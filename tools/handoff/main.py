@@ -88,7 +88,7 @@ class AcpClient:
                 options = params.get('options', [])
                 result = {'outcome': {'outcome': 'cancelled'}}
                 if sys.stdin.isatty():
-                    print('\nClaude requests:', params.get('toolCall', {}).get('title', 'tool access'))
+                    print('\nClaude requests:', json.dumps(params.get('toolCall', {}), indent=2))
                     for index, option in enumerate(options):
                         print(f'{index + 1}: {option["name"]}')
                     choice = input('Choose an option (Enter cancels): ')
@@ -162,11 +162,20 @@ def run(ident):
         if init.get('protocolVersion') != config['protocol_version']:
             raise HandoffError('ACP protocol version mismatch')
         session = client.request('session/new', {'cwd': str(worktree), 'mcpServers': []})
-        models = session.get('models', {}).get('availableModels', [])
-        matching = next((m for m in models if m.get('modelId') == config['model']), None)
-        if not matching:
-            raise HandoffError('Required Claude 5.5 model is unavailable; no model substitution performed')
-        client.request('session/set_model', {'sessionId': session['sessionId'], 'modelId': matching['modelId']})
+        model_config = next((x for x in session.get('configOptions', []) if x.get('category') == 'model'), None)
+        if model_config:
+            selected = next((x for x in model_config.get('options', [])
+                             if x.get('name') == config['model_display_name']), None)
+            if not selected:
+                raise HandoffError('Required Claude 5.5 model is unavailable; no model substitution performed')
+            client.request('session/set_config_option', {'sessionId': session['sessionId'],
+                'configId': model_config['id'], 'value': selected['value']})
+        else:
+            models = session.get('models', {}).get('availableModels', [])
+            matching = next((m for m in models if m.get('modelId') == config['model']), None)
+            if not matching:
+                raise HandoffError('Required Claude 5.5 model is unavailable; no model substitution performed')
+            client.request('session/set_model', {'sessionId': session['sessionId'], 'modelId': matching['modelId']})
         result = client.request('session/prompt', {'sessionId': session['sessionId'], 'prompt': [{
             'type': 'text', 'text': f'Read CLAUDE.md and handoffs/{ident}/brief.md. Implement that packet in this worktree. '
             f'Return handoffs/{ident}/result.md with the exact model, evidence, screenshots, and limitations. '
