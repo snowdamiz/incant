@@ -1,0 +1,7 @@
+{
+  "adapter": "node_modules/.bin/claude-agent-acp",
+  "claude": "node_modules/.bin/claude",
+  "model": "claude-opus-5-5",
+  "protocol_version": 1,
+  "request_timeout_seconds": 600
+}

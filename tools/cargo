@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+if command -v rustup >/dev/null 2>&1; then
+  INCANT_RUST_BIN=$(dirname "$(rustup which rustc)")
+  PATH="$INCANT_RUST_BIN:$PATH"
+  export PATH
+fi
+exec cargo "$@"
