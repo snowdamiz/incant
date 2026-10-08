@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Incant",
+  "version": "0.0.1",
+  "identifier": "dev.incant.editor",
+  "build": {"frontendDist": "../ui/dist", "devUrl": "http://localhost:5173"},
+  "app": {
+    "windows": [],
+    "macOSPrivateApi": true,
+    "withGlobalTauri": true,
+    "security": {"csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src ipc: http://ipc.localhost"}
+  },
+  "bundle": {"active": false}
+}

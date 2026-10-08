@@ -1,0 +1,53 @@
+{
+  "phase": 0,
+  "director_approval": null,
+  "spikes": {
+    "native_viewport": {
+      "passed": false,
+      "remaining": [
+        "macOS native composition review",
+        "Windows native execution"
+      ]
+    },
+    "document_crdt": {
+      "passed": true,
+      "evidence": "docs/spikes/phase-0.md#spike-2-document-and-crdt--local-evidence-passed"
+    },
+    "scripting": {
+      "passed": true,
+      "evidence": "docs/spikes/evidence/script-benchmark.json",
+      "scope": "batched behavior over 1000 entities, one Mac"
+    },
+    "live_agent": {
+      "passed": false,
+      "completed": 0,
+      "required_passes": 14,
+      "total": 20
+    },
+    "authentication": {
+      "passed": false,
+      "remaining": [
+        "live OAuth/API-key inference",
+        "three-OS refresh/revoke/keychain"
+      ]
+    },
+    "claude_acp": {
+      "passed": false,
+      "remaining": [
+        "result packet",
+        "screenshots and review",
+        "integration"
+      ]
+    }
+  },
+  "nightly_runnable_targets": {
+    "macos": false,
+    "windows": false,
+    "linux": false,
+    "ios": false,
+    "android": false,
+    "web": false
+  },
+  "signing_certificates_obtained": false,
+  "year_one_staffing_confirmed": false
+}

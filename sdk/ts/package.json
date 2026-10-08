@@ -1,0 +1,1 @@
+{"name":"@incant/runtime","version":"0.0.1","private":true,"types":"src/index.d.ts","scripts":{"typecheck":"tsc --noEmit -p tsconfig.json"}}

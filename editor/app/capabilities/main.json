@@ -1,0 +1,1 @@
+{"identifier":"main","description":"Local editor window only; no shell, filesystem or remote-origin plugins.","windows":["main"],"webviews":["editor"],"permissions":["core:default"]}

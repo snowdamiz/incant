@@ -1,5 +1,5 @@
 {
   "status": "blocked",
-  "detail": "Claude Code is not logged in. Run node_modules/.bin/claude auth login, then retry.",
-  "updated_at": "2026-10-08T21:55:03Z"
+  "detail": "ACP handoff did not complete. See terminal diagnosis; no credentials logged.",
+  "updated_at": "2026-10-08T23:12:28Z"
 }

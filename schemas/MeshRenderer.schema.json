@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cast_shadows": {
+      "type": "boolean"
+    },
+    "materials": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "mesh": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "mesh",
+    "materials",
+    "cast_shadows"
+  ],
+  "title": "MeshRenderer",
+  "type": "object"
+}

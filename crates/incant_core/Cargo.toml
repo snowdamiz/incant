@@ -10,4 +10,6 @@ bevy = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 incant_doc = { workspace = true }
-incant_cmd = { workspace = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+bevy = { workspace = true, features = ["web"] }
