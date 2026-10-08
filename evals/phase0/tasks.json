@@ -2169,6 +2169,7 @@
           "tick_rate": 60
         }
       },
+      "max_transactions": 1,
       "prompt": "Set Player, Crate, Beacon translations to [-2,0,0], [0,0,0], [2,0,0] in one transaction. Query the project before editing. Preserve everything outside this request. Capture an actual 320 by 180 viewport screenshot after the edits."
     },
     {

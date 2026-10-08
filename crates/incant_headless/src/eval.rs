@@ -14,6 +14,8 @@ struct Case {
     prompt: String,
     initial: Project,
     expected: Project,
+    #[serde(default)]
+    max_transactions: Option<usize>,
 }
 
 fn normalized(mut project: Project) -> Project {
@@ -93,6 +95,9 @@ pub fn run(path: &Path, output: &Path, model: String, max_tokens: u64, ci: bool)
                     && t.actor.model.as_deref() == Some(model.as_str())
             });
         let actual = bus.project().clone();
+        let transaction_limit = case
+            .max_transactions
+            .is_none_or(|limit| bus.history().len() <= limit);
         let mut undo_ok = true;
         while !bus.history().is_empty() {
             if bus.undo().is_err() {
@@ -101,13 +106,18 @@ pub fn run(path: &Path, output: &Path, model: String, max_tokens: u64, ci: bool)
             }
         }
         undo_ok &= bus.project() == &case.initial;
-        let ok = result.is_ok() && exact_state && all_tools && provenance && undo_ok;
+        let ok = result.is_ok()
+            && exact_state
+            && all_tools
+            && provenance
+            && undo_ok
+            && transaction_limit;
         passed += usize::from(ok);
         let (report, error) = match result {
             Ok(r) => (json!(r), Value::Null),
             Err(e) => (Value::Null, json!(e.to_string())),
         };
-        results.push(json!({"case":case.id,"passed":ok,"exact_state":exact_state,"three_tools":all_tools,"provenance":provenance,"undo":undo_ok,"elapsed_ms":started.elapsed().as_millis(),"used_tokens":agent.budget.used_tokens,"report":report,"error":error,"actual":actual}));
+        results.push(json!({"case":case.id,"passed":ok,"exact_state":exact_state,"three_tools":all_tools,"provenance":provenance,"undo":undo_ok,"transaction_limit":transaction_limit,"elapsed_ms":started.elapsed().as_millis(),"used_tokens":agent.budget.used_tokens,"report":report,"error":error,"actual":actual}));
         // Persist after each case; interrupted runs cannot masquerade as 20/20.
         save(
             output,

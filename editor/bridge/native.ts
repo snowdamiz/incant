@@ -11,6 +11,13 @@ export interface EngineRead {
 }
 export type Invoke = <T>(command: string, args?: Record<string, unknown>) => Promise<T>;
 const id = (value: string) => value as Ulid;
+function freeze<T>(value: T): T {
+  if (value !== null && typeof value === 'object' && !Object.isFrozen(value)) {
+    for (const child of Object.values(value)) freeze(child);
+    Object.freeze(value);
+  }
+  return value;
+}
 function timestamp(ulid: string): string {
   const alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
   const value = [...ulid.slice(0, 10)].reduce((n, c) => n * 32 + alphabet.indexOf(c), 0);
@@ -71,7 +78,7 @@ export class NativeBridge implements EditorBridge {
   constructor(private invoke: Invoke) {}
   getSnapshot = () => this.snapshot;
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => {this.listeners.delete(listener);}; };
-  private publish(read: EngineRead) { this.read=read; this.snapshot=snapshotFromEngine(read); this.listeners.forEach(fn=>fn()); }
+  private publish(read: EngineRead) { this.read=freeze(read); this.snapshot=freeze(snapshotFromEngine(read)); this.listeners.forEach(fn=>fn()); }
   async start() {
     try { this.publish(await this.invoke<EngineRead>('engine_read')); }
     catch(error) {

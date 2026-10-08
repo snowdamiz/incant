@@ -46,4 +46,5 @@ add('19-preserve-siblings','Rename Player to Pilot. Keep every component, parent
 def composite(p):
     set_transform(p,P,'translation',[0,1,0]);set_transform(p,C,'translation',[-4,0,0]);set_transform(p,B,'translation',[4,0,0]);set_transform(p,C,'scale',[2,1,2]);set_transform(p,B,'scale',[2,1,2]);p['memory']['layout']='three platforms'
 add('20-composite','Set Player translation [0,1,0], Crate [-4,0,0], Beacon [4,0,0]. Set Crate and Beacon scale [2,1,2]. Set memory layout to three platforms.',composite)
+cases[10]['max_transactions']=1
 (ROOT/'evals/phase0/tasks.json').write_text(json.dumps({'version':1,'cases':cases},indent=2,sort_keys=True)+'\n')

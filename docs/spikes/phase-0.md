@@ -59,7 +59,11 @@ TypeScript behavior that updates each of them every frame: 120,000 commands tota
 Measured p95 9.539 ms; maximum 10.197 ms; frame budget 16.667 ms. Includes QuickJS,
 command validation and commit, ECS snapshot and projection synchronization. Excludes
 rendering, hardware presentation and sleep. This is not 1,000 isolated VMs and does
-not establish performance on other devices or with complex gameplay.
+not establish performance on other devices or with complex gameplay. A later repeat
+while browser evidence and other desktop work were running measured p95 15.955 ms
+and maximum 16.781 ms (one frame exceeded 16.667 ms). Host load average was 14.88.
+The result is sensitive to concurrent load; production frame-time guarantees remain
+unproven. Both results are retained in the evidence directory.
 
 An earlier implementation appended runtime ticks to authoring CRDT history and
 measured p95 364.74 ms, failing the budget. Separating disposable runtime state

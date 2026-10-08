@@ -191,10 +191,14 @@ fn auth_command(action: AuthCli) -> Result<()> {
     let (path, mut accounts, _lock) = accounts()?;
     match action {
         AuthCli::Login { add } => {
-            let existing = accounts
-                .active
-                .as_ref()
-                .and_then(|id| accounts.accounts.iter().find(|a| &a.id == id));
+            let existing = if add {
+                None
+            } else {
+                accounts
+                    .active
+                    .as_ref()
+                    .and_then(|id| accounts.accounts.iter().find(|a| &a.id == id))
+            };
             let attempt =
                 LoginAttempt::new(&accounts.host_id, existing.map(|a| a.client_id.as_str()))?;
             println!(
