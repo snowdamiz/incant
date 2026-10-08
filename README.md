@@ -96,7 +96,7 @@ tools/cargo fmt --all --check
 tools/cargo clippy --workspace --all-targets --locked -- -D warnings
 tools/cargo test --workspace --release --locked
 tools/cargo run -p incant_cmd --release --example collaboration_spike
-tools/cargo run -p incant_doc --release --example crdt_benchmark
+tools/cargo run -p incant_doc --release --example crdt_bench
 tools/cargo run -p incant_platform_smoke --release
 ```
 

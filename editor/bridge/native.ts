@@ -7,7 +7,7 @@ type History = { id: string; description: string; actor: {origin: 'user'|'agent'
 export interface EngineRead {
   project: Project; revision: number; can_redo: boolean; history: History[]; applied: number;
   schemas: Record<string, {title?: string; properties?: Record<string, FieldSchema>}>;
-  console: string[]; viewport_error: string | null;
+  console: {id: string; level: 'info'|'error'; message: string}[]; viewport_error: string | null;
 }
 export type Invoke = <T>(command: string, args?: Record<string, unknown>) => Promise<T>;
 const id = (value: string) => value as Ulid;
@@ -50,7 +50,7 @@ export function snapshotFromEngine(read: EngineRead): BridgeSnapshot {
     connection: {status:'ready',project:{id:id(read.project.id),name:read.project.name}},
     hierarchy: {status:'ready',value:{roots,nodes}}, schemas,entities,diagnostics:[],
     history: {entries:read.history.map(tx=>({transaction:id(tx.id),description:tx.description,origin:origin(tx.actor),at:timestamp(tx.id)})),applied:read.applied},
-    console: read.console.map((message,i)=>({id:`native-${i}`,level:'info',source:'native',message,at:''})),
+    console: read.console.map(event=>({...event,source:'native',at:timestamp(event.id)})),
     provider: {status:'not-connected',provider:'openai'},
     agent: {status:'unavailable',reason:'Use the headless agent command for the Phase 0 provider spike.'},
     viewport: read.viewport_error ? {status:'error',error:{code:'viewport.failed',message:read.viewport_error}} : {status:'attached',surface:'Native wgpu'},

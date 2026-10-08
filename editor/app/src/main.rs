@@ -1,6 +1,7 @@
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::{Entity, Project, Scene, Transform, schema_registry};
 use incant_render::{Renderer, wgpu};
+use serde::Serialize;
 use serde_json::{Value, json};
 use std::{
     path::PathBuf,
@@ -14,8 +15,23 @@ struct Editor {
     bus: Mutex<CommandBus>,
     viewport: Mutex<Option<[f32; 4]>>,
     alive: AtomicBool,
-    console: Mutex<Vec<String>>,
+    console: Mutex<Vec<ConsoleEvent>>,
     viewport_error: Mutex<Option<String>>,
+}
+#[derive(Clone, Serialize)]
+struct ConsoleEvent {
+    id: String,
+    level: &'static str,
+    message: String,
+}
+impl ConsoleEvent {
+    fn new(level: &'static str, message: String) -> Self {
+        Self {
+            id: incant_doc::new_id(),
+            level,
+            message,
+        }
+    }
 }
 #[tauri::command]
 fn engine_read(state: tauri::State<'_, Arc<Editor>>) -> Result<Value, String> {
@@ -126,11 +142,10 @@ fn main() {
             let surface = instance.create_surface(window.clone())?;
             let renderer = pollster::block_on(Renderer::new(&instance, Some(&surface)))
                 .map_err(|e| std::io::Error::other(e.to_string()))?;
-            editor
-                .console
-                .lock()
-                .unwrap()
-                .push(format!("Native wgpu adapter: {}", renderer.adapter_name));
+            editor.console.lock().unwrap().push(ConsoleEvent::new(
+                "info",
+                format!("Native wgpu adapter: {}", renderer.adapter_name),
+            ));
             let close = editor.clone();
             window.on_window_event(move |event| {
                 if matches!(event, tauri::WindowEvent::Destroyed) {
@@ -206,7 +221,10 @@ fn main() {
                                 *status = Some(error.to_string());
                             }
                             if let Ok(mut log) = shared.console.lock() {
-                                log.push(format!("Render error: {error}"));
+                                log.push(ConsoleEvent::new(
+                                    "error",
+                                    format!("Render error: {error}"),
+                                ));
                             }
                             break;
                         }

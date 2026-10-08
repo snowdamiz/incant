@@ -29,7 +29,7 @@ state is validated on a fork before it can affect the live document.
 
 ### CRDT microbenchmark
 
-Command: `cargo run -p incant_doc --release --example crdt_benchmark`.
+Command: `cargo run -p incant_doc --release --example crdt_bench`.
 10,000 entities, five scalar fields each, two concurrent field edits, full snapshot
 exchange. One local measured run; no network, schema validation or UI cost.
 

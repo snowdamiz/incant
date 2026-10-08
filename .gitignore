@@ -17,3 +17,5 @@ __pycache__/
 /platforms/android/app/src/main/jniLibs/
 /platforms/android/local.properties
 *.tsbuildinfo
+
+/editor/app/gen/
