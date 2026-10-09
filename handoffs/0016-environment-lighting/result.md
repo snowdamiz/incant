@@ -183,11 +183,11 @@ These captures need no regeneration:
   `opaque-between-transparent`, `hdr-transparent-over-black`, `emissive-map`,
   `sixteen-bit-color`, `linear-filter` and `minified-color-mips`.
 
-All of these run under `INCANT_MATERIAL_EVIDENCE`. The commands below are Astra's GPU
-workflow. I did not run them.
+All of these run under `INCANT_MATERIAL_EVIDENCE`. The command below follows the CI and desktop
+workflow invocation. I did not run it.
 
 ```
-INCANT_MATERIAL_EVIDENCE=artifacts/environment-initial cargo test -p incant_render --test model_gpu -- --ignored
+INCANT_MATERIAL_EVIDENCE=artifacts/environment-initial cargo test -p incant_render --release --locked --test model_gpu -- --ignored
 ```
 
 ## Screenshots
