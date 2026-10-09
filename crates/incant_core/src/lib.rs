@@ -1,6 +1,7 @@
 //! Bevy ECS projection and fixed-step simulation. The editor document is immutable
 //! during play; stopping discards the runtime projection, preserving authored state.
-use bevy::prelude::*;
+use bevy_app::{App, Update};
+use bevy_ecs::prelude::*;
 use incant_doc::{Project, Transform as DocTransform, Velocity as DocVelocity};
 use serde::Serialize;
 use std::collections::BTreeMap;

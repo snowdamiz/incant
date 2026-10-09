@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-08",
+  "platform": "macOS",
+  "storage": "private-local-file",
+  "user_authorized_browser_sign_in": true,
+  "account_metadata_shared_between_editor_and_cli": true,
+  "credential_directory_mode": "0700",
+  "credential_file_mode": "0600",
+  "real_session_refresh": true,
+  "changed_build_native_restart_retained_session": true,
+  "keychain_prompts_with_new_backend": 0,
+  "synthetic_cross_build_write_read_delete": true,
+  "live_scene_edit": {
+    "model": "gpt-6-astra",
+    "successful_tools": [
+      "doc_query",
+      "doc_patch",
+      "doc_query"
+    ],
+    "transactions": 1,
+    "human_approval": true,
+    "final_name": "Player",
+    "final_translation": [
+      0,
+      1,
+      0
+    ],
+    "other_entity_fields_preserved": true,
+    "provenance_recorded": true,
+    "input_tokens": 4234,
+    "output_tokens": 302
+  },
+  "limits": [
+    "macOS only",
+    "Private files use OS permissions, not additional encryption",
+    "API-key inference and live revocation are not yet verified",
+    "Single approved edit is not the unassisted twenty-task evaluation"
+  ],
+  "details": "docs/spikes/auth-login-repair.md"
+}

@@ -40,8 +40,9 @@ frame budget within its documented workload.
 - The real twenty-task evaluation is running with the director's saved session.
 - Draft PR: https://github.com/snowdamiz/incant/pull/1. macOS checks and the
   six-platform workflow ran: full checks and five platforms passed. Android
-  now reaches compilation but fails because the Bevy umbrella crate pulls in an
-  unconfigured Android activity implementation; a dependency correction is next.
+  reached compilation but pulled in an unconfigured Android activity implementation.
+  Core now depends directly on Bevy app/ECS, removing that unused dependency;
+  local tests pass and remote validation is pending.
 
 ## External prerequisites still required
 
