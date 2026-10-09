@@ -199,6 +199,7 @@ class NativeBridge {
     isFixture = false;
     read;
     listeners = new Set();
+    historyListeners = new Set();
     pending = false;
     chrome;
     provider = {
@@ -243,6 +244,18 @@ class NativeBridge {
             this.listeners.delete(listener);
         };
     };
+    subscribeHistoryRequests = (listener)=>{
+        this.historyListeners.add(listener);
+        return ()=>{
+            this.historyListeners.delete(listener);
+        };
+    };
+    async startHistoryRequests(listen) {
+        if (listen) await listen("incant:history-request", ({ payload })=>{
+            if (payload !== 'undo' && payload !== 'redo') return;
+            this.historyListeners.forEach((listener)=>listener(payload));
+        });
+    }
     publish(read) {
         this.read = freeze(read);
         const snapshot = {
@@ -415,6 +428,7 @@ function installNativeBridge() {
     const bridge = new NativeBridge(invoke);
     host.__INCANT_BRIDGE__ = bridge;
     void bridge.start();
+    void bridge.startHistoryRequests(host.__TAURI__?.event?.listen).catch(()=>console.error("Native history menu could not be connected."));
     void bridge.startProviderUpdates(host.__TAURI__?.event?.listen).catch(()=>bridge.updateProvider({
             status: "error",
             provider: "openai",

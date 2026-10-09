@@ -1,3 +1,46 @@
+## Latest director restriction: stop computer use and screen capture
+
+The director has just said: “Stop using computer use for now or tell cloude to if
+its using it. Amazon is blocking prime video output due to screnecapture”.
+
+Effective immediately, do not use computer-use tools, native or browser automation,
+screenshots, screen recording, screen sharing, or capture helpers. Do not launch
+any new browser or native visual review. This overrides every capture/review
+request below. Continue only code/file work and nonvisual terminal checks until
+the director explicitly lifts this restriction. Existing images can remain on disk.
+
+This follow-up is notification only: acknowledge receipt, record that further
+visual verification is deferred at the director’s request in result.md, and end
+the turn. Do not restart or change the completed design. Do not run new tests or
+capture any pixels for this notification. Preserve all existing changes.
+
+## Current follow-up: review corrected native evidence and safe dialog focus
+
+The UI commits are integrated into the main checkout. Astra built and launched the
+corrected worktree bundle normally with the disposable Connected Editor Review
+project and the native #141519 backdrop. New CUA captures are ready in
+screenshots/after/native-cua/: 02-overview-focused.png, 04-entity-selected.png,
+05-history-after-rename.png, 06-undone.png, and 08-account-dialog.png.
+
+Review these actual corrected native pixels now and finish the color/logo alignment
+assessment. Keep all raw native images local and uncommitted because they contain
+the real account label. Update result.md/native-requests.md with findings and any
+remaining limitations. If a capture indicator obscures the lights, report that
+precisely; do not claim pixel confirmation from a browser double. Ask Astra for
+specific follow-up captures if needed. No direct native automation and no HOME override.
+
+Functional observations through CUA: selecting Entity 0 populated the real Transform
+inspector; F2 rename to Lantern updated history and status; the history Undo button
+restored Entity 0. Screenshot 06 is button undo, NOT keyboard undo. Cmd+Z did not
+reach the engine; Astra is fixing the native menu interception independently.
+The connected-account dialog opens and Escape returns focus to the account chip.
+Its initial keyboard focus landed on Sign out. Change its initial focus to Close
+(or another non-destructive control) so opening account settings cannot make an
+accidental Enter disconnect the user. Preserve explicit sign-out behavior and
+focus trapping. Add only a meaningful focus/interaction regression if needed,
+not more CSS-source or exact-token assertion tests. Commit that follow-up and the
+native review notes with Built-by: claude. Do not touch Rust or bridge logic.
+
 # Redesign the real editor to match the landing-page editor
 
 ## Highest priority: director palette and titlebar correction

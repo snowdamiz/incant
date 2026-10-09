@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { BridgeResolution } from './bridge/resolve';
 import { FIXTURE_VARIANTS } from './bridge/fixture';
 import { PROVIDER_FIXTURE_NAMES } from './bridge/providerFixture';
@@ -62,7 +62,7 @@ function FatalScreen({ title, children }: { title: string; children: React.React
 
 function Workbench() {
   const shell = useShell();
-  const { snapshot, run, accountOpen } = shell;
+  const { bridge, snapshot, run, accountOpen } = shell;
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
   const [panels, setPanels] = useState<PanelVisibility>({ hierarchy: true, dock: true, inspector: true });
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
@@ -81,6 +81,24 @@ function Workbench() {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
+  const runHistory = useCallback((action: 'undo' | 'redo') => {
+    const history = snapshot?.history;
+    if (!history || (action === 'undo' ? history.applied === 0 : history.applied === history.entries.length)) return;
+    void run({ type: action === 'undo' ? 'history.undo' : 'history.redo' });
+  }, [run, snapshot?.history]);
+
+  useEffect(() => bridge?.subscribeHistoryRequests?.((action) => {
+    if (isTextEntry(document.activeElement)) {
+      // WebKit owns the text edit buffer, including React-controlled inputs.
+      // No standard API exposes its undo stack. Never fall back to project undo
+      // if this draft has nothing to undo or the browser refuses the command.
+      document.execCommand(action);
+      return;
+    }
+    if (shortcutsOpen || accountOpen || document.activeElement?.closest('[role="dialog"]')) return;
+    runHistory(action);
+  }), [bridge, runHistory, shortcutsOpen, accountOpen]);
+
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.defaultPrevented || shortcutsOpen || accountOpen) return;
@@ -94,10 +112,10 @@ function Workbench() {
       if (isTextEntry(event.target)) return;
       if (mod && key === 'z') {
         event.preventDefault();
-        void run({ type: event.shiftKey ? 'history.redo' : 'history.undo' });
+        runHistory(event.shiftKey ? 'redo' : 'undo');
       } else if (event.ctrlKey && !event.metaKey && key === 'y') {
         event.preventDefault();
-        void run({ type: 'history.redo' });
+        runHistory('redo');
       } else if ((event.key === '?' && !mod) || (mod && event.key === '/')) {
         event.preventDefault();
         shortcutsReturn.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -110,7 +128,7 @@ function Workbench() {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [run, shortcutsOpen, accountOpen]);
+  }, [runHistory, shortcutsOpen, accountOpen]);
 
   const openShortcuts = (from: HTMLElement) => {
     shortcutsReturn.current = from;

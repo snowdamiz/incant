@@ -11,6 +11,7 @@ use std::{
     },
     time::Duration,
 };
+mod menu;
 mod provider;
 mod window;
 struct Editor {
@@ -147,6 +148,8 @@ fn main() {
             provider::provider_action
         ])
         .setup(move |app| {
+            #[cfg(target_os = "macos")]
+            menu::install(app.handle())?;
             editor
                 .provider
                 .start(app.handle().clone(), "restore".into(), None, false)?;

@@ -51,6 +51,25 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it("forwards validated native history intent to the UI without mutating the document", async () => {
+    const ipc: string[] = [];
+    const invoke: Invoke = async <T>(command: string) => { ipc.push(command); return read() as T; };
+    const bridge = new NativeBridge(invoke);
+    let send: (payload: unknown) => void = () => { throw new Error('No menu listener'); };
+    await bridge.startHistoryRequests(async (name, listener) => {
+      expect(name).toBe('incant:history-request');
+      send = (payload) => listener({ payload: payload as never });
+      return () => undefined;
+    });
+    const intents: string[] = [];
+    const unsubscribe = bridge.subscribeHistoryRequests((action) => intents.push(action));
+    for (const payload of ['undo', 'redo', 'delete', null, { action: 'undo' }]) send(payload);
+    expect(intents).toEqual(['undo', 'redo']);
+    expect(ipc).toEqual([]);
+    unsubscribe();
+    send('undo');
+    expect(intents).toEqual(['undo', 'redo']);
+  });
   it("projects the Rust scene hierarchy and component schema without inventing capabilities", () => {
     const value = snapshotFromEngine(read());
     expect(value.hierarchy.status).toBe("ready");

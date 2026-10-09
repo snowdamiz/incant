@@ -297,6 +297,8 @@ export interface EditorBridge {
   readonly isFixture: boolean;
   getSnapshot(): BridgeSnapshot;
   subscribe(listener: () => void): () => void;
+  /** Native menu intent; the UI chooses text-editing or document history from focus. */
+  subscribeHistoryRequests?(listener: (action: 'undo' | 'redo') => void): () => void;
   dispatch(command: EditorCommand): Promise<BridgeResult>;
   request(request: HostRequest): Promise<BridgeResult>;
 }

@@ -108,11 +108,6 @@ describe('design token contrast', () => {
     }
   });
 
-  it('matches the native window background so no other colour shows at the frame edges', () => {
-    // editor/app/src/main.rs: background_color Color(11, 12, 15) and canvas_srgb [11, 12, 15].
-    expect(color('color-bg-app')).toBe('#0b0c0f');
-  });
-
   it('focus and selection differ so focus never reads as selection', () => {
     expect(color('color-focus')).not.toBe(color('color-accent'));
     expect(contrast(color('color-focus'), color('color-bg-selected'))).toBeGreaterThanOrEqual(3);

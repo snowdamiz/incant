@@ -224,6 +224,7 @@ export class NativeBridge implements EditorBridge {
   readonly isFixture = false;
   private read: EngineRead | undefined;
   private listeners = new Set<() => void>();
+  private historyListeners = new Set<(action: 'undo' | 'redo') => void>();
   private pending = false;
   private chrome: WindowChrome | undefined;
   private provider: ProviderState = { status: "checking", provider: "openai" };
@@ -250,6 +251,16 @@ export class NativeBridge implements EditorBridge {
       this.listeners.delete(listener);
     };
   };
+  subscribeHistoryRequests = (listener: (action: 'undo' | 'redo') => void) => {
+    this.historyListeners.add(listener);
+    return () => { this.historyListeners.delete(listener); };
+  };
+  async startHistoryRequests(listen?: Listen) {
+    if (listen) await listen<unknown>("incant:history-request", ({ payload }) => {
+      if (payload !== 'undo' && payload !== 'redo') return;
+      this.historyListeners.forEach((listener) => listener(payload));
+    });
+  }
   private publish(read: EngineRead) {
     this.read = freeze(read);
     const snapshot = { ...snapshotFromEngine(read), provider: this.provider };
@@ -408,6 +419,8 @@ export function installNativeBridge(): NativeBridge | undefined {
   const bridge = new NativeBridge(invoke);
   host.__INCANT_BRIDGE__ = bridge;
   void bridge.start();
+  void bridge.startHistoryRequests(host.__TAURI__?.event?.listen)
+    .catch(() => console.error("Native history menu could not be connected."));
   void bridge.startProviderUpdates(host.__TAURI__?.event?.listen).catch(() => bridge.updateProvider({ status: "error", provider: "openai", error: { code: "provider.transport", message: "Could not read the saved OpenAI connection. Restart Incant to retry." } }));
   void bridge
     .startWindowUpdates(host.__TAURI__?.event?.listen)

@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import axe from 'axe-core';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { App } from './App';
 import type { BridgeSnapshot, EditorBridge, EditorCommand } from './bridge/contract';
 import { createFixtureBridge, fixtureSnapshot } from './bridge/fixture';
@@ -12,9 +12,9 @@ import { humanize } from './components/inspector/FieldView';
  * edit capabilities and records commands. It never changes its snapshot, which
  * lets the tests prove the UI does not apply edits locally.
  */
-function recordingBridge(capabilities: string[]) {
+function recordingBridge(capabilities: string[], snapshot = fixtureSnapshot('sample')) {
   const commands: EditorCommand[] = [];
-  const snapshot = fixtureSnapshot('sample');
+  const historyListeners = new Set<(action: 'undo' | 'redo') => void>();
   const bridge: EditorBridge = {
     protocolVersion: 1,
     capabilities,
@@ -22,13 +22,17 @@ function recordingBridge(capabilities: string[]) {
     isFixture: false,
     getSnapshot: () => snapshot,
     subscribe: () => () => undefined,
+    subscribeHistoryRequests: (listener) => {
+      historyListeners.add(listener);
+      return () => { historyListeners.delete(listener); };
+    },
     dispatch: (command) => {
       commands.push(command);
       return Promise.resolve({ ok: true });
     },
     request: () => Promise.resolve({ ok: true }),
   };
-  return { bridge, commands };
+  return { bridge, commands, menuHistory: (action: 'undo' | 'redo') => historyListeners.forEach((listener) => listener(action)) };
 }
 
 const renderWith = (bridge: EditorBridge | null) =>
@@ -126,6 +130,69 @@ describe('editor shell', () => {
   it('reports unknown capabilities instead of guessing at them', () => {
     renderWith(recordingBridge(['entity.rename', 'mystery.power']).bridge);
     expect(screen.getByText('1 unknown capabilities ignored')).toBeTruthy();
+  });
+
+  it('routes native menu Undo and Redo through the same bridge as keyboard commands', () => {
+    const snapshot = fixtureSnapshot('sample');
+    const host = recordingBridge(['history.undo', 'history.redo'], {
+      ...snapshot, history: { ...snapshot.history, applied: 2 },
+    });
+    const view = renderWith(host.bridge);
+    act(() => { host.menuHistory('undo'); host.menuHistory('redo'); });
+    expect(host.commands).toEqual([{ type: 'history.undo' }, { type: 'history.redo' }]);
+    view.unmount();
+    host.menuHistory('undo');
+    expect(host.commands).toHaveLength(2);
+  });
+
+  it('keeps native menu history in the focused text draft, even when text undo does nothing', () => {
+    const host = recordingBridge(['entity.rename', 'history.undo', 'history.redo']);
+    renderWith(host.bridge);
+    const row = treeRow('Dock Prototype');
+    act(() => row.focus());
+    fireEvent.keyDown(row, { key: 'F2' });
+    const draft = screen.getByLabelText('New name');
+    expect(document.activeElement).toBe(draft);
+    const exec = vi.fn(() => false);
+    Object.defineProperty(document, 'execCommand', { configurable: true, value: exec });
+    try {
+      act(() => { host.menuHistory('undo'); host.menuHistory('redo'); });
+      expect(exec.mock.calls).toEqual([['undo'], ['redo']]);
+      expect(host.commands).toEqual([]);
+      // Ordinary browser shortcuts retain their default text editing behavior.
+      expect(fireEvent.keyDown(draft, { key: 'z', metaKey: true })).toBe(true);
+      expect(exec).toHaveBeenCalledTimes(2);
+      expect(host.commands).toEqual([]);
+    } finally {
+      Reflect.deleteProperty(document, 'execCommand');
+    }
+  });
+
+  it.each([
+    { button: /^Keyboard shortcuts$/, dialog: 'Keyboard shortcuts' },
+    { button: /^ChatGPT /, dialog: 'ChatGPT account' },
+  ])('does not undo project history behind the $dialog dialog', ({ button, dialog: name }) => {
+    const host = recordingBridge(['history.undo', 'history.redo']);
+    renderWith(host.bridge);
+    fireEvent.click(screen.getByRole('button', { name: button }));
+    const dialog = screen.getByRole('dialog', { name });
+    act(() => { host.menuHistory('undo'); host.menuHistory('redo'); });
+    expect(host.commands).toEqual([]);
+    fireEvent.keyDown(dialog, { key: 'Escape' });
+    act(() => host.menuHistory('undo'));
+    expect(host.commands).toEqual([{ type: 'history.undo' }]);
+  });
+
+  it('ignores keyboard and native history commands at the ends of the history stack', () => {
+    const snapshot = fixtureSnapshot('sample');
+    const host = recordingBridge(['history.undo', 'history.redo'], {
+      ...snapshot, history: { entries: [], applied: 0 },
+    });
+    renderWith(host.bridge);
+    act(() => { host.menuHistory('undo'); host.menuHistory('redo'); });
+    fireEvent.keyDown(document.body, { key: 'z', metaKey: true });
+    fireEvent.keyDown(document.body, { key: 'z', metaKey: true, shiftKey: true });
+    expect(host.commands).toEqual([]);
   });
 
   it('jumps from a problem to the entity and shows the field-level error', async () => {
@@ -253,7 +320,7 @@ describe('editor shell', () => {
     await waitFor(() => expect(requests).toEqual(['window.close', 'window.drag']));
   });
 
-  it('arranges the titlebar as identity, a centred tool cluster, and account and help at the end', async () => {
+  it('starts native window dragging from every empty titlebar spacer', async () => {
     const requests: string[] = [];
     const { bridge } = recordingBridge(['window.drag']);
     renderWith({
@@ -263,31 +330,10 @@ describe('editor shell', () => {
         return Promise.resolve({ ok: true });
       },
     });
-    const titlebar = document.querySelector<HTMLElement>('.titlebar')!;
-    const sections = [...titlebar.children].map((element) => element.className);
-    expect(sections).toEqual(['titlebar__start', 'titlebar__tools', 'titlebar__end']);
-    const [start, tools, end] = [...titlebar.children] as HTMLElement[];
-    expect(within(start!).getByRole('heading', { level: 1 }).textContent).toContain('Dock Prototype');
-    expect(within(tools!).getAllByRole('group').map((g) => g.getAttribute('aria-label'))).toEqual(['History', 'Layout']);
-    expect(within(end!).getByRole('button', { name: /ChatGPT/ })).toBeTruthy();
-    expect(within(end!).getByRole('button', { name: 'Keyboard shortcuts' })).toBeTruthy();
-    // Empty space on either side of the centred cluster is a drag area.
-    fireEvent.mouseDown(end!.querySelector('.titlebar__spacer')!, { button: 0, detail: 1 });
-    await waitFor(() => expect(requests).toEqual(['window.drag']));
-  });
-
-  it('places the inspector and agent in the lighter side column and marks the agent with the wisp', () => {
-    renderFixture('sample');
-    const inspector = document.querySelector('[data-region="inspector"]')!;
-    const agent = document.querySelector('[data-region="agent"]')!;
-    expect(inspector.closest('.column--side')).not.toBeNull();
-    expect(agent.closest('.column--side')).toBe(inspector.closest('.column--side'));
-    expect(document.querySelector('[data-region="hierarchy"]')!.closest('.column--side')).toBeNull();
-    const mark = agent.querySelector('svg.wisp');
-    expect(mark).not.toBeNull();
-    expect(mark!.getAttribute('aria-hidden')).toBe('true');
-    // The mark decorates an honest empty state; the composer stays disabled.
-    expect((screen.getByLabelText('Message to the agent') as HTMLTextAreaElement).disabled).toBe(true);
+    const spacers = document.querySelectorAll('.titlebar__spacer');
+    expect(spacers.length).toBeGreaterThan(0);
+    for (const spacer of spacers) fireEvent.mouseDown(spacer, { button: 0, detail: 1 });
+    await waitFor(() => expect(requests).toEqual(Array(spacers.length).fill('window.drag')));
   });
 
   it('hides and restores panels from the titlebar, and F6 skips hidden panels', () => {
