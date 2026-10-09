@@ -11,8 +11,12 @@ fn shade_light(light:Light,world:vec3f,n:vec3f,v:vec3f,base:vec3f,metallic:f32,r
         let range2=light.position_range.w*light.position_range.w;
         if distance2>=range2 {return vec3f(0.0);}
         l=unit(delta);
-        let falloff=max(1.0-(distance2/range2)*(distance2/range2),0.0);
-        attenuation=falloff/max(distance2,1e-4);
+        // C1 range window: squaring (1-(d/r)^4) gives zero value and zero slope at
+        // d=r, so the cutoff has no visible rim. 1 cm (1e-4 m^2) floor keeps
+        // coincident sources finite. Filament "Physically based rendering in
+        // Filament", punctual light attenuation, equation 65.
+        let ratio2=distance2/range2;let window=max(1.0-ratio2*ratio2,0.0);
+        attenuation=window*window/max(distance2,1e-4);
         if light.kind.x==2u {
             let cosine=dot(-l,light.direction_outer.xyz);
             let cone=clamp((cosine-light.direction_outer.w)/(light.radiance_inner.w-light.direction_outer.w),0.0,1.0);

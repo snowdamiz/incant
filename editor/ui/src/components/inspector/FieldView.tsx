@@ -86,7 +86,14 @@ function FieldRow({
         {label}
       </label>
       <div className="field__value">
-        <ValueControl id={id} schema={schema} value={value} invalid={severity === 'error'} describedBy={describedBy} />
+        <ValueControl
+          id={id}
+          fieldKey={path[path.length - 1] ?? ''}
+          schema={schema}
+          value={value}
+          invalid={severity === 'error'}
+          describedBy={describedBy}
+        />
       </div>
       {problems.length > 0 ? (
         <ul className="field__problems" id={messageId}>
@@ -104,12 +111,14 @@ function FieldRow({
 
 function ValueControl({
   id,
+  fieldKey,
   schema,
   value,
   invalid,
   describedBy,
 }: {
   id: string;
+  fieldKey: string;
   schema: FieldSchema;
   value: unknown;
   invalid: boolean;
@@ -180,15 +189,18 @@ function ValueControl({
       if (!Array.isArray(value) || !value.every((item) => typeof item === 'number')) {
         return <Mismatch id={id} expected="a list of numbers" value={value} />;
       }
-      const widget = schema['x-incant-widget'];
-      const axes = widget === 'quat' ? ['X', 'Y', 'Z', 'W'] : ['X', 'Y', 'Z', 'W'].slice(0, value.length);
+      const channels = arrayChannels(schema['x-incant-widget'], fieldKey, value.length);
       return (
         <span className="control control--vector" role="group" aria-labelledby={labelledBy} id={id}>
           {value.map((item, index) => (
             <label key={index} className="vector__axis">
-              <span className={`vector__axis-name axis--${axes[index]?.toLowerCase() ?? 'n'}`}>{axes[index] ?? index}</span>
+              {/* Tint classes stay positional: R/G/B share the X/Y/Z red/green/blue tints. */}
+              <span className={`vector__axis-name axis--${AXES[index]?.toLowerCase() ?? 'n'}`} aria-hidden={channels ? true : undefined}>
+                {channels?.[index]?.short ?? AXES[index] ?? index}
+              </span>
               <input
                 className="control__input mono"
+                aria-label={channels?.[index]?.name}
                 readOnly
                 aria-readonly
                 aria-invalid={invalid || undefined}
@@ -203,6 +215,30 @@ function ValueControl({
     default:
       return <Unsupported id={id} type={schema.type} value={value} />;
   }
+}
+
+const AXES = ['X', 'Y', 'Z', 'W'] as const;
+const COLOR_CHANNELS = [
+  { short: 'R', name: 'Red' },
+  { short: 'G', name: 'Green' },
+  { short: 'B', name: 'Blue' },
+  { short: 'A', name: 'Alpha' },
+] as const;
+
+/**
+ * Colour arrays read as channels, not spatial axes. Native schemas carry no
+ * widget hint for colour yet, so a 3- or 4-number array whose key names a
+ * colour ("color", "baseColor", "emissive_color") is presented as R/G/B(/A).
+ * Presentation only: values and commands are unchanged.
+ */
+export function arrayChannels(
+  widget: string | undefined,
+  key: string,
+  length: number,
+): readonly { short: string; name: string }[] | null {
+  const hinted = widget === 'color' || widget === 'rgb' || widget === 'rgba';
+  const named = widget === undefined && /colou?r$/i.test(key);
+  return (hinted || named) && (length === 3 || length === 4) ? COLOR_CHANNELS.slice(0, length) : null;
 }
 
 function formatNumber(value: number): string {

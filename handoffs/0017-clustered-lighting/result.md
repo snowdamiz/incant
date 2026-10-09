@@ -2,7 +2,24 @@
 
 ## Status
 
-Review complete for the initial fixtures and the priority follow-up captures.
+Current round (range rim and native captures): complete, pending Astra's
+integration run and refreshed native captures. See "Round 3" at the end.
+
+- Range rim: fixed in `crates/incant_render/src/lighting/shade.wgsl` with a
+  squared quartic window, as the brief directed. All 17 `model_gpu` GPU tests
+  and all 14 `incant_render` library tests pass locally, and oracle identity
+  still holds.
+- Near-patch plateau: confirmed as intended by Astra (1 cm distance floor).
+  Not a cluster omission. Question closed.
+- Dielectric limitation: closed by the new `punctual-low-dielectric-*`
+  captures.
+- Native captures: reviewed. Color showed X/Y/Z labels, now fixed in generic
+  FieldView presentation. Three further issues are reported, not fixed.
+- This round supersedes the "Mac is locked" statements below for native
+  review only. Those statements stay as history. Native final captures with
+  both fixes are still pending.
+
+Earlier rounds, kept as history:
 
 - Initial review: no visual defect. Verdicts are preserved unchanged below.
 - Follow-up review: all supplied oracle pairs verified pixel-identical. No
@@ -404,3 +421,258 @@ graph do not exist yet. No phase gate is approved by this review.
 - Resolved: transport is recorded as Claude Code through ACP 1, per the
   follow-up brief.
 - Resolved: oracle captures were supplied with the follow-up.
+
+# Round 3: range-window correction and native capture review
+
+Everything above this heading is preserved history. This round is new.
+
+## Director feedback acknowledged (round 3)
+
+- I own the focused look-dev correction to the range window. This narrow
+  shader edit overrides the earlier no-shader-edit rule. I did not change
+  cluster assignment, light units, tone mapping or any other BRDF math.
+- Astra confirmed the near-patch plateau is intended. The attenuation
+  denominator uses a 1 cm minimum distance (`max(d², 1e-4)` in m²) to keep
+  coincident sources finite. The first two depth patches put their sources
+  5 to 7 mm from the patch. **Confirmed and documented: not a cluster
+  omission.** Follow-up open question 1 is closed.
+- `punctual-low-dielectric-*` at intensity 50 is the lower-intensity
+  companion I requested.
+- The Mac is unlocked, and five real CUA captures were supplied for viewport
+  and field review. Saved account restored without interaction. I did not
+  transcribe the account identity shown in the title bar.
+- Handoff 0016 owns generic Inspector label-wrapping CSS. I made no CSS edits.
+- Rendering used this worktree's own target directory through `./tools/cargo`.
+  `CARGO_TARGET_DIR` was unset, so nothing was shared.
+
+## Change 1: C1 range window (shader)
+
+`crates/incant_render/src/lighting/shade.wgsl`, in `shade_light`:
+
+- Before: `window = max(1 - (d²/r²)², 0)` and `attenuation = window / max(d², 1e-4)`.
+  The window has slope -4 at d = r, which is the measured crease.
+- After: the same window is squared, giving
+  `attenuation = window² / max(d², 1e-4)`. Value and first derivative are both
+  zero at d = r, so the cutoff is C1-continuous.
+- Reference: Filament, "Physically Based Rendering in Filament", punctual
+  light attenuation, equation 65 (as cited in the brief). The arithmetic is
+  expressed independently. No shader listing was copied.
+- Preserved: authored units and radiance scaling, inverse square away from
+  the cutoff, the early return giving strict zero for d ≥ r, the 1 cm
+  denominator floor, and the spot cone factor.
+
+Note on window shape: squaring also lowers the window inside the range. At
+half range the window is 0.88, against 0.94 before. At a quarter range it is
+0.992, and at a tenth of the range it is 0.9998.
+Lights authored with a range close to the lit distance will look slightly
+dimmer than before. That is visible in the small-range fixtures below and is
+the expected cost of a C1 window.
+
+## Evidence for change 1 (real GPU, regenerated locally)
+
+Command (worktree-local target, output git-ignored):
+
+    INCANT_LIGHT_EVIDENCE=<worktree>/artifacts/cluster-final \
+      ./tools/cargo test -p incant_render --release --locked --test model_gpu lights::coverage -- --ignored
+    # 3 passed
+
+Range edge, linear red per pixel inward from the left cutoff:
+
+| Capture | First five pixels inward | Step at cutoff |
+|---|---|---|
+| 640x480 before | 0.0006, 0.0152, 0.0307, 0.0467, 0.0630 | about 0.015, constant |
+| 640x480 after | 0.0009, 0.0040, 0.0086, 0.0152, 0.0232 | 0.003, growing inward |
+| 513x385 before | 0.0027, 0.0212, 0.0409, 0.0612, 0.0823 | about 0.019, constant |
+| 513x385 after | 0.0018, 0.0065, 0.0144, 0.0242, 0.0382 | 0.005, growing inward |
+
+The steps now grow with distance from the cutoff instead of staying
+constant, so the falloff eases into zero. The interior peak is unchanged at
+252, 222, 170. No clipping.
+
+Seam detector, range edge (worst-scoring line, which was the cutoff):
+
+| Capture | Worst column before | Worst column after | Column mean before | Column mean after |
+|---|---|---|---|---|
+| 640x480 | 3.40 | 0.56 | 0.41 | 0.21 |
+| 513x385 | 4.59 | 0.92 | 0.52 | 0.23 |
+
+Tile lines remain at the noise floor.
+
+Before vs after over all regenerated images (largest per-pixel channel
+change):
+
+| Images | Max change | Reason |
+|---|---|---|
+| visible-range-edge, both sizes | 39 | intended rim removal (range 1.8) |
+| spatial-overflow-96, both sizes | 16 | small ranges (4): slightly dimmer, smoother pools |
+| depth-boundary-patches, both sizes | 10 | small ranges (0.16 × depth): peak 143 → 142 |
+| punctual-hdr metal and dielectric, all 8 | 1 | range 100 at about 5 units: inverse square preserved |
+| punctual-low-dielectric, all 4 | 1 | same |
+
+Oracle identity after the change was verified directly by decoding. Both
+spatial-overflow-96 sizes and both depth-boundary-patches sizes are
+pixel-identical to their `-oracle` images.
+
+Verdicts after change 1:
+
+- **visible-range-edge (both sizes): pass.** The pool now fades out with no
+  defined rim. Follow-up defect 1 is resolved.
+- **spatial-overflow-96 (both sizes): pass.** Same green-to-rose blend,
+  slightly softer, no seams, oracle-identical.
+- **depth-boundary-patches (both sizes): pass.** Same grid pattern, peaks
+  within 1 code value of before, oracle-identical. Patches 00 and 01 keep the
+  intended 1 cm plateau.
+- **punctual-hdr (8 images): pass, unchanged** within 1 code value.
+
+## Evidence: low-intensity dielectric companion (new captures)
+
+| Roughness | Peak sRGB | Vertical profile at x=320 (R, top to bottom) |
+|---|---|---|
+| 0.045 | 255,249,239 (2 px pinpoint) | 71 … 122 … 36 |
+| 0.3 | 216,196,159 | 71 … 186 highlight … 36 |
+| 0.7 | 126,114,91 | 72 … 126 … 37 |
+| 1 | 123,111,89 | 72 … 123 … 38 |
+
+- **punctual-low-dielectric (4 images): pass.** The diffuse body sits well
+  below the shoulder (about 70 to 125), so Lambert falloff toward the rim is
+  visible. The highlight goes from pinpoint to soft lobe to broad and nearly
+  absent as roughness rises. No hue ring at the clip. The follow-up
+  dielectric limitation is closed.
+
+## Other verification run locally
+
+    ./tools/cargo test -p incant_render --release --locked --test model_gpu -- --ignored
+    # 17 passed: includes inverse square, outside-range, spot falloff,
+    # 64/65/128 overflow and brute-force spatial cluster checks
+    ./tools/cargo test -p incant_render --release --locked --lib -- --include-ignored
+    # 14 passed: includes per-slice GPU readback and HDR output
+    ./tools/cargo fmt --all -- --check          # ok
+    ./tools/cargo clippy -p incant_render --locked --all-targets -- -D warnings   # ok
+
+Evidence from the full run was written to `artifacts/cluster-final-all/`,
+also git-ignored. Astra still owns the authoritative numerical run and the
+final evidence regeneration.
+
+## Native capture review (artifacts/lighting-native/, real CUA, JPEG)
+
+| Capture | Size | Verdict |
+|---|---|---|
+| 01-point-dim-wide | 1440x900 | Pass for viewport. Inspector Color shows X/Y/Z (fixed, see change 2). |
+| 02-point-undo-bright | 1440x900 | Pass. Intensity 300, larger near-white highlight, Redo enabled. |
+| 03-point-redo-dim | 1440x900 | Pass. Intensity 60, viewport matches 01, Redo disabled again. |
+| 04-spot-wide | 1440x900 | Pass for fields. Zero-intensity probe leaves the viewport unchanged, as intended. |
+| 05-spot-minimum | 1000x650 | Issue: the Outer degrees row is cut off behind the Agent panel. |
+| resize-check (not listed in brief) | 1000x900 | Pass. All spot fields visible, sphere centred. |
+
+Viewport observations, all captures: the authored point light gives a warm
+near-white highlight with a smooth falloff on a dark metallic-looking sphere.
+There is no hue ring at the clip and no seam. The sphere edge is aliased
+because no antialiasing exists yet. The lower rim drops below the background
+because no ambient term exists. Both match the headless fixtures. The cursor
+hovers over hierarchy rows in 01 and 04, which is a capture artifact. Undo and
+Redo button states are correct in each capture. These captures predate change
+1, but the point light's range of 100 does not reach the sphere's distance
+limit, so they are unaffected.
+
+## Change 2: Color channels labelled R/G/B (generic FieldView presentation)
+
+The issue was material. The native PointLight and SpotLight Color showed
+"X 1 / Y 0.8 / Z 0.5", which reads as a position or direction next to the
+Transform section's identical X/Y/Z rows.
+
+- `editor/ui/src/components/inspector/FieldView.tsx`: new exported
+  `arrayChannels` helper. A 3- or 4-number array is shown as R/G/B(/A) when
+  the schema widget is `color`, `rgb` or `rgba`, or when there is no widget
+  hint and the field key ends in "color" or "colour" (`color`, `baseColor`,
+  `emissive_color`). Each input gets an accessible name (Red, Green, Blue,
+  Alpha), and the visible letter is hidden from assistive tech to avoid a
+  double reading. All other arrays keep X/Y/Z/W, and `quat` is unchanged.
+- The tint classes stay positional (`axis--x/y/z/w`), and X/Y/Z already use
+  red, green and blue tints. No CSS changed, so there is no conflict with
+  handoff 0016.
+- Presentation only: values, read-only state, diagnostics and commands are
+  unchanged.
+- `editor/ui/src/App.test.tsx`: one new test. It uses the observed native
+  PointLight schema shape (an untitled 3-number `color`, no widget). It checks
+  that Color reads R/G/B, that the Green input has the accessible name
+  "Green" and value 0.8, that a spatial array in the same component stays
+  X/Y/Z, and that axe reports no violations.
+
+Commands, from `editor/ui`, after `npm ci --offline` at the repo root
+(node_modules is git-ignored):
+
+    npx tsc -b --noEmit     # ok
+    npx vitest run          # 11 files, 283 tests passed (1 new)
+
+Not yet verified visually. No native or browser screenshot of the R/G/B
+labels exists. They need the refreshed native captures.
+
+Data-binding request for Astra: the native light schemas should emit an
+explicit `x-incant-widget: "color"` on `color`. That would make the key-name
+rule only a fallback. I did not edit the engine schemas.
+
+## Other native issues (reported, not fixed)
+
+1. **Light units are invisible.** The schemas describe Intensity in candela,
+   or lux for DirectionalLight, and Range in metres. Those descriptions only
+   appear as a hover tooltip, so the Inspector shows a bare "60" or "100".
+   FieldView already renders `x-incant-unit`, but the native schemas do not
+   emit it. Data-binding request: emit `x-incant-unit` with `cd` or `lx` for
+   intensity, `m` for range and `°` for the cone angles. The renderer needs
+   no change.
+2. **Minimum-size Inspector clips its last field.** At 1000x650 the Outer
+   degrees row is cut off at the Agent panel boundary. The Inspector body
+   does scroll (`overflow: auto`), but macOS overlay scrollbars give no
+   visible cue that more fields exist. Recommended for a layout handoff:
+   either a scroll-edge shadow on the Inspector, or let the Agent panel
+   collapse or shrink first at small heights. This touches Inspector CSS, so
+   I left it out of this handoff because of 0016.
+3. **Spot aim is not inspectable on the probe.** The SpotLight probe shows
+   no Transform section, and spot direction is transformed local -Z. If the
+   probe has no Transform, its default orientation is implicit. Question for
+   Astra: is that intended for a probe? A real spot should expose its aim.
+4. **Account identity appears in captures.** The title-bar account chip shows
+   the signed-in identity in every native capture. These files are
+   git-ignored here. If native captures are ever committed, attached to a PR
+   or published as evidence, crop or redact that chip first.
+
+## Remaining verification (round 3)
+
+- Astra: the authoritative numerical test run and final evidence
+  regeneration with the new window.
+- Refreshed native captures with both changes: the range edge in the native
+  viewport, Color showing R/G/B, and 1000x650 Inspector behaviour.
+- Visual confirmation of the R/G/B labels in any real renderer, which no
+  screenshot shows yet.
+- Data bindings requested above: `x-incant-widget: "color"` and
+  `x-incant-unit` on light schemas.
+- Not approved by this review: production lighting, with no shadows,
+  antialiasing, exposure controls, mobile tiers or complete render graph. No
+  native approval and no phase gate approval either.
+
+## Changed paths (round 3)
+
+- `crates/incant_render/src/lighting/shade.wgsl`: C1 range window
+- `editor/ui/src/components/inspector/FieldView.tsx`: colour channel labels
+- `editor/ui/src/App.test.tsx`: one new presentation test
+- `handoffs/0017-clustered-lighting/result.md`: this file
+
+These are git-ignored and not committed: review scripts in
+`artifacts/review0017/` (including `edge2.py` and `before_after.py`),
+regenerated images in `artifacts/cluster-final/` and
+`artifacts/cluster-final-all/`, and run logs.
+
+## Screenshot paths (round 3)
+
+Reviewed, not produced:
+
+- `artifacts/lighting-native/01-point-dim-wide.jpg`,
+  `02-point-undo-bright.jpg`, `03-point-redo-dim.jpg`, `04-spot-wide.jpg`,
+  `05-spot-minimum.jpg` and `resize-check.jpg`.
+- `artifacts/cluster-initial/punctual-low-dielectric-*.png`.
+
+Regenerated locally by the real GPU test, after change 1:
+
+- `artifacts/cluster-final/*.png` (22 images, including 4 oracles).
+
+No screenshots were fabricated, and no shell-native capture was used.
