@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { MouseEvent } from 'react';
 import { Icon } from '../icons/Icon';
 import { WispMark } from '../icons/WispMark';
+import { projectState } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 import { ChatGPTButton } from './AccountDialog';
 
@@ -17,9 +18,13 @@ export function AgentPanel() {
   const agent = snapshot?.agent;
   const provider = snapshot?.provider;
   const canSend = agent?.status === 'idle' && capabilities.has('agent.send');
+  const project = projectState(snapshot);
   const reason = !snapshot
     ? 'No engine is connected.'
-    : agent?.status === 'unavailable'
+    : project.kind === 'failed'
+      ? // The banner shows the failure itself; repeating it here adds nothing.
+        'The agent needs an open project.'
+      : agent?.status === 'unavailable'
       ? agent.reason
       : !capabilities.has('agent.send')
         ? 'This bridge does not support sending messages to the agent.'

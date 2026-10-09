@@ -272,3 +272,8 @@ the old tablet layout. The integrated strict build also passes: JavaScript is
 48.65 kB gzip and CSS is 8.40 kB gzip. The new changes are separate from deployed
 PR #2 and await their own hosted integration checks. Before/after review evidence
 and exact commits are in the [result packet](../../handoffs/0008-native-and-site-review/result.md).
+
+Handoff 0008's tablet layout and platform-mark improvements deployed from main
+5d1f5ab after PR #4 merged. The website build and deploy jobs passed; HTTPS
+returned 200 and every entrypoint asset matched the reviewed build.
+See [deployment evidence](evidence/runtime-assets-site-deploy-2026-10-09.json).

@@ -315,3 +315,102 @@ describe('account semantics in the dialog', () => {
     await waitFor(() => expect(requests).toEqual([{ type: 'provider.connect', method: 'oauth', add: true }]));
   });
 });
+
+/**
+ * WebKit draws no :focus-visible ring after script focus that follows a key press
+ * (handoff 0008, native capture d05). The UI marks keyboard focus itself with
+ * data-focus-visible, which CSS rings exactly like :focus-visible.
+ */
+describe('account dialog focus ring by input modality', () => {
+  const marked = (element: Element | null) => element?.hasAttribute('data-focus-visible') ?? false;
+  // A real Enter on a focused button: the keydown, then the click the browser synthesizes.
+  const pressEnterOn = (element: HTMLElement) => {
+    fireEvent.keyDown(element, { key: 'Enter' });
+    fireEvent.click(element);
+  };
+  const clickWithPointer = (element: HTMLElement) => {
+    fireEvent.pointerDown(element);
+    fireEvent.mouseDown(element);
+    fireEvent.click(element);
+  };
+
+  it('keyboard-opened: Close takes focus and is marked for a visible ring', () => {
+    const { bridge } = providerBridge(PROVIDER_FIXTURES['signed-in']);
+    renderBridge(bridge);
+    chip().focus();
+    pressEnterOn(chip());
+    const close = within(dialog()).getByRole('button', { name: 'Close' });
+    expect(document.activeElement).toBe(close);
+    expect(marked(close)).toBe(true);
+    // Escape still closes and returns focus to the chip, which keeps the ring.
+    fireEvent.keyDown(close, { key: 'Escape' });
+    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(document.activeElement).toBe(chip());
+    expect(marked(chip())).toBe(true);
+    expect(marked(close)).toBe(false);
+  });
+
+  it('pointer-opened: Close takes focus without the keyboard ring', () => {
+    const { bridge } = providerBridge(PROVIDER_FIXTURES['signed-in']);
+    renderBridge(bridge);
+    clickWithPointer(chip());
+    const close = within(dialog()).getByRole('button', { name: 'Close' });
+    expect(document.activeElement).toBe(close);
+    expect(marked(close)).toBe(false);
+    expect(document.querySelector('[data-focus-visible]')).toBeNull();
+  });
+
+  it('keyboard navigation after a pointer open shows the ring, and moving focus moves it', () => {
+    const { bridge } = providerBridge(PROVIDER_FIXTURES['signed-in']);
+    renderBridge(bridge);
+    clickWithPointer(chip());
+    const d = dialog();
+    const close = within(d).getByRole('button', { name: 'Close' });
+    // Shift+Tab from the first control wraps to the last one, through the dialog's trap.
+    fireEvent.keyDown(close, { key: 'Tab', shiftKey: true });
+    const last = document.activeElement as HTMLElement;
+    expect(last).not.toBe(close);
+    expect(d.contains(last)).toBe(true);
+    expect(marked(last)).toBe(true);
+    expect(marked(close)).toBe(false);
+    expect(document.querySelectorAll('[data-focus-visible]')).toHaveLength(1);
+    // A pointer press drops the ring again.
+    fireEvent.pointerDown(last);
+    expect(marked(last)).toBe(false);
+  });
+
+  it('keyboard sign-out question focuses the safe answer with a ring; pointer does not', () => {
+    const { bridge, requests } = providerBridge(PROVIDER_FIXTURES['signed-in']);
+    renderBridge(bridge);
+    chip().focus();
+    pressEnterOn(chip());
+    let d = dialog();
+    const signOut = within(d).getByRole('button', { name: 'Sign out' });
+    signOut.focus();
+    pressEnterOn(signOut);
+    let keep = within(d).getByRole('button', { name: 'Keep signed in' });
+    expect(document.activeElement).toBe(keep);
+    expect(marked(keep)).toBe(true);
+    fireEvent.keyDown(keep, { key: 'Escape' });
+    expect(within(d).queryByRole('group', { name: /Sign out of/ })).toBeNull();
+    fireEvent.keyDown(d, { key: 'Escape' });
+
+    clickWithPointer(chip());
+    d = dialog();
+    clickWithPointer(within(d).getByRole('button', { name: 'Sign out' }));
+    keep = within(d).getByRole('button', { name: 'Keep signed in' });
+    expect(document.activeElement).toBe(keep);
+    expect(marked(keep)).toBe(false);
+    expect(requests).toEqual([]);
+  });
+
+  it('command shortcuts do not switch to keyboard modality', () => {
+    const { bridge } = providerBridge(PROVIDER_FIXTURES['signed-in']);
+    renderBridge(bridge);
+    clickWithPointer(chip());
+    const close = within(dialog()).getByRole('button', { name: 'Close' });
+    fireEvent.keyDown(close, { key: 'z', metaKey: true });
+    fireEvent.keyDown(close, { key: 'Shift' });
+    expect(marked(close)).toBe(false);
+  });
+});

@@ -1,5 +1,5 @@
-use incant_cmd::{Actor, Command, CommandBus};
-use incant_doc::{Entity, Project, Scene, Transform, schema_registry};
+use incant_cmd::{Actor, Command};
+use incant_doc::{Project, schema_registry};
 use incant_render::{Renderer, Viewport, wgpu};
 use serde::Serialize;
 use serde_json::{Value, json};
@@ -12,11 +12,12 @@ use std::{
     time::Duration,
 };
 mod menu;
+mod project;
 mod provider;
 mod window;
 struct Editor {
     provider: Arc<provider::ProviderRuntime>,
-    bus: Mutex<CommandBus>,
+    bus: Arc<Mutex<project::LoadState>>,
     viewport: Mutex<Option<Viewport>>,
     alive: AtomicBool,
     console: Mutex<Vec<ConsoleEvent>>,
@@ -39,9 +40,18 @@ impl ConsoleEvent {
 }
 #[tauri::command]
 fn engine_read(state: tauri::State<'_, Arc<Editor>>) -> Result<Value, String> {
-    let bus = state.bus.lock().map_err(|_| "engine lock failed")?;
+    let load = state.bus.lock().map_err(|_| "engine lock failed")?;
+    let bus = match &*load {
+        project::LoadState::Ready(bus) => bus,
+        project::LoadState::Loading => return Ok(json!({"status":"loading"})),
+        project::LoadState::Failed(error) => {
+            return Ok(
+                json!({"status":"error", "error":{"code":error.code(),"message":error.to_string()}}),
+            );
+        }
+    };
     Ok(
-        json!({"project":bus.project(),"revision":bus.revision(),"can_redo":bus.can_redo(),"applied":bus.history().len(),"history":bus.history().iter().chain(bus.redo_history()).map(|tx|json!({"id":tx.id,"description":tx.description,"actor":tx.actor})).collect::<Vec<_>>(),"schemas":schema_registry(),"console":state.console.lock().map_err(|_|"console lock failed")?.clone(),"viewport_error":state.viewport_error.lock().map_err(|_|"viewport lock failed")?.clone()}),
+        json!({"status":"ready","project":bus.project(),"revision":bus.revision(),"can_redo":bus.can_redo(),"applied":bus.history().len(),"history":bus.history().iter().chain(bus.redo_history()).map(|tx|json!({"id":tx.id,"description":tx.description,"actor":tx.actor})).collect::<Vec<_>>(),"schemas":schema_registry(),"console":state.console.lock().map_err(|_|"console lock failed")?.clone(),"viewport_error":state.viewport_error.lock().map_err(|_|"viewport lock failed")?.clone()}),
     )
 }
 #[tauri::command]
@@ -52,7 +62,8 @@ fn engine_execute(
     expected_revision: u64,
 ) -> Result<Value, String> {
     {
-        let mut bus = state.bus.lock().map_err(|_| "engine lock failed")?;
+        let mut load = state.bus.lock().map_err(|_| "engine lock failed")?;
+        let bus = load.bus_mut()?;
         bus.execute(
             commands,
             Actor::user("editor"),
@@ -66,7 +77,8 @@ fn engine_execute(
 #[tauri::command]
 fn engine_history(state: tauri::State<'_, Arc<Editor>>, redo: bool) -> Result<Value, String> {
     {
-        let mut bus = state.bus.lock().map_err(|_| "engine lock failed")?;
+        let mut load = state.bus.lock().map_err(|_| "engine lock failed")?;
+        let bus = load.bus_mut()?;
         if redo { bus.redo() } else { bus.undo() }.map_err(|e| e.to_string())?;
     }
     engine_read(state)
@@ -94,42 +106,9 @@ fn viewport_bounds(
 }
 fn main() {
     let project_path = std::env::args_os().nth(1).map(PathBuf::from);
-    let project = if let Some(path) = &project_path {
-        match std::fs::read_to_string(path)
-            .map_err(|e| e.to_string())
-            .and_then(|s| Project::from_text(&s).map_err(|e| e.to_string()))
-        {
-            Ok(p) => p,
-            Err(e) => {
-                eprintln!("Could not open project: {e}");
-                std::process::exit(1);
-            }
-        }
-    } else {
-        let mut p = Project::empty("Incant Surface Spike");
-        let mut s = Scene::new("Main");
-        let mut e = Entity::new("Cube");
-        e.components
-            .insert("Transform".into(), json!(Transform::default()));
-        s.entities.insert(e.id.clone(), e);
-        p.scenes.insert(s.id.clone(), s);
-        p
-    };
-    let bus = if let Some(path) = &project_path {
-        CommandBus::persistent(path.with_extension("journal.jsonl"), project)
-    } else {
-        CommandBus::new(project)
-    };
-    let bus = match bus {
-        Ok(bus) => bus,
-        Err(e) => {
-            eprintln!("Could not recover project: {e}");
-            std::process::exit(1);
-        }
-    };
     let editor = Arc::new(Editor {
         provider: Arc::new(provider::ProviderRuntime::new()),
-        bus: Mutex::new(bus),
+        bus: Arc::new(Mutex::new(project::LoadState::Loading)),
         viewport: Mutex::new(None),
         alive: AtomicBool::new(true),
         console: Mutex::new(vec![]),
@@ -178,6 +157,20 @@ fn main() {
                     .transparent(true)
                     .auto_resize();
             window.add_child(webview, tauri::PhysicalPosition::new(0, 0), size)?;
+            let project_app = app.handle().clone();
+            project::start(
+                editor.bus.clone(),
+                project::LOAD_TIMEOUT,
+                move || project::open(project_path.as_deref()),
+                move || {
+                    use tauri::Emitter;
+                    let _ = project_app.emit_to(
+                        tauri::EventTarget::webview("editor"),
+                        "incant:engine-changed",
+                        (),
+                    );
+                },
+            );
             // The native surface is owned by the native window, independently of the webview.
             let instance = wgpu::Instance::default();
             let surface = instance.create_surface(window.clone())?;
@@ -209,8 +202,10 @@ fn main() {
                 }
             });
             let shared = editor.clone();
+            let render_app = app.handle().clone();
             std::thread::spawn(move || {
                 let mut configured = (0, 0);
+                let empty = Project::empty("Loading");
                 let format = surface
                     .get_capabilities(&renderer.adapter)
                     .formats
@@ -258,7 +253,10 @@ fn main() {
                             && r[1] + r[3] <= size.height as f32
                     });
                     let project = match shared.bus.lock() {
-                        Ok(bus) => bus.project().clone(),
+                        Ok(load) => match &*load {
+                            project::LoadState::Ready(bus) => bus.project().clone(),
+                            _ => empty.clone(),
+                        },
                         Err(_) => break,
                     };
                     match renderer.draw(
@@ -283,6 +281,12 @@ fn main() {
                                     format!("Render error: {error}"),
                                 ));
                             }
+                            use tauri::Emitter;
+                            let _ = render_app.emit_to(
+                                tauri::EventTarget::webview("editor"),
+                                "incant:engine-changed",
+                                (),
+                            );
                             break;
                         }
                     }

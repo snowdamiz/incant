@@ -52,10 +52,17 @@ within its documented workload.
 
 ## Active work
 
-- All three initial PRs are merged into main after their required checks passed:
-  foundation #1, product site #2 and asset imports #3. The site deployed successfully
-  at https://snowdamiz.github.io/incant/. Runtime asset-version work and renewed
-  Claude visual review continue separately. Merging does not approve a phase gate.
+- Responsive project loading is being integrated: file reads and journal recovery
+  run off the native event thread, with a 15-second timeout and rejected late
+  results. Three Rust loader tests, 240 integrated UI/bridge tests, workspace release tests
+  and Clippy pass locally. Claude handoff 0009 supplies the loading/error
+  presentation and keyboard-dialog focus ring; the native app builds successfully.
+  Protected-folder access and rebuilt native verification remain unproven.
+
+- The first four PRs are merged into main after their required checks passed:
+  foundation #1, product site #2, asset imports #3 and runtime assets/UI polish #4. The site deployed successfully
+  at https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99 before merge. Responsive startup
+  and further Claude UI polish continue separately. Merging does not approve a phase gate.
 
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing

@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { NativeBridge, snapshotFromEngine } from "./native";
-import type { EngineRead, Invoke } from "./native";
+import type { EngineRead, EngineResponse, Invoke } from "./native";
 import type { Ulid, WindowChrome } from "./contract";
 const scene = "00000000000000000000000002";
 const entity = "00000000000000000000000010";
@@ -52,6 +52,101 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it("does not roll back a completed edit when a concurrent event read returns late", async () => {
+    let finishEdit: (value: EngineRead) => void = () => { throw new Error("No edit"); };
+    let finishRead: (value: EngineRead) => void = () => { throw new Error("No read"); };
+    let initialized = false;
+    const invoke: Invoke = async <T>(command: string) => {
+      if (!initialized) { initialized = true; return read() as T; }
+      return await new Promise<EngineRead>((resolve) => {
+        if (command === "engine_execute") finishEdit = resolve;
+        else finishRead = resolve;
+      }) as T;
+    };
+    const bridge = new NativeBridge(invoke);
+    await bridge.start();
+    const editing = bridge.dispatch({ type: "entity.rename", entity: entity as Ulid, name: "Changed" });
+    const refreshing = bridge.start();
+    const updated = read();
+    updated.revision = 8;
+    updated.project.scenes[scene]!.entities[entity]!.name = "Changed";
+    finishEdit(updated);
+    expect((await editing).ok).toBe(true);
+    finishRead(read());
+    await refreshing;
+    expect(bridge.getSnapshot().entities[entity]?.name).toBe("Changed");
+  });
+  it("reports a missing or rejected event subscription instead of waiting indefinitely", async () => {
+    const invoke = vi.fn(async () => read()) as Invoke;
+    for (const listen of [undefined, async () => { throw new Error("Event permission denied"); }]) {
+      const bridge = new NativeBridge(invoke);
+      await bridge.startEngineUpdates(listen);
+      expect(bridge.getSnapshot().connection.status).toBe("error");
+      expect(bridge.getSnapshot().hierarchy.status).toBe("error");
+      expect(bridge.getSnapshot().entities).toEqual({});
+    }
+    expect(invoke).not.toHaveBeenCalled();
+  });
+  it("subscribes before reading and ignores an obsolete loading response after completion", async () => {
+    let notify: () => void = () => { throw new Error("No listener"); };
+    let finishInitial: (value: EngineResponse) => void = () => { throw new Error("No read"); };
+    let calls = 0;
+    const invoke: Invoke = async <T>() => {
+      if (calls++ === 0) return await new Promise<EngineResponse>((resolve) => { finishInitial = resolve; }) as T;
+      return read() as T;
+    };
+    const bridge = new NativeBridge(invoke);
+    const starting = bridge.startEngineUpdates(async (event, listener) => {
+      expect(event).toBe("incant:engine-changed");
+      expect(calls).toBe(0);
+      notify = () => listener({ payload: null as never });
+      return () => undefined;
+    });
+    await vi.waitFor(() => expect(calls).toBe(1));
+    expect(bridge.getSnapshot().connection.status).toBe("connecting");
+    expect(bridge.getSnapshot().hierarchy.status).toBe("loading");
+    expect((await bridge.dispatch({ type: "history.undo" })).ok).toBe(false);
+    notify();
+    await vi.waitFor(() => expect(bridge.getSnapshot().connection.status).toBe("ready"));
+    finishInitial({ status: "loading" });
+    await starting;
+    expect(bridge.getSnapshot().hierarchy.status).toBe("ready");
+    expect(calls).toBe(2);
+  });
+  it("removes stale project state on load or transport failure while preserving account metadata", async () => {
+    let response: EngineResponse = read();
+    let transportError = false;
+    const calls: string[] = [];
+    const invoke: Invoke = async <T>(command: string) => {
+      calls.push(command);
+      if (transportError) throw "Native transport unavailable";
+      return response as T;
+    };
+    const bridge = new NativeBridge(invoke);
+    const provider = { status: "connected", provider: "openai", method: "oauth", accountLabel: "Test account" } as const;
+    bridge.updateProvider(provider);
+    await bridge.start();
+    expect(bridge.getSnapshot().entities[entity]?.name).toBe("Cube");
+    const error = { code: "project.timeout", message: "Project loading timed out." };
+    response = { status: "error", error };
+    await bridge.start();
+    expect(bridge.getSnapshot().connection).toEqual({ status: "error", error });
+    expect(bridge.getSnapshot().hierarchy).toEqual({ status: "error", error });
+    expect(bridge.getSnapshot().entities).toEqual({});
+    expect(bridge.getSnapshot().diagnostics[0]?.message).toBe(error.message);
+    expect(bridge.getSnapshot().provider).toEqual(provider);
+    expect((await bridge.dispatch({ type: "history.undo" })).ok).toBe(false);
+    expect(calls).toEqual(["engine_read", "engine_read"]);
+    response = read();
+    await bridge.start();
+    transportError = true;
+    await bridge.start();
+    expect(bridge.getSnapshot().connection.status).toBe("error");
+    expect(bridge.getSnapshot().entities).toEqual({});
+    expect((await bridge.dispatch({ type: "entity.rename", entity: entity as Ulid, name: "Stale" })).ok).toBe(false);
+    expect(bridge.getSnapshot().provider).toEqual(provider);
+    expect(calls).toHaveLength(4);
+  });
   it("forwards validated native history intent to the UI without mutating the document", async () => {
     const ipc: string[] = [];
     const invoke: Invoke = async <T>(command: string) => { ipc.push(command); return read() as T; };

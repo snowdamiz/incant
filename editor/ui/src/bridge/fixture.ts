@@ -11,6 +11,7 @@
  * Contains no credentials. Every id is a syntactically valid but invented ULID.
  */
 import type {
+  BridgeError,
   BridgeResult,
   BridgeSnapshot,
   ComponentSchema,
@@ -32,6 +33,8 @@ export const FIXTURE_VARIANTS = [
   'loading',
   'hierarchy-error',
   'connection-error',
+  'project-loading',
+  'project-error',
   'large',
 ] as const;
 export type FixtureVariant = (typeof FIXTURE_VARIANTS)[number];
@@ -476,15 +479,34 @@ export function fixtureSnapshot(variant: FixtureVariant): BridgeSnapshot {
         ],
       };
     case 'connection-error':
+      return failedProject({ code: 'bridge.disconnected', message: 'The editor process stopped responding.' });
+    // Mirrors editor/bridge/native.ts snapshotFromEngine() for an engine `loading` response.
+    case 'project-loading':
       return {
         ...baseSnapshot(),
-        connection: {
-          status: 'error',
-          error: { code: 'bridge.disconnected', message: 'The editor process stopped responding.' },
-        },
+        connection: { status: 'connecting' },
         hierarchy: { status: 'loading' },
+        agent: { status: 'unavailable', reason: 'Loading project.' },
+        viewport: { status: 'not-attached', reason: 'Loading project.' },
       };
+    case 'project-error':
+      return failedProject({
+        code: 'project.timeout',
+        message: "Project loading timed out. Check the file's availability and folder permissions, then reopen the project.",
+      });
   }
+}
+
+/** Mirrors snapshotFromEngine() for an engine `error` response: no entities, no history. */
+function failedProject(error: BridgeError): BridgeSnapshot {
+  return {
+    ...baseSnapshot(),
+    connection: { status: 'error', error },
+    hierarchy: { status: 'error', error },
+    diagnostics: [{ id: 'project-load', severity: 'error', message: error.message, entity: null, component: null, path: null }],
+    agent: { status: 'unavailable', reason: error.message },
+    viewport: { status: 'error', error },
+  };
 }
 
 const READ_ONLY: BridgeResult = {
