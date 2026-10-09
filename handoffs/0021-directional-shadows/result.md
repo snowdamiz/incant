@@ -182,6 +182,41 @@ minimum size.
 
 This round changed no code and reran no tests. The only file changed is this report.
 
+## Supplemental round: true-minimum Assets capture
+
+Verdict: **accepted.** This closes the mislabeled minimum-capture gap from the
+polish round. The native root-label fix is now verified at the true minimum
+window size.
+
+**Evidence checked.** I checked `artifacts/shadow-native-polish/assets-retina-minimum.jpg`:
+- I decoded it with macOS `sips`, and it measures 2002x1302.
+- Its SHA-256 begins `b1f3f270` and matches the dimensions file.
+- That is the expected Retina outer size for the configured 1000x650 window,
+  the same size as the final-round minimum captures.
+
+**What it shows:**
+- "Project folder" is in the sans-serif UI face at the true minimum. It matches
+  the asset names and is no longer monospace. The final-round capture
+  `assets-separated-minimum.jpg` showed it in monospace at the same size, so the
+  two images form a direct before and after.
+- The filter field, Import button, folder header and both asset rows keep one
+  left edge and an even row rhythm. Nothing truncates or overlaps, and the
+  "Linear" usage tag stays right-aligned.
+- Assets stays a left workspace beside Hierarchy, and the Inspector shows the
+  asset empty state. The bottom dock holds only Problems, Console and History,
+  and Problems reports zero errors and warnings.
+- The sanitized AX tree names the group "Folder Project folder". It keeps
+  Problems, Console and History as the only output tabs, and focus rests on the
+  selected Assets tab.
+
+The 1720x669 image `assets-minimum.jpg` remains a short-window check only, as
+recorded in the polish round. The true-minimum evidence is the new capture
+above. This round changed no code and reran no tests. The only file changed is
+this report.
+
+No native requests remain open from my review. The thin-caster limits recorded
+in the final round still apply.
+
 ---
 
 # Initial round (history)
