@@ -97,8 +97,10 @@ Native captures verify point intensity Undo/Redo, all new read-only fields,
 RGB channel names, unit annotations and viewport rendering at 1440×900 and
 1000×650. Saved authentication
 survives the rebuild without interaction. Claude owns native and headless pixel
-review; final native verdict and exact tested revisions are tracked in the
-evidence ledger and handoff 0017.
+review. Claude approved all 45 final GPU captures and seven native captures in
+`301d389`, including units, RGB labels, native intensity Undo/Redo and scroll
+access to the lower Inspector fields. Exact revisions and image hashes are in
+[the evidence ledger](evidence/clustered-lighting-2026-10-09.json).
 
 No shadowing, light occlusion, area/IES lights, exposure UI, gizmos, authored
 camera selection, render-graph scheduler, SSAO, bloom, antialiasing, or mobile
@@ -107,3 +109,29 @@ separate preview shader; authored light shading applies to imported materials.
 Cluster building tests every local light per cluster: dense scenes and overflow
 can be expensive. There is no hierarchical light binning, GPU timing benchmark,
 per-device tuning, or completed performance gate yet.
+
+
+## Local frame timing
+
+`./tools/cargo run -p incant_render --example frame_benchmark --release --locked
+-- /absolute/project.incant.json` reads a cooked project without changing it.
+It measures CPU encoding, submission and GPU completion at 1920×1080 after five
+warm-up frames, for 30 samples. Loading, readback, PNG encoding, presentation and
+simulation are excluded. These are fenced wall times, not GPU timestamps.
+
+On this Apple M5 Pro, a 3,968-triangle imported sphere with a black environment
+and a 0.7-meter-spaced point-light lattice (2-meter light ranges) measured:
+
+| Local lights | Median ms | p95 ms |
+| --- | ---: | ---: |
+| 0 | 1.385 | 1.458 |
+| 64 | 2.715 | 3.278 |
+| 256 | 2.659 | 2.784 |
+| 1024 | 7.765 | 9.060 |
+| 4096 | 28.050 | 31.856 |
+
+The 4,096-light case exceeds a 16.7 ms frame budget even before gameplay or
+presentation. The overlap/overflow path needs optimization for dense scenes.
+These small synthetic scenes and this faster Mac do not satisfy PLAN.md's Core
+Sample performance gate on its named devices. Raw sorted samples are retained
+in the evidence ledger. The desktop app was closed during these measurements.

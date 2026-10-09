@@ -53,14 +53,16 @@ within its documented workload.
 
 ## Active work
 
-- Authored directional, point and spot lights now use real GPU clustered forward
-  shading with bounded lists and an exact overflow fallback. Physical, depth,
-  spatial-oracle and resource-lifetime checks pass; the public CLI verifies
-  intensity edits, atomic rejection, Undo/Redo and source-free rendering.
-  Initial validation passes 135 Rust tests, 23 GPU checks and 282 UI tests.
-  Claude's expanded pixel review found a range-edge crease and Inspector label
-  issues; focused corrections and final native recaptures are in progress.
-  See [clustered lighting evidence](docs/spikes/clustered-lighting.md).
+- Authored directional, point and spot lights use real GPU clustered forward
+  shading with bounded lists and an exact overflow fallback. The shared command
+  bus, durable history, schemas and read-only Inspector remain the authoring
+  interface. Final validation passes 135 Rust tests, 24 GPU checks and 283 UI
+  tests. Claude approved the final headless/native captures after fixing the
+  range-edge rim, RGB labels and unit display. Public CLI edits, atomic rejection,
+  Undo/Redo and source-free rendering pass. The 1080p local frame probe measures
+  1.38–28.05 ms median across 0–4096 local lights on M5 Pro; the dense case needs
+  optimization and no game/device performance gate is claimed. Ready for hosted
+  checks. See [clustered lighting evidence](docs/spikes/clustered-lighting.md).
 
 - Distant environment lighting includes diffuse convolution, GGX roughness
   filtering, a matching BRDF lookup and retained GPU versions. Authored
