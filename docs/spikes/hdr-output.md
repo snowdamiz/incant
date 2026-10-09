@@ -53,7 +53,8 @@ Scene resources and material versions retain their previous ownership behavior.
   account, with the viewport attached. Claude approved all 24 final headless
   captures and both native captures in `4c6784f`, at 1440×874 and 1000×650 logical
   sizes. Native JPEGs carry the display profile, so exact color assertions use
-  the sRGB headless readbacks. Hosted checks remain pending.
+  the sRGB headless readbacks. All three applicable hosted checks passed on
+  `573fbc8`; PR #15 merged as `5b8fcd3` on 2026-10-09.
 
 This is a fixed ordered renderer, not the complete production render graph.
 Clustered forward+ lights, specular IBL, cascaded shadows, SSAO, bloom, TAA,

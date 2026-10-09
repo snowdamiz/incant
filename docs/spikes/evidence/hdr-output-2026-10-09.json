@@ -84,5 +84,47 @@
     "headless_captures": 24,
     "native_captures": 2
   },
-  "hosted_checks": "pending"
+  "hosted_checks": {
+    "head": "573fbc8aa5ed1d1517deb5cc86154f88ffd2dd54",
+    "checks": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T19:09:13Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37975234704/job/113971748287",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "startedAt": "2026-10-09T18:43:18Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T19:08:28Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37975234684/job/113971747629",
+        "name": "checks",
+        "startedAt": "2026-10-09T18:43:24Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T18:57:36Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37975234704/job/113971748486",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "startedAt": "2026-10-09T18:43:18Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      }
+    ],
+    "result": "all three applicable checks passed"
+  },
+  "merge": {
+    "pr": 15,
+    "url": "https://github.com/snowdamiz/incant/pull/15",
+    "commit": "5b8fcd3d44525d9703a80b44109b5b52df348cec",
+    "merged_at": "2026-10-09T19:12:31Z",
+    "author_trailer": "Built-by: astra (verified)"
+  }
 }

@@ -1,0 +1,165 @@
+{
+  "date": "2026-10-09",
+  "implementation": "da18b0a",
+  "numeric_followup": "ccec033",
+  "studio_retune": "0caf872",
+  "adapter": "Apple M5 Pro",
+  "local_checks": {
+    "rust_behavior_tests": 131,
+    "rust_behavior_validation": "130 in full workspace run; additional low-pass test separately passed",
+    "explicit_gpu_tests": 15,
+    "final_gpu_validation": "13 model/editor/headless tests rerun after retune; unchanged 2 output tests passed earlier",
+    "ui_bridge_tests": 282,
+    "clippy": "passed workspace; affected crates rerun after new tests",
+    "format": "passed",
+    "generated_files": "passed",
+    "sdk_typecheck": "passed",
+    "python_tool_tests": 5,
+    "native_release_build": "passed"
+  },
+  "public_cli": {
+    "adapter": "Apple M5 Pro",
+    "checks": [
+      {
+        "name": "authored-environment",
+        "seconds": 0.319,
+        "sha256": "2cbe69ae6b2e7a424b2251c34d6a48e3fb309e5e67b7e2f17f4c7b61fe6227c6",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        }
+      },
+      {
+        "name": "rotated-environment",
+        "seconds": 0.3212,
+        "sha256": "4769313d4bc68b660195bd86b66f2f99a49a696a48619f74e1f2d54057fc1ef3",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        }
+      },
+      {
+        "name": "undo-environment",
+        "seconds": 0.3209,
+        "sha256": "2cbe69ae6b2e7a424b2251c34d6a48e3fb309e5e67b7e2f17f4c7b61fe6227c6",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        }
+      },
+      {
+        "name": "redo-environment",
+        "seconds": 0.3166,
+        "sha256": "4769313d4bc68b660195bd86b66f2f99a49a696a48619f74e1f2d54057fc1ef3",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        }
+      },
+      {
+        "name": "source-free-environment",
+        "seconds": 0.3178,
+        "sha256": "4769313d4bc68b660195bd86b66f2f99a49a696a48619f74e1f2d54057fc1ef3",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        }
+      },
+      {
+        "name": "native-ready-environment",
+        "seconds": 0.7828,
+        "sha256": "2cbe69ae6b2e7a424b2251c34d6a48e3fb309e5e67b7e2f17f4c7b61fe6227c6",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        }
+      }
+    ],
+    "command_bus_undo_redo": "passed",
+    "source_free_public_cli": "passed",
+    "source_project": "private disposable fixture; project contents created through CLI/command bus"
+  },
+  "captures": {
+    "base-color-texture.png": "3f23498ac338c0f33c6d3794a89ea0032e3ff55880a1882d1e4972a314e27a17",
+    "cli-authored-environment.png": "2cbe69ae6b2e7a424b2251c34d6a48e3fb309e5e67b7e2f17f4c7b61fe6227c6",
+    "cli-default-studio.png": "447489063a3aaf58cbe013ad3cae817b66a1c642cb8e2397291d0d5d51038aed",
+    "cli-native-ready-environment.png": "2cbe69ae6b2e7a424b2251c34d6a48e3fb309e5e67b7e2f17f4c7b61fe6227c6",
+    "cli-redo-environment.png": "4769313d4bc68b660195bd86b66f2f99a49a696a48619f74e1f2d54057fc1ef3",
+    "cli-rotated-environment.png": "4769313d4bc68b660195bd86b66f2f99a49a696a48619f74e1f2d54057fc1ef3",
+    "cli-source-free-environment.png": "4769313d4bc68b660195bd86b66f2f99a49a696a48619f74e1f2d54057fc1ef3",
+    "cli-undo-environment.png": "2cbe69ae6b2e7a424b2251c34d6a48e3fb309e5e67b7e2f17f4c7b61fe6227c6",
+    "dark-fill-10.png": "43bba9f34e60d387924e1b4a2362d4a0b0ea3d8ce205130b3effb649efc166e9",
+    "dark-fill-18.png": "57bd04d3a3649393fc9d684978524a5ff5039dba00f9fd7c80d2801ef8afe7e2",
+    "dark-fill-50.png": "59788065412773c32edd73d1de01be84f3c8d9f680d43402e1b6380a620d5ba5",
+    "double-sided-back.png": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+    "emissive-map.png": "ae2cd28cbdc77e62a0233925b5702d2188da4f2e6a834cba9c7bf918a5f6f7f3",
+    "environment-disabled.png": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+    "environment-linear-metal.png": "0739cef132d181b9fec9a8866330d628dad4a69e414f774d7a50aec670afbe93",
+    "environment-restored.png": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9",
+    "environment-rotation-half-turn.png": "4930b16f83022ef644bbd9133ecad51d90e48e6d75cd41c823013ff5498ba222",
+    "environment-rotation-zero.png": "49a35139b3f206e5b0731685fbdd260bad02fba0990f9ac5412f12f90eec8bcf",
+    "environment-rough-metal.png": "f6fd11dc7bd2d383a4a34a2afa76f4f7e3c212c66e543ee1320bb108e16af88d",
+    "environment-srgb-metal.png": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9",
+    "environment-white-furnace.png": "062d2f0e4d6d8605b6988f77800dab4fd99cab8d414d755f5625c73189e12390",
+    "hdr-glossy-highlight.png": "886cfc34d5440e8dbc0bbaf9449099ce63a50cfde6df6be5270d891994cc0230",
+    "hdr-transparent-over-black.png": "92fa682f5c5b37440488b2b9457fdfd69215508eb07a6665a03d4ac2270631e8",
+    "layered-transparency.png": "c78f11db0ad33f49c6a256d199f7bacea023759426498927b688b1f275d51773",
+    "linear-filter.png": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec",
+    "lit-double-sided-back.png": "dcbd28e6e8fc38a0e3c55987b4792da7fbb8c6096ebc58c61df135deabf7580d",
+    "mask-discarded.png": "e1751a8a2d75f191fde7f49ca0c531d612d0a59b444411f83d6dffc97f8744c7",
+    "metallic-roughness-map.png": "d3744f3cde70216735ab0f188c59e2e79452d5a3307a98165c579a33997d2232",
+    "minified-color-mips.png": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec",
+    "normal-map.png": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a",
+    "occlusion-map.png": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a",
+    "opaque-alpha-zero.png": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+    "opaque-between-transparent.png": "e3bdebc967b2cf254df4feb048950827a54aac9131617442f787b188ac12e9d9",
+    "reflected-single-sided.png": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+    "reimported-blue-texture.png": "9eb8a28267847140b94aeb61579445f97cd73978315775e094f28e26c42845f7",
+    "sixteen-bit-color.png": "fbdb02aa70b86684355ae8e5c2731b1eb49626b9a8156de8a80e1ad6ae89869d",
+    "studio-dark-matte.png": "bcd6176576ad58f83764a7aa6ee92e48c1f2d7ce67d2e9f7f7f31daef3129e6c",
+    "studio-dark-rough.png": "5c88851c8625dd9ccb4038d6ccbb5a2185fb9eebff6bc4ad8b907d1237994d7c",
+    "studio-dark-satin.png": "fe7bf254be61a8a213c9e1c9f0d13dbd3ed6ac4830dd142dc744819be6440a19",
+    "studio-dark-smooth.png": "7cf36b070a2b3c5acf812972275e1e56c01a7712a711e1b0fa273fec2c617ff9",
+    "studio-dielectric-matte.png": "db1e87402262c626ce0ebe854f722f0de625f6ff054b96c5c56cc1a7732a40ce",
+    "studio-dielectric-rough.png": "0bb6498815269a2a20c1572c82011711f8c9620013d1a09fd6378e4716eca804",
+    "studio-dielectric-satin.png": "aa1ad0a7a7fb60200cf29643fcdc951679374f3b7dec9425f0aa0e717cee516f",
+    "studio-dielectric-smooth.png": "f9e48d8aa0757bdffb07b113f59ac4e31fe432de254af9ad851b155f200344af",
+    "studio-metal-matte.png": "9c8ebbd851d1de09098af80676501e74ec20d85ed2451a1bcd99ea4e013a0b26",
+    "studio-metal-rough.png": "4622e1c1d7150217103d5d90ef78e1472df9bc2037f25a269bb42e3c3ce48c27",
+    "studio-metal-satin.png": "928e2dbfb384414a94355bf9e3af0ab7b6b48b369da462720ca960fc07ef6b9e",
+    "studio-metal-smooth.png": "4677800f3782bd23bee195fc115ccff879ceedc2465725fbeebef8def36fdd00",
+    "varying-normal-map.png": "27180b14ddb8c4ec9c076f72ddc01ed49fe3a08a60fdd9a02747b2eb86070bda"
+  },
+  "visual_review": {
+    "initial": "f72bec6 requested key/fill retune",
+    "retuned_headless": "approved by Claude Opus 5.5 via ACP, e192fe8",
+    "native": "pending: CUA reports Mac locked; prior build left running"
+  },
+  "hosted_checks": "not yet dispatched",
+  "limits": [
+    "one global distant environment per project",
+    "fixed 128-pixel specular cube, eight roughness levels, 16-pixel diffuse cube, 64-pixel DFG lookup",
+    "CPU prefilter on scene-preparation render worker; no persistent prefilter disk cache/cancellation",
+    "split-sum single-scattering GGX, fixed preview direct key, no skybox/shadows/local probes/antialiasing",
+    "project schema/document validation plus existing importer four-megatexel limit; color/linear equirectangular 2:1 images only"
+  ],
+  "phase_gate": "not approved"
+}

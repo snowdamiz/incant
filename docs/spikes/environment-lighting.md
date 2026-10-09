@@ -62,8 +62,9 @@ fill panel intensities preserve a clear hierarchy under the HDR output shoulder.
   quadrature checks the BRDF integral; other tests cover cube axes/edges, constant
   radiance, HDR/sRGB/linear decode, invalid radiance, filter broadening and document
   transaction semantics. All lookup values are finite, nonnegative and bounded.
-- Fifteen explicit GPU checks pass before the final look-dev retune; the final
-  captures and rerun are recorded in the evidence ledger. Actual environment
+- Fifteen explicit GPU checks pass, including the final look-dev retune
+  (13 model/editor/headless checks rerun; two unchanged display checks passed).
+  The final captures and rerun are recorded in the evidence ledger. Actual environment
   checks cover color spaces, positive/negative yaw, intensity, roughness,
   constant-environment white-furnace energy, retained versions and source removal.
 - 282 UI/bridge tests, UI build, SDK typecheck, generated files, Python tools,
@@ -75,6 +76,9 @@ fill panel intensities preserve a clear hierarchy under the HDR output shoulder.
   CLI processes completed in 0.32–0.79 seconds each on Apple M5 Pro, including
   device creation, asset loading, filtering, drawing and PNG output. This is a
   local fixture measurement, not a frame-time or platform performance gate.
+- Claude Opus 5.5 through ACP approved the final headless captures in `e192fe8`,
+  confirming key/fill hierarchy, neutral colors, smooth roughness progression and
+  seam-free studio reflections. CLI/default-studio and authored-map captures pass.
 - Native application verification is pending: CUA reports the Mac is locked.
   The running prior build was left intact. Claude reviews the saved GPU images;
   this is not a substitute for native integration evidence.

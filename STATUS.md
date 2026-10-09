@@ -58,8 +58,8 @@ within its documented workload.
   `EnvironmentLight` components bind imported equirectangular textures through
   the shared command bus. The public CLI verifies rotation, Undo/Redo and
   source-free rendering. 131 Rust behavior tests and 15 explicit GPU checks are
-  covered by the current validation; final look-dev rerun/review is in progress.
-  Claude's default studio is integrated. Native verification is pending because
+  covered by the current validation; final look-dev GPU rerun passes.
+  Claude approved the final headless images; the default studio is integrated. Native verification is pending because
   CUA reports the Mac locked; no native approval is claimed. See
   [environment lighting evidence](docs/spikes/environment-lighting.md).
 
@@ -68,8 +68,9 @@ within its documented workload.
   off bright highlights. Eleven explicit GPU checks cover tone mapping, display
   formats, dark materials, HDR transparency, resize lifetime, imports and playback.
   The workspace passes 124 Rust tests, Clippy and 282 UI tests/build. Claude approved
-  the 24 final GPU captures and both native sizes. Hosted checks are pending;
-  full production lighting, render graph, IBL, shadows, bloom and antialiasing
+  the 24 final GPU captures and both native sizes. All three applicable hosted checks passed on `573fbc8`; PR #15 merged
+  as `5b8fcd3` on 2026-10-09. Full production lighting, render graph, IBL,
+  shadows, bloom and antialiasing
   remain open. See [HDR output evidence](docs/spikes/hdr-output.md).
 
 - Structured script logging now uses the bounded sandbox API and preserves
@@ -179,12 +180,12 @@ within its documented workload.
   and saved disposable projects; native account focus behavior passes, with the
   visible keyboard ring also approved by Claude.
 
-- The first fourteen PRs are merged into main after their required checks passed:
+- The first fifteen PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
   responsive loading/focus #5, shared import batches #6, source watching #7 and
   editor/agent imports with the redesigned asset workspace #8, and runtime scene
   projection #9, imported GPU geometry #10, native source watching #11 and headless
-  playback #12, material previews #13 and structured runtime logs #14. The site deployed at
+  playback #12, material previews #13, structured runtime logs #14 and HDR output #15. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
   before merge. Editor/agent imports are the current Phase 1 increment. Merging does
