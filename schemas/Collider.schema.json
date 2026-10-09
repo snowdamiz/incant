@@ -12,7 +12,8 @@
               },
               "maxItems": 3,
               "minItems": 3,
-              "type": "array"
+              "type": "array",
+              "x-incant-unit": "m"
             },
             "type": {
               "const": "box",
@@ -30,7 +31,8 @@
           "properties": {
             "radius": {
               "format": "double",
-              "type": "number"
+              "type": "number",
+              "x-incant-unit": "m"
             },
             "type": {
               "const": "sphere",
@@ -49,11 +51,13 @@
           "properties": {
             "half_height": {
               "format": "double",
-              "type": "number"
+              "type": "number",
+              "x-incant-unit": "m"
             },
             "radius": {
               "format": "double",
-              "type": "number"
+              "type": "number",
+              "x-incant-unit": "m"
             },
             "type": {
               "const": "capsule",
@@ -72,17 +76,29 @@
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
+  "order": [
+    "shape",
+    "density",
+    "friction",
+    "restitution",
+    "sensor",
+    "memberships",
+    "filter"
+  ],
   "properties": {
     "density": {
       "format": "double",
       "maximum": 100000,
       "minimum": 0.001,
-      "type": "number"
+      "type": "number",
+      "x-incant-unit": "kg/m³"
     },
     "filter": {
       "format": "uint32",
+      "maximum": 4294967295,
       "minimum": 0,
-      "type": "integer"
+      "type": "integer",
+      "x-incant-widget": "collision-mask"
     },
     "friction": {
       "format": "double",
@@ -93,8 +109,10 @@
     "memberships": {
       "description": "Collision requires both membership/filter intersections to be nonzero.",
       "format": "uint32",
+      "maximum": 4294967295,
       "minimum": 0,
-      "type": "integer"
+      "type": "integer",
+      "x-incant-widget": "collision-mask"
     },
     "restitution": {
       "format": "double",

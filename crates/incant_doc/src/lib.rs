@@ -570,6 +570,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         }
     }
     lights::annotate_schemas(&mut registry);
+    physics::annotate_schemas(&mut registry);
     registry
 }
 impl Scene {

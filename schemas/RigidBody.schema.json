@@ -11,12 +11,22 @@
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
+  "order": [
+    "motion",
+    "gravity_scale",
+    "linear_damping",
+    "angular_damping",
+    "can_sleep",
+    "ccd"
+  ],
   "properties": {
     "angular_damping": {
+      "description": "Angular velocity damping rate, in inverse seconds.",
       "format": "double",
       "maximum": 100,
       "minimum": 0,
-      "type": "number"
+      "type": "number",
+      "x-incant-unit": "1/s"
     },
     "can_sleep": {
       "type": "boolean"
@@ -31,10 +41,12 @@
       "type": "number"
     },
     "linear_damping": {
+      "description": "Linear velocity damping rate, in inverse seconds.",
       "format": "double",
       "maximum": 100,
       "minimum": 0,
-      "type": "number"
+      "type": "number",
+      "x-incant-unit": "1/s"
     },
     "motion": {
       "$ref": "#/$defs/BodyMotion"

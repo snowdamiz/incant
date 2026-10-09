@@ -18,8 +18,10 @@ pub struct RigidBody {
     pub motion: BodyMotion,
     #[schemars(range(min = -100, max = 100))]
     pub gravity_scale: f64,
+    /// Linear velocity damping rate, in inverse seconds.
     #[schemars(range(min = 0, max = 100))]
     pub linear_damping: f64,
+    /// Angular velocity damping rate, in inverse seconds.
     #[schemars(range(min = 0, max = 100))]
     pub angular_damping: f64,
     pub can_sleep: bool,
@@ -201,4 +203,58 @@ pub(crate) fn validate_entity(entity: &Entity) -> Result<(), String> {
         }
     }
     Ok(())
+}
+
+pub(crate) fn annotate_schemas(
+    registry: &mut std::collections::BTreeMap<String, serde_json::Value>,
+) {
+    use serde_json::json;
+    let body = registry
+        .get_mut("RigidBody")
+        .expect("registered physics schema");
+    body["order"] = json!([
+        "motion",
+        "gravity_scale",
+        "linear_damping",
+        "angular_damping",
+        "can_sleep",
+        "ccd"
+    ]);
+    for key in ["linear_damping", "angular_damping"] {
+        body["properties"][key]["x-incant-unit"] = json!("1/s");
+    }
+    let collider = registry
+        .get_mut("Collider")
+        .expect("registered physics schema");
+    collider["order"] = json!([
+        "shape",
+        "density",
+        "friction",
+        "restitution",
+        "sensor",
+        "memberships",
+        "filter"
+    ]);
+    collider["properties"]["density"]["x-incant-unit"] = json!("kg/m³");
+    for key in ["memberships", "filter"] {
+        collider["properties"][key]["x-incant-widget"] = json!("collision-mask");
+        collider["properties"][key]["maximum"] = json!(u32::MAX);
+    }
+    for variant in collider["$defs"]["ColliderShape"]["oneOf"]
+        .as_array_mut()
+        .expect("shape variants")
+    {
+        for (key, property) in variant["properties"]
+            .as_object_mut()
+            .expect("shape properties")
+        {
+            if key != "type" {
+                property["x-incant-unit"] = json!("m");
+            }
+        }
+    }
+    registry
+        .get_mut("AngularVelocity")
+        .expect("registered physics schema")["properties"]["angular"]["x-incant-unit"] =
+        json!("rad/s");
 }
