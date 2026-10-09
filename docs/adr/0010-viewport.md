@@ -8,7 +8,7 @@ Create a native wgpu surface on the Tauri parent window and overlay transparent 
 
 ## Evidence and implementation boundary
 
-The Rust native host compiles on macOS. Native composition and Windows behavior need end-to-end evidence before this architecture can pass Spike 1.
+Claude reviewed actual macOS native composition, resize and fullscreen behavior in handoff 0002. The director replaced manual Windows review with automated CI acceptance; Windows/Linux editor builds, shared tests and native GPU readback passed (docs/spikes/evidence/desktop-editor-2026-10-08.json). The later connected-panel revision has its own review and explicitly deferred native follow-ups in docs/spikes/connected-editor.md. This passes the spike under that acceptance change; it does not establish untested platform behavior or director approval.
 
 ## Consequences and revisit trigger
 

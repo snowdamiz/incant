@@ -114,7 +114,7 @@ credential contents were printed or copied into evidence.
   A subsequent query verified the result. All three tool calls succeeded; usage was
   4,234 input tokens and 302 output tokens across four model steps. The saved
   document records agent provenance and the matching transaction ID.
-- The latest local suite has 41 Rust behavior tests and 180 UI/bridge tests passing;
+- At this checkpoint, 41 Rust behavior tests and 180 UI/bridge tests passed;
   workspace/all-target Clippy passes with warnings denied.
 
 A subsequent repeated callback test exposed inherited nonblocking sockets on

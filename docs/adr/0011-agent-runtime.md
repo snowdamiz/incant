@@ -8,7 +8,7 @@ Run the agent locally with provider-agnostic traits. OpenAI Responses is the fir
 
 ## Evidence and implementation boundary
 
-Mock provider tests verify denial, cancellation, budgets, atomic edits, provenance and streamed completion handling. The live twenty-case harness checks exact scope, all three tools and full undo. Live credentials remain unconnected.
+Mock provider tests verify denial, cancellation, budgets, atomic edits, provenance and streamed completion handling. The live twenty-case harness checks exact scope, all three tools and full undo. The director connected an OpenAI OAuth account. The real unassisted evaluation passed 19/20 tasks; a separate ten-step rerun passed after the initial incomplete response. See docs/spikes/evidence/live-agent-2026-10-08.json and ten-step-followup-2026-10-08.json. Saved credentials are reloaded per request; the in-editor composer remains unavailable in Phase 0.
 
 ## Consequences and revisit trigger
 

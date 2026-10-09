@@ -14,9 +14,9 @@ An implementation or a passing local test does not approve the architecture gate
 | 0006 | Gameplay scripting | SWC, QuickJS sandbox, hot reload and measured ECS workload |
 | 0007 | Native extensions | C ABI boundary exercised by iOS probe; plugins deferred |
 | 0008 | Project document | Canonical JSON, schemas, Loro and Automerge benchmark |
-| 0009 | Editor shell | React/Tauri implementation; Claude visual handoff underway |
-| 0010 | Viewport | Native parent-window surface plus transparent webview; platform testing underway |
-| 0011 | Agent runtime | Typed local tools, streamed OpenAI Responses, deterministic tests; live eval pending |
+| 0009 | Editor shell | React/Tauri and Claude connected neutral shell integrated; final native follow-ups deferred |
+| 0010 | Viewport | macOS native composition reviewed; Windows/Linux builds and GPU readback passed under director CI acceptance |
+| 0011 | Agent runtime | Typed local tools and Responses; real saved-account eval scored 19/20 |
 | 0012 | Accounts service | Optional cloud metadata service design; no service deployed |
 | 0013 | Asset generation | Provider interface design; implementation deferred to Phase 3 |
-| 0014 | CI/CD | Six-target source/build harnesses; remote nightly execution pending |
+| 0014 | CI/CD | All six hosted builds and probe execution passed; scheduled nightly history pending |

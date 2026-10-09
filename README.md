@@ -66,8 +66,10 @@ node_modules/.bin/tsc -p sdk/ts/tsconfig.json
 
 The CLI makes direct requests to OpenAI. It never reads Codex/Claude credentials.
 Browser sign-in, session renewal, persistence across development rebuilds and
-live scene editing are verified on macOS. Windows/Linux live authentication and
-API-key inference still need verification.
+live scene editing are verified on macOS. At the director’s request, Windows/Linux
+use CI builds, protocol tests and real-backend synthetic credential persistence in
+place of manual sign-in checks. Live API-key inference and revocation still need
+verification.
 
 ```sh
 tools/cargo run -p incant_headless -- auth login
@@ -128,8 +130,8 @@ a hello-world proof, not an exported game or a mobile editor.
 
 GitHub Actions configurations are prepared for local checks, nightly six-target
 probes, and protected live evaluation. All six probe targets have passed hosted builds, with desktop, browser and iOS
-simulator execution. Android APK execution is now checked with a disposable hosted
-emulator; that new job is awaiting its first run. Three-desktop synthetic credential
+simulator execution. Android APK Activity launch and native instrumentation also
+passed in a disposable Android 35 x86_64 hosted emulator. Three-desktop synthetic credential
 persistence across changed builds passes. The private remote is
 `https://github.com/snowdamiz/incant`. Nightly debug artifacts do not satisfy signed-release requirements.
 The [security boundaries](docs/SECURITY.md) and [architecture proposals](docs/adr)
