@@ -1,31 +1,22 @@
 # Native capture requests: Problems row wrapping
 
-Requested from Astra, who alone performs native CUA captures. Build the release app from
-the commit that contains this file, with the same saved project and fixture as w08 to
-w12. Keep the captures private in `artifacts/native-source-watch-review` and do not
-commit them. Browser fixture captures in `screenshots/after` are not native evidence.
+Status: fulfilled. No further native evidence is requested.
 
-All captures are full-window JPEG or PNG at scale 1. Report the measured window size.
+Astra integrated the wrapping fix d497e2c as 3cb5c8b, rebuilt the release app and
+supplied the captures below. They are kept private in the ignored
+`artifacts/native-source-watch-review` and are not committed. Claude reviewed them in
+`result.md`. Browser fixture captures in `screenshots/after` remain fixture-only and
+are not native evidence.
 
-## Required
+| Request | Capture | Outcome |
+| --- | --- | --- |
+| 1. Error at 1000×650 | w13-wrap-error-minimum.jpg | Supplied and passed. The message wraps to two lines and ends with the line and column. |
+| 2. Error at 1440×900 | w14-wrap-error-wide.jpg | Supplied and passed. One line, path at the right. |
+| 3. Optional recovered state at 1000×650 | w15-wrap-recovered-minimum.jpg | Supplied and passed. "No problems", Attached, history unchanged. |
+| 4. Optional entity focus at 1000×650 | Not captured | Not performed. The fixture project has no entity diagnostic. Focus evidence stays fixture-only. |
 
-1. **w13-wrap-error-minimum.** Window 1000×650. Problems tab active. Write the same
-   malformed `triangle.gltf` used for w11.
-   - Expected: the message wraps onto a second line and ends with
-     "expected value at line 1 column 1". No ellipsis.
-   - Expected: `triangle.gltf` stays in the mono right-hand column, top-aligned with the
-     first message line. The red icon sits on the first line.
-   - Expected: no horizontal scroll bar in the dock. The viewport stays Attached with the
-     last valid geometry.
-2. **w14-wrap-error-wide.** Window 1440×900, same error and tab.
-   - Expected: the row is one line and 28px tall, as in w10. The path stays at the right.
+Astra also supplied w13-wrap-before-error.jpg, a 1440×900 baseline with no error before
+the malformed write. It was reviewed as context.
 
-## Optional
-
-3. **w15-wrap-recovered-minimum.** Window 1000×650 after repairing the source.
-   - Expected: "No problems" empty state as in w12. This checks the change did not alter
-     the empty state.
-4. **w16-wrap-keyboard-minimum.** Window 1000×650 with the error present. Press F6 until
-   the dock has focus, then Tab into the Problems list. The project-level source row is
-   not a button, so focus should skip it. Capture only if an entity diagnostic is
-   available in the project; then capture its focus ring around the full wrapped row.
+If a later handoff adds a project with an entity diagnostic, a native capture of the
+wrapped entity row with its keyboard focus ring at 1000×650 would close request 4.

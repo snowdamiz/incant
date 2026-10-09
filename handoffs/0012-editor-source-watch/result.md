@@ -2,16 +2,23 @@
 
 ## Status
 
-- **Minimum-width readability fix: done, pending native confirmation.** Problems rows
-  now wrap instead of truncating. The full error, including line and column, is in the
-  row at 1000×650 in browser fixture captures. Native confirmation is requested from
-  Astra in `native-requests.md`. No native pixels of the fix exist yet, and none are
-  claimed.
-- **Earlier native review: pass.** All thirteen supplied native captures were reviewed.
+- **Final verdict: pass.** The wrapping fix is confirmed in native pixels. At the
+  measured 1000×650 minimum the source error wraps to two lines and shows "expected
+  value at line 1 column 1" in full. At 1440×900 it stays one line. The source path
+  keeps its own right-hand column at both sizes. Recovery at 1000×650 returns to "No
+  problems" with no extra history entry.
+- **Native requests are fulfilled.** `native-requests.md` records the outcome. No further
+  native evidence is requested.
+- **Some evidence stays fixture-only.** Long nested paths, unbroken names and entity
+  focus behavior were only checked in browser fixture captures. The native project has
+  no such diagnostics.
+- **Earlier native review: pass.** All thirteen earlier native captures were reviewed.
   The source-watch states, the bridge path fix and restart recovery are confirmed in
   native pixels. That verdict is unchanged.
 - **Tests and build pass.** All UI and bridge tests pass, including two new ones. The
-  build passes with main JS at 101.62 KiB gzip.
+  build passes with main JS at 101.62 KiB gzip. Astra reports the same 282 tests and
+  the native release build passing after integration. Claude did not rerun tests for
+  this review-only pass, as the packet allows.
 - No phase gate is approved or claimed by this result.
 
 ## Model and transport
@@ -24,6 +31,12 @@
 
 ## Packet revisions acknowledged
 
+- **Final priority: native wrapping captures are ready.** Read first and applied. The
+  three supplied captures were reviewed, and this file and `native-requests.md` were
+  updated. This pass is review-only, so tests were not rerun. Astra's integration commit
+  3cb5c8b is not in this worktree. The reviewed code is d497e2c here. The optional
+  entity-focus capture was not performed because the fixture has no entity error. That
+  focus evidence stays labeled fixture-only.
 - **Priority: finish minimum-width diagnostic readability, 2026-10-09.** Read first and
   applied. It expands the earlier review-only scope to a focused Problems-row change.
   The separate source path, panels, palette and typography are kept. No new control was
@@ -100,6 +113,44 @@ Other results, after the fix, at both sizes:
 - Keyboard: Tab reaches the entity row with a visible 2px focus ring. Enter selects the
   entity in the Hierarchy.
 - No page errors.
+
+## Native confirmation of the wrapping fix
+
+Captured by Astra through Codex CUA from the release app built after integrating the fix
+as 3cb5c8b. All are at scale 1, and sizes were confirmed from the files with `sips`.
+
+| Capture | Size | Observed |
+| --- | --- | --- |
+| w13-wrap-before-error.jpg | 1440×900 | Unlisted baseline before the malformed write. No problems, Attached, History 4. |
+| w13-wrap-error-minimum.jpg | 1000×650 | The error wraps after "invalid glTF:". The second line reads "expected value at line 1 column 1". No ellipsis. |
+| w14-wrap-error-wide.jpg | 1440×900 | The same error on one line, as in w10. The path sits at the right edge. |
+| w15-wrap-recovered-minimum.jpg | 1000×650 | "No problems", Attached, 0 errors, History still 4. |
+
+Pixel findings:
+
+- **Wrap point matches the fixture.** Native WebKit breaks the line at the same word as
+  the Chrome fixture capture of the same text.
+- **Alignment holds.** The red icon sits on the first message line. `triangle.gltf`
+  stays in its mono right-hand column, aligned with the first line. The second line
+  starts under the message, not under the icon.
+- **Row heights are as designed.** The text in the native 1000×650 row spans two 20px
+  lines. At 1440×900 it spans one line, so the row keeps its 28px height.
+- **No overflow or regression.** No horizontal scroll bar appears in the dock. The tabs,
+  red Problems badge, status bar count, panels and palette match the earlier native
+  captures.
+
+Viewport pixel comparison, using the same method as the earlier review:
+
+| Comparison | Size | Changed pixels | Meaning |
+| --- | --- | --- | --- |
+| w08 reopened vs pre-error baseline | 1440×900 | 0 | The rebuilt app shows the same valid geometry. |
+| pre-error baseline vs wide error | 1440×900 | 0 | The error kept the last valid geometry. |
+| w11 vs w13 minimum error | 1000×650 | 0 | Same retained geometry before and after the fix. |
+| minimum error vs recovered | 1000×650 | 0 | The restored bytes match the prior valid version. |
+
+```
+python3 -I /tmp/sw-review-scripts/diff3.py /tmp/sw-review-bmp
+```
 
 ## Earlier review: inspected native captures
 
@@ -196,6 +247,9 @@ and was not reviewed.
 
 ## Changed paths
 
+This final review pass changed only `result.md` and `native-requests.md`. The code,
+tests, tool and fixture screenshots below landed in d497e2c.
+
 - `editor/ui/src/components/BottomDock.tsx`: Problems rows get a wrapping text group
   and break opportunities after "/".
 - `editor/ui/src/styles/app.css`: the Problems row styles, scoped to Problems only.
@@ -204,7 +258,8 @@ and was not reviewed.
   tool.
 - `handoffs/0012-editor-source-watch/screenshots/before/` and `after/`: fixture PNGs
   and `report.json`.
-- `handoffs/0012-editor-source-watch/native-requests.md`: native capture requests.
+- `handoffs/0012-editor-source-watch/native-requests.md`: native capture requests,
+  now marked fulfilled.
 - `handoffs/0012-editor-source-watch/result.md`: this file.
 
 No Rust, bridge, contract, dependency, camera, lighting or shader change. Console,
@@ -243,17 +298,22 @@ All are browser fixture captures, not native evidence:
 - Each set has a `report.json` with the row measurements, axe results and keyboard
   checks.
 
-Native captures stay private in the ignored `artifacts/native-source-watch-review`.
+Native captures, including w13 to w15, stay private in the ignored
+`artifacts/native-source-watch-review`. None were committed.
 
 ## Limitations
 
-- The wrapping fix has no native pixels yet. Chrome and the native WebKit view may
-  wrap text at slightly different points.
+- The wrapping fix is confirmed natively only for the short `triangle.gltf` error.
+  Long nested paths, unbroken names and the path dropping below the message were seen
+  only in browser fixture captures.
+- Entity row focus and reveal with wrapped text were checked only in the browser
+  fixture. The native project has no entity diagnostic.
 - Wrapping makes long problems taller. In the 650px window the dock shows fewer rows
   at once, and the list scrolls.
 - Retina or any scale other than 1 was not observed and is not claimed.
 - Minimum size was observed only at 1000×650 for the Problems error and recovered
   states. History and Console at minimum size were not shown.
+- Native wrapping was observed only at scale 1 in this macOS WebKit build.
 - The Console entries behind the count changes were not shown in any capture.
 - Journal recovery facts, revision 6 and import origins, come from Astra's report. The
   pixels agree with them but cannot prove them.
