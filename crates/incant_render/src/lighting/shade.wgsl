@@ -3,7 +3,7 @@ struct LightGrid { view:mat4x4f, viewport:vec4f, dimensions:vec4u, depth:vec4f, 
 @group(3) @binding(0) var<uniform> light_grid:LightGrid;
 @group(3) @binding(1) var<storage,read> punctual_lights:array<Light>;
 @group(3) @binding(2) var<storage,read> cluster_counts:array<u32>;
-@group(3) @binding(3) var<storage,read> cluster_indices:array<u32>;
+@group(3) @binding(3) var<storage,read> cluster_masks:array<u32>;
 fn shade_light(light:Light,world:vec3f,n:vec3f,v:vec3f,base:vec3f,metallic:f32,roughness:f32)->vec3f {
     var l=-light.direction_outer.xyz;var attenuation=1.0;
     if light.kind.x!=0u {
@@ -39,19 +39,26 @@ fn direct_lighting(pixel:vec2f,world:vec3f,n:vec3f,v:vec3f,base:vec3f,metallic:f
         radiance+=shade_light(punctual_lights[i],world,n,v,base,metallic,roughness);
     }
     if light_grid.lights.y==0u {return radiance;}
+    // Explicit reference mode bypasses all culling and does not read grid buffers.
+    if light_grid.lights.z!=0u {
+        for(var i=light_grid.lights.x;i<light_grid.lights.x+light_grid.lights.y;i++) {
+            radiance+=shade_light(punctual_lights[i],world,n,v,base,metallic,roughness);
+        }
+        return radiance;
+    }
     let xy=min(vec2u(max(pixel-light_grid.viewport.xy,vec2f(0.0))/64.0),light_grid.dimensions.xy-vec2u(1u));
     let depth=max(-(light_grid.view*vec4f(world,1.0)).z,light_grid.depth.x);
     let z=min(u32(max(log(depth/light_grid.depth.x)*light_grid.depth.z,0.0)),light_grid.dimensions.z-1u);
     let cluster=(z*light_grid.dimensions.y+xy.y)*light_grid.dimensions.x+xy.x;
-    let count=cluster_counts[cluster];
-    if count>light_grid.dimensions.w {
-        for(var i=light_grid.lights.x;i<light_grid.lights.x+light_grid.lights.y;i++) {
-            radiance+=shade_light(punctual_lights[i],world,n,v,base,metallic,roughness);
-        }
-    } else {
-        for(var i=0u;i<count;i++) {
-            let index=cluster_indices[cluster*light_grid.dimensions.w+i];
+    if cluster_counts[cluster]==0u {return radiance;}
+    // Ascending words and least-set bits give a stable light summation order,
+    // including clusters containing all 4096 supported lights. No list overflow.
+    for(var word=0u;word<light_grid.dimensions.w;word++) {
+        var mask=cluster_masks[cluster*light_grid.dimensions.w+word];
+        while mask!=0u {
+            let index=light_grid.lights.x+word*32u+firstTrailingBit(mask);
             radiance+=shade_light(punctual_lights[index],world,n,v,base,metallic,roughness);
+            mask&=mask-1u;
         }
     }
     return radiance;

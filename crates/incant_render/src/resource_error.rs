@@ -3,7 +3,7 @@
 pub enum ResourceError {
     #[error("render target exceeds dimension or 16-megapixel attachment budget")]
     RenderTargetSize,
-    #[error("cluster grid exceeds the 32 MiB index budget or device storage limits")]
+    #[error("cluster grid exceeds the 64 MiB membership-mask budget or device storage limits")]
     LightGridSize,
     #[error("unsupported display output format: {0:?}")]
     OutputFormat(wgpu::TextureFormat),

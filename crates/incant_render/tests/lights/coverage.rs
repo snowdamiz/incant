@@ -1,7 +1,7 @@
 //! Geometric coverage fixtures requested by Claude, without an art-direction claim.
 use super::*;
 
-fn save(name: &str, png: &[u8]) {
+pub(super) fn save(name: &str, png: &[u8]) {
     if let Some(directory) = std::env::var_os("INCANT_LIGHT_EVIDENCE") {
         std::fs::create_dir_all(&directory).unwrap();
         std::fs::write(
@@ -13,17 +13,9 @@ fn save(name: &str, png: &[u8]) {
 }
 fn oracle(f: &mut Fixture, r: &Renderer, name: &str) {
     let reference = f.scene(r);
-    // These zero-energy lights force every cluster into the all-local-light
-    // fallback. The oracle consequently bypasses all spatial selection.
-    for _ in 0..65 {
-        light(
-            f,
-            "PointLight",
-            json!({"color":[0,0,0],"intensity":0,"range":10000}),
-            [0.; 3],
-        );
-    }
-    let brute_force = f.scene(r);
+    let brute_force = f
+        .scene(r)
+        .with_local_light_selection(LocalLightSelection::All);
     for (w, h) in [(640, 480), (513, 385)] {
         let a = r.screenshot_scene_png(&reference, w, h).unwrap();
         let b = r.screenshot_scene_png(&brute_force, w, h).unwrap();
@@ -35,7 +27,7 @@ fn oracle(f: &mut Fixture, r: &Renderer, name: &str) {
 
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
-fn distinct_colored_lights_preserve_energy_across_cluster_overflow() {
+fn distinct_colored_lights_preserve_energy_across_mask_words() {
     let r = Renderer::headless().unwrap();
     let mut f = fixture();
     for z in 0..3 {

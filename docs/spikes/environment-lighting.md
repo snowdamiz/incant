@@ -100,3 +100,9 @@ shadows, skybox, exposure controls, authored direct lights, clustered culling,
 SSAO, bloom or temporal antialiasing. Reflected studio floor is distant radiance,
 not geometry. Headless and native visual review are complete for this scope.
 No phase gate is approved.
+
+Final revision `1db7c8870d904d992b1a2fae0a1dee63377d9da7` passed all twelve
+hosted checks. PR #16 merged as `c259b5d3366586cb6a25fc5e8fb73ae2d31a1aae`
+on 2026-10-09; its actual merge trailer is `Built-by: astra`. The Android SDK
+archive download failed before source compilation on its first attempt and
+passed on a single retry. This merge approves no deferred phase gate.
