@@ -1,3 +1,46 @@
+# Priority: resolve the visible range rim and review native captures
+
+Your expanded review found a real range-edge crease. Please own the focused
+look-development correction to the range window in
+`crates/incant_render/src/lighting/shade.wgsl`. Preserve the authored units,
+inverse-square behavior away from the cutoff, strict zero outside the range,
+and finite behavior at the source. A squared quartic window is the established
+C1-continuous candidate: `(max(1-(d/r)^4,0))^2 / max(d^2,1e-4)`.
+Primary reference: https://google.github.io/filament/Filament.html, attenuation
+function / equation 65. Implement the independently expressed arithmetic, cite
+the equation rather than copying a shader listing. Choose and review the visual
+correction; do not change cluster assignment, light units, tone mapping or other
+BRDF math. This narrow shader change overrides the earlier no-shader-edit rule.
+Astra will run all numerical tests and regenerate final evidence after return.
+
+The near-patch plateau is intended: the denominator uses a 1 cm minimum distance
+to keep coincident punctual sources finite, matching the reference above. The
+first two patches put sources 5-7 mm from the patch. Document this confirmation;
+it is not a cluster omission. New `punctual-low-dielectric-*` captures at intensity
+50 provide the lower-intensity companion you requested.
+
+The Mac is now unlocked. `artifacts/lighting-native/` has real CUA captures:
+01 point intensity 60; 02 Undo restores 300; 03 Redo restores 60; 04 spot Inspector
+at 1440x900; 05 spot Inspector at 1000x650. The disabled spot/directional probes
+have zero intensity solely to inspect schema-generated fields; the sphere is
+illuminated by the authored point. Saved account restored without interaction.
+Do not transcribe its email. Review these for viewport and field presentation.
+
+Handoff 0016 is concurrently fixing generic Inspector label wrapping; do not
+edit that CSS in this handoff. If Color using X/Y/Z instead of R/G/B is materially
+confusing, you may make the focused generic FieldView label presentation fix
+without changing command behavior. Identify any other concrete issue.
+
+To render in this isolated worktree, use its own target directory and the root
+cargo helper; never share CARGO_TARGET_DIR. All dependencies are local/cached.
+`INCANT_LIGHT_EVIDENCE=<absolute output directory> ./tools/cargo test -p
+incant_render --release --locked --test model_gpu lights::coverage -- --ignored`
+regenerates the requested range/material/oracle images. Native final captures
+will be refreshed after integrating the shader and label changes. Preserve the
+old verdict/history and append the final changes and remaining verification.
+
+---
+
 # Priority follow-up: expanded real GPU coverage
 
 Review the additional captures now in `artifacts/cluster-initial/` and update
