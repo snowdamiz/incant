@@ -1,0 +1,1759 @@
+{
+  "set": "revised",
+  "generated": "2026-10-09T23:37:12.262Z",
+  "browser": "155.0.8059.40",
+  "captures": [
+    {
+      "file": "crate-body-1440x900.png",
+      "crop": "crate-body-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "crate-body",
+      "entity": "Crate 01",
+      "measure": {
+        "rows": [
+          {
+            "label": "Motion",
+            "values": [
+              "dynamic"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 39,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Gravity scale",
+            "values": [
+              "1"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 109,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Linear damping",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 143,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Angular damping",
+            "values": [
+              "0.05"
+            ],
+            "height": 32,
+            "value": {
+              "x": 1240,
+              "y": 179,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Can sleep",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 251,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "CCD",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 285,
+              "width": 188,
+              "height": 28
+            }
+          }
+        ],
+        "sections": [
+          "Gravity and damping",
+          "Solver"
+        ],
+        "maskStrip": null,
+        "maskCell": null,
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 1109,
+          "y": -36,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "crate-collider-1440x900.png",
+      "crop": "crate-collider-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "crate-collider",
+      "entity": "Crate 01",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [
+              "box"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 39,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Half extents, in m",
+            "values": [
+              "0.5",
+              "0.5",
+              "0.5"
+            ],
+            "height": 33,
+            "value": {
+              "x": 1240,
+              "y": 78,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "420"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 152,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.7"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 186,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 220,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 290,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 324,
+              "width": 188,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 367,
+              "width": 188,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 1240,
+          "y": 357,
+          "width": 188,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 1242,
+          "y": 357,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 1109,
+          "y": -36,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "post-capsule-masks-1440x900.png",
+      "crop": "post-capsule-masks-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "post-capsule-masks",
+      "entity": "Mooring Post",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [
+              "capsule"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 107,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Half height",
+            "values": [
+              "0.6"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 181,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "0.15"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 215,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "1000"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 287,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.5"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 321,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 355,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 425,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "1"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 459,
+              "width": 188,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "6"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 502,
+              "width": 188,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 1240,
+          "y": 492,
+          "width": 188,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 1242,
+          "y": 492,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 1109,
+          "y": 32,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "trigger-sphere-sensor-1440x900.png",
+      "crop": "trigger-sphere-sensor-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "trigger-sphere-sensor",
+      "entity": "Wave Trigger",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [
+              "sphere"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 182,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "1.25"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 218,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "1"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 290,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.5"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 324,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 358,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 428,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "4"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 462,
+              "width": 188,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "3"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 505,
+              "width": 188,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 1240,
+          "y": 495,
+          "width": 188,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 1242,
+          "y": 495,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "crate-axis-error-1440x900.png",
+      "crop": "crate-axis-error-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "crate-axis-error",
+      "entity": "Crate 03",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [
+              "box"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 39,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Half extents, in m",
+            "values": [
+              "0.5",
+              "-0.5",
+              "0.5"
+            ],
+            "height": 91,
+            "value": {
+              "x": 1240,
+              "y": 78,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "420"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 210,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.7"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 244,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 278,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 348,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 382,
+              "width": 188,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 425,
+              "width": 188,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 1240,
+          "y": 415,
+          "width": 188,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 1242,
+          "y": 415,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 1109,
+          "y": -40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "unknown-shape-focus-1440x900.png",
+      "crop": "unknown-shape-focus-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "unknown-shape-focus",
+      "entity": "Pier Planks",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [],
+            "height": 222,
+            "value": {
+              "x": 1240,
+              "y": 39,
+              "width": 188,
+              "height": 148
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "1000"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 303,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.9"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 337,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 371,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 1240,
+              "y": 441,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 475,
+              "width": 188,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 1240,
+              "y": 518,
+              "width": 188,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 1240,
+          "y": 508,
+          "width": 188,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 1242,
+          "y": 508,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "control control--notice",
+        "activeOutline": "solid",
+        "inspector": {
+          "x": 1109,
+          "y": -36,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "crate-body-1000x650.png",
+      "crop": "crate-body-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "crate-body",
+      "entity": "Crate 01",
+      "measure": {
+        "rows": [
+          {
+            "label": "Motion",
+            "values": [
+              "dynamic"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 39,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Gravity scale",
+            "values": [
+              "1"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 109,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Linear damping",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 143,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Angular damping",
+            "values": [
+              "0.05"
+            ],
+            "height": 32,
+            "value": {
+              "x": 807,
+              "y": 179,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Can sleep",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 251,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "CCD",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 285,
+              "width": 181,
+              "height": 28
+            }
+          }
+        ],
+        "sections": [
+          "Gravity and damping",
+          "Solver"
+        ],
+        "maskStrip": null,
+        "maskCell": null,
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 680,
+          "y": -36,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "crate-collider-1000x650.png",
+      "crop": "crate-collider-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "crate-collider",
+      "entity": "Crate 01",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [
+              "box"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 39,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Half extents, in m",
+            "values": [
+              "0.5",
+              "0.5",
+              "0.5"
+            ],
+            "height": 33,
+            "value": {
+              "x": 807,
+              "y": 78,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "420"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 152,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.7"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 186,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 220,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 290,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 324,
+              "width": 181,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 367,
+              "width": 181,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 807,
+          "y": 357,
+          "width": 181,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 809,
+          "y": 357,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 680,
+          "y": -36,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "post-capsule-masks-1000x650.png",
+      "crop": "post-capsule-masks-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "post-capsule-masks",
+      "entity": "Mooring Post",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [
+              "capsule"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 39,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Half height",
+            "values": [
+              "0.6"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 113,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "0.15"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 147,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "1000"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 219,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.5"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 253,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 287,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 357,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "1"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 391,
+              "width": 181,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "6"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 434,
+              "width": 181,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 807,
+          "y": 424,
+          "width": 181,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 809,
+          "y": 424,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 680,
+          "y": -36,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "trigger-sphere-sensor-1000x650.png",
+      "crop": "trigger-sphere-sensor-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "trigger-sphere-sensor",
+      "entity": "Wave Trigger",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [
+              "sphere"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 39,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "1.25"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 75,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "1"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 147,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.5"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 181,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 215,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 285,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "4"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 319,
+              "width": 181,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "3"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 362,
+              "width": 181,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 807,
+          "y": 352,
+          "width": 181,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 809,
+          "y": 352,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 680,
+          "y": -36,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "crate-axis-error-1000x650.png",
+      "crop": "crate-axis-error-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "crate-axis-error",
+      "entity": "Crate 03",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [
+              "box"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 39,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Half extents, in m",
+            "values": [
+              "0.5",
+              "-0.5",
+              "0.5"
+            ],
+            "height": 91,
+            "value": {
+              "x": 807,
+              "y": 78,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "420"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 210,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.7"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 244,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 278,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 348,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 382,
+              "width": 181,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 425,
+              "width": 181,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 807,
+          "y": 415,
+          "width": 181,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 809,
+          "y": 415,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "tree-row is-selected",
+        "activeOutline": "none",
+        "inspector": {
+          "x": 680,
+          "y": -36,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "unknown-shape-focus-1000x650.png",
+      "crop": "unknown-shape-focus-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "unknown-shape-focus",
+      "entity": "Pier Planks",
+      "measure": {
+        "rows": [
+          {
+            "label": "Shape",
+            "values": [],
+            "height": 222,
+            "value": {
+              "x": 807,
+              "y": 39,
+              "width": 181,
+              "height": 148
+            }
+          },
+          {
+            "label": "Density",
+            "values": [
+              "1000"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 303,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Friction",
+            "values": [
+              "0.9"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 337,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Restitution",
+            "values": [
+              "0"
+            ],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 371,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Sensor",
+            "values": [],
+            "height": 28,
+            "value": {
+              "x": 807,
+              "y": 441,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Memberships",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 475,
+              "width": 181,
+              "height": 37
+            }
+          },
+          {
+            "label": "Filter",
+            "values": [
+              "4294967295"
+            ],
+            "height": 37,
+            "value": {
+              "x": 807,
+              "y": 518,
+              "width": 181,
+              "height": 37
+            }
+          }
+        ],
+        "sections": [
+          "Material",
+          "Collision"
+        ],
+        "maskStrip": {
+          "x": 807,
+          "y": 508,
+          "width": 181,
+          "height": 4
+        },
+        "maskCell": {
+          "x": 809,
+          "y": 508,
+          "width": 4,
+          "height": 4
+        },
+        "clippedInputs": [],
+        "active": "control control--notice",
+        "activeOutline": "solid",
+        "inspector": {
+          "x": 680,
+          "y": -36,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    }
+  ]
+}
