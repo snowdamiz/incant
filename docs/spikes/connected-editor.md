@@ -85,7 +85,9 @@ indicator obscures the traffic lights, so their actual alignment remains unverif
 The first fullscreen image needs a settled-state replacement. Minimum-size and traffic-light visibility checks remain open. The rebuilt native
 F2 check now passes: Entity 1 was fully selected, typing Lantern replaced the name,
 and Cmd+Z restored Entity 1. Keyboard opening the account dialog focused Close.
-A settled fullscreen capture and keyboard-dialog capture were returned to Claude.
+Claude confirmed that settled fullscreen has no white strips. Keyboard dialog focus
+lands safely on Close, but WebKit draws no focus ring; this is queued for Claude’s
+next UI fix. Those private captures remain outside Git.
 
 The review found F2 typing appended to an unselected old name and long inspector
 references clipped mid-glyph. Claude fixed both, with a failing-before/passing-after

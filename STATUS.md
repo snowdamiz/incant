@@ -71,7 +71,7 @@ within its documented workload.
   and screen capture again when needed. Claude’s handoff 0008 fixes tablet workflow layout, platform-mark balance, clipped
   inspector paths and F2 name selection. Rebuilt native F2 rename and Undo pass. The transport now preserves schema field
   order (223 tests pass); macOS locked before its final native verification.
-  Claude is reviewing new settled-fullscreen and keyboard-dialog captures;
+  Claude confirmed settled fullscreen and found a missing native dialog focus ring;
   minimum-size and visible traffic-light checks remain open.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
