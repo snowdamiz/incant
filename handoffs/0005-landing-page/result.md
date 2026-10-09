@@ -1,50 +1,60 @@
-# Result: 0005 landing page
+# Result: 0005 landing page (revision 2)
 
 ## Status
 
-Complete and ready for Astra integration. Not pushed, published or merged. No phase gate is
-claimed or approved by this handoff.
+Revision 2 is complete in this worktree and ready for Astra to integrate. It responds to the director's rejection of the first design. Not pushed, published or merged. No phase gate is claimed or approved.
+
+The rationale and the critique of the first version are in `revision-2.md`. The revision 1 commit is `7557c10`, and its screenshots remain unchanged in `screenshots/`.
 
 ## Model
 
-Claude Opus 5.5 (`claude-opus-5-5`), running in Claude Code with the director's Claude
-account. No image-generation service or substitute model was used. All artwork is hand-written SVG/CSS.
+Claude Opus 5.5 (`claude-opus-5-5`), running in Claude Code with the director's Claude account. No other model and no image-generation service was used. All artwork is hand-written SVG/CSS.
 
 ## Director feedback applied
 
-- **"Imply finished release":** the public copy uses a confident, present-tense product voice. It contains no Phase 0, gate, roadmap, beta, "coming soon" or internal-tracking language. A grep audit of `website/src` and `index.html` confirms this.
-- **No fabrication:** there are no customer counts, quotes, awards, pricing, version numbers, installers, signup forms, video or demo.
-- **Genuine destinations only:** the CTAs point to the private repository or its PLAN.md ("product guide"). Every outbound link carries screen-reader text saying it is on GitHub and may require access. The page has no Download button.
-- **Hedged claims:** the page does not claim public or open source or any shipped platform list. It states no performance numbers.
+- **"Vibe coded, generic":** the page has a new visual direction, structure, illustration and copy. The rationale is in `revision-2.md`.
+- **"Imply finished release":** the copy keeps a confident present-tense voice. It contains no Phase 0, roadmap, beta or internal-tracking language.
+- **No fabrication:** there are no customers, quotes, awards, pricing, versions, downloads, signup forms or demos.
+- **Genuine destinations:** the calls to action go to the repository and to PLAN.md, presented as the "product guide". Screen-reader text notes that GitHub may require access.
 
 ## Changed paths
 
-All changes are inside the allowed scope.
+**Added components** in `website/src/components/`:
+- `EditorStage.vue`
+- `StageScene.vue`
+- `StagePanel.vue`
+- `PrinciplesSection.vue`
+- `StatementBand.vue`
+- `SiteFooter.vue`
 
-- `website/index.html`: meta tags, a favicon with a base-aware URL and a noscript fallback.
-- `website/public/favicon.svg`: the wisp mascot.
-- `website/src/style.css`: Tailwind 4 `@theme` design tokens, latin-only local fonts, focus ring and reduced motion.
-- `website/src/App.vue`: skip link and section composition.
-- `website/src/content.ts`: links, nav, workflow steps and FAQ copy.
-- `website/src/components/`:
-  - `WispMark.vue`
-  - `SiteHeader.vue`
-  - `HeroSection.vue`
-  - `EditorIllustration.vue`
-  - `GameScene.vue`
-  - `FeatureCard.vue`
-  - `FeatureSection.vue`
-  - `WorkflowSection.vue`
-  - `WorkflowVisual.vue`
-  - `TrustSection.vue`
-  - `FaqSection.vue`
-  - `ClosingSection.vue`
-- `website/playwright.config.ts` and `website/tests/landing.spec.ts`: evidence capture and behavioural checks.
-- `handoffs/0005-landing-page/result.md` and `handoffs/0005-landing-page/screenshots/*.png`.
+**Rewritten:**
+- `website/src/style.css`
+- `website/src/content.ts`
+- `website/src/App.vue`
+- `website/src/components/HeroSection.vue`
+- `website/src/components/SiteHeader.vue`
+- `website/src/components/FaqSection.vue`
 
-`website/.gitignore` shows a one-character change (`node_modules/` became `node_modules`) that this session did not make. It was left uncommitted.
+**Removed** from `website/src/components/`:
+- `ClosingSection.vue`
+- `EditorIllustration.vue`
+- `FeatureCard.vue`
+- `FeatureSection.vue`
+- `GameScene.vue`
+- `TrustSection.vue`
+- `WorkflowSection.vue`
+- `WorkflowVisual.vue`
 
-No CI workflow was added. Pages deployment on push to main is Astra's integration task, and workflow files are outside this handoff's allowed paths.
+**Updated:**
+- `website/index.html`: title, theme colour and light colour scheme.
+- `website/public/favicon.svg`: now uses the brand violet.
+- `website/tests/landing.spec.ts`: stage-tab test, plus screenshots now go to `screenshots/revision-2/`.
+
+**Dependency:** `website/package.json` and `website/package-lock.json` gain `@fontsource-variable/fraunces` at exactly 5.3.0 (OFL-1.1). The scripts are unchanged. Only the latin "soft" normal and italic files are bundled.
+
+**Handoff files:** `handoffs/0005-landing-page/revision-2.md`, `result.md` and `screenshots/revision-2/*.png`.
+
+**Not touched:** `playwright.config.ts`, `vite.config.ts`, CI and workflow files. Two working-tree changes did not come from this session and are left uncommitted: `website/.gitignore` and the updated `brief.md`.
 
 ## Commands and results
 
@@ -52,76 +62,56 @@ These were run from `website/` on 2026-10-08.
 
 | Command | Result |
 |---|---|
-| `npm run build` | Pass. `vue-tsc --noEmit` is strict and clean, and the Vite build succeeds. |
-| `PAGES_BASE_PATH=/incant/ npm run build` | Pass. `dist/index.html` references `/incant/assets/...` and `/incant/favicon.svg`. |
-| `npm run dev -- --port 5175 --strictPort` | HTTP 200 on `http://127.0.0.1:5175/`. |
-| `npx playwright test` | **10 passed.** It runs `npm run preview` with `/incant/` in system Chrome. |
+| `npm run build` | Pass. Strict `vue-tsc` is clean. |
+| `PAGES_BASE_PATH=/incant/ npm run build` | Pass. Asset and favicon URLs are prefixed with `/incant/`. |
+| `npx playwright test` | **10 passed** in system Chrome against the `/incant/` preview on port 4175. |
 
-Payload of the `/incant/` build:
+The port 4175 server was started by the test runner. One manual preview, PID 90759, was stopped by that exact PID. The user's preview on port 4176, PID 75746, was not touched.
 
-| Asset | Raw | Gzip |
-|---|---|---|
-| JS (Vue + app, the only JS) | 119.8 kB | **43.0 kB** (budget 100 kB) |
-| CSS | 52.7 kB | 9.5 kB |
-| Inter latin variable woff2 | 48.3 kB | n/a |
-| JetBrains Mono latin variable woff2 | 40.4 kB | n/a |
-| Total `dist/` | **268 kB** on disk | (target below 2 MB) |
+The tests cover:
+- No overflow and no external requests at 1440, 768, 390 and 320.
+- axe-core at 1440 and 390 with zero serious or critical violations.
+- The skip link, heading order and outbound link targets.
+- The mobile menu from the keyboard, including Escape and focus return.
+- Stage tabs driven by arrow, Home and End keys, which change the panel and its accessible description.
+- FAQ disclosure and reduced motion.
 
-The brand reference PNG and the screenshots are not shipped in `dist/`.
+Deployed payload:
 
-### What the Playwright suite verifies
-
-These are real-browser checks against the built preview, not mocks.
-
-1. At 1440, 768, 390 and 320 the page has no horizontal overflow, and every request stays on `127.0.0.1`.
-2. axe-core 4.14 at 1440 and 390 reports **zero violations of any impact**.
-3. Tab reveals the skip link and Enter moves focus to `<main>`. There is exactly one h1 and no skipped heading levels. Every `#hash` link resolves, and every external href is the repo or PLAN.md.
-4. The mobile menu opens from the keyboard, focuses its first link and sets `aria-expanded`. Escape closes it and returns focus to the toggle, and choosing a link closes it and navigates.
-5. Workflow tabs follow the ARIA tabs pattern. Arrow keys move both focus and selection, Home and End work, and the panel and illustration swap.
-6. FAQ `<details>` disclosures toggle from the keyboard.
-7. With `prefers-reduced-motion: reduce`, every animation runs only once at near-zero duration.
+| Asset | Size |
+|---|---|
+| JS | 95.9 kB raw, **35.5 kB gzip** (budget 100 kB) |
+| CSS | 34.7 kB raw, 7.4 kB gzip |
+| Fonts | Fraunces soft 62 kB and italic 78 kB, Inter 48 kB, JetBrains Mono 40 kB |
+| Total `dist/` | **368 kB** (target below 2 MB) |
 
 ## Screenshots
 
-These are real Chrome captures in `handoffs/0005-landing-page/screenshots/`.
+These are in `handoffs/0005-landing-page/screenshots/revision-2/`:
 
 - `desktop-1440-full.png` and `desktop-1440-fold.png`
 - `tablet-768-full.png` and `tablet-768-fold.png`
 - `mobile-390-full.png`, `mobile-390-fold.png` and `mobile-390-menu-open.png`
 - `narrow-320-full.png` and `narrow-320-fold.png`
-- `workflow-describe-1440.png`, `workflow-inspect-1440.png`, `workflow-playtest-1440.png` and `workflow-rewind-1440.png`
+- `stage-ask-1440.png`, `stage-review-1440.png`, `stage-play-1440.png` and `stage-undo-1440.png`
+- `stage-play-390.png`
 
-## Visual direction and design system
+## Review findings fixed during this revision
 
-- **Mood:** "spellbook at dusk." The page sits on ink-violet night neutrals, lit by the wisp's violet. Warm ember marks the game world and human edits, and mint "spell" marks validated or applied state. Each colour has one meaning, and the editor illustration, history chips and diffs reuse it.
-- **Brand mark:** `WispMark.vue` is a single-path SVG redraw of the director's mascot, used alone without the wordmark. It was checked by overlaying it on `brand-reference.png` and matches closely. It appears in the nav, footer, favicon, the floating hero mascot that blinks unless motion is reduced, the agent avatar and the closing CTA.
-- **Typography:** Inter Variable at tight tracking for display, set from 2.6rem at 320px up to 5.4rem at desktop. JetBrains Mono carries the "engine voice": eyebrows, commands and code.
-- **Hero:** the headline is "Say the word. Build the world." Below it is an art-directed conceptual editor window. It has a hierarchy, a dusk viewport with a grapple line to a crystal ledge, and an agent panel with a four-command transaction. Its accessible label and visible caption both state it is a conceptual illustration, not a screenshot.
-- **Story order:**
-  1. A features bento covering the command bus, text-native documents, shared senses, history and undo, your model and keys, and Rust with TypeScript.
-  2. An interactive four-step workflow: Describe, Inspect, Play-test, Rewind.
-  3. Trust rules drawn from PLAN.md: offline by default, project content treated as data, no agent shell, and capability grants.
-  4. A plain FAQ.
-  5. The closing CTA and footer.
-- **States and accessibility:** a 2px violet focus-visible ring is used everywhere, and tap targets are at least 44px. Muted text is `#b4afcc` on `#08070f`, about 9:1 contrast. Long code scrolls inside a focusable region instead of overflowing the page. A noscript fallback is included. Loading and error states do not apply because there is no data fetching.
+1. **Scene too sparse:** the moon dominated the middle, the wanderer was tiny and the lighthouse beam cut across the isle.
+   - The wanderer is now 1.2 times larger and the moon has moved to the upper right.
+   - The beam has been replaced by a lamp glow.
+   - The landing spot is clear of the anchor post.
+2. **Play-test frames:** the onion-skin frames floated off the path, and the rope started where no character was. The frames now sit on the actual swing curve, starting from the cliff.
+3. **Lamp glow:** the glow rendered as a dark blob. It is now a warm radial gradient.
+4. **Mobile tabs:** the two-row tab grid made the active bar of the second row read as an underline of the first. The tabs are now a single row at every width, with numerals hidden below 520px.
+5. **Test locator:** the original locator also matched small presentational SVG icons inside the labelled illustration. It now targets the labelled container.
 
-## Rendered review findings fixed
+## Limitations
 
-- **Mascot overlap:** the hero mascot covered the window chrome's Edit and Play chips. It was repositioned per breakpoint, beside the window on xl and sitting on its edge below that.
-- **Clipped card at 320px:** the scripting card's implicit grid column grew to the code width, so the card's overflow clipping cut off its text. It now uses `grid-cols-1` with `minmax(0,…)` columns and min-w-0 children, and the code scrolls internally.
-- **Hero pill at 320px:** it wrapped into two awkward lines, so the secondary text is now hidden below 380px.
-- **Tablet bento hole:** the 768px grid left an empty slot, which is now fixed.
-- **Small fixes:**
-  - The closing CTA button wrapped at 320px.
-  - The workflow height jumped between tabs.
-  - The open mobile menu was translucent over the hero headline.
-  - The gap between the hero and the features section was oversized.
-
-## Limitations and open questions
-
-- **Unverified artifact:** at 320px, Playwright's clipped full-page captures showed a dark rectangle over the illustration's left edge. A normal scrolled viewport capture at the same spot is clean, and hit-testing finds no element there. It is treated as a capture artifact, but not proven to be one.
-- **Not tested:** Firefox, Safari and real devices. Lighthouse and visual-regression baselines were not run.
-- **Mascot sync:** another handoff is finalizing the app mascot. If its final geometry differs, replace the path in `WispMark.vue` and `public/favicon.svg`.
-- **Private destinations:** both CTAs lead to a private repo. Visitors without access will get a GitHub 404 or a sign-in page. The director may want a public destination later.
-- **Illustrative content:** the editor UI, the grapple example, the TypeScript API shown (`behavior`, `ctx.pull`) and the scene document syntax are illustrative, not the shipped API. They should be aligned once the real APIs exist.
-- **Out of scope here:** no Open Graph image was added because it would need an absolute deploy URL. The GitHub Pages workflow is for Astra to add.
+- **Tablet crop:** at 768px the viewport is taller than the scene's 16:10 ratio, so its far left and right edges are cropped. The character, path and isle stay in frame.
+- **Not tested:** Firefox, Safari and real devices. Lighthouse was not run.
+- **Mascot sync:** the mascot redraw matches the reference. If the parallel mascot handoff changes the shape, update `WispMark.vue` and `public/favicon.svg`.
+- **Private destinations:** both calls to action lead to a private repository, so visitors without access will see a GitHub sign-in page or a 404.
+- **Illustrative content:** the editor UI and the scene format excerpt are illustrative, not the shipped product, and both are labelled as conceptual.
+- **Tests to adapt:** Astra's independent behavioural tests may need updates for the new labels. Nav items are now How it works, Principles and FAQ. The stage uses the ids `stage-tab-*` and `stage-panel`, replacing the old `tab-*` and `panel-*`.

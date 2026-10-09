@@ -107,30 +107,36 @@ test.describe('landing page', () => {
     await expect(page).toHaveURL(/#faq$/)
   })
 
-  test('workflow tabs change the illustration via keyboard', async ({ page }) => {
+  test('stage step tabs change the editor illustration via keyboard', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await settle(page)
-    const describe = page.getByRole('tab', { name: /Describe/ })
-    await describe.focus()
-    await expect(describe).toHaveAttribute('aria-selected', 'true')
-    await expect(page.locator('#panel-describe')).toBeVisible()
+    const ask = page.getByRole('tab', { name: /Ask/ })
+    const panel = page.locator('#stage-panel')
+    await ask.focus()
+    await expect(ask).toHaveAttribute('aria-selected', 'true')
+    await expect(panel.locator(':scope > [role="img"]')).toHaveAttribute('aria-label', /not a screenshot/)
 
-    await page.keyboard.press('ArrowDown')
-    const inspect = page.getByRole('tab', { name: /Inspect/ })
-    await expect(inspect).toBeFocused()
-    await expect(inspect).toHaveAttribute('aria-selected', 'true')
-    await expect(page.locator('#panel-inspect')).toBeVisible()
-    await expect(page.locator('#panel-describe')).toBeHidden()
+    await page.keyboard.press('ArrowRight')
+    const review = page.getByRole('tab', { name: /Review/ })
+    await expect(review).toBeFocused()
+    await expect(review).toHaveAttribute('aria-selected', 'true')
+    await expect(panel).toHaveAttribute('aria-labelledby', 'stage-tab-review')
+    await expect(panel.locator(':scope > [role="img"]')).toHaveAttribute('aria-label', /dashed path/)
 
     await page.keyboard.press('End')
-    await expect(page.getByRole('tab', { name: /Rewind/ })).toHaveAttribute('aria-selected', 'true')
+    await expect(page.getByRole('tab', { name: /Undo/ })).toHaveAttribute('aria-selected', 'true')
     await page.keyboard.press('ArrowRight')
-    await expect(describe).toHaveAttribute('aria-selected', 'true')
+    await expect(ask).toHaveAttribute('aria-selected', 'true')
 
-    for (const id of ['describe', 'inspect', 'playtest', 'rewind']) {
-      await page.locator(`#tab-${id}`).click()
-      await page.locator('#workflow').screenshot({ path: `${shots}/workflow-${id}-1440.png`, animations: 'disabled' })
+    for (const id of ['ask', 'review', 'play', 'undo']) {
+      await page.locator(`#stage-tab-${id}`).click()
+      await page.waitForTimeout(500)
+      await page.locator('#how').screenshot({ path: `${shots}/stage-${id}-1440.png` })
     }
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.locator('#stage-tab-play').click()
+    await page.waitForTimeout(500)
+    await page.locator('#how').screenshot({ path: `${shots}/stage-play-390.png` })
   })
 
   test('FAQ disclosures toggle', async ({ page }) => {
