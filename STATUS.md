@@ -58,14 +58,14 @@ within its documented workload.
   merged as PR #22 (`a6fd91f`). The engine now takes PLAN.md's Rapier fallback
   after measured Jolt binding portability gaps; see ADR 0003. Typed bodies,
   primitive colliders, fixed stepping, sensors, masks and raycasts connect to
-  isolated play and the shared command bus. Ten new behavior tests, full workspace Clippy and
-  295 UI tests/build pass locally. The initial full suite passes 153 Rust tests
-  and 40 GPU checks; the additional material case passes afterward. Public CLI,
+  isolated play and the shared command bus. Ten new behavior tests, full workspace Clippy, 154 Rust tests and
+  312 UI tests/build pass locally. The earlier 40 GPU checks pass; all 26 final
+  engine look-dev PNGs match Claude’s reviewed originals byte for byte. Public CLI,
   browser/WASM and iOS simulator physics execution pass. Shared validation and
   fewer snapshots reduce paired local 512-body p95 from 9.99 to 8.80 ms, with
-  exact final-state equality. Claude handoff 0022 owns the new Inspector
-  presentation and pixel review. Final integrated/hosted checks and native editor
-  acceptance remain pending. Character controllers, mesh/compound
+  exact final-state equality. Claude handoff 0022 implemented and reviewed the new Inspector
+  in browser fixtures. Shared schemas supply field order and units. Final native
+  CUA review and hosted checks remain pending. Character controllers, mesh/compound
   colliders, hierarchy/scale, rollback snapshots and device performance remain
   open. See [runtime evidence](docs/spikes/physics-runtime.md).
 

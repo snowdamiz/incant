@@ -118,6 +118,35 @@ node tools/generate_sdk.mjs
 node_modules/.bin/tsc -p sdk/ts/tsconfig.json
 ```
 
+## Physics runtime
+
+The fixed-step runtime supports box, sphere and Y-capsule colliders; fixed,
+dynamic and velocity-driven kinematic bodies; contacts, friction, restitution,
+sleeping, CCD, sensors and collision masks. Add `Collider`, `RigidBody` and
+optional `Velocity`/`AngularVelocity` through the same component commands used by
+every client. Physics entities currently need a scene-root `Transform` with unit
+scale; shape dimensions are meters. Density is kg/m³, angular velocity is rad/s,
+and damping rates are 1/s. The generated schemas describe each field.
+
+During isolated play, scripts can call `api.raycast` and `api.triggerEvents()`.
+Raycasts return stable entity IDs, support masks and exclusion, and are limited
+to 256 per tick. Trigger events describe the just-completed simulation tick.
+Script commands affect the next physics step; stopping play preserves authored
+data. The Inspector displays these components read-only. Character controllers,
+mesh/compound colliders and rollback remain open.
+
+Run the reproducible public-CLI example into a new directory:
+
+```sh
+tools/cargo build -p incant_headless --release --locked
+python3 tools/probes/physics-runtime.py artifacts/physics-example
+```
+
+It creates a falling body and floor, verifies Undo/Redo and persistent reopening,
+then compiles a TypeScript behavior that raycasts the floor and makes the body
+jump. Its project, script and results remain in that directory. See
+[physics evidence and limits](docs/spikes/physics-runtime.md).
+
 ## OpenAI connection and live evaluation
 
 The CLI makes direct requests to OpenAI. It never reads Codex/Claude credentials.
