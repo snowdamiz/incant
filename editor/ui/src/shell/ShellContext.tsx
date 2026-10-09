@@ -9,7 +9,6 @@ import type {
   HostRequest,
   Ulid,
 } from '../bridge/contract';
-import type { AnyHostRequest } from '../bridge/provider';
 import type { CapabilitySet } from '../bridge/resolve';
 import { readCapabilities, unavailableMessage } from '../bridge/resolve';
 
@@ -27,9 +26,9 @@ export interface Shell {
   readonly announce: (message: string) => void;
   /** Checks the capability, dispatches, and announces any failure. Resolves true on success. */
   readonly run: (command: EditorCommand) => Promise<boolean>;
-  readonly ask: (request: AnyHostRequest) => Promise<boolean>;
+  readonly ask: (request: HostRequest) => Promise<boolean>;
   /** Like `ask`, but returns the host's result so a caller can show the exact error inline. */
-  readonly request: (request: AnyHostRequest) => Promise<BridgeResult>;
+  readonly request: (request: HostRequest) => Promise<BridgeResult>;
   readonly explainUnavailable: (capability: Capability) => void;
   /** The ChatGPT account dialog. `from` regains focus when it closes. */
   readonly accountOpen: boolean;
@@ -84,20 +83,19 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   );
 
   const request = useCallback(
-    async (hostRequest: AnyHostRequest): Promise<BridgeResult> => {
+    async (hostRequest: HostRequest): Promise<BridgeResult> => {
       if (!bridge || !capabilities.has(hostRequest.type)) {
         const message = unavailableMessage(hostRequest.type, bridge);
         announce(message);
         return { ok: false, error: { code: 'unsupported', message } };
       }
-      // ProviderRequest shapes are not yet in the shared HostRequest union; see provider.ts.
-      const result = await bridge.request(hostRequest as HostRequest);
+      const result = await bridge.request(hostRequest);
       if (!result.ok) announce(`${hostRequest.type} failed: ${result.error.message}`);
       return result;
     },
     [announce, bridge, capabilities],
   );
-  const ask = useCallback(async (hostRequest: AnyHostRequest) => (await request(hostRequest)).ok, [request]);
+  const ask = useCallback(async (hostRequest: HostRequest) => (await request(hostRequest)).ok, [request]);
 
   const [accountOpen, setAccountOpen] = useState(false);
   const accountReturn = useRef<HTMLElement | null>(null);

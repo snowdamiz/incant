@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent, ReactNode } from 'react';
 import type { BridgeError, ProviderAccount, ProviderState } from '../bridge/contract';
 import type { ProviderRequest } from '../bridge/provider';
-import { activeLabel, savedAccounts } from '../bridge/provider';
+import { savedAccounts, signedInLabel } from '../bridge/provider';
 import { Icon } from '../icons/Icon';
 import { useShell } from '../shell/ShellContext';
 
@@ -161,13 +161,14 @@ function AccountBody({
   setConfirmingSignOut: (value: boolean) => void;
 }) {
   const accounts = savedAccounts(provider);
-  const selected = activeLabel(provider);
+  const signedIn = signedInLabel(provider);
   const connect = (extra: { add?: boolean } = {}) => void send({ type: 'provider.connect', method: 'oauth', ...extra });
   const signInAvailable = can('provider.connect');
   const showAccounts = accounts.length > 0 && provider.status !== 'connecting' && provider.status !== 'checking';
 
   let status: ReactNode;
   let actions: ReactNode = null;
+  let note: ReactNode = null;
   switch (provider.status) {
     case 'checking':
       status = (
@@ -178,10 +179,12 @@ function AccountBody({
       break;
     case 'not-connected':
       status = (
-        <Status id="account-status" icon="spark" title={selected ? `Sign in again as ${selected}` : 'Use the agent with your ChatGPT account'}>
-          {signInAvailable
-            ? 'Incant opens ChatGPT in your web browser. Approve access there, then come back here.'
-            : 'Signing in is not available from this editor build yet.'}
+        <Status id="account-status" icon="spark" title="Use the agent with your ChatGPT account">
+          {!signInAvailable
+            ? 'Signing in is not available from this editor build yet.'
+            : accounts.length > 0
+              ? 'Sign in to one of your saved accounts, or continue with ChatGPT in your web browser.'
+              : 'Incant opens ChatGPT in your web browser. Approve access there, then come back here.'}
         </Status>
       );
       actions = (
@@ -208,6 +211,13 @@ function AccountBody({
             ChatGPT sign-in is open in your default browser. Approve access there and Incant will finish automatically. You
             never need to copy a code into the editor.
           </Status>
+        );
+      }
+      if (signedIn) {
+        note = (
+          <>
+            You are still signed in as <strong>{signedIn}</strong>. Cancelling keeps it in use.
+          </>
         );
       }
       actions = (
@@ -258,16 +268,26 @@ function AccountBody({
       );
       break;
     case 'error':
-      status = (
-        <Status id="account-status" icon="error" tone="error" title="Sign-in didn't finish">
-          Nothing was changed. You can try again now.
-        </Status>
-      );
-      actions = (
-        <>
-          <ChatGPTButton available={signInAvailable && !busy} autoFocusTarget onClick={() => connect()} />
-        </>
-      );
+      if (signedIn) {
+        // A failed add or switch. The signed-in account is untouched; rows offer switching, this offers adding.
+        status = (
+          <Status id="account-status" icon="error" tone="error" title="That didn't finish">
+            You are still signed in as <strong>{signedIn}</strong>.
+          </Status>
+        );
+        actions = (
+          <ActionButton icon="plus" onClick={() => connect({ add: true })} disabled={busy || !signInAvailable} autoFocusTarget>
+            Add another account
+          </ActionButton>
+        );
+      } else {
+        status = (
+          <Status id="account-status" icon="error" tone="error" title="Sign-in didn't finish">
+            You can try again now.
+          </Status>
+        );
+        actions = <ChatGPTButton available={signInAvailable && !busy} autoFocusTarget onClick={() => connect()} />;
+      }
       break;
   }
 
@@ -276,6 +296,12 @@ function AccountBody({
       {status}
       {provider.status === 'error' ? <ErrorNotice error={provider.error} /> : null}
       {failure ? <ErrorNotice error={failure} /> : null}
+      {note ? (
+        <p className="account__message" role="note">
+          <Icon name="check" size={14} />
+          <span>{note}</span>
+        </p>
+      ) : null}
       {provider.message ? (
         <p className="account__message" role="note">
           <Icon name="info" size={14} />
@@ -294,7 +320,7 @@ function AccountBody({
         <div className="account__confirm" role="group" aria-labelledby="signout-question">
           <p id="signout-question">
             Sign out of <strong>{provider.accountLabel}</strong> on this computer? The agent stops working until you sign in
-            again in your browser.
+            again. Other saved accounts stay listed.
           </p>
           <div className="account__actions">
             <ActionButton tone="danger-solid" onClick={() => void send({ type: 'provider.disconnect' })} disabled={busy} autoFocusTarget>
@@ -308,9 +334,13 @@ function AccountBody({
       <ul className="account__facts">
         <li>
           <Icon name="lock" size={14} />
+          <span>You stay signed in on this computer when you quit, restart or install a new build of Incant.</span>
+        </li>
+        <li>
+          <Icon name="info" size={14} />
           <span>
-            Your sign-in is kept on this computer, so you stay signed in when you quit, restart or update Incant. It is never
-            saved in your projects.
+            Your sign-in is never saved in your projects. After Incant changes, your computer may ask once to allow access to
+            it.
           </span>
         </li>
         <li>
@@ -373,8 +403,8 @@ function AccountList({
   canSwitch: boolean;
   onSwitch: (id: string) => void;
 }) {
-  const signedIn = provider.status === 'connected';
-  const activeId = provider.activeAccount ?? (accounts.length === 1 ? accounts[0]!.id : undefined);
+  // Only a signed-in account is marked. Saved, signed-out registrations are listed for sign-in, never as active.
+  const activeId = signedInLabel(provider) === null ? undefined : (provider.activeAccount ?? accounts[0]?.id);
   return (
     <section className="account__list" aria-labelledby="accounts-title">
       <h3 id="accounts-title" className="account__list-title">
@@ -383,6 +413,7 @@ function AccountList({
       <ul>
         {accounts.map((account) => {
           const active = account.id === activeId;
+          const verb = activeId === undefined ? 'Sign in' : 'Use';
           return (
             <li key={account.id} className={`account-row${active ? ' is-active' : ''}`} aria-current={active || undefined}>
               <span className="account-row__avatar" aria-hidden="true">
@@ -392,25 +423,19 @@ function AccountList({
                 {account.label}
               </span>
               {active ? (
-                <span className={`account-row__state${signedIn ? ' is-signed-in' : ''}`}>
-                  {signedIn ? (
-                    <>
-                      <Icon name="check" size={12} />
-                      In use
-                    </>
-                  ) : (
-                    'Selected, signed out'
-                  )}
+                <span className="account-row__state is-signed-in">
+                  <Icon name="check" size={12} />
+                  In use
                 </span>
               ) : (
                 <button
                   type="button"
                   className="button button--small account-row__switch"
-                  aria-label={`Use ${account.label}`}
+                  aria-label={`${verb} ${verb === 'Sign in' ? 'as ' : ''}${account.label}`}
                   aria-disabled={!canSwitch || undefined}
                   onClick={() => canSwitch && onSwitch(account.id)}
                 >
-                  Use
+                  {verb}
                 </button>
               )}
             </li>

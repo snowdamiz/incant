@@ -32,7 +32,7 @@ if (!executablePath) throw new Error('No Chrome found. Set CHROME_PATH.');
 if (!existsSync(join(uiRoot, 'dist/index.html'))) throw new Error('Run the build first (dist/ is missing).');
 mkdirSync(outDir, { recursive: true });
 
-const STATES = ['checking', 'signed-out', 'signed-out-saved', 'browser', 'validating', 'signed-in', 'signed-in-multi', 'signed-in-cli-key', 'error'];
+const STATES = ['checking', 'signed-out', 'signed-out-saved', 'browser', 'validating', 'signed-in', 'signed-in-multi', 'signed-in-cli-key', 'error', 'adding-browser', 'error-while-signed-in'];
 const SIZE = { width: 1280, height: 800 };
 const port = Number(process.env.EVIDENCE_PORT ?? 4183);
 const server = await preview({ root: uiRoot, logLevel: 'warn', preview: { port, strictPort: true, host: '127.0.0.1' } });
