@@ -11,8 +11,10 @@ use std::{
     },
     time::Duration,
 };
+mod provider;
 mod window;
 struct Editor {
+    provider: Arc<provider::ProviderRuntime>,
     bus: Mutex<CommandBus>,
     viewport: Mutex<Option<Viewport>>,
     alive: AtomicBool,
@@ -125,6 +127,7 @@ fn main() {
         }
     };
     let editor = Arc::new(Editor {
+        provider: Arc::new(provider::ProviderRuntime::new()),
         bus: Mutex::new(bus),
         viewport: Mutex::new(None),
         alive: AtomicBool::new(true),
@@ -139,9 +142,14 @@ fn main() {
             engine_history,
             viewport_bounds,
             window::window_read,
-            window::window_action
+            window::window_action,
+            provider::provider_read,
+            provider::provider_action
         ])
         .setup(move |app| {
+            editor
+                .provider
+                .start(app.handle().clone(), "restore".into(), None, false)?;
             let config = tauri::utils::config::WindowConfig {
                 label: "main".into(),
                 background_color: Some(tauri::utils::config::Color(11, 12, 15, 255)),
@@ -178,7 +186,14 @@ fn main() {
             ));
             let close = editor.clone();
             let observed_window = window.clone();
+            let account_app = app.handle().clone();
             window.on_window_event(move |event| {
+                if matches!(event, tauri::WindowEvent::Focused(true)) {
+                    let _ =
+                        close
+                            .provider
+                            .start(account_app.clone(), "restore".into(), None, false);
+                }
                 if matches!(event, tauri::WindowEvent::Destroyed) {
                     close.alive.store(false, Ordering::Relaxed);
                 } else if matches!(

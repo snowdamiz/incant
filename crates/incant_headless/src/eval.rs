@@ -1,5 +1,6 @@
 use super::*;
 use incant_agent::provider::Provider;
+use serde::Deserialize;
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]

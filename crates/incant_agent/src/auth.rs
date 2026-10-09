@@ -9,6 +9,7 @@ use sha2::{Digest, Sha256};
 use std::{
     io::{Read, Write},
     net::TcpListener,
+    sync::atomic::{AtomicBool, Ordering},
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 use url::Url;
@@ -46,12 +47,16 @@ struct Discovery {
 struct Claims {
     sub: String,
     nonce: Option<String>,
+    email: Option<String>,
+    name: Option<String>,
 }
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct AccountMetadata {
     pub id: String,
     pub client_id: String,
     pub subject: String,
+    #[serde(default)]
+    pub label: String,
 }
 /// An attempt owns the callback listener, state, nonce and PKCE verifier together.
 pub struct LoginAttempt {
@@ -83,10 +88,23 @@ fn now() -> u64 {
         .unwrap_or_default()
         .as_secs()
 }
+pub fn valid_host_id(value: &str) -> bool {
+    value
+        .strip_prefix("urn:uuid:")
+        .and_then(|s| uuid::Uuid::parse_str(s).ok())
+        .is_some_and(|id| id.get_version_num() == 4 && id.get_variant() == uuid::Variant::RFC4122)
+}
+/// A launch-only secret URL. Never serialize it or return it to the webview.
+pub struct BrowserAuthorization(zeroize::Zeroizing<String>);
+impl BrowserAuthorization {
+    pub fn open(&self) -> Result<(), AgentError> {
+        open::that(self.0.as_str()).map_err(|_| failure("Could not open the system browser. Set a default browser, then retry Continue with ChatGPT."))
+    }
+}
 impl LoginAttempt {
     pub fn new(host_id: &str, returning_client_id: Option<&str>) -> Result<Self, AgentError> {
-        if host_id.is_empty() {
-            return Err(failure("a persistent host ID is required"));
+        if !valid_host_id(host_id) {
+            return Err(failure("a persistent urn:uuid UUIDv4 host ID is required"));
         }
         let listener = TcpListener::bind("127.0.0.1:0")
             .map_err(|_| failure("could not bind loopback callback"))?;
@@ -138,6 +156,20 @@ impl LoginAttempt {
             url,
         })
     }
+    pub fn set_id_token_hint(&mut self, hint: &str) {
+        if !hint.is_empty() {
+            self.url
+                .query_pairs_mut()
+                .append_pair("id_token_hint", hint);
+        }
+    }
+    /// Never print this URL: reauthorization can contain an ID token hint.
+    pub fn browser_authorization(&self) -> BrowserAuthorization {
+        BrowserAuthorization(zeroize::Zeroizing::new(self.url.to_string()))
+    }
+    pub fn open_browser(&self) -> Result<(), AgentError> {
+        self.browser_authorization().open()
+    }
     pub fn authorization_url(&self) -> &str {
         self.url.as_str()
     }
@@ -146,69 +178,20 @@ impl LoginAttempt {
         expected_subject: Option<&str>,
         timeout: Duration,
     ) -> Result<AccountMetadata, AgentError> {
-        let deadline = Instant::now() + timeout;
-        let (code, issued_client) = loop {
-            if Instant::now() >= deadline {
-                return Err(failure("sign-in timed out"));
-            }
-            match self.listener.accept() {
-                Ok((mut stream, _)) => {
-                    stream
-                        .set_read_timeout(Some(Duration::from_secs(3)))
-                        .map_err(|_| failure("callback read timeout failed"))?;
-                    let mut bytes = Vec::new();
-                    let mut chunk = [0u8; 1024];
-                    loop {
-                        let size = stream
-                            .read(&mut chunk)
-                            .map_err(|_| failure("callback read failed"))?;
-                        if size == 0 {
-                            break;
-                        }
-                        bytes.extend_from_slice(&chunk[..size]);
-                        if bytes.len() > 8192 {
-                            return Err(failure("oversized callback"));
-                        }
-                        if bytes.windows(4).any(|x| x == b"\r\n\r\n") {
-                            break;
-                        }
-                    }
-                    let line = std::str::from_utf8(&bytes)
-                        .map_err(|_| failure("malformed callback"))?
-                        .lines()
-                        .next()
-                        .unwrap_or("");
-                    let mut parts = line.split_whitespace();
-                    let method = parts.next();
-                    let target = parts.next().unwrap_or("");
-                    if method != Some("GET") || !target.starts_with("/auth/callback?") {
-                        let _=stream.write_all(b"HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\nConnection: close\r\n\r\n");
-                        continue;
-                    }
-                    let result = self.validate_callback(target);
-                    let body = if result.is_ok() {
-                        "Authorization received. Return to Incant to finish validation."
-                    } else {
-                        "Authorization rejected. Return to Incant and retry sign-in."
-                    };
-                    let status = if result.is_ok() {
-                        "200 OK"
-                    } else {
-                        "400 Bad Request"
-                    };
-                    let _ = write!(
-                        stream,
-                        "HTTP/1.1 {status}\r\nContent-Type: text/plain\r\nCache-Control: no-store\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
-                        body.len()
-                    );
-                    break result?;
-                }
-                Err(e) if e.kind() == std::io::ErrorKind::WouldBlock => {
-                    std::thread::sleep(Duration::from_millis(25))
-                }
-                Err(_) => return Err(failure("callback listener failed")),
-            }
-        };
+        self.finish_cancellable(expected_subject, timeout, &AtomicBool::new(false), || {})
+    }
+    pub fn finish_cancellable(
+        self,
+        expected_subject: Option<&str>,
+        timeout: Duration,
+        cancelled: &AtomicBool,
+        validating: impl FnOnce(),
+    ) -> Result<AccountMetadata, AgentError> {
+        let (code, issued_client) = self.wait_callback(timeout, cancelled)?;
+        validating();
+        if cancelled.load(Ordering::Relaxed) {
+            return Err(AgentError::Interrupted);
+        }
         let client = client()?;
         let response = client
             .post(TOKEN)
@@ -223,7 +206,10 @@ impl LoginAttempt {
             .send()
             .map_err(|_| failure("OAuth token exchange failed"))?;
         if !response.status().is_success() {
-            return Err(failure("OAuth code rejected; start a fresh sign-in"));
+            return Err(oauth_response_error(
+                response,
+                "Sign-in code exchange failed",
+            ));
         }
         let token: TokenResponse = response
             .json()
@@ -255,15 +241,111 @@ impl LoginAttempt {
             "oauth-{:x}",
             Sha256::digest(format!("{}:{}", issued_client, claims.sub))
         );
-        CredentialStore::save(
-            &id,
-            &serde_json::to_string(&record).map_err(|_| failure("credential encoding failed"))?,
-        )?;
-        Ok(AccountMetadata {
+        if cancelled.load(Ordering::Relaxed) {
+            return Err(AgentError::Interrupted);
+        }
+        let mut store = crate::accounts::AccountStore::open()?;
+        save_record(&id, &record)?;
+        let account = AccountMetadata {
             id,
             client_id: issued_client,
             subject: claims.sub,
-        })
+            label: format!(
+                "{} · {}",
+                claims
+                    .email
+                    .or(claims.name)
+                    .unwrap_or_else(|| "ChatGPT account".into()),
+                &record.client_id[record.client_id.len().saturating_sub(6)..]
+            ),
+        };
+        store.activate(account.clone())?;
+        Ok(account)
+    }
+    fn wait_callback(
+        &self,
+        timeout: Duration,
+        cancelled: &AtomicBool,
+    ) -> Result<(String, String), AgentError> {
+        let deadline = Instant::now() + timeout;
+        loop {
+            if cancelled.load(Ordering::Relaxed) {
+                return Err(AgentError::Interrupted);
+            }
+            if Instant::now() >= deadline {
+                return Err(failure(
+                    "Sign-in timed out. Choose Continue with ChatGPT to try again.",
+                ));
+            }
+            let mut stream = match self.listener.accept() {
+                Ok((stream, _)) => stream,
+                Err(e) if e.kind() == std::io::ErrorKind::WouldBlock => {
+                    std::thread::sleep(Duration::from_millis(25));
+                    continue;
+                }
+                Err(_) => return Err(failure("callback listener failed")),
+            };
+            let _ = stream.set_read_timeout(Some(Duration::from_millis(250)));
+            let _ = stream.set_write_timeout(Some(Duration::from_secs(1)));
+            let read_deadline = Instant::now() + Duration::from_secs(2);
+            let mut bytes = zeroize::Zeroizing::new(Vec::new());
+            let mut chunk = [0u8; 1024];
+            while bytes.len() <= 8192
+                && Instant::now() < read_deadline
+                && !cancelled.load(Ordering::Relaxed)
+            {
+                match stream.read(&mut chunk) {
+                    Ok(0) => break,
+                    Ok(size) => {
+                        bytes.extend_from_slice(&chunk[..size]);
+                        if bytes.windows(4).any(|x| x == b"\r\n\r\n") {
+                            break;
+                        }
+                    }
+                    Err(_) => break,
+                }
+            }
+            let line = std::str::from_utf8(&bytes)
+                .unwrap_or("")
+                .lines()
+                .next()
+                .unwrap_or("");
+            let mut parts = line.split_whitespace();
+            let method = parts.next();
+            let target = parts.next().unwrap_or("");
+            let matches = method == Some("GET")
+                && target.starts_with("/auth/callback?")
+                && bytes.len() <= 8192;
+            // Unrelated browser requests, stale tabs and invalid states must not
+            // consume the active attempt or send a code to the token endpoint.
+            let state_matches = Url::parse(&format!("http://127.0.0.1{target}"))
+                .ok()
+                .is_some_and(|u| {
+                    u.query_pairs()
+                        .filter(|(k, _)| k == "state")
+                        .map(|(_, v)| v.into_owned())
+                        .collect::<Vec<_>>()
+                        == [self.state.clone()]
+                });
+            if !matches || !state_matches {
+                let _ = stream.write_all(
+                    b"HTTP/1.1 400 Bad Request\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+                );
+                continue;
+            }
+            let result = self.validate_callback(target);
+            let body = if result.is_ok() {
+                "Authorization received. Return to Incant to finish connecting. You may close this tab."
+            } else {
+                "Sign-in was not completed. Return to Incant for details and retry when ready."
+            };
+            let _ = write!(
+                stream,
+                "HTTP/1.1 200 OK\r\nContent-Type: text/plain; charset=utf-8\r\nCache-Control: no-store\r\nContent-Security-Policy: default-src 'none'\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
+                body.len()
+            );
+            return result;
+        }
     }
     fn validate_callback(&self, target: &str) -> Result<(String, String), AgentError> {
         let url = Url::parse(&format!("http://127.0.0.1{target}"))
@@ -284,13 +366,19 @@ impl LoginAttempt {
             return Err(failure("OAuth state mismatch"));
         }
         if params.contains_key("error") {
-            return Err(failure("sign-in declined or unavailable"));
+            return Err(failure(
+                "Sign-in was declined or unavailable. Continue with ChatGPT to try again.",
+            ));
         }
         let issued = params
             .get("client_id")
             .cloned()
             .unwrap_or_else(|| self.client_id.clone());
-        if issued == "dynamic_agent_client" || issued.trim().is_empty() {
+        if !issued.starts_with("oaiapp_")
+            || !issued
+                .bytes()
+                .all(|b| b.is_ascii_alphanumeric() || b == b'_' || b == b'-')
+        {
             return Err(failure("registration did not issue a client ID"));
         }
         if self.client_id != "dynamic_agent_client" && issued != self.client_id {
@@ -302,6 +390,37 @@ impl LoginAttempt {
             .ok_or_else(|| failure("callback has no code"))?;
         Ok((code.clone(), issued))
     }
+}
+fn save_record(id: &str, record: &OAuthCredential) -> Result<(), AgentError> {
+    let encoded = zeroize::Zeroizing::new(
+        serde_json::to_string(record).map_err(|_| failure("credential encoding failed"))?,
+    );
+    CredentialStore::save(id, &encoded)
+}
+fn oauth_response_error(response: reqwest::blocking::Response, context: &str) -> AgentError {
+    let status = response.status().as_u16();
+    let body: serde_json::Value = response.json().unwrap_or_default();
+    let code = body.get("error").and_then(|e| {
+        e.as_str()
+            .or_else(|| e.get("code").and_then(|v| v.as_str()))
+    });
+    // Only known protocol codes may leave this module. Never echo token bodies,
+    // arbitrary server text, authorization codes, URLs or request credentials.
+    let recovery = match code {
+        Some("invalid_client") => "OpenAI rejected Incant's client registration (invalid_client).",
+        Some(
+            "invalid_grant"
+            | "invalid_refresh_token"
+            | "token_expired"
+            | "refresh_token_expired"
+            | "refresh_token_invalidated"
+            | "refresh_token_reused",
+        ) => "The authorization has expired or was revoked. Continue with ChatGPT to reconnect.",
+        Some("access_denied") => "Authorization was declined.",
+        Some("invalid_request") => "OpenAI rejected the authorization request (invalid_request).",
+        _ => "Try again shortly. Your saved account has been retained.",
+    };
+    failure(&format!("{context} (HTTP {status}). {recovery}"))
 }
 fn discovery(client: &Client) -> Result<Discovery, AgentError> {
     let result: Discovery = client
@@ -391,7 +510,10 @@ pub fn access_token(account: &AccountMetadata) -> Result<zeroize::Zeroizing<Stri
             .send()
             .map_err(|_| failure("token refresh unavailable"))?;
         if !response.status().is_success() {
-            return Err(failure("token refresh rejected; reauthorize this account"));
+            return Err(oauth_response_error(
+                response,
+                "Saved session could not be renewed",
+            ));
         }
         let refreshed: TokenResponse = response
             .json()
@@ -415,10 +537,7 @@ pub fn access_token(account: &AccountMetadata) -> Result<zeroize::Zeroizing<Stri
             record.refresh_token = refresh;
         }
         record.expires_at = now().saturating_add(refreshed.expires_in);
-        CredentialStore::save(
-            &account.id,
-            &serde_json::to_string(&record).map_err(|_| failure("credential encoding failed"))?,
-        )?;
+        save_record(&account.id, &record)?;
     }
     Ok(zeroize::Zeroizing::new(record.access_token.clone()))
 }
@@ -457,7 +576,7 @@ mod tests {
     use super::*;
     #[test]
     fn registration_and_pkce_callback_validation() {
-        let a = LoginAttempt::new("urn:uuid:test", None).unwrap();
+        let a = LoginAttempt::new("urn:uuid:760402d0-90a4-4c00-bf3e-d74330ecc166", None).unwrap();
         let url = Url::parse(a.authorization_url()).unwrap();
         let pairs: std::collections::BTreeMap<_, _> = url.query_pairs().collect();
         assert_eq!(
@@ -497,7 +616,11 @@ mod tests {
     }
     #[test]
     fn returning_registration_cannot_swap_client() {
-        let a = LoginAttempt::new("host", Some("oaiapp_original")).unwrap();
+        let a = LoginAttempt::new(
+            "urn:uuid:760402d0-90a4-4c00-bf3e-d74330ecc166",
+            Some("oaiapp_original"),
+        )
+        .unwrap();
         assert!(
             a.validate_callback(&format!(
                 "/auth/callback?state={}&code=x&client_id=oaiapp_other",
@@ -510,6 +633,70 @@ mod tests {
                 .unwrap()
                 .1,
             "oaiapp_original"
+        );
+    }
+    #[test]
+    fn rejects_invalid_host_and_generates_unique_attempt_parameters() {
+        assert!(LoginAttempt::new("incant:01OLD", None).is_err());
+        let host = format!("urn:uuid:{}", uuid::Uuid::new_v4());
+        let a = LoginAttempt::new(&host, None).unwrap();
+        let b = LoginAttempt::new(&host, None).unwrap();
+        assert_ne!(a.state, b.state);
+        assert_ne!(a.nonce, b.nonce);
+        assert_ne!(a.verifier, b.verifier);
+        assert_ne!(a.redirect, b.redirect);
+        assert!(a.redirect.starts_with("http://127.0.0.1:"));
+        assert!(a.redirect.ends_with("/auth/callback"));
+    }
+    #[test]
+    fn callback_listener_ignores_stale_tabs_then_accepts_matching_attempt() {
+        let a = LoginAttempt::new(&format!("urn:uuid:{}", uuid::Uuid::new_v4()), None).unwrap();
+        let address = a.listener.local_addr().unwrap();
+        let state = a.state.clone();
+        let worker = std::thread::spawn(move || {
+            a.wait_callback(Duration::from_secs(3), &AtomicBool::new(false))
+        });
+        let send = |target: &str| {
+            let mut stream = std::net::TcpStream::connect(address).unwrap();
+            stream
+                .set_read_timeout(Some(Duration::from_secs(2)))
+                .unwrap();
+            write!(
+                stream,
+                "GET {target} HTTP/1.1\r\nHost: {address}\r\nConnection: close\r\n\r\n"
+            )
+            .unwrap();
+            let mut response = String::new();
+            stream.read_to_string(&mut response).unwrap();
+            response
+        };
+        assert!(send("/favicon.ico").starts_with("HTTP/1.1 400"));
+        assert!(
+            send("/auth/callback?state=stale&code=secret&client_id=oaiapp_wrong")
+                .starts_with("HTTP/1.1 400")
+        );
+        let response = send(&format!(
+            "/auth/callback?state={state}&code=fake-code&client_id=oaiapp_test"
+        ));
+        assert!(response.contains("Return to Incant"));
+        assert!(!response.contains("fake-code"));
+        assert_eq!(
+            worker.join().unwrap().unwrap(),
+            ("fake-code".into(), "oaiapp_test".into())
+        );
+    }
+    #[test]
+    fn cancelled_and_expired_attempts_stop_without_token_exchange() {
+        let a = LoginAttempt::new(&format!("urn:uuid:{}", uuid::Uuid::new_v4()), None).unwrap();
+        assert!(matches!(
+            a.wait_callback(Duration::from_secs(30), &AtomicBool::new(true)),
+            Err(AgentError::Interrupted)
+        ));
+        assert!(
+            a.wait_callback(Duration::ZERO, &AtomicBool::new(false))
+                .unwrap_err()
+                .to_string()
+                .contains("timed out")
         );
     }
 }

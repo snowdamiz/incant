@@ -16,6 +16,7 @@ tauri = { version = "=2.12.1", features = ["unstable", "macos-private-api"] }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
 incant_core = { workspace = true }
+incant_agent = { workspace = true }
 incant_render = { path = "../../crates/incant_render" }
 serde = { workspace = true }
 serde_json = { workspace = true }

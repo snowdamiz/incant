@@ -209,4 +209,31 @@ describe("native bridge", () => {
     expect(bridge.getSnapshot().hierarchy.status).toBe("ready");
     unsubscribe();
   });
+  it("restores account metadata and retains it across project edits", async () => {
+    const provider = { status: "connected", provider: "openai", method: "oauth", accountLabel: "Test account", activeAccount: "test-id" } as const;
+    const invoke: Invoke = async <T>(command: string) => (command === "provider_read" ? provider : read()) as T;
+    const bridge = new NativeBridge(invoke);
+    await bridge.startProviderUpdates();
+    await bridge.start();
+    expect(bridge.getSnapshot().provider).toEqual(provider);
+    await bridge.dispatch({ type: "entity.rename", entity: entity as Ulid, name: "Changed" });
+    expect(bridge.getSnapshot().provider).toEqual(provider);
+    expect(JSON.stringify(bridge.getSnapshot().provider)).not.toMatch(/token|authorization_url/i);
+  });
+  it("routes account selection and cancellation without exposing credentials or writing a project", async () => {
+    const calls: unknown[] = [];
+    const invoke: Invoke = async <T>(command: string, args?: Record<string, unknown>) => {
+      calls.push({ command, args });
+      return { status: "not-connected", provider: "openai" } as T;
+    };
+    const bridge = new NativeBridge(invoke);
+    for (const request of [{ type: "provider.connect", method: "oauth", add: true }, { type: "provider.switch", accountId: "saved" }, { type: "provider.cancel" }, { type: "provider.disconnect" }] as const) {
+      expect(await bridge.request(request)).toEqual({ ok: true });
+    }
+    expect(calls).toContainEqual({ command: "provider_action", args: { action: "connect", accountId: null, add: true } });
+    expect(calls).toContainEqual({ command: "provider_action", args: { action: "switch", accountId: "saved", add: false } });
+    expect(calls).toHaveLength(8);
+    expect(bridge.getSnapshot().history.entries).toEqual([]);
+  });
+
 });

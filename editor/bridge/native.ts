@@ -12,6 +12,7 @@ import type {
   FieldSchema,
   Origin,
   WindowChrome,
+  ProviderState,
 } from "./contract";
 
 type Entity = {
@@ -209,6 +210,10 @@ export class NativeBridge implements EditorBridge {
     "entity.delete",
     "history.undo",
     "history.redo",
+    "provider.connect",
+    "provider.cancel",
+    "provider.disconnect",
+    "provider.switch",
     "viewport.bounds",
     "window.drag",
     "window.minimize",
@@ -221,6 +226,7 @@ export class NativeBridge implements EditorBridge {
   private listeners = new Set<() => void>();
   private pending = false;
   private chrome: WindowChrome | undefined;
+  private provider: ProviderState = { status: "checking", provider: "openai" };
   private snapshot: BridgeSnapshot = {
     connection: { status: "connecting" },
     hierarchy: { status: "loading" },
@@ -246,7 +252,7 @@ export class NativeBridge implements EditorBridge {
   };
   private publish(read: EngineRead) {
     this.read = freeze(read);
-    const snapshot = snapshotFromEngine(read);
+    const snapshot = { ...snapshotFromEngine(read), provider: this.provider };
     this.snapshot = freeze(
       this.chrome ? { ...snapshot, window: this.chrome } : snapshot,
     );
@@ -256,6 +262,15 @@ export class NativeBridge implements EditorBridge {
     this.chrome = freeze(chrome);
     this.snapshot = freeze({ ...this.snapshot, window: this.chrome });
     this.listeners.forEach((fn) => fn());
+  }
+  updateProvider(provider: ProviderState) {
+    this.provider = freeze(provider);
+    this.snapshot = freeze({ ...this.snapshot, provider: this.provider });
+    this.listeners.forEach((fn) => fn());
+  }
+  async startProviderUpdates(listen?: Listen) {
+    if (listen) await listen<ProviderState>("incant:provider-changed", (event) => this.updateProvider(event.payload));
+    this.updateProvider(await this.invoke<ProviderState>("provider_read"));
   }
   async startWindowUpdates(listen?: Listen) {
     if (listen)
@@ -339,6 +354,14 @@ export class NativeBridge implements EditorBridge {
     }
   }
   async request(request: HostRequest): Promise<BridgeResult> {
+    if (request.type === "provider.connect" || request.type === "provider.cancel" || request.type === "provider.disconnect" || request.type === "provider.switch") {
+      if (request.type === "provider.connect" && request.method !== "oauth") return failure("Use incant auth api-key for the hidden API-key prompt.");
+      try {
+        await this.invoke("provider_action", { action: request.type.slice("provider.".length), accountId: "accountId" in request ? request.accountId ?? null : null, add: "add" in request ? request.add ?? false : false });
+        this.updateProvider(await this.invoke<ProviderState>("provider_read"));
+        return { ok: true };
+      } catch (error) { return failure(error); }
+    }
     if (
       request.type === "window.drag" ||
       request.type === "window.minimize" ||
@@ -385,6 +408,7 @@ export function installNativeBridge(): NativeBridge | undefined {
   const bridge = new NativeBridge(invoke);
   host.__INCANT_BRIDGE__ = bridge;
   void bridge.start();
+  void bridge.startProviderUpdates(host.__TAURI__?.event?.listen).catch(() => bridge.updateProvider({ status: "error", provider: "openai", error: { code: "provider.transport", message: "Could not read the saved OpenAI connection. Restart Incant to retry." } }));
   void bridge
     .startWindowUpdates(host.__TAURI__?.event?.listen)
     .catch(() => console.error("Native window state could not be connected."));
