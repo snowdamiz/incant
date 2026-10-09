@@ -3194,6 +3194,7 @@ dependencies = [
  "incant_cmd",
  "incant_core",
  "incant_doc",
+ "incant_import",
  "incant_render",
  "incant_script",
  "rpassword",
@@ -3201,6 +3202,20 @@ dependencies = [
  "serde",
  "serde_json",
  "tempfile",
+]
+
+[[package]]
+name = "incant_import"
+version = "0.0.1"
+dependencies = [
+ "image",
+ "incant_assets",
+ "incant_cmd",
+ "incant_doc",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
 ]
 
 [[package]]
