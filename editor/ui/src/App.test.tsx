@@ -68,8 +68,25 @@ describe('editor shell', () => {
   it('renders the hierarchy as an accessible tree with problem counts in names', async () => {
     const { container } = renderFixture('sample');
     const tree = screen.getByRole('tree', { name: 'Hierarchy' });
-    expect(within(tree).getAllByRole('treeitem').length).toBe(17);
+    expect(within(tree).getAllByRole('treeitem').length).toBe(18);
     expect(treeRow('Crate 03').textContent).toContain('1 error');
+    await expectNoAxeViolations(container);
+  });
+
+  it('shows enabled light shadows as a distance group and omitted shadows as Off', async () => {
+    const { container } = renderFixture('sample');
+    fireEvent.click(treeRow('Sun'));
+    const sun = screen.getByRole('region', { name: 'Light' });
+    const group = within(sun).getByRole('group', { name: 'Shadows' });
+    expect((within(group).getByRole('textbox', { name: 'Distance' }) as HTMLInputElement).value).toBe('120');
+    expect(within(group).getByText('m')).toBeTruthy();
+    expect(within(sun).queryByDisplayValue('Off')).toBeNull();
+
+    fireEvent.click(treeRow('Sky Fill'));
+    const fill = screen.getByRole('region', { name: 'Light' });
+    expect((within(fill).getByRole('textbox', { name: 'Shadows' }) as HTMLInputElement).value).toBe('Off');
+    expect(within(fill).queryByText(/Cannot show as/)).toBeNull();
+    expect(within(fill).queryByRole('group', { name: 'Shadows' })).toBeNull();
     await expectNoAxeViolations(container);
   });
 

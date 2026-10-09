@@ -38,6 +38,10 @@ export function FieldView({
   ctx: FieldContext;
 }) {
   const label = schema.title ?? humanize(name);
+  const unset = unsetKind(schema, value);
+  if (unset) {
+    return <FieldRow label={label} schema={schema} value={value} path={path} ctx={ctx} unset={unset} />;
+  }
   if (schema.type === 'object' && 'properties' in schema) {
     const record = isRecord(value) ? value : null;
     return (
@@ -56,18 +60,33 @@ export function FieldView({
   return <FieldRow label={label} schema={schema} value={value} path={path} ctx={ctx} />;
 }
 
+/**
+ * How an absent value is authored, when the schema allows it. A missing value is
+ * only valid for an optional field and an explicit null only for a nullable one;
+ * anything else is left to the normal type check, which reports a mismatch.
+ */
+export type UnsetKind = 'omitted' | 'null';
+
+export function unsetKind(schema: FieldSchema, value: unknown): UnsetKind | null {
+  if (value === undefined) return schema.optional === true ? 'omitted' : null;
+  if (value === null) return schema.nullable === true ? 'null' : null;
+  return null;
+}
+
 function FieldRow({
   label,
   schema,
   value,
   path,
   ctx,
+  unset,
 }: {
   label: string;
   schema: FieldSchema;
   value: unknown;
   path: readonly string[];
   ctx: FieldContext;
+  unset?: UnsetKind | undefined;
 }) {
   const id = fieldDomId(ctx.entity, ctx.component, path);
   const messageId = useId();
@@ -86,14 +105,18 @@ function FieldRow({
         {label}
       </label>
       <div className="field__value">
-        <ValueControl
-          id={id}
-          fieldKey={path[path.length - 1] ?? ''}
-          schema={schema}
-          value={value}
-          invalid={severity === 'error'}
-          describedBy={describedBy}
-        />
+        {unset ? (
+          <UnsetControl id={id} schema={schema} unset={unset} describedBy={describedBy} />
+        ) : (
+          <ValueControl
+            id={id}
+            fieldKey={path[path.length - 1] ?? ''}
+            schema={schema}
+            value={value}
+            invalid={severity === 'error'}
+            describedBy={describedBy}
+          />
+        )}
       </div>
       {problems.length > 0 ? (
         <ul className="field__problems" id={messageId}>
@@ -215,6 +238,48 @@ function ValueControl({
     default:
       return <Unsupported id={id} type={schema.type} value={value} />;
   }
+}
+
+/**
+ * Quiet, read-only presentation of an optional value that is not authored. An
+ * optional settings group (an object, such as a light's shadows) is a feature
+ * that is off while absent; an optional scalar is simply not set. The accessible
+ * description says which authored form produced it, so null and omission stay
+ * distinguishable without adding visual noise.
+ */
+function UnsetControl({
+  id,
+  schema,
+  unset,
+  describedBy,
+}: {
+  id: string;
+  schema: FieldSchema;
+  unset: UnsetKind;
+  describedBy: string | undefined;
+}) {
+  const hintId = `${id}-unset`;
+  const text = schema.type === 'object' ? 'Off' : 'Not set';
+  const hint =
+    unset === 'null'
+      ? 'Optional value, set to null in the document.'
+      : 'Optional value, not present in the document.';
+  return (
+    <span className="control control--unset" data-unset={unset} title={hint}>
+      <input
+        id={id}
+        className="control__input"
+        aria-labelledby={`${id}-label`}
+        aria-describedby={[hintId, describedBy].filter(Boolean).join(' ')}
+        readOnly
+        aria-readonly
+        value={text}
+      />
+      <span id={hintId} className="visually-hidden">
+        {hint}
+      </span>
+    </span>
+  );
 }
 
 const AXES = ['X', 'Y', 'Z', 'W'] as const;
