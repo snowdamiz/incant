@@ -126,7 +126,9 @@ Keychain prompts. Windows/Linux retain their OS stores. The
 limits. Per the director’s CI acceptance decision, all three desktop hosts now
 pass real-backend synthetic credential persistence across changed executables,
 cleanup and auth regression tests. [CI evidence](evidence/desktop-credentials-2026-10-08.json).
-API-key live inference and live revocation remain pending.
+API-key fallback is covered by automated protocol/storage tests; no separate
+live key is required for the verified OAuth workflow. Live revocation
+verification remains pending.
 
 ## Spike 6: Claude ACP handoff — local evidence passed
 

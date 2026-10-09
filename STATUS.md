@@ -33,14 +33,17 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
   gate ledger and GitHub workflow source.
 
 See [written evidence and limitations](docs/spikes/phase-0.md). Fifty-four Rust
-behavior tests, 223 UI/bridge tests and five Python tool tests pass after integration. The thousand-entity script benchmark meets the local
-frame budget within its documented workload.
+behavior tests, 223 UI/bridge tests and five Python tool tests pass after
+integration. The thousand-entity script benchmark meets the local frame budget
+within its documented workload.
 
 ## Active work
 
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing
-  page has the matching palette in PR #2. See
+  page has the matching palette in PR #2. Claude is expanding it around PLAN.md's
+  planned modeling/content tools and other product capabilities, using source
+  edits and terminal builds while the capture restriction remains in force. See
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
   routes by focus; automated tests pass, but its final native interaction check
   remains pending. **Computer use, browser automation and screen capture are
@@ -68,18 +71,23 @@ frame budget within its documented workload.
   present in the downloaded APK. [Android emulator execution also passed](docs/spikes/evidence/android-emulator-2026-10-08.json):
   both activity launch and native instrumentation ran the document/120-tick probe.
   Nightly history remains a distinct requirement. All source, desktop editor and
-  credential checks also passed on 1045f4f. The newly integrated UI/menu revision
-  has passed local checks and awaits its own remote results.
+  credential checks also passed on 1045f4f. The integrated UI/menu/sign-out revision
+  **d87436f** has now passed all four workflows: source checks, Windows/Linux
+  editor builds and renderer probes, three-desktop credential persistence, and all
+  six platform probes. The evidence files retain the exact revision and run links.
 
 ## External prerequisites still required
 
-- Private repository created at https://github.com/snowdamiz/incant. The bootstrap
+- Repository: https://github.com/snowdamiz/incant. The bootstrap
   is on main; implementation is in draft PR #1 on impl/phase0-foundation.
   The director remains responsible for merging.
 - Physical-device
   coverage, self-hosted graphics/device runners, and nightly artifact history.
 - Apple/Windows distribution signing, store/developer accounts, staffing and the
   director's phase gate approvals. These are human-only under PLAN.md.
+
+[Phase 0 review checklist](docs/gates/phase0-review.md) maps requirements to evidence
+and distinguishes the remaining director decisions.
 
 `python3 tools/check_gate.py` reports remaining evidence. No source-code scaffold,
 mock response, simulator build or unsigned package counts as a shipped product.

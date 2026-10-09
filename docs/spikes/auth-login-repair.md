@@ -175,5 +175,15 @@ Six new isolated tests cover cleanup, identity mismatch, remote failure, local
 failure, selection persistence across reopen, and API-key sign-out. They use
 synthetic records and temporary metadata directories; they never access the
 current provider account or contact OpenAI. All 54 local Rust behavior tests and
-workspace Clippy pass, and the development app rebuilds. These tests do not satisfy
-the outstanding live API-key inference or live revocation evidence requirement.
+workspace Clippy pass, and the development app rebuilds. These tests do not establish live server revocation.
+
+## API-key validation scope
+
+The director questioned the need for a separate API key because real OAuth sign-in
+and inference already work. No additional key is required from the director. The
+fallback remains implemented: automated loopback HTTP tests exercise model-list
+validation, inference authorization and terminal API-key failure handling; desktop
+CI exercises the credential stores. These are explicitly automated evidence, not
+live API-key usage. The extra live-key check is deferred rather than a prerequisite
+for continuing the verified OAuth workflow. Live revocation verification
+remains separate, without disconnecting the director’s saved account.

@@ -8,7 +8,7 @@ Retain axum and Postgres for optional Incant cloud metadata, licensing and sync.
 
 ## Evidence and implementation boundary
 
-The editor and CLI share loopback PKCE, callback and ID-token validation, API-key fallback, refresh serialization and disconnect. Real macOS browser sign-in, refresh, persistence across changed development builds and live agent inference pass. The saved session completed a twenty-task evaluation with 19 passes. The director replaced manual Windows/Linux sign-in with CI builds and automated protocol/storage checks, which passed on all three desktop hosts. Live API-key inference and live revocation remain pending. See [login repair evidence](../spikes/auth-login-repair.md).
+The editor and CLI share loopback PKCE, callback and ID-token validation, API-key fallback, refresh serialization and disconnect. Real macOS browser sign-in, refresh, persistence across changed development builds and live agent inference pass. The saved session completed a twenty-task evaluation with 19 passes. The director replaced manual Windows/Linux sign-in with CI builds and automated protocol/storage checks, which passed on all three desktop hosts. API-key fallback uses automated protocol/storage evidence; a separate live key is not required for the verified OAuth workflow. Live revocation verification remains pending. See [login repair evidence](../spikes/auth-login-repair.md).
 
 ## Consequences and revisit trigger
 

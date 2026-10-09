@@ -68,8 +68,9 @@ The CLI makes direct requests to OpenAI. It never reads Codex/Claude credentials
 Browser sign-in, session renewal, persistence across development rebuilds and
 live scene editing are verified on macOS. At the director’s request, Windows/Linux
 use CI builds, protocol tests and real-backend synthetic credential persistence in
-place of manual sign-in checks. Live API-key inference and revocation still need
-verification.
+place of manual sign-in checks. API-key fallback is covered by automated protocol
+tests; no additional live key is needed for the verified OAuth workflow. Live
+revocation verification remains separate.
 
 ```sh
 tools/cargo run -p incant_headless -- auth login

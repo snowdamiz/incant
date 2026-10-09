@@ -47,5 +47,43 @@
       "classes.dex"
     ],
     "device_execution": false
+  },
+  "integrated_editor_followup": {
+    "source_commit": "d87436fe500d9a96ef928d1574c636ecfa4ce39b",
+    "workflow": "https://github.com/snowdamiz/incant/actions/runs/37877461776",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "web",
+        "conclusion": "success",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37877461776/job/113649245271"
+      },
+      {
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "conclusion": "success",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37877461776/job/113649245404"
+      },
+      {
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "conclusion": "success",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37877461776/job/113649245489"
+      },
+      {
+        "name": "ios",
+        "conclusion": "success",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37877461776/job/113649245494"
+      },
+      {
+        "name": "android",
+        "conclusion": "success",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37877461776/job/113649245522"
+      },
+      {
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "conclusion": "success",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37877461776/job/113649245543"
+      }
+    ],
+    "scope": "All six hosted platform probes built, executed and uploaded artifacts. Android includes emulator activity and native instrumentation. This is a PR-triggered run, not nightly history, a shipped game or signed distribution."
   }
 }
