@@ -2,8 +2,21 @@
 
 ## Status
 
-Current round (range rim and native captures): complete, pending Astra's
-integration run and refreshed native captures. See "Round 3" at the end.
+**Final round (integrated review): complete. No remaining material defect
+within this handoff's scope. No new code change was needed.** See "Round 4"
+at the end.
+
+- Integrated runtime is 2ee02d0 / 00dfbd1. The final GPU images match my
+  independent local run, and every final oracle pair and CLI Undo/Redo hash
+  identity was verified directly.
+- Every defect raised in earlier rounds is closed: the range rim, X/Y/Z
+  colour labels, invisible light units and the uninspectable spot aim.
+- Inspector scrolling at minimum size: verdict is no correction required.
+  The reasons are in Round 4.
+- Not approved here: production lighting, any phase gate, or publication of
+  account-bearing native images.
+
+Round 3 summary, kept as history:
 
 - Range rim: fixed in `crates/incant_render/src/lighting/shade.wgsl` with a
   squared quartic window, as the brief directed. All 17 `model_gpu` GPU tests
@@ -676,3 +689,177 @@ Regenerated locally by the real GPU test, after change 1:
 - `artifacts/cluster-final/*.png` (22 images, including 4 oracles).
 
 No screenshots were fabricated, and no shell-native capture was used.
+
+# Round 4: integrated final review
+
+Everything above is preserved history. This round reviews the integrated
+runtime: 2ee02d0, plus 00dfbd1, which only fixes an account-dialog test
+race. The initial images are historical only.
+
+## Director feedback acknowledged (round 4)
+
+- All corrections are integrated. Astra reports passing results for 135 Rust
+  behaviour tests, 24 real GPU checks, 283 UI tests, workspace Clippy,
+  generated files, SDK typecheck and the native release build. My range fix
+  passes Astra's new regression, which failed on the original shader. I did
+  not re-run Astra's full matrix this round. The independent checks I did run
+  are listed below.
+- Native schemas now emit RGB widget hints and cd, lx, m and degree units.
+  The spot and directional probes carry explicit identity Transforms.
+- Handoff 0016's two-line label fix is integrated and approved. I was allowed
+  to make a focused Inspector scroll-affordance fix only if 05 and 06 still
+  showed a material UX problem. They do not, so I made no change.
+- Account identity: not transcribed. No account-bearing image is committed or
+  published. All images remain git-ignored.
+
+## Final GPU evidence (artifacts/cluster-final/, verified directly)
+
+Oracle and CLI identity, decoded pixel comparison:
+
+| Capture | Compared with | Result |
+|---|---|---|
+| spatial-overflow-96-640x480 | its -oracle | pixel-identical |
+| spatial-overflow-96-513x385 | its -oracle | pixel-identical |
+| depth-boundary-patches-640x480 | its -oracle | pixel-identical |
+| depth-boundary-patches-513x385 | its -oracle | pixel-identical |
+| cli-undo-point, cli-restored-point, cli-source-free-point | cli-authored-point | pixel-identical |
+| cli-redo-point | cli-dimmed-point | pixel-identical |
+| cli-dimmed-point | cli-authored-point | differs (intensity edit), as expected |
+
+Reproducibility: I compared the final images with my independent round 3 run
+of all GPU tests in the same worktree (`artifacts/cluster-final-all/`). All 33 non-oracle
+shared images match exactly, except one pixel in each spatial-overflow-96
+image, which differs by one code value. Oracle identity holds within each run,
+so this is a cross-run rounding difference in the 96-light sum, not an
+assignment difference.
+
+Changes from the historical initial images:
+
+| Images | Max change | Verdict |
+|---|---|---|
+| point-near/far, outside-range, spot-*, directional-red, disabled, cluster-64/65/128 | 0 | Pass: byte-identical, initial verdicts stand |
+| punctual-hdr-*, punctual-low-dielectric-*, cli-* | 1 | Pass: inverse square preserved where range is far |
+| visible-range-edge, both sizes | 39 | Pass: rim removed (below) |
+| spatial-overflow-96, both sizes | 16 | Pass: small-range windows, smoother, oracle-identical |
+| spatial-clusters, three sizes | 10 | Pass: small-range windows, no seams |
+| depth-boundary-patches, both sizes | 10 | Pass: grid pattern intact, oracle-identical |
+
+Range edge, final, linear red stepping inward from the left cutoff:
+
+    640x480: 0.0009, 0.0040, 0.0086, 0.0152, 0.0232
+    513x385: 0.0018, 0.0065, 0.0144, 0.0242, 0.0382
+
+The steps grow inward, so the falloff eases into zero. The worst seam score
+at the cutoff is 0.56 for 640x480 and 0.92 for 513x385, against 3.40 and
+4.59 originally. Tile lines are at the noise floor. No clipping anywhere
+except near-white specular cores, with no hue ring at the clip.
+
+New regression fixture: `range-98-percent` and `range-99-percent`, both
+321x181. The light sits at 98% and then 99% of its 2 m range from the
+surface.
+
+| Capture | Peak sRGB | Peak linear |
+|---|---|---|
+| range-98-percent | 135 | 0.2423 |
+| range-99-percent | 70 | 0.0612 |
+
+    measured ratio 3.96
+    C1 window prediction  3.961
+    old C0 window         2.01
+
+Both are small soft discs with no ring. **Pass.** The measurement
+independently confirms the shipped window is the C1 form.
+
+## Final native capture review (artifacts/lighting-native-final/, real CUA)
+
+| Capture | Size | Verdict |
+|---|---|---|
+| 01-point-dim-wide | 1440x900 | Pass. Color reads R 1, G 0.8, B 0.5. Intensity 60 cd, Range 100 m. Viewport highlight warm near-white, no seam. |
+| 02-point-undo-bright | 1440x900 | Pass. Undo restores 300 cd. Larger highlight, Redo enabled. |
+| 03-point-redo-dim | 1440x900 | Pass. Redo restores 60 cd. Viewport matches 01, Redo disabled. |
+| 04-spot-wide | 1440x900 | Pass. R/G/B, cd, m and ° units. Identity Transform now shown, so aim (local -Z) is inspectable. Zero intensity leaves the viewport unchanged, as intended. |
+| 05-spot-minimum | 1000x650 | Pass, see the scroll verdict. Last visible row partly cut at the Agent boundary. |
+| 06-spot-minimum-scrolled | 1000x650 | Pass. Outer degrees and the full Transform are reached by scrolling inside the Inspector. |
+| 07-directional-minimum | 1000x650 | Pass. Intensity shows lx. Overlay scrollbar visible at the right edge during interaction. Transform present. |
+
+Viewport (all captures): the sphere lighting matches the headless fixtures.
+Edges are aliased because no antialiasing exists, and the rim is dark because
+no ambient term exists. Both are known limits, not defects. Units align
+right in the field. The degree glyph sits high, which is normal for the
+glyph and does not affect legibility.
+
+## Scroll-affordance verdict (05 and 06)
+
+**No correction required in this handoff.** Field access works through
+scrolling, as 06 shows. The minimum-size presentation is not a material UX
+problem, for four reasons:
+
+1. In 05 the last visible row is visibly cut at the Agent panel boundary. A
+   partly visible row is itself a standard cue that the region continues.
+2. The Inspector uses the platform overlay scrollbar, which appears during
+   interaction (visible in 07). That matches the Hierarchy and the other
+   scroll regions, so adding an Inspector-only cue would make the editor
+   inconsistent.
+3. The Inspector/Agent split is user-resizable by pointer and keyboard
+   ("Resize agent panel", minimum 180 px), so a user can trade Agent height
+   for Inspector height at small window sizes.
+4. Handoff 0016 just approved this Inspector baseline. Changing it for a
+   non-material issue would add risk without a clear benefit.
+
+Non-blocking suggestion for a future layout pass, not this handoff: at
+small heights, the Agent panel could default to its minimum height while no
+provider is attached, since it then only shows a static "Agent not ready"
+message. Any edge-fade cue should be applied to every scroll region at once,
+not to the Inspector alone.
+
+## Defect ledger (final)
+
+| Raised | Item | Final state |
+|---|---|---|
+| Follow-up | Range cutoff slope crease | Closed: C1 window (8a5cf38), regression ratio 3.96 |
+| Follow-up | Depth patches 00/01 flattened | Closed: intended 1 cm floor, not a cluster omission |
+| Follow-up | Dielectric sweep saturated | Closed: punctual-low-dielectric-* |
+| Follow-up | Oracle shares shading code | Limit stands: covered by analytic regressions such as the range ratio, not by the oracle |
+| Round 3 | Color shown as X/Y/Z | Closed: R/G/B in native 01, 04 and 07 |
+| Round 3 | Light units invisible | Closed: cd, lx, m and ° in native captures |
+| Round 3 | Minimum-size Inspector clipping | Closed: reachable by scrolling, no correction required |
+| Round 3 | Spot aim not inspectable | Closed: identity Transform shown in 04 and 06 |
+| Round 3 | Account identity in captures | Standing handling rule: images stay git-ignored and are never published |
+
+## Remaining limits (not defects in this increment)
+
+- Production lighting is not approved. There are no shadows, antialiasing,
+  exposure controls, mobile tiers or complete render graph.
+- No phase gate approval by this review.
+- Native captures contain account identity. Crop or redact before any
+  publication. None is committed.
+- The quaternion rotation shows aim numerically only. A visual direction
+  gizmo would be a later editor feature, not required here.
+
+## Commands run (round 4)
+
+    python3 -I artifacts/review0017/ident.py   artifacts/cluster-final   # oracle and CLI identity
+    python3 -I artifacts/review0017/before_after.py artifacts/cluster-final-all artifacts/cluster-final
+    python3 -I artifacts/review0017/before_after.py artifacts/cluster-initial artifacts/cluster-final
+    python3 -I artifacts/review0017/edge2.py   artifacts/cluster-final   # range-edge linear steps
+    python3 -I artifacts/review0017/seams.py   <final range, overflow and patch pngs>
+    python3 -I artifacts/review0017/stats.py   artifacts/cluster-final/*.png
+    # inline decode of range-98/99-percent peaks and ratio (same decoder)
+
+All ran successfully. Scripts are git-ignored in `artifacts/review0017/`.
+
+## Changed paths (round 4)
+
+- `handoffs/0017-clustered-lighting/result.md` (this file)
+
+The brief was already committed at 1f8033f and is unchanged in this
+worktree. No source, test, CSS or schema change was made this round.
+
+## Screenshot paths (round 4, reviewed, not produced)
+
+- `artifacts/cluster-final/`: 45 PNGs, including 4 oracles, the range-98 and
+  range-99 regression captures, and 6 CLI captures.
+- `artifacts/lighting-native-final/`: 01-point-dim-wide, 02-point-undo-bright,
+  03-point-redo-dim, 04-spot-wide, 05-spot-minimum,
+  06-spot-minimum-scrolled and 07-directional-minimum (JPEG, account-bearing,
+  git-ignored).
