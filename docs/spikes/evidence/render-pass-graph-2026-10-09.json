@@ -9,7 +9,7 @@
     "ui_tests": 283,
     "python_tool_tests": 5,
     "clippy": "workspace all targets release passed",
-    "generated_files_and_sdk": "passed",
+    "generated_files_and_sdk": "Conventions/bridge/SDK passed; camera schema snapshot corrected by d9ace60 and integrated. Second headless schema generation produces no diff.",
     "native_build": "custom-protocol release build and packaging after all workspace test builds passed"
   },
   "pixel_comparison": {
@@ -1643,7 +1643,7 @@
     "output-collapsed.jpg": "8d0768c09b8a84a4659ed334083286e9e785afbf7ed42fbd51a8c1da3b79f001",
     "output-open.jpg": "f4675276095e0cb8aaf4be5da82c80385c79f9355f48bfcad569292d90cdba39"
   },
-  "native_check": "CUA: attached surface, 0 errors/warnings before and after collapsing output; layout restored, app closed. Claude pixel review pending.",
+  "native_check": "CUA: attached surface, 0 errors/warnings before and after collapsing output; layout restored, app closed. Claude pixel review passed, including final fixture follow-up.",
   "timing": {
     "baseline_commit": "83c98a7186d25ad6530a7320675cd4d3fe6e86f3",
     "timestamp_utc": "2026-10-09T21:06:05Z",
@@ -3322,7 +3322,13 @@
       }
     ]
   },
-  "visual_review": "pending handoff 0020",
+  "visual_review": {
+    "initial_commit": "1494fda",
+    "final_commit": "92a4714",
+    "model": "Claude Opus 5.5 via ACP",
+    "verdict": "pass; no open pixel-evidence gaps",
+    "independent_checks": "Initial 30 renderer GPU cases pass; final stable light fixture passes five separate-process reruns, lifetime test passes two and all eight final fixture PNGs reproduce exactly. Native composition reviewed."
+  },
   "verification_logs_sha256": {
     "graph-workspace.log": "56b64c6b22fb9be50089b6646c1ea3db62f641919e812543df7aa6ac6db616fe",
     "graph-gpu-unit.log": "7d3159aab0bb074e90450fb0c76a06d37490e3d0b3703b877eaa04aa7607a2c4",
@@ -3332,7 +3338,15 @@
     "graph-tools.log": "67f1bec1d1944f37610c5253d38eae3b25b79e995c8a7c81043c0b8e269a6bd0",
     "graph-ui-build.log": "261ff8df3836db5e32af90d32ded2641b671a34403dd3f73a8a1e9515ee6e685",
     "graph-native-build.log": "f1dd73fd0d3185f0cb0b8dc459948e056918de1d223461f6ae6a2079d6cf7d7a",
-    "graph-native-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1"
+    "graph-native-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1",
+    "graph-final-clippy.log": "dd046e5e09e06235995dd522d5a55a53e1d5af45ea6b1f49c5b8e0790b5233d1",
+    "graph-final-gpu-unit.log": "2864e7d3ba957383574dcc86c2c3d254602312de0437a1c84def3b39735753cb",
+    "graph-final-gpu-model.log": "65662cd96e5bcf2e01bbe451af24b13a411874d3b98f0b4c93a34c4b381cd2d2",
+    "graph-final-native-build.log": "db7ce6990dfe9b50a2a6b1ec274713550a0035eba0cc61275e05974c0d3a5a79",
+    "graph-final-native-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1",
+    "graph-final-stability.log": "39244518f0601fab7fe61098c61d95925c54d4dc3921752d5db71d7615be716a",
+    "graph-final-lifetime.log": "435933ccc7b06d4e655b0c8fe1b716b0e9192731ed6c3a1b06975250a6e0988b",
+    "camera-schema-check.log": "ded1788f83674adf1b82636171458b509b7ce1fa5e51e821f1f4df6b5e3199e7"
   },
   "limitations": [
     "Internal fixed pass schedule; no automatic resource aliasing, multi-view rendering or parallel encoders.",
@@ -3340,5 +3354,38 @@
     "Shadows, SSAO, bloom, TAA and mobile feature tiers remain open.",
     "Fenced synthetic frame timings exclude loading, readback, presentation and simulation; no named game/device gate.",
     "All caller-retained command buffers can retain their GPU resources; idle cache bounds are not a total queued-frame cap."
-  ]
+  ],
+  "final_fixture_png_sha256": {
+    "graph-retained-model-0.png": "82e27ea26a36e163b78b32138969de0106533e1b419a20f6f00cdb10452a2ffa",
+    "graph-retained-model-1.png": "32e23ed4fe6c073771b24e00a0b9dc37c3bd95de278591e7b0c02c2e182a6a4a",
+    "graph-retained-model-2.png": "ba146f366a29ac8fbf9154cfcb39aa208183128acb37768b7e46ffa2f4abb7ab",
+    "graph-retained-model-3.png": "fba11043c9f71470eea6c0019e8710fa9a100166657bbe941219d3d3c4ddf2fb",
+    "spatial-overflow-96-513x385-oracle.png": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44",
+    "spatial-overflow-96-513x385.png": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44",
+    "spatial-overflow-96-640x480-oracle.png": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a",
+    "spatial-overflow-96-640x480.png": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a"
+  },
+  "fixture_stability": [
+    {
+      "name": "spatial-overflow-96-513x385-oracle.png",
+      "sha256": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44",
+      "separate_processes_identical": true
+    },
+    {
+      "name": "spatial-overflow-96-513x385.png",
+      "sha256": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44",
+      "separate_processes_identical": true
+    },
+    {
+      "name": "spatial-overflow-96-640x480-oracle.png",
+      "sha256": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a",
+      "separate_processes_identical": true
+    },
+    {
+      "name": "spatial-overflow-96-640x480.png",
+      "sha256": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a",
+      "separate_processes_identical": true
+    }
+  ],
+  "coverage_followup": "Four reverse-submitted frames retain model versions and alternate active local-light bits; final two frames share exact geometry, viewport and grid shape. Existing lighting viewport test also already submits commands out of encoding order."
 }

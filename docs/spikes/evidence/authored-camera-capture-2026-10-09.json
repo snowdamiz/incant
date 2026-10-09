@@ -277,5 +277,13 @@
     "initial_attempt": "16,000-token budget rejected by conservative reservation; not counted as a successful live turn"
   },
   "final_coverage_and_metadata": "fda9745",
-  "development_bundle": "artifacts/Incant.app rebuilt and packaged after the final custom-protocol build"
+  "development_bundle": "artifacts/Incant.app rebuilt and packaged after the final custom-protocol build",
+  "hosted_followup": {
+    "original_head": "83c98a7186d25ad6530a7320675cd4d3fe6e86f3",
+    "source_failure": "Generated agent-tools schema snapshot was stale; runtime/GPU checks preceding schema verification passed. Windows/Linux desktop and all three credential-storage jobs passed.",
+    "corrected_head": "d9ace604e5de5d3aceaa17406c96b5ce33400b06",
+    "local_check": "Second headless schema generation produces no diff; generated SDK check passes.",
+    "exact_head_hosted": "pending",
+    "failed_log_sha256": "f4ccde5592d01c254e6d81531adcb8078381c11e0b86b0d2d943dc8514ed164f"
+  }
 }

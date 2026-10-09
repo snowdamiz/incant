@@ -50,12 +50,16 @@ rather than being represented by unused placeholder nodes.
 ## Verification
 
 The existing HDR, material, lighting, camera, editor and playback GPU cases run
-through the schedule. A new GPU lifetime case prepares three different imported
+through the schedule. A new GPU lifetime case prepares four frames with three different imported
 model versions at alternating sizes, records frames, injects rejected viewport
 requests, drops the scenes/store/project and deletes their files. It verifies
 that the graph retains no CPU frame or encoder resource, submits commands in
 reverse order, and compares every output byte against its immediate reference.
-A subsequent model-free frame must contain only the display background.
+Two stable local lights alternate between a nearby and offscreen position. The
+last two frames use identical geometry, size and mask word count, so they reuse
+the same cluster buffer while selecting different light bits. Their immediate
+references must differ; all reverse-submitted frames must match their own
+reference. A subsequent model-free frame must contain only the display background.
 
 The combined checks pass 139 ordinary Rust tests, 33 GPU cases (6 renderer unit,
 24 renderer integration, 2 headless and 1 editor), 283 UI tests, five Python tool
@@ -69,8 +73,14 @@ Four captures differ by one channel value in one pixel (513×385) or two pixels
 (640×480). These are the 96-light fixture and its all-light counterpart; each
 current clustered/oracle pair remains exact. The fixture creates fresh ULIDs,
 so separate runs can sum the same lights in different floating-point order.
-Claude's review is pending; numerical comparisons are not visual approval.
-Three additional positive-coverage captures exercise the new lifetime test.
+Claude's initial review `1494fda` approved all reviewed appearance and independently
+reproduced the baseline bytes with the scheduled code in repeated processes.
+Following that review, the 96-light fixture now uses stable ULIDs; two separate
+runs produce exactly the same four PNGs. The expanded lifetime fixture now has
+four lit captures with alternating local-light membership. Claude's final
+review `92a4714` passes with no open pixel-evidence gaps; five independent
+stability runs and two lifetime runs reproduce the final files. The original baseline comparison is retained as historical evidence;
+no runtime/shader changes accompanied these test improvements.
 
 Three paired trials at 1920×1080, five warm-up frames and thirty measured frames
 per path/trial, use the identical cooked sphere/light-lattice projects from the

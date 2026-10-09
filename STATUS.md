@@ -57,7 +57,10 @@ within its documented workload.
   dependencies and owned frame resources. Reverse-order queued submission after
   scene/source disposal passes. 139 Rust, 33 GPU and 283 UI tests, Clippy and the
   native build pass; 120/124 baseline PNGs match exactly, four differ at one/two
-  pixels by one channel level. Paired timings are stable. Claude review is pending. Production shadows/post-effects remain open. See
+  pixels by one channel level. Those light fixtures now use deterministic IDs;
+  repeated captures are exact. Claude approved the final fixtures/native images.
+  Paired timings are stable; hosted checks are next. Production shadows and
+  post-effects remain open. See
   [render-pass scheduling](docs/spikes/render-pass-graph.md).
 
 - Authored Camera selection is connected to renderer captures, public CLI,
@@ -68,7 +71,9 @@ within its documented workload.
   139 Rust, 32 GPU and 283 UI tests, Clippy and the native release build pass.
   Claude approved all 36 captures, including independent skewed-basis checks.
   A live saved-account agent captured the exact camera with no edits or login
-  prompts. Ready for hosted checks; no editor camera-selection control is claimed.
+  prompts. Hosted desktop/credential checks pass; the source job found a stale
+  generated tool-schema snapshot, corrected at `d9ace60`. Exact-head reruns are
+  pending. No editor camera-selection control is claimed.
   See [authored camera evidence](docs/spikes/authored-camera-capture.md).
 
 - Cluster membership masks replace overflow fallback in the next lighting
@@ -230,7 +235,7 @@ within its documented workload.
   editor/agent imports with the redesigned asset workspace #8, and runtime scene
   projection #9, imported GPU geometry #10, native source watching #11 and headless
   playback #12, material previews #13, structured runtime logs #14, HDR output #15
-  and authored environments #16. The site deployed at
+  authored environments #16, clustered lights #17 and exact light masks #18. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
   before merge. Current Phase 1 work is tracked above. Merging does not approve a phase gate.
