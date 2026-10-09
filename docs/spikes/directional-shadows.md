@@ -79,3 +79,10 @@ No account login or Keychain prompt occurred.
 The shadow retention GPU case also reimports wider geometry, confirms a changed
 new frame and an exact original frame from the retained scene. This checks
 caster-bounds and geometry-version coherence across cache replacement.
+
+Claude recommended separating the shadow lookup offset from the normal-mapped
+shading normal. An analytical mirrored-normal fixture reproduces the old defect:
+the same geometric boundary changes by up to12 channel levels. Passing the
+unperturbed interpolated surface normal to the shadow lookup fixes that test;
+BRDF and environment shading still use the normal map. Combined checks and
+Claude review of the correction remain pending.

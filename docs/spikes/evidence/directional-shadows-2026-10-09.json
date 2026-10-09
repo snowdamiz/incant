@@ -2499,5 +2499,14 @@
     "result": "pass; new geometry changes current frame while retained old scene reproduces original shadow exactly",
     "log_sha256": "23aec23595c04d7aeb541fde506b2caf5d4b047ccb7d1900c100b1b4759651f3",
     "capture_sha256": "07e13ca061ee66d52f7d3093f40117600dfdf4c47c7de7876798790921777ab6"
+  },
+  "normal_map_shadow_offset_fix": {
+    "source": "Claude look-dev recommendation reproduced by Astra",
+    "before": "Opposing tangent-X normal maps change the geometrically symmetric shadow boundary at81 central-column pixels by up to12 channel levels",
+    "after": "Unperturbed interpolated surface normal supplies the shadow offset; mapped normal still supplies BRDF/IBL. Targeted GPU regression passes; full checks pending.",
+    "logs_sha256": {
+      "shadow-normal-before.log": "60a338584a7a4197310795a9bd388203761b37d396d9a74f40a3fdb38894cce5",
+      "shadow-normal-after.log": "11289c79416ec185e33c3121b407930a48e185b666562d820b4fc62eb45d4551"
+    }
   }
 }
