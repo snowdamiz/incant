@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-09",
+  "platform": "macOS",
+  "native_build": "3cb5c8b",
+  "source_watch_code_base": "25e455c",
+  "cache_integration": "1eba8ab",
+  "local_checks": {
+    "rust_behavior_tests": 115,
+    "gpu_tests_explicit": 2,
+    "ui_bridge_tests": 282,
+    "clippy": "passed",
+    "ui_build": "passed",
+    "native_release_custom_protocol_build": "passed",
+    "main_js_gzip_kib": 101.62
+  },
+  "native": {
+    "external_dependency_edit_reimports": true,
+    "undo_restores_and_survives_polling": true,
+    "redo_restores_changed_geometry": true,
+    "malformed_source_keeps_last_valid_geometry": true,
+    "source_error_does_not_create_transaction": true,
+    "repair_with_changed_geometry_reimports_and_clears_error": true,
+    "history_tab_signals_source_error": true,
+    "source_path_separate_from_message": true,
+    "identical_repair_does_not_create_transaction": true,
+    "saved_account_restored_without_login": true,
+    "reopened_app_restores_history_and_geometry": true,
+    "journal_recovery": {
+      "recovered_revision": 6,
+      "history": [
+        {
+          "actor": {
+            "actor": "model",
+            "conversation_id": null,
+            "model": null,
+            "origin": "import"
+          },
+          "commands": 1,
+          "description": "Import triangle",
+          "id": "01M4GRH58NSF322RNP59CWXEG4"
+        },
+        {
+          "actor": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user"
+          },
+          "commands": 4,
+          "description": "Renderer geometry probe",
+          "id": "01M4GRH5A6TR6WJD4TXH3KDRAN"
+        },
+        {
+          "actor": {
+            "actor": "source-watch",
+            "conversation_id": null,
+            "model": null,
+            "origin": "import"
+          },
+          "commands": 1,
+          "description": "Reimport changed sources",
+          "id": "01M4GS3R5WJ3T3XXSVVA51BGE9"
+        },
+        {
+          "actor": {
+            "actor": "source-watch",
+            "conversation_id": null,
+            "model": null,
+            "origin": "import"
+          },
+          "commands": 1,
+          "description": "Reimport changed sources",
+          "id": "01M4GS7BX5T3607VA2QXQSBZWD"
+        }
+      ],
+      "saved": true,
+      "asset_fingerprint": "44da6afb10e6a38fdc8d8a867044f41b126648987b0fd8cf038e9f4148feb79d",
+      "record_count": 7
+    },
+    "captures_private": true,
+    "capture_sizes": [
+      [
+        1440,
+        900
+      ],
+      [
+        1000,
+        650
+      ]
+    ],
+    "display_scale": 1
+  },
+  "visual_review": {
+    "verdict": "PASS",
+    "review_commit": "dfac541",
+    "model": "Claude Opus 5.5",
+    "transport": "ACP",
+    "native_error_row_full_detail_at_minimum": true,
+    "long_tokens_and_entity_focus_browser_fixture_only": true
+  },
+  "hosted_checks": "pending",
+  "limits": [
+    "Polling hashes registered source bytes; no production IO or memory budget claimed.",
+    "Source IO/cooking cannot yet be forcibly cancelled; closed-app results are discarded.",
+    "No user watcher controls/configuration yet.",
+    "Diagnostic monochrome geometry only; production lighting/materials/camera remain open."
+  ]
+}
