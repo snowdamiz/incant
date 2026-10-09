@@ -633,6 +633,14 @@
   color: var(--color-text-subtle);
 }
 
+/* "Model · Updates “name”": a quiet separator so the type and the update note read apart
+   (native review, revision 5). Decorative only; the two spans are already separate text. */
+.import-row__type + .import-row__existing::before {
+  content: '·';
+  margin-right: var(--space-3);
+  color: var(--color-text-subtle);
+}
+
 .import-row__existing {
   min-width: 0;
   overflow: hidden;
