@@ -12,6 +12,6 @@
   },
   "bundle": {
     "active": false,
-    "icon": ["icons/icon.png", "../ui/brand/Incant.icns"]
+    "icon": ["icons/icon.png", "icons/icon.ico", "../ui/brand/Incant.icns"]
   }
 }

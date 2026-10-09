@@ -38,10 +38,14 @@ frame budget within its documented workload.
 
 - Claude completed the macOS native-window review, including traffic-light
   alignment, rounded GPU viewport, resizing and screenshots. The connected-account
-  UI is integrated. Per the director's 2026-10-08 decision, Windows/Linux manual
+  UI is integrated. Claude is now redesigning the editor to match the landing
+  page’s connected panels, at the director’s request (handoff 0006).
+  Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are
-  being verified; no additional desktop machines or interactive logins are needed.
+  being verified; Linux editor tests/build/readback passed. Windows exposed a
+  missing ICO; Claude supplied the approved wisp asset and the rerun is pending.
+  No additional desktop machines or interactive logins are needed.
 - The real twenty-task evaluation completed with the director's saved session:
   **19/20 passed**, exceeding the 14/20 score threshold. The ten-step case reached
   the expected state but returned an incomplete provider response and is counted
