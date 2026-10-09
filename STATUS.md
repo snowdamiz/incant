@@ -64,11 +64,13 @@ within its documented workload.
   platform marks and the subsequent workflow correction are integrated in PR #2.
   Each workflow icon has a short visible explanation and tighter spacing; all 23
   hosted checks passed on bf99437. Visual review is resuming under the new permission. See
-  [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
-  routes by focus; automated tests pass, but its final native interaction check
-  remains pending. On 2026-10-09 the director explicitly permitted computer use
-  and screen capture again when needed. Claude native/browser visual review is
-  resuming in handoff 0008; earlier restrictions remain historical evidence only.
+  [integration evidence](docs/spikes/connected-editor.md). Native menu Undo routes by focus. Actual macOS CUA checks now confirm
+  project Cmd+Z/redo, isolated text-field Undo, safe account-dialog focus, divider
+  keyboard resizing and fullscreen transitions. Claude reviewed the native captures;
+  the capture indicator still obscures the traffic lights. On 2026-10-09 the director explicitly permitted computer use
+  and screen capture again when needed. Claude’s handoff 0008 fixes tablet workflow layout, platform-mark balance, clipped
+  inspector paths and F2 name selection. The latest UI changes still need a rebuilt
+  native check; minimum-size and settled-fullscreen captures remain open.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are

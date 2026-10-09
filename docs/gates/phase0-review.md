@@ -21,7 +21,7 @@ The separate landing page is [PR #2](https://github.com/snowdamiz/incant/pull/2)
 | QuickJS/Bevy hot reload and 1,000 entities | [Measured run](../spikes/evidence/script-benchmark.json), behavior tests and [scope](../spikes/phase-0.md#spike-3-quickjs-typescript-and-bevy--local-evidence-passed-with-scope-limits) | Batched script updates; no claim of 1,000 isolated VMs, mobile frame time or full rendering frame budget |
 | Twenty live agent tasks, at least fourteen successes | [19/20 full-suite result](../spikes/evidence/live-agent-2026-10-08.json); [separate ten-step follow-up](../spikes/evidence/ten-step-followup-2026-10-08.json) | The original incomplete response remains a failure in the full-suite score; the in-editor composer is not implemented in Phase 0 |
 | OAuth, API-key fallback and credential persistence | [macOS live sign-in/refresh/rebuild evidence](../spikes/auth-login-repair.md), [three-desktop CI](../spikes/evidence/desktop-credentials-2026-10-08.json) and automated API-key protocol tests | Live revocation evidence remains pending. A separate live API key is not required for the director's OAuth workflow |
-| Claude 5.5 ACP roundtrip | [First result packet](../../handoffs/0001-editor-foundation/result.md), later native/account/palette packets and integration commits | No copied coding-agent credentials; subsequent visual checks are deferred under the director's current restriction |
+| Claude 5.5 ACP roundtrip | [First result packet](../../handoffs/0001-editor-foundation/result.md), later native/account/palette packets and integration commits | No copied coding-agent credentials; handoff 0008 resumes visual review after the director restored capture permission |
 | Runnable artifacts for six targets | [Build and execution evidence](../spikes/evidence/six-platform-2026-10-08.json), including hosted Android emulator execution | PR-triggered runs do not prove scheduled nightly history or signed distribution |
 | Apple and Windows signing certificates | No certificate evidence recorded | Director-provided accounts/certificates are required; unsigned development builds are not substitutes |
 | Year 1 director/reviewer/contracts | Director is identified by the plan; reviewer/contracts are not recorded | Director confirmation is required; no staffing or contract commitments were made by an agent |
@@ -42,10 +42,12 @@ probes. The linked evidence records exact revisions and run URLs; see the
 [integration report](../spikes/connected-editor.md).
 
 The director temporarily stopped computer use and screen capture, then explicitly
-permitted them again on 2026-10-09 when needed. Native traffic-light alignment,
-the final text/project Undo interaction check and resize/focus review are resuming
-under handoff 0008. They remain unverified until actual results are recorded; a
-browser fixture or compiled app does not prove native behavior.
+permitted them again on 2026-10-09 when needed. Actual CUA checks on the rebuilt macOS app verified project Cmd+Z/redo, text-only
+Undo in a rename draft, account-dialog Close focus, divider keyboard resizing and
+fullscreen transitions. Claude reviewed the supplied native images in handoff 0008.
+The capture indicator still hides the traffic lights; exact light alignment, a
+settled fullscreen capture, minimum window size and the newest F2 fix need follow-up.
+A browser fixture or compiled app does not prove those native details.
 
 ## Open decisions from PLAN.md section 12
 

@@ -256,3 +256,19 @@ hosting, not a new visual review. [Deployment evidence](evidence/landing-deploy-
 
 References: [Vite GitHub Pages deployment](https://vite.dev/guide/static-deploy.html#github-pages),
 [Tailwind Vite integration](https://tailwindcss.com/docs/installation/using-vite).
+
+### Revision 8: rendered review after capture permission returned
+
+The director restored capture permission. Claude reviewed the current page at
+320, 390, 768, 1024, 1280 and 1440 px in handoff 0008. The workflow now uses a
+three-by-two grid on tablets to avoid a half-empty section, smaller phone icons
+leave room for the explanations, platform marks are centered on their visible
+shapes with balanced sizes, and the narrow modeling window retains its project
+name. Each step keeps an icon, title and sentence. Source artwork and licenses
+remain unchanged.
+
+Claude’s 24 browser tests pass, including a width regression that fails against
+the old tablet layout. The integrated strict build also passes: JavaScript is
+48.65 kB gzip and CSS is 8.40 kB gzip. The new changes are separate from deployed
+PR #2 and await their own hosted integration checks. Before/after review evidence
+and exact commits are in the [result packet](../../handoffs/0008-native-and-site-review/result.md).
