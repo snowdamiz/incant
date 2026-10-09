@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 mod assets;
 mod eval;
+mod play;
 mod watch;
 use incant_agent::{
     Agent, ApprovalMode, Budget, accounts::AccountStore, credentials::CredentialStore,
@@ -90,6 +91,8 @@ enum Cli {
         #[arg(long, default_value_t = 120)]
         ticks: u64,
     },
+    /// Run isolated gameplay, optionally recording actual GPU frames and a report.
+    Play(play::Options),
     Script {
         project: PathBuf,
         compiled_script: PathBuf,
@@ -388,6 +391,7 @@ fn main() -> Result<()> {
                 json!({"state":engine.snapshot(),"assets":assets.snapshot(),"wall_ms":start.elapsed().as_secs_f64()*1000.}),
             )?;
         }
+        Cli::Play(options) => print(play::run(options).map_err(|error| error.to_string())?)?,
         Cli::Script {
             project,
             compiled_script,

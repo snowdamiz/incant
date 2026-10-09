@@ -34,8 +34,8 @@ scene selection and simulation-driven render snapshots remain open.
   changed output. Parent hierarchy/flattened diagnostic equivalence still passes.
 - macOS source checks and Windows/Linux desktop workflows explicitly invoke the
   GPU tests. Desktop jobs also execute the public CLI probe. Hosted results are
-  complete for the initial geometry head on Windows/Linux; final-head checks are
-  pending. Local tests do not count as hosted evidence.
+  complete on final head `277893d`: all twelve required hosted checks passed.
+  PR #10 merged into main as `faa86fa` on 2026-10-09.
 - Claude handoff 0011 owns rendered-pixel/native composition review and accurate
   viewport error wording. Native Undo selected the previous model version. Redo
   while its replacement cache was unavailable showed a real asset IO error;
