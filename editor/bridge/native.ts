@@ -199,7 +199,8 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
       ...(asset.import_settings?.type === 'texture' ? { textureUsage: asset.import_settings.usage } : {}),
     })) } } : {}),
     assetImport: read.asset_import ?? { available: false, reason: 'This host does not expose asset importing.' },
-    diagnostics: [],
+    diagnostics: read.viewport_error ? [{ id: 'native-viewport', severity: 'error',
+      message: read.viewport_error, entity: null, component: null, path: null }] : [],
     history: {
       entries: read.history.map((tx) => ({
         transaction: id(tx.id),

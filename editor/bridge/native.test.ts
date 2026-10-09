@@ -52,6 +52,24 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it('publishes render errors to Problems and clears them after recovery', async () => {
+    let current = read();
+    const bridge = new NativeBridge(async <T>() => current as T);
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics).toEqual([]);
+    current = { ...read(), viewport_error: 'A cooked model could not be loaded' };
+    await bridge.start();
+    expect(bridge.getSnapshot().connection.status).toBe('ready');
+    expect(bridge.getSnapshot().viewport?.status).toBe('error');
+    expect(bridge.getSnapshot().diagnostics).toEqual([{
+      id: 'native-viewport', severity: 'error', message: current.viewport_error,
+      entity: null, component: null, path: null,
+    }]);
+    current = read();
+    await bridge.start();
+    expect(bridge.getSnapshot().viewport?.status).toBe('attached');
+    expect(bridge.getSnapshot().diagnostics).toEqual([]);
+  });
   it('allows document editing during cooking and preserves it when the import becomes stale', async () => {
     let current = read(); current.asset_import = { available: true };
     let rejectImport: (error: { code: string; message: string }) => void = () => { throw new Error('No pending import'); };
