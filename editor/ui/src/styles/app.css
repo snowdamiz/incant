@@ -1372,6 +1372,44 @@ kbd {
   font-size: var(--text-xs);
 }
 
+/* Problems rows wrap: the precise error (line, column) must stay readable at the minimum
+   window width. The location stays in its own right-hand column while it fits beside at
+   least half the row; a longer path drops below the message and uses the full width.
+   Long paths and unbroken tokens wrap inside their own box, never past the row. */
+.problems__row {
+  align-items: flex-start;
+  /* 4 + 20 + 4 keeps a one-line row at the shared 28px list height. */
+  padding-block: 4px;
+}
+
+.problems__row > .icon {
+  /* Centre the 14px icon on the first 20px line of the message. */
+  margin-top: calc((var(--leading) - 14px) / 2);
+}
+
+.problems__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 10px;
+}
+
+.problems__text > .list__main {
+  flex: 1 1 50%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.problems__text > .list__meta {
+  flex: 0 1 auto;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 18px;
+}
+
 .sev--error {
   color: var(--color-danger);
 }

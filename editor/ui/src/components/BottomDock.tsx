@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { Fragment, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import type { ConsoleLevel, Diagnostic, Origin } from '../bridge/contract';
 import type { IconName } from '../icons/Icon';
@@ -138,24 +138,41 @@ function ProblemsList() {
           <>
             <Icon name={SEVERITY_ICON[d.severity]} size={14} className={`sev sev--${d.severity}`} />
             <span className="visually-hidden">{d.severity}: </span>
-            <span className="list__main">{d.message}</span>
-            {where ? <span className="list__meta mono">{where}</span> : <span className="list__meta">Project</span>}
+            <span className="problems__text">
+              <span className="list__main">{breakAfterSlashes(d.message)}</span>
+              {where ? <span className="list__meta mono">{breakAfterSlashes(where)}</span> : <span className="list__meta">Project</span>}
+            </span>
           </>
         );
         return (
           <li key={d.id}>
             {d.entity !== null ? (
-              <button type="button" className="list__row list__row--action" onClick={() => reveal(d)}>
+              <button type="button" className="list__row list__row--action problems__row" onClick={() => reveal(d)}>
                 {content}
               </button>
             ) : (
-              <div className="list__row">{content}</div>
+              <div className="list__row problems__row">{content}</div>
             )}
           </li>
         );
       })}
     </ul>
   );
+}
+
+/**
+ * Problems rows wrap instead of truncating, so a long source path should break at its
+ * folders rather than mid-name. <wbr> adds a break opportunity after each "/" without
+ * changing the text that assistive technology reads.
+ */
+function breakAfterSlashes(text: string) {
+  const parts = text.split('/');
+  return parts.map((part, index) => (
+    <Fragment key={index}>
+      {part}
+      {index < parts.length - 1 ? <>/<wbr /></> : null}
+    </Fragment>
+  ));
 }
 
 const LEVELS: ConsoleLevel[] = ['error', 'warn', 'info', 'debug'];
