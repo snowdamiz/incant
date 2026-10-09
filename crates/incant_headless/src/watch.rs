@@ -35,7 +35,6 @@ pub fn run(
     )?;
     let mut watcher = SourceWatcher::new(root, debounce);
     let mut runtime = AssetStore::default();
-    let cache = root.join(".incant/cache");
     let mut runtime_error = None;
     // Persist recovered journal state as well, but never overwrite an external edit.
     let recovered = bus.project().canonical_text()?;
@@ -56,7 +55,7 @@ pub fn run(
             saved = text;
         }
         let previous_error = runtime_error.clone();
-        let changes = match runtime.sync(bus.project(), &cache) {
+        let changes = match runtime.sync_project(bus.project(), root) {
             Ok(changes) => {
                 runtime_error = None;
                 Some(changes)

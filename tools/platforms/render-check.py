@@ -31,19 +31,85 @@ def validate_png(data, width, height):
         raise ValueError('Renderer PNG has missing chunks')
 
 
-def edit(executable, project, commands):
+def edit(executable, project, commands, revision=0, journal=None):
     """All probe edits use the same validated command bus as the editor."""
     requests = [
         {'id': 1, 'method': 'command.execute', 'params': {
-            'commands': commands, 'expected_revision': 0, 'description': 'Renderer hierarchy probe'}},
+            'commands': commands, 'expected_revision': revision, 'description': 'Renderer geometry probe'}},
         {'id': 2, 'method': 'project.save', 'params': {}},
     ]
-    result = subprocess.run([str(executable), 'rpc', str(project)],
+    command = [str(executable), 'rpc', str(project)]
+    if journal is not None:
+        command += ['--journal', str(journal)]
+    result = subprocess.run(command,
                             input=''.join(json.dumps(item) + '\n' for item in requests),
                             text=True, capture_output=True, check=True, timeout=30)
     responses = [json.loads(line) for line in result.stdout.splitlines()]
     if len(responses) != 2 or any('error' in response for response in responses):
         raise ValueError('Renderer probe command transaction failed')
+
+
+def model_probe(executable, output):
+    """Public CLI import, command binding and cache-only GPU rendering."""
+    root = output / 'models'
+    root.mkdir()
+    project = root / 'models.incant.json'
+    subprocess.run([str(executable), 'init', str(project), '--name', 'Imported geometry review',
+                    '--entities', '2'], check=True, capture_output=True, timeout=30)
+    def source(offset):
+        (root / 'triangle.bin').write_bytes(struct.pack('<9f', offset-1, -1, 0, offset+1, -1, 0, offset, 1, 0))
+        (root / 'triangle.gltf').write_text(json.dumps({
+            'asset': {'version': '2.0'}, 'buffers': [{'uri': 'triangle.bin', 'byteLength': 36}],
+            'bufferViews': [{'buffer': 0, 'byteLength': 36}],
+            'accessors': [{'bufferView': 0, 'componentType': 5126, 'count': 3, 'type': 'VEC3',
+                           'min': [offset-1, -1, 0], 'max': [offset+1, 1, 0]}],
+            'meshes': [{'primitives': [{'attributes': {'POSITION': 0}}]}],
+            'nodes': [{'translation': [1, 0, 0], 'children': [1]},
+                      {'mesh': 0, 'translation': [0, 2, 0]}, {'mesh': 0, 'translation': [-7, 0, 0]}],
+            'scenes': [{'nodes': [2]}, {'nodes': [0]}], 'scene': 1,
+        }))
+    def import_model():
+        return json.loads(subprocess.check_output([str(executable), 'import', str(project), 'triangle.gltf'],
+                                                 text=True, timeout=60))
+    def capture(name):
+        path = root / name
+        response = json.loads(subprocess.check_output([str(executable), 'screenshot', str(project), str(path),
+                                                      '--width', '640', '--height', '360'], text=True, timeout=120))
+        pixels = path.read_bytes()
+        validate_png(pixels, 640, 360)
+        geometry = response['geometry']
+        if geometry != {'diagnostic_entities': 0, 'model_entities': 2, 'primitive_instances': 2,
+                        'model_triangles': 2, 'model_draw_calls': 1}:
+            raise ValueError('Unexpected imported geometry projection')
+        return pixels, response
+    source(0)
+    imported = import_model()
+    document = json.loads(project.read_text())
+    asset_id = next(iter(document['assets']))
+    scene = next(iter(document['scenes'].values()))
+    commands = []
+    for entity, x in zip(scene['entities'], [-3, 0]):
+        for component, value in {
+            'Transform': {'translation': [x, 0, 0], 'rotation': [0, 0, 0, 1], 'scale': [1, 1, 1]},
+            'MeshRenderer': {'mesh': asset_id, 'materials': [], 'cast_shadows': True},
+        }.items():
+            commands.append({'op': 'set_component', 'scene_id': scene['id'], 'entity_id': entity,
+                             'component': component, 'value': value})
+    edit(executable, project, commands, imported['revision'], project.with_suffix('.journal.jsonl'))
+    first, engine = capture('original.png')
+    (root / 'triangle.gltf').unlink()
+    (root / 'triangle.bin').unlink()
+    retained, _ = capture('without-sources.png')
+    if first != retained:
+        raise ValueError('Rendering changed after removing model sources')
+    source(2)
+    import_model()
+    changed, _ = capture('reimported.png')
+    if first == changed:
+        raise ValueError('Reimported geometry did not change the GPU output')
+    return {'source_independent': True, 'reimport_changes_pixels': True,
+            'original_sha256': hashlib.sha256(first).hexdigest(),
+            'reimported_sha256': hashlib.sha256(changed).hexdigest(), 'engine': engine}
 
 
 def main():
@@ -86,7 +152,8 @@ def main():
               'hierarchy_matches_flattened': True, 'hierarchy_differs_from_initial': True,
               'width': 320, 'height': 180, 'sha256': hashlib.sha256(data).hexdigest(),
               'hierarchy_sha256': hashlib.sha256(hierarchy).hexdigest(),
-              'engine': engine, 'visual_review': False, 'native_window_composition_review': False}
+              'engine': engine, 'imported_models': model_probe(executable, output),
+              'visual_review': False, 'native_window_composition_review': False}
     (output / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report))
 

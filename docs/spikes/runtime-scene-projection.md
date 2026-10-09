@@ -1,5 +1,9 @@
 # Runtime scene projection
 
+PR #9 merged into main as `331a3cb` on 2026-10-09 after all twelve hosted checks
+passed on `97cf521`. This completes the scoped ECS projection increment, not the
+Phase 1 engine or its release gate.
+
 The Phase 1 ECS projection now retains local rotation, scale, parent references
 and typed `MeshRenderer` bindings. Parent-first matrix composition supplies initial
 and fixed-step world transforms, including parents whose IDs sort after children.

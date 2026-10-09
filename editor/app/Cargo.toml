@@ -16,6 +16,7 @@ tauri = { version = "=2.12.1", features = ["unstable", "macos-private-api"] }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
 incant_import = { path = "../../crates/incant_import" }
+incant_assets = { path = "../../crates/incant_assets" }
 incant_core = { workspace = true }
 incant_agent = { workspace = true }
 incant_render = { path = "../../crates/incant_render" }

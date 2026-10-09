@@ -74,8 +74,7 @@ pub fn run(
         super::provider(model.clone())?
     };
     provider.models()?;
-    let mut viewport =
-        GpuPerception(incant_render::Renderer::headless().map_err(|e| e.to_string())?);
+    let mut viewport = GpuPerception::new(None)?;
     let mut results = vec![];
     let mut passed = 0;
     for case in suite.cases {

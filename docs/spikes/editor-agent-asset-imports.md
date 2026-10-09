@@ -132,3 +132,7 @@ reveal pass is claimed. Private native captures remain ignored. Revision 4 of
 the native evidence file records exact checks and Claude's pass verdicts. Native
 review commit `9343822` adds one decorative separator between the model type and
 the existing-asset update note; it passed a dedicated browser check.
+
+All twelve hosted checks passed on `73b817b`. PR #8 merged into main as `cda5ef3`
+on 2026-10-09; exact check links and conclusions are in the native evidence file.
+The merge completes this scoped import/UI increment, not a phase gate.

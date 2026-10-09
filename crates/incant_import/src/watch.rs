@@ -1,7 +1,9 @@
 //! Content polling for authoring workers. Only registered source dependencies
 //! are inspected; cache writes and unrelated project files cannot trigger edits.
 use crate::{ImportDetails, ImportOutcome, ImportRequest, ImportSnapshot, PreparedImports, Result};
-use incant_assets::{Dependency, SourceSet, load_model, load_texture};
+use incant_assets::{
+    CacheKind, Dependency, SourceSet, load_model, load_texture, project_cache_directory,
+};
 use incant_cmd::{Actor, CommandBus};
 use incant_doc::Asset;
 use serde::Serialize;
@@ -222,13 +224,20 @@ fn cached_dependencies(root: &Path, asset: &Asset) -> Option<Vec<Dependency>> {
     crate::validate_path(&asset.path).ok()?;
     let mut deps = match asset.kind.as_str() {
         "model" => {
-            load_model(&root.join(".incant/cache/models"), &asset.sha256)
-                .ok()?
-                .metadata
-                .dependencies
+            load_model(
+                &project_cache_directory(root, CacheKind::Models).ok()?,
+                &asset.sha256,
+            )
+            .ok()?
+            .metadata
+            .dependencies
         }
         "texture" => {
-            let texture = load_texture(&root.join(".incant/cache/textures"), &asset.sha256).ok()?;
+            let texture = load_texture(
+                &project_cache_directory(root, CacheKind::Textures).ok()?,
+                &asset.sha256,
+            )
+            .ok()?;
             let usage = match asset.import_settings {
                 Some(incant_doc::AssetImportSettings::Texture { usage }) => usage,
                 None => incant_assets::TextureUsage::Color,
