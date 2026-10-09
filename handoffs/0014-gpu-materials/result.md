@@ -226,8 +226,8 @@ These are `10-final-wide.jpg` at 1440x900 and `11-final-minimum.jpg` at 1000x650
   It has the same three-tone face shading and stripe layout as the headless readback.
   It sits on the same neutral near-black backdrop. Native output and headless capture
   agree visually. I cannot claim a pixel comparison because both files are JPEGs.
-- **Framing.** At wide size the cube is centered in the viewport and fills about a
-  third of its height. At minimum size it stays centered and fully visible, scaled
+- **Framing.** At wide size the cube is centered in the viewport and fills about
+  half of its height. At minimum size it stays centered and fully visible, scaled
   down with the narrower viewport. The fixed camera frames this fixture acceptably.
   Small or offset models, such as the default triangles, will still need automatic
   framing later.
