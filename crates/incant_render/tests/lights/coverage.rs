@@ -185,4 +185,21 @@ fn local_range_edges_and_hdr_specular_materials_render_repeatably() {
             outputs.push(a);
         }
     }
+    component(
+        &mut f,
+        &id,
+        "PointLight",
+        json!({"color":[1,0.8,0.5],"intensity":50,"range":100}),
+    );
+    for roughness in [0.045, 0.3, 0.7, 1.] {
+        f.edit(|g| {
+            g["materials"][0] = json!({"pbrMetallicRoughness":{
+                "baseColorFactor":[0.5,0.5,0.5,1],"metallicFactor":0,"roughnessFactor":roughness
+            }})
+        });
+        save(
+            &format!("punctual-low-dielectric-{roughness}"),
+            &r.screenshot_scene_png(&f.scene(&r), 640, 480).unwrap(),
+        );
+    }
 }
