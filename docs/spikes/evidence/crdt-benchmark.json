@@ -1,0 +1,16 @@
+{
+  "automerge": {
+    "fork_edit_export_merge_ms": 82.525417,
+    "initial_ms": 722.9652920000001,
+    "snapshot_bytes": 115297,
+    "version": "0.12.0"
+  },
+  "entities": 10000,
+  "fixture": "five scalar fields per entity, two concurrent field edits, full snapshot exchange",
+  "loro": {
+    "fork_edit_export_merge_ms": 119.654041,
+    "initial_ms": 82.026375,
+    "snapshot_bytes": 1028311,
+    "version": "1.16.2"
+  }
+}

@@ -12,3 +12,10 @@
 __pycache__/
 *.pyc
 *.log
+**/.gradle/
+/platforms/android/**/build/
+/platforms/android/app/src/main/jniLibs/
+/platforms/android/local.properties
+*.tsbuildinfo
+
+/editor/app/gen/

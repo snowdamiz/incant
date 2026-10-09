@@ -1,0 +1,5 @@
+# Generated bindings and canonical project documents must compare identically on
+# all CI hosts, including Git for Windows with core.autocrlf enabled.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf

@@ -1,0 +1,441 @@
+{
+  "generatedAt": "2026-10-09T00:03:39.430Z",
+  "browser": "Chrome 155.0.8059.40 (headless, playwright-core)",
+  "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "build": "vite build output served by vite preview",
+  "screenshots": [
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/00-before-blank-1280x800.png",
+      "size": "1280x800",
+      "description": "Before: no editor UI existed in the repository (blank page)."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/01-no-engine-1280x800.png",
+      "size": "1280x800",
+      "description": "After: no bridge injected. Explicit no-engine state; no fabricated data."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/02-sample-initial-1280x800.png",
+      "size": "1280x800",
+      "description": "After: labeled sample fixture, nothing selected."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/03-sample-selected-error-1280x800.png",
+      "size": "1280x800",
+      "description": "After: Crate 03 selected from Problems; field error in inspector; keyboard focus ring on tree row."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/04-inspector-unsupported-1280x800.png",
+      "size": "1280x800",
+      "description": "Inspector: type mismatch, unsupported field type and unregistered component shown explicitly."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/05-console-1280x800.png",
+      "size": "1280x800",
+      "description": "Console tab with level filters."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/06-history-1280x800.png",
+      "size": "1280x800",
+      "description": "History tab with provenance (user, agent, script, import) and an undone entry."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/07-readonly-explained-1280x800.png",
+      "size": "1280x800",
+      "description": "F2 on the read-only fixture: status bar explains why rename is unavailable."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/08-shortcuts-dialog-1280x800.png",
+      "size": "1280x800",
+      "description": "Keyboard shortcuts dialog (focus on Close)."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/10-state-empty-1280x800.png",
+      "size": "1280x800",
+      "description": "State: empty."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/10-state-loading-1280x800.png",
+      "size": "1280x800",
+      "description": "State: loading."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/10-state-hierarchy-error-1280x800.png",
+      "size": "1280x800",
+      "description": "State: hierarchy-error."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/10-state-connection-error-1280x800.png",
+      "size": "1280x800",
+      "description": "State: connection-error."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/10-state-large-1280x800.png",
+      "size": "1280x800",
+      "description": "State: large."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/11-state-bad-fixture-1280x800.png",
+      "size": "1280x800",
+      "description": "Unknown fixture name is reported, not guessed."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/01-no-engine-1920x1080.png",
+      "size": "1920x1080",
+      "description": "After: no bridge injected. Explicit no-engine state; no fabricated data."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/02-sample-initial-1920x1080.png",
+      "size": "1920x1080",
+      "description": "After: labeled sample fixture, nothing selected."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/03-sample-selected-error-1920x1080.png",
+      "size": "1920x1080",
+      "description": "After: Crate 03 selected from Problems; field error in inspector; keyboard focus ring on tree row."
+    },
+    {
+      "file": "handoffs/0001-editor-foundation/screenshots/12-native-viewport-transparent-1280x800.png",
+      "size": "1280x800",
+      "description": "Evidence test double reports an attached viewport; PNG captured with omitBackground, so the viewport hole is transparent (alpha 0) where the native surface will show. Not a native render."
+    }
+  ],
+  "axe": [
+    {
+      "label": "no-engine",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "sample, Crate 03 selected",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "sample, Crate 03 selected",
+      "size": "1920x1080",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "label": "sample, History tab",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "sample, Console tab",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "sample, Grapple Controller",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "label": "empty",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "loading",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "hierarchy-error",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "connection-error",
+      "size": "1280x800",
+      "violations": [],
+      "incomplete": []
+    }
+  ],
+  "layout": [
+    {
+      "label": "no-engine 1280x800",
+      "size": {
+        "width": 1280,
+        "height": 800
+      },
+      "regions": {
+        "hierarchy": {
+          "x": 0,
+          "y": 72,
+          "width": 240,
+          "height": 704
+        },
+        "viewport": {
+          "x": 246,
+          "y": 72,
+          "width": 708,
+          "height": 474
+        },
+        "dock": {
+          "x": 246,
+          "y": 552,
+          "width": 708,
+          "height": 224
+        },
+        "inspector": {
+          "x": 960,
+          "y": 72,
+          "width": 320,
+          "height": 378
+        },
+        "agent": {
+          "x": 960,
+          "y": 456,
+          "width": 320,
+          "height": 320
+        }
+      },
+      "treeRowHeight": null,
+      "visibleTreeRows": 0,
+      "truncatedRowsWithTitleTooltip": 0,
+      "minVisibleTextPx": 11,
+      "pageOverflow": false,
+      "fonts": [
+        "Inter Variable",
+        "JetBrains Mono Variable"
+      ]
+    },
+    {
+      "label": "sample (Crate 03 selected) 1280x800",
+      "size": {
+        "width": 1280,
+        "height": 800
+      },
+      "regions": {
+        "hierarchy": {
+          "x": 0,
+          "y": 40,
+          "width": 240,
+          "height": 736
+        },
+        "viewport": {
+          "x": 246,
+          "y": 40,
+          "width": 708,
+          "height": 506
+        },
+        "dock": {
+          "x": 246,
+          "y": 552,
+          "width": 708,
+          "height": 224
+        },
+        "inspector": {
+          "x": 960,
+          "y": 40,
+          "width": 320,
+          "height": 410
+        },
+        "agent": {
+          "x": 960,
+          "y": 456,
+          "width": 320,
+          "height": 320
+        }
+      },
+      "treeRowHeight": 24,
+      "visibleTreeRows": 17,
+      "truncatedRowsWithTitleTooltip": 2,
+      "minVisibleTextPx": 11,
+      "pageOverflow": false,
+      "fonts": [
+        "Inter Variable",
+        "JetBrains Mono Variable"
+      ]
+    },
+    {
+      "label": "large (2,041 entities) 1280x800",
+      "size": {
+        "width": 1280,
+        "height": 800
+      },
+      "regions": {
+        "hierarchy": {
+          "x": 0,
+          "y": 40,
+          "width": 240,
+          "height": 736
+        },
+        "viewport": {
+          "x": 246,
+          "y": 40,
+          "width": 708,
+          "height": 506
+        },
+        "dock": {
+          "x": 246,
+          "y": 552,
+          "width": 708,
+          "height": 224
+        },
+        "inspector": {
+          "x": 960,
+          "y": 40,
+          "width": 320,
+          "height": 410
+        },
+        "agent": {
+          "x": 960,
+          "y": 456,
+          "width": 320,
+          "height": 320
+        }
+      },
+      "treeRowHeight": 24,
+      "visibleTreeRows": 27,
+      "truncatedRowsWithTitleTooltip": 0,
+      "minVisibleTextPx": 11,
+      "pageOverflow": false,
+      "fonts": [
+        "Inter Variable",
+        "JetBrains Mono Variable"
+      ]
+    },
+    {
+      "label": "no-engine 1920x1080",
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "regions": {
+        "hierarchy": {
+          "x": 0,
+          "y": 72,
+          "width": 320,
+          "height": 984
+        },
+        "viewport": {
+          "x": 326,
+          "y": 72,
+          "width": 1168,
+          "height": 676
+        },
+        "dock": {
+          "x": 326,
+          "y": 754,
+          "width": 1168,
+          "height": 302
+        },
+        "inspector": {
+          "x": 1500,
+          "y": 72,
+          "width": 420,
+          "height": 558
+        },
+        "agent": {
+          "x": 1500,
+          "y": 636,
+          "width": 420,
+          "height": 420
+        }
+      },
+      "treeRowHeight": null,
+      "visibleTreeRows": 0,
+      "truncatedRowsWithTitleTooltip": 0,
+      "minVisibleTextPx": 11,
+      "pageOverflow": false,
+      "fonts": [
+        "Inter Variable",
+        "JetBrains Mono Variable"
+      ]
+    },
+    {
+      "label": "sample (Crate 03 selected) 1920x1080",
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "regions": {
+        "hierarchy": {
+          "x": 0,
+          "y": 40,
+          "width": 320,
+          "height": 1016
+        },
+        "viewport": {
+          "x": 326,
+          "y": 40,
+          "width": 1168,
+          "height": 708
+        },
+        "dock": {
+          "x": 326,
+          "y": 754,
+          "width": 1168,
+          "height": 302
+        },
+        "inspector": {
+          "x": 1500,
+          "y": 40,
+          "width": 420,
+          "height": 590
+        },
+        "agent": {
+          "x": 1500,
+          "y": 636,
+          "width": 420,
+          "height": 420
+        }
+      },
+      "treeRowHeight": 24,
+      "visibleTreeRows": 17,
+      "truncatedRowsWithTitleTooltip": 1,
+      "minVisibleTextPx": 11,
+      "pageOverflow": false,
+      "fonts": [
+        "Inter Variable",
+        "JetBrains Mono Variable"
+      ]
+    }
+  ],
+  "network": {
+    "offlineOnly": true,
+    "external": []
+  },
+  "console": [],
+  "transparency": {
+    "viewportHost": {
+      "x": 246,
+      "y": 72,
+      "width": 708,
+      "height": 474
+    },
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "viewportHostBackground": "rgba(0, 0, 0, 0)",
+    "hierarchyBackground": "rgb(21, 24, 30)",
+    "viewportHeaderBackground": "rgb(21, 24, 30)",
+    "pixelAlpha": {
+      "viewportCenter": 0,
+      "hierarchyPanel": 255,
+      "topBar": 255,
+      "statusBar": 255
+    }
+  }
+}

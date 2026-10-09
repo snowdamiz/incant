@@ -1,0 +1,45 @@
+{
+  "assets": {},
+  "id": "01M4ESCTXKDCX0AK12F5CDW5DG",
+  "memory": {},
+  "name": "Kinematic Spike",
+  "scenes": {
+    "01M4ESCTXKX1PD3VFYT0FJSWH2": {
+      "entities": {
+        "01M4ESCTXK5TF840H610AX108Q": {
+          "components": {
+            "Transform": {
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "id": "01M4ESCTXK5TF840H610AX108Q",
+          "name": "Entity 0",
+          "parent": null,
+          "provenance": null
+        }
+      },
+      "id": "01M4ESCTXKX1PD3VFYT0FJSWH2",
+      "name": "Main"
+    }
+  },
+  "schema_version": 1,
+  "scripts": {},
+  "settings": {
+    "tick_rate": 60
+  }
+}

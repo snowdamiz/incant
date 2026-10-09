@@ -1,0 +1,188 @@
+{
+  "generatedAt": "2026-10-09T01:30:18.049Z",
+  "browser": "Chrome 155.0.8059.40 (headless)",
+  "screenshots": [
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-checking.png",
+      "description": "Titlebar account chip, checking"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-checking.png",
+      "description": "Account dialog opened from the titlebar, checking"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-signed-out.png",
+      "description": "Titlebar account chip, signed-out"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-signed-out.png",
+      "description": "Account dialog opened from the titlebar, signed-out"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/window-signed-out.png",
+      "description": "Full window with dialog, signed-out"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-signed-out-saved.png",
+      "description": "Titlebar account chip, signed-out-saved"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-signed-out-saved.png",
+      "description": "Account dialog opened from the titlebar, signed-out-saved"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-browser.png",
+      "description": "Titlebar account chip, browser"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-browser.png",
+      "description": "Account dialog opened from the titlebar, browser"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-validating.png",
+      "description": "Titlebar account chip, validating"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-validating.png",
+      "description": "Account dialog opened from the titlebar, validating"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-signed-in.png",
+      "description": "Titlebar account chip, signed-in"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-signed-in.png",
+      "description": "Account dialog opened from the titlebar, signed-in"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-signed-in-multi.png",
+      "description": "Titlebar account chip, signed-in-multi"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-signed-in-multi.png",
+      "description": "Account dialog opened from the titlebar, signed-in-multi"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/window-signed-in-multi.png",
+      "description": "Full window with dialog, signed-in-multi"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-signed-in-cli-key.png",
+      "description": "Titlebar account chip, signed-in-cli-key"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-signed-in-cli-key.png",
+      "description": "Account dialog opened from the titlebar, signed-in-cli-key"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-error.png",
+      "description": "Titlebar account chip, error"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-error.png",
+      "description": "Account dialog opened from the titlebar, error"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-adding-browser.png",
+      "description": "Titlebar account chip, adding-browser"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-adding-browser.png",
+      "description": "Account dialog opened from the titlebar, adding-browser"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-error-while-signed-in.png",
+      "description": "Titlebar account chip, error-while-signed-in"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-error-while-signed-in.png",
+      "description": "Account dialog opened from the titlebar, error-while-signed-in"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/focus-signed-out-initial.png",
+      "description": "Initial focus on Continue with ChatGPT after opening with Enter"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-signed-in-multi-confirm-signout.png",
+      "description": "Sign-out confirmation with focus on the confirm button"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/agent-signed-out.png",
+      "description": "Agent panel, signed-out"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/flow-agent-continue.png",
+      "description": "After clicking Continue with ChatGPT in the agent panel (simulated browser wait)"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/agent-browser.png",
+      "description": "Agent panel, browser"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/agent-error.png",
+      "description": "Agent panel, error"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/agent-signed-in.png",
+      "description": "Agent panel, signed-in"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/window-narrow-signed-in-multi.png",
+      "description": "Narrow 900x600 window with dialog"
+    }
+  ],
+  "axe": [
+    {
+      "label": "dialog checking",
+      "violations": []
+    },
+    {
+      "label": "dialog signed-out",
+      "violations": []
+    },
+    {
+      "label": "dialog signed-out-saved",
+      "violations": []
+    },
+    {
+      "label": "dialog browser",
+      "violations": []
+    },
+    {
+      "label": "dialog validating",
+      "violations": []
+    },
+    {
+      "label": "dialog signed-in",
+      "violations": []
+    },
+    {
+      "label": "dialog signed-in-multi",
+      "violations": []
+    },
+    {
+      "label": "dialog signed-in-cli-key",
+      "violations": []
+    },
+    {
+      "label": "dialog error",
+      "violations": []
+    },
+    {
+      "label": "dialog adding-browser",
+      "violations": []
+    },
+    {
+      "label": "dialog error-while-signed-in",
+      "violations": []
+    },
+    {
+      "label": "dialog sign-out confirmation",
+      "violations": []
+    },
+    {
+      "label": "shell signed-out",
+      "violations": []
+    }
+  ]
+}

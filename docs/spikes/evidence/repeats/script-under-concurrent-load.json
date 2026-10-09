@@ -1,0 +1,9 @@
+{
+  "commands": 120000,
+  "max_frame_ms": 16.781041,
+  "p95_frame_ms": 15.955167,
+  "state": {
+    "ticks": 120
+  },
+  "ticks": 120
+}

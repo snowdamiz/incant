@@ -49,6 +49,7 @@ class AcpClient:
         self.proc = subprocess.Popen(command, cwd=cwd, env=env, stdin=subprocess.PIPE,
                                      stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, bufsize=1)
         self.root, self.timeout, self.counter = Path(cwd), timeout, 0
+        self.print_updates = True
         self.messages = queue.Queue()
         def reader():
             try:
@@ -69,7 +70,7 @@ class AcpClient:
     def handle(self, msg):
         if 'id' not in msg:
             update = msg.get('params', {}).get('update', {})
-            if update.get('sessionUpdate') == 'agent_message_chunk':
+            if self.print_updates and update.get('sessionUpdate') == 'agent_message_chunk':
                 print(update.get('content', {}).get('text', ''), end='', flush=True)
             return
         method, params = msg.get('method'), msg.get('params', {})
@@ -88,7 +89,15 @@ class AcpClient:
                 options = params.get('options', [])
                 result = {'outcome': {'outcome': 'cancelled'}}
                 if sys.stdin.isatty():
-                    print('\nClaude requests:', json.dumps(params.get('toolCall', {}), indent=2))
+                    call = params.get('toolCall', {})
+                    # Print a reviewable command/path without duplicating large
+                    # file content embedded in both rawInput and ACP diff blocks.
+                    print('\nClaude requests:', json.dumps({
+                        'name': call.get('name'), 'kind': call.get('kind'),
+                        'title': call.get('title'),
+                        'command': call.get('rawInput', {}).get('command'),
+                        'path': call.get('rawInput', {}).get('file_path'),
+                    }, indent=2))
                     for index, option in enumerate(options):
                         print(f'{index + 1}: {option["name"]}')
                     choice = input('Choose an option (Enter cancels): ')
@@ -113,6 +122,9 @@ class AcpClient:
                 raise HandoffError(f'ACP request timed out: {method}') from None
             if isinstance(msg, Exception):
                 raise msg
+            # A long handoff may keep making progress for hours. This is an
+            # inactivity timeout, not a deadline that kills an active agent.
+            deadline = time.monotonic() + self.timeout
             if msg.get('id') == ident and ('result' in msg or 'error' in msg):
                 if 'error' in msg:
                     # Error bodies may include sensitive account details; expose only the code.
@@ -130,7 +142,7 @@ class AcpClient:
         for stream in (self.proc.stdin, self.proc.stdout):
             stream.close()
 
-def run(ident):
+def run(ident, permission_mode=None):
     packet = ROOT / 'handoffs' / packet_id(ident)
     if not (packet / 'brief.md').is_file():
         raise HandoffError('Missing handoffs/<id>/brief.md')
@@ -146,11 +158,11 @@ def run(ident):
     if not logged_in:
         write_status(packet, 'blocked', 'Claude Code is not logged in. Run node_modules/.bin/claude auth login, then retry.')
         raise HandoffError('Claude Code is not logged in; packet preserved for manual execution')
-    if git('status', '--porcelain', '--untracked-files=normal'):
-        raise HandoffError('Commit the reviewed working tree before creating the handoff worktree')
     worktree = ROOT / '.worktrees' / ident
     branch = f'handoff/{ident}'
     if not worktree.exists():
+        if git('status', '--porcelain', '--untracked-files=normal'):
+            raise HandoffError('Commit the reviewed working tree before creating the handoff worktree')
         git('worktree', 'add', '-b', branch, str(worktree), 'HEAD')
     elif git('-C', str(worktree), 'branch', '--show-current') != branch:
         raise HandoffError('Existing worktree is on an unexpected branch')
@@ -161,7 +173,21 @@ def run(ident):
             'clientCapabilities': {'fs': {'readTextFile': True, 'writeTextFile': True}, 'terminal': False}})
         if init.get('protocolVersion') != config['protocol_version']:
             raise HandoffError('ACP protocol version mismatch')
-        session = client.request('session/new', {'cwd': str(worktree), 'mcpServers': []})
+        session = None
+        capabilities = init.get('agentCapabilities', {})
+        if capabilities.get('loadSession') and 'list' in capabilities.get('sessionCapabilities', {}):
+            listed = client.request('session/list', {'cwd': str(worktree)})
+            # Some adapters return other directories despite a cwd filter.
+            matches = [s for s in listed.get('sessions', []) if s.get('cwd') == str(worktree)]
+            if matches:
+                previous = max(matches, key=lambda s: s.get('updatedAt', ''))
+                client.print_updates = False
+                session = client.request('session/load', {'sessionId': previous['sessionId'], 'cwd': str(worktree), 'mcpServers': []})
+                session['sessionId'] = previous['sessionId']
+                client.print_updates = True
+                print('Resumed the latest ACP session scoped to this handoff worktree.', flush=True)
+        if session is None:
+            session = client.request('session/new', {'cwd': str(worktree), 'mcpServers': []})
         model_config = next((x for x in session.get('configOptions', []) if x.get('category') == 'model'), None)
         if model_config:
             selected = next((x for x in model_config.get('options', [])
@@ -176,10 +202,22 @@ def run(ident):
             if not matching:
                 raise HandoffError('Required Claude 5.5 model is unavailable; no model substitution performed')
             client.request('session/set_model', {'sessionId': session['sessionId'], 'modelId': matching['modelId']})
+        if permission_mode:
+            mode_config = next((x for x in session.get('configOptions', []) if x.get('category') == 'mode'), None)
+            if not mode_config or not any(x.get('value') == permission_mode for x in mode_config.get('options', [])):
+                raise HandoffError(f'Requested permission mode {permission_mode} is unavailable; no fallback performed')
+            client.request('session/set_config_option', {'sessionId': session['sessionId'],
+                'configId': mode_config['id'], 'value': permission_mode})
+            print(f'Claude session permission mode: {permission_mode}', flush=True)
+        write_status(packet, 'running', 'Claude is implementing the current packet through ACP; result review is pending.')
         result = client.request('session/prompt', {'sessionId': session['sessionId'], 'prompt': [{
-            'type': 'text', 'text': f'Read CLAUDE.md and handoffs/{ident}/brief.md. Implement that packet in this worktree. '
+            'type': 'text', 'text': f'Read CLAUDE.md and implement the CURRENT packet below in this worktree. '
+            'The packet may have changed since the previous session. Read its priority revisions first, '
+            'acknowledge new director feedback, and apply it before continuing any earlier completion steps. '
+            f'If files already exist from an interrupted attempt, inspect and finish them. '
             f'Return handoffs/{ident}/result.md with the exact model, evidence, screenshots, and limitations. '
-            'Do not publish, merge, read credentials, change external accounts, or edit outside this worktree.'}]})
+            'Do not publish, merge, read credentials, change external accounts, or edit outside this worktree. '
+            f'\n\nCURRENT PACKET: handoffs/{ident}/brief.md\n\n' + (packet / 'brief.md').read_text()}]})
         result_path = worktree / 'handoffs' / ident / 'result.md'
         if result.get('stopReason') != 'end_turn' or not result_path.is_file():
             raise HandoffError('Handoff ended without a complete result packet')
@@ -188,16 +226,25 @@ def run(ident):
     except HandoffError:
         write_status(packet, 'blocked', 'ACP handoff did not complete. See terminal diagnosis; no credentials logged.')
         raise
+    except KeyboardInterrupt:
+        write_status(packet, 'interrupted', 'Session stopped locally; worktree changes are preserved for resume.')
+        raise
     finally:
         client.close()
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
-    sub.add_parser('run').add_argument('id', type=packet_id)
+    run_parser = sub.add_parser('run')
+    run_parser.add_argument('id', type=packet_id)
+    run_parser.add_argument('--permission-mode', choices=['default', 'acceptEdits', 'auto', 'bypassPermissions'],
+                            help='Explicit session permission mode; use bypassPermissions only with director authorization')
     args = parser.parse_args()
     try:
-        run(args.id)
+        run(args.id, args.permission_mode)
+    except KeyboardInterrupt:
+        print('Handoff interrupted; resume the same packet to continue.', file=sys.stderr)
+        return 130
     except (HandoffError, subprocess.CalledProcessError) as exc:
         print(f'Handoff blocked: {exc}', file=sys.stderr)
         return 1

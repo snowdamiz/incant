@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-08",
+  "source_commit": "2a40d1613fba4683c8bd982c2352d3f98bc89afa",
+  "workflow": "https://github.com/snowdamiz/incant/actions/runs/37872433486",
+  "linux": {
+    "conclusion": "success",
+    "job": "https://github.com/snowdamiz/incant/actions/runs/37872433486/job/113633542647",
+    "ui_tests": 180,
+    "workspace_rust_tests": "passed",
+    "native_editor_build": "passed",
+    "render_probe": {
+      "platform": "linux",
+      "native_renderer_executed": true,
+      "png_transport_validated": true,
+      "width": 320,
+      "height": 180,
+      "sha256": "c22477ad0de13d0acf07479bfd1fb1730f0db1c296220edf04d097901e912674",
+      "engine": {
+        "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "height": 180,
+        "width": 320
+      },
+      "visual_review": false,
+      "native_window_composition_review": false
+    }
+  },
+  "windows": {
+    "conclusion": "failure",
+    "job": "https://github.com/snowdamiz/incant/actions/runs/37872433486/job/113633542784",
+    "failure": "tauri-build required editor/app/icons/icon.ico, which was absent",
+    "fix_commit": "bd308600baa9c7d0d69ef86da0697de13c1f7434",
+    "rerun": "https://github.com/snowdamiz/incant/actions/runs/37873827660"
+  },
+  "scope": "Automated editor builds, shared UI/bridge/Rust tests and native renderer readback per the director acceptance override; not manual Windows composition review.",
+  "successful_followup": {
+    "source_commit": "bd308600baa9c7d0d69ef86da0697de13c1f7434",
+    "workflow": "https://github.com/snowdamiz/incant/actions/runs/37873827660",
+    "conclusion": "success",
+    "windows_job": "https://github.com/snowdamiz/incant/actions/runs/37873827660/job/113637681445",
+    "linux_job": "https://github.com/snowdamiz/incant/actions/runs/37873827660/job/113637681218",
+    "native_editor_and_engine_builds": "passed",
+    "shared_ui_bridge_and_workspace_rust_tests": "passed",
+    "reports": {
+      "win32": {
+        "platform": "win32",
+        "native_renderer_executed": true,
+        "png_transport_validated": true,
+        "width": 320,
+        "height": 180,
+        "sha256": "c22477ad0de13d0acf07479bfd1fb1730f0db1c296220edf04d097901e912674",
+        "engine": {
+          "adapter": "Microsoft Basic Render Driver",
+          "height": 180,
+          "width": 320
+        },
+        "visual_review": false,
+        "native_window_composition_review": false
+      },
+      "linux": {
+        "platform": "linux",
+        "native_renderer_executed": true,
+        "png_transport_validated": true,
+        "width": 320,
+        "height": 180,
+        "sha256": "c22477ad0de13d0acf07479bfd1fb1730f0db1c296220edf04d097901e912674",
+        "engine": {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "height": 180,
+          "width": 320
+        },
+        "visual_review": false,
+        "native_window_composition_review": false
+      }
+    }
+  },
+  "integrated_editor_followup": {
+    "source_commit": "d87436fe500d9a96ef928d1574c636ecfa4ce39b",
+    "workflow": "https://github.com/snowdamiz/incant/actions/runs/37877461685",
+    "conclusion": "success",
+    "windows_job": "https://github.com/snowdamiz/incant/actions/runs/37877461685/job/113649411710",
+    "linux_job": "https://github.com/snowdamiz/incant/actions/runs/37877461685/job/113649411958",
+    "native_editor_and_engine_builds": "passed",
+    "ui_bridge_tests": 223,
+    "rust_behavior_tests": 54,
+    "reports": {
+      "win32": {
+        "platform": "win32",
+        "native_renderer_executed": true,
+        "png_transport_validated": true,
+        "width": 320,
+        "height": 180,
+        "sha256": "913f7255a935a8e73b4851b32545370561833741cfe14c78122aabde291aab55",
+        "engine": {
+          "adapter": "Microsoft Basic Render Driver",
+          "height": 180,
+          "output": "D:\\a\\incant\\incant\\artifacts\\render-smoke\\viewport.png",
+          "width": 320
+        },
+        "visual_review": false,
+        "native_window_composition_review": false
+      },
+      "linux": {
+        "platform": "linux",
+        "native_renderer_executed": true,
+        "png_transport_validated": true,
+        "width": 320,
+        "height": 180,
+        "sha256": "913f7255a935a8e73b4851b32545370561833741cfe14c78122aabde291aab55",
+        "engine": {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "height": 180,
+          "output": "/home/runner/work/incant/incant/artifacts/render-smoke/viewport.png",
+          "width": 320
+        },
+        "visual_review": false,
+        "native_window_composition_review": false
+      }
+    },
+    "scope": "Connected neutral editor, macOS menu routing and persistent sign-out integration. Hosted Windows/Linux builds and software GPU readback; no manual native interaction or composition review.",
+    "source_checks": {
+      "workflow": "https://github.com/snowdamiz/incant/actions/runs/37877461683",
+      "conclusion": "success",
+      "job": "https://github.com/snowdamiz/incant/actions/runs/37877461683/job/113649468183",
+      "checks": [
+        "conventions and generated bindings",
+        "five Python tool tests",
+        "223 UI/bridge tests",
+        "strict TypeScript and production UI build",
+        "Rust formatting and workspace Clippy",
+        "54 Rust behavior tests",
+        "native macOS release editor build",
+        "derived schema and SDK consistency",
+        "eval fixture validation",
+        "two-client collaboration probe"
+      ]
+    }
+  }
+}

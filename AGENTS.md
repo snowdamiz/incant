@@ -2,9 +2,12 @@
 
 # Incant repository conventions
 
-Source of truth: PLAN.md. Current stage: Phase 0. No phase can pass without the
-specified evidence and the director's recorded approval. Do not claim later
-phases complete by creating interfaces or placeholders.
+Source of truth: PLAN.md. Current stage: Phase 1, authorized by the director while
+open Phase 0 items remain deferred. Continue sensible engineering work without
+repeated phase-advancement confirmations, per the director's 2026-10-08 decision.
+Keep unmet gates and human-owned actions explicit; advancement does not mean a
+gate passed. Do not claim completion through interfaces, placeholders or missing
+evidence. The complete engine and game release requirements remain in force.
 
 All project edits pass through incant_cmd; typed, schema-validated text documents
 use stable ULIDs. Agent edits are atomic, reversible transactions with provenance.
@@ -25,17 +28,23 @@ focused. TypeScript uses strict mode. Unknown capabilities fail explicitly.
 Document limitations and measured results; mock tests never count as live gates.
 
 Every commit trailer identifies its author: Built-by: astra or Built-by: claude.
-PRs are agent-authored and director-merged. Human-only actions include phase gate
-approval, signing credentials, store/developer accounts, payments, legal filings,
-age ratings and staffing. Implement and verify reviewable work before requesting
-these actions. Never publish or sign using fabricated or borrowed credentials.
+PRs are agent-authored and agent-merged into main once the scoped work is complete,
+reviewed, and its required checks pass, per the director's 2026-10-09 authorization.
+Do not request separate merge approval. A merge does not approve a phase gate or
+claim that deferred requirements are complete. Human-only actions include phase
+gate approval, signing credentials, store/developer accounts, payments, legal
+filings, age ratings and staffing. Implement and verify reviewable work before
+requesting these actions. Never publish or sign using fabricated or borrowed
+credentials.
 
 # Astra workflow
 
 Route visual work with `python3 tools/handoff/main.py run <id>`. Prepare a packet
 with scope, acceptance criteria, paths, commands, performance constraints and
 expected result. Review returned diffs, run the full checks, then prepare the PR
-when a remote exists. Do not merge your own PR or approve a phase gate.
+when a remote exists. Merge completed PRs into main after their required checks
+pass; resolve conflicts and verify the integrated result without asking for another
+merge confirmation. Preserve author trailers. Do not approve a phase gate.
 
 Generate both instruction files using `python3 tools/generate_conventions.py`.
 Keep technical evidence in docs/spikes and current outstanding work in STATUS.md.

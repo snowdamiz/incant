@@ -1,0 +1,74 @@
+{
+  "phase": 0,
+  "director_approval": null,
+  "spikes": {
+    "native_viewport": {
+      "passed": true,
+      "remaining": [],
+      "macos_evidence": "handoffs/0002-native-viewport/result.md",
+      "acceptance_override": "2026-10-08 director replaced manual Windows native review with CI builds and automated tests",
+      "desktop_ci_evidence": "docs/spikes/evidence/desktop-editor-2026-10-08.json"
+    },
+    "document_crdt": {
+      "passed": true,
+      "evidence": "docs/spikes/phase-0.md#spike-2-document-and-crdt--local-evidence-passed"
+    },
+    "scripting": {
+      "passed": true,
+      "evidence": "docs/spikes/evidence/script-benchmark.json",
+      "scope": "batched behavior over 1000 entities, one Mac"
+    },
+    "live_agent": {
+      "passed": true,
+      "completed": 20,
+      "required_passes": 14,
+      "total": 20,
+      "successful": 19,
+      "evidence": "docs/spikes/evidence/live-agent-2026-10-08.json",
+      "remaining": [],
+      "ten_step_followup": "docs/spikes/evidence/ten-step-followup-2026-10-08.json"
+    },
+    "authentication": {
+      "passed": false,
+      "remaining": [
+        "Live revocation evidence"
+      ],
+      "macos_evidence": "docs/spikes/auth-login-repair.md",
+      "macos_storage_exception": "director requested private credential files to eliminate repeated Keychain prompts",
+      "desktop_acceptance_override": "2026-10-08 director waived manual Windows/Linux login checks in favor of CI builds and automated tests",
+      "desktop_ci_evidence": "docs/spikes/evidence/desktop-credentials-2026-10-08.json",
+      "api_key_validation": "Fallback retained and covered by loopback protocol tests plus platform credential-storage tests. A separate live API key is not required alongside the director\u2019s verified OAuth workflow."
+    },
+    "claude_acp": {
+      "passed": true,
+      "evidence": "handoffs/0001-editor-foundation/result.md",
+      "integration": "Connected neutral editor and safe account-dialog focus integrated; 223 UI/bridge tests pass. Final native menu and titlebar checks deferred under the director\u2019s computer-use restriction; see docs/spikes/connected-editor.md."
+    }
+  },
+  "nightly_runnable_targets": {
+    "macos": false,
+    "windows": false,
+    "linux": false,
+    "ios": false,
+    "android": false,
+    "web": false
+  },
+  "signing_certificates_obtained": false,
+  "year_one_staffing_confirmed": false,
+  "platform_build_evidence": "docs/spikes/evidence/six-platform-2026-10-08.json",
+  "android_execution_evidence": "docs/spikes/evidence/android-emulator-2026-10-08.json",
+  "advance_authorization": {
+    "date": "2026-10-08",
+    "next_phase": 1,
+    "director_decision": "Begin Phase 1; defer the open gate items",
+    "followup": "Continue sensible implementation without repeated permission questions.",
+    "deferred_items": [
+      "live revocation verification",
+      "nightly history from main",
+      "distribution signing certificates",
+      "year-one staffing",
+      "phase-completion approval"
+    ],
+    "scope": "Authorizes implementation progress only. Deferred items remain open and final engine/game requirements are unchanged."
+  }
+}

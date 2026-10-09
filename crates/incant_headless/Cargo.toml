@@ -13,3 +13,10 @@ incant_cmd = { workspace = true }
 incant_core = { workspace = true }
 incant_script = { workspace = true }
 incant_agent = { workspace = true }
+clap = { version = "4.5", features = ["derive"] }
+dirs = "6"
+rpassword = "7"
+tempfile = "3"
+incant_render = { path = "../incant_render" }
+base64 = "0.22"
+schemars = { workspace = true }
