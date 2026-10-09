@@ -1,0 +1,175 @@
+{
+  "browser": "Chrome 155.0.8059.40 headless via playwright-core, deviceScaleFactor 1",
+  "data": "SYNTHETIC: capture-only evidence double; not engine state and not native WebKit",
+  "shots": [
+    "problems-source-1000x650.png",
+    "problems-source-1000x650-dock.png",
+    "problems-stress-1000x650.png",
+    "problems-stress-1000x650-dock.png",
+    "problems-stress-1000x650-dock-scrolled.png",
+    "problems-stress-1000x650-focus.png",
+    "problems-source-1440x900.png",
+    "problems-source-1440x900-dock.png",
+    "problems-stress-1440x900.png",
+    "problems-stress-1440x900-dock.png",
+    "problems-stress-1440x900-dock-scrolled.png",
+    "problems-stress-1440x900-focus.png"
+  ],
+  "rows": [
+    {
+      "label": "source 1000x650",
+      "dock": "446px wide",
+      "listHorizontalOverflow": false,
+      "rows": [
+        {
+          "message": "could not cook triangle.gltf: invalid glTF: expected value at line 1 column 1",
+          "meta": "triangle.gltf",
+          "rowSize": "430x48",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 94
+        }
+      ]
+    },
+    {
+      "label": "stress 1000x650",
+      "dock": "446px wide",
+      "listHorizontalOverflow": false,
+      "rows": [
+        {
+          "message": "could not cook triangle.gltf: invalid glTF: expected value at line 1 column 1",
+          "meta": "triangle.gltf",
+          "rowSize": "430x48",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 94
+        },
+        {
+          "message": "could not cook models/environment/harbor/district_02/props/weathered_pier_lantern_cluster_variant_b.gltf: invalid glTF: missing field `asset` at line 14 column 3",
+          "meta": "models/environment/harbor/district_02/props/weathered_pier_lantern_cluster_variant_b.gltf",
+          "rowSize": "430x104",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 386
+        },
+        {
+          "message": "could not cook textures/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.png: unsupported image data at byte 4096",
+          "meta": "textures/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.png",
+          "rowSize": "430x142",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 386
+        },
+        {
+          "message": "Intensity is negative and is clamped to 0 at line 3 column 18",
+          "meta": "Sun · light · intensity",
+          "rowSize": "430x48",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 166
+        }
+      ]
+    },
+    {
+      "label": "source 1440x900",
+      "dock": "862px wide",
+      "listHorizontalOverflow": false,
+      "rows": [
+        {
+          "message": "could not cook triangle.gltf: invalid glTF: expected value at line 1 column 1",
+          "meta": "triangle.gltf",
+          "rowSize": "846x28",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 94
+        }
+      ]
+    },
+    {
+      "label": "stress 1440x900",
+      "dock": "862px wide",
+      "listHorizontalOverflow": false,
+      "rows": [
+        {
+          "message": "could not cook triangle.gltf: invalid glTF: expected value at line 1 column 1",
+          "meta": "triangle.gltf",
+          "rowSize": "846x28",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 94
+        },
+        {
+          "message": "could not cook models/environment/harbor/district_02/props/weathered_pier_lantern_cluster_variant_b.gltf: invalid glTF: missing field `asset` at line 14 column 3",
+          "meta": "models/environment/harbor/district_02/props/weathered_pier_lantern_cluster_variant_b.gltf",
+          "rowSize": "846x66",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 641
+        },
+        {
+          "message": "could not cook textures/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.png: unsupported image data at byte 4096",
+          "meta": "textures/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.png",
+          "rowSize": "846x86",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 785
+        },
+        {
+          "message": "Intensity is negative and is clamped to 0 at line 3 column 18",
+          "meta": "Sun · light · intensity",
+          "rowSize": "846x28",
+          "mainClipped": false,
+          "metaClipped": false,
+          "mainOutsideRow": false,
+          "metaOutsideRow": false,
+          "metaWidth": 166
+        }
+      ]
+    }
+  ],
+  "axe": [
+    {
+      "label": "dock 1000x650",
+      "violations": []
+    },
+    {
+      "label": "dock 1440x900",
+      "violations": []
+    }
+  ],
+  "keyboard": [
+    {
+      "label": "1000x650",
+      "active": "button \"warning: Intensity is negative and is clamped to 0 at line 3\"",
+      "focusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)",
+      "selectedAfterEnter": "Sun1, 1 warning"
+    },
+    {
+      "label": "1440x900",
+      "active": "button \"warning: Intensity is negative and is clamped to 0 at line 3\"",
+      "focusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)",
+      "selectedAfterEnter": "Sun1, 1 warning"
+    }
+  ],
+  "errors": []
+}
