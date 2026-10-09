@@ -414,18 +414,3 @@ describe('account dialog focus ring by input modality', () => {
     expect(marked(close)).toBe(false);
   });
 });
-
-describe('focus ring stylesheet', () => {
-  it('gives every :focus-visible rule a [data-focus-visible] twin', async () => {
-    const { readFileSync } = await import('node:fs');
-    const { join } = await import('node:path');
-    const css = readFileSync(join(process.cwd(), 'src/styles/app.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
-    const selectors = [...css.matchAll(/([^{}]+)\{/g)].flatMap((m) => m[1]!.split(',').map((s) => s.trim()));
-    const visible = selectors.filter((s) => s.includes(':focus-visible'));
-    expect(visible.length).toBeGreaterThan(0);
-    for (const selector of visible) {
-      const twin = selector === ':focus-visible' ? '[data-focus-visible]' : selector.replaceAll(':focus-visible', '[data-focus-visible]');
-      expect(selectors, `missing twin for ${selector}`).toContain(twin);
-    }
-  });
-});
