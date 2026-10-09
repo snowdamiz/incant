@@ -1,8 +1,15 @@
 # Native viewport integration: constraints and open questions
 
 Scope: how the web shell (`editor/ui`) cooperates with the native wgpu surface
-(Phase 0 Spike 1). Written by handoff 0001 for Astra. **No native window was run for
-this handoff; nothing here is a claim that native compositing works.**
+(Phase 0 Spike 1). Written by handoff 0001 for Astra, before any native run.
+
+**Native results (handoff 0002, macOS only).** The real Tauri/wgpu app was reviewed on
+macOS 26.6, an Apple M5 Pro, and a Retina display at a device pixel ratio of 2. The
+surface sits below a transparent webview. The geometry shows through the viewport
+hole, and the chrome is opaque at exact token values. The GPU corner mask matches
+the island with no seam. The surface follows panel hiding, window resizing,
+fullscreen and zoom, and the modal dialog covers it. No Windows or Linux evidence
+exists yet. See `handoffs/0002-native-viewport/result.md`.
 
 ## What the UI does today
 

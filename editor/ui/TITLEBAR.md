@@ -60,9 +60,11 @@ Rules the UI follows:
 ### macOS: native traffic lights (`controls: 'native-overlay'`)
 
 - Window config: `titleBarStyle: "Overlay"`, `hiddenTitle: true`, `decorations: true`.
-- Position the traffic lights vertically centered in the 40 px bar: approximately
-  `trafficLightPosition: { x: 14, y: 14 }` (verify on a real window; Tauri's support
-  for this option depends on version).
+- Position the traffic lights vertically centered in the 40 px bar:
+  `trafficLightPosition: { x: 14, y: 22 }`. Measured natively in handoff 0002 (tao
+  0.37.1): `y` is extra titlebar-container height, not a top offset, and the light
+  centre lands at `y − 2.25` pt. With y=22 the centres sit at 19.75 pt, level with the
+  logo; y=14 left them 8 pt high. The logo starts 12.5 pt after the green light.
 - Report `leadingInset: 78` (traffic lights + margin) and `trailingInset: 0`.
   In fullscreen the lights hide: report `fullscreen: true, leadingInset: 0`.
 - Do not draw custom caption buttons on macOS.

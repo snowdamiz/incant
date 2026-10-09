@@ -125,7 +125,7 @@ function Workbench() {
     <div className="app">
       <a
         className="skip-link"
-        href="#viewport-title"
+        href={panels.hierarchy ? '#hierarchy-title' : '#viewport-title'}
         onClick={(event) => {
           event.preventDefault();
           focusRegion(panels.hierarchy ? 'hierarchy' : 'viewport');

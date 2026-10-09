@@ -118,7 +118,7 @@ function EntityInspector({
       ) : null}
       {entity.components.length === 0 ? (
         <StateView icon="entity" title="No components" compact>
-          <p>This entity has no components.</p>
+          <p>{entity.kind === 'scene' ? 'Scenes hold entities, not components.' : 'This entity has no components.'}</p>
         </StateView>
       ) : (
         entity.components.map((component, index) => (
@@ -187,9 +187,11 @@ function ComponentSection({
         >
           <Icon name="chevron" size={12} className={`component__chevron${open ? ' is-open' : ''}`} />
           <span className="component__title">{schema?.title ?? shortType(component.type)}</span>
-          <span className="component__type mono" title={component.type}>
-            {component.type}
-          </span>
+          {(schema?.title ?? shortType(component.type)) !== component.type ? (
+            <span className="component__type mono" title={component.type}>
+              {component.type}
+            </span>
+          ) : null}
           {errors ? (
             <span className="badge badge--error">
               <Icon name="error" size={12} />

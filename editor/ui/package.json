@@ -11,7 +11,8 @@
     "preview": "vite preview --strictPort --port 4174",
     "test": "vitest run",
     "evidence": "node scripts/evidence.mjs",
-    "icon": "node scripts/render-icon.mjs"
+    "icon": "node scripts/render-icon.mjs",
+    "icon:macos": "node scripts/render-macos-icon.mjs"
   },
   "devDependencies": {
     "@testing-library/dom": "10.4.2",

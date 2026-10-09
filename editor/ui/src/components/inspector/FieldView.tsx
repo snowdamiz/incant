@@ -37,7 +37,7 @@ export function FieldView({
   path: readonly string[];
   ctx: FieldContext;
 }) {
-  const label = schema.title ?? name;
+  const label = schema.title ?? humanize(name);
   if (schema.type === 'object' && 'properties' in schema) {
     const record = isRecord(value) ? value : null;
     return (
@@ -236,6 +236,16 @@ function Unsupported({ id, type, value }: { id?: string | undefined; type: strin
       Unsupported field type “{type}”; raw value:
     </Notice>
   );
+}
+
+/** "translation" -> "Translation", "castShadows" / "cast_shadows" -> "Cast shadows". */
+export function humanize(key: string): string {
+  const words = key
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/[_-]+/g, ' ')
+    .trim()
+    .toLowerCase();
+  return words ? words[0]!.toUpperCase() + words.slice(1) : key;
 }
 
 export function safeJson(value: unknown): string {
