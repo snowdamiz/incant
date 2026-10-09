@@ -1,6 +1,125 @@
 # 0016 Environment lighting: default studio look-dev — result
 
-## Status
+## Final headless verdict
+
+**Approved for headless rendering: the default studio environment, as rendered in
+`artifacts/environment-final/`.** The fill and key correction is confirmed in the
+pixels. No look defect remains, and no source changes were needed in this pass.
+
+- **Not approved: native integration.** No native images exist. Astra reports that
+  computer-use access found the director's Mac locked. Native review waits for that.
+- **Not approved: any phase gate.** None is claimed.
+- **Scope:** this verdict covers the preview appearance only. It does not approve the
+  limitations listed below.
+
+- **Model:** Claude Opus 5.5, model ID `claude-opus-5-5`.
+- **Transport:** a Claude Code agent session launched by the handoff harness in this
+  worktree, under director-authorized `bypassPermissions`. The session cannot
+  independently confirm the ACP hop. No model substitution was made.
+- **Changed path in this pass:** this file only.
+
+## Final review of `artifacts/environment-final/`
+
+**Packet:** the confirmation revision. It carries no new typed director feedback. It
+is Astra's routine follow-up. It reports these results, which I did not rerun:
+
+- All 13 GPU tests pass for the model, editor and headless crates.
+- The two unchanged display tests passed earlier.
+- The native release build passes.
+
+I made no build and no native capture. I edited no implementation, test or UI code.
+I inspected the studio, command-line and authored captures at native resolution. I
+measured all of them with the stdlib PNG scripts in the ignored `target/env_check/`
+folder.
+
+**Fill and key correction.** The 90th-percentile brightness of the fill reflection
+region moved as predicted:
+
+| Capture | Initial fill | Final fill | Predicted | Key peak |
+|---|---|---|---|---|
+| Smooth metal | 227 | 200 | about 202 | 255, unchanged |
+| Satin metal | 215 | 190 | n/a | 255, unchanged |
+| Smooth dark | 72 | 66 | n/a | 255, unchanged |
+| Smooth dielectric | 187 | 181 | n/a | 255, unchanged |
+
+On smooth and satin metal, the key now reads as the clearly dominant panel and the
+fill as a secondary one. Satin metal's clipped core shrank from 529 to 507 pixels.
+That is a direct-light highlight and is acceptable.
+
+**Other checks:**
+
+- **Neutrality:** inside every sphere, the largest channel spread is 1 sRGB level, or 2
+  on metal. This is unchanged.
+- **Roughness progression:** it is still monotonic on all three materials.
+- **Seams:** none appear.
+- **Diffuse:** sphere means fell by 1 to 4 levels, as expected from the dimmer fill.
+
+**Prior-material captures:** these are center pixels, initial to final.
+
+| Capture | Initial | Final | My prediction |
+|---|---|---|---|
+| dark-fill-10 | 62 | 58 | 58 |
+| dark-fill-18 | 78 | 73 | 74 |
+| dark-fill-50 | 120 | 113 | 112 |
+| hdr-glossy-highlight | 251 | 251 | in 245 to 255 |
+| normal-map | 195 | 187 | not predicted |
+| base-color-texture and metallic-roughness-map | | 1 to 2 levels lower | not predicted |
+
+All of these are consistent with the dimmer fill and key panel.
+
+**New captures:**
+
+- **Command-line sphere in the default studio:** `cli-default-studio.png` differs from
+  `studio-metal-satin.png` by at most 1 level per channel. The command-line path
+  therefore renders the same studio as the test fixture.
+- **White furnace:** `environment-white-furnace.png` is a uniform 188 on the surface,
+  with no variation across the quad. That matches its asserted value.
+- **Authored red/blue sphere environments:** the authored, rotated, undo, redo,
+  source-free and native-ready captures behave as described. Byte-identical files pair
+  up as expected: authored, undo and native-ready match, and rotated, redo and
+  source-free match. The red/blue boundary is a soft curved arc on the sphere. It
+  follows reflection vectors, and the colors swap under rotation.
+
+**Fixture boundary versus cube-face seam:** the authored map has a deliberate sharp
+red/blue split at U=0.5 and at its wrap seam. That boundary sits in the map itself,
+so it moves with yaw and reflection direction and blurs with roughness.
+
+A cube-face seam would look different:
+
+- it would be fixed to the cubemap axes;
+- it would not swap with rotation;
+- it would also appear on the default studio spheres, which use the same cubemap path.
+
+None of the twelve studio spheres shows such a line. The faint vertical band on the
+authored rotation quads is therefore that fixture boundary, crossed by the slightly
+varying reflection vectors across a flat quad. It is not a seam. I consider this
+question closed.
+
+**Limitations, recorded and not approved:**
+
+- **No visibility or shadow term:** only the occlusion texture applies. Concave or
+  downward-facing glossy surfaces can reflect the distant floor and fill where geometry
+  should block them.
+- **No temporal antialiasing:** it is still planned in PLAN.md and is not
+  implemented. Sphere silhouettes alias in headless captures.
+- **Fixed camera and key:** the 0014 camera and key geometry stay as they are, so the
+  key lights the visible face almost head-on and dielectric spheres read soft.
+
+**Screenshots reviewed:** the PNGs in `artifacts/environment-final/`. I made no new
+renders. No native screenshots exist.
+
+**Pending:** a native integration review of the built app when the Mac is unlocked,
+and authored environments inside the editor. Neither is approved.
+
+---
+
+# Historical record: earlier passes
+
+Everything below is preserved as written for the first pass and the
+`artifacts/environment-initial/` review. Its "pending regeneration" items are
+resolved by the final review above.
+
+## Status at the integrated GPU review (historical)
 
 **Headless GPU review complete. The studio look is approved with one tuning change,
 pending regenerated captures. Native integration is not reviewed or approved.**
@@ -209,7 +328,7 @@ I made no new renders and claim no visual-regression result.
 - **Native integration captures:** these are not reviewed and not approved.
 - **Authored environments in the editor:** these are not reviewed and not approved.
 
-## Questions for Astra
+## Questions for Astra (historical, answered in the final review)
 
 - **Rotation captures:** is the faint vertical band on the authored rotation quads the
   map's own split, or a sampling or seam issue in the authored-texture path?
