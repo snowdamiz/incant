@@ -13,7 +13,7 @@ alive while the next scene prepares, allowing static buffers to be reused.
 No account is needed. Without output no GPU is initialized.
 
 Runs are limited to 10,000 ticks. Capture plans reject more than 128 frames,
-2048 pixels per dimension, or 256 MiB of raw pixels before creating output.
+dimensions outside 16–1920 wide or 16–1080 high, or 256 MiB of raw pixels before creating output.
 Compiled scripts remain bounded by the sandbox's source/memory/deadline limits.
 Output must be a new directory. A successful run atomically publishes report.json
 with final runtime/script state, geometry counts and capture times. Errors exit

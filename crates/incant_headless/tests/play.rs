@@ -81,9 +81,9 @@ fn play_rejects_unbounded_work_failed_scripts_and_existing_output_paths() {
             "--output",
             "oversized",
             "--width",
-            "2048",
+            "1920",
             "--height",
-            "2048",
+            "1080",
         ],
     ] {
         let mut command = vec!["play", "game.incant.json"];
@@ -96,6 +96,30 @@ fn play_rejects_unbounded_work_failed_scripts_and_existing_output_paths() {
             "{error}"
         );
         assert!(!root.join("oversized").exists());
+    }
+    for (flag, dimension) in [
+        ("--width", "15"),
+        ("--height", "15"),
+        ("--width", "1921"),
+        ("--height", "1081"),
+    ] {
+        let failed = run(
+            root,
+            &[
+                "play",
+                "game.incant.json",
+                "--output",
+                "invalid-size",
+                flag,
+                dimension,
+            ],
+        );
+        assert!(!failed.status.success());
+        assert!(String::from_utf8_lossy(&failed.stderr).contains("invalid value"));
+        assert!(
+            !root.join("invalid-size").exists(),
+            "unsupported dimensions must fail before output or GPU setup"
+        );
     }
     fs::create_dir(root.join("existing")).unwrap();
     fs::write(root.join("existing/report.json"), "keep prior result").unwrap();

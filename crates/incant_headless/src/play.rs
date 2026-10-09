@@ -33,9 +33,9 @@ pub struct Options {
     /// Capture the initial/final state and every N fixed ticks in between.
     #[arg(long, default_value_t = 60, value_parser = clap::value_parser!(u64).range(1..))]
     pub capture_every: u64,
-    #[arg(long, default_value_t = 640, value_parser = clap::value_parser!(u32).range(1..=2048))]
+    #[arg(long, default_value_t = 640, value_parser = clap::value_parser!(u32).range(i64::from(incant_render::MIN_SCREENSHOT_DIMENSION)..=i64::from(incant_render::MAX_SCREENSHOT_WIDTH)))]
     pub width: u32,
-    #[arg(long, default_value_t = 360, value_parser = clap::value_parser!(u32).range(1..=2048))]
+    #[arg(long, default_value_t = 360, value_parser = clap::value_parser!(u32).range(i64::from(incant_render::MIN_SCREENSHOT_DIMENSION)..=i64::from(incant_render::MAX_SCREENSHOT_HEIGHT)))]
     pub height: u32,
 }
 

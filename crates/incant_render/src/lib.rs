@@ -13,6 +13,9 @@ use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
 pub use wgpu;
 use wgpu::util::DeviceExt;
 type Result<T> = std::result::Result<T, Box<dyn Error + Send + Sync>>;
+pub const MIN_SCREENSHOT_DIMENSION: u32 = 16;
+pub const MAX_SCREENSHOT_WIDTH: u32 = 1920;
+pub const MAX_SCREENSHOT_HEIGHT: u32 = 1080;
 #[repr(C)]
 #[derive(Clone, Copy, Pod, Zeroable)]
 struct Vertex {
@@ -368,7 +371,9 @@ impl Renderer {
         width: u32,
         height: u32,
     ) -> Result<Vec<u8>> {
-        if !(16..=1920).contains(&width) || !(16..=1080).contains(&height) {
+        if !(MIN_SCREENSHOT_DIMENSION..=MAX_SCREENSHOT_WIDTH).contains(&width)
+            || !(MIN_SCREENSHOT_DIMENSION..=MAX_SCREENSHOT_HEIGHT).contains(&height)
+        {
             return Err("screenshot size out of bounds".into());
         }
         let texture = self.device.create_texture(&wgpu::TextureDescriptor {

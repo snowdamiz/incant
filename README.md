@@ -59,7 +59,8 @@ journal. It accepts `--seconds` (rounded up to a fixed tick) or `--ticks`, with 
 10,000-tick limit. Without `--output` it needs no GPU. With a new output directory
 it records the initial/final state and every `--capture-every` ticks as actual PNGs,
 plus an atomic `report.json` containing final runtime/script state and capture times.
-Capture is bounded to 128 frames and 256 MiB of raw pixels. A failed run exits
+Capture is bounded to 128 frames and 256 MiB of raw pixels, with dimensions
+from 16×16 to 1920×1080. A failed run exits
 nonzero and may leave partial PNGs, but never a completed report. Current captures
 use the diagnostic renderer and fixed camera. Asset sources are unnecessary when
 the cooked cache is present; the command reads the saved checkpoint, not unsaved
