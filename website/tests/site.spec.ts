@@ -81,3 +81,22 @@ test('keyboard users can skip navigation', async ({ page }) => {
   await skip.press('Enter')
   await expect(page.locator('main')).toBeFocused()
 })
+
+test('mobile navigation supports keyboard dismissal and working section links', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('./')
+  const toggle = page.getByRole('button', { name: /^(Open|Close) menu$/ })
+  await toggle.click()
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  const features = page.locator('#mobile-menu').getByRole('link', { name: 'Features', exact: false })
+  await expect(features).toBeFocused()
+  await page.keyboard.press('Escape')
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(toggle).toBeFocused()
+
+  await toggle.press('Enter')
+  await features.press('Enter')
+  await expect(page).toHaveURL(/#features$/)
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(page.locator('#mobile-menu')).not.toBeVisible()
+})
