@@ -16,5 +16,8 @@
     "@anthropic-ai/claude-code": "2.1.295",
     "@swc/core": "1.16.13",
     "typescript": "5.9.3"
-  }
+  },
+  "workspaces": [
+    "editor/ui"
+  ]
 }

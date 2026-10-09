@@ -1,0 +1,109 @@
+/*
+ * Incant editor design tokens, revision 1 ("islands"). See editor/ui/DESIGN.md.
+ * Contrast pairs are enforced by src/styles/tokens.test.ts; change both together.
+ */
+:root {
+  /* Surfaces. A dark canvas with slightly lifted panel "islands". Cool graphite, low chroma. */
+  --color-bg-app: #0b0c0f; /* canvas behind the islands and the titlebar */
+  --color-bg-panel: #131418; /* island surface */
+  --color-bg-raised: #1a1c21; /* inputs, chips, menus */
+  --color-bg-hover: #202329;
+  --color-bg-selected: #262b52; /* indigo-tinted selection pill */
+  --color-bg-selected-inactive: #23262d;
+  --color-bg-viewport: #0e0f12;
+
+  /* Text. */
+  --color-text: #ececf1;
+  --color-text-muted: #a9aeb9;
+  --color-text-subtle: #959cab;
+  --color-text-on-accent: #0b0c0f;
+
+  /* Lines. Decorative hairlines are low contrast; control borders meet 3:1. */
+  --color-border: #22252b;
+  --color-border-strong: #2e323a;
+  --color-border-control: #676e7b;
+
+  /* Interaction. One accent: periwinkle. Focus is a lighter tint drawn as a ring, so it is
+     distinguished from the filled selection pill by shape as well as luminance. */
+  --color-accent: #8c95ff;
+  --color-accent-strong: #a9b0ff;
+  --color-focus: #c3c8ff;
+
+  /* Status. */
+  --color-danger: #ff7a70;
+  --color-danger-bg: #33191b;
+  --color-warning: #f0bd55;
+  --color-warning-bg: #312610;
+  --color-success: #5dd39a;
+  --color-info: #7ab8ff;
+  --color-info-bg: #15233a;
+
+  /* Provenance. */
+  --color-origin-user: #7ab8ff;
+  --color-origin-agent: #d892f5;
+  --color-origin-script: #5dd39a;
+  --color-origin-import: #f0bd55;
+
+  /* Vector axes. Conventional XYZ hues, lifted to stay legible as 12 px text. */
+  --color-axis-x: #ff8a7f;
+  --color-axis-y: #7fe0a3;
+  --color-axis-z: #85b4ff;
+  --color-axis-w: #c6ccd6;
+
+  /* Fixture label. */
+  --color-fixture: #f0bd55;
+  --color-fixture-bg: #2b220f;
+
+  /* Window controls (custom chrome on Windows/Linux). */
+  --color-window-close: #c42b1c;
+
+  /* Typography. Locally bundled variable fonts; system fallbacks for offline safety. */
+  --font-ui: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --text-xs: 12px; /* Minimum size; metadata and badges. */
+  --text-sm: 13px; /* Default UI text. */
+  --text-md: 14px; /* Inputs, chat, entity name. */
+  --text-lg: 16px; /* State headings. */
+  --text-xl: 20px; /* Full-screen state headings. */
+  --leading-tight: 16px;
+  --leading: 20px;
+  --weight-regular: 420;
+  --weight-medium: 530;
+  --weight-semibold: 620;
+  --tracking-tight: -0.011em;
+
+  /* Spacing, 4 px grid. */
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 24px;
+  --space-7: 32px;
+
+  /* Sizing. */
+  --row-height: 26px;
+  --control-height: 28px;
+  --header-height: 40px;
+  --titlebar-height: 40px;
+  --statusbar-height: 26px;
+  --gutter: 6px; /* gap between islands; also the splitter hit area */
+  --splitter-size: 6px;
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 10px; /* islands */
+  --indent: 14px;
+
+  --shadow-island: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-popover: 0 12px 40px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.06);
+
+  --duration-fast: 90ms;
+  --duration: 160ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration: 0ms;
+  }
+}
