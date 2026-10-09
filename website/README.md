@@ -27,6 +27,9 @@ Browser screenshots from normal verification are saved in ignored
 `handoffs/0005-landing-page/screenshots/`. To deliberately regenerate that evidence,
 set `INCANT_EVIDENCE_DIR` to its absolute directory when running the tests.
 
+Fraunces, Inter and JetBrains Mono are self-hosted under the SIL Open Font License.
+Their license texts ship in `public/licenses/` alongside the production assets.
+
 ## Deployment
 
 `.github/workflows/website.yml` checks pull requests that touch the site. On every
