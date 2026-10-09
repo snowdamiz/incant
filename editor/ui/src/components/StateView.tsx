@@ -12,6 +12,8 @@ export function StateView({
   tone = 'neutral',
   action,
   compact = false,
+  spinner = false,
+  alert = tone === 'error',
 }: {
   icon: IconName;
   title: string;
@@ -19,11 +21,18 @@ export function StateView({
   tone?: Tone;
   action?: ReactNode;
   compact?: boolean;
+  /** Shows a spinner instead of the icon, for work in progress. */
+  spinner?: boolean;
+  /**
+   * Error views are announced as alerts by default. Pass false when the same failure
+   * is already announced elsewhere (the connection banner), so it is read once.
+   */
+  alert?: boolean;
 }) {
   return (
-    <div className={`state-view state-view--${tone}${compact ? ' state-view--compact' : ''}`} role={tone === 'error' ? 'alert' : undefined}>
+    <div className={`state-view state-view--${tone}${compact ? ' state-view--compact' : ''}`} role={alert ? 'alert' : undefined}>
       <span className="state-view__tile" aria-hidden="true">
-        <Icon name={icon} size={compact ? 16 : 20} className="state-view__icon" />
+        {spinner ? <span className="spinner" /> : <Icon name={icon} size={compact ? 16 : 20} className="state-view__icon" />}
       </span>
       <p className="state-view__title">{title}</p>
       {children ? <div className="state-view__body">{children}</div> : null}

@@ -101,16 +101,26 @@ kbd,
   outline-offset: 2px;
 }
 
+/* Keyboard focus marker (src/shell/inputModality.ts). WebKit does not match
+   :focus-visible after script focus following a key press, e.g. a dialog opened with
+   Enter focusing Close. Every :focus-visible rule has a [data-focus-visible] twin. */
+[data-focus-visible] {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
 .tree-row:focus-visible,
 .list__row--action:focus-visible,
 .panel:focus-visible,
 .dialog__body:focus-visible,
 .component__toggle:focus-visible,
-.tab:focus-visible {
-  outline-offset: -2px;
-}
-
-.panel:focus-visible {
+.tab:focus-visible,
+.tree-row[data-focus-visible],
+.list__row--action[data-focus-visible],
+.panel[data-focus-visible],
+.dialog__body[data-focus-visible],
+.component__toggle[data-focus-visible],
+.tab[data-focus-visible] {
   outline-offset: -2px;
 }
 
@@ -226,6 +236,11 @@ kbd {
   font-weight: var(--weight-medium);
   letter-spacing: var(--tracking-tight);
   color: var(--color-text);
+}
+
+/* Opening or failed: the label is a state, not a project name. */
+.titlebar__project.is-pending {
+  color: var(--color-text-muted);
 }
 
 .titlebar[data-window-focused='false'] .titlebar__identity,
@@ -347,7 +362,8 @@ kbd {
   color: #fff;
 }
 
-.window-control:focus-visible {
+.window-control:focus-visible,
+.window-control[data-focus-visible] {
   outline-offset: -2px;
 }
 
@@ -575,11 +591,13 @@ kbd {
   background: var(--color-border-control);
 }
 
-.splitter:focus-visible {
+.splitter:focus-visible,
+.splitter[data-focus-visible] {
   outline: none;
 }
 
 .splitter:focus-visible::after,
+.splitter[data-focus-visible]::after,
 .splitter:active::after {
   background: var(--color-focus);
 }
@@ -1252,7 +1270,8 @@ kbd {
 }
 
 /* Tabs are square for the underline; the focus ring stays rounded and inside the strip. */
-.tab:focus-visible {
+.tab:focus-visible,
+.tab[data-focus-visible] {
   outline-offset: -5px;
   border-radius: calc(var(--radius) + 3px);
 }
@@ -1864,7 +1883,8 @@ input.control.control__input {
   font-size: var(--text-sm);
 }
 
-input.control.control__input:focus-visible {
+input.control.control__input:focus-visible,
+input.control.control__input[data-focus-visible] {
   outline: 2px solid var(--color-focus);
   outline-offset: 1px;
 }

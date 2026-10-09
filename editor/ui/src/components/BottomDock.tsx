@@ -4,6 +4,7 @@ import type { ConsoleLevel, Diagnostic, Origin } from '../bridge/contract';
 import type { IconName } from '../icons/Icon';
 import { Icon } from '../icons/Icon';
 import type { DockTab } from '../shell/ShellContext';
+import { projectState } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 import { StateView } from './StateView';
 
@@ -93,6 +94,22 @@ function ProblemsList() {
     [snapshot?.diagnostics],
   );
   if (!snapshot) return <StateView icon="plug" title="No engine connected" compact />;
+  const project = projectState(snapshot);
+  // Nothing has been validated while the project opens; never claim "No problems" then.
+  if (project.kind === 'loading') {
+    return (
+      <StateView icon="problems" spinner title="Opening project…" compact>
+        <p>Problems appear when validation finishes.</p>
+      </StateView>
+    );
+  }
+  if (sorted.length === 0 && project.kind === 'failed') {
+    return (
+      <StateView icon="problems" title="Not validated" compact>
+        <p>The project did not open, so it has not been checked.</p>
+      </StateView>
+    );
+  }
   if (sorted.length === 0) {
     return (
       <StateView icon="problems" title="No problems" compact>
@@ -208,6 +225,16 @@ function originLabel(origin: Origin): { label: string; detail: string } {
 function HistoryList() {
   const { snapshot, run } = useShell();
   if (!snapshot) return <StateView icon="plug" title="No engine connected" compact />;
+  const project = projectState(snapshot);
+  // Without an open project there is no history to undo; no toolbar or "0 of 0" claim.
+  if (project.kind === 'loading') return <StateView icon="history" spinner title="Opening project…" compact />;
+  if (project.kind === 'failed') {
+    return (
+      <StateView icon="history" title="No project loaded" compact>
+        <p>Edit history appears once the project opens.</p>
+      </StateView>
+    );
+  }
   const { entries, applied } = snapshot.history;
   return (
     <div className="history">
