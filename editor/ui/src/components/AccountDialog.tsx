@@ -338,10 +338,7 @@ function AccountBody({
         </li>
         <li>
           <Icon name="info" size={14} />
-          <span>
-            Your sign-in is never saved in your projects. After Incant changes, your computer may ask once to allow access to
-            it.
-          </span>
+          <span>Your sign-in stays private to your user account on this computer and is never saved in your projects.</span>
         </li>
         <li>
           <Icon name="plug" size={14} />

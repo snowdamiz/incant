@@ -125,8 +125,8 @@ Both are bundled locally, so nothing is fetched from a network.
   second mono line, a bordered list of saved accounts where only a signed-in account
   is filled and marked "In use" (signed-out registrations offer "Sign in", never an
   active mark), then actions and three facts: you stay signed in across restarts and
-  new builds, sign-in is never in projects and the computer may ask once for access
-  after Incant changes, and everything but the agent works offline. While adding an
+  new builds, sign-in stays private to the user account and out of projects (no
+  storage or encryption details), and everything but the agent works offline. While adding an
   account, a note says the current one stays in use and cancelling keeps it. "Continue with ChatGPT" uses OpenAI's
   white button format. Sign-out asks inline first. Escape closes without cancelling a
   sign-in; "Cancel sign-in" is explicit. No field ever accepts a token, code or key.

@@ -63,7 +63,9 @@ describe('ChatGPT account dialog', () => {
     const cta = within(d).getByRole('button', { name: 'Continue with ChatGPT' });
     expect(document.activeElement).toBe(cta);
     expect(within(d).getByText(/stay signed in on this computer when you quit, restart or install a new build of Incant/)).toBeTruthy();
-    expect(within(d).getByText(/never saved in your projects/)).toBeTruthy();
+    expect(within(d).getByText(/private to your user account on this computer and is never saved in your projects/)).toBeTruthy();
+    // No storage implementation details or OS permission prompts are promised or described.
+    expect(d.textContent).not.toMatch(/may ask|keychain|permission|encrypt/i);
     expect(within(d).getByText(/works offline, without an account/)).toBeTruthy();
     await expectNoAxeViolations(document.body);
     fireEvent.click(cta);
