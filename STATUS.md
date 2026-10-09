@@ -58,11 +58,12 @@ within its documented workload.
   each passed 23 hosted browser checks. Graphical explanations, authentic SVG
   platform marks and the subsequent workflow correction are integrated in PR #2.
   Each workflow icon has a short visible explanation and tighter spacing; all 23
-  hosted checks passed on bf99437. The capture restriction remains in force. See
+  hosted checks passed on bf99437. Visual review is resuming under the new permission. See
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
   routes by focus; automated tests pass, but its final native interaction check
-  remains pending. **Computer use, browser automation and screen capture are
-  stopped at the director’s request** until explicitly permitted again.
+  remains pending. On 2026-10-09 the director explicitly permitted computer use
+  and screen capture again when needed. Claude native/browser visual review is
+  resuming in handoff 0008; earlier restrictions remain historical evidence only.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are

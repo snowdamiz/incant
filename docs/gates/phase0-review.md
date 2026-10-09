@@ -41,10 +41,11 @@ and renderer probes, three-desktop credential persistence, and six-platform
 probes. The linked evidence records exact revisions and run URLs; see the
 [integration report](../spikes/connected-editor.md).
 
-The director stopped computer use and screen capture. That restriction remains
-in force. Exact native traffic-light alignment, the final text/project Undo
-interaction check and further resize/focus captures are therefore deferred. A
-browser fixture or a compiled app is not recorded as proof of those native checks.
+The director temporarily stopped computer use and screen capture, then explicitly
+permitted them again on 2026-10-09 when needed. Native traffic-light alignment,
+the final text/project Undo interaction check and resize/focus review are resuming
+under handoff 0008. They remain unverified until actual results are recorded; a
+browser fixture or compiled app does not prove native behavior.
 
 ## Open decisions from PLAN.md section 12
 
@@ -66,7 +67,8 @@ browser fixture or a compiled app is not recorded as proof of those native check
    checks. Landing-page design changes remain routed through Claude ACP.
 2. Complete live revocation verification with a suitable disposable connection;
    do not revoke the director's working account just to satisfy a test.
-3. Resume deferred native checks only after the director permits computer use.
+3. Complete the native checks now that the director has restored computer-use and
+   capture permission; record actual results through Claude visual review.
 4. The foundation is now on main. Record scheduled workflow results from the default
    branch as they become available; a merge or a manual run does not prove nightly history.
 5. Record the human-owned signing, staffing and outstanding strategic decisions.
