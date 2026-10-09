@@ -79,7 +79,7 @@ pub(crate) fn read(renderer: &Renderer, texture: &wgpu::Texture) -> Vec<u8> {
     }
     pixels
 }
-fn save(name: &str, pixels: &[u8], width: u32, height: u32) {
+pub(crate) fn save(name: &str, pixels: &[u8], width: u32, height: u32) {
     if let Some(directory) = std::env::var_os("INCANT_HDR_EVIDENCE") {
         std::fs::create_dir_all(&directory).unwrap();
         let file =
@@ -158,15 +158,15 @@ fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
         let mut encoder = renderer.device.create_command_encoder(&Default::default());
         renderer
             .output
-            .encode(
+            .prepare(
                 &renderer.device,
-                &mut encoder,
                 &source.create_view(&Default::default()),
                 &target.create_view(&Default::default()),
                 format,
                 None,
             )
-            .unwrap();
+            .unwrap()
+            .encode(&mut encoder);
         renderer.queue.submit([encoder.finish()]);
         let pixels = read(&renderer, &target);
         for (i, (_, expected)) in signals.iter().enumerate() {

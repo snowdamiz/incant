@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+bevy_ecs = { workspace = true }
 incant_doc = { workspace = true }
 incant_core = { workspace = true }
 incant_assets = { path = "../incant_assets" }

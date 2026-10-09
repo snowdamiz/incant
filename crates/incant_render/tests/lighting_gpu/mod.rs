@@ -10,17 +10,17 @@ use std::{collections::BTreeMap, time::Duration};
 fn grid_readback(r: &Renderer, plan: LightPlan) -> (Vec<u32>, Vec<u32>) {
     let lights = GpuLights::upload(&r.device, plan);
     let mut encoder = r.device.create_command_encoder(&Default::default());
-    let _frame = r
+    let frame = r
         .lighting
         .prepare(
             &r.device,
-            &mut encoder,
             &lights,
             [0., 0., 320., 192.],
             LocalLightSelection::Clustered,
             crate::camera::CameraView::preview(),
         )
         .unwrap();
+    frame.compute.as_ref().unwrap().encode(&mut encoder);
     let grid = r
         .lighting
         .buffers(&r.device, [5, 3], lights.local.div_ceil(32).max(1))

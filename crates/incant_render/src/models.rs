@@ -1,7 +1,7 @@
 //! Indexed model versions with immutable geometry and material resources.
 use crate::{
     Renderer, ResourceError, Result,
-    materials::{MaterialResources, PipelineKey},
+    materials::MaterialResources,
     scene::{ResolvedScene, SceneStats},
 };
 use incant_assets::{AssetStore, RuntimeAsset, RuntimeAssetData};
@@ -11,6 +11,9 @@ use std::{
     sync::{Arc, Weak},
 };
 use wgpu::util::DeviceExt;
+#[path = "model_draw.rs"]
+mod drawing;
+pub(crate) use drawing::{ModelDraw, ModelTarget};
 
 struct Primitive {
     vertices: wgpu::Buffer,
@@ -39,7 +42,7 @@ struct Batch {
 /// Source bytes are not needed after AssetStore has loaded the cooked model.
 pub struct RenderScene {
     pub(crate) diagnostics: Vec<glam::Mat4>,
-    batches: Vec<Batch>,
+    batches: Vec<Arc<Batch>>,
     stats: SceneStats,
     environment: Option<crate::environment::Binding>,
     lights: crate::lighting::GpuLights,
@@ -190,7 +193,7 @@ impl Renderer {
                     if bytes.len() as u64 > self.device.limits().max_buffer_size {
                         return Err(ResourceError::BufferSize("scene instances").into());
                     }
-                    batches.push(Batch {
+                    batches.push(Arc::new(Batch {
                         model: Arc::clone(&model),
                         primitive,
                         instances: self.device.create_buffer_init(
@@ -203,7 +206,7 @@ impl Renderer {
                         count: transforms.len() as u32,
                         mirrored,
                         centers,
-                    });
+                    }));
                 }
             }
         }
@@ -230,151 +233,4 @@ impl Renderer {
             environment,
         })
     }
-
-    pub(crate) fn render_models(
-        &self,
-        scene: &RenderScene,
-        target: ModelTarget<'_>,
-        encoder: &mut wgpu::CommandEncoder,
-    ) -> Result<()> {
-        if scene.batches.is_empty() {
-            return Ok(());
-        }
-        #[repr(C)]
-        #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
-        struct Frame {
-            matrix: [[f32; 4]; 4],
-            eye: [f32; 4],
-            environment: [f32; 4],
-        }
-        let environment = scene
-            .environment
-            .as_ref()
-            .expect("model scene has environment");
-        let frame = Frame {
-            matrix: scene
-                .camera
-                .matrix(target.rect[2] / target.rect[3])?
-                .to_cols_array_2d(),
-            eye: scene.camera.eye.extend(1.).to_array(),
-            environment: [
-                environment.intensity,
-                environment.rotation.cos(),
-                environment.rotation.sin(),
-                crate::environment::MAX_SPECULAR_LOD,
-            ],
-        };
-        let camera = self
-            .device
-            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                label: Some("Material preview frame"),
-                contents: bytemuck::bytes_of(&frame),
-                usage: wgpu::BufferUsages::UNIFORM,
-            });
-        let bind_group = self.device.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: Some("Material preview frame"),
-            layout: &self.materials.globals,
-            entries: &[wgpu::BindGroupEntry {
-                binding: 0,
-                resource: camera.as_entire_binding(),
-            }],
-        });
-        struct Draw<'a> {
-            batch: &'a Batch,
-            instances: std::ops::Range<u32>,
-            pipeline: wgpu::RenderPipeline,
-            depth: f64,
-        }
-        let mut opaque = Vec::new();
-        let light_group = self.lighting.prepare(
-            &self.device,
-            encoder,
-            &scene.lights,
-            target.rect,
-            scene.light_selection,
-            scene.camera,
-        )?;
-        let mut transparent = Vec::new();
-        let eye = scene.camera.eye.as_dvec3();
-        let forward = scene.camera.forward.as_dvec3();
-        for batch in &scene.batches {
-            let material =
-                &batch.model.materials.materials[batch.model.primitives[batch.primitive].material];
-            let pipeline = self.materials.pipeline(
-                &self.device,
-                PipelineKey {
-                    format: target.format,
-                    alpha: material.alpha,
-                    double_sided: material.double_sided,
-                    mirrored: batch.mirrored,
-                },
-            )?;
-            if material.alpha == incant_assets::AlphaMode::Blend {
-                for (index, center) in batch.centers.iter().enumerate() {
-                    transparent.push(Draw {
-                        batch,
-                        instances: index as u32..index as u32 + 1,
-                        pipeline: pipeline.clone(),
-                        depth: (center.as_dvec3() - eye).dot(forward),
-                    });
-                }
-            } else {
-                opaque.push(Draw {
-                    batch,
-                    instances: 0..batch.count,
-                    pipeline,
-                    depth: 0.,
-                });
-            }
-        }
-        // Primitive-center sorting handles ordinary layered transparency. Crossing
-        // triangles and intersecting transparent surfaces remain order-dependent.
-        transparent.sort_by(|a, b| b.depth.total_cmp(&a.depth));
-        let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-            label: Some("Imported model geometry"),
-            color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                view: target.color,
-                resolve_target: None,
-                depth_slice: None,
-                ops: wgpu::Operations {
-                    load: wgpu::LoadOp::Load,
-                    store: wgpu::StoreOp::Store,
-                },
-            })],
-            depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
-                view: target.depth,
-                depth_ops: Some(wgpu::Operations {
-                    load: wgpu::LoadOp::Load,
-                    store: wgpu::StoreOp::Discard,
-                }),
-                stencil_ops: None,
-            }),
-            timestamp_writes: None,
-            occlusion_query_set: None,
-            multiview_mask: None,
-        });
-        pass.set_bind_group(0, &bind_group, &[]);
-        pass.set_bind_group(2, &environment.resource.group, &[]);
-        pass.set_bind_group(3, &light_group, &[]);
-        let [x, y, w, h] = target.rect;
-        pass.set_viewport(x, y, w, h, 0., 1.);
-        for draw in opaque.iter().chain(&transparent) {
-            let batch = draw.batch;
-            let primitive = &batch.model.primitives[batch.primitive];
-            let material = &batch.model.materials.materials[primitive.material];
-            pass.set_pipeline(&draw.pipeline);
-            pass.set_bind_group(1, &material.bind_group, &[]);
-            pass.set_vertex_buffer(0, primitive.vertices.slice(..));
-            pass.set_vertex_buffer(1, batch.instances.slice(..));
-            pass.set_index_buffer(primitive.indices.slice(..), wgpu::IndexFormat::Uint32);
-            pass.draw_indexed(0..primitive.index_count, 0, draw.instances.clone());
-        }
-        Ok(())
-    }
-}
-pub(crate) struct ModelTarget<'a> {
-    pub color: &'a wgpu::TextureView,
-    pub depth: &'a wgpu::TextureView,
-    pub format: wgpu::TextureFormat,
-    pub rect: [f32; 4],
 }

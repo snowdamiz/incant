@@ -3238,6 +3238,7 @@ dependencies = [
 name = "incant_render"
 version = "0.0.1"
 dependencies = [
+ "bevy_ecs",
  "bytemuck",
  "glam 0.32.1",
  "half",
