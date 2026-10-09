@@ -51,6 +51,7 @@ fn unit(v:vec3f) -> vec3f { return v*inverseSqrt(max(dot(v,v),1e-16)); }
     let direct=(diffuse+distribution*visibility*fresnel)*frame.radiance.xyz*nl;
     // Diffuse preview environment only: no specular IBL or shadow claim.
     let indirect=frame.environment.xyz*base.rgb*(1.0-metallic)*occlusion;
-    let color=direct+indirect+emissive;
+    // Bound finite radiance before half-float storage; values above one survive.
+    let color=clamp(direct+indirect+emissive,vec3f(0),vec3f(65504));
     return vec4f(color,select(1.0,base.a,material.flags.x==2u));
 }

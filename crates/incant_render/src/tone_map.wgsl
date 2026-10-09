@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2024 The Khronos Group Inc. (Khronos PBR Neutral reference).
+// Copyright 2024 The Khronos Group, Inc. (Khronos PBR Neutral reference).
 // Modified for Incant: ported from GLSL to WGSL, fixed preview exposure added,
 // and the commentary rewritten. The curve constants and operations are unchanged.
 //
 // Source of the curve: Khronos PBR Neutral tone mapper.
 //   Reference code: https://github.com/KhronosGroup/ToneMapping/blob/
-//     f5dc101149fc5c85c0f9852fe2ba438853e8a7d1/PBR_Neutral/pbrNeutral.glsl
+//     180b1a7bddec33f73fe41712a2963cc3ad8e5547/PBR_Neutral/pbrNeutral.glsl
 //     (Apache-2.0 per the repository's .reuse/dep5).
 //   Specification: PBR_Neutral/README.md in the same repository (CC-BY-4.0).
 //
