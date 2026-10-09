@@ -21,7 +21,6 @@ simulates physics or draws images. Usage (repo root, after the release build):
 
 import json
 import math
-import shutil
 import struct
 import subprocess
 import sys
@@ -148,7 +147,7 @@ def main():
     if not CLI.exists():
         raise SystemExit("Build first: ./tools/cargo build -p incant_headless --release --locked")
     if OUT.exists():
-        shutil.rmtree(OUT)
+        raise SystemExit("Output directory already exists; choose a new directory.")
     (OUT / "models").mkdir(parents=True)
     run("init", PROJECT, "--name", "Physics Look-dev", "--entities", "0")
 
