@@ -44,7 +44,8 @@ sample with the bundled SWC compiler and runs 120 ticks: 120 shared-bus commands
 messages at ticks 60 and 120, unchanged authored bytes, no GPU or account.
 The integrated `832ae5d` tree passes 124 Rust behavior tests, all seven explicit
 GPU tests and workspace Clippy. The UI tree is unchanged from its 282-test/build
-verification. Hosted checks are pending.
+verification. All three applicable hosted checks passed on `b09a3e2`;
+PR #14 merged into main as `b36b76f47867e523c27a0f0f4afe80f4e0e6794e` on 2026-10-09.
 
 This does not add a script exception debugger, stack traces, failed-tick logs,
 engine-system telemetry or editor console wiring. Simulation timestamps are not

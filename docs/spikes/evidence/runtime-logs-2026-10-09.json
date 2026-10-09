@@ -41,5 +41,47 @@
     "clippy": "passed",
     "ui_code_unchanged_since_282_test_verification": true
   },
-  "hosted_checks": "pending"
+  "hosted_checks": "all three applicable checks passed",
+  "hosted_merge": {
+    "headRefOid": "b09a3e2e8cefd5ecbdc9e40aab2c4631e07ab7aa",
+    "mergeCommit": {
+      "oid": "b36b76f47867e523c27a0f0f4afe80f4e0e6794e"
+    },
+    "mergedAt": "2026-10-09T18:41:19Z",
+    "number": 14,
+    "state": "MERGED",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T18:39:23Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37971977094/job/113960619191",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "startedAt": "2026-10-09T18:15:15Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T18:40:07Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37971977057/job/113960617432",
+        "name": "checks",
+        "startedAt": "2026-10-09T18:15:19Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T18:28:21Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37971977094/job/113960618731",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "startedAt": "2026-10-09T18:15:15Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      }
+    ],
+    "url": "https://github.com/snowdamiz/incant/pull/14"
+  }
 }

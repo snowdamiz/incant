@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-09",
+  "implementation": "2010cea",
+  "final_curve": "7264041",
+  "reference_tests": "3bde8a1",
+  "adapter": "Apple M5 Pro",
+  "local_checks": {
+    "rust_behavior_tests": 124,
+    "explicit_gpu_tests": 11,
+    "ui_bridge_tests": 282,
+    "clippy": "passed",
+    "format": "passed",
+    "ui_build": "passed",
+    "release_native_build": "passed",
+    "generated_conventions_bridge_sdk": "passed",
+    "bundled_license_and_notice_byte_comparison": "passed"
+  },
+  "scope": "RGBA16Float geometry and HDR blending followed by a derived SDR preview tone map and native composition; not a full render graph or HDR-monitor output",
+  "limits": {
+    "frame_pixels": 16777216,
+    "dimension": 8192,
+    "radiance": 65504,
+    "preview_exposure": 1.0,
+    "compression_threshold": 0.8,
+    "output_formats": [
+      "Rgba8Unorm",
+      "Rgba8UnormSrgb",
+      "Bgra8Unorm",
+      "Bgra8UnormSrgb"
+    ]
+  },
+  "headless_final_captures": {
+    "base-color-texture.png": "8c41c41be093c1fc8a7150574b07dbe62fedbb64dc2cc45eff71481325b02c93",
+    "dark-fill-10.png": "37920c7a6228252317800c210c1f6d13fced09dbcb34397f592114923e4549fb",
+    "dark-fill-18.png": "0d89fd6f7d0ff7fd3e6472ab95c36f966a7e079fcfb5cbcece25e3b3b02112c7",
+    "dark-fill-50.png": "d9b6d19ee051fa0396e42a463dee9f937fa5bd55e4858c1fda0a1e7418f6dc82",
+    "double-sided-back.png": "4f49034004320f7142255c6893110561f4181c1562f7b98557349d10ddab385e",
+    "emissive-map.png": "ec1ccbb53a0de325ed551c2b80156e0c4c62ea5bbb03316aa9fd66e9e91b2f1b",
+    "hdr-glossy-highlight.png": "4f4e8b6f9bd82ec759eb92da91f0357b51e404ebc5c2bd71357aa47f1cb1f1b2",
+    "hdr-reference-swatches.png": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130",
+    "hdr-transparent-over-black.png": "92fa682f5c5b37440488b2b9457fdfd69215508eb07a6665a03d4ac2270631e8",
+    "layered-transparency.png": "f7ed53260a25b13216fe9c204d53b6602f6ea9199090943cef56f367fadd043b",
+    "linear-filter.png": "eb05e4254c4797026f86f063f05bcd1d1080bd1ccd7caec65c9ee6fc8a939de4",
+    "lit-double-sided-back.png": "5a25986341f8be0bb91907736310f20457c78a3f6f921714bddc6d8049c9a5c8",
+    "mask-discarded.png": "e1751a8a2d75f191fde7f49ca0c531d612d0a59b444411f83d6dffc97f8744c7",
+    "metallic-roughness-map.png": "22037c8fa22925596f26541e48fb5194b9e5879dad2f210229fa7dfd379532f4",
+    "minified-color-mips.png": "eb05e4254c4797026f86f063f05bcd1d1080bd1ccd7caec65c9ee6fc8a939de4",
+    "normal-map.png": "d73492123fc70a7793f7f64e9d4e112b5d6794fe8754d8358398381790f34eb4",
+    "occlusion-map.png": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a",
+    "opaque-alpha-zero.png": "4f49034004320f7142255c6893110561f4181c1562f7b98557349d10ddab385e",
+    "opaque-between-transparent.png": "805dca6e16dce66b087073322a4c245145c919c8660f7138af02d4e06ba524ce",
+    "reflected-single-sided.png": "4f49034004320f7142255c6893110561f4181c1562f7b98557349d10ddab385e",
+    "reimported-blue-texture.png": "e1712a63083e8095a884a9db9db0dc80233a0d45ce4e1dff4764a075a815000f",
+    "sixteen-bit-color.png": "167ed1c9afc481bedc8383d6d55ae5feb7ffb54e7cb19b1653e9b2f8a4609272",
+    "textured-cube.png": "b305522a3abf86b0eadb05f4d0ada13f751807d4882820c45ac4a23ef93ea847",
+    "varying-normal-map.png": "1507dc95daa2d91bfdc32547a0504b226cc17f66bf8a8cac27637bffa6351232"
+  },
+  "native": {
+    "wide_logical": [
+      1440,
+      874
+    ],
+    "minimum_logical": [
+      1000,
+      650
+    ],
+    "capture_encoding": "JPEG, 2x device scale",
+    "captures": {
+      "07-final-wide.jpg": "33b18ebb858760c715811c1850107fda47c0303097bf8b2bfece88fb15ebe2e9",
+      "08-final-minimum.jpg": "170fa284009a802d72befb4d6cee2f8fb9e44b3d92e1faa37ba36f201347b6ba"
+    },
+    "project_history_and_saved_account_restored": true,
+    "viewport_attached_after_resize": true,
+    "problems": 0
+  },
+  "visual_review": {
+    "model": "Claude Opus 5.5",
+    "transport": "ACP via tools/handoff/main.py",
+    "packet": "0015-hdr-output",
+    "status": "final review pending"
+  },
+  "hosted_checks": "pending"
+}

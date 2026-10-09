@@ -67,7 +67,8 @@ within its documented workload.
   Failure retains prior completed records, and output names/budgets are checked.
   Five new behavior tests and the combined frame/log GPU case pass. The combined
   material/log tree passes 124 Rust tests, seven explicit GPU tests and Clippy;
-  the unchanged UI passes 282 tests and its build. Hosted checks are pending. See [runtime log evidence](docs/spikes/runtime-logs.md).
+  the unchanged UI passes 282 tests and its build. All three applicable hosted
+  checks passed on `b09a3e2`; PR #14 merged as `b36b76f` on 2026-10-09. See [runtime log evidence](docs/spikes/runtime-logs.md).
 
 - Imported glTF material previews now use typed metallic/roughness factors and
   retained GPU base-color, metallic/roughness, normal, occlusion and emissive maps.
