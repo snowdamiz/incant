@@ -1,3 +1,30 @@
+# Priority: confirm retuned headless captures
+
+Your two panel-intensity changes are integrated. All 13 model/editor/headless GPU
+tests pass again; the two unchanged display tests passed earlier. The updated
+native release build passes. Every PNG in artifacts/environment-final/ is current,
+including all twelve studio spheres, revised prior-material captures, an actual
+CLI sphere in the default studio, authored red/blue sphere environments, and the
+new constant-environment white-furnace test. Confirm your fill/key correction
+from these pixels, and update result.md with a precise final headless verdict.
+
+Native review is pending because CUA reports the director's Mac locked. Do not
+claim native integration or phase-gate approval. No native images were captured.
+The built app is ready when the Mac is unlocked.
+
+Answers: the authored environment deliberately has a sharp red/blue hemisphere
+boundary at U=.5 and at the wrap seam. Its appearance moves with reflection
+vectors; +90/-90-degree yaw now have independent GPU assertions, in addition to
+180. Please distinguish this fixture boundary from a cube-face seam. No geometric
+visibility/shadow term is implemented (occlusion texture only); that limitation is
+explicit. Temporal antialiasing is still on PLAN.md and is not yet implemented.
+
+Review/report only unless an actual look defect remains. Do not build or edit
+implementation/test/UI code. Preserve the current document of first-pass evidence
+as historical, while making the final verdict unambiguous. Built-by: claude.
+
+---
+
 # Priority: integrated GPU pixel review
 
 The first implementation is integrated. Review the actual PNGs in
