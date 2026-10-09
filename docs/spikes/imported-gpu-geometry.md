@@ -36,7 +36,13 @@ scene selection and simulation-driven render snapshots remain open.
   GPU tests. Desktop jobs also execute the public CLI probe. Hosted results are
   pending for this increment; local tests do not count as hosted evidence.
 - Claude handoff 0011 owns rendered-pixel/native composition review and accurate
-  viewport error wording. Native review is pending.
+  viewport error wording. Native Undo selected the previous model version. Redo
+  while its replacement cache was unavailable showed a real asset IO error;
+  restoring the cache recovered the viewport automatically at the same revision.
+  The saved account restored without a new login. Claude's pixel review is pending.
+- All 110 Rust behavior tests, two explicitly invoked GPU tests, 276 UI tests,
+  workspace Clippy, formatting, generated contracts/SDK checks and the native
+  release build pass locally. [Machine-readable evidence](evidence/imported-geometry-2026-10-09.json).
 
 The last valid GPU scene stays allocated on an asset/render-preparation failure;
 the existing error overlay currently covers it. Retry is once per second or on

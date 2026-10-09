@@ -56,7 +56,8 @@ within its documented workload.
 - Imported model GPU geometry is implemented locally: indexed/instanced buffers,
   default glTF scene/node hierarchy, version retention, revision-driven editor
   replacement, and shared CLI/agent rendering. CPU checks, two real GPU tests and
-  public CLI import/reimport/readback pass. Native/Claude review and hosted checks
+  public CLI import/reimport/readback pass. Native Undo and missing-cache recovery
+  pass without reopening. Claude pixel review and hosted checks
   are pending; materials, lighting and the production render graph remain open.
   See [imported GPU geometry](docs/spikes/imported-gpu-geometry.md).
 

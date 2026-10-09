@@ -43,5 +43,21 @@
     }
   },
   "visual_review": false,
-  "native_window_composition_review": false
+  "native_window_composition_review": false,
+  "native_behavior": {
+    "build": "b2721a2",
+    "undo_selects_prior_version": true,
+    "missing_replacement_cache_reports_error": true,
+    "same_revision_cache_restore_recovers": true,
+    "saved_account_restored": true,
+    "visual_review": "pending Claude",
+    "captures_private": true
+  },
+  "local_checks": {
+    "rust_behavior_tests": 110,
+    "gpu_tests_explicit": 2,
+    "ui_tests": 276,
+    "clippy": "passed",
+    "native_release_build": "passed"
+  }
 }

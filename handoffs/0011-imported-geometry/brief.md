@@ -1,3 +1,16 @@
+## Priority update: native captures available now
+
+Astra rebuilt the real release app from b2721a2 and supplied native-*.jpg in
+artifacts/geometry-review. Native Undo restored the original geometry version;
+Redo with the replacement cooked file temporarily moved showed a real asset IO
+error; restoring that disposable cache recovered Attached automatically at the
+same document revision. Captures: native-reimported-wide, native-undo-original,
+native-cache-error-before-copy, native-recovered, native-minimum. Review all.
+The error screenshot predates your copy changes; request one final native error
+capture after integration. Saved account restoration also succeeded; never quote
+its label. Minimum sizing used Window > Move & Resize > Bottom Right and was
+restored afterward. Do not commit these private captures.
+
 # Imported GPU geometry: native visual review and error wording
 
 Claude Opus 5.5 through ACP owns this visual review. Preserve the approved left
