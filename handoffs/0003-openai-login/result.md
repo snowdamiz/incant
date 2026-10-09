@@ -8,8 +8,43 @@ packet, so nothing here is native evidence. Phase gate approval is not claimed.
 Model: Claude Opus 5.5 (`claude-opus-5-5`), run through Claude Code in this worktree
 with the director's bypassPermissions authorization. No other model was substituted.
 
-Commits by Claude: 35f3527 holds the first UI. The follow-up is a separate commit on
-top of Astra's 86aa0da, which remains attributed to Astra.
+Commits by Claude: 35f3527 holds the first UI. 8bb34e1 is the follow-up on top of
+Astra's 86aa0da, which remains attributed to Astra. The Keychain copy correction
+below is its own commit.
+
+## Latest correction: no Keychain prompt line (director feedback)
+
+I acknowledge the director's request to stop the repeated Keychain password prompts.
+Astra is moving macOS sign-in storage to private local files. The dialog no longer
+says "After Incant changes, your computer may ask once to allow access to it." I
+chose generic cross-platform wording, so no platform branch is needed. The facts now
+read:
+
+- You stay signed in on this computer when you quit, restart or install a new build
+  of Incant.
+- Your sign-in stays private to your user account on this computer and is never
+  saved in your projects.
+- Everything except the agent works offline, without an account.
+
+The new wording promises no encryption and names no file modes, Keychain or other
+developer detail. A test now fails if the dialog text mentions "may ask",
+"keychain", "permission" or "encrypt". `DESIGN.md` was updated to match.
+
+I checked this against browser fixtures only. I did not touch the real account, the
+native app or any credentials.
+
+Visual QA: I re-captured all 32 fixture screenshots and inspected the signed-out and
+narrow 900x600 signed-in dialogs. The three facts take two lines each, and nothing
+clips or wraps badly.
+
+Commands, run from `editor/ui`:
+
+```
+npm run typecheck                    # pass, 0 errors
+npx vitest run                       # 180 tests passed
+npm run build                        # pass
+node scripts/account-evidence.mjs    # 32 screenshots, 13 axe runs, 0 violations
+```
 
 ## Follow-up after 35f3527 (priority revision)
 
@@ -33,14 +68,8 @@ unstaged because the text is Astra's. The shared contract is untouched.
 - **Error without a signed-in account.** The headline is "Sign-in didn't finish". The
   body drops "Nothing was changed", which the UI cannot know.
 - **Chip.** Any error now reads "Needs attention" instead of "Sign-in problem".
-- **Persistence copy.** It promises the sign-in survives restarts and new builds. It
-  does not promise the absence of operating system prompts. It is now three short
-  facts:
-  - You stay signed in on this computer when you quit, restart or install a new build
-    of Incant.
-  - Your sign-in is never saved in your projects. After Incant changes, your computer
-    may ask once to allow access to it.
-  - Everything except the agent works offline, without an account.
+- **Persistence copy.** It promises the sign-in survives restarts and new builds. The
+  latest correction above superseded the operating-system prompt line added here.
 - **Sign-out confirmation.** It now adds that other saved accounts stay listed.
 - **Fixtures.** They follow `editor/app/src/provider.rs`. The new `adding-browser` and
   `error-while-signed-in` states were added. Error codes are `provider.auth`, the API
