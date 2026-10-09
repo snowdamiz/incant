@@ -53,13 +53,23 @@ within its documented workload.
 
 ## Active work
 
+- HDR geometry now renders to retained RGBA16Float attachments before the display
+  transform. Claude's derived preview curve preserves ordinary colors and rolls
+  off bright highlights. Eleven explicit GPU checks cover tone mapping, display
+  formats, dark materials, HDR transparency, resize lifetime, imports and playback.
+  The workspace passes 124 Rust tests, Clippy and 282 UI tests/build. Claude approved
+  the 24 final GPU captures and both native sizes. Hosted checks are pending;
+  full production lighting, render graph, IBL, shadows, bloom and antialiasing
+  remain open. See [HDR output evidence](docs/spikes/hdr-output.md).
+
 - Structured script logging now uses the bounded sandbox API and preserves
   messages from successful ticks. Both headless script/play commands return logs;
   playback can additionally stream a new JSONL file without requiring a GPU.
   Failure retains prior completed records, and output names/budgets are checked.
   Five new behavior tests and the combined frame/log GPU case pass. The combined
   material/log tree passes 124 Rust tests, seven explicit GPU tests and Clippy;
-  the unchanged UI passes 282 tests and its build. Hosted checks are pending. See [runtime log evidence](docs/spikes/runtime-logs.md).
+  the unchanged UI passes 282 tests and its build. All three applicable hosted
+  checks passed on `b09a3e2`; PR #14 merged as `b36b76f` on 2026-10-09. See [runtime log evidence](docs/spikes/runtime-logs.md).
 
 - Imported glTF material previews now use typed metallic/roughness factors and
   retained GPU base-color, metallic/roughness, normal, occlusion and emissive maps.
@@ -67,7 +77,9 @@ within its documented workload.
   implemented. 119 Rust behavior tests and seven explicit GPU tests pass locally.
   Native texture reimport, Undo/Redo, retention on source error and repair
   pass. Claude approved the final headless and native captures, including the
-  minimum-height Inspector scroll behavior. PR #13 awaits hosted checks. Production lighting/render graph/postprocessing remain open. See
+  minimum-height Inspector scroll behavior. All twelve hosted checks passed on
+  `f7607ab`; PR #13 merged as `794c765` on 2026-10-09. Production lighting and
+  the full render graph remain open. See
   [GPU material evidence](docs/spikes/gpu-materials.md).
 
 - Isolated headless playback now accepts ticks/seconds and an optional compiled
@@ -157,12 +169,12 @@ within its documented workload.
   and saved disposable projects; native account focus behavior passes, with the
   visible keyboard ring also approved by Claude.
 
-- The first twelve PRs are merged into main after their required checks passed:
+- The first fourteen PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
   responsive loading/focus #5, shared import batches #6, source watching #7 and
   editor/agent imports with the redesigned asset workspace #8, and runtime scene
   projection #9, imported GPU geometry #10, native source watching #11 and headless
-  playback #12. The site deployed at
+  playback #12, material previews #13 and structured runtime logs #14. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
   before merge. Editor/agent imports are the current Phase 1 increment. Merging does

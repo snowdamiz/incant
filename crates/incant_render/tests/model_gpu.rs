@@ -5,6 +5,10 @@ use incant_render::Renderer;
 use materials::{Fixture, center, emissive, near};
 use serde_json::json;
 
+// Derived preview-curve reference values after the sRGB display transfer.
+const DISPLAY_RED: [u8; 4] = [243, 30, 30, 255];
+const DISPLAY_GREEN: [u8; 4] = [30, 243, 30, 255];
+
 fn capture(fixture: &Fixture, renderer: &Renderer, name: &str) -> Vec<u8> {
     let png = renderer
         .screenshot_scene_png(&fixture.scene(renderer), 320, 180)
@@ -65,7 +69,7 @@ fn alpha_modes_and_back_faces_follow_material_semantics() {
     let mut fixture = Fixture::new(emissive([1., 0., 0.], 0., "OPAQUE"));
     near(
         center(&capture(&fixture, &renderer, "opaque-alpha-zero")),
-        [255, 0, 0, 255],
+        DISPLAY_RED,
         1,
     );
     let empty = renderer
@@ -74,12 +78,12 @@ fn alpha_modes_and_back_faces_follow_material_semantics() {
     fixture.edit(|g| g["materials"][0] = emissive([1., 0., 0.], 0., "MASK"));
     assert_eq!(capture(&fixture, &renderer, "mask-discarded"), empty);
     fixture.edit(|g| g["materials"][0] = emissive([1., 0., 0.], 0.5, "MASK"));
-    near(fixture.pixel(&renderer), [255, 0, 0, 255], 1);
+    near(fixture.pixel(&renderer), DISPLAY_RED, 1);
     // A reflected instance keeps its authored front face through winding reversal.
     fixture.edit(|g| g["nodes"][0]["scale"] = json!([-1, 1, 1]));
     near(
         center(&capture(&fixture, &renderer, "reflected-single-sided")),
-        [255, 0, 0, 255],
+        DISPLAY_RED,
         1,
     );
     fixture.edit(|g| g["nodes"][0]["scale"] = json!([1, 1, -1]));
@@ -87,7 +91,7 @@ fn alpha_modes_and_back_faces_follow_material_semantics() {
     fixture.edit(|g| g["materials"][0]["doubleSided"] = json!(true));
     near(
         center(&capture(&fixture, &renderer, "double-sided-back")),
-        [255, 0, 0, 255],
+        DISPLAY_RED,
         1,
     );
     fixture.edit(|g| {
@@ -225,11 +229,11 @@ fn emissive_maps_and_samplers_retain_color_and_addressing() {
     }
     std::fs::write(fixture.root.path().join("quad.bin"), &bytes).unwrap();
     fixture.texture(&[255, 0, 0, 255, 0, 255, 0, 255], 2, 1, |_| {});
-    near(fixture.pixel(&renderer), [0, 255, 0, 255], 1);
+    near(fixture.pixel(&renderer), DISPLAY_GREEN, 1);
     fixture.edit(|g| g["samplers"][0]["wrapS"] = json!(10497));
-    near(fixture.pixel(&renderer), [255, 0, 0, 255], 1);
+    near(fixture.pixel(&renderer), DISPLAY_RED, 1);
     fixture.edit(|g| g["samplers"][0]["wrapS"] = json!(33648));
-    near(fixture.pixel(&renderer), [0, 255, 0, 255], 1);
+    near(fixture.pixel(&renderer), DISPLAY_GREEN, 1);
     for vertex in 0..6 {
         bytes[72 + vertex * 8..76 + vertex * 8].copy_from_slice(&0.5f32.to_le_bytes());
     }
@@ -300,4 +304,64 @@ fn imported_geometry_survives_sources_and_retained_versions_survive_reimport() {
         renderer.screenshot_scene_png(&updated, 320, 180).unwrap(),
         "failed replacement must leave the prior scene usable"
     );
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by the desktop workflow"]
+fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
+    let renderer = Renderer::headless().unwrap();
+    let mut fixture =
+        Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.3}}));
+    let normal = (glam::Vec3::new(1., 2., 3.).normalize()
+        + glam::Vec3::new(6., 5., 9.).normalize())
+    .normalize();
+    fixture.normal(normal);
+    let highlight = center(&capture(&fixture, &renderer, "hdr-glossy-highlight"));
+    // Radiance > 1 must reach the shoulder, without clipping before the transform.
+    // Premature UNORM clipping would yield the tone-mapped 1.0 value (243).
+    assert!(highlight[0] > 245 && highlight[0] < 255, "{highlight:?}");
+    assert_eq!(highlight[0], highlight[1]);
+    assert_eq!(highlight[1], highlight[2]);
+    assert_eq!(highlight[3], 255);
+    fixture.edit(|g| {
+        g["materials"] = json!([
+            emissive([1.; 3], 0.5, "BLEND"),
+            emissive([0.; 3], 1., "OPAQUE")
+        ]);
+        let mut back = g["meshes"][0].clone();
+        back["primitives"][0]["material"] = json!(1);
+        g["meshes"].as_array_mut().unwrap().push(back);
+        g["nodes"] =
+            json!([{"mesh":0,"translation":[0,0,0.1]},{"mesh":1,"translation":[0,0,-0.1]}]);
+        g["scenes"][0]["nodes"] = json!([0, 1]);
+    });
+    near(
+        center(&capture(&fixture, &renderer, "hdr-transparent-over-black")),
+        [188, 188, 188, 255],
+        1,
+    );
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by the desktop workflow"]
+fn dark_fill_lit_materials_remain_distinguishable() {
+    let renderer = Renderer::headless().unwrap();
+    let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
+    // This surface faces the camera but away from the key. Only diffuse fill contributes.
+    fixture.normal(glam::Vec3::new(1., 0., -0.4));
+    let mut previous = 0;
+    for (name, albedo, expected) in [
+        ("dark-fill-10", 0.1, 48),
+        ("dark-fill-18", 0.18, 66),
+        ("dark-fill-50", 0.5, 108),
+    ] {
+        fixture.edit(|g| {
+            g["materials"][0]["pbrMetallicRoughness"]["baseColorFactor"] =
+                json!([albedo, albedo, albedo, 1])
+        });
+        let pixel = center(&capture(&fixture, &renderer, name));
+        near(pixel, [expected, expected, expected, 255], 1);
+        assert!(pixel[0] > previous + 12);
+        previous = pixel[0];
+    }
 }

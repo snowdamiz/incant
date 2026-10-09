@@ -65,3 +65,10 @@ camera and diagnostic cubes for entities without mesh bindings remain. glTF core
 static materials/UV0 are supported; extensions, animation and authored material
 asset overrides still fail explicitly. CPU float images retain full precision;
 GPU images use half precision. Hosted checks remain pending.
+
+## Hosted completion
+
+All twelve hosted checks passed on `f7607abcff0479309ce8add6929d5e92c865c2ff`.
+PR #13 merged into main as `794c765f87e79cac4a9afe6e5511248ff8bdc56d`
+on 2026-10-09. The merge preserves `Built-by: astra`. This completes this material
+preview increment, not the production lighting or Phase 1 gate.

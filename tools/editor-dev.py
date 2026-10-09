@@ -41,6 +41,9 @@ def main():
     temporary.replace(bundle / 'MacOS/incant_editor')
     (bundle / 'Resources').mkdir(exist_ok=True)
     shutil.copy2(ROOT / 'editor/ui/brand/Incant.icns', bundle / 'Resources/Incant.icns')
+    shutil.copy2(ROOT / 'THIRD_PARTY_NOTICES.md', bundle / 'Resources/THIRD_PARTY_NOTICES.md')
+    (bundle / 'Resources/licenses').mkdir(exist_ok=True)
+    shutil.copy2(ROOT / 'licenses/Apache-2.0.txt', bundle / 'Resources/licenses/Apache-2.0.txt')
     with (bundle / 'Info.plist').open('wb') as stream:
         plistlib.dump({
             'CFBundleExecutable': 'incant_editor',
