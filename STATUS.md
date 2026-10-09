@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- HDR geometry now renders to retained RGBA16Float attachments before the display
+  transform. Claude's derived preview curve preserves ordinary colors and rolls
+  off bright highlights. Eleven explicit GPU checks cover tone mapping, display
+  formats, dark materials, HDR transparency, resize lifetime, imports and playback.
+  The workspace passes 124 Rust tests, Clippy and 282 UI tests/build. Final native
+  visual review and hosted checks are pending; full production lighting, render
+  graph, IBL, shadows, bloom and antialiasing remain open.
+
 - Structured script logging now uses the bounded sandbox API and preserves
   messages from successful ticks. Both headless script/play commands return logs;
   playback can additionally stream a new JSONL file without requiring a GPU.

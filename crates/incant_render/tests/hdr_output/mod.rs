@@ -111,19 +111,19 @@ fn near(actual: &[u8], expected: &[u8]) {
 #[ignore = "requires a native GPU; run by all desktop workflows"]
 fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
     let renderer = Renderer::headless().unwrap();
-    // Expected sRGB code values independently evaluated from the upstream GLSL.
+    // Expected sRGB code values independently evaluated from the documented derived curve.
     let signals: [([f32; 3], [u8; 3]); 12] = [
         ([0.; 3], [0; 3]),
-        ([0.01; 3], [2; 3]),
-        ([0.18; 3], [105; 3]),
-        ([0.5; 3], [181; 3]),
-        ([0.8; 3], [226; 3]),
-        ([1.; 3], [240; 3]),
-        ([2.; 3], [250; 3]),
-        ([4.; 3], [253; 3]),
+        ([0.01; 3], [25; 3]),
+        ([0.18; 3], [118; 3]),
+        ([0.5; 3], [188; 3]),
+        ([0.8; 3], [231; 3]),
+        ([1.; 3], [243; 3]),
+        ([2.; 3], [252; 3]),
+        ([4.; 3], [254; 3]),
         ([16.; 3], [255; 3]),
         ([65504.; 3], [255; 3]),
-        ([4., 0.2, 0.2], [253, 156, 156]),
+        ([4., 0.2, 0.2], [254, 158, 158]),
         ([65504., 0., 0.], [255, 255, 255]),
     ];
     let width = 384;

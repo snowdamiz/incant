@@ -5,9 +5,9 @@ use incant_render::Renderer;
 use materials::{Fixture, center, emissive, near};
 use serde_json::json;
 
-// Khronos PBR Neutral reference values after the sRGB display transfer.
-const DISPLAY_RED: [u8; 4] = [241, 33, 33, 255];
-const DISPLAY_GREEN: [u8; 4] = [33, 241, 33, 255];
+// Derived preview-curve reference values after the sRGB display transfer.
+const DISPLAY_RED: [u8; 4] = [243, 30, 30, 255];
+const DISPLAY_GREEN: [u8; 4] = [30, 243, 30, 255];
 
 fn capture(fixture: &Fixture, renderer: &Renderer, name: &str) -> Vec<u8> {
     let png = renderer
@@ -192,7 +192,7 @@ fn emissive_maps_and_samplers_retain_color_and_addressing() {
     });
     near(
         center(&capture(&fixture, &renderer, "emissive-map")),
-        [124, 55, 4, 255],
+        [128, 64, 32, 255],
         1,
     );
     {
@@ -214,7 +214,7 @@ fn emissive_maps_and_samplers_retain_color_and_addressing() {
     fixture.cook();
     near(
         center(&capture(&fixture, &renderer, "sixteen-bit-color")),
-        [124, 55, 4, 255],
+        [128, 64, 32, 255],
         1,
     );
     // Constant coordinates isolate sampler behavior from the camera projection.
@@ -315,30 +315,11 @@ fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
     let normal = (glam::Vec3::new(1., 2., 3.).normalize()
         + glam::Vec3::new(6., 5., 9.).normalize())
     .normalize();
-    let path = fixture.root.path().join("quad.bin");
-    let mut bytes = std::fs::read(&path).unwrap();
-    for _ in 0..6 {
-        for value in normal.to_array() {
-            bytes.extend_from_slice(&value.to_le_bytes());
-        }
-    }
-    std::fs::write(path, bytes).unwrap();
-    fixture.edit(|g| {
-        g["buffers"][0]["byteLength"] = json!(192);
-        g["bufferViews"]
-            .as_array_mut()
-            .unwrap()
-            .push(json!({"buffer":0,"byteOffset":120,"byteLength":72}));
-        g["accessors"]
-            .as_array_mut()
-            .unwrap()
-            .push(json!({"bufferView":2,"componentType":5126,"count":6,"type":"VEC3"}));
-        g["meshes"][0]["primitives"][0]["attributes"]["NORMAL"] = json!(2);
-    });
+    fixture.normal(normal);
     let highlight = center(&capture(&fixture, &renderer, "hdr-glossy-highlight"));
     // Radiance > 1 must reach the shoulder, without clipping before the transform.
-    // Premature UNORM clipping would yield the tone-mapped 1.0 value (240).
-    assert!(highlight[0] > 243 && highlight[0] < 255, "{highlight:?}");
+    // Premature UNORM clipping would yield the tone-mapped 1.0 value (243).
+    assert!(highlight[0] > 245 && highlight[0] < 255, "{highlight:?}");
     assert_eq!(highlight[0], highlight[1]);
     assert_eq!(highlight[1], highlight[2]);
     assert_eq!(highlight[3], 255);
@@ -356,7 +337,31 @@ fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
     });
     near(
         center(&capture(&fixture, &renderer, "hdr-transparent-over-black")),
-        [181, 181, 181, 255],
+        [188, 188, 188, 255],
         1,
     );
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by the desktop workflow"]
+fn dark_fill_lit_materials_remain_distinguishable() {
+    let renderer = Renderer::headless().unwrap();
+    let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
+    // This surface faces the camera but away from the key. Only diffuse fill contributes.
+    fixture.normal(glam::Vec3::new(1., 0., -0.4));
+    let mut previous = 0;
+    for (name, albedo, expected) in [
+        ("dark-fill-10", 0.1, 48),
+        ("dark-fill-18", 0.18, 66),
+        ("dark-fill-50", 0.5, 108),
+    ] {
+        fixture.edit(|g| {
+            g["materials"][0]["pbrMetallicRoughness"]["baseColorFactor"] =
+                json!([albedo, albedo, albedo, 1])
+        });
+        let pixel = center(&capture(&fixture, &renderer, name));
+        near(pixel, [expected, expected, expected, 255], 1);
+        assert!(pixel[0] > previous + 12);
+        previous = pixel[0];
+    }
 }
