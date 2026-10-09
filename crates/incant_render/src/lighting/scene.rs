@@ -18,6 +18,7 @@ pub(crate) struct Light {
 pub(crate) struct LightPlan {
     directional: Vec<Light>,
     local: Vec<Light>,
+    shadows: Vec<crate::shadows::ShadowLight>,
 }
 impl LightPlan {
     pub fn add(
@@ -26,10 +27,12 @@ impl LightPlan {
         world: DMat4,
     ) -> Result<(), SceneError> {
         let decode = |kind| components.get(kind).cloned();
+        let mut shadow_distance = None;
         let (color, intensity, range, inner, outer, kind) =
             if let Some(value) = decode("DirectionalLight") {
                 let l: DirectionalLight =
                     serde_json::from_value(value).map_err(incant_doc::DocumentError::from)?;
+                shadow_distance = l.shadows.map(|s| s.distance as f32);
                 (l.color, l.intensity, 0., 1., 1., 0)
             } else if let Some(value) = decode("PointLight") {
                 let l: PointLight =
@@ -60,13 +63,26 @@ impl LightPlan {
         if kind == 2 && inner as f32 <= outer as f32 {
             return Err(SceneError::LightCone);
         }
+        let mut shadow_index = 0;
+        if let Some(distance) =
+            shadow_distance.filter(|_| intensity > 0. && color.iter().any(|v| *v > 0.))
+        {
+            if self.shadows.len() >= crate::shadows::MAX_SHADOW_LIGHTS {
+                return Err(SceneError::ShadowLightLimit);
+            }
+            self.shadows.push(crate::shadows::ShadowLight {
+                direction,
+                distance,
+            });
+            shadow_index = self.shadows.len() as u32;
+        }
         let light = Light {
             position_range: position.extend(range as f32).to_array(),
             direction_outer: direction.extend(outer as f32).to_array(),
             radiance_inner: Vec3::from_array(color.map(|v| (v * intensity) as f32))
                 .extend(inner as f32)
                 .to_array(),
-            kind: [kind, 0, 0, 0],
+            kind: [kind, shadow_index, 0, 0],
         };
         if kind == 0 {
             self.directional.push(light);
@@ -78,7 +94,7 @@ impl LightPlan {
         }
         Ok(())
     }
-    pub fn finish(mut self) -> (Vec<Light>, u32) {
+    pub fn finish(mut self) -> (Vec<Light>, u32, Vec<crate::shadows::ShadowLight>) {
         // Explicitly authored zero-intensity lights still disable the preview key.
         if self.directional.is_empty() && self.local.is_empty() {
             self.directional.push(Light {
@@ -94,7 +110,7 @@ impl LightPlan {
         }
         let directional = self.directional.len() as u32;
         self.directional.extend(self.local);
-        (self.directional, directional)
+        (self.directional, directional, self.shadows)
     }
 }
 
@@ -109,7 +125,7 @@ mod tests {
             * DMat4::from_scale(DVec3::new(2., 3., 4.));
         let mut p = LightPlan::default();
         p.add(&BTreeMap::from([("SpotLight".into(),json!({"color":[1,0.5,0.25],"intensity":8,"range":10,"inner_degrees":10,"outer_degrees":20}))]),world).unwrap();
-        let (lights, directional) = p.finish();
+        let (lights, directional, _) = p.finish();
         assert_eq!(directional, 0);
         assert_eq!(lights.len(), 1);
         assert_eq!(lights[0].position_range, [4., 5., 6., 10.]);
@@ -119,7 +135,7 @@ mod tests {
     }
     #[test]
     fn explicit_zero_lights_disable_preview_and_budgets_fail_without_dropping_lights() {
-        let (_, directional) = LightPlan::default().finish();
+        let (_, directional, _) = LightPlan::default().finish();
         assert_eq!(directional, 1);
         let c = BTreeMap::from([(
             "DirectionalLight".into(),
@@ -139,7 +155,7 @@ mod tests {
         )]);
         let mut p = LightPlan::default();
         p.add(&c, DMat4::IDENTITY).unwrap();
-        let (lights, d) = p.finish();
+        let (lights, d, _) = p.finish();
         assert_eq!(d, 0);
         assert_eq!(lights[0].radiance_inner[..3], [0.; 3]);
         let mut p = LightPlan::default();
@@ -175,5 +191,48 @@ mod tests {
             p.add(&c, DMat4::from_translation(DVec3::splat(1e100))),
             Err(SceneError::LightTransform)
         ));
+    }
+    #[test]
+    fn enabled_shadow_slots_remain_aligned_and_capacity_fails_explicitly() {
+        let light = |intensity| {
+            BTreeMap::from([(
+                "DirectionalLight".into(),
+                json!({
+                    "color":[1,1,1],"intensity":intensity,"shadows":{"distance":50}
+                }),
+            )])
+        };
+        let mut plan = LightPlan::default();
+        plan.add(&light(0.), DMat4::IDENTITY).unwrap();
+        for i in 0..crate::shadows::MAX_SHADOW_LIGHTS {
+            plan.add(&light(1.), DMat4::from_rotation_y(i as f64 * 0.1))
+                .unwrap();
+        }
+        assert!(matches!(
+            plan.add(&light(1.), DMat4::IDENTITY),
+            Err(SceneError::ShadowLightLimit)
+        ));
+        plan.add(
+            &BTreeMap::from([(
+                "PointLight".into(),
+                json!({"color":[1,1,1],"intensity":1,"range":5}),
+            )]),
+            DMat4::IDENTITY,
+        )
+        .unwrap();
+        let (lights, directional, shadows) = plan.finish();
+        assert_eq!(directional, 5);
+        assert_eq!(shadows.len(), 4);
+        assert_eq!(
+            lights.iter().map(|l| l.kind[1]).collect::<Vec<_>>(),
+            [0, 1, 2, 3, 4, 0]
+        );
+        for (i, shadow) in shadows.iter().enumerate() {
+            assert_eq!(shadow.distance, 50.);
+            assert_eq!(
+                shadow.direction.to_array(),
+                lights[i + 1].direction_outer[..3]
+            );
+        }
     }
 }

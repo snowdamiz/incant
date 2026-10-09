@@ -13,7 +13,8 @@ pub(crate) fn build(
         label: Some("glTF metallic roughness"),
         source: wgpu::ShaderSource::Wgsl(
             format!(
-                "{}\n{}",
+                "{}\n{}\n{}",
+                include_str!("shadows/shade.wgsl"),
                 include_str!("lighting/shade.wgsl"),
                 include_str!("model_material.wgsl")
             )

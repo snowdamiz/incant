@@ -33,10 +33,11 @@ fn shade_light(light:Light,world:vec3f,n:vec3f,v:vec3f,base:vec3f,metallic:f32,r
     let diffuse=(1.0-fresnel)*(1.0-metallic)*base/3.14159265359;
     return (diffuse+distribution*visibility*fresnel)*light.radiance_inner.xyz*(nl*attenuation);
 }
-fn direct_lighting(pixel:vec2f,world:vec3f,n:vec3f,v:vec3f,base:vec3f,metallic:f32,roughness:f32)->vec3f {
+fn direct_lighting(pixel:vec2f,world:vec3f,n:vec3f,surface_normal:vec3f,v:vec3f,base:vec3f,metallic:f32,roughness:f32)->vec3f {
     var radiance=vec3f(0.0);
     for(var i=0u;i<light_grid.lights.x;i++) {
-        radiance+=shade_light(punctual_lights[i],world,n,v,base,metallic,roughness);
+        radiance+=shade_light(punctual_lights[i],world,n,v,base,metallic,roughness)
+            *directional_shadow(punctual_lights[i].kind.y,world,surface_normal);
     }
     if light_grid.lights.y==0u {return radiance;}
     // Explicit reference mode bypasses all culling and does not read grid buffers.

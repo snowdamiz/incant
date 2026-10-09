@@ -14,6 +14,9 @@ use wgpu::util::DeviceExt;
 #[path = "model_draw.rs"]
 mod drawing;
 pub(crate) use drawing::{ModelDraw, ModelTarget};
+#[path = "shadow_draw.rs"]
+mod shadow_drawing;
+pub(crate) use shadow_drawing::ShadowDraw;
 
 struct Primitive {
     vertices: wgpu::Buffer,
@@ -37,6 +40,8 @@ struct Batch {
     count: u32,
     mirrored: bool,
     centers: Vec<glam::Vec3>,
+    casts_shadows: bool,
+    bounds: crate::shadows::cascade::Bounds,
 }
 /// Immutable scene ready for rendering. A failed replacement never changes it.
 /// Source bytes are not needed after AssetStore has loaded the cooked model.
@@ -161,7 +166,7 @@ impl Renderer {
                     model
                 }
             };
-            for (primitive, transforms) in plan.primitives {
+            for ((primitive, casts_shadows), transforms) in plan.primitives {
                 // A reflected instance reverses winding. Split it from ordinary
                 // instances so back-face culling remains correct for both.
                 for mirrored in [false, true] {
@@ -175,15 +180,19 @@ impl Renderer {
                     }
                     let mesh = &model.primitives[primitive];
                     let mut centers = Vec::new();
+                    let mut minimum = glam::Vec3::splat(f32::INFINITY);
+                    let mut maximum = glam::Vec3::splat(f32::NEG_INFINITY);
                     for instance in &transforms {
                         let world = glam::Mat4::from_cols_array_2d(&instance.world);
                         for x in [mesh.minimum.x, mesh.maximum.x] {
                             for y in [mesh.minimum.y, mesh.maximum.y] {
                                 for z in [mesh.minimum.z, mesh.maximum.z] {
-                                    if !world.transform_point3(glam::Vec3::new(x, y, z)).is_finite()
-                                    {
+                                    let point = world.transform_point3(glam::Vec3::new(x, y, z));
+                                    if !point.is_finite() {
                                         return Err(ResourceError::GeometryRange.into());
                                     }
+                                    minimum = minimum.min(point);
+                                    maximum = maximum.max(point);
                                 }
                             }
                         }
@@ -206,6 +215,8 @@ impl Renderer {
                         count: transforms.len() as u32,
                         mirrored,
                         centers,
+                        casts_shadows,
+                        bounds: crate::shadows::cascade::Bounds { minimum, maximum },
                     }));
                 }
             }
@@ -222,8 +233,18 @@ impl Renderer {
                 }
             })
             .sum();
+        let lights = crate::lighting::GpuLights::upload(&self.device, resolved.lights);
+        if !lights.shadows.is_empty()
+            && batches.iter().any(|b| {
+                b.casts_shadows
+                    && b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
+                        == incant_assets::AlphaMode::Blend
+            })
+        {
+            return Err(ResourceError::TransparentShadowCaster.into());
+        }
         Ok(RenderScene {
-            lights: crate::lighting::GpuLights::upload(&self.device, resolved.lights),
+            lights,
             light_selection: crate::LocalLightSelection::Clustered,
             cameras: resolved.cameras,
             camera: crate::camera::CameraView::preview(),

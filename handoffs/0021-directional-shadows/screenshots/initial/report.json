@@ -1,0 +1,589 @@
+{
+  "set": "initial",
+  "generated": "2026-10-09T21:56:56.237Z",
+  "browser": "155.0.8059.40",
+  "captures": [
+    {
+      "file": "shadows-enabled-1440x900.png",
+      "crop": "shadows-enabled-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "shadows-enabled",
+      "entity": "Sun",
+      "measure": {
+        "rows": [
+          {
+            "label": "Kind",
+            "value": "directional",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 328,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Color",
+            "value": "#FFE9C7",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 362,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Intensity",
+            "value": "98000",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 396,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Distance",
+            "value": "120",
+            "height": 28,
+            "valueBox": {
+              "x": 1249,
+              "y": 466,
+              "width": 179,
+              "height": 28
+            }
+          }
+        ],
+        "group": "Shadows",
+        "unset": null,
+        "activeElement": "tree-row is-selected",
+        "inspectorBackground": "rgb(23, 24, 28)",
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "regions": [
+          "hierarchy",
+          "viewport",
+          "dock",
+          "inspector",
+          "agent"
+        ],
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "assetsTab": true,
+        "outputTabs": [
+          "Hierarchy18 entities",
+          "Assets7 assets",
+          "Problems(5)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "shadows-disabled-1440x900.png",
+      "crop": "shadows-disabled-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "shadows-disabled",
+      "entity": "Sky Fill",
+      "measure": {
+        "rows": [
+          {
+            "label": "Kind",
+            "value": "directional",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 328,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Color",
+            "value": "#BFD4FF",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 362,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Intensity",
+            "value": "12000",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 396,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Shadows",
+            "value": "Off",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 430,
+              "width": 188,
+              "height": 28
+            }
+          }
+        ],
+        "group": null,
+        "unset": {
+          "color": "rgb(149, 156, 171)",
+          "fontSize": "13px",
+          "border": "rgb(46, 50, 58)",
+          "outline": "none",
+          "describedBy": "field-01J9ZF1XTR0000000000000004-incant_Light_shadows-unset"
+        },
+        "activeElement": "tree-row is-selected",
+        "inspectorBackground": "rgb(23, 24, 28)",
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "regions": [
+          "hierarchy",
+          "viewport",
+          "dock",
+          "inspector",
+          "agent"
+        ],
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "assetsTab": true,
+        "outputTabs": [
+          "Hierarchy18 entities",
+          "Assets7 assets",
+          "Problems(5)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "shadows-disabled-focus-1440x900.png",
+      "crop": "shadows-disabled-focus-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "shadows-disabled-focus",
+      "entity": "Sky Fill",
+      "measure": {
+        "rows": [
+          {
+            "label": "Kind",
+            "value": "directional",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 328,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Color",
+            "value": "#BFD4FF",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 362,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Intensity",
+            "value": "12000",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 396,
+              "width": 188,
+              "height": 28
+            }
+          },
+          {
+            "label": "Shadows",
+            "value": "Off",
+            "height": 28,
+            "valueBox": {
+              "x": 1240,
+              "y": 430,
+              "width": 188,
+              "height": 28
+            }
+          }
+        ],
+        "group": null,
+        "unset": {
+          "color": "rgb(149, 156, 171)",
+          "fontSize": "13px",
+          "border": "rgb(46, 50, 58)",
+          "outline": "solid",
+          "describedBy": "field-01J9ZF1XTR0000000000000004-incant_Light_shadows-unset"
+        },
+        "activeElement": "field-01J9ZF1XTR0000000000000004-incant_Light_shadows-label",
+        "inspectorBackground": "rgb(23, 24, 28)",
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "regions": [
+          "hierarchy",
+          "viewport",
+          "dock",
+          "inspector",
+          "agent"
+        ],
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "assetsTab": true,
+        "outputTabs": [
+          "Hierarchy18 entities",
+          "Assets7 assets",
+          "Problems(5)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "shadows-enabled-1000x650.png",
+      "crop": "shadows-enabled-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "shadows-enabled",
+      "entity": "Sun",
+      "measure": {
+        "rows": [
+          {
+            "label": "Kind",
+            "value": "directional",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 175,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Color",
+            "value": "#FFE9C7",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 209,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Intensity",
+            "value": "98000",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 243,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Distance",
+            "value": "120",
+            "height": 28,
+            "valueBox": {
+              "x": 816,
+              "y": 313,
+              "width": 172,
+              "height": 28
+            }
+          }
+        ],
+        "group": "Shadows",
+        "unset": null,
+        "activeElement": "tree-row is-selected",
+        "inspectorBackground": "rgb(23, 24, 28)",
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "regions": [
+          "hierarchy",
+          "viewport",
+          "dock",
+          "inspector",
+          "agent"
+        ],
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1000,
+          "height": 40
+        },
+        "assetsTab": true,
+        "outputTabs": [
+          "Hierarchy18 entities",
+          "Assets7 assets",
+          "Problems(5)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "shadows-disabled-1000x650.png",
+      "crop": "shadows-disabled-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "shadows-disabled",
+      "entity": "Sky Fill",
+      "measure": {
+        "rows": [
+          {
+            "label": "Kind",
+            "value": "directional",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 215,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Color",
+            "value": "#BFD4FF",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 249,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Intensity",
+            "value": "12000",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 283,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Shadows",
+            "value": "Off",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 317,
+              "width": 181,
+              "height": 28
+            }
+          }
+        ],
+        "group": null,
+        "unset": {
+          "color": "rgb(149, 156, 171)",
+          "fontSize": "13px",
+          "border": "rgb(46, 50, 58)",
+          "outline": "none",
+          "describedBy": "field-01J9ZF1XTR0000000000000004-incant_Light_shadows-unset"
+        },
+        "activeElement": "tree-row is-selected",
+        "inspectorBackground": "rgb(23, 24, 28)",
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "regions": [
+          "hierarchy",
+          "viewport",
+          "dock",
+          "inspector",
+          "agent"
+        ],
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1000,
+          "height": 40
+        },
+        "assetsTab": true,
+        "outputTabs": [
+          "Hierarchy18 entities",
+          "Assets7 assets",
+          "Problems(5)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "shadows-disabled-focus-1000x650.png",
+      "crop": "shadows-disabled-focus-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "shadows-disabled-focus",
+      "entity": "Sky Fill",
+      "measure": {
+        "rows": [
+          {
+            "label": "Kind",
+            "value": "directional",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 199,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Color",
+            "value": "#BFD4FF",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 233,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Intensity",
+            "value": "12000",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 267,
+              "width": 181,
+              "height": 28
+            }
+          },
+          {
+            "label": "Shadows",
+            "value": "Off",
+            "height": 28,
+            "valueBox": {
+              "x": 807,
+              "y": 301,
+              "width": 181,
+              "height": 28
+            }
+          }
+        ],
+        "group": null,
+        "unset": {
+          "color": "rgb(149, 156, 171)",
+          "fontSize": "13px",
+          "border": "rgb(46, 50, 58)",
+          "outline": "solid",
+          "describedBy": "field-01J9ZF1XTR0000000000000004-incant_Light_shadows-unset"
+        },
+        "activeElement": "field-01J9ZF1XTR0000000000000004-incant_Light_shadows-label",
+        "inspectorBackground": "rgb(23, 24, 28)",
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "regions": [
+          "hierarchy",
+          "viewport",
+          "dock",
+          "inspector",
+          "agent"
+        ],
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1000,
+          "height": 40
+        },
+        "assetsTab": true,
+        "outputTabs": [
+          "Hierarchy18 entities",
+          "Assets7 assets",
+          "Problems(5)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    }
+  ]
+}

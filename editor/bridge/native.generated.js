@@ -24,6 +24,59 @@ _export(exports, {
 function isReady(read) {
     return read.status === undefined || read.status === "ready";
 }
+/** Resolve only local definitions and a single nullable alternative for display.
+ * Recursive/unknown schema forms remain explicit unsupported fields. No fetches.
+ */ function inspectorField(value, defs, depth = 0) {
+    const unsupported = {
+        type: "unsupported"
+    };
+    if (depth > 16 || !value || typeof value !== "object" || Array.isArray(value)) return unsupported;
+    const raw = value;
+    const metadata = {
+        ...typeof raw.title === "string" ? {
+            title: raw.title
+        } : {},
+        ...typeof raw.description === "string" ? {
+            description: raw.description
+        } : {}
+    };
+    if (typeof raw.$ref === "string") {
+        const name = raw.$ref.startsWith("#/$defs/") ? raw.$ref.slice(8) : "";
+        const target = Object.hasOwn(defs, name) ? defs[name] : undefined;
+        return target ? {
+            ...inspectorField(target, defs, depth + 1),
+            ...metadata
+        } : unsupported;
+    }
+    if (Array.isArray(raw.anyOf)) {
+        const alternatives = raw.anyOf;
+        if (alternatives.length !== 2 || alternatives.some((v)=>!v || typeof v !== "object")) return unsupported;
+        const concrete = alternatives.filter((v)=>v.type !== "null");
+        if (concrete.length !== 1) return unsupported;
+        return {
+            ...inspectorField(concrete[0], defs, depth + 1),
+            ...metadata,
+            nullable: true
+        };
+    }
+    if (typeof raw.type !== "string") return unsupported;
+    const field = {
+        ...raw
+    };
+    if (raw.type === "object" && raw.properties && typeof raw.properties === "object") {
+        const required = Array.isArray(raw.required) ? raw.required : [];
+        field.properties = Object.fromEntries(Object.entries(raw.properties).map(([key, child])=>[
+                key,
+                {
+                    ...inspectorField(child, defs, depth + 1),
+                    optional: !required.includes(key)
+                }
+            ]));
+    } else if (raw.type === "array" && raw.items && typeof raw.items === "object") {
+        field.items = inspectorField(raw.items, defs, depth + 1);
+    }
+    return field;
+}
 const id = (value)=>value;
 function freeze(value) {
     if (value !== null && typeof value === "object" && !Object.isFrozen(value)) {
@@ -175,7 +228,13 @@ function snapshotFromEngine(read) {
             type,
             version: 1,
             title: schema.title ?? type,
-            properties: schema.properties ?? {},
+            properties: Object.fromEntries(Object.entries(schema.properties ?? {}).map(([key, field])=>[
+                    key,
+                    {
+                        ...inspectorField(field, schema.$defs ?? {}),
+                        optional: schema.required !== undefined && !schema.required.includes(key)
+                    }
+                ])),
             ...schema.order ? {
                 order: schema.order
             } : {}

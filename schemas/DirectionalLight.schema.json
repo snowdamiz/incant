@@ -1,9 +1,30 @@
 {
+  "$defs": {
+    "DirectionalShadows": {
+      "additionalProperties": false,
+      "description": "Four 1024×1024 depth cascades. Distance is in world meters, independent of scale.",
+      "properties": {
+        "distance": {
+          "description": "Maximum view-space receiver distance; capped by the selected camera's far plane.",
+          "format": "double",
+          "maximum": 10000,
+          "minimum": 0.01,
+          "type": "number",
+          "x-incant-unit": "m"
+        }
+      },
+      "required": [
+        "distance"
+      ],
+      "type": "object"
+    }
+  },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "order": [
     "color",
-    "intensity"
+    "intensity",
+    "shadows"
   ],
   "properties": {
     "color": {
@@ -26,6 +47,17 @@
       "minimum": 0,
       "type": "number",
       "x-incant-unit": "lx"
+    },
+    "shadows": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DirectionalShadows"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Optional cascaded directional shadows. Omit to preserve unshadowed lighting."
     }
   },
   "required": [

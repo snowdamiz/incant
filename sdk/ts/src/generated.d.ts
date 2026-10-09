@@ -17,7 +17,8 @@ export namespace CommandSchema {
 export type Command = CommandSchema.Root;
 
 export namespace DirectionalLightSchema {
-  export type Root = { "color": [number, number, number]; "intensity": number };
+  export type DirectionalShadows = { "distance": number };
+  export type Root = { "color": [number, number, number]; "intensity": number; "shadows"?: (DirectionalShadows) | (null) };
 }
 export type DirectionalLight = DirectionalLightSchema.Root;
 

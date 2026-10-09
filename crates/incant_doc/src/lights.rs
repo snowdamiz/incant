@@ -7,6 +7,10 @@ pub(crate) fn annotate_schemas(
     registry: &mut std::collections::BTreeMap<String, serde_json::Value>,
 ) {
     use serde_json::json;
+    registry
+        .get_mut("DirectionalLight")
+        .expect("registered light schema")["$defs"]["DirectionalShadows"]["properties"]["distance"]
+        ["x-incant-unit"] = json!("m");
     for kind in ["DirectionalLight", "PointLight", "SpotLight"] {
         let properties =
             &mut registry.get_mut(kind).expect("registered light schema")["properties"];
@@ -37,6 +41,17 @@ pub struct DirectionalLight {
     /// Illuminance in lux.
     #[schemars(range(min = 0, max = 1000000))]
     pub intensity: f64,
+    /// Optional cascaded directional shadows. Omit to preserve unshadowed lighting.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub shadows: Option<DirectionalShadows>,
+}
+/// Four 1024×1024 depth cascades. Distance is in world meters, independent of scale.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct DirectionalShadows {
+    /// Maximum view-space receiver distance; capped by the selected camera's far plane.
+    #[schemars(range(min = 0.01, max = 10000))]
+    pub distance: f64,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -68,6 +83,13 @@ pub(crate) fn validate(kind: &str, value: &serde_json::Value) -> Result<(), Stri
         "DirectionalLight" => {
             let light: DirectionalLight =
                 serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
+            if light
+                .shadows
+                .as_ref()
+                .is_some_and(|s| !(0.01..=10000.0).contains(&s.distance))
+            {
+                return Err("directional shadow distance must be 0.01..10000 meters".into());
+            }
             (light.color, light.intensity, None)
         }
         "PointLight" => {

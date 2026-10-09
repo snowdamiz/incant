@@ -38,6 +38,8 @@ pub enum SceneError {
     CameraTransform,
     #[error("camera projection exceeds GPU numeric precision")]
     CameraProjection,
+    #[error("scene exceeds four enabled directional shadow lights")]
+    ShadowLightLimit,
     #[error("scene exceeds 16 directional or 4096 local lights")]
     LightLimit,
 }
@@ -78,7 +80,7 @@ impl Instance {
 
 pub(crate) struct ModelPlan {
     pub source: Arc<RuntimeAsset>,
-    pub primitives: BTreeMap<usize, Vec<Instance>>,
+    pub primitives: BTreeMap<(usize, bool), Vec<Instance>>,
 }
 pub(crate) struct ResolvedScene {
     pub diagnostics: Vec<Mat4>,
@@ -222,7 +224,10 @@ pub(crate) fn resolve(
                     return Err(SceneError::InstanceLimit);
                 }
                 result.stats.model_triangles += (model.meshes[primitive].indices.len() / 3) as u64;
-                plan.primitives.entry(primitive).or_default().push(instance);
+                plan.primitives
+                    .entry((primitive, binding.cast_shadows))
+                    .or_default()
+                    .push(instance);
             }
             pending.extend(node.children.iter().rev().map(|&child| (child, world)));
         }
@@ -247,7 +252,7 @@ mod tests {
         assert_eq!(scene.stats.model_triangles, 2);
         assert_eq!(scene.stats.diagnostic_entities, 0);
         let model = scene.models.values().next().unwrap();
-        let instances = &model.primitives[&0];
+        let instances = &model.primitives[&(0, true)];
         let mut origins: Vec<_> = instances.iter().map(|i| i.world[3]).collect();
         origins.sort_by(|a, b| a[0].total_cmp(&b[0]));
         assert_eq!(origins, vec![[-2., 2., 0., 1.], [1., 2., 0., 1.]]);
@@ -298,5 +303,31 @@ mod tests {
         assert_eq!(result.stats.model_entities, 2);
         assert_eq!(result.stats.diagnostic_entities, 1);
         assert!(result.cameras.contains_key(&camera_id));
+    }
+    #[test]
+    fn shadow_caster_flags_split_instances_without_dropping_geometry() {
+        let directory = tempfile::tempdir().unwrap();
+        let (mut project, assets, _) = support::fixture(directory.path());
+        let first = project
+            .scenes
+            .values_mut()
+            .next()
+            .unwrap()
+            .entities
+            .values_mut()
+            .next()
+            .unwrap();
+        first.components.get_mut("MeshRenderer").unwrap()["cast_shadows"] =
+            serde_json::json!(false);
+        let resolved = resolve(&project, Some(&assets)).unwrap();
+        assert_eq!(resolved.stats.primitive_instances, 2);
+        assert_eq!(resolved.stats.model_draw_calls, 2);
+        let primitive = &resolved.models.values().next().unwrap().primitives;
+        assert_eq!(primitive[&(0, true)].len(), 1);
+        assert_eq!(primitive[&(0, false)].len(), 1);
+        assert_ne!(
+            primitive[&(0, true)][0].world,
+            primitive[&(0, false)][0].world
+        );
     }
 }

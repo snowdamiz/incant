@@ -172,6 +172,16 @@ describe('asset library', () => {
     expect(within(groups[1]!).getAllByRole('option')).toHaveLength(2);
   });
 
+  it('sets real folder paths in monospace but the project-root label as plain text', () => {
+    const root: ProjectAsset = { id: '01J9ZF1XTR0000000000000009' as Ulid, name: 'Quad', path: 'quad.gltf', kind: 'model', fingerprint: 'f9' };
+    renderWith(controlledBridge({ assets: { status: 'ready', value: [root, ...ASSETS] } }).bridge);
+    openAssets();
+    const names = [...document.querySelectorAll('.asset-list__folder-name')];
+    const label = (text: string) => names.find((name) => name.textContent?.endsWith(text))!;
+    expect(label('Project folder').classList.contains('mono')).toBe(false);
+    expect(label('models/').classList.contains('mono')).toBe(true);
+  });
+
   it('lists the sample fixture assets with name, source and type, and keeps it read-only', async () => {
     const { container } = render(<App resolution={{ kind: 'bridge', bridge: createFixtureBridge('sample') }} />);
     openAssets();

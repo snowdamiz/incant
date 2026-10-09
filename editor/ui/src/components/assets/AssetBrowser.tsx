@@ -268,7 +268,8 @@ function AssetList({
           <div key={group.folder} role="group" aria-labelledby={headId} className="asset-list__group">
             <div id={headId} className="asset-list__folder" title={group.folder ? `${group.folder}/` : 'Project folder'}>
               <Icon name="group" size={14} />
-              <span className="asset-list__folder-name mono">
+              {/* Real paths stay monospace like other paths; the root label is prose. */}
+              <span className={`asset-list__folder-name${group.folder ? ' mono' : ''}`}>
                 <span className="visually-hidden">Folder </span>
                 {folderLabel(group.folder)}
               </span>

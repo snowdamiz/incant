@@ -16,7 +16,8 @@ fn punctual_lights_roundtrip_and_reject_invalid_units_angles_and_types() {
             "DirectionalLight",
             json!(DirectionalLight {
                 color: [1.; 3],
-                intensity: 2.
+                intensity: 2.,
+                shadows: None
             }),
         ),
         (
@@ -84,4 +85,46 @@ fn punctual_lights_roundtrip_and_reject_invalid_units_angles_and_types() {
             json!({"color":[1,1,1],"intensity":0}),
         );
     assert!(p.validate().is_err());
+}
+
+#[test]
+fn directional_shadow_configuration_is_optional_typed_and_bounded() {
+    let original = json!({"color":[1.,1.,1.],"intensity":2.});
+    let decoded: DirectionalLight = serde_json::from_value(original.clone()).unwrap();
+    assert!(decoded.shadows.is_none());
+    assert_eq!(serde_json::to_value(decoded).unwrap(), original);
+    let mut value = original;
+    for distance in [0.01, 50., 10000.] {
+        value["shadows"] = json!({"distance":distance});
+        let p = project("DirectionalLight", value.clone());
+        assert_eq!(Project::from_text(&p.canonical_text().unwrap()).unwrap(), p);
+    }
+    for bad in [
+        json!({"distance":0}),
+        json!({"distance":10001}),
+        json!({}),
+        json!({"distance":50,"unknown":true}),
+        json!(true),
+    ] {
+        value["shadows"] = bad;
+        assert!(
+            project("DirectionalLight", value.clone())
+                .validate()
+                .is_err()
+        );
+    }
+    // Unsupported punctual-light shadows must fail, not be silently ignored.
+    for (kind, mut light) in [
+        (
+            "PointLight",
+            json!({"color":[1,1,1],"intensity":1,"range":10}),
+        ),
+        (
+            "SpotLight",
+            json!({"color":[1,1,1],"intensity":1,"range":10,"inner_degrees":10,"outer_degrees":20}),
+        ),
+    ] {
+        light["shadows"] = json!({"distance":50});
+        assert!(project(kind, light).validate().is_err());
+    }
 }

@@ -198,6 +198,8 @@ fn inherited_cameras_and_custom_light_clusters_match_the_all_light_reference() {
     for y in -3..=3 {
         for x in -3..=3 {
             let mut e = Entity::new("Local light");
+            // Stable light ordering makes cross-process pixel evidence repeatable.
+            e.id = format!("{:026}", 1000 + (y + 3) * 7 + (x + 3));
             e.components.insert("PointLight".into(),json!({"color":[0.5+f64::from(x)*0.1,0.5+f64::from(y)*0.1,0.4],"intensity":0.4,"range":1.5}));
             e.components.insert(
                 "Transform".into(),

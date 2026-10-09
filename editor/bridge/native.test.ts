@@ -52,6 +52,31 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it('resolves optional nullable local definitions without mutating the engine schema', () => {
+    const current = read();
+    current.schemas.DirectionalLight = {
+      required: ['intensity'],
+      properties: { intensity: { type: 'number' }, shadows: { anyOf: [
+        { $ref: '#/$defs/DirectionalShadows' }, { type: 'null' },
+      ] } },
+      $defs: { DirectionalShadows: { type: 'object', required: ['distance'], properties: {
+        distance: { type: 'number', minimum: 0.01, maximum: 10000, 'x-incant-unit': 'm' },
+      } } },
+    };
+    const before = JSON.stringify(current.schemas);
+    const snapshot = snapshotFromEngine(current);
+    expect(snapshot.schemas.DirectionalLight?.properties.shadows).toEqual({
+      type: 'object', required: ['distance'], nullable: true, optional: true,
+      properties: { distance: { type: 'number', minimum: 0.01, maximum: 10000, 'x-incant-unit': 'm', optional: false } },
+    });
+    expect(JSON.stringify(current.schemas)).toBe(before);
+    current.schemas.Invalid = { properties: {
+      cycle: { $ref: '#/$defs/Cycle' }, external: { $ref: 'https://example.invalid/schema' },
+      ambiguous: { anyOf: [{ type: 'number' }, { type: 'string' }] },
+    }, $defs: { Cycle: { $ref: '#/$defs/Cycle' } } };
+    const unsupported = snapshotFromEngine(current).schemas.Invalid!.properties;
+    for (const field of Object.values(unsupported)) expect(field.type).toBe('unsupported');
+  });
   it('publishes render errors to Problems and clears them after recovery', async () => {
     let current = read();
     const bridge = new NativeBridge(async <T>() => current as T);

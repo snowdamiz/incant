@@ -4,7 +4,7 @@ mod crdt;
 mod lights;
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
-pub use lights::{DirectionalLight, PointLight, SpotLight};
+pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -523,7 +523,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         ("Camera", vec!["fov_degrees", "near", "far"]),
         ("MeshRenderer", vec!["mesh", "materials", "cast_shadows"]),
         ("Script", vec!["source", "props"]),
-        ("DirectionalLight", vec!["color", "intensity"]),
+        ("DirectionalLight", vec!["color", "intensity", "shadows"]),
         ("PointLight", vec!["color", "intensity", "range"]),
         (
             "SpotLight",

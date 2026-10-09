@@ -53,13 +53,25 @@ within its documented workload.
 
 ## Active work
 
+- Opt-in directional cascades are implemented with scoped Claude appearance
+  and native acceptance. The scheduled depth pass honors imported caster flags,
+  alpha masks, reflection and sidedness; retained queued frames and cascade
+  transitions pass real GPU checks. Public CLI edits, atomic invalid rejection,
+  Undo/Redo, durable reopening and source-free cached captures pass. Initial
+  checks pass 144 Rust, 40 GPU and 294 UI tests plus Clippy. Native enabled/Off
+  states, separated Assets workspace and sun-angle Undo/Redo pass. Final 1080p analytical timings
+  measure 1.389–3.096 ms across 0–4 suns; thin-caster contact/aliasing limits remain.
+  Final hosted checks are pending; local-light shadows and
+  adaptive quality remain open. See [directional shadows](docs/spikes/directional-shadows.md).
+
 - Real GPU passes now execute through a persistent Bevy ECS schedule with explicit
   dependencies and owned frame resources. Reverse-order queued submission after
   scene/source disposal passes. 139 Rust, 33 GPU and 283 UI tests, Clippy and the
   native build pass; 120/124 baseline PNGs match exactly, four differ at one/two
   pixels by one channel level. Those light fixtures now use deterministic IDs;
   repeated captures are exact. Claude approved the final fixtures/native images.
-  Paired timings are stable; hosted checks are next. Production shadows and
+  Paired timings are stable; all twelve hosted checks pass at `50c950a` and PR #20
+  merged as `13edae6`. Production shadows and
   post-effects remain open. See
   [render-pass scheduling](docs/spikes/render-pass-graph.md).
 
@@ -72,8 +84,8 @@ within its documented workload.
   Claude approved all 36 captures, including independent skewed-basis checks.
   A live saved-account agent captured the exact camera with no edits or login
   prompts. Hosted desktop/credential checks pass; the source job found a stale
-  generated tool-schema snapshot, corrected at `d9ace60`. Exact-head reruns are
-  pending. No editor camera-selection control is claimed.
+  generated tool-schema snapshot, corrected at `d9ace60`. All six exact-head checks now pass at `d9ace60`; PR #19 merged as
+  `695f3b3`. No editor camera-selection control is claimed.
   See [authored camera evidence](docs/spikes/authored-camera-capture.md).
 
 - Cluster membership masks replace overflow fallback in the next lighting
