@@ -256,7 +256,7 @@ function ComponentSection({
                   version {schema.version}. Values may be shown incorrectly until migrated.
                 </p>
               ) : null}
-              {sectionKeys(component.type, keys).map((section, index) => {
+              {sectionKeys(component.type, keys, (schema.order ?? []).length > 0).map((section, index) => {
                 const rows = section.keys.map((key) => {
                   const field = schema.properties[key];
                   return field ? (

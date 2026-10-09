@@ -250,3 +250,157 @@ not by this look-dev.
   finds it redundant next to the Problems list path, it could appear only when the
   row is an ancestor of the target. I kept it, because the brief asks to preserve
   full nested paths.
+
+---
+
+# Follow-up round: shared annotations and one semantic correction
+
+## Status
+
+Scoped verdict: **the follow-up is complete for browser-fixture review. Native
+acceptance is not claimed.** Native CUA captures follow after integration. No
+phase gate is approved.
+
+Exact model and transport: Claude Opus 5.5, model ID `claude-opus-5-5`, through
+the director's Claude subscription via ACP. No model substitution occurred.
+
+The worktree started clean at `74bb4bd`, which includes Astra's `c547bed`:
+Rust registry units, mask widget, order and the regenerated schemas. No
+interrupted files were present.
+
+## Director feedback acknowledged and applied
+
+- **Damping is a rate in 1/s, not dimensionless.** My first brief said
+  otherwise, and I followed it. Rapier applies `v / (1 + dt·damping)`. I deleted
+  the profile tooltips that called damping a "damping coefficient
+  (dimensionless)". The schema now supplies the unit `1/s` and the description
+  "… damping rate, in inverse seconds." The Inspector shows both. Gravity scale,
+  friction and restitution remain dimensionless.
+- **Redundant hints removed.** Units and the mask widget now come only from the
+  schema: `x-incant-unit` and `x-incant-widget: "collision-mask"`. `FieldHint`
+  no longer has `unit` or `widget`. The AngularVelocity profile is gone. The
+  profile keeps only what the schema lacks:
+  - section captions
+  - the "CCD" label
+  - tooltips for motion, gravity scale, can sleep, CCD, friction, restitution, sensor and filter
+- **One-based collision group labels.** Kept, as confirmed.
+- **Runtime evidence.** Headless CLI motion is the supported runtime evidence,
+  and native review is Inspector and static viewport only. I did not rebuild
+  Rust or regenerate the motion fixtures, so the look-dev frames above are
+  unchanged.
+
+## Correctness fix: `sectionKeys` now honours schema order
+
+Before this fix, `sectionKeys` reordered fields by profile keys even when the
+schema supplied an `order`. It now takes `schemaOrdered`, which is true when the
+component schema has a non-empty `order`.
+
+- **The schema order is kept exactly.** Consecutive keys from the same profile
+  section share a caption. Keys the profile does not name form an "Other" run and
+  are never dropped.
+- **Incompatible orders get no captions.** If the schema order splits a section
+  into two runs, or places the uncaptioned lead row (`shape`, `motion`) after a
+  captioned run, grouping cannot fit. The rows then render in schema order with
+  no captions at all, rather than being rearranged.
+- **The profile order applies only without a schema order.** This covers older
+  bridges, where `orderedKeys` falls back to alphabetical.
+
+New behaviour tests:
+- **Pure function.**
+  - With the native order, captions match the previous round.
+  - With an order shuffled within sections, the order is kept and grouping still fits. An unknown key goes to "Other".
+  - An order that splits a section gets no captions, in exact schema order.
+  - An order with the lead row placed late also gets no captions.
+  - Without a schema order, the profile order applies.
+  - A component without a profile is unchanged.
+- **Rendered through `App`.** The Collider schema is reordered to
+  `shape, restitution, friction, density, filter, memberships, sensor`. The rows
+  render in exactly that order under the "Material" and "Collision" captions. An
+  order that splits a section renders in exact schema order with no captions.
+- **Schema is the only source.** A Collider density schema without
+  `x-incant-unit` shows no unit. A memberships schema without the widget shows no
+  mask control.
+
+## Fixture refresh
+
+The browser fixture's `RigidBody`, `Collider` and `AngularVelocity` now carry the
+current generated annotations:
+- `order`
+- units `1/s`, `kg/m³`, `m` and `rad/s`
+- the damping descriptions
+- `x-incant-widget` and `maximum: 4294967295` on both masks
+
+The drift test now also checks that each fixture `order` equals the native
+bridge output from the real `schemas/*.schema.json`. The native and browser
+spacing are therefore produced by the same data.
+
+## Changed paths (this round)
+
+- `editor/ui/src/components/inspector/presentation.ts`: hints trimmed; order-preserving `sectionKeys`
+- `editor/ui/src/components/inspector/FieldView.tsx`: units and mask widget from the schema only
+- `editor/ui/src/components/inspector/InspectorPanel.tsx`: passes whether the schema supplied an order
+- `editor/ui/src/bridge/fixture.ts`: current schema annotations
+- `editor/ui/src/components/inspector/PhysicsFields.test.tsx`: order, units and fixture-order tests
+- `handoffs/0022-physics-inspector/screenshots/followup/`, `result.md`
+
+## Commands and results
+
+| Command | Result |
+| --- | --- |
+| `npm run test --workspace editor/ui` | 13 files, **312 passed** (309 before; the old section test was replaced by four tests) |
+| `npm run build --workspace editor/ui` | ok; strict `tsc -b` passes |
+| JS gzip | Vite reports 105.10 kB (≈ 102.6 KiB); gzip -9 gives 101.27 KiB. Budget 110 KiB |
+| `node handoffs/0022-physics-inspector/tools/capture-inspector.mjs followup` | 12 captures |
+| Rust | not rebuilt or rerun; Rust is unchanged in this round, as the brief says |
+
+## Pixel review (browser fixture, Chrome, DPR 2; not native evidence)
+
+I compared the new captures with the previous round's `revised/` captures:
+- **Changed as intended.** Only `crate-body` changed. At 1440×900 and 1000×650,
+  Linear damping and Angular damping now show `1/s` inside the value box, right
+  aligned like `kg/m³` and `m`. Gravity scale stays unitless. The section
+  captions and row rhythm are unchanged.
+- **Identical.** Every other full-window capture is byte-identical:
+  - Collider box, capsule and masks, and the sphere sensor
+  - the axis error
+  - focus on the unknown shape
+
+  The schema-sourced units and widget therefore render exactly as the profile
+  did, and the reorder fix does not move anything for the native order.
+- **One crop differs.** The 1000×650 crop of `unknown-shape-focus` differs by 2
+  pixel rows. Its full-window capture is identical, so this is crop-box rounding.
+
+Every capture had zero axe violations, no page errors, no remote requests, no
+horizontal overflow and no clipped inputs. The value column is at 1240 px at
+1440 wide and 807 px at 1000 wide for every row. The bottom dock shows only
+Problems, Console and History.
+
+Captures kept:
+- `screenshots/followup/crate-body-{1440x900,1000x650}{,-inspector}.png`
+- `screenshots/followup/unknown-shape-focus-1000x650-inspector.png`
+- `screenshots/followup/report.json`, which covers all 12 states
+
+I deleted the other follow-up captures because they are byte-identical to `screenshots/revised/`.
+
+**Observation, not changed.** "Angular damping" and "Half extents" wrap to two
+lines at both sizes. This is the existing two-line label clamp in the 34% label
+column, and it reads cleanly.
+
+## Remaining native requests for Astra (unchanged in substance)
+
+1. **Native CUA captures, after integration.** Capture at 1440×900 and the true
+   minimum. Use the Inspector on the look-dev project (`artifacts/0022-physics/`,
+   or regenerate it with `tools/physics_lookdev.py`) for Crate, Ball, Pill and
+   Floor. Capture:
+   - RigidBody, showing the `1/s` damping
+   - the Collider shape rows
+   - the Material and Collision sections with masks
+   - AngularVelocity
+   - keyboard focus on the Shape row
+   - a static viewport
+
+   Native has no play controls, so there are no native motion captures. The
+   unknown-tag state cannot be loaded natively; the browser fixture is the only evidence for it.
+2. **Path-bearing physics diagnostics.** Optional. If Rust validation errors carry
+   JSON pointers such as `/shape/half_extents/1`, the Inspector already places
+   them on the exact axis or row.
