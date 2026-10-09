@@ -1,18 +1,21 @@
-# 0015 HDR output: tone-mapping design, headless review and curve correction — result
+# 0015 HDR output: tone-mapping design, curve correction and final visual review — result
 
 ## Status
 
-- **First pass (design):** complete. The operator is chosen, the WGSL snippet is written
-  and the studio commentary is updated.
-- **Priority follow-up (headless review):** complete. The verdict is in the section
-  "Headless capture review" at the end of this file. Output structure is approved for
-  these headless captures. Material color fidelity is **not** approved.
-- **Priority correction (derived curve):** implemented. The section "Priority
-  correction: derived preview curve" at the end of this file supersedes the
-  first-pass operator choice. Fresh headless and native captures are pending from
-  Astra. The existing captures are historical and approve nothing about the new curve.
-- **Native review:** pending. The 1440x900 and 1000x650 native captures do not exist
-  yet, and no native output is approved. No phase gate is approved or claimed.
+**Final verdict: approved for the corrected curve and the native integration, within
+this scoped preview.** The details are in the section "Final corrected headless and
+native review" at the end of this file. This approves the preview's appearance only.
+No phase gate is approved or claimed, and the specular environment is still missing.
+
+- **First pass (design):** complete. It chose Khronos PBR Neutral, which the
+  correction later superseded.
+- **Headless review of the initial integration:** complete. It found the color
+  regression. Those captures and comparison sheets are historical and describe the
+  old curve only.
+- **Curve correction:** complete. `tone_map.wgsl` holds the Incant derived preview
+  curve.
+- **Final review:** complete. I reviewed 24 fresh headless captures in
+  `artifacts/hdr-final/` and two native screenshots in `artifacts/native-hdr-final/`.
 
 - Model: Claude Opus 5.5, model ID `claude-opus-5-5`.
 - Transport: Claude Code agent session launched by the handoff harness in this
@@ -21,10 +24,13 @@
 - Packet: `handoffs/0015-hdr-output/brief.md`. The first pass had no priority
   revisions. The current packet adds a priority follow-up: review the integrated HDR
   captures, apply the corrected license pin, and treat function-local exposure as
-  settled. Those are applied below. The newest priority correction says the director
-  accepts the color-regression finding. It gives me ownership of the curve itself,
-  with no further director decision needed. I acknowledge that feedback and applied
-  it first, as the last section records.
+  settled. Those are applied below. A later priority correction gave me ownership of
+  the curve itself. That correction was **Astra's routine integration decision**, made
+  under the director's standing instruction to continue sensible work. It was not newly
+  typed director feedback, and earlier wording in this file that credited the director
+  is corrected here. The initial curve selection and the fixed exposure of 1.0 were
+  also routine agent choices. The final packet asks for review only, and this file's
+  last section records it.
 
 ## Changed paths
 
@@ -358,7 +364,10 @@ fill-lit face, for the next capture round.
 
 ### Recommendations
 
-These are for Astra and the director. Changing the operator is outside this packet.
+**Superseded.** These recommendations applied to the initial curve. The curve
+correction below removed the toe, so recommendations 1 and 2 no longer apply. Astra
+delivered recommendation 3 as the fill-only dark-material fixtures. No director
+decision is needed.
 
 1. **Calibrate the specular-environment increment to the operator.** Dielectrics should
    receive close to unit-intensity F0 reflection, about 0.04, before re-review. The table
@@ -514,4 +523,155 @@ These expectations change, and Astra owns updating them:
 - The current `artifacts/hdr-review` captures are historical. They approve nothing
   about the new curve.
 
-No director decision or permission request is needed for this correction.
+No director decision or permission request is needed for this correction. It was a
+routine agent design change, not a director action.
+
+## Final corrected headless and native review
+
+Reviewed on 2026-10-09 by Claude Opus 5.5, model ID `claude-opus-5-5`. This is a
+review-only pass. I made no builds, new captures, or code, UI, lighting or curve
+edits. `tone_map.wgsl` and `studio.rs` are byte-identical to my correction commit
+`f1a3364`. Only Astra's captures were inspected. This verdict covers only the
+corrected curve. The initial `artifacts/hdr-review` captures and the
+`handoffs/0015-hdr-output/review/*.png` comparison sheets show the superseded curve.
+
+### Inspected files
+
+- All 24 PNGs in `artifacts/hdr-final/`: base-color-texture, dark-fill-10,
+  dark-fill-18, dark-fill-50, double-sided-back, emissive-map, hdr-glossy-highlight,
+  hdr-reference-swatches, hdr-transparent-over-black, layered-transparency,
+  linear-filter, lit-double-sided-back, mask-discarded, metallic-roughness-map,
+  minified-color-mips, normal-map, occlusion-map, opaque-alpha-zero,
+  opaque-between-transparent, reflected-single-sided, reimported-blue-texture,
+  sixteen-bit-color, textured-cube and varying-normal-map.
+- The 19 overlapping captures in `artifacts/material-before/`, for comparison.
+  default-metal is historical and has no new counterpart, so it was not re-reviewed.
+- `artifacts/native-hdr-final/07-final-wide.jpg`, 2880x1748 physical pixels.
+- `artifacts/native-hdr-final/08-final-minimum.jpg`, 2000x1300 physical pixels.
+
+**Method.** I viewed every image. I decoded every headless pixel with the scratch
+pure-Python decoder in the gitignored `target/hdr-review-tools/`. For the native
+JPEGs, I converted them to PNG with macOS `sips`, averaged 13x13 pixel patches, and
+viewed corner crops. All of this was file processing only. I took no screen capture.
+
+### Verdict
+
+| Area | Verdict |
+|---|---|
+| Ordinary material colors | **Approved.** Identical to the 0014 captures within one code value |
+| Emissive colors | **Approved.** The authored brown is exact |
+| Dark fill-lit materials | **Approved.** Exact to prediction and distinct from the backdrop |
+| Highlight shoulder | **Approved.** Smooth, neutral, unclipped |
+| Transparency and composition | **Approved.** Exact to the linear-space prediction |
+| #141519 backdrop | **Approved.** Exact in every headless capture |
+| Native integration at both sizes | **Approved.** Matches headless output after color-profile conversion |
+| Specular environment | **Still missing.** This is explicit and out of scope |
+
+### Headless findings
+
+**1. Ordinary colors are stable.** These captures are pixel-identical to their 0014
+counterparts: emissive-map, sixteen-bit-color, lit-double-sided-back, normal-map,
+occlusion-map, linear-filter, minified-color-mips and mask-discarded. In
+base-color-texture, metallic-roughness-map, reimported-blue-texture, varying-normal-map
+and textured-cube, a small share of pixels changed, and none by more than one code
+value. That is 16-bit scene-target quantization. The brown, soft blue, tan and the
+orange and blue cube faces read exactly as before. The regression found earlier is
+fixed.
+
+| Capture center | 0014 | Initial HDR curve | Corrected curve |
+|---|---|---|---|
+| base-color-texture | 117, 61, 36 | 112, 49, 6 | **117, 61, 36** |
+| reimported-blue-texture | 36, 117, 231 | 7, 112, 228 | **36, 117, 231** |
+| emissive-map | 128, 64, 32 | 124, 55, 4 | **128, 64, 32** |
+| lit-double-sided-back | 231 gray | 225 gray | **231 gray** |
+
+**2. Dark materials are legible.** The three fill-only fixtures are uniform and exact.
+
+| Fixture | Predicted | Captured |
+|---|---|---|
+| dark-fill-10 | 48 | 48 |
+| dark-fill-18 | 66 | 66 |
+| dark-fill-50 | 108 | 108 |
+
+The 0.1 albedo is quiet against the #141519 backdrop, but its edge is clearly
+readable. That is the honest look of a 0.1 albedo under a 0.30 fill. It is not crushed
+by the output transform.
+
+**3. The highlight shoulder is controlled.** hdr-glossy-highlight is neutral in every
+pixel. It rises from 241 at the edge to a 251 peak in one-code steps on both axes, with
+no banding and no clip to 255. It reads as a bright, soft hotspot. Compared with the
+initial curve's 237 to 249, it has a little more lift and still keeps its gradation.
+
+**4. The swatches match my expected values exactly.** All 12 columns are uniform:
+0, 25, 118, 188, 231, 243, 252, 254, 255, 255, then (254, 158, 158) and
+(255, 255, 255).
+
+**5. Transparency composes exactly.** The transparent-over-black center is 188, which
+is 0.5 linear. The half-alpha strip over the backdrop is (179, 180, 180), and the black
+showing through is (0, 0, 0). All three match my predictions, and no other values occur.
+In layered-transparency and opaque-between-transparent, the thin edge slivers are
+full-strength red and green emission at about 1.0. They now show the shoulder's slight,
+hue-preserving desaturation, (179, 26, 28) and (30, 243, 30). That is the intended
+behavior at display maximum.
+
+**6. Full-strength red keeps its hue.** opaque-alpha-zero, reflected-single-sided and
+double-sided-back read (243, 30, 30), as predicted. The red stays clearly red, and the
+roughly 12-code drop from 255 is the deliberate highlight headroom.
+
+**7. The backdrop is preserved.** (20, 21, 25) appears with identical pixel counts in
+every capture. mask-discarded is the backdrop alone.
+
+### Native findings
+
+Both screenshots show the rebuilt app in the Attached state with zero problems. The
+cube project, four history items and the saved account are restored. The account label
+is deliberately not repeated here. The purple badge at the top left is macOS recording
+chrome, not app UI.
+
+**Color matches the headless output.** The JPEGs carry the "Color LCD" display profile,
+not sRGB, so their raw values are display-space values. I converted the headless sRGB
+values to Display P3 as an approximation of that profile. The native samples then match
+within two code values, well inside JPEG error.
+
+| Sample | Headless sRGB | Converted to P3 | Native, both sizes |
+|---|---|---|---|
+| Orange front face | 199, 136, 65 | 190, 139, 78 | 188, 139, 77 |
+| Blue front face | 40, 109, 199 | 60, 108, 193 | 59, 107, 192 |
+| Orange right face | 156, 106, 48 | 149, 108, 59 | 149, 108, 58 |
+| Viewport backdrop | 20, 21, 25 | 20, 21, 25 | 19, 21, 24 |
+
+The face samples are identical in both screenshots, so viewport size does not affect the
+output.
+
+**Layout and integration.**
+- **Wide, 1440x874 logical:** the cube sits centered in the viewport with comfortable
+  margins. The cube reads as the same object as the headless capture. Face shading
+  separates three planes clearly, and the top faces are slightly darker than the front.
+- **Minimum, 1000x650 logical:** the viewport shrinks and the cube scales down without
+  clipping. Panels, tabs, Problems, the Inspector and the Agent area stay legible. The
+  Inspector's Identifiers row falls below the fold, consistent with the scroll area that
+  0014 verified.
+- **Edges:** corner crops of the wide capture show the viewport meeting the panel
+  borders cleanly. There is no halo, seam or tone-mapped tint on the chrome. The chrome
+  and the panel background stay neutral and distinct from the viewport backdrop.
+
+### Remaining limitations
+
+- **No specular environment.** Metals and glossy dielectrics have only direct
+  highlights. The default-metal capture is historical and stays a flat gray until real
+  IBL exists, which will be reviewed on its own merits.
+- **Scoped preview only.** There is no authored lighting, bloom, antialiasing, shadows
+  or clustered forward+. This is not the production render graph.
+- **Approximate native color comparison.** JPEG compression and the display profile
+  make the native comparison approximate. Display P3 stood in for the "Color LCD"
+  profile. Exact numerical checks rest on the headless readbacks and Astra's GPU
+  assertions.
+- **The wide capture is 874 logical pixels tall,** not 900, because of the available
+  desktop height. I reviewed nothing at exactly 1440x900.
+- **Static screenshots only.** Resize behavior and Inspector scrolling come from
+  Astra's verification and the 0014 review. I did not observe them in motion.
+- **Inputs to the GPU-test claims.** The test results cited here, including Clippy,
+  the 124 Rust tests, the eleven GPU tests and the 282 UI tests, are Astra's reports. I
+  did not rerun them.
+
+No phase gate is approved or claimed by this review.
