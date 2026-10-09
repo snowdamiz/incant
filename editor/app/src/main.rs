@@ -1,5 +1,5 @@
 use incant_cmd::{Actor, Command};
-use incant_doc::{Project, schema_registry};
+use incant_doc::schema_registry;
 use incant_render::{Renderer, Viewport, wgpu};
 use serde::Serialize;
 use serde_json::{Value, json};
@@ -15,6 +15,7 @@ mod assets;
 mod menu;
 mod project;
 mod provider;
+mod render_scene;
 mod window;
 struct Editor {
     provider: Arc<provider::ProviderRuntime>,
@@ -217,7 +218,13 @@ fn main() {
             let render_app = app.handle().clone();
             std::thread::spawn(move || {
                 let mut configured = (0, 0);
-                let empty = Project::empty("Loading");
+                let mut runtime = match render_scene::SceneRuntime::new(&renderer) {
+                    Ok(runtime) => runtime,
+                    Err(error) => {
+                        publish_render_status(&shared, &render_app, Some(error));
+                        return;
+                    }
+                };
                 let format = surface
                     .get_capabilities(&renderer.adapter)
                     .formats
@@ -248,6 +255,33 @@ fn main() {
                         );
                         configured = (size.width, size.height);
                     }
+                    let rect = shared.viewport.lock().ok().and_then(|r| *r).filter(|v| {
+                        let r = v.rect;
+                        r[2] > 0.
+                            && r[3] > 0.
+                            && r[0] + r[2] <= size.width as f32
+                            && r[1] + r[3] <= size.height as f32
+                    });
+                    let update = match shared.bus.lock() {
+                        Ok(load) => match &*load {
+                            project::LoadState::Ready(bus)
+                                if runtime.needs_update(bus.revision()) =>
+                            {
+                                Some((bus.project().clone(), bus.revision()))
+                            }
+                            _ => None,
+                        },
+                        Err(_) => break,
+                    };
+                    if let Some((project, revision)) = update {
+                        let result = runtime.update(
+                            &renderer,
+                            &project,
+                            revision,
+                            shared.asset_root.as_deref(),
+                        );
+                        publish_render_status(&shared, &render_app, result.err());
+                    }
                     let frame = match surface.get_current_texture() {
                         wgpu::CurrentSurfaceTexture::Success(frame)
                         | wgpu::CurrentSurfaceTexture::Suboptimal(frame) => frame,
@@ -257,22 +291,8 @@ fn main() {
                             continue;
                         }
                     };
-                    let rect = shared.viewport.lock().ok().and_then(|r| *r).filter(|v| {
-                        let r = v.rect;
-                        r[2] > 0.
-                            && r[3] > 0.
-                            && r[0] + r[2] <= size.width as f32
-                            && r[1] + r[3] <= size.height as f32
-                    });
-                    let project = match shared.bus.lock() {
-                        Ok(load) => match &*load {
-                            project::LoadState::Ready(bus) => bus.project().clone(),
-                            _ => empty.clone(),
-                        },
-                        Err(_) => break,
-                    };
-                    match renderer.draw(
-                        &project,
+                    match renderer.draw_scene(
+                        &runtime.scene,
                         &frame.texture.create_view(&Default::default()),
                         format,
                         size.width,
@@ -284,21 +304,7 @@ fn main() {
                             frame.present();
                         }
                         Err(error) => {
-                            if let Ok(mut status) = shared.viewport_error.lock() {
-                                *status = Some(error.to_string());
-                            }
-                            if let Ok(mut log) = shared.console.lock() {
-                                log.push(ConsoleEvent::new(
-                                    "error",
-                                    format!("Render error: {error}"),
-                                ));
-                            }
-                            use tauri::Emitter;
-                            let _ = render_app.emit_to(
-                                tauri::EventTarget::webview("editor"),
-                                "incant:engine-changed",
-                                (),
-                            );
+                            publish_render_status(&shared, &render_app, Some(error.to_string()));
                             break;
                         }
                     }
@@ -309,4 +315,31 @@ fn main() {
         })
         .run(tauri::generate_context!())
         .expect("Incant native editor failed");
+}
+
+fn publish_render_status(editor: &Editor, app: &tauri::AppHandle, error: Option<String>) {
+    let changed = if let Ok(mut status) = editor.viewport_error.lock() {
+        if *status == error {
+            false
+        } else {
+            *status = error.clone();
+            true
+        }
+    } else {
+        false
+    };
+    if !changed {
+        return;
+    }
+    if let Some(error) = error
+        && let Ok(mut log) = editor.console.lock()
+    {
+        log.push(ConsoleEvent::new("error", format!("Render error: {error}")));
+    }
+    use tauri::Emitter;
+    let _ = app.emit_to(
+        tauri::EventTarget::webview("editor"),
+        "incant:engine-changed",
+        (),
+    );
 }

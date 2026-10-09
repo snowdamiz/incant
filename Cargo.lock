@@ -3171,6 +3171,7 @@ name = "incant_editor"
 version = "0.0.1"
 dependencies = [
  "incant_agent",
+ "incant_assets",
  "incant_cmd",
  "incant_core",
  "incant_doc",
@@ -3238,11 +3239,15 @@ version = "0.0.1"
 dependencies = [
  "bytemuck",
  "glam 0.32.1",
+ "incant_assets",
  "incant_core",
  "incant_doc",
  "png 0.18.1",
  "pollster",
+ "serde",
  "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
  "wgpu",
 ]
 

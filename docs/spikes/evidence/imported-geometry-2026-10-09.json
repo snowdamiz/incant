@@ -1,0 +1,47 @@
+{
+  "platform": "darwin",
+  "native_renderer_executed": true,
+  "png_transport_validated": true,
+  "hierarchy_matches_flattened": true,
+  "hierarchy_differs_from_initial": true,
+  "width": 320,
+  "height": 180,
+  "sha256": "913f7255a935a8e73b4851b32545370561833741cfe14c78122aabde291aab55",
+  "hierarchy_sha256": "3ab83135369a91e72b05a3ba0aa54637b3e13cc81c6b6a85725315240ea4ba75",
+  "engine": {
+    "adapter": "Apple M5 Pro",
+    "geometry": {
+      "diagnostic_entities": 3,
+      "model_draw_calls": 0,
+      "model_entities": 0,
+      "model_triangles": 0,
+      "primitive_instances": 0
+    },
+    "height": 180,
+    "output": "artifacts/model-render-check-20261009/viewport.png",
+    "shading": "diagnostic",
+    "width": 320
+  },
+  "imported_models": {
+    "source_independent": true,
+    "reimport_changes_pixels": true,
+    "original_sha256": "7288403b51424449987c15ed2c5a7ea1d8d600149698b6ffd4bc7fb6e083fa7f",
+    "reimported_sha256": "d826a937092ff58b75d004fbd6b137c5638feaf5e164eabd4f63bdcf0c9c7664",
+    "engine": {
+      "adapter": "Apple M5 Pro",
+      "geometry": {
+        "diagnostic_entities": 0,
+        "model_draw_calls": 1,
+        "model_entities": 2,
+        "model_triangles": 2,
+        "primitive_instances": 2
+      },
+      "height": 360,
+      "output": "artifacts/model-render-check-20261009/models/original.png",
+      "shading": "diagnostic",
+      "width": 640
+    }
+  },
+  "visual_review": false,
+  "native_window_composition_review": false
+}
