@@ -10,55 +10,53 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  { label: 'Features', href: '#features' },
-  { label: 'Workflow', href: '#workflow' },
-  { label: 'Trust', href: '#trust' },
+  { label: 'How it works', href: '#how' },
+  { label: 'Principles', href: '#principles' },
   { label: 'FAQ', href: '#faq' },
 ]
 
-export type WorkflowStepId = 'describe' | 'inspect' | 'playtest' | 'rewind'
+export type StageStep = 'ask' | 'review' | 'play' | 'undo'
 
-export interface WorkflowStep {
-  id: WorkflowStepId
-  index: string
+export interface StageStepCopy {
+  id: StageStep
+  numeral: string
   label: string
-  title: string
-  body: string
-  points: string[]
+  line: string
 }
 
-export const workflowSteps: WorkflowStep[] = [
+export const stageSteps: StageStepCopy[] = [
+  { id: 'ask', numeral: '01', label: 'Ask', line: 'Describe the mechanic in plain words.' },
+  { id: 'review', numeral: '02', label: 'Review', line: 'Read the exact change before it lands.' },
+  { id: 'play', numeral: '03', label: 'Play-test', line: 'The agent plays it and shows its evidence.' },
+  { id: 'undo', numeral: '04', label: 'Undo', line: 'One step takes the whole change back.' },
+]
+
+export interface Principle {
+  numeral: string
+  title: string
+  body: string
+}
+
+export const principles: Principle[] = [
   {
-    id: 'describe',
-    index: '01',
-    label: 'Describe',
-    title: 'Say what you want, in plain words.',
-    body: 'Ask for a mechanic the way you would ask a teammate. The agent reads your scene through the same schemas the editor uses, so it never guesses at field names.',
-    points: ['Works alongside your own clicks and drags', 'Plans against real component schemas'],
+    numeral: '01',
+    title: 'One history',
+    body: 'Clicks, scripts and agent requests become the same kind of edit, in one timeline, with a name on each.',
   },
   {
-    id: 'inspect',
-    index: '02',
-    label: 'Inspect',
-    title: 'Read every change before it lands.',
-    body: 'Edits arrive as typed commands grouped into a single transaction. The project is a readable text document, so the change is a diff you can actually review.',
-    points: ['Stable IDs, never fragile names', 'Validation errors point to exact paths'],
+    numeral: '02',
+    title: 'Plain-text worlds',
+    body: 'Scenes and prefabs are readable documents. Review a change the way you review code, then keep it.',
   },
   {
-    id: 'playtest',
-    index: '03',
-    label: 'Play-test',
-    title: 'Watch it play, not just compile.',
-    body: 'The agent runs the game, looks at the viewport, reads the console and reports back with what it saw. You get evidence, not a hopeful summary.',
-    points: ['Viewport captures and logs as tools', 'Results land next to the transaction'],
+    numeral: '03',
+    title: 'Evidence, not guesses',
+    body: 'The agent plays the game, watches the viewport and reads the console before it says it is done.',
   },
   {
-    id: 'rewind',
-    index: '04',
-    label: 'Rewind',
-    title: 'Keep it, tweak it, or undo it.',
-    body: 'Agent work sits in the same history as yours. One undo reverts the whole transaction, and provenance shows exactly who did what.',
-    points: ['One history for people and agents', 'Undo is atomic, never partial'],
+    numeral: '04',
+    title: 'Yours to run',
+    body: 'Bring your own model account. The editor works offline, with no Incant account required.',
   },
 ]
 
@@ -71,31 +69,26 @@ export const faqItems: FaqItem[] = [
   {
     question: 'What is Incant?',
     answer:
-      'Incant is a game engine and editor in one application. You can build the way you would in a traditional editor, by clicking, dragging and writing scripts, or describe what you want and let an AI agent make the change in the same scene.',
+      'A game engine and editor in one application. Build by hand the way you would in any editor, or describe what you want and let an AI agent make the change in the same scene.',
   },
   {
-    question: 'Does the AI change things without asking me?',
+    question: 'Can the agent change things without me?',
     answer:
-      'Every agent action is a transaction made of typed commands, exactly like your own edits. You can review it in the history, amend it, or undo the whole thing in one step. Provenance records whether a change came from you, the agent, a script or an import.',
+      'Every agent action is a transaction in the same history as your own edits. You can inspect it, amend it, or undo the whole thing in one step, and each entry records who made it.',
   },
   {
     question: 'Which AI model does it use?',
     answer:
-      'Yours. You connect your own model provider account, starting with OpenAI. Model calls go directly from your machine to the provider, and keys are stored in your operating system keychain, never on Incant servers.',
+      'Yours. Connect your own model provider account, starting with OpenAI. Calls go directly from your machine to the provider, and keys stay in your operating system keychain.',
   },
   {
-    question: 'Can I use the editor offline?',
+    question: 'Does it work offline?',
     answer:
-      'Yes. The manual editor works fully offline with no Incant account, and no editing feature is gated behind a login. The agent needs a model connection, so it is available offline only when you connect a local model.',
+      'The editor works fully offline with no Incant account, and no editing feature sits behind a login. The agent needs a model connection, or a local model if you prefer to stay offline.',
   },
   {
-    question: 'What languages do I write games in?',
+    question: 'What do I write gameplay in?',
     answer:
-      'Gameplay is written in TypeScript, running in a sandboxed runtime with hot reload. The engine core is Rust. Scripts get no file system or network access unless your project grants that capability and you confirm it.',
-  },
-  {
-    question: 'Where can I learn more?',
-    answer:
-      'The Incant repository on GitHub is the home of the project, including the full product guide that describes the architecture, the document model and the agent. The repository is private, so GitHub may ask you to sign in with an account that has access.',
+      'TypeScript, with hot reload, in a sandbox that has no file or network access unless your project asks and you agree. The engine core is written in Rust.',
   },
 ]
