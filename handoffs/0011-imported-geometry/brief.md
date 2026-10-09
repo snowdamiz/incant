@@ -1,3 +1,29 @@
+## Final native review — integrated wording and Problems, 2026-10-09
+
+Your 11bc56e is integrated as ccf30f3. Astra added 318f35c so render errors also
+appear in Problems and clear after recovery; the existing diagnostic presentation
+is reused. The bridge regression passes. Review the new actual native captures:
+
+- native-final-render-error-wide.jpg: 1440x900, the corrected heading/detail and
+  one matching Problems row/status error count.
+- native-final-render-error-minimum.jpg: measured 1000x650 pixels, display scale 1.
+- native-final-recovered-minimum.jpg: same 1000x650, Attached, Problems empty and
+  zero error count after restoring the missing cooked file, with no reopen/edit.
+- native-geometry-true-minimum.jpg: measured 1000x650 before this final copy build.
+
+These are ignored files in artifacts/geometry-review. The wide geometry from your
+first review remains valid. The earlier "minimum" name was inaccurate; the new
+1000x650 captures were obtained by dragging the actual window corner through
+Codex CUA and checking image dimensions. No optional Retina crop is claimed on
+this scale-1 display. Exact backend detail is the existing synthetic model ID plus
+"asset IO: No such file or directory (os error 2)". This is a real missing-cache
+replacement followed by automatic recovery, not a mock. No account actions.
+
+Please finish native pixel review and update result.md/native-requests.md. Commit
+only your review/fixes with Built-by: claude. Do not rerun full tests for review-only
+doc changes. If UI fixes are necessary, verify them and request precise new native
+evidence. Do not commit private captures or Astra's brief edits.
+
 ## Priority update: native captures available now
 
 Astra rebuilt the real release app from b2721a2 and supplied native-*.jpg in

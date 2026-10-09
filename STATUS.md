@@ -57,8 +57,9 @@ within its documented workload.
   default glTF scene/node hierarchy, version retention, revision-driven editor
   replacement, and shared CLI/agent rendering. CPU checks, two real GPU tests and
   public CLI import/reimport/readback pass. Native Undo and missing-cache recovery
-  pass without reopening. Claude pixel review and hosted checks
-  are pending; materials, lighting and the production render graph remain open.
+  pass without reopening. Claude approved the final native wide/minimum captures;
+  279 UI tests pass, including render-error diagnostics and recovery. PR #10
+  awaits final-head hosted checks; materials, lighting and the production render graph remain open.
   See [imported GPU geometry](docs/spikes/imported-gpu-geometry.md).
 
 - Runtime scene projection now composes parent transforms, preserves mesh bindings,

@@ -50,14 +50,34 @@
     "missing_replacement_cache_reports_error": true,
     "same_revision_cache_restore_recovers": true,
     "saved_account_restored": true,
-    "visual_review": "pending Claude",
-    "captures_private": true
+    "visual_review": "PASS: Claude Opus 5.5 via ACP, 80f3d0b",
+    "captures_private": true,
+    "final_copy_build": "318f35c",
+    "problems_reports_and_clears_render_error": true
   },
   "local_checks": {
     "rust_behavior_tests": 110,
     "gpu_tests_explicit": 2,
-    "ui_tests": 276,
+    "ui_tests": 279,
     "clippy": "passed",
     "native_release_build": "passed"
+  },
+  "native_review": {
+    "result": "PASS",
+    "review_commit": "80f3d0b",
+    "widths": [
+      [
+        1440,
+        900
+      ],
+      [
+        1000,
+        650
+      ]
+    ],
+    "display_scale": 1,
+    "retina_capture": false,
+    "private_captures": true,
+    "appearance": "diagnostic; no PBR/AA/production-camera claim"
   }
 }
