@@ -56,8 +56,10 @@ within its documented workload.
 - An isolated physics candidate probe runs pinned Jolt and Rapier with fixed
   stepping and repeated position checks. Native Jolt contact, raycast, rollback,
   invalid-input, stale-handle and sensor checks pass. The selected Jolt binding
-  refuses iOS simulator/Web targets; Rapier builds there. Hosted cross-desktop
-  evidence and the engine integration decision remain open. No physics backend
+  refuses iOS simulator/Web targets; Rapier builds there. The native position
+  streams match across hosted macOS, Windows and Linux at `6118219`; all six checks pass
+  at `6118219` and PR #22 merged as `a6fd91f`. The engine integration decision
+  remains open. No physics backend
   has been added to the engine. See [candidate evidence](docs/spikes/physics-candidates.md).
 
 - Opt-in directional cascades are implemented with scoped Claude appearance
@@ -68,7 +70,7 @@ within its documented workload.
   checks pass 144 Rust, 40 GPU and 294 UI tests plus Clippy. Native enabled/Off
   states, separated Assets workspace and sun-angle Undo/Redo pass. Final 1080p analytical timings
   measure 1.389–3.096 ms across 0–4 suns; thin-caster contact/aliasing limits remain.
-  Final hosted checks are pending; local-light shadows and
+  All twelve hosted checks pass at `5d31768`; PR #21 merged as `899cc2a`. local-light shadows and
   adaptive quality remain open. See [directional shadows](docs/spikes/directional-shadows.md).
 
 - Real GPU passes now execute through a persistent Bevy ECS schedule with explicit

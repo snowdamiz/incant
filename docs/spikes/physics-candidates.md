@@ -28,8 +28,12 @@ evaluation before choosing the engine integration.
 
 A scoped workflow runs the probe and behavior checks on macOS, Linux and Windows,
 then compares recorded hashes across hosts. A separate job records the known
-binding refusals and successful Rapier target builds. Hosted results remain
-pending; a passed expected-refusal check must never be called platform support.
+binding refusals and successful Rapier target builds. All three native jobs and target-build recording pass at `6118219`. Independent
+artifact inspection confirms exact per-backend position hashes across macOS
+arm64, Linux x86_64 and Windows AMD64, including both Jolt worker counts. This
+is evidence for one synthetic position workload, not complete runtime
+determinism. A passed expected-refusal check is not platform support. All six exact-head checks pass at `6118219`. PR #22 merged as `a6fd91f`; its tree
+matches that head and the merge author trailer is verified.
 
 [Full local evidence](evidence/physics-candidates-2026-10-09.json) retains exact
 position hashes, raw timing samples, commands, target outcomes and log hashes.
