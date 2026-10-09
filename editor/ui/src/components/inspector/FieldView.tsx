@@ -220,18 +220,20 @@ function FieldRow({
       ? 'warning'
       : null;
   const errorPaths = new Set(problems.filter((d) => d.severity === 'error').map((d) => d.path ?? ''));
-  const describedBy = [noteId, problems.length > 0 ? messageId : undefined].filter(Boolean).join(' ') || undefined;
+  const description = schema.description ?? hint.description;
+  const descriptionId = description ? `${id}-description` : undefined;
+  const describedBy =
+    [descriptionId, noteId, problems.length > 0 ? messageId : undefined].filter(Boolean).join(' ') || undefined;
   const unit = unitOf(schema);
   const vectorUnit = schema.type === 'array' && !unset && !notice ? unit : undefined;
   return (
-    <div className={`field${severity ? ` field--${severity}` : ''}`}>
+    // The hover tooltip lives on the row, never on the <label>: WebKit names a field
+    // from its label's title attribute, which would replace the visible label with
+    // the description (seen in the native AX tree). The description is announced
+    // through aria-describedby instead.
+    <div className={`field${severity ? ` field--${severity}` : ''}`} title={description ?? label}>
       {/* A real <label> (plus aria-labelledby for non-input controls) keeps the name robust even when clipped. */}
-      <label
-        className="field__label"
-        id={`${id}-label`}
-        htmlFor={id}
-        title={schema.description ?? hint.description ?? label}
-      >
+      <label className="field__label" id={`${id}-label`} htmlFor={id}>
         {label}
         {vectorUnit ? (
           <span className="field__unit">
@@ -240,6 +242,11 @@ function FieldRow({
           </span>
         ) : null}
       </label>
+      {description ? (
+        <span id={descriptionId} className="visually-hidden">
+          {description}
+        </span>
+      ) : null}
       <div className="field__value">
         {notice ? (
           <Notice id={id} value={notice.value} describedBy={describedBy}>
