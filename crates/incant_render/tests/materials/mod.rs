@@ -69,6 +69,30 @@ impl Fixture {
         fs::write(path, serde_json::to_vec(&value).unwrap()).unwrap();
         self.cook();
     }
+    pub fn normal(&mut self, normal: glam::Vec3) {
+        let path = self.root.path().join("quad.bin");
+        let mut bytes = fs::read(&path).unwrap();
+        bytes.truncate(120);
+        for _ in 0..6 {
+            for value in normal.normalize().to_array() {
+                bytes.extend_from_slice(&value.to_le_bytes());
+            }
+        }
+        fs::write(path, bytes).unwrap();
+        self.edit(|g| {
+            g["buffers"][0]["byteLength"] = json!(192);
+            if g["bufferViews"].as_array().unwrap().len() == 2 {
+                g["bufferViews"].as_array_mut().unwrap().push(Value::Null);
+            }
+            if g["accessors"].as_array().unwrap().len() == 2 {
+                g["accessors"].as_array_mut().unwrap().push(Value::Null);
+            }
+            g["bufferViews"][2] = json!({"buffer":0,"byteOffset":120,"byteLength":72});
+            g["accessors"][2] =
+                json!({"bufferView":2,"componentType":5126,"count":6,"type":"VEC3"});
+            g["meshes"][0]["primitives"][0]["attributes"]["NORMAL"] = json!(2);
+        });
+    }
     pub fn texture(
         &mut self,
         pixels: &[u8],
