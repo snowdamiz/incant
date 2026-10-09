@@ -69,6 +69,7 @@ describe("native bridge", () => {
     const invoke = vi.fn(async (command: string) => { if (command === 'engine_import') throw 'Source could not be cooked'; return state; }) as unknown as Invoke;
     const bridge = new NativeBridge(invoke); await bridge.start();
     const command = { type: 'asset.import', sources: [{ source: 'bad.glb' }] } as const;
+    expect(bridge.getSnapshot().assets).toBeUndefined();
     expect((await bridge.dispatch(command)).ok).toBe(false);
     expect(invoke).not.toHaveBeenCalledWith('engine_import', expect.anything());
     const available = read(); available.asset_import = { available: true };

@@ -64,6 +64,14 @@ within its documented workload.
   assets in `incant watch-assets`. Six service and two separate-process CLI tests
   pass. Editor dispatch and GPU/ECS hot reload remain open.
   See [source watching evidence](docs/spikes/asset-source-watch.md).
+  PR #7 is open on `c337252`; source checks and both desktop test jobs are running.
+
+- Native editor imports now prepare outside the event thread/document lock and
+  commit with revision checks through the existing persistent history. Two new
+  Rust behavior tests and 242 UI/bridge tests pass. The asset metadata and import
+  contract are wired to the native bridge. Claude Opus 5.5 ACP handoff 0010 is
+  implementing the asset library/import interface; it is not integrated or
+  natively verified yet. Automatic editor watching remains open.
 
 - Responsive project loading merged in PR #5 after all twelve hosted checks passed.
   File reads and journal recovery

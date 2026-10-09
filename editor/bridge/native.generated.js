@@ -198,19 +198,21 @@ function snapshotFromEngine(read) {
         },
         schemas,
         entities,
-        assets: {
-            status: 'ready',
-            value: Object.values(read.project.assets ?? {}).map((asset)=>({
-                    id: id(asset.id),
-                    name: asset.name,
-                    path: asset.path,
-                    kind: asset.kind,
-                    fingerprint: asset.sha256,
-                    ...asset.import_settings?.type === 'texture' ? {
-                        textureUsage: asset.import_settings.usage
-                    } : {}
-                }))
-        },
+        ...read.project.assets ? {
+            assets: {
+                status: 'ready',
+                value: Object.values(read.project.assets).map((asset)=>({
+                        id: id(asset.id),
+                        name: asset.name,
+                        path: asset.path,
+                        kind: asset.kind,
+                        fingerprint: asset.sha256,
+                        ...asset.import_settings?.type === 'texture' ? {
+                            textureUsage: asset.import_settings.usage
+                        } : {}
+                    }))
+            }
+        } : {},
         assetImport: read.asset_import ?? {
             available: false,
             reason: 'This host does not expose asset importing.'
