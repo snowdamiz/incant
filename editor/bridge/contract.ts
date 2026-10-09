@@ -12,6 +12,9 @@ export const KNOWN_CAPABILITIES = [
   'history.undo',
   'history.redo',
   'provider.connect',
+  'provider.cancel',
+  'provider.disconnect',
+  'provider.switch',
   'agent.send',
   'viewport.bounds',
   'window.drag',
@@ -173,16 +176,27 @@ export interface ConsoleEntry {
 }
 
 /** Provider connection metadata only. There is deliberately no field for a key or token. */
-export type ProviderState =
+export interface ProviderAccount {
+  readonly id: string;
+  readonly label: string;
+}
+export type ProviderState = (
+  | { readonly status: 'checking'; readonly provider: 'openai' }
   | { readonly status: 'not-connected'; readonly provider: 'openai' }
-  | { readonly status: 'connecting'; readonly provider: 'openai'; readonly method: 'oauth' | 'api-key' }
+  | { readonly status: 'connecting'; readonly provider: 'openai'; readonly method: 'oauth' | 'api-key'; readonly phase?: 'browser' | 'validating' }
   | {
       readonly status: 'connected';
       readonly provider: 'openai';
       readonly method: 'oauth' | 'api-key';
       readonly accountLabel: string;
     }
-  | { readonly status: 'error'; readonly provider: 'openai'; readonly error: BridgeError };
+  | { readonly status: 'error'; readonly provider: 'openai'; readonly error: BridgeError }
+) & {
+  readonly accounts?: readonly ProviderAccount[];
+  readonly activeAccount?: string;
+  /** Safe, nonsecret status or recovery information. */
+  readonly message?: string;
+};
 
 export type AgentState =
   | { readonly status: 'unavailable'; readonly reason: string }
@@ -245,7 +259,7 @@ export type EditorCommand =
 
 /** Requests to the host that are not document edits and are not journaled. */
 export type HostRequest =
-  | { readonly type: 'provider.connect'; readonly method: 'oauth' | 'api-key' }
+  | { readonly type: 'provider.connect'; readonly method: 'oauth' | 'api-key'; readonly phase?: 'browser' | 'validating' }
   | { readonly type: 'agent.send'; readonly text: string }
   | {
       readonly type: 'viewport.bounds';
