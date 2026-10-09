@@ -33,8 +33,9 @@ nonzero; partial PNGs may remain, but no completed report is published.
   removed and captured distinct geometry positions at ticks 0/30/60 on Apple
   M5 Pro. The authoring document remained byte-identical. A second run used the
   bundled SWC compiler and kinematic TypeScript template: 60 ticks and 120 script
-  commands with three GPU frames. Pixel review by Claude and hosted checks are
-  pending; numeric PNG differences alone do not certify visual quality.
+  commands with three GPU frames. Claude Opus 5.5 ACP approved all six frames
+  in handoff 0013, including the expected net script motion and retained
+  diagnostic appearance. Hosted checks are pending.
 
 The appearance is the existing diagnostic renderer with a fixed camera. There
 is no production render-graph, PBR, animation, input-script, assertion-script or

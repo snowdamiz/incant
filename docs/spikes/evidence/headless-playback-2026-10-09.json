@@ -52,6 +52,12 @@
       60
     ]
   },
-  "visual_review": "pending",
+  "visual_review": {
+    "verdict": "PASS",
+    "review_commit": "2fc2943",
+    "model": "Claude Opus 5.5",
+    "transport": "ACP launched by tools/handoff/main.py",
+    "reviewed_frames": 6
+  },
   "hosted_checks": "pending"
 }

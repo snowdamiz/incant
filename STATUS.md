@@ -58,7 +58,8 @@ within its documented workload.
   documents/journals remain unchanged; bounded output and failure handling pass.
   114 Rust behavior tests and three explicit GPU tests pass on this increment.
   A source-free imported-model run and a compiled TypeScript run produce real
-  frame sequences. Claude pixel review and hosted checks are pending. See
+  frame sequences. Claude approved the six captured frames; hosted checks are
+  pending. See
   [headless playback evidence](docs/spikes/headless-playback.md).
 
 - Imported model GPU geometry is implemented locally: indexed/instanced buffers,
