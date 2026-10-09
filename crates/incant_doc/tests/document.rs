@@ -22,6 +22,93 @@ fn deterministic_roundtrip() {
     );
 }
 #[test]
+fn environments_validate_bindings_limits_and_global_uniqueness() {
+    let mut project = sample();
+    let id = new_id();
+    project.assets.insert(
+        id.clone(),
+        Asset {
+            id: id.clone(),
+            name: "Studio".into(),
+            path: "studio.exr".into(),
+            kind: "texture".into(),
+            sha256: "ab".repeat(32),
+            import_settings: Some(AssetImportSettings::Texture {
+                usage: TextureUsage::Linear,
+            }),
+        },
+    );
+    let sid = project.scenes.keys().next().unwrap().clone();
+    let eid = project.scenes[&sid].entities.keys().next().unwrap().clone();
+    let valid = json!(EnvironmentLight {
+        texture: id.clone(),
+        intensity: 1.,
+        rotation_degrees: 180.
+    });
+    project
+        .scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&eid)
+        .unwrap()
+        .components
+        .insert("EnvironmentLight".into(), valid.clone());
+    let serialized = project.canonical_text().unwrap();
+    assert_eq!(Project::from_text(&serialized).unwrap(), project);
+    for (field, value) in [
+        ("texture", json!(new_id())),
+        ("intensity", json!(-0.1)),
+        ("intensity", json!(100.1)),
+        ("rotation_degrees", json!(361)),
+        ("unknown", json!(0)),
+    ] {
+        let mut invalid = project.clone();
+        invalid
+            .scenes
+            .get_mut(&sid)
+            .unwrap()
+            .entities
+            .get_mut(&eid)
+            .unwrap()
+            .components
+            .get_mut("EnvironmentLight")
+            .unwrap()[field] = value;
+        assert!(invalid.validate().is_err(), "{field}");
+    }
+    for usage in [
+        None,
+        Some(AssetImportSettings::Texture {
+            usage: TextureUsage::Color,
+        }),
+        Some(AssetImportSettings::Texture {
+            usage: TextureUsage::Linear,
+        }),
+    ] {
+        project.assets.get_mut(&id).unwrap().import_settings = usage;
+        project.validate().unwrap();
+    }
+    project.assets.get_mut(&id).unwrap().import_settings = Some(AssetImportSettings::Texture {
+        usage: TextureUsage::Normal,
+    });
+    assert!(project.validate().is_err());
+    project.assets.get_mut(&id).unwrap().import_settings = None;
+    project.assets.get_mut(&id).unwrap().kind = "model".into();
+    assert!(project.validate().is_err());
+    project.assets.get_mut(&id).unwrap().kind = "texture".into();
+    let mut second = Scene::new("Other scene");
+    let mut entity = Entity::new("Other environment");
+    entity.components.insert("EnvironmentLight".into(), valid);
+    second.entities.insert(entity.id.clone(), entity);
+    project.scenes.insert(second.id.clone(), second);
+    assert!(
+        project
+            .diagnostics()
+            .iter()
+            .any(|d| d.message.contains("only one global"))
+    );
+}
+#[test]
 fn mesh_bindings_require_the_correct_asset_kinds() {
     let mut project = sample();
     let model = Asset {

@@ -13,6 +13,8 @@ pub enum SceneError {
     Document(#[from] incant_doc::DocumentError),
     #[error("model asset {0} is not loaded at the document's current fingerprint")]
     MissingModel(String),
+    #[error("environment texture {0} is not loaded at the document's current fingerprint")]
+    MissingEnvironment(String),
     #[error("authored material asset overrides are not supported by the imported preview")]
     MaterialOverrides,
     #[error("model {0} has no scene to instantiate")]
@@ -67,6 +69,7 @@ pub(crate) struct ResolvedScene {
     pub diagnostics: Vec<Mat4>,
     pub models: BTreeMap<String, ModelPlan>,
     pub stats: SceneStats,
+    pub environment: Option<crate::environment::EnvironmentPlan>,
 }
 
 /// A model's default scene is used, falling back to its first declared scene.
@@ -81,16 +84,38 @@ pub(crate) fn resolve(
         diagnostics: Vec::new(),
         models: BTreeMap::new(),
         stats: SceneStats::default(),
+        environment: None,
     };
+    for entity in project
+        .scenes
+        .values()
+        .flat_map(|scene| scene.entities.values())
+    {
+        if let Some(value) = entity.components.get("EnvironmentLight") {
+            let binding: incant_doc::EnvironmentLight =
+                serde_json::from_value(value.clone()).map_err(incant_doc::DocumentError::from)?;
+            let registered = &project.assets[&binding.texture];
+            let source = assets
+                .and_then(|assets| assets.get(&binding.texture))
+                .filter(|asset| {
+                    asset.info().fingerprint == registered.sha256 && asset.info().kind == "texture"
+                })
+                .ok_or_else(|| SceneError::MissingEnvironment(binding.texture.clone()))?;
+            result.environment = Some(crate::environment::EnvironmentPlan {
+                source,
+                intensity: binding.intensity as f32,
+                rotation: binding.rotation_degrees.to_radians() as f32,
+            });
+        }
+    }
     for entity in state.entities.values() {
         let world64 = glam::DMat4::from_cols_array_2d(&entity.world_transform);
         let world = world64.as_mat4();
         // Validate even empty mesh nodes so invalid ranges never reach GPU buffers.
         Instance::new(world)?;
         let Some(binding) = &entity.mesh else {
-            if project.scenes[&entity.scene_id].entities[&entity.id]
-                .components
-                .contains_key("Transform")
+            let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
+            if components.contains_key("Transform") && !components.contains_key("EnvironmentLight")
             {
                 result.diagnostics.push(world);
                 result.stats.diagnostic_entities += 1;

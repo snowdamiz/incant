@@ -1,4 +1,5 @@
 //! Real GPU checks, explicitly run by the desktop renderer workflow.
+mod environments;
 mod materials;
 mod support;
 use incant_render::Renderer;
@@ -347,20 +348,23 @@ fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
 fn dark_fill_lit_materials_remain_distinguishable() {
     let renderer = Renderer::headless().unwrap();
     let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
-    // This surface faces the camera but away from the key. Only diffuse fill contributes.
+    // This surface faces the camera but away from the key. Only the convolved
+    // environment contributes, including dielectric specular reflection.
     fixture.normal(glam::Vec3::new(1., 0., -0.4));
     let mut previous = 0;
-    for (name, albedo, expected) in [
-        ("dark-fill-10", 0.1, 48),
-        ("dark-fill-18", 0.18, 66),
-        ("dark-fill-50", 0.5, 108),
+    for (name, albedo) in [
+        ("dark-fill-10", 0.1),
+        ("dark-fill-18", 0.18),
+        ("dark-fill-50", 0.5),
     ] {
         fixture.edit(|g| {
             g["materials"][0]["pbrMetallicRoughness"]["baseColorFactor"] =
                 json!([albedo, albedo, albedo, 1])
         });
         let pixel = center(&capture(&fixture, &renderer, name));
-        near(pixel, [expected, expected, expected, 255], 1);
+        assert!((20..160).contains(&pixel[0]), "{pixel:?}");
+        assert!(pixel[0].abs_diff(pixel[1]) <= 1 && pixel[1].abs_diff(pixel[2]) <= 1);
+        assert_eq!(pixel[3], 255);
         assert!(pixel[0] > previous + 12);
         previous = pixel[0];
     }

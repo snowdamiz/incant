@@ -16,6 +16,11 @@ export namespace CommandSchema {
 }
 export type Command = CommandSchema.Root;
 
+export namespace EnvironmentLightSchema {
+  export type Root = { "intensity": number; "rotation_degrees": number; "texture": string };
+}
+export type EnvironmentLight = EnvironmentLightSchema.Root;
+
 export namespace MeshRendererSchema {
   export type Root = { "cast_shadows": boolean; "materials": Array<string>; "mesh": string };
 }

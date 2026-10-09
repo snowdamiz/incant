@@ -14,6 +14,80 @@ fn asset() -> Asset {
 }
 
 #[test]
+fn environment_binding_and_reimport_are_atomic_and_reversible() {
+    let mut bus = CommandBus::new(Project::empty("Environment transaction")).unwrap();
+    let mut source = asset();
+    source.kind = "texture".into();
+    source.path = "studio.exr".into();
+    let mut scene = Scene::new("World");
+    let mut entity = Entity::new("Studio");
+    entity.components.insert(
+        "EnvironmentLight".into(),
+        json!(incant_doc::EnvironmentLight {
+            texture: source.id.clone(),
+            intensity: 2.,
+            rotation_degrees: 90.,
+        }),
+    );
+    scene.entities.insert(entity.id.clone(), entity);
+    bus.execute(
+        vec![
+            Command::UpsertAsset {
+                asset: source.clone(),
+            },
+            Command::CreateScene { scene },
+        ],
+        Actor::user("test"),
+        "Add environment",
+        Some(0),
+    )
+    .unwrap();
+    let first = bus.project().clone();
+    source.sha256 = "cd".repeat(32);
+    bus.execute(
+        vec![Command::UpsertAsset {
+            asset: source.clone(),
+        }],
+        Actor::import("image"),
+        "Reimport environment",
+        None,
+    )
+    .unwrap();
+    let second = bus.project().clone();
+    bus.undo().unwrap();
+    assert_eq!(bus.project(), &first);
+    bus.redo().unwrap();
+    assert_eq!(bus.project(), &second);
+    source.import_settings = Some(incant_doc::AssetImportSettings::Texture {
+        usage: incant_doc::TextureUsage::Normal,
+    });
+    assert!(
+        bus.execute(
+            vec![Command::UpsertAsset {
+                asset: source.clone()
+            }],
+            Actor::import("image"),
+            "Invalid interpretation",
+            None
+        )
+        .is_err()
+    );
+    assert!(
+        bus.execute(
+            vec![Command::RemoveAsset {
+                asset_id: source.id
+            }],
+            Actor::user("test"),
+            "Remove referenced environment",
+            None
+        )
+        .is_err()
+    );
+    assert_eq!(bus.project(), &second);
+    assert_eq!(bus.history().len(), 2);
+}
+
+#[test]
 fn import_with_references_is_one_reversible_transaction() {
     let before = Project::empty("import test");
     let mut bus = CommandBus::new(before.clone()).unwrap();

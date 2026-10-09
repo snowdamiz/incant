@@ -6,6 +6,7 @@ pub(crate) fn build(
     key: PipelineKey,
     globals: &wgpu::BindGroupLayout,
     materials: &wgpu::BindGroupLayout,
+    environment: &wgpu::BindGroupLayout,
 ) -> wgpu::RenderPipeline {
     let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
         label: Some("glTF metallic roughness"),
@@ -13,7 +14,7 @@ pub(crate) fn build(
     });
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Material pipeline"),
-        bind_group_layouts: &[Some(globals), Some(materials)],
+        bind_group_layouts: &[Some(globals), Some(materials), Some(environment)],
         immediate_size: 0,
     });
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {

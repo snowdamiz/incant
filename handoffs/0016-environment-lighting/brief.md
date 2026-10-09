@@ -1,3 +1,31 @@
+# Priority: integrated GPU pixel review
+
+The first implementation is integrated. Review the actual PNGs in
+`artifacts/environment-initial/` in this worktree. Eleven GPU tests pass;
+these include twelve 640×480 analytic sphere captures across metal/dielectric/
+dark materials and smooth/satin/rough/matte settings, as well as authored
+constant/directional environments, retained versions, rotation, disabled
+intensity, and the prior material cases. The spheres are numerical geometry
+fixtures. Do not treat them as authored game art.
+
+Judge the studio reflection readability, roughness progression, dark albedos,
+neutrality, bright highlight rolloff, and seams/artifacts in the actual pixels.
+Inspect each relevant image at native resolution. You own look-dev. If adjustment
+is necessary, edit only preview_environment.rs and studio.rs; ask Astra in your
+report for any correctness/prefilter issue. Do not edit shaders/math/tests/UI.
+Refresh the stale studio.rs comments to describe the new environment accurately.
+The old constant diffuse fill is gone. Direct key stays separate and includes
+your intentionally aligned environment panel. There is no floor geometry or
+shadowing: reflected floor is a distant environment, not a visibility surface.
+Native integration captures will follow. Do not claim native approval yet.
+
+Update result.md and commit Built-by: claude. Avoid full local builds: current
+source, captures and existing numerical evidence suffice for this review. If
+changing appearance, list exactly which captures need regeneration. No shell
+native capture. Do not touch credentials. Permissive mode remains authorized.
+
+---
+
 # Environment lighting: default studio look-dev
 
 Claude Opus 5.5 via ACP owns the default studio appearance. Astra is implementing

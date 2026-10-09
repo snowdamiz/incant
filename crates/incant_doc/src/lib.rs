@@ -141,6 +141,18 @@ pub struct Camera {
     pub near: f64,
     pub far: f64,
 }
+/// A distant, equirectangular image light. Rotation is about world +Y and does
+/// not inherit the entity transform. One environment is allowed per project
+/// until active-scene selection is implemented.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct EnvironmentLight {
+    pub texture: Id,
+    #[schemars(range(min = 0, max = 100))]
+    pub intensity: f64,
+    #[schemars(range(min = -360, max = 360))]
+    pub rotation_degrees: f64,
+}
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 pub struct Diagnostic {
@@ -345,6 +357,19 @@ impl Project {
                 }
             }
         }
+        if self
+            .scenes
+            .values()
+            .flat_map(|scene| scene.entities.values())
+            .filter(|entity| entity.components.contains_key("EnvironmentLight"))
+            .count()
+            > 1
+        {
+            issue(
+                "/scenes".into(),
+                "only one global EnvironmentLight is supported",
+            );
+        }
         errors
     }
 }
@@ -412,6 +437,29 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("material reference must identify a material asset".into());
             }
         }
+        "EnvironmentLight" => {
+            let environment: EnvironmentLight = decode(value)?;
+            if !(0.0..=100.0).contains(&environment.intensity)
+                || !(-360.0..=360.0).contains(&environment.rotation_degrees)
+            {
+                return Err(
+                    "environment intensity must be 0..100 and rotation -360..360 degrees".into(),
+                );
+            }
+            let Some(asset) = project.assets.get(&environment.texture) else {
+                return Err("environment texture does not exist".into());
+            };
+            if asset.kind != "texture"
+                || matches!(
+                    asset.import_settings,
+                    Some(AssetImportSettings::Texture {
+                        usage: TextureUsage::Normal
+                    })
+                )
+            {
+                return Err("environment requires a color or linear texture asset".into());
+            }
+        }
         "Camera" => {
             let c: Camera = decode(value)?;
             if !(0.1..179.).contains(&c.fov_degrees)
@@ -440,6 +488,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        (
+            "EnvironmentLight".into(),
+            json!(schemars::schema_for!(EnvironmentLight)),
+        ),
     ]);
     // Shared inspector annotations. All clients receive the same field order;
     // schema properties remain the source of validation and generated types.
@@ -448,6 +500,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         ("Camera", vec!["fov_degrees", "near", "far"]),
         ("MeshRenderer", vec!["mesh", "materials", "cast_shadows"]),
         ("Script", vec!["source", "props"]),
+        (
+            "EnvironmentLight",
+            vec!["texture", "intensity", "rotation_degrees"],
+        ),
     ] {
         if let Some(schema) = registry.get_mut(name) {
             schema["order"] = json!(order);
