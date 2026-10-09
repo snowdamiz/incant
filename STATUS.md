@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- Isolated headless playback now accepts ticks/seconds and an optional compiled
+  TypeScript behavior, with actual GPU captures at selected ticks. Authored
+  documents/journals remain unchanged; bounded output and failure handling pass.
+  114 Rust behavior tests and three explicit GPU tests pass on this increment.
+  A source-free imported-model run and a compiled TypeScript run produce real
+  frame sequences. Claude pixel review and hosted checks are pending. See
+  [headless playback evidence](docs/spikes/headless-playback.md).
+
 - Imported model GPU geometry is implemented locally: indexed/instanced buffers,
   default glTF scene/node hierarchy, version retention, revision-driven editor
   replacement, and shared CLI/agent rendering. CPU checks, two real GPU tests and

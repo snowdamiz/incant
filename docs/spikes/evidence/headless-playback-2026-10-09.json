@@ -1,0 +1,57 @@
+{
+  "native_gpu": "Apple M5 Pro",
+  "ticks": 60,
+  "capture_ticks": [
+    0,
+    30,
+    60
+  ],
+  "frames_sha256": [
+    "d826a937092ff58b75d004fbd6b137c5638feaf5e164eabd4f63bdcf0c9c7664",
+    "d709f1069237111683d0aed82e49475ca4b7131f4817a8a992d8cc5576b06487",
+    "7288403b51424449987c15ed2c5a7ea1d8d600149698b6ffd4bc7fb6e083fa7f"
+  ],
+  "sources_removed": true,
+  "author_document_unchanged": true,
+  "geometry": [
+    {
+      "diagnostic_entities": 0,
+      "model_entities": 2,
+      "primitive_instances": 2,
+      "model_triangles": 2,
+      "model_draw_calls": 1
+    },
+    {
+      "diagnostic_entities": 0,
+      "model_entities": 2,
+      "primitive_instances": 2,
+      "model_triangles": 2,
+      "model_draw_calls": 1
+    },
+    {
+      "diagnostic_entities": 0,
+      "model_entities": 2,
+      "primitive_instances": 2,
+      "model_triangles": 2,
+      "model_draw_calls": 1
+    }
+  ],
+  "local_checks": {
+    "rust_behavior_tests": 114,
+    "explicit_gpu_tests": 3,
+    "clippy": "passed",
+    "formatting": "passed"
+  },
+  "compiled_typescript_probe": {
+    "template": "sdk/templates/kinematic/move.ts",
+    "ticks": 60,
+    "script_commands": 120,
+    "capture_ticks": [
+      0,
+      30,
+      60
+    ]
+  },
+  "visual_review": "pending",
+  "hosted_checks": "pending"
+}
