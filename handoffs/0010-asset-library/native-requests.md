@@ -3,7 +3,76 @@
 Claude's ACP session has no computer use. Every check needs Astra's CUA channel. Keep raw
 captures and any account labels in the ignored `artifacts/` tree, out of Git.
 
-## Revision 4: new layout (open)
+## Revision 5 verdicts on the revision 4 layout (Claude, 2026-10-09)
+
+Astra captured these through Codex CUA on build `3a7f7ff`, which is the revision 4 design
+(b99c520) plus Astra's nonvisual corrections. Behaviour verdicts are Astra's, from the
+`revision_4` section of `docs/spikes/evidence/editor-assets-native-2026-10-09.json`. The
+pixel verdicts below are Claude's. The captures stay in the ignored
+`artifacts/native-review/`, and no account label is quoted.
+
+| ID | Captures (pixels) | Behaviour (Astra) | Pixels (Claude) |
+| --- | --- | --- | --- |
+| N1 | `n01-assets-wide` 3024×1898; `n01b-assets-min` 2002×1302 | Pass | **Pass** |
+| N2 | `n02-texture-details`, `n02b-model-details` 3024×1898; minimum texture from `n01b` | Pass | **Pass** |
+| N3 | `n03-import-form`, `n03b-import-success` 3024×1898; `n03c-import-form-min` 2002×1302 | Pass, real batch | **Pass**, with one polish fix |
+| N4 | `n04-busy`, `n04b-failed` 3024×1898; `n04c-failed-min` 2002×1302 | Pass, real 8-image worker and malformed glTF | **Pass** |
+| N5 | `n05-keyboard` 3024×1898 | Pass | **Pass** |
+| N6 | none; output-only placement is visible in every capture | Placement passes; entity-linked reveal has the automated test only | **Pass** for placement; reveal **not natively verifiable** |
+
+Wide captures are 3024×1898, which is 1512×949 CSS px on the external display at 2×.
+Minimum captures are 2002×1302, about 1001×651 CSS px. Traffic lights are visible and
+correct in `n04c-failed-min`. In every other n-capture the capture indicator covers them.
+The titlebar, project name, layout toggles and account chip are unchanged and unclipped in
+all eleven.
+
+- **N1.**
+  - "Hierarchy 2" and "Assets 10" sit in the header, with the accent underline on Assets.
+  - Folder rows `models/`, `stress/` and `textures/` align with the 8 px row inset. The
+    Color and Linear tags right-align in one column, and the recent dots sit after the
+    tags.
+  - At minimum, nothing in the header or list clips, and the Import button keeps its
+    label.
+- **N2.**
+  - Texture: the identity block shows "normal" and "Texture". Below it come the Source
+    well, the Interpretation segmented control (Linear selected, with its hint), Reimport
+    with its explanation, and the collapsed Identifiers.
+  - Model: "Placing models in a scene is not available yet." appears under Source, with no
+    Interpretation section.
+  - At minimum (`n01b`), Source and Interpretation fit. Reimport sits below the fold
+    because the Agent panel keeps its height. This is the recorded Inspector-height
+    limitation, not a defect.
+- **N3.**
+  - The form shows the identity block, a two-line lede, the path rows, "2 of 64" and the
+    formats line. The pinned "Import 2 files" row sits above the Agent header.
+  - After the real batch, the green "Imported 2 files…" note shows at the top. The form
+    resets, and the list shows the new tag and dots. History goes from 7 to 8.
+  - At minimum the pinned row stays visible while the second path scrolls under it, which
+    is the intended behaviour.
+  - **Polish fixed in revision 5:** on a model row that updates an existing asset, "Model"
+    and "Updates “triangle”" ran together. They now read "Model · Updates “triangle”".
+    That is verified in the browser capture `screenshots/revision-4/18-model-update-separator-double-1440x900.png`.
+    It is a CSS-only change, so no new native capture is requested.
+- **N4.**
+  - Busy: "Importing 8 files…" appears under the list toolbar, with a spinner in the Assets
+    tab. The paths are read-only, the segments are dimmed, and the pinned row shows the
+    two-line pending status.
+  - Failure: "Last import failed" appears under the toolbar, and the Assets tab has a red
+    dot. The Inspector alert shows the engine's exact glTF error in readable mono, the path
+    is kept, and "Try again" is pinned.
+  - At minimum, the alert and Try again both stay visible. The path rows scroll below them.
+- **N5.** The Enter-focused asset name in the Inspector has a fitted periwinkle ring, not a
+  field-like box. The selected row keeps its pill.
+- **N6.** The dock shows only Problems, Console and History in every capture. Revealing an
+  entity-linked problem from the Assets view is covered by the automated interaction test
+  only. `editor/bridge/native.ts` does not yet emit entity-linked diagnostics, so no native
+  capture exists and none is claimed. This does not block the UI. It needs one capture
+  once the host emits such diagnostics.
+
+No other visual defect was found, and no redesign is warranted. No new native capture is
+required for revision 5.
+
+## Revision 4: new layout (requests, now answered above)
 
 The director rejected the bottom-dock asset UI. Revision 4 moves assets into the left
 column, beside the Hierarchy, and their details and import into the Inspector. The bottom
@@ -19,12 +88,12 @@ indicator off the traffic lights in at least one capture.
 
 | ID | Check | Status |
 | --- | --- | --- |
-| N1 | Left column switcher and grouped asset list, wide and minimum | Open |
-| N2 | Asset details in the Inspector, texture and model | Open |
-| N3 | Import form in the Inspector, then batch success | Open |
-| N4 | Busy and failure: the list status line, the tab mark and the Inspector error | Open |
-| N5 | Keyboard: tabs, list, Enter to Inspector, Escape back | Open |
-| N6 | Problems reveal and the dock holds only output | Open |
+| N1 | Left column switcher and grouped asset list, wide and minimum | Pass |
+| N2 | Asset details in the Inspector, texture and model | Pass |
+| N3 | Import form in the Inspector, then batch success | Pass |
+| N4 | Busy and failure: the list status line, the tab mark and the Inspector error | Pass |
+| N5 | Keyboard: tabs, list, Enter to Inspector, Escape back | Pass |
+| N6 | Problems reveal and the dock holds only output | Placement passes; native reveal waits for host diagnostics |
 
 - **N1 `n01-assets-wide`, `n01b-assets-min`.** Click "Assets" in the left column header.
   - Expected: "Hierarchy n" and "Assets n" sit in the header, and Assets is underlined.

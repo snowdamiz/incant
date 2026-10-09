@@ -1,13 +1,13 @@
 # Result: handoff 0010, editor asset library and import workflow
 
-**Status, revision 4:** The director rejected the asset UI in the bottom dock. It is
-replaced by a dedicated design: assets are a left-column view beside the Hierarchy, and
-their details, reimport and import open in the Inspector. Problems, Console and History
-keep the bottom dock. Every backend behaviour is unchanged and still goes through the one
-`asset.import` command. The browser review over synthetic data is done. Native capture of
-the new layout is **open**, with requests N1 to N6 in native-requests.md. Nothing here
-approves a phase gate or claims complete feature integration. Astra integrates this into
-PR #8.
+**Status, revision 5:** The revision 4 design is integrated as b99c520, with Astra's
+nonvisual corrections as 3a7f7ff. Claude reviewed Astra's eleven native CUA captures of
+that build, and N1 to N5 pass pixel review. N6 output-only placement passes. The
+entity-linked Problems reveal is verified only by the automated test, because the native
+host does not yet emit entity-linked diagnostics. One polish fix was made: a separator
+between "Model" and "Updates “name”" on import rows. No redesign was needed, and no new
+native capture is required. Nothing here approves a phase gate. Astra owns the full checks,
+the PR and the merge.
 
 **Model and transport (verified by Astra):** Claude Opus 5.5 (`claude-opus-5-5`)
 through Claude Code and `claude-agent-acp`. Astra launched this session with
@@ -16,6 +16,55 @@ The runner initialized ACP protocol 1, selected the configured Opus 5.5 option
 and delivered the packet through `session/prompt`. Claude’s original self-report
 misidentified the outer transport. No routing exception or model substitution occurred.
 
+
+## Revision 5: native review of the revision 4 layout
+
+The per-capture verdicts are in native-requests.md, under "Revision 5 verdicts".
+
+| Item | Evidence | Verdict |
+| --- | --- | --- |
+| N1 list and switcher, wide and minimum | `n01-assets-wide`, `n01b-assets-min` | Pass |
+| N2 texture and model properties | `n02-texture-details`, `n02b-model-details`, `n01b` | Pass |
+| N3 import form, pinned action, real batch success | `n03`, `n03b`, `n03c` (minimum) | Pass, plus one separator polish |
+| N4 real busy worker and real glTF error, wide and minimum | `n04`, `n04b`, `n04c` | Pass |
+| N5 Enter/Escape and the heading ring | `n05-keyboard`, and the ring in `n01b` and `n02b` | Pass |
+| N6 output-only dock | all captures | Pass |
+| N6 entity-linked Problems reveal | automated test only; the native host emits no such diagnostics yet | Not natively verified; does not block |
+
+Native capture sizes:
+
+| Capture | Pixels | CSS size at 2× |
+| --- | --- | --- |
+| Wide, external display | 3024×1898 | 1512×949 |
+| Minimum | 2002×1302 | about 1001×651 |
+
+Traffic lights are visible and correct in `n04c-failed-min`. In every other capture the
+capture indicator covers them. Every capture shows the titlebar unchanged and unclipped.
+
+Astra's integrated corrections changed no CSS, layout or copy. They are:
+
+- A hidden Inspector is revealed before focus moves to it.
+- Escape can reveal a hidden left panel.
+- A failed reimport's Show restores the correct asset.
+- Folder group IDs stay distinct when folder names differ only in punctuation.
+
+**The revision 5 change** is one CSS rule in `src/styles/assets.css`: a decorative "·"
+between the type and the "Updates “name”" note on import rows.
+
+| Check | Result |
+| --- | --- |
+| `npm test --workspace editor/ui` | 276 passed, Astra's integrated count |
+| `npm run build --workspace editor/ui` | built |
+| Capture tool, 40 captures | 0 errors and 0 axe violations |
+| Targeted separator capture | `screenshots/revision-4/18-model-update-separator-double-1440x900.png` |
+
+| Asset | Vite gzip | Delta from the pre-0010 baseline |
+| --- | --- | --- |
+| Main JS | 101.58 kB | +8.01 kB from 93.57 |
+| CSS | 9.82 kB | +1.44 kB from 8.38 |
+
+At gzip level 9 the main JS is 100,405 bytes, or 98.05 KiB. That is within the 110 KiB
+budget.
 
 ## Revision 4: why and what changed
 
@@ -142,8 +191,9 @@ tree and remain in Git history.
 
 ### Revision 4 limitations
 
-- **No native evidence of the new layout yet.** The browser captures do not prove WebKit
-  rendering. Requests N1 to N6 are in native-requests.md.
+- **Native evidence covers macOS only.** It consists of CUA captures from Astra. The
+  entity-linked Problems reveal has no native capture, because the host does not emit
+  those diagnostics yet.
 - **Inspector height at the minimum window.** At about 1000×650 the Inspector is roughly
   320 px tall, so asset sections and the import rows scroll. The import action row stays
   pinned. Resizing the Agent panel gives more room. The UI does not resize it on its own.
