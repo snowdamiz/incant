@@ -225,6 +225,16 @@ impl Renderer {
             .create_view(&Default::default());
         let pipeline = self.cached_pipeline(format, false)?;
         let mut encoder = self.device.create_command_encoder(&Default::default());
+        // Claude's neutral viewport backdrop, sRGB #141519. Match the
+        // attachment's transfer function just as the composition canvas does.
+        let backdrop = [20, 21, 25].map(|channel| {
+            let value = f64::from(channel) / 255.;
+            if format.is_srgb() {
+                ((value + 0.055) / 1.055).powf(2.4)
+            } else {
+                value
+            }
+        });
         {
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("Native viewport"),
@@ -234,9 +244,9 @@ impl Renderer {
                     depth_slice: None,
                     ops: wgpu::Operations {
                         load: wgpu::LoadOp::Clear(wgpu::Color {
-                            r: 0.03,
-                            g: 0.03,
-                            b: 0.03,
+                            r: backdrop[0],
+                            g: backdrop[1],
+                            b: backdrop[2],
                             a: 1.,
                         }),
                         store: wgpu::StoreOp::Store,
