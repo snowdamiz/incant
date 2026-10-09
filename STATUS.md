@@ -64,8 +64,9 @@ within its documented workload.
 - Runtime scene projection now composes parent transforms, preserves mesh bindings,
   and atomically synchronizes topology while reusing the ECS world. Five new core
   behavior tests and asset-kind validation pass. The real GPU probe matches a
-  parented scene to equivalent flattened geometry. Imported GPU geometry/materials
-  are still open; the viewport remains diagnostic cubes. Script benchmark results
+  parented scene to equivalent flattened geometry. All twelve hosted checks passed
+  on `97cf521`; PR #9 merged into main as `331a3cb`. The imported-geometry increment
+  above builds on this projection; GPU materials remain open. Script benchmark results
   and their host-load variability are recorded in
   [runtime scene evidence](docs/spikes/runtime-scene-projection.md).
 
@@ -115,10 +116,11 @@ within its documented workload.
   and saved disposable projects; native account focus behavior passes, with the
   visible keyboard ring also approved by Claude.
 
-- The first eight PRs are merged into main after their required checks passed:
+- The first nine PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
   responsive loading/focus #5, shared import batches #6, source watching #7 and
-  editor/agent imports with the redesigned asset workspace #8. The site deployed at
+  editor/agent imports with the redesigned asset workspace #8, and runtime scene
+  projection #9. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
   before merge. Editor/agent imports are the current Phase 1 increment. Merging does
