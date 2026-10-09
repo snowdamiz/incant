@@ -56,8 +56,12 @@ within its documented workload.
 - Cluster membership masks replace overflow fallback in the next lighting
   increment. Exact GPU readback covers every bit through 4096 lights, word-count
   changes and stale clearing; full-capacity mixed point/spot output matches an
-  explicit all-light reference byte for byte. Final performance comparison,
-  complete checks and Claude pixel review are in progress.
+  explicit all-light reference byte for byte. A final-bit-only visible capture
+  also matches the one-light reference. Claude approved appearance; 135 Rust,
+  27 GPU and 283 UI tests, Clippy and native release build pass. Three paired
+  trials measure 34.23 → 6.44 ms median at 4096 lights on M5 Pro, with identical
+  cooked projects. This is a synthetic fenced frame probe, not a game/device
+  gate. Ready for hosted checks; see [light mask evidence](docs/spikes/light-masks.md).
 
 - Authored directional, point and spot lights use real GPU clustered forward
   shading with bounded lists and an exact overflow fallback. The shared command

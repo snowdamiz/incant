@@ -45,7 +45,9 @@ pixel review in `dab3a96` approved appearance within this scope. A follow-up
 now gives the final local bit its own visible-surface capture: 4095 off-frustum
 lights precede the only visible local light, with a directional prefix. The
 clustered, All and single-local-light reference images match exactly. Its
-focused pixel review is pending.
+focused pixel review passed in Claude commit `1249e4b`. All 53 current PNGs
+are recorded by hash in the evidence ledger. The custom-protocol native release
+build also passes.
 
 ## Paired frame timing
 

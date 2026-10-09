@@ -6,13 +6,13 @@
   "adapter": "Apple M5 Pro",
   "local_checks": {
     "rust_behavior_tests": 135,
-    "explicit_gpu_tests": 26,
+    "explicit_gpu_tests": 27,
     "ui_bridge_tests": 283,
     "clippy": "workspace all targets release passed",
     "generated_files": "passed",
     "sdk_typecheck": "passed",
     "python_tool_tests": 5,
-    "native_build": "in progress"
+    "native_build": "passed custom-protocol release after workspace tests"
   },
   "prior_pixel_comparison": {
     "baseline": "8b94eff",
@@ -90,10 +90,13 @@
     "depth-boundary-patches-640x480.png": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993",
     "directional-red.png": "332bb7a6856155de6a6acc1dc5ce3c3dcaf2556a12b53c2cfc3623be34d92d3a",
     "explicit-light-disabled.png": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
-    "full-mask-257x193-oracle.png": "743c5a495dc54ea22feed97e6a7875f9bf076b9957482dbd24b3ea2ec63b8cd8",
-    "full-mask-257x193.png": "743c5a495dc54ea22feed97e6a7875f9bf076b9957482dbd24b3ea2ec63b8cd8",
+    "full-mask-257x193-oracle.png": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92",
+    "full-mask-257x193.png": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92",
     "full-mask-320x240-oracle.png": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea",
     "full-mask-320x240.png": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea",
+    "last-bit-only-321x181-oracle.png": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
+    "last-bit-only-321x181-single-light.png": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
+    "last-bit-only-321x181.png": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
     "point-far.png": "6c2a097e64240e8298622572e497dd567abb8e3c6832f366fea3ed9a2f55448b",
     "point-near.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
     "point-outside-range.png": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
@@ -1956,11 +1959,31 @@
       "project_sha256": "261aec0064b4d44c6121dededeff065294b153c9f79634d8f68925e8bd616749"
     }
   ],
-  "visual_review": "pending Claude Opus 5.5 ACP handoff 0018",
+  "visual_review": {
+    "model": "Claude Opus 5.5",
+    "transport": "ACP protocol 1",
+    "initial": "dab3a96",
+    "final": "1249e4b",
+    "verdict": "appearance preserved within selection-only scope; final-bit visible-surface evidence reviewed"
+  },
   "limitations": [
     "not GPU timestamps or presented frames",
     "not Core Sample or named-device performance gate",
     "cluster construction remains O(clusters * local lights)",
     "64 MiB mask budget plus counts; conservative spot spheres; no hierarchical binning"
-  ]
+  ],
+  "coverage": "f52cdc8",
+  "verification_logs_sha256": {
+    "mask-workspace.log": "37a43f63f39519e64cf88b3ddfad8da9158eb349ace8622e8cc34807af58e516",
+    "mask-clippy.log": "d11b60e64eedf32bbc712d24ba9a365fc27fc8373d0f0add915e009527e9d816",
+    "mask-gpu-unit.log": "88728fee52f2f5e566ae45350d145651e423128b9fdde7bc723c076b248c26b2",
+    "mask-gpu-model.log": "c1adf606fcca6d444aa384803065ce61a1d662dae18d18cd6e0dbfd89969ca53",
+    "mask-last-bit.log": "8e9386426d4e545391313c3f4754ae995a8802c4d222809cdd230f637d787e67",
+    "mask-final-test-clippy.log": "eb372ab63f32d8415f87c188202d51361743d3ca2dbdf2dc579f0a3003b2524c",
+    "mask-editor-headless-gpu.log": "0f766201d45ccee3cc20c0b75ad74ed2b4f7131ce1860d357de233cffc6057ac",
+    "mask-ui.log": "1f8b410965f4749dfe1b63ad52544998921442531c440eeb3cdba9434d140bc4",
+    "mask-ui-build.log": "c72a3f8256088a7de25533fa9f8909f848b0d29adbf8cb3609d4c50d1046ddca",
+    "mask-tools.log": "00399f721b52e27f94f1109cc1992ed955870cba06510b6ee2a07dc9528172e9",
+    "mask-native-build.log": "74d972ad296166c9b7c423acc32ba366cbaaeb7a67fe81b60f94943384d597ea"
+  }
 }
