@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-09",
+  "feature_commit": "d18a54f",
+  "before_material_integration": {
+    "rust_behavior_tests": 122,
+    "explicit_gpu_tests": 3,
+    "ui_bridge_tests": 282,
+    "clippy": "passed",
+    "format": "passed",
+    "sdk_type_check": "passed",
+    "ui_build": "passed"
+  },
+  "live_cli": {
+    "compiler": "bundled SWC",
+    "template": "sdk/templates/kinematic/move.ts",
+    "completed": true,
+    "ticks": 120,
+    "script_commands": 120,
+    "logs": [
+      {
+        "tick": 60,
+        "elapsed_seconds": 1.0000000000000013,
+        "level": "info",
+        "message": "Moved 60 fixed ticks"
+      },
+      {
+        "tick": 120,
+        "elapsed_seconds": 1.9999999999999978,
+        "level": "info",
+        "message": "Moved 120 fixed ticks"
+      }
+    ],
+    "authored_unchanged": true,
+    "gpu_initialized": false,
+    "account_used": false
+  },
+  "combined_material_checks": {
+    "commit": "832ae5d",
+    "rust_behavior_tests": 124,
+    "explicit_gpu_tests": 7,
+    "clippy": "passed",
+    "ui_code_unchanged_since_282_test_verification": true
+  },
+  "hosted_checks": "pending"
+}

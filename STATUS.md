@@ -53,13 +53,21 @@ within its documented workload.
 
 ## Active work
 
+- Structured script logging now uses the bounded sandbox API and preserves
+  messages from successful ticks. Both headless script/play commands return logs;
+  playback can additionally stream a new JSONL file without requiring a GPU.
+  Failure retains prior completed records, and output names/budgets are checked.
+  Five new behavior tests and the combined frame/log GPU case pass. The combined
+  material/log tree passes 124 Rust tests, seven explicit GPU tests and Clippy;
+  the unchanged UI passes 282 tests and its build. Hosted checks are pending. See [runtime log evidence](docs/spikes/runtime-logs.md).
+
 - Imported glTF material previews now use typed metallic/roughness factors and
   retained GPU base-color, metallic/roughness, normal, occlusion and emissive maps.
   Color spaces, samplers/mips, alpha modes, sidedness and reflected instances are
   implemented. 119 Rust behavior tests and seven explicit GPU tests pass locally.
   Native texture reimport, Undo/Redo, retention on source error and repair
   pass. Claude approved the final headless and native captures, including the
-  minimum-height Inspector scroll behavior. Hosted checks remain pending. Production lighting/render graph/postprocessing remain open. See
+  minimum-height Inspector scroll behavior. PR #13 awaits hosted checks. Production lighting/render graph/postprocessing remain open. See
   [GPU material evidence](docs/spikes/gpu-materials.md).
 
 - Isolated headless playback now accepts ticks/seconds and an optional compiled

@@ -51,8 +51,16 @@ tools/cargo run -p incant_headless -- run artifacts/demo.incant.json --ticks 120
 tools/cargo run -p incant_headless -- screenshot artifacts/demo.incant.json artifacts/demo.png
 node tools/build_script.mjs sdk/templates/kinematic/move.ts artifacts/move.js
 tools/cargo run -p incant_headless --release -- script artifacts/demo.incant.json artifacts/move.js --ticks 120
-tools/cargo run -p incant_headless --release -- play artifacts/demo.incant.json --seconds 2 --compiled-script artifacts/move.js --output artifacts/play-demo --capture-every 30
+tools/cargo run -p incant_headless --release -- play artifacts/demo.incant.json --seconds 2 --compiled-script artifacts/move.js --output artifacts/play-demo --capture-every 30 --log-output artifacts/play-demo/game.jsonl
 ```
+
+Scripts emit structured output with `api.log(message, level?)`, where the default
+level is `info`; `debug`, `warn` and `error` are also supported. Both `script` and
+`play` include successful-tick logs in their JSON result. `play --log-output FILE`
+also writes a new JSONL file as ticks complete, including when no GPU captures are
+requested. Existing log files and reserved frame/report filenames are rejected.
+If a later tick fails, prior complete log records remain. Output is bounded to
+10,000 records and 8 MiB of JSONL data; exceeding either limit fails the run.
 
 `play` runs an isolated simulation without changing the saved document or its
 journal. It accepts `--seconds` (rounded up to a fixed tick) or `--ticks`, with a
@@ -62,7 +70,7 @@ plus an atomic `report.json` containing final runtime/script state and capture t
 Capture is bounded to 128 frames and 256 MiB of raw pixels, with dimensions
 from 16×16 to 1920×1080. A failed run exits
 nonzero and may leave partial PNGs, but never a completed report. Current captures
-use the diagnostic renderer and fixed camera. Asset sources are unnecessary when
+use the shared preview renderer and fixed camera, including imported materials. Asset sources are unnecessary when
 the cooked cache is present; the command reads the saved checkpoint, not unsaved
 editor edits. Game logs and assertion-script support remain open.
 
