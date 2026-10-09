@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-08",
+  "scope": "PR-triggered hosted CI; not nightly history or signed distribution",
+  "checks": {
+    "conclusion": "success",
+    "event": "pull_request",
+    "headSha": "356c11af9b7ae9e14ad1f9ee5750883f39879abc",
+    "status": "completed",
+    "url": "https://github.com/snowdamiz/incant/actions/runs/37865548630"
+  },
+  "platform_run": {
+    "conclusion": "failure",
+    "event": "pull_request",
+    "headSha": "356c11af9b7ae9e14ad1f9ee5750883f39879abc",
+    "status": "completed",
+    "url": "https://github.com/snowdamiz/incant/actions/runs/37865548777"
+  },
+  "jobs": [
+    {
+      "name": "android",
+      "conclusion": "failure",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37865548777/job/113611288817"
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37865548777/job/113611289098"
+    },
+    {
+      "name": "web",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37865548777/job/113611289153"
+    },
+    {
+      "name": "ios",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37865548777/job/113611289175"
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37865548777/job/113611289253"
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37865548777/job/113611289280"
+    }
+  ],
+  "runtime_reports": {
+    "macos": {
+      "arch": "aarch64",
+      "incant": "hello-world",
+      "ok": true,
+      "os": "macos",
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "windows": {
+      "arch": "x86_64",
+      "incant": "hello-world",
+      "ok": true,
+      "os": "windows",
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "linux": {
+      "arch": "x86_64",
+      "incant": "hello-world",
+      "ok": true,
+      "os": "linux",
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "ios-simulator": {
+      "ok": true,
+      "status": 0
+    },
+    "web": {
+      "arch": "wasm32",
+      "incant": "hello-world",
+      "ok": true,
+      "os": "",
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    }
+  },
+  "android_failure": "sdkmanager was not on PATH; workflow now invokes its installed SDK path explicitly. Rerun pending."
+}

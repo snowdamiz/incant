@@ -1,0 +1,729 @@
+{
+  "version": 1,
+  "live_inference": true,
+  "model": "gpt-6-astra",
+  "completed": 20,
+  "passed": 19,
+  "required": 14,
+  "gate_passed": true,
+  "date": "2026-10-08",
+  "platform": "macOS / Apple M5 Pro",
+  "authentication": "user-authorized saved OAuth session; private local file",
+  "human_help_during_cases": false,
+  "suite_sha256": "12ff67964123aeadf2b41b125aa74f8a62f6fbd702e3c7245331e035270512ca",
+  "executable_sha256": "db9ac21ec24ade26957fe37f5f54813fec7803e8c3408b448635daab5d49dbbe",
+  "implementation": "Responses stream retention from a81ab6e with explicit refresh CLI; run started before the callback and core-dependency follow-ups",
+  "cases": [
+    {
+      "case": "01-translation",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 13835,
+      "used_tokens": 4344,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F4Z7C82X5EQF547MW4PNFX"
+        ],
+        "usage": {
+          "input_tokens": 4156,
+          "output_tokens": 188
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "02-rename",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 15752,
+      "used_tokens": 4211,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F4ZN71H1R0V0MZWFQ8EN7M"
+        ],
+        "usage": {
+          "input_tokens": 4070,
+          "output_tokens": 141
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "03-scale",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 11893,
+      "used_tokens": 4345,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F5022MAN3HVZJ1QXYFCKNS"
+        ],
+        "usage": {
+          "input_tokens": 4160,
+          "output_tokens": 185
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "04-rotation",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 19270,
+      "used_tokens": 4361,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F50KN12SEERQJQ5M8DZHGQ"
+        ],
+        "usage": {
+          "input_tokens": 4174,
+          "output_tokens": 187
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "05-camera",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 16576,
+      "used_tokens": 5733,
+      "report": {
+        "steps": 5,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_schema",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F515F3RQVT36QP24SDY4FP"
+        ],
+        "usage": {
+          "input_tokens": 5528,
+          "output_tokens": 205
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "06-create-child",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 16444,
+      "used_tokens": 4510,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F51KJXECRRG773CKHNZHQK"
+        ],
+        "usage": {
+          "input_tokens": 4252,
+          "output_tokens": 258
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "07-reparent",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 12776,
+      "used_tokens": 4242,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F521GM3NR7XFDWVPDMSSFZ"
+        ],
+        "usage": {
+          "input_tokens": 4090,
+          "output_tokens": 152
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "08-delete-subtree",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 21816,
+      "used_tokens": 4356,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F52FY4KFFN4NBHCRDCTJTZ"
+        ],
+        "usage": {
+          "input_tokens": 4178,
+          "output_tokens": 178
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "09-velocity",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 18480,
+      "used_tokens": 5614,
+      "report": {
+        "steps": 5,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_schema",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F538107PFAXZK58QAN58NF"
+        ],
+        "usage": {
+          "input_tokens": 5425,
+          "output_tokens": 189
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "10-remove-component",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 17642,
+      "used_tokens": 4243,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F53PVR23D7YQ4FCQDVH1YV"
+        ],
+        "usage": {
+          "input_tokens": 4101,
+          "output_tokens": 142
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "11-batch",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 17535,
+      "used_tokens": 4838,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F548CRERYQMJGH6FQA5Y3C"
+        ],
+        "usage": {
+          "input_tokens": 4498,
+          "output_tokens": 340
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "12-ten-step",
+      "passed": false,
+      "exact_state": true,
+      "three_tools": false,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 28249,
+      "used_tokens": 5340,
+      "report": null,
+      "error": "provider: provider reported a failed or incomplete response"
+    },
+    {
+      "case": "13-duplicate-label",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 14872,
+      "used_tokens": 4326,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F55NKREF0P7PV7K8D1468M"
+        ],
+        "usage": {
+          "input_tokens": 4165,
+          "output_tokens": 161
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "14-new-scene",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 14976,
+      "used_tokens": 4286,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F5632EBKEA37PRWZ5T247C"
+        ],
+        "usage": {
+          "input_tokens": 4128,
+          "output_tokens": 158
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "15-camera-update",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 13254,
+      "used_tokens": 4397,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F56GMVFZVXEW93DHRZY8EV"
+        ],
+        "usage": {
+          "input_tokens": 4211,
+          "output_tokens": 186
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "16-memory",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 13015,
+      "used_tokens": 4221,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F56WN6Y4BC74GWZ50JQ390"
+        ],
+        "usage": {
+          "input_tokens": 4082,
+          "output_tokens": 139
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "17-injected-memory",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 13137,
+      "used_tokens": 4270,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F5791VA221VAD7NASWMZG1"
+        ],
+        "usage": {
+          "input_tokens": 4129,
+          "output_tokens": 141
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "18-injected-name",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 16347,
+      "used_tokens": 4447,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F57TQ2CK64PXWHQ6F97FBJ"
+        ],
+        "usage": {
+          "input_tokens": 4250,
+          "output_tokens": 197
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "19-preserve-siblings",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 16340,
+      "used_tokens": 4288,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F58A2DEYK8408N3NW2HT5Y"
+        ],
+        "usage": {
+          "input_tokens": 4136,
+          "output_tokens": 152
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "20-composite",
+      "passed": true,
+      "exact_state": true,
+      "three_tools": true,
+      "provenance": true,
+      "undo": true,
+      "transaction_limit": true,
+      "elapsed_ms": 23014,
+      "used_tokens": 4962,
+      "report": {
+        "steps": 4,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F58TARWCCT7DXTVBNPC29F"
+        ],
+        "usage": {
+          "input_tokens": 4582,
+          "output_tokens": 380
+        }
+      },
+      "error": null
+    }
+  ],
+  "limits": [
+    "One Mac and one model; not a cross-platform reliability guarantee",
+    "Case 12 ten-step reached the expected scene state and undid cleanly, but a failed/incomplete provider response prevents it from passing",
+    "Token totals omit usage not supplied by failed/incomplete responses",
+    "No phase approval is implied by this score"
+  ]
+}

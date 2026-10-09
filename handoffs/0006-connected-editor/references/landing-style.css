@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+
+/*
+ * Revision 2 type system. Latin-only variable files, bundled locally.
+ * Fraunces (soft axis) is the display voice; Inter carries reading text;
+ * JetBrains Mono appears only inside the product illustration.
+ */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-normal.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-italic.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+@theme {
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Page: warm studio paper and ink. */
+  --color-paper: #f4f1ea;
+  --color-paper-deep: #ebe6da;
+  --color-ink: #17151d;
+  --color-ink-soft: #2b2833;
+  --color-muted: #5d5966;
+  --color-rule: rgb(23 21 29 / 0.14);
+
+  /* The wisp: one brand violet, used with intent. */
+  --color-wisp: #4b2bc7;
+  --color-wisp-deep: #3a1fa6;
+  --color-wisp-mist: #d9d2fb;
+
+  /* Editor illustration palette (dark product surface only). */
+  --color-ed-bg: #131118;
+  --color-ed-panel: #1a1720;
+  --color-ed-raised: #24202c;
+  --color-ed-line: rgb(255 255 255 / 0.08);
+  --color-ed-text: #ebe7f2;
+  --color-ed-muted: #a39db1;
+  --color-ed-violet: #a998ff;
+  --color-ed-green: #86dcbc;
+  --color-ed-amber: #f2b679;
+  --color-ed-red: #f38b86;
+
+  --animate-blink: blink 6s ease-in-out infinite;
+  --animate-march: march 1.2s linear infinite;
+  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes blink {
+    0%,
+    93%,
+    100% {
+      transform: scaleY(1);
+    }
+    96% {
+      transform: scaleY(0.12);
+    }
+  }
+  @keyframes march {
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-wisp);
+    color: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-wisp);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* Display setting for Fraunces: soft terminals echo the wisp's curves. */
+@utility font-display-soft {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 100;
+  font-optical-sizing: auto;
+}
+
+@utility text-balance-safe {
+  text-wrap: balance;
+}
+
+@utility text-pretty-safe {
+  text-wrap: pretty;
+}

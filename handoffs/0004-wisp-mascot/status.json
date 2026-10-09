@@ -1,0 +1,5 @@
+{
+  "status": "integrated",
+  "detail": "Claude Opus 5.5 ACP artwork reviewed and integrated; native assets synchronized, UI checks passed, release app rebuilt and packaged. See docs/spikes/wisp-mascot.md for evidence and limitations.",
+  "updated_at": "2026-10-09T01:31:26Z"
+}

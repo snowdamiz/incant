@@ -22,6 +22,14 @@ Planning horizon: 36 months, starting November 2026, ending with a shipped game 
 
 Every phase has an **exit gate**. Do not start the next phase until the gate passes. Gates are the only real schedule control in a project this size.
 
+Director decision, 2026-10-08: begin Phase 1 while the remaining Phase 0 gate
+items stay explicitly open. The director also instructed: “next time dont ask,
+just continue if it makes sense to do so”. Use engineering judgment to continue
+useful implementation without repeated phase-advancement confirmations. Keep
+deferred evidence and human-owned actions tracked; do not mark gates passed,
+claim completed releases, or waive final requirements without their evidence.
+This overrides the stop-before-next-phase rule above for implementation progress.
+
 ---
 
 ## 1. Vision, principles, and definition of done
@@ -159,6 +167,15 @@ Design decisions:
 - **The provider abstraction is generic.** OpenAI is the required first provider. Anthropic, Google, and local models (via an OpenAI-compatible endpoint) are second-tier providers added once the abstraction is proven. The user can connect several and pick per task.
 - **Token refresh and revocation** are handled by the engine. Disconnecting a provider deletes local credentials and, for OAuth, calls the revoke endpoint.
 - **Cost transparency.** Every agent turn shows tokens used and estimated cost, with a per-project budget cap the user sets. The agent is told its remaining budget and plans accordingly.
+
+Director decision, 2026-10-08: repeated macOS Keychain password prompts during
+development are unacceptable. For the current macOS implementation, store Incant's
+credentials in atomic owner-only files in its stable application-support directory
+(0700 directory, 0600 files), surviving relaunches and changed development builds.
+This replaces the macOS Keychain choice above; it relies on OS file permissions,
+without additional encryption. Windows/Linux continue using their OS credential
+stores. Do not read or migrate legacy Keychain entries automatically. Evidence and
+scope are in docs/spikes/auth-login-repair.md.
 
 ### 3.2 Engine account (our login)
 
@@ -302,6 +319,15 @@ Exit gate:
 - Spike 6 round-trips a handoff end to end with no credentials written to disk.
 - Spike 4 succeeds on at least 14 of 20 tasks without human help.
 - CI produces a runnable artifact for every target nightly.
+
+Director decision, 2026-10-08: manual Windows/Linux sign-in checks and the manual
+Windows native viewport review are replaced by CI builds and automated tests.
+Use native editor/engine builds, shared UI/bridge tests, GPU readback probes and
+synthetic credential persistence across changed executables on those CI hosts.
+Do not require the director to provide Windows/Linux desktop machines or perform
+interactive logins there. Retain the macOS live-account and native-review evidence;
+CI results must state which behavior was exercised, without claiming manual or
+live-account validation. This change does not waive other phase gates.
 
 ### Phase 1: Core engine (Feb 2027 to Sep 2027, 8 months)
 

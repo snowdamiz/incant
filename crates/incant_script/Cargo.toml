@@ -12,3 +12,4 @@ serde_json = { workspace = true }
 thiserror = { workspace = true }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
+incant_core = { workspace = true }

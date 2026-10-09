@@ -43,3 +43,15 @@ Commit with `Built-by: claude`. Leave branch unmerged for Astra's review.
 After authenticating with Claude Code, run Claude from a git worktree on branch
 handoff/0001-editor-foundation and ask it to execute this brief using Claude 5.5.
 The original packet and evidence must remain available even when ACP is blocked.
+
+## Director feedback — priority revision
+
+The director has now reviewed the direction and says: **“the design of the UI is not nearly good enough. It should look very good, clean, easy to use, modern, custom titlebar, etc. Really tell it to focus on visuals.”**
+
+This supersedes treating the current shell as visually ready. Make visual quality your primary task. Reconsider the overall composition, visual hierarchy, typography, spacing, density, surfaces, colors, and interactions as a coherent product. A passing build or accessibility check is necessary but does not make the current design good enough. Do not limit this to small cosmetic fixes. Deliver a substantially stronger design that feels modern, clean, deliberate, and easy to use.
+
+Design and implement a custom titlebar integrated with the editor. Astra will implement any native host support you specify (window dragging, minimize/maximize/close, platform-specific native controls and insets). Keep engine/project mutations on the shared bridge. For host/window controls, propose exact typed bridge requests and capabilities and document what Astra must wire; do not fake working controls. For real macOS integration, the host can use an overlay titlebar and hide the native title text; coordinate native traffic lights versus custom controls explicitly.
+
+Own the visual decisions and iterate on actual screenshots at both target sizes. Review the entire product, not only individual components. Compare your revised screenshots against your first design and explain the improvements. Keep the original screenshots as the before evidence; put the new direction in a separate revision screenshot directory. The sample fixture must stay labeled and unsupported capabilities must remain honest, but these constraints should not dominate or clutter the experience.
+
+Please continue in this same handoff/session with existing implementation context, but prioritize the director's revision before calling the result complete. Return the revised design and a candid assessment of remaining visual issues.

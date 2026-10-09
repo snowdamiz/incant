@@ -1,0 +1,73 @@
+# Phase 0 review checklist
+
+This records the foundation against PLAN.md. On 2026-10-08 the director explicitly
+authorized starting Phase 1 while the remaining Phase 0 items stay open, then
+instructed agents to continue sensible implementation without repeated permission
+questions. This authorizes engineering progress; it does not mark missing evidence
+complete. The full Engine 1.0 and Driftwake objectives remain open. The director owns
+phase approval and PR merges. Current implementation: [PR #1](https://github.com/snowdamiz/incant/pull/1).
+The separate landing page is [PR #2](https://github.com/snowdamiz/incant/pull/2).
+
+## Deliverables and evidence
+
+| Requirement | Current evidence | Remaining boundary |
+|---|---|---|
+| Architecture records for all stack rows | [Fourteen ADRs](../adr/README.md) cover all fourteen rows | Engineering proposals await director review; they are not implemented later-phase subsystems |
+| Native viewport spike | [macOS review](../../handoffs/0002-native-viewport/result.md), Windows/Linux native builds and GPU readback in [desktop evidence](../spikes/evidence/desktop-editor-2026-10-08.json) | Accepted under the director's CI replacement for manual Windows review; latest UI follow-ups are separate below |
+| Bevy → CRDT → two clients → text roundtrip | [Collaboration result](../spikes/evidence/collaboration-spike.json) records two-client convergence and byte-identical canonical text after 120 ticks | No production network collaboration service is claimed |
+| QuickJS/Bevy hot reload and 1,000 entities | [Measured run](../spikes/evidence/script-benchmark.json), behavior tests and [scope](../spikes/phase-0.md#spike-3-quickjs-typescript-and-bevy--local-evidence-passed-with-scope-limits) | Batched script updates; no claim of 1,000 isolated VMs, mobile frame time or full rendering frame budget |
+| Twenty live agent tasks, at least fourteen successes | [19/20 full-suite result](../spikes/evidence/live-agent-2026-10-08.json); [separate ten-step follow-up](../spikes/evidence/ten-step-followup-2026-10-08.json) | The original incomplete response remains a failure in the full-suite score; the in-editor composer is not implemented in Phase 0 |
+| OAuth, API-key fallback and credential persistence | [macOS live sign-in/refresh/rebuild evidence](../spikes/auth-login-repair.md), [three-desktop CI](../spikes/evidence/desktop-credentials-2026-10-08.json) and automated API-key protocol tests | Live revocation evidence remains pending. A separate live API key is not required for the director's OAuth workflow |
+| Claude 5.5 ACP roundtrip | [First result packet](../../handoffs/0001-editor-foundation/result.md), later native/account/palette packets and integration commits | No copied coding-agent credentials; subsequent visual checks are deferred under the director's current restriction |
+| Runnable artifacts for six targets | [Build and execution evidence](../spikes/evidence/six-platform-2026-10-08.json), including hosted Android emulator execution | PR-triggered runs do not prove scheduled nightly history or signed distribution |
+| Apple and Windows signing certificates | No certificate evidence recorded | Director-provided accounts/certificates are required; unsigned development builds are not substitutes |
+| Year 1 director/reviewer/contracts | Director is identified by the plan; reviewer/contracts are not recorded | Director confirmation is required; no staffing or contract commitments were made by an agent |
+
+The ledger at [phase0.json](phase0.json) remains unapproved. The gate command reports
+auth verification, scheduled nightly artifacts, signing, staffing and director
+approval as outstanding. Phase 1 implementation is now separately authorized.
+
+## Latest requested editor changes
+
+Claude's connected panels, neutral palette and logo spacing are integrated, and
+the matching landing-page revision passed its CI. The account dialog opens on a
+safe control. macOS menu history now routes through focus and the shared command
+bus. Local tests and the development build pass. At source revision `d87436f`,
+all four hosted workflows also passed: source checks, Windows/Linux native editor
+and renderer probes, three-desktop credential persistence, and six-platform
+probes. The linked evidence records exact revisions and run URLs; see the
+[integration report](../spikes/connected-editor.md).
+
+The director stopped computer use and screen capture. That restriction remains
+in force. Exact native traffic-light alignment, the final text/project Undo
+interaction check and further resize/focus captures are therefore deferred. A
+browser fixture or a compiled app is not recorded as proof of those native checks.
+
+## Open decisions from PLAN.md section 12
+
+| Decision | Current disposition |
+|---|---|
+| React versus Solid | React is the implemented proposal in ADR 0009 |
+| Loro versus Automerge | Loro is the implemented proposal, with both benchmark results retained in ADR 0008 |
+| Managed identity versus self-hosted accounts | ADR 0012 separates optional cloud metadata from local provider login; the identity operating choice still requires director review before service implementation |
+| RON versus JSON | Canonical typed JSON with derived JSON Schemas is implemented in ADR 0008 |
+| Browser editor in 1.0 or 1.1 | PLAN.md's definition of done includes it in 1.0; the WASM probe is not the delivered browser editor |
+| Engine license/business model | No license or paid-cloud business decision has been made on the director's behalf |
+| Game name and engine-name clearance/reservations | Driftwake remains a placeholder. Incant is the chosen engine name; trademark/domain/package reservations are not represented as complete |
+| Codex execution mode | Phase 0 work has used local Codex/CLI, local Claude ACP and hosted CI; no cloud Codex deployment is claimed |
+| Approval mode by risk | Reversible local implementation/tests proceed autonomously. Claude ACP bypassPermissions was explicitly authorized. PR merges, phase approval, signing, purchases and legal/staffing actions remain director-owned |
+
+## Order for remaining work
+
+1. Review the recorded editor/source CI results for `d87436f`; further landing-page
+   content and design work is underway through Claude ACP.
+2. Complete live revocation verification with a suitable disposable connection;
+   do not revoke the director's working account just to satisfy a test.
+3. Resume deferred native checks only after the director permits computer use.
+4. The director reviews and merges the foundation PR when ready. The scheduled
+   workflow must run from the default branch before nightly results can be recorded.
+5. Record the human-owned signing, staffing and outstanding strategic decisions.
+   Request phase approval only when its evidence is ready; do not self-approve it.
+
+No additional Windows/Linux desktop machines or manual login checks are required.
+No additional API key is requested from the director.
