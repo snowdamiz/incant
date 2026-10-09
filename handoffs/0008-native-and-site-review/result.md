@@ -2,7 +2,9 @@
 
 **Status:** review complete for the landing page and the browser fixture. The native review
 is partial. The traffic lights are still hidden by the capture indicator in every supplied
-native image, so their alignment stays unconfirmed natively (see `native-requests.md`, D1).
+windowed image, so their alignment stays unconfirmed natively (see `native-requests.md`, D1).
+The rebuilt native captures confirm the F2 rename fix and a settled fullscreen. They also show
+one new defect: the keyboard-opened account dialog has no visible focus ring natively.
 No phase gate is approved by this work.
 
 **Model:** Claude Opus 5.5 (`claude-opus-5-5`) through Claude Code, the configured ACP Claude.
@@ -20,6 +22,11 @@ No other model was used.
 - **The middle ground for the landing page is kept.** Each workflow step keeps its icon,
   title and one-sentence explanation. Real platform marks remain.
 - **Merges belong to Astra.** These commits are not pushed or merged.
+- **Latest follow-up (review only).** I reviewed the three rebuilt captures in
+  `artifacts/native-review/followup/` and changed only this file and `native-requests.md`.
+  I made no new native captures, and I did not repeat the landing or fixture work.
+- **Disconnected state** is no longer a director question. It is an implementation
+  follow-up, and Astra owns correct connection-state propagation.
 
 ## Commits (all `Built-by: claude`)
 
@@ -28,7 +35,8 @@ No other model was used.
 | `5b395f0` | Landing workflow layout across widths, platform-mark optical sizing, 320 px window bar, and one behavioural test |
 | `eef71d3` | Inspector reference values end in an ellipsis instead of a clipped glyph |
 | `07a0f59` | F2 rename opens with the current name selected, with a behavioural test |
-| this commit | `result.md`, `native-requests.md`, capture scripts and browser screenshots |
+| `3d6f039` | `result.md`, `native-requests.md`, capture scripts and browser screenshots |
+| this commit | Text-only update of `result.md` and `native-requests.md` for the rebuilt native captures |
 
 ## Changed paths
 
@@ -96,10 +104,10 @@ native evidence. They are in `screenshots/{before,after}/browser-fixture/`, capt
 Defect fixed: long asset paths in the inspector were cut mid-glyph at the field border.
 They now end in an ellipsis, and the full value stays in the tooltip.
 
-Finding not changed, because it concerns state rather than appearance: in the connection-error
-fixture, Problems shows "No problems" and the hierarchy shows a loading skeleton. Meanwhile
-the banner says that nothing shown is current. A stale-data treatment for the dock and
-hierarchy may be worth a later decision.
+Implementation follow-up, owned by Astra: in the connection-error fixture, Problems shows
+"No problems" and the hierarchy shows a loading skeleton. Meanwhile the banner says that
+nothing shown is current. Astra will propagate the connection state correctly. Once the
+panels receive it, a visual stale-data treatment can follow.
 
 ## Native observations (Astra's CUA captures)
 
@@ -122,12 +130,34 @@ ignored `artifacts/native-review/crops/`.
 | Account dialog | Opened on Close, not Sign out. It was opened by pointer, so no focus ring shows (request D3). | 04 |
 | Divider keyboard resize | The arrow keys moved the hierarchy from 245 to 277 and back | 05 |
 
+### Rebuilt-build follow-up captures
+
+Source: `artifacts/native-review/followup/`, rebuilt with this packet's UI commits. These
+captures precede Astra's bridge field-order fix. Crops are in the ignored `followup/crops/`.
+
+| Check | Result | Image |
+| --- | --- | --- |
+| F2 rename selection | **Confirmed.** The rename field opens with the name highlighted. The pointer covers the last glyph, so the pixels show the highlight across "Entity" and continuing under the pointer. Astra verified functionally that typing "Lantern" replaced the whole name and that Cmd+Z restored "Entity 1". | d06 |
+| Settled fullscreen | **Confirmed.** The window fills the display, with no white band or strip. The logo starts 14.5 pt from the leading edge. Its centre is about 19.75 pt, the same height as in the window. | d03 |
+| Account dialog opened by Enter | Focus lands on Close (Astra), which is the safe control. **Defect:** no focus ring is drawn on Close natively. The same keyboard path in Chrome draws a clear ring (fixture image 12). | d05 |
+| Panels after rebuild | Unchanged: square, flush joins and the neutral viewport | d03, d06 |
+| Transform order | Still Rotation, Scale, Translation in these captures. They precede the bridge fix, so this proves nothing about the fix. | d03, d06 |
+
 Native defects:
 
-- **F2 rename appended to the old name** ("Entity 0Lantern"). Fixed in `07a0f59`. Native
-  confirmation is requested in D4.
-- **Transform fields arrive in alphabetical order** (Rotation, Scale, Translation). The native
-  schema registry sends no `order`. This is a data-binding request for Astra (R1).
+- **F2 rename appended to the old name** ("Entity 0Lantern"). Fixed in `07a0f59` and
+  confirmed natively in d06.
+- **Transform fields arrive in alphabetical order** (Rotation, Scale, Translation). Astra
+  found that the native bridge adapter dropped `schema.order`. `native.ts` now forwards it,
+  and that change passes 223 tests. The rebuilt native check was interrupted, so the field
+  order is **not verified natively** (request D7).
+- **No focus ring on the keyboard-opened account dialog.** Close receives focus, but WebKit
+  does not draw the `:focus-visible` ring after this programmatic focus. Chrome does. This is
+  a UI defect in my scope. I did not fix it here, because this follow-up is review-only.
+  The proposed fix is a keyboard-modality marker set on keydown and cleared on pointerdown.
+  The dialog's initial focus would then show the ring whenever the dialog opened from the
+  keyboard, without relying on the engine's heuristic. It needs a behavioural test and native
+  confirmation (request D8).
 
 **Undo logic review:** I read `menu.rs` and the UI's history-request handler. With a text
 field focused, the menu action calls the browser's own text undo and never falls back to
@@ -161,8 +191,11 @@ native input, read no credentials, and took no account action.
 ## Limitations
 
 - **Traffic-light alignment is not confirmed in native pixels.** The logo is confirmed. Request D1.
-- **No native evidence for this packet's UI commits yet.** Astra's build predates them. Requests D3 and D4.
-- **Minimum window size and settled fullscreen** have no native evidence (D2, D3).
+- **Native evidence for this packet's UI commits** covers F2 rename only. The landing page has
+  no native surface. The inspector ellipsis has no native capture.
+- **Minimum window size** has no native evidence (D3 in `native-requests.md`).
+- **Transform field order** is not verified natively after Astra's bridge fix (D7).
+- **Keyboard focus ring in the native account dialog** is missing (D8).
 - **Documents-folder project startup stalls**, per Astra. Documents access is not verified.
 - **Platforms.** There is no Windows or Linux evidence. Windows caption buttons were seen only in a browser double.
 - **Public copy.** The site describes the planned product as shipped, as the director requested.
@@ -173,5 +206,3 @@ native input, read no credentials, and took no account action.
 
 1. Should the dimmed logo in inactive windows stay at 55%, the same as the identity text, or
    stay at full colour like a macOS app icon? I kept 55% for consistency.
-2. Does the director want a stale-data treatment for the hierarchy and dock while the editor
-   is disconnected?
