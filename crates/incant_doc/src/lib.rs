@@ -229,6 +229,12 @@ impl Project {
             if id != &asset.id {
                 issue(format!("/assets/{id}/id"), "map key and ID differ");
             }
+            if asset.name.trim().is_empty() || asset.kind.trim().is_empty() {
+                issue(
+                    format!("/assets/{id}"),
+                    "asset name and kind cannot be empty",
+                );
+            }
             if !safe_relative_path(&asset.path) {
                 issue(
                     format!("/assets/{id}/path"),

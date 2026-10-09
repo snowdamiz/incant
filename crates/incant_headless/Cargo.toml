@@ -13,6 +13,7 @@ incant_cmd = { workspace = true }
 incant_core = { workspace = true }
 incant_script = { workspace = true }
 incant_agent = { workspace = true }
+incant_assets = { path = "../incant_assets" }
 clap = { version = "4.5", features = ["derive"] }
 dirs = "6"
 rpassword = "7"

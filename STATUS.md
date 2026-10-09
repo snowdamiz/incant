@@ -12,6 +12,11 @@ repeated permission questions. Phase advancement does not mark those gates passe
   canonical formatting and stable ULIDs.
 - One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,
   durable recovery and exclusive journal ownership.
+- Initial Phase 1 static glTF/GLB import, meshopt cooking and versioned binary
+  cache, with dependency invalidation and source-independent CPU loading. CLI
+  import uses stable asset IDs and journaled command-bus transactions; reimport
+  and undo are tested. Textures, animation and runtime integration remain open.
+  See [asset pipeline evidence](docs/spikes/asset-pipeline.md).
 - Bevy fixed-step simulation; isolated play state; SWC/QuickJS scripting, sandbox,
   live ECS queries and compatible hot reload.
 - Actual wgpu rendering and PNG readback on Apple M5 Pro.
@@ -34,7 +39,7 @@ repeated permission questions. Phase advancement does not mark those gates passe
 - Fourteen architecture records, generated TS structural bindings, developer docs,
   gate ledger and GitHub workflow source.
 
-See [written evidence and limitations](docs/spikes/phase-0.md). Fifty-four Rust
+See [written evidence and limitations](docs/spikes/phase-0.md). The Phase 0 baseline of fifty-four Rust
 behavior tests, 223 UI/bridge tests and five Python tool tests pass after
 integration. The thousand-entity script benchmark meets the local frame budget
 within its documented workload.
@@ -44,9 +49,11 @@ within its documented workload.
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing
   page has the matching palette in PR #2. Its modeling expansion and lighter copy
-  each passed 23 hosted browser checks. Claude is now revising it again around
-  graphical explanations and authentic SVG platform marks following director
-  feedback, while the capture restriction remains in force. See
+  each passed 23 hosted browser checks. Graphical explanations, authentic SVG
+  platform marks and the subsequent workflow correction are now integrated in
+  PR #2. The workflow pairs each icon with a short visible explanation and tighter
+  spacing; all 23 hosted checks passed on bf99437. The capture restriction remains
+  in force. See
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
   routes by focus; automated tests pass, but its final native interaction check
   remains pending. **Computer use, browser automation and screen capture are

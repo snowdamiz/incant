@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand};
+mod assets;
 mod eval;
 use incant_agent::{
     Agent, ApprovalMode, Budget, accounts::AccountStore, credentials::CredentialStore,
@@ -21,10 +22,7 @@ use std::{
 
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
 #[derive(Parser)]
-#[command(
-    name = "incant",
-    about = "Incant Phase 0 headless engine and validation tools"
-)]
+#[command(name = "incant", about = "Incant headless engine and project tools")]
 struct Args {
     #[command(subcommand)]
     command: Cli,
@@ -59,6 +57,13 @@ enum Cli {
         name: String,
         #[arg(long, default_value_t = 1)]
         entities: usize,
+    },
+    /// Import a project-local static glTF/GLB through the shared command bus.
+    Import {
+        project: PathBuf,
+        source: PathBuf,
+        #[arg(long)]
+        cache: Option<PathBuf>,
     },
     Validate {
         project: PathBuf,
@@ -314,6 +319,11 @@ fn main() -> Result<()> {
                 json!({"valid":true,"project_id":project.id,"schema_version":project.schema_version}),
             )?;
         }
+        Cli::Import {
+            project,
+            source,
+            cache,
+        } => assets::import(&project, &source, cache.as_deref())?,
         Cli::Schema { directory } => {
             fs::create_dir_all(&directory)?;
             let mut registry = schema_registry();

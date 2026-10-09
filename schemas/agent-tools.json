@@ -24,6 +24,34 @@
     "name": "doc_patch",
     "parameters": {
       "$defs": {
+        "Asset": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "path",
+            "kind",
+            "sha256"
+          ],
+          "type": "object"
+        },
         "Command": {
           "oneOf": [
             {
@@ -203,6 +231,41 @@
                 "scene_id",
                 "entity_id",
                 "component"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "description": "Register or update an imported asset without changing its stable identity.",
+              "properties": {
+                "asset": {
+                  "$ref": "#/$defs/Asset"
+                },
+                "op": {
+                  "const": "upsert_asset",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "asset"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "asset_id": {
+                  "type": "string"
+                },
+                "op": {
+                  "const": "remove_asset",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "asset_id"
               ],
               "type": "object"
             },

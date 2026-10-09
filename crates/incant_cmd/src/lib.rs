@@ -1,7 +1,8 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
 mod journal;
 use incant_doc::{
-    CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene, new_id,
+    Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene,
+    new_id,
 };
 pub use journal::Journal;
 use schemars::JsonSchema;
@@ -47,6 +48,13 @@ pub enum Command {
         entity_id: Id,
         component: String,
     },
+    /// Register or update an imported asset without changing its stable identity.
+    UpsertAsset {
+        asset: Asset,
+    },
+    RemoveAsset {
+        asset_id: Id,
+    },
     SetMemory {
         section: String,
         text: String,
@@ -76,6 +84,12 @@ impl Actor {
             actor: "incant-agent".into(),
             model: Some(model),
             conversation_id: Some(conversation_id.into()),
+        }
+    }
+    pub fn import(name: impl Into<String>) -> Self {
+        Self {
+            origin: Origin::Import,
+            ..Self::user(name)
         }
     }
     fn provenance(&self, transaction: &str) -> Result<Provenance, CommandError> {
@@ -389,6 +403,14 @@ fn apply(
     provenance: &Provenance,
 ) -> Result<(), CommandError> {
     match command {
+        Command::UpsertAsset { asset } => {
+            project.assets.insert(asset.id.clone(), asset.clone());
+        }
+        Command::RemoveAsset { asset_id } => {
+            if project.assets.remove(asset_id).is_none() {
+                return Err(CommandError::Invalid("asset does not exist".into()));
+            }
+        }
         Command::CreateScene { scene } => {
             if project.scenes.contains_key(&scene.id) {
                 return Err(CommandError::Invalid("scene already exists".into()));
