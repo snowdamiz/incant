@@ -39,7 +39,7 @@ pub enum ImportError {
 }
 pub type Result<T> = std::result::Result<T, ImportError>;
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, schemars::JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct ImportRequest {
     pub source: String,

@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-09",
+  "model": "gpt-6-astra",
+  "authentication": "existing saved OAuth account; no reauthentication or credential changes",
+  "report": {
+    "steps": 4,
+    "tool_calls": [
+      {
+        "name": "doc_query",
+        "succeeded": true
+      },
+      {
+        "name": "asset_import",
+        "succeeded": true
+      },
+      {
+        "name": "asset_inspect",
+        "succeeded": true
+      }
+    ],
+    "transaction_ids": [
+      "01M4GEN034XE0NR7XAAYWH0E74"
+    ],
+    "usage": {
+      "input_tokens": 5244,
+      "output_tokens": 210
+    }
+  },
+  "verification": {
+    "real_source_import": true,
+    "one_agent_transaction": true,
+    "journal_recovery": true,
+    "undo_removes_import": true,
+    "redo_restores_identical_project": true,
+    "runtime_load_without_sources": true,
+    "runtime_ticks": 2,
+    "decoded_payload_bytes": 156
+  },
+  "scope": "One disposable triangle model on macOS; no GUI or GPU asset binding claim. Import approval was preapproved by the test driver within the authorized disposable project."
+}

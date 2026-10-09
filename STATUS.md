@@ -64,7 +64,8 @@ within its documented workload.
   assets in `incant watch-assets`. Six service and two separate-process CLI tests
   pass. Editor dispatch and GPU/ECS hot reload remain open.
   See [source watching evidence](docs/spikes/asset-source-watch.md).
-  PR #7 is open on `c337252`; source checks and both desktop test jobs are running.
+  PR #7 is open on `79a821e`; hosted checks are running again after the cache
+  confinement fix passed local import/watch tests and Clippy.
 
 - Native editor imports now prepare outside the event thread/document lock and
   commit with revision checks through the existing persistent history. Two new
@@ -72,6 +73,12 @@ within its documented workload.
   contract are wired to the native bridge. Claude Opus 5.5 ACP handoff 0010 is
   implementing the asset library/import interface; it is not integrated or
   natively verified yet. Automatic editor watching remains open.
+  Agent asset list/inspect/import now use the shared service and a project-bound
+  filesystem capability. Three new agent tests and a live saved-session import
+  pass, including journal recovery, Undo/Redo and source-independent CPU loading.
+  Default cache writes now reject symlink redirection; this fix is also being
+  included in PR #7 before merge.
+  See [editor/agent import evidence](docs/spikes/editor-agent-asset-imports.md).
 
 - Responsive project loading merged in PR #5 after all twelve hosted checks passed.
   File reads and journal recovery

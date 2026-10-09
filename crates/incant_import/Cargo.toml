@@ -10,6 +10,7 @@ incant_assets = { path = "../incant_assets" }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
 serde = { workspace = true }
+schemars = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
