@@ -8,17 +8,14 @@
 //! There is no specular environment yet, so metals stay dark outside their
 //! direct highlight; an output transform cannot conceal that.
 //!
-//! HDR output (handoff 0015; headless captures reviewed, native pending): the
-//! scene renders to linear HDR and `tone_map.wgsl` applies the Khronos PBR
-//! Neutral curve at fixed exposure 1.0. These values are kept unchanged for
-//! the first pass. Ordinary values in [0.08, 0.8] lose only a constant 0.04,
-//! a camera-facing white dielectric (about 0.79 linear) maps to about 0.75,
-//! a fully lit white face (about 0.91) maps to about 0.84 on the shoulder, and
-//! glossy highlights roll off on a hue-preserving shoulder instead of
-//! clipping. The constant offset costs dark fill-lit surfaces the most, so
-//! dark albedos may crush. Headless review kept these values: retuning scales
-//! colors but cannot undo the offset, which also over-saturates muted colors
-//! until a specular environment supplies the ~0.04 sheen the curve removes.
+//! HDR output (handoff 0015): the scene renders to linear HDR and
+//! `tone_map.wgsl` applies an Incant preview curve derived from the Khronos
+//! PBR Neutral shoulder, at fixed exposure 1.0. Colors whose brightest channel
+//! is below 0.8 pass through unchanged, so the camera-facing white face (about
+//! 0.79 linear), fill-lit dark albedos and emissive colors keep their values.
+//! A fully lit white face (about 0.91) rolls onto the shoulder near 0.87, and
+//! glossy highlights compress smoothly toward white without changing hue.
+//! These constants stay unchanged pending review of fresh captures.
 pub const EYE: [f32; 3] = [6., 5., 9.];
 pub const LIGHT_DIRECTION: [f32; 3] = [1., 2., 3.];
 pub const LIGHT_RADIANCE: [f32; 3] = [2.0; 3];

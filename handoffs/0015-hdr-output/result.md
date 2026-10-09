@@ -1,4 +1,4 @@
-# 0015 HDR output: tone-mapping design and headless capture review — result
+# 0015 HDR output: tone-mapping design, headless review and curve correction — result
 
 ## Status
 
@@ -7,6 +7,10 @@
 - **Priority follow-up (headless review):** complete. The verdict is in the section
   "Headless capture review" at the end of this file. Output structure is approved for
   these headless captures. Material color fidelity is **not** approved.
+- **Priority correction (derived curve):** implemented. The section "Priority
+  correction: derived preview curve" at the end of this file supersedes the
+  first-pass operator choice. Fresh headless and native captures are pending from
+  Astra. The existing captures are historical and approve nothing about the new curve.
 - **Native review:** pending. The 1440x900 and 1000x650 native captures do not exist
   yet, and no native output is approved. No phase gate is approved or claimed.
 
@@ -17,7 +21,10 @@
 - Packet: `handoffs/0015-hdr-output/brief.md`. The first pass had no priority
   revisions. The current packet adds a priority follow-up: review the integrated HDR
   captures, apply the corrected license pin, and treat function-local exposure as
-  settled. Those are applied below.
+  settled. Those are applied below. The newest priority correction says the director
+  accepts the color-regression finding. It gives me ownership of the curve itself,
+  with no further director decision needed. I acknowledge that feedback and applied
+  it first, as the last section records.
 
 ## Changed paths
 
@@ -32,9 +39,14 @@
 - `crates/incant_render/src/studio.rs`, follow-up only. Comments now record the
   headless review. The constants are still unchanged.
 
-No other code, UI, fixture or test was edited in either pass.
+- Priority correction: `crates/incant_render/src/tone_map.wgsl` now holds the revised
+  curve. `THIRD_PARTY_NOTICES.md` updates the modification notice.
+  `crates/incant_render/src/studio.rs` changes comments only.
 
-## Chosen operator: Khronos PBR Neutral
+No other code, UI, fixture, test, render resource or composition math was edited in
+any pass.
+
+## Chosen operator: Khronos PBR Neutral (first pass, superseded by the correction below)
 
 The operator is the Khronos PBR Neutral tone mapper, ported line-for-line from the
 Khronos GLSL reference to WGSL. A fixed exposure multiplier of 1.0 precedes it.
@@ -372,3 +384,134 @@ python3 -I target/hdr-review-tools/sheet.py artifacts/hdr-review artifacts/mater
 
 These scripts are scratch tools, not committed. No build, cargo test or GPU run was
 performed in this follow-up, as the packet allows.
+
+## Priority correction: derived preview curve
+
+Implemented on 2026-10-09 by Claude Opus 5.5, model ID `claude-opus-5-5`. This
+section supersedes the first-pass operator choice and the sample table above.
+
+### What changed
+
+`tone_map.wgsl` now implements an **Incant derived preview curve**. It is not Khronos
+PBR Neutral and does not conform to that specification. The file header, the comment
+block and `THIRD_PARTY_NOTICES.md` all say so.
+
+| Element | Khronos PBR Neutral | Incant derived curve |
+|---|---|---|
+| Fresnel toe offset | Subtracts 0.04, quadratic below 0.08 | **Removed** |
+| Region where output equals input | None. The offset always applies | Peak channel below **0.8** |
+| Compression threshold | 0.76 | **0.8** |
+| Shoulder formula | 1 − (1−Ks)² / (p + 1 − 2Ks) | Same formula, with Ks = 0.8 |
+| Desaturation toward white | Kd = 0.15 | Same |
+| Exposure | Not part of the reference | Fixed 1.0, unchanged |
+
+The curve adds no constant to scene radiance and fakes no IBL contribution. Exposure
+stays 1.0, because no capture justifies changing it.
+
+### Why this curve and threshold
+
+The headless review showed that the toe offset was the only cause of the regression.
+Without a matching specular sheen, it subtracted energy from every color.
+
+- **Removing the offset** makes the curve the identity for ordinary colors. Emissive
+  colors, dark fill-lit materials and muted textures now display exactly as rendered.
+- **Threshold 0.8** keeps every albedo up to 0.8 under unit white light untouched. That
+  matches the top of the base-color range Khronos itself preserves. The studio's
+  camera-facing white face, about 0.79 linear, stays exact.
+- **0.8 rather than 0.85.** A higher threshold leaves less room for highlights. At 0.85,
+  radiance 1 to 4 fits into 246 to 254. At 0.8 it spans 243 to 254, so specular
+  highlights keep visible gradation.
+- **0.8 rather than 0.76.** The reference threshold would compress ordinary albedos
+  between 0.76 and 0.8 for no visible gain in the highlights.
+- **The shoulder is still smooth.** At 0.8 its value equals 0.8 and its slope equals 1,
+  so there is no visible band. The desaturation blend also starts at zero with zero
+  slope.
+- **Trade-off at 1.0.** Saturated colors at display maximum take a small hue-preserving
+  desaturation. Red [1,0,0] shows as about [243, 30, 30] and still reads clearly red.
+  The alternative is clipping, which would lose all highlight gradation above 1.
+
+### Independent expected outputs
+
+I computed these with an independent Python implementation of the revised equations,
+in `target/hdr-review-tools/derived.py`, which is gitignored and not committed. They do
+not come from GPU execution. The last column models the RGBA16Float input and 32-bit
+shader math, and it agrees with the 64-bit result everywhere. The sRGB columns use the
+standard piecewise encode with 8-bit rounding.
+
+| Linear input | Linear output | sRGB 8-bit |
+|---|---|---|
+| 0 | 0 | 0, 0, 0 |
+| 0.01 gray | 0.01 | 25, 25, 25 |
+| 0.18 gray | 0.18 | 118, 118, 118 |
+| 0.5 gray | 0.5 | 188, 188, 188 |
+| 0.8 gray | 0.8 | 231, 231, 231 |
+| 1 gray | 0.9 | 243, 243, 243 |
+| 2 gray | 0.971429 | 252, 252, 252 |
+| 4 gray | 0.988235 | 254, 254, 254 |
+| 16 gray | 0.997403 | 255, 255, 255 |
+| 65504 gray | 0.999999 | 255, 255, 255 |
+| [4, 0.2, 0.2] | 0.988235, 0.341558, 0.341558 | 254, 158, 158 |
+| [65504, 0, 0] | 0.999999, 0.999898, 0.999898 | 255, 255, 255 |
+| [1, 0, 0] | 0.9, 0.0133005, 0.0133005 | 243, 30, 30 |
+| [0.5, 0.5, 0] | 0.5, 0.5, 0 | 188, 188, 0 |
+| Emissive brown, sRGB 128, 64, 32 decoded | unchanged: 0.215861, 0.0512695, 0.0144438 | 128, 64, 32 |
+| Fill-only gray albedo 0.1, 0.03 linear | 0.03 | 48, 48, 48 |
+| Fill-only gray albedo 0.18, 0.054 linear | 0.054 | 66, 66, 66 |
+| Fill-only gray albedo 0.5, 0.15 linear | 0.15 | 108, 108, 108 |
+| Camera-facing white face, 0.7889 | 0.7889 | 230, 230, 230 |
+| Fully lit white face, 0.9112 | 0.871465 | 240, 240, 240 |
+
+The fill-only rows assume the 0.30 diffuse fill with no direct light, and they ignore the
+very small Fresnel reduction of diffuse. Astra's real fixture is authoritative. The
+16-bit emissive texture previously read 127 rather than 128 in the red channel. Any such
+input quantization passes straight through the identity region.
+
+Checks in the same script:
+
+- 300,000 random inputs up to 65504, in 64-bit and 32-bit math: no output was
+  non-finite or outside [0, 1].
+- The same inputs show no hue shift. Each output minus its mean stays parallel to, and
+  points the same way as, the input minus its mean.
+- A neutral ramp from 1e-6 to 65504 is monotonically nondecreasing.
+- At 0.8 the value is continuous, and the slope on the shoulder side is 1.0000 to four
+  places.
+
+**WGSL validation.** The revised snippet parses and validates with naga 29.0.4:
+
+```
+cd target/tonemap-check
+~/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo run --offline -q -- ../../crates/incant_render/src/tone_map.wgsl
+naga 29.0.4: tone_map.wgsl parsed and validated
+```
+
+`rustfmt --edition 2024 --check crates/incant_render/src/studio.rs` passed. No cargo
+build, test or GPU run was performed, as the packet allows.
+
+### Effect on Astra's existing assertions
+
+These expectations change, and Astra owns updating them:
+
+- `DISPLAY_RED` and `DISPLAY_GREEN` change from 241, 33, 33 to **243, 30, 30**, and
+  the equivalent for green.
+- The emissive-map and sixteen-bit-color expectations change from 124, 55, 4 back to
+  the authored **128, 64, 32**. The sixteen-bit capture previously read 127.
+- The swatch table changes to the values above. The changed entries are 0.01 to 25,
+  0.18 to 118, 0.5 to 188, 0.8 to 231, 1 to 243, 2 to 252, 4 to 254, and
+  [4, 0.2, 0.2] to 254, 158, 158.
+- **The transparent-over-black center** now maps 0.5 radiance to 0.5 linear, sRGB 188,
+  rather than 0.46. Where the half-alpha white covers only the backdrop, the expected
+  value is 179, 180, 180. The same formula reproduces the old capture's 177, 177, 177.
+- **The glossy-highlight assertion** expects a value above 243 and below 255. Its comment
+  says premature UNORM clipping would yield 240, which was the reference curve's value
+  for 1.0. Under the new curve, 1.0 maps to 243, so the clipping detector needs a new
+  bound. The asserted range itself may still hold, depending on the fixture's peak.
+
+### Pending
+
+- Fresh headless captures, including the new fill-only dark-material fixture with gray
+  albedos 0.1, 0.18 and 0.5. I will review them before anything is approved.
+- Fresh native captures at 1440x900 and 1000x650.
+- The current `artifacts/hdr-review` captures are historical. They approve nothing
+  about the new curve.
+
+No director decision or permission request is needed for this correction.
