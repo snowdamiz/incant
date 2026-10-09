@@ -1,7 +1,7 @@
 //! Phase 0 native-surface and actual-GPU screenshot proof, not a production PBR renderer.
 use bytemuck::{Pod, Zeroable};
-use glam::{Mat4, Quat, Vec3};
-use incant_doc::{Project, Transform};
+use glam::{Mat4, Vec3};
+use incant_doc::Project;
 use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
 pub use wgpu;
 use wgpu::util::DeviceExt;
@@ -431,15 +431,17 @@ fn vertices(project: &Project, aspect: f32) -> Result<Vec<Vertex>> {
     let mut output = vec![];
     for scene in project.scenes.values() {
         for entity in scene.entities.values() {
-            let Some(value) = entity.components.get("Transform") else {
+            if !entity.components.contains_key("Transform") {
                 continue;
-            };
-            let t: Transform = serde_json::from_value(value.clone())?;
-            let world = Mat4::from_scale_rotation_translation(
-                Vec3::from_array(t.scale.map(|x| x as f32)),
-                Quat::from_array(t.rotation.map(|x| x as f32)),
-                Vec3::from_array(state.entities[&entity.id].translation.map(|x| x as f32)),
+            }
+            let world = Mat4::from_cols_array_2d(
+                &state.entities[&entity.id]
+                    .world_transform
+                    .map(|column| column.map(|v| v as f32)),
             );
+            if !world.is_finite() || !world.inverse().is_finite() {
+                return Err("world transform exceeds renderer numeric range".into());
+            }
             let mvp = projection * view * world;
             for (indices, normal) in faces {
                 let normal = world

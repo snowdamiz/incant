@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- Runtime scene projection now composes parent transforms, preserves mesh bindings,
+  and atomically synchronizes topology while reusing the ECS world. Five new core
+  behavior tests and asset-kind validation pass. The real GPU probe matches a
+  parented scene to equivalent flattened geometry. Imported GPU geometry/materials
+  are still open; the viewport remains diagnostic cubes. Script benchmark results
+  and their host-load variability are recorded in
+  [runtime scene evidence](docs/spikes/runtime-scene-projection.md).
+
 - `incant_import` now prepares glTF/image import batches on an owned document
   snapshot and commits all changed assets in one command-bus transaction. The CLI
   uses this shared service. Five service behavior tests, the existing CLI tests, full workspace release
@@ -73,8 +81,11 @@ within its documented workload.
   Rust behavior tests and 267 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
   handoff 0010 supplies the integrated asset library and import/reimport interface.
   Real native batch import, Undo/Redo, texture reimport, error recovery, concurrent
-  edits, stale-import rejection and text/project Undo separation pass. Claude reviewed the actual native captures and the four visual corrections;
-  all native requests pass, including the final paste interaction checks. Automatic editor
+  edits, stale-import rejection and text/project Undo separation pass. The director
+  rejected the bottom-dock asset layout after the earlier native review. PR #8 is
+  held as a draft while Claude reworks asset browsing into dedicated navigation
+  and the main Inspector, separate from diagnostics. Earlier behavior evidence is
+  retained; the replacement design needs its own native review. Automatic editor
   watching remains open.
   Agent asset list/inspect/import now use the shared service and a project-bound
   filesystem capability. Three new agent tests and a live saved-session import

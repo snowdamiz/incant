@@ -1,0 +1,239 @@
+{
+  "date": "2026-10-09",
+  "scope": "Core scene projection and diagnostic renderer hierarchy, before imported GPU geometry binding",
+  "benchmarks": {
+    "earlier_contended_comparison": {
+      "date": "2026-10-09",
+      "baseline": "handoff/0010-asset-library (same runtime as PR #8)",
+      "current": "runtime scene projection and reused ECS synchronization, uncommitted",
+      "host": "Apple M5 Pro",
+      "workload": {
+        "entities": 1000,
+        "ticks": 120,
+        "commands": 120000,
+        "project_sha256": "ce068e5f8bdcf87e1988240fa57e8f8b1760cee7e67fbe43c1b6bc501366bc39",
+        "script_sha256": "f3cc23a2f439e4a13347842ee6b86fd477a38e552948857914d26913c99f721d"
+      },
+      "runs": [
+        {
+          "version": "baseline",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 24.322125,
+            "p95_frame_ms": 18.99925,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        },
+        {
+          "version": "current",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 33.444333,
+            "p95_frame_ms": 22.349583,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        },
+        {
+          "version": "current",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 32.778833,
+            "p95_frame_ms": 23.850583,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        },
+        {
+          "version": "baseline",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 19.5075,
+            "p95_frame_ms": 17.491709,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        },
+        {
+          "version": "baseline",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 26.223333,
+            "p95_frame_ms": 17.772917,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        },
+        {
+          "version": "current",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 26.474667,
+            "p95_frame_ms": 21.683208,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        }
+      ],
+      "scope": "Local scripted simulation only; excludes GPU rendering and presentation. Alternating sequential runs; no local builds in parallel. User/background host activity is uncontrolled.",
+      "host_load_after": "11:18  up 23:12, 2 users, load averages: 18.02 21.08 19.27",
+      "note": "Original label corrected: uptime was captured after these six runs."
+    },
+    "later_comparison": {
+      "date": "2026-10-09",
+      "host": "Apple M5 Pro",
+      "host_load_after": "11:28  up 23:23, 2 users, load averages: 28.08 25.30 22.32",
+      "executable_sha256": {
+        "baseline": "c4fee8cc82cab4bc026a5aec54a6df8c899918612355e6cc3867ba3917943bd2",
+        "current": "02b1af1ff9feb0f44d39bb4a3f64e311b04fe8ebca963d4b3e14f05bb6dc5deb"
+      },
+      "runs": [
+        {
+          "version": "baseline",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 15.142666,
+            "p95_frame_ms": 11.415,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        },
+        {
+          "version": "current",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 12.797083,
+            "p95_frame_ms": 11.533375,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        },
+        {
+          "version": "current",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 15.082875000000001,
+            "p95_frame_ms": 12.896875,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        },
+        {
+          "version": "baseline",
+          "result": {
+            "commands": 120000,
+            "max_frame_ms": 15.522499999999999,
+            "p95_frame_ms": 13.686125,
+            "state": {
+              "ticks": 120
+            },
+            "ticks": 120
+          }
+        }
+      ],
+      "scope": "1000 entities, 120 ticks, 120000 script commands. Excludes GPU/rendering. Uncontrolled user/background host activity."
+    },
+    "instrumented_phase_comparison": {
+      "note": "Separate temporary profiling driver; not the headless CLI executable. Timing is observational, host load uncontrolled.",
+      "results": {
+        "baseline": {
+          "step": {
+            "median_ms": 0.056792,
+            "p95_ms": 0.11379099999999999
+          },
+          "motion_readback": {
+            "median_ms": 0.33141699999999996,
+            "p95_ms": 0.505458
+          },
+          "script_and_commands": {
+            "median_ms": 9.596333,
+            "p95_ms": 11.74175
+          },
+          "sync": {
+            "median_ms": 1.022375,
+            "p95_ms": 1.437334
+          }
+        },
+        "current": {
+          "step": {
+            "median_ms": 0.029375,
+            "p95_ms": 0.044042000000000005
+          },
+          "motion_readback": {
+            "median_ms": 0.425041,
+            "p95_ms": 0.646125
+          },
+          "script_and_commands": {
+            "median_ms": 9.56725,
+            "p95_ms": 10.932958
+          },
+          "sync": {
+            "median_ms": 1.1688749999999999,
+            "p95_ms": 1.517167
+          }
+        }
+      }
+    },
+    "final_numeric_guard": {
+      "executable_sha256": "6ccdbf53cb093ee24ab024ca494033f1c63f4b12ab883ba4e9d18c473d83e264",
+      "result": {
+        "commands": 120000,
+        "max_frame_ms": 15.015667,
+        "p95_frame_ms": 11.658583,
+        "state": {
+          "ticks": 120
+        },
+        "ticks": 120
+      }
+    }
+  },
+  "limitations": [
+    "Earlier comparison exceeded 16.667 ms for both versions. Later comparison passed that p95 budget. Neither establishes sustained whole-game frame time.",
+    "No GPU imported-model/material rendering or asset hot reload claimed.",
+    "Numerical overflow on later unconstrained simulation steps remains a separate runtime hardening concern."
+  ],
+  "gpu": {
+    "platform": "darwin",
+    "native_renderer_executed": true,
+    "png_transport_validated": true,
+    "hierarchy_matches_flattened": true,
+    "hierarchy_differs_from_initial": true,
+    "width": 320,
+    "height": 180,
+    "sha256": "913f7255a935a8e73b4851b32545370561833741cfe14c78122aabde291aab55",
+    "hierarchy_sha256": "3ab83135369a91e72b05a3ba0aa54637b3e13cc81c6b6a85725315240ea4ba75",
+    "engine": {
+      "adapter": "Apple M5 Pro",
+      "height": 180,
+      "output": "artifacts/runtime-scene-render-final/viewport.png",
+      "width": 320
+    },
+    "visual_review": false,
+    "native_window_composition_review": false
+  },
+  "validation": {
+    "workspace_release_tests": 108,
+    "workspace_clippy": "pass",
+    "generated_schema_sdk_bridge": "pass",
+    "tool_tests": 5
+  }
+}
