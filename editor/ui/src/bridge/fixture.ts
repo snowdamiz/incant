@@ -113,7 +113,26 @@ const SCHEMAS: Record<string, ComponentSchema> = {
       kind: { type: 'string', title: 'Kind', enum: ['directional', 'point', 'spot'] },
       color: { type: 'string', title: 'Color', format: 'color' },
       intensity: { type: 'number', title: 'Intensity', minimum: 0, 'x-incant-unit': 'lx' },
-      shadows: { type: 'boolean', title: 'Shadows' },
+      // Mirrors the native DirectionalLight.shadows field after bridge resolution:
+      // a nullable reference to { distance }, optional on the component.
+      shadows: {
+        type: 'object',
+        title: 'Shadows',
+        description: 'Cascaded shadow settings. Absent or null: this light casts no shadows.',
+        optional: true,
+        nullable: true,
+        properties: {
+          distance: {
+            type: 'number',
+            title: 'Distance',
+            description: 'View distance covered by the shadow cascades.',
+            minimum: 0.01,
+            maximum: 10000,
+            'x-incant-unit': 'm',
+            optional: false,
+          },
+        },
+      },
     },
   },
   'incant.Camera': {
@@ -224,7 +243,20 @@ const SAMPLE_SCENE: Spec = {
             {
               type: 'incant.Light',
               schemaVersion: 1,
-              value: { kind: 'directional', color: '#FFE9C7', intensity: 98000, shadows: true },
+              value: { kind: 'directional', color: '#FFE9C7', intensity: 98000, shadows: { distance: 120 } },
+            },
+          ],
+        },
+        {
+          name: 'Sky Fill',
+          kind: 'light',
+          components: [
+            transform([0, 30, 0]),
+            {
+              type: 'incant.Light',
+              schemaVersion: 1,
+              // Shadows omitted: an authored, valid "disabled" state.
+              value: { kind: 'directional', color: '#BFD4FF', intensity: 12000 },
             },
           ],
         },

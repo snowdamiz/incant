@@ -1944,6 +1944,30 @@ input.control.control__input[data-focus-visible] {
   font-variant-numeric: tabular-nums;
 }
 
+/*
+ * Optional value that is not authored (absent or null). Same 28 px footprint as
+ * a value box so rows stay aligned, but an outline instead of the filled well:
+ * it reads as "nothing here", not as an empty editable field, and stays calm
+ * (no warning colour; a missing *required* value still shows the dashed notice).
+ */
+.control--unset {
+  height: var(--control-height);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  background: transparent;
+}
+
+.control--unset .control__input {
+  color: var(--color-text-subtle);
+  font-size: var(--text-sm);
+}
+
+.control--unset:focus-within {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
 .control__unit {
   flex: none;
   color: var(--color-text-subtle);

@@ -4,6 +4,7 @@ use incant_doc::{Entity, Transform};
 use incant_render::Renderer;
 use serde_json::json;
 mod coverage;
+mod lookdev;
 mod normal_offset;
 mod queued;
 fn insert(f: &mut Fixture, e: Entity) -> String {
