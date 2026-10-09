@@ -1,0 +1,166 @@
+@import 'tailwindcss';
+
+/*
+ * Revision 2 type system. Latin-only variable files, bundled locally.
+ * Fraunces (soft axis) is the display voice; Inter carries reading text;
+ * JetBrains Mono appears only inside the product illustration.
+ */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-normal.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-italic.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+@theme {
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Page: neutral studio paper and graphite ink (revision 3: purple tint removed). */
+  --color-paper: #f4f3ef;
+  --color-paper-deep: #e9e7e1;
+  --color-ink: #15161a;
+  --color-ink-soft: #26282e;
+  --color-muted: #5b5e66;
+  --color-rule: rgb(21 22 26 / 0.14);
+
+  /* Brand violet is reserved for the wisp logo mark (header, footer, favicon). */
+  --color-wisp: #4b2bc7;
+  /* One page accent: the editor's periwinkle hue (235deg), darkened for 5.8:1 on paper. */
+  --color-accent: #4650c8;
+  --color-accent-soft: #a9b0ff; /* on charcoal; equals editor --color-accent-strong */
+
+  /* Editor illustration: mirrors references/previous-editor-tokens.css (cool graphite). */
+  --color-ed-bg: #0b0c0f; /* --color-bg-app */
+  --color-ed-panel: #131418; /* --color-bg-panel */
+  --color-ed-raised: #1a1c21; /* --color-bg-raised */
+  --color-ed-viewport: #0e0f12; /* --color-bg-viewport */
+  --color-ed-selected: #262b52; /* --color-bg-selected */
+  --color-ed-line: #22252b; /* --color-border */
+  --color-ed-control: #676e7b; /* --color-border-control */
+  --color-ed-text: #ececf1; /* --color-text */
+  --color-ed-muted: #a9aeb9; /* --color-text-muted */
+  --color-ed-accent: #8c95ff; /* --color-accent */
+  --color-ed-agent: #d892f5; /* --color-origin-agent */
+  --color-ed-green: #5dd39a; /* --color-success */
+  --color-ed-amber: #f0bd55; /* --color-warning */
+  --color-ed-red: #ff7a70; /* --color-danger */
+
+  --animate-blink: blink 6s ease-in-out infinite;
+  --animate-march: march 1.2s linear infinite;
+  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-flow: flow 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+
+  @keyframes blink {
+    0%,
+    93%,
+    100% {
+      transform: scaleY(1);
+    }
+    96% {
+      transform: scaleY(0.12);
+    }
+  }
+  @keyframes march {
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
+  @keyframes flow {
+    to {
+      left: 100%;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* Display setting for Fraunces: soft terminals echo the wisp's curves. */
+@utility font-display-soft {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 100;
+  font-optical-sizing: auto;
+}
+
+@utility text-balance-safe {
+  text-wrap: balance;
+}
+
+@utility text-pretty-safe {
+  text-wrap: pretty;
+}

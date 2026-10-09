@@ -28,10 +28,14 @@ focused. TypeScript uses strict mode. Unknown capabilities fail explicitly.
 Document limitations and measured results; mock tests never count as live gates.
 
 Every commit trailer identifies its author: Built-by: astra or Built-by: claude.
-PRs are agent-authored and director-merged. Human-only actions include phase gate
-approval, signing credentials, store/developer accounts, payments, legal filings,
-age ratings and staffing. Implement and verify reviewable work before requesting
-these actions. Never publish or sign using fabricated or borrowed credentials.
+PRs are agent-authored and agent-merged into main once the scoped work is complete,
+reviewed, and its required checks pass, per the director's 2026-10-09 authorization.
+Do not request separate merge approval. A merge does not approve a phase gate or
+claim that deferred requirements are complete. Human-only actions include phase
+gate approval, signing credentials, store/developer accounts, payments, legal
+filings, age ratings and staffing. Implement and verify reviewable work before
+requesting these actions. Never publish or sign using fabricated or borrowed
+credentials.
 
 # Claude workflow
 

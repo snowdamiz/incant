@@ -5,7 +5,10 @@ authorized starting Phase 1 while the remaining Phase 0 items stay open, then
 instructed agents to continue sensible implementation without repeated permission
 questions. This authorizes engineering progress; it does not mark missing evidence
 complete. The full Engine 1.0 and Driftwake objectives remain open. The director owns
-phase approval and PR merges. Current implementation: [PR #1](https://github.com/snowdamiz/incant/pull/1).
+phase approval. On 2026-10-09 the director authorized agents to merge completed PRs
+after review and passing checks. Foundation [PR #1](https://github.com/snowdamiz/incant/pull/1)
+merged into main after all twelve checks passed on 575cc35; this does not approve
+the Phase 0 gate.
 The separate landing page is [PR #2](https://github.com/snowdamiz/incant/pull/2).
 
 ## Deliverables and evidence
@@ -55,17 +58,17 @@ browser fixture or a compiled app is not recorded as proof of those native check
 | Engine license/business model | No license or paid-cloud business decision has been made on the director's behalf |
 | Game name and engine-name clearance/reservations | Driftwake remains a placeholder. Incant is the chosen engine name; trademark/domain/package reservations are not represented as complete |
 | Codex execution mode | Phase 0 work has used local Codex/CLI, local Claude ACP and hosted CI; no cloud Codex deployment is claimed |
-| Approval mode by risk | Reversible local implementation/tests proceed autonomously. Claude ACP bypassPermissions was explicitly authorized. PR merges, phase approval, signing, purchases and legal/staffing actions remain director-owned |
+| Approval mode by risk | Reversible local implementation/tests proceed autonomously. Claude ACP bypassPermissions was explicitly authorized. Agents merge completed PRs after review and passing checks under the 2026-10-09 authorization. Phase approval, signing, purchases and legal/staffing actions remain director-owned |
 
 ## Order for remaining work
 
-1. Review the recorded editor/source CI results for `d87436f`; further landing-page
-   content and design work is underway through Claude ACP.
+1. Continue Phase 1 implementation and merge completed PRs after review and passing
+   checks. Landing-page design changes remain routed through Claude ACP.
 2. Complete live revocation verification with a suitable disposable connection;
    do not revoke the director's working account just to satisfy a test.
 3. Resume deferred native checks only after the director permits computer use.
-4. The director reviews and merges the foundation PR when ready. The scheduled
-   workflow must run from the default branch before nightly results can be recorded.
+4. The foundation is now on main. Record scheduled workflow results from the default
+   branch as they become available; a merge or a manual run does not prove nightly history.
 5. Record the human-owned signing, staffing and outstanding strategic decisions.
    Request phase approval only when its evidence is ready; do not self-approve it.
 
