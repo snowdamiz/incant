@@ -205,7 +205,7 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
         message: read.viewport_error, entity: null, component: null, path: null }] : []),
       ...(read.source_diagnostics ?? []).map((issue) => ({
         id: `asset-source:${issue.asset_id}`, severity: 'error' as const,
-        message: `${issue.source}: ${issue.message}`, entity: null, component: null, path: null,
+        message: issue.message, entity: null, component: null, path: issue.source,
       })),
     ],
     history: {
