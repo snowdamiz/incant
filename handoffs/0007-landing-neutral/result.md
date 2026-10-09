@@ -6,6 +6,23 @@ Complete in this worktree. It is committed with `Built-by: claude` for Astra to 
 the existing landing PR. Nothing was pushed, published, deployed or merged, and no phase gate is
 claimed or approved.
 
+## Director restriction: screen capture stopped
+
+On 2026-10-08, after the design commit `6090702`, the director said: "Stop using computer use
+for now or tell cloude to if its using it. Amazon is blocking prime video output due to
+screnecapture".
+
+- **Acknowledged.** Effective immediately, this session does not use computer-use tools,
+  browser or native automation, screenshots, screen recording or capture helpers.
+- **No computer-use tools were used at any point in this packet.** The earlier screenshots came
+  from headless Chrome driven by Playwright. Those runs, and the headless violet pixel count,
+  all finished before the restriction arrived. They will not be repeated.
+- **Further visual verification is deferred at the director's request** until the director
+  explicitly lifts the restriction. That covers new renders, visual review and re-running the
+  Playwright suite, which takes screenshots.
+- **Nothing else changed.** The design and existing evidence stay as committed, and no tests ran
+  for this notification. The existing images remain on disk.
+
 ## Model
 
 Claude Opus 5.5 (`claude-opus-5-5`), running in Claude Code. No other model and no

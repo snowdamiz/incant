@@ -1,3 +1,19 @@
+## Latest director restriction: stop computer use and screen capture
+
+The director has just said: “Stop using computer use for now or tell cloude to if
+its using it. Amazon is blocking prime video output due to screnecapture”.
+
+Effective immediately, do not use computer-use tools, native or browser automation,
+screenshots, screen recording, screen sharing, or capture helpers. Do not launch
+any new browser or native visual review. This overrides every capture/review
+request below. Continue only code/file work and nonvisual terminal checks until
+the director explicitly lifts this restriction. Existing images can remain on disk.
+
+This follow-up is notification only: acknowledge receipt, record that further
+visual verification is deferred at the director’s request in result.md, and end
+the turn. Do not restart or change the completed design. Do not run new tests or
+capture any pixels for this notification. Preserve all existing changes.
+
 # Align landing-page colors with the director’s preferred editor palette
 
 ## Latest director instruction
