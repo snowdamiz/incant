@@ -144,6 +144,44 @@ Astra's integrated run already passed them.
 - Should optional scalars read "Not set" or show an engine default once
   schemas carry defaults? This carries over from the initial round.
 
+## Polish round: native Assets root label
+
+Verdict: **accepted.** The project-root typography fix from `d2f3a02`, which
+was integrated as `81d1fa0`, renders correctly natively. This closes my native
+request from the final round.
+
+I reviewed both CUA captures in the ignored `artifacts/shadow-native-polish/` folder:
+- **Wide capture.** At 1440x900, "Project folder" uses the same sans-serif UI
+  face and subtle colour as the rest of the list. It no longer reads like code.
+  The folder icon, label and the Environment and Quad rows keep their alignment
+  and even rhythm.
+- **Short capture.** The second capture shows the same result with no
+  truncation, overlap or row-height change. The AX tree still names the group
+  "Folder Project folder".
+- **Layout unchanged.** Assets stays a left workspace beside Hierarchy, the
+  Inspector shows the asset empty state, and the bottom dock holds only Problems,
+  Console and History. Problems reports zero errors and warnings.
+
+**Evidence discrepancy.** The packet says the minimum capture is Retina
+2002x1302. The file `assets-minimum.jpg` actually measures 1720x669. Its hash
+matches the dimensions file, which also records 1720x669. The image shows a
+short, wide window with macOS window controls, on what appears to be an external
+display. The earlier native README said a 1720x669 capture must not be called the
+minimum-size check. I therefore do not count this image as a 1000x650
+minimum-window verification.
+
+I accept the fix anyway, for three reasons:
+- The change only swaps the label's font family to the narrower UI face.
+- The label already ends with an ellipsis when space is short.
+- The true-minimum capture from the final round, `assets-separated-minimum.jpg`
+  at 2002x1302, showed this column with room to spare at the same 245-point
+  width.
+
+If a strict record is wanted, Astra can recapture this Assets view at the true
+minimum size.
+
+This round changed no code and reran no tests. The only file changed is this report.
+
 ---
 
 # Initial round (history)
