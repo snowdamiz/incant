@@ -160,6 +160,15 @@ Design decisions:
 - **Token refresh and revocation** are handled by the engine. Disconnecting a provider deletes local credentials and, for OAuth, calls the revoke endpoint.
 - **Cost transparency.** Every agent turn shows tokens used and estimated cost, with a per-project budget cap the user sets. The agent is told its remaining budget and plans accordingly.
 
+Director decision, 2026-10-08: repeated macOS Keychain password prompts during
+development are unacceptable. For the current macOS implementation, store Incant's
+credentials in atomic owner-only files in its stable application-support directory
+(0700 directory, 0600 files), surviving relaunches and changed development builds.
+This replaces the macOS Keychain choice above; it relies on OS file permissions,
+without additional encryption. Windows/Linux continue using their OS credential
+stores. Do not read or migrate legacy Keychain entries automatically. Evidence and
+scope are in docs/spikes/auth-login-repair.md.
+
 ### 3.2 Engine account (our login)
 
 Separate from the OpenAI connection. The engine account provides:

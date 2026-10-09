@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-08",
+  "source_commit": "1045f4f2fb84ab76ae4b2b7f7e11901cc269534e",
+  "workflow": "https://github.com/snowdamiz/incant/actions/runs/37875040486",
+  "job": "https://github.com/snowdamiz/incant/actions/runs/37875040486/job/113641566563",
+  "conclusion": "success",
+  "report": {
+    "platform": "android",
+    "execution": "hosted-emulator",
+    "abi": "x86_64",
+    "api_level": "35",
+    "apk_sha256": "732fc2760c13a71099b947c5bc9fa45695fd54d365db5d3b72ec39d135df735a",
+    "activity_passed": true,
+    "instrumentation_passed": true,
+    "native_document_and_120_tick_probe_passed": true,
+    "physical_device": false,
+    "visual_review": false
+  },
+  "scope": "APK installed and launched in a disposable hosted x86_64 Android 35 emulator. The native probe passed through both Activity startup and Android instrumentation. Not physical-device, frame-time or pixel-review evidence."
+}

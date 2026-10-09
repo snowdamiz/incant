@@ -31,15 +31,18 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
   gate ledger and GitHub workflow source.
 
 See [written evidence and limitations](docs/spikes/phase-0.md). Forty-eight Rust
-behavior tests, 180 UI/bridge tests and five Python tool tests pass after integration. The thousand-entity script benchmark meets the local
+behavior tests, 223 UI/bridge tests and five Python tool tests pass after integration. The thousand-entity script benchmark meets the local
 frame budget within its documented workload.
 
 ## Active work
 
-- Claude completed the macOS native-window review, including traffic-light
-  alignment, rounded GPU viewport, resizing and screenshots. The connected-account
-  UI is integrated. Claude is now redesigning the editor to match the landing
-  page’s connected panels, at the director’s request (handoff 0006).
+- Claude’s connected-panel redesign and neutral charcoal palette are integrated,
+  including the titlebar logo spacing and safer account-dialog focus. The landing
+  page has the matching palette in draft PR #2. See
+  [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
+  routes by focus; automated tests pass, but its final native interaction check
+  remains pending. **Computer use, browser automation and screen capture are
+  stopped at the director’s request** until explicitly permitted again.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are
@@ -60,17 +63,18 @@ frame budget within its documented workload.
 - Draft PR: https://github.com/snowdamiz/incant/pull/1. All six platform jobs
   [passed on 640fbdd](docs/spikes/evidence/six-platform-2026-10-08.json), including
   Android APK packaging. Both arm64/x86_64 native libraries, manifest and DEX are
-  present in the downloaded APK. A hosted Android emulator execution check is
-  now implemented. Its first run exposed mismatched AVD lookup directories; an
-  explicit shared AVD path is configured for the rerun. Nightly history remains a distinct
-  requirement. Current source checks are running again.
+  present in the downloaded APK. [Android emulator execution also passed](docs/spikes/evidence/android-emulator-2026-10-08.json):
+  both activity launch and native instrumentation ran the document/120-tick probe.
+  Nightly history remains a distinct requirement. All source, desktop editor and
+  credential checks also passed on 1045f4f. The newly integrated UI/menu revision
+  has passed local checks and awaits its own remote results.
 
 ## External prerequisites still required
 
 - Private repository created at https://github.com/snowdamiz/incant. The bootstrap
   is on main; implementation is in draft PR #1 on impl/phase0-foundation.
   The director remains responsible for merging.
-- Android execution, physical-device
+- Physical-device
   coverage, self-hosted graphics/device runners, and nightly artifact history.
 - Apple/Windows distribution signing, store/developer accounts, staffing and the
   director's phase gate approvals. These are human-only under PLAN.md.

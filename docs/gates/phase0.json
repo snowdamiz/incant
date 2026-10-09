@@ -41,7 +41,7 @@
     "claude_acp": {
       "passed": true,
       "evidence": "handoffs/0001-editor-foundation/result.md",
-      "integration": "native review and account UI integrated; 180 UI/bridge tests pass; macOS native review recorded under spike 1"
+      "integration": "Connected neutral editor and safe account-dialog focus integrated; 223 UI/bridge tests pass. Final native menu and titlebar checks deferred under the director\u2019s computer-use restriction; see docs/spikes/connected-editor.md."
     }
   },
   "nightly_runnable_targets": {
@@ -54,5 +54,6 @@
   },
   "signing_certificates_obtained": false,
   "year_one_staffing_confirmed": false,
-  "platform_build_evidence": "docs/spikes/evidence/six-platform-2026-10-08.json"
+  "platform_build_evidence": "docs/spikes/evidence/six-platform-2026-10-08.json",
+  "android_execution_evidence": "docs/spikes/evidence/android-emulator-2026-10-08.json"
 }

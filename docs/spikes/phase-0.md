@@ -143,7 +143,8 @@ the handoff worktree. The editor foundation, macOS native review and account UI
 handoffs subsequently completed through ACP with returned result packets, reviewed
 screenshots and integration. [Handoff 0001](../../handoffs/0001-editor-foundation/result.md)
 records the first complete round trip; handoffs 0002 and 0003 contain the native and
-account follow-ups. The current UI/bridge suite passes 180 tests.
+account follow-ups. The latest integrated UI/bridge suite passes 223 tests; see the
+[connected-editor follow-up](connected-editor.md) for its exact verification scope.
 
 ## Six-target runnable artifacts — partial evidence
 
@@ -154,7 +155,7 @@ account follow-ups. The current UI/bridge suite passes 180 tests.
 | iOS arm64 simulator | Passed locally | Scene lifecycle, C ABI and ECS assertions passed | Ad-hoc simulator .app only |
 | Windows | Hosted CI passed | Document and 120-tick simulation passed | Hosted unsigned executable |
 | Linux | Hosted CI passed | Document and 120-tick simulation passed | Hosted executable |
-| Android | Hosted NDK/Gradle build passed | Device execution pending | Debug APK verified to contain both native ABIs, manifest and DEX |
+| Android | Hosted NDK/Gradle build passed | Android 35 x86_64 emulator activity and instrumentation passed | Debug APK contains both native ABIs; no physical-device result |
 
 The iOS host was corrected to adopt the scene lifecycle required by the installed
 SDK before recording an execution pass. A compiled but failed launch was not counted.
@@ -164,8 +165,12 @@ library. No device signing certificate or platform release has been produced.
 GitHub workflows exist and a private remote was created at
 https://github.com/snowdamiz/incant. The six-platform workflow passed on 640fbdd;
 [recorded results](evidence/six-platform-2026-10-08.json) include the downloaded
-Android APK hash and contents check. Prior PR checks passed and current source
-checks are rerunning. Hosted probes bootstrap validation; the plan's
+Android APK hash and contents check. The subsequent [emulator run](evidence/android-emulator-2026-10-08.json)
+passed activity launch and native instrumentation, including document roundtrip and
+120 simulation ticks. An explicit shared AVD directory fixed the initial emulator
+lookup failure. Source, desktop editor, six-target and credential workflows all
+passed on 1045f4f. The subsequent UI/menu integration has passed local checks;
+its remote checks are tracked separately. Hosted probes bootstrap validation; the plan's
 self-hosted graphics/device runners and nightly artifact
 history are not provisioned. Signing certificates and Year 1 staffing are director
 prerequisites. Phase 0 is not ready for approval.
