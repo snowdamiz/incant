@@ -16,6 +16,11 @@ export namespace CommandSchema {
 }
 export type Command = CommandSchema.Root;
 
+export namespace DirectionalLightSchema {
+  export type Root = { "color": [number, number, number]; "intensity": number };
+}
+export type DirectionalLight = DirectionalLightSchema.Root;
+
 export namespace EnvironmentLightSchema {
   export type Root = { "intensity": number; "rotation_degrees": number; "texture": string };
 }
@@ -25,6 +30,11 @@ export namespace MeshRendererSchema {
   export type Root = { "cast_shadows": boolean; "materials": Array<string>; "mesh": string };
 }
 export type MeshRenderer = MeshRendererSchema.Root;
+
+export namespace PointLightSchema {
+  export type Root = { "color": [number, number, number]; "intensity": number; "range": number };
+}
+export type PointLight = PointLightSchema.Root;
 
 export namespace ProjectSchema {
   export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
@@ -44,6 +54,11 @@ export namespace ScriptSchema {
   export type Root = { "props": { [key: string]: unknown }; "source": string };
 }
 export type Script = ScriptSchema.Root;
+
+export namespace SpotLightSchema {
+  export type Root = { "color": [number, number, number]; "inner_degrees": number; "intensity": number; "outer_degrees": number; "range": number };
+}
+export type SpotLight = SpotLightSchema.Root;
 
 export namespace TransformSchema {
   export type Root = { "rotation": [number, number, number, number]; "scale": [number, number, number]; "translation": [number, number, number] };

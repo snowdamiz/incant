@@ -1,5 +1,6 @@
 //! Real GPU checks, explicitly run by the desktop renderer workflow.
 mod environments;
+mod lights;
 mod materials;
 mod support;
 use incant_render::Renderer;

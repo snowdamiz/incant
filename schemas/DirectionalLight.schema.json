@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "order": [
+    "color",
+    "intensity"
+  ],
+  "properties": {
+    "color": {
+      "description": "Linear RGB multiplier. Light travels along transformed local -Z.",
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "intensity": {
+      "description": "Illuminance in lux.",
+      "format": "double",
+      "maximum": 1000000,
+      "minimum": 0,
+      "type": "number"
+    }
+  },
+  "required": [
+    "color",
+    "intensity"
+  ],
+  "title": "DirectionalLight",
+  "type": "object"
+}
