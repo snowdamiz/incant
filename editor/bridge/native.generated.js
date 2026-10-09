@@ -87,7 +87,7 @@ function snapshotFromEngine(read) {
             ]);
         }
         for (const entity of Object.values(scene.entities)){
-            const kind = "Camera" in entity.components ? "camera" : "MeshRenderer" in entity.components ? "mesh" : "Script" in entity.components ? "script" : "group";
+            const kind = "Camera" in entity.components ? "camera" : "MeshRenderer" in entity.components ? "mesh" : "Script" in entity.components ? "script" : "entity";
             nodes[entity.id] = {
                 id: id(entity.id),
                 name: entity.name,

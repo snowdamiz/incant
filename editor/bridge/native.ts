@@ -128,7 +128,7 @@ export function snapshotFromEngine(read: EngineRead): BridgeSnapshot {
             ? "mesh"
             : "Script" in entity.components
               ? "script"
-              : "group";
+              : "entity";
       nodes[entity.id] = {
         id: id(entity.id),
         name: entity.name,

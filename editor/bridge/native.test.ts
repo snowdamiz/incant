@@ -58,6 +58,7 @@ describe("native bridge", () => {
     expect(value.hierarchy.value.roots).toEqual([scene]);
     expect(value.hierarchy.value.nodes[entity]?.parent).toBe(scene);
     expect(value.entities[entity]?.components[0]?.type).toBe("Transform");
+    expect(value.entities[entity]?.kind).toBe("entity");
     expect(value.agent.status).toBe("unavailable");
   });
   it("sends a rename and observed revision through IPC, then uses only the returned engine state", async () => {
