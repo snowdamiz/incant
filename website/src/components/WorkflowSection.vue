@@ -21,29 +21,44 @@ import { platformMarks } from '../icons/platforms'
 
       <!--
         Pipeline: each icon carries its own title and one line.
-        Below xl it is a vertical rail with the text beside each node; from xl a horizontal wire,
-        where six columns are wide enough (about 190 px) for a sentence under each node.
+        Phones: a vertical rail with the text beside each node (smaller tiles below 640 px).
+        768 to 1279 px: three columns in two rows, with a connector between neighbours in a row.
+        From xl: one horizontal wire across six columns (about 190 px each).
       -->
       <div class="relative mt-14 sm:mt-20">
         <span class="absolute top-8 right-[calc(100%/12)] left-[calc(100%/12)] hidden h-px overflow-hidden bg-ink/20 xl:block" aria-hidden="true">
           <span class="absolute inset-y-0 -left-10 w-10 bg-gradient-to-r from-transparent via-accent to-transparent motion-safe:animate-flow" />
         </span>
-        <ol class="relative grid max-w-2xl gap-1 xl:max-w-none xl:grid-cols-6 xl:gap-0">
-          <li v-for="(s, i) in workflowSteps" :key="s.id" class="relative flex items-start gap-5 py-3 xl:flex-col xl:items-center xl:gap-0 xl:px-3 xl:py-0 xl:text-center">
+        <ol class="relative grid max-w-2xl gap-1 md:max-w-none md:grid-cols-3 md:gap-x-0 md:gap-y-14 xl:grid-cols-6 xl:gap-y-0">
+          <li
+            v-for="(s, i) in workflowSteps"
+            :key="s.id"
+            class="relative flex items-start gap-4 py-3 sm:gap-5 md:flex-col md:items-center md:gap-0 md:px-4 md:py-0 md:text-center xl:px-3"
+          >
             <!-- Rail segment to the next node: centre to centre, whatever the text height (li py-3 + gap-1). -->
-            <span v-if="i < workflowSteps.length - 1" class="absolute top-11 -bottom-12 left-8 w-px bg-ink/20 xl:hidden" aria-hidden="true" />
             <span
-              class="relative grid size-16 shrink-0 place-items-center rounded-2xl bg-ed-panel shadow-[0_12px_24px_-16px_rgb(21_22_26/0.6)] ring-1"
+              v-if="i < workflowSteps.length - 1"
+              class="absolute top-9 -bottom-10 left-6 w-px bg-ink/20 sm:top-11 sm:-bottom-12 sm:left-8 md:hidden"
+              aria-hidden="true"
+            />
+            <!-- Row connector (md to xl): from this node's centre to its right-hand neighbour's. -->
+            <span
+              v-if="i % 3 !== 2"
+              class="absolute top-8 left-1/2 hidden h-px w-full bg-ink/20 md:block xl:hidden"
+              aria-hidden="true"
+            />
+            <span
+              class="relative grid size-12 shrink-0 place-items-center rounded-xl bg-ed-panel shadow-[0_12px_24px_-16px_rgb(21_22_26/0.6)] ring-1 sm:size-16 sm:rounded-2xl"
               :class="s.id === 'ship' ? 'text-accent-soft ring-accent' : 'text-ed-text ring-ink/10'"
               aria-hidden="true"
             >
-              <svg viewBox="0 0 24 24" class="size-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" class="size-6 sm:size-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <component :is="el.tag" v-for="(el, j) in pipelineGlyphs[s.id]" :key="j" v-bind="el.attrs" />
               </svg>
             </span>
-            <div class="min-w-0 pt-2 xl:pt-0">
-              <h3 class="text-[17px] font-semibold tracking-[-0.01em] xl:mt-5">{{ s.title }}</h3>
-              <p class="text-pretty-safe mt-1.5 max-w-sm text-[15px] leading-relaxed text-muted xl:mx-auto xl:max-w-[12.5rem]">
+            <div class="min-w-0 pt-1 sm:pt-2 md:pt-0">
+              <h3 class="text-[17px] font-semibold tracking-[-0.01em] md:mt-5">{{ s.title }}</h3>
+              <p class="text-pretty-safe mt-1.5 max-w-sm text-[15px] leading-relaxed text-muted md:mx-auto md:max-w-[15rem] xl:max-w-[12.5rem]">
                 {{ s.body }}
               </p>
             </div>
@@ -55,9 +70,12 @@ import { platformMarks } from '../icons/platforms'
       <div class="mt-14 border-t border-rule pt-12 sm:mt-16">
         <ul class="grid grid-cols-3 gap-y-10 sm:grid-cols-6" aria-label="Export platforms">
           <li v-for="mark in platformMarks" :key="mark.id" class="flex flex-col items-center">
-            <svg :viewBox="mark.viewBox" class="h-10 w-auto text-ink sm:h-11 lg:h-12" aria-hidden="true" focusable="false">
-              <path fill="currentColor" :d="mark.path" />
-            </svg>
+            <!-- A fixed mark box; each mark is centred on its ink at its optical height. -->
+            <span class="flex h-10 items-center sm:h-11 lg:h-12" aria-hidden="true">
+              <svg :viewBox="mark.viewBox" :style="{ height: `${mark.optical * 100}%` }" class="w-auto text-ink" focusable="false">
+                <path fill="currentColor" :d="mark.path" />
+              </svg>
+            </span>
             <span class="mt-3 text-[13px] text-muted">{{ mark.name }}</span>
           </li>
         </ul>

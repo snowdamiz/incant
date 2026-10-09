@@ -161,6 +161,27 @@ test.describe('landing page', () => {
     await expect(preview).not.toHaveAttribute('aria-label', before ?? '')
   })
 
+  test('workflow steps span the content width and keep their explanations visible', async ({ page }) => {
+    for (const width of [320, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 })
+      await settle(page)
+      const section = page.locator('#workflow')
+      const steps = section.locator('ol > li')
+      await expect(steps).toHaveCount(6)
+      for (const step of await steps.all()) {
+        await expect(step.locator('h3')).toBeVisible()
+        await expect(step.locator('p')).toBeVisible()
+      }
+      // From 768 px the steps are laid out across the row; no half-empty band beside a rail.
+      if (width >= 768) {
+        const content = await section.locator('ol').evaluate((ol) => ol.parentElement!.getBoundingClientRect().width)
+        const right = await steps.evaluateAll((els) => Math.max(...els.map((e) => e.getBoundingClientRect().right)))
+        const left = await steps.evaluateAll((els) => Math.min(...els.map((e) => e.getBoundingClientRect().left)))
+        expect(right - left).toBeGreaterThan(content * 0.95)
+      }
+    }
+  })
+
   test('FAQ disclosures toggle', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await settle(page)
