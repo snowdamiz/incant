@@ -147,7 +147,7 @@ test.describe('landing page', () => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await settle(page)
     const stage = page.locator('#create')
-    const preview = stage.locator('[role="img"]')
+    const preview = stage.getByRole('img', { name: /^Illustration of the Incant geometry graph editor/ })
     const nodes = stage.getByRole('button')
     const before = await preview.getAttribute('aria-label')
     expect(await nodes.count()).toBeGreaterThan(1)
