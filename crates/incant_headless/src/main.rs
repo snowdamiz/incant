@@ -44,6 +44,11 @@ enum Cli {
         model: String,
         #[arg(long, default_value_t = 128000)]
         max_tokens: u64,
+        #[arg(long, default_value_t = 25000)]
+        max_output_tokens: u64,
+        /// Run one existing case for diagnosis; cannot pass the twenty-task gate.
+        #[arg(long)]
+        case: Option<String>,
         /// Use only a dedicated evaluation key from the environment, never OS accounts.
         #[arg(long)]
         ci: bool,
@@ -92,6 +97,8 @@ enum Cli {
         model: String,
         #[arg(long, default_value_t = 64000)]
         max_tokens: u64,
+        #[arg(long, default_value_t = 25000)]
+        max_output_tokens: u64,
         #[arg(long)]
         journal: Option<PathBuf>,
     },
@@ -386,14 +393,25 @@ fn main() -> Result<()> {
             output,
             model,
             max_tokens,
+            max_output_tokens,
+            case,
             ci,
-        } => eval::run(&suite, &output, model, max_tokens, ci)?,
+        } => eval::run(
+            &suite,
+            &output,
+            model,
+            max_tokens,
+            max_output_tokens,
+            ci,
+            case.as_deref(),
+        )?,
         Cli::Auth { action } => auth_command(action)?,
         Cli::Agent {
             project,
             prompt,
             model,
             max_tokens,
+            max_output_tokens,
             journal,
         } => {
             let mut provider = provider(model)?;
@@ -407,6 +425,7 @@ fn main() -> Result<()> {
                 },
                 approval: ApprovalMode::Destructive,
                 max_steps: 30,
+                max_output_tokens,
             };
             let mut viewport =
                 GpuPerception(incant_render::Renderer::headless().map_err(|e| e.to_string())?);

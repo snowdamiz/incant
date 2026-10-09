@@ -1,0 +1,61 @@
+{
+  "cases": [
+    {
+      "case": "12-ten-step",
+      "elapsed_ms": 24278,
+      "error": null,
+      "exact_state": true,
+      "passed": true,
+      "provenance": true,
+      "report": {
+        "steps": 5,
+        "tool_calls": [
+          {
+            "name": "doc_query",
+            "succeeded": true
+          },
+          {
+            "name": "doc_schema",
+            "succeeded": true
+          },
+          {
+            "name": "doc_patch",
+            "succeeded": true
+          },
+          {
+            "name": "view_screenshot",
+            "succeeded": true
+          }
+        ],
+        "transaction_ids": [
+          "01M4F5N8TSDV8E8BKYS61Q51EW"
+        ],
+        "usage": {
+          "input_tokens": 6671,
+          "output_tokens": 658
+        }
+      },
+      "three_tools": true,
+      "transaction_limit": true,
+      "undo": true,
+      "used_tokens": 7329
+    }
+  ],
+  "completed": 1,
+  "gate_passed": false,
+  "live_inference": true,
+  "max_output_tokens": 25000,
+  "model": "gpt-6-astra",
+  "passed": 1,
+  "required": 1,
+  "selected_case": "12-ten-step",
+  "version": 1,
+  "date": "2026-10-08",
+  "scope": "Single-case diagnostic follow-up; original full-suite score remains 19/20",
+  "executable_sha256": "6ee8060cf832fe86d9208179df9e5a41a2aab902cd3c5fa47bfc35a8dfc1a043",
+  "suite_sha256": "12ff67964123aeadf2b41b125aa74f8a62f6fbd702e3c7245331e035270512ca",
+  "limits": [
+    "Original incomplete-response cause was not retained; output-budget exhaustion is plausible, not proven",
+    "A single-case pass does not change the original evaluation score or approve Phase 0"
+  ]
+}

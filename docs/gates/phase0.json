@@ -25,9 +25,8 @@
       "total": 20,
       "successful": 19,
       "evidence": "docs/spikes/evidence/live-agent-2026-10-08.json",
-      "remaining": [
-        "Investigate incomplete response on the ten-step case; exact state and undo passed"
-      ]
+      "remaining": [],
+      "ten_step_followup": "docs/spikes/evidence/ten-step-followup-2026-10-08.json"
     },
     "authentication": {
       "passed": false,

@@ -18,6 +18,11 @@ use thiserror::Error;
 pub enum AgentError {
     #[error("provider: {0}")]
     Provider(String),
+    #[error("provider: {reason}")]
+    Response {
+        reason: &'static str,
+        usage: Option<Usage>,
+    },
     #[error("tool: {0}")]
     Tool(String),
     #[error("session budget exhausted")]
@@ -186,6 +191,8 @@ pub struct Agent {
     pub budget: Budget,
     pub approval: ApprovalMode,
     pub max_steps: usize,
+    /// Includes reasoning and visible output; still bounded by the session budget.
+    pub max_output_tokens: u64,
 }
 impl Agent {
     #[allow(clippy::too_many_arguments)]
@@ -221,10 +228,25 @@ impl Agent {
                 + serde_json::to_vec(&tools).unwrap().len()
                 + 4096) as u64;
             let available = self.budget.remaining().saturating_sub(reserve);
-            if available < 64 {
+            let max_output = available.min(self.max_output_tokens);
+            if max_output < 64 {
                 return Err(AgentError::Budget);
             }
-            let completion = provider.complete(&input, &tools, available.min(4096), on_text)?;
+            let completion = match provider.complete(&input, &tools, max_output, on_text) {
+                Ok(completion) => completion,
+                Err(error) => {
+                    // A failed/incomplete turn may still consume tokens. Never
+                    // execute its partial tool calls or silently make it free.
+                    let spent = match &error {
+                        AgentError::Response {
+                            usage: Some(usage), ..
+                        } => usage.input_tokens.saturating_add(usage.output_tokens),
+                        _ => reserve.saturating_add(max_output),
+                    };
+                    self.budget.used_tokens = self.budget.used_tokens.saturating_add(spent);
+                    return Err(error);
+                }
+            };
             let spent = completion
                 .usage
                 .input_tokens

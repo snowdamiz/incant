@@ -100,6 +100,11 @@ its journal. The evaluation automatically edits twenty disposable fixtures and
 makes billable/provider-plan requests with a per-case token cap. It checks exact
 final state, successful query/patch/screenshot calls, provenance and undo. Mock
 tests and `eval-check` never count toward the fourteen-of-twenty live gate.
+`--max-output-tokens` defaults to 25,000 per response, including reasoning, and is
+clamped to the remaining session budget. Incomplete turns never execute partial
+tool calls. Their reported usage is charged; missing usage reserves the request's
+conservative bound. `eval --case 12-ten-step` runs only that existing case for
+diagnosis and cannot pass the full-suite gate.
 
 ## Verification and platform probes
 

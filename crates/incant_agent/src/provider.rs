@@ -173,9 +173,38 @@ pub fn read_stream(
                     });
                 }
                 "response.failed" | "response.incomplete" | "error" => {
-                    return Err(AgentError::Provider(
-                        "provider reported a failed or incomplete response".into(),
-                    ));
+                    let response = &event["response"];
+                    // Only emit known, static diagnostics. Provider error text
+                    // may echo project contents or other sensitive inputs.
+                    let reason = match event["type"].as_str() {
+                        Some("response.incomplete") => {
+                            match response["incomplete_details"]["reason"].as_str() {
+                                Some("max_output_tokens") => {
+                                    "response reached its output-token limit (including reasoning); increase --max-output-tokens within the session budget"
+                                }
+                                Some("content_filter") => {
+                                    "response was stopped by the content filter"
+                                }
+                                _ => "provider returned an incomplete response",
+                            }
+                        }
+                        _ => match response["error"]["code"]
+                            .as_str()
+                            .or(event["code"].as_str())
+                        {
+                            Some("server_error") => "provider reported a server error",
+                            Some("rate_limit_exceeded") => "provider rate limit exceeded",
+                            _ => "provider reported a failed response",
+                        },
+                    };
+                    let usage = response["usage"]["input_tokens"]
+                        .as_u64()
+                        .zip(response["usage"]["output_tokens"].as_u64())
+                        .map(|(input_tokens, output_tokens)| Usage {
+                            input_tokens,
+                            output_tokens,
+                        });
+                    return Err(AgentError::Response { reason, usage });
                 }
                 _ => {}
             }

@@ -33,6 +33,7 @@ fn agent() -> Agent {
         },
         approval: ApprovalMode::Destructive,
         max_steps: 3,
+        max_output_tokens: 25000,
     }
 }
 fn completion(output: Vec<Value>) -> Completion {
@@ -203,4 +204,82 @@ fn direct_route_completed_items_are_retained_until_terminal_success() {
         )
         .is_err()
     );
+}
+
+struct StreamFixture {
+    events: String,
+    requested_output: u64,
+}
+impl Provider for StreamFixture {
+    fn model(&self) -> &str {
+        "fixture-model"
+    }
+    fn complete(
+        &mut self,
+        _: &[Value],
+        _: &[Value],
+        max_output_tokens: u64,
+        _: &mut dyn FnMut(&str),
+    ) -> Result<Completion, AgentError> {
+        self.requested_output = max_output_tokens;
+        read_stream(self.events.as_bytes(), &mut |_| {})
+    }
+}
+#[test]
+fn incomplete_output_never_edits_and_consumed_tokens_remain_charged() {
+    let item = json!({"type":"response.output_item.done","output_index":0,"item":patch()});
+    let terminal = json!({"type":"response.incomplete","response":{"incomplete_details":{"reason":"max_output_tokens"},"usage":{"input_tokens":30,"output_tokens":4096}}});
+    let mut provider = StreamFixture {
+        events: format!("data: {item}\n\ndata: {terminal}\n\n"),
+        requested_output: 0,
+    };
+    let mut bus = CommandBus::new(Project::empty("test")).unwrap();
+    let mut a = agent();
+    let error = a
+        .run(
+            &mut provider,
+            &mut bus,
+            &mut NoViewport,
+            "edit",
+            "test",
+            &AtomicBool::new(false),
+            &mut |_, _| true,
+            &mut |_| {},
+        )
+        .unwrap_err();
+    assert!(error.to_string().contains("output-token limit"));
+    assert_eq!(provider.requested_output, 25000);
+    assert_eq!(a.budget.used_tokens, 4126);
+    assert_eq!(bus.revision(), 0);
+    assert!(bus.project().memory.is_empty());
+}
+#[test]
+fn unknown_failure_redacts_provider_content_and_reserves_unknown_usage() {
+    let terminal = json!({"type":"response.failed","response":{"error":{"code":"arbitrary-private-error-code","message":"secret-project-content"}}});
+    let mut provider = StreamFixture {
+        events: format!("data: {terminal}\n\n"),
+        requested_output: 0,
+    };
+    let mut bus = CommandBus::new(Project::empty("test")).unwrap();
+    let mut a = agent();
+    a.budget.max_tokens = 20000;
+    let error = a
+        .run(
+            &mut provider,
+            &mut bus,
+            &mut NoViewport,
+            "edit",
+            "test",
+            &AtomicBool::new(false),
+            &mut |_, _| true,
+            &mut |_| {},
+        )
+        .unwrap_err();
+    assert_eq!(
+        error.to_string(),
+        "provider: provider reported a failed response"
+    );
+    assert!(provider.requested_output < a.max_output_tokens);
+    assert_eq!(a.budget.remaining(), 0);
+    assert_eq!(bus.revision(), 0);
 }

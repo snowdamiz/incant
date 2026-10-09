@@ -89,8 +89,13 @@ director's saved OAuth session and `gpt-6-astra`: **19 of 20 cases passed**, abo
 the fourteen-case threshold. [Per-case evidence](evidence/live-agent-2026-10-08.json)
 records state, tool, provenance and undo checks. The ten-step case reached its exact
 expected state and undid correctly, but returned a failed/incomplete provider
-response; it is counted as failed and remains a reliability issue. This result
-does not approve Phase 0 or claim cross-platform agent reliability.
+response; it is counted as failed. A subsequent single-case run passed all checks,
+including the real screenshot and undo, after adding bounded configurable output
+tokens and safe terminal diagnostics. [Follow-up evidence](evidence/ten-step-followup-2026-10-08.json)
+retains that distinction; the original cause was not captured. Failed/incomplete
+responses now charge known usage (or reserve a conservative bound if unavailable),
+and cannot execute partial tools. Neither result approves Phase 0 or establishes
+cross-platform agent reliability.
 
 The CLI supports a dedicated CI evaluation key or an explicitly connected local
 OpenAI account. It never reuses Codex or Claude credentials.

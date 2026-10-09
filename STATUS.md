@@ -28,7 +28,7 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
 - Fourteen architecture records, generated TS structural bindings, developer docs,
   gate ledger and GitHub workflow source.
 
-See [written evidence and limitations](docs/spikes/phase-0.md). Forty-one Rust
+See [written evidence and limitations](docs/spikes/phase-0.md). Forty-four Rust
 behavior tests, 180 UI/bridge tests and four Python tool tests pass after integration. The thousand-entity script benchmark meets the local
 frame budget within its documented workload.
 
@@ -41,6 +41,12 @@ frame budget within its documented workload.
   **19/20 passed**, exceeding the 14/20 score threshold. The ten-step case reached
   the expected state but returned an incomplete provider response and is counted
   as failed. [Per-case results](docs/spikes/evidence/live-agent-2026-10-08.json).
+  Its [single-case follow-up](docs/spikes/evidence/ten-step-followup-2026-10-08.json)
+  passes all checks with the new output budget and diagnostic handling. The original
+  score remains 19/20; the old failure's cause was not retained.
+- Cross-build synthetic credential checks now run on all three desktop CI hosts;
+  they verify the real storage backends without using provider accounts. Local
+  macOS execution passed; Windows/Linux hosted results are pending.
 - Draft PR: https://github.com/snowdamiz/incant/pull/1. macOS checks and the
   six-platform workflow ran: full checks and five platforms passed. Android
   reached compilation but pulled in an unconfigured Android activity implementation.

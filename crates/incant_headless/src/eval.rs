@@ -46,8 +46,24 @@ pub fn check(path: &Path) -> Result<()> {
     let suite = load(path)?;
     print(json!({"validated_cases":suite.cases.len(),"live_inference":false,"gate_passed":false}))
 }
-pub fn run(path: &Path, output: &Path, model: String, max_tokens: u64, ci: bool) -> Result<()> {
-    let suite = load(path)?;
+pub fn run(
+    path: &Path,
+    output: &Path,
+    model: String,
+    max_tokens: u64,
+    max_output_tokens: u64,
+    ci: bool,
+    selected: Option<&str>,
+) -> Result<()> {
+    let mut suite = load(path)?;
+    if let Some(id) = selected {
+        suite.cases.retain(|case| case.id == id);
+        if suite.cases.is_empty() {
+            return Err("evaluation case does not exist".into());
+        }
+    }
+    let total = suite.cases.len();
+    let required = if selected.is_some() { total } else { 14 };
     let mut provider = if ci {
         OpenAiProvider::new(
             std::env::var("INCANT_EVAL_OPENAI_API_KEY")
@@ -72,6 +88,7 @@ pub fn run(path: &Path, output: &Path, model: String, max_tokens: u64, ci: bool)
             },
             approval: ApprovalMode::Auto,
             max_steps: 30,
+            max_output_tokens,
         };
         let started = Instant::now();
         let result = agent.run(
@@ -123,20 +140,33 @@ pub fn run(path: &Path, output: &Path, model: String, max_tokens: u64, ci: bool)
         save(
             output,
             &(serde_json::to_string_pretty(
-                &json!({"version":1,"live_inference":true,"model":model,"completed":results.len(),"passed":passed,"required":14,"gate_passed":results.len()==20 && passed>=14,"cases":results}),
+                &json!({"version":1,"live_inference":true,"model":model,"selected_case":selected,"max_output_tokens":max_output_tokens,"completed":results.len(),"passed":passed,"required":required,"gate_passed":gate_passed(selected, results.len(), passed),"cases":results}),
             )? + "\n"),
         )?;
     }
-    print(json!({"output":output,"passed":passed,"total":20,"gate_passed":passed>=14}))?;
-    if passed < 14 {
-        return Err("live evaluation did not reach 14 of 20".into());
+    print(
+        json!({"output":output,"passed":passed,"total":total,"gate_passed":gate_passed(selected, total, passed)}),
+    )?;
+    if passed < required {
+        return Err("live evaluation did not meet the required pass count".into());
     }
     Ok(())
+}
+fn gate_passed(selected: Option<&str>, completed: usize, passed: usize) -> bool {
+    selected.is_none() && completed == 20 && passed >= 14
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn partial_or_filtered_runs_cannot_pass_the_full_gate() {
+        assert!(!gate_passed(Some("12-ten-step"), 1, 1));
+        assert!(!gate_passed(Some("12-ten-step"), 20, 20));
+        assert!(!gate_passed(None, 19, 19));
+        assert!(!gate_passed(None, 20, 13));
+        assert!(gate_passed(None, 20, 14));
+    }
     #[test]
     fn corpus_has_twenty_valid_nontrivial_independent_cases() {
         let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../evals/phase0/tasks.json");
