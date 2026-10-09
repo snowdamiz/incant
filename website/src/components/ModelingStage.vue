@@ -33,7 +33,7 @@ const description = computed(() => {
     class="overflow-hidden rounded-xl bg-ed-bg text-ed-text shadow-[0_1px_0_rgb(255_255_255/0.06)_inset,0_50px_100px_-50px_rgb(21_22_26/0.55),0_20px_40px_-30px_rgb(21_22_26/0.4)] ring-1 ring-ink/10"
   >
     <WindowBar file="lighthouse.geo">
-      <span class="ml-auto shrink-0 text-[12px] text-ed-muted">Geometry graph</span>
+      <span class="ml-auto hidden shrink-0 text-[12px] text-ed-muted min-[360px]:inline">Geometry graph</span>
     </WindowBar>
 
     <div class="grid grid-cols-1 md:grid-cols-[17rem_minmax(0,1fr)] lg:grid-cols-[19rem_minmax(0,1fr)]">

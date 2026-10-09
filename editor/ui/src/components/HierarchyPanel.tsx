@@ -361,6 +361,8 @@ function RenameInput({ initial, onDone }: { initial: string; onDone: (value: str
       className="tree-row__rename"
       aria-label="New name"
       autoFocus
+      // Start with the whole name selected, so typing replaces it (as in Finder and code editors).
+      onFocus={(event) => event.currentTarget.select()}
       value={value}
       onChange={(event) => setValue(event.target.value)}
       onClick={(event) => event.stopPropagation()}

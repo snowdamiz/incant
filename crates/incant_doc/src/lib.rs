@@ -416,7 +416,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
     Ok(())
 }
 pub fn schema_registry() -> BTreeMap<String, Value> {
-    BTreeMap::from([
+    let mut registry = BTreeMap::from([
         ("Project".into(), json!(schemars::schema_for!(Project))),
         ("Transform".into(), json!(schemars::schema_for!(Transform))),
         ("Velocity".into(), json!(schemars::schema_for!(Velocity))),
@@ -429,7 +429,20 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
-    ])
+    ]);
+    // Shared inspector annotations. All clients receive the same field order;
+    // schema properties remain the source of validation and generated types.
+    for (name, order) in [
+        ("Transform", vec!["translation", "rotation", "scale"]),
+        ("Camera", vec!["fov_degrees", "near", "far"]),
+        ("MeshRenderer", vec!["mesh", "materials", "cast_shadows"]),
+        ("Script", vec!["source", "props"]),
+    ] {
+        if let Some(schema) = registry.get_mut(name) {
+            schema["order"] = json!(order);
+        }
+    }
+    registry
 }
 impl Scene {
     pub fn new(name: impl Into<String>) -> Self {

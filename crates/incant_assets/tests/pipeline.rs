@@ -40,7 +40,7 @@ fn import_cook_runtime_load_and_dependency_reimport_are_reversible() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path();
     fixture(root);
-    let cache = root.join("cache");
+    let cache = root.join("cache/models");
     let source = Path::new("models/triangle.gltf");
     let first = cook_gltf(root, source, &cache).unwrap();
     assert!(!first.cache_hit);
@@ -95,6 +95,14 @@ fn import_cook_runtime_load_and_dependency_reimport_are_reversible() {
             .meshes,
         first.meshes
     );
+    let mut store = incant_assets::AssetStore::default();
+    store.sync(bus.project(), &root.join("cache")).unwrap();
+    let version = store.get(before.assets.keys().next().unwrap()).unwrap();
+    let incant_assets::RuntimeAssetData::Model(model) = version.data() else {
+        panic!("expected loaded model");
+    };
+    assert_eq!(model.meshes, first.meshes);
+    assert_eq!(version.info().payload_bytes, 3 * 48 + 3 * 4);
 }
 #[test]
 fn glb_and_embedded_buffers_produce_the_same_geometry() {

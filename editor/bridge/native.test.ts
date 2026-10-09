@@ -36,6 +36,7 @@ function read(): EngineRead {
     applied: 0,
     schemas: {
       Transform: {
+        order: ["translation", "rotation", "scale"],
         properties: {
           translation: {
             type: "array",
@@ -78,6 +79,7 @@ describe("native bridge", () => {
     expect(value.hierarchy.value.nodes[entity]?.parent).toBe(scene);
     expect(value.entities[entity]?.components[0]?.type).toBe("Transform");
     expect(value.entities[entity]?.kind).toBe("entity");
+    expect(value.schemas.Transform?.order).toEqual(["translation", "rotation", "scale"]);
     expect(value.agent.status).toBe("unavailable");
   });
   it("sends a rename and observed revision through IPC, then uses only the returned engine state", async () => {

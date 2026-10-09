@@ -18,7 +18,10 @@ after review and passing checks, without requesting separate merge approval.
   cache, with dependency invalidation and source-independent CPU loading. PNG,
   JPEG and EXR cook to independently validated KTX2 with color/normal-aware mips.
   CLI import preserves stable IDs and durable import settings through the shared
-  command bus. Animation, compression tiers and runtime integration remain open.
+  command bus. The CPU runtime store publishes asset replacements atomically and
+  keeps retained versions valid across reimport and undo. Headless runs load cooked
+  assets before simulation. Animation, compression tiers, GPU/ECS bindings and
+  automatic source watching remain open.
   See [asset pipeline evidence](docs/spikes/asset-pipeline.md).
 - Bevy fixed-step simulation; isolated play state; SWC/QuickJS scripting, sandbox,
   live ECS queries and compatible hot reload.
@@ -49,17 +52,27 @@ within its documented workload.
 
 ## Active work
 
+- All three initial PRs are merged into main after their required checks passed:
+  foundation #1, product site #2 and asset imports #3. The site deployed successfully
+  at https://snowdamiz.github.io/incant/. Runtime asset-version work and renewed
+  Claude visual review continue separately. Merging does not approve a phase gate.
+
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing
-  page has the matching palette in PR #2. Its modeling expansion and lighter copy
+  page has the matching palette, merged in PR #2. Its modeling expansion and lighter copy
   each passed 23 hosted browser checks. Graphical explanations, authentic SVG
   platform marks and the subsequent workflow correction are integrated in PR #2.
   Each workflow icon has a short visible explanation and tighter spacing; all 23
-  hosted checks passed on bf99437. The capture restriction remains in force. See
-  [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
-  routes by focus; automated tests pass, but its final native interaction check
-  remains pending. **Computer use, browser automation and screen capture are
-  stopped at the director’s request** until explicitly permitted again.
+  hosted checks passed on bf99437. Visual review is resuming under the new permission. See
+  [integration evidence](docs/spikes/connected-editor.md). Native menu Undo routes by focus. Actual macOS CUA checks now confirm
+  project Cmd+Z/redo, isolated text-field Undo, safe account-dialog focus, divider
+  keyboard resizing and fullscreen transitions. Claude reviewed the native captures;
+  the capture indicator still obscures the traffic lights. On 2026-10-09 the director explicitly permitted computer use
+  and screen capture again when needed. Claude’s handoff 0008 fixes tablet workflow layout, platform-mark balance, clipped
+  inspector paths and F2 name selection. Rebuilt native F2 rename and Undo pass. The transport now preserves schema field
+  order (223 tests pass); macOS locked before its final native verification.
+  Claude confirmed settled fullscreen and found a missing native dialog focus ring;
+  minimum-size and visible traffic-light checks remain open.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are
