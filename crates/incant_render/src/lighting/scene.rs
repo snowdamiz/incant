@@ -142,5 +142,38 @@ mod tests {
         let (lights, d) = p.finish();
         assert_eq!(d, 0);
         assert_eq!(lights[0].radiance_inner[..3], [0.; 3]);
+        let mut p = LightPlan::default();
+        for _ in 0..MAX_LOCAL {
+            p.add(&c, DMat4::IDENTITY).unwrap();
+        }
+        assert!(matches!(
+            p.add(&c, DMat4::IDENTITY),
+            Err(SceneError::LightLimit)
+        ));
+    }
+    #[test]
+    fn unrepresentable_light_transforms_and_cones_fail_explicitly() {
+        let mut p = LightPlan::default();
+        let c = BTreeMap::from([(
+            "SpotLight".into(),
+            json!({
+                "color":[1,1,1],"intensity":1,"range":1,
+                "inner_degrees":10,"outer_degrees":10.000000001
+            }),
+        )]);
+        assert!(matches!(
+            p.add(&c, DMat4::IDENTITY),
+            Err(SceneError::LightCone)
+        ));
+        let c = BTreeMap::from([(
+            "PointLight".into(),
+            json!({
+                "color":[1,1,1],"intensity":1,"range":1
+            }),
+        )]);
+        assert!(matches!(
+            p.add(&c, DMat4::from_translation(DVec3::splat(1e100))),
+            Err(SceneError::LightTransform)
+        ));
     }
 }

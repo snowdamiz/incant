@@ -2,6 +2,7 @@ use super::materials::{Fixture, center, near};
 use incant_doc::{Entity, TextureUsage, Transform};
 use incant_render::Renderer;
 use serde_json::{Value, json};
+mod coverage;
 
 fn fixture() -> Fixture {
     let mut f =
@@ -42,9 +43,12 @@ fn component(f: &mut Fixture, id: &str, kind: &str, value: Value) {
         .insert(kind.into(), value);
 }
 fn shot(f: &Fixture, r: &Renderer, name: &str) -> [u8; 4] {
+    shot_size(f, r, name, 320, 180)
+}
+fn shot_size(f: &Fixture, r: &Renderer, name: &str, width: u32, height: u32) -> [u8; 4] {
     let scene = f.scene(r);
     assert_eq!(scene.stats().diagnostic_entities, 0);
-    let png = r.screenshot_scene_png(&scene, 320, 180).unwrap();
+    let png = r.screenshot_scene_png(&scene, width, height).unwrap();
     if let Some(directory) = std::env::var_os("INCANT_LIGHT_EVIDENCE") {
         std::fs::create_dir_all(&directory).unwrap();
         std::fs::write(
@@ -123,6 +127,29 @@ fn directional_point_and_spot_lights_obey_authored_physical_parameters() {
         json!({"color":[1,1,1],"intensity":8,"range":1000,"inner_degrees":10,"outer_degrees":20}),
     );
     near(shot(&f, &r, "spot-center"), near_point, 1);
+    // Odd dimensions put the sampled pixel center exactly on the camera axis
+    // and world origin, making its light angle exactly the authored 15 degrees.
+    let centered = shot_size(&f, &r, "spot-centered-reference", 321, 181);
+    let angle = 15_f64.to_radians();
+    component(
+        &mut f,
+        &id,
+        "Transform",
+        json!(Transform {
+            translation: [0., 0., 4.],
+            rotation: [0., (angle / 2.).sin(), 0., (angle / 2.).cos()],
+            ..Default::default()
+        }),
+    );
+    let penumbra = shot_size(&f, &r, "spot-penumbra", 321, 181);
+    let expected = ((angle.cos() - 20_f64.to_radians().cos())
+        / (10_f64.to_radians().cos() - 20_f64.to_radians().cos()))
+    .powi(2);
+    let actual = linear(penumbra[0]) / linear(centered[0]);
+    assert!(
+        (actual - expected).abs() < 0.025,
+        "spot falloff {actual} != {expected}"
+    );
     component(
         &mut f,
         &id,
