@@ -18,7 +18,10 @@ after review and passing checks, without requesting separate merge approval.
   cache, with dependency invalidation and source-independent CPU loading. PNG,
   JPEG and EXR cook to independently validated KTX2 with color/normal-aware mips.
   CLI import preserves stable IDs and durable import settings through the shared
-  command bus. Animation, compression tiers and runtime integration remain open.
+  command bus. The CPU runtime store publishes asset replacements atomically and
+  keeps retained versions valid across reimport and undo. Headless runs load cooked
+  assets before simulation. Animation, compression tiers, GPU/ECS bindings and
+  automatic source watching remain open.
   See [asset pipeline evidence](docs/spikes/asset-pipeline.md).
 - Bevy fixed-step simulation; isolated play state; SWC/QuickJS scripting, sandbox,
   live ECS queries and compatible hot reload.

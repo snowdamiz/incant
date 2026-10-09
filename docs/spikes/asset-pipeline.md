@@ -48,7 +48,7 @@ The default model cache is `.incant/cache/models`; textures use
 files contain metadata, meshopt streams and KTX2 images. The loader still accepts
 version 1 model entries. Standalone texture manifests refer to content-hashed
 `.ktx2` files. Runtime CPU loaders work without source files; renderer/ECS loading
-and automatic hot reload are still pending.
+and automatic source watching are still pending.
 
 Keys include importer versions, dependency paths/hashes and texture usage. Model
 cache hits currently reparse geometry and image sources; avoiding that work is a
@@ -71,6 +71,29 @@ million vertices, three million indices, 4,194,304 texels per image and 8,192
 pixels per dimension, with additional object-count bounds. These are not measured
 streaming/performance budgets.
 
+## Runtime versions
+
+`AssetStore` loads the project’s models and textures from cooked cache entries,
+keyed by their stable document IDs. Sync stages the entire next asset set before
+publishing it. Missing or corrupt files, unsupported asset kinds, mismatched
+texture settings and payload-budget failures leave every previous version intact.
+An unchanged asset retains the same allocation and generation. Replacement and
+remove/re-add assign increasing generations; consumers holding an `Arc` can
+finish using an older immutable version safely. Document undo/redo can therefore
+restore an earlier cooked version without accessing source files.
+
+The default published payload budget is 256 MiB, covering decoded vertices,
+indices and texture mips. Metadata, allocator overhead, staging and older versions
+retained by consumers are additional memory; this is not a process-memory ceiling
+or measured streaming budget. Unknown runtime asset kinds fail explicitly.
+
+`incant run PROJECT` now loads this store from the project’s `.incant/cache` before
+starting simulation and reports asset IDs, content fingerprints, generations and
+payload bytes alongside its state. Missing cooked content fails before ticks run.
+This is CPU loading and version management. Binding these versions to GPU/ECS
+instances and automatically watching/reimporting changed source files remain open.
+No document edits bypass the shared command bus.
+
 ## Verification
 
 Local checks pass:
@@ -81,8 +104,14 @@ Local checks pass:
 - Eight texture tests cover color/data separation, alpha fringes, odd dimensions,
   normal-vector filtering, JPEG, 16-bit PNG, HDR EXR, malformed/truncated KTX2,
   cache repair and textured-model bindings, tangents and image dependencies.
+- Four runtime-store tests cover source removal, immutable retained versions,
+  reimport/undo/redo, atomic failed batches, removal/re-add, payload budgets,
+  settings mismatches, corrupt replacements and unsupported kinds. The geometry
+  test also loads a cooked model through the store.
 - Four asset-command tests and two separate-process CLI tests cover stable IDs,
-  atomic references/removal, undo/redo, usage changes and cache rebuilds. Existing
+  atomic references/removal, undo/redo, usage changes and cache rebuilds. The CLI
+  test runs a model after deleting its source, verifies loaded geometry bytes and
+  checks missing cooked data fails without editing the project. Existing
   eight transaction, seven document and two headless evaluation tests also pass.
 - Affected-crate Clippy with warnings denied, formatting, generated conventions/
   schemas/SDK and strict TypeScript compilation pass.

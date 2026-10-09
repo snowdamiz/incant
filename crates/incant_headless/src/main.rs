@@ -354,11 +354,13 @@ fn main() -> Result<()> {
             if ticks > 1_000_000 {
                 return Err("tick count exceeds limit".into());
             }
-            let mut engine = Engine::new(&read_project(&project)?)?;
+            let document = read_project(&project)?;
+            let assets = assets::load_runtime(&project, &document)?;
+            let mut engine = Engine::new(&document)?;
             let start = Instant::now();
             engine.run_ticks(ticks);
             print(
-                json!({"state":engine.snapshot(),"wall_ms":start.elapsed().as_secs_f64()*1000.}),
+                json!({"state":engine.snapshot(),"assets":assets.snapshot(),"wall_ms":start.elapsed().as_secs_f64()*1000.}),
             )?;
         }
         Cli::Script {

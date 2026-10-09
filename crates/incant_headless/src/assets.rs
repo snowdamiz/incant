@@ -5,6 +5,19 @@ use incant_doc::{Asset, AssetImportSettings, new_id};
 use serde_json::json;
 use std::path::{Component, Path};
 
+pub fn load_runtime(
+    project: &Path,
+    document: &incant_doc::Project,
+) -> Result<incant_assets::AssetStore> {
+    let root = project
+        .parent()
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or(Path::new("."));
+    let mut store = incant_assets::AssetStore::default();
+    store.sync(document, &root.join(".incant/cache"))?;
+    Ok(store)
+}
+
 pub fn import(
     project: &Path,
     source: &Path,

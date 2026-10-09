@@ -4,6 +4,7 @@ mod gltf_import;
 mod ktx;
 mod mesh;
 mod model_textures;
+mod runtime;
 mod source;
 mod tangents;
 mod texture;
@@ -14,6 +15,9 @@ pub use gltf_import::{ImportedModel, ModelNode, import_gltf};
 pub use ktx::{decode_ktx2, encode_ktx2};
 pub use mesh::{Mesh, Vertex, cook_mesh, decode_mesh};
 pub use model_textures::ModelTexture;
+pub use runtime::{
+    AssetChanges, AssetStore, RuntimeAsset, RuntimeAssetData, RuntimeAssetError, RuntimeAssetInfo,
+};
 pub use source::{Dependency, SourceSet};
 pub use texture::{Texture, TextureFormat, TextureUsage, import_image};
 pub use texture_cache::{CookedTexture, TextureMetadata, cook_texture, load_texture};

@@ -41,6 +41,15 @@ fn cli_import_is_idempotent_and_persists_reimport_history() {
     let changed = run(&args);
     assert_eq!(changed["asset"]["id"], first["asset"]["id"]);
     assert_ne!(changed["asset"]["sha256"], first["asset"]["sha256"]);
+    fs::remove_file(temp.path().join("triangle.gltf")).unwrap();
+    let played = run(&["run", project.to_str().unwrap(), "--ticks", "2"]);
+    let asset_id = changed["asset"]["id"].as_str().unwrap();
+    assert_eq!(
+        played["assets"][asset_id]["fingerprint"],
+        changed["asset"]["sha256"]
+    );
+    assert_eq!(played["assets"][asset_id]["payload_bytes"], 156);
+    assert_eq!(played["state"]["tick"], 2);
     let loaded = incant_doc::Project::from_text(&fs::read_to_string(&project).unwrap()).unwrap();
     assert_eq!(loaded.assets.len(), 1);
     let mut bus =
@@ -52,6 +61,20 @@ fn cli_import_is_idempotent_and_persists_reimport_history() {
         bus.project().assets.values().next().unwrap().sha256,
         first["asset"]["sha256"].as_str().unwrap()
     );
+    let authored = fs::read(&project).unwrap();
+    fs::remove_file(temp.path().join(".incant/cache/models").join(format!(
+        "{}.incmodel",
+        changed["asset"]["sha256"].as_str().unwrap()
+    )))
+    .unwrap();
+    let missing = Command::new(env!("CARGO_BIN_EXE_incant_headless"))
+        .current_dir(temp.path())
+        .args(["run", project.to_str().unwrap(), "--ticks", "2"])
+        .output()
+        .unwrap();
+    assert!(!missing.status.success());
+    assert!(String::from_utf8_lossy(&missing.stderr).contains(asset_id));
+    assert_eq!(fs::read(&project).unwrap(), authored);
 }
 
 #[test]
