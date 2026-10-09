@@ -1,0 +1,45 @@
+{
+  "baseRefName": "main",
+  "headRefOid": "79a821e84393311edc2f97e513e5cb7544a1cd9a",
+  "mergeable": "MERGEABLE",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-09T14:11:41Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37939815322/job/113851495058",
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "startedAt": "2026-10-09T13:52:16Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop editor and engine"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-09T14:14:04Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37939815462/job/113851658791",
+      "name": "checks",
+      "startedAt": "2026-10-09T13:52:45Z",
+      "status": "COMPLETED",
+      "workflowName": "Incant checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-09T14:03:42Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37939815322/job/113851494553",
+      "name": "desktop (ubuntu-latest, Linux)",
+      "startedAt": "2026-10-09T13:52:16Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop editor and engine"
+    }
+  ],
+  "merge": {
+    "mergeCommit": {
+      "oid": "0c8e1bc1229b19e95b8798ccfef671cd3e7120fc"
+    },
+    "mergedAt": "2026-10-09T14:37:05Z",
+    "state": "MERGED",
+    "url": "https://github.com/snowdamiz/incant/pull/7"
+  }
+}

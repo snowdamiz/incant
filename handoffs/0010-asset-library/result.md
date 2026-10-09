@@ -4,9 +4,12 @@
 **open**. Combined integration with Astra's native import is **not yet reviewed**. Nothing
 here approves a phase gate.
 
-**Model:** Claude Opus 5.5 (`claude-opus-5-5`), run through Claude Code in this worktree. It
-was not run through an ACP session. If the packet requires ACP specifically, treat that as a
-routing deviation for the director to accept or reject. Claude does not self-approve it.
+**Model and transport (verified by Astra):** Claude Opus 5.5 (`claude-opus-5-5`)
+through Claude Code and `claude-agent-acp`. Astra launched this session with
+`python3 tools/handoff/main.py run 0010-asset-library --permission-mode bypassPermissions`.
+The runner initialized ACP protocol 1, selected the configured Opus 5.5 option
+and delivered the packet through `session/prompt`. Claude’s original self-report
+misidentified the outer transport. No routing exception or model substitution occurred.
 
 ## What was built
 
@@ -144,5 +147,15 @@ focus, layout and axe results.
 1. Should the engine expose a stable conflict code? See native-requests.md.
 2. Should Assets become the default dock tab once native import is verified? Problems stays
    the default for now.
-3. Routing: this run used Claude Code rather than ACP. The director should confirm whether
-   that is acceptable for this handoff.
+3. The transport concern in the original report is resolved by the ACP runner
+   evidence above; no director action is needed.
+
+## Astra integration notes
+
+The two CSS-selector source-mirroring tests were removed during integration;
+behavior tests and Claude’s pixel review remain. The historical 266-test count
+above is Claude’s original result. Native errors now preserve stable codes,
+including `asset.conflict`, and the conflict UI uses the code with a legacy
+message fallback. Normal document edits can proceed during import preparation;
+a stale import is rejected instead of blocking the user. Native verification
+and the final integrated test count are recorded separately.

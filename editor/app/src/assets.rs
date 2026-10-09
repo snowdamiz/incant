@@ -3,6 +3,7 @@
 use crate::{Editor, engine_read, project::LoadState};
 use incant_cmd::{Actor, CommandError};
 use incant_import::{ImportRequest, ImportSnapshot, PreparedImports};
+use serde::Serialize;
 use serde_json::Value;
 use std::sync::{
     Arc, Mutex,
@@ -25,6 +26,31 @@ enum ImportTaskError {
     Command(#[from] CommandError),
     #[error(transparent)]
     Import(#[from] incant_import::ImportError),
+}
+#[derive(Serialize)]
+pub struct ImportFailure {
+    code: &'static str,
+    message: String,
+}
+impl From<ImportTaskError> for ImportFailure {
+    fn from(error: ImportTaskError) -> Self {
+        let code = match &error {
+            ImportTaskError::Unsaved | ImportTaskError::Project(_) => "asset.unavailable",
+            ImportTaskError::Busy => "asset.busy",
+            ImportTaskError::Closed => "asset.closed",
+            ImportTaskError::Command(CommandError::Conflict { .. })
+            | ImportTaskError::Import(
+                incant_import::ImportError::Command(CommandError::Conflict { .. })
+                | incant_import::ImportError::ChangedProject
+                | incant_import::ImportError::DifferentProject,
+            ) => "asset.conflict",
+            _ => "asset.import",
+        };
+        Self {
+            code,
+            message: error.to_string(),
+        }
+    }
 }
 
 struct ImportGuard<'a>(&'a AtomicBool);
@@ -72,7 +98,7 @@ pub async fn engine_import(
     app: tauri::AppHandle,
     requests: Vec<ImportRequest>,
     expected_revision: u64,
-) -> Result<Value, String> {
+) -> Result<Value, ImportFailure> {
     let editor = state.inner().clone();
     tauri::async_runtime::spawn_blocking(move || -> Result<(), ImportTaskError> {
         let _guard = ImportGuard::acquire(&editor.importing)?;
@@ -85,14 +111,20 @@ pub async fn engine_import(
         commit(&editor.bus, prepared)
     })
     .await
-    .map_err(|_| "Asset import worker stopped unexpectedly.".to_string())?
-    .map_err(|e| e.to_string())?;
+    .map_err(|_| ImportFailure {
+        code: "asset.worker",
+        message: "Asset import worker stopped unexpectedly.".into(),
+    })?
+    .map_err(ImportFailure::from)?;
     let _ = app.emit_to(
         tauri::EventTarget::webview("editor"),
         "incant:engine-changed",
         (),
     );
-    engine_read(state)
+    engine_read(state).map_err(|message| ImportFailure {
+        code: "engine.read",
+        message,
+    })
 }
 
 #[cfg(test)]

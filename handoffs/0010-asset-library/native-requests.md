@@ -2,8 +2,8 @@
 
 Claude's ACP session has no computer use. Every check below needs Astra's CUA channel on a
 build that includes this handoff's UI commit and Astra's native import command. Keep raw
-captures and any account labels in the ignored `artifacts/` tree, out of Git. The Mac was
-locked at the last native check, so it must be unlocked first.
+captures and any account labels in the ignored `artifacts/` tree, out of Git. The Mac is unlocked; native behavior checks and captures are now supplied in the
+2026-10-09 evidence file. Pixel review is pending.
 
 Native verification stays **open** until these captures are supplied and reviewed. The
 images in `screenshots/after/` are headless Chrome over synthetic data. They prove neither
@@ -45,8 +45,8 @@ Use a scratch saved project folder that contains, for example, `models/prop.glb`
 2. Start an import and capture while it runs.
 3. Expected: a spinner in the Assets tab, the strip "Importing 1 file… You can keep working",
    read-only path fields, and no percentage or cancel control. Switching to History and
-   moving through the hierarchy must stay responsive. Renaming during the import should be
-   refused with the bridge's "Wait for the current engine operation." message in the status bar.
+   moving through the hierarchy must stay responsive. Renaming during the import now succeeds. The prepared import must then
+   reject its stale revision without reverting the rename. This was verified natively.
 
 ## A4. Failure: `a04-import-failed`
 
@@ -82,9 +82,8 @@ Use a scratch saved project folder that contains, for example, `models/prop.glb`
 
 ## Contract notes for Astra (no contract change made)
 
-- Every native failure arrives as `engine.request`. The UI detects conflicts by message text
-  ("revision conflict", "project changed since"). A stable code would make the retry hint
-  robust. One option is `asset.conflict` or `document.conflict`.
+- Addressed during integration: native errors preserve stable codes, including
+  `asset.conflict`; the UI recognizes that code and keeps a legacy text fallback.
 - The UI tracks its own pending import. The bridge exposes no pending flag, so a second window
   or the agent starting an import would be seen only through `engine.busy`. That is acceptable
   for now.

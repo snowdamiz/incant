@@ -83,6 +83,6 @@ export function kindLabel(kind: string): string {
 }
 
 /** Engine errors that mean the project changed underneath the import; retrying is safe. */
-export function isConflict(message: string): boolean {
-  return /revision conflict|project changed since/i.test(message);
+export function isConflict(message: string, code?: string): boolean {
+  return code === 'asset.conflict' || /revision conflict|project changed since/i.test(message);
 }

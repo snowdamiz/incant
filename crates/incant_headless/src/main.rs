@@ -477,12 +477,17 @@ fn main() -> Result<()> {
                 max_steps: 30,
                 max_output_tokens,
             };
-            let mut viewport =
+            let viewport =
                 GpuPerception(incant_render::Renderer::headless().map_err(|e| e.to_string())?);
+            let root = project
+                .parent()
+                .filter(|p| !p.as_os_str().is_empty())
+                .unwrap_or(Path::new("."));
+            let mut host = incant_agent::ProjectHost::new(bus.project(), root, viewport)?;
             let report = agent.run(
                 &mut provider,
                 &mut bus,
-                &mut viewport,
+                &mut host,
                 &prompt,
                 &new_id(),
                 &AtomicBool::new(false),
