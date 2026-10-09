@@ -49,6 +49,20 @@ together; do not reuse a journal for another project.
 tools/cargo run -p incant_headless -- rpc artifacts/demo.incant.json --journal artifacts/demo.journal.jsonl
 ```
 
+Import an existing project-local source, then watch its files and dependencies:
+
+```sh
+tools/cargo run -p incant_headless --release -- import /path/game.json models/prop.glb
+tools/cargo run -p incant_headless --release -- watch-assets /path/game.json
+```
+
+`watch-assets` emits JSON lines, commits stable source changes through the shared
+undoable history and reloads CPU assets. It owns the project's journal until
+interrupted, so close other writers first. `--interval-ms` defaults to 500 and
+`--debounce-ms` to 300. `--polls N` bounds a run and exits unsuccessfully when
+sources remain unsettled or errors remain. GPU and editor hot reload are still
+open; see [source watching](docs/spikes/asset-source-watch.md).
+
 The native host injects the compiled transport before the UI loads. After editing
 `editor/bridge/native.ts`, run `node tools/build_bridge.mjs`; CI checks that its
 generated JavaScript is current.

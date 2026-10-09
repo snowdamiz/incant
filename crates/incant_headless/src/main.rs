@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 mod assets;
 mod eval;
+mod watch;
 use incant_agent::{
     Agent, ApprovalMode, Budget, accounts::AccountStore, credentials::CredentialStore,
     provider::OpenAiProvider,
@@ -66,6 +67,17 @@ enum Cli {
         cache: Option<PathBuf>,
         #[arg(long, value_parser = ["color", "linear", "normal"])]
         texture_usage: Option<String>,
+    },
+    /// Reimport registered sources and reload CPU assets; emits JSON lines until interrupted.
+    WatchAssets {
+        project: PathBuf,
+        #[arg(long, default_value_t = 500, value_parser = clap::value_parser!(u64).range(10..=60000))]
+        interval_ms: u64,
+        #[arg(long, default_value_t = 300, value_parser = clap::value_parser!(u64).range(0..=60000))]
+        debounce_ms: u64,
+        /// Stop after this many polls (otherwise keep watching). Unsettled/error state fails.
+        #[arg(long, value_parser = clap::value_parser!(u64).range(1..))]
+        polls: Option<u64>,
     },
     Validate {
         project: PathBuf,
@@ -332,6 +344,19 @@ fn main() -> Result<()> {
             cache.as_deref(),
             texture_usage.as_deref(),
         )?,
+        Cli::WatchAssets {
+            project,
+            interval_ms,
+            debounce_ms,
+            polls,
+        } => {
+            watch::run(
+                &project,
+                Duration::from_millis(interval_ms),
+                Duration::from_millis(debounce_ms),
+                polls,
+            )?;
+        }
         Cli::Schema { directory } => {
             fs::create_dir_all(&directory)?;
             let mut registry = schema_registry();

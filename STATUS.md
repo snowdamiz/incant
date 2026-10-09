@@ -21,7 +21,8 @@ after review and passing checks, without requesting separate merge approval.
   command bus. The CPU runtime store publishes asset replacements atomically and
   keeps retained versions valid across reimport and undo. Headless runs load cooked
   assets before simulation. Animation, compression tiers, GPU/ECS bindings and
-  automatic source watching remain open.
+  editor/GPU hot reload remain open. The authoring CLI now watches registered
+  sources and reloads CPU assets.
   See [asset pipeline evidence](docs/spikes/asset-pipeline.md).
 - Bevy fixed-step simulation; isolated play state; SWC/QuickJS scripting, sandbox,
   live ECS queries and compatible hot reload.
@@ -55,8 +56,14 @@ within its documented workload.
 - `incant_import` now prepares glTF/image import batches on an owned document
   snapshot and commits all changed assets in one command-bus transaction. The CLI
   uses this shared service. Five service behavior tests, the existing CLI tests, full workspace release
-  tests and Clippy pass locally. Editor/agent import controls and automatic
-  source watching remain open.
+  tests and Clippy passed locally and all twelve hosted checks passed before PR #6
+  merged into main as `130d249`. Editor/agent import controls remain open.
+
+- Automatic source watching now debounces registered model/image sources and
+  dependencies, commits successful changes through shared history and reloads CPU
+  assets in `incant watch-assets`. Six service and two separate-process CLI tests
+  pass. Editor dispatch and GPU/ECS hot reload remain open.
+  See [source watching evidence](docs/spikes/asset-source-watch.md).
 
 - Responsive project loading merged in PR #5 after all twelve hosted checks passed.
   File reads and journal recovery
@@ -66,12 +73,13 @@ within its documented workload.
   presentation and keyboard-dialog focus ring; the native app builds successfully.
   Protected-folder access and rebuilt native verification remain unproven.
 
-- The first five PRs are merged into main after their required checks passed:
-  foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4
-  and responsive loading/focus #5. The site deployed successfully at
+- The first six PRs are merged into main after their required checks passed:
+  foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
+  responsive loading/focus #5 and shared import batches #6. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
-  before merge. Shared import preparation and atomic batches are the next Phase 1
-  increment. Merging does not approve a phase gate.
+  before merge. Shared import preparation passed all twelve checks on `4bddf52`
+  before merge. Source watching is the current Phase 1 increment. Merging does
+  not approve a phase gate.
 
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing
