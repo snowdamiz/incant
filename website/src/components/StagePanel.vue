@@ -40,17 +40,17 @@ const history = [
           Add a grappling hook that pulls the wanderer to whatever it hits. Test it, then show me.
         </p>
         <div class="flex gap-3">
-          <WispMark class="mt-0.5 h-5 w-auto shrink-0" body="#a998ff" />
+          <WispMark class="mt-0.5 h-5 w-auto shrink-0" body="#8c95ff" />
           <div class="text-[13px] leading-relaxed">
             <p>Here is the plan.</p>
             <ol class="mt-2 space-y-1.5 text-ed-muted">
-              <li><span class="font-mono text-[11.5px] text-ed-violet">1</span>&ensp;Add GrappleHook to Wanderer</li>
-              <li><span class="font-mono text-[11.5px] text-ed-violet">2</span>&ensp;Write grapple.ts</li>
-              <li><span class="font-mono text-[11.5px] text-ed-violet">3</span>&ensp;Play-test the jump to the isle</li>
+              <li><span class="font-mono text-[11.5px] text-ed-accent">1</span>&ensp;Add GrappleHook to Wanderer</li>
+              <li><span class="font-mono text-[11.5px] text-ed-accent">2</span>&ensp;Write grapple.ts</li>
+              <li><span class="font-mono text-[11.5px] text-ed-accent">3</span>&ensp;Play-test the jump to the isle</li>
             </ol>
           </div>
         </div>
-        <div class="mt-auto rounded-lg border border-ed-line px-3.5 py-2.5 text-[12.5px] text-ed-muted">
+        <div class="mt-auto rounded-lg border border-ed-control bg-ed-raised px-3.5 py-2.5 text-[12.5px] text-ed-muted">
           Ask the agent…
         </div>
       </div>
@@ -78,7 +78,7 @@ const history = [
         <p class="text-[13px] leading-relaxed text-ed-muted">Four edits in one transaction. Nothing changes until you apply it.</p>
         <div class="mt-auto flex gap-2 text-[12.5px] font-medium">
           <span class="flex-1 rounded-md bg-ed-text py-2 text-center text-ed-bg">Apply</span>
-          <span class="flex-1 rounded-md border border-ed-line py-2 text-center">Discard</span>
+          <span class="flex-1 rounded-md border border-ed-control py-2 text-center">Discard</span>
         </div>
       </div>
     </template>
@@ -94,10 +94,10 @@ const history = [
           <div
             v-for="(frame, i) in frames"
             :key="i"
-            class="relative aspect-[4/3] overflow-hidden rounded-md bg-gradient-to-b from-[#2a2048] via-[#6a4268] to-[#c98a72]"
+            class="relative aspect-[4/3] overflow-hidden rounded-md bg-gradient-to-b from-[#151922] via-[#3a3d47] to-[#b88466]"
           >
-            <span class="absolute bottom-0 left-0 h-[22%] w-[42%] bg-[#120e1c]" />
-            <span class="absolute right-0 bottom-[38%] h-[8%] w-[34%] rounded-sm bg-[#1d1630]" />
+            <span class="absolute bottom-0 left-0 h-[22%] w-[42%] bg-[#0e1014]" />
+            <span class="absolute right-0 bottom-[38%] h-[8%] w-[34%] rounded-sm bg-[#171a21]" />
             <span class="absolute size-1.5 rounded-full bg-[#efe6d4]" :style="{ left: frame.x, top: frame.y }" />
           </div>
         </div>
@@ -110,7 +110,7 @@ const history = [
           </li>
         </ul>
         <div class="mt-auto flex gap-3 border-t border-ed-line pt-4">
-          <WispMark class="mt-0.5 h-5 w-auto shrink-0" body="#a998ff" />
+          <WispMark class="mt-0.5 h-5 w-auto shrink-0" body="#8c95ff" />
           <p class="text-[13px] leading-relaxed">It works. The wanderer reaches the isle in one pull.</p>
         </div>
       </div>
@@ -124,7 +124,7 @@ const history = [
           <li v-for="(entry, i) in history" :key="i" class="flex items-center gap-3 rounded-md px-2.5 py-2.5" :class="entry.undone ? 'bg-ed-raised' : ''">
             <span
               class="grid size-6 shrink-0 place-items-center rounded-full text-[10.5px] font-semibold"
-              :class="entry.who === 'Agent' ? 'bg-ed-violet/20 text-ed-violet' : 'bg-ed-amber/15 text-ed-amber'"
+              :class="entry.who === 'Agent' ? 'bg-ed-agent/15 text-ed-agent' : 'bg-ed-amber/15 text-ed-amber'"
             >{{ entry.who === 'Agent' ? 'A' : 'Y' }}</span>
             <span class="min-w-0 flex-1 text-[13px]" :class="entry.undone ? 'text-ed-muted line-through decoration-ed-muted/60' : ''">
               {{ entry.what }}

@@ -12,7 +12,7 @@ const year = new Date().getFullYear()
         id="closing-title"
         class="font-display-soft text-balance-safe text-[3.25rem] leading-[0.95] font-[420] tracking-[-0.03em] sm:text-[5.2rem] lg:text-[7rem]"
       >
-        Start with a <em class="text-wisp italic">sentence.</em>
+        Start with a <em class="italic">sentence.</em>
       </h2>
       <div class="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
         <p class="max-w-md text-[17px] leading-relaxed text-muted">
@@ -21,7 +21,7 @@ const year = new Date().getFullYear()
         <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
           <a
             :href="links.productGuide"
-            class="inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-[15px] font-medium text-paper transition-colors hover:bg-wisp"
+            class="inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-[15px] font-medium text-paper transition-colors hover:bg-ink-soft"
           >
             Read the product guide
             <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" /></svg>
@@ -29,7 +29,7 @@ const year = new Date().getFullYear()
           </a>
           <a
             :href="links.repository"
-            class="text-[15px] font-medium underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-wisp"
+            class="text-[15px] font-medium underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-accent"
           >
             View on GitHub<span class="sr-only"> (may require access)</span>
           </a>

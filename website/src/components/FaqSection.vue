@@ -11,7 +11,7 @@ import { faqItems, links } from '../content'
         </h2>
         <p class="mt-5 max-w-xs text-[16px] leading-relaxed text-muted">
           The
-          <a :href="links.productGuide" class="text-ink underline decoration-rule underline-offset-4 hover:decoration-wisp">
+          <a :href="links.productGuide" class="text-ink underline decoration-rule underline-offset-4 hover:decoration-accent">
             product guide<span class="sr-only"> (on GitHub, may require access)</span></a>
           goes deeper, from the document model to the agent.
         </p>
@@ -23,7 +23,7 @@ import { faqItems, links } from '../content'
             class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left [&::-webkit-details-marker]:hidden"
           >
             <h3 class="text-[18px] font-medium tracking-[-0.01em] sm:text-[19px]">{{ item.question }}</h3>
-            <svg viewBox="0 0 20 20" class="size-5 shrink-0 text-muted transition-colors group-hover:text-wisp" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <svg viewBox="0 0 20 20" class="size-5 shrink-0 text-muted transition-colors group-hover:text-accent" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
               <path d="M4 10h12" />
               <path d="M10 4v12" class="origin-center transition-transform duration-300 group-open:scale-y-0" />
             </svg>
