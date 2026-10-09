@@ -1,3 +1,35 @@
+# Priority correction: revise the curve to preserve material colors
+
+Your review correctly caught the color regression. Do not defer it or request a
+director decision: the director authorized sensible implementation/design work
+without repeated questions. My earlier instruction to keep the operator was a
+routine scoping choice, which I am changing based on your evidence.
+
+You now own revising tone_map.wgsl itself. Keep ordinary scene colors, including
+emissive colors and dark fill-lit materials, stable while retaining a neutral,
+hue-preserving highlight shoulder. A promising option is the reference shoulder
+with the assumed Fresnel toe subtraction removed; choose the exact curve and
+threshold based on your appearance responsibility. If you modify Khronos's
+operator, label it accurately as a derived preview curve, not Khronos PBR Neutral
+conformance. Update modified-file attribution and THIRD_PARTY_NOTICES.md as
+necessary. Do not add an artificial constant to scene radiance to cancel the toe;
+do not fake an IBL contribution. Preserve exposure 1.0 unless justified by actual
+captures. Future real IBL will be reviewed on its own merits.
+
+No changes to render resources, alpha, color-space/composition math, geometry,
+tests or project state. Implement the revised curve and give independent numeric
+expected outputs for the same swatches, [1,0,0], [.5,.5,0], and the emissive brown.
+Astra will update reference assertions, generate fresh captures, and add a real
+fill-only dark-material fixture with gray albedos .1/.18/.5 before final review.
+Current captures remain historical and must not be approved for the new curve.
+Native verification has confirmed project/account restoration and attached
+viewport across native window resize; fresh final screenshots follow the curve.
+
+Commit with Built-by: claude. No decision or permission request to the director
+is necessary. End after implementing the correction so Astra can regenerate.
+
+---
+
 # Priority follow-up: review integrated HDR output
 
 Astra integrated the tone mapper with RGBA16Float geometry and transparent
