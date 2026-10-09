@@ -65,8 +65,11 @@ export function ViewportPanel() {
     title = 'No project loaded';
     detail = 'There is nothing to render until the project opens.';
   } else if (viewport.status === 'error') {
+    // One state covers surface setup, scene preparation and drawing failures. The
+    // surface may still be attached with an earlier scene underneath, so this names
+    // the render error without claiming a cause or that nothing is drawn.
     status = 'Error';
-    title = 'The viewport failed to attach';
+    title = 'Viewport render error';
     detail = viewport.error.message;
   } else {
     status = 'Not attached';
@@ -99,7 +102,9 @@ export function ViewportPanel() {
             <p id="viewport-detail" className="viewport-empty__detail">
               {detail}
             </p>
-            <p className="viewport-empty__note">Nothing in this area is rendered by the engine.</p>
+            {viewport?.status === 'error' ? null : (
+              <p className="viewport-empty__note">Nothing in this area is rendered by the engine.</p>
+            )}
           </div>
         )}
       </div>

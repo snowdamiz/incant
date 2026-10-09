@@ -159,4 +159,42 @@ describe('project loading and failure states', () => {
     const hierarchy = region('hierarchy');
     expect(within(hierarchy).getByRole('alert').textContent).toContain('expected "}" but found end of file');
   });
+
+  it('a render error on a ready project names the error without claiming a detached surface', async () => {
+    // A failed scene replacement can keep the last valid GPU scene on an attached surface.
+    const message = 'asset 01J00000000000000000000020 cooked geometry version 3 is unsupported (expected 2)';
+    const { bridge, publish } = projectBridge({
+      ...fixtureSnapshot('sample'),
+      viewport: { status: 'error', error: { code: 'viewport.failed', message } },
+    });
+    const { container } = render(<App resolution={{ kind: 'bridge', bridge }} />);
+
+    const viewport = region('viewport');
+    expect(within(viewport).getByText('Error')).toBeTruthy();
+    expect(within(viewport).getByText('Viewport render error')).toBeTruthy();
+    // The backend detail is shown verbatim and describes the host.
+    const detail = within(viewport).getByText(message);
+    expect(detail.id).toBe('viewport-detail');
+    expect(viewport.querySelector('[data-viewport-host]')!.getAttribute('aria-describedby')).toBe('viewport-detail');
+    expect(viewport.textContent).not.toMatch(/failed to attach|not attached|Nothing in this area is rendered/i);
+    // A render error is not a project failure.
+    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
+    expect(within(viewport).queryByText('No project loaded')).toBeNull();
+    await expectNoAxeViolations(container);
+
+    // A later valid revision recovers: the host is clear for the native surface again.
+    publish({ ...fixtureSnapshot('sample'), viewport: { status: 'attached', surface: 'Native wgpu' } });
+    expect(within(viewport).getByText('Attached')).toBeTruthy();
+    expect(within(viewport).queryByText('Viewport render error')).toBeNull();
+    expect(viewport.querySelector('.viewport-empty')).toBeNull();
+  });
+
+  it('a failed project open does not describe the viewport as a render error', () => {
+    const { bridge } = projectBridge(fixtureSnapshot('project-error'));
+    render(<App resolution={{ kind: 'bridge', bridge }} />);
+    const viewport = region('viewport');
+    expect(within(viewport).getByText('No project loaded')).toBeTruthy();
+    expect(within(viewport).getByText('There is nothing to render until the project opens.')).toBeTruthy();
+    expect(viewport.textContent).not.toMatch(/render error|failed to attach|Nothing in this area is rendered/i);
+  });
 });
