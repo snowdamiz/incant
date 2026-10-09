@@ -18,6 +18,8 @@ pub struct ModelNode {
 #[derive(Debug, Clone)]
 pub struct ImportedModel {
     pub meshes: Vec<Mesh>,
+    pub textures: Vec<crate::ModelTexture>,
+    pub images: Vec<crate::Texture>,
     pub nodes: Vec<ModelNode>,
     pub scenes: Vec<Vec<usize>>,
     pub default_scene: Option<usize>,
@@ -28,7 +30,7 @@ pub struct ImportedModel {
 }
 
 /// First static-model importer. Unsupported content fails explicitly instead of
-/// silently losing animation, texture bindings, morph targets or extension data.
+/// silently losing animation, morph targets or extension data.
 pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
     let mut sources = SourceSet::new(root)?;
     let bytes = sources.read(source)?;
@@ -44,11 +46,6 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
     }
     if doc.cameras().next().is_some() {
         return Err(AssetError::Unsupported("glTF cameras".into()));
-    }
-    if doc.textures().next().is_some() || doc.images().next().is_some() {
-        return Err(AssetError::Unsupported(
-            "textured glTF (texture cooking is pending)".into(),
-        ));
     }
     if doc.nodes().len() > 100_000 || doc.meshes().len() > 10_000 {
         return Err(AssetError::Limit("model objects"));
@@ -104,6 +101,8 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
             return Err(invalid("accessor outside buffer view"));
         }
     }
+    let (textures, images) =
+        crate::model_textures::import_textures(doc, &buffers, &mut sources, source)?;
     let mut meshes = Vec::new();
     let mut mesh_materials = Vec::new();
     let mut primitive_indices = Vec::new();
@@ -144,6 +143,16 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
                 if accessor.count() != n {
                     return Err(invalid("vertex attribute counts differ"));
                 }
+            }
+            let material = primitive.material();
+            let pbr = material.pbr_metallic_roughness();
+            let textured = pbr.base_color_texture().is_some()
+                || pbr.metallic_roughness_texture().is_some()
+                || material.normal_texture().is_some()
+                || material.occlusion_texture().is_some()
+                || material.emissive_texture().is_some();
+            if textured && primitive.get(&Semantic::TexCoords(0)).is_none() {
+                return Err(invalid("textured primitive requires TEXCOORD_0"));
             }
             let reader = primitive.reader(|b| Some(buffers[b.index()].as_slice()));
             let positions: Vec<_> = reader
@@ -193,6 +202,14 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
                     return Err(AssetError::Limit("generated normal vertices"));
                 }
             }
+            if tangents.is_none() && material.normal_texture().is_some() {
+                let old_count = imported.vertices.len();
+                crate::tangents::generate(&mut imported)?;
+                total_vertices = total_vertices - old_count + imported.vertices.len();
+                if total_vertices > MAX_VERTICES {
+                    return Err(AssetError::Limit("generated tangent vertices"));
+                }
+            }
             ids.push(meshes.len());
             mesh_materials.push(primitive.material().index());
             meshes.push(imported);
@@ -227,6 +244,8 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
         .unwrap_or_default();
     Ok(ImportedModel {
         meshes,
+        textures,
+        images,
         nodes,
         materials,
         mesh_materials,

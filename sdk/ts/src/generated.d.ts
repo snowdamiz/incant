@@ -5,11 +5,13 @@ export namespace CameraSchema {
 export type Camera = CameraSchema.Root;
 
 export namespace CommandSchema {
-  export type Asset = { "id": string; "kind": string; "name": string; "path": string; "sha256": string };
+  export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
+  export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
   export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
   export type Origin = "user" | "agent" | "script" | "import";
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
+  export type TextureUsage = "color" | "linear" | "normal";
   export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "set_memory"; "section": string; "text": string });
 }
 export type Command = CommandSchema.Root;
@@ -20,13 +22,15 @@ export namespace MeshRendererSchema {
 export type MeshRenderer = MeshRendererSchema.Root;
 
 export namespace ProjectSchema {
-  export type Asset = { "id": string; "kind": string; "name": string; "path": string; "sha256": string };
+  export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
+  export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
   export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
   export type Origin = "user" | "agent" | "script" | "import";
   export type ProjectSettings = { "tick_rate": number };
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type ScriptSource = { "id": string; "name": string; "path": string };
+  export type TextureUsage = "color" | "linear" | "normal";
   export type Root = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings };
 }
 export type Project = ProjectSchema.Root;

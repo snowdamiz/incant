@@ -58,12 +58,14 @@ enum Cli {
         #[arg(long, default_value_t = 1)]
         entities: usize,
     },
-    /// Import a project-local static glTF/GLB through the shared command bus.
+    /// Import a project-local static model or image through the shared command bus.
     Import {
         project: PathBuf,
         source: PathBuf,
         #[arg(long)]
         cache: Option<PathBuf>,
+        #[arg(long, value_parser = ["color", "linear", "normal"])]
+        texture_usage: Option<String>,
     },
     Validate {
         project: PathBuf,
@@ -323,7 +325,13 @@ fn main() -> Result<()> {
             project,
             source,
             cache,
-        } => assets::import(&project, &source, cache.as_deref())?,
+            texture_usage,
+        } => assets::import(
+            &project,
+            &source,
+            cache.as_deref(),
+            texture_usage.as_deref(),
+        )?,
         Cli::Schema { directory } => {
             fs::create_dir_all(&directory)?;
             let mut registry = schema_registry();

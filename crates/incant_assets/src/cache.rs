@@ -20,11 +20,14 @@ pub struct ModelMetadata {
     pub default_scene: Option<usize>,
     pub materials: Vec<serde_json::Value>,
     pub mesh_materials: Vec<Option<usize>>,
+    #[serde(default)]
+    pub textures: Vec<crate::ModelTexture>,
 }
 #[derive(Debug)]
 pub struct CookedModel {
     pub metadata: ModelMetadata,
     pub meshes: Vec<Mesh>,
+    pub images: Vec<crate::Texture>,
     pub cache_hit: bool,
 }
 impl From<&ImportedModel> for ModelMetadata {
@@ -37,6 +40,7 @@ impl From<&ImportedModel> for ModelMetadata {
             default_scene: m.default_scene,
             materials: m.materials.clone(),
             mesh_materials: m.mesh_materials.clone(),
+            textures: m.textures.clone(),
         }
     }
 }
@@ -65,7 +69,7 @@ pub fn cook_gltf(root: &Path, source: &Path, cache: &Path) -> Result<CookedModel
     if json.len() > 8 * 1024 * 1024 {
         return Err(AssetError::Limit("model metadata"));
     }
-    let mut bytes = b"INCMOD01".to_vec();
+    let mut bytes = b"INCMOD02".to_vec();
     bytes.extend_from_slice(&(json.len() as u32).to_le_bytes());
     bytes.extend(json);
     bytes.extend_from_slice(&(imported.meshes.len() as u32).to_le_bytes());
@@ -73,6 +77,15 @@ pub fn cook_gltf(root: &Path, source: &Path, cache: &Path) -> Result<CookedModel
         let cooked = cook_mesh(mesh)?;
         bytes.extend_from_slice(&(cooked.len() as u32).to_le_bytes());
         bytes.extend(cooked);
+        if bytes.len() > MAX_SOURCE_BYTES - 32 {
+            return Err(AssetError::Limit("cooked model bytes"));
+        }
+    }
+    bytes.extend_from_slice(&(imported.images.len() as u32).to_le_bytes());
+    for image in &imported.images {
+        let ktx = crate::encode_ktx2(image)?;
+        bytes.extend_from_slice(&(ktx.len() as u32).to_le_bytes());
+        bytes.extend(ktx);
         if bytes.len() > MAX_SOURCE_BYTES - 32 {
             return Err(AssetError::Limit("cooked model bytes"));
         }
@@ -120,7 +133,7 @@ fn count(bytes: &mut &[u8]) -> Result<usize> {
     Ok(u32::from_le_bytes(take(bytes, 4)?.try_into().unwrap()) as usize)
 }
 fn decode_model(bytes: &[u8], key: &str) -> Result<CookedModel> {
-    if bytes.len() < 48 || &bytes[..8] != b"INCMOD01" {
+    if bytes.len() < 48 || (&bytes[..8] != b"INCMOD01" && &bytes[..8] != b"INCMOD02") {
         return Err(invalid("invalid model cache header"));
     }
     let end = bytes.len() - 32;
@@ -152,6 +165,18 @@ fn decode_model(bytes: &[u8], key: &str) -> Result<CookedModel> {
         }
         meshes.push(mesh);
     }
+    let mut images = Vec::new();
+    if &bytes[..8] == b"INCMOD02" {
+        let n = count(&mut payload)?;
+        if n > 768 {
+            return Err(AssetError::Limit("cached textures"));
+        }
+        for _ in 0..n {
+            let size = count(&mut payload)?;
+            images.push(crate::decode_ktx2(take(&mut payload, size)?)?);
+        }
+    }
+    crate::model_textures::validate_textures(&metadata.textures, images.len())?;
     if !payload.is_empty() {
         return Err(invalid("trailing bytes in model cache"));
     }
@@ -179,6 +204,7 @@ fn decode_model(bytes: &[u8], key: &str) -> Result<CookedModel> {
     Ok(CookedModel {
         metadata,
         meshes,
+        images,
         cache_hit: true,
     })
 }

@@ -29,6 +29,8 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - run: cargo test --workspace --release --locked
+      - name: Validate cooked KTX2 with the Khronos reference tool
+        run: python3 tools/validate_ktx.py
       - run: cargo build -p incant_editor --release --features custom-protocol --locked
       - run: cargo run -p incant_headless --release --locked -- schema schemas
       - run: node tools/generate_sdk.mjs --check

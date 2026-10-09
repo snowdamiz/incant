@@ -59,7 +59,9 @@ impl SourceSet {
         if name.is_empty()
             || name.contains(':')
             || name.contains('\0')
-            || normalized.to_string_lossy().contains('\\')
+            || normalized
+                .components()
+                .any(|c| c.as_os_str().to_string_lossy().contains('\\'))
         {
             return Err(invalid("asset path is not portable"));
         }
@@ -97,7 +99,10 @@ impl SourceSet {
                 .ok_or_else(|| invalid("malformed data URI"))?;
             if !matches!(
                 header,
-                "application/octet-stream;base64" | "application/gltf-buffer;base64"
+                "application/octet-stream;base64"
+                    | "application/gltf-buffer;base64"
+                    | "image/png;base64"
+                    | "image/jpeg;base64"
             ) {
                 return Err(AssetError::Unsupported("buffer data URI media type".into()));
             }
@@ -135,7 +140,7 @@ impl SourceSet {
     pub fn fingerprint(&self) -> String {
         use sha2::{Digest, Sha256};
         let mut hash = Sha256::new();
-        hash.update(b"incant-static-gltf-v1-meshopt-0.6.2\0");
+        hash.update(b"incant-static-gltf-v2-meshopt-0.6.2-textures-v1\0");
         for d in self.dependencies() {
             hash.update((d.path.len() as u64).to_le_bytes());
             hash.update(d.path.as_bytes());

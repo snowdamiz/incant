@@ -1,13 +1,22 @@
 //! CPU asset import and cooking. No account, renderer or editor is required.
 mod cache;
 mod gltf_import;
+mod ktx;
 mod mesh;
+mod model_textures;
 mod source;
+mod tangents;
+mod texture;
+mod texture_cache;
 
 pub use cache::{CookedModel, ModelMetadata, cook_gltf, load_model};
 pub use gltf_import::{ImportedModel, ModelNode, import_gltf};
+pub use ktx::{decode_ktx2, encode_ktx2};
 pub use mesh::{Mesh, Vertex, cook_mesh, decode_mesh};
+pub use model_textures::ModelTexture;
 pub use source::{Dependency, SourceSet};
+pub use texture::{Texture, TextureFormat, TextureUsage, import_image};
+pub use texture_cache::{CookedTexture, TextureMetadata, cook_texture, load_texture};
 use thiserror::Error;
 
 pub const MAX_SOURCE_BYTES: usize = 128 * 1024 * 1024;

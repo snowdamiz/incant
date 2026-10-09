@@ -8,6 +8,7 @@ fn asset() -> Asset {
         name: "Lighthouse".into(),
         path: "assets/lighthouse.glb".into(),
         kind: "model".into(),
+        import_settings: None,
         sha256: "ab".repeat(32),
     }
 }
@@ -137,4 +138,48 @@ fn invalid_import_metadata_cannot_partially_modify_a_project() {
     assert_eq!(bus.project(), &before);
     assert_eq!(bus.revision(), 0);
     assert!(bus.history().is_empty());
+}
+
+#[test]
+fn texture_import_options_are_validated_and_undoable() {
+    use incant_doc::{AssetImportSettings, TextureUsage};
+    let mut source = asset();
+    source.import_settings = Some(AssetImportSettings::Texture {
+        usage: TextureUsage::Normal,
+    });
+    let mut bus = CommandBus::new(Project::empty("settings")).unwrap();
+    assert!(
+        bus.execute(
+            vec![Command::UpsertAsset {
+                asset: source.clone()
+            }],
+            Actor::import("texture"),
+            "Invalid settings",
+            None
+        )
+        .is_err()
+    );
+    source.kind = "texture".into();
+    bus.execute(
+        vec![Command::UpsertAsset {
+            asset: source.clone(),
+        }],
+        Actor::import("texture"),
+        "Import normal",
+        None,
+    )
+    .unwrap();
+    let before = bus.project().clone();
+    source.import_settings = Some(AssetImportSettings::Texture {
+        usage: TextureUsage::Color,
+    });
+    bus.execute(
+        vec![Command::UpsertAsset { asset: source }],
+        Actor::import("texture"),
+        "Change usage",
+        None,
+    )
+    .unwrap();
+    bus.undo().unwrap();
+    assert_eq!(bus.project(), &before);
 }

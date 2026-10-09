@@ -56,7 +56,24 @@ pub struct Asset {
     pub path: String,
     pub kind: String,
     pub sha256: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub import_settings: Option<AssetImportSettings>,
 }
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(tag = "type", rename_all = "snake_case", deny_unknown_fields)]
+pub enum AssetImportSettings {
+    Texture { usage: TextureUsage },
+}
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema,
+)]
+#[serde(rename_all = "snake_case")]
+pub enum TextureUsage {
+    Color,
+    Linear,
+    Normal,
+}
+
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct ScriptSource {
@@ -233,6 +250,16 @@ impl Project {
                 issue(
                     format!("/assets/{id}"),
                     "asset name and kind cannot be empty",
+                );
+            }
+            if matches!(
+                asset.import_settings,
+                Some(AssetImportSettings::Texture { .. })
+            ) && asset.kind != "texture"
+            {
+                issue(
+                    format!("/assets/{id}/import_settings"),
+                    "texture import settings require a texture asset",
                 );
             }
             if !safe_relative_path(&asset.path) {

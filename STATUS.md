@@ -12,10 +12,11 @@ repeated permission questions. Phase advancement does not mark those gates passe
   canonical formatting and stable ULIDs.
 - One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,
   durable recovery and exclusive journal ownership.
-- Initial Phase 1 static glTF/GLB import, meshopt cooking and versioned binary
-  cache, with dependency invalidation and source-independent CPU loading. CLI
-  import uses stable asset IDs and journaled command-bus transactions; reimport
-  and undo are tested. Textures, animation and runtime integration remain open.
+- Phase 1 static textured glTF/GLB import, meshopt cooking and versioned binary
+  cache, with dependency invalidation and source-independent CPU loading. PNG,
+  JPEG and EXR cook to independently validated KTX2 with color/normal-aware mips.
+  CLI import preserves stable IDs and durable import settings through the shared
+  command bus. Animation, compression tiers and runtime integration remain open.
   See [asset pipeline evidence](docs/spikes/asset-pipeline.md).
 - Bevy fixed-step simulation; isolated play state; SWC/QuickJS scripting, sandbox,
   live ECS queries and compatible hot reload.

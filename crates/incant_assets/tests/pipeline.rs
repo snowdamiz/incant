@@ -57,6 +57,7 @@ fn import_cook_runtime_load_and_dependency_reimport_are_reversible() {
         name: "Triangle".into(),
         path: "models/triangle.gltf".into(),
         kind: "model".into(),
+        import_settings: None,
         sha256: first.metadata.fingerprint.clone(),
     };
     bus.execute(
@@ -249,4 +250,50 @@ fn absent_normals_preserve_hard_edges_instead_of_smoothing_them() {
     assert_eq!(mesh.vertices[0][..3], mesh.vertices[3][..3]);
     assert_eq!(mesh.vertices[0][3..6], [0., 0., 1.]);
     assert_eq!(mesh.vertices[3][3..6], [0., 1., 0.]);
+}
+
+#[test]
+fn version_one_caches_remain_loadable_after_texture_support() {
+    use sha2::{Digest, Sha256};
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    fixture(root);
+    let imported = import_gltf(root, Path::new("models/triangle.gltf")).unwrap();
+    let mut metadata = serde_json::to_value(incant_assets::ModelMetadata::from(&imported)).unwrap();
+    metadata.as_object_mut().unwrap().remove("textures");
+    let json = serde_json::to_vec(&metadata).unwrap();
+    let mut bytes = b"INCMOD01".to_vec();
+    bytes.extend((json.len() as u32).to_le_bytes());
+    bytes.extend(json);
+    bytes.extend((imported.meshes.len() as u32).to_le_bytes());
+    for mesh in &imported.meshes {
+        let cooked = cook_mesh(mesh).unwrap();
+        bytes.extend((cooked.len() as u32).to_le_bytes());
+        bytes.extend(cooked);
+    }
+    let hash = Sha256::digest(&bytes);
+    bytes.extend(hash);
+    fs::write(
+        root.join(format!("{}.incmodel", imported.fingerprint)),
+        bytes,
+    )
+    .unwrap();
+    let loaded = load_model(root, &imported.fingerprint).unwrap();
+    assert!(loaded.images.is_empty());
+    assert!(loaded.metadata.textures.is_empty());
+    assert_eq!(loaded.meshes, imported.meshes);
+}
+
+#[test]
+fn native_path_separators_become_portable_dependency_names() {
+    let temp = tempfile::tempdir().unwrap();
+    fixture(temp.path());
+    let mut sources = SourceSet::new(temp.path()).unwrap();
+    assert_eq!(
+        sources
+            .read(&Path::new("buffers").join("triangle.bin"))
+            .unwrap(),
+        triangle()
+    );
+    assert_eq!(sources.dependencies()[0].path, "buffers/triangle.bin");
 }

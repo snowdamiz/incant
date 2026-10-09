@@ -6,6 +6,16 @@
         "id": {
           "type": "string"
         },
+        "import_settings": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AssetImportSettings"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "kind": {
           "type": "string"
         },
@@ -27,6 +37,27 @@
         "sha256"
       ],
       "type": "object"
+    },
+    "AssetImportSettings": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "texture",
+              "type": "string"
+            },
+            "usage": {
+              "$ref": "#/$defs/TextureUsage"
+            }
+          },
+          "required": [
+            "type",
+            "usage"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "Entity": {
       "additionalProperties": false,
@@ -162,6 +193,14 @@
         "path"
       ],
       "type": "object"
+    },
+    "TextureUsage": {
+      "enum": [
+        "color",
+        "linear",
+        "normal"
+      ],
+      "type": "string"
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",

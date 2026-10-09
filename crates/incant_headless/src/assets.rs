@@ -1,11 +1,16 @@
 use crate::{Result, print, read_project, save};
-use incant_assets::cook_gltf;
+use incant_assets::{TextureUsage, cook_gltf, cook_texture};
 use incant_cmd::{Actor, Command, CommandBus};
-use incant_doc::{Asset, new_id};
+use incant_doc::{Asset, AssetImportSettings, new_id};
 use serde_json::json;
 use std::path::{Component, Path};
 
-pub fn import(project: &Path, source: &Path, cache: Option<&Path>) -> Result<()> {
+pub fn import(
+    project: &Path,
+    source: &Path,
+    cache: Option<&Path>,
+    texture_usage: Option<&str>,
+) -> Result<()> {
     let root = project
         .parent()
         .filter(|p| !p.as_os_str().is_empty())
@@ -33,8 +38,53 @@ pub fn import(project: &Path, source: &Path, cache: Option<&Path>) -> Result<()>
         );
     }
     let previous = matching.first().copied().cloned();
-    let default_cache = root.join(".incant/cache/models");
-    let cooked = cook_gltf(root, source, cache.unwrap_or(&default_cache))?;
+    let extension = source
+        .extension()
+        .and_then(|v| v.to_str())
+        .unwrap_or("")
+        .to_ascii_lowercase();
+    let (kind, fingerprint, cache_hit, import_settings, details) = match extension.as_str() {
+        "gltf" | "glb" => {
+            if texture_usage.is_some() {
+                return Err("Texture usage applies only to standalone images".into());
+            }
+            let default_cache = root.join(".incant/cache/models");
+            let cooked = cook_gltf(root, source, cache.unwrap_or(&default_cache))?;
+            (
+                "model",
+                cooked.metadata.fingerprint,
+                cooked.cache_hit,
+                None,
+                json!({"meshes":cooked.meshes.len(),"textures":cooked.images.len(),"vertices":cooked.meshes.iter().map(|m|m.vertices.len()).sum::<usize>(),"dependencies":cooked.metadata.dependencies}),
+            )
+        }
+        "png" | "jpg" | "jpeg" | "exr" => {
+            let default_cache = root.join(".incant/cache/textures");
+            let cache = cache.unwrap_or(&default_cache);
+            let usage = match texture_usage {
+                Some("color") => TextureUsage::Color,
+                Some("linear") => TextureUsage::Linear,
+                Some("normal") => TextureUsage::Normal,
+                Some(_) => return Err("Unknown texture usage".into()),
+                None => match &previous {
+                    Some(old) => match old.import_settings {
+                        Some(AssetImportSettings::Texture { usage }) => usage,
+                        None => TextureUsage::Color,
+                    },
+                    _ => TextureUsage::Color,
+                },
+            };
+            let cooked = cook_texture(root, source, cache, usage)?;
+            (
+                "texture",
+                cooked.metadata.fingerprint,
+                cooked.cache_hit,
+                Some(AssetImportSettings::Texture { usage }),
+                json!({"width":cooked.texture.width,"height":cooked.texture.height,"format":cooked.texture.format,"mip_levels":cooked.texture.levels.len(),"usage":usage,"dependencies":[cooked.metadata.dependency]}),
+            )
+        }
+        _ => return Err("Import supports glTF, GLB, PNG, JPEG and EXR".into()),
+    };
     let asset = Asset {
         id: previous
             .as_ref()
@@ -51,23 +101,23 @@ pub fn import(project: &Path, source: &Path, cache: Option<&Path>) -> Result<()>
                     .into_owned()
             }),
         path: path.into(),
-        kind: "model".into(),
-        sha256: cooked.metadata.fingerprint.clone(),
+        kind: kind.into(),
+        sha256: fingerprint,
+        import_settings,
     };
-    // A repeated unchanged import is a no-op, so refresh checks don't fill Undo.
     let changed = previous.as_ref() != Some(&asset);
     if changed {
         bus.execute(
             vec![Command::UpsertAsset {
                 asset: asset.clone(),
             }],
-            Actor::import("glTF"),
+            Actor::import(kind),
             format!("Import {}", asset.name),
             None,
         )?;
     }
     save(project, &bus.project().canonical_text()?)?;
     print(
-        json!({"asset":asset,"changed":changed,"cache_hit":cooked.cache_hit,"meshes":cooked.meshes.len(),"vertices":cooked.meshes.iter().map(|m|m.vertices.len()).sum::<usize>(),"dependencies":cooked.metadata.dependencies,"revision":bus.revision()}),
+        json!({"asset":asset,"changed":changed,"cache_hit":cache_hit,"details":details,"revision":bus.revision()}),
     )
 }
