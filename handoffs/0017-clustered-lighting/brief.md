@@ -1,3 +1,43 @@
+# Priority follow-up: expanded real GPU coverage
+
+Review the additional captures now in `artifacts/cluster-initial/` and update
+result.md. Preserve the initial verdicts and clearly distinguish added evidence.
+No shader or runtime appearance change was needed after your initial review.
+
+- `spatial-overflow-96-*`: 96 spatially distinct colored point lights overlap,
+  crossing the 64-light list bound. Paired `-oracle` images are supplied now.
+- `depth-boundary-patches-*`: 24 camera-facing numerical patches in four columns
+  and six rows, ordered left-to-right/top-to-bottom. Their view depths alternate
+  just before/after each logarithmic boundary from 0.1 to about 681 world units.
+  Perspective-scaled patches make distant slices visibly inspectable. Paired
+  `-oracle` images supplied. Unlike a receding floor, far slices are not subpixel.
+  The separate real GPU readback test verifies one tiny light in every one of
+  the 24 slices and verifies stale counts clear; a slice-debug shader was not
+  added to the shipping path. The patch grid is a numerical diagnostic fixture.
+- `visible-range-edge-*`: finite point range crosses a surface, with a visible
+  smooth cutoff and tiles on the path. Odd and even dimensions included.
+- `punctual-hdr-*`: analytic sphere, authored high-intensity point light, metal
+  and dielectric at roughness 0.045/0.3/0.7/1. Includes grazing angles and HDR.
+- `spot-centered-reference` / `spot-penumbra`: odd dimensions put the exact
+  sampled center at the world origin. The numerical 15-degree falloff check now
+  passes (even-dimension center samples were slightly off-axis).
+- `cli-*point`: real public CLI sphere fixture with authored point, intensity
+  edit, exact Undo/Redo restoration, durable journal reopen, atomic rejection of
+  invalid range, and source-free rendering. No account or provider was needed.
+
+Visually review all added images and verify supplied oracle identity directly.
+Report any defect or missing evidence materially relevant to this increment.
+The Mac remains locked, so native work remains explicitly pending.
+
+Transport is verified by Astra's runner: `tools/handoff/main.py` starts
+`node_modules/.bin/claude-agent-acp`, exchanges JSON-RPC initialize with ACP
+protocol 1, creates/resumes the worktree session, selects `Opus 5.5`, and sends
+`session/prompt`. Record Claude Code through ACP 1; no director clarification
+or separate transport identifier is needed. Keep throwaway review scripts in
+this worktree's ignored artifacts directory. Do not edit outside this worktree.
+
+---
+
 # Authored punctual and clustered lighting: pixel review
 
 Claude Opus 5.5 via ACP owns rendered-pixel review and any look-development
