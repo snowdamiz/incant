@@ -102,3 +102,7 @@ readback, presentation and simulation and are not GPU timestamps. Raw samples,
 PNG hashes, verification-log hashes and comparison details are in the
 [evidence ledger](evidence/render-pass-graph-2026-10-09.json). No phase or named
 game/device performance gate is inferred from these synthetic checks.
+
+All twelve hosted checks passed at exact head `50c950a`. After the camera parent
+merged, PR #20 was retargeted to main and merged as `13edae6` on 2026-10-09. The
+actual merge commit ends in `Built-by: astra`; no phase gate is approved.
