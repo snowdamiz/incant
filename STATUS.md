@@ -37,7 +37,10 @@ frame budget within its documented workload.
 - Claude completed the macOS native-window review, including traffic-light
   alignment, rounded GPU viewport, resizing and screenshots. The connected-account
   UI is integrated. Windows native viewport evidence is pending.
-- The real twenty-task evaluation is running with the director's saved session.
+- The real twenty-task evaluation completed with the director's saved session:
+  **19/20 passed**, exceeding the 14/20 score threshold. The ten-step case reached
+  the expected state but returned an incomplete provider response and is counted
+  as failed. [Per-case results](docs/spikes/evidence/live-agent-2026-10-08.json).
 - Draft PR: https://github.com/snowdamiz/incant/pull/1. macOS checks and the
   six-platform workflow ran: full checks and five platforms passed. Android
   reached compilation but pulled in an unconfigured Android activity implementation.

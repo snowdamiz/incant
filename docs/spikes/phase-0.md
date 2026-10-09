@@ -9,8 +9,11 @@ The complete 36-month engine/game plan remains open.
 Tauri 2.12.1 hosts a transparent child webview above a wgpu 29 native parent-window
 surface. The renderer compiles and actual offscreen GPU readback produced
 `artifacts/phase0-capture.png` (1280×720, Apple M5 Pro). This only proves native GPU
-render/readback, not webview composition. Native hierarchy selection, rename, undo and redo have passed; Claude
-pixel review remains pending. Windows execution remains pending.
+render/readback, not webview composition. Native hierarchy selection, rename, undo
+and redo passed separately. Claude subsequently completed the actual macOS native
+composition review, including traffic-light alignment, rounded viewport masking,
+resizing and fullscreen transitions; see [handoff 0002](../../handoffs/0002-native-viewport/result.md).
+Windows native editor execution remains pending.
 
 ## Spike 2: document and CRDT — local evidence passed
 
@@ -69,7 +72,7 @@ An earlier implementation appended runtime ticks to authoring CRDT history and
 measured p95 364.74 ms, failing the budget. Separating disposable runtime state
 removed that inappropriate authoring overhead while retaining shared commands.
 
-## Spike 4: live OpenAI agent — evaluation in progress
+## Spike 4: live OpenAI agent — score threshold passed
 
 The local loop has query, typed atomic patch, schema and actual GPU screenshot
 tools, streamed Responses handling, bounded tokens/steps, approval modes,
@@ -81,8 +84,13 @@ edit, duplicate labels, hierarchy changes and two injection examples. The oracle
 compares the full final document excluding generated provenance, checks successful
 query/patch/screenshot calls, validates agent provenance and undoes every patch to
 recover the exact initial project. A partial run cannot pass the gate. The corpus
-validates locally. Real OAuth inference and an approved scene edit now pass. The
-unassisted twenty-task evaluation is in progress; no gate score is claimed yet.
+validates locally. The real unassisted evaluation completed on macOS using the
+director's saved OAuth session and `gpt-6-astra`: **19 of 20 cases passed**, above
+the fourteen-case threshold. [Per-case evidence](evidence/live-agent-2026-10-08.json)
+records state, tool, provenance and undo checks. The ten-step case reached its exact
+expected state and undid correctly, but returned a failed/incomplete provider
+response; it is counted as failed and remains a reliability issue. This result
+does not approve Phase 0 or claim cross-platform agent reliability.
 
 The CLI supports a dedicated CI evaluation key or an explicitly connected local
 OpenAI account. It never reuses Codex or Claude credentials.
@@ -107,7 +115,7 @@ Keychain prompts. Windows/Linux retain their OS stores. The
 limits. Windows/Linux real-account authentication, API-key inference and live
 revocation remain pending.
 
-## Spike 6: Claude ACP handoff — in progress
+## Spike 6: Claude ACP handoff — local evidence passed
 
 Authenticated Claude Code reports a valid subscription. ACP initializes, lists
 models, explicitly selects Opus 5.5 and executes the hierarchy/editor packet in an
@@ -118,8 +126,11 @@ escape, interleaved client requests and error-body redaction.
 The first prompt hit an absolute timeout while still working. The client now uses
 an inactivity timeout. A later machine sleep disconnected the adapter. Session
 listing/loading now resumes the latest session only when its cwd exactly matches
-the handoff worktree. Visual files are preserved. Result packet, reviewed screenshots
-and completed integration are still required before calling this spike passed.
+the handoff worktree. The editor foundation, macOS native review and account UI
+handoffs subsequently completed through ACP with returned result packets, reviewed
+screenshots and integration. [Handoff 0001](../../handoffs/0001-editor-foundation/result.md)
+records the first complete round trip; handoffs 0002 and 0003 contain the native and
+account follow-ups. The current UI/bridge suite passes 180 tests.
 
 ## Six-target runnable artifacts — partial evidence
 
@@ -128,9 +139,9 @@ and completed integration are still required before calling this spike passed.
 | macOS arm64 | Passed locally | 120 ticks, x≈6, document roundtrip passed | Local unsigned executable |
 | Web/WASM | Passed locally | In-app browser logged INCANT_SMOKE_PASS | Local static folder |
 | iOS arm64 simulator | Passed locally | Scene lifecycle, C ABI and ECS assertions passed | Ad-hoc simulator .app only |
-| Windows | CI source prepared | Pending runner | No artifact yet |
-| Linux | CI source prepared | Pending runner | No artifact yet |
-| Android | Gradle/JNI/NDK source prepared | Pending SDK and runner/device | No artifact yet |
+| Windows | Hosted CI passed | Document and 120-tick simulation passed | Hosted unsigned executable |
+| Linux | Hosted CI passed | Document and 120-tick simulation passed | Hosted executable |
+| Android | SDK path fixed; activity dependency correction under CI validation | Device execution pending | APK validation pending |
 
 The iOS host was corrected to adopt the scene lifecycle required by the installed
 SDK before recording an execution pass. A compiled but failed launch was not counted.
@@ -138,8 +149,10 @@ The Rust LLVM tools component was required to resolve the local WASM linker's LL
 library. No device signing certificate or platform release has been produced.
 
 GitHub workflows exist and a private remote was created at
-https://github.com/snowdamiz/incant. No remote run has completed yet. Hosted probes bootstrap
-validation; the plan's self-hosted graphics/device runners and nightly artifact
+https://github.com/snowdamiz/incant. PR checks and five hosted platform probes
+have passed; [recorded results](evidence/ci-pr-2026-10-08.json) distinguish those
+runs from current reruns. Hosted probes bootstrap validation; the plan's
+self-hosted graphics/device runners and nightly artifact
 history are not provisioned. Signing certificates and Year 1 staffing are director
 prerequisites. Phase 0 is not ready for approval.
 

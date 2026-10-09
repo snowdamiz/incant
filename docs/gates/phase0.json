@@ -19,10 +19,15 @@
       "scope": "batched behavior over 1000 entities, one Mac"
     },
     "live_agent": {
-      "passed": false,
-      "completed": 0,
+      "passed": true,
+      "completed": 20,
       "required_passes": 14,
-      "total": 20
+      "total": 20,
+      "successful": 19,
+      "evidence": "docs/spikes/evidence/live-agent-2026-10-08.json",
+      "remaining": [
+        "Investigate incomplete response on the ten-step case; exact state and undo passed"
+      ]
     },
     "authentication": {
       "passed": false,

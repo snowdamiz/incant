@@ -126,3 +126,9 @@ The native app remains connected. This proves macOS persistence, refresh and liv
 inference; Windows/Linux real-account authentication, API-key inference and live
 revocation remain outstanding. The single approved edit does not count as an
 unassisted twenty-task evaluation or Phase 0 approval.
+
+The subsequent unassisted [twenty-task run](evidence/live-agent-2026-10-08.json)
+completed with the same saved account: 19/20 passed, with no additional browser
+login or Keychain prompts. One incomplete provider response is counted as a failed
+task. The final app build, including the callback fix, also restored the account
+after restart; the native account button displayed the saved profile.
