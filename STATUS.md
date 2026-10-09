@@ -5,6 +5,13 @@ The complete engine/game release is not implemented. No phase gate is approved.
 
 ## Work in progress
 
+- Product landing page: standalone Vue/Vite/Tailwind website and push-to-main
+  GitHub Pages workflow in `codex/incant-landing`; Claude visual review and browser
+  verification are in progress. This does not advance an engine phase gate.
+- Pages activation was attempted on 2026-10-08 and GitHub returned HTTP 422:
+  the current plan does not support Pages for this private repository. The
+  director must choose a Pages-eligible plan or repository visibility before
+  publishing; no visibility or billing settings were changed.
 - Monorepo and pinned Rust/Node development tools.
 - Spike 6: scoped ACP client, shared generated conventions, visual handoff packet.
 - Spikes 2–3: typed document, command journal and QuickJS/Bevy integration.
