@@ -52,9 +52,14 @@ within its documented workload.
 
 ## Active work
 
+- All three initial PRs are merged into main after their required checks passed:
+  foundation #1, product site #2 and asset imports #3. The site deployed successfully
+  at https://snowdamiz.github.io/incant/. Runtime asset-version work and renewed
+  Claude visual review continue separately. Merging does not approve a phase gate.
+
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing
-  page has the matching palette in PR #2. Its modeling expansion and lighter copy
+  page has the matching palette, merged in PR #2. Its modeling expansion and lighter copy
   each passed 23 hosted browser checks. Graphical explanations, authentic SVG
   platform marks and the subsequent workflow correction are integrated in PR #2.
   Each workflow icon has a short visible explanation and tighter spacing; all 23

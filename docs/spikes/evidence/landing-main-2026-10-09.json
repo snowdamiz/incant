@@ -1,0 +1,42 @@
+{
+  "baseRefName": "main",
+  "headRefOid": "e7bb956b438fbc910977fd3addf8c6ba1692f8f8",
+  "mergeCommit": {
+    "oid": "6a0841b1552dd5e9ecfb492dcc4ca14f7f9338d9"
+  },
+  "mergedAt": "2026-10-09T04:41:06Z",
+  "state": "MERGED",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-09T04:40:31Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37883546928/job/113668390029",
+      "name": "checks",
+      "startedAt": "2026-10-09T04:22:14Z",
+      "status": "COMPLETED",
+      "workflowName": "Incant checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-09T04:22:54Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37883546933/job/113668390147",
+      "name": "build",
+      "startedAt": "2026-10-09T04:22:09Z",
+      "status": "COMPLETED",
+      "workflowName": "Website \u00b7 check and deploy"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-09T04:22:54Z",
+      "conclusion": "SKIPPED",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37883546933/job/113668580747",
+      "name": "deploy",
+      "startedAt": "2026-10-09T04:22:54Z",
+      "status": "COMPLETED",
+      "workflowName": "Website \u00b7 check and deploy"
+    }
+  ],
+  "url": "https://github.com/snowdamiz/incant/pull/2"
+}

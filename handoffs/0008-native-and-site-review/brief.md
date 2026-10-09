@@ -1,3 +1,23 @@
+## Current follow-up: native captures are ready
+
+Astra has supplied seven actual native CUA PNGs and functional observations in
+`artifacts/native-review/` **inside this handoff worktree**. Read
+`artifacts/native-review/astra-observations.md` first and inspect those existing
+images now. The root native build matches the pre-polish editor source; the two
+commits already made in this handoff stay preserved. Do not repeat completed site
+or fixture work. Review the supplied native titlebar, fullscreen and account-dialog
+pixels, finish your result packet, and request only specific additional native
+captures that are still needed. Raw native images have real account labels and
+must remain ignored/uncommitted.
+
+Use Astra's CUA channel for all native app input and capture. Do not use native
+capture helpers (including screencapture, CGWindow or Swift helpers), AppleScript,
+or synthetic native input. Browser fixture tests and existing-image inspection
+remain permitted. No computer-use tools are exposed to your ACP session; use the
+provided native files and write exact follow-up requests instead of substituting
+other native automation. Ignore a blank helper capture when judging alignment;
+it does not supersede the supplied CUA evidence.
+
 # Resume native editor and landing-page visual review
 
 ## Latest director authorization — 2026-10-09

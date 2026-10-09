@@ -125,8 +125,14 @@ For initial revision `472cdcc`, Linux desktop, all six platform probes and all
 three credential jobs passed. Windows exposed a native-separator bug in source
 resolution: `PathBuf` backslashes were being treated as invalid filename
 characters. The fix checks path components and has a native-path regression test.
-Hosted validation of the fix and texture increment is pending. No local browser,
-renderer capture, screenshot, account or credential access ran.
+The combined import revision `aed4cbe` passed source checks, Windows/Linux native
+editor builds and renderer probes, all three credential-storage jobs, all six
+platform probes, and website checks. [Exact run evidence](evidence/asset-import-2026-10-09.json).
+PR #3 merged into main as `acc123b`. Those platform probes exercise the existing
+platform workload; they do not claim asset GPU/ECS integration on six targets.
+No local browser, renderer capture, screenshot, account or credential access ran
+as part of the asset-import checks. The later runtime-version increment remains
+separately locally verified pending hosted integration.
 
 ## Still open
 

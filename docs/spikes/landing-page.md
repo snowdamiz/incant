@@ -248,8 +248,11 @@ private-repository eligibility failure is historical, not the current blocker.
 On 2026-10-09 the director authorized agents to merge completed PRs after review
 and passing checks. The Pages creation call now succeeds with `build_type=workflow`,
 HTTPS enforced, and the expected URL `https://snowdamiz.github.io/incant/`. Repository
-visibility and billing were not changed. The main-branch website workflow will
-publish after integration; a successful public deployment is not yet claimed.
+visibility and billing were not changed. PR #2 merged into main as `6a0841b` after its website and source checks passed.
+[The main-branch workflow](https://github.com/snowdamiz/incant/actions/runs/37885030479)
+successfully built, tested and deployed the site. A direct HTTPS read returned 200
+with the expected Incant document and `/incant/assets/` references. This verifies
+hosting, not a new visual review. [Deployment evidence](evidence/landing-deploy-2026-10-09.json).
 
 References: [Vite GitHub Pages deployment](https://vite.dev/guide/static-deploy.html#github-pages),
 [Tailwind Vite integration](https://tailwindcss.com/docs/installation/using-vite).
