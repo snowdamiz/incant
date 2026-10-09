@@ -70,6 +70,34 @@ describe("native bridge", () => {
     expect(bridge.getSnapshot().viewport?.status).toBe('attached');
     expect(bridge.getSnapshot().diagnostics).toEqual([]);
   });
+
+  it('updates source diagnostics without changing the ready document or viewport', async () => {
+    let current = read();
+    const bridge = new NativeBridge(async <T>() => current as T);
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics).toEqual([]);
+    current = { ...read(), source_diagnostics: [{
+      asset_id: '00000000000000000000000011', source: 'models/prop.gltf', message: 'Missing buffer',
+    }] };
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics).toEqual([{
+      id: 'asset-source:00000000000000000000000011', severity: 'error',
+      message: 'Missing buffer', entity: null, component: null, path: 'models/prop.gltf',
+    }]);
+    expect(bridge.getSnapshot().viewport?.status).toBe('attached');
+    expect(bridge.getSnapshot().entities[entity]?.name).toBe('Cube');
+    current = { ...current, viewport_error: 'GPU capture failed' };
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics.map((item) => item.id)).toEqual([
+      'native-viewport', 'asset-source:00000000000000000000000011',
+    ]);
+    current = { ...current, source_diagnostics: [] };
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics.map((item) => item.id)).toEqual(['native-viewport']);
+    current = read();
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics).toEqual([]);
+  });
   it('allows document editing during cooking and preserves it when the import becomes stale', async () => {
     let current = read(); current.asset_import = { available: true };
     let rejectImport: (error: { code: string; message: string }) => void = () => { throw new Error('No pending import'); };

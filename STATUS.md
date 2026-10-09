@@ -20,9 +20,9 @@ after review and passing checks, without requesting separate merge approval.
   CLI import preserves stable IDs and durable import settings through the shared
   command bus. The CPU runtime store publishes asset replacements atomically and
   keeps retained versions valid across reimport and undo. Headless runs load cooked
-  assets before simulation. Animation, compression tiers, GPU/ECS bindings and
-  editor/GPU hot reload remain open. The authoring CLI now watches registered
-  sources and reloads CPU assets.
+  assets before simulation. Animation, compression tiers and production
+  material/ECS bindings remain open. The authoring CLI watches sources;
+  the native editor now watches sources and replaces imported GPU geometry.
   See [asset pipeline evidence](docs/spikes/asset-pipeline.md).
 - Bevy fixed-step simulation; isolated play state; SWC/QuickJS scripting, sandbox,
   live ECS queries and compatible hot reload.
@@ -61,6 +61,15 @@ within its documented workload.
   frame sequences. Claude approved the six captured frames; hosted checks are
   pending. See
   [headless playback evidence](docs/spikes/headless-playback.md).
+
+- Saved native projects now watch registered sources and dependencies on a worker,
+  prepare outside the command-bus lock and commit with revision checks. Imports
+  share durable history; source errors retain the last valid geometry and clear
+  on repair. Actual native external edits, Undo/Redo, error/recovery, journal
+  replay and reopening the rebuilt app pass. 115 Rust tests, two explicit GPU
+  tests and 282 UI/bridge tests pass locally. Claude approved the native sequence
+  and final wrapping fix at 1440×900 and 1000×650; hosted checks are pending.
+  See [editor source watching](docs/spikes/editor-source-watch.md).
 
 - Imported model GPU geometry is implemented locally: indexed/instanced buffers,
   default glTF scene/node hierarchy, version retention, revision-driven editor
@@ -111,7 +120,7 @@ within its documented workload.
   Claude approved the replacement's native captures at wide/minimum sizes and
   supplied a final import-row separator polish. All twelve hosted checks passed
   on `73b817b`; PR #8 merged into main as `cda5ef3`. Automatic editor
-  watching remains open.
+  watching is implemented in the next increment.
   Agent asset list/inspect/import now use the shared service and a project-bound
   filesystem capability. Three new agent tests and a live saved-session import
   pass, including journal recovery, Undo/Redo and source-independent CPU loading.

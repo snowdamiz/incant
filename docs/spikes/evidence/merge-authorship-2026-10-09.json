@@ -1,0 +1,17 @@
+{
+  "historical_metadata_omissions": [
+    {
+      "pull_request": 8,
+      "merge_commit": "cda5ef3c0f9c4c68cc3b4c14e53e06980f4398d6",
+      "performed_by": "astra",
+      "issue": "GitHub default merge body omitted the required Built-by trailer; constituent implementation commits retain their author trailers."
+    },
+    {
+      "pull_request": 9,
+      "merge_commit": "331a3cb480a9fd0c377af39c87bcc3d9064193fb",
+      "performed_by": "astra",
+      "issue": "GitHub default merge body omitted the required Built-by trailer; constituent implementation commits retain their author trailers."
+    }
+  ],
+  "correction": "Future merges supply --body-file with Built-by: astra. Published main history is preserved."
+}
