@@ -4,10 +4,15 @@ import { Icon, iconForKind } from '../../icons/Icon';
 import { projectState } from '../../shell/projectState';
 import { useShell } from '../../shell/ShellContext';
 import { StateView } from '../StateView';
+import { AssetInspector } from '../assets/AssetInspector';
+import { useAssets } from '../../assets/AssetsContext';
 import { FieldView, fieldDomId, safeJson } from './FieldView';
 
 export function InspectorPanel() {
   const { snapshot, selection } = useShell();
+  // The Inspector follows the left column: entities for Hierarchy, assets for Assets.
+  const { view } = useAssets();
+  const assetsView = view === 'assets';
   const editable = false; // No component-edit command exists on the bridge yet (see NATIVE_VIEWPORT.md).
   const entity = selection !== null ? snapshot?.entities[selection] : undefined;
   const project = projectState(snapshot);
@@ -26,6 +31,8 @@ export function InspectorPanel() {
         <p>Component values appear here once the project opens.</p>
       </StateView>
     );
+  } else if (assetsView) {
+    body = <AssetInspector />;
   } else if (selection === null) {
     body = (
       <StateView icon="entity" title="Nothing selected" compact>
@@ -48,7 +55,7 @@ export function InspectorPanel() {
         <h2 id="inspector-title" className="panel__title">
           Inspector
         </h2>
-        {entity && !editable ? (
+        {entity && !editable && !assetsView ? (
           <span
             className="quiet-chip"
             tabIndex={0}

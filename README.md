@@ -1,7 +1,7 @@
 # Incant
 
 Incant is an in-progress, text-native game engine and editor. This repository is
-implementing [PLAN.md](PLAN.md). **Current stage: Phase 0.** It is not an Engine 1.0
+implementing [PLAN.md](PLAN.md). **Current stage: Phase 1, with open Phase 0 items deferred.** It is not an Engine 1.0
 release, and Driftwake has not been built or shipped. No phase gate is approved.
 See [the evidence ledger](docs/spikes/phase-0.md) and [STATUS.md](STATUS.md).
 
@@ -26,6 +26,21 @@ transport and editor with bundled assets. On macOS it produces the unsigned
 development bundle `artifacts/Incant.app`; open that bundle to run the native
 window. `--release` builds an optimized version. This is a local development
 package, not a signed distribution installer.
+
+To import assets in the native editor, launch it with a saved project path. On macOS:
+
+```sh
+open -n artifacts/Incant.app --args /absolute/path/game.incant.json
+```
+
+Open **Assets → Import**, enter one or more project-relative glTF/GLB or image
+paths, and import the batch. Files must already be inside the project folder.
+Texture details allow Color, Linear or Normal map interpretation and reimport.
+Each changed batch is one undoable history entry. Cooking runs in the background;
+editing the document during cooking causes a conflict that can be retried.
+The default unsaved startup project explains why imports are unavailable.
+Imported assets are registered and cooked; placing models in the viewport remains
+open. [Editor and agent import evidence](docs/spikes/editor-agent-asset-imports.md).
 
 ## Headless tools
 
@@ -112,8 +127,12 @@ tools/cargo run -p incant_headless --release -- eval-check
 tools/cargo run -p incant_headless --release -- eval --model MODEL_ID
 ```
 
-The interactive agent asks before each patch and saves a separate result file plus
-its journal. The evaluation automatically edits twenty disposable fixtures and
+The interactive agent asks before document patches and asset imports under its
+default approval policy, then saves a separate result file plus its journal.
+It can list and inspect registered assets, and import existing sources inside the
+opened project's folder through the same atomic import service as the editor.
+The engine host supplies that folder; the model cannot choose another root,
+arbitrary output paths or shell commands. The evaluation automatically edits twenty disposable fixtures and
 makes billable/provider-plan requests with a per-case token cap. It checks exact
 final state, successful query/patch/screenshot calls, provenance and undo. Mock
 tests and `eval-check` never count toward the fourteen-of-twenty live gate.

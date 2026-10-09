@@ -51,6 +51,7 @@ export function readCapabilities(advertised: readonly string[]): CapabilitySet {
 const CAPABILITY_LABELS: Record<Capability, string> = {
   'entity.rename': 'Rename',
   'entity.delete': 'Delete',
+  'asset.import': 'Import assets',
   'history.undo': 'Undo',
   'history.redo': 'Redo',
   'provider.connect': 'Sign in with ChatGPT',

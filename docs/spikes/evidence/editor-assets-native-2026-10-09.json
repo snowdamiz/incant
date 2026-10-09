@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-09",
+  "platform": "macOS",
+  "transport": "Codex CUA accessibility and native input",
+  "build": "5346cc0 plus structured native import-error integration",
+  "project": "Disposable Native Asset Review project; local synthetic triangle and PNG sources",
+  "results": {
+    "unsaved_startup": "PASS: host reason and disabled import control",
+    "batch_import": "PASS: model and normal-map texture registered together; one history entry",
+    "batch_undo_redo": "PASS: native Cmd+Z removed both assets; Shift+Cmd+Z restored both. Stable-ID preservation is also covered by Rust history tests.",
+    "texture_reimport": "PASS: Normal map to Linear preserved ID 01M4GJ0W4VP8AA4TEW2N6ERFDE; Undo restored Normal map and original fingerprint",
+    "malformed_source": "PASS: exact glTF error, unchanged asset count/history, source retained, Try again available",
+    "background_preparation": "PASS: eight 2048x2048 synthetic PNGs cooked with native navigation responsive; busy status and read-only import fields observed",
+    "concurrent_edit": "PASS: entity rename committed during cooking; History remained responsive; asset.conflict then rejected stale batch (expected revision 7, current 8), preserving paths and rename",
+    "keyboard": "PASS: Tab/Down/Enter reach texture details; heading receives focus; Escape restores asset row; Home reaches model; model has no texture interpretation control",
+    "text_undo": "PASS: Cmd+Z and native Edit > Undo changed path typing only; assets/history unchanged",
+    "responsive_layout": "PASS: narrow native pane replaces list, retains 300px dock, and shows complete tab labels/counts; wide pane, selected controls, heading rings approved by Claude.",
+    "inspector_order": "PASS: native Translation, Rotation, Scale order",
+    "saved_account": "PASS: saved connection restored in rebuilt app; no sign-in or Keychain prompt; no account actions invoked",
+    "account_focus": "PASS: pointer/keyboard dialog opens on Close; Escape restores opener; Claude confirms visible Close focus ring.",
+    "restart": "PASS: quitting and reopening the same saved project recovered all 10 registered assets, four history entries and the concurrent entity rename; saved account remained connected."
+  },
+  "visual_review": "PASS: Claude Opus 5.5 through ACP approved revision 4 native captures in review commit 9343822. Prior dock-layout pixel approvals remain superseded.",
+  "private_capture_directory": "artifacts/native-import-review/ (ignored; account label may be present; do not publish)",
+  "limitations": [
+    "No manual Windows/Linux checks required by director; hosted checks remain applicable.",
+    "No GPU/ECS asset binding, file picker/source copying, automatic editor source watching or cancellable parsing claimed."
+  ],
+  "revision_2": {
+    "build": "08026d8",
+    "ui_tests": 267,
+    "paste_selection": "PASS: replaces fully selected path; unselected caret retains it and inserts lines below",
+    "busy_copy": "PASS in native accessibility for actual large imports at wide and narrow sizes; private captures supplied to Claude",
+    "reimport_result": "PASS: operation completes after scrolling; history advances and Claude confirms full result visibility.",
+    "captures": [
+      "r01-busy-copy-wide.jpg",
+      "r01b-busy-copy-narrow.jpg",
+      "r03-reimport-result.jpg",
+      "r04-heading-focus-narrow.jpg",
+      "r04-heading-focus-wide.jpg"
+    ],
+    "visual_verdict": "PASS R1\u2013R4: busy copy wide/narrow, complete narrow tab labels/counts, reimport result visible, heading ring wraps title with padding. R5 native paste behavior also passes."
+  },
+  "validation": {
+    "rust_release_tests": 102,
+    "ui_bridge_tests": 267,
+    "clippy": "pass",
+    "native_debug_build": "pass",
+    "native_release_build": "pass",
+    "generated_contracts": "pass",
+    "khronos_ktx2": "pass"
+  },
+  "revision_4": {
+    "build": "3a7f7ff",
+    "design_commit": "94c6635 (integrated as b99c520)",
+    "ui_tests": 276,
+    "native_results": {
+      "placement": "PASS: asset navigation in left column; properties/import in Inspector; dock contains only Problems, Console, History",
+      "batch": "PASS: triangle + normal texture, Normal map interpretation, single history increment 7 to 8; native Undo restored Linear, Redo restored Normal map",
+      "busy": "PASS: eight changed 2048x2048 PNGs cooked in real worker; hierarchy/assets keyboard switching remained responsive; history 8 to 9",
+      "error": "PASS: malformed glTF retained path and exact engine error; asset count and history unchanged; choosing a texture and Show restored failed form and focused path",
+      "keyboard": "PASS: Home/End select model/texture; Enter focuses Inspector heading; Escape restores same row; tab arrows switch views",
+      "hidden_inspector": "PASS: hidden right panel reopened by Import, focusing Path 1",
+      "minimum_layout": "PASS: Claude reviewed the actual 1001x651 logical minimum. Import action remains pinned; details scroll. Reimport below fold is documented; traffic-light spacing is confirmed in n04c-failed-min.",
+      "saved_account": "Existing connection restored in rebuilt app without sign-in or Keychain prompt. No account actions performed.",
+      "problems_reveal": "Automated UI test passes. Native live entity-linked diagnostics are not yet emitted by editor/bridge/native.ts; no fabricated native result."
+    },
+    "native_captures": [
+      "n01-assets-wide.jpg",
+      "n01b-assets-min.jpg",
+      "n02-texture-details.jpg",
+      "n02b-model-details.jpg",
+      "n03-import-form.jpg",
+      "n03b-import-success.jpg",
+      "n03c-import-form-min.jpg",
+      "n04-busy.jpg",
+      "n04b-failed.jpg",
+      "n04c-failed-min.jpg",
+      "n05-keyboard.jpg"
+    ],
+    "integration_corrections": [
+      "Hidden destination panels reopen before focus transfer",
+      "Failed reimport Show selects its own asset even after another asset is selected",
+      "Folder labels with punctuation retain distinct accessible IDs"
+    ],
+    "visual_verdict": "PASS N1-N5 and N6 output placement, including minimum-size scrolling/pinned action, grouped rows, identity blocks, errors and focus rings. Native entity-linked problem reveal remains unexercised; automated test passes.",
+    "native_review_commit": "9343822",
+    "polish": "Decorative separator between Model and Updates note; browser verified by Claude; no new native capture requested.",
+    "capture_dimensions": {
+      "wide": [
+        3024,
+        1898
+      ],
+      "minimum": [
+        2002,
+        1302
+      ]
+    },
+    "validation": {
+      "ui_bridge_tests": 276,
+      "native_debug_build": "pass",
+      "native_release_build": "pass",
+      "main_bundle_gzip_kb": 101.58,
+      "bundle_budget_kb": 110
+    }
+  }
+}

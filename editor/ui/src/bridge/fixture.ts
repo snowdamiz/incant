@@ -23,6 +23,7 @@ import type {
   EntityKind,
   HierarchyNode,
   HistoryEntry,
+  ProjectAsset,
   Ulid,
 } from './contract';
 import { UI_PROTOCOL_VERSION } from './contract';
@@ -405,6 +406,26 @@ const SAMPLE_CONSOLE: ConsoleEntry[] = [
   { id: 'c5', level: 'info', source: 'viewport', message: 'Native viewport not attached (Spike 1 pending).', at: at(2) },
 ];
 
+/** Sample asset rows. Fingerprints are invented; nothing was cooked. */
+const SAMPLE_ASSETS: ProjectAsset[] = [
+  { id: fixtureId(7001), name: 'dock_kit', path: 'models/dock_kit.glb', kind: 'model', fingerprint: 'sample-fingerprint-dock-kit' },
+  { id: fixtureId(7002), name: 'crate', path: 'models/props/crate.gltf', kind: 'model', fingerprint: 'sample-fingerprint-crate' },
+  { id: fixtureId(7003), name: 'Crate albedo', path: 'textures/crate_albedo.png', kind: 'texture', fingerprint: 'sample-fingerprint-albedo', textureUsage: 'color' },
+  { id: fixtureId(7004), name: 'crate_normal', path: 'textures/crate_normal.png', kind: 'texture', fingerprint: 'sample-fingerprint-normal', textureUsage: 'normal' },
+  { id: fixtureId(7005), name: 'pier_roughness', path: 'textures/pier_roughness.jpg', kind: 'texture', fingerprint: 'sample-fingerprint-rough', textureUsage: 'linear' },
+  { id: fixtureId(7006), name: 'harbor_sky', path: 'textures/sky/harbor_sky_4k.exr', kind: 'texture', fingerprint: 'sample-fingerprint-sky', textureUsage: 'linear' },
+  {
+    id: fixtureId(7007),
+    name: 'weathered_pier_planks_with_moss_and_salt_stains_variant_b',
+    path: 'textures/environment/harbor/district_02/surfaces/wood/weathered_pier_planks_with_moss_and_salt_stains_variant_b_albedo.png',
+    kind: 'texture',
+    fingerprint: 'sample-fingerprint-long',
+    textureUsage: 'color',
+  },
+];
+
+const READ_ONLY_IMPORT = { available: false, reason: 'The sample fixture is read-only.' } as const;
+
 const NO_VIEWPORT = {
   status: 'not-attached',
   reason: 'Sample data has no native surface. Open a project in the Incant editor app to attach the wgpu viewport.',
@@ -438,6 +459,8 @@ export function fixtureSnapshot(variant: FixtureVariant): BridgeSnapshot {
         diagnostics: sampleDiagnostics(byName),
         history: { entries: SAMPLE_HISTORY, applied: 4 },
         console: SAMPLE_CONSOLE,
+        assets: { status: 'ready', value: SAMPLE_ASSETS },
+        assetImport: READ_ONLY_IMPORT,
       };
     }
     case 'large': {
@@ -448,6 +471,8 @@ export function fixtureSnapshot(variant: FixtureVariant): BridgeSnapshot {
         hierarchy: { status: 'ready', value: { roots, nodes } },
         schemas: SCHEMAS,
         entities,
+        assets: { status: 'ready', value: largeAssets(240) },
+        assetImport: READ_ONLY_IMPORT,
       };
     }
     case 'empty':
@@ -456,12 +481,16 @@ export function fixtureSnapshot(variant: FixtureVariant): BridgeSnapshot {
         connection: { status: 'ready', project: { id: fixtureId(0), name: 'Untitled Project' } },
         hierarchy: { status: 'ready', value: { roots: [], nodes: {} } },
         schemas: SCHEMAS,
+        assets: { status: 'ready', value: [] },
+        assetImport: READ_ONLY_IMPORT,
       };
     case 'loading':
       return {
         ...baseSnapshot(),
         connection: { status: 'ready', project: PROJECT },
         hierarchy: { status: 'loading' },
+        assets: { status: 'loading' },
+        assetImport: READ_ONLY_IMPORT,
       };
     case 'hierarchy-error':
       return {
@@ -486,6 +515,8 @@ export function fixtureSnapshot(variant: FixtureVariant): BridgeSnapshot {
         ...baseSnapshot(),
         connection: { status: 'connecting' },
         hierarchy: { status: 'loading' },
+        assets: { status: 'loading' },
+        assetImport: { available: false, reason: 'Loading project.' },
         agent: { status: 'unavailable', reason: 'Loading project.' },
         viewport: { status: 'not-attached', reason: 'Loading project.' },
       };
@@ -503,10 +534,29 @@ function failedProject(error: BridgeError): BridgeSnapshot {
     ...baseSnapshot(),
     connection: { status: 'error', error },
     hierarchy: { status: 'error', error },
+    assets: { status: 'error', error },
+    assetImport: { available: false, reason: error.message },
     diagnostics: [{ id: 'project-load', severity: 'error', message: error.message, entity: null, component: null, path: null }],
     agent: { status: 'unavailable', reason: error.message },
     viewport: { status: 'error', error },
   };
+}
+
+function largeAssets(count: number): ProjectAsset[] {
+  const folders = ['models/props', 'models/architecture', 'textures/props', 'textures/terrain'];
+  return Array.from({ length: count }, (_, index) => {
+    const folder = folders[index % folders.length]!;
+    const model = folder.startsWith('models');
+    const name = `${model ? 'prop' : 'surface'}_${String(index).padStart(3, '0')}`;
+    return {
+      id: fixtureId(20000 + index),
+      name,
+      path: `${folder}/${name}.${model ? 'glb' : 'png'}`,
+      kind: model ? 'model' : 'texture',
+      fingerprint: `sample-fingerprint-${index}`,
+      ...(model ? {} : { textureUsage: index % 3 === 0 ? ('normal' as const) : ('color' as const) }),
+    };
+  });
 }
 
 const READ_ONLY: BridgeResult = {

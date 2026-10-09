@@ -1,0 +1,702 @@
+/*
+ * Asset library, revision 4. Assets live in the left column as a second view beside the
+ * Hierarchy, and their details, reimport and import open in the Inspector. Same row pill,
+ * focus ring, panel surfaces and section rhythm as the hierarchy and entity inspector.
+ */
+
+/* ---- Left column: Hierarchy | Assets ---- */
+
+.navigator__header {
+  gap: 0;
+  padding: 0 var(--space-3) 0 var(--space-3);
+}
+
+.navigator__tabs {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-1);
+  height: 100%;
+}
+
+.navigator__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 var(--space-3);
+  border: 0;
+  background: transparent;
+  color: var(--color-text-subtle);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  cursor: pointer;
+  transition: color var(--duration-fast);
+}
+
+.navigator__tab::after {
+  content: '';
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: -1px;
+  height: 2px;
+  border-radius: 1px;
+  background: transparent;
+}
+
+.navigator__tab:hover {
+  color: var(--color-text);
+}
+
+.navigator__tab[aria-selected='true'] {
+  color: var(--color-text);
+}
+
+.navigator__tab[aria-selected='true']::after {
+  background: var(--color-accent);
+}
+
+.navigator__tab:focus-visible,
+.navigator__tab[data-focus-visible] {
+  outline-offset: -5px;
+  border-radius: calc(var(--radius) + 3px);
+}
+
+.navigator__busy {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+}
+
+.navigator__alert {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-danger);
+}
+
+.navigator__panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Asset browser ---- */
+
+.asset-browser {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.asset-browser__toolbar {
+  gap: var(--space-3);
+}
+
+.asset-browser__import {
+  flex: none;
+  height: var(--control-height);
+}
+
+.button.is-current {
+  border-color: var(--color-border-control);
+  background: var(--color-bg-hover);
+}
+
+/* One quiet line for a running or failed import, under the toolbar. */
+.asset-browser__status {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 28px;
+  margin: var(--space-1) var(--space-3) var(--space-2);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-info-bg) 60%, var(--color-bg-panel));
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+}
+
+.asset-browser__status--error {
+  background: color-mix(in srgb, var(--color-danger-bg) 75%, var(--color-bg-panel));
+}
+
+.asset-browser__status--error > .icon {
+  color: var(--color-danger);
+}
+
+.asset-browser__status-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asset-browser__status-action {
+  flex: none;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-accent-strong);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}
+
+.asset-browser__status-action:hover {
+  background: var(--color-bg-hover);
+}
+
+.asset-list {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--space-1) 0 var(--space-4);
+}
+
+.asset-list__group + .asset-list__group {
+  margin-top: var(--space-3);
+}
+
+.asset-list__folder {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  margin: 0 var(--space-3);
+  padding: 0 var(--space-2);
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.asset-list__folder-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.asset-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--row-height);
+  margin: 0 var(--space-3);
+  padding: 0 var(--space-3) 0 calc(var(--space-2) + var(--indent));
+  border-radius: var(--radius);
+  color: var(--color-text-soft);
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+}
+
+.asset-row:hover {
+  background: var(--color-bg-hover);
+}
+
+.asset-row.is-selected {
+  background: var(--color-bg-selected);
+  color: var(--color-text);
+}
+
+.asset-row.is-selected .asset-row__name {
+  font-weight: var(--weight-medium);
+}
+
+.asset-row:focus-visible,
+.asset-row[data-focus-visible] {
+  outline-offset: -2px;
+}
+
+.asset-row__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.asset-row__tag {
+  flex: none;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.asset-row.is-selected .asset-row__tag {
+  color: var(--color-text-muted);
+}
+
+.asset-row__recent {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-success);
+}
+
+.kind--model {
+  color: #a3adff;
+}
+
+.kind--texture {
+  color: #73d6c2;
+}
+
+/* ---- Inspector: asset details and import ---- */
+
+.asset-inspector {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* The name takes focus when details open. Padding keeps the ring off the text so it reads
+   as focus on a title, not as an editable field (native review, 2026-10-09). */
+.asset-inspector__title {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 0 -6px;
+  padding: 1px 6px;
+  border-radius: var(--radius);
+}
+
+.asset-inspector__title:focus-visible,
+.asset-inspector__title[data-focus-visible] {
+  outline-offset: 0;
+}
+
+.asset-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.asset-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.asset-section--notice {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.asset-section__title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.asset-section__hint {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+.asset-section__changed {
+  color: var(--color-warning);
+}
+
+.asset-section__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.asset-source {
+  padding: 6px var(--space-3);
+  border-radius: var(--radius);
+  background: var(--color-bg-well);
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+  line-height: 18px;
+  overflow-wrap: break-word;
+  user-select: text;
+}
+
+.asset-ids > summary {
+  width: fit-content;
+  list-style: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
+
+.asset-ids > summary::-webkit-details-marker {
+  display: none;
+}
+
+.asset-ids > summary::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-right: 8px;
+  border-left: 4px solid currentColor;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  vertical-align: 1px;
+  transition: transform var(--duration-fast);
+}
+
+.asset-ids[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.asset-ids:not([open]) {
+  gap: 0;
+}
+
+.asset-ids__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.asset-ids__list > div {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: baseline;
+}
+
+.asset-ids__list dt {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.asset-ids__list dd {
+  margin: 0;
+  min-width: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+.asset-pending {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 24px;
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+}
+
+.asset-pending__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.asset-pending__note {
+  color: var(--color-text-subtle);
+  line-height: 16px;
+}
+
+
+/* Segmented radio group (texture interpretation). */
+.segmented {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 2px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-bg-well);
+}
+
+.segmented__option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.segmented__option input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.segmented__option:hover {
+  color: var(--color-text);
+}
+
+.segmented__option:has(input:checked) {
+  background: var(--color-bg-hover);
+  box-shadow: inset 0 0 0 1px var(--color-border-control);
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+}
+
+.segmented__option:has(input:focus-visible),
+.segmented__option:has(input[data-focus-visible]) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 0;
+}
+
+.segmented:disabled .segmented__option {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.segmented:disabled .segmented__option:hover {
+  color: var(--color-text-muted);
+}
+
+/* Notices: success and failure inside the pane. */
+.asset-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 10px var(--space-3) 10px var(--space-4);
+  border-radius: var(--radius);
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+.asset-note > .icon {
+  margin-top: 1px;
+}
+
+.asset-note--success {
+  background: color-mix(in srgb, var(--color-success) 9%, var(--color-bg-side));
+  color: var(--color-text-soft);
+}
+
+.asset-note--success > .icon {
+  color: var(--color-success);
+}
+
+.asset-note--error {
+  border: 1px solid color-mix(in srgb, var(--color-danger) 35%, transparent);
+  background: var(--color-danger-bg);
+  color: var(--color-text-soft);
+}
+
+.asset-note--error > .icon {
+  color: var(--color-danger);
+}
+
+.asset-note__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.asset-note__title {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.asset-note__message {
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+
+.asset-note__hint {
+  color: var(--color-text-muted);
+}
+
+.asset-note__dismiss {
+  width: 22px;
+  height: 22px;
+  margin: -2px -2px 0 0;
+}
+
+/* Import form */
+
+.import-form__lede {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 18px;
+}
+
+.import-form__lede code {
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-raised);
+  color: var(--color-text-soft);
+  font-size: 11.5px;
+}
+
+.import-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.import-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.import-row__line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.import-row__kind {
+  flex: none;
+  color: var(--color-text-subtle);
+}
+
+.import-row__input {
+  flex: 1;
+  min-width: 0;
+  height: var(--control-height);
+  padding: 0 var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-bg-well);
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  text-overflow: ellipsis;
+  transition: border-color var(--duration-fast);
+}
+
+.import-row__input::placeholder {
+  color: var(--color-text-subtle);
+  opacity: 0.8;
+}
+
+.import-row__input:hover {
+  border-color: var(--color-border-strong);
+}
+
+.import-row__input:focus-visible,
+.import-row__input[data-focus-visible] {
+  border-color: var(--color-border-control);
+  outline-offset: 1px;
+}
+
+.import-row__input[readonly] {
+  color: var(--color-text-muted);
+}
+
+.import-row__input[aria-invalid='true'] {
+  border-color: color-mix(in srgb, var(--color-danger) 70%, transparent);
+  background: color-mix(in srgb, var(--color-danger-bg) 60%, var(--color-bg-well));
+}
+
+.import-row__remove {
+  width: 24px;
+  height: 24px;
+}
+
+.import-row__meta,
+.import-row__problem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px var(--space-3);
+  margin-left: 28px;
+  margin-right: 30px;
+  font-size: var(--text-xs);
+}
+
+.import-row__problem {
+  color: var(--color-danger);
+  line-height: 17px;
+}
+
+.import-row__type {
+  color: var(--color-text-subtle);
+}
+
+/* "Model · Updates “name”": a quiet separator so the type and the update note read apart
+   (native review, revision 5). Decorative only; the two spans are already separate text. */
+.import-row__type + .import-row__existing::before {
+  content: '·';
+  margin-right: var(--space-3);
+  color: var(--color-text-subtle);
+}
+
+.import-row__existing {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text-subtle);
+}
+
+.import-form__add {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: 20px;
+}
+
+.import-form__count {
+  margin-left: auto;
+  margin-right: 4px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.import-form__formats {
+  margin-top: calc(-1 * var(--space-2));
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.import-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: 0 var(--space-4) 0 var(--space-5);
+}
+
+.import-form > .asset-note {
+  margin-top: 0;
+}
+
+/* The submit row stays in view while the paths scroll. */
+.import-form__footer {
+  position: sticky;
+  bottom: 0;
+  margin: auto calc(-1 * var(--space-4)) 0 calc(-1 * var(--space-5));
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-side);
+}
+
+.import-form__wait {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+

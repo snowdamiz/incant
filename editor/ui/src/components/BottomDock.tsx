@@ -7,6 +7,7 @@ import type { DockTab } from '../shell/ShellContext';
 import { projectState } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 import { StateView } from './StateView';
+import { useAssets } from '../assets/AssetsContext';
 
 const TABS: { id: DockTab; label: string; icon: IconName }[] = [
   { id: 'problems', label: 'Problems', icon: 'problems' },
@@ -88,7 +89,9 @@ const SEVERITY_RANK = { error: 0, warning: 1, info: 2 } as const;
 const SEVERITY_ICON = { error: 'error', warning: 'warning', info: 'info' } as const;
 
 function ProblemsList() {
-  const { snapshot, select, announce } = useShell();
+  const { snapshot, select, announce, showPanel } = useShell();
+  // A problem names an entity; showing it means showing the Hierarchy, not the asset list.
+  const { setView } = useAssets();
   const sorted = useMemo(
     () => [...(snapshot?.diagnostics ?? [])].sort((a, b) => SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity]),
     [snapshot?.diagnostics],
@@ -120,6 +123,9 @@ function ProblemsList() {
   const nodes = snapshot.hierarchy.status === 'ready' ? snapshot.hierarchy.value.nodes : {};
   const reveal = (d: Diagnostic) => {
     if (d.entity === null) return;
+    showPanel('hierarchy');
+    showPanel('inspector');
+    setView('hierarchy');
     select(d.entity);
     announce(`Selected ${nodes[d.entity]?.name ?? 'entity'}`);
   };

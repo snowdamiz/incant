@@ -57,13 +57,36 @@ within its documented workload.
   snapshot and commits all changed assets in one command-bus transaction. The CLI
   uses this shared service. Five service behavior tests, the existing CLI tests, full workspace release
   tests and Clippy passed locally and all twelve hosted checks passed before PR #6
-  merged into main as `130d249`. Editor/agent import controls remain open.
+  merged into main as `130d249`. Editor/agent integration is the current increment.
 
 - Automatic source watching now debounces registered model/image sources and
   dependencies, commits successful changes through shared history and reloads CPU
   assets in `incant watch-assets`. Six service and two separate-process CLI tests
   pass. Editor dispatch and GPU/ECS hot reload remain open.
   See [source watching evidence](docs/spikes/asset-source-watch.md).
+  PR #7 merged as `0c8e1bc` after all three applicable hosted checks passed on
+  `79a821e`, including source checks and Windows/Linux desktop jobs.
+  [Exact checks and merge evidence](docs/spikes/evidence/asset-source-watch-2026-10-09.json).
+
+- Native editor imports now prepare outside the event thread/document lock and
+  commit with revision checks through the existing persistent history. Two new
+  Rust behavior tests and 276 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
+  handoff 0010 supplies the integrated asset library and import/reimport interface.
+  Real native batch import, Undo/Redo, texture reimport, error recovery, concurrent
+  edits, stale-import rejection and text/project Undo separation pass. The director
+  rejected the bottom-dock asset layout. Claude's replacement moves Assets to the
+  left navigation and properties/import into the main Inspector. The dock now holds
+  only Problems, Console and History. All 276 UI tests pass; native batch, busy,
+  failure recovery, keyboard and hidden-Inspector checks pass in the replacement.
+  Claude approved the replacement's native captures at wide/minimum sizes and
+  supplied a final import-row separator polish. PR #8 awaits its final hosted
+  checks before merging. Automatic editor
+  watching remains open.
+  Agent asset list/inspect/import now use the shared service and a project-bound
+  filesystem capability. Three new agent tests and a live saved-session import
+  pass, including journal recovery, Undo/Redo and source-independent CPU loading.
+  Default cache writes reject symlink redirection; this fix merged with PR #7.
+  See [editor/agent import evidence](docs/spikes/editor-agent-asset-imports.md).
 
 - Responsive project loading merged in PR #5 after all twelve hosted checks passed.
   File reads and journal recovery
@@ -71,14 +94,16 @@ within its documented workload.
   results. Three Rust loader tests, 240 integrated UI/bridge tests, workspace release tests
   and Clippy pass locally. Claude handoff 0009 supplies the loading/error
   presentation and keyboard-dialog focus ring; the native app builds successfully.
-  Protected-folder access and rebuilt native verification remain unproven.
+  Protected-folder access remains unproven. The rebuilt app opens both default
+  and saved disposable projects; native account focus behavior passes, with the
+  visible keyboard ring also approved by Claude.
 
-- The first six PRs are merged into main after their required checks passed:
+- The first seven PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
-  responsive loading/focus #5 and shared import batches #6. The site deployed at
+  responsive loading/focus #5, shared import batches #6 and source watching #7. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
-  before merge. Source watching is the current Phase 1 increment. Merging does
+  before merge. Editor/agent imports are the current Phase 1 increment. Merging does
   not approve a phase gate.
 
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
@@ -91,12 +116,12 @@ within its documented workload.
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo routes by focus. Actual macOS CUA checks now confirm
   project Cmd+Z/redo, isolated text-field Undo, safe account-dialog focus, divider
   keyboard resizing and fullscreen transitions. Claude reviewed the native captures;
-  the capture indicator still obscures the traffic lights. On 2026-10-09 the director explicitly permitted computer use
+  an unobscured native capture now confirms correct traffic-light/logo spacing. On 2026-10-09 the director explicitly permitted computer use
   and screen capture again when needed. Claude’s handoff 0008 fixes tablet workflow layout, platform-mark balance, clipped
   inspector paths and F2 name selection. Rebuilt native F2 rename and Undo pass. The transport now preserves schema field
-  order (223 tests pass); macOS locked before its final native verification.
-  Claude confirmed settled fullscreen and found a missing native dialog focus ring;
-  minimum-size and visible traffic-light checks remain open.
+  order (223 tests passed); native Translation/Rotation/Scale order now also passes.
+  Claude confirmed settled fullscreen. The dialog ring fix, minimum-size tabs,
+  detail focus rings and visible traffic-light positioning now pass native review.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are

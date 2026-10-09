@@ -150,6 +150,27 @@ are bundled locally, so nothing is fetched from a network.
   viewport, inspector and History say "No project loaded" in one short line. Problems lists
   the engine's diagnostic. Without one, it says "Not validated", never "No problems". Saved
   account metadata in the titlebar chip stays visible in every project state.
+- **Asset library (handoff 0010, revision 4).** Assets are content navigation, not output,
+  so they live in the left column as a second view beside the Hierarchy. Problems, Console
+  and History keep the bottom dock to themselves.
+  - **Left column.** The header is a two-tab switcher, "Hierarchy" and "Assets", each with a
+    count, in the dock-tab style.
+  - **Asset list.** A filter and an Import button sit above the list. Assets are grouped
+    under their source folder, and long folders keep their last segments, such as
+    "…/surfaces/wood/". Rows reuse the hierarchy's 28 px pill: a kind icon, the name, and
+    for textures a quiet interpretation tag on the right.
+  - **Inspector.** It follows the left column. Hierarchy shows entity components, and Assets
+    shows the selected asset or the import form, so "pick on the left, inspect on the right"
+    holds everywhere. Asset details use the entity identity block, then sections for
+    Source, Interpretation, Reimport and a collapsed Identifiers disclosure.
+  - **Import form.** It sits in the Inspector, with a pinned action row at the bottom.
+  - **Notices.** A running or failed import shows one line under the list toolbar, wherever
+    the Inspector is. The Assets tab also carries a spinner or a red dot. The full error
+    stays in the Inspector until it is dismissed or retried. The cooking note reads "You
+    can keep working. Editing now means retrying the import." There is never a percentage
+    or a cancel control.
+  - **Leaving the asset list.** Revealing a problem from the dock returns the left column
+    to the Hierarchy. Styles live in `src/styles/assets.css`.
 
 ## Focus and keyboard
 
@@ -158,11 +179,17 @@ are bundled locally, so nothing is fetched from a network.
 - Keyboard modality (handoff 0009): WebKit draws no `:focus-visible` ring when script moves
   focus after a key press. `src/shell/inputModality.ts` sets `data-focus-visible` on the
   focused element while the last input was a key without ⌘, Ctrl or Alt. A pointer press
-  clears it. Every `:focus-visible` rule has a `[data-focus-visible]` twin, and a test
-  enforces that. A keyboard-opened dialog therefore rings Close. A pointer-opened dialog
+  clears it. `:focus-visible` rules have `[data-focus-visible]` twins. Keyboard behavior
+  is covered by interaction tests and pixel review. A keyboard-opened dialog rings Close. A pointer-opened dialog
   focuses Close without a ring, as before.
 - F6 / Shift+F6 cycle visible panels (hidden panels are skipped). Hierarchy is an ARIA
-  tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys.
+  tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys. The left
+  column's Hierarchy and Assets switcher is a tab list, so arrows move between the views.
+  The asset list is an ARIA listbox grouped by folder, with a roving tabindex. Arrows, Home
+  and End move the selection, and the Inspector follows it. Enter or Space moves focus to
+  the asset's name in the Inspector, ⌘/Ctrl+F filters, and Escape in the Inspector returns
+  to the row. Shift+Enter in a path field adds a row. A paste of several lines adds one row per
+  line. If the field was empty or wholly selected, the first line replaces it.
   Dividers are `separator`s resizable with arrows (Shift = 64 px). `?` opens the
   shortcut list (modal, focus trapped, Escape returns focus). A skip link is first.
 

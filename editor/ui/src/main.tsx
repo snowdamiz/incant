@@ -5,6 +5,7 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import './styles/tokens.css';
 import './styles/app.css';
+import './styles/assets.css';
 import { App } from './App';
 import { resolveBridge } from './bridge/resolve';
 

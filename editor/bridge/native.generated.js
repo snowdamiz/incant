@@ -86,6 +86,16 @@ function snapshotFromEngine(read) {
                 applied: 0
             },
             console: [],
+            assets: error ? {
+                status: 'error',
+                error
+            } : {
+                status: 'loading'
+            },
+            assetImport: {
+                available: false,
+                reason: error?.message ?? 'Loading project.'
+            },
             diagnostics: error ? [
                 {
                     id: "project-load",
@@ -188,6 +198,25 @@ function snapshotFromEngine(read) {
         },
         schemas,
         entities,
+        ...read.project.assets ? {
+            assets: {
+                status: 'ready',
+                value: Object.values(read.project.assets).map((asset)=>({
+                        id: id(asset.id),
+                        name: asset.name,
+                        path: asset.path,
+                        kind: asset.kind,
+                        fingerprint: asset.sha256,
+                        ...asset.import_settings?.type === 'texture' ? {
+                            textureUsage: asset.import_settings.usage
+                        } : {}
+                    }))
+            }
+        } : {},
+        assetImport: read.asset_import ?? {
+            available: false,
+            reason: 'This host does not expose asset importing.'
+        },
         diagnostics: [],
         history: {
             entries: read.history.map((tx)=>({
@@ -224,6 +253,15 @@ function snapshotFromEngine(read) {
     };
 }
 function failure(error) {
+    if (typeof error === 'object' && error !== null && 'code' in error && 'message' in error && typeof error.code === 'string' && typeof error.message === 'string') {
+        return {
+            ok: false,
+            error: {
+                code: error.code,
+                message: error.message
+            }
+        };
+    }
     return {
         ok: false,
         error: {
@@ -238,6 +276,7 @@ class NativeBridge {
     capabilities = [
         "entity.rename",
         "entity.delete",
+        "asset.import",
         "history.undo",
         "history.redo",
         "provider.connect",
@@ -256,6 +295,7 @@ class NativeBridge {
     listeners = new Set();
     historyListeners = new Set();
     pending = false;
+    importing = false;
     refreshId = 0;
     chrome;
     provider = {
@@ -369,19 +409,32 @@ class NativeBridge {
         }
     }
     async dispatch(command) {
-        if (!this.read || this.pending) return {
+        const importing = command.type === 'asset.import';
+        if (!this.read || this.pending || importing && this.importing) return {
             ok: false,
             error: {
                 code: "engine.busy",
                 message: "Wait for the current engine operation."
             }
         };
-        this.pending = true;
+        // Cooking owns a snapshot, so normal edits/history may continue. A changed
+        // revision rejects the import at commit rather than locking the user out.
+        if (importing) this.importing = true;
+        else this.pending = true;
         try {
             // A pending background read cannot overwrite the mutation response.
             ++this.refreshId;
             let read;
-            if (command.type === "history.undo" || command.type === "history.redo") {
+            if (command.type === 'asset.import') {
+                if (!this.read.asset_import?.available) return failure(this.read.asset_import?.reason ?? 'Open a saved project to import assets.');
+                read = await this.invoke('engine_import', {
+                    requests: command.sources.map((source)=>({
+                            source: source.source,
+                            texture_usage: source.textureUsage ?? null
+                        })),
+                    expectedRevision: this.read.revision
+                });
+            } else if (command.type === "history.undo" || command.type === "history.redo") {
                 read = await this.invoke("engine_history", {
                     redo: command.type === "history.redo"
                 });
@@ -420,7 +473,8 @@ class NativeBridge {
             await this.start();
             return failure(error);
         } finally{
-            this.pending = false;
+            if (importing) this.importing = false;
+            else this.pending = false;
         }
     }
     async request(request) {

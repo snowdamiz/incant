@@ -1,4 +1,5 @@
 /** Native transport for the Claude-owned UI contract. All document writes use incant_cmd. */
+import type { ProjectSchema } from '../../sdk/ts/src/generated';
 import type {
   BridgeSnapshot,
   BridgeError,
@@ -25,6 +26,7 @@ type Entity = {
 type Project = {
   id: string;
   name: string;
+  assets?: Record<string, ProjectSchema.Asset>;
   scenes: Record<
     string,
     { id: string; name: string; entities: Record<string, Entity> }
@@ -53,6 +55,7 @@ export interface EngineRead {
   >;
   console: { id: string; level: "info" | "error"; message: string }[];
   viewport_error: string | null;
+  asset_import?: { available: boolean; reason?: string };
 }
 export type EngineResponse = EngineRead
   | { status: "loading" }
@@ -107,6 +110,8 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
       connection: error ? { status: "error", error } : { status: "connecting" },
       hierarchy: error ? { status: "error", error } : { status: "loading" },
       schemas: {}, entities: {}, history: { entries: [], applied: 0 }, console: [],
+      assets: error ? { status: 'error', error } : { status: 'loading' },
+      assetImport: { available: false, reason: error?.message ?? 'Loading project.' },
       diagnostics: error ? [{ id: "project-load", severity: "error", message: error.message,
         entity: null, component: null, path: null }] : [],
       provider: { status: "not-connected", provider: "openai" },
@@ -189,6 +194,11 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
     hierarchy: { status: "ready", value: { roots, nodes } },
     schemas,
     entities,
+    ...(read.project.assets ? { assets: { status: 'ready' as const, value: Object.values(read.project.assets).map((asset) => ({
+      id: id(asset.id), name: asset.name, path: asset.path, kind: asset.kind, fingerprint: asset.sha256,
+      ...(asset.import_settings?.type === 'texture' ? { textureUsage: asset.import_settings.usage } : {}),
+    })) } } : {}),
+    assetImport: read.asset_import ?? { available: false, reason: 'This host does not expose asset importing.' },
     diagnostics: [],
     history: {
       entries: read.history.map((tx) => ({
@@ -218,6 +228,9 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
   };
 }
 function failure(error: unknown): BridgeResult {
+  if (typeof error === 'object' && error !== null && 'code' in error && 'message' in error && typeof error.code === 'string' && typeof error.message === 'string') {
+    return { ok: false, error: { code: error.code, message: error.message } };
+  }
   return {
     ok: false,
     error: {
@@ -231,6 +244,7 @@ export class NativeBridge implements EditorBridge {
   readonly capabilities = [
     "entity.rename",
     "entity.delete",
+    "asset.import",
     "history.undo",
     "history.redo",
     "provider.connect",
@@ -249,6 +263,7 @@ export class NativeBridge implements EditorBridge {
   private listeners = new Set<() => void>();
   private historyListeners = new Set<(action: 'undo' | 'redo') => void>();
   private pending = false;
+  private importing = false;
   private refreshId = 0;
   private chrome: WindowChrome | undefined;
   private provider: ProviderState = { status: "checking", provider: "openai" };
@@ -329,7 +344,8 @@ export class NativeBridge implements EditorBridge {
     }
   }
   async dispatch(command: EditorCommand): Promise<BridgeResult> {
-    if (!this.read || this.pending)
+    const importing = command.type === 'asset.import';
+    if (!this.read || this.pending || (importing && this.importing))
       return {
         ok: false,
         error: {
@@ -337,12 +353,21 @@ export class NativeBridge implements EditorBridge {
           message: "Wait for the current engine operation.",
         },
       };
-    this.pending = true;
+    // Cooking owns a snapshot, so normal edits/history may continue. A changed
+    // revision rejects the import at commit rather than locking the user out.
+    if (importing) this.importing = true;
+    else this.pending = true;
     try {
       // A pending background read cannot overwrite the mutation response.
       ++this.refreshId;
       let read: EngineRead;
-      if (command.type === "history.undo" || command.type === "history.redo") {
+      if (command.type === 'asset.import') {
+        if (!this.read.asset_import?.available) return failure(this.read.asset_import?.reason ?? 'Open a saved project to import assets.');
+        read = await this.invoke<EngineRead>('engine_import', {
+          requests: command.sources.map((source) => ({ source: source.source, texture_usage: source.textureUsage ?? null })),
+          expectedRevision: this.read.revision,
+        });
+      } else if (command.type === "history.undo" || command.type === "history.redo") {
         read = await this.invoke<EngineRead>("engine_history", {
           redo: command.type === "history.redo",
         });
@@ -387,7 +412,8 @@ export class NativeBridge implements EditorBridge {
       await this.start();
       return failure(error);
     } finally {
-      this.pending = false;
+      if (importing) this.importing = false;
+      else this.pending = false;
     }
   }
   async request(request: HostRequest): Promise<BridgeResult> {
