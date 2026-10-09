@@ -12,7 +12,10 @@ API. Scripts use a disposable runtime command bus during play. Native extensions
 not loaded. These boundaries require independent adversarial review before release;
 the current tests are engineering evidence, not a security certification.
 
-Provider credentials are stored only in Incant's OS keychain namespace. Metadata files
+Windows/Linux provider credentials use Incant's OS credential-store namespace.
+At the director's request, macOS uses private 0700/0600 local credential files to
+avoid repeated Keychain prompts across development builds. These files rely on
+OS file permissions, with no additional encryption. Metadata files
 contain account identifiers, registration/client identifiers and connection selection,
 not tokens or API keys. OAuth callbacks check path/method, state, duplicate parameters,
 PKCE, nonce and verified token claims. Credentials are never included in provider

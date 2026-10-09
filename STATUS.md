@@ -15,6 +15,8 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
 - Actual wgpu rendering and PNG readback on Apple M5 Pro.
 - Local OpenAI Responses loop, shared typed tools, approvals, token limits,
   interruption checks and strict streamed-response handling; deterministic tests.
+  Saved-account providers reload credentials per request, refresh near expiry,
+  retry HTTP 401 once after refresh, and stop after disconnect/account switch.
 - Shared editor/CLI OpenAI login and twenty-task live eval harness. Real macOS
   OAuth sign-in, refresh, session restoration across rebuilt apps and a live
   command-bus scene edit pass. The director-requested private-file store removes
@@ -28,8 +30,8 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
 - Fourteen architecture records, generated TS structural bindings, developer docs,
   gate ledger and GitHub workflow source.
 
-See [written evidence and limitations](docs/spikes/phase-0.md). Forty-four Rust
-behavior tests, 180 UI/bridge tests and four Python tool tests pass after integration. The thousand-entity script benchmark meets the local
+See [written evidence and limitations](docs/spikes/phase-0.md). Forty-eight Rust
+behavior tests, 180 UI/bridge tests and five Python tool tests pass after integration. The thousand-entity script benchmark meets the local
 frame budget within its documented workload.
 
 ## Active work
@@ -47,14 +49,16 @@ frame budget within its documented workload.
   Its [single-case follow-up](docs/spikes/evidence/ten-step-followup-2026-10-08.json)
   passes all checks with the new output budget and diagnostic handling. The original
   score remains 19/20; the old failure's cause was not retained.
-- Cross-build synthetic credential checks now run on all three desktop CI hosts;
-  they verify the real storage backends without using provider accounts. Local
-  macOS execution passed; Windows/Linux hosted results are pending.
+- Cross-build synthetic credential checks run on all three desktop CI hosts;
+  they verify the real storage backends without using provider accounts.
+  [All three hosted jobs passed](docs/spikes/evidence/desktop-credentials-2026-10-08.json),
+  including record cleanup.
 - Draft PR: https://github.com/snowdamiz/incant/pull/1. All six platform jobs
   [passed on 640fbdd](docs/spikes/evidence/six-platform-2026-10-08.json), including
   Android APK packaging. Both arm64/x86_64 native libraries, manifest and DEX are
-  present in the downloaded APK. Android execution and nightly history remain
-  distinct requirements. Current source checks are running again.
+  present in the downloaded APK. A hosted Android emulator execution check is
+  now implemented; its first CI run is pending. Nightly history remains a distinct
+  requirement. Current source checks are running again.
 
 ## External prerequisites still required
 

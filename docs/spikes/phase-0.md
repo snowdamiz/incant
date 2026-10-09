@@ -121,8 +121,10 @@ changed build, and a saved-account scene-edit request pass. At the director's
 request, macOS now uses atomic owner-only credential files to avoid repeated
 Keychain prompts. Windows/Linux retain their OS stores. The
 [repair and live evidence](auth-login-repair.md) documents storage, verification and
-limits. Windows/Linux real-account authentication, API-key inference and live
-revocation remain pending.
+limits. Per the director’s CI acceptance decision, all three desktop hosts now
+pass real-backend synthetic credential persistence across changed executables,
+cleanup and auth regression tests. [CI evidence](evidence/desktop-credentials-2026-10-08.json).
+API-key live inference and live revocation remain pending.
 
 ## Spike 6: Claude ACP handoff — local evidence passed
 
