@@ -1,3 +1,21 @@
+## Latest follow-up: rebuilt native evidence, review only
+
+The previously requested captures are now in this worktree's ignored
+`artifacts/native-review/followup/`: d03-fullscreen-settled.jpg,
+d05-account-dialog-keyboard.jpg and d06-rename-selected.jpg. Review these existing
+images and update result.md/native-requests.md only for what they actually prove.
+Do not repeat the completed landing/fixture work or create new native captures.
+Astra verified F2 selected all of Entity 1, typing Lantern replaced the whole name,
+and Cmd+Z restored Entity 1. Opening the account dialog by Enter focused Close.
+The fullscreen capture followed a native click in the viewport after entry settled.
+The captures precede a bridge metadata fix: native.ts now forwards schema.order;
+that fix passes 223 tests but the final rebuilt native check was interrupted by the
+Mac locking. Do not claim the field-order check or minimum-size/lights checks pass.
+No need to ask the director to decide the disconnected-state issue: leave it as an
+implementation follow-up, and Astra will own correct connection-state propagation.
+Keep all raw native images and real account labels uncommitted. Commit only your
+updated text review with Built-by: claude; no external account actions or publishing.
+
 ## Current follow-up: native captures are ready
 
 Astra has supplied seven actual native CUA PNGs and functional observations in

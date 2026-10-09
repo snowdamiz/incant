@@ -82,14 +82,18 @@ fixture in [handoff 0008](../../handoffs/0008-native-and-site-review/result.md).
 The native captures contain real account labels and remain ignored in the handoff
 worktree’s `artifacts/native-review/`. The logo geometry was measured; the capture
 indicator obscures the traffic lights, so their actual alignment remains unverified.
-The first fullscreen image needs a settled-state replacement. Minimum-size and
-newly fixed F2 rename behavior still need rebuilt-native checks.
+The first fullscreen image needs a settled-state replacement. Minimum-size and traffic-light visibility checks remain open. The rebuilt native
+F2 check now passes: Entity 1 was fully selected, typing Lantern replaced the name,
+and Cmd+Z restored Entity 1. Keyboard opening the account dialog focused Close.
+A settled fullscreen capture and keyboard-dialog capture were returned to Claude.
 
 The review found F2 typing appended to an unselected old name and long inspector
 references clipped mid-glyph. Claude fixed both, with a failing-before/passing-after
 selection assertion. Astra supplied shared schema `order` annotations for Transform,
-Camera, MeshRenderer and Script, as requested; native Transform now receives
-translation, rotation and scale ordering from the same schema registry.
+Camera, MeshRenderer and Script, as requested; the native transport also forwards those annotations after a rebuilt-native check
+exposed that it discarded them. All 223 UI/bridge tests pass, including the
+annotation projection regression. The corrected app was rebuilt and relaunched,
+but macOS locked before final native field-order verification; that check is open.
 
 A separate startup limitation was observed: opening the test project under
 Documents blocked before the window initialized. A process sample placed the main

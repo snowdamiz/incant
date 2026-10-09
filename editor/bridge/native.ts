@@ -47,7 +47,7 @@ export interface EngineRead {
   applied: number;
   schemas: Record<
     string,
-    { title?: string; properties?: Record<string, FieldSchema> }
+    { title?: string; properties?: Record<string, FieldSchema>; order?: readonly string[] }
   >;
   console: { id: string; level: "info" | "error"; message: string }[];
   viewport_error: string | null;
@@ -156,6 +156,7 @@ export function snapshotFromEngine(read: EngineRead): BridgeSnapshot {
       version: 1,
       title: schema.title ?? type,
       properties: schema.properties ?? {},
+      ...(schema.order ? { order: schema.order } : {}),
     };
   }
   return {

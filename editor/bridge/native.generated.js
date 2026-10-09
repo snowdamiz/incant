@@ -113,7 +113,10 @@ function snapshotFromEngine(read) {
             type,
             version: 1,
             title: schema.title ?? type,
-            properties: schema.properties ?? {}
+            properties: schema.properties ?? {},
+            ...schema.order ? {
+                order: schema.order
+            } : {}
         };
     }
     return {

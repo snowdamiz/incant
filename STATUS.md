@@ -69,8 +69,10 @@ within its documented workload.
   keyboard resizing and fullscreen transitions. Claude reviewed the native captures;
   the capture indicator still obscures the traffic lights. On 2026-10-09 the director explicitly permitted computer use
   and screen capture again when needed. Claude’s handoff 0008 fixes tablet workflow layout, platform-mark balance, clipped
-  inspector paths and F2 name selection. The latest UI changes still need a rebuilt
-  native check; minimum-size and settled-fullscreen captures remain open.
+  inspector paths and F2 name selection. Rebuilt native F2 rename and Undo pass. The transport now preserves schema field
+  order (223 tests pass); macOS locked before its final native verification.
+  Claude is reviewing new settled-fullscreen and keyboard-dialog captures;
+  minimum-size and visible traffic-light checks remain open.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are
