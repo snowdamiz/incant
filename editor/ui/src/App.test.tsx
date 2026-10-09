@@ -253,6 +253,43 @@ describe('editor shell', () => {
     await waitFor(() => expect(requests).toEqual(['window.close', 'window.drag']));
   });
 
+  it('arranges the titlebar as identity, a centred tool cluster, and account and help at the end', async () => {
+    const requests: string[] = [];
+    const { bridge } = recordingBridge(['window.drag']);
+    renderWith({
+      ...bridge,
+      request: (request) => {
+        requests.push(request.type);
+        return Promise.resolve({ ok: true });
+      },
+    });
+    const titlebar = document.querySelector<HTMLElement>('.titlebar')!;
+    const sections = [...titlebar.children].map((element) => element.className);
+    expect(sections).toEqual(['titlebar__start', 'titlebar__tools', 'titlebar__end']);
+    const [start, tools, end] = [...titlebar.children] as HTMLElement[];
+    expect(within(start!).getByRole('heading', { level: 1 }).textContent).toContain('Dock Prototype');
+    expect(within(tools!).getAllByRole('group').map((g) => g.getAttribute('aria-label'))).toEqual(['History', 'Layout']);
+    expect(within(end!).getByRole('button', { name: /ChatGPT/ })).toBeTruthy();
+    expect(within(end!).getByRole('button', { name: 'Keyboard shortcuts' })).toBeTruthy();
+    // Empty space on either side of the centred cluster is a drag area.
+    fireEvent.mouseDown(end!.querySelector('.titlebar__spacer')!, { button: 0, detail: 1 });
+    await waitFor(() => expect(requests).toEqual(['window.drag']));
+  });
+
+  it('places the inspector and agent in the lighter side column and marks the agent with the wisp', () => {
+    renderFixture('sample');
+    const inspector = document.querySelector('[data-region="inspector"]')!;
+    const agent = document.querySelector('[data-region="agent"]')!;
+    expect(inspector.closest('.column--side')).not.toBeNull();
+    expect(agent.closest('.column--side')).toBe(inspector.closest('.column--side'));
+    expect(document.querySelector('[data-region="hierarchy"]')!.closest('.column--side')).toBeNull();
+    const mark = agent.querySelector('svg.wisp');
+    expect(mark).not.toBeNull();
+    expect(mark!.getAttribute('aria-hidden')).toBe('true');
+    // The mark decorates an honest empty state; the composer stays disabled.
+    expect((screen.getByLabelText('Message to the agent') as HTMLTextAreaElement).disabled).toBe(true);
+  });
+
   it('hides and restores panels from the titlebar, and F6 skips hidden panels', () => {
     renderFixture('sample');
     const toggle = screen.getByRole('button', { name: 'Hierarchy panel' });

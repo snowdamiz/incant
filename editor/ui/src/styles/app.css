@@ -1,10 +1,11 @@
 /*
- * Incant editor shell, revision 1 ("islands"). Values come from tokens.css; see DESIGN.md.
+ * Incant editor shell, revision 2 ("connected"). Values come from tokens.css; see DESIGN.md.
  *
- * Composition: a dark canvas holds the custom titlebar, rounded panel islands separated by
- * 6 px gutters (which double as resize handles), and a quiet status line. Chrome is opaque.
- * When a native surface is attached (html.native-viewport) the canvas and the viewport hole
- * become transparent; the host paints the canvas color as the window background.
+ * Composition: one continuous frame, after the landing-page product illustration. The
+ * titlebar, panels and status line butt together and are divided by 1 px opaque separators
+ * (which are also the resize handles). There are no gutters and no floating cards. Chrome is
+ * opaque. When a native surface is attached (html.native-viewport) only the viewport hole
+ * becomes transparent; it is square, so the host clips with zero corner radii.
  */
 
 *,
@@ -110,15 +111,14 @@ kbd,
 }
 
 .panel:focus-visible {
-  outline-offset: -1px;
-  border-radius: var(--radius-lg);
+  outline-offset: -2px;
 }
 
 kbd {
   display: inline-block;
   min-width: 18px;
   padding: 0 5px;
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
   background: var(--color-bg-raised);
   color: var(--color-text-muted);
@@ -157,13 +157,17 @@ kbd {
 
 /* ---- Titlebar ---- */
 
+/* One strip of the frame: identity at the start, the edit/layout tool cluster centred,
+   account and help at the end. A hairline separates it from the panels, as in the reference. */
 .titlebar {
   flex: none;
   display: flex;
   align-items: center;
-  gap: var(--space-3);
   height: var(--titlebar-height);
   padding: 0 var(--space-3) 0 var(--space-4);
+  /* The hairline is a shadow, not a border, so content centres on the full 40 px bar,
+     the same line the native traffic lights are centred on. */
+  box-shadow: inset 0 -1px 0 var(--color-border);
   background: var(--color-bg-app);
   user-select: none;
   -webkit-user-select: none;
@@ -178,10 +182,26 @@ kbd {
   align-self: stretch;
 }
 
-/* macOS: the logo sits 12 px after the inset edge, which puts it 12.5 pt after the
-   green traffic light (measured natively; see handoff 0002). */
-.titlebar__inset + .titlebar__identity {
-  margin-left: calc(-1 * var(--space-4));
+/* Equal-basis start and end sections keep the tool cluster centred in the window. */
+.titlebar__start,
+.titlebar__end {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: var(--space-3);
+}
+
+.titlebar__end {
+  justify-content: flex-end;
+}
+
+/* macOS: the 78 px inset covers the traffic lights (green ends at 73.5 pt). The logo box
+   starts at 86 pt, so the glyph sits 15 pt after the green light: clearly its own group,
+   wider than the 9 pt between lights. Measured natively; see handoff 0006 result. */
+.titlebar__inset + .titlebar__start {
+  margin-left: calc(var(--space-3) - var(--space-4));
 }
 
 .titlebar__identity {
@@ -194,11 +214,6 @@ kbd {
 .titlebar__logo {
   flex: none;
   display: block;
-}
-
-.titlebar__sep {
-  color: var(--color-border-strong);
-  font-size: var(--text-md);
 }
 
 .titlebar__project {
@@ -214,27 +229,36 @@ kbd {
 }
 
 .titlebar[data-window-focused='false'] .titlebar__identity,
-.titlebar[data-window-focused='false'] .titlebar__tools {
+.titlebar[data-window-focused='false'] .titlebar__tools,
+.titlebar[data-window-focused='false'] .titlebar__end > * {
   opacity: 0.55;
 }
 
 .titlebar__spacer {
   flex: 1;
   align-self: stretch;
+  min-width: var(--space-3);
 }
 
 .titlebar__tools {
+  flex: none;
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  margin: 0 var(--space-4);
 }
 
 .titlebar__group {
   display: flex;
   align-items: center;
   gap: var(--space-1);
-  padding-right: var(--space-3);
-  border-right: 1px solid var(--color-border);
+}
+
+.titlebar__divider {
+  width: 1px;
+  height: 16px;
+  margin: 0 var(--space-2);
+  background: var(--color-border-strong);
 }
 
 .fixture-tag {
@@ -242,9 +266,8 @@ kbd {
   display: inline-flex;
   align-items: center;
   height: 20px;
-  padding: 0 var(--space-3);
-  border: 1px solid color-mix(in srgb, var(--color-fixture) 45%, transparent);
-  border-radius: 10px;
+  padding: 0 7px;
+  border-radius: var(--radius-sm);
   background: var(--color-fixture-bg);
   color: var(--color-fixture);
   font-size: var(--text-xs);
@@ -277,7 +300,7 @@ kbd {
 
 .tool-button[aria-disabled='true'] {
   color: var(--color-text-subtle);
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: default;
 }
 
@@ -285,12 +308,15 @@ kbd {
   background: transparent;
 }
 
-.tool-button--toggle[aria-pressed='false'] {
-  color: var(--color-text-subtle);
-}
-
+/* Shown panels are bright; hidden ones recede and gain a faint well, so the state reads
+   from shape as well as colour without filling every button in the cluster. */
 .tool-button--toggle[aria-pressed='true'] {
   color: var(--color-text);
+}
+
+.tool-button--toggle[aria-pressed='false'] {
+  color: var(--color-text-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-border-strong);
 }
 
 /* Windows/Linux caption buttons (only when the host advertises them). */
@@ -328,26 +354,26 @@ kbd {
 /* ChatGPT account status; opens the account dialog. Metadata only; never a key or token. */
 .provider-chip {
   flex: none;
+  min-width: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   height: 26px;
-  max-width: 240px;
-  padding: 0 var(--space-4) 0 var(--space-3);
-  border: 1px solid var(--color-border-strong);
-  border-radius: 13px;
-  background: transparent;
+  max-width: 260px;
+  padding: 0 10px 0 9px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-bg-raised);
   color: var(--color-text-muted);
   font: inherit;
   font-size: var(--text-xs);
   white-space: nowrap;
   cursor: pointer;
-  transition: background var(--duration-fast), border-color var(--duration-fast);
+  transition: background var(--duration-fast);
 }
 
 .provider-chip:hover {
   background: var(--color-bg-hover);
-  border-color: var(--color-border-control);
 }
 
 .provider-chip__name {
@@ -400,11 +426,11 @@ kbd {
   }
 }
 
-/* ---- Connection notice ---- */
+/* ---- Connection notice: a full-width strip of the frame, under the titlebar ---- */
 
 .notice-region {
   flex: none;
-  padding: 0 var(--gutter) var(--gutter);
+  background: var(--color-bg-app);
 }
 
 .notice {
@@ -412,8 +438,8 @@ kbd {
   align-items: center;
   gap: var(--space-3);
   min-height: 32px;
-  padding: 6px var(--space-4);
-  border-radius: var(--radius-lg);
+  padding: 6px var(--space-5);
+  border-bottom: 1px solid var(--color-border);
   font-size: var(--text-sm);
   line-height: 18px;
 }
@@ -424,7 +450,6 @@ kbd {
 
 .notice--info {
   background: var(--color-info-bg);
-  border: 1px solid color-mix(in srgb, var(--color-info) 22%, transparent);
 }
 
 .notice--info > .icon {
@@ -433,7 +458,6 @@ kbd {
 
 .notice--error {
   background: var(--color-danger-bg);
-  border: 1px solid color-mix(in srgb, var(--color-danger) 35%, transparent);
 }
 
 .notice--error > .icon {
@@ -468,14 +492,13 @@ kbd {
   }
 }
 
-/* ---- Workspace: islands separated by gutters ---- */
+/* ---- Workspace: panels joined edge to edge ---- */
 
 .workspace {
   flex: 1;
   min-height: 0;
   display: grid;
   grid-template-rows: minmax(0, 1fr);
-  padding: 0 var(--gutter);
   background: var(--color-bg-app);
 }
 
@@ -486,41 +509,66 @@ kbd {
   min-height: 0;
 }
 
-/* Gutters double as resize handles: invisible until hovered or focused. */
-.splitter {
-  position: relative;
-  touch-action: none;
-  border-radius: 3px;
+.column--side {
+  background: var(--color-bg-side);
 }
 
-.splitter::after {
+/* Separators are the resize handles: a 1 px opaque line with a wider invisible drag
+   target that overlaps both neighbours. Hover and focus light the line in violet. */
+.splitter {
+  position: relative;
+  z-index: 3;
+  touch-action: none;
+  background: var(--color-border);
+}
+
+.splitter::before {
   content: '';
   position: absolute;
-  border-radius: 2px;
-  background: transparent;
-  transition: background var(--duration-fast);
 }
 
 .splitter--vertical {
   cursor: col-resize;
 }
 
-.splitter--vertical::after {
-  top: 12px;
-  bottom: 12px;
-  left: 2px;
-  width: 2px;
+.splitter--vertical::before {
+  top: 0;
+  bottom: 0;
+  left: calc(-1 * var(--splitter-hit));
+  right: calc(-1 * var(--splitter-hit));
 }
 
 .splitter--horizontal {
   cursor: row-resize;
 }
 
+.splitter--horizontal::before {
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--splitter-hit));
+  bottom: calc(-1 * var(--splitter-hit));
+}
+
+.splitter::after {
+  content: '';
+  position: absolute;
+  background: transparent;
+  transition: background var(--duration-fast);
+  pointer-events: none;
+}
+
+.splitter--vertical::after {
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 3px;
+}
+
 .splitter--horizontal::after {
-  left: 12px;
-  right: 12px;
-  top: 2px;
-  height: 2px;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 3px;
 }
 
 .splitter:hover::after {
@@ -536,7 +584,7 @@ kbd {
   background: var(--color-focus);
 }
 
-/* ---- Islands ---- */
+/* ---- Panels ---- */
 
 .panel {
   display: flex;
@@ -545,11 +593,14 @@ kbd {
   min-height: 0;
   overflow: hidden;
   background: var(--color-bg-panel);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-island);
 }
 
+.column--side .panel {
+  background: var(--color-bg-side);
+}
+
+/* Panel headers share one height so the hierarchy, viewport and inspector headers form a
+   single ruled line across the window. Titles are quiet labels, as in the reference. */
 .panel__header {
   flex: none;
   display: flex;
@@ -557,26 +608,20 @@ kbd {
   gap: var(--space-3);
   height: var(--header-height);
   padding: 0 var(--space-3) 0 var(--space-5);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .panel__title {
   margin: 0;
   font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   letter-spacing: var(--tracking-tight);
-  color: var(--color-text);
+  color: var(--color-text-muted);
 }
 
 .panel__count {
-  min-width: 20px;
-  height: 18px;
-  padding: 0 6px;
-  border-radius: 9px;
-  background: var(--color-bg-raised);
-  color: var(--color-text-muted);
+  color: var(--color-text-subtle);
   font-size: var(--text-xs);
-  line-height: 18px;
-  text-align: center;
   font-variant-numeric: tabular-nums;
 }
 
@@ -598,7 +643,7 @@ kbd {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0 var(--space-3) var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-2);
 }
 
 .panel__scroll {
@@ -615,7 +660,7 @@ kbd {
   gap: 6px;
   height: var(--control-height);
   padding: 0 var(--space-3);
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid transparent;
   border-radius: var(--radius);
   background: var(--color-bg-raised);
   color: var(--color-text-subtle);
@@ -623,7 +668,7 @@ kbd {
 }
 
 .search-field:hover {
-  border-color: var(--color-border-control);
+  border-color: var(--color-border-strong);
 }
 
 .search-field:focus-within {
@@ -666,7 +711,7 @@ kbd {
   flex: 1;
   min-height: 0;
   overflow: auto;
-  padding: 0 0 var(--space-4);
+  padding: var(--space-1) 0 var(--space-4);
 }
 
 .tree-row {
@@ -675,13 +720,13 @@ kbd {
   align-items: center;
   gap: 6px;
   height: var(--row-height);
-  margin: 0 6px;
+  margin: 0 var(--space-3);
   padding-inline-end: var(--space-3);
   border-radius: var(--radius);
   white-space: nowrap;
   cursor: default;
   user-select: none;
-  color: var(--color-text);
+  color: var(--color-text-soft);
 }
 
 .tree-row:hover {
@@ -690,6 +735,7 @@ kbd {
 
 .tree-row.is-selected {
   background: var(--color-bg-selected);
+  color: var(--color-text);
 }
 
 .tree-row.is-selected .tree-row__name {
@@ -702,7 +748,7 @@ kbd {
   top: 0;
   bottom: 0;
   left: var(--space-2);
-  background-image: linear-gradient(to right, var(--color-border-strong) 1px, transparent 1px);
+  background-image: linear-gradient(to right, var(--color-border) 1px, transparent 1px);
   background-size: var(--indent) 100%;
   background-position: 7px 0;
   background-repeat: repeat-x;
@@ -759,7 +805,8 @@ kbd {
   padding: 0 6px;
   border: 1px solid var(--color-focus);
   border-radius: var(--radius-sm);
-  background: var(--color-bg-app);
+  background: var(--color-bg-viewport);
+  color: var(--color-text);
   outline: none;
 }
 
@@ -856,11 +903,10 @@ kbd {
 .state-view__tile {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   margin-bottom: var(--space-2);
-  border: 1px solid var(--color-border-strong);
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--color-bg-raised);
   color: var(--color-text-muted);
 }
@@ -872,7 +918,6 @@ kbd {
 }
 
 .state-view--error .state-view__tile {
-  border-color: color-mix(in srgb, var(--color-danger) 40%, transparent);
   background: var(--color-danger-bg);
   color: var(--color-danger);
 }
@@ -1058,9 +1103,9 @@ kbd {
 
 /* ---- Viewport ---- */
 
+/* The viewport strip is opaque frame; only the host below it goes transparent. */
 .panel--viewport > .panel__header {
   background: var(--color-bg-panel);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .status-pill {
@@ -1069,8 +1114,8 @@ kbd {
   align-items: center;
   gap: 6px;
   height: 22px;
-  padding: 0 10px;
-  border-radius: 11px;
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
   background: var(--color-bg-raised);
   color: var(--color-text-muted);
   font-size: var(--text-xs);
@@ -1105,11 +1150,12 @@ kbd {
   min-height: 0;
   display: grid;
   place-items: center;
-  border-radius: 0 0 calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px);
+  /* Square and flush with its neighbours, so the host clips with zero corner radii. */
+  border-radius: 0;
   background-color: var(--color-bg-viewport);
   background-image:
-    radial-gradient(ellipse at center, transparent 0%, transparent 45%, rgb(0 0 0 / 0.45) 100%),
-    radial-gradient(circle, rgb(255 255 255 / 0.07) 1px, transparent 1.4px);
+    radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgb(0 0 0 / 0.35) 100%),
+    radial-gradient(circle, rgb(255 255 255 / 0.06) 1px, transparent 1.4px);
   background-size:
     100% 100%,
     22px 22px;
@@ -1137,14 +1183,12 @@ kbd {
 .viewport-empty__tile {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   margin-bottom: var(--space-2);
-  border: 1px solid var(--color-border-strong);
-  border-radius: 14px;
-  background: var(--color-bg-panel);
+  border-radius: 12px;
+  background: var(--color-bg-raised);
   color: var(--color-text-muted);
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
 }
 
 .viewport-empty__title {
@@ -1168,39 +1212,61 @@ kbd {
 .tabs {
   flex: none;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: var(--space-1);
   height: var(--header-height);
   padding: 0 var(--space-3);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .tab {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  height: 28px;
+  gap: 7px;
   padding: 0 10px;
   border: 0;
-  border-radius: var(--radius);
+  border-radius: 0;
   background: transparent;
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
   cursor: pointer;
-  transition:
-    background var(--duration-fast),
-    color var(--duration-fast);
+  transition: color var(--duration-fast);
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 1px;
+  background: transparent;
+  transition: background var(--duration-fast);
 }
 
 .tab:hover {
   color: var(--color-text);
-  background: var(--color-bg-hover);
+}
+
+/* Tabs are square for the underline; the focus ring stays rounded and inside the strip. */
+.tab:focus-visible {
+  outline-offset: -5px;
+  border-radius: calc(var(--radius) + 3px);
+}
+
+.tab:hover::after {
+  background: var(--color-border-strong);
 }
 
 .tab[aria-selected='true'] {
   color: var(--color-text);
-  background: var(--color-bg-raised);
-  box-shadow: inset 0 0 0 1px var(--color-border-strong);
+}
+
+.tab[aria-selected='true']::after {
+  background: var(--color-accent);
 }
 
 .tab .icon {
@@ -1215,8 +1281,8 @@ kbd {
   min-width: 18px;
   height: 16px;
   padding: 0 5px;
-  border-radius: 8px;
-  background: var(--color-bg-hover);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-raised);
   color: var(--color-text-muted);
   font-size: var(--text-xs);
   line-height: 16px;
@@ -1241,7 +1307,7 @@ kbd {
   flex: 1;
   min-height: 0;
   margin: 0;
-  padding: 0 0 var(--space-3);
+  padding: var(--space-2) 0 var(--space-3);
   list-style: none;
   overflow: auto;
 }
@@ -1250,9 +1316,10 @@ kbd {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: calc(100% - 12px);
+  width: calc(100% - 16px);
   min-height: 28px;
-  margin: 0 6px;
+  margin: 0 var(--space-3);
+  color: var(--color-text-soft);
   padding: var(--space-1) 10px;
   border: 0;
   border-radius: var(--radius);
@@ -1310,7 +1377,7 @@ kbd {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0 var(--space-4) var(--space-3);
+  padding: var(--space-3) var(--space-4) var(--space-1);
 }
 
 .toggle {
@@ -1318,9 +1385,9 @@ kbd {
   align-items: center;
   gap: 6px;
   height: 24px;
-  padding: 0 10px;
+  padding: 0 9px;
   border: 1px solid var(--color-border-strong);
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: transparent;
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
@@ -1445,18 +1512,17 @@ kbd {
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-1) var(--space-3) var(--space-4) var(--space-5);
+  padding: var(--space-4) var(--space-3) var(--space-4) var(--space-5);
 }
 
 .kind-tile {
   flex: none;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  background: color-mix(in srgb, currentColor 12%, var(--color-bg-raised));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: color-mix(in srgb, currentColor 13%, var(--color-bg-side));
 }
 
 .inspector__identity-text {
@@ -1502,8 +1568,8 @@ kbd {
   align-items: center;
   gap: 5px;
   height: 22px;
-  padding: 0 var(--space-3);
-  border-radius: 11px;
+  padding: 0 7px;
+  border-radius: var(--radius-sm);
   background: var(--color-bg-raised);
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
@@ -1577,7 +1643,7 @@ kbd {
   align-items: center;
   gap: var(--space-3);
   width: 100%;
-  height: 38px;
+  height: 36px;
   padding: 0 var(--space-4) 0 var(--space-4);
   border: 0;
   background: transparent;
@@ -1619,7 +1685,7 @@ kbd {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 0 var(--space-4) var(--space-5) var(--space-5);
+  padding: var(--space-1) var(--space-4) var(--space-5) var(--space-5);
 }
 
 .component__notice {
@@ -1645,7 +1711,7 @@ kbd {
   display: block;
   padding: 6px var(--space-3);
   border-radius: var(--radius-sm);
-  background: var(--color-bg-app);
+  background: var(--color-bg-well);
   color: var(--color-text-muted);
   overflow-wrap: anywhere;
   white-space: pre-wrap;
@@ -1743,7 +1809,7 @@ input.control.control__input,
   padding: 0 var(--space-3);
   border: 1px solid transparent;
   border-radius: var(--radius);
-  background: var(--color-bg-raised);
+  background: var(--color-bg-well);
   transition: border-color var(--duration-fast);
 }
 
@@ -1769,7 +1835,7 @@ input.control.control__input:hover,
 .vector__axis:has([aria-invalid='true']),
 input.control.control__input[aria-invalid='true'] {
   border-color: color-mix(in srgb, var(--color-danger) 70%, transparent);
-  background: color-mix(in srgb, var(--color-danger-bg) 60%, var(--color-bg-raised));
+  background: color-mix(in srgb, var(--color-danger-bg) 60%, var(--color-bg-well));
 }
 
 .control {
@@ -1953,15 +2019,9 @@ input.control.control__input:focus-visible {
 .agent-empty__mark {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  margin-bottom: var(--space-2);
-  border-radius: 10px;
-  background: linear-gradient(140deg, #3b3f8f, #5b3a86);
-  color: #eef0ff;
-  box-shadow:
-    inset 0 0 0 1px rgb(255 255 255 / 0.12),
-    0 6px 24px rgb(108 98 255 / 0.25);
+  margin-bottom: var(--space-3);
+  color: var(--color-accent);
+  --wisp-eye: var(--color-bg-side);
 }
 
 .agent-empty__title {
@@ -1983,10 +2043,10 @@ input.control.control__input:focus-visible {
   flex: none;
   display: flex;
   flex-direction: column;
-  margin: 0 var(--space-3) var(--space-3);
+  margin: 0 var(--space-4) var(--space-4);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
-  background: var(--color-bg-raised);
+  background: var(--color-bg-well);
   transition: border-color var(--duration-fast);
 }
 
@@ -1995,7 +2055,7 @@ input.control.control__input:focus-visible {
 }
 
 .composer.is-disabled {
-  background: color-mix(in srgb, var(--color-bg-raised) 55%, var(--color-bg-panel));
+  background: color-mix(in srgb, var(--color-bg-well) 50%, var(--color-bg-side));
 }
 
 .composer__input {
@@ -2049,7 +2109,7 @@ input.control.control__input:focus-visible {
 }
 
 .send-button[aria-disabled='true'] {
-  background: var(--color-bg-hover);
+  background: var(--color-bg-raised);
   color: var(--color-text-subtle);
   cursor: not-allowed;
 }
@@ -2063,6 +2123,7 @@ input.control.control__input:focus-visible {
   gap: var(--space-5);
   height: var(--statusbar-height);
   padding: 0 var(--space-5);
+  border-top: 1px solid var(--color-border);
   background: var(--color-bg-app);
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
@@ -2137,7 +2198,7 @@ input.control.control__input:focus-visible {
   z-index: 50;
   display: grid;
   place-items: center;
-  background: rgb(5 6 8 / 0.6);
+  background: rgb(8 6 12 / 0.62);
   backdrop-filter: blur(2px);
 }
 
@@ -2146,7 +2207,7 @@ input.control.control__input:focus-visible {
   max-height: calc(100vh - 96px);
   display: flex;
   flex-direction: column;
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--color-bg-panel);
   box-shadow: var(--shadow-popover);
 }
@@ -2186,7 +2247,7 @@ input.control.control__input:focus-visible {
 .dialog__body {
   overflow: auto;
   padding: 0 var(--space-6) var(--space-6);
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 12px 12px;
 }
 
 .shortcuts__title {

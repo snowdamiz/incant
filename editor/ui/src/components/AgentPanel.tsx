@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { MouseEvent } from 'react';
 import { Icon } from '../icons/Icon';
+import { WispMark } from '../icons/WispMark';
 import { useShell } from '../shell/ShellContext';
 import { ChatGPTButton } from './AccountDialog';
 
@@ -44,7 +45,7 @@ export function AgentPanel() {
       <div className="agent__transcript" role="log" aria-label="Agent conversation">
         <div className="agent-empty">
           <span className="agent-empty__mark" aria-hidden="true">
-            <Icon name="spark" size={18} />
+            <WispMark size={28} />
           </span>
           <p className="agent-empty__title">
             {ready ? 'Describe a change' : signedIn ? 'Agent not ready' : 'Use your ChatGPT account'}

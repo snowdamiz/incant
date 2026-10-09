@@ -404,7 +404,7 @@ const SAMPLE_CONSOLE: ConsoleEntry[] = [
 
 const NO_VIEWPORT = {
   status: 'not-attached',
-  reason: 'Native viewport pending Phase 0 Spike 1 (Bevy wgpu surface in a Tauri window).',
+  reason: 'Sample data has no native surface. Open a project in the Incant editor app to attach the wgpu viewport.',
 } as const;
 
 function baseSnapshot(): Omit<BridgeSnapshot, 'connection' | 'hierarchy'> {

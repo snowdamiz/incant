@@ -166,7 +166,7 @@ function Workbench() {
         {panels.inspector ? (
           <>
             <Splitter label="Resize inspector and agent" orientation="vertical" invert value={layout.right} min={280} max={560} onChange={(right) => resize({ right })} />
-            <div className="column" style={{ gridTemplateRows: `minmax(0, 1fr) var(--splitter-size) ${layout.agent}px` }}>
+            <div className="column column--side" style={{ gridTemplateRows: `minmax(0, 1fr) var(--splitter-size) ${layout.agent}px` }}>
               <InspectorPanel />
               <Splitter label="Resize agent panel" orientation="horizontal" invert value={layout.agent} min={180} max={560} onChange={(agent) => resize({ agent })} />
               <AgentPanel />
