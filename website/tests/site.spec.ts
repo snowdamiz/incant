@@ -59,7 +59,8 @@ for (const width of [390, 1440]) {
     await page.goto('./', { waitUntil: 'networkidle' })
     await page.addScriptTag({ content: axe.source })
     const violations = await page.evaluate(async () => {
-      const result = await window.axe.run(document, {
+      const scanner = (window as unknown as { axe: typeof axe }).axe
+      const result = await scanner.run(document, {
         runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] },
       })
       return result.violations.map(violation => ({
