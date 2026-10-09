@@ -1,3 +1,23 @@
+# Priority: verify the minimum-height Inspector scroll behavior
+
+Astra investigated the last layout concern from your final review. The Inspector
+is an intentional independent scroll area. A normal wheel scroll at 1000x650
+reveals the complete Reimport help and Identifiers row, with space below it. See
+artifacts/native-material-review/12-minimum-inspector-scrolled.jpg. The viewport,
+Agent panel and side navigation stay fixed while the Inspector scrolls. Nothing
+is permanently clipped or inaccessible.
+
+Review that supplied capture and the .panel__scroll code if needed. Amend the
+final review to distinguish content below a working scroll viewport from an
+actual clipping defect. If you still judge the scroll affordance to require
+visual polish, state a specific follow-up; do not misstate functionality as broken.
+This is review-only: no builds, code edits or new captures. Commit the correction
+with Built-by: claude. The previous backdrop/framing priorities were Astra's
+routine integration decision under the director's continue-without-asking
+instruction, not a new explicit human design decision.
+
+---
+
 # Priority follow-up: final integrated captures
 
 Astra integrated your studio tuning. The final integrated tree passes all seven
