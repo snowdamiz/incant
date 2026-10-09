@@ -404,3 +404,152 @@ column, and it reads cleanly.
 2. **Path-bearing physics diagnostics.** Optional. If Rust validation errors carry
    JSON pointers such as `/shape/half_extents/1`, the Inspector already places
    them on the exact axis or row.
+
+---
+
+# Final native review round (CUA captures of `4644232`)
+
+## Status
+
+**Scoped native verdict: layout and presentation are accepted on actual WebKit
+pixels. One real accessibility defect was found and fixed, and the fix awaits a
+native AX recapture.**
+
+- **Accepted on pixels.** Field layout, units, AngularVelocity, all three
+  Collider variants, collision masks, and resize/scroll behaviour.
+- **Accessibility defect.** WebKit used tooltip text as field names. The fix is
+  in this commit and needs one native accessibility recapture before it counts as
+  natively verified.
+- **Not natively evidenced.** Keyboard focus and native motion; see below.
+- **No approvals.** This verdict approves no phase gate and claims nothing about
+  uncaptured behaviour.
+
+Exact model and transport: Claude Opus 5.5, model ID `claude-opus-5-5`, through
+the director's Claude subscription via ACP. No model substitution occurred.
+
+## Inputs reviewed
+
+- **Captures.** All 14 files in `artifacts/physics-native-final/`. Every SHA-256
+  matches `manifest.json`, which records source commit `4644232`. The images stay
+  ignored and local, because they show the account label. I copied none into
+  tracked screenshots.
+- **Wide set.** 2880×1748: `wide-crate-body`, `-crate-collider`,
+  `-pill-capsule`, `-ball-shape-focus` and `-floor`.
+- **Minimum set.** 2002×1302: `minimum-crate-initial`, `-crate-body`,
+  `-crate-body-lower`, `-crate-collision`, `-crate-angular-shape`,
+  `-ball-shape-focus`, `-pill`, `-floor`, and `minimum-pill-ax.txt`.
+- **Out of scope.** I did not rebuild Rust or regenerate motion fixtures. The
+  helper's refusal of existing output directories is untouched (`physics_lookdev.py`, as integrated).
+
+## Native findings
+
+**Accepted on pixels (wide and minimum):**
+- **Arrangement.** Left Hierarchy and Assets, Inspector in the main right column,
+  Problems, Console and History only in the bottom dock. Titlebar alignment and
+  continuous panels are intact.
+- **RigidBody.** The rows read Motion, then Gravity and damping, then Solver.
+  `1/s` sits inside the boxes for both damping rows, and gravity scale is
+  unitless. "Angular damping" wraps to two lines under the existing clamp, and
+  the value box stays aligned.
+- **Collider shapes.**
+  - **box.** Crate shows half extents 0.4 for X, Y and Z; Floor shows 6, 0.1 and 4. The `m` unit sits in the label cell.
+  - **sphere.** Ball shows Radius 0.35 m.
+  - **capsule.** Pill shows the engine note, then Half height 0.35 m and Radius 0.25 m.
+
+  Variant rows hang on the indented rule, and their value column lines up with
+  the outer rows. Material shows `kg/m³`. Collision shows the Sensor switch,
+  then Memberships and Filter showing 4294967295 with "All groups" and full
+  strips. Nothing clips horizontally at either size.
+- **AngularVelocity.** The row reads Angular `rad/s` with X 0, Y 2, Z 1.2.
+  Values match the authored project.
+- **Resize and scroll.** At minimum size before collapsing, the Inspector shows
+  AngularVelocity and Collider down to Density. Collapsing the unrelated sections
+  and scrolling brings every RigidBody and Collision row into view.
+  - The scrollbar appears.
+  - Section headers scroll cleanly under the panel header.
+  - Rows are not cut mid-control, except at the scroll edge, as expected.
+- **Visibility.** The fields are sufficiently visible. At minimum size the
+  Inspector viewport is short because the Agent panel shares the column. The
+  Agent divider (180 px) and section collapse both work, so no field is
+  unreachable.
+- **Focus.** `*-ball-shape-focus` shows the standard focus ring on the Shape
+  value at both sizes. That focus came from a pointer click, so WebKit also shows
+  a text selection. It proves the ring renders natively. It does not evidence
+  keyboard Tab order; see request 2.
+
+**Defect 1 (fixed here): WebKit used the description tooltip as the field name.**
+
+`minimum-pill-ax.txt` shows, for example:
+
+- `text field Friction coefficient (dimensionless)., Description: Friction`
+- `checkbox Continuous collision detection for fast-moving bodies., Description: CCD`
+- `text field Linear velocity damping rate, in inverse seconds., Description: Linear damping`
+
+WebKit takes a field's AX title from its `<label>`'s `title` attribute.
+`FieldRow` has always placed the description there. The defect therefore
+predates this handoff, but the new physics tooltips exposed it. Fields without a
+description were named correctly (`text field Density`, `text field Half height`).
+
+The fix is in `FieldView.tsx`:
+- The `<label>` no longer carries `title`.
+- The hover tooltip moves to the `.field` row.
+- The description is a visually hidden span that comes first in the control's
+  `aria-describedby`. The visible label stays the accessible name, and the
+  description is announced separately.
+
+A new behaviour test covers four cases:
+- the friction text field
+- the schema-described mask, alongside the group summary
+- the CCD switch
+- a field without a description, which gets no extra description and keeps the label as the tooltip
+
+All 12 Chrome fixture full-window captures are byte-identical to the previous
+round, so the change is not visible. axe still reports 0 violations, with no
+overflow or clipped inputs (`screenshots/native-fix/report.json`). The fix is not
+natively verified until request 1 is done.
+
+**Observation 2 (outside this scope, not changed): the Agent empty state clips at 180 px.**
+In every minimum capture taken after the divider was reduced to 180, the "Agent
+not ready" heading is cut off behind the composer. The AX tree still exposes the
+text. This is an Agent-panel layout issue and not a physics defect. It should
+become its own small visual task: hide or compact the empty-state illustration
+when the panel is short.
+
+**Observation 3 (not a defect here): component order is alphabetical.**
+AngularVelocity, Collider, MeshRenderer, RigidBody, then Transform. The
+document's component map sets that order, and this handoff did not change it. A
+future presentation task could put Transform first and RigidBody before
+Collider. That needs a decision on whether component order belongs to the schema
+registry (Astra) or the UI.
+
+## Commands and results
+
+| Command | Result |
+| --- | --- |
+| manifest SHA-256 check | 14 of 14 match |
+| `npm run test --workspace editor/ui` | 13 files, **313 passed** (312 plus 1 new AX-naming test) |
+| `npm run build --workspace editor/ui` | ok; Vite reports 105.14 kB gzip (≈ 102.7 KiB; budget 110 KiB) |
+| `node handoffs/0022-physics-inspector/tools/capture-inspector.mjs native-fix` | 12 states, all byte-identical to the previous capture; 0 axe violations; no errors or remote requests |
+| Rust, motion fixtures | not rebuilt or regenerated, per the brief |
+
+## Changed paths
+
+- `editor/ui/src/components/inspector/FieldView.tsx`: description moved from the label `title` to the row tooltip and `aria-describedby`
+- `editor/ui/src/components/inspector/PhysicsFields.test.tsx`: AX-naming regression test; the damping-description assertion now uses the accessible description
+- `handoffs/0022-physics-inspector/screenshots/native-fix/report.json`, `result.md`
+
+## Requests for Astra (native, CUA only)
+
+1. **AX recapture after integrating this commit.** Repeat `minimum-pill-ax.txt`
+   for Pill. Also record the AX node of a focused field with a description:
+   Friction, CCD or Memberships. Confirm that fields are named by their visible
+   label (`text field Friction`, `checkbox CCD`). If the WebKit dump format
+   exposes AXHelp or a description, record it so I can confirm the description
+   and the mask group list are announced. No pixel recapture is needed for this:
+   the browser output is byte-identical.
+2. **Keyboard focus.** At minimum size on Ball, press Tab from the Inspector
+   header into the Collider section, with no pointer click, and capture the
+   focus ring on the Shape value and on Memberships. This replaces the
+   pointer-click focus evidence.
+3. **Optional.** A capture of the Agent empty state at 180 px divider height, if
+   Observation 2 is scheduled.

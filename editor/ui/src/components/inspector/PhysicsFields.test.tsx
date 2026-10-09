@@ -301,7 +301,7 @@ describe('physics component layout', () => {
     for (const name of ['Linear damping', 'Angular damping']) {
       const input = within(damping).getByRole('textbox', { name });
       expect(input.closest('.control--number')?.querySelector('.control__unit')?.textContent).toBe('1/s');
-      expect(input.closest('.field')?.querySelector('.field__label')?.getAttribute('title')).toMatch(/damping rate, in inverse seconds/);
+      expect(described(input)).toMatch(/damping rate, in inverse seconds/);
     }
     expect(within(damping).getByRole('textbox', { name: 'Gravity scale' }).closest('.control--number')?.querySelector('.control__unit')).toBeNull();
     const solver = within(body).getByRole('group', { name: 'Solver' });
@@ -348,6 +348,34 @@ describe('physics component layout', () => {
     const focused = document.activeElement as HTMLElement;
     expect(focused.classList.contains('control--notice')).toBe(true);
     expect(focused.textContent).toContain('Unknown shape type "cylinder"');
+  });
+});
+
+describe('field names and descriptions', () => {
+  it('keeps the visible label as the name and announces the description separately', () => {
+    // Native WebKit named fields from the <label> title attribute, demoting the visible
+    // label ("Friction") to a description (artifacts/physics-native-final/minimum-pill-ax.txt).
+    const friction = NATIVE.Collider!.properties.friction!;
+    const { container } = show('friction', friction, 0.4);
+    const input = screen.getByRole('textbox', { name: 'Friction' });
+    expect(described(input)).toBe('Friction coefficient (dimensionless).');
+    expect(container.querySelector('label')?.hasAttribute('title')).toBe(false);
+    expect(container.querySelector('.field')?.getAttribute('title')).toBe('Friction coefficient (dimensionless).');
+    cleanup();
+    // Schema descriptions win, also for switches and masks.
+    show('memberships', NATIVE.Collider!.properties.memberships!, 4294967295);
+    const mask = screen.getByRole('textbox', { name: 'Memberships' });
+    expect(described(mask)).toContain('Collision requires both membership/filter intersections to be nonzero.');
+    expect(described(mask)).toContain('Every collision group, 1 to 32.');
+    cleanup();
+    show('ccd', NATIVE.RigidBody!.properties.ccd!, true, { component: 'RigidBody' });
+    const ccd = screen.getByRole('checkbox', { name: 'CCD' });
+    expect(described(ccd)).toBe('Continuous collision detection for fast-moving bodies.');
+    cleanup();
+    // No description: no hidden text, the row tooltip is just the label.
+    const plain = show('density', NATIVE.Collider!.properties.density!, 420);
+    expect(screen.getByRole('textbox', { name: 'Density' }).getAttribute('aria-describedby')).toBeNull();
+    expect(plain.container.querySelector('.field')?.getAttribute('title')).toBe('Density');
   });
 });
 
