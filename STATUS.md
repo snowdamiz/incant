@@ -68,7 +68,9 @@ within its documented workload.
   139 Rust, 32 GPU and 283 UI tests, Clippy and the native release build pass.
   Claude approved all 36 captures, including independent skewed-basis checks.
   A live saved-account agent captured the exact camera with no edits or login
-  prompts. Ready for hosted checks; no editor camera-selection control is claimed.
+  prompts. Hosted desktop/credential checks pass; the source job found a stale
+  generated tool-schema snapshot, corrected at `d9ace60`. Exact-head reruns are
+  pending. No editor camera-selection control is claimed.
   See [authored camera evidence](docs/spikes/authored-camera-capture.md).
 
 - Cluster membership masks replace overflow fallback in the next lighting

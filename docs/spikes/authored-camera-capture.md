@@ -85,3 +85,14 @@ result without storing image pixels in the report. Usage was 3,897 input and
 live tool/account integration, not model-authored game completion or pixel review.
 An initial 16,000-token configured budget was rejected by the conservative local
 reservation; the ordinary 64,000-token budget completed the probe.
+
+## Hosted schema follow-up
+
+Windows/Linux desktop and all three credential-storage jobs passed at `83c98a7`.
+The source workflow reached generated-schema verification and found the checked-in
+`agent-tools.json` snapshot missing the optional camera field/updated description.
+The runtime tool schema was already correct, as used by the live agent check.
+Follow-up `d9ace60` regenerates the snapshot; a second local schema generation
+leaves the tree unchanged and SDK generation checks pass. Exact-head hosted
+checks are running again before PR #19 can merge. This is an artifact correction,
+not a new runtime or appearance change.
