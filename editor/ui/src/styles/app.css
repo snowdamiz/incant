@@ -1803,11 +1803,19 @@ kbd {
   min-height: var(--control-height);
 }
 
+/* Long schema labels ("Rotation degrees") wrap to a second line rather than
+   clipping in the fixed-width Inspector; only a third line is truncated. The
+   value column keeps its full 66% share. The title attribute still carries the
+   full name or description on hover. */
 .field__label {
-  color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  line-height: var(--leading-tight);
+  color: var(--color-text-muted);
 }
 
 .field--error .field__label {
