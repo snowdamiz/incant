@@ -160,6 +160,9 @@ describe('ChatGPT account dialog', () => {
         { type: 'provider.connect', method: 'oauth', add: true },
       ]),
     );
+    // The bridge records the request before its promise settles. Wait for the
+    // dialog to re-enable actions before clicking the next one.
+    await waitFor(() => expect(d.getAttribute('aria-busy')).toBeNull());
     fireEvent.click(within(d).getByRole('button', { name: 'Sign out' }));
     // Sign-out asks first; nothing is sent yet.
     expect(requests).toHaveLength(2);

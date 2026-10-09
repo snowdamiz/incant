@@ -6,16 +6,17 @@
   "adapter": "Apple M5 Pro",
   "local_checks": {
     "rust_behavior_tests": 131,
-    "rust_behavior_validation": "130 in full workspace run; additional low-pass test separately passed",
+    "rust_behavior_validation": "131 in final full workspace run",
     "explicit_gpu_tests": 15,
-    "final_gpu_validation": "13 model/editor/headless tests rerun after retune; unchanged 2 output tests passed earlier",
+    "final_gpu_validation": "All 15 explicit GPU checks passed on the final environment renderer",
     "ui_bridge_tests": 282,
     "clippy": "passed workspace; affected crates rerun after new tests",
     "format": "passed",
     "generated_files": "passed",
     "sdk_typecheck": "passed",
     "python_tool_tests": 5,
-    "native_release_build": "passed"
+    "native_release_build": "passed",
+    "label_followup": "282 UI tests, UI build and native release rebuild pass after label wrapping fix"
   },
   "public_cli": {
     "adapter": "Apple M5 Pro",
@@ -151,9 +152,136 @@
   "visual_review": {
     "initial": "f72bec6 requested key/fill retune",
     "retuned_headless": "approved by Claude Opus 5.5 via ACP, e192fe8",
-    "native": "pending: CUA reports Mac locked; prior build left running"
+    "native": "Approved a756fa9; final native label wrapping approved e16a88f by Claude Opus 5.5 via ACP 1"
   },
-  "hosted_checks": "not yet dispatched",
+  "hosted_checks": {
+    "prior_head": {
+      "headRefOid": "42a991df647077de84755fd0f6df025164ccb48d",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:16:25Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808877/job/113983786271",
+          "name": "storage (macos-latest)",
+          "startedAt": "2026-10-09T19:14:10Z",
+          "status": "COMPLETED",
+          "workflowName": "Desktop credential persistence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:40:58Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808912/job/113983785793",
+          "name": "desktop (windows-latest, Windows, .exe)",
+          "startedAt": "2026-10-09T19:14:06Z",
+          "status": "COMPLETED",
+          "workflowName": "Desktop editor and engine"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:40:28Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808910/job/113983785727",
+          "name": "checks",
+          "startedAt": "2026-10-09T19:14:14Z",
+          "status": "COMPLETED",
+          "workflowName": "Incant checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:15:31Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808972/job/113983786487",
+          "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+          "startedAt": "2026-10-09T19:14:10Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:17:37Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808877/job/113983786030",
+          "name": "storage (windows-latest)",
+          "startedAt": "2026-10-09T19:14:04Z",
+          "status": "COMPLETED",
+          "workflowName": "Desktop credential persistence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:29:01Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808912/job/113983786375",
+          "name": "desktop (ubuntu-latest, Linux)",
+          "startedAt": "2026-10-09T19:14:05Z",
+          "status": "COMPLETED",
+          "workflowName": "Desktop editor and engine"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:15:50Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808972/job/113983786397",
+          "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+          "startedAt": "2026-10-09T19:14:05Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:16:15Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808877/job/113983786352",
+          "name": "storage (ubuntu-latest)",
+          "startedAt": "2026-10-09T19:14:04Z",
+          "status": "COMPLETED",
+          "workflowName": "Desktop credential persistence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:15:00Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808972/job/113983786660",
+          "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+          "startedAt": "2026-10-09T19:14:04Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:17:08Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808972/job/113983786176",
+          "name": "web",
+          "startedAt": "2026-10-09T19:14:05Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:19:40Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808972/job/113983786599",
+          "name": "ios",
+          "startedAt": "2026-10-09T19:14:10Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-09T19:17:35Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37978808972/job/113983786526",
+          "name": "android",
+          "startedAt": "2026-10-09T19:14:05Z",
+          "status": "COMPLETED",
+          "workflowName": "Six platform probes"
+        }
+      ]
+    },
+    "final_head": "pending push after native review"
+  },
   "limits": [
     "one global distant environment per project",
     "fixed 128-pixel specular cube, eight roughness levels, 16-pixel diffuse cube, 64-pixel DFG lookup",
@@ -161,5 +289,30 @@
     "split-sum single-scattering GGX, fixed preview direct key, no skybox/shadows/local probes/antialiasing",
     "project schema/document validation plus existing importer four-megatexel limit; color/linear equirectangular 2:1 images only"
   ],
-  "phase_gate": "not approved"
+  "phase_gate": "not approved",
+  "native": {
+    "build_source": "441b3a6",
+    "render_behavior_source": "42a991d",
+    "sizes": [
+      "1440x900",
+      "1000x650"
+    ],
+    "source_reimport": "passed",
+    "undo_redo": "passed",
+    "invalid_source_retention_and_repair": "passed",
+    "saved_account_restoration": "passed without interaction",
+    "readonly_inspector": "passed; no field editing claimed",
+    "journal_reopen": "passed after correcting the disposable fixture journal path"
+  },
+  "native_captures": {
+    "01-authored-wide.jpg": "cf5131b21ecf3a0ffa56d4dc015ad23acaab84478a323006a8445f8423264e10",
+    "02-source-reimport.jpg": "859df08bf17dd35fe2ae7f278813e32924cf8750dcb61f5b0dd7631ad142e977",
+    "03-undo-reimport.jpg": "9200b89c5ddf2a61e37b7c5b8d89c2a1a38bacdcc10819b0f3140894b9aa7ffc",
+    "04-redo-reimport.jpg": "f7698a200e781b330bc0554243f3aab2fa7fe1fb833b5175148004674fb7aa8b",
+    "05-invalid-source-retained.jpg": "f054f561ae5f8168adb254f11c104fc9a576dadacf82876bbac0b60fd183df5d",
+    "06-source-repaired.jpg": "ea2c0eb665afa10fec1926017071363e65a7d619ae950c558751340e80909ecf",
+    "07-minimum.jpg": "06f7ba7612fc60c6e7309395f1b7b9f2fafe722a109e4d02119c870b52a8ac1a",
+    "08-label-fixed-wide.jpg": "67d9c060f9268fe77a9c69831ea7163de9e98b71f379e7927651f5eb18bb9a4c",
+    "09-label-fixed-minimum.jpg": "f7c6ed104d6eded13139811f3b822e1d2098d8f8db90e5b9f7e62ef63194cc9e"
+  }
 }

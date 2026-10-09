@@ -124,7 +124,9 @@ are bundled locally, so nothing is fetched from a network.
   show a dot for problems inside.
 - **Inspector:** the identity block shows the kind tile, entity name, kind · ULID and copy-ID.
   "Read-only" is a quiet lock chip in the header. Components are disclosure rows separated by
-  hairlines, with fields in a 34/66 label/value grid. Values sit in recessed 28 px wells with
+  hairlines, with fields in a 34/66 label/value grid. Long labels wrap to a second line at
+  16 px leading and truncate only on a third, so names like "Rotation degrees" stay readable
+  in the fixed-width column. Values sit in recessed 28 px wells with
   prefixes and suffixes inside: axis letters, link icons, swatches and units.
 - **Output dock:** text tabs with a 2 px periwinkle underline on the active tab and counts in
   small raised boxes. Console level filters and history undo/redo are chips.

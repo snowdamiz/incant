@@ -3,6 +3,32 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+pub(crate) fn annotate_schemas(
+    registry: &mut std::collections::BTreeMap<String, serde_json::Value>,
+) {
+    use serde_json::json;
+    for kind in ["DirectionalLight", "PointLight", "SpotLight"] {
+        let properties =
+            &mut registry.get_mut(kind).expect("registered light schema")["properties"];
+        properties["color"]["x-incant-widget"] = json!("rgb");
+        properties["color"]["items"]["minimum"] = json!(0);
+        properties["color"]["items"]["maximum"] = json!(1);
+        properties["intensity"]["x-incant-unit"] = json!(if kind == "DirectionalLight" {
+            "lx"
+        } else {
+            "cd"
+        });
+        if kind != "DirectionalLight" {
+            properties["range"]["x-incant-unit"] = json!("m");
+        }
+        if kind == "SpotLight" {
+            for angle in ["inner_degrees", "outer_degrees"] {
+                properties[angle]["x-incant-unit"] = json!("°");
+            }
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct DirectionalLight {

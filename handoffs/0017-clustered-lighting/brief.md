@@ -1,3 +1,39 @@
+# Priority: integrated final lighting review
+
+All corrections are integrated. Runtime source is 2ee02d0 / 00dfbd1 (the latter
+adds only an account-dialog test race fix). Full local validation passes 135 Rust
+behavior tests, 24 real GPU checks, 283 UI tests, workspace Clippy, generated
+files, SDK typecheck and the native release build. Your range-edge fix passes the
+new observable regression that failed on the original shader.
+
+Review freshly regenerated `artifacts/cluster-final/` and CUA captures in
+`artifacts/lighting-native-final/`. Initial images remain historical only.
+The final CLI captures reverify intensity edits, exact Undo/Redo image hashes,
+atomic invalid-range rejection, journal reopen and source-free loading after the
+shader change. Verify the final oracle pairs directly.
+
+Native final: 01 point dim at 60 cd; 02 Undo to 300 cd; 03 Redo to 60 cd;
+04 spot at wide size; 05 spot at 1000x650 before scrolling; 06 after scrolling
+inside Inspector; 07 directional at minimum size. The native schema now emits
+RGB widget hints and cd/lx/m/degree units. Spot/directional probes now include
+explicit identity Transforms so their aim is inspectable. Their intensity is
+zero intentionally; the point lights the sphere. Account restoration still
+requires no prompt; do not put its email in the report.
+
+Handoff 0016 is complete and its generic two-line label fix is integrated here.
+Its final native captures are approved. You may now make a focused Inspector
+scroll-affordance fix if the final 05/06 pair still demonstrates a material UX
+problem. Field access does work through scrolling; do not call the field
+unreachable. Own any necessary presentation correction, and keep command
+behavior unchanged. If no correction is required, give the precise final scoped
+verdict. Do not expand into broad editor redesign or production lighting approval.
+
+Update result.md, closing resolved defects and listing any remaining material
+issue or limit. Commit current brief and review result with Built-by: claude.
+Images stay git-ignored; no account-bearing native image is to be published.
+
+---
+
 # Priority: resolve the visible range rim and review native captures
 
 Your expanded review found a real range-edge crease. Please own the focused

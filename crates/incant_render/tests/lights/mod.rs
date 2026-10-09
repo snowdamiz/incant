@@ -69,6 +69,37 @@ fn linear(v: u8) -> f64 {
 }
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
+fn finite_range_light_eases_to_zero_without_a_linear_edge_crease() {
+    let r = Renderer::headless().unwrap();
+    let mut f = fixture();
+    let id = light(
+        &mut f,
+        "PointLight",
+        json!({"color":[1,1,1],"intensity":500,"range":2}),
+        [0., 0., 1.96],
+    );
+    let at_98 = shot_size(&f, &r, "range-98-percent", 321, 181);
+    component(
+        &mut f,
+        &id,
+        "Transform",
+        json!(Transform {
+            translation: [0., 0., 1.98],
+            ..Default::default()
+        }),
+    );
+    let at_99 = shot_size(&f, &r, "range-99-percent", 321, 181);
+    // Near a smooth zero-slope cutoff, halving distance to the boundary reduces
+    // irradiance by about four, rather than the factor of two from a linear
+    // crease. These pixels remain below the tone-map shoulder.
+    let ratio = linear(at_98[0]) / linear(at_99[0]);
+    assert!(
+        (3.7..4.5).contains(&ratio),
+        "range edge irradiance ratio {ratio}: {at_98:?}/{at_99:?}"
+    );
+}
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
 fn directional_point_and_spot_lights_obey_authored_physical_parameters() {
     let r = Renderer::headless().unwrap();
     let mut f = fixture();
