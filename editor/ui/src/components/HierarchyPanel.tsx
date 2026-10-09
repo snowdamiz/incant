@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { KeyboardEvent } from 'react';
+import type { KeyboardEvent, ReactNode } from 'react';
 import type { HierarchyTree, Ulid } from '../bridge/contract';
 import type { ProblemCounts, Row } from '../hierarchy/tree';
 import { defaultExpanded, indexProblems, treeKey, typeAhead, visibleRows } from '../hierarchy/tree';
@@ -7,9 +7,13 @@ import { Icon, iconForKind } from '../icons/Icon';
 import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 import { Skeleton, StateView } from './StateView';
+import { AssetBrowser } from './assets/AssetBrowser';
+import { useAssets } from '../assets/AssetsContext';
+import type { NavigatorView } from '../assets/AssetsContext';
 
 export function HierarchyPanel() {
   const { snapshot, bridge } = useShell();
+  const { view } = useAssets();
   const hierarchy = snapshot?.hierarchy;
   const project = projectState(snapshot);
   let body;
@@ -46,20 +50,99 @@ export function HierarchyPanel() {
   }
   const count = hierarchy?.status === 'ready' ? Object.keys(hierarchy.value.nodes).length : null;
   return (
-    <section className="panel" data-region="hierarchy" aria-labelledby="hierarchy-title" tabIndex={-1}>
-      <header className="panel__header">
-        <h2 id="hierarchy-title" className="panel__title">
-          Hierarchy
-        </h2>
-        {count !== null ? (
-          <span className="panel__count" title={`${count.toLocaleString()} entities`}>
-            {count.toLocaleString()}
-            <span className="visually-hidden"> entities</span>
-          </span>
-        ) : null}
-      </header>
-      {body}
+    <section className="panel" data-region="hierarchy" aria-label="Hierarchy and assets" tabIndex={-1}>
+      <NavigatorTabs entityCount={count} />
+      <div
+        className="navigator__panel"
+        role="tabpanel"
+        id={`navigator-panel-${view}`}
+        aria-labelledby={`navigator-tab-${view}`}
+      >
+        {view === 'assets' ? <AssetBrowser /> : body}
+      </div>
     </section>
+  );
+}
+
+const VIEWS: readonly NavigatorView[] = ['hierarchy', 'assets'];
+
+/**
+ * The left column shows either the scene hierarchy or the project's assets. Both are
+ * "pick something, inspect it on the right" lists, so they share one column and one
+ * Inspector instead of putting a browser in the output dock.
+ */
+function NavigatorTabs({ entityCount }: { entityCount: number | null }) {
+  const { snapshot } = useShell();
+  const { view, setView, pending, outcome } = useAssets();
+  const refs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const assets = snapshot?.assets?.status === 'ready' ? snapshot.assets.value.length : null;
+  const select = (next: NavigatorView, focus: boolean) => {
+    setView(next);
+    if (focus) refs.current[next]?.focus();
+  };
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const index = VIEWS.indexOf(view);
+    let next = index;
+    if (event.key === 'ArrowRight') next = (index + 1) % VIEWS.length;
+    else if (event.key === 'ArrowLeft') next = (index - 1 + VIEWS.length) % VIEWS.length;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = VIEWS.length - 1;
+    else return;
+    event.preventDefault();
+    select(VIEWS[next]!, true);
+  };
+  const tab = (id: NavigatorView, label: ReactNode, extra: ReactNode) => (
+    <button
+      ref={(element) => {
+        refs.current[id] = element;
+      }}
+      type="button"
+      role="tab"
+      id={`navigator-tab-${id}`}
+      className="navigator__tab"
+      aria-selected={view === id}
+      aria-controls={`navigator-panel-${id}`}
+      tabIndex={view === id ? 0 : -1}
+      onClick={() => select(id, false)}
+    >
+      {label}
+      {extra}
+    </button>
+  );
+  return (
+    <header className="panel__header navigator__header">
+      <div className="navigator__tabs" role="tablist" aria-label="Left panel" onKeyDown={onKeyDown}>
+        {tab(
+          'hierarchy',
+          <span id="hierarchy-title">Hierarchy</span>,
+          entityCount !== null ? (
+            <span className="panel__count">
+              {entityCount.toLocaleString()}
+              <span className="visually-hidden"> entities</span>
+            </span>
+          ) : null,
+        )}
+        {tab(
+          'assets',
+          <span id="assets-title">Assets</span>,
+          pending ? (
+            <span className="navigator__busy" title="Import running">
+              <span className="spinner spinner--small" aria-hidden="true" />
+              <span className="visually-hidden">, importing</span>
+            </span>
+          ) : outcome?.status === 'failure' ? (
+            <span className="navigator__alert" title="The last import failed">
+              <span className="visually-hidden">, last import failed</span>
+            </span>
+          ) : assets !== null ? (
+            <span className="panel__count">
+              {assets.toLocaleString()}
+              <span className="visually-hidden"> assets</span>
+            </span>
+          ) : null,
+        )}
+      </div>
+    </header>
   );
 }
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * BROWSER FIXTURE captures for handoff 0010 (adapted from 0009). Serves editor/ui/dist with
+ * BROWSER FIXTURE captures for handoff 0010 (adapted from 0009). Revision 4: assets are a
+ * left-column view beside the Hierarchy; details and import open in the Inspector. Serves editor/ui/dist with
  * `vite preview` on port 4190 (never the user's 4176), drives local Chrome through the pinned
  * playwright-core, and writes PNGs plus report.json to handoffs/0010-asset-library/screenshots/<set>/.
  *
@@ -175,8 +176,8 @@ async function layoutReport(p, label) {
         const b = document.querySelector(s)?.getBoundingClientRect();
         return b ? `${Math.round(b.width)}x${Math.round(b.height)}` : null;
       };
-      const overflow = [...document.querySelectorAll('.assets *')].filter((e) => e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow === 'visible').length;
-      return { dock: r('[data-region="dock"]'), browser: r('.assets__browser'), pane: r('.asset-pane'), visibleOverflowingElements: overflow };
+      const overflow = [...document.querySelectorAll('.asset-browser *, .asset-inspector *')].filter((e) => e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow === 'visible').length;
+      return { left: r('[data-region="hierarchy"]'), list: r('.asset-list'), inspector: r('[data-region="inspector"]'), visibleOverflowingElements: overflow };
     })),
   });
 }
@@ -275,20 +276,16 @@ try {
       report.dispatched.push({ mode: 'reimport-hold', size, commands: await p.evaluate(() => window.__EVIDENCE_DISPATCHED__) });
       await context.close();
     }
-    // 17 Keyboard path: F6 to the dock, Assets tab, Tab into the list, Down, Enter opens details.
+    // 17 Keyboard path: F6 to the left column (Assets view), Down, Enter opens details in the Inspector.
     {
       const { context, p } = await page(vp, double());
       await open(p);
       await p.mouse.click(w / 2, 120);
       for (let i = 0; i < 6; i += 1) {
         await p.keyboard.press('F6');
-        if (await p.evaluate(() => document.activeElement?.closest('[data-region]')?.getAttribute('data-region') === 'dock')) break;
+        if (await p.evaluate(() => document.activeElement?.closest('[data-region]')?.getAttribute('data-region') === 'hierarchy')) break;
       }
-      await focusReport(p, `F6 to dock ${size}`);
-      await p.keyboard.press('Tab');
-      await p.keyboard.press('Tab');
-      await p.keyboard.press('Tab');
-      await focusReport(p, `Tab into list ${size}`);
+      await focusReport(p, `F6 to the asset list ${size}`);
       await p.keyboard.press('ArrowDown');
       await shot(p, `17-keyboard-list-focus-double-${size}`);
       await focusReport(p, `ArrowDown in list ${size}`);

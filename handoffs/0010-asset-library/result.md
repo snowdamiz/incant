@@ -1,10 +1,13 @@
 # Result: handoff 0010, editor asset library and import workflow
 
-**Status:** UI is integrated, and Astra has verified native behaviour. The revision 2
-visual fixes are integrated as 08026d8. Claude's revision 3 review of Astra's native
-re-captures passed R1 to R4, and Astra's native R5 behaviour check passed. No native
-request is open, and no implementation change was needed in revision 3. Nothing here
-approves a phase gate. Astra owns the remaining review, the PR and the merge.
+**Status, revision 4:** The director rejected the asset UI in the bottom dock. It is
+replaced by a dedicated design: assets are a left-column view beside the Hierarchy, and
+their details, reimport and import open in the Inspector. Problems, Console and History
+keep the bottom dock. Every backend behaviour is unchanged and still goes through the one
+`asset.import` command. The browser review over synthetic data is done. Native capture of
+the new layout is **open**, with requests N1 to N6 in native-requests.md. Nothing here
+approves a phase gate or claims complete feature integration. Astra integrates this into
+PR #8.
 
 **Model and transport (verified by Astra):** Claude Opus 5.5 (`claude-opus-5-5`)
 through Claude Code and `claude-agent-acp`. Astra launched this session with
@@ -13,7 +16,150 @@ The runner initialized ACP protocol 1, selected the configured Opus 5.5 option
 and delivered the packet through `session/prompt`. Claude’s original self-report
 misidentified the outer transport. No routing exception or model substitution occurred.
 
-## Native pixel review, 2026-10-09 (revision 2)
+
+## Revision 4: why and what changed
+
+The director wrote: "I dont like this UI at the bottom. Looks messy, unprofessional, bad
+spacing. And I dont even think the assets belong in that bottom sections where the compiler
+issues are presumably right next to it." I read the private screenshot,
+`director-rejected-bottom-dock.png`. It is 3022×1896 and ignored, and its account label is
+not quoted here. It shows the faults:
+
+- **Wrong neighbours.** The asset browser sat beside compiler output.
+- **Cramped table.** A four-column table was squeezed into a short strip.
+- **Duplicate inspector.** A second mini-inspector competed with the real Inspector a few
+  centimetres away.
+- **Scattered notices.** Notices lived in pane-local places.
+
+The design decision follows the editor's own model: navigation on the left, details on the
+right, output at the bottom.
+
+- **Left column: "Hierarchy" and "Assets".**
+  - The header is a two-tab switcher. Each tab has a count, the selected one has the accent
+    underline, and arrow keys move between them.
+  - The Assets view is a calm list grouped by source folder. Long folders keep their last
+    segments, such as "…/surfaces/wood/", with the full path in the tooltip.
+  - Rows match the hierarchy's 28 px pill: a kind icon, the name, and a quiet
+    interpretation tag (Color, Linear, Normal map) for textures.
+  - A filter and an Import button sit above the list.
+- **Inspector follows the left column.** Hierarchy shows entity components, as before.
+  Assets shows the selected asset or the import form.
+  - Asset details reuse the entity identity block: kind tile, name and type. Then come
+    inspector-style sections for Source (the full path in a recessed mono well, wrapped at
+    slashes), Interpretation (segmented control and hint), Reimport (action and one-line
+    explanation) and a collapsed Identifiers disclosure (ID and fingerprint).
+  - The import form has the same identity block ("Import assets", "From the project
+    folder"), the path rows and a pinned action row.
+- **The bottom dock is output again.** It holds only Problems, Console and History. The dock
+  no longer resizes itself.
+- **Notices have fixed homes.**
+  - A running or failed import shows one line under the asset toolbar: "Importing 8 files…"
+    or "Last import failed" with a Show link. It appears wherever the Inspector is.
+  - The Assets tab carries a spinner while an import runs, or a red dot after a failure.
+  - The full error, with the engine's exact message, stays at the top of the Inspector view
+    it belongs to until it is dismissed or retried.
+  - The cooking note in the pinned action row reads "You can keep working. Editing now
+    means retrying the import."
+- **Moving between views.**
+  - Selecting an asset with a click or the arrow keys updates the Inspector without moving
+    focus.
+  - Enter moves focus to the asset name in the Inspector, and Escape returns to the same
+    row.
+  - Returning to Hierarchy restores the entity selection and its Inspector.
+  - Revealing a problem from the dock switches back to Hierarchy, so the selected entity is
+    visible.
+
+Behaviour that was kept and is still tested:
+
+- Batch import as one command.
+- Usage sent only for images, and only when it changes something.
+- Reimport without typing a path.
+- Path validation that mirrors the engine.
+- Drafts, pending state and errors retained across view switches.
+- The `asset.conflict` code with its text fallback.
+- Busy blocking of a second import.
+- Paste over a selection.
+- Text and menu Undo inside path fields, with project Undo from the list.
+- F2 rename in the hierarchy.
+- Untrusted names rendered as text.
+
+No thumbnails, file pickers, model placement or cancellation were added.
+
+Changed in revision 4:
+
+- **New:** `src/components/assets/AssetBrowser.tsx`, `src/components/assets/AssetInspector.tsx`
+  and `src/assets/library.ts`.
+- **Removed:** `AssetsTab.tsx` and `AssetPane.tsx`.
+- **Changed:** `HierarchyPanel.tsx` (the left-column switcher), `InspectorPanel.tsx`,
+  `BottomDock.tsx` (restored to its pre-0010 form, plus a switch back to Hierarchy when a
+  problem is revealed), `App.tsx`, `ShellContext.tsx` and `AssetsContext.tsx` (`view`).
+- **Also changed:** `styles/assets.css` (rewritten), `DESIGN.md`, the tests and the capture
+  tool.
+
+### Revision 4 commands and results
+
+| Command | Result |
+| --- | --- |
+| `npx vitest run` in `editor/ui` | 273 tests passed: the integrated 267 plus 6 for placement, Inspector switching, problem reveal, folder grouping and folder labels |
+| `npx tsc -b --noEmit` | clean |
+| `npm run build --workspace editor/ui` | built |
+| `node handoffs/0010-asset-library/tools/capture-assets.mjs revision-4` | 40 captures, 0 page or console errors |
+
+Bundle, against HEAD `93dbfc5`, the pre-0010 baseline:
+
+| Asset | Baseline, Vite gzip | Revision 4, Vite gzip | Delta |
+| --- | --- | --- | --- |
+| Main JS | 93.57 kB | 101.43 kB | +7.86 kB |
+| CSS | 8.38 kB | 9.79 kB | +1.41 kB |
+
+At gzip level 9 the main JS went from 92,450 to 100,293 bytes, or 90.28 to 97.94 KiB. That is
+within the 110 KiB budget. No dependencies, fonts or icon packages were added.
+
+### Revision 4 browser evidence (synthetic, not native)
+
+Captures are in `screenshots/revision-4/`, at 1000×650 and 1440×900 and 2× scale. They were
+made with Chrome 155 headless through the pinned `playwright-core` on port 4190, using the
+same states and evidence doubles as before. `report.json` holds focus, layout, axe and
+dispatch data. The revision 1 to 3 captures of the rejected dock design are removed from the
+tree and remain in Git history.
+
+- **axe-core:** zero violations in the details, import form, busy, failed, conflict and
+  success states.
+- **Keyboard:** F6 reaches the asset list row directly. Down moves the selection, Enter
+  focuses the asset name in the Inspector, and Escape returns to the same row. Every step
+  has a visible 2 px ring.
+- **Layout:** no visibly overflowing elements.
+
+| Size | Left column | Inspector |
+| --- | --- | --- |
+| 1000×650 | 232 px wide | 320×321 px |
+| 1440×900 | 245 px wide | 331×534 px |
+
+- **Pixel review:** I reviewed populated, long path, empty, unsaved, busy, failure and
+  success states at both sizes. At 1000×650 the Inspector is short, so the import form and
+  the lower details sections scroll. The import action row stays pinned. I did not shrink
+  the Agent panel automatically.
+
+### Revision 4 limitations
+
+- **No native evidence of the new layout yet.** The browser captures do not prove WebKit
+  rendering. Requests N1 to N6 are in native-requests.md.
+- **Inspector height at the minimum window.** At about 1000×650 the Inspector is roughly
+  320 px tall, so asset sections and the import rows scroll. The import action row stays
+  pinned. Resizing the Agent panel gives more room. The UI does not resize it on its own.
+- **Narrow left column.** At 232 px, long asset names end in an ellipsis. The full name is in
+  the Inspector, and the full path is in the tooltip and the Inspector.
+- **Not offered, because they do not exist yet:** a file picker, drag and drop, source
+  copying, thumbnails, cancellation, or viewport display of models.
+- **View state is local.** The Hierarchy or Assets choice is not saved between sessions.
+
+## Earlier revisions (superseded by revision 4)
+
+The sections below record revisions 1 to 3 of the dock-based design. Their native
+behaviour checks remain valid evidence for the backend. Their visual verdicts no longer
+apply.
+
+### Native pixel review, 2026-10-09 (revision 2)
 
 Astra captured these with Codex CUA on the rebuilt Tauri/WebKit app. The captures are in the
 ignored `artifacts/native-review/` directory. They stay out of Git, and no account label is
@@ -67,7 +213,7 @@ What the pixels show:
   selected or empty field takes the first line and the rest become new rows. A caret paste
   still keeps the path and adds every line below it. Two interaction tests cover both cases.
 
-## Revision 3: native re-capture review
+### Revision 3: native re-capture review
 
 Every verdict passed, from Astra's private CUA captures of the integrated build, 08026d8.
 Per-capture details are in native-requests.md.
@@ -86,7 +232,7 @@ changed documentation only. The tests and browser captures from revision 2 still
 the code: 267 tests passed and 40 captures were taken. Astra's integration run of 08026d8
 also passed the 267 UI tests.
 
-## What was built
+### Revision 1 to 3 design (superseded)
 
 - **Assets tab.** It is the first tab of the bottom dock, ahead of Problems, Console and
   History. It shows a filterable list of the project's assets. Each row has a kind tile,
@@ -133,7 +279,7 @@ Retained behaviour, each covered by tests:
 - Account-dialog and shortcut-dialog history blocking.
 - File names are rendered only as text.
 
-## Changed paths
+### Changed paths
 
 - `editor/ui/src/assets/AssetsContext.tsx`, `paths.ts` and `paths.test.ts` are new.
 - `editor/ui/src/components/assets/AssetsTab.tsx`, `AssetPane.tsx` and `Assets.test.tsx` are
@@ -157,7 +303,7 @@ Retained behaviour, each covered by tests:
 No changes were made to `editor/app/**`, `editor/bridge/**` or the contract. The contract
 question for Astra is in native-requests.md.
 
-## Commands and results
+### Commands and results
 
 | Command | Result |
 | --- | --- |
@@ -177,7 +323,7 @@ Measured with `zlib` at gzip level 9, the main JS went from 92,450 to 99,525 byt
 90.28 to 97.19 KiB, an increase of 6.91 KiB. The JS stays under the 110 KiB budget. No
 dependencies, remote fonts or icon packages were added.
 
-## Browser evidence (synthetic, not native)
+### Browser evidence (synthetic, not native)
 
 Captures are in `screenshots/after/` at 1000×650 and 1440×900, at 2× scale. They were made
 with Chrome 155 headless through the pinned `playwright-core` 1.64, using `vite preview` on
@@ -204,7 +350,7 @@ focus, layout and axe results.
 - **Layout:** no visibly overflowing elements. At 1000×650 the pane fills the 446 px dock.
   At 1440×900 the list is 542 px and the pane 320 px.
 
-## Limitations
+### Limitations
 
 - **Native evidence is CUA captures on macOS only.** Its pixel verdicts are Claude's, and its
   behaviour verdicts are Astra's. No Windows or Linux native capture was requested. The
@@ -218,7 +364,7 @@ focus, layout and axe results.
 - **The dock grows on demand.** Opening a pane grows the dock to 300 px when there is room.
   It does not shrink back on close, and that is deliberate.
 
-## Open questions
+### Open questions
 
 1. Resolved: the engine now exposes `asset.conflict`.
 2. Should Assets become the default dock tab once native import is verified? Problems stays

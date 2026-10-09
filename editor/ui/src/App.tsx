@@ -185,7 +185,7 @@ function Workbench() {
           {panels.dock ? (
             <>
               <Splitter label="Resize output panel" orientation="horizontal" invert value={layout.dock} min={120} max={640} onChange={(dock) => resize({ dock })} />
-              <BottomDock onRequestHeight={(min) => setLayout((current) => (current.dock >= min ? current : clampLayout({ ...current, dock: min }, window.innerWidth, window.innerHeight)))} />
+              <BottomDock />
             </>
           ) : null}
         </div>
