@@ -1,0 +1,18 @@
+[package]
+name = "incant_import"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+incant_assets = { path = "../incant_assets" }
+incant_doc = { workspace = true }
+incant_cmd = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"
+image = { version = "=0.25.10", default-features = false, features = ["png"] }
+serde_json = { workspace = true }

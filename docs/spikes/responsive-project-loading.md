@@ -36,3 +36,9 @@ A follow-up CUA attempt still found macOS locked. Native verification of the new
 focus ring, loading/error states and schema field order remains open. Browser
 focus-visible suppression is explicitly a simulation, not native WebKit proof.
 No account action or filesystem permission change was taken.
+
+PR #5 merged as b2f7f18 after all twelve hosted checks passed on 2580b09. This
+includes source checks, both Windows/Linux native editor builds/tests/readback,
+three credential stores and all six platform probes. Exact jobs and merge metadata
+are in [responsive-loading-2026-10-09.json](evidence/responsive-loading-2026-10-09.json).
+Native Mac checks above remain open; CI results do not erase that limitation.

@@ -147,3 +147,30 @@ All thirteen hosted checks passed on c063a99, including Windows/Linux editor
 builds and tests, three credential stores, all six platform probes and site
 browser tests. The exact revision and jobs are retained in
 [evidence/runtime-assets-2026-10-09.json](evidence/runtime-assets-2026-10-09.json).
+
+## Shared import preparation and commit
+
+`incant_import` is the authoring service between `incant_assets` and `incant_cmd`.
+`ImportSnapshot::capture` copies the current document and revision; preparation
+can then move to a worker without holding the editor's command-bus lock. A batch
+of one to 64 canonical project-relative sources validates identities/options and
+cooks every input before returning an immutable prepared batch. Commit verifies
+project identity, revision and contents, then issues all changed `UpsertAsset`
+commands as one atomic transaction with the caller's validated provenance.
+Unchanged imports do not add history, but still reject stale snapshots.
+
+The CLI import path now calls this service and preserves its existing result
+shape, cache override, stable ULIDs, user-renamed labels and texture usage settings.
+Repeated separators and other noncanonical source paths now fail explicitly,
+preventing textual aliases from creating separate source identities. Runtime
+loading remains in `incant_assets` without an authoring command-bus dependency.
+
+Five service tests cover worker preparation, an atomic persistent batch, undo/redo,
+loading after source deletion, cache rebuild and saved settings, corrupt later
+inputs, invalid provenance, stale revisions (including no-ops), different project
+identities and same-ID/revision documents with different content, and malformed/
+ambiguous sources. Existing real CLI import/reimport and runtime tests also pass.
+Cooking can leave content-addressed cache files when preparation or commit fails;
+no authored document or history entry is partially published. Editor and agent
+import entry points, progress/cancellation and automatic source watching remain
+open. This service is not claimed as a completed asset hot-reload feature.
