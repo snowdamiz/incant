@@ -1,4 +1,5 @@
 //! Local provider loop and typed engine tools. There is no shell tool.
+pub mod accounts;
 pub mod auth;
 pub mod credentials;
 pub mod provider;

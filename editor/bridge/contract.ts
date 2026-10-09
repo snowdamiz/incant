@@ -259,7 +259,10 @@ export type EditorCommand =
 
 /** Requests to the host that are not document edits and are not journaled. */
 export type HostRequest =
-  | { readonly type: 'provider.connect'; readonly method: 'oauth' | 'api-key'; readonly phase?: 'browser' | 'validating' }
+  | { readonly type: 'provider.connect'; readonly method: 'oauth' | 'api-key'; readonly accountId?: string; readonly add?: boolean }
+  | { readonly type: 'provider.cancel' }
+  | { readonly type: 'provider.disconnect' }
+  | { readonly type: 'provider.switch'; readonly accountId: string }
   | { readonly type: 'agent.send'; readonly text: string }
   | {
       readonly type: 'viewport.bounds';

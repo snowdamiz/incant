@@ -1,16 +1,14 @@
 use clap::{Parser, Subcommand};
 mod eval;
 use incant_agent::{
-    Agent, ApprovalMode, Budget,
-    auth::{self, AccountMetadata, LoginAttempt},
-    credentials::CredentialStore,
+    Agent, ApprovalMode, Budget, accounts::AccountStore, credentials::CredentialStore,
     provider::OpenAiProvider,
 };
 use incant_cmd::{Actor, CommandBus};
 use incant_core::Engine;
 use incant_doc::{Entity, Project, Scene, Transform, new_id, schema_registry};
 use incant_script::PlaySession;
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use serde_json::{Value, json};
 use std::{
     error::Error,
@@ -118,13 +116,6 @@ enum AuthCli {
     },
     Disconnect,
 }
-#[derive(Default, Serialize, Deserialize)]
-struct Accounts {
-    host_id: String,
-    active: Option<String>,
-    accounts: Vec<AccountMetadata>,
-    api_key_connected: bool,
-}
 fn read_project(path: &Path) -> Result<Project> {
     Ok(Project::from_text(&fs::read_to_string(path)?)?)
 }
@@ -144,90 +135,31 @@ fn print(value: impl Serialize) -> Result<()> {
     println!("{}", serde_json::to_string_pretty(&value)?);
     Ok(())
 }
-fn accounts() -> Result<(PathBuf, Accounts, fs::File)> {
-    let dir = dirs::config_dir()
-        .ok_or("OS configuration directory unavailable")?
-        .join("Incant");
-    fs::create_dir_all(&dir)?;
-    let lock = fs::OpenOptions::new()
-        .create(true)
-        .truncate(false)
-        .read(true)
-        .write(true)
-        .open(dir.join("accounts.lock"))?;
-    lock.try_lock()
-        .map_err(|_| "another Incant process is managing provider credentials")?;
-    let path = dir.join("accounts.json");
-    let mut accounts: Accounts = if path.exists() {
-        serde_json::from_str(&fs::read_to_string(&path)?)?
-    } else {
-        Accounts::default()
-    };
-    if accounts.host_id.is_empty() {
-        accounts.host_id = format!("incant:{}", new_id());
-        save(&path, &serde_json::to_string_pretty(&accounts)?)?;
-    }
-    Ok((path, accounts, lock))
-}
 fn provider(model: String) -> Result<OpenAiProvider> {
-    let (_, accounts, _lock) = accounts()?;
-    let token = if let Some(active) = &accounts.active {
-        let account = accounts
-            .accounts
-            .iter()
-            .find(|a| &a.id == active)
-            .ok_or("active account metadata missing")?;
-        auth::access_token(account)?.to_string()
-    } else if accounts.api_key_connected {
-        CredentialStore::load("api-key")?.to_string()
-    } else {
-        return Err(
-            "No OpenAI connection. Run `incant auth login` or `incant auth api-key`.".into(),
-        );
-    };
-    Ok(OpenAiProvider::new(token, model)?)
+    Ok(AccountStore::open()?.provider(model)?)
 }
 fn auth_command(action: AuthCli) -> Result<()> {
-    let (path, mut accounts, _lock) = accounts()?;
     match action {
         AuthCli::Login { add } => {
-            let existing = if add {
-                None
-            } else {
-                accounts
-                    .active
-                    .as_ref()
-                    .and_then(|id| accounts.accounts.iter().find(|a| &a.id == id))
-            };
-            let attempt =
-                LoginAttempt::new(&accounts.host_id, existing.map(|a| a.client_id.as_str()))?;
+            let (attempt, subject) = AccountStore::open()?.prepare_login(add, None)?;
+            // No account lock held while the person signs in. Never log a URL
+            // containing a returning account's ID-token hint.
+            attempt.open_browser()?;
+            println!("Incant opened your system browser. Complete Continue with ChatGPT there.");
+            let account = attempt.finish(subject.as_deref(), Duration::from_secs(300))?;
+            AccountStore::open()?.activate(account)?;
             println!(
-                "Open this URL in your system browser to authorize Incant:\n{}",
-                attempt.authorization_url()
+                "Connected. This login is shared by the editor and CLI and survives rebuilds."
             );
-            io::stdout().flush()?;
-            let account = attempt.finish(
-                if add {
-                    None
-                } else {
-                    existing.map(|a| a.subject.as_str())
-                },
-                Duration::from_secs(300),
-            )?;
-            accounts.active = Some(account.id.clone());
-            accounts.accounts.retain(|a| a.id != account.id);
-            accounts.accounts.push(account);
-            save(&path, &serde_json::to_string_pretty(&accounts)?)?;
-            println!("Connected. Tokens are stored in the OS keychain.");
         }
         AuthCli::ApiKey => {
             let key = rpassword::prompt_password("OpenAI API key (hidden): ")?;
-            let provider = OpenAiProvider::new(key.clone(), "connection-validation".into())?;
-            provider.models()?;
+            OpenAiProvider::new(key.clone(), "connection-validation".into())?.models()?;
+            let mut store = AccountStore::open()?;
             CredentialStore::save("api-key", &key)?;
-            accounts.api_key_connected = true;
-            accounts.active = None;
-            save(&path, &serde_json::to_string_pretty(&accounts)?)?;
+            store.data.api_key_connected = true;
+            store.data.active = None;
+            store.save()?;
             println!("API key validated and stored in the OS keychain.");
         }
         AuthCli::KeychainCheck => {
@@ -245,44 +177,27 @@ fn auth_command(action: AuthCli) -> Result<()> {
                 json!({"keychain_roundtrip":true,"temporary_credential_deleted":true,"os":std::env::consts::OS}),
             )?;
         }
-        AuthCli::Accounts => {
-            print(&accounts.accounts)?;
-        }
+        AuthCli::Accounts => print(&AccountStore::open()?.data.accounts)?,
         AuthCli::Switch { account } => {
-            let selected = accounts
-                .accounts
-                .iter()
-                .find(|a| a.id == account)
-                .ok_or("unknown account")?;
-            auth::access_token(selected)?;
-            accounts.active = Some(account);
-            save(&path, &serde_json::to_string_pretty(&accounts)?)?;
+            if !AccountStore::open()?.switch(&account)? {
+                let (attempt, subject) =
+                    AccountStore::open()?.prepare_login(false, Some(&account))?;
+                attempt.open_browser()?;
+                let account = attempt.finish(subject.as_deref(), Duration::from_secs(300))?;
+                AccountStore::open()?.activate(account)?;
+            }
             println!("Active OpenAI account changed.");
         }
-        AuthCli::Models => {
-            drop(_lock);
-            print(provider("model-catalog".into())?.models()?)?;
-        }
+        AuthCli::Models => print(provider("model-catalog".into())?.models()?)?,
         AuthCli::Status => {
+            let store = AccountStore::open()?;
             print(
-                json!({"oauth_accounts":accounts.accounts.len(),"active_oauth":accounts.active.is_some(),"api_key_connected":accounts.api_key_connected}),
+                json!({"oauth_accounts":store.data.accounts.len(),"active_oauth":store.data.active.is_some(),"api_key_connected":store.data.api_key_connected}),
             )?;
         }
         AuthCli::Disconnect => {
-            if let Some(active) = accounts.active.take() {
-                let account = accounts
-                    .accounts
-                    .iter()
-                    .find(|a| a.id == active)
-                    .ok_or("account metadata missing")?;
-                let revoked = auth::disconnect(account)?;
-                println!("Local credentials removed. Remote revocation confirmed: {revoked}");
-            } else if accounts.api_key_connected {
-                CredentialStore::delete("api-key")?;
-                accounts.api_key_connected = false;
-                println!("Local API key removed.");
-            }
-            save(&path, &serde_json::to_string_pretty(&accounts)?)?;
+            let revoked = AccountStore::open()?.disconnect()?;
+            println!("Local credentials removed. Remote revocation confirmed: {revoked}");
         }
     }
     Ok(())

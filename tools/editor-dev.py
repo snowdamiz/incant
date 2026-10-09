@@ -39,9 +39,12 @@ def main():
     temporary = bundle / 'MacOS/incant_editor.next'
     shutil.copy2(executable, temporary)
     temporary.replace(bundle / 'MacOS/incant_editor')
+    (bundle / 'Resources').mkdir(exist_ok=True)
+    shutil.copy2(ROOT / 'editor/ui/brand/Incant.icns', bundle / 'Resources/Incant.icns')
     with (bundle / 'Info.plist').open('wb') as stream:
         plistlib.dump({
             'CFBundleExecutable': 'incant_editor',
+            'CFBundleIconFile': 'Incant.icns',
             'CFBundleIdentifier': config['identifier'],
             'CFBundleName': config['productName'],
             'CFBundleDisplayName': config['productName'],
