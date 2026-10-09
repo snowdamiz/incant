@@ -136,7 +136,9 @@ are bundled locally, so nothing is fetched from a network.
   send. No transcript is ever invented.
 - **ChatGPT account (handoff 0003):** unchanged in behaviour. A 460 px modal has one status
   row, host errors verbatim with their code, saved accounts with "In use" only for the signed-in
-  one, actions, and three facts. No field ever accepts a token, code or key.
+  one, actions, and three facts. No field ever accepts a token, code or key. Initial focus is
+  never destructive: when signed in, the dialog opens on Close, and the inline sign-out question
+  opens on "Keep signed in".
 - **Notices:** absent, connecting and lost engine states show as one full-width strip under the
   titlebar. Lost connection uses an alert role.
 

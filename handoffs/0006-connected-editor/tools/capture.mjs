@@ -168,7 +168,18 @@ try {
     if (provider === 'signed-out') await shot(p, `10-agent-signed-out-1440x900`);
     await p.locator('.provider-chip').click();
     await shot(p, `11-account-${provider}-1440x900`);
-    if (provider === 'signed-in-multi') await axe(p, 'account dialog signed-in-multi');
+    if (provider === 'signed-in-multi') {
+      await axe(p, 'account dialog signed-in-multi');
+      // Keyboard path: reopen from the chip with Enter and record where focus lands.
+      await p.keyboard.press('Escape');
+      await p.locator('.provider-chip').focus();
+      await p.keyboard.press('Enter');
+      report.focus = { onOpen: await p.evaluate(() => document.activeElement?.getAttribute('aria-label') ?? document.activeElement?.textContent) };
+      await shot(p, '12-account-keyboard-open-focus-1440x900');
+      await p.getByRole('button', { name: 'Sign out' }).click();
+      report.focus.onSignOutQuestion = await p.evaluate(() => document.activeElement?.textContent?.trim());
+      await shot(p, '13-account-signout-question-focus-1440x900');
+    }
     await context.close();
   }
   for (const variant of ['large', 'empty', 'loading', 'hierarchy-error', 'connection-error']) {

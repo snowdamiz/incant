@@ -2,14 +2,16 @@
 
 ## Status
 
-Ready for director review. Native confirmation of the latest correction is pending.
+Ready for director review.
 
 - The connected-panel redesign and the director's palette and logo correction are done in
-  `editor/ui`. They are verified by build, typecheck, 225 unit tests, axe and Chrome renders
-  of the sample fixture.
-- The rebuilt worktree app (`artifacts/Incant.app`) embeds this UI. Native capture of the
-  corrected build is requested from Astra as C2 in `native-requests.md`. I have not observed
-  native evidence of the corrected palette or logo, and I do not claim it.
+  `editor/ui`. Astra's native captures of the corrected build now confirm the neutral palette,
+  the dark viewport backdrop and the logo position. One gap remains: every native capture so
+  far has a capture-tool indicator over the traffic lights. So the logo-to-light alignment is
+  confirmed natively only by matching the browser measurement, not by seeing both in one image.
+  Follow-up C3 asks for that image.
+- Follow-up from Astra's review: the connected-account dialog no longer opens with focus on
+  Sign out. It opens on Close, and the sign-out question opens on "Keep signed in".
 - The phase gate is not approved, and this result does not approve it.
 
 ## Model
@@ -43,7 +45,8 @@ model did the visual work.
    - **Alignment:** the logo is now 16 px. The titlebar hairline is now an inset shadow, so
      content centres on the full 40 pt bar instead of 39 pt.
    - **Evidence:** "Before" comes from my native capture of the violet build. "After" comes
-     from a Chrome capture with the macOS inset double. The native check is C2.
+     from a Chrome capture with the macOS inset double, and from Astra's native capture of the
+     corrected build (see the native review below).
 
 ## What changed
 
@@ -79,9 +82,17 @@ model did the visual work.
   reference's proportions. Chrome height constants match the new 28 px status line.
 - **Fixture copy:** the sample fixture's viewport reason no longer says "pending Phase 0 Spike 1",
   since the native surface exists. It now says sample data has no native surface.
+- **Account dialog focus (follow-up):**
+  - When signed in, the dialog opens with focus on Close instead of Sign out, so Enter right
+    after opening account settings closes the dialog.
+  - The sign-out question now takes focus when it opens and lands on "Keep signed in", not the
+    destructive Sign out. Before, a mouse click on Sign out left focus where it was, because
+    WebKit does not focus clicked buttons. Two Enter presses could sign the user out.
+  - Explicit sign-out is unchanged. Choosing Sign out and then the red Sign out still sends
+    `provider.disconnect`. Escape, focus trapping and account switching are unchanged.
 - **Unchanged behaviour:**
   - Hierarchy behaviour, selection, rename, delete, undo and redo through the command bus.
-  - F6 regions, shortcuts and the account dialog's state, focus and switching logic.
+  - F6 regions, shortcuts, and the account dialog's state and switching logic.
   - Offline use, the fixture labels and capability checks.
 
 ## Commands and results
@@ -91,10 +102,11 @@ model did the visual work.
 | `npm ci` | passed, 0 vulnerabilities |
 | `npm run typecheck --workspace editor/ui` | passed |
 | `npm run build --workspace editor/ui` | passed: CSS 43.7 kB (8.3 kB gzip), JS 299.2 kB (92.5 kB gzip) |
-| `npm test --workspace editor/ui` | 225 of 225 passed in 8 files (180 before this handoff) |
-| `node handoffs/0006-connected-editor/tools/capture.mjs before\|after` | 35 browser fixture captures per set, 0 page errors |
+| `npm test --workspace editor/ui` | 226 of 226 passed in 8 files (180 before this handoff) |
+| `node handoffs/0006-connected-editor/tools/capture.mjs before\|after` | 35 "before" and 37 "after" browser fixture captures, 0 page errors |
+| Chrome keyboard check of the account dialog (`report.json` → `focus`) | opened with Enter on the chip: focus on Close; after choosing Sign out: focus on "Keep signed in" |
 | axe-core in Chrome (entity selected, History tab, account dialog) | 0 violations |
-| `python3 tools/editor-dev.py` | built `artifacts/Incant.app`; the binary embeds `assets/index-B_EYLgev.css` and `assets/index-GtptYiPo.js` from this build |
+| `python3 tools/editor-dev.py` | built `artifacts/Incant.app`; the binary embeds `assets/index-B_EYLgev.css` and `assets/index-BZTZGI4B.js` (with the dialog focus fix) from this build |
 | `tools/cargo run -p incant_headless -- init artifacts/0006/connected.incant.json --name "Connected Editor Review"` | created the disposable project |
 
 New tests:
@@ -107,6 +119,10 @@ New tests:
 - **Token checks:** frame surfaces must stay low-chroma, the canvas must equal the native
   window background, and the side column and wells are in the contrast matrix.
 - **Layout:** the layout tests use the exported chrome constants.
+- **Account dialog keyboard safety:** a regression test opens the signed-in dialog and
+  activates whatever holds focus at each step. That closes the dialog, then answers "Keep
+  signed in", and no host request is ever sent. It also checks that Tab still wraps inside the
+  dialog. An existing test now expects the sign-out question to focus "Keep signed in".
 
 Measured in Chrome over the sample fixture:
 
@@ -130,6 +146,8 @@ fixture or of evidence test doubles, not engine state.
   - `04-history-1440x900.png`, `03-console-1440x900.png` and `07-hierarchy-scrolled-1440x900.png`
   - `09-resized-by-drag-1440x900.png` and `09b-separator-keyboard-focus-1440x900.png`
   - `11-account-*.png`, `06-shortcuts-dialog-1440x900.png` and `20-state-*.png`
+  - `12-account-keyboard-open-focus-1440x900.png` (focus ring on Close) and
+    `13-account-signout-question-focus-1440x900.png` (focus on "Keep signed in")
   - `30-titlebar-mac-double-1440.png` (logo position) and `31-window-windows-double-1440x900.png`
   - `40`–`45` detail crops, plus `report.json` with axe results and layout measurements
 - **Superseded violet pass:** `screenshots/superseded-violet/browser-fixture/` and
@@ -138,9 +156,31 @@ fixture or of evidence test doubles, not engine state.
   - `superseded-violet/native/n01-launch-1440x874.png` is a real native window capture of the
     violet build. It shows the attached wgpu cube in the square viewport and the logo-gap problem.
     How it was taken is covered in the next section.
-  - Astra's `screenshots/after/native-cua/01-overview.png` was reviewed. Findings are in
-    `native-requests.md`. It shows the real account label, so I did not commit it, and I omit the
-    label here.
+  - Astra's CUA captures in `screenshots/after/native-cua/` are `01` (violet build) and `02`, `04`,
+    `05`, `06` and `08` (corrected build). I reviewed them, and the findings are below. They show
+    the real account label, so they stay local and uncommitted, and the label is omitted here.
+
+## Native review of the corrected build (Astra's CUA captures)
+
+Measured from the JPEG captures at device pixel ratio 2. Measurements are image analysis only.
+I sent no native input.
+
+| Check | Result | Capture |
+| --- | --- | --- |
+| Neutral palette | Confirmed: panels, side column, titlebar and status line are neutral graphite. No violet tint remains in the chrome. | 02, 04 |
+| Viewport backdrop | Confirmed: dark neutral `#141519` family (reads `#171a1e` after JPEG and colour management). The white cube stays readable. | 02 |
+| Viewport clipping | Square, flush with the separators and the header line, with no corner artifacts or gaps | 02, 05 |
+| Logo spacing | Glyph starts at device x 176–177, or 88–88.5 pt, identical to the browser double (177) | 04 |
+| Logo vertical position | Glyph centroid at device y 40.5 versus 41.1 in the browser double, a difference of 0.3 pt. Bounding-box centre 19.25 pt. | 04 |
+| Traffic lights | **Not visible.** A capture-tool indicator covers device x 11–143, y 11–51 (5.5–71.5 pt by 5.5–25.5 pt), which hides all three lights. Alignment is not pixel-confirmed natively. | 01–08 |
+| Focus state of "02-overview-focused" | The identity is dimmed to the unfocused 55% state. The window was inactive at capture despite the file name. Capture 04 is focused. | 02 |
+| Entity selection | Selecting Entity 0 populated the real Transform inspector | 04 |
+| Rename | Lantern appears in the hierarchy, inspector, History ("Rename entity to Lantern") and status line | 05 |
+| Undo | History shows "(undone)" and Entity 0 restored. This was the **History Undo button**, not Cmd+Z. | 06 |
+| Account dialog | Opens over the frame. Escape returned focus to the chip (Astra's report). The capture predates the focus fix. | 08 |
+
+Astra also reported that Cmd+Z did not reach the engine because the native menu intercepts it.
+Astra is fixing that in native code. I do not claim keyboard undo works natively.
 
 ## Process disclosure
 
@@ -153,19 +193,21 @@ did not start, were not touched. I never inspected credentials or account state.
 
 ## Limitations
 
-- **Native review of the correction is pending.** The neutral palette and logo position are
-  verified in Chrome only. Native capture C2 is requested.
-- **Native interaction is not observed in this handoff.** I have no native evidence for
-  selection, rename, undo and redo, panel resize, focus or the account dialog. Unit tests
-  cover these behaviours with a recording bridge, and Chrome covers the fixture. Rename and undo
-  in the fixture only show the read-only explanation.
-- **Viewport clear colour.** Astra implemented my request R2 in `005088d`, a neutral
-  `#141519` clear in place of the old grey. It is in the rebuilt bundle but not yet seen in a
-  native capture.
+- **Traffic-light alignment is not seen natively.** The capture indicator hides the lights in
+  every native capture. Light-to-logo alignment rests on the handoff 0002 light measurement
+  (centre 19.75 pt), plus the native logo matching the browser double within 0.3 pt. C3 asks for
+  a capture with visible lights.
+- **Keyboard undo does not work natively yet.** Cmd+Z is intercepted by the native menu, and
+  Astra is fixing it. Button undo works (capture 06).
+- **Dialog focus fix is not yet seen natively.** It is verified in unit tests and in Chrome. The
+  native account dialog capture predates it (C3).
+- **Native evidence still missing:** panel resize by drag, F6 and focus rings, the compact
+  1000×650 window, and fullscreen.
 - **Platforms.** There is no Windows or Linux evidence. The Windows caption buttons were checked
   only with a browser double.
 - **Small text.** Status-line key hints stay at 11 px, the documented minimum.
-- **Packet file.** `brief.md` changes made by others are left uncommitted.
+- **Packet files.** `brief.md` changes and the reference files added by others are left
+  uncommitted. Astra's native captures stay local because they show the account label.
 
 ## Open questions
 

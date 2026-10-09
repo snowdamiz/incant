@@ -64,6 +64,13 @@ export function AccountDialog() {
   useLayoutEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
+    // The sign-out question always takes focus when it opens (a mouse click does not move
+    // focus in WebKit), and it lands on the safe answer.
+    const question = confirmingSignOut ? dialog.querySelector<HTMLElement>('.account__confirm [data-autofocus]') : null;
+    if (question) {
+      question.focus();
+      return;
+    }
     if (dialog.contains(document.activeElement) && document.activeElement !== dialog) return;
     const target = dialog.querySelector<HTMLElement>('[data-autofocus]') ?? dialog.querySelector<HTMLElement>('.icon-button');
     target?.focus();
@@ -255,12 +262,13 @@ function AccountBody({
               Add another account
             </ActionButton>
           ) : null}
+          {/* Never the initial focus: opening account settings must not put Enter on a
+              destructive path. With no autofocus target here, focus starts on Close. */}
           <ActionButton
             icon="signOut"
             tone="danger"
             onClick={() => setConfirmingSignOut(true)}
             disabled={busy || !can('provider.disconnect')}
-            autoFocusTarget
           >
             Sign out
           </ActionButton>
@@ -323,10 +331,13 @@ function AccountBody({
             again. Other saved accounts stay listed.
           </p>
           <div className="account__actions">
-            <ActionButton tone="danger-solid" onClick={() => void send({ type: 'provider.disconnect' })} disabled={busy} autoFocusTarget>
+            <ActionButton tone="danger-solid" onClick={() => void send({ type: 'provider.disconnect' })} disabled={busy}>
               Sign out
             </ActionButton>
-            <ActionButton onClick={() => setConfirmingSignOut(false)}>Keep signed in</ActionButton>
+            {/* The safe answer takes focus, so Enter twice cannot sign the user out. */}
+            <ActionButton onClick={() => setConfirmingSignOut(false)} autoFocusTarget>
+              Keep signed in
+            </ActionButton>
           </div>
         </div>
       ) : null}
