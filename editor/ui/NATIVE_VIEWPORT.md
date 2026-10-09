@@ -1,0 +1,73 @@
+# Native viewport integration: constraints and open questions
+
+Scope: how the web shell (`editor/ui`) cooperates with the native wgpu surface
+(Phase 0 Spike 1). Written by handoff 0001 for Astra. **No native window was run for
+this handoff; nothing here is a claim that native compositing works.**
+
+## What the UI does today
+
+1. **Reserves a hole.** `[data-viewport-host]` in `ViewportPanel` is the only area the
+   native surface should occupy. The UI never draws engine pixels there.
+2. **Goes transparent when attached.** When `snapshot.viewport.status === 'attached'`,
+   the shell adds `html.native-viewport`, which makes `html`, `body`, the app frame, the
+   workspace canvas, the viewport island and the viewport host transparent. All other
+   chrome (other islands, the viewport island's header and border, titlebar, status
+   line) stays opaque. Because the canvas and the 6 px gutters are then transparent,
+   **the host window background must be the canvas color `#0b0c0f`** (see TITLEBAR.md).
+   Measured in Chrome with an evidence test double (`evidence.json → transparency`):
+   PNG alpha is 0 at the viewport center and 255 on the hierarchy, top bar and status bar.
+3. **Reports placement.** If the bridge advertises `viewport.bounds`, the UI sends
+   `{ type: 'viewport.bounds', rect, devicePixelRatio, cornerRadii }` on mount, on element resize
+   (`ResizeObserver`) and on window resize, coalesced to one per animation frame.
+   `rect` is in CSS pixels relative to the webview's top-left. `cornerRadii` is
+   `[topLeft, topRight, bottomRight, bottomLeft]` in CSS px, read from the host
+   element (currently `[0, 0, 9, 9]`: the island header covers the top corners). The
+   host should clip the surface to these radii (CALayer `cornerRadius` + `maskedCorners`
+   on macOS; a rounded DirectComposition clip on Windows) so the surface matches the
+   island; without clipping, the bottom corners show square native pixels.
+4. **CSP allows the IPC scheme.** `connect-src 'self' ipc: http://ipc.localhost`.
+
+## Constraints the host must satisfy
+
+- **Window transparency.** The Tauri window and its webview must be created
+  transparent (`transparent: true`, plus macOS private API where required), or the
+  native surface must be layered *above* the webview and clipped to the reported rect.
+  Which of the two is used is Spike 1's decision; the UI supports both.
+- **Coordinate conversion.** Physical pixels = `rect × devicePixelRatio`. The host must
+  re-place the surface when the window moves between displays with different scale
+  factors (the UI re-sends bounds on `resize`, but a DPR-only change may not fire one;
+  see open question 3).
+- **Overlap.** Nothing in the web UI overlaps the viewport except the modal shortcuts
+  dialog and its scrim. If the native surface is layered *above* the webview, the
+  dialog will be hidden behind it. Options: hide the native surface while
+  `[role=dialog]` is open (the UI can report this), or keep native below the webview.
+- **Input.** With the surface below a transparent webview, pointer events over the
+  hole reach the webview first. The host must forward them or the UI must mark the hole
+  `pointer-events: none` (not done yet; needs a decision with gizmo work).
+- **Focus.** The viewport region is an F6 stop. Keyboard input while it is focused
+  should go to the engine; this needs a `viewport.focus` request or an equivalent.
+
+## Open questions for Astra
+
+1. Is the native surface a child window *below* the webview (transparent webview) or
+   *above* it (clipped)? This decides dialog overlap and input routing.
+2. Should `viewport.bounds` also carry a visibility flag (hidden when a modal is open,
+   when the window is minimized, or when the panel is collapsed)?
+3. Will the host listen for DPR changes itself, or should the UI add a
+   `matchMedia('(resolution: …)')` listener and re-send?
+4. Inspector data is in the snapshot for every entity (spike-sized). For large scenes
+   the bridge should page `EntityDetail` by selection; the contract can grow a
+   `entity.detail` request.
+5. Field editing needs a component command on `incant_cmd` (e.g.
+   `component.set { entity, component, path, value }`). The inspector is read-only until
+   that exists. `editor/ui/src/bridge/contract.ts` is a proposal to be replaced by the
+   real `editor/bridge` types.
+6. Conversation events for the agent transcript are not in the contract yet; the agent
+   panel shows only availability state and never a fabricated transcript.
+
+## Evidence still pending
+
+- Native screenshot via `tools/cargo run -p incant_headless -- screenshot ...` (command
+  not available in this worktree).
+- macOS and Windows runs of the Tauri window with the surface attached.
+- Resize and DPR-change behavior with a real surface.
