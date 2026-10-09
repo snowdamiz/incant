@@ -29,10 +29,12 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - run: cargo test --workspace --release --locked
+      # Each GPU test owns a native device; serialize device lifetimes to avoid
+      # hosted driver crashes when many renderer contexts initialize together.
       - name: Verify geometry, editor recovery and simulated frame capture
         run: |
-          cargo test -p incant_render --release --locked --lib -- --ignored
-          cargo test -p incant_render -p incant_editor -p incant_headless --release --locked --test model_gpu -- --ignored
+          cargo test -p incant_render --release --locked --lib -- --ignored --test-threads=1 --nocapture
+          cargo test -p incant_render -p incant_editor -p incant_headless --release --locked --test model_gpu -- --ignored --test-threads=1 --nocapture
       - name: Validate cooked KTX2 with the Khronos reference tool
         run: python3 tools/validate_ktx.py
       - run: cargo build -p incant_editor --release --features custom-protocol --locked
