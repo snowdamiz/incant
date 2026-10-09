@@ -303,6 +303,15 @@ Exit gate:
 - Spike 4 succeeds on at least 14 of 20 tasks without human help.
 - CI produces a runnable artifact for every target nightly.
 
+Director decision, 2026-10-08: manual Windows/Linux sign-in checks and the manual
+Windows native viewport review are replaced by CI builds and automated tests.
+Use native editor/engine builds, shared UI/bridge tests, GPU readback probes and
+synthetic credential persistence across changed executables on those CI hosts.
+Do not require the director to provide Windows/Linux desktop machines or perform
+interactive logins there. Retain the macOS live-account and native-review evidence;
+CI results must state which behavior was exercised, without claiming manual or
+live-account validation. This change does not waive other phase gates.
+
 ### Phase 1: Core engine (Feb 2027 to Sep 2027, 8 months)
 
 Goals: a runtime that can run a real 3D game without an editor.

@@ -5,9 +5,10 @@
     "native_viewport": {
       "passed": false,
       "remaining": [
-        "Windows native execution"
+        "Windows/Linux editor builds, shared UI/bridge tests and native GPU readback in CI"
       ],
-      "macos_evidence": "handoffs/0002-native-viewport/result.md"
+      "macos_evidence": "handoffs/0002-native-viewport/result.md",
+      "acceptance_override": "2026-10-08 director replaced manual Windows native review with CI builds and automated tests"
     },
     "document_crdt": {
       "passed": true,
@@ -31,12 +32,12 @@
     "authentication": {
       "passed": false,
       "remaining": [
-        "live API-key inference",
-        "Windows/Linux OAuth, refresh and credential-store checks",
-        "live revocation"
+        "Windows/Linux automated credential persistence and auth regression tests",
+        "API-key inference and live revocation evidence"
       ],
       "macos_evidence": "docs/spikes/auth-login-repair.md",
-      "macos_storage_exception": "director requested private credential files to eliminate repeated Keychain prompts"
+      "macos_storage_exception": "director requested private credential files to eliminate repeated Keychain prompts",
+      "desktop_acceptance_override": "2026-10-08 director waived manual Windows/Linux login checks in favor of CI builds and automated tests"
     },
     "claude_acp": {
       "passed": true,
@@ -53,5 +54,6 @@
     "web": false
   },
   "signing_certificates_obtained": false,
-  "year_one_staffing_confirmed": false
+  "year_one_staffing_confirmed": false,
+  "platform_build_evidence": "docs/spikes/evidence/six-platform-2026-10-08.json"
 }

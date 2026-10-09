@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-08",
+  "scope": "Hosted PR builds and desktop/browser/iOS simulator probes; not nightly history, Android device execution or signed distribution",
+  "headSha": "640fbddf4e3cfe1956c96b31c3d20afb771fd529",
+  "url": "https://github.com/snowdamiz/incant/actions/runs/37871381794",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "web",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37871381794/job/113630268578"
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37871381794/job/113630268725"
+    },
+    {
+      "name": "ios",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37871381794/job/113630268835"
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37871381794/job/113630268839"
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37871381794/job/113630268841"
+    },
+    {
+      "name": "android",
+      "conclusion": "success",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37871381794/job/113630268872"
+    }
+  ],
+  "android_apk": {
+    "sha256": "dfd4124891cec05da0bdaa855597257e20072d9d7b2f2422bb52538e61567f59",
+    "size_bytes": 13340092,
+    "required_entries_verified": [
+      "lib/arm64-v8a/libincant_platform_smoke.so",
+      "lib/x86_64/libincant_platform_smoke.so",
+      "AndroidManifest.xml",
+      "classes.dex"
+    ],
+    "device_execution": false
+  }
+}

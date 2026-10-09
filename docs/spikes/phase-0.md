@@ -13,7 +13,11 @@ render/readback, not webview composition. Native hierarchy selection, rename, un
 and redo passed separately. Claude subsequently completed the actual macOS native
 composition review, including traffic-light alignment, rounded viewport masking,
 resizing and fullscreen transitions; see [handoff 0002](../../handoffs/0002-native-viewport/result.md).
-Windows native editor execution remains pending.
+The director subsequently replaced the manual Windows review and Windows/Linux
+interactive sign-in checks with CI builds and automated tests. The desktop
+workflow builds the real editor/headless engine, runs shared tests, and exercises
+native GPU readback. Its results are pending; it does not claim manual composition
+review. The acceptance change is recorded in PLAN.md.
 
 ## Spike 2: document and CRDT — local evidence passed
 
@@ -146,7 +150,7 @@ account follow-ups. The current UI/bridge suite passes 180 tests.
 | iOS arm64 simulator | Passed locally | Scene lifecycle, C ABI and ECS assertions passed | Ad-hoc simulator .app only |
 | Windows | Hosted CI passed | Document and 120-tick simulation passed | Hosted unsigned executable |
 | Linux | Hosted CI passed | Document and 120-tick simulation passed | Hosted executable |
-| Android | SDK path fixed; activity dependency correction under CI validation | Device execution pending | APK validation pending |
+| Android | Hosted NDK/Gradle build passed | Device execution pending | Debug APK verified to contain both native ABIs, manifest and DEX |
 
 The iOS host was corrected to adopt the scene lifecycle required by the installed
 SDK before recording an execution pass. A compiled but failed launch was not counted.
@@ -154,9 +158,10 @@ The Rust LLVM tools component was required to resolve the local WASM linker's LL
 library. No device signing certificate or platform release has been produced.
 
 GitHub workflows exist and a private remote was created at
-https://github.com/snowdamiz/incant. PR checks and five hosted platform probes
-have passed; [recorded results](evidence/ci-pr-2026-10-08.json) distinguish those
-runs from current reruns. Hosted probes bootstrap validation; the plan's
+https://github.com/snowdamiz/incant. The six-platform workflow passed on 640fbdd;
+[recorded results](evidence/six-platform-2026-10-08.json) include the downloaded
+Android APK hash and contents check. Prior PR checks passed and current source
+checks are rerunning. Hosted probes bootstrap validation; the plan's
 self-hosted graphics/device runners and nightly artifact
 history are not provisioned. Signing certificates and Year 1 staffing are director
 prerequisites. Phase 0 is not ready for approval.

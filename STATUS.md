@@ -36,7 +36,10 @@ frame budget within its documented workload.
 
 - Claude completed the macOS native-window review, including traffic-light
   alignment, rounded GPU viewport, resizing and screenshots. The connected-account
-  UI is integrated. Windows native viewport evidence is pending.
+  UI is integrated. Per the director's 2026-10-08 decision, Windows/Linux manual
+  login and Windows viewport checks are replaced by CI editor/engine builds,
+  UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are
+  being verified; no additional desktop machines or interactive logins are needed.
 - The real twenty-task evaluation completed with the director's saved session:
   **19/20 passed**, exceeding the 14/20 score threshold. The ten-step case reached
   the expected state but returned an incomplete provider response and is counted
@@ -47,18 +50,18 @@ frame budget within its documented workload.
 - Cross-build synthetic credential checks now run on all three desktop CI hosts;
   they verify the real storage backends without using provider accounts. Local
   macOS execution passed; Windows/Linux hosted results are pending.
-- Draft PR: https://github.com/snowdamiz/incant/pull/1. macOS checks and the
-  six-platform workflow ran: full checks and five platforms passed. Android
-  reached compilation but pulled in an unconfigured Android activity implementation.
-  Core now depends directly on Bevy app/ECS, removing that unused dependency;
-  local tests pass and remote validation is pending.
+- Draft PR: https://github.com/snowdamiz/incant/pull/1. All six platform jobs
+  [passed on 640fbdd](docs/spikes/evidence/six-platform-2026-10-08.json), including
+  Android APK packaging. Both arm64/x86_64 native libraries, manifest and DEX are
+  present in the downloaded APK. Android execution and nightly history remain
+  distinct requirements. Current source checks are running again.
 
 ## External prerequisites still required
 
 - Private repository created at https://github.com/snowdamiz/incant. The bootstrap
   is on main; implementation is in draft PR #1 on impl/phase0-foundation.
   The director remains responsible for merging.
-- Android execution and desktop authentication checks, physical-device
+- Android execution and remaining automated desktop checks, physical-device
   coverage, self-hosted graphics/device runners, and nightly artifact history.
 - Apple/Windows distribution signing, store/developer accounts, staffing and the
   director's phase gate approvals. These are human-only under PLAN.md.
