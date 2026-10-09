@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Runtime scene projection now composes parent transforms, preserves mesh bindings,
+  and atomically synchronizes topology while reusing the ECS world. Five new core
+  behavior tests and asset-kind validation pass. The real GPU probe matches a
+  parented scene to equivalent flattened geometry. Imported GPU geometry/materials
+  are still open; the viewport remains diagnostic cubes. Script benchmark results
+  and their host-load variability are recorded in
+  [runtime scene evidence](docs/spikes/runtime-scene-projection.md).
+
+
 - `incant_import` now prepares glTF/image import batches on an owned document
   snapshot and commits all changed assets in one command-bus transaction. The CLI
   uses this shared service. Five service behavior tests, the existing CLI tests, full workspace release

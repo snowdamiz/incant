@@ -17,6 +17,7 @@
       "type": "array"
     },
     "mesh": {
+      "description": "Stable ID of a cooked model asset. Its selected glTF scene supplies the\nmodel's primitives and local node transforms.",
       "type": "string"
     }
   },
