@@ -1,8 +1,9 @@
 use super::materials::{Fixture, center, near};
 use incant_doc::{Entity, TextureUsage, Transform};
-use incant_render::Renderer;
+use incant_render::{LocalLightSelection, Renderer};
 use serde_json::{Value, json};
 mod coverage;
+mod masks;
 
 fn fixture() -> Fixture {
     let mut f =
@@ -235,7 +236,7 @@ fn directional_point_and_spot_lights_obey_authored_physical_parameters() {
 }
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
-fn clustered_lists_and_overflow_match_total_light_energy_and_retain_old_scenes() {
+fn clustered_masks_match_total_light_energy_and_retain_old_scenes() {
     let r = Renderer::headless().unwrap();
     let mut f = fixture();
     let id = light(
@@ -253,7 +254,7 @@ fn clustered_lists_and_overflow_match_total_light_energy_and_retain_old_scenes()
         .unwrap()
         .entities
         .remove(&id);
-    for count in [64, 65, 128] {
+    for count in [31, 32, 33, 63, 64, 65, 127, 128, 129] {
         let mut candidate = f.project.clone();
         for _ in 0..count {
             light(
@@ -285,8 +286,8 @@ fn spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize() {
     let r = Renderer::headless().unwrap();
     let mut f = fixture();
     // Localized colored lights straddle screen tile edges and depth slices.
-    // The all-light oracle below uses the exact same BRDF but bypasses spatial
-    // selection by forcing list overflow with zero-energy, global-range lights.
+    // The all-light oracle below uses the exact same BRDF but explicitly
+    // bypasses both cluster construction and mask selection.
     for z in [0.4, 1.2, 2.8] {
         for y in [-2.5, -0.4, 1.5] {
             for x in [-2.5, -1., 0.5, 2.] {
@@ -300,15 +301,9 @@ fn spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize() {
         }
     }
     let clustered = f.scene(&r);
-    for _ in 0..65 {
-        light(
-            &mut f,
-            "PointLight",
-            json!({"color":[0,0,0],"intensity":0,"range":10000}),
-            [0., 0., 0.],
-        );
-    }
-    let brute_force = f.scene(&r);
+    let brute_force = f
+        .scene(&r)
+        .with_local_light_selection(LocalLightSelection::All);
     for (w, h) in [(320, 180), (257, 191), (640, 360), (320, 180)] {
         let a = r.screenshot_scene_png(&clustered, w, h).unwrap();
         let b = r.screenshot_scene_png(&brute_force, w, h).unwrap();

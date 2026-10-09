@@ -43,8 +43,15 @@ pub struct RenderScene {
     stats: SceneStats,
     environment: Option<crate::environment::Binding>,
     lights: crate::lighting::GpuLights,
+    light_selection: crate::LocalLightSelection,
 }
 impl RenderScene {
+    /// Select an unculled diagnostic or normal clustered light path for this
+    /// prepared scene. Authored documents and GPU light data remain unchanged.
+    pub fn with_local_light_selection(mut self, selection: crate::LocalLightSelection) -> Self {
+        self.light_selection = selection;
+        self
+    }
     /// Identifies the available appearance without claiming production lighting.
     pub fn shading(&self) -> &'static str {
         if self.batches.is_empty() {
@@ -201,6 +208,7 @@ impl Renderer {
             .sum();
         Ok(RenderScene {
             lights: crate::lighting::GpuLights::upload(&self.device, resolved.lights),
+            light_selection: crate::LocalLightSelection::Clustered,
             diagnostics: resolved.diagnostics,
             batches,
             stats: resolved.stats,
@@ -262,9 +270,13 @@ impl Renderer {
             depth: f64,
         }
         let mut opaque = Vec::new();
-        let light_group =
-            self.lighting
-                .prepare(&self.device, encoder, &scene.lights, target.rect)?;
+        let light_group = self.lighting.prepare(
+            &self.device,
+            encoder,
+            &scene.lights,
+            target.rect,
+            scene.light_selection,
+        )?;
         let mut transparent = Vec::new();
         let eye = glam::Vec3::from_array(crate::studio::EYE).as_dvec3();
         let forward = (-eye).normalize();

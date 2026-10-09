@@ -53,6 +53,12 @@ within its documented workload.
 
 ## Active work
 
+- Cluster membership masks replace overflow fallback in the next lighting
+  increment. Exact GPU readback covers every bit through 4096 lights, word-count
+  changes and stale clearing; full-capacity mixed point/spot output matches an
+  explicit all-light reference byte for byte. Final performance comparison,
+  complete checks and Claude pixel review are in progress.
+
 - Authored directional, point and spot lights use real GPU clustered forward
   shading with bounded lists and an exact overflow fallback. The shared command
   bus, durable history, schemas and read-only Inspector remain the authoring
@@ -72,7 +78,8 @@ within its documented workload.
   Undo/Redo, error retention/recovery and rebuilt account restoration pass.
   Claude approved the headless and native captures and the final Inspector label
   fix at wide/minimum sizes. All twelve hosted checks passed on `42a991d`; the
-  final review/label revision is awaiting its exact-head checks before merge.
+  final revision `1db7c88` also passed all twelve checks. PR #16 merged as
+  `c259b5d` on 2026-10-09.
   See [environment lighting evidence](docs/spikes/environment-lighting.md).
 
 - HDR geometry now renders to retained RGBA16Float attachments before the display

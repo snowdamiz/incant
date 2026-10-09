@@ -1,6 +1,6 @@
-//! Conservative clustered forward lighting; overflow falls back to all local
-//! lights rather than silently discarding illumination. Buffers are retained
-//! at one grid size; commands preserve replaced buffers across resize.
+//! Conservative clustered forward lighting with exact, bounded membership masks.
+//! Buffers are retained at one grid size/light count; encoded commands preserve
+//! replaced buffers across resize. No cluster truncates lights or falls back.
 #[cfg(test)]
 #[path = "../../tests/lighting_gpu/mod.rs"]
 mod gpu_tests;
@@ -9,7 +9,18 @@ use crate::{ResourceError, Result};
 use std::sync::{Arc, Mutex};
 use wgpu::util::DeviceExt;
 pub(crate) const DEPTH_SLICES: u32 = 24;
-pub(crate) const CLUSTER_CAPACITY: u32 = 64;
+const MAX_MASK_WORDS: u32 = (scene::MAX_LOCAL as u32).div_ceil(32);
+
+/// Read-only light selection for a prepared scene. This does not edit the project.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum LocalLightSelection {
+    /// Select conservative view clusters; the normal rendering path.
+    #[default]
+    Clustered,
+    /// Evaluate every local light, bypassing spatial selection for diagnostics.
+    /// This deliberately expensive reference path shares only the shading math.
+    All,
+}
 const MAX_CLUSTERS: u32 = 131072;
 #[repr(C)]
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
@@ -42,7 +53,8 @@ impl GpuLights {
 pub(crate) struct GridBuffers {
     dimensions: [u32; 2],
     pub counts: wgpu::Buffer,
-    pub indices: wgpu::Buffer,
+    words: u32,
+    pub masks: wgpu::Buffer,
 }
 pub(crate) struct LightingSystem {
     pub layout: wgpu::BindGroupLayout,
@@ -106,13 +118,21 @@ impl LightingSystem {
             cache: Mutex::new(None),
         }
     }
-    fn buffers(&self, device: &wgpu::Device, dimensions: [u32; 2]) -> Result<Arc<GridBuffers>> {
+    fn buffers(
+        &self,
+        device: &wgpu::Device,
+        dimensions: [u32; 2],
+        words: u32,
+    ) -> Result<Arc<GridBuffers>> {
+        if !(1..=MAX_MASK_WORDS).contains(&words) {
+            return Err(ResourceError::LightGridSize.into());
+        }
         let count = dimensions[0]
             .checked_mul(dimensions[1])
             .and_then(|n| n.checked_mul(DEPTH_SLICES))
             .filter(|n| *n > 0 && *n <= MAX_CLUSTERS)
             .ok_or(ResourceError::LightGridSize)?;
-        let bytes = u64::from(count) * u64::from(CLUSTER_CAPACITY) * 4;
+        let bytes = u64::from(count) * u64::from(words) * 4;
         if bytes > device.limits().max_storage_buffer_binding_size
             || bytes > device.limits().max_buffer_size
         {
@@ -122,7 +142,10 @@ impl LightingSystem {
             .cache
             .lock()
             .map_err(|_| ResourceError::CacheLock("light grid"))?;
-        if let Some(buffers) = cached.as_ref().filter(|b| b.dimensions == dimensions) {
+        if let Some(buffers) = cached
+            .as_ref()
+            .filter(|b| b.dimensions == dimensions && b.words == words)
+        {
             return Ok(Arc::clone(buffers));
         }
         let make = |label, size| {
@@ -135,8 +158,9 @@ impl LightingSystem {
         };
         let buffers = Arc::new(GridBuffers {
             dimensions,
+            words,
             counts: make("Cluster light counts", u64::from(count) * 4),
-            indices: make("Cluster light indices", bytes),
+            masks: make("Cluster light membership masks", bytes),
         });
         *cached = Some(Arc::clone(&buffers));
         Ok(buffers)
@@ -147,37 +171,38 @@ impl LightingSystem {
         encoder: &mut wgpu::CommandEncoder,
         lights: &GpuLights,
         viewport: [f32; 4],
+        selection: LocalLightSelection,
     ) -> Result<wgpu::BindGroup> {
         let dimensions = [
             (viewport[2] / 64.).ceil() as u32,
             (viewport[3] / 64.).ceil() as u32,
         ];
+        let clustered = lights.local > 0 && selection == LocalLightSelection::Clustered;
+        let words = lights.local.div_ceil(32).max(1);
+        // The all-light diagnostic and directional-only paths never access masks.
         let buffers = self.buffers(
             device,
-            if lights.local == 0 {
-                [1, 1]
-            } else {
-                dimensions
-            },
+            if clustered { dimensions } else { [1, 1] },
+            if clustered { words } else { 1 },
         )?;
         let grid = GridUniform {
             view: crate::camera_view().to_cols_array_2d(),
             viewport,
-            dimensions: [dimensions[0], dimensions[1], DEPTH_SLICES, CLUSTER_CAPACITY],
+            dimensions: [dimensions[0], dimensions[1], DEPTH_SLICES, words],
             depth: [
                 crate::CAMERA_NEAR,
                 crate::CAMERA_FAR,
                 DEPTH_SLICES as f32 / (crate::CAMERA_FAR / crate::CAMERA_NEAR).ln(),
                 (crate::CAMERA_FOV * 0.5).tan(),
             ],
-            lights: [lights.directional, lights.local, 0, 0],
+            lights: [lights.directional, lights.local, u32::from(!clustered), 0],
         };
         let uniform = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("Immutable light grid frame"),
             contents: bytemuck::bytes_of(&grid),
             usage: wgpu::BufferUsages::UNIFORM,
         });
-        let entries = [&uniform, &lights.buffer, &buffers.counts, &buffers.indices]
+        let entries = [&uniform, &lights.buffer, &buffers.counts, &buffers.masks]
             .iter()
             .enumerate()
             .map(|(binding, buffer)| wgpu::BindGroupEntry {
@@ -190,9 +215,8 @@ impl LightingSystem {
             layout: &self.compute_layout,
             entries: &entries,
         });
-        // With no local lights the fragment shader returns before accessing the
-        // lists. Otherwise every cluster is overwritten, including empty ones.
-        if lights.local > 0 {
+        // Every used cluster word is overwritten, including empty clusters.
+        if clustered {
             let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
                 label: Some("Assign local lights to view clusters"),
                 timestamp_writes: None,

@@ -1,6 +1,6 @@
 //! Native rendering and GPU readback with retained imported material previews.
 //! Ordered HDR geometry, display transform and native composition passes.
-//! Clustered lighting and the full production render graph remain open.
+//! Authored clustered lights; the full production render graph remains open.
 mod environment;
 mod frame;
 #[cfg(test)]
@@ -21,6 +21,7 @@ mod test_support;
 use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Vec3};
 use incant_doc::Project;
+pub use lighting::LocalLightSelection;
 pub use models::RenderScene;
 pub use resource_error::ResourceError;
 pub use scene::{SceneError, SceneStats};

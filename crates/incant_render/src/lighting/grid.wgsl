@@ -5,9 +5,10 @@ struct Grid { view:mat4x4f, viewport:vec4f, dimensions:vec4u, depth:vec4f, light
 @group(0) @binding(0) var<uniform> grid:Grid;
 @group(0) @binding(1) var<storage,read> lights:array<Light>;
 @group(0) @binding(2) var<storage,read_write> counts:array<u32>;
-@group(0) @binding(3) var<storage,read_write> indices:array<u32>;
+@group(0) @binding(3) var<storage,read_write> masks:array<u32>;
 var<workgroup> hits:atomic<u32>;
-var<workgroup> sorted_indices:array<u32,64>;
+// 4096 local lights / 32 bits. Each set bit addresses one local light.
+var<workgroup> membership:array<atomic<u32>,128>;
 fn intersects(position:vec3f,radius:f32,id:vec3u)->bool {
     // Conservative tolerance covers view-transform/plane arithmetic at far Z.
     let r=radius+1e-5*max(1.0,max(max(abs(position.x),abs(position.y)),abs(position.z)));
@@ -28,32 +29,20 @@ fn intersects(position:vec3f,radius:f32,id:vec3u)->bool {
 }
 @compute @workgroup_size(64) fn build(@builtin(workgroup_id) id:vec3u,@builtin(local_invocation_index) lane:u32) {
     if lane==0u {atomicStore(&hits,0u);}
-    sorted_indices[lane]=0xffffffffu;
+    for(var word=lane;word<grid.dimensions.w;word+=64u) {atomicStore(&membership[word],0u);}
     workgroupBarrier();
     let cluster=(id.z*grid.dimensions.y+id.y)*grid.dimensions.x+id.x;
     for(var local=lane;local<grid.lights.y;local+=64u) {
-        let index=grid.lights.x+local;let light=lights[index];
+        let light=lights[grid.lights.x+local];
         let p=(grid.view*vec4f(light.position_range.xyz,1.0)).xyz;
         if intersects(p,light.position_range.w,id) {
-            let slot=atomicAdd(&hits,1u);
-            if slot<grid.dimensions.w {sorted_indices[slot]=index;}
+            atomicAdd(&hits,1u);
+            atomicOr(&membership[local/32u],1u<<(local%32u));
         }
     }
     workgroupBarrier();
-    // Atomic insertion order is unspecified. Sorting keeps repeated scene
-    // rendering and Undo reproducible instead of changing floating-point sums.
-    for(var k=2u;k<=64u;k*=2u) {
-        for(var j=k/2u;j>0u;j/=2u) {
-            let own=sorted_indices[lane];let other=sorted_indices[lane^j];
-            let minimum=((lane&j)==0u)==((lane&k)==0u);
-            let chosen=select(max(own,other),min(own,other),minimum);
-            workgroupBarrier();
-            sorted_indices[lane]=chosen;
-            workgroupBarrier();
-        }
+    for(var word=lane;word<grid.dimensions.w;word+=64u) {
+        masks[cluster*grid.dimensions.w+word]=atomicLoad(&membership[word]);
     }
-    if lane<min(atomicLoad(&hits),grid.dimensions.w) {indices[cluster*grid.dimensions.w+lane]=sorted_indices[lane];}
-    // Preserve overflow count: the fragment path falls back to every local light.
-    // It must never drop lights or read indices beyond the bounded list.
     if lane==0u {counts[cluster]=atomicLoad(&hits);}
 }
