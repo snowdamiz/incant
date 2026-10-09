@@ -15,6 +15,19 @@ no native input and takes no native captures. Raw native images stay in the igno
 
 Press no account action. Escape is the only key allowed inside the account dialog.
 
+## Status after the rebuilt follow-up captures (2026-10-09)
+
+| Request | Status |
+| --- | --- |
+| D1 Traffic lights, focused and inactive | **Open.** Not supplied yet. |
+| D2 Settled fullscreen | **Done.** `d03-fullscreen-settled.jpg` is clean. |
+| D3.1 Minimum size 1000×650 | **Open.** Not supplied yet. |
+| D3.2 Account dialog opened by keyboard | **Done.** Focus is on Close, but no ring is drawn natively. See D8. |
+| D4 F2 rename selects the name | **Done.** `d06-rename-selected.jpg`, plus Astra's functional check |
+| R1 Transform field order | **Fix landed, not verified natively.** See D7. |
+| D7 Field order after the bridge fix | **Open.** |
+| D8 Focus ring after the UI fix | **Open.** It waits for Claude's UI fix in a later handoff. |
+
 ## D1. Traffic lights without the capture indicator (highest priority)
 
 The CUA indicator pill covers device x 12 to 143 and y 12 to 50 in every supplied window
@@ -51,14 +64,26 @@ not "Entity 1Lantern". Then press Cmd+Z to restore the disposable name.
 ## R1. Transform field order (data binding; Astra owns this change)
 
 Natively, the inspector lists Transform as Rotation, Scale, Translation. The fixture and
-conventional editors list Translation, Rotation, Scale. The UI already honours an optional
-`order` array on each component schema, as `editor/ui/src/bridge/fixture.ts` does. It sorts
-any fields not in `order` alphabetically. The native snapshot's `schema_registry()` output in
-`editor/app/src/main.rs` sends no `order`.
+conventional editors list Translation, Rotation, Scale. The UI honours an optional `order`
+array on each component schema and sorts any remaining fields alphabetically.
 
-Requested: emit `"order": ["translation", "rotation", "scale"]` for the Transform schema.
-Add an order for any other component whose fields have a natural sequence. No UI change is
-needed.
+Correction: my first guess blamed `schema_registry()`. Astra found that the native bridge
+adapter dropped `schema.order`. `native.ts` now forwards it, and that change passes 223 tests.
+The rebuilt native check was interrupted when the Mac locked.
+
+## D7. Transform order after the bridge fix
+
+`d07-transform-order`: rebuild from the commit with the `native.ts` fix. Select any entity and
+capture the inspector. The expected order is Translation, Rotation, Scale. No input beyond
+selection is needed.
+
+## D8. Focus ring on the keyboard-opened account dialog (after a later UI fix)
+
+In `d05-account-dialog-keyboard.jpg`, Close has focus but no ring. In Chrome, the same keyboard
+path draws a clear ring. WebKit does not apply `:focus-visible` after this programmatic focus.
+Claude will fix this in UI code in a later handoff, using a keyboard-modality marker. This
+follow-up was review-only. After that fix, repeat D3.2 as `d08-account-dialog-ring`: Tab to
+the ChatGPT chip, press Enter, capture, then press Escape. Press nothing else.
 
 ## R2. Startup stall with a project under Documents (Astra's finding, recorded)
 
