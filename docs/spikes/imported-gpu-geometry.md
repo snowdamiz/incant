@@ -43,6 +43,12 @@ scene selection and simulation-driven render snapshots remain open.
 - All 110 Rust behavior tests, two explicitly invoked GPU tests, 276 UI tests,
   workspace Clippy, formatting, generated contracts/SDK checks and the native
   release build pass locally. [Machine-readable evidence](evidence/imported-geometry-2026-10-09.json).
+- A real `gpt-6-astra` turn used the saved OAuth session, queried a disposable
+  project containing bound models and requested one 640×360 screenshot. Both
+  tools succeeded without source files or project edits. Three steps used 4,736
+  input and 68 output tokens. An initial 12,000-token reservation was rejected
+  locally; the ordinary 64,000-token budget completed. This verifies transport,
+  not visual quality. [Live perception evidence](evidence/agent-model-perception-2026-10-09.json).
 
 The last valid GPU scene stays allocated on an asset/render-preparation failure;
 the existing error overlay currently covers it. Retry is once per second or on
