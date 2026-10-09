@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-09",
+  "implementation": "3655c30",
+  "adapter": "Apple M5 Pro",
+  "validation": {
+    "rust_behavior_tests": 138,
+    "explicit_gpu_tests": 31,
+    "ui_bridge_tests": 283,
+    "clippy": "workspace all targets release passed",
+    "generated_checks": "passed",
+    "sdk_typecheck": "passed",
+    "python_tests": 5,
+    "native_custom_protocol_release": "passed"
+  },
+  "public_cli": {
+    "adapter": "Apple M5 Pro",
+    "checks": [
+      {
+        "name": "preview",
+        "sha256": "4ed8e568f99d052c7f1493e19acd3e40e29f32bee46b0f1899cb06e5cd8f7a96",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "camera": null
+      },
+      {
+        "name": "authored",
+        "sha256": "84e2a209a623849d0b95e0a067481f946549365a2d25a1dc603ec8755b99deb4",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "camera": "1KD7CEPSGN9YT9DC47SQEMPP46"
+      },
+      {
+        "name": "moved",
+        "sha256": "94536d884231d8523c80757e2b890b8e80162325d1630bb3e596cb56e0f9ab7a",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "camera": "1KD7CEPSGN9YT9DC47SQEMPP46"
+      },
+      {
+        "name": "undo",
+        "sha256": "84e2a209a623849d0b95e0a067481f946549365a2d25a1dc603ec8755b99deb4",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "camera": "1KD7CEPSGN9YT9DC47SQEMPP46"
+      },
+      {
+        "name": "redo",
+        "sha256": "94536d884231d8523c80757e2b890b8e80162325d1630bb3e596cb56e0f9ab7a",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "camera": "1KD7CEPSGN9YT9DC47SQEMPP46"
+      },
+      {
+        "name": "reopened",
+        "sha256": "94536d884231d8523c80757e2b890b8e80162325d1630bb3e596cb56e0f9ab7a",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "camera": "1KD7CEPSGN9YT9DC47SQEMPP46"
+      },
+      {
+        "name": "source-free",
+        "sha256": "94536d884231d8523c80757e2b890b8e80162325d1630bb3e596cb56e0f9ab7a",
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "camera": "1KD7CEPSGN9YT9DC47SQEMPP46"
+      }
+    ],
+    "atomic_camera_rejection": "passed",
+    "command_bus_undo_redo": "passed",
+    "journal_reopen": "passed",
+    "source_free": "passed"
+  },
+  "verification_logs_sha256": {
+    "camera-workspace.log": "b5a3fc61ee805d59e730525d5195d64bc876d5c729655df64093595371b553e5",
+    "camera-clippy.log": "2b114b3dc485616ec94140bffd517c385e3af843690bd8802520335ae2e0c980",
+    "camera-all-gpu-unit.log": "27c058d8ba16b52e9c4fa8497f3d3b75731c4f61864dedf643f2c7403eee5dc9",
+    "camera-all-gpu-model.log": "27a61f5877307aa595e6581243e156ff5b512ec10cf7e9d4dc751e72d8b4bdaa",
+    "camera-agent-routing.log": "a1775560f439cac80cda837908e2374f6abc15ecfe9e2f58eb6890f5d3bd63b5",
+    "camera-ui.log": "bae7fe86358b7f0a35db901a04ca8d1679daab029364cf6a194889a8d5dbda54",
+    "camera-ui-build.log": "7dd0ef970eb899f3c7bfb71c423d0d6f84cdd54d7bc9fd06761bd27d56442568",
+    "camera-tools.log": "c2cb220da134b4313c9a6243533f1a48d4867b56bbf36ec81be8da8ddf1c7e3d",
+    "camera-native-build.log": "c29f5de63251ec7a952489c4388108f70a9d237122739f3cb474b12aeb2ec48e"
+  },
+  "png_sha256": {
+    "camera-clusters-0-321x241-oracle.png": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099",
+    "camera-clusters-0-321x241.png": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099",
+    "camera-clusters-0-480x270-oracle.png": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31",
+    "camera-clusters-0-480x270.png": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31",
+    "camera-clusters-1-321x241-oracle.png": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e",
+    "camera-clusters-1-321x241.png": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e",
+    "camera-clusters-1-480x270-oracle.png": "4d89c31cce0bb33ad5dbbddc3c249ab7087d8362367fc10937792b4f9bc94f4f",
+    "camera-clusters-1-480x270.png": "4d89c31cce0bb33ad5dbbddc3c249ab7087d8362367fc10937792b4f9bc94f4f",
+    "camera-clusters-2-321x241-oracle.png": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+    "camera-clusters-2-321x241.png": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+    "camera-clusters-2-480x270-oracle.png": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be",
+    "camera-clusters-2-480x270.png": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be",
+    "camera-facing-away.png": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e",
+    "camera-flat-parent-reference.png": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+    "camera-fov-30.png": "3f9c3cc8ddac14df4961fb5037f52314b3c1e1e1616483f1fdab0aabe0ef88cf",
+    "camera-fov-80.png": "ba3bc64e8fddfdcc2e3b5a686403b39cf9ce8d0840ac06e6b6f7b29f6a4e1a4f",
+    "camera-inherited-pose.png": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+    "camera-transparent-back.png": "7bdd9f474dd897aabe2a55d45d37f55450a79850d1b4b462707104fcdce67ca9",
+    "camera-transparent-front.png": "d67b2e5da8ffba4c585b5cd397af77774be34f486137b016cad518fc28321065",
+    "cli-camera-authored.png": "84e2a209a623849d0b95e0a067481f946549365a2d25a1dc603ec8755b99deb4",
+    "cli-camera-moved.png": "94536d884231d8523c80757e2b890b8e80162325d1630bb3e596cb56e0f9ab7a",
+    "cli-camera-preview.png": "4ed8e568f99d052c7f1493e19acd3e40e29f32bee46b0f1899cb06e5cd8f7a96",
+    "cli-camera-redo.png": "94536d884231d8523c80757e2b890b8e80162325d1630bb3e596cb56e0f9ab7a",
+    "cli-camera-reopened.png": "94536d884231d8523c80757e2b890b8e80162325d1630bb3e596cb56e0f9ab7a",
+    "cli-camera-source-free.png": "94536d884231d8523c80757e2b890b8e80162325d1630bb3e596cb56e0f9ab7a",
+    "cli-camera-undo.png": "84e2a209a623849d0b95e0a067481f946549365a2d25a1dc603ec8755b99deb4",
+    "far-clipped.png": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e",
+    "near-clipped.png": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e"
+  },
+  "visual_review": "pending Claude Opus 5.5 ACP handoff 0019",
+  "native_ui_review": "not claimed; UI controls unchanged",
+  "limitations": [
+    "perspective only",
+    "explicit selection per invocation; default remains editor preview",
+    "no active-game-camera setting or editor selector",
+    "no glTF camera import or camera rigs",
+    "no phase gate approved"
+  ]
+}

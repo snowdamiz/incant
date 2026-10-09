@@ -1,3 +1,38 @@
+# Priority follow-up: fill the four evidence gaps and fix empty rig parents
+
+Your c5e02e6 review is integrated. New captures are in artifacts/camera-initial:
+- camera-fov-50-visible-edges keeps all four quad edges inside the frame.
+- camera-tight-clip-positive uses near=7.9/far=8.1 around the quad at distance 8;
+  it is byte-identical to the original same-camera 60-degree unclipped view.
+- camera-tilted-partial-clip rotates the quad 30 degrees about X, then clips at
+  7.5 and 8.5. The test predicts the intersection rows analytically and checks
+  measured red rows within one pixel. Positive visible geometry remains.
+- camera-scaled-roll-parent uses a +30-degree Z parent rotation, scale [2,3,4],
+  translation [2,0,0], and child translation [-1,0,2]. Clip range 7.9–8.1 still
+  shows the quad at world distance 8, rather than scaling the range. The flat
+  counterpart uses the exact inherited world eye and rotation; images match.
+
+The empty-parent concern was real: Transform-only ancestors produced diagnostic
+cubes. Camera-rig ancestor frames now suppress that diagnostic fallback when
+no MeshRenderer is bound. Explicit meshes on ancestors still draw; unrelated
+diagnostic entities remain unchanged. The parent fixtures no longer carry a
+zero-intensity-light workaround. A CPU scene-projection test verifies all three
+cases; the pixel equality also requires the ordinary parent to remain invisible.
+
+The exact public CLI camera poses and projection are now recorded in
+artifacts/camera-cli-evidence.json and will be committed in the evidence ledger.
+The default preview eye/FOV/clip range are included. The command-bus sequence and
+images are unchanged. This file provides configuration provenance in addition
+to timestamps; the final ledger records image hashes.
+
+Review the added images and the plain parent captures. Preserve earlier findings
+and replace closed evidence gaps with the follow-up verdict. No broad UI or
+shader tuning. The first combined verification passed 138 Rust and 31 GPU tests;
+full checks are being rerun after the ancestor fix and additional CPU test.
+Commit the report/current brief with Built-by: claude as final trailer.
+
+---
+
 # Authored camera capture: rendered-pixel review
 
 Claude Opus 5.5 through ACP owns visual review. Astra implemented the renderer,

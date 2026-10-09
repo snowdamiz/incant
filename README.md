@@ -70,7 +70,13 @@ plus an atomic `report.json` containing final runtime/script state and capture t
 Capture is bounded to 128 frames and 256 MiB of raw pixels, with dimensions
 from 16×16 to 1920×1080. A failed run exits
 nonzero and may leave partial PNGs, but never a completed report. Current captures
-use the shared preview renderer and fixed camera, including imported materials and HDR lighting followed by the preview display transform. Asset sources are unnecessary when
+use the shared renderer, including imported materials and HDR lighting followed
+by the preview display transform. `screenshot --camera ENTITY_ID` and
+`play --camera ENTITY_ID --output DIR` select an authored perspective Camera.
+Playback follows that camera through each simulated tick. Omit `--camera` for
+the fixed editor preview. The agent `view_screenshot` tool accepts the same
+optional `camera` ID. Missing/non-camera IDs fail instead of silently falling
+back. Camera edits use the shared command bus and normal Undo/Redo. Asset sources are unnecessary when
 the cooked cache is present; the command reads the saved checkpoint, not unsaved
 editor edits. Game logs and assertion-script support remain open.
 
