@@ -53,5 +53,9 @@ const year = new Date().getFullYear()
         </ul>
       </nav>
     </div>
+    <p class="mx-auto max-w-[82rem] px-5 pb-10 text-[12px] leading-relaxed text-muted sm:px-8 lg:px-12">
+      Platform icons from Font Awesome Free, CC BY 4.0. Workflow icons from Lucide, ISC. The Android robot is reproduced from
+      work created and shared by Google, under CC BY 3.0. Platform names and marks belong to their owners.
+    </p>
   </footer>
 </template>

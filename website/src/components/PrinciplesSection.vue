@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PrincipleDiagram from './PrincipleDiagram.vue'
 import { principles } from '../content'
 </script>
 
@@ -13,9 +14,9 @@ import { principles } from '../content'
       </h2>
 
       <ol class="mt-14 grid gap-x-12 sm:mt-20 md:grid-cols-3">
-        <li v-for="item in principles" :key="item.numeral" class="border-t border-rule pt-6 pb-10 md:pb-0">
-          <p class="font-display-soft text-[15px] text-accent italic">{{ item.numeral }}</p>
-          <h3 class="font-display-soft mt-3 text-[1.75rem] leading-tight font-[450] tracking-[-0.015em]">{{ item.title }}</h3>
+        <li v-for="item in principles" :key="item.numeral" class="border-t border-rule pt-8 pb-12 md:pb-0">
+          <PrincipleDiagram :id="item.id" />
+          <h3 class="font-display-soft mt-8 text-[1.75rem] leading-tight font-[450] tracking-[-0.015em]">{{ item.title }}</h3>
           <p class="text-pretty-safe mt-3 max-w-xs text-[16px] leading-relaxed text-muted">{{ item.body }}</p>
         </li>
       </ol>

@@ -1,5 +1,49 @@
 # Expand and polish the landing page around the full Incant plan
 
+## Latest director instruction — redesign around graphics, not text
+
+The director reviewed the density pass and says: “landing page it still too text
+heavy. Needs more graphical things. As one example the platforms can be
+represented as their actual svg icons instead of text. REdesign again with this
+in mind”. Treat this as a substantial new design pass, not another copy trim.
+
+Make the added sections communicate through graphics. Use authentic, recognizable
+SVG platform marks instead of the current large platform-name word row. Use real
+vector assets from official sources or a reputable icon library, retain any
+required licensing/attribution, and keep accessible platform names. Do not replace
+these with emoji, text glyphs or invented logos. Keep visible labels minimal;
+choose the appropriate recognizable representation for Windows, macOS, Linux,
+iOS, Android and Web while preserving their distinction for assistive technology.
+Network/source downloads via terminal or non-browser fetch are permitted; browser
+and computer-use/capture tools are still prohibited.
+
+The platform row is one example, not the whole request. Rethink the tool overview
+and workflow to rely on graphical composition, meaningful diagrams, mini product
+illustrations or purposeful iconography. The interaction/model should tell the
+story with minimal supporting copy. Reduce the repeated term-and-description
+lists and decorative large words. Use the page's established visual language;
+do not make a generic icon-card grid or add token graphics next to the same wall
+of text. Keep useful product detail available without forcing a visitor to read
+every capability. Preserve the core modeling/game-engine/agent promise and the
+existing working walkthroughs. Give the page room and a clear visual hierarchy.
+
+Preserve the finished-product voice (no future labels), neutral paper/ink and
+charcoal palette, restrained accent, approved wisp and connected product panels.
+No computer use, browser/native automation, Playwright execution or captures on
+this machine. Work through source and nonvisual terminal validation only; hosted
+CI will handle browser tests after integration. Do not claim rendered review.
+
+Continue from 80e3649, integrated on the landing branch as 1acb2d5. Its 23 hosted
+browser tests passed, but that does not establish design acceptance. Preserve
+prior result packets, produce the new design, run strict typechecking and both
+production builds, and commit with Built-by: claude. Include sources/licenses for
+SVG assets, the concrete graphical changes, checks and remaining limitations.
+Scope remains website/ and this handoff. No publishing, pushing or merging.
+
+The director also said: “next time dont ask, just continue if it makes sense to
+do so”. Use judgment for routine authorized design and implementation choices.
+Do not ask repeated permission; preserve the explicit screen-capture restriction.
+
 ## Latest director feedback — the expanded page is too dense
 
 The director has now viewed the new page and says: “some of the new sections are
