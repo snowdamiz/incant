@@ -140,3 +140,10 @@ presentation. The overlap/overflow path needs optimization for dense scenes.
 These small synthetic scenes and this faster Mac do not satisfy PLAN.md's Core
 Sample performance gate on its named devices. Raw sorted samples are retained
 in the evidence ledger. The desktop app was closed during these measurements.
+
+Windows hosted validation on `8b94eff` ended in a native process access violation
+while 18 renderer GPU tests ran concurrently; it did not report an assertion
+failure. Follow-up `788da07` serializes native GPU tests and exposes individual
+case output. All 18 renderer cases pass locally with that command. The exact-head
+Windows rerun remains required before merging PR #17; no driver root cause or
+Windows success is inferred from the local result.

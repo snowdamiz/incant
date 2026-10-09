@@ -107,6 +107,15 @@ fn authored_camera_changes_projection_clips_geometry_and_retains_its_selected_po
         &mut f,
         &id,
         "Camera",
+        json!({"fov_degrees":50,"near":0.1,"far":100}),
+    );
+    let visible_edges = capture(&f, &r, &id, "camera-fov-50-visible-edges");
+    assert!(red_pixels(&visible_edges) < 321 * 241);
+    assert!(red_pixels(&visible_edges) > 190 * 190);
+    edit(
+        &mut f,
+        &id,
+        "Camera",
         json!({"fov_degrees":80,"near":0.1,"far":100}),
     );
     let wide = capture(&f, &r, &id, "camera-fov-80");
@@ -126,6 +135,32 @@ fn authored_camera_changes_projection_clips_geometry_and_retains_its_selected_po
         "Camera",
         json!({"fov_degrees":60,"near":0.1,"far":100}),
     );
+    edit(
+        &mut f,
+        &id,
+        "Camera",
+        json!({"fov_degrees":60,"near":7.9,"far":8.1}),
+    );
+    assert_eq!(capture(&f, &r, &id, "camera-tight-clip-positive"), first);
+    f.edit(|g| {
+        g["nodes"][0]["rotation"] =
+            json!([15f64.to_radians().sin(), 0, 0, 15f64.to_radians().cos()])
+    });
+    edit(
+        &mut f,
+        &id,
+        "Camera",
+        json!({"fov_degrees":60,"near":7.5,"far":8.5}),
+    );
+    let partial = capture(&f, &r, &id, "camera-tilted-partial-clip");
+    let (top, bottom) = red_rows(&partial, 321);
+    let half_height = 241f64 / 2.;
+    let y = 30f64.to_radians().cos();
+    let tangent = 30f64.to_radians().tan();
+    let expected_top = half_height - half_height * y / (7.5 * tangent);
+    let expected_bottom = half_height + half_height * y / (8.5 * tangent);
+    assert!((top as f64 - expected_top).abs() <= 1.);
+    assert!((bottom as f64 - expected_bottom).abs() <= 1.);
     edit(
         &mut f,
         &id,
@@ -226,15 +261,58 @@ fn inherited_cameras_and_custom_light_clusters_match_the_all_light_reference() {
             ..Default::default()
         }),
     );
-    parent.components.insert(
-        "DirectionalLight".into(),
-        json!({"color":[1,1,1],"intensity":0}),
-    );
+
     let child = entities.get_mut(&id).unwrap();
     child.parent = Some(parent.id.clone());
     child.components.get_mut("Transform").unwrap()["translation"][0] = json!(-7.);
     entities.insert(parent.id.clone(), parent);
     assert_eq!(capture(&f, &r, &id, "camera-inherited-pose"), flat);
+    assert_eq!(f.scene(&r).stats().diagnostic_entities, 0);
+    let entities = &mut f.project.scenes.values_mut().next().unwrap().entities;
+    let parent_id = entities[&id].parent.clone().unwrap();
+    let roll = glam::DQuat::from_rotation_z(30f64.to_radians());
+    entities.get_mut(&parent_id).unwrap().components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [2., 0., 0.],
+            rotation: roll.to_array(),
+            scale: [2., 3., 4.]
+        }),
+    );
+    entities.get_mut(&id).unwrap().components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [-1., 0., 2.],
+            ..Default::default()
+        }),
+    );
+    edit(
+        &mut f,
+        &id,
+        "Camera",
+        json!({"fov_degrees":60,"near":7.9,"far":8.1}),
+    );
+    let inherited = capture(&f, &r, &id, "camera-scaled-roll-parent");
+    let world = glam::DMat4::from_scale_rotation_translation(
+        glam::DVec3::new(2., 3., 4.),
+        roll,
+        glam::DVec3::new(2., 0., 0.),
+    );
+    let eye = world.transform_point3(glam::DVec3::new(-1., 0., 2.));
+    let entities = &mut f.project.scenes.values_mut().next().unwrap().entities;
+    entities.get_mut(&id).unwrap().parent = None;
+    entities.remove(&parent_id);
+    edit(
+        &mut f,
+        &id,
+        "Transform",
+        json!(Transform {
+            translation: eye.to_array(),
+            rotation: roll.to_array(),
+            ..Default::default()
+        }),
+    );
+    assert_eq!(capture(&f, &r, &id, "camera-scaled-roll-flat"), inherited);
 }
 
 #[test]
@@ -276,4 +354,21 @@ fn transparency_depth_order_follows_the_selected_camera() {
     let back = super::materials::center(&capture(&f, &r, &id, "camera-transparent-back"));
     assert!(front[0] > front[2] + 30, "{front:?}");
     assert!(back[2] > back[0] + 30, "{back:?}");
+}
+
+fn red_rows(bytes: &[u8], width: usize) -> (usize, usize) {
+    let mut decoder = png::Decoder::new(std::io::Cursor::new(bytes))
+        .read_info()
+        .unwrap();
+    let mut pixels = vec![0; decoder.output_buffer_size().unwrap()];
+    let info = decoder.next_frame(&mut pixels).unwrap();
+    let rows: Vec<_> = pixels[..info.buffer_size()]
+        .as_chunks::<4>()
+        .0
+        .iter()
+        .enumerate()
+        .filter(|(_, p)| p[0] > p[1].saturating_add(50))
+        .map(|(i, _)| i / width)
+        .collect();
+    (*rows.iter().min().unwrap(), *rows.iter().max().unwrap())
 }

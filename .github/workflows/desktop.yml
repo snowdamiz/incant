@@ -34,10 +34,12 @@ jobs:
       - run: npm run build --workspace editor/ui
       - run: npm test --workspace editor/ui
       - run: cargo test --workspace --release --locked
+      # Each GPU test owns a native device; serialize device lifetimes to avoid
+      # hosted driver crashes when many renderer contexts initialize together.
       - name: Verify geometry, editor recovery and simulated frame capture
         run: |
-          cargo test -p incant_render --release --locked --lib -- --ignored
-          cargo test -p incant_render -p incant_editor -p incant_headless --release --locked --test model_gpu -- --ignored
+          cargo test -p incant_render --release --locked --lib -- --ignored --test-threads=1 --nocapture
+          cargo test -p incant_render -p incant_editor -p incant_headless --release --locked --test model_gpu -- --ignored --test-threads=1 --nocapture
       - run: cargo build -p incant_editor -p incant_headless --release --features incant_editor/custom-protocol --locked
       - name: Exercise native GPU rendering without a user account
         run: python tools/platforms/render-check.py
