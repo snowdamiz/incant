@@ -156,3 +156,24 @@ executable, verified the record, deleted it and verified absence. Windows exerci
 Credential Manager, Linux Secret Service and macOS the private-file backend. These
 jobs also passed the shared auth regression suite. They satisfy the director's
 replacement for manual Windows/Linux sign-in checks without using provider accounts.
+
+## Local sign-out failure handling
+
+A follow-up source audit found two independent bugs. An absent or malformed OAuth
+record could abort sign-out before local cleanup, and signing out of OAuth could
+make an older stored API key active implicitly. Local cleanup now tolerates a
+missing, malformed or identity-mismatched OAuth record without sending its token
+to a remote service. A failed local deletion remains an error so it can be retried.
+Successful sign-out clears both active-provider selectors; other saved credentials
+and registration metadata remain inactive rather than becoming a fallback.
+
+The result now distinguishes confirmed remote OAuth revocation, unconfirmed remote
+revocation, and cases where remote revocation does not apply. Deleting an API key
+locally no longer claims that its remote authorization was revoked.
+
+Six new isolated tests cover cleanup, identity mismatch, remote failure, local
+failure, selection persistence across reopen, and API-key sign-out. They use
+synthetic records and temporary metadata directories; they never access the
+current provider account or contact OpenAI. All 54 local Rust behavior tests and
+workspace Clippy pass, and the development app rebuilds. These tests do not satisfy
+the outstanding live API-key inference or live revocation evidence requirement.

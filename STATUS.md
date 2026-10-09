@@ -17,6 +17,8 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
   interruption checks and strict streamed-response handling; deterministic tests.
   Saved-account providers reload credentials per request, refresh near expiry,
   retry HTTP 401 once after refresh, and stop after disconnect/account switch.
+  Sign-out cannot reactivate an older API key; missing/damaged OAuth records can
+  be cleared locally without claiming remote revocation.
 - Shared editor/CLI OpenAI login and twenty-task live eval harness. Real macOS
   OAuth sign-in, refresh, session restoration across rebuilt apps and a live
   command-bus scene edit pass. The director-requested private-file store removes
@@ -30,7 +32,7 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
 - Fourteen architecture records, generated TS structural bindings, developer docs,
   gate ledger and GitHub workflow source.
 
-See [written evidence and limitations](docs/spikes/phase-0.md). Forty-eight Rust
+See [written evidence and limitations](docs/spikes/phase-0.md). Fifty-four Rust
 behavior tests, 223 UI/bridge tests and five Python tool tests pass after integration. The thousand-entity script benchmark meets the local
 frame budget within its documented workload.
 

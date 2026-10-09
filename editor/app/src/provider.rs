@@ -1,5 +1,10 @@
 //! Native provider coordination. OAuth URLs and secrets never enter the webview.
-use incant_agent::{AgentError, accounts::AccountStore, auth, credentials::CredentialStore};
+use incant_agent::{
+    AgentError,
+    accounts::{AccountStore, RemoteRevocation},
+    auth,
+    credentials::CredentialStore,
+};
 use serde_json::{Value, json};
 use std::sync::{
     Arc, Mutex,
@@ -94,7 +99,7 @@ impl ProviderRuntime {
         if action == "disconnect" {
             let revoked = AccountStore::open()?.disconnect()?;
             let mut state = public_state(false)?;
-            if !revoked {
+            if revoked == RemoteRevocation::Unconfirmed {
                 state["message"] = json!(
                     "Signed out on this computer. Remote revocation could not be confirmed; you can also disconnect Incant in ChatGPT Settings."
                 );

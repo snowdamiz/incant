@@ -219,7 +219,12 @@ fn auth_command(action: AuthCli) -> Result<()> {
         }
         AuthCli::Disconnect => {
             let revoked = AccountStore::open()?.disconnect()?;
-            println!("Local credentials removed. Remote revocation confirmed: {revoked}");
+            let remote = match revoked {
+                incant_agent::accounts::RemoteRevocation::Confirmed => "confirmed",
+                incant_agent::accounts::RemoteRevocation::Unconfirmed => "unconfirmed",
+                incant_agent::accounts::RemoteRevocation::NotApplicable => "not performed",
+            };
+            println!("Local credentials removed. Remote revocation: {remote}");
         }
     }
     Ok(())

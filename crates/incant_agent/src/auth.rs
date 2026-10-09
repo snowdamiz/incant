@@ -568,37 +568,138 @@ fn access_token_inner(
 }
 /// Local deletion happens even if remote revocation cannot be confirmed.
 pub fn disconnect(account: &AccountMetadata) -> Result<bool, AgentError> {
-    let secret = CredentialStore::load(&account.id)?;
-    let record: OAuthCredential =
-        serde_json::from_str(&secret).map_err(|_| failure("invalid saved credential record"))?;
-    let revoked = (|| {
-        let client = client()?;
-        let endpoint = discovery(&client)?.revocation_endpoint;
-        for attempt in 0..3 {
-            let response = client
-                .post(&endpoint)
-                .form(&[
-                    ("token", record.refresh_token.as_str()),
-                    ("token_type_hint", "refresh_token"),
-                    ("client_id", record.client_id.as_str()),
-                ])
-                .send();
-            if response.as_ref().is_ok_and(|r| r.status().is_success()) {
-                return Ok::<_, AgentError>(true);
-            }
-            if attempt < 2 {
-                std::thread::sleep(Duration::from_secs(1 << attempt));
-            }
-        }
-        Ok(false)
-    })()
-    .unwrap_or(false);
-    CredentialStore::delete(&account.id)?;
+    disconnect_saved(
+        account,
+        CredentialStore::load_optional(&account.id)?,
+        || CredentialStore::delete(&account.id),
+        revoke_record,
+    )
+}
+fn disconnect_saved(
+    account: &AccountMetadata,
+    saved: Option<zeroize::Zeroizing<String>>,
+    delete: impl FnOnce() -> Result<(), AgentError>,
+    revoke: impl FnOnce(&OAuthCredential) -> Result<bool, AgentError>,
+) -> Result<bool, AgentError> {
+    // A missing/corrupt record cannot be revoked remotely, but must not prevent
+    // explicit local sign-out. Never send a token belonging to another identity.
+    let record = saved
+        .and_then(|secret| serde_json::from_str::<OAuthCredential>(&secret).ok())
+        .filter(|record| {
+            record.client_id == account.client_id
+                && record.subject == account.subject
+                && !record.refresh_token.is_empty()
+        });
+    let revoked = record.is_some_and(|record| revoke(&record).unwrap_or(false));
+    delete()?;
     Ok(revoked)
+}
+fn revoke_record(record: &OAuthCredential) -> Result<bool, AgentError> {
+    let client = client()?;
+    let endpoint = discovery(&client)?.revocation_endpoint;
+    for attempt in 0..3 {
+        let response = client
+            .post(&endpoint)
+            .form(&[
+                ("token", record.refresh_token.as_str()),
+                ("token_type_hint", "refresh_token"),
+                ("client_id", record.client_id.as_str()),
+            ])
+            .send();
+        if response.as_ref().is_ok_and(|r| r.status().is_success()) {
+            return Ok(true);
+        }
+        if attempt < 2 {
+            std::thread::sleep(Duration::from_secs(1 << attempt));
+        }
+    }
+    Ok(false)
 }
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn revocation_fixture() -> (AccountMetadata, String) {
+        let account = AccountMetadata {
+            id: "oauth-test".into(),
+            client_id: "oaiapp_test".into(),
+            subject: "test-user".into(),
+            label: "Test".into(),
+        };
+        let record = OAuthCredential {
+            client_id: account.client_id.clone(),
+            subject: account.subject.clone(),
+            access_token: "synthetic-access".into(),
+            refresh_token: "synthetic-refresh".into(),
+            id_token: "synthetic-id".into(),
+            scope: "chatgpt.tokens.use.direct".into(),
+            expires_at: 0,
+        };
+        (account, serde_json::to_string(&record).unwrap())
+    }
+
+    #[test]
+    fn local_signout_cleans_missing_damaged_and_mismatched_records_without_network() {
+        let (account, record) = revocation_fixture();
+        for saved in [
+            None,
+            Some("broken-json".into()),
+            Some(record.replace("oaiapp_test", "oaiapp_other")),
+            Some(record.replace("test-user", "other-user")),
+            Some(record.replace("synthetic-refresh", "")),
+        ] {
+            let deleted = std::cell::Cell::new(false);
+            let revoked = disconnect_saved(
+                &account,
+                saved.map(zeroize::Zeroizing::new),
+                || {
+                    deleted.set(true);
+                    Ok(())
+                },
+                |_| panic!("An unverified/missing credential must never be sent"),
+            )
+            .unwrap();
+            assert!(deleted.get());
+            assert!(!revoked);
+        }
+    }
+
+    #[test]
+    fn local_signout_deletes_even_when_remote_revocation_fails() {
+        let (account, record) = revocation_fixture();
+        for remote in [Ok(true), Ok(false), Err(failure("Remote unavailable"))] {
+            let expected = remote.as_ref().is_ok_and(|revoked| *revoked);
+            let deleted = std::cell::Cell::new(false);
+            let result = disconnect_saved(
+                &account,
+                Some(zeroize::Zeroizing::new(record.clone())),
+                || {
+                    deleted.set(true);
+                    Ok(())
+                },
+                |credential| {
+                    assert_eq!(credential.refresh_token, "synthetic-refresh");
+                    remote
+                },
+            )
+            .unwrap();
+            assert!(deleted.get());
+            assert_eq!(result, expected);
+        }
+    }
+
+    #[test]
+    fn local_signout_never_reports_success_if_deletion_fails() {
+        let (account, record) = revocation_fixture();
+        let result = disconnect_saved(
+            &account,
+            Some(zeroize::Zeroizing::new(record)),
+            || Err(failure("Local deletion failed")),
+            |_| Ok(true),
+        );
+        assert!(result.is_err());
+    }
+
     #[test]
     fn registration_and_pkce_callback_validation() {
         let a = LoginAttempt::new("urn:uuid:760402d0-90a4-4c00-bf3e-d74330ecc166", None).unwrap();
