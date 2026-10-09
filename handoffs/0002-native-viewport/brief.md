@@ -82,3 +82,28 @@ Only capture Incant windows from this packet. Do not close or alter any other
 running Incant instance the director may be inspecting. If another Incant process
 exists, distinguish it from your new worktree build by executable path before
 capturing or manipulating it. Record any capture/OS-permission limitation exactly.
+
+## New director feedback — continued visual refinement
+
+The director says: “tell claude to keep improving UI and fixing little issues while
+you continue working on logic. For example traffic lights position as one example”.
+Their attached native screenshot is at
+`handoffs/0002-native-viewport/reference-director-2026-10-08.png`. Read that image
+now and explicitly acknowledge this updated instruction before continuing.
+
+Keep iterating on visual quality and usability in the real native app. Address the
+traffic-light position/alignment, and inspect other small spacing, alignment,
+clipping, focus, truncation and control-state issues across the entire UI. Do not
+stop at documenting issues that you can fix within this visual task. Astra is
+continuing logic, native integration and platform work in parallel. If a polish
+fix needs Rust/native support, write exact requested values/behavior to
+`handoffs/0002-native-viewport/native-requests.md` as soon as you identify it;
+Astra will read and implement it while you continue UI work. You may keep revising
+that file. Keep an actual before/after evidence trail and report remaining issues
+candidly. No phase gate approval is implied.
+
+The main-checkout app in the director's screenshot was launched before the
+latest committed 14/14 traffic-light inset change; compare the current native
+worktree build as well and choose the final placement from actual pixels. The
+existing director instance must remain untouched. Resume the native review already
+underway in this session, using your existing test instance and captured evidence.

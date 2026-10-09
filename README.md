@@ -117,7 +117,8 @@ Gradle 8.11.1, JDK 17, Android SDK 35, NDK and cargo-ndk 4.1.2. Platform packagi
 a hello-world proof, not an exported game or a mobile editor.
 
 GitHub Actions configurations are prepared for local checks, nightly six-target
-probes, and protected live evaluation. They have not run yet; the new private remote is
+probes, and protected live evaluation. The first PR checks passed, as did macOS, Windows, Linux, iOS simulator and web
+probes. Android is being rerun after an SDK-tool path fix. The private remote is
 `https://github.com/snowdamiz/incant`. Nightly debug artifacts do not satisfy signed-release requirements.
 The [security boundaries](docs/SECURITY.md) and [architecture proposals](docs/adr)
 describe current limitations.

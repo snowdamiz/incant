@@ -67,7 +67,8 @@ jobs:
       - run: rustup show
       - run: cargo install cargo-ndk --version 4.1.2 --locked
       - name: Install SDK components already licensed on the hosted runner
-        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0' 'ndk;28.0.13004108'
+        run: |
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" 'platforms;android-35' 'build-tools;35.0.0' 'ndk;28.0.13004108'
       - run: ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.13004108" tools/platforms/android.sh
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with: {name: hello-android-debug, path: artifacts/android, if-no-files-found: error}

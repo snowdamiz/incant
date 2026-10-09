@@ -31,16 +31,18 @@ frame budget within its documented workload.
 
 - Claude's native-window review is next: titlebar, traffic lights, rounded GPU
   viewport, resizing and screenshots. Windows native viewport evidence is pending.
-- CI workflows are authored; remote execution and target-specific validation remain.
+- Draft PR: https://github.com/snowdamiz/incant/pull/1. macOS checks and the
+  six-platform workflow ran: full checks and five platforms passed. Android
+  is being rerun after an SDK-tool path fix.
 
 ## External prerequisites still required
 
 - Private repository created at https://github.com/snowdamiz/incant. The bootstrap
-  is on main; implementation is on impl/phase0-foundation. Review PR and CI runs
-  are being prepared after UI integration. The director remains responsible for merging.
+  is on main; implementation is in draft PR #1 on impl/phase0-foundation.
+  The director remains responsible for merging.
 - A working user-authorized OpenAI connection for the live twenty-task evaluation.
   The first browser attempt did not complete; no provider tokens were obtained.
-- Windows/Linux/Android execution and desktop authentication checks, physical-device
+- Android execution and desktop authentication checks, physical-device
   coverage, self-hosted graphics/device runners, and nightly artifact history.
 - Apple/Windows distribution signing, store/developer accounts, staffing and the
   director's phase gate approvals. These are human-only under PLAN.md.

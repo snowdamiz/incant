@@ -176,3 +176,16 @@ specified macOS traffic-light inset and canvas color. Rounded viewport radii are
 converted to physical pixels and used by a GPU composition mask. The mask is
 native GPU work with no readback; render pipelines are cached per target format.
 These changes still require Claude's actual native pixel review (packet 0002).
+
+### First remote CI results
+
+Draft PR #1 is https://github.com/snowdamiz/incant/pull/1. Its complete macOS check
+workflow passed at commit 356c11a, including the bundled release editor build.
+The platform workflow built, executed and uploaded runnable probes for macOS,
+Windows, Linux, iOS simulator and browser/WASM. Downloaded reports are recorded
+in `evidence/ci-pr-2026-10-08.json`. The Android job stopped because `sdkmanager`
+was not on PATH; the workflow now names the installed SDK tool explicitly, with
+its rerun pending. No license-acceptance bypass was added.
+
+These are PR-triggered hosted jobs. Scheduled runs on main, their history,
+physical devices, graphics runners and signed distribution are still unproven.
