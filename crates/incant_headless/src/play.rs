@@ -30,6 +30,9 @@ pub struct Options {
     /// New directory for PNG frames and report.json; existing paths are rejected.
     #[arg(long)]
     pub output: Option<PathBuf>,
+    /// New JSONL file for committed script logs; does not require GPU captures.
+    #[arg(long)]
+    pub log_output: Option<PathBuf>,
     /// Capture the initial/final state and every N fixed ticks in between.
     #[arg(long, default_value_t = 60, value_parser = clap::value_parser!(u64).range(1..))]
     pub capture_every: u64,
@@ -45,6 +48,10 @@ pub enum PlayError {
     Duration,
     #[error("capture plan exceeds {MAX_FRAMES} frames or 256 MiB of raw pixels")]
     CaptureBudget,
+    #[error("script log capture exceeds 10,000 records or 8 MiB of JSONL output")]
+    LogBudget,
+    #[error("log output conflicts with a reserved frame or report filename")]
+    LogOutputConflict,
     #[error("compiled script exceeds 1,000,000 bytes")]
     ScriptSize,
     #[error(transparent)]
@@ -77,6 +84,7 @@ pub struct Report {
     state: incant_core::RuntimeSnapshot,
     script_state: serde_json::Value,
     frames: Vec<Frame>,
+    logs: Vec<super::play_logs::Entry>,
     adapter: Option<String>,
     width: Option<u32>,
     height: Option<u32>,
@@ -128,15 +136,19 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
     let mut play = PlaySession::new(&document, &source)?;
     // Reserve a new output directory before GPU setup. Never overwrite a prior run.
     // A failed run may leave partial PNGs, but never a completed report.json.
-    let renderer = if let Some(output) = &options.output {
+    if let Some(output) = &options.output {
         if let Some(parent) = output.parent().filter(|p| !p.as_os_str().is_empty()) {
             fs::create_dir_all(parent)?;
         }
         fs::create_dir(output)?;
-        Some(incant_render::Renderer::headless().map_err(|e| PlayError::Render(e.to_string()))?)
-    } else {
-        None
-    };
+    }
+    let mut logs =
+        super::play_logs::Capture::new(options.log_output.as_deref(), options.output.as_deref())?;
+    let renderer = options
+        .output
+        .as_ref()
+        .map(|_| incant_render::Renderer::headless().map_err(|e| PlayError::Render(e.to_string())))
+        .transpose()?;
     let root = options
         .project
         .parent()
@@ -151,6 +163,10 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
     for tick in 0..=count {
         if tick != 0 {
             commands += play.tick()?;
+            let entries = play.host.take_logs();
+            if !entries.is_empty() {
+                logs.append(tick, play.snapshot().elapsed_seconds, entries)?;
+            }
         }
         if let (Some(renderer), Some(output)) = (&renderer, &options.output)
             && (tick % options.capture_every == 0 || tick == count)
@@ -185,6 +201,7 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         state: play.snapshot(),
         script_state: play.host.state().clone(),
         frames,
+        logs: logs.finish()?,
         adapter: renderer.as_ref().map(|r| r.adapter_name.clone()),
         width: renderer.as_ref().map(|_| options.width),
         height: renderer.as_ref().map(|_| options.height),

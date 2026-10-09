@@ -10,6 +10,11 @@ fn headless_play_records_current_simulation_frames_and_publishes_a_complete_repo
     let root = temp.path();
     fixture(root);
     let authored = fs::read(root.join("game.incant.json")).unwrap();
+    fs::write(
+        root.join("logging.js"),
+        "exports.default={update(api){api.log('simulated');}};",
+    )
+    .unwrap();
     let report = success(run(
         root,
         &[
@@ -21,6 +26,10 @@ fn headless_play_records_current_simulation_frames_and_publishes_a_complete_repo
             "37",
             "--output",
             "frames",
+            "--log-output",
+            "frames/game.jsonl",
+            "--compiled-script",
+            "logging.js",
             "--width",
             "320",
             "--height",
@@ -36,6 +45,13 @@ fn headless_play_records_current_simulation_frames_and_publishes_a_complete_repo
     assert_eq!(ticks, [0, 37, 60]);
     assert_eq!(report["completed"], true);
     assert_eq!(report["state"]["tick"], 60);
+    assert_eq!(report["logs"].as_array().unwrap().len(), 60);
+    let records: Vec<serde_json::Value> = fs::read_to_string(root.join("frames/game.jsonl"))
+        .unwrap()
+        .lines()
+        .map(|line| serde_json::from_str(line).unwrap())
+        .collect();
+    assert_eq!(serde_json::json!(records), report["logs"]);
     assert_eq!(
         serde_json::from_slice::<serde_json::Value>(
             &fs::read(root.join("frames/report.json")).unwrap()

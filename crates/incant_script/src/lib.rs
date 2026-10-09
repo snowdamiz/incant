@@ -1,7 +1,9 @@
 //! QuickJS sandbox for SWC-compiled TypeScript. No OS, filesystem, module loader,
 //! network, native plugins or shell are installed into the runtime.
+mod logs;
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::Origin;
+pub use logs::{LogLevel, ScriptLog};
 use rquickjs::{Context, Runtime};
 use serde::Deserialize;
 use serde_json::Value;
@@ -21,6 +23,8 @@ pub enum ScriptError {
     Command(#[from] CommandError),
     #[error("script input exceeds configured limit")]
     InputLimit,
+    #[error("script logs exceed the message, tick or pending-output limit")]
+    LogLimit,
     #[error(transparent)]
     Document(#[from] incant_doc::DocumentError),
 }
@@ -88,6 +92,7 @@ impl PlaySession {
 struct TickResult {
     state: Value,
     commands: Vec<Command>,
+    logs: Vec<ScriptLog>,
 }
 pub struct ScriptHost {
     context: Context,
@@ -95,6 +100,7 @@ pub struct ScriptHost {
     deadline: Arc<Mutex<Instant>>,
     budget: Duration,
     state: Value,
+    logs: Vec<ScriptLog>,
 }
 impl ScriptHost {
     pub fn new(compiled_source: &str) -> Result<Self, ScriptError> {
@@ -124,14 +130,20 @@ impl ScriptHost {
      const world = JSON.parse(worldJson);
      const state = JSON.parse(stateJson);
      const commands = [];
+     const logs = [];
      const api = Object.freeze({{
        query: (component) => Object.values(world.scenes).flatMap(scene => Object.values(scene.entities)
          .filter(entity => !component || Object.hasOwn(entity.components, component))
          .map(entity => ({{...entity, scene_id: scene.id}}))),
-       command: (command) => {{ if (commands.length >= 10000) throw new Error('command limit'); commands.push(command); }}
+       command: (command) => {{ if (commands.length >= 10000) throw new Error('command limit'); commands.push(command); }},
+       log: (message, level = 'info') => {{
+         if (typeof message !== 'string' || message.length > 4096 || logs.length >= 64 ||
+             !['debug', 'info', 'warn', 'error'].includes(level)) throw new Error('invalid script log');
+         logs.push({{level, message}});
+       }}
      }});
      __behavior.update(api, dt, state);
-     return JSON.stringify({{state, commands}});
+     return JSON.stringify({{state, commands, logs}});
    }};
    JSON.stringify(__state);
   "#
@@ -148,14 +160,20 @@ impl ScriptHost {
             deadline,
             budget,
             state: serde_json::from_str(&state)?,
+            logs: Vec::new(),
         })
     }
     pub fn state(&self) -> &Value {
         &self.state
     }
+    /// Consume committed output. Call regularly to keep the pending queue bounded.
+    pub fn take_logs(&mut self) -> Vec<ScriptLog> {
+        std::mem::take(&mut self.logs)
+    }
     pub fn hot_reload(&mut self, source: &str) -> Result<(), ScriptError> {
         let mut next = Self::with_budget(source, self.budget)?;
         next.state = preserve_compatible(&self.state, &next.state);
+        next.logs = std::mem::take(&mut self.logs);
         *self = next;
         Ok(())
     }
@@ -183,6 +201,9 @@ impl ScriptHost {
         if serde_json::to_vec(&output.state)?.len() > 1024 * 1024 {
             return Err(ScriptError::InputLimit);
         }
+        if !logs::fits(&self.logs, &output.logs) {
+            return Err(ScriptError::LogLimit);
+        }
         let count = output.commands.len();
         if count > 0 {
             bus.execute(
@@ -198,6 +219,7 @@ impl ScriptHost {
             )?;
         }
         self.state = output.state;
+        self.logs.extend(output.logs);
         Ok(count)
     }
 }
