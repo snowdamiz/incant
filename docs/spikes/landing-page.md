@@ -181,6 +181,58 @@ Local computer use and capture stayed stopped. The latest result packet records
 remaining visual checks and preserves the expansion report separately as
 `result-2-expansion.md`.
 
+### Revision 6: graphical explanations and platform SVGs
+
+The director asked for another redesign with more graphics, specifically actual
+SVG platform icons. Claude's `81a7f9b`, integrated as `f436bf7`, replaces the
+platform-name row with Font Awesome marks for Windows, Apple/macOS, Linux,
+Apple/iOS, Android and the web. Small accessible labels distinguish the targets.
+The source and license records ship in the site, with Lucide icons used for the
+workflow. Astra's `4fd741e` links the visible credits to the license pages and
+updates the existing outbound-link check to allow genuine HTTPS credit links.
+
+Six original SVG tool illustrations now show topology/UVs, LODs, shader graphs,
+terrain, rigging/timelines and image-to-3D in connected charcoal viewports. The
+full tool descriptions are available in a closed disclosure. The workflow uses
+icons connected by a wire, with reduced-motion handling, and the three principles
+use small explanatory diagrams. The finished-product voice and neutral palette
+remain intact.
+
+The integrated production build passes at `/incant/`: JavaScript is 132.05 kB raw /
+48.18 kB gzip and CSS is 40.02 kB raw / 8.19 kB gzip. The local preview serves that
+build, verified by HTTP. The first hosted run for `4fd741e` passed 22 checks but
+failed the geometry keyboard test because its generic image selector also
+matched the six new illustrations. `2f04e7d` scopes that locator to the geometry
+editor's accessible name; the interaction assertions remain intact. All 23 tests
+passed in [run 37881244624](https://github.com/snowdamiz/incant/actions/runs/37881244624).
+No local browser, computer use or capture ran. Agent visual review is still
+deferred; the packet records the unreviewed icon proportions, drawings and layout.
+Earlier reports remain as `result-1-palette.md`, `result-2-expansion.md` and
+`result-3-density.md`.
+
+### Revision 7: restore a useful middle ground in the workflow
+
+The director's screenshot feedback said the workflow had removed too much text.
+Claude's `76ce75c`, integrated as `bf99437`, restores a short introduction and a
+single visible explanation beneath each of the six steps. The icons and platform
+SVGs remain. The section's visible copy is now 131 words, between the original
+193 and the graphical pass's 32. This is a description of the change, not a word
+count acceptance criterion.
+
+The heading is smaller, section padding and the gap before the platform row are
+reduced, and a vertical rail below 1280 px keeps each explanation next to its
+icon. On wider screens the six columns retain the connected horizontal diagram.
+The correction is scoped to the workflow; the other graphical sections remain.
+
+The integrated strict production build passes with `/incant/`: JavaScript is
+132.77 kB raw / 48.46 kB gzip; CSS is 40.47 kB raw / 8.31 kB gzip. HTTP confirms the
+existing preview serves this build. All 23 hosted browser tests passed in 16.6s
+in [run 37881478211](https://github.com/snowdamiz/incant/actions/runs/37881478211).
+PR deployment was skipped. No local browser or capture ran; the director's
+attached screenshot is feedback, not permission to resume capture. Agent visual
+review remains deferred. The earlier graphical result is preserved as
+`result-4-graphics.md`.
+
 ## Hosting prerequisite
 
 The authenticated GitHub Pages creation call for `snowdamiz/incant`, with
