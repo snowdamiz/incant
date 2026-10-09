@@ -17,10 +17,10 @@ exists yet. See `handoffs/0002-native-viewport/result.md`.
    native surface should occupy. The UI never draws engine pixels there.
 2. **Goes transparent when attached.** When `snapshot.viewport.status === 'attached'`,
    the shell adds `html.native-viewport`, which makes `html`, `body`, the app frame, the
-   workspace canvas, the viewport island and the viewport host transparent. All other
-   chrome (other islands, the viewport island's header and border, titlebar, status
-   line) stays opaque. Because the canvas and the 6 px gutters are then transparent,
-   **the host window background must be the canvas color `#0b0c0f`** (see TITLEBAR.md).
+   workspace, the viewport panel and the viewport host transparent. All other chrome
+   (other panels, the viewport strip, the 1 px separators, titlebar, status line) stays
+   opaque. Revision 2 (handoff 0006) has no gutters, so only the hole is transparent. The
+   host window background stays the canvas colour `#0b0c0f` (see TITLEBAR.md).
    Measured in Chrome with an evidence test double (`evidence.json → transparency`):
    PNG alpha is 0 at the viewport center and 255 on the hierarchy, top bar and status bar.
 3. **Reports placement.** If the bridge advertises `viewport.bounds`, the UI sends
@@ -28,10 +28,9 @@ exists yet. See `handoffs/0002-native-viewport/result.md`.
    (`ResizeObserver`) and on window resize, coalesced to one per animation frame.
    `rect` is in CSS pixels relative to the webview's top-left. `cornerRadii` is
    `[topLeft, topRight, bottomRight, bottomLeft]` in CSS px, read from the host
-   element (currently `[0, 0, 9, 9]`: the island header covers the top corners). The
-   host should clip the surface to these radii (CALayer `cornerRadius` + `maskedCorners`
-   on macOS; a rounded DirectComposition clip on Windows) so the surface matches the
-   island; without clipping, the bottom corners show square native pixels.
+   element. Since revision 2 the host is square and flush with its neighbours, so it
+   reports `[0, 0, 0, 0]`, measured in Chrome at 1000×650, 1280×800 and 1440×900. The host's
+   corner clip remains supported for any future rounded layout.
 4. **CSP allows the IPC scheme.** `connect-src 'self' ipc: http://ipc.localhost`.
 
 ## Constraints the host must satisfy

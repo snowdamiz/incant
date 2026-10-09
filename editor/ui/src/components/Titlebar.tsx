@@ -64,29 +64,27 @@ export function Titlebar({
       {chrome && chrome.leadingInset > 0 ? (
         <div className="titlebar__inset" style={{ width: chrome.leadingInset }} aria-hidden="true" />
       ) : null}
-      <div className="titlebar__identity">
-        <img className="titlebar__logo" src="./icon.svg" alt="Incant" width={18} height={18} />
-        <span className="titlebar__sep" aria-hidden="true">
-          /
-        </span>
-        <h1 className="titlebar__project" title={project}>
-          <span className="visually-hidden">Project: </span>
-          {project}
-        </h1>
-        {bridge?.isFixture ? (
-          <span
-            className="fixture-tag"
-            data-no-drag=""
-            tabIndex={0}
-            title={`${bridge.label}. Static sample data for design review: not engine state, and edits are disabled.`}
-          >
-            Sample data
-            <span className="visually-hidden">: {bridge.label}, not engine state; edits are disabled</span>
-          </span>
-        ) : null}
+      <div className="titlebar__start">
+        <div className="titlebar__identity">
+          <img className="titlebar__logo" src="./icon.svg" alt="Incant" width={16} height={16} />
+          <h1 className="titlebar__project" title={project}>
+            <span className="visually-hidden">Project: </span>
+            {project}
+          </h1>
+          {bridge?.isFixture ? (
+            <span
+              className="fixture-tag"
+              data-no-drag=""
+              tabIndex={0}
+              title={`${bridge.label}. Static sample data for design review: not engine state, and edits are disabled.`}
+            >
+              Sample data
+              <span className="visually-hidden">: {bridge.label}, not engine state; edits are disabled</span>
+            </span>
+          ) : null}
+        </div>
+        <div className="titlebar__spacer" />
       </div>
-
-      <div className="titlebar__spacer" />
 
       <div className="titlebar__tools">
         <div className="titlebar__group" role="group" aria-label="History">
@@ -109,11 +107,16 @@ export function Titlebar({
             onClick={() => void run({ type: 'history.redo' })}
           />
         </div>
+        <span className="titlebar__divider" aria-hidden="true" />
         <div className="titlebar__group" role="group" aria-label="Layout">
           <ToggleButton icon="sidebarLeft" label="Hierarchy panel" pressed={panels.hierarchy} onClick={() => onTogglePanel('hierarchy')} />
           <ToggleButton icon="panelBottom" label="Output panel" pressed={panels.dock} onClick={() => onTogglePanel('dock')} />
           <ToggleButton icon="sidebarRight" label="Inspector and agent panel" pressed={panels.inspector} onClick={() => onTogglePanel('inspector')} />
         </div>
+      </div>
+
+      <div className="titlebar__end">
+        <div className="titlebar__spacer" />
         <ProviderChip />
         <button
           type="button"

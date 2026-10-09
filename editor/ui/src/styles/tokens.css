@@ -1,27 +1,35 @@
 /*
- * Incant editor design tokens, revision 1 ("islands"). See editor/ui/DESIGN.md.
+ * Incant editor design tokens, revision 2 ("connected"). See editor/ui/DESIGN.md.
  * Contrast pairs are enforced by src/styles/tokens.test.ts; change both together.
+ *
+ * Structure follows the landing-page product illustration: one continuous frame, panels
+ * joined by hairline separators instead of floating islands. Colour follows the previous
+ * editor (2a40d16, handoffs/0006-connected-editor/references/previous-editor-tokens.css):
+ * neutral cool charcoal, with periwinkle spent only on selection, focus and the brand mark.
  */
 :root {
-  /* Surfaces. A dark canvas with slightly lifted panel "islands". Cool graphite, low chroma. */
-  --color-bg-app: #0b0c0f; /* canvas behind the islands and the titlebar */
-  --color-bg-panel: #131418; /* island surface */
-  --color-bg-raised: #1a1c21; /* inputs, chips, menus */
-  --color-bg-hover: #202329;
-  --color-bg-selected: #262b52; /* indigo-tinted selection pill */
+  /* Surfaces. Neutral graphite, low chroma. */
+  --color-bg-app: #0b0c0f; /* titlebar and status line; also the native window background */
+  --color-bg-panel: #131418; /* hierarchy, viewport strip, output dock, dialogs */
+  --color-bg-side: #17181c; /* inspector + agent column, one step lighter as in the reference */
+  --color-bg-raised: #1e2026; /* inputs, chips, counts */
+  --color-bg-hover: #24272e;
+  --color-bg-selected: #262b52; /* indigo-tinted selection pill (unchanged from revision 1) */
   --color-bg-selected-inactive: #23262d;
-  --color-bg-viewport: #0e0f12;
+  --color-bg-viewport: #0e0f12; /* empty viewport field */
+  --color-bg-well: #0e0f12; /* recessed value wells on the side column */
 
   /* Text. */
   --color-text: #ececf1;
+  --color-text-soft: #d3d6dd; /* resting tree rows and list text */
   --color-text-muted: #a9aeb9;
   --color-text-subtle: #959cab;
   --color-text-on-accent: #0b0c0f;
 
-  /* Lines. Decorative hairlines are low contrast; control borders meet 3:1. */
-  --color-border: #22252b;
+  /* Lines. Separators are opaque so they stay solid over a transparent native viewport. */
+  --color-border: #25282f; /* panel separators and hairlines */
   --color-border-strong: #2e323a;
-  --color-border-control: #676e7b;
+  --color-border-control: #676e7b; /* ≥ 3:1 */
 
   /* Interaction. One accent: periwinkle. Focus is a lighter tint drawn as a ring, so it is
      distinguished from the filled selection pill by shape as well as luminance. */
@@ -63,7 +71,7 @@
   --text-xs: 12px; /* Minimum size; metadata and badges. */
   --text-sm: 13px; /* Default UI text. */
   --text-md: 14px; /* Inputs, chat, entity name. */
-  --text-lg: 16px; /* State headings. */
+  --text-lg: 16px; /* Dialog headings. */
   --text-xl: 20px; /* Full-screen state headings. */
   --leading-tight: 16px;
   --leading: 20px;
@@ -82,20 +90,19 @@
   --space-7: 32px;
 
   /* Sizing. */
-  --row-height: 26px;
+  --row-height: 28px;
   --control-height: 28px;
-  --header-height: 40px;
-  --titlebar-height: 40px;
-  --statusbar-height: 26px;
-  --gutter: 6px; /* gap between islands; also the splitter hit area */
-  --splitter-size: 6px;
+  --header-height: 36px; /* panel headers and the dock tab strip */
+  --titlebar-height: 40px; /* native traffic lights are centred for 40 px (TITLEBAR.md) */
+  --statusbar-height: 28px;
+  --splitter-size: 1px; /* the visible separator; the drag target extends 3 px each side */
+  --splitter-hit: 3px;
   --radius-sm: 4px;
   --radius: 6px;
-  --radius-lg: 10px; /* islands */
+  --radius-lg: 8px; /* composer, dialog sections */
   --indent: 14px;
 
-  --shadow-island: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 1px 2px rgb(0 0 0 / 0.3);
-  --shadow-popover: 0 12px 40px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.06);
+  --shadow-popover: 0 24px 64px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.07);
 
   --duration-fast: 90ms;
   --duration: 160ms;

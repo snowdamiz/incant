@@ -37,7 +37,7 @@ const color = (name: string) => {
 };
 
 // WCAG 2.2: 4.5:1 for text (SC 1.4.3), 3:1 for UI components and focus indicators (SC 1.4.11).
-const TEXT_SURFACES = ['color-bg-app', 'color-bg-panel', 'color-bg-raised', 'color-bg-hover', 'color-bg-selected'];
+const TEXT_SURFACES = ['color-bg-app', 'color-bg-panel', 'color-bg-side', 'color-bg-raised', 'color-bg-hover', 'color-bg-selected', 'color-bg-well'];
 const TEXT = [
   'color-text',
   'color-text-muted',
@@ -86,18 +86,34 @@ describe('design token contrast', () => {
     expect(contrast(color(fg), color(bg))).toBeGreaterThanOrEqual(4.5);
   });
 
-  it.each(['color-bg-app', 'color-bg-panel', 'color-bg-raised', 'color-bg-hover', 'color-bg-selected'])(
+  it.each(['color-bg-app', 'color-bg-panel', 'color-bg-side', 'color-bg-raised', 'color-bg-hover', 'color-bg-selected'])(
     'focus ring is at least 3:1 against %s',
     (bg) => {
       expect(contrast(color('color-focus'), color(bg))).toBeGreaterThanOrEqual(3);
     },
   );
 
-  it.each(['color-bg-app', 'color-bg-panel'])('control borders are at least 3:1 against %s', (bg) => {
+  it.each(['color-bg-app', 'color-bg-panel', 'color-bg-side'])('control borders are at least 3:1 against %s', (bg) => {
     expect(contrast(color('color-border-control'), color(bg))).toBeGreaterThanOrEqual(3);
   });
 
-  it('focus (amber) and selection (blue) differ in hue so focus never reads as selection', () => {
+  it('keeps the frame neutral: surfaces are low-chroma graphite, not tinted violet', () => {
+    // Director feedback on revision 2: "a bit too purple". Chroma = max - min channel.
+    const chroma = (hex: string) => {
+      const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+      return Math.max(...c) - Math.min(...c);
+    };
+    for (const name of ['color-bg-app', 'color-bg-panel', 'color-bg-side', 'color-bg-raised', 'color-bg-hover', 'color-border']) {
+      expect(chroma(color(name)), name).toBeLessThanOrEqual(10);
+    }
+  });
+
+  it('matches the native window background so no other colour shows at the frame edges', () => {
+    // editor/app/src/main.rs: background_color Color(11, 12, 15) and canvas_srgb [11, 12, 15].
+    expect(color('color-bg-app')).toBe('#0b0c0f');
+  });
+
+  it('focus and selection differ so focus never reads as selection', () => {
     expect(color('color-focus')).not.toBe(color('color-accent'));
     expect(contrast(color('color-focus'), color('color-bg-selected'))).toBeGreaterThanOrEqual(3);
   });

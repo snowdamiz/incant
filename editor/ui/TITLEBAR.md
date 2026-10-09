@@ -8,11 +8,13 @@ captures use labeled evidence test doubles.
 ## What the UI renders
 
 ```
-[leading inset][logo] / Project name [Sample data]   ……drag……   [↶ ↷] | [▢◧ ▢⬓ ▢◨] | (● OpenAI  Not connected) [⌨] [— ▢ ✕][trailing inset]
+[leading inset][logo] Project name [Sample data] ……drag…… [↶ ↷] | [◧ ⬓ ◨] ……drag…… (● ChatGPT Sign in) [⌨] [— ▢ ✕][trailing inset]
 ```
 
-- 40 px tall, canvas color (`--color-bg-app`), no bottom border: the panel islands
-  start directly below it.
+- 40 px tall, canvas color (`--color-bg-app`). Revision 2 (handoff 0006) draws a 1 px
+  hairline at the bottom as an inset shadow, so content still centres on the full 40 px.
+  The tool cluster is centred in the window between equal-width start and end sections.
+  Empty space in both sections is a drag area.
 - The whole bar is a drag handle except interactive elements (`button`, `a`, `input`,
   `[role=button]`, `[data-no-drag]`).
 - Layout toggles (hierarchy, output, inspector) and the shortcuts button are local UI
@@ -64,7 +66,12 @@ Rules the UI follows:
   `trafficLightPosition: { x: 14, y: 22 }`. Measured natively in handoff 0002 (tao
   0.37.1): `y` is extra titlebar-container height, not a top offset, and the light
   centre lands at `y − 2.25` pt. With y=22 the centres sit at 19.75 pt, level with the
-  logo; y=14 left them 8 pt high. The logo starts 12.5 pt after the green light.
+  logo; y=14 left them 8 pt high.
+- Logo placement (handoff 0006, director feedback "too close to traffic lights and not
+  aligned"): the 16 px logo box starts at 86 pt, so the glyph starts at 88.5 pt, 15 pt after
+  the green light (which ends at 73.5 pt). The glyph is 14.5 pt tall, close to the 14 pt
+  lights, and its centre is 19.75 pt, level with the lights. Measured in a browser capture
+  with the macOS inset double; native confirmation is requested in that handoff.
 - Report `leadingInset: 78` (traffic lights + margin) and `trailingInset: 0`.
   In fullscreen the lights hide: report `fullscreen: true, leadingInset: 0`.
 - Do not draw custom caption buttons on macOS.
@@ -91,8 +98,8 @@ Rules the UI follows:
 
 When the native viewport is attached the webview is transparent (see
 NATIVE_VIEWPORT.md). The **window background color must be the canvas color
-`#0b0c0f`** so the 6 px gutters between islands and the titlebar area do not show the
-desktop.
+`#0b0c0f`**. Revision 2 has no gutters and a square viewport, so this colour is visible
+only during a resize, before the webview repaints.
 
 ## Open questions
 

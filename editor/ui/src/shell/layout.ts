@@ -6,26 +6,28 @@ export interface Layout {
   readonly agent: number;
 }
 
-/** Fixed chrome outside the workspace grid: top bar + status bar. */
-const CHROME_HEIGHT = 40 + 24;
-const SPLITTER = 6;
+/** Fixed chrome outside the workspace grid: titlebar (40) + status line (28). */
+export const CHROME_HEIGHT = 40 + 28;
+/** Separators are 1 px lines (their drag target overlaps the neighbours). */
+export const SPLITTER = 1;
 /** The viewport never shrinks below this, so the native surface stays usable. */
 export const MIN_VIEWPORT = { width: 360, height: 200 } as const;
 
 const clamp = (value: number, min: number, max: number) => Math.round(Math.min(max, Math.max(min, value)));
 
 /**
- * Proportional defaults, tuned so 1280×800 and 1920×1080 both keep a readable
- * hierarchy (≥ 240 px), an inspector wide enough for a vec3 row (≥ 320 px), and
- * a viewport at least half the window wide.
+ * Proportional defaults after the landing-page illustration (a narrow outline, a wide
+ * viewport, a ~20 rem inspector), tuned so 1280×800 and 1920×1080 both keep a readable
+ * hierarchy (≥ 232 px), an inspector wide enough for a vec3 row (≥ 320 px), and a
+ * viewport at least half the window wide.
  */
 export function defaultLayout(width: number, height: number): Layout {
   return clampLayout(
     {
-      left: clamp(width * 0.18, 240, 320),
-      right: clamp(width * 0.22, 320, 420),
-      dock: clamp(height * 0.28, 160, 360),
-      agent: clamp(height * 0.34, 280, 360),
+      left: clamp(width * 0.17, 232, 296),
+      right: clamp(width * 0.23, 320, 400),
+      dock: clamp(height * 0.27, 160, 340),
+      agent: clamp(height * 0.33, 260, 340),
     },
     width,
     height,

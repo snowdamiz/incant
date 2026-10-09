@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { clampLayout, defaultLayout, MIN_VIEWPORT } from './layout';
+import { CHROME_HEIGHT, clampLayout, defaultLayout, MIN_VIEWPORT, SPLITTER } from './layout';
 
-const viewportWidth = (width: number, l: { left: number; right: number }) => width - l.left - l.right - 12;
+const viewportWidth = (width: number, l: { left: number; right: number }) => width - l.left - l.right - 2 * SPLITTER;
 
 describe('layout', () => {
   it.each([
@@ -9,7 +9,7 @@ describe('layout', () => {
     [1920, 1080],
   ])('default layout at %i×%i keeps readable side panels and a dominant viewport', (w, h) => {
     const layout = defaultLayout(w, h);
-    expect(layout.left).toBeGreaterThanOrEqual(240);
+    expect(layout.left).toBeGreaterThanOrEqual(232);
     expect(layout.right).toBeGreaterThanOrEqual(320);
     expect(viewportWidth(w, layout)).toBeGreaterThanOrEqual(w / 2);
   });
@@ -22,6 +22,6 @@ describe('layout', () => {
 
   it('never lets the dock squeeze the viewport below its minimum height', () => {
     const layout = clampLayout({ left: 240, right: 320, dock: 640, agent: 300 }, 1280, 600);
-    expect(600 - 64 - 6 - layout.dock).toBeGreaterThanOrEqual(MIN_VIEWPORT.height);
+    expect(600 - CHROME_HEIGHT - SPLITTER - layout.dock).toBeGreaterThanOrEqual(MIN_VIEWPORT.height);
   });
 });
