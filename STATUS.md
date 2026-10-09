@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Authored directional, point and spot lights now use real GPU clustered forward
+  shading with bounded lists and an exact overflow fallback. Physical, depth,
+  spatial-oracle and resource-lifetime checks pass; the public CLI verifies
+  intensity edits, atomic rejection, Undo/Redo and source-free rendering.
+  Initial validation passes 135 Rust tests, 23 GPU checks and 282 UI tests.
+  Claude's expanded pixel review found a range-edge crease and Inspector label
+  issues; focused corrections and final native recaptures are in progress.
+  See [clustered lighting evidence](docs/spikes/clustered-lighting.md).
+
 - Distant environment lighting now includes diffuse convolution, GGX roughness
   filtering, a matching BRDF lookup and retained GPU versions. Authored
   `EnvironmentLight` components bind imported equirectangular textures through
