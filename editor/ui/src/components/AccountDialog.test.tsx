@@ -113,6 +113,37 @@ describe('ChatGPT account dialog', () => {
     expect(chip().textContent).toContain('ada@example.com');
   });
 
+  it('signed in: keyboard focus never starts on a destructive action', async () => {
+    const { bridge, requests } = providerBridge(PROVIDER_FIXTURES['signed-in']);
+    renderBridge(bridge);
+    // Enter on a focused button activates it; model that as a click on whatever holds focus.
+    const pressEnter = () => fireEvent.click(document.activeElement as HTMLElement);
+
+    let d = openDialog();
+    expect(document.activeElement).toBe(within(d).getByRole('button', { name: 'Close' }));
+    pressEnter();
+    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(document.activeElement).toBe(chip());
+
+    // Even after choosing Sign out, the confirmation starts on the safe answer.
+    d = openDialog();
+    fireEvent.click(within(d).getByRole('button', { name: 'Sign out' }));
+    const confirm = within(d).getByRole('group', { name: /Sign out of ada@example.com/ });
+    expect(document.activeElement).toBe(within(confirm).getByRole('button', { name: 'Keep signed in' }));
+    pressEnter();
+    expect(within(d).queryByRole('group', { name: /Sign out of/ })).toBeNull();
+    expect(d.contains(document.activeElement)).toBe(true);
+    expect(document.activeElement?.textContent).not.toMatch(/Sign out/);
+    await Promise.resolve();
+    expect(requests).toEqual([]);
+
+    // Focus stays trapped: Tab from the last control wraps to the first.
+    const focusable = [...d.querySelectorAll<HTMLElement>('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])')];
+    focusable.at(-1)!.focus();
+    fireEvent.keyDown(d, { key: 'Tab' });
+    expect(document.activeElement).toBe(focusable[0]);
+  });
+
   it('marks the active account and switches, adds and signs out on request', async () => {
     const { bridge, requests } = providerBridge(PROVIDER_FIXTURES['signed-in-multi']);
     renderBridge(bridge);
@@ -133,7 +164,7 @@ describe('ChatGPT account dialog', () => {
     // Sign-out asks first; nothing is sent yet.
     expect(requests).toHaveLength(2);
     const confirm = within(d).getByRole('group', { name: /Sign out of studio@example.org/ });
-    expect(document.activeElement).toBe(within(confirm).getByRole('button', { name: 'Sign out' }));
+    expect(document.activeElement).toBe(within(confirm).getByRole('button', { name: 'Keep signed in' }));
     fireEvent.keyDown(d, { key: 'Escape' });
     expect(within(d).queryByRole('group', { name: /Sign out of/ })).toBeNull();
     fireEvent.click(within(d).getByRole('button', { name: 'Sign out' }));

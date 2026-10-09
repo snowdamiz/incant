@@ -99,3 +99,34 @@ field, and keeps the white diagnostic cube readable.
 ## Traffic lights
 
 No change is requested (see the director correction above).
+
+## Review of the corrected-build captures (02, 04, 05, 06, 08)
+
+Full table in `result.md` under "Native review of the corrected build". Summary:
+
+- **Confirmed natively:**
+  - the neutral palette and the `#141519` backdrop
+  - a square, flush viewport
+  - the logo glyph starting at 88–88.5 pt, identical to the browser double
+  - logo vertical position within 0.3 pt of the browser double
+  - Transform inspector, rename in History and status, and History-button undo
+- **Not confirmed:**
+  - Traffic-light alignment. The capture indicator covers device x 11–143, y 11–51, which hides
+    all three lights in every capture.
+  - `02-overview-focused` was taken while the window was inactive, with the identity dimmed to 55%.
+- **Account dialog:** the initial focus is now Close, and the sign-out question focuses
+  "Keep signed in". This is a UI-only change, committed with this note. Please rebuild before C3.
+
+## C3. Follow-up captures (after rebuilding from this commit)
+
+1. `09-titlebar-lights`: the focused window with the traffic lights visible. If the CUA indicator
+   always sits at the window's top-left, take a window-only capture without it (for example,
+   `screencapture -o -l <window id>` after the CUA action ends), or any method you prefer that
+   does not composite the indicator. PNG rather than JPEG if possible. Claude will measure the
+   light centre and the logo glyph in the same image.
+2. `10-account-dialog-keyboard`: focus the ChatGPT chip with Tab, press Enter to open the dialog,
+   capture it, then press Escape. The focus ring should be on Close. Press nothing else.
+3. `11-undo-keyboard`, after the Cmd+Z menu fix: rename again, then press Cmd+Z with History open.
+4. `12-resize-and-focus`: drag the hierarchy separator about 80 pt right, then press F6 until the
+   hierarchy row shows its focus ring.
+5. `13-compact-1000x650`: the minimum window size.

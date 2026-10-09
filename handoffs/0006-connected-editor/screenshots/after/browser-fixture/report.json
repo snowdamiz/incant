@@ -25,6 +25,8 @@
     "10-agent-signed-out-1440x900.png",
     "11-account-signed-out-1440x900.png",
     "11-account-signed-in-multi-1440x900.png",
+    "12-account-keyboard-open-focus-1440x900.png",
+    "13-account-signout-question-focus-1440x900.png",
     "11-account-browser-1440x900.png",
     "11-account-error-while-signed-in-1440x900.png",
     "20-state-large-1280x800.png",
@@ -341,5 +343,9 @@
       "pageOverflow": false
     }
   ],
-  "errors": []
+  "errors": [],
+  "focus": {
+    "onOpen": "Close",
+    "onSignOutQuestion": "Keep signed in"
+  }
 }
