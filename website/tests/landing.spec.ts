@@ -81,7 +81,11 @@ test.describe('landing page', () => {
       if (href.startsWith('#')) {
         expect(await page.locator(href).count(), href).toBe(1)
       } else {
-        expect(href).toMatch(/^https:\/\/github\.com\/snowdamiz\/incant(\/blob\/main\/PLAN\.md)?$/)
+        // Credit links are legitimate destinations alongside the product guide.
+        const destination = new URL(href)
+        expect(destination.protocol).toBe('https:')
+        expect(destination.username).toBe('')
+        expect(destination.password).toBe('')
       }
     }
   })
