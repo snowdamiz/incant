@@ -1,5 +1,5 @@
 //! One persistent account store shared by every Incant binary and checkout.
-//! Metadata is outside the project/build tree; credentials stay in the OS store.
+//! Metadata is outside the project/build tree; credentials stay in the private platform store.
 use crate::{
     AgentError,
     auth::{self, AccountMetadata, LoginAttempt},

@@ -55,3 +55,48 @@ other Incant instances. Your older review worktree app can remain alone.
 Commit UI changes and result.md with Built-by: claude; list tests/evidence and
 remaining issues. No publishing, merging or phase approval. Return soon enough
 that Astra can integrate and validate the real login flow while you continue polish.
+
+## Priority follow-up after 35f3527
+
+Your UI commit is integrated in main, and Astra's real provider host commit is now
+in this worktree as 86aa0da (already in main as b2f3c03). Read native-requests.md,
+including Astra's response at its end, before doing anything else. Remove the
+local duplicate request type/cast now that the shared contract is corrected.
+Confirm cancellation preserves a previously connected account while adding a new
+one; signed-out saved accounts have no activeAccount. Tighten copy accordingly.
+
+The director approved macOS Keychain access for the rebuilt-binary synthetic
+persistence check. It passed and deleted the fake record. OS permission prompts
+can still occur after development code changes, without requiring OpenAI login.
+
+The director's new native app is now running from the MAIN checkout with project
+name 'Incant Login Check'. DO NOT touch it, capture its account info, close it or
+start sign-in there. Astra and the director are using it for real login validation.
+You may build and launch your OWN worktree app (a disposable project) to verify
+signed-out native UI and keep refining visual usability. Do not start OAuth or
+consent or read credentials. If the director signs in while you work, the shared
+account store may show that account; do not capture personal account information.
+Keep the native review within signed-out state before real login, or continue
+fixture visual polish instead. Do not claim unavailable native states were tested.
+Commit follow-up UI refinements separately, Built-by: claude. Existing Astra
+commit must remain attributed to Astra. No phase approval, merging or publishing.
+
+## Latest director correction — stop Keychain password prompts
+
+The director says: "im getting tired of putting in the keychain password 10 times
+each time its needed. Find a workaround". Astra traced this to macOS per-item
+Keychain prompts and is replacing ONLY the macOS credential backend with the
+OpenAI-documented protected local file method (private 0700 directory, atomic 0600
+files in OS user config, outside projects). No Keychain reads/writes on macOS in
+that implementation. This overrides the earlier plan's Keychain storage choice
+for this local build at the director's request. Stable host/client/account IDs
+are retained. User will do one final returning sign-in to populate that store;
+Astra will verify subsequent launches/rebuilds use it without Keychain access.
+
+Please adjust the account dialog retention copy: on macOS remove the permission
+prompt line, as it should no longer happen; keep concise saved-on-this-computer
+and offline facts. If a generic cross-platform wording removes this irrelevant
+implementation detail altogether, that is fine. Do not promise encryption: files
+are private to the OS user. No need to mention file modes or developer details in
+the product UI. Never touch the real account or native app. Browser fixtures only.
+Return this small UI follow-up promptly with test/typecheck and your visual QA.

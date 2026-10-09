@@ -59,3 +59,40 @@ References: [OpenAI registration and sign-in](https://developers.openai.com/siwc
 [host identifiers](https://developers.openai.com/siwc/token-sharing-open-source),
 [account/session lifecycle](https://developers.openai.com/siwc/token-sharing-open-source/profiles-and-sessions),
 [Microsoft credential limits](https://learn.microsoft.com/en-us/windows/win32/api/wincred/ns-wincred-credentialw).
+
+
+## Director-requested macOS storage change
+
+After real sign-in and a successful app restart, the director reported repeated
+Keychain password dialogs and explicitly requested a workaround. macOS now uses
+OpenAI's documented local credential-file method, in
+`~/Library/Application Support/Incant/credentials/` with a private 0700 directory
+and atomic owner-only 0600 files. These files are protected by OS file permissions,
+not an additional encryption layer. No authentication Keychain backend is linked
+on macOS; there is no automatic legacy-Keychain read or migration. Existing
+host ID and account/client mappings stay intact. One returning sign-in populates
+the new store, without re-registering the client. Old Keychain records are left
+unread to avoid more password prompts. Windows/Linux keep their OS stores.
+
+The change is authorized by the director's later explicit instruction and
+supersedes PLAN.md's Keychain storage choice for this macOS development setup.
+It does not change other applications, OS Keychain access policies or security
+settings. No Codex/Claude session is borrowed. Tests reject symlink credential
+files and files readable by other users; atomic replacement leaves outside
+symlink targets untouched.
+
+A second cross-build test used the new backend: build `local-first` saved a large
+synthetic record, build `local-second` read it, and deleted it. All operations
+completed without a Keychain dialog or password. Tests also confirm metadata and
+credential persistence independently of executable path and owner-only modes.
+
+## Live transport defect discovered during connection testing
+
+The real OAuth account fetched the model catalog and completed a Responses call.
+The direct route emitted complete tool calls through `response.output_item.done`,
+then sent an empty terminal output array. The previous SSE reader discarded those
+items and reported a no-op success. It now retains completed output items until
+`response.completed`, preserves their order and refuses an entirely empty result.
+Tests ensure interrupted/failed streams cannot execute those buffered tool calls.
+A repeated live probe returned the expected `doc_query` call. A scene-edit test
+then reached the approval boundary correctly; no edit was claimed before approval.

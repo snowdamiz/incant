@@ -3265,6 +3265,7 @@ dependencies = [
  "incant_doc",
  "jsonwebtoken",
  "keyring",
+ "libc",
  "open",
  "rand 0.9.5",
  "reqwest",

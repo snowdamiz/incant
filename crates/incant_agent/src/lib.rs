@@ -2,6 +2,8 @@
 pub mod accounts;
 pub mod auth;
 pub mod credentials;
+#[cfg(target_os = "macos")]
+mod local_credentials;
 pub mod provider;
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::schema_registry;

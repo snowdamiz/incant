@@ -126,7 +126,7 @@ impl ProviderRuntime {
                 self.publish(app, pending.clone());
             },
         )?;
-        // Publication follows durable keychain and metadata writes. Closing the
+        // Publication follows durable credential and metadata writes. Closing the
         // app after success does not discard its selected account.
         AccountStore::open()?.activate(account)?;
         public_state(false)

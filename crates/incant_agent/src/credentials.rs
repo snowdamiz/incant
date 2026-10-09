@@ -1,4 +1,5 @@
-//! Incant-only OS credentials, committed by replacing a small manifest last.
+//! Incant-only credentials. macOS uses private local files at the director's
+//! request; other platforms use OS stores with a small manifest committed last.
 //! Windows' 2560-byte credential limit is smaller than a complete OAuth record.
 //! Bounded chunks also let a failed refresh write preserve the previous session.
 use crate::AgentError;
@@ -13,15 +14,17 @@ struct Manifest {
     generation: String,
     parts: usize,
 }
-trait Backend {
+pub(super) trait Backend {
     fn get(&self, account: &str) -> Result<Option<Zeroizing<String>>, AgentError>;
     fn put(&self, account: &str, secret: &str) -> Result<(), AgentError>;
     fn remove(&self, account: &str) -> Result<(), AgentError>;
 }
+#[cfg(not(target_os = "macos"))]
 struct OsStore;
-fn error(message: &str) -> AgentError {
+pub(super) fn error(message: &str) -> AgentError {
     AgentError::Provider(message.into())
 }
+#[cfg(not(target_os = "macos"))]
 fn entry(account: &str) -> Result<keyring::Entry, AgentError> {
     if account.is_empty() || account.len() > 250 || account.contains('\0') {
         return Err(error("invalid credential account ID"));
@@ -29,6 +32,7 @@ fn entry(account: &str) -> Result<keyring::Entry, AgentError> {
     keyring::Entry::new("dev.incant.openai", account)
         .map_err(|_| error("OS credential store unavailable"))
 }
+#[cfg(not(target_os = "macos"))]
 impl Backend for OsStore {
     fn get(&self, account: &str) -> Result<Option<Zeroizing<String>>, AgentError> {
         match entry(account)?.get_password() {
@@ -141,12 +145,32 @@ fn load(backend: &impl Backend, account: &str) -> Result<Option<Zeroizing<String
     }
     Ok(Some(secret))
 }
+#[cfg(target_os = "macos")]
+fn backend() -> Result<impl Backend, AgentError> {
+    crate::local_credentials::LocalStore::new()
+}
+#[cfg(not(target_os = "macos"))]
+fn backend() -> Result<impl Backend, AgentError> {
+    Ok(OsStore)
+}
 impl CredentialStore {
+    pub fn storage_kind() -> &'static str {
+        if cfg!(target_os = "macos") {
+            "private-local-file"
+        } else {
+            "os-keychain"
+        }
+    }
     pub fn save(account: &str, secret: &str) -> Result<(), AgentError> {
-        store(&OsStore, account, secret)
+        let backend = backend()?;
+        if cfg!(target_os = "macos") {
+            backend.put(account, secret)
+        } else {
+            store(&backend, account, secret)
+        }
     }
     pub fn load_optional(account: &str) -> Result<Option<Zeroizing<String>>, AgentError> {
-        load(&OsStore, account)
+        load(&backend()?, account)
     }
     pub fn load(account: &str) -> Result<Zeroizing<String>, AgentError> {
         Self::load_optional(account)?.ok_or_else(|| {
@@ -154,12 +178,13 @@ impl CredentialStore {
         })
     }
     pub fn delete(account: &str) -> Result<(), AgentError> {
-        if let Some(saved) = OsStore.get(account)?
+        let backend = backend()?;
+        if let Some(saved) = backend.get(account)?
             && let Some(m) = manifest(&saved)?
         {
-            remove_parts(&OsStore, account, &m)?;
+            remove_parts(&backend, account, &m)?;
         }
-        OsStore.remove(account)
+        backend.remove(account)
     }
 }
 #[cfg(test)]

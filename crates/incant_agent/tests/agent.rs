@@ -166,7 +166,7 @@ fn unknown_tools_and_fabricated_screenshots_fail() {
 #[test]
 fn response_stream_requires_terminal_success() {
     let delta = "data: {\"type\":\"response.output_text.delta\",\"delta\":\"hello\"}\n\n";
-    let done = "data: {\"type\":\"response.completed\",\"response\":{\"output\":[],\"usage\":{\"input_tokens\":2,\"output_tokens\":1}}}\n\n";
+    let done = "data: {\"type\":\"response.completed\",\"response\":{\"output\":[{\"type\":\"message\",\"role\":\"assistant\",\"content\":[{\"type\":\"output_text\",\"text\":\"hello\"}]}],\"usage\":{\"input_tokens\":2,\"output_tokens\":1}}}\n\n";
     let mut text = String::new();
     let output = read_stream(format!("{delta}{done}").as_bytes(), &mut |t| {
         text.push_str(t)
@@ -178,6 +178,27 @@ fn response_stream_requires_terminal_success() {
     assert!(
         read_stream(
             b"data: {\"type\":\"response.failed\"}\n\n".as_slice(),
+            &mut |_| {}
+        )
+        .is_err()
+    );
+}
+
+#[test]
+fn direct_route_completed_items_are_retained_until_terminal_success() {
+    let item = json!({"type":"function_call","call_id":"call_test","name":"doc_query","arguments":"{\"path\":\"\"}"});
+    let event = format!(
+        "data: {}\n\n",
+        json!({"type":"response.output_item.done","output_index":0,"item":item})
+    );
+    let done = "data: {\"type\":\"response.completed\",\"response\":{\"output\":[],\"usage\":{\"input_tokens\":10,\"output_tokens\":18}}}\n\n";
+    let output = read_stream(format!("{event}{done}").as_bytes(), &mut |_| {}).unwrap();
+    assert_eq!(output.output, vec![item]);
+    assert!(read_stream(event.as_bytes(), &mut |_| {}).is_err());
+    assert!(read_stream(done.as_bytes(), &mut |_| {}).is_err());
+    assert!(
+        read_stream(
+            format!("{event}data: {{\"type\":\"response.failed\"}}\n\n").as_bytes(),
             &mut |_| {}
         )
         .is_err()

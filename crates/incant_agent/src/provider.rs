@@ -106,6 +106,7 @@ pub fn read_stream(
     on_text: &mut dyn FnMut(&str),
 ) -> Result<Completion, AgentError> {
     let mut data = String::new();
+    let mut completed_items = std::collections::BTreeMap::new();
     let mut total = 0usize;
     for line in reader.lines() {
         let line = line.map_err(|_| AgentError::Provider("response stream interrupted".into()))?;
@@ -131,16 +132,36 @@ pub fn read_stream(
                         on_text(text);
                     }
                 }
+                "response.output_item.done" => {
+                    let index = event["output_index"].as_u64().ok_or_else(|| {
+                        AgentError::Provider("output item is missing its index".into())
+                    })?;
+                    let item = event.get("item").filter(|v| v.is_object()).ok_or_else(|| {
+                        AgentError::Provider("invalid completed output item".into())
+                    })?;
+                    completed_items.insert(index, item.clone());
+                }
                 "response.completed" => {
                     let response = &event["response"];
                     let usage = &response["usage"];
+                    let output = response["output"].as_array().ok_or_else(|| {
+                        AgentError::Provider("completed response has no output array".into())
+                    })?;
+                    // ChatGPT's direct route can send item.done events followed
+                    // by an empty terminal output array. Only use fully completed
+                    // items, and never execute them before response.completed.
+                    let output: Vec<Value> = if output.is_empty() {
+                        completed_items.into_values().collect()
+                    } else {
+                        output.clone()
+                    };
+                    if output.is_empty() {
+                        return Err(AgentError::Provider(
+                            "provider completed without any output items".into(),
+                        ));
+                    }
                     return Ok(Completion {
-                        output: response["output"]
-                            .as_array()
-                            .ok_or_else(|| {
-                                AgentError::Provider("completed response has no output".into())
-                            })?
-                            .clone(),
+                        output,
                         usage: Usage {
                             input_tokens: usage["input_tokens"].as_u64().ok_or_else(|| {
                                 AgentError::Provider("missing input usage".into())

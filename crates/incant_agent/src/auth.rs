@@ -1,5 +1,5 @@
 //! Public-client Sign in with ChatGPT, per the official 2026-10-08 contract.
-//! OAuth records live in the OS keychain. No Codex or Claude sessions are read.
+//! OAuth records live in Incant's private credential store. No Codex or Claude sessions are read.
 use crate::{AgentError, credentials::CredentialStore};
 use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD};
 use jsonwebtoken::{Algorithm, DecodingKey, Validation, decode, decode_header, jwk::JwkSet};
@@ -492,7 +492,7 @@ fn require_inference_scope(scope: &str) -> Result<(), AgentError> {
 pub fn access_token(account: &AccountMetadata) -> Result<zeroize::Zeroizing<String>, AgentError> {
     let saved = CredentialStore::load(&account.id)?;
     let mut record: OAuthCredential =
-        serde_json::from_str(&saved).map_err(|_| failure("invalid keychain credential record"))?;
+        serde_json::from_str(&saved).map_err(|_| failure("invalid saved credential record"))?;
     if record.client_id != account.client_id || record.subject != account.subject {
         return Err(failure("stored account identity mismatch"));
     }
@@ -545,7 +545,7 @@ pub fn access_token(account: &AccountMetadata) -> Result<zeroize::Zeroizing<Stri
 pub fn disconnect(account: &AccountMetadata) -> Result<bool, AgentError> {
     let secret = CredentialStore::load(&account.id)?;
     let record: OAuthCredential =
-        serde_json::from_str(&secret).map_err(|_| failure("invalid keychain credential record"))?;
+        serde_json::from_str(&secret).map_err(|_| failure("invalid saved credential record"))?;
     let revoked = (|| {
         let client = client()?;
         let endpoint = discovery(&client)?.revocation_endpoint;

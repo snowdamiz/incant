@@ -109,7 +109,8 @@ enum AuthCli {
     ApiKey,
     Models,
     Status,
-    KeychainCheck,
+    #[command(alias = "keychain-check")]
+    CredentialCheck,
     Accounts,
     Switch {
         account: String,
@@ -160,9 +161,9 @@ fn auth_command(action: AuthCli) -> Result<()> {
             store.data.api_key_connected = true;
             store.data.active = None;
             store.save()?;
-            println!("API key validated and stored in the OS keychain.");
+            println!("API key validated and stored in Incant's private credential store.");
         }
-        AuthCli::KeychainCheck => {
+        AuthCli::CredentialCheck => {
             let account = format!("smoke-{}", new_id());
             let secret = format!("temporary-probe-{}", new_id());
             CredentialStore::save(&account, &secret)?;
@@ -171,10 +172,10 @@ fn auth_command(action: AuthCli) -> Result<()> {
             let matched = loaded?.as_str() == secret;
             deleted?;
             if !matched {
-                return Err("keychain probe did not round-trip".into());
+                return Err("credential probe did not round-trip".into());
             }
             print(
-                json!({"keychain_roundtrip":true,"temporary_credential_deleted":true,"os":std::env::consts::OS}),
+                json!({"credential_roundtrip":true,"storage":CredentialStore::storage_kind(),"temporary_credential_deleted":true,"os":std::env::consts::OS}),
             )?;
         }
         AuthCli::Accounts => print(&AccountStore::open()?.data.accounts)?,
@@ -191,8 +192,15 @@ fn auth_command(action: AuthCli) -> Result<()> {
         AuthCli::Models => print(provider("model-catalog".into())?.models()?)?,
         AuthCli::Status => {
             let store = AccountStore::open()?;
+            let credential_available = if let Some(account) = store.selected() {
+                CredentialStore::load_optional(&account.id)?.is_some()
+            } else if store.data.api_key_connected {
+                CredentialStore::load_optional("api-key")?.is_some()
+            } else {
+                false
+            };
             print(
-                json!({"oauth_accounts":store.data.accounts.len(),"active_oauth":store.data.active.is_some(),"api_key_connected":store.data.api_key_connected}),
+                json!({"oauth_accounts":store.data.accounts.len(),"active_oauth":store.data.active.is_some(),"api_key_connected":store.data.api_key_connected,"credential_available":credential_available,"storage":CredentialStore::storage_kind()}),
             )?;
         }
         AuthCli::Disconnect => {
