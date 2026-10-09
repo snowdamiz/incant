@@ -231,10 +231,10 @@ function snapshotFromEngine(read) {
             ...(read.source_diagnostics ?? []).map((issue)=>({
                     id: `asset-source:${issue.asset_id}`,
                     severity: 'error',
-                    message: `${issue.source}: ${issue.message}`,
+                    message: issue.message,
                     entity: null,
                     component: null,
-                    path: null
+                    path: issue.source
                 }))
         ],
         history: {

@@ -82,7 +82,7 @@ describe("native bridge", () => {
     await bridge.start();
     expect(bridge.getSnapshot().diagnostics).toEqual([{
       id: 'asset-source:00000000000000000000000011', severity: 'error',
-      message: 'models/prop.gltf: Missing buffer', entity: null, component: null, path: null,
+      message: 'Missing buffer', entity: null, component: null, path: 'models/prop.gltf',
     }]);
     expect(bridge.getSnapshot().viewport?.status).toBe('attached');
     expect(bridge.getSnapshot().entities[entity]?.name).toBe('Cube');
