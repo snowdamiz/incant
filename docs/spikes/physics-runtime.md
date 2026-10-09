@@ -54,10 +54,11 @@ behavior evidence, not live-device or complete engine acceptance.
 
 ## Integration evidence
 
-The complete workspace passes 153 ordinary Rust tests, followed by one additional
-physics-material behavior case (all seven physics tests pass). All 40 explicit
-real-GPU tests pass, as do Clippy, 295 UI tests/build, five Python tool tests,
-Rust format, generated bridge/schema/SDK and convention checks. Native macOS and
+The final integrated workspace passes 154 ordinary Rust tests, Clippy, 312 UI
+tests/build, five Python tool tests, Rust format, generated bridge/SDK and
+convention checks. The earlier 40 explicit real-GPU checks pass; all 26 final
+physics look-dev captures are byte-identical to Claude’s reviewed engine frames.
+The final native bundle builds with embedded frontend assets. Native macOS and
 actual browser WASM execute the integrated falling-sphere probe for 120 ticks and
 produce the same final Y of 0.49993008375167847 m. The new iOS simulator app also
 executes the real core/physics contact assertion and reports status 0. This proves
@@ -89,3 +90,23 @@ Three alternating before/after trials give median p95 values 9.994 ms and 8.798 
 All samples, including a 17.774 ms baseline outlier, remain in the evidence. These
 are local analytical measurements with concurrent development work, exclude
 rendering, and do not pass a game/device performance gate.
+
+
+## Inspector integration
+
+The shared registry now supplies physics field order, units and collision-mask
+widget metadata. The bridge accepts only unambiguous tagged object unions.
+Claude’s read-only Inspector presents known shapes, grouped material and solver
+fields, raw collision-mask values with group summaries, and exact nested/axis
+diagnostics. Unknown or missing tags retain their values and show an explicit
+mismatch. Schema order takes precedence over presentation grouping. Damping
+units were corrected to 1/s before the final native build.
+
+Claude approved the browser fixture at 1440×900 and 1000×650 and actual headless
+physics motion. Final native CUA captures cover the three shapes, AngularVelocity,
+damping, collision fields, keyboard focus and scroll/resize behavior at 1440×874
+logical and the true 1000×650 minimum. Native visual acceptance is pending Claude’s
+review. Captures remain ignored because the titlebar contains the saved account
+label; hashes and sanitized accessibility evidence identify the review artifacts.
+The saved account restored without another login or Keychain prompt. The native
+viewport is an authored static scene; no play-in-editor controls are claimed.

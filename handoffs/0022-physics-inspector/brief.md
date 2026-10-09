@@ -1,3 +1,21 @@
+# Small follow-up: compact Agent empty state
+
+Your native review found the Agent not ready heading clipped behind the composer
+at the supported 180 px panel height. Please fix this now as a small follow-up
+within this packet. The director asked to keep correcting small UI issues; no
+separate permission or task is needed. Preserve the component ordering for now;
+this follow-up only addresses real compact-panel clipping and scrolling/accessibility.
+
+Use a browser fixture matching the native unavailable-agent state at 1000x650
+and agent panel height 180. Review the pixels and keyboard/scroll access, and
+check the regular wide layout for regressions. Keep the neutral styling and
+left Assets/bottom diagnostic arrangement. Do not add capabilities or change
+engine logic. Run the UI checks and commit Built-by: claude. Astra will integrate,
+rebuild native, recapture the changed panel and the requested mouse-free Tab
+focus on Shape/Memberships, and verify the corrected native field names.
+
+---
+
 # Final native review request
 
 The integrated implementation is at 46442329c52a6cf65be2fe5372f5d431b36b597d.
