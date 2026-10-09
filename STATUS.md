@@ -20,6 +20,9 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
 - Real execution of platform probes on macOS, browser/WASM and iOS simulator.
 - Completed Claude Opus 5.5 ACP handoff, redesigned UI with a custom titlebar,
   retained before/after screenshots, and native integration.
+- Supplied wisp mascot integrated into the titlebar, favicon and native app icons;
+  [visual and packaging evidence](docs/spikes/wisp-mascot.md) records verification
+  and the remaining native Dock visual-review limitation.
 - Fourteen architecture records, generated TS structural bindings, developer docs,
   gate ledger and GitHub workflow source.
 

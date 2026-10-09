@@ -35,9 +35,12 @@ Run these from the repository root. They require Chrome, and the icns step requi
 ```
 node handoffs/0004-wisp-mascot/tools/trace-mascot.mjs     # optional: re-trace master
 node handoffs/0004-wisp-mascot/tools/compose-icons.mjs    # optional: rebuild both SVGs
-npm run icon --workspace editor/ui                         # public/icon.png
+npm run icon --workspace editor/ui                         # public/icon.png + native copy
 npm run icon:macos --workspace editor/ui                   # brand/Incant.icns
 ```
 
-`editor/app/icons/icon.png` is a copy of `public/icon.png` used by the native host.
-Copy it again after you regenerate the icons.
+`npm run icon` also updates `editor/app/icons/icon.png`, used by the native host.
+The Tauri configuration references that PNG and `brand/Incant.icns` explicitly.
+`python3 tools/editor-dev.py --release` rebuilds the local development bundle,
+copies the ICNS into its Resources directory, and declares it in Info.plist.
+Relaunch the application after rebuilding to load the new embedded UI and icon.

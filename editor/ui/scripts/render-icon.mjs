@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Rasterizes public/icon.svg to public/icon.png (512×512, transparent corners)
- * with a locally installed Chrome. Re-run after editing the SVG.
+ * Rasterizes public/icon.svg to public/icon.png (512×512, transparent background)
+ * and updates the Tauri host's copy. Re-run after editing the SVG.
  */
-import { existsSync, readFileSync } from 'node:fs';
+import { copyFileSync, existsSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
@@ -23,4 +23,5 @@ try {
 } finally {
   await browser.close();
 }
-console.log('Wrote public/icon.png');
+copyFileSync(join(publicDir, 'icon.png'), resolve(publicDir, '../../app/icons/icon.png'));
+console.log('Wrote public/icon.png and app/icons/icon.png');
