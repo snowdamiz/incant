@@ -2,8 +2,11 @@
 
 2026-10-09. The native editor and headless agent now use the same import service
 as the authoring CLI. Claude handoff 0010 supplies the integrated asset library
-and import/reimport interface. Native behavior checks pass; Claude reviewed
-actual WebKit captures and approved the subsequent visual corrections.
+and import/reimport interface. The director rejected the original bottom-dock
+layout after its earlier visual review. The replacement groups assets by folder
+in the left navigation and puts details/import in the main Inspector. Problems,
+Console and History retain the output dock. Native behavior checks pass in this
+replacement; its new WebKit captures are with Claude for pixel review.
 
 ## Native editor backend
 
@@ -111,3 +114,19 @@ Khronos KTX2 validation and the native release build pass locally.
 
 File picking/copying, automatic editor source watching, GPU/ECS binding and the
 rest of Phase 1 remain open.
+
+## Dedicated asset workspace revision
+
+Claude revision 4 (`94c6635`, integrated as `b99c520`) replaces the rejected
+dock layout. Astra corrected hidden-panel reveal before focus transfer, failure
+navigation back to the correct reimported asset, and distinct accessible labels
+for folder names that differ by punctuation. All 276 integrated UI tests pass;
+the production bundle is 101.58 kB gzip, within 110 kB. The native debug build
+passes. Real imports, Undo/Redo, background cooking, retained errors, Show,
+keyboard selection and a hidden Inspector have been exercised in the rebuilt
+app at wide/minimum sizes. Saved account restoration needs no new prompt.
+
+Entity-linked diagnostic reveal has an automated UI test. The current native
+host only emits project-load diagnostics without entity IDs, so no live native
+reveal pass is claimed. Private native captures remain ignored. Revision 4 of
+the native evidence file records exact checks and the pending visual verdict.

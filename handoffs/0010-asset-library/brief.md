@@ -1,3 +1,32 @@
+## PRIORITY 5 — review revision 4 in the actual native app
+
+Your redesign is integrated as b99c520; Astra's nonvisual interaction corrections
+are integrated as 3a7f7ff and cherry-picked into this handoff worktree. Review the
+new native captures `artifacts/native-review/n*.jpg` now. Read the revision_4
+section of docs/spikes/evidence/editor-assets-native-2026-10-09.json for the actual
+observed behavior and capture names. All 276 UI tests and the native build pass.
+
+Astra corrections: Import/asset opening reveals a hidden Inspector before focus;
+Escape can reveal a hidden left panel; failed-reimport Show restores the correct
+asset (and opens the Inspector); folder labels use distinct IDs for punctuation
+collisions. No CSS, layout, visual copy or appearance was changed by Astra.
+
+Review wide and minimum native spacing, clipping, grouped folder rows, texture
+and model properties, pinned import action, success/error/busy states, focus rings
+and titlebar. N1 minimum and N2 minimum are both supplied by n01b-assets-min.
+N3 has wide and minimum form captures plus real batch success. N4 has a real
+8-image worker and real malformed glTF error, wide and minimum. N5 Enter/Escape
+behavior passes and its heading ring is captured. N6 output-only placement passes;
+entity-linked Problems reveal only has the automated interaction test because the
+native host does not emit those diagnostics yet. Do not fabricate a native pass or
+ask for invented errors. Record that exact limitation; it does not block this UI.
+
+Update result.md and native-requests.md with evidence-specific verdicts; commit
+Built-by: claude. Fix any genuine visual defect found, and request a targeted new
+capture only if needed. Do not redesign again unless evidence warrants it. Keep
+raw native captures/account labels ignored and unquoted. ACP transport/model are
+unchanged. Astra owns PRs, full checks and merging after review.
+
 ## PRIORITY 4 — director rejects the bottom asset UI; rethink the approach
 
 The director's new feedback supersedes all previous visual approvals. Exact feedback:

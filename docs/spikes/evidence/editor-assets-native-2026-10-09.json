@@ -20,7 +20,7 @@
     "account_focus": "PASS: pointer/keyboard dialog opens on Close; Escape restores opener; Claude confirms visible Close focus ring.",
     "restart": "PASS: quitting and reopening the same saved project recovered all 10 registered assets, four history entries and the concurrent entity rename; saved account remained connected."
   },
-  "visual_review": "PASS: Claude Opus 5.5 through ACP reviewed original captures and all final re-captures. Review commit 6a06e3e; handoffs/0010-asset-library/result.md contains exact verdicts.",
+  "visual_review": "Previous dock-layout approvals superseded by director feedback. Revision 4 native captures await Claude ACP review.",
   "private_capture_directory": "artifacts/native-import-review/ (ignored; account label may be present; do not publish)",
   "limitations": [
     "No manual Windows/Linux checks required by director; hosted checks remain applicable.",
@@ -49,5 +49,40 @@
     "native_release_build": "pass",
     "generated_contracts": "pass",
     "khronos_ktx2": "pass"
+  },
+  "revision_4": {
+    "build": "3a7f7ff",
+    "design_commit": "94c6635 (integrated as b99c520)",
+    "ui_tests": 276,
+    "native_results": {
+      "placement": "PASS: asset navigation in left column; properties/import in Inspector; dock contains only Problems, Console, History",
+      "batch": "PASS: triangle + normal texture, Normal map interpretation, single history increment 7 to 8; native Undo restored Linear, Redo restored Normal map",
+      "busy": "PASS: eight changed 2048x2048 PNGs cooked in real worker; hierarchy/assets keyboard switching remained responsive; history 8 to 9",
+      "error": "PASS: malformed glTF retained path and exact engine error; asset count and history unchanged; choosing a texture and Show restored failed form and focused path",
+      "keyboard": "PASS: Home/End select model/texture; Enter focuses Inspector heading; Escape restores same row; tab arrows switch views",
+      "hidden_inspector": "PASS: hidden right panel reopened by Import, focusing Path 1",
+      "minimum_layout": "Captured actual native minimum Window > Move & Resize > Bottom Right; restored previous size after checks. Pixel review pending.",
+      "saved_account": "Existing connection restored in rebuilt app without sign-in or Keychain prompt. No account actions performed.",
+      "problems_reveal": "Automated UI test passes. Native live entity-linked diagnostics are not yet emitted by editor/bridge/native.ts; no fabricated native result."
+    },
+    "native_captures": [
+      "n01-assets-wide.jpg",
+      "n01b-assets-min.jpg",
+      "n02-texture-details.jpg",
+      "n02b-model-details.jpg",
+      "n03-import-form.jpg",
+      "n03b-import-success.jpg",
+      "n03c-import-form-min.jpg",
+      "n04-busy.jpg",
+      "n04b-failed.jpg",
+      "n04c-failed-min.jpg",
+      "n05-keyboard.jpg"
+    ],
+    "integration_corrections": [
+      "Hidden destination panels reopen before focus transfer",
+      "Failed reimport Show selects its own asset even after another asset is selected",
+      "Folder labels with punctuation retain distinct accessible IDs"
+    ],
+    "visual_verdict": "Pending Claude review"
   }
 }

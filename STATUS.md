@@ -73,8 +73,12 @@ within its documented workload.
   Rust behavior tests and 267 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
   handoff 0010 supplies the integrated asset library and import/reimport interface.
   Real native batch import, Undo/Redo, texture reimport, error recovery, concurrent
-  edits, stale-import rejection and text/project Undo separation pass. Claude reviewed the actual native captures and the four visual corrections;
-  all native requests pass, including the final paste interaction checks. Automatic editor
+  edits, stale-import rejection and text/project Undo separation pass. The director
+  rejected the bottom-dock asset layout. Claude's replacement moves Assets to the
+  left navigation and properties/import into the main Inspector. The dock now holds
+  only Problems, Console and History. All 276 UI tests pass; native batch, busy,
+  failure recovery, keyboard and hidden-Inspector checks pass in the replacement.
+  Its native pixel review is pending; PR #8 remains a draft until reviewed. Automatic editor
   watching remains open.
   Agent asset list/inspect/import now use the shared service and a project-bound
   filesystem capability. Three new agent tests and a live saved-session import
