@@ -53,6 +53,13 @@ within its documented workload.
 
 ## Active work
 
+- An isolated physics candidate probe runs pinned Jolt and Rapier with fixed
+  stepping and repeated position checks. Native Jolt contact, raycast, rollback,
+  invalid-input, stale-handle and sensor checks pass. The selected Jolt binding
+  refuses iOS simulator/Web targets; Rapier builds there. Hosted cross-desktop
+  evidence and the engine integration decision remain open. No physics backend
+  has been added to the engine. See [candidate evidence](docs/spikes/physics-candidates.md).
+
 - Opt-in directional cascades are implemented with scoped Claude appearance
   and native acceptance. The scheduled depth pass honors imported caster flags,
   alpha masks, reflection and sidedness; retained queued frames and cascade

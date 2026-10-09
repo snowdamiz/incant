@@ -1,0 +1,71 @@
+name: Physics candidate feasibility
+on:
+  pull_request:
+    paths:
+      - 'tools/probes/physics/**'
+      - '.github/workflows/physics-candidates.yml'
+      - 'rust-toolchain.toml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: physics-candidates-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: rustup show
+      - run: cmake --version
+      - run: cargo build --manifest-path tools/probes/physics/Cargo.toml --release --locked
+      - run: cargo test --manifest-path tools/probes/physics/Cargo.toml --release --locked
+      - run: python tools/probes/physics/run.py --output artifacts/physics --trials 3
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: physics-${{ matrix.os }}
+          path: artifacts/physics/results.json
+          if-no-files-found: error
+  compare:
+    needs: native
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: physics-*
+          path: results
+      - name: Compare cross-host candidate position hashes
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          files = sorted(Path('results').glob('*/results.json'))
+          assert len(files) == 3, 'missing host evidence'
+          reports = [json.loads(path.read_text()) for path in files]
+          assert {r['host']['system'] for r in reports} == {'Darwin', 'Linux', 'Windows'}
+          for mode in ['jolt1', 'jolt4', 'rapier']:
+              hashes = {next(row['positions_sha256'] for row in r['summary'] if row['mode'] == mode) for r in reports}
+              assert len(hashes) == 1, f'{mode}: cross-host position sequence mismatch'
+          print('All candidate position sequences match across three hosted desktops.')
+          print('This is one synthetic workload, not complete runtime determinism or a release gate.')
+          PY
+  portability:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: rustup target add aarch64-apple-ios-sim wasm32-unknown-unknown
+      - run: python tools/probes/physics/portability.py --output artifacts/physics-portability
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: candidate-portability
+          path: artifacts/physics-portability
+          if-no-files-found: error
