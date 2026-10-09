@@ -33,6 +33,7 @@ pub(crate) struct PipelineKey {
 }
 pub(crate) struct MaterialSystem {
     pub globals: wgpu::BindGroupLayout,
+    environment: wgpu::BindGroupLayout,
     layout: wgpu::BindGroupLayout,
     fallback: wgpu::TextureView,
     sampler: wgpu::Sampler,
@@ -51,7 +52,11 @@ fn uniform_entry(binding: u32, visibility: wgpu::ShaderStages) -> wgpu::BindGrou
     }
 }
 impl MaterialSystem {
-    pub fn new(device: &wgpu::Device, queue: &wgpu::Queue) -> Self {
+    pub fn new(
+        device: &wgpu::Device,
+        queue: &wgpu::Queue,
+        environment: &wgpu::BindGroupLayout,
+    ) -> Self {
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Material frame"),
             entries: &[uniform_entry(0, wgpu::ShaderStages::VERTEX_FRAGMENT)],
@@ -114,6 +119,7 @@ impl MaterialSystem {
         );
         Self {
             globals,
+            environment: environment.clone(),
             layout,
             fallback: texture.create_view(&Default::default()),
             sampler: device.create_sampler(&Default::default()),
@@ -290,7 +296,13 @@ impl MaterialSystem {
         Ok(cache
             .entry(key)
             .or_insert_with(|| {
-                crate::material_pipeline::build(device, key, &self.globals, &self.layout)
+                crate::material_pipeline::build(
+                    device,
+                    key,
+                    &self.globals,
+                    &self.layout,
+                    &self.environment,
+                )
             })
             .clone())
     }

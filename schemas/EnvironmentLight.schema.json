@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A distant, equirectangular image light. Rotation is about world +Y and does\nnot inherit the entity transform. One environment is allowed per project\nuntil active-scene selection is implemented.",
+  "order": [
+    "texture",
+    "intensity",
+    "rotation_degrees"
+  ],
+  "properties": {
+    "intensity": {
+      "format": "double",
+      "maximum": 100,
+      "minimum": 0,
+      "type": "number"
+    },
+    "rotation_degrees": {
+      "format": "double",
+      "maximum": 360,
+      "minimum": -360,
+      "type": "number"
+    },
+    "texture": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "texture",
+    "intensity",
+    "rotation_degrees"
+  ],
+  "title": "EnvironmentLight",
+  "type": "object"
+}

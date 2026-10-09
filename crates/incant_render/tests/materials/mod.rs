@@ -12,6 +12,78 @@ pub struct Fixture {
     pub asset_id: String,
 }
 impl Fixture {
+    pub fn environment(
+        &mut self,
+        pixels: &[u8],
+        width: u32,
+        height: u32,
+        usage: incant_doc::TextureUsage,
+    ) -> String {
+        write_png(
+            &self.root.path().join("environment.png"),
+            pixels,
+            width,
+            height,
+        );
+        let cooked = incant_assets::cook_texture(
+            self.root.path(),
+            Path::new("environment.png"),
+            &self.root.path().join(".incant/cache/textures"),
+            usage,
+        )
+        .unwrap();
+        let id = self
+            .project
+            .assets
+            .values()
+            .find(|a| a.path == "environment.png")
+            .map(|a| a.id.clone())
+            .unwrap_or_else(new_id);
+        self.project.assets.insert(
+            id.clone(),
+            Asset {
+                id: id.clone(),
+                name: "Environment".into(),
+                path: "environment.png".into(),
+                kind: "texture".into(),
+                sha256: cooked.metadata.fingerprint,
+                import_settings: Some(incant_doc::AssetImportSettings::Texture { usage }),
+            },
+        );
+        let entities = &mut self.project.scenes.values_mut().next().unwrap().entities;
+        if !entities
+            .values()
+            .any(|e| e.components.contains_key("EnvironmentLight"))
+        {
+            let mut entity = Entity::new("Environment");
+            entity.components.insert(
+                "EnvironmentLight".into(),
+                json!(incant_doc::EnvironmentLight {
+                    texture: id.clone(),
+                    intensity: 1.,
+                    rotation_degrees: 0.,
+                }),
+            );
+            entities.insert(entity.id.clone(), entity);
+        }
+        self.assets
+            .sync_project(&self.project, self.root.path())
+            .unwrap();
+        id
+    }
+    pub fn environment_setting(&mut self, field: &str, value: f64) {
+        let entity = self
+            .project
+            .scenes
+            .values_mut()
+            .next()
+            .unwrap()
+            .entities
+            .values_mut()
+            .find(|e| e.components.contains_key("EnvironmentLight"))
+            .unwrap();
+        entity.components.get_mut("EnvironmentLight").unwrap()[field] = json!(value);
+    }
     pub fn new(material: Value) -> Self {
         let root = tempfile::tempdir().unwrap();
         // A quad centered on the camera target, with consistent +Z winding/UVs.

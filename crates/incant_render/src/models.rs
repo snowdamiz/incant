@@ -41,6 +41,7 @@ pub struct RenderScene {
     pub(crate) diagnostics: Vec<glam::Mat4>,
     batches: Vec<Batch>,
     stats: SceneStats,
+    environment: Option<crate::environment::Binding>,
 }
 impl RenderScene {
     /// Identifies the available appearance without claiming production lighting.
@@ -65,6 +66,15 @@ impl Renderer {
         self.upload_scene(crate::scene::resolve(project, None)?)
     }
     fn upload_scene(&self, mut resolved: ResolvedScene) -> Result<RenderScene> {
+        let environment = if resolved.environment.is_some() || !resolved.models.is_empty() {
+            Some(self.environments.prepare(
+                &self.device,
+                &self.queue,
+                resolved.environment.take(),
+            )?)
+        } else {
+            None
+        };
         let mut cache = self
             .models
             .lock()
@@ -192,6 +202,7 @@ impl Renderer {
             diagnostics: resolved.diagnostics,
             batches,
             stats: resolved.stats,
+            environment,
         })
     }
 
@@ -213,6 +224,10 @@ impl Renderer {
             radiance: [f32; 4],
             environment: [f32; 4],
         }
+        let environment = scene
+            .environment
+            .as_ref()
+            .expect("model scene has environment");
         let frame = Frame {
             matrix: crate::camera(target.rect[2] / target.rect[3]).to_cols_array_2d(),
             eye: glam::Vec3::from_array(crate::studio::EYE)
@@ -224,9 +239,12 @@ impl Renderer {
             radiance: glam::Vec3::from_array(crate::studio::LIGHT_RADIANCE)
                 .extend(0.)
                 .to_array(),
-            environment: glam::Vec3::from_array(crate::studio::DIFFUSE_ENVIRONMENT)
-                .extend(0.)
-                .to_array(),
+            environment: [
+                environment.intensity,
+                environment.rotation.cos(),
+                environment.rotation.sin(),
+                crate::environment::MAX_SPECULAR_LOD,
+            ],
         };
         let camera = self
             .device
@@ -310,6 +328,7 @@ impl Renderer {
             multiview_mask: None,
         });
         pass.set_bind_group(0, &bind_group, &[]);
+        pass.set_bind_group(2, &environment.resource.group, &[]);
         let [x, y, w, h] = target.rect;
         pass.set_viewport(x, y, w, h, 0., 1.);
         for draw in opaque.iter().chain(&transparent) {
