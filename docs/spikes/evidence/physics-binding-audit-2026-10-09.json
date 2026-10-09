@@ -1,0 +1,23 @@
+{
+  "joltc_sys_version": "0.3.1+Jolt-5.0.0",
+  "jolt_sys_version": "0.1.5",
+  "records": [
+    {
+      "name": "joltc-ios",
+      "sha256": "7b8afae35786c640301d9e4d442739a264d746386ce57d0460ad07166c644306",
+      "result": "C++ build reached; bindgen rejects arm64-apple-ios-sim Clang triple"
+    },
+    {
+      "name": "joltc-wasm",
+      "sha256": "115fe3998ff938e93ac99f88df4da08d347ab6f4baa21278776f71f5fa2bb198",
+      "result": "CMake compiler link check fails with Apple Clang; no WASM C++ toolchain configured"
+    },
+    {
+      "name": "jolt-sys-build-script",
+      "sha256": "4e25b0f40351e1dfb5e27ab1024fe98559342ac9ca27dc9eb23a30b0733bb7d4",
+      "result": "source hardcodes Visual Studio 16 2019, Windows runtime libraries and SSE flags; not a cross-target build"
+    }
+  ],
+  "scope": "local published binding/toolchain checks, not proof Jolt core cannot support these targets",
+  "command": "CMAKE=<local CMake4.2.3> ./tools/cargo check --manifest-path artifacts/joltc-portability/Cargo.toml --target <aarch64-apple-ios-sim|wasm32-unknown-unknown> --locked"
+}

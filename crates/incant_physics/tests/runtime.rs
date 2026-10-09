@@ -307,3 +307,87 @@ fn invalid_document_and_step_leave_live_state_unchanged() {
     assert!(PreparedPhysics::new(&project).is_err());
     assert_eq!(physics.states(), before);
 }
+
+#[test]
+fn authored_friction_restitution_gravity_and_damping_change_motion() {
+    let slide = |friction: f64| {
+        let (mut project, scene, floor, body) = setup();
+        let entities = &mut project.scenes.get_mut(&scene).unwrap().entities;
+        let ground = entities.get_mut(&floor).unwrap();
+        ground.components.get_mut("Collider").unwrap()["friction"] = json!(friction);
+        ground.components.get_mut("Collider").unwrap()["shape"]["half_extents"] =
+            json!([100., 0.5, 100.]);
+        let moving = entities.get_mut(&body).unwrap();
+        moving.components.get_mut("Transform").unwrap()["translation"] = json!([0., 0.51, 0.]);
+        moving.components.get_mut("Collider").unwrap()["friction"] = json!(friction);
+        moving
+            .components
+            .insert("Velocity".into(), json!({"linear":[5.,0.,0.]}));
+        let mut world = runtime(&project);
+        for _ in 0..120 {
+            world.step(1. / 60.).unwrap();
+        }
+        world.states()[&body].translation[0]
+    };
+    assert!(slide(1.) < slide(0.) * 0.5);
+    let rebound = |restitution: f64| {
+        let (mut project, scene, floor, body) = setup();
+        let entities = &mut project.scenes.get_mut(&scene).unwrap().entities;
+        for id in [&floor, &body] {
+            entities
+                .get_mut(id)
+                .unwrap()
+                .components
+                .get_mut("Collider")
+                .unwrap()["restitution"] = json!(restitution);
+        }
+        entities
+            .get_mut(&body)
+            .unwrap()
+            .components
+            .get_mut("Collider")
+            .unwrap()["shape"] = json!({"type":"sphere","radius":0.5});
+        let mut world = runtime(&project);
+        let mut hit = false;
+        let mut maximum: f64 = 0.;
+        for _ in 0..180 {
+            world.step(1. / 60.).unwrap();
+            let y = world.states()[&body].translation[1];
+            hit |= y < 0.55;
+            if hit {
+                maximum = maximum.max(y);
+            }
+        }
+        maximum
+    };
+    assert!(rebound(1.) > 2.);
+    assert!(rebound(0.) < 0.6);
+    let (mut project, scene, _, body) = setup();
+    let moving = project
+        .scenes
+        .get_mut(&scene)
+        .unwrap()
+        .entities
+        .get_mut(&body)
+        .unwrap();
+    moving.components.insert(
+        "RigidBody".into(),
+        json!(RigidBody {
+            gravity_scale: 0.,
+            linear_damping: 5.,
+            can_sleep: false,
+            ..Default::default()
+        }),
+    );
+    moving
+        .components
+        .insert("Velocity".into(), json!({"linear":[5.,0.,0.]}));
+    let mut world = runtime(&project);
+    for _ in 0..120 {
+        world.step(1. / 60.).unwrap();
+    }
+    let state = &world.states()[&body];
+    assert_eq!(state.translation[1], 4.);
+    assert!(state.velocity[0] < 0.01);
+    assert!(!state.sleeping);
+}

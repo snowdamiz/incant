@@ -5,7 +5,7 @@ import init, { smoke } from './pkg/incant_platform_smoke.js';
 try {
   await init();
   window.__INCANT_SMOKE__ = JSON.parse(smoke());
-  console.log('INCANT_SMOKE_PASS', window.__INCANT_SMOKE__);
+  console.log('INCANT_SMOKE_PASS', JSON.stringify(window.__INCANT_SMOKE__));
 } catch (error) {
   window.__INCANT_SMOKE__ = { ok: false, error: String(error) };
   console.error('INCANT_SMOKE_FAIL', error);

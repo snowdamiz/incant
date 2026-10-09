@@ -2,8 +2,9 @@
 
 The engine now uses pinned Rapier 0.36 with enhanced determinism. The fallback
 choice and Jolt binding evidence are recorded in ADR 0003; no phase gate is
-claimed. This working increment has not yet completed native visual review,
-full workspace/hosted checks or target execution.
+claimed. This working increment has not yet completed native visual review or
+hosted checks. The full local workspace, actual GPU regression, browser and iOS
+simulator checks below pass.
 
 `RigidBody`, `Collider` and `AngularVelocity` are typed authored components.
 Create and modify them through ordinary `incant_cmd` transactions, including
@@ -42,10 +43,34 @@ Position and velocity ranges are validated; a numerical solver failure stops
 further simulation until play restarts. Character controllers, mesh/compound
 colliders, hierarchy/scale support and serialized rollback remain open.
 
-Initial new behavior checks: six physics runtime cases, two script integration
+Initial new behavior checks: seven physics runtime cases, two script integration
 cases and one command-bus atomicity/Undo/Redo case pass. They cover settling and
 sleep, replay from authored state, exact sync preservation, all three primitive
 shapes, high-speed CCD, kinematics/rotation, masks, scene isolation, sensor
 entry/exit, ray hit/exclusion/tie/invalid input, script impulse-by-velocity,
-query budget, hot reload and unchanged author data. This is deterministic local
+query budget, hot reload, friction/restitution/gravity/damping and unchanged author data. This is deterministic local
 behavior evidence, not live-device or complete engine acceptance.
+
+
+## Integration evidence
+
+The complete workspace passes 153 ordinary Rust tests, followed by one additional
+physics-material behavior case (all seven physics tests pass). All 40 explicit
+real-GPU tests pass, as do Clippy, 295 UI tests/build, five Python tool tests,
+Rust format, generated bridge/schema/SDK and convention checks. Native macOS and
+actual browser WASM execute the integrated falling-sphere probe for120 ticks and
+produce the same final Y of0.49993008375167847m. The new iOS simulator app also
+executes the real core/physics contact assertion and reports status0. This proves
+this integrated workload runs there; it is not a physical-device performance gate.
+
+`python3 tools/probes/physics-runtime.py <new-output-directory>` exercises public
+CLI/RPC creation, atomic unsupported-scale rejection, Undo/Redo, persistent
+reopening and play/stop. Two360-tick runs have exact runtime snapshots. A compiled
+TypeScript behavior raycasts the real floor and changes Velocity at tick121;
+its body rises to0.581562m by tick122. Hashes prove the authored project and
+journal are unchanged. Desktop CI now runs this probe on macOS/Windows/Linux;
+platform CI includes the actual physics assertion on all six targets.
+
+[Machine evidence](evidence/physics-runtime-2026-10-09.json) records build/log
+hashes and current pending review. [Supplemental binding audit](evidence/physics-binding-audit-2026-10-09.json)
+records the additional published Jolt binding checks behind ADR0003.
