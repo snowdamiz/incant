@@ -42,22 +42,17 @@ export const principles: Principle[] = [
   {
     numeral: '01',
     title: 'One history',
-    body: 'Clicks, scripts, teammates and the agent all make the same kind of edit, in one timeline, with a name on each.',
+    body: 'Your clicks, your scripts, your team and the agent, in one undoable timeline.',
   },
   {
     numeral: '02',
     title: 'Plain-text worlds',
-    body: 'Scenes, materials and graphs are readable documents. Concurrent edits merge, and you review a change the way you review code.',
+    body: 'Scenes, materials and graphs are documents you can diff, review and merge.',
   },
   {
     numeral: '03',
     title: 'Evidence, not guesses',
-    body: 'The agent plays the game, watches the viewport and reads the console before it says it is done.',
-  },
-  {
-    numeral: '04',
-    title: 'Yours to run',
-    body: 'Connect your own model provider. The editor works offline, with no Incant account required.',
+    body: 'The agent plays the game and shows its proof before it calls a change done.',
   },
 ]
 
@@ -70,71 +65,53 @@ export const faqItems: FaqItem[] = [
   {
     question: 'What is Incant?',
     answer:
-      'One application that is a 3D and 2D modeling tool, a game engine and an editor. Build by hand, or describe what you want and let an AI agent make the change in the same project, through the same commands.',
+      'A 3D and 2D modeling tool, game engine and editor in one application. Build by hand, or ask the AI agent to make the change through the same commands.',
   },
   {
     question: 'Can the agent change things without me?',
     answer:
-      'Every agent action is a transaction in the same history as your own edits. Choose whether it asks first, inspect what it did, amend it, or undo the whole thing in one step. Each entry records who made it.',
+      'Only as far as you allow. Every agent action is a transaction in your history: inspect it, amend it, or undo it in one step.',
   },
   {
     question: 'Which AI model does it use?',
     answer:
-      'Yours. Connect OpenAI, Anthropic, Google or a local model, and pick one per task. Calls go directly from your machine to the provider, credentials stay on your machine, and every turn shows its cost against a budget you set.',
+      'Yours. Connect OpenAI, Anthropic, Google or a local model and pick one per task. Credentials stay on your machine, and every turn shows its cost.',
   },
   {
     question: 'Does it work offline?',
     answer:
-      'Yes. The editor works fully offline with no Incant account, and no editing feature sits behind a login. The agent needs a model connection, or a local model if you prefer to stay offline.',
+      'Yes. The editor needs no connection and no Incant account. The agent needs a model provider, or a local model.',
   },
   {
     question: 'Can my team work on the same project?',
     answer:
-      'Yes. A project is a mergeable document, so teammates and the agent can edit the same scene at once without conflicts. An Incant account adds cloud sync and invitations. Everything else works without one.',
+      'Yes. Projects merge concurrent edits, from teammates and the agent alike. An Incant account adds cloud sync and invitations.',
   },
   {
     question: 'Do I still need Blender?',
     answer:
-      'For most game assets, no. Geometry graphs, mesh cleanup, materials, terrain and animation all live in the engine. Detailed sculpting stays in dedicated tools by design, and those meshes import as glTF or FBX.',
+      'For most game assets, no. Detailed sculpting stays in dedicated tools by design, and those meshes import as glTF or FBX.',
   },
   {
     question: 'What kinds of games is it for?',
     answer:
-      '2D and 3D games written in TypeScript, from templates for third-person, first-person, 2D platformer and top-down. Online multiplayer is built in, with server-authoritative and rollback modes, and cross-play between desktop and mobile.',
+      '2D and 3D games in TypeScript, from third-person, first-person, platformer and top-down templates, with online multiplayer and cross-play built in.',
   },
 ]
 
-/* Content tools (PLAN.md Phase 4). Prose groups, not a feature checklist. */
-export interface ToolGroup {
-  title: string
-  body: string
+/* Content tools (PLAN.md Phase 4), as a scannable index rather than prose. */
+export interface ToolEntry {
+  term: string
+  gloss: string
 }
 
-export const toolGroups: ToolGroup[] = [
-  {
-    title: 'Geometry graphs',
-    body: 'Build meshes from primitives, booleans, extrusions, bevels, subdivision, arrays, curves and lofts, then scatter, instance and displace them with noise. Graphs are saved as text, so the agent can write one and you can review it.',
-  },
-  {
-    title: 'Mesh tools',
-    body: 'Cleanup turns imported and generated meshes into engine-ready ones, with automatic retopology and UVs, LODs, decimation, and normal and AO baking. A light brush sculpt mode handles adjustments.',
-  },
-  {
-    title: 'Materials',
-    body: 'A shader graph compiles to WGSL, with nodes for PBR inputs, math, textures, UV operations and vertex animation. When no node fits, you or the agent can write WGSL directly.',
-  },
-  {
-    title: 'Terrain and light',
-    body: 'Paint heightmaps, layer materials and scatter foliage across terrain that streams in. Baked lightmaps and probe volumes light every tier, with screen-space GI on desktop.',
-  },
-  {
-    title: 'Animation and effects',
-    body: 'Retarget animation between rigs, set up IK, build animation graphs and cut cinematics on a timeline. GPU particles get a graph editor of their own.',
-  },
-  {
-    title: 'Generated assets',
-    body: 'Plug in providers for image-to-3D with automatic cleanup, texture sets and humanoid animation from text. Results go through the same pipeline as imported glTF and FBX, with licensing metadata attached.',
-  },
+export const toolIndex: ToolEntry[] = [
+  { term: 'Geometry graphs', gloss: 'Booleans, bevels, lofts, arrays, scatter' },
+  { term: 'Mesh tools', gloss: 'Retopology, UVs, LODs, baking, light sculpt' },
+  { term: 'Materials', gloss: 'Shader graphs compiled to WGSL' },
+  { term: 'Terrain', gloss: 'Heightmaps, layered materials, foliage' },
+  { term: 'Animation and VFX', gloss: 'Retargeting, IK, timelines, particles' },
+  { term: 'Generated assets', gloss: 'Image-to-3D, texture sets, motion' },
 ]
 
 /* The interactive geometry graph in the modeling stage. Values are illustrative. */
@@ -156,51 +133,19 @@ export const lighthouseGraph: GraphNode[] = [
   { id: 'output', op: 'Output', detail: 'retopo · auto-UV · LOD 0–2', adds: 'cleanup, UVs and levels of detail, shown as a wireframe' },
 ]
 
-/* The end-to-end path (PLAN.md sections 1.1, 5 and 6). */
+/* The end-to-end path (PLAN.md sections 1.1, 5 and 6): a verb and the artifact it leaves. */
 export interface WorkflowStep {
-  numeral: string
   title: string
-  body: string
   artifact: string
 }
 
 export const workflowSteps: WorkflowStep[] = [
-  {
-    numeral: '01',
-    title: 'Model',
-    body: 'Shape the lighthouse in a geometry graph, or import a mesh and let cleanup make it game-ready.',
-    artifact: 'lighthouse.geo',
-  },
-  {
-    numeral: '02',
-    title: 'Surface',
-    body: 'Layer a weathered stone material in the shader graph. It compiles to WGSL for every tier.',
-    artifact: 'weathered_stone.mat',
-  },
-  {
-    numeral: '03',
-    title: 'Script',
-    body: 'Write the lamp’s behavior in TypeScript, with types from the schema and hot reload.',
-    artifact: 'lamp.ts',
-  },
-  {
-    numeral: '04',
-    title: 'Review',
-    body: 'Agent changes arrive as one transaction with a readable diff, beside your own edits.',
-    artifact: '4 edits · 1 transaction',
-  },
-  {
-    numeral: '05',
-    title: 'Play-test',
-    body: 'The headless runner plays the scene and returns frames, logs and assertion results.',
-    artifact: '3 of 3 checks passed',
-  },
-  {
-    numeral: '06',
-    title: 'Ship',
-    body: 'Export the same project to desktop, mobile and the web, with native projects you can open.',
-    artifact: '6 targets',
-  },
+  { title: 'Model', artifact: 'lighthouse.geo' },
+  { title: 'Surface', artifact: 'weathered_stone.mat' },
+  { title: 'Script', artifact: 'lamp.ts' },
+  { title: 'Review', artifact: '4 edits · 1 transaction' },
+  { title: 'Play-test', artifact: '3 of 3 checks passed' },
+  { title: 'Ship', artifact: '6 platforms' },
 ]
 
 export const exportTargets = ['Windows', 'macOS', 'Linux', 'iOS', 'Android', 'Web'] as const

@@ -1,5 +1,44 @@
 # Expand and polish the landing page around the full Incant plan
 
+## Latest director feedback — the expanded page is too dense
+
+The director has now viewed the new page and says: “some of the new sections are
+way to text heavy and close together overall, not good enough”. Rework the new
+sections and overall page pacing now. This is a request for a stronger design
+pass, not just another paragraph or a small spacing adjustment.
+
+Cut the amount of visible copy substantially. Give the modeling and workflow
+sections room to breathe, reduce competing headings/labels and repeated prose,
+and let the modeling illustration and a few strong ideas carry the explanation.
+The six tool descriptions plus the six workflow descriptions currently read too
+much like documentation. Do not turn PLAN.md into a feature inventory. Preserve
+its important product promise through concise, well-chosen content and an
+intentional visual hierarchy. Decide where short summaries, visual groupings or
+useful progressive disclosure improve the page. Avoid hiding everything merely
+to reduce length, and avoid replacing the prose wall with generic card grids.
+
+Review the whole page's rhythm: transitions into and out of the two new sections,
+the relationship between heading/description/illustration, whitespace within and
+between groups, column density and mobile stacking. Improve the design as a
+cohesive page, not isolated blocks. Keep the interactive geometry illustration,
+but refine its role and surrounding composition as needed. Preserve keyboard and
+screen-reader behavior and keep the existing agent walkthrough working.
+
+The director's finished-product presentation is still required: do not restore
+future/planned/early-development labels. Keep the approved neutral palette,
+restrained accent, wisp and connected-panel product chrome. The screen-capture
+restriction remains in force: no computer use, browsers, Playwright execution,
+native automation or capture tools. Source edits and nonvisual terminal checks
+only. Hosted CI will run browser tests after Astra integrates the result.
+
+The prior revision 317cf6b is integrated on the landing branch as 11abac8 and is
+available in the user's existing preview. Continue from the files already here.
+Preserve previous result evidence as history, append or write a new result for
+this design pass, run strict type checking and the /incant/ build, and commit with
+Built-by: claude for integration. Do not publish, merge or push. Explain the
+concrete changes in hierarchy, copy density and spacing, with actual checks and
+remaining verification limits. Do not claim you saw a render.
+
 ## Director correction — finished-product presentation
 
 The director just clarified: “no just tell claude to design it as if it all

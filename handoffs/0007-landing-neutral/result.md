@@ -1,115 +1,134 @@
-# Result: 0007 landing page, revision 3 (expanded around the full plan)
+# Result: 0007 landing page, revision 4 (density and pacing pass)
 
-Dated 2026-10-08. The earlier palette result is kept unchanged as history in
-`result-1-palette.md`. Its design commit is `6090702`, and its capture-stop note is `c5999d3`.
+Dated 2026-10-08. Earlier results are kept unchanged as history:
+
+- **`result-1-palette.md`:** the neutral palette work, `6090702` and `c5999d3`.
+- **`result-2-expansion.md`:** the modeling and workflow expansion, `317cf6b`. It is integrated
+  on the landing branch as `11abac8`.
 
 ## Status
 
-The expanded page is implemented, type-checked, built and committed with `Built-by: claude`.
-Astra can integrate it into PR #2. Nothing was pushed, published, deployed or merged, and no
-phase gate is claimed or approved.
+The design pass is implemented, type-checked, built and committed with `Built-by: claude` for
+Astra to integrate into PR #2. Nothing was pushed, published, deployed or merged, and no phase
+gate is claimed or approved.
 
-**This revision has not been seen rendered by anyone.** The director's screen-capture ban
-was in force for the whole revision. Every visual judgment below comes from source review,
-geometry worked out by hand, contrast arithmetic and a structural render to HTML text.
+**This revision has not been seen rendered.** The screen-capture ban was in force throughout.
+No computer use, browser, Playwright run, native automation or capture of any kind was used.
+Every judgment below comes from source review, layout arithmetic and a text-only render in
+Node.
 
 ## Model
 
-Claude Opus 5.5 (`claude-opus-5-5`), running in Claude Code. No other model and no
-image-generation service was used. All new artwork is hand-written SVG and CSS.
+Claude Opus 5.5 (`claude-opus-5-5`), running in Claude Code.
 
 ## Director feedback acknowledged
 
-1. **"Add more to the landing page… based off of what the plan document promises… missing the
-   3d modeling capabilities":** applied. The page has a new modeling section with an interactive
-   geometry-graph illustration, a six-group content-tools overview and an end-to-end workflow
-   with the six export targets.
-2. **"Design it as if it all already shipped… labeling as future is useless":** applied. Public
-   copy is in the present tense, as a finished product. An interrupted earlier pass had added
-   "Can I use it today? Not yet" and "planned" wording, and all of it is gone. There is no
-   current-versus-roadmap section. A text search of the rendered HTML found none of these
-   words: planned, future, early development, not yet, coming soon, roadmap, beta.
-3. **The repository is public:** every "may require access" and "private" note is removed from
-   the visible and screen-reader copy.
-4. **Credential storage changed:** the copy now says credentials stay on the user's machine. The
-   keychain claim is gone. PLAN.md and the auth code were not touched.
-5. **Screen-capture ban:** obeyed throughout. No computer use, no browser or native automation,
-   no Playwright run and no screenshots or capture of any kind were used, headless included.
+The director said: "some of the new sections are way to text heavy and close together overall,
+not good enough". That is correct. I diagnosed four causes in revision 3:
 
-## What changed on the page
+1. **Six prose paragraphs under the modeling stage:** the paragraphs averaged 35 words and each
+   had its own heading, which made the section read like documentation.
+2. **A workflow that retold the stage:** each of its six steps had a numeral, a heading, a
+   sentence and an artifact. A separate sub-heading and paragraph then introduced the export
+   targets.
+3. **The same pattern three times running:** modeling, workflow and principles all used a
+   heading, then a list of numbered or titled prose items, so the page rhythm went flat.
+4. **Tight spacing:** each heading had its description beside it in the same row, and the gaps
+   between groups were 56 to 80 px, which crowded each section's opening.
 
-The page order is now:
+The finished-product voice, the neutral palette, the restrained accent, the wisp and the
+connected-panel chrome are all kept.
 
-1. Hero
-2. **Modeling** (new)
-3. **Workflow** (new)
-4. Principles
-5. Statement band
-6. FAQ
-7. Closing
+## What changed
 
-The navigation reads How it works, Modeling, Workflow and FAQ.
+### Copy density
 
-- **Hero:** the paragraph now says Incant is a 3D and 2D modeling tool, game engine and editor
-  in one. The headline, interactive agent stage and calls to action are unchanged. The caption
-  reads "Product illustration." The stage's screen-reader descriptions still say "not a
-  screenshot", which keeps the image description truthful.
-- **Modeling section:**
-  - **Heading:** "Shape it where you ship it."
-  - **Graph editor:** a second editor window shares its title bar with the hero stage, so both
-    read as one product. Its node list holds seven steps:
-    1. Cylinder
-    2. Taper
-    3. Extrude
-    4. Array
-    5. Boolean
-    6. Scatter
-    7. Output
-  - **Clay viewport:** selecting a node shows the model at that step of the graph. Each node's
-    geometry is outlined in the editor accent while it is selected.
-  - **Output step:** the last node shows the cleaned-up topology as a wireframe, with an "LOD 0
-    of 3" label.
-  - **Toolset:** below the window, six groups are set as editorial prose under hairline rules,
-    not cards. They cover geometry graphs, mesh tools, materials, terrain and light, animation
-    and effects, and generated assets.
-- **Workflow section:** six steps run on one hairline track, horizontal on desktop and vertical
-  on mobile. The steps are Model, Surface, Script, Review, Play-test and Ship. Each step ends
-  with its concrete artefact, such as `lighthouse.geo`, `lamp.ts` or "4 edits · 1 transaction".
-  A large typographic row of the six export targets follows.
-- **Principles:** collaboration and mergeable documents are now part of the existing four
-  principles.
-- **FAQ:** there are seven questions.
-  - **New:** team collaboration, "Do I still need Blender?", and what kinds of games it is for.
-  - **Updated:** the provider answer covers multiple providers, picking a model per task,
-    credentials staying local and the cost budget.
-  - **Unchanged position:** the offline question is still closed by default.
+The counts below are visible words and headings per section, from the same text-only render
+before and after this pass.
 
-The palette, the wisp artwork and the existing interactions are unchanged.
+| Section | Words before | Words after | Headings before | Headings after |
+|---|---|---|---|---|
+| Modeling, including about 60 words of editor UI | 324 | 148 | 7 | 1 |
+| Workflow | 193 | 57 | 8 | 1 |
+| Principles | 91 | 54 | 5 | 4 |
+| FAQ, all answers counted though most start collapsed | 306 | 213 | 8 | 8 |
+| Hero, including the agent stage UI | 160 | 147 | 1 | 1 |
+
+- **Modeling:** one sentence now follows the heading. The six prose groups became a two-column
+  index with no headings. Each entry is a term with a gloss of 4 to 6 words, such as "Mesh tools:
+  Retopology, UVs, LODs, baking, light sculpt". One display line leads into the index: "From
+  first primitive to a game-ready asset."
+- **Workflow:** each step is now just a verb in large display type and the artifact it leaves,
+  such as **Model** `lighthouse.geo` or **Review** `4 edits · 1 transaction`. The step sentences,
+  numerals and the export sub-heading are gone. "Ship" leads straight into the large platform
+  row, which has one caption line.
+- **Principles:** three ideas of one line each, in a single row. "Yours to run" was removed
+  because the statement band already makes that point with "Works offline" and "Credentials stay
+  local".
+- **Hero and FAQ:** the hero paragraph is two short sentences. Every FAQ answer is one or two
+  sentences.
+
+### Hierarchy
+
+- **One idea per section opening:** the modeling and workflow headings are larger, rising from
+  4.4 to 5.2 rem on desktop. Each now stands alone with a single short line under it, instead
+  of sharing a row with a paragraph.
+- **Illustrations carry the explanation:** in modeling, the interactive graph stage is the
+  centre of the section, and the index is set clearly smaller beneath it. In workflow, the track
+  and the platform row are the content.
+- **Fewer competing headings:** 13 headings were removed from the two new sections. The index
+  uses a definition list and the workflow steps are list items, so screen-reader heading
+  navigation now lands only on real section starts.
+- **Pattern variety:** the three middle sections now look distinct. Modeling has an
+  illustration and an index, workflow has a track and large type, and principles is a short
+  three-column row.
+
+### Spacing and transitions
+
+| Gap | Before | After |
+|---|---|---|
+| Section padding, modeling and workflow | 96–128 px | 112–192 px, by breakpoint |
+| Heading to modeling stage | up to 80 px | 96 px from `sm` |
+| Stage to index | 96 px | 128 px |
+| Heading to workflow track | 80 px | 112 px |
+| Track to platform row | 96 px | 128 px |
+| Principles padding | 96–128 px | 112–160 px |
+
+- **Transitions:** the workflow band and the principles section no longer have hairline rules
+  at their tops. The change between paper and deep paper marks those transitions on its own.
+  Modeling keeps its single rule below the hero.
+
+### Mobile
+
+- **Graph stage:** below 768 px, the seven graph nodes are a horizontal strip of node names
+  under the viewport. The parameters, the panel label and the agent prompt line are hidden at
+  that size. Before, the stage stacked into a column about 350 px tall below the viewport.
+- **Workflow and index:** the workflow keeps its vertical rail, now with only a verb and an
+  artifact per stop. The tool index stacks to one column.
+
+### Accessibility and behaviour
+
+- **Graph nodes:** these are still toggle buttons with a pressed state. The live announcement
+  and the changing preview description are unchanged. The scrollable strip on phones contains
+  only focusable buttons.
+- **Agent walkthrough:** the tab list, its keyboard handling and its screen-reader descriptions
+  are untouched.
+- **Contrast:** no new colour pairs were added. Every text colour reuses pairs computed in the
+  previous revision.
 
 ## Changed paths
 
-**Added** in `website/src/components/`:
-- `ModelingSection.vue`
-- `ModelingStage.vue`
-- `LighthouseModel.vue`
-- `WorkflowSection.vue`
-- `WindowBar.vue`
-
-**Modified:**
+**Code:**
 - `website/src/content.ts`
-- `website/src/App.vue`
-- `website/src/components/EditorStage.vue`, which now uses the shared title bar
+- `website/src/components/ModelingSection.vue`
+- `website/src/components/ModelingStage.vue`
+- `website/src/components/WorkflowSection.vue`
+- `website/src/components/PrinciplesSection.vue`
 - `website/src/components/HeroSection.vue`
-- `website/src/components/SiteHeader.vue`
-- `website/src/components/SiteFooter.vue`
-- `website/src/components/FaqSection.vue`
-- `website/tests/landing.spec.ts`, which gains one behavioural test
+- `website/src/components/StatementBand.vue`
 
-**Handoff files:** `result.md`, the new `result-1-palette.md`, and Astra's updated `brief.md`,
-which is committed as received.
-
-No dependencies were added. PLAN.md, the auth code, the native code and the CI files were not
-touched.
+**Handoff files:** `result.md`, the new `result-2-expansion.md`, and Astra's updated `brief.md`,
+which is committed as received. The tests are unchanged, because no new interaction was added.
 
 ## Commands and results
 
@@ -120,104 +139,83 @@ All commands ran from `website/` on 2026-10-08.
 | `npm run typecheck` | Pass. Strict `vue-tsc` includes `tests/`. |
 | `npm run build` | Pass |
 | `PAGES_BASE_PATH=/incant/ npm run build` | Pass. Script, stylesheet and favicon URLs are prefixed with `/incant/`. |
-| Structural check | Pass. The page was rendered with Vue's server renderer into a temporary directory and parsed as text. No browser was involved, and the temporary entry file was deleted. |
+| Structural check | Pass. The page was built with Vite's SSR mode into `/tmp`, rendered with Vue's server renderer and parsed as text. No browser was involved, and the temporary entry file was deleted. |
 
 The structural check found the following:
 
 - There is one h1, and heading levels never skip.
 - There are no duplicate ids, and every in-page anchor resolves.
 - The only external links are the repository and PLAN.md.
-- None of the banned qualifier words appear.
-- There is exactly one tab list, with 4 tabs and 1 tab panel. The graph nodes are 7 toggle
-  buttons.
+- None of these words appear: planned, future, early development, not yet, coming soon, roadmap,
+  private, may require access, keychain, beta.
+- There is one tab list, with 4 tabs and 1 tab panel. The graph has 7 pressed-state buttons.
 
-**Payload:** JS is 113.7 kB raw and 41.4 kB gzip, against a 100 kB gzip budget. CSS is 8.0 kB
+**Payload:** JS is 110.8 kB raw and 40.4 kB gzip, against a 100 kB gzip budget. CSS is 8.1 kB
 gzip, and `dist/` totals 412 kB.
 
-**Contrast:** the new colour pairs were computed with the WCAG formula, and all pass AA.
+**Browser tests were not run,** under the restriction. Astra's hosted CI will run them.
 
-| Pair | Ratio |
-|---|---|
-| Muted text on the selected node | 6.09 |
-| Accent on deep paper | 5.24 |
-| Muted text on deep paper | 5.25 |
-| Muted text on the viewport | 8.62 |
-| Editor accent on the viewport | 7.17 |
-
-The unselected graph nodes use muted colour rather than opacity, so they keep that contrast.
-
-**Browser tests were not run.** The director's restriction covers them. The suite now has 23
-tests, 22 existing and 1 new, for Astra's hosted CI to run. The new test checks that a graph
-node can be selected with the keyboard, that exactly one node is pressed at a time, and that
-the preview's accessible description changes. It does not assert copy or styles.
-
-**Expected to pass:** I expect Astra's own `site.spec.ts` to pass unchanged. The page still has
-a single tab list, the offline FAQ stays closed, the mobile menu still has a FAQ link, and every
-anchor resolves.
+- **Unchanged:** all 23 tests are as they were, including the graph-node keyboard test from the
+  previous revision.
+- **Expected to pass:** the selectors they rely on are all still present. These are the tab ids,
+  `#create` buttons with a pressed state, the closed offline FAQ item, and a FAQ link in the
+  mobile menu.
 
 ## Screenshots
 
-**None were taken for this revision.** Visual verification is deferred at the director's
-request. The images on disk under `screenshots/before/` and `screenshots/after/` show the
-palette revision only, not this page. Note that running `landing.spec.ts` in CI will write fresh
-screenshots to `test-results/visual/`. Those would be the first renders of this revision.
+**None were taken.** Visual verification is deferred at the director's request. The images
+under `screenshots/` show the palette revision only. A CI run of `landing.spec.ts` writes fresh
+renders to `test-results/visual/`.
 
 ## Deferred visual checks
 
-These need someone to look at a render once capture is allowed again:
-
-1. **Lighthouse model:** check silhouette, proportions and draw order at each of the seven graph
-   steps. Also check the accent outline on each step and the wireframe overlay. All of this was
-   placed by computed coordinates, not by eye.
-2. **Graph stage at 320 and 390 px:** the viewport stacks above the node list. Check the
-   truncation of node parameters and the title bar.
-3. **Workflow track:** check dot alignment on the hairline at desktop and mobile, and the
-   wrapping and slash spacing of the export row at 320 to 768 px.
-4. **Page rhythm:** check spacing and hierarchy across the two new sections against the hero.
-   Also check that the deep-paper workflow band sits well between two paper sections.
-5. **Desktop header:** check that four navigation items and the GitHub link fit at 768 px.
-6. **Test suite:** run the full browser suite, including both axe scans, the overflow checks at
-   four widths, reduced motion and the new graph-node test.
+1. **Overall rhythm:** check the page top to bottom at 1440 and 390 px. In particular, check that
+   the new space opens up the two sections without making the page feel thin.
+2. **Workflow track at 1024 to 1280 px:** at about 1024 px, the artifact `4 edits · 1 transaction`
+   is expected to wrap to two lines. Check that it still reads well.
+3. **Platform row:** at 4.2 rem on desktop, the six names are expected to wrap onto two lines.
+   Check where the wrap falls and whether a slash ends a line.
+4. **Graph strip on phones:** check the horizontal scroll affordance. On mount, the strip alone
+   scrolls to its end, so the default Output node starts in view. Check that this happens
+   without moving the page.
+5. **Lighthouse geometry:** the previous revision's open item still stands. The model was placed
+   by computed coordinates and has not been observed.
+6. **Test suite:** run the full browser suite, including axe at 390 and 1440 px and overflow at
+   four widths.
 
 ## Promise-to-page map
 
 | Page claim | PLAN.md source |
 |---|---|
-| One application: 3D/2D modeling tool, engine and editor, with an agent on the same project | 1.1 |
-| Geometry graphs: primitives, booleans, extrude, bevel, subdivision, array, scatter, noise, curves, lofts, instancing; text-serialized and agent-authorable | Phase 4; 2.2 `incant_geo`; App. B `GeometryGraph` |
-| Mesh cleanup, auto-retopology, auto-UV, LODs, decimation, normal/AO baking, light sculpt for adjustments | Phase 4 |
-| Shader graph to WGSL, nodes for PBR inputs, math, textures, UV operations, vertex animation; WGSL written directly | Phase 4 |
-| Terrain heightmaps, layered materials, foliage scatter, streaming; baked lightmaps and probe volumes on every tier, screen-space GI on desktop | Phase 4 |
-| Retargeting, IK rigs, animation graphs, cinematic timeline; GPU particles with a graph editor | Phase 4 |
-| Image-to-3D with cleanup, texture sets, humanoid animation from text; same cook pipeline as imports; licensing metadata | Phase 4; 6.6 |
-| glTF and FBX import | Phase 1 |
-| "Do I still need Blender": detailed sculpting stays in other tools by design | Phase 4 ("not full Blender sculpting"); 9 out-of-scope list |
-| TypeScript gameplay, types from the schema, hot reload | 1.2 #7; Phase 1; 6.3 |
-| Agent edits as one transaction with a readable diff, beside your own edits; undo in one step | 1.2 #4; 2.4; Phase 3 chat UI |
-| Approval choice ("whether it asks first") | Phase 3 approval modes |
-| Headless play-test returns frames, logs and assertions | Phase 1 headless runner; App. A `play.run` |
-| Six export targets; generated Xcode and Gradle projects | 1.1; Phase 5; 6.7 |
-| Steam integration, crash reporting, dedicated server build | Phase 5; Phase 6 |
-| Multiplayer with server-authoritative and rollback modes, cross-play between desktop and mobile | Phase 6; 6.8; 1.3 |
-| Templates: third-person, first-person, 2D platformer, top-down | Phase 2 |
-| Mergeable documents; teammates and the agent edit at once; account adds sync and invitations | 2.3 CRDT; 3.2; 3.3 |
-| Offline editor with no account; nothing behind a login | 3.3 |
-| OpenAI, Anthropic, Google or local model, chosen per task; calls go direct; cost against a budget | 1.2 #5; 3.1; 3.4 |
-| Credentials stay on the user's machine | 3.1, as amended by the director (see below) |
-| Agent has no shell access; sandboxed scripts | 3.5 |
+| 3D and 2D modeling tool, game engine and editor in one; agent works through the same commands | 1.1; 1.2 #1 |
+| Geometry graphs: booleans, bevels, lofts, arrays, scatter; graphs are text the agent can write | Phase 4; App. B `GeometryGraph` |
+| Mesh tools: retopology, UVs, LODs, baking, light sculpt | Phase 4 |
+| Materials: shader graphs compiled to WGSL | Phase 4 |
+| Terrain: heightmaps, layered materials, foliage | Phase 4 |
+| Animation and VFX: retargeting, IK, timelines, particles | Phase 4 |
+| Generated assets: image-to-3D, texture sets, motion | Phase 4; 6.6 |
+| Graph stage steps: primitive, taper, extrude, array, boolean, scatter with noise, then retopology, UV and LOD output | Phase 4 |
+| Workflow: model, surface, TypeScript script, review as one transaction, headless play-test, ship | 1.1; 2.4; Phase 1; Phase 3; App. A `play.run` |
+| Six platforms; native Xcode and Gradle projects; Steam, crash reporting, dedicated servers | 1.1; Phase 5; Phase 6; 6.7 |
+| One undoable timeline shared by user, scripts, team and agent | 1.2 #1 and #4; 2.3 provenance |
+| Scenes, materials and graphs as documents you can diff, review and merge | 1.2 #2; 2.3 |
+| Agent plays the game and shows proof | 1.2 #3; Phase 3 tools |
+| Agent acts only as far as you allow | Phase 3 approval modes |
+| OpenAI, Anthropic, Google or local model, per task; cost shown per turn | 3.1; 3.4; Phase 3 |
+| Credentials stay on your machine | 3.1, as amended by the director: owner-only local files on macOS and native stores elsewhere |
+| Offline editor, no account; agent needs a provider or local model | 3.3 |
+| Concurrent edits merge; account adds cloud sync and invitations | 2.3 CRDT; 3.2 |
+| Detailed sculpting stays in dedicated tools; glTF and FBX import | Phase 4; 9 out-of-scope list; Phase 1 |
+| 2D and 3D games in TypeScript, templates, online multiplayer and cross-play | Phase 1; Phase 2 templates; Phase 6; 1.3 |
+| No shell access for the agent | 3.5 |
 
 ## Limitations
 
-- **Visual quality is unverified:** see the deferred checks above. The geometry is reasoned,
-  not observed.
-- **Finished-product voice:** the copy presents everything in PLAN.md as shipped, as the
-  director instructed. The repository is in Phase 0, so the page describes the product's
-  intended scope, not its verified state. This marketing presentation approves no phase gate.
-- **Credential wording:** this follows the director's verbal update. The worktree's PLAN.md
-  copy still says keychain, and I didn't change it.
-- **Driftwake left out:** the launch game is not named on the page, because PLAN.md calls the
-  name a placeholder.
-- **Payload growth:** JS grew by 5.9 kB gzip from the new sections. That is still well under
-  budget.
+- **Unverified visually:** no render of this revision has been seen. See the deferred checks
+  above.
+- **Finished-product voice:** the copy presents the full plan as shipped, as the director
+  instructed. The repository remains in Phase 0, and this page approves no phase gate.
+- **Credential wording:** this follows the director's update. The worktree's PLAN.md copy still
+  says keychain, and I didn't change it.
 - **Inherited limitations:** the tablet crop of the hero scene and the lack of Firefox, Safari
   and real-device testing carry over from earlier revisions.
