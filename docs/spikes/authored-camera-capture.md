@@ -61,7 +61,9 @@ cooked rendering retain the image.
 
 283 UI tests, the UI build, workspace Clippy, generated checks, SDK typechecking,
 five Python tests and the custom-protocol native release build pass. Claude approved the initial and expanded rendered evidence (`c5e02e6`,
-`ddc8645`). A final reference/skewed-parent evidence follow-up remains pending. Native controls/layout are unchanged and no
+`ddc8645`). Final review `a7fc35f` approves all 36 recorded images, including an
+independent projected-corner check of the skewed camera basis. No pixel-evidence
+gap remains for this scoped increment. Native controls/layout are unchanged and no
 new native UI review is claimed.
 
 ## Limits

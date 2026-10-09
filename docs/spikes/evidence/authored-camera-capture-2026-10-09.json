@@ -186,7 +186,7 @@
     "camera-final-gpu-unit.log": "3694f9abda700124d838adeb525d5c27b832975723f00bda1098709a4efd44d7",
     "camera-final-gpu-model.log": "26937e534b44464935b8fc822913f8b638187683fd90a1a32f68a8171b27fb23",
     "camera-final-extra-gpu.log": "719506957b34757e53217b8337f21f071b09ff7790b2b17a572e36efe724d241",
-    "camera-final-native-build.log": "0daf9d75b92baefd866639b0357b672e9016d63356f8e17dabc55e26c9b668f6",
+    "camera-final-native-build.log": "59dfeaffe4a42d50e5dbde2ee0b93d832b61a1127961cf051644ca5e3144e67b",
     "camera-final-agent-tests.log": "caf7c5ac4680e151e830e8c15b14902c99467f6bb24f078cc4cedf8ad4985646",
     "camera-final-clippy.log": "afba53ef3da40ddf842652009de3a6b22c5ee2ffdb3ead598f2c4a1a4d2e1085"
   },
@@ -233,7 +233,8 @@
     "transport": "ACP protocol 1",
     "initial": "c5e02e6",
     "expanded": "ddc8645",
-    "remaining": "final unclipped-reference and skewed-parent follow-up"
+    "final": "a7fc35f",
+    "verdict": "pass within authored-camera capture scope; all 36 image hashes confirmed; no open pixel-evidence gap"
   },
   "native_ui_review": "not claimed; UI controls unchanged",
   "limitations": [
@@ -274,5 +275,7 @@
       "game.incant.journal.jsonl": "e68342de40dfac78812ab8361e7f3eac37ab79ad2ea754dd9a0798e1d4df727d"
     },
     "initial_attempt": "16,000-token budget rejected by conservative reservation; not counted as a successful live turn"
-  }
+  },
+  "final_coverage_and_metadata": "fda9745",
+  "development_bundle": "artifacts/Incant.app rebuilt and packaged after the final custom-protocol build"
 }

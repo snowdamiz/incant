@@ -57,8 +57,12 @@ within its documented workload.
   isolated playback and the agent screenshot tool. Geometry, material view vectors,
   transparent sorting and light clusters share the selected camera. Projection,
   clipping, inheritance, retained views, public command history and moving-camera
-  playback pass initial tests. Full verification and Claude pixel review remain
-  in progress; no editor camera-selection control is claimed.
+  playback pass. Empty camera-rig parents no longer create diagnostic cubes.
+  139 Rust, 32 GPU and 283 UI tests, Clippy and the native release build pass.
+  Claude approved all 36 captures, including independent skewed-basis checks.
+  A live saved-account agent captured the exact camera with no edits or login
+  prompts. Ready for hosted checks; no editor camera-selection control is claimed.
+  See [authored camera evidence](docs/spikes/authored-camera-capture.md).
 
 - Cluster membership masks replace overflow fallback in the next lighting
   increment. Exact GPU readback covers every bit through 4096 lights, word-count
@@ -210,16 +214,16 @@ within its documented workload.
   and saved disposable projects; native account focus behavior passes, with the
   visible keyboard ring also approved by Claude.
 
-- The first fifteen PRs are merged into main after their required checks passed:
+- The first sixteen PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
   responsive loading/focus #5, shared import batches #6, source watching #7 and
   editor/agent imports with the redesigned asset workspace #8, and runtime scene
   projection #9, imported GPU geometry #10, native source watching #11 and headless
-  playback #12, material previews #13, structured runtime logs #14 and HDR output #15. The site deployed at
+  playback #12, material previews #13, structured runtime logs #14, HDR output #15
+  and authored environments #16. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
-  before merge. Editor/agent imports are the current Phase 1 increment. Merging does
-  not approve a phase gate.
+  before merge. Current Phase 1 work is tracked above. Merging does not approve a phase gate.
 
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing
