@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import SiteHeader from './components/SiteHeader.vue'
 import HeroSection from './components/HeroSection.vue'
+import ModelingSection from './components/ModelingSection.vue'
+import WorkflowSection from './components/WorkflowSection.vue'
 import PrinciplesSection from './components/PrinciplesSection.vue'
 import StatementBand from './components/StatementBand.vue'
 import FaqSection from './components/FaqSection.vue'
@@ -17,6 +19,8 @@ import SiteFooter from './components/SiteFooter.vue'
   <SiteHeader />
   <main id="main" tabindex="-1" class="outline-none">
     <HeroSection />
+    <ModelingSection />
+    <WorkflowSection />
     <PrinciplesSection />
     <StatementBand />
     <FaqSection />

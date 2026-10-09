@@ -139,6 +139,24 @@ test.describe('landing page', () => {
     await page.locator('#how').screenshot({ path: `${shots}/stage-play-390.png` })
   })
 
+  test('geometry graph nodes preview the model from the keyboard', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await settle(page)
+    const stage = page.locator('#create')
+    const preview = stage.locator('[role="img"]')
+    const nodes = stage.getByRole('button')
+    const before = await preview.getAttribute('aria-label')
+    expect(await nodes.count()).toBeGreaterThan(1)
+    await expect(nodes.last()).toHaveAttribute('aria-pressed', 'true')
+
+    await nodes.first().focus()
+    await page.keyboard.press('Enter')
+    await expect(nodes.first()).toHaveAttribute('aria-pressed', 'true')
+    await expect(nodes.last()).toHaveAttribute('aria-pressed', 'false')
+    await expect(stage.getByRole('button', { pressed: true })).toHaveCount(1)
+    await expect(preview).not.toHaveAttribute('aria-label', before ?? '')
+  })
+
   test('FAQ disclosures toggle', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await settle(page)

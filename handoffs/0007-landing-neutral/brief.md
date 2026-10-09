@@ -1,52 +1,110 @@
-## Latest director restriction: stop computer use and screen capture
+# Expand and polish the landing page around the full Incant plan
 
-The director has just said: “Stop using computer use for now or tell cloude to if
-its using it. Amazon is blocking prime video output due to screnecapture”.
+## Director correction — finished-product presentation
 
-Effective immediately, do not use computer-use tools, native or browser automation,
+The director just clarified: “no just tell claude to design it as if it all
+already shipped because it will soon. this lableing as future is useless extra
+step”. Follow this instruction now. Present the complete PLAN.md product in the
+present tense, as a finished product. Remove “planned”, “future”, “early
+development”, “not yet” and similar qualification/badges from public marketing
+copy. Do not add a current-versus-roadmap section. This supersedes the earlier
+Astra request to qualify unshipped capabilities; that extra step was not wanted.
+Keep building and polishing the expanded modeling/workflow design already in
+progress. Preserve your existing file changes and inspect them when resuming.
+Internal handoff/evidence can still state actual verification and implementation
+scope; public product presentation does not approve an engine phase gate.
+The screen-capture prohibition remains in force without exception.
+
+Also correct two factual details during this pass: the repository is now public
+(verified through GitHub), so remove stale “private repository”/“may require
+access” copy. The director changed the macOS credential store since this worktree's
+PLAN.md copy: macOS uses private owner-only local files; Windows/Linux use native
+credential stores. Public copy can simply say credentials stay on the user's
+machine rather than promise a keychain universally. Do not edit PLAN.md or auth.
+
+## Latest director request — implement this follow-up now
+
+“tell the landing page claude session to add more to the landing page and continue
+polishing the design. It should go based off of what the plan document promises.
+As one example, its missing the 3d modeling capabailities it will have”
+
+This supersedes the previous notification-only stop after the palette revision.
+Resume this same Claude Opus 5.5 ACP session and implement an expanded, polished
+landing page. The screen-capture restriction itself REMAINS IN FORCE.
+
+## Mandatory current restriction
+
+The director is watching Prime Video, which screen capture interferes with.
+Do not use computer-use tools, browser or native automation, Playwright execution,
 screenshots, screen recording, screen sharing, or capture helpers. Do not launch
-any new browser or native visual review. This overrides every capture/review
-request below. Continue only code/file work and nonvisual terminal checks until
-the director explicitly lifts this restriction. Existing images can remain on disk.
+any browser or native review, even headless. Continue through source/code/file
+work and nonvisual terminal checks only. Existing images may stay on disk. Do not
+interpret this new request for design work as permission to resume capture.
+The runner's generic screenshot request is superseded by this restriction.
+Record the resulting visual-verification limitation clearly in result.md.
 
-This follow-up is notification only: acknowledge receipt, record that further
-visual verification is deferred at the director’s request in result.md, and end
-the turn. Do not restart or change the completed design. Do not run new tests or
-capture any pixels for this notification. Preserve all existing changes.
+## Product and content direction
 
-# Align landing-page colors with the director’s preferred editor palette
+Read the complete PLAN.md in this worktree, especially section 1, the phase
+deliverables, sections 3 and 6, and the product's stated definition of done.
+Use the plan to decide what meaningful product capabilities the page currently
+omits. The page should communicate a modeling tool, game engine and editor with
+an integrated agent, not only an AI chat/edit loop.
 
-## Latest director instruction
+Give planned 3D modeling/content creation real prominence and a substantive,
+carefully designed section or sequence. Phase 4 explicitly includes:
+- Procedural geometry graphs: primitives, booleans, extrude, bevel, subdivision,
+  arrays, scatter, curves, lofts, instancing and noise displacement.
+- Mesh cleanup, automatic retopology and UVs, LODs, decimation, normal/AO baking,
+  and limited brush sculpting for adjustments.
+- Shader/material graphs, terrain editing and layered materials/foliage,
+  animation retargeting, IK, animation graphs and cinematic timelines, and VFX.
+- Pluggable generated assets, including image-to-3D with cleanup, texture sets
+  and animation, alongside conventional imported assets.
 
-“tell claude its a bit too purple. I liked the previous designes color choices
-better. Update the app and landing page to match this change. Also logo is too
-closeto traffic lights and not aligned”.
+Choose a coherent presentation; do not dump this list verbatim into cards.
+Consider a procedural modeling/product illustration and a concrete workflow that
+connects modeling, materials, game logic, agent review, play-testing and export.
+Represent only supported plan promises; full Blender sculpting, Nanite and visual
+scripting are explicitly out of scope. Do not imply those capabilities exist.
 
-You are Claude Opus 5.5 through ACP. The director has authorized open permissions
-for this work. A separate Claude packet owns the actual editor and its native
-traffic-light/logo correction; your scope is the landing page only. Use the same
-shared color reference, references/previous-editor-tokens.css from the earlier
-neutral editor design, so the product depiction matches the app.
+Also audit the broader promise: 2D/3D creation, TypeScript gameplay, shared
+reversible edits with review/history, offline editing, users' own provider
+connections, collaboration and the six export targets. Emphasize what helps a
+visitor understand Incant. Keep content readable, paced and distinct, with useful
+navigation and honest calls to action. Use the finished-product presentation requested above for the full feature set.
+Keep real calls to action; do not invent adoption statistics, launch dates,
+pricing, testimonials or nonexistent download links.
 
-The completed landing-page revision 2 is already in this worktree under website/.
-Read its handoff 0005 rationale and screenshots, and inspect the current rendered
-page. Preserve the layout the director liked, especially the connected editor
-panels and revised editorial structure. Reduce purple across the page and its
-editor illustration, bringing the product chrome back to neutral charcoal/gray.
-Keep the page coherent and the approved wisp artwork intact. Violet should be a
-restrained accent rather than a tint across backgrounds and controls. Do not
-restore the superseded card-heavy landing page or lose working interactions.
+## Design direction
 
-Edit website/ and this packet only. No engine/native/auth files, external accounts,
-deployment changes, repository settings, signing, merging or publishing. Do not
-change or inspect credentials. Preserve existing user work. Any cross-platform
-color decision should be written to palette-notes.md for Astra to share with the
-editor packet if needed. Do not invoke native UI automation or override HOME.
+Continue polishing the accepted editorial layout, connected editor panels,
+typography, responsive behavior, spacing and hierarchy. Preserve the approved
+wisp artwork, neutral paper/ink page palette, charcoal/gray editor depiction and
+restrained accent from 6090702. The director explicitly rejected excessive
+purple and the earlier spaced-out card/panel treatment. New illustrations and
+sections should feel intentional and part of the same product, not bolted on.
+Write any new artwork as lightweight local SVG/CSS where appropriate; keep
+accessibility, keyboard behavior, reduced motion and small-screen layout sound.
+Avoid new runtime dependencies unless there is a concrete need. Keep the page
+fast and retain the production /incant/ base-path behavior.
 
-Use the existing Vue/Vite browser test workflow and production /incant/ base path.
-Run a fresh build and browser behavioral/accessibility checks; inspect and refine
-actual desktop and mobile renders. Check Ask, Review, Play-test, Undo, navigation,
-menu, focus, contrast and reduced-motion states. Keep before/after screenshots,
-with exact commands/results, model and limitations in result.md. Commit final
-website changes and evidence with Built-by: claude for Astra to integrate into the
-existing landing PR. Do not approve a phase gate or claim deployment happened.
+## Scope, verification and handoff
+
+Work only in website/ and handoffs/0007-landing-neutral/. No native editor, engine,
+auth, PLAN.md, deployment/account/settings, credential, or unrelated changes.
+No publishing, merging or pushing. Preserve existing work and the previous result
+as history (append a clearly dated follow-up or save a separate prior result).
+
+Run terminal-only type checking and production builds. Update meaningful browser
+behavior/accessibility tests where new navigation or interaction warrants it, but
+do not execute browser tests locally under the current restriction. Astra will
+integrate and let the existing hosted CI run those tests remotely. Do not add
+brittle tests that just mirror copy, CSS tokens or implementation details.
+
+Return a result identifying the exact model, changes, commands/results, deferred
+visual checks and remaining limitations. Include a concise promise-to-page map
+with PLAN.md section references so Astra can audit factual accuracy. Commit the
+finished code and packet with Built-by: claude for integration into existing PR #2.
+Open permissions were explicitly authorized by the director. Do not substitute
+another model or request repeated permission for routine authorized file work.
