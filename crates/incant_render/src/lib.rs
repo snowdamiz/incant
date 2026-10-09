@@ -6,6 +6,7 @@ mod frame;
 #[cfg(test)]
 #[path = "../tests/hdr_output/mod.rs"]
 mod hdr_output;
+mod lighting;
 mod material_pipeline;
 mod materials;
 mod models;
@@ -52,6 +53,7 @@ pub struct Renderer {
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
     environments: environment::EnvironmentSystem,
+    lighting: lighting::LightingSystem,
     frames: frame::FrameCache,
     output: output::OutputPass,
 }
@@ -75,7 +77,9 @@ impl Renderer {
             })
             .await?;
         let environments = environment::EnvironmentSystem::new(&device, &queue);
-        let materials = materials::MaterialSystem::new(&device, &queue, &environments.layout);
+        let lighting = lighting::LightingSystem::new(&device);
+        let materials =
+            materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
         Ok(Self {
             device,
             queue,
@@ -85,6 +89,7 @@ impl Renderer {
             models: Mutex::new(HashMap::new()),
             materials,
             environments,
+            lighting,
             frames: Default::default(),
             output: Default::default(),
         })
@@ -349,9 +354,14 @@ impl Renderer {
         Ok(bytes)
     }
 }
+const CAMERA_NEAR: f32 = 0.1;
+const CAMERA_FAR: f32 = 1000.;
+const CAMERA_FOV: f32 = 50f32.to_radians();
+fn camera_view() -> Mat4 {
+    Mat4::look_at_rh(Vec3::from_array(studio::EYE), Vec3::ZERO, Vec3::Y)
+}
 fn camera(aspect: f32) -> Mat4 {
-    Mat4::perspective_rh(50f32.to_radians(), aspect, 0.1, 1000.)
-        * Mat4::look_at_rh(Vec3::from_array(studio::EYE), Vec3::ZERO, Vec3::Y)
+    Mat4::perspective_rh(CAMERA_FOV, aspect, CAMERA_NEAR, CAMERA_FAR) * camera_view()
 }
 fn vertices(transforms: &[Mat4], aspect: f32) -> Vec<Vertex> {
     let camera = camera(aspect);

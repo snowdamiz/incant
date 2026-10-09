@@ -7,7 +7,7 @@ use incant_render::Renderer;
 use serde_json::json;
 
 // Analytic UV sphere: numerical coverage fixture, not authored game art.
-fn sphere(fixture: &mut Fixture) {
+pub(super) fn sphere(fixture: &mut Fixture) {
     let (rings, sectors) = (32, 64);
     let vertex = |y: usize, x: usize| {
         let theta = std::f32::consts::PI * y as f32 / rings as f32;

@@ -1,5 +1,5 @@
 // Core metallic-roughness equations; preview lighting is separate frame data.
-struct Frame { view_projection: mat4x4f, eye:vec4f, light:vec4f, radiance:vec4f, environment:vec4f }
+struct Frame { view_projection: mat4x4f, eye:vec4f, environment:vec4f }
 struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec4u }
 @group(0) @binding(0) var<uniform> frame:Frame;
 @group(1) @binding(0) var<uniform> material:Material;
@@ -49,15 +49,10 @@ fn environment_direction(d:vec3f) -> vec3f {
         n=unit(mat3x3f(t,b,n)*mapped);
     }
     if material.flags.z!=0u && !front {n=-n;}
-    let v=unit(frame.eye.xyz-in.world);let l=unit(frame.light.xyz);let h=unit(v+l);
-    let nv=max(dot(n,v),0.0);let nl=max(dot(n,l),0.0);let nh=max(dot(n,h),0.0);let vh=max(dot(v,h),0.0);
+    let v=unit(frame.eye.xyz-in.world);let nv=max(dot(n,v),0.0);
     let metallic=clamp(material.factors.x*mr.b,0.0,1.0);let roughness=clamp(material.emissive_roughness.w*mr.g,0.045,1.0);
-    let alpha=roughness*roughness;let a2=alpha*alpha;
-    let denominator=nh*nh*(a2-1.0)+1.0;let distribution=a2/(3.14159265359*denominator*denominator);
-    let visibility=0.5/max(nl*sqrt(nv*nv*(1.0-a2)+a2)+nv*sqrt(nl*nl*(1.0-a2)+a2),1e-7);
-    let f0=mix(vec3f(0.04),base.rgb,metallic);let fresnel=f0+(1.0-f0)*pow(1.0-vh,5.0);
-    let diffuse=(1.0-fresnel)*(1.0-metallic)*base.rgb/3.14159265359;
-    let direct=(diffuse+distribution*visibility*fresnel)*frame.radiance.xyz*nl;
+    let f0=mix(vec3f(0.04),base.rgb,metallic);
+    let direct=direct_lighting(in.position.xy,in.world,n,v,base.rgb,metallic,roughness);
     let dfg=textureSampleLevel(brdf_lut,environment_sampler,vec2f(nv,roughness),0.0).rg;
     let reflectance=f0*dfg.x+dfg.y;
     let irradiance=textureSampleLevel(diffuse_environment,environment_sampler,environment_direction(n),0.0).rgb;

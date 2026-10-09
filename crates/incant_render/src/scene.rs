@@ -25,6 +25,12 @@ pub enum SceneError {
     TransformRange,
     #[error("scene exceeds {MAX_INSTANCES} primitive instances")]
     InstanceLimit,
+    #[error("world light transform exceeds renderer numeric range")]
+    LightTransform,
+    #[error("spot inner/outer angles cannot be distinguished at GPU precision")]
+    LightCone,
+    #[error("scene exceeds 16 directional or 4096 local lights")]
+    LightLimit,
 }
 
 #[derive(Debug, Default, Clone, serde::Serialize)]
@@ -70,6 +76,7 @@ pub(crate) struct ResolvedScene {
     pub models: BTreeMap<String, ModelPlan>,
     pub stats: SceneStats,
     pub environment: Option<crate::environment::EnvironmentPlan>,
+    pub lights: crate::lighting::scene::LightPlan,
 }
 
 /// A model's default scene is used, falling back to its first declared scene.
@@ -85,6 +92,7 @@ pub(crate) fn resolve(
         models: BTreeMap::new(),
         stats: SceneStats::default(),
         environment: None,
+        lights: Default::default(),
     };
     for entity in project
         .scenes
@@ -110,12 +118,22 @@ pub(crate) fn resolve(
     }
     for entity in state.entities.values() {
         let world64 = glam::DMat4::from_cols_array_2d(&entity.world_transform);
+        let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
+        result.lights.add(components, world64)?;
         let world = world64.as_mat4();
         // Validate even empty mesh nodes so invalid ranges never reach GPU buffers.
         Instance::new(world)?;
         let Some(binding) = &entity.mesh else {
             let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
-            if components.contains_key("Transform") && !components.contains_key("EnvironmentLight")
+            if components.contains_key("Transform")
+                && ![
+                    "EnvironmentLight",
+                    "DirectionalLight",
+                    "PointLight",
+                    "SpotLight",
+                ]
+                .iter()
+                .any(|kind| components.contains_key(*kind))
             {
                 result.diagnostics.push(world);
                 result.stats.diagnostic_entities += 1;

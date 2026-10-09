@@ -2,7 +2,7 @@
 use crate::{Renderer, ResourceError, Viewport, frame::HDR_FORMAT, output::OutputPass};
 use std::{sync::Arc, time::Duration};
 
-fn texture(
+pub(crate) fn texture(
     renderer: &Renderer,
     format: wgpu::TextureFormat,
     width: u32,
@@ -26,7 +26,7 @@ fn texture(
         view_formats: &[],
     })
 }
-fn read(renderer: &Renderer, texture: &wgpu::Texture) -> Vec<u8> {
+pub(crate) fn read(renderer: &Renderer, texture: &wgpu::Texture) -> Vec<u8> {
     let width = texture.width();
     let height = texture.height();
     let stride = (width * 4).div_ceil(256) * 256;

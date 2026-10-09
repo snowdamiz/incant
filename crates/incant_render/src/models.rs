@@ -42,6 +42,7 @@ pub struct RenderScene {
     batches: Vec<Batch>,
     stats: SceneStats,
     environment: Option<crate::environment::Binding>,
+    lights: crate::lighting::GpuLights,
 }
 impl RenderScene {
     /// Identifies the available appearance without claiming production lighting.
@@ -199,6 +200,7 @@ impl Renderer {
             })
             .sum();
         Ok(RenderScene {
+            lights: crate::lighting::GpuLights::upload(&self.device, resolved.lights),
             diagnostics: resolved.diagnostics,
             batches,
             stats: resolved.stats,
@@ -220,8 +222,6 @@ impl Renderer {
         struct Frame {
             matrix: [[f32; 4]; 4],
             eye: [f32; 4],
-            light: [f32; 4],
-            radiance: [f32; 4],
             environment: [f32; 4],
         }
         let environment = scene
@@ -232,12 +232,6 @@ impl Renderer {
             matrix: crate::camera(target.rect[2] / target.rect[3]).to_cols_array_2d(),
             eye: glam::Vec3::from_array(crate::studio::EYE)
                 .extend(1.)
-                .to_array(),
-            light: glam::Vec3::from_array(crate::studio::LIGHT_DIRECTION)
-                .extend(0.)
-                .to_array(),
-            radiance: glam::Vec3::from_array(crate::studio::LIGHT_RADIANCE)
-                .extend(0.)
                 .to_array(),
             environment: [
                 environment.intensity,
@@ -268,6 +262,9 @@ impl Renderer {
             depth: f64,
         }
         let mut opaque = Vec::new();
+        let light_group =
+            self.lighting
+                .prepare(&self.device, encoder, &scene.lights, target.rect)?;
         let mut transparent = Vec::new();
         let eye = glam::Vec3::from_array(crate::studio::EYE).as_dvec3();
         let forward = (-eye).normalize();
@@ -329,6 +326,7 @@ impl Renderer {
         });
         pass.set_bind_group(0, &bind_group, &[]);
         pass.set_bind_group(2, &environment.resource.group, &[]);
+        pass.set_bind_group(3, &light_group, &[]);
         let [x, y, w, h] = target.rect;
         pass.set_viewport(x, y, w, h, 0., 1.);
         for draw in opaque.iter().chain(&transparent) {

@@ -1,8 +1,10 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 #[cfg(feature = "crdt")]
 mod crdt;
+mod lights;
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
+pub use lights::{DirectionalLight, PointLight, SpotLight};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -355,6 +357,17 @@ impl Project {
                         issue(path, &message);
                     }
                 }
+                if ["DirectionalLight", "PointLight", "SpotLight"]
+                    .iter()
+                    .filter(|kind| entity.components.contains_key(**kind))
+                    .count()
+                    > 1
+                {
+                    issue(
+                        format!("{path}/components"),
+                        "an entity can contain only one punctual light",
+                    );
+                }
             }
         }
         if self
@@ -387,6 +400,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
         serde_json::from_value(v.clone()).map_err(|e| e.to_string())
     }
     match kind {
+        "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
         "Transform" => {
             let t: Transform = decode(value)?;
             if !t
@@ -489,6 +503,15 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
         (
+            "DirectionalLight".into(),
+            json!(schemars::schema_for!(DirectionalLight)),
+        ),
+        (
+            "PointLight".into(),
+            json!(schemars::schema_for!(PointLight)),
+        ),
+        ("SpotLight".into(), json!(schemars::schema_for!(SpotLight))),
+        (
             "EnvironmentLight".into(),
             json!(schemars::schema_for!(EnvironmentLight)),
         ),
@@ -500,6 +523,18 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         ("Camera", vec!["fov_degrees", "near", "far"]),
         ("MeshRenderer", vec!["mesh", "materials", "cast_shadows"]),
         ("Script", vec!["source", "props"]),
+        ("DirectionalLight", vec!["color", "intensity"]),
+        ("PointLight", vec!["color", "intensity", "range"]),
+        (
+            "SpotLight",
+            vec![
+                "color",
+                "intensity",
+                "range",
+                "inner_degrees",
+                "outer_degrees",
+            ],
+        ),
         (
             "EnvironmentLight",
             vec!["texture", "intensity", "rotation_degrees"],
@@ -509,6 +544,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             schema["order"] = json!(order);
         }
     }
+    lights::annotate_schemas(&mut registry);
     registry
 }
 impl Scene {

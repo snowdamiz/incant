@@ -34,6 +34,7 @@ pub(crate) struct PipelineKey {
 pub(crate) struct MaterialSystem {
     pub globals: wgpu::BindGroupLayout,
     environment: wgpu::BindGroupLayout,
+    lighting: wgpu::BindGroupLayout,
     layout: wgpu::BindGroupLayout,
     fallback: wgpu::TextureView,
     sampler: wgpu::Sampler,
@@ -56,6 +57,7 @@ impl MaterialSystem {
         device: &wgpu::Device,
         queue: &wgpu::Queue,
         environment: &wgpu::BindGroupLayout,
+        lighting: &wgpu::BindGroupLayout,
     ) -> Self {
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Material frame"),
@@ -120,6 +122,7 @@ impl MaterialSystem {
         Self {
             globals,
             environment: environment.clone(),
+            lighting: lighting.clone(),
             layout,
             fallback: texture.create_view(&Default::default()),
             sampler: device.create_sampler(&Default::default()),
@@ -302,6 +305,7 @@ impl MaterialSystem {
                     &self.globals,
                     &self.layout,
                     &self.environment,
+                    &self.lighting,
                 )
             })
             .clone())

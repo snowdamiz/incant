@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "order": [
+    "color",
+    "intensity",
+    "range",
+    "inner_degrees",
+    "outer_degrees"
+  ],
+  "properties": {
+    "color": {
+      "items": {
+        "format": "double",
+        "maximum": 1,
+        "minimum": 0,
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array",
+      "x-incant-widget": "rgb"
+    },
+    "inner_degrees": {
+      "format": "double",
+      "maximum": 89.9,
+      "minimum": 0,
+      "type": "number",
+      "x-incant-unit": "°"
+    },
+    "intensity": {
+      "description": "Luminous intensity in candela. Light travels along transformed local -Z.",
+      "format": "double",
+      "maximum": 1000000,
+      "minimum": 0,
+      "type": "number",
+      "x-incant-unit": "cd"
+    },
+    "outer_degrees": {
+      "format": "double",
+      "maximum": 89.9,
+      "minimum": 0.1,
+      "type": "number",
+      "x-incant-unit": "°"
+    },
+    "range": {
+      "format": "double",
+      "maximum": 10000,
+      "minimum": 0.001,
+      "type": "number",
+      "x-incant-unit": "m"
+    }
+  },
+  "required": [
+    "color",
+    "intensity",
+    "range",
+    "inner_degrees",
+    "outer_degrees"
+  ],
+  "title": "SpotLight",
+  "type": "object"
+}
