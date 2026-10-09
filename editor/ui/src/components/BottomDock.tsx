@@ -7,20 +7,27 @@ import type { DockTab } from '../shell/ShellContext';
 import { projectState } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 import { StateView } from './StateView';
+import { AssetsTab } from './assets/AssetsTab';
+import { useAssets } from '../assets/AssetsContext';
 
 const TABS: { id: DockTab; label: string; icon: IconName }[] = [
+  { id: 'assets', label: 'Assets', icon: 'texture' },
   { id: 'problems', label: 'Problems', icon: 'problems' },
   { id: 'console', label: 'Console', icon: 'console' },
   { id: 'history', label: 'History', icon: 'history' },
 ];
 
-/** Problems, Console and History share the dock under the viewport (ARIA tabs). */
-export function BottomDock() {
+/** Assets, Problems, Console and History share the dock under the viewport (ARIA tabs). */
+/** `onRequestHeight` lets a tab ask for room (never shrinks the dock; the layout clamp still applies). */
+export function BottomDock({ onRequestHeight }: { onRequestHeight?: (min: number) => void }) {
   const { snapshot, dockTab, setDockTab } = useShell();
+  const { pending, outcome } = useAssets();
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const problems = snapshot?.diagnostics ?? [];
   const errors = problems.filter((d) => d.severity === 'error').length;
+  const assets = snapshot?.assets?.status === 'ready' ? snapshot.assets.value.length : 0;
   const counts: Record<DockTab, string | null> = {
+    assets: assets ? String(assets) : null,
     problems: problems.length ? String(problems.length) : null,
     console: snapshot?.console.length ? String(snapshot.console.length) : null,
     history: snapshot?.history.entries.length ? String(snapshot.history.entries.length) : null,
@@ -42,7 +49,7 @@ export function BottomDock() {
   };
 
   return (
-    <section className="panel panel--dock" data-region="dock" aria-label="Problems, console and history" tabIndex={-1}>
+    <section className="panel panel--dock" data-region="dock" aria-label="Assets and output" tabIndex={-1}>
       <div className="tabs" role="tablist" aria-label="Output" onKeyDown={onKeyDown}>
         {TABS.map((tab) => (
           <button
@@ -62,7 +69,16 @@ export function BottomDock() {
           >
             <Icon name={tab.icon} size={14} />
             {tab.label}
-            {counts[tab.id] ? (
+            {tab.id === 'assets' && pending ? (
+              <span className="tab__busy" title="Import running">
+                <span className="spinner spinner--small" aria-hidden="true" />
+                <span className="visually-hidden">(importing)</span>
+              </span>
+            ) : tab.id === 'assets' && outcome?.status === 'failure' && dockTab !== 'assets' ? (
+              <span className="tab__count tab__count--error" title="The last import failed">
+                <span className="visually-hidden">(</span>!<span className="visually-hidden"> last import failed)</span>
+              </span>
+            ) : counts[tab.id] ? (
               <span className={`tab__count${tab.id === 'problems' && errors ? ' tab__count--error' : ''}`}>
                 <span className="visually-hidden">(</span>
                 {counts[tab.id]}
@@ -78,7 +94,15 @@ export function BottomDock() {
         id={`dock-panel-${dockTab}`}
         aria-labelledby={`dock-tab-${dockTab}`}
       >
-        {dockTab === 'problems' ? <ProblemsList /> : dockTab === 'console' ? <ConsoleList /> : <HistoryList />}
+        {dockTab === 'assets' ? (
+          <AssetsTab onRequestHeight={onRequestHeight} />
+        ) : dockTab === 'problems' ? (
+          <ProblemsList />
+        ) : dockTab === 'console' ? (
+          <ConsoleList />
+        ) : (
+          <HistoryList />
+        )}
       </div>
     </section>
   );

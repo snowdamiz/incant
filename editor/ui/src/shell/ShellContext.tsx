@@ -12,7 +12,7 @@ import type {
 import type { CapabilitySet } from '../bridge/resolve';
 import { readCapabilities, unavailableMessage } from '../bridge/resolve';
 
-export type DockTab = 'problems' | 'console' | 'history';
+export type DockTab = 'assets' | 'problems' | 'console' | 'history';
 
 export interface Shell {
   readonly bridge: EditorBridge | null;
@@ -26,6 +26,8 @@ export interface Shell {
   readonly announce: (message: string) => void;
   /** Checks the capability, dispatches, and announces any failure. Resolves true on success. */
   readonly run: (command: EditorCommand) => Promise<boolean>;
+  /** Like `run`, but returns the bridge's result so a caller can show the exact error inline. */
+  readonly dispatch: (command: EditorCommand) => Promise<BridgeResult>;
   readonly ask: (request: HostRequest) => Promise<boolean>;
   /** Like `ask`, but returns the host's result so a caller can show the exact error inline. */
   readonly request: (request: HostRequest) => Promise<BridgeResult>;
@@ -37,6 +39,9 @@ export interface Shell {
 }
 
 const ShellContext = createContext<Shell | null>(null);
+
+/** Plain-language failure prefixes; other commands keep their command name. */
+const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed' };
 
 const NO_CAPABILITIES = readCapabilities([]);
 const noopSubscribe = () => () => undefined;
@@ -69,18 +74,20 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
     [announce, bridge],
   );
 
-  const run = useCallback(
-    async (command: EditorCommand) => {
+  const dispatch = useCallback(
+    async (command: EditorCommand): Promise<BridgeResult> => {
       if (!bridge || !capabilities.has(command.type)) {
-        explainUnavailable(command.type);
-        return false;
+        const message = unavailableMessage(command.type, bridge);
+        announce(message);
+        return { ok: false, error: { code: 'unsupported', message } };
       }
       const result = await bridge.dispatch(command);
-      if (!result.ok) announce(`${command.type} failed: ${result.error.message}`);
-      return result.ok;
+      if (!result.ok) announce(`${FAILURE_LABEL[command.type] ?? `${command.type} failed`}: ${result.error.message}`);
+      return result;
     },
-    [announce, bridge, capabilities, explainUnavailable],
+    [announce, bridge, capabilities],
   );
+  const run = useCallback(async (command: EditorCommand) => (await dispatch(command)).ok, [dispatch]);
 
   const request = useCallback(
     async (hostRequest: HostRequest): Promise<BridgeResult> => {
@@ -129,6 +136,7 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
       message,
       announce,
       run,
+      dispatch,
       ask,
       request,
       explainUnavailable,
@@ -136,7 +144,7 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
       openAccount,
       closeAccount,
     }),
-    [bridge, snapshot, capabilities, liveSelection, dockTab, message, announce, run, ask, request, explainUnavailable, accountOpen, openAccount, closeAccount],
+    [bridge, snapshot, capabilities, liveSelection, dockTab, message, announce, run, dispatch, ask, request, explainUnavailable, accountOpen, openAccount, closeAccount],
   );
   return <ShellContext.Provider value={value}>{children}</ShellContext.Provider>;
 }

@@ -1,0 +1,731 @@
+/*
+ * Asset library (dock tab). Same surfaces, row pill and focus ring as the hierarchy and
+ * output lists. The details/import pane sits beside the list when there is room and
+ * replaces it in a narrow dock (container queries, so it follows splitter changes too).
+ */
+
+.assets {
+  container: assets / inline-size;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.assets__browser {
+  container: asset-browser / inline-size;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.assets__toolbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+}
+
+.assets__toolbar .search-field {
+  max-width: 360px;
+}
+
+.assets__toolbar .button {
+  margin-left: auto;
+}
+
+.button.is-current {
+  border-color: var(--color-border-control);
+  background: var(--color-bg-hover);
+}
+
+/* Running import: a quiet strip above the list, present whichever pane is open. */
+.assets__busy {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: 6px var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-info-bg) 55%, var(--color-bg-panel));
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.assets__busy > span:nth-child(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.assets__busy-note {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text-subtle);
+}
+
+/* ---- List ---- */
+
+.asset-list {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.asset-list__head,
+.asset-row {
+  display: grid;
+  grid-template-columns: 22px minmax(96px, 1fr) minmax(0, 1.6fr) 136px;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.asset-list__head {
+  flex: none;
+  height: 24px;
+  margin: 0 var(--space-3);
+  padding: 0 10px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+}
+
+.asset-list__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 0 var(--space-3);
+}
+
+.asset-row {
+  height: var(--row-height);
+  margin: 0 var(--space-3);
+  padding: 0 10px;
+  border-radius: var(--radius);
+  color: var(--color-text-soft);
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+}
+
+.asset-row:hover {
+  background: var(--color-bg-hover);
+}
+
+.asset-row.is-selected {
+  background: var(--color-bg-selected);
+  color: var(--color-text);
+}
+
+.asset-row:focus-visible,
+.asset-row[data-focus-visible] {
+  outline-offset: -2px;
+}
+
+.asset-row__tile,
+.asset-pane__tile,
+.import-row__kind {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.asset-row__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: var(--weight-medium);
+}
+
+/* The folder shrinks first so the file name stays readable in long paths. */
+.asset-row__path {
+  display: flex;
+  min-width: 0;
+  font-size: var(--text-xs);
+}
+
+.asset-row__folder {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text-subtle);
+}
+
+.asset-row__file {
+  flex: 0 1 auto;
+  min-width: 3ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text-muted);
+}
+
+.asset-row.is-selected .asset-row__folder,
+.asset-row.is-selected .asset-row__file {
+  color: var(--color-text-muted);
+}
+
+.asset-row__type {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.asset-row__recent {
+  flex: none;
+  display: inline-flex;
+  color: var(--color-success);
+}
+
+.asset-row__recent::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.kind--model {
+  color: #a3adff;
+}
+
+.kind--texture {
+  color: #73d6c2;
+}
+
+/* Narrow list: name and type on the first line, source path below. */
+@container asset-browser (max-width: 520px) {
+  .asset-list__head {
+    display: none;
+  }
+
+  .asset-list__body {
+    padding-top: var(--space-1);
+  }
+
+  .asset-row {
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    row-gap: 0;
+    height: auto;
+    min-height: 40px;
+    padding-block: 4px;
+  }
+
+  .asset-row__tile {
+    grid-row: 1 / 3;
+  }
+
+  .asset-row__name {
+    grid-column: 2;
+  }
+
+  .asset-row__type {
+    grid-column: 3;
+    grid-row: 1;
+    justify-content: flex-end;
+  }
+
+  .asset-row__path {
+    grid-column: 2 / 4;
+    grid-row: 2;
+  }
+}
+
+/* ---- Pane: details and import ---- */
+
+.asset-pane {
+  flex: none;
+  width: 320px;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--color-border);
+  background: var(--color-bg-side);
+}
+
+@container assets (min-width: 960px) {
+  .asset-pane {
+    width: 380px;
+  }
+}
+
+.asset-pane__header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 40px;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.asset-pane__back {
+  display: none;
+  margin-left: calc(-1 * var(--space-3));
+}
+
+.asset-pane__title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+.asset-pane__title:focus-visible,
+.asset-pane__title[data-focus-visible] {
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
+}
+
+.asset-pane__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.asset-pane__body > .state-view {
+  flex: none;
+}
+
+/* Narrow dock: the pane takes the whole tab and "Back" returns to the list. */
+@container assets (max-width: 640px) {
+  .assets[data-pane='open'] > .assets__browser {
+    display: none;
+  }
+
+  .asset-pane {
+    flex: 1;
+    width: auto;
+    border-left: 0;
+    background: var(--color-bg-panel);
+  }
+
+  .asset-pane__back {
+    display: inline-grid;
+  }
+
+  .asset-pane__close {
+    display: none;
+  }
+}
+
+/* Details */
+
+.asset-details,
+.import-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-4) var(--space-5);
+}
+
+.asset-facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.asset-facts > div {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: baseline;
+}
+
+.asset-facts dt {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.asset-facts dd {
+  margin: 0;
+  min-width: 0;
+  color: var(--color-text-soft);
+}
+
+.asset-facts__path,
+.asset-facts--ids dd {
+  font-size: var(--text-xs);
+  line-height: 18px;
+  overflow-wrap: break-word;
+  user-select: text;
+}
+
+.asset-details__section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.asset-details__label {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.asset-details__hint,
+.asset-details__note {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+.asset-details__changed {
+  color: var(--color-warning);
+}
+
+.asset-details__note {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.asset-details__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 24px;
+}
+
+.asset-details__actions + .asset-details__hint {
+  margin-top: calc(-1 * var(--space-2));
+}
+
+.asset-details__ids summary {
+  width: fit-content;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.asset-details__ids summary:hover {
+  color: var(--color-text-muted);
+}
+
+.asset-details__ids[open] summary {
+  margin-bottom: var(--space-3);
+}
+
+.asset-pending {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 24px;
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+}
+
+/* Segmented radio group (texture interpretation). */
+.segmented {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 2px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-bg-well);
+}
+
+.segmented__option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.segmented__option input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.segmented__option:hover {
+  color: var(--color-text);
+}
+
+.segmented__option:has(input:checked) {
+  background: var(--color-bg-hover);
+  box-shadow: inset 0 0 0 1px var(--color-border-control);
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+}
+
+.segmented__option:has(input:focus-visible),
+.segmented__option:has(input[data-focus-visible]) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 0;
+}
+
+.segmented:disabled .segmented__option {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.segmented:disabled .segmented__option:hover {
+  color: var(--color-text-muted);
+}
+
+/* Notices: success and failure inside the pane. */
+.asset-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 10px var(--space-3) 10px var(--space-4);
+  border-radius: var(--radius);
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+.asset-note > .icon {
+  margin-top: 1px;
+}
+
+.asset-note--success {
+  background: color-mix(in srgb, var(--color-success) 9%, var(--color-bg-side));
+  color: var(--color-text-soft);
+}
+
+.asset-note--success > .icon {
+  color: var(--color-success);
+}
+
+.asset-note--error {
+  border: 1px solid color-mix(in srgb, var(--color-danger) 35%, transparent);
+  background: var(--color-danger-bg);
+  color: var(--color-text-soft);
+}
+
+.asset-note--error > .icon {
+  color: var(--color-danger);
+}
+
+.asset-note__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.asset-note__title {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.asset-note__message {
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+
+.asset-note__hint {
+  color: var(--color-text-muted);
+}
+
+.asset-note__dismiss {
+  width: 22px;
+  height: 22px;
+  margin: -2px -2px 0 0;
+}
+
+/* Import form */
+
+.import-form__lede {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 18px;
+}
+
+.import-form__lede code {
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-raised);
+  color: var(--color-text-soft);
+  font-size: 11.5px;
+}
+
+.import-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.import-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.import-row__line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.import-row__kind {
+  flex: none;
+  color: var(--color-text-subtle);
+}
+
+.import-row__input {
+  flex: 1;
+  min-width: 0;
+  height: var(--control-height);
+  padding: 0 var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-bg-well);
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  text-overflow: ellipsis;
+  transition: border-color var(--duration-fast);
+}
+
+.import-row__input::placeholder {
+  color: var(--color-text-subtle);
+  opacity: 0.8;
+}
+
+.import-row__input:hover {
+  border-color: var(--color-border-strong);
+}
+
+.import-row__input:focus-visible,
+.import-row__input[data-focus-visible] {
+  border-color: var(--color-border-control);
+  outline-offset: 1px;
+}
+
+.import-row__input[readonly] {
+  color: var(--color-text-muted);
+}
+
+.import-row__input[aria-invalid='true'] {
+  border-color: color-mix(in srgb, var(--color-danger) 70%, transparent);
+  background: color-mix(in srgb, var(--color-danger-bg) 60%, var(--color-bg-well));
+}
+
+.import-row__remove {
+  width: 24px;
+  height: 24px;
+}
+
+.import-row__meta,
+.import-row__problem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px var(--space-3);
+  margin-left: 28px;
+  margin-right: 30px;
+  font-size: var(--text-xs);
+}
+
+.import-row__problem {
+  color: var(--color-danger);
+  line-height: 17px;
+}
+
+.import-row__type {
+  color: var(--color-text-subtle);
+}
+
+.import-row__existing {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text-subtle);
+}
+
+.import-form__add {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: 20px;
+}
+
+.import-form__count {
+  margin-left: auto;
+  margin-right: 4px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.import-form__formats {
+  margin-top: calc(-1 * var(--space-2));
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.import-form {
+  flex: 1;
+  padding-bottom: 0;
+}
+
+/* The submit row stays in view while the paths scroll. */
+.import-form__footer {
+  position: sticky;
+  bottom: 0;
+  margin: auto calc(-1 * var(--space-4)) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-side);
+}
+
+@container assets (max-width: 640px) {
+  .import-form__footer {
+    background: var(--color-bg-panel);
+  }
+}
+
+.import-form__wait {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+/* Dock tab: a small spinner while an import runs. */
+.tab__busy {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 16px;
+}

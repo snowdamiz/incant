@@ -1,0 +1,407 @@
+{
+  "browser": "Chrome 155.0.8059.40 headless via playwright-core",
+  "data": "SYNTHETIC: shipped read-only sample fixture and capture-only evidence doubles; not engine state",
+  "shots": [
+    "01-populated-fixture-1000x650.png",
+    "02-details-long-path-fixture-1000x650.png",
+    "03-import-unavailable-fixture-1000x650.png",
+    "04-empty-fixture-1000x650.png",
+    "05-project-loading-fixture-1000x650.png",
+    "06-project-failed-fixture-1000x650.png",
+    "07-large-fixture-1000x650.png",
+    "08-assets-absent-older-host-double-1000x650.png",
+    "09-unsaved-unavailable-double-1000x650.png",
+    "10-import-validation-double-1000x650.png",
+    "10b-import-ready-double-1000x650.png",
+    "11-import-busy-double-1000x650.png",
+    "11b-busy-other-tab-double-1000x650.png",
+    "12-import-failed-double-1000x650.png",
+    "13-import-conflict-double-1000x650.png",
+    "14-import-success-double-1000x650.png",
+    "15-reimport-changed-usage-double-1000x650.png",
+    "16-reimport-busy-double-1000x650.png",
+    "17-keyboard-list-focus-double-1000x650.png",
+    "17b-keyboard-details-focus-double-1000x650.png",
+    "01-populated-fixture-1440x900.png",
+    "02-details-long-path-fixture-1440x900.png",
+    "03-import-unavailable-fixture-1440x900.png",
+    "04-empty-fixture-1440x900.png",
+    "05-project-loading-fixture-1440x900.png",
+    "06-project-failed-fixture-1440x900.png",
+    "07-large-fixture-1440x900.png",
+    "08-assets-absent-older-host-double-1440x900.png",
+    "09-unsaved-unavailable-double-1440x900.png",
+    "10-import-validation-double-1440x900.png",
+    "10b-import-ready-double-1440x900.png",
+    "11-import-busy-double-1440x900.png",
+    "11b-busy-other-tab-double-1440x900.png",
+    "12-import-failed-double-1440x900.png",
+    "13-import-conflict-double-1440x900.png",
+    "14-import-success-double-1440x900.png",
+    "15-reimport-changed-usage-double-1440x900.png",
+    "16-reimport-busy-double-1440x900.png",
+    "17-keyboard-list-focus-double-1440x900.png",
+    "17b-keyboard-details-focus-double-1440x900.png"
+  ],
+  "axe": [
+    {
+      "label": "details fixture 1440x900",
+      "violations": []
+    },
+    {
+      "label": "import form 1440x900",
+      "violations": []
+    },
+    {
+      "label": "busy 1440x900",
+      "violations": []
+    },
+    {
+      "label": "fail 1440x900",
+      "violations": []
+    },
+    {
+      "label": "conflict 1440x900",
+      "violations": []
+    },
+    {
+      "label": "success 1440x900",
+      "violations": []
+    }
+  ],
+  "focus": [
+    {
+      "label": "import opened by pointer hold 1000x650",
+      "active": "input  \"Path 1\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "after invalid submit 1000x650",
+      "active": "input  \"Path 2\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "import opened by pointer fail 1000x650",
+      "active": "input  \"Path 1\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "import opened by pointer conflict 1000x650",
+      "active": "input  \"Path 1\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "import opened by pointer success 1000x650",
+      "active": "input  \"Path 1\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "F6 to dock 1000x650",
+      "active": "button tab \"Assets(6)\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "Tab into list 1000x650",
+      "active": "div option \"dock_kit models/dock_kit.glb Model\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "ArrowDown in list 1000x650",
+      "active": "div option \"crate models/props/crate.gltf Model\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "Enter opens details 1000x650",
+      "active": "h3  \"crate\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "Escape closes details 1000x650",
+      "active": "div option \"crate models/props/crate.gltf Model\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "import opened by pointer hold 1440x900",
+      "active": "input  \"Path 1\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "after invalid submit 1440x900",
+      "active": "input  \"Path 2\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "import opened by pointer fail 1440x900",
+      "active": "input  \"Path 1\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "import opened by pointer conflict 1440x900",
+      "active": "input  \"Path 1\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "import opened by pointer success 1440x900",
+      "active": "input  \"Path 1\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "F6 to dock 1440x900",
+      "active": "button tab \"Assets(6)\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "Tab into list 1440x900",
+      "active": "div option \"dock_kit models/dock_kit.glb Model\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "ArrowDown in list 1440x900",
+      "active": "div option \"crate models/props/crate.gltf Model\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "Enter opens details 1440x900",
+      "active": "h3  \"crate\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "Escape closes details 1440x900",
+      "active": "div option \"crate models/props/crate.gltf Model\"",
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    }
+  ],
+  "dispatched": [
+    {
+      "mode": "hold",
+      "size": "1000x650",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/lantern.glb"
+            },
+            {
+              "source": "textures/lantern_normal.png",
+              "textureUsage": "normal"
+            },
+            {
+              "source": "textures/crate_normal.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "fail",
+      "size": "1000x650",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/lantern.glb"
+            },
+            {
+              "source": "textures/lantern_normal.png",
+              "textureUsage": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "conflict",
+      "size": "1000x650",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/lantern.glb"
+            },
+            {
+              "source": "textures/lantern_normal.png",
+              "textureUsage": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "success",
+      "size": "1000x650",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/lantern.glb"
+            },
+            {
+              "source": "textures/lantern_normal.png",
+              "textureUsage": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "reimport-hold",
+      "size": "1000x650",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/crate_albedo.png",
+              "textureUsage": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "hold",
+      "size": "1440x900",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/lantern.glb"
+            },
+            {
+              "source": "textures/lantern_normal.png",
+              "textureUsage": "normal"
+            },
+            {
+              "source": "textures/crate_normal.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "fail",
+      "size": "1440x900",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/lantern.glb"
+            },
+            {
+              "source": "textures/lantern_normal.png",
+              "textureUsage": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "conflict",
+      "size": "1440x900",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/lantern.glb"
+            },
+            {
+              "source": "textures/lantern_normal.png",
+              "textureUsage": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "success",
+      "size": "1440x900",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "models/props/lantern.glb"
+            },
+            {
+              "source": "textures/lantern_normal.png",
+              "textureUsage": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "reimport-hold",
+      "size": "1440x900",
+      "commands": [
+        {
+          "type": "asset.import",
+          "sources": [
+            {
+              "source": "textures/crate_albedo.png",
+              "textureUsage": "normal"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "layout": [
+    {
+      "label": "populated 1000x650",
+      "dock": "446x176",
+      "browser": "446x140",
+      "pane": null,
+      "visibleOverflowingElements": 0
+    },
+    {
+      "label": "details 1000x650",
+      "dock": "446x300",
+      "browser": "0x0",
+      "pane": "446x264",
+      "visibleOverflowingElements": 0
+    },
+    {
+      "label": "populated 1440x900",
+      "dock": "862x243",
+      "browser": "862x207",
+      "pane": null,
+      "visibleOverflowingElements": 0
+    },
+    {
+      "label": "details 1440x900",
+      "dock": "862x300",
+      "browser": "542x264",
+      "pane": "320x264",
+      "visibleOverflowingElements": 0
+    }
+  ],
+  "errors": []
+}

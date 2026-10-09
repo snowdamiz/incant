@@ -150,6 +150,18 @@ are bundled locally, so nothing is fetched from a network.
   viewport, inspector and History say "No project loaded" in one short line. Problems lists
   the engine's diagnostic. Without one, it says "Not validated", never "No problems". Saved
   account metadata in the titlebar chip stays visible in every project state.
+- **Asset library (handoff 0010):** the first dock tab, so it shares the output dock's
+  width and splitter. Rows use the hierarchy's 28 px pill on a four-column grid: kind tile,
+  name, source path, type. The folder part of a path truncates before the file name, so
+  long paths stay identifiable. Below about 520 px the row becomes two lines. Selecting a
+  row opens a details pane on the right. The import form opens in the same pane, and both
+  ask the dock to grow to 300 px, within the usual layout clamp. Below about 640 px the
+  pane replaces the list and shows a Back button. Texture interpretation is a three-option
+  segmented radio group: Color, Linear, Normal map. A running import shows a strip above
+  the list, a spinner in the tab and an inline status. It never shows a percentage or a
+  cancel control. Failures are an inline alert with the engine's exact message. They keep
+  every typed path and replace the submit label with "Try again". Fingerprints and IDs sit
+  in a collapsed "Identifiers" disclosure. Styles live in `src/styles/assets.css`.
 
 ## Focus and keyboard
 
@@ -162,7 +174,11 @@ are bundled locally, so nothing is fetched from a network.
   enforces that. A keyboard-opened dialog therefore rings Close. A pointer-opened dialog
   focuses Close without a ring, as before.
 - F6 / Shift+F6 cycle visible panels (hidden panels are skipped). Hierarchy is an ARIA
-  tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys.
+  tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys. The asset
+  list is an ARIA listbox with a roving tabindex. Arrows, Home and End move through it,
+  Enter or Space opens details, ⌘/Ctrl+F filters, and Escape closes the pane and returns to
+  the row. Shift+Enter in a path field adds a row. A paste of several lines adds one row per
+  line.
   Dividers are `separator`s resizable with arrows (Shift = 64 px). `?` opens the
   shortcut list (modal, focus trapped, Escape returns focus). A skip link is first.
 
