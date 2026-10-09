@@ -84,6 +84,28 @@ These are website checks, not engine or live-provider release evidence. Firefox,
 Safari and physical-device visual checks were not run. Public CTA destinations
 are the real repository and its product plan; they require repository access.
 
+### Revision 2 integration
+
+Following the director's rejection of the first visual design, Claude produced
+`cbfbfab`, integrated as `373a2bf`. The new design uses a warm paper/ink palette,
+Fraunces display typography, fewer sections and a single interactive editor stage.
+Ask, Review, Play-test and Undo change the illustrated scene, outline, inspector
+and status together. The critique and design rationale are in
+`handoffs/0005-landing-page/revision-2.md`; reviewed screenshots are preserved in
+`handoffs/0005-landing-page/screenshots/revision-2/` alongside the original evidence.
+
+Fresh `npm ci` reports zero vulnerabilities; the strict production build succeeds.
+All 22 integrated browser checks pass in 9.9 seconds, including zero axe
+violations and WCAG A/AA checks. Independent behavioral tests exercise the revised
+controls without hard-coding marketing copy. Actionlint and generated-convention
+checks remain clean. Both reviewed screenshot sets remain unchanged by tests.
+
+The integrated revision ships 95.86 kB JS / 35.54 kB gzip and 34.74 kB CSS /
+7.43 kB gzip. Four local font files total 228.85 kB; their OFL licenses ship in
+`public/licenses/`. The complete deployed directory is 392 kB on disk including
+licenses. The CI workflow and the unresolved private-repository Pages prerequisite
+remain as described below. Director visual acceptance and merge remain pending.
+
 ## Hosting prerequisite
 
 The authenticated GitHub Pages creation call for `snowdamiz/incant`, with
