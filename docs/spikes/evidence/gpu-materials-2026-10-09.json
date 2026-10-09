@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-09",
+  "renderer_base": "43f0d3f",
+  "adapter": "Apple M5 Pro",
+  "local_checks": {
+    "rust_behavior_tests": 119,
+    "explicit_gpu_tests": 7,
+    "ui_bridge_tests": 282,
+    "clippy": "passed",
+    "format": "passed",
+    "ui_build": "passed",
+    "native_release_custom_protocol_build": "passed"
+  },
+  "native": {
+    "fixture_creation": "CLI init/import and shared command-bus RPC",
+    "source_texture_reimport": true,
+    "undo_exact_viewport_restoration": true,
+    "undo_survives_polling": true,
+    "redo_exact_replacement_restoration": true,
+    "invalid_image_keeps_last_good_viewport": true,
+    "repair_clears_diagnostic_and_restores_pixels": true,
+    "asset_details_in_main_inspector": true,
+    "window_sizes": [
+      [
+        1440,
+        900
+      ],
+      [
+        1000,
+        650
+      ]
+    ],
+    "captures": "private ignored artifacts/native-material-review/*.jpg",
+    "comparison_region": [
+      300,
+      110,
+      1050,
+      590
+    ],
+    "capture_encoding": "CUA JPEG",
+    "saved_account_restored": true
+  },
+  "visual_review": "pending Claude 0014",
+  "hosted_checks": "pending"
+}

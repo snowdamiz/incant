@@ -13,7 +13,7 @@ pub enum SceneError {
     Document(#[from] incant_doc::DocumentError),
     #[error("model asset {0} is not loaded at the document's current fingerprint")]
     MissingModel(String),
-    #[error("material overrides are not supported by the geometry diagnostic pass")]
+    #[error("authored material asset overrides are not supported by the imported preview")]
     MaterialOverrides,
     #[error("model {0} has no scene to instantiate")]
     NoScene(String),
