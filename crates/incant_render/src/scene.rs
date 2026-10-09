@@ -2,7 +2,10 @@
 use glam::Mat4;
 use incant_assets::{AssetStore, RuntimeAsset, RuntimeAssetData};
 use incant_doc::Project;
-use std::{collections::BTreeMap, sync::Arc};
+use std::{
+    collections::{BTreeMap, BTreeSet},
+    sync::Arc,
+};
 use thiserror::Error;
 
 const MAX_INSTANCES: usize = 100_000;
@@ -29,6 +32,12 @@ pub enum SceneError {
     LightTransform,
     #[error("spot inner/outer angles cannot be distinguished at GPU precision")]
     LightCone,
+    #[error("camera entity {0} was not found or has no Camera component")]
+    MissingCamera(String),
+    #[error("camera world transform cannot form a finite orthonormal view")]
+    CameraTransform,
+    #[error("camera projection exceeds GPU numeric precision")]
+    CameraProjection,
     #[error("scene exceeds 16 directional or 4096 local lights")]
     LightLimit,
 }
@@ -77,6 +86,7 @@ pub(crate) struct ResolvedScene {
     pub stats: SceneStats,
     pub environment: Option<crate::environment::EnvironmentPlan>,
     pub lights: crate::lighting::scene::LightPlan,
+    pub cameras: BTreeMap<String, crate::camera::CameraView>,
 }
 
 /// A model's default scene is used, falling back to its first declared scene.
@@ -93,6 +103,7 @@ pub(crate) fn resolve(
         stats: SceneStats::default(),
         environment: None,
         lights: Default::default(),
+        cameras: BTreeMap::new(),
     };
     for entity in project
         .scenes
@@ -116,17 +127,45 @@ pub(crate) fn resolve(
             });
         }
     }
+    // Empty frames used by a camera rig are not drawable diagnostic geometry.
+    // Explicit MeshRenderer bindings on those entities still render normally.
+    let mut camera_frames = BTreeSet::new();
+    for scene in project.scenes.values() {
+        for camera in scene
+            .entities
+            .values()
+            .filter(|e| e.components.contains_key("Camera"))
+        {
+            let mut current = Some(camera.id.as_str());
+            while let Some(id) = current {
+                if !camera_frames.insert(id.to_owned()) {
+                    break;
+                }
+                current = scene.entities[id].parent.as_deref();
+            }
+        }
+    }
     for entity in state.entities.values() {
         let world64 = glam::DMat4::from_cols_array_2d(&entity.world_transform);
         let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
         result.lights.add(components, world64)?;
+        if let Some(value) = components.get("Camera") {
+            let camera: incant_doc::Camera =
+                serde_json::from_value(value.clone()).map_err(incant_doc::DocumentError::from)?;
+            result.cameras.insert(
+                entity.id.clone(),
+                crate::camera::CameraView::authored(&camera, world64)?,
+            );
+        }
         let world = world64.as_mat4();
         // Validate even empty mesh nodes so invalid ranges never reach GPU buffers.
         Instance::new(world)?;
         let Some(binding) = &entity.mesh else {
             let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
             if components.contains_key("Transform")
+                && !camera_frames.contains(&entity.id)
                 && ![
+                    "Camera",
                     "EnvironmentLight",
                     "DirectionalLight",
                     "PointLight",
@@ -227,5 +266,37 @@ mod tests {
             resolve(&project, Some(&assets)),
             Err(SceneError::MissingModel(_))
         ));
+    }
+    #[test]
+    fn camera_rig_frames_hide_diagnostic_cubes_but_preserve_explicit_meshes() {
+        use incant_doc::{Entity, Transform};
+        use serde_json::json;
+        let temp = tempfile::tempdir().unwrap();
+        let (mut project, assets, _) = support::fixture(temp.path());
+        let entities = &mut project.scenes.values_mut().next().unwrap().entities;
+        let model_id = entities.keys().next().unwrap().clone();
+        let mut frame = Entity::new("Camera rig frame");
+        frame
+            .components
+            .insert("Transform".into(), json!(Transform::default()));
+        entities.get_mut(&model_id).unwrap().parent = Some(frame.id.clone());
+        entities.insert(frame.id.clone(), frame);
+        let mut camera = Entity::new("Attached camera");
+        camera.parent = Some(model_id);
+        camera.components.insert(
+            "Camera".into(),
+            json!({"fov_degrees":60,"near":0.1,"far":100}),
+        );
+        let camera_id = camera.id.clone();
+        entities.insert(camera.id.clone(), camera);
+        let mut diagnostic = Entity::new("Unrelated diagnostic cube");
+        diagnostic
+            .components
+            .insert("Transform".into(), json!(Transform::default()));
+        entities.insert(diagnostic.id.clone(), diagnostic);
+        let result = resolve(&project, Some(&assets)).unwrap();
+        assert_eq!(result.stats.model_entities, 2);
+        assert_eq!(result.stats.diagnostic_entities, 1);
+        assert!(result.cameras.contains_key(&camera_id));
     }
 }

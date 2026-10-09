@@ -106,3 +106,126 @@ fn headless_play_records_current_simulation_frames_and_publishes_a_complete_repo
         "a partial run must never claim completion"
     );
 }
+
+#[test]
+#[ignore = "requires a native GPU; run by the desktop workflow"]
+fn camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection() {
+    use incant_doc::{Camera, Entity, Project, Transform};
+    use serde_json::json;
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    let cube = fixture(root);
+    let path = root.join("game.incant.json");
+    let mut project = Project::from_text(&fs::read_to_string(&path).unwrap()).unwrap();
+    let entities = &mut project.scenes.values_mut().next().unwrap().entities;
+    entities
+        .get_mut(&cube)
+        .unwrap()
+        .components
+        .remove("Velocity");
+    let mut camera = Entity::new("Moving camera");
+    let id = camera.id.clone();
+    camera.components.insert(
+        "Camera".into(),
+        json!(Camera {
+            fov_degrees: 60.,
+            near: 0.1,
+            far: 100.
+        }),
+    );
+    camera.components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [0., 0., 5.],
+            ..Default::default()
+        }),
+    );
+    camera
+        .components
+        .insert("Velocity".into(), json!({"linear":[2,0,0]}));
+    entities.insert(id.clone(), camera);
+    fs::write(&path, project.canonical_text().unwrap()).unwrap();
+    let authored = fs::read(&path).unwrap();
+    let journal = fs::read(root.join("game.incant.journal.jsonl")).unwrap();
+    let report = success(run(
+        root,
+        &[
+            "play",
+            "game.incant.json",
+            "--camera",
+            &id,
+            "--ticks",
+            "60",
+            "--output",
+            "camera-frames",
+            "--width",
+            "320",
+            "--height",
+            "180",
+        ],
+    ));
+    assert_eq!(report["camera"], id);
+    let first = fs::read(root.join("camera-frames/frame-000000.png")).unwrap();
+    let last = fs::read(root.join("camera-frames/frame-000060.png")).unwrap();
+    assert_ne!(
+        first, last,
+        "camera velocity must affect the frame while geometry stays still"
+    );
+    let screenshot = success(run(
+        root,
+        &[
+            "screenshot",
+            "game.incant.json",
+            "camera.png",
+            "--camera",
+            &id,
+            "--width",
+            "320",
+            "--height",
+            "180",
+        ],
+    ));
+    assert_eq!(screenshot["camera"], id);
+    assert_eq!(first, fs::read(root.join("camera.png")).unwrap());
+    assert_eq!(authored, fs::read(&path).unwrap());
+    assert_eq!(
+        journal,
+        fs::read(root.join("game.incant.journal.jsonl")).unwrap()
+    );
+    assert!(
+        !run(
+            root,
+            &[
+                "screenshot",
+                "game.incant.json",
+                "missing.png",
+                "--camera",
+                &cube
+            ]
+        )
+        .status
+        .success()
+    );
+    assert!(!root.join("missing.png").exists());
+    assert!(
+        !run(
+            root,
+            &[
+                "play",
+                "game.incant.json",
+                "--camera",
+                &cube,
+                "--output",
+                "missing-frames"
+            ]
+        )
+        .status
+        .success()
+    );
+    assert!(!root.join("missing-frames/report.json").exists());
+    assert!(
+        !run(root, &["play", "game.incant.json", "--camera", &id])
+            .status
+            .success()
+    );
+}

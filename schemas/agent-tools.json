@@ -483,12 +483,20 @@
     "type": "function"
   },
   {
-    "description": "Capture the actual engine viewport; never fabricate perception.",
+    "description": "Capture actual engine pixels through an authored Camera entity ID, or omit camera for the editor preview; never fabricate perception.",
     "name": "view_screenshot",
     "parameters": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
       "additionalProperties": false,
       "properties": {
+        "camera": {
+          "default": null,
+          "description": "Authored Camera entity ID; omit for the editor preview.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "height": {
           "format": "uint32",
           "minimum": 0,

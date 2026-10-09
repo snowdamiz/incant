@@ -1,6 +1,7 @@
 //! Native rendering and GPU readback with retained imported material previews.
 //! Ordered HDR geometry, display transform and native composition passes.
 //! Authored clustered lights; the full production render graph remains open.
+mod camera;
 mod environment;
 mod frame;
 #[cfg(test)]
@@ -202,7 +203,7 @@ impl Renderer {
             return Err("invalid viewport corner radius".into());
         }
         let attachments = self.frames.get(&self.device, width, height)?;
-        let vertices = vertices(&scene.diagnostics, rect[2] / rect[3]);
+        let vertices = vertices(&scene.diagnostics, scene.camera.matrix(rect[2] / rect[3])?);
         let buffer = self
             .device
             .create_buffer_init(&wgpu::util::BufferInitDescriptor {
@@ -359,13 +360,9 @@ const CAMERA_NEAR: f32 = 0.1;
 const CAMERA_FAR: f32 = 1000.;
 const CAMERA_FOV: f32 = 50f32.to_radians();
 fn camera_view() -> Mat4 {
-    Mat4::look_at_rh(Vec3::from_array(studio::EYE), Vec3::ZERO, Vec3::Y)
+    camera::CameraView::preview().view
 }
-fn camera(aspect: f32) -> Mat4 {
-    Mat4::perspective_rh(CAMERA_FOV, aspect, CAMERA_NEAR, CAMERA_FAR) * camera_view()
-}
-fn vertices(transforms: &[Mat4], aspect: f32) -> Vec<Vertex> {
-    let camera = camera(aspect);
+fn vertices(transforms: &[Mat4], camera: Mat4) -> Vec<Vertex> {
     let corners = [
         [-0.5, -0.5, -0.5],
         [0.5, -0.5, -0.5],

@@ -30,6 +30,9 @@ pub struct Options {
     /// New directory for PNG frames and report.json; existing paths are rejected.
     #[arg(long)]
     pub output: Option<PathBuf>,
+    /// Authored Camera entity ID, followed through each captured simulation tick.
+    #[arg(long, requires = "output")]
+    pub camera: Option<String>,
     /// New JSONL file for committed script logs; does not require GPU captures.
     #[arg(long)]
     pub log_output: Option<PathBuf>,
@@ -88,6 +91,8 @@ pub struct Report {
     adapter: Option<String>,
     width: Option<u32>,
     height: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    camera: Option<String>,
     wall_ms: f64,
 }
 
@@ -174,11 +179,17 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
             assets
                 .sync_project(play.project(), root)
                 .map_err(|error| PlayError::Load(error.to_string()))?;
-            let scene = retained_scene.insert(
-                renderer
-                    .prepare_scene(play.project(), &assets)
-                    .map_err(|error| PlayError::Render(error.to_string()))?,
-            );
+            let prepared = renderer
+                .prepare_scene(play.project(), &assets)
+                .map_err(|error| PlayError::Render(error.to_string()))?;
+            let prepared = if let Some(id) = &options.camera {
+                prepared
+                    .with_camera(id)
+                    .map_err(|error| PlayError::Render(error.to_string()))?
+            } else {
+                prepared
+            };
+            let scene = retained_scene.insert(prepared);
             let png = renderer
                 .screenshot_scene_png(scene, options.width, options.height)
                 .map_err(|error| PlayError::Render(error.to_string()))?;
@@ -205,6 +216,7 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         adapter: renderer.as_ref().map(|r| r.adapter_name.clone()),
         width: renderer.as_ref().map(|_| options.width),
         height: renderer.as_ref().map(|_| options.height),
+        camera: options.camera,
         wall_ms: start.elapsed().as_secs_f64() * 1000.,
     };
     if let Some(output) = options.output {

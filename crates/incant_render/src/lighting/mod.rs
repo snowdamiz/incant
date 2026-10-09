@@ -35,11 +35,27 @@ pub(crate) struct GpuLights {
     buffer: wgpu::Buffer,
     directional: u32,
     local: u32,
+    positions: Vec<glam::Vec3>,
 }
 impl GpuLights {
+    pub fn validate_view(&self, view: glam::Mat4) -> std::result::Result<(), crate::SceneError> {
+        if self
+            .positions
+            .iter()
+            .any(|p| !view.transform_point3(*p).is_finite())
+        {
+            return Err(crate::SceneError::LightTransform);
+        }
+        Ok(())
+    }
+
     pub fn upload(device: &wgpu::Device, plan: scene::LightPlan) -> Self {
         let (lights, directional) = plan.finish();
         Self {
+            positions: lights[directional as usize..]
+                .iter()
+                .map(|l| glam::Vec3::from_slice(&l.position_range[..3]))
+                .collect(),
             buffer: device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
                 label: Some("Immutable authored lights"),
                 contents: bytemuck::cast_slice(&lights),
@@ -172,6 +188,7 @@ impl LightingSystem {
         lights: &GpuLights,
         viewport: [f32; 4],
         selection: LocalLightSelection,
+        camera: crate::camera::CameraView,
     ) -> Result<wgpu::BindGroup> {
         let dimensions = [
             (viewport[2] / 64.).ceil() as u32,
@@ -186,14 +203,14 @@ impl LightingSystem {
             if clustered { words } else { 1 },
         )?;
         let grid = GridUniform {
-            view: crate::camera_view().to_cols_array_2d(),
+            view: camera.view.to_cols_array_2d(),
             viewport,
             dimensions: [dimensions[0], dimensions[1], DEPTH_SLICES, words],
             depth: [
-                crate::CAMERA_NEAR,
-                crate::CAMERA_FAR,
-                DEPTH_SLICES as f32 / (crate::CAMERA_FAR / crate::CAMERA_NEAR).ln(),
-                (crate::CAMERA_FOV * 0.5).tan(),
+                camera.near,
+                camera.far,
+                DEPTH_SLICES as f32 / (camera.far / camera.near).ln(),
+                (camera.fov * 0.5).tan(),
             ],
             lights: [lights.directional, lights.local, u32::from(!clustered), 0],
         };

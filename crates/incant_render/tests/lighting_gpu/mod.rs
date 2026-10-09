@@ -18,6 +18,7 @@ fn grid_readback(r: &Renderer, plan: LightPlan) -> (Vec<u32>, Vec<u32>) {
             &lights,
             [0., 0., 320., 192.],
             LocalLightSelection::Clustered,
+            crate::camera::CameraView::preview(),
         )
         .unwrap();
     let grid = r
@@ -167,61 +168,87 @@ fn clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_da
             .entities
             .insert(light.id.clone(), light);
     }
+    let mut camera = Entity::new("Offset capture camera");
+    camera.components.insert(
+        "Camera".into(),
+        json!({"fov_degrees":70,"near":0.5,"far":30}),
+    );
+    camera.components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [0., 0., 8.],
+            ..Default::default()
+        }),
+    );
+    let camera_id = camera.id.clone();
+    p.scenes
+        .values_mut()
+        .next()
+        .unwrap()
+        .entities
+        .insert(camera.id.clone(), camera);
     let r = Renderer::headless().unwrap();
-    let scene = r.prepare_scene(&p, &assets).unwrap();
-    let format = wgpu::TextureFormat::Rgba8UnormSrgb;
-    let a = texture(&r, format, 320, 180);
-    let b = texture(&r, format, 800, 500);
-    let c = texture(&r, format, 512, 320);
-    let first = r
-        .draw_scene(
-            &scene,
-            &a.create_view(&Default::default()),
-            format,
-            320,
-            180,
-            None,
-        )
-        .unwrap();
-    let second = r
-        .draw_scene(
-            &scene,
-            &b.create_view(&Default::default()),
-            format,
-            800,
-            500,
-            Some(Viewport {
-                rect: [80., 40., 640., 360.],
-                corner_radii: [0.; 4],
-                canvas_srgb: [20, 21, 25],
-            }),
-        )
-        .unwrap();
-    let third = r
-        .draw_scene(
-            &scene,
-            &c.create_view(&Default::default()),
-            format,
-            512,
-            320,
-            Some(Viewport {
-                rect: [37., 41., 320., 180.],
-                corner_radii: [0.; 4],
-                canvas_srgb: [20, 21, 25],
-            }),
-        )
-        .unwrap();
-    // Submit in a different order from encoding; retained size-specific buffers
-    // and per-command uniforms must be valid until the queue finishes each pass.
-    r.queue.submit([second, first, third]);
-    let base = read(&r, &a);
-    let offset = crop(&read(&r, &c), 512, [37, 41, 320, 180]);
-    assert_eq!(base.len(), offset.len());
-    assert!(base.iter().zip(offset).all(|(a, b)| a.abs_diff(b) <= 1));
-    let small = r.lighting.buffers(&r.device, [5, 3], 1).unwrap();
-    let reused = r.lighting.buffers(&r.device, [5, 3], 1).unwrap();
-    assert!(std::sync::Arc::ptr_eq(&small, &reused));
-    assert!(r.lighting.buffers(&r.device, [u32::MAX, 2], 1).is_err());
+    for selected in [None, Some(camera_id.as_str())] {
+        let scene = r.prepare_scene(&p, &assets).unwrap();
+        let scene = if let Some(id) = selected {
+            scene.with_camera(id).unwrap()
+        } else {
+            scene
+        };
+        let format = wgpu::TextureFormat::Rgba8UnormSrgb;
+        let a = texture(&r, format, 320, 180);
+        let b = texture(&r, format, 800, 500);
+        let c = texture(&r, format, 512, 320);
+        let first = r
+            .draw_scene(
+                &scene,
+                &a.create_view(&Default::default()),
+                format,
+                320,
+                180,
+                None,
+            )
+            .unwrap();
+        let second = r
+            .draw_scene(
+                &scene,
+                &b.create_view(&Default::default()),
+                format,
+                800,
+                500,
+                Some(Viewport {
+                    rect: [80., 40., 640., 360.],
+                    corner_radii: [0.; 4],
+                    canvas_srgb: [20, 21, 25],
+                }),
+            )
+            .unwrap();
+        let third = r
+            .draw_scene(
+                &scene,
+                &c.create_view(&Default::default()),
+                format,
+                512,
+                320,
+                Some(Viewport {
+                    rect: [37., 41., 320., 180.],
+                    corner_radii: [0.; 4],
+                    canvas_srgb: [20, 21, 25],
+                }),
+            )
+            .unwrap();
+        // Submit in a different order from encoding; retained size-specific buffers
+        // and per-command uniforms must be valid until the queue finishes each pass.
+        r.queue.submit([second, first, third]);
+        let base = read(&r, &a);
+        let offset = crop(&read(&r, &c), 512, [37, 41, 320, 180]);
+        assert_eq!(base.len(), offset.len());
+        assert!(base.iter().zip(offset).all(|(a, b)| a.abs_diff(b) <= 1));
+        let small = r.lighting.buffers(&r.device, [5, 3], 1).unwrap();
+        let reused = r.lighting.buffers(&r.device, [5, 3], 1).unwrap();
+        assert!(std::sync::Arc::ptr_eq(&small, &reused));
+        assert!(r.lighting.buffers(&r.device, [u32::MAX, 2], 1).is_err());
+    }
 }
 
 #[test]
