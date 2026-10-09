@@ -17,7 +17,8 @@
     "responsive_layout": "AX confirms Back to assets replaces Close panel after native bottom-right quarter placement; 300px dock. Pixel review remains Claude-owned.",
     "inspector_order": "PASS: native Translation, Rotation, Scale order",
     "saved_account": "PASS: saved connection restored in rebuilt app; no sign-in or Keychain prompt; no account actions invoked",
-    "account_focus": "PASS: prior rebuilt app pointer/keyboard-opened account dialog focused Close; Escape restored opener; pixel focus-ring review pending"
+    "account_focus": "PASS: prior rebuilt app pointer/keyboard-opened account dialog focused Close; Escape restored opener; pixel focus-ring review pending",
+    "restart": "PASS: quitting and reopening the same saved project recovered all 10 registered assets, four history entries and the concurrent entity rename; saved account remained connected."
   },
   "visual_review": "Pending Claude Opus 5.5 ACP review of private captures. Astra did not judge pixels.",
   "known_followup": "Busy sentence incorrectly says other edits wait. Claude must update copy to reflect concurrent edits and possible retry.",

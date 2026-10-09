@@ -1,8 +1,9 @@
 # Shared editor and agent asset imports
 
 2026-10-09. The native editor and headless agent now use the same import service
-as the authoring CLI. The editor interface is being implemented separately by
-Claude handoff 0010; its integration and native verification are still open.
+as the authoring CLI. Claude handoff 0010 supplies the integrated asset library
+and import/reimport interface. Native behavior checks pass; Claude is reviewing
+actual WebKit captures and finishing visual corrections.
 
 ## Native editor backend
 
@@ -78,5 +79,30 @@ the authorized disposable project. This does not claim native UI approval or GPU
 asset rendering. The run used 5,244 input and 210 output tokens over four steps.
 [Exact evidence](evidence/agent-asset-import-2026-10-09.json).
 
-Editor UI integration, file picking/copying, automatic editor source watching,
-GPU/ECS binding, interactive native checks and the rest of Phase 1 remain open.
+## Integrated native verification
+
+The combined UI/bridge suite passes 265 tests, the production UI builds, and
+`tools/editor-dev.py` builds the native Tauri bundle. Actual macOS CUA checks on a
+disposable saved project verify the unavailable unsaved-project reason, a real
+model/normal-map batch, one-step Undo/Redo, Linear reimport with preserved texture
+ID, and Undo restoring the saved Normal map and fingerprint. A malformed glTF
+preserves both the asset list and typed source path. Model details expose no
+texture interpretation controls.
+
+An eight-image 2048×2048 batch exercises the actual background worker. Native
+hierarchy rename and History navigation stay responsive while cooking. After a
+concurrent rename commits, the stale import fails with `asset.conflict` and keeps
+all paths for retry. Native import failures now retain typed codes through the
+bridge, avoiding reliance on message wording. Keyboard and native Edit-menu Undo
+in a path field leave project history unchanged. Detail focus and Escape return
+are observed through accessibility; ring appearance belongs to Claude's review.
+The saved account restores without a new login or Keychain prompt.
+[Sanitized native evidence](evidence/editor-assets-native-2026-10-09.json).
+
+Raw captures remain in ignored artifacts because the account label can appear.
+Claude is reviewing wide and narrow native layouts, controls, focus rings and
+chrome; Astra does not self-approve pixels. Busy-state copy still requires a
+correction to reflect concurrent edits. Browser fixtures remain synthetic evidence.
+
+File picking/copying, automatic editor source watching, GPU/ECS binding and the
+rest of Phase 1 remain open.
