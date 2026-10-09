@@ -2,18 +2,27 @@
 
 ## Status
 
-Follow-up review complete. Scoped verdict: **pass**. The four evidence gaps from
-the first review are closed by measured pixels. The empty rig-parent defect is
-fixed in the captures I reviewed. I found no rendering defect in any supplied
-PNG. Every predictable geometric extent matched its analytic projection within
-about one pixel.
+Final review complete. Final scoped verdict: **pass, with no open pixel-evidence
+gaps**. This covers authored perspective camera capture in the renderer, the
+public CLI and the agent screenshot tool.
 
-Three items stay open and are listed under "Remaining items". None of them
-changes the pixel verdict.
+- I found no rendering defect in any of the 36 supplied PNGs.
+- Every predictable geometric extent matched its analytic projection within
+  about one pixel. The largest gap is 1.6 px at a bottom edge.
+- All required byte-identity pairs hold.
+- The ledger, the CLI configuration file and the on-disk PNGs agree on every hash.
+- The three items left open after the second review are resolved.
 
 This is a rendered-pixel review of one increment. It does not approve a phase
 gate, production engine readiness, an editor camera UI, orthographic cameras,
 camera rigs as a feature, or glTF camera import.
+
+The report has three review rounds:
+- The first review at `c5e02e6`.
+- The follow-up at `ddc8645`.
+- This final round, which builds on Astra's `fda9745` and `c21b643`.
+
+Earlier rounds are preserved below as history.
 
 ## Model
 
@@ -22,9 +31,128 @@ camera rigs as a feature, or glTF camera import.
   inspect the ACP transport from inside the session.
 - No model substitution occurred.
 
-## Director feedback acknowledged
+## Changed paths
 
-The current brief begins with a priority follow-up. It integrates my `c5e02e6`
+- `handoffs/0019-authored-cameras/result.md` (this file, committed).
+- Ignored, not committed: `artifacts/review-0019-scripts/stats.py`,
+  `artifacts/review-0019-scripts/predict.py`,
+  `artifacts/review-0019-scripts/pose2-480-zoom.png`, plus one-off inline
+  measurement commands.
+
+I did not edit shaders, matrices, tests, GUI styling, project content, the
+ledger, the documentation or the brief.
+
+## Commands run
+
+```sh
+shasum -a 256 artifacts/camera-initial/*.png
+python3 -I artifacts/review-0019-scripts/stats.py artifacts/camera-initial/*.png
+python3 -I artifacts/review-0019-scripts/predict.py
+# Final round, inline python3 -I with the same stdlib PNG decoder:
+#  - every PNG hash checked against the ledger's png_sha256 entries
+#  - CLI configuration compared with the ledger's public-CLI configuration
+#  - the 33 earlier PNG hashes compared with the previous round
+#  - skewed-parent quad corners projected with an independent orthonormalization
+```
+
+The scripts are stdlib-only PNG decoders. They report the non-background or red
+bounding box, per-row red spans, sample colors and luminance second differences.
+They also project the ±3-unit fixture quad through each camera for comparison.
+
+Not run by me in any round: cargo, GPU, UI and Clippy tests and builds. All test
+counts in this report come from Astra's briefs. I did not need a native
+capture, so CUA was not used.
+
+## Final round: reference and skewed-parent evidence
+
+**Director feedback acknowledged.** The current brief integrates `ddc8645`. It
+reports these results, which I did not run myself:
+- Ledger and documentation updates.
+- A post-fix suite of 139 Rust, 32 distinct GPU and 283 UI tests, plus the
+  native release build and workspace Clippy.
+- A live saved-account agent capture, which the brief says is not pixel review.
+
+The brief asks me to do three things, and I did them first:
+- review three extra images,
+- verify ledger and configuration consistency,
+- give a final verdict while preserving history.
+
+**Provenance.** The runner supplied 36 PNGs. The three new ones are timestamped
+2026-10-09 16:46 to 16:47. I compared the other 33 against my hashes from the
+previous round, and every byte matches. That supports the brief's statement
+that runtime appearance is unchanged since `8b82f43`.
+
+**Ledger and configuration consistency:**
+- The committed ledger `docs/spikes/evidence/authored-camera-capture-2026-10-09.json`
+  lists 36 PNG hashes. Each one matches the file on disk, and no PNG on disk
+  is missing from it.
+- The CLI capture configuration in `artifacts/camera-cli-evidence.json` is
+  identical to the ledger's public-CLI configuration.
+- The seven CLI hashes in that file match the CLI PNGs.
+- The ledger's visual-review field names Claude Opus 5.5 over ACP with reviews
+  `c5e02e6` and `ddc8645`, and it marks this final follow-up as remaining. That
+  is accurate until this report lands.
+
+**camera-tight-clip-unclipped-reference vs camera-tight-clip-positive.** These
+are byte-identical. The reference uses the same camera at 60° with range
+0.1–100. Its quad spans x 82–238, y 42–198, against a prediction of
+82.2–238.8 and 42.2–198.8. This closes round-two item 2. The 7.9–8.1 depth
+window removes nothing from a quad at distance 8.
+
+**camera-skewed-parent vs camera-skewed-flat-reference.** These are
+byte-identical, with 25,158 red pixels. The rotated child under the scaled,
+rolled parent produces a forward vector and up vector that are 6.4° from
+perpendicular before orthonormalization.
+
+The test builds its flat reference with the same `look_to_rh` the renderer
+uses. That reference alone proves self-consistency, not the convention. So I
+projected the quad with my own orthonormalization that keeps forward exact
+and re-derives up:
+
+| Corner | Measured | Predicted, forward kept | Alternative, up kept |
+|---|---|---|---|
+| left | (91, 146) | (90.4, 147.2) | (89.0, 171.3) |
+| top | (171, 26) | (171.9, 25.2) | (171.4, 52.1) |
+| right | (310, 99) | (310.7, 99.3) | (310.0, 122.6) |
+| bottom | leaves frame at (220, 240) | (222.8, 242.6), just below the frame | (227.6, 276.2) |
+
+The capture matches the forward-preserving convention within about one pixel.
+It misses the up-preserving alternative by 23 to 27 px. The renderer therefore
+aims exactly along the inherited forward axis and corrects roll. That is the
+right behavior for a camera, because the subject stays centered when a parent
+is sheared. It closes the optional fixture I suggested in round two.
+
+The edge is a straight diagonal with no wobble, and the fill is uniform red
+(243,31,31). The ordinary scaled-parent fixture now also asserts illumination,
+so a blank frame can no longer satisfy its equality check.
+
+**Round-two remaining items, all resolved:**
+1. The ledger now carries all 36 PNG hashes.
+2. The tight-clip byte identity is now directly visible in two saved PNGs.
+3. The spike doc now states that mesh-less ancestors used as camera-rig frames
+   no longer draw diagnostic cubes. It also says explicit ancestor meshes still
+   render.
+
+**The agent change is outside the pixel scope.** The agent change adds the
+selected camera ID to the tool observation and to the screenshot result it
+passes back. I read the diff. Pixels still go to the model only as an image
+labelled as untrusted tool data. The live saved-account run is reported, not
+observed by me, and is not pixel evidence.
+
+**Final-round limitations.** I did not run cargo, GPU, UI, Clippy or build
+commands. The test counts above come from the brief. No native capture was
+needed, so CUA was not used. Antialiasing on quad edges remains a pre-existing,
+out-of-scope observation.
+
+## Round two: follow-up review (history, `ddc8645`)
+
+Round-two verdict: **pass**. The four evidence gaps from the first review closed
+with measured pixels, and the empty rig-parent defect was fixed. Three items
+stayed open at that time. All three are resolved in the final round above.
+
+### Round-two director feedback acknowledged
+
+The round-two brief began with a priority follow-up. It integrates my `c5e02e6`
 review and asks me to:
 
 - review five new captures,
@@ -35,7 +163,7 @@ review and asks me to:
 I applied all of these before anything else. The brief text was already
 committed by Astra in `8b82f43` and was unchanged in the worktree.
 
-## Evidence provenance
+### Round-two evidence provenance
 
 - The runner copied 33 PNGs into this worktree's ignored
   `artifacts/camera-initial/`.
@@ -49,36 +177,7 @@ committed by Astra in `8b82f43` and was unchanged in the worktree.
   does not yet list hashes for the five new PNGs. The brief says the final
   ledger will record them. See "Remaining items".
 
-## Changed paths
-
-- `handoffs/0019-authored-cameras/result.md` (this file, committed).
-- Ignored, not committed: `artifacts/review-0019-scripts/stats.py`,
-  `artifacts/review-0019-scripts/predict.py`,
-  `artifacts/review-0019-scripts/pose2-480-zoom.png`, plus one-off inline
-  measurement commands.
-
-I did not edit shaders, matrices, tests, GUI styling, project content or the brief.
-
-## Commands run
-
-```sh
-shasum -a 256 artifacts/camera-initial/*.png
-python3 -I artifacts/review-0019-scripts/stats.py artifacts/camera-initial/*.png
-python3 -I artifacts/review-0019-scripts/predict.py
-# plus inline python3 -I measurements of the new captures, using the same
-# stdlib PNG decoder, and a grep of the committed ledger for each PNG hash
-```
-
-The scripts are stdlib-only PNG decoders. They report the non-background or red
-bounding box, per-row red spans, sample colors and luminance second differences.
-They also project the ±3-unit fixture quad through each camera for comparison.
-
-Not run by me: cargo tests, GPU tests, Clippy and builds. The brief reports the
-first combined run passing 138 Rust and 31 GPU tests. A rerun after the
-ancestor fix is in progress, and I did not observe it. I did not need a native
-capture, so CUA was not used.
-
-## Follow-up review: closed evidence gaps
+### Round-two closed evidence gaps
 
 All new images are 321×241. Eye (0,0,8) looks down −Z at the ±3 quad on z=0
 unless a row says otherwise. Each table row closes one earlier gap.
@@ -113,7 +212,7 @@ for mesh-less ancestors of a Camera. Explicit meshes on ancestors and unrelated
 diagnostic entities still count. Document validation already rejects missing
 parents and cycles, so the new ancestor walk cannot index a missing entity.
 
-## Findings preserved from the first review
+### Findings preserved from the first review
 
 All of these still hold. Hashes are unchanged for every re-captured image.
 
@@ -141,7 +240,10 @@ same gradient rotated clockwise, as a +30° camera roll requires.
 predates camera selection and is out of scope. The titleless CLI frame is not
 treated as an editor design.
 
-## Remaining items
+### Round-two remaining items, now resolved
+
+All of the items below were open at `ddc8645`. The final round closed each one,
+including the optional fixture.
 
 1. **The new ledger hashes are missing.** The committed ledger lists no SHA-256
    for camera-fov-50-visible-edges, camera-tight-clip-positive,
@@ -170,7 +272,7 @@ never clip the quad, but visible clipping is now covered elsewhere. Earlier
 gap 6 is unchanged and informational. The agent `view_screenshot` camera test
 is a routing-only mock and does not count as pixel evidence.
 
-## Open questions
+### Round-two open questions
 
 - None blocking. The full verification rerun after the ancestor fix was
   reported as in progress, and I have not seen its result.
@@ -179,6 +281,7 @@ is a routing-only mock and does not count as pixel evidence.
 
 - I did not edit or run renderer code, tests or builds.
 - No native UI capture was needed or taken.
-- Provenance rests on timestamps and on hashes recorded in the CLI evidence
-  file. The five new renderer PNGs are not yet in the committed ledger.
-- This review does not approve any phase gate.
+- Provenance rests on timestamps, on the committed ledger's 36 PNG hashes and
+  on the CLI configuration file. All three agree with the files I reviewed.
+- Quad-edge aliasing is a pre-existing observation outside this packet.
+- This review does not approve any phase gate or production engine readiness.
