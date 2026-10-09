@@ -158,17 +158,22 @@ impl AccountStore {
         self.save()?;
         Ok(true)
     }
-    pub fn provider(&self, model: String) -> Result<OpenAiProvider, AgentError> {
-        let token = if let Some(account) = self.selected() {
-            auth::access_token(account)?
+    /// Consumes the store so its lock is released before the provider needs to
+    /// reopen it for a request. Retaining that lock would deadlock token renewal.
+    pub fn provider(self, model: String) -> Result<OpenAiProvider, AgentError> {
+        if let Some(account) = self.selected() {
+            // Validate while this lock is held; the provider reloads/renews the
+            // same active registration before each later network request.
+            auth::access_token(account)?;
+            OpenAiProvider::for_account(account.id.clone(), model)
         } else if self.data.api_key_connected {
-            CredentialStore::load("api-key")?
+            CredentialStore::load("api-key")?;
+            OpenAiProvider::for_saved_api_key(model)
         } else {
-            return Err(error(
+            Err(error(
                 "No OpenAI connection. Continue with ChatGPT in Incant, or run incant auth login.",
-            ));
-        };
-        OpenAiProvider::new(token.to_string(), model)
+            ))
+        }
     }
     pub fn disconnect(&mut self) -> Result<bool, AgentError> {
         let revoked = if let Some(account) = self.selected() {

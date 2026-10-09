@@ -32,12 +32,12 @@
     "authentication": {
       "passed": false,
       "remaining": [
-        "Windows/Linux automated credential persistence and auth regression tests",
         "API-key inference and live revocation evidence"
       ],
       "macos_evidence": "docs/spikes/auth-login-repair.md",
       "macos_storage_exception": "director requested private credential files to eliminate repeated Keychain prompts",
-      "desktop_acceptance_override": "2026-10-08 director waived manual Windows/Linux login checks in favor of CI builds and automated tests"
+      "desktop_acceptance_override": "2026-10-08 director waived manual Windows/Linux login checks in favor of CI builds and automated tests",
+      "desktop_ci_evidence": "docs/spikes/evidence/desktop-credentials-2026-10-08.json"
     },
     "claude_acp": {
       "passed": true,

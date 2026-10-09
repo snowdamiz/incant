@@ -4,6 +4,8 @@ use serde_json::{Value, json};
 use std::io::{BufRead, BufReader};
 use std::time::Duration;
 use zeroize::Zeroizing;
+#[cfg(test)]
+mod tests;
 
 pub struct Completion {
     pub output: Vec<Value>,
@@ -23,13 +25,66 @@ pub trait Provider {
 /// to OpenAI; no Incant service is involved and responses are not stored remotely.
 pub struct OpenAiProvider {
     client: Client,
-    credential: Zeroizing<String>,
+    credential: TokenSource,
+    renewable: bool,
     model: String,
+    base_url: String,
 }
+type TokenSource = Box<dyn Fn(bool) -> Result<Zeroizing<String>, AgentError> + Send + Sync>;
 impl OpenAiProvider {
     pub fn new(credential: String, model: String) -> Result<Self, AgentError> {
         if credential.trim().is_empty() || model.trim().is_empty() {
             return Err(AgentError::Provider("missing credential or model".into()));
+        }
+        let secret = Zeroizing::new(credential);
+        Self::with_token_source(Box::new(move |_| Ok(secret.clone())), false, model)
+    }
+    pub(crate) fn for_account(account_id: String, model: String) -> Result<Self, AgentError> {
+        Self::with_token_source(
+            Box::new(move |force| {
+                let store = crate::accounts::AccountStore::open()?;
+                let account = store
+                    .selected()
+                    .filter(|account| account.id == account_id)
+                    .ok_or_else(|| {
+                        AgentError::Provider(
+                            "The active account changed or signed out; start a new agent request."
+                                .into(),
+                        )
+                    })?;
+                if force {
+                    crate::auth::refresh_access_token(account)
+                } else {
+                    crate::auth::access_token(account)
+                }
+            }),
+            true,
+            model,
+        )
+    }
+    pub(crate) fn for_saved_api_key(model: String) -> Result<Self, AgentError> {
+        Self::with_token_source(
+            Box::new(|_| {
+                let store = crate::accounts::AccountStore::open()?;
+                if store.data.active.is_some() || !store.data.api_key_connected {
+                    return Err(AgentError::Provider(
+                        "The active account changed or signed out; start a new agent request."
+                            .into(),
+                    ));
+                }
+                crate::credentials::CredentialStore::load("api-key")
+            }),
+            false,
+            model,
+        )
+    }
+    fn with_token_source(
+        credential: TokenSource,
+        renewable: bool,
+        model: String,
+    ) -> Result<Self, AgentError> {
+        if model.trim().is_empty() {
+            return Err(AgentError::Provider("missing model".into()));
         }
         let client = Client::builder()
             .connect_timeout(Duration::from_secs(15))
@@ -39,15 +94,18 @@ impl OpenAiProvider {
             .map_err(|_| AgentError::Provider("HTTP client initialization failed".into()))?;
         Ok(Self {
             client,
-            credential: Zeroizing::new(credential),
+            credential,
+            renewable,
             model,
+            base_url: "https://api.openai.com/v1".into(),
         })
     }
     pub fn models(&self) -> Result<Value, AgentError> {
+        let token = (self.credential)(false)?;
         let response = self
             .client
-            .get("https://api.openai.com/v1/models")
-            .bearer_auth(self.credential.as_str())
+            .get(format!("{}/models", self.base_url))
+            .bearer_auth(token.as_str())
             .send()
             .map_err(|_| AgentError::Provider("model catalog request failed".into()))?;
         if !response.status().is_success() {
@@ -73,17 +131,32 @@ impl Provider for OpenAiProvider {
         on_text: &mut dyn FnMut(&str),
     ) -> Result<Completion, AgentError> {
         let body = json!({"model":self.model,"input":input,"tools":tools,"store":false,"stream":true,"max_output_tokens":max_output_tokens,"parallel_tool_calls":false});
+        let mut refreshed_after_unauthorized = false;
+        let mut force_refresh = false;
         for attempt in 0..3u32 {
+            // Resolve the current record for every request, under the account
+            // store's cross-process lock. Long turns must not retain stale tokens.
+            let token = (self.credential)(force_refresh)?;
+            force_refresh = false;
             let response = self
                 .client
-                .post("https://api.openai.com/v1/responses")
-                .bearer_auth(self.credential.as_str())
+                .post(format!("{}/responses", self.base_url))
+                .bearer_auth(token.as_str())
                 .json(&body)
                 .send()
                 .map_err(|_| {
                     AgentError::Provider("OpenAI request failed; transport details redacted".into())
                 })?;
             let status = response.status();
+            if status.as_u16() == 401
+                && self.renewable
+                && !refreshed_after_unauthorized
+                && attempt < 2
+            {
+                refreshed_after_unauthorized = true;
+                force_refresh = true;
+                continue;
+            }
             if (status.as_u16() == 429 || status.is_server_error()) && attempt < 2 {
                 std::thread::sleep(Duration::from_secs(1 << attempt));
                 continue;

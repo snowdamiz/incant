@@ -123,8 +123,8 @@ gaps between packets and require complete HTTP headers. The regression test send
 each request in separated writes so that a partial callback cannot be accepted.
 
 The native app remains connected. This proves macOS persistence, refresh and live
-inference; Windows/Linux real-account authentication, API-key inference and live
-revocation remain outstanding. The single approved edit does not count as an
+inference; API-key inference and live revocation remain outstanding. The later
+director decision replaces Windows/Linux real-account checks with automated CI. The single approved edit does not count as an
 unassisted twenty-task evaluation or Phase 0 approval.
 
 The subsequent unassisted [twenty-task run](evidence/live-agent-2026-10-08.json)
@@ -132,3 +132,27 @@ completed with the same saved account: 19/20 passed, with no additional browser
 login or Keychain prompts. One incomplete provider response is counted as a failed
 task. The final app build, including the callback fix, also restored the account
 after restart; the native account button displayed the saved profile.
+
+
+## Session renewal and desktop CI
+
+The provider previously retained the access token captured when the agent started.
+It now resolves the selected account under the shared account-store lock before
+each request, refreshing near expiry. A server HTTP 401 triggers at most one forced
+refresh and retry. A changed or disconnected account stops subsequent requests;
+saved API-key connections are also rechecked. Explicit evaluation keys retain their
+separate API-key path. Server error bodies and credentials remain redacted.
+
+Loopback HTTP tests exercise API-key catalog/inference authorization and request
+flags, fresh token resolution, bounded unauthorized retry, redaction and stopping
+before network access when the account is unavailable. A live saved-account probe
+returned the expected `doc_query` call using 608 input and 18 output tokens without
+another login. This is live inference evidence, not forced-expiry or live revocation
+evidence. The full local suite now passes 48 Rust behavior tests.
+
+[Credential persistence CI](evidence/desktop-credentials-2026-10-08.json) passed on
+macOS, Windows and Linux. Each job saved a synthetic 14 KB record, rebuilt a changed
+executable, verified the record, deleted it and verified absence. Windows exercised
+Credential Manager, Linux Secret Service and macOS the private-file backend. These
+jobs also passed the shared auth regression suite. They satisfy the director's
+replacement for manual Windows/Linux sign-in checks without using provider accounts.
