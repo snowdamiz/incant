@@ -11,10 +11,14 @@ import type {
 } from '../bridge/contract';
 import type { CapabilitySet } from '../bridge/resolve';
 import { readCapabilities, unavailableMessage } from '../bridge/resolve';
+import type { PanelVisibility } from '../components/Titlebar';
 
-export type DockTab = 'assets' | 'problems' | 'console' | 'history';
+export type DockTab = 'problems' | 'console' | 'history';
 
 export interface Shell {
+  readonly panels: PanelVisibility;
+  readonly showPanel: (panel: keyof PanelVisibility) => void;
+  readonly togglePanel: (panel: keyof PanelVisibility) => void;
   readonly bridge: EditorBridge | null;
   readonly snapshot: BridgeSnapshot | null;
   readonly capabilities: CapabilitySet;
@@ -58,6 +62,13 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   const capabilities = useMemo(() => (bridge ? readCapabilities(bridge.capabilities) : NO_CAPABILITIES), [bridge]);
   const [selection, setSelection] = useState<Ulid | null>(null);
   const [dockTab, setDockTab] = useState<DockTab>('problems');
+  const [panels, setPanels] = useState<PanelVisibility>({ hierarchy: true, dock: true, inspector: true });
+  const showPanel = useCallback((panel: keyof PanelVisibility) => {
+    setPanels((current) => current[panel] ? current : { ...current, [panel]: true });
+  }, []);
+  const togglePanel = useCallback((panel: keyof PanelVisibility) => {
+    setPanels((current) => ({ ...current, [panel]: !current[panel] }));
+  }, []);
   const [message, setMessage] = useState('');
   const clearTimer = useRef<number | undefined>(undefined);
 
@@ -126,6 +137,9 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
 
   const value = useMemo<Shell>(
     () => ({
+      panels,
+      showPanel,
+      togglePanel,
       bridge,
       snapshot,
       capabilities,
@@ -144,7 +158,7 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
       openAccount,
       closeAccount,
     }),
-    [bridge, snapshot, capabilities, liveSelection, dockTab, message, announce, run, dispatch, ask, request, explainUnavailable, accountOpen, openAccount, closeAccount],
+    [panels, showPanel, togglePanel, bridge, snapshot, capabilities, liveSelection, dockTab, message, announce, run, dispatch, ask, request, explainUnavailable, accountOpen, openAccount, closeAccount],
   );
   return <ShellContext.Provider value={value}>{children}</ShellContext.Provider>;
 }

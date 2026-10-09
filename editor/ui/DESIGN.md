@@ -150,20 +150,27 @@ are bundled locally, so nothing is fetched from a network.
   viewport, inspector and History say "No project loaded" in one short line. Problems lists
   the engine's diagnostic. Without one, it says "Not validated", never "No problems". Saved
   account metadata in the titlebar chip stays visible in every project state.
-- **Asset library (handoff 0010):** the first dock tab, so it shares the output dock's
-  width and splitter. Rows use the hierarchy's 28 px pill on a four-column grid: kind tile,
-  name, source path, type. The folder part of a path truncates before the file name, so
-  long paths stay identifiable. Below about 520 px the row becomes two lines. Selecting a
-  row opens a details pane on the right. The import form opens in the same pane, and both
-  ask the dock to grow to 300 px, within the usual layout clamp. Below about 640 px the
-  pane replaces the list and shows a Back button. Texture interpretation is a three-option
-  segmented radio group: Color, Linear, Normal map. A running import shows a strip above
-  the list, a spinner in the tab and an inline status. It never shows a percentage or a
-  cancel control. Failures are an inline alert with the engine's exact message. They keep
-  every typed path and replace the submit label with "Try again". Fingerprints and IDs sit
-  in a collapsed "Identifiers" disclosure. While cooking, the strip says "You can keep working. Editing now means retrying the
-  import." Below about 520 px of dock width the dock tabs drop their icons, so every label
-  and count stays visible. Styles live in `src/styles/assets.css`.
+- **Asset library (handoff 0010, revision 4).** Assets are content navigation, not output,
+  so they live in the left column as a second view beside the Hierarchy. Problems, Console
+  and History keep the bottom dock to themselves.
+  - **Left column.** The header is a two-tab switcher, "Hierarchy" and "Assets", each with a
+    count, in the dock-tab style.
+  - **Asset list.** A filter and an Import button sit above the list. Assets are grouped
+    under their source folder, and long folders keep their last segments, such as
+    "…/surfaces/wood/". Rows reuse the hierarchy's 28 px pill: a kind icon, the name, and
+    for textures a quiet interpretation tag on the right.
+  - **Inspector.** It follows the left column. Hierarchy shows entity components, and Assets
+    shows the selected asset or the import form, so "pick on the left, inspect on the right"
+    holds everywhere. Asset details use the entity identity block, then sections for
+    Source, Interpretation, Reimport and a collapsed Identifiers disclosure.
+  - **Import form.** It sits in the Inspector, with a pinned action row at the bottom.
+  - **Notices.** A running or failed import shows one line under the list toolbar, wherever
+    the Inspector is. The Assets tab also carries a spinner or a red dot. The full error
+    stays in the Inspector until it is dismissed or retried. The cooking note reads "You
+    can keep working. Editing now means retrying the import." There is never a percentage
+    or a cancel control.
+  - **Leaving the asset list.** Revealing a problem from the dock returns the left column
+    to the Hierarchy. Styles live in `src/styles/assets.css`.
 
 ## Focus and keyboard
 
@@ -176,10 +183,12 @@ are bundled locally, so nothing is fetched from a network.
   is covered by interaction tests and pixel review. A keyboard-opened dialog rings Close. A pointer-opened dialog
   focuses Close without a ring, as before.
 - F6 / Shift+F6 cycle visible panels (hidden panels are skipped). Hierarchy is an ARIA
-  tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys. The asset
-  list is an ARIA listbox with a roving tabindex. Arrows, Home and End move through it,
-  Enter or Space opens details, ⌘/Ctrl+F filters, and Escape closes the pane and returns to
-  the row. Shift+Enter in a path field adds a row. A paste of several lines adds one row per
+  tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys. The left
+  column's Hierarchy and Assets switcher is a tab list, so arrows move between the views.
+  The asset list is an ARIA listbox grouped by folder, with a roving tabindex. Arrows, Home
+  and End move the selection, and the Inspector follows it. Enter or Space moves focus to
+  the asset's name in the Inspector, ⌘/Ctrl+F filters, and Escape in the Inspector returns
+  to the row. Shift+Enter in a path field adds a row. A paste of several lines adds one row per
   line. If the field was empty or wholly selected, the first line replaces it.
   Dividers are `separator`s resizable with arrows (Shift = 64 px). `?` opens the
   shortcut list (modal, focus trapped, Escape returns focus). A skip link is first.

@@ -5,9 +5,10 @@ import { useShell } from '../shell/ShellContext';
 import { MAX_BATCH, pathProblem, sourceKind } from './paths';
 
 /**
- * UI state for the asset library: the import draft, the one running import and its
- * outcome. It lives above the dock so switching tabs or hiding the dock does not lose
- * typed paths, a pending import or its error. It holds no project data: the asset
+ * UI state for the asset library: which view the left column shows, what the Inspector
+ * shows for assets, the import draft, the one running import and its outcome. It lives
+ * above the shell panels so switching views or hiding a panel does not lose typed
+ * paths, a pending import or its error. It holds no project data: the asset
  * list always comes from the bridge snapshot, and every change goes through
  * Shell.dispatch as one `asset.import` command.
  */
@@ -31,7 +32,10 @@ export type ImportOutcome =
   | { readonly status: 'success'; readonly job: ImportJob }
   | { readonly status: 'failure'; readonly job: ImportJob; readonly error: BridgeError };
 
+/** What the Inspector shows while the Assets view is active. */
 export type Pane = 'closed' | 'import' | 'details';
+/** The left column: the scene hierarchy or the project's assets. */
+export type NavigatorView = 'hierarchy' | 'assets';
 
 export interface AssetWorkspace {
   readonly draft: readonly DraftRow[];
@@ -45,6 +49,8 @@ export interface AssetWorkspace {
   readonly dismissOutcome: () => void;
   /** Source paths written by the last successful import, marked in the list. */
   readonly recent: ReadonlySet<string>;
+  readonly view: NavigatorView;
+  readonly setView: (view: NavigatorView) => void;
   readonly pane: Pane;
   readonly setPane: (pane: Pane) => void;
   readonly selected: Ulid | null;
@@ -100,6 +106,7 @@ export function AssetsProvider({ children }: { children: ReactNode }) {
   const [pending, setPending] = useState<ImportJob | null>(null);
   const [outcome, setOutcome] = useState<ImportOutcome | null>(null);
   const [recent, setRecent] = useState<ReadonlySet<string>>(() => new Set());
+  const [view, setView] = useState<NavigatorView>('hierarchy');
   const [pane, setPane] = useState<Pane>('closed');
   const [selected, setSelected] = useState<Ulid | null>(null);
   const [filter, setFilter] = useState('');
@@ -217,6 +224,8 @@ export function AssetsProvider({ children }: { children: ReactNode }) {
       outcome,
       dismissOutcome: () => setOutcome(null),
       recent,
+      view,
+      setView,
       pane,
       setPane,
       selected,
@@ -228,7 +237,7 @@ export function AssetsProvider({ children }: { children: ReactNode }) {
       importDraft,
       reimport,
     }),
-    [draft, setSource, setUsage, addRows, removeRow, pending, outcome, recent, pane, selected, filter, reimportUsage, setReimportUsage, importDraft, reimport],
+    [draft, setSource, setUsage, addRows, removeRow, pending, outcome, recent, view, pane, selected, filter, reimportUsage, setReimportUsage, importDraft, reimport],
   );
   return <AssetsContext.Provider value={value}>{children}</AssetsContext.Provider>;
 }

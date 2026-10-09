@@ -76,12 +76,108 @@ async function expectNoAxeViolations(container: HTMLElement) {
 }
 
 describe('asset library', () => {
+  it('reveals a hidden Inspector when importing or opening an asset, and restores the list on Escape', async () => {
+    renderWith(controlledBridge().bridge);
+    openAssets();
+    fireEvent.click(screen.getByRole('button', { name: 'Inspector and agent panel' }));
+    expect(screen.queryByRole('region', { name: 'Inspector' })).toBeNull();
+    openImport();
+    await waitFor(() => expect(document.activeElement).toBe(pathInput(1)));
+    fireEvent.click(screen.getByRole('button', { name: 'Inspector and agent panel' }));
+    const row = screen.getByRole('option', { name: /^crate Model/ });
+    fireEvent.click(row);
+    fireEvent.keyDown(row, { key: 'Enter' });
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('heading', { name: 'crate' })));
+    fireEvent.click(screen.getByRole('button', { name: 'Hierarchy panel' }));
+    fireEvent.keyDown(screen.getByRole('heading', { name: 'crate' }), { key: 'Escape' });
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('option', { name: /^crate Model/ })));
+  });
+
+  it('reveals the failed reimport asset after selecting another asset or hiding the Inspector', async () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Reimport' }));
+    await host.resolve({ ok: false, error: { code: 'asset.import', message: 'Source was removed.' } });
+    fireEvent.click(screen.getByRole('option', { name: /^crate_normal/ }));
+    expect(screen.queryByRole('alert')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Show' }));
+    expect(screen.getByRole('heading', { name: 'crate' })).toBeTruthy();
+    expect(screen.getByRole('alert').textContent).toContain('Source was removed.');
+    fireEvent.click(screen.getByRole('button', { name: 'Inspector and agent panel' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Show' }));
+    expect(screen.getByRole('alert').textContent).toContain('Source was removed.');
+  });
+
+  it('assigns distinct accessible folder labels for paths that differ only by punctuation', () => {
+    const assets = ASSETS.map((asset, index) => ({ ...asset, path: `${['a/b', 'a_b', 'a.b'][index]}/source.png` }));
+    renderWith(controlledBridge({ assets: { status: 'ready', value: assets } }).bridge);
+    openAssets();
+    const groups = within(screen.getByRole('listbox', { name: 'Assets' })).getAllByRole('group');
+    const labels = groups.map((group) => group.getAttribute('aria-labelledby'));
+    expect(new Set(labels).size).toBe(3);
+    expect(labels.map((id) => document.getElementById(id!)?.textContent).sort()).toEqual(['Folder a.b/', 'Folder a/b/', 'Folder a_b/'].sort());
+  });
+
+  it('lives in the left column; the output dock keeps only Problems, Console and History', () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    const dock = screen.getByRole('tablist', { name: 'Output' });
+    expect(within(dock).getAllByRole('tab').map((tab) => tab.textContent?.replace(/\d+|\(|\)/g, '').trim())).toEqual(['Problems', 'Console', 'History']);
+    const left = screen.getByRole('tablist', { name: 'Left panel' });
+    expect(within(left).getAllByRole('tab').map((tab) => tab.getAttribute('aria-selected'))).toEqual(['true', 'false']);
+  });
+
+  it('switches the Inspector with the left view and keeps the entity selection', async () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    const crate = screen.getByRole('treeitem', { name: /^Crate 01/ });
+    fireEvent.click(crate);
+    expect(screen.getByText('Crate 01', { selector: '.inspector__name' })).toBeTruthy();
+    // Arrow keys move between the two views, as in any tab list.
+    const hierarchyTab = screen.getByRole('tab', { name: /^Hierarchy/ });
+    act(() => hierarchyTab.focus());
+    fireEvent.keyDown(hierarchyTab, { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: /^Assets/ }).getAttribute('aria-selected')).toBe('true');
+    expect(document.activeElement).toBe(screen.getByRole('tab', { name: /^Assets/ }));
+    expect(screen.getByText('No asset selected')).toBeTruthy();
+    expect(screen.queryByRole('tree')).toBeNull();
+    fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
+    expect(screen.getByRole('heading', { name: 'crate' })).toBeTruthy();
+    fireEvent.keyDown(screen.getByRole('tab', { name: /^Assets/ }), { key: 'ArrowLeft' });
+    expect(screen.getByText('Crate 01', { selector: '.inspector__name' })).toBeTruthy();
+    expect(screen.getByRole('treeitem', { name: /^Crate 01/ }).getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('returns to the Hierarchy when a problem is revealed from the Assets view', () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    const problems = screen.getByRole('list', { name: 'Problems' });
+    fireEvent.click(within(problems).getAllByRole('button')[0]!);
+    expect(screen.getByRole('tab', { name: /^Hierarchy/ }).getAttribute('aria-selected')).toBe('true');
+    expect(screen.getByRole('tree', { name: 'Hierarchy' })).toBeTruthy();
+  });
+
+  it('groups assets by source folder', () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    const groups = within(screen.getByRole('listbox', { name: 'Assets' })).getAllByRole('group');
+    expect(groups.map((group) => group.getAttribute('aria-labelledby') && document.getElementById(group.getAttribute('aria-labelledby')!)?.textContent)).toEqual([
+      'Folder models/',
+      'Folder textures/',
+    ]);
+    expect(within(groups[1]!).getAllByRole('option')).toHaveLength(2);
+  });
+
   it('lists the sample fixture assets with name, source and type, and keeps it read-only', async () => {
     const { container } = render(<App resolution={{ kind: 'bridge', bridge: createFixtureBridge('sample') }} />);
     openAssets();
     const list = screen.getByRole('listbox', { name: 'Assets' });
     expect(within(list).getAllByRole('option')).toHaveLength(7);
-    expect(within(list).getByRole('option', { name: /^crate_normal textures\/crate_normal\.png Texture · Normal map/ })).toBeTruthy();
+    expect(within(list).getByRole('option', { name: /^crate_normal\s*Texture,\s*Normal map/ })).toBeTruthy();
     expect(container.textContent).not.toContain('sample-fingerprint');
     await expectNoAxeViolations(container);
     openImport();
@@ -97,7 +193,7 @@ describe('asset library', () => {
   ])('%s does not claim an empty library', (variant, expected) => {
     render(<App resolution={{ kind: 'bridge', bridge: createFixtureBridge(variant) }} />);
     openAssets();
-    expect(screen.getByRole('tabpanel').textContent).toMatch(expected);
+    expect(document.getElementById('navigator-panel-assets')!.textContent).toMatch(expected);
     expect(screen.queryByText('No assets yet')).toBeNull();
   });
 
@@ -117,7 +213,7 @@ describe('asset library', () => {
     openAssets();
     expect(screen.getByText('No assets yet')).toBeTruthy();
     expect(screen.getByText('Open a saved project to import assets.')).toBeTruthy();
-    fireEvent.click(screen.getByRole('button', { name: /Import from project folder/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Import assets' }));
     expect(screen.getByText('Importing is unavailable')).toBeTruthy();
     expect(host.commands).toEqual([]);
   });
@@ -180,7 +276,7 @@ describe('asset library', () => {
     expect(screen.queryByRole('textbox', { name: 'Path 2' })).toBeNull();
     // With only a blank row left, the submit button claims no file count.
     expect(within(document.querySelector<HTMLElement>('.import-form__footer')!).getByRole('button').textContent).toBe('Import');
-    expect(screen.getByRole('option', { name: /^lantern models\/lantern\.glb Model\s*just imported/ })).toBeTruthy();
+    expect(screen.getByRole('option', { name: /^lantern Model,\s*just imported/ })).toBeTruthy();
     await waitFor(() => expect(statusMessage()).toBe('Imported 3 files.'));
     expect(host.commands).toHaveLength(1);
   });
@@ -277,7 +373,7 @@ describe('asset library', () => {
     const host = controlledBridge();
     renderWith(host.bridge);
     openAssets();
-    fireEvent.click(screen.getByRole('option', { name: /^crate models/ }));
+    fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
     expect(screen.getByRole('heading', { name: 'crate' })).toBeTruthy();
     expect(screen.queryByRole('radiogroup')).toBeNull();
     expect(screen.getByText('Placing models in a scene is not available yet.')).toBeTruthy();
@@ -294,7 +390,7 @@ describe('asset library', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Reimport as Linear' }));
     expect(host.commands.at(-1)).toEqual({ type: 'asset.import', sources: [{ source: 'textures/crate_albedo.png', textureUsage: 'linear' }] });
     // While it runs, another import cannot start from anywhere.
-    fireEvent.click(screen.getByRole('option', { name: /^crate models/ }));
+    fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
     fireEvent.click(screen.getByRole('button', { name: 'Reimport' }));
     expect(host.commands).toHaveLength(3);
     expect(screen.getByText('Another import is running. Reimport when it finishes.')).toBeTruthy();
@@ -305,7 +401,7 @@ describe('asset library', () => {
     const host = controlledBridge();
     renderWith(host.bridge);
     openAssets();
-    const first = screen.getByRole('option', { name: /^crate models/ });
+    const first = screen.getByRole('option', { name: /^crate Model/ });
     act(() => first.focus());
     fireEvent.keyDown(first, { key: 'ArrowDown' });
     const second = screen.getByRole('option', { name: /^Crate albedo/ });
@@ -314,7 +410,8 @@ describe('asset library', () => {
     await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('heading', { name: 'Crate albedo' })));
     fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
     await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('option', { name: /^Crate albedo/ })));
-    expect(screen.queryByRole('heading', { name: 'Crate albedo' })).toBeNull();
+    // Details stay in the Inspector; Escape only returns focus to the list.
+    expect(screen.getByRole('heading', { name: 'Crate albedo' })).toBeTruthy();
   });
 
   it('keeps text undo in the path field and project undo in the list', () => {
@@ -334,7 +431,7 @@ describe('asset library', () => {
     } finally {
       Reflect.deleteProperty(document, 'execCommand');
     }
-    const row = screen.getByRole('option', { name: /^crate models/ });
+    const row = screen.getByRole('option', { name: /^crate Model/ });
     act(() => row.focus());
     fireEvent.keyDown(row, { key: 'z', metaKey: true });
     expect(host.commands).toEqual([{ type: 'history.undo' }]);
@@ -347,14 +444,16 @@ describe('asset library', () => {
     });
     renderWith(host.bridge);
     openAssets();
-    expect(screen.getByRole('tabpanel').querySelector('img')).toBeNull();
+    expect(screen.getByRole('listbox', { name: 'Assets' }).querySelector('img')).toBeNull();
+    expect(document.querySelector('[data-region="inspector"] img')).toBeNull();
     expect(screen.getByRole('option').textContent).toContain(hostile);
   });
 
-  it('keeps F2 rename in the hierarchy', () => {
+  it('keeps F2 rename in the hierarchy after visiting assets', () => {
     const host = controlledBridge();
     renderWith(host.bridge);
     openAssets();
+    fireEvent.click(screen.getByRole('tab', { name: /^Hierarchy/ }));
     const row = screen.getByRole('treeitem', { name: /^Dock Prototype/ });
     act(() => row.focus());
     fireEvent.keyDown(row, { key: 'F2' });

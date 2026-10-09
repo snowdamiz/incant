@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { isConflict, pathProblem, sourceKind, splitPaste, splitPath } from './paths';
+import { folderLabel, groupByFolder } from './library';
 
 describe('import source paths (mirrors incant_import validate_path)', () => {
   it('accepts canonical project-relative model and image paths', () => {
@@ -42,5 +43,23 @@ describe('import source paths (mirrors incant_import validate_path)', () => {
     expect(isConflict('document revision conflict: expected 1, current 2')).toBe(true);
     expect(isConflict('the project changed since import preparation; prepare again')).toBe(true);
     expect(isConflict('could not cook a.png')).toBe(false);
+  });
+});
+
+describe('asset list folders', () => {
+  it('keeps the most specific end of a long folder', () => {
+    expect(folderLabel('')).toBe('Project folder');
+    expect(folderLabel('textures')).toBe('textures/');
+    expect(folderLabel('textures/environment/harbor/district_02/surfaces/wood')).toBe('…/surfaces/wood/');
+    expect(folderLabel('a/averyveryveryverylongfoldername')).toBe('…/averyveryveryverylongfoldername/');
+  });
+
+  it('groups by folder in path order', () => {
+    const asset = (path: string) => ({ id: path, name: path, path, kind: 'model', fingerprint: '' }) as never;
+    expect(groupByFolder([asset('b/x.glb'), asset('a.glb'), asset('b/c/y.glb'), asset('b/a.glb')]).map((g) => [g.folder, g.assets.length])).toEqual([
+      ['', 1],
+      ['b', 2],
+      ['b/c', 1],
+    ]);
   });
 });

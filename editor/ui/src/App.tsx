@@ -13,7 +13,6 @@ import { ShortcutsDialog } from './components/ShortcutsDialog';
 import { Splitter } from './components/Splitter';
 import { StateView } from './components/StateView';
 import { Titlebar } from './components/Titlebar';
-import type { PanelVisibility } from './components/Titlebar';
 import { ViewportPanel } from './components/ViewportPanel';
 import { Icon } from './icons/Icon';
 import { ShellProvider, useShell } from './shell/ShellContext';
@@ -67,9 +66,8 @@ function FatalScreen({ title, children }: { title: string; children: React.React
 
 function Workbench() {
   const shell = useShell();
-  const { bridge, snapshot, run, accountOpen } = shell;
+  const { bridge, snapshot, run, accountOpen, panels, togglePanel } = shell;
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
-  const [panels, setPanels] = useState<PanelVisibility>({ hierarchy: true, dock: true, inspector: true });
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const shortcutsReturn = useRef<HTMLElement | null>(null);
 
@@ -131,12 +129,12 @@ function Workbench() {
       } else if (mod && event.altKey && ['1', '2', '3'].includes(event.code.slice(-1)) && event.code.startsWith('Digit')) {
         event.preventDefault();
         const panel = (['hierarchy', 'dock', 'inspector'] as const)[Number(event.code.slice(-1)) - 1]!;
-        setPanels((current) => ({ ...current, [panel]: !current[panel] }));
+        togglePanel(panel);
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [runHistory, shortcutsOpen, accountOpen]);
+  }, [runHistory, shortcutsOpen, accountOpen, togglePanel]);
 
   const openShortcuts = (from: HTMLElement) => {
     shortcutsReturn.current = from;
@@ -164,7 +162,7 @@ function Workbench() {
       </a>
       <Titlebar
         panels={panels}
-        onTogglePanel={(panel) => setPanels((current) => ({ ...current, [panel]: !current[panel] }))}
+        onTogglePanel={togglePanel}
         onShortcuts={openShortcuts}
       />
       <ConnectionBanner />
@@ -185,7 +183,7 @@ function Workbench() {
           {panels.dock ? (
             <>
               <Splitter label="Resize output panel" orientation="horizontal" invert value={layout.dock} min={120} max={640} onChange={(dock) => resize({ dock })} />
-              <BottomDock onRequestHeight={(min) => setLayout((current) => (current.dock >= min ? current : clampLayout({ ...current, dock: min }, window.innerWidth, window.innerHeight)))} />
+              <BottomDock />
             </>
           ) : null}
         </div>

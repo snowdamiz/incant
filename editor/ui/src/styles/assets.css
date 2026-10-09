@@ -1,39 +1,104 @@
 /*
- * Asset library (dock tab). Same surfaces, row pill and focus ring as the hierarchy and
- * output lists. The details/import pane sits beside the list when there is room and
- * replaces it in a narrow dock (container queries, so it follows splitter changes too).
+ * Asset library, revision 4. Assets live in the left column as a second view beside the
+ * Hierarchy, and their details, reimport and import open in the Inspector. Same row pill,
+ * focus ring, panel surfaces and section rhythm as the hierarchy and entity inspector.
  */
 
-.assets {
-  container: assets / inline-size;
-  flex: 1;
-  min-height: 0;
-  display: flex;
+/* ---- Left column: Hierarchy | Assets ---- */
+
+.navigator__header {
+  gap: 0;
+  padding: 0 var(--space-3) 0 var(--space-3);
 }
 
-.assets__browser {
-  container: asset-browser / inline-size;
+.navigator__tabs {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-1);
+  height: 100%;
+}
+
+.navigator__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 var(--space-3);
+  border: 0;
+  background: transparent;
+  color: var(--color-text-subtle);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  cursor: pointer;
+  transition: color var(--duration-fast);
+}
+
+.navigator__tab::after {
+  content: '';
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: -1px;
+  height: 2px;
+  border-radius: 1px;
+  background: transparent;
+}
+
+.navigator__tab:hover {
+  color: var(--color-text);
+}
+
+.navigator__tab[aria-selected='true'] {
+  color: var(--color-text);
+}
+
+.navigator__tab[aria-selected='true']::after {
+  background: var(--color-accent);
+}
+
+.navigator__tab:focus-visible,
+.navigator__tab[data-focus-visible] {
+  outline-offset: -5px;
+  border-radius: calc(var(--radius) + 3px);
+}
+
+.navigator__busy {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+}
+
+.navigator__alert {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-danger);
+}
+
+.navigator__panel {
   flex: 1;
-  min-width: 0;
   min-height: 0;
   display: flex;
   flex-direction: column;
 }
 
-.assets__toolbar {
-  flex: none;
+/* ---- Asset browser ---- */
+
+.asset-browser {
+  flex: 1;
+  min-height: 0;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.asset-browser__toolbar {
   gap: var(--space-3);
-  padding: var(--space-3) var(--space-3) var(--space-2);
 }
 
-.assets__toolbar .search-field {
-  max-width: 360px;
-}
-
-.assets__toolbar .button {
-  margin-left: auto;
+.asset-browser__import {
+  flex: none;
+  height: var(--control-height);
 }
 
 .button.is-current {
@@ -41,75 +106,90 @@
   background: var(--color-bg-hover);
 }
 
-/* Running import: a quiet strip above the list, present whichever pane is open. */
-.assets__busy {
+/* One quiet line for a running or failed import, under the toolbar. */
+.asset-browser__status {
   flex: none;
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  min-width: 0;
-  padding: 6px var(--space-5);
-  border-bottom: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-info-bg) 55%, var(--color-bg-panel));
+  min-height: 28px;
+  margin: var(--space-1) var(--space-3) var(--space-2);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-info-bg) 60%, var(--color-bg-panel));
   color: var(--color-text-soft);
   font-size: var(--text-xs);
+}
+
+.asset-browser__status--error {
+  background: color-mix(in srgb, var(--color-danger-bg) 75%, var(--color-bg-panel));
+}
+
+.asset-browser__status--error > .icon {
+  color: var(--color-danger);
+}
+
+.asset-browser__status-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.assets__busy > span:nth-child(2) {
-  overflow: hidden;
-  text-overflow: ellipsis;
+.asset-browser__status-action {
+  flex: none;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-accent-strong);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
 }
 
-.assets[data-pane='open'] .assets__busy-note {
-  display: none; /* the pane's own status carries it */
+.asset-browser__status-action:hover {
+  background: var(--color-bg-hover);
 }
-
-.assets__busy-note {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--color-text-subtle);
-}
-
-/* ---- List ---- */
 
 .asset-list {
   flex: 1;
   min-height: 0;
+  overflow: auto;
+  padding: var(--space-1) 0 var(--space-4);
+}
+
+.asset-list__group + .asset-list__group {
+  margin-top: var(--space-3);
+}
+
+.asset-list__folder {
   display: flex;
-  flex-direction: column;
-}
-
-.asset-list__head,
-.asset-row {
-  display: grid;
-  grid-template-columns: 22px minmax(96px, 1fr) minmax(0, 1.6fr) 136px;
   align-items: center;
-  column-gap: 10px;
-}
-
-.asset-list__head {
-  flex: none;
-  height: 24px;
+  gap: 6px;
+  height: 26px;
   margin: 0 var(--space-3);
-  padding: 0 10px;
+  padding: 0 var(--space-2);
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
-  font-weight: var(--weight-medium);
 }
 
-.asset-list__body {
-  flex: 1;
-  min-height: 0;
-  overflow: auto;
-  padding: 0 0 var(--space-3);
+.asset-list__folder-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: ltr;
 }
 
 .asset-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   height: var(--row-height);
   margin: 0 var(--space-3);
-  padding: 0 10px;
+  padding: 0 var(--space-3) 0 calc(var(--space-2) + var(--indent));
   border-radius: var(--radius);
   color: var(--color-text-soft);
   white-space: nowrap;
@@ -126,79 +206,38 @@
   color: var(--color-text);
 }
 
+.asset-row.is-selected .asset-row__name {
+  font-weight: var(--weight-medium);
+}
+
 .asset-row:focus-visible,
 .asset-row[data-focus-visible] {
   outline-offset: -2px;
 }
 
-.asset-row__tile,
-.asset-pane__tile,
-.import-row__kind {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: var(--radius-sm);
-  background: color-mix(in srgb, currentColor 12%, transparent);
-}
-
 .asset-row__name {
+  flex: 1;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: var(--weight-medium);
 }
 
-/* The folder shrinks first so the file name stays readable in long paths. */
-.asset-row__path {
-  display: flex;
-  min-width: 0;
-  font-size: var(--text-xs);
-}
-
-.asset-row__folder {
-  flex: 0 1 auto;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.asset-row__tag {
+  flex: none;
   color: var(--color-text-subtle);
-}
-
-.asset-row__file {
-  flex: 0 1 auto;
-  min-width: 3ch;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--color-text-muted);
-}
-
-.asset-row.is-selected .asset-row__folder,
-.asset-row.is-selected .asset-row__file {
-  color: var(--color-text-muted);
-}
-
-.asset-row__type {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-  overflow: hidden;
-  color: var(--color-text-muted);
   font-size: var(--text-xs);
+}
+
+.asset-row.is-selected .asset-row__tag {
+  color: var(--color-text-muted);
 }
 
 .asset-row__recent {
   flex: none;
-  display: inline-flex;
-  color: var(--color-success);
-}
-
-.asset-row__recent::before {
-  content: '';
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: currentColor;
+  background: var(--color-success);
 }
 
 .kind--model {
@@ -209,235 +248,150 @@
   color: #73d6c2;
 }
 
-/* Narrow list: name and type on the first line, source path below. */
-@container asset-browser (max-width: 520px) {
-  .asset-list__head {
-    display: none;
-  }
+/* ---- Inspector: asset details and import ---- */
 
-  .asset-list__body {
-    padding-top: var(--space-1);
-  }
-
-  .asset-row {
-    grid-template-columns: 22px minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
-    row-gap: 0;
-    height: auto;
-    min-height: 40px;
-    padding-block: 4px;
-  }
-
-  .asset-row__tile {
-    grid-row: 1 / 3;
-  }
-
-  .asset-row__name {
-    grid-column: 2;
-  }
-
-  .asset-row__type {
-    grid-column: 3;
-    grid-row: 1;
-    justify-content: flex-end;
-  }
-
-  .asset-row__path {
-    grid-column: 2 / 4;
-    grid-row: 2;
-  }
-}
-
-/* ---- Pane: details and import ---- */
-
-.asset-pane {
-  flex: none;
-  width: 320px;
-  min-width: 0;
-  min-height: 0;
+.asset-inspector {
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--color-border);
-  background: var(--color-bg-side);
+  min-height: 100%;
 }
 
-@container assets (min-width: 960px) {
-  .asset-pane {
-    width: 380px;
-  }
-}
-
-.asset-pane__header {
-  flex: none;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: 40px;
-  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.asset-pane__back {
-  display: none;
-  margin-left: calc(-1 * var(--space-3));
-}
-
-.asset-pane__title {
-  flex: 1;
-  min-width: 0;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-tight);
-  color: var(--color-text);
-}
-
-/* The heading takes focus when details open. Padding keeps the ring off the text so it
-   reads as focus on a title, not as an editable field (native WebKit review, 2026-10-09). */
-.asset-pane__title {
-  flex: 0 1 auto;
-  padding: 2px 6px;
-  margin-inline: -6px auto;
+/* The name takes focus when details open. Padding keeps the ring off the text so it reads
+   as focus on a title, not as an editable field (native review, 2026-10-09). */
+.asset-inspector__title {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 0 -6px;
+  padding: 1px 6px;
   border-radius: var(--radius);
 }
 
-.asset-pane__title:focus-visible,
-.asset-pane__title[data-focus-visible] {
+.asset-inspector__title:focus-visible,
+.asset-inspector__title[data-focus-visible] {
   outline-offset: 0;
 }
 
-.asset-pane__body {
-  flex: 1;
-  min-height: 0;
+.asset-details {
   display: flex;
   flex-direction: column;
-  overflow: auto;
 }
 
-.asset-pane__body > .state-view {
-  flex: none;
-}
-
-/* Narrow dock: the pane takes the whole tab and "Back" returns to the list. */
-@container assets (max-width: 640px) {
-  .assets[data-pane='open'] > .assets__browser {
-    display: none;
-  }
-
-  .asset-pane {
-    flex: 1;
-    width: auto;
-    border-left: 0;
-    background: var(--color-bg-panel);
-  }
-
-  .asset-pane__back {
-    display: inline-grid;
-  }
-
-  .asset-pane__close {
-    display: none;
-  }
-}
-
-/* Details */
-
-.asset-details,
-.import-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-4) var(--space-5);
-}
-
-.asset-facts {
+.asset-section {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.asset-section--notice {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.asset-section__title {
   margin: 0;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
 }
 
-.asset-facts > div {
-  display: grid;
-  grid-template-columns: 76px minmax(0, 1fr);
-  gap: var(--space-3);
-  align-items: baseline;
-}
-
-.asset-facts dt {
+.asset-section__hint {
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
+  line-height: 17px;
 }
 
-.asset-facts dd {
-  margin: 0;
-  min-width: 0;
+.asset-section__changed {
+  color: var(--color-warning);
+}
+
+.asset-section__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.asset-source {
+  padding: 6px var(--space-3);
+  border-radius: var(--radius);
+  background: var(--color-bg-well);
   color: var(--color-text-soft);
-}
-
-.asset-facts__path,
-.asset-facts--ids dd {
   font-size: var(--text-xs);
   line-height: 18px;
   overflow-wrap: break-word;
   user-select: text;
 }
 
-.asset-details__section {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.asset-details__label {
-  color: var(--color-text-subtle);
-  font-size: var(--text-xs);
-}
-
-.asset-details__hint,
-.asset-details__note {
-  color: var(--color-text-subtle);
-  font-size: var(--text-xs);
-  line-height: 17px;
-}
-
-.asset-details__changed {
-  color: var(--color-warning);
-}
-
-.asset-details__note {
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--color-border);
-}
-
-.asset-details__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: 24px;
-}
-
-.asset-details__actions + .asset-details__hint {
-  margin-top: calc(-1 * var(--space-2));
-}
-
-.asset-details__ids summary {
+.asset-ids > summary {
   width: fit-content;
-  color: var(--color-text-subtle);
-  font-size: var(--text-xs);
+  list-style: none;
   cursor: pointer;
   border-radius: var(--radius-sm);
-}
-
-.asset-details__ids summary:hover {
   color: var(--color-text-muted);
 }
 
-.asset-details__ids[open] summary {
-  margin-bottom: var(--space-3);
+.asset-ids > summary::-webkit-details-marker {
+  display: none;
+}
+
+.asset-ids > summary::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-right: 8px;
+  border-left: 4px solid currentColor;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  vertical-align: 1px;
+  transition: transform var(--duration-fast);
+}
+
+.asset-ids[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.asset-ids:not([open]) {
+  gap: 0;
+}
+
+.asset-ids__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.asset-ids__list > div {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: baseline;
+}
+
+.asset-ids__list dt {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.asset-ids__list dd {
+  margin: 0;
+  min-width: 0;
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+.asset-pending {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 24px;
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
 }
 
 .asset-pending__text {
@@ -451,14 +405,6 @@
   line-height: 16px;
 }
 
-.asset-pending {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: 24px;
-  color: var(--color-text-soft);
-  font-size: var(--text-xs);
-}
 
 /* Segmented radio group (texture interpretation). */
 .segmented {
@@ -687,6 +633,14 @@
   color: var(--color-text-subtle);
 }
 
+/* "Model · Updates “name”": a quiet separator so the type and the update note read apart
+   (native review, revision 5). Decorative only; the two spans are already separate text. */
+.import-row__type + .import-row__existing::before {
+  content: '·';
+  margin-right: var(--space-3);
+  color: var(--color-text-subtle);
+}
+
 .import-row__existing {
   min-width: 0;
   overflow: hidden;
@@ -718,26 +672,27 @@
 
 .import-form {
   flex: 1;
-  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: 0 var(--space-4) 0 var(--space-5);
+}
+
+.import-form > .asset-note {
+  margin-top: 0;
 }
 
 /* The submit row stays in view while the paths scroll. */
 .import-form__footer {
   position: sticky;
   bottom: 0;
-  margin: auto calc(-1 * var(--space-4)) 0;
+  margin: auto calc(-1 * var(--space-4)) 0 calc(-1 * var(--space-5));
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-5);
   border-top: 1px solid var(--color-border);
   background: var(--color-bg-side);
-}
-
-@container assets (max-width: 640px) {
-  .import-form__footer {
-    background: var(--color-bg-panel);
-  }
 }
 
 .import-form__wait {
@@ -745,26 +700,3 @@
   font-size: var(--text-xs);
 }
 
-/* Dock tab: a small spinner while an import runs. */
-.tab__busy {
-  display: inline-grid;
-  place-items: center;
-  width: 18px;
-  height: 16px;
-}
-
-/* Narrow dock: the four tabs drop their icons so every label and count stays visible. */
-.panel--dock {
-  container: dock / inline-size;
-}
-
-@container dock (max-width: 520px) {
-  .panel--dock .tab {
-    gap: 6px;
-    padding-inline: 8px;
-  }
-
-  .panel--dock .tab > .icon {
-    display: none;
-  }
-}

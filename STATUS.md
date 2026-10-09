@@ -61,6 +61,7 @@ within its documented workload.
   and their host-load variability are recorded in
   [runtime scene evidence](docs/spikes/runtime-scene-projection.md).
 
+
 - `incant_import` now prepares glTF/image import batches on an owned document
   snapshot and commits all changed assets in one command-bus transaction. The CLI
   uses this shared service. Five service behavior tests, the existing CLI tests, full workspace release
@@ -78,14 +79,17 @@ within its documented workload.
 
 - Native editor imports now prepare outside the event thread/document lock and
   commit with revision checks through the existing persistent history. Two new
-  Rust behavior tests and 267 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
+  Rust behavior tests and 276 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
   handoff 0010 supplies the integrated asset library and import/reimport interface.
   Real native batch import, Undo/Redo, texture reimport, error recovery, concurrent
   edits, stale-import rejection and text/project Undo separation pass. The director
-  rejected the bottom-dock asset layout after the earlier native review. PR #8 is
-  held as a draft while Claude reworks asset browsing into dedicated navigation
-  and the main Inspector, separate from diagnostics. Earlier behavior evidence is
-  retained; the replacement design needs its own native review. Automatic editor
+  rejected the bottom-dock asset layout. Claude's replacement moves Assets to the
+  left navigation and properties/import into the main Inspector. The dock now holds
+  only Problems, Console and History. All 276 UI tests pass; native batch, busy,
+  failure recovery, keyboard and hidden-Inspector checks pass in the replacement.
+  Claude approved the replacement's native captures at wide/minimum sizes and
+  supplied a final import-row separator polish. PR #8 awaits its final hosted
+  checks before merging. Automatic editor
   watching remains open.
   Agent asset list/inspect/import now use the shared service and a project-bound
   filesystem capability. Three new agent tests and a live saved-session import
