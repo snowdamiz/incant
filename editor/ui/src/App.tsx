@@ -3,6 +3,7 @@ import type { BridgeResolution } from './bridge/resolve';
 import { FIXTURE_VARIANTS } from './bridge/fixture';
 import { PROVIDER_FIXTURE_NAMES } from './bridge/providerFixture';
 import { UI_PROTOCOL_VERSION } from './bridge/contract';
+import { AssetsProvider } from './assets/AssetsContext';
 import { AccountDialog } from './components/AccountDialog';
 import { AgentPanel } from './components/AgentPanel';
 import { BottomDock } from './components/BottomDock';
@@ -47,7 +48,9 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
   }
   return (
     <ShellProvider bridge={resolution.kind === 'bridge' ? resolution.bridge : null}>
-      <Workbench />
+      <AssetsProvider>
+        <Workbench />
+      </AssetsProvider>
     </ShellProvider>
   );
 }
@@ -182,7 +185,7 @@ function Workbench() {
           {panels.dock ? (
             <>
               <Splitter label="Resize output panel" orientation="horizontal" invert value={layout.dock} min={120} max={640} onChange={(dock) => resize({ dock })} />
-              <BottomDock />
+              <BottomDock onRequestHeight={(min) => setLayout((current) => (current.dock >= min ? current : clampLayout({ ...current, dock: min }, window.innerWidth, window.innerHeight)))} />
             </>
           ) : null}
         </div>

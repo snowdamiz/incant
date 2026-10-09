@@ -43,6 +43,11 @@ const PATHS = {
   external: 'M9 2.5h4.5V7M13.5 2.5L7.5 8.5M11.5 9.5v4h-9v-9h4',
   plus: 'M8 3.5v9M3.5 8h9',
   signOut: 'M6.5 2.5h-4v11h4M10 5l3 3-3 3M13 8H6',
+  model: 'M8 2l5.5 3v6L8 14l-5.5-3V5zM2.5 5L8 8l5.5-3M8 8v6',
+  texture: 'M2.5 2.5h11v11h-11zM2.5 11l3.5-3.5 3 3 1.5-1.5 3 3M10.5 5.5v.01',
+  import: 'M8 2.5v7M5 6.5l3 3 3-3M2.5 10v3.5h11V10',
+  reimport: 'M13 8a5 5 0 01-8.6 3.5M3 8a5 5 0 018.6-3.5M11.5 2v2.6H8.9M4.5 14v-2.6h2.6',
+  back: 'M13 8H3.5M7 4.5L3.5 8 7 11.5',
 } as const;
 
 export type IconName = keyof typeof PATHS;
@@ -56,6 +61,8 @@ const KIND_ICONS: Record<string, IconName> = {
   prefab: 'prefab',
   script: 'script',
   audio: 'audio',
+  model: 'model',
+  texture: 'texture',
 };
 
 export function iconForKind(kind: string): IconName {
