@@ -1,7 +1,10 @@
 # Phase 0 review checklist
 
-This records the foundation against PLAN.md, not an approval to start Phase 1.
-The complete Engine 1.0 and Driftwake objectives remain open. The director owns
+This records the foundation against PLAN.md. On 2026-10-08 the director explicitly
+authorized starting Phase 1 while the remaining Phase 0 items stay open, then
+instructed agents to continue sensible implementation without repeated permission
+questions. This authorizes engineering progress; it does not mark missing evidence
+complete. The full Engine 1.0 and Driftwake objectives remain open. The director owns
 phase approval and PR merges. Current implementation: [PR #1](https://github.com/snowdamiz/incant/pull/1).
 The separate landing page is [PR #2](https://github.com/snowdamiz/incant/pull/2).
 
@@ -22,7 +25,7 @@ The separate landing page is [PR #2](https://github.com/snowdamiz/incant/pull/2)
 
 The ledger at [phase0.json](phase0.json) remains unapproved. The gate command reports
 auth verification, scheduled nightly artifacts, signing, staffing and director
-approval as outstanding. No later-phase implementation has started.
+approval as outstanding. Phase 1 implementation is now separately authorized.
 
 ## Latest requested editor changes
 

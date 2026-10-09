@@ -22,6 +22,14 @@ Planning horizon: 36 months, starting November 2026, ending with a shipped game 
 
 Every phase has an **exit gate**. Do not start the next phase until the gate passes. Gates are the only real schedule control in a project this size.
 
+Director decision, 2026-10-08: begin Phase 1 while the remaining Phase 0 gate
+items stay explicitly open. The director also instructed: “next time dont ask,
+just continue if it makes sense to do so”. Use engineering judgment to continue
+useful implementation without repeated phase-advancement confirmations. Keep
+deferred evidence and human-owned actions tracked; do not mark gates passed,
+claim completed releases, or waive final requirements without their evidence.
+This overrides the stop-before-next-phase rule above for implementation progress.
+
 ---
 
 ## 1. Vision, principles, and definition of done

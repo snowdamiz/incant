@@ -1,8 +1,10 @@
 # Implementation status
 
-Source: [PLAN.md](PLAN.md), revision 2. Current phase: **0, in progress**.
-The complete engine/game release is not implemented. No phase gate is approved.
-The plan forbids beginning Phase 1 before Phase 0 passes and the director approves.
+Source: [PLAN.md](PLAN.md), revision 2 with director decisions. Current phase:
+**1, in progress**. The complete engine/game release is not implemented.
+On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
+Phase 0 items deferred, and instructed agents to continue sensible work without
+repeated permission questions. Phase advancement does not mark those gates passed.
 
 ## Implemented and locally verified
 
@@ -41,9 +43,10 @@ within its documented workload.
 
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing
-  page has the matching palette in PR #2. Claude is expanding it around PLAN.md's
-  planned modeling/content tools and other product capabilities, using source
-  edits and terminal builds while the capture restriction remains in force. See
+  page has the matching palette in PR #2. Its modeling expansion and lighter copy
+  each passed 23 hosted browser checks. Claude is now revising it again around
+  graphical explanations and authentic SVG platform marks following director
+  feedback, while the capture restriction remains in force. See
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
   routes by focus; automated tests pass, but its final native interaction check
   remains pending. **Computer use, browser automation and screen capture are

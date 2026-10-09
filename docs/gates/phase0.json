@@ -56,5 +56,19 @@
   "signing_certificates_obtained": false,
   "year_one_staffing_confirmed": false,
   "platform_build_evidence": "docs/spikes/evidence/six-platform-2026-10-08.json",
-  "android_execution_evidence": "docs/spikes/evidence/android-emulator-2026-10-08.json"
+  "android_execution_evidence": "docs/spikes/evidence/android-emulator-2026-10-08.json",
+  "advance_authorization": {
+    "date": "2026-10-08",
+    "next_phase": 1,
+    "director_decision": "Begin Phase 1; defer the open gate items",
+    "followup": "Continue sensible implementation without repeated permission questions.",
+    "deferred_items": [
+      "live revocation verification",
+      "nightly history from main",
+      "distribution signing certificates",
+      "year-one staffing",
+      "phase-completion approval"
+    ],
+    "scope": "Authorizes implementation progress only. Deferred items remain open and final engine/game requirements are unchanged."
+  }
 }

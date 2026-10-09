@@ -1,8 +1,11 @@
 # Incant repository conventions
 
-Source of truth: PLAN.md. Current stage: Phase 0. No phase can pass without the
-specified evidence and the director's recorded approval. Do not claim later
-phases complete by creating interfaces or placeholders.
+Source of truth: PLAN.md. Current stage: Phase 1, authorized by the director while
+open Phase 0 items remain deferred. Continue sensible engineering work without
+repeated phase-advancement confirmations, per the director's 2026-10-08 decision.
+Keep unmet gates and human-owned actions explicit; advancement does not mean a
+gate passed. Do not claim completion through interfaces, placeholders or missing
+evidence. The complete engine and game release requirements remain in force.
 
 All project edits pass through incant_cmd; typed, schema-validated text documents
 use stable ULIDs. Agent edits are atomic, reversible transactions with provenance.
