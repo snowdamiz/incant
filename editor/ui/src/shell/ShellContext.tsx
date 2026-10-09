@@ -12,7 +12,7 @@ import type {
 import type { CapabilitySet } from '../bridge/resolve';
 import { readCapabilities, unavailableMessage } from '../bridge/resolve';
 
-export type DockTab = 'assets' | 'problems' | 'console' | 'history';
+export type DockTab = 'problems' | 'console' | 'history';
 
 export interface Shell {
   readonly bridge: EditorBridge | null;

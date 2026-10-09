@@ -1,16 +1,76 @@
 # Native requests for handoff 0010 (for Astra, through Codex CUA)
 
-Claude's ACP session has no computer use. Every check below needs Astra's CUA channel on a
-build that includes this handoff's UI commit and Astra's native import command. Keep raw
-captures and any account labels in the ignored `artifacts/` tree, out of Git. The Mac is
-unlocked. Native behaviour checks and captures A1 to A7 were supplied on 2026-10-09, and
-Claude's pixel review of them is in result.md. Astra supplied R1 to R4 re-captures and the
-R5 behaviour result on a build containing revision 2 (integrated as 08026d8). Claude
-reviewed them in revision 3, and every item passed. No request is open.
+Claude's ACP session has no computer use. Every check needs Astra's CUA channel. Keep raw
+captures and any account labels in the ignored `artifacts/` tree, out of Git.
 
-The images in `screenshots/after/` are headless Chrome over synthetic data. They prove
-neither WebKit rendering nor engine behaviour. The native verdicts below rest on Astra's
-private CUA captures, which are kept in the ignored `artifacts/native-review/`.
+## Revision 4: new layout (open)
+
+The director rejected the bottom-dock asset UI. Revision 4 moves assets into the left
+column, beside the Hierarchy, and their details and import into the Inspector. The bottom
+dock holds only Problems, Console and History again. Backend behaviour is unchanged, so
+A1 to A7 and R5 still stand as behaviour evidence. Every pixel verdict below is open until
+these captures are reviewed.
+
+Use a build that includes the revision 4 UI commit, and the same disposable saved project
+with `models/triangle.gltf`, `textures/normal.png`, the eight `stress/image-*.png` files and
+`models/broken.gltf`. Capture the wide size, then the minimum size (Window > Move & Resize >
+Bottom Right), then restore it (Return to Previous Size). If possible, keep the capture
+indicator off the traffic lights in at least one capture.
+
+| ID | Check | Status |
+| --- | --- | --- |
+| N1 | Left column switcher and grouped asset list, wide and minimum | Open |
+| N2 | Asset details in the Inspector, texture and model | Open |
+| N3 | Import form in the Inspector, then batch success | Open |
+| N4 | Busy and failure: the list status line, the tab mark and the Inspector error | Open |
+| N5 | Keyboard: tabs, list, Enter to Inspector, Escape back | Open |
+| N6 | Problems reveal and the dock holds only output | Open |
+
+- **N1 `n01-assets-wide`, `n01b-assets-min`.** Click "Assets" in the left column header.
+  - Expected: "Hierarchy n" and "Assets n" sit in the header, and Assets is underlined.
+  - Assets are grouped under folder labels such as `models/`, `stress/` and `textures/`.
+    Texture rows show Color, Linear or Normal map on the right.
+  - The Inspector shows "No asset selected". The bottom dock shows only Problems, Console
+    and History.
+  - At the minimum size, no header text or count is clipped. Long names end in an
+    ellipsis.
+- **N2 `n02-texture-details`, `n02b-model-details`.** Click `normal`, then `triangle`.
+  - Expected: the Inspector identity block shows the name and type.
+  - It has a Source section with a mono path well, an Interpretation segmented control
+    (textures only), a Reimport button with its one-line explanation, and a collapsed
+    Identifiers disclosure.
+  - The model shows "Placing models in a scene is not available yet." under Source, and no
+    Interpretation section.
+  - Capture the wide size and the minimum size for the texture.
+- **N3 `n03-import-form`, `n03b-import-success`.** Choose Import in the left toolbar, enter
+  `models/triangle.gltf` and `textures/normal.png`, and set Normal map.
+  - Expected: the Inspector shows "Import assets" and "From the project folder", the path
+    rows and a pinned action row reading "Import 2 files".
+  - After success, the green note sits at the top of the Inspector. The list rows show
+    green dots, and History increments by 1.
+- **N4 `n04-busy`, `n04b-failed`.** Import the eight stress PNGs and capture while cooking.
+  - Busy: the line "Importing 8 files…" appears under the list toolbar, with a spinner in
+    the Assets tab and the two-line pending status in the Inspector's action row.
+  - Then import `models/broken.gltf`. Failed: the left status line reads "Last import
+    failed". The Assets tab has a red dot. The Inspector alert shows the engine's exact
+    message and Try again.
+  - Then select an asset. The left status line keeps "Last import failed" with a Show link,
+    and Show returns to the import form with the error.
+- **N5 `n05-keyboard`.** Click the viewport, then press F6 until focus is on an asset row
+  with a ring. Press Down, then Enter.
+  - Expected: the asset name in the Inspector has a fitted ring, not a field-like box.
+    Escape returns a ringed row.
+  - Shift+Tab to the "Assets" tab and press Left. Hierarchy shows the previous entity
+    selection, and F2 still renames.
+- **N6 `n06-problem-reveal`.** With Assets showing and at least one problem with an
+  entity, click it in Problems.
+  - Expected: the left column switches to Hierarchy with that entity selected.
+
+## Earlier revisions (dock design, superseded)
+
+The records below refer to the rejected bottom-dock design. Their behaviour results stand.
+Their pixel verdicts no longer describe the UI. The revision 1 to 3 browser captures were
+removed from `screenshots/` and remain in Git history.
 
 | ID | Check | Status |
 | --- | --- | --- |
