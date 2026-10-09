@@ -60,6 +60,36 @@ fn environment_sources_decode_linear_srgb_hdr_and_reject_invalid_radiance() {
 }
 
 #[test]
+fn large_environment_uses_cooked_low_pass_mips_before_cube_resampling() {
+    let pixels: Vec<u8> = (0..512)
+        .flat_map(|y| {
+            (0..1024).flat_map(move |x| {
+                let c = if (x + y) % 2 == 0 { 0 } else { 255 };
+                [c, c, c, 255]
+            })
+        })
+        .collect();
+    let mut png_bytes = Vec::new();
+    {
+        let mut encoder = png::Encoder::new(&mut png_bytes, 1024, 512);
+        encoder.set_color(png::ColorType::Rgba);
+        encoder.set_depth(png::BitDepth::Eight);
+        encoder
+            .write_header()
+            .unwrap()
+            .write_image_data(&pixels)
+            .unwrap();
+    }
+    let mut image = source(incant_assets::TextureFormat::Rgba8Linear, [0.; 4]);
+    image.texture =
+        incant_assets::import_image(&png_bytes, incant_assets::TextureUsage::Linear).unwrap();
+    let cube = super::source::decode(&image).unwrap();
+    for pixel in cube.pixels {
+        assert!((pixel - Vec3::splat(128. / 255.)).abs().max_element() < 0.00001);
+    }
+}
+
+#[test]
 fn cubemap_axes_edges_and_constant_radiance_are_preserved() {
     let cube = Cube::from_fn(32, |d| d * 0.5 + Vec3::splat(0.5));
     for axis in [Vec3::X, -Vec3::X, Vec3::Y, -Vec3::Y, Vec3::Z, -Vec3::Z] {
@@ -121,6 +151,12 @@ fn quadrature(nv: f32, roughness: f32) -> glam::Vec2 {
 }
 #[test]
 fn brdf_lookup_matches_independent_hemisphere_integrals() {
+    for value in filter::brdf_lut() {
+        assert!(
+            value.is_finite() && value.min_element() >= 0. && value.element_sum() <= 1.01,
+            "nonconserving lookup: {value}"
+        );
+    }
     for nv in [0.1, 0.5, 1.] {
         for roughness in [0.3, 0.6, 1.] {
             let integrated = filter::integrate_brdf(nv, roughness, 16384);
