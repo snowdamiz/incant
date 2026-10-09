@@ -1,0 +1,159 @@
+{
+  "conclusion": "success",
+  "databaseId": 37889690832,
+  "headSha": "5d1f5abaa23fd04f32eacfccbfc13cd52fc0f709",
+  "jobs": [
+    {
+      "completedAt": "2026-10-09T05:41:37Z",
+      "conclusion": "success",
+      "databaseId": 113687565620,
+      "name": "build",
+      "startedAt": "2026-10-09T05:40:24Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-09T05:40:26Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-09T05:40:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:40:30Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "number": 2,
+          "startedAt": "2026-10-09T05:40:26Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:40:38Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "number": 3,
+          "startedAt": "2026-10-09T05:40:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:40:42Z",
+          "conclusion": "success",
+          "name": "Run npm ci",
+          "number": 4,
+          "startedAt": "2026-10-09T05:40:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:40:45Z",
+          "conclusion": "success",
+          "name": "Build for the repository's Pages path",
+          "number": 5,
+          "startedAt": "2026-10-09T05:40:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:16Z",
+          "conclusion": "success",
+          "name": "Run npx playwright install --with-deps chromium",
+          "number": 6,
+          "startedAt": "2026-10-09T05:40:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:33Z",
+          "conclusion": "success",
+          "name": "Check navigation, accessibility, and deployed asset paths",
+          "number": 7,
+          "startedAt": "2026-10-09T05:41:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:34Z",
+          "conclusion": "success",
+          "name": "Upload website",
+          "number": 8,
+          "startedAt": "2026-10-09T05:41:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:34Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "number": 15,
+          "startedAt": "2026-10-09T05:41:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:34Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "number": 16,
+          "startedAt": "2026-10-09T05:41:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:35Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-10-09T05:41:34Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37889690832/job/113687565620"
+    },
+    {
+      "completedAt": "2026-10-09T05:41:51Z",
+      "conclusion": "success",
+      "databaseId": 113687884307,
+      "name": "deploy",
+      "startedAt": "2026-10-09T05:41:40Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-09T05:41:43Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-09T05:41:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:43Z",
+          "conclusion": "success",
+          "name": "Configure Pages",
+          "number": 2,
+          "startedAt": "2026-10-09T05:41:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:50Z",
+          "conclusion": "success",
+          "name": "Deploy",
+          "number": 3,
+          "startedAt": "2026-10-09T05:41:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-09T05:41:50Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 4,
+          "startedAt": "2026-10-09T05:41:50Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/snowdamiz/incant/actions/runs/37889690832/job/113687884307"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/snowdamiz/incant/actions/runs/37889690832",
+  "public_probe": {
+    "url": "https://snowdamiz.github.io/incant/",
+    "status": 200,
+    "matching_build_assets": [
+      "/incant/assets/index-D-swxDSI.js",
+      "/incant/assets/index-ConR8obK.css"
+    ]
+  }
+}
