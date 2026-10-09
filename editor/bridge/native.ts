@@ -260,6 +260,7 @@ export class NativeBridge implements EditorBridge {
   private listeners = new Set<() => void>();
   private historyListeners = new Set<(action: 'undo' | 'redo') => void>();
   private pending = false;
+  private importing = false;
   private refreshId = 0;
   private chrome: WindowChrome | undefined;
   private provider: ProviderState = { status: "checking", provider: "openai" };
@@ -340,7 +341,8 @@ export class NativeBridge implements EditorBridge {
     }
   }
   async dispatch(command: EditorCommand): Promise<BridgeResult> {
-    if (!this.read || this.pending)
+    const importing = command.type === 'asset.import';
+    if (!this.read || this.pending || (importing && this.importing))
       return {
         ok: false,
         error: {
@@ -348,7 +350,10 @@ export class NativeBridge implements EditorBridge {
           message: "Wait for the current engine operation.",
         },
       };
-    this.pending = true;
+    // Cooking owns a snapshot, so normal edits/history may continue. A changed
+    // revision rejects the import at commit rather than locking the user out.
+    if (importing) this.importing = true;
+    else this.pending = true;
     try {
       // A pending background read cannot overwrite the mutation response.
       ++this.refreshId;
@@ -404,7 +409,8 @@ export class NativeBridge implements EditorBridge {
       await this.start();
       return failure(error);
     } finally {
-      this.pending = false;
+      if (importing) this.importing = false;
+      else this.pending = false;
     }
   }
   async request(request: HostRequest): Promise<BridgeResult> {

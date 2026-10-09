@@ -10,6 +10,8 @@ Claude handoff 0010; its integration and native verification are still open.
 the entire batch on Tauri's blocking worker pool, then reacquires the bus only
 for revision-checked commit. Reads and native input do not wait on source parsing.
 Concurrent edits make the prepared import fail instead of overwriting those edits.
+The bridge permits normal edits and history operations while cooking; only a
+second simultaneous import is rejected. A stale import can be retried explicitly.
 One native import can run at a time; the guard releases on errors. A closed editor
 rejects a completed preparation before commit. Default unsaved projects explicitly
 report that a saved project must be opened before importing local sources.
@@ -22,9 +24,10 @@ the real command history and metadata. No GPU instance is invented for an asset.
 
 Two Rust tests verify preparation outside the bus lock, rejected stale commits,
 durable history/recovery/Undo, import serialization and unavailable loading state.
-Two bridge tests verify request serialization, revision dispatch, real asset
+Three bridge tests verify request serialization, revision dispatch, real asset
 mapping, unavailable hosts and preserved state after import failure. The complete
-pre-handoff UI/bridge suite has 242 passing tests; native Rust tests and Clippy pass.
+pre-handoff UI/bridge suite has 243 passing tests, including edits during cooking;
+native Rust tests and Clippy pass.
 
 ## Agent tools
 

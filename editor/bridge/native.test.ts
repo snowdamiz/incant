@@ -52,6 +52,26 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it('allows document editing during cooking and preserves it when the import becomes stale', async () => {
+    let current = read(); current.asset_import = { available: true };
+    let rejectImport: (error: string) => void = () => { throw new Error('No pending import'); };
+    const invoke: Invoke = async <T>(name: string) => {
+      if (name === 'engine_import') return await new Promise<T>((_, reject) => { rejectImport = reject; });
+      if (name === 'engine_execute') {
+        current = read(); current.asset_import = { available: true }; current.revision = 8;
+        current.project.scenes[scene]!.entities[entity]!.name = 'Edited during import';
+      }
+      return current as T;
+    };
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    const command = { type: 'asset.import', sources: [{ source: 'large.glb' }] } as const;
+    const importing = bridge.dispatch(command);
+    expect((await bridge.dispatch(command)).ok).toBe(false);
+    expect((await bridge.dispatch({ type: 'entity.rename', entity: entity as Ulid, name: 'Edited during import' })).ok).toBe(true);
+    rejectImport('The project changed since import preparation; prepare again');
+    expect((await importing).ok).toBe(false);
+    expect(bridge.getSnapshot().entities[entity]?.name).toBe('Edited during import');
+  });
   it("imports a batch with the current revision and publishes real asset metadata", async () => {
     const initial = read(); initial.asset_import = { available: true };
     const updated = read(); updated.revision = 8; updated.asset_import = { available: true };
