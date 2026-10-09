@@ -1,9 +1,11 @@
 //! Native rendering and GPU readback with retained imported material previews.
-//! Ordered HDR geometry, display transform and native composition passes.
+//! Bevy-scheduled HDR geometry, lighting, display transform and composition.
 //! Authored clustered lights; the full production render graph remains open.
 mod camera;
+mod diagnostic_draw;
 mod environment;
 mod frame;
+mod graph;
 #[cfg(test)]
 #[path = "../tests/hdr_output/mod.rs"]
 mod hdr_output;
@@ -28,7 +30,6 @@ pub use resource_error::ResourceError;
 pub use scene::{SceneError, SceneStats};
 use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
 pub use wgpu;
-use wgpu::util::DeviceExt;
 type Result<T> = std::result::Result<T, Box<dyn Error + Send + Sync>>;
 pub const MIN_SCREENSHOT_DIMENSION: u32 = 16;
 pub const MAX_SCREENSHOT_WIDTH: u32 = 1920;
@@ -58,6 +59,7 @@ pub struct Renderer {
     lighting: lighting::LightingSystem,
     frames: frame::FrameCache,
     output: output::OutputPass,
+    graph: graph::FrameGraph,
 }
 impl Renderer {
     pub async fn new(
@@ -94,6 +96,7 @@ impl Renderer {
             lighting,
             frames: Default::default(),
             output: Default::default(),
+            graph: Default::default(),
         })
     }
     pub fn headless() -> Result<Self> {
@@ -203,64 +206,28 @@ impl Renderer {
             return Err("invalid viewport corner radius".into());
         }
         let attachments = self.frames.get(&self.device, width, height)?;
-        let vertices = vertices(&scene.diagnostics, scene.camera.matrix(rect[2] / rect[3])?);
-        let buffer = self
-            .device
-            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                label: Some("ECS diagnostic geometry"),
-                contents: if vertices.is_empty() {
-                    &[0u8; 28]
-                } else {
-                    bytemuck::cast_slice(&vertices)
-                },
-                usage: wgpu::BufferUsages::VERTEX,
-            });
-        let hdr = &attachments.color;
-        let depth = &attachments.depth;
-        let pipeline = self.cached_pipeline(frame::HDR_FORMAT)?;
-        let mut encoder = self.device.create_command_encoder(&Default::default());
-        {
-            let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-                label: Some("Linear HDR geometry"),
-                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                    view: hdr,
-                    resolve_target: None,
-                    depth_slice: None,
-                    ops: wgpu::Operations {
-                        load: wgpu::LoadOp::Clear(wgpu::Color::TRANSPARENT),
-                        store: wgpu::StoreOp::Store,
-                    },
-                })],
-                depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
-                    view: depth,
-                    depth_ops: Some(wgpu::Operations {
-                        load: wgpu::LoadOp::Clear(1.),
-                        store: wgpu::StoreOp::Store,
-                    }),
-                    stencil_ops: None,
-                }),
-                timestamp_writes: None,
-                occlusion_query_set: None,
-                multiview_mask: None,
-            });
-            pass.set_pipeline(&pipeline);
-            pass.set_viewport(rect[0], rect[1], rect[2], rect[3], 0., 1.);
-            pass.set_vertex_buffer(0, buffer.slice(..));
-            pass.draw(0..vertices.len() as u32, 0..1);
-        }
-        self.render_models(
+        let diagnostics =
+            diagnostic_draw::DiagnosticDraw::prepare(self, scene, attachments.clone(), rect)?;
+        let models = self.prepare_models(
             scene,
             models::ModelTarget {
-                color: hdr,
-                depth,
+                color: attachments.color.clone(),
+                depth: attachments.depth.clone(),
                 format: frame::HDR_FORMAT,
                 rect,
             },
-            &mut encoder,
         )?;
-        self.output
-            .encode(&self.device, &mut encoder, hdr, view, format, viewport)?;
-        Ok(encoder.finish())
+        let output =
+            self.output
+                .prepare(&self.device, &attachments.color, view, format, viewport)?;
+        self.graph.encode(
+            &self.device,
+            graph::PreparedFrame {
+                diagnostics,
+                models,
+                output,
+            },
+        )
     }
     pub fn screenshot_png(&self, project: &Project, width: u32, height: u32) -> Result<Vec<u8>> {
         self.screenshot_scene_png(&self.diagnostic_scene(project)?, width, height)

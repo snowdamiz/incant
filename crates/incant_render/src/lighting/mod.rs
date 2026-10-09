@@ -184,12 +184,11 @@ impl LightingSystem {
     pub fn prepare(
         &self,
         device: &wgpu::Device,
-        encoder: &mut wgpu::CommandEncoder,
         lights: &GpuLights,
         viewport: [f32; 4],
         selection: LocalLightSelection,
         camera: crate::camera::CameraView,
-    ) -> Result<wgpu::BindGroup> {
+    ) -> Result<PreparedLighting> {
         let dimensions = [
             (viewport[2] / 64.).ceil() as u32,
             (viewport[3] / 64.).ceil() as u32,
@@ -227,25 +226,44 @@ impl LightingSystem {
                 resource: buffer.as_entire_binding(),
             })
             .collect::<Vec<_>>();
-        let compute = device.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: Some("Cluster assignment frame"),
-            layout: &self.compute_layout,
-            entries: &entries,
+        let compute = clustered.then(|| ClusterPass {
+            pipeline: self.pipeline.clone(),
+            group: device.create_bind_group(&wgpu::BindGroupDescriptor {
+                label: Some("Cluster assignment frame"),
+                layout: &self.compute_layout,
+                entries: &entries,
+            }),
+            dimensions,
         });
+        Ok(PreparedLighting {
+            compute,
+            shading: device.create_bind_group(&wgpu::BindGroupDescriptor {
+                label: Some("Cluster shading frame"),
+                layout: &self.layout,
+                entries: &entries,
+            }),
+        })
+    }
+}
+/// Immutable uniforms and retained storage bindings for one encoded frame.
+pub(crate) struct PreparedLighting {
+    pub shading: wgpu::BindGroup,
+    pub compute: Option<ClusterPass>,
+}
+pub(crate) struct ClusterPass {
+    pipeline: wgpu::ComputePipeline,
+    group: wgpu::BindGroup,
+    dimensions: [u32; 2],
+}
+impl ClusterPass {
+    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
         // Every used cluster word is overwritten, including empty clusters.
-        if clustered {
-            let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
-                label: Some("Assign local lights to view clusters"),
-                timestamp_writes: None,
-            });
-            pass.set_pipeline(&self.pipeline);
-            pass.set_bind_group(0, &compute, &[]);
-            pass.dispatch_workgroups(dimensions[0], dimensions[1], DEPTH_SLICES);
-        }
-        Ok(device.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: Some("Cluster shading frame"),
-            layout: &self.layout,
-            entries: &entries,
-        }))
+        let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
+            label: Some("Assign local lights to view clusters"),
+            timestamp_writes: None,
+        });
+        pass.set_pipeline(&self.pipeline);
+        pass.set_bind_group(0, &self.group, &[]);
+        pass.dispatch_workgroups(self.dimensions[0], self.dimensions[1], DEPTH_SLICES);
     }
 }

@@ -32,15 +32,14 @@ impl OutputPass {
             _ => Err(ResourceError::OutputFormat(format).into()),
         }
     }
-    pub fn encode(
+    pub fn prepare(
         &self,
         device: &wgpu::Device,
-        encoder: &mut wgpu::CommandEncoder,
         source: &wgpu::TextureView,
         target: &wgpu::TextureView,
         format: wgpu::TextureFormat,
         viewport: Option<Viewport>,
-    ) -> Result<()> {
+    ) -> Result<OutputDraw> {
         let pipeline = {
             let mut pipelines = self
                 .0
@@ -90,10 +89,24 @@ impl OutputPass {
                 },
             ],
         });
+        Ok(OutputDraw {
+            pipeline,
+            bindings,
+            target: target.clone(),
+        })
+    }
+}
+pub(crate) struct OutputDraw {
+    pipeline: wgpu::RenderPipeline,
+    bindings: wgpu::BindGroup,
+    target: wgpu::TextureView,
+}
+impl OutputDraw {
+    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Tone map scene and compose display backdrop"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                view: target,
+                view: &self.target,
                 resolve_target: None,
                 depth_slice: None,
                 ops: wgpu::Operations {
@@ -103,12 +116,12 @@ impl OutputPass {
             })],
             ..Default::default()
         });
-        pass.set_pipeline(&pipeline);
-        pass.set_bind_group(0, &bindings, &[]);
+        pass.set_pipeline(&self.pipeline);
+        pass.set_bind_group(0, &self.bindings, &[]);
         pass.draw(0..3, 0..1);
-        Ok(())
     }
 }
+
 fn build(device: &wgpu::Device, format: wgpu::TextureFormat) -> wgpu::RenderPipeline {
     let source = format!(
         "{}\n{}",

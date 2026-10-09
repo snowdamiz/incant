@@ -53,6 +53,13 @@ within its documented workload.
 
 ## Active work
 
+- Real GPU passes now execute through a persistent Bevy ECS schedule with explicit
+  dependencies and owned frame resources. Reverse-order queued submission after
+  scene/source disposal passes. 139 Rust, 33 GPU and 283 UI tests, Clippy and the
+  native build pass; 120/124 baseline PNGs match exactly, four differ at one/two
+  pixels by one channel level. Paired timings are stable. Claude review is pending. Production shadows/post-effects remain open. See
+  [render-pass scheduling](docs/spikes/render-pass-graph.md).
+
 - Authored Camera selection is connected to renderer captures, public CLI,
   isolated playback and the agent screenshot tool. Geometry, material view vectors,
   transparent sorting and light clusters share the selected camera. Projection,
