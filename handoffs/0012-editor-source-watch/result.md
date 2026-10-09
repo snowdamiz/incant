@@ -2,19 +2,16 @@
 
 ## Status
 
-- **Final verdict: pass.** All thirteen supplied native captures were reviewed. The
-  first eight came from ac2b162 and the final five from the rebuilt release app.
-- **The bridge fix is confirmed in native pixels.** The source error now shows the
-  engine message once, with the asset path in the separate right-hand column. This was
-  checked at 1440×900 and at the measured 1000×650 minimum.
-- **Restart is confirmed.** The reopened app shows the same recovered geometry and all
-  four history entries, with no redundant import.
-- **No UI fix was made.** Nothing in `editor/ui` changed, so UI tests and the build were
-  not rerun, as the packet allows for a review-only result.
-- **No further native evidence is required.** `native-requests.md` was not created.
-- One non-blocking recommendation remains: at the minimum width the Problems row
-  truncates the useful end of the message. The final packet forbids layout changes, so
-  it is recorded under open questions and not fixed.
+- **Minimum-width readability fix: done, pending native confirmation.** Problems rows
+  now wrap instead of truncating. The full error, including line and column, is in the
+  row at 1000×650 in browser fixture captures. Native confirmation is requested from
+  Astra in `native-requests.md`. No native pixels of the fix exist yet, and none are
+  claimed.
+- **Earlier native review: pass.** All thirteen supplied native captures were reviewed.
+  The source-watch states, the bridge path fix and restart recovery are confirmed in
+  native pixels. That verdict is unchanged.
+- **Tests and build pass.** All UI and bridge tests pass, including two new ones. The
+  build passes with main JS at 101.62 KiB gzip.
 - No phase gate is approved or claimed by this result.
 
 ## Model and transport
@@ -27,10 +24,15 @@
 
 ## Packet revisions acknowledged
 
+- **Priority: finish minimum-width diagnostic readability, 2026-10-09.** Read first and
+  applied. It expands the earlier review-only scope to a focused Problems-row change.
+  The separate source path, panels, palette and typography are kept. No new control was
+  added. Rust, bridge and contracts were not touched. Pinned dependencies were installed
+  with `npm ci` from the workspace lockfile.
 - **Final native follow-up, 2026-10-09.** Read first and applied. Astra integrated the
   0b8c405 review and implemented the bridge recommendation. The five new captures were
-  reviewed, and this file was updated. No look-dev or layout change was made, and tests
-  were not rerun.
+  reviewed in 57713ad. That pass was review-only: no layout change was made and tests
+  were not rerun. The priority above supersedes its "no layout change" limit.
 - **Commit identity.** The brief cites 3580aff for the bridge change. In this worktree
   the same change is 99a11dd. Both have the same patch ID. The diagnostic now keeps the
   engine message as is and puts the source into the diagnostic path.
@@ -40,7 +42,66 @@
 - The earlier optional request for an error raised while History is open is answered by
   w09-final-error-in-history.jpg.
 
-## Inspected captures
+## Problems row wrapping fix
+
+### Problem
+
+In native w11 at 1000×650 the Problems row ended at "invalid glTF:…". The line and
+column were hidden. The cause was the shared list style, which keeps every row on one
+line and truncates it. Console rows already wrap, but Problems rows did not.
+
+### Change
+
+- **Messages wrap.** The message wraps onto as many lines as it needs. Long unbroken
+  tokens break inside the row instead of overflowing.
+- **The location stays separate.** It stays in the mono right-hand column while it fits
+  beside at least half of the row. A longer path drops onto its own line under the
+  message, at full width and in the same subtle mono style. This uses flex wrapping and
+  needs no width breakpoint.
+- **Paths break at folders.** A break opportunity is added after each "/" in the message
+  and the location. The text that assistive technology reads is unchanged.
+- **Alignment.** Message and location align on their first baseline. The severity icon
+  is centred on the first line. A one-line row keeps the shared 28px height.
+- **Behavior kept.** Entity problems are still buttons that reveal the entity. Their
+  focus ring now surrounds the whole wrapped row. Project-level problems are still not
+  actions.
+
+### Fixture evidence
+
+These are BROWSER FIXTURE captures, not native evidence. The built UI ran in headless
+Chrome 155 at device scale 1, fed by a capture-only bridge double. The double's first
+diagnostic copies the w11 source error text. The others stress a long nested path, a
+96-character unbroken name and an entity warning.
+
+```
+npm ci --ignore-scripts --no-audit --no-fund
+npm run build --workspace editor/ui
+node handoffs/0012-editor-source-watch/tools/capture-problems.mjs before   # unchanged UI
+node handoffs/0012-editor-source-watch/tools/capture-problems.mjs after    # with the fix
+```
+
+Measured in the browser. A row counts as clipped when its text box scrolls in either
+direction.
+
+| Window | Diagnostic | Before | After |
+| --- | --- | --- | --- |
+| 1000×650 | w11 source error | clipped, 28px row | full text, 48px row |
+| 1000×650 | long nested path | message and path clipped | full text, 104px row, path below |
+| 1000×650 | unbroken name | message and path clipped | full text, 142px row, path below |
+| 1000×650 | entity warning | clipped | full text, 48px row |
+| 1440×900 | w11 source error | full text | full text, 28px row, unchanged |
+| 1440×900 | long nested path | message and path clipped | full text, 66px row, path below |
+| 1440×900 | unbroken name | message and path clipped | full text, 86px row, path below |
+
+Other results, after the fix, at both sizes:
+
+- No horizontal overflow in the Problems list and no text box past its row.
+- The axe-core scan of the dock reports no violations.
+- Keyboard: Tab reaches the entity row with a visible 2px focus ring. Enter selects the
+  entity in the Hierarchy.
+- No page errors.
+
+## Earlier review: inspected native captures
 
 All captures are in `artifacts/native-source-watch-review`, which is git-ignored. None
 were committed or copied into the repository. The title bar shows a private account
@@ -135,25 +196,61 @@ and was not reviewed.
 
 ## Changed paths
 
+- `editor/ui/src/components/BottomDock.tsx`: Problems rows get a wrapping text group
+  and break opportunities after "/".
+- `editor/ui/src/styles/app.css`: the Problems row styles, scoped to Problems only.
+- `editor/ui/src/components/ProblemsList.test.tsx`: two new behavior tests.
+- `handoffs/0012-editor-source-watch/tools/capture-problems.mjs`: the fixture capture
+  tool.
+- `handoffs/0012-editor-source-watch/screenshots/before/` and `after/`: fixture PNGs
+  and `report.json`.
+- `handoffs/0012-editor-source-watch/native-requests.md`: native capture requests.
 - `handoffs/0012-editor-source-watch/result.md`: this file.
 
-No Rust, contract, dependency, camera, lighting, shader, CSS or component change.
+No Rust, bridge, contract, dependency, camera, lighting or shader change. Console,
+History and other lists keep their existing styles.
 
 ## Tests and builds
 
-- UI tests and the UI build were not run by Claude. No UI file changed and the packet
-  waives them for review-only docs.
-- Astra reports all 280 UI and bridge tests and the UI build passing, with 101.59 KiB
-  gzip main JS. Claude did not rerun or independently verify these.
+```
+npm test --workspace editor/ui
+npm run build --workspace editor/ui
+```
+
+| Check | Result |
+| --- | --- |
+| UI and bridge tests | 282 passed in 11 files: the earlier 280 plus 2 new |
+| Typecheck and build | passed |
+| Main JS | 101.62 KiB gzip, under the 110 KiB budget |
+| CSS | 9.89 KiB gzip |
+
+- The new tests check that the full message is the row's own text, that the path stays
+  in its own location element, and that break opportunities do not change the text.
+  They also check that entity problems remain buttons that reveal the entity.
+- jsdom has no layout, so wrapping itself is measured in the fixture captures, not the
+  unit tests.
 - The native app was not built, per the packet.
 
 ## Screenshots
 
-- No screenshots were produced by Claude.
-- Reviewed native captures stay in the ignored `artifacts/native-source-watch-review`.
+All are browser fixture captures, not native evidence:
+
+- `handoffs/0012-editor-source-watch/screenshots/before/`: the unchanged UI.
+- `handoffs/0012-editor-source-watch/screenshots/after/`: the fix. Key files are
+  `problems-source-1000x650.png`, `problems-stress-1000x650-dock.png`,
+  `problems-stress-1000x650-dock-scrolled.png`, `problems-stress-1000x650-focus.png`
+  and `problems-stress-1440x900-dock.png`.
+- Each set has a `report.json` with the row measurements, axe results and keyboard
+  checks.
+
+Native captures stay private in the ignored `artifacts/native-source-watch-review`.
 
 ## Limitations
 
+- The wrapping fix has no native pixels yet. Chrome and the native WebKit view may
+  wrap text at slightly different points.
+- Wrapping makes long problems taller. In the 650px window the dock shows fewer rows
+  at once, and the list scrolls.
 - Retina or any scale other than 1 was not observed and is not claimed.
 - Minimum size was observed only at 1000×650 for the Problems error and recovered
   states. History and Console at minimum size were not shown.
@@ -165,11 +262,6 @@ No Rust, contract, dependency, camera, lighting, shader, CSS or component change
 
 ## Open questions
 
-- **Truncated detail at minimum width.** At 1000×650 the Problems row ends at
-  "invalid glTF:…", which hides the line and column. The full text is still in the DOM
-  for assistive technology and appears wrapped in Console, but the row has no tooltip or
-  wrap. A later handoff could let Problems messages wrap the way Console rows already
-  do. It was not changed here because the final packet forbids layout changes.
 - Should a project-level source diagnostic reveal the asset in the Assets view when
   clicked, the way entity diagnostics reveal the entity? That is new behavior and would
   need a binding first, so nothing was added.
