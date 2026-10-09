@@ -1643,7 +1643,7 @@
     "output-collapsed.jpg": "8d0768c09b8a84a4659ed334083286e9e785afbf7ed42fbd51a8c1da3b79f001",
     "output-open.jpg": "f4675276095e0cb8aaf4be5da82c80385c79f9355f48bfcad569292d90cdba39"
   },
-  "native_check": "CUA: attached surface, 0 errors/warnings before and after collapsing output; layout restored, app closed. Claude initial pixel review passed; fixture follow-up pending.",
+  "native_check": "CUA: attached surface, 0 errors/warnings before and after collapsing output; layout restored, app closed. Claude pixel review passed, including final fixture follow-up.",
   "timing": {
     "baseline_commit": "83c98a7186d25ad6530a7320675cd4d3fe6e86f3",
     "timestamp_utc": "2026-10-09T21:06:05Z",
@@ -3324,8 +3324,10 @@
   },
   "visual_review": {
     "initial_commit": "1494fda",
-    "verdict": "pass; fixture stability and stronger local-light lifetime evidence requested",
-    "final_follow_up": "pending"
+    "final_commit": "92a4714",
+    "model": "Claude Opus 5.5 via ACP",
+    "verdict": "pass; no open pixel-evidence gaps",
+    "independent_checks": "Initial 30 renderer GPU cases pass; final stable light fixture passes five separate-process reruns, lifetime test passes two and all eight final fixture PNGs reproduce exactly. Native composition reviewed."
   },
   "verification_logs_sha256": {
     "graph-workspace.log": "56b64c6b22fb9be50089b6646c1ea3db62f641919e812543df7aa6ac6db616fe",

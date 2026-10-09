@@ -77,8 +77,9 @@ Claude's initial review `1494fda` approved all reviewed appearance and independe
 reproduced the baseline bytes with the scheduled code in repeated processes.
 Following that review, the 96-light fixture now uses stable ULIDs; two separate
 runs produce exactly the same four PNGs. The expanded lifetime fixture now has
-four lit captures with alternating local-light membership. Final fixture review
-is pending. The original baseline comparison is retained as historical evidence;
+four lit captures with alternating local-light membership. Claude's final
+review `92a4714` passes with no open pixel-evidence gaps; five independent
+stability runs and two lifetime runs reproduce the final files. The original baseline comparison is retained as historical evidence;
 no runtime/shader changes accompanied these test improvements.
 
 Three paired trials at 1920×1080, five warm-up frames and thirty measured frames
