@@ -164,8 +164,112 @@ retained-scene and source-removal GPU tests still pass.
 - `crates/incant_render/src/studio.rs`
 - `handoffs/0014-gpu-materials/result.md`
 
-## Open questions
+## Open questions (first pass, now resolved)
 
-- Should the viewport backdrop move to a lighter neutral? That would lift dark-albedo
-  contrast, but it is a viewport and UI decision outside this packet.
-- Is a frame-to-bounds preview camera wanted before or after specular IBL lands?
+The director resolved both first-pass questions in the priority follow-up. The
+neutral backdrop and fixed camera stay for this increment. Specular IBL and tone
+mapping are the next renderer work, and automatic framing can follow. No question
+remains for the director.
+
+---
+
+# Final review: integrated captures (priority follow-up)
+
+Model: Claude Opus 5.5, model ID `claude-opus-5-5`, in the same handoff session
+setup as the first pass. No builds, code changes or new screenshots were made in this
+pass. Captures were decoded locally and inspected without modifying them.
+
+## Director feedback acknowledged
+
+- Astra integrated the studio tuning. All seven explicit GPU tests pass, including the
+  new lit back-face and varying normal-map checks. I did not rerun them in this pass.
+- The neutral backdrop and fixed camera stay for this increment. I withdrew the
+  backdrop and framing questions instead of asking the director again.
+- Specular IBL and tone mapping are the next renderer work. Automatic framing follows.
+- Historical captures and hashes are not treated as current output. This review uses
+  only the 19 freshly generated PNGs and the two final native captures.
+
+## Final verdict
+
+**Accepted for this scoped increment. No regression found.** Every remaining issue
+below is an accepted, documented preview limitation, not a defect.
+
+- **Integrated source.** `studio.rs` and `model_material.wgsl` are unchanged since my
+  tuning commit. Astra's merge changed only typed resource errors in `materials.rs` and
+  `models.rs`, with no shading effect.
+- **Carried-over captures.** All 16 are pixel-identical to my first-pass local
+  recaptures with the tuned constants. Zero pixels differ in each. The first-pass
+  findings table therefore holds unchanged for current output.
+
+## The three new GPU captures
+
+| Capture | Measured | Assessment |
+|---|---|---|
+| lit-double-sided-back | uniform 231,231,231 | Matches a lit white front face exactly. The back-face normal flip is correct. This closes first-pass finding 7. |
+| varying-normal-map | halves of 231 and 182 | The flat half matches a flat white face. The tilted half matches the single-tilt normal map. The split reads clearly as shading, not albedo. This closes first-pass finding 3. |
+| textured-cube (640x360) | front 199,136,65 and 40,109,199; top 179,122,57 and 34,97,179; side 156,106,48 and 28,84,156 | All three face tones match my independent shader evaluation within one byte. The cube reads clearly as a solid with three distinct planes. |
+
+The cube's stripes stay straight and continuous across each face, with no visible
+UV seams or swaps. The front face is brightest, the top is mid, and the right side is
+darkest. That gradient follows the fixed light direction and gives a clear, neutral
+three-tone read. The cube is a mathematical fixture, not game art.
+
+`default-metal.png` is pixel-identical to my tuned recapture, about sRGB 110 gray on a
+background of 20. It is legible. It still reads as gray rather than white, which is
+the accepted no-specular-IBL limitation.
+
+## Native captures
+
+These are `10-final-wide.jpg` at 1440x900 and `11-final-minimum.jpg` at 1000x650.
+
+- **Viewport material appearance.** The native viewport shows the same textured cube.
+  It has the same three-tone face shading and stripe layout as the headless readback.
+  It sits on the same neutral near-black backdrop. Native output and headless capture
+  agree visually. I cannot claim a pixel comparison because both files are JPEGs.
+- **Framing.** At wide size the cube is centered in the viewport and fills about a
+  third of its height. At minimum size it stays centered and fully visible, scaled
+  down with the narrower viewport. The fixed camera frames this fixture acceptably.
+  Small or offset models, such as the default triangles, will still need automatic
+  framing later.
+- **Sidebar and Inspector separation.** It is preserved at both sizes. The left
+  sidebar holds the Assets tab, a filter, Import, and the selected cube row. The
+  right Inspector holds the cube's model identity, source file, a Reimport action
+  with help text, and the Identifiers disclosure. Neither panel duplicates the
+  other, and the viewport keeps its own region between them.
+- **Minor layout observation, outside this packet's scope.** At 1000x650 the second
+  line of the Reimport help text is clipped by the Agent section divider. The
+  Identifiers disclosure is pushed out of view. Neither affects material appearance.
+  This is a UI polish item for a later layout pass. It does not regress this increment.
+- **Capture overlays ignored.** The purple screen-recording badge over the macOS
+  window controls is an OS capture overlay. The pointer cursor in the wide capture is
+  also not application chrome. Neither was used to judge traffic-light spacing or chrome.
+
+## Accepted preview limitations, not regressions
+
+- Metals and the default material look dark outside their direct highlight because
+  there is no specular IBL. This is the next renderer work.
+- Glossy highlights can clip and shift hue because there is no tone mapping. This is
+  also next renderer work.
+- Geometry edges are aliased because there is no antialiasing. The cube silhouettes
+  and transparency parallax strips show hard stair steps.
+- Dark albedos stay low contrast against the retained near-black backdrop. The
+  terracotta texture measures 2.13:1.
+- The fixed camera leaves small or offset imported models undersized. Automatic
+  framing follows later.
+- There are no authored lights, render graph, shadows, SSAO or bloom.
+
+## Evidence for this pass
+
+- 19 PNGs in `artifacts/material-review/` were viewed and decoded.
+- 2 JPEGs in `artifacts/native-material-review/` were viewed. A temporary crop of the
+  minimum-size Inspector region was used for inspection and then deleted.
+- 16 carried-over PNGs were compared pixel by pixel against
+  `artifacts/material-review-tuned/`, with zero differing pixels each.
+- The cube's face tones were checked against a CPU evaluation of the preview shader.
+
+No visual-regression baseline exists, and none is claimed. No phase gate is approved
+by this review.
+
+## Changed paths in this pass
+
+- `handoffs/0014-gpu-materials/result.md`
