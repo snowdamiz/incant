@@ -3322,7 +3322,11 @@
       }
     ]
   },
-  "visual_review": "pending handoff 0020",
+  "visual_review": {
+    "initial_commit": "1494fda",
+    "verdict": "pass; fixture stability and stronger local-light lifetime evidence requested",
+    "final_follow_up": "pending"
+  },
   "verification_logs_sha256": {
     "graph-workspace.log": "56b64c6b22fb9be50089b6646c1ea3db62f641919e812543df7aa6ac6db616fe",
     "graph-gpu-unit.log": "7d3159aab0bb074e90450fb0c76a06d37490e3d0b3703b877eaa04aa7607a2c4",
@@ -3340,5 +3344,38 @@
     "Shadows, SSAO, bloom, TAA and mobile feature tiers remain open.",
     "Fenced synthetic frame timings exclude loading, readback, presentation and simulation; no named game/device gate.",
     "All caller-retained command buffers can retain their GPU resources; idle cache bounds are not a total queued-frame cap."
-  ]
+  ],
+  "final_fixture_png_sha256": {
+    "graph-retained-model-0.png": "82e27ea26a36e163b78b32138969de0106533e1b419a20f6f00cdb10452a2ffa",
+    "graph-retained-model-1.png": "32e23ed4fe6c073771b24e00a0b9dc37c3bd95de278591e7b0c02c2e182a6a4a",
+    "graph-retained-model-2.png": "ba146f366a29ac8fbf9154cfcb39aa208183128acb37768b7e46ffa2f4abb7ab",
+    "graph-retained-model-3.png": "fba11043c9f71470eea6c0019e8710fa9a100166657bbe941219d3d3c4ddf2fb",
+    "spatial-overflow-96-513x385-oracle.png": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44",
+    "spatial-overflow-96-513x385.png": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44",
+    "spatial-overflow-96-640x480-oracle.png": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a",
+    "spatial-overflow-96-640x480.png": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a"
+  },
+  "fixture_stability": [
+    {
+      "name": "spatial-overflow-96-513x385-oracle.png",
+      "sha256": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44",
+      "separate_processes_identical": true
+    },
+    {
+      "name": "spatial-overflow-96-513x385.png",
+      "sha256": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44",
+      "separate_processes_identical": true
+    },
+    {
+      "name": "spatial-overflow-96-640x480-oracle.png",
+      "sha256": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a",
+      "separate_processes_identical": true
+    },
+    {
+      "name": "spatial-overflow-96-640x480.png",
+      "sha256": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a",
+      "separate_processes_identical": true
+    }
+  ],
+  "coverage_followup": "Four reverse-submitted frames retain model versions and alternate active local-light bits; final two frames share exact geometry, viewport and grid shape. Existing lighting viewport test also already submits commands out of encoding order."
 }
