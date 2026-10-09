@@ -1,13 +1,143 @@
 # 0016 Environment lighting: default studio look-dev — result
 
+## Final native verdict
+
+**Native integration approved.** The approval covers rendering, retention, recovery
+and viewport sizing in the CUA-native captures in `artifacts/environment-native/`.
+Astra recorded them from PR16 source commit `42a991d`, built independently.
+
+- **One styling defect fixed:** Inspector field labels were clipped. I fixed this in
+  this pass. The fix is browser-verified but not yet natively recaptured.
+- **No phase gate:** none is approved or claimed.
+- **Headless verdict unchanged:** the headless and command-line approval below still
+  stands.
+
+**Model and transport:** Claude Opus 5.5, model ID `claude-opus-5-5`. The packet
+states ACP protocol 1. This session runs as a Claude Code agent launched by the
+handoff harness in this worktree, under director-authorized `bypassPermissions`. The
+session cannot independently confirm the ACP hop. No model substitution was made.
+
+**Packet:** the final native review revision. It carries no new typed director
+feedback. Astra's routine notes are acknowledged:
+
+- **Capture indicator:** the macOS capture indicator overlaps the window corner. It is
+  an OS overlay and was not judged as app chrome.
+- **Saved account:** it was restored without a prompt. No account identifier is
+  recorded here. The captures show the account chip in the titlebar. They stay in the
+  ignored `artifacts/` folder and are not committed.
+- **Fixture journal path:** Astra corrected a setup mistake in the disposable fixture.
+  This is not an application change, and no validation was bypassed.
+
+**Source identity:** `git diff 42a991d HEAD -- crates` is empty. The captured build
+therefore used the same renderer and environment source as the approved headless
+review. The two commits differ only in documentation and evidence files.
+
+### Captures reviewed at native resolution
+
+Captures 01 to 06 are 1440×900 JPEGs. `07-minimum.jpg` is 1000×650, and
+`resize-check.jpg` is 1000×900.
+
+| Capture | What it shows | Verdict |
+|---|---|---|
+| 01 authored at yaw 0 | The metallic sphere reflects the authored red/blue map. It matches the headless authored capture: a red reflection lobe, a blue rim and the white key highlight. The Inspector shows Texture, Intensity of 1 and Rotation of 0. There are no problems. | Pass |
+| 02 source changed | The watched source switches to uniform green. The sphere is evenly green with only the key highlight, as a uniform environment should look. Undo becomes available, and there are no problems. | Pass |
+| 03 undo | The original red/blue environment returns, identical in look to 01. | Pass |
+| 04 redo | Green returns, identical to 02. | Pass |
+| 05 invalid source | Problems shows the error, quoted in full below. The status bar shows one error, and the sphere keeps the last valid green lighting. | Pass |
+| 06 source repaired | The original environment returns. Problems and the status bar clear. | Pass |
+| 07 minimum 1000×650 | All panels stay visible. The viewport shrinks and the sphere stays round and centered. The output dock, the Inspector and the Agent composer fit without overlap. | Pass |
+| resize 1000×900 | The sphere is round and centered at a different aspect ratio. | Pass |
+
+The error in capture 05 reads:
+
+```
+could not cook environment.png: invalid asset: The image format could not be determined
+```
+
+**Retention and recovery:** the viewport never goes blank or falls back to the
+default studio during the invalid-source state. Valid lighting is retained, the error
+is visible in two places, and repair clears it. The error text is clear, and the
+offending file name sits right-aligned in mono, like other problems.
+
+**Viewport sizing:** the sphere is centered in the viewport in every capture. At
+1440×900 the viewport center is about x 677, y 352. At 1000×650 it is about x 457,
+y 227. At 1000×900 it is about x 457, y 352. There is no stretching, letterboxing or
+offset between the native surface and the web viewport hole.
+
+**Inspector clipping and scrolling:** the Inspector column is a fixed width of about
+332 px at every window size. In every capture the "Rotation degrees" label was clipped
+to "Rotation degre...". The full name was available only through the hover title.
+That is a concrete legibility defect on the component this handoff adds, so I fixed
+it below.
+
+The Texture asset ID is also truncated with an ellipsis. That is the intended behavior
+for a mono value well, and the full ID is in its hover title. The three fields fit
+without scrolling, even at the minimum window size.
+
+**Colours:** the saturated red, blue and green are numerical test colours, not art
+direction. They were judged only for correctness.
+
+### Styling fix: Inspector field labels
+
+- **`editor/ui/src/styles/app.css`:** `.field__label` now clamps to two lines at the
+  16 px tight leading, instead of a single-line ellipsis. A third line is the first
+  one truncated. Unbreakable words wrap. The 34/66 label/value grid is unchanged, so
+  value wells lose no width. The hover title and the real `<label>` association are
+  unchanged.
+- **`editor/ui/DESIGN.md`:** the Inspector entry now records the wrapping rule.
+
+**Verification:** I rendered the real `tokens.css` and before/after `app.css` with
+FieldView's markup at the 332 px Inspector width, using headless Chrome at 2× scale.
+This is a browser render of the stylesheet, not a native capture. The render files are
+`target/env_check/ui/before.png` and `after.png`, in an ignored folder and not
+committed.
+
+- "Rotation degrees" now reads in full on two lines.
+- A long multi-word label clamps at two lines with an ellipsis.
+- A long single word wraps.
+- One-line rows are unchanged.
+
+The Inter web font is not installed in this worktree, so the render used the system UI
+font. Inter is about as wide or slightly narrower, so it should fit at least as well.
+
+**Not run:**
+
+- **UI unit tests and typecheck:** not run, because `node_modules` is absent here. No
+  test references this class's styling.
+- **Native recapture:** not done. Native capture is Astra's role.
+
+**Native recapture needed:** a native capture of the Environment Inspector,
+like 01, plus the minimum-size capture 07 are needed to confirm the wrapped label in
+the app. The renderer and the viewport are untouched, so no other capture needs
+regeneration.
+
+**Optional data request for Astra:** the schema could give this field
+`title: "Rotation"` with `x-incant-unit: "°"`. FieldView already renders units inside
+the value well, which would read better than a wrapped label. Texture could also use
+`format: "asset-ref"` to get the link icon. These are schema bindings, so I left them
+untouched.
+
+### Native limitations, recorded and not approved
+
+- **No visibility or shadow term:** geometric visibility and shadows are not
+  implemented, and only the occlusion texture applies.
+- **No temporal antialiasing:** it is still planned in PLAN.md. The sphere silhouettes
+  alias natively too.
+- **No authoring in the Inspector:** it is read-only. The environment is changed
+  through the source and command bus, not edited in the Inspector.
+- **Default studio not shown natively:** this capture sequence shows only authored
+  environments. The default studio is covered by the headless command-line capture,
+  which renders the same source.
+
 ## Final headless verdict
 
-**Approved for headless rendering: the default studio environment, as rendered in
+**Headless verdict (still current): approved for headless rendering: the default studio environment, as rendered in
 `artifacts/environment-final/`.** The fill and key correction is confirmed in the
 pixels. No look defect remains, and no source changes were needed in this pass.
 
-- **Not approved: native integration.** No native images exist. Astra reports that
-  computer-use access found the director's Mac locked. Native review waits for that.
+- **Native integration:** at the time of this headless pass, no native images existed
+  because the Mac was locked. That has since been superseded by the final native
+  verdict above.
 - **Not approved: any phase gate.** None is claimed.
 - **Scope:** this verdict covers the preview appearance only. It does not approve the
   limitations listed below.
