@@ -2,14 +2,18 @@
 
 ## Status
 
-Review complete. Scoped verdict: **pass with evidence gaps**. I found no concrete
-rendering defect in the supplied PNGs. Every geometric extent I could predict
-matched within one pixel. Several acceptance items are proven only weakly
-because the frames are uniform; numerical fixtures for Astra are listed below.
+Follow-up review complete. Scoped verdict: **pass**. The four evidence gaps from
+the first review are closed by measured pixels. The empty rig-parent defect is
+fixed in the captures I reviewed. I found no rendering defect in any supplied
+PNG. Every predictable geometric extent matched its analytic projection within
+about one pixel.
+
+Three items stay open and are listed under "Remaining items". None of them
+changes the pixel verdict.
 
 This is a rendered-pixel review of one increment. It does not approve a phase
-gate, production engine readiness, an editor camera UI, orthographic cameras or
-glTF camera import.
+gate, production engine readiness, an editor camera UI, orthographic cameras,
+camera rigs as a feature, or glTF camera import.
 
 ## Model
 
@@ -18,29 +22,42 @@ glTF camera import.
   inspect the ACP transport from inside the session.
 - No model substitution occurred.
 
-## Packet revisions and director feedback
+## Director feedback acknowledged
 
-The current brief has no priority-revision section and no new director feedback
-beyond the standing CLAUDE.md decisions. I reviewed the camera packet, not the
-earlier lighting packet. No earlier files from an interrupted attempt existed:
-`result.md` was absent and the worktree was clean at `3655c30`.
+The current brief begins with a priority follow-up. It integrates my `c5e02e6`
+review and asks me to:
+
+- review five new captures,
+- confirm the empty-parent fix in the plain parent captures,
+- use the new CLI pose record,
+- preserve earlier findings and replace closed gaps with a follow-up verdict.
+
+I applied all of these before anything else. The brief text was already
+committed by Astra in `8b82f43` and was unchanged in the worktree.
 
 ## Evidence provenance
 
-- The runner had not yet copied `artifacts/camera-initial` into this worktree.
-- I copied the 28 PNGs from the main checkout's `artifacts/camera-initial`.
-- Their timestamps are 2026-10-09 16:35 to 16:36. Commit `3655c30` is 16:36:38 the
-  same day. I cannot prove byte-level provenance from that commit beyond timing.
-- All images are 8-bit RGBA with alpha 255 on sampled pixels.
+- The runner copied 33 PNGs into this worktree's ignored
+  `artifacts/camera-initial/`.
+- The renderer captures are timestamped 2026-10-09 16:42, matching Astra's
+  `8b82f43` at 16:42:52. The seven CLI captures are unchanged from 16:35, as the
+  brief states.
+- `artifacts/camera-cli-evidence.json` now records the CLI configuration:
+  dimensions, authored and moved transforms, projection and default preview
+  camera. Its seven SHA-256 values match my hashes of the CLI PNGs.
+- The committed ledger `docs/spikes/evidence/authored-camera-capture-2026-10-09.json`
+  does not yet list hashes for the five new PNGs. The brief says the final
+  ledger will record them. See "Remaining items".
 
 ## Changed paths
 
 - `handoffs/0019-authored-cameras/result.md` (this file, committed).
-- Ignored, not committed: `artifacts/camera-initial/` (copied PNGs),
-  `artifacts/review-0019-scripts/stats.py`, `artifacts/review-0019-scripts/predict.py`,
-  `artifacts/review-0019-scripts/pose2-480-zoom.png`.
+- Ignored, not committed: `artifacts/review-0019-scripts/stats.py`,
+  `artifacts/review-0019-scripts/predict.py`,
+  `artifacts/review-0019-scripts/pose2-480-zoom.png`, plus one-off inline
+  measurement commands.
 
-No shaders, matrices, tests, GUI styling or project content were edited.
+I did not edit shaders, matrices, tests, GUI styling, project content or the brief.
 
 ## Commands run
 
@@ -48,98 +65,120 @@ No shaders, matrices, tests, GUI styling or project content were edited.
 shasum -a 256 artifacts/camera-initial/*.png
 python3 -I artifacts/review-0019-scripts/stats.py artifacts/camera-initial/*.png
 python3 -I artifacts/review-0019-scripts/predict.py
+# plus inline python3 -I measurements of the new captures, using the same
+# stdlib PNG decoder, and a grep of the committed ledger for each PNG hash
 ```
 
-The scripts are stdlib-only PNG decoders. `stats.py` reports the non-background
-bounding box, sample colors and the maximum luminance second difference.
-`predict.py` projects the fixture quad's corners through each authored camera
-and compares them with measured extents. It also reports the interior-only
-second difference, sampled at least three pixels from any edge.
+The scripts are stdlib-only PNG decoders. They report the non-background or red
+bounding box, per-row red spans, sample colors and luminance second differences.
+They also project the ±3-unit fixture quad through each camera for comparison.
 
-Not run by me: cargo tests, GPU tests, Clippy and builds. The brief reports those
-as Astra's results, with combined verification still in progress. I did not
-need a native capture, so CUA was not used.
+Not run by me: cargo tests, GPU tests, Clippy and builds. The brief reports the
+first combined run passing 138 Rust and 31 GPU tests. A rerun after the
+ancestor fix is in progress, and I did not observe it. I did not need a native
+capture, so CUA was not used.
 
-## Screenshots reviewed
+## Follow-up review: closed evidence gaps
 
-All paths are under `artifacts/camera-initial/`.
+All new images are 321×241. Eye (0,0,8) looks down −Z at the ±3 quad on z=0
+unless a row says otherwise. Each table row closes one earlier gap.
+
+| Earlier gap | New capture | Measured | Predicted | Verdict |
+|---|---|---|---|---|
+| 1. The fov-30 frame could not show quad edges | camera-fov-50-visible-edges | red x 64–256, y 24–216 | x 63.6–257.4, y 23.6–217.4 | Closed. All four edges are inside the frame. |
+| 2. The clip cases proved only an empty frame | camera-tight-clip-positive, near 7.9 / far 8.1 | red x 82–238, y 42–198 | unclipped 60° quad at x 82.2–238.8, y 42.2–198.8 | Closed. The full quad survives a 0.2-unit depth window. |
+| 2. (continued) | camera-tilted-partial-clip, quad tilted 30° about X, clip 7.5–8.5 | red rows 96–141; widths 167, 157, 147 at top, middle, bottom | cut rows 96.40 and 141.76; widths 167.0, 156.5, 147.4 | Closed. Both cuts are straight horizontal edges with contiguous rows at the predicted depths. |
+| 3. Parent inheritance covered translation only | camera-scaled-roll-parent vs camera-scaled-roll-flat | byte-identical; corners at (61,121), (273,65), (195,200), with the top corner off-frame | inherited eye (0.268, −1, 8); corners (60.6,123.1), (274.4,65.8), (196.1,201.3), (138.8,−12.5) | Closed. Rotation and non-uniform scale move the eye and roll the view. Clip units are not scaled, or the 7.9–8.1 window would show nothing. |
+| 5. The CLI poses were not recorded | artifacts/camera-cli-evidence.json | authored eye (0,0,8), moved eye (2,0,8), 60°, 0.1–100, 640×480; preview eye (6,5,9), 50° | see below | Closed. |
+
+**CLI framing now checks numerically.** At 640×480 and 60°, the focal length is
+415.7 px. A 2-unit move at distance 8 predicts a 103.9 px leftward shift of the
+sphere's center. I measured a bounding-box center shift of 115 px. That box
+includes the 8 px off-axis widening from 274 to 282 px. The projected center of
+an off-axis sphere also lands farther out than its geometric center. Both
+effects make the measured shift larger than the simple prediction, and the
+size is plausible. The vertical extent is unchanged at y 103–376, as a pure
++X move requires. The preview's smaller sphere is consistent with its farther
+eye, at distance 11.9 versus 8.
+
+**Rig parent fix.** These captures confirm the fix:
+- camera-inherited-pose now uses a plain Transform-only parent with no light
+  workaround. It is byte-identical to camera-flat-parent-reference.
+- The scaled-roll parent is also Transform-only, and its capture equals the
+  parentless flat capture.
+
+A visible diagnostic cube at the parent would break either equality. I read
+the scene change and the new CPU test. The new rule hides fallback cubes only
+for mesh-less ancestors of a Camera. Explicit meshes on ancestors and unrelated
+diagnostic entities still count. Document validation already rejects missing
+parents and cycles, so the new ancestor walk cannot index a missing entity.
+
+## Findings preserved from the first review
+
+All of these still hold. Hashes are unchanged for every re-captured image.
 
 | Image | Result |
 |---|---|
-| camera-fov-80.png | Red quad x 107–213, y 67–173. Predicted 106.6–214.4, 66.6–174.4. Square on a non-square frame. |
-| camera-fov-30.png | Uniform red (243,31,31). Predicted quad x −8.1 to 329.1 overfills 321×241. Consistent but weak (gap 1). |
-| near-clipped.png, far-clipped.png, camera-facing-away.png | Byte-identical uniform background (20,21,25). Expected: near 9 > distance 8, far 7 < 8, camera rotated 180°. |
-| camera-clusters-0 (35°, eye 0,0,8) | 321: x 17–303, predicted 17.2–303.8. 480: x 79–400, predicted 79.4–400.6. Quad overfills vertically as predicted. |
-| camera-clusters-1 (75°, eye 3,2,7) | 321: x 108–232 y 52–186, predicted 108.0–233.0, 52.1–187.6. 480: x 181–320 y 58–209, predicted 181.2–321.3, 58.3–210.2. |
-| camera-clusters-2 (90°, eye −5,4,10) | 321: x 127–186 y 88–153, predicted 126.8–187.2, 87.9–154.5. 480: x 202–269 y 99–172, predicted 202.3–269.9, 98.5–173.1. |
-| camera-clusters-*-oracle.png | All six byte-identical to the culling-free All-light path. |
-| camera-flat-parent-reference.png, camera-inherited-pose.png | Byte-identical. Also identical to camera-clusters-2-321x241 because both reuse pose 2. |
-| camera-transparent-front.png | Center (188,6,138), red-dominant. Red border x 77–243 matches the near plane's predicted 77.0–244.0. |
-| camera-transparent-back.png | Center (137,6,188), blue-dominant. Blue border matches the near plane, now the blue quad. |
-| cli-camera-preview / authored / moved | Viewpoint changes coherently (details below). |
-| cli-camera-undo.png | Byte-identical to authored. |
+| camera-fov-80 | Red quad x 107–213, y 67–173. Predicted 106.6–214.4, 66.6–174.4. Square on a non-square frame. |
+| camera-fov-30 | Uniform red. The predicted quad overfills the frame. Now backed by the fov-50 frame. |
+| near-clipped, far-clipped, camera-facing-away | Byte-identical background frames, as intended. Now backed by positive clip controls. |
+| camera-clusters-0, 35°, eye (0,0,8) | Within one pixel of prediction at both sizes. The quad overfills vertically, as predicted. |
+| camera-clusters-1, 75°, eye (3,2,7) | Within 1.6 px of prediction at both sizes, largest at the bottom edge. |
+| camera-clusters-2, 90°, eye (−5,4,10) | Within 1.5 px of prediction at both sizes, largest at the bottom edge. |
+| camera-clusters-*-oracle | All six byte-identical to the culling-free All-light path. |
+| camera-transparent-front / back | Centers (188,6,138) red-dominant and (137,6,188) blue-dominant. The border matches the near plane's predicted x 77.0–244.0. |
+| cli-camera-undo | Byte-identical to authored. |
 | cli-camera-redo / reopened / source-free | Byte-identical to moved. |
 
 **Cluster seams and illumination.** The interior luminance second difference is
 at most 2.2 for poses 0 and 1 and 5.6 for pose 2, on an 8-bit scale. A 6× zoom
-of pose 2 at 480×270 shows smooth falloff for all 7×7 point lights. The zoom
-showed no straight-line discontinuity, cutoff, missing tile or dark cluster
-cell. The hue gradient across the light grid is continuous and identical
-between the pair sizes. Odd and even sizes keep the same vertical-FOV framing:
-the quad width relative to frame height is 1.19 in both pose-0 sizes.
+of pose 2 shows smooth falloff for all 7×7 point lights. It shows no seam,
+cutoff, missing tile or dark cluster cell. The hue gradient is continuous and
+identical between the pair sizes. The rolled scaled-parent capture shows the
+same gradient rotated clockwise, as a +30° camera roll requires.
 
-**CLI sphere.** The preview sphere spans x 210–429, about 220 px. The authored
-camera is closer, at 274 px, with the highlight up-right. The moved camera
-shifts the sphere left by 115 px with the same vertical extent, y 103–376. The
-sphere widens from 274 to 282 px, the expected off-axis perspective stretch.
-The specular highlight moves with the view direction. The 3968-triangle
-silhouette shows no visible faceting at 640×480. I did not treat the titleless
-frame as an editor design.
+**Not a defect of this packet.** Quad edges are aliased stair-steps. This
+predates camera selection and is out of scope. The titleless CLI frame is not
+treated as an editor design.
 
-**Pre-existing observation, not a defect of this packet.** Quad edges are
-aliased stair-steps, which is visible in the zoom. This predates camera
-selection and is out of scope.
+## Remaining items
 
-## Evidence gaps and fixtures requested from Astra
+1. **The new ledger hashes are missing.** The committed ledger lists no SHA-256
+   for camera-fov-50-visible-edges, camera-tight-clip-positive,
+   camera-tilted-partial-clip, camera-scaled-roll-parent or
+   camera-scaled-roll-flat. The brief says the final ledger will add them. Its
+   `visual_review` field still reads "pending". My hash prefixes are
+   `eca524c77ca7d2fc`, `29a364e13f7f3f4a`, `65813ffd2ae07f3a` and
+   `f6f806044e46cb8f`. The last one is shared by the two scaled-roll images.
+2. **One byte-identity claim is test-asserted only.** The brief says the
+   tight-clip capture equals the original unclipped 60° view. That reference
+   frame is not saved as a PNG, so I could not compare the bytes myself. Its
+   geometry matches the unclipped prediction to the pixel, so I accept it on the
+   test's assertion.
+3. **Documentation is behind the new rig-frame rule.** The spike doc still
+   says only that camera-only entities lose their cubes. It should also say
+   that mesh-less ancestors of a camera do. A user who wanted a placeholder cube
+   on a parent of a camera will no longer see it.
 
-1. **The fov-30 frame cannot distinguish a correct projection from a full-frame bug.**
-   A red clear color or full-screen red draw would produce the same image. The
-   test's `red_pixels(narrow) > 2 * red_pixels(wide)` assertion would also pass.
-   Add a fov 50 capture, or assert edges. At eye (0,0,8) and 321×241, a ±3 quad is
-   predicted at x 63.6–257.4 and y 23.6–217.4.
-2. **The clipping and facing-away cases only prove that nothing is drawn.** All
-   three are byte-identical background frames. Add positive controls at fov 60:
-   near 7.9 / far 8.1 should still show the full quad. A tilted quad crossing
-   the near plane should show a straight cut at a predicted pixel row.
-3. **Parent inheritance is exercised for translation only.** The fixture moves a
-   parent by (2,0,0) and nothing else. Rotation inheritance, scale affecting
-   inherited position and aim, and scale not changing clip units have no pixel
-   evidence. Add a rotated, non-uniformly scaled parent compared with an
-   equivalent flat pose. Add a scaled parent whose near-clip threshold stays at
-   world distance 8.
-4. **The cluster near/far ranges never intersect the quad.** The three ranges
-   differ, but no pose clips visible geometry. Oracle equality covers cluster
-   slicing, not visible near/far behavior at those poses. This is acceptable
-   if gap 2 is addressed.
-5. **The CLI camera poses and FOV are not recorded in the repository.** The
-   script that produced the CLI images is absent, so I could only check
-   consistency, not predicted framing. Please record the camera transform and
-   Camera values beside the evidence.
-6. **The agent `view_screenshot` camera test checks routing only.** It uses a mock
-   host and does not count as pixel evidence, as the test itself states.
+**Optional low-priority fixture.** A rotated child under a non-uniformly scaled
+parent creates a sheared basis. The code keeps forward exact and
+re-orthogonalizes up through `look_to_rh`. That convention is reasonable, but
+no capture shows it. One flat-vs-inherited pair would pin it down.
+
+Earlier gap 4 is resolved by the clip controls. The cluster near/far ranges
+never clip the quad, but visible clipping is now covered elsewhere. Earlier
+gap 6 is unchanged and informational. The agent `view_screenshot` camera test
+is a routing-only mock and does not count as pixel evidence.
 
 ## Open questions
 
-- The inheritance fixture's parent carries a zero-intensity DirectionalLight.
-  Is that needed to keep a transform-only parent from rendering as a diagnostic
-  cube? If so, camera rigs with empty parent entities would show cubes in
-  captures. That is worth an explicit test or a documented limitation.
-- Full combined GPU, Clippy and build verification was reported as in progress.
-  I did not observe its result.
+- None blocking. The full verification rerun after the ancestor fix was
+  reported as in progress, and I have not seen its result.
 
 ## Limitations
 
 - I did not edit or run renderer code, tests or builds.
 - No native UI capture was needed or taken.
-- Screenshot provenance rests on timestamps, as noted above.
+- Provenance rests on timestamps and on hashes recorded in the CLI evidence
+  file. The five new renderer PNGs are not yet in the committed ledger.
 - This review does not approve any phase gate.
