@@ -8,6 +8,7 @@ use serde::Serialize;
 use std::{
     collections::BTreeMap,
     path::{Path, PathBuf},
+    sync::Arc,
     time::{Duration, Instant},
 };
 
@@ -29,6 +30,7 @@ pub struct WatchReport {
 }
 
 type Observation = std::result::Result<Vec<Dependency>, String>;
+#[derive(Clone)]
 struct Entry {
     asset: Asset,
     baseline: Vec<Dependency>,
@@ -39,7 +41,8 @@ struct Entry {
     diagnostic: Option<WatchDiagnostic>,
 }
 
-/// Run on an authoring worker that owns its command bus, never a UI/event thread.
+/// Run source observation/cooking on an authoring worker, never a UI/event thread.
+/// Capture an ImportSnapshot under the bus lock, prepare without it, then commit.
 /// Polling hashes content (including same-size writes) without decoding unchanged
 /// geometry/images. Each asset's read is bounded by SourceSet's source limits.
 /// Undo changes the document, not the observed source baseline: a live watcher
@@ -50,6 +53,16 @@ pub struct SourceWatcher {
     entries: BTreeMap<String, Entry>,
     debounce: Duration,
     retry: Duration,
+    epoch: Arc<()>,
+}
+
+/// Owned observation/cooking result. Publishing is revision-checked and consumes
+/// this result. Failed commits leave watcher baselines and diagnostics unchanged.
+pub struct PreparedWatch {
+    next: SourceWatcher,
+    imports: PreparedImports,
+    report: WatchReport,
+    now: Instant,
 }
 impl SourceWatcher {
     pub fn new(root: impl Into<PathBuf>, debounce: Duration) -> Self {
@@ -59,6 +72,7 @@ impl SourceWatcher {
             entries: BTreeMap::new(),
             debounce,
             retry: Duration::from_secs(2),
+            epoch: Arc::new(()),
         }
     }
 
@@ -71,19 +85,80 @@ impl SourceWatcher {
     /// Failed attempts retry at most every two seconds (or after a new edit), so a
     /// newly created dependency can repair a model whose previous cook failed.
     pub fn poll(&mut self, bus: &mut CommandBus, now: Instant) -> Result<WatchReport> {
+        let prepared = self.prepare(ImportSnapshot::capture(bus), now);
+        self.commit(prepared, bus)
+    }
+
+    pub fn prepare(&self, snapshot: ImportSnapshot, now: Instant) -> PreparedWatch {
+        let mut next = Self {
+            root: self.root.clone(),
+            project_id: self.project_id.clone(),
+            entries: self.entries.clone(),
+            debounce: self.debounce,
+            retry: self.retry,
+            epoch: Arc::clone(&self.epoch),
+        };
+        let (report, imports) = next.observe(&snapshot, now);
+        PreparedWatch {
+            next,
+            imports: PreparedImports { snapshot, imports },
+            report,
+            now,
+        }
+    }
+
+    pub fn commit(&mut self, prepared: PreparedWatch, bus: &mut CommandBus) -> Result<WatchReport> {
+        if !Arc::ptr_eq(&self.epoch, &prepared.next.epoch) {
+            return Err(crate::ImportError::StaleWatch);
+        }
+        let PreparedWatch {
+            mut next,
+            imports,
+            mut report,
+            now,
+        } = prepared;
+        // Validate even a no-change cycle: stale observations must not advance the
+        // baseline or consume a diagnostic while a user changes the document.
+        let committed = imports.commit(
+            bus,
+            Actor::import("source-watch"),
+            "Reimport changed sources",
+        )?;
+        for import in &committed.imports {
+            let entry = next.entries.get_mut(&import.asset.id).unwrap();
+            entry.baseline = dependencies(&import.details).to_vec();
+            entry.baseline.sort_by(|a, b| a.path.cmp(&b.path));
+            entry.observed = Some(Ok(entry.baseline.clone()));
+            entry.force = false;
+            entry.since = now;
+            clear(entry, &mut report);
+            report.pending -= 1;
+        }
+        report.imports = committed.imports;
+        report.revision = committed.revision;
+        next.epoch = Arc::new(());
+        *self = next;
+        Ok(report)
+    }
+
+    fn observe(
+        &mut self,
+        snapshot: &ImportSnapshot,
+        now: Instant,
+    ) -> (WatchReport, Vec<ImportOutcome>) {
         let mut report = WatchReport {
             imports: vec![],
             diagnostics: vec![],
             cleared: vec![],
             pending: 0,
-            revision: bus.revision(),
+            revision: snapshot.revision,
         };
-        if self.project_id.as_ref() != Some(&bus.project().id) {
+        if self.project_id.as_ref() != Some(&snapshot.project.id) {
             self.entries.clear();
-            self.project_id = Some(bus.project().id.clone());
+            self.project_id = Some(snapshot.project.id.clone());
         }
         self.entries.retain(|id, e| {
-            if bus.project().assets.contains_key(id) {
+            if snapshot.project.assets.contains_key(id) {
                 true
             } else {
                 if e.diagnostic.is_some() {
@@ -93,7 +168,7 @@ impl SourceWatcher {
             }
         });
         let mut ready = vec![];
-        for (id, asset) in &bus.project().assets {
+        for (id, asset) in &snapshot.project.assets {
             let replace = self.entries.get(id).is_none_or(|e| {
                 e.asset.path != asset.path
                     || e.asset.kind != asset.kind
@@ -147,9 +222,8 @@ impl SourceWatcher {
         ready.sort();
         ready.truncate(crate::MAX_BATCH_IMPORTS);
         if ready.is_empty() {
-            return Ok(report);
+            return (report, vec![]);
         }
-        let snapshot = ImportSnapshot::capture(bus);
         let mut imports = vec![];
         for (_, id) in ready {
             let entry = self.entries.get_mut(&id).unwrap();
@@ -181,26 +255,7 @@ impl SourceWatcher {
                 }
             }
         }
-        if !imports.is_empty() {
-            let committed = PreparedImports { snapshot, imports }.commit(
-                bus,
-                Actor::import("source-watch"),
-                "Reimport changed sources",
-            )?;
-            for import in &committed.imports {
-                let entry = self.entries.get_mut(&import.asset.id).unwrap();
-                entry.baseline = dependencies(&import.details).to_vec();
-                entry.baseline.sort_by(|a, b| a.path.cmp(&b.path));
-                entry.observed = Some(Ok(entry.baseline.clone()));
-                entry.force = false;
-                entry.since = now;
-                clear(entry, &mut report);
-                report.pending -= 1;
-            }
-            report.imports = committed.imports;
-            report.revision = committed.revision;
-        }
-        Ok(report)
+        (report, imports)
     }
 }
 

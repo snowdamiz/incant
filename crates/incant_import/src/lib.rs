@@ -10,7 +10,7 @@ use std::{
     path::{Component, Path},
 };
 use thiserror::Error;
-pub use watch::{SourceWatcher, WatchDiagnostic, WatchReport};
+pub use watch::{PreparedWatch, SourceWatcher, WatchDiagnostic, WatchReport};
 
 pub const MAX_BATCH_IMPORTS: usize = 64;
 
@@ -32,6 +32,8 @@ pub enum ImportError {
     Cook { path: String, source: AssetError },
     #[error("the prepared import belongs to a different project")]
     DifferentProject,
+    #[error("prepared source-watch cycle is stale or belongs to another watcher")]
+    StaleWatch,
     #[error("the project changed since import preparation; prepare again")]
     ChangedProject,
     #[error(transparent)]

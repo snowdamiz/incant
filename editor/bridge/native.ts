@@ -55,6 +55,7 @@ export interface EngineRead {
   >;
   console: { id: string; level: "info" | "error"; message: string }[];
   viewport_error: string | null;
+  source_diagnostics?: { asset_id: string; source: string; message: string }[];
   asset_import?: { available: boolean; reason?: string };
 }
 export type EngineResponse = EngineRead
@@ -199,7 +200,10 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
       ...(asset.import_settings?.type === 'texture' ? { textureUsage: asset.import_settings.usage } : {}),
     })) } } : {}),
     assetImport: read.asset_import ?? { available: false, reason: 'This host does not expose asset importing.' },
-    diagnostics: [],
+    diagnostics: (read.source_diagnostics ?? []).map((issue) => ({
+      id: `asset-source:${issue.asset_id}`, severity: 'error',
+      message: `${issue.source}: ${issue.message}`, entity: null, component: null, path: null,
+    })),
     history: {
       entries: read.history.map((tx) => ({
         transaction: id(tx.id),

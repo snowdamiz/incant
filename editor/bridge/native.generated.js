@@ -217,7 +217,14 @@ function snapshotFromEngine(read) {
             available: false,
             reason: 'This host does not expose asset importing.'
         },
-        diagnostics: [],
+        diagnostics: (read.source_diagnostics ?? []).map((issue)=>({
+                id: `asset-source:${issue.asset_id}`,
+                severity: 'error',
+                message: `${issue.source}: ${issue.message}`,
+                entity: null,
+                component: null,
+                path: null
+            })),
         history: {
             entries: read.history.map((tx)=>({
                     transaction: id(tx.id),

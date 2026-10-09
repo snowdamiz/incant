@@ -58,6 +58,71 @@ fn model(root: &Path, bin: &str) {
 }
 
 #[test]
+fn stale_preparation_keeps_edits_and_does_not_consume_watch_diagnostics() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    image(root, "good.png", 1);
+    image(root, "bad.png", 2);
+    let mut bus = CommandBus::new(Project::empty("Concurrent watch")).unwrap();
+    import(&mut bus, root, &["good.png", "bad.png"]);
+    let mut watcher = SourceWatcher::new(root, Duration::ZERO);
+    watcher.poll(&mut bus, Instant::now()).unwrap();
+    image(root, "good.png", 7);
+    fs::write(root.join("bad.png"), "unfinished source").unwrap();
+    let before = bus.project().clone();
+    let prepared = watcher.prepare(ImportSnapshot::capture(&bus), Instant::now());
+    assert_eq!(bus.project(), &before);
+    assert_eq!(watcher.diagnostics().count(), 0);
+    let mut renamed = asset(&bus, "good.png");
+    renamed.name = "User's concurrent name".into();
+    bus.execute(
+        vec![Command::UpsertAsset { asset: renamed }],
+        Actor::user("editor"),
+        "Rename",
+        None,
+    )
+    .unwrap();
+    let after_edit = bus.project().clone();
+    let history = bus.history().len();
+    assert!(matches!(
+        watcher.commit(prepared, &mut bus),
+        Err(incant_import::ImportError::Command(
+            incant_cmd::CommandError::Conflict { .. }
+        ))
+    ));
+    assert_eq!(bus.project(), &after_edit);
+    assert_eq!(bus.history().len(), history);
+    assert_eq!(watcher.diagnostics().count(), 0);
+    let retry = watcher.poll(&mut bus, Instant::now()).unwrap();
+    assert_eq!(retry.imports.len(), 1);
+    assert_eq!(retry.diagnostics.len(), 1);
+    assert_eq!(asset(&bus, "good.png").name, "User's concurrent name");
+    assert_eq!(bus.history().len(), history + 1);
+}
+
+#[test]
+fn prepared_cycles_cannot_be_reordered_or_published_by_another_watcher() {
+    let temp = tempfile::tempdir().unwrap();
+    let mut bus = CommandBus::new(Project::empty("Watch order")).unwrap();
+    let mut watcher = SourceWatcher::new(temp.path(), Duration::ZERO);
+    let earlier = watcher.prepare(ImportSnapshot::capture(&bus), Instant::now());
+    let later = watcher.prepare(ImportSnapshot::capture(&bus), Instant::now());
+    watcher.commit(later, &mut bus).unwrap();
+    assert!(matches!(
+        watcher.commit(earlier, &mut bus),
+        Err(incant_import::ImportError::StaleWatch)
+    ));
+    let prepared = watcher.prepare(ImportSnapshot::capture(&bus), Instant::now());
+    let mut other = SourceWatcher::new(temp.path(), Duration::ZERO);
+    assert!(matches!(
+        other.commit(prepared, &mut bus),
+        Err(incant_import::ImportError::StaleWatch)
+    ));
+    assert_eq!(bus.revision(), 0);
+    assert!(bus.history().is_empty());
+}
+
+#[test]
 fn burst_writes_form_one_transaction_and_undo_is_not_immediately_overwritten() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path();
