@@ -1,5 +1,156 @@
 # 0020 render-pass graph: rendered-pixel review result
 
+## Final status
+
+Final review complete. Final scoped visual verdict: **pass, with no open
+pixel-evidence gaps.** Scheduling causes no visual regression. Both findings
+from the initial review are resolved by Astra's test-only follow-up `69dfb32`,
+integrated at `25f2129`. I verified both fixes by rerunning them in separate
+processes.
+
+This verdict does not approve a phase gate. It does not certify game, device or
+GPU-timestamp performance. Shadows, post-effects and the full production graph
+remain open. No new editor control or camera selector is claimed or reviewed.
+
+Exact model for both rounds: Claude Opus 5.5, model ID `claude-opus-5-5`. No
+model substitution occurred.
+
+The report has two rounds:
+- This final round reviews the eight final fixture captures and the revised tests.
+- The initial review at `1494fda` is preserved below as history. A correction
+  to one of its statements is recorded in this round.
+
+## Final round
+
+### Director feedback acknowledged
+
+The revised packet says my initial review is integrated and no runtime or
+shader code changed. I confirmed that the follow-up diff touches only two test
+files, documentation, the evidence ledger and the brief. The packet also
+corrects one statement from my initial report. I accept the correction below.
+I made no test, shader or UI edits.
+
+### Correction to the initial report
+
+My initial finding 2 said that no pixel test submits clustered-light frames out
+of order. That statement was too broad, and I withdraw it. The pre-existing
+GPU test with the long name ending in `queued_resize_commands_keep_their_own_light_data`
+encodes three clustered frames and submits them as second, first, third. It
+compares pixels for both the preview camera and a selected camera.
+
+That test uses the same lights in every frame and allows a one-step tolerance.
+So it cannot show whether a frame shaded with another frame's cluster
+membership. The new alternating-membership lifetime case covers that narrower
+gap, with exact byte equality.
+
+### Stable 96-light fixture: verified reproducible
+
+The fixture now gives its 96 lights fixed IDs in x, y, z construction order.
+The IDs are zero-padded decimal numbers, which are valid ULID strings and sort
+in construction order. Light order therefore no longer depends on the clock or
+on random bits.
+
+I ran the unchanged test five times in separate processes. Every run produced
+one hash per file, and those hashes equal Astra's two runs and the stability report.
+
+| Capture | Hash prefix | Astra's two runs | My five runs |
+| --- | --- | --- | --- |
+| 513x385 and its oracle | `7f58c292c288` | identical | identical |
+| 640x480 and its oracle | `ef4798ef0470` | identical | identical |
+
+Clustered and oracle outputs remain byte-identical to each other. The stable
+640x480 capture is byte-identical to the old baseline. The stable 513x385
+capture differs from the old baseline by one green step at pixel 208, 102. This
+is one of the variants I already observed in the initial round. It reflects a
+different fixed light order, not a rendering change. The stable captures should
+replace the old baseline for this fixture in future cross-commit comparisons.
+
+Both stable captures look the same as before. Colored light pools blend across
+the quad without banding, seams or cluster-boundary artifacts.
+
+### Four-frame retained lifetime case: verified
+
+All four captures keep exactly the same geometry as the initial round. Frames 2
+and 3 have identical foreground masks with each other. Each frame shows only
+its in-range light.
+
+| Frame | Size | Foreground pixels | Geometry mask matches initial | Mean RGB | Dominant channel |
+| --- | --- | --- | --- | --- | --- |
+| 0, offset 0 | 321x193 | 1050 | yes | 141, 93, 93 | red in every pixel |
+| 1, offset +2 | 480x270 | 2731 | yes | 91, 139, 91 | green in every pixel |
+| 2, offset -2 | 321x193 | 812 | yes, same as initial offset -2 | 136, 95, 95 | red in every pixel |
+| 3, offset -2 | 321x193 | 812 | yes, same as frame 2 | 95, 136, 95 | green in every pixel |
+
+In the red frames the green and blue means are equal. In the green frames the
+red and blue means are equal. So the light parked at 1000, 1000, 1000 adds
+nothing, as its range of 20 requires. Frames 2 and 3 are near channel swaps of
+each other, as expected from two lights at one position with mirrored colors.
+
+The test now checks the failure it targets. Frames 2 and 3 share one cached
+cluster buffer and differ only in which light bit reaches the geometry. They are
+submitted in reverse, so frame 3's assignment runs before frame 2's. If frame 2
+skipped its own assignment, it would shade with the green membership. The red
+light would then be missing, and the exact comparison against the red
+reference would fail. The test also asserts that the frame 2 and frame 3
+references differ, so a blank or membership-blind result cannot pass.
+
+The earlier checks remain in place: rejected viewport preparation, no retained
+CPU frame or encoder, no surviving CPU model version after disposal and file
+removal, and the final model-free frame that must be entirely `#141519`. My two
+reruns passed and reproduced all four captures byte-for-byte.
+
+### Final round commands and results
+
+```sh
+for i in 1 2 3 4 5; do
+  INCANT_LIGHT_EVIDENCE=$PWD/artifacts/review-0020-final/run$i CARGO_TARGET_DIR=$PWD/target \
+    cargo test -q -p incant_render --test model_gpu \
+    distinct_colored_lights_preserve_energy -- --ignored
+done
+# 5/5 passed, one hash per file across all runs.
+
+for i in 1 2; do
+  INCANT_HDR_EVIDENCE=$PWD/artifacts/review-0020-final/graph$i CARGO_TARGET_DIR=$PWD/target \
+    cargo test -q -p incant_render --lib queued_graph -- --ignored
+done
+# 2/2 passed. All four lifetime captures are byte-identical to graph-final.
+
+(cd artifacts && python3 -I review-0020-scripts/lifetime.py)
+(cd artifacts && python3 -I review-0020-scripts/pixdiff.py \
+  graph-baseline/spatial-overflow-96-<size>.png graph-final/spatial-overflow-96-<size>.png)
+```
+
+Not rerun by me in this round: the combined 33-case GPU suite, Clippy, the UI
+and ordinary Rust suites and the final native build. The brief says Astra is
+rerunning those. Their results are not evidence in this report. Native imagery,
+other captures and runtime code are unchanged, so the initial native and
+baseline review still applies.
+
+### Final round screenshots reviewed
+
+- `artifacts/graph-final/graph-retained-model-0.png` through `-3.png`
+- `artifacts/graph-final/spatial-overflow-96-513x385.png` and its oracle
+- `artifacts/graph-final/spatial-overflow-96-640x480.png` and its oracle
+- `artifacts/graph-final-repeat/` for the four overflow captures, by hash
+- `artifacts/graph-fixture-stability.json`
+
+### Final round changed paths
+
+- `handoffs/0020-render-pass-graph/result.md`, updated and committed.
+- Ignored, not committed: `artifacts/review-0020-scripts/lifetime.py` and the
+  rerun captures in `artifacts/review-0020-final/`.
+
+### Final round open questions
+
+None for pixel evidence. Both requests from the initial round are answered.
+
+---
+
+# Initial review at `1494fda`, preserved as history
+
+Finding 2's statement about clustered out-of-order submission is corrected in
+the final round above. The rest is unchanged.
+
 ## Status
 
 Review complete. Scoped visual verdict: **pass. Scheduling causes no visual
