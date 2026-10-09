@@ -9,6 +9,7 @@ export type Ulid = string & { readonly __brand: 'Ulid' };
 export const KNOWN_CAPABILITIES = [
   'entity.rename',
   'entity.delete',
+  'asset.import',
   'history.undo',
   'history.redo',
   'provider.connect',
@@ -39,6 +40,22 @@ export type LoadState<T> =
 export interface ProjectInfo {
   readonly id: Ulid;
   readonly name: string;
+}
+
+export type TextureUsage = 'color' | 'linear' | 'normal';
+export interface ProjectAsset {
+  readonly id: Ulid;
+  readonly name: string;
+  readonly path: string;
+  readonly kind: string;
+  readonly fingerprint: string;
+  readonly textureUsage?: TextureUsage;
+}
+export interface AssetImportRequest {
+  /** Canonical project-relative path to an existing source; no network URLs. */
+  readonly source: string;
+  /** Images only. Omit on reimport to preserve the saved interpretation. */
+  readonly textureUsage?: TextureUsage;
 }
 
 export type ConnectionState =
@@ -240,6 +257,9 @@ export interface BridgeSnapshot {
    * should page this by selection (see NATIVE_VIEWPORT.md open questions).
    */
   readonly entities: Readonly<Record<string, EntityDetail>>;
+  /** Optional for older hosts. Absence means the host does not expose assets. */
+  readonly assets?: LoadState<readonly ProjectAsset[]>;
+  readonly assetImport?: { readonly available: boolean; readonly reason?: string };
   readonly diagnostics: readonly Diagnostic[];
   readonly history: HistoryState;
   readonly console: readonly ConsoleEntry[];
@@ -254,6 +274,7 @@ export interface BridgeSnapshot {
 export type EditorCommand =
   | { readonly type: 'entity.rename'; readonly entity: Ulid; readonly name: string }
   | { readonly type: 'entity.delete'; readonly entity: Ulid }
+  | { readonly type: 'asset.import'; readonly sources: readonly AssetImportRequest[] }
   | { readonly type: 'history.undo' }
   | { readonly type: 'history.redo' };
 

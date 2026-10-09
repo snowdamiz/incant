@@ -11,6 +11,7 @@ use std::{
     },
     time::Duration,
 };
+mod assets;
 mod menu;
 mod project;
 mod provider;
@@ -22,6 +23,8 @@ struct Editor {
     alive: AtomicBool,
     console: Mutex<Vec<ConsoleEvent>>,
     viewport_error: Mutex<Option<String>>,
+    asset_root: Option<PathBuf>,
+    importing: AtomicBool,
 }
 #[derive(Clone, Serialize)]
 struct ConsoleEvent {
@@ -51,7 +54,7 @@ fn engine_read(state: tauri::State<'_, Arc<Editor>>) -> Result<Value, String> {
         }
     };
     Ok(
-        json!({"status":"ready","project":bus.project(),"revision":bus.revision(),"can_redo":bus.can_redo(),"applied":bus.history().len(),"history":bus.history().iter().chain(bus.redo_history()).map(|tx|json!({"id":tx.id,"description":tx.description,"actor":tx.actor})).collect::<Vec<_>>(),"schemas":schema_registry(),"console":state.console.lock().map_err(|_|"console lock failed")?.clone(),"viewport_error":state.viewport_error.lock().map_err(|_|"viewport lock failed")?.clone()}),
+        json!({"status":"ready","project":bus.project(),"revision":bus.revision(),"can_redo":bus.can_redo(),"applied":bus.history().len(),"history":bus.history().iter().chain(bus.redo_history()).map(|tx|json!({"id":tx.id,"description":tx.description,"actor":tx.actor})).collect::<Vec<_>>(),"schemas":schema_registry(),"console":state.console.lock().map_err(|_|"console lock failed")?.clone(),"viewport_error":state.viewport_error.lock().map_err(|_|"viewport lock failed")?.clone(),"asset_import": if state.asset_root.is_some() {json!({"available":true})}else{json!({"available":false,"reason":"Open a saved project to import assets."})}}),
     )
 }
 #[tauri::command]
@@ -106,6 +109,12 @@ fn viewport_bounds(
 }
 fn main() {
     let project_path = std::env::args_os().nth(1).map(PathBuf::from);
+    let asset_root = project_path.as_ref().map(|path| {
+        path.parent()
+            .filter(|p| !p.as_os_str().is_empty())
+            .unwrap_or(std::path::Path::new("."))
+            .to_path_buf()
+    });
     let editor = Arc::new(Editor {
         provider: Arc::new(provider::ProviderRuntime::new()),
         bus: Arc::new(Mutex::new(project::LoadState::Loading)),
@@ -113,6 +122,8 @@ fn main() {
         alive: AtomicBool::new(true),
         console: Mutex::new(vec![]),
         viewport_error: Mutex::new(None),
+        asset_root,
+        importing: AtomicBool::new(false),
     });
     tauri::Builder::default()
         .manage(editor.clone())
@@ -120,6 +131,7 @@ fn main() {
             engine_read,
             engine_execute,
             engine_history,
+            assets::engine_import,
             viewport_bounds,
             window::window_read,
             window::window_action,

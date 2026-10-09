@@ -52,6 +52,35 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it("imports a batch with the current revision and publishes real asset metadata", async () => {
+    const initial = read(); initial.asset_import = { available: true };
+    const updated = read(); updated.revision = 8; updated.asset_import = { available: true };
+    const assetId = '00000000000000000000000011';
+    updated.project.assets = { [assetId]: { id: assetId, name: 'Surface', path: 'textures/surface.png', kind: 'texture', sha256: 'a'.repeat(64), import_settings: { type: 'texture', usage: 'normal' } } };
+    const invoke = vi.fn(async (command: string) => command === 'engine_import' ? updated : initial) as unknown as Invoke;
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    expect(await bridge.dispatch({ type: 'asset.import', sources: [{ source: 'textures/surface.png', textureUsage: 'normal' }, { source: 'model.glb' }] })).toEqual({ ok: true });
+    expect(invoke).toHaveBeenCalledWith('engine_import', { requests: [{ source: 'textures/surface.png', texture_usage: 'normal' }, { source: 'model.glb', texture_usage: null }], expectedRevision: 7 });
+    expect(bridge.getSnapshot().assets).toEqual({ status: 'ready', value: [{ id: assetId, name: 'Surface', path: 'textures/surface.png', kind: 'texture', fingerprint: 'a'.repeat(64), textureUsage: 'normal' }] });
+    expect(bridge.getSnapshot().assetImport?.available).toBe(true);
+  });
+  it("rejects unavailable imports and preserves the last asset list after a failed import", async () => {
+    const state = read();
+    const invoke = vi.fn(async (command: string) => { if (command === 'engine_import') throw 'Source could not be cooked'; return state; }) as unknown as Invoke;
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    const command = { type: 'asset.import', sources: [{ source: 'bad.glb' }] } as const;
+    expect((await bridge.dispatch(command)).ok).toBe(false);
+    expect(invoke).not.toHaveBeenCalledWith('engine_import', expect.anything());
+    const available = read(); available.asset_import = { available: true };
+    const availableInvoke = vi.fn(async (name: string) => { if (name === 'engine_import') throw 'Source could not be cooked'; return available; }) as unknown as Invoke;
+    const connected = new NativeBridge(availableInvoke); await connected.start();
+    const before = connected.getSnapshot().assets;
+    const result = await connected.dispatch(command);
+    expect(result).toEqual({ ok: false, error: { code: 'engine.request', message: 'Source could not be cooked' } });
+    expect(connected.getSnapshot().assets).toEqual(before);
+    expect(snapshotFromEngine({ status: 'loading' }).assets?.status).toBe('loading');
+    expect(snapshotFromEngine({ status: 'error', error: { code: 'project.io', message: 'Missing file' } }).assets?.status).toBe('error');
+  });
   it("does not roll back a completed edit when a concurrent event read returns late", async () => {
     let finishEdit: (value: EngineRead) => void = () => { throw new Error("No edit"); };
     let finishRead: (value: EngineRead) => void = () => { throw new Error("No read"); };

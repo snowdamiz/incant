@@ -86,6 +86,16 @@ function snapshotFromEngine(read) {
                 applied: 0
             },
             console: [],
+            assets: error ? {
+                status: 'error',
+                error
+            } : {
+                status: 'loading'
+            },
+            assetImport: {
+                available: false,
+                reason: error?.message ?? 'Loading project.'
+            },
             diagnostics: error ? [
                 {
                     id: "project-load",
@@ -188,6 +198,23 @@ function snapshotFromEngine(read) {
         },
         schemas,
         entities,
+        assets: {
+            status: 'ready',
+            value: Object.values(read.project.assets ?? {}).map((asset)=>({
+                    id: id(asset.id),
+                    name: asset.name,
+                    path: asset.path,
+                    kind: asset.kind,
+                    fingerprint: asset.sha256,
+                    ...asset.import_settings?.type === 'texture' ? {
+                        textureUsage: asset.import_settings.usage
+                    } : {}
+                }))
+        },
+        assetImport: read.asset_import ?? {
+            available: false,
+            reason: 'This host does not expose asset importing.'
+        },
         diagnostics: [],
         history: {
             entries: read.history.map((tx)=>({
@@ -238,6 +265,7 @@ class NativeBridge {
     capabilities = [
         "entity.rename",
         "entity.delete",
+        "asset.import",
         "history.undo",
         "history.redo",
         "provider.connect",
@@ -381,7 +409,16 @@ class NativeBridge {
             // A pending background read cannot overwrite the mutation response.
             ++this.refreshId;
             let read;
-            if (command.type === "history.undo" || command.type === "history.redo") {
+            if (command.type === 'asset.import') {
+                if (!this.read.asset_import?.available) return failure(this.read.asset_import?.reason ?? 'Open a saved project to import assets.');
+                read = await this.invoke('engine_import', {
+                    requests: command.sources.map((source)=>({
+                            source: source.source,
+                            texture_usage: source.textureUsage ?? null
+                        })),
+                    expectedRevision: this.read.revision
+                });
+            } else if (command.type === "history.undo" || command.type === "history.redo") {
                 read = await this.invoke("engine_history", {
                     redo: command.type === "history.redo"
                 });

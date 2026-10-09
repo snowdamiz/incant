@@ -3172,6 +3172,7 @@ dependencies = [
  "incant_cmd",
  "incant_core",
  "incant_doc",
+ "incant_import",
  "incant_render",
  "pollster",
  "serde",
