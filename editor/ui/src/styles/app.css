@@ -1855,6 +1855,8 @@ input.control.control__input[aria-invalid='true'] {
   color: var(--color-text);
   font-size: var(--text-xs);
   outline: none;
+  /* Long paths and IDs end in an ellipsis instead of a glyph cut at the border (full value in title). */
+  text-overflow: ellipsis;
 }
 
 input.control.control__input {
