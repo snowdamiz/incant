@@ -2,7 +2,7 @@
 use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Quat, Vec3};
 use incant_doc::{Project, Transform};
-use std::{error::Error, time::Duration};
+use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
 pub use wgpu;
 use wgpu::util::DeviceExt;
 type Result<T> = std::result::Result<T, Box<dyn Error + Send + Sync>>;
@@ -12,11 +12,26 @@ struct Vertex {
     position: [f32; 4],
     normal: [f32; 3],
 }
+/// Physical-pixel viewport placement supplied by the editor, including its chrome mask.
+#[derive(Clone, Copy)]
+pub struct Viewport {
+    pub rect: [f32; 4],
+    pub corner_radii: [f32; 4],
+    pub canvas_srgb: [u8; 3],
+}
+#[repr(C)]
+#[derive(Clone, Copy, Pod, Zeroable)]
+struct ClipUniform {
+    rect: [f32; 4],
+    radii: [f32; 4],
+    canvas: [f32; 4],
+}
 pub struct Renderer {
     pub device: wgpu::Device,
     pub queue: wgpu::Queue,
     pub adapter: wgpu::Adapter,
     pub adapter_name: String,
+    pipelines: Mutex<HashMap<(wgpu::TextureFormat, bool), wgpu::RenderPipeline>>,
 }
 impl Renderer {
     pub async fn new(
@@ -42,6 +57,7 @@ impl Renderer {
             queue,
             adapter,
             adapter_name,
+            pipelines: Mutex::new(HashMap::new()),
         })
     }
     pub fn headless() -> Result<Self> {
@@ -95,6 +111,60 @@ impl Renderer {
                 cache: None,
             })
     }
+    fn clip_pipeline(&self, format: wgpu::TextureFormat) -> wgpu::RenderPipeline {
+        let shader = self
+            .device
+            .create_shader_module(wgpu::ShaderModuleDescriptor {
+                label: Some("Native viewport corner mask"),
+                source: wgpu::ShaderSource::Wgsl(include_str!("viewport_clip.wgsl").into()),
+            });
+        self.device
+            .create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+                label: Some("Native viewport composition"),
+                layout: None,
+                vertex: wgpu::VertexState {
+                    module: &shader,
+                    entry_point: Some("vertex"),
+                    compilation_options: Default::default(),
+                    buffers: &[],
+                },
+                primitive: Default::default(),
+                depth_stencil: None,
+                multisample: Default::default(),
+                fragment: Some(wgpu::FragmentState {
+                    module: &shader,
+                    entry_point: Some("fragment"),
+                    compilation_options: Default::default(),
+                    targets: &[Some(wgpu::ColorTargetState {
+                        format,
+                        blend: Some(wgpu::BlendState::ALPHA_BLENDING),
+                        write_mask: wgpu::ColorWrites::ALL,
+                    })],
+                }),
+                multiview_mask: None,
+                cache: None,
+            })
+    }
+    fn cached_pipeline(
+        &self,
+        format: wgpu::TextureFormat,
+        clip: bool,
+    ) -> Result<wgpu::RenderPipeline> {
+        let mut pipelines = self
+            .pipelines
+            .lock()
+            .map_err(|_| "render cache lock failed")?;
+        Ok(pipelines
+            .entry((format, clip))
+            .or_insert_with(|| {
+                if clip {
+                    self.clip_pipeline(format)
+                } else {
+                    self.pipeline(format)
+                }
+            })
+            .clone())
+    }
     pub fn draw(
         &self,
         project: &Project,
@@ -102,13 +172,15 @@ impl Renderer {
         format: wgpu::TextureFormat,
         width: u32,
         height: u32,
-        viewport: Option<[f32; 4]>,
+        viewport: Option<Viewport>,
     ) -> Result<wgpu::CommandBuffer> {
         if width == 0 || height == 0 || width > 8192 || height > 8192 {
             return Err("invalid render target size".into());
         }
         project.validate()?;
-        let rect = viewport.unwrap_or([0., 0., width as f32, height as f32]);
+        let rect = viewport
+            .map(|v| v.rect)
+            .unwrap_or([0., 0., width as f32, height as f32]);
         if rect.iter().any(|v| !v.is_finite())
             || rect[0] < 0.
             || rect[1] < 0.
@@ -118,6 +190,9 @@ impl Renderer {
             || rect[1] + rect[3] > height as f32
         {
             return Err("viewport outside render target".into());
+        }
+        if viewport.is_some_and(|v| v.corner_radii.iter().any(|r| !r.is_finite() || *r < 0.)) {
+            return Err("invalid viewport corner radius".into());
         }
         let vertices = vertices(project, rect[2] / rect[3])?;
         let buffer = self
@@ -148,7 +223,7 @@ impl Renderer {
                 view_formats: &[],
             })
             .create_view(&Default::default());
-        let pipeline = self.pipeline(format);
+        let pipeline = self.cached_pipeline(format, false)?;
         let mut encoder = self.device.create_command_encoder(&Default::default());
         {
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
@@ -183,6 +258,55 @@ impl Renderer {
             pass.set_viewport(rect[0], rect[1], rect[2], rect[3], 0., 1.);
             pass.set_vertex_buffer(0, buffer.slice(..));
             pass.draw(0..vertices.len() as u32, 0..1);
+        }
+        if let Some(viewport) = viewport {
+            let linear = viewport.canvas_srgb.map(|v| {
+                let v = f32::from(v) / 255.;
+                if !format.is_srgb() {
+                    v
+                } else if v <= 0.04045 {
+                    v / 12.92
+                } else {
+                    ((v + 0.055) / 1.055).powf(2.4)
+                }
+            });
+            let uniform = ClipUniform {
+                rect,
+                radii: viewport.corner_radii,
+                canvas: [linear[0], linear[1], linear[2], 1.],
+            };
+            let buffer = self
+                .device
+                .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                    label: Some("Viewport clipping bounds"),
+                    contents: bytemuck::bytes_of(&uniform),
+                    usage: wgpu::BufferUsages::UNIFORM,
+                });
+            let pipeline = self.cached_pipeline(format, true)?;
+            let bind_group = self.device.create_bind_group(&wgpu::BindGroupDescriptor {
+                label: Some("Viewport clipping bounds"),
+                layout: &pipeline.get_bind_group_layout(0),
+                entries: &[wgpu::BindGroupEntry {
+                    binding: 0,
+                    resource: buffer.as_entire_binding(),
+                }],
+            });
+            let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+                label: Some("Composite the viewport into editor chrome"),
+                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
+                    view,
+                    resolve_target: None,
+                    depth_slice: None,
+                    ops: wgpu::Operations {
+                        load: wgpu::LoadOp::Load,
+                        store: wgpu::StoreOp::Store,
+                    },
+                })],
+                ..Default::default()
+            });
+            pass.set_pipeline(&pipeline);
+            pass.set_bind_group(0, &bind_group, &[]);
+            pass.draw(0..3, 0..1);
         }
         Ok(encoder.finish())
     }

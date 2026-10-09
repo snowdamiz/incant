@@ -362,12 +362,13 @@ export class NativeBridge implements EditorBridge {
           message: "This host capability is not connected.",
         },
       };
-    const { rect, devicePixelRatio: dpr } = request;
+    const { rect, devicePixelRatio: dpr, cornerRadii } = request;
     if (!Number.isFinite(dpr) || dpr <= 0)
       return failure("Invalid device pixel ratio.");
     try {
       await this.invoke("viewport_bounds", {
         rect: [rect.x, rect.y, rect.width, rect.height].map((v) => v * dpr),
+        cornerRadii: cornerRadii.map((v) => v * dpr),
       });
       return { ok: true };
     } catch (error) {

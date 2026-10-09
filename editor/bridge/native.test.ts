@@ -133,11 +133,12 @@ describe("native bridge", () => {
         type: "viewport.bounds",
         rect: { x: 100, y: 40, width: 500, height: 300 },
         devicePixelRatio: 2,
+        cornerRadii: [0, 0, 10, 10],
       }),
     ).toEqual({ ok: true });
     expect(request).toEqual({
       command: "viewport_bounds",
-      args: { rect: [200, 80, 1000, 600] },
+      args: { rect: [200, 80, 1000, 600], cornerRadii: [0, 0, 20, 20] },
     });
   });
   it("keeps engine errors visible and does not apply optimistic document edits", async () => {

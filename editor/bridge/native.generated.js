@@ -349,7 +349,7 @@ class NativeBridge {
                 message: "This host capability is not connected."
             }
         };
-        const { rect, devicePixelRatio: dpr } = request;
+        const { rect, devicePixelRatio: dpr, cornerRadii } = request;
         if (!Number.isFinite(dpr) || dpr <= 0) return failure("Invalid device pixel ratio.");
         try {
             await this.invoke("viewport_bounds", {
@@ -358,7 +358,8 @@ class NativeBridge {
                     rect.y,
                     rect.width,
                     rect.height
-                ].map((v)=>v * dpr)
+                ].map((v)=>v * dpr),
+                cornerRadii: cornerRadii.map((v)=>v * dpr)
             });
             return {
                 ok: true

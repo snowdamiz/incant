@@ -1,6 +1,6 @@
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::{Entity, Project, Scene, Transform, schema_registry};
-use incant_render::{Renderer, wgpu};
+use incant_render::{Renderer, Viewport, wgpu};
 use serde::Serialize;
 use serde_json::{Value, json};
 use std::{
@@ -14,7 +14,7 @@ use std::{
 mod window;
 struct Editor {
     bus: Mutex<CommandBus>,
-    viewport: Mutex<Option<[f32; 4]>>,
+    viewport: Mutex<Option<Viewport>>,
     alive: AtomicBool,
     console: Mutex<Vec<ConsoleEvent>>,
     viewport_error: Mutex<Option<String>>,
@@ -69,11 +69,24 @@ fn engine_history(state: tauri::State<'_, Arc<Editor>>, redo: bool) -> Result<Va
     engine_read(state)
 }
 #[tauri::command]
-fn viewport_bounds(state: tauri::State<'_, Arc<Editor>>, rect: [f32; 4]) -> Result<(), String> {
-    if rect.iter().any(|v| !v.is_finite() || *v < 0.) {
+fn viewport_bounds(
+    state: tauri::State<'_, Arc<Editor>>,
+    rect: [f32; 4],
+    corner_radii: [f32; 4],
+) -> Result<(), String> {
+    if rect
+        .iter()
+        .chain(corner_radii.iter())
+        .any(|v| !v.is_finite() || *v < 0.)
+    {
         return Err("invalid viewport bounds".into());
     }
-    *state.viewport.lock().map_err(|_| "viewport lock failed")? = Some(rect);
+    *state.viewport.lock().map_err(|_| "viewport lock failed")? = Some(Viewport {
+        rect,
+        corner_radii,
+        // Claude's revision-1 canvas color, specified in editor/ui/TITLEBAR.md.
+        canvas_srgb: [11, 12, 15],
+    });
     Ok(())
 }
 fn main() {
@@ -212,7 +225,8 @@ fn main() {
                             continue;
                         }
                     };
-                    let rect = shared.viewport.lock().ok().and_then(|r| *r).filter(|r| {
+                    let rect = shared.viewport.lock().ok().and_then(|r| *r).filter(|v| {
+                        let r = v.rect;
                         r[2] > 0.
                             && r[3] > 0.
                             && r[0] + r[2] <= size.width as f32
