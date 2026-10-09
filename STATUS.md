@@ -56,10 +56,11 @@ within its documented workload.
 - Isolated headless playback now accepts ticks/seconds and an optional compiled
   TypeScript behavior, with actual GPU captures at selected ticks. Authored
   documents/journals remain unchanged; bounded output and failure handling pass.
-  114 Rust behavior tests and three explicit GPU tests pass on this increment.
+  117 Rust behavior tests, three explicit GPU tests and 282 UI tests pass after
+  integration with native source watching.
   A source-free imported-model run and a compiled TypeScript run produce real
-  frame sequences. Claude approved the six captured frames; hosted checks are
-  pending. See
+  frame sequences. Claude approved the six captured frames; PR #12 is stacked
+  on source-watch PR #11 and awaits hosted checks. See
   [headless playback evidence](docs/spikes/headless-playback.md).
 
 - Saved native projects now watch registered sources and dependencies on a worker,
@@ -68,7 +69,8 @@ within its documented workload.
   on repair. Actual native external edits, Undo/Redo, error/recovery, journal
   replay and reopening the rebuilt app pass. 115 Rust tests, two explicit GPU
   tests and 282 UI/bridge tests pass locally. Claude approved the native sequence
-  and final wrapping fix at 1440×900 and 1000×650; hosted checks are pending.
+  and final wrapping fix at 1440×900 and 1000×650; PR #11 targets main and
+  awaits hosted checks.
   See [editor source watching](docs/spikes/editor-source-watch.md).
 
 - Imported model GPU geometry is implemented locally: indexed/instanced buffers,
@@ -78,8 +80,9 @@ within its documented workload.
   pass without reopening. Claude approved the final native wide/minimum captures;
   112 Rust behavior tests, two explicit GPU tests and 279 UI tests pass, including
   render-error diagnostics and recovery. Default cache reads reject directory
-  symlinks and asset reuse is scoped to the project grant. PR #10
-  awaits final-head hosted checks; materials, lighting and the production render graph remain open.
+  symlinks and asset reuse is scoped to the project grant. All twelve hosted
+  checks passed on `277893d`; PR #10 merged as `faa86fa` on 2026-10-09.
+  Materials, lighting and the production render graph remain open.
   See [imported GPU geometry](docs/spikes/imported-gpu-geometry.md).
 
 - Runtime scene projection now composes parent transforms, preserves mesh bindings,
@@ -137,11 +140,11 @@ within its documented workload.
   and saved disposable projects; native account focus behavior passes, with the
   visible keyboard ring also approved by Claude.
 
-- The first nine PRs are merged into main after their required checks passed:
+- The first ten PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
   responsive loading/focus #5, shared import batches #6, source watching #7 and
   editor/agent imports with the redesigned asset workspace #8, and runtime scene
-  projection #9. The site deployed at
+  projection #9, and imported GPU geometry #10. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
   before merge. Editor/agent imports are the current Phase 1 increment. Merging does

@@ -59,5 +59,14 @@
     "transport": "ACP launched by tools/handoff/main.py",
     "reviewed_frames": 6
   },
-  "hosted_checks": "pending"
+  "hosted_checks": "pending",
+  "integrated_checks": {
+    "commit": "cac473c",
+    "rust_tests": 117,
+    "gpu_tests": 3,
+    "ui_tests": 282,
+    "clippy": "passed",
+    "ui_build": "passed",
+    "fmt": "passed"
+  }
 }

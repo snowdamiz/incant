@@ -28,7 +28,9 @@ nonzero; partial PNGs may remain, but no completed report is published.
   and PNG output, changing simulation pixels, equality of the first frame with
   the authored screenshot, and no completion report after a script failure.
 - All 114 workspace Rust behavior tests, all three explicit GPU tests, workspace
-  Clippy and formatting pass locally on this branch. No UI change is included.
+  Clippy and formatting passed before source-watch integration. The combined
+  `cac473c` tree passes 117 Rust tests, three explicit GPU tests and 282 UI tests,
+  plus Clippy, formatting and the UI build. Playback changes no UI.
 - A separate CLI run loaded two imported model instances with their sources
   removed and captured distinct geometry positions at ticks 0/30/60 on Apple
   M5 Pro. The authoring document remained byte-identical. A second run used the
