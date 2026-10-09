@@ -3,6 +3,7 @@
 mod material_pipeline;
 mod materials;
 mod models;
+mod resource_error;
 mod scene;
 mod studio;
 #[cfg(test)]
@@ -12,6 +13,7 @@ use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Vec3};
 use incant_doc::Project;
 pub use models::RenderScene;
+pub use resource_error::ResourceError;
 pub use scene::{SceneError, SceneStats};
 use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
 pub use wgpu;

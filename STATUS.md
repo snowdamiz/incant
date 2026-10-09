@@ -57,8 +57,8 @@ within its documented workload.
   retained GPU base-color, metallic/roughness, normal, occlusion and emissive maps.
   Color spaces, samplers/mips, alpha modes, sidedness and reflected instances are
   implemented. 119 Rust behavior tests and seven explicit GPU tests pass locally.
-  Visual review, native texture-reimport verification and hosted checks remain
-  pending. Production lighting/render graph/postprocessing remain open. See
+  Native texture reimport, Undo/Redo, retention on source error and repair
+  pass. Claude visual review and hosted checks remain pending. Production lighting/render graph/postprocessing remain open. See
   [GPU material evidence](docs/spikes/gpu-materials.md).
 
 - Isolated headless playback now accepts ticks/seconds and an optional compiled
@@ -67,8 +67,8 @@ within its documented workload.
   117 Rust behavior tests, three explicit GPU tests and 282 UI tests pass after
   integration with native source watching.
   A source-free imported-model run and a compiled TypeScript run produce real
-  frame sequences. Claude approved the six captured frames; PR #12 is stacked
-  on main after source-watch PR #11 merged and awaits hosted checks. See
+  frame sequences. Claude approved the six captured frames. All twelve hosted checks passed on
+  `58118f1`; PR #12 merged into main as `1d9650b` on 2026-10-09. See
   [headless playback evidence](docs/spikes/headless-playback.md).
 
 - Saved native projects now watch registered sources and dependencies on a worker,

@@ -1,6 +1,6 @@
 //! Indexed model versions with immutable geometry and material resources.
 use crate::{
-    Renderer, Result,
+    Renderer, ResourceError, Result,
     materials::{MaterialResources, PipelineKey},
     scene::{ResolvedScene, SceneStats},
 };
@@ -68,7 +68,7 @@ impl Renderer {
         let mut cache = self
             .models
             .lock()
-            .map_err(|_| "GPU model cache lock failed")?;
+            .map_err(|_| ResourceError::CacheLock("GPU model"))?;
         cache.retain(|_, model| model.strong_count() != 0);
         let mut batches = Vec::new();
         for (key, plan) in resolved.models {
@@ -86,7 +86,7 @@ impl Renderer {
                         if vertices.len() as u64 > self.device.limits().max_buffer_size
                             || indices.len() as u64 > self.device.limits().max_buffer_size
                         {
-                            return Err("cooked geometry exceeds GPU buffer limit".into());
+                            return Err(ResourceError::BufferSize("cooked geometry").into());
                         }
                         let mut minimum = glam::DVec3::splat(f64::INFINITY);
                         let mut maximum = glam::DVec3::splat(f64::NEG_INFINITY);
@@ -148,9 +148,7 @@ impl Renderer {
                                 for z in [mesh.minimum.z, mesh.maximum.z] {
                                     if !world.transform_point3(glam::Vec3::new(x, y, z)).is_finite()
                                     {
-                                        return Err(
-                                            "transformed geometry exceeds GPU numeric range".into(),
-                                        );
+                                        return Err(ResourceError::GeometryRange.into());
                                     }
                                 }
                             }
@@ -159,7 +157,7 @@ impl Renderer {
                     }
                     let bytes = bytemuck::cast_slice(&transforms);
                     if bytes.len() as u64 > self.device.limits().max_buffer_size {
-                        return Err("scene instances exceed GPU buffer limit".into());
+                        return Err(ResourceError::BufferSize("scene instances").into());
                     }
                     batches.push(Batch {
                         model: Arc::clone(&model),

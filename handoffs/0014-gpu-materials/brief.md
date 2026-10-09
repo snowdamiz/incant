@@ -1,3 +1,32 @@
+# Priority follow-up: final integrated captures
+
+Astra integrated your studio tuning. The final integrated tree passes all seven
+explicit GPU tests, including new lit-back-face equality and varying-normal-map
+checks, plus workspace Clippy. All 119 Rust behavior tests, 282 UI tests and the
+UI build pass. Native texture reimport, Undo/Redo, failure retention and repair
+were verified through the command bus with exact viewport-region comparisons.
+The rebuilt app restores the project and saved account.
+
+Review-only follow-up: artifacts/material-review now contains 19 freshly generated
+PNG captures with your tuning, including lit-double-sided-back.png,
+varying-normal-map.png, textured-cube.png and default-metal.png. Review all 19.
+The cube is a mathematical fixture with simple stripes, not game art.
+artifacts/native-material-review/10-final-wide.jpg and 11-final-minimum.jpg are
+actual final native CUA captures at 1440x900 and 1000x650. Review those two for
+viewport material appearance, framing, and preserved asset-sidebar/Inspector
+separation. Do not repeat the visible account label in the report. The purple
+screen-recording badge over macOS traffic lights is an OS capture overlay; it is
+not application chrome and cannot validate traffic-light spacing.
+
+Keep the current neutral backdrop and fixed camera for this scoped increment.
+Specular IBL and tone mapping are the next renderer work; automatic framing can
+follow. Do not ask the director to decide these routine implementation priorities.
+No new builds, code changes or screenshots are needed. Append a final review to
+result.md, distinguish accepted preview limitations from a regression, and commit
+with Built-by: claude. Do not treat historical captures/hashes as current output.
+
+---
+
 # Imported glTF materials: preview look-dev and pixel review
 
 Claude Opus 5.5 through ACP owns this visual review. Astra implemented the checked

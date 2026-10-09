@@ -147,11 +147,26 @@ fn material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength()
     near(fixture.pixel(&renderer), mapped, 1);
     fixture.edit(|g| g["materials"][0] = json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
     let flat = fixture.pixel(&renderer);
+    fixture.edit(|g| {
+        g["nodes"][0]["scale"] = json!([1, 1, -1]);
+        g["materials"][0]["doubleSided"] = json!(true);
+    });
+    near(
+        center(&capture(&fixture, &renderer, "lit-double-sided-back")),
+        flat,
+        1,
+    );
+    fixture.edit(|g| {
+        g["nodes"][0]["scale"] = json!([1, 1, 1]);
+        g["materials"][0]["doubleSided"] = json!(false);
+    });
     fixture.texture(&[255, 128, 128, 255], 1, 1, |g| {
         g["materials"][0]["normalTexture"] = json!({"index":0,"scale":1})
     });
-    let mapped = center(&capture(&fixture, &renderer, "normal-map"));
-    assert_ne!(flat, mapped);
+    let mapped = capture(&fixture, &renderer, "normal-map");
+    assert_ne!(flat, center(&mapped));
+    fixture.texture(&[255, 128, 128, 255, 128, 128, 255, 255], 2, 1, |_| {});
+    assert_ne!(capture(&fixture, &renderer, "varying-normal-map"), mapped);
     fixture.edit(|g| g["materials"][0]["normalTexture"]["scale"] = json!(0));
     near(fixture.pixel(&renderer), flat, 1);
     fixture.texture(&[0,0,0,255],1,1,|g| {

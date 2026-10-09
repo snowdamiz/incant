@@ -1,6 +1,6 @@
 //! GPU resources for typed glTF materials. Bindings are immutable and retained
 //! with each model version. All images and samplers preserve their cooked roles.
-use crate::Result;
+use crate::{ResourceError, Result};
 use incant_assets::{AlphaMode, CookedModel, Material, ModelTexture, TextureFormat};
 use std::{collections::HashMap, sync::Mutex};
 use wgpu::util::DeviceExt;
@@ -133,7 +133,7 @@ impl MaterialSystem {
             if source.width > device.limits().max_texture_dimension_2d
                 || source.height > device.limits().max_texture_dimension_2d
             {
-                return Err("cooked material image exceeds GPU texture limit".into());
+                return Err(ResourceError::TextureSize.into());
             }
             let (format, stride) = match source.format {
                 TextureFormat::Rgba8Srgb => (wgpu::TextureFormat::Rgba8UnormSrgb, 4),
@@ -161,9 +161,7 @@ impl MaterialSystem {
                     for word in bytes.as_chunks::<4>().0 {
                         let value = half::f16::from_f32(f32::from_le_bytes(*word));
                         if !value.is_finite() {
-                            return Err(
-                                "material image exceeds finite RGBA16Float GPU range".into()
-                            );
+                            return Err(ResourceError::TextureRange.into());
                         }
                         out.extend_from_slice(&value.to_bits().to_le_bytes());
                     }
@@ -288,7 +286,7 @@ impl MaterialSystem {
         let mut cache = self
             .pipelines
             .lock()
-            .map_err(|_| "material pipeline cache lock failed")?;
+            .map_err(|_| ResourceError::CacheLock("material pipeline"))?;
         Ok(cache
             .entry(key)
             .or_insert_with(|| {

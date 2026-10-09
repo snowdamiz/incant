@@ -34,8 +34,16 @@ Transformed bounds outside finite GPU coordinates fail before scene publication.
   Source removal and a retained old texture version remain renderable after reimport.
 - Workspace Clippy, formatting, all 282 UI/bridge tests and the UI build pass.
   Clippy also passes after the final additional GPU assertions.
-- Actual captures are in ignored artifacts/material-review. Claude ACP handoff
-  0014 owns appearance review; that review and native verification remain pending.
+- Native build `43f0d3f` opened a disposable model project created through CLI
+  init/import and command-bus RPC. External texture writes reimport automatically;
+  Undo restores the original viewport pixels and stays restored through polling;
+  Redo restores the new pixels. A malformed image adds one source diagnostic and
+  leaves geometry/materials unchanged. Repair restores the original pixels and
+  clears diagnostics. Assets use the left sidebar and the main Inspector.
+  The app remains Attached at 1440×900 and 1000×650 and restores the saved account.
+- Actual headless PNGs are in ignored artifacts/material-review; native CUA JPEGs
+  are in artifacts/native-material-review. Only test metadata is committed.
+  Claude ACP handoff 0014 owns appearance review; final review remains pending.
 
 ## Limits
 
