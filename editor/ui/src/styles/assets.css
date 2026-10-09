@@ -61,6 +61,10 @@
   text-overflow: ellipsis;
 }
 
+.assets[data-pane='open'] .assets__busy-note {
+  display: none; /* the pane's own status carries it */
+}
+
 .assets__busy-note {
   min-width: 0;
   overflow: hidden;
@@ -291,10 +295,18 @@
   color: var(--color-text);
 }
 
+/* The heading takes focus when details open. Padding keeps the ring off the text so it
+   reads as focus on a title, not as an editable field (native WebKit review, 2026-10-09). */
+.asset-pane__title {
+  flex: 0 1 auto;
+  padding: 2px 6px;
+  margin-inline: -6px auto;
+  border-radius: var(--radius);
+}
+
 .asset-pane__title:focus-visible,
 .asset-pane__title[data-focus-visible] {
-  outline-offset: 1px;
-  border-radius: var(--radius-sm);
+  outline-offset: 0;
 }
 
 .asset-pane__body {
@@ -428,11 +440,22 @@
   margin-bottom: var(--space-3);
 }
 
+.asset-pending__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.asset-pending__note {
+  color: var(--color-text-subtle);
+  line-height: 16px;
+}
+
 .asset-pending {
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
-  height: 24px;
+  min-height: 24px;
   color: var(--color-text-soft);
   font-size: var(--text-xs);
 }
@@ -728,4 +751,20 @@
   place-items: center;
   width: 18px;
   height: 16px;
+}
+
+/* Narrow dock: the four tabs drop their icons so every label and count stays visible. */
+.panel--dock {
+  container: dock / inline-size;
+}
+
+@container dock (max-width: 520px) {
+  .panel--dock .tab {
+    gap: 6px;
+    padding-inline: 8px;
+  }
+
+  .panel--dock .tab > .icon {
+    display: none;
+  }
 }

@@ -161,7 +161,9 @@ are bundled locally, so nothing is fetched from a network.
   the list, a spinner in the tab and an inline status. It never shows a percentage or a
   cancel control. Failures are an inline alert with the engine's exact message. They keep
   every typed path and replace the submit label with "Try again". Fingerprints and IDs sit
-  in a collapsed "Identifiers" disclosure. Styles live in `src/styles/assets.css`.
+  in a collapsed "Identifiers" disclosure. While cooking, the strip says "You can keep working. Editing now means retrying the
+  import." Below about 520 px of dock width the dock tabs drop their icons, so every label
+  and count stays visible. Styles live in `src/styles/assets.css`.
 
 ## Focus and keyboard
 
@@ -178,7 +180,7 @@ are bundled locally, so nothing is fetched from a network.
   list is an ARIA listbox with a roving tabindex. Arrows, Home and End move through it,
   Enter or Space opens details, ⌘/Ctrl+F filters, and Escape closes the pane and returns to
   the row. Shift+Enter in a path field adds a row. A paste of several lines adds one row per
-  line.
+  line. If the field was empty or wholly selected, the first line replaces it.
   Dividers are `separator`s resizable with arrows (Shift = 64 px). `?` opens the
   shortcut list (modal, focus trapped, Escape returns focus). A skip link is first.
 
