@@ -8,8 +8,8 @@ production lighting, or a phase gate.
 
 `EnvironmentLight` is a registered, schema-derived component with a stable texture
 asset ID, intensity (0–100), and rotation about world +Y (−360 to 360 degrees).
-It uses the existing component commands, Inspector, agent tools and durable
-Undo/Redo. Referenced assets cannot be removed or reinterpreted as normal maps.
+It uses the existing component commands, agent tools and durable Undo/Redo.
+The Inspector displays fields read-only; interactive field editing is separate. Referenced assets cannot be removed or reinterpreted as normal maps.
 Only one global environment is accepted across the currently loaded project;
 active-scene selection is not implemented. Entity transforms do not rotate the
 environment; the component's explicit world yaw does. A light-only entity does
@@ -57,8 +57,7 @@ fill panel intensities preserve a clear hierarchy under the HDR output shoulder.
 
 ## Verification and current limits
 
-- 130 workspace Rust tests passed, followed by one additional passing low-pass
-  source test (131 behavior tests in the current tree). Independent uniform-angle
+- 131 workspace Rust behavior tests pass in the final full run. Independent uniform-angle
   quadrature checks the BRDF integral; other tests cover cube axes/edges, constant
   radiance, HDR/sRGB/linear decode, invalid radiance, filter broadening and document
   transaction semantics. All lookup values are finite, nonnegative and bounded.
@@ -79,9 +78,17 @@ fill panel intensities preserve a clear hierarchy under the HDR output shoulder.
 - Claude Opus 5.5 through ACP approved the final headless captures in `e192fe8`,
   confirming key/fill hierarchy, neutral colors, smooth roughness progression and
   seam-free studio reflections. CLI/default-studio and authored-map captures pass.
-- Native application verification is pending: CUA reports the Mac is locked.
-  The running prior build was left intact. Claude reviews the saved GPU images;
-  this is not a substitute for native integration evidence.
+- Native source reimport, Undo/Redo, invalid-source retention and repair pass.
+  The saved account restores without interaction. Claude approved the native
+  sequence at 1440×900 and 1000×650, then fixed the clipped Rotation degrees
+  label. The rebuilt app passes the final native label review (`e16a88f`);
+  282 UI tests and the native rebuild pass after that CSS change.
+- The disposable fixture initially used a different RPC journal path from the
+  editor default. The editor correctly rejected the mismatch. Preserving the
+  old import journal and copying the valid command-bus journal to the default
+  fixture path resolved it; no validation was bypassed.
+- All twelve hosted checks passed on `42a991d`. The final native-review/label-fix
+  revision will run its required checks before merge.
 
 Filtering is synchronous during scene preparation on the existing render worker;
 there is no persistent prefiltered-environment disk cache, background job progress
@@ -91,4 +98,5 @@ loses energy on rough metals; multiscattering compensation is not implemented.
 There are no local reflection probes, visibility rays, parallax correction,
 shadows, skybox, exposure controls, authored direct lights, clustered culling,
 SSAO, bloom or temporal antialiasing. Reflected studio floor is distant radiance,
-not geometry. Native and final visual review remain explicit before merge.
+not geometry. Headless and native visual review are complete for this scope.
+No phase gate is approved.
