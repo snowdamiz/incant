@@ -46,30 +46,35 @@
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  /* Page: warm studio paper and ink. */
-  --color-paper: #f4f1ea;
-  --color-paper-deep: #ebe6da;
-  --color-ink: #17151d;
-  --color-ink-soft: #2b2833;
-  --color-muted: #5d5966;
-  --color-rule: rgb(23 21 29 / 0.14);
+  /* Page: neutral studio paper and graphite ink (revision 3: purple tint removed). */
+  --color-paper: #f4f3ef;
+  --color-paper-deep: #e9e7e1;
+  --color-ink: #15161a;
+  --color-ink-soft: #26282e;
+  --color-muted: #5b5e66;
+  --color-rule: rgb(21 22 26 / 0.14);
 
-  /* The wisp: one brand violet, used with intent. */
+  /* Brand violet is reserved for the wisp logo mark (header, footer, favicon). */
   --color-wisp: #4b2bc7;
-  --color-wisp-deep: #3a1fa6;
-  --color-wisp-mist: #d9d2fb;
+  /* One page accent: the editor's periwinkle hue (235deg), darkened for 5.8:1 on paper. */
+  --color-accent: #4650c8;
+  --color-accent-soft: #a9b0ff; /* on charcoal; equals editor --color-accent-strong */
 
-  /* Editor illustration palette (dark product surface only). */
-  --color-ed-bg: #131118;
-  --color-ed-panel: #1a1720;
-  --color-ed-raised: #24202c;
-  --color-ed-line: rgb(255 255 255 / 0.08);
-  --color-ed-text: #ebe7f2;
-  --color-ed-muted: #a39db1;
-  --color-ed-violet: #a998ff;
-  --color-ed-green: #86dcbc;
-  --color-ed-amber: #f2b679;
-  --color-ed-red: #f38b86;
+  /* Editor illustration: mirrors references/previous-editor-tokens.css (cool graphite). */
+  --color-ed-bg: #0b0c0f; /* --color-bg-app */
+  --color-ed-panel: #131418; /* --color-bg-panel */
+  --color-ed-raised: #1a1c21; /* --color-bg-raised */
+  --color-ed-viewport: #0e0f12; /* --color-bg-viewport */
+  --color-ed-selected: #262b52; /* --color-bg-selected */
+  --color-ed-line: #22252b; /* --color-border */
+  --color-ed-control: #676e7b; /* --color-border-control */
+  --color-ed-text: #ececf1; /* --color-text */
+  --color-ed-muted: #a9aeb9; /* --color-text-muted */
+  --color-ed-accent: #8c95ff; /* --color-accent */
+  --color-ed-agent: #d892f5; /* --color-origin-agent */
+  --color-ed-green: #5dd39a; /* --color-success */
+  --color-ed-amber: #f0bd55; /* --color-warning */
+  --color-ed-red: #ff7a70; /* --color-danger */
 
   --animate-blink: blink 6s ease-in-out infinite;
   --animate-march: march 1.2s linear infinite;
@@ -126,11 +131,11 @@
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background: var(--color-wisp);
+    background: var(--color-accent);
     color: var(--color-paper);
   }
   :focus-visible {
-    outline: 2px solid var(--color-wisp);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
     border-radius: 4px;
   }

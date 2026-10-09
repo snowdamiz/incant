@@ -11,7 +11,7 @@ import { links } from '../content'
           id="hero-title"
           class="font-display-soft text-balance-safe text-[3.25rem] leading-[0.95] font-[420] tracking-[-0.03em] text-ink min-[400px]:text-[3.6rem] sm:text-[5.2rem] lg:col-span-8 lg:text-[6.6rem] xl:text-[7.4rem]"
         >
-          The game engine you can <em class="text-wisp italic">talk&nbsp;to.</em>
+          The game engine you can <em class="text-accent italic">talk&nbsp;to.</em>
         </h1>
 
         <div class="lg:col-span-4 lg:pb-3">
@@ -22,7 +22,7 @@ import { links } from '../content'
           <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
             <a
               :href="links.productGuide"
-              class="inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-[15px] font-medium text-paper transition-colors hover:bg-wisp"
+              class="inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-[15px] font-medium text-paper transition-colors hover:bg-ink-soft"
             >
               Read the product guide
               <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" /></svg>
@@ -30,7 +30,7 @@ import { links } from '../content'
             </a>
             <a
               :href="links.repository"
-              class="text-[15px] font-medium text-ink underline decoration-rule decoration-1 underline-offset-[6px] transition-colors hover:decoration-wisp"
+              class="text-[15px] font-medium text-ink underline decoration-rule decoration-1 underline-offset-[6px] transition-colors hover:decoration-accent"
             >
               View on GitHub
               <span class="sr-only">(may require access)</span>

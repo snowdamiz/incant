@@ -75,12 +75,12 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
         aria-controls="stage-panel"
         :tabindex="s.id === step ? 0 : -1"
         class="group relative -mt-px border-t-2 py-4 pr-2 text-left sm:pr-4 transition-colors sm:py-5"
-        :class="s.id === step ? 'border-wisp' : 'border-transparent hover:border-ink/25'"
+        :class="s.id === step ? 'border-accent' : 'border-transparent hover:border-ink/25'"
         @click="step = s.id"
         @keydown="onKeydown($event, i)"
       >
         <span class="flex items-baseline gap-2.5">
-          <span class="font-display-soft hidden text-[15px] italic min-[520px]:inline" :class="s.id === step ? 'text-wisp' : 'text-muted'">{{ s.numeral }}</span>
+          <span class="font-display-soft hidden text-[15px] italic min-[520px]:inline" :class="s.id === step ? 'text-accent' : 'text-muted'">{{ s.numeral }}</span>
           <span class="text-[14px] font-semibold whitespace-nowrap min-[400px]:text-[15px] sm:text-base" :class="s.id === step ? 'text-ink' : 'text-muted group-hover:text-ink'">{{ s.label }}</span>
         </span>
         <span class="mt-1 hidden text-[14px] leading-snug text-muted md:block">{{ s.line }}</span>
@@ -93,7 +93,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
       <div
         role="img"
         :aria-label="descriptions[step]"
-        class="overflow-hidden rounded-xl bg-ed-bg text-ed-text shadow-[0_1px_0_rgb(255_255_255/0.06)_inset,0_50px_100px_-50px_rgb(23_21_29/0.55),0_20px_40px_-30px_rgb(23_21_29/0.4)] ring-1 ring-ink/10"
+        class="overflow-hidden rounded-xl bg-ed-bg text-ed-text shadow-[0_1px_0_rgb(255_255_255/0.06)_inset,0_50px_100px_-50px_rgb(21_22_26/0.55),0_20px_40px_-30px_rgb(21_22_26/0.4)] ring-1 ring-ink/10"
       >
         <!-- Title bar -->
         <div class="flex h-11 items-center gap-3 border-b border-ed-line px-4">
@@ -103,7 +103,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
             <span class="size-2.5 rounded-full bg-white/15" />
           </div>
           <div class="ml-2 flex min-w-0 items-center gap-2 text-[12.5px]">
-            <WispMark class="h-4 w-auto shrink-0" body="#a998ff" />
+            <WispMark class="h-4 w-auto shrink-0" body="#8c95ff" />
             <span class="truncate font-medium">Lantern Reach</span>
             <span class="hidden text-ed-muted sm:inline">/ cliffs.scene</span>
           </div>
@@ -114,7 +114,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
           </div>
           <span
             class="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1 text-[12px] font-medium lg:ml-0"
-            :class="step === 'play' ? 'bg-ed-red/15 text-ed-red' : 'bg-ed-raised text-ed-text'"
+            :class="step === 'play' ? 'bg-ed-red/15 text-ed-red' : 'border border-ed-line bg-ed-raised text-ed-text'"
           >
             <svg v-if="step !== 'play'" viewBox="0 0 12 12" class="size-2.5" fill="currentColor"><path d="M3 2l7 4-7 4z" /></svg>
             <span v-else class="size-2 rounded-[2px] bg-ed-red" />
@@ -124,7 +124,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
 
         <div class="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_17.5rem] lg:grid-cols-[12.5rem_minmax(0,1fr)_20rem]">
           <!-- Outline -->
-          <div class="hidden border-r border-ed-line py-3 lg:block">
+          <div class="hidden border-r border-ed-line bg-ed-panel py-3 lg:block">
             <p class="px-4 pb-2 text-[12px] font-medium text-ed-muted">Scene</p>
             <ul class="space-y-px px-2 text-[13px]">
               <li
@@ -132,7 +132,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
                 :key="node.name"
                 class="flex items-center gap-2 rounded-md py-1.5 pr-2"
                 :class="[
-                  node.tone === 'selected' ? 'bg-ed-violet/15 text-ed-text' : 'text-ed-muted',
+                  node.tone === 'selected' ? 'bg-ed-selected text-ed-text' : 'text-ed-muted',
                   node.tone === 'new' ? 'text-ed-green' : '',
                 ]"
                 :style="{ paddingLeft: `${0.6 + node.depth * 0.9}rem` }"
@@ -144,7 +144,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
           </div>
 
           <!-- Viewport -->
-          <div class="relative aspect-[16/10] min-w-0 overflow-hidden md:aspect-auto md:min-h-[24rem] lg:min-h-[28rem]">
+          <div class="relative aspect-[16/10] min-w-0 overflow-hidden bg-ed-viewport md:aspect-auto md:min-h-[24rem] lg:min-h-[28rem]">
             <StageScene :step="step" class="absolute inset-0" />
             <span
               v-if="step === 'play'"
@@ -154,7 +154,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
             </span>
             <span
               v-if="step === 'review'"
-              class="absolute top-[30%] left-[50%] rounded-md bg-ed-bg/85 px-2 py-1 font-mono text-[11px] text-ed-violet backdrop-blur"
+              class="absolute top-[30%] left-[50%] rounded-md bg-ed-bg/85 px-2 py-1 font-mono text-[11px] text-ed-accent backdrop-blur"
             >Anchor Ring</span>
             <span
               v-if="step === 'undo'"
