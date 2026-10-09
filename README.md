@@ -78,7 +78,7 @@ the fixed editor preview. The agent `view_screenshot` tool accepts the same
 optional `camera` ID. Missing/non-camera IDs fail instead of silently falling
 back. Camera edits use the shared command bus and normal Undo/Redo. Asset sources are unnecessary when
 the cooked cache is present; the command reads the saved checkpoint, not unsaved
-editor edits. Game logs and assertion-script support remain open.
+editor edits. Assertion-script support remains open.
 
 `init` refuses to overwrite an existing file. `rpc` serves newline-delimited JSON
 on stdin/stdout. `project.read`, `schema.list`, `command.execute`, `history.read`,
