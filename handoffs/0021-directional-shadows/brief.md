@@ -1,3 +1,27 @@
+# Supplemental minimum capture, report only
+
+Your40d1939 report correctly flagged the1720x669 capture. CUA moved to the
+built-in display again, verified the menu offered moving back to the external
+monitor, then resized. New assets-retina-minimum.jpg is actually2002x1302,
+verified by decoding it. It is in artifacts/shadow-native-polish, with updated
+dimensions.json and sanitized AX. Please review this single image and append
+its scoped acceptance (or concrete issue) to result.md. No code changes or
+unchanged checks needed. This closes the earlier mislabeled capture evidence.
+
+---
+
+# Last small review: native Assets root label
+
+Your final d2f3a02 is integrated as81d1fa0. Root294UI tests/build and native
+custom-protocol rebuild/package pass. CUA captured your root-folder typography
+fix in artifacts/shadow-native-polish/assets-{wide,minimum}.jpg. Dimensions are
+in dimensions.json (wide1440x900, second capture1720x669; true minimum recapture pending). Same actual
+root-level project assets as your previous captures. Zero engine errors and
+saved account restored without prompts. Review those two images, append verdict
+to result.md, and commit report only if accepted. No unchanged test reruns.
+
+---
+
 # Priority final review — integrated native evidence
 
 Your initial commit 38aef10 is integrated as root 9f02f45. Review this follow-up

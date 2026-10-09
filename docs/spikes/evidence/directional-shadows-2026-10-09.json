@@ -1,12 +1,12 @@
 {
   "date": "2026-10-09",
   "implementation_commit": "a4dcac4",
-  "stage": "integrated local checks and native capture complete; final Claude review and exact-head CI pending",
+  "stage": "implemented and scoped Claude review accepted; exact-head hosted checks pending",
   "adapter": "Apple M5 Pro",
   "tests": {
     "ordinary_rust": 144,
     "native_gpu": 40,
-    "ui": 293,
+    "ui": 294,
     "python_tools": 5,
     "clippy": "passed"
   },
@@ -2364,7 +2364,9 @@
     "four fixed 1024x1024 cascades per sun; maximum four enabled suns",
     "BLEND caster fails explicitly; noncasting blended receiver supported",
     "all imported caster bounds used without caster culling",
-    "no point/spot shadow maps, adaptive quality or production game/device gate"
+    "no point/spot shadow maps, adaptive quality or production game/device gate",
+    "2cm wall contact leak1-2px; lower bias caused widespread acne",
+    "far thin-post aliasing beyond roughly30m with12-degree sun in headless framing"
   ],
   "logs_sha256": {
     "shadow-workspace.log": "a35cb9942b6197c5d0018a3f3d41b1cf1c343adb6648f07706f3a4a60ce7a148",
@@ -2382,7 +2384,11 @@
     "shadow-integrated-ui.log": "8d6ea5afa51726e841992515c03759d10e27589fc72abb8dca5f14561069b22f",
     "shadow-integrated-schema.log": "339fda5dbd9a91df5d528913a0a276d427984da4ad285be58690449b9320a6eb",
     "shadow-native-final-build.log": "7a5654619e052098e48044ddc0ea33a33bf9f5703b4aa7d539cdb0afd2d4cb53",
-    "shadow-native-final-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1"
+    "shadow-native-final-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1",
+    "shadow-polish-ui-test.log": "36945ea116208336093164157d4d84e30ee2ba674f7068469d01ccbe847bf887",
+    "shadow-polish-ui-build.log": "58a223e3891d1be86a766d790ca11837b4650ef35540c406bc9bff60b8473f69",
+    "shadow-polish-native-build.log": "713bab35e790388691f49befe647fc1ac475a31fbcb9a523a7e2651caa207921",
+    "shadow-polish-native-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1"
   },
   "shadow_captures": [
     {
@@ -2511,7 +2517,7 @@
   "normal_map_shadow_offset_fix": {
     "source": "Claude look-dev recommendation reproduced by Astra",
     "before": "Opposing tangent-X normal maps change the geometrically symmetric shadow boundary at81 central-column pixels by up to12 channel levels",
-    "after": "Unperturbed interpolated surface normal supplies the shadow offset; mapped normal supplies BRDF/IBL. Targeted regression and full integrated checks pass; Claude final review pending.",
+    "after": "Unperturbed interpolated surface normal supplies the shadow offset; mapped normal supplies BRDF/IBL. Targeted regression and integrated checks pass; Claude accepted the correction atd2f3a02.",
     "logs_sha256": {
       "shadow-normal-before.log": "60a338584a7a4197310795a9bd388203761b37d396d9a74f40a3fdb38894cce5",
       "shadow-normal-after.log": "11289c79416ec185e33c3121b407930a48e185b666562d820b4fc62eb45d4551"
@@ -2520,7 +2526,7 @@
   "integrated_checks": {
     "ordinary_rust": 144,
     "gpu": 40,
-    "ui": 293,
+    "ui": 294,
     "clippy": "passed",
     "schemas_sdk_bridge_conventions": "passed",
     "python_tools": 5,
@@ -3958,6 +3964,42 @@
     "viewport": "actual cooked look-dev scene, native default preview camera; sun12 to38 via Undo and back12 via Redo; zero errors",
     "layout": "Assets left, asset details main Inspector, only Problems/Console/History in bottom output",
     "saved_account": "restored without login or Keychain prompt",
-    "appearance_review": "pending Claude; images remain ignored"
+    "appearance_review": "Claude Opus 5.5 through ACP accepted d2f3a02; native Assets typography accepted at wide and true minimum in 383a3ee; no native requests remain"
+  },
+  "claude_review": {
+    "initial": "38aef1086131f1a7628a7434f326d96ebfa9f0e0",
+    "final": "d2f3a0269349de47220de97ac3c38ff7e3188d86",
+    "model": "claude-opus-5-5",
+    "transport": "ACP",
+    "report": "handoffs/0021-directional-shadows/result.md",
+    "verdict": "scoped native/appearance acceptance, not a phase or game/device gate",
+    "native_typography_final": "383a3ee31b2286f0653647ad905b4a10716593ec"
+  },
+  "native_asset_typography": {
+    "captures": {
+      "assets-minimum.jpg": {
+        "pixels": [
+          1720,
+          669
+        ],
+        "sha256": "6ff4bbea0c68eb0e3e21e6fb7f5944419cb49ae37498042ecc75906ef09d4ef1"
+      },
+      "assets-wide.jpg": {
+        "pixels": [
+          1440,
+          900
+        ],
+        "sha256": "7a686c6788c32e7c214b7eb05568ce9a7f918a071aff75762b36e52e149a41bf"
+      },
+      "assets-retina-minimum.jpg": {
+        "pixels": [
+          2002,
+          1302
+        ],
+        "sha256": "b1f3f27042b573f3f637a6949a1d109db5bff8eef7431ae4c18f1bb3dea53c87"
+      }
+    },
+    "note": "first minimum attempt1720x669 correctly treated as short only; supplemental assets-retina-minimum measured2002x1302",
+    "verdict": "accepted by Claude at 383a3ee after decoding the true-minimum 2002x1302 capture"
   }
 }

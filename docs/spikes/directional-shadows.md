@@ -1,4 +1,4 @@
-# Directional cascaded shadows — implementation in progress
+# Directional cascaded shadows
 
 DirectionalLight now accepts optional `shadows: { distance }`, with distance
 validated from 0.01 to 10000 world meters. Omission preserves unshadowed lighting.
@@ -23,15 +23,15 @@ caster culling, animated/skinned geometry and production game/device performance
 gates remain open. Claude's initial look-dev accepts the 3×3 comparison filter/bias with the thin-caster
 contact leak and distant thin-post aliasing documented in handoff 0021.
 
-Integrated local verification passes 144 ordinary Rust tests, 40 GPU checks, 293 UI
+Integrated local verification passes 144 ordinary Rust tests, 40 GPU checks, 294 UI
 tests, Clippy, generated schemas/SDK and UI production build. New real GPU checks
 cover analytical occlusion, caster flags/range, retained scenes, offscreen
 casters, four-light capacity, alpha holes/reflection/sidedness, cascade overlap
 and distance fade, and reverse submission after scene/asset/source disposal.
 The public CLI authors/imports through the shared command bus; light/caster edits,
 Undo/Redo, atomic invalid batch rejection, journal reopening and source-free
-cached rendering pass. Native verification and measurements are complete; final Claude appearance review
-and exact-head hosted checks remain pending. No release gate is claimed.
+cached rendering pass. Native verification and measurements are complete; Claude accepted the scoped native and appearance review;
+exact-head hosted checks remain pending. No release gate is claimed.
 
 Initial native checks show the enabled Sun's distance as 40 m in the read-only
 Inspector, an attached viewport and zero errors before/after output resizing.
@@ -63,7 +63,7 @@ camera-cluster images differ at one pixel by one red-channel level. That fixture
 used random light ULIDs and therefore variable floating-point summation order;
 the fixture now uses stable IDs. All 16 resulting camera captures match across
 two independent processes. Claude independently verified the original differences
-and repeatability; full look-dev approval is still pending. The
+and repeatability; scoped look-dev/native approval is recorded in handoff 0021. The
 [evidence ledger](evidence/directional-shadows-2026-10-09.json) retains hashes,
 checks, CLI results and raw timing samples.
 
@@ -86,7 +86,7 @@ shading normal. An analytical mirrored-normal fixture reproduces the old defect:
 the same geometric boundary changes by up to 12 channel levels. Passing the
 unperturbed interpolated surface normal to the shadow lookup fixes that test;
 BRDF and environment shading still use the normal map. The full integrated suite passes, and all four original look-dev images remain
-pixel-identical. Final Claude review of the correction remains pending.
+pixel-identical. Claude accepted the correction after independently comparing before/after pixels.
 
 
 Final CUA captures use the actual cooked look-dev geometry in the native editor
@@ -98,4 +98,8 @@ inner minimum is 1000×650 logical points. Enabled distance reads 60 m; omitted
 and explicit-null settings read Off with distinct accessible descriptions. The
 read-only field receives focus. Assets stays in the left workspace, and the
 bottom remains diagnostics only. No native errors or account prompts occurred.
-Captures and sanitized accessibility records await Claude's final review.
+Claude accepted these captures. The thin-wall contact leak and far thin-post
+aliasing remain documented quality limits. A final Assets root-label typography
+fix passes 294 UI tests and a rebuilt native package; the wide/short review is
+accepted, and Claude also accepted the supplemental 2002×1302 Retina minimum
+capture after verifying its decoded dimensions.
