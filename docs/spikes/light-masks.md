@@ -81,3 +81,10 @@ Cluster construction still tests every local light against every cluster.
 Hierarchical binning, production render graph, shadows, mobile tiers and named
 performance gates remain open. No new native UI review is claimed for this
 renderer-only change; the preceding authored-light Inspector review still applies.
+
+## Hosted integration
+
+All three applicable hosted checks passed on exact head `2c517ce`, including
+Windows and Linux GPU execution. After prerequisite PR #17 merged, PR #18 merged
+into main as `1b35f02` on 2026-10-09. Its actual merge trailer is `Built-by: astra`.
+No phase or game/device performance gate is approved by this integration.

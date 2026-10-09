@@ -33,7 +33,7 @@ fn distinct_colored_lights_preserve_energy_across_mask_words() {
     for z in 0..3 {
         for y in 0..4 {
             for x in 0..8 {
-                light(
+                let id = light(
                     &mut f,
                     "PointLight",
                     json!({
@@ -46,6 +46,12 @@ fn distinct_colored_lights_preserve_energy_across_mask_words() {
                         1.4 + z as f64 * 0.2,
                     ],
                 );
+                // Stable ULIDs keep floating-point accumulation order identical
+                // across separate processes and cross-commit pixel comparisons.
+                let entities = &mut f.project.scenes.values_mut().next().unwrap().entities;
+                let mut entity = entities.remove(&id).unwrap();
+                entity.id = format!("{:026}", z * 32 + y * 8 + x + 1);
+                assert!(entities.insert(entity.id.clone(), entity).is_none());
             }
         }
     }

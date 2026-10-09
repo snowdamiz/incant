@@ -453,5 +453,74 @@
     "4096-light local benchmark exceeds 16.7ms; no Core Sample/device performance gate claimed",
     "native account-bearing screenshots remain ignored and unpublished"
   ],
-  "phase_gate": "not approved"
+  "phase_gate": "not approved",
+  "hosted_integration": {
+    "pr": 17,
+    "head": "788da0726338b5a724c61a411ff2f47163be354c",
+    "merge_commit": "726a25d729c1b0b67e3bb5fecb622dc3dfca72f2",
+    "merged_at": "2026-10-09T21:08:05Z",
+    "checks": [
+      {
+        "name": "storage (macos-latest)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343773/job/114015873215"
+      },
+      {
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343692/job/114015873431"
+      },
+      {
+        "name": "checks",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343718/job/114015873264"
+      },
+      {
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343828/job/114015874264"
+      },
+      {
+        "name": "storage (windows-latest)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343773/job/114015873541"
+      },
+      {
+        "name": "desktop (ubuntu-latest, Linux)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343692/job/114015873617"
+      },
+      {
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343828/job/114015874125"
+      },
+      {
+        "name": "storage (ubuntu-latest)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343773/job/114015873540"
+      },
+      {
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343828/job/114015874241"
+      },
+      {
+        "name": "web",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343828/job/114015874141"
+      },
+      {
+        "name": "ios",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343828/job/114015874152"
+      },
+      {
+        "name": "android",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988343828/job/114015873866"
+      }
+    ],
+    "merge_trailer": "Built-by: astra; verified on actual GitHub merge commit"
+  }
 }

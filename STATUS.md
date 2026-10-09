@@ -79,7 +79,8 @@ within its documented workload.
   27 GPU and 283 UI tests, Clippy and native release build pass. Three paired
   trials measure 34.23 → 6.44 ms median at 4096 lights on M5 Pro, with identical
   cooked projects. This is a synthetic fenced frame probe, not a game/device
-  gate. Ready for hosted checks; see [light mask evidence](docs/spikes/light-masks.md).
+  gate. All three applicable hosted checks pass at `2c517ce`; PR #18 merged
+  into main as `1b35f02`. See [light mask evidence](docs/spikes/light-masks.md).
 
 - Authored directional, point and spot lights use real GPU clustered forward
   shading with bounded lists and an exact overflow fallback. The shared command
@@ -89,8 +90,10 @@ within its documented workload.
   range-edge rim, RGB labels and unit display. Public CLI edits, atomic rejection,
   Undo/Redo and source-free rendering pass. The 1080p local frame probe measures
   1.38–28.05 ms median across 0–4096 local lights on M5 Pro; the dense case needs
-  optimization and no game/device performance gate is claimed. Ready for hosted
-  checks. See [clustered lighting evidence](docs/spikes/clustered-lighting.md).
+  optimization and no game/device performance gate is claimed. All twelve hosted
+  checks pass at `788da07`, including the serialized Windows GPU rerun; PR #17
+  merged as `726a25d`. The dense case is improved by the mask increment above.
+  See [clustered lighting evidence](docs/spikes/clustered-lighting.md).
 
 - Distant environment lighting includes diffuse convolution, GGX roughness
   filtering, a matching BRDF lookup and retained GPU versions. Authored
@@ -221,7 +224,7 @@ within its documented workload.
   and saved disposable projects; native account focus behavior passes, with the
   visible keyboard ring also approved by Claude.
 
-- The first sixteen PRs are merged into main after their required checks passed:
+- The first eighteen PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
   responsive loading/focus #5, shared import batches #6, source watching #7 and
   editor/agent imports with the redesigned asset workspace #8, and runtime scene

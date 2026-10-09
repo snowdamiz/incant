@@ -13,15 +13,51 @@ fn queued_graph_frames_outlive_scene_versions_and_failed_preparation() {
     let (mut project, mut assets, asset_id) = test_support::fixture(directory.path());
     let mut jobs = Vec::new();
     let mut references = Vec::new();
-    for (index, (offset, width, height)) in [(0., 321, 193), (2., 480, 270), (-2., 321, 193)]
-        .into_iter()
-        .enumerate()
+    for (index, (offset, width, height)) in [
+        (0., 321, 193),
+        (2., 480, 270),
+        (-2., 321, 193),
+        (-2., 321, 193),
+    ]
+    .into_iter()
+    .enumerate()
     {
         if index > 0 {
             let mut replacement = test_support::model(directory.path(), offset);
             replacement.id = asset_id.clone();
             project.assets.insert(asset_id.clone(), replacement);
             assets.sync_project(&project, directory.path()).unwrap();
+        }
+        // Last two frames reuse the exact grid shape/word count but alternate
+        // which local-light bit can reach geometry. Stale masks cannot pass.
+        for light_index in 0..2 {
+            let mut light = incant_doc::Entity::new("Retained local light");
+            light.id = format!("{:026}", light_index + 1);
+            light.components.insert(
+                "PointLight".into(),
+                serde_json::json!({
+                    "color": if light_index == 0 { [1.,0.05,0.05] } else { [0.05,1.,0.05] },
+                    "intensity":80,"range":20
+                }),
+            );
+            light.components.insert(
+                "Transform".into(),
+                serde_json::json!(incant_doc::Transform {
+                    translation: if light_index == index % 2 {
+                        [1., 3., 6.]
+                    } else {
+                        [1000.; 3]
+                    },
+                    ..Default::default()
+                }),
+            );
+            project
+                .scenes
+                .values_mut()
+                .next()
+                .unwrap()
+                .entities
+                .insert(light.id.clone(), light);
         }
         let scene = renderer.prepare_scene(&project, &assets).unwrap();
         let format = wgpu::TextureFormat::Rgba8UnormSrgb;
@@ -84,6 +120,10 @@ fn queued_graph_frames_outlive_scene_versions_and_failed_preparation() {
     assert_ne!(
         references[0], references[2],
         "different retained geometry must produce different pixels"
+    );
+    assert_ne!(
+        references[2], references[3],
+        "same geometry/grid must show the different active local light"
     );
     drop(assets);
     drop(project);

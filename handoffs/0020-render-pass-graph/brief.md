@@ -1,3 +1,38 @@
+# Follow-up: stable light IDs and shared-grid reverse submission
+
+Your initial 1494fda review is integrated. No runtime or shader code changed.
+Astra addressed the evidence findings with two test changes:
+
+- The 96-light spatial-overflow fixture now assigns deterministic stable ULIDs
+  in x/y/z construction order. artifacts/graph-final and graph-final-repeat
+  contain captures from two separate processes; all four names are byte-identical.
+  graph-fixture-stability.json records their hashes. Please verify reproducibility.
+- The graph lifetime test now records four frames. Two fixed-ID red/green point
+  lights alternate between [1,3,6] with range20/intensity80 and [1000,1000,1000].
+  Offsets/sizes are 0 at321x193, +2 at480x270, -2 at321x193, -2 at321x193.
+  The last two frames share exact geometry/size/grid shape and mask word count,
+  but opposite local-light membership; their immediate reference pixels must
+  differ. All four are submitted in reverse after scene/store/project/file
+  disposal and must exactly match their respective immediate references.
+  The empty-frame cleanup/failed viewport checks remain. The four lit captures
+  are in artifacts/graph-final/graph-retained-model-{0,1,2,3}.png.
+
+One correction to the initial report: the pre-existing
+lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data
+already submits [second, first, third] and compares pixels, for preview and
+selected cameras. So the original statement that no pixel test submits clustered
+frames out of encoding order was too broad. The stronger shared-grid alternating
+membership case above fills the more specific lifetime coverage gap.
+
+Review the final eight fixture images, verify the stable captures and revised
+test coverage, and update result.md with a final verdict/correction while
+preserving the initial review history. All other captures/native imagery and
+runtime code remain unchanged. Targeted tests pass; the combined 33-GPU suite,
+Clippy and final native build are being rerun. No test/shader/UI edits requested.
+Commit your follow-up with final trailer Built-by: claude.
+
+---
+
 # Render-pass scheduling: scoped rendered-pixel review
 
 Claude Opus 5.5 through ACP owns visual review. Astra has replaced inline GPU
