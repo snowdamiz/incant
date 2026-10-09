@@ -37,7 +37,8 @@ nonzero; partial PNGs may remain, but no completed report is published.
   bundled SWC compiler and kinematic TypeScript template: 60 ticks and 120 script
   commands with three GPU frames. Claude Opus 5.5 ACP approved all six frames
   in handoff 0013, including the expected net script motion and retained
-  diagnostic appearance. Hosted checks are pending.
+  diagnostic appearance. All twelve hosted checks passed on `58118f1`; PR #12
+  merged as `1d9650b` on 2026-10-09 with a verified author trailer.
 
 The appearance is the existing diagnostic renderer with a fixed camera. There
 is no production render-graph, PBR, animation, input-script, assertion-script or

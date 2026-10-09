@@ -60,3 +60,6 @@ budget gate is claimed without measurement. Watch controls, user configuration,
 file picking/copying and production asset tiers remain open.
 
 [Native and local evidence](evidence/editor-source-watch-2026-10-09.json).
+
+All three applicable hosted checks passed on `083bc8e`. PR #11 merged into main
+as `dd9c292` on 2026-10-09 with a verified `Built-by: astra` merge trailer.

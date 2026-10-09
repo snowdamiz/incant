@@ -104,5 +104,48 @@
     "Source IO/cooking cannot yet be forcibly cancelled; closed-app results are discarded.",
     "No user watcher controls/configuration yet.",
     "Diagnostic monochrome geometry only; production lighting/materials/camera remain open."
-  ]
+  ],
+  "hosted": {
+    "baseRefName": "main",
+    "headRefOid": "083bc8e05af542882b89380c29b732502f526589",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T17:40:04Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37965210286/job/113937729299",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "startedAt": "2026-10-09T17:17:28Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T17:41:48Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37965210329/job/113937729127",
+        "name": "checks",
+        "startedAt": "2026-10-09T17:17:33Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T17:30:47Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37965210286/job/113937729697",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "startedAt": "2026-10-09T17:17:28Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      }
+    ],
+    "url": "https://github.com/snowdamiz/incant/pull/11"
+  },
+  "merged": {
+    "commit": "dd9c2922acb8f1f8a61064a4d9b08d2aeaa35761",
+    "at": "2026-10-09T17:43:16Z",
+    "built_by_trailer_verified": true
+  }
 }

@@ -2,6 +2,7 @@
 mod cache;
 mod gltf_import;
 mod ktx;
+mod material;
 mod mesh;
 mod model_textures;
 mod project_cache;
@@ -14,6 +15,7 @@ mod texture_cache;
 pub use cache::{CookedModel, ModelMetadata, cook_gltf, load_model};
 pub use gltf_import::{ImportedModel, ModelNode, import_gltf};
 pub use ktx::{decode_ktx2, encode_ktx2};
+pub use material::{AlphaMode, Material, MaterialTexture};
 pub use mesh::{Mesh, Vertex, cook_mesh, decode_mesh};
 pub use model_textures::ModelTexture;
 pub use project_cache::{CacheKind, project_cache_directory};

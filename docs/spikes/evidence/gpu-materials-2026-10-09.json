@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-09",
+  "renderer_base": "43f0d3f",
+  "adapter": "Apple M5 Pro",
+  "local_checks": {
+    "rust_behavior_tests": 119,
+    "explicit_gpu_tests": 7,
+    "ui_bridge_tests": 282,
+    "clippy": "passed",
+    "format": "passed",
+    "ui_build": "passed",
+    "native_release_custom_protocol_build": "passed"
+  },
+  "native": {
+    "fixture_creation": "CLI init/import and shared command-bus RPC",
+    "source_texture_reimport": true,
+    "undo_exact_viewport_restoration": true,
+    "undo_survives_polling": true,
+    "redo_exact_replacement_restoration": true,
+    "invalid_image_keeps_last_good_viewport": true,
+    "repair_clears_diagnostic_and_restores_pixels": true,
+    "asset_details_in_main_inspector": true,
+    "window_sizes": [
+      [
+        1440,
+        900
+      ],
+      [
+        1000,
+        650
+      ]
+    ],
+    "captures": "private ignored artifacts/native-material-review/*.jpg",
+    "comparison_region": [
+      300,
+      110,
+      1050,
+      590
+    ],
+    "capture_encoding": "CUA JPEG",
+    "saved_account_restored": true,
+    "rebuilt_project_history_and_account_restored": true,
+    "final_captures": {
+      "10-final-wide.jpg": "c146ca283f1e3f78116023068910a28494fecb4cb06ede1aae23f664f7cbd22c",
+      "11-final-minimum.jpg": "9ef20e3989b6eedc1dda4be3c83d43b0ecbdbf6842086f605a8ecc0caacbc846"
+    },
+    "minimum_inspector_scrolling_reveals_complete_content": true
+  },
+  "visual_review": {
+    "model": "Claude Opus 5.5",
+    "transport": "ACP via tools/handoff/main.py",
+    "handoff": "0014-gpu-materials",
+    "headless_captures": 19,
+    "native_sizes": [
+      [
+        1440,
+        900
+      ],
+      [
+        1000,
+        650
+      ]
+    ],
+    "final_review": "4918685",
+    "scroll_correction": "7027df5",
+    "verdict": "accepted for imported-material preview scope"
+  },
+  "hosted_checks": "pending",
+  "studio_tuning": "aabfeef (Claude 0d8f29e)",
+  "final_native_base": "aabfeef",
+  "captures": {
+    "base-color-texture.png": "82a5b356dc35e2578b9758951ebd1eb0b89433eb816ce76947d2ae710ddbe8d3",
+    "default-metal.png": "074f64f836c03bbd74d013fe955d417c3d34a7a2efc9e71117e1432ef4beef6d",
+    "double-sided-back.png": "3ab56ae7be4e4f1aa5e19713e33ee7469ed9991ad22237dcbe9f19ff8840e5dd",
+    "emissive-map.png": "ec1ccbb53a0de325ed551c2b80156e0c4c62ea5bbb03316aa9fd66e9e91b2f1b",
+    "layered-transparency.png": "d118d2ba35da878043b950d28dcc4b771685844863698dab7e1b1b8099db8997",
+    "linear-filter.png": "eb05e4254c4797026f86f063f05bcd1d1080bd1ccd7caec65c9ee6fc8a939de4",
+    "lit-double-sided-back.png": "5a25986341f8be0bb91907736310f20457c78a3f6f921714bddc6d8049c9a5c8",
+    "mask-discarded.png": "e1751a8a2d75f191fde7f49ca0c531d612d0a59b444411f83d6dffc97f8744c7",
+    "metallic-roughness-map.png": "6e1451191b6632fb7296582e55903c5aeb1d85ff429d2af052d33e8a65e987cc",
+    "minified-color-mips.png": "eb05e4254c4797026f86f063f05bcd1d1080bd1ccd7caec65c9ee6fc8a939de4",
+    "normal-map.png": "d73492123fc70a7793f7f64e9d4e112b5d6794fe8754d8358398381790f34eb4",
+    "occlusion-map.png": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a",
+    "opaque-alpha-zero.png": "3ab56ae7be4e4f1aa5e19713e33ee7469ed9991ad22237dcbe9f19ff8840e5dd",
+    "opaque-between-transparent.png": "275cc1f721703c2cb46139b33a076a8039e64db084747d9db6d53d29b75ca02c",
+    "reflected-single-sided.png": "3ab56ae7be4e4f1aa5e19713e33ee7469ed9991ad22237dcbe9f19ff8840e5dd",
+    "reimported-blue-texture.png": "23eaf07618de4da2e1c89b307d9ec66edba68c22e97114b45d54b13ee75c1812",
+    "sixteen-bit-color.png": "167ed1c9afc481bedc8383d6d55ae5feb7ffb54e7cb19b1653e9b2f8a4609272",
+    "textured-cube.png": "902ce10a99affc49b151559b1a60a0a690321fcdd6dcbbfc57bba1046e65ef76",
+    "varying-normal-map.png": "a86aeeaabc68d242edb725892083d604fbb485b4fe91901a93ecdb340fb8de20"
+  }
+}

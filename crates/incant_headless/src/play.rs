@@ -72,6 +72,7 @@ pub struct Frame {
     elapsed_seconds: f64,
     file: String,
     geometry: incant_render::SceneStats,
+    shading: &'static str,
 }
 
 #[derive(Serialize)]
@@ -188,6 +189,7 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
                 elapsed_seconds: play.snapshot().elapsed_seconds,
                 file,
                 geometry: scene.stats().clone(),
+                shading: scene.shading(),
             });
         }
     }
