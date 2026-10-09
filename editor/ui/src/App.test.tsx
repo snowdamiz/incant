@@ -207,7 +207,7 @@ describe('editor shell', () => {
     renderFixture('sample');
     const input = screen.getByLabelText('Message to the agent') as HTMLTextAreaElement;
     expect(input.disabled).toBe(true);
-    expect(screen.getAllByText('Connect an OpenAI account to use the agent.').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Sign in with ChatGPT to use the agent.').length).toBeGreaterThan(0);
     expect(input.getAttribute('aria-describedby')).toBe('agent-reason');
   });
 

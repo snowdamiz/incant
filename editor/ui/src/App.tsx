@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import type { BridgeResolution } from './bridge/resolve';
 import { FIXTURE_VARIANTS } from './bridge/fixture';
+import { PROVIDER_FIXTURE_NAMES } from './bridge/providerFixture';
 import { UI_PROTOCOL_VERSION } from './bridge/contract';
+import { AccountDialog } from './components/AccountDialog';
 import { AgentPanel } from './components/AgentPanel';
 import { BottomDock } from './components/BottomDock';
 import { HierarchyPanel } from './components/HierarchyPanel';
@@ -37,6 +39,7 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
           No fixture is named <code>{resolution.requested}</code>.
         </p>
         <p className="subtle">Available: {FIXTURE_VARIANTS.join(', ')}.</p>
+        <p className="subtle">Account states (provider=): {PROVIDER_FIXTURE_NAMES.join(', ')}.</p>
       </FatalScreen>
     );
   }
@@ -59,7 +62,7 @@ function FatalScreen({ title, children }: { title: string; children: React.React
 
 function Workbench() {
   const shell = useShell();
-  const { snapshot, run } = shell;
+  const { snapshot, run, accountOpen } = shell;
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
   const [panels, setPanels] = useState<PanelVisibility>({ hierarchy: true, dock: true, inspector: true });
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
@@ -80,7 +83,7 @@ function Workbench() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.defaultPrevented || shortcutsOpen) return;
+      if (event.defaultPrevented || shortcutsOpen || accountOpen) return;
       const mod = event.metaKey || event.ctrlKey;
       const key = event.key.toLowerCase();
       if (event.key === 'F6') {
@@ -107,7 +110,7 @@ function Workbench() {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [run, shortcutsOpen]);
+  }, [run, shortcutsOpen, accountOpen]);
 
   const openShortcuts = (from: HTMLElement) => {
     shortcutsReturn.current = from;
@@ -180,6 +183,7 @@ function Workbench() {
           }}
         />
       ) : null}
+      {accountOpen ? <AccountDialog /> : null}
     </div>
   );
 }

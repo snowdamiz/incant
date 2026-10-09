@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import type { MouseEvent } from 'react';
 import { Icon } from '../icons/Icon';
 import { useShell } from '../shell/ShellContext';
+import { ChatGPTButton } from './AccountDialog';
 
 /**
  * Agent chat area. It never fabricates a transcript or a reply: without a
@@ -9,7 +11,7 @@ import { useShell } from '../shell/ShellContext';
  * bridge exposes conversation events.
  */
 export function AgentPanel() {
-  const { snapshot, capabilities, ask, explainUnavailable } = useShell();
+  const { snapshot, capabilities, ask, explainUnavailable, openAccount } = useShell();
   const [draft, setDraft] = useState('');
   const agent = snapshot?.agent;
   const provider = snapshot?.provider;
@@ -25,10 +27,12 @@ export function AgentPanel() {
           : '';
   const ready = agent?.status === 'idle' || agent?.status === 'running';
 
-  const connect = () => {
-    if (!capabilities.has('provider.connect')) explainUnavailable('provider.connect');
-    else void ask({ type: 'provider.connect', method: 'oauth' });
+  // Starts sign-in and opens the account dialog, which shows browser and validation progress.
+  const connect = (event: MouseEvent<HTMLButtonElement>) => {
+    openAccount(event.currentTarget);
+    if (capabilities.has('provider.connect')) void ask({ type: 'provider.connect', method: 'oauth' });
   };
+  const signedIn = provider?.status === 'connected';
 
   return (
     <section className="panel panel--agent" data-region="agent" aria-labelledby="agent-title" tabIndex={-1}>
@@ -42,7 +46,9 @@ export function AgentPanel() {
           <span className="agent-empty__mark" aria-hidden="true">
             <Icon name="spark" size={18} />
           </span>
-          <p className="agent-empty__title">{ready ? 'Describe a change' : 'Bring your own AI'}</p>
+          <p className="agent-empty__title">
+            {ready ? 'Describe a change' : signedIn ? 'Agent not ready' : 'Use your ChatGPT account'}
+          </p>
           <p className="agent-empty__body">
             {ready
               ? 'Every edit the agent makes lands in History and can be undone.'
@@ -83,15 +89,21 @@ export function AgentPanel() {
           {reason}
         </span>
         <div className="composer__bar">
-          {snapshot && !ready && provider?.status !== 'connected' ? (
+          {snapshot && !ready && provider?.status === 'not-connected' ? (
+            <ChatGPTButton small available={capabilities.has('provider.connect')} onClick={connect} />
+          ) : snapshot && !ready && provider && provider.status !== 'connected' ? (
             <button
               type="button"
-              className="button button--accent button--small"
-              aria-disabled={!capabilities.has('provider.connect') || undefined}
-              onClick={connect}
+              className={`button button--small${provider.status === 'error' ? ' button--danger' : ''}`}
+              aria-haspopup="dialog"
+              onClick={(event) => openAccount(event.currentTarget)}
             >
-              <Icon name="plug" size={12} />
-              Connect OpenAI…
+              {provider.status === 'error' ? (
+                <Icon name="error" size={12} />
+              ) : (
+                <span className="spinner spinner--small" aria-hidden="true" />
+              )}
+              {provider.status === 'error' ? 'Sign-in problem…' : provider.status === 'checking' ? 'Checking sign-in…' : 'Signing in…'}
             </button>
           ) : (
             <span className="composer__hint">{canSend ? '⌘↵ to send' : ''}</span>

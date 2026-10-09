@@ -116,8 +116,17 @@ Both are bundled locally, so nothing is fetched from a network.
   state. With a surface attached, the hole is fully transparent and only the island
   header is painted.
 - **Agent:** a centered mark and one sentence. The composer is a rounded field with the
-  send button inside. When no provider is connected, "Connect OpenAI…" sits in the
-  composer's action bar. No transcript is ever invented.
+  send button inside. When signed out, a white "Continue with ChatGPT" button sits in
+  the composer's action bar; while signing in or after an error, a status button
+  reopens the account dialog. No transcript is ever invented.
+- **ChatGPT account (handoff 0003):** the titlebar chip shows a status dot, "ChatGPT"
+  and the account or state, and opens a 460 px modal. The modal has one status row
+  (36 px badge, headline, one sentence), host errors verbatim with their code on a
+  second mono line, a bordered list of saved accounts where the active one is filled
+  and marked "In use", then actions and two facts: sign-in is kept on this computer,
+  and everything but the agent works offline. "Continue with ChatGPT" uses OpenAI's
+  white button format. Sign-out asks inline first. Escape closes without cancelling a
+  sign-in; "Cancel sign-in" is explicit. No field ever accepts a token, code or key.
 - **Notices:** absent, connecting and lost engine states show as one rounded strip
   under the titlebar. Lost connection uses an alert role.
 
