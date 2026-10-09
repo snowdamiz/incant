@@ -21,6 +21,9 @@ _export(exports, {
         return snapshotFromEngine;
     }
 });
+function isReady(read) {
+    return read.status === undefined || read.status === "ready";
+}
 const id = (value)=>value;
 function freeze(value) {
     if (value !== null && typeof value === "object" && !Object.isFrozen(value)) {
@@ -61,6 +64,55 @@ function origin(actor) {
     }
 }
 function snapshotFromEngine(read) {
+    if (!isReady(read)) {
+        const error = read.status === "error" ? read.error : undefined;
+        return {
+            connection: error ? {
+                status: "error",
+                error
+            } : {
+                status: "connecting"
+            },
+            hierarchy: error ? {
+                status: "error",
+                error
+            } : {
+                status: "loading"
+            },
+            schemas: {},
+            entities: {},
+            history: {
+                entries: [],
+                applied: 0
+            },
+            console: [],
+            diagnostics: error ? [
+                {
+                    id: "project-load",
+                    severity: "error",
+                    message: error.message,
+                    entity: null,
+                    component: null,
+                    path: null
+                }
+            ] : [],
+            provider: {
+                status: "not-connected",
+                provider: "openai"
+            },
+            agent: {
+                status: "unavailable",
+                reason: error?.message ?? "Loading project."
+            },
+            viewport: error ? {
+                status: "error",
+                error
+            } : {
+                status: "not-attached",
+                reason: "Loading project."
+            }
+        };
+    }
     const nodes = {};
     const entities = {};
     const roots = [];
@@ -204,39 +256,15 @@ class NativeBridge {
     listeners = new Set();
     historyListeners = new Set();
     pending = false;
+    refreshId = 0;
     chrome;
     provider = {
         status: "checking",
         provider: "openai"
     };
-    snapshot = {
-        connection: {
-            status: "connecting"
-        },
-        hierarchy: {
-            status: "loading"
-        },
-        schemas: {},
-        entities: {},
-        diagnostics: [],
-        history: {
-            entries: [],
-            applied: 0
-        },
-        console: [],
-        provider: {
-            status: "not-connected",
-            provider: "openai"
-        },
-        agent: {
-            status: "unavailable",
-            reason: "Connecting to engine."
-        },
-        viewport: {
-            status: "not-attached",
-            reason: "Connecting to native surface."
-        }
-    };
+    snapshot = snapshotFromEngine({
+        status: "loading"
+    });
     constructor(invoke){
         this.invoke = invoke;
     }
@@ -260,7 +288,7 @@ class NativeBridge {
         });
     }
     publish(read) {
-        this.read = freeze(read);
+        this.read = isReady(read) ? freeze(read) : undefined;
         const snapshot = {
             ...snapshotFromEngine(read),
             provider: this.provider
@@ -295,24 +323,25 @@ class NativeBridge {
         if (listen) await listen("incant:window-changed", (event)=>this.updateWindow(event.payload));
         this.updateWindow(await this.invoke("window_read"));
     }
+    async startEngineUpdates(listen) {
+        // Subscribe before the initial read, so completion during setup cannot be lost.
+        if (listen) await listen("incant:engine-changed", ()=>{
+            void this.start();
+        });
+        await this.start();
+    }
     async start() {
+        const request = ++this.refreshId;
         try {
-            this.publish(await this.invoke("engine_read"));
+            const read = await this.invoke("engine_read");
+            if (request === this.refreshId) this.publish(read);
         } catch (error) {
+            if (request !== this.refreshId) return;
             const result = failure(error);
-            if (result.ok) return;
-            this.snapshot = {
-                ...this.snapshot,
-                connection: {
-                    status: "error",
-                    error: result.error
-                },
-                hierarchy: {
-                    status: "error",
-                    error: result.error
-                }
-            };
-            this.listeners.forEach((fn)=>fn());
+            if (!result.ok) this.publish({
+                status: "error",
+                error: result.error
+            });
         }
     }
     async dispatch(command) {
@@ -325,6 +354,8 @@ class NativeBridge {
         };
         this.pending = true;
         try {
+            // A pending background read cannot overwrite the mutation response.
+            ++this.refreshId;
             let read;
             if (command.type === "history.undo" || command.type === "history.redo") {
                 read = await this.invoke("engine_history", {
@@ -430,7 +461,9 @@ function installNativeBridge() {
     if (!invoke || host.__INCANT_BRIDGE__) return undefined;
     const bridge = new NativeBridge(invoke);
     host.__INCANT_BRIDGE__ = bridge;
-    void bridge.start();
+    void bridge.startEngineUpdates(host.__TAURI__?.event?.listen).catch(()=>{
+        void bridge.start();
+    });
     void bridge.startHistoryRequests(host.__TAURI__?.event?.listen).catch(()=>console.error("Native history menu could not be connected."));
     void bridge.startProviderUpdates(host.__TAURI__?.event?.listen).catch(()=>bridge.updateProvider({
             status: "error",

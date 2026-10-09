@@ -1,6 +1,7 @@
 /** Native transport for the Claude-owned UI contract. All document writes use incant_cmd. */
 import type {
   BridgeSnapshot,
+  BridgeError,
   BridgeResult,
   EditorBridge,
   EditorCommand,
@@ -40,6 +41,7 @@ type History = {
   };
 };
 export interface EngineRead {
+  status?: "ready";
   project: Project;
   revision: number;
   can_redo: boolean;
@@ -51,6 +53,12 @@ export interface EngineRead {
   >;
   console: { id: string; level: "info" | "error"; message: string }[];
   viewport_error: string | null;
+}
+export type EngineResponse = EngineRead
+  | { status: "loading" }
+  | { status: "error"; error: BridgeError };
+function isReady(read: EngineResponse): read is EngineRead {
+  return read.status === undefined || read.status === "ready";
 }
 export type Invoke = <T>(
   command: string,
@@ -92,7 +100,21 @@ function origin(actor: History["actor"]): Origin {
       return { kind: "user" };
   }
 }
-export function snapshotFromEngine(read: EngineRead): BridgeSnapshot {
+export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
+  if (!isReady(read)) {
+    const error = read.status === "error" ? read.error : undefined;
+    return {
+      connection: error ? { status: "error", error } : { status: "connecting" },
+      hierarchy: error ? { status: "error", error } : { status: "loading" },
+      schemas: {}, entities: {}, history: { entries: [], applied: 0 }, console: [],
+      diagnostics: error ? [{ id: "project-load", severity: "error", message: error.message,
+        entity: null, component: null, path: null }] : [],
+      provider: { status: "not-connected", provider: "openai" },
+      agent: { status: "unavailable", reason: error?.message ?? "Loading project." },
+      viewport: error ? { status: "error", error }
+        : { status: "not-attached", reason: "Loading project." },
+    };
+  }
   const nodes: Record<string, HierarchyNode> = {};
   const entities: Record<string, EntityDetail> = {};
   const roots: Ulid[] = [];
@@ -227,23 +249,10 @@ export class NativeBridge implements EditorBridge {
   private listeners = new Set<() => void>();
   private historyListeners = new Set<(action: 'undo' | 'redo') => void>();
   private pending = false;
+  private refreshId = 0;
   private chrome: WindowChrome | undefined;
   private provider: ProviderState = { status: "checking", provider: "openai" };
-  private snapshot: BridgeSnapshot = {
-    connection: { status: "connecting" },
-    hierarchy: { status: "loading" },
-    schemas: {},
-    entities: {},
-    diagnostics: [],
-    history: { entries: [], applied: 0 },
-    console: [],
-    provider: { status: "not-connected", provider: "openai" },
-    agent: { status: "unavailable", reason: "Connecting to engine." },
-    viewport: {
-      status: "not-attached",
-      reason: "Connecting to native surface.",
-    },
-  };
+  private snapshot: BridgeSnapshot = snapshotFromEngine({ status: "loading" });
   constructor(private invoke: Invoke) {}
   getSnapshot = () => this.snapshot;
   subscribe = (listener: () => void) => {
@@ -262,8 +271,8 @@ export class NativeBridge implements EditorBridge {
       this.historyListeners.forEach((listener) => listener(payload));
     });
   }
-  private publish(read: EngineRead) {
-    this.read = freeze(read);
+  private publish(read: EngineResponse) {
+    this.read = isReady(read) ? freeze(read) : undefined;
     const snapshot = { ...snapshotFromEngine(read), provider: this.provider };
     this.snapshot = freeze(
       this.chrome ? { ...snapshot, window: this.chrome } : snapshot,
@@ -291,18 +300,20 @@ export class NativeBridge implements EditorBridge {
       );
     this.updateWindow(await this.invoke<WindowChrome>("window_read"));
   }
+  async startEngineUpdates(listen?: Listen) {
+    // Subscribe before the initial read, so completion during setup cannot be lost.
+    if (listen) await listen<unknown>("incant:engine-changed", () => { void this.start(); });
+    await this.start();
+  }
   async start() {
+    const request = ++this.refreshId;
     try {
-      this.publish(await this.invoke<EngineRead>("engine_read"));
+      const read = await this.invoke<EngineResponse>("engine_read");
+      if (request === this.refreshId) this.publish(read);
     } catch (error) {
+      if (request !== this.refreshId) return;
       const result = failure(error);
-      if (result.ok) return;
-      this.snapshot = {
-        ...this.snapshot,
-        connection: { status: "error", error: result.error },
-        hierarchy: { status: "error", error: result.error },
-      };
-      this.listeners.forEach((fn) => fn());
+      if (!result.ok) this.publish({ status: "error", error: result.error });
     }
   }
   async dispatch(command: EditorCommand): Promise<BridgeResult> {
@@ -316,6 +327,8 @@ export class NativeBridge implements EditorBridge {
       };
     this.pending = true;
     try {
+      // A pending background read cannot overwrite the mutation response.
+      ++this.refreshId;
       let read: EngineRead;
       if (command.type === "history.undo" || command.type === "history.redo") {
         read = await this.invoke<EngineRead>("engine_history", {
@@ -419,7 +432,8 @@ export function installNativeBridge(): NativeBridge | undefined {
   if (!invoke || host.__INCANT_BRIDGE__) return undefined;
   const bridge = new NativeBridge(invoke);
   host.__INCANT_BRIDGE__ = bridge;
-  void bridge.start();
+  void bridge.startEngineUpdates(host.__TAURI__?.event?.listen)
+    .catch(() => { void bridge.start(); });
   void bridge.startHistoryRequests(host.__TAURI__?.event?.listen)
     .catch(() => console.error("Native history menu could not be connected."));
   void bridge.startProviderUpdates(host.__TAURI__?.event?.listen).catch(() => bridge.updateProvider({ status: "error", provider: "openai", error: { code: "provider.transport", message: "Could not read the saved OpenAI connection. Restart Incant to retry." } }));

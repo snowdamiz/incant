@@ -52,6 +52,12 @@ within its documented workload.
 
 ## Active work
 
+- Responsive project loading is being integrated: file reads and journal recovery
+  run off the native event thread, with a 15-second timeout and rejected late
+  results. Three Rust tests and 225 UI/bridge tests pass locally. Claude handoff
+  0009 owns the loading/error presentation and missing keyboard-dialog focus ring.
+  Protected-folder access and rebuilt native verification remain unproven.
+
 - All three initial PRs are merged into main after their required checks passed:
   foundation #1, product site #2 and asset imports #3. The site deployed successfully
   at https://snowdamiz.github.io/incant/. Runtime asset-version work and renewed

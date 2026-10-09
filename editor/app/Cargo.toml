@@ -21,3 +21,7 @@ incant_render = { path = "../../crates/incant_render" }
 serde = { workspace = true }
 serde_json = { workspace = true }
 pollster = "0.4"
+thiserror = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"
