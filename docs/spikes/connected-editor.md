@@ -5,7 +5,7 @@ Date: 2026-10-08. Phase 0 follow-up, not phase approval.
 Claude Opus 5.5 implemented handoff 0006 through ACP: connected panels with thin
 separators, neutral graphite surfaces restored from the previous palette, and a
 titlebar logo inset/alignment correction. The landing page received the same
-palette direction through handoff 0007 in draft PR #2. The layout and typography
+palette direction through handoff 0007 in PR #2. The layout and typography
 remain Claude-owned. The primary implementation is in draft PR #1.
 
 The browser fixture measured a 15 pt logo-to-green-light gap and matched vertical

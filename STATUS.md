@@ -38,7 +38,7 @@ frame budget within its documented workload.
 
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing
-  page has the matching palette in draft PR #2. See
+  page has the matching palette in PR #2. See
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
   routes by focus; automated tests pass, but its final native interaction check
   remains pending. **Computer use, browser automation and screen capture are
