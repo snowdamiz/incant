@@ -59,10 +59,10 @@ within its documented workload.
   0009 owns the loading/error presentation and missing keyboard-dialog focus ring.
   Protected-folder access and rebuilt native verification remain unproven.
 
-- All three initial PRs are merged into main after their required checks passed:
-  foundation #1, product site #2 and asset imports #3. The site deployed successfully
-  at https://snowdamiz.github.io/incant/. Runtime asset-version work and renewed
-  Claude visual review continue separately. Merging does not approve a phase gate.
+- The first four PRs are merged into main after their required checks passed:
+  foundation #1, product site #2, asset imports #3 and runtime assets/UI polish #4. The site deployed successfully
+  at https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99 before merge. Responsive startup
+  and further Claude UI polish continue separately. Merging does not approve a phase gate.
 
 - Claude’s connected-panel redesign and neutral charcoal palette are integrated,
   including the titlebar logo spacing and safer account-dialog focus. The landing

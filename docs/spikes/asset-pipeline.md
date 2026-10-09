@@ -141,3 +141,9 @@ file watching/runtime reload, renderer/ECS integration, and editor/agent import
 entry points remain. Animated/skinned glTF, morphs, sparse accessors, extensions,
 non-triangle primitives, cameras, vertex colors and UV sets beyond UV0 are still
 rejected explicitly. The rest of Phase 1 and Core Sample remain open in PLAN.md.
+
+Runtime asset loading and handoff 0008 polish merged in PR #4 on 2026-10-09.
+All thirteen hosted checks passed on c063a99, including Windows/Linux editor
+builds and tests, three credential stores, all six platform probes and site
+browser tests. The exact revision and jobs are retained in
+[evidence/runtime-assets-2026-10-09.json](evidence/runtime-assets-2026-10-09.json).
