@@ -3,7 +3,7 @@ import WispMark from './WispMark.vue'
 
 const facts = [
   { title: 'Works offline', body: 'The editor needs no account and no connection.' },
-  { title: 'Keys stay local', body: 'Model calls go straight from your machine to your provider.' },
+  { title: 'Credentials stay local', body: 'Model calls go straight from your machine to your provider.' },
   { title: 'No shell access', body: 'The agent acts only through engine commands and sandboxed scripts.' },
 ] as const
 </script>

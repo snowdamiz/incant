@@ -16,8 +16,8 @@ import { links } from '../content'
 
         <div class="lg:col-span-4 lg:pb-3">
           <p class="text-pretty-safe max-w-md text-[17px] leading-relaxed text-muted sm:text-lg">
-            Incant is a 3D and 2D modeling tool, game engine and editor in one, where you and an AI agent build the same
-            world. Model, script, or just say what you want. Every change is readable, and every change can be undone.
+            A 3D and 2D modeling tool, game engine and editor in one. You and an AI agent build the same world, and every
+            change can be read and undone.
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
             <a
