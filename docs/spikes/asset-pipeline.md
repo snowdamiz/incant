@@ -48,7 +48,7 @@ The default model cache is `.incant/cache/models`; textures use
 files contain metadata, meshopt streams and KTX2 images. The loader still accepts
 version 1 model entries. Standalone texture manifests refer to content-hashed
 `.ktx2` files. Runtime CPU loaders work without source files; renderer/ECS loading
-and automatic source watching are still pending.
+is still pending. The authoring CLI now supports source watching and CPU reload; see [source watching](asset-source-watch.md).
 
 Keys include importer versions, dependency paths/hashes and texture usage. Model
 cache hits currently reparse geometry and image sources; avoiding that work is a
@@ -91,7 +91,7 @@ or measured streaming budget. Unknown runtime asset kinds fail explicitly.
 starting simulation and reports asset IDs, content fingerprints, generations and
 payload bytes alongside its state. Missing cooked content fails before ticks run.
 This is CPU loading and version management. Binding these versions to GPU/ECS
-instances and automatically watching/reimporting changed source files remain open.
+instances remains open. The authoring CLI now watches and reimports sources.
 No document edits bypass the shared command bus.
 
 ## Verification
@@ -136,8 +136,8 @@ separately locally verified pending hosted integration.
 
 ## Still open
 
-FBX conversion, WAV/OGG import, target block compression, streaming, automatic
-file watching/runtime reload, renderer/ECS integration, and editor/agent import
+FBX conversion, WAV/OGG import, target block compression, streaming, editor/GPU
+hot reload, renderer/ECS integration, and editor/agent import
 entry points remain. Animated/skinned glTF, morphs, sparse accessors, extensions,
 non-triangle primitives, cameras, vertex colors and UV sets beyond UV0 are still
 rejected explicitly. The rest of Phase 1 and Core Sample remain open in PLAN.md.
@@ -172,5 +172,8 @@ identities and same-ID/revision documents with different content, and malformed/
 ambiguous sources. Existing real CLI import/reimport and runtime tests also pass.
 Cooking can leave content-addressed cache files when preparation or commit fails;
 no authored document or history entry is partially published. Editor and agent
-import entry points, progress/cancellation and automatic source watching remain
-open. This service is not claimed as a completed asset hot-reload feature.
+import entry points and progress/cancellation remain open. Shared import
+preparation merged in PR #6 after all twelve hosted checks passed on `4bddf52`;
+[exact CI evidence](evidence/import-service-2026-10-09.json). The authoring CLI now
+uses this service for automatic [source watching and CPU reload](asset-source-watch.md).
+GPU/ECS and editor hot reload remain incomplete.

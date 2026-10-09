@@ -1,5 +1,6 @@
 //! Editor/tooling import coordination. Runtime cooked-asset loading stays in
 //! incant_assets, without a dependency on the authoring command bus.
+mod watch;
 use incant_assets::{AssetError, Dependency, TextureFormat, TextureUsage, cook_gltf, cook_texture};
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::{Asset, AssetImportSettings, Project, new_id};
@@ -9,6 +10,7 @@ use std::{
     path::{Component, Path},
 };
 use thiserror::Error;
+pub use watch::{SourceWatcher, WatchDiagnostic, WatchReport};
 
 pub const MAX_BATCH_IMPORTS: usize = 64;
 
@@ -78,6 +80,7 @@ pub struct CommittedImports {
 
 /// Capture under the caller's bus lock, then move into a worker. Cooking needs
 /// neither a live bus borrow nor the editor's event thread.
+#[derive(Clone)]
 pub struct ImportSnapshot {
     project: Project,
     revision: u64,
