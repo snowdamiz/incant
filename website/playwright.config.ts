@@ -5,6 +5,7 @@ const basePath = process.env.PAGES_BASE_PATH || '/'
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
+  workers: 2,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   reporter: 'list',
