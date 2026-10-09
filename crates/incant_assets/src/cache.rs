@@ -26,6 +26,7 @@ pub struct ModelMetadata {
 #[derive(Debug)]
 pub struct CookedModel {
     pub metadata: ModelMetadata,
+    pub materials: Vec<crate::Material>,
     pub meshes: Vec<Mesh>,
     pub images: Vec<crate::Texture>,
     pub cache_hit: bool,
@@ -59,6 +60,7 @@ fn key_path(cache: &Path, key: &str) -> Result<std::path::PathBuf> {
 pub fn cook_gltf(root: &Path, source: &Path, cache: &Path) -> Result<CookedModel> {
     let imported = import_gltf(root, source)?;
     let metadata = ModelMetadata::from(&imported);
+    crate::material::resolve(&metadata.materials, &metadata.textures, &imported.images)?;
     if let Ok(mut model) = load_model(cache, &metadata.fingerprint)
         && model.metadata == metadata
     {
@@ -201,8 +203,10 @@ fn decode_model(bytes: &[u8], key: &str) -> Result<CookedModel> {
         return Err(invalid("invalid model metadata reference"));
     }
     crate::gltf_import::validate_nodes(&metadata.nodes)?;
+    let materials = crate::material::resolve(&metadata.materials, &metadata.textures, &images)?;
     Ok(CookedModel {
         metadata,
+        materials,
         meshes,
         images,
         cache_hit: true,

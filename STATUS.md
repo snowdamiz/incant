@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- Imported glTF material previews now use typed metallic/roughness factors and
+  retained GPU base-color, metallic/roughness, normal, occlusion and emissive maps.
+  Color spaces, samplers/mips, alpha modes, sidedness and reflected instances are
+  implemented. 119 Rust behavior tests and seven explicit GPU tests pass locally.
+  Visual review, native texture-reimport verification and hosted checks remain
+  pending. Production lighting/render graph/postprocessing remain open. See
+  [GPU material evidence](docs/spikes/gpu-materials.md).
+
 - Isolated headless playback now accepts ticks/seconds and an optional compiled
   TypeScript behavior, with actual GPU captures at selected ticks. Authored
   documents/journals remain unchanged; bounded output and failure handling pass.
@@ -60,7 +68,7 @@ within its documented workload.
   integration with native source watching.
   A source-free imported-model run and a compiled TypeScript run produce real
   frame sequences. Claude approved the six captured frames; PR #12 is stacked
-  on source-watch PR #11 and awaits hosted checks. See
+  on main after source-watch PR #11 merged and awaits hosted checks. See
   [headless playback evidence](docs/spikes/headless-playback.md).
 
 - Saved native projects now watch registered sources and dependencies on a worker,
@@ -69,8 +77,8 @@ within its documented workload.
   on repair. Actual native external edits, Undo/Redo, error/recovery, journal
   replay and reopening the rebuilt app pass. 115 Rust tests, two explicit GPU
   tests and 282 UI/bridge tests pass locally. Claude approved the native sequence
-  and final wrapping fix at 1440×900 and 1000×650; PR #11 targets main and
-  awaits hosted checks.
+  and final wrapping fix at 1440×900 and 1000×650. All three applicable hosted
+  checks passed on `083bc8e`; PR #11 merged as `dd9c292` on 2026-10-09.
   See [editor source watching](docs/spikes/editor-source-watch.md).
 
 - Imported model GPU geometry is implemented locally: indexed/instanced buffers,

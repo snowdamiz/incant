@@ -17,6 +17,7 @@ pollster = "0.4"
 bytemuck = { version = "1.25", features = ["derive"] }
 glam = "0.32"
 png = "0.18"
+half = "=2.7.1"
 
 [dev-dependencies]
 tempfile = "3.27"

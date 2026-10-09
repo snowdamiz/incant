@@ -46,7 +46,12 @@ impl Instance {
         if !world.is_finite() || !inverse.is_finite() {
             return Err(SceneError::TransformRange);
         }
-        let columns = inverse.transpose().to_cols_array_2d();
+        let mut columns = inverse.transpose().to_cols_array_2d();
+        columns[0][3] = if world.as_dmat4().determinant() < 0. {
+            -1.
+        } else {
+            1.
+        };
         Ok(Self {
             world: world.to_cols_array_2d(),
             normal: [columns[0], columns[1], columns[2]],

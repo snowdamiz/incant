@@ -1,6 +1,10 @@
-//! Phase 0 native-surface and actual-GPU screenshot proof, not a production PBR renderer.
+//! Native rendering and GPU readback with retained imported material previews.
+//! The production render graph, authored lighting and postprocessing remain open.
+mod material_pipeline;
+mod materials;
 mod models;
 mod scene;
+mod studio;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;
@@ -43,7 +47,7 @@ pub struct Renderer {
     pub adapter_name: String,
     pipelines: Mutex<HashMap<(wgpu::TextureFormat, bool), wgpu::RenderPipeline>>,
     models: Mutex<models::ModelCache>,
-    model_pipelines: Mutex<HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>>,
+    materials: materials::MaterialSystem,
 }
 impl Renderer {
     pub async fn new(
@@ -64,6 +68,7 @@ impl Renderer {
                 ..Default::default()
             })
             .await?;
+        let materials = materials::MaterialSystem::new(&device, &queue);
         Ok(Self {
             device,
             queue,
@@ -71,7 +76,7 @@ impl Renderer {
             adapter_name,
             pipelines: Mutex::new(HashMap::new()),
             models: Mutex::new(HashMap::new()),
-            model_pipelines: Mutex::new(HashMap::new()),
+            materials,
         })
     }
     pub fn headless() -> Result<Self> {
@@ -458,7 +463,7 @@ impl Renderer {
 }
 fn camera(aspect: f32) -> Mat4 {
     Mat4::perspective_rh(50f32.to_radians(), aspect, 0.1, 1000.)
-        * Mat4::look_at_rh(Vec3::new(6., 5., 9.), Vec3::ZERO, Vec3::Y)
+        * Mat4::look_at_rh(Vec3::from_array(studio::EYE), Vec3::ZERO, Vec3::Y)
 }
 fn vertices(transforms: &[Mat4], aspect: f32) -> Vec<Vertex> {
     let camera = camera(aspect);

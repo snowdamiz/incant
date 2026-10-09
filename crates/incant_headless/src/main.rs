@@ -442,7 +442,7 @@ fn main() -> Result<()> {
             }
             fs::write(&output, bytes)?;
             print(
-                json!({"output":output,"adapter":renderer.adapter_name,"width":width,"height":height,"geometry":scene.stats(),"shading":"diagnostic"}),
+                json!({"output":output,"adapter":renderer.adapter_name,"width":width,"height":height,"geometry":scene.stats(),"shading":scene.shading()}),
             )?;
         }
         Cli::Rpc { project, journal } => rpc(project, journal)?,
