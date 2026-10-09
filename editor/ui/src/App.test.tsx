@@ -394,4 +394,43 @@ describe('editor shell', () => {
       'Scale',
     ]);
   });
+
+  it('presents native light colour arrays as R/G/B channels and keeps spatial arrays as X/Y/Z', async () => {
+    // Shape observed from the native PointLight schema: an untitled 3-number "color" with no widget hint.
+    const base = fixtureSnapshot('sample');
+    const [id, entity] = Object.entries(base.entities).find(([, e]) => e.kind !== 'scene')!;
+    const snapshot: BridgeSnapshot = {
+      ...base,
+      diagnostics: [],
+      schemas: {
+        ...base.schemas,
+        PointLight: {
+          type: 'PointLight',
+          version: 1,
+          title: 'PointLight',
+          properties: {
+            color: { type: 'array', items: { type: 'number' }, minItems: 3, maxItems: 3 },
+            offset: { type: 'array', items: { type: 'number' }, minItems: 3, maxItems: 3 },
+          },
+        },
+      },
+      entities: {
+        ...base.entities,
+        [id]: {
+          ...entity,
+          components: [{ type: 'PointLight', schemaVersion: 1, value: { color: [1, 0.8, 0.5], offset: [4, 5, 6] } }],
+        },
+      },
+    };
+    const { bridge } = recordingBridge([]);
+    const { container } = renderWith({ ...bridge, getSnapshot: () => snapshot });
+    fireEvent.click(treeRow(entity.name));
+    const section = screen.getByRole('region', { name: 'PointLight' });
+    const color = within(section).getByRole('group', { name: 'Color' });
+    expect([...color.querySelectorAll('.vector__axis-name')].map((n) => n.textContent)).toEqual(['R', 'G', 'B']);
+    expect((within(color).getByRole('textbox', { name: 'Green' }) as HTMLInputElement).value).toBe('0.8');
+    const offset = within(section).getByRole('group', { name: 'Offset' });
+    expect([...offset.querySelectorAll('.vector__axis-name')].map((n) => n.textContent)).toEqual(['X', 'Y', 'Z']);
+    await expectNoAxeViolations(container);
+  });
 });
