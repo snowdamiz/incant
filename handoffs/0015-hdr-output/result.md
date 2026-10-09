@@ -1,17 +1,23 @@
-# 0015 HDR output: tone-mapping design — first-pass result
+# 0015 HDR output: tone-mapping design and headless capture review — result
 
 ## Status
 
-First pass complete: operator chosen, WGSL snippet written, studio commentary updated.
-**Pixel review pending.** There are no headless or native captures yet, so this
-result approves no rendered output. No phase gate is approved or claimed.
+- **First pass (design):** complete. The operator is chosen, the WGSL snippet is written
+  and the studio commentary is updated.
+- **Priority follow-up (headless review):** complete. The verdict is in the section
+  "Headless capture review" at the end of this file. Output structure is approved for
+  these headless captures. Material color fidelity is **not** approved.
+- **Native review:** pending. The 1440x900 and 1000x650 native captures do not exist
+  yet, and no native output is approved. No phase gate is approved or claimed.
 
 - Model: Claude Opus 5.5, model ID `claude-opus-5-5`.
 - Transport: Claude Code agent session launched by the handoff harness in this
   worktree, under director-authorized `bypassPermissions`. The session cannot
   independently confirm the ACP hop. No model substitution was made.
-- Packet: `handoffs/0015-hdr-output/brief.md`. It contained no priority revisions or
-  new director feedback beyond the brief itself. No earlier partial attempt existed.
+- Packet: `handoffs/0015-hdr-output/brief.md`. The first pass had no priority
+  revisions. The current packet adds a priority follow-up: review the integrated HDR
+  captures, apply the corrected license pin, and treat function-local exposure as
+  settled. Those are applied below.
 
 ## Changed paths
 
@@ -21,8 +27,12 @@ result approves no rendered output. No phase gate is approved or claimed.
 - `crates/incant_render/src/studio.rs`. Comments only. `EYE`, `LIGHT_DIRECTION`,
   `LIGHT_RADIANCE` and `DIFFUSE_ENVIRONMENT` are unchanged.
 - `handoffs/0015-hdr-output/result.md` (this file).
+- `handoffs/0015-hdr-output/review/*.png`, follow-up only. Four before-and-after
+  comparison sheets built from Astra's readbacks.
+- `crates/incant_render/src/studio.rs`, follow-up only. Comments now record the
+  headless review. The constants are still unchanged.
 
-No other code, UI, fixture or test was edited.
+No other code, UI, fixture or test was edited in either pass.
 
 ## Chosen operator: Khronos PBR Neutral
 
@@ -68,12 +78,16 @@ geometry semantics.
 | Item | Value |
 |---|---|
 | Reference code | `PBR_Neutral/pbrNeutral.glsl` in github.com/KhronosGroup/ToneMapping |
-| Pinned commit | `f5dc101149fc5c85c0f9852fe2ba438853e8a7d1`, the latest change to that file |
+| Pinned commit | `180b1a7bddec33f73fe41712a2963cc3ad8e5547`, corrected by Astra during integration |
 | Code license | Apache-2.0, Copyright 2024 The Khronos Group Inc., per the repository's `.reuse/dep5` |
 | Specification | `PBR_Neutral/README.md`, CC-BY-4.0. It is cited as a reference only, and no text was copied |
 | Upstream NOTICE file | None exists, so there is no NOTICE text to propagate |
 
-I fetched these directly from the primary repository on 2026-10-09.
+I fetched these directly from the primary repository on 2026-10-09. The first pass
+pinned `f5dc101`, the last commit that changed the GLSL file. That commit predates
+`.reuse/dep5`, which returns 404 there, so it could not anchor the license declaration.
+I re-checked Astra's correction upstream. At `180b1a7`, `dep5` assigns Apache-2.0 to
+`pbrNeutral.glsl`, and the GLSL is byte-identical at both commits.
 
 Apache-2.0 obligations and how they are handled:
 
@@ -81,9 +95,10 @@ Apache-2.0 obligations and how they are handled:
   identifier, the Khronos copyright line and the pinned source URL.
 - **State modifications.** The header says the file was ported to WGSL, gained a fixed
   exposure and had its commentary rewritten. The constants and operations are unchanged.
-- **Provide a copy of the license with distributions.** This is not done yet. The repo
-  has no project license and no third-party notices file, and creating one is outside
-  this scope. See the open questions below.
+- **Provide a copy of the license with distributions.** Astra resolved this during
+  integration. The full text is in `licenses/Apache-2.0.txt`, and the attribution is in
+  `THIRD_PARTY_NOTICES.md`. Astra reports that the development app bundle and the
+  desktop CI artifacts include both. I did not inspect a built bundle.
 
 ### Port fidelity notes for Astra's review
 
@@ -145,7 +160,7 @@ Sweep checks in the same Python port:
 **Not run, and not required in this pass:** cargo build, clippy, GPU execution of the
 snippet, headless captures and native captures. Integration belongs to Astra.
 
-## Expected appearance after integration, to verify in capture review
+## Expected appearance after integration (first-pass predictions)
 
 These are predictions, not observations.
 
@@ -175,7 +190,7 @@ These are predictions, not observations.
 - The #141519 backdrop and editor chrome should match their current colors exactly.
   I will sample backdrop pixels to confirm this.
 
-## Pending pixel review
+## Pending pixel review (first-pass plan; headless outcome below)
 
 Once Astra's integration lands, I will review headless and native captures for:
 
@@ -188,14 +203,172 @@ Once Astra's integration lands, I will review headless and native captures for:
 
 No screenshots exist for this pass, and none are claimed.
 
-## Open questions
+## First-pass open questions, now resolved
 
-1. **License text distribution.** The shipped engine will embed Apache-2.0 code from
-   Khronos. Who should add a third-party notices file containing the Apache-2.0 text,
-   and where? The project's own license is also undecided, per PLAN.md open question 6.
-2. **Exposure ownership.** Exposure is a constant inside the snippet. If Astra prefers
-   a uniform, or a Rust-side constant next to the studio values, that is a binding
-   change for Astra to make. The curve itself should stay unchanged.
-3. **Composition order.** The brief says the backdrop composes after tone mapping and
-   the sRGB encode applies after that. Please confirm the encode is applied once, to
-   the tone-mapped scene only, and never to the display-referred backdrop.
+1. **License text distribution.** Resolved by Astra with `licenses/Apache-2.0.txt` and
+   `THIRD_PARTY_NOTICES.md`. The project's own license is still undecided, per
+   PLAN.md open question 6, but that is separate from this notice.
+2. **Exposure ownership.** Resolved by the packet. Exposure stays a function-local
+   constant until authored renderer settings exist.
+3. **Composition order.** Resolved by the integrated `output.wgsl`, which I read.
+   Chrome and backdrop are converted to linear display RGB, mixed with the tone-mapped
+   scene by coverage, and sRGB-encoded once at the end. They never pass through
+   `tone_map`. The captures confirm this.
+
+## Headless capture review (priority follow-up)
+
+Reviewed on 2026-10-09 by Claude Opus 5.5, model ID `claude-opus-5-5`. I reviewed all
+20 PNGs in `artifacts/hdr-review/`, which are Astra's GPU readbacks. I compared them
+with the 19 captures in `artifacts/material-before/`. I viewed every image and decoded
+every pixel. The textured-cube and default-metal captures come with the native
+follow-up, so they are not part of this review.
+
+### Verdict
+
+| Area | Verdict for these headless captures |
+|---|---|
+| Neutral #141519 backdrop | **Approved.** Exact in all 20 captures |
+| Transparency and composition | **Approved.** Exact to linear-space math, with no halos |
+| Specular shoulder | **Approved.** Smooth, neutral, unclipped |
+| Neutral and grey materials | **Approved.** Neutral, about 6 to 7 code values darker |
+| Saturated colors at or below 0.8 | **Approved.** Unchanged |
+| Muted and textured color fidelity | **Not approved.** Chroma rises visibly |
+| Emissive authored colors | **Not approved.** Same toe effect, and no future fix applies |
+| Dark-material legibility | **Not judged.** No dark-albedo fixture exists. The swatch shows strong toe crush |
+
+No tuning was made. `studio.rs` and the exposure constant are unchanged. The reasons
+are below.
+
+### Evidence
+
+Each sheet shows the before capture on the left and the HDR capture on the right.
+Magenta panels mark new fixtures that have no before capture.
+
+- `handoffs/0015-hdr-output/review/colors-before-after.png`: base-color texture,
+  reimported blue texture, metallic-roughness map and emissive map.
+- `handoffs/0015-hdr-output/review/neutrals-before-after.png`: lit double-sided back,
+  varying normal map, normal map and occlusion map.
+- `handoffs/0015-hdr-output/review/transparency-before-after.png`: layered transparency,
+  opaque between transparent, opaque alpha zero and the transparent-over-black fixture.
+- `handoffs/0015-hdr-output/review/highlight-and-emissive-before-after.png`: glossy
+  highlight, linear filter, sixteen-bit color and double-sided back.
+
+The sheets are derived from Astra's readbacks only, by pixel copy. I built them, and
+decoded the PNGs, with a pure-Python decoder and encoder in the gitignored
+`target/hdr-review-tools/`, which is not committed. I took no screenshots of my own and
+used no shell screen capture.
+
+### Findings
+
+**1. The backdrop is preserved exactly.** Every capture contains #141519 as
+(20, 21, 25). Its pixel count matches the before capture in every pair, so tone mapping
+never touches it. `mask-discarded` is identical to its before capture.
+
+**2. Transparency blends in HDR and composes correctly.** The center of the
+transparent-over-black fixture reads 181, which is 0.46 linear as the packet predicts.
+A strip where the half-alpha white layer covers only the backdrop reads 177. That
+matches an independent computation: tone-map 1.0 to 0.869, then mix it 50% with the
+linear backdrop. Where only the opaque black layer shows, pixels read (0, 0, 0). No
+other values appear anywhere, so there are no halos or fringes. Layered transparency
+keeps its center (188, 6, 138) within one code value of before.
+
+**3. The specular shoulder behaves as designed.** The glossy fixture is neutral in
+every pixel. It peaks at 249 with a soft plateau and falls to 237 at the quad edge, in
+one-code steps across both axes. There is no banding and no clip to 255. The highlight
+reads as a bright, soft hotspot rather than a hard white disc. The quad spans only 12
+code values, so the highlight is gentle. That is acceptable for a neutral preview, and
+a specular environment will change it anyway.
+
+**4. The reference swatches match the specification.** All 12 columns are uniform and
+equal Astra's test values: 0, 2, 105, 181, 226, 240, 250, 253, 255, 255, then
+(253, 156, 156) and (255, 255, 255). Saturated red at f16 maximum turning white is the
+intended desaturation of extreme highlights.
+
+**5. Neutral materials stay neutral and slightly darker.** Lit greys drop by the
+designed 0.04 linear offset. The lit white face moves from 231 to 225. The normal map
+moves from 182 to 175, and the occlusion map from 187 to 180. The relative occlusion
+and normal-map contrast is unchanged. I judge this loss of brightness too small to
+justify retuning.
+
+**6. Muted colors gain chroma, which is a visible regression.** HSL saturation in the
+table is computed from the sRGB values.
+
+| Capture | Before | After | Saturation before, after |
+|---|---|---|---|
+| base-color-texture | (117, 61, 36) | (112, 49, 6) | 0.53, 0.90 |
+| reimported-blue-texture | (36, 117, 231) | (7, 112, 228) | 0.80, 0.94 |
+| metallic-roughness-map | (167, 132, 98) | (159, 121, 80) | 0.28, 0.33 |
+| emissive-map and sixteen-bit-color | (128, 64, 32) | (124, 55, 4) | 0.60, 0.94 |
+| opaque-alpha-zero, emissive red 1.0 | (255, 0, 0) | (241, 34, 34) | 1.00, 0.88 |
+
+Hue angle is preserved, as the operator guarantees. Perceptually, though, the brown
+texture reads as burnt orange and the soft blue reads as a pure saturated blue. A
+material preview that turns authored brown into orange does not meet the brief's
+"preserve color relationships in ordinary material values" for these colors. Linear
+filter and mip captures, (188, 188, 0), are unchanged, because a zero channel incurs
+no offset.
+
+**Cause.** PBR Neutral subtracts 0.04 from every channel, with a quadratic toe below
+0.08. The operator assumes that a glossy dielectric under a roughly unit-intensity white
+environment always carries about 0.04 of Fresnel reflection, and the offset removes it.
+This preview has no specular environment, so the offset removes energy that was never
+added. A dark channel such as the brown's blue, at 0.017 linear, collapses to 0.002.
+I checked this diagnosis numerically by adding a uniform specular lift before the
+operator:
+
+| Color, before HDR | No lift | Lift 0.012, about 0.04 times the 0.30 fill | Lift 0.04, unit environment |
+|---|---|---|---|
+| brown (117, 61, 36) | (112, 49, 6) | (113, 52, 17) | (118, 63, 40) |
+| blue (36, 117, 231) | (7, 112, 229) | (17, 113, 229) | (40, 118, 231) |
+| tan (167, 132, 98) | (159, 121, 81) | (161, 124, 86) | (167, 132, 98) |
+
+With a unit-intensity specular environment, the authored colors return to within 4
+code values. Emissive and other unlit content never receives that lift, so emissive
+colors keep the shift whatever lighting is added.
+
+**Why I did not tune.** None of the permitted controls fixes the cause.
+
+- **Exposure scales colors but cannot undo a constant offset.** At exposure 2.0 the
+  brown's saturation is still 0.75, against 0.53 before. Whites sit at 249, deep in the
+  shoulder, and emissive red turns visibly pink at (251, 101, 101). Changing exposure
+  would also invalidate Astra's fixed emissive and swatch expectations without a visual
+  gain.
+- **Radiance and fill scale lit colors proportionally,** with the same limitation. A
+  lift of about 8% would restore neutral brightness to the 0014 values, but neutrals
+  already read well. The specular increment will recalibrate studio levels anyway.
+
+**7. Dark-material legibility cannot be judged from these captures.** No fixture
+contains a dark albedo. The only evidence is the 0.01 swatch, which displays as 2,
+against 25 without tone mapping, plus the collapsed dark channels in finding 6. The
+first-pass prediction still stands: a 0.18 albedo lit only by the fill displays near 37,
+against 66 before. I request a dark-albedo fixture, such as albedo 0.04 and 0.1 on a
+fill-lit face, for the next capture round.
+
+### Recommendations
+
+These are for Astra and the director. Changing the operator is outside this packet.
+
+1. **Calibrate the specular-environment increment to the operator.** Dielectrics should
+   receive close to unit-intensity F0 reflection, about 0.04, before re-review. The table
+   above predicts that this restores textured color fidelity.
+2. **Decide whether emissive and unlit fidelity matters.** If authored emissive colors
+   must display as authored, PBR Neutral's toe will always shift them. That would argue
+   for revisiting the operator or its offset parameter later. The decision belongs to
+   the director, not to me.
+3. **Add a dark-albedo fixture,** as described in finding 7.
+
+### Native review
+
+Native 1440x900 and 1000x650 captures will follow after Astra's build. Rounded-mask
+edges, chrome colors and editor composition at those sizes remain unreviewed and
+unapproved. Only Astra captures native UI.
+
+### Follow-up commands
+
+```
+python3 -I target/hdr-review-tools/stats.py artifacts/hdr-review artifacts/material-before
+python3 -I target/hdr-review-tools/sheet.py artifacts/hdr-review artifacts/material-before <out.png> <names...>
+```
+
+These scripts are scratch tools, not committed. No build, cargo test or GPU run was
+performed in this follow-up, as the packet allows.
