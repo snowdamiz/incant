@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "ColliderShape": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "half_extents": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            },
+            "type": {
+              "const": "box",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "half_extents"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "radius": {
+              "format": "double",
+              "type": "number"
+            },
+            "type": {
+              "const": "sphere",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "radius"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Capsule along local Y; half_height excludes the hemispherical ends.",
+          "properties": {
+            "half_height": {
+              "format": "double",
+              "type": "number"
+            },
+            "radius": {
+              "format": "double",
+              "type": "number"
+            },
+            "type": {
+              "const": "capsule",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "half_height",
+            "radius"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "density": {
+      "format": "double",
+      "maximum": 100000,
+      "minimum": 0.001,
+      "type": "number"
+    },
+    "filter": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "friction": {
+      "format": "double",
+      "maximum": 10,
+      "minimum": 0,
+      "type": "number"
+    },
+    "memberships": {
+      "description": "Collision requires both membership/filter intersections to be nonzero.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "restitution": {
+      "format": "double",
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "sensor": {
+      "type": "boolean"
+    },
+    "shape": {
+      "$ref": "#/$defs/ColliderShape"
+    }
+  },
+  "required": [
+    "shape",
+    "density",
+    "friction",
+    "restitution",
+    "sensor",
+    "memberships",
+    "filter"
+  ],
+  "title": "Collider",
+  "type": "object"
+}

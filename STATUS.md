@@ -53,14 +53,17 @@ within its documented workload.
 
 ## Active work
 
-- An isolated physics candidate probe runs pinned Jolt and Rapier with fixed
-  stepping and repeated position checks. Native Jolt contact, raycast, rollback,
-  invalid-input, stale-handle and sensor checks pass. The selected Jolt binding
-  refuses iOS simulator/Web targets; Rapier builds there. The native position
-  streams match across hosted macOS, Windows and Linux at `6118219`; all six checks pass
-  at `6118219` and PR #22 merged as `a6fd91f`. The engine integration decision
-  remains open. No physics backend
-  has been added to the engine. See [candidate evidence](docs/spikes/physics-candidates.md).
+- Physics runtime integration is in progress on `impl/physics-runtime`. The
+  [candidate probe](docs/spikes/physics-candidates.md) passed all six checks and
+  merged as PR #22 (`a6fd91f`). The engine now takes PLAN.md's Rapier fallback
+  after measured Jolt binding portability gaps; see ADR 0003. Typed bodies,
+  primitive colliders, fixed stepping, sensors, masks and raycasts connect to
+  isolated play and the shared command bus. Nine new behavior tests, Clippy and
+  295 UI tests/build pass locally. Claude handoff 0022 owns the new Inspector
+  presentation and pixel review. Full workspace checks, target execution and
+  native acceptance remain pending. Character controllers, mesh/compound
+  colliders, hierarchy/scale, rollback snapshots and device performance remain
+  open. See [runtime evidence](docs/spikes/physics-runtime.md).
 
 - Opt-in directional cascades are implemented with scoped Claude appearance
   and native acceptance. The scheduled depth pass honors imported caster flags,

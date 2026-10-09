@@ -1,9 +1,9 @@
 # Physics candidate feasibility
 
 The isolated probe in `tools/probes/physics` runs pinned Jolt and Rapier
-candidates without adding a physics dependency to Incant. PLAN.md still chooses
-Jolt; no replacement decision is made. The engine's colliders, rigid bodies,
-character controller, queries and script integration remain open.
+candidates in an independent workspace. The subsequent engine integration takes
+the plan's Rapier fallback; see [ADR 0003](../adr/0003-physics.md) and
+[runtime integration](physics-runtime.md). This probe alone is not engine support.
 
 On Apple M5 Pro, three independent 600-step simulations of 512 boxes produce
 byte-identical position streams within each candidate. Jolt's one/four-worker

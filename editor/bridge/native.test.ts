@@ -52,6 +52,26 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it('preserves tagged shape alternatives and refuses ambiguous unions', () => {
+    const current = read();
+    const variant = (tag: string) => ({ type: 'object', required: ['type', 'radius'], properties: {
+      type: { type: 'string', const: tag }, radius: { type: 'number' },
+    } });
+    current.schemas.Collider = { properties: { shape: { $ref: '#/$defs/Shape' } }, $defs: {
+      Shape: { oneOf: [variant('sphere'), variant('capsule')] },
+    } };
+    const before = JSON.stringify(current.schemas);
+    const field = snapshotFromEngine(current).schemas.Collider!.properties.shape!;
+    expect(field).toMatchObject({ type: 'tagged-union', discriminator: 'type', variants: {
+      sphere: { type: 'object', properties: { type: { type: 'string', enum: ['sphere'] }, radius: { type: 'number' } } },
+      capsule: { type: 'object' },
+    } });
+    expect(JSON.stringify(current.schemas)).toBe(before);
+    for (const alternatives of [[variant('sphere'), variant('sphere')], [{ type:'number' }, { type:'string' }], [{ ...variant('sphere'), required: [] }, variant('capsule')]]) {
+      current.schemas.Collider = { properties: { shape: { oneOf: alternatives } } };
+      expect(snapshotFromEngine(current).schemas.Collider!.properties.shape!.type).toBe('unsupported');
+    }
+  });
   it('resolves optional nullable local definitions without mutating the engine schema', () => {
     const current = read();
     current.schemas.DirectionalLight = {

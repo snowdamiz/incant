@@ -78,7 +78,7 @@ fn hierarchy_composes_rotation_scale_and_parent_local_motion_before_snapshot() {
         initial.entities[&child_id].parent.as_ref(),
         Some(&parent_id)
     );
-    engine.run_ticks(60);
+    engine.run_ticks(60).unwrap();
     let current = engine.snapshot();
     near(current.entities[&child_id].translation, [2., 0., 0.]);
     near(
@@ -132,7 +132,7 @@ fn sync_reparents_and_replaces_bindings_atomically_without_rewinding_time() {
     }
     project.scenes.insert(scene.id.clone(), scene);
     let mut engine = Engine::new(&project).unwrap();
-    engine.run_ticks(30);
+    engine.run_ticks(30).unwrap();
     let before = engine.snapshot();
     assert_eq!(before.entities[&child_id].mesh.as_ref(), Some(&binding));
     near(
@@ -168,7 +168,7 @@ fn sync_reparents_and_replaces_bindings_atomically_without_rewinding_time() {
     );
     assert_eq!(synced.tick, 30);
     assert!((synced.elapsed_seconds - 0.5).abs() < 1e-12);
-    engine.run_ticks(120);
+    engine.run_ticks(120).unwrap();
     assert!((engine.snapshot().elapsed_seconds - 1.5).abs() < 1e-12);
 }
 
@@ -240,7 +240,7 @@ fn sync_removes_deleted_entities_and_resets_components_while_moving_scenes() {
     scene.entities.insert(deleted.id.clone(), deleted);
     project.scenes.insert(scene.id.clone(), scene);
     let mut engine = Engine::new(&project).unwrap();
-    engine.run_ticks(60);
+    engine.run_ticks(60).unwrap();
     near(
         engine.snapshot().entities[&moving_id].translation,
         [4., 0., 0.],
@@ -255,7 +255,7 @@ fn sync_removes_deleted_entities_and_resets_components_while_moving_scenes() {
     project.scenes.clear();
     project.scenes.insert(scene_id.clone(), replacement);
     engine.sync(&project).unwrap();
-    engine.step();
+    engine.step().unwrap();
     let state = engine.snapshot();
     assert_eq!(state.entities.len(), 2);
     assert!(!state.entities.contains_key(&deleted_id));

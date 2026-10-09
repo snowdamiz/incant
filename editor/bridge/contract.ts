@@ -141,6 +141,13 @@ export type FieldSchema = {
       readonly description?: string;
       readonly properties: Readonly<Record<string, FieldSchema>>;
     }
+  | {
+      readonly type: 'tagged-union';
+      readonly title?: string;
+      readonly description?: string;
+      readonly discriminator: string;
+      readonly variants: Readonly<Record<string, FieldSchema>>;
+    }
   | { readonly type: string & {}; readonly title?: string; readonly description?: string });
 
 export interface ComponentSchema {

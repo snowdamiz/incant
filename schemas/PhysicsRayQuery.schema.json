@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "direction": {
+      "description": "Normalized by the runtime; a zero vector is rejected.",
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "exclude_entity": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "filter": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "include_sensors": {
+      "type": "boolean"
+    },
+    "max_distance": {
+      "format": "double",
+      "type": "number"
+    },
+    "memberships": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "origin": {
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "scene_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "scene_id",
+    "origin",
+    "direction",
+    "max_distance",
+    "include_sensors",
+    "memberships",
+    "filter"
+  ],
+  "title": "RayQuery",
+  "type": "object"
+}

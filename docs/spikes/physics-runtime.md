@@ -1,0 +1,51 @@
+# Physics runtime integration — in progress
+
+The engine now uses pinned Rapier 0.36 with enhanced determinism. The fallback
+choice and Jolt binding evidence are recorded in ADR 0003; no phase gate is
+claimed. This working increment has not yet completed native visual review,
+full workspace/hosted checks or target execution.
+
+`RigidBody`, `Collider` and `AngularVelocity` are typed authored components.
+Create and modify them through ordinary `incant_cmd` transactions, including
+complete multi-component creation, Undo/Redo and script-generated edits. Shapes
+are boxes (half extents), spheres and local-Y capsules. Fixed/dynamic/velocity
+kinematic bodies, density, friction, restitution, gravity scale, damping, sleeping,
+CCD, sensor overlaps and two-sided collision masks are implemented. Gravity is
+world -Y at 9.81 m/s²; the document tick rate controls fixed stepping.
+
+Each scene has an independent world. The ECS publishes updated transforms and
+linear/angular velocities to the isolated play bus before scripts run. Scripts
+write the same component commands; the next sync changes only affected solver
+state. Unchanged body handles, contacts and sleep state survive every tick. The
+authored project and its journal never change during play.
+
+`api.raycast` is read-only, normalizes a nonzero direction, uses world meters,
+returns a stable entity ID, distance, point and normal, and supports masks,
+sensors and exclusion. Exact-distance ties use stable IDs. Up to 256 queries per
+tick share the script deadline. `api.triggerEvents()` returns sorted sensor
+entry/exit transitions for the completed tick. Native query bindings survive
+compatible hot reload; plain ScriptHost use without a play session fails clearly.
+API structural types are generated from Rust schemas.
+
+PhysicsRuntime tests exposed that Rapier 0.36's collision-only refresh clears
+new-body flags without registering simulation islands. Incant therefore never
+uses that refresh before stepping: queries after author edits inspect current
+shapes directly, while stepped worlds use Rapier's BVH. Tests cover immediate
+queries, removed/reused internal handles and exact agreement between an untouched
+world and a world echoed through document synchronization at every tick.
+
+Current implementation boundary: physics entities must be scene roots with unit
+Transform scale; size the shape explicitly. These restrictions are validated on
+the complete transaction and never silently flatten a hierarchy. Colliders alone
+are stationary. Fixed bodies reject nonzero velocity. Unsupported shapes fail.
+Position and velocity ranges are validated; a numerical solver failure stops
+further simulation until play restarts. Character controllers, mesh/compound
+colliders, hierarchy/scale support and serialized rollback remain open.
+
+Initial new behavior checks: six physics runtime cases, two script integration
+cases and one command-bus atomicity/Undo/Redo case pass. They cover settling and
+sleep, replay from authored state, exact sync preservation, all three primitive
+shapes, high-speed CCD, kinematics/rotation, masks, scene isolation, sensor
+entry/exit, ray hit/exclusion/tie/invalid input, script impulse-by-velocity,
+query budget, hot reload and unchanged author data. This is deterministic local
+behavior evidence, not live-device or complete engine acceptance.

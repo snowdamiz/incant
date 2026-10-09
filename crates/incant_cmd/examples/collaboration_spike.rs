@@ -17,7 +17,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     scene.entities.insert(entity.id.clone(), entity);
     project.scenes.insert(scene.id.clone(), scene);
     let mut bevy = Engine::new(&project)?;
-    bevy.run_ticks(120);
+    bevy.run_ticks(120)?;
     let position = bevy.snapshot().entities[&entity_id].translation;
     let mut author = CommandBus::new(project)?;
     author.execute(

@@ -1,0 +1,53 @@
+{
+  "$defs": {
+    "BodyMotion": {
+      "enum": [
+        "fixed",
+        "dynamic",
+        "kinematic"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "angular_damping": {
+      "format": "double",
+      "maximum": 100,
+      "minimum": 0,
+      "type": "number"
+    },
+    "can_sleep": {
+      "type": "boolean"
+    },
+    "ccd": {
+      "type": "boolean"
+    },
+    "gravity_scale": {
+      "format": "double",
+      "maximum": 100,
+      "minimum": -100,
+      "type": "number"
+    },
+    "linear_damping": {
+      "format": "double",
+      "maximum": 100,
+      "minimum": 0,
+      "type": "number"
+    },
+    "motion": {
+      "$ref": "#/$defs/BodyMotion"
+    }
+  },
+  "required": [
+    "motion",
+    "gravity_scale",
+    "linear_damping",
+    "angular_damping",
+    "can_sleep",
+    "ccd"
+  ],
+  "title": "RigidBody",
+  "type": "object"
+}
