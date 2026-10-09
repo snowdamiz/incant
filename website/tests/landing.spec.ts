@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const shots = resolve(here, '../../handoffs/0005-landing-page/screenshots')
+// Ordinary verification must not overwrite Claude's reviewed evidence.
+const shots = process.env.INCANT_EVIDENCE_DIR ?? resolve(here, '../test-results/visual')
 const axeSource = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8')
 
 const viewports = [

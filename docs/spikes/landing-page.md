@@ -51,8 +51,32 @@ handoff reference, test output, project document, or Rust artifact is included.
 - The bootstrap branch has no `tools/tests/`; the later implementation branch's
   tool and editor test suites are outside this independent landing-page branch.
 
-Production browser/build measurements and Claude's final visual findings are
-recorded after integration below.
+### Integrated website results
+
+- Claude visual commit `7557c10` was integrated as `dc9c11b`, preserving its
+  `Built-by: claude` provenance. Its templates, styles and artwork were retained.
+- The only cherry-pick conflict was the independently created Playwright config.
+  The integrated config uses a portable browser executable override, two workers,
+  matching preview base paths, isolated server startup and CI retry/trace support.
+- Fresh `npm ci` and `PAGES_BASE_PATH=/incant/ npm run build`: passed, including
+  strict checking of Vue, TypeScript, build config and tests.
+- All **22 production browser checks passed in 9.4 seconds** using local Chrome.
+  Coverage includes real asset loading, no third-party requests, no overflow at
+  320/390/768/1440px, resolved anchors, skip navigation, mobile menu dismissal,
+  workflow tab keyboard selection, FAQ disclosure and reduced motion. axe found
+  zero violations, including WCAG A/AA scans at 390 and 1440px.
+- Integrated bundle: JavaScript 119.81 kB raw / 43.00 kB gzip; CSS 52.94 kB raw /
+  9.57 kB gzip; local fonts 48.25 and 40.40 kB. Total deployed size: 268 kB on disk.
+- Claude reviewed actual desktop, tablet, mobile, menu and workflow-state renders
+  and fixed clipping, wrapping, overlap and menu-background issues. See the full
+  findings and browser limitations in `handoffs/0005-landing-page/result.md`.
+- Normal test captures go to ignored `website/test-results/visual/`; the reviewed
+  screenshots are retained unchanged in the handoff. An explicit
+  `INCANT_EVIDENCE_DIR` override can regenerate evidence intentionally.
+
+These are website checks, not engine or live-provider release evidence. Firefox,
+Safari and physical-device visual checks were not run. Public CTA destinations
+are the real repository and its product plan; they require repository access.
 
 ## Hosting prerequisite
 

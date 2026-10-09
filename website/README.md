@@ -22,6 +22,11 @@ For installed Chrome, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to its executabl
 instead of downloading the Playwright browser. `npm run build` includes strict
 Vue/TypeScript checking. Browser checks exercise the production build.
 
+Browser screenshots from normal verification are saved in ignored
+`test-results/visual/`. Claude's reviewed screenshots are retained separately in
+`handoffs/0005-landing-page/screenshots/`. To deliberately regenerate that evidence,
+set `INCANT_EVIDENCE_DIR` to its absolute directory when running the tests.
+
 ## Deployment
 
 `.github/workflows/website.yml` checks pull requests that touch the site. On every
