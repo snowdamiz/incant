@@ -70,11 +70,11 @@ within its documented workload.
 
 - Native editor imports now prepare outside the event thread/document lock and
   commit with revision checks through the existing persistent history. Two new
-  Rust behavior tests and 265 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
+  Rust behavior tests and 267 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
   handoff 0010 supplies the integrated asset library and import/reimport interface.
   Real native batch import, Undo/Redo, texture reimport, error recovery, concurrent
-  edits, stale-import rejection and text/project Undo separation pass. Claude is
-  reviewing native captures and correcting busy-state copy. Automatic editor
+  edits, stale-import rejection and text/project Undo separation pass. Claude reviewed the actual native captures and the four visual corrections;
+  all native requests pass, including the final paste interaction checks. Automatic editor
   watching remains open.
   Agent asset list/inspect/import now use the shared service and a project-bound
   filesystem capability. Three new agent tests and a live saved-session import
@@ -90,7 +90,7 @@ within its documented workload.
   presentation and keyboard-dialog focus ring; the native app builds successfully.
   Protected-folder access remains unproven. The rebuilt app opens both default
   and saved disposable projects; native account focus behavior passes, with the
-  ring appearance now under Claude review.
+  visible keyboard ring also approved by Claude.
 
 - The first seven PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
@@ -110,12 +110,12 @@ within its documented workload.
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo routes by focus. Actual macOS CUA checks now confirm
   project Cmd+Z/redo, isolated text-field Undo, safe account-dialog focus, divider
   keyboard resizing and fullscreen transitions. Claude reviewed the native captures;
-  the capture indicator still obscures the traffic lights. On 2026-10-09 the director explicitly permitted computer use
+  an unobscured native capture now confirms correct traffic-light/logo spacing. On 2026-10-09 the director explicitly permitted computer use
   and screen capture again when needed. Claude’s handoff 0008 fixes tablet workflow layout, platform-mark balance, clipped
   inspector paths and F2 name selection. Rebuilt native F2 rename and Undo pass. The transport now preserves schema field
   order (223 tests passed); native Translation/Rotation/Scale order now also passes.
-  Claude confirmed settled fullscreen and found a missing native dialog focus ring;
-  minimum-size and visible traffic-light checks remain open.
+  Claude confirmed settled fullscreen. The dialog ring fix, minimum-size tabs,
+  detail focus rings and visible traffic-light positioning now pass native review.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are

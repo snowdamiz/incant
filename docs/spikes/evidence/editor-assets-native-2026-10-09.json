@@ -14,14 +14,13 @@
     "concurrent_edit": "PASS: entity rename committed during cooking; History remained responsive; asset.conflict then rejected stale batch (expected revision 7, current 8), preserving paths and rename",
     "keyboard": "PASS: Tab/Down/Enter reach texture details; heading receives focus; Escape restores asset row; Home reaches model; model has no texture interpretation control",
     "text_undo": "PASS: Cmd+Z and native Edit > Undo changed path typing only; assets/history unchanged",
-    "responsive_layout": "AX confirms Back to assets replaces Close panel after native bottom-right quarter placement; 300px dock. Pixel review remains Claude-owned.",
+    "responsive_layout": "PASS: narrow native pane replaces list, retains 300px dock, and shows complete tab labels/counts; wide pane, selected controls, heading rings approved by Claude.",
     "inspector_order": "PASS: native Translation, Rotation, Scale order",
     "saved_account": "PASS: saved connection restored in rebuilt app; no sign-in or Keychain prompt; no account actions invoked",
-    "account_focus": "PASS: prior rebuilt app pointer/keyboard-opened account dialog focused Close; Escape restored opener; pixel focus-ring review pending",
+    "account_focus": "PASS: pointer/keyboard dialog opens on Close; Escape restores opener; Claude confirms visible Close focus ring.",
     "restart": "PASS: quitting and reopening the same saved project recovered all 10 registered assets, four history entries and the concurrent entity rename; saved account remained connected."
   },
-  "visual_review": "Claude reviewed original native captures, approved controls, errors, inspector and account focus ring, and visible traffic-light placement. Five follow-up corrections integrated; their native re-captures await Claude review.",
-  "known_followup": "Review final native re-captures for corrected busy copy, tabs, heading ring and result scroll.",
+  "visual_review": "PASS: Claude Opus 5.5 through ACP reviewed original captures and all final re-captures. Review commit 6a06e3e; handoffs/0010-asset-library/result.md contains exact verdicts.",
   "private_capture_directory": "artifacts/native-import-review/ (ignored; account label may be present; do not publish)",
   "limitations": [
     "No manual Windows/Linux checks required by director; hosted checks remain applicable.",
@@ -32,13 +31,23 @@
     "ui_tests": 267,
     "paste_selection": "PASS: replaces fully selected path; unselected caret retains it and inserts lines below",
     "busy_copy": "PASS in native accessibility for actual large imports at wide and narrow sizes; private captures supplied to Claude",
-    "reimport_result": "PASS: operation completes after scrolling and history advances; result visibility awaiting pixel verdict",
+    "reimport_result": "PASS: operation completes after scrolling; history advances and Claude confirms full result visibility.",
     "captures": [
       "r01-busy-copy-wide.jpg",
       "r01b-busy-copy-narrow.jpg",
       "r03-reimport-result.jpg",
       "r04-heading-focus-narrow.jpg",
       "r04-heading-focus-wide.jpg"
-    ]
+    ],
+    "visual_verdict": "PASS R1\u2013R4: busy copy wide/narrow, complete narrow tab labels/counts, reimport result visible, heading ring wraps title with padding. R5 native paste behavior also passes."
+  },
+  "validation": {
+    "rust_release_tests": 102,
+    "ui_bridge_tests": 267,
+    "clippy": "pass",
+    "native_debug_build": "pass",
+    "native_release_build": "pass",
+    "generated_contracts": "pass",
+    "khronos_ktx2": "pass"
   }
 }

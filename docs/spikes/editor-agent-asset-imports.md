@@ -2,8 +2,8 @@
 
 2026-10-09. The native editor and headless agent now use the same import service
 as the authoring CLI. Claude handoff 0010 supplies the integrated asset library
-and import/reimport interface. Native behavior checks pass; Claude is reviewing
-actual WebKit captures and finishing visual corrections.
+and import/reimport interface. Native behavior checks pass; Claude reviewed
+actual WebKit captures and approved the subsequent visual corrections.
 
 ## Native editor backend
 
@@ -81,7 +81,7 @@ asset rendering. The run used 5,244 input and 210 output tokens over four steps.
 
 ## Integrated native verification
 
-The combined UI/bridge suite passes 265 tests, the production UI builds, and
+The combined UI/bridge suite passes 267 tests, the production UI builds, and
 `tools/editor-dev.py` builds the native Tauri bundle. Actual macOS CUA checks on a
 disposable saved project verify the unavailable unsaved-project reason, a real
 model/normal-map batch, one-step Undo/Redo, Linear reimport with preserved texture
@@ -100,9 +100,14 @@ The saved account restores without a new login or Keychain prompt.
 [Sanitized native evidence](evidence/editor-assets-native-2026-10-09.json).
 
 Raw captures remain in ignored artifacts because the account label can appear.
-Claude is reviewing wide and narrow native layouts, controls, focus rings and
-chrome; Astra does not self-approve pixels. Busy-state copy still requires a
-correction to reflect concurrent edits. Browser fixtures remain synthetic evidence.
+Claude reviewed wide and narrow native layouts, controls, focus rings and chrome.
+Its corrections to busy copy, narrow tabs, heading focus and reimport result
+scrolling pass a second native review. Selected-path multiline paste is verified
+through native input. The unobscured original wide capture confirms traffic-light
+spacing; other captures retain the system capture overlay.
+[Claude review](../../handoffs/0010-asset-library/result.md). Browser fixtures remain
+synthetic evidence. All 102 workspace release tests, Clippy, generated contracts,
+Khronos KTX2 validation and the native release build pass locally.
 
 File picking/copying, automatic editor source watching, GPU/ECS binding and the
 rest of Phase 1 remain open.
