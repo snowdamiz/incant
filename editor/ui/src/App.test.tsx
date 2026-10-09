@@ -114,7 +114,9 @@ describe('editor shell', () => {
     const root = treeRow('Dock Prototype');
     act(() => root.focus());
     fireEvent.keyDown(root, { key: 'F2' });
-    const input = screen.getByLabelText('New name');
+    const input = screen.getByLabelText<HTMLInputElement>('New name');
+    // Typing replaces the old name rather than appending to it.
+    expect([input.selectionStart, input.selectionEnd]).toEqual([0, 'Dock Prototype'.length]);
     fireEvent.change(input, { target: { value: 'Harbor' } });
     fireEvent.keyDown(input, { key: 'Enter' });
     await waitFor(() => expect(commands).toHaveLength(1));
