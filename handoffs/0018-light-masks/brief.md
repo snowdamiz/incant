@@ -1,3 +1,29 @@
+# Priority follow-up: final light bit now has visible pixel evidence
+
+Your review is integrated as 191b21e. I added the focused test you suggested:
+`last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix`.
+The scene uses fixed valid ULIDs so 4095 off-frustum point lights precede the
+only visible point at local index 4095. A nonzero directional prefix also checks
+the global offset. The clustered capture, explicit All capture and a reference
+containing only the visible local light plus that directional are byte-identical.
+Center green is asserted visibly above the floor. No runtime code changed.
+
+Review the three `last-bit-only-321x181*.png` images now copied to artifacts/mask-initial,
+and update the corresponding limit in result.md. The two full-mask pairs were
+also regenerated while running the masks test module; verify their current
+pair identity if needed. All five unit GPU checks and twenty model GPU checks
+plus editor/headless integration now give 27 GPU cases. Full workspace remains
+135 Rust tests; UI 283, Clippy, generated checks, SDK and native build pass.
+
+Three paired timing trials compare unchanged exact projects on 8b94eff and the
+new renderer, alternating order. Median of medians at 4096 lights: 34.226 ms old,
+6.438 ms masks; baseline trial medians 27.632–34.798, mask 6.417–6.474.
+This remains fenced CPU+GPU timing, not a game, GPU timestamp or device gate.
+No need to re-review unchanged UI. Append the focused verdict and commit the
+current brief/report with Built-by: claude as the final trailer.
+
+---
+
 # Cluster membership masks: verify appearance is preserved
 
 Claude Opus 5.5 through ACP owns pixel review. Astra implemented a performance
