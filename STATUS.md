@@ -96,8 +96,8 @@ within its documented workload.
   only Problems, Console and History. All 276 UI tests pass; native batch, busy,
   failure recovery, keyboard and hidden-Inspector checks pass in the replacement.
   Claude approved the replacement's native captures at wide/minimum sizes and
-  supplied a final import-row separator polish. PR #8 awaits its final hosted
-  checks before merging. Automatic editor
+  supplied a final import-row separator polish. All twelve hosted checks passed
+  on `73b817b`; PR #8 merged into main as `cda5ef3`. Automatic editor
   watching remains open.
   Agent asset list/inspect/import now use the shared service and a project-bound
   filesystem capability. Three new agent tests and a live saved-session import
@@ -115,9 +115,10 @@ within its documented workload.
   and saved disposable projects; native account focus behavior passes, with the
   visible keyboard ring also approved by Claude.
 
-- The first seven PRs are merged into main after their required checks passed:
+- The first eight PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
-  responsive loading/focus #5, shared import batches #6 and source watching #7. The site deployed at
+  responsive loading/focus #5, shared import batches #6, source watching #7 and
+  editor/agent imports with the redesigned asset workspace #8. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
   before merge. Editor/agent imports are the current Phase 1 increment. Merging does

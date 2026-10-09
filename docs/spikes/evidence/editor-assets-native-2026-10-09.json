@@ -103,5 +103,73 @@
       "main_bundle_gzip_kb": 101.58,
       "bundle_budget_kb": 110
     }
+  },
+  "merge": {
+    "pull_request": 8,
+    "head": "73b817bc2bdc440ba867dbaf9d43355e7cc59d20",
+    "commit": "cda5ef3c0f9c4c68cc3b4c14e53e06980f4398d6",
+    "merged_at": "2026-10-09T16:16:03Z",
+    "checks": [
+      {
+        "name": "storage (macos-latest)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502134/job/113901456784"
+      },
+      {
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502149/job/113901596832"
+      },
+      {
+        "name": "checks",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502171/job/113901648619"
+      },
+      {
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502201/job/113901457574"
+      },
+      {
+        "name": "storage (windows-latest)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502134/job/113901457055"
+      },
+      {
+        "name": "desktop (ubuntu-latest, Linux)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502149/job/113901596573"
+      },
+      {
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502201/job/113901458313"
+      },
+      {
+        "name": "storage (ubuntu-latest)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502134/job/113901456984"
+      },
+      {
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502201/job/113901457560"
+      },
+      {
+        "name": "web",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502201/job/113901457259"
+      },
+      {
+        "name": "ios",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502201/job/113901457550"
+      },
+      {
+        "name": "android",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37954502201/job/113901457420"
+      }
+    ]
   }
 }
