@@ -8,7 +8,7 @@ Retain the plan’s Jolt choice behind an adapter with stable entity IDs. No raw
 
 ## Evidence and implementation boundary
 
-This phase has only deterministic linear motion for integration tests. Jolt has not been implemented or measured; that work begins after the Phase 0 gate.
+This phase has only deterministic linear motion for integration tests. Jolt is not integrated into the engine. Phase 1 work is authorized while open Phase 0 gates remain deferred. The isolated [candidate probe](../spikes/physics-candidates.md) now measures native Jolt/Rapier behavior and exposes binding portability limits; it does not change the chosen backend.
 
 ## Consequences and revisit trigger
 
