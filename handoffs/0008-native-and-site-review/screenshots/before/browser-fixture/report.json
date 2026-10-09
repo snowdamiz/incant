@@ -1,0 +1,351 @@
+{
+  "browser": "Chrome 155.0.8059.40 headless",
+  "data": "SAMPLE FIXTURE / evidence test doubles, not engine state",
+  "shots": [
+    "01-sample-1440x900.png",
+    "02-entity-selected-keyboard-focus-1440x900.png",
+    "40-detail-top-left-1440.png",
+    "41-detail-top-right-1440.png",
+    "42-detail-agent-1440.png",
+    "43-detail-dock-1440.png",
+    "03-console-1440x900.png",
+    "04-history-1440x900.png",
+    "05-rename-attempt-fixture-1440x900.png",
+    "06-shortcuts-dialog-1440x900.png",
+    "07-hierarchy-scrolled-1440x900.png",
+    "09-resized-by-drag-1440x900.png",
+    "09b-separator-keyboard-focus-1440x900.png",
+    "44-detail-titlebar-focus-1440.png",
+    "45-detail-tab-focus-1440.png",
+    "08-panels-hidden-1440x900.png",
+    "01-sample-1280x800.png",
+    "02-entity-selected-keyboard-focus-1280x800.png",
+    "01-sample-1000x650.png",
+    "02-entity-selected-keyboard-focus-1000x650.png",
+    "10-agent-signed-out-1440x900.png",
+    "11-account-signed-out-1440x900.png",
+    "11-account-signed-in-multi-1440x900.png",
+    "12-account-keyboard-open-focus-1440x900.png",
+    "13-account-signout-question-focus-1440x900.png",
+    "11-account-browser-1440x900.png",
+    "11-account-error-while-signed-in-1440x900.png",
+    "20-state-large-1280x800.png",
+    "20-state-empty-1280x800.png",
+    "20-state-loading-1280x800.png",
+    "20-state-hierarchy-error-1280x800.png",
+    "20-state-connection-error-1280x800.png",
+    "21-no-engine-1280x800.png",
+    "30-titlebar-mac-double-1440.png",
+    "31-window-mac-double-1440x900.png",
+    "30-titlebar-windows-double-1440.png",
+    "31-window-windows-double-1440x900.png"
+  ],
+  "axe": [
+    {
+      "label": "sample, entity selected, 1440x900",
+      "violations": []
+    },
+    {
+      "label": "history tab, 1440x900",
+      "violations": []
+    },
+    {
+      "label": "account dialog signed-in-multi",
+      "violations": []
+    }
+  ],
+  "layout": [
+    {
+      "label": "sample 1440x900",
+      "viewportHost": [
+        246,
+        76,
+        862,
+        552
+      ],
+      "viewportRadii": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+      ],
+      "hierarchy": [
+        0,
+        40,
+        245,
+        832
+      ],
+      "inspector": [
+        1109,
+        40,
+        331,
+        534
+      ],
+      "dock": [
+        246,
+        629,
+        862,
+        243
+      ],
+      "agent": [
+        1109,
+        575,
+        331,
+        297
+      ],
+      "minTextPx": 11,
+      "pageOverflow": false
+    },
+    {
+      "label": "entity selected 1440x900",
+      "viewportHost": [
+        246,
+        76,
+        862,
+        552
+      ],
+      "viewportRadii": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+      ],
+      "hierarchy": [
+        0,
+        40,
+        245,
+        832
+      ],
+      "inspector": [
+        1109,
+        40,
+        331,
+        534
+      ],
+      "dock": [
+        246,
+        629,
+        862,
+        243
+      ],
+      "agent": [
+        1109,
+        575,
+        331,
+        297
+      ],
+      "minTextPx": 11,
+      "pageOverflow": false
+    },
+    {
+      "label": "after dragging the hierarchy separator 80 px right",
+      "viewportHost": [
+        326,
+        76,
+        782,
+        552
+      ],
+      "viewportRadii": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+      ],
+      "hierarchy": [
+        0,
+        40,
+        325,
+        832
+      ],
+      "inspector": [
+        1109,
+        40,
+        331,
+        534
+      ],
+      "dock": [
+        326,
+        629,
+        782,
+        243
+      ],
+      "agent": [
+        1109,
+        575,
+        331,
+        297
+      ],
+      "minTextPx": 11,
+      "pageOverflow": false
+    },
+    {
+      "label": "sample 1280x800",
+      "viewportHost": [
+        233,
+        76,
+        726,
+        479
+      ],
+      "viewportRadii": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+      ],
+      "hierarchy": [
+        0,
+        40,
+        232,
+        732
+      ],
+      "inspector": [
+        960,
+        40,
+        320,
+        467
+      ],
+      "dock": [
+        233,
+        556,
+        726,
+        216
+      ],
+      "agent": [
+        960,
+        508,
+        320,
+        264
+      ],
+      "minTextPx": 11,
+      "pageOverflow": false
+    },
+    {
+      "label": "entity selected 1280x800",
+      "viewportHost": [
+        233,
+        76,
+        726,
+        479
+      ],
+      "viewportRadii": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+      ],
+      "hierarchy": [
+        0,
+        40,
+        232,
+        732
+      ],
+      "inspector": [
+        960,
+        40,
+        320,
+        467
+      ],
+      "dock": [
+        233,
+        556,
+        726,
+        216
+      ],
+      "agent": [
+        960,
+        508,
+        320,
+        264
+      ],
+      "minTextPx": 11,
+      "pageOverflow": false
+    },
+    {
+      "label": "sample 1000x650",
+      "viewportHost": [
+        233,
+        76,
+        446,
+        369
+      ],
+      "viewportRadii": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+      ],
+      "hierarchy": [
+        0,
+        40,
+        232,
+        582
+      ],
+      "inspector": [
+        680,
+        40,
+        320,
+        321
+      ],
+      "dock": [
+        233,
+        446,
+        446,
+        176
+      ],
+      "agent": [
+        680,
+        362,
+        320,
+        260
+      ],
+      "minTextPx": 11,
+      "pageOverflow": false
+    },
+    {
+      "label": "entity selected 1000x650",
+      "viewportHost": [
+        233,
+        76,
+        446,
+        369
+      ],
+      "viewportRadii": [
+        "0px",
+        "0px",
+        "0px",
+        "0px"
+      ],
+      "hierarchy": [
+        0,
+        40,
+        232,
+        582
+      ],
+      "inspector": [
+        680,
+        40,
+        320,
+        321
+      ],
+      "dock": [
+        233,
+        446,
+        446,
+        176
+      ],
+      "agent": [
+        680,
+        362,
+        320,
+        260
+      ],
+      "minTextPx": 11,
+      "pageOverflow": false
+    }
+  ],
+  "errors": [],
+  "focus": {
+    "onOpen": "Close",
+    "onSignOutQuestion": "Keep signed in"
+  }
+}
