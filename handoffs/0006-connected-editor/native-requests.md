@@ -85,7 +85,11 @@ normally with the project above. Put the files in `screenshots/after/native-cua/
 
 The C1 items above remain useful but are lower priority than C2.
 
-## R2. Viewport clear colour (taste, director's call)
+## R2. Viewport clear colour: implemented by Astra in `005088d`
+
+Implemented: the clear is now sRGB `#141519`, converted per attachment format. It is in the
+rebuilt bundle, because `libincant_render` was compiled after the change and the app was
+linked after that. C2 captures will show it natively. Original request:
 
 The wgpu clear is linear 0.03, which shows as neutral grey (about `#3f3f3f` after colour
 management). It is the brightest surface in the frame. Requested clear: sRGB `#141519`

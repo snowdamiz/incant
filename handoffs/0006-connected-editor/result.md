@@ -159,8 +159,9 @@ did not start, were not touched. I never inspected credentials or account state.
   selection, rename, undo and redo, panel resize, focus or the account dialog. Unit tests
   cover these behaviours with a recording bridge, and Chrome covers the fixture. Rename and undo
   in the fixture only show the read-only explanation.
-- **Viewport clear colour.** The neutral grey wgpu clear is the brightest surface. Request R2
-  proposes `#141519` and is the director's call.
+- **Viewport clear colour.** Astra implemented my request R2 in `005088d`, a neutral
+  `#141519` clear in place of the old grey. It is in the rebuilt bundle but not yet seen in a
+  native capture.
 - **Platforms.** There is no Windows or Linux evidence. The Windows caption buttons were checked
   only with a browser double.
 - **Small text.** Status-line key hints stay at 11 px, the documented minimum.
@@ -168,4 +169,5 @@ did not start, were not touched. I never inspected credentials or account state.
 
 ## Open questions
 
-1. Should the viewport clear move to the neutral `#141519` (R2)?
+1. After the C2 native captures, does the director accept the neutral frame and the new
+   logo position? The phase gate stays with the director.
