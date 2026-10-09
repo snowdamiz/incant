@@ -272,6 +272,9 @@ export class NativeBridge implements EditorBridge {
     });
   }
   private publish(read: EngineResponse) {
+    // A render/status event can read while a command is still in flight. Its
+    // older document must not replace the command's newer revision on arrival.
+    if (isReady(read) && this.read && read.project.id === this.read.project.id && read.revision < this.read.revision) return;
     this.read = isReady(read) ? freeze(read) : undefined;
     const snapshot = { ...snapshotFromEngine(read), provider: this.provider };
     this.snapshot = freeze(

@@ -52,6 +52,30 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it("does not roll back a completed edit when a concurrent event read returns late", async () => {
+    let finishEdit: (value: EngineRead) => void = () => { throw new Error("No edit"); };
+    let finishRead: (value: EngineRead) => void = () => { throw new Error("No read"); };
+    let initialized = false;
+    const invoke: Invoke = async <T>(command: string) => {
+      if (!initialized) { initialized = true; return read() as T; }
+      return await new Promise<EngineRead>((resolve) => {
+        if (command === "engine_execute") finishEdit = resolve;
+        else finishRead = resolve;
+      }) as T;
+    };
+    const bridge = new NativeBridge(invoke);
+    await bridge.start();
+    const editing = bridge.dispatch({ type: "entity.rename", entity: entity as Ulid, name: "Changed" });
+    const refreshing = bridge.start();
+    const updated = read();
+    updated.revision = 8;
+    updated.project.scenes[scene]!.entities[entity]!.name = "Changed";
+    finishEdit(updated);
+    expect((await editing).ok).toBe(true);
+    finishRead(read());
+    await refreshing;
+    expect(bridge.getSnapshot().entities[entity]?.name).toBe("Changed");
+  });
   it("reports a missing or rejected event subscription instead of waiting indefinitely", async () => {
     const invoke = vi.fn(async () => read()) as Invoke;
     for (const listen of [undefined, async () => { throw new Error("Event permission denied"); }]) {
