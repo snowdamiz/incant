@@ -35,7 +35,7 @@ pub(crate) struct MaterialSystem {
     pub globals: wgpu::BindGroupLayout,
     environment: wgpu::BindGroupLayout,
     lighting: wgpu::BindGroupLayout,
-    layout: wgpu::BindGroupLayout,
+    pub layout: wgpu::BindGroupLayout,
     fallback: wgpu::TextureView,
     sampler: wgpu::Sampler,
     pipelines: Mutex<HashMap<PipelineKey, wgpu::RenderPipeline>>,

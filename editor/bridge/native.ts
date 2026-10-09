@@ -51,7 +51,9 @@ export interface EngineRead {
   applied: number;
   schemas: Record<
     string,
-    { title?: string; properties?: Record<string, FieldSchema>; order?: readonly string[] }
+    { title?: string; properties?: Record<string, Record<string, unknown>>;
+      $defs?: Record<string, Record<string, unknown>>; required?: readonly string[];
+      order?: readonly string[] }
   >;
   console: { id: string; level: "info" | "error"; message: string }[];
   viewport_error: string | null;
@@ -63,6 +65,44 @@ export type EngineResponse = EngineRead
   | { status: "error"; error: BridgeError };
 function isReady(read: EngineResponse): read is EngineRead {
   return read.status === undefined || read.status === "ready";
+}
+/** Resolve only local definitions and a single nullable alternative for display.
+ * Recursive/unknown schema forms remain explicit unsupported fields. No fetches.
+ */
+function inspectorField(
+  raw: Record<string, unknown>, defs: Record<string, Record<string, unknown>>,
+  depth = 0,
+): FieldSchema {
+  const unsupported: FieldSchema = { type: "unsupported" };
+  if (depth > 16) return unsupported;
+  const metadata = {
+    ...(typeof raw.title === "string" ? { title: raw.title } : {}),
+    ...(typeof raw.description === "string" ? { description: raw.description } : {}),
+  };
+  if (typeof raw.$ref === "string") {
+    const name = raw.$ref.startsWith("#/$defs/") ? raw.$ref.slice(8) : "";
+    const target = Object.hasOwn(defs, name) ? defs[name] : undefined;
+    return target ? { ...inspectorField(target, defs, depth + 1), ...metadata } : unsupported;
+  }
+  if (Array.isArray(raw.anyOf)) {
+    const alternatives = raw.anyOf as Record<string, unknown>[];
+    if (alternatives.length !== 2 || alternatives.some(v => !v || typeof v !== "object")) return unsupported;
+    const concrete = alternatives.filter(v => v.type !== "null");
+    if (concrete.length !== 1) return unsupported;
+    return { ...inspectorField(concrete[0]!, defs, depth + 1), ...metadata, nullable: true };
+  }
+  if (typeof raw.type !== "string") return unsupported;
+  const field = { ...raw };
+  if (raw.type === "object" && raw.properties && typeof raw.properties === "object") {
+    const required = Array.isArray(raw.required) ? raw.required : [];
+    field.properties = Object.fromEntries(Object.entries(raw.properties).map(([key, child]) => [key, {
+      ...inspectorField(child as Record<string, unknown>, defs, depth + 1),
+      optional: !required.includes(key),
+    }]));
+  } else if (raw.type === "array" && raw.items && typeof raw.items === "object") {
+    field.items = inspectorField(raw.items as Record<string, unknown>, defs, depth + 1);
+  }
+  return field as FieldSchema;
 }
 export type Invoke = <T>(
   command: string,
@@ -183,7 +223,10 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
       type,
       version: 1,
       title: schema.title ?? type,
-      properties: schema.properties ?? {},
+      properties: Object.fromEntries(Object.entries(schema.properties ?? {}).map(([key, field]) => [key, {
+        ...inspectorField(field, schema.$defs ?? {}),
+        optional: schema.required !== undefined && !schema.required.includes(key),
+      }])),
       ...(schema.order ? { order: schema.order } : {}),
     };
   }

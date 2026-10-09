@@ -17,6 +17,7 @@ mod output;
 mod preview_environment;
 mod resource_error;
 mod scene;
+mod shadows;
 mod studio;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
@@ -57,6 +58,7 @@ pub struct Renderer {
     materials: materials::MaterialSystem,
     environments: environment::EnvironmentSystem,
     lighting: lighting::LightingSystem,
+    shadows: shadows::ShadowSystem,
     frames: frame::FrameCache,
     output: output::OutputPass,
     graph: graph::FrameGraph,
@@ -82,6 +84,7 @@ impl Renderer {
             .await?;
         let environments = environment::EnvironmentSystem::new(&device, &queue);
         let lighting = lighting::LightingSystem::new(&device);
+        let shadows = shadows::ShadowSystem::new(&device);
         let materials =
             materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
         Ok(Self {
@@ -94,6 +97,7 @@ impl Renderer {
             materials,
             environments,
             lighting,
+            shadows,
             frames: Default::default(),
             output: Default::default(),
             graph: Default::default(),

@@ -7,6 +7,10 @@ pub(crate) fn annotate_schemas(
     registry: &mut std::collections::BTreeMap<String, serde_json::Value>,
 ) {
     use serde_json::json;
+    registry
+        .get_mut("DirectionalLight")
+        .expect("registered light schema")["$defs"]["DirectionalShadows"]["properties"]["distance"]
+        ["x-incant-unit"] = json!("m");
     for kind in ["DirectionalLight", "PointLight", "SpotLight"] {
         let properties =
             &mut registry.get_mut(kind).expect("registered light schema")["properties"];

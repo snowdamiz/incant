@@ -36,6 +36,7 @@ pub(crate) struct GpuLights {
     directional: u32,
     local: u32,
     positions: Vec<glam::Vec3>,
+    pub shadows: Vec<crate::shadows::ShadowLight>,
 }
 impl GpuLights {
     pub fn validate_view(&self, view: glam::Mat4) -> std::result::Result<(), crate::SceneError> {
@@ -50,8 +51,9 @@ impl GpuLights {
     }
 
     pub fn upload(device: &wgpu::Device, plan: scene::LightPlan) -> Self {
-        let (lights, directional) = plan.finish();
+        let (lights, directional, shadows) = plan.finish();
         Self {
+            shadows,
             positions: lights[directional as usize..]
                 .iter()
                 .map(|l| glam::Vec3::from_slice(&l.position_range[..3]))
@@ -79,7 +81,7 @@ pub(crate) struct LightingSystem {
     cache: Mutex<Option<Arc<GridBuffers>>>,
 }
 fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
-    let entries: Vec<_> = (0..4)
+    let mut entries: Vec<_> = (0..4)
         .map(|binding| wgpu::BindGroupLayoutEntry {
             binding,
             visibility: if compute {
@@ -101,6 +103,36 @@ fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
             count: None,
         })
         .collect();
+    if !compute {
+        entries.extend([
+            wgpu::BindGroupLayoutEntry {
+                binding: 4,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Texture {
+                    sample_type: wgpu::TextureSampleType::Depth,
+                    view_dimension: wgpu::TextureViewDimension::D2Array,
+                    multisampled: false,
+                },
+                count: None,
+            },
+            wgpu::BindGroupLayoutEntry {
+                binding: 5,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Comparison),
+                count: None,
+            },
+            wgpu::BindGroupLayoutEntry {
+                binding: 6,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                ty: wgpu::BindingType::Buffer {
+                    ty: wgpu::BufferBindingType::Uniform,
+                    has_dynamic_offset: false,
+                    min_binding_size: None,
+                },
+                count: None,
+            },
+        ]);
+    }
     device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
         label: Some("Clustered lighting"),
         entries: &entries,
@@ -188,6 +220,7 @@ impl LightingSystem {
         viewport: [f32; 4],
         selection: LocalLightSelection,
         camera: crate::camera::CameraView,
+        shadows: &crate::shadows::PreparedShadows,
     ) -> Result<PreparedLighting> {
         let dimensions = [
             (viewport[2] / 64.).ceil() as u32,
@@ -218,7 +251,7 @@ impl LightingSystem {
             contents: bytemuck::bytes_of(&grid),
             usage: wgpu::BufferUsages::UNIFORM,
         });
-        let entries = [&uniform, &lights.buffer, &buffers.counts, &buffers.masks]
+        let mut entries = [&uniform, &lights.buffer, &buffers.counts, &buffers.masks]
             .iter()
             .enumerate()
             .map(|(binding, buffer)| wgpu::BindGroupEntry {
@@ -235,6 +268,20 @@ impl LightingSystem {
             }),
             dimensions,
         });
+        entries.extend([
+            wgpu::BindGroupEntry {
+                binding: 4,
+                resource: wgpu::BindingResource::TextureView(&shadows.view),
+            },
+            wgpu::BindGroupEntry {
+                binding: 5,
+                resource: wgpu::BindingResource::Sampler(&shadows.sampler),
+            },
+            wgpu::BindGroupEntry {
+                binding: 6,
+                resource: shadows.uniform.as_entire_binding(),
+            },
+        ]);
         Ok(PreparedLighting {
             compute,
             shading: device.create_bind_group(&wgpu::BindGroupDescriptor {

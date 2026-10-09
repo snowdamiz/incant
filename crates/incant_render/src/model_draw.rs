@@ -52,12 +52,14 @@ impl Renderer {
             }],
         });
         let mut opaque = Vec::new();
+        let shadows = self.prepare_shadow_draw(scene, target.rect[2] / target.rect[3])?;
         let lighting = self.lighting.prepare(
             &self.device,
             &scene.lights,
             target.rect,
             scene.light_selection,
             scene.camera,
+            &shadows.maps,
         )?;
         let mut transparent = Vec::new();
         let eye = scene.camera.eye.as_dvec3();
@@ -101,6 +103,7 @@ impl Renderer {
             camera: bind_group,
             environment: environment.resource.group.clone(),
             lighting,
+            shadows,
             draws: opaque,
         }))
     }
@@ -116,6 +119,7 @@ pub(crate) struct ModelDraw {
     camera: wgpu::BindGroup,
     environment: wgpu::BindGroup,
     pub lighting: crate::lighting::PreparedLighting,
+    pub shadows: super::ShadowDraw,
     draws: Vec<Draw>,
 }
 impl ModelDraw {

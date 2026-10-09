@@ -3,6 +3,7 @@ mod cameras;
 mod environments;
 mod lights;
 mod materials;
+mod shadows;
 mod support;
 use incant_render::Renderer;
 use materials::{Fixture, center, emissive, near};

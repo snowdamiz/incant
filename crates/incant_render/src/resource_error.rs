@@ -1,6 +1,12 @@
 //! Resource preparation errors remain typed even at the renderer's boxed boundary.
 #[derive(Debug, thiserror::Error)]
 pub enum ResourceError {
+    #[error("directional shadow projection exceeds finite GPU precision")]
+    ShadowRange,
+    #[error("directional shadow atlas exceeds the four-light / 64 MiB budget or device limits")]
+    ShadowMapSize,
+    #[error("BLEND materials cannot cast directional shadows; disable cast_shadows or use MASK")]
+    TransparentShadowCaster,
     #[error("render target exceeds dimension or 16-megapixel attachment budget")]
     RenderTargetSize,
     #[error("cluster grid exceeds the 64 MiB membership-mask budget or device storage limits")]

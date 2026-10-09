@@ -105,7 +105,11 @@ export interface Diagnostic {
  * registry is the source of truth; anything outside this subset is shown as an
  * explicit "unsupported field" row, never silently dropped.
  */
-export type FieldSchema =
+export type FieldSchema = {
+  /** Absence/null are authored disabled values, not schema mismatches. */
+  readonly optional?: boolean;
+  readonly nullable?: boolean;
+} & (
   | {
       readonly type: 'string';
       readonly title?: string;
@@ -137,7 +141,7 @@ export type FieldSchema =
       readonly description?: string;
       readonly properties: Readonly<Record<string, FieldSchema>>;
     }
-  | { readonly type: string & {}; readonly title?: string; readonly description?: string };
+  | { readonly type: string & {}; readonly title?: string; readonly description?: string });
 
 export interface ComponentSchema {
   readonly type: string;

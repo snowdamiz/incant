@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Opt-in directional cascades are implemented and undergoing Claude appearance
+  and native review. The scheduled depth pass honors imported caster flags,
+  alpha masks, reflection and sidedness; retained queued frames and cascade
+  transitions pass real GPU checks. Public CLI edits, atomic invalid rejection,
+  Undo/Redo, durable reopening and source-free cached captures pass. Initial
+  checks pass 144 Rust, 38 GPU and 284 UI tests plus Clippy. Performance and
+  native/visual evidence are still being completed; local-light shadows and
+  adaptive quality remain open. See [directional shadows](docs/spikes/directional-shadows.md).
+
 - Real GPU passes now execute through a persistent Bevy ECS schedule with explicit
   dependencies and owned frame resources. Reverse-order queued submission after
   scene/source disposal passes. 139 Rust, 33 GPU and 283 UI tests, Clippy and the
