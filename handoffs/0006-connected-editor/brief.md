@@ -1,5 +1,42 @@
 # Redesign the real editor to match the landing-page editor
 
+## Highest priority: director palette and titlebar correction
+
+New director feedback: “tell claude its a bit too purple. I liked the previous
+designes color choices better. Update the app and landing page to match this
+change. Also logo is too closeto traffic lights and not aligned”.
+
+Keep the new connected-panel structure, but restore the earlier editor’s neutral
+charcoal/gray color direction. Use references/previous-editor-tokens.css (from
+2a40d16) as the shared palette anchor. Reduce purple-tinted panel backgrounds and
+chrome; violet should be a restrained brand/selection accent. Do not restart the
+layout or lose the working connected-panel improvements. The landing-page palette
+is being adjusted through a separate Claude packet using the same token reference.
+
+Fix the native titlebar logo’s spacing from the traffic lights and its vertical
+alignment. Review the actual native screenshot from Astra at
+screenshots/after/native-cua/01-overview.png. If you need a native value changed,
+write the exact request to native-requests.md and continue CSS work. Astra handles
+native input/capture through CUA; do not use the Swift input helper or override HOME.
+Return updated browser/native-review evidence for this director correction before
+calling the UI finished. Do not alter real account state or the root app.
+
+## Priority coordination update for native review
+
+Astra is taking over native UI input/capture using the supported Codex CUA API.
+Do not execute the Swift input helper, AppleScript, synthetic CGEvent input, or
+other direct native UI automation. Do not override HOME or CODEX_HOME. Preserve
+all current UI changes and review progress; this is not a design reset.
+You may continue browser fixture review using your existing testing tools. For
+native review, report the worktree app executable and project path in
+native-requests.md. Astra will launch it normally, operate it through CUA, and put
+native screenshots in this packet for you to inspect. The root real account must
+remain connected. Do not alter any existing account. If the actual native UI
+contains an account label, keep screenshots local and omit that label from prose.
+Review the provided native screenshots and request any further interaction or
+capture through native-requests.md. Finish UI corrections and result reporting;
+never claim a native interaction test you have not observed evidence for.
+
 ## Director's latest instruction
 
 “There is a a new landing page that has some images of an editor. It does not use

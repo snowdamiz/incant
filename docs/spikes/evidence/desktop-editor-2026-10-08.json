@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-08",
+  "source_commit": "2a40d1613fba4683c8bd982c2352d3f98bc89afa",
+  "workflow": "https://github.com/snowdamiz/incant/actions/runs/37872433486",
+  "linux": {
+    "conclusion": "success",
+    "job": "https://github.com/snowdamiz/incant/actions/runs/37872433486/job/113633542647",
+    "ui_tests": 180,
+    "workspace_rust_tests": "passed",
+    "native_editor_build": "passed",
+    "render_probe": {
+      "platform": "linux",
+      "native_renderer_executed": true,
+      "png_transport_validated": true,
+      "width": 320,
+      "height": 180,
+      "sha256": "c22477ad0de13d0acf07479bfd1fb1730f0db1c296220edf04d097901e912674",
+      "engine": {
+        "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "height": 180,
+        "width": 320
+      },
+      "visual_review": false,
+      "native_window_composition_review": false
+    }
+  },
+  "windows": {
+    "conclusion": "failure",
+    "job": "https://github.com/snowdamiz/incant/actions/runs/37872433486/job/113633542784",
+    "failure": "tauri-build required editor/app/icons/icon.ico, which was absent",
+    "fix_commit": "bd308600baa9c7d0d69ef86da0697de13c1f7434",
+    "rerun": "https://github.com/snowdamiz/incant/actions/runs/37873827660"
+  },
+  "scope": "Automated editor builds, shared UI/bridge/Rust tests and native renderer readback per the director acceptance override; not manual Windows composition review.",
+  "successful_followup": {
+    "source_commit": "bd308600baa9c7d0d69ef86da0697de13c1f7434",
+    "workflow": "https://github.com/snowdamiz/incant/actions/runs/37873827660",
+    "conclusion": "success",
+    "windows_job": "https://github.com/snowdamiz/incant/actions/runs/37873827660/job/113637681445",
+    "linux_job": "https://github.com/snowdamiz/incant/actions/runs/37873827660/job/113637681218",
+    "native_editor_and_engine_builds": "passed",
+    "shared_ui_bridge_and_workspace_rust_tests": "passed",
+    "reports": {
+      "win32": {
+        "platform": "win32",
+        "native_renderer_executed": true,
+        "png_transport_validated": true,
+        "width": 320,
+        "height": 180,
+        "sha256": "c22477ad0de13d0acf07479bfd1fb1730f0db1c296220edf04d097901e912674",
+        "engine": {
+          "adapter": "Microsoft Basic Render Driver",
+          "height": 180,
+          "width": 320
+        },
+        "visual_review": false,
+        "native_window_composition_review": false
+      },
+      "linux": {
+        "platform": "linux",
+        "native_renderer_executed": true,
+        "png_transport_validated": true,
+        "width": 320,
+        "height": 180,
+        "sha256": "c22477ad0de13d0acf07479bfd1fb1730f0db1c296220edf04d097901e912674",
+        "engine": {
+          "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "height": 180,
+          "width": 320
+        },
+        "visual_review": false,
+        "native_window_composition_review": false
+      }
+    }
+  }
+}

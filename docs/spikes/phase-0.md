@@ -4,7 +4,7 @@ Date: 2026-10-08. Host: Apple M5 Pro, arm64 macOS. Rust 1.99.0, Node 22.23.3.
 This is a working evidence ledger, not a gate approval. No later phase has started.
 The complete 36-month engine/game plan remains open.
 
-## Spike 1: native viewport — in progress
+## Spike 1: native viewport — passed under the director’s CI acceptance
 
 Tauri 2.12.1 hosts a transparent child webview above a wgpu 29 native parent-window
 surface. The renderer compiles and actual offscreen GPU readback produced
@@ -16,8 +16,10 @@ resizing and fullscreen transitions; see [handoff 0002](../../handoffs/0002-nati
 The director subsequently replaced the manual Windows review and Windows/Linux
 interactive sign-in checks with CI builds and automated tests. The desktop
 workflow builds the real editor/headless engine, runs shared tests, and exercises
-native GPU readback. Its results are pending; it does not claim manual composition
-review. The acceptance change is recorded in PLAN.md.
+native renderer readback. Both Windows and Linux jobs passed on bd30860 after
+adding the missing Windows ICO. [CI evidence](evidence/desktop-editor-2026-10-08.json)
+records the shared tests, actual native builds and software GPU adapters used. This
+does not claim manual Windows composition review. The acceptance change is in PLAN.md.
 
 ## Spike 2: document and CRDT — local evidence passed
 

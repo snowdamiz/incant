@@ -3,12 +3,11 @@
   "director_approval": null,
   "spikes": {
     "native_viewport": {
-      "passed": false,
-      "remaining": [
-        "Windows/Linux editor builds, shared UI/bridge tests and native GPU readback in CI"
-      ],
+      "passed": true,
+      "remaining": [],
       "macos_evidence": "handoffs/0002-native-viewport/result.md",
-      "acceptance_override": "2026-10-08 director replaced manual Windows native review with CI builds and automated tests"
+      "acceptance_override": "2026-10-08 director replaced manual Windows native review with CI builds and automated tests",
+      "desktop_ci_evidence": "docs/spikes/evidence/desktop-editor-2026-10-08.json"
     },
     "document_crdt": {
       "passed": true,

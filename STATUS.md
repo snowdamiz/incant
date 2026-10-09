@@ -43,8 +43,8 @@ frame budget within its documented workload.
   Per the director's 2026-10-08 decision, Windows/Linux manual
   login and Windows viewport checks are replaced by CI editor/engine builds,
   UI/bridge tests, GPU readback and credential-persistence checks. Those jobs are
-  being verified; Linux editor tests/build/readback passed. Windows exposed a
-  missing ICO; Claude supplied the approved wisp asset and the rerun is pending.
+  now passing on both Windows and Linux; see
+  [desktop CI evidence](docs/spikes/evidence/desktop-editor-2026-10-08.json).
   No additional desktop machines or interactive logins are needed.
 - The real twenty-task evaluation completed with the director's saved session:
   **19/20 passed**, exceeding the 14/20 score threshold. The ten-step case reached
@@ -61,7 +61,8 @@ frame budget within its documented workload.
   [passed on 640fbdd](docs/spikes/evidence/six-platform-2026-10-08.json), including
   Android APK packaging. Both arm64/x86_64 native libraries, manifest and DEX are
   present in the downloaded APK. A hosted Android emulator execution check is
-  now implemented; its first CI run is pending. Nightly history remains a distinct
+  now implemented. Its first run exposed mismatched AVD lookup directories; an
+  explicit shared AVD path is configured for the rerun. Nightly history remains a distinct
   requirement. Current source checks are running again.
 
 ## External prerequisites still required
@@ -69,7 +70,7 @@ frame budget within its documented workload.
 - Private repository created at https://github.com/snowdamiz/incant. The bootstrap
   is on main; implementation is in draft PR #1 on impl/phase0-foundation.
   The director remains responsible for merging.
-- Android execution and remaining automated desktop checks, physical-device
+- Android execution, physical-device
   coverage, self-hosted graphics/device runners, and nightly artifact history.
 - Apple/Windows distribution signing, store/developer accounts, staffing and the
   director's phase gate approvals. These are human-only under PLAN.md.

@@ -76,7 +76,10 @@ jobs:
           test -c /dev/kvm
           sudo chown "$(id -u):$(id -g)" /dev/kvm
           test -r /dev/kvm && test -w /dev/kvm
-          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --name incant-ci --package 'system-images;android-35;google_apis;x86_64'
+          export ANDROID_AVD_HOME="$RUNNER_TEMP/incant-avd"
+          mkdir -p "$ANDROID_AVD_HOME"
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --name incant-ci --path "$ANDROID_AVD_HOME/incant-ci.avd" --package 'system-images;android-35;google_apis;x86_64'
+          test -f "$ANDROID_AVD_HOME/incant-ci.ini"
           python3 tools/platforms/android-check.py --avd incant-ci
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
