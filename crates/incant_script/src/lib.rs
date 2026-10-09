@@ -60,7 +60,8 @@ impl PlaySession {
     pub fn tick(&mut self) -> Result<usize, ScriptError> {
         self.engine.step()?;
         let mut commands = Vec::new();
-        for runtime in self.engine.snapshot().entities.values() {
+        let snapshot = self.engine.snapshot();
+        for runtime in snapshot.entities.values() {
             let entity = &self.bus.project().scenes[&runtime.scene_id].entities[&runtime.id];
             if let Some(value) = entity.components.get("Transform") {
                 let mut transform: incant_doc::Transform = serde_json::from_value(value.clone())?;
@@ -109,7 +110,7 @@ impl PlaySession {
                 None,
             )?;
         }
-        let events = self.engine.snapshot().trigger_events;
+        let events = snapshot.trigger_events;
         let count = self
             .host
             .tick_with_events(&mut self.bus, self.dt, &events)?;

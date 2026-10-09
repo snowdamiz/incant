@@ -97,5 +97,78 @@
     "full physics feature set",
     "rollback or universal cross-platform determinism",
     "Phase 1 completion"
-  ]
+  ],
+  "optimization": {
+    "checks": "core, document, physics and script suites; full workspace Clippy; public CLI probe pass",
+    "measurement": {
+      "bodies": 512,
+      "steps": 600,
+      "sleeping": false,
+      "ccd": true,
+      "includes": "solver, ECS, simulation command bus, noop JS, document sync; excludes rendering",
+      "paired_trials": {
+        "baseline": [
+          {
+            "p95_frame_ms": 9.994292,
+            "max_frame_ms": 12.415916000000001,
+            "ticks": 600,
+            "commands": 0
+          },
+          {
+            "p95_frame_ms": 9.895875,
+            "max_frame_ms": 11.355667,
+            "ticks": 600,
+            "commands": 0
+          },
+          {
+            "p95_frame_ms": 17.773917,
+            "max_frame_ms": 26.528875,
+            "ticks": 600,
+            "commands": 0
+          }
+        ],
+        "optimized": [
+          {
+            "p95_frame_ms": 8.941790999999998,
+            "max_frame_ms": 11.581,
+            "ticks": 600,
+            "commands": 0
+          },
+          {
+            "p95_frame_ms": 8.750708,
+            "max_frame_ms": 9.577041999999999,
+            "ticks": 600,
+            "commands": 0
+          },
+          {
+            "p95_frame_ms": 8.798083,
+            "max_frame_ms": 9.6145,
+            "ticks": 600,
+            "commands": 0
+          }
+        ]
+      },
+      "final_snapshot_exact": true,
+      "host_load": "Claude may be compiling in a separate worktree; these are local analytical timings, not release-device gates",
+      "binary_hashes": {
+        "baseline": "5ef8ed16e0b7b162221534ae6b362c70eaa46e15a1caf04f9ae6770a03bfcb57",
+        "optimized": "5d8bb89aa4ac75c7ce4773bb158c1c3cc6a46fe43488aa053f7ee0b392a8f50e"
+      }
+    },
+    "cli": {
+      "passed": true,
+      "public_rpc": true,
+      "atomic_invalid_rejection": true,
+      "undo_redo_and_persistent_reopen": true,
+      "repeated_runtime_exact": true,
+      "sandbox_query_and_velocity_command": true,
+      "author_files_unchanged": {
+        "project.incant.json": "5898129eaae7ad5d3bbda425a35c695d9a6efae0120149972054b73be311900c",
+        "history.jsonl": "bf17956472b08fc1560bb796864b9202960b624b7de97f4d9ab465d37f4d736a"
+      },
+      "settled_y": 0.4999316930770874,
+      "jump_y": 0.5815619230270386,
+      "live_platform_gate": false
+    }
+  }
 }

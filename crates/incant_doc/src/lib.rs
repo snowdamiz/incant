@@ -175,7 +175,20 @@ pub enum DocumentError {
     Version(u32),
 }
 
+/// Immutable proof that this exact project passed semantic validation. The
+/// borrow prevents edits while downstream projections share the validation.
+#[derive(Clone, Copy)]
+pub struct ValidatedProject<'a>(&'a Project);
+impl<'a> ValidatedProject<'a> {
+    pub fn project(self) -> &'a Project {
+        self.0
+    }
+}
 impl Project {
+    pub fn validated(&self) -> Result<ValidatedProject<'_>, DocumentError> {
+        self.validate()?;
+        Ok(ValidatedProject(self))
+    }
     pub fn empty(name: impl Into<String>) -> Self {
         Self {
             id: new_id(),
