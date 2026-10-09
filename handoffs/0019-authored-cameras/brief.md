@@ -1,3 +1,35 @@
+# Priority: final reference and skewed-parent evidence
+
+Your ddc8645 follow-up is integrated. The remaining documentation/ledger items
+are now updated, including all current PNG hashes, CLI poses and the mesh-less
+camera-ancestor rule. The full post-fix suite passes 139 Rust cases, 31 GPU cases,
+283 UI tests and the native release build. The extra skewed-parent case below
+passes as well, giving 32 distinct GPU cases. Workspace Clippy passes.
+
+Three additional images are now in artifacts/camera-initial:
+- camera-tight-clip-unclipped-reference saves the original 60-degree camera view
+  with range 0.1–100. Compare it directly with camera-tight-clip-positive (7.9–8.1);
+  these are byte-identical, as the test already asserted.
+- camera-skewed-parent / camera-skewed-flat-reference implement your optional
+  fixture: parent roll 30 degrees and scale [2,3,4], child rotation Y=15, X=10,
+  Z=5 degrees (glam YXZ composition), parent translation [2,0,0] and child
+  translation [-1,0,2]. The normalized world forward/up are demonstrably not
+  perpendicular before constructing the orthonormal view. The flat reference
+  derives a rigid look-to pose independently from that inherited basis. Images
+  match exactly and the test requires visibly lit geometry.
+
+The ordinary scaled-parent fixture also now asserts visible illumination, so
+blank frames cannot satisfy its equality assertion. Runtime appearance is
+unchanged since 8b82f43; later changes add tests, reports and screenshot metadata.
+A live saved-account engine-agent run queried and captured the exact Camera ID
+without any edits/login prompts; it did not assess design and is not pixel review.
+
+Review the three extra images, verify ledger/config consistency, then give the
+final scoped verdict in result.md. Preserve previous review history. No UI work
+or shader changes. Commit the report with final trailer Built-by: claude.
+
+---
+
 # Priority follow-up: fill the four evidence gaps and fix empty rig parents
 
 Your c5e02e6 review is integrated. New captures are in artifacts/camera-initial:

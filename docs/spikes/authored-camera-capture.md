@@ -15,7 +15,9 @@ now applies its inherited pose, vertical field of view and near/far clip planes.
 Omitting the selector preserves the fixed editor preview. Unknown IDs and IDs
 without Camera fail explicitly. Playback requires an output directory when a
 camera is specified; failed captures never publish a completed report.
-Camera-only entities no longer create diagnostic cube geometry.
+Camera-only entities and mesh-less ancestors used as camera-rig frames no longer
+create diagnostic cube geometry. Explicit MeshRenderer bindings on those
+ancestors still render; unrelated diagnostic entities are preserved.
 
 ## Shared camera frame
 
@@ -24,7 +26,9 @@ clustered light grid all consume the selected frame. Cluster FOV and logarithmic
 slices use the authored clip range. The grid still uses 64-pixel tiles/24 slices,
 with viewport-origin subtraction. Buffer reuse is safe across camera changes:
 each encoded draw supplies immutable camera/grid uniforms and rebuilds membership.
-Prepared scenes retain their camera poses across later project edits.
+Prepared scenes retain their camera poses across later project edits. A skewed
+basis from a rotated child under uneven parent scale matches the independently
+flattened orthonormal pose in captured pixels.
 
 Local −Z points forward and +Y supplies roll, matching the axis convention in
 [Khronos's camera specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#view-matrix).
@@ -40,7 +44,7 @@ Selecting a camera is read-only renderer configuration, not a new mutation path.
 
 ## Verification
 
-138 Rust tests and 31 explicit real GPU cases pass on Apple M5 Pro. The focused
+139 Rust tests and 32 explicit real GPU cases pass on Apple M5 Pro. The focused
 checks cover FOV, near/far clipping, camera-facing direction, inherited/flattened
 pose equality, retained views, reversed translucent-plane ordering, and exact
 all-light oracle matches at three camera poses and two sizes. Offset viewport
@@ -56,8 +60,8 @@ leaves document/revision/history unchanged, and journal reopen and source-free
 cooked rendering retain the image.
 
 283 UI tests, the UI build, workspace Clippy, generated checks, SDK typechecking,
-five Python tests and the custom-protocol native release build pass. Claude's
-rendered-pixel review is pending. Native controls/layout are unchanged and no
+five Python tests and the custom-protocol native release build pass. Claude approved the initial and expanded rendered evidence (`c5e02e6`,
+`ddc8645`). A final reference/skewed-parent evidence follow-up remains pending. Native controls/layout are unchanged and no
 new native UI review is claimed.
 
 ## Limits
@@ -67,3 +71,15 @@ orthographic/infinite projection, lens shift, an active-game-camera setting,
 editor camera controls, glTF camera import, camera rigs, or multi-camera capture
 in one playback invocation. Missing those features is not a Phase 1 completion
 claim. Shadows, the render graph and remaining core-engine/game gates stay open.
+
+## Saved-account agent check
+
+A live `gpt-6-astra` run used the existing saved OAuth account without a login or
+Keychain prompt. It queried the Camera component, called `view_screenshot` with
+the selected ID, and finished in three steps with no transactions. The host-
+confirmed camera ID is retained in the tool observation and the model's tool
+result without storing image pixels in the report. Usage was 3,897 input and
+145 output tokens. Project and journal hashes stayed unchanged. This verifies
+live tool/account integration, not model-authored game completion or pixel review.
+An initial 16,000-token configured budget was rejected by the conservative local
+reservation; the ordinary 64,000-token budget completed the probe.

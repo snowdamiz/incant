@@ -95,6 +95,7 @@ fn authored_camera_changes_projection_clips_geometry_and_retains_its_selected_po
     ));
     let retained = prepared.with_camera(&id).unwrap();
     let first = r.screenshot_scene_png(&retained, 321, 241).unwrap();
+    save("camera-tight-clip-unclipped-reference", &first);
     assert_ne!(first, preview);
     edit(
         &mut f,
@@ -293,6 +294,11 @@ fn inherited_cameras_and_custom_light_clusters_match_the_all_light_reference() {
         json!({"fov_degrees":60,"near":7.9,"far":8.1}),
     );
     let inherited = capture(&f, &r, &id, "camera-scaled-roll-parent");
+    let pixel = super::materials::center(&inherited);
+    assert!(
+        pixel[..3].iter().any(|channel| *channel > 50),
+        "scaled rig must still illuminate the visible quad: {pixel:?}"
+    );
     let world = glam::DMat4::from_scale_rotation_translation(
         glam::DVec3::new(2., 3., 4.),
         roll,
@@ -371,4 +377,78 @@ fn red_rows(bytes: &[u8], width: usize) -> (usize, usize) {
         .map(|(i, _)| i / width)
         .collect();
     (*rows.iter().min().unwrap(), *rows.iter().max().unwrap())
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose() {
+    let r = Renderer::headless().unwrap();
+    let mut f = Fixture::new(emissive([1., 0., 0.], 1., "OPAQUE"));
+    let parent_rotation = glam::DQuat::from_rotation_z(30f64.to_radians());
+    let child_rotation = glam::DQuat::from_euler(
+        glam::EulerRot::YXZ,
+        15f64.to_radians(),
+        10f64.to_radians(),
+        5f64.to_radians(),
+    );
+    let mut parent = Entity::new("Uneven camera parent");
+    parent.components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [2., 0., 0.],
+            rotation: parent_rotation.to_array(),
+            scale: [2., 3., 4.]
+        }),
+    );
+    let pid = insert(&mut f, parent);
+    let cid = camera(
+        &mut f,
+        Transform {
+            translation: [-1., 0., 2.],
+            rotation: child_rotation.to_array(),
+            ..Default::default()
+        },
+    );
+    f.project
+        .scenes
+        .values_mut()
+        .next()
+        .unwrap()
+        .entities
+        .get_mut(&cid)
+        .unwrap()
+        .parent = Some(pid.clone());
+    let inherited = capture(&f, &r, &cid, "camera-skewed-parent");
+    assert!(red_pixels(&inherited) > 1000);
+    let world =
+        glam::DMat4::from_scale_rotation_translation(
+            glam::DVec3::new(2., 3., 4.),
+            parent_rotation,
+            glam::DVec3::new(2., 0., 0.),
+        ) * glam::DMat4::from_rotation_translation(child_rotation, glam::DVec3::new(-1., 0., 2.));
+    let eye = world.transform_point3(glam::DVec3::ZERO);
+    let direction = world.transform_vector3(-glam::DVec3::Z).normalize();
+    let up = world.transform_vector3(glam::DVec3::Y).normalize();
+    assert!(
+        direction.dot(up).abs() > 0.01,
+        "fixture must actually contain skew"
+    );
+    let rotation = glam::DQuat::from_mat4(&glam::DMat4::look_to_rh(eye, direction, up).inverse());
+    let entities = &mut f.project.scenes.values_mut().next().unwrap().entities;
+    entities.get_mut(&cid).unwrap().parent = None;
+    entities.remove(&pid);
+    edit(
+        &mut f,
+        &cid,
+        "Transform",
+        json!(Transform {
+            translation: eye.to_array(),
+            rotation: rotation.to_array(),
+            ..Default::default()
+        }),
+    );
+    assert_eq!(
+        capture(&f, &r, &cid, "camera-skewed-flat-reference"),
+        inherited
+    );
 }
