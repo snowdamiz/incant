@@ -15,12 +15,16 @@ editor/bridge. Start the app with bundled assets, not a fixture browser page:
 
 ```
 tools/cargo run -p incant_headless -- init artifacts/native.incant.json --name "Native Surface Spike"
-tools/cargo run -p incant_editor --features custom-protocol -- artifacts/native.incant.json
+python3 tools/editor-dev.py
 ```
 
 If the fixture already exists, reuse it. The initialization command deliberately
 refuses overwrites. `custom-protocol` embeds local frontend assets so no dev server
 or external network is required. Leave source/project edits on the command bus.
+On macOS, open the resulting `artifacts/Incant.app`. A proper app bundle is needed
+for reliable native app discovery/capture; a bare terminal binary was not listed
+by the automation surface. The bundle opens a disposable default project unless
+a project path is supplied as an application argument.
 
 ## Verify
 
@@ -28,6 +32,9 @@ or external network is required. Leave source/project edits on the command bus.
 - Confirm real rendered geometry shows through the viewport while chrome is opaque.
 - Check hierarchy/inspector selection, console and undo history remain usable.
 - Check bounds when panels/window resize; record DPI and platform.
+- Review the redesigned custom titlebar and its macOS native traffic-light inset.
+  Verify titlebar dragging, double-click zoom and focus/fullscreen state. The host
+  implements `window.*` requests and publishes `WindowChrome` through the bridge.
 - Review actual GPU screenshot output from `incant_headless screenshot` separately.
 - Screenshots must contain only this app, never the user's other windows or accounts.
 - If native capture or OS permissions are unavailable, report the exact blocker;

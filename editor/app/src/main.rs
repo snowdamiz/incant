@@ -11,6 +11,7 @@ use std::{
     },
     time::Duration,
 };
+mod window;
 struct Editor {
     bus: Mutex<CommandBus>,
     viewport: Mutex<Option<[f32; 4]>>,
@@ -123,17 +124,26 @@ fn main() {
             engine_read,
             engine_execute,
             engine_history,
-            viewport_bounds
+            viewport_bounds,
+            window::window_read,
+            window::window_action
         ])
         .setup(move |app| {
-            let window = tauri::window::WindowBuilder::new(app, "main")
+            let builder = tauri::window::WindowBuilder::new(app, "main")
                 .title("Incant — Phase 0")
                 .inner_size(1440., 900.)
-                .min_inner_size(1000., 650.)
-                .build()?;
+                .min_inner_size(1000., 650.);
+            #[cfg(target_os = "macos")]
+            let builder = builder
+                .title_bar_style(tauri::TitleBarStyle::Overlay)
+                .hidden_title(true);
+            #[cfg(not(target_os = "macos"))]
+            let builder = builder.decorations(false);
+            let window = builder.build()?;
             let size = window.inner_size()?;
             let webview =
                 tauri::WebviewBuilder::new("editor", tauri::WebviewUrl::App("index.html".into()))
+                    .initialization_script(include_str!("../../bridge/native.generated.js"))
                     .transparent(true)
                     .auto_resize();
             window.add_child(webview, tauri::PhysicalPosition::new(0, 0), size)?;
@@ -147,9 +157,17 @@ fn main() {
                 format!("Native wgpu adapter: {}", renderer.adapter_name),
             ));
             let close = editor.clone();
+            let observed_window = window.clone();
             window.on_window_event(move |event| {
                 if matches!(event, tauri::WindowEvent::Destroyed) {
                     close.alive.store(false, Ordering::Relaxed);
+                } else if matches!(
+                    event,
+                    tauri::WindowEvent::Resized(_)
+                        | tauri::WindowEvent::Focused(_)
+                        | tauri::WindowEvent::ScaleFactorChanged { .. }
+                ) {
+                    window::publish_state(&observed_window);
                 }
             });
             let shared = editor.clone();

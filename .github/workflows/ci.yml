@@ -22,6 +22,7 @@ jobs:
       - run: npm ci
       - run: python3 tools/generate_conventions.py --check
       - run: npm run test:tools
+      - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui
       - run: cargo fmt --all --check

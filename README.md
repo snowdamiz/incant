@@ -22,6 +22,12 @@ The editor/UI build is being returned through the Claude handoff; until it is
 integrated, use the headless commands below. Build-time Claude login is needed only
 for visual development, not for using the engine.
 
+After UI integration, `python3 tools/editor-dev.py` builds the frontend, native
+transport and editor with bundled assets. On macOS it produces the unsigned
+development bundle `artifacts/Incant.app`; open that bundle to run the native
+window. `--release` builds an optimized version. This is a local development
+package, not a signed distribution installer.
+
 ## Headless tools
 
 ```sh
@@ -43,6 +49,10 @@ together; do not reuse a journal for another project.
 ```sh
 tools/cargo run -p incant_headless -- rpc artifacts/demo.incant.json --journal artifacts/demo.journal.jsonl
 ```
+
+The native host injects the compiled transport before the UI loads. After editing
+`editor/bridge/native.ts`, run `node tools/build_bridge.mjs`; CI checks that its
+generated JavaScript is current.
 
 Gameplay types are generated from Rust-derived JSON Schemas. Regenerate both after
 changing the registry or commands:
@@ -108,8 +118,8 @@ Gradle 8.11.1, JDK 17, Android SDK 35, NDK and cargo-ndk 4.1.2. Platform packagi
 a hello-world proof, not an exported game or a mobile editor.
 
 GitHub Actions configurations are prepared for local checks, nightly six-target
-probes, and protected live evaluation. They have not run because no remote is
-configured. Nightly debug artifacts do not satisfy signed-release requirements.
+probes, and protected live evaluation. They have not run yet; the new private remote is
+`https://github.com/snowdamiz/incant`. Nightly debug artifacts do not satisfy signed-release requirements.
 The [security boundaries](docs/SECURITY.md) and [architecture proposals](docs/adr)
 describe current limitations.
 
@@ -128,3 +138,9 @@ The handoff client isolates work in `.worktrees/<packet>`, explicitly selects th
 required model, scopes protocol filesystem access and resumes the latest session
 for that exact worktree after interruption. Review the result packet, run tests and
 integrate with provenance; do not self-approve a phase gate or merge a PR.
+
+When the director explicitly authorizes unattended tool use, the runner accepts
+`--permission-mode bypassPermissions` for that ACP session. It verifies that the
+adapter offers the mode and fails explicitly otherwise. This does not change
+global Claude settings or broaden the task's authorized scope. Worktree-scoped
+ACP filesystem handlers are not an OS sandbox for Claude's shell commands.

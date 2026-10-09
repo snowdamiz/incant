@@ -29,15 +29,19 @@ frame budget within its documented workload.
 
 ## Active work
 
-- Claude Opus 5.5 is finishing the editor shell, visual tests, screenshots and result
+- Claude Opus 5.5 is substantially redesigning the editor in response to director
+  feedback, including a custom titlebar, before returning visual tests and a result
   packet in `.worktrees/0001-editor-foundation`.
-- Astra's Tauri host and typed native bridge await UI integration and native-window
-  interaction/composition validation. Windows native viewport evidence is pending.
+- The macOS native host passed hierarchy selection, rename, undo and redo through
+  real IPC. Custom titlebar host support is in progress; revised UI integration and
+  native composition review remain. Windows native viewport evidence is pending.
 - CI workflows are authored; remote execution and target-specific validation remain.
 
 ## External prerequisites still required
 
-- A GitHub repository URL to run CI and prepare a review PR; none is configured.
+- Private repository created at https://github.com/snowdamiz/incant. The bootstrap
+  is on main; implementation is on impl/phase0-foundation. Review PR and CI runs
+  follow UI integration. The director remains responsible for merging.
 - A working user-authorized OpenAI connection for the live twenty-task evaluation.
   The first browser attempt did not complete; no provider tokens were obtained.
 - Windows/Linux/Android execution and desktop authentication checks, physical-device

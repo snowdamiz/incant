@@ -134,7 +134,27 @@ SDK before recording an execution pass. A compiled but failed launch was not cou
 The Rust LLVM tools component was required to resolve the local WASM linker's LLVM
 library. No device signing certificate or platform release has been produced.
 
-GitHub workflows exist but no Git remote has been supplied. Hosted probes bootstrap
+GitHub workflows exist and a private remote was created at
+https://github.com/snowdamiz/incant. No remote run has completed yet. Hosted probes bootstrap
 validation; the plan's self-hosted graphics/device runners and nightly artifact
 history are not provisioned. Signing certificates and Year 1 staffing are director
 prerequisites. Phase 0 is not ready for approval.
+
+### Native interaction check during the visual revision
+
+On 2026-10-08, the bundled macOS development app loaded `tauri://localhost`,
+received the native project/schema snapshot, and exposed the actual hierarchy
+and Transform inspector through accessibility. Double-click rename changed Cube
+to Native rename check; Undo restored Cube; Redo restored Native rename check.
+The history count and button availability followed the engine results. These are
+functional observations of the earlier UI, not visual approval of the redesign.
+Launching a proper `.app` bundle made the binary discoverable for native UI tests;
+`tools/editor-dev.py` now creates that unsigned development bundle.
+
+The director requested a substantially stronger visual design with a custom
+titlebar. Claude acknowledged this through ACP and is revising the UI. The director
+also authorized open permissions for that work; the session uses the adapter’s
+explicit `bypassPermissions` mode, without changing global Claude settings. ACP
+filesystem requests remain worktree-scoped; tool execution follows the handoff
+instructions and is not an OS sandbox. The existing limits on credentials,
+publishing, merging and outside-worktree edits remain in the prompt.
