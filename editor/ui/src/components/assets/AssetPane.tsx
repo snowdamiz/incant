@@ -46,6 +46,23 @@ export function focusPane(mode: 'details' | 'import') {
   }, 0);
 }
 
+/** In-pane progress: no percentage or cancel exists, only what is true while cooking. */
+function PendingStatus({ label }: { label: string }) {
+  return (
+    <span className="asset-pending" role="status">
+      <span className="spinner spinner--small" aria-hidden="true" />
+      <span className="asset-pending__text">
+        {label}
+        <span className="asset-pending__note">You can keep working. Editing now means retrying the import.</span>
+      </span>
+    </span>
+  );
+}
+
+function scrollPaneTop() {
+  document.getElementById('asset-pane')?.querySelector('.asset-pane__body')?.scrollTo?.({ top: 0 });
+}
+
 /** Details/reimport for the selected asset, or the import form. */
 export function AssetPane() {
   const { snapshot, bridge, capabilities } = useShell();
@@ -232,10 +249,7 @@ function AssetDetails({ asset, availability }: { asset: ProjectAsset; availabili
       ) : null}
       <div className="asset-details__actions">
         {mine ? (
-          <span className="asset-pending" role="status">
-            <span className="spinner spinner--small" aria-hidden="true" />
-            Reimporting…
-          </span>
+          <PendingStatus label="Reimporting…" />
         ) : (
           <button
             type="button"
@@ -244,7 +258,8 @@ function AssetDetails({ asset, availability }: { asset: ProjectAsset; availabili
             aria-describedby={`reimport-note-${asset.id}`}
             onClick={() => {
               if (blocked) return;
-              void reimport(asset);
+              // The result note is at the top of the pane; bring it into view when done.
+              void reimport(asset).then(scrollPaneTop);
             }}
           >
             <Icon name="reimport" size={14} />
@@ -303,7 +318,7 @@ function ImportForm({ assets }: { assets: readonly ProjectAsset[] }) {
     }
     const ok = await importDraft();
     // The result is shown at the top of the form; bring it into view.
-    document.getElementById('asset-pane')?.querySelector('.asset-pane__body')?.scrollTo?.({ top: 0 });
+    scrollPaneTop();
     if (ok) {
       setAttempted(false);
       setVisited(new Set());
@@ -313,12 +328,17 @@ function ImportForm({ assets }: { assets: readonly ProjectAsset[] }) {
   const onPaste = (row: DraftRow) => (event: ClipboardEvent<HTMLInputElement>) => {
     const lines = splitPaste(event.clipboardData.getData('text'));
     if (lines.length < 2) return;
-    // Several lines become several rows; the first replaces this row only if it is empty.
     event.preventDefault();
+    // Several lines become several rows. The first replaces this path when the field is
+    // empty or wholly selected (select all, then paste); otherwise this path is kept and
+    // every pasted line goes into new rows below it.
+    const input = event.currentTarget;
+    const replaces = row.source === '' || (input.selectionStart === 0 && input.selectionEnd === row.source.length);
     const [first, ...rest] = lines as [string, ...string[]];
-    if (row.source === '') setSource(row.key, first);
-    const added = addRows(row.source === '' ? rest : lines, row.key);
-    const dropped = (row.source === '' ? rest : lines).length - added.length;
+    if (replaces) setSource(row.key, first);
+    const extra = replaces ? rest : lines;
+    const added = addRows(extra, row.key);
+    const dropped = extra.length - added.length;
     if (dropped > 0) announce(`Only ${MAX_BATCH} paths fit in one import; ${dropped} were not added.`);
   };
 
@@ -432,10 +452,7 @@ function ImportForm({ assets }: { assets: readonly ProjectAsset[] }) {
       <p className="import-form__formats">Accepts {ACCEPTED_FORMATS}. Paste several lines to add several paths.</p>
       <div className="import-form__footer">
         {mine ? (
-          <span className="asset-pending" role="status">
-            <span className="spinner spinner--small" aria-hidden="true" />
-            Importing {countFiles(pending.sources.length)}…
-          </span>
+          <PendingStatus label={`Importing ${countFiles(pending.sources.length)}…`} />
         ) : (
           <button type="submit" className="button button--primary button--small" aria-disabled={busy || undefined}>
             <Icon name="import" size={14} />

@@ -160,6 +160,9 @@ describe('asset library', () => {
 
     // Busy: inputs are kept and read-only, there is no cancel or percentage, and a second submit sends nothing.
     expect(screen.getAllByText(/Importing 3 files…/).length).toBeGreaterThan(0);
+    // Edits are not blocked while cooking; an edit makes the stale import fail with a retry.
+    expect(screen.getAllByText('You can keep working. Editing now means retrying the import.').length).toBeGreaterThan(0);
+    expect(document.body.textContent).not.toMatch(/wait until it finishes/i);
     expect(pathInput(1).hasAttribute('readonly')).toBe(true);
     expect(screen.queryByRole('button', { name: /cancel/i })).toBeNull();
     expect(document.body.textContent).not.toMatch(/\d+%/);
@@ -238,6 +241,36 @@ describe('asset library', () => {
     expect(pathInput(1)).toHaveProperty('value', 'models/a.glb');
     expect(pathInput(2)).toHaveProperty('value', 'textures/b.png');
     expect(pathInput(3)).toHaveProperty('value', 'textures/c.exr');
+  });
+
+  it('replaces a wholly selected path when several lines are pasted over it', () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    openImport();
+    const input = pathInput(1) as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'models/old.glb' } });
+    // Select all, then paste: the selection is replaced, as in any text field.
+    input.setSelectionRange(0, input.value.length);
+    fireEvent.paste(input, { clipboardData: { getData: () => 'models/a.glb\ntextures/b.png' } });
+    expect(pathInput(1)).toHaveProperty('value', 'models/a.glb');
+    expect(pathInput(2)).toHaveProperty('value', 'textures/b.png');
+    expect(screen.queryByRole('textbox', { name: 'Path 3' })).toBeNull();
+    expect(screen.queryByDisplayValue('models/old.glb')).toBeNull();
+  });
+
+  it('keeps an unselected path and adds pasted lines below it', () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    openImport();
+    const input = pathInput(1) as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'models/keep.glb' } });
+    input.setSelectionRange(input.value.length, input.value.length);
+    fireEvent.paste(input, { clipboardData: { getData: () => 'models/a.glb\ntextures/b.png' } });
+    expect(pathInput(1)).toHaveProperty('value', 'models/keep.glb');
+    expect(pathInput(2)).toHaveProperty('value', 'models/a.glb');
+    expect(pathInput(3)).toHaveProperty('value', 'textures/b.png');
   });
 
   it('reimports an asset without typing its path, preserving or changing its interpretation', async () => {

@@ -85,7 +85,7 @@ export function AssetsTab({ onRequestHeight }: { onRequestHeight?: ((min: number
             <span>
               {pending.kind === 'reimport' ? `Reimporting ${pending.name ?? pending.sources[0]?.source ?? ''}…` : `Importing ${countFiles(pending.sources.length)}…`}
             </span>
-            <span className="assets__busy-note">You can keep working. Other edits wait until it finishes.</span>
+            <span className="assets__busy-note">You can keep working. Editing now means retrying the import.</span>
           </div>
         ) : null}
         {browser}
