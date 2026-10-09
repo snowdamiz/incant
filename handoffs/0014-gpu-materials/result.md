@@ -166,10 +166,11 @@ retained-scene and source-removal GPU tests still pass.
 
 ## Open questions (first pass, now resolved)
 
-The director resolved both first-pass questions in the priority follow-up. The
-neutral backdrop and fixed camera stay for this increment. Specular IBL and tone
-mapping are the next renderer work, and automatic framing can follow. No question
-remains for the director.
+Astra settled both first-pass questions as a routine integration decision. The
+director's standing instruction is to continue without asking, and Astra acted under
+it. This was not a new explicit human design decision. The neutral backdrop and fixed
+camera stay for this increment. Specular IBL and tone mapping are the next renderer
+work, and automatic framing can follow. No question remains open.
 
 ---
 
@@ -179,12 +180,15 @@ Model: Claude Opus 5.5, model ID `claude-opus-5-5`, in the same handoff session
 setup as the first pass. No builds, code changes or new screenshots were made in this
 pass. Captures were decoded locally and inspected without modifying them.
 
-## Director feedback acknowledged
+## Packet feedback acknowledged
 
-- Astra integrated the studio tuning. All seven explicit GPU tests pass, including the
-  new lit back-face and varying normal-map checks. I did not rerun them in this pass.
-- The neutral backdrop and fixed camera stay for this increment. I withdrew the
-  backdrop and framing questions instead of asking the director again.
+- Astra integrated the studio tuning. Astra reports that all seven explicit GPU tests
+  pass, including the new lit back-face and varying normal-map checks. I did not
+  rerun them in this pass.
+- The neutral backdrop and fixed camera stay for this increment. That was Astra's
+  routine integration decision under the director's continue-without-asking
+  instruction. I withdrew the backdrop and framing questions rather than escalating
+  them.
 - Specular IBL and tone mapping are the next renderer work. Automatic framing follows.
 - Historical captures and hashes are not treated as current output. This review uses
   only the 19 freshly generated PNGs and the two final native captures.
@@ -236,10 +240,11 @@ These are `10-final-wide.jpg` at 1440x900 and `11-final-minimum.jpg` at 1000x650
   right Inspector holds the cube's model identity, source file, a Reimport action
   with help text, and the Identifiers disclosure. Neither panel duplicates the
   other, and the viewport keeps its own region between them.
-- **Minor layout observation, outside this packet's scope.** At 1000x650 the second
-  line of the Reimport help text is clipped by the Agent section divider. The
-  Identifiers disclosure is pushed out of view. Neither affects material appearance.
-  This is a UI polish item for a later layout pass. It does not regress this increment.
+- **Inspector overflow at 1000x650 is scrollable content, not clipping.** Corrected
+  in the amendment below. In the unscrolled capture, the Reimport help and the
+  Identifiers row sit below the fold of a working Inspector scroll area. That is the
+  intended behavior, not a defect. A scroll-affordance polish follow-up is stated in
+  the amendment.
 - **Capture overlays ignored.** The purple screen-recording badge over the macOS
   window controls is an OS capture overlay. The pointer cursor in the wide capture is
   also not application chrome. Neither was used to judge traffic-light spacing or chrome.
@@ -269,6 +274,61 @@ These are `10-final-wide.jpg` at 1440x900 and `11-final-minimum.jpg` at 1000x650
 
 No visual-regression baseline exists, and none is claimed. No phase gate is approved
 by this review.
+
+## Changed paths in this pass
+
+- `handoffs/0014-gpu-materials/result.md`
+
+---
+
+# Amendment: minimum-height Inspector scrolling (priority follow-up)
+
+Model: Claude Opus 5.5, model ID `claude-opus-5-5`, in the same handoff session setup.
+This pass was review-only. I made no builds, code edits or new captures.
+
+## Correction
+
+My final review said the Reimport help was "clipped" at 1000x650 and the Identifiers
+row was "pushed out of view". That wording was wrong. The content sat below the fold
+of a working scroll viewport. It was never permanently clipped or inaccessible.
+
+## Evidence
+
+- **Capture.** `artifacts/native-material-review/12-minimum-inspector-scrolled.jpg`
+  shows the 1000x650 window after a normal wheel scroll in the Inspector. The Source
+  block, Reimport button and both lines of its help text are fully visible. The
+  Identifiers disclosure row is visible below them with its own divider. A macOS
+  overlay scrollbar appears at the Inspector's right edge, spanning only the
+  Inspector region.
+- **Fixed panels.** Compared with `11-final-minimum.jpg`, the viewport, cube, bottom
+  Problems panel, Agent panel, asset sidebar and top bar are unchanged in position.
+  Only the Inspector content moved. Its Model header scrolled up under the fixed
+  Inspector title.
+- **Code.** `.panel__scroll` in `editor/ui/src/styles/app.css` sets `flex: 1`,
+  `min-height: 0` and `overflow: auto`. The Inspector body renders inside it in
+  `InspectorPanel.tsx`. That is a correct independent flex scroll container. The
+  zero minimum height is what lets it shrink and scroll rather than push the Agent
+  panel.
+- **Cursor.** The pointer glow in this capture is the capture tool's cursor, not
+  application chrome.
+
+## Verdict
+
+Inspector scrolling is functional and accepted. This is not a defect and not a
+regression of this increment.
+
+## Optional polish follow-up
+
+Overlay scrollbars on macOS hide at rest. In the unscrolled state, the last visible
+help line meets the Agent divider with no sign that more content follows. A user can
+reasonably read that as a hard cut.
+
+Specific follow-up for a later UI pass: when `.panel__scroll` content overflows and
+is not at its bottom, show a subtle bottom edge cue. A fade of about 16px, from
+transparent to the panel background color, would do it. Remove the cue when the
+scroll reaches the end. A matching top cue would help when scrolled down. This is
+appearance polish only. It does not change behavior, and it does not block this
+increment.
 
 ## Changed paths in this pass
 
