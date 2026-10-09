@@ -5,6 +5,10 @@ use incant_render::Renderer;
 use materials::{Fixture, center, emissive, near};
 use serde_json::json;
 
+// Khronos PBR Neutral reference values after the sRGB display transfer.
+const DISPLAY_RED: [u8; 4] = [241, 33, 33, 255];
+const DISPLAY_GREEN: [u8; 4] = [33, 241, 33, 255];
+
 fn capture(fixture: &Fixture, renderer: &Renderer, name: &str) -> Vec<u8> {
     let png = renderer
         .screenshot_scene_png(&fixture.scene(renderer), 320, 180)
@@ -65,7 +69,7 @@ fn alpha_modes_and_back_faces_follow_material_semantics() {
     let mut fixture = Fixture::new(emissive([1., 0., 0.], 0., "OPAQUE"));
     near(
         center(&capture(&fixture, &renderer, "opaque-alpha-zero")),
-        [255, 0, 0, 255],
+        DISPLAY_RED,
         1,
     );
     let empty = renderer
@@ -74,12 +78,12 @@ fn alpha_modes_and_back_faces_follow_material_semantics() {
     fixture.edit(|g| g["materials"][0] = emissive([1., 0., 0.], 0., "MASK"));
     assert_eq!(capture(&fixture, &renderer, "mask-discarded"), empty);
     fixture.edit(|g| g["materials"][0] = emissive([1., 0., 0.], 0.5, "MASK"));
-    near(fixture.pixel(&renderer), [255, 0, 0, 255], 1);
+    near(fixture.pixel(&renderer), DISPLAY_RED, 1);
     // A reflected instance keeps its authored front face through winding reversal.
     fixture.edit(|g| g["nodes"][0]["scale"] = json!([-1, 1, 1]));
     near(
         center(&capture(&fixture, &renderer, "reflected-single-sided")),
-        [255, 0, 0, 255],
+        DISPLAY_RED,
         1,
     );
     fixture.edit(|g| g["nodes"][0]["scale"] = json!([1, 1, -1]));
@@ -87,7 +91,7 @@ fn alpha_modes_and_back_faces_follow_material_semantics() {
     fixture.edit(|g| g["materials"][0]["doubleSided"] = json!(true));
     near(
         center(&capture(&fixture, &renderer, "double-sided-back")),
-        [255, 0, 0, 255],
+        DISPLAY_RED,
         1,
     );
     fixture.edit(|g| {
@@ -188,7 +192,7 @@ fn emissive_maps_and_samplers_retain_color_and_addressing() {
     });
     near(
         center(&capture(&fixture, &renderer, "emissive-map")),
-        [128, 64, 32, 255],
+        [124, 55, 4, 255],
         1,
     );
     {
@@ -210,7 +214,7 @@ fn emissive_maps_and_samplers_retain_color_and_addressing() {
     fixture.cook();
     near(
         center(&capture(&fixture, &renderer, "sixteen-bit-color")),
-        [128, 64, 32, 255],
+        [124, 55, 4, 255],
         1,
     );
     // Constant coordinates isolate sampler behavior from the camera projection.
@@ -225,11 +229,11 @@ fn emissive_maps_and_samplers_retain_color_and_addressing() {
     }
     std::fs::write(fixture.root.path().join("quad.bin"), &bytes).unwrap();
     fixture.texture(&[255, 0, 0, 255, 0, 255, 0, 255], 2, 1, |_| {});
-    near(fixture.pixel(&renderer), [0, 255, 0, 255], 1);
+    near(fixture.pixel(&renderer), DISPLAY_GREEN, 1);
     fixture.edit(|g| g["samplers"][0]["wrapS"] = json!(10497));
-    near(fixture.pixel(&renderer), [255, 0, 0, 255], 1);
+    near(fixture.pixel(&renderer), DISPLAY_RED, 1);
     fixture.edit(|g| g["samplers"][0]["wrapS"] = json!(33648));
-    near(fixture.pixel(&renderer), [0, 255, 0, 255], 1);
+    near(fixture.pixel(&renderer), DISPLAY_GREEN, 1);
     for vertex in 0..6 {
         bytes[72 + vertex * 8..76 + vertex * 8].copy_from_slice(&0.5f32.to_le_bytes());
     }
@@ -299,5 +303,60 @@ fn imported_geometry_survives_sources_and_retained_versions_survive_reimport() {
         second,
         renderer.screenshot_scene_png(&updated, 320, 180).unwrap(),
         "failed replacement must leave the prior scene usable"
+    );
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by the desktop workflow"]
+fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
+    let renderer = Renderer::headless().unwrap();
+    let mut fixture =
+        Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.3}}));
+    let normal = (glam::Vec3::new(1., 2., 3.).normalize()
+        + glam::Vec3::new(6., 5., 9.).normalize())
+    .normalize();
+    let path = fixture.root.path().join("quad.bin");
+    let mut bytes = std::fs::read(&path).unwrap();
+    for _ in 0..6 {
+        for value in normal.to_array() {
+            bytes.extend_from_slice(&value.to_le_bytes());
+        }
+    }
+    std::fs::write(path, bytes).unwrap();
+    fixture.edit(|g| {
+        g["buffers"][0]["byteLength"] = json!(192);
+        g["bufferViews"]
+            .as_array_mut()
+            .unwrap()
+            .push(json!({"buffer":0,"byteOffset":120,"byteLength":72}));
+        g["accessors"]
+            .as_array_mut()
+            .unwrap()
+            .push(json!({"bufferView":2,"componentType":5126,"count":6,"type":"VEC3"}));
+        g["meshes"][0]["primitives"][0]["attributes"]["NORMAL"] = json!(2);
+    });
+    let highlight = center(&capture(&fixture, &renderer, "hdr-glossy-highlight"));
+    // Radiance > 1 must reach the shoulder, without clipping before the transform.
+    // Premature UNORM clipping would yield the tone-mapped 1.0 value (240).
+    assert!(highlight[0] > 243 && highlight[0] < 255, "{highlight:?}");
+    assert_eq!(highlight[0], highlight[1]);
+    assert_eq!(highlight[1], highlight[2]);
+    assert_eq!(highlight[3], 255);
+    fixture.edit(|g| {
+        g["materials"] = json!([
+            emissive([1.; 3], 0.5, "BLEND"),
+            emissive([0.; 3], 1., "OPAQUE")
+        ]);
+        let mut back = g["meshes"][0].clone();
+        back["primitives"][0]["material"] = json!(1);
+        g["meshes"].as_array_mut().unwrap().push(back);
+        g["nodes"] =
+            json!([{"mesh":0,"translation":[0,0,0.1]},{"mesh":1,"translation":[0,0,-0.1]}]);
+        g["scenes"][0]["nodes"] = json!([0, 1]);
+    });
+    near(
+        center(&capture(&fixture, &renderer, "hdr-transparent-over-black")),
+        [181, 181, 181, 255],
+        1,
     );
 }

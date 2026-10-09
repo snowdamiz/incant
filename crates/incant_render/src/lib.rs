@@ -1,8 +1,14 @@
 //! Native rendering and GPU readback with retained imported material previews.
-//! The production render graph, authored lighting and postprocessing remain open.
+//! Ordered HDR geometry, display transform and native composition passes.
+//! Clustered lighting and the full production render graph remain open.
+mod frame;
+#[cfg(test)]
+#[path = "../tests/hdr_output/mod.rs"]
+mod hdr_output;
 mod material_pipeline;
 mod materials;
 mod models;
+mod output;
 mod resource_error;
 mod scene;
 mod studio;
@@ -35,21 +41,16 @@ pub struct Viewport {
     pub corner_radii: [f32; 4],
     pub canvas_srgb: [u8; 3],
 }
-#[repr(C)]
-#[derive(Clone, Copy, Pod, Zeroable)]
-struct ClipUniform {
-    rect: [f32; 4],
-    radii: [f32; 4],
-    canvas: [f32; 4],
-}
 pub struct Renderer {
     pub device: wgpu::Device,
     pub queue: wgpu::Queue,
     pub adapter: wgpu::Adapter,
     pub adapter_name: String,
-    pipelines: Mutex<HashMap<(wgpu::TextureFormat, bool), wgpu::RenderPipeline>>,
+    pipelines: Mutex<HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>>,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
+    frames: frame::FrameCache,
+    output: output::OutputPass,
 }
 impl Renderer {
     pub async fn new(
@@ -66,7 +67,7 @@ impl Renderer {
         let adapter_name = adapter.get_info().name;
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
-                label: Some("Incant Phase 0"),
+                label: Some("Incant renderer"),
                 ..Default::default()
             })
             .await?;
@@ -79,6 +80,8 @@ impl Renderer {
             pipelines: Mutex::new(HashMap::new()),
             models: Mutex::new(HashMap::new()),
             materials,
+            frames: Default::default(),
+            output: Default::default(),
         })
     }
     pub fn headless() -> Result<Self> {
@@ -132,58 +135,14 @@ impl Renderer {
                 cache: None,
             })
     }
-    fn clip_pipeline(&self, format: wgpu::TextureFormat) -> wgpu::RenderPipeline {
-        let shader = self
-            .device
-            .create_shader_module(wgpu::ShaderModuleDescriptor {
-                label: Some("Native viewport corner mask"),
-                source: wgpu::ShaderSource::Wgsl(include_str!("viewport_clip.wgsl").into()),
-            });
-        self.device
-            .create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-                label: Some("Native viewport composition"),
-                layout: None,
-                vertex: wgpu::VertexState {
-                    module: &shader,
-                    entry_point: Some("vertex"),
-                    compilation_options: Default::default(),
-                    buffers: &[],
-                },
-                primitive: Default::default(),
-                depth_stencil: None,
-                multisample: Default::default(),
-                fragment: Some(wgpu::FragmentState {
-                    module: &shader,
-                    entry_point: Some("fragment"),
-                    compilation_options: Default::default(),
-                    targets: &[Some(wgpu::ColorTargetState {
-                        format,
-                        blend: Some(wgpu::BlendState::ALPHA_BLENDING),
-                        write_mask: wgpu::ColorWrites::ALL,
-                    })],
-                }),
-                multiview_mask: None,
-                cache: None,
-            })
-    }
-    fn cached_pipeline(
-        &self,
-        format: wgpu::TextureFormat,
-        clip: bool,
-    ) -> Result<wgpu::RenderPipeline> {
+    fn cached_pipeline(&self, format: wgpu::TextureFormat) -> Result<wgpu::RenderPipeline> {
         let mut pipelines = self
             .pipelines
             .lock()
-            .map_err(|_| "render cache lock failed")?;
+            .map_err(|_| ResourceError::CacheLock("diagnostic pipeline"))?;
         Ok(pipelines
-            .entry((format, clip))
-            .or_insert_with(|| {
-                if clip {
-                    self.clip_pipeline(format)
-                } else {
-                    self.pipeline(format)
-                }
-            })
+            .entry(format)
+            .or_insert_with(|| self.pipeline(format))
             .clone())
     }
     /// Phase 0 compatibility path. Bound models require prepare_scene and draw_scene.
@@ -214,9 +173,7 @@ impl Renderer {
         height: u32,
         viewport: Option<Viewport>,
     ) -> Result<wgpu::CommandBuffer> {
-        if width == 0 || height == 0 || width > 8192 || height > 8192 {
-            return Err("invalid render target size".into());
-        }
+        output::OutputPass::validate(format)?;
         let rect = viewport
             .map(|v| v.rect)
             .unwrap_or([0., 0., width as f32, height as f32]);
@@ -233,6 +190,7 @@ impl Renderer {
         if viewport.is_some_and(|v| v.corner_radii.iter().any(|r| !r.is_finite() || *r < 0.)) {
             return Err("invalid viewport corner radius".into());
         }
+        let attachments = self.frames.get(&self.device, width, height)?;
         let vertices = vertices(&scene.diagnostics, rect[2] / rect[3]);
         let buffer = self
             .device
@@ -245,54 +203,24 @@ impl Renderer {
                 },
                 usage: wgpu::BufferUsages::VERTEX,
             });
-        let depth = self
-            .device
-            .create_texture(&wgpu::TextureDescriptor {
-                label: Some("Depth"),
-                size: wgpu::Extent3d {
-                    width,
-                    height,
-                    depth_or_array_layers: 1,
-                },
-                mip_level_count: 1,
-                sample_count: 1,
-                dimension: wgpu::TextureDimension::D2,
-                format: wgpu::TextureFormat::Depth32Float,
-                usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
-                view_formats: &[],
-            })
-            .create_view(&Default::default());
-        let pipeline = self.cached_pipeline(format, false)?;
+        let hdr = &attachments.color;
+        let depth = &attachments.depth;
+        let pipeline = self.cached_pipeline(frame::HDR_FORMAT)?;
         let mut encoder = self.device.create_command_encoder(&Default::default());
-        // Claude's neutral viewport backdrop, sRGB #141519. Match the
-        // attachment's transfer function just as the composition canvas does.
-        let backdrop = [20, 21, 25].map(|channel| {
-            let value = f64::from(channel) / 255.;
-            if format.is_srgb() {
-                ((value + 0.055) / 1.055).powf(2.4)
-            } else {
-                value
-            }
-        });
         {
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-                label: Some("Native viewport"),
+                label: Some("Linear HDR geometry"),
                 color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                    view,
+                    view: hdr,
                     resolve_target: None,
                     depth_slice: None,
                     ops: wgpu::Operations {
-                        load: wgpu::LoadOp::Clear(wgpu::Color {
-                            r: backdrop[0],
-                            g: backdrop[1],
-                            b: backdrop[2],
-                            a: 1.,
-                        }),
+                        load: wgpu::LoadOp::Clear(wgpu::Color::TRANSPARENT),
                         store: wgpu::StoreOp::Store,
                     },
                 })],
                 depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
-                    view: &depth,
+                    view: depth,
                     depth_ops: Some(wgpu::Operations {
                         load: wgpu::LoadOp::Clear(1.),
                         store: wgpu::StoreOp::Store,
@@ -311,62 +239,15 @@ impl Renderer {
         self.render_models(
             scene,
             models::ModelTarget {
-                color: view,
-                depth: &depth,
-                format,
+                color: hdr,
+                depth,
+                format: frame::HDR_FORMAT,
                 rect,
             },
             &mut encoder,
         )?;
-        if let Some(viewport) = viewport {
-            let linear = viewport.canvas_srgb.map(|v| {
-                let v = f32::from(v) / 255.;
-                if !format.is_srgb() {
-                    v
-                } else if v <= 0.04045 {
-                    v / 12.92
-                } else {
-                    ((v + 0.055) / 1.055).powf(2.4)
-                }
-            });
-            let uniform = ClipUniform {
-                rect,
-                radii: viewport.corner_radii,
-                canvas: [linear[0], linear[1], linear[2], 1.],
-            };
-            let buffer = self
-                .device
-                .create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                    label: Some("Viewport clipping bounds"),
-                    contents: bytemuck::bytes_of(&uniform),
-                    usage: wgpu::BufferUsages::UNIFORM,
-                });
-            let pipeline = self.cached_pipeline(format, true)?;
-            let bind_group = self.device.create_bind_group(&wgpu::BindGroupDescriptor {
-                label: Some("Viewport clipping bounds"),
-                layout: &pipeline.get_bind_group_layout(0),
-                entries: &[wgpu::BindGroupEntry {
-                    binding: 0,
-                    resource: buffer.as_entire_binding(),
-                }],
-            });
-            let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-                label: Some("Composite the viewport into editor chrome"),
-                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                    view,
-                    resolve_target: None,
-                    depth_slice: None,
-                    ops: wgpu::Operations {
-                        load: wgpu::LoadOp::Load,
-                        store: wgpu::StoreOp::Store,
-                    },
-                })],
-                ..Default::default()
-            });
-            pass.set_pipeline(&pipeline);
-            pass.set_bind_group(0, &bind_group, &[]);
-            pass.draw(0..3, 0..1);
-        }
+        self.output
+            .encode(&self.device, &mut encoder, hdr, view, format, viewport)?;
         Ok(encoder.finish())
     }
     pub fn screenshot_png(&self, project: &Project, width: u32, height: u32) -> Result<Vec<u8>> {

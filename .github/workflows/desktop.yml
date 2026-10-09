@@ -35,7 +35,9 @@ jobs:
       - run: npm test --workspace editor/ui
       - run: cargo test --workspace --release --locked
       - name: Verify geometry, editor recovery and simulated frame capture
-        run: cargo test -p incant_render -p incant_editor -p incant_headless --release --locked --test model_gpu -- --ignored
+        run: |
+          cargo test -p incant_render --release --locked --lib -- --ignored
+          cargo test -p incant_render -p incant_editor -p incant_headless --release --locked --test model_gpu -- --ignored
       - run: cargo build -p incant_editor -p incant_headless --release --features incant_editor/custom-protocol --locked
       - name: Exercise native GPU rendering without a user account
         run: python tools/platforms/render-check.py
@@ -46,4 +48,6 @@ jobs:
             target/release/incant_editor${{ matrix.suffix }}
             target/release/incant_headless${{ matrix.suffix }}
             artifacts/render-smoke
+            THIRD_PARTY_NOTICES.md
+            licenses/Apache-2.0.txt
           if-no-files-found: error
