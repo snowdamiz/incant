@@ -5,6 +5,8 @@ Source: [PLAN.md](PLAN.md), revision 2 with director decisions. Current phase:
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without
 repeated permission questions. Phase advancement does not mark those gates passed.
+On 2026-10-09 the director authorized agents to merge completed PRs into main
+after review and passing checks, without requesting separate merge approval.
 
 ## Implemented and locally verified
 
@@ -51,10 +53,9 @@ within its documented workload.
   including the titlebar logo spacing and safer account-dialog focus. The landing
   page has the matching palette in PR #2. Its modeling expansion and lighter copy
   each passed 23 hosted browser checks. Graphical explanations, authentic SVG
-  platform marks and the subsequent workflow correction are now integrated in
-  PR #2. The workflow pairs each icon with a short visible explanation and tighter
-  spacing; all 23 hosted checks passed on bf99437. The capture restriction remains
-  in force. See
+  platform marks and the subsequent workflow correction are integrated in PR #2.
+  Each workflow icon has a short visible explanation and tighter spacing; all 23
+  hosted checks passed on bf99437. The capture restriction remains in force. See
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo now
   routes by focus; automated tests pass, but its final native interaction check
   remains pending. **Computer use, browser automation and screen capture are
@@ -76,7 +77,8 @@ within its documented workload.
   they verify the real storage backends without using provider accounts.
   [All three hosted jobs passed](docs/spikes/evidence/desktop-credentials-2026-10-08.json),
   including record cleanup.
-- Draft PR: https://github.com/snowdamiz/incant/pull/1. All six platform jobs
+- Foundation [PR #1](https://github.com/snowdamiz/incant/pull/1) merged into main
+  on 2026-10-09 after all twelve checks passed on 575cc35. All six platform jobs
   [passed on 640fbdd](docs/spikes/evidence/six-platform-2026-10-08.json), including
   Android APK packaging. Both arm64/x86_64 native libraries, manifest and DEX are
   present in the downloaded APK. [Android emulator execution also passed](docs/spikes/evidence/android-emulator-2026-10-08.json):
@@ -89,9 +91,6 @@ within its documented workload.
 
 ## External prerequisites still required
 
-- Repository: https://github.com/snowdamiz/incant. The bootstrap
-  is on main; implementation is in draft PR #1 on impl/phase0-foundation.
-  The director remains responsible for merging.
 - Physical-device
   coverage, self-hosted graphics/device runners, and nightly artifact history.
 - Apple/Windows distribution signing, store/developer accounts, staffing and the

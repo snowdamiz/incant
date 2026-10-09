@@ -30,6 +30,12 @@ deferred evidence and human-owned actions tracked; do not mark gates passed,
 claim completed releases, or waive final requirements without their evidence.
 This overrides the stop-before-next-phase rule above for implementation progress.
 
+Director decision, 2026-10-09: agents merge completed PRs into main once the scoped
+work is reviewed and its required checks pass. Do not wait for a separate director
+merge or request repeated merge confirmation. Resolve integration conflicts and
+verify the result. Merging implemented work does not approve a phase gate or mark
+deferred requirements complete; the remaining human-owned actions still apply.
+
 ---
 
 ## 1. Vision, principles, and definition of done
@@ -219,7 +225,7 @@ This plan is executed primarily by AI coding agents under human direction. Two a
 |---|---|---|---|
 | **Astra** | OpenAI Codex (cloud tasks and the Codex CLI) | Andrey's OpenAI account | Everything that is not visual: architecture, Rust crates, document model, command bus, scripting runtime and TS SDK, physics, audio, animation runtime, networking, asset pipeline, platform and export, backend services, CI, tests, eval graders, documentation text, Driftwake gameplay and systems code. Also integrates every Claude handoff and opens all PRs. |
 | **Claude 5.5** (Opus 5.5 by default) | Claude Code, reached over ACP (Agent Client Protocol) | Andrey's already logged-in Claude account. No API key, nothing stored in the repo or CI | All visual work as defined in 4.2: editor UI and UX design and implementation, viewport and gizmo visuals, look-dev, shader and material appearance, VFX, lighting tuning, golden-image and screenshot review, art direction, Driftwake art, HUD, trailer and store art, diagrams and site design. |
-| **Andrey** (director) | | | Priorities, phase gate approvals, PR merges, routing tie-breaks, and anything requiring a human: store and developer accounts, signing keys, payments, legal, age ratings. |
+| **Andrey** (director) | | | Priorities, phase gate approvals, routing tie-breaks, and anything requiring a human: store and developer accounts, signing keys, payments, legal, age ratings. |
 
 The build-time agents are separate from the in-engine agent that end users talk to. End users connect their own OpenAI account (Section 3). The engine, the templates, and the shipped game must never contain or depend on the director's Codex or Claude sessions.
 
@@ -253,7 +259,7 @@ If routing is ambiguous, Astra asks the director in the task thread and defaults
 1. **Packet.** Astra writes a self-contained handoff packet to `handoffs/<id>/brief.md`: goal, acceptance criteria, relevant file paths, build and run commands, the headless-runner command that captures screenshots, reference images, constraints (performance budgets, target platforms, tiers), and exactly what to return.
 2. **Session.** Astra runs `tools/handoff run <id>`. The tool opens an ACP session to Claude Code through the Claude Code ACP adapter. The session inherits the director's logged-in Claude account. No API key or token is written anywhere.
 3. **Work.** Claude works in a git worktree on branch `handoff/<id>`, runs the visual regression suite, and writes `handoffs/<id>/result.md` with before and after screenshots, rationale, and open questions.
-4. **Integration.** Astra reviews the result, merges the worktree, runs full CI, and opens the PR. Every commit carries a trailer `Built-by: astra` or `Built-by: claude` so provenance covers engine development as well as game content.
+4. **Integration.** Astra reviews the result, merges the worktree, opens the PR, and runs full CI. Once the scoped work is complete, reviewed, and its required checks pass, Astra merges the PR into main under the director’s standing authorization. Every commit carries a trailer `Built-by: astra` or `Built-by: claude` so provenance covers engine development as well as game content.
 5. **Fallback.** If ACP or the Claude account is unavailable, the packet stays in `handoffs/` and the director runs Claude Code on it manually. Packets are written so that this always works.
 6. **Batching.** Non-urgent visual tasks are batched per sprint to respect subscription limits. Blocking ones go immediately.
 
@@ -287,7 +293,7 @@ The agents do the building. Humans direct, review, and do what agents cannot.
 
 ### 4.6 Operating rules
 
-- Every PR is agent-authored and human-merged. The director approves every phase gate.
+- Every PR is agent-authored and agent-merged into main after review and passing required checks. No separate merge confirmation is needed. The director approves every phase gate; a PR merge does not approve a gate.
 - Weekly the director reviews the handoff log, eval results, and friction logs, and resolves any routing disputes.
 - Agents never self-approve a routing exception. Ambiguity defaults to the split pattern.
 - Both agents dogfood the product. Astra and Claude build Driftwake content through the in-engine agent wherever possible, which is what the provenance metric measures.
@@ -651,7 +657,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | Codex outages or task limits stall the primary builder | Medium | Medium | Codex CLI fallback on the director's machine; work queue lives in the repo so any agent session can resume it |
 | Two agents drift on conventions and style | High | Medium | Both instruction files generated from one conventions source; CI lint; Astra integrates every handoff and owns the final PR |
 | Routing ambiguity causes rework | Medium | Low | Default to the split pattern; director tie-breaks weekly |
-| Director becomes the bottleneck for approvals | High | Medium | Approval modes per risk level; only gates, merges, and routing disputes need the director |
+| Director becomes the bottleneck for approvals | High | Medium | Approval modes per risk level; agents merge completed PRs after review and passing checks; gates and routing disputes need the director |
 
 ---
 
@@ -792,7 +798,7 @@ Component (examples)
 - **Astra:** the agent running in OpenAI Codex that builds everything non-visual and integrates all work.
 - **ACP:** Agent Client Protocol, the open protocol for talking to coding agents such as Claude Code from another tool. Used to hand visual work to Claude 5.5.
 - **Handoff packet:** a self-contained folder describing one visual task for Claude, plus the result it returns.
-- **Director:** the human (Andrey) who sets priorities, approves gates, merges PRs, and breaks routing ties.
+- **Director:** the human (Andrey) who sets priorities, approves gates and breaks routing ties. Agents merge completed PRs under the director’s standing authorization.
 
 ## Appendix D: Name shortlist
 
