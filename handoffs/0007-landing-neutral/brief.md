@@ -1,5 +1,46 @@
 # Expand and polish the landing page around the full Incant plan
 
+## Latest director correction — a middle ground for the workflow
+
+The director has reviewed the graphical pass in the browser and supplied a
+screenshot of the “One project, from shape to ship” workflow section. Their exact
+feedback: “This section was taken to far in terms of removing text. It must find
+a good middle ground”. This instruction takes precedence over the earlier push
+to minimize all text. Implement this focused correction now.
+
+The screenshot shows the six workflow icons and one-word labels, a large empty
+band, and the platform logo row. It looks under-explained. Keep the graphical
+pipeline and authentic platform SVGs, but restore useful, concise visible copy:
+a short introduction if it helps and one brief explanation for each workflow
+step, explaining what the visitor does or gets. Make those explanations concrete
+and differentiated (modeling, materials, TypeScript logic, reviewing agent edits,
+play-test evidence, export). Do not rely on screen-reader-only descriptions to
+explain the visible workflow. Aim for an understandable middle ground between
+bare icon labels and the original long feature paragraphs. Keep the overall page
+graphical; do not expand every other section again.
+
+Rebalance this section's spacing and hierarchy so the explanations belong to
+their icons and the workflow and platform row feel related. The supplied
+screenshot has excessive vertical dead space; retain comfortable breathing room
+without preserving empty bands just to make the section large. Ensure the mobile
+rail can accommodate the concise explanations naturally. Keep the actual SVG
+platform icons and small platform labels the director requested.
+
+Continue from your committed 81a7f9b. Astra has separately integrated it and added
+license links plus a test selector fix; leave SiteFooter.vue and browser tests
+alone so those integration changes are preserved. Scope this correction to the
+workflow component/content and handoff evidence unless a closely related styling
+change is necessary. Preserve the prior graphical result as history. Run strict
+typecheck and production builds (including /incant/), commit with Built-by:
+claude, and return the result for integration. No push, merge or publishing.
+
+No computer use, browser/native automation, Playwright execution, screenshots,
+recording or capture. The user's attached screenshot is feedback, not permission
+to resume capture. Terminal source work only; hosted CI will validate behavior.
+Do not claim an agent rendered review. Keep the neutral palette, restrained
+accent, finished-product voice and other approved choices. Use judgment and
+continue without asking routine design permission.
+
 ## Latest director instruction — redesign around graphics, not text
 
 The director reviewed the density pass and says: “landing page it still too text

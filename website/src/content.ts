@@ -182,19 +182,18 @@ export const lighthouseGraph: GraphNode[] = [
   { id: 'output', op: 'Output', detail: 'retopo · auto-UV · LOD 0–2', adds: 'cleanup, UVs and levels of detail, shown as a wireframe' },
 ]
 
-/* The end-to-end path (PLAN.md sections 1.1, 5 and 6), drawn as a pipeline. */
+/* The end-to-end path (PLAN.md sections 1.1, 5 and 6), drawn as a pipeline with one line each. */
 export interface WorkflowStep {
   id: 'model' | 'surface' | 'script' | 'review' | 'playtest' | 'ship'
   title: string
-  /** Read by assistive technology with the step; not shown. */
-  artifact: string
+  body: string
 }
 
 export const workflowSteps: WorkflowStep[] = [
-  { id: 'model', title: 'Model', artifact: 'a geometry graph' },
-  { id: 'surface', title: 'Surface', artifact: 'a shader graph material' },
-  { id: 'script', title: 'Script', artifact: 'TypeScript gameplay' },
-  { id: 'review', title: 'Review', artifact: 'the agent’s changes as one transaction' },
-  { id: 'playtest', title: 'Play-test', artifact: 'a headless run with evidence' },
-  { id: 'ship', title: 'Ship', artifact: 'every platform from one project' },
+  { id: 'model', title: 'Model', body: 'Build meshes in a geometry graph, or import your own and clean them up.' },
+  { id: 'surface', title: 'Surface', body: 'Layer materials in a shader graph that compiles to WGSL for every platform.' },
+  { id: 'script', title: 'Script', body: 'Write gameplay in TypeScript, typed from your scene, with hot reload.' },
+  { id: 'review', title: 'Review', body: 'Read the agent’s work as one diff, then keep it or undo it in a step.' },
+  { id: 'playtest', title: 'Play-test', body: 'A headless run returns frames, logs and passed checks as proof it works.' },
+  { id: 'ship', title: 'Ship', body: 'Export the same project to desktop, mobile and the web.' },
 ]
