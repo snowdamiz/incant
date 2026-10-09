@@ -1,3 +1,45 @@
+# Priority: final native label-fix recapture
+
+Review 08-label-fixed-wide.jpg (1440x900) and 09-label-fixed-minimum.jpg
+(1000x650) in artifacts/environment-native. These are real CUA captures from
+source 441b3a6 on impl/environment-lighting, which includes your a756fa9 label
+fix. The native app was rebuilt and reopened; all 282 UI tests and build pass.
+Source lighting is unchanged. Update result.md with the final label verdict;
+commit the result and current brief with Built-by: claude. No further design
+expansion is requested. Keep source and capture limitations precise.
+
+---
+
+# Priority: final native environment review
+
+The Mac is now accessible. Review CUA-native captures in
+`artifacts/environment-native/`, recorded from the exact PR16 source 42a991d
+built independently in the managed worktree. No runtime/style changes occurred.
+The public CLI/headless review remains approved; update result.md with the native
+verdict and limitations. Model is Claude Opus 5.5 through ACP protocol 1.
+
+Capture sequence: 01 authored 64x32 red/blue environment at yaw 0 with a metallic
+sphere and the read-only EnvironmentLight Inspector; 02 watched source changed
+to a synthetic uniform green environment; 03 Undo restores old environment;
+04 Redo restores green; 05 invalid source shows a cook error while retaining
+valid green lighting; 06 source repair restores the original environment and
+clears errors; 07 minimum window size (1000x650). Check rendering, retention,
+recovery, Inspector clipping/scrolling and viewport sizing. Numerical test colors
+are intentionally saturated and are not an art-direction choice.
+
+The macOS capture indicator can cover traffic lights; this pre-existing OS overlay
+is not app chrome. Saved account is restored without a prompt. Do not record the
+account email in result.md. Astra fixed only a disposable-fixture setup mistake:
+its authoring RPC had used .incant/journal.jsonl while the editor correctly loaded
+game.incant.journal.jsonl; preserving the old import journal and putting the
+correct generated command-bus journal at the default path fixed the fixture.
+No project source or application journal validation was bypassed.
+
+Review pixels; do not change runtime math. If a concrete styling defect is found,
+you own its focused fix. Commit result with Built-by: claude. No phase approval.
+
+---
+
 # Priority: confirm retuned headless captures
 
 Your two panel-intensity changes are integrated. All 13 model/editor/headless GPU

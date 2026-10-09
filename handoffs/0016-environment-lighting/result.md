@@ -1,13 +1,80 @@
 # 0016 Environment lighting: default studio look-dev — result
 
+## Final label verdict
+
+**Approved: the Inspector label fix, natively confirmed.** No styling defect remains in
+the reviewed native scope. No phase gate is approved or claimed.
+
+**Packet:** the final label-fix recapture revision. It carries no new typed director
+feedback, and no further design expansion was requested. Astra reports:
+
+- The native app was rebuilt and reopened from `441b3a6` on `impl/environment-lighting`.
+- All 282 UI tests pass, and the build passes.
+- Source lighting is unchanged.
+
+I did not rerun any of these.
+
+**Source identity:** `a756fa9` is not a direct ancestor of `441b3a6`, so the fix was
+carried over by rebase or cherry-pick. A content comparison between this branch and
+`441b3a6` is empty for three areas:
+
+- `editor/ui/src/styles/app.css`, which contains the two-line label clamp;
+- `editor/ui/DESIGN.md`;
+- `crates/incant_render/src`.
+
+The captured build therefore contains exactly the reviewed label fix and the reviewed
+lighting source.
+
+**Captures reviewed at native resolution:** these are real CUA captures. Like 01 to 07,
+they are JPEGs and stay in the ignored `artifacts/` folder.
+
+| Capture | Size | Result |
+|---|---|---|
+| `08-label-fixed-wide.jpg` | 1440×900 | Pass |
+| `09-label-fixed-minimum.jpg` | 1000×650 | Pass |
+
+- **Label:** "Rotation degrees" now reads in full as "Rotation" over "degrees", with no
+  ellipsis. Its value well stays vertically centered against the two-line label.
+- **Other rows:** Texture and Intensity stay single-line and look the same as in 01 and
+  07. The row gap is preserved, and nothing overlaps.
+- **Minimum size:** at 1000×650 the Inspector still fits all three fields above the Agent
+  section without scrolling.
+- **Value wells:** they keep their full 66% column. The Texture ID is truncated in mono
+  with its hover title, as intended.
+- **Viewport:** the sphere matches 01 and 07 at the same sizes. It stays round and
+  centered, so the label change did not affect rendering.
+
+**Limitations, kept precise:**
+
+- **Two-line limit:** wrapping is verified natively for one real two-line label only.
+  Labels longer than two lines, and labels in other components, were checked only in
+  the headless Chrome render of the stylesheet, with a system font. They were not
+  checked natively.
+- **Not recaptured natively after the fix:** the undo, redo, invalid-source and repair
+  states of captures 02 to 06. Their native verdict comes from the `42a991d` build.
+  The label change is CSS only and does not touch that behavior.
+- **Account chip:** the captures show the saved account in the titlebar. No account
+  identifier is recorded here, and the images are not committed.
+- **Rendering limitations unchanged:** there is no geometric visibility or shadow term,
+  only the occlusion texture applies, and temporal antialiasing is not implemented.
+  Those limitations are listed below.
+
+**Model and transport:** Claude Opus 5.5, model ID `claude-opus-5-5`. The packet
+states ACP protocol 1. The session runs as a Claude Code agent launched by the handoff
+harness in this worktree, under `bypassPermissions`. The session cannot independently
+confirm the ACP hop. No model substitution was made.
+
+**Changed paths in this pass:** this file and the current packet,
+`handoffs/0016-environment-lighting/brief.md`, which is committed as requested.
+
 ## Final native verdict
 
 **Native integration approved.** The approval covers rendering, retention, recovery
 and viewport sizing in the CUA-native captures in `artifacts/environment-native/`.
 Astra recorded them from PR16 source commit `42a991d`, built independently.
 
-- **One styling defect fixed:** Inspector field labels were clipped. I fixed this in
-  this pass. The fix is browser-verified but not yet natively recaptured.
+- **One styling defect fixed:** Inspector field labels were clipped. The fix is now
+  natively confirmed by captures 08 and 09, in the final label verdict above.
 - **No phase gate:** none is approved or claimed.
 - **Headless verdict unchanged:** the headless and command-line approval below still
   stands.
@@ -106,7 +173,7 @@ font. Inter is about as wide or slightly narrower, so it should fit at least as 
   test references this class's styling.
 - **Native recapture:** not done. Native capture is Astra's role.
 
-**Native recapture needed:** a native capture of the Environment Inspector,
+**Native recapture needed (resolved by captures 08 and 09):** a native capture of the Environment Inspector,
 like 01, plus the minimum-size capture 07 are needed to confirm the wrapped label in
 the app. The renderer and the viewport are untouched, so no other capture needs
 regeneration.
