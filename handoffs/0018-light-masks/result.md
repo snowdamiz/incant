@@ -112,13 +112,10 @@ This image is new, so it has no prior to compare against.
   independent of culling and selection only. A fault in building the light
   buffer would affect both images the same way. The GPU readback test
   covers this for counts and masks, but I did not run it.
-- **Pixels do not prove the final mask bit.** The full-mask lights form a
-  32x32x4 lattice about 16 by 16 by 1.5 units, each with a 1.2 range. Some lights, including probably the
-  highest-index layer, may not reach visible geometry. Correct selection of
-  bit 4095 is shown by the mask readback test in
-  `crates/incant_render/tests/lighting_gpu/mod.rs`, not by these images. If
-  pixel evidence for the last word is wanted, add a capture where only light
-  4095 lights the visible surface.
+- **Final mask bit now has pixel evidence (closed in the follow-up).** The
+  earlier limit said the full-mask images might not show bit 4095 reaching
+  visible geometry. The focused last-bit capture now shows it directly. See
+  "Follow-up: final light bit" below.
 - No GPU test, workspace validation or timing was re-run by me. The pass
   counts and timings in the brief are Astra's.
 - No screenshots were produced by this review. The only derived image is the
@@ -130,4 +127,93 @@ This image is new, so it has no prior to compare against.
 
 ## Open questions
 
-None blocking. The final-bit pixel capture above is optional extra evidence.
+None. The final-bit evidence requested in the initial review is supplied and
+verified in the follow-up below.
+
+# Follow-up: final light bit
+
+## Status
+
+**Complete. The final mask bit lights visible geometry correctly. No defect
+found.** This closes the evidence limit from the initial review. The initial
+findings above are preserved unchanged, apart from that limit and the open
+question, which now point here.
+
+- Director feedback acknowledged: Astra integrated the initial review as
+  191b21e and added the focused test I suggested. As requested, this section
+  reviews the three new captures, rechecks the regenerated full-mask pairs and
+  updates the corresponding limit. Unchanged UI was not re-reviewed.
+- Model and transport are unchanged: Claude Opus 5.5 (`claude-opus-5-5`)
+  through Claude Code over ACP protocol 1.
+- Still not approved: the complete lighting system, Phase 1 or any gate.
+
+## Images reviewed
+
+- `artifacts/mask-initial/last-bit-only-321x181.png`, viewed directly.
+- `artifacts/mask-initial/last-bit-only-321x181-oracle.png`
+- `artifacts/mask-initial/last-bit-only-321x181-single-light.png`
+- `artifacts/mask-initial/full-mask-257x193.png` and its oracle.
+- `artifacts/mask-initial/full-mask-320x240.png` and its oracle.
+
+## Test design check
+
+I read `last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix`
+in `crates/incant_render/tests/lights/masks.rs`. The visible light's ID is
+4096 zero-padded to 26 digits. The 4095 prefix lights use 1 to 4095 with the
+same padding. Zero-padded decimal strings sort numerically, and digits are
+valid ULID characters. So the visible light is local index 4095, in mask word
+127, bit 31. The prefix lights sit at x = 1e6 with a range of 1. They cannot
+touch any cluster, so the clustered path can only shade through that final
+bit. The single-light reference uses a one-word mask, so its equality with the
+clustered capture is a real cross-check of the last word.
+
+## Findings
+
+**All three last-bit captures are byte-identical.** The clustered, All-mode
+and single-light reference PNGs share one file hash.
+
+```
+6daf35320c4d5df9ca7a1f4921123abe10c21222  last-bit-only-321x181.png
+6daf35320c4d5df9ca7a1f4921123abe10c21222  last-bit-only-321x181-oracle.png
+6daf35320c4d5df9ca7a1f4921123abe10c21222  last-bit-only-321x181-single-light.png
+```
+
+**The final light is visibly present.** The quad shows a smooth yellow-green
+falloff matching the light color of 0.4, 0.8, 0.2.
+
+| Measure | Value |
+|---|---|
+| Center pixel, RGB | 72, 99, 52 |
+| Maximum channel | 99 |
+| Clipped pixels | 0 |
+| Red-dominant lit pixels | 0 |
+
+Zero red-dominant pixels means none of the red prefix lights leak into the
+frame. No tile seam appears. The tile rows and columns score within the
+image's ordinary range in the seam scan. The directional light is too dim
+to judge separately by eye. Its global offset is checked by the byte
+identity with the single-light reference, which includes the same light.
+
+**Regenerated full-mask pairs remain identical.** Both sizes match their
+oracles pixel for pixel. Their center pixels, maximum channel of 205 and zero
+clipping match the initial review's values. The earlier copies were
+overwritten, so I could not hash-compare old and new versions directly.
+
+## Scoped verdict
+
+Exact mask selection reaches the final supported local light with visible,
+correct shading. Within this packet's scope, appearance is preserved.
+
+## Limitations
+
+- I did not re-run the GPU tests, workspace validation, Clippy, UI tests or
+  timing. The 27 GPU cases, 135 Rust tests and timing figures are Astra's.
+- The paired timing reports a 4096-light median of medians of 34.226 ms on
+  the old renderer and 6.438 ms with masks. It is fenced CPU+GPU timing, not
+  a game, GPU timestamp or device gate. I did not verify it.
+- No screenshots or native captures were produced. The commands used were:
+
+```
+python3 -I artifacts/review0018/seam.py artifacts/mask-initial/last-bit-only-321x181.png
+shasum artifacts/mask-initial/last-bit-only-321x181*.png
+```
