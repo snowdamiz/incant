@@ -25,13 +25,13 @@ const year = new Date().getFullYear()
           >
             Read the product guide
             <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" /></svg>
-            <span class="sr-only">(on GitHub, may require access)</span>
+            <span class="sr-only">(on GitHub)</span>
           </a>
           <a
             :href="links.repository"
             class="text-[15px] font-medium underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-accent"
           >
-            View on GitHub<span class="sr-only"> (may require access)</span>
+            View on GitHub
           </a>
         </div>
       </div>

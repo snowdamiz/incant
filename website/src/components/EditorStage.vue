@@ -2,7 +2,7 @@
 import { computed, nextTick, ref } from 'vue'
 import StagePanel from './StagePanel.vue'
 import StageScene from './StageScene.vue'
-import WispMark from './WispMark.vue'
+import WindowBar from './WindowBar.vue'
 import { stageSteps, type StageStep } from '../content'
 
 const step = ref<StageStep>('ask')
@@ -10,11 +10,11 @@ const tabs = ref<HTMLButtonElement[]>([])
 const active = computed(() => stageSteps.find((s) => s.id === step.value) ?? stageSteps[0]!)
 
 const descriptions: Record<StageStep, string> = {
-  ask: 'Conceptual illustration of the Incant editor, not a screenshot. A cloaked wanderer stands selected on a cliff at dusk, across a gap from a floating isle with an iron ring. In the agent panel the user asks for a grappling hook that pulls the wanderer to whatever it hits, and the agent answers with a three-step plan.',
+  ask: 'Illustration of the Incant editor, not a screenshot. A cloaked wanderer stands selected on a cliff at dusk, across a gap from a floating isle with an iron ring. In the agent panel the user asks for a grappling hook that pulls the wanderer to whatever it hits, and the agent answers with a three-step plan.',
   review:
-    'Conceptual illustration of the Incant editor, not a screenshot. A dashed path predicts the grapple from the wanderer to the ring on the floating isle. The panel shows the proposed text change, which adds a GrappleHook component and a script, with Apply and Discard.',
-  play: 'Conceptual illustration of the Incant editor, not a screenshot. The game is playing. Faded frames trace the wanderer swinging across the gap and landing on the isle, and the play-test report lists three passed checks.',
-  undo: 'Conceptual illustration of the Incant editor, not a screenshot. The scene is back exactly as it was before the agent worked. The history panel lists the agent’s grappling hook transaction as undone.',
+    'Illustration of the Incant editor, not a screenshot. A dashed path predicts the grapple from the wanderer to the ring on the floating isle. The panel shows the proposed text change, which adds a GrappleHook component and a script, with Apply and Discard.',
+  play: 'Illustration of the Incant editor, not a screenshot. The game is playing. Faded frames trace the wanderer swinging across the gap and landing on the isle, and the play-test report lists three passed checks.',
+  undo: 'Illustration of the Incant editor, not a screenshot. The scene is back exactly as it was before the agent worked. The history panel lists the agent’s grappling hook transaction as undone.',
 }
 
 const status: Record<StageStep, string> = {
@@ -95,18 +95,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
         :aria-label="descriptions[step]"
         class="overflow-hidden rounded-xl bg-ed-bg text-ed-text shadow-[0_1px_0_rgb(255_255_255/0.06)_inset,0_50px_100px_-50px_rgb(21_22_26/0.55),0_20px_40px_-30px_rgb(21_22_26/0.4)] ring-1 ring-ink/10"
       >
-        <!-- Title bar -->
-        <div class="flex h-11 items-center gap-3 border-b border-ed-line px-4">
-          <div class="flex gap-1.5">
-            <span class="size-2.5 rounded-full bg-white/15" />
-            <span class="size-2.5 rounded-full bg-white/15" />
-            <span class="size-2.5 rounded-full bg-white/15" />
-          </div>
-          <div class="ml-2 flex min-w-0 items-center gap-2 text-[12.5px]">
-            <WispMark class="h-4 w-auto shrink-0" body="#8c95ff" />
-            <span class="truncate font-medium">Lantern Reach</span>
-            <span class="hidden text-ed-muted sm:inline">/ cliffs.scene</span>
-          </div>
+        <WindowBar file="cliffs.scene">
           <div class="mx-auto hidden items-center gap-1 lg:flex">
             <span v-for="tool in ['M4 4l6 14 2-6 6-2z', 'M12 3v18M3 12h18', 'M20 12a8 8 0 1 1-3-6.2M20 4v4h-4', 'M5 5h6v6H5zM13 13h6v6h-6z']" :key="tool" class="grid size-7 place-items-center rounded-md first:bg-ed-raised">
               <svg viewBox="0 0 24 24" class="size-3.5 text-ed-muted" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path :d="tool" /></svg>
@@ -120,7 +109,7 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
             <span v-else class="size-2 rounded-[2px] bg-ed-red" />
             {{ step === 'play' ? 'Stop' : 'Play' }}
           </span>
-        </div>
+        </WindowBar>
 
         <div class="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_17.5rem] lg:grid-cols-[12.5rem_minmax(0,1fr)_20rem]">
           <!-- Outline -->
@@ -175,6 +164,6 @@ async function onKeydown(event: KeyboardEvent, index: number): Promise<void> {
         </div>
       </div>
     </div>
-    <p class="mt-4 text-[13px] text-muted">Conceptual product illustration.</p>
+    <p class="mt-4 text-[13px] text-muted">Product illustration.</p>
   </div>
 </template>

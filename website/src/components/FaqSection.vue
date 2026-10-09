@@ -12,7 +12,7 @@ import { faqItems, links } from '../content'
         <p class="mt-5 max-w-xs text-[16px] leading-relaxed text-muted">
           The
           <a :href="links.productGuide" class="text-ink underline decoration-rule underline-offset-4 hover:decoration-accent">
-            product guide<span class="sr-only"> (on GitHub, may require access)</span></a>
+            product guide<span class="sr-only"> (on GitHub)</span></a>
           goes deeper, from the document model to the agent.
         </p>
       </div>

@@ -68,7 +68,7 @@ onBeforeUnmount(() => {
           <a :href="links.repository" class="inline-flex items-center gap-1.5 text-[14.5px] font-medium text-ink">
             GitHub
             <svg viewBox="0 0 16 16" class="size-3" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" /></svg>
-            <span class="sr-only">(Incant repository, may require access)</span>
+            <span class="sr-only">(Incant repository)</span>
           </a>
         </li>
       </ul>
