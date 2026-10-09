@@ -50,3 +50,35 @@ in editor/ui. Do not modify credentials, publish, merge, or approve phase gates.
 actual screenshot paths, platform/size/DPI, findings and limitations. Clearly
 separate browser transparency evidence from native composition evidence. Commit
 visual changes and the result with `Built-by: claude` for Astra to integrate.
+
+## Integration notes for this review
+
+The director says the UI must look very good, clean, modern and easy to use, with a
+custom titlebar. Keep that higher visual standard in this native review. The first
+redesign is integrated; do not revert to the rejected initial layout. The director
+explicitly authorized open permissions for Claude's work, and this session is
+launched with `--permission-mode bypassPermissions`. Scoped builds/tests are
+allowed; prior interrupted session denials do not prohibit this packet's commands.
+
+Astra has implemented your requested window.* contract, 78 CSS-pixel macOS inset,
+14/14 traffic-light position, canvas #0b0c0f, and GPU masking for cornerRadii. The
+surface stays below the webview so modal UI can cover it. All shared types are now
+in editor/bridge/contract.ts; the UI module re-exports them. Both UI and bridge tests
+run with `npm test --workspace editor/ui` (158 passed on integration). Actual
+engine tests have been run by Astra (29 passed); do not call those unrun based on
+the first handoff's earlier interruption.
+
+Review the native app, not only fixtures. Fix visual UI issues in this worktree and
+report native Rust correctness/integration requests to Astra. Native double-click
+currently toggles zoom; respecting the macOS alternate double-click preference is
+still an integration detail to assess. The original titlebar icon has been replaced
+with your public/icon.png in the Tauri host; include a macOS app icon if required.
+
+One functional UI detail observed through accessibility: the skip link reads
+“Skip to hierarchy” while its href remains #viewport-title; its click handler does
+focus the correct region. Make the href agree with the visible label.
+
+Only capture Incant windows from this packet. Do not close or alter any other
+running Incant instance the director may be inspecting. If another Incant process
+exists, distinguish it from your new worktree build by executable path before
+capturing or manipulating it. Record any capture/OS-permission limitation exactly.

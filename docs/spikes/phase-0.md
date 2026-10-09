@@ -9,8 +9,8 @@ The complete 36-month engine/game plan remains open.
 Tauri 2.12.1 hosts a transparent child webview above a wgpu 29 native parent-window
 surface. The renderer compiles and actual offscreen GPU readback produced
 `artifacts/phase0-capture.png` (1280×720, Apple M5 Pro). This only proves native GPU
-render/readback, not webview composition. Native-window interaction and Claude
-pixel review are pending. Windows execution remains pending.
+render/readback, not webview composition. Native hierarchy selection, rename, undo and redo have passed; Claude
+pixel review remains pending. Windows execution remains pending.
 
 ## Spike 2: document and CRDT — local evidence passed
 
@@ -158,3 +158,21 @@ explicit `bypassPermissions` mode, without changing global Claude settings. ACP
 filesystem requests remain worktree-scoped; tool execution follows the handoff
 instructions and is not an OS sandbox. The existing limits on credentials,
 publishing, merging and outside-worktree edits remain in the prompt.
+
+### Completed visual handoff and integration
+
+Claude Opus 5.5 returned the first handoff through the ACP runner; the received
+commit is integrated as `90b4213` with its `Built-by: claude` trailer. Revision 1
+substantially changes the UI in response to the director's feedback and retains
+the first design as before evidence. The result and Chrome captures are in
+`handoffs/0001-editor-foundation`. The browser titlebar variants are explicitly
+labeled test doubles; they do not prove native OS behavior.
+
+After integration, 158 UI/bridge tests, 29 Rust behavior tests, four Python tool
+tests, strict TypeScript builds and workspace clippy passed. The native app loads
+the revised UI with the real project and native bridge. The host implements the
+window actions, publishes focus/maximize/fullscreen metadata and applies the
+specified macOS traffic-light inset and canvas color. Rounded viewport radii are
+converted to physical pixels and used by a GPU composition mask. The mask is
+native GPU work with no readback; render pipelines are cached per target format.
+These changes still require Claude's actual native pixel review (packet 0002).

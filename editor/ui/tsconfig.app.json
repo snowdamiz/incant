@@ -26,11 +26,13 @@
     "noEmit": true
   },
   "include": [
-    "src"
+    "src",
+    "../bridge/**/*.ts"
   ],
   "exclude": [
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
-    "src/test"
+    "src/test",
+    "../bridge/**/*.test.ts"
   ]
 }

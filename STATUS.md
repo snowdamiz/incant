@@ -18,30 +18,26 @@ The plan forbids beginning Phase 1 before Phase 0 passes and the director approv
 - OAuth/API-key/secure-storage implementation and twenty-task live eval harness.
   macOS temporary keychain roundtrip passes. Live authentication is unverified.
 - Real execution of platform probes on macOS, browser/WASM and iOS simulator.
-- ACP worktree handoff, explicit Opus 5.5 selection and interruption recovery.
+- Completed Claude Opus 5.5 ACP handoff, redesigned UI with a custom titlebar,
+  retained before/after screenshots, and native integration.
 - Fourteen architecture records, generated TS structural bindings, developer docs,
   gate ledger and GitHub workflow source.
 
 See [written evidence and limitations](docs/spikes/phase-0.md). Twenty-nine Rust
-behavior tests and four Python tool tests have passed; checks will run again after
-native editor integration. The thousand-entity script benchmark meets the local
+behavior tests, 158 UI/bridge tests and four Python tool tests pass after integration. The thousand-entity script benchmark meets the local
 frame budget within its documented workload.
 
 ## Active work
 
-- Claude Opus 5.5 is substantially redesigning the editor in response to director
-  feedback, including a custom titlebar, before returning visual tests and a result
-  packet in `.worktrees/0001-editor-foundation`.
-- The macOS native host passed hierarchy selection, rename, undo and redo through
-  real IPC. Custom titlebar host support is in progress; revised UI integration and
-  native composition review remain. Windows native viewport evidence is pending.
+- Claude's native-window review is next: titlebar, traffic lights, rounded GPU
+  viewport, resizing and screenshots. Windows native viewport evidence is pending.
 - CI workflows are authored; remote execution and target-specific validation remain.
 
 ## External prerequisites still required
 
 - Private repository created at https://github.com/snowdamiz/incant. The bootstrap
   is on main; implementation is on impl/phase0-foundation. Review PR and CI runs
-  follow UI integration. The director remains responsible for merging.
+  are being prepared after UI integration. The director remains responsible for merging.
 - A working user-authorized OpenAI connection for the live twenty-task evaluation.
   The first browser attempt did not complete; no provider tokens were obtained.
 - Windows/Linux/Android execution and desktop authentication checks, physical-device

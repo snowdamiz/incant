@@ -27,6 +27,7 @@
     "noEmit": true
   },
   "include": [
-    "src"
+    "src",
+    "../bridge/**/*.ts"
   ]
 }

@@ -12,7 +12,7 @@ import type {
   FieldSchema,
   Origin,
   WindowChrome,
-} from "../ui/src/bridge/contract";
+} from "./contract";
 
 type Entity = {
   id: string;

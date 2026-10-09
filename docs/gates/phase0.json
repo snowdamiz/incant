@@ -32,12 +32,9 @@
       ]
     },
     "claude_acp": {
-      "passed": false,
-      "remaining": [
-        "result packet",
-        "screenshots and review",
-        "integration"
-      ]
+      "passed": true,
+      "evidence": "handoffs/0001-editor-foundation/result.md",
+      "integration": "90b4213; 158 UI/bridge tests pass; actual native composition review remains under spike 1"
     }
   },
   "nightly_runnable_targets": {

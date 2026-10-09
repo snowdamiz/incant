@@ -18,11 +18,10 @@ npm run build --workspace editor/ui
 tools/cargo build --workspace --locked
 ```
 
-The editor/UI build is being returned through the Claude handoff; until it is
-integrated, use the headless commands below. Build-time Claude login is needed only
-for visual development, not for using the engine.
+The editor UI and native bridge are integrated. Build-time Claude login is needed
+only for visual development, not for using the engine.
 
-After UI integration, `python3 tools/editor-dev.py` builds the frontend, native
+`python3 tools/editor-dev.py` builds the frontend, native
 transport and editor with bundled assets. On macOS it produces the unsigned
 development bundle `artifacts/Incant.app`; open that bundle to run the native
 window. `--release` builds an optimized version. This is a local development

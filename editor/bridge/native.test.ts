@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { NativeBridge, snapshotFromEngine } from "./native";
 import type { EngineRead, Invoke } from "./native";
-import type { Ulid, WindowChrome } from "../ui/src/bridge/contract";
+import type { Ulid, WindowChrome } from "./contract";
 const scene = "00000000000000000000000002";
 const entity = "00000000000000000000000010";
 function read(): EngineRead {

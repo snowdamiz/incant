@@ -142,7 +142,14 @@ fn main() {
             window::window_action
         ])
         .setup(move |app| {
-            let builder = tauri::window::WindowBuilder::new(app, "main")
+            let config = tauri::utils::config::WindowConfig {
+                label: "main".into(),
+                background_color: Some(tauri::utils::config::Color(11, 12, 15, 255)),
+                traffic_light_position: cfg!(target_os = "macos")
+                    .then_some(tauri::utils::config::LogicalPosition { x: 14., y: 14. }),
+                ..Default::default()
+            };
+            let builder = tauri::window::WindowBuilder::from_config(app, &config)?
                 .title("Incant — Phase 0")
                 .inner_size(1440., 900.)
                 .min_inner_size(1000., 650.);
