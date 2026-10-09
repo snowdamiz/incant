@@ -70,11 +70,12 @@ function isReady(read: EngineResponse): read is EngineRead {
  * Recursive/unknown schema forms remain explicit unsupported fields. No fetches.
  */
 function inspectorField(
-  raw: Record<string, unknown>, defs: Record<string, Record<string, unknown>>,
+  value: unknown, defs: Record<string, Record<string, unknown>>,
   depth = 0,
 ): FieldSchema {
   const unsupported: FieldSchema = { type: "unsupported" };
-  if (depth > 16) return unsupported;
+  if (depth > 16 || !value || typeof value !== "object" || Array.isArray(value)) return unsupported;
+  const raw = value as Record<string, unknown>;
   const metadata = {
     ...(typeof raw.title === "string" ? { title: raw.title } : {}),
     ...(typeof raw.description === "string" ? { description: raw.description } : {}),

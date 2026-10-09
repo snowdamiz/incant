@@ -283,7 +283,81 @@
     "source_failure": "Generated agent-tools schema snapshot was stale; runtime/GPU checks preceding schema verification passed. Windows/Linux desktop and all three credential-storage jobs passed.",
     "corrected_head": "d9ace604e5de5d3aceaa17406c96b5ce33400b06",
     "local_check": "Second headless schema generation produces no diff; generated SDK check passes.",
-    "exact_head_hosted": "pending",
+    "exact_head_hosted": "all six checks passed; PR19 merged",
     "failed_log_sha256": "f4ccde5592d01c254e6d81531adcb8078381c11e0b86b0d2d943dc8514ed164f"
+  },
+  "hosted_checks_and_merge": {
+    "head": "d9ace604e5de5d3aceaa17406c96b5ce33400b06",
+    "checks": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T21:20:04Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37992514640/job/114030061482",
+        "name": "storage (macos-latest)",
+        "startedAt": "2026-10-09T21:17:25Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T21:46:04Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37992514632/job/114030061819",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "startedAt": "2026-10-09T21:17:19Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T21:45:10Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37992514721/job/114030061818",
+        "name": "checks",
+        "startedAt": "2026-10-09T21:17:24Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T21:20:51Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37992514640/job/114030061777",
+        "name": "storage (windows-latest)",
+        "startedAt": "2026-10-09T21:17:19Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T21:32:54Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37992514632/job/114030061546",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "startedAt": "2026-10-09T21:17:19Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T21:19:32Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37992514640/job/114030061635",
+        "name": "storage (ubuntu-latest)",
+        "startedAt": "2026-10-09T21:17:19Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      }
+    ],
+    "merge": {
+      "headRefOid": "d9ace604e5de5d3aceaa17406c96b5ce33400b06",
+      "mergeCommit": {
+        "oid": "695f3b353c8ecbcf0b438cba3378ca3f73666949"
+      },
+      "mergedAt": "2026-10-09T21:48:04Z",
+      "state": "MERGED"
+    },
+    "merge_trailer": "Built-by: astra (verified from actual commit)"
   }
 }

@@ -42,17 +42,19 @@ fn environment_direction(d:vec3f) -> vec3f {
     let occlusion=1.0+material.factors.z*(textureSample(occlusion_map,occlusion_sampler,in.uv).r-1.0);
     let emissive=material.emissive_roughness.xyz*textureSample(emissive_map,emissive_sampler,in.uv).xyz;
     if material.flags.x==1u && base.a<material.factors.w { discard; }
-    var n=unit(in.normal);
+    // Texture normals perturb shading, never the geometric shadow-bias position.
+    var surface_normal=unit(in.normal);
+    var n=surface_normal;
     if material.flags.y!=0u {
         let t=unit(in.tangent.xyz-n*dot(n,in.tangent.xyz));let b=cross(n,t)*in.tangent.w;
         let mapped=unit(normal_sample*vec3f(material.factors.y,material.factors.y,1.0));
         n=unit(mat3x3f(t,b,n)*mapped);
     }
-    if material.flags.z!=0u && !front {n=-n;}
+    if material.flags.z!=0u && !front {n=-n;surface_normal=-surface_normal;}
     let v=unit(frame.eye.xyz-in.world);let nv=max(dot(n,v),0.0);
     let metallic=clamp(material.factors.x*mr.b,0.0,1.0);let roughness=clamp(material.emissive_roughness.w*mr.g,0.045,1.0);
     let f0=mix(vec3f(0.04),base.rgb,metallic);
-    let direct=direct_lighting(in.position.xy,in.world,n,v,base.rgb,metallic,roughness);
+    let direct=direct_lighting(in.position.xy,in.world,n,surface_normal,v,base.rgb,metallic,roughness);
     let dfg=textureSampleLevel(brdf_lut,environment_sampler,vec2f(nv,roughness),0.0).rg;
     let reflectance=f0*dfg.x+dfg.y;
     let irradiance=textureSampleLevel(diffuse_environment,environment_sampler,environment_direction(n),0.0).rgb;

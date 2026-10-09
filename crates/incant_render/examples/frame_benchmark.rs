@@ -13,13 +13,17 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let path = PathBuf::from(
         std::env::args_os()
             .nth(1)
-            .ok_or("usage: frame_benchmark <project>")?,
+            .ok_or("usage: frame_benchmark <project> [camera-id]")?,
     );
     let project = Project::from_text(&std::fs::read_to_string(&path)?)?;
     let mut assets = AssetStore::default();
     assets.sync_project(&project, path.parent().ok_or("project parent missing")?)?;
     let renderer = Renderer::headless()?;
-    let scene = renderer.prepare_scene(&project, &assets)?;
+    let camera = std::env::args().nth(2);
+    let mut scene = renderer.prepare_scene(&project, &assets)?;
+    if let Some(id) = camera.as_deref() {
+        scene = scene.with_camera(id)?;
+    }
     let (width, height) = (1920, 1080);
     let format = wgpu::TextureFormat::Rgba8UnormSrgb;
     let texture = renderer.device.create_texture(&wgpu::TextureDescriptor {
@@ -60,6 +64,7 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "min_ms":milliseconds[0],"max_ms":milliseconds[29],
             "sorted_samples_ms":milliseconds,
             "scene":scene.stats(),
+            "camera":camera,
             "method":"CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation"
         }))?
     );

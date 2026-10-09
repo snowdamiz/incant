@@ -26,11 +26,12 @@ function isReady(read) {
 }
 /** Resolve only local definitions and a single nullable alternative for display.
  * Recursive/unknown schema forms remain explicit unsupported fields. No fetches.
- */ function inspectorField(raw, defs, depth = 0) {
+ */ function inspectorField(value, defs, depth = 0) {
     const unsupported = {
         type: "unsupported"
     };
-    if (depth > 16) return unsupported;
+    if (depth > 16 || !value || typeof value !== "object" || Array.isArray(value)) return unsupported;
+    const raw = value;
     const metadata = {
         ...typeof raw.title === "string" ? {
             title: raw.title

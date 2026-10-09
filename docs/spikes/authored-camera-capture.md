@@ -93,6 +93,7 @@ The source workflow reached generated-schema verification and found the checked-
 `agent-tools.json` snapshot missing the optional camera field/updated description.
 The runtime tool schema was already correct, as used by the live agent check.
 Follow-up `d9ace60` regenerates the snapshot; a second local schema generation
-leaves the tree unchanged and SDK generation checks pass. Exact-head hosted
-checks are running again before PR #19 can merge. This is an artifact correction,
+leaves the tree unchanged and SDK generation checks pass. All six exact-head hosted
+checks passed at `d9ace60`; PR #19 merged into main as `695f3b3` on 2026-10-09.
+The actual merge commit ends in `Built-by: astra`. This is an artifact correction,
 not a new runtime or appearance change.
