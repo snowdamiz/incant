@@ -2,6 +2,7 @@ use clap::{Parser, Subcommand};
 mod assets;
 mod eval;
 mod play;
+mod play_logs;
 mod watch;
 use incant_agent::{
     Agent, ApprovalMode, Budget, accounts::AccountStore, credentials::CredentialStore,
@@ -406,18 +407,24 @@ fn main() -> Result<()> {
             )?;
             let mut times = vec![];
             let mut count = 0;
-            for _ in 0..ticks {
+            let mut logs = play_logs::Capture::new(None, None)?;
+            for tick in 1..=ticks {
                 let start = Instant::now();
                 count += play.tick()?;
                 times.push(start.elapsed().as_secs_f64() * 1000.);
+                let entries = play.host.take_logs();
+                if !entries.is_empty() {
+                    logs.append(tick, play.snapshot().elapsed_seconds, entries)?;
+                }
             }
+            let logs = logs.finish()?;
             times.sort_by(f64::total_cmp);
             let p95 = times
                 .get((times.len() * 95 / 100).min(times.len().saturating_sub(1)))
                 .copied()
                 .unwrap_or(0.);
             print(
-                json!({"ticks":ticks,"commands":count,"state":play.host.state(),"p95_frame_ms":p95,"max_frame_ms":times.last()}),
+                json!({"ticks":ticks,"commands":count,"state":play.host.state(),"logs":logs,"p95_frame_ms":p95,"max_frame_ms":times.last()}),
             )?;
         }
         Cli::Screenshot {

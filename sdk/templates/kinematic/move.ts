@@ -3,6 +3,7 @@ export default defineBehavior({
   initialState: { ticks: 0 },
   update(api, dt, state) {
     state.ticks++;
+    if (state.ticks % 60 === 0) api.log(`Moved ${state.ticks} fixed ticks`);
     for (const entity of api.query('Transform')) {
       const transform = entity.components.Transform as {
         translation: number[]; rotation: number[]; scale: number[];
