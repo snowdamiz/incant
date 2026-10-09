@@ -106,6 +106,20 @@ The integrated revision ships 95.86 kB JS / 35.54 kB gzip and 34.74 kB CSS /
 licenses. The CI workflow and the unresolved private-repository Pages prerequisite
 remain as described below. Director visual acceptance and merge remain pending.
 
+### Revision 3: director-requested neutral colors
+
+The director asked to reduce purple and match the previous editor colors. Claude
+Opus 5.5 completed packet 0007 in commit 6090702, integrated as 5e677a7. The landing
+page keeps the revision-2 layout and interactions, with neutral graphite editor
+panels, slate scene art, an ink statement band and restrained indigo accents.
+The approved wisp shape stays unchanged. Palette notes and before/after captures
+are retained in `handoffs/0007-landing-neutral/`.
+
+The integrated `/incant/` production build and all 22 browser checks passed in
+10.6 seconds, including both accessibility suites. The local preview serves the
+rebuilt assets. GitHub CI is running on the updated PR. Publishing prerequisites
+remain unchanged; this work did not alter billing, repository visibility or Pages.
+
 ## Hosting prerequisite
 
 The authenticated GitHub Pages creation call for `snowdamiz/incant`, with
