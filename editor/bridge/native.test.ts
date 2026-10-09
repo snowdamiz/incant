@@ -54,7 +54,7 @@ function read(): EngineRead {
 describe("native bridge", () => {
   it('allows document editing during cooking and preserves it when the import becomes stale', async () => {
     let current = read(); current.asset_import = { available: true };
-    let rejectImport: (error: string) => void = () => { throw new Error('No pending import'); };
+    let rejectImport: (error: { code: string; message: string }) => void = () => { throw new Error('No pending import'); };
     const invoke: Invoke = async <T>(name: string) => {
       if (name === 'engine_import') return await new Promise<T>((_, reject) => { rejectImport = reject; });
       if (name === 'engine_execute') {
@@ -68,8 +68,8 @@ describe("native bridge", () => {
     const importing = bridge.dispatch(command);
     expect((await bridge.dispatch(command)).ok).toBe(false);
     expect((await bridge.dispatch({ type: 'entity.rename', entity: entity as Ulid, name: 'Edited during import' })).ok).toBe(true);
-    rejectImport('The project changed since import preparation; prepare again');
-    expect((await importing).ok).toBe(false);
+    rejectImport({ code: 'asset.conflict', message: 'A newer edit is present.' });
+    expect(await importing).toEqual({ ok: false, error: { code: 'asset.conflict', message: 'A newer edit is present.' } });
     expect(bridge.getSnapshot().entities[entity]?.name).toBe('Edited during import');
   });
   it("imports a batch with the current revision and publishes real asset metadata", async () => {

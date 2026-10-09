@@ -1,3 +1,39 @@
+## Priority revision: native integration review, 2026-10-09
+
+Your original UI commit is integrated. Review the native captures now in the ignored
+`artifacts/native-review/` directory in this worktree. These were captured by Astra
+through Codex CUA on the actual rebuilt Tauri/WebKit app. The Mac is unlocked.
+Read `docs/spikes/evidence/editor-assets-native-2026-10-09.json` for observed behavior.
+Astra owns behavior assertions; you own pixel review and any visual corrections.
+
+- Fix the busy sentence “Other edits wait until it finishes.” Normal document edits
+  now succeed while cooking; a concurrent edit makes the import fail with an explicit
+  retry hint. Keep copy short and accurate. Supersedes the old contract below.
+- Native errors now preserve `asset.conflict`; UI detects that code with a legacy text
+  fallback. Preserve those integration changes.
+- Review all native captures, including account-keyboard-focus.jpg from the previous
+  rebuilt bundle. Inspect wide/narrow asset layout, focus rings, selected texture
+  controls, error readability, titlebar/traffic lights, inspector paths and clipping.
+  Some native AX lists expose only the first row though keyboard navigation works;
+  inspect whether the pixels actually show all rows correctly.
+- Native minimum layout was obtained with Window > Move & Resize > Bottom Right;
+  restored wide layout with Return to Previous Size. Report actual image dimensions
+  and whether traffic lights are visible or still obscured by the capture indicator.
+- Consider the observed multiline-paste interaction: selecting all text in a nonempty
+  path and pasting multiple lines appended rows while retaining the old selected path.
+  Decide whether replacing the selected current path is more usable and implement
+  that behavior with an interaction test if appropriate.
+- Do not restore deleted CSS-selector source-mirroring tests. Integrated suite is
+  265 passing tests; use behavior tests and pixel evidence.
+- The previous report’s “not ACP” claim was incorrect. This session is dispatched
+  by tools/handoff/main.py using AcpClient, protocol 1, model claude-opus-5-5.
+  The runner controls the outer transport; no routing exception is needed. Retain
+  the corrected verified transport section in result.md.
+- Keep raw native screenshots/account labels in ignored artifacts only. Never
+  copy them into tracked screenshots or quote real account labels in reports.
+- If fixes need new native captures, leave precise requests for Astra. Continue
+  browser review yourself. Commit fixes with Built-by: claude; no PR/merge.
+
 # Editor asset library and import workflow
 
 Use Claude Opus 5.5 through ACP. The director wants polished, clean, modern visuals

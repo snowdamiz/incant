@@ -139,7 +139,7 @@ function OutcomeNotice({ outcome, onDismiss }: { outcome: ImportOutcome; onDismi
 }
 
 function FailureNotice({ error, onDismiss }: { error: BridgeError; onDismiss: () => void }) {
-  const conflict = isConflict(error.message);
+  const conflict = isConflict(error.message, error.code);
   return (
     <div className="asset-note asset-note--error" role="alert">
       <Icon name="error" size={14} />

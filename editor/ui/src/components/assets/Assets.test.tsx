@@ -213,7 +213,7 @@ describe('asset library', () => {
     openImport();
     fireEvent.change(pathInput(1), { target: { value: 'models/a.glb' } });
     fireEvent.click(screen.getByRole('button', { name: 'Import 1 file' }));
-    await host.resolve({ ok: false, error: { code: 'engine.request', message: 'document revision conflict: expected 4, current 5' } });
+    await host.resolve({ ok: false, error: { code: 'asset.conflict', message: 'A newer edit is present.' } });
     expect(screen.getByRole('alert').textContent).toContain('The project changed during the import');
     expect(screen.getByRole('button', { name: 'Try again' })).toBeTruthy();
   });

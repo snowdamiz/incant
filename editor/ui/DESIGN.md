@@ -170,8 +170,8 @@ are bundled locally, so nothing is fetched from a network.
 - Keyboard modality (handoff 0009): WebKit draws no `:focus-visible` ring when script moves
   focus after a key press. `src/shell/inputModality.ts` sets `data-focus-visible` on the
   focused element while the last input was a key without ⌘, Ctrl or Alt. A pointer press
-  clears it. Every `:focus-visible` rule has a `[data-focus-visible]` twin, and a test
-  enforces that. A keyboard-opened dialog therefore rings Close. A pointer-opened dialog
+  clears it. `:focus-visible` rules have `[data-focus-visible]` twins. Keyboard behavior
+  is covered by interaction tests and pixel review. A keyboard-opened dialog rings Close. A pointer-opened dialog
   focuses Close without a ring, as before.
 - F6 / Shift+F6 cycle visible panels (hidden panels are skipped). Hierarchy is an ARIA
   tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys. The asset

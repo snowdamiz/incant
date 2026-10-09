@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-09",
+  "platform": "macOS",
+  "transport": "Codex CUA accessibility and native input",
+  "build": "5346cc0 plus structured native import-error integration",
+  "project": "Disposable Native Asset Review project; local synthetic triangle and PNG sources",
+  "results": {
+    "unsaved_startup": "PASS: host reason and disabled import control",
+    "batch_import": "PASS: model and normal-map texture registered together; one history entry",
+    "batch_undo_redo": "PASS: native Cmd+Z removed both assets; Shift+Cmd+Z restored both. Stable-ID preservation is also covered by Rust history tests.",
+    "texture_reimport": "PASS: Normal map to Linear preserved ID 01M4GJ0W4VP8AA4TEW2N6ERFDE; Undo restored Normal map and original fingerprint",
+    "malformed_source": "PASS: exact glTF error, unchanged asset count/history, source retained, Try again available",
+    "background_preparation": "PASS: eight 2048x2048 synthetic PNGs cooked with native navigation responsive; busy status and read-only import fields observed",
+    "concurrent_edit": "PASS: entity rename committed during cooking; History remained responsive; asset.conflict then rejected stale batch (expected revision 7, current 8), preserving paths and rename",
+    "keyboard": "PASS: Tab/Down/Enter reach texture details; heading receives focus; Escape restores asset row; Home reaches model; model has no texture interpretation control",
+    "text_undo": "PASS: Cmd+Z and native Edit > Undo changed path typing only; assets/history unchanged",
+    "responsive_layout": "AX confirms Back to assets replaces Close panel after native bottom-right quarter placement; 300px dock. Pixel review remains Claude-owned.",
+    "inspector_order": "PASS: native Translation, Rotation, Scale order",
+    "saved_account": "PASS: saved connection restored in rebuilt app; no sign-in or Keychain prompt; no account actions invoked",
+    "account_focus": "PASS: prior rebuilt app pointer/keyboard-opened account dialog focused Close; Escape restored opener; pixel focus-ring review pending"
+  },
+  "visual_review": "Pending Claude Opus 5.5 ACP review of private captures. Astra did not judge pixels.",
+  "known_followup": "Busy sentence incorrectly says other edits wait. Claude must update copy to reflect concurrent edits and possible retry.",
+  "private_capture_directory": "artifacts/native-import-review/ (ignored; account label may be present; do not publish)",
+  "limitations": [
+    "No manual Windows/Linux checks required by director; hosted checks remain applicable.",
+    "No GPU/ECS asset binding, file picker/source copying, automatic editor source watching or cancellable parsing claimed."
+  ]
+}

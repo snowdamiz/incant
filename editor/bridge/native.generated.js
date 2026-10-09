@@ -253,6 +253,15 @@ function snapshotFromEngine(read) {
     };
 }
 function failure(error) {
+    if (typeof error === 'object' && error !== null && 'code' in error && 'message' in error && typeof error.code === 'string' && typeof error.message === 'string') {
+        return {
+            ok: false,
+            error: {
+                code: error.code,
+                message: error.message
+            }
+        };
+    }
     return {
         ok: false,
         error: {
