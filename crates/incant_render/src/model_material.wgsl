@@ -42,6 +42,7 @@ fn environment_direction(d:vec3f) -> vec3f {
     let occlusion=1.0+material.factors.z*(textureSample(occlusion_map,occlusion_sampler,in.uv).r-1.0);
     let emissive=material.emissive_roughness.xyz*textureSample(emissive_map,emissive_sampler,in.uv).xyz;
     if material.flags.x==1u && base.a<material.factors.w { discard; }
+    // Texture normals perturb shading, never the geometric shadow-bias position.
     var surface_normal=unit(in.normal);
     var n=surface_normal;
     if material.flags.y!=0u {

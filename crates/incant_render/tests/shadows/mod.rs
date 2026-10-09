@@ -241,7 +241,7 @@ fn directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions
     // scene must retain its original shadow geometry after the cache advances.
     let path = f.root.path().join("quad.bin");
     let mut bytes = std::fs::read(&path).unwrap();
-    for vertex in bytes[..72].chunks_exact_mut(12) {
+    for vertex in bytes[..72].as_chunks_mut::<12>().0 {
         let x = f32::from_le_bytes(vertex[..4].try_into().unwrap()) * 2.;
         vertex[..4].copy_from_slice(&x.to_le_bytes());
     }
