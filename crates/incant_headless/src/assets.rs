@@ -13,7 +13,7 @@ pub fn load_runtime(
         .filter(|p| !p.as_os_str().is_empty())
         .unwrap_or(Path::new("."));
     let mut store = incant_assets::AssetStore::default();
-    store.sync(document, &root.join(".incant/cache"))?;
+    store.sync_project(document, root)?;
     Ok(store)
 }
 

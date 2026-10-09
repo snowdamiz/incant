@@ -58,7 +58,9 @@ within its documented workload.
   replacement, and shared CLI/agent rendering. CPU checks, two real GPU tests and
   public CLI import/reimport/readback pass. Native Undo and missing-cache recovery
   pass without reopening. Claude approved the final native wide/minimum captures;
-  279 UI tests pass, including render-error diagnostics and recovery. PR #10
+  112 Rust behavior tests, two explicit GPU tests and 279 UI tests pass, including
+  render-error diagnostics and recovery. Default cache reads reject directory
+  symlinks and asset reuse is scoped to the project grant. PR #10
   awaits final-head hosted checks; materials, lighting and the production render graph remain open.
   See [imported GPU geometry](docs/spikes/imported-gpu-geometry.md).
 

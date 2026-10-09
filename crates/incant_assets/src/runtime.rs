@@ -1,10 +1,17 @@
 //! Immutable decoded assets keyed by the document's stable IDs. Reload is staged
 //! before publication so a missing or corrupt replacement leaves the running
 //! project intact. This store never imports sources or changes project documents.
-use crate::{AssetError, CookedModel, CookedTexture, load_model, load_texture};
+use crate::{
+    AssetError, CacheKind, CookedModel, CookedTexture, load_model, load_texture,
+    project_cache_directory,
+};
 use incant_doc::{Asset, AssetImportSettings, Project, TextureUsage};
 use serde::Serialize;
-use std::{collections::BTreeMap, path::Path, sync::Arc};
+use std::{
+    collections::BTreeMap,
+    path::{Path, PathBuf},
+    sync::Arc,
+};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -17,6 +24,8 @@ pub enum RuntimeAssetError {
     Budget(usize),
     #[error("asset generation counter exhausted")]
     GenerationExhausted,
+    #[error("cannot resolve asset cache root: {0}")]
+    CacheRoot(#[from] std::io::Error),
 }
 
 #[derive(Debug)]
@@ -94,6 +103,12 @@ pub struct AssetStore {
     assets: BTreeMap<String, Arc<RuntimeAsset>>,
     generation: u64,
     budget: usize,
+    scope: Option<CacheScope>,
+}
+#[derive(PartialEq, Eq)]
+enum CacheScope {
+    Explicit { project: String, cache: PathBuf },
+    Project { project: String, root: PathBuf },
 }
 impl Default for AssetStore {
     fn default() -> Self {
@@ -106,6 +121,7 @@ impl AssetStore {
             assets: BTreeMap::new(),
             generation: 0,
             budget: payload_bytes,
+            scope: None,
         }
     }
     pub fn get(&self, id: &str) -> Option<Arc<RuntimeAsset>> {
@@ -125,16 +141,52 @@ impl AssetStore {
         project: &Project,
         cache: &Path,
     ) -> Result<AssetChanges, RuntimeAssetError> {
+        let scope = CacheScope::Explicit {
+            project: project.id.clone(),
+            cache: std::path::absolute(cache)?,
+        };
+        self.sync_with(project, scope, |asset| {
+            load(asset, &cache.join(category(asset)?.directory()))
+        })
+    }
+    /// Load only from real cache directories inside the granted project. Already
+    /// retained versions need no filesystem access; replacements are checked before
+    /// reading, and a failed batch leaves those prior versions intact.
+    pub fn sync_project(
+        &mut self,
+        project: &Project,
+        root: &Path,
+    ) -> Result<AssetChanges, RuntimeAssetError> {
+        let root = root.canonicalize()?;
+        let scope = CacheScope::Project {
+            project: project.id.clone(),
+            root: root.clone(),
+        };
+        self.sync_with(project, scope, |asset| {
+            load(asset, &project_cache_directory(&root, category(asset)?)?)
+        })
+    }
+    fn sync_with(
+        &mut self,
+        project: &Project,
+        scope: CacheScope,
+        load: impl Fn(&Asset) -> crate::Result<RuntimeAssetData>,
+    ) -> Result<AssetChanges, RuntimeAssetError> {
         project.validate()?;
         let mut next = BTreeMap::new();
         let mut generation = self.generation;
         let mut bytes = 0_usize;
         let mut changes = AssetChanges::default();
+        let reuse = self.scope.as_ref() == Some(&scope);
         for (id, asset) in &project.assets {
-            let version = match self.assets.get(id).filter(|old| old.matches(asset)) {
+            let version = match self
+                .assets
+                .get(id)
+                .filter(|old| reuse && old.matches(asset))
+            {
                 Some(old) => Arc::clone(old),
                 None => {
-                    let data = load(asset, cache).map_err(|source| RuntimeAssetError::Load {
+                    let data = load(asset).map_err(|source| RuntimeAssetError::Load {
                         id: id.clone(),
                         source,
                     })?;
@@ -169,7 +221,17 @@ impl AssetStore {
             .collect();
         self.assets = next;
         self.generation = generation;
+        self.scope = Some(scope);
         Ok(changes)
+    }
+}
+fn category(asset: &Asset) -> crate::Result<CacheKind> {
+    match asset.kind.as_str() {
+        "model" => Ok(CacheKind::Models),
+        "texture" => Ok(CacheKind::Textures),
+        kind => Err(AssetError::Unsupported(format!(
+            "runtime asset kind {kind}"
+        ))),
     }
 }
 fn usage(asset: &Asset) -> Option<TextureUsage> {
@@ -183,9 +245,9 @@ fn usage(asset: &Asset) -> Option<TextureUsage> {
 }
 fn load(asset: &Asset, cache: &Path) -> crate::Result<RuntimeAssetData> {
     match asset.kind.as_str() {
-        "model" => load_model(&cache.join("models"), &asset.sha256).map(RuntimeAssetData::Model),
+        "model" => load_model(cache, &asset.sha256).map(RuntimeAssetData::Model),
         "texture" => {
-            let texture = load_texture(&cache.join("textures"), &asset.sha256)?;
+            let texture = load_texture(cache, &asset.sha256)?;
             if Some(texture.metadata.usage) != usage(asset) {
                 return Err(crate::invalid(
                     "texture settings do not match the cooked payload",

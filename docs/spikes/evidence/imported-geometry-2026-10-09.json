@@ -56,7 +56,7 @@
     "problems_reports_and_clears_render_error": true
   },
   "local_checks": {
-    "rust_behavior_tests": 110,
+    "rust_behavior_tests": 112,
     "gpu_tests_explicit": 2,
     "ui_tests": 279,
     "clippy": "passed",
@@ -79,5 +79,13 @@
     "retina_capture": false,
     "private_captures": true,
     "appearance": "diagnostic; no PBR/AA/production-camera claim"
+  },
+  "cache_scope": {
+    "project_directory_symlinks_rejected": true,
+    "reuse_requires_same_project_and_root": true,
+    "failed_batch_retains_prior_versions": true,
+    "explicit_caller_granted_cache_supported": true,
+    "regression_tests": 2,
+    "concurrent_filesystem_replacement_race_not_claimed": true
   }
 }
