@@ -58,16 +58,21 @@ before HDR display conversion. The inverse-square denominator clamps distance
 to one centimeter to avoid a singularity. Finite-range windowing and the squared
 angular spot ramp are documented in [Filament's attenuation section](https://google.github.io/filament/Filament.html).
 Claude's review identified a visible rim in the initial unsquared quartic range
-window; the focused smooth-cutoff revision and its final verification are tracked
-in handoff 0017. Tiny fixtures with lights less than 1 cm from the surface
+window. The reviewed correction squares the window, giving zero value and zero
+slope at the cutoff. A real GPU regression samples 98% and 99% of the radius
+and confirms irradiance decreases quadratically near the boundary. All physical
+and spatial-oracle checks pass with this correction. Tiny fixtures with lights less than 1 cm from the surface
 intentionally expose the finite-source plateau.
 
 ## Evidence and limits
 
-Initial local validation passes 135 workspace Rust behavior tests, 23 explicit
-GPU checks, 282 UI/bridge tests, Clippy, generated-file checks, SDK typechecking,
-five Python tests and the native release build. Final range-cutoff regression
-and returned look-development changes still require the integrated rerun.
+Final local validation passes 135 workspace Rust behavior tests, 24 explicit
+GPU checks, 283 UI/bridge tests, workspace Clippy and the native release build.
+Generated files, SDK typechecking and five Python tests also pass. The new
+range-edge regression fails on the initial shader and passes on the correction.
+A pre-existing account-dialog test race was corrected: it now waits for the
+pending request to finish before clicking the next action. No authentication
+behavior changed.
 
 The GPU checks cover inverse-square falloff, spot direction and penumbra,
 directional color, range rejection, transform inheritance, retained versions,
@@ -85,14 +90,15 @@ A disposable public-CLI project renders 3,968 sphere triangles in one draw.
 Intensity edits change the image; Undo/Redo restore exact hashes. Invalid range
 edits leave the document, revision and history unchanged. Durable journal reopen
 and source-independent rendering pass. Six separate screenshot processes took
-0.32–0.58 seconds each on Apple M5 Pro, including initialization, asset loading,
+0.32–1.60 seconds each on Apple M5 Pro, including initialization, asset loading,
 rendering and PNG writing; these are not GPU frame timings.
 
-Initial native captures verify point intensity Undo/Redo, all new read-only
-fields, and viewport rendering at 1440×900 and 1000×650. Saved authentication
+Native captures verify point intensity Undo/Redo, all new read-only fields,
+RGB channel names, unit annotations and viewport rendering at 1440×900 and
+1000×650. Saved authentication
 survives the rebuild without interaction. Claude owns native and headless pixel
-review; final visual verdict and exact tested revisions will be recorded in the
-evidence ledger after the cutoff and Inspector fixes are integrated.
+review; final native verdict and exact tested revisions are tracked in the
+evidence ledger and handoff 0017.
 
 No shadowing, light occlusion, area/IES lights, exposure UI, gizmos, authored
 camera selection, render-graph scheduler, SSAO, bloom, antialiasing, or mobile
