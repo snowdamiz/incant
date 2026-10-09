@@ -391,7 +391,7 @@ fn main() -> Result<()> {
                 json!({"state":engine.snapshot(),"assets":assets.snapshot(),"wall_ms":start.elapsed().as_secs_f64()*1000.}),
             )?;
         }
-        Cli::Play(options) => print(play::run(options)?)?,
+        Cli::Play(options) => print(play::run(options).map_err(|error| error.to_string())?)?,
         Cli::Script {
             project,
             compiled_script,

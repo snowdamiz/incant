@@ -88,7 +88,13 @@ fn play_rejects_unbounded_work_failed_scripts_and_existing_output_paths() {
     ] {
         let mut command = vec!["play", "game.incant.json"];
         command.extend(args);
-        assert!(!run(root, &command).status.success());
+        let failed = run(root, &command);
+        assert!(!failed.status.success());
+        let error = String::from_utf8_lossy(&failed.stderr);
+        assert!(
+            error.contains("play duration") || error.contains("capture plan"),
+            "{error}"
+        );
         assert!(!root.join("oversized").exists());
     }
     fs::create_dir(root.join("existing")).unwrap();
