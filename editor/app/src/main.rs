@@ -146,7 +146,7 @@ fn main() {
                 label: "main".into(),
                 background_color: Some(tauri::utils::config::Color(11, 12, 15, 255)),
                 traffic_light_position: cfg!(target_os = "macos")
-                    .then_some(tauri::utils::config::LogicalPosition { x: 14., y: 14. }),
+                    .then_some(tauri::utils::config::LogicalPosition { x: 14., y: 22. }),
                 ..Default::default()
             };
             let builder = tauri::window::WindowBuilder::from_config(app, &config)?
