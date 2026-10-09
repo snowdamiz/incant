@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { exportTargets, workflowSteps } from '../content'
+import { workflowSteps } from '../content'
+import { pipelineGlyphs } from '../icons/pipeline'
+import { platformMarks } from '../icons/platforms'
 </script>
 
 <template>
@@ -12,43 +14,41 @@ import { exportTargets, workflowSteps } from '../content'
         >
           One project, from shape to <em class="italic">ship.</em>
         </h2>
-        <p class="text-pretty-safe mt-6 max-w-lg text-[17px] leading-relaxed text-muted sm:mt-8 sm:text-lg">
-          Every step lives in the same project and the same history.
-        </p>
       </div>
 
-      <!-- A verb and the artifact it leaves behind: the track reads at a glance. -->
-      <ol class="mt-20 grid sm:mt-28 lg:grid-cols-6">
-        <li
-          v-for="s in workflowSteps"
-          :key="s.title"
-          class="relative border-l border-rule pb-10 pl-7 last:pb-0 lg:border-t lg:border-l-0 lg:pt-8 lg:pr-4 lg:pb-0 lg:pl-0"
-        >
-          <span class="absolute top-[0.7rem] -left-[5px] size-[9px] rounded-full bg-ink lg:-top-[5px] lg:left-0" aria-hidden="true" />
-          <p class="font-display-soft text-[1.75rem] leading-tight font-[430] tracking-[-0.02em] sm:text-[2rem]">{{ s.title }}</p>
-          <p class="mt-2 font-mono text-[12.5px] text-muted">{{ s.artifact }}</p>
-        </li>
-      </ol>
-
-      <!-- Where "Ship" lands. -->
-      <div class="mt-24 sm:mt-32">
-        <ul class="flex flex-wrap items-baseline gap-x-5 gap-y-1 lg:gap-x-7" aria-label="Export platforms">
-          <li
-            v-for="(target, i) in exportTargets"
-            :key="target"
-            class="font-display-soft text-[2.2rem] leading-[1.15] font-[400] tracking-[-0.02em] sm:text-[3rem] lg:text-[4.2rem]"
-          >
-            {{ target
-            }}<svg
-              v-if="i < exportTargets.length - 1"
-              viewBox="0 0 10 20"
-              class="ml-5 inline-block h-[0.62em] w-[0.31em] text-ink/25 lg:ml-7"
+      <!-- Pipeline: product-chrome nodes on one wire. Vertical on phones, horizontal from md. -->
+      <div class="relative mt-16 sm:mt-24">
+        <span class="absolute top-10 bottom-10 left-8 w-px bg-ink/20 md:hidden" aria-hidden="true" />
+        <span class="absolute top-8 right-[calc(100%/12)] left-[calc(100%/12)] hidden h-px overflow-hidden bg-ink/20 md:block" aria-hidden="true">
+          <span class="absolute inset-y-0 -left-10 w-10 bg-gradient-to-r from-transparent via-accent to-transparent motion-safe:animate-flow" />
+        </span>
+        <ol class="relative grid gap-2 md:grid-cols-6 md:gap-0">
+          <li v-for="s in workflowSteps" :key="s.id" class="relative flex items-center gap-5 py-2 md:flex-col md:gap-0 md:py-0">
+            <span
+              class="grid size-16 shrink-0 place-items-center rounded-2xl bg-ed-panel shadow-[0_12px_24px_-16px_rgb(21_22_26/0.6)] ring-1"
+              :class="s.id === 'ship' ? 'text-accent-soft ring-accent' : 'text-ed-text ring-ink/10'"
               aria-hidden="true"
-              focusable="false"
-            ><path d="M9 1 1 19" fill="none" stroke="currentColor" stroke-width="1.2" /></svg>
+            >
+              <svg viewBox="0 0 24 24" class="size-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <component :is="el.tag" v-for="(el, i) in pipelineGlyphs[s.id]" :key="i" v-bind="el.attrs" />
+              </svg>
+            </span>
+            <span class="text-[16px] font-medium md:mt-5">{{ s.title }}<span class="sr-only">: {{ s.artifact }}</span></span>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Where "Ship" lands: the real platform marks, named for everyone. -->
+      <div class="mt-24 border-t border-rule pt-14 sm:mt-32 sm:pt-16">
+        <ul class="grid grid-cols-3 gap-y-12 sm:grid-cols-6" aria-label="Export platforms">
+          <li v-for="mark in platformMarks" :key="mark.id" class="flex flex-col items-center">
+            <svg :viewBox="mark.viewBox" class="h-11 w-auto text-ink sm:h-12 lg:h-14" aria-hidden="true" focusable="false">
+              <path fill="currentColor" :d="mark.path" />
+            </svg>
+            <span class="mt-4 text-[13px] text-muted">{{ mark.name }}</span>
           </li>
         </ul>
-        <p class="text-pretty-safe mt-8 max-w-lg text-[15px] leading-relaxed text-muted">
+        <p class="text-pretty-safe mx-auto mt-14 max-w-md text-center text-[15px] leading-relaxed text-muted">
           Native Xcode and Gradle projects included, along with Steam, crash reporting and dedicated servers.
         </p>
       </div>

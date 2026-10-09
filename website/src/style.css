@@ -79,6 +79,7 @@
   --animate-blink: blink 6s ease-in-out infinite;
   --animate-march: march 1.2s linear infinite;
   --animate-rise: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-flow: flow 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 
   @keyframes blink {
     0%,
@@ -93,6 +94,11 @@
   @keyframes march {
     to {
       stroke-dashoffset: -20;
+    }
+  }
+  @keyframes flow {
+    to {
+      left: 100%;
     }
   }
   @keyframes rise {

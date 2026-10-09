@@ -33,6 +33,7 @@ export const stageSteps: StageStepCopy[] = [
 ]
 
 export interface Principle {
+  id: 'history' | 'text' | 'evidence'
   numeral: string
   title: string
   body: string
@@ -40,16 +41,19 @@ export interface Principle {
 
 export const principles: Principle[] = [
   {
+    id: 'history',
     numeral: '01',
     title: 'One history',
     body: 'Your clicks, your scripts, your team and the agent, in one undoable timeline.',
   },
   {
+    id: 'text',
     numeral: '02',
     title: 'Plain-text worlds',
     body: 'Scenes, materials and graphs are documents you can diff, review and merge.',
   },
   {
+    id: 'evidence',
     numeral: '03',
     title: 'Evidence, not guesses',
     body: 'The agent plays the game and shows its proof before it calls a change done.',
@@ -99,19 +103,64 @@ export const faqItems: FaqItem[] = [
   },
 ]
 
-/* Content tools (PLAN.md Phase 4), as a scannable index rather than prose. */
-export interface ToolEntry {
+/*
+ * Content tools (PLAN.md Phase 4), told as a strip of small illustrated viewports.
+ * `label` is the only visible text; `description` is the accessible description of the picture;
+ * `detail` feeds the optional "whole toolset" disclosure.
+ */
+export type VignetteId = 'retopo' | 'lod' | 'material' | 'terrain' | 'rig' | 'generate'
+
+export interface ToolVignette {
+  id: VignetteId
+  label: string
+  description: string
+}
+
+export const toolVignettes: ToolVignette[] = [
+  {
+    id: 'retopo',
+    label: 'Retopology · UVs',
+    description: 'Automatic retopology and UVs: a clean quad-mesh sphere beside its unwrapped UV islands.',
+  },
+  {
+    id: 'lod',
+    label: 'LODs · Decimation',
+    description: 'Level-of-detail generation: the same rock at three decreasing polygon counts.',
+  },
+  {
+    id: 'material',
+    label: 'Shader graphs',
+    description: 'A material graph: two texture nodes wired into a shaded stone sphere.',
+  },
+  {
+    id: 'terrain',
+    label: 'Terrain · Foliage',
+    description: 'Terrain: a heightmapped ridge with layered rock, grass and sand materials and scattered trees.',
+  },
+  {
+    id: 'rig',
+    label: 'Rigs · IK · Timelines',
+    description: 'Animation: a character rig mid-stride with an IK target on one foot, above a timeline of keyframes.',
+  },
+  {
+    id: 'generate',
+    label: 'Image to 3D',
+    description: 'Generated assets: a flat picture of a crate turned into a clean, game-ready 3D crate.',
+  },
+]
+
+export interface ToolDetail {
   term: string
   gloss: string
 }
 
-export const toolIndex: ToolEntry[] = [
-  { term: 'Geometry graphs', gloss: 'Booleans, bevels, lofts, arrays, scatter' },
-  { term: 'Mesh tools', gloss: 'Retopology, UVs, LODs, baking, light sculpt' },
-  { term: 'Materials', gloss: 'Shader graphs compiled to WGSL' },
-  { term: 'Terrain', gloss: 'Heightmaps, layered materials, foliage' },
-  { term: 'Animation and VFX', gloss: 'Retargeting, IK, timelines, particles' },
-  { term: 'Generated assets', gloss: 'Image-to-3D, texture sets, motion' },
+export const toolDetails: ToolDetail[] = [
+  { term: 'Geometry graphs', gloss: 'Primitives, booleans, extrude, bevel, subdivision, arrays, curves, lofts, scatter, instancing, noise' },
+  { term: 'Mesh tools', gloss: 'Cleanup, retopology, UVs, LODs, decimation, normal and AO baking, light sculpting' },
+  { term: 'Materials', gloss: 'Shader graphs compiled to WGSL, with custom WGSL nodes' },
+  { term: 'Terrain and light', gloss: 'Heightmaps, layered materials, foliage, lightmaps, probe volumes' },
+  { term: 'Animation and VFX', gloss: 'Retargeting, IK rigs, animation graphs, cinematic timelines, GPU particles' },
+  { term: 'Generated assets', gloss: 'Image-to-3D, texture sets, animation from text, alongside glTF and FBX' },
 ]
 
 /* The interactive geometry graph in the modeling stage. Values are illustrative. */
@@ -133,19 +182,19 @@ export const lighthouseGraph: GraphNode[] = [
   { id: 'output', op: 'Output', detail: 'retopo · auto-UV · LOD 0–2', adds: 'cleanup, UVs and levels of detail, shown as a wireframe' },
 ]
 
-/* The end-to-end path (PLAN.md sections 1.1, 5 and 6): a verb and the artifact it leaves. */
+/* The end-to-end path (PLAN.md sections 1.1, 5 and 6), drawn as a pipeline. */
 export interface WorkflowStep {
+  id: 'model' | 'surface' | 'script' | 'review' | 'playtest' | 'ship'
   title: string
+  /** Read by assistive technology with the step; not shown. */
   artifact: string
 }
 
 export const workflowSteps: WorkflowStep[] = [
-  { title: 'Model', artifact: 'lighthouse.geo' },
-  { title: 'Surface', artifact: 'weathered_stone.mat' },
-  { title: 'Script', artifact: 'lamp.ts' },
-  { title: 'Review', artifact: '4 edits · 1 transaction' },
-  { title: 'Play-test', artifact: '3 of 3 checks passed' },
-  { title: 'Ship', artifact: '6 platforms' },
+  { id: 'model', title: 'Model', artifact: 'a geometry graph' },
+  { id: 'surface', title: 'Surface', artifact: 'a shader graph material' },
+  { id: 'script', title: 'Script', artifact: 'TypeScript gameplay' },
+  { id: 'review', title: 'Review', artifact: 'the agent’s changes as one transaction' },
+  { id: 'playtest', title: 'Play-test', artifact: 'a headless run with evidence' },
+  { id: 'ship', title: 'Ship', artifact: 'every platform from one project' },
 ]
-
-export const exportTargets = ['Windows', 'macOS', 'Linux', 'iOS', 'Android', 'Web'] as const

@@ -54,29 +54,31 @@ const description = computed(() => {
       <!-- Graph: a vertical node list from md up, a scrollable strip of node names on phones -->
       <div class="flex min-w-0 flex-col border-t border-ed-line bg-ed-panel md:order-1 md:border-t-0 md:border-r">
         <p class="hidden border-b border-ed-line px-4 py-3 text-[12px] font-medium text-ed-muted md:block">Graph</p>
-        <ol ref="strip" class="relative flex flex-1 gap-1 overflow-x-auto px-2 py-2 md:block md:overflow-visible">
+        <div class="relative flex-1">
           <span class="absolute top-6 bottom-6 left-[1.375rem] hidden w-px bg-ed-line md:block" aria-hidden="true" />
-          <li v-for="(node, i) in lighthouseGraph" :key="node.id" class="relative shrink-0">
-            <button
-              type="button"
-              :aria-pressed="i === step"
-              class="flex min-h-11 w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left transition-colors duration-150 focus-visible:outline-ed-accent md:gap-3"
-              :class="i === step ? 'bg-ed-selected' : 'hover:bg-white/[0.04]'"
-              @click="step = i"
-            >
-              <span
-                class="size-2 shrink-0 rounded-full border"
-                :class="i <= step ? 'border-ed-accent bg-ed-accent' : 'border-ed-control bg-ed-panel'"
-                aria-hidden="true"
-              />
-              <span class="min-w-0">
-                <span class="sr-only">Preview after </span>
-                <span class="block text-[13px] font-medium whitespace-nowrap" :class="i > step ? 'text-ed-muted' : ''">{{ node.op }}</span>
-                <span class="hidden truncate font-mono text-[12px] text-ed-muted md:block">{{ node.detail }}</span>
-              </span>
-            </button>
-          </li>
-        </ol>
+          <ol ref="strip" class="relative flex gap-1 overflow-x-auto px-2 py-2 md:block md:overflow-visible">
+            <li v-for="(node, i) in lighthouseGraph" :key="node.id" class="relative shrink-0">
+              <button
+                type="button"
+                :aria-pressed="i === step"
+                class="flex min-h-11 w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left transition-colors duration-150 focus-visible:outline-ed-accent md:gap-3"
+                :class="i === step ? 'bg-ed-selected' : 'hover:bg-white/[0.04]'"
+                @click="step = i"
+              >
+                <span
+                  class="size-2 shrink-0 rounded-full border"
+                  :class="i <= step ? 'border-ed-accent bg-ed-accent' : 'border-ed-control bg-ed-panel'"
+                  aria-hidden="true"
+                />
+                <span class="min-w-0">
+                  <span class="sr-only">Preview after </span>
+                  <span class="block text-[13px] font-medium whitespace-nowrap" :class="i > step ? 'text-ed-muted' : ''">{{ node.op }}</span>
+                  <span class="hidden truncate font-mono text-[12px] text-ed-muted md:block">{{ node.detail }}</span>
+                </span>
+              </button>
+            </li>
+          </ol>
+        </div>
         <div class="hidden items-center gap-2.5 border-t border-ed-line px-4 py-3 md:flex">
           <WispMark class="h-4 w-auto shrink-0" body="#8c95ff" />
           <span class="truncate text-[12.5px] text-ed-muted">Ask the agent to edit this graph…</span>
