@@ -70,7 +70,7 @@ within its documented workload.
 
 - Native editor imports now prepare outside the event thread/document lock and
   commit with revision checks through the existing persistent history. Two new
-  Rust behavior tests and 267 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
+  Rust behavior tests and 276 integrated UI/bridge tests pass. Claude Opus 5.5 ACP
   handoff 0010 supplies the integrated asset library and import/reimport interface.
   Real native batch import, Undo/Redo, texture reimport, error recovery, concurrent
   edits, stale-import rejection and text/project Undo separation pass. The director
@@ -78,7 +78,9 @@ within its documented workload.
   left navigation and properties/import into the main Inspector. The dock now holds
   only Problems, Console and History. All 276 UI tests pass; native batch, busy,
   failure recovery, keyboard and hidden-Inspector checks pass in the replacement.
-  Its native pixel review is pending; PR #8 remains a draft until reviewed. Automatic editor
+  Claude approved the replacement's native captures at wide/minimum sizes and
+  supplied a final import-row separator polish. PR #8 awaits its final hosted
+  checks before merging. Automatic editor
   watching remains open.
   Agent asset list/inspect/import now use the shared service and a project-bound
   filesystem capability. Three new agent tests and a live saved-session import

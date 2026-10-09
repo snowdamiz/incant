@@ -6,7 +6,7 @@ and import/reimport interface. The director rejected the original bottom-dock
 layout after its earlier visual review. The replacement groups assets by folder
 in the left navigation and puts details/import in the main Inspector. Problems,
 Console and History retain the output dock. Native behavior checks pass in this
-replacement; its new WebKit captures are with Claude for pixel review.
+replacement; Claude approved its new WebKit captures at wide and minimum sizes.
 
 ## Native editor backend
 
@@ -129,4 +129,6 @@ app at wide/minimum sizes. Saved account restoration needs no new prompt.
 Entity-linked diagnostic reveal has an automated UI test. The current native
 host only emits project-load diagnostics without entity IDs, so no live native
 reveal pass is claimed. Private native captures remain ignored. Revision 4 of
-the native evidence file records exact checks and the pending visual verdict.
+the native evidence file records exact checks and Claude's pass verdicts. Native
+review commit `9343822` adds one decorative separator between the model type and
+the existing-asset update note; it passed a dedicated browser check.

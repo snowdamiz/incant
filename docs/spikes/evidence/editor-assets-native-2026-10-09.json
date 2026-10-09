@@ -20,7 +20,7 @@
     "account_focus": "PASS: pointer/keyboard dialog opens on Close; Escape restores opener; Claude confirms visible Close focus ring.",
     "restart": "PASS: quitting and reopening the same saved project recovered all 10 registered assets, four history entries and the concurrent entity rename; saved account remained connected."
   },
-  "visual_review": "Previous dock-layout approvals superseded by director feedback. Revision 4 native captures await Claude ACP review.",
+  "visual_review": "PASS: Claude Opus 5.5 through ACP approved revision 4 native captures in review commit 9343822. Prior dock-layout pixel approvals remain superseded.",
   "private_capture_directory": "artifacts/native-import-review/ (ignored; account label may be present; do not publish)",
   "limitations": [
     "No manual Windows/Linux checks required by director; hosted checks remain applicable.",
@@ -61,7 +61,7 @@
       "error": "PASS: malformed glTF retained path and exact engine error; asset count and history unchanged; choosing a texture and Show restored failed form and focused path",
       "keyboard": "PASS: Home/End select model/texture; Enter focuses Inspector heading; Escape restores same row; tab arrows switch views",
       "hidden_inspector": "PASS: hidden right panel reopened by Import, focusing Path 1",
-      "minimum_layout": "Captured actual native minimum Window > Move & Resize > Bottom Right; restored previous size after checks. Pixel review pending.",
+      "minimum_layout": "PASS: Claude reviewed the actual 1001x651 logical minimum. Import action remains pinned; details scroll. Reimport below fold is documented; traffic-light spacing is confirmed in n04c-failed-min.",
       "saved_account": "Existing connection restored in rebuilt app without sign-in or Keychain prompt. No account actions performed.",
       "problems_reveal": "Automated UI test passes. Native live entity-linked diagnostics are not yet emitted by editor/bridge/native.ts; no fabricated native result."
     },
@@ -83,6 +83,25 @@
       "Failed reimport Show selects its own asset even after another asset is selected",
       "Folder labels with punctuation retain distinct accessible IDs"
     ],
-    "visual_verdict": "Pending Claude review"
+    "visual_verdict": "PASS N1-N5 and N6 output placement, including minimum-size scrolling/pinned action, grouped rows, identity blocks, errors and focus rings. Native entity-linked problem reveal remains unexercised; automated test passes.",
+    "native_review_commit": "9343822",
+    "polish": "Decorative separator between Model and Updates note; browser verified by Claude; no new native capture requested.",
+    "capture_dimensions": {
+      "wide": [
+        3024,
+        1898
+      ],
+      "minimum": [
+        2002,
+        1302
+      ]
+    },
+    "validation": {
+      "ui_bridge_tests": 276,
+      "native_debug_build": "pass",
+      "native_release_build": "pass",
+      "main_bundle_gzip_kb": 101.58,
+      "bundle_budget_kb": 110
+    }
   }
 }
