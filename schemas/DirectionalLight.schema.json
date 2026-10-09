@@ -10,18 +10,22 @@
       "description": "Linear RGB multiplier. Light travels along transformed local -Z.",
       "items": {
         "format": "double",
+        "maximum": 1,
+        "minimum": 0,
         "type": "number"
       },
       "maxItems": 3,
       "minItems": 3,
-      "type": "array"
+      "type": "array",
+      "x-incant-widget": "rgb"
     },
     "intensity": {
       "description": "Illuminance in lux.",
       "format": "double",
       "maximum": 1000000,
       "minimum": 0,
-      "type": "number"
+      "type": "number",
+      "x-incant-unit": "lx"
     }
   },
   "required": [

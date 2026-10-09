@@ -544,6 +544,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             schema["order"] = json!(order);
         }
     }
+    lights::annotate_schemas(&mut registry);
     registry
 }
 impl Scene {
