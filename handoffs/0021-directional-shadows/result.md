@@ -1,6 +1,154 @@
-# 0021 directional shadows: initial look-dev, pixel review and Inspector result
+# 0021 directional shadows: look-dev, pixel review and Inspector result
 
-## Status
+## Final status
+
+Final review complete. Scoped verdict: **native acceptance granted for the
+scope of this handoff,** with two thin-caster limits recorded below. The
+Inspector states, the Assets separation, the native shadow rendering, native
+Undo/Redo and the mapped-normal correction all pass review on actual pixels.
+
+The scope covers opt-in directional cascades for up to four suns and the
+read-only Inspector presentation. The verdict does not approve a phase gate. It
+also does not certify game or device performance, or production game art.
+
+Exact model and transport for both rounds: Claude Opus 5.5, model ID
+`claude-opus-5-5`, through the director's Claude subscription via ACP. No model
+substitution occurred.
+
+The report has two rounds:
+- This final round reviews the integrated native evidence and Astra's correction.
+- The initial review from `38aef10`, integrated as `9f02f45`, is kept below as history.
+
+## Final round
+
+### Director feedback acknowledged
+
+The bottom-dock criticism stays binding. Assets must read as a dedicated
+workspace with consistent spacing, details in the main Inspector, and
+diagnostics below. I reviewed both Assets captures specifically and did not
+reintroduce Assets as an output tab.
+
+### Assets separation (assets-separated-wide and -minimum)
+
+The organization is correct at both sizes:
+- Assets is a tab in the left workspace beside Hierarchy, with its own filter and Import button.
+- The main Inspector shows the "No asset selected" state, not a cramped detail row.
+- The bottom dock holds only Problems, Console and History.
+- Filter, Import, folder header and asset rows share one left edge and an even
+  row rhythm at both sizes. Nothing clips at the true minimum.
+
+I found one real inconsistency and fixed it. The project-root group label
+"Project folder" is prose, but it used the monospace style meant for real
+paths such as `models/props/`. It read like code next to the asset names.
+Real folder paths stay monospace. The root label now uses the normal UI face.
+A new behavior test checks both cases. The sample browser fixture has no
+project-root assets, so this change has no new browser capture. A native
+capture of the Assets view would show it, and I list that below.
+
+### Native Inspector (enabled, omitted, null, focus)
+
+The wide captures and the true-minimum captures match the browser review:
+- **Enabled.** The "Shadows" group shows Distance 60 m with the standard group rule and unit.
+- **Omitted and null.** Both rows read "Off" in the quiet outlined box, aligned with the other rows.
+- **Focus.** The read-only field shows the standard focus ring at minimum size.
+- **No problems.** There are no layout regressions, and Problems shows no errors or warnings.
+
+I did not reread the AX text files beyond the README's summary. That summary
+says absent and null have distinct accessible explanations, which matches the
+unit tests.
+
+### Native shadow pixels (look-dev at 12 and 38 degrees, Undo/Redo)
+
+The native default preview camera frames the scene differently from the
+headless camera. I judged appearance, not framing.
+- **Matches headless.** Contact, slopes and the sphere terminator look the same
+  as the headless renders. There is no acne on open ground at either angle.
+- **Redo restores exactly.** I decoded both JPEGs and compared only the viewport
+  region. All 673,740 viewport pixels in the Redo capture are identical to the
+  original 12° capture.
+- **Limit 1 is present natively.** The 2 cm wall shows the same thin lit line at its ground contact.
+- **Limit 2 is milder in this framing.** At 12°, the far posts' shadows are
+  slightly stepped, but they are not broken into dashes. The default camera is
+  closer to the posts than the headless camera.
+
+### Mapped-normal correction (Astra)
+
+I accept the correction. Shadow lookups now offset along the interpolated
+geometric normal, flipped for double-sided back faces. Shading still uses the
+mapped normal. The test compares opposing tangent-X normal maps along the
+center column, where lighting is symmetric, so only a moved shadow edge can
+differ there.
+
+| Evidence | Center-column pixels differing by more than 1 level | Maximum difference |
+| --- | --- | --- |
+| Before | 81 | 12 |
+| After | 0 | 0 |
+
+About 30,000 pixels still differ elsewhere in the image. That is intended,
+because normal maps should change shading off-axis. All four integrated
+look-dev images are pixel-identical to my initial renders, so the correction
+changed nothing without normal maps.
+
+### Regression, timing and repeatability
+
+- **Regression set.** The comparison now has 122 of 124 exact pairs. The only
+  differences are the same two one-pixel, one-level camera-cluster files.
+  My earlier 121 of 123 matched the files I was given.
+- **Timing.** I read the medians in the final timing file. They are an
+  analytical frame probe and not a performance gate.
+
+| Shadowed suns | Casters | Median frame, 1080p |
+| --- | --- | --- |
+| 0 | 1 | 1.389 ms |
+| 1 | 1 | 1.470 ms |
+| 1 | 64 | 1.479 ms |
+| 4 | 64 | 3.096 ms |
+
+### Remaining thin-caster limits
+
+1. **Contact leak.** Casters thinner than about one shadow texel, such as the 2 cm
+   wall, show a 1 to 2 px lit line where they meet the ground. Every lower-bias
+   setting I tried caused widespread acne without removing it. Receiver-plane
+   depth bias is the usual next step if game art needs paper-thin casters.
+2. **Far aliasing.** Thin posts under a low sun alias in the far 1024² cascades.
+   In the headless framing they break into dashes beyond about 30 m. A
+   world-space filter radius or more far-cascade resolution would address it.
+   That is a math and resource decision for Astra.
+
+Neither limit blocks this scoped acceptance. Both should be tracked before any
+production art or quality gate.
+
+### Final-round changes
+
+- `editor/ui/src/components/assets/AssetBrowser.tsx`: monospace only for real folder paths
+- `editor/ui/src/components/assets/Assets.test.tsx`: behavior test for the root label
+- `handoffs/0021-directional-shadows/result.md`: this round
+
+### Final-round commands
+
+```
+npx vitest run (editor/ui)               # 12 files, 294 tests passed
+npm run build --workspace editor/ui      # pass; main JS 102.14 kB gzip, budget 110 KiB
+```
+
+Only UI code changed, so I did not rerun the unchanged Rust and GPU suites.
+Astra's integrated run already passed them.
+
+### Native requests
+
+1. Capture the Assets view with an asset at the project root, at wide and
+   minimum size. I need it to confirm the root label now reads as plain text natively.
+
+### Open questions
+
+- Should optional scalars read "Not set" or show an engine default once
+  schemas carry defaults? This carries over from the initial round.
+
+---
+
+# Initial round (history)
+
+## Status (initial round)
 
 Initial review complete. Scoped verdict: **Inspector presentation done; shadow
 appearance acceptable for this initial stage, with two documented look-dev limits
