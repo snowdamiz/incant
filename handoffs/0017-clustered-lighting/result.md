@@ -2,19 +2,37 @@
 
 ## Status
 
-Review complete. No visual defect found in the supplied fixtures. This is a
-fixture-level pixel review only. It is not production lighting approval, not
-native-capture approval, and not a phase gate approval.
+Review complete for the initial fixtures and the priority follow-up captures.
+
+- Initial review: no visual defect. Verdicts are preserved unchanged below.
+- Follow-up review: all supplied oracle pairs verified pixel-identical. No
+  tile seam, slice seam or hue-shifted clipping was found. There is one open
+  look-development defect: the visible range cutoff has a slope crease. There
+  is one open question about the two nearest depth patches. One evidence
+  limitation affects the dielectric sweep. See "Follow-up review" below.
+
+This is a fixture-level pixel review only. It is not production lighting
+approval, not native-capture approval, and not a phase gate approval. Native
+work remains explicitly pending because the Mac is locked.
 
 - Model: Claude Opus 5.5 (`claude-opus-5-5`), Anthropic.
-- Transport: Claude Code agent session launched by the handoff runner
-  (bypassPermissions, director-authorized). Images were read directly from the
-  worktree. No ACP-specific tool was exposed to this session beyond the runner
-  itself; record that if the routing log expects a distinct ACP transport id.
-- Director feedback: the current brief carries no priority revisions or new
-  director feedback. No earlier result.md existed, so this is a fresh review.
+- Transport: Claude Code through ACP protocol 1. Per the follow-up brief,
+  Astra's runner (`tools/handoff/main.py`) starts `claude-agent-acp`,
+  exchanges JSON-RPC initialize with ACP protocol 1, creates or resumes the
+  worktree session, selects Opus 5.5 and sends `session/prompt`. The runner's
+  bypassPermissions mode is director-authorized.
+- Director feedback acknowledged (follow-up brief): record the transport as
+  Claude Code through ACP 1, with no separate identifier needed. Keep
+  throwaway review scripts in the ignored `artifacts/` directory of this
+  worktree. Preserve the initial verdicts and clearly separate the added
+  evidence. All three points are applied here. The initial open question
+  about transport is closed.
 - Native captures: none. The Mac is locked. No shell-native capture was used.
-  No credentials were read.
+  No credentials were read. No file outside this worktree was edited. The
+  initial review's temporary `/tmp/review0017/` scripts were moved into
+  `artifacts/review0017/`, which git ignores, and the `/tmp` copy was deleted.
+
+# Initial review (preserved)
 
 ## Method
 
@@ -145,31 +163,229 @@ depth, so several of the review targets in the brief are only weakly exercised.
 7. **Native captures** on the Mac once unlocked, at least one per fixture
    family, compared against these headless captures.
 
+# Follow-up review: expanded real GPU coverage (added evidence)
+
+Everything in this section is new evidence from the priority follow-up. It
+does not change any initial verdict above.
+
+## Method (follow-up)
+
+1. Viewed every added PNG visually.
+2. Ran the same decoder and checks from `artifacts/review0017/` on the added
+   images: SHA-1, decoded pixel identity against each supplied `-oracle`
+   image, clipping and hue-at-clip checks, the 64 px tile seam detector,
+   scanline profiles, sRGB-to-linear edge slopes and per-patch statistics.
+3. The oracle images were supplied this time, so the oracle identity claim
+   was checked directly.
+
+## Oracle and state identity (verified directly)
+
+| Capture | Compared with | Result |
+|---|---|---|
+| spatial-overflow-96-640x480 | its -oracle | pixel-identical, same SHA-1 |
+| spatial-overflow-96-513x385 | its -oracle | pixel-identical, same SHA-1 |
+| depth-boundary-patches-640x480 | its -oracle | pixel-identical, same SHA-1 |
+| depth-boundary-patches-513x385 | its -oracle | pixel-identical, same SHA-1 |
+| cli-undo-point | cli-authored-point | pixel-identical |
+| cli-restored-point | cli-authored-point | pixel-identical |
+| cli-source-free-point | cli-authored-point | pixel-identical |
+| cli-redo-point | cli-dimmed-point | pixel-identical |
+| cli-dimmed-point | cli-authored-point | differs in 37391 px, as an intensity edit should |
+
+The identity proves that clustered assignment equals brute-force evaluation
+of all lights. It cannot catch an error in shading code that both paths
+share, such as BRDF, attenuation or tone mapping. Those were judged visually
+below.
+
+## Measured results (follow-up)
+
+| Image | Size | Max RGB | Clipped px |
+|---|---|---|---|
+| spatial-overflow-96 | 640x480, 513x385 | 229,219,208 | 0 |
+| depth-boundary-patches | 640x480, 513x385 | 143,147,129 | 0 |
+| visible-range-edge | 640x480, 513x385 | 252,222,171 | 0 |
+| spot-centered-reference | 321x181 | 110,110,110 | 0 |
+| spot-penumbra | 321x181 | 109,109,109 | 0 |
+| punctual-hdr-metal-0.045 | 640x480 | 255,255,255 | 22 |
+| punctual-hdr-metal-0.3 | 640x480 | 255,254,252 | 708 |
+| punctual-hdr-metal-0.7 | 640x480 | 254,238,212 | 0 |
+| punctual-hdr-metal-1 | 640x480 | 247,225,185 | 0 |
+| punctual-hdr-dielectric-0.045 | 640x480 | 255,255,254 | 8 |
+| punctual-hdr-dielectric-0.3 | 640x480 | 255,247,234 | 88 |
+| punctual-hdr-dielectric-0.7 | 640x480 | 254,238,212 | 0 |
+| punctual-hdr-dielectric-1 | 640x480 | 254,238,210 | 0 |
+| cli-authored-point | 640x480 | 255,253,249 | 406 |
+| cli-dimmed-point | 640x480 | 255,246,232 | 34 |
+
+Every clipped pixel is near-white. No image contains a pixel with red at 255
+and green below 230, so the highlights show no orange or yellow hue ring at
+the clip.
+
+Seam detector at 64 px tile lines vs the image mean (column / row):
+
+| Image | Column mean | Tile columns | Row mean | Tile rows |
+|---|---|---|---|---|
+| overflow 640x480 | 0.82 | 0.69 to 0.92 | 0.85 | 0.61 to 1.00 |
+| overflow 513x385 | 0.91 | 0.78 to 1.07 | 0.89 | 0.65 to 0.96 |
+| depth patches 640x480 | 1.03 | 0.88 to 1.28 | 1.01 | 0.89 to 1.43 |
+| range edge 640x480 | 0.41 | 0.00 to 0.51 | 0.32 | 0.00 to 0.61 |
+| metal-0.3 sphere | 1.56 | 0.03 to 1.04 | 1.66 | 0.87 to 2.13 |
+
+The worst-scoring lines in every image are sphere or quad silhouettes or
+light peaks. None falls on a tile line.
+
+## Verdicts (follow-up)
+
+- **spatial-overflow-96 (both sizes): pass.** The 96 overlapping coloured
+  lights form a smooth green-to-rose blend with no tile seam, no block
+  pattern and no clipping. The oracle match is verified directly, so the
+  overflow path is exact. Odd and even sizes both pass.
+- **depth-boundary-patches (both sizes): pass with one open question.** The
+  24 patches form a clean numerical grid. Peak red follows the column (93,
+  113, 129, 143) and peak green follows the row (107, 119, 129, 139, 147).
+  Blue stays at 129. Patches on opposite sides of each logarithmic boundary
+  match each other's pattern exactly, and the odd 513x385 size gives the same
+  per-patch values within 1 code value. That is direct visual evidence of no
+  slice-boundary discontinuity from about 0.1 to 681 units. The exception is
+  patches 00 and 01, see the open question below.
+- **visible-range-edge (both sizes): open look-dev defect.** The cutoff is
+  continuous, with no hard step and no tile seam. In linear light, though,
+  the falloff reaches zero with a nearly constant slope instead of easing
+  out (see the defect below). On screen the pool reads as a disc with a
+  defined rim rather than a fade.
+- **spot-centered-reference: pass.** Odd dimensions put the plateau centre at
+  x=160, the column of the world origin. The plateau holds 107 to 110 with a
+  monotonic ramp to 0 on both sides. The ramps differ in length (8 px vs
+  11 px) only because the quad is tilted in perspective. No ring and no step.
+- **spot-penumbra: pass.** The penumbra is wider and monotonic, rising from 0
+  to 97 over 11 px and then easing into the plateau. The inner-cone slope
+  "knee" noted initially is still visible (109 to 103) but stays a look-dev
+  note, not a defect.
+- **punctual-hdr metal sweep: pass.** Roughness reads correctly. At 0.045 the
+  highlight is a tight pinpoint on a black ball. It widens through 0.3 and
+  0.7, and at 1 it becomes a broad, nearly uniform lobe from 244 at the
+  centre to 172 near the lower rim. The highlight rolls through the tone-map
+  shoulder to near-white without hue rings. Black low-roughness metal is
+  expected because no environment lighting exists. That is consistent with
+  the black quads of the initial fixtures.
+- **punctual-hdr dielectric sweep: pass, with an evidence limitation.** The
+  specular pinpoint at 0.045 and the soft highlight at 0.3 are correct and
+  clip only to near-white. The grazing lower rim darkens smoothly from 241 to
+  101 over the last few pixels without a band. However, the diffuse body sits
+  at 248 to 254 sRGB across almost the whole disc, deep in the tone-map
+  shoulder. That flattens the shading, so the 0.7 and 1 dielectrics are
+  nearly indistinguishable and Lambert falloff is barely visible.
+- **cli-*-point: pass.** The authored, Undo, restored and source-free renders
+  are pixel-identical. Redo is pixel-identical to the dimmed render. The
+  dimmed sphere shows a smaller, still near-white highlight and a darker
+  body, which is a plausible intensity reduction. The highlight shows no hue
+  shift at the clip. This is visual confirmation that Undo and Redo restore
+  exactly and that rendering does not depend on source files. Journal reopen
+  and the atomic rejection of an invalid range are not pixel-observable
+  beyond these identities, so I took them from Astra's tests.
+
+## Open defects (follow-up)
+
+1. **Range cutoff slope crease (look-development, non-blocking for
+   clustering correctness).** At the left edge of the range pool, linear red
+   per pixel inward from the cutoff measures:
+
+       640x480: 0.0006, 0.0152, 0.0307, 0.0467, 0.0630, 0.0802
+       513x385: 0.0027, 0.0212, 0.0409, 0.0612, 0.0823, 0.1046
+
+   Each step adds about 0.015 to 0.020, so the attenuation reaches zero with a
+   nonzero slope. A smooth window, for example `(1 - (d/r)^4)^2`, would give
+   roughly quadratic values near the edge, about 1:4:9, and they are not.
+   Value continuity is fine, but the slope discontinuity reads as a defined
+   ring, which is what the brief asked me to judge for. Request: Astra
+   confirms the intended range-window function. If the spec calls for a
+   zero-derivative window, this is a mismatch. If the linear end is intended,
+   document it as a look-dev choice. I did not change any shader.
+
+## Open questions (follow-up)
+
+1. **Depth patches 00 and 01 have flattened peaks.** Both keep their hue and
+   match the row below at their edges, with a linear ratio of 1.0. Their
+   centres are dimmer, though. Patch 00 drops to about 0.25 to 0.55 of the
+   patch below it, and patch 01's peak plateaus at 84 instead of 113. The
+   shape fits a minimum-distance or radius clamp on inverse-square
+   attenuation for the two nearest patches near 0.1 units. Because the oracle
+   is identical, clustering is not the cause. Please confirm that this is
+   intended clamp behaviour and document it. If not, it is a shared shading
+   issue near the near plane.
+
+## Evidence limitations (follow-up)
+
+- **Dielectric sweep saturates in the tone-map shoulder.** Roughness and
+  Lambert falloff on dielectrics cannot be judged well at this intensity. A
+  lower-intensity companion sweep would give useful look-dev evidence, either
+  bracketed or with a darker albedo. Exposure controls do not exist yet, and
+  I did not tune the authored lights.
+- **The oracle shares shading code.** Byte identity verifies assignment only.
+  An independent analytic reference for a few pixels, such as the patch peaks
+  or the spot centre, would cover shared BRDF and attenuation code.
+- **Native captures remain pending** for every family. The Mac is locked.
+
+## Status of initial evidence requests
+
+| Initial request | Status |
+|---|---|
+| 1. Spatially distinct overflow | Supplied and verified: spatial-overflow-96 with oracle |
+| 2. Depth-slice boundaries | Supplied: depth patches with oracle, plus Astra's readback test; no slice-debug view, accepted as a diagnostic fixture |
+| 3. Visible range edge | Supplied: reveals the slope crease above |
+| 4. Lights straddling tile boundaries | Covered by the overflow and range-edge captures crossing tile lines with no seam |
+| 5. High-intensity capture | Supplied: HDR sweep and CLI fixtures; highlights roll off cleanly |
+| 6. Specular and grazing angles | Supplied: metal and dielectric sweep; dielectric limited by saturation |
+| 7. Native captures | Still pending: Mac locked |
+
 ## Changed paths
 
 - `handoffs/0017-clustered-lighting/result.md` (this file)
 
+Throwaway review scripts are in `artifacts/review0017/`, which git ignores,
+and are not committed.
+
 ## Run commands
+
+Initial review (scripts since moved from `/tmp/review0017/`):
 
     shasum artifacts/cluster-initial/*.png
     sips -g pixelWidth -g pixelHeight <each png>
-    python3 -I /tmp/review0017/stats.py <pngs>   # max, clipping, unique colours
-    python3 -I /tmp/review0017/seams.py <pngs>   # tile seam detector
-    python3 -I /tmp/review0017/rows.py <png> y=90 x=162   # scanline profiles
-    python3 -I /tmp/review0017/res.py artifacts/cluster-initial   # resolution consistency
+    python3 -I artifacts/review0017/stats.py <pngs>   # max, clipping, unique colours
+    python3 -I artifacts/review0017/seams.py <pngs>   # tile seam detector
+    python3 -I artifacts/review0017/rows.py <png> y=90 x=162   # scanline profiles
+    python3 -I artifacts/review0017/res.py artifacts/cluster-initial   # resolution consistency
 
-All ran successfully. The review scripts are throwaway tools in `/tmp` and are
-intentionally not committed.
+Follow-up review:
+
+    python3 -I artifacts/review0017/ident.py artifacts/cluster-initial   # oracle and CLI identity
+    python3 -I artifacts/review0017/prof.py artifacts/cluster-initial    # HDR, spot, range profiles
+    python3 -I artifacts/review0017/patches.py <depth patch pngs>        # per-patch stats
+    python3 -I artifacts/review0017/edge.py <range png> <y>              # range edge pixels
+    python3 -I artifacts/review0017/lin.py artifacts/cluster-initial     # linear slopes, patch ratios
+    python3 -I artifacts/review0017/pmap.py <depth patch 640x480 png>    # patch 00/01 ratio map
+
+All ran successfully.
 
 ## Screenshot paths
 
-Reviewed, not produced: all 13 PNGs in `artifacts/cluster-initial/`. No new
-screenshots or visual-regression images were created.
+Reviewed, not produced. These are all in `artifacts/cluster-initial/`:
+
+- Initial: 13 PNGs (point, spot, directional, disabled, cluster-64/65/128,
+  spatial-clusters at three sizes).
+- Follow-up: spatial-overflow-96 and depth-boundary-patches at 640x480 and
+  513x385, each with -oracle; visible-range-edge at both sizes;
+  spot-centered-reference; spot-penumbra; punctual-hdr metal and dielectric
+  at 0.045, 0.3, 0.7 and 1; cli authored, dimmed, undo, redo, restored and
+  source-free point.
+
+No new screenshots or visual-regression images were created.
 
 ## Unavailable
 
-- Native macOS captures: unavailable, Mac locked.
-- Brute-force oracle images: not supplied, oracle equality not re-verified.
+- Native macOS captures: unavailable, Mac locked. Native work remains pending.
+- Initial spatial-clusters oracle images: not supplied, so not re-verified.
+  The follow-up oracles were verified.
 - Visual regression baseline comparison: no baseline exists for this increment.
 
 ## Rationale and limits
@@ -181,7 +397,10 @@ graph do not exist yet. No phase gate is approved by this review.
 
 ## Open questions
 
-- Should the ACP transport be recorded with a distinct identifier in
-  result.md, given this session ran as a Claude Code agent under the runner?
-- Can the oracle captures be copied next to the fixtures in future packets so
-  the byte-for-byte claim can be checked during pixel review?
+- Range window function: is a nonzero slope at the cutoff intended? See the
+  follow-up defect 1.
+- Depth patches 00 and 01: is the flattened near-plane peak an intended
+  distance clamp? See follow-up question 1.
+- Resolved: transport is recorded as Claude Code through ACP 1, per the
+  follow-up brief.
+- Resolved: oracle captures were supplied with the follow-up.
