@@ -182,6 +182,15 @@ fn environment_intensity_rotation_and_roughness_change_real_reflections() {
         .collect();
     fixture.environment(&pixels, 64, 32, TextureUsage::Linear);
     let first = center(&capture(&fixture, &renderer, "environment-rotation-zero"));
+    assert!(first[2] > first[0] + 100);
+    fixture.environment_setting("rotation_degrees", 90.);
+    let positive = fixture.pixel(&renderer);
+    fixture.environment_setting("rotation_degrees", -90.);
+    let negative = fixture.pixel(&renderer);
+    assert!(
+        positive[2] > positive[0] + 100 && negative[0] > negative[2] + 100,
+        "positive/negative world +Y yaw: {positive:?} / {negative:?}"
+    );
     fixture.environment_setting("rotation_degrees", 180.);
     let second = center(&capture(
         &fixture,
@@ -207,6 +216,14 @@ fn environment_intensity_rotation_and_roughness_change_real_reflections() {
     assert!(
         rough[0] > 40 && rough[0] + 10 < smooth[0],
         "{smooth:?} / {rough:?}"
+    );
+    fixture.edit(|g| g["materials"][0]["pbrMetallicRoughness"]["metallicFactor"] = json!(0));
+    // A white dielectric in a constant environment returns that radiance:
+    // diffuse fills exactly the energy remaining after specular reflection.
+    near(
+        center(&capture(&fixture, &renderer, "environment-white-furnace")),
+        [188, 188, 188, 255],
+        1,
     );
 }
 

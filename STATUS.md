@@ -53,6 +53,16 @@ within its documented workload.
 
 ## Active work
 
+- Distant environment lighting now includes diffuse convolution, GGX roughness
+  filtering, a matching BRDF lookup and retained GPU versions. Authored
+  `EnvironmentLight` components bind imported equirectangular textures through
+  the shared command bus. The public CLI verifies rotation, Undo/Redo and
+  source-free rendering. 131 Rust behavior tests and 15 explicit GPU checks are
+  covered by the current validation; final look-dev rerun/review is in progress.
+  Claude's default studio is integrated. Native verification is pending because
+  CUA reports the Mac locked; no native approval is claimed. See
+  [environment lighting evidence](docs/spikes/environment-lighting.md).
+
 - HDR geometry now renders to retained RGBA16Float attachments before the display
   transform. Claude's derived preview curve preserves ordinary colors and rolls
   off bright highlights. Eleven explicit GPU checks cover tone mapping, display
