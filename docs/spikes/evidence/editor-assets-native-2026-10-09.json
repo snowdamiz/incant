@@ -20,11 +20,25 @@
     "account_focus": "PASS: prior rebuilt app pointer/keyboard-opened account dialog focused Close; Escape restored opener; pixel focus-ring review pending",
     "restart": "PASS: quitting and reopening the same saved project recovered all 10 registered assets, four history entries and the concurrent entity rename; saved account remained connected."
   },
-  "visual_review": "Pending Claude Opus 5.5 ACP review of private captures. Astra did not judge pixels.",
-  "known_followup": "Busy sentence incorrectly says other edits wait. Claude must update copy to reflect concurrent edits and possible retry.",
+  "visual_review": "Claude reviewed original native captures, approved controls, errors, inspector and account focus ring, and visible traffic-light placement. Five follow-up corrections integrated; their native re-captures await Claude review.",
+  "known_followup": "Review final native re-captures for corrected busy copy, tabs, heading ring and result scroll.",
   "private_capture_directory": "artifacts/native-import-review/ (ignored; account label may be present; do not publish)",
   "limitations": [
     "No manual Windows/Linux checks required by director; hosted checks remain applicable.",
     "No GPU/ECS asset binding, file picker/source copying, automatic editor source watching or cancellable parsing claimed."
-  ]
+  ],
+  "revision_2": {
+    "build": "08026d8",
+    "ui_tests": 267,
+    "paste_selection": "PASS: replaces fully selected path; unselected caret retains it and inserts lines below",
+    "busy_copy": "PASS in native accessibility for actual large imports at wide and narrow sizes; private captures supplied to Claude",
+    "reimport_result": "PASS: operation completes after scrolling and history advances; result visibility awaiting pixel verdict",
+    "captures": [
+      "r01-busy-copy-wide.jpg",
+      "r01b-busy-copy-narrow.jpg",
+      "r03-reimport-result.jpg",
+      "r04-heading-focus-narrow.jpg",
+      "r04-heading-focus-wide.jpg"
+    ]
+  }
 }

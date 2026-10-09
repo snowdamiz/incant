@@ -1,3 +1,22 @@
+## Priority revision 3: final native re-capture review
+
+The revision 2 commit is integrated as 08026d8, rebuilt and tested (267 UI tests).
+New private CUA captures are in artifacts/native-review/r*.jpg. Review R1–R4 now:
+- r01-busy-copy-wide.jpg: actual eight-PNG worker, on the external display.
+- r01b-busy-copy-narrow.jpg: actual eight-PNG worker, minimum laptop placement.
+- r04-heading-focus-narrow.jpg: also supplies R2 tabs, seven? history count at
+  capture is authoritative; normal texture heading focused by Enter.
+- r03-reimport-result.jpg: after scrolling texture details down, selecting Linear
+  and reimporting; native AX confirms Reimported and history increment.
+- r04-heading-focus-wide.jpg: restored wide size, Escape to row then Enter.
+Native R5 both cases PASS: select-all then multiline paste replaces Path 1 and
+adds Path 2; at end caret it keeps Path 1 and inserts new rows below. Source paths
+were synthetic and no invalid paths submitted. Account stayed connected across
+this new build too. Finish pixel review, update result.md and native-requests.md
+with precise verdicts, commit with Built-by: claude. Only change implementation
+if evidence shows a remaining issue. Keep private captures ignored. No need to
+repeat all browser tests if only review docs change. Astra will handle PR/merge.
+
 ## Priority revision: native integration review, 2026-10-09
 
 Your original UI commit is integrated. Review the native captures now in the ignored
