@@ -325,9 +325,30 @@ class NativeBridge {
     }
     async startEngineUpdates(listen) {
         // Subscribe before the initial read, so completion during setup cannot be lost.
-        if (listen) await listen("incant:engine-changed", ()=>{
-            void this.start();
-        });
+        if (!listen) {
+            this.publish({
+                status: "error",
+                error: {
+                    code: "engine.events",
+                    message: "Native project updates are unavailable. Restart Incant to retry."
+                }
+            });
+            return;
+        }
+        try {
+            await listen("incant:engine-changed", ()=>{
+                void this.start();
+            });
+        } catch  {
+            this.publish({
+                status: "error",
+                error: {
+                    code: "engine.events",
+                    message: "Could not connect native project updates. Restart Incant to retry."
+                }
+            });
+            return;
+        }
         await this.start();
     }
     async start() {
@@ -461,9 +482,7 @@ function installNativeBridge() {
     if (!invoke || host.__INCANT_BRIDGE__) return undefined;
     const bridge = new NativeBridge(invoke);
     host.__INCANT_BRIDGE__ = bridge;
-    void bridge.startEngineUpdates(host.__TAURI__?.event?.listen).catch(()=>{
-        void bridge.start();
-    });
+    void bridge.startEngineUpdates(host.__TAURI__?.event?.listen);
     void bridge.startHistoryRequests(host.__TAURI__?.event?.listen).catch(()=>console.error("Native history menu could not be connected."));
     void bridge.startProviderUpdates(host.__TAURI__?.event?.listen).catch(()=>bridge.updateProvider({
             status: "error",

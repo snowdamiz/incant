@@ -22,8 +22,9 @@ current retry path. This does not prove protected-folder access works.
 Local checks: three Rust behavior tests verify a blocked loader leaves state
 readable and commands unavailable, timeout rejects a late result and releases its
 journal, and restart restores shared command history while rejecting invalid files
-and duplicate journal ownership. Two bridge regressions cover completion during
+and duplicate journal ownership. Three bridge regressions cover completion during
 initial IPC, obsolete responses, stale-state removal and independent account
-metadata. The 225 editor/bridge tests pass. Claude owns the loading/error
+metadata, and explicit failure when native event subscription is unavailable.
+Renderer failures now also notify the bridge immediately. The 226 editor/bridge tests pass. Claude owns the loading/error
 presentation and native keyboard-dialog focus ring in handoff 0009. Those UI and
 native checks are still pending.

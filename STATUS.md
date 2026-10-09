@@ -54,7 +54,8 @@ within its documented workload.
 
 - Responsive project loading is being integrated: file reads and journal recovery
   run off the native event thread, with a 15-second timeout and rejected late
-  results. Three Rust tests and 225 UI/bridge tests pass locally. Claude handoff
+  results. Three Rust tests and 226 UI/bridge tests pass locally; full workspace release
+  tests and Clippy also pass. Claude handoff
   0009 owns the loading/error presentation and missing keyboard-dialog focus ring.
   Protected-folder access and rebuilt native verification remain unproven.
 

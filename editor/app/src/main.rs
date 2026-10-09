@@ -202,6 +202,7 @@ fn main() {
                 }
             });
             let shared = editor.clone();
+            let render_app = app.handle().clone();
             std::thread::spawn(move || {
                 let mut configured = (0, 0);
                 let empty = Project::empty("Loading");
@@ -280,6 +281,12 @@ fn main() {
                                     format!("Render error: {error}"),
                                 ));
                             }
+                            use tauri::Emitter;
+                            let _ = render_app.emit_to(
+                                tauri::EventTarget::webview("editor"),
+                                "incant:engine-changed",
+                                (),
+                            );
                             break;
                         }
                     }

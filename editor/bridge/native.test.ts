@@ -52,6 +52,17 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it("reports a missing or rejected event subscription instead of waiting indefinitely", async () => {
+    const invoke = vi.fn(async () => read()) as Invoke;
+    for (const listen of [undefined, async () => { throw new Error("Event permission denied"); }]) {
+      const bridge = new NativeBridge(invoke);
+      await bridge.startEngineUpdates(listen);
+      expect(bridge.getSnapshot().connection.status).toBe("error");
+      expect(bridge.getSnapshot().hierarchy.status).toBe("error");
+      expect(bridge.getSnapshot().entities).toEqual({});
+    }
+    expect(invoke).not.toHaveBeenCalled();
+  });
   it("subscribes before reading and ignores an obsolete loading response after completion", async () => {
     let notify: () => void = () => { throw new Error("No listener"); };
     let finishInitial: (value: EngineResponse) => void = () => { throw new Error("No read"); };
