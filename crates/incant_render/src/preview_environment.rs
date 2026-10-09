@@ -24,11 +24,20 @@
 //! so no feature is a hard one-texel edge and each blurs progressively through
 //! the rougher prefiltered levels.
 //!
+//! Panel hierarchy (tuned on the first GPU captures): on an 0.8 metal the key
+//! panel reflects at about 1.35 linear, onto the tone-map shoulder (sRGB ~249),
+//! while the fill reflects at about 0.6, below the shoulder (sRGB ~202). A
+//! brighter fill landed within a few sRGB levels of the key after shoulder
+//! compression and competed with it.
+//!
 //! Diffuse budget: the old constant fill was 0.3 and is replaced, not added to.
 //! The cosine-weighted mean radiance of this environment, which is the value
-//! that replaces that fill, averages about 0.32 over all normals: about 0.45
+//! that replaces that fill, averages about 0.30 over all normals: about 0.42
 //! facing up, 0.25 facing away from the key and 0.15 facing down. The key
 //! panel slightly reinforces the directional key's diffuse; that is deliberate.
+//!
+//! The floor is part of this distant environment only. There is no floor
+//! geometry, shadowing or visibility; reflected floor is never an occluder.
 
 /// Upper bound of every returned channel.
 pub(crate) const MAX_RADIANCE: f32 = 16.0;
@@ -55,7 +64,7 @@ const PANELS: [Panel; 3] = [
         half_width: 0.34,
         half_height: 0.24,
         softness: 0.09,
-        radiance: [1.7, 1.7, 1.7],
+        radiance: [1.4, 1.4, 1.4],
     },
     // Fill card on the camera's right, low and broad.
     Panel {
@@ -63,7 +72,7 @@ const PANELS: [Panel; 3] = [
         half_width: 0.55,
         half_height: 0.45,
         softness: 0.2,
-        radiance: [0.7, 0.7, 0.7],
+        radiance: [0.45, 0.45, 0.45],
     },
     // Rim strip behind and above the subject, wide and short.
     Panel {
