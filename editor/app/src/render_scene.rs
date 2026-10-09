@@ -44,7 +44,7 @@ impl SceneRuntime {
         let candidate = (|| {
             if let Some(root) = root {
                 self.assets
-                    .sync(project, &root.join(".incant/cache"))
+                    .sync_project(project, root)
                     .map_err(|e| e.to_string())?;
             } else if !project.assets.is_empty() {
                 return Err("Open a saved project to load its cooked assets".into());

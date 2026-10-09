@@ -39,6 +39,88 @@ fn pixel(asset: &incant_assets::RuntimeAsset) -> &[u8] {
 }
 
 #[test]
+fn retained_assets_are_not_reused_as_authorization_for_another_project_scope() {
+    let temp = tempfile::tempdir().unwrap();
+    let other = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    let asset = cook(root, "paint.png", [255, 0, 0, 255], TextureUsage::Color);
+    fs::create_dir(root.join(".incant")).unwrap();
+    fs::rename(root.join("cache"), root.join(".incant/cache")).unwrap();
+    let mut bus = CommandBus::new(Project::empty("Scoped cache")).unwrap();
+    edit(&mut bus, &asset);
+    let mut store = AssetStore::default();
+    store.sync_project(bus.project(), root).unwrap();
+    let trusted = store.get(&asset.id).unwrap();
+    // Same IDs and fingerprints do not grant the second root access to the first.
+    assert!(store.sync_project(bus.project(), other.path()).is_err());
+    assert!(Arc::ptr_eq(&trusted, &store.get(&asset.id).unwrap()));
+    fs::rename(root.join(".incant/cache"), root.join("held-cache")).unwrap();
+    assert!(
+        store
+            .sync_project(bus.project(), root)
+            .unwrap()
+            .loaded
+            .is_empty()
+    );
+    let mut different_project = bus.project().clone();
+    different_project.id = new_id();
+    assert!(store.sync_project(&different_project, root).is_err());
+    assert!(Arc::ptr_eq(&trusted, &store.get(&asset.id).unwrap()));
+}
+
+#[test]
+#[cfg(unix)]
+fn project_runtime_rejects_redirected_cache_directories_and_retains_trusted_versions() {
+    use std::os::unix::fs::symlink;
+    for (component, target) in [
+        (".incant", ""),
+        (".incant/cache", "cache"),
+        (".incant/cache/textures", "cache/textures"),
+    ] {
+        let temp = tempfile::tempdir().unwrap();
+        let outside = tempfile::tempdir().unwrap();
+        let root = temp.path();
+        let original = cook(root, "paint.png", [255, 0, 0, 255], TextureUsage::Color);
+        fs::create_dir(root.join(".incant")).unwrap();
+        fs::rename(root.join("cache"), root.join(".incant/cache")).unwrap();
+        fs::remove_file(root.join("paint.png")).unwrap();
+        let mut bus = CommandBus::new(Project::empty("Scoped cache")).unwrap();
+        edit(&mut bus, &original);
+        let mut store = AssetStore::default();
+        store.sync_project(bus.project(), root).unwrap();
+        let before = store.snapshot();
+        let retained = store.get(&original.id).unwrap();
+        assert_eq!(pixel(&retained), [255, 0, 0, 255]);
+        let mut replacement = cook(
+            outside.path(),
+            "paint.png",
+            [0, 0, 255, 255],
+            TextureUsage::Color,
+        );
+        replacement.id = original.id.clone();
+        edit(&mut bus, &replacement);
+        fs::rename(root.join(component), root.join("held-cache")).unwrap();
+        symlink(outside.path().join(target), root.join(component)).unwrap();
+        assert!(
+            store.sync_project(bus.project(), root).is_err(),
+            "redirected {component} must fail"
+        );
+        assert_eq!(store.snapshot(), before);
+        assert!(Arc::ptr_eq(&retained, &store.get(&original.id).unwrap()));
+        // The replacement really is valid; only the unauthorized project redirect
+        // prevents loading. Explicit caller-granted caches remain supported.
+        let mut explicit = AssetStore::default();
+        explicit
+            .sync(bus.project(), &outside.path().join("cache"))
+            .unwrap();
+        assert_eq!(
+            pixel(&explicit.get(&original.id).unwrap()),
+            [0, 0, 255, 255]
+        );
+    }
+}
+
+#[test]
 fn live_versions_survive_reimport_and_undo_without_source_files() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path();

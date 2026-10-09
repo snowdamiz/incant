@@ -486,7 +486,7 @@ fn main() -> Result<()> {
                 .parent()
                 .filter(|p| !p.as_os_str().is_empty())
                 .unwrap_or(Path::new("."));
-            let viewport = GpuPerception::new(Some(root.join(".incant/cache")))?;
+            let viewport = GpuPerception::new(Some(root.to_path_buf()))?;
             let mut host = incant_agent::ProjectHost::new(bus.project(), root, viewport)?;
             let report = agent.run(
                 &mut provider,
@@ -513,14 +513,14 @@ fn main() -> Result<()> {
 
 struct GpuPerception {
     renderer: incant_render::Renderer,
-    cache: Option<PathBuf>,
+    project_root: Option<PathBuf>,
     assets: incant_assets::AssetStore,
 }
 impl GpuPerception {
-    fn new(cache: Option<PathBuf>) -> Result<Self> {
+    fn new(project_root: Option<PathBuf>) -> Result<Self> {
         Ok(Self {
             renderer: incant_render::Renderer::headless().map_err(|e| e.to_string())?,
-            cache,
+            project_root,
             assets: Default::default(),
         })
     }
@@ -533,8 +533,8 @@ impl incant_agent::Perception for GpuPerception {
         height: u32,
     ) -> std::result::Result<Value, incant_agent::AgentError> {
         use base64::Engine;
-        if let Some(cache) = &self.cache {
-            self.assets.sync(project, cache).map_err(|_| {
+        if let Some(root) = &self.project_root {
+            self.assets.sync_project(project, root).map_err(|_| {
                 incant_agent::AgentError::Tool("Cooked assets could not be loaded".into())
             })?;
         } else if !project.assets.is_empty() {

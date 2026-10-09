@@ -44,7 +44,7 @@ scene selection and simulation-driven render snapshots remain open.
   captures at 1440×900 and a measured 1000×650 (scale 1). The corrected error text
   fits, Problems reflects the same failure, and both clear on recovery. There is
   no Retina-capture claim. [Claude review](../../handoffs/0011-imported-geometry/result.md).
-- All 110 Rust behavior tests, two explicitly invoked GPU tests, 279 UI tests,
+- All 112 Rust behavior tests, two explicitly invoked GPU tests, 279 UI tests,
   workspace Clippy, formatting, generated contracts/SDK checks and the native
   release build pass locally. [Machine-readable evidence](evidence/imported-geometry-2026-10-09.json).
 - A real `gpt-6-astra` turn used the saved OAuth session, queried a disposable
@@ -64,3 +64,11 @@ Claude noted the diagnostic shader's aliasing, fixed camera framing and flat
 shading. These remain part of the open production-renderer work. A draw/device
 failure currently stops the render worker until restart; asset-preparation
 failures are the retryable cases verified above.
+
+Default runtime and watcher cache reads now validate every directory below the
+granted project root before descending. Repository-supplied symlink redirects are
+rejected. Retained assets are scoped to the project ID and root (or explicit cache
+capability), so moving between projects cannot reuse a previous grant. Failed
+replacement batches retain the earlier versions. Two regression tests cover
+redirected cache directories and project-scope changes. This is not a claim of
+race-proof directory-handle isolation against concurrent filesystem replacement.
