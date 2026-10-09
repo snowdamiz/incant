@@ -14,6 +14,23 @@ Ready for director review.
   Sign out. It opens on Close, and the sign-out question opens on "Keep signed in".
 - The phase gate is not approved, and this result does not approve it.
 
+## Visual verification deferred at the director's request
+
+On 2026-10-08 the director said: "Stop using computer use for now". Screen capture was
+blocking Prime Video output. From that point Claude ran no computer-use tools, browser or
+native automation, screenshots, screen recording or capture helpers, and launched no visual
+review. The remaining visual checks are deferred until the director lifts the restriction:
+
+- native traffic-light alignment
+- the keyboard-opened account dialog
+- keyboard undo after Astra's menu fix
+- resize with focus rings
+- the compact window
+
+The C3 requests in `native-requests.md` are on hold for the same reason. Existing images stay on
+disk unchanged. No new tests or captures were run for this notification, and the completed
+design is unchanged.
+
 ## Model
 
 Claude Opus 5.5, model ID `claude-opus-5-5`, running as Claude Code in this worktree. No other

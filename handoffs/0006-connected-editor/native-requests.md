@@ -119,6 +119,10 @@ Full table in `result.md` under "Native review of the corrected build". Summary:
 
 ## C3. Follow-up captures (after rebuilding from this commit)
 
+**On hold (2026-10-08):** the director has stopped all computer use and screen capture, because
+it was blocking Prime Video output. Do not take these captures until the director explicitly
+lifts the restriction.
+
 1. `09-titlebar-lights`: the focused window with the traffic lights visible. If the CUA indicator
    always sits at the window's top-left, take a window-only capture without it (for example,
    `screencapture -o -l <window id>` after the CUA action ends), or any method you prefer that
