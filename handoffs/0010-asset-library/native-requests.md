@@ -4,12 +4,13 @@ Claude's ACP session has no computer use. Every check below needs Astra's CUA ch
 build that includes this handoff's UI commit and Astra's native import command. Keep raw
 captures and any account labels in the ignored `artifacts/` tree, out of Git. The Mac is
 unlocked. Native behaviour checks and captures A1 to A7 were supplied on 2026-10-09, and
-Claude's pixel review of them is in result.md. Requests R1 to R4 below cover the
-revision 2 visual fixes, which only browser captures have checked so far.
+Claude's pixel review of them is in result.md. Astra supplied R1 to R4 re-captures and the
+R5 behaviour result on a build containing revision 2 (integrated as 08026d8). Claude
+reviewed them in revision 3, and every item passed. No request is open.
 
-Native verification stays **open** until these captures are supplied and reviewed. The
-images in `screenshots/after/` are headless Chrome over synthetic data. They prove neither
-WebKit rendering nor engine behaviour.
+The images in `screenshots/after/` are headless Chrome over synthetic data. They prove
+neither WebKit rendering nor engine behaviour. The native verdicts below rest on Astra's
+private CUA captures, which are kept in the ignored `artifacts/native-review/`.
 
 | ID | Check | Status |
 | --- | --- | --- |
@@ -20,11 +21,45 @@ WebKit rendering nor engine behaviour.
 | A5 | Reimport with a changed texture interpretation, then Undo | Passed; scroll fixed in revision 2, see R3 |
 | A6 | WebKit layout: container queries, `:has()` segmented control, narrow dock | Pixels reviewed; tab clipping fixed, see R2 |
 | A7 | Keyboard and focus rings in WebKit | Passed; heading ring fixed, see R4 |
-| R1 | Busy copy, wide and narrow | Open |
-| R2 | Narrow dock tabs show every label and count | Open |
-| R3 | Reimport result note scrolled into view | Open |
-| R4 | Details heading focus ring fits the title | Open |
-| R5 | Select-all, then multi-line paste replaces the path | Open (behaviour) |
+| R1 | Busy copy, wide and narrow | **Pass** (pixels, revision 3) |
+| R2 | Narrow dock tabs show every label and count | **Pass** (pixels, from r01b and r04 narrow) |
+| R3 | Reimport result note scrolled into view | **Pass** (pixels; Astra's AX confirms Reimported and the history increment) |
+| R4 | Details heading focus ring fits the title | **Pass** (pixels, wide and narrow) |
+| R5 | Select-all, then multi-line paste replaces the path | **Pass** (behaviour, Astra) |
+
+## Revision 3 verdicts (Claude, 2026-10-09)
+
+Each verdict below names the capture it rests on. Dimensions are measured from the files.
+
+- **R1 pass, from `r01-busy-copy-wide` and `r01b-busy-copy-narrow`.**
+  - `r01-busy-copy-wide` is 1440×900, taken on the external display at 1x. During the
+    eight-PNG worker, the strip reads "Importing 8 files…" alone, because the pane is open.
+  - The 320 px pane's footer shows "Importing 8 files…" over "You can keep working. Editing
+    now means retrying the import." The note wraps to two lines, which is acceptable.
+  - `r01b-busy-copy-narrow` is 2002×1302, the minimum laptop placement. The footer shows
+    both lines on one line each.
+  - "Other edits wait" appears nowhere. The read-only path fields and the disabled segments
+    read correctly.
+- **R2 pass.** In `r01b`, the narrow tabs read "Assets" with its spinner, "Problems",
+  "Console 1" and "History 5". In `r04-heading-focus-narrow` they read "Assets 10",
+  "Problems", "Console 1" and "History 6". In `r03` History reads 7, which agrees with the
+  reimport increment. Every label and count is fully visible, with no icons and no clipping.
+- **R3 pass, from `r03-reimport-result` (2002×1302).** The pane is scrolled to the top. The
+  note "Reimported. Undo reverts the whole reimport." sits fully below the header. Linear is
+  selected, and the status bar reads "Reimported normal."
+- **R4 pass, from `r04-heading-focus-narrow` and `r04-heading-focus-wide`.**
+  - `r04-heading-focus-narrow` is 2002×1302. After Enter, the periwinkle ring wraps only
+    "normal", with padding. It no longer spans the header or resembles a text field.
+  - `r04-heading-focus-wide` is 3024×1412. After Escape to the row and Enter again, it shows
+    the same fitted ring next to the Close button. The CUA pointer overlaps part of the
+    title in this capture, but the ring is unaffected.
+- **R5 pass:** Astra's behaviour result. Select-all, then a multi-line paste replaced Path 1
+  and added Path 2. A paste at the end caret kept Path 1 and inserted the rows below it.
+  The source paths were synthetic.
+- **Traffic lights.** The purple capture indicator still covers the traffic lights in all
+  five r-captures. The only native evidence of the lights remains `a06-wide-details`, where
+  they are visible and clear the wisp and project name. This is a limit of the capture
+  tool, not a UI defect. No further request is made.
 
 ## Revision 2 re-captures (Claude, 2026-10-09)
 
