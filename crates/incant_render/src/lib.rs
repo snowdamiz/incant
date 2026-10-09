@@ -1,6 +1,7 @@
 //! Native rendering and GPU readback with retained imported material previews.
 //! Ordered HDR geometry, display transform and native composition passes.
 //! Clustered lighting and the full production render graph remain open.
+mod environment;
 mod frame;
 #[cfg(test)]
 #[path = "../tests/hdr_output/mod.rs"]
@@ -9,6 +10,7 @@ mod material_pipeline;
 mod materials;
 mod models;
 mod output;
+mod preview_environment;
 mod resource_error;
 mod scene;
 mod studio;
@@ -49,6 +51,7 @@ pub struct Renderer {
     pipelines: Mutex<HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>>,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
+    environments: environment::EnvironmentSystem,
     frames: frame::FrameCache,
     output: output::OutputPass,
 }
@@ -71,7 +74,8 @@ impl Renderer {
                 ..Default::default()
             })
             .await?;
-        let materials = materials::MaterialSystem::new(&device, &queue);
+        let environments = environment::EnvironmentSystem::new(&device, &queue);
+        let materials = materials::MaterialSystem::new(&device, &queue, &environments.layout);
         Ok(Self {
             device,
             queue,
@@ -80,6 +84,7 @@ impl Renderer {
             pipelines: Mutex::new(HashMap::new()),
             models: Mutex::new(HashMap::new()),
             materials,
+            environments,
             frames: Default::default(),
             output: Default::default(),
         })

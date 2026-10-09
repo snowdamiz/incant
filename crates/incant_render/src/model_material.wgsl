@@ -13,8 +13,17 @@ struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec
 @group(1) @binding(8) var occlusion_sampler:sampler;
 @group(1) @binding(9) var emissive_map:texture_2d<f32>;
 @group(1) @binding(10) var emissive_sampler:sampler;
+@group(2) @binding(0) var specular_environment:texture_cube<f32>;
+@group(2) @binding(1) var diffuse_environment:texture_cube<f32>;
+@group(2) @binding(2) var brdf_lut:texture_2d<f32>;
+@group(2) @binding(3) var environment_sampler:sampler;
 struct VertexOut { @builtin(position) position:vec4f, @location(0) world:vec3f, @location(1) normal:vec3f, @location(2) tangent:vec4f, @location(3) uv:vec2f }
 fn unit(v:vec3f) -> vec3f { return v*inverseSqrt(max(dot(v,v),1e-16)); }
+// Rotate world directions into the source image's coordinates (inverse +Y yaw).
+fn environment_direction(d:vec3f) -> vec3f {
+    let c=frame.environment.y;let s=frame.environment.z;
+    return vec3f(c*d.x-s*d.z,d.y,s*d.x+c*d.z);
+}
 @vertex fn vertex(@location(0) position:vec3f,@location(1) normal:vec3f,
     @location(2) w0:vec4f,@location(3) w1:vec4f,@location(4) w2:vec4f,@location(5) w3:vec4f,
     @location(6) n0:vec4f,@location(7) n1:vec4f,@location(8) n2:vec4f,@location(9) uv:vec2f,@location(10) tangent:vec4f) -> VertexOut {
@@ -49,8 +58,15 @@ fn unit(v:vec3f) -> vec3f { return v*inverseSqrt(max(dot(v,v),1e-16)); }
     let f0=mix(vec3f(0.04),base.rgb,metallic);let fresnel=f0+(1.0-f0)*pow(1.0-vh,5.0);
     let diffuse=(1.0-fresnel)*(1.0-metallic)*base.rgb/3.14159265359;
     let direct=(diffuse+distribution*visibility*fresnel)*frame.radiance.xyz*nl;
-    // Diffuse preview environment only: no specular IBL or shadow claim.
-    let indirect=frame.environment.xyz*base.rgb*(1.0-metallic)*occlusion;
+    let dfg=textureSampleLevel(brdf_lut,environment_sampler,vec2f(nv,roughness),0.0).rg;
+    let reflectance=f0*dfg.x+dfg.y;
+    let irradiance=textureSampleLevel(diffuse_environment,environment_sampler,environment_direction(n),0.0).rgb;
+    let reflected=textureSampleLevel(specular_environment,environment_sampler,
+        environment_direction(reflect(-v,n)),roughness*frame.environment.w).rgb;
+    // Single scattering loses energy at high roughness. Keep diffuse within the
+    // remaining energy; multiscattering compensation is a separate future model.
+    let indirect=((1.0-reflectance)*(1.0-metallic)*base.rgb*irradiance+reflectance*reflected)
+        *frame.environment.x*occlusion;
     // Bound finite radiance before half-float storage; values above one survive.
     let color=clamp(direct+indirect+emissive,vec3f(0),vec3f(65504));
     return vec4f(color,select(1.0,base.a,material.flags.x==2u));

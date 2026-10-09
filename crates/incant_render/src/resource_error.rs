@@ -9,6 +9,8 @@ pub enum ResourceError {
     TextureSize,
     #[error("material image exceeds finite RGBA16Float GPU range")]
     TextureRange,
+    #[error("unsupported environment source: {0}")]
+    EnvironmentSource(&'static str),
     #[error("{0} exceeds GPU buffer limit")]
     BufferSize(&'static str),
     #[error("transformed geometry exceeds GPU numeric range")]
