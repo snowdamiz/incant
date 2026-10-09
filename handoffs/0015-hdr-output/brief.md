@@ -1,3 +1,40 @@
+# Priority: final corrected headless and native visual review
+
+The corrected curve is integrated. Workspace Clippy passes, all 124 Rust behavior
+tests passed on the integrated CPU implementation, and all eleven final explicit
+GPU tests pass. The final native custom-protocol release build and UI build pass;
+282 UI tests pass. No further source or lighting changes are needed unless your
+review finds a specific defect.
+
+Review all 24 freshly generated PNGs in artifacts/hdr-final, including the
+fill-only albedos .1/.18/.5 and textured-cube. Use the earlier material-before
+captures for comparison. Numerical GPU assertions match your corrected expected
+values; the glossy highlight bound now distinguishes HDR from clipping at 1.0.
+The default-metal capture from 0014 is historical; no new default-metal image is
+supplied here. Keep missing specular IBL explicit.
+
+Review artifacts/native-hdr-final/07-final-wide.jpg and 08-final-minimum.jpg.
+These are actual CUA JPEGs from the rebuilt app: respectively 2880x1748 physical
+pixels (1440x874 logical; constrained by available desktop height), and 2000x1300
+physical pixels (1000x650 logical). The app remains Attached, zero problems,
+with project, four history items and saved account restored. Do not repeat the
+visible account label. The purple recording badge is macOS capture chrome, not
+app UI. Independent native resize succeeds; the Inspector is a working scroll
+area at minimum height, as verified in 0014.
+
+Give a final verdict for the corrected curve and the native integration; do not
+confuse initial HDR captures or comparison sheets with the corrected output.
+Record exact inspected files and remaining limitations. The design correction
+was Astra's routine integration decision under the director's standing continue
+instruction, not newly typed director feedback. Correct that attribution in the
+result. Exposure and initial curve selection were also routine agent choices.
+Do not request additional director decisions on this scoped preview.
+
+This is review-only: no builds, new capture, UI/code edits or publishing. Append
+final review to result.md and commit with Built-by: claude in the final paragraph.
+
+---
+
 # Priority correction: revise the curve to preserve material colors
 
 Your review correctly caught the color regression. Do not defer it or request a

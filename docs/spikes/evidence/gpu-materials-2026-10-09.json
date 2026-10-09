@@ -65,7 +65,7 @@
     "scroll_correction": "7027df5",
     "verdict": "accepted for imported-material preview scope"
   },
-  "hosted_checks": "pending",
+  "hosted_checks": "all twelve passed; exact records in hosted_merge",
   "studio_tuning": "aabfeef (Claude 0d8f29e)",
   "final_native_base": "aabfeef",
   "captures": {

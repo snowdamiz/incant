@@ -75,7 +75,9 @@ within its documented workload.
   implemented. 119 Rust behavior tests and seven explicit GPU tests pass locally.
   Native texture reimport, Undo/Redo, retention on source error and repair
   pass. Claude approved the final headless and native captures, including the
-  minimum-height Inspector scroll behavior. PR #13 awaits hosted checks. Production lighting/render graph/postprocessing remain open. See
+  minimum-height Inspector scroll behavior. All twelve hosted checks passed on
+  `f7607ab`; PR #13 merged as `794c765` on 2026-10-09. Production lighting and
+  the full render graph remain open. See
   [GPU material evidence](docs/spikes/gpu-materials.md).
 
 - Isolated headless playback now accepts ticks/seconds and an optional compiled
