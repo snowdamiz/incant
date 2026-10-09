@@ -76,6 +76,50 @@ async function expectNoAxeViolations(container: HTMLElement) {
 }
 
 describe('asset library', () => {
+  it('reveals a hidden Inspector when importing or opening an asset, and restores the list on Escape', async () => {
+    renderWith(controlledBridge().bridge);
+    openAssets();
+    fireEvent.click(screen.getByRole('button', { name: 'Inspector and agent panel' }));
+    expect(screen.queryByRole('region', { name: 'Inspector' })).toBeNull();
+    openImport();
+    await waitFor(() => expect(document.activeElement).toBe(pathInput(1)));
+    fireEvent.click(screen.getByRole('button', { name: 'Inspector and agent panel' }));
+    const row = screen.getByRole('option', { name: /^crate Model/ });
+    fireEvent.click(row);
+    fireEvent.keyDown(row, { key: 'Enter' });
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('heading', { name: 'crate' })));
+    fireEvent.click(screen.getByRole('button', { name: 'Hierarchy panel' }));
+    fireEvent.keyDown(screen.getByRole('heading', { name: 'crate' }), { key: 'Escape' });
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('option', { name: /^crate Model/ })));
+  });
+
+  it('reveals the failed reimport asset after selecting another asset or hiding the Inspector', async () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Reimport' }));
+    await host.resolve({ ok: false, error: { code: 'asset.import', message: 'Source was removed.' } });
+    fireEvent.click(screen.getByRole('option', { name: /^crate_normal/ }));
+    expect(screen.queryByRole('alert')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Show' }));
+    expect(screen.getByRole('heading', { name: 'crate' })).toBeTruthy();
+    expect(screen.getByRole('alert').textContent).toContain('Source was removed.');
+    fireEvent.click(screen.getByRole('button', { name: 'Inspector and agent panel' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Show' }));
+    expect(screen.getByRole('alert').textContent).toContain('Source was removed.');
+  });
+
+  it('assigns distinct accessible folder labels for paths that differ only by punctuation', () => {
+    const assets = ASSETS.map((asset, index) => ({ ...asset, path: `${['a/b', 'a_b', 'a.b'][index]}/source.png` }));
+    renderWith(controlledBridge({ assets: { status: 'ready', value: assets } }).bridge);
+    openAssets();
+    const groups = within(screen.getByRole('listbox', { name: 'Assets' })).getAllByRole('group');
+    const labels = groups.map((group) => group.getAttribute('aria-labelledby'));
+    expect(new Set(labels).size).toBe(3);
+    expect(labels.map((id) => document.getElementById(id!)?.textContent).sort()).toEqual(['Folder a.b/', 'Folder a/b/', 'Folder a_b/'].sort());
+  });
+
   it('lives in the left column; the output dock keeps only Problems, Console and History', () => {
     const host = controlledBridge();
     renderWith(host.bridge);
