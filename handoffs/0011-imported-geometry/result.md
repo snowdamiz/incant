@@ -6,8 +6,9 @@
   no longer claims the surface failed to attach or that nothing is rendered.
 - **Headless geometry review.** Done.
 - **Native review of the supplied captures.** Done for all five captures from b2721a2.
-- **Native review of the new error copy.** Pending. The supplied error capture predates
-  this change. A final native error capture is requested in `native-requests.md`.
+- **Native review of the new error copy.** Done on 2026-10-09 from Astra's final release
+  captures, at 1440×900 and at the true 1000×650 minimum. Verdict: pass. No UI fix was
+  needed, and no further native evidence is requested.
 - No phase gate is approved or claimed by this result.
 
 ## Model and transport
@@ -18,7 +19,12 @@
   AppleScript or synthetic native events were used.
 - Director feedback acknowledged: the priority update supplying native captures was read
   before finishing. All five captures were reviewed, and the final post-integration error
-  capture is requested as instructed.
+  capture was requested as instructed.
+- Final packet section acknowledged. Astra integrated the wording and made render errors
+  appear in Problems. In this worktree those commits are 11bc56e and c135b96. The brief
+  cites ccf30f3 and 318f35c from the integration branch. The bridge change in 318f35c
+  matches c135b96. This final pass changed documentation only, so the full UI tests were
+  not rerun, as the packet allows.
 
 ## Changed paths
 
@@ -121,7 +127,10 @@ All of these are local and ignored. Native captures are private and were not com
   and `without-sources.png`.
 - Native captures from Astra in `artifacts/geometry-review/`: `native-reimported-wide.jpg`,
   `native-undo-original.jpg`, `native-cache-error-before-copy.jpg`, `native-recovered.jpg`
-  and `native-minimum.jpg`.
+  and `native-minimum.jpg`. The last one is 1720×669, not the true minimum.
+- Final native captures in the same folder: `native-final-render-error-wide.jpg`,
+  `native-final-render-error-minimum.jpg`, `native-final-recovered-minimum.jpg` and
+  `native-geometry-true-minimum.jpg`.
 
 ## Error-state review in the browser
 
@@ -172,6 +181,38 @@ Appearance findings, not changed here because they need Rust or are outside this
   so the shading gives little shape cue on this fixture. That is expected for a
   diagnostic shader, and the synthetic geometry is flat.
 
+## Final native review of the integrated wording
+
+All four captures come from the real release app with a real missing cooked file. They
+were reviewed at full size. No account label is quoted here.
+
+- **Wide error state passes.** `native-final-render-error-wide.jpg` shows the "Error"
+  pill, the heading "Viewport render error" and the verbatim backend detail. Neither old
+  phrase appears. Problems has exactly one matching row, and the status bar counts one
+  error. The heading, detail and Problems row agree.
+- **Minimum error state passes.** `native-final-render-error-minimum.jpg` is 1000×650 at
+  scale 1. The viewport island is about 420×300, and the tile, heading and three-line
+  detail fit with comfortable margins. The Problems row truncates with an ellipsis, which
+  is acceptable because the full text is in the viewport. The titlebar account chip
+  truncates without overlapping anything.
+- **Recovery passes.** `native-final-recovered-minimum.jpg` shows "Attached", the scene
+  again, an empty Problems list and a zero error count. This followed restoring the file,
+  with no reopen or edit. The Console keeps its two entries, which is correct for a log.
+- **Geometry at the true minimum passes.** `native-geometry-true-minimum.jpg` shows both
+  triangles fully inside the island, with no clipping and no seam at the edges. The
+  dimmed titlebar is the normal unfocused-window state.
+- **Wording reads well in native.** The long asset ID cannot break, so the first detail
+  line is short. That is readable, and changing it would mean altering the backend text.
+
+Minor presentation notes, not fixed here because they are outside the files this packet
+allows:
+
+- **The Problems row is labeled "Project".** Rows without an entity use that scope label.
+  A render error is better described as "Viewport". That would mean a diagnostic source
+  field in the contract, or a change to the dock row.
+- **The earlier 1720×669 capture was misnamed.** Astra has already corrected this. The
+  new captures are the true minimum.
+
 ## Findings for Astra
 
 1. **One code covers three failures.** Setup, scene replacement and draw failures all
@@ -183,9 +224,9 @@ Appearance findings, not changed here because they need Rust or are outside this
    error and the scene. That is a layout change for a future visual handoff.
 3. **The draw-failure path never recovers.** After a draw error the render loop exits, so
    the error stays until restart. The UI copy now avoids promising recovery for that case.
-4. **Render errors are missing from Problems.** In the native error capture, Problems says
-   "No problems" and the status bar shows 0 errors while the viewport shows Error. The
-   error appears only in the Console. Consider publishing the render error as a diagnostic.
+4. **Render errors in Problems: resolved.** The pre-copy capture showed "No problems" next
+   to a viewport error. Astra's c135b96 publishes the error as a diagnostic, and the final
+   captures confirm it appears and clears on recovery.
 5. **Test timeouts under load.** The UI suite exceeds the default 5-second timeout when the
    machine is heavily loaded. The CI gate is unaffected by this run, but it is worth
    watching.
@@ -193,8 +234,8 @@ Appearance findings, not changed here because they need Rust or are outside this
 ## Not done or unavailable
 
 - No native build was run, per the brief.
-- The native capture of the new copy is pending. So are a true 1000×650 native capture and
-  an optional Retina crop. See `native-requests.md`.
+- No Retina crop exists, because the capture display runs at scale 1. Edge aliasing was
+  judged only from the 1× captures and the headless frames.
 - No visual-regression baseline exists or was claimed.
 - Mathematical correctness of the shader and transforms was not reviewed; Astra owns it.
 
