@@ -40,6 +40,9 @@ const PATHS = {
   problems: 'M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3',
   link: 'M6.5 9.5l3-3M7 4.5l1-1a2.5 2.5 0 013.5 3.5l-1 1M9 11.5l-1 1A2.5 2.5 0 014.5 9l1-1',
   send: 'M2.5 8L13.5 2.5 11 13.5 8 9zM8 9l5.5-6.5',
+  external: 'M9 2.5h4.5V7M13.5 2.5L7.5 8.5M11.5 9.5v4h-9v-9h4',
+  plus: 'M8 3.5v9M3.5 8h9',
+  signOut: 'M6.5 2.5h-4v11h4M10 5l3 3-3 3M13 8H6',
 } as const;
 
 export type IconName = keyof typeof PATHS;

@@ -415,7 +415,7 @@ function baseSnapshot(): Omit<BridgeSnapshot, 'connection' | 'hierarchy'> {
     history: { entries: [], applied: 0 },
     console: [],
     provider: { status: 'not-connected', provider: 'openai' },
-    agent: { status: 'unavailable', reason: 'Connect an OpenAI account to use the agent.' },
+    agent: { status: 'unavailable', reason: 'Sign in with ChatGPT to use the agent.' },
     viewport: NO_VIEWPORT,
   };
 }

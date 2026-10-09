@@ -1,6 +1,7 @@
 import type { Capability, EditorBridge } from './contract';
 import { KNOWN_CAPABILITIES, UI_PROTOCOL_VERSION } from './contract';
 import { createFixtureBridge, isFixtureVariant } from './fixture';
+import { createProviderFixtureBridge, isProviderFixture } from './providerFixture';
 
 export type BridgeResolution =
   | { readonly kind: 'bridge'; readonly bridge: EditorBridge }
@@ -10,7 +11,8 @@ export type BridgeResolution =
 
 /**
  * Picks the data source. An injected host bridge always wins. The sample fixture
- * is only used when explicitly requested with `?fixture=<variant>`.
+ * is only used when explicitly requested with `?fixture=<variant>`; an optional
+ * `&provider=<state>` selects a simulated account state for sign-in UI review.
  */
 export function resolveBridge(injected: EditorBridge | undefined, search: string): BridgeResolution {
   if (injected) {
@@ -19,10 +21,14 @@ export function resolveBridge(injected: EditorBridge | undefined, search: string
     }
     return { kind: 'bridge', bridge: injected };
   }
-  const requested = new URLSearchParams(search).get('fixture');
+  const params = new URLSearchParams(search);
+  const requested = params.get('fixture');
   if (requested === null) return { kind: 'none' };
   if (!isFixtureVariant(requested)) return { kind: 'bad-fixture', requested };
-  return { kind: 'bridge', bridge: createFixtureBridge(requested) };
+  const provider = params.get('provider');
+  if (provider === null) return { kind: 'bridge', bridge: createFixtureBridge(requested) };
+  if (!isProviderFixture(provider)) return { kind: 'bad-fixture', requested: `provider=${provider}` };
+  return { kind: 'bridge', bridge: createProviderFixtureBridge(requested, provider) };
 }
 
 export interface CapabilitySet {
@@ -47,7 +53,10 @@ const CAPABILITY_LABELS: Record<Capability, string> = {
   'entity.delete': 'Delete',
   'history.undo': 'Undo',
   'history.redo': 'Redo',
-  'provider.connect': 'Connect provider',
+  'provider.connect': 'Sign in with ChatGPT',
+  'provider.cancel': 'Cancel sign-in',
+  'provider.disconnect': 'Sign out',
+  'provider.switch': 'Switch account',
   'agent.send': 'Send to agent',
   'viewport.bounds': 'Native viewport placement',
   'window.drag': 'Window dragging',
