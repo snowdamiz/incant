@@ -103,6 +103,9 @@ enum Cli {
     Screenshot {
         project: PathBuf,
         output: PathBuf,
+        /// Authored Camera entity ID; omit for the editor preview.
+        #[arg(long)]
+        camera: Option<String>,
         #[arg(long, default_value_t = 1280)]
         width: u32,
         #[arg(long, default_value_t = 720)]
@@ -430,6 +433,7 @@ fn main() -> Result<()> {
         Cli::Screenshot {
             project,
             output,
+            camera,
             width,
             height,
         } => {
@@ -439,6 +443,11 @@ fn main() -> Result<()> {
             let scene = renderer
                 .prepare_scene(&document, &assets)
                 .map_err(|e| e.to_string())?;
+            let scene = if let Some(id) = &camera {
+                scene.with_camera(id).map_err(|e| e.to_string())?
+            } else {
+                scene
+            };
             let bytes = renderer
                 .screenshot_scene_png(&scene, width, height)
                 .map_err(|e| e.to_string())?;
@@ -449,7 +458,7 @@ fn main() -> Result<()> {
             }
             fs::write(&output, bytes)?;
             print(
-                json!({"output":output,"adapter":renderer.adapter_name,"width":width,"height":height,"geometry":scene.stats(),"shading":scene.shading()}),
+                json!({"output":output,"adapter":renderer.adapter_name,"width":width,"height":height,"geometry":scene.stats(),"shading":scene.shading(),"camera":camera}),
             )?;
         }
         Cli::Rpc { project, journal } => rpc(project, journal)?,
@@ -540,6 +549,7 @@ impl incant_agent::Perception for GpuPerception {
     fn screenshot(
         &mut self,
         project: &Project,
+        camera: Option<&str>,
         width: u32,
         height: u32,
     ) -> std::result::Result<Value, incant_agent::AgentError> {
@@ -559,12 +569,19 @@ impl incant_agent::Perception for GpuPerception {
             .map_err(|_| {
                 incant_agent::AgentError::Tool("Scene geometry could not be prepared".into())
             })?;
+        let scene = if let Some(id) = camera {
+            scene
+                .with_camera(id)
+                .map_err(|error| incant_agent::AgentError::Tool(error.to_string()))?
+        } else {
+            scene
+        };
         let bytes = self
             .renderer
             .screenshot_scene_png(&scene, width, height)
             .map_err(|_| incant_agent::AgentError::Tool("GPU capture failed".into()))?;
         Ok(
-            json!({"mime_type":"image/png","data_url":format!("data:image/png;base64,{}",base64::engine::general_purpose::STANDARD.encode(bytes)),"width":width,"height":height}),
+            json!({"mime_type":"image/png","data_url":format!("data:image/png;base64,{}",base64::engine::general_purpose::STANDARD.encode(bytes)),"width":width,"height":height,"camera":camera}),
         )
     }
 }

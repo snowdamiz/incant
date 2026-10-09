@@ -29,6 +29,12 @@ pub enum SceneError {
     LightTransform,
     #[error("spot inner/outer angles cannot be distinguished at GPU precision")]
     LightCone,
+    #[error("camera entity {0} was not found or has no Camera component")]
+    MissingCamera(String),
+    #[error("camera world transform cannot form a finite orthonormal view")]
+    CameraTransform,
+    #[error("camera projection exceeds GPU numeric precision")]
+    CameraProjection,
     #[error("scene exceeds 16 directional or 4096 local lights")]
     LightLimit,
 }
@@ -77,6 +83,7 @@ pub(crate) struct ResolvedScene {
     pub stats: SceneStats,
     pub environment: Option<crate::environment::EnvironmentPlan>,
     pub lights: crate::lighting::scene::LightPlan,
+    pub cameras: BTreeMap<String, crate::camera::CameraView>,
 }
 
 /// A model's default scene is used, falling back to its first declared scene.
@@ -93,6 +100,7 @@ pub(crate) fn resolve(
         stats: SceneStats::default(),
         environment: None,
         lights: Default::default(),
+        cameras: BTreeMap::new(),
     };
     for entity in project
         .scenes
@@ -120,6 +128,14 @@ pub(crate) fn resolve(
         let world64 = glam::DMat4::from_cols_array_2d(&entity.world_transform);
         let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
         result.lights.add(components, world64)?;
+        if let Some(value) = components.get("Camera") {
+            let camera: incant_doc::Camera =
+                serde_json::from_value(value.clone()).map_err(incant_doc::DocumentError::from)?;
+            result.cameras.insert(
+                entity.id.clone(),
+                crate::camera::CameraView::authored(&camera, world64)?,
+            );
+        }
         let world = world64.as_mat4();
         // Validate even empty mesh nodes so invalid ranges never reach GPU buffers.
         Instance::new(world)?;
@@ -127,6 +143,7 @@ pub(crate) fn resolve(
             let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
             if components.contains_key("Transform")
                 && ![
+                    "Camera",
                     "EnvironmentLight",
                     "DirectionalLight",
                     "PointLight",

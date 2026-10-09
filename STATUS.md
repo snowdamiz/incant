@@ -53,6 +53,13 @@ within its documented workload.
 
 ## Active work
 
+- Authored Camera selection is connected to renderer captures, public CLI,
+  isolated playback and the agent screenshot tool. Geometry, material view vectors,
+  transparent sorting and light clusters share the selected camera. Projection,
+  clipping, inheritance, retained views, public command history and moving-camera
+  playback pass initial tests. Full verification and Claude pixel review remain
+  in progress; no editor camera-selection control is claimed.
+
 - Cluster membership masks replace overflow fallback in the next lighting
   increment. Exact GPU readback covers every bit through 4096 lights, word-count
   changes and stale clearing; full-capacity mixed point/spot output matches an

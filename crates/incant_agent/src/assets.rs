@@ -49,10 +49,11 @@ impl<P: EngineHost> EngineHost for ProjectHost<P> {
     fn screenshot(
         &mut self,
         project: &Project,
+        camera: Option<&str>,
         width: u32,
         height: u32,
     ) -> Result<Value, AgentError> {
-        self.perception.screenshot(project, width, height)
+        self.perception.screenshot(project, camera, width, height)
     }
 }
 

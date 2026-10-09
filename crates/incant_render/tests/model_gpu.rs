@@ -1,4 +1,5 @@
 //! Real GPU checks, explicitly run by the desktop renderer workflow.
+mod cameras;
 mod environments;
 mod lights;
 mod materials;

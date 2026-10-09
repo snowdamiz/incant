@@ -7,7 +7,7 @@ use crate::{
 use incant_assets::{AssetStore, RuntimeAsset, RuntimeAssetData};
 use incant_doc::Project;
 use std::{
-    collections::HashMap,
+    collections::{BTreeMap, HashMap},
     sync::{Arc, Weak},
 };
 use wgpu::util::DeviceExt;
@@ -44,8 +44,21 @@ pub struct RenderScene {
     environment: Option<crate::environment::Binding>,
     lights: crate::lighting::GpuLights,
     light_selection: crate::LocalLightSelection,
+    cameras: BTreeMap<String, crate::camera::CameraView>,
+    pub(crate) camera: crate::camera::CameraView,
 }
 impl RenderScene {
+    /// Select an authored Camera entity by stable ID for this prepared frame.
+    /// The default remains the editor preview; no project state is mutated.
+    pub fn with_camera(mut self, id: &str) -> std::result::Result<Self, crate::SceneError> {
+        self.camera = *self
+            .cameras
+            .get(id)
+            .ok_or_else(|| crate::SceneError::MissingCamera(id.into()))?;
+        self.lights.validate_view(self.camera.view)?;
+        Ok(self)
+    }
+
     /// Select an unculled diagnostic or normal clustered light path for this
     /// prepared scene. Authored documents and GPU light data remain unchanged.
     pub fn with_local_light_selection(mut self, selection: crate::LocalLightSelection) -> Self {
@@ -209,6 +222,8 @@ impl Renderer {
         Ok(RenderScene {
             lights: crate::lighting::GpuLights::upload(&self.device, resolved.lights),
             light_selection: crate::LocalLightSelection::Clustered,
+            cameras: resolved.cameras,
+            camera: crate::camera::CameraView::preview(),
             diagnostics: resolved.diagnostics,
             batches,
             stats: resolved.stats,
@@ -237,10 +252,11 @@ impl Renderer {
             .as_ref()
             .expect("model scene has environment");
         let frame = Frame {
-            matrix: crate::camera(target.rect[2] / target.rect[3]).to_cols_array_2d(),
-            eye: glam::Vec3::from_array(crate::studio::EYE)
-                .extend(1.)
-                .to_array(),
+            matrix: scene
+                .camera
+                .matrix(target.rect[2] / target.rect[3])?
+                .to_cols_array_2d(),
+            eye: scene.camera.eye.extend(1.).to_array(),
             environment: [
                 environment.intensity,
                 environment.rotation.cos(),
@@ -276,10 +292,11 @@ impl Renderer {
             &scene.lights,
             target.rect,
             scene.light_selection,
+            scene.camera,
         )?;
         let mut transparent = Vec::new();
-        let eye = glam::Vec3::from_array(crate::studio::EYE).as_dvec3();
-        let forward = (-eye).normalize();
+        let eye = scene.camera.eye.as_dvec3();
+        let forward = scene.camera.forward.as_dvec3();
         for batch in &scene.batches {
             let material =
                 &batch.model.materials.materials[batch.model.primitives[batch.primitive].material];

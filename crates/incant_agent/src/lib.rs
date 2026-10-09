@@ -87,6 +87,9 @@ struct SchemaArgs {
 #[derive(Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 struct ScreenshotArgs {
+    /// Authored Camera entity ID; omit for the editor preview.
+    #[serde(default)]
+    camera: Option<String>,
     width: u32,
     height: u32,
 }
@@ -100,6 +103,7 @@ pub trait EngineHost {
     fn screenshot(
         &mut self,
         project: &incant_doc::Project,
+        camera: Option<&str>,
         width: u32,
         height: u32,
     ) -> Result<Value, AgentError>;
@@ -108,7 +112,13 @@ pub trait EngineHost {
 pub use EngineHost as Perception;
 pub struct NoViewport;
 impl Perception for NoViewport {
-    fn screenshot(&mut self, _: &incant_doc::Project, _: u32, _: u32) -> Result<Value, AgentError> {
+    fn screenshot(
+        &mut self,
+        _: &incant_doc::Project,
+        _: Option<&str>,
+        _: u32,
+        _: u32,
+    ) -> Result<Value, AgentError> {
         Err(AgentError::Tool("no renderer connected".into()))
     }
 }
@@ -134,7 +144,7 @@ pub fn tools() -> Vec<Value> {
         ),
         tool(
             "view_screenshot",
-            "Capture the actual engine viewport; never fabricate perception.",
+            "Capture actual engine pixels through an authored Camera entity ID, or omit camera for the editor preview; never fabricate perception.",
             json!(schemars::schema_for!(ScreenshotArgs)),
         ),
     ];
@@ -204,7 +214,12 @@ fn dispatch_cancellable(
                     "screenshot dimensions outside supported range".into(),
                 ));
             }
-            perception.screenshot(bus.project(), args.width, args.height)
+            perception.screenshot(
+                bus.project(),
+                args.camera.as_deref(),
+                args.width,
+                args.height,
+            )
         }
         _ => Err(AgentError::Tool(
             "unknown tool; shell and network tools are not supported".into(),
