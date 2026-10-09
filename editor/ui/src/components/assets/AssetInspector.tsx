@@ -79,7 +79,7 @@ function scrollPaneTop() {
  * Hierarchy view, so "select on the left, inspect on the right" holds for both.
  */
 export function AssetInspector() {
-  const { snapshot, bridge, capabilities } = useShell();
+  const { snapshot, bridge, capabilities, showPanel } = useShell();
   const { pane, selected } = useAssets();
   const assets = snapshot?.assets?.status === 'ready' ? snapshot.assets.value : [];
   const availability = importAvailability(snapshot, bridge, capabilities);
@@ -88,6 +88,7 @@ export function AssetInspector() {
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape' && !event.defaultPrevented) {
       event.preventDefault();
+      showPanel('hierarchy');
       returnToList(selected);
     }
   };

@@ -55,7 +55,7 @@ export function AssetBrowser() {
 }
 
 function ImportButton({ label }: { label: string }) {
-  const { snapshot, bridge, capabilities } = useShell();
+  const { snapshot, bridge, capabilities, showPanel } = useShell();
   const { pane, setPane } = useAssets();
   const availability = importAvailability(snapshot, bridge, capabilities);
   return (
@@ -67,6 +67,7 @@ function ImportButton({ label }: { label: string }) {
       aria-pressed={pane === 'import'}
       title={availability.ok ? 'Import files from the project folder' : availability.reason}
       onClick={() => {
+        showPanel('inspector');
         setPane('import');
         focusInspectorTarget('import');
       }}
@@ -79,7 +80,8 @@ function ImportButton({ label }: { label: string }) {
 
 /** One line under the toolbar while an import runs or after it fails, wherever the Inspector is. */
 function ImportStatus() {
-  const { pending, outcome, pane, setPane } = useAssets();
+  const { pending, outcome, pane, setPane, selected, setSelected } = useAssets();
+  const { panels, showPanel } = useShell();
   if (pending) {
     return (
       <div className="asset-browser__status" role="status">
@@ -92,7 +94,7 @@ function ImportStatus() {
   }
   if (outcome?.status !== 'failure') return null;
   const target = outcome.job.kind === 'import' ? 'import' : 'details';
-  const showing = pane === target;
+  const showing = panels.inspector && pane === target && (target === 'import' || selected === outcome.job.asset);
   return (
     <div className="asset-browser__status asset-browser__status--error">
       <Icon name="error" size={14} />
@@ -104,6 +106,8 @@ function ImportStatus() {
           type="button"
           className="asset-browser__status-action"
           onClick={() => {
+            if (target === 'details' && outcome.job.asset) setSelected(outcome.job.asset);
+            showPanel('inspector');
             setPane(target);
             focusInspectorTarget(target);
           }}
@@ -116,7 +120,7 @@ function ImportStatus() {
 }
 
 function Library({ assets }: { assets: readonly ProjectAsset[] }) {
-  const { snapshot, bridge, capabilities } = useShell();
+  const { snapshot, bridge, capabilities, showPanel } = useShell();
   const { filter, setFilter, selected, setSelected, setPane, recent } = useAssets();
   const filterRef = useRef<HTMLInputElement>(null);
   const visible = useMemo(() => assets.filter((asset) => matchesFilter(asset, filter)), [assets, filter]);
@@ -137,6 +141,7 @@ function Library({ assets }: { assets: readonly ProjectAsset[] }) {
   }
 
   const open = (id: Ulid, focus: boolean) => {
+    showPanel('inspector');
     setSelected(id);
     setPane('details');
     if (focus) focusInspectorTarget('details');
@@ -257,8 +262,8 @@ function AssetList({
 
   return (
     <div id="asset-list" className="asset-list" role="listbox" aria-label="Assets" onKeyDown={onKeyDown}>
-      {groups.map((group) => {
-        const headId = `asset-folder-${group.folder || 'root'}`.replace(/[^A-Za-z0-9_-]/g, '_');
+      {groups.map((group, index) => {
+        const headId = `asset-folder-${index}`;
         return (
           <div key={group.folder} role="group" aria-labelledby={headId} className="asset-list__group">
             <div id={headId} className="asset-list__folder" title={group.folder ? `${group.folder}/` : 'Project folder'}>

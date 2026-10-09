@@ -89,7 +89,7 @@ const SEVERITY_RANK = { error: 0, warning: 1, info: 2 } as const;
 const SEVERITY_ICON = { error: 'error', warning: 'warning', info: 'info' } as const;
 
 function ProblemsList() {
-  const { snapshot, select, announce } = useShell();
+  const { snapshot, select, announce, showPanel } = useShell();
   // A problem names an entity; showing it means showing the Hierarchy, not the asset list.
   const { setView } = useAssets();
   const sorted = useMemo(
@@ -123,6 +123,8 @@ function ProblemsList() {
   const nodes = snapshot.hierarchy.status === 'ready' ? snapshot.hierarchy.value.nodes : {};
   const reveal = (d: Diagnostic) => {
     if (d.entity === null) return;
+    showPanel('hierarchy');
+    showPanel('inspector');
     setView('hierarchy');
     select(d.entity);
     announce(`Selected ${nodes[d.entity]?.name ?? 'entity'}`);
