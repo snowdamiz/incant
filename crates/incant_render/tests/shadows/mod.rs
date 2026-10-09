@@ -234,7 +234,22 @@ fn directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions
             ..Default::default()
         }),
     );
-    assert_ne!(capture(&f, &r, &camera, "shadow-moved-caster"), shadow);
+    let moved = capture(&f, &r, &camera, "shadow-moved-caster");
+    assert_ne!(moved, shadow);
+    // Reimport changes both geometry and caster bounds. A previously prepared
+    // scene must retain its original shadow geometry after the cache advances.
+    let path = f.root.path().join("quad.bin");
+    let mut bytes = std::fs::read(&path).unwrap();
+    for vertex in bytes[..72].chunks_exact_mut(12) {
+        let x = f32::from_le_bytes(vertex[..4].try_into().unwrap()) * 2.;
+        vertex[..4].copy_from_slice(&x.to_le_bytes());
+    }
+    std::fs::write(path, bytes).unwrap();
+    f.edit(|g| {
+        g["accessors"][0]["min"][0] = json!(-6.);
+        g["accessors"][0]["max"][0] = json!(6.);
+    });
+    assert_ne!(capture(&f, &r, &camera, "shadow-reimported-width"), moved);
     assert_eq!(r.screenshot_scene_png(&prepared, 640, 480).unwrap(), shadow);
 }
 

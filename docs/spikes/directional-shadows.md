@@ -34,7 +34,8 @@ native verification are still being completed. No release gate is claimed.
 
 Initial native checks show the enabled Sun's distance as 40 m in the read-only
 Inspector, an attached viewport and zero errors before/after output resizing.
-Wide and minimum captures await Claude review. Assets remains a separate left
+Wide (1440×900) and short (1720×669) captures await Claude review. The latter
+is an external-monitor quarter window; the actual 1000×650 minimum remains pending. Assets remains a separate left
 workspace, with Problems/Console/History in the bottom output. The saved account
 restores across the rebuilt app without authentication or Keychain interaction.
 
@@ -64,3 +65,17 @@ two independent processes. Claude independently verified the original difference
 and repeatability; full look-dev approval is still pending. The
 [evidence ledger](evidence/directional-shadows-2026-10-09.json) retains hashes,
 checks, CLI results and raw timing samples.
+
+A live `gpt-6-astra` turn using the saved OAuth account inspected the schema,
+proposed one Sun distance edit, read back the result and captured the selected
+camera at 640×480. Astra approved that exact patch on a disposable fixture through
+the normal CLI approval prompt. An independent full-document comparison confirms
+only distance (40→24 m) and the Sun's agent provenance changed; journal reopening
+matches the resulting document. All five tools succeeded over six steps, using
+14,405 input and 359 output tokens. Two earlier test launches had stdin closed and
+correctly denied the mutation; they are not counted as successful edit checks.
+No account login or Keychain prompt occurred.
+
+The shadow retention GPU case also reimports wider geometry, confirms a changed
+new frame and an exact original frame from the retained scene. This checks
+caster-bounds and geometry-version coherence across cache replacement.

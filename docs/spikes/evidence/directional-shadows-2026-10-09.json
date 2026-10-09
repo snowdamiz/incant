@@ -2355,7 +2355,7 @@
   "native_initial": {
     "enabled_setting": "Sun Inspector shows Shadows Distance 40 m",
     "viewport": "Attached; zero errors before and after output resize",
-    "sizes": "wide and minimum window captured through CUA",
+    "sizes": "1440x900 wide and1720x669 short window; actual1000x650 minimum still pending",
     "layout": "Assets remains separate left tab; bottom output contains Problems/Console/History",
     "account": "existing saved session restored with no login or keychain interaction",
     "approval": "pending Claude review; screenshots contain account labels and remain ignored"
@@ -2465,5 +2465,39 @@
       "name": "shadow-single-sided-back.png",
       "sha256": "2a9abc8efdd367d3515da296fe3876db8d0b73c3233a60e4cffc8b1788ff576b"
     }
-  ]
+  ],
+  "live_saved_account_agent": {
+    "model": "gpt-6-astra",
+    "authentication": "existing saved OAuth; no login or keychain prompts",
+    "steps": 6,
+    "tools": [
+      "doc_schema",
+      "doc_query",
+      "doc_patch",
+      "doc_query",
+      "view_screenshot"
+    ],
+    "all_tools_succeeded": true,
+    "atomic_transaction": "01M4HAKQAYMGFB9MAP39HFPCG5",
+    "approval": "Astra reviewed the exact Sun distance-only patch and approved it on the disposable fixture through CLI stdin",
+    "requested_distance_m": 24,
+    "independent_result_diff": "exactly Sun shadow distance plus agent provenance; all other content unchanged",
+    "journal_replay": "matches complete agent-result document",
+    "selected_camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+    "capture_size": [
+      640,
+      480
+    ],
+    "usage": {
+      "input_tokens": 14405,
+      "output_tokens": 359
+    },
+    "initial_harness_failures": "two runs had EOF on stdin and correctly denied the patch; neither counted as successful mutation",
+    "project_result_sha256": "66ec61916ff33e9a82cd01d83eed609979901555439e1bdfd8446d805ae89d5b"
+  },
+  "shadow_reimport_retention": {
+    "result": "pass; new geometry changes current frame while retained old scene reproduces original shadow exactly",
+    "log_sha256": "23aec23595c04d7aeb541fde506b2caf5d4b047ccb7d1900c100b1b4759651f3",
+    "capture_sha256": "07e13ca061ee66d52f7d3093f40117600dfdf4c47c7de7876798790921777ab6"
+  }
 }
