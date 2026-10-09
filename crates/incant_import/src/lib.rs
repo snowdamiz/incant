@@ -230,8 +230,8 @@ fn cook(
 ) -> incant_assets::Result<ImportOutcome> {
     let source = Path::new(&request.source);
     let (kind, fingerprint, cache_hit, import_settings, details) = if model {
-        let default_cache = root.join(".incant/cache/models");
-        let cooked = cook_gltf(root, source, cache_override.unwrap_or(&default_cache))?;
+        let cache = cache_directory(root, cache_override, "models")?;
+        let cooked = cook_gltf(root, source, &cache)?;
         (
             "model",
             cooked.metadata.fingerprint,
@@ -245,19 +245,14 @@ fn cook(
             },
         )
     } else {
-        let default_cache = root.join(".incant/cache/textures");
+        let cache = cache_directory(root, cache_override, "textures")?;
         let usage = request.texture_usage.unwrap_or_else(|| {
             match previous.and_then(|asset| asset.import_settings.as_ref()) {
                 Some(AssetImportSettings::Texture { usage }) => *usage,
                 None => TextureUsage::Color,
             }
         });
-        let cooked = cook_texture(
-            root,
-            source,
-            cache_override.unwrap_or(&default_cache),
-            usage,
-        )?;
+        let cooked = cook_texture(root, source, &cache, usage)?;
         (
             "texture",
             cooked.metadata.fingerprint,
@@ -293,4 +288,39 @@ fn cook(
         cache_hit,
         details,
     })
+}
+
+/// Default cache writes belong to the selected project. Check each directory
+/// before descending, so an authored .incant/cache symlink cannot redirect a
+/// host-granted import outside the project. CLI's explicit --cache remains a
+/// separately caller-authorized path; engine-agent tools never accept it.
+fn cache_directory(
+    root: &Path,
+    override_path: Option<&Path>,
+    kind: &str,
+) -> incant_assets::Result<std::path::PathBuf> {
+    if let Some(path) = override_path {
+        return Ok(path.to_path_buf());
+    }
+    let root = root.canonicalize()?;
+    let mut path = root.clone();
+    for part in [".incant", "cache", kind] {
+        path.push(part);
+        match std::fs::create_dir(&path) {
+            Ok(()) => {}
+            Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {}
+            Err(error) => return Err(error.into()),
+        }
+        let metadata = std::fs::symlink_metadata(&path)?;
+        if metadata.file_type().is_symlink()
+            || !metadata.is_dir()
+            || !path.canonicalize()?.starts_with(&root)
+        {
+            return Err(AssetError::Invalid(
+                "default cache directories must be real project directories, not symlinks or files"
+                    .into(),
+            ));
+        }
+    }
+    Ok(path)
 }

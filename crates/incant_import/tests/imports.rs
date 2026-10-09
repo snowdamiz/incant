@@ -272,3 +272,26 @@ fn malformed_or_ambiguous_requests_fail_before_cooking() {
         Err(ImportError::AmbiguousSource(_))
     ));
 }
+
+#[cfg(unix)]
+#[test]
+fn default_cache_cannot_be_redirected_outside_the_project() {
+    for component in [".incant", ".incant/cache", ".incant/cache/textures"] {
+        let temp = tempfile::tempdir().unwrap();
+        let root = temp.path();
+        let outside = tempfile::tempdir().unwrap();
+        image(root, "a.png", 5);
+        let target = root.join(component);
+        std::fs::create_dir_all(target.parent().unwrap()).unwrap();
+        std::os::unix::fs::symlink(outside.path(), &target).unwrap();
+        let bus = CommandBus::new(Project::empty("Confined cache")).unwrap();
+        let result = ImportSnapshot::capture(&bus).prepare(root, None, &[request("a.png")]);
+        assert!(
+            matches!(result, Err(ImportError::Cook { .. })),
+            "{component}"
+        );
+        assert_eq!(std::fs::read_dir(outside.path()).unwrap().count(), 0);
+        assert!(bus.project().assets.is_empty());
+        assert!(bus.history().is_empty());
+    }
+}
