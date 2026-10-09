@@ -18,8 +18,9 @@ export default defineConfig({
   },
   webServer: {
     command: 'npm run preview',
+    env: { PAGES_BASE_PATH: basePath },
     url: `http://127.0.0.1:4175${basePath}`,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 30_000,
   },
 })
