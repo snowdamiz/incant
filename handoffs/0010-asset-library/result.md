@@ -1,9 +1,10 @@
 # Result: handoff 0010, editor asset library and import workflow
 
-**Status:** UI is integrated. Astra has verified native behaviour, and Claude has reviewed
-the native pixels from 2026-10-09. Four visual corrections and one interaction change from
-that review are committed. Their native re-captures are **open**. Nothing here approves a
-phase gate or claims complete feature integration.
+**Status:** UI is integrated, and Astra has verified native behaviour. The revision 2
+visual fixes are integrated as 08026d8. Claude's revision 3 review of Astra's native
+re-captures passed R1 to R4, and Astra's native R5 behaviour check passed. No native
+request is open, and no implementation change was needed in revision 3. Nothing here
+approves a phase gate. Astra owns the remaining review, the PR and the merge.
 
 **Model and transport (verified by Astra):** Claude Opus 5.5 (`claude-opus-5-5`)
 through Claude Code and `claude-agent-acp`. Astra launched this session with
@@ -65,6 +66,25 @@ What the pixels show:
   several lines. The old path was kept and the lines were appended below it. Now a wholly
   selected or empty field takes the first line and the rest become new rows. A caret paste
   still keeps the path and adds every line below it. Two interaction tests cover both cases.
+
+## Revision 3: native re-capture review
+
+Every verdict passed, from Astra's private CUA captures of the integrated build, 08026d8.
+Per-capture details are in native-requests.md.
+
+| Item | Capture and size | Verdict |
+| --- | --- | --- |
+| R1 busy copy | `r01-busy-copy-wide` 1440×900 (external display, 1x); `r01b-busy-copy-narrow` 2002×1302 | Pass: new two-line status in the pane, no "Other edits wait" |
+| R2 narrow tabs | `r01b`, `r04-heading-focus-narrow` | Pass: every label and the Console and History counts are visible |
+| R3 reimport result | `r03-reimport-result` 2002×1302 | Pass: pane at top, full "Reimported." note, Linear applied |
+| R4 heading ring | `r04-heading-focus-narrow` 2002×1302; `r04-heading-focus-wide` 3024×1412 | Pass: the ring fits the title and no longer looks like a field |
+| R5 paste over selection | Astra behaviour check | Pass for both the select-all and caret cases |
+
+The capture indicator still covers the traffic lights in every r-capture. `a06-wide-details`
+remains the only native capture that shows them, and there they are correct. Revision 3
+changed documentation only. The tests and browser captures from revision 2 still describe
+the code: 267 tests passed and 40 captures were taken. Astra's integration run of 08026d8
+also passed the 267 UI tests.
 
 ## What was built
 
@@ -186,8 +206,9 @@ focus, layout and axe results.
 
 ## Limitations
 
-- **Revision 2 fixes are browser-verified only.** Native re-captures are requested as R1 to
-  R4 in native-requests.md. Browser captures never prove WebKit behaviour.
+- **Native evidence is CUA captures on macOS only.** Its pixel verdicts are Claude's, and its
+  behaviour verdicts are Astra's. No Windows or Linux native capture was requested. The
+  synthetic browser captures never prove WebKit behaviour.
 - **Not offered, because they do not exist yet:** a file picker, drag and drop, source
   copying, thumbnails, cancellation, or viewport display of models.
 - **Conflict detection.** Conflicts are detected by the `asset.conflict` code, with a
