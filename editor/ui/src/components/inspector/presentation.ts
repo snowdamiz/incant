@@ -1,20 +1,16 @@
 /**
- * Inspector presentation profiles: grouping, labels and semantic units for
- * components whose engine schema carries no display annotations yet.
+ * Inspector presentation profiles: section captions, and labels or tooltips the
+ * engine schema does not carry. Units, field order and the collision-mask widget
+ * come from the schema (x-incant-unit, order, x-incant-widget), not from here.
  *
- * Presentation only. Nothing here validates, converts or hides a value, and the
- * engine schema always wins: a schema `title`, `description`, `x-incant-unit`,
- * `x-incant-widget` or `order` overrides the matching profile entry. Fields the
- * profile does not mention still render, after the grouped ones.
+ * Presentation only. Nothing here validates, converts, reorders or hides a
+ * value, and the engine schema wins: a schema `title` or `description`
+ * overrides the matching profile entry, and a schema `order` is kept exactly.
  */
 
 export interface FieldHint {
   readonly title?: string;
   readonly description?: string;
-  /** Semantic unit, shown beside the value. Dimensionless values have none. */
-  readonly unit?: string;
-  /** A 32-bit collision group mask: summary plus a per-group strip. */
-  readonly widget?: 'collision-mask';
 }
 
 export interface FieldSection {
@@ -29,8 +25,6 @@ export interface ComponentPresentation {
   readonly fields: Readonly<Record<string, FieldHint>>;
 }
 
-const METERS = 'm';
-
 const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
   RigidBody: {
     sections: [
@@ -41,8 +35,6 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
     fields: {
       '/motion': { description: 'fixed, dynamic, or kinematic (moved by its authored velocity).' },
       '/gravity_scale': { description: 'Multiplier on world gravity (dimensionless).' },
-      '/linear_damping': { description: 'Linear velocity damping coefficient (dimensionless).' },
-      '/angular_damping': { description: 'Angular velocity damping coefficient (dimensionless).' },
       '/can_sleep': { description: 'Lets the solver pause this body while it is at rest.' },
       '/ccd': { title: 'CCD', description: 'Continuous collision detection for fast-moving bodies.' },
     },
@@ -54,21 +46,10 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
       { title: 'Collision', keys: ['sensor', 'memberships', 'filter'] },
     ],
     fields: {
-      '/shape/half_extents': { unit: METERS },
-      '/shape/radius': { unit: METERS },
-      '/shape/half_height': { unit: METERS },
-      '/density': { unit: 'kg/m³' },
       '/friction': { description: 'Friction coefficient (dimensionless).' },
       '/restitution': { description: 'Bounciness, 0 to 1 (dimensionless).' },
       '/sensor': { description: 'Reports overlaps instead of producing contacts.' },
-      '/memberships': { widget: 'collision-mask' },
-      '/filter': { widget: 'collision-mask', description: 'Collision groups this collider can interact with.' },
-    },
-  },
-  AngularVelocity: {
-    sections: [{ title: null, keys: ['angular'] }],
-    fields: {
-      '/angular': { unit: 'rad/s', description: 'Angular velocity about each world axis.' },
+      '/filter': { description: 'Collision groups this collider can interact with.' },
     },
   },
 };
@@ -83,23 +64,39 @@ export function fieldHint(component: string, pointerPath: string): FieldHint {
 }
 
 /**
- * Splits ordered keys into captioned sections. Keys the profile does not name
- * (new schema fields) are never dropped: they follow in a final, uncaptioned
- * section. Without a profile, everything is one section.
+ * Captions runs of keys without changing their order when the schema supplies
+ * one. Consecutive keys from the same profile section share a caption; keys the
+ * profile does not name are captioned "Other" (never dropped). If a schema order
+ * would split a section into separate runs, grouping is incompatible with it and
+ * the rows stay in schema order with no captions at all.
+ *
+ * Only when the schema has no order does the profile also supply the order.
  */
-export function sectionKeys(type: string, keys: readonly string[]): FieldSection[] {
+export function sectionKeys(type: string, keys: readonly string[], schemaOrdered: boolean): FieldSection[] {
   const profile = componentPresentation(type);
   if (!profile) return [{ title: null, keys }];
-  const placed = new Set<string>();
-  const sections: FieldSection[] = [];
-  for (const section of profile.sections) {
-    const present = section.keys.filter((key) => keys.includes(key));
-    present.forEach((key) => placed.add(key));
-    if (present.length > 0) sections.push({ title: section.title, keys: present });
+  const sectionOf = (key: string) => profile.sections.find((section) => section.keys.includes(key));
+  const ordered = schemaOrdered
+    ? keys
+    : [
+        ...profile.sections.flatMap((section) => section.keys.filter((key) => keys.includes(key))),
+        ...keys.filter((key) => !sectionOf(key)),
+      ];
+  const runs: { section: FieldSection | undefined; keys: string[] }[] = [];
+  for (const key of ordered) {
+    const section = sectionOf(key);
+    const last = runs.at(-1);
+    if (last && last.section === section) last.keys.push(key);
+    else runs.push({ section, keys: [key] });
   }
-  const rest = keys.filter((key) => !placed.has(key));
-  if (rest.length > 0) sections.push({ title: sections.length > 0 ? 'Other' : null, keys: rest });
-  return sections;
+  const split = new Set(runs.map((run) => run.section)).size !== runs.length;
+  // An uncaptioned profile section after a captioned one would read as part of it.
+  const buried = runs.some((run, index) => index > 0 && run.section?.title === null);
+  if (split || buried) return [{ title: null, keys: [...ordered] }];
+  return runs.map((run, index) => ({
+    title: run.section ? run.section.title : index === 0 ? null : 'Other',
+    keys: run.keys,
+  }));
 }
 
 export const MASK_BITS = 32;

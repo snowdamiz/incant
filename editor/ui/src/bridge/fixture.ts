@@ -147,17 +147,33 @@ const SCHEMAS: Record<string, ComponentSchema> = {
     },
   },
   // Physics: mirrors of the native RigidBody / Collider / AngularVelocity schemas after
-  // bridge resolution (bare type names, no titles, units or order; FieldView.test.tsx
-  // checks them against snapshotFromEngine over schemas/*.schema.json).
+  // bridge resolution, including the registry's order, units and mask widget (bare
+  // type names, no titles). PhysicsFields.test.tsx checks them against
+  // snapshotFromEngine over schemas/*.schema.json.
   RigidBody: {
     type: 'RigidBody',
     version: 1,
     title: 'RigidBody',
+    order: ['motion', 'gravity_scale', 'linear_damping', 'angular_damping', 'can_sleep', 'ccd'],
     properties: {
       motion: { type: 'string', enum: ['fixed', 'dynamic', 'kinematic'], optional: false },
       gravity_scale: { type: 'number', minimum: -100, maximum: 100, optional: false },
-      linear_damping: { type: 'number', minimum: 0, maximum: 100, optional: false },
-      angular_damping: { type: 'number', minimum: 0, maximum: 100, optional: false },
+      linear_damping: {
+        type: 'number',
+        description: 'Linear velocity damping rate, in inverse seconds.',
+        minimum: 0,
+        maximum: 100,
+        'x-incant-unit': '1/s',
+        optional: false,
+      },
+      angular_damping: {
+        type: 'number',
+        description: 'Angular velocity damping rate, in inverse seconds.',
+        minimum: 0,
+        maximum: 100,
+        'x-incant-unit': '1/s',
+        optional: false,
+      },
       can_sleep: { type: 'boolean', optional: false },
       ccd: { type: 'boolean', optional: false },
     },
@@ -166,6 +182,7 @@ const SCHEMAS: Record<string, ComponentSchema> = {
     type: 'Collider',
     version: 1,
     title: 'Collider',
+    order: ['shape', 'density', 'friction', 'restitution', 'sensor', 'memberships', 'filter'],
     properties: {
       shape: {
         type: 'tagged-union',
@@ -175,14 +192,21 @@ const SCHEMAS: Record<string, ComponentSchema> = {
           box: {
             type: 'object',
             properties: {
-              half_extents: { type: 'array', items: { type: 'number' }, minItems: 3, maxItems: 3, optional: false },
+              half_extents: {
+                type: 'array',
+                items: { type: 'number' },
+                minItems: 3,
+                maxItems: 3,
+                'x-incant-unit': 'm',
+                optional: false,
+              },
               type: { type: 'string', enum: ['box'], optional: false },
             },
           },
           sphere: {
             type: 'object',
             properties: {
-              radius: { type: 'number', optional: false },
+              radius: { type: 'number', 'x-incant-unit': 'm', optional: false },
               type: { type: 'string', enum: ['sphere'], optional: false },
             },
           },
@@ -190,19 +214,21 @@ const SCHEMAS: Record<string, ComponentSchema> = {
             type: 'object',
             description: 'Capsule along local Y; half_height excludes the hemispherical ends.',
             properties: {
-              half_height: { type: 'number', optional: false },
-              radius: { type: 'number', optional: false },
+              half_height: { type: 'number', 'x-incant-unit': 'm', optional: false },
+              radius: { type: 'number', 'x-incant-unit': 'm', optional: false },
               type: { type: 'string', enum: ['capsule'], optional: false },
             },
           },
         },
       },
-      density: { type: 'number', minimum: 0.001, maximum: 100000, optional: false },
-      filter: { type: 'integer', minimum: 0, optional: false },
+      density: { type: 'number', minimum: 0.001, maximum: 100000, 'x-incant-unit': 'kg/m³', optional: false },
+      filter: { type: 'integer', minimum: 0, maximum: 4294967295, 'x-incant-widget': 'collision-mask', optional: false },
       friction: { type: 'number', minimum: 0, maximum: 10, optional: false },
       memberships: {
         type: 'integer',
         minimum: 0,
+        maximum: 4294967295,
+        'x-incant-widget': 'collision-mask',
         description: 'Collision requires both membership/filter intersections to be nonzero.',
         optional: false,
       },
@@ -215,7 +241,14 @@ const SCHEMAS: Record<string, ComponentSchema> = {
     version: 1,
     title: 'AngularVelocity',
     properties: {
-      angular: { type: 'array', items: { type: 'number' }, minItems: 3, maxItems: 3, optional: false },
+      angular: {
+        type: 'array',
+        items: { type: 'number' },
+        minItems: 3,
+        maxItems: 3,
+        'x-incant-unit': 'rad/s',
+        optional: false,
+      },
     },
   },
   'incant.Script': {

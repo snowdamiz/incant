@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { App } from '../../App';
 import { snapshotFromEngine } from '../../../../bridge/native';
 import type { EngineRead } from '../../../../bridge/native';
-import type { Diagnostic, FieldSchema, Ulid } from '../../bridge/contract';
+import type { BridgeSnapshot, ComponentSchema, Diagnostic, EditorBridge, FieldSchema, Ulid } from '../../bridge/contract';
 import { createFixtureBridge, fixtureSnapshot } from '../../bridge/fixture';
 import { FieldView, fieldDomId } from './FieldView';
 import { maskDescription, maskGroups, maskSummary, sectionKeys } from './presentation';
@@ -80,6 +80,7 @@ describe('native physics schemas', () => {
     for (const name of PHYSICS) {
       expect(NATIVE[name]!.properties).toMatchObject(fixture[name]!.properties);
       expect(Object.keys(NATIVE[name]!.properties).sort()).toEqual(Object.keys(fixture[name]!.properties).sort());
+      expect(fixture[name]!.order).toEqual(NATIVE[name]!.order);
     }
   });
 });
@@ -211,14 +212,77 @@ describe('collision masks', () => {
 });
 
 describe('physics component layout', () => {
-  it('groups fields into captioned sections and never drops unknown keys', () => {
-    expect(sectionKeys('Collider', ['density', 'filter', 'friction', 'memberships', 'restitution', 'sensor', 'shape', 'new_field'])).toEqual([
+  it('keeps a schema order exactly and captions only contiguous profile runs', () => {
+    const native = ['shape', 'density', 'friction', 'restitution', 'sensor', 'memberships', 'filter'];
+    expect(sectionKeys('Collider', native, true)).toEqual([
+      { title: null, keys: ['shape'] },
+      { title: 'Material', keys: ['density', 'friction', 'restitution'] },
+      { title: 'Collision', keys: ['sensor', 'memberships', 'filter'] },
+    ]);
+    // Reordered within sections: the schema order wins, the grouping still fits.
+    expect(sectionKeys('Collider', ['shape', 'restitution', 'density', 'friction', 'filter', 'sensor', 'memberships', 'new_field'], true)).toEqual([
+      { title: null, keys: ['shape'] },
+      { title: 'Material', keys: ['restitution', 'density', 'friction'] },
+      { title: 'Collision', keys: ['filter', 'sensor', 'memberships'] },
+      { title: 'Other', keys: ['new_field'] },
+    ]);
+    // An order that splits a section, or puts the uncaptioned lead row later, gets no captions.
+    const split = ['shape', 'density', 'sensor', 'friction', 'restitution', 'memberships', 'filter'];
+    expect(sectionKeys('Collider', split, true)).toEqual([{ title: null, keys: split }]);
+    const late = ['density', 'friction', 'restitution', 'shape', 'sensor', 'memberships', 'filter'];
+    expect(sectionKeys('Collider', late, true)).toEqual([{ title: null, keys: late }]);
+  });
+
+  it('uses the profile order only when the schema supplies none, and never drops unknown keys', () => {
+    expect(sectionKeys('Collider', ['density', 'filter', 'friction', 'memberships', 'restitution', 'sensor', 'shape', 'new_field'], false)).toEqual([
       { title: null, keys: ['shape'] },
       { title: 'Material', keys: ['density', 'friction', 'restitution'] },
       { title: 'Collision', keys: ['sensor', 'memberships', 'filter'] },
       { title: 'Other', keys: ['new_field'] },
     ]);
-    expect(sectionKeys('Transform', ['translation', 'rotation'])).toEqual([{ title: null, keys: ['translation', 'rotation'] }]);
+    expect(sectionKeys('Transform', ['translation', 'rotation'], true)).toEqual([{ title: null, keys: ['translation', 'rotation'] }]);
+  });
+
+  it('renders a reordered Collider schema in its own order', async () => {
+    const rowsFor = async (order: readonly string[]) => {
+      const base = fixtureSnapshot('sample');
+      const collider: ComponentSchema = { ...base.schemas.Collider!, order };
+      const snapshot: BridgeSnapshot = { ...base, schemas: { ...base.schemas, Collider: collider } };
+      const bridge: EditorBridge = {
+        ...createFixtureBridge('sample'),
+        getSnapshot: () => snapshot,
+        subscribe: () => () => undefined,
+      };
+      render(<App resolution={{ kind: 'bridge', bridge }} />);
+      fireEvent.click(screen.getByRole('treeitem', { name: /^Crate 01/ }));
+      const region = await waitFor(() =>
+        within(document.querySelector<HTMLElement>('[data-region="inspector"]')!).getByRole('region', { name: 'Collider' }),
+      );
+      const result = {
+        labels: [...region.querySelectorAll(':scope .component__body > .field .field__label, :scope .component__section > .field .field__label')].map(
+          (label) => label.firstChild?.textContent,
+        ),
+        captions: [...region.querySelectorAll('.component__section-title')].map((caption) => caption.textContent),
+      };
+      cleanup();
+      return result;
+    };
+    expect(await rowsFor(['shape', 'restitution', 'friction', 'density', 'filter', 'memberships', 'sensor'])).toEqual({
+      labels: ['Shape', 'Restitution', 'Friction', 'Density', 'Filter', 'Memberships', 'Sensor'],
+      captions: ['Material', 'Collision'],
+    });
+    expect(await rowsFor(['shape', 'sensor', 'density', 'friction', 'restitution', 'memberships', 'filter'])).toEqual({
+      labels: ['Shape', 'Sensor', 'Density', 'Friction', 'Restitution', 'Memberships', 'Filter'],
+      captions: [],
+    });
+  });
+
+  it('takes units and the mask widget from the schema, not the profile', () => {
+    show('density', { type: 'number', optional: false }, 420);
+    expect(screen.getByRole('textbox', { name: 'Density' }).closest('.control--number')?.querySelector('.control__unit')).toBeNull();
+    cleanup();
+    show('memberships', { type: 'integer', optional: false }, 4294967295);
+    expect(document.querySelector('.control--mask')).toBeNull();
   });
 
   it('presents a crate’s RigidBody, Collider and AngularVelocity read-only with semantic units', async () => {
@@ -233,7 +297,13 @@ describe('physics component layout', () => {
     expect((within(body).getByRole('textbox', { name: 'Motion' }) as HTMLInputElement).value).toBe('dynamic');
     const damping = within(body).getByRole('group', { name: 'Gravity and damping' });
     expect((within(damping).getByRole('textbox', { name: 'Gravity scale' }) as HTMLInputElement).value).toBe('1');
-    expect(within(damping).getByRole('textbox', { name: 'Angular damping' }).closest('.control--number')?.querySelector('.control__unit')).toBeNull();
+    // Damping is a rate (Rapier applies v / (1 + dt·damping)); unit and description come from the schema.
+    for (const name of ['Linear damping', 'Angular damping']) {
+      const input = within(damping).getByRole('textbox', { name });
+      expect(input.closest('.control--number')?.querySelector('.control__unit')?.textContent).toBe('1/s');
+      expect(input.closest('.field')?.querySelector('.field__label')?.getAttribute('title')).toMatch(/damping rate, in inverse seconds/);
+    }
+    expect(within(damping).getByRole('textbox', { name: 'Gravity scale' }).closest('.control--number')?.querySelector('.control__unit')).toBeNull();
     const solver = within(body).getByRole('group', { name: 'Solver' });
     expect(within(solver).getByRole('checkbox', { name: 'Can sleep' }).getAttribute('aria-checked')).toBe('true');
     expect(within(solver).getByRole('checkbox', { name: 'CCD' }).getAttribute('aria-checked')).toBe('true');

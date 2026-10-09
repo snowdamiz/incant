@@ -221,7 +221,7 @@ function FieldRow({
       : null;
   const errorPaths = new Set(problems.filter((d) => d.severity === 'error').map((d) => d.path ?? ''));
   const describedBy = [noteId, problems.length > 0 ? messageId : undefined].filter(Boolean).join(' ') || undefined;
-  const unit = unitOf(schema, hint);
+  const unit = unitOf(schema);
   const vectorUnit = schema.type === 'array' && !unset && !notice ? unit : undefined;
   return (
     <div className={`field${severity ? ` field--${severity}` : ''}`}>
@@ -253,7 +253,6 @@ function FieldRow({
             path={path}
             ctx={ctx}
             schema={schema}
-            hint={hint}
             unit={unit}
             value={value}
             invalid={severity === 'error'}
@@ -279,9 +278,8 @@ function FieldRow({
   );
 }
 
-function unitOf(schema: FieldSchema, hint: FieldHint): string | undefined {
-  const own = 'x-incant-unit' in schema ? schema['x-incant-unit'] : undefined;
-  return own ?? hint.unit;
+function unitOf(schema: FieldSchema): string | undefined {
+  return 'x-incant-unit' in schema ? schema['x-incant-unit'] : undefined;
 }
 
 function ValueControl({
@@ -289,7 +287,6 @@ function ValueControl({
   path,
   ctx,
   schema,
-  hint,
   unit,
   value,
   invalid,
@@ -300,7 +297,6 @@ function ValueControl({
   path: readonly string[];
   ctx: FieldContext;
   schema: FieldSchema;
-  hint: FieldHint;
   unit: string | undefined;
   value: unknown;
   invalid: boolean;
@@ -342,7 +338,7 @@ function ValueControl({
     }
     case 'number':
     case 'integer': {
-      const widget = ('x-incant-widget' in schema ? schema['x-incant-widget'] : undefined) ?? hint.widget;
+      const widget = 'x-incant-widget' in schema ? schema['x-incant-widget'] : undefined;
       if (widget === 'collision-mask') {
         if (!isMask(value)) return <Mismatch id={id} expected="a 32-bit group mask" value={value} />;
         return <MaskControl common={common} value={value} />;
