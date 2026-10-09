@@ -1,3 +1,41 @@
+## PRIORITY 4 — director rejects the bottom asset UI; rethink the approach
+
+The director's new feedback supersedes all previous visual approvals. Exact feedback:
+“I dont like this UI at the bottom. Looks messy, unprofessional, bad spacing. And
+I dont even think the assets belong in that bottom sections where the compiler
+issues are presumably right next to it. Have it rethink the approach.”
+
+The director's supplied screenshot is available privately at
+`artifacts/native-review/director-rejected-bottom-dock.png`. Read it first. It
+contains an account label; keep it ignored and never quote that label in reports.
+
+This requires a substantial layout and interaction rethink, not another small
+spacing patch. Move asset browsing out of the Problems/Console/History output
+dock into a coherent, dedicated place in the editor. You own the design choice
+and implementation. Work out where content navigation, the asset list, details
+and import/reimport belong together, how they relate to hierarchy and the scene
+viewport, and how users enter/leave that workspace without confusion. Keep
+Problems, Console and History as output/diagnostic/history tools. Avoid cramming
+a table and a second mini-inspector into a short bottom strip. Fix density,
+alignment, spacing, visual hierarchy and the persistence/placement of notices.
+Preserve the connected neutral charcoal shell and restrained accent palette.
+
+Keep all working backend behavior: real batch imports/reimports, stable IDs,
+texture interpretation, atomic Undo/Redo, path validation, retained drafts/errors,
+concurrent editing, typed asset.conflict, native text/menu Undo and account safety.
+Do not invent thumbnails, file pickers, model placement or unavailable operations.
+Use the space thoughtfully at wide and minimum native sizes. Reorganize the shell
+and navigation as necessary within editor/ui/**; Astra owns native/backend logic.
+No need to ask the director which placement to use. Implement your strongest
+approach, review the actual browser pixels, and supply precise native requests.
+
+PR #8 will remain unmerged while this redesign is incorporated. Continue your
+existing ACP session on this worktree. Commit completed UI with Built-by: claude,
+update result.md and native-requests.md, and retain honest evidence. Avoid
+CSS-source-mirroring tests. Run UI behavior tests and production build; keep the
+bundle within its established budget. Private captures stay ignored. Astra is
+continuing runtime logic separately and will integrate your UI into PR #8.
+
 ## Priority revision 3: final native re-capture review
 
 The revision 2 commit is integrated as 08026d8, rebuilt and tested (267 UI tests).
