@@ -120,6 +120,67 @@ The integrated `/incant/` production build and all 22 browser checks passed in
 rebuilt assets. GitHub CI is running on the updated PR. Publishing prerequisites
 remain unchanged; this work did not alter billing, repository visibility or Pages.
 
+### Revision 4: modeling and the complete product workflow
+
+The director requested more of PLAN.md's product scope, specifically the missing
+3D modeling capabilities, and reaffirmed the finished-product presentation.
+Claude Opus 5.5 resumed the same ACP session and produced `317cf6b`, integrated as
+`11abac8`. Public copy uses the present tense without future-feature labels.
+
+The page now includes an interactive geometry graph that builds a lighthouse
+from a cylinder through taper, extrusion, array, boolean and scatter steps to a
+wireframe output. Six editorial groups explain modeling, mesh cleanup, materials,
+terrain/light, animation/effects and generated assets. A second section connects
+Model, Surface, Script, Review, Play-test and Ship, with all six export targets.
+The hero identifies Incant as a 3D/2D modeling tool, engine and editor. The neutral
+palette, connected panels, wisp artwork and prior interactions remain intact.
+The handoff result maps product claims to PLAN.md sections and retains the earlier
+palette report separately as `result-1-palette.md`.
+
+The director's computer-use and screen-capture restriction remained in force for
+the entire revision. Neither Claude nor Astra launched a browser, used native
+UI automation, or captured local pixels. Claude ran strict type checking, both
+base-path builds and a text-only Vue server-rendered structural check. Astra's
+integrated `/incant/` production build also passed: 113.67 kB JavaScript raw /
+41.39 kB gzip and 38.13 kB CSS raw / 8.02 kB gzip. No dependencies were added.
+A direct HTTP check confirms the existing local preview serves that exact build
+and its assets; this is not a visual or interaction check.
+
+Hosted browser verification for source revision `11abac8` passed in
+[run 37879493383](https://github.com/snowdamiz/incant/actions/runs/37879493383),
+including all 23 tests; deployment was skipped for the PR. The director then
+reported that the added sections were too text-heavy and too close together.
+Claude is revising their density and overall page spacing; passing browser tests
+is not acceptance of the visual design. Agent visual review remains deferred. The screenshots in
+`screenshots/after/` establish only the earlier palette revision, not the new
+modeling and workflow sections. The public copy follows the director's requested
+presentation; the engine remains in Phase 0 and no phase gate is approved.
+
+### Revision 5: less text and more space
+
+The director found the new sections too text-heavy and crowded. Claude's
+`80e3649`, integrated as `1acb2d5`, replaces six tool paragraphs with a short
+two-column index and reduces the workflow to six actions and their outputs.
+The modeling and workflow openings now each have one heading and one sentence.
+Larger inner gaps and section padding separate the illustrations, index, workflow
+and export platforms. The principles, hero and FAQ are shorter as well. On small
+screens, graph nodes use a compact horizontal strip below the viewport.
+
+Claude's text-only before/after measurement records modeling content falling from
+324 to 148 words and workflow content from 193 to 57; the two sections drop from
+fifteen headings to two. The result preserves the full product presentation,
+neutral palette and existing interactions. This is a response to the director's
+design feedback, not a claim of visual acceptance.
+
+The integrated strict production build passes with `/incant/`: JavaScript is
+110.76 kB raw / 40.37 kB gzip and CSS is 38.45 kB raw / 8.06 kB gzip. An HTTP check
+confirms the existing preview serves this build. Hosted verification passed all 23 browser tests, including both accessibility
+suites, in [run 37880016814](https://github.com/snowdamiz/incant/actions/runs/37880016814).
+Deployment was skipped for the PR.
+Local computer use and capture stayed stopped. The latest result packet records
+remaining visual checks and preserves the expansion report separately as
+`result-2-expansion.md`.
+
 ## Hosting prerequisite
 
 The authenticated GitHub Pages creation call for `snowdamiz/incant`, with
@@ -127,12 +188,14 @@ The authenticated GitHub Pages creation call for `snowdamiz/incant`, with
 
 > Your current plan does not support GitHub Pages for this repository.
 
-The repository is private. No Pages site was created, and no billing or visibility
-setting was changed. A director decision to use a Pages-eligible GitHub plan or
-make the repository public is required before Pages can be enabled. After that,
-set the Pages source to GitHub Actions and merge the PR; the main push deploys it.
-The expected URL is `https://snowdamiz.github.io/incant/`. It is not a verified live
-site while this prerequisite remains unresolved.
+At that check the repository was private. No Pages site was created, and this
+implementation did not change billing or repository visibility. A later read-only
+GitHub check on 2026-10-08 reports the repository as public; the Pages endpoint
+returns HTTP 404, so a configured site is not yet confirmed. The previous
+private-repository eligibility failure is historical, not the current blocker.
+Pages still needs to use GitHub Actions as its source, and the director owns the
+PR merge that triggers deployment. The expected URL is
+`https://snowdamiz.github.io/incant/`; no successful public deployment is claimed.
 
 References: [Vite GitHub Pages deployment](https://vite.dev/guide/static-deploy.html#github-pages),
 [Tailwind Vite integration](https://tailwindcss.com/docs/installation/using-vite).
