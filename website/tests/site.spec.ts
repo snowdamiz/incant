@@ -98,7 +98,7 @@ test('mobile navigation supports keyboard dismissal and working section links', 
 
   await toggle.press('Enter')
   await firstSection.press('Enter')
-  expect(new URL(page.url()).hash).toBe(destination)
+  await expect(page).toHaveURL(url => url.hash === destination)
   await expect(toggle).toHaveAttribute('aria-expanded', 'false')
   await expect(page.locator('#mobile-menu')).not.toBeVisible()
 })
