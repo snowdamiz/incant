@@ -285,6 +285,12 @@ impl LoginAttempt {
                 }
                 Err(_) => return Err(failure("callback listener failed")),
             };
+            // BSD/macOS may inherit O_NONBLOCK from the listening socket. A
+            // callback can arrive in multiple packets, so honor the bounded
+            // read timeout instead of treating the first WouldBlock as EOF.
+            stream
+                .set_nonblocking(false)
+                .map_err(|_| failure("callback connection setup failed"))?;
             let _ = stream.set_read_timeout(Some(Duration::from_millis(250)));
             let _ = stream.set_write_timeout(Some(Duration::from_secs(1)));
             let read_deadline = Instant::now() + Duration::from_secs(2);
@@ -302,6 +308,11 @@ impl LoginAttempt {
                             break;
                         }
                     }
+                    Err(e)
+                        if matches!(
+                            e.kind(),
+                            std::io::ErrorKind::WouldBlock | std::io::ErrorKind::TimedOut
+                        ) => {}
                     Err(_) => break,
                 }
             }
@@ -315,6 +326,7 @@ impl LoginAttempt {
             let target = parts.next().unwrap_or("");
             let matches = method == Some("GET")
                 && target.starts_with("/auth/callback?")
+                && bytes.windows(4).any(|x| x == b"\r\n\r\n")
                 && bytes.len() <= 8192;
             // Unrelated browser requests, stale tabs and invalid states must not
             // consume the active attempt or send a code to the token endpoint.
@@ -490,6 +502,19 @@ fn require_inference_scope(scope: &str) -> Result<(), AgentError> {
 }
 /// Caller serializes this operation per account (the headless CLI holds an OS lock).
 pub fn access_token(account: &AccountMetadata) -> Result<zeroize::Zeroizing<String>, AgentError> {
+    access_token_inner(account, false)
+}
+/// Explicit session renewal for the account settings/validation CLI. The caller
+/// holds the same AccountStore process lock as ordinary automatic refresh.
+pub fn refresh_access_token(
+    account: &AccountMetadata,
+) -> Result<zeroize::Zeroizing<String>, AgentError> {
+    access_token_inner(account, true)
+}
+fn access_token_inner(
+    account: &AccountMetadata,
+    force_refresh: bool,
+) -> Result<zeroize::Zeroizing<String>, AgentError> {
     let saved = CredentialStore::load(&account.id)?;
     let mut record: OAuthCredential =
         serde_json::from_str(&saved).map_err(|_| failure("invalid saved credential record"))?;
@@ -497,7 +522,7 @@ pub fn access_token(account: &AccountMetadata) -> Result<zeroize::Zeroizing<Stri
         return Err(failure("stored account identity mismatch"));
     }
     require_inference_scope(&record.scope)?;
-    if record.expires_at <= now().saturating_add(60) {
+    if force_refresh || record.expires_at <= now().saturating_add(60) {
         let client = client()?;
         let response = client
             .post(TOKEN)
@@ -661,11 +686,11 @@ mod tests {
             stream
                 .set_read_timeout(Some(Duration::from_secs(2)))
                 .unwrap();
-            write!(
-                stream,
-                "GET {target} HTTP/1.1\r\nHost: {address}\r\nConnection: close\r\n\r\n"
-            )
-            .unwrap();
+            // Exercise a split browser request, including a delay while the
+            // accepted connection has no bytes ready to read.
+            write!(stream, "GET {target} HTTP/1.1\r\n").unwrap();
+            std::thread::sleep(Duration::from_millis(30));
+            write!(stream, "Host: {address}\r\nConnection: close\r\n\r\n").unwrap();
             let mut response = String::new();
             stream.read_to_string(&mut response).unwrap();
             response

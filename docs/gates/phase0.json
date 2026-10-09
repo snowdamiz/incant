@@ -5,9 +5,9 @@
     "native_viewport": {
       "passed": false,
       "remaining": [
-        "macOS native composition review",
         "Windows native execution"
-      ]
+      ],
+      "macos_evidence": "handoffs/0002-native-viewport/result.md"
     },
     "document_crdt": {
       "passed": true,
@@ -27,14 +27,17 @@
     "authentication": {
       "passed": false,
       "remaining": [
-        "live OAuth/API-key inference",
-        "three-OS refresh/revoke/keychain"
-      ]
+        "live API-key inference",
+        "Windows/Linux OAuth, refresh and credential-store checks",
+        "live revocation"
+      ],
+      "macos_evidence": "docs/spikes/auth-login-repair.md",
+      "macos_storage_exception": "director requested private credential files to eliminate repeated Keychain prompts"
     },
     "claude_acp": {
       "passed": true,
       "evidence": "handoffs/0001-editor-foundation/result.md",
-      "integration": "90b4213; 158 UI/bridge tests pass; actual native composition review remains under spike 1"
+      "integration": "native review and account UI integrated; 180 UI/bridge tests pass; macOS native review recorded under spike 1"
     }
   },
   "nightly_runnable_targets": {

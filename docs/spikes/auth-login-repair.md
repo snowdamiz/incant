@@ -27,7 +27,7 @@ Actual inference is still the CLI Phase 0 agent; this repair does not claim the
 later-phase in-editor conversation loop is complete.
 
 Large OAuth records exceed Windows Credential Manager's 2560-byte blob limit.
-Credentials use bounded OS-keychain chunks and an atomically replaced manifest.
+Windows/Linux credentials use bounded OS-keychain chunks and an atomically replaced manifest.
 Failed writes leave the old record readable; successful writes remove the old
 generation. Legacy single-entry credentials remain readable. Temporary errors do
 not erase credentials. OS access controls remain in force.
@@ -51,9 +51,9 @@ not erase credentials. OS access controls remain in force.
 
 Keychain can ask for OS access after a development executable changes. This is
 separate from OpenAI reauthentication: Incant retains the saved session rather
-than creating a registration on each build. A real OpenAI consent, restart check
-with that account and live agent request still require the director's first login.
-No live provider or Phase 0 approval is implied by synthetic tests.
+than creating a registration on each build. Real consent, a restart check and live
+requests were still pending at this initial checkpoint. The real-account results
+below supersede that limitation. No Phase 0 approval is implied by synthetic tests.
 
 References: [OpenAI registration and sign-in](https://developers.openai.com/siwc/token-sharing-open-source/sign-in),
 [host identifiers](https://developers.openai.com/siwc/token-sharing-open-source),
@@ -96,3 +96,33 @@ items and reported a no-op success. It now retains completed output items until
 Tests ensure interrupted/failed streams cannot execute those buffered tool calls.
 A repeated live probe returned the expected `doc_query` call. A scene-edit test
 then reached the approval boundary correctly; no edit was claimed before approval.
+
+## Real saved-session verification after the storage change
+
+The director completed returning browser sign-in. CLI status confirmed one active
+OAuth account with a credential available from `private-local-file`. A metadata-only
+filesystem check confirmed directory mode 0700 and credential mode 0600. No real
+credential contents were printed or copied into evidence.
+
+- Explicit `auth refresh` renewed the real session and atomically saved its rotated
+  credential without a Keychain dialog.
+- The native application was rebuilt after source changes, then relaunched. Its
+  account state restored successfully without browser sign-in or a password prompt.
+- A fresh CLI agent process used that saved account with `gpt-6-astra`. In one
+  approved command-bus transaction it renamed the sole test entity to `Player` and
+  set translation to `[0, 1, 0]`, preserving rotation, scale and entity count.
+  A subsequent query verified the result. All three tool calls succeeded; usage was
+  4,234 input tokens and 302 output tokens across four model steps. The saved
+  document records agent provenance and the matching transaction ID.
+- The latest local suite has 41 Rust behavior tests and 180 UI/bridge tests passing;
+  workspace/all-target Clippy passes with warnings denied.
+
+A subsequent repeated callback test exposed inherited nonblocking sockets on
+macOS. Accepted connections now explicitly use bounded blocking reads, tolerate
+gaps between packets and require complete HTTP headers. The regression test sends
+each request in separated writes so that a partial callback cannot be accepted.
+
+The native app remains connected. This proves macOS persistence, refresh and live
+inference; Windows/Linux real-account authentication, API-key inference and live
+revocation remain outstanding. The single approved edit does not count as an
+unassisted twenty-task evaluation or Phase 0 approval.

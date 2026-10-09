@@ -107,6 +107,7 @@ enum AuthCli {
         add: bool,
     },
     ApiKey,
+    Refresh,
     Models,
     Status,
     #[command(alias = "keychain-check")]
@@ -152,6 +153,12 @@ fn auth_command(action: AuthCli) -> Result<()> {
             println!(
                 "Connected. This login is shared by the editor and CLI and survives rebuilds."
             );
+        }
+        AuthCli::Refresh => {
+            let store = AccountStore::open()?;
+            let account = store.selected().ok_or("No active ChatGPT account")?;
+            incant_agent::auth::refresh_access_token(account)?;
+            print(json!({"session_refreshed":true,"storage":CredentialStore::storage_kind()}))?;
         }
         AuthCli::ApiKey => {
             let key = rpassword::prompt_password("OpenAI API key (hidden): ")?;

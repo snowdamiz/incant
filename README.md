@@ -65,22 +65,27 @@ node_modules/.bin/tsc -p sdk/ts/tsconfig.json
 ## OpenAI connection and live evaluation
 
 The CLI makes direct requests to OpenAI. It never reads Codex/Claude credentials.
-Authentication is not yet verified end to end. OpenAI authorization availability
-and public-client registration must work for the connecting account.
+Browser sign-in, session renewal, persistence across development rebuilds and
+live scene editing are verified on macOS. Windows/Linux live authentication and
+API-key inference still need verification.
 
 ```sh
 tools/cargo run -p incant_headless -- auth login
-# Open the printed URL in your system browser and finish consent there.
+# Finish consent in the system browser that opens automatically.
 # If OAuth is unavailable, use the hidden local prompt:
 tools/cargo run -p incant_headless -- auth api-key
 tools/cargo run -p incant_headless -- auth models
 ```
 
 Do not paste a key or token into chat, source files or command-line arguments. The
-API-key prompt is hidden and saves only to the OS keychain. `auth status` reports
-connection metadata. `auth accounts`, `auth login --add`, `auth switch <account-id>`
-and `auth disconnect` manage profiles. `auth keychain-check` writes/reads/deletes an
-isolated temporary probe without touching existing provider credentials.
+API-key prompt is hidden. On macOS, credentials live in owner-only files in
+`~/Library/Application Support/Incant/credentials/`, shared by the editor, CLI and
+development builds. This avoids Keychain password prompts; file permissions
+protect the records, without additional encryption. Windows/Linux use their OS
+credential stores. `auth status` reports connection metadata. `auth accounts`,
+`auth login --add`, `auth switch <account-id>` and `auth disconnect` manage profiles.
+`auth refresh` renews the active session. `auth credential-check` writes, reads and
+deletes an isolated synthetic probe without touching provider credentials.
 
 Choose an exact available model ID from `auth models`:
 

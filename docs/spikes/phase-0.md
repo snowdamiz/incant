@@ -69,7 +69,7 @@ An earlier implementation appended runtime ticks to authoring CRDT history and
 measured p95 364.74 ms, failing the budget. Separating disposable runtime state
 removed that inappropriate authoring overhead while retaining shared commands.
 
-## Spike 4: live OpenAI agent — blocked on provider connection
+## Spike 4: live OpenAI agent — evaluation in progress
 
 The local loop has query, typed atomic patch, schema and actual GPU screenshot
 tools, streamed Responses handling, bounded tokens/steps, approval modes,
@@ -81,7 +81,8 @@ edit, duplicate labels, hierarchy changes and two injection examples. The oracle
 compares the full final document excluding generated provenance, checks successful
 query/patch/screenshot calls, validates agent provenance and undoes every patch to
 recover the exact initial project. A partial run cannot pass the gate. The corpus
-validates locally. **Live results: 0 cases run; no success rate established.**
+validates locally. Real OAuth inference and an approved scene edit now pass. The
+unassisted twenty-task evaluation is in progress; no gate score is claimed yet.
 
 The CLI supports a dedicated CI evaluation key or an explicitly connected local
 OpenAI account. It never reuses Codex or Claude credentials.
@@ -97,12 +98,14 @@ revocation. Callback tests reject incorrect state and duplicate parameters.
 temporary probe credential in Incant's OS keychain namespace. No real provider
 secret was needed or printed. This proves the local keychain backend only.
 
-The attempted live OpenAI authorization did not complete. The user reported an
-invalid-response/blank page; an in-app diagnostic navigation was blocked. We do
-not know whether the original failure was registration eligibility or the request.
-No token was obtained. OAuth, API-key inference and refresh/revoke against the
-service remain unverified; Windows and Linux keychain/authentication remain pending.
-See the [public-client sign-in guide](https://developers.openai.com/siwc/token-sharing-open-source/sign-in.md).
+The initial request used an invalid host identifier. After correction, the director
+completed real browser sign-in. macOS session refresh, native restart after a
+changed build, and a saved-account scene-edit request pass. At the director's
+request, macOS now uses atomic owner-only credential files to avoid repeated
+Keychain prompts. Windows/Linux retain their OS stores. The
+[repair and live evidence](auth-login-repair.md) documents storage, verification and
+limits. Windows/Linux real-account authentication, API-key inference and live
+revocation remain pending.
 
 ## Spike 6: Claude ACP handoff — in progress
 
