@@ -213,6 +213,32 @@ fn directional_shadow_lookdev_contact_slopes_and_curves() {
     let light_id = light.id.clone();
     entities.insert(light_id.clone(), light);
 
+    // Preserve this synthetic test scene for native review when explicitly
+    // requested. Never replace an existing directory or follow a symlink.
+    if let Some(destination) = std::env::var_os("INCANT_SHADOW_FIXTURE_COPY") {
+        fn copy(source: &std::path::Path, destination: &std::path::Path) {
+            std::fs::create_dir(destination).unwrap();
+            for entry in std::fs::read_dir(source).unwrap() {
+                let entry = entry.unwrap();
+                let target = destination.join(entry.file_name());
+                let kind = entry.file_type().unwrap();
+                if kind.is_dir() {
+                    copy(&entry.path(), &target);
+                } else {
+                    assert!(kind.is_file(), "fixture contains a non-regular entry");
+                    std::fs::copy(entry.path(), target).unwrap();
+                }
+            }
+        }
+        let destination = std::path::PathBuf::from(destination);
+        copy(f.root.path(), &destination);
+        std::fs::write(
+            destination.join("game.incant.json"),
+            f.project.canonical_text().unwrap(),
+        )
+        .unwrap();
+    }
+
     let mid = capture(&f, &r, &camera_id, "lookdev-sun-38");
     for (name, elevation, azimuth) in [("lookdev-sun-12", 12., 240.), ("lookdev-sun-70", 70., 240.)]
     {

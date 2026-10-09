@@ -1,12 +1,12 @@
 {
   "date": "2026-10-09",
   "implementation_commit": "a4dcac4",
-  "stage": "initial; Claude look-dev and final native UI review pending",
+  "stage": "integrated local checks and native capture complete; final Claude review and exact-head CI pending",
   "adapter": "Apple M5 Pro",
   "tests": {
     "ordinary_rust": 144,
-    "native_gpu": 38,
-    "ui": 284,
+    "native_gpu": 40,
+    "ui": 293,
     "python_tools": 5,
     "clippy": "passed"
   },
@@ -2374,7 +2374,15 @@
     "shadow-ui-final.log": "94b6e740f26478ab6a1b4aea38ff4aa9715b722a328604304ea22fc0f25b1259",
     "shadow-schema-final.log": "11344dfee2c7615cfeecb976848f70cf803225717eae3390edf81740ce427930",
     "shadow-native-initial-build.log": "b5f918fc9e644ce5d9f4cb0877893922502b76d899227965b74335414d9bfc3a",
-    "shadow-native-initial-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1"
+    "shadow-native-initial-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1",
+    "shadow-integrated-workspace.log": "cf60de85ee800009dbb1d23e7b31a86ee2bc524f1e653c9569ce1e0290ec3d28",
+    "shadow-integrated-gpu-unit.log": "f67a59221803b07fa9b5dbd07bca879e4b3033c19fa7dd5666c940b42f5d8aef",
+    "shadow-integrated-gpu-model.log": "11a40e0c1a0e8f73c79878ecc22d16398a949e7f81608bad09289d7c83fefe62",
+    "shadow-integrated-clippy.log": "991204dad290e40a8246014164dbfc10893302c5d6d66d65c3e0801074dbcfee",
+    "shadow-integrated-ui.log": "8d6ea5afa51726e841992515c03759d10e27589fc72abb8dca5f14561069b22f",
+    "shadow-integrated-schema.log": "339fda5dbd9a91df5d528913a0a276d427984da4ad285be58690449b9320a6eb",
+    "shadow-native-final-build.log": "7a5654619e052098e48044ddc0ea33a33bf9f5703b4aa7d539cdb0afd2d4cb53",
+    "shadow-native-final-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1"
   },
   "shadow_captures": [
     {
@@ -2503,10 +2511,1453 @@
   "normal_map_shadow_offset_fix": {
     "source": "Claude look-dev recommendation reproduced by Astra",
     "before": "Opposing tangent-X normal maps change the geometrically symmetric shadow boundary at81 central-column pixels by up to12 channel levels",
-    "after": "Unperturbed interpolated surface normal supplies the shadow offset; mapped normal still supplies BRDF/IBL. Targeted GPU regression passes; full checks pending.",
+    "after": "Unperturbed interpolated surface normal supplies the shadow offset; mapped normal supplies BRDF/IBL. Targeted regression and full integrated checks pass; Claude final review pending.",
     "logs_sha256": {
       "shadow-normal-before.log": "60a338584a7a4197310795a9bd388203761b37d396d9a74f40a3fdb38894cce5",
       "shadow-normal-after.log": "11289c79416ec185e33c3121b407930a48e185b666562d820b4fc62eb45d4551"
     }
+  },
+  "integrated_checks": {
+    "ordinary_rust": 144,
+    "gpu": 40,
+    "ui": 293,
+    "clippy": "passed",
+    "schemas_sdk_bridge_conventions": "passed",
+    "python_tools": 5,
+    "claude_initial_commit": "38aef1086131f1a7628a7434f326d96ebfa9f0e0",
+    "normal_offset": "targeted test fails before correction and passes after; combined suite passes",
+    "lookdev_images": [
+      {
+        "name": "lookdev-sun-12.png",
+        "pixels_equal": true,
+        "sha256": "9c25abff830a24300190bb608dbdea67f7a7a63883e4b4d792a6dd10479389b7"
+      },
+      {
+        "name": "lookdev-sun-38.png",
+        "pixels_equal": true,
+        "sha256": "be3da8cad70181dd67c2499a6d94d8af843b94ea253d4dd864ced637e94b4eb5"
+      },
+      {
+        "name": "lookdev-sun-70.png",
+        "pixels_equal": true,
+        "sha256": "06e846ead6866fae23146c0ac06c0ccf6138f1d3a26ce0e62e7a94b2968d7595"
+      },
+      {
+        "name": "lookdev-unshadowed.png",
+        "pixels_equal": true,
+        "sha256": "7fae7886e1067bfa0f0b910f5daaf7ce4a1cb6c07882442d1eb8fbb38b7f095c"
+      }
+    ],
+    "unshadowed_corrected_images": [
+      {
+        "name": "base-color-texture.png",
+        "pixel_equal": true,
+        "sha256": "3f23498ac338c0f33c6d3794a89ea0032e3ff55880a1882d1e4972a314e27a17"
+      },
+      {
+        "name": "camera-clusters-0-321x241-oracle.png",
+        "pixel_equal": true,
+        "sha256": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099"
+      },
+      {
+        "name": "camera-clusters-0-321x241.png",
+        "pixel_equal": true,
+        "sha256": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099"
+      },
+      {
+        "name": "camera-clusters-0-480x270-oracle.png",
+        "pixel_equal": true,
+        "sha256": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31"
+      },
+      {
+        "name": "camera-clusters-0-480x270.png",
+        "pixel_equal": true,
+        "sha256": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31"
+      },
+      {
+        "name": "camera-clusters-1-321x241-oracle.png",
+        "pixel_equal": true,
+        "sha256": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e"
+      },
+      {
+        "name": "camera-clusters-1-321x241.png",
+        "pixel_equal": true,
+        "sha256": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e"
+      },
+      {
+        "name": "camera-clusters-1-480x270-oracle.png",
+        "pixel_equal": true,
+        "sha256": "d9d264ec1e2d6179f69d6fcbe0cdb47ca33f8ef428d49cd58de95d9808358b7b"
+      },
+      {
+        "name": "camera-clusters-1-480x270.png",
+        "pixel_equal": true,
+        "sha256": "d9d264ec1e2d6179f69d6fcbe0cdb47ca33f8ef428d49cd58de95d9808358b7b"
+      },
+      {
+        "name": "camera-clusters-2-321x241-oracle.png",
+        "pixel_equal": true,
+        "sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a"
+      },
+      {
+        "name": "camera-clusters-2-321x241.png",
+        "pixel_equal": true,
+        "sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a"
+      },
+      {
+        "name": "camera-clusters-2-480x270-oracle.png",
+        "pixel_equal": true,
+        "sha256": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be"
+      },
+      {
+        "name": "camera-clusters-2-480x270.png",
+        "pixel_equal": true,
+        "sha256": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be"
+      },
+      {
+        "name": "camera-facing-away.png",
+        "pixel_equal": true,
+        "sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e"
+      },
+      {
+        "name": "camera-flat-parent-reference.png",
+        "pixel_equal": true,
+        "sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a"
+      },
+      {
+        "name": "camera-fov-30.png",
+        "pixel_equal": true,
+        "sha256": "3f9c3cc8ddac14df4961fb5037f52314b3c1e1e1616483f1fdab0aabe0ef88cf"
+      },
+      {
+        "name": "camera-fov-50-visible-edges.png",
+        "pixel_equal": true,
+        "sha256": "eca524c77ca7d2fc41a73d105d3190ea3a66c3105ababf801011cc82742ac1bb"
+      },
+      {
+        "name": "camera-fov-80.png",
+        "pixel_equal": true,
+        "sha256": "ba3bc64e8fddfdcc2e3b5a686403b39cf9ce8d0840ac06e6b6f7b29f6a4e1a4f"
+      },
+      {
+        "name": "camera-inherited-pose.png",
+        "pixel_equal": true,
+        "sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a"
+      },
+      {
+        "name": "camera-scaled-roll-flat.png",
+        "pixel_equal": true,
+        "sha256": "f6f806044e46cb8fcd5b9db9b8f9b856cb14cbf7847c85d4f548a04c786c0d22"
+      },
+      {
+        "name": "camera-scaled-roll-parent.png",
+        "pixel_equal": true,
+        "sha256": "f6f806044e46cb8fcd5b9db9b8f9b856cb14cbf7847c85d4f548a04c786c0d22"
+      },
+      {
+        "name": "camera-skewed-flat-reference.png",
+        "pixel_equal": true,
+        "sha256": "bd7e1105a490922c57c129631783268aead6dfc0801716ee00dff543d70c692b"
+      },
+      {
+        "name": "camera-skewed-parent.png",
+        "pixel_equal": true,
+        "sha256": "bd7e1105a490922c57c129631783268aead6dfc0801716ee00dff543d70c692b"
+      },
+      {
+        "name": "camera-tight-clip-positive.png",
+        "pixel_equal": true,
+        "sha256": "29a364e13f7f3f4a2b2a7388e277bec90d99f0385cf62c44111a12becea3e268"
+      },
+      {
+        "name": "camera-tight-clip-unclipped-reference.png",
+        "pixel_equal": true,
+        "sha256": "29a364e13f7f3f4a2b2a7388e277bec90d99f0385cf62c44111a12becea3e268"
+      },
+      {
+        "name": "camera-tilted-partial-clip.png",
+        "pixel_equal": true,
+        "sha256": "65813ffd2ae07f3a15b34db42251f4783b27eeddf3f491a272bad47b916aab38"
+      },
+      {
+        "name": "camera-transparent-back.png",
+        "pixel_equal": true,
+        "sha256": "7bdd9f474dd897aabe2a55d45d37f55450a79850d1b4b462707104fcdce67ca9"
+      },
+      {
+        "name": "camera-transparent-front.png",
+        "pixel_equal": true,
+        "sha256": "d67b2e5da8ffba4c585b5cd397af77774be34f486137b016cad518fc28321065"
+      },
+      {
+        "name": "cluster-127-lights.png",
+        "pixel_equal": true,
+        "sha256": "727e5e5e0bb54983bb0e59602b2e76480bdd54cee2b714005f848a2febefd4ea"
+      },
+      {
+        "name": "cluster-128-lights.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-129-lights.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-31-lights.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-32-lights.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-33-lights.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-63-lights.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-64-lights.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-65-lights.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "dark-fill-10.png",
+        "pixel_equal": true,
+        "sha256": "43bba9f34e60d387924e1b4a2362d4a0b0ea3d8ce205130b3effb649efc166e9"
+      },
+      {
+        "name": "dark-fill-18.png",
+        "pixel_equal": true,
+        "sha256": "57bd04d3a3649393fc9d684978524a5ff5039dba00f9fd7c80d2801ef8afe7e2"
+      },
+      {
+        "name": "dark-fill-50.png",
+        "pixel_equal": true,
+        "sha256": "59788065412773c32edd73d1de01be84f3c8d9f680d43402e1b6380a620d5ba5"
+      },
+      {
+        "name": "depth-boundary-patches-513x385-oracle.png",
+        "pixel_equal": true,
+        "sha256": "472df7ec4eceb5a11d9ee938ca6f78fd01aad3d464c54b77fb21a3663bdc7808"
+      },
+      {
+        "name": "depth-boundary-patches-513x385.png",
+        "pixel_equal": true,
+        "sha256": "472df7ec4eceb5a11d9ee938ca6f78fd01aad3d464c54b77fb21a3663bdc7808"
+      },
+      {
+        "name": "depth-boundary-patches-640x480-oracle.png",
+        "pixel_equal": true,
+        "sha256": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993"
+      },
+      {
+        "name": "depth-boundary-patches-640x480.png",
+        "pixel_equal": true,
+        "sha256": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993"
+      },
+      {
+        "name": "directional-red.png",
+        "pixel_equal": true,
+        "sha256": "332bb7a6856155de6a6acc1dc5ce3c3dcaf2556a12b53c2cfc3623be34d92d3a"
+      },
+      {
+        "name": "double-sided-back.png",
+        "pixel_equal": true,
+        "sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0"
+      },
+      {
+        "name": "emissive-map.png",
+        "pixel_equal": true,
+        "sha256": "ae2cd28cbdc77e62a0233925b5702d2188da4f2e6a834cba9c7bf918a5f6f7f3"
+      },
+      {
+        "name": "environment-disabled.png",
+        "pixel_equal": true,
+        "sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80"
+      },
+      {
+        "name": "environment-linear-metal.png",
+        "pixel_equal": true,
+        "sha256": "0739cef132d181b9fec9a8866330d628dad4a69e414f774d7a50aec670afbe93"
+      },
+      {
+        "name": "environment-restored.png",
+        "pixel_equal": true,
+        "sha256": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9"
+      },
+      {
+        "name": "environment-rotation-half-turn.png",
+        "pixel_equal": true,
+        "sha256": "4930b16f83022ef644bbd9133ecad51d90e48e6d75cd41c823013ff5498ba222"
+      },
+      {
+        "name": "environment-rotation-zero.png",
+        "pixel_equal": true,
+        "sha256": "49a35139b3f206e5b0731685fbdd260bad02fba0990f9ac5412f12f90eec8bcf"
+      },
+      {
+        "name": "environment-rough-metal.png",
+        "pixel_equal": true,
+        "sha256": "f6fd11dc7bd2d383a4a34a2afa76f4f7e3c212c66e543ee1320bb108e16af88d"
+      },
+      {
+        "name": "environment-srgb-metal.png",
+        "pixel_equal": true,
+        "sha256": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9"
+      },
+      {
+        "name": "environment-white-furnace.png",
+        "pixel_equal": true,
+        "sha256": "062d2f0e4d6d8605b6988f77800dab4fd99cab8d414d755f5625c73189e12390"
+      },
+      {
+        "name": "explicit-light-disabled.png",
+        "pixel_equal": true,
+        "sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80"
+      },
+      {
+        "name": "far-clipped.png",
+        "pixel_equal": true,
+        "sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e"
+      },
+      {
+        "name": "full-mask-257x193-oracle.png",
+        "pixel_equal": true,
+        "sha256": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92"
+      },
+      {
+        "name": "full-mask-257x193.png",
+        "pixel_equal": true,
+        "sha256": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92"
+      },
+      {
+        "name": "full-mask-320x240-oracle.png",
+        "pixel_equal": true,
+        "sha256": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea"
+      },
+      {
+        "name": "full-mask-320x240.png",
+        "pixel_equal": true,
+        "sha256": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea"
+      },
+      {
+        "name": "hdr-glossy-highlight.png",
+        "pixel_equal": true,
+        "sha256": "886cfc34d5440e8dbc0bbaf9449099ce63a50cfde6df6be5270d891994cc0230"
+      },
+      {
+        "name": "hdr-transparent-over-black.png",
+        "pixel_equal": true,
+        "sha256": "92fa682f5c5b37440488b2b9457fdfd69215508eb07a6665a03d4ac2270631e8"
+      },
+      {
+        "name": "last-bit-only-321x181-oracle.png",
+        "pixel_equal": true,
+        "sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb"
+      },
+      {
+        "name": "last-bit-only-321x181-single-light.png",
+        "pixel_equal": true,
+        "sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb"
+      },
+      {
+        "name": "last-bit-only-321x181.png",
+        "pixel_equal": true,
+        "sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb"
+      },
+      {
+        "name": "layered-transparency.png",
+        "pixel_equal": true,
+        "sha256": "c78f11db0ad33f49c6a256d199f7bacea023759426498927b688b1f275d51773"
+      },
+      {
+        "name": "linear-filter.png",
+        "pixel_equal": true,
+        "sha256": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec"
+      },
+      {
+        "name": "lit-double-sided-back.png",
+        "pixel_equal": true,
+        "sha256": "dcbd28e6e8fc38a0e3c55987b4792da7fbb8c6096ebc58c61df135deabf7580d"
+      },
+      {
+        "name": "mask-discarded.png",
+        "pixel_equal": true,
+        "sha256": "e1751a8a2d75f191fde7f49ca0c531d612d0a59b444411f83d6dffc97f8744c7"
+      },
+      {
+        "name": "metallic-roughness-map.png",
+        "pixel_equal": true,
+        "sha256": "d3744f3cde70216735ab0f188c59e2e79452d5a3307a98165c579a33997d2232"
+      },
+      {
+        "name": "minified-color-mips.png",
+        "pixel_equal": true,
+        "sha256": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec"
+      },
+      {
+        "name": "near-clipped.png",
+        "pixel_equal": true,
+        "sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e"
+      },
+      {
+        "name": "normal-map.png",
+        "pixel_equal": true,
+        "sha256": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a"
+      },
+      {
+        "name": "occlusion-map.png",
+        "pixel_equal": true,
+        "sha256": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a"
+      },
+      {
+        "name": "opaque-alpha-zero.png",
+        "pixel_equal": true,
+        "sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0"
+      },
+      {
+        "name": "opaque-between-transparent.png",
+        "pixel_equal": true,
+        "sha256": "e3bdebc967b2cf254df4feb048950827a54aac9131617442f787b188ac12e9d9"
+      },
+      {
+        "name": "point-far.png",
+        "pixel_equal": true,
+        "sha256": "6c2a097e64240e8298622572e497dd567abb8e3c6832f366fea3ed9a2f55448b"
+      },
+      {
+        "name": "point-near.png",
+        "pixel_equal": true,
+        "sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "point-outside-range.png",
+        "pixel_equal": true,
+        "sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80"
+      },
+      {
+        "name": "punctual-hdr-dielectric-0.045.png",
+        "pixel_equal": true,
+        "sha256": "99f3d5b66e3e990c4daad6d2a83416484281e1d4a93cbcfee3b401651d9c0f28"
+      },
+      {
+        "name": "punctual-hdr-dielectric-0.3.png",
+        "pixel_equal": true,
+        "sha256": "7202fafecfa60062ede82ef590e0587309f6503e54ed3831741c3f9f46c1cd03"
+      },
+      {
+        "name": "punctual-hdr-dielectric-0.7.png",
+        "pixel_equal": true,
+        "sha256": "7252e0ec64cf9ab5cc181d9b6826e59e54625442df2f5d13a8b17d8143c3f319"
+      },
+      {
+        "name": "punctual-hdr-dielectric-1.png",
+        "pixel_equal": true,
+        "sha256": "60ce7087ce6f4a0606b3c09af0f0170090c2ca99c0082dde487a4027e64c1a87"
+      },
+      {
+        "name": "punctual-hdr-metal-0.045.png",
+        "pixel_equal": true,
+        "sha256": "fa65df74cd71466c503af8bbda3de471e213d688119e4dd60bc80e7a58a57e11"
+      },
+      {
+        "name": "punctual-hdr-metal-0.3.png",
+        "pixel_equal": true,
+        "sha256": "a94c313da5e143febaea92c9be4fcbce925824256c065f4d46a06644cdf2b6c9"
+      },
+      {
+        "name": "punctual-hdr-metal-0.7.png",
+        "pixel_equal": true,
+        "sha256": "cc15082e0b9fddebc65dd8eb237cf8f847fb695b54c7011cc6bd19107dbf6fdf"
+      },
+      {
+        "name": "punctual-hdr-metal-1.png",
+        "pixel_equal": true,
+        "sha256": "5391af05bd3cf529827b522b55254ae3044ccabf04ee04f83b392db2de3386b1"
+      },
+      {
+        "name": "punctual-low-dielectric-0.045.png",
+        "pixel_equal": true,
+        "sha256": "83920b3e6335fdf0d3911249241bafe24c7e89ccf87eb47fe66c5773493f20b2"
+      },
+      {
+        "name": "punctual-low-dielectric-0.3.png",
+        "pixel_equal": true,
+        "sha256": "772d45a8b6853533d444bb0b46bea699516c109d0831a5ded5b626d03a7fe4c3"
+      },
+      {
+        "name": "punctual-low-dielectric-0.7.png",
+        "pixel_equal": true,
+        "sha256": "4ad9fb095f0bb5bc751c0fd2a27ffee206c3b42e6ebf5bd61650d451a91ddd11"
+      },
+      {
+        "name": "punctual-low-dielectric-1.png",
+        "pixel_equal": true,
+        "sha256": "23931886951fb6cf2fb4c0fa09c19c232415e18bbd9db9c55fb3418fba3ab3e2"
+      },
+      {
+        "name": "range-98-percent.png",
+        "pixel_equal": true,
+        "sha256": "e0aee7ee04eadffe8d3c28b96034032a77b862be3ea408621ed4f69496505345"
+      },
+      {
+        "name": "range-99-percent.png",
+        "pixel_equal": true,
+        "sha256": "33a9ed69acdb141571fac20d715c920763ca6b0d7edcdc02f4bc0955ff58a576"
+      },
+      {
+        "name": "reflected-single-sided.png",
+        "pixel_equal": true,
+        "sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0"
+      },
+      {
+        "name": "reimported-blue-texture.png",
+        "pixel_equal": true,
+        "sha256": "9eb8a28267847140b94aeb61579445f97cd73978315775e094f28e26c42845f7"
+      },
+      {
+        "name": "sixteen-bit-color.png",
+        "pixel_equal": true,
+        "sha256": "fbdb02aa70b86684355ae8e5c2731b1eb49626b9a8156de8a80e1ad6ae89869d"
+      },
+      {
+        "name": "spatial-clusters-257x191.png",
+        "pixel_equal": true,
+        "sha256": "0095349a077cf2cd4c9da832a4a8d865c29ac9cfdde579f5a0b2009436e352a6"
+      },
+      {
+        "name": "spatial-clusters-320x180.png",
+        "pixel_equal": true,
+        "sha256": "5d2bd318d614f039ec857203c0369fd9579570634a51a81700939aae4503baea"
+      },
+      {
+        "name": "spatial-clusters-640x360.png",
+        "pixel_equal": true,
+        "sha256": "5c3d77d66bff36f0b267b28ae7e39fe1c2fbb9aefeefb7fae360c8ec5d921395"
+      },
+      {
+        "name": "spatial-overflow-96-513x385-oracle.png",
+        "pixel_equal": true,
+        "sha256": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44"
+      },
+      {
+        "name": "spatial-overflow-96-513x385.png",
+        "pixel_equal": true,
+        "sha256": "7f58c292c288144a5116d19bd1ae1a6e833cf0f356ac2f7545532c8f6785fc44"
+      },
+      {
+        "name": "spatial-overflow-96-640x480-oracle.png",
+        "pixel_equal": true,
+        "sha256": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a"
+      },
+      {
+        "name": "spatial-overflow-96-640x480.png",
+        "pixel_equal": true,
+        "sha256": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a"
+      },
+      {
+        "name": "spot-away.png",
+        "pixel_equal": true,
+        "sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80"
+      },
+      {
+        "name": "spot-center.png",
+        "pixel_equal": true,
+        "sha256": "4f062daa0b252705145c5559ef989f6fa7628e0bf910d804469a24b096c1761a"
+      },
+      {
+        "name": "spot-centered-reference.png",
+        "pixel_equal": true,
+        "sha256": "a565ea67a477269160458e88119d9c7e70cf486ef7ae7bcfaf4662dc7ab8181a"
+      },
+      {
+        "name": "spot-penumbra.png",
+        "pixel_equal": true,
+        "sha256": "a98abc353e310536b5a9a104712895c83f41dcaa9ba8be34992f88c99b66dfad"
+      },
+      {
+        "name": "studio-dark-matte.png",
+        "pixel_equal": true,
+        "sha256": "bcd6176576ad58f83764a7aa6ee92e48c1f2d7ce67d2e9f7f7f31daef3129e6c"
+      },
+      {
+        "name": "studio-dark-rough.png",
+        "pixel_equal": true,
+        "sha256": "5c88851c8625dd9ccb4038d6ccbb5a2185fb9eebff6bc4ad8b907d1237994d7c"
+      },
+      {
+        "name": "studio-dark-satin.png",
+        "pixel_equal": true,
+        "sha256": "fe7bf254be61a8a213c9e1c9f0d13dbd3ed6ac4830dd142dc744819be6440a19"
+      },
+      {
+        "name": "studio-dark-smooth.png",
+        "pixel_equal": true,
+        "sha256": "7cf36b070a2b3c5acf812972275e1e56c01a7712a711e1b0fa273fec2c617ff9"
+      },
+      {
+        "name": "studio-dielectric-matte.png",
+        "pixel_equal": true,
+        "sha256": "db1e87402262c626ce0ebe854f722f0de625f6ff054b96c5c56cc1a7732a40ce"
+      },
+      {
+        "name": "studio-dielectric-rough.png",
+        "pixel_equal": true,
+        "sha256": "0bb6498815269a2a20c1572c82011711f8c9620013d1a09fd6378e4716eca804"
+      },
+      {
+        "name": "studio-dielectric-satin.png",
+        "pixel_equal": true,
+        "sha256": "d9e5f2278e1894c136dd858b7862c4537b62c1db4777a1270f0488034429b353"
+      },
+      {
+        "name": "studio-dielectric-smooth.png",
+        "pixel_equal": true,
+        "sha256": "f9e48d8aa0757bdffb07b113f59ac4e31fe432de254af9ad851b155f200344af"
+      },
+      {
+        "name": "studio-metal-matte.png",
+        "pixel_equal": true,
+        "sha256": "9c8ebbd851d1de09098af80676501e74ec20d85ed2451a1bcd99ea4e013a0b26"
+      },
+      {
+        "name": "studio-metal-rough.png",
+        "pixel_equal": true,
+        "sha256": "4622e1c1d7150217103d5d90ef78e1472df9bc2037f25a269bb42e3c3ce48c27"
+      },
+      {
+        "name": "studio-metal-satin.png",
+        "pixel_equal": true,
+        "sha256": "928e2dbfb384414a94355bf9e3af0ab7b6b48b369da462720ca960fc07ef6b9e"
+      },
+      {
+        "name": "studio-metal-smooth.png",
+        "pixel_equal": true,
+        "sha256": "4677800f3782bd23bee195fc115ccff879ceedc2465725fbeebef8def36fdd00"
+      },
+      {
+        "name": "varying-normal-map.png",
+        "pixel_equal": true,
+        "sha256": "27180b14ddb8c4ec9c076f72ddc01ed49fe3a08a60fdd9a02747b2eb86070bda"
+      },
+      {
+        "name": "visible-range-edge-513x385.png",
+        "pixel_equal": true,
+        "sha256": "f2b26e9719541aa38814c97d444a58b7141b1fb33435cf2eb88f790ec88f77ba"
+      },
+      {
+        "name": "visible-range-edge-640x480.png",
+        "pixel_equal": true,
+        "sha256": "e24c9a3866c25e3228d1d36b483d98ca2424c36fe6332828ec47d7b29609156b"
+      }
+    ]
+  },
+  "performance_enabled_final": {
+    "timestamp_utc": "2026-10-09T22:08:15Z",
+    "summary": [
+      {
+        "shadow_lights": 0,
+        "casters": 1,
+        "median_ms": 1.388604
+      },
+      {
+        "shadow_lights": 1,
+        "casters": 1,
+        "median_ms": 1.469646
+      },
+      {
+        "shadow_lights": 1,
+        "casters": 64,
+        "median_ms": 1.4787915000000003
+      },
+      {
+        "shadow_lights": 4,
+        "casters": 64,
+        "median_ms": 3.0961045
+      }
+    ],
+    "samples": [
+      {
+        "trial": 1,
+        "shadow_lights": 0,
+        "casters": 1,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-0-1-pv7i7d8c/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.670792,
+        "measured_frames": 30,
+        "median_ms": 1.388604,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3749159999999998,
+        "p95_ms": 1.471542,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 2,
+          "model_triangles": 4,
+          "primitive_instances": 2
+        },
+        "sorted_samples_ms": [
+          1.3749159999999998,
+          1.375583,
+          1.376541,
+          1.376833,
+          1.377,
+          1.377375,
+          1.377667,
+          1.380042,
+          1.382334,
+          1.3829580000000001,
+          1.384625,
+          1.384667,
+          1.385167,
+          1.385959,
+          1.388333,
+          1.3888749999999999,
+          1.391584,
+          1.3921249999999998,
+          1.393084,
+          1.3938329999999999,
+          1.397333,
+          1.3982910000000002,
+          1.4,
+          1.401667,
+          1.406709,
+          1.409125,
+          1.42125,
+          1.444792,
+          1.471542,
+          2.670792
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "shadow_lights": 1,
+        "casters": 1,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-1-1-h0ejzshh/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.812916,
+        "measured_frames": 30,
+        "median_ms": 1.4744795,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.446208,
+        "p95_ms": 2.796,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 2,
+          "model_triangles": 4,
+          "primitive_instances": 2
+        },
+        "sorted_samples_ms": [
+          1.446208,
+          1.449417,
+          1.450333,
+          1.4507079999999999,
+          1.451584,
+          1.45425,
+          1.45475,
+          1.4585,
+          1.4597499999999999,
+          1.460334,
+          1.461291,
+          1.46475,
+          1.4673749999999999,
+          1.4675829999999999,
+          1.47025,
+          1.4787089999999998,
+          1.479166,
+          1.480542,
+          1.481583,
+          1.484542,
+          1.491834,
+          1.499041,
+          1.5017500000000001,
+          1.515375,
+          1.563667,
+          1.59525,
+          2.744458,
+          2.784833,
+          2.796,
+          2.812916
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "shadow_lights": 1,
+        "casters": 64,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-1-64-sjgbalnp/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.798583,
+        "measured_frames": 30,
+        "median_ms": 1.481958,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.456667,
+        "p95_ms": 2.762459,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 65,
+          "model_triangles": 130,
+          "primitive_instances": 65
+        },
+        "sorted_samples_ms": [
+          1.456667,
+          1.458834,
+          1.45925,
+          1.463042,
+          1.464542,
+          1.465041,
+          1.465458,
+          1.465875,
+          1.466958,
+          1.471666,
+          1.472958,
+          1.4729590000000001,
+          1.476125,
+          1.4785,
+          1.481958,
+          1.481958,
+          1.4844579999999998,
+          1.4877079999999998,
+          1.488083,
+          1.488375,
+          1.4887080000000001,
+          1.489667,
+          1.492167,
+          1.498333,
+          1.519375,
+          1.5889579999999999,
+          2.746083,
+          2.74675,
+          2.762459,
+          2.798583
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "shadow_lights": 4,
+        "casters": 64,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-4-64-a4xtjaap/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 3.189833,
+        "measured_frames": 30,
+        "median_ms": 3.0720415,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 3.003708,
+        "p95_ms": 3.177958,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 65,
+          "model_triangles": 130,
+          "primitive_instances": 65
+        },
+        "sorted_samples_ms": [
+          3.003708,
+          3.025416,
+          3.036833,
+          3.039458,
+          3.042875,
+          3.0442910000000003,
+          3.0452500000000002,
+          3.0456670000000003,
+          3.0573330000000003,
+          3.058167,
+          3.0600419999999997,
+          3.064875,
+          3.065416,
+          3.067958,
+          3.069833,
+          3.07425,
+          3.0761249999999998,
+          3.078417,
+          3.079958,
+          3.086167,
+          3.0869169999999997,
+          3.0892910000000002,
+          3.092958,
+          3.095417,
+          3.110833,
+          3.128375,
+          3.1419170000000003,
+          3.175,
+          3.177958,
+          3.189833
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "shadow_lights": 4,
+        "casters": 64,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-4-64-a4xtjaap/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 4.5,
+        "measured_frames": 30,
+        "median_ms": 3.0961045,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 2.9625,
+        "p95_ms": 3.225375,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 65,
+          "model_triangles": 130,
+          "primitive_instances": 65
+        },
+        "sorted_samples_ms": [
+          2.9625,
+          3.038084,
+          3.04425,
+          3.048291,
+          3.04925,
+          3.056458,
+          3.059875,
+          3.062292,
+          3.065875,
+          3.074375,
+          3.080334,
+          3.088042,
+          3.089709,
+          3.092834,
+          3.094959,
+          3.0972500000000003,
+          3.1127920000000002,
+          3.113375,
+          3.114583,
+          3.12,
+          3.120709,
+          3.123583,
+          3.128458,
+          3.133709,
+          3.142125,
+          3.1476669999999998,
+          3.1597090000000003,
+          3.201875,
+          3.225375,
+          4.5
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "shadow_lights": 1,
+        "casters": 64,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-1-64-sjgbalnp/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.911333,
+        "measured_frames": 30,
+        "median_ms": 1.4787915000000003,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.448167,
+        "p95_ms": 2.90075,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 65,
+          "model_triangles": 130,
+          "primitive_instances": 65
+        },
+        "sorted_samples_ms": [
+          1.448167,
+          1.453375,
+          1.454167,
+          1.4547080000000001,
+          1.4576660000000001,
+          1.457958,
+          1.462667,
+          1.463375,
+          1.4638749999999998,
+          1.467416,
+          1.468208,
+          1.468416,
+          1.470875,
+          1.474916,
+          1.4768750000000002,
+          1.4807080000000001,
+          1.4848750000000002,
+          1.487042,
+          1.487417,
+          1.491541,
+          1.518917,
+          1.52,
+          2.773083,
+          2.774416,
+          2.787458,
+          2.794583,
+          2.8036670000000004,
+          2.829542,
+          2.90075,
+          2.911333
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "shadow_lights": 1,
+        "casters": 1,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-1-1-h0ejzshh/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.9164999999999996,
+        "measured_frames": 30,
+        "median_ms": 1.469646,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.4514580000000001,
+        "p95_ms": 1.531042,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 2,
+          "model_triangles": 4,
+          "primitive_instances": 2
+        },
+        "sorted_samples_ms": [
+          1.4514580000000001,
+          1.4542920000000001,
+          1.458792,
+          1.460333,
+          1.461667,
+          1.462542,
+          1.465875,
+          1.466583,
+          1.466666,
+          1.4673340000000001,
+          1.4675420000000001,
+          1.468,
+          1.468541,
+          1.469417,
+          1.4694580000000002,
+          1.4698339999999999,
+          1.470542,
+          1.4706249999999998,
+          1.470792,
+          1.471,
+          1.4774580000000002,
+          1.482458,
+          1.483708,
+          1.486708,
+          1.487125,
+          1.503709,
+          1.507333,
+          1.513083,
+          1.531042,
+          2.9164999999999996
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "shadow_lights": 0,
+        "casters": 1,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-0-1-pv7i7d8c/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.440083,
+        "measured_frames": 30,
+        "median_ms": 1.3841455,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.371209,
+        "p95_ms": 1.4382920000000001,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 2,
+          "model_triangles": 4,
+          "primitive_instances": 2
+        },
+        "sorted_samples_ms": [
+          1.371209,
+          1.371792,
+          1.373333,
+          1.374209,
+          1.375958,
+          1.3762500000000002,
+          1.376833,
+          1.377084,
+          1.378791,
+          1.37925,
+          1.379625,
+          1.380833,
+          1.382959,
+          1.383084,
+          1.383666,
+          1.384625,
+          1.385292,
+          1.385708,
+          1.388833,
+          1.392709,
+          1.394792,
+          1.4015,
+          1.4016250000000001,
+          1.402458,
+          1.403334,
+          1.4119169999999999,
+          1.4131669999999998,
+          1.4135,
+          1.4382920000000001,
+          1.440083
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "shadow_lights": 0,
+        "casters": 1,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-0-1-pv7i7d8c/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.478167,
+        "measured_frames": 30,
+        "median_ms": 1.4005830000000001,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3702079999999999,
+        "p95_ms": 1.469792,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 2,
+          "model_triangles": 4,
+          "primitive_instances": 2
+        },
+        "sorted_samples_ms": [
+          1.3702079999999999,
+          1.379917,
+          1.382417,
+          1.384167,
+          1.387042,
+          1.387208,
+          1.390459,
+          1.395458,
+          1.395459,
+          1.396125,
+          1.398083,
+          1.398166,
+          1.398625,
+          1.398791,
+          1.400041,
+          1.401125,
+          1.401375,
+          1.403958,
+          1.40475,
+          1.405209,
+          1.411291,
+          1.417875,
+          1.4183329999999998,
+          1.420042,
+          1.4254580000000001,
+          1.426833,
+          1.444334,
+          1.4534159999999998,
+          1.469792,
+          1.478167
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "shadow_lights": 1,
+        "casters": 1,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-1-1-h0ejzshh/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.869875,
+        "measured_frames": 30,
+        "median_ms": 1.464354,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.445541,
+        "p95_ms": 2.796875,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 2,
+          "model_triangles": 4,
+          "primitive_instances": 2
+        },
+        "sorted_samples_ms": [
+          1.445541,
+          1.4495829999999998,
+          1.452583,
+          1.452875,
+          1.453458,
+          1.454042,
+          1.454792,
+          1.456125,
+          1.457042,
+          1.4573749999999999,
+          1.457417,
+          1.459125,
+          1.460083,
+          1.462583,
+          1.463083,
+          1.465625,
+          1.4727080000000001,
+          1.475458,
+          1.4762499999999998,
+          1.4767919999999999,
+          1.477833,
+          1.482291,
+          1.4835829999999999,
+          1.4862499999999998,
+          1.492167,
+          1.492625,
+          1.492834,
+          2.574792,
+          2.796875,
+          2.869875
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "shadow_lights": 1,
+        "casters": 64,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-1-64-sjgbalnp/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.834833,
+        "measured_frames": 30,
+        "median_ms": 1.4639995,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.275917,
+        "p95_ms": 2.761709,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 65,
+          "model_triangles": 130,
+          "primitive_instances": 65
+        },
+        "sorted_samples_ms": [
+          1.275917,
+          1.447334,
+          1.451083,
+          1.452,
+          1.452458,
+          1.452917,
+          1.453041,
+          1.454208,
+          1.457292,
+          1.457292,
+          1.457875,
+          1.458459,
+          1.4585,
+          1.459084,
+          1.462791,
+          1.465208,
+          1.465875,
+          1.469459,
+          1.471792,
+          1.476583,
+          1.482708,
+          1.484792,
+          1.490292,
+          1.4910839999999999,
+          1.4959159999999998,
+          1.4985840000000001,
+          1.5068329999999999,
+          2.754709,
+          2.761709,
+          2.834833
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "shadow_lights": 4,
+        "casters": 64,
+        "project": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-shadow-bench-4-64-a4xtjaap/game.incant.json",
+        "camera": "1N61G1XF2V9Y9RJ3W4N7BBDRWV",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 3.2573749999999997,
+        "measured_frames": 30,
+        "median_ms": 3.112229,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 3.0417500000000004,
+        "p95_ms": 3.2429580000000002,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 2,
+          "model_entities": 65,
+          "model_triangles": 130,
+          "primitive_instances": 65
+        },
+        "sorted_samples_ms": [
+          3.0417500000000004,
+          3.0456659999999998,
+          3.058125,
+          3.067125,
+          3.0745,
+          3.083708,
+          3.0860420000000004,
+          3.090875,
+          3.090875,
+          3.093625,
+          3.103041,
+          3.105458,
+          3.107125,
+          3.108083,
+          3.1114580000000003,
+          3.113,
+          3.122792,
+          3.127709,
+          3.13625,
+          3.1492500000000003,
+          3.149916,
+          3.153292,
+          3.154333,
+          3.157334,
+          3.158833,
+          3.175542,
+          3.202792,
+          3.239292,
+          3.2429580000000002,
+          3.2573749999999997
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      }
+    ]
+  },
+  "native_final": {
+    "captures": {
+      "assets-separated-minimum.jpg": {
+        "pixels": [
+          2002,
+          1302
+        ],
+        "sha256": "55fb29155bd517a41922ee92367c8b3dac06abc82f9e2f20c12695c7b053acfc"
+      },
+      "assets-separated-wide.jpg": {
+        "pixels": [
+          1440,
+          900
+        ],
+        "sha256": "9f5be38a93466656a5be0e6ab7adb133e9acfd8e74df0746ec2e91b0f71fa206"
+      },
+      "disabled-minimum-focus.jpg": {
+        "pixels": [
+          2002,
+          1302
+        ],
+        "sha256": "be0f916b76b603d4c4de92d77279ad68b052a12ac697ca963d69f5a13c633702"
+      },
+      "disabled-minimum.jpg": {
+        "pixels": [
+          2002,
+          1302
+        ],
+        "sha256": "1cbb9ee12b1e28cea3d37532390ae452549bb6431de54b5230a0ecb0cb5c8009"
+      },
+      "disabled-wide.jpg": {
+        "pixels": [
+          1440,
+          900
+        ],
+        "sha256": "b84a2b251994a1301483210d67bd883236a3a5d4afe7e2c8841c49f29a83206a"
+      },
+      "enabled-minimum.jpg": {
+        "pixels": [
+          2002,
+          1302
+        ],
+        "sha256": "9a22909c1bde78823d7cc43d4104b22abcd57a709f373291f35b19d89f816a87"
+      },
+      "enabled-sun12-wide.jpg": {
+        "pixels": [
+          1440,
+          900
+        ],
+        "sha256": "cd5982a6961a88a953d271a5083b67b03b4b05e680827a623b969c3afd562564"
+      },
+      "lookdev-sun12-redo.jpg": {
+        "pixels": [
+          1440,
+          900
+        ],
+        "sha256": "ffb7aaaca07fa109fb01961477956cc1bb4589ce12a83c174bc4db26e4ba4bbb"
+      },
+      "lookdev-sun12.jpg": {
+        "pixels": [
+          1440,
+          900
+        ],
+        "sha256": "f485c08fab29989a04492cafaccb3fb3f53f20f40f927b117ddbe6bd95003dad"
+      },
+      "lookdev-sun38.jpg": {
+        "pixels": [
+          1440,
+          900
+        ],
+        "sha256": "b7a3c2558562f46249ab2c53db86ec44ff10c3d0e088cd209e20c2abc378b412"
+      },
+      "null-minimum.jpg": {
+        "pixels": [
+          2002,
+          1302
+        ],
+        "sha256": "88ced1855f1759960abea02d03757873c83eaf47243a66dec1fc4f82f67398e8"
+      },
+      "null-wide.jpg": {
+        "pixels": [
+          1440,
+          900
+        ],
+        "sha256": "b4f8211f49d2f8c22a5d5ada9de79a523690fc290614209398dbaa0a8a2e3421"
+      }
+    },
+    "capture_method": "CUA only",
+    "minimum": "1000x650 inner minimum enforced; built-in Retina quarter action yields2002x1302 device-pixel outer capture including border",
+    "settings": "60 m enabled; omitted/null Off with distinct accessible descriptions; read-only focus passes",
+    "viewport": "actual cooked look-dev scene, native default preview camera; sun12 to38 via Undo and back12 via Redo; zero errors",
+    "layout": "Assets left, asset details main Inspector, only Problems/Console/History in bottom output",
+    "saved_account": "restored without login or Keychain prompt",
+    "appearance_review": "pending Claude; images remain ignored"
   }
 }

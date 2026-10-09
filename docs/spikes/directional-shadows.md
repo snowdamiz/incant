@@ -20,17 +20,18 @@ pass. BLEND casters currently fail with a typed error before scene publication;
 setting cast_shadows=false allows blended geometry to render and receive shadows.
 Diagnostic fallback cubes do not cast. Point/spot shadows, adaptive quality,
 caster culling, animated/skinned geometry and production game/device performance
-gates remain open. The initial 3×3 comparison filter/bias awaits Claude look-dev.
+gates remain open. Claude's initial look-dev accepts the 3×3 comparison filter/bias with the thin-caster
+contact leak and distant thin-post aliasing documented in handoff 0021.
 
-Initial local verification passes 144 ordinary Rust tests, 38 GPU checks, 284 UI
+Integrated local verification passes 144 ordinary Rust tests, 40 GPU checks, 293 UI
 tests, Clippy, generated schemas/SDK and UI production build. New real GPU checks
 cover analytical occlusion, caster flags/range, retained scenes, offscreen
 casters, four-light capacity, alpha holes/reflection/sidedness, cascade overlap
 and distance fade, and reverse submission after scene/asset/source disposal.
 The public CLI authors/imports through the shared command bus; light/caster edits,
 Undo/Redo, atomic invalid batch rejection, journal reopening and source-free
-cached rendering pass. Full evidence, performance, Claude appearance review and
-native verification are still being completed. No release gate is claimed.
+cached rendering pass. Native verification and measurements are complete; final Claude appearance review
+and exact-head hosted checks remain pending. No release gate is claimed.
 
 Initial native checks show the enabled Sun's distance as 40 m in the read-only
 Inspector, an attached viewport and zero errors before/after output resizing.
@@ -44,10 +45,10 @@ warm-up and thirty measured frames per trial, give these medians of trial median
 
 | Enabled shadow suns | Imported quad casters | Median milliseconds |
 | --- | ---: | ---: |
-| 0 | 1 | 1.398 |
-| 1 | 1 | 1.479 |
-| 1 | 64 | 1.472 |
-| 4 | 64 | 3.109 |
+| 0 | 1 | 1.389 |
+| 1 | 1 | 1.470 |
+| 1 | 64 | 1.479 |
+| 4 | 64 | 3.096 |
 
 These are small analytical fixtures with an authored camera, not game scenes.
 They include CPU encoding, queue submission and a GPU completion fence, excluding
@@ -82,7 +83,19 @@ caster-bounds and geometry-version coherence across cache replacement.
 
 Claude recommended separating the shadow lookup offset from the normal-mapped
 shading normal. An analytical mirrored-normal fixture reproduces the old defect:
-the same geometric boundary changes by up to12 channel levels. Passing the
+the same geometric boundary changes by up to 12 channel levels. Passing the
 unperturbed interpolated surface normal to the shadow lookup fixes that test;
-BRDF and environment shading still use the normal map. Combined checks and
-Claude review of the correction remain pending.
+BRDF and environment shading still use the normal map. The full integrated suite passes, and all four original look-dev images remain
+pixel-identical. Final Claude review of the correction remains pending.
+
+
+Final CUA captures use the actual cooked look-dev geometry in the native editor
+at sun elevations 12° and 38°, changed live through Undo and restored with Redo.
+The native default preview camera differs from the authored headless camera.
+Wide captures measure 1440×900 pixels. Minimum checks on the built-in Retina
+display measure 2002×1302 device pixels including the border; the configured
+inner minimum is 1000×650 logical points. Enabled distance reads 60 m; omitted
+and explicit-null settings read Off with distinct accessible descriptions. The
+read-only field receives focus. Assets stays in the left workspace, and the
+bottom remains diagnostics only. No native errors or account prompts occurred.
+Captures and sanitized accessibility records await Claude's final review.

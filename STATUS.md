@@ -58,8 +58,9 @@ within its documented workload.
   alpha masks, reflection and sidedness; retained queued frames and cascade
   transitions pass real GPU checks. Public CLI edits, atomic invalid rejection,
   Undo/Redo, durable reopening and source-free cached captures pass. Initial
-  checks pass 144 Rust, 38 GPU and 284 UI tests plus Clippy. Performance and
-  native/visual evidence are still being completed; local-light shadows and
+  checks pass 144 Rust, 40 GPU and 293 UI tests plus Clippy. Native enabled/Off
+  states, separated Assets workspace and sun-angle Undo/Redo pass. Final timings
+  and captures are ready for Claude review; local-light shadows and
   adaptive quality remain open. See [directional shadows](docs/spikes/directional-shadows.md).
 
 - Real GPU passes now execute through a persistent Bevy ECS schedule with explicit

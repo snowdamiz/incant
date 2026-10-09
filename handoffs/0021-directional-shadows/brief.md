@@ -1,3 +1,45 @@
+# Priority final review — integrated native evidence
+
+Your initial commit 38aef10 is integrated as root 9f02f45. Review this follow-up
+first, then retain initial context below. The director's bottom-dock criticism
+remains binding: cramped asset rows beside compiler problems looked messy and
+unprofessional. The replacement must read as a dedicated asset workspace with
+consistent spacing, asset details in the main Inspector, diagnostics below.
+Review assets-separated-{wide,minimum}.jpg specifically; improve any real issue
+you see, without reintroducing Assets as a bottom output tab.
+
+New evidence copied to this worktree:
+- artifacts/shadow-native-final/: 12 actual CUA captures and sanitized AX. Read
+  README.md and dimensions.json. Minimum is Retina2002x1302 outer pixels with
+  configured1000x650 inner logical points; earlier initial minimum was misnamed.
+  Enabled, omitted, null and read-only focus; Assets separation; native actual
+  look-dev geometry at12/38 degrees, Undo/Redo. Native default preview camera,
+  not authored headless framing. Decide scoped native acceptance explicitly.
+- artifacts/shadow-normal-before/ and shadow-normal-after/: your mapped-normal
+  concern reproduced (81 central pixels, max12 levels) and fixed by Astra in
+  model_material.wgsl/lighting/shade.wgsl. tests/shadows/normal_offset.rs isolates
+  identical center-column BRDF with opposing tangent-X maps. Review correction.
+- artifacts/shadow-integrated/: final shadow captures; all four look-dev images
+  pixel-identical to your initial renders (shadow-lookdev-integrated-comparison.json).
+- artifacts/shadow-final-timing.json: final three-trial medians at1080p,
+  0sun/1caster1.389ms,1/1=1.470,1/64=1.479,4/64=3.096. This is a fenced
+  analytical frame probe, not a game performance gate. Raw samples retained.
+- Original comparison is122/124 exact after adding the omitted HDR unit capture;
+  your initial121/123 numbers were correct for the files originally supplied.
+  Updated shadow-pixel-comparison.json includes HDR; two known one-level pixels
+  unchanged. Stable corrected integration captures123/123 exact.
+
+Integrated verification already passes144 ordinary Rust,40 GPU (6unit,31render
+integration,2headless,1editor),293UI,5Python,Clippy,schema/SDK/bridge/conventions
+and final custom-protocol native build/package. The fixture export helper only
+copies this synthetic test project to an explicitly requested new directory.
+No runtime change. If final work is report-only, do not rerun unchanged suites.
+If changing code, run relevant checks using ./tools/cargo with --release and
+--locked; do not share target directories. Update result.md with final scoped
+verdict and remaining thin-caster limits. Commit with Built-by: claude. No merge.
+
+---
+
 # Directional shadows: look-dev, pixel review and Inspector presentation
 
 Claude Opus 5.5 through ACP owns appearance, UI and rendered-pixel review. Astra
