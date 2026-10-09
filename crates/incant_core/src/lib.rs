@@ -78,8 +78,8 @@ impl Engine {
     pub fn step(&mut self) -> Result<(), PhysicsError> {
         let mut physics = self.physics.lock().unwrap_or_else(|e| e.into_inner());
         physics.step(self.dt)?;
-        for (id, state) in physics.states() {
-            let entity = self.entities[&id];
+        for (id, state) in physics.state_iter() {
+            let entity = self.entities[id];
             let mut target = self.app.world_mut().entity_mut(entity);
             target.get_mut::<Position>().expect("physics position").0 = state.translation;
             target
@@ -169,8 +169,9 @@ impl Engine {
     /// ECS projection. Validation/decoding finish before any live entity changes.
     /// Existing Bevy entities and schedules are reused; no scripts receive World.
     pub fn sync(&mut self, project: &Project) -> Result<(), incant_doc::DocumentError> {
-        let staged = prepare(project)?;
-        let prepared_physics = PreparedPhysics::new(project)?;
+        let validated = project.validated()?;
+        let staged = prepare(validated)?;
+        let prepared_physics = PreparedPhysics::from_validated(validated)?;
         let mut physics = self.physics.lock().unwrap_or_else(|e| e.into_inner());
         physics.sync(prepared_physics);
         let physics_states = physics.states();

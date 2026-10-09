@@ -9,7 +9,8 @@
       },
       "maxItems": 3,
       "minItems": 3,
-      "type": "array"
+      "type": "array",
+      "x-incant-unit": "rad/s"
     }
   },
   "required": [

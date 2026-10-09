@@ -124,6 +124,7 @@ export type FieldSchema = {
       readonly minimum?: number;
       readonly maximum?: number;
       readonly 'x-incant-unit'?: string;
+      readonly 'x-incant-widget'?: 'collision-mask' | (string & {});
     }
   | { readonly type: 'boolean'; readonly title?: string; readonly description?: string }
   | {
@@ -133,6 +134,7 @@ export type FieldSchema = {
       readonly items: FieldSchema;
       readonly minItems?: number;
       readonly maxItems?: number;
+      readonly 'x-incant-unit'?: string;
       readonly 'x-incant-widget'?: 'vec2' | 'vec3' | 'vec4' | 'quat' | (string & {});
     }
   | {

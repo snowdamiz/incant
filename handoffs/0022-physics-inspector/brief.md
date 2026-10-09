@@ -1,3 +1,32 @@
+# Follow-up: shared annotations and one semantic correction
+
+Your d230009 is integrated as 02c7218. Astra has now added the requested units,
+mask widget metadata and field order in the Rust registry, regenerated schemas,
+and expanded the typed FieldSchema number/array metadata. Runtime/core has also
+removed duplicate validation/snapshot work, with unchanged final simulation state.
+
+Correction to the initial brief: **linear and angular damping are rates in 1/s**,
+not dimensionless. Rapier applies velocity/(1 + dt*damping). The generated schema
+now has accurate descriptions and 1/s units. Fix the fallback profile descriptions
+and refresh the fixture to include the current schema annotations, so the next
+browser review matches native spacing. Remove redundant hints when sensible.
+One-based collision group labels are correct. No native play controls exist yet;
+headless CLI motion is the supported runtime evidence, native is Inspector/static
+viewport review only.
+
+Also address a correctness point found during review: sectionKeys currently
+reorders fields according to profile keys even when the schema supplies an order,
+contrary to its documented precedence. Preserve the supplied field order while
+applying compatible grouping, including a small behavior test with a reordered
+schema. Do not merely change the comment to waive schema precedence.
+
+Run relevant UI checks and review updated body-unit pixels at wide/minimum.
+Append result.md, commit Built-by: claude. Native CUA captures will follow after
+integration; do not claim native acceptance yet. Do not rebuild unchanged Rust
+or regenerate the unchanged motion fixtures. Worktree has the latest integration.
+
+---
+
 # Physics Inspector presentation and real-engine look-dev
 
 Claude Opus 5.5 through ACP owns all visual decisions. Astra has implemented

@@ -47,7 +47,12 @@ struct Spec {
 pub struct PreparedPhysics(BTreeMap<String, BTreeMap<String, Spec>>);
 impl PreparedPhysics {
     pub fn new(project: &Project) -> Result<Self, DocumentError> {
-        project.validate()?;
+        Self::from_validated(project.validated()?)
+    }
+    pub fn from_validated(
+        validated: incant_doc::ValidatedProject<'_>,
+    ) -> Result<Self, DocumentError> {
+        let project = validated.project();
         let mut scenes = BTreeMap::new();
         for scene in project.scenes.values() {
             let mut entities = BTreeMap::new();
@@ -237,6 +242,14 @@ impl PhysicsRuntime {
         self.events.sort();
         self.overlaps = overlaps;
         Ok(())
+    }
+    pub fn state_iter(&self) -> impl Iterator<Item = (&str, &BodyState)> {
+        self.scenes.values().flat_map(|scene| {
+            scene
+                .entries
+                .iter()
+                .map(|(id, entry)| (id.as_str(), &entry.config.state))
+        })
     }
     pub fn states(&self) -> BTreeMap<String, BodyState> {
         self.scenes
