@@ -6,10 +6,11 @@ The complete engine/game release is not implemented. No phase gate is approved.
 ## Work in progress
 
 - Product landing page: standalone Vue/Vite/Tailwind website and push-to-main
-  GitHub Pages workflow in `codex/incant-landing`. Claude's visual review is
-  complete; the strict production build and all 22 browser checks pass. See
-  `docs/spikes/landing-page.md`. Director review/merge remains pending. This does
-  not advance an engine phase gate.
+  GitHub Pages workflow in `codex/incant-landing`, PR #2. The first version passes
+  the strict production build, all 22 browser checks and Linux CI. The director
+  rejected its visual design as generic; Claude's substantial revision 2 is in
+  progress. See `docs/spikes/landing-page.md`. Review/merge remains pending. This
+  does not advance an engine phase gate.
 - Pages activation was attempted on 2026-10-08 and GitHub returned HTTP 422:
   the current plan does not support Pages for this private repository. The
   director must choose a Pages-eligible plan or repository visibility before

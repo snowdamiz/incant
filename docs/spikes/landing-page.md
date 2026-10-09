@@ -53,6 +53,12 @@ handoff reference, test output, project document, or Rust artifact is included.
 
 ### Integrated website results
 
+The first version's GitHub Actions build also passed on Linux (run 37871614168).
+The director then rejected its appearance as generic and requested substantial
+refinement. The following results establish functional evidence for version 1;
+they do not imply acceptance of its design. Revision 2 is routed to Claude in the
+updated handoff packet.
+
 - Claude visual commit `7557c10` was integrated as `dc9c11b`, preserving its
   `Built-by: claude` provenance. Its templates, styles and artwork were retained.
 - The only cherry-pick conflict was the independently created Playwright config.

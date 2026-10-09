@@ -1,5 +1,53 @@
 # Incant product landing page
 
+## Revision 2 — director rejected the first design
+
+Latest feedback, verbatim:
+
+> the design needs to be heavily refined and improved. Right now it looks vibe coded and a bit generic
+
+This feedback supersedes the previous visual completion claim. The first version
+is committed as `7557c10` in this worktree and integrated in PR #2. Its functional
+checks pass, including Linux CI, but that does not satisfy the director's visual
+quality requirement. Do not defend the first result with test scores.
+
+Treat this as a substantial redesign, not another spacing adjustment. First
+critique your own original desktop and mobile renders: identify the specific
+composition, typography, content, illustration and repeated UI patterns that
+make it feel generic. Then choose and implement a materially stronger, coherent
+visual direction appropriate to a professional creative tool. You own that
+direction; do not ask Astra to make appearance decisions. The first screen and
+overall page structure should make the improvement unmistakable.
+
+Reconsider the first version's heavy purple glow, pill treatments, many rounded
+feature cards, decorative micro-labels, technical copy density, and conceptual
+editor's level of craft. Keep only elements justified by your new direction.
+Aim for restraint, distinctive typography, confident hierarchy, intentional
+spacing, a compelling product focal point and a considered reading rhythm.
+Avoid merely swapping colors or adding more decoration. Reduce copy and sections
+where they weaken the story. Preserve the wisp identity and the director's
+finished-product voice. You may replace the current artwork, change the theme,
+use a better licensed self-hosted font (pin dependencies and lockfile), and
+restructure components when that improves the result. Do not use another model.
+
+Write a short revision rationale in `handoffs/0005-landing-page/revision-2.md`,
+including your critique and what changed. Implement first, then review real
+desktop/mobile renders and interaction states. Preserve the original screenshots;
+save the new evidence under `screenshots/revision-2/`. Update `result.md` for the
+final result. Work efficiently: one substantial redesign pass followed by focused
+corrections to observed defects. Browser metrics alone are not visual acceptance.
+
+Integration notes: Astra already supplied the production workflow and portable
+Playwright config in the integration branch. Do not edit CI, Vite plumbing,
+`package.json` scripts, or `playwright.config.ts` in this revision. You may update
+your `tests/landing.spec.ts` for new interactions and the revision screenshot
+destination. Astra will adapt the independent behavioral tests if the design
+changes labels or control structure. Keep semantic navigation, a functional
+interaction, reduced motion and accessible mobile behavior. Use your existing
+worktree's `npx playwright test` for local visual evidence. Port 4176 is the user's
+existing integration preview; do not stop it. Manage only your own server on
+4175/5175 by its exact PID. No broad pkill commands.
+
 ## Director request and latest priority
 
 “Design a beautiful, professional, and modern landing page for this app, use vue,
