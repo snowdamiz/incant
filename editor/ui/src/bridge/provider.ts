@@ -1,25 +1,8 @@
 import type { HostRequest, ProviderAccount, ProviderState } from './contract';
 
-/**
- * Provider account requests described in handoff 0003. The shared HostRequest
- * union in editor/bridge/contract.ts does not list these shapes yet (it has only
- * `provider.connect {method, phase?}`); see handoffs/0003-openai-login/native-requests.md.
- * Every field is nonsecret: ids and flags only, never a token, code or URL.
- */
-export type ProviderRequest =
-  | {
-      readonly type: 'provider.connect';
-      readonly method: 'oauth';
-      /** Resume or reauthorize this saved registration. Omitted: the host's selected one. */
-      readonly accountId?: string;
-      /** True registers another account instead of resuming the selected one. */
-      readonly add?: boolean;
-    }
-  | { readonly type: 'provider.cancel' }
-  | { readonly type: 'provider.disconnect' }
-  | { readonly type: 'provider.switch'; readonly accountId: string };
+/** Host requests that manage the ChatGPT account. Ids and flags only, never a token, code or URL. */
+export type ProviderRequest = Extract<HostRequest, { readonly type: `provider.${string}` }>;
 
-export type AnyHostRequest = HostRequest | ProviderRequest;
 
 export type ProviderTone = 'neutral' | 'pending' | 'ok' | 'error';
 
@@ -30,11 +13,15 @@ export function savedAccounts(state: ProviderState): readonly ProviderAccount[] 
   return [];
 }
 
-/** Label of the selected account, if the host told us which one it is. */
-export function activeLabel(state: ProviderState): string | null {
+/**
+ * The signed-in account, if any. The host sends `activeAccount` only while an
+ * account is signed in, including during an add attempt or after a failed one.
+ * A signed-out saved registration is never reported as active.
+ */
+export function signedInLabel(state: ProviderState): string | null {
   if (state.status === 'connected') return state.accountLabel;
-  const match = state.accounts?.find((account) => account.id === state.activeAccount);
-  return match ? match.label : null;
+  if (state.activeAccount === undefined) return null;
+  return state.accounts?.find((account) => account.id === state.activeAccount)?.label ?? null;
 }
 
 /** Short status for the titlebar chip. */
@@ -50,6 +37,6 @@ export function providerSummary(state: ProviderState | undefined): { tone: Provi
     case 'connected':
       return { tone: 'ok', text: state.accountLabel };
     case 'error':
-      return { tone: 'error', text: 'Sign-in problem' };
+      return { tone: 'error', text: 'Needs attention' };
   }
 }

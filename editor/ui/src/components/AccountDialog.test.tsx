@@ -4,7 +4,6 @@ import { describe, expect, it } from 'vitest';
 import { App } from '../App';
 import type { BridgeResult, BridgeSnapshot, EditorBridge, HostRequest, ProviderState } from '../bridge/contract';
 import { createFixtureBridge, fixtureSnapshot } from '../bridge/fixture';
-import type { AnyHostRequest } from '../bridge/provider';
 import { PROVIDER_FIXTURES, PROVIDER_FIXTURE_NAMES, simulateProvider } from '../bridge/providerFixture';
 import { resolveBridge } from '../bridge/resolve';
 
@@ -15,7 +14,7 @@ const PROVIDER_CAPS = ['provider.connect', 'provider.cancel', 'provider.disconne
  * test publish provider states, as the native host does via incant:provider-changed.
  */
 function providerBridge(initial: ProviderState, options: { capabilities?: string[]; reply?: BridgeResult } = {}) {
-  const requests: AnyHostRequest[] = [];
+  const requests: HostRequest[] = [];
   const listeners = new Set<() => void>();
   let snapshot: BridgeSnapshot = { ...fixtureSnapshot('sample'), provider: initial };
   const bridge: EditorBridge = {
@@ -30,7 +29,7 @@ function providerBridge(initial: ProviderState, options: { capabilities?: string
     },
     dispatch: () => Promise.resolve({ ok: true }),
     request: (request: HostRequest) => {
-      requests.push(request as AnyHostRequest);
+      requests.push(request);
       return Promise.resolve(options.reply ?? { ok: true });
     },
   };
@@ -63,7 +62,8 @@ describe('ChatGPT account dialog', () => {
     const d = openDialog();
     const cta = within(d).getByRole('button', { name: 'Continue with ChatGPT' });
     expect(document.activeElement).toBe(cta);
-    expect(within(d).getByText(/stay signed in when you quit, restart or update Incant/)).toBeTruthy();
+    expect(within(d).getByText(/stay signed in on this computer when you quit, restart or install a new build of Incant/)).toBeTruthy();
+    expect(within(d).getByText(/never saved in your projects/)).toBeTruthy();
     expect(within(d).getByText(/works offline, without an account/)).toBeTruthy();
     await expectNoAxeViolations(document.body);
     fireEvent.click(cta);
@@ -143,11 +143,11 @@ describe('ChatGPT account dialog', () => {
   it('error: shows the exact host message and code, and retries', async () => {
     const { bridge, requests } = providerBridge(PROVIDER_FIXTURES.error);
     renderBridge(bridge);
-    expect(chip().textContent).toContain('Sign-in problem');
+    expect(chip().textContent).toContain('Needs attention');
     const d = openDialog();
     const alert = within(d).getByRole('alert');
     expect(alert.textContent).toContain('Could not open the default browser: no handler is registered for https links.');
-    expect(alert.textContent).toContain('oauth.browser_launch');
+    expect(alert.textContent).toContain('provider.auth');
     fireEvent.click(within(d).getByRole('button', { name: 'Continue with ChatGPT' }));
     await waitFor(() => expect(requests).toEqual([{ type: 'provider.connect', method: 'oauth' }]));
   });
@@ -221,14 +221,64 @@ describe('provider fixtures', () => {
     }
   });
 
-  it('simulates cancel, switch and add without inventing accounts', () => {
+  it('simulates the host: cancelling an add keeps the earlier account, signing out leaves no active account', () => {
     const multi = PROVIDER_FIXTURES['signed-in-multi'];
-    expect(simulateProvider(PROVIDER_FIXTURES.browser, { type: 'provider.cancel' }).status).toBe('not-connected');
-    const switched = simulateProvider(multi, { type: 'provider.switch', accountId: 'acct-fixture-1' });
-    expect(switched).toMatchObject({ status: 'connected', accountLabel: 'ada@example.com', activeAccount: 'acct-fixture-1' });
-    expect(simulateProvider(multi, { type: 'provider.switch', accountId: 'missing' })).toBe(multi);
+    expect(simulateProvider(PROVIDER_FIXTURES.browser, { type: 'provider.cancel' })).toEqual({ status: 'not-connected', provider: 'openai' });
     const adding = simulateProvider(multi, { type: 'provider.connect', method: 'oauth', add: true });
     expect(adding).toMatchObject({ status: 'connecting', phase: 'browser', activeAccount: multi.activeAccount });
-    expect(adding.accounts).toHaveLength(3);
+    expect(simulateProvider(adding, { type: 'provider.cancel' })).toMatchObject({ status: 'connected', accountLabel: 'studio@example.org' });
+    const signedOut = simulateProvider(multi, { type: 'provider.disconnect' });
+    expect(signedOut.status).toBe('not-connected');
+    expect(signedOut.activeAccount).toBeUndefined();
+    expect(signedOut.accounts).toHaveLength(3);
+    const switched = simulateProvider(signedOut, { type: 'provider.switch', accountId: 'acct-fixture-1' });
+    expect(switched).toMatchObject({ status: 'connected', accountLabel: 'ada@example.com', activeAccount: 'acct-fixture-1' });
+    expect(simulateProvider(multi, { type: 'provider.switch', accountId: 'missing' })).toBe(multi);
+  });
+
+  it('signed-out fixtures never name an active account', () => {
+    for (const state of Object.values(PROVIDER_FIXTURES)) {
+      if (state.status === 'not-connected' || state.status === 'checking') expect('activeAccount' in state).toBe(false);
+    }
+  });
+});
+
+describe('account semantics in the dialog', () => {
+  it('signed out with saved accounts: none is marked in use, and each offers sign-in', async () => {
+    const { bridge, requests } = providerBridge(PROVIDER_FIXTURES['signed-out-saved']);
+    renderBridge(bridge);
+    const d = openDialog();
+    expect(d.querySelector('[aria-current]')).toBeNull();
+    expect(within(d).queryByText('In use')).toBeNull();
+    expect(within(d).getByText(/Remote revocation could not be confirmed/)).toBeTruthy();
+    fireEvent.click(within(d).getByRole('button', { name: 'Sign in as studio@example.org' }));
+    await waitFor(() => expect(requests).toEqual([{ type: 'provider.switch', accountId: 'acct-fixture-2' }]));
+  });
+
+  it('adding while signed in: says the current account stays in use, and cancel keeps it', async () => {
+    const { bridge, requests, publish } = providerBridge(PROVIDER_FIXTURES['adding-browser']);
+    renderBridge(bridge);
+    const d = openDialog();
+    expect(within(d).getByText(/You are still signed in as/).textContent).toContain('ada@example.com');
+    expect(within(d).getByText(/Cancelling keeps it in use/)).toBeTruthy();
+    fireEvent.click(within(d).getByRole('button', { name: 'Cancel sign-in' }));
+    await waitFor(() => expect(requests).toEqual([{ type: 'provider.cancel' }]));
+    publish(simulateProvider(PROVIDER_FIXTURES['adding-browser'], { type: 'provider.cancel' }));
+    expect(within(d).getByText('Signed in')).toBeTruthy();
+    expect(d.querySelector('[aria-current="true"]')!.textContent).toContain('ada@example.com');
+  });
+
+  it('a failed add or switch while signed in keeps the account in use', async () => {
+    const { bridge, requests } = providerBridge(PROVIDER_FIXTURES['error-while-signed-in']);
+    renderBridge(bridge);
+    const d = openDialog();
+    expect(within(d).getByText("That didn't finish")).toBeTruthy();
+    expect(within(d).getByText(/You are still signed in as/).textContent).toContain('ada@example.com');
+    expect(within(d).getByRole('alert').textContent).toContain('The sign-in window expired after 5 minutes.');
+    expect(d.querySelector('[aria-current="true"]')!.textContent).toContain('In use');
+    const retry = within(d).getByRole('button', { name: 'Add another account' });
+    expect(document.activeElement).toBe(retry);
+    fireEvent.click(retry);
+    await waitFor(() => expect(requests).toEqual([{ type: 'provider.connect', method: 'oauth', add: true }]));
   });
 });

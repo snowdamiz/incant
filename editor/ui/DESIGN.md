@@ -122,9 +122,12 @@ Both are bundled locally, so nothing is fetched from a network.
 - **ChatGPT account (handoff 0003):** the titlebar chip shows a status dot, "ChatGPT"
   and the account or state, and opens a 460 px modal. The modal has one status row
   (36 px badge, headline, one sentence), host errors verbatim with their code on a
-  second mono line, a bordered list of saved accounts where the active one is filled
-  and marked "In use", then actions and two facts: sign-in is kept on this computer,
-  and everything but the agent works offline. "Continue with ChatGPT" uses OpenAI's
+  second mono line, a bordered list of saved accounts where only a signed-in account
+  is filled and marked "In use" (signed-out registrations offer "Sign in", never an
+  active mark), then actions and three facts: you stay signed in across restarts and
+  new builds, sign-in is never in projects and the computer may ask once for access
+  after Incant changes, and everything but the agent works offline. While adding an
+  account, a note says the current one stays in use and cancelling keeps it. "Continue with ChatGPT" uses OpenAI's
   white button format. Sign-out asks inline first. Escape closes without cancelling a
   sign-in; "Cancel sign-in" is explicit. No field ever accepts a token, code or key.
 - **Notices:** absent, connecting and lost engine states show as one rounded strip

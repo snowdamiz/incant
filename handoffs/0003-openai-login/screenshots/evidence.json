@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T01:14:20.150Z",
+  "generatedAt": "2026-10-09T01:23:56.199Z",
   "browser": "Chrome 155.0.8059.40 (headless)",
   "screenshots": [
     {
@@ -83,6 +83,22 @@
       "description": "Account dialog opened from the titlebar, error"
     },
     {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-adding-browser.png",
+      "description": "Titlebar account chip, adding-browser"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-adding-browser.png",
+      "description": "Account dialog opened from the titlebar, adding-browser"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/titlebar-error-while-signed-in.png",
+      "description": "Titlebar account chip, error-while-signed-in"
+    },
+    {
+      "file": "handoffs/0003-openai-login/screenshots/dialog-error-while-signed-in.png",
+      "description": "Account dialog opened from the titlebar, error-while-signed-in"
+    },
+    {
       "file": "handoffs/0003-openai-login/screenshots/focus-signed-out-initial.png",
       "description": "Initial focus on Continue with ChatGPT after opening with Enter"
     },
@@ -150,6 +166,14 @@
     },
     {
       "label": "dialog error",
+      "violations": []
+    },
+    {
+      "label": "dialog adding-browser",
+      "violations": []
+    },
+    {
+      "label": "dialog error-while-signed-in",
       "violations": []
     },
     {

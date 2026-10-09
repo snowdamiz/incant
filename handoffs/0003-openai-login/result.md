@@ -1,136 +1,154 @@
 # Result: handoff 0003, ChatGPT account UI
 
-Status: **UI delivered for integration; native verification not done.** The account
-interface is implemented, tested and inspected in a real browser against explicit
-fixtures. No native host in this worktree advertises `provider.*` yet, so nothing here
-is native evidence. Phase gate approval is not claimed.
+Status: **UI follow-up delivered; native UI not verified.** The account interface
+matches the host semantics Astra confirmed in 86aa0da. It is tested and was inspected
+in a real browser against explicit fixtures. No native screenshot was taken in this
+packet, so nothing here is native evidence. Phase gate approval is not claimed.
 
 Model: Claude Opus 5.5 (`claude-opus-5-5`), run through Claude Code in this worktree
 with the director's bypassPermissions authorization. No other model was substituted.
 
-## Director feedback acknowledged
+Commits by Claude: 35f3527 holds the first UI. The follow-up is a separate commit on
+top of Astra's 86aa0da, which remains attributed to Astra.
 
-- OpenAI authentication is the priority. This packet delivers the full sign-in UI
-  first; polish items were limited to the account surface.
-- Traffic-light y22 and the other 0002 refinements are untouched. No titlebar layout,
-  inset or native code was changed. The chip changed from a span to a button with the
-  same height and position.
-- No credentials were read, no account consent was started, and no external account
-  was changed. Fixture labels are invented `example.com/org/net` addresses.
+## Follow-up after 35f3527 (priority revision)
+
+I read Astra's response at the end of native-requests.md first. I left that file
+unstaged because the text is Astra's. The shared contract is untouched.
+
+- **Local request type and cast removed.** The UI now uses the shared `HostRequest`
+  directly. `ProviderRequest` in `editor/ui/src/bridge/provider.ts` is only a narrowing
+  alias of the shared union. It does not duplicate any shape.
+- **Signed-out saved accounts carry no active account.** Rows for those accounts offer
+  "Sign in", which sends `provider.switch`. No row is marked "In use" while signed out.
+  The fallback that marked a lone account as active is gone, and so is the label
+  "Selected, signed out".
+- **Cancelling an add keeps the earlier account.** While adding an account, the dialog
+  says you are still signed in as that account and that cancelling keeps it in use.
+  The fixture simulation returns to that account on cancel, as the host does.
+- **Failed add or switch while signed in.** The headline is "That didn't finish" and
+  the body says you are still signed in as the account. That account stays marked
+  "In use". The retry is "Add another account", since the failed action could also
+  have been a switch.
+- **Error without a signed-in account.** The headline is "Sign-in didn't finish". The
+  body drops "Nothing was changed", which the UI cannot know.
+- **Chip.** Any error now reads "Needs attention" instead of "Sign-in problem".
+- **Persistence copy.** It promises the sign-in survives restarts and new builds. It
+  does not promise the absence of operating system prompts. It is now three short
+  facts:
+  - You stay signed in on this computer when you quit, restart or install a new build
+    of Incant.
+  - Your sign-in is never saved in your projects. After Incant changes, your computer
+    may ask once to allow access to it.
+  - Everything except the agent works offline, without an account.
+- **Sign-out confirmation.** It now adds that other saved accounts stay listed.
+- **Fixtures.** They follow `editor/app/src/provider.rs`. The new `adding-browser` and
+  `error-while-signed-in` states were added. Error codes are `provider.auth`, the API
+  key label is "Personal API key", and the signed-out message is the host's
+  remote-revocation text.
+
+### Native review not done, and why
+
+I did not build or launch my own worktree app. The host's `restore` action runs at
+launch and on every window focus. It reads the shared account store in the user
+config directory, loads the keychain record, and refreshes the access token. In my
+app that would mean reading credentials and possibly refreshing the director's token
+while they validate login in the main checkout. It could also raise Keychain prompts
+for them and show their personal account. None of these can be ruled out while they
+may be signing in. Following the brief's alternative, I continued fixture polish.
+**No native state is claimed as tested.**
+
+Astra can capture the signed-out native UI safely by launching with a store that has
+no accounts.
 
 ## What the user sees
 
-- **Titlebar chip.** It shows a status dot, "ChatGPT", and the account or state:
-  "Checking…", "Sign in", "Waiting for browser…", "Finishing sign-in…", the account
-  label, or "Sign-in problem". It opens the account dialog.
-- **Account dialog** (modal, focus trapped, Escape closes, focus returns to the opener):
+- **Titlebar chip.** It shows a status dot, "ChatGPT", and either the account or the
+  state: "Checking…", "Sign in", "Waiting for browser…", "Finishing sign-in…" or
+  "Needs attention". It opens the account dialog.
+- **Account dialog.** It is modal, focus is trapped, and Escape closes it and returns
+  focus to the opener. Escape never cancels a sign-in.
   - **Checking:** a spinner and "Checking for a saved sign-in…".
-  - **Signed out:** a white "Continue with ChatGPT" button, plus "Add another account"
-    when saved registrations exist. A host `message` shows as an info note.
-  - **Browser wait:** "Continue in your browser", with "Open browser again" and
-    "Cancel sign-in". The copy says no code is ever copied into the editor.
-  - **Validating:** "Finishing sign-in…", with "Cancel sign-in".
-  - **Connected:** "Signed in" with the account, a saved-accounts list marking the
-    active one "In use", "Use" on the others, "Add another account", and "Sign out".
-    Sign-out asks inline first, and Escape backs out of that question.
-  - **Error:** the host's exact message with its code on a second line, and
-    "Continue with ChatGPT" to retry.
-  - **Every state:** "Your sign-in is kept on this computer, so you stay signed in when
-    you quit, restart or update Incant. It is never saved in your projects." It also
-    says everything except the agent works offline.
-- **Agent panel.** When signed out, the composer bar has "Continue with ChatGPT". It
-  starts sign-in and opens the dialog. While signing in or after an error, a status
-  button reopens the dialog.
-- **Rejected requests.** A rejected host request shows inline in the dialog with the
-  exact host error. Missing capabilities are explained, and no request is sent.
-- **No secret entry.** No input exists for API keys, tokens or codes. A connection
-  made with an API key from the command line shows as "Connected with an API key".
+  - **Signed out:** a white "Continue with ChatGPT" button. Saved accounts are listed
+    with "Sign in" buttons, plus "Add another account". Host messages appear verbatim.
+  - **Browser wait:** "Open browser again", which relaunches the same pending attempt,
+    and "Cancel sign-in". The copy says no code is ever copied into the editor.
+  - **Validating:** "Finishing sign-in…" and "Cancel sign-in".
+  - **Connected:** the active account is marked "In use", and other accounts offer
+    "Use". "Add another account" is available. "Sign out" asks inline first.
+  - **Error:** the host's exact message, with its code on a second line.
+- **Agent panel.** When signed out, it shows "Continue with ChatGPT". While signing in
+  or after an error, a status button reopens the dialog.
+- **No secret entry.** No state has any text input. A connection made with an API key
+  from the command line shows as connected.
 
 ## Branding
 
-I read OpenAI's Sign in with ChatGPT pages before branding:
-developers.openai.com/siwc/quickstart, /siwc/website and /siwc/ui-ux-guidelines.
+I read OpenAI's Sign in with ChatGPT pages: developers.openai.com/siwc/quickstart,
+/siwc/website and /siwc/ui-ux-guidelines. They approve "Continue with ChatGPT" on
+white or black with the ChatGPT logo. The UI uses the white button. No approved logo
+file is published, and I did not redraw OpenAI's mark, so the button stays text-only.
 
-- They approve four formats: "Continue with ChatGPT" or "Sign in with ChatGPT", on
-  black or white, each with the ChatGPT logo.
-- The UI uses "Continue with ChatGPT" on white, which reads as primary on the dark
-  shell.
-- **Limitation:** the pages publish no logo file or usage spec. I did not redraw
-  OpenAI's mark, so the button is text-only until an approved asset is supplied.
-- openai.com/brand returned HTTP 403 and could not be read.
+## Changed paths in the follow-up
 
-## Changed paths
-
-- `editor/ui/src/components/AccountDialog.tsx` is new. It holds the dialog and the
-  `ChatGPTButton`.
-- `editor/ui/src/components/AccountDialog.test.tsx` is new and has 14 tests.
-- `editor/ui/src/bridge/provider.ts` is new. It holds the request shapes that are
-  missing from `HostRequest` (see native-requests.md N1) and status helpers.
-- `editor/ui/src/bridge/providerFixture.ts` is new. It holds the simulated account
-  states, selected with `?fixture=sample&provider=<state>`.
-- `editor/ui/src/bridge/resolve.ts` gains labels for the new capabilities, which also
-  fixes the typecheck the contract change broke. It also adds the `provider=` parameter.
-- `editor/ui/src/shell/ShellContext.tsx` adds `request` (returns the host result),
-  widens `ask`, and owns the account dialog's open state and focus return.
-- `editor/ui/src/components/ProviderChip.tsx`, `AgentPanel.tsx`, `src/App.tsx`,
-  `src/icons/Icon.tsx` (external, plus, signOut), `src/styles/app.css` and
-  `src/bridge/fixture.ts` were updated, as were the agent copy and `src/App.test.tsx`.
+- `editor/ui/src/bridge/provider.ts` now holds the narrowing alias and
+  `signedInLabel`, which replaced `activeLabel`. The chip summary changed.
+- `editor/ui/src/bridge/providerFixture.ts` has host-faithful states and simulation.
+- `editor/ui/src/shell/ShellContext.tsx` no longer has the cast or the widened type.
+- `editor/ui/src/components/AccountDialog.tsx` has the copy and active-account
+  changes.
+- `editor/ui/src/components/AccountDialog.test.tsx` has six new tests and updates.
+- `editor/ui/scripts/account-evidence.mjs` captures the two new states.
 - `editor/ui/DESIGN.md` documents the account component.
-- `editor/ui/scripts/account-evidence.mjs` is new and produces the browser evidence.
-- `handoffs/0003-openai-login/native-requests.md`, `result.md` and `screenshots/` are new.
+- `handoffs/0003-openai-login/result.md` and `screenshots/` were updated.
 
 ## Commands and results
 
-Run from `editor/ui`:
+Run from `editor/ui` after the follow-up:
 
 ```
-npm run typecheck                      # pass (tsc strict, exactOptionalPropertyTypes)
-npx vitest run                         # 7 files, 174 tests passed
-npm run build                          # pass; JS 296.6 kB (91.4 kB gzip), CSS 43.6 kB (8.3 kB gzip)
-node scripts/account-evidence.mjs      # 28 screenshots, 11 axe runs, 0 violations
+npm run typecheck                    # pass (strict, exactOptionalPropertyTypes)
+npx vitest run                       # 7 files, 180 tests passed
+npm run build                        # pass
+node scripts/account-evidence.mjs    # 32 screenshots, 13 axe runs, 0 violations
 ```
 
-- **Axe.** Real-browser axe initially found `label-content-name-mismatch` on the
-  chip. I fixed it, and the final run is clean, with color contrast included.
-- **Unit tests** cover the request each action sends and initial focus. They also
-  cover focus recovery when host state changes, Escape not cancelling sign-in, the
-  inline sign-out confirmation, verbatim errors, and that no state renders a text
-  input. They check that browser storage stays empty, fixtures hold no
-  credential- or URL-shaped strings, and plain fixtures still advertise nothing.
+The new tests cover these behaviors:
+- Signed-out saved accounts show no "In use" mark, and "Sign in as" sends a switch.
+- While adding, the dialog shows the "still signed in" note, and cancel returns to
+  the earlier account.
+- A failed add while signed in keeps the account in use.
+- The simulation keeps the account on cancel during an add, and signing out leaves
+  no active account.
+- No signed-out fixture names an active account.
 
 ## Screenshots
 
-These are browser fixture captures from headless Chrome 155 at device pixel ratio 2.
-They are not native. All are in `handoffs/0003-openai-login/screenshots/`, with
-metadata in `evidence.json`:
+These are browser fixture captures from headless Chrome at device pixel ratio 2.
+They are not native. All are in `handoffs/0003-openai-login/screenshots/`:
 
-- `dialog-<state>.png` and `titlebar-<state>.png` for checking, signed-out,
-  signed-out-saved, browser, validating, signed-in, signed-in-multi,
-  signed-in-cli-key and error.
+- `dialog-<state>.png` and `titlebar-<state>.png` for each state:
+  - checking, signed-out, signed-out-saved
+  - browser, validating, adding-browser
+  - signed-in, signed-in-multi, signed-in-cli-key
+  - error, error-while-signed-in
 - `window-signed-out.png`, `window-signed-in-multi.png` and
-  `window-narrow-signed-in-multi.png` at 900x600.
+  `window-narrow-signed-in-multi.png`.
 - `dialog-signed-in-multi-confirm-signout.png` and `focus-signed-out-initial.png`.
 - `agent-{signed-out,browser,error,signed-in}.png` and `flow-agent-continue.png`.
 
-Issues found by inspecting the renders and fixed: the error code broke mid-word, and a
-redundant "Not now" button sat orphaned under the full-width retry button.
+Inspecting the renders led to three fixes. The retention note ran four lines and was
+split. A retry label assumed the failed action was an add. Earlier, the error code
+broke mid-word.
 
-## Not done, and why
+## Limitations and open questions
 
-- **Native verification.** No native host here advertises `provider.*` or emits
-  `incant:provider-changed`. Native captures are listed for Astra in
-  native-requests.md N3.
-- **Live sign-in.** Out of scope by instruction. The director signs in.
-- **ChatGPT logo in the button.** No approved asset is available.
-- **Native window screenshots.** None were taken in this packet, so no other Incant
-  instance was touched.
-
-## Open questions
-
-1. Please add the provider request shapes to the shared `HostRequest` (N1).
-2. Please confirm the host semantics in N2, especially that disconnect signs out only
-   the active account and that a repeat connect relaunches the browser.
-3. Can the director supply an approved ChatGPT logo asset for the button?
-4. After the director signs in, should the agent panel show "Using ChatGPT plan" near
-   the composer, as OpenAI's guidelines suggest? That needs `agent.send` to be live
-   first.
+1. **Native UI.** It is unverified for the reason above.
+2. **Default connect.** With saved accounts but no active one, "Continue with ChatGPT"
+   resumes the host's selected registration, which the UI cannot name. Astra: should
+   the state expose that selection as a separate nonsecret field, distinct from
+   `activeAccount`? The UI could then say which account the button resumes.
+3. **Logo.** The ChatGPT logo is missing from the button until an approved asset is
+   supplied.
+4. **Agent panel error label.** After an error it still says "Sign-in problem…", even
+   when an account is still signed in. A follow-up could align it with the chip.

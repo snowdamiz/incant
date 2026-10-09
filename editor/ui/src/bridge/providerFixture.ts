@@ -12,12 +12,16 @@ import type { AgentState, BridgeResult, BridgeSnapshot, EditorBridge, HostReques
 import { UI_PROTOCOL_VERSION } from './contract';
 import type { FixtureVariant } from './fixture';
 import { fixtureSnapshot } from './fixture';
-import type { AnyHostRequest } from './provider';
 
 const ADA: ProviderAccount = { id: 'acct-fixture-1', label: 'ada@example.com' };
 const STUDIO: ProviderAccount = { id: 'acct-fixture-2', label: 'studio@example.org' };
 const LONG: ProviderAccount = { id: 'acct-fixture-3', label: 'a.very.long.account.name.for.wrapping@example.net' };
 
+/**
+ * Mirrors editor/app/src/provider.rs (Astra, 86aa0da): `activeAccount` is present
+ * only while an account is signed in, including while another one is being added
+ * or after a failed add/switch. Signed-out saved registrations carry no active id.
+ */
 export const PROVIDER_FIXTURES = {
   checking: { status: 'checking', provider: 'openai' },
   'signed-out': { status: 'not-connected', provider: 'openai' },
@@ -25,11 +29,11 @@ export const PROVIDER_FIXTURES = {
     status: 'not-connected',
     provider: 'openai',
     accounts: [ADA, STUDIO],
-    activeAccount: ADA.id,
-    message: 'Your saved sign-in for ada@example.com has expired. Continue to sign in again.',
+    message: 'Signed out on this computer. Remote revocation could not be confirmed; you can also disconnect Incant in ChatGPT Settings.',
   },
   browser: { status: 'connecting', provider: 'openai', method: 'oauth', phase: 'browser' },
   validating: { status: 'connecting', provider: 'openai', method: 'oauth', phase: 'validating' },
+  'adding-browser': { status: 'connecting', provider: 'openai', method: 'oauth', phase: 'browser', accounts: [ADA], activeAccount: ADA.id },
   'signed-in': { status: 'connected', provider: 'openai', method: 'oauth', accountLabel: ADA.label, accounts: [ADA], activeAccount: ADA.id },
   'signed-in-multi': {
     status: 'connected',
@@ -39,12 +43,18 @@ export const PROVIDER_FIXTURES = {
     accounts: [ADA, STUDIO, LONG],
     activeAccount: STUDIO.id,
   },
-  'signed-in-cli-key': { status: 'connected', provider: 'openai', method: 'api-key', accountLabel: 'Command-line API key' },
+  'signed-in-cli-key': { status: 'connected', provider: 'openai', method: 'api-key', accountLabel: 'Personal API key' },
   error: {
     status: 'error',
     provider: 'openai',
-    error: { code: 'oauth.browser_launch', message: 'Could not open the default browser: no handler is registered for https links.' },
+    error: { code: 'provider.auth', message: 'Could not open the default browser: no handler is registered for https links.' },
     accounts: [ADA],
+  },
+  'error-while-signed-in': {
+    status: 'error',
+    provider: 'openai',
+    error: { code: 'provider.auth', message: 'The sign-in window expired after 5 minutes.' },
+    accounts: [ADA, STUDIO],
     activeAccount: ADA.id,
   },
 } as const satisfies Record<string, ProviderState>;
@@ -75,25 +85,26 @@ function extras(accounts: readonly ProviderAccount[] | undefined, activeAccount:
   return { ...(accounts ? { accounts } : {}), ...(activeAccount !== undefined ? { activeAccount } : {}) };
 }
 
-/** Pure simulation of host behavior, exported for tests. */
-export function simulateProvider(state: ProviderState, request: AnyHostRequest): ProviderState {
-  const keep = extras(state.accounts, state.activeAccount);
+/** The signed-in state for `activeAccount`, or signed out when there is none (as the host does). */
+function settled(accounts: readonly ProviderAccount[] | undefined, activeAccount: string | undefined): ProviderState {
+  const active = accounts?.find((account) => account.id === activeAccount);
+  if (active) return { status: 'connected', provider: 'openai', method: 'oauth', accountLabel: active.label, ...extras(accounts, active.id) };
+  return { status: 'not-connected', provider: 'openai', ...extras(accounts, undefined) };
+}
+
+/** Pure simulation of host behavior, exported for tests. Never completes a sign-in. */
+export function simulateProvider(state: ProviderState, request: HostRequest): ProviderState {
   switch (request.type) {
     case 'provider.connect':
-      return {
-        status: 'connecting',
-        provider: 'openai',
-        method: 'oauth',
-        phase: 'browser',
-        ...extras(state.accounts, 'add' in request && request.add ? state.activeAccount : (('accountId' in request ? request.accountId : undefined) ?? state.activeAccount)),
-      };
+      // A pending attempt keeps any signed-in account; it stays in use until a new one is verified.
+      return { status: 'connecting', provider: 'openai', method: 'oauth', phase: 'browser', ...extras(state.accounts, state.activeAccount) };
     case 'provider.cancel':
+      return settled(state.accounts, state.activeAccount);
     case 'provider.disconnect':
-      return { status: 'not-connected', provider: 'openai', ...keep };
+      return settled(state.accounts, undefined);
     case 'provider.switch': {
       const account = state.accounts?.find((candidate) => candidate.id === request.accountId);
-      if (!account) return state;
-      return { status: 'connected', provider: 'openai', method: 'oauth', accountLabel: account.label, ...extras(state.accounts, account.id) };
+      return account ? settled(state.accounts, account.id) : state;
     }
     default:
       return state;
@@ -115,9 +126,8 @@ export function createProviderFixtureBridge(variant: FixtureVariant, provider: P
     },
     dispatch: () => Promise.resolve(READ_ONLY),
     request: (request: HostRequest) => {
-      const any = request as AnyHostRequest;
-      if (!any.type.startsWith('provider.')) return Promise.resolve(READ_ONLY);
-      snapshot = withProvider(snapshot, simulateProvider(snapshot.provider, any));
+      if (!request.type.startsWith('provider.')) return Promise.resolve(READ_ONLY);
+      snapshot = withProvider(snapshot, simulateProvider(snapshot.provider, request));
       for (const listener of listeners) listener();
       return Promise.resolve(OK);
     },
