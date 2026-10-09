@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+/* Latin-only variable fonts, bundled locally to keep the payload small. */
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Ink: the night-sky neutrals the page is set on. */
+  --color-ink-950: #08070f;
+  --color-ink-900: #0d0b18;
+  --color-ink-850: #120f20;
+  --color-ink-800: #18142a;
+  --color-ink-700: #241e3d;
+  --color-ink-600: #342c55;
+  --color-ink-400: #8d87ab;
+  --color-ink-300: #b4afcc;
+  --color-ink-200: #d6d3e6;
+  --color-ink-100: #eeedf6;
+
+  /* Wisp: the mascot violet and its readable tints. */
+  --color-wisp-700: #3a1fa6;
+  --color-wisp-600: #4b2bc7;
+  --color-wisp-500: #6246e5;
+  --color-wisp-400: #8b78ff;
+  --color-wisp-300: #b3a8ff;
+  --color-wisp-200: #d6d0ff;
+
+  /* Ember: warm game-world light. Spell: validated, applied state. */
+  --color-ember-400: #ffb86b;
+  --color-ember-300: #ffd09c;
+  --color-spell-400: #5ee6c4;
+  --color-spell-300: #9af2da;
+  --color-rose-400: #ff7a93;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-flow: flow 1.6s linear infinite;
+  --animate-blink: blink 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(-1.5deg);
+    }
+  }
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+  @keyframes blink {
+    0%,
+    92%,
+    100% {
+      transform: scaleY(1);
+    }
+    95% {
+      transform: scaleY(0.1);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    @apply bg-ink-950 font-sans text-ink-100 antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-wisp-500) 60%, transparent);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-wisp-300);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@utility text-balance-safe {
+  text-wrap: balance;
+}
+
+@utility grain {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.045) 1px, transparent 0);
+  background-size: 22px 22px;
+}
