@@ -1985,5 +1985,29 @@
     "mask-ui-build.log": "c72a3f8256088a7de25533fa9f8909f848b0d29adbf8cb3609d4c50d1046ddca",
     "mask-tools.log": "00399f721b52e27f94f1109cc1992ed955870cba06510b6ee2a07dc9528172e9",
     "mask-native-build.log": "74d972ad296166c9b7c423acc32ba366cbaaeb7a67fe81b60f94943384d597ea"
+  },
+  "hosted_integration": {
+    "pr": 18,
+    "head": "2c517ce78fb33aeb9e08c154779cc51145acf163",
+    "merge_commit": "1b35f02235728e2e9cdd339cd11395afb17a9e09",
+    "merged_at": "2026-10-09T21:08:35Z",
+    "checks": [
+      {
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988399585/job/114016516606"
+      },
+      {
+        "name": "checks",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988399752/job/114016204752"
+      },
+      {
+        "name": "desktop (ubuntu-latest, Linux)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37988399585/job/114016517008"
+      }
+    ],
+    "merge_trailer": "Built-by: astra; verified on actual GitHub merge commit"
   }
 }

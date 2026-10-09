@@ -1,0 +1,3344 @@
+{
+  "date": "2026-10-09",
+  "implementation": "b774155",
+  "baseline": "83c98a7186d25ad6530a7320675cd4d3fe6e86f3",
+  "adapter": "Apple M5 Pro",
+  "local_checks": {
+    "rust_behavior_tests": 139,
+    "explicit_gpu_tests": 33,
+    "ui_tests": 283,
+    "python_tool_tests": 5,
+    "clippy": "workspace all targets release passed",
+    "generated_files_and_sdk": "passed",
+    "native_build": "custom-protocol release build and packaging after all workspace test builds passed"
+  },
+  "pixel_comparison": {
+    "baseline": "83c98a7186d25ad6530a7320675cd4d3fe6e86f3",
+    "comparisons": [
+      {
+        "name": "base-color-texture.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "3f23498ac338c0f33c6d3794a89ea0032e3ff55880a1882d1e4972a314e27a17",
+        "current_sha256": "3f23498ac338c0f33c6d3794a89ea0032e3ff55880a1882d1e4972a314e27a17"
+      },
+      {
+        "name": "camera-clusters-0-321x241-oracle.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099",
+        "current_sha256": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099"
+      },
+      {
+        "name": "camera-clusters-0-321x241.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099",
+        "current_sha256": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099"
+      },
+      {
+        "name": "camera-clusters-0-480x270-oracle.png",
+        "size": [
+          480,
+          270
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31",
+        "current_sha256": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31"
+      },
+      {
+        "name": "camera-clusters-0-480x270.png",
+        "size": [
+          480,
+          270
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31",
+        "current_sha256": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31"
+      },
+      {
+        "name": "camera-clusters-1-321x241-oracle.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e",
+        "current_sha256": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e"
+      },
+      {
+        "name": "camera-clusters-1-321x241.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e",
+        "current_sha256": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e"
+      },
+      {
+        "name": "camera-clusters-1-480x270-oracle.png",
+        "size": [
+          480,
+          270
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "4d89c31cce0bb33ad5dbbddc3c249ab7087d8362367fc10937792b4f9bc94f4f",
+        "current_sha256": "4d89c31cce0bb33ad5dbbddc3c249ab7087d8362367fc10937792b4f9bc94f4f"
+      },
+      {
+        "name": "camera-clusters-1-480x270.png",
+        "size": [
+          480,
+          270
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "4d89c31cce0bb33ad5dbbddc3c249ab7087d8362367fc10937792b4f9bc94f4f",
+        "current_sha256": "4d89c31cce0bb33ad5dbbddc3c249ab7087d8362367fc10937792b4f9bc94f4f"
+      },
+      {
+        "name": "camera-clusters-2-321x241-oracle.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+        "current_sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a"
+      },
+      {
+        "name": "camera-clusters-2-321x241.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+        "current_sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a"
+      },
+      {
+        "name": "camera-clusters-2-480x270-oracle.png",
+        "size": [
+          480,
+          270
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be",
+        "current_sha256": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be"
+      },
+      {
+        "name": "camera-clusters-2-480x270.png",
+        "size": [
+          480,
+          270
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be",
+        "current_sha256": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be"
+      },
+      {
+        "name": "camera-facing-away.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e",
+        "current_sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e"
+      },
+      {
+        "name": "camera-flat-parent-reference.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+        "current_sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a"
+      },
+      {
+        "name": "camera-fov-30.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "3f9c3cc8ddac14df4961fb5037f52314b3c1e1e1616483f1fdab0aabe0ef88cf",
+        "current_sha256": "3f9c3cc8ddac14df4961fb5037f52314b3c1e1e1616483f1fdab0aabe0ef88cf"
+      },
+      {
+        "name": "camera-fov-50-visible-edges.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "eca524c77ca7d2fc41a73d105d3190ea3a66c3105ababf801011cc82742ac1bb",
+        "current_sha256": "eca524c77ca7d2fc41a73d105d3190ea3a66c3105ababf801011cc82742ac1bb"
+      },
+      {
+        "name": "camera-fov-80.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "ba3bc64e8fddfdcc2e3b5a686403b39cf9ce8d0840ac06e6b6f7b29f6a4e1a4f",
+        "current_sha256": "ba3bc64e8fddfdcc2e3b5a686403b39cf9ce8d0840ac06e6b6f7b29f6a4e1a4f"
+      },
+      {
+        "name": "camera-inherited-pose.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+        "current_sha256": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a"
+      },
+      {
+        "name": "camera-scaled-roll-flat.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "f6f806044e46cb8fcd5b9db9b8f9b856cb14cbf7847c85d4f548a04c786c0d22",
+        "current_sha256": "f6f806044e46cb8fcd5b9db9b8f9b856cb14cbf7847c85d4f548a04c786c0d22"
+      },
+      {
+        "name": "camera-scaled-roll-parent.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "f6f806044e46cb8fcd5b9db9b8f9b856cb14cbf7847c85d4f548a04c786c0d22",
+        "current_sha256": "f6f806044e46cb8fcd5b9db9b8f9b856cb14cbf7847c85d4f548a04c786c0d22"
+      },
+      {
+        "name": "camera-skewed-flat-reference.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bd7e1105a490922c57c129631783268aead6dfc0801716ee00dff543d70c692b",
+        "current_sha256": "bd7e1105a490922c57c129631783268aead6dfc0801716ee00dff543d70c692b"
+      },
+      {
+        "name": "camera-skewed-parent.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bd7e1105a490922c57c129631783268aead6dfc0801716ee00dff543d70c692b",
+        "current_sha256": "bd7e1105a490922c57c129631783268aead6dfc0801716ee00dff543d70c692b"
+      },
+      {
+        "name": "camera-tight-clip-positive.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "29a364e13f7f3f4a2b2a7388e277bec90d99f0385cf62c44111a12becea3e268",
+        "current_sha256": "29a364e13f7f3f4a2b2a7388e277bec90d99f0385cf62c44111a12becea3e268"
+      },
+      {
+        "name": "camera-tight-clip-unclipped-reference.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "29a364e13f7f3f4a2b2a7388e277bec90d99f0385cf62c44111a12becea3e268",
+        "current_sha256": "29a364e13f7f3f4a2b2a7388e277bec90d99f0385cf62c44111a12becea3e268"
+      },
+      {
+        "name": "camera-tilted-partial-clip.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "65813ffd2ae07f3a15b34db42251f4783b27eeddf3f491a272bad47b916aab38",
+        "current_sha256": "65813ffd2ae07f3a15b34db42251f4783b27eeddf3f491a272bad47b916aab38"
+      },
+      {
+        "name": "camera-transparent-back.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "7bdd9f474dd897aabe2a55d45d37f55450a79850d1b4b462707104fcdce67ca9",
+        "current_sha256": "7bdd9f474dd897aabe2a55d45d37f55450a79850d1b4b462707104fcdce67ca9"
+      },
+      {
+        "name": "camera-transparent-front.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "d67b2e5da8ffba4c585b5cd397af77774be34f486137b016cad518fc28321065",
+        "current_sha256": "d67b2e5da8ffba4c585b5cd397af77774be34f486137b016cad518fc28321065"
+      },
+      {
+        "name": "cluster-127-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "727e5e5e0bb54983bb0e59602b2e76480bdd54cee2b714005f848a2febefd4ea",
+        "current_sha256": "727e5e5e0bb54983bb0e59602b2e76480bdd54cee2b714005f848a2febefd4ea"
+      },
+      {
+        "name": "cluster-128-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-129-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-31-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-32-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-33-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-63-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-64-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "cluster-65-lights.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "dark-fill-10.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "43bba9f34e60d387924e1b4a2362d4a0b0ea3d8ce205130b3effb649efc166e9",
+        "current_sha256": "43bba9f34e60d387924e1b4a2362d4a0b0ea3d8ce205130b3effb649efc166e9"
+      },
+      {
+        "name": "dark-fill-18.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "57bd04d3a3649393fc9d684978524a5ff5039dba00f9fd7c80d2801ef8afe7e2",
+        "current_sha256": "57bd04d3a3649393fc9d684978524a5ff5039dba00f9fd7c80d2801ef8afe7e2"
+      },
+      {
+        "name": "dark-fill-50.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "59788065412773c32edd73d1de01be84f3c8d9f680d43402e1b6380a620d5ba5",
+        "current_sha256": "59788065412773c32edd73d1de01be84f3c8d9f680d43402e1b6380a620d5ba5"
+      },
+      {
+        "name": "depth-boundary-patches-513x385-oracle.png",
+        "size": [
+          513,
+          385
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "472df7ec4eceb5a11d9ee938ca6f78fd01aad3d464c54b77fb21a3663bdc7808",
+        "current_sha256": "472df7ec4eceb5a11d9ee938ca6f78fd01aad3d464c54b77fb21a3663bdc7808"
+      },
+      {
+        "name": "depth-boundary-patches-513x385.png",
+        "size": [
+          513,
+          385
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "472df7ec4eceb5a11d9ee938ca6f78fd01aad3d464c54b77fb21a3663bdc7808",
+        "current_sha256": "472df7ec4eceb5a11d9ee938ca6f78fd01aad3d464c54b77fb21a3663bdc7808"
+      },
+      {
+        "name": "depth-boundary-patches-640x480-oracle.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993",
+        "current_sha256": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993"
+      },
+      {
+        "name": "depth-boundary-patches-640x480.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993",
+        "current_sha256": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993"
+      },
+      {
+        "name": "directional-red.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "332bb7a6856155de6a6acc1dc5ce3c3dcaf2556a12b53c2cfc3623be34d92d3a",
+        "current_sha256": "332bb7a6856155de6a6acc1dc5ce3c3dcaf2556a12b53c2cfc3623be34d92d3a"
+      },
+      {
+        "name": "double-sided-back.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+        "current_sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0"
+      },
+      {
+        "name": "emissive-map.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "ae2cd28cbdc77e62a0233925b5702d2188da4f2e6a834cba9c7bf918a5f6f7f3",
+        "current_sha256": "ae2cd28cbdc77e62a0233925b5702d2188da4f2e6a834cba9c7bf918a5f6f7f3"
+      },
+      {
+        "name": "environment-disabled.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+        "current_sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80"
+      },
+      {
+        "name": "environment-linear-metal.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "0739cef132d181b9fec9a8866330d628dad4a69e414f774d7a50aec670afbe93",
+        "current_sha256": "0739cef132d181b9fec9a8866330d628dad4a69e414f774d7a50aec670afbe93"
+      },
+      {
+        "name": "environment-restored.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9",
+        "current_sha256": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9"
+      },
+      {
+        "name": "environment-rotation-half-turn.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "4930b16f83022ef644bbd9133ecad51d90e48e6d75cd41c823013ff5498ba222",
+        "current_sha256": "4930b16f83022ef644bbd9133ecad51d90e48e6d75cd41c823013ff5498ba222"
+      },
+      {
+        "name": "environment-rotation-zero.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "49a35139b3f206e5b0731685fbdd260bad02fba0990f9ac5412f12f90eec8bcf",
+        "current_sha256": "49a35139b3f206e5b0731685fbdd260bad02fba0990f9ac5412f12f90eec8bcf"
+      },
+      {
+        "name": "environment-rough-metal.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "f6fd11dc7bd2d383a4a34a2afa76f4f7e3c212c66e543ee1320bb108e16af88d",
+        "current_sha256": "f6fd11dc7bd2d383a4a34a2afa76f4f7e3c212c66e543ee1320bb108e16af88d"
+      },
+      {
+        "name": "environment-srgb-metal.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9",
+        "current_sha256": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9"
+      },
+      {
+        "name": "environment-white-furnace.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "062d2f0e4d6d8605b6988f77800dab4fd99cab8d414d755f5625c73189e12390",
+        "current_sha256": "062d2f0e4d6d8605b6988f77800dab4fd99cab8d414d755f5625c73189e12390"
+      },
+      {
+        "name": "explicit-light-disabled.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+        "current_sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80"
+      },
+      {
+        "name": "far-clipped.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e",
+        "current_sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e"
+      },
+      {
+        "name": "full-mask-257x193-oracle.png",
+        "size": [
+          257,
+          193
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92",
+        "current_sha256": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92"
+      },
+      {
+        "name": "full-mask-257x193.png",
+        "size": [
+          257,
+          193
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92",
+        "current_sha256": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92"
+      },
+      {
+        "name": "full-mask-320x240-oracle.png",
+        "size": [
+          320,
+          240
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea",
+        "current_sha256": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea"
+      },
+      {
+        "name": "full-mask-320x240.png",
+        "size": [
+          320,
+          240
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea",
+        "current_sha256": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea"
+      },
+      {
+        "name": "hdr-glossy-highlight.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "886cfc34d5440e8dbc0bbaf9449099ce63a50cfde6df6be5270d891994cc0230",
+        "current_sha256": "886cfc34d5440e8dbc0bbaf9449099ce63a50cfde6df6be5270d891994cc0230"
+      },
+      {
+        "name": "hdr-reference-swatches.png",
+        "size": [
+          384,
+          128
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130",
+        "current_sha256": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130"
+      },
+      {
+        "name": "hdr-transparent-over-black.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "92fa682f5c5b37440488b2b9457fdfd69215508eb07a6665a03d4ac2270631e8",
+        "current_sha256": "92fa682f5c5b37440488b2b9457fdfd69215508eb07a6665a03d4ac2270631e8"
+      },
+      {
+        "name": "last-bit-only-321x181-oracle.png",
+        "size": [
+          321,
+          181
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
+        "current_sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb"
+      },
+      {
+        "name": "last-bit-only-321x181-single-light.png",
+        "size": [
+          321,
+          181
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
+        "current_sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb"
+      },
+      {
+        "name": "last-bit-only-321x181.png",
+        "size": [
+          321,
+          181
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
+        "current_sha256": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb"
+      },
+      {
+        "name": "layered-transparency.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "c78f11db0ad33f49c6a256d199f7bacea023759426498927b688b1f275d51773",
+        "current_sha256": "c78f11db0ad33f49c6a256d199f7bacea023759426498927b688b1f275d51773"
+      },
+      {
+        "name": "linear-filter.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec",
+        "current_sha256": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec"
+      },
+      {
+        "name": "lit-double-sided-back.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "dcbd28e6e8fc38a0e3c55987b4792da7fbb8c6096ebc58c61df135deabf7580d",
+        "current_sha256": "dcbd28e6e8fc38a0e3c55987b4792da7fbb8c6096ebc58c61df135deabf7580d"
+      },
+      {
+        "name": "mask-discarded.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "e1751a8a2d75f191fde7f49ca0c531d612d0a59b444411f83d6dffc97f8744c7",
+        "current_sha256": "e1751a8a2d75f191fde7f49ca0c531d612d0a59b444411f83d6dffc97f8744c7"
+      },
+      {
+        "name": "metallic-roughness-map.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "d3744f3cde70216735ab0f188c59e2e79452d5a3307a98165c579a33997d2232",
+        "current_sha256": "d3744f3cde70216735ab0f188c59e2e79452d5a3307a98165c579a33997d2232"
+      },
+      {
+        "name": "minified-color-mips.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec",
+        "current_sha256": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec"
+      },
+      {
+        "name": "near-clipped.png",
+        "size": [
+          321,
+          241
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e",
+        "current_sha256": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e"
+      },
+      {
+        "name": "normal-map.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a",
+        "current_sha256": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a"
+      },
+      {
+        "name": "occlusion-map.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a",
+        "current_sha256": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a"
+      },
+      {
+        "name": "opaque-alpha-zero.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+        "current_sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0"
+      },
+      {
+        "name": "opaque-between-transparent.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "e3bdebc967b2cf254df4feb048950827a54aac9131617442f787b188ac12e9d9",
+        "current_sha256": "e3bdebc967b2cf254df4feb048950827a54aac9131617442f787b188ac12e9d9"
+      },
+      {
+        "name": "point-far.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "6c2a097e64240e8298622572e497dd567abb8e3c6832f366fea3ed9a2f55448b",
+        "current_sha256": "6c2a097e64240e8298622572e497dd567abb8e3c6832f366fea3ed9a2f55448b"
+      },
+      {
+        "name": "point-near.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+        "current_sha256": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3"
+      },
+      {
+        "name": "point-outside-range.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+        "current_sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80"
+      },
+      {
+        "name": "punctual-hdr-dielectric-0.045.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "99f3d5b66e3e990c4daad6d2a83416484281e1d4a93cbcfee3b401651d9c0f28",
+        "current_sha256": "99f3d5b66e3e990c4daad6d2a83416484281e1d4a93cbcfee3b401651d9c0f28"
+      },
+      {
+        "name": "punctual-hdr-dielectric-0.3.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "7202fafecfa60062ede82ef590e0587309f6503e54ed3831741c3f9f46c1cd03",
+        "current_sha256": "7202fafecfa60062ede82ef590e0587309f6503e54ed3831741c3f9f46c1cd03"
+      },
+      {
+        "name": "punctual-hdr-dielectric-0.7.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "7252e0ec64cf9ab5cc181d9b6826e59e54625442df2f5d13a8b17d8143c3f319",
+        "current_sha256": "7252e0ec64cf9ab5cc181d9b6826e59e54625442df2f5d13a8b17d8143c3f319"
+      },
+      {
+        "name": "punctual-hdr-dielectric-1.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "60ce7087ce6f4a0606b3c09af0f0170090c2ca99c0082dde487a4027e64c1a87",
+        "current_sha256": "60ce7087ce6f4a0606b3c09af0f0170090c2ca99c0082dde487a4027e64c1a87"
+      },
+      {
+        "name": "punctual-hdr-metal-0.045.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "fa65df74cd71466c503af8bbda3de471e213d688119e4dd60bc80e7a58a57e11",
+        "current_sha256": "fa65df74cd71466c503af8bbda3de471e213d688119e4dd60bc80e7a58a57e11"
+      },
+      {
+        "name": "punctual-hdr-metal-0.3.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "a94c313da5e143febaea92c9be4fcbce925824256c065f4d46a06644cdf2b6c9",
+        "current_sha256": "a94c313da5e143febaea92c9be4fcbce925824256c065f4d46a06644cdf2b6c9"
+      },
+      {
+        "name": "punctual-hdr-metal-0.7.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "cc15082e0b9fddebc65dd8eb237cf8f847fb695b54c7011cc6bd19107dbf6fdf",
+        "current_sha256": "cc15082e0b9fddebc65dd8eb237cf8f847fb695b54c7011cc6bd19107dbf6fdf"
+      },
+      {
+        "name": "punctual-hdr-metal-1.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "5391af05bd3cf529827b522b55254ae3044ccabf04ee04f83b392db2de3386b1",
+        "current_sha256": "5391af05bd3cf529827b522b55254ae3044ccabf04ee04f83b392db2de3386b1"
+      },
+      {
+        "name": "punctual-low-dielectric-0.045.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "83920b3e6335fdf0d3911249241bafe24c7e89ccf87eb47fe66c5773493f20b2",
+        "current_sha256": "83920b3e6335fdf0d3911249241bafe24c7e89ccf87eb47fe66c5773493f20b2"
+      },
+      {
+        "name": "punctual-low-dielectric-0.3.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "772d45a8b6853533d444bb0b46bea699516c109d0831a5ded5b626d03a7fe4c3",
+        "current_sha256": "772d45a8b6853533d444bb0b46bea699516c109d0831a5ded5b626d03a7fe4c3"
+      },
+      {
+        "name": "punctual-low-dielectric-0.7.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "4ad9fb095f0bb5bc751c0fd2a27ffee206c3b42e6ebf5bd61650d451a91ddd11",
+        "current_sha256": "4ad9fb095f0bb5bc751c0fd2a27ffee206c3b42e6ebf5bd61650d451a91ddd11"
+      },
+      {
+        "name": "punctual-low-dielectric-1.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "23931886951fb6cf2fb4c0fa09c19c232415e18bbd9db9c55fb3418fba3ab3e2",
+        "current_sha256": "23931886951fb6cf2fb4c0fa09c19c232415e18bbd9db9c55fb3418fba3ab3e2"
+      },
+      {
+        "name": "range-98-percent.png",
+        "size": [
+          321,
+          181
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "e0aee7ee04eadffe8d3c28b96034032a77b862be3ea408621ed4f69496505345",
+        "current_sha256": "e0aee7ee04eadffe8d3c28b96034032a77b862be3ea408621ed4f69496505345"
+      },
+      {
+        "name": "range-99-percent.png",
+        "size": [
+          321,
+          181
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "33a9ed69acdb141571fac20d715c920763ca6b0d7edcdc02f4bc0955ff58a576",
+        "current_sha256": "33a9ed69acdb141571fac20d715c920763ca6b0d7edcdc02f4bc0955ff58a576"
+      },
+      {
+        "name": "reflected-single-sided.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+        "current_sha256": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0"
+      },
+      {
+        "name": "reimported-blue-texture.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "9eb8a28267847140b94aeb61579445f97cd73978315775e094f28e26c42845f7",
+        "current_sha256": "9eb8a28267847140b94aeb61579445f97cd73978315775e094f28e26c42845f7"
+      },
+      {
+        "name": "sixteen-bit-color.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "fbdb02aa70b86684355ae8e5c2731b1eb49626b9a8156de8a80e1ad6ae89869d",
+        "current_sha256": "fbdb02aa70b86684355ae8e5c2731b1eb49626b9a8156de8a80e1ad6ae89869d"
+      },
+      {
+        "name": "spatial-clusters-257x191.png",
+        "size": [
+          257,
+          191
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "0095349a077cf2cd4c9da832a4a8d865c29ac9cfdde579f5a0b2009436e352a6",
+        "current_sha256": "0095349a077cf2cd4c9da832a4a8d865c29ac9cfdde579f5a0b2009436e352a6"
+      },
+      {
+        "name": "spatial-clusters-320x180.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "5d2bd318d614f039ec857203c0369fd9579570634a51a81700939aae4503baea",
+        "current_sha256": "5d2bd318d614f039ec857203c0369fd9579570634a51a81700939aae4503baea"
+      },
+      {
+        "name": "spatial-clusters-640x360.png",
+        "size": [
+          640,
+          360
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "5c3d77d66bff36f0b267b28ae7e39fe1c2fbb9aefeefb7fae360c8ec5d921395",
+        "current_sha256": "5c3d77d66bff36f0b267b28ae7e39fe1c2fbb9aefeefb7fae360c8ec5d921395"
+      },
+      {
+        "name": "spatial-overflow-96-513x385-oracle.png",
+        "size": [
+          513,
+          385
+        ],
+        "identical_pixels": false,
+        "changed_pixels": 1,
+        "max_channel_delta": 1,
+        "baseline_sha256": "7a651b371dd6a560434927b3c8f7caeb03e943dcabc2a7e0038bbda569ab2602",
+        "current_sha256": "76821ff7d22cee90f00e122013713dbe58a7a0e129088844065ebb3cb338cf75"
+      },
+      {
+        "name": "spatial-overflow-96-513x385.png",
+        "size": [
+          513,
+          385
+        ],
+        "identical_pixels": false,
+        "changed_pixels": 1,
+        "max_channel_delta": 1,
+        "baseline_sha256": "7a651b371dd6a560434927b3c8f7caeb03e943dcabc2a7e0038bbda569ab2602",
+        "current_sha256": "76821ff7d22cee90f00e122013713dbe58a7a0e129088844065ebb3cb338cf75"
+      },
+      {
+        "name": "spatial-overflow-96-640x480-oracle.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": false,
+        "changed_pixels": 2,
+        "max_channel_delta": 1,
+        "baseline_sha256": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a",
+        "current_sha256": "dec0936cd598045f1321d55ff0685baaa08173587b141f24d911e0a71cbe4b5f"
+      },
+      {
+        "name": "spatial-overflow-96-640x480.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": false,
+        "changed_pixels": 2,
+        "max_channel_delta": 1,
+        "baseline_sha256": "ef4798ef047012623b5f3ae4cb794a45746a9b1adf5736b5f40edd2dcc52f02a",
+        "current_sha256": "dec0936cd598045f1321d55ff0685baaa08173587b141f24d911e0a71cbe4b5f"
+      },
+      {
+        "name": "spot-away.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+        "current_sha256": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80"
+      },
+      {
+        "name": "spot-center.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "4f062daa0b252705145c5559ef989f6fa7628e0bf910d804469a24b096c1761a",
+        "current_sha256": "4f062daa0b252705145c5559ef989f6fa7628e0bf910d804469a24b096c1761a"
+      },
+      {
+        "name": "spot-centered-reference.png",
+        "size": [
+          321,
+          181
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "a565ea67a477269160458e88119d9c7e70cf486ef7ae7bcfaf4662dc7ab8181a",
+        "current_sha256": "a565ea67a477269160458e88119d9c7e70cf486ef7ae7bcfaf4662dc7ab8181a"
+      },
+      {
+        "name": "spot-penumbra.png",
+        "size": [
+          321,
+          181
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "a98abc353e310536b5a9a104712895c83f41dcaa9ba8be34992f88c99b66dfad",
+        "current_sha256": "a98abc353e310536b5a9a104712895c83f41dcaa9ba8be34992f88c99b66dfad"
+      },
+      {
+        "name": "studio-dark-matte.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "bcd6176576ad58f83764a7aa6ee92e48c1f2d7ce67d2e9f7f7f31daef3129e6c",
+        "current_sha256": "bcd6176576ad58f83764a7aa6ee92e48c1f2d7ce67d2e9f7f7f31daef3129e6c"
+      },
+      {
+        "name": "studio-dark-rough.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "5c88851c8625dd9ccb4038d6ccbb5a2185fb9eebff6bc4ad8b907d1237994d7c",
+        "current_sha256": "5c88851c8625dd9ccb4038d6ccbb5a2185fb9eebff6bc4ad8b907d1237994d7c"
+      },
+      {
+        "name": "studio-dark-satin.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "fe7bf254be61a8a213c9e1c9f0d13dbd3ed6ac4830dd142dc744819be6440a19",
+        "current_sha256": "fe7bf254be61a8a213c9e1c9f0d13dbd3ed6ac4830dd142dc744819be6440a19"
+      },
+      {
+        "name": "studio-dark-smooth.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "7cf36b070a2b3c5acf812972275e1e56c01a7712a711e1b0fa273fec2c617ff9",
+        "current_sha256": "7cf36b070a2b3c5acf812972275e1e56c01a7712a711e1b0fa273fec2c617ff9"
+      },
+      {
+        "name": "studio-dielectric-matte.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "db1e87402262c626ce0ebe854f722f0de625f6ff054b96c5c56cc1a7732a40ce",
+        "current_sha256": "db1e87402262c626ce0ebe854f722f0de625f6ff054b96c5c56cc1a7732a40ce"
+      },
+      {
+        "name": "studio-dielectric-rough.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "0bb6498815269a2a20c1572c82011711f8c9620013d1a09fd6378e4716eca804",
+        "current_sha256": "0bb6498815269a2a20c1572c82011711f8c9620013d1a09fd6378e4716eca804"
+      },
+      {
+        "name": "studio-dielectric-satin.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "d9e5f2278e1894c136dd858b7862c4537b62c1db4777a1270f0488034429b353",
+        "current_sha256": "d9e5f2278e1894c136dd858b7862c4537b62c1db4777a1270f0488034429b353"
+      },
+      {
+        "name": "studio-dielectric-smooth.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "f9e48d8aa0757bdffb07b113f59ac4e31fe432de254af9ad851b155f200344af",
+        "current_sha256": "f9e48d8aa0757bdffb07b113f59ac4e31fe432de254af9ad851b155f200344af"
+      },
+      {
+        "name": "studio-metal-matte.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "9c8ebbd851d1de09098af80676501e74ec20d85ed2451a1bcd99ea4e013a0b26",
+        "current_sha256": "9c8ebbd851d1de09098af80676501e74ec20d85ed2451a1bcd99ea4e013a0b26"
+      },
+      {
+        "name": "studio-metal-rough.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "4622e1c1d7150217103d5d90ef78e1472df9bc2037f25a269bb42e3c3ce48c27",
+        "current_sha256": "4622e1c1d7150217103d5d90ef78e1472df9bc2037f25a269bb42e3c3ce48c27"
+      },
+      {
+        "name": "studio-metal-satin.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "928e2dbfb384414a94355bf9e3af0ab7b6b48b369da462720ca960fc07ef6b9e",
+        "current_sha256": "928e2dbfb384414a94355bf9e3af0ab7b6b48b369da462720ca960fc07ef6b9e"
+      },
+      {
+        "name": "studio-metal-smooth.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "4677800f3782bd23bee195fc115ccff879ceedc2465725fbeebef8def36fdd00",
+        "current_sha256": "4677800f3782bd23bee195fc115ccff879ceedc2465725fbeebef8def36fdd00"
+      },
+      {
+        "name": "varying-normal-map.png",
+        "size": [
+          320,
+          180
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "27180b14ddb8c4ec9c076f72ddc01ed49fe3a08a60fdd9a02747b2eb86070bda",
+        "current_sha256": "27180b14ddb8c4ec9c076f72ddc01ed49fe3a08a60fdd9a02747b2eb86070bda"
+      },
+      {
+        "name": "visible-range-edge-513x385.png",
+        "size": [
+          513,
+          385
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "f2b26e9719541aa38814c97d444a58b7141b1fb33435cf2eb88f790ec88f77ba",
+        "current_sha256": "f2b26e9719541aa38814c97d444a58b7141b1fb33435cf2eb88f790ec88f77ba"
+      },
+      {
+        "name": "visible-range-edge-640x480.png",
+        "size": [
+          640,
+          480
+        ],
+        "identical_pixels": true,
+        "changed_pixels": 0,
+        "max_channel_delta": 0,
+        "baseline_sha256": "e24c9a3866c25e3228d1d36b483d98ca2424c36fe6332828ec47d7b29609156b",
+        "current_sha256": "e24c9a3866c25e3228d1d36b483d98ca2424c36fe6332828ec47d7b29609156b"
+      }
+    ],
+    "additional": [
+      "graph-retained-model-0.png",
+      "graph-retained-model-1.png",
+      "graph-retained-model-2.png"
+    ]
+  },
+  "current_png_sha256": {
+    "base-color-texture.png": "3f23498ac338c0f33c6d3794a89ea0032e3ff55880a1882d1e4972a314e27a17",
+    "camera-clusters-0-321x241-oracle.png": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099",
+    "camera-clusters-0-321x241.png": "545c95eefeba351b352eefb58459a0e523fe8f0e0a450286f0e5b633af1b5099",
+    "camera-clusters-0-480x270-oracle.png": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31",
+    "camera-clusters-0-480x270.png": "5598dfb296692a236eb5ec0db1399c7cae98ac8e43a33291c7d71ba166c05e31",
+    "camera-clusters-1-321x241-oracle.png": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e",
+    "camera-clusters-1-321x241.png": "26feb258ca922d43b5498546c212f3ec1275a82a026ce8222e45f77e50b8183e",
+    "camera-clusters-1-480x270-oracle.png": "4d89c31cce0bb33ad5dbbddc3c249ab7087d8362367fc10937792b4f9bc94f4f",
+    "camera-clusters-1-480x270.png": "4d89c31cce0bb33ad5dbbddc3c249ab7087d8362367fc10937792b4f9bc94f4f",
+    "camera-clusters-2-321x241-oracle.png": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+    "camera-clusters-2-321x241.png": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+    "camera-clusters-2-480x270-oracle.png": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be",
+    "camera-clusters-2-480x270.png": "6390b36ccccf12acf8f32d61bf04c229b26fc60e72c08d52d9cf89e51601f6be",
+    "camera-facing-away.png": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e",
+    "camera-flat-parent-reference.png": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+    "camera-fov-30.png": "3f9c3cc8ddac14df4961fb5037f52314b3c1e1e1616483f1fdab0aabe0ef88cf",
+    "camera-fov-50-visible-edges.png": "eca524c77ca7d2fc41a73d105d3190ea3a66c3105ababf801011cc82742ac1bb",
+    "camera-fov-80.png": "ba3bc64e8fddfdcc2e3b5a686403b39cf9ce8d0840ac06e6b6f7b29f6a4e1a4f",
+    "camera-inherited-pose.png": "b2fa4117413e449c6a0c91fb70e437d486f994464e8d89617cd604a58fc47a8a",
+    "camera-scaled-roll-flat.png": "f6f806044e46cb8fcd5b9db9b8f9b856cb14cbf7847c85d4f548a04c786c0d22",
+    "camera-scaled-roll-parent.png": "f6f806044e46cb8fcd5b9db9b8f9b856cb14cbf7847c85d4f548a04c786c0d22",
+    "camera-skewed-flat-reference.png": "bd7e1105a490922c57c129631783268aead6dfc0801716ee00dff543d70c692b",
+    "camera-skewed-parent.png": "bd7e1105a490922c57c129631783268aead6dfc0801716ee00dff543d70c692b",
+    "camera-tight-clip-positive.png": "29a364e13f7f3f4a2b2a7388e277bec90d99f0385cf62c44111a12becea3e268",
+    "camera-tight-clip-unclipped-reference.png": "29a364e13f7f3f4a2b2a7388e277bec90d99f0385cf62c44111a12becea3e268",
+    "camera-tilted-partial-clip.png": "65813ffd2ae07f3a15b34db42251f4783b27eeddf3f491a272bad47b916aab38",
+    "camera-transparent-back.png": "7bdd9f474dd897aabe2a55d45d37f55450a79850d1b4b462707104fcdce67ca9",
+    "camera-transparent-front.png": "d67b2e5da8ffba4c585b5cd397af77774be34f486137b016cad518fc28321065",
+    "cluster-127-lights.png": "727e5e5e0bb54983bb0e59602b2e76480bdd54cee2b714005f848a2febefd4ea",
+    "cluster-128-lights.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "cluster-129-lights.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "cluster-31-lights.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "cluster-32-lights.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "cluster-33-lights.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "cluster-63-lights.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "cluster-64-lights.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "cluster-65-lights.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "dark-fill-10.png": "43bba9f34e60d387924e1b4a2362d4a0b0ea3d8ce205130b3effb649efc166e9",
+    "dark-fill-18.png": "57bd04d3a3649393fc9d684978524a5ff5039dba00f9fd7c80d2801ef8afe7e2",
+    "dark-fill-50.png": "59788065412773c32edd73d1de01be84f3c8d9f680d43402e1b6380a620d5ba5",
+    "depth-boundary-patches-513x385-oracle.png": "472df7ec4eceb5a11d9ee938ca6f78fd01aad3d464c54b77fb21a3663bdc7808",
+    "depth-boundary-patches-513x385.png": "472df7ec4eceb5a11d9ee938ca6f78fd01aad3d464c54b77fb21a3663bdc7808",
+    "depth-boundary-patches-640x480-oracle.png": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993",
+    "depth-boundary-patches-640x480.png": "251c877bc76d248a02ec48304137c11d5722644f3ae81686b05d6ad9ef969993",
+    "directional-red.png": "332bb7a6856155de6a6acc1dc5ce3c3dcaf2556a12b53c2cfc3623be34d92d3a",
+    "double-sided-back.png": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+    "emissive-map.png": "ae2cd28cbdc77e62a0233925b5702d2188da4f2e6a834cba9c7bf918a5f6f7f3",
+    "environment-disabled.png": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+    "environment-linear-metal.png": "0739cef132d181b9fec9a8866330d628dad4a69e414f774d7a50aec670afbe93",
+    "environment-restored.png": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9",
+    "environment-rotation-half-turn.png": "4930b16f83022ef644bbd9133ecad51d90e48e6d75cd41c823013ff5498ba222",
+    "environment-rotation-zero.png": "49a35139b3f206e5b0731685fbdd260bad02fba0990f9ac5412f12f90eec8bcf",
+    "environment-rough-metal.png": "f6fd11dc7bd2d383a4a34a2afa76f4f7e3c212c66e543ee1320bb108e16af88d",
+    "environment-srgb-metal.png": "185e0a67ef792450d7cb6d0cedd386a011a7c2ccdaba2b2df8abed2d3dcfffe9",
+    "environment-white-furnace.png": "062d2f0e4d6d8605b6988f77800dab4fd99cab8d414d755f5625c73189e12390",
+    "explicit-light-disabled.png": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+    "far-clipped.png": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e",
+    "full-mask-257x193-oracle.png": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92",
+    "full-mask-257x193.png": "d51c137d30a25bee459feed3b59f0cd72d14f5e04acea9b61e9dddf1a14a8d92",
+    "full-mask-320x240-oracle.png": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea",
+    "full-mask-320x240.png": "8c7d5562a44b79661e3209b6853106c4a847983aeae155885a009af6f89dffea",
+    "graph-retained-model-0.png": "1bf1124eaba53a6fe8052125b610646b61bef8c59f13fe27791bfae26d374914",
+    "graph-retained-model-1.png": "8f9f576b421f4bab29a8771568066ac4a31ce2473490163a4d7e1423e8468299",
+    "graph-retained-model-2.png": "07c283c6c70f50899b5b78583654a59c900725651368578e85845287f32bbeb1",
+    "hdr-glossy-highlight.png": "886cfc34d5440e8dbc0bbaf9449099ce63a50cfde6df6be5270d891994cc0230",
+    "hdr-reference-swatches.png": "de99290cfd11f0af713beaafeb14ca4dbdc410840347c9949ae7f6d772709130",
+    "hdr-transparent-over-black.png": "92fa682f5c5b37440488b2b9457fdfd69215508eb07a6665a03d4ac2270631e8",
+    "last-bit-only-321x181-oracle.png": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
+    "last-bit-only-321x181-single-light.png": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
+    "last-bit-only-321x181.png": "7fef1e167a5816993284d53df4b1d3156cffba667da60b078821cddab5963bdb",
+    "layered-transparency.png": "c78f11db0ad33f49c6a256d199f7bacea023759426498927b688b1f275d51773",
+    "linear-filter.png": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec",
+    "lit-double-sided-back.png": "dcbd28e6e8fc38a0e3c55987b4792da7fbb8c6096ebc58c61df135deabf7580d",
+    "mask-discarded.png": "e1751a8a2d75f191fde7f49ca0c531d612d0a59b444411f83d6dffc97f8744c7",
+    "metallic-roughness-map.png": "d3744f3cde70216735ab0f188c59e2e79452d5a3307a98165c579a33997d2232",
+    "minified-color-mips.png": "e1ffdb1b22d050451c778595ea69e30922d71ad1cba57898838592bea22126ec",
+    "near-clipped.png": "fc4a0a1ef4d59f51b18f16b233fe7c734e3c0e210c2af921983a3e49a2b30a9e",
+    "normal-map.png": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a",
+    "occlusion-map.png": "29edc7d8f9cd5542d946adade7f8ee4696d0fe75e38239ca732e5f09eaeb371a",
+    "opaque-alpha-zero.png": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+    "opaque-between-transparent.png": "e3bdebc967b2cf254df4feb048950827a54aac9131617442f787b188ac12e9d9",
+    "point-far.png": "6c2a097e64240e8298622572e497dd567abb8e3c6832f366fea3ed9a2f55448b",
+    "point-near.png": "bcc29fba076d0406d8f99bf23902db3ddff6114daba370c889d62574cb2f39a3",
+    "point-outside-range.png": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+    "punctual-hdr-dielectric-0.045.png": "99f3d5b66e3e990c4daad6d2a83416484281e1d4a93cbcfee3b401651d9c0f28",
+    "punctual-hdr-dielectric-0.3.png": "7202fafecfa60062ede82ef590e0587309f6503e54ed3831741c3f9f46c1cd03",
+    "punctual-hdr-dielectric-0.7.png": "7252e0ec64cf9ab5cc181d9b6826e59e54625442df2f5d13a8b17d8143c3f319",
+    "punctual-hdr-dielectric-1.png": "60ce7087ce6f4a0606b3c09af0f0170090c2ca99c0082dde487a4027e64c1a87",
+    "punctual-hdr-metal-0.045.png": "fa65df74cd71466c503af8bbda3de471e213d688119e4dd60bc80e7a58a57e11",
+    "punctual-hdr-metal-0.3.png": "a94c313da5e143febaea92c9be4fcbce925824256c065f4d46a06644cdf2b6c9",
+    "punctual-hdr-metal-0.7.png": "cc15082e0b9fddebc65dd8eb237cf8f847fb695b54c7011cc6bd19107dbf6fdf",
+    "punctual-hdr-metal-1.png": "5391af05bd3cf529827b522b55254ae3044ccabf04ee04f83b392db2de3386b1",
+    "punctual-low-dielectric-0.045.png": "83920b3e6335fdf0d3911249241bafe24c7e89ccf87eb47fe66c5773493f20b2",
+    "punctual-low-dielectric-0.3.png": "772d45a8b6853533d444bb0b46bea699516c109d0831a5ded5b626d03a7fe4c3",
+    "punctual-low-dielectric-0.7.png": "4ad9fb095f0bb5bc751c0fd2a27ffee206c3b42e6ebf5bd61650d451a91ddd11",
+    "punctual-low-dielectric-1.png": "23931886951fb6cf2fb4c0fa09c19c232415e18bbd9db9c55fb3418fba3ab3e2",
+    "range-98-percent.png": "e0aee7ee04eadffe8d3c28b96034032a77b862be3ea408621ed4f69496505345",
+    "range-99-percent.png": "33a9ed69acdb141571fac20d715c920763ca6b0d7edcdc02f4bc0955ff58a576",
+    "reflected-single-sided.png": "9f6f05c05279abb22ddb7912527cf55a8aaea0874ef6e8581fd5934aad6dbfc0",
+    "reimported-blue-texture.png": "9eb8a28267847140b94aeb61579445f97cd73978315775e094f28e26c42845f7",
+    "sixteen-bit-color.png": "fbdb02aa70b86684355ae8e5c2731b1eb49626b9a8156de8a80e1ad6ae89869d",
+    "spatial-clusters-257x191.png": "0095349a077cf2cd4c9da832a4a8d865c29ac9cfdde579f5a0b2009436e352a6",
+    "spatial-clusters-320x180.png": "5d2bd318d614f039ec857203c0369fd9579570634a51a81700939aae4503baea",
+    "spatial-clusters-640x360.png": "5c3d77d66bff36f0b267b28ae7e39fe1c2fbb9aefeefb7fae360c8ec5d921395",
+    "spatial-overflow-96-513x385-oracle.png": "76821ff7d22cee90f00e122013713dbe58a7a0e129088844065ebb3cb338cf75",
+    "spatial-overflow-96-513x385.png": "76821ff7d22cee90f00e122013713dbe58a7a0e129088844065ebb3cb338cf75",
+    "spatial-overflow-96-640x480-oracle.png": "dec0936cd598045f1321d55ff0685baaa08173587b141f24d911e0a71cbe4b5f",
+    "spatial-overflow-96-640x480.png": "dec0936cd598045f1321d55ff0685baaa08173587b141f24d911e0a71cbe4b5f",
+    "spot-away.png": "be898545d83ae02f997e89ed3bf943bf3f9a5eb704435bfa639d58a08a9c9c80",
+    "spot-center.png": "4f062daa0b252705145c5559ef989f6fa7628e0bf910d804469a24b096c1761a",
+    "spot-centered-reference.png": "a565ea67a477269160458e88119d9c7e70cf486ef7ae7bcfaf4662dc7ab8181a",
+    "spot-penumbra.png": "a98abc353e310536b5a9a104712895c83f41dcaa9ba8be34992f88c99b66dfad",
+    "studio-dark-matte.png": "bcd6176576ad58f83764a7aa6ee92e48c1f2d7ce67d2e9f7f7f31daef3129e6c",
+    "studio-dark-rough.png": "5c88851c8625dd9ccb4038d6ccbb5a2185fb9eebff6bc4ad8b907d1237994d7c",
+    "studio-dark-satin.png": "fe7bf254be61a8a213c9e1c9f0d13dbd3ed6ac4830dd142dc744819be6440a19",
+    "studio-dark-smooth.png": "7cf36b070a2b3c5acf812972275e1e56c01a7712a711e1b0fa273fec2c617ff9",
+    "studio-dielectric-matte.png": "db1e87402262c626ce0ebe854f722f0de625f6ff054b96c5c56cc1a7732a40ce",
+    "studio-dielectric-rough.png": "0bb6498815269a2a20c1572c82011711f8c9620013d1a09fd6378e4716eca804",
+    "studio-dielectric-satin.png": "d9e5f2278e1894c136dd858b7862c4537b62c1db4777a1270f0488034429b353",
+    "studio-dielectric-smooth.png": "f9e48d8aa0757bdffb07b113f59ac4e31fe432de254af9ad851b155f200344af",
+    "studio-metal-matte.png": "9c8ebbd851d1de09098af80676501e74ec20d85ed2451a1bcd99ea4e013a0b26",
+    "studio-metal-rough.png": "4622e1c1d7150217103d5d90ef78e1472df9bc2037f25a269bb42e3c3ce48c27",
+    "studio-metal-satin.png": "928e2dbfb384414a94355bf9e3af0ab7b6b48b369da462720ca960fc07ef6b9e",
+    "studio-metal-smooth.png": "4677800f3782bd23bee195fc115ccff879ceedc2465725fbeebef8def36fdd00",
+    "varying-normal-map.png": "27180b14ddb8c4ec9c076f72ddc01ed49fe3a08a60fdd9a02747b2eb86070bda",
+    "visible-range-edge-513x385.png": "f2b26e9719541aa38814c97d444a58b7141b1fb33435cf2eb88f790ec88f77ba",
+    "visible-range-edge-640x480.png": "e24c9a3866c25e3228d1d36b483d98ca2424c36fe6332828ec47d7b29609156b"
+  },
+  "native_capture_sha256": {
+    "output-collapsed.jpg": "8d0768c09b8a84a4659ed334083286e9e785afbf7ed42fbd51a8c1da3b79f001",
+    "output-open.jpg": "f4675276095e0cb8aaf4be5da82c80385c79f9355f48bfcad569292d90cdba39"
+  },
+  "native_check": "CUA: attached surface, 0 errors/warnings before and after collapsing output; layout restored, app closed. Claude pixel review pending.",
+  "timing": {
+    "baseline_commit": "83c98a7186d25ad6530a7320675cd4d3fe6e86f3",
+    "timestamp_utc": "2026-10-09T21:06:05Z",
+    "summary_median_of_trial_medians_ms": {
+      "0": {
+        "baseline": 1.393771,
+        "scheduled": 1.3965
+      },
+      "64": {
+        "baseline": 1.3925835000000002,
+        "scheduled": 1.403625
+      },
+      "256": {
+        "baseline": 1.4055,
+        "scheduled": 1.413834
+      },
+      "1024": {
+        "baseline": 2.6919790000000003,
+        "scheduled": 2.6974375
+      },
+      "4096": {
+        "baseline": 6.6107499999999995,
+        "scheduled": 6.50625
+      }
+    },
+    "samples": [
+      {
+        "trial": 1,
+        "path": "baseline",
+        "local_lights": 0,
+        "project_sha256": "3e8d63260b042015a5c91d4476a6b350322633c70cef4e6004f5f496fe0a3e55",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.4638330000000002,
+        "measured_frames": 30,
+        "median_ms": 1.3987705,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.360666,
+        "p95_ms": 1.420666,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.360666,
+          1.367875,
+          1.373208,
+          1.377917,
+          1.380625,
+          1.382584,
+          1.382708,
+          1.384167,
+          1.384917,
+          1.388541,
+          1.3902079999999999,
+          1.390333,
+          1.3963750000000001,
+          1.396625,
+          1.397041,
+          1.4005,
+          1.401166,
+          1.4014170000000001,
+          1.4015410000000001,
+          1.402333,
+          1.4027919999999998,
+          1.403875,
+          1.406208,
+          1.407834,
+          1.4112090000000002,
+          1.414666,
+          1.4163750000000002,
+          1.418166,
+          1.420666,
+          1.4638330000000002
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "scheduled",
+        "local_lights": 0,
+        "project_sha256": "3e8d63260b042015a5c91d4476a6b350322633c70cef4e6004f5f496fe0a3e55",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.567959,
+        "measured_frames": 30,
+        "median_ms": 1.414521,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.2385,
+        "p95_ms": 1.483042,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.2385,
+          1.371583,
+          1.373917,
+          1.379458,
+          1.3905,
+          1.391,
+          1.398666,
+          1.403875,
+          1.405,
+          1.408083,
+          1.4089580000000002,
+          1.410875,
+          1.411,
+          1.412125,
+          1.4131669999999998,
+          1.415875,
+          1.417708,
+          1.419416,
+          1.421834,
+          1.4232500000000001,
+          1.424875,
+          1.427959,
+          1.4301249999999999,
+          1.4315,
+          1.432167,
+          1.446083,
+          1.447458,
+          1.473042,
+          1.483042,
+          1.567959
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "baseline",
+        "local_lights": 64,
+        "project_sha256": "5b2af8340b1fdc5d141a390af5bfd7e31f1429e042604ec8a7c47853dd311ecc",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.485833,
+        "measured_frames": 30,
+        "median_ms": 1.397437,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.333875,
+        "p95_ms": 1.450209,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.333875,
+          1.3756249999999999,
+          1.378625,
+          1.381,
+          1.381291,
+          1.3832090000000001,
+          1.3847079999999998,
+          1.3864999999999998,
+          1.38775,
+          1.391958,
+          1.394375,
+          1.39525,
+          1.395417,
+          1.395625,
+          1.396333,
+          1.398541,
+          1.399833,
+          1.4005,
+          1.401208,
+          1.401708,
+          1.4039169999999999,
+          1.405667,
+          1.411292,
+          1.413583,
+          1.421041,
+          1.4355419999999999,
+          1.442167,
+          1.442917,
+          1.450209,
+          1.485833
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "scheduled",
+        "local_lights": 64,
+        "project_sha256": "5b2af8340b1fdc5d141a390af5bfd7e31f1429e042604ec8a7c47853dd311ecc",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.438,
+        "measured_frames": 30,
+        "median_ms": 1.403625,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3745,
+        "p95_ms": 1.4312909999999999,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3745,
+          1.379084,
+          1.3814170000000001,
+          1.3839169999999998,
+          1.384333,
+          1.385166,
+          1.3940000000000001,
+          1.396625,
+          1.397833,
+          1.398,
+          1.398083,
+          1.4002089999999998,
+          1.400875,
+          1.4022080000000001,
+          1.403041,
+          1.404209,
+          1.407667,
+          1.407667,
+          1.408625,
+          1.4135840000000002,
+          1.41375,
+          1.414083,
+          1.417958,
+          1.41825,
+          1.418667,
+          1.421292,
+          1.423208,
+          1.423333,
+          1.4312909999999999,
+          1.438
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "baseline",
+        "local_lights": 256,
+        "project_sha256": "6783cc8c8710614c9aab0b2ad325774dd1b38e0358d478a4d5c23a4ef826783b",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.711541,
+        "measured_frames": 30,
+        "median_ms": 1.422688,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3864999999999998,
+        "p95_ms": 2.711,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3864999999999998,
+          1.388458,
+          1.389625,
+          1.3996659999999999,
+          1.402833,
+          1.403042,
+          1.404833,
+          1.4065830000000001,
+          1.409958,
+          1.41225,
+          1.414542,
+          1.415375,
+          1.4187500000000002,
+          1.42,
+          1.4207919999999998,
+          1.424584,
+          1.4374170000000002,
+          1.446667,
+          1.4617499999999999,
+          1.471,
+          1.501917,
+          1.512375,
+          2.667042,
+          2.681917,
+          2.686542,
+          2.6925,
+          2.700834,
+          2.705917,
+          2.711,
+          2.711541
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "scheduled",
+        "local_lights": 256,
+        "project_sha256": "6783cc8c8710614c9aab0b2ad325774dd1b38e0358d478a4d5c23a4ef826783b",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.747709,
+        "measured_frames": 30,
+        "median_ms": 1.4264994999999998,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3835,
+        "p95_ms": 2.700166,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3835,
+          1.3851250000000002,
+          1.3912499999999999,
+          1.3963750000000001,
+          1.397,
+          1.397041,
+          1.397833,
+          1.398792,
+          1.400417,
+          1.404958,
+          1.4055,
+          1.4076250000000001,
+          1.409083,
+          1.409209,
+          1.4263329999999999,
+          1.426666,
+          1.430334,
+          1.43275,
+          1.445167,
+          1.485917,
+          1.493042,
+          2.666959,
+          2.66775,
+          2.6809580000000004,
+          2.683917,
+          2.69125,
+          2.69375,
+          2.695416,
+          2.700166,
+          2.747709
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "baseline",
+        "local_lights": 1024,
+        "project_sha256": "0d7611523ebd76f99777b701a66440ad1769a15a93d808d24276956331417fdb",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.956416,
+        "measured_frames": 30,
+        "median_ms": 2.7089790000000002,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.45475,
+        "p95_ms": 2.939166,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.45475,
+          1.486875,
+          1.526792,
+          1.573084,
+          1.591792,
+          2.6757500000000003,
+          2.6902079999999997,
+          2.694834,
+          2.69775,
+          2.699167,
+          2.699875,
+          2.706834,
+          2.707875,
+          2.708416,
+          2.708458,
+          2.7095000000000002,
+          2.709625,
+          2.71475,
+          2.737167,
+          2.737334,
+          2.7555829999999997,
+          2.7875,
+          2.7971250000000003,
+          2.798375,
+          2.809459,
+          2.819458,
+          2.900166,
+          2.90025,
+          2.939166,
+          2.956416
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "scheduled",
+        "local_lights": 1024,
+        "project_sha256": "0d7611523ebd76f99777b701a66440ad1769a15a93d808d24276956331417fdb",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.8530830000000003,
+        "measured_frames": 30,
+        "median_ms": 2.6974375,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.414,
+        "p95_ms": 2.7534159999999996,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.414,
+          2.579292,
+          2.652125,
+          2.669167,
+          2.6755,
+          2.6822920000000003,
+          2.684583,
+          2.688458,
+          2.689084,
+          2.691125,
+          2.691459,
+          2.692917,
+          2.693042,
+          2.693834,
+          2.697167,
+          2.697708,
+          2.6988749999999997,
+          2.7025,
+          2.70275,
+          2.70675,
+          2.710042,
+          2.712334,
+          2.714458,
+          2.7170419999999997,
+          2.718583,
+          2.7196249999999997,
+          2.726209,
+          2.727583,
+          2.7534159999999996,
+          2.8530830000000003
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "baseline",
+        "local_lights": 4096,
+        "project_sha256": "261aec0064b4d44c6121dededeff065294b153c9f79634d8f68925e8bd616749",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 9.090167,
+        "measured_frames": 30,
+        "median_ms": 7.7541665,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 6.487667,
+        "p95_ms": 9.090124999999999,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          6.487667,
+          6.4978750000000005,
+          6.500167,
+          6.530708,
+          6.5327079999999995,
+          6.558584,
+          6.625833999999999,
+          7.272583,
+          7.477,
+          7.495500000000001,
+          7.622834,
+          7.721666,
+          7.730875,
+          7.741333,
+          7.7465,
+          7.761833,
+          7.767041,
+          7.769459,
+          7.769666,
+          7.772791000000001,
+          7.777625,
+          7.784834,
+          7.788959,
+          7.800667,
+          7.801417,
+          7.814542,
+          7.892958,
+          9.002625,
+          9.090124999999999,
+          9.090167
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 1,
+        "path": "scheduled",
+        "local_lights": 4096,
+        "project_sha256": "261aec0064b4d44c6121dededeff065294b153c9f79634d8f68925e8bd616749",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 7.9755840000000005,
+        "measured_frames": 30,
+        "median_ms": 6.50625,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 6.43825,
+        "p95_ms": 7.855041999999999,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          6.43825,
+          6.442416000000001,
+          6.446667,
+          6.452917,
+          6.457167,
+          6.457916,
+          6.463666,
+          6.467041,
+          6.4726669999999995,
+          6.474667,
+          6.4755840000000005,
+          6.482875,
+          6.484625,
+          6.491625,
+          6.503417,
+          6.5090829999999995,
+          6.5095,
+          6.5104999999999995,
+          6.517166,
+          6.518458000000001,
+          6.522125,
+          6.534333,
+          7.571375,
+          7.588083,
+          7.650666,
+          7.725917,
+          7.746582999999999,
+          7.805875,
+          7.855041999999999,
+          7.9755840000000005
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "scheduled",
+        "local_lights": 0,
+        "project_sha256": "3e8d63260b042015a5c91d4476a6b350322633c70cef4e6004f5f496fe0a3e55",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.4710420000000002,
+        "measured_frames": 30,
+        "median_ms": 1.3965,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3359999999999999,
+        "p95_ms": 1.459083,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3359999999999999,
+          1.34775,
+          1.368791,
+          1.36975,
+          1.3712920000000002,
+          1.3714169999999999,
+          1.372833,
+          1.382417,
+          1.3830419999999999,
+          1.383625,
+          1.3836670000000002,
+          1.386875,
+          1.387541,
+          1.3895,
+          1.393042,
+          1.399958,
+          1.4019169999999999,
+          1.4031250000000002,
+          1.4055,
+          1.4068749999999999,
+          1.407292,
+          1.409792,
+          1.4105,
+          1.416458,
+          1.419416,
+          1.423583,
+          1.425,
+          1.457708,
+          1.459083,
+          1.4710420000000002
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "baseline",
+        "local_lights": 0,
+        "project_sha256": "3e8d63260b042015a5c91d4476a6b350322633c70cef4e6004f5f496fe0a3e55",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.502375,
+        "measured_frames": 30,
+        "median_ms": 1.393771,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3656670000000002,
+        "p95_ms": 1.477167,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3656670000000002,
+          1.370042,
+          1.370458,
+          1.3734579999999998,
+          1.373709,
+          1.3745829999999999,
+          1.3760000000000001,
+          1.380125,
+          1.3809580000000001,
+          1.382583,
+          1.383125,
+          1.3847079999999998,
+          1.385167,
+          1.3876249999999999,
+          1.393375,
+          1.394167,
+          1.399875,
+          1.405709,
+          1.405916,
+          1.4089580000000002,
+          1.411792,
+          1.412458,
+          1.4234580000000001,
+          1.430375,
+          1.432917,
+          1.454875,
+          1.4565,
+          1.46775,
+          1.477167,
+          1.502375
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "scheduled",
+        "local_lights": 64,
+        "project_sha256": "5b2af8340b1fdc5d141a390af5bfd7e31f1429e042604ec8a7c47853dd311ecc",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.480709,
+        "measured_frames": 30,
+        "median_ms": 1.395375,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.370708,
+        "p95_ms": 1.4530420000000002,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.370708,
+          1.373708,
+          1.3747919999999998,
+          1.377333,
+          1.381083,
+          1.38225,
+          1.3876249999999999,
+          1.388083,
+          1.3884159999999999,
+          1.39,
+          1.3901670000000002,
+          1.3918750000000002,
+          1.3934170000000001,
+          1.39425,
+          1.395083,
+          1.395667,
+          1.4002080000000001,
+          1.401042,
+          1.401792,
+          1.402542,
+          1.409084,
+          1.410584,
+          1.411833,
+          1.4170829999999999,
+          1.420167,
+          1.432208,
+          1.442,
+          1.443417,
+          1.4530420000000002,
+          1.480709
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "baseline",
+        "local_lights": 64,
+        "project_sha256": "5b2af8340b1fdc5d141a390af5bfd7e31f1429e042604ec8a7c47853dd311ecc",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.553334,
+        "measured_frames": 30,
+        "median_ms": 1.3896875,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.1681249999999999,
+        "p95_ms": 1.492667,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.1681249999999999,
+          1.303917,
+          1.3246250000000002,
+          1.3383749999999999,
+          1.341917,
+          1.3752090000000001,
+          1.377458,
+          1.3834579999999999,
+          1.3835,
+          1.383583,
+          1.3845,
+          1.384666,
+          1.385083,
+          1.387542,
+          1.388625,
+          1.3907500000000002,
+          1.394083,
+          1.3965830000000001,
+          1.399667,
+          1.404875,
+          1.406667,
+          1.408084,
+          1.430416,
+          1.441125,
+          1.45225,
+          1.4575420000000001,
+          1.463125,
+          1.4855420000000001,
+          1.492667,
+          1.553334
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "scheduled",
+        "local_lights": 256,
+        "project_sha256": "6783cc8c8710614c9aab0b2ad325774dd1b38e0358d478a4d5c23a4ef826783b",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.811333,
+        "measured_frames": 30,
+        "median_ms": 1.409187,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.298667,
+        "p95_ms": 2.799791,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.298667,
+          1.380917,
+          1.3855,
+          1.386417,
+          1.3888749999999999,
+          1.389708,
+          1.391209,
+          1.392167,
+          1.393084,
+          1.3960839999999999,
+          1.396541,
+          1.4032499999999999,
+          1.403625,
+          1.405417,
+          1.406333,
+          1.4120409999999999,
+          1.413834,
+          1.4381249999999999,
+          1.5178749999999999,
+          2.46525,
+          2.537458,
+          2.538292,
+          2.708209,
+          2.71375,
+          2.714,
+          2.718,
+          2.7243749999999998,
+          2.749583,
+          2.799791,
+          2.811333
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "baseline",
+        "local_lights": 256,
+        "project_sha256": "6783cc8c8710614c9aab0b2ad325774dd1b38e0358d478a4d5c23a4ef826783b",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.79475,
+        "measured_frames": 30,
+        "median_ms": 1.400875,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.365125,
+        "p95_ms": 2.7252919999999996,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.365125,
+          1.369833,
+          1.3720830000000002,
+          1.37575,
+          1.3759169999999998,
+          1.376167,
+          1.37675,
+          1.3795000000000002,
+          1.380541,
+          1.380833,
+          1.389958,
+          1.392458,
+          1.394167,
+          1.397792,
+          1.400709,
+          1.401041,
+          1.401208,
+          1.401208,
+          1.4012499999999999,
+          1.404625,
+          1.407292,
+          1.407791,
+          1.408708,
+          1.4098750000000002,
+          1.416041,
+          1.4665,
+          2.5231250000000003,
+          2.677208,
+          2.7252919999999996,
+          2.79475
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "scheduled",
+        "local_lights": 1024,
+        "project_sha256": "0d7611523ebd76f99777b701a66440ad1769a15a93d808d24276956331417fdb",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.777875,
+        "measured_frames": 30,
+        "median_ms": 2.675521,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.372417,
+        "p95_ms": 2.74325,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.372417,
+          1.3743340000000002,
+          1.382375,
+          1.3895,
+          1.39175,
+          1.396917,
+          2.460584,
+          2.471417,
+          2.658625,
+          2.660458,
+          2.6635,
+          2.665375,
+          2.668292,
+          2.670542,
+          2.670875,
+          2.680167,
+          2.681417,
+          2.681917,
+          2.691541,
+          2.691834,
+          2.6944999999999997,
+          2.69775,
+          2.705708,
+          2.70675,
+          2.708292,
+          2.708458,
+          2.715958,
+          2.7174579999999997,
+          2.74325,
+          2.777875
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "baseline",
+        "local_lights": 1024,
+        "project_sha256": "0d7611523ebd76f99777b701a66440ad1769a15a93d808d24276956331417fdb",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.775709,
+        "measured_frames": 30,
+        "median_ms": 2.6919790000000003,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.388458,
+        "p95_ms": 2.743792,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.388458,
+          1.399291,
+          1.427667,
+          2.435625,
+          2.652709,
+          2.6662909999999997,
+          2.6705829999999997,
+          2.673083,
+          2.673833,
+          2.678291,
+          2.6811249999999998,
+          2.68525,
+          2.6874160000000002,
+          2.688875,
+          2.6914170000000004,
+          2.6925410000000003,
+          2.694125,
+          2.694708,
+          2.698333,
+          2.699167,
+          2.70075,
+          2.7083749999999998,
+          2.710334,
+          2.71125,
+          2.714416,
+          2.716417,
+          2.728583,
+          2.736875,
+          2.743792,
+          2.775709
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "scheduled",
+        "local_lights": 4096,
+        "project_sha256": "261aec0064b4d44c6121dededeff065294b153c9f79634d8f68925e8bd616749",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 7.825,
+        "measured_frames": 30,
+        "median_ms": 6.6022085,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 6.014791000000001,
+        "p95_ms": 7.811165999999999,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          6.014791000000001,
+          6.257916,
+          6.289750000000001,
+          6.3488750000000005,
+          6.354125000000001,
+          6.429333,
+          6.450583,
+          6.457,
+          6.461125,
+          6.469957999999999,
+          6.482540999999999,
+          6.527749999999999,
+          6.543458,
+          6.584874999999999,
+          6.590125,
+          6.614292,
+          6.654333,
+          7.744125,
+          7.754333000000001,
+          7.756708000000001,
+          7.757125,
+          7.764625,
+          7.7762910000000005,
+          7.780958999999999,
+          7.781208,
+          7.790125,
+          7.792333,
+          7.806375,
+          7.811165999999999,
+          7.825
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 2,
+        "path": "baseline",
+        "local_lights": 4096,
+        "project_sha256": "261aec0064b4d44c6121dededeff065294b153c9f79634d8f68925e8bd616749",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 10.298708,
+        "measured_frames": 30,
+        "median_ms": 6.495729,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 5.186208000000001,
+        "p95_ms": 9.023166000000002,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          5.186208000000001,
+          5.22675,
+          5.258708,
+          6.338709,
+          6.3699580000000005,
+          6.46,
+          6.46375,
+          6.466708,
+          6.473541,
+          6.473708,
+          6.477791,
+          6.4799999999999995,
+          6.487083,
+          6.4894169999999995,
+          6.495583,
+          6.495875,
+          6.498208,
+          6.512584,
+          6.517417,
+          6.517792,
+          6.5258329999999996,
+          6.5294170000000005,
+          6.599083,
+          7.569249999999999,
+          7.686333,
+          7.719042,
+          7.7281249999999995,
+          9.009833,
+          9.023166000000002,
+          10.298708
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "baseline",
+        "local_lights": 0,
+        "project_sha256": "3e8d63260b042015a5c91d4476a6b350322633c70cef4e6004f5f496fe0a3e55",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.42625,
+        "measured_frames": 30,
+        "median_ms": 1.391354,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3676249999999999,
+        "p95_ms": 1.413458,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3676249999999999,
+          1.370041,
+          1.371875,
+          1.3719999999999999,
+          1.376084,
+          1.3775840000000001,
+          1.382291,
+          1.3827500000000001,
+          1.3827909999999999,
+          1.382875,
+          1.3838329999999999,
+          1.384875,
+          1.3852499999999999,
+          1.3897499999999998,
+          1.391125,
+          1.391583,
+          1.3918750000000002,
+          1.3921249999999998,
+          1.392375,
+          1.393166,
+          1.3940409999999999,
+          1.397375,
+          1.400708,
+          1.4020409999999999,
+          1.4032499999999999,
+          1.403542,
+          1.408,
+          1.408,
+          1.413458,
+          1.42625
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "scheduled",
+        "local_lights": 0,
+        "project_sha256": "3e8d63260b042015a5c91d4476a6b350322633c70cef4e6004f5f496fe0a3e55",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.418833,
+        "measured_frames": 30,
+        "median_ms": 1.39075,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.367375,
+        "p95_ms": 1.41225,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.367375,
+          1.36775,
+          1.369333,
+          1.3705,
+          1.372833,
+          1.373041,
+          1.3732499999999999,
+          1.374083,
+          1.377208,
+          1.377958,
+          1.379125,
+          1.380125,
+          1.382708,
+          1.384375,
+          1.387417,
+          1.394083,
+          1.3945830000000001,
+          1.395041,
+          1.3957920000000001,
+          1.397417,
+          1.397542,
+          1.3977499999999998,
+          1.398709,
+          1.399667,
+          1.402459,
+          1.403083,
+          1.40525,
+          1.40675,
+          1.41225,
+          1.418833
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "baseline",
+        "local_lights": 64,
+        "project_sha256": "5b2af8340b1fdc5d141a390af5bfd7e31f1429e042604ec8a7c47853dd311ecc",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.436208,
+        "measured_frames": 30,
+        "median_ms": 1.3925835000000002,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3753330000000001,
+        "p95_ms": 1.426375,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3753330000000001,
+          1.376667,
+          1.3790829999999998,
+          1.380583,
+          1.380625,
+          1.381125,
+          1.3825,
+          1.3828340000000001,
+          1.383542,
+          1.3845,
+          1.3851250000000002,
+          1.385416,
+          1.385958,
+          1.389833,
+          1.391833,
+          1.393334,
+          1.393791,
+          1.393958,
+          1.3944999999999999,
+          1.394625,
+          1.3960000000000001,
+          1.397334,
+          1.398791,
+          1.4014170000000001,
+          1.401583,
+          1.4033330000000002,
+          1.4055,
+          1.4150829999999999,
+          1.426375,
+          1.436208
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "scheduled",
+        "local_lights": 64,
+        "project_sha256": "5b2af8340b1fdc5d141a390af5bfd7e31f1429e042604ec8a7c47853dd311ecc",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 1.621875,
+        "measured_frames": 30,
+        "median_ms": 1.4230209999999999,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.303333,
+        "p95_ms": 1.565625,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.303333,
+          1.390917,
+          1.392,
+          1.394666,
+          1.397458,
+          1.398792,
+          1.399875,
+          1.400375,
+          1.4009999999999998,
+          1.413667,
+          1.415458,
+          1.4158330000000001,
+          1.4220409999999999,
+          1.422209,
+          1.422375,
+          1.423667,
+          1.4302080000000001,
+          1.430709,
+          1.432334,
+          1.447958,
+          1.469,
+          1.473708,
+          1.493833,
+          1.494041,
+          1.5097909999999999,
+          1.521959,
+          1.533458,
+          1.563583,
+          1.565625,
+          1.621875
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "baseline",
+        "local_lights": 256,
+        "project_sha256": "6783cc8c8710614c9aab0b2ad325774dd1b38e0358d478a4d5c23a4ef826783b",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.806166,
+        "measured_frames": 30,
+        "median_ms": 1.4055,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3808749999999999,
+        "p95_ms": 2.782167,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3808749999999999,
+          1.382208,
+          1.384291,
+          1.386709,
+          1.3875,
+          1.3889580000000001,
+          1.392292,
+          1.3953749999999998,
+          1.3977499999999998,
+          1.397791,
+          1.3980839999999999,
+          1.398833,
+          1.399125,
+          1.400458,
+          1.4007500000000002,
+          1.41025,
+          1.411625,
+          1.415459,
+          1.417,
+          1.422208,
+          1.44925,
+          1.4556669999999998,
+          1.46025,
+          1.697042,
+          2.699958,
+          2.715708,
+          2.720791,
+          2.760125,
+          2.782167,
+          2.806166
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "scheduled",
+        "local_lights": 256,
+        "project_sha256": "6783cc8c8710614c9aab0b2ad325774dd1b38e0358d478a4d5c23a4ef826783b",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.796167,
+        "measured_frames": 30,
+        "median_ms": 1.413834,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.2644170000000001,
+        "p95_ms": 2.7889999999999997,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.2644170000000001,
+          1.3770419999999999,
+          1.377375,
+          1.381584,
+          1.383166,
+          1.3832090000000001,
+          1.386792,
+          1.3876249999999999,
+          1.388708,
+          1.389916,
+          1.3963750000000001,
+          1.397834,
+          1.40175,
+          1.411459,
+          1.4125839999999998,
+          1.415084,
+          1.415792,
+          1.428,
+          1.4394589999999998,
+          1.4489159999999999,
+          1.5031249999999998,
+          1.503208,
+          1.668542,
+          1.672625,
+          2.671667,
+          2.6919169999999997,
+          2.720709,
+          2.72975,
+          2.7889999999999997,
+          2.796167
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "baseline",
+        "local_lights": 1024,
+        "project_sha256": "0d7611523ebd76f99777b701a66440ad1769a15a93d808d24276956331417fdb",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 3.9856659999999997,
+        "measured_frames": 30,
+        "median_ms": 2.5887705,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3747500000000001,
+        "p95_ms": 2.822334,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3747500000000001,
+          1.38075,
+          1.38425,
+          1.384375,
+          1.3934170000000001,
+          1.40025,
+          1.401666,
+          1.405583,
+          1.447458,
+          1.4505830000000002,
+          1.479584,
+          1.510417,
+          1.6962920000000001,
+          2.473333,
+          2.5300000000000002,
+          2.647541,
+          2.6527920000000003,
+          2.6614999999999998,
+          2.664708,
+          2.664792,
+          2.67625,
+          2.681708,
+          2.682667,
+          2.6840840000000004,
+          2.695917,
+          2.7104579999999996,
+          2.710791,
+          2.733708,
+          2.822334,
+          3.9856659999999997
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "scheduled",
+        "local_lights": 1024,
+        "project_sha256": "0d7611523ebd76f99777b701a66440ad1769a15a93d808d24276956331417fdb",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 2.881375,
+        "measured_frames": 30,
+        "median_ms": 2.7045209999999997,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 1.3840000000000001,
+        "p95_ms": 2.828334,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          1.3840000000000001,
+          1.4055,
+          1.443583,
+          1.471541,
+          1.483708,
+          1.518208,
+          1.551958,
+          2.647125,
+          2.674667,
+          2.675208,
+          2.681041,
+          2.683291,
+          2.6865,
+          2.6899580000000003,
+          2.703667,
+          2.705375,
+          2.7075,
+          2.708708,
+          2.711166,
+          2.716167,
+          2.73025,
+          2.734166,
+          2.735667,
+          2.749,
+          2.757917,
+          2.7680000000000002,
+          2.771084,
+          2.8214580000000002,
+          2.828334,
+          2.881375
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "baseline",
+        "local_lights": 4096,
+        "project_sha256": "261aec0064b4d44c6121dededeff065294b153c9f79634d8f68925e8bd616749",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 7.877000000000001,
+        "measured_frames": 30,
+        "median_ms": 6.6107499999999995,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 5.290292,
+        "p95_ms": 7.858042000000001,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          5.290292,
+          5.344833,
+          5.347625,
+          5.672375000000001,
+          5.70875,
+          6.463709,
+          6.513542,
+          6.52825,
+          6.532417000000001,
+          6.542541,
+          6.560916,
+          6.564209,
+          6.590083,
+          6.6017920000000005,
+          6.606375,
+          6.615125,
+          6.616084000000001,
+          6.619792,
+          6.624874999999999,
+          6.624958,
+          6.634458,
+          6.660417,
+          6.664542,
+          6.73725,
+          6.779917,
+          6.823125,
+          6.828792,
+          6.878,
+          7.858042000000001,
+          7.877000000000001
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      },
+      {
+        "trial": 3,
+        "path": "scheduled",
+        "local_lights": 4096,
+        "project_sha256": "261aec0064b4d44c6121dededeff065294b153c9f79634d8f68925e8bd616749",
+        "adapter": "Apple M5 Pro",
+        "height": 1080,
+        "max_ms": 6.7434590000000005,
+        "measured_frames": 30,
+        "median_ms": 6.0012495,
+        "method": "CPU encode + queue submit + GPU completion wait; no present, readback, PNG, asset load or simulation",
+        "min_ms": 5.048709000000001,
+        "p95_ms": 6.684667,
+        "scene": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 1,
+          "model_triangles": 3968,
+          "primitive_instances": 1
+        },
+        "sorted_samples_ms": [
+          5.048709000000001,
+          5.195125,
+          5.199042,
+          5.2075000000000005,
+          5.212958,
+          5.244375,
+          5.245375,
+          5.254708,
+          5.278625,
+          5.287667,
+          5.292916,
+          5.307667,
+          5.32675,
+          5.344042,
+          5.527458,
+          6.475041,
+          6.497083,
+          6.504041,
+          6.524833,
+          6.5349580000000005,
+          6.552166,
+          6.554667,
+          6.558584,
+          6.569084,
+          6.646041,
+          6.650791,
+          6.657916,
+          6.664874999999999,
+          6.684667,
+          6.7434590000000005
+        ],
+        "warmup_frames": 5,
+        "width": 1920
+      }
+    ]
+  },
+  "visual_review": "pending handoff 0020",
+  "verification_logs_sha256": {
+    "graph-workspace.log": "56b64c6b22fb9be50089b6646c1ea3db62f641919e812543df7aa6ac6db616fe",
+    "graph-gpu-unit.log": "7d3159aab0bb074e90450fb0c76a06d37490e3d0b3703b877eaa04aa7607a2c4",
+    "graph-gpu-model.log": "7567a1d0f592b2d29fa23f5cd7da7b1dee8e236a4681e07e1873b3ef636068bc",
+    "graph-clippy.log": "a89ef903f9cd666c64a8d9f1d7cbf1c1efab7dc6cd72dad97dfcf978f3e1d806",
+    "graph-ui.log": "8846cb3766ae799555ca2e4e96298770cc5c84e28e7842d0c0d49928c5f39184",
+    "graph-tools.log": "67f1bec1d1944f37610c5253d38eae3b25b79e995c8a7c81043c0b8e269a6bd0",
+    "graph-ui-build.log": "261ff8df3836db5e32af90d32ded2641b671a34403dd3f73a8a1e9515ee6e685",
+    "graph-native-build.log": "f1dd73fd0d3185f0cb0b8dc459948e056918de1d223461f6ae6a2079d6cf7d7a",
+    "graph-native-package.log": "1a722efc52729fe78a0ba61283711ade1b09492d3e6f93616bca19c5d64e71f1"
+  },
+  "limitations": [
+    "Internal fixed pass schedule; no automatic resource aliasing, multi-view rendering or parallel encoders.",
+    "No bevy_render default RenderPlugin integration; uses pinned bevy_ecs schedule with Incant-owned GPU resources.",
+    "Shadows, SSAO, bloom, TAA and mobile feature tiers remain open.",
+    "Fenced synthetic frame timings exclude loading, readback, presentation and simulation; no named game/device gate.",
+    "All caller-retained command buffers can retain their GPU resources; idle cache bounds are not a total queued-frame cap."
+  ]
+}

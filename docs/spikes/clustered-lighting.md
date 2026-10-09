@@ -145,5 +145,7 @@ Windows hosted validation on `8b94eff` ended in a native process access violatio
 while 18 renderer GPU tests ran concurrently; it did not report an assertion
 failure. Follow-up `788da07` serializes native GPU tests and exposes individual
 case output. All 18 renderer cases pass locally with that command. The exact-head
-Windows rerun remains required before merging PR #17; no driver root cause or
-Windows success is inferred from the local result.
+Windows rerun passed on exact head `788da07`, as did all twelve required hosted
+checks. PR #17 merged into main as `726a25d` on 2026-10-09; its actual merge
+commit has the `Built-by: astra` trailer. Serialization resolved this observed
+run failure, but a driver root cause has not been established.
