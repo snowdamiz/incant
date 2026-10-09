@@ -217,14 +217,26 @@ function snapshotFromEngine(read) {
             available: false,
             reason: 'This host does not expose asset importing.'
         },
-        diagnostics: (read.source_diagnostics ?? []).map((issue)=>({
-                id: `asset-source:${issue.asset_id}`,
-                severity: 'error',
-                message: `${issue.source}: ${issue.message}`,
-                entity: null,
-                component: null,
-                path: null
-            })),
+        diagnostics: [
+            ...read.viewport_error ? [
+                {
+                    id: 'native-viewport',
+                    severity: 'error',
+                    message: read.viewport_error,
+                    entity: null,
+                    component: null,
+                    path: null
+                }
+            ] : [],
+            ...(read.source_diagnostics ?? []).map((issue)=>({
+                    id: `asset-source:${issue.asset_id}`,
+                    severity: 'error',
+                    message: `${issue.source}: ${issue.message}`,
+                    entity: null,
+                    component: null,
+                    path: null
+                }))
+        ],
         history: {
             entries: read.history.map((tx)=>({
                     transaction: id(tx.id),

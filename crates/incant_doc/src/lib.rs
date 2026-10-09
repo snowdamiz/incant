@@ -128,6 +128,8 @@ pub struct ScriptComponent {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct MeshRenderer {
+    /// Stable ID of a cooked model asset. Its selected glTF scene supplies the
+    /// model's primitives and local node transforms.
     pub mesh: Id,
     pub materials: Vec<Id>,
     pub cast_shadows: bool,
@@ -399,6 +401,15 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                     .any(|id| !project.assets.contains_key(id))
             {
                 return Err("asset reference does not exist".into());
+            }
+            if project.assets[&m.mesh].kind != "model" {
+                return Err("mesh reference must identify a model asset".into());
+            }
+            if m.materials
+                .iter()
+                .any(|id| project.assets[id].kind != "material")
+            {
+                return Err("material reference must identify a material asset".into());
             }
         }
         "Camera" => {

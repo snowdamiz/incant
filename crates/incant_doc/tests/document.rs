@@ -22,6 +22,61 @@ fn deterministic_roundtrip() {
     );
 }
 #[test]
+fn mesh_bindings_require_the_correct_asset_kinds() {
+    let mut project = sample();
+    let model = Asset {
+        id: new_id(),
+        name: "Model".into(),
+        path: "model.glb".into(),
+        kind: "model".into(),
+        sha256: "ab".repeat(32),
+        import_settings: None,
+    };
+    let material = Asset {
+        id: new_id(),
+        name: "Material".into(),
+        path: "material.json".into(),
+        kind: "material".into(),
+        sha256: "cd".repeat(32),
+        import_settings: None,
+    };
+    project.assets.insert(model.id.clone(), model.clone());
+    project.assets.insert(material.id.clone(), material.clone());
+    let entity = project
+        .scenes
+        .values_mut()
+        .next()
+        .unwrap()
+        .entities
+        .values_mut()
+        .next()
+        .unwrap();
+    entity.components.insert(
+        "MeshRenderer".into(),
+        json!(MeshRenderer {
+            mesh: model.id.clone(),
+            materials: vec![material.id.clone()],
+            cast_shadows: true
+        }),
+    );
+    project.validate().unwrap();
+    project.assets.get_mut(&model.id).unwrap().kind = "texture".into();
+    assert!(
+        project
+            .diagnostics()
+            .iter()
+            .any(|error| error.message == "mesh reference must identify a model asset")
+    );
+    project.assets.get_mut(&model.id).unwrap().kind = "model".into();
+    project.assets.get_mut(&material.id).unwrap().kind = "texture".into();
+    assert!(
+        project
+            .diagnostics()
+            .iter()
+            .any(|error| error.message == "material reference must identify a material asset")
+    );
+}
+#[test]
 fn rejects_unknown_versions_fields_and_cycles() {
     let mut p = sample();
     let scene = p.scenes.values_mut().next().unwrap();

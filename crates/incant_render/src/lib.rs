@@ -1,7 +1,14 @@
 //! Phase 0 native-surface and actual-GPU screenshot proof, not a production PBR renderer.
+mod models;
+mod scene;
+#[cfg(test)]
+#[path = "../tests/support/mod.rs"]
+mod test_support;
 use bytemuck::{Pod, Zeroable};
-use glam::{Mat4, Quat, Vec3};
-use incant_doc::{Project, Transform};
+use glam::{Mat4, Vec3};
+use incant_doc::Project;
+pub use models::RenderScene;
+pub use scene::{SceneError, SceneStats};
 use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
 pub use wgpu;
 use wgpu::util::DeviceExt;
@@ -32,6 +39,8 @@ pub struct Renderer {
     pub adapter: wgpu::Adapter,
     pub adapter_name: String,
     pipelines: Mutex<HashMap<(wgpu::TextureFormat, bool), wgpu::RenderPipeline>>,
+    models: Mutex<models::ModelCache>,
+    model_pipelines: Mutex<HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>>,
 }
 impl Renderer {
     pub async fn new(
@@ -58,6 +67,8 @@ impl Renderer {
             adapter,
             adapter_name,
             pipelines: Mutex::new(HashMap::new()),
+            models: Mutex::new(HashMap::new()),
+            model_pipelines: Mutex::new(HashMap::new()),
         })
     }
     pub fn headless() -> Result<Self> {
@@ -165,6 +176,7 @@ impl Renderer {
             })
             .clone())
     }
+    /// Phase 0 compatibility path. Bound models require prepare_scene and draw_scene.
     pub fn draw(
         &self,
         project: &Project,
@@ -174,10 +186,27 @@ impl Renderer {
         height: u32,
         viewport: Option<Viewport>,
     ) -> Result<wgpu::CommandBuffer> {
+        self.draw_scene(
+            &self.diagnostic_scene(project)?,
+            view,
+            format,
+            width,
+            height,
+            viewport,
+        )
+    }
+    pub fn draw_scene(
+        &self,
+        scene: &RenderScene,
+        view: &wgpu::TextureView,
+        format: wgpu::TextureFormat,
+        width: u32,
+        height: u32,
+        viewport: Option<Viewport>,
+    ) -> Result<wgpu::CommandBuffer> {
         if width == 0 || height == 0 || width > 8192 || height > 8192 {
             return Err("invalid render target size".into());
         }
-        project.validate()?;
         let rect = viewport
             .map(|v| v.rect)
             .unwrap_or([0., 0., width as f32, height as f32]);
@@ -194,7 +223,7 @@ impl Renderer {
         if viewport.is_some_and(|v| v.corner_radii.iter().any(|r| !r.is_finite() || *r < 0.)) {
             return Err("invalid viewport corner radius".into());
         }
-        let vertices = vertices(project, rect[2] / rect[3])?;
+        let vertices = vertices(&scene.diagnostics, rect[2] / rect[3]);
         let buffer = self
             .device
             .create_buffer_init(&wgpu::util::BufferInitDescriptor {
@@ -256,7 +285,7 @@ impl Renderer {
                     view: &depth,
                     depth_ops: Some(wgpu::Operations {
                         load: wgpu::LoadOp::Clear(1.),
-                        store: wgpu::StoreOp::Discard,
+                        store: wgpu::StoreOp::Store,
                     }),
                     stencil_ops: None,
                 }),
@@ -269,6 +298,16 @@ impl Renderer {
             pass.set_vertex_buffer(0, buffer.slice(..));
             pass.draw(0..vertices.len() as u32, 0..1);
         }
+        self.render_models(
+            scene,
+            models::ModelTarget {
+                color: view,
+                depth: &depth,
+                format,
+                rect,
+            },
+            &mut encoder,
+        )?;
         if let Some(viewport) = viewport {
             let linear = viewport.canvas_srgb.map(|v| {
                 let v = f32::from(v) / 255.;
@@ -321,6 +360,14 @@ impl Renderer {
         Ok(encoder.finish())
     }
     pub fn screenshot_png(&self, project: &Project, width: u32, height: u32) -> Result<Vec<u8>> {
+        self.screenshot_scene_png(&self.diagnostic_scene(project)?, width, height)
+    }
+    pub fn screenshot_scene_png(
+        &self,
+        scene: &RenderScene,
+        width: u32,
+        height: u32,
+    ) -> Result<Vec<u8>> {
         if !(16..=1920).contains(&width) || !(16..=1080).contains(&height) {
             return Err("screenshot size out of bounds".into());
         }
@@ -338,8 +385,8 @@ impl Renderer {
             usage: wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::COPY_SRC,
             view_formats: &[],
         });
-        self.queue.submit([self.draw(
-            project,
+        self.queue.submit([self.draw_scene(
+            scene,
             &texture.create_view(&Default::default()),
             wgpu::TextureFormat::Rgba8UnormSrgb,
             width,
@@ -404,12 +451,12 @@ impl Renderer {
         Ok(bytes)
     }
 }
-fn vertices(project: &Project, aspect: f32) -> Result<Vec<Vertex>> {
-    // The spike consumes a real Bevy ECS query projection. Keep this isolated
-    // from authored state; production rendering will cache and update it incrementally.
-    let state = incant_core::Engine::new(project)?.snapshot();
-    let view = Mat4::look_at_rh(Vec3::new(6., 5., 9.), Vec3::ZERO, Vec3::Y);
-    let projection = Mat4::perspective_rh(50f32.to_radians(), aspect, 0.1, 1000.);
+fn camera(aspect: f32) -> Mat4 {
+    Mat4::perspective_rh(50f32.to_radians(), aspect, 0.1, 1000.)
+        * Mat4::look_at_rh(Vec3::new(6., 5., 9.), Vec3::ZERO, Vec3::Y)
+}
+fn vertices(transforms: &[Mat4], aspect: f32) -> Vec<Vertex> {
+    let camera = camera(aspect);
     let corners = [
         [-0.5, -0.5, -0.5],
         [0.5, -0.5, -0.5],
@@ -429,34 +476,23 @@ fn vertices(project: &Project, aspect: f32) -> Result<Vec<Vertex>> {
         ([1, 5, 6, 1, 6, 2], [1., 0., 0.]),
     ];
     let mut output = vec![];
-    for scene in project.scenes.values() {
-        for entity in scene.entities.values() {
-            let Some(value) = entity.components.get("Transform") else {
-                continue;
-            };
-            let t: Transform = serde_json::from_value(value.clone())?;
-            let world = Mat4::from_scale_rotation_translation(
-                Vec3::from_array(t.scale.map(|x| x as f32)),
-                Quat::from_array(t.rotation.map(|x| x as f32)),
-                Vec3::from_array(state.entities[&entity.id].translation.map(|x| x as f32)),
-            );
-            let mvp = projection * view * world;
-            for (indices, normal) in faces {
-                let normal = world
-                    .inverse()
-                    .transpose()
-                    .transform_vector3(Vec3::from_array(normal))
-                    .normalize()
-                    .to_array();
-                for index in indices {
-                    let position = mvp * Vec3::from_array(corners[index]).extend(1.);
-                    output.push(Vertex {
-                        position: position.to_array(),
-                        normal,
-                    });
-                }
+    for world in transforms {
+        let mvp = camera * world;
+        for (indices, normal) in faces {
+            let normal = world
+                .inverse()
+                .transpose()
+                .transform_vector3(Vec3::from_array(normal))
+                .normalize()
+                .to_array();
+            for index in indices {
+                let position = mvp * Vec3::from_array(corners[index]).extend(1.);
+                output.push(Vertex {
+                    position: position.to_array(),
+                    normal,
+                });
             }
         }
     }
-    Ok(output)
+    output
 }

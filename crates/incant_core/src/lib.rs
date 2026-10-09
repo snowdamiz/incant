@@ -1,10 +1,12 @@
 //! Bevy ECS projection and fixed-step simulation. The editor document is immutable
 //! during play; stopping discards the runtime projection, preserving authored state.
+mod scene;
 use bevy_app::{App, Update};
 use bevy_ecs::prelude::*;
-use incant_doc::{Project, Transform as DocTransform, Velocity as DocVelocity};
+use incant_doc::{MeshRenderer, Project};
+use scene::{LocalFrame, ParentId, SceneOrder, WorldFrame, prepare, propagate};
 use serde::Serialize;
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 #[derive(Component, Clone)]
 pub struct StableId(pub String);
@@ -14,6 +16,8 @@ pub struct SceneId(pub String);
 pub struct Position(pub [f64; 3]);
 #[derive(Component, Clone)]
 pub struct LinearVelocity(pub [f64; 3]);
+#[derive(Component, Clone)]
+pub struct MeshBinding(pub MeshRenderer);
 #[derive(Resource)]
 struct FixedStep(f64);
 #[derive(Debug, Clone, Serialize)]
@@ -22,6 +26,14 @@ pub struct RuntimeEntity {
     pub scene_id: String,
     pub translation: [f64; 3],
     pub velocity: [f64; 3],
+    pub parent: Option<String>,
+    pub rotation: [f64; 4],
+    pub scale: [f64; 3],
+    /// Column-major local-to-world matrix, including every ancestor. Translation
+    /// and velocity above remain parent-local, preserving the script contract.
+    pub world_transform: [[f64; 4]; 4],
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub mesh: Option<MeshRenderer>,
 }
 #[derive(Debug, Clone, Serialize)]
 pub struct RuntimeSnapshot {
@@ -32,43 +44,29 @@ pub struct RuntimeSnapshot {
 
 pub struct Engine {
     app: App,
+    entities: BTreeMap<String, Entity>,
     tick: u64,
     dt: f64,
+    elapsed_seconds: f64,
 }
 impl Engine {
     pub fn new(project: &Project) -> Result<Self, incant_doc::DocumentError> {
-        project.validate()?;
-        let dt = 1. / f64::from(project.settings.tick_rate);
         let mut app = App::new();
-        app.insert_resource(FixedStep(dt));
-        app.add_systems(Update, integrate);
-        for scene in project.scenes.values() {
-            for entity in scene.entities.values() {
-                let position = entity
-                    .components
-                    .get("Transform")
-                    .map(|v| serde_json::from_value::<DocTransform>(v.clone()))
-                    .transpose()?
-                    .unwrap_or_default();
-                let velocity = entity
-                    .components
-                    .get("Velocity")
-                    .map(|v| serde_json::from_value::<DocVelocity>(v.clone()))
-                    .transpose()?
-                    .map_or([0.; 3], |v| v.linear);
-                app.world_mut().spawn((
-                    StableId(entity.id.clone()),
-                    SceneId(scene.id.clone()),
-                    Position(position.translation),
-                    LinearVelocity(velocity),
-                ));
-            }
-        }
-        Ok(Self { app, tick: 0, dt })
+        app.add_systems(Update, (integrate, propagate).chain());
+        let mut engine = Self {
+            app,
+            entities: BTreeMap::new(),
+            tick: 0,
+            dt: 0.,
+            elapsed_seconds: 0.,
+        };
+        engine.sync(project)?;
+        Ok(engine)
     }
     pub fn step(&mut self) {
         self.app.update();
         self.tick += 1;
+        self.elapsed_seconds += self.dt;
     }
     pub fn run_ticks(&mut self, ticks: u64) {
         for _ in 0..ticks {
@@ -76,37 +74,88 @@ impl Engine {
         }
     }
     pub fn snapshot(&mut self) -> RuntimeSnapshot {
-        let mut query = self
-            .app
-            .world_mut()
-            .query::<(&StableId, &SceneId, &Position, &LinearVelocity)>();
+        let mut query = self.app.world_mut().query::<(
+            &StableId,
+            &SceneId,
+            &Position,
+            &LinearVelocity,
+            &ParentId,
+            &LocalFrame,
+            &WorldFrame,
+            Option<&MeshBinding>,
+        )>();
         let entities = query
             .iter(self.app.world())
-            .map(|(id, scene, position, velocity)| {
-                (
-                    id.0.clone(),
-                    RuntimeEntity {
-                        id: id.0.clone(),
-                        scene_id: scene.0.clone(),
-                        translation: position.0,
-                        velocity: velocity.0,
-                    },
-                )
-            })
+            .map(
+                |(id, scene, position, velocity, parent, local, world, mesh)| {
+                    (
+                        id.0.clone(),
+                        RuntimeEntity {
+                            id: id.0.clone(),
+                            scene_id: scene.0.clone(),
+                            translation: position.0,
+                            velocity: velocity.0,
+                            parent: parent.0.clone(),
+                            rotation: local.rotation,
+                            scale: local.scale,
+                            world_transform: world.0,
+                            mesh: mesh.map(|binding| binding.0.clone()),
+                        },
+                    )
+                },
+            )
             .collect();
         RuntimeSnapshot {
             tick: self.tick,
-            elapsed_seconds: self.tick as f64 * self.dt,
+            elapsed_seconds: self.elapsed_seconds,
             entities,
         }
     }
     /// Apply script-generated authored state through the command bus, then sync the
-    /// ECS projection. No scripts receive World or unvalidated component access.
+    /// ECS projection. Validation/decoding finish before any live entity changes.
+    /// Existing Bevy entities and schedules are reused; no scripts receive World.
     pub fn sync(&mut self, project: &Project) -> Result<(), incant_doc::DocumentError> {
-        let tick = self.tick;
-        let mut next = Self::new(project)?;
-        next.tick = tick;
-        *self = next;
+        let staged = prepare(project)?;
+        let retained: BTreeSet<_> = staged.iter().map(|entity| entity.id.as_str()).collect();
+        let world = self.app.world_mut();
+        self.entities.retain(|id, entity| {
+            if retained.contains(id.as_str()) {
+                true
+            } else {
+                world.despawn(*entity);
+                false
+            }
+        });
+        let mut order = SceneOrder::default();
+        for entity in staged {
+            let id = *self
+                .entities
+                .entry(entity.id.clone())
+                .or_insert_with(|| world.spawn_empty().id());
+            let mut target = world.entity_mut(id);
+            target.insert((
+                StableId(entity.id),
+                SceneId(entity.scene),
+                Position(entity.local.translation),
+                LinearVelocity(entity.velocity),
+                ParentId(entity.parent_id),
+                LocalFrame {
+                    rotation: entity.local.rotation,
+                    scale: entity.local.scale,
+                },
+                WorldFrame(entity.world.to_cols_array_2d()),
+            ));
+            if let Some(mesh) = entity.mesh {
+                target.insert(MeshBinding(mesh));
+            } else {
+                target.remove::<MeshBinding>();
+            }
+            order.entities.push((id, entity.parent_index));
+            order.worlds.push(entity.world);
+        }
+        self.dt = 1. / f64::from(project.settings.tick_rate);
+        world.insert_resource(FixedStep(self.dt));
+        world.insert_resource(order);
         Ok(())
     }
 }
@@ -120,7 +169,7 @@ fn integrate(step: Res<FixedStep>, mut query: Query<(&mut Position, &LinearVeloc
 #[cfg(test)]
 mod tests {
     use super::*;
-    use incant_doc::{Entity as DocEntity, Scene};
+    use incant_doc::{Entity as DocEntity, Scene, Transform as DocTransform};
     use serde_json::json;
     #[test]
     fn fixed_step_is_reproducible_and_does_not_edit_project() {

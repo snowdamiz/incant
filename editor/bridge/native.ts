@@ -200,10 +200,14 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
       ...(asset.import_settings?.type === 'texture' ? { textureUsage: asset.import_settings.usage } : {}),
     })) } } : {}),
     assetImport: read.asset_import ?? { available: false, reason: 'This host does not expose asset importing.' },
-    diagnostics: (read.source_diagnostics ?? []).map((issue) => ({
-      id: `asset-source:${issue.asset_id}`, severity: 'error',
-      message: `${issue.source}: ${issue.message}`, entity: null, component: null, path: null,
-    })),
+    diagnostics: [
+      ...(read.viewport_error ? [{ id: 'native-viewport', severity: 'error' as const,
+        message: read.viewport_error, entity: null, component: null, path: null }] : []),
+      ...(read.source_diagnostics ?? []).map((issue) => ({
+        id: `asset-source:${issue.asset_id}`, severity: 'error' as const,
+        message: `${issue.source}: ${issue.message}`, entity: null, component: null, path: null,
+      })),
+    ],
     history: {
       entries: read.history.map((tx) => ({
         transaction: id(tx.id),

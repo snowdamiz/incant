@@ -423,8 +423,13 @@ fn main() -> Result<()> {
             height,
         } => {
             let renderer = incant_render::Renderer::headless().map_err(|e| e.to_string())?;
+            let document = read_project(&project)?;
+            let assets = assets::load_runtime(&project, &document)?;
+            let scene = renderer
+                .prepare_scene(&document, &assets)
+                .map_err(|e| e.to_string())?;
             let bytes = renderer
-                .screenshot_png(&read_project(&project)?, width, height)
+                .screenshot_scene_png(&scene, width, height)
                 .map_err(|e| e.to_string())?;
             if let Some(parent) = output.parent()
                 && !parent.as_os_str().is_empty()
@@ -433,7 +438,7 @@ fn main() -> Result<()> {
             }
             fs::write(&output, bytes)?;
             print(
-                json!({"output":output,"adapter":renderer.adapter_name,"width":width,"height":height}),
+                json!({"output":output,"adapter":renderer.adapter_name,"width":width,"height":height,"geometry":scene.stats(),"shading":"diagnostic"}),
             )?;
         }
         Cli::Rpc { project, journal } => rpc(project, journal)?,
@@ -477,12 +482,11 @@ fn main() -> Result<()> {
                 max_steps: 30,
                 max_output_tokens,
             };
-            let viewport =
-                GpuPerception(incant_render::Renderer::headless().map_err(|e| e.to_string())?);
             let root = project
                 .parent()
                 .filter(|p| !p.as_os_str().is_empty())
                 .unwrap_or(Path::new("."));
+            let viewport = GpuPerception::new(Some(root.join(".incant/cache")))?;
             let mut host = incant_agent::ProjectHost::new(bus.project(), root, viewport)?;
             let report = agent.run(
                 &mut provider,
@@ -507,7 +511,20 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-struct GpuPerception(incant_render::Renderer);
+struct GpuPerception {
+    renderer: incant_render::Renderer,
+    cache: Option<PathBuf>,
+    assets: incant_assets::AssetStore,
+}
+impl GpuPerception {
+    fn new(cache: Option<PathBuf>) -> Result<Self> {
+        Ok(Self {
+            renderer: incant_render::Renderer::headless().map_err(|e| e.to_string())?,
+            cache,
+            assets: Default::default(),
+        })
+    }
+}
 impl incant_agent::Perception for GpuPerception {
     fn screenshot(
         &mut self,
@@ -516,9 +533,24 @@ impl incant_agent::Perception for GpuPerception {
         height: u32,
     ) -> std::result::Result<Value, incant_agent::AgentError> {
         use base64::Engine;
+        if let Some(cache) = &self.cache {
+            self.assets.sync(project, cache).map_err(|_| {
+                incant_agent::AgentError::Tool("Cooked assets could not be loaded".into())
+            })?;
+        } else if !project.assets.is_empty() {
+            return Err(incant_agent::AgentError::Tool(
+                "This viewport has no project asset access".into(),
+            ));
+        }
+        let scene = self
+            .renderer
+            .prepare_scene(project, &self.assets)
+            .map_err(|_| {
+                incant_agent::AgentError::Tool("Scene geometry could not be prepared".into())
+            })?;
         let bytes = self
-            .0
-            .screenshot_png(project, width, height)
+            .renderer
+            .screenshot_scene_png(&scene, width, height)
             .map_err(|_| incant_agent::AgentError::Tool("GPU capture failed".into()))?;
         Ok(
             json!({"mime_type":"image/png","data_url":format!("data:image/png;base64,{}",base64::engine::general_purpose::STANDARD.encode(bytes)),"width":width,"height":height}),

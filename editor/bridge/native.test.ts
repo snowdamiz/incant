@@ -52,6 +52,25 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it('publishes render errors to Problems and clears them after recovery', async () => {
+    let current = read();
+    const bridge = new NativeBridge(async <T>() => current as T);
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics).toEqual([]);
+    current = { ...read(), viewport_error: 'A cooked model could not be loaded' };
+    await bridge.start();
+    expect(bridge.getSnapshot().connection.status).toBe('ready');
+    expect(bridge.getSnapshot().viewport?.status).toBe('error');
+    expect(bridge.getSnapshot().diagnostics).toEqual([{
+      id: 'native-viewport', severity: 'error', message: current.viewport_error,
+      entity: null, component: null, path: null,
+    }]);
+    current = read();
+    await bridge.start();
+    expect(bridge.getSnapshot().viewport?.status).toBe('attached');
+    expect(bridge.getSnapshot().diagnostics).toEqual([]);
+  });
+
   it('updates source diagnostics without changing the ready document or viewport', async () => {
     let current = read();
     const bridge = new NativeBridge(async <T>() => current as T);
@@ -67,7 +86,15 @@ describe("native bridge", () => {
     }]);
     expect(bridge.getSnapshot().viewport?.status).toBe('attached');
     expect(bridge.getSnapshot().entities[entity]?.name).toBe('Cube');
-    current = { ...read(), source_diagnostics: [] };
+    current = { ...current, viewport_error: 'GPU capture failed' };
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics.map((item) => item.id)).toEqual([
+      'native-viewport', 'asset-source:00000000000000000000000011',
+    ]);
+    current = { ...current, source_diagnostics: [] };
+    await bridge.start();
+    expect(bridge.getSnapshot().diagnostics.map((item) => item.id)).toEqual(['native-viewport']);
+    current = read();
     await bridge.start();
     expect(bridge.getSnapshot().diagnostics).toEqual([]);
   });
