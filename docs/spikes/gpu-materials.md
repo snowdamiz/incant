@@ -43,7 +43,16 @@ Transformed bounds outside finite GPU coordinates fail before scene publication.
   The app remains Attached at 1440×900 and 1000×650 and restores the saved account.
 - Actual headless PNGs are in ignored artifacts/material-review; native CUA JPEGs
   are in artifacts/native-material-review. Only test metadata is committed.
-  Claude ACP handoff 0014 owns appearance review; final review remains pending.
+  Claude Opus 5.5 through ACP approved all 19 final headless captures and native
+  captures at both sizes in handoff 0014. Its review also confirms the additional
+  lit-back-face and varying-normal cases. A follow-up native scroll shows the
+  full Inspector content remains reachable at minimum height; Claude corrected
+  its initial clipping concern and accepted the independent scroll behavior.
+- Claude tuned key radiance to 2.0 and diffuse fill to 0.30, preserving camera and
+  direction. These improve preview legibility without changing authored factors.
+  Historical geometry evidence remains tied to its original revision; those image
+  hashes are not current lighting baselines. The final integrated tree again
+  passes all 119 Rust tests, seven explicit GPU tests and workspace Clippy.
 
 ## Limits
 
@@ -55,4 +64,4 @@ sorting and does not solve intersecting surfaces or crossing triangles. The fixe
 camera and diagnostic cubes for entities without mesh bindings remain. glTF core
 static materials/UV0 are supported; extensions, animation and authored material
 asset overrides still fail explicitly. CPU float images retain full precision;
-GPU images use half precision. Hosted checks and visual approval are not yet claimed.
+GPU images use half precision. Hosted checks remain pending.

@@ -43,9 +43,28 @@
     "final_captures": {
       "10-final-wide.jpg": "c146ca283f1e3f78116023068910a28494fecb4cb06ede1aae23f664f7cbd22c",
       "11-final-minimum.jpg": "9ef20e3989b6eedc1dda4be3c83d43b0ecbdbf6842086f605a8ecc0caacbc846"
-    }
+    },
+    "minimum_inspector_scrolling_reveals_complete_content": true
   },
-  "visual_review": "pending Claude 0014",
+  "visual_review": {
+    "model": "Claude Opus 5.5",
+    "transport": "ACP via tools/handoff/main.py",
+    "handoff": "0014-gpu-materials",
+    "headless_captures": 19,
+    "native_sizes": [
+      [
+        1440,
+        900
+      ],
+      [
+        1000,
+        650
+      ]
+    ],
+    "final_review": "4918685",
+    "scroll_correction": "7027df5",
+    "verdict": "accepted for imported-material preview scope"
+  },
   "hosted_checks": "pending",
   "studio_tuning": "aabfeef (Claude 0d8f29e)",
   "final_native_base": "aabfeef",

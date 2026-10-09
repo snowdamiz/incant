@@ -58,7 +58,8 @@ within its documented workload.
   Color spaces, samplers/mips, alpha modes, sidedness and reflected instances are
   implemented. 119 Rust behavior tests and seven explicit GPU tests pass locally.
   Native texture reimport, Undo/Redo, retention on source error and repair
-  pass. Claude visual review and hosted checks remain pending. Production lighting/render graph/postprocessing remain open. See
+  pass. Claude approved the final headless and native captures, including the
+  minimum-height Inspector scroll behavior. Hosted checks remain pending. Production lighting/render graph/postprocessing remain open. See
   [GPU material evidence](docs/spikes/gpu-materials.md).
 
 - Isolated headless playback now accepts ticks/seconds and an optional compiled
@@ -148,11 +149,12 @@ within its documented workload.
   and saved disposable projects; native account focus behavior passes, with the
   visible keyboard ring also approved by Claude.
 
-- The first ten PRs are merged into main after their required checks passed:
+- The first twelve PRs are merged into main after their required checks passed:
   foundation #1, product site #2, asset imports #3, runtime assets/UI polish #4,
   responsive loading/focus #5, shared import batches #6, source watching #7 and
   editor/agent imports with the redesigned asset workspace #8, and runtime scene
-  projection #9, and imported GPU geometry #10. The site deployed at
+  projection #9, imported GPU geometry #10, native source watching #11 and headless
+  playback #12. The site deployed at
   https://snowdamiz.github.io/incant/. PR #4 passed all thirteen checks on c063a99
   before merge. Shared import preparation passed all twelve checks on `4bddf52`
   before merge. Editor/agent imports are the current Phase 1 increment. Merging does
