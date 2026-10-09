@@ -14,6 +14,12 @@ after review and passing checks, without requesting separate merge approval.
   canonical formatting and stable ULIDs.
 - One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,
   durable recovery and exclusive journal ownership.
+- Phase 1 static textured glTF/GLB import, meshopt cooking and versioned binary
+  cache, with dependency invalidation and source-independent CPU loading. PNG,
+  JPEG and EXR cook to independently validated KTX2 with color/normal-aware mips.
+  CLI import preserves stable IDs and durable import settings through the shared
+  command bus. Animation, compression tiers and runtime integration remain open.
+  See [asset pipeline evidence](docs/spikes/asset-pipeline.md).
 - Bevy fixed-step simulation; isolated play state; SWC/QuickJS scripting, sandbox,
   live ECS queries and compatible hot reload.
 - Actual wgpu rendering and PNG readback on Apple M5 Pro.
@@ -36,7 +42,7 @@ after review and passing checks, without requesting separate merge approval.
 - Fourteen architecture records, generated TS structural bindings, developer docs,
   gate ledger and GitHub workflow source.
 
-See [written evidence and limitations](docs/spikes/phase-0.md). Fifty-four Rust
+See [written evidence and limitations](docs/spikes/phase-0.md). The Phase 0 baseline of fifty-four Rust
 behavior tests, 223 UI/bridge tests and five Python tool tests pass after
 integration. The thousand-entity script benchmark meets the local frame budget
 within its documented workload.

@@ -1,0 +1,31 @@
+{
+  "validator": "ktx version: v4.4.2",
+  "binary_sha256": "abd30109cbf84859b2f34951f7967e801111abadaac588468d98ed075100ad37",
+  "checks": [
+    {
+      "fixture": "color",
+      "sha256": "161c27a3c498eacd05fa936f16865dea727be25e16bb3457d9e6b49ec19c3f2e",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "fixture": "linear",
+      "sha256": "58dd58017727a8d450cc10771b56d2dccfba9e615b5d4ea1d0fc57e3e2f52a4f",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "fixture": "hdr",
+      "sha256": "05b0c1fce22a57fb125ce13ebcf00fc5b4e9b99588874459fb70c5485cf969bc",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "date": "2026-10-09",
+  "command": "python3 tools/validate_ktx.py",
+  "capture_used": false,
+  "scope": "Three synthetic texture formats; not visual acceptance or a Phase 1 gate."
+}

@@ -1,5 +1,64 @@
 {
   "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "import_settings": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AssetImportSettings"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "path",
+        "kind",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "AssetImportSettings": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "texture",
+              "type": "string"
+            },
+            "usage": {
+              "$ref": "#/$defs/TextureUsage"
+            }
+          },
+          "required": [
+            "type",
+            "usage"
+          ],
+          "type": "object"
+        }
+      ]
+    },
     "Entity": {
       "additionalProperties": false,
       "properties": {
@@ -100,6 +159,14 @@
         "entities"
       ],
       "type": "object"
+    },
+    "TextureUsage": {
+      "enum": [
+        "color",
+        "linear",
+        "normal"
+      ],
+      "type": "string"
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -281,6 +348,41 @@
         "scene_id",
         "entity_id",
         "component"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "description": "Register or update an imported asset without changing its stable identity.",
+      "properties": {
+        "asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "op": {
+          "const": "upsert_asset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "asset"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "type": "string"
+        },
+        "op": {
+          "const": "remove_asset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "asset_id"
       ],
       "type": "object"
     },

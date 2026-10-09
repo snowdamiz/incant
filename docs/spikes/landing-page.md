@@ -245,9 +245,11 @@ implementation did not change billing or repository visibility. A later read-onl
 GitHub check on 2026-10-08 reports the repository as public; the Pages endpoint
 returns HTTP 404, so a configured site is not yet confirmed. The previous
 private-repository eligibility failure is historical, not the current blocker.
-Pages still needs to use GitHub Actions as its source, and the director owns the
-PR merge that triggers deployment. The expected URL is
-`https://snowdamiz.github.io/incant/`; no successful public deployment is claimed.
+On 2026-10-09 the director authorized agents to merge completed PRs after review
+and passing checks. The Pages creation call now succeeds with `build_type=workflow`,
+HTTPS enforced, and the expected URL `https://snowdamiz.github.io/incant/`. Repository
+visibility and billing were not changed. The main-branch website workflow will
+publish after integration; a successful public deployment is not yet claimed.
 
 References: [Vite GitHub Pages deployment](https://vite.dev/guide/static-deploy.html#github-pages),
 [Tailwind Vite integration](https://tailwindcss.com/docs/installation/using-vite).
