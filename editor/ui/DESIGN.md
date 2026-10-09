@@ -139,13 +139,28 @@ are bundled locally, so nothing is fetched from a network.
   one, actions, and three facts. No field ever accepts a token, code or key. Initial focus is
   never destructive: when signed in, the dialog opens on Close, and the inline sign-out question
   opens on "Keep signed in".
-- **Notices:** absent, connecting and lost engine states show as one full-width strip under the
-  titlebar. Lost connection uses an alert role.
+- **Notices:** absent, opening and failed states show as one full-width strip under the
+  titlebar. A failure uses an alert role and is the only place its full text and code appear.
+  `project.*` codes read "The project could not be opened."; other codes read "Lost connection
+  to the editor process." Reopening is the retry path, and the strip says so once.
+- **Project states (handoff 0009):** while the project opens, nothing claims a result. The
+  titlebar and the strip say "Opening project…". The hierarchy shows its skeleton, and the
+  inspector, Problems and History show a spinner tile. The viewport pill reads "Waiting", and
+  the status bar hides its error and warning counts. When the open fails, the hierarchy,
+  viewport, inspector and History say "No project loaded" in one short line. Problems lists
+  the engine's diagnostic. Without one, it says "Not validated", never "No problems". Saved
+  account metadata in the titlebar chip stays visible in every project state.
 
 ## Focus and keyboard
 
 - Focus ring: 2 px `--color-focus` (`:focus-visible`), inset inside lists and islands so
   it is never clipped. Field boxes ring on `:focus-within`.
+- Keyboard modality (handoff 0009): WebKit draws no `:focus-visible` ring when script moves
+  focus after a key press. `src/shell/inputModality.ts` sets `data-focus-visible` on the
+  focused element while the last input was a key without ⌘, Ctrl or Alt. A pointer press
+  clears it. Every `:focus-visible` rule has a `[data-focus-visible]` twin, and a test
+  enforces that. A keyboard-opened dialog therefore rings Close. A pointer-opened dialog
+  focuses Close without a ring, as before.
 - F6 / Shift+F6 cycle visible panels (hidden panels are skipped). Hierarchy is an ARIA
   tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys.
   Dividers are `separator`s resizable with arrows (Shift = 64 px). `?` opens the

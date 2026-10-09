@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Icon } from '../icons/Icon';
+import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 
 /**
@@ -41,20 +42,35 @@ export function ViewportPanel() {
   }, [ask, reportBounds]);
 
   const viewport = snapshot?.viewport;
+  const project = projectState(snapshot);
   const attached = viewport?.status === 'attached';
   let status: string;
+  let title: string;
   let detail: string;
   if (!viewport) {
     status = 'No engine';
+    title = 'Native viewport not attached';
     detail = 'Connect the editor process to attach a viewport.';
   } else if (viewport.status === 'attached') {
     status = 'Attached';
+    title = '';
     detail = '';
+  } else if (project.kind === 'loading') {
+    status = 'Waiting';
+    title = 'Opening project…';
+    detail = 'The viewport attaches when the project has loaded.';
+  } else if (viewport.status === 'error' && project.kind === 'failed' && sameError(viewport.error, project.error)) {
+    // The project failed, not the surface. The banner carries the full message.
+    status = 'Error';
+    title = 'No project loaded';
+    detail = 'There is nothing to render until the project opens.';
   } else if (viewport.status === 'error') {
     status = 'Error';
+    title = 'The viewport failed to attach';
     detail = viewport.error.message;
   } else {
     status = 'Not attached';
+    title = 'Native viewport not attached';
     detail = viewport.reason;
   }
 
@@ -79,9 +95,7 @@ export function ViewportPanel() {
             <span className="viewport-empty__tile" aria-hidden="true">
               <Icon name="viewport" size={22} />
             </span>
-            <p className="viewport-empty__title">
-              {viewport?.status === 'error' ? 'The viewport failed to attach' : 'Native viewport not attached'}
-            </p>
+            <p className="viewport-empty__title">{title}</p>
             <p id="viewport-detail" className="viewport-empty__detail">
               {detail}
             </p>

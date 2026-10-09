@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { ComponentSchema, ComponentValue, Diagnostic, EntityDetail } from '../../bridge/contract';
 import { Icon, iconForKind } from '../../icons/Icon';
+import { projectState } from '../../shell/projectState';
 import { useShell } from '../../shell/ShellContext';
 import { StateView } from '../StateView';
 import { FieldView, fieldDomId, safeJson } from './FieldView';
@@ -9,11 +10,20 @@ export function InspectorPanel() {
   const { snapshot, selection } = useShell();
   const editable = false; // No component-edit command exists on the bridge yet (see NATIVE_VIEWPORT.md).
   const entity = selection !== null ? snapshot?.entities[selection] : undefined;
+  const project = projectState(snapshot);
   let body;
   if (!snapshot) {
     body = (
       <StateView icon="plug" title="No engine connected" compact>
         <p>Component values appear here once a project is attached.</p>
+      </StateView>
+    );
+  } else if (project.kind === 'loading') {
+    body = <StateView icon="entity" spinner title="Opening project…" compact />;
+  } else if (project.kind === 'failed') {
+    body = (
+      <StateView icon="entity" title="No project loaded" compact>
+        <p>Component values appear here once the project opens.</p>
       </StateView>
     );
   } else if (selection === null) {

@@ -1,0 +1,253 @@
+{
+  "browser": "Chrome 155.0.8059.40 headless",
+  "data": "SYNTHETIC: sample fixture and evidence test doubles, not engine state",
+  "shots": [
+    "01-project-loading-1000x650.png",
+    "01b-project-loading-history-1000x650.png",
+    "02-project-failed-1000x650.png",
+    "02b-project-failed-history-1000x650.png",
+    "03-project-ready-1000x650.png",
+    "04-account-pointer-open-1000x650.png",
+    "05-account-keyboard-open-1000x650.png",
+    "06-webkit-sim-account-pointer-open-1000x650.png",
+    "07-webkit-sim-account-keyboard-open-1000x650.png",
+    "07c-webkit-sim-account-keyboard-open-detail-1000x650.png",
+    "08-webkit-sim-signout-question-keyboard-1000x650.png",
+    "01-project-loading-1440x900.png",
+    "01b-project-loading-history-1440x900.png",
+    "02-project-failed-1440x900.png",
+    "02b-project-failed-history-1440x900.png",
+    "03-project-ready-1440x900.png",
+    "04-account-pointer-open-1440x900.png",
+    "05-account-keyboard-open-1440x900.png",
+    "05b-account-keyboard-tab-1440x900.png",
+    "06-webkit-sim-account-pointer-open-1440x900.png",
+    "07-webkit-sim-account-keyboard-open-1440x900.png",
+    "07c-webkit-sim-account-keyboard-open-detail-1440x900.png",
+    "08-webkit-sim-signout-question-keyboard-1440x900.png"
+  ],
+  "axe": [
+    {
+      "label": "project loading 1440x900",
+      "violations": []
+    },
+    {
+      "label": "project failed 1440x900",
+      "violations": []
+    },
+    {
+      "label": "account keyboard-open 1440x900",
+      "violations": []
+    }
+  ],
+  "focus": [
+    {
+      "label": "pointer-open 1000x650",
+      "active": "Close",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": false,
+      "outline": "none 3px rgb(169, 174, 185)"
+    },
+    {
+      "label": "keyboard-open 1000x650",
+      "active": "Close",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "webkit-sim 1000x650",
+      "rewrittenRules": 7
+    },
+    {
+      "label": "webkit-sim pointer-open 1000x650",
+      "active": "Close",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": false,
+      "outline": "none 3px rgb(169, 174, 185)"
+    },
+    {
+      "label": "webkit-sim keyboard-open 1000x650",
+      "active": "Close",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": true,
+      "outline": "none 3px rgb(169, 174, 185)"
+    },
+    {
+      "label": "webkit-sim keyboard sign-out question 1000x650",
+      "active": "Keep signed in",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": true,
+      "outline": "none 3px rgb(236, 236, 241)"
+    },
+    {
+      "label": "pointer-open 1440x900",
+      "active": "Close",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": false,
+      "outline": "none 3px rgb(169, 174, 185)"
+    },
+    {
+      "label": "keyboard-open 1440x900",
+      "active": "Close",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "keyboard Tab inside dialog 1440x900",
+      "active": "Use ada@example.com",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": true,
+      "outline": "solid 2px rgb(195, 200, 255)"
+    },
+    {
+      "label": "webkit-sim 1440x900",
+      "rewrittenRules": 7
+    },
+    {
+      "label": "webkit-sim pointer-open 1440x900",
+      "active": "Close",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": false,
+      "outline": "none 3px rgb(169, 174, 185)"
+    },
+    {
+      "label": "webkit-sim keyboard-open 1440x900",
+      "active": "Close",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": true,
+      "outline": "none 3px rgb(169, 174, 185)"
+    },
+    {
+      "label": "webkit-sim keyboard sign-out question 1440x900",
+      "active": "Keep signed in",
+      "dataFocusVisible": false,
+      "matchesFocusVisible": true,
+      "outline": "none 3px rgb(236, 236, 241)"
+    }
+  ],
+  "text": [
+    {
+      "label": "project loading 1000x650, Problems tab",
+      "titlebar": "Project: Connecting…",
+      "banner": "Connecting to the editor process…",
+      "hierarchy": "Hierarchy Loading hierarchy",
+      "viewport": "Viewport Not attached Native viewport not attached Loading project. Nothing in this area is rendered by the engine.",
+      "dock": "Problems Console History No problems Validation errors and warnings from the engine appear here.",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Loading project. Everything else works offline, no account needed.",
+      "statusbar": "Evidence test double (not engine) 0 errors, 0 warnings F6 next panel · ? shortcuts",
+      "alerts": 0
+    },
+    {
+      "label": "project loading 1000x650, History tab",
+      "titlebar": "Project: Connecting…",
+      "banner": "Connecting to the editor process…",
+      "hierarchy": "Hierarchy Loading hierarchy",
+      "viewport": "Viewport Not attached Native viewport not attached Loading project. Nothing in this area is rendered by the engine.",
+      "dock": "Problems Console History Undo Redo 0 of 0 applied No history yet Every edit, by you, the agent, a script or an import, is recorded here and can be undone.",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Loading project. Everything else works offline, no account needed.",
+      "statusbar": "Evidence test double (not engine) 0 errors, 0 warnings F6 next panel · ? shortcuts",
+      "alerts": 0
+    },
+    {
+      "label": "project failed 1000x650, Problems tab",
+      "titlebar": "Project: Disconnected",
+      "banner": "Lost connection to the editor process. Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Nothing shown is current. project.timeout",
+      "hierarchy": "Hierarchy The hierarchy could not be loaded Project loading timed out. Check the file's availability and folder permissions, then reopen the project. project.timeout",
+      "viewport": "Viewport Error The viewport failed to attach Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Nothing in this area is rendered by the engine.",
+      "dock": "Problems ( 1 ) Console History error: Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Project",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Everything else works offline, no account needed.",
+      "statusbar": "Evidence test double (not engine) 1 errors, 0 warnings F6 next panel · ? shortcuts",
+      "alerts": 2
+    },
+    {
+      "label": "project failed 1000x650, History tab",
+      "titlebar": "Project: Disconnected",
+      "banner": "Lost connection to the editor process. Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Nothing shown is current. project.timeout",
+      "hierarchy": "Hierarchy The hierarchy could not be loaded Project loading timed out. Check the file's availability and folder permissions, then reopen the project. project.timeout",
+      "viewport": "Viewport Error The viewport failed to attach Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Nothing in this area is rendered by the engine.",
+      "dock": "Problems ( 1 ) Console History Undo Redo 0 of 0 applied No history yet Every edit, by you, the agent, a script or an import, is recorded here and can be undone.",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Everything else works offline, no account needed.",
+      "statusbar": "Evidence test double (not engine) 1 errors, 0 warnings F6 next panel · ? shortcuts",
+      "alerts": 2
+    },
+    {
+      "label": "project ready 1000x650",
+      "titlebar": "Project: Dock Prototype Sample data : Sample fixture: sample, account signed-in-multi (simulated), not engine state; edits are disabled",
+      "banner": null,
+      "hierarchy": "Hierarchy 17 entities Filter hierarchy by name Dock Prototype Environment Sun Sky Dome Sea Surface Player Spawn Player Camera Rig Grapple Controller 1 1 , 1 error, 1 warning Dock Pier Planks 1 , 1 warning Crate 01 Crate 02 Crate 03 1 , 1 error Crate 04 Mooring Post with an intentionally long name to test truncation Harbor Ambience",
+      "viewport": "Viewport Not attached Native viewport not attached Sample data has no native surface. Open a project in the Incant editor app to attach the wgpu viewport. Nothing in this area is rendered by the engine.",
+      "dock": "Problems ( 5 ) Console ( 5 ) History ( 5 ) error: Half extents must be positive; y is -0.5. Crate 03 · Collider · /halfExtents/1 error: Script asset not found: scripts/grapple.ts Grapple Controller · Script · /source warning: Expected a number for pullSpeed; got the string \"12\". Grapple Controller · Script · /params/pullSpeed warning: Mesh has no LOD 2; distant rendering will use LOD 1. Pier Planks · MeshRenderer · /mesh info: Project has 2 unused materials. Project",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Agent messaging is not enabled in this build yet. Everything else works offline, no account needed.",
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 2 errors, 2 warnings F6 next panel · ? shortcuts",
+      "alerts": 0
+    },
+    {
+      "label": "project loading 1440x900, Problems tab",
+      "titlebar": "Project: Connecting…",
+      "banner": "Connecting to the editor process…",
+      "hierarchy": "Hierarchy Loading hierarchy",
+      "viewport": "Viewport Not attached Native viewport not attached Loading project. Nothing in this area is rendered by the engine.",
+      "dock": "Problems Console History No problems Validation errors and warnings from the engine appear here.",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Loading project. Everything else works offline, no account needed.",
+      "statusbar": "Evidence test double (not engine) 0 errors, 0 warnings F6 next panel · ? shortcuts",
+      "alerts": 0
+    },
+    {
+      "label": "project loading 1440x900, History tab",
+      "titlebar": "Project: Connecting…",
+      "banner": "Connecting to the editor process…",
+      "hierarchy": "Hierarchy Loading hierarchy",
+      "viewport": "Viewport Not attached Native viewport not attached Loading project. Nothing in this area is rendered by the engine.",
+      "dock": "Problems Console History Undo Redo 0 of 0 applied No history yet Every edit, by you, the agent, a script or an import, is recorded here and can be undone.",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Loading project. Everything else works offline, no account needed.",
+      "statusbar": "Evidence test double (not engine) 0 errors, 0 warnings F6 next panel · ? shortcuts",
+      "alerts": 0
+    },
+    {
+      "label": "project failed 1440x900, Problems tab",
+      "titlebar": "Project: Disconnected",
+      "banner": "Lost connection to the editor process. Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Nothing shown is current. project.timeout",
+      "hierarchy": "Hierarchy The hierarchy could not be loaded Project loading timed out. Check the file's availability and folder permissions, then reopen the project. project.timeout",
+      "viewport": "Viewport Error The viewport failed to attach Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Nothing in this area is rendered by the engine.",
+      "dock": "Problems ( 1 ) Console History error: Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Project",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Everything else works offline, no account needed.",
+      "statusbar": "Evidence test double (not engine) 1 errors, 0 warnings F6 next panel · ? shortcuts",
+      "alerts": 2
+    },
+    {
+      "label": "project failed 1440x900, History tab",
+      "titlebar": "Project: Disconnected",
+      "banner": "Lost connection to the editor process. Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Nothing shown is current. project.timeout",
+      "hierarchy": "Hierarchy The hierarchy could not be loaded Project loading timed out. Check the file's availability and folder permissions, then reopen the project. project.timeout",
+      "viewport": "Viewport Error The viewport failed to attach Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Nothing in this area is rendered by the engine.",
+      "dock": "Problems ( 1 ) Console History Undo Redo 0 of 0 applied No history yet Every edit, by you, the agent, a script or an import, is recorded here and can be undone.",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Project loading timed out. Check the file's availability and folder permissions, then reopen the project. Everything else works offline, no account needed.",
+      "statusbar": "Evidence test double (not engine) 1 errors, 0 warnings F6 next panel · ? shortcuts",
+      "alerts": 2
+    },
+    {
+      "label": "project ready 1440x900",
+      "titlebar": "Project: Dock Prototype Sample data : Sample fixture: sample, account signed-in-multi (simulated), not engine state; edits are disabled",
+      "banner": null,
+      "hierarchy": "Hierarchy 17 entities Filter hierarchy by name Dock Prototype Environment Sun Sky Dome Sea Surface Player Spawn Player Camera Rig Grapple Controller 1 1 , 1 error, 1 warning Dock Pier Planks 1 , 1 warning Crate 01 Crate 02 Crate 03 1 , 1 error Crate 04 Mooring Post with an intentionally long name to test truncation Harbor Ambience",
+      "viewport": "Viewport Not attached Native viewport not attached Sample data has no native surface. Open a project in the Incant editor app to attach the wgpu viewport. Nothing in this area is rendered by the engine.",
+      "dock": "Problems ( 5 ) Console ( 5 ) History ( 5 ) error: Half extents must be positive; y is -0.5. Crate 03 · Collider · /halfExtents/1 error: Script asset not found: scripts/grapple.ts Grapple Controller · Script · /source warning: Expected a number for pullSpeed; got the string \"12\". Grapple Controller · Script · /params/pullSpeed warning: Mesh has no LOD 2; distant rendering will use LOD 1. Pier Planks · MeshRenderer · /mesh info: Project has 2 unused materials. Project",
+      "inspector": "Inspector Nothing selected Select an entity in the hierarchy to inspect its components.",
+      "agent": "Agent not ready Agent messaging is not enabled in this build yet. Everything else works offline, no account needed.",
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 2 errors, 2 warnings F6 next panel · ? shortcuts",
+      "alerts": 0
+    }
+  ],
+  "errors": []
+}

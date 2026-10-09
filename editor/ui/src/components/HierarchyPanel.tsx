@@ -4,12 +4,14 @@ import type { HierarchyTree, Ulid } from '../bridge/contract';
 import type { ProblemCounts, Row } from '../hierarchy/tree';
 import { defaultExpanded, indexProblems, treeKey, typeAhead, visibleRows } from '../hierarchy/tree';
 import { Icon, iconForKind } from '../icons/Icon';
+import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 import { Skeleton, StateView } from './StateView';
 
 export function HierarchyPanel() {
   const { snapshot, bridge } = useShell();
   const hierarchy = snapshot?.hierarchy;
+  const project = projectState(snapshot);
   let body;
   if (!snapshot) {
     body = (
@@ -19,6 +21,13 @@ export function HierarchyPanel() {
     );
   } else if (!hierarchy || hierarchy.status === 'loading') {
     body = <Skeleton label="Loading hierarchy" />;
+  } else if (hierarchy.status === 'error' && project.kind === 'failed' && sameError(hierarchy.error, project.error)) {
+    // The banner carries the full failure; this panel only says what it cannot show.
+    body = (
+      <StateView icon="error" tone="error" alert={false} title="No project loaded">
+        <p>Entities appear here once the project opens.</p>
+      </StateView>
+    );
   } else if (hierarchy.status === 'error') {
     body = (
       <StateView icon="error" tone="error" title="The hierarchy could not be loaded">

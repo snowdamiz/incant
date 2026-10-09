@@ -33,9 +33,11 @@ export function Titlebar({
     connection?.status === 'ready'
       ? connection.project.name
       : connection?.status === 'connecting'
-        ? 'Connecting…'
+        ? 'Opening project…'
         : connection?.status === 'error'
-          ? 'Disconnected'
+          ? connection.error.code.startsWith('project.')
+            ? 'Project not opened'
+            : 'Disconnected'
           : 'No project open';
   const history = snapshot?.history;
   const canUndo = (history?.applied ?? 0) > 0;
@@ -67,8 +69,11 @@ export function Titlebar({
       <div className="titlebar__start">
         <div className="titlebar__identity">
           <img className="titlebar__logo" src="./icon.svg" alt="Incant" width={16} height={16} />
-          <h1 className="titlebar__project" title={project}>
-            <span className="visually-hidden">Project: </span>
+          <h1
+            className={`titlebar__project${connection?.status === 'ready' ? '' : ' is-pending'}`}
+            title={project}
+          >
+            {connection?.status === 'ready' ? <span className="visually-hidden">Project: </span> : null}
             {project}
           </h1>
           {bridge?.isFixture ? (

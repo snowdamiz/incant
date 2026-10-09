@@ -16,6 +16,8 @@ import type { PanelVisibility } from './components/Titlebar';
 import { ViewportPanel } from './components/ViewportPanel';
 import { Icon } from './icons/Icon';
 import { ShellProvider, useShell } from './shell/ShellContext';
+import { installInputModality } from './shell/inputModality';
+import { projectState } from './shell/projectState';
 import { focusRegion, nextRegion, regionOf } from './shell/regions';
 import { clampLayout, defaultLayout } from './shell/layout';
 import type { Layout } from './shell/layout';
@@ -67,6 +69,9 @@ function Workbench() {
   const [panels, setPanels] = useState<PanelVisibility>({ hierarchy: true, dock: true, inspector: true });
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const shortcutsReturn = useRef<HTMLElement | null>(null);
+
+  // Keeps keyboard focus visible where WebKit omits :focus-visible after script focus.
+  useEffect(() => installInputModality(document), []);
 
   const attached = snapshot?.viewport.status === 'attached';
   // With a native surface attached, the page background must not paint over it.
@@ -213,10 +218,14 @@ function isTextEntry(target: EventTarget | null): boolean {
   return target.isContentEditable;
 }
 
-/** Slim notice under the titlebar, only when the engine is absent, connecting or lost. */
+/**
+ * Slim notice under the titlebar, only when the engine is absent, the project is
+ * opening, or it failed. This is the one place the full failure text is shown;
+ * panels show a short state and Problems lists the engine's diagnostic.
+ */
 function ConnectionBanner() {
   const { snapshot, bridge } = useShell();
-  const connection = snapshot?.connection;
+  const project = projectState(snapshot);
   let content = null;
   if (!bridge) {
     content = (
@@ -228,27 +237,32 @@ function ConnectionBanner() {
         </span>
       </div>
     );
-  } else if (connection?.status === 'connecting') {
+  } else if (project.kind === 'loading') {
     content = (
       <div className="notice notice--info" role="status">
         <span className="spinner" aria-hidden="true" />
-        <span>Connecting to the editor process…</span>
+        <span>Opening project…</span>
       </div>
     );
-  } else if (connection?.status === 'error') {
+  } else if (project.kind === 'failed') {
+    const { error, projectError } = project;
+    // Reopening is the retry path. Say so once, unless the engine's message already does.
+    const hint = /\breopen\b/i.test(error.message) ? '' : ' Reopen the project to try again.';
     content = (
       <div className="notice notice--error" role="alert">
         <Icon name="error" size={14} />
         <span>
-          <strong>Lost connection to the editor process.</strong> {connection.error.message} Nothing shown is current.
+          <strong>{projectError ? 'The project could not be opened.' : 'Lost connection to the editor process.'}</strong>{' '}
+          {error.message}
+          {hint}
         </span>
-        <span className="notice__code mono">{connection.error.code}</span>
+        <span className="notice__code mono">{error.code}</span>
       </div>
     );
   }
   if (!content) return null;
   return (
-    <div className="notice-region" role="region" aria-label="Connection status">
+    <div className="notice-region" role="region" aria-label="Project status">
       {content}
     </div>
   );
@@ -260,13 +274,15 @@ function StatusBar() {
   const tone = !bridge ? 'idle' : bridge.isFixture ? 'fixture' : connection === 'ready' ? 'ok' : connection === 'error' ? 'error' : 'pending';
   const errors = snapshot?.diagnostics.filter((d) => d.severity === 'error').length ?? 0;
   const warnings = snapshot?.diagnostics.filter((d) => d.severity === 'warning').length ?? 0;
+  // While the project is opening nothing has been validated, so no counts are claimed.
+  const loading = projectState(snapshot).kind === 'loading';
   return (
     <footer className="statusbar">
       <span className={`statusbar__conn statusbar__conn--${tone}`}>
         <span className="statusbar__dot" aria-hidden="true" />
         {bridge ? bridge.label : 'No engine'}
       </span>
-      {snapshot ? (
+      {snapshot && !loading ? (
         <span className="statusbar__item">
           <Icon name="error" size={12} className="sev sev--error" />
           {errors} <span className="visually-hidden">errors,</span>
