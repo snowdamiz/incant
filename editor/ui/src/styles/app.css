@@ -136,9 +136,11 @@ kbd {
   background: var(--color-bg-app);
 }
 
+/* Centred so it never lands on macOS traffic lights or Windows caption buttons. */
 .skip-link {
   position: absolute;
-  left: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
   top: -100px;
   z-index: 100;
   padding: var(--space-2) var(--space-4);
@@ -150,7 +152,7 @@ kbd {
 }
 
 .skip-link:focus {
-  top: var(--space-2);
+  top: 6px; /* vertically centred in the 40 px titlebar */
 }
 
 /* ---- Titlebar ---- */
@@ -176,8 +178,10 @@ kbd {
   align-self: stretch;
 }
 
+/* macOS: the logo sits 12 px after the inset edge, which puts it 12.5 pt after the
+   green traffic light (measured natively; see handoff 0002). */
 .titlebar__inset + .titlebar__identity {
-  margin-left: calc(-1 * var(--space-4) + var(--space-2));
+  margin-left: calc(-1 * var(--space-4));
 }
 
 .titlebar__identity {
@@ -972,6 +976,15 @@ kbd {
   background: transparent;
   color: var(--color-text-subtle);
   cursor: default;
+}
+
+/* A disabled ghost action recedes; it must never look more prominent than an enabled one. */
+.button--ghost[aria-disabled='true'],
+.button--ghost[aria-disabled='true']:hover {
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-text-subtle);
+  opacity: 0.6;
 }
 
 /* An unavailable accent action keeps its emphasis but reads as inactive. */

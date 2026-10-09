@@ -300,5 +300,7 @@ function UnavailableAwareButton({
 function formatTime(iso: string) {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return iso;
-  return date.toISOString().slice(11, 19);
+  // Local wall-clock time; the full ISO instant stays in the <time dateTime> attribute.
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }

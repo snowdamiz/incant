@@ -2,9 +2,10 @@ import { act, fireEvent, render, screen, waitFor, within } from '@testing-librar
 import axe from 'axe-core';
 import { describe, expect, it } from 'vitest';
 import { App } from './App';
-import type { EditorBridge, EditorCommand } from './bridge/contract';
+import type { BridgeSnapshot, EditorBridge, EditorCommand } from './bridge/contract';
 import { createFixtureBridge, fixtureSnapshot } from './bridge/fixture';
 import type { FixtureVariant } from './bridge/fixture';
+import { humanize } from './components/inspector/FieldView';
 
 /**
  * TEST DOUBLE, not a bridge implementation: serves the sample snapshot, advertises
@@ -263,5 +264,49 @@ describe('editor shell', () => {
     expect(document.activeElement?.closest('[data-region]')?.getAttribute('data-region')).toBe('viewport');
     fireEvent.click(toggle);
     expect(screen.getByRole('tree', { name: 'Hierarchy' })).toBeTruthy();
+  });
+
+  it('points the skip link at the region its label names', () => {
+    renderFixture('sample');
+    const link = screen.getByRole('link', { name: 'Skip to hierarchy' });
+    expect(link.getAttribute('href')).toBe('#hierarchy-title');
+    expect(document.querySelector(link.getAttribute('href')!)?.textContent).toContain('Hierarchy');
+    fireEvent.click(screen.getByRole('button', { name: 'Hierarchy panel' }));
+    const viewportLink = screen.getByRole('link', { name: 'Skip to viewport' });
+    expect(viewportLink.getAttribute('href')).toBe('#viewport-title');
+  });
+
+  it('humanizes untitled native schema fields and does not repeat a type that equals its title', () => {
+    // Shape observed from the native bridge: schema title equals the type, fields have no titles.
+    const base = fixtureSnapshot('sample');
+    const [id, entity] = Object.entries(base.entities).find(([, e]) => e.kind !== 'scene')!;
+    const snapshot: BridgeSnapshot = {
+      ...base,
+      diagnostics: [],
+      schemas: {
+        ...base.schemas,
+        Transform: {
+          type: 'Transform',
+          version: 1,
+          title: 'Transform',
+          properties: { translation: { type: 'array', items: { type: 'number' } } },
+        },
+      },
+      entities: {
+        ...base.entities,
+        [id]: { ...entity, components: [{ type: 'Transform', schemaVersion: 1, value: { translation: [1, 2, 3] } }] },
+      },
+    };
+    const { bridge } = recordingBridge([]);
+    renderWith({ ...bridge, getSnapshot: () => snapshot });
+    fireEvent.click(treeRow(entity.name));
+    const section = screen.getByRole('region', { name: 'Transform' });
+    expect(section.querySelector('.component__type')).toBeNull();
+    expect(within(section).getByText('Translation')).toBeTruthy();
+    expect([humanize('castShadows'), humanize('cast_shadows'), humanize('scale')]).toEqual([
+      'Cast shadows',
+      'Cast shadows',
+      'Scale',
+    ]);
   });
 });
