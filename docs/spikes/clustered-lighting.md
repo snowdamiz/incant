@@ -30,6 +30,11 @@ Light-only entities do not become diagnostic cubes. No authored punctual lights
 means the existing studio preview key; an explicitly authored zero-intensity
 light disables that fallback. Environment illumination remains independent.
 
+The initial list-based assignment described below is superseded by
+[exact membership masks](light-masks.md), with a separate all-light diagnostic
+reference and paired performance evidence. This document retains the initial
+PR #17 implementation and review record.
+
 ## Assignment and shading
 
 The camera view is divided into 64-pixel tiles and 24 logarithmic depth slices
