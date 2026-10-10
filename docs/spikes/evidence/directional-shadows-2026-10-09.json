@@ -1,7 +1,7 @@
 {
   "date": "2026-10-09",
   "implementation_commit": "a4dcac4",
-  "stage": "implemented and scoped Claude review accepted; exact-head hosted checks pending",
+  "stage": "scoped implementation merged; phase and remaining release requirements open",
   "adapter": "Apple M5 Pro",
   "tests": {
     "ordinary_rust": 144,
@@ -4001,5 +4001,141 @@
     },
     "note": "first minimum attempt1720x669 correctly treated as short only; supplemental assets-retina-minimum measured2002x1302",
     "verdict": "accepted by Claude at 383a3ee after decoding the true-minimum 2002x1302 capture"
+  },
+  "hosted": {
+    "headRefOid": "5d31768b5d17970a05142083d2a696f5395b30ad",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:25:33Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886409/job/114051799254",
+        "name": "storage (macos-latest)",
+        "startedAt": "2026-10-09T22:22:55Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:51:01Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886394/job/114052122936",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "startedAt": "2026-10-09T22:23:52Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:47:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886424/job/114052083254",
+        "name": "checks",
+        "startedAt": "2026-10-09T22:23:51Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:24:30Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886396/job/114051799963",
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "startedAt": "2026-10-09T22:22:57Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:25:21Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886409/job/114051799534",
+        "name": "storage (windows-latest)",
+        "startedAt": "2026-10-09T22:22:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:40:34Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886394/job/114052122766",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "startedAt": "2026-10-09T22:23:53Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:24:25Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886396/job/114051799951",
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "startedAt": "2026-10-09T22:22:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:25:00Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886409/job/114051799493",
+        "name": "storage (ubuntu-latest)",
+        "startedAt": "2026-10-09T22:22:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:23:48Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886396/job/114051800092",
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "startedAt": "2026-10-09T22:22:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:25:48Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886396/job/114051799865",
+        "name": "web",
+        "startedAt": "2026-10-09T22:22:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:26:03Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886396/job/114051799581",
+        "name": "ios",
+        "startedAt": "2026-10-09T22:22:57Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T22:26:47Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/37998886396/job/114051799947",
+        "name": "android",
+        "startedAt": "2026-10-09T22:22:50Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      }
+    ]
+  },
+  "merge": {
+    "headRefOid": "5d31768b5d17970a05142083d2a696f5395b30ad",
+    "mergeCommit": {
+      "oid": "899cc2a7a4d4e32d946517dfbfdf97a3917b5537"
+    },
+    "mergedAt": "2026-10-09T23:07:14Z",
+    "state": "MERGED",
+    "url": "https://github.com/snowdamiz/incant/pull/21",
+    "verified_author_trailer": "Built-by: astra",
+    "tree_matches_tested_head": true
   }
 }

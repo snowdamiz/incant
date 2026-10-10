@@ -66,7 +66,7 @@ export type EngineResponse = EngineRead
 function isReady(read: EngineResponse): read is EngineRead {
   return read.status === undefined || read.status === "ready";
 }
-/** Resolve only local definitions and a single nullable alternative for display.
+/** Resolve local definitions, nullable fields and explicit tagged object unions for display.
  * Recursive/unknown schema forms remain explicit unsupported fields. No fetches.
  */
 function inspectorField(
@@ -92,8 +92,25 @@ function inspectorField(
     if (concrete.length !== 1) return unsupported;
     return { ...inspectorField(concrete[0]!, defs, depth + 1), ...metadata, nullable: true };
   }
+  if (Array.isArray(raw.oneOf)) {
+    const variants = raw.oneOf as Record<string, unknown>[];
+    if (variants.length < 2 || variants.length > 32 || variants.some(v => !v || v.type !== 'object' || !v.properties || typeof v.properties !== 'object' || !Array.isArray(v.required))) return unsupported;
+    const first = variants[0]!.properties as Record<string, Record<string, unknown>>;
+    const tags = Object.keys(first).filter(key => variants.every(v => {
+      const property = (v.properties as Record<string, Record<string, unknown>>)[key];
+      return (v.required as unknown[]).includes(key) && property?.type === 'string' && typeof property.const === 'string';
+    }));
+    const discriminator = tags.find(key => new Set(variants.map(v => (v.properties as Record<string, Record<string, unknown>>)[key]!.const)).size === variants.length);
+    if (!discriminator) return unsupported;
+    return { type: 'tagged-union', ...metadata, discriminator,
+      variants: Object.fromEntries(variants.map(v => [
+        String((v.properties as Record<string, Record<string, unknown>>)[discriminator]!.const), inspectorField(v, defs, depth + 1),
+      ])),
+    };
+  }
   if (typeof raw.type !== "string") return unsupported;
   const field = { ...raw };
+  if (raw.type === "string" && typeof raw.const === "string") field.enum = [raw.const];
   if (raw.type === "object" && raw.properties && typeof raw.properties === "object") {
     const required = Array.isArray(raw.required) ? raw.required : [];
     field.properties = Object.fromEntries(Object.entries(raw.properties).map(([key, child]) => [key, {

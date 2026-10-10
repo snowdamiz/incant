@@ -10,7 +10,13 @@ export interface Entity {
 }
 export type { Command } from './generated';
 import type { Command } from './generated';
+export type { PhysicsRayQuery as RayQuery, PhysicsRayHit as RayHit, PhysicsTriggerEvent as TriggerEvent } from './generated';
+import type { PhysicsRayQuery as RayQuery, PhysicsRayHit as RayHit, PhysicsTriggerEvent as TriggerEvent } from './generated';
 export interface ScriptApi {
+  /** Play-session query; at most 256 per tick. Direction is normalized. */
+  raycast(query: RayQuery): RayHit | null;
+  /** Sorted entry/exit transitions for the just-completed simulation tick. */
+  triggerEvents(): readonly TriggerEvent[];
   query(component?: string): readonly Entity[];
   command(command: Command): void;
   /** Structured output, published only after this tick commits. Maximum 64 messages

@@ -21,6 +21,8 @@ pub enum ScriptError {
     Result(#[from] serde_json::Error),
     #[error(transparent)]
     Command(#[from] CommandError),
+    #[error(transparent)]
+    Physics(#[from] incant_core::PhysicsError),
     #[error("script input exceeds configured limit")]
     InputLimit,
     #[error("script logs exceed the message, tick or pending-output limit")]
@@ -39,10 +41,13 @@ pub struct PlaySession {
 }
 impl PlaySession {
     pub fn new(project: &incant_doc::Project, compiled_source: &str) -> Result<Self, ScriptError> {
+        let engine = incant_core::Engine::new(project)?;
+        let mut host = ScriptHost::new(compiled_source)?;
+        host.set_raycaster(Arc::new(engine.raycaster()))?;
         Ok(Self {
-            host: ScriptHost::new(compiled_source)?,
+            host,
             bus: CommandBus::simulation(project.clone())?,
-            engine: incant_core::Engine::new(project)?,
+            engine,
             dt: 1. / f64::from(project.settings.tick_rate),
         })
     }
@@ -53,20 +58,42 @@ impl PlaySession {
         self.engine.snapshot()
     }
     pub fn tick(&mut self) -> Result<usize, ScriptError> {
-        self.engine.step();
+        self.engine.step()?;
         let mut commands = Vec::new();
-        for runtime in self.engine.snapshot().entities.values() {
+        let snapshot = self.engine.snapshot();
+        for runtime in snapshot.entities.values() {
             let entity = &self.bus.project().scenes[&runtime.scene_id].entities[&runtime.id];
             if let Some(value) = entity.components.get("Transform") {
                 let mut transform: incant_doc::Transform = serde_json::from_value(value.clone())?;
-                if transform.translation != runtime.translation {
+                if transform.translation != runtime.translation
+                    || transform.rotation != runtime.rotation
+                {
                     transform.translation = runtime.translation;
+                    transform.rotation = runtime.rotation;
                     commands.push(Command::SetComponent {
                         scene_id: runtime.scene_id.clone(),
                         entity_id: runtime.id.clone(),
                         component: "Transform".into(),
                         value: serde_json::to_value(transform)?,
                     });
+                }
+            }
+            if entity.components.contains_key("RigidBody") {
+                for (name, value) in [
+                    ("Velocity", serde_json::json!({"linear": runtime.velocity})),
+                    (
+                        "AngularVelocity",
+                        serde_json::json!({"angular": runtime.angular_velocity}),
+                    ),
+                ] {
+                    if entity.components.get(name) != Some(&value) {
+                        commands.push(Command::SetComponent {
+                            scene_id: runtime.scene_id.clone(),
+                            entity_id: runtime.id.clone(),
+                            component: name.into(),
+                            value,
+                        });
+                    }
                 }
             }
         }
@@ -83,7 +110,10 @@ impl PlaySession {
                 None,
             )?;
         }
-        let count = self.host.tick(&mut self.bus, self.dt)?;
+        let events = snapshot.trigger_events;
+        let count = self
+            .host
+            .tick_with_events(&mut self.bus, self.dt, &events)?;
         self.engine.sync(self.bus.project())?;
         Ok(count)
     }
@@ -94,7 +124,14 @@ struct TickResult {
     commands: Vec<Command>,
     logs: Vec<ScriptLog>,
 }
+type Raycaster = Arc<
+    dyn Fn(incant_core::RayQuery) -> Result<Option<incant_core::RayHit>, incant_core::PhysicsError>
+        + Send
+        + Sync,
+>;
 pub struct ScriptHost {
+    raycaster: Option<Raycaster>,
+    query_count: Arc<std::sync::atomic::AtomicUsize>,
     context: Context,
     _runtime: Runtime,
     deadline: Arc<Mutex<Instant>>,
@@ -126,12 +163,18 @@ impl ScriptHost {
 ; return exports.default; }})({{}});
    if (!__behavior || typeof __behavior.update !== 'function') throw new Error('default behavior.update required');
    let __state = JSON.parse(JSON.stringify(__behavior.initialState ?? {{}}));
-   globalThis.__tick = (worldJson, dt, stateJson) => {{
+   globalThis.__tick = (worldJson, dt, stateJson, eventsJson) => {{
      const world = JSON.parse(worldJson);
      const state = JSON.parse(stateJson);
      const commands = [];
      const logs = [];
      const api = Object.freeze({{
+       raycast: (query) => {{
+         const result = JSON.parse(globalThis.__incantRaycast(JSON.stringify(query)));
+         if (result.error) throw new Error(result.error);
+         return result.hit;
+       }},
+       triggerEvents: () => JSON.parse(eventsJson),
        query: (component) => Object.values(world.scenes).flatMap(scene => Object.values(scene.entities)
          .filter(entity => !component || Object.hasOwn(entity.components, component))
          .map(entity => ({{...entity, scene_id: scene.id}}))),
@@ -154,14 +197,56 @@ impl ScriptHost {
         if state.len() > 1024 * 1024 {
             return Err(ScriptError::InputLimit);
         }
-        Ok(Self {
+        let mut host = Self {
+            raycaster: None,
+            query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
             context,
             _runtime: runtime,
             deadline,
             budget,
             state: serde_json::from_str(&state)?,
             logs: Vec::new(),
-        })
+        };
+        host.install_queries()?;
+        Ok(host)
+    }
+    fn set_raycaster(&mut self, raycaster: Raycaster) -> Result<(), ScriptError> {
+        self.raycaster = Some(raycaster);
+        self.install_queries()
+    }
+    fn install_queries(&mut self) -> Result<(), ScriptError> {
+        let raycaster = self.raycaster.clone();
+        let count = self.query_count.clone();
+        let deadline = self.deadline.clone();
+        self.context
+            .with(|ctx| {
+                let function =
+                    rquickjs::Function::new(ctx.clone(), move |text: String| -> String {
+                        let result = (|| -> Result<_, String> {
+                            if text.len() > 4096
+                                || count.fetch_add(1, std::sync::atomic::Ordering::Relaxed) >= 256
+                                || Instant::now()
+                                    >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
+                            {
+                                return Err("physics query budget exceeded".into());
+                            }
+                            let query = serde_json::from_str(&text)
+                                .map_err(|e| format!("invalid ray query: {e}"))?;
+                            raycaster
+                                .as_ref()
+                                .ok_or("physics queries require a play session")?(
+                                query
+                            )
+                            .map_err(|e| e.to_string())
+                        })();
+                        match result {
+                            Ok(hit) => serde_json::json!({"hit":hit}).to_string(),
+                            Err(error) => serde_json::json!({"error":error}).to_string(),
+                        }
+                    })?;
+                ctx.globals().set("__incantRaycast", function)
+            })
+            .map_err(|_| ScriptError::Execution)
     }
     pub fn state(&self) -> &Value {
         &self.state
@@ -172,12 +257,24 @@ impl ScriptHost {
     }
     pub fn hot_reload(&mut self, source: &str) -> Result<(), ScriptError> {
         let mut next = Self::with_budget(source, self.budget)?;
+        next.raycaster = self.raycaster.clone();
+        next.install_queries()?;
         next.state = preserve_compatible(&self.state, &next.state);
         next.logs = std::mem::take(&mut self.logs);
         *self = next;
         Ok(())
     }
     pub fn tick(&mut self, bus: &mut CommandBus, dt: f64) -> Result<usize, ScriptError> {
+        self.tick_with_events(bus, dt, &[])
+    }
+    fn tick_with_events(
+        &mut self,
+        bus: &mut CommandBus,
+        dt: f64,
+        events: &[incant_core::TriggerEvent],
+    ) -> Result<usize, ScriptError> {
+        self.query_count
+            .store(0, std::sync::atomic::Ordering::Relaxed);
         if !dt.is_finite() || dt <= 0. || dt > 1. {
             return Err(ScriptError::InputLimit);
         }
@@ -191,7 +288,12 @@ impl ScriptHost {
             .context
             .with(|ctx| {
                 let function: rquickjs::Function = ctx.globals().get("__tick")?;
-                function.call::<_, String>((world, dt, state))
+                function.call::<_, String>((
+                    world,
+                    dt,
+                    state,
+                    serde_json::to_string(events).expect("serializable trigger events"),
+                ))
             })
             .map_err(|_| ScriptError::Execution)?;
         if result.len() > 16 * 1024 * 1024 {

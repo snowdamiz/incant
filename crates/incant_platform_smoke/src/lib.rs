@@ -1,6 +1,6 @@
 //! Small runnable cross-platform probe of the actual document and Bevy crates.
 use incant_core::Engine;
-use incant_doc::{Entity, Project, Scene, Transform};
+use incant_doc::{Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform};
 use serde_json::json;
 
 pub fn run() -> Result<String, String> {
@@ -15,6 +15,44 @@ pub fn run() -> Result<String, String> {
         .components
         .insert("Velocity".into(), json!({"linear":[3.,0.,0.]}));
     scene.entities.insert(id.clone(), entity);
+    let mut floor = Entity::new("Physics floor");
+    floor.components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [0., -0.5, 0.],
+            ..Default::default()
+        }),
+    );
+    floor.components.insert(
+        "Collider".into(),
+        json!(Collider {
+            shape: ColliderShape::Box {
+                half_extents: [10., 0.5, 10.]
+            },
+            ..Default::default()
+        }),
+    );
+    let mut falling = Entity::new("Falling sphere");
+    let falling_id = falling.id.clone();
+    falling.components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [0., 4., 0.],
+            ..Default::default()
+        }),
+    );
+    falling.components.insert(
+        "Collider".into(),
+        json!(Collider {
+            shape: ColliderShape::Sphere { radius: 0.5 },
+            ..Default::default()
+        }),
+    );
+    falling
+        .components
+        .insert("RigidBody".into(), json!(RigidBody::default()));
+    scene.entities.insert(floor.id.clone(), floor);
+    scene.entities.insert(falling.id.clone(), falling);
     project.scenes.insert(scene.id.clone(), scene);
     let text = project.canonical_text().map_err(|e| e.to_string())?;
     let reloaded = Project::from_text(&text).map_err(|e| e.to_string())?;
@@ -22,13 +60,17 @@ pub fn run() -> Result<String, String> {
         return Err("document roundtrip failed".into());
     }
     let mut engine = Engine::new(&project).map_err(|e| e.to_string())?;
-    engine.run_ticks(120);
+    engine.run_ticks(120).map_err(|e| e.to_string())?;
     let state = engine.snapshot();
     let x = state.entities[&id].translation[0];
     if (x - 6.).abs() > 1e-9 {
         return Err("ECS fixed-step assertion failed".into());
     }
-    Ok(json!({"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
+    let physics_y = state.entities[&falling_id].translation[1];
+    if (physics_y - 0.5).abs() > 0.02 {
+        return Err("physics contact assertion failed".into());
+    }
+    Ok(json!({"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
 }
 
 #[cfg(not(target_arch = "wasm32"))]

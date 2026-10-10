@@ -124,6 +124,7 @@ export type FieldSchema = {
       readonly minimum?: number;
       readonly maximum?: number;
       readonly 'x-incant-unit'?: string;
+      readonly 'x-incant-widget'?: 'collision-mask' | (string & {});
     }
   | { readonly type: 'boolean'; readonly title?: string; readonly description?: string }
   | {
@@ -133,6 +134,7 @@ export type FieldSchema = {
       readonly items: FieldSchema;
       readonly minItems?: number;
       readonly maxItems?: number;
+      readonly 'x-incant-unit'?: string;
       readonly 'x-incant-widget'?: 'vec2' | 'vec3' | 'vec4' | 'quat' | (string & {});
     }
   | {
@@ -140,6 +142,13 @@ export type FieldSchema = {
       readonly title?: string;
       readonly description?: string;
       readonly properties: Readonly<Record<string, FieldSchema>>;
+    }
+  | {
+      readonly type: 'tagged-union';
+      readonly title?: string;
+      readonly description?: string;
+      readonly discriminator: string;
+      readonly variants: Readonly<Record<string, FieldSchema>>;
     }
   | { readonly type: string & {}; readonly title?: string; readonly description?: string });
 

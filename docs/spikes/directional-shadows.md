@@ -31,12 +31,13 @@ and distance fade, and reverse submission after scene/asset/source disposal.
 The public CLI authors/imports through the shared command bus; light/caster edits,
 Undo/Redo, atomic invalid batch rejection, journal reopening and source-free
 cached rendering pass. Native verification and measurements are complete; Claude accepted the scoped native and appearance review;
-exact-head hosted checks remain pending. No release gate is claimed.
+all twelve hosted checks pass at `5d31768`. PR #21 merged as `899cc2a`; its tree
+matches the tested head and its author trailer is verified. No release gate is claimed.
 
 Initial native checks show the enabled Sun's distance as 40 m in the read-only
 Inspector, an attached viewport and zero errors before/after output resizing.
 Wide (1440×900) and short (1720×669) captures await Claude review. The latter
-is an external-monitor quarter window; the actual 1000×650 minimum remains pending. Assets remains a separate left
+is an external-monitor quarter window; the actual 1000×650 minimum was still pending at that point. Assets remains a separate left
 workspace, with Problems/Console/History in the bottom output. The saved account
 restores across the rebuilt app without authentication or Keychain interaction.
 

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "entered": {
+      "type": "boolean"
+    },
+    "first": {
+      "description": "Stable entity IDs in lexical order, at least one is a sensor.",
+      "type": "string"
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "second": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "scene_id",
+    "first",
+    "second",
+    "entered"
+  ],
+  "title": "TriggerEvent",
+  "type": "object"
+}

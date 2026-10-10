@@ -146,22 +146,109 @@ const SCHEMAS: Record<string, ComponentSchema> = {
       far: { type: 'number', title: 'Far plane', minimum: 0, 'x-incant-unit': 'm' },
     },
   },
-  'incant.Collider': {
-    type: 'incant.Collider',
+  // Physics: mirrors of the native RigidBody / Collider / AngularVelocity schemas after
+  // bridge resolution, including the registry's order, units and mask widget (bare
+  // type names, no titles). PhysicsFields.test.tsx checks them against
+  // snapshotFromEngine over schemas/*.schema.json.
+  RigidBody: {
+    type: 'RigidBody',
+    version: 1,
+    title: 'RigidBody',
+    order: ['motion', 'gravity_scale', 'linear_damping', 'angular_damping', 'can_sleep', 'ccd'],
+    properties: {
+      motion: { type: 'string', enum: ['fixed', 'dynamic', 'kinematic'], optional: false },
+      gravity_scale: { type: 'number', minimum: -100, maximum: 100, optional: false },
+      linear_damping: {
+        type: 'number',
+        description: 'Linear velocity damping rate, in inverse seconds.',
+        minimum: 0,
+        maximum: 100,
+        'x-incant-unit': '1/s',
+        optional: false,
+      },
+      angular_damping: {
+        type: 'number',
+        description: 'Angular velocity damping rate, in inverse seconds.',
+        minimum: 0,
+        maximum: 100,
+        'x-incant-unit': '1/s',
+        optional: false,
+      },
+      can_sleep: { type: 'boolean', optional: false },
+      ccd: { type: 'boolean', optional: false },
+    },
+  },
+  Collider: {
+    type: 'Collider',
     version: 1,
     title: 'Collider',
-    order: ['shape', 'halfExtents', 'isTrigger'],
+    order: ['shape', 'density', 'friction', 'restitution', 'sensor', 'memberships', 'filter'],
     properties: {
-      shape: { type: 'string', title: 'Shape', enum: ['box', 'sphere', 'capsule'] },
-      halfExtents: {
+      shape: {
+        type: 'tagged-union',
+        discriminator: 'type',
+        optional: false,
+        variants: {
+          box: {
+            type: 'object',
+            properties: {
+              half_extents: {
+                type: 'array',
+                items: { type: 'number' },
+                minItems: 3,
+                maxItems: 3,
+                'x-incant-unit': 'm',
+                optional: false,
+              },
+              type: { type: 'string', enum: ['box'], optional: false },
+            },
+          },
+          sphere: {
+            type: 'object',
+            properties: {
+              radius: { type: 'number', 'x-incant-unit': 'm', optional: false },
+              type: { type: 'string', enum: ['sphere'], optional: false },
+            },
+          },
+          capsule: {
+            type: 'object',
+            description: 'Capsule along local Y; half_height excludes the hemispherical ends.',
+            properties: {
+              half_height: { type: 'number', 'x-incant-unit': 'm', optional: false },
+              radius: { type: 'number', 'x-incant-unit': 'm', optional: false },
+              type: { type: 'string', enum: ['capsule'], optional: false },
+            },
+          },
+        },
+      },
+      density: { type: 'number', minimum: 0.001, maximum: 100000, 'x-incant-unit': 'kg/m³', optional: false },
+      filter: { type: 'integer', minimum: 0, maximum: 4294967295, 'x-incant-widget': 'collision-mask', optional: false },
+      friction: { type: 'number', minimum: 0, maximum: 10, optional: false },
+      memberships: {
+        type: 'integer',
+        minimum: 0,
+        maximum: 4294967295,
+        'x-incant-widget': 'collision-mask',
+        description: 'Collision requires both membership/filter intersections to be nonzero.',
+        optional: false,
+      },
+      restitution: { type: 'number', minimum: 0, maximum: 1, optional: false },
+      sensor: { type: 'boolean', optional: false },
+    },
+  },
+  AngularVelocity: {
+    type: 'AngularVelocity',
+    version: 1,
+    title: 'AngularVelocity',
+    properties: {
+      angular: {
         type: 'array',
-        title: 'Half extents',
         items: { type: 'number' },
         minItems: 3,
         maxItems: 3,
-        'x-incant-widget': 'vec3',
+        'x-incant-unit': 'rad/s',
+        optional: false,
       },
-      isTrigger: { type: 'boolean', title: 'Trigger' },
     },
   },
   'incant.Script': {
@@ -214,15 +301,27 @@ const mesh = (meshRef: string, material: string): ComponentValue => ({
   schemaVersion: 1,
   value: { mesh: meshRef, material, castShadows: true, lodBias: 0 },
 });
-const box = (half: number[]): ComponentValue => ({
-  type: 'incant.Collider',
+const ALL_GROUPS = 4294967295;
+const collider = (shape: Record<string, unknown>, extra: Record<string, unknown> = {}): ComponentValue => ({
+  type: 'Collider',
   schemaVersion: 1,
-  value: { shape: 'box', halfExtents: half, isTrigger: false },
+  value: { shape, density: 1000, friction: 0.5, restitution: 0, sensor: false, memberships: ALL_GROUPS, filter: ALL_GROUPS, ...extra },
 });
-const crate = (name: string, x: number, half = [0.5, 0.5, 0.5]): Spec => ({
+const body = (motion: string, extra: Record<string, unknown> = {}): ComponentValue => ({
+  type: 'RigidBody',
+  schemaVersion: 1,
+  value: { motion, gravity_scale: 1, linear_damping: 0, angular_damping: 0.05, can_sleep: true, ccd: true, ...extra },
+});
+const crate = (name: string, x: number, half = [0.5, 0.5, 0.5], more: ComponentValue[] = []): Spec => ({
   name,
   kind: 'mesh',
-  components: [transform([x, 0.5, 2]), mesh('assets/dock_kit/crate.mesh', 'materials/weathered_wood.mat'), box(half)],
+  components: [
+    transform([x, 0.5, 2]),
+    mesh('assets/dock_kit/crate.mesh', 'materials/weathered_wood.mat'),
+    body('dynamic'),
+    collider({ type: 'box', half_extents: half }, { density: 420, friction: 0.7 }),
+    ...more,
+  ],
 });
 
 const SAMPLE_SCENE: Spec = {
@@ -307,15 +406,38 @@ const SAMPLE_SCENE: Spec = {
       kind: 'group',
       components: [transform([0, 0, 6])],
       children: [
-        { name: 'Pier Planks', kind: 'mesh', components: [transform([0, 0, 0]), mesh('assets/dock_kit/pier_planks.mesh', 'materials/weathered_wood.mat')] },
-        crate('Crate 01', -2),
+        {
+          name: 'Pier Planks',
+          kind: 'mesh',
+          components: [
+            transform([0, 0, 0]),
+            mesh('assets/dock_kit/pier_planks.mesh', 'materials/weathered_wood.mat'),
+            // Deliberately unknown shape tag: the Inspector must say so, not pick a default.
+            collider({ type: 'cylinder', half_height: 0.1, radius: 4 }, { friction: 0.9 }),
+          ],
+        },
+        crate('Crate 01', -2, [0.5, 0.5, 0.5], [
+          { type: 'AngularVelocity', schemaVersion: 1, value: { angular: [0, 1.5708, 0] } },
+        ]),
         crate('Crate 02', -1),
         crate('Crate 03', 0, [0.5, -0.5, 0.5]),
         crate('Crate 04', 1),
         {
           name: 'Mooring Post with an intentionally long name to test truncation',
           kind: 'mesh',
-          components: [transform([3, 0, 0]), mesh('assets/dock_kit/post.mesh', 'materials/weathered_wood.mat')],
+          components: [
+            transform([3, 0, 0]),
+            mesh('assets/dock_kit/post.mesh', 'materials/weathered_wood.mat'),
+            collider({ type: 'capsule', half_height: 0.6, radius: 0.15 }, { memberships: 1, filter: 6 }),
+          ],
+        },
+        {
+          name: 'Wave Trigger',
+          kind: 'group',
+          components: [
+            transform([0, 0.5, 1]),
+            collider({ type: 'sphere', radius: 1.25 }, { sensor: true, memberships: 4, filter: 3, density: 1 }),
+          ],
         },
       ],
     },
@@ -379,8 +501,8 @@ function sampleDiagnostics(byName: Map<string, Ulid>): Diagnostic[] {
       severity: 'error',
       message: 'Half extents must be positive; y is -0.5.',
       entity: id('Crate 03'),
-      component: 'incant.Collider',
-      path: '/halfExtents/1',
+      component: 'Collider',
+      path: '/shape/half_extents/1',
     },
     {
       id: 'd2',
@@ -405,6 +527,14 @@ function sampleDiagnostics(byName: Map<string, Ulid>): Diagnostic[] {
       entity: id('Pier Planks'),
       component: 'incant.MeshRenderer',
       path: '/mesh',
+    },
+    {
+      id: 'd6',
+      severity: 'error',
+      message: 'Unknown collider shape `cylinder`; expected `box`, `sphere` or `capsule`.',
+      entity: id('Pier Planks'),
+      component: 'Collider',
+      path: '/shape/type',
     },
     {
       id: 'd5',

@@ -1,0 +1,511 @@
+{
+  "runtime_commit": "a9367c12a341210998807b1a2f1e90bbebe5103e",
+  "checks": {
+    "ordinary_rust": 153,
+    "additional_material_case": 1,
+    "real_gpu": 40,
+    "ui": 295,
+    "python": 5,
+    "clippy": true
+  },
+  "cli": {
+    "passed": true,
+    "public_rpc": true,
+    "atomic_invalid_rejection": true,
+    "undo_redo_and_persistent_reopen": true,
+    "repeated_runtime_exact": true,
+    "sandbox_query_and_velocity_command": true,
+    "author_files_unchanged": {
+      "project.incant.json": "0e5e5a1ba2b89dc5b5d0793cb471a53aca354df5fdf456a6c4cfe0cc445a25ee",
+      "history.jsonl": "c6e00949c8a3f29b80deacd11d176ef8552f584361df8a57331a66bec917a3c6"
+    },
+    "settled_y": 0.4999316930770874,
+    "jump_y": 0.5815619230270386,
+    "live_platform_gate": false
+  },
+  "macos": {
+    "arch": "aarch64",
+    "incant": "hello-world",
+    "ok": true,
+    "os": "macos",
+    "physics_backend": "rapier-0.36-enhanced-determinism",
+    "physics_y": 0.49993008375167847,
+    "position_x": 5.999999999999987,
+    "ticks": 120
+  },
+  "web": {
+    "level": "log",
+    "message": "INCANT_SMOKE_PASS {\"arch\":\"wasm32\",\"incant\":\"hello-world\",\"ok\":true,\"os\":\"\",\"physics_backend\":\"rapier-0.36-enhanced-determinism\",\"physics_y\":0.49993008375167847,\"position_x\":5.999999999999987,\"ticks\":120}",
+    "timestamp": "2026-10-09T23:32:31.077Z",
+    "url": "http://127.0.0.1:4189/"
+  },
+  "ios_simulator": {
+    "ok": true,
+    "status": 0
+  },
+  "logs": {
+    "ordinary_rust": {
+      "file": "incant-physics-workspace.log",
+      "sha256": "c727e02569044c91b41b178ea97f8e39aa68475da7c06259dcfd6c19146cbfc3"
+    },
+    "gpu": {
+      "file": "incant-physics-gpu.log",
+      "sha256": "aacdbd13c0a9cb509fe9e072905b32fceee064f887f81acb5709d5d6e1a76676"
+    },
+    "clippy": {
+      "file": "incant-physics-clippy.log",
+      "sha256": "c726c27bf618282550a67fdecc03fb4144d094ba63f7d864f2743d9ecd80c81c"
+    },
+    "ui": {
+      "file": "incant-physics-ui.log",
+      "sha256": "45493ef456188877adfcad057a8d0094b5164e3477af582b2226ab36dd2ff19b"
+    },
+    "python": {
+      "file": "incant-physics-python.log",
+      "sha256": "b30c9139edcefc0d2ccb5cb2b563396b8f5a55c94a8f8820104b91325898cace"
+    },
+    "additional_physics_materials": {
+      "file": "incant-physics-materials.log",
+      "sha256": "aedc4e48dd75a23b07e6cb2f4b5396870fec6aedc396f1265095fb5b43f1c910"
+    },
+    "web_build": {
+      "file": "incant-physics-web-build.log",
+      "sha256": "94520b8313cd3ec5eac41ea4b53ad0cd645a7d7137e22c108029c8c9e60bf24f"
+    },
+    "ios_build": {
+      "file": "incant-physics-ios-build.log",
+      "sha256": "f2a64a8aaed0b64bc68755e7c2f3f9c4ff34d922c6d8816baf476145820e85f9"
+    },
+    "ios_execution": {
+      "file": "incant-physics-ios-run.log",
+      "sha256": "be064f4458b3bc85e213242d7ef94874f2984d59f88012ad5fffe9a11cf3fb3f"
+    }
+  },
+  "build_hashes": {
+    "target/release/incant_headless": "5ef8ed16e0b7b162221534ae6b362c70eaa46e15a1caf04f9ae6770a03bfcb57",
+    "artifacts/web/pkg/incant_platform_smoke_bg.wasm": "7ee539a674f16e6887d701fb6a10ad59197178ab1264bede930ce8a6ebe79988",
+    "artifacts/ios-simulator/IncantSmoke.app/IncantSmoke": "fbb43d236917a6548084eb39966501d60250a6f99e4b55fcc2b0c400113a8095"
+  },
+  "pending": [
+    "exact-head hosted checks",
+    "merge"
+  ],
+  "not_claimed": [
+    "physical-device performance",
+    "full physics feature set",
+    "rollback or universal cross-platform determinism",
+    "Phase 1 completion"
+  ],
+  "optimization": {
+    "checks": "core, document, physics and script suites; full workspace Clippy; public CLI probe pass",
+    "measurement": {
+      "bodies": 512,
+      "steps": 600,
+      "sleeping": false,
+      "ccd": true,
+      "includes": "solver, ECS, simulation command bus, noop JS, document sync; excludes rendering",
+      "paired_trials": {
+        "baseline": [
+          {
+            "p95_frame_ms": 9.994292,
+            "max_frame_ms": 12.415916000000001,
+            "ticks": 600,
+            "commands": 0
+          },
+          {
+            "p95_frame_ms": 9.895875,
+            "max_frame_ms": 11.355667,
+            "ticks": 600,
+            "commands": 0
+          },
+          {
+            "p95_frame_ms": 17.773917,
+            "max_frame_ms": 26.528875,
+            "ticks": 600,
+            "commands": 0
+          }
+        ],
+        "optimized": [
+          {
+            "p95_frame_ms": 8.941790999999998,
+            "max_frame_ms": 11.581,
+            "ticks": 600,
+            "commands": 0
+          },
+          {
+            "p95_frame_ms": 8.750708,
+            "max_frame_ms": 9.577041999999999,
+            "ticks": 600,
+            "commands": 0
+          },
+          {
+            "p95_frame_ms": 8.798083,
+            "max_frame_ms": 9.6145,
+            "ticks": 600,
+            "commands": 0
+          }
+        ]
+      },
+      "final_snapshot_exact": true,
+      "host_load": "Claude may be compiling in a separate worktree; these are local analytical timings, not release-device gates",
+      "binary_hashes": {
+        "baseline": "5ef8ed16e0b7b162221534ae6b362c70eaa46e15a1caf04f9ae6770a03bfcb57",
+        "optimized": "5d8bb89aa4ac75c7ce4773bb158c1c3cc6a46fe43488aa053f7ee0b392a8f50e"
+      }
+    },
+    "cli": {
+      "passed": true,
+      "public_rpc": true,
+      "atomic_invalid_rejection": true,
+      "undo_redo_and_persistent_reopen": true,
+      "repeated_runtime_exact": true,
+      "sandbox_query_and_velocity_command": true,
+      "author_files_unchanged": {
+        "project.incant.json": "5898129eaae7ad5d3bbda425a35c695d9a6efae0120149972054b73be311900c",
+        "history.jsonl": "bf17956472b08fc1560bb796864b9202960b624b7de97f4d9ab465d37f4d736a"
+      },
+      "settled_y": 0.4999316930770874,
+      "jump_y": 0.5815619230270386,
+      "live_platform_gate": false
+    }
+  },
+  "final_local": {
+    "source_commit": "46442329c52a6cf65be2fe5372f5d431b36b597d",
+    "recorded_utc": "2026-10-09T23:55:45.355017+00:00",
+    "checks": {
+      "ordinary_rust": 154,
+      "ui": 315,
+      "python": 5,
+      "clippy": true,
+      "fmt": true,
+      "generated_bridge_sdk_and_conventions": true,
+      "native_custom_protocol_build": true
+    },
+    "logs": {
+      "ordinary_rust": {
+        "file": "incant-physics-final-workspace.log",
+        "sha256": "f6f62b7d9e1cdfe6ec0a0632488982522b24ebb9ba70e5603e1c322921adf47d"
+      },
+      "clippy": {
+        "file": "incant-physics-final-clippy.log",
+        "sha256": "87b7c20dfd2cb9574afbcf0685933c43f1ecce3dc620700e6fb6110dc53b1435"
+      },
+      "ui": {
+        "file": "incant-physics-final-ui-v2.log",
+        "sha256": "c3d534939efc7d6e438795667c658a36fd393bd1d72a49292d8543f02088ad46"
+      },
+      "python": {
+        "file": "incant-physics-final-python.log",
+        "sha256": "cb0480cbda0db1b1b6f871ff3e58705555dbf3e6e741f8cd1218cbc5dbd6b29e"
+      },
+      "native_build": {
+        "file": "incant-physics-final-editor-v2.log",
+        "sha256": "d7fdbbe8153ddb12a2ad78cae9e0ed0626a8fc5b93ee1d41fa54c02d7ddfa4a8"
+      }
+    },
+    "native_capture_manifest": {
+      "source_commit": "46442329c52a6cf65be2fe5372f5d431b36b597d",
+      "capture": "CUA native app screenshot bytes, unedited",
+      "wide_pixels": [
+        2880,
+        1748
+      ],
+      "minimum_pixels": [
+        2002,
+        1302
+      ],
+      "files": [
+        {
+          "file": "minimum-ball-shape-focus.jpg",
+          "sha256": "31b3703d01cb99e72dd2437676cd6ed42b1cf1ece5ce2aac201eefd0d4dc6a60"
+        },
+        {
+          "file": "minimum-crate-angular-shape.jpg",
+          "sha256": "0174821e10d1dd43c7eb2bfaf74cfa14b9e4728f333392ba27560c7e80b98b17"
+        },
+        {
+          "file": "minimum-crate-body-lower.jpg",
+          "sha256": "37e86d193ae05e3f31a8b86a1b9a42302fb7d44e701a60e79a5d8bc5107ac1f9"
+        },
+        {
+          "file": "minimum-crate-body.jpg",
+          "sha256": "17c4277f1265e41e7ae9124d353ad624074db02fb5431316b49d48c617eff9c9"
+        },
+        {
+          "file": "minimum-crate-collision.jpg",
+          "sha256": "8ae3a9f3e0ab05b37dd91f5e1fd501e484f67797195ad790a0beeee9f474e0ad"
+        },
+        {
+          "file": "minimum-crate-initial.jpg",
+          "sha256": "59edbb88acf0e44d449865a99e12e05593c3b3c9a781a06b8bf985c10ccbc430"
+        },
+        {
+          "file": "minimum-floor.jpg",
+          "sha256": "fcf703e24ce6d1950346a82a32fde6cb46c5ee02a07b04c0de0ca80bd758b97a"
+        },
+        {
+          "file": "minimum-pill-ax.txt",
+          "sha256": "255b850fde2af5a585e301df648fb55d3fc01eaae54e6ffc72b8453de1d6dc30"
+        },
+        {
+          "file": "minimum-pill.jpg",
+          "sha256": "ee2229d127225659b2df0166cc5deb945e612cb462960205a127fea12228072d"
+        },
+        {
+          "file": "wide-ball-shape-focus.jpg",
+          "sha256": "36d5b574b5f7555138151794e2a1d5a586f0cddd2f07288b12d1b94458aab0a8"
+        },
+        {
+          "file": "wide-crate-body.jpg",
+          "sha256": "2b62f0ee4e28f798de6938abc0882fb93b76ab955face8f110246dd237d5a229"
+        },
+        {
+          "file": "wide-crate-collider.jpg",
+          "sha256": "71972420c001f62293c74a4ce428e38ad21ee3322092b2d053036c8e500993c4"
+        },
+        {
+          "file": "wide-floor.jpg",
+          "sha256": "2addee49372ab6cb7b0af2103e0c92b1872a3c6ca7553a31adfdb9b7ad968170"
+        },
+        {
+          "file": "wide-pill-capsule.jpg",
+          "sha256": "50b44182cb14d5969c5d37d6dfe367eb62ee4f24b2e603b661897f2c3ac0ea8c"
+        }
+      ]
+    },
+    "native_visual_verdict": "accepted by Claude Opus 5.5 over ACP in 6c2b511",
+    "headless_lookdev_frame_equality": [
+      {
+        "name": "frame-000000.png",
+        "exact": true,
+        "before_sha256": "c3d36d7a94d38d7c83d2587e7469467a94f022e1ef2125696748f08db31a9f66",
+        "after_sha256": "c3d36d7a94d38d7c83d2587e7469467a94f022e1ef2125696748f08db31a9f66"
+      },
+      {
+        "name": "frame-000006.png",
+        "exact": true,
+        "before_sha256": "b760115713c2eaa0a5099989d0a481404352257bec2fa6021aa14c6c2a972235",
+        "after_sha256": "b760115713c2eaa0a5099989d0a481404352257bec2fa6021aa14c6c2a972235"
+      },
+      {
+        "name": "frame-000012.png",
+        "exact": true,
+        "before_sha256": "929828cf0c8639deed4513ca4718e3eda1d8274bf4f5b21776f7fc94dd072069",
+        "after_sha256": "929828cf0c8639deed4513ca4718e3eda1d8274bf4f5b21776f7fc94dd072069"
+      },
+      {
+        "name": "frame-000018.png",
+        "exact": true,
+        "before_sha256": "5c3ce7715ec2095985cfa75ca3a6bef5b07007dcd55459162f088add84d98d81",
+        "after_sha256": "5c3ce7715ec2095985cfa75ca3a6bef5b07007dcd55459162f088add84d98d81"
+      },
+      {
+        "name": "frame-000024.png",
+        "exact": true,
+        "before_sha256": "2cc7ab8c7feb7c50916f895f156e52e81273f39d988e50f3fc50bf4c288f9faf",
+        "after_sha256": "2cc7ab8c7feb7c50916f895f156e52e81273f39d988e50f3fc50bf4c288f9faf"
+      },
+      {
+        "name": "frame-000030.png",
+        "exact": true,
+        "before_sha256": "f3db42300895edd7fa86c26d50c4af205fae27961b07a93978d8ad67453324a1",
+        "after_sha256": "f3db42300895edd7fa86c26d50c4af205fae27961b07a93978d8ad67453324a1"
+      },
+      {
+        "name": "frame-000036.png",
+        "exact": true,
+        "before_sha256": "17d46e6cf5cab5751dfee04700438a3a1c6f629f810b17295926c8ac9ee01d5b",
+        "after_sha256": "17d46e6cf5cab5751dfee04700438a3a1c6f629f810b17295926c8ac9ee01d5b"
+      },
+      {
+        "name": "frame-000042.png",
+        "exact": true,
+        "before_sha256": "81eadfaefd24ede87b777436f1b9d462ecdcdc9eaa8b2d1ce7996fe45fa2eb23",
+        "after_sha256": "81eadfaefd24ede87b777436f1b9d462ecdcdc9eaa8b2d1ce7996fe45fa2eb23"
+      },
+      {
+        "name": "frame-000048.png",
+        "exact": true,
+        "before_sha256": "3f33c53b02e37abbe4d6472ad9919f5f396af7aadc257e2c9919e2d23fa98572",
+        "after_sha256": "3f33c53b02e37abbe4d6472ad9919f5f396af7aadc257e2c9919e2d23fa98572"
+      },
+      {
+        "name": "frame-000054.png",
+        "exact": true,
+        "before_sha256": "79aede9bde649cc44d6f6f9bfa105b3473e3e958ec1469b6ff12c7ceb1c0df4c",
+        "after_sha256": "79aede9bde649cc44d6f6f9bfa105b3473e3e958ec1469b6ff12c7ceb1c0df4c"
+      },
+      {
+        "name": "frame-000060.png",
+        "exact": true,
+        "before_sha256": "1ac21b3c3708faf9372cd09729752ab49944960bc0533a4073edced2c0eb5089",
+        "after_sha256": "1ac21b3c3708faf9372cd09729752ab49944960bc0533a4073edced2c0eb5089"
+      },
+      {
+        "name": "frame-000066.png",
+        "exact": true,
+        "before_sha256": "b61e7426681b1f36474bb42e426b43b2b161e29f833bcba216ccc1f9297330e6",
+        "after_sha256": "b61e7426681b1f36474bb42e426b43b2b161e29f833bcba216ccc1f9297330e6"
+      },
+      {
+        "name": "frame-000072.png",
+        "exact": true,
+        "before_sha256": "fe861557bacb30312ee4bc0059b1e4a89499b78ffc358eeee3378c367ef4f6da",
+        "after_sha256": "fe861557bacb30312ee4bc0059b1e4a89499b78ffc358eeee3378c367ef4f6da"
+      },
+      {
+        "name": "frame-000078.png",
+        "exact": true,
+        "before_sha256": "f20f35c301df59c9f0188bb670cc41a3ec24c933b6968ed4c2ad2eb16849c441",
+        "after_sha256": "f20f35c301df59c9f0188bb670cc41a3ec24c933b6968ed4c2ad2eb16849c441"
+      },
+      {
+        "name": "frame-000084.png",
+        "exact": true,
+        "before_sha256": "fd633d140f226a0a1ecef60828c8980200fa79f7841308975c41d806a2a6c74b",
+        "after_sha256": "fd633d140f226a0a1ecef60828c8980200fa79f7841308975c41d806a2a6c74b"
+      },
+      {
+        "name": "frame-000090.png",
+        "exact": true,
+        "before_sha256": "2cd75a85e7b31a651691b41e311c2be692ce85b5347f26aba468e551ad9fac8c",
+        "after_sha256": "2cd75a85e7b31a651691b41e311c2be692ce85b5347f26aba468e551ad9fac8c"
+      },
+      {
+        "name": "frame-000096.png",
+        "exact": true,
+        "before_sha256": "59421cff6949d78d336eeee04a5a36fe356a630ec7ff37a1643150b3cb7fca3d",
+        "after_sha256": "59421cff6949d78d336eeee04a5a36fe356a630ec7ff37a1643150b3cb7fca3d"
+      },
+      {
+        "name": "frame-000102.png",
+        "exact": true,
+        "before_sha256": "28ce8b48b7090369168d09802b4bd988bcbc98b0fb4449f0af7f7c54f468792d",
+        "after_sha256": "28ce8b48b7090369168d09802b4bd988bcbc98b0fb4449f0af7f7c54f468792d"
+      },
+      {
+        "name": "frame-000108.png",
+        "exact": true,
+        "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
+        "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
+      },
+      {
+        "name": "frame-000114.png",
+        "exact": true,
+        "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
+        "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
+      },
+      {
+        "name": "frame-000120.png",
+        "exact": true,
+        "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
+        "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
+      },
+      {
+        "name": "frame-000126.png",
+        "exact": true,
+        "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
+        "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
+      },
+      {
+        "name": "frame-000132.png",
+        "exact": true,
+        "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
+        "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
+      },
+      {
+        "name": "frame-000138.png",
+        "exact": true,
+        "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
+        "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
+      },
+      {
+        "name": "frame-000144.png",
+        "exact": true,
+        "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
+        "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
+      },
+      {
+        "name": "frame-000150.png",
+        "exact": true,
+        "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
+        "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
+      }
+    ],
+    "native_corrected_source_commit": "6cb489a",
+    "native_corrected_manifest": {
+      "source_commit": "6cb489a",
+      "native_binary_sha256": "e514b4b81e6dd769a1e38639fd083e43ee137cbc12e521111be913b3b9fbd012",
+      "files": [
+        {
+          "file": "agent-keyboard-ax.txt",
+          "sha256": "69b16f34f9ca97e1f0bc2a19eb870df3a04e5553539f2c2f5049e31cb8206d41"
+        },
+        {
+          "file": "keyboard-sequence.json",
+          "sha256": "16a1f07ef0d649fca6c50ceaadc9c73827d7c09d5e80717f4c84c07c01bd886f"
+        },
+        {
+          "file": "memberships-keyboard-ax.txt",
+          "sha256": "67945724fa7787a6b66aaa5dfbd265acbfb97eb8e67b953417fdf75c30de5565"
+        },
+        {
+          "file": "minimum-agent-before-end.jpg",
+          "sha256": "e4e58006b7567b1e6a155722542f19e926fe7f794ec1e73430c449df96d70130",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "minimum-agent-end.jpg",
+          "sha256": "6bd8dcd8ce6cfd160f2007674b131575ec7c5b7d0ea51967508ac11d2c944d7e",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "minimum-ball-memberships-keyboard.jpg",
+          "sha256": "62c2b38b30249c0ed40aacab5f1a6090c990c52182e11282635fe147d01d0e9a",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "minimum-ball-shape-keyboard.jpg",
+          "sha256": "3a72fd42151937ee8f9e9bf87ff4b183683d7b931bf43e6eae2f888e4c9f1dd3",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "minimum-default.jpg",
+          "sha256": "cdca0fb907247459bc9e561fa47e79b83d06e723f52977d6ba220bda7124e001",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "pill-accessibility.txt",
+          "sha256": "9621d61af42fa342cc488721bf1d6963d2764d664a425d356e4ca0b162a0c265"
+        },
+        {
+          "file": "shape-keyboard-ax.txt",
+          "sha256": "0e2f962f46acd2244aea65a6fc2346a9291c7a376732df03f5afe5bb323a16a9"
+        },
+        {
+          "file": "wide-default.jpg",
+          "sha256": "8d11bbe45686c195f0047e83da049cc1326db336da5cd13b1d59a34c4c170ec8",
+          "pixels": [
+            2880,
+            1748
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { Icon } from '../icons/Icon';
 import { WispMark } from '../icons/WispMark';
@@ -15,6 +15,8 @@ import { ChatGPTButton } from './AccountDialog';
 export function AgentPanel() {
   const { snapshot, capabilities, ask, explainUnavailable, openAccount } = useShell();
   const [draft, setDraft] = useState('');
+  const transcript = useRef<HTMLDivElement>(null);
+  const scrollable = useOverflow(transcript);
   const agent = snapshot?.agent;
   const provider = snapshot?.provider;
   const canSend = agent?.status === 'idle' && capabilities.has('agent.send');
@@ -47,7 +49,14 @@ export function AgentPanel() {
           Agent
         </h2>
       </header>
-      <div className="agent__transcript" role="log" aria-label="Agent conversation">
+      {/* Focusable only while its content overflows (a short panel), so keyboard users can scroll it. */}
+      <div
+        ref={transcript}
+        className="agent__transcript"
+        role="log"
+        aria-label="Agent conversation"
+        tabIndex={scrollable ? 0 : undefined}
+      >
         <div className="agent-empty">
           <span className="agent-empty__mark" aria-hidden="true">
             <WispMark size={28} />
@@ -121,4 +130,20 @@ export function AgentPanel() {
       </form>
     </section>
   );
+}
+
+/** True while the element's content is taller than its box; tracks resizes of both. */
+function useOverflow(ref: React.RefObject<HTMLElement | null>): boolean {
+  const [overflowing, setOverflowing] = useState(false);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const update = () => setOverflowing(element.scrollHeight > element.clientHeight + 1);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+    for (const child of element.children) observer.observe(child);
+    return () => observer.disconnect();
+  }, [ref]);
+  return overflowing;
 }

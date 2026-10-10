@@ -1794,6 +1794,46 @@ kbd {
   font-weight: var(--weight-semibold);
 }
 
+/*
+ * Captioned runs of rows inside one component (Collider: Material, Collision).
+ * A caption and extra top space, not a rule or an indent: sections are siblings
+ * of the leading rows, so nesting stays one level deep.
+ */
+.component__section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: var(--space-3);
+}
+
+.component__section-title {
+  margin: 0 0 var(--space-1);
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* The selected variant's fields hang off the row that names it, without a second legend. */
+.field-group--variant {
+  margin-top: 0;
+  padding-top: var(--space-1);
+  padding-bottom: var(--space-1);
+}
+
+/* Keep the value column flush with the outer rows: the group's 1 px rule plus
+   12 px indent (13 px) comes out of the label column, not the values. */
+.field-group--variant > .field {
+  grid-template-columns: minmax(63px, calc(34% - 8.6px)) minmax(0, 1fr);
+}
+
+.field-group__note {
+  margin: 0;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: var(--leading-tight);
+}
+
 .field {
   display: grid;
   grid-template-columns: minmax(76px, 34%) minmax(0, 1fr);
@@ -1816,6 +1856,13 @@ kbd {
   overflow-wrap: break-word;
   line-height: var(--leading-tight);
   color: var(--color-text-muted);
+}
+
+.field__unit {
+  margin-left: 6px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  white-space: nowrap;
 }
 
 .field--error .field__label {
@@ -1844,6 +1891,14 @@ kbd {
   font-size: var(--text-xs);
   line-height: var(--leading-tight);
   color: var(--color-text-muted);
+}
+
+.field__problem-path {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
 }
 
 .field__problem .icon {
@@ -2028,6 +2083,52 @@ input.control.control__input[data-focus-visible] {
   background: var(--color-text-on-accent);
 }
 
+/*
+ * Collision mask: the raw u32 stays the value; the summary sits where a unit
+ * would; the strip below shows groups 1 to 32 left to right in four bytes.
+ */
+.control--mask {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+}
+
+/* The label lines up with the value box, not the box plus strip. */
+.field:has(.control--mask) {
+  align-items: start;
+}
+
+.field:has(.control--mask) > .field__label {
+  margin-top: 6px;
+}
+
+.control--mask__summary {
+  color: var(--color-text-muted);
+}
+
+.mask-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  padding: 0 2px;
+}
+
+.mask-strip__byte {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 1px;
+}
+
+.mask-strip__cell {
+  height: 4px;
+  border-radius: 1px;
+  background: var(--color-border-strong);
+}
+
+.mask-strip__cell.is-set {
+  background: color-mix(in srgb, var(--color-accent) 72%, var(--color-bg-side));
+}
+
 .control--vector {
   display: grid;
   grid-auto-flow: column;
@@ -2076,6 +2177,12 @@ input.control.control__input[data-focus-visible] {
   line-height: var(--leading-tight);
 }
 
+.control--notice:focus-visible,
+.control--notice[data-focus-visible] {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
 .control--notice__text {
   display: flex;
   gap: 6px;
@@ -2095,6 +2202,13 @@ input.control.control__input[data-focus-visible] {
   overflow: auto;
   display: flex;
   flex-direction: column;
+  container: agent-transcript / size;
+}
+
+.agent__transcript:focus-visible,
+.agent__transcript[data-focus-visible] {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
 }
 
 .agent-empty {
@@ -2129,6 +2243,37 @@ input.control.control__input[data-focus-visible] {
 
 .agent-empty .button {
   margin-top: var(--space-2);
+}
+
+/*
+ * Compact empty state for a short Agent panel (the 180 px minimum, or the default
+ * height at 1000 x 650). The full illustration needs about 150 px, so below
+ * that the mark is dropped and the text is set smaller: title and reason stay
+ * visible above the composer instead of sliding behind it. Any remainder
+ * scrolls, and the transcript is then focusable (AgentPanel).
+ */
+@container agent-transcript (max-height: 160px) {
+  /* Still centred when there is room; auto margins resolve to 0 on overflow, so
+     the title stays at the top and the rest scrolls. */
+  .agent-empty {
+    gap: 0;
+    max-width: none;
+    padding: 6px var(--space-5);
+  }
+
+  .agent-empty__mark {
+    display: none;
+  }
+
+  .agent-empty__title {
+    font-size: var(--text-sm);
+    line-height: 18px;
+  }
+
+  .agent-empty__body {
+    font-size: var(--text-xs);
+    line-height: var(--leading-tight);
+  }
 }
 
 .composer {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import type { ComponentSchema, ComponentValue, Diagnostic, EntityDetail } from '../../bridge/contract';
 import { Icon, iconForKind } from '../../icons/Icon';
 import { projectState } from '../../shell/projectState';
@@ -7,6 +7,7 @@ import { StateView } from '../StateView';
 import { AssetInspector } from '../assets/AssetInspector';
 import { useAssets } from '../../assets/AssetsContext';
 import { FieldView, fieldDomId, safeJson } from './FieldView';
+import { sectionKeys } from './presentation';
 
 export function InspectorPanel() {
   const { snapshot, selection } = useShell();
@@ -118,8 +119,7 @@ function EntityInspector({
                     href={`#${fieldDomId(entity.id, d.component, (d.path ?? '').split('/').filter(Boolean))}`}
                     onClick={(event) => {
                       event.preventDefault();
-                      const id = fieldDomId(entity.id, d.component ?? '', (d.path ?? '').split('/').filter(Boolean));
-                      const target = document.getElementById(id);
+                      const target = nearestField(entity.id, d.component ?? '', d.path);
                       target?.scrollIntoView({ block: 'center' });
                       (target?.matches('input,[tabindex]') ? target : target?.querySelector<HTMLElement>('input,[tabindex]'))?.focus();
                     }}
@@ -170,6 +170,19 @@ function CopyIdButton({ id }: { id: string }) {
       <Icon name="copy" size={14} />
     </button>
   );
+}
+
+/**
+ * The field element for a diagnostic path, or the closest rendered ancestor: a
+ * path inside a mismatched union or past a vector axis still lands on its row.
+ */
+function nearestField(entity: string, component: string, path: string | null): HTMLElement | null {
+  const parts = (path ?? '').split('/').filter(Boolean).map((part) => part.replace(/~1/g, '/').replace(/~0/g, '~'));
+  for (let length = parts.length; length >= 0; length -= 1) {
+    const target = document.getElementById(fieldDomId(entity, component, parts.slice(0, length)));
+    if (target) return target;
+  }
+  return null;
 }
 
 function shortType(type: string) {
@@ -243,18 +256,30 @@ function ComponentSection({
                   version {schema.version}. Values may be shown incorrectly until migrated.
                 </p>
               ) : null}
-              {keys.map((key) => {
-                const field = schema.properties[key];
-                return field ? (
-                  <FieldView
-                    key={key}
-                    name={key}
-                    schema={field}
-                    value={component.value[key]}
-                    path={[key]}
-                    ctx={{ entity, component: component.type, diagnostics }}
-                  />
-                ) : null;
+              {sectionKeys(component.type, keys, (schema.order ?? []).length > 0).map((section, index) => {
+                const rows = section.keys.map((key) => {
+                  const field = schema.properties[key];
+                  return field ? (
+                    <FieldView
+                      key={key}
+                      name={key}
+                      schema={field}
+                      value={component.value[key]}
+                      path={[key]}
+                      ctx={{ entity, component: component.type, diagnostics }}
+                    />
+                  ) : null;
+                });
+                if (section.title === null) return <Fragment key={`section-${index}`}>{rows}</Fragment>;
+                const captionId = `${bodyId}-section-${index}`;
+                return (
+                  <div key={section.title} className="component__section" role="group" aria-labelledby={captionId}>
+                    <p className="component__section-title" id={captionId}>
+                      {section.title}
+                    </p>
+                    {rows}
+                  </div>
+                );
               })}
               {Object.keys(component.value)
                 .filter((key) => !(key in schema.properties))

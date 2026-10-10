@@ -53,12 +53,22 @@ within its documented workload.
 
 ## Active work
 
-- An isolated physics candidate probe runs pinned Jolt and Rapier with fixed
-  stepping and repeated position checks. Native Jolt contact, raycast, rollback,
-  invalid-input, stale-handle and sensor checks pass. The selected Jolt binding
-  refuses iOS simulator/Web targets; Rapier builds there. Hosted cross-desktop
-  evidence and the engine integration decision remain open. No physics backend
-  has been added to the engine. See [candidate evidence](docs/spikes/physics-candidates.md).
+- Physics runtime integration is in progress on `impl/physics-runtime`. The
+  [candidate probe](docs/spikes/physics-candidates.md) passed all six checks and
+  merged as PR #22 (`a6fd91f`). The engine now takes PLAN.md's Rapier fallback
+  after measured Jolt binding portability gaps; see ADR 0003. Typed bodies,
+  primitive colliders, fixed stepping, sensors, masks and raycasts connect to
+  isolated play and the shared command bus. Ten new behavior tests, full workspace Clippy, 154 Rust tests and
+  315 UI tests/build pass locally. The earlier 40 GPU checks pass; all 26 final
+  engine look-dev PNGs match Claude’s reviewed originals byte for byte. Public CLI,
+  browser/WASM and iOS simulator physics execution pass. Shared validation and
+  fewer snapshots reduce paired local 512-body p95 from 9.99 to 8.80 ms, with
+  exact final-state equality. Claude handoff 0022 implemented and reviewed the new Inspector
+  in browser fixtures and the native app. Shared schemas supply field order and
+  units; WebKit field names and the compact Agent state are fixed. Final hosted
+  checks and merge of PR #23 remain pending. Character controllers, mesh/compound
+  colliders, hierarchy/scale, rollback snapshots and device performance remain
+  open. See [runtime evidence](docs/spikes/physics-runtime.md).
 
 - Opt-in directional cascades are implemented with scoped Claude appearance
   and native acceptance. The scheduled depth pass honors imported caster flags,
@@ -68,7 +78,7 @@ within its documented workload.
   checks pass 144 Rust, 40 GPU and 294 UI tests plus Clippy. Native enabled/Off
   states, separated Assets workspace and sun-angle Undo/Redo pass. Final 1080p analytical timings
   measure 1.389–3.096 ms across 0–4 suns; thin-caster contact/aliasing limits remain.
-  Final hosted checks are pending; local-light shadows and
+  All twelve hosted checks pass at `5d31768`; PR #21 merged as `899cc2a`. local-light shadows and
   adaptive quality remain open. See [directional shadows](docs/spikes/directional-shadows.md).
 
 - Real GPU passes now execute through a persistent Bevy ECS schedule with explicit

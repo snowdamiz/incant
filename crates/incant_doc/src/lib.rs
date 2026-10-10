@@ -2,9 +2,11 @@
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
+mod physics;
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
+pub use physics::{AngularVelocity, BodyMotion, Collider, ColliderShape, RigidBody};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -173,7 +175,20 @@ pub enum DocumentError {
     Version(u32),
 }
 
+/// Immutable proof that this exact project passed semantic validation. The
+/// borrow prevents edits while downstream projections share the validation.
+#[derive(Clone, Copy)]
+pub struct ValidatedProject<'a>(&'a Project);
+impl<'a> ValidatedProject<'a> {
+    pub fn project(self) -> &'a Project {
+        self.0
+    }
+}
 impl Project {
+    pub fn validated(&self) -> Result<ValidatedProject<'_>, DocumentError> {
+        self.validate()?;
+        Ok(ValidatedProject(self))
+    }
     pub fn empty(name: impl Into<String>) -> Self {
         Self {
             id: new_id(),
@@ -351,6 +366,9 @@ impl Project {
                         );
                     }
                 }
+                if let Err(message) = physics::validate_entity(entity) {
+                    issue(format!("{path}/components"), &message);
+                }
                 for (kind, value) in &entity.components {
                     let path = format!("{path}/components/{kind}");
                     if let Err(message) = validate_component(kind, value, self) {
@@ -400,6 +418,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
         serde_json::from_value(v.clone()).map_err(|e| e.to_string())
     }
     match kind {
+        "RigidBody" | "Collider" | "AngularVelocity" => physics::validate(kind, value)?,
         "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
         "Transform" => {
             let t: Transform = decode(value)?;
@@ -502,6 +521,12 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        ("RigidBody".into(), json!(schemars::schema_for!(RigidBody))),
+        ("Collider".into(), json!(schemars::schema_for!(Collider))),
+        (
+            "AngularVelocity".into(),
+            json!(schemars::schema_for!(AngularVelocity)),
+        ),
         (
             "DirectionalLight".into(),
             json!(schemars::schema_for!(DirectionalLight)),
@@ -545,6 +570,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         }
     }
     lights::annotate_schemas(&mut registry);
+    physics::annotate_schemas(&mut registry);
     registry
 }
 impl Scene {

@@ -281,7 +281,7 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
   "history.undo"=>{let tx=bus.undo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
   "history.redo"=>{let tx=bus.redo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
   "play.start"=>{engine=Some(Engine::new(bus.project())?);Ok(json!({"playing":true}))},
-  "play.step"=>{let engine=engine.as_mut().ok_or("no play session")?;engine.step();Ok(json!(engine.snapshot()))},
+  "play.step"=>{let engine=engine.as_mut().ok_or("no play session")?;engine.step()?;Ok(json!(engine.snapshot()))},
   "play.state"=>Ok(json!(engine.as_mut().ok_or("no play session")?.snapshot())),
   "play.stop"=>{engine=None;Ok(json!({"playing":false,"project":bus.project()}))},
   _=>Err("unknown RPC method".into()),
@@ -371,6 +371,20 @@ fn main() -> Result<()> {
                 "Command".into(),
                 json!(schemars::schema_for!(incant_cmd::Command)),
             );
+            registry.extend([
+                (
+                    "PhysicsRayQuery".into(),
+                    json!(schemars::schema_for!(incant_core::RayQuery)),
+                ),
+                (
+                    "PhysicsRayHit".into(),
+                    json!(schemars::schema_for!(incant_core::RayHit)),
+                ),
+                (
+                    "PhysicsTriggerEvent".into(),
+                    json!(schemars::schema_for!(incant_core::TriggerEvent)),
+                ),
+            ]);
             for (name, schema) in registry {
                 save(
                     &directory.join(format!("{name}.schema.json")),
@@ -390,7 +404,7 @@ fn main() -> Result<()> {
             let assets = assets::load_runtime(&project, &document)?;
             let mut engine = Engine::new(&document)?;
             let start = Instant::now();
-            engine.run_ticks(ticks);
+            engine.run_ticks(ticks)?;
             print(
                 json!({"state":engine.snapshot(),"assets":assets.snapshot(),"wall_ms":start.elapsed().as_secs_f64()*1000.}),
             )?;

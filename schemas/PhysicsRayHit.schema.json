@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "distance": {
+      "format": "double",
+      "type": "number"
+    },
+    "entity_id": {
+      "type": "string"
+    },
+    "normal": {
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "point": {
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    }
+  },
+  "required": [
+    "entity_id",
+    "distance",
+    "point",
+    "normal"
+  ],
+  "title": "RayHit",
+  "type": "object"
+}

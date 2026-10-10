@@ -1,0 +1,141 @@
+{
+  "$defs": {
+    "ColliderShape": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "half_extents": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array",
+              "x-incant-unit": "m"
+            },
+            "type": {
+              "const": "box",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "half_extents"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "radius": {
+              "format": "double",
+              "type": "number",
+              "x-incant-unit": "m"
+            },
+            "type": {
+              "const": "sphere",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "radius"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Capsule along local Y; half_height excludes the hemispherical ends.",
+          "properties": {
+            "half_height": {
+              "format": "double",
+              "type": "number",
+              "x-incant-unit": "m"
+            },
+            "radius": {
+              "format": "double",
+              "type": "number",
+              "x-incant-unit": "m"
+            },
+            "type": {
+              "const": "capsule",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "half_height",
+            "radius"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "order": [
+    "shape",
+    "density",
+    "friction",
+    "restitution",
+    "sensor",
+    "memberships",
+    "filter"
+  ],
+  "properties": {
+    "density": {
+      "format": "double",
+      "maximum": 100000,
+      "minimum": 0.001,
+      "type": "number",
+      "x-incant-unit": "kg/m³"
+    },
+    "filter": {
+      "format": "uint32",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-incant-widget": "collision-mask"
+    },
+    "friction": {
+      "format": "double",
+      "maximum": 10,
+      "minimum": 0,
+      "type": "number"
+    },
+    "memberships": {
+      "description": "Collision requires both membership/filter intersections to be nonzero.",
+      "format": "uint32",
+      "maximum": 4294967295,
+      "minimum": 0,
+      "type": "integer",
+      "x-incant-widget": "collision-mask"
+    },
+    "restitution": {
+      "format": "double",
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "sensor": {
+      "type": "boolean"
+    },
+    "shape": {
+      "$ref": "#/$defs/ColliderShape"
+    }
+  },
+  "required": [
+    "shape",
+    "density",
+    "friction",
+    "restitution",
+    "sensor",
+    "memberships",
+    "filter"
+  ],
+  "title": "Collider",
+  "type": "object"
+}

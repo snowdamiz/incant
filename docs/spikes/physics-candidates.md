@@ -1,9 +1,9 @@
 # Physics candidate feasibility
 
 The isolated probe in `tools/probes/physics` runs pinned Jolt and Rapier
-candidates without adding a physics dependency to Incant. PLAN.md still chooses
-Jolt; no replacement decision is made. The engine's colliders, rigid bodies,
-character controller, queries and script integration remain open.
+candidates in an independent workspace. The subsequent engine integration takes
+the plan's Rapier fallback; see [ADR 0003](../adr/0003-physics.md) and
+[runtime integration](physics-runtime.md). This probe alone is not engine support.
 
 On Apple M5 Pro, three independent 600-step simulations of 512 boxes produce
 byte-identical position streams within each candidate. Jolt's one/four-worker
@@ -28,8 +28,12 @@ evaluation before choosing the engine integration.
 
 A scoped workflow runs the probe and behavior checks on macOS, Linux and Windows,
 then compares recorded hashes across hosts. A separate job records the known
-binding refusals and successful Rapier target builds. Hosted results remain
-pending; a passed expected-refusal check must never be called platform support.
+binding refusals and successful Rapier target builds. All three native jobs and target-build recording pass at `6118219`. Independent
+artifact inspection confirms exact per-backend position hashes across macOS
+arm64, Linux x86_64 and Windows AMD64, including both Jolt worker counts. This
+is evidence for one synthetic position workload, not complete runtime
+determinism. A passed expected-refusal check is not platform support. All six exact-head checks pass at `6118219`. PR #22 merged as `a6fd91f`; its tree
+matches that head and the merge author trailer is verified.
 
 [Full local evidence](evidence/physics-candidates-2026-10-09.json) retains exact
 position hashes, raw timing samples, commands, target outcomes and log hashes.

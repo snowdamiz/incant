@@ -1,7 +1,7 @@
 name: Six platform probes
 on:
   pull_request:
-    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_doc/**', 'platforms/**', 'tools/platforms/**', 'Cargo.lock', '.github/workflows/nightly.yml']
+    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'platforms/**', 'tools/platforms/**', 'Cargo.lock', '.github/workflows/nightly.yml']
   schedule: [{cron: '30 6 * * *'}]
   workflow_dispatch:
 permissions:

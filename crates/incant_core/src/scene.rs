@@ -33,8 +33,10 @@ pub(crate) struct PreparedEntity {
 }
 
 /// All validation and decoding precede changes to the running ECS world.
-pub(crate) fn prepare(project: &Project) -> Result<Vec<PreparedEntity>, incant_doc::DocumentError> {
-    project.validate()?;
+pub(crate) fn prepare(
+    validated: incant_doc::ValidatedProject<'_>,
+) -> Result<Vec<PreparedEntity>, incant_doc::DocumentError> {
+    let project = validated.project();
     let mut staged: Vec<PreparedEntity> = Vec::new();
     for (scene, entity, parent_index) in ordered_entities(project) {
         let local = entity

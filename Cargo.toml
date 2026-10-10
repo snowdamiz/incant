@@ -24,6 +24,7 @@ rquickjs = "=0.14.0"
 incant_doc = { path = "crates/incant_doc", default-features = false }
 incant_cmd = { path = "crates/incant_cmd" }
 incant_core = { path = "crates/incant_core" }
+incant_physics = { path = "crates/incant_physics" }
 incant_script = { path = "crates/incant_script" }
 incant_agent = { path = "crates/incant_agent" }
 
