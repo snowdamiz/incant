@@ -3,9 +3,7 @@ use incant_types::{Transform, Velocity};
 use std::collections::BTreeMap;
 use thiserror::Error;
 
-/// The canonical 128 bits of an authored ULID; no string parsing during play.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct StableId(pub [u8; 16]);
+pub use incant_types::StableId;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct CookedEntity {

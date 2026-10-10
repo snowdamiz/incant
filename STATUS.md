@@ -53,6 +53,13 @@ within its documented workload.
 
 ## Active work
 
+- Native physics migration has a locally tested document-free typed backend
+  extraction with unchanged legacy schemas and case-sensitive ID behavior.
+  Direct motion updates preserve sleep and contacts without per-tick world
+  reconstruction. Native cooked/ECS integration and its shipping proof remain
+  in progress; physics save/restore and device gates remain open. See
+  [native physics evidence](docs/spikes/native-physics-runtime.md).
+
 - Native fixed-tick input now owns a fresh cooked world, script VM and bounded
   input timeline. Action bindings validate once at construction/rebind; each
   valid packet advances native simulation before the synchronous script. Raw

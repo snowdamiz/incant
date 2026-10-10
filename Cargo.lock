@@ -3757,10 +3757,22 @@ version = "0.0.1"
 dependencies = [
  "incant_doc",
  "incant_nav",
+ "incant_physics_runtime",
  "rapier3d",
  "schemars 1.2.2",
  "serde",
  "serde_json",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "incant_physics_runtime"
+version = "0.0.1"
+dependencies = [
+ "incant_types",
+ "rapier3d",
+ "schemars 1.2.2",
+ "serde",
  "thiserror 2.0.21",
 ]
 

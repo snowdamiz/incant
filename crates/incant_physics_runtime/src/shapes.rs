@@ -1,4 +1,4 @@
-use incant_doc::{ColliderShape, PrimitiveColliderShape};
+use incant_types::{ColliderShape, PrimitiveColliderShape};
 use rapier3d::prelude::*;
 
 fn primitive(shape: &PrimitiveColliderShape) -> SharedShape {
