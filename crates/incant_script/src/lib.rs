@@ -1,13 +1,17 @@
 //! Native QuickJS host over borrowed ECS numeric columns. No authoring model,
 //! command bus, JSON projection or filesystem/network capability is installed.
 //! The prior document-backed host lives temporarily in incant_play_legacy.
+pub mod artifact;
 mod budget;
 mod commands;
 mod compiled;
+#[cfg(feature = "compiler")]
+mod compiler;
 mod diagnostics;
 mod loan;
 mod synchronous;
 
+pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
 use rquickjs::{Context, Function, Persistent, Runtime, Value};
@@ -21,6 +25,10 @@ use thiserror::Error;
 pub enum ScriptError {
     #[error("script engine failed without a JavaScript diagnostic")]
     Execution,
+    #[error("cooked script engine/build/target or artifact format is incompatible")]
+    ArtifactCompatibility,
+    #[error("cooked script bytecode integrity check failed")]
+    ArtifactIntegrity,
     #[error("script execution exceeded its {budget_ms} ms thread CPU budget")]
     ExecutionDeadline { budget_ms: u128 },
     #[error("script CPU budget clock {reason}")]
@@ -77,13 +85,16 @@ impl ScriptHost {
     }
 
     pub fn with_budget(compiled: CompiledScript, limit: Duration) -> Result<Self, ScriptError> {
-        let (runtime, context, deadline) = vm(limit)?;
+        let (runtime, context, deadline) = vm(limit, compiled.allow_source)?;
+        context.with(|ctx| {
+            compiled
+                .harden(&ctx)
+                .map_err(|error| diagnostics::javascript(&ctx, error, "initialization", &deadline))
+        })?;
+        // Fixed engine hardening runs first. Its two internal module promises
+        // must not change the guest module's separately measured baseline.
         let synchronous = synchronous::Synchronous::install(&runtime);
         let update = context.with(|ctx| {
-            ctx.eval::<(), _>(include_str!("harden.js"))
-                .map_err(|error| {
-                    diagnostics::javascript(&ctx, error, "initialization", &deadline)
-                })?;
             let update = compiled.instantiate(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "initialization", &deadline)
             })?;
@@ -177,7 +188,7 @@ impl ScriptHost {
 }
 
 type Vm = (Runtime, Context, Arc<Mutex<budget::ExecutionBudget>>);
-fn vm(limit: Duration) -> Result<Vm, ScriptError> {
+fn vm(limit: Duration, allow_source: bool) -> Result<Vm, ScriptError> {
     let runtime = Runtime::new().map_err(diagnostics::allocation)?;
     runtime.set_memory_limit(32 * 1024 * 1024);
     runtime.set_max_stack_size(1024 * 1024);
@@ -189,11 +200,37 @@ fn vm(limit: Duration) -> Result<Vm, ScriptError> {
             .unwrap_or_else(|error| error.into_inner())
             .expired()
     })));
-    let context = Context::full(&runtime).map_err(diagnostics::allocation)?;
+    let context = bytecode_context(&runtime, allow_source)?;
     Ok((runtime, context, deadline))
 }
 
-#[cfg(test)]
+fn bytecode_context(runtime: &Runtime, allow_source: bool) -> Result<Context, ScriptError> {
+    if allow_source {
+        #[cfg(feature = "compiler")]
+        return Context::full(runtime).map_err(diagnostics::allocation);
+    }
+    {
+        use rquickjs::context::intrinsic as i;
+        // Deliberately omit Eval. All source, including engine hardening, was
+        // compiled by the cook; dynamic Function/eval routes fail explicitly.
+        Context::custom::<(
+            i::Date,
+            i::RegExpCompiler,
+            i::RegExp,
+            i::Json,
+            i::Proxy,
+            i::MapSet,
+            i::TypedArrays,
+            i::Promise,
+            i::Performance,
+            i::WeakRef,
+            i::DOMException,
+        )>(runtime)
+        .map_err(diagnostics::allocation)
+    }
+}
+
+#[cfg(all(test, feature = "compiler"))]
 mod structural_tests;
-#[cfg(test)]
+#[cfg(all(test, feature = "compiler"))]
 mod tests;

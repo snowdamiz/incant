@@ -1,57 +1,63 @@
-use crate::{ScriptError, diagnostics, vm};
-use rquickjs::{Ctx, Function, Module, WriteOptions};
-use std::{sync::Arc, time::Duration};
+use crate::{EmbeddedScript, ScriptError, ScriptMetadata, artifact};
+use rquickjs::{Ctx, Function, Module};
+use std::sync::Arc;
 
-/// Bytecode produced by this exact pinned QuickJS compiler. The bytes are private
-/// and immutable: there is deliberately no safe loader for arbitrary cache/file
-/// bytes. A content hash alone would not make untrusted QuickJS bytecode safe.
-/// File export and authenticated artifact loading remain separate work.
+/// Private immutable compiler-produced bytecode, retained through VM destruction.
+/// No safe loader accepts arbitrary project, cache, mod or network bytes.
 #[derive(Clone)]
 pub struct CompiledScript {
-    bytes: Arc<[u8]>,
+    pub(crate) bytes: Arc<[u8]>,
+    pub(crate) hardening: Arc<[u8]>,
+    pub(crate) metadata: ScriptMetadata,
+    pub(crate) allow_source: bool,
 }
 
 impl CompiledScript {
-    /// Compile SWC CommonJS output without executing project code. This belongs
-    /// at authoring/cook time. Runtime ticks execute only the compiled module.
-    pub fn compile(source: &str) -> Result<Self, ScriptError> {
-        if source.len() > 1_000_000 {
-            return Err(ScriptError::InputLimit);
-        }
-        let (_runtime, context, deadline) = vm(Duration::from_millis(50))?;
-        let wrapper = format!(
-            r#"
-            const defineBehavior = value => value;
-            const behavior = (function(exports) {{ "use strict";
-                {source}
-                ; return exports.default;
-            }})({{}});
-            if (!behavior || typeof behavior.update !== 'function') throw new Error('default behavior.update required');
-            if ('initialState' in behavior || 'onTimer' in behavior) throw new Error('state and timers are not migrated to the native bulk host');
-            export function update(chunks, dt, commands) {{ return behavior.update({{chunks, dt, commands}}); }}
-        "#
-        );
-        let bytes = context.with(|ctx| {
-            let module = Module::declare(ctx.clone(), "incant-native-behavior", wrapper)
-                .map_err(|error| diagnostics::javascript(&ctx, error, "compilation", &deadline))?;
-            module
-                .write(WriteOptions::default())
-                .map_err(|error| diagnostics::javascript(&ctx, error, "compilation", &deadline))
-        })?;
-        diagnostics::check_deadline(&deadline)?;
+    /// Cross the native build's executable-code trust boundary.
+    ///
+    /// # Safety
+    /// The caller must establish that both blobs were freshly produced by the
+    /// trusted Incant cook for this exact engine/build/target and remain its
+    /// unmodified output. This is intended only for cook-generated Rust included
+    /// in a trusted executable build. The hardening blob must be the engine's
+    /// fixed hardening module, never project code. A matching hash/metadata does
+    /// **not** establish these facts. Never call this on supplied executable
+    /// caches, project/mod/network bytes, or generated Rust from such inputs.
+    ///
+    /// ```compile_fail
+    /// fn arbitrary_bytes(artifact: incant_script::EmbeddedScript) {
+    ///     incant_script::CompiledScript::from_embedded(artifact);
+    /// }
+    /// ```
+    pub unsafe fn from_embedded(artifact: EmbeddedScript) -> Result<Self, ScriptError> {
+        artifact::validate(&artifact.metadata, artifact.bytecode, artifact.hardening)?;
         Ok(Self {
-            bytes: bytes.into(),
+            bytes: artifact.bytecode.into(),
+            hardening: artifact.hardening.into(),
+            metadata: artifact.metadata,
+            allow_source: false,
         })
     }
 
     pub fn byte_len(&self) -> usize {
-        self.bytes.len()
+        self.bytes.len() + self.hardening.len()
+    }
+
+    pub fn metadata(&self) -> &ScriptMetadata {
+        &self.metadata
+    }
+
+    pub(crate) fn harden(&self, ctx: &Ctx<'_>) -> rquickjs::Result<()> {
+        // SAFETY: compiler or the documented native-build trust crossing above
+        // is the sole source. The fixed engine module precedes all guest code.
+        let module = unsafe { Module::load(ctx.clone(), &self.hardening) }?;
+        let (_, promise) = module.eval()?;
+        promise.result::<()>().ok_or(rquickjs::Error::Unknown)?
     }
 
     pub(crate) fn instantiate<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Function<'js>> {
-        // SAFETY: bytes can only be made by compile() above, using the identical
-        // pinned engine and build. No externally provided bytecode is accepted.
-        // ScriptHost retains this Arc allocation until after VM destruction.
+        // SAFETY: only trusted compiler-produced bytes enter this allocation.
+        // The host retains both Arc allocations until after VM destruction.
         let module = unsafe { Module::load(ctx.clone(), &self.bytes) }?;
         let (module, promise) = module.eval()?;
         promise.result::<()>().ok_or(rquickjs::Error::Unknown)??;
