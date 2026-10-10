@@ -81,3 +81,11 @@ this is not an API requirement. Route overlays see the start-of-tick grid, and
 linear turns and small/occluded markers remain documented visual limitations.
 Hosted checks remain pending. See the [Claude result](../../handoffs/0029-grid-navigation-lookdev/result.md)
 and [exact evidence](evidence/grid-navigation-2026-10-10.json).
+
+## Merge verification
+
+All twelve required hosted checks passed on `533e0d6`. PR #40 merged into main
+as `9a9db3f` on 2026-10-10. The resulting tree matches the tested head exactly
+(`c680757a1ad3ef0bf31fda628205ffd808880d32`). This incorporates the already
+merged navigation/script foundation and does not approve a phase gate.
+See [merge evidence](evidence/grid-navigation-merge-2026-10-10.json).
