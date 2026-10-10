@@ -58,7 +58,7 @@ within its documented workload.
   commands and direct numeric updates that preserve sleeping bodies. Whole-batch
   validation precedes solver edits; publication failures after solver advancement
   make the world terminal. Legacy schemas/text IDs and v1 cooked scenes remain
-  compatible. Local evidence includes 423 release workspace tests, both Clippy
+  compatible. Local union evidence includes 428 release workspace tests, both Clippy
   modes, nine identical native/browser state streams and 32 fresh source-free
   shipping processes. Physics saves fail explicitly, including after removal;
   character/navigation, JS physics query/configuration bindings, cross-host CI

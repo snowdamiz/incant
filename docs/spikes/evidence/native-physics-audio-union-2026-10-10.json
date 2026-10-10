@@ -1,0 +1,1339 @@
+{
+  "date": "2026-10-10",
+  "status": "passed",
+  "reviewed_physics_head": "32a720cebbb688164c71024dfe7c600b94473858",
+  "audio_stack_head": "8fef22cb3a101270cc4a6527ffe8b09cbef75ec2",
+  "integrated_source_head": "d4a8505e41cd18c3637854bb17e830762954ff32",
+  "integrated_source_tree": "0481a0088f5b0243c10bb3b8a2560b62f787ed59",
+  "preservation": "Physics/runtime/cook/script/type source matches reviewed32a720c; audio/assets source matches reviewed audio stack; only copied-player test gains mutex. CI guards/triggers combine both sides.",
+  "checks": {
+    "scoped": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-scoped.log",
+      "sha256": "df2d00a30010ace455e92eb85f707c3f06e0f993b8d6a069366746ffa399c20f",
+      "passed": 162,
+      "failed": 0,
+      "ignored": 0
+    },
+    "workspace": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-workspace.log",
+      "sha256": "79a9e4efb6204e58d692dd8cbc692ed57b5f0f27828051dfd9d00db541fe90bb",
+      "passed": 428,
+      "failed": 0,
+      "ignored": 44
+    },
+    "clippy": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-clippy.log",
+      "sha256": "a41e57b46a868fd2dcf8b0d0ed5e877461a70aa1ed06feb1ac5065c5fcc3ed67"
+    },
+    "compiler_disabled_clippy": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-no-compiler.log",
+      "sha256": "68e1779ac0721c0ad352668385b6e2ff2dd1e58aadac698ddf6b056c8a562b64"
+    },
+    "audio_device_compile": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-device.log",
+      "sha256": "96f65696e9a10f374f2ee1aa850ee93e1be165deff950c1d1d5aa0ae7a95f603"
+    },
+    "release_tools": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-tools-build.log",
+      "sha256": "a58a7822e22f5f9a949095cf5e2189dcdded99435193789598a16b73f325b4b1"
+    },
+    "contracts": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-contracts.log",
+      "sha256": "67a16ed8112de129cd279ed9621dc50e0af619d16b3712a7064f6628005bb1e1"
+    },
+    "parity": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-parity.log",
+      "sha256": "5e360e7344a905977150e4860d1bd2d3da9ef6aff81e2694f3a1f2e82d13a3db"
+    },
+    "physics_shipping": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-shipping.log",
+      "sha256": "68cc5d72a1dfe5d13950f9cc8e02c7b7eee1e35a5b574138143ca11750912078"
+    },
+    "audio_shipping": {
+      "status": "passed",
+      "log": "/tmp/incant-native-physics-audio-union-audio.log",
+      "sha256": "505f60f27e0471cff063056912c16ecfd3e904f40a2a4ed8128ba2905037b8c9"
+    },
+    "copied_player_test": {
+      "status": "passed",
+      "log": "/tmp/incant-copied-player-isolation-tests.log",
+      "sha256": "31e3a77e143f8c08a0cfd9036b3697cd8d7ebfdef4f5f14635ca395ab44a9f31",
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0
+    },
+    "copied_player_clippy": {
+      "status": "passed",
+      "log": "/tmp/incant-copied-player-isolation-clippy.log",
+      "sha256": "6778d32e37b952ca134b76dfb51fa63c18bd7819f3bdd2fc932c74dbc7de7b4f"
+    }
+  },
+  "tool_tests": 38,
+  "other_contracts": [
+    "generated SDK/schema/bridge",
+    "strict SDK TypeScript",
+    "generated conventions",
+    "actionlint",
+    "format",
+    "seven-root runtime dependency guard under workspace feature unification"
+  ],
+  "feature_graphs": [
+    {
+      "root": "incant_physics",
+      "target": "aarch64-apple-darwin",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics",
+      "target": "x86_64-pc-windows-msvc",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics",
+      "target": "x86_64-unknown-linux-gnu",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics",
+      "target": "aarch64-apple-ios",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics",
+      "target": "aarch64-apple-ios-sim",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics",
+      "target": "aarch64-linux-android",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics",
+      "target": "wasm32-unknown-unknown",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "std"
+      ],
+      "parallel": false,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics_runtime",
+      "target": "aarch64-apple-darwin",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics_runtime",
+      "target": "x86_64-pc-windows-msvc",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics_runtime",
+      "target": "x86_64-unknown-linux-gnu",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics_runtime",
+      "target": "aarch64-apple-ios",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics_runtime",
+      "target": "aarch64-apple-ios-sim",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics_runtime",
+      "target": "aarch64-linux-android",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_physics_runtime",
+      "target": "wasm32-unknown-unknown",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "std"
+      ],
+      "parallel": false,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_runtime",
+      "target": "aarch64-apple-darwin",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_runtime",
+      "target": "x86_64-pc-windows-msvc",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_runtime",
+      "target": "x86_64-unknown-linux-gnu",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_runtime",
+      "target": "aarch64-apple-ios",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_runtime",
+      "target": "aarch64-apple-ios-sim",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_runtime",
+      "target": "aarch64-linux-android",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_runtime",
+      "target": "wasm32-unknown-unknown",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "std"
+      ],
+      "parallel": false,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_script_player",
+      "target": "aarch64-apple-darwin",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_script_player",
+      "target": "x86_64-pc-windows-msvc",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_script_player",
+      "target": "x86_64-unknown-linux-gnu",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_script_player",
+      "target": "aarch64-apple-ios",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_script_player",
+      "target": "aarch64-apple-ios-sim",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_script_player",
+      "target": "aarch64-linux-android",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "root": "incant_script_player",
+      "target": "wasm32-unknown-unknown",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "std"
+      ],
+      "parallel": false,
+      "evidence": "resolved feature graph only, not target execution"
+    }
+  ],
+  "parity": {
+    "status": "passed",
+    "host": {
+      "system": "Darwin",
+      "machine": "arm64"
+    },
+    "trials": 3,
+    "browser_executed": true,
+    "browser": [
+      {
+        "trial": 0,
+        "browser": "156.0.8078.4",
+        "streams": [
+          {
+            "scenario": 0,
+            "file": "browser-0.bin",
+            "bytes": 2714667
+          }
+        ]
+      },
+      {
+        "trial": 1,
+        "browser": "156.0.8078.4",
+        "streams": [
+          {
+            "scenario": 0,
+            "file": "browser-1.bin",
+            "bytes": 2714667
+          }
+        ]
+      },
+      {
+        "trial": 2,
+        "browser": "156.0.8078.4",
+        "streams": [
+          {
+            "scenario": 0,
+            "file": "browser-2.bin",
+            "bytes": 2714667
+          }
+        ]
+      }
+    ],
+    "records": [
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-1-0.bin",
+        "trial": 0,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-4-0.bin",
+        "trial": 0,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-4-1.bin",
+        "trial": 1,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-1-1.bin",
+        "trial": 1,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-1-2.bin",
+        "trial": 2,
+        "workers": 1,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "native-4-2.bin",
+        "trial": 2,
+        "workers": 4,
+        "mode": "native-parallel"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "browser-0.bin",
+        "trial": 0,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "browser-1.bin",
+        "trial": 1,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      },
+      {
+        "bodies": 35,
+        "frames": 641,
+        "record_bytes": 121,
+        "max_sleeping": 32,
+        "wake_transitions": 16,
+        "events": 4,
+        "bytes": 2714667,
+        "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+        "file": "browser-2.bin",
+        "trial": 2,
+        "workers": 0,
+        "mode": "browser-wasm-serial"
+      }
+    ],
+    "source_sha256": {
+      "crates/incant_runtime/src/scene.rs": "bcd08b83a931615aafde6cef79d80b16f2a717de4e271f96ea4b8ebbc02bd2b8",
+      "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+      "crates/incant_runtime/src/lib.rs": "a88f0754c6ce3af921cb070553e03af8b02383a27b5c37e166ef384ca72bcd4c",
+      "crates/incant_runtime/src/save.rs": "f05f56b7833b95050f630209e4f18f063109141d9d109a3b13ba16de3e4a58cb",
+      "crates/incant_runtime/src/binary.rs": "02f8688a0969606c80aac0a46b35772848dea308f76cd2baa2fba19a483c3fde",
+      "crates/incant_runtime/src/world.rs": "4921fc3bdf0f51632f518aeecc6b4916fcf0898a8f9c4bea20a3cc8c90521e05",
+      "crates/incant_runtime/src/commands.rs": "cd2bb03392b60f91c459c75da5ff77e9717b5f97e606bbfe3fba94617679082c",
+      "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+      "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+      "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+      "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+      "crates/incant_physics_runtime/src/lib.rs": "6f6195522e75587d678a9e73dc264802d88fd19f8bf02003425c8f5b0dcb506e",
+      "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+      "crates/incant_physics_runtime/src/queries.rs": "94e7c8aa5d56977036e4161f8637b5e8221e95312c4df8fe3f9b81b382986668",
+      "crates/incant_physics_runtime/src/character.rs": "a46c7ece3103ce7c8ddbd80d60b1668782028e93c626b655d6f4bab175672a92",
+      "Cargo.lock": "a8b33f7ef19ca31529f95d95ebee94b2f16d0dde805f9c7e43ae4201ac509e9e",
+      "tools/probes/native-physics/Cargo.lock": "2cccf7bc3f0d571712e470fdbc041d594b19a87eebca7cd8df3b4624a5c2488e",
+      "tools/probes/native-physics/Cargo.toml": "2422cfe646cc18cb1b0df4cb1354f1a253f305ada22041b26cfc678aea4c6838",
+      "tools/probes/native-physics/src/lib.rs": "854d02f4e233a03b5752f7b300065607e4ad645b43f053ff0067f3e1cc3615ae",
+      "tools/probes/native-physics/src/main.rs": "c53061a63b4b869c8000e915742f6bdf2e588c4e23d9012b04f7ad00fa55e0cf",
+      "tools/probes/native-physics/run.py": "599772e7b65af1380c8a99c001e3e29a50f65223af1c14428fe4047022300930",
+      "tools/probes/native-physics/browser.mjs": "ca02d571378e7713c792836b87aa5410ba5180f66fdc653eb8afc108947b6792"
+    },
+    "scope": "native cooked ECS full public rigid-body state; original native serial/joint solver proof remains separate; no timings, phone, backend-adoption or hidden solver-state claim"
+  },
+  "physics_shipping": {
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_input": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "lto": "fat"
+      },
+      "incant_physics_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "rapier3d": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      }
+    },
+    "player_sha256": "87c14258a11c923ba0635d697db1521d1e7b7bf75e132a922470d883ed2bf10c",
+    "player_bytes": 3941816,
+    "symbols": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "1cc810aa-38af-365f-b80c-34326d0148b2"
+      }
+    },
+    "script_metadata": {
+      "build_id": "1ee63e2da9738655c1a45f0e0645a431dbb2f067dad327d2cd781c596379a380",
+      "bytecode_bytes": 4008,
+      "bytecode_sha256": "6c08e49d602e33f463973c7101aa866098ccd3be66882be0c11399bf07edd95a",
+      "debug_line_tables": true,
+      "embedded_source": false,
+      "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+      "format": 1,
+      "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+      "source_map_sha256": "3d5c48d61766cc051c142f893353666452eb5094fa76cb76e69513d2f8f71b61",
+      "source_name": "embedded-structural.js",
+      "source_sha256": "fe7d1e50e909399b8b455ee2c96023d47c9b4aaad1e28c395a354fb07d1a9243",
+      "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+      "target": "aarch64-apple-darwin",
+      "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+      "wrapper_prefix_lines": 3
+    },
+    "authoring_preserved": {
+      "game.incant.json": "18d998be49942e1fc6bd126b11289d28c67cae42e558047aaa0a53dc08e3a194",
+      "history.jsonl": "ba37c98c7f718c7ac65611ed69d14db5e2ce1088f48bc596035b24afddbd5f6a"
+    },
+    "inputs_and_build_storage_removed": true,
+    "removed_input_scope": "authoring/compile inputs and temporary Cargo storage; runtime exchange files retained",
+    "runtime_exchange_files": [
+      "input.json",
+      "actions.json"
+    ],
+    "runtime_source_compiler_symbols_absent": true,
+    "dynamic_source_routes_rejected": true,
+    "observations": [
+      {
+        "ticks": 0,
+        "entities": 2,
+        "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 1,
+        "entities": 3,
+        "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 2,
+        "entities": 3,
+        "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0333333333333334, 1.0, 0.0]\n"
+      },
+      {
+        "ticks": 3,
+        "entities": 3,
+        "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0666666666666669, 2.0, 0.0]\n"
+      },
+      {
+        "ticks": 4,
+        "entities": 2,
+        "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 4.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 4.0, 0.0]\n"
+      },
+      {
+        "ticks": 60,
+        "entities": 2,
+        "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 60.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 60.0, 0.0]\n"
+      }
+    ],
+    "recorded_input_observations": [
+      {
+        "ticks": 0,
+        "entities": 2,
+        "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 1,
+        "entities": 3,
+        "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 2,
+        "entities": 3,
+        "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0375, 1.0, 0.0]\n"
+      },
+      {
+        "ticks": 3,
+        "entities": 3,
+        "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0708333333333335, 2.0, 0.0]\n"
+      },
+      {
+        "ticks": 4,
+        "entities": 2,
+        "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 4.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 4.0, 3.0]\n"
+      },
+      {
+        "ticks": 60,
+        "entities": 2,
+        "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 60.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 60.0, 3.0]\n"
+      }
+    ],
+    "native_physics_observations": [
+      {
+        "ticks": 0,
+        "output": "tick=0 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 3.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 3.0, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.0, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.0, 4.0, 0.0] [0.0, 0.0, 0.0, 1.0] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+      },
+      {
+        "ticks": 1,
+        "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 2.9982969760894775, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 2.9982969760894775, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, -0.16350001096725464, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.033332824707031, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.033332824707031, 4.0, 0.0] [0.0, 0.00833322573453188, 0.0, 0.999965250492096] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+      },
+      {
+        "ticks": 60,
+        "output": "tick=60 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.00595275592058897, 0.4997122585773468, 0.0025561037473380566]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.00595275592058897, 0.4997122585773468, 0.0025561037473380566] [-0.00012970506213605404, 1.568111542837869e-6, 0.00012519564188551158, 1.0] [0.00020080046670045704, -0.0002750213607214391, 0.00047549817827530205] [0.0009513464756309986, -8.687531583007058e-9, -0.0004017487808596343] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [6.999969482421875, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [6.999969482421875, 4.0, 0.0] [0.0, 0.47942492365837097, 0.0, 0.8775829672813416] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+      },
+      {
+        "ticks": 600,
+        "output": "tick=600 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0059583005495369434, 0.4999309182167053, 0.0025801181327551603]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0059583005495369434, 0.4999309182167053, 0.0025801181327551603] [-7.640940111741656e-7, 1.5690386589994887e-6, 2.5463174324613647e-7, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] true\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [24.99969482421875, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [24.99969482421875, 4.0, 0.0] [0.0, -0.958926260471344, 0.0, 0.28365570306777954] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+      }
+    ],
+    "input_exchange_only_at_startup": true,
+    "scope": "Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate"
+  },
+  "audio_shipping": {
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_assets_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_audio_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "cooked_audio": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed",
+        "lto": "fat"
+      }
+    },
+    "symbol_identity": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "89de1499-9297-3a3e-9bc4-631e133e3338"
+      }
+    },
+    "player_sha256": "825acac5f630e559a23ad2e4dbceca021a13da59e74f8e3105d8b121a1084013",
+    "player_bytes": 585072,
+    "headless_sha256": "77fa87aca0206f2e081a810026c49b7aac35de33df0280cf7aa43851e4b3ddf9",
+    "built_targets": [
+      "atomic_arena",
+      "bitflags",
+      "block_buffer",
+      "build-script-build",
+      "cfg_if",
+      "cooked_audio",
+      "cpufeatures",
+      "crossbeam_utils",
+      "crypto_common",
+      "digest",
+      "dyn_clone",
+      "errno",
+      "fastrand",
+      "generic_array",
+      "getrandom",
+      "glam",
+      "incant_assets_runtime",
+      "incant_audio_runtime",
+      "itoa",
+      "kira",
+      "libc",
+      "memchr",
+      "mint",
+      "once_cell",
+      "pastey",
+      "proc_macro2",
+      "quote",
+      "ref_cast",
+      "ref_cast_impl",
+      "rtrb",
+      "rustix",
+      "schemars",
+      "schemars_derive",
+      "serde",
+      "serde_core",
+      "serde_derive",
+      "serde_derive_internals",
+      "serde_json",
+      "sha2",
+      "syn",
+      "tempfile",
+      "thiserror",
+      "thiserror_impl",
+      "triple_buffer",
+      "typenum",
+      "unicode_ident",
+      "version_check",
+      "zmij"
+    ],
+    "public_command_imports": {
+      "tone.wav": {
+        "asset": {
+          "id": "01M4KZKME1RWE8RS8ZZAZSV5T6",
+          "kind": "audio",
+          "name": "tone",
+          "path": "tone.wav",
+          "sha256": "895bbb7dcd996159e69e5e56f2e6003a3d28a50b84e5d2c93b0c2fd552d7f4f0"
+        },
+        "cache_hit": false,
+        "changed": true,
+        "details": {
+          "channels": 2,
+          "dependencies": [
+            {
+              "path": "tone.wav",
+              "sha256": "4ca7a19ec2ba590d736fede622d89acfcbc6c060988e6f6fe43885eef8255e09"
+            }
+          ],
+          "duration_seconds": 0.5,
+          "frames": 24000,
+          "sample_rate": 48000
+        },
+        "revision": 1
+      },
+      "music.ogg": {
+        "asset": {
+          "id": "01M4KZKMES1ZXMZDTA7WJB6RDX",
+          "kind": "audio",
+          "name": "music",
+          "path": "music.ogg",
+          "sha256": "dc3c6e191132813ecf27244c3d45093115d6bbd742b82145b579c444583ba5e0"
+        },
+        "cache_hit": false,
+        "changed": true,
+        "details": {
+          "channels": 2,
+          "dependencies": [
+            {
+              "path": "music.ogg",
+              "sha256": "7ba839f62023b3b0dd3e7bf7c9da7bc905bf53f8c59a8d65bdaf6e0315596126"
+            }
+          ],
+          "duration_seconds": 0.5,
+          "frames": 24000,
+          "sample_rate": 48000
+        },
+        "revision": 2
+      }
+    },
+    "project_hash_before_delete": "5cc1e3ce7600b8be5897de134269a147cf90505b82a4cefd4f752dd39985b593",
+    "source_and_build_storage_deleted": true,
+    "read_only_cache": {
+      "dc3c6e191132813ecf27244c3d45093115d6bbd742b82145b579c444583ba5e0.json": "06ca052b058a54d9c7aeef368f433b2b9f7271a42de0076ceb44276eea831eca",
+      "895bbb7dcd996159e69e5e56f2e6003a3d28a50b84e5d2c93b0c2fd552d7f4f0.json": "8e7e32db5d5a430bb32119eabe5468f92d93acaae27a927f589f26e8ce0f63d4",
+      "4bec823bf765f9ff9114ae0c13540081740ae2aaa16c754dd47ca79a81916bc9.ipcm": "4bec823bf765f9ff9114ae0c13540081740ae2aaa16c754dd47ca79a81916bc9",
+      "1443195168415a5e5d3563cd98410751810552f6bd141110d04097ddd4eb3f60.ipcm": "1443195168415a5e5d3563cd98410751810552f6bd141110d04097ddd4eb3f60"
+    },
+    "runs": 64,
+    "audio_device_opened": false,
+    "batch_and_process_repeat_exact": true,
+    "results": [
+      {
+        "clip": "music.ogg",
+        "mode": "static",
+        "rate": 0.25,
+        "pcm_sha256": "7b6494d28a2e55900564585a74cca3aab605f7940db091e3b5de0164f672c042",
+        "rms": 0.2589230118370836
+      },
+      {
+        "clip": "music.ogg",
+        "mode": "static",
+        "rate": 1,
+        "pcm_sha256": "7d2309f64a178533c2afce36145bce32bc3a86d6cdf7560cd8a4e5f5333ebe56",
+        "rms": 0.25904700160495914
+      },
+      {
+        "clip": "music.ogg",
+        "mode": "static",
+        "rate": 1.7,
+        "pcm_sha256": "e9270e56a2502dde36b56d4f1b31d0c6cceeb7cede2861610b2d98c386aa5993",
+        "rms": 0.25902899040013344
+      },
+      {
+        "clip": "music.ogg",
+        "mode": "static",
+        "rate": 4,
+        "pcm_sha256": "a22006ac16f3cc83a7026e2639dadeddc26d8b9b0a9283983ea1f6a40f104ab4",
+        "rms": 0.25905318208616984
+      },
+      {
+        "clip": "music.ogg",
+        "mode": "stream",
+        "rate": 0.25,
+        "pcm_sha256": "049de7160b52f47eeb29a969ac811aba0ab983c0e737cd8d1d5a821ee5e34033",
+        "rms": 0.2589230118385115
+      },
+      {
+        "clip": "music.ogg",
+        "mode": "stream",
+        "rate": 1,
+        "pcm_sha256": "fbb5774023bc97d467cfd98ebeee64e1d799539ea8752780f23382cf83cd1336",
+        "rms": 0.2590470015812859
+      },
+      {
+        "clip": "music.ogg",
+        "mode": "stream",
+        "rate": 1.7,
+        "pcm_sha256": "9838822bcc3a98baabf37da18eca4bc860ba94568d82c13b8bb8affc85618409",
+        "rms": 0.2590289903938025
+      },
+      {
+        "clip": "music.ogg",
+        "mode": "stream",
+        "rate": 4,
+        "pcm_sha256": "cbe115cbd05386de19189f294c1b76419778769e041a204507d3d5822ab7eebd",
+        "rms": 0.2590531820636073
+      },
+      {
+        "clip": "tone.wav",
+        "mode": "static",
+        "rate": 0.25,
+        "pcm_sha256": "bd9e06543aa1e25610987bec13c4da9cadb8aeddb856b4cb810a6e5596ca7b28",
+        "rms": 0.17256246513630763
+      },
+      {
+        "clip": "tone.wav",
+        "mode": "static",
+        "rate": 1,
+        "pcm_sha256": "1052ebd39a933510050b5be5b9d2c42a541ab3fd847a86677409aba64c6df690",
+        "rms": 0.17263721176127847
+      },
+      {
+        "clip": "tone.wav",
+        "mode": "static",
+        "rate": 1.7,
+        "pcm_sha256": "8c4987e5c3ea97d20981d51180b97b341fe082e195e66dd7622be44cc53d8e69",
+        "rms": 0.17262353894176635
+      },
+      {
+        "clip": "tone.wav",
+        "mode": "static",
+        "rate": 4,
+        "pcm_sha256": "59a77ea311e5bb2df850a3068059a37d3030d7e9d6d21a7f64c4207022f8bf96",
+        "rms": 0.17263738160312644
+      },
+      {
+        "clip": "tone.wav",
+        "mode": "stream",
+        "rate": 0.25,
+        "pcm_sha256": "cab931b9b164b93ee8bff8d69fe98d7c4052119810194a1723d60abf13465f02",
+        "rms": 0.1725624651399248
+      },
+      {
+        "clip": "tone.wav",
+        "mode": "stream",
+        "rate": 1,
+        "pcm_sha256": "a48731a700fa10011248c60ee222a6603a5069226dc16cb7dede663c6095a1db",
+        "rms": 0.17263721176655294
+      },
+      {
+        "clip": "tone.wav",
+        "mode": "stream",
+        "rate": 1.7,
+        "pcm_sha256": "03cee43efb57156701d21ec009345d01a3dde1bbc2beb785ee39729c2751bbf5",
+        "rms": 0.17262353894547477
+      },
+      {
+        "clip": "tone.wav",
+        "mode": "stream",
+        "rate": 4,
+        "pcm_sha256": "f6fbcaea73f0c3590ab7d3ed6c7a6e8066c5dfd25ed096aad2d346168e02e819",
+        "rms": 0.17263738160514516
+      }
+    ],
+    "native_ecs_audio_integration": false,
+    "reference_phone_gate": false
+  },
+  "copied_player_isolation": {
+    "fix_commit": "1de1f209c4d43c38523741b2d80dcad957c74940",
+    "changed_behavior": "Only serialize two integration tests around copy/spawn; no retry/assertion removal/production changes",
+    "observed_hosted_failures": [
+      "https://github.com/snowdamiz/incant/actions/runs/38091269776/job/114328021404",
+      "https://github.com/snowdamiz/incant/actions/runs/38091305157/job/114328129850"
+    ],
+    "diagnosis_limit": "The inherited-writer mechanism is reproduced; exact hosted interleaving was not traced",
+    "container": "python@sha256:1b668429b3511ab407d8e00648891631b0b1a4d7e15e3ca70f38ab5b91ad4ab4",
+    "container_network": "none",
+    "controlled_linux_probe": {
+      "host": "Linux-7.0.14-linuxkit-aarch64-with",
+      "python": "3.12.15",
+      "results": [
+        {
+          "trial": 0,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 1,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 2,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 3,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 4,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 5,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 6,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 7,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 8,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 9,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 10,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 11,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 12,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 13,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 14,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        },
+        {
+          "trial": 15,
+          "parent_writer_closed": true,
+          "child_writer_cloexec": true,
+          "before_child_exec_errno": 26,
+          "after_child_exec_exit": 0
+        }
+      ],
+      "scope": "controlled Linux descriptor-inheritance mechanism; not a trace of the failed hosted runner"
+    },
+    "controlled_linux_probe_source": "import errno, fcntl, json, os, platform, shutil, subprocess, tempfile\nresults=[]\nfor trial in range(16):\n    with tempfile.TemporaryDirectory() as directory:\n        target=os.path.join(directory,'busybox')\n        shutil.copy2('/bin/busybox',target)\n        writable=os.open(target,os.O_WRONLY|os.O_CLOEXEC)\n        assert fcntl.fcntl(writable,fcntl.F_GETFD)&fcntl.FD_CLOEXEC\n        ready_r,ready_w=os.pipe()\n        go_r,go_w=os.pipe()\n        child=os.fork()\n        if child==0:\n            os.close(ready_r);os.close(go_w)\n            os.write(ready_w,b'1')\n            os.read(go_r,1)\n            os.execl('/bin/true','true')\n        os.close(ready_w);os.close(go_r)\n        assert os.read(ready_r,1)==b'1'\n        os.close(writable)\n        try:\n            subprocess.run([target,'true'],check=True)\n            raise AssertionError('inherited write descriptor did not block execution')\n        except OSError as error:\n            assert error.errno==errno.ETXTBSY,error\n        os.write(go_w,b'1')\n        assert os.waitpid(child,0)[1]==0\n        subprocess.run([target,'true'],check=True)\n        os.close(ready_r);os.close(go_w)\n        results.append({'trial':trial,'parent_writer_closed':True,'child_writer_cloexec':True,'before_child_exec_errno':26,'after_child_exec_exit':0})\nprint(json.dumps({'host':platform.platform(),'python':platform.python_version(),'results':results,'scope':'controlled Linux descriptor-inheritance mechanism; not a trace of the failed hosted runner'},indent=2))\n",
+    "pinned_rust_sources": [
+      "https://github.com/rust-lang/rust/blob/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/fs/unix.rs",
+      "https://github.com/rust-lang/rust/blob/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/process/unix/unix.rs"
+    ]
+  },
+  "source_sha256": {
+    ".github/workflows/ci.yml": "72615f1c53d7fe7a49042102cb6e4a285ec1e137d0b79438aa4940e598916ed9",
+    ".github/workflows/desktop.yml": "021eb376dcde99c1432b3a30b4f6a3a5c8324ab6f6895c70e8ae00c1c1b5e606",
+    ".github/workflows/nightly.yml": "df70eed96aab487249aabcbab91a393cc3b6317c8bee8af80d5e3b55485761bd",
+    ".github/workflows/physics-candidates.yml": "5b8889625c792a03e807794f242097008cb2c5d0a587b086be723682a8bbdad5",
+    "Cargo.lock": "a8b33f7ef19ca31529f95d95ebee94b2f16d0dde805f9c7e43ae4201ac509e9e",
+    "Cargo.toml": "c84dd70bc624a5719e4544bbbab3957c2a9c156bb5aac15e2ce5108224f1132a",
+    "crates/incant_assets_runtime/Cargo.toml": "2c825a3a54c5f2586ccc2cb8fbe9af274015e620b2fb28d10da31dbaea22d243",
+    "crates/incant_assets_runtime/src/audio.rs": "fb5c8532178fc959e122457aa9c29c9c7e6dce7f1c36a789606d15738d0c46ac",
+    "crates/incant_assets_runtime/src/lib.rs": "e31ad95fcb4d87002ada9588188025f6014d5ce026cb2e3b855dddcff21247f3",
+    "crates/incant_assets_runtime/tests/cooked.rs": "d1ede06786a210fb4a5330e791151f52290040cab2af5b7adc61649f0d70aa00",
+    "crates/incant_assets_runtime/tests/support/mod.rs": "12b146bd25a41549fe66820f647e4d810f7ae82a6964fe0d2e94a69ec9fa1e2a",
+    "crates/incant_audio_runtime/Cargo.toml": "badaf4e0c5c60fbae2a9873d29e2313e10dfd6456616259a0482ef17a2a9a6a1",
+    "crates/incant_audio_runtime/examples/cooked_audio.rs": "60428c8da63065d10df26dd805a86665fa42a70f83e87d5f591e1ce15dbdddd8",
+    "crates/incant_audio_runtime/src/config.rs": "eb22b9ca8803ef14534c4bd68dfb17d0f96c10ad386cd8f4a9d89dd3c6723f7e",
+    "crates/incant_audio_runtime/src/lib.rs": "9a38f0ea2fa77eb17b89f9c98cafe55a476236c46058bffcce2b4f74790ef0fb",
+    "crates/incant_audio_runtime/src/mixer.rs": "4bc908b88f7a0c1cbf0a85daea957c26ad14df9ef54ad1580b694ef51bacd12c",
+    "crates/incant_audio_runtime/src/offline.rs": "df823c9040b925d2d97648abc0c22ea2944b171d43ede70cd6449eb99b874857",
+    "crates/incant_audio_runtime/src/offline_stream.rs": "bcb5d073288778d694857394fdb11ff350cd2e8b79f3d7acd6fd231d0d30ecc5",
+    "crates/incant_audio_runtime/src/stream.rs": "5c95e5df733637bb7c5f41f807bdbe0977435305b8bbb5977b72e4484c6d16f4",
+    "crates/incant_audio_runtime/tests/cooked.rs": "075a2735389e78eaa5784d16e6858fa6b0be64964046f716113393645fd76a7e",
+    "crates/incant_cook/Cargo.toml": "8edd1ed3ad58dd32e38c841da6d713fb76c61563a8a2a8f962f2f2019336b8e2",
+    "crates/incant_cook/examples/cook_scene.rs": "e9edb5d97088a266593e5a1cc3a7ed89596ff87b5b221a89adf46210c710ca16",
+    "crates/incant_cook/src/lib.rs": "c648ba5137598280d90a487b82d59d51a690c3fc7e0024c3e768b24ec2ed3477",
+    "crates/incant_cook/src/scene.rs": "cef9fe20e10cea09b8b083aae35d92a64d2bd5f3b2092ebd98b5c7e3c087ece0",
+    "crates/incant_cook/src/script.rs": "a1eee1f00e96f4badc5f94dacbbf5a2fbd7ee0bce52ac91c9fb090f0a52a7382",
+    "crates/incant_cook/tests/runtime.rs": "22ffdc199f560ad77a5aca6690543a7a47a9d3c3647084428407ee5d522c4820",
+    "crates/incant_cook/tests/scripts.rs": "1cf01a02707c9617f9d2b07ede894ee5ca4065eb35fa67e499df818c46697dc8",
+    "crates/incant_physics/Cargo.toml": "59439336a35c4c2853ada5cae9cb197eb5558cb6435e7dd1c06c2b56e5d37fc2",
+    "crates/incant_physics/src/lib.rs": "5fa52ea48230e64f723fe9e5be354d2b450f76cd68042fb19e60347aac00fc26",
+    "crates/incant_physics/src/navigation.rs": "11b87c607d619a20287a7df740ca62c312e2fbd262b4c69ddb3dbbe521e3506e",
+    "crates/incant_physics/tests/character.rs": "44f5d2875f9509e93cc6047f0df0f615ade175bb4bf87bcc2df6363e3241d2d5",
+    "crates/incant_physics/tests/compound.rs": "2bb39cd097f5a6d0f3320af674b609d0d6636b594d8a68137af3ce34e87d511b",
+    "crates/incant_physics/tests/facade.rs": "f24dbb52306fdf8c32fed2f17f520f64b14ab9c78dae995e59ca14c17de9f9ab",
+    "crates/incant_physics/tests/navigation.rs": "3cd46303ec4a55c48181cc5826f341b2735c5ec3b5ba8255e036ed118c825267",
+    "crates/incant_physics/tests/runtime.rs": "00e27b5b243c04b917a2a3e4637c942258ee0a0346a244c132c4f697fac8f6ed",
+    "crates/incant_physics_runtime/Cargo.toml": "03cbdc41344fade42197ad457b27e00f0f3f537accb7935d77afd52173128885",
+    "crates/incant_physics_runtime/src/character.rs": "a46c7ece3103ce7c8ddbd80d60b1668782028e93c626b655d6f4bab175672a92",
+    "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+    "crates/incant_physics_runtime/src/lib.rs": "6f6195522e75587d678a9e73dc264802d88fd19f8bf02003425c8f5b0dcb506e",
+    "crates/incant_physics_runtime/src/queries.rs": "94e7c8aa5d56977036e4161f8637b5e8221e95312c4df8fe3f9b81b382986668",
+    "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+    "crates/incant_physics_runtime/tests/typed.rs": "99ccbb278d09d655e65c3123efd2c13e12cb112f77a10d666837aa2e9a71e2bb",
+    "crates/incant_runtime/Cargo.toml": "fa06c43719120dc282c59b7ab84ccb0e76d3fcd87c49ff5b41fb24d93cc665ea",
+    "crates/incant_runtime/examples/run_scene.rs": "99801aecdfaa80faec156d127fd1aded13b5c86bf15ed544103f2fd0fc315c14",
+    "crates/incant_runtime/examples/save_world.rs": "7ffcbae5f2f92d9405d0f14512dbb42dd8dccb69f77820045c66726474a07ef3",
+    "crates/incant_runtime/src/binary.rs": "02f8688a0969606c80aac0a46b35772848dea308f76cd2baa2fba19a483c3fde",
+    "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+    "crates/incant_runtime/src/columns/tests.rs": "96e0caa0aace60e87095d3d22651aba5345db828d220b2dfc0bfb15f68405ad8",
+    "crates/incant_runtime/src/commands.rs": "cd2bb03392b60f91c459c75da5ff77e9717b5f97e606bbfe3fba94617679082c",
+    "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+    "crates/incant_runtime/src/lib.rs": "a88f0754c6ce3af921cb070553e03af8b02383a27b5c37e166ef384ca72bcd4c",
+    "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+    "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+    "crates/incant_runtime/src/save.rs": "f05f56b7833b95050f630209e4f18f063109141d9d109a3b13ba16de3e4a58cb",
+    "crates/incant_runtime/src/scene.rs": "bcd08b83a931615aafde6cef79d80b16f2a717de4e271f96ea4b8ebbc02bd2b8",
+    "crates/incant_runtime/src/world.rs": "4921fc3bdf0f51632f518aeecc6b4916fcf0898a8f9c4bea20a3cc8c90521e05",
+    "crates/incant_runtime/tests/columns.rs": "8c86e7033b7b5c7ca9171a5a2587dfbff088d5b6bbd151d49bb03da7a3fc82c3",
+    "crates/incant_runtime/tests/numeric_boundaries.rs": "2d246f6b4bc3a0bb28e0dbeae072b2ad892235aa5f0a30ebb8b462c48d13741f",
+    "crates/incant_runtime/tests/physics.rs": "b3e82a95512235d2bf54c6ce01bb795a81a2ba752176a82d7e3566fe5abece4d",
+    "crates/incant_runtime/tests/saves.rs": "be5a4e056f90574837c83ee8a5fe812267b5ed02198480187dabd4729e5d6458",
+    "crates/incant_runtime/tests/scenes.rs": "b5d870d382843f918c014e218825acac2ae2436bacfa2525a1992de10cf964ba",
+    "crates/incant_runtime/tests/structural.rs": "ac002e67cbee6ea7523b30ec94959d5dc2a4e168853bbbe66aa697afcc03cd9b",
+    "crates/incant_script_player/tests/embedded.rs": "19312ce4fbbe22c6e831a72ff628a445501f956e2cbc69cb9fc28c6fbcca98c2",
+    "crates/incant_types/Cargo.toml": "ae094bd227e3e585de808ad18da99b02cc7bc8282720cffeb6d3a8b3275c5e9c",
+    "crates/incant_types/src/audio.rs": "31a41005ed056423ce3c7d3882429550d6383a58a1ea5799e698c25d150a3feb",
+    "crates/incant_types/src/camera.rs": "b650ca68ef1777b81672f489d17ba98b0557eebda891c97e4de0aa20a0ae8e65",
+    "crates/incant_types/src/collider_shapes.rs": "dc2efc4d76e8671b03bc38eb92e8db0161f4613417772644028e0b4ecb958979",
+    "crates/incant_types/src/lib.rs": "49094a8f0d5bd4b10ff5194f6adf3a8d297c2532bf067d9df10ec84ff4b5ebe3",
+    "crates/incant_types/src/lights.rs": "c69e1a4f9b682f1f5bf267d57502387b9f8e6b4a42c32c752c0176f43c9ac935",
+    "crates/incant_types/src/physics.rs": "ec1dd966a85676197f7283133be1b274666135a8cfe6403a477a130a6a43769d",
+    "crates/incant_types/src/physics_validation.rs": "c8a2e2e8b77020ea2ae39d047a9be13081003ef6cf236ca292a52aed4f4a3a98",
+    "crates/incant_types/src/render.rs": "e02d42ddcdbcdeb607c4ae307f30b02805adae2b68cd1fadee2eaed603f3d881",
+    "crates/incant_types/src/transform.rs": "b22948c2013800b8b76d1d18693e7a406358e2d554aad01a1e6d1f87adccf08c"
+  },
+  "limitations": "Audio extraction is not native ECS audio integration; no physics saves, mobile execution, phone/shipping performance or backend-adoption gate. Cross-host CI awaits this publication."
+}
