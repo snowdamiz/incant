@@ -6,7 +6,7 @@
 //! No world, input, script VM or audio-cursor rollback/save is claimed.
 use incant_assets_runtime::sha256;
 use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS, SceneAudio};
-use incant_runtime::{NativeWorld, StableId};
+use incant_runtime::{CookedScene, NativeWorld, StableId};
 use std::{
     fmt::Write as _,
     fs::{File, OpenOptions},
@@ -34,7 +34,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if !(1..=3600).contains(&ticks) || !(1..=8192).contains(&batch) {
         return Err("tick/batch bound".into());
     }
-    let mut world = NativeWorld::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
+    let scene = CookedScene::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
+    if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
+        return Err("this audio player has no spatial host".into());
+    }
+    let mut world = NativeWorld::new(scene);
     let frames = ticks * 48000 / u64::from(world.tick_rate());
     if frames > 1_000_000 {
         return Err("output frame bound".into());

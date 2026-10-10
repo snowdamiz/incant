@@ -475,3 +475,32 @@ fn background_decoder_failure_between_ticks_destroys_the_whole_session() {
     assert!(session.source_state(id(1)).is_err() && session.rebind(actions()).is_err());
     assert!(matches!(session.tick(&[]), Err(GameError::Failed)));
 }
+
+#[path = "support/spatial.rs"]
+mod spatial;
+#[test]
+fn spatial_and_manifest_only_scenes_reject_before_vm_or_backend_setup() {
+    let counts = Arc::new(Counts::default());
+    for scene in spatial::scenes().into_iter().skip(1) {
+        // Top-level guest execution would fail if the VM were constructed.
+        let script = || CompiledScript::compile("throw Error('VM must not run');").unwrap();
+        assert!(matches!(
+            GameSession::new(
+                scene.clone(),
+                script(),
+                actions(),
+                vec![],
+                AudioManagerSettings::<Backend> {
+                    backend_settings: counts.clone(),
+                    ..Default::default()
+                }
+            ),
+            Err(GameError::SpatialHost)
+        ));
+        assert!(matches!(
+            OfflineGameSession::new(scene, script(), actions(), vec![], 48000),
+            Err(GameError::SpatialHost)
+        ));
+    }
+    assert_eq!(counts.starts.load(Ordering::SeqCst), 0);
+}

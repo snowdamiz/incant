@@ -18,13 +18,22 @@ after review and passing checks, without requesting separate merge approval.
 
 ## Implemented and locally verified
 
+- Native game composition now owns typed input/VM/physics and retained scene
+  audio with retryable invalid input, terminal accepted-tick failures, and an
+  exact rational offline sample clock. The integrated workspace passes 504
+  release tests/doctests, 56 GPU regressions and release Clippy; a fresh 4,322,672
+  byte shipping player passes 22 source-free launches including replay/motion/PCM
+  and explicit no-renderer refusals. Device output, renderer integration, full
+  session restoration and phone/performance gates remain open. See
+  [native game session evidence](docs/spikes/native-game-session.md).
+
 - Optional native scene audio host reads typed committed ECS poses and retained
   fingerprint-checked cooked clips, with bounded playback/lifecycle/spatial state
   and explicit retryable-preflight versus terminal-apply semantics. 92 scoped
   union tests plus the final 17-test audio suite pass; 16 source-free shipping
-  processes exercise actual native ticks/offline mixing. Full workspace optional
-  feature CI, game-session integration, device output, cursor saves and phone
-  gates remain open. See [host evidence](docs/spikes/native-scene-audio-host.md).
+  processes exercise actual native ticks/offline mixing. Composite game integration
+  is verified above; hosted optional-feature CI, device output, cursor saves and
+  phone gates remain open. See [host evidence](docs/spikes/native-scene-audio-host.md).
 - Atlas review 0034 authoring follow-up: bounded skyline packing fixes the explicit
   three-frame false failure and retains previous layouts as maximum bounds grow.
   Shared import preparation rejects broken frame/nine-slice references atomically;
@@ -88,8 +97,9 @@ within its documented workload.
 
 - Native scene audio migration has typed version-3 declarations, cooked binary
   IDs, ECS audio components, final-graph structural validation and explicit
-  unsupported cursor saves. Scoped tests and Clippy pass; host clip/mixer
-  integration and full verification are still in progress. See
+  unsupported cursor saves. Typed host/composite integration and local full
+  checks pass; device playback, cursor restoration and hosted verification
+  remain separate. See
   [native scene audio](docs/spikes/native-scene-audio.md).
 - The integrated editor now preserves live OAuth completion announcements and
   recovers Close focus instead of reusing Cancel as Sign out. Shortcut cells keep
@@ -108,8 +118,8 @@ within its documented workload.
   keeps importing, cooking, writing and project asset synchronization with
   compatibility exports. All 40 scoped release tests, 3 default audio-reader
   tests and both Clippy modes pass; default audio dependencies remain lean and
-  the explicit visual graph excludes authoring/importers. Native render scene
-  cooking/extraction and pixel placement remain unimplemented. See
+  the explicit visual graph excludes authoring/importers. Typed native spatial
+  cooking/views are integrated; the GPU host and pixel placement remain open. See
   [reader boundary evidence](docs/spikes/cooked-visual-assets-boundary.md).
 
 - Atlas-specific rendering and public import/repack behavior are accepted in
@@ -944,4 +954,4 @@ mock response, simulator build or unsigned package counts as a shipped product.
 
 Typed Camera/MeshRenderer/current light/environment declarations now cook to checked scene v4 with binary stable asset references and existing recipe fingerprints; old scene encodings remain supported. Read-only parent-first ECS views expose continuous f64 locals/committed globals with accepted-change topology/configuration generations. Structural configuration batches are atomic, saves refuse unsupported spatial state, and no-render probes refuse spatial scenes. Real source-deleted cook→scene→sealed-model loading, 120 scoped release tests/doctests, scoped Clippy and six runner cases pass; runtime dependencies stay authoring-free. [Evidence](docs/spikes/native-spatial-scene.md).
 
-Native renderer input binding/primitive and GPU checks, explicit camera selection, game/audio host refusal on integration, spatial saves and the complete runtime/Play/pixel-placement migration remain open. No renderer/shader/UI change or performance/appearance gate is claimed.
+Game/audio host refusal is now covered by the composition tests and actual version-4 runner checks above. Native renderer input binding/primitive and GPU checks, explicit camera selection, spatial saves and the complete runtime/Play/pixel-placement migration remain open. No renderer/shader/UI change or performance/appearance gate is claimed.

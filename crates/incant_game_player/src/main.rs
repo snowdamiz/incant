@@ -44,9 +44,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if !(1..=3600).contains(&ticks) || !(8000..=192000).contains(&rate) {
         return Err("tick/sample-rate bounds".into());
     }
-    // This core decodes only v1-v3; spatial v4 requires an explicit host and is
-    // unsupported until that capability is deliberately connected.
     let scene = CookedScene::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
+    if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
+        return Err("this game player has no spatial host".into());
+    }
     let frames = u128::from(ticks) * u128::from(rate) / u128::from(scene.tick_rate());
     if frames > 1_000_000 {
         return Err("output frame bound".into());
