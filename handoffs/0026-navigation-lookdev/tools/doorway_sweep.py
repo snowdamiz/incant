@@ -10,8 +10,9 @@ scene's. `play --ticks 1` runs doorway_probe.ts, which asks for a route from
 clearance to the doorway jambs.
 
 Usage (repo root):
-  python3 -I handoffs/0026-navigation-lookdev/tools/doorway_sweep.py OUT_DIR [WIDTH ...]
-OUT_DIR must not exist.
+  python3 -I handoffs/0026-navigation-lookdev/tools/doorway_sweep.py OUT_DIR [--cell-size M] [WIDTH ...]
+OUT_DIR must not exist. --cell-size overrides only the horizontal cell size
+(default: the look-dev scene's 0.1 m); radius and every other setting stay equal.
 """
 
 import json
@@ -25,7 +26,7 @@ import navigation_lookdev as nl  # noqa: E402  (same-directory helper; no third-
 PROBE = Path(__file__).resolve().with_name("doorway_probe.ts")
 
 
-def build(out, width):
+def build(out, width, cell_size):
     out.mkdir(parents=True)
     project = out / "doorway.incant.json"
     journal = project.with_suffix(".journal.jsonl")
@@ -42,7 +43,7 @@ def build(out, width):
             "Transform": nl.transform(center),
             "Collider": nl.collider({"type": "box", "half_extents": list(ext)})}})
         sources.append({"entity": eid, "geometry": "collider"})
-    settings = dict(nl.NAVIGATION, min=[-4, -1, -3], max=[4, 2.5, 3])
+    settings = dict(nl.NAVIGATION, min=[-4, -1, -3], max=[4, 2.5, 3], cell_size=cell_size)
     entities.append({"id": nl.new_ulid(599), "name": "Navigation", "parent": None,
                      "components": {"NavigationMesh": {"settings": settings, "sources": sources}}})
     revision = nl.rpc(project, journal, [{"id": 1, "method": "project.read"}])[0]["result"]["revision"]
@@ -59,7 +60,11 @@ def build(out, width):
 
 def main():
     out = Path(sys.argv[1]).resolve()
-    widths = [float(w) for w in sys.argv[2:]] or [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.6]
+    args = sys.argv[2:]
+    cell_size = nl.NAVIGATION["cell_size"]
+    if args[:1] == ["--cell-size"]:
+        cell_size, args = float(args[1]), args[2:]
+    widths = [float(w) for w in args] or [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.6]
     if out.exists():
         raise SystemExit("Output directory already exists; choose a new directory.")
     before = nl.verify_binary()
@@ -68,12 +73,12 @@ def main():
     nl.run("node", nl.ROOT / "tools/build_script.mjs", PROBE, script)
     rows = []
     for width in widths:
-        project = build(out / f"w{width:.2f}", width)
+        project = build(out / f"w{width:.2f}", width, cell_size)
         logs = out / f"w{width:.2f}.logs.jsonl"
         nl.run(nl.CLI, "play", project, "--ticks", 1, "--compiled-script", script, "--log-output", logs)
         event = json.loads(json.loads(logs.read_text(encoding="utf-8").splitlines()[0])["message"])
         points = event["path"]
-        row = {"width": width, "route": points is not None,
+        row = {"width": width, "cell_size": cell_size, "route": points is not None,
                "free_width_needed_for_radius": round(width - 2 * nl.NAVIGATION["agent_radius"], 3)}
         if points:
             # Clearance from the route to the nearest jamb corner (x = +-0.15, z = +-w/2).
@@ -91,7 +96,7 @@ def main():
         print(json.dumps({k: v for k, v in row.items() if k != "points"}))
     after = nl.verify_binary()
     (out / "sweep.json").write_text(json.dumps({"binary_sha256_before": before, "binary_sha256_after": after,
-                                                "settings": nl.NAVIGATION, "rows": rows}, indent=1), encoding="utf-8")
+                                                "settings": dict(nl.NAVIGATION, cell_size=cell_size), "rows": rows}, indent=1), encoding="utf-8")
 
 
 if __name__ == "__main__":
