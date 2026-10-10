@@ -82,7 +82,35 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
 }
 '''
         source = inputs / 'behavior.ts'
-        source.write_text(f'// {sentinel}\n' + checks + template)
+        controls = (ROOT / 'sdk/templates/native-input/move.ts').read_text()
+        controls = '\n'.join(line for line in controls.splitlines() if not line.startswith('import type'))
+        combined = template.replace('export default {', 'const structural = {')
+        combined += '\n' + controls.replace('export default {', 'const controls = {')
+        combined += '''
+import type { NativeContext } from '../../ts/src/native';
+let inputTick = 0;
+export default {update(context: NativeContext) {
+    ++inputTick;
+    const input = context.input;
+    if ('move' in input.actions) {
+        if (inputTick === 1) {
+            if (!input.actions.jump.pressed || !input.actions.jump.released || input.actions.jump.active ||
+                input.keyboard.pressed[0] !== 'Space' || input.keyboard.released[0] !== 'Space' ||
+                !input.actions.use.pressed || input.gestures[0]?.type !== 'tap' ||
+                input.touch_changes.length !== 2 || input.connected[0] !== 7 ||
+                input.gamepads[7]?.left_stick[0] !== 0.75) throw Error('recorded devices/actions/gesture');
+        } else if (inputTick === 2 && (input.actions.jump.pressed || !input.actions.use.released)) {
+            throw Error('stale input edges');
+        } else if (inputTick === 3 && (input.disconnected[0] !== 7 || input.actions.move.active)) {
+            throw Error('recorded disconnect');
+        } else if (inputTick === 4 && input.focused) { throw Error('recorded focus'); }
+    }
+    structural.update(context);
+    controls.update(context);
+    return undefined;
+}} satisfies NativeBehavior;
+'''
+        source.write_text(f'// {sentinel}\n' + checks + combined)
         commonjs = inputs / 'behavior.js'
         run(['node', ROOT / 'tools/build_script.mjs', source, commonjs])
         environment = dict(os.environ,
@@ -101,7 +129,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             (out / 'build.log').write_text(build.stderr)
             require(build.returncode == 0, f'Shipping script build failed; see {out / "build.log"}')
             flags = {}
-            for crate in ('incant_runtime', 'incant_script', 'incant_script_player'):
+            for crate in ('incant_input', 'incant_runtime', 'incant_script', 'incant_script_player'):
                 lines = [line for line in build.stderr.splitlines() if 'Running `' in line
                          and re.search(r'--crate-name ' + crate + r'\b', line) and f'--target {target}' in line]
                 require(len(lines) == 1, f'Missing fresh target compile for {crate}')
@@ -141,8 +169,29 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             shutil.copy2(metadata_files[0], out / 'symbols/script-symbols.json')
             shutil.copy2(metadata_files[0].with_name('behavior.js.map'), out / 'symbols/behavior.js.map')
         shutil.copy2(scene, out / 'player/world.scene')
-    # No authoring inputs or build storage exist at this point. Only the player
-    # and checked scene enter the runtime working directory; maps are separate.
+        # These are bounded startup exchange inputs, not cooked binary assets or
+        # session saves. Typed packets are retained after one-time decoding.
+        clip = {'format': 'incant-input', 'version': 1, 'tick_rate': 60, 'start_tick': 0,
+                'ticks': 60, 'frames': [
+            {'tick': 1, 'events': [
+                {'type': 'key', 'code': 'Space', 'down': True},
+                {'type': 'key', 'code': 'Space', 'down': False},
+                {'type': 'gamepad_connected', 'id': 7},
+                {'type': 'gamepad_axis', 'id': 7, 'axis': 'left_x', 'value': 0.75},
+                {'type': 'touch', 'id': 1, 'phase': 'down', 'position': [3, 4]},
+                {'type': 'touch', 'id': 1, 'phase': 'up', 'position': [3, 4]}]},
+            {'tick': 2, 'events': [{'type': 'gamepad_axis', 'id': 7, 'axis': 'left_x', 'value': 0.25}]},
+            {'tick': 3, 'events': [{'type': 'gamepad_disconnected', 'id': 7}]},
+            {'tick': 4, 'events': [{'type': 'focus', 'focused': False}]},
+            {'tick': 5, 'events': [{'type': 'focus', 'focused': True}]}]}
+        actions = {
+            'move': {'kind': 'axis1', 'dead_zone': 0, 'bindings': [{'type': 'gamepad_axis', 'id': 7, 'axis': 'left_x'}]},
+            'jump': {'kind': 'button', 'bindings': [{'type': 'key', 'code': 'Space'}]},
+            'use': {'kind': 'button', 'bindings': [{'type': 'gesture', 'gesture': 'tap'}]}}
+        (out / 'player/input.json').write_text(json.dumps(clip) + '\n')
+        (out / 'player/actions.json').write_text(json.dumps(actions) + '\n')
+    # No authoring inputs or build storage exist at this point. Only the player,
+    # checked scene and bounded input-exchange files enter the runtime directory; maps are separate.
     original_scene = (out / 'player/world.scene').read_bytes()
     observations = []
     for ticks in (0, 1, 2, 3, 4, 60):
@@ -155,11 +204,28 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         require(all(p == [0, ticks, 0] for p in positions[:2]), f'Wrong direct component writes: {positions}')
         observations.append({'ticks': ticks, 'entities': expected, 'output': first})
     require((out / 'player/world.scene').read_bytes() == original_scene, 'Script changed cooked scene')
+    recorded = []
+    for ticks in (0, 1, 2, 3, 4, 60):
+        command = [player, 'world.scene', str(ticks), '--input-recording', 'input.json', '--input-actions', 'actions.json']
+        first = subprocess.check_output(command, cwd=out / 'player', text=True)
+        second = subprocess.check_output(command, cwd=out / 'player', text=True)
+        expected_count = 3 if 1 <= ticks < 4 else 2
+        require(first == second and first.startswith(f'tick={ticks} entities={expected_count}\n'), 'Nonrepeatable input result')
+        positions = [ast.literal_eval(re.search(r'(\[[^\[\]]*\])$', line)[1]) for line in first.splitlines()[1:]]
+        expected_x = 0 if ticks == 0 else 0.75 / 60 if ticks == 1 else 1 / 60
+        require(all(abs(p[0] - expected_x) < 1e-12 and p[1:] == [ticks, 3 if ticks else 0]
+                    for p in positions[:2]), f'Wrong recorded input movement: {positions}')
+        recorded.append({'ticks': ticks, 'entities': expected_count, 'output': first})
+    require((out / 'player/world.scene').read_bytes() == original_scene, 'Recorded input changed cooked scene')
     result = {'passed': True, 'target': target, 'compiler': compiler, 'codegen': flags,
               'player_sha256': sha(player), 'player_bytes': player.stat().st_size,
               'symbols': identity, 'script_metadata': metadata, 'authoring_preserved': before,
-              'inputs_and_build_storage_removed': True, 'runtime_source_compiler_symbols_absent': True,
+              'inputs_and_build_storage_removed': True,
+              'removed_input_scope': 'authoring/compile inputs and temporary Cargo storage; runtime exchange files retained',
+              'runtime_exchange_files': ['input.json', 'actions.json'],
+              'runtime_source_compiler_symbols_absent': True,
               'dynamic_source_routes_rejected': True, 'observations': observations,
+              'recorded_input_observations': recorded, 'input_exchange_only_at_startup': True,
               'scope': 'Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate'}
     (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'passed': True, 'target': target, 'player_bytes': result['player_bytes'], 'evidence': str(out / 'result.json')}))

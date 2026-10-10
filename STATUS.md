@@ -53,6 +53,21 @@ within its documented workload.
 
 ## Active work
 
+- Native fixed-tick input now owns a fresh cooked world, script VM and bounded
+  input timeline. Action bindings validate once at construction/rebind; each
+  valid packet advances native simulation before the synchronous script. Raw
+  devices, gestures and named actions reach JS as direct bounded VM copies,
+  without tick-time JSON or project projection. Invalid packets preserve input
+  edges/clock and world/VM state; a later script failure makes the session
+  unusable. All 394 release workspace tests/doctests, workspace Clippy, 89 scoped
+  tests and strict SDK checks pass. A fresh compiler-free shipping player passes
+  twelve empty-input and twelve recorded-input processes after authoring/compile
+  source deletion; retained JSON files are startup-only runtime exchanges. Its
+  stripped size is 2,154,408 bytes (+364,272 vs the corrected cooked-script
+  baseline). Native input/VM save/seek, live platform adapters, remaining legacy
+  gameplay and device/performance gates stay open. Hosted checks are pending;
+  see [native input evidence](docs/spikes/native-input-session.md).
+
 - Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
   SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
   and their exclusive scope ends; rejected batches restore the numeric undo

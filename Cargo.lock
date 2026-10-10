@@ -3811,9 +3811,11 @@ name = "incant_script"
 version = "0.0.1"
 dependencies = [
  "cpu-time",
+ "incant_input",
  "incant_runtime",
  "incant_types",
  "rquickjs",
+ "serde_json",
  "sha2 0.10.9",
  "thiserror 2.0.21",
  "ulid",
@@ -3824,9 +3826,11 @@ name = "incant_script_player"
 version = "0.0.1"
 dependencies = [
  "incant_cook",
+ "incant_input",
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "serde_json",
 ]
 
 [[package]]

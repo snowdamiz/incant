@@ -13,10 +13,14 @@ compiler = []
 [dependencies]
 incant_runtime.workspace = true
 incant_types.workspace = true
+incant_input.workspace = true
 rquickjs.workspace = true
 thiserror.workspace = true
 ulid.workspace = true
 sha2.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
 
 [build-dependencies]
 sha2.workspace = true

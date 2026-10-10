@@ -1,4 +1,9 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
+import type { InputFrame } from './generated';
+/** VM-owned bounded copy; no native pointers/handles or JSON conversion.
+ * Retention cannot hold an ECS loan or alter the next input frame. */
+type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
+export type NativeInput = InputReadonly<InputFrame>;
 export type NativeId = string; // canonical uppercase, 26-character ULID
 export type NativeVector3 = readonly [number, number, number] | Float64Array;
 /** translation xyz, rotation xyzw (unit quaternion), scale xyz; length 10. */
@@ -28,6 +33,7 @@ export interface NativeContext {
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;
   readonly commands: NativeCommands;
+  readonly input: NativeInput;
 }
 export interface NativeBehavior {
   /** Synchronous only; no promises, deferred work or non-undefined return. */
