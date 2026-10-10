@@ -1,5 +1,10 @@
 name: Desktop editor and engine
 on:
+  push:
+    branches: [main]
+    # Refill shared dependencies when their inputs change, without repeating
+    # this matrix after every source-only merge.
+    paths: ['Cargo.lock', '**/Cargo.lock', 'Cargo.toml', '**/Cargo.toml', 'rust-toolchain', 'rust-toolchain.toml', '.cargo/**', '.github/workflows/desktop.yml']
   pull_request:
     paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', '.cargo/**', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'package*.json', 'tools/probes/**', 'tools/shipping*.py', 'tools/tests/test_shipping.py', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
   workflow_dispatch:
@@ -40,8 +45,8 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # PR caches stay in their merge-ref scope; forks only restore.
-          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+          # Share one default-branch dependency set; all PRs only restore.
+          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       - run: npm ci
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
