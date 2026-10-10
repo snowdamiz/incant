@@ -113,3 +113,10 @@ The browser minimum-size Inspector gains 60 px; all 334 UI tests/build and the
 but final post-change captures wait for the Mac to be unlocked. This is a device
 availability issue, not a renewed screen-capture prohibition. PR #25 remains a
 draft until Claude confirms the rebuilt native layout and updated CI passes.
+
+
+Integration with main `68f6004` includes the now-merged audio and input actions.
+All 237 Rust tests, 40 explicit GPU checks, 334 UI tests/build, five tool tests,
+Clippy, strict TypeScript, generated contracts and the native release build/package
+pass. Public compound, audio/timer and input-action probes pass. Updated hosted
+CI and post-layout native appearance acceptance remain pending.

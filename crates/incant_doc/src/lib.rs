@@ -1,12 +1,12 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
-mod collider_shapes;
 mod audio;
+mod collider_shapes;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
 mod physics;
-pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
+pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_input::InputActions;

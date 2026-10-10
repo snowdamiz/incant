@@ -245,5 +245,90 @@
     "new_captures_after_pause": false,
     "stool_report": "Initial diagnosis unsupported by numerical energy trace; no solver patch",
     "stool_evidence": "compound-stool-energy-2026-10-09.json"
+  },
+  "resumed_integration_2026_10_10": {
+    "main": "68f6004b11c0d78a0bfdc9d47b0705821015f15c",
+    "integration_commit": "f867fc2d0ea4c4b28fb41e62d662b0839e81ad21",
+    "rust_tests": 237,
+    "gpu_tests": 40,
+    "ui_tests": 334,
+    "tool_tests": 5,
+    "clippy": true,
+    "contracts": true,
+    "strict_typescript": true,
+    "native_build_package": true,
+    "compound_probe": {
+      "passed": true,
+      "atomic_duplicate_rejection": true,
+      "stable_part_edit_undo_redo_reopen": true,
+      "strict_typescript": true,
+      "hollow_arch_query": true,
+      "parent_hit_identity": true,
+      "dynamic_compound_height": 0.2999277710914612,
+      "repeated_final_state_exact": true,
+      "author_files_unchanged": {
+        "compound.incant.json": "f0045e0cb9a78d4f4d4fc19f7294bc1a53e8be441dfdc7a6880bde52a75003c1",
+        "history.jsonl": "c364ea384171399c6ffe0362f58f22b4ab62735953d2c43ffc308f349e7e845d"
+      },
+      "physical_device_gate": false
+    },
+    "audio_probe": {
+      "passed": true,
+      "public_import_and_rpc": true,
+      "strict_typescript": true,
+      "source_free": true,
+      "repeated_pcm_exact": true,
+      "frames": 48000,
+      "sample_rate": 48000,
+      "timer_pcm_matches_update_control": true,
+      "saved_audio_timer_deadlines_restored": true,
+      "restored_paused_source_stays_silent_until_timer": true,
+      "left_rms": 0.2441395090272332,
+      "paused_left_rms": 0.0,
+      "resumed_left_rms": 0.2441395090272332,
+      "right_rms": 0.3664044296662817,
+      "attenuated_right_rms": 0.18361455724094905,
+      "bus_gain_ratio": 0.5011253750621514,
+      "existing_output_untouched": true,
+      "author_files_unchanged": {
+        "game.incant.json": "bbdf41a7e48702c0280478698ee2890931c1b942f5ac07ba68cfa3031e51fe91",
+        "game.incant.journal.jsonl": "063adcdd2f707fd0b480fee0332c720d0f9d90d43af39b9558c468be6018e9d4"
+      },
+      "pcm_sha256": "4ab70417e9ee9e457b7a83e8f8307825557795e705e4cb6f9afba8550df43225",
+      "binary_sha256": "2f4cb5dad9c845aefc6e7af05cd727b183c1528577901d1d2ae6e87b1fdc038d",
+      "audio_device_opened": false,
+      "pixel_capture": false
+    },
+    "actions_probe": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "steps": [
+        7,
+        13
+      ],
+      "atomic_command_undo_redo": true,
+      "runtime_rebind_saved": true,
+      "full_state_equal": true,
+      "continued_logs_equal": true,
+      "subtick_taps": true,
+      "alternative_bindings_do_not_repeat_presses": true,
+      "touch_gesture_binding": true,
+      "author_files_unchanged": {
+        "game.incant.json": "5991e8081ac7230796512a467de60ae1b61fe7e6aaa173f10d42a4bc170be16f",
+        "history.jsonl": "650f4382b1cc2f2abc54174dc6592a8baf2614f070c800d5ef2071a6feaf65b9",
+        "input.json": "4b9ba5d9049d38db47ee22a49a0ed851b4e6718ecf384c5350d036e0ee3d6a6e"
+      },
+      "final_position": [
+        0.275,
+        0.0,
+        0.3
+      ],
+      "binary_sha256": "2f4cb5dad9c845aefc6e7af05cd727b183c1528577901d1d2ae6e87b1fdc038d"
+    },
+    "claude_result": "handoffs/0025-compound-native-review/result.md",
+    "visual_status": "Supplied native/64-part and corrected-runtime scopes accepted; compact idle Agent improvement needs final rebuilt native confirmation.",
+    "native_capture_availability": "Mac locked; human unlock requested; screen use is authorized.",
+    "updated_hosted_ci": "pending"
   }
 }

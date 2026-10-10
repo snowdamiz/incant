@@ -67,7 +67,9 @@ within its documented workload.
   unsupported, so no solver change was made. All twelve hosted checks passed at
   `18e3406`. Handoff 0025 accepted the supplied native/64-part and corrected-runtime
   scope, then improved the unavailable Agent pane. Its 334 UI checks/build pass.
-  Final post-change native captures await Mac unlock; updated CI and merge remain open.
+  Integration with merged audio/input passes 237 Rust, 40 GPU, 334 UI and five tool
+  tests, contracts, Clippy and native packaging. Final post-change native captures
+  await Mac unlock; updated CI and merge remain open.
   See [compound colliders](docs/spikes/compound-colliders.md).
 
 - Named button/axis input actions and runtime rebinding now use validated project
