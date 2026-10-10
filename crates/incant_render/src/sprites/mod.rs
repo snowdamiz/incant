@@ -157,12 +157,16 @@ impl SpriteSystem {
             // Resolve geometry before allocating GPU resources so an undersized
             // reimport reports the affected entity and exact region/dimensions.
             let sprite = &plan.sprite;
+            let region = sprite
+                .region
+                .pixels()
+                .ok_or(incant_2d::SpriteError::UnresolvedAtlas)?;
             let texture_size = [source.texture.width, source.texture.height];
             let geometry = incant_2d::tessellate(sprite, texture_size).map_err(|source| {
                 ResourceError::SpriteGeometry {
                     entity: plan.id.clone(),
                     texture: sprite.texture.clone(),
-                    region: sprite.region,
+                    region,
                     texture_size,
                     source,
                 }
@@ -182,10 +186,7 @@ impl SpriteSystem {
                 }
             };
             let start = vertices.len() as u32;
-            let [x, y, w, h] = sprite
-                .region
-                .pixels()
-                .ok_or(incant_2d::SpriteError::UnresolvedAtlas)?;
+            let [x, y, w, h] = region;
             let tw = source.texture.width as f64;
             let th = source.texture.height as f64;
             let bounds = if sprite.sampling == SpriteSampling::Linear {

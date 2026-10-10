@@ -86,8 +86,24 @@ fn atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement() {
         "mode",
         json!({"kind":"nine_slice","border":[3,0,0,0],"pixels_per_unit":8}),
     );
-    assert!(
-        renderer.prepare_scene(&f.project, &f.assets).is_err(),
-        "resolved frame bounds validate slice borders"
+    let error = renderer.prepare_scene(&f.project, &f.assets).err().unwrap();
+    let incant_render::ResourceError::SpriteGeometry {
+        entity,
+        texture,
+        region,
+        source,
+        ..
+    } = error
+        .downcast_ref::<incant_render::ResourceError>()
+        .unwrap()
+    else {
+        panic!("expected resolved frame geometry diagnostic, got {error}");
+    };
+    assert_eq!(entity, &f.sprite);
+    assert_eq!(texture, &f.texture);
+    assert_eq!(
+        *region, after,
+        "diagnostic identifies the resolved frame rectangle"
     );
+    assert_eq!(*source, incant_2d::SpriteError::Slice);
 }

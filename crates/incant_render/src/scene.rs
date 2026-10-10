@@ -196,7 +196,9 @@ pub(crate) fn resolve(
                     frame: frame.clone(),
                 })?;
                 sprite.region = region.into();
-                sprite.validate()?;
+                // Sprite upload validates this resolved rectangle before the
+                // affected GPU allocation and supplies the entity/texture IDs
+                // and cooked dimensions in its typed geometry diagnostic.
             }
             result.sprites.push(crate::sprites::SpritePlan {
                 source,

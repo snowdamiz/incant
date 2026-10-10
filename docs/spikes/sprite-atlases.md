@@ -39,3 +39,21 @@ priority. Full workspace/device performance, atlas Claude review, native packagi
 and hosted CI remain open. The old document-backed gameplay probe does not
 satisfy the new runtime-data-path or reference-phone gates. This is not a completed
 tilemap/2D physics implementation or phase-gate pass.
+
+## Integration verification, 2026-10-10
+
+The region-local nearest sampling path and typed reimport diagnostics are now
+integrated with stable atlas frame resolution. The diagnostic carries the final
+packed pixel rectangle; a failed nine-slice after frame lookup identifies the
+entity and texture without publishing a replacement scene. Its retained-scene
+regression and the ordinary-texture shrink regression both pass.
+
+The integrated branch passes workspace Clippy, 330 Rust tests across 106 suites,
+and all 54 explicit GPU checks (including six sprite checks). The shader's
+separate magnification regression, identified by Claude's subsequent review of
+the shared sprite path, is still being corrected on the sprite branch. These
+passing tests do not override that rendered evidence; atlas acceptance remains
+open until the correction and scoped atlas rendered review are integrated.
+Logs: `/tmp/incant-atlas-integrated-tests.log`,
+`/tmp/incant-atlas-integrated-clippy-r3.log`, and
+`/tmp/incant-atlas-integrated-all-gpu.log`.

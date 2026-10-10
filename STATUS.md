@@ -78,10 +78,11 @@ within its documented workload.
 
 - Cook-time sprite atlases are in implementation: typed source descriptors,
   stable frame identities, deterministic packing, edge extrusion, cache metadata
-  and dependency-aware reimport. All 76 focused tests, five sprite GPU checks,
-  Clippy, generated contracts and the public saved workflow pass. Full integration,
-  Claude/native review and hosted/device checks remain open; preserve this work
-  while prioritizing the revised runtime architecture.
+  and dependency-aware reimport. Integrated nearest sampling and resolved-frame
+  diagnostics pass 330 Rust tests, all 54 GPU checks and workspace Clippy. The
+  earlier focused/public workflow also passes. Claude found a magnified-sprite
+  sampling regression in the shared path; its correction, atlas rendered/native
+  review and hosted/device checks remain open while runtime migration continues.
   See [sprite atlas work](docs/spikes/sprite-atlases.md).
 
 - Sprite rendering is in implementation in an isolated checkout: typed texture
