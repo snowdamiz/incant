@@ -222,10 +222,48 @@
       "exact_public_replay_claimed": false
     },
     "awaiting": [
-      "full workspace validation",
-      "unchanged public TypeScript course",
+      "native GPU and platform validation",
       "Claude rendered repeat review",
       "hosted checks of final source"
-    ]
+    ],
+    "local_rust_tests": 286,
+    "clippy_all_targets": true,
+    "headless": {
+      "source_commit": "4c495e96c1afa536c73b95c0c6aadd7649ef29f1",
+      "sha256": "29ecd16b38a020670b13b49bb26a653b0d5f95d0f78273477bd456488d85f461",
+      "purpose": "Near-head-on passing correction; unchanged 0027 plaza regression"
+    },
+    "public_workflow": {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6157673834154757,
+        "neighbors": 17,
+        "remaining": 6.208589198944098e-11,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "973884566d24d872f3632bea4e263bb021f449beda223f429aca624aa6b75fca",
+        "game.incant.journal.jsonl": "6939457fefe3f4d0d110eb9a603f1ba118e349bd570c711ed0b5d5be083c9beb"
+      },
+      "binary_sha256": "29ecd16b38a020670b13b49bb26a653b0d5f95d0f78273477bd456488d85f461",
+      "rendering_or_physics_collision_gate": false
+    },
+    "unchanged_public_plaza": {
+      "firstAllArrived": 2212,
+      "minSeparation": 0.5960335878511636,
+      "minPlinthGap": 0.050000041865167155,
+      "minPostGap": 0.050175734890105406,
+      "overlapTicks": 0,
+      "maxStall": 137,
+      "maxApplied": 1.4000000900885663,
+      "ticks": 2700,
+      "last_tick_not_all_arrived": 2211,
+      "final_arrived": 100,
+      "prior_course_or_thresholds_modified": false
+    }
   }
 }

@@ -16,7 +16,7 @@ ID-based jitter was tried and rejected after it failed the crossing regression.
 Review the immutable binary sourced from 4c495e9 (exact SHA/source metadata in
 artifacts/tools/binary.json). A new numerical Rust regression ports your existing
 plaza routing and initial positions/goals; it fails the previous opposing rule
-and passes the current rule with all100 settled, as do all12 rotated/staggered
+and passes the current rule with all 100 settled, as do all 12 rotated/staggered
 crossing layouts. That port is numerical coverage, not an exact public replay.
 The unchanged public TypeScript run must also pass before this review begins.
 

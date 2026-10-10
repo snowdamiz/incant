@@ -164,6 +164,14 @@ directions (dot product below -0.99 times their lengths, about eight degrees of
 head-on) with a predicted conflict during the horizon. This leaves ordinary
 crossing and goal-seeking objectives unchanged. All twelve radial layouts pass
 with minimum separation 0.5368895 m and final distances below 0.00001 m. The new
-numerical plaza test has all100 settled throughout its last second, minimum
+numerical plaza test has all 100 settled throughout its last second, minimum
 separation 0.59696561 m and no body/obstacle overlap. Full public playback and
 Claude's unchanged rendered course must still verify this candidate before merge.
+
+
+The unchanged public TypeScript plaza run also passes candidate `4c495e9`: all
+100 remain at their goals from tick 2212 through 2700, zero overlap ticks,
+minimum separation 0.59603359 m and minimum plinth clearance
+0.05000004 m. All 286 Rust tests and Clippy pass. The independent
+100-agent public workflow repeats and resumes exactly with unchanged authoring
+files. Claude's updated rendered review and final hosted checks remain pending.
