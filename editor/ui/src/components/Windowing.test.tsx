@@ -69,9 +69,52 @@ describe('windowing helpers', () => {
     revealSpan(box, 40, 28);
     expect(box.scrollTop).toBe(40);
   });
+
+  it.each([0, 1, 10, 1000])('bounds both endpoints when a scrolled list shrinks to %i rows', (count) => {
+    const [first, last] = rowRange({ top: 2_800_000, height: 280, left: 0, width: 300 }, count, 28, 4);
+    expect([first, last]).toEqual([count, count]);
+    expect(mountedIndices(first, last, count, [0, count - 1, count])).toEqual(count === 0 ? [] : count === 1 ? [0] : [0, count - 1]);
+  });
 });
 
 describe('hierarchy with 100,000 entities', () => {
+  it('can narrow a filter while scrolled beyond the remaining rows', async () => {
+    render(<App resolution={{ kind: 'bridge', bridge: bridgeFor(stress).bridge }} />);
+    const filter = screen.getByLabelText('Filter hierarchy by name');
+    fireEvent.change(filter, { target: { value: 'Entity 100.' } });
+    await waitFor(() => expect(screen.getByText('1,000 matches')).toBeTruthy());
+    const tree = screen.getByRole('tree', { name: 'Hierarchy' });
+    scrollTo(tree, 26_000);
+    await waitFor(() => expect(screen.getByRole('treeitem', { name: /^Entity 100\.0940/ })).toBeTruthy());
+
+    fireEvent.change(filter, { target: { value: 'Group 001' } });
+    await waitFor(() => expect(screen.getByText('1 match')).toBeTruthy());
+    expect(treeItems().length).toBeLessThanOrEqual(2);
+    // jsdom does not clamp scrollTop when content shrinks; deliver the browser's adjustment.
+    scrollTo(tree, 0);
+    await waitFor(() => expect(screen.getByRole('treeitem', { name: /^Group 001/ })).toBeTruthy());
+    expect(treeItems()).toHaveLength(2);
+  });
+
+  it('tracks the replacement scroller after a filter has no matches', async () => {
+    render(<App resolution={{ kind: 'bridge', bridge: bridgeFor(stress).bridge }} />);
+    const filter = screen.getByLabelText('Filter hierarchy by name');
+    const original = screen.getByRole('tree', { name: 'Hierarchy' });
+    scrollTo(original, 2400);
+    await waitFor(() => expect(screen.getByRole('treeitem', { name: /^Group 090/ })).toBeTruthy());
+
+    fireEvent.change(filter, { target: { value: 'no such entity' } });
+    await waitFor(() => expect(screen.getByText('No matching entities')).toBeTruthy());
+    expect(screen.queryByRole('tree', { name: 'Hierarchy' })).toBeNull();
+    fireEvent.change(filter, { target: { value: '' } });
+    const replacement = await screen.findByRole('tree', { name: 'Hierarchy' });
+    expect(replacement).not.toBe(original);
+    await waitFor(() => expect(screen.getByRole('treeitem', { name: /^Group 001/ })).toBeTruthy());
+    scrollTo(replacement, 2400);
+    await waitFor(() => expect(screen.getByRole('treeitem', { name: /^Group 090/ })).toBeTruthy());
+    expect(treeItems().length).toBeLessThan(60);
+  });
+
   it('mounts a bounded window of rows and keeps every row’s place in the tree', async () => {
     render(<App resolution={{ kind: 'bridge', bridge: bridgeFor(stress).bridge }} />);
     expect(screen.getByRole('tab', { name: /^Hierarchy/ }).textContent).toContain('100,101');
@@ -151,6 +194,22 @@ describe('hierarchy with 100,000 entities', () => {
 });
 
 describe('asset list with 20,000 assets', () => {
+  it('can scroll again after clearing a filter with no matches', async () => {
+    render(<App resolution={{ kind: 'bridge', bridge: bridgeFor(stress).bridge }} />);
+    fireEvent.click(screen.getByRole('tab', { name: /^Assets/ }));
+    const filter = screen.getByLabelText('Filter assets by name or path');
+    const original = screen.getByRole('listbox', { name: 'Assets' });
+    const initialNames = within(original).getAllByRole('option').map((row) => row.textContent);
+    fireEvent.change(filter, { target: { value: 'no such asset' } });
+    expect(screen.getByText('No matching assets')).toBeTruthy();
+    fireEvent.change(filter, { target: { value: '' } });
+    const replacement = screen.getByRole('listbox', { name: 'Assets' });
+    expect(replacement).not.toBe(original);
+    scrollTo(replacement, 14_000);
+    await waitFor(() => expect(within(replacement).getAllByRole('option').some((row) => !initialNames.includes(row.textContent))).toBe(true));
+    expect(within(replacement).getAllByRole('option').length).toBeLessThan(60);
+  });
+
   it('mounts a window of labelled folder groups and reaches the last asset from the keyboard', async () => {
     render(<App resolution={{ kind: 'bridge', bridge: bridgeFor(stress).bridge }} />);
     fireEvent.click(screen.getByRole('tab', { name: /^Assets/ }));
@@ -169,6 +228,41 @@ describe('asset list with 20,000 assets', () => {
     expect(options().length).toBeLessThan(60);
     // The Inspector follows the selection.
     expect(document.querySelector('.inspector__name')?.textContent).toBe(document.activeElement?.querySelector('.asset-row__name')?.textContent);
+  });
+});
+
+describe('Inspector list value transitions', () => {
+  it.each(['object', 'string'] as const)('keeps a %s list bounded and scrollable through empty and smaller values', async (kind) => {
+    const items: FieldSchema = kind === 'object' ? { type: 'object', properties: { name: { type: 'string' } } } : { type: 'string' };
+    const schema: FieldSchema = { type: 'array', items };
+    const values = Array.from({ length: 1000 }, (_, index) => kind === 'object' ? { name: `value-${index}` } : `value-${index}`);
+    const show = (value: readonly unknown[]) => (
+      <FieldView name="items" schema={schema} value={value} path={['items']} ctx={{ entity: '01JA33RV000000000000000001', component: 'Test', diagnostics: [] }} />
+    );
+    const list = () => screen.getByRole(kind === 'object' ? 'listbox' : 'list', { name: 'Items' });
+    const entry = (index: number) => kind === 'object'
+      ? within(list()).getByRole('option', { name: new RegExp(`^Item ${index + 1}:`) })
+      : within(list()).getByDisplayValue(`value-${index}`);
+    const rows = () => within(list()).getAllByRole(kind === 'object' ? 'option' : 'listitem');
+    const { rerender } = render(show(values));
+    const original = list();
+    scrollTo(original, 10_400);
+    await waitFor(() => expect(entry(400)).toBeTruthy());
+    expect(rows().length).toBeLessThan(60);
+    rerender(show([]));
+    expect(screen.getByText('No items.')).toBeTruthy();
+    rerender(show(values));
+    expect(list()).not.toBe(original);
+    await waitFor(() => expect(entry(1)).toBeTruthy());
+    scrollTo(list(), 10_400);
+    await waitFor(() => expect(entry(400)).toBeTruthy());
+    expect(rows().length).toBeLessThan(60);
+
+    rerender(show(values.slice(0, 2)));
+    // Model the browser's scroll clamp after content shrinks (jsdom has no layout).
+    scrollTo(list(), 0);
+    await waitFor(() => expect(entry(1)).toBeTruthy());
+    expect(rows()).toHaveLength(2);
   });
 });
 
@@ -195,7 +289,7 @@ describe('a 65,536-value navigation grid', () => {
       />,
     );
 
-  it('draws a map and mounts no control per cell; the exact values open as a bounded table', () => {
+  it('draws a map and mounts no control per cell; the exact values open as a bounded table', async () => {
     const { container } = show();
     expect(container.querySelectorAll('input')).toHaveLength(0);
     expect(container.querySelector('canvas')?.getAttribute('width')).toBe('256');
@@ -214,7 +308,15 @@ describe('a 65,536-value navigation grid', () => {
       table.scrollTop = 22 * 200;
       fireEvent.scroll(table);
     });
-    return waitFor(() => expect(table.querySelector('.number-table__index')?.textContent).not.toBe('0'));
+    await waitFor(() => expect(table.querySelector('.number-table__index')?.textContent).not.toBe('0'));
+    fireEvent.click(screen.getByRole('button', { name: 'Hide values' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Show values' }));
+    const replacement = screen.getByRole('group', { name: /Costs/ });
+    expect(replacement).not.toBe(table);
+    expect(replacement.querySelector('.number-table__index')?.textContent).toBe('0');
+    scrollTo(replacement, 22 * 200);
+    await waitFor(() => expect(replacement.querySelector('.number-table__index')?.textContent).not.toBe('0'));
+    expect(replacement.querySelectorAll('.number-table__cell').length).toBeLessThan(2000);
   });
 
   it('marks the exact cell an engine diagnostic names', () => {

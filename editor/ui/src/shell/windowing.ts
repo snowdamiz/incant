@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import type { RefObject } from 'react';
+import { useCallback, useState } from 'react';
+import type { RefCallback, RefObject } from 'react';
 
 /**
  * Bounded rendering for long panels (PLAN.md revision 4, ADR 0009): a list mounts
@@ -26,15 +26,18 @@ export interface Viewport {
  * Tracks a scroll container's viewport. Updates only when the scroll offset crosses
  * a `step` boundary or the container is resized; callers overscan by at least one
  * step, so the mounted rows always cover what is visible.
+ * Attach the returned callback ref to the container. It keeps `ref.current` available
+ * for imperative scrolling and follows DOM replacement even when the owner stays
+ * mounted (for example, a filter temporarily has no results).
  */
 export function useViewport(
   ref: RefObject<HTMLElement | null>,
   step: number,
   fallback: { readonly height: number; readonly width: number } = { height: FALLBACK_HEIGHT, width: FALLBACK_WIDTH },
-): Viewport {
+): readonly [Viewport, RefCallback<HTMLElement>] {
   const [viewport, setViewport] = useState<Viewport>({ top: 0, height: fallback.height, left: 0, width: fallback.width });
-  useEffect(() => {
-    const element = ref.current;
+  const attach = useCallback<RefCallback<HTMLElement>>((element) => {
+    ref.current = element;
     if (!element) return;
     let frame = 0;
     const measure = () => {
@@ -55,19 +58,21 @@ export function useViewport(
     const observer = new ResizeObserver(schedule);
     observer.observe(element);
     return () => {
+      ref.current = null;
       element.removeEventListener('scroll', schedule);
       observer.disconnect();
       if (frame !== 0) cancelAnimationFrame(frame);
     };
   }, [ref, step, fallback.height, fallback.width]);
-  return viewport;
+  return [viewport, attach];
 }
 
 /** First and last (exclusive) index of fixed-height rows to mount for a viewport. */
 export function rowRange(viewport: Viewport, count: number, rowHeight: number, overscan: number, offset = 0): [number, number] {
-  const first = Math.max(0, Math.floor((viewport.top - offset) / rowHeight) - overscan);
+  // Content can shrink before the browser delivers its adjusted scroll position.
+  const first = Math.min(count, Math.max(0, Math.floor((viewport.top - offset) / rowHeight) - overscan));
   const last = Math.min(count, Math.ceil((viewport.top - offset + viewport.height) / rowHeight) + overscan);
-  return [Math.min(first, count), Math.max(first, last)];
+  return [first, Math.max(first, last)];
 }
 
 /** Indices first..last-1 plus pinned ones, ascending and unique. Pinned indices outside 0..count are ignored. */
