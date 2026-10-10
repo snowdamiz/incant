@@ -90,9 +90,9 @@ within its documented workload.
   and resumes a mid-jump save with exact final state/logs and unchanged authored
   files. All 190 Rust, 315 UI and five tool tests pass, along with Clippy, generated
   contracts and the native build/package. macOS normalized-input smoke execution
-  passes; hosted checks and merge are pending. Live OS/browser adapters, action
-  mapping is implemented in the increment above; live adapters and physical-device
-  verification remain open. No computer use or local
+  passes; hosted checks and merge are pending. Action mapping is implemented in
+  the increment above; live OS/browser adapters and physical-device verification
+  remain open. No computer use or local
   captures occurred. See [game input](docs/spikes/game-input.md).
 
 - Versioned logical game saves preserve runtime scenes, hierarchy, spawned/deleted
