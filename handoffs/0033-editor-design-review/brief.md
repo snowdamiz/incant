@@ -1,3 +1,35 @@
+## Native review update — 2026-10-10 17:45
+
+Astra built the current main-based whole-app design at 6db60b2, including two
+independently reproduced behavior fixes: AgentPanel observes its actual remounted
+transcript node, and a navigation grid that becomes malformed keeps its raw costs
+visible even if its valid predecessor's values were collapsed. Those fixes are now
+in your checkout; preserve them. All 500 UI tests, strict typecheck, production
+build, six native editor tests, Clippy, and the explicit native GPU recovery test
+pass. Read the manifest in ignored `artifacts/0033-native-main/` for exact source,
+binary identity and commands. It is a new native custom-protocol build; saved
+sign-in restored automatically.
+
+Review the two new actual native captures now available there: compound-first.png
+and grid-current.png. The former shows the current compound panel at its first
+row; it is NOT an End/last-row check. The latter shows the current large grid with
+values collapsed. Both are 1440 by 874 logical pixels. They include the private
+account label: keep raw captures local and ignored. Any committed illustration
+must be an account-free crop. Treat this as a focused native delta review of your
+whole-app work, not another redesign or acceptance of unobserved states.
+
+The user is interacting with the native preview and automated input was blocked
+twice by the focus-change guard. Do not drive the native app during this pass.
+Astra is leaving it available and continuing engineering. Native End then Tab
+last-part reveal, grid values paging, dialogs/menus and the 1000 by 650 minimum
+captures remain explicitly pending; do not claim those checks passed. You may
+review existing browser coverage to decide whether the supplied native states
+have any new visual defect, and inspect the two behavior patches if relevant.
+Report scoped findings and remaining native checklist. Make changes only if a
+clear defect warrants them; preserve the app-wide design and all interactions.
+No Cargo, shader, engine, schema, account or native automation changes. Continue
+through ACP at explicitly verified Opus 5.5 Max; commit Built-by: claude.
+
 ## Current integration priority — publish the whole-app pass on main, 2026-10-10 16:55
 
 Astra integrated your whole-app commit and fixed reproduced menu focus, diagnostic
