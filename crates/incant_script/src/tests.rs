@@ -343,3 +343,43 @@ fn finite_motion_signed_unit_quaternion_and_reflected_scale_remain_valid() {
         [3. / 60., 0., 0.]
     );
 }
+
+#[test]
+fn numeric_finite_components_with_overflowing_hierarchy_restore_the_entire_loan() {
+    // Both the empty and velocity-only command paths used to accept this:
+    // individual components remain finite, but parent * child overflows.
+    for queued in ["", "commands.setVelocity(chunks[0].ids[0], [3,0,0]);"] {
+        let code = CompiledScript::compile(&format!(
+            "exports.default={{update({{chunks,commands}}){{
+                globalThis.views=chunks.flatMap(c=>[c.transforms,c.velocities].filter(Boolean));
+                for(const c of chunks){{
+                    for(let i=0;i<c.transforms.length;i+=c.transformStride){{
+                        c.transforms[i+2]=17;c.transforms[i+7]=1e200;
+                    }}
+                    if(c.velocities)c.velocities[1]=31;
+                }}
+                {queued}
+            }}}};"
+        ))
+        .unwrap();
+        let mut host = ScriptHost::new(code).unwrap();
+        let mut world = world();
+        let before = world.snapshot();
+        let saved = world.save_bytes().unwrap();
+        assert!(
+            matches!(host.tick(&mut world, 0.125), Err(ScriptError::Structural(
+            incant_runtime::RuntimeError::Scene(incant_runtime::SceneError::Component(child))
+        )) if child == id(2))
+        );
+        assert_eq!(world.snapshot(), before);
+        assert_eq!(world.save_bytes().unwrap(), saved);
+        check(
+            &host,
+            "for(const v of views)if(v.buffer.byteLength!==0)throw Error('retained view');",
+        );
+        assert!(matches!(
+            host.tick(&mut world, 0.125),
+            Err(ScriptError::FailedSession)
+        ));
+    }
+}

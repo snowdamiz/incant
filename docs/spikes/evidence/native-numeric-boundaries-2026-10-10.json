@@ -1,0 +1,700 @@
+{
+  "date": "2026-10-10",
+  "base_commit": "7cc0dcdf9d5bfe4aa8965d3b9f33a7c374874e83",
+  "source_sha256": {
+    "crates/incant_runtime/src/world.rs": "bac7305560e764984b524abc7476f4ecf630afd08026a59c057b5b1dc1d3dace",
+    "crates/incant_runtime/src/scene.rs": "4228cbd022ede932f4cbf1c6cb7ac71becc572f2c5ed7e4fee1f47520b095653",
+    "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+    "crates/incant_script/src/loan.rs": "2ae499a4215bda9bd3192d4bad0bbcf1de292163558e9c8d7c6dc7068716a2ae",
+    "crates/incant_script/src/tests.rs": "e298f443a29a59dd30c3bc8ecc9ec8e9497ceba8f1c413873901463656948b50",
+    "crates/incant_script/src/session_tests.rs": "8c65e0ba4ce7c9a2e1ab7207c869e21f55e822fd3e14cf711513bb2d97de7575",
+    "crates/incant_runtime/tests/numeric_boundaries.rs": "2d246f6b4bc3a0bb28e0dbeae072b2ad892235aa5f0a30ebb8b462c48d13741f"
+  },
+  "verification": {
+    "baseline_new_regressions_failed": 4,
+    "scoped_tests_passed": 80,
+    "workspace_release_tests_passed": 407,
+    "gpu_tests_ignored": 44,
+    "workspace_all_targets_clippy": true,
+    "compiler_disabled_clippy": true,
+    "independent_review": "windowing_correctness reviewed frozen implementation; no blocking findings; pointer-lifetime prose clarified afterwards"
+  },
+  "shipping": {
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_input": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "lto": "fat"
+      }
+    },
+    "player_sha256": "be547381f6fd09dcadc3138b218458b1b31e5564c42f5e3123821b26bc7ac03a",
+    "player_bytes": 2170968,
+    "symbols": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "e7e9324a-2622-35cc-b153-db1b15259907"
+      }
+    },
+    "script_metadata": {
+      "build_id": "44d18b3828baf627509b5f74e9842d7fe9fe3c693d463189b0a8f530db46a3de",
+      "bytecode_bytes": 3890,
+      "bytecode_sha256": "cf3e940f561f2eb1aa0dbf1442c93b7f7fa1690b6b3222070fd2d61e1a5de023",
+      "debug_line_tables": true,
+      "embedded_source": false,
+      "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+      "format": 1,
+      "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+      "source_map_sha256": "27940e78a7a2fa56bbfdc3dd6ebfe786652e5cbbf9d5cb18402b9ace804fdddc",
+      "source_name": "embedded-structural.js",
+      "source_sha256": "1ba09c0cb8dbd900d60c88792b00fba2315ba7b2ae078dd8938570a2d51e146b",
+      "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+      "target": "aarch64-apple-darwin",
+      "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+      "wrapper_prefix_lines": 3
+    },
+    "authoring_preserved": {
+      "game.incant.json": "81912ab38eac6b34cfbd73928512e57189f61574caa64e96ec4b013aaeeb6b10",
+      "history.jsonl": "679636af553fe26bba1a3304e44643b992796eef168570dcce537c2f7a79958f"
+    },
+    "inputs_and_build_storage_removed": true,
+    "removed_input_scope": "authoring/compile inputs and temporary Cargo storage; runtime exchange files retained",
+    "runtime_exchange_files": [
+      "input.json",
+      "actions.json"
+    ],
+    "runtime_source_compiler_symbols_absent": true,
+    "dynamic_source_routes_rejected": true,
+    "observations": [
+      {
+        "ticks": 0,
+        "entities": 2,
+        "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 1,
+        "entities": 3,
+        "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 2,
+        "entities": 3,
+        "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0333333333333334, 1.0, 0.0]\n"
+      },
+      {
+        "ticks": 3,
+        "entities": 3,
+        "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0666666666666669, 2.0, 0.0]\n"
+      },
+      {
+        "ticks": 4,
+        "entities": 2,
+        "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 4.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 4.0, 0.0]\n"
+      },
+      {
+        "ticks": 60,
+        "entities": 2,
+        "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 60.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 60.0, 0.0]\n"
+      }
+    ],
+    "recorded_input_observations": [
+      {
+        "ticks": 0,
+        "entities": 2,
+        "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 1,
+        "entities": 3,
+        "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+      },
+      {
+        "ticks": 2,
+        "entities": 3,
+        "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0375, 1.0, 0.0]\n"
+      },
+      {
+        "ticks": 3,
+        "entities": 3,
+        "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0708333333333335, 2.0, 0.0]\n"
+      },
+      {
+        "ticks": 4,
+        "entities": 2,
+        "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 4.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 4.0, 3.0]\n"
+      },
+      {
+        "ticks": 60,
+        "entities": 2,
+        "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 60.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 60.0, 3.0]\n"
+      }
+    ],
+    "input_exchange_only_at_startup": true,
+    "scope": "Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate"
+  },
+  "local_release_diagnostic": {
+    "scope": "Local release-profile diagnostic only; not shipping-profile/device gate; other development tasks were active",
+    "warmup_ticks": 20,
+    "sample_ticks": 120,
+    "rounds": 3,
+    "host": "macOS-26.6-arm64-arm-64bit-Mach-O",
+    "cpu": "Apple M5 Pro",
+    "source_sha256": "9c3aa9878e036ad999e4e63f0bab8492e28c27004448b5606bbb1c670ab97dc2",
+    "samples": [
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "static",
+        "round": 0,
+        "p50_ns": 156750,
+        "p95_ns": 195542,
+        "min_ns": 148375,
+        "max_ns": 535458,
+        "tick": 140,
+        "last_world_x": 16.0
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "static",
+        "round": 0,
+        "p50_ns": 154167,
+        "p95_ns": 282959,
+        "min_ns": 141875,
+        "max_ns": 637375,
+        "tick": 140,
+        "last_world_x": 16.0
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "static",
+        "round": 1,
+        "p50_ns": 147708,
+        "p95_ns": 264917,
+        "min_ns": 141458,
+        "max_ns": 1140584,
+        "tick": 140,
+        "last_world_x": 16.0
+      },
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "static",
+        "round": 1,
+        "p50_ns": 161709,
+        "p95_ns": 244625,
+        "min_ns": 148333,
+        "max_ns": 326000,
+        "tick": 140,
+        "last_world_x": 16.0
+      },
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "static",
+        "round": 2,
+        "p50_ns": 165083,
+        "p95_ns": 259000,
+        "min_ns": 153917,
+        "max_ns": 360958,
+        "tick": 140,
+        "last_world_x": 16.0
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "static",
+        "round": 2,
+        "p50_ns": 157000,
+        "p95_ns": 259375,
+        "min_ns": 146042,
+        "max_ns": 448959,
+        "tick": 140,
+        "last_world_x": 16.0
+      },
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "moving",
+        "round": 0,
+        "p50_ns": 210583,
+        "p95_ns": 299708,
+        "min_ns": 173291,
+        "max_ns": 406583,
+        "tick": 140,
+        "last_world_x": 16.5833333333333
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "moving",
+        "round": 0,
+        "p50_ns": 195208,
+        "p95_ns": 285708,
+        "min_ns": 169542,
+        "max_ns": 579500,
+        "tick": 140,
+        "last_world_x": 16.5833333333333
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "moving",
+        "round": 1,
+        "p50_ns": 189750,
+        "p95_ns": 268666,
+        "min_ns": 172917,
+        "max_ns": 403625,
+        "tick": 140,
+        "last_world_x": 16.5833333333333
+      },
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "moving",
+        "round": 1,
+        "p50_ns": 199125,
+        "p95_ns": 287875,
+        "min_ns": 173416,
+        "max_ns": 361917,
+        "tick": 140,
+        "last_world_x": 16.5833333333333
+      },
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "moving",
+        "round": 2,
+        "p50_ns": 193417,
+        "p95_ns": 250166,
+        "min_ns": 174875,
+        "max_ns": 363875,
+        "tick": 140,
+        "last_world_x": 16.5833333333333
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "moving",
+        "round": 2,
+        "p50_ns": 191375,
+        "p95_ns": 294333,
+        "min_ns": 171875,
+        "max_ns": 410625,
+        "tick": 140,
+        "last_world_x": 16.5833333333333
+      },
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "parented",
+        "round": 0,
+        "p50_ns": 334375,
+        "p95_ns": 850500,
+        "min_ns": 237667,
+        "max_ns": 3828666,
+        "tick": 140,
+        "last_world_x": 104.6666666666664
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "parented",
+        "round": 0,
+        "p50_ns": 289375,
+        "p95_ns": 652042,
+        "min_ns": 236792,
+        "max_ns": 1453125,
+        "tick": 140,
+        "last_world_x": 104.6666666666664
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "parented",
+        "round": 1,
+        "p50_ns": 251959,
+        "p95_ns": 421875,
+        "min_ns": 227042,
+        "max_ns": 543625,
+        "tick": 140,
+        "last_world_x": 104.6666666666664
+      },
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "parented",
+        "round": 1,
+        "p50_ns": 281875,
+        "p95_ns": 602209,
+        "min_ns": 227459,
+        "max_ns": 824083,
+        "tick": 140,
+        "last_world_x": 104.6666666666664
+      },
+      {
+        "role": "baseline",
+        "count": 10000,
+        "mode": "parented",
+        "round": 2,
+        "p50_ns": 276166,
+        "p95_ns": 437416,
+        "min_ns": 230625,
+        "max_ns": 657792,
+        "tick": 140,
+        "last_world_x": 104.6666666666664
+      },
+      {
+        "role": "candidate",
+        "count": 10000,
+        "mode": "parented",
+        "round": 2,
+        "p50_ns": 372250,
+        "p95_ns": 592417,
+        "min_ns": 253625,
+        "max_ns": 3600125,
+        "tick": 140,
+        "last_world_x": 104.6666666666664
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "static",
+        "round": 0,
+        "p50_ns": 1647875,
+        "p95_ns": 2048875,
+        "min_ns": 1559750,
+        "max_ns": 2243541,
+        "tick": 140,
+        "last_world_x": 0.0
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "static",
+        "round": 0,
+        "p50_ns": 1607875,
+        "p95_ns": 2517958,
+        "min_ns": 1454916,
+        "max_ns": 9486875,
+        "tick": 140,
+        "last_world_x": 0.0
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "static",
+        "round": 1,
+        "p50_ns": 1518833,
+        "p95_ns": 2122125,
+        "min_ns": 1454250,
+        "max_ns": 5208167,
+        "tick": 140,
+        "last_world_x": 0.0
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "static",
+        "round": 1,
+        "p50_ns": 1632209,
+        "p95_ns": 2187667,
+        "min_ns": 1519209,
+        "max_ns": 5319584,
+        "tick": 140,
+        "last_world_x": 0.0
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "static",
+        "round": 2,
+        "p50_ns": 1604459,
+        "p95_ns": 1970209,
+        "min_ns": 1504833,
+        "max_ns": 2363084,
+        "tick": 140,
+        "last_world_x": 0.0
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "static",
+        "round": 2,
+        "p50_ns": 1526500,
+        "p95_ns": 1970500,
+        "min_ns": 1452292,
+        "max_ns": 4498333,
+        "tick": 140,
+        "last_world_x": 0.0
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "moving",
+        "round": 0,
+        "p50_ns": 1730375,
+        "p95_ns": 2129000,
+        "min_ns": 1631750,
+        "max_ns": 2336375,
+        "tick": 140,
+        "last_world_x": 0.5833333333333325
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "moving",
+        "round": 0,
+        "p50_ns": 1780625,
+        "p95_ns": 2641958,
+        "min_ns": 1629958,
+        "max_ns": 4292209,
+        "tick": 140,
+        "last_world_x": 0.5833333333333325
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "moving",
+        "round": 1,
+        "p50_ns": 1747750,
+        "p95_ns": 2216584,
+        "min_ns": 1617375,
+        "max_ns": 3973709,
+        "tick": 140,
+        "last_world_x": 0.5833333333333325
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "moving",
+        "round": 1,
+        "p50_ns": 1739916,
+        "p95_ns": 2285042,
+        "min_ns": 1634167,
+        "max_ns": 7187500,
+        "tick": 140,
+        "last_world_x": 0.5833333333333325
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "moving",
+        "round": 2,
+        "p50_ns": 1752416,
+        "p95_ns": 2221667,
+        "min_ns": 1650041,
+        "max_ns": 2303542,
+        "tick": 140,
+        "last_world_x": 0.5833333333333325
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "moving",
+        "round": 2,
+        "p50_ns": 1776959,
+        "p95_ns": 2179666,
+        "min_ns": 1630917,
+        "max_ns": 2529709,
+        "tick": 140,
+        "last_world_x": 0.5833333333333325
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "parented",
+        "round": 0,
+        "p50_ns": 5459833,
+        "p95_ns": 6707542,
+        "min_ns": 4431250,
+        "max_ns": 10420666,
+        "tick": 140,
+        "last_world_x": 200.6666666666665
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "parented",
+        "round": 0,
+        "p50_ns": 5439583,
+        "p95_ns": 7566625,
+        "min_ns": 4460666,
+        "max_ns": 10451208,
+        "tick": 140,
+        "last_world_x": 200.6666666666665
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "parented",
+        "round": 1,
+        "p50_ns": 4457667,
+        "p95_ns": 6695083,
+        "min_ns": 3842958,
+        "max_ns": 9681125,
+        "tick": 140,
+        "last_world_x": 200.6666666666665
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "parented",
+        "round": 1,
+        "p50_ns": 4560125,
+        "p95_ns": 5448292,
+        "min_ns": 3982583,
+        "max_ns": 6595625,
+        "tick": 140,
+        "last_world_x": 200.6666666666665
+      },
+      {
+        "role": "baseline",
+        "count": 100000,
+        "mode": "parented",
+        "round": 2,
+        "p50_ns": 4446375,
+        "p95_ns": 5332000,
+        "min_ns": 3896333,
+        "max_ns": 5767208,
+        "tick": 140,
+        "last_world_x": 200.6666666666665
+      },
+      {
+        "role": "candidate",
+        "count": 100000,
+        "mode": "parented",
+        "round": 2,
+        "p50_ns": 4348791,
+        "p95_ns": 5240541,
+        "min_ns": 3804500,
+        "max_ns": 5677958,
+        "tick": 140,
+        "last_world_x": 200.6666666666665
+      }
+    ],
+    "summaries": [
+      {
+        "count": 10000,
+        "mode": "static",
+        "median_of_three_runs": {
+          "baseline": {
+            "p50_ns": 161709,
+            "p95_ns": 244625
+          },
+          "candidate": {
+            "p50_ns": 154167,
+            "p95_ns": 264917
+          }
+        }
+      },
+      {
+        "count": 10000,
+        "mode": "moving",
+        "median_of_three_runs": {
+          "baseline": {
+            "p50_ns": 199125,
+            "p95_ns": 287875
+          },
+          "candidate": {
+            "p50_ns": 191375,
+            "p95_ns": 285708
+          }
+        }
+      },
+      {
+        "count": 10000,
+        "mode": "parented",
+        "median_of_three_runs": {
+          "baseline": {
+            "p50_ns": 281875,
+            "p95_ns": 602209
+          },
+          "candidate": {
+            "p50_ns": 289375,
+            "p95_ns": 592417
+          }
+        }
+      },
+      {
+        "count": 100000,
+        "mode": "static",
+        "median_of_three_runs": {
+          "baseline": {
+            "p50_ns": 1632209,
+            "p95_ns": 2048875
+          },
+          "candidate": {
+            "p50_ns": 1526500,
+            "p95_ns": 2122125
+          }
+        }
+      },
+      {
+        "count": 100000,
+        "mode": "moving",
+        "median_of_three_runs": {
+          "baseline": {
+            "p50_ns": 1739916,
+            "p95_ns": 2221667
+          },
+          "candidate": {
+            "p50_ns": 1776959,
+            "p95_ns": 2216584
+          }
+        }
+      },
+      {
+        "count": 100000,
+        "mode": "parented",
+        "median_of_three_runs": {
+          "baseline": {
+            "p50_ns": 4560125,
+            "p95_ns": 5448292
+          },
+          "candidate": {
+            "p50_ns": 4457667,
+            "p95_ns": 6695083
+          }
+        }
+      }
+    ],
+    "builds": {
+      "baseline": {
+        "tree": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant",
+        "runtime_library_sha256": "e92ea7d22fc14f1fb73601adbeff795c85b821c0a8e148ff599031580ec48884",
+        "world_source_sha256": "fd86c0bf1fb006df272d00fadcee40bd8746be54f9d155f40fd2335741edcb93",
+        "executable_sha256": "56ea1a84f2a31eaeadf6a59c3249e2dcecc650364168251551a3cbb862860726",
+        "runtime_library": "target/release/deps/libincant_runtime-c6bda8e5c3a6af91.rlib",
+        "profile": "Cargo release, ordinary runtime-only dependency graph; external harness rustc opt-level=3"
+      },
+      "candidate": {
+        "tree": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant",
+        "runtime_library_sha256": "b1859ad45bc8b1d159593d3fe34ae80369e543ec6951b5ae0671841b82a2a6c0",
+        "world_source_sha256": "bac7305560e764984b524abc7476f4ecf630afd08026a59c057b5b1dc1d3dace",
+        "executable_sha256": "17138e0a09b83af5f48e6afe9fd15d32c14acb3f566654043162a9d67bf4d481",
+        "runtime_library": "target/release/libincant_runtime.rlib",
+        "profile": "Cargo release, ordinary runtime-only dependency graph; external harness rustc opt-level=3"
+      }
+    }
+  }
+}

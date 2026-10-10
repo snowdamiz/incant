@@ -1,4 +1,4 @@
-use crate::scene::matrix;
+use crate::scene::{matrix, validate_components};
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
 use bevy_ecs::prelude::*;
 use glam::DMat4;
@@ -92,7 +92,7 @@ impl NativeWorld {
         let mut schedule = Schedule::default();
         // Native builds enable Bevy's multi_threaded executor and parallel
         // queries. Browser builds remain serial until their worker host exists.
-        schedule.add_systems((integrate, propagate).chain());
+        schedule.add_systems((integrate, publish_globals).chain());
         Self {
             world,
             schedule,
@@ -119,6 +119,10 @@ impl NativeWorld {
 
     pub fn step(&mut self) -> Result<(), RuntimeError> {
         let next = self.tick.checked_add(1).ok_or(RuntimeError::TickOverflow)?;
+        // Prepare the complete candidate hierarchy in its existing scratch
+        // buffer before changing any live component or the simulation clock.
+        // This is typed numeric work, not authoring validation or a world copy.
+        self.prepare_globals(Some(self.world.resource::<Step>().0))?;
         self.schedule.run(&mut self.world);
         self.tick = next;
         Ok(())
@@ -154,6 +158,37 @@ impl NativeWorld {
             });
     }
 
+    /// Check immediate numeric writes or the next integration step without
+    /// publishing derived state. A failed pass may overwrite scratch entries;
+    /// every later pass fills them parent-first before reading them again.
+    pub(crate) fn prepare_globals(&mut self, step: Option<f64>) -> Result<(), SceneError> {
+        self.world
+            .resource_scope(|world, mut hierarchy: Mut<Hierarchy>| {
+                let mut query = world.query::<(&Identity, &Local, Option<&Motion>)>();
+                for index in 0..hierarchy.nodes.len() {
+                    let (entity, parent) = hierarchy.nodes[index];
+                    let (id, local, motion) = query.get(world, entity).expect("fixed topology");
+                    let velocity = motion.map(|v| &v.0);
+                    validate_components(id.0, &local.0, velocity)?;
+                    let local_matrix = if let (Some(step), Some(velocity)) = (step, velocity) {
+                        let mut candidate = local.0.clone();
+                        advance_translation(&mut candidate, velocity, step);
+                        matrix(&candidate)
+                    } else {
+                        matrix(&local.0)
+                    };
+                    let value = parent.map_or(local_matrix, |parent| {
+                        hierarchy.globals[parent] * local_matrix
+                    });
+                    if !value.is_finite() {
+                        return Err(SceneError::Component(id.0));
+                    }
+                    hierarchy.globals[index] = value;
+                }
+                Ok(())
+            })
+    }
+
     pub fn inspect(&self, id: StableId) -> Option<EntitySnapshot> {
         let entity = self.world.get_entity(*self.entities.get(&id)?).ok()?;
         Some(EntitySnapshot {
@@ -176,14 +211,24 @@ impl NativeWorld {
 
 fn integrate(step: Res<Step>, mut query: Query<(&mut Local, &Motion)>) {
     let advance = |(mut local, motion): (Mut<Local>, &Motion)| {
-        for axis in 0..3 {
-            local.0.translation[axis] += motion.0.linear[axis] * step.0;
-        }
+        advance_translation(&mut local.0, &motion.0, step.0);
     };
     #[cfg(not(target_arch = "wasm32"))]
     query.par_iter_mut().for_each(advance);
     #[cfg(target_arch = "wasm32")]
     query.iter_mut().for_each(advance);
+}
+
+fn advance_translation(transform: &mut Transform, velocity: &Velocity, step: f64) {
+    for axis in 0..3 {
+        transform.translation[axis] += velocity.linear[axis] * step;
+    }
+}
+
+fn publish_globals(hierarchy: Res<Hierarchy>, mut query: Query<&mut Global>) {
+    for (index, &(entity, _)) in hierarchy.nodes.iter().enumerate() {
+        query.get_mut(entity).expect("fixed topology").0 = hierarchy.globals[index];
+    }
 }
 
 pub(crate) fn spawn(world: &mut World, entity: CookedEntity) -> Entity {

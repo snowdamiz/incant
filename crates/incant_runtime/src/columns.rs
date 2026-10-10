@@ -68,9 +68,11 @@ impl NativeWorld {
     /// them until this outer scope ends. It must exclusively hold this handle,
     /// make no further visits while foreign views exist, and revoke every view
     /// before Rust reads/restores component data or the scope exits. Allocations
-    /// stay fixed for that entire interval. Rollback using retained raw pointers
-    /// belongs inside the outer scope, after revocation. Owned snapshots can be
-    /// restored through a new scope if the caller verifies its matching layout.
+    /// stay fixed for that entire interval, but pointer validity does not survive
+    /// a subsequent native visit or validation borrow. After either operation,
+    /// restore owned undo values through fresh visits; never dereference the old
+    /// pointers. Owned snapshots can be restored through a new scope if the
+    /// caller verifies its matching layout.
     /// This API supplies no foreign pointers,
     /// detachment, rollback or script host. Native slices cannot outlive a visit;
     /// extending a raw pointer's use requires the adapter's separate safety proof.
@@ -133,6 +135,15 @@ impl NativeWorld {
 }
 
 impl NumericColumns<'_> {
+    /// Check typed component values and their composed hierarchy without
+    /// publishing derived transforms or copying the world. A trusted foreign
+    /// adapter must revoke all external views before calling this, just as it
+    /// must before another native slice visit. On error, immediate writes remain
+    /// available for the adapter to restore through fresh visits in this scope.
+    pub fn validate(&mut self) -> Result<(), crate::RuntimeError> {
+        self.owner.prepare_globals(None).map_err(Into::into)
+    }
+
     /// Visit each nonempty Transform table once, including tables without
     /// Velocity. A slice loan ends before the next callback begins.
     pub fn for_each_chunk(&mut self, mut visit: impl FnMut(NumericChunk<'_>)) {
