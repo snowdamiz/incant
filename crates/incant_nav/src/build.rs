@@ -161,9 +161,16 @@ impl NavigationMesh {
         Ok(report)
     }
 }
+const CONTOUR_ERROR_CELLS: f32 = 0.25;
+fn erosion_cells(s: &NavigationSettings) -> u16 {
+    // Recast's 2/3 chamfer distance overestimates Euclidean distance by at most
+    // sqrt(1^2 + 0.5^2). Reserve that factor and the contour simplification error
+    // before rounding outwards; otherwise convex corners can cut inside radius.
+    (s.agent_radius / s.cell_size * 1.118_034 + CONTOUR_ERROR_CELLS).ceil() as u16
+}
 fn tile_bounds(s: &NavigationSettings, id: TileId) -> Aabb3d {
     let width = s.cell_size * f32::from(s.tile_cells);
-    let border = ((s.agent_radius / s.cell_size).ceil() + 3.) * s.cell_size;
+    let border = (f32::from(erosion_cells(s)) + 3.) * s.cell_size;
     let x = s.min[0] + id.x as f32 * width;
     let z = s.min[2] + id.z as f32 * width;
     // The final partial tile rounds outward by less than one voxel.
@@ -188,7 +195,7 @@ fn build_tile(
     input.mark_walkable_triangles(s.max_slope_degrees.to_radians());
     let height = (s.agent_height / s.cell_height).ceil() as u16;
     let climb = (s.max_climb / s.cell_height).floor() as u16;
-    let radius = (s.agent_radius / s.cell_size).ceil() as u16;
+    let radius = erosion_cells(s);
     let mut heightfield = HeightfieldBuilder {
         aabb,
         cell_size: s.cell_size,
@@ -216,12 +223,16 @@ fn build_tile(
     compact
         .build_regions(radius + 3, 0, 20)
         .map_err(|e| build_error(&e))?;
-    let contours = compact.build_contours(1.1, radius * 8, BuildContoursFlags::default());
+    let contours = compact.build_contours(
+        CONTOUR_ERROR_CELLS,
+        radius * 8,
+        BuildContoursFlags::default(),
+    );
     let poly = contours.into_polygon_mesh(6).map_err(|e| build_error(&e))?;
     if poly.polygon_count() > 4096 {
         return Err(limit("tile exceeds 4096 polygons"));
     }
-    let detail = DetailNavmesh::new(&poly, &compact, s.cell_size * 2., s.cell_height)
+    let detail = DetailNavmesh::new(&poly, &compact, s.cell_size, s.cell_height * 0.25)
         .map_err(|e| build_error(&e))?;
     let mut polygons = vec![];
     let mut neighbors = vec![];

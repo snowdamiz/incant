@@ -181,6 +181,48 @@ fn low_ceiling_and_narrow_passages_cannot_produce_a_route() {
 }
 
 #[test]
+fn rotated_wall_corners_preserve_configured_radius_at_multiple_voxel_sizes() {
+    for cell_size in [0.1, 0.2, 0.25, 0.4] {
+        for degrees in [0_f32, 22.5, 45., 67.5] {
+            let mut s = settings();
+            s.cell_size = cell_size;
+            s.agent_radius = 0.4;
+            s.tile_cells = 32;
+            let mut obstacle = wall();
+            let (sin, cos) = degrees.to_radians().sin_cos();
+            for p in &mut obstacle.vertices {
+                let (x, z) = (p[0], p[2]);
+                p[0] = x * cos - z * sin;
+                p[2] = x * sin + z * cos;
+            }
+            let mut nav = NavigationMesh::default();
+            nav.rebuild(
+                &s,
+                &BTreeMap::from([("floor".into(), floor()), ("wall".into(), obstacle)]),
+            )
+            .unwrap();
+            let path = nav.find_path(&query()).unwrap().unwrap();
+            for pair in path.points.windows(2) {
+                for i in 0..=200 {
+                    let t = i as f32 / 200.;
+                    let x = pair[0][0] + t * (pair[1][0] - pair[0][0]);
+                    let z = pair[0][2] + t * (pair[1][2] - pair[0][2]);
+                    let local_x = x * cos + z * sin;
+                    let local_z = -x * sin + z * cos;
+                    let clearance = (local_x.abs() - 1.)
+                        .max(0.)
+                        .hypot((local_z.abs() - 2.).max(0.));
+                    assert!(
+                        clearance >= s.agent_radius - 1e-4,
+                        "cell {cell_size}, yaw {degrees}: {clearance}"
+                    );
+                }
+            }
+        }
+    }
+}
+
+#[test]
 fn removed_bounds_drop_tiles_and_failed_work_limits_keep_prior_mesh() {
     let mut nav = NavigationMesh::default();
     let sources = BTreeMap::from([("floor".into(), floor())]);
