@@ -98,7 +98,9 @@ def build(project, art, kind, manifest, textures):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("out", type=Path)
+    lk.add_selectors(parser)
     args = parser.parse_args()
+    lk.apply_selectors(args)
     out = args.out.resolve()
     if out.exists():
         raise SystemExit("Output directory already exists; choose a new directory.")

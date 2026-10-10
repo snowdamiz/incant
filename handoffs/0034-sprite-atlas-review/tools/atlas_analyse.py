@@ -97,7 +97,7 @@ def read_ktx2(path):
 def descriptor_for(run, meta):
     """The authored descriptor this page was cooked from, found by its dependency hash."""
     want = meta["dependency"]["sha256"]
-    for path in sorted((run / "art").glob("*.atlas.json")):
+    for path in sorted((run / "art").glob("*.atlas.json")) + sorted((run / "art-followup").glob("*.atlas.json")):
         if sha(path) == want:
             return path.name, json.loads(path.read_text(encoding="utf-8"))
     raise SystemExit(f"no authored descriptor matches {want}")
@@ -425,6 +425,157 @@ def attribute(pixels, camera, size, scene, board, linear_only=True):
 
 # --------------------------------------------------------------- analysis --
 
+def decoded_checks(run, scene, manifest, state_dir):
+    """Strip decoding across span cuts, exact predictions, painter order and fringe tests
+    for one state directory; shots the run did not capture are skipped."""
+    out = {}
+    # ---- decoded strips across span cuts (pixel-perfect 1:1 frames)
+    phase = manifest["strip"]["phase"]
+    strips = {}
+    for case in strip_cases(scene):
+        png = state_dir / {"W": "pp-W-1280x200.png", "V": "pp-V-320x1080.png", "X": "pp-X-1024x832.png",
+                                "Y": "pp-Y-832x1024.png"}[case["board"]]
+        img = image(png)
+        res = check_strip(img, case["axis"], case["start"], case["cross"], case["thickness"], case["length"],
+                          case["m"], case["flip"], case["offset"], case["base"], phase, (img.width, img.height))
+        res["cuts_px"] = [c for c in cut_positions(case) if 0 <= c < (img.width if case["axis"] == 0 else img.height)]
+        around = []
+        for c in res["cuts_px"]:
+            u = math.ceil(c - 0.5)
+            pick = (lambda q: strip_texel(img.rgb(q, case["cross"]) if case["axis"] == 0
+                                          else img.rgb(case["cross"], q), phase))
+            around.append({"cut_px": c, "before": pick(u - 1)[0] if u >= 1 else None, "at": pick(u)[0]})
+        res["around_cuts"] = around
+        res["m"], res["flip"], res["start"] = case["m"], case["flip"], case["start"]
+        strips[case["name"]] = res
+    out["strips"] = strips
+    out["strips_summary"] = {"cases": len(strips), "mismatching_cases": sorted(k for k, v in strips.items()
+                                                                                 if v["mismatches"]),
+                                "decoded_pixels": sum(v["pixels"] for v in strips.values())}
+
+    # ---- exact predictions at aligned / tie placements
+    bg = image(state_dir / "pp-S-320x180.png").rgb(0, 0)
+    ballast = "ballast-v1.png"
+    exact = {}
+    for shot in ("pp-S-320x180", "pp-S-960x540", "pp-B-320x180", "pp-B-960x540"):
+        if not (state_dir / f"{shot}.png").exists():
+            continue
+        k = scale_of(shot)
+        img = image(state_dir / f"{shot}.png")
+        items = []
+        for name, meta in scene["meta"].items():
+            if meta["board"] != shot[3] or meta["frame"] in (None, "solid", "ballast") or meta["rect"] is None:
+                continue
+            src, rect = source_of(run, manifest, meta["frame"], ballast)
+            x, y, w, h = meta["rect"]
+            if w % rect[2] or h % rect[3]:
+                continue
+            items.append((name, src, rect, (x, y, w, h), (lambda mx, my: upscale(mx, my))(w * k // rect[2],
+                                                                                        h * k // rect[3])))
+        exact[shot] = check_exact(img, k, items, bg)
+    for shot in ("pp-T-320x180", "pp-T-960x540"):
+        if not (state_dir / f"{shot}.png").exists():
+            continue
+        k = scale_of(shot)
+        img = image(state_dir / f"{shot}.png")
+        items = []
+        for name, meta in scene["meta"].items():
+            if meta["board"] != "T" or meta["frame"] not in ("probe", "odd", "card3"):
+                continue
+            src, rect = source_of(run, manifest, meta["frame"], ballast)
+            w, h = meta["size_px"]
+            if "orientation" in meta:
+                o, centre = meta["orientation"], meta["center"]
+                W, H = (h, w) if o in ("R90", "R270", "R90FX") else (w, h)
+                mapper = (lambda o_, w_, h_, m_, k_: lambda a, b: tuple(
+                    c // m_ for c in orientation_texel(o_, a // k_, b // k_, w_, h_)))(o, w, h, w // rect[2], k)
+                items.append((name, src, rect, (centre[0] - W / 2, centre[1] - H / 2, W, H), mapper))
+            else:  # pivot cards: exact rectangles, some on half-pixel (tie) rows
+                x, y, _, _ = meta["rect"]
+                items.append((name, src, rect, (x, y, w, h), (lambda k_: lambda a, b: (a // k_, b // k_))(k)))
+        markers = [tuple(m["rect"]) for n, m in scene["meta"].items() if n.startswith("T:pivot") and
+                   n.endswith(":origin")]
+        exact[shot] = check_exact(img, k, items, bg, exclude=markers)
+    for shot in ("pp-N-320x180", "pp-N-960x540"):
+        if not (state_dir / f"{shot}.png").exists():
+            continue
+        k = scale_of(shot)
+        img = image(state_dir / f"{shot}.png")
+        src, rect = source_of(run, manifest, "panel", ballast)
+        items = []
+        for name, (fx, fy, density) in {"N:native": (0, 0, 16), "N:stretch": (0, 0, 16), "N:flipx": (1, 0, 16),
+                                        "N:flipy": (0, 1, 16), "N:flipxy": (1, 1, 16), "N:density8": (0, 0, 8),
+                                        "N:simple24": (0, 0, 16)}.items():
+            meta = scene["meta"][name]
+            x, y, w, h = meta["rect"]
+            base = nine_mapper(w, h, sc.PANEL_BORDER, density)
+            mapper = (lambda base_, w_, h_, fx_, fy_, k_: lambda a, b: flip_mapper(base_, w_, h_, fx_, fy_)(
+                a // k_, b // k_))(base, w, h, fx, fy, k)
+            items.append((name, src, rect, (x, y, w, h), mapper))
+        for name, (fx, fy) in {"N:rot180": (1, 1), "N:mirror": (1, 0)}.items():
+            meta = scene["meta"][name]
+            w, h = meta["size_px"]
+            centre = meta["center"]
+            base = nine_mapper(w, h, sc.PANEL_BORDER, 16)
+            mapper = (lambda base_, w_, h_, fx_, fy_, k_: lambda a, b: flip_mapper(base_, w_, h_, fx_, fy_)(
+                a // k_, b // k_))(base, w, h, fx, fy, k)
+            items.append((name, src, rect, (centre[0] - w / 2, centre[1] - h / 2, w, h), mapper))
+        exact[shot] = check_exact(img, k, items, bg)
+    out["exact"] = exact
+    out["exact_summary"] = {shot: {"sprites": len(v), "mismatching": sorted(n for n, r in v.items()
+                                                                              if r["mismatches"]),
+                                      "skipped_pixels": sum(r["skipped_outside_identity"] for r in v.values())}
+                               for shot, v in exact.items()}
+
+    # ---- painter order
+    order = {}
+    img = image(state_dir / "pp-O-320x180.png")
+    groups = {"LAYER": ["O:layer-top", "O:layer-under"], "ORDER": ["O:order-top", "O:order-under"],
+              "ID TIE": ["O:tie-first", "O:tie-second"], "Z IGNORED": ["O:z-near", "O:z-far-top"],
+              "BATCH": [f"O:batch{k}" for k in range(5)], "WISP STACK": [f"O:wisp-stack{k}" for k in range(4)]}
+    badge = image(run / "art/badge.png")
+    for group, names in groups.items():
+        sprites = []
+        for n in names:
+            meta = scene["meta"][n]
+            if meta["frame"] is None:
+                src, srect = badge, [0, 0, 16, 16]
+            else:
+                src, srect = source_of(run, manifest, meta["frame"], ballast)
+            sprites.append({"name": n, "layer": meta["layer"], "order": meta["order"], "rect": meta["rect"],
+                            "src": src, "srect": srect})
+        xs = [s["rect"][0] for s in sprites] + [s["rect"][0] + s["rect"][2] for s in sprites]
+        ys = [s["rect"][1] for s in sprites] + [s["rect"][1] + s["rect"][3] for s in sprites]
+        region = (min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys))
+        order[group] = composite_check(img, 1, sprites, region, bg, scene["ids"])
+        order[group]["reversed_order_control_mismatches"] = composite_check(img, 1, sprites, region, bg,
+                                                                            scene["ids"], reverse=True)["mismatches"]
+    out["painter_order"] = order
+
+    # ---- linear fringes (hidden RGB under zero alpha must not tint edges)
+    fringe = {}
+    rects = {"pp-L": {"halo3x": (160, 19, 72, 72), "halo2.5x-light": (240, 21, 60, 60), "orb-light": (84, 23, 64, 64)},
+             "pp-O": {"halo-on-light": (284, 85, 24, 24), "orb-on-light": (250, 81, 32, 32)}}
+    for shot in ("pp-L-320x180", "pp-L-960x540", "pp-O-320x180"):
+        if not (state_dir / f"{shot}.png").exists():
+            continue
+        k = scale_of(shot)
+        img = image(state_dir / f"{shot}.png")
+        res = {}
+        for label, (x, y, w, h) in rects[shot[:4]].items():
+            green = magenta = 0
+            for v in range(y * k, (y + h) * k):
+                for u in range(x * k, (x + w) * k):
+                    r, g, b = img.rgb(u, v)
+                    green += g > r + 2  # every authored colour here has G < R
+                    magenta += label.startswith("orb") and b > g + 2  # orb and light plate have B < G
+            res[label] = {"green_tinted": green, "magenta_tinted": magenta}
+        fringe[shot] = res
+    out["fringe"] = fringe
+
+    return out
+
+
 def analyse(run):
     helper = json.loads((run / "helper.json").read_text(encoding="utf-8"))
     manifest = json.loads((run / "art/manifest.json").read_text(encoding="utf-8"))
@@ -520,141 +671,7 @@ def analyse(run):
         pp_vs_ortho[board] = res
     report["pixel_perfect_vs_ortho3"] = pp_vs_ortho
 
-    # ---- decoded strips across span cuts (pixel-perfect 1:1 frames)
-    phase = manifest["strip"]["phase"]
-    strips = {}
-    for case in strip_cases(scene):
-        png = shots("s0-r1") / {"W": "pp-W-1280x200.png", "V": "pp-V-320x1080.png", "X": "pp-X-1024x832.png",
-                                "Y": "pp-Y-832x1024.png"}[case["board"]]
-        img = image(png)
-        res = check_strip(img, case["axis"], case["start"], case["cross"], case["thickness"], case["length"],
-                          case["m"], case["flip"], case["offset"], case["base"], phase, (img.width, img.height))
-        res["cuts_px"] = [c for c in cut_positions(case) if 0 <= c < (img.width if case["axis"] == 0 else img.height)]
-        around = []
-        for c in res["cuts_px"]:
-            u = math.ceil(c - 0.5)
-            pick = (lambda q: strip_texel(img.rgb(q, case["cross"]) if case["axis"] == 0
-                                          else img.rgb(case["cross"], q), phase))
-            around.append({"cut_px": c, "before": pick(u - 1)[0] if u >= 1 else None, "at": pick(u)[0]})
-        res["around_cuts"] = around
-        res["m"], res["flip"], res["start"] = case["m"], case["flip"], case["start"]
-        strips[case["name"]] = res
-    report["strips"] = strips
-    report["strips_summary"] = {"cases": len(strips), "mismatching_cases": sorted(k for k, v in strips.items()
-                                                                                 if v["mismatches"]),
-                                "decoded_pixels": sum(v["pixels"] for v in strips.values())}
-
-    # ---- exact predictions at aligned / tie placements
-    bg = image(shots("s0-r1") / "pp-S-320x180.png").rgb(0, 0)
-    ballast = "ballast-v1.png"
-    exact = {}
-    for shot in ("pp-S-320x180", "pp-S-960x540", "pp-B-320x180", "pp-B-960x540"):
-        k = scale_of(shot)
-        img = image(shots("s0-r1") / f"{shot}.png")
-        items = []
-        for name, meta in scene["meta"].items():
-            if meta["board"] != shot[3] or meta["frame"] in (None, "solid", "ballast") or meta["rect"] is None:
-                continue
-            src, rect = source_of(run, manifest, meta["frame"], ballast)
-            x, y, w, h = meta["rect"]
-            if w % rect[2] or h % rect[3]:
-                continue
-            items.append((name, src, rect, (x, y, w, h), (lambda mx, my: upscale(mx, my))(w * k // rect[2],
-                                                                                        h * k // rect[3])))
-        exact[shot] = check_exact(img, k, items, bg)
-    for shot in ("pp-T-320x180", "pp-T-960x540"):
-        k = scale_of(shot)
-        img = image(shots("s0-r1") / f"{shot}.png")
-        items = []
-        for name, meta in scene["meta"].items():
-            if meta["board"] != "T" or meta["frame"] not in ("probe", "odd", "card3"):
-                continue
-            src, rect = source_of(run, manifest, meta["frame"], ballast)
-            w, h = meta["size_px"]
-            if "orientation" in meta:
-                o, centre = meta["orientation"], meta["center"]
-                W, H = (h, w) if o in ("R90", "R270", "R90FX") else (w, h)
-                mapper = (lambda o_, w_, h_, m_, k_: lambda a, b: tuple(
-                    c // m_ for c in orientation_texel(o_, a // k_, b // k_, w_, h_)))(o, w, h, w // rect[2], k)
-                items.append((name, src, rect, (centre[0] - W / 2, centre[1] - H / 2, W, H), mapper))
-            else:  # pivot cards: exact rectangles, some on half-pixel (tie) rows
-                x, y, _, _ = meta["rect"]
-                items.append((name, src, rect, (x, y, w, h), (lambda k_: lambda a, b: (a // k_, b // k_))(k)))
-        markers = [tuple(m["rect"]) for n, m in scene["meta"].items() if n.startswith("T:pivot") and
-                   n.endswith(":origin")]
-        exact[shot] = check_exact(img, k, items, bg, exclude=markers)
-    for shot in ("pp-N-320x180", "pp-N-960x540"):
-        k = scale_of(shot)
-        img = image(shots("s0-r1") / f"{shot}.png")
-        src, rect = source_of(run, manifest, "panel", ballast)
-        items = []
-        for name, (fx, fy, density) in {"N:native": (0, 0, 16), "N:stretch": (0, 0, 16), "N:flipx": (1, 0, 16),
-                                        "N:flipy": (0, 1, 16), "N:flipxy": (1, 1, 16), "N:density8": (0, 0, 8),
-                                        "N:simple24": (0, 0, 16)}.items():
-            meta = scene["meta"][name]
-            x, y, w, h = meta["rect"]
-            base = nine_mapper(w, h, sc.PANEL_BORDER, density)
-            mapper = (lambda base_, w_, h_, fx_, fy_, k_: lambda a, b: flip_mapper(base_, w_, h_, fx_, fy_)(
-                a // k_, b // k_))(base, w, h, fx, fy, k)
-            items.append((name, src, rect, (x, y, w, h), mapper))
-        for name, (fx, fy) in {"N:rot180": (1, 1), "N:mirror": (1, 0)}.items():
-            meta = scene["meta"][name]
-            w, h = meta["size_px"]
-            centre = meta["center"]
-            base = nine_mapper(w, h, sc.PANEL_BORDER, 16)
-            mapper = (lambda base_, w_, h_, fx_, fy_, k_: lambda a, b: flip_mapper(base_, w_, h_, fx_, fy_)(
-                a // k_, b // k_))(base, w, h, fx, fy, k)
-            items.append((name, src, rect, (centre[0] - w / 2, centre[1] - h / 2, w, h), mapper))
-        exact[shot] = check_exact(img, k, items, bg)
-    report["exact"] = exact
-    report["exact_summary"] = {shot: {"sprites": len(v), "mismatching": sorted(n for n, r in v.items()
-                                                                              if r["mismatches"]),
-                                      "skipped_pixels": sum(r["skipped_outside_identity"] for r in v.values())}
-                               for shot, v in exact.items()}
-
-    # ---- painter order
-    order = {}
-    img = image(shots("s0-r1") / "pp-O-320x180.png")
-    groups = {"LAYER": ["O:layer-top", "O:layer-under"], "ORDER": ["O:order-top", "O:order-under"],
-              "ID TIE": ["O:tie-first", "O:tie-second"], "Z IGNORED": ["O:z-near", "O:z-far-top"],
-              "BATCH": [f"O:batch{k}" for k in range(5)], "WISP STACK": [f"O:wisp-stack{k}" for k in range(4)]}
-    badge = image(run / "art/badge.png")
-    for group, names in groups.items():
-        sprites = []
-        for n in names:
-            meta = scene["meta"][n]
-            if meta["frame"] is None:
-                src, srect = badge, [0, 0, 16, 16]
-            else:
-                src, srect = source_of(run, manifest, meta["frame"], ballast)
-            sprites.append({"name": n, "layer": meta["layer"], "order": meta["order"], "rect": meta["rect"],
-                            "src": src, "srect": srect})
-        xs = [s["rect"][0] for s in sprites] + [s["rect"][0] + s["rect"][2] for s in sprites]
-        ys = [s["rect"][1] for s in sprites] + [s["rect"][1] + s["rect"][3] for s in sprites]
-        region = (min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys))
-        order[group] = composite_check(img, 1, sprites, region, bg, scene["ids"])
-        order[group]["reversed_order_control_mismatches"] = composite_check(img, 1, sprites, region, bg,
-                                                                            scene["ids"], reverse=True)["mismatches"]
-    report["painter_order"] = order
-
-    # ---- linear fringes (hidden RGB under zero alpha must not tint edges)
-    fringe = {}
-    rects = {"pp-L": {"halo3x": (160, 19, 72, 72), "halo2.5x-light": (240, 21, 60, 60), "orb-light": (84, 23, 64, 64)},
-             "pp-O": {"halo-on-light": (284, 85, 24, 24), "orb-on-light": (250, 81, 32, 32)}}
-    for shot in ("pp-L-320x180", "pp-L-960x540", "pp-O-320x180"):
-        k = scale_of(shot)
-        img = image(shots("s0-r1") / f"{shot}.png")
-        res = {}
-        for label, (x, y, w, h) in rects[shot[:4]].items():
-            green = magenta = 0
-            for v in range(y * k, (y + h) * k):
-                for u in range(x * k, (x + w) * k):
-                    r, g, b = img.rgb(u, v)
-                    green += g > r + 2  # every authored colour here has G < R
-                    magenta += label.startswith("orb") and b > g + 2  # orb and light plate have B < G
-            res[label] = {"green_tinted": green, "magenta_tinted": magenta}
-        fringe[shot] = res
-    report["fringe"] = fringe
+    report.update(decoded_checks(run, scene, manifest, shots("s0-r1")))
 
     # ---- raw rectangle after relocation: what the authored pixel rectangle now shows
     raw = {}

@@ -1,5 +1,427 @@
 # 0034 cooked atlas review: identity, relocation, filtering and public workflows
 
+The follow-up round comes first. Round one follows unchanged, from "Status" onward.
+
+## Follow-up: skyline packer, import-time sprite checks and 64-texel spans
+
+### Verdict
+
+**Accepted, scoped to atlas-specific behaviour, and explicitly conditional on the
+shared renderer's remaining limitations.** On the follow-up executable (source
+`4194240`), every atlas-specific check passes. Every round-one atlas finding is fixed
+except one narrow packing residual.
+
+The shared limits recorded by 0032 round five still apply, and atlas frames inherit
+them:
+- one-axis ties above 128× fail;
+- two-axis exact ties near frame edges, and in non-dyadic 96 × 96 views, fail on
+  every build;
+- 342 nearest 2048-square sprites exceed the geometry cap.
+
+The camera/follower placement contract is under separate review. None of these is
+atlas-specific, and none is fixed or approved here.
+
+| Round-one finding | Follow-up result |
+| --- | --- |
+| Three frames rejected at 1204×1148 | They fit 1204×1148 under all three tested bounds |
+| Page grew with `maximum_size` | Monotonic: 0 violations over all nested pairs of 69 bounds, for two frame sets |
+| 130-frame page at a 2048×2048 bound: 1204×1865 | 1222×1104, 40% fewer texels |
+| Import errors in Rust Debug form | Readable Display text, with separate dimension, texel and padding errors |
+| Reimports that broke every render while `validate` passed | Rejected atomically at import, naming every affected sprite; `validate` reports errors and exits 1 |
+| Missing-frame render error names no entity | Unchanged in the renderer, but import and `validate` now name the entity first |
+| Raw atlas rectangles show unrelated content after repacks | Unchanged by design, now with a warning on every reimport and in `validate` |
+| Linear frames differ by up to 2 levels across repacks | Unchanged; informational |
+| Source-Y ties failing at the span cut at 36×, 40× and 56× | 0 failures out of 4,972 exact ties on the 64-texel build |
+
+- **Rendering under the new packer is correct.**
+  - The four cooked pages match their sources texel for texel: content, extrusion
+    and empty space.
+  - Relocation is real. 126 of 130 frames move for v2, all 130 for v3, and 95 of 129
+    for a valid replacement.
+  - Nearest atlas frames are byte-identical to the explicit-rectangle control in every
+    camera, and identical before and after each repack. Only the resized ballast and
+    the deliberate raw-rectangle sprite change, by design.
+  - Strips, exact placements, pivots, nine-slices, sorting and fringe checks all
+    pass, as do fresh-process repeats and source-free rendering.
+- **The import and `validate` changes work as described.** All 13 rejections exit 1
+  and leave the project and journal bytes, revision, history and every asset
+  fingerprint unchanged. Binding rejections leave 2 orphan cache files each, which is
+  allowed. Undo, Redo and a valid replacement restore exact fingerprints. A single
+  watcher poll imported a valid badge and rejected a broken atlas.
+- **Repeatability holds.** Repeated fresh processes match byte for byte. Against round
+  one's frames, every nearest view is pixel-identical except 136 rolled-view
+  knife-edge pixels; see below.
+
+Remaining or new observations:
+1. **Residual NoFit (low).** The 130-frame set is rejected at 1221×1104 and
+   1221×1147. An engine-free proof shows a valid 1217×1104 layout exists. The message
+   now correctly says the bounded heuristic could not pack, rather than that the
+   frames do not fit.
+2. **Missing-cache diagnostics are noisy (low).** One missing atlas cache yields 407
+   identical errors, one per sprite.
+3. **Shared, informational.** The 64-texel spans change 136 pixels in rolled views of
+   long strips, compared with the 512-texel build. Every one lies within 0.0021 px of
+   an exact sprite edge or texel boundary, and they are identical in atlas and
+   control. No crack appears.
+4. **Golden tests (informational).** PNG bytes differ between the two builds while
+   decoded pixels are identical. Cross-build comparisons should decode pixels.
+
+This verdict covers headless rendering on one Apple M5 Pro with Metal, at the tested
+magnifications. It does not establish arbitrary zoom, portability, phone performance,
+native editor presentation, hosted CI or any phase gate.
+
+### Decisions acknowledged
+
+- The new packet section supersedes the earlier execution and budget instructions.
+  I ran a focused delta and reused round one's art, scene, cameras, control binding
+  and frames. Round one's 229-frame runs were not repeated.
+- **Binaries:**
+  - only the active `incant_headless` (`734811cb…`) rendered in this round;
+  - `incant_headless-pre-followup` (`b72389ee…`) was not run;
+  - round one's preserved frames from it are the cross-build baseline;
+  - every call was hash-checked before and after.
+- I read the integrated 0032 round-five report. This acceptance stays scoped to atlas
+  behaviour and conditional on its limits.
+- **Not done here:** no Cargo, Rust, shader, source, schema, SDK, docs or `editor/ui`
+  edit; no attempt to fix the renderer or the camera; no native-app automation,
+  accounts, merging or publishing.
+- Astra's updated `brief.md` stays uncommitted, as delivered. Round one's sections,
+  evidence and screenshots are unchanged, and their hashes still verify.
+
+### Model, effort and provenance
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`) at Max effort, in the
+  resumed ACP runner session. The runner confirms both settings over ACP before
+  sending the prompt (`configure_model_and_effort`); I cannot inspect that handshake
+  from inside the session.
+- **Worktree:** HEAD `08db97c`, whose tree is identical to `4194240`, the follow-up
+  binary's source.
+
+| Build | Source | sha256 |
+| --- | --- | --- |
+| Follow-up, `incant_headless` (37,859,296 bytes) | `4194240378971f03bd7f3d812b961ccc0d24eb4d`, tree `08acdd59…` | `734811cb6053e32cce1ccd0fbb98fb7a515106cf7a8442f93b0be297af065469` |
+| Round one, `incant_headless-pre-followup`, not run | `3825439d9e1f746999487ada3bb866a443ca2683` | `b72389ee24276459938705850b5cfe3efe2ffb1b744ba94ecf1f5d2ba8cc27a2` |
+
+All 505 engine calls of this round matched `binary.json` before and after.
+
+### Packing (import only, no frames; `evidence/followup/packing/`)
+
+- **Reproduction:** 1200×40, 1100×4 and 4×1100 with padding 2 now fit 1204×1148
+  under bounds 1204×1148, 1204×1200 and 1204×2048. The regions are: wide at (2, 2),
+  row at (2, 46), column at (1106, 46).
+- **The 130-frame round-one set:**
+
+  | maximum_size | Page | Texels |
+  | --- | --- | --- |
+  | 2048×2048 | 1222×1104 | 1,349,088 (round one: 1204×1865, 2,245,460) |
+  | 1204×1170 and 1204×1148 | 1204×1148 | 1,382,192 |
+  | 2048×1170, 1300×1200 and 1600×2600 | 1222×1104 | 1,349,088 |
+  | 1204×1147 and 4096×1024 | rejected, genuinely impossible | – |
+
+  At the 2048×2048 bound, the level-0 GPU copy (RGBA16Float) shrinks from about
+  17.1 MiB to 10.3 MiB.
+- **Monotonicity sweep:** widths 1204–4096 by heights 1024–3000, 69 valid bounds for
+  each of the two sets.
+  - For every nested pair, a fit at the smaller bound fits the larger one with no
+    larger page: 0 violations.
+  - Distinct pages: 1204×1148 and 1222×1104 for the 130 frames; 1204×1148 and
+    1212×1104 for the three frames.
+- **Residual:**
+  - the 130-frame set is still rejected at 1221×1104 and 1221×1147;
+  - `atlas_packing_probe.py --feasible` places all 130 padded frames, disjoint, inside
+    1217×1104, by the engine's own rules;
+  - the four-frame core of that layout packs correctly at 1217×1104 under every
+    bound, so no smaller reproduction exists in my tests.
+
+  Every other rejected bound in the sweep is infeasible.
+
+### Cooked pages and relocation
+
+| Version | Fingerprint | Page | Pad | Mips | KTX2 sha256 | Mismatches (content/extrusion/empty) |
+| --- | --- | --- | --- | --- | --- | --- |
+| v1 | `8079ce3724e4…` | 1222×1104 | 2 | 11 | `bf44f17af2a9…` | 0 / 0 / 0 |
+| v2 (ballast 1240×150) | `dcaefe33ce20…` | 1262×1104 | 2 | 11 | `1e82e493de53…` | 0 / 0 / 0 |
+| v3 (padding 5) | `04cd9527fe91…` | 1246×1110 | 5 | 11 | `748b6160874e…` | 0 / 0 / 0 |
+| drop unused label (129 frames) | `bde672575ed7…` | 1246×1110 | 5 | 11 | `0bf07658d340…` | 0 / 0 / 0 |
+
+A frame-free capture in a second project reproduces the v1, v2 and v3 fingerprints
+exactly.
+
+Packed origins (x, y):
+
+| Frame | v1 | v2 | v3 |
+| --- | --- | --- | --- |
+| hstrip (1100×4) | 20, 77 | 147, 183 | 5, 55 |
+| vmid (1×700, from source y 103) | 15, 2 | 15, 2 | 1240, 5 |
+| card 7 | 348, 46 | 348, 156 | 368, 121 |
+| panel (nine-slice) | 20, 46 | 20, 156 | 190, 106 |
+| probe | 444, 46 | 444, 156 | 1194, 115 |
+| orb | 156, 46 | 156, 156 | 1040, 115 |
+
+- **v1 → v2:** 126 of 130 frames move. The ballast and the three vertical columns
+  stay.
+- **v1 → v3:** all 130 move.
+- **Valid replacement:** dropping the unreferenced `label:PROBE 1X` moves 95 of the
+  remaining 129.
+- **Large origin:** v2 puts the 1100-texel horizontal strip at packed x = 147, and
+  its frames equal v1's.
+
+### Rendered invariance (byte comparison)
+
+| Comparison | Identical frames | Differences |
+| --- | --- | --- |
+| v1 subset rendered again in fresh processes | 10 / 10 | none |
+| Control (original images) against atlas v1 | 23 / 26 | only board L (linear): 1, 135 and 32 px, at most 1, 1 and 2 levels |
+| v2 (relocation) against v1 | 20 / 26 | board L: 2, 407 and 87 px, at most 2 levels. Board B: only the ballast (2,283 px) and the raw rectangle (1,512 px) |
+| Undo against v1; Redo against v2 | 10 / 10; 10 / 10 | none |
+| v3 (repack) against v1 | 20 / 26 | board L: 2, 503 and 125 px, at most 2 levels. Board B: only the raw rectangle |
+| After 13 rejected imports, against v3 | 6 / 6 | none |
+| Valid replacement (95 frames moved) against v3 | 6 / 6 | none |
+| Watcher batch against v3 | 5 / 6 | board O: only the two recoloured badge sprites, 64 px each |
+| Badge reimported back, against v3 | 6 / 6 | none |
+| Every source removed, against v3 | 26 / 26 | none |
+| Round one's v1 (old build) against follow-up v1 | 0 / 26 bytes, 20 / 26 pixels | board L linear (at most 2 levels), plus rolled-view knife edges |
+| Round one's control against follow-up control | 0 / 26 bytes, 23 / 26 pixels | rolled-view knife edges only |
+
+- **Linear differences** lie inside linear sprites, as in round one.
+- **Byte-only differences.** Every other cross-build difference is in PNG bytes only:
+  same chunk layout, filters and zlib header, with a different deflate length.
+- **Rolled-view knife edges** (`analysis-fu-1.json`, `round1_rolled_view_changes`).
+  Every changed pixel was inverted through the camera:
+
+  | View | Changed px | Within 0.01 px of a sprite edge | Within 0.01 px of a texel boundary | Largest distance |
+  | --- | --- | --- | --- | --- |
+  | W rolled 3° | 67 | 19 | 48 | 0.0019 px |
+  | V rolled 3° | 68 | 25 | 43 | 0.0021 px |
+  | B rolled 7° (minified ballast) | 1 | 0 | 1 | 0.0013 px |
+
+  No background pixel appears inside a strip, nothing is unexplained, and the counts
+  are identical for atlas and control. The new spans add internal vertices and move
+  only ambiguous ties (figure `screenshots/followup/figures/knife-edges-control-rl-W-1280x288.png`).
+
+### Decoded checks on the follow-up v1 frames
+
+- **Strips:** 112 rows, 109,088 along-axis pixels, 0 mismatches against the
+  documented nearest rule. This includes span cuts, flips, exact and near ties, and
+  the 32× leading and trailing texels. Interior runs are exactly M px.
+- **Exact predictions at 1×:** 152 sprites match with 0 mismatching pixels: board S
+  84, B 9 (raw, stable and scoped card 7), T 50 (45 orientations and 5 pivots) and
+  N 9 nine-slices.
+- **Painter order:** six groups match exactly. The reversed-order controls mismatch
+  232, 232, 232, 232, 50 and 232 px.
+- **Fringes:** 0 green- or magenta-tinted pixels in the halo and orb regions.
+- **Large-origin probe** (`evidence/followup/extra/`):
+  - the page is still 7308×5, with w6 at (6266, 2);
+  - all 9 rows decode exactly, including 8× windows on the cut at page x 6778;
+  - the pixel-perfect frame equals the control;
+  - only the 2.5× linear strip differs, by 1 level on 10 and 2 px.
+
+### Import rejection, validate and watcher
+
+All 13 rejections exit 1. In each, the project and journal bytes, the revision and
+history (from `rpc project.read` / `history.read`) and every asset fingerprint are
+unchanged. RPC reads were first confirmed not to rewrite either file.
+
+| Rejected import | Message (first line, verbatim after `Error: `) | New cache files |
+| --- | --- | --- |
+| unfittable maximum | could not cook art/atlas.atlas.json: could not pack every frame within the requested maximum using the bounded unrotated skyline heuristic | 0 |
+| 4096×2048 maximum | … atlas page exceeds the 4194304-texel limit | 0 |
+| 8193×256 maximum | … atlas width and height must each be in 1..8192 | 0 |
+| padding 0, padding 17 | … atlas padding must be in 1..16 | 0 |
+| lower-case ULID | … atlas version must be 1 and atlas/frame IDs must be canonical ULIDs | 0 |
+| rectangle past the image | … invalid asset: atlas source rectangle exceeds image dimensions | 0 |
+| 257 frames | … atlas must contain 1..256 frames with nonempty bounded names and paths | 0 |
+| 4,194,305 source texels | … asset exceeds atlas decoded source texels limit | 0 |
+| atlas as linear | … invalid asset: sprite atlases require color interpretation | 0 |
+| shrunken nine-slice frame | import rejected: 15 invalid sprite reference(s) | 2 |
+| card B dropped | import rejected: 2 invalid sprite reference(s) | 2 |
+| badge shrunk to 8×8 | import rejected: 2 invalid sprite reference(s) | 2 |
+| badge as linear | import rejected: 2 invalid sprite reference(s) | 2 |
+
+- **Binding rejections name every sprite.** Each line gives scene, entity, texture,
+  frame and cause, for example "…frame 01JA34FR00000000000000000F: nine-slice borders
+  [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]" for each of the 15 nine-slice
+  sprites. The other causes read "referenced frame does not exist in the cooked
+  atlas", "source rectangle [0, 0, 16, 16] exceeds cooked texture [8, 8]" and
+  "sprites require a cooked color texture". Full text: `evidence/followup/rejection-messages.json`.
+- **Orphan cache files:** the 2 new files per binding rejection are the prepared page
+  and its metadata. They are unreferenced, as the brief allows.
+- **Reimport warnings:** every reimport reply carries a `raw_atlas_region` warning
+  for `B:raw-card7` (`evidence/followup/import-diagnostics.json`).
+
+`validate` results:
+
+| Case | Exit | valid | Diagnostics |
+| --- | --- | --- | --- |
+| After scene creation, after rejections, after Undo, source-free | 0 | true | one `raw_atlas_region` warning, with scene, entity, texture and path `…/SpriteRenderer/region` |
+| Frame ID authored on an ordinary texture (command accepted) | 1 | false | `not_atlas` error on `S:card0:1x`, with frame and path `…/region/frame`, plus the warning |
+| Cooked atlas cache deleted, in a scratch copy | 1 | false | 407 `cache_unavailable` errors, "asset IO: No such file or directory (os error 2)" |
+
+That frame-on-ordinary state still fails to render ("sprite atlas frame … is
+unavailable in texture …"; no entity). Undo restores a valid project.
+
+- **Watcher.** During one `watch-assets` run, the badge became a valid orange 16×16
+  image and the atlas lost card B in the same poll.
+  - The badge was imported: `changed`, fingerprint `58513fa5…`.
+  - The atlas was rejected. Its diagnostic lists both card-B sprites, and the atlas
+    keeps its v3 fingerprint.
+  - Restoring the descriptor cleared the diagnostic, and the watcher exited 0.
+  - Reimporting the original badge returns the v3 frames exactly.
+- **Undo and Redo:**
+  - the v2 reimport undoes to v1 and redoes to v2;
+  - the valid replacement goes `bde67257…` → Undo `04cd9527…` → Redo `bde67257…` →
+    Undo `04cd9527…`.
+- **Source-free:** 11 files removed; 26 of 26 frames identical; `validate` passes.
+  Reimport fails with "could not cook art/atlas.atlas.json: asset IO: No such file or
+  directory (os error 2)".
+
+### Source-Y span cuts on the 64-texel build (`evidence/followup/upper/`)
+
+I re-ran round one's upper-span probe on the new build. It covers both board
+positions, at exact ties over span texels 236 to about 548, in 1920 × 1080
+pixel-perfect frames.
+
+| Source axis, board centre | Failed exact ties at 36× / 40× / 48× / 56× | Round one |
+| --- | --- | --- |
+| x, origin | 0/324, 0/288, 0/320, 0/315 | 93, 278, 219, 269 |
+| x, (500, 500) | 0/324, 0/288, 0/320, 0/315 | 53, 262, 198, 262 |
+| y, both positions | 0/300, 0/297, 0/322, 0/320 | 124, 185, 36, 232 |
+
+- Strip texels 512 to 526, where the cut failures were, now resolve correctly. There
+  are no non-tie errors, and atlas and control are byte-identical in all four frames.
+- This is the measured set only. It does not show correctness at other zooms or
+  positions, and 0032 round five still finds failures above 128×.
+
+### Appearance review (follow-up)
+
+I viewed the frames and figures.
+- **Board B over v1 to v3:**
+  - the stable-ID and texture-scoped cards never change;
+  - the raw pixel rectangle shows card 7, then night sky, then strip extrusion over
+    empty page, as the limitation requires (`screenshots/followup/figures/board-b-v1-v2-v3-zoom3.png`).
+- **The cooked pages are now compact:** 1222 × 1104 for v1, with the 1100-texel
+  columns along one side (`screenshots/followup/figures/atlas-pages-v1-v2-v3-quarter.png`). My adversarial
+  set still leaves most of the page empty, because the columns set its height.
+- **The watcher batch** changed only the two ordinary badges on board O.
+- **The decoded 40× source-Y cut** that showed red failing ties in round one is now a
+  clean checker (`screenshots/followup/figures/decoded-upper-y-40x-cut-ties.png`).
+- **The rolled-view knife edges** are isolated pixels along strip edges and texel
+  boundaries, not lines or gaps.
+- **Everything else** is pixel-identical to round one's reviewed frames, so round
+  one's appearance notes stand.
+
+### Requests for Astra (follow-up)
+
+1. **Residual NoFit (low).**
+   - Repro: import `evidence/art/atlas-v1.atlas.json` with `maximum_size` 1221×1104
+     (as `atlas_packing_probe.py ART --sweep` does). The import is rejected, while
+     `atlas_packing_probe.py ART OUT.json --feasible` proves a 1217×1104 layout.
+   - Option: add widths built from the actual layout, such as each placed frame's
+     right edge, to the candidate set. Otherwise document that sets near a tight
+     bound can still be rejected.
+2. **Missing-cache diagnostics (low).**
+   - One missing atlas cache produces 407 identical `cache_unavailable` errors.
+   - Option: report it once per texture, with the affected sprite count or list.
+3. **No new renderer request.** Keep my source-Y cut case (strip texels 512 to 526,
+   36×/40×/56×) in the shared regression; it passes now.
+
+### Changed paths (follow-up)
+
+All changes are inside `handoffs/0034-sprite-atlas-review/`. `brief.md` is Astra's and
+stays uncommitted.
+
+| Path | Change |
+| --- | --- |
+| `tools/atlas_followup.py` | new: the focused follow-up sequence, `--import-diagnostics`, `--full-messages` |
+| `tools/atlas_followup_analyse.py` | new: follow-up checks, cross-build comparison, knife-edge classification |
+| `tools/atlas_lookdev.py` | `--binary`/`--round` selectors with separate ledgers; keeps import diagnostics and longer stderr |
+| `tools/atlas_analyse.py` | decoded checks factored into `decoded_checks`; follow-up descriptor lookup |
+| `tools/atlas_packing_probe.py` | `--sweep`, `--residual`, `--feasible`, selectors |
+| `tools/atlas_upper_probe.py`, `tools/atlas_extra.py` | selectors |
+| `tools/atlas_figures.py` | state-name parameters, `--followup-round1`, knife-edge maps |
+| `tools/atlas_evidence.py` | `--followup` assembly |
+| `tools/test_atlas_tools.py` | 13 tests: camera inversion and selectors added |
+| `evidence/followup/` | analysis, run records, scene, import and rejection records, packing/upper/extra records, budget and image hashes |
+| `screenshots/followup/engine/` | 19 unedited engine frames |
+| `screenshots/followup/figures/` | 8 derived figures |
+
+- **Round one still reproduces.** Its analysis rebuilds `evidence/analysis-run-2.json`
+  exactly with the updated tools, and its figures rebuild byte for byte.
+- **Reproducing round one's renders** now needs `--binary pre-followup --round r1`,
+  because the follow-up build rejects its s8 imports by design.
+
+### Commands and results (follow-up)
+
+From the repository root, `P=handoffs/0034-sprite-atlas-review/tools`,
+`F=artifacts/0034-sprite-atlas-review/followup`, `R1=artifacts/0034-sprite-atlas-review/run-2`:
+
+```sh
+python3 -I $P/atlas_packing_probe.py --repro $F/packing-repro-1
+python3 -I $P/atlas_packing_probe.py $R1/art $F/packing-probe-1
+python3 -I $P/atlas_packing_probe.py $R1/art $F/packing-sweep-1 --sweep                # 139 imports, 0 violations
+python3 -I $P/atlas_packing_probe.py --residual $F/packing-residual-1
+python3 -I $P/atlas_packing_probe.py $R1/art $F/feasible-1217x1104-tool.json --feasible
+python3 -I $P/atlas_followup.py $F/fu-1                                                # 269 calls, 184 frames
+python3 -I $P/atlas_followup.py $F/import-diag-1 --import-diagnostics
+python3 -I $P/atlas_followup.py $F/rejection-messages.json --full-messages $F/import-diag-1
+python3 -I $P/atlas_followup_analyse.py $F/fu-1 $R1 $F/analysis/fu-1-final.json
+python3 -I $P/atlas_upper_probe.py $F/upper-1
+python3 -I $P/atlas_upper_probe.py $F/upper-2-swapped --swap
+python3 -I $P/atlas_upper_probe.py $F/upper-1 --decode-only                            # and upper-2-swapped
+python3 -I $P/atlas_upper_probe.py $F/analysis/upper-span-stats.json --stats $F/upper-1 $F/upper-2-swapped
+python3 -I $P/atlas_extra.py $F/extra-1
+python3 -I $P/atlas_analyse.py $F/extra-1 $F/analysis/extra-1.json --extra
+python3 -I $P/atlas_figures.py $F/fu-1 $F/analysis/fu-1-final.json $F/figures-1 --upper $F/upper-2-swapped --followup-round1 $R1
+python3 -I $P/atlas_evidence.py --followup
+python3 -I $P/test_atlas_tools.py                                       # 13 tests OK
+python3 -I handoffs/0032-sprite-rendering/tools/test_reference.py       # 19 OK
+python3 -m unittest discover -s tools/tests                             # 25 OK
+cd handoffs/0034-sprite-atlas-review && shasum -a 256 -c evidence/followup/screenshots.sha256   # 27 OK
+cd handoffs/0034-sprite-atlas-review && shasum -a 256 -c evidence/screenshots.sha256            # 28 OK (round one)
+```
+
+The analysis that produced `fu-1-final.json` was run twice after its last change;
+both outputs are identical. Not run: Cargo, Clippy, the Rust and GPU suites, the UI
+suite (no UI file changed), PlaySession, native captures and hosted CI. The agent's
+batch import path is account-gated and was not exercised; the watcher's multi-source
+poll was.
+
+### Budget (follow-up)
+
+| Item | Frames | Raw |
+| --- | --- | --- |
+| `fu-1` focused workflow | 184 | 164.8 MiB |
+| Upper-span probes, two positions | 8 | 63.3 MiB |
+| Large-origin probe | 9 | 11.7 MiB |
+| **Follow-up round total** | **201 of 600** | **239.8 of 512 MiB** |
+| Round one (preserved, unchanged) | 744 | 810.1 MiB |
+| Lifetime | 945 | 1,049.9 MiB |
+
+- Each invocation wrote one frame, at most 7.9 MiB raw. Nothing was overwritten.
+- The one expected failed screenshot wrote no frame.
+- The ledgers are `evidence/followup/budget-ledger-followup.jsonl` and, for round one,
+  `evidence/budget-ledger.jsonl`. Totals are in `evidence/followup/budget.json`.
+
+### Limitations (follow-up)
+
+- **Hardware:** one GPU and backend (Apple M5 Pro, Metal), headless only.
+- **Coverage:** the upper-span and strip results cover only the listed magnifications
+  and positions. The shared limits from 0032 round five were not re-measured here.
+- **Packing:** results come from my adversarial frame set and grid of bounds. The
+  packer remains a heuristic, not an optimal packer.
+- **Tie tolerance:** the knife-edge classification uses a 0.01 px tie tolerance. All
+  changed pixels fall within 0.0021 px.
+- **Not covered:** perspective cameras, the native Inspector, phones, performance and
+  the camera/follower contract. No phase gate is approved or claimed.
+
+### Open questions (follow-up)
+
+1. Should the packer's candidate widths include layout-derived widths, to close the
+   1217-wide residual, or is the heuristic bound acceptable as documented?
+2. Should missing-cache diagnostics be grouped per texture?
+
+---
+
 ## Status
 
 **Accepted, scoped, conditional on the shared wide-region review. I found no

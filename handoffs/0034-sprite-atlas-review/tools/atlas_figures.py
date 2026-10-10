@@ -9,6 +9,8 @@
   board-b-v1-v2-v3-zoom3           board B from the v1, v2 and v3 pixel-perfect frames.
   linear-diff-rl-L-v1-v3-x64       rolled linear board, |v3 - v1| x 64 over a dimmed frame.
   art-contact-sheet                the new source art enlarged over a checker.
+  knife-edges-control-*            (--followup-round1) rolled control views of the follow-up
+      build, dimmed, with every pixel that differs from round one's build ringed in red.
   decoded-upper-y-40x-cut-ties     (--upper) vertical 40x columns of the upper-span probe around
       the 512 cut, 4x wide; exact ties showing the wrong texel are red.
 
@@ -68,9 +70,12 @@ def decoded(run, scene, phase, board, png, out):
     write(out, w, h, px)
 
 
-def pages(run, analysis, out):
-    states = [("v1", analysis["fingerprints"]["s0-r1"]), ("v2", analysis["fingerprints"]["s1-v2"]),
-              ("v3", analysis["fingerprints"]["s5-v3"])]
+ROUND1 = ("s0-r1", "s1-v2", "s5-v3")
+FOLLOWUP = ("f0-v1-r1", "f1-v2", "f4-v3")
+
+
+def pages(run, analysis, out, names=ROUND1):
+    states = [(label, analysis["fingerprints"][name]) for label, name in zip(("v1", "v2", "v3"), names)]
     tiles = []
     for label, fp in states:
         meta = json.loads((run / f"atlas/.incant/cache/textures/{fp}.json").read_text(encoding="utf-8"))
@@ -114,8 +119,8 @@ def pages(run, analysis, out):
     write(out, W, H, px)
 
 
-def board_b(run, out):
-    imgs = [an.image(run / f"states/{s}/pp-B-320x180.png") for s in ("s0-r1", "s1-v2", "s5-v3")]
+def board_b(run, out, names=ROUND1):
+    imgs = [an.image(run / f"states/{s}/pp-B-320x180.png") for s in names]
     k, crop = 3, (0, 0, 240, 120)
     cw, ch = crop[2] * k, crop[3] * k
     W, H = 3 * cw + 4 * 8, ch + 16
@@ -128,9 +133,9 @@ def board_b(run, out):
     write(out, W, H, px)
 
 
-def linear_diff(run, out):
-    a = an.image(run / "states/s0-r1/rl-L-640x360.png")
-    b = an.image(run / "states/s5-v3/rl-L-640x360.png")
+def linear_diff(run, out, names=ROUND1):
+    a = an.image(run / f"states/{names[0]}/rl-L-640x360.png")
+    b = an.image(run / f"states/{names[2]}/rl-L-640x360.png")
     px = []
     for y in range(a.height):
         for x in range(a.width):
@@ -167,6 +172,21 @@ def upper_cut(probe, out, m=40, y0=560, y1=1080, scale=4):
     write(out, w, h, px)
 
 
+def knife_map(a_png, b_png, out):
+    """Frame b dimmed, with every pixel that differs from frame a ringed in red (3 x 3)."""
+    a, b = an.image(a_png), an.image(b_png)
+    px = [tuple(c // 3 for c in b.rgb(x, y)) + (255,) for y in range(b.height) for x in range(b.width)]
+    for y in range(b.height):
+        for x in range(b.width):
+            if a.rgb(x, y) != b.rgb(x, y):
+                for dy in (-1, 0, 1):
+                    for dx in (-1, 0, 1):
+                        if 0 <= x + dx < b.width and 0 <= y + dy < b.height and (dx or dy):
+                            px[(y + dy) * b.width + x + dx] = RED
+                px[y * b.width + x] = b.rgb(x, y) + (255,)
+    write(out, b.width, b.height, px)
+
+
 def art_preview(art, out):
     """Contact sheet of the new original art over a checker (not an engine frame)."""
     items = [("cards.png", 8), ("probe.png", 12), ("halo.png", 8), ("labels34.png", 3), ("ballast-v1.png", 1),
@@ -193,6 +213,8 @@ def main():
     parser.add_argument("analysis", type=Path)
     parser.add_argument("out", type=Path)
     parser.add_argument("--upper", type=Path, help="an atlas_upper_probe.py output directory")
+    parser.add_argument("--followup-round1", type=Path, metavar="ROUND1_RUN",
+                        help="RUN is an atlas_followup.py run; also map rolled-view changes against ROUND1_RUN")
     args = parser.parse_args()
     if args.out.exists():
         raise SystemExit("Output directory already exists; choose a new directory.")
@@ -201,12 +223,21 @@ def main():
     analysis = json.loads(args.analysis.read_text(encoding="utf-8"))
     scene = json.loads((run / "scene-atlas.json").read_text(encoding="utf-8"))
     phase = json.loads((run / "art/manifest.json").read_text(encoding="utf-8"))["strip"]["phase"]
-    decoded(run, scene, phase, "X", run / "states/s0-r1/pp-X-1024x832.png", args.out / "decoded-x-cuts-1024x832.png")
-    decoded(run, scene, phase, "Y", run / "states/s0-r1/pp-Y-832x1024.png", args.out / "decoded-y-cuts-832x1024.png")
-    pages(run, analysis, args.out / "atlas-pages-v1-v2-v3-quarter.png")
-    board_b(run, args.out / "board-b-v1-v2-v3-zoom3.png")
-    linear_diff(run, args.out / "linear-diff-rl-L-v1-v3-x64.png")
-    art_preview(run / "art", args.out / "art-contact-sheet.png")
+    names = FOLLOWUP if args.followup_round1 else ROUND1
+    decoded(run, scene, phase, "X", run / f"states/{names[0]}/pp-X-1024x832.png",
+            args.out / "decoded-x-cuts-1024x832.png")
+    decoded(run, scene, phase, "Y", run / f"states/{names[0]}/pp-Y-832x1024.png",
+            args.out / "decoded-y-cuts-832x1024.png")
+    pages(run, analysis, args.out / "atlas-pages-v1-v2-v3-quarter.png", names)
+    board_b(run, args.out / "board-b-v1-v2-v3-zoom3.png", names)
+    linear_diff(run, args.out / "linear-diff-rl-L-v1-v3-x64.png", names)
+    if args.followup_round1:
+        round1 = args.followup_round1.resolve()
+        for shot in ("rl-W-1280x288", "rl-V-360x1080"):
+            knife_map(round1 / f"states/control/{shot}.png", run / f"states/control/{shot}.png",
+                      args.out / f"knife-edges-control-{shot}.png")
+    else:
+        art_preview(run / "art", args.out / "art-contact-sheet.png")
     if args.upper:
         upper_cut(args.upper.resolve(), args.out / "decoded-upper-y-40x-cut-ties.png")
     print(json.dumps(sorted(p.name for p in args.out.iterdir())))
