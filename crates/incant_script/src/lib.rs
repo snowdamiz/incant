@@ -330,19 +330,24 @@ mod tests {
         assert_eq!(host.state()["safe"], true);
     }
     #[test]
-    fn deadline_interrupts_infinite_loop() {
-        let mut host = ScriptHost::with_budget(
-            "exports.default={update(){while(true){}}};",
-            Duration::from_millis(10),
-        )
-        .unwrap();
+    fn cpu_budget_interrupts_runaway_initialization_and_updates() {
+        // Exercise the shipped allowance. A 10 ms setup assumption is not
+        // portable across OS CPU-clock resolution and VM initialization cost.
+        let start = Instant::now();
+        assert!(matches!(
+            ScriptHost::new("while(true){}"),
+            Err(ScriptError::ExecutionDeadline { budget_ms: 50 })
+        ));
+        assert!(start.elapsed() < Duration::from_secs(1));
+        let mut host = ScriptHost::new("exports.default={update(){while(true){}}};").unwrap();
         let mut bus = CommandBus::new(Project::empty("sandbox")).unwrap();
         let start = Instant::now();
         assert!(matches!(
             host.tick(&mut bus, 1. / 60.),
-            Err(ScriptError::ExecutionDeadline { budget_ms: 10 })
+            Err(ScriptError::ExecutionDeadline { budget_ms: 50 })
         ));
         assert!(start.elapsed() < Duration::from_secs(1));
+        assert_eq!(host.clock().tick, 0);
     }
     #[test]
     fn native_query_expiry_prevents_commit_even_when_the_script_catches_errors() {

@@ -63,3 +63,13 @@ over 120 ticks: p95 12.079250, 12.566875 and 12.058417 ms, maximum 13.070250,
 13.005375 and 12.501917 ms. They include no rendering and ran during concurrent
 development on this Mac. They are workload measurements, not physical-device
 release gates or a controlled before/after CPU-clock comparison.
+
+
+Windows CI at `cebe1e9` rejected the old runaway-loop test while constructing the
+host, before the loop under test ran: its custom 10 ms CPU allowance expired.
+The regression now exercises the shipped 50 ms allowance for both genuinely
+runaway initialization and update, with a one-second wall-time ceiling and exact
+error categories. The hostile-error-getter test also uses 50 ms. Production
+limits and clock accounting are unchanged; the zero-budget setup test and real
+native-CPU exhaustion/rollback tests remain. All 300 local Rust tests and Clippy
+pass after this test correction. Updated Windows validation is pending.

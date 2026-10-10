@@ -152,5 +152,14 @@
     "rendering_included": false,
     "concurrent_development_work": true,
     "physical_device_gate_claimed": false
+  },
+  "windows_test_adjustment": {
+    "failed_head": "cebe1e9af3ec5a92b2bc8580d9e02f62d74fcbca",
+    "failed_job": "https://github.com/snowdamiz/incant/actions/runs/38058986690/job/114233204824",
+    "observed_failure": "10 ms custom allowance expired while constructing the host, before the intended infinite update loop ran",
+    "change": "Exercise real runaway initialization, update and hostile error getter using the shipped 50 ms allowance; keep one-second wall-time ceilings and exact deadline errors. Production code is unchanged.",
+    "local_workspace_tests": 300,
+    "clippy": "pass",
+    "hosted_validation": "pending"
   }
 }
