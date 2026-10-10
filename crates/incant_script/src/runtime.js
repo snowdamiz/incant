@@ -32,6 +32,11 @@ globalThis.__tick = (worldJson, dt, stateJson, eventsJson, inputJson, clockJson,
       timers.push({op:'cancel', id});
       replaced.add(id);
     },
+    findPath: (query) => {
+      const result = JSON.parse(globalThis.__incantFindPath(JSON.stringify(query)));
+      if (result.error) throw new Error(result.error);
+      return result.path;
+    },
     raycast: (query) => {
       const result = JSON.parse(globalThis.__incantRaycast(JSON.stringify(query)));
       if (result.error) throw new Error(result.error);

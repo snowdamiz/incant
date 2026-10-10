@@ -53,6 +53,16 @@ within its documented workload.
 
 ## Active work
 
+- Tiled runtime navigation now bakes selected static colliders and cooked model
+  meshes, reuses unchanged tiles, and provides bounded A*/funnel queries with
+  terrain height detail to TypeScript. Engine updates stage atomically. The real
+  public character chase, runtime room edit, durable authoring Undo/Redo and
+  save/resume pass without model source files. Local Rust/UI/GPU checks pass;
+  exact counts, binary hashes and workload timings are in the
+  [navigation evidence](docs/spikes/navigation-runtime.md). Hosted CI and Claude's
+  rendered motion review are pending. Local avoidance, off-mesh links, 2D grids,
+  navigation Inspector/debug draw and Core Sample/device gates remain open.
+
 - XLIFF translator exchange exports typed tables and imports matching targets
   through one reversible shared-command transaction. Unknown/stale sources,
   malformed XML and incompatible arguments reject the full batch. No-op imports
@@ -434,10 +444,10 @@ within its documented workload.
 ## Current screen-work constraint
 
 Revision 3 is the current implementation baseline. Its additional Phase 1 work
-remains open: tiled navmesh generation/pathfinding/steering and 2D grid navigation;
-sprites/atlases/tilemaps and Rapier 2D; shaped text, font fallback and IME; typed
-localized string tables, formatting, locale switching and pseudo-localization;
-and gamepad/mobile haptics. The expanded Core Sample gate includes navigation,
+includes the implemented tiled navmesh/path-query and localization runtime above.
+Still open are navigation steering/local avoidance, off-mesh links and 2D grids;
+sprites/atlases/tilemaps and Rapier 2D; shaped text, font fallback and IME;
+localization UI and gamepad/mobile haptics. The expanded Core Sample gate includes navigation,
 RTL/CJK/localization coverage and a 2D sample on all four reference devices.
 This does not replace the remaining original renderer, animation, audio/device,
 input-adapter, SDK/coroutine and complete-game performance requirements. Later

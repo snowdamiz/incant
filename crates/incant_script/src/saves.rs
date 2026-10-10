@@ -118,6 +118,19 @@ impl PlaySession {
         compiled_source: &str,
         text: &str,
     ) -> Result<Self, SaveError> {
+        Self::from_save_with_navigation_resources(
+            authored,
+            compiled_source,
+            text,
+            incant_core::NavigationResources::new(),
+        )
+    }
+    pub fn from_save_with_navigation_resources(
+        authored: &Project,
+        compiled_source: &str,
+        text: &str,
+        resources: incant_core::NavigationResources,
+    ) -> Result<Self, SaveError> {
         if text.len() > MAX_SAVE_BYTES {
             return Err(SaveError::Size);
         }
@@ -134,7 +147,7 @@ impl PlaySession {
         }
         let manifest_sha256 = manifest(authored)?;
         save.validate(&manifest_sha256)?;
-        let mut next = Self::new(&save.project, compiled_source)?;
+        let mut next = Self::with_navigation_resources(&save.project, compiled_source, resources)?;
         next.authored_sha256 = authored_sha256;
         next.manifest_sha256 = manifest_sha256;
         next.ticks = save.tick;

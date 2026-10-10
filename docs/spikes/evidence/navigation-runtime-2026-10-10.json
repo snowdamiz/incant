@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-10",
+  "base_commit": "37246330f930628713d19fba1130f4feb011026b",
+  "scope": "Tiled collider/model navigation, bounded script path queries and public saved-character gameplay",
+  "local": {
+    "rust_distinct_tests_passed": 270,
+    "full_workspace_tests_passed": 268,
+    "additional_navigation_tests_passed": 2,
+    "gpu_tests_passed": 40,
+    "ui_tests_passed": 315,
+    "python_tool_tests_passed": 5,
+    "clippy_all_targets": true,
+    "fmt": true,
+    "strict_typescript_and_generated_contracts": true,
+    "native_custom_protocol_build_package": true
+  },
+  "public_probe": {
+    "passed": true,
+    "strict_typescript": true,
+    "public_import_rpc": true,
+    "durable_undo_redo": true,
+    "invalid_command_rollback": true,
+    "cooked_mesh_without_source": true,
+    "runtime_room_rebuild": true,
+    "navmesh_character_chase": true,
+    "saved_path_following": true,
+    "repeated_gameplay_exact": true,
+    "position": [
+      7.927345275878906,
+      0.90993732213974,
+      -0.013149266131222248
+    ],
+    "first_corners": 6,
+    "second_corners": 2,
+    "author_files_unchanged": {
+      "game.incant.json": "b39c6ecb55a6fbcdb0f1f46bca0749345265bffd929e07f4207fafcf599e1bbd",
+      "game.incant.journal.jsonl": "7ce7f44f0a390feca2e80501cbd27ef08931e9f88622d8e97b9d45c6b6b14ca3"
+    },
+    "binary_sha256": "135b3feff61a53953fddb280b026a895c077b3f5d820a82a6ec1edf0f7757e0d",
+    "visual_or_device_gate": false
+  },
+  "packaged_native_sha256": "7e5f40d426fb3037f60b4db0ff48c7c49388f5236f09094a7cabaa7b230cebac",
+  "platform_local": {
+    "macos_executed": {
+      "changed_tiles": 9,
+      "first_corners": 6,
+      "recast_tiled": true,
+      "retained_tiles": 6,
+      "second_corners": 2,
+      "visual_gate": false
+    },
+    "wasm_compiled": true,
+    "ios_simulator_compiled": true,
+    "wasm_ios_execution_claimed": false
+  },
+  "benchmark": {
+    "arch": "aarch64",
+    "cases": [
+      {
+        "changed_tiles": [
+          1
+        ],
+        "initial_build_ms": 0.49,
+        "name": "one_tile",
+        "path": {
+          "max_ms": 0.00675,
+          "p50_ms": 0.003167,
+          "p95_ms": 0.003625,
+          "samples": 100
+        },
+        "rebuild": {
+          "max_ms": 0.16875,
+          "p50_ms": 0.150917,
+          "p95_ms": 0.1675,
+          "samples": 100
+        },
+        "tiles": 1,
+        "unchanged": {
+          "max_ms": 0.004,
+          "p50_ms": 0.003417,
+          "p95_ms": 0.0038330000000000005,
+          "samples": 100
+        }
+      },
+      {
+        "changed_tiles": [
+          4
+        ],
+        "initial_build_ms": 2.940167,
+        "name": "sixteen_tiles",
+        "path": {
+          "max_ms": 0.009417,
+          "p50_ms": 0.005666,
+          "p95_ms": 0.006959,
+          "samples": 100
+        },
+        "rebuild": {
+          "max_ms": 0.881084,
+          "p50_ms": 0.63075,
+          "p95_ms": 0.725958,
+          "samples": 100
+        },
+        "tiles": 16,
+        "unchanged": {
+          "max_ms": 0.018542,
+          "p50_ms": 0.011375,
+          "p95_ms": 0.013834,
+          "samples": 100
+        }
+      }
+    ],
+    "mobile_gate": false,
+    "os": "macos"
+  },
+  "ci": {
+    "status": "not yet published; new navigation checks pending"
+  },
+  "visual_review": {
+    "status": "Claude Opus 5.5 ACP packet prepared",
+    "packet": "handoffs/0026-navigation-lookdev/brief.md"
+  },
+  "open": [
+    "local avoidance and hundred-agent steering",
+    "off-mesh links",
+    "2D grid navigation",
+    "navigation Inspector and debug draw",
+    "rendered navigation review",
+    "hosted checks",
+    "Core Sample integration and physical-device performance gates"
+  ]
+}

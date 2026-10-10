@@ -12,7 +12,7 @@ mod queries;
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::Origin;
 pub use logs::{LogLevel, ScriptLog};
-use queries::{CharacterMover, Raycaster};
+use queries::{CharacterMover, Navigator, Raycaster};
 use rquickjs::{Context, Runtime};
 use serde::Deserialize;
 use serde_json::Value;
@@ -76,6 +76,7 @@ pub struct ScriptHost {
     localization: Arc<Mutex<localization::State>>,
     raycaster: Option<Raycaster>,
     character_mover: Option<CharacterMover>,
+    navigator: Option<Navigator>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
     context: Context,
     _runtime: Runtime,
@@ -127,6 +128,7 @@ impl ScriptHost {
             localization: Arc::new(Mutex::new(localization::State::default())),
             raycaster: None,
             character_mover: None,
+            navigator: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
             context,
             _runtime: runtime,
@@ -155,12 +157,19 @@ impl ScriptHost {
         let mut next = Self::with_budget(source, self.budget)?;
         next.raycaster = self.raycaster.clone();
         next.character_mover = self.character_mover.clone();
+        next.navigator = self.navigator.clone();
         next.install_queries()?;
         if self.schedule.has_timers() && !next.has_timer_handler {
             return Err(ScriptError::TimerHandler);
         }
         next.schedule = self.schedule.clone();
-        next.state = preserve_compatible(&self.state, &next.state);
+        // Recreating the VM for identical source has no schema migration: keep
+        // runtime-grown arrays and dynamic object keys as well as scalar fields.
+        next.state = if next.source_sha256 == self.source_sha256 {
+            self.state.clone()
+        } else {
+            preserve_compatible(&self.state, &next.state)
+        };
         next.logs = std::mem::take(&mut self.logs);
         *self = next;
         Ok(())

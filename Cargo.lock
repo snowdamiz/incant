@@ -2534,6 +2534,7 @@ version = "0.32.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f70749695b063ecbf6b62949ccccde2e733ec3ecbbd71d467dca4e5c6c97cca0"
 dependencies = [
+ "libm",
  "serde_core",
 ]
 
@@ -3448,10 +3449,12 @@ version = "0.0.1"
 dependencies = [
  "base64 0.22.1",
  "exr",
+ "glam 0.32.1",
  "gltf",
  "image",
  "incant_cmd",
  "incant_doc",
+ "incant_nav",
  "ktx2",
  "meshopt",
  "mikktspace",
@@ -3504,7 +3507,9 @@ dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
  "incant_doc",
+ "incant_nav",
  "incant_physics",
+ "schemars 1.2.2",
  "serde",
  "serde_json",
 ]
@@ -3517,6 +3522,7 @@ dependencies = [
  "getrandom 0.3.4",
  "incant_input",
  "incant_localization",
+ "incant_nav",
  "loro",
  "schemars 1.2.2",
  "serde",
@@ -3615,10 +3621,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_nav"
+version = "0.0.1"
+dependencies = [
+ "glam 0.32.1",
+ "rerecast",
+ "schemars 1.2.2",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_physics"
 version = "0.0.1"
 dependencies = [
  "incant_doc",
+ "incant_nav",
  "rapier3d",
  "schemars 1.2.2",
  "serde",
@@ -6014,6 +6034,22 @@ dependencies = [
  "wasm-bindgen-futures",
  "wasm-streams",
  "web-sys",
+]
+
+[[package]]
+name = "rerecast"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d91bc1e22832298b01bca704eab9d6fe1d1c8c9cf6a1a44554e678b807884360"
+dependencies = [
+ "anyhow",
+ "bevy_reflect",
+ "bitflags 2.13.2",
+ "glam 0.32.1",
+ "libm",
+ "slotmap",
+ "thiserror 2.0.21",
+ "tracing",
 ]
 
 [[package]]

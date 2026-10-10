@@ -304,7 +304,7 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
   "history.read"=>Ok(json!(bus.history().iter().map(|t|json!({"id":t.id,"description":t.description,"actor":t.actor,"commands":t.commands.len()})).collect::<Vec<_>>())),
   "history.undo"=>{let tx=bus.undo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
   "history.redo"=>{let tx=bus.redo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
-  "play.start"=>{engine=Some(Engine::new(bus.project())?);Ok(json!({"playing":true}))},
+  "play.start"=>{let assets=assets::load_runtime(&project,bus.project())?;engine=Some(Engine::with_navigation_resources(bus.project(),assets.navigation_resources())?);Ok(json!({"playing":true}))},
   "play.step"=>{let engine=engine.as_mut().ok_or("no play session")?;engine.step()?;Ok(json!(engine.snapshot()))},
   "play.state"=>Ok(json!(engine.as_mut().ok_or("no play session")?.snapshot())),
   "play.stop"=>{engine=None;Ok(json!({"playing":false,"project":bus.project()}))},
@@ -489,6 +489,14 @@ fn main() -> Result<()> {
             ]);
             registry.extend([
                 (
+                    "NavigationQuery".into(),
+                    json!(schemars::schema_for!(incant_core::NavigationQuery)),
+                ),
+                (
+                    "NavigationPath".into(),
+                    json!(schemars::schema_for!(incant_core::NavigationPath)),
+                ),
+                (
                     "PhysicsCharacterQuery".into(),
                     json!(schemars::schema_for!(incant_core::CharacterQuery)),
                 ),
@@ -526,7 +534,8 @@ fn main() -> Result<()> {
             }
             let document = read_project(&project)?;
             let assets = assets::load_runtime(&project, &document)?;
-            let mut engine = Engine::new(&document)?;
+            let mut engine =
+                Engine::with_navigation_resources(&document, assets.navigation_resources())?;
             let start = Instant::now();
             engine.run_ticks(ticks)?;
             print(
@@ -549,9 +558,12 @@ fn main() -> Result<()> {
             if ticks > 10000 {
                 return Err("script tick count exceeds limit".into());
             }
-            let mut play = PlaySession::new(
-                &read_project(&project)?,
+            let document = read_project(&project)?;
+            let assets = assets::load_runtime(&project, &document)?;
+            let mut play = PlaySession::with_navigation_resources(
+                &document,
                 &fs::read_to_string(compiled_script)?,
+                assets.navigation_resources(),
             )?;
             let mut times = vec![];
             let mut count = 0;

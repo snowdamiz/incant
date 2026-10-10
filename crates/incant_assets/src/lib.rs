@@ -6,6 +6,8 @@ mod gltf_import;
 mod ktx;
 mod material;
 mod mesh;
+mod navigation;
+pub use navigation::model_navigation_geometry;
 mod model_textures;
 mod project_cache;
 mod runtime;
