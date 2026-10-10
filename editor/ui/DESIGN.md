@@ -117,7 +117,7 @@ Display names come from the schema title when it has words ("Mesh Renderer"), ot
 from the profile or by splitting the identifier ("RigidBody" → "Rigid Body"). The type
 ID is in the header tooltip and the section's accessible description.
 
-**Rows.** A label column of `clamp(80px, 32cqi, 168px)` of the component's width, an
+**Rows.** A label column of `clamp(88px, 32cqi, 168px)` of the component's width, an
 8 px gap, and the value column. Labels are muted 12 px, wrap to two lines and clamp at a
 third. Captioned runs (Collider: Material, Collision) use a caption with a trailing
 hairline instead of a box.
