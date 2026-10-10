@@ -1,12 +1,18 @@
 # Cooked atlas presentation and rendered correctness review
 
-Status: packet prepared; launch after handoff 0032 accepts the shared wide-region
-renderer and Astra supplies this branch's frozen executable/metadata. Do not use
-a different installed or live-rebuilding binary. No Cargo in the visual worktree.
+Status: begin the independent atlas review using the frozen executable/metadata
+supplied by Astra. Handoff 0032 is concurrently reviewing the shared wide-region
+fix; its final acceptance is still pending. Review atlas identity, relocation,
+filtering and public workflows now, and keep overall acceptance conditional on
+that shared review. Do not use a different installed or live-rebuilding binary.
+No Cargo in the visual worktree.
 Required model is Claude Opus 5.5 over ACP with Max thinking explicitly verified.
 
-Read PLAN.md revision 6, CLAUDE.md, docs/spikes/sprite-atlases.md and the completed
-0032 sprite review. This packet extends the accepted sprite review to actual
+Read PLAN.md revision 6, CLAUDE.md, docs/spikes/sprite-atlases.md and the current
+0032 sprite review. Its earlier report predates the wide-region fix; use the
+current candidate and docs/spikes/sprite-rendering.md for that fix's numerical
+evidence, and do not label the shared renderer accepted. This packet extends the
+sprite review to actual
 cooked atlas frames. Astra owns packing, importing, resource identity, validation
 and integration. You own original art/look-dev, rendered analysis and judgment.
 Whole-app UI redesign remains in 0033; do not edit editor/ui during this packet.
