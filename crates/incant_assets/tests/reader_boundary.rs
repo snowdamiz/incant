@@ -309,3 +309,45 @@ fn runtime_readers_reject_symlink_cache_entries_without_following_sources() {
         Err(runtime::AssetError::Invalid(_))
     ));
 }
+
+#[test]
+fn binary_visual_bindings_load_sealed_versions_and_fail_stale_or_wrong_kind() {
+    use incant_types::{StableId, VisualAssetKind, VisualAssetRef};
+    let temp = tempfile::tempdir().unwrap();
+    model_source(temp.path());
+    let cache = temp.path().join("cache");
+    let cooked = authoring::cook_gltf(temp.path(), Path::new("triangle.gltf"), &cache).unwrap();
+    let key = cooked.metadata.fingerprint;
+    let reference = VisualAssetRef {
+        id: StableId([42; 16]),
+        kind: VisualAssetKind::Model,
+        fingerprint: std::array::from_fn(|i| {
+            u8::from_str_radix(&key[i * 2..i * 2 + 2], 16).unwrap()
+        }),
+    };
+    fs::remove_file(temp.path().join("triangle.gltf")).unwrap();
+    fs::remove_file(temp.path().join("triangle.bin")).unwrap();
+    let version = runtime::RuntimeAsset::load_visual(&reference, 7, &cache).unwrap();
+    assert_eq!(version.info().fingerprint, key);
+    let runtime::RuntimeAssetData::Model(model) = version.data() else {
+        panic!("model binding")
+    };
+    assert_eq!(model.meshes[0].indices.len(), 3);
+    let mut wrong = reference;
+    wrong.kind = VisualAssetKind::Texture;
+    assert!(runtime::RuntimeAsset::load_visual(&wrong, 8, &cache).is_err());
+    wrong = reference;
+    wrong.fingerprint[0] ^= 1;
+    assert!(runtime::RuntimeAsset::load_visual(&wrong, 8, &cache).is_err());
+    let path = cache.join(format!("{key}.incmodel"));
+    let mut corrupt = fs::read(&path).unwrap();
+    corrupt[48] ^= 1;
+    fs::write(&path, corrupt).unwrap();
+    assert!(runtime::RuntimeAsset::load_visual(&reference, 8, &cache).is_err());
+    // A rejected replacement does not mutate the retained, already decoded version.
+    let runtime::RuntimeAssetData::Model(model) = version.data() else {
+        unreachable!()
+    };
+    assert_eq!(model.meshes[0].indices.len(), 3);
+    assert_eq!(version.info().generation, 7);
+}

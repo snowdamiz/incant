@@ -1,10 +1,7 @@
 //! Immutable decoded assets keyed by the document's stable IDs. Reload is staged
 //! before publication so a missing or corrupt replacement leaves the running
 //! project intact. This store never imports sources or changes project documents.
-use crate::{
-    AssetError, CacheKind, CookedAudio, CookedModel, CookedTexture, load_audio, load_model,
-    load_texture, project_cache_directory,
-};
+use crate::{AssetError, CacheKind, project_cache_directory};
 use incant_doc::{Asset, AssetImportSettings, Project, TextureUsage};
 use serde::Serialize;
 use std::{
@@ -28,70 +25,7 @@ pub enum RuntimeAssetError {
     CacheRoot(#[from] std::io::Error),
 }
 
-#[derive(Debug)]
-pub enum RuntimeAssetData {
-    Model(CookedModel),
-    Texture(CookedTexture),
-    Audio(Arc<CookedAudio>),
-}
-impl RuntimeAssetData {
-    /// Decoded vertex/index/mip payload, excluding Rust metadata and allocator
-    /// overhead. Audio counts its manifest; PCM stays in a validated file and
-    /// mixer/decoder buffers have separate bounds. Staged replacements and
-    /// retained versions add to the process peak, outside this published-set cap.
-    fn payload_bytes(&self) -> usize {
-        match self {
-            Self::Model(model) => {
-                model
-                    .meshes
-                    .iter()
-                    .map(|mesh| {
-                        mesh.vertices.len() * size_of::<crate::Vertex>()
-                            + mesh.indices.len() * size_of::<u32>()
-                    })
-                    .sum::<usize>()
-                    + model
-                        .images
-                        .iter()
-                        .flat_map(|image| &image.levels)
-                        .map(Vec::len)
-                        .sum::<usize>()
-            }
-            Self::Texture(texture) => texture.texture.levels.iter().map(Vec::len).sum(),
-            Self::Audio(audio) => audio.resident_bytes(),
-        }
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-pub struct RuntimeAssetInfo {
-    pub id: String,
-    pub kind: String,
-    pub fingerprint: String,
-    /// Monotonically increasing within a store, including remove/re-add cycles.
-    pub generation: u64,
-    pub payload_bytes: usize,
-}
-
-#[derive(Debug)]
-pub struct RuntimeAsset {
-    info: RuntimeAssetInfo,
-    usage: Option<TextureUsage>,
-    data: RuntimeAssetData,
-}
-impl RuntimeAsset {
-    pub fn info(&self) -> &RuntimeAssetInfo {
-        &self.info
-    }
-    pub fn data(&self) -> &RuntimeAssetData {
-        &self.data
-    }
-    fn matches(&self, asset: &Asset) -> bool {
-        self.info.kind == asset.kind
-            && self.info.fingerprint == asset.sha256
-            && self.usage == usage(asset)
-    }
-}
+pub use incant_assets_runtime::{RuntimeAsset, RuntimeAssetData, RuntimeAssetInfo};
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize)]
 pub struct AssetChanges {
@@ -133,7 +67,7 @@ impl AssetStore {
     pub fn snapshot(&self) -> BTreeMap<String, RuntimeAssetInfo> {
         self.assets
             .iter()
-            .map(|(id, asset)| (id.clone(), asset.info.clone()))
+            .map(|(id, asset)| (id.clone(), asset.info().clone()))
             .collect()
     }
     /// Load models, textures and audio from their respective cache directories. All
@@ -148,8 +82,8 @@ impl AssetStore {
             project: project.id.clone(),
             cache: std::path::absolute(cache)?,
         };
-        self.sync_with(project, scope, |asset| {
-            load(asset, &cache.join(category(asset)?.directory()))
+        self.sync_with(project, scope, |asset, generation| {
+            load(asset, generation, &cache.join(category(asset)?.directory()))
         })
     }
     /// Load only from real cache directories inside the granted project. Already
@@ -165,15 +99,19 @@ impl AssetStore {
             project: project.id.clone(),
             root: root.clone(),
         };
-        self.sync_with(project, scope, |asset| {
-            load(asset, &project_cache_directory(&root, category(asset)?)?)
+        self.sync_with(project, scope, |asset, generation| {
+            load(
+                asset,
+                generation,
+                &project_cache_directory(&root, category(asset)?)?,
+            )
         })
     }
     fn sync_with(
         &mut self,
         project: &Project,
         scope: CacheScope,
-        load: impl Fn(&Asset) -> crate::Result<RuntimeAssetData>,
+        load: impl Fn(&Asset, u64) -> crate::Result<RuntimeAsset>,
     ) -> Result<AssetChanges, RuntimeAssetError> {
         project.validate()?;
         let mut next = BTreeMap::new();
@@ -185,33 +123,24 @@ impl AssetStore {
             let version = match self
                 .assets
                 .get(id)
-                .filter(|old| reuse && old.matches(asset))
+                .filter(|old| reuse && matches(old, asset))
             {
                 Some(old) => Arc::clone(old),
                 None => {
-                    let data = load(asset).map_err(|source| RuntimeAssetError::Load {
-                        id: id.clone(),
-                        source,
-                    })?;
                     generation = generation
                         .checked_add(1)
                         .ok_or(RuntimeAssetError::GenerationExhausted)?;
-                    changes.loaded.push(id.clone());
-                    Arc::new(RuntimeAsset {
-                        info: RuntimeAssetInfo {
+                    let version =
+                        load(asset, generation).map_err(|source| RuntimeAssetError::Load {
                             id: id.clone(),
-                            kind: asset.kind.clone(),
-                            fingerprint: asset.sha256.clone(),
-                            generation,
-                            payload_bytes: data.payload_bytes(),
-                        },
-                        usage: usage(asset),
-                        data,
-                    })
+                            source,
+                        })?;
+                    changes.loaded.push(id.clone());
+                    Arc::new(version)
                 }
             };
             bytes = bytes
-                .checked_add(version.info.payload_bytes)
+                .checked_add(version.info().payload_bytes)
                 .filter(|&bytes| bytes <= self.budget)
                 .ok_or(RuntimeAssetError::Budget(self.budget))?;
             next.insert(id.clone(), version);
@@ -247,23 +176,23 @@ fn usage(asset: &Asset) -> Option<TextureUsage> {
         None => TextureUsage::Color,
     })
 }
-fn load(asset: &Asset, cache: &Path) -> crate::Result<RuntimeAssetData> {
+fn matches(version: &RuntimeAsset, asset: &Asset) -> bool {
+    version.info().kind == asset.kind
+        && version.info().fingerprint == asset.sha256
+        && version.usage() == usage(asset)
+}
+fn load(asset: &Asset, generation: u64, cache: &Path) -> crate::Result<RuntimeAsset> {
     match asset.kind.as_str() {
-        "model" => load_model(cache, &asset.sha256).map(RuntimeAssetData::Model),
-        "audio" => {
-            load_audio(cache, &asset.sha256).map(|audio| RuntimeAssetData::Audio(Arc::new(audio)))
-        }
+        "model" => RuntimeAsset::load_model(&asset.id, generation, cache, &asset.sha256),
         "texture" => {
-            let texture = load_texture(cache, &asset.sha256)?;
-            if Some(texture.metadata.usage) != usage(asset) {
-                return Err(crate::invalid(
-                    "texture settings do not match the cooked payload",
-                ));
-            }
-            Ok(RuntimeAssetData::Texture(texture))
+            RuntimeAsset::load_texture(&asset.id, generation, cache, &asset.sha256, usage(asset))
         }
-        kind => Err(AssetError::Unsupported(format!(
-            "runtime asset kind {kind}"
-        ))),
+        "audio" => RuntimeAsset::load_audio(&asset.id, generation, cache, &asset.sha256),
+        kind => {
+            return Err(AssetError::Unsupported(format!(
+                "runtime asset kind {kind}"
+            )));
+        }
     }
+    .map_err(Into::into)
 }

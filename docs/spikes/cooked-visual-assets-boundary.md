@@ -108,3 +108,33 @@ Local logs: `/tmp/incant-visual-assets-feature-tests.log`,
 These are scoped desktop reader and dependency checks. They do not claim a fresh
 shipping renderer executable, live mobile/device performance, native spatial
 rendering, legacy Play migration, visual acceptance or the pixel contract complete.
+
+## Sealed retained versions
+
+The following extraction moves `RuntimeAsset`, `RuntimeAssetData` and
+`RuntimeAssetInfo` under the same optional runtime visual feature. The authoring
+AssetStore still owns project validation, cache grants, reload policy, staged
+publication, generation assignment and payload budgets. It uses reexports of the
+shared versions. `RuntimeAsset` fields remain private; constructors load bounded
+cooked data and return shared-only access, so a caller cannot install a mutable
+hand-built model under an accepted renderer cache identity. The public consumed
+Model/Texture types themselves remain mutable as previously documented.
+
+The shared binary `VisualAssetRef` descriptor maps StableId, model/texture kind
+and a 32-byte recipe fingerprint at startup. `load_visual` converts its label/key
+once and chooses the matching cooked reader. This fingerprint is not a complete
+file digest or authenticated export claim. Texture usage can additionally be
+checked by the authoring constructor. Metadata labels are bounded to 256 bytes;
+normal authored ULIDs and native 128-bit hex labels fit. The store's generation,
+reuse and failed-publication behavior is unchanged.
+
+The same scoped release suite passes **41 tests** and Clippy with warnings denied.
+An additional actual-cook regression removes glTF/buffer sources, loads through
+the binary descriptor, rejects the wrong kind, stale key and corrupt replacement,
+and proves the retained accepted version stays usable. Existing store tests cover
+publication, generation, source-free reuse and budget rejection. Test log SHA256:
+`b48eb258b1efe87cba5a19d34b305e64ed65ed946c58d3b6a2144ab0433dc113`.
+Only a dev dependency edge from incant_assets to the existing incant_types package
+is added; no package resolution changes. Independent read-only review found no
+blocking issue. This does not yet remove the renderer's authoring dependencies or
+implement a native render loop.

@@ -70,6 +70,11 @@ within its documented workload.
 
 ## Active work
 
+- Cooked visual readers and sealed retained asset versions are extracted below
+  authoring. Native binary binding descriptors load the same checked versions;
+  the canonical renderer/authoring-adapter split and spatial host are in progress.
+  See [reader boundary](docs/spikes/cooked-visual-assets-boundary.md).
+
 - Existing cooked model/KTX readers and consumed geometry/material/texture values
   now live behind the optional `incant_assets_runtime/visual` feature; authoring
   keeps importing, cooking, writing and project asset synchronization with
