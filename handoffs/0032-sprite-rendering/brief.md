@@ -1,3 +1,42 @@
+## Corrected-renderer follow-up — final plan revision 6
+
+Your first engine review is integrated and preserved. Continue the same Opus 5.5
+Max session for a focused follow-up; do not restart art or the Inspector. Read
+PLAN.md and docs/spikes/performance-plan-v6-review.md: the final update is in this
+checkout, with hosted device tests and revised prerequisites. It does not imply
+the runtime migration or any device gate is complete in this frozen build.
+
+Astra reproduced your duplicated-texel defect before the change. The correction
+in source c2c7758 uses region-local texel coordinates and textureLoad for nearest
+sampling. Within a 1/1024-texel band, ties choose the side of increasing screen
+coordinate on the dominant derivative axis (X wins equal slopes). This avoids
+cancelling derivatives at oblique angles. Linear sampling keeps its previous
+path. Read the shader and docs/spikes/sprite-rendering.md for the exact rule.
+All 325 Rust tests, Clippy, 53 GPU checks and 10 tool tests pass. The new regression
+covers eight orientations, a mirrored parent, scales 1/2/3 and 64/80-row sheets;
+it compares each texel and requires full resized-sheet frames to match exactly.
+
+The new immutable artifacts/tools/incant_headless and binary.json identify this
+corrected build. Your original is preserved as artifacts/tools/pre-ties-incant_headless
+and pre-ties-binary.json. Verify SHA before/after calls. Keep all first-round
+art/evidence/results; use distinct follow-up output paths and result sections.
+
+Re-run the real-engine helper and independent analysis, check the odd grid-pivot
+rulers under flips/mirrors/quarter turns, resized-sheet invariance, aligned
+placements, nine-slice and fractional/rolled views. Update only the documented
+nearest tie expectation where needed, never hide unrelated differences. Add
+near-boundary cases if the new rule exposes another issue. Verify unchanged
+linear and tone behavior, repeated source-free runs, and inspect real pixels.
+Return scoped acceptance or concrete failures with retained before/after evidence.
+
+Your undersized-reimport diagnostics request remains with Astra. Keep the neutral
+curve and linear-light blending for this follow-up; an authored exact display
+option can be per-camera when implemented. Optional sprite-grid snapping is
+separate work. These are recorded recommendations, not questions that should
+block this review. The pixel-camera near-tie follower defect is separate and is
+not claimed fixed. Sprite Inspector/native review still follows 0033. No Cargo,
+Rust/shader edits, account changes, merging or phase approval in this worktree.
+
 # Sprite presentation and real rendered review
 
 Status: engine review ready; use the supplied tested frozen engine and schemas. Read CLAUDE.md and docs/spikes/sprite-rendering.md.
