@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- The first runtime boundary extraction moves shared component values into
+  `incant_types`, retaining incant_doc re-exports and identical generated schemas
+  and SDK. Workspace Clippy, 318 Rust tests, 41 GPU checks, 12 tool tests and
+  WASM/iOS core compilation pass. A resolved Cargo graph guard rejects authoring
+  dependencies in this package. It does not certify the still-unimplemented
+  incant_runtime or remove the legacy per-tick document path; cooked scenes and
+  a real native world are next. See [component boundary evidence](docs/spikes/runtime-component-types.md).
+
 - The [final plan update review](docs/spikes/performance-plan-v6-review.md)
   adopts hosted AWS Device Farm phones, removes name/package reservations and
   moves distribution signing/store accounts to Phase 5 uploads. Phase 0's

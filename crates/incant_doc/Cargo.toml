@@ -10,6 +10,7 @@ default = ["crdt"]
 crdt = ["dep:loro"]
 
 [dependencies]
+incant_types.workspace = true
 incant_nav.workspace = true
 serde = { workspace = true }
 serde_json = { workspace = true }
