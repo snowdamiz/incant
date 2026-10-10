@@ -57,8 +57,9 @@ within its documented workload.
   Initialization/tick budgets now use the executing thread's CPU time, excluding
   host pauses and other threads. Real waiting/CPU-exhaustion tests, VM interrupts,
   zero-budget initialization and fail-closed clock handling cover the change.
-  Full workspace and public checks are in progress; cross-platform clock tests
-  and integration of the final steering correction remain pending. See
+  All 298 Rust, 40 GPU, 315 UI and five tool tests pass, as do Clippy, strict
+  contracts, native packaging and both public steering/off-mesh saved workflows.
+  Cross-platform clock tests and final steering integration remain pending. See
   [CPU budget details](docs/spikes/script-cpu-budget.md).
 
 - Script failures now distinguish bounded initialization/tick JavaScript messages,

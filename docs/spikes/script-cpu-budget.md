@@ -38,7 +38,14 @@ by other threads is excluded, so any future parallel query implementation needs
 its own bounded work accounting. No new host capability, script sleep function,
 filesystem access or process control is exposed.
 
-Validation and exact source/binary records will be recorded after the workspace
-and public workflows finish. Cross-platform clock behavior still requires the
-hosted Windows/Linux workspace tests; compilation of the separate core platform
-probe does not establish a scripting runtime gate. No phase gate is approved.
+At source `a9a1814`, 298 Rust tests, all 40 GPU tests, 315 UI tests and five tool
+tests pass locally. Full workspace Clippy, generated contracts, strict TypeScript,
+unsigned native packaging and both public steering/off-mesh save-reopen workflows
+pass. The latter used temporary sleep prevention, so they are integration checks;
+the timed callback tests establish the CPU-accounting behavior. Exact binary and
+source records are in the [evidence file](evidence/script-cpu-budget-2026-10-10.json).
+
+Cross-platform clock behavior still requires the hosted Windows/Linux workspace
+tests. Compilation of the separate core platform probe does not establish a
+scripting runtime gate. The final steering correction and dependency merges are
+still pending. No phase gate is approved.

@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-10",
+  "source_commit": "a9a1814d0db49656a439fc81b3a02467238a4a27",
+  "scope": "thread CPU execution budgets and fail-closed clock diagnostics",
+  "local": {
+    "rust_tests": 298,
+    "gpu_tests": 40,
+    "ui_tests": 315,
+    "python_tools": 5,
+    "clippy_all_targets": true,
+    "fmt": true,
+    "generated_contracts_strict_ts": true,
+    "unsigned_native_package": true
+  },
+  "headless_binary": {
+    "source_commit": "a9a1814d0db49656a439fc81b3a02467238a4a27",
+    "sha256": "e67b35b50e513d4e22acdce2d7f1687650874823bbaba9492199c22ac337ccbd"
+  },
+  "native_sha256": "d22a81d33e648fb443624ece527c419fb6ab9206502e8886a8f86c67595002c1",
+  "public_steering": {
+    "passed": true,
+    "agents": 100,
+    "strict_typescript": true,
+    "shared_velocity_commands": true,
+    "repeat_and_save_resume_exact": true,
+    "state": {
+      "minimum": 0.6157673834154757,
+      "neighbors": 17,
+      "remaining": 6.208589198944098e-11,
+      "tick": 600
+    },
+    "author_files_unchanged": {
+      "game.incant.json": "8d76dffd676e221ca851abbbdbd44b4fa640c7980701f20d6a8bae31768f51f5",
+      "game.incant.journal.jsonl": "83164361284e5e49b2f678bfc018ae8519dc04ef39e1f489df2983a510abfd67"
+    },
+    "binary_sha256": "e67b35b50e513d4e22acdce2d7f1687650874823bbaba9492199c22ac337ccbd",
+    "rendering_or_physics_collision_gate": false
+  },
+  "public_links": {
+    "passed": true,
+    "strict_typescript": true,
+    "public_commands": true,
+    "durable_undo_redo": true,
+    "invalid_cost_rollback": true,
+    "explicit_link_traversal": true,
+    "one_way_reverse_null": true,
+    "save_in_flight_exact": true,
+    "repeat_exact": true,
+    "mid_link_progress": 0.30555555555555564,
+    "author_files_unchanged": {
+      "game.incant.json": "400f343c6c4223fec508269fe0ba7e7733b587e1201affeb8441deda91208552",
+      "game.incant.journal.jsonl": "28522b33aa33b554bd93372748876383ed20a3c2e995da444ccaa0650b7e4271"
+    },
+    "binary_sha256": "e67b35b50e513d4e22acdce2d7f1687650874823bbaba9492199c22ac337ccbd",
+    "physics_or_visual_gate": false
+  },
+  "timing_behavior": {
+    "host_callback_wait_ms": 120,
+    "other_thread_cpu_ms": 100,
+    "default_script_cpu_budget_ms": 50,
+    "wait_result": "successful state/log/clock publication",
+    "native_callback_cpu_ms": 80,
+    "native_cpu_result": "typed budget failure with commands/state/logs/clock rolled back",
+    "actual_host_sleep_test_claimed": false
+  },
+  "runtime_capabilities_added": false,
+  "ci": "pending",
+  "open": [
+    "hosted Windows/Linux clock behavior tests",
+    "integration of final steering correction and dependency merges",
+    "native solver calls remain nonpreemptible and input bounded",
+    "no WebAssembly scripting runtime gate",
+    "physical-device and phase gates remain open"
+  ]
+}
