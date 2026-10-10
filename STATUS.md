@@ -53,6 +53,17 @@ within its documented workload.
 
 ## Active work
 
+- XLIFF translator exchange exports typed tables and imports matching targets
+  through one reversible shared-command transaction. Unknown/stale sources,
+  malformed XML and incompatible arguments reject the full batch. No-op imports
+  preserve history; empty targets and absent targets retain distinct meanings.
+  The public two-table/strict-TypeScript workflow, exact durable Undo/Redo and
+  rollback checks pass. Local verification passes 254 Rust tests, 40 GPU checks,
+  315 UI tests/build, five tool tests, Clippy, contracts and native packaging;
+  macOS executes the XLIFF smoke check, while WASM/iOS compile. Hosted CI and the
+  graphical localization panel remain open. See
+  [translator exchange](docs/spikes/localization-exchange.md).
+
 - Typed string tables, a bounded ICU MessageFormat subset, ICU4X plural/number/date
   formatting, fallback, pseudo-localization, missing-string reports and saved
   runtime locale switching are implemented. Shared commands preserve provenance,
@@ -64,7 +75,7 @@ within its documented workload.
   another login or Keychain prompt. Windows CI passed Rust/GPU/native checks but
   exposed a Python cp1252 decoding error in the public locale probe. Explicit
   UTF-8 fixes it locally, including a simulated cp1252 subprocess default; updated
-  hosted checks are pending. XLIFF, shaping/bidi/IME,
+  hosted checks are pending. Shaping/bidi/IME,
   localization UI and Core Sample visual/device gates remain open.
   See [localization runtime](docs/spikes/localization-runtime.md).
 

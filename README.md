@@ -157,6 +157,10 @@ and survive game saves. `api.locale()`, `api.formatNumber`, `api.formatDate` and
 fails unless `--allow-fallback` is explicit. See the
 [format and limits](docs/spikes/localization-runtime.md), or run
 `python3 tools/probes/game-localization.py artifacts/localization-example`.
+For translators, `incant localization-export PROJECT TABLE_ID ja OUTPUT.xlf`
+publishes a new XLIFF file. `incant localization-import PROJECT TRANSLATED.xlf`
+validates source identity and imports all targets in one reversible transaction.
+See the [exchange profile and limits](docs/spikes/localization-exchange.md).
 Text shaping, localization UI and rendered RTL/CJK acceptance remain open.
 
 `play --assertions FILE` checks runtime, behavior and input state at absolute game

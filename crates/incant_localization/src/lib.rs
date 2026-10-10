@@ -1,7 +1,10 @@
 //! Data-only string tables and bounded ICU MessageFormat-subset evaluation.
 //! No platform, filesystem, network, rendering or JavaScript dependency.
 mod catalog;
+mod contracts;
+mod exchange;
 mod format;
+pub use exchange::{MAX_XLIFF_BYTES, TranslationUpdate, export_xliff, translations_from_xliff};
 mod message;
 mod types;
 pub use catalog::Catalog;

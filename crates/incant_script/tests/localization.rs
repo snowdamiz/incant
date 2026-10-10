@@ -46,7 +46,8 @@ fn switching_locale_is_tick_scoped_and_saved_without_changing_authoring() {
     assert_eq!(original.host.state()["dates"][0], "5/8/24");
     assert_eq!(p.canonical_text().unwrap(), before);
     let mut bad: Value = serde_json::from_str(&save).unwrap();
-    bad["project"]["string_tables"][&id]["messages"]["coins"]["en"] = json!("Altered resource");
+    // Keep the argument contract valid so this tests resource identity, not pattern rejection.
+    bad["project"]["string_tables"][&id]["messages"]["coins"]["en"] = json!("Altered {n}");
     assert!(matches!(
         PlaySession::from_save(&p, &source, &bad.to_string()),
         Err(SaveError::Manifest)

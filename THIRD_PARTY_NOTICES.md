@@ -13,6 +13,10 @@ available in their versioned crates.io packages or `cargo vendor --locked`.
 Incant's bounded MessageFormat parser and pseudo-localization are original code;
 they are not a complete ICU MessageFormat implementation.
 
+Translator exchange uses unmodified [quick-xml 0.42.0](https://crates.io/crates/quick-xml/0.42.0),
+copyright (c) 2016 Johann Tuffe, under the [MIT license](licenses/quick-xml-MIT.txt).
+The pinned source and checksum are recorded in Cargo.lock.
+
 ## Audio dependencies
 
 Incant uses unmodified [Kira 0.12.5](https://crates.io/crates/kira/0.12.5),

@@ -1,10 +1,12 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
 mod journal;
+mod localization;
 use incant_doc::{
     Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene,
     new_id,
 };
 pub use journal::Journal;
+pub use localization::{PreparedTranslations, TranslationImportResult};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
