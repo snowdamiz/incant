@@ -91,6 +91,25 @@ fn portal_search_avoids_the_rendered_room_tile_boundary_detour() {
             );
         }
     }
+    // Probe short segments throughout the room above and below its quantized
+    // surface. Unwalkable positions may return None, but valid finite queries
+    // must not throw at triangulation boundaries or shared tile corners.
+    for ix in 0..71 {
+        for iz in 0..41 {
+            for y in [0.05, 0.12, 0.5] {
+                for [dx, dz] in [[0.01, 0.], [-0.01, 0.], [0., 0.01], [0., -0.01]] {
+                    let mut short = query.clone();
+                    let x = -7. + ix as f32 * 0.2;
+                    let z = -4. + iz as f32 * 0.2;
+                    short.path.start = [x, y, z];
+                    short.path.end = [x + dx, y, z + dz];
+                    short.path.snap_distance = 0.6;
+                    let result = engine.navigator()(short.clone());
+                    assert!(result.is_ok(), "short room query {short:?}: {result:?}");
+                }
+            }
+        }
+    }
     let path = engine.navigator()(query).unwrap().unwrap();
     let length = path
         .points

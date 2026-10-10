@@ -6,7 +6,7 @@ use std::{cmp::Ordering, collections::BinaryHeap};
 type Point = [f32; 3];
 #[derive(Clone, Copy)]
 struct Visit {
-    at: f32,
+    at: f64,
     poly: usize,
 }
 impl PartialEq for Visit {
@@ -26,19 +26,20 @@ impl Ord for Visit {
             .then_with(|| b.poly.cmp(&self.poly))
     }
 }
-fn cross(a: Point, b: Point, c: Point) -> f32 {
-    (b[0] - a[0]) * (c[2] - a[2]) - (b[2] - a[2]) * (c[0] - a[0])
+fn cross(a: Point, b: Point, c: Point) -> f64 {
+    (f64::from(b[0]) - f64::from(a[0])) * (f64::from(c[2]) - f64::from(a[2]))
+        - (f64::from(b[2]) - f64::from(a[2])) * (f64::from(c[0]) - f64::from(a[0]))
 }
-fn interval(poly: &NavigationPolygon, a: Point, b: Point) -> Option<(f32, f32)> {
+fn interval(poly: &NavigationPolygon, a: Point, b: Point) -> Option<(f64, f64)> {
     let points = &poly.vertices;
     let area = (1..points.len() - 1)
         .map(|i| cross(points[0], points[i], points[i + 1]))
-        .sum::<f32>();
+        .sum::<f64>();
     if area.abs() < 1e-10 {
         return None;
     }
     let sign = area.signum();
-    let (mut low, mut high) = (0_f32, 1_f32);
+    let (mut low, mut high) = (0_f64, 1_f64);
     for i in 0..points.len() {
         let p = points[i];
         let q = points[(i + 1) % points.len()];
@@ -71,7 +72,7 @@ impl NavigationMesh {
         budget: &mut u32,
     ) -> Option<Walk> {
         let n = self.polygons.len();
-        let mut best = vec![f32::INFINITY; n];
+        let mut best = vec![f64::INFINITY; n];
         let mut parent = vec![None; n];
         let mut queue = BinaryHeap::new();
         best[start] = 0.;
