@@ -9,6 +9,22 @@ pub type InputActions = BTreeMap<String, InputAction>;
 pub const MAX_ACTIONS: usize = 64;
 pub const MAX_BINDINGS: usize = 16;
 
+/// Immutable runtime bindings. Validation runs at construction/rebind, never
+/// during fixed ticks. Keeping the owned map private prevents later mutation.
+#[derive(Debug, Clone, Default)]
+pub struct ValidatedActions(std::sync::Arc<InputActions>);
+
+impl ValidatedActions {
+    pub fn new(actions: InputActions) -> Result<Self, ActionError> {
+        validate_actions(&actions)?;
+        Ok(Self(std::sync::Arc::new(actions)))
+    }
+
+    pub fn definitions(&self) -> &InputActions {
+        &self.0
+    }
+}
+
 #[derive(Debug, Error, PartialEq)]
 pub enum ActionError {
     #[error("input actions require at most 64 names of 1–64 ASCII letters, digits or _.:-")]

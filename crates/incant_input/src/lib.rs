@@ -3,7 +3,7 @@
 mod actions;
 pub use actions::{
     ActionError, ActionGesture, ActionKind, ActionState, InputAction, InputActions, InputBinding,
-    Stick, validate_actions,
+    Stick, ValidatedActions, validate_actions,
 };
 mod gestures;
 mod recording;
@@ -60,6 +60,11 @@ impl InputRuntime {
         Ok(())
     }
 
+    /// Seed immutable, already validated bindings without changing time or physical edges.
+    pub fn map_validated(&mut self, actions: &ValidatedActions) {
+        self.frame.actions = actions::baseline(actions.definitions(), &self.frame);
+    }
+
     /// An invalid packet changes no state, time, edges or gesture recognition.
     pub fn advance(&mut self, events: &[InputEvent], dt: f64) -> Result<&InputFrame, InputError> {
         self.advance_mapped(events, dt, &InputActions::new())
@@ -74,6 +79,26 @@ impl InputRuntime {
         actions: &InputActions,
     ) -> Result<&InputFrame, InputError> {
         validate_actions(actions)?;
+        self.advance_inner(events, dt, actions)
+    }
+
+    /// Native fixed-tick path. Bindings were checked at the session boundary;
+    /// only the bounded event packet is validated transactionally on each tick.
+    pub fn advance_validated(
+        &mut self,
+        events: &[InputEvent],
+        dt: f64,
+        actions: &ValidatedActions,
+    ) -> Result<&InputFrame, InputError> {
+        self.advance_inner(events, dt, actions.definitions())
+    }
+
+    fn advance_inner(
+        &mut self,
+        events: &[InputEvent],
+        dt: f64,
+        actions: &InputActions,
+    ) -> Result<&InputFrame, InputError> {
         if !dt.is_finite() || !(1. / 240. ..=1.).contains(&dt) || self.time + dt <= self.time {
             return Err(InputError::Step);
         }

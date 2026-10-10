@@ -31,28 +31,34 @@ jobs:
       - run: npm run test:tools
       # Check the real binary-scene/native-world slice and its shared values.
       # The legacy PlaySession still requires migration and is not certified here.
-      - run: python3 tools/check_runtime_dependencies.py incant_types incant_runtime
+      - run: python3 tools/check_runtime_dependencies.py incant_types incant_runtime incant_script incant_script_player
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - run: cargo check -p incant_audio --features device --locked
-      - run: cargo test --workspace --release --locked
+      - run: cargo test --workspace --release --locked --timings
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.
       # Keep the same workspace feature graph as the preceding test run; scoped
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
-        run: cargo test --workspace --release --locked -- --ignored --test-threads=1 --nocapture
+        run: cargo test --workspace --release --locked --timings -- --ignored --test-threads=1 --nocapture
       # Keep workspace feature unification from the release tests while building
       # only these tools; execute the resulting binaries directly below.
-      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --release --features incant_editor/custom-protocol --locked
+      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --release --features incant_editor/custom-protocol --locked --timings
       - name: Validate cooked KTX2 with the Khronos reference tool
         run: python3 tools/validate_ktx.py --probe-binary target/release/examples/texture_probe
       - run: target/release/incant_headless schema schemas
+      - name: Verify native binary world saves across process restarts
+        run: python3 tools/probes/native-saves.py artifacts/native-world-saves
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python3 tools/shipping.py artifacts/shipping-runtime
+      - name: Verify embedded scripts with no runtime source compiler
+        run: python3 tools/probes/cooked-script.py artifacts/cooked-native-script
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with: {name: cooked-native-script-macOS, path: artifacts/cooked-native-script, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with: {name: runtime-player-macOS, path: artifacts/shipping-runtime/player.zip, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -87,3 +93,11 @@ jobs:
       - run: node_modules/.bin/tsc -p sdk/ts/tsconfig.json
       - run: target/release/incant_headless eval-check
       - run: target/release/examples/collaboration_spike
+      - name: Preserve Cargo unit timing diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cargo-timings-macOS
+          path: target/cargo-timings/*.html
+          if-no-files-found: warn
+          retention-days: 7

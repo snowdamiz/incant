@@ -40,10 +40,12 @@ module. Miri was not run; the installed stable toolchain has no Miri component.
 world access cannot overlap the exclusive borrow in safe Rust. Structural
 commands can be queued externally during visits and applied afterward. The next
 scope reacquires current tables/rows; it caches no pointer across reallocation or
-component moves. A caller using unsafe foreign pointers must revoke every foreign
-view before Rust component reads/restoration, the current chunk callback returns,
-or the outer scope exits. This remains a requirement for the future synchronous
-JS loan adapter; the native API does not implement or certify that adapter.
+component moves. A trusted adapter can retain derived raw pointers beyond slice
+visits while exclusively holding the outer handle. It must make no further visits
+while foreign views exist, and revoke all views before Rust component
+reads/restoration or outer-scope exit. The raw-pointer extension requires its own
+safety proof; the native API does not implement or certify the adapter. See the
+subsequent [QuickJS loan audit](native-script-columns.md).
 
 ## Mutation and failure semantics
 
@@ -62,8 +64,9 @@ is conservatively marked changed exactly once, even for read-only/restored
 visits. All derived hierarchy transforms are then refreshed once, including after
 an error/unwind, so safe observations cannot see stale caches. Empty/unused
 scopes do neither. The simulation tick is unchanged. This cleanup is not a
-transaction commit or numeric validation. A future script adapter must detach
-views, validate values and restore rejected writes inside the exclusive scope.
+transaction commit or numeric validation. A script adapter must detach views and
+restore execution-failure writes inside the exclusive scope; it must not restore
+per-tick authoring validation contrary to PLAN.md section 2.6.
 
 The native overhead is one flag per table, table scanning, O(K) changed-tick
 publication for K visited rows, and one O(N) hierarchy refresh. It does not copy

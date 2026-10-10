@@ -5,18 +5,34 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["compiler"]
+# Authoring/cook and the development runner only. Native players disable this.
+compiler = []
+
 [dependencies]
-rquickjs = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
-thiserror = { workspace = true }
-incant_doc = { workspace = true }
-incant_cmd = { workspace = true }
-incant_core = { workspace = true }
+incant_runtime.workspace = true
+incant_types.workspace = true
 incant_input.workspace = true
-incant_localization.workspace = true
+rquickjs.workspace = true
+thiserror.workspace = true
+ulid.workspace = true
 sha2.workspace = true
-schemars.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+
+[build-dependencies]
+sha2.workspace = true
+
+[[example]]
+name = "native_bulk"
+required-features = ["compiler"]
 
 [target.'cfg(any(unix, windows))'.dependencies]
 cpu-time.workspace = true
+
+# This pinned QuickJS release has no bundled iOS/Android bindings. Generate
+# them from the actual SDK/NDK headers at build time.
+[target.'cfg(any(target_os = "ios", target_os = "android"))'.dependencies]
+rquickjs = { workspace = true, features = ["bindgen"] }

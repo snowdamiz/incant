@@ -1,0 +1,66 @@
+use crate::{EmbeddedScript, ScriptError, ScriptMetadata, artifact};
+use rquickjs::{Ctx, Function, Module};
+use std::sync::Arc;
+
+/// Private immutable compiler-produced bytecode, retained through VM destruction.
+/// No safe loader accepts arbitrary project, cache, mod or network bytes.
+#[derive(Clone)]
+pub struct CompiledScript {
+    pub(crate) bytes: Arc<[u8]>,
+    pub(crate) hardening: Arc<[u8]>,
+    pub(crate) metadata: ScriptMetadata,
+    pub(crate) allow_source: bool,
+}
+
+impl CompiledScript {
+    /// Cross the native build's executable-code trust boundary.
+    ///
+    /// # Safety
+    /// The caller must establish that both blobs were freshly produced by the
+    /// trusted Incant cook for this exact engine/build/target and remain its
+    /// unmodified output. This is intended only for cook-generated Rust included
+    /// in a trusted executable build. The hardening blob must be the engine's
+    /// fixed hardening module, never project code. A matching hash/metadata does
+    /// **not** establish these facts. Never call this on supplied executable
+    /// caches, project/mod/network bytes, or generated Rust from such inputs.
+    ///
+    /// ```compile_fail
+    /// fn arbitrary_bytes(artifact: incant_script::EmbeddedScript) {
+    ///     incant_script::CompiledScript::from_embedded(artifact);
+    /// }
+    /// ```
+    pub unsafe fn from_embedded(artifact: EmbeddedScript) -> Result<Self, ScriptError> {
+        artifact::validate(&artifact.metadata, artifact.bytecode, artifact.hardening)?;
+        Ok(Self {
+            bytes: artifact.bytecode.into(),
+            hardening: artifact.hardening.into(),
+            metadata: artifact.metadata,
+            allow_source: false,
+        })
+    }
+
+    pub fn byte_len(&self) -> usize {
+        self.bytes.len() + self.hardening.len()
+    }
+
+    pub fn metadata(&self) -> &ScriptMetadata {
+        &self.metadata
+    }
+
+    pub(crate) fn harden(&self, ctx: &Ctx<'_>) -> rquickjs::Result<()> {
+        // SAFETY: compiler or the documented native-build trust crossing above
+        // is the sole source. The fixed engine module precedes all guest code.
+        let module = unsafe { Module::load(ctx.clone(), &self.hardening) }?;
+        let (_, promise) = module.eval()?;
+        promise.result::<()>().ok_or(rquickjs::Error::Unknown)?
+    }
+
+    pub(crate) fn instantiate<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Function<'js>> {
+        // SAFETY: only trusted compiler-produced bytes enter this allocation.
+        // The host retains both Arc allocations until after VM destruction.
+        let module = unsafe { Module::load(ctx.clone(), &self.bytes) }?;
+        let (module, promise) = module.eval()?;
+        promise.result::<()>().ok_or(rquickjs::Error::Unknown)??;
+        module.get("update")
+    }
+}

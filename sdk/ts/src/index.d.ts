@@ -1,4 +1,5 @@
 /** Sandbox API. Scripts cannot import host modules or access filesystem/network. */
+export type { NativeBehavior, NativeContext, NativeCommands, NativeChunk, NativeId, NativeTransform, NativeVector3, NativeInput } from './native';
 export type Id = string;
 export type Json = null | boolean | number | string | Json[] | { [key: string]: Json };
 export interface Entity {
