@@ -669,3 +669,15 @@ and distinguishes the remaining director decisions.
 
 `python3 tools/check_gate.py` reports remaining evidence. No source-code scaffold,
 mock response, simulator build or unsigned package counts as a shipped product.
+
+- Native cooked-script startup: the canonical host now accepts only trusted
+  build-produced embedded bytecode through an explicit unsafe boundary, with
+  compiler-free normal player dependencies, precompiled hardening and disabled
+  dynamic source evaluation. The cook preserves bounded symbol/map metadata and
+  rejects cross-target exports. A fresh shipping player runs the structural TS
+  example after source/build-tree deletion. All 382 release workspace tests,
+  workspace and compiler-disabled Clippy, and iOS/Android compiler-disabled host
+  compilation passed locally; hosted results remain pending. See
+  [evidence](docs/spikes/cooked-native-scripts.md). Full gameplay migration,
+  authenticated file exports, cross-target embedding, automatic source-map
+  diagnostics, MSVC symbol audit and device/performance gates remain open.

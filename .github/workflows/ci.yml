@@ -31,7 +31,7 @@ jobs:
       - run: npm run test:tools
       # Check the real binary-scene/native-world slice and its shared values.
       # The legacy PlaySession still requires migration and is not certified here.
-      - run: python3 tools/check_runtime_dependencies.py incant_types incant_runtime incant_script
+      - run: python3 tools/check_runtime_dependencies.py incant_types incant_runtime incant_script incant_script_player
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui
@@ -53,6 +53,10 @@ jobs:
       - run: target/release/incant_headless schema schemas
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python3 tools/shipping.py artifacts/shipping-runtime
+      - name: Verify embedded scripts with no runtime source compiler
+        run: python3 tools/probes/cooked-script.py artifacts/cooked-native-script
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with: {name: cooked-native-script-macOS, path: artifacts/cooked-native-script, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with: {name: runtime-player-macOS, path: artifacts/shipping-runtime/player.zip, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
