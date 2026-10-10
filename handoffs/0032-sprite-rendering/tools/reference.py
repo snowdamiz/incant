@@ -13,7 +13,8 @@ frame so real engine frames can be compared pixel by pixel:
     with the top-left fill rule, affine attributes;
   * sampling: bilinear (clamp to edge) level zero on normalized UVs clamped to the
     region's outer texel centres; nearest per NEAREST_RULE: the pre-ties hardware
-    filter, the fixed 1/1024-texel tie band, or the derivative-scaled band;
+    filter, the fixed 1/1024-texel tie band, the derivative-scaled band, or that
+    band on 512- or 64-texel spans with a flat integer base;
   * painter order: (layer, order, entity ID); depth test LessEqual against opaque
     meshes, no sprite depth writes; premultiplied "over" blending stored as f16;
   * display: unpremultiply, Incant tone curve (identity below a 0.8 peak), mix
@@ -41,8 +42,17 @@ STRAIGHT_ALPHA_FILTERING = False
 #                dominant derivative axis (X wins equal slopes), integer fetch.
 #   "pixel-band" magnification correction (f9aa1da): the same rule with the band
 #                scaled by the signed derivative, i.e. 1/1024 screen pixel.
-NEAREST_RULE = "pixel-band"
+#   "span-band"  wide-region correction (0494b40): the pixel-band rule on bounded
+#                spans. Each quad's source extent is cut every 512 texels from its
+#                first vertex; texels are interpolated span-locally and a flat
+#                integer base is added after the bias, so exact ties no longer
+#                depend on the region width.
+#   "span64-band" short-span correction (1f72a99): the same geometry and shader
+#                with spans of at most 64 source texels.
+NEAREST_RULE = "span64-band"
 TIE_BAND = 1.0 / 1024
+SPAN_TEXELS = 512.0
+SPAN_RULES = {"span-band": 512.0, "span64-band": 64.0}  # rule -> source texels per span
 # Clipping a primitive at the target edge creates new, separately snapped vertices;
 # allow two 1/256 px snap steps of attribute-plane movement for such triangles only.
 CLIP_SLACK_PX = 2.0 / 256
@@ -259,6 +269,50 @@ def tessellate(sprite, tw, th):
     return verts
 
 
+def span_cuts(start, end, span=SPAN_TEXELS):
+    """(fraction, source texel) cut points from start to end, every `span` texels."""
+    distance = abs(end - start)
+    count = max(math.ceil(distance / span), 1)
+    sign = -1.0 if end - start < 0 else 1.0  # f64::signum: +0.0 gives 1
+    out = []
+    for i in range(count + 1):
+        if i == count:
+            out.append((1.0, end))
+        else:
+            part = i * span
+            out.append((part / max(distance, 1.0), start + sign * part))
+    return out
+
+
+def nearest_spans(verts, region, tw, th, span=SPAN_TEXELS):
+    """Candidate span tessellation (0494b40 with 512, 1f72a99 with 64), from its
+    published description and source.
+
+    Each tessellated quad (first vertex low, third high) is cut on both source axes
+    every `span` texels from the low vertex's integer source coordinate. Returns
+    (local x, local y, span texel x, span texel y, base x, base y) per vertex; the
+    base is flat per sub-quad and span texels lie in [0, span].
+    """
+    size = (tw, th)
+    out = []
+    for q in range(0, len(verts), 6):
+        low, high = verts[q], verts[q + 2]
+
+        def source(vertex, axis):
+            value = vertex[2 + axis] * size[axis] - region[axis]
+            return math.copysign(math.floor(abs(value) + 0.5), value)  # f64::round: half away from zero
+        xs = span_cuts(source(low, 0), source(high, 0), span)
+        ys = span_cuts(source(low, 1), source(high, 1), span)
+        for pair_y in zip(ys, ys[1:]):
+            for pair_x in zip(xs, xs[1:]):
+                base = (min(pair_x[0][1], pair_x[1][1]), min(pair_y[0][1], pair_y[1][1]))
+                for a, b in ((0, 0), (1, 0), (1, 1), (0, 0), (1, 1), (0, 1)):
+                    cx, cy = pair_x[a], pair_y[b]
+                    out.append((low[0] + (high[0] - low[0]) * cx[0], low[1] + (high[1] - low[1]) * cy[0],
+                                cx[1] - base[0], cy[1] - base[1], base[0], base[1]))
+    return out
+
+
 # ------------------------------------------------------------------- camera --
 
 class View:
@@ -442,7 +496,12 @@ def plane_gradient(pts, values):
             ((v2 - v0) * (x1 - x0) - (v1 - v0) * (x2 - x0)) / det)
 
 
-def tie_band_index(t, dx, dy, size, slack_px=0.0, position_px=1.5e-4):
+def ulp32(x):
+    """Spacing of f32 values near |x| (at least that of 1)."""
+    return 2.0 ** (math.floor(math.log2(max(abs(x), 1.0))) - 23)
+
+
+def tie_band_index(t, dx, dy, size, slack_px=0.0, position_px=1.5e-4, local=None, local_ulps=0):
     """Documented corrected rule for one axis; returns (index, alternative or None).
 
     The alternative is set when f32 interpolation or an equal-slope axis choice could
@@ -450,9 +509,12 @@ def tie_band_index(t, dx, dy, size, slack_px=0.0, position_px=1.5e-4):
     `slack_px` widens that window for triangles the GPU clips at the target edge,
     whose re-derived, re-snapped vertices can move the attribute plane slightly.
     `position_px` is the f32 screen-position error assumed for this sprite.
+    For "span-band", `local` is the interpolated span texel (t minus its integer base)
+    and `local_ulps` how many of its f32 ulps to allow; axis-aligned geometry uses none,
+    so an exact tie is a prediction that the engine must meet, not a knife edge.
     """
     def pick(direction):
-        if NEAREST_RULE == "pixel-band":
+        if NEAREST_RULE in ("pixel-band", *SPAN_RULES):
             v = t + direction * TIE_BAND
         else:
             s = (direction > 0) - (direction < 0)
@@ -467,7 +529,9 @@ def tie_band_index(t, dx, dy, size, slack_px=0.0, position_px=1.5e-4):
     # derivative-scaled band shrinks with magnification, so its window scales too:
     # position error in pixels times texels per pixel, plus about 8 f32 ulps of t.
     spread_px = max(abs(dx), abs(dy))
-    if NEAREST_RULE == "pixel-band":
+    if NEAREST_RULE in SPAN_RULES:
+        tolerance = position_px * spread_px + slack_px * spread_px + local_ulps * ulp32(t if local is None else local)
+    elif NEAREST_RULE == "pixel-band":
         tolerance = position_px * spread_px + 1e-6 * abs(t) + slack_px * spread_px
     else:
         tolerance = 1.5e-4 * max(1.0, spread_px) + 4e-6 * abs(t) + slack_px * spread_px
@@ -501,16 +565,33 @@ def draw_sprite(frame, view, world, sprite, tex, name):
     def on(a, b):
         return abs(a - b) <= 1e-9 * max(1.0, abs(b))
 
+    # Sprites wholly outside the frame contribute nothing; skip them before splitting.
+    if not verts:
+        return
+    corners = [view.project([f32(c) for c in apply(world, (lx, ly, 0.0))])[:2] for lx, ly, _, _ in verts]
+    if (max(x for x, _ in corners) < -1 or min(x for x, _ in corners) > frame.w + 1
+            or max(y for _, y in corners) < -1 or min(y for _, y in corners) > frame.h + 1):
+        return
+    spans = sampling == "nearest" and NEAREST_RULE in SPAN_RULES
+    if spans:
+        verts = nearest_spans(verts, reg, tw, th, SPAN_RULES[NEAREST_RULE])
     projected = []
-    for lx, ly, u, v in verts:
+    for vertex in verts:
+        lx, ly = vertex[0], vertex[1]
         # World positions reach the GPU as f32 vertex attributes.
         sx, sy, depth = view.project([f32(c) for c in apply(world, (lx, ly, 0.0))])
-        # Region-local texels, reconstructed in f64 and stored as f32 like the engine.
-        texel = (f32(u * tw - reg[0]), f32(v * th - reg[1]))
-        projected.append(((sx, sy), (u, v, depth) + texel, (lx, ly)))
+        if spans:
+            # Span-local texels (at most 512) and a flat integer base, both f32.
+            u = v = 0.0
+            texel, base = (f32(vertex[2]), f32(vertex[3])), (vertex[4], vertex[5])
+        else:
+            # Region-local texels, reconstructed in f64 and stored as f32 like the engine.
+            u, v = vertex[2], vertex[3]
+            texel, base = (f32(u * tw - reg[0]), f32(v * th - reg[1])), (0.0, 0.0)
+        projected.append(((sx, sy), (u, v, depth) + texel, (lx, ly), base))
     R, G, B, A, D = frame.r, frame.g, frame.b, frame.a, frame.depth
     tr, tg, tb, ta = tint
-    tie_band = sampling == "nearest" and NEAREST_RULE in ("tie-band", "pixel-band")
+    tie_band = sampling == "nearest" and NEAREST_RULE in ("tie-band", "pixel-band", *SPAN_RULES)
     derivative = {}
     # Axis-aligned dyadic placements stay exact in f32. Rotated sprites or cameras
     # carry irrational matrix terms, so allow about 8 f32 ulps of the world
@@ -521,12 +602,17 @@ def draw_sprite(frame, view, world, sprite, tex, name):
         magnitude = max(abs(world[0][3]), abs(world[1][3]), abs(view.eye[0]), abs(view.eye[1]), 1.0)
         ulp = 2.0 ** (math.floor(math.log2(magnitude)) - 23)
         position_px = max(position_px, 8 * ulp * view.height / (2 * view.half_h))
+    # Span texels: rotated geometry may interpolate them a couple of ulps off;
+    # axis-aligned placements are predicted exactly.
+    local_ulps = 2 if rotated else 0
 
     def gradient(pts):
         derivative["x"] = plane_gradient(pts, [a[3] for a in current])
         derivative["y"] = plane_gradient(pts, [a[4] for a in current])
         clipped = any(not (0 <= x <= frame.w and 0 <= y <= frame.h) for x, y in pts)
-        derivative["slack"] = CLIP_SLACK_PX if clipped else 0.0
+        # An axis-aligned span keeps every clipped vertex on its texel plane, so the
+        # clip slack applies to rotated span geometry only.
+        derivative["slack"] = CLIP_SLACK_PX if clipped and (not spans or rotated) else 0.0
 
     def shade(i, attr, amb_edge, inside):
         u, v, depth, tx, ty = attr
@@ -538,8 +624,11 @@ def draw_sprite(frame, view, world, sprite, tex, name):
         if depth > D[i] + 1e-6:
             return
         if tie_band:
-            ix, altx = tie_band_index(tx, *derivative["x"], reg[2], derivative["slack"], position_px)
-            iy, alty = tie_band_index(ty, *derivative["y"], reg[3], derivative["slack"], position_px)
+            bx, by = flat_base[0]
+            ix, altx = tie_band_index(bx + tx, *derivative["x"], reg[2], derivative["slack"], position_px,
+                                      tx, local_ulps)
+            iy, alty = tie_band_index(by + ty, *derivative["y"], reg[3], derivative["slack"], position_px,
+                                      ty, local_ulps)
             texel = tex.premul[reg[1] + iy][reg[0] + ix]
             amb = any(alt is not None and tex.premul[reg[1] + (iy if a == "x" else alt)][reg[0] + (alt if a == "x" else ix)]
                       != texel for a, alt in (("x", altx), ("y", alty)))
@@ -561,6 +650,7 @@ def draw_sprite(frame, view, world, sprite, tex, name):
         frame.top_linear[i] = sampling == "linear"
         frame.owner[i] = name
 
+    flat_base = [(0.0, 0.0)]
     for t in range(0, len(projected), 3):
         tri = projected[t:t + 3]
         outer = []
@@ -569,6 +659,7 @@ def draw_sprite(frame, view, world, sprite, tex, name):
             outer.append((on(ax, bx) and (on(ax, xmin) or on(ax, xmax)))
                          or (on(ay, by) and (on(ay, ymin) or on(ay, ymax))))
         current = [p[1] for p in tri]
+        flat_base[0] = tri[0][3]  # flat attributes come from the provoking (first) vertex
         raster_triangle(frame, [p[0] for p in tri], current, shade, tuple(outer),
                         gradient if tie_band else None)
 

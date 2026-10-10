@@ -175,3 +175,63 @@ The rebuilt frozen executable is ready for Claude's independent rendered follow-
 Hosted adapters, native editor acceptance and reference-phone performance remain
 open. This correction does not fix the separate pixel-camera follower near-tie
 defect or approve a phase gate.
+
+## High-magnification follow-up: 64-texel spans
+
+Claude's round-four review fixed the region-width defect through 16× but exposed
+remaining exact and near-tie errors beyond it. Astra expanded the independent
+GPU colour-run oracle; the 512-texel geometry fails 95 of 2,856 cases. Reducing
+source spans to 64 texels fixes that set. Adding ±1/256-pixel interior offsets
+produces 5,768 passing cases: 1,400 outer-edge and 4,368 interior cases, across
+512–8192 source widths, both axes/directions, and the fourteen recorded scales
+from 1× through 128×. This is the tested range, not a bound on all possible zoom.
+The oracle derives integer source indices from screen-pixel centres and measures
+unique post-display colours independently; it does not reuse the shader formula.
+
+The shader and its tie bias are unchanged. Shorter spans bound interpolation and
+projected endpoint error while retaining camera-independent geometry: moving a
+camera does not retessellate sprites. The material tradeoff is more vertices for
+large nearest-sampled sprites. At most 130 spans per source axis, including the
+two nine-slice cuts, gives 101,400 vertices (6,489,600 bytes at 64 bytes each) for
+a theoretical 8192×8192 nine-slice, versus the previous 1,944-vertex bound. This is
+about 6.19 MiB and 52.2× the previous bound. The unchanged texture budget can reject
+that theoretical source before geometry is allocated. The unchanged 128 MiB total
+geometry and device-buffer caps reject oversized batches before extending retained
+vertices or allocating GPU resources; large nearest sprites reach that cap sooner.
+Small regions remain one quad per slice, and linear sampling remains unchanged.
+
+The independent Astra review confirms the oracle arithmetic, case counts and bound.
+All 360 workspace tests, 55 GPU tests and workspace Clippy pass. These are desktop
+correctness checks on Apple M5 Pro/Metal, not reference-phone performance results.
+Claude's rendered round-five review is integrated below.
+The separate pixel-camera near-tie follower issue is still open. Machine-readable
+source hashes and exact case sets are in
+[evidence](evidence/sprite-short-spans-2026-10-10.json).
+
+
+## Independent 64-texel review and remaining limits
+
+Claude Opus 5.5 Max reviewed the frozen `1f72a99` executable in
+[round five](../../handoffs/0032-sprite-rendering/result.md#round-5-64-texel-spans).
+All 50,862 exact and 76,764 near one-axis ties through tested 128× pass. The
+previous failing rows are fixed; unchanged boards, live playback, source-free
+copies and resized texture reimports remain byte-identical. Two fresh runs match
+across 432 common images. Root verified all seven committed image hashes and
+19 independent reference-helper tests. The review consumed 1,006 frames and
+560.6 MiB raw, within its explicit 2,048-frame/1-GiB budget.
+
+This does not close general nearest-sampling correctness. Above 128×, 138/1,404
+exact and 4/2,808 near ties fail, beginning at 160× in HD. Two-axis nine-slices
+also expose a pre-existing defect on every tested build: 121 exact-tie pixels
+near 128-square frame edges and 646 pixels in non-dyadic 96-square views fail on
+the candidate. The reported clipping/raster-grid explanation is an inference,
+not a proven hardware cause. Both prior builds fail more pixels, but the new
+geometry moves some failures; it must not be called pixel-correct for all views.
+A future correction needs independent two-axis/projection/zoom coverage without
+unboundedly shrinking retained spans or widening the near-tie acceptance band.
+
+The total geometry budget now rejects a real scene of 342 nearest 2048-square
+sprites; 341 render successfully. The previous 512-span build renders both.
+The error prevents output but needs a better resource/count diagnostic. No
+portable backend, native-editor, phone performance, arbitrary zoom or phase gate
+is approved. The separate camera/follower placement contract remains open.
