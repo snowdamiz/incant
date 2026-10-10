@@ -26,6 +26,8 @@ pub enum GameError {
     Buffer { expected: usize, actual: usize },
     #[error("offline sample rate must be within 8000..=192000 Hz")]
     SampleRate,
+    #[error("this game session has no spatial host")]
+    SpatialHost,
     #[error("native sample clock exhausted")]
     Clock,
 }
@@ -48,6 +50,9 @@ where
         actions: InputActions,
         audio: impl FnOnce(&NativeWorld) -> incant_audio_runtime::Result<SceneAudio<B>>,
     ) -> Result<Self> {
+        if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
+            return Err(GameError::SpatialHost);
+        }
         let native = NativeSession::new(scene, script, actions)?;
         let audio = audio(native.world()?)?;
         Ok(Self {
