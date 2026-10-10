@@ -65,14 +65,14 @@ settings remain unchanged.
 The [pinned Rust cache action](https://github.com/Swatinem/rust-cache/tree/6323deb102c322ba6fcbdcafc7e3dddab59af2b6)
 uses only Cargo registry/git and target paths with bin caching disabled; it does
 not include Cargo credentials, project/auth artifacts or evaluation outputs.
-Fork PRs only restore. Internal PR saves remain in their GitHub PR merge-ref
-scope; they cannot populate main or another PR. No privileged PR trigger or
-additional token permission is introduced. Main builds seed a trusted cache.
-The first Windows/Linux desktop PR remains cold until a successful default-branch
-desktop run seeds that workflow; same-PR updates can reuse its cache. After this
-change lands, one manual dispatch of the existing desktop workflow on main can
-seed both Windows/Linux caches without adding permanent push or scheduled jobs.
-No such dispatch was performed during this investigation.
+The initial rollout allowed internal PR saves in their isolated merge-ref scope;
+those could not populate main or another PR. The measured retention refinement
+below now makes every PR restore-only, with main producers publishing the shared
+set. No privileged PR trigger or additional token permission is introduced.
+Filtered desktop/credential main pushes automatically refill dependency changes;
+existing main checks and nightly platform runs supply the other jobs. A first PR
+remains cold until its successful main producer publishes. No dispatch has yet
+been performed during this investigation.
 
 ## Verification and remaining work
 
@@ -92,7 +92,7 @@ No such dispatch was performed during this investigation.
   following ignored pass again matched all 44 baseline GPU names in 22.66
   seconds, with **zero compile events** and Cargo finishing in 0.49 seconds.
   Formatting, the real runtime dependency guard and workflow lint pass.
-- Hosted cold/warm validation remains required. Record queue versus execution,
+- Initial hosted validation was pending. Record queue versus execution,
   cache hit/restore/save size, compilation versus test time and test counts.
   Component timings suggest roughly five minutes of avoidable macOS GPU
   compilation and eleven minutes on the slower Windows sample. These are
@@ -131,7 +131,8 @@ execution, symbol validation and uploaded artifacts from PR #47 remain intact.
 The static CRT policy and PE import checks are documented in
 [Windows CRT evidence](windows-crt-policy.md). Its local 352 Rust and 25 tool
 tests passed before this workflow-only integration; hosted Windows behavior and
-cold/warm timings remain unverified.
+cold/warm timings were still unverified at that integration; the cold results
+are recorded below.
 
 ## Combine the required authoring tools and examples
 
@@ -176,7 +177,7 @@ GPU calls (11m30s compilation), 1m32s on editor/headless, 1m30s on cook_scene an
 1m42s on shipping. Keeping shipping provenance intact is inexpensive relative
 to repeated development-graph compilation. Its macOS check spent 40m57s executing;
 the standalone cook and collaboration steps took 54s and 2m05s respectively.
-New hosted cold/warm measurements remain pending.
+The first cold hosted results are recorded below; warm measurements remain open.
 
 ## Authorized cache cleanup
 
@@ -247,3 +248,39 @@ GPU tests; the artifact comparison confirms their graph remains reusable.
 Actionlint v1.7.12 and `git diff --check` pass. Hosted Windows/Linux/macOS results
 for this final selector refinement remain to be measured. Shipping still has an
 independent fresh target directory and unchanged provenance checks.
+
+## Completed first cold hosted matrix
+
+At checked head `588b3ab`, all 17 PR #48 checks passed. The coordinator verified
+merge `56c22d4` at 20:06:24 UTC with the identical checked tree. The later combined
+explicit-target/workspace-selector refinements above were not in this run.
+
+| Job | Queue | Execution | Normal tests | GPU tests | Tool build | Separate cook | Shipping | Cache save |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| macOS checks | 2m30s | 33m58s | 13m04s | 1m35s | 4m28s | 1m33s | 2m09s | 41s |
+| Linux desktop | 2s | 17m56s | 9m09s | 1m39s | 1m42s | 54s | 45s | 21s |
+| Windows desktop | 2s | 40m21s | 20m48s | 2m18s | 6m21s | 2m15s | 1m59s | 1m18s |
+
+[Desktop run](https://github.com/snowdamiz/incant/actions/runs/38079748032)
+and [macOS run](https://github.com/snowdamiz/incant/actions/runs/38079748085)
+all missed their Rust cache. All three passed the exact 44 named baseline GPU
+tests; normal workspace test totals were 352, 350 and 347 respectively, reflecting
+platform coverage. Windows's GPU call compiled nothing (Cargo 0.88s); Linux and
+macOS each rebuilt only the editor. Windows still compiled 72 crates in the tool
+build and 88 in the cook call. Its uncached npm install took 18 seconds.
+
+The preceding PR #47 jobs took 40m57s on macOS, 24m16s on Linux and timed out at
+45m06s on Windows during saved steering replay after shipping passed. These
+uncontrolled adjacent-revision results do not establish a matched speedup;
+especially, removing GPU rebuilds shifted some compilation to subsequent tools.
+The workspace-selector experiment addresses that remaining graph mismatch.
+Warm hosted verification remains open.
+
+Final cache sizes and the implemented shared-cache producer policy are recorded
+in [cache retention](ci-cache-retention.md). After preserving those measurements
+and independently rechecking PR #48's merged state and every candidate's key/ref,
+12 exact private Rust cache IDs were removed at 20:07 UTC to make room for shared
+main producers. This freed 8,581,391,005 bytes; all 15 other entries were preserved.
+[Per-ID cleanup evidence](ci-pr48-cache-cleanup-2026-10-10.json) records the verified
+merge, sizes and before/after IDs. Open PRs, default-branch caches, quota and
+billing settings were unchanged.
