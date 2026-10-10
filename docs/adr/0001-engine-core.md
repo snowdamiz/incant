@@ -1,6 +1,8 @@
 # ADR 0001: Bevy ECS on Rust
 
-Date: 2026-10-08. Status: proposed for director review.
+Date: 2026-10-08. Updated: 2026-10-10. Status: decided by director instruction
+in the PLAN.md revision 5 decision record. This does not approve the Phase 0
+gate or claim later-phase work is implemented.
 
 ## Decision
 
