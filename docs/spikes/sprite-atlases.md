@@ -179,3 +179,35 @@ checks, release workspace Clippy and the headless build pass. The frozen binary
 SHA256 is `734811cb6053e32cce1ccd0fbb98fb7a515106cf7a8442f93b0be297af065469`.
 Claude's focused atlas delta is pending; 0032's above 128× and two-axis frame-edge
 sampling limitations still apply. This is not a native gameplay or device gate.
+
+
+## Follow-up rendered acceptance, 2026-10-10
+
+Claude Opus 5.5 at explicitly verified Max reviewed the frozen `4194240`
+headless binary (`734811cb6053e32cce1ccd0fbb98fb7a515106cf7a8442f93b0be297af065469`).
+The [follow-up report](../../handoffs/0034-sprite-atlas-review/result.md) accepts
+atlas-specific behavior, conditional on the shared renderer limits from 0032.
+It adds 201 frames / 239.8 MiB under a separate 600-frame / 512-MiB budget,
+preserving round one's evidence unchanged. All 505 engine calls retained the
+executable hash. Thirteen evidence-tool tests and all 55 retained screenshot
+hashes pass independently after integration of Claude's `5a9ad02` commit.
+
+The three-frame packing reproduction fits 1204×1148. The 130-frame page uses
+1222×1104 instead of 1204×1865, and all nested pairs in the 69-bound sweep
+preserve fit and nonincreasing page area. Thirteen rejected imports preserve
+project/journal/revision/history and asset fingerprints; accepted replacements
+and Undo/Redo restore exact fingerprints. Nearest atlas/control views, frame
+relocation, source-free rendering and repeated fresh processes agree. The
+source-Y cuts at 36×/40×/56× pass 4,972 tested exact ties.
+
+Limits remain explicit: the heuristic can reject a feasible 1217×1104 layout;
+missing-cache diagnostics repeat once per sprite; decoded pixels, not PNG
+container bytes, define cross-build equality. Shared one-axis failures above
+128×, two-axis edge/non-dyadic ties, and the 342-sprite geometry limit remain
+open. This is one Apple M5 Pro/Metal result, not arbitrary-zoom, cross-platform,
+native editor, reference-phone performance or phase-gate approval.
+
+Actual main53 was merged as `70184b1` after the review. Conflict resolution
+retains main's CI timing and pinned-tool cache changes and all atlas/sprite
+workflow probes; no renderer source conflict occurred. The resulting union
+requires its own full correctness checks and hosted CI before publication.

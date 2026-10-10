@@ -62,6 +62,14 @@ within its documented workload.
 
 ## Active work
 
+- Atlas-specific rendering and public import/repack behavior are accepted in
+  Claude's scoped follow-up on `4194240`: 201 new frames, stable frame IDs,
+  atomic rejected imports, source-free repeats and atlas/control equality.
+  Thirteen tooling tests and 55 screenshot hashes pass after integration.
+  Main53 is integrated; full union checks and hosted CI remain pending. Shared
+  magnification/two-axis ties, geometry capacity and phone gates remain open;
+  see [atlas follow-up](docs/spikes/sprite-atlases.md#follow-up-rendered-acceptance-2026-10-10).
+
 - Sprite high-zoom follow-up uses 64-source-texel retained spans. The old spans
   fail 95/2,856 expanded GPU cases; the fix passes all 5,768 exact/near-tie cases
   through tested 128× magnification. All 360 workspace and 55 GPU tests plus
