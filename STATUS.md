@@ -69,6 +69,14 @@ within its documented workload.
   union passes 98 scoped tests, 28 tool tests and the fresh 24-process proof;
   hosted checks are pending. See [native input evidence](docs/spikes/native-input-session.md).
 
+- PR #51 is merged after nine passing checks and verified tested-tree identity.
+  Its real shared-cache Windows critical path was 21m19s plus 1s queue, 38%
+  below the cold PR #49 sample; feature/dependency changes remain explicit.
+  All native ordinary tests and 44 exact GPU names per host passed. All 12 Rust
+  cache families remain covered within the observed 9.134 GiB inventory.
+  Further Windows compilation/link attribution and conservative docs/UI path
+  selection remain open; see [warm evidence](docs/spikes/ci-build-performance.md#completed-warm-pr-51).
+
 - Pinned web/Android tool reuse is locally verified: isolated exact-version
   executable caches, normal install fallback, and default-branch-only saves.
   Hosted restoration/sizes remain pending; engine/GPU/credential/shipping
