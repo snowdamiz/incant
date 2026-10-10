@@ -29,6 +29,10 @@ import reference  # noqa: E402
 
 BG = (24, 22, 40)
 TOL_NEAREST, TOL_LINEAR = 1, 2
+# Nearest rule per tested build source. Round-one runs predate the field (pre-ties).
+RULES = {"39e5c38107451ba44a02ef7b80f27bef11d4141d": "hardware",
+         "c2c7758c14c37d36aa13e322aa2c87e63ce489ad": "tie-band",
+         "f9aa1da0818313c5c6cac580e54d7107646378bc": "pixel-band"}
 
 
 def sha(path):
@@ -45,17 +49,29 @@ class Run:
         self.tex = {name: reference.Texture(art / f) for name, f in (
             ("sheet", "sheet.png"), ("teal", "sheet-teal.png"), ("tall", "sheet-tall.png"),
             ("labels", "labels.png"), ("badge", "badge.png"), ("orange", "badge-orange.png"),
-            ("tone16", "tone16.png"))}
+            ("tone16", "tone16.png"), ("ruler64", "ruler64.png"), ("strip", "strip4096.png"),
+            ("strip8192", "strip8192.png"))
+            if (art / f).exists()}
         self.ids = self.scene["ids"]
-        self.rule = "hardware" if self.helper.get("binary", "pre-ties") == "pre-ties" else "tie-band"
+        commit = self.helper.get("binary_source_commit")
+        if commit is None:
+            self.rule = "hardware"
+        elif commit in RULES:
+            self.rule = RULES[commit]
+        else:
+            raise SystemExit(f"no documented nearest rule for build {commit}; add it to RULES")
         occ = self.scene["occluder"]
         self.meshes = [(self.ids["C:occluder"], occ["positions"], occ["emissive"])]
         self.asset = t
 
     def textures(self, sheet="sheet", badge="badge"):
         t = self.asset
-        return {t["sheet"]: self.tex[sheet], t["labels"]: self.tex["labels"], t["badge"]: self.tex[badge],
-                t["tone16"]: self.tex["tone16"]}
+        out = {t["sheet"]: self.tex[sheet], t["labels"]: self.tex["labels"], t["badge"]: self.tex[badge],
+               t["tone16"]: self.tex["tone16"]}
+        for name in ("ruler64", "strip", "strip8192"):
+            if name in t:
+                out[t[name]] = self.tex[name]
+        return out
 
     def render(self, camera, w, h, sheet="sheet", badge="badge", overrides=None):
         return reference.render(self.scene["entities"], self.textures(sheet, badge), self.scene["cameras"][camera]["id"]
@@ -246,6 +262,145 @@ def board_g(img, scene):
     return out
 
 
+def decode_generic(img, x0, y0, x1, y1, blue):
+    """Self-naming texels with the given blue channel: (R, G) = (60 + 2 i, 60 + 2 j)."""
+    found = {}
+    for y in range(max(0, y0), min(img.height, y1)):
+        for x in range(max(0, x0), min(img.width, x1)):
+            r, g, b = img.rgb(x, y)
+            if b == blue and (r - 60) % 2 == 0 and (g - 60) % 2 == 0 and 60 <= r <= 186 and 60 <= g <= 186:
+                found[(x, y)] = ((r - 60) // 2, (g - 60) // 2)
+    return found
+
+
+def tuple_runs(found):
+    """Runs of decoded texels along the middle row and middle column."""
+    xs = sorted({x for x, _ in found})
+    ys = sorted({y for _, y in found})
+    mid_y, mid_x = ys[len(ys) // 2], xs[len(xs) // 2]
+    return (runs([found[(x, mid_y)] for x in xs if (x, mid_y) in found]),
+            runs([found[(mid_x, y)] for y in ys if (mid_x, y) in found]))
+
+
+def board_h(img, scene):
+    """Round-three falsification cases on board H, decoded from engine pixels."""
+    out = {}
+    for key, meta in scene["meta"].items():
+        if not key.startswith("H:") or "kind" not in meta:
+            continue
+        kind, (x, y) = meta["kind"], meta["cell"]
+        entry = {"kind": kind, "delta_px": meta["delta_px"], "delta_steps_of_1_256": round(meta["delta_px"] * 256, 4)}
+        if kind == "high":
+            m = meta["magnification"]
+            found = decode_window(img, x - 2, y, x + 7 * m + 3, y + m)
+            cols, _ = tuple_runs(found)
+            order = list(range(6, -1, -1)) if meta["flipped"] else list(range(7))
+            widths = [n for _, n in cols]
+            entry.update(magnification=m, flipped=meta["flipped"], widths=widths,
+                         uniform=[t[0] for t, _ in cols] == order and widths == [m] * 7)
+        elif kind in ("turn", "aniso"):
+            if kind == "turn":
+                mx = my = meta["magnification"]
+                found = decode_window(img, x - 1, y - 1, x + 59, y + 59)
+                entry.update(magnification=mx, angle=meta["angle"])
+            else:
+                mx, my = meta["magnification"]
+                found = decode_window(img, x - 1, y - 1, x + 7 * mx + 3, y + 7 * my + 3)
+                entry.update(magnification=[mx, my], flipped=meta["flipped"])
+            cols, rows_ = tuple_runs(found)
+            # A quarter turn exchanges screen axes, so each axis must hold seven
+            # distinct texels of equal width (the axis magnification).
+            col_w, row_w = [n for _, n in cols], [n for _, n in rows_]
+            entry.update(widths=col_w, heights=row_w,
+                         uniform=(len({t for t, _ in cols}) == 7 == len(cols) and len({t for t, _ in rows_}) == 7
+                                  == len(rows_) and col_w == [mx] * 7 and row_w == [my] * 7))
+        elif kind == "minify":
+            k, size = meta["texels_per_pixel"], meta["size_px"]
+            found = decode_generic(img, x - 2, y - 2, x + size + 3, y + size + 3, 120)
+            xs = sorted({px for px, _ in found})
+            ys = sorted({py for _, py in found})
+            mid_y, mid_x = ys[len(ys) // 2], xs[len(xs) // 2]
+            row = [found[(px, mid_y)][0] for px in xs if (px, mid_y) in found]
+            col = [found[(mid_x, py)][1] for py in ys if (mid_x, py) in found]
+            step = -k if meta["flipped"] else k
+            entry.update(texels_per_pixel=k, flipped=meta["flipped"], placement=meta["placement"],
+                         columns=row, rows=col, covered=[len(xs), len(ys)],
+                         uniform=(len(xs) == size and len(ys) == size
+                                  and all(b - a == step for a, b in zip(row, row[1:]))
+                                  and all(b - a == step for a, b in zip(col, col[1:]))))
+        out[key] = entry
+    # Mirror consistency for minification: is a flipped sprite the mirror image of
+    # the unflipped one at the same placement? Ties pick one side, so it may not be.
+    for key, entry in out.items():
+        if entry["kind"] == "minify" and ":plain:" in key:
+            twin = out.get(key.replace(":plain:", ":flip:"))
+            if twin:
+                entry["flipped_twin_is_mirror"] = (twin["columns"] == entry["columns"][::-1]
+                                                   and twin["rows"] == entry["rows"][::-1])
+    return out
+
+
+def board_i(img, scene):
+    """4096-texel strips near t = 4096: every complete texel run must span M pixels."""
+    out = {}
+    for key, meta in scene["meta"].items():
+        if not key.startswith("I:") or meta.get("kind") != "wide":
+            continue
+        m, y, flipped = meta["magnification"], meta["row_y"], meta["flipped"]
+        found = decode_generic(img, 0, y + m // 2, img.width, y + m // 2 + 1, 90)
+        xs = sorted(px for px, _ in found)
+        seq = [found[(px, y + m // 2)][0] + 64 * found[(px, y + m // 2)][1] for px in xs]
+        rr = runs(seq)
+        # Drop the run cut by the frame edge: the left one for plain strips, the
+        # right one for flipped strips. The strip's own end is a complete texel.
+        partial = rr[0] if not flipped else rr[-1]
+        complete = rr[1:] if not flipped else rr[:-1]
+        steps = [b[0] - a[0] for a, b in zip(complete, complete[1:])]
+        expected_step = -1 if flipped else 1
+        bad = [(t, n) for t, n in complete if n != m]
+        out[key] = {"magnification": m, "flipped": flipped, "delta_px": meta["delta_px"],
+                    "delta_steps_of_1_256": round(meta["delta_px"] * 256, 4),
+                    "complete_texels": len(complete), "texel_range": [min(seq), max(seq)],
+                    "partial_edge_run": partial, "width_counts": dict(Counter(n for _, n in complete)),
+                    "consecutive": all(st == expected_step for st in steps), "off_width_texels": bad[:12],
+                    "uniform": not bad and all(st == expected_step for st in steps)}
+    return out
+
+
+def decode_strip_row(img, y, x0, x1):
+    """Strip texels on one row: i = R + 64 G + 4096 B in the strip encodings."""
+    out = {}
+    for x in range(max(0, x0), min(img.width, x1)):
+        r, g, b = img.rgb(x, y)
+        if b in (90, 92) and (r - 60) % 2 == 0 and (g - 60) % 2 == 0 and 60 <= r <= 186 and 60 <= g <= 186:
+            out[x] = (r - 60) // 2 + 64 * ((g - 60) // 2) + 4096 * ((b - 90) // 2)
+    return out
+
+
+def board_j(img, scene):
+    """Exact ties across region widths: complete texel runs must span M pixels."""
+    out = {}
+    for key, meta in scene["meta"].items():
+        if not key.startswith("J:") or meta.get("kind") != "map":
+            continue
+        m, y, flipped = meta["magnification"], meta["row_y"], meta["flipped"]
+        x0, x1 = (820, img.width) if flipped else (0, 781)
+        found = decode_strip_row(img, y + m // 2, x0, x1)
+        xs = sorted(found)
+        rr = runs([found[x] for x in xs])
+        if rr and not flipped and xs[0] == 0:
+            rr = rr[1:]
+        if rr and flipped and xs[-1] == img.width - 1:
+            rr = rr[:-1]
+        steps = [b[0] - a[0] for a, b in zip(rr, rr[1:])]
+        bad = [(t, n) for t, n in rr if n != m]
+        ok = bool(rr) and not bad and all(st == (-1 if flipped else 1) for st in steps)
+        out[key] = {"width": meta["width"], "magnification": m, "flipped": flipped, "complete_texels": len(rr),
+                    "texel_range": [min(found.values()), max(found.values())] if found else None,
+                    "width_counts": dict(Counter(n for _, n in rr)), "off_width_texels": bad[:12], "uniform": ok}
+    return out
+
+
 def odd_station(img):
     out = {}
     for k, name in enumerate(("normal", "flip_x", "flip_y", "both")):
@@ -348,6 +503,12 @@ def main():
         result["board_f"] = board_f(images["pp-F-320x180"], run.scene)
     if "pp-G-1024x640" in images:
         result["board_g"] = board_g(images["pp-G-1024x640"], run.scene)
+    if "pp-H-1280x640" in images:
+        result["board_h"] = board_h(images["pp-H-1280x640"], run.scene)
+    if "pp-I-1024x640" in images:
+        result["board_i"] = board_i(images["pp-I-1024x640"], run.scene)
+    if "pp-J-1024x640" in images:
+        result["board_j"] = board_j(images["pp-J-1024x640"], run.scene)
     if run.rule == "tie-band" and "pp-G-1024x640" in images and "pp-F-320x180" in images:
         # Model-only counterfactual for the recommendation, not engine evidence: the
         # corrected rule with the band scaled by the signed derivative (1/1024 px).
@@ -708,6 +869,11 @@ def main():
                       "board_f_failures": [k for k, v in result.get("board_f", {}).items() if not v["pass"]],
                       "board_g_nonuniform": sorted({(v["magnification"], v["flipped"], v["delta_steps_of_1_256"])
                                                     for v in result.get("board_g", {}).values() if not v["uniform"]}),
+                      "board_h_nonuniform": sorted(k for k, v in result.get("board_h", {}).items() if not v["uniform"]),
+                      "board_h_mirror_mismatch": sorted(k for k, v in result.get("board_h", {}).items()
+                                                        if v.get("flipped_twin_is_mirror") is False),
+                      "board_i_nonuniform": sorted(k for k, v in result.get("board_i", {}).items() if not v["uniform"]),
+                      "board_j_nonuniform": sorted(k for k, v in result.get("board_j", {}).items() if not v["uniform"]),
                       "orientation": result["orientation_mismatched_pixels"],
                       "nine_slice_flips": result["nine_slice_flip_mismatched_pixels"],
                       "painter_all_pass": all(v["pass"] for v in result["painter_probes"].values()),
