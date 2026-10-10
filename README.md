@@ -340,3 +340,19 @@ When the director explicitly authorizes unattended tool use, the runner accepts
 adapter offers the mode and fails explicitly otherwise. This does not change
 global Claude settings or broaden the task's authorized scope. Worktree-scoped
 ACP filesystem handlers are not an OS sandbox for Claude's shell commands.
+
+### Scripted audio and offline export
+
+Import project-local WAV or OGG Vorbis with `incant_headless import PROJECT SOURCE`.
+AudioSource, AudioBus and AudioListener use the same validated components and
+command history as the rest of the project. TypeScript can pause/resume a source,
+change gain/pan/rate, or move a spatial emitter through `api.command`.
+
+`incant_headless play PROJECT --ticks 60 --compiled-script behavior.js --audio-output mix.wav`
+exports stereo float WAV at 48 kHz without opening a device or capturing pixels.
+Use `--audio-rate` for 8–192 kHz. The output must be a new path; its report includes
+sample count, peak level, samples at full scale and a PCM hash. Cooked audio works
+without its original source files. See [audio semantics and limits](docs/spikes/audio-runtime.md)
+and `python3 tools/probes/game-audio.py artifacts/game-audio-cli` for a complete
+strict-TypeScript/import/RPC example. Native device controls and browser audio
+remain open; logical game saves do not preserve mixer playheads.

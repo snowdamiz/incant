@@ -86,7 +86,9 @@ The full workspace passes 190 Rust tests, 315 UI tests, five tool tests and
 Clippy. Generated schemas, SDK/bridge/conventions and strict TypeScript checks
 pass. The native release build and package pass without launching the app.
 Existing public save and character probes pass with the new input host. Hosted
-checks and merge are pending; no local GPU capture tests were rerun.
+checks all passed at `0021738`; PR #27 merged as `72fb2bd` with an identical
+reviewed tree. The main native app was rebuilt without opening it. No local GPU
+capture tests were rerun.
 
 OS/browser event adapters, actual hardware polling, IME/text input, pointer lock,
 gamepad calibration/dead zones, configurable action maps, rumble, native play

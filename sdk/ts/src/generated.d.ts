@@ -4,6 +4,22 @@ export namespace AngularVelocitySchema {
 }
 export type AngularVelocity = AngularVelocitySchema.Root;
 
+export namespace AudioBusSchema {
+  export type Root = { "gain_db": number; "parent"?: string | null };
+}
+export type AudioBus = AudioBusSchema.Root;
+
+export namespace AudioListenerSchema {
+  export type Root = {  };
+}
+export type AudioListener = AudioListenerSchema.Root;
+
+export namespace AudioSourceSchema {
+  export type AudioSpatial = { "max_distance": number; "min_distance": number };
+  export type Root = { "bus"?: string | null; "clip": string; "gain_db": number; "looping": boolean; "pan": number; "playing": boolean; "rate": number; "spatial"?: (AudioSpatial) | (null); "start_seconds": number; "streaming": boolean };
+}
+export type AudioSource = AudioSourceSchema.Root;
+
 export namespace CameraSchema {
   export type Root = { "far": number; "fov_degrees": number; "near": number };
 }

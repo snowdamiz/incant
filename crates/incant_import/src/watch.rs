@@ -2,7 +2,7 @@
 //! are inspected; cache writes and unrelated project files cannot trigger edits.
 use crate::{ImportDetails, ImportOutcome, ImportRequest, ImportSnapshot, PreparedImports, Result};
 use incant_assets::{
-    CacheKind, Dependency, SourceSet, load_model, load_texture, project_cache_directory,
+    CacheKind, Dependency, SourceSet, load_audio, load_model, load_texture, project_cache_directory,
 };
 use incant_cmd::{Actor, CommandBus};
 use incant_doc::Asset;
@@ -230,7 +230,7 @@ impl SourceWatcher {
         for (_, id) in ready {
             let entry = self.entries.get_mut(&id).unwrap();
             entry.attempted = Some(now);
-            let result = if matches!(entry.asset.kind.as_str(), "model" | "texture") {
+            let result = if matches!(entry.asset.kind.as_str(), "model" | "texture" | "audio") {
                 snapshot.clone().prepare(
                     &self.root,
                     None,
@@ -269,9 +269,9 @@ fn clear(entry: &mut Entry, report: &mut WatchReport) {
 
 fn dependencies(details: &ImportDetails) -> &[Dependency] {
     match details {
-        ImportDetails::Model { dependencies, .. } | ImportDetails::Texture { dependencies, .. } => {
-            dependencies
-        }
+        ImportDetails::Audio { dependencies, .. }
+        | ImportDetails::Model { dependencies, .. }
+        | ImportDetails::Texture { dependencies, .. } => dependencies,
     }
 }
 
@@ -287,6 +287,15 @@ fn cached_dependencies(root: &Path, asset: &Asset) -> Option<Vec<Dependency>> {
             .metadata
             .dependencies
         }
+        "audio" => vec![
+            load_audio(
+                &project_cache_directory(root, CacheKind::Audio).ok()?,
+                &asset.sha256,
+            )
+            .ok()?
+            .metadata
+            .dependency,
+        ],
         "texture" => {
             let texture = load_texture(
                 &project_cache_directory(root, CacheKind::Textures).ok()?,

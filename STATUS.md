@@ -53,13 +53,29 @@ within its documented workload.
 
 ## Active work
 
+- Cooked WAV/OGG audio, typed sources/buses/listeners, Kira mixing/spatialization,
+  bounded native/offline streaming and script-driven WAV export are implemented.
+  The public import/RPC/strict-TypeScript probe works after deleting source files;
+  repeated PCM is exact, pause is silent and bus attenuation matches expected
+  levels. Twenty new tests bring the distinct passing Rust total to 215; Clippy,
+  315 UI tests/build, five tool tests, generated contracts and native packaging
+  pass. macOS/iOS device-backend and WASM compilation pass. All twelve hosted
+  checks passed at `246a380`, including the Windows retained-reader repair test.
+  Integration with merged timers passes 224 Rust tests, the combined public audio
+  and saved-timer probe, contracts, Clippy, UI checks and native packaging. Updated
+  hosted checks and merge remain pending. Native controls/playback, browser resources, hardware,
+  lifecycle/latency and mixer save cursors remain open. No device playback or local
+  capture occurred. See [audio runtime](docs/spikes/audio-runtime.md).
+
 - Fixed-tick script timers, repeat/cancel/replace, copied payloads and a saved
   game clock are implemented. Version 2 game saves preserve pending deadlines
   and read version 1 with an empty schedule. Seven script tests and a CLI failure
   test pass; a strict TypeScript public-CLI probe preserves callbacks, command
   effects and log continuity across process restarts. All 204 distinct Rust tests,
   315 UI tests/build, five tool tests, Clippy, generated contracts and the native
-  build/package pass locally. Hosted validation is pending. Coroutines remain open; Promise/generator behavior
+  build/package pass locally. All three hosted checks passed at `54f85a1`;
+  PR #31 merged as `93bc5ed` with the reviewed tree unchanged. Coroutines remain
+  open; Promise/generator behavior
   callbacks now fail explicitly before commit. See [timers](docs/spikes/script-timers.md).
 
 - Headless `play --assertions FILE` evaluates bounded data-only checks over
@@ -69,7 +85,8 @@ within its documented workload.
   movement/jumping/landing assertions, intentional failure, numeric equivalence,
   missing/null data, invalid plans and bounded output. All 195 Rust, 315 UI and
   five tool tests, Clippy, generated contracts and the native build/package pass.
-  Hosted checks and the GPU diagnostic-report extension remain pending; local
+  All three hosted checks, including GPU diagnostic-report retention, passed at
+  `7379f9c`; PR #28 merged as `734d008` with the reviewed tree unchanged. Local
   capture stays paused. See [gameplay assertions](docs/spikes/play-assertions.md).
 
 - Shared fixed-tick keyboard/mouse/gamepad/touch processing, sandbox `api.input()`
@@ -79,7 +96,8 @@ within its documented workload.
   and resumes a mid-jump save with exact final state/logs and unchanged authored
   files. All 190 Rust, 315 UI and five tool tests pass, along with Clippy, generated
   contracts and the native build/package. macOS normalized-input smoke execution
-  passes; hosted checks and merge are pending. Live OS/browser adapters, action
+  passes. All twelve hosted checks passed at `0021738`; PR #27 merged as `72fb2bd`
+  with the reviewed tree unchanged. Live OS/browser adapters, action
   mapping and physical-device verification remain open. No computer use or local
   captures occurred. See [game input](docs/spikes/game-input.md).
 
