@@ -185,6 +185,8 @@ pub fn steer(
             avoidance_responsibility: input.responsibility,
         };
         let mut neighbors = vec![];
+        let preferred = vector(input.preferred_velocity).clamp_length_max(input.max_speed);
+        let mut crossing = false;
         for other in &agents {
             if input.id == other.id
                 || !overlap(
@@ -205,6 +207,22 @@ pub fn steer(
                 + 2. * query.margin;
             if position.length_squared() > range * range {
                 continue;
+            }
+            // A perfectly reciprocal head-on crowd can satisfy ORCA by stopping
+            // forever. Choose a 45-degree passing preference at unchanged speed when
+            // requested velocities predict a collision. The hand is consistent
+            // for every moving agent. This is an objective
+            // preference only: obstacle/agent constraints still project it into
+            // the feasible velocity region below.
+            let relative_preferred =
+                preferred - vector(other.preferred_velocity).clamp_length_max(other.max_speed);
+            let closing = position.dot(relative_preferred);
+            if closing > 0. {
+                let encounter = closing / relative_preferred.length_squared();
+                let separation = position - relative_preferred * encounter;
+                let clearance = input.radius + other.radius + 2. * query.margin;
+                crossing |= encounter <= query.time_horizon
+                    && separation.length_squared() < clearance * clearance;
             }
             // The backend chooses a random normal for a zero-length overlap
             // vector. Replace only that singular case with an antisymmetric,
@@ -247,10 +265,15 @@ pub fn steer(
                 })
             })
             .collect();
+        let preferred = if crossing {
+            (preferred + preferred.perp()) * std::f32::consts::FRAC_1_SQRT_2
+        } else {
+            preferred
+        };
         let velocity = agent.compute_avoiding_velocity(
             &neighbors,
             &obstacles,
-            vector(input.preferred_velocity),
+            preferred,
             input.max_speed,
             time_step,
             &AvoidanceOptions {

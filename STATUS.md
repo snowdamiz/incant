@@ -60,7 +60,10 @@ within its documented workload.
   Goal-block standoffs and large lateral detours remain behavior-level limits;
   host sleep/load can trigger the existing script wall-clock deadline. The
   integrated branch passes 284 Rust, 40 GPU, 315 UI and five tool tests, Clippy,
-  SDK checks, native packaging and WASM/iOS compilation. Hosted CI is pending. See [steering evidence](docs/spikes/navigation-steering.md).
+  SDK checks, native packaging and WASM/iOS compilation. PR #36 Linux CI exposed
+  a symmetric-crowd arrival failure while eleven other checks passed. A consistent
+  passing preference now passes twelve rotated/staggered cases locally; full
+  revalidation and updated rendered review are in progress. See [steering evidence](docs/spikes/navigation-steering.md).
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
   with funnel smoothing and connected visibility repair. Claude's rendered
@@ -72,7 +75,7 @@ within its documented workload.
   [navigation evidence](docs/spikes/navigation-runtime.md). PR #35's scoped implementation
   and v9 rendered review are complete: both 600-tick runs match 726 frames/logs,
   with no query exceptions and grounding on every tick. All twelve CI checks
-  passed on d7517b0; final report changes await current-head checks before merge. Quantized height
+  passed at `1928138`; PR #35 merged as `302613c` with its tested tree unchanged. Quantized height
   detail can undershoot true step discontinuities; physics owns grounding.
   Steering is implemented and reviewed on its separate integration branch;
   off-mesh links are in integration checks. Grid navigation, native Inspector/
