@@ -1,0 +1,35 @@
+{
+  "hosted_run": 38092910737,
+  "failed_compare_job": 114336712401,
+  "head": "2512ff0ee902c33779114c8f847379bca09eebc1",
+  "reports": {
+    "native-ecs-physics-macos-latest": {
+      "original_report_sha256": "ac045d6c214fee46efcf8e87a6ed0ec193eb49a7d4ff0955f50869ea03d5f816",
+      "canonical_report_sha256": "ac045d6c214fee46efcf8e87a6ed0ec193eb49a7d4ff0955f50869ea03d5f816",
+      "stream_sha256": [
+        "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c"
+      ],
+      "streams": 6
+    },
+    "native-ecs-physics-ubuntu-latest": {
+      "original_report_sha256": "6689404d7ee8d3f8c330afb4b143c303dff4eddc1d6af876c3ef9f1ecea70825",
+      "canonical_report_sha256": "6689404d7ee8d3f8c330afb4b143c303dff4eddc1d6af876c3ef9f1ecea70825",
+      "stream_sha256": [
+        "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c"
+      ],
+      "streams": 9
+    },
+    "native-ecs-physics-windows-latest": {
+      "original_report_sha256": "7ed1b438baf1c40816cc0cad992f591a3b38d998be709787a1028a1405edde4b",
+      "canonical_report_sha256": "5cd0aa7fbeb98bd04a621fcd8ab7f9d8d96c27d372342878de35e4c5977051f1",
+      "stream_sha256": [
+        "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c"
+      ],
+      "streams": 6
+    }
+  },
+  "original_reports_rejected": true,
+  "canonical_key_only_copies_pass": true,
+  "changed_source_digest_rejected": true,
+  "stream_bytes_modified": false
+}
