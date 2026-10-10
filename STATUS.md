@@ -69,6 +69,11 @@ within its documented workload.
   union passes 98 scoped tests, 28 tool tests and the fresh 24-process proof;
   hosted checks are pending. See [native input evidence](docs/spikes/native-input-session.md).
 
+- Pinned web/Android tool reuse is locally verified: isolated exact-version
+  executable caches, normal install fallback, and default-branch-only saves.
+  Hosted restoration/sizes remain pending; engine/GPU/credential/shipping
+  coverage stays intact. See [tool reuse evidence](docs/spikes/ci-pinned-platform-tools.md).
+
 - Main cache seeding is verified across all 12 Rust jobs after PR #49: the shared
   set uses 7.807 GiB and the retained inventory 8.929 GiB after exact obsolete
   cache cleanup. All checks remained enabled. Independent warm-PR latency and
