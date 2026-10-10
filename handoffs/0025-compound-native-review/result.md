@@ -1,6 +1,6 @@
 # 0025 — Compound native Inspector and corrected-runtime review: result
 
-**Status: scoped appearance accepted, with one UI improvement committed. Astra will rebuild for the final native confirmation of that improvement.**
+**Status: SCOPED NATIVE APPEARANCE ACCEPTED. PR #25 may leave draft for this scope.** The final native captures (source `5b97ecd`, app SHA `f23c403f…5224`) confirm the compact unavailable-Agent layout and every required valid-data Inspector state at 1440×874 and 1000×650. No remaining UI defect was found.
 
 - **Native Inspector:** accepted for the real states Astra captured at normal (1440×874) and minimum (1000×650) window sizes:
   - a valid mixed compound;
@@ -10,8 +10,28 @@
   - scrolled fields;
   - primitive regression.
 - **Corrected-runtime frames and numbers:** accepted. That review is complete and was not repeated.
-- **New in this increment:** the crowded minimum-size Inspector is improved. When the agent cannot run, the Agent pane takes a compact default height. This has been verified in the browser fixture; its native pixels await Astra's rebuild.
+- **Layout fix:** the crowded minimum-size Inspector is fixed. When the agent cannot run, the Agent pane takes a compact default height. This is verified in the browser fixture and in the final native pixels.
 - **Not claimed:** this is not a phase-gate approval or a complete-engine claim.
+
+## Final verdict (2026-10-10)
+
+**Accepted for the scoped native Inspector review**, at normal 1440×874 and minimum 1000×650. The accepted states are:
+
+- the mixed sphere/box compound;
+- exact part paths;
+- readable full IDs;
+- keyboard End, then Tab;
+- the valid 64-part list (bounded, scrolling, focus);
+- primitive regression;
+- the compact unavailable-Agent allocation.
+
+This verdict rests on Astra's real CUA captures plus the earlier browser-fixture hostile-data results and behaviour tests.
+
+**Not claimed:**
+
+- Native reorder and native invalid-data display. These are outside the read-only/rejection boundary and are covered by tests instead.
+- Traffic-light alignment, because the OS pill hides it.
+- A phase gate or complete-engine status.
 
 ## Model and transport
 
@@ -20,6 +40,13 @@
 
 ## Priority revisions and feedback acknowledged
 
+- **Final native review supplied (latest revision):**
+  - I read `artifacts/0025-native-final/manifest.json` and `notes.md`.
+  - All nine JPEG SHA-256 values match the manifest.
+  - The rebuilt app is source `5b97ecd`, SHA `f23c403fceb9bca3418bd0dc317e9e316c808fe665eb9fc8fb99748afabf5224`, project `a945aeee…6bd419`.
+  - `5b97ecd` contains this change as `19c3be9`, and its `editor/ui/src` is byte-identical to this branch's `6a9c832` (`git diff --quiet`).
+  - I did not repeat playback or Cargo.
+  - On resuming, a cherry-pick of Astra's `9c84af0` (packet update) stood in conflict on `brief.md`. It was completed as `3b96ee8` with Astra's version, which is the current packet. I made no other change to it.
 - **Follow-up (Astra, under the director's standing request to keep improving small UI issues):** the minimum-size Inspector was crowded while the Agent is unavailable. I applied a layout fix using my own design judgment (below), keeping resizable panels and the existing layout. The agent runtime, the project mutation boundary and the titlebar are untouched.
 - **Manifest and notes read.** I used `artifacts/0025-native/manifest.json` and `notes.md`, with the `.jpg` names. The earlier `.png` files are identical, mislabelled copies, and they stay ignored.
 - **Read-only boundaries recorded, not requested again:**
@@ -66,12 +93,23 @@
   - a keyboard separator move keeps the user's size (+16);
   - a ready agent with `agent.send` gets the full default.
 
-**Native confirmation pending:** Astra's rebuild should capture, at 1000×650 and 1440×874:
+**Native confirmation (final captures, `artifacts/0025-native-final`):**
 
-- 64 Parts after End;
-- 64 Parts after End then Tab;
-- Dumbbell after End then Tab;
-- Floor at the top of the Inspector.
+These are CUA JPEG bytes at 2× Retina scale. Committed crops of the Inspector and Agent column are in `screenshots/native-final/*-side.png`. They are cropped below the titlebar with `sips` and re-encoded as PNG with no other edits, and they contain no account identity.
+
+| Capture | Size | Verdict |
+|---|---|---|
+| `parts-64-min-end` | 1000×650 | **Pass.** Row 64 is focused and fully inside the visible Inspector, with a list scrollbar. The Agent pane measures about 200 pt from the pixels (manifest: 200 px). The Inspector is about 381 pt, up from about 321 pt before the change. |
+| `parts-64-min-end-tab` | 1000×650 | **Pass. This is the defect state that is now fixed.** The card shows `Part 64 of 64` and `/shape/parts/63`. The full ID `…1063` sits in its focus ring, and Offset plus the 2×2 Rotation are all visible above the Agent pane. Before the change, the card was cut off at the ID row. |
+| `mixed-min-end-tab` | 1000×650 | **Pass.** `3 parts · 2 sphere, 1 box`. Row 3 is selected and distinct from the hovered row 1. Caption `/shape/parts/2`. The full ID `…112` is visible and selected in its ring at the boundary. |
+| `primitive-min-top` | 1000×650 | **Pass.** Floor shows `box`, half extents 10 / 0.5 / 10, Material, then Collision. Primitive presentation is unchanged. |
+| `parts-64-wide-end`, `parts-64-wide-end-tab` | 1440×874 | **Pass.** About 6.5 rows in a bounded well. The row ring hands off to the ID ring. `/shape/parts/63`. ID, Offset and the first Rotation row show. Agent pane about 210 pt (manifest: 210 px). |
+| `mixed-wide-end-tab` | 1440×874 | **Pass.** The card shows down to Primitive and Half extents. |
+| `primitive-wide-top` | 1440×874 | **Pass.** The whole Collider (Material, Collision and the mask bars) plus the start of Transform now fit above the Agent pane. |
+| Agent pane | both | **Pass.** The native three-line reason ("Use the headless agent command for the Phase 0 provider spike…") is fully legible in the compact layout (no mark), with the disabled composer below. Nothing clips or overlaps. |
+| Shell | both | **Pass.** Connected neutral panels, the Hierarchy/Assets tabs, the Problems/Console/History dock and the Read-only chip are unchanged. The titlebar is unchanged; traffic lights are hidden by the OS screen-share pill. |
+
+`resize-observation.jpg` has the same bytes as `primitive-min-top.jpg` (SHA `89e620e5…`).
 
 ## Native review (Astra's pixels, from source `64b9efe`, before this change)
 
@@ -143,7 +181,16 @@ Numeric evidence from `props.logs.jsonl` (300 samples) matches the 0024 v2 basel
   - `side-report.json` and `inspector-report-r2.json`.
 - `handoffs/0025-compound-native-review/screenshots/native/primitive-{wide,min}-top-inspector.png`: account-free crops.
 - `handoffs/0025-compound-native-review/result.md`.
-- Earlier commits on this branch hold the browser and engine evidence and the other native crops: `caf019d` and `df6a584`.
+- `handoffs/0025-compound-native-review/screenshots/native-final/` (final review, this commit): 8 account-free crops of the Inspector+Agent column:
+  - `mixed-min-end-tab`
+  - `parts-64-min-end`
+  - `parts-64-min-end-tab`
+  - `primitive-min-top`
+  - `mixed-wide-end-tab`
+  - `parts-64-wide-end`
+  - `parts-64-wide-end-tab`
+  - `primitive-wide-top`
+- Earlier commits on this branch hold the browser and engine evidence and the other native crops: `caf019d` and `df6a584`. The UI change is `6a9c832`.
 
 ## Commands and results
 
@@ -155,17 +202,18 @@ node handoffs/0025-compound-native-review/tools/capture-inspector.mjs artifacts/
 node handoffs/0025-compound-native-review/tools/measure-side-column.mjs artifacts/0025-side-r2   # 16 captures, no transcript overflow
 ```
 
-I ran no native automation and no Cargo, and I did not repeat the runtime look-dev runs.
+For the final review I re-ran `tsc -b --noEmit` (pass) and `vitest run` (15 files, 334 tests pass) on HEAD. I ran no native automation, no Cargo and no playback, and I did not repeat the runtime look-dev runs.
 
 ## Requests for Astra
 
-1. **Native rebuild:** rebuild from this commit and capture the four states listed above at 1000×650 and 1440×874, to confirm the compact Agent pane natively.
+1. **No further native captures are needed for this scope.**
 2. **Nonvisual correction:** none required.
 
 ## Limitations
 
-- The idle-Agent improvement is verified in the browser fixture and jsdom only; native pixels are pending.
-- The native evidence is lossy JPEG, and the traffic lights are hidden by the OS overlay.
+- The native evidence is lossy CUA JPEG (2× Retina), so there is no pixel-exact or colour-exact claim; 1 px separators and anti-aliasing are judged only approximately.
+- The macOS screen-sharing pill hides the traffic lights in every native capture, so their alignment is not reviewed. This is an OS capture limitation, and titlebar styling is unchanged.
+- The full native images contain account identity. They stay ignored, and only account-free crops are committed.
 - Reorder and invalid-data presentation are covered by behaviour, fixture and command tests, not native captures, because of the read-only and rejection boundaries.
 - The idle state is per session and is not persisted. Moving the separator once opts out until reload.
 - Determinism of the runtime frames is local to one host only.
