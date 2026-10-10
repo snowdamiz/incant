@@ -72,9 +72,10 @@ within its documented workload.
   renderer geometry, parallel material view rays, light clusters and directional
   cascade fitting. CPU/shared-command checks and all 41 renderer GPU tests pass.
   Integrated checks pass 318 Rust and 387 UI tests, Clippy, contracts and native
-  packaging. Claude engine/browser/native review is accepted; required hosted
-  checks remain open;
-  pixel-perfect cameras, sprites, tilemaps and 2D physics remain open. See
+  packaging. Claude engine/browser/native review is accepted. PR #41 merged as
+  `af15941` after all twelve checks passed on `a88343e`; its tested tree is
+  unchanged by the merge. Pixel-perfect cameras, sprites, tilemaps and 2D physics
+  remain open. See
   [orthographic cameras](docs/spikes/orthographic-cameras.md).
 
 - PR #39 merged as `72a53df` after all twelve required checks passed on
