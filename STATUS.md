@@ -58,8 +58,9 @@ within its documented workload.
   edits and recovery, hollow openings, rotated parts, dynamic contacts, stable
   reordering and continuous character travel pass. The initial tree passes 168
   Rust and 316 UI tests/build; Claude handoff 0024 will implement the nested-part
-  Inspector and review real motion. Public CLI, integrated native review and
-  hosted checks remain open. See [compound colliders](docs/spikes/compound-colliders.md).
+  Inspector and review real motion. Public CLI authoring/recovery and actual
+  macOS, browser/WASM and iOS-simulator compound execution pass. Integrated native
+  review and hosted checks remain open. See [compound colliders](docs/spikes/compound-colliders.md).
 
 - Read-only character movement queries are implemented on the primitive runtime,
   with script-owned gravity/jumping and Velocity commands. Real motion review

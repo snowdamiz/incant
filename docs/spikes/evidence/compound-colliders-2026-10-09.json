@@ -1,0 +1,97 @@
+{
+  "runtime_commit": "8b7f211981337ce95611aff9fe6d37394f83603b",
+  "headless_sha256": "37b787280810e19cfd3448a241189ff86c9077805f967ff4d1a113f52df4fe79",
+  "initial_checks": {
+    "rust_tests": 168,
+    "ui_baseline_tests": 316,
+    "clippy": "workspace all-targets passed",
+    "schemas_sdk_bridge": "passed"
+  },
+  "character_cases": {
+    "configurations": 24,
+    "ticks_per_configuration": 300,
+    "compound_floor_includes_adjacent_parts": true,
+    "result": "all ticks retain at least 95 percent tangential progress, grounded height and wall separation"
+  },
+  "cli": {
+    "passed": true,
+    "atomic_duplicate_rejection": true,
+    "stable_part_edit_undo_redo_reopen": true,
+    "strict_typescript": true,
+    "hollow_arch_query": true,
+    "parent_hit_identity": true,
+    "dynamic_compound_height": 0.2999277710914612,
+    "repeated_final_state_exact": true,
+    "author_files_unchanged": {
+      "compound.incant.json": "92096128e3d550d1e2b7943680cf5d2a007f9d2143e24996678243c430a68c7b",
+      "history.jsonl": "191b764fd092f4a58501d5756d1c883f6c894a2aaf4b7417a8fc798849266643"
+    },
+    "physical_device_gate": false
+  },
+  "platforms": {
+    "macos": {
+      "arch": "aarch64",
+      "character_movement": {
+        "collisions": [
+          "01M4HMNPR8KF6W092M0Y298YCQ"
+        ],
+        "grounded": true,
+        "sliding_down_slope": false,
+        "translation": [
+          0.10000000149011612,
+          5.1684826757991686e-05,
+          0.0
+        ]
+      },
+      "incant": "hello-world",
+      "ok": true,
+      "os": "macos",
+      "physics_backend": "rapier-0.36-enhanced-determinism",
+      "physics_y": 0.49993008375167847,
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "browser_wasm": {
+      "arch": "wasm32",
+      "character_movement": {
+        "collisions": [
+          "01M4HMR6ZW9R63F8AARM2XWBMD"
+        ],
+        "grounded": true,
+        "sliding_down_slope": false,
+        "translation": [
+          0.10000000149011612,
+          5.1684826757991686e-05,
+          0
+        ]
+      },
+      "incant": "hello-world",
+      "ok": true,
+      "os": "",
+      "physics_backend": "rapier-0.36-enhanced-determinism",
+      "physics_y": 0.49993008375167847,
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "wasm_sha256": "6edef5d60c27f4570e67df74ed4194f69c2dc43a73aee2246a95e029512ae4fd",
+    "ios_simulator": {
+      "ok": true,
+      "status": 0
+    },
+    "ios_sha256": "a4344373b2988fdeb0853f51a092d0051e6231694a090ba56fd75e1d20ab218a",
+    "workload": "Two adjacent box parts form the floor; a sphere settles on their seam and a primitive character sweeps on the compound surface."
+  },
+  "pending": [
+    "Claude object-array Inspector and rendered motion review",
+    "integrated native review and full checks",
+    "hosted checks and merge"
+  ],
+  "not_claimed": [
+    "mesh terrain",
+    "nested compound parts",
+    "per-part materials or masks",
+    "compound character bodies",
+    "physical-device game performance",
+    "universal determinism"
+  ]
+}

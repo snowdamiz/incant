@@ -108,17 +108,33 @@ fn walking_and_wall_sliding_keep_tangential_speed_on_every_tick() {
                             .collect();
                         let parts: Vec<_> = obstacles
                             .iter()
-                            .map(|e| incant_doc::ColliderPart {
-                                id: e.id.clone(),
-                                translation: serde_json::from_value(
-                                    e.components["Transform"]["translation"].clone(),
-                                )
-                                .unwrap(),
-                                rotation: [0., 0., 0., 1.],
-                                shape: serde_json::from_value(
-                                    e.components["Collider"]["shape"].clone(),
-                                )
-                                .unwrap(),
+                            .flat_map(|e| {
+                                let mut part = incant_doc::ColliderPart {
+                                    id: e.id.clone(),
+                                    translation: serde_json::from_value(
+                                        e.components["Transform"]["translation"].clone(),
+                                    )
+                                    .unwrap(),
+                                    rotation: [0., 0., 0., 1.],
+                                    shape: serde_json::from_value(
+                                        e.components["Collider"]["shape"].clone(),
+                                    )
+                                    .unwrap(),
+                                };
+                                if e.name == "Floor" {
+                                    // Exercise the shared seam, not just one box
+                                    // wrapped inside a compound.
+                                    part.shape = incant_doc::PrimitiveColliderShape::Box {
+                                        half_extents: [2.75, 0.1, 4.6],
+                                    };
+                                    part.translation[0] -= 2.75;
+                                    let mut right = part.clone();
+                                    right.id = "01JA2CHAR00000000000000001".into();
+                                    right.translation[0] += 5.5;
+                                    vec![part, right]
+                                } else {
+                                    vec![part]
+                                }
                             })
                             .collect();
                         for e in &obstacles {
