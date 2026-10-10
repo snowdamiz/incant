@@ -9,6 +9,7 @@
  * overrides the matching profile entry, and a schema `order` is kept exactly.
  */
 
+import type { ComponentSchema, FieldSchema } from '../../bridge/contract';
 import type { IconName } from '../../icons/Icon';
 import { formatNumber, isRecord, splitIdentifier } from './format';
 
@@ -42,10 +43,11 @@ export interface FieldHint {
   readonly omittedNote?: string;
   /**
    * A tag that depends on sibling values in the same component, such as a field
-   * the current mode ignores. Returns null when there is nothing to say or the
-   * siblings are not well-formed (it never guesses or repairs).
+   * the current mode ignores. Returns null when there is nothing to say, the
+   * siblings are not well-formed, or the mode is one the component's schema does
+   * not declare (it never guesses or repairs).
    */
-  readonly status?: (component: Readonly<Record<string, unknown>>) => FieldStatus | null;
+  readonly status?: (component: Readonly<Record<string, unknown>>, schema: ComponentSchema | undefined) => FieldStatus | null;
   /** Presents a plain string as a stable identifier (monospace, never a reference). */
   readonly identifier?: boolean;
   /** Abbreviation in one-line list summaries ("r" for radius); the full label is spoken. */
@@ -187,12 +189,17 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
       },
       '/fov_degrees': {
         title: 'Field of view',
-        status: (camera) => {
-          const mode = isOrthographicCamera(camera)
-            ? 'orthographic'
-            : isPixelPerfectCamera(camera)
-              ? 'pixel-perfect'
-              : null;
+        status: (camera, schema) => {
+          // Only a projection the schema declares makes the field of view unused. A kind
+          // it lacks (pixel-perfect, which main's schema does not have yet) is shown as
+          // unknown on the Projection row and never assumed here.
+          const kinds = unionVariants(schema?.properties.projection);
+          const mode =
+            kinds.has('orthographic') && isOrthographicCamera(camera)
+              ? 'orthographic'
+              : kinds.has('pixel_perfect') && isPixelPerfectCamera(camera)
+                ? 'pixel-perfect'
+                : null;
           return mode
             ? { short: 'Unused', long: `Not used by ${mode} projection. Kept for switching back to perspective.` }
             : null;
@@ -294,6 +301,11 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
   },
 };
 
+/** The variant tags a tagged-union field declares; empty for anything else. */
+function unionVariants(field: FieldSchema | undefined): ReadonlySet<string> {
+  return new Set(field?.type === 'tagged-union' && 'variants' in field ? Object.keys(field.variants) : []);
+}
+
 /**
  * True only for a well-formed orthographic projection: exactly `kind` and a
  * finite, positive numeric `vertical_size`. A missing, mistyped or non-positive
@@ -317,9 +329,11 @@ export function isOrthographicCamera(camera: Readonly<Record<string, unknown>>):
 }
 
 /**
- * The engine's pixel-perfect bounds (docs/spikes/pixel-perfect-cameras.md): each
- * logical dimension is a whole number from 16 to 4096, the product is at most
- * 4,194,304 pixels, and density is finite from 1 to 4096 pixels per metre.
+ * The pixel-perfect renderer's bounds: each logical dimension is a whole number from
+ * 16 to 4096, the product is at most 4,194,304 pixels, and density is finite from 1
+ * to 4096 pixels per metre. That renderer and its schema variant are not on main yet
+ * (they live on handoff/0033-pixel-integration, docs/spikes/pixel-perfect-cameras.md);
+ * the Inspector only applies this to a schema that declares `pixel_perfect`.
  */
 export const PIXEL_PERFECT_LIMITS = {
   minDimension: 16,

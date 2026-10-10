@@ -104,8 +104,8 @@ const component = (name) => async (page) => {
 
 const STATES = [
   { key: 'no-selection', ...fixture(), sizes: ['normal', 'minimum', 'wide'] },
-  { key: 'transform-camera', ...fixture(), steps: [tree('Pixel Camera')], sizes: ['normal', 'minimum', 'narrow', 'wide'] },
-  { key: 'camera-focus', ...fixture(), steps: [tree('Pixel Camera'), focusField('Near clip')], sizes: ['normal', 'minimum'] },
+  { key: 'transform-camera', ...fixture(), steps: [tree('Close-up Camera')], sizes: ['normal', 'minimum', 'narrow', 'wide'] },
+  { key: 'camera-focus', ...fixture(), steps: [tree('Close-up Camera'), focusField('Near clip')], sizes: ['normal', 'minimum'] },
   { key: 'light-fixture', ...fixture(), steps: [tree('Sun')], sizes: ['normal'] },
   { key: 'crate-error', ...fixture(), steps: [tree('Crate 03')], sizes: ['normal', 'minimum'] },
   { key: 'railing-compound', ...fixture(), steps: [tree('Broken Railing')], sizes: ['normal', 'minimum'] },
@@ -129,6 +129,8 @@ const STATES = [
   { key: 'native-character-collider', ...double, steps: [tree('Player Character'), component('Collider')], sizes: ['normal', 'minimum'] },
   { key: 'native-audio', ...double, steps: [tree('Audio Emitter')], sizes: ['normal'] },
   { key: 'native-ortho', ...double, steps: [tree('Map Camera')], sizes: ['normal'] },
+  { key: 'camera-rig', ...fixture(), steps: [tree('Camera Rig')], sizes: ['normal', 'minimum', 'narrow'] },
+  { key: 'map-camera', ...fixture(), steps: [tree('Map Camera')], sizes: ['normal', 'narrow'] },
   { key: 'native-broken-camera', ...double, steps: [tree('Broken Camera')], sizes: ['normal', 'minimum'] },
   { key: 'native-malformed', ...double, steps: [tree('Malformed Props')], sizes: ['normal', 'minimum'] },
   { key: 'native-long-name', ...double, steps: [tree('Mooring Post')], sizes: ['normal', 'minimum'] },

@@ -27,9 +27,11 @@ const artifacts = join(repoRoot, 'artifacts/0033-editor-design-review');
 /** [capture, crop, pair]: crop '' is the full window; pair false copies only the after image. */
 const PICKS = [
   ['no-selection-normal-1440x874', '', true],
-  ['transform-camera-normal-1440x874', '', true],
-  ['transform-camera-minimum-1000x650', '', true],
-  ['transform-camera-narrow-1440x874', 'side', true],
+  // Cameras present in both builds (the sample's third camera is perspective on main).
+  ['camera-rig-normal-1440x874', '', true],
+  ['camera-rig-minimum-1000x650', '', true],
+  ['map-camera-narrow-1440x874', 'side', true],
+  ['transform-camera-normal-1440x874', 'side', false],
   ['native-rubble-parts-normal-1440x874', 'inspector', true],
   ['native-rubble-parts-narrow-1440x874', 'inspector', true],
   ['native-rubble-parts-minimum-1000x650', 'inspector', true],
