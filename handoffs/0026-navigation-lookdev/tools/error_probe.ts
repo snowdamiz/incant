@@ -1,6 +1,6 @@
 // Exception repro for handoff 0026 (no rendering, no edit). One findPath per tick
-// around the open-floor point (4.7, 1.7) where walkable_probe.ts saw a thrown
-// "funnel did not cross its navigation corridor". Logs result or error per query.
+// around open-floor points where walkable_probe.ts saw a thrown query: (4.7, 1.7)
+// on the v7 binary and (4.3, 2.7) on the v8 binary. Logs result or error per query.
 import type { Json, ScriptApi } from '../../../sdk/ts/src/index';
 
 type Vec3 = [number, number, number];
@@ -9,6 +9,10 @@ const QUERIES: [Vec3, Vec3][] = [
   [[4.7, 0, 1.7], [4.8, 0, 1.7]], [[4.6, 0, 1.7], [4.8, 0, 1.7]], [[4.7, 0, 1.7], [6.6, 0, 1.2]],
   [[3.0, 0, 1.7], [6.0, 0, 1.7]], [[4.71, 0, 1.7], [4.7, 0, 1.7]], [[4.7, 0, 1.6], [4.71, 0, 1.6]],
   [[4.7, 0, 1.8], [4.71, 0, 1.8]], [[4.65, 0, 1.7], [4.66, 0, 1.7]], [[4.75, 0, 1.7], [4.76, 0, 1.7]],
+  // v8: (4.3, 2.7) threw in walkable_probe's tolerant pass (y 0.12, snap 0.1).
+  [[4.3, 0.12, 2.7], [4.31, 0.12, 2.7]], [[4.31, 0.12, 2.7], [4.3, 0.12, 2.7]], [[4.3, 0.05, 2.7], [4.31, 0.05, 2.7]],
+  [[4.3, 0, 2.7], [4.31, 0, 2.7]], [[4.3, 0.12, 2.7], [4.3, 0.12, 2.71]], [[4.29, 0.12, 2.7], [4.3, 0.12, 2.7]],
+  [[4.3, 0.12, 2.7], [6.6, 0.12, 1.2]], [[4.3, 0, 2.7], [6.6, 0, 1.2]],
 ];
 
 export default defineBehavior<{ tick: number } & Record<string, Json>>({
