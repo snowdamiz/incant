@@ -37,6 +37,27 @@ const combos = (item: HTMLElement) => [...item.querySelectorAll('.shortcuts__com
 const actions = (dialog: HTMLElement) => [...dialog.querySelectorAll('.shortcuts__row .shortcuts__action')].map((cell) => cell.firstChild?.textContent);
 
 describe('keyboard shortcuts dialog', () => {
+  it.each(['macos', 'windows'] as const)('names shortcut cells with their section and action on %s, including after filtering', (platform) => {
+    const { dialog } = open(platform);
+    const redoName = platform === 'macos' ? 'General Redo Shift Command Z' : 'General Redo Ctrl Y , or Ctrl Shift Z';
+    const assertContext = () => {
+      const redo = within(dialog).getByRole('cell', { name: redoName });
+      expect(redo).toBe(row(dialog, 'Redo').querySelector('.shortcuts__keys'));
+      expect(redo.tagName).toBe('TD');
+      expect(row(dialog, 'Redo').querySelector('.shortcuts__action')?.tagName).toBe('TD');
+      expect([...dialog.querySelectorAll('.shortcuts__section th')].every((th) => th.getAttribute('scope') === 'rowgroup')).toBe(true);
+    };
+    assertContext();
+    const filter = within(dialog).getByRole('searchbox', { name: 'Filter shortcuts' });
+    fireEvent.change(filter, { target: { value: 'redo' } });
+    assertContext();
+    fireEvent.change(filter, { target: { value: 'hierarchy rename' } });
+    expect(within(dialog).getByRole('cell', { name: 'Hierarchy Rename F2' })).toBe(row(dialog, 'Rename').querySelector('.shortcuts__keys'));
+    expect(within(dialog).queryByRole('cell', { name: redoName })).toBeNull();
+    fireEvent.change(filter, { target: { value: '' } });
+    assertContext();
+  });
+
   it('writes macOS keys as in its menus, with spoken names', async () => {
     const { container, dialog } = open('macos');
     expect(combos(row(dialog, 'Redo'))).toEqual(['⇧⌘Z']);

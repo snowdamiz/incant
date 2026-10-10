@@ -55,6 +55,25 @@ async function expectNoAxeViolations(container: HTMLElement) {
 }
 
 describe('ChatGPT account dialog', () => {
+  it('keeps one polite live status through browser wait, validation and OAuth completion', () => {
+    const { bridge, publish } = providerBridge(PROVIDER_FIXTURES.browser);
+    renderBridge(bridge);
+    const d = openDialog();
+    const status = within(d).getByRole('status');
+    expect(status.getAttribute('aria-live')).toBe('polite');
+    expect(status.textContent).toContain('Continue in your browser');
+    publish(PROVIDER_FIXTURES.validating);
+    expect(within(d).getByRole('status')).toBe(status);
+    expect(status.textContent).toContain('Finishing sign-in');
+    publish(PROVIDER_FIXTURES['signed-in']);
+    expect(within(d).getByRole('status')).toBe(status);
+    expect(status.textContent).toBe('Signed in as ada@example.com');
+    expect(status.classList.contains('visually-hidden')).toBe(true);
+    expect(d.contains(document.activeElement)).toBe(true);
+    expect(document.activeElement).not.toBe(within(d).getByRole('button', { name: 'Sign out' }));
+    expect(document.activeElement).toBe(within(d).getByRole('button', { name: 'Close' }));
+  });
+
   it('signed out: offers Continue with ChatGPT, says where the sign-in is kept, and starts browser sign-in', async () => {
     const { bridge, requests } = providerBridge(PROVIDER_FIXTURES['signed-out']);
     renderBridge(bridge);

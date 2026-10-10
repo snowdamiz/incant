@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- The integrated editor now preserves live OAuth completion announcements and
+  recovers Close focus instead of reusing Cancel as Sign out. Shortcut cells keep
+  native table semantics with explicit group/action/key context; returning to the
+  same Problems page after filtering announces again with timer cleanup. All 504
+  UI tests, strict TypeScript and the production build pass. Styling is unchanged;
+  native packaging, live screen-reader and Claude rendered acceptance remain
+  separate. See [editor correctness evidence](docs/spikes/editor-windowing-correctness.md#account-shortcuts-and-repeated-page-announcements-2026-10-10).
+
 - Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
   SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
   and their exclusive scope ends; rejected batches restore the numeric undo

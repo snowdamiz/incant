@@ -230,6 +230,7 @@ function AccountBody({
             </ActionButton>
           ) : null}
           <ActionButton
+            key="cancel-sign-in"
             onClick={() => void send({ type: 'provider.cancel' })}
             disabled={busy || !can('provider.cancel')}
             autoFocusTarget={provider.phase === 'validating'}
@@ -243,8 +244,9 @@ function AccountBody({
       if (provider.method === 'api-key') {
         status = <Status id="account-status">Connected with an API key, set up from the command line, where you can change it.</Status>;
       } else {
-        // Named for assistive tech; the list below shows the signed-in account visibly.
-        status = <span id="account-status" className="visually-hidden">Signed in as {provider.accountLabel}</span>;
+        // Keep the existing live node for asynchronous completion; the account list
+        // already shows this identity visibly.
+        status = <Status id="account-status" visuallyHidden>Signed in as {provider.accountLabel}</Status>;
       }
       actions = confirmingSignOut ? null : (
         <>
@@ -256,6 +258,7 @@ function AccountBody({
           {/* Never the initial focus: opening account settings must not put Enter on a
               destructive path. With no autofocus target here, focus starts on Close. */}
           <ActionButton
+            key="sign-out"
             icon="signOut"
             tone="danger"
             onClick={() => setConfirmingSignOut(true)}
@@ -349,15 +352,17 @@ function Status({
   detail,
   spinner = false,
   tone = 'neutral',
+  visuallyHidden = false,
 }: {
   id: string;
   children: ReactNode;
   detail?: string;
   spinner?: boolean;
   tone?: 'neutral' | 'error';
+  visuallyHidden?: boolean;
 }) {
   return (
-    <div id={id} className={`account__status account__status--${tone}`} role="status" aria-live="polite">
+    <div id={id} className={visuallyHidden ? 'visually-hidden' : `account__status account__status--${tone}`} role="status" aria-live="polite">
       <p className="account__headline">
         {spinner ? <span className="spinner spinner--small" aria-hidden="true" /> : null}
         <span>{children}</span>

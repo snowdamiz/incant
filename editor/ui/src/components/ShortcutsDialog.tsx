@@ -149,6 +149,7 @@ export function ShortcutsDialog({ onClose }: { onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
   const statusId = useId();
+  const tableId = useId();
   useEffect(() => filterRef.current?.focus(), []);
 
   const groups = useMemo(() => {
@@ -242,17 +243,21 @@ export function ShortcutsDialog({ onClose }: { onClose: () => void }) {
               {groups.map((group, groupIndex) => (
                 <tbody key={group.title}>
                   <tr className="shortcuts__section">
-                    <th colSpan={2} scope="colgroup" id={`shortcuts-group-${groupIndex}`}>
+                    <th colSpan={2} scope="rowgroup" id={`${tableId}-group-${groupIndex}`}>
                       {group.title}
                     </th>
                   </tr>
-                  {group.items.map((item) => (
+                  {group.items.map((item, itemIndex) => (
                     <tr key={item.action} className="shortcuts__row">
-                      <td className="shortcuts__action">
+                      <td className="shortcuts__action" id={`${tableId}-action-${groupIndex}-${itemIndex}`}>
                         {item.action}
                         {item.where ? <span className="shortcuts__where">{item.where}</span> : null}
                       </td>
-                      <td className="shortcuts__keys">
+                      <td className="shortcuts__keys" aria-labelledby={[
+                        `${tableId}-group-${groupIndex}`,
+                        `${tableId}-action-${groupIndex}-${itemIndex}`,
+                        ...combosFor(item, platform).map((_, index) => `${tableId}-combo-${groupIndex}-${itemIndex}-${index}`),
+                      ].join(' ')}>
                         {combosFor(item, platform).map((combo, index) => (
                           <Fragment key={index}>
                             {index > 0 ? (
@@ -260,7 +265,7 @@ export function ShortcutsDialog({ onClose }: { onClose: () => void }) {
                                 {item.paired ? '/' : 'or'}
                               </span>
                             ) : null}
-                            <span className="visually-hidden">
+                            <span className="visually-hidden" id={`${tableId}-combo-${groupIndex}-${itemIndex}-${index}`}>
                               {index > 0 ? ', or ' : ''}
                               {spokenCombo(combo, platform)}
                             </span>

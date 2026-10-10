@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { Ref } from 'react';
 import type { IconName } from '../../icons/Icon';
 import { Icon } from '../../icons/Icon';
@@ -63,6 +63,8 @@ export function Pager({
 }) {
   const lastButton = useRef<HTMLButtonElement>(null);
   const [spoken, setSpoken] = useState('');
+  const repeatTimer = useRef<number | undefined>(undefined);
+  useEffect(() => () => window.clearTimeout(repeatTimer.current), []);
   if (page.count <= 1) return null;
   const range = (index: number) => {
     const start = index * PAGE_SIZE;
@@ -72,7 +74,20 @@ export function Pager({
   const go = (target: number) => {
     if (target < 0 || target >= page.count || target === page.index) return;
     page.go(target === page.anchorPage ? null : target);
-    setSpoken(`Showing ${noun} ${range(target)} of ${page.total.toLocaleString()}`);
+    const message = `Showing ${noun} ${range(target)} of ${page.total.toLocaleString()}`;
+    window.clearTimeout(repeatTimer.current);
+    repeatTimer.current = undefined;
+    if (message === spoken) {
+      // Filtering can reset the page without changing the last spoken range.
+      // Separate removal and insertion so the same range is announced again.
+      setSpoken('');
+      repeatTimer.current = window.setTimeout(() => {
+        repeatTimer.current = undefined;
+        setSpoken(message);
+      }, 30);
+    } else {
+      setSpoken(message);
+    }
   };
   const atStart = page.index === 0;
   const atEnd = page.index >= page.count - 1;
