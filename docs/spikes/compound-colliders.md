@@ -33,8 +33,7 @@ Actual macOS, browser/WASM and iOS-simulator execution uses two adjacent floor
 parts, a sphere settling on their seam, and a primitive character sweep. All three
 pass; macOS and browser return the same movement and settling values. These are
 platform execution checks, not physical-device performance or a universal
-determinism claim. Full visual/native, performance and hosted verification remain
-open. Machine-readable results are in
+determinism claim. Final native appearance and hosted verification remain open. Machine-readable results are in
 [evidence/compound-colliders-2026-10-09.json](evidence/compound-colliders-2026-10-09.json).
 
 Claude handoff 0024 owns the object-array Inspector and real rendered look-dev.
@@ -55,3 +54,19 @@ variation; repeated playback final states match and author files stay unchanged.
 This small synthetic workload shows that high part counts are costly, even when
 the visible extent is identical. Prefer a simple primitive when it describes the
 shape. These measurements do not satisfy a complete-game or target-device gate.
+
+
+## Integrated checks and paused native review
+
+The corrected tree passes 168 Rust tests, 40 explicit GPU checks, 329 UI tests,
+Clippy, strict TypeScript, generated schema/SDK/bridge checks and the native
+release build. Public primitive, character and compound CLI probes pass again.
+Claude's object-list Inspector is integrated; one further correctness fix follows
+the selected part's stable ID and preserves row focus through reordered snapshots.
+The new regression first failed on index-based selection, then passed.
+
+Before the director paused all computer use and capture on 2026-10-09, native CUA
+checks confirmed the three-part list, End/Tab navigation, exact nested paths, full
+stable ID and saved-account restoration without prompts. Final wide/minimum native
+appearance and 64-part review are pending; no acceptance is claimed for them.
+Code, numerical replay, tests and CI continue while capture is paused.

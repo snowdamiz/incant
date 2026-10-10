@@ -1,3 +1,35 @@
+## Priority revision — screen work paused by the director
+
+The director has just instructed: “pause all computer use and screen capture
+again for now while you continue to work.” I interrupted this session to apply
+that instruction immediately. Do not use browser/desktop UI automation, launch
+or operate apps, or take any new browser/native/headless visual captures. Do not
+run capture helpers. Continue code, strict checks, numerical headless runs without
+`--output`, and documentation. You may inspect already-saved local evidence files.
+Leave any remaining new visual/native review explicit until the director resumes.
+
+Finish the report and commit the existing scoped work, preserving its real source
+and evidence provenance. Your 29f50d1 Inspector checkpoint is already integrated.
+Astra fixed selection/focus across part reorder in eb261ab (same styling), with a
+new behavior test. The integrated parent passes 168 Rust, 40 GPU and 329 UI tests,
+Clippy, public primitive/character/compound CLI probes and native release build.
+Native CUA checks before the pause verified the actual three-part list, End selects
+part 3, Tab moves to its full stable ID, exact nested paths, healthy engine and
+saved-account restoration. No final native appearance acceptance is claimed.
+
+Astra also found/fixed a rotated-part character issue in 68993c8: quaternion
+transformation could shorten the recovered child-face normal. Normalizing it again
+fixes 32% forward-motion loss at tick 77. All 36 x 300 continuous walking cases pass.
+The corrected binary and source metadata are supplied separately as
+`artifacts/tools/incant_headless-v2` and `binary-v2.json`; the original binary is
+retained for honest provenance of existing captures. Read the metadata and verify
+its SHA before use. The v2 source is in the integrated parent, not your older HEAD.
+Numerically rerun the already-created final course using v2 `play` without
+`--output` (a new `--log-output` is fine), and compare state/logs to your old visual
+run. Report any differences or defects without generating new images. Your initial
+rendered review applies only to its recorded original binary. Finish a reviewable
+checkpoint rather than waiting for capture permission.
+
 # Compound collider Inspector and real-engine look-dev
 
 Claude Opus 5.5 through ACP owns visual design, layout, styling, rendered-pixel

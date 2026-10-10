@@ -53,14 +53,17 @@ within its documented workload.
 
 ## Active work
 
-- Compound collider foundations support 1–64 stable primitive parts with local
-  offsets/rotations, one parent body and aggregated sensor/hit identity. Atomic
-  edits and recovery, hollow openings, rotated parts, dynamic contacts, stable
-  reordering and continuous character travel pass. The initial tree passes 168
-  Rust and 316 UI tests/build; Claude handoff 0024 will implement the nested-part
-  Inspector and review real motion. Public CLI authoring/recovery and actual
-  macOS, browser/WASM and iOS-simulator compound execution pass. Integrated native
-  review and hosted checks remain open. See [compound colliders](docs/spikes/compound-colliders.md).
+- Compound colliders support 1–64 stable local primitive parts with one body and
+  parent sensor/hit identity. Atomic edits/recovery, hollow openings, rotated parts,
+  stable reordering and 36 continuous character-walking cases pass. A rotated-face
+  normal correction fixes a measured walking slowdown. Claude's compact part
+  Inspector is integrated; selection follows stable IDs through reordered snapshots.
+  Integrated checks pass 168 Rust, 40 GPU and 329 UI tests/build, Clippy, generated
+  contracts and public CLI probes. Actual macOS/browser/iOS baseline execution
+  passes. Initial native keyboard/field/account checks pass. Final native appearance
+  and 64-part review are deferred by the director's renewed computer-use/capture
+  pause; numerical work and CI continue. Hosted checks/merge remain open.
+  See [compound colliders](docs/spikes/compound-colliders.md).
 
 - Read-only character movement queries are implemented on the primitive runtime,
   with script-owned gravity/jumping and Velocity commands. Real motion review

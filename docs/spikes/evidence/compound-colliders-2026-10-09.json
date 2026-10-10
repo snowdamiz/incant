@@ -83,8 +83,9 @@
     "workload": "Two adjacent box parts form the floor; a sphere settles on their seam and a primitive character sweeps on the compound surface."
   },
   "pending": [
-    "Claude object-array Inspector and rendered motion review",
-    "integrated native review and full checks",
+    "Claude completed report and corrected-runtime numeric replay",
+    "native wide/minimum appearance and 64-part review (director paused computer use and captures)",
+    "corrected-runtime visual review if numerical replay changes motion",
     "hosted checks and merge"
   ],
   "not_claimed": [
@@ -191,5 +192,46 @@
       "requested_dx": 0.02666666666666667
     },
     "after": "36 cases x 300 ticks pass >=95% progress; recovered child normals are normalized after local rotation"
+  },
+  "corrected_runtime": {
+    "source": "aa2a4d5beaa93d7ef6d8a6b3be15cca84fdaad79",
+    "headless_sha256": "8235a36a825de9a989787a439dc28c30a7d42a04eb2a05c4714b47f95661de99",
+    "rust_tests": 168,
+    "gpu_tests": 40,
+    "ui_tests": 329,
+    "clippy": "passed",
+    "native_release_build": "passed",
+    "generated_schemas_sdk_bridge_conventions": "passed",
+    "tool_tests": 5,
+    "public_primitive_cli": "passed",
+    "public_character_cli": "passed",
+    "public_compound_cli": {
+      "passed": true,
+      "atomic_duplicate_rejection": true,
+      "stable_part_edit_undo_redo_reopen": true,
+      "strict_typescript": true,
+      "hollow_arch_query": true,
+      "parent_hit_identity": true,
+      "dynamic_compound_height": 0.2999277710914612,
+      "repeated_final_state_exact": true,
+      "author_files_unchanged": {
+        "compound.incant.json": "29169be9a1627054c3f2a3a1e6ca615cf9a065b9ab779a1895a5a7eb7936034c",
+        "history.jsonl": "262c1f15800c7cbef0ee2d01124af29f25251425eba16069e630c9efaca31360"
+      },
+      "physical_device_gate": false
+    }
+  },
+  "native_before_pause": {
+    "source": "eb261ab",
+    "binary_sha256": "91945e8c0a5e42b911ce4bafc7a1e691e85a10031cdbf3c02a6ef610c7a50ead",
+    "project": "public compound CLI probe",
+    "verified": [
+      "native schema displays 3 compound parts",
+      "End selects part 3 and matching nested path",
+      "Tab leaves list for full stable ID",
+      "saved login restored without prompting",
+      "engine reports zero errors/warnings"
+    ],
+    "appearance_approval": false
   }
 }
