@@ -1,82 +1,101 @@
-# 0025: Compound native Inspector and corrected-runtime review — result
+# 0025 — Compound native Inspector and corrected-runtime review: result
 
-**Status: partial native appearance acceptance. The corrected-runtime look-dev is accepted.**
+**Status: scoped appearance accepted, with one UI improvement committed. Astra will rebuild for the final native confirmation of that improvement.**
 
-- **Native (Inspector compound states):** accepted from Astra's native pixels at normal (1440×874) and minimum (1000×650) window sizes. The states are mixed parts, exact paths, full readable IDs, End then Tab, and the 64-part bounded list with scroll and focus.
-- **Native, still open:** three items:
-  - traffic-light alignment, which a CUA overlay hides;
-  - selection after reorder, which was not captured natively;
-  - an unambiguous primitive-regression frame.
-- **Runtime:** the corrected-runtime frames of the 0024 course were reviewed on the SHA-verified binary. They show no new defect.
-- **No changes to `editor/ui/src`:** no UI defect was found.
+- **Native Inspector:** accepted for the real states Astra captured at normal (1440×874) and minimum (1000×650) window sizes:
+  - a valid mixed compound;
+  - the valid 64-part list (bounded, scrolling, focus);
+  - End then Tab to the full ID;
+  - exact paths;
+  - scrolled fields;
+  - primitive regression.
+- **Corrected-runtime frames and numbers:** accepted. That review is complete and was not repeated.
+- **New in this increment:** the crowded minimum-size Inspector is improved. When the agent cannot run, the Agent pane takes a compact default height. This has been verified in the browser fixture; its native pixels await Astra's rebuild.
 - **Not claimed:** this is not a phase-gate approval or a complete-engine claim.
 
 ## Model and transport
 
-- Model: **Claude Opus 5.5** (`claude-opus-5-5`), in Claude Code (Claude Agent SDK). The handoff runner supplies the ACP transport and the director's subscription; I cannot verify the transport from inside the session.
+- Model: **Claude Opus 5.5** (`claude-opus-5-5`) in Claude Code (Claude Agent SDK). The handoff runner provides the ACP transport and the director's subscription; I cannot verify the transport from inside the session.
 - No other model was substituted.
 
-## Director feedback acknowledged
+## Priority revisions and feedback acknowledged
 
-- **Computer use and screen capture are reauthorized (2026-10-10).** This supersedes the 0024 pause, and screen work has resumed.
-- **Native interaction stayed with Astra.** Astra supplied the native interactions and captures through CUA. I reviewed them with the image reader and ran no shell native automation.
-- **Validated on the integrated code:** source `64b9efe` (current main plus `eb261ab` and the rotated-child normal fix). This handoff's commits touch only handoff files.
-- **Director's layout preserved and seen in native pixels:**
-  - neutral connected panels;
-  - Hierarchy and Assets as separate workspace tabs;
-  - a bottom dock with only Problems, Console and History.
-- **No solver inference from spawn height.** I did not alter the solver or runtime.
+- **Follow-up (Astra, under the director's standing request to keep improving small UI issues):** the minimum-size Inspector was crowded while the Agent is unavailable. I applied a layout fix using my own design judgment (below), keeping resizable panels and the existing layout. The agent runtime, the project mutation boundary and the titlebar are untouched.
+- **Manifest and notes read.** I used `artifacts/0025-native/manifest.json` and `notes.md`, with the `.jpg` names. The earlier `.png` files are identical, mislabelled copies, and they stay ignored.
+- **Read-only boundaries recorded, not requested again:**
+  - **Reorder:** the read-only Inspector has no reorder control. Stable selection across reorders is covered by the `eb261ab` behaviour test.
+  - **Invalid data:** native code rejects invalid projects, so it never shows a field-level invalid snapshot. Malformed nested data is covered by the browser fixture (32 captures) and by schema and command rejection tests.
+- **Traffic lights:** the macOS screen-sharing indicator covers the traffic-light pixels during CUA capture. This is an OS limitation, not an app defect, and titlebar styling is unchanged in this increment.
+- **Earlier feedback:** computer use and capture are reauthorized. Native interaction is by Astra through CUA. Validation is on `64b9efe`. Connected panels, the separate Assets workspace and the Problems/Console/History dock are preserved.
 
-## Inputs and provenance
+## UI improvement: compact Agent pane while the agent cannot run
 
-Binary, from `artifacts/tools/binary.json`:
+**Defect.** At the minimum window size the side column gave the Agent its normal default of `clamp(0.33·h, 260, 340)`, which is 260 px at 650 tall, even when the pane could only say why it is unavailable. The Inspector kept 321 px, of which about 285 px was scrollable. In the native 64-part minimum capture, the part card's ID row was cut off at the Agent boundary.
 
-| Item | Value |
+**Change** (`editor/ui/src/shell/layout.ts`, `editor/ui/src/App.tsx`):
+
+- **New `idleAgentHeight(h)`:** returns `clamp(0.24·h, 200, 240)`. It is bounded like `clampLayout`, so it is never taller than the regular agent default.
+- **When it applies:** while `snapshot.agent.status` is anything other than `idle` or `running` (signed out, checking, error, not ready, or no engine), the side column uses `min(layout.agent, idleAgentHeight)`.
+- **When it stops applying:**
+  - The first time someone moves the Agent separator (pointer or keyboard), their size wins, even while the agent is unavailable.
+  - A ready agent (`idle` or `running`) gets the normal default size again.
+- **Why 200 px:** that is the measured height that fits the compact empty state (title plus reason, with no mark below 160 px of transcript) and the one-line disabled composer, including the "Continue with ChatGPT" sign-in button.
+- **Why there was no CSS change:** the compact empty state from `6cb489a` already handles this height.
+
+**Measured in the browser fixture** (headless Chrome 155, `tools/measure-side-column.mjs`, Rubble Pile selected; 16 captures):
+
+| Window | Agent before → after | Inspector before → after | Transcript overflow |
+|---|---|---|---|
+| 1000×650 | 260 → **200** | 321 → **381** (+19%) | none, in all 4 provider states |
+| 1440×874 | 288 → **210** | n/a → **595** | none |
+| 1440×900 | 297 → **216** | 534 → **615** (+15%) | none |
+| 1920×1080 | 340 → **240** | n/a → **771** | none |
+
+- **Native reason text:** I also checked it, substituting the exact native wording ("Use the headless agent command for the Phase 0 provider spike. …"). It fits without scrolling: 82 of 82 px at 650 tall, and 92 of 92 px at 874 tall. The transcript stays non-tabbable because nothing overflows.
+- **Inspector regression re-run** (`tools/capture-inspector.mjs` → `artifacts/0025-ui-r2`, 32 captures):
+  - 0 axe violations, 0 page errors, 0 remote requests, 0 clipped inputs, 0 px horizontal overflow.
+  - Exactly one tabbable option per list.
+  - Focus stays visible for End and End then Tab at both sizes.
+- **Result at 1000×650:** with part 64 selected, the card's ID and Offset now show above the Agent pane (`screenshots/agent-idle/before-…` vs `after-…`).
+
+**Tests added:**
+
+- `layout.test.ts`: idle heights at 650, 874, 1080 and 1440 px tall, each at least 200 and below the regular default.
+- `App.test.tsx`:
+  - an unavailable agent starts compact;
+  - a keyboard separator move keeps the user's size (+16);
+  - a ready agent with `agent.send` gets the full default.
+
+**Native confirmation pending:** Astra's rebuild should capture, at 1000×650 and 1440×874:
+
+- 64 Parts after End;
+- 64 Parts after End then Tab;
+- Dumbbell after End then Tab;
+- Floor at the top of the Inspector.
+
+## Native review (Astra's pixels, from source `64b9efe`, before this change)
+
+Provenance: native app `9ce81f7e…bca5980`, project `a945aeee…6bd419`. These are CUA JPEG bytes at 2× Retina scale, unchanged; the SHA-256 of every file is in the manifest.
+
+**Limitations of the JPEGs:**
+
+- They are lossy, so there is no pixel-exact or colour-exact claim. Fine anti-aliasing and the 1 px separators are judged only approximately.
+- They show the director's real account email, so the originals stay ignored. The committed `screenshots/native/*-inspector.png` files are Inspector-column crops (sips crop to PNG, with no other edits) that exclude the account chip.
+- `primitive-min-top.jpg` is 1000×873 logical: minimum width, not minimum height.
+
+| Capture | Verdict |
 |---|---|
-| Source | `64b9efe5e7ab0e1bdf464539b65c73a570b37e88` |
-| `binary_sha256` | `290d85195933866c5cb4793d0374f6354b8a69397d9743bdd7e557511ebc580e` |
-| `shasum -a 256 artifacts/tools/incant_headless` | **matches** |
+| `mixed-default`, `mixed-end-tab` (1440×874) | **Pass.** `3 parts · 2 sphere, 1 box`. Card shows `/shape/parts/0` and then `/shape/parts/2`. End selects row 3, which is visibly different from the hover tint. Tab gives a full-width ring around the full ID ending `112`. |
+| `mixed-min` (1000×650) | **Pass.** The Inspector scrolls inside its own panel. The card and the 2×2 quaternion are legible. |
+| `parts-64-default` (1440×874) | **Pass.** The list is bounded at about 6.5 rows, with the cut-off row as a scroll cue. The summary truncates; the full text is in its tooltip and accessible description. |
+| `parts-64-min-end`, `parts-64-min-end-tab` (1000×650) | **Pass.** Row 64 is focused with its ring inside the well, and a scrollbar is visible. `/shape/parts/63`. The ID ending `1063` is fully readable, and `-ax.txt` confirms it is the selected text. This was the crowding that motivated the change above. |
+| `parts-64-wide-end-tab`, `-detail-scrolled` (1440×873) | **Pass.** Half extents, Material, Collision and the mask bars render, with no overflow. |
+| `primitive-wide-top` (1440×873), `primitive-min-top` (1000×873) | **Pass (primitive regression).** Floor shows `box` with half extents 10 / 0.5 / 10 and the Material/Collision groups, unchanged from earlier primitive presentation. "Half extents m" wraps to two lines at the default width, which is acceptable and pre-existing. |
+| `primitive-min`, `resize-observation` (1000×650) | **Pass.** These are scrolled views; the scroll was Astra's action (see the manifest). |
+| Shell | **Pass.** Connected neutral panels, the Hierarchy/Assets tabs, and a dock with only Problems/Console/History. Traffic lights are not reviewable because of the OS pill. |
+| Viewport | **Out of scope.** The native fixture's entities draw as default cubes, because there is no compound render mesh. |
 
-Native captures:
-
-- Astra's native app, per `binary.json`: `native_sha256` `9ce81f7e…bca5980`, project `a945aeee…6bd419`.
-- There are 10 captures in `artifacts/0025-native/`. **`manifest.json` was not supplied**, so I inferred the state names from the file names and pixels.
-- The captures are **JPEG data with a `.png` extension** (JFIF, 2× Retina): 2880×1748/1746 for 1440-wide windows and 2000×1300 for 1000×650. They are lossy, not raw.
-- **They show the director's real ChatGPT account email in the titlebar, so they stay ignored and uncommitted.**
-- Committed derivatives are Inspector-column crops only (`sips` crop, re-encoded as PNG with no other edits), and they exclude the account chip.
-
-Truncated SHA-256 of the originals:
-
-| Capture | SHA-256 (truncated) |
-|---|---|
-| `mixed-default` | `64e9bb37…` |
-| `mixed-end-tab` | `2ff08103…` |
-| `mixed-min` | `222504c7…` |
-| `parts-64-default` | `1e8a2b0c…` |
-| `parts-64-min-end` | `02043384…` |
-| `parts-64-min-end-tab` | `f25f422e…` |
-| `parts-64-wide-end-tab` | `42499d7e…` |
-| `parts-64-wide-detail-scrolled` | `2caf55df…` |
-| `primitive-min` | `9a29f4e7…` |
-| `resize-observation` | `988817d2…` |
-
-## Native review (Astra's pixels)
-
-| State | Size | Verdict |
-|---|---|---|
-| Dumbbell mixed parts, default | 1440 | **Pass.** Summary `3 parts · 2 sphere, 1 box`. Compact rows: `r 0.3 m` and `½ 0.7 × 0.1 × 0.1 m`. Card `Part 1 of 3` with `/shape/parts/0`. Full ID `000…0110` readable. |
-| Dumbbell End then Tab | 1440 | **Pass.** Row 3 is selected (tinted), and the hovered row 1 is visibly different (neutral grey). Caption `/shape/parts/2`. Tab puts focus on the ID: a full-width lavender ring, all 26 characters selected, and nothing clipped. |
-| Dumbbell | 1000×650 | **Pass.** The Inspector scrolls inside its own panel. The list, card, Offset and the 2×2 quaternion are legible. |
-| 64 parts, default | 1440 | **Pass.** The well is bounded at about 6.5 rows, and row 7 is cut by the well edge as the scroll cue. The summary truncates (`…21 sphere, 21…`); the full text is in `title` and `aria-describedby`. |
-| 64 parts End | 1000×650 | **Pass.** Row 64 is focused with its ring fully inside the well. A list scrollbar is visible. Card `Part 64 of 64` with `/shape/parts/63`. |
-| 64 parts End then Tab | 1000×650 and 1440 | **Pass.** The row ring hands off to the ID ring, and row 64 stays selected. The full ID `…1063` is readable. `parts-64-min-end-tab-ax.txt` reports the selected text as the ID. |
-| 64 parts, detail scrolled | 1440 | **Pass.** Half extents `0.25 / 0.3 / 0.4`, Material, Collision, and the mask bars render like the primitive masks. There is no horizontal overflow. |
-| `resize-observation` | 1000×650 | **Pass, with an observation.** After resizing to the minimum, the Inspector half of the right column is about 255 pt tall, so only list rows 1–2 show before the Agent pane. Everything scrolls and nothing clips or overlaps. The shell's equal Inspector/Agent split is director-owned layout, so I left it unchanged; see Open questions. |
-| `primitive-min` (Floor) | 1000×650 | **Inconclusive.** The Inspector is scrolled to Friction/Restitution/Collision/masks, which render correctly. The Shape row is off-screen, and without the manifest I cannot tell whether the scroll offset was carried over from the previous entity or set by Astra on purpose. |
-| Shell and titlebar | both | **Panels pass, traffic lights not reviewable.** Panels are connected, the toolbar is centred, the dock is correct, and the Read-only chip is present. A purple CUA/control overlay pill covers the traffic-light area in every capture, so I **cannot confirm traffic-light alignment**. |
-| Viewport | both | **Out of scope.** The compound entities draw as the default cube meshes, because this native project has no compound render mesh. That is not an Inspector defect, and there is no collider debug draw. |
-
-The browser-fixture pass from the first checkpoint still stands for hostile malformed data: 32 captures, 0 axe violations, 0 clipped inputs and 0 overflow. See `screenshots/browser/`.
+The browser-fixture hostile-data evidence from the first checkpoint still stands: 32 captures with 0 axe violations, 0 clipped inputs and 0 overflow (`screenshots/browser/`).
 
 ## Corrected-runtime look-dev (SHA-verified binary)
 
@@ -112,51 +131,41 @@ Numeric evidence from `props.logs.jsonl` (300 samples) matches the 0024 v2 basel
 
 **New runtime defects:** none.
 
-## Changed paths (this checkpoint)
+## Changed paths (this increment)
 
-- `handoffs/0025-compound-native-review/result.md` (rewritten).
-- `handoffs/0025-compound-native-review/screenshots/native/`: 7 Inspector-column crops with no account content:
-  - `mixed-end-tab`
-  - `mixed-min`
-  - `parts-64-min-end`
-  - `parts-64-min-end-tab`
-  - `parts-64-wide-end-tab`
-  - `parts-64-wide-detail-scrolled`
-  - `resize-observation`
-- `handoffs/0025-compound-native-review/screenshots/engine/`: four frames copied unchanged from run A, plus two 2×2 pixel-copy sheets made with `contact_sheet.py`:
-  - `arch-t156-through-opening.png`
-  - `overview-t148-arch-and-terrace.png`
-  - `props-t024-falling.png`
-  - `props-t040-landed.png`
-  - `sheet-arch-t100-t156-t200-overview-t148.png`
-  - `sheet-props-t024-t040-t300-overview-t300.png`
-- Committed in the earlier checkpoint `caf019d`: `tools/capture-inspector.mjs` and `screenshots/browser/`.
+- `editor/ui/src/shell/layout.ts`: adds `IDLE_AGENT_MIN` and `idleAgentHeight`.
+- `editor/ui/src/App.tsx`: the side column uses the idle Agent height until the separator is moved or the agent is ready; adds `windowHeight` state.
+- `editor/ui/src/shell/layout.test.ts` and `editor/ui/src/App.test.tsx`: new tests.
+- `handoffs/0025-compound-native-review/tools/measure-side-column.mjs` (new): browser measurement of the side column. It refuses an existing output directory.
+- `handoffs/0025-compound-native-review/screenshots/agent-idle/`:
+  - before and after full-window views at 1000×650;
+  - four side-column crops;
+  - `side-report.json` and `inspector-report-r2.json`.
+- `handoffs/0025-compound-native-review/screenshots/native/primitive-{wide,min}-top-inspector.png`: account-free crops.
+- `handoffs/0025-compound-native-review/result.md`.
+- Earlier commits on this branch hold the browser and engine evidence and the other native crops: `caf019d` and `df6a584`.
 
-## Tests
+## Commands and results
 
-Results on this code; no UI source changed after them:
+```sh
+cd editor/ui && npx tsc -b --noEmit     # strict: pass
+npx vitest run                          # 15 files, 334 tests: pass (329 + 5 new)
+npm run build                           # pass
+node handoffs/0025-compound-native-review/tools/capture-inspector.mjs artifacts/0025-ui-r2       # 32 captures, all checks clean
+node handoffs/0025-compound-native-review/tools/measure-side-column.mjs artifacts/0025-side-r2   # 16 captures, no transcript overflow
+```
 
-| Command | Result |
-|---|---|
-| `npx tsc -b --noEmit` (strict) | pass |
-| `npx vitest run` | 15 files, 329 tests pass, including `eb261ab`'s reorder test |
-| `npm run build` | pass |
+I ran no native automation and no Cargo, and I did not repeat the runtime look-dev runs.
 
-## Remaining requests for Astra
+## Requests for Astra
 
-1. **Traffic lights:** a titlebar capture at both sizes with the CUA overlay hidden (or moved), so I can check traffic-light alignment against the titlebar row.
-2. **Reorder:** select part 3 of the Dumbbell, then reorder its parts through a shared `incant_cmd` transaction. Capture before and after; the same stable ID should stay selected and focused.
-3. **Primitive regression:** a primitive collider (Floor) with the Inspector scrolled to the top, so the Shape and dimension rows are visible. Also confirm whether `primitive-min`'s scroll offset was carried over from the previous selection. If it was, that is a behaviour question for the Inspector: should the scroll reset per entity?
-4. **Diagnostics:** native diagnostics at exact nested paths still depend on the bridge emitting per-field component pointers (carried over from 0024). The native project had 0 problems, so native error presentation is unreviewed.
-5. **Manifest:** please add `manifest.json` with exact steps per capture, and supply raw PNGs if lossless review is required.
-
-## Open questions
-
-- **Minimum-size Inspector/Agent split:** at the minimum window size, should the Inspector/Agent split favour the Inspector when the Agent pane is in its not-ready empty state? This is a director-owned layout choice, so I made no change.
+1. **Native rebuild:** rebuild from this commit and capture the four states listed above at 1000×650 and 1440×874, to confirm the compact Agent pane natively.
+2. **Nonvisual correction:** none required.
 
 ## Limitations
 
-- Native acceptance covers only the states listed. Traffic lights, reorder, the primitive Shape rows and native diagnostics remain open.
-- The native images are lossy JPEG, and there was no manifest.
-- Determinism is local to one host only.
-- The runtime frames are headless engine output, not native editor viewport evidence.
+- The idle-Agent improvement is verified in the browser fixture and jsdom only; native pixels are pending.
+- The native evidence is lossy JPEG, and the traffic lights are hidden by the OS overlay.
+- Reorder and invalid-data presentation are covered by behaviour, fixture and command tests, not native captures, because of the read-only and rejection boundaries.
+- The idle state is per session and is not persisted. Moving the separator once opts out until reload.
+- Determinism of the runtime frames is local to one host only.
