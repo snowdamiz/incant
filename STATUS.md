@@ -10,6 +10,16 @@ after review and passing checks, without requesting separate merge approval.
 
 ## Implemented and locally verified
 
+- Native physics hosted streams match across all three desktop hosts and actual
+  browser WASM (21 streams). Canonical source-report path keys fix the Windows
+  metadata comparison failure; the strict comparator is unchanged. See
+  [evidence](docs/spikes/native-physics-runtime.md#hosted-cross-host-report-paths).
+
+- Shipping Cargo capture explicitly decodes UTF-8 on all desktop hosts. A real
+  subprocess regression reproduces Windows cp1252 failure before the fix; 40
+  tool tests pass. Corrected hosted Windows packaging remains pending. See
+  [encoding evidence](docs/spikes/shipping-output-utf8.md).
+
 - Typed versioned project JSON, semantic validation, published derived schemas,
   canonical formatting and stable ULIDs.
 - One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,
