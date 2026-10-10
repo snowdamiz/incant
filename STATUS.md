@@ -53,6 +53,12 @@ within its documented workload.
 
 ## Active work
 
+- The editor context now generates icons/assets during Tauri build preparation,
+  before rustc records input timestamps. Both feature modes have locally verified
+  cold generated outputs and immediate warm no-op builds; hosted validation is
+  pending. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
+  invalidation fix from [measured Windows compilation costs](docs/spikes/ci-cargo-unit-timings.md).
+
 - Cooked PCM loading and Kira mixing now live in authoring-free runtime crates;
   legacy import/gameplay adapters retain their existing public behavior. All 412
   release workspace tests and Clippy pass. A fresh 585,072-byte shipping audio
