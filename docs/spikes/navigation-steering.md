@@ -110,3 +110,28 @@ a temporary sleep assertion on a quiet host. This is an open scripting-runtime
 robustness/diagnostic issue, not successful determinism evidence for failed runs.
 The [review packet](../../handoffs/0027-steering-lookdev/result.md) records the
 exact binary, failed attempts, observations and scene reproduction.
+
+
+## Linux convergence regression (2026-10-10)
+
+PR #36's Linux desktop run at `084065a` retained separation but failed arrival:
+one common-radius crowd still had an agent 16.081753 m from its goal after 1500
+steps. Eleven other hosted checks passed. Rotating that same fixture by 0.0001
+radians reproduced the failure on this Mac (22.316338 m remaining). This is a
+local-avoidance symmetry/progress failure, not a compiler failure or a test to
+waive. Fixed small lateral preferences of 5% and 20% did not reliably solve it.
+
+The wrapper now predicts closest approach from the requested velocities. If a
+neighbor would enter the combined body/margin clearance during the horizon,
+the objective turns 45 degrees toward a consistent passing hand without changing
+its requested speed. ORCA still constrains this objective against the same agents
+and obstacles; no constraint or speed limit is relaxed. Stopped preferences remain
+zero. This reduces reciprocal crowd stalls, but is not a guarantee of global
+arrival or feasible separation in every arrangement.
+
+All twelve common/staggered-radius cases at rotations 0, 0.0001, 0.03, 0.17, 0.7
+and 1.2 radians pass the original 1500-step arrival and separation requirements
+locally. The smallest observed separation is 0.5568335 m; every final goal distance
+is below 0.00001 m. The earlier rendered results above describe the prior binary.
+Full checks, the updated public workflow and a new rendered review are required
+for this correction before merging.

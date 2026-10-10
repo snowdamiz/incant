@@ -82,11 +82,15 @@ fn overlapping_agents_have_repeatable_antisymmetric_escape_without_randomness() 
 }
 #[test]
 fn one_hundred_crossing_agents_keep_clearance_and_reach_opposite_goals() {
-    for stagger in [0., 4.] {
+    for (stagger, rotation) in [0., 4.].into_iter().flat_map(|stagger| {
+        [0., 0.0001, 0.03, 0.17, 0.7, 1.2]
+            .into_iter()
+            .map(move |rotation| (stagger, rotation))
+    }) {
         let mut q = query(
             (0..100)
                 .map(|i| {
-                    let angle = i as f32 * std::f32::consts::TAU / 100.;
+                    let angle = i as f32 * std::f32::consts::TAU / 100. + rotation;
                     agent(
                         i,
                         (20. + (i % 5) as f32 * stagger) * angle.cos(),
@@ -135,11 +139,22 @@ fn one_hundred_crossing_agents_keep_clearance_and_reach_opposite_goals() {
         let remaining = q
             .agents
             .iter()
-            .zip(goals)
+            .zip(&goals)
             .map(|(a, g)| (a.position[0] - g[0]).hypot(a.position[2] - g[1]))
             .fold(0., f32::max);
         eprintln!("100 agents: min separation={minimum}, max goal distance={remaining}");
-        assert!(remaining < 0.1, "remaining {remaining}");
+        if remaining >= 0.1 {
+            for (a, g) in q.agents.iter().zip(&goals).take(10) {
+                eprintln!(
+                    "stalled sample: {} pos {:?} velocity {:?} preferred {:?} goal {:?}",
+                    a.id, a.position, a.velocity, a.preferred_velocity, g
+                );
+            }
+        }
+        assert!(
+            remaining < 0.1,
+            "stagger {stagger}, rotation {rotation}: remaining {remaining}"
+        );
     }
 }
 
