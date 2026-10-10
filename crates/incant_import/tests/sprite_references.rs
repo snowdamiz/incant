@@ -110,6 +110,22 @@ impl Fixture {
             &[request("sheet.atlas.json"), request("ordinary.png")],
         )
     }
+    fn journal_bytes(&mut self) -> Vec<u8> {
+        let project = self.bus.project().clone();
+        let revision = self.bus.revision();
+        // Windows denies independent reads while the persistent bus holds its lock.
+        // Release it, inspect the exact bytes, then verify the replayed state.
+        drop(std::mem::replace(
+            &mut self.bus,
+            CommandBus::new(project.clone()).unwrap(),
+        ));
+        let path = self.root.path().join("history.jsonl");
+        let bytes = fs::read(&path).unwrap();
+        self.bus = CommandBus::persistent(path, project.clone()).unwrap();
+        assert_eq!(self.bus.project(), &project);
+        assert_eq!(self.bus.revision(), revision);
+        bytes
+    }
 }
 
 #[test]
@@ -119,7 +135,7 @@ fn broken_shared_frames_and_shrunken_slices_reject_the_entire_import_batch() {
     let sliced = f.sprite(f.atlas.clone(), json!({"frame":A}), true);
     let before = f.bus.project().clone();
     let revision = f.bus.revision();
-    let journal = fs::read(f.root.path().join("history.jsonl")).unwrap();
+    let journal = f.journal_bytes();
     image(f.root.path(), "ordinary.png", 8, 99); // an unrelated successful cook in the same batch
     let mut dropped = descriptor();
     dropped["frames"].as_object_mut().unwrap().remove(A);
@@ -144,10 +160,7 @@ fn broken_shared_frames_and_shrunken_slices_reject_the_entire_import_batch() {
     assert_eq!(errors.0[0].entity_id, sliced);
     assert_eq!(f.bus.project(), &before);
     assert_eq!(f.bus.revision(), revision);
-    assert_eq!(
-        fs::read(f.root.path().join("history.jsonl")).unwrap(),
-        journal
-    );
+    assert_eq!(f.journal_bytes(), journal);
     assert!(
         validate_cached_sprites(f.bus.project(), f.root.path(), None)
             .unwrap()

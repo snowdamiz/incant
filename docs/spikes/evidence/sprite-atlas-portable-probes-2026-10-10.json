@@ -1,0 +1,122 @@
+{
+  "recorded_at": "2026-10-10T23:51:47.742366+00:00",
+  "base_head": "8a7fbafcb236e470da25ea071aac54d29988999c",
+  "scope": [
+    "test-only release/read/reopen of exclusive journal",
+    "strict geometry probe expects zero sprites in model fixture"
+  ],
+  "hosted_failures": [
+    {
+      "job_id": 114338229239,
+      "platform": "Linux",
+      "cause": "strict model geometry expectation omitted sprite_entities",
+      "raw_log_sha256": "7103543e16ac400453bf9e8e91d56e4d84489b387130ccc512d8c571737993dc"
+    },
+    {
+      "job_id": 114338229300,
+      "platform": "Windows",
+      "cause": "independent history.jsonl read while CommandBus holds exclusive OS lock (error 33)",
+      "raw_log_sha256": "43f92028cb487e3eef04a1f6022a609a9bf554ee58157d830e8aeaaa52f31765"
+    }
+  ],
+  "local_checks": {
+    "sprite_reference_tests": 4,
+    "release_clippy": true,
+    "cargo_fmt": true,
+    "headless_release_build": true,
+    "python_tools_tests": 40,
+    "generated_conventions": true
+  },
+  "logs": {
+    "incant-pr58-sprite-reference-tests.log": {
+      "path": "/tmp/incant-pr58-sprite-reference-tests.log",
+      "sha256": "c850dbe95ada083f7b51399a64258c41cc6669d4f283a8818cfc0e15e4db07bf"
+    },
+    "incant-pr58-sprite-reference-clippy.log": {
+      "path": "/tmp/incant-pr58-sprite-reference-clippy.log",
+      "sha256": "8c0c387e85382ffce42dfd161f6cb1e756c3176510eb06633cf0f3f9108aa50b"
+    },
+    "incant-pr58-headless-build.log": {
+      "path": "/tmp/incant-pr58-headless-build.log",
+      "sha256": "2379d1c1b31b99e6d1f33931e637142421e89b525495fe878091e3fd60a1f82d"
+    },
+    "incant-pr58-render-probe.log": {
+      "path": "/tmp/incant-pr58-render-probe.log",
+      "sha256": "6ba56b296dc674aa2abf35b0698ac70b7bb97342a65a580c481455833eeaaf2b"
+    },
+    "incant-pr58-fmt.log": {
+      "path": "/tmp/incant-pr58-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "incant-pr58-tools-tests.log": {
+      "path": "/tmp/incant-pr58-tools-tests.log",
+      "sha256": "4048c79644ddc423fadf389e27482ca035f71cd3c280598f50c96c111e450f3b"
+    }
+  },
+  "headless_sha256": "f98a43d979947540cede700b9ccdbd8c1aecbec1994343fca8422e249e4f2dcd",
+  "native_renderer_probe": {
+    "platform": "darwin",
+    "native_renderer_executed": true,
+    "png_transport_validated": true,
+    "hierarchy_matches_flattened": true,
+    "hierarchy_differs_from_initial": true,
+    "width": 320,
+    "height": 180,
+    "sha256": "913f7255a935a8e73b4851b32545370561833741cfe14c78122aabde291aab55",
+    "hierarchy_sha256": "3ab83135369a91e72b05a3ba0aa54637b3e13cc81c6b6a85725315240ea4ba75",
+    "engine": {
+      "adapter": "Apple M5 Pro",
+      "camera": null,
+      "geometry": {
+        "diagnostic_entities": 3,
+        "model_draw_calls": 0,
+        "model_entities": 0,
+        "model_triangles": 0,
+        "primitive_instances": 0,
+        "sprite_entities": 0
+      },
+      "height": 180,
+      "output": "artifacts/pr58-portable-render-probe/viewport.png",
+      "shading": "diagnostic",
+      "width": 320
+    },
+    "imported_models": {
+      "source_independent": true,
+      "reimport_changes_pixels": true,
+      "original_sha256": "cb466ebfe3cbb692e3ed40b1cb63868ef62a41bbff4eb294c63fc735f3104a9c",
+      "reimported_sha256": "f9bca317bce7b81bffc45f4fc3399b8a9864e1a75abbac47a34fc7faa4324dfe",
+      "engine": {
+        "adapter": "Apple M5 Pro",
+        "camera": null,
+        "geometry": {
+          "diagnostic_entities": 0,
+          "model_draw_calls": 1,
+          "model_entities": 2,
+          "model_triangles": 2,
+          "primitive_instances": 2,
+          "sprite_entities": 0
+        },
+        "height": 360,
+        "output": "artifacts/pr58-portable-render-probe/models/original.png",
+        "shading": "material_preview",
+        "width": 640
+      }
+    },
+    "visual_review": false,
+    "native_window_composition_review": false
+  },
+  "limits": [
+    "Local journal test ran on macOS; corrected Windows hosted run is pending.",
+    "No production Rust code or lock semantics changed.",
+    "Numerical PNG/geometry checks do not constitute visual or native-window acceptance."
+  ],
+  "commands": [
+    "PATH=/opt/homebrew/bin:$PATH ./tools/cargo test -j2 -p incant_import --test sprite_references --release --locked",
+    "PATH=/opt/homebrew/bin:$PATH ./tools/cargo clippy -j2 -p incant_import --test sprite_references --release --locked -- -D warnings",
+    "PATH=/opt/homebrew/bin:$PATH ./tools/cargo build -j2 -p incant_headless --release --locked",
+    "python3 tools/platforms/render-check.py --output artifacts/pr58-portable-render-probe",
+    "PATH=/opt/homebrew/bin:$PATH ./tools/cargo fmt --all -- --check",
+    "python3 -m unittest discover -s tools/tests",
+    "python3 tools/generate_conventions.py --check"
+  ]
+}
