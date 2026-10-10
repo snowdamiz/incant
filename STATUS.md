@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- CI build reuse now keeps the ignored GPU suite on the workspace feature graph,
+  combines macOS editor/headless builds and caches Rust dependencies. The measured
+  baseline is a 38m15s median PR check, dominated by compilation; repeated Windows
+  npm archives consumed 8.91 GiB. Local checks pass 339 Rust tests, all 44 exact
+  baseline GPU tests, 387 UI tests, 15 tool tests, combined packaging and public
+  gameplay probes. The final GPU pass compiles nothing. Hosted cold/warm timing
+  remains pending; all platform/test coverage and open device/license gates stay
+  in force. See [CI evidence](docs/spikes/ci-build-performance.md).
+
 - Windows MSVC compilation and doctests now share Cargo's static CRT policy;
   Tauri's package-local shim is disabled after it shadowed the real runtime in
   an unrelated executable doctest. Full-workspace doc coverage remains enabled.
