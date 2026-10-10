@@ -232,7 +232,41 @@
     "reference_device_gate": false
   },
   "ci": {
-    "status": "pending"
+    "status": "pending UTF-8 probe repair",
+    "prior_head": "0ee5532d06277dafaf82c12c89f50d8179233958",
+    "windows_failure": {
+      "run": "https://github.com/snowdamiz/incant/actions/runs/38026340265/job/114137866330",
+      "stage": "public locale-switching Python probe",
+      "cause": "Python default cp1252 decoding of UTF-8 Rust RPC output",
+      "rust_tests_gpu_and_native_build_passed": true
+    },
+    "repair": "Use explicit UTF-8 for every localized subprocess and file text operation; rerun hosted checks.",
+    "local_utf8_repair": {
+      "default_encoding_warnings_as_errors": true,
+      "simulated_subprocess_default_cp1252": true,
+      "scope": "real public CLI workflow on macOS with Windows code-page fallback injected in the Python harness; not a Windows execution claim",
+      "probe_result": {
+        "passed": true,
+        "strict_typescript": true,
+        "rpc_journal_undo_redo": true,
+        "runtime_locales": [
+          "en",
+          "ru",
+          "ja",
+          "ar",
+          "fr-CA"
+        ],
+        "timer_switches_saved": true,
+        "restored_state_and_log_suffix_equal": true,
+        "missing_translation_exit_status": true,
+        "author_files_unchanged": {
+          "game.incant.json": "d2cb2b8784142aa6dd8c4e17d3b5650345a8bbb9f0001423a81a21ca49960932",
+          "history.jsonl": "4811865bc76d2dca656afba7afd69584ef0bea9b080998f73241ee02dadb8570"
+        },
+        "shaping_or_visual_acceptance": false,
+        "binary_sha256": "d4fb0ec64853c8a2916546769d454d20809f818ee66f26142122dba644e8df06"
+      }
+    }
   },
   "open": [
     "Text shaping, bidi layout, font fallback and IME",

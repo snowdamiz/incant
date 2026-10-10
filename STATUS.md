@@ -72,7 +72,10 @@ within its documented workload.
   Six public gameplay probes pass; the macOS platform probe executes locale data,
   while WASM/iOS target checks compile. A live saved-account Astra run authors and
   verifies a Japanese table that produces the expected gameplay text, without
-  another login or Keychain prompt. Hosted CI, shaping/bidi/IME,
+  another login or Keychain prompt. Windows CI passed Rust/GPU/native checks but
+  exposed a Python cp1252 decoding error in the public locale probe. Explicit
+  UTF-8 fixes it locally, including a simulated cp1252 subprocess default; updated
+  hosted checks are pending. Shaping/bidi/IME,
   localization UI and Core Sample visual/device gates remain open.
   See [localization runtime](docs/spikes/localization-runtime.md).
 
@@ -445,7 +448,8 @@ The director reauthorized computer use and screen capture on 2026-10-10.
 Claude's resumed compound review accepted the supplied native and corrected-runtime
 scope, then improved the unavailable Agent pane. Final post-change native captures
 currently await Mac unlock; the unlock request is pending. Compound PR #25 remains
-a separate draft while that final native confirmation and updated CI are open.
+a separate draft while that final native confirmation is open. All twelve hosted
+checks passed on compound head `5b97ecd`.
 The compound changes have not merged into main.
 
 ## External prerequisites still required
