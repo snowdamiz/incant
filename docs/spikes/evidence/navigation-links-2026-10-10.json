@@ -164,6 +164,53 @@
       "sha256": "b6e52bbadc689e96b6afad5f521210f3f73f4341e7b11b5d05b7ecac862e044a"
     }
   },
-  "hosted_checks": "pending; must integrate and validate steering convergence correction first",
-  "phase_gate_approved": false
+  "hosted_checks": "pending publication; depends on reviewed PR #36",
+  "phase_gate_approved": false,
+  "integration_after_steering_fix": {
+    "source_commit": "61cf71d1dcd4856b54a3839add443c99cb4cc2ef",
+    "rust_tests": 289,
+    "clippy": "pass",
+    "public_probes": [
+      {
+        "passed": true,
+        "strict_typescript": true,
+        "public_commands": true,
+        "durable_undo_redo": true,
+        "invalid_cost_rollback": true,
+        "explicit_link_traversal": true,
+        "one_way_reverse_null": true,
+        "save_in_flight_exact": true,
+        "repeat_exact": true,
+        "mid_link_progress": 0.30555555555555564,
+        "author_files_unchanged": {
+          "game.incant.json": "56b80bc96d10320f363c437c4327521cd026e77d01068a0da35c4a986111cf26",
+          "game.incant.journal.jsonl": "8dee3845b109e6da8879861272cab8c53723acf30a52c29016197ebc7a6b8788"
+        },
+        "binary_sha256": "6205ce3f85333597da97323bd0612b1692cc1744669e4ab33cf3e0f890d34721",
+        "physics_or_visual_gate": false
+      },
+      {
+        "passed": true,
+        "agents": 100,
+        "strict_typescript": true,
+        "shared_velocity_commands": true,
+        "repeat_and_save_resume_exact": true,
+        "state": {
+          "minimum": 0.6157673834154757,
+          "neighbors": 17,
+          "remaining": 6.208589198944098e-11,
+          "tick": 600
+        },
+        "author_files_unchanged": {
+          "game.incant.json": "836b2a455e9e09eac2c169dd17f8f178b0159ddf1b55fdc464c3420d0423921b",
+          "game.incant.journal.jsonl": "05265ed16b58ddf3599534e914f08af43930ef226d0d99dda1f0e4dcc5fbd73a"
+        },
+        "binary_sha256": "6205ce3f85333597da97323bd0612b1692cc1744669e4ab33cf3e0f890d34721",
+        "rendering_or_physics_collision_gate": false
+      }
+    ],
+    "native_binary_sha256": "aee111a987428990c1e93b6a55b215ed0078a2bcaefa5e64000d9622545fd1f9",
+    "native_package": "artifacts/Incant.app",
+    "notes": "Navigation/steering changes validated together; earlier GPU/UI/contracts still apply to their unchanged code. Updated steering visual review and current-head hosted checks remain required."
+  }
 }
