@@ -53,14 +53,16 @@ def main():
 
     run('init',project,'--entities',0,'--name','Compound CLI verification')
     sid=next(iter(json.loads(project.read_text())['scenes']))
-    ground,arch,body=[f'{n:026d}' for n in [10,11,12]]
+    ground,arch,body,nav=[f'{n:026d}' for n in [10,11,12,13]]
     arch_collider=collider(compound([part(100,[-1,1,0],box([.2,1,.2])),part(101,[1,1,0],box([.2,1,.2])),part(102,[0,2,0],box([1.2,.2,.2]))]))
     body_collider=collider(compound([part(110,[-.7,0,0],{'type':'sphere','radius':.3}),part(111,[.7,0,0],{'type':'sphere','radius':.3}),part(112,[0,0,0],box([.7,.1,.1]))]))
+    navigation={'settings':{'min':[-10,-1,-10],'max':[10,4,10],'cell_size':.2,'cell_height':.05,'tile_cells':32,'agent_radius':.2,'agent_height':1.5,'max_climb':.2,'max_slope_degrees':45},'sources':[{'entity':ground,'geometry':'collider'},{'entity':arch,'geometry':'collider'}]}
     commands=[]
     for eid,name,components in [
         (ground,'Floor',{'Transform':transform([0,-.5,0]),'Collider':collider(box([10,.5,10]))}),
         (arch,'Arch',{'Transform':transform([0,0,0]),'Collider':arch_collider}),
         (body,'Dumbbell',{'Transform':transform([3,4,0]),'Collider':body_collider,'RigidBody':{'motion':'dynamic','gravity_scale':1,'linear_damping':0,'angular_damping':0,'can_sleep':True,'ccd':True}}),
+        (nav,'Navigation',{'NavigationMesh':navigation}),
     ]:
         commands.append({'op':'create_entity','scene_id':sid,'entity':{'id':eid,'name':name,'parent':None,'components':components,'provenance':None}})
     def set_collider(value):
@@ -84,10 +86,16 @@ def main():
     baseline={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [project,journal]}
     source=out/'compound.ts'
     source.write_text('import type { ScriptApi } from '+json.dumps((ROOT/'sdk/ts/src/index').as_posix())+''';
-export default defineBehavior<{tick:number;hole:boolean;leg:boolean;height:number}>({
-  initialState:{tick:0,hole:false,leg:false,height:0},
+export default defineBehavior<{tick:number;hole:boolean;leg:boolean;height:number;navigation:boolean}>({
+  initialState:{tick:0,hole:false,leg:false,height:0,navigation:false},
   update(api:ScriptApi,dt,state){
     state.tick++;
+    if(state.tick===1){
+      const nav=api.query('NavigationMesh')[0]!;
+      const path=api.findPath({scene_id:nav.scene_id,mesh_entity:nav.id,path:{start:[0,0,3],end:[0,0,-3],snap_distance:.15,max_visited:1000}});
+      state.navigation=path!==null && path.points.length===2;
+      if(!state.navigation)throw Error('Navigation filled the compound arch opening');
+    }
     const arch=api.query('Collider').find(e=>e.name==='Arch')!;
     const body=api.query('RigidBody')[0]!;
     const cast=(x:number)=>api.raycast({scene_id:arch.scene_id,origin:[x,1,3],direction:[0,0,-1],max_distance:6,
@@ -110,7 +118,7 @@ export default defineBehavior<{tick:number;hole:boolean;leg:boolean;height:numbe
     (out/'rpc.json').write_text(json.dumps(records,indent=2)+'\n')
     (out/'play.json').write_text(json.dumps(first,indent=2)+'\n')
     result={'passed':True,'atomic_duplicate_rejection':True,'stable_part_edit_undo_redo_reopen':True,
-            'strict_typescript':True,'hollow_arch_query':True,'parent_hit_identity':True,
+            'strict_typescript':True,'hollow_arch_query':True,'parent_hit_identity':True,'compound_navigation_opening':first['script_state']['navigation'],
             'dynamic_compound_height':first['script_state']['height'],'repeated_final_state_exact':True,
             'author_files_unchanged':baseline,'physical_device_gate':False}
     (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
