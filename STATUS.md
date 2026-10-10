@@ -8,7 +8,7 @@
   and device/performance gates remain open. Hosted checks are next.
   [Exact union evidence](docs/spikes/evidence/sprite-atlas-publication-union-2026-10-10.json).
 
-Source: [PLAN.md](PLAN.md), revision 6 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
+Source: [PLAN.md](PLAN.md), revision 7 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without

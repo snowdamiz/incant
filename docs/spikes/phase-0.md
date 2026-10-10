@@ -2,7 +2,7 @@
 
 Date: 2026-10-08. Host: Apple M5 Pro, arm64 macOS. Rust 1.99.0, Node 22.23.3.
 This is a working evidence ledger, not a gate approval. No later phase has started.
-The complete 36-month engine/game plan remains open.
+The complete engine/game plan remains open.
 
 ## Spike 1: native viewport — passed under the director’s CI acceptance
 
@@ -174,7 +174,7 @@ lookup failure. Source, desktop editor, six-target and credential workflows all
 passed on 1045f4f. The subsequent UI/menu integration has passed local checks;
 its remote checks are tracked separately. Hosted probes bootstrap validation; the plan's
 self-hosted graphics/device runners and nightly artifact
-history are not provisioned. Signing certificates and Year 1 staffing are director
+history are not provisioned. Signing certificates and Phase 0–1 staffing are director
 prerequisites. Phase 0 is not ready for approval.
 
 ### Native interaction check during the visual revision
