@@ -104,3 +104,9 @@ action, audio, timer, save and input/character probes all pass on the same binar
 This includes saved runtime rebinding and timer-controlled audio resume after
 a process restart. Updated hosted checks and the audio dependency merge remain
 pending. No native app, device playback or local capture was used.
+
+
+All twelve updated hosted checks passed at `f6ebc14`. After audio PR #29,
+PR #32 merged on 2026-10-10 as `68f6004b11c0d78a0bfdc9d47b0705821015f15c`.
+Its tree `f0d1fbbf95b183052e95998ec95cff7cba98ee65` equals the reviewed head.
+Physical input/haptics and the graphical binding editor remain open.

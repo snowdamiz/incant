@@ -520,6 +520,29 @@
       ],
       "type": "string"
     },
+    "LocaleSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "fallbacks": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "pseudo": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "locale"
+      ],
+      "type": "object"
+    },
     "MouseButton": {
       "enum": [
         "left",
@@ -547,6 +570,9 @@
             "$ref": "#/$defs/InputAction"
           },
           "type": "object"
+        },
+        "localization": {
+          "$ref": "#/$defs/LocaleSettings"
         },
         "tick_rate": {
           "format": "uint32",
@@ -641,6 +667,38 @@
       ],
       "type": "string"
     },
+    "StringTable": {
+      "additionalProperties": false,
+      "description": "A typed document asset. Message keys remain stable when translations change.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "messages": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "description": "Stable key -> canonical BCP-47 locale -> complete message pattern.",
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "source_locale": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "source_locale",
+        "messages"
+      ],
+      "type": "object"
+    },
     "TextureUsage": {
       "enum": [
         "color",
@@ -690,6 +748,12 @@
     },
     "settings": {
       "$ref": "#/$defs/ProjectSettings"
+    },
+    "string_tables": {
+      "additionalProperties": {
+        "$ref": "#/$defs/StringTable"
+      },
+      "type": "object"
     }
   },
   "required": [

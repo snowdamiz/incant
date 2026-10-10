@@ -87,6 +87,14 @@ enum Cli {
     Validate {
         project: PathBuf,
     },
+    /// Report absent translations; exits unsuccessfully unless fallback is explicitly allowed.
+    LocalizationCheck {
+        project: PathBuf,
+        #[arg(long)]
+        locale: Option<String>,
+        #[arg(long)]
+        allow_fallback: bool,
+    },
     Schema {
         directory: PathBuf,
     },
@@ -343,6 +351,25 @@ fn main() -> Result<()> {
                 json!({"valid":true,"project_id":project.id,"schema_version":project.schema_version}),
             )?;
         }
+        Cli::LocalizationCheck {
+            project,
+            locale,
+            allow_fallback,
+        } => {
+            let project = read_project(&project)?;
+            let mut settings = project.settings.localization.clone();
+            if let Some(locale) = locale {
+                settings.locale = locale;
+            }
+            let catalog = incant_localization::Catalog::compile(&project.string_tables)?;
+            let missing = catalog.missing_strings(&settings)?;
+            let complete = missing.is_empty();
+            print(json!({"project_id":project.id,"locale":settings.locale,
+                "complete":complete,"fallback_allowed":allow_fallback,"missing":missing}))?;
+            if !complete && !allow_fallback {
+                return Err("localization has missing translations".into());
+            }
+        }
         Cli::Import {
             project,
             source,
@@ -410,6 +437,36 @@ fn main() -> Result<()> {
                 "Command".into(),
                 json!(schemars::schema_for!(incant_cmd::Command)),
             );
+            registry.extend([
+                (
+                    "StringTable".into(),
+                    json!(schemars::schema_for!(incant_localization::StringTable)),
+                ),
+                (
+                    "LocaleSettings".into(),
+                    json!(schemars::schema_for!(incant_localization::LocaleSettings)),
+                ),
+                (
+                    "LocalizeRequest".into(),
+                    json!(schemars::schema_for!(incant_localization::LocalizeRequest)),
+                ),
+                (
+                    "LocalizedText".into(),
+                    json!(schemars::schema_for!(incant_localization::LocalizedText)),
+                ),
+                (
+                    "MissingString".into(),
+                    json!(schemars::schema_for!(incant_localization::MissingString)),
+                ),
+                (
+                    "CalendarDate".into(),
+                    json!(schemars::schema_for!(incant_localization::CalendarDate)),
+                ),
+                (
+                    "DateLength".into(),
+                    json!(schemars::schema_for!(incant_localization::DateLength)),
+                ),
+            ]);
             registry.extend([
                 (
                     "PhysicsCharacterQuery".into(),

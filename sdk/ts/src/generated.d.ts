@@ -20,6 +20,11 @@ export namespace AudioSourceSchema {
 }
 export type AudioSource = AudioSourceSchema.Root;
 
+export namespace CalendarDateSchema {
+  export type Root = { "day": number; "month": number; "year": number };
+}
+export type CalendarDate = CalendarDateSchema.Root;
+
 export namespace CameraSchema {
   export type Root = { "far": number; "fov_degrees": number; "near": number };
 }
@@ -41,15 +46,22 @@ export namespace CommandSchema {
   export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
   export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
   export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type LocaleSettings = { "fallbacks"?: Array<string>; "locale": string; "pseudo"?: boolean };
   export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
   export type Origin = "user" | "agent" | "script" | "import";
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type Stick = "left" | "right";
+  export type StringTable = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
   export type TextureUsage = "color" | "linear" | "normal";
-  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" });
+  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" });
 }
 export type Command = CommandSchema.Root;
+
+export namespace DateLengthSchema {
+  export type Root = "short" | "medium" | "long";
+}
+export type DateLength = DateLengthSchema.Root;
 
 export namespace DirectionalLightSchema {
   export type DirectionalShadows = { "distance": number };
@@ -72,16 +84,18 @@ export namespace GameSaveSchema {
   export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
   export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
   export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type LocaleSettings = { "fallbacks"?: Array<string>; "locale": string; "pseudo"?: boolean };
   export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
   export type Origin = "user" | "agent" | "script" | "import";
-  export type Project = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings };
-  export type ProjectSettings = { "input_actions"?: { [key: string]: InputAction }; "tick_rate": number };
+  export type Project = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings; "string_tables"?: { [key: string]: StringTable } };
+  export type ProjectSettings = { "input_actions"?: { [key: string]: InputAction }; "localization"?: LocaleSettings; "tick_rate": number };
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type Schedule = { "clock": ScriptClock; "timers": { [key: string]: Timer } };
   export type ScriptClock = { "elapsed_seconds": number; "tick": number };
   export type ScriptSource = { "id": string; "name": string; "path": string };
   export type Stick = "left" | "right";
+  export type StringTable = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
   export type TextureUsage = "color" | "linear" | "normal";
   export type Timer = { "due_tick": number; "interval_ticks"?: number | null; "payload": unknown };
   export type Root = { "authored_sha256": string; "elapsed_seconds": number; "format": string; "project": Project; "schedule"?: (Schedule) | (null); "script_sha256": string; "script_state": unknown; "tick": number; "version": number };
@@ -144,10 +158,35 @@ export namespace InputRecordingSchema {
 }
 export type InputRecording = InputRecordingSchema.Root;
 
+export namespace LocaleSettingsSchema {
+  export type Root = { "fallbacks"?: Array<string>; "locale": string; "pseudo"?: boolean };
+}
+export type LocaleSettings = LocaleSettingsSchema.Root;
+
+export namespace LocalizeRequestSchema {
+  export type CalendarDate = { "day": number; "month": number; "year": number };
+  export type MessageArgument = (string) | (number) | (CalendarDate);
+  export type Root = { "arguments"?: { [key: string]: MessageArgument }; "key": string; "table_id": string };
+}
+export type LocalizeRequest = LocalizeRequestSchema.Root;
+
+export namespace LocalizedTextSchema {
+  export type MissingKind = "translation" | "key";
+  export type MissingString = { "key": string; "kind": MissingKind; "requested_locale": string; "resolved_locale"?: string | null; "table_id": string };
+  export type Root = { "missing"?: (MissingString) | (null); "requested_locale": string; "resolved_locale"?: string | null; "text": string };
+}
+export type LocalizedText = LocalizedTextSchema.Root;
+
 export namespace MeshRendererSchema {
   export type Root = { "cast_shadows": boolean; "materials": Array<string>; "mesh": string };
 }
 export type MeshRenderer = MeshRendererSchema.Root;
+
+export namespace MissingStringSchema {
+  export type MissingKind = "translation" | "key";
+  export type Root = { "key": string; "kind": MissingKind; "requested_locale": string; "resolved_locale"?: string | null; "table_id": string };
+}
+export type MissingString = MissingStringSchema.Root;
 
 export namespace PhysicsCharacterMovementSchema {
   export type Root = { "collisions": Array<string>; "grounded": boolean; "sliding_down_slope": boolean; "translation": [number, number, number] };
@@ -198,15 +237,17 @@ export namespace ProjectSchema {
   export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
   export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
   export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type LocaleSettings = { "fallbacks"?: Array<string>; "locale": string; "pseudo"?: boolean };
   export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
   export type Origin = "user" | "agent" | "script" | "import";
-  export type ProjectSettings = { "input_actions"?: { [key: string]: InputAction }; "tick_rate": number };
+  export type ProjectSettings = { "input_actions"?: { [key: string]: InputAction }; "localization"?: LocaleSettings; "tick_rate": number };
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type ScriptSource = { "id": string; "name": string; "path": string };
   export type Stick = "left" | "right";
+  export type StringTable = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
   export type TextureUsage = "color" | "linear" | "normal";
-  export type Root = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings };
+  export type Root = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings; "string_tables"?: { [key: string]: StringTable } };
 }
 export type Project = ProjectSchema.Root;
 
@@ -230,6 +271,11 @@ export namespace SpotLightSchema {
   export type Root = { "color": [number, number, number]; "inner_degrees": number; "intensity": number; "outer_degrees": number; "range": number };
 }
 export type SpotLight = SpotLightSchema.Root;
+
+export namespace StringTableSchema {
+  export type Root = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
+}
+export type StringTable = StringTableSchema.Root;
 
 export namespace TimerEventSchema {
   export type Root = { "id": string; "payload": unknown; "scheduled_tick": number };

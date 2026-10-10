@@ -161,5 +161,86 @@
     "computer_use": false,
     "local_capture": false,
     "native_app_opened": false
+  },
+  "merged_integration": {
+    "pr": "https://github.com/snowdamiz/incant/pull/32",
+    "reviewed_head": "f6ebc14a7e571970d817f50978354e6f795d3c97",
+    "merge": "68f6004b11c0d78a0bfdc9d47b0705821015f15c",
+    "merged_at": "2026-10-10T04:58:50Z",
+    "reviewed_tree_unchanged": true,
+    "checks": [
+      {
+        "name": "storage (macos-latest)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914626/job/114130588575"
+      },
+      {
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914579/job/114130633076"
+      },
+      {
+        "name": "checks",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914618/job/114130655358"
+      },
+      {
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914573/job/114130588566"
+      },
+      {
+        "name": "storage (windows-latest)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914626/job/114130588662"
+      },
+      {
+        "name": "desktop (ubuntu-latest, Linux)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914579/job/114130632850"
+      },
+      {
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914573/job/114130588565"
+      },
+      {
+        "name": "storage (ubuntu-latest)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914626/job/114130588735"
+      },
+      {
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914573/job/114130588533"
+      },
+      {
+        "name": "web",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914573/job/114130588590"
+      },
+      {
+        "name": "ios",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914573/job/114130588369"
+      },
+      {
+        "name": "android",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38023914573/job/114130588540"
+      }
+    ]
   }
 }

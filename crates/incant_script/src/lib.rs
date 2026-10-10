@@ -1,5 +1,6 @@
 //! QuickJS sandbox for SWC-compiled TypeScript. No OS, filesystem, module loader,
 //! network, native plugins or shell are installed into the runtime.
+mod localization;
 mod logs;
 mod play;
 mod saves;
@@ -52,6 +53,8 @@ pub enum ScriptError {
     #[error(transparent)]
     Timer(#[from] TimerError),
     #[error(transparent)]
+    Localization(#[from] incant_localization::LocalizationError),
+    #[error(transparent)]
     Document(#[from] incant_doc::DocumentError),
 }
 
@@ -70,6 +73,7 @@ struct InitialState {
 }
 pub struct ScriptHost {
     source_sha256: String,
+    localization: Arc<Mutex<localization::State>>,
     raycaster: Option<Raycaster>,
     character_mover: Option<CharacterMover>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
@@ -120,6 +124,7 @@ impl ScriptHost {
         }
         let mut host = Self {
             source_sha256: saves::hash(compiled_source.as_bytes()),
+            localization: Arc::new(Mutex::new(localization::State::default())),
             raycaster: None,
             character_mover: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
@@ -133,6 +138,7 @@ impl ScriptHost {
             logs: Vec::new(),
         };
         host.install_queries()?;
+        host.install_localization()?;
         Ok(host)
     }
     pub fn state(&self) -> &Value {
@@ -176,6 +182,10 @@ impl ScriptHost {
         if !dt.is_finite() || dt <= 0. || dt > 1. {
             return Err(ScriptError::InputLimit);
         }
+        self.localization
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .prepare(bus.project())?;
         let (mut schedule, timer_events) = self.schedule.advance(dt)?;
         let world = serde_json::to_string(bus.project())?;
         let state = serde_json::to_string(&self.state)?;

@@ -8,6 +8,7 @@ pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_input::InputActions;
+pub use incant_localization::{LocaleSettings, StringTable};
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
 pub use physics::{AngularVelocity, BodyMotion, Collider, ColliderShape, RigidBody};
 use schemars::JsonSchema;
@@ -31,6 +32,8 @@ pub struct Project {
     pub scenes: BTreeMap<Id, Scene>,
     pub assets: BTreeMap<Id, Asset>,
     pub scripts: BTreeMap<Id, ScriptSource>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub string_tables: BTreeMap<Id, StringTable>,
     pub settings: ProjectSettings,
     pub memory: BTreeMap<String, String>,
 }
@@ -41,6 +44,8 @@ pub struct ProjectSettings {
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     #[schemars(length(max = 64))]
     pub input_actions: InputActions,
+    #[serde(default, skip_serializing_if = "LocaleSettings::is_default")]
+    pub localization: LocaleSettings,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -203,9 +208,11 @@ impl Project {
             scenes: BTreeMap::new(),
             assets: BTreeMap::new(),
             scripts: BTreeMap::new(),
+            string_tables: BTreeMap::new(),
             settings: ProjectSettings {
                 tick_rate: 60,
                 input_actions: InputActions::new(),
+                localization: LocaleSettings::default(),
             },
             memory: BTreeMap::new(),
         }
@@ -273,6 +280,9 @@ impl Project {
         for sid in self.scripts.keys() {
             check_id(sid, format!("/scripts/{sid}/id"));
         }
+        for id in self.string_tables.keys() {
+            check_id(id, format!("/string_tables/{id}/id"));
+        }
         if self.schema_version != SCHEMA_VERSION {
             issue("/schema_version".into(), "unsupported schema version");
         }
@@ -284,6 +294,16 @@ impl Project {
         }
         if let Err(error) = incant_input::validate_actions(&self.settings.input_actions) {
             issue("/settings/input_actions".into(), &error.to_string());
+        }
+        if let Err(error) = self.settings.localization.validate() {
+            issue("/settings/localization".into(), &error.to_string());
+        }
+        if let Err(error) = incant_localization::Catalog::compile(&self.string_tables) {
+            let path = match &error {
+                incant_localization::LocalizationError::Validation { path, .. } => path.clone(),
+                _ => "/string_tables".into(),
+            };
+            issue(path, &error.to_string());
         }
         for (id, asset) in &self.assets {
             if id != &asset.id {

@@ -53,6 +53,21 @@ within its documented workload.
 
 ## Active work
 
+- Typed string tables, a bounded ICU MessageFormat subset, ICU4X plural/number/date
+  formatting, fallback, pseudo-localization, missing-string reports and saved
+  runtime locale switching are implemented. Shared commands preserve provenance,
+  journal history and Undo/Redo. Local checks pass 245 Rust tests, 40 GPU checks,
+  315 UI tests/build, five tool tests, Clippy, contracts and native packaging.
+  Six public gameplay probes pass; the macOS platform probe executes locale data,
+  while WASM/iOS target checks compile. A live saved-account Astra run authors and
+  verifies a Japanese table that produces the expected gameplay text, without
+  another login or Keychain prompt. Windows CI passed Rust/GPU/native checks but
+  exposed a Python cp1252 decoding error in the public locale probe. Explicit
+  UTF-8 fixes it locally, including a simulated cp1252 subprocess default; updated
+  hosted checks are pending. XLIFF, shaping/bidi/IME,
+  localization UI and Core Sample visual/device gates remain open.
+  See [localization runtime](docs/spikes/localization-runtime.md).
+
 - Named button/axis input actions and runtime rebinding now use validated project
   settings and the shared command bus. Ordered physical transitions preserve
   short taps, combine alternative bindings, apply dead zones and normalize
@@ -62,8 +77,9 @@ within its documented workload.
   expected movement; existing save/input/timer probes pass. Local input-only p95
   is 0.0025 ms for the typical workload and 2.8033 ms at the configured maximum.
   Integration with audio and merged timers passes 232 Rust tests, the five public
-  gameplay probes, contracts, Clippy and native packaging. Updated hosted checks,
-  device adapters, haptics and the graphical binding editor remain open.
+  gameplay probes, contracts, Clippy and native packaging. All twelve checks passed
+  at `f6ebc14`; PR #32 merged as `68f6004` with its tested tree unchanged.
+  Device adapters, haptics and the graphical binding editor remain open.
   See [input actions](docs/spikes/input-actions.md).
 
 - Cooked WAV/OGG audio, typed sources/buses/listeners, Kira mixing/spatialization,
@@ -75,8 +91,9 @@ within its documented workload.
   pass. macOS/iOS device-backend and WASM compilation pass. All twelve hosted
   checks passed at `246a380`, including the Windows retained-reader repair test.
   Integration with merged timers passes 224 Rust tests, the combined public audio
-  and saved-timer probe, contracts, Clippy, UI checks and native packaging. Updated
-  hosted checks and merge remain pending. Native controls/playback, browser resources, hardware,
+  and saved-timer probe, contracts, Clippy, UI checks and native packaging. All
+  twelve checks passed at `de83a4e`; PR #29 merged as `f96dca7` with its tested tree
+  unchanged. Native controls/playback, browser resources, hardware,
   lifecycle/latency and mixer save cursors remain open. No device playback or local
   capture occurred. See [audio runtime](docs/spikes/audio-runtime.md).
 
@@ -416,13 +433,13 @@ input-adapter, SDK/coroutine and complete-game performance requirements. Later
 networking and service scope follows Revision 3 Sections 6.8/6.10; their open
 director decisions and human-owned production prerequisites remain explicit.
 
-The director paused computer use and screen capture again on 2026-10-09. No new
-native/browser operations or captures are authorized while that pause remains.
-Code, numerical replay, unit tests and hosted build/test work continue.
-Compound-collider PR #25 remains a separate draft at `18e3406`. All twelve hosted
-checks pass. Claude still needs to review the native Inspector at normal and
-minimum widths, including the 64-part case; this is paused under the current
-screen-work instruction. The compound changes have not merged into main.
+The director reauthorized computer use and screen capture on 2026-10-10.
+Claude's resumed compound review accepted the supplied native and corrected-runtime
+scope, then improved the unavailable Agent pane. Final post-change native captures
+currently await Mac unlock; the unlock request is pending. Compound PR #25 remains
+a separate draft while that final native confirmation is open. All twelve hosted
+checks passed on compound head `5b97ecd`.
+The compound changes have not merged into main.
 
 ## External prerequisites still required
 

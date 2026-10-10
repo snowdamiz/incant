@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "MissingKind": {
+      "enum": [
+        "translation",
+        "key"
+      ],
+      "type": "string"
+    },
+    "MissingString": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/MissingKind"
+        },
+        "requested_locale": {
+          "type": "string"
+        },
+        "resolved_locale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "table_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "table_id",
+        "key",
+        "requested_locale",
+        "kind"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "missing": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MissingString"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "requested_locale": {
+      "type": "string"
+    },
+    "resolved_locale": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "text": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "text",
+    "requested_locale"
+  ],
+  "title": "LocalizedText",
+  "type": "object"
+}

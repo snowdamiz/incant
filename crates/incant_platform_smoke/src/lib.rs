@@ -1,5 +1,6 @@
 //! Small runnable cross-platform probe of the actual document and Bevy crates.
 mod input;
+mod localization;
 use incant_core::{CharacterQuery, Engine};
 use incant_doc::{
     BodyMotion, Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform,
@@ -8,6 +9,7 @@ use serde_json::json;
 
 pub fn run() -> Result<String, String> {
     let input = input::check()?;
+    let localization = localization::check()?;
     let mut project = Project::empty("Incant platform smoke");
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Hello world");
@@ -113,7 +115,7 @@ pub fn run() -> Result<String, String> {
     {
         return Err("character movement assertion failed".into());
     }
-    Ok(json!({"input":input,"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
+    Ok(json!({"localization":localization,"input":input,"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
 }
 
 #[cfg(not(target_arch = "wasm32"))]

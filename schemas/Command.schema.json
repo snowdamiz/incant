@@ -520,6 +520,29 @@
       ],
       "type": "string"
     },
+    "LocaleSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "fallbacks": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "pseudo": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "locale"
+      ],
+      "type": "object"
+    },
     "MouseButton": {
       "enum": [
         "left",
@@ -600,6 +623,38 @@
         "right"
       ],
       "type": "string"
+    },
+    "StringTable": {
+      "additionalProperties": false,
+      "description": "A typed document asset. Message keys remain stable when translations change.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "messages": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "description": "Stable key -> canonical BCP-47 locale -> complete message pattern.",
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "source_locale": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "source_locale",
+        "messages"
+      ],
+      "type": "object"
     },
     "TextureUsage": {
       "enum": [
@@ -845,6 +900,58 @@
         "op",
         "section",
         "text"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "description": "Replace a typed translation table through the shared undoable transaction.",
+      "properties": {
+        "op": {
+          "const": "upsert_string_table",
+          "type": "string"
+        },
+        "table": {
+          "$ref": "#/$defs/StringTable"
+        }
+      },
+      "required": [
+        "op",
+        "table"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "remove_string_table",
+          "type": "string"
+        },
+        "table_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "table_id"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "set_locale",
+          "type": "string"
+        },
+        "settings": {
+          "$ref": "#/$defs/LocaleSettings"
+        }
+      },
+      "required": [
+        "op",
+        "settings"
       ],
       "type": "object"
     },

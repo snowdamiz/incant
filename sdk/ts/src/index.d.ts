@@ -23,7 +23,21 @@ export type { PhysicsRayQuery as RayQuery, PhysicsRayHit as RayHit, PhysicsTrigg
 import type { PhysicsRayQuery as RayQuery, PhysicsRayHit as RayHit, PhysicsTriggerEvent as TriggerEvent } from './generated';
 export type { PhysicsCharacterQuery as CharacterQuery, PhysicsCharacterMovement as CharacterMovement } from './generated';
 import type { PhysicsCharacterQuery as CharacterQuery, PhysicsCharacterMovement as CharacterMovement } from './generated';
+export type { StringTable, LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
+import type { LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
 export interface ScriptApi {
+  /** Read-only localization snapshot at the start of this tick. Each localization
+   * query costs 4 of the shared 256 native-query units. Change locale with the
+   * set_locale command; successful changes are visible next tick and saved.
+   * Missing keys return an explicit marker and diagnostic; bad arguments throw. */
+  localize(request: LocalizeRequest): LocalizedText;
+  locale(): LocaleSettings;
+  formatNumber(value: number): string;
+  /** ISO calendar input; formatted using the current locale's calendar. */
+  formatDate(value: CalendarDate, length?: DateLength): string;
+  /** Deterministic coverage for all declared keys in the current locale.
+   * Unknown keys requested at runtime are reported by localize().missing. */
+  localizationReport(): readonly MissingString[];
   /** Clock of the tick being processed (first update is tick 1). Saved/restored. */
   clock(): ScriptClock;
   /** Create/replace a named timer, delivered to onTimer before update. Delays
@@ -36,10 +50,10 @@ export interface ScriptApi {
    * buttons are [0,1], with a pressed threshold of 0.5. Edges last one tick. */
   input(): InputFrame;
   /** Read-only sweep for a nonsensor kinematic body. World +Y is up. Costs 16 of
-   * the shared 256 physics-query units per tick. Apply translation/dt as Velocity
+   * the shared 256 native-query units per tick. Apply translation/dt as Velocity
    * through api.command for the next tick. Gravity/jumping are behavior-owned. */
   computeCharacterMotion(query: CharacterQuery): CharacterMovement;
-  /** Play-session query; at most 256 per tick. Direction is normalized. */
+  /** Play-session query; costs 1 of 256 shared native-query units per tick. Direction is normalized. */
   raycast(query: RayQuery): RayHit | null;
   /** Sorted entry/exit transitions for the just-completed simulation tick. */
   triggerEvents(): readonly TriggerEvent[];
