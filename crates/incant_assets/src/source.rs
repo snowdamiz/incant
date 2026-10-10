@@ -1,6 +1,5 @@
 use crate::{AssetError, MAX_SOURCE_BYTES, Result, invalid, sha256};
 use base64::{Engine, engine::general_purpose::STANDARD};
-use serde::{Deserialize, Serialize};
 use std::{
     collections::BTreeMap,
     fs::File,
@@ -8,11 +7,7 @@ use std::{
     path::{Component, Path, PathBuf},
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct Dependency {
-    pub path: String,
-    pub sha256: String,
-}
+pub use incant_assets_runtime::Dependency;
 
 /// One bounded snapshot of a source file and its local dependencies. URI resolution
 /// allows sibling directories inside the project, but never network or outside files.

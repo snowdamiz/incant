@@ -1,9 +1,7 @@
 //! Project audio declarations projected onto a mixer. Hosts call sync after a
 //! committed simulation tick. Runtime failures are terminal: no partially
 //! applied tick may be presented as successful audio or resumed silently.
-use crate::{
-    AudioError, Bus, Mixer, OfflineBackend, PlayOptions, PlaybackState, Result, Spatial, VoiceId,
-};
+use crate::{AudioError, Bus, Mixer, OfflineBackend, PlayOptions, PlaybackState, Spatial, VoiceId};
 use glam::DQuat;
 use incant_assets::{AssetStore, CookedAudio, RuntimeAssetData};
 use incant_core::RuntimeSnapshot;
@@ -14,6 +12,19 @@ use std::{
     fmt::Debug,
     sync::Arc,
 };
+
+#[derive(Debug, thiserror::Error)]
+pub enum SceneAudioError {
+    #[error(transparent)]
+    Runtime(#[from] AudioError),
+    #[error(transparent)]
+    Document(#[from] incant_doc::DocumentError),
+    #[error(transparent)]
+    Json(#[from] serde_json::Error),
+    #[error("audio cache for asset {0} is absent or does not match the document")]
+    MissingAsset(String),
+}
+type Result<T> = std::result::Result<T, SceneAudioError>;
 
 pub struct SceneAudio<B: Backend> {
     mixer: Mixer<B>,
@@ -65,7 +76,7 @@ fn position(snapshot: &RuntimeSnapshot, id: &str) -> Result<[f32; 3]> {
         e.world_transform[3][1] as f32,
         e.world_transform[3][2] as f32,
     ];
-    crate::config::position(p)?;
+    crate::validate_position(p)?;
     Ok(p)
 }
 fn rotation(snapshot: &RuntimeSnapshot, id: &str) -> Result<[f32; 4]> {
@@ -76,7 +87,7 @@ fn rotation(snapshot: &RuntimeSnapshot, id: &str) -> Result<[f32; 4]> {
     let mut rotation = DQuat::IDENTITY;
     while let Some(id) = next {
         if !seen.insert(id) {
-            return Err(AudioError::Invalid("runtime audio parent cycle"));
+            return Err(AudioError::Invalid("runtime audio parent cycle").into());
         }
         let e = snapshot
             .entities
@@ -84,7 +95,7 @@ fn rotation(snapshot: &RuntimeSnapshot, id: &str) -> Result<[f32; 4]> {
             .ok_or(AudioError::Invalid("audio parent is absent from runtime"))?;
         let local = DQuat::from_array(e.rotation);
         if !local.is_finite() || local.length_squared() < 1e-12 {
-            return Err(AudioError::Invalid("audio rotation is invalid"));
+            return Err(AudioError::Invalid("audio rotation is invalid").into());
         }
         rotation = local.normalize() * rotation;
         next = e.parent.as_deref();
@@ -111,7 +122,7 @@ where
         assets: &AssetStore,
     ) -> Result<()> {
         if self.failed {
-            return Err(AudioError::FailedSession);
+            return Err(AudioError::FailedSession.into());
         }
         let result = self.sync_inner(project, snapshot, assets);
         self.failed = result.is_err();
@@ -132,7 +143,7 @@ where
         if errors.is_empty() {
             Ok(())
         } else {
-            Err(AudioError::Stream(format!("{errors:?}")))
+            Err(AudioError::Stream(format!("{errors:?}")).into())
         }
     }
     fn sync_inner(
@@ -146,7 +157,8 @@ where
         if layout(&buses) != self.layout {
             return Err(AudioError::Unsupported(
                 "changing bus topology requires restarting playback",
-            ));
+            )
+            .into());
         }
         let mut listener = None;
         let mut prepared = Vec::new();
@@ -162,18 +174,18 @@ where
             let declaration: AudioSource = serde_json::from_value(value.clone())?;
             let asset = assets
                 .get(&declaration.clip)
-                .ok_or_else(|| AudioError::MissingAsset(declaration.clip.clone()))?;
+                .ok_or_else(|| SceneAudioError::MissingAsset(declaration.clip.clone()))?;
             let RuntimeAssetData::Audio(clip) = asset.data() else {
-                return Err(AudioError::MissingAsset(declaration.clip));
+                return Err(SceneAudioError::MissingAsset(declaration.clip));
             };
             if asset.info().fingerprint != project.assets[&declaration.clip].sha256 {
-                return Err(AudioError::MissingAsset(declaration.clip));
+                return Err(SceneAudioError::MissingAsset(declaration.clip));
             }
             let spatial = declaration
                 .spatial
                 .as_ref()
                 .map(|s| {
-                    Ok::<_, AudioError>(Spatial {
+                    Ok::<_, SceneAudioError>(Spatial {
                         position: position(snapshot, &e.id)?,
                         min_distance: s.min_distance,
                         max_distance: s.max_distance,
@@ -276,9 +288,13 @@ impl SceneAudio<OfflineBackend> {
     }
     pub fn render(&mut self, output: &mut [f32]) -> Result<()> {
         if self.failed {
-            return Err(AudioError::FailedSession);
+            return Err(AudioError::FailedSession.into());
         }
-        let result = self.mixer.render(output).and_then(|_| self.check_errors());
+        let result = self
+            .mixer
+            .render(output)
+            .map_err(SceneAudioError::from)
+            .and_then(|_| self.check_errors());
         self.failed = result.is_err();
         result
     }

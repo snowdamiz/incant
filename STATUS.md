@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Cooked PCM loading and Kira mixing now live in authoring-free runtime crates;
+  legacy import/gameplay adapters retain their existing public behavior. All 412
+  release workspace tests and Clippy pass. A fresh 585,072-byte shipping audio
+  executable passes 64 source-free process checks across static/streaming modes,
+  playback rates and render batch sizes, with matching symbols and no authoring
+  code compiled into its dependency graph. Native ECS audio integration, device
+  playback, lifecycle, browser resources and phone gates remain open. See
+  [cooked audio boundary](docs/spikes/cooked-audio-boundary.md).
+
 - Native numeric publication now rejects finite-value integration/hierarchy
   overflow before advancing live world state. Script loans revoke views before
   the same hierarchy check and restore all numeric writes on failure. Four

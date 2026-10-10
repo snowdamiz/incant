@@ -49,7 +49,8 @@ pub(crate) fn gain(value: f32) -> Result<()> {
         Err(AudioError::Invalid("gain must be finite in [-80,24] dB"))
     }
 }
-pub(crate) fn position(value: [f32; 3]) -> Result<()> {
+/// Validate a bounded spatial position before issuing mixer commands.
+pub fn position(value: [f32; 3]) -> Result<()> {
     if value.iter().all(|v| v.is_finite() && v.abs() <= 1_000_000.) {
         Ok(())
     } else {
@@ -57,7 +58,8 @@ pub(crate) fn position(value: [f32; 3]) -> Result<()> {
     }
 }
 impl PlayOptions {
-    pub(crate) fn validate(&self, duration: f64) -> Result<()> {
+    /// Validate options against a retained clip's duration before publication.
+    pub fn validate(&self, duration: f64) -> Result<()> {
         gain(self.gain_db)?;
         if !self.pan.is_finite()
             || !(-1. ..=1.).contains(&self.pan)
