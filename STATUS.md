@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Sprite high-zoom follow-up uses 64-source-texel retained spans. The old spans
+  fail 95/2,856 expanded GPU cases; the fix passes all 5,768 exact/near-tie cases
+  through tested 128× magnification. All 360 workspace and 55 GPU tests plus
+  Clippy pass. Large sprites use more vertices, still under explicit total caps;
+  the theoretical maximum nine-slice bound is 6.19 MiB. Independent numerical
+  review passes; Claude rendered acceptance of this candidate and the separate
+  pixel-camera near-tie follower fix remain open. See
+  [sprite evidence](docs/spikes/sprite-rendering.md).
+
 - The macOS texture-format check now reuses the workspace-built `texture_probe`
   alongside the existing tools, avoiding its separate package feature graph.
   All three real fixtures pass the unchanged pinned Khronos validator; the build

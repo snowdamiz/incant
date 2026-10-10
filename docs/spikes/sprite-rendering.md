@@ -175,3 +175,35 @@ The rebuilt frozen executable is ready for Claude's independent rendered follow-
 Hosted adapters, native editor acceptance and reference-phone performance remain
 open. This correction does not fix the separate pixel-camera follower near-tie
 defect or approve a phase gate.
+
+## High-magnification follow-up: 64-texel spans
+
+Claude's round-four review fixed the region-width defect through 16× but exposed
+remaining exact and near-tie errors beyond it. Astra expanded the independent
+GPU colour-run oracle; the 512-texel geometry fails 95 of 2,856 cases. Reducing
+source spans to 64 texels fixes that set. Adding ±1/256-pixel interior offsets
+produces 5,768 passing cases: 1,400 outer-edge and 4,368 interior cases, across
+512–8192 source widths, both axes/directions, and the fourteen recorded scales
+from 1× through 128×. This is the tested range, not a bound on all possible zoom.
+The oracle derives integer source indices from screen-pixel centres and measures
+unique post-display colours independently; it does not reuse the shader formula.
+
+The shader and its tie bias are unchanged. Shorter spans bound interpolation and
+projected endpoint error while retaining camera-independent geometry: moving a
+camera does not retessellate sprites. The material tradeoff is more vertices for
+large nearest-sampled sprites. At most 130 spans per source axis, including the
+two nine-slice cuts, gives 101,400 vertices (6,489,600 bytes at 64 bytes each) for
+a theoretical 8192×8192 nine-slice, versus the previous 1,944-vertex bound. This is
+about 6.19 MiB and 52.2× the previous bound. The unchanged texture budget can reject
+that theoretical source before geometry is allocated. The unchanged 128 MiB total
+geometry and device-buffer caps reject oversized batches before extending retained
+vertices or allocating GPU resources; large nearest sprites reach that cap sooner.
+Small regions remain one quad per slice, and linear sampling remains unchanged.
+
+The independent Astra review confirms the oracle arithmetic, case counts and bound.
+All 360 workspace tests, 55 GPU tests and workspace Clippy pass. These are desktop
+correctness checks on Apple M5 Pro/Metal, not reference-phone performance results.
+Claude's rendered review of the rebuilt 64-texel candidate remains pending.
+The separate pixel-camera near-tie follower issue is still open. Machine-readable
+source hashes and exact case sets are in
+[evidence](evidence/sprite-short-spans-2026-10-10.json).

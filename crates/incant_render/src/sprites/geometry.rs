@@ -8,8 +8,11 @@ pub(super) struct NearestVertex {
     pub base: [f64; 2],
 }
 
-/// Each source axis is at most 8192 texels, split into spans of at most 512.
-/// Nine-slice boundaries add at most two spans per axis: 18² × 6 = 1944 vertices.
+/// Short spans bound both interpolation error and projected endpoint rounding at
+/// high magnification. Keep camera-independent retained geometry: camera motion
+/// does not require rebuilding it. Total uploaded geometry remains separately capped.
+/// Each source axis is at most 8192 texels, split into spans of at most 64.
+/// Nine-slice boundaries add at most two spans per axis: 130² × 6 = 101400 vertices.
 pub(super) fn nearest(
     geometry: &[SpriteVertex],
     region: [u32; 4],
@@ -48,13 +51,13 @@ pub(super) fn nearest(
 
 fn cuts(start: f64, end: f64) -> Vec<(f64, f64)> {
     let distance = (end - start).abs();
-    let count = (distance / 512.).ceil().max(1.) as usize;
+    let count = (distance / 64.).ceil().max(1.) as usize;
     (0..=count)
         .map(|i| {
             if i == count {
                 (1., end)
             } else {
-                let part = i as f64 * 512.;
+                let part = i as f64 * 64.;
                 (
                     part / distance.max(1.),
                     start + (end - start).signum() * part,
@@ -95,7 +98,7 @@ mod tests {
                     };
                     let original = incant_2d::tessellate(&sprite, [8192, 8192]).unwrap();
                     let vertices = nearest(&original, sprite.region, [8192, 8192]);
-                    assert!(vertices.len() <= 1944);
+                    assert!(vertices.len() <= 101400);
                     assert_eq!(vertices.len() % 6, 0);
                     let mut area = 0.;
                     for triangle in vertices.as_chunks::<3>().0 {
@@ -108,7 +111,7 @@ mod tests {
                     }
                     assert!((area - size[0] * size[1]).abs() <= 1e-9 * area.max(1.));
                     for vertex in &vertices {
-                        assert!(vertex.texel.iter().all(|c| (0.0..=512.0).contains(c)));
+                        assert!(vertex.texel.iter().all(|c| (0.0..=64.0).contains(c)));
                         let texel: [f64; 2] =
                             std::array::from_fn(|i| vertex.base[i] + vertex.texel[i]);
                         // Every new vertex lies on an original quad's mapping,
