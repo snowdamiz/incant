@@ -16,6 +16,7 @@ mod spatial_binary;
 mod spatial_commands;
 mod spatial_view;
 mod world;
+mod world_identity;
 
 pub use audio::{
     CookedAudio, MAX_AUDIO_BUSES, MAX_AUDIO_NODES, MAX_AUDIO_SOURCES, NativeAudioBus,
@@ -28,6 +29,7 @@ pub use physics::CookedPhysics;
 pub use save::{MAX_SAVE_BYTES, SaveError};
 pub use scene::{CookedEntity, CookedScene, SceneError, StableId};
 pub use world::{EntitySnapshot, NativeWorld, RuntimeError};
+pub use world_identity::WorldIdentity;
 
 pub use spatial::{
     CookedSpatial, MAX_DIRECTIONAL_LIGHTS, MAX_LOCAL_LIGHTS, MAX_MESH_ENTITIES, MAX_SHADOW_LIGHTS,

@@ -145,6 +145,7 @@ impl NativeWorld {
             .binding_generation
             .checked_add(1)
             .ok_or(SaveError::Invalid("spatial generation exhausted"))?;
+        candidate.identity = self.identity.clone();
         *self = candidate;
         Ok(())
     }

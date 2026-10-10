@@ -56,6 +56,7 @@ pub enum RuntimeError {
 /// A disposable Bevy world; no project, command bus, authoring validator or
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
+    pub(crate) identity: crate::WorldIdentity,
     pub(crate) world: World,
     schedule: Schedule,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
@@ -124,6 +125,7 @@ impl NativeWorld {
         // queries. Browser builds remain serial until their worker host exists.
         schedule.add_systems((integrate, publish_globals).chain());
         let mut result = Self {
+            identity: crate::WorldIdentity::new(),
             world,
             physics: solver,
             physics_failed: false,
