@@ -80,7 +80,8 @@ linear-light blending and neutral curve are unchanged. The pixel-camera near-tie
 follow defect is separate from these texel-sampling ties and is not fixed here.
 
 Bounds: 32,768 sprites and 256 MiB unique sprite texture storage per prepared
-scene; geometry is bounded to 54 vertices per sprite and 128 MiB total. These
+scene; linear geometry is bounded to 54 vertices per sprite; nearest geometry to 1944
+vertices per sprite and 128 MiB total (see the wide-region correction below). These
 limits exclude retained prior scenes, staged replacements and allocator overhead.
 Source textures retain the asset pipeline's own dimension/texel limits. Each
 source region is nonempty and at most 8192 pixels per axis. World sizes are finite,
@@ -133,3 +134,44 @@ Claude's ongoing review uses the prior frozen `a4b5ddb9…` renderer binary. The
 integration does not change its shader or sampling rules, but it does not replace
 the required final native review. The near-tie pixel-camera defect, hosted checks
 and physical-device/performance gates remain open.
+
+## Wide nearest regions, 2026-10-10
+
+Claude's third review accepts the magnification correction but exposes large-region
+precision loss near the f32 source coordinate bound. On Apple M5 Pro/Metal, the
+initial outer-edge regression fails 34/600 cases. Separating the fractional bias
+from the integer part reduces that to 24/600; interpolation precision still fails.
+
+Nearest geometry now splits authored source rectangles into spans of at most
+512 texels per axis. Each span interpolates small local coordinates and carries
+an exact flat integer source base. The shader biases the fractional part before
+adding the integer coordinates. The geometry preserves the original affine source
+mapping, flips and nine-slice cuts. Linear sampling and the display curve keep their
+previous paths. The existing 64-byte vertex layout and draw batches are unchanged.
+Large regions add CPU/vertex work: the bound is 1944 vertices per nearest sprite,
+including nine-slice cuts, versus 54 for linear. The 128 MiB geometry/device limit
+is checked before extending the CPU buffer or allocating the next texture.
+
+The expanded regression covers 600 outer-edge and 264 internal-span cases:
+512–8192 source pixels, magnifications 1/2/4/8/16/32, both axes/flips and offsets
+around pixel-center ties. Independent aligned GPU crops collect a unique color
+for every source texel; uniqueness after the display transform is asserted.
+All 864 cases pass. Independent review caught an earlier periodic palette that
+would have missed a lost source base. Removing only that shader base now causes
+720/864 failures, proving the strengthened test detects this regression; the
+shader was then restored exactly. This is numerical readback, not appearance
+approval.
+
+The unchanged runtime code passes 360 normal workspace tests, all 55 ignored GPU
+tests, workspace Clippy and the combined editor/headless/cook/collaboration release
+build. After strengthening the test, all seven sprite GPU tests and renderer
+Clippy pass again, including the earlier 70-case offset and 48-case orientation/
+sheet-height sweeps. A pure geometry test covers area/source mapping, flips,
+asymmetric/collapsed slices, span bounds and maximum vertex count. Independent
+Astra review found no further blocker. Exact hashes, commands' local logs and
+negative-control evidence are in [wide-region evidence](evidence/sprite-wide-nearest-2026-10-10.json).
+
+The rebuilt frozen executable is ready for Claude's independent rendered follow-up.
+Hosted adapters, native editor acceptance and reference-phone performance remain
+open. This correction does not fix the separate pixel-camera follower near-tie
+defect or approve a phase gate.

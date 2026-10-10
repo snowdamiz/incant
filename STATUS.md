@@ -140,6 +140,14 @@ within its documented workload.
   CRDT scaling remain open. The new device/performance targets have not been passed
   or waived.
 
+- Claude's third sprite review exposed large-region nearest precision loss.
+  Bounded source spans preserve the original mapping and now pass 864 edge/span
+  cases with unique source colors; removing the flat base fails 720 cases.
+  All 360 normal/55 GPU workspace tests and Clippy pass; seven focused GPU tests
+  pass after the test-oracle improvement. Independent rendered review of the
+  rebuilt candidate, native acceptance and hosted/device checks remain open.
+  See [wide-region evidence](docs/spikes/sprite-rendering.md#wide-nearest-regions-2026-10-10).
+
 - The sprite branch now integrates the native runtime/CRT/CI foundation with
   unchanged camera schemas and SDK. Checks pass 359 Rust tests, 54 GPU tests,
   420 UI tests, 25 tool tests, Clippy and combined packaging. The GPU pass builds

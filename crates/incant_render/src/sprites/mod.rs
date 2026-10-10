@@ -1,6 +1,7 @@
 //! Immutable sprite resources, deterministic painter order and retained frame commands.
 //! Geometry, premultiplied linear color and clip/depth math; no style presets.
 mod drawing;
+mod geometry;
 mod texture;
 use crate::{ResourceError, Result};
 pub(crate) use drawing::SpriteDraw;
@@ -167,6 +168,26 @@ impl SpriteSystem {
                     source,
                 }
             })?;
+            let geometry = if sprite.sampling == SpriteSampling::Nearest {
+                geometry::nearest(&geometry, sprite.region, texture_size)
+            } else {
+                geometry
+                    .into_iter()
+                    .map(|v| geometry::NearestVertex {
+                        position: v.position,
+                        texel: [0.; 2],
+                        base: v.uv,
+                    })
+                    .collect()
+            };
+            // Enforce the total bound before extending the CPU vertex vector or
+            // allocating this sprite's GPU texture. Large regions add spans.
+            let vertex_bytes = (vertices.len() + geometry.len()) * size_of::<Vertex>();
+            if vertex_bytes > 128 * 1024 * 1024
+                || vertex_bytes as u64 > device.limits().max_buffer_size
+            {
+                return Err(ResourceError::BufferSize("sprite geometry").into());
+            }
             let key = plan.source.info().fingerprint.clone();
             let texture = match cache.get(&key).and_then(Weak::upgrade) {
                 Some(texture) => texture,
@@ -206,15 +227,12 @@ impl SpriteSystem {
                 }
                 vertices.push(Vertex {
                     position: position.to_array(),
-                    uv: local.uv.map(|v| v as f32),
+                    // Nearest uses this slot as a flat integer source base;
+                    // linear retains its original normalized texture UVs.
+                    uv: local.base.map(|v| v as f32),
                     tint: sprite.tint.map(|v| v as f32),
                     uv_bounds: bounds,
-                    // Reconstruct in f64 before the f32 vertex boundary, so the
-                    // nearest path never interpolates sheet-normalized UVs.
-                    texel: [
-                        (local.uv[0] * tw - f64::from(x)) as f32,
-                        (local.uv[1] * th - f64::from(y)) as f32,
-                    ],
+                    texel: local.texel.map(|v| v as f32),
                     sampling: u32::from(sprite.sampling == SpriteSampling::Linear),
                 });
             }
