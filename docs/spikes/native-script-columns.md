@@ -180,3 +180,40 @@ All Cargo builds used two jobs. Full logs are retained locally as
 `/tmp/incant-native-host-integration-tools.log`. Hosted Windows linkage/imports,
 PDB packaging, CI cache timing and the migration/device gates above remain
 pending; local integration checks do not certify them.
+
+## Publication verification with structural bindings and CI follow-up
+
+The complete native-host branch at `7b04b460eb35df34bbe7eefa159ec9157a45d821`
+also includes the [structural bindings](native-script-structural.md) and reviewed
+CI follow-up `0b501e91063b1a17f44fbb53888376ea6f028927`. The latter builds the exact
+editor/headless/cook/collaboration targets together and invokes their binaries
+directly, retaining every gameplay probe and fresh shipping verification.
+
+Additional integrated nonvisual checks on 2026-10-10 passed on arm64 macOS:
+
+- All 44 ignored GPU tests, with the exact test identities matched against the
+  recorded baseline, and all 387 UI/bridge tests plus the production UI build.
+- Audio device compilation and the combined release command for `incant_editor`,
+  `incant_headless`, `cook_scene` and `collaboration_spike` with the editor's
+  `custom-protocol` feature.
+- Regenerated schemas unchanged, the evaluation-suite check, the real
+  two-client collaboration example, and all fifteen existing public gameplay
+  probes from the CI workflow.
+- Fresh shipping-profile build/package verification: fat LTO, one codegen unit,
+  portable CPU policy, abort without unwinding, matched dSYM UUIDs and successful
+  source-independent cooked-scene execution of the packaged player. This player
+  remains the native Transform/Velocity runner; it does not certify a shipped
+  script artifact or device performance.
+
+All 24 original script-package files were compared to their `incant_play_legacy`
+counterparts. Only the package/namespace rename and explicit temporary-path
+documentation differ; gameplay implementation is unchanged. The preceding
+373-test workspace and workspace Clippy results cover the same Rust sources.
+
+Logs use `/tmp/incant-native-host-publication-` followed by `gpu.log`,
+`ui-tests.log`, `ui-build.log`, `audio.log`, `build.log`, `eval.log`,
+`collaboration.log` and `shipping.log`. Individual public-probe logs/results and
+the fresh shipping manifest/archives are retained in the ignored
+`artifacts/native-host-publication/` directory. Native-script-only standalone
+evidence remains linked from the structural audit. Hosted checks on the new PR
+remain separate from these local results.
