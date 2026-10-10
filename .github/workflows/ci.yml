@@ -47,9 +47,9 @@ jobs:
         run: cargo test --workspace --release --locked -- --ignored --test-threads=1 --nocapture
       - name: Validate cooked KTX2 with the Khronos reference tool
         run: python3 tools/validate_ktx.py
-      # Build the exact tools used below together so their shared dependencies
-      # keep one feature graph, then execute the resulting binaries directly.
-      - run: cargo build -p incant_editor -p incant_headless -p incant_cook -p incant_cmd --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --release --features incant_editor/custom-protocol --locked
+      # Keep workspace feature unification from the release tests while building
+      # only these tools; execute the resulting binaries directly below.
+      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --release --features incant_editor/custom-protocol --locked
       - run: target/release/incant_headless schema schemas
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python3 tools/shipping.py artifacts/shipping-runtime
