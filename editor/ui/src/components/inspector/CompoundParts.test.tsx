@@ -255,6 +255,31 @@ describe('compound parts', () => {
     expect(detail().textContent).toContain('Part 1 of 3');
   });
 
+  it('keeps the selected stable part and keyboard focus through reordered snapshots', () => {
+    const { rerender } = show(MIXED);
+    fireEvent.click(rows()[1]!);
+    const selectedRow = rows()[1]!;
+    const reordered = { ...MIXED, parts: [MIXED.parts[1], MIXED.parts[2], MIXED.parts[0]] };
+    const update = (next: unknown) => rerender(
+      <FieldView name="shape" schema={SHAPE} value={next} path={['shape']} ctx={{ entity: ENTITY, component: 'Collider', diagnostics: [] }} />,
+    );
+    update(reordered);
+    expect(value('ID')).toBe(id(2));
+    expect(value('Primitive')).toBe('sphere');
+    expect(detail().textContent).toContain('Part 1 of 3');
+    expect(document.activeElement).toBe(selectedRow);
+    expect(rows()[0]).toBe(selectedRow);
+    expect(rows()[0]!.getAttribute('aria-selected')).toBe('true');
+    expect(within(detail()).getByRole('textbox', { name: 'Radius' }).id).toBe(
+      fieldDomId(ENTITY, 'Collider', ['shape', 'parts', '0', 'shape', 'radius']),
+    );
+    // Removing that part selects its replacement, without retaining stale fields.
+    update({ ...MIXED, parts: [MIXED.parts[2], MIXED.parts[0]] });
+    expect(value('ID')).toBe(id(3));
+    expect(value('Primitive')).toBe('capsule');
+    expect(rows().filter((row) => row.tabIndex === 0)).toHaveLength(1);
+  });
+
   it('has no accessibility violations for mixed parts', async () => {
     const { container } = show(MIXED);
     const results = await axe.run(container, { rules: { 'color-contrast': { enabled: false } } });

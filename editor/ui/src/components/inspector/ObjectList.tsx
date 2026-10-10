@@ -49,12 +49,25 @@ export function ObjectListView({
   const noun = singular(label);
   const listRef = useRef<HTMLDivElement>(null);
   const issues = value.map((_, index) => itemProblems(ctx.diagnostics, `${here}/${index}`));
+  const identity = Object.keys(item.properties).find((key) => fieldHint(ctx.component, pointer([...path, '0', key])).identifier);
+  const ids = value.map((entry) => identity && isRecord(entry) && typeof entry[identity] === 'string' ? entry[identity] as string : null);
+  const counts = new Map<string, number>();
+  for (const id of ids) if (id !== null) counts.set(id, (counts.get(id) ?? 0) + 1);
+  // Malformed/duplicate identifiers still get independent rows. Valid stable
+  // identities preserve the selected part and its DOM focus across reordering.
+  const keys = ids.map((id, index) => id !== null && counts.get(id) === 1 ? `id:${id}` : `index:${index}`);
   const [selected, setSelected] = useState(() => {
     const error = issues.findIndex((list) => severityOf(list) === 'error');
     const warning = issues.findIndex((list) => severityOf(list) === 'warning');
-    return error >= 0 ? error : warning >= 0 ? warning : 0;
+    const index = error >= 0 ? error : warning >= 0 ? warning : 0;
+    return { key: keys[index], index };
   });
-  const current = Math.min(selected, Math.max(0, value.length - 1));
+  const found = selected.key === undefined ? -1 : keys.indexOf(selected.key);
+  const current = found >= 0 ? found : Math.min(selected.index, Math.max(0, value.length - 1));
+  const currentKey = keys[current];
+  useEffect(() => {
+    if (selected.key !== currentKey || selected.index !== current) setSelected({ key: currentKey, index: current });
+  }, [current, currentKey, selected.key, selected.index]);
   // The list row owns its own path and anything that does not address a listed item.
   const own = ctx.diagnostics.filter((d) => {
     if (d.path === null) return false;
@@ -82,7 +95,7 @@ export function ObjectListView({
 
   const focusItem = (index: number) => {
     const next = Math.max(0, Math.min(value.length - 1, index));
-    setSelected(next);
+    setSelected({ key: keys[next], index: next });
     listRef.current?.querySelector<HTMLElement>(`[data-index="${next}"]`)?.focus();
   };
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -145,7 +158,7 @@ export function ObjectListView({
               ].filter(Boolean);
               return (
                 <div
-                  key={index}
+                  key={keys[index]}
                   data-index={index}
                   id={fieldDomId(ctx.entity, ctx.component, [...path, String(index)])}
                   className={`object-list__row${tone ? ` object-list__row--${tone}` : ''}`}
@@ -153,7 +166,7 @@ export function ObjectListView({
                   aria-selected={index === current}
                   tabIndex={index === current ? 0 : -1}
                   title={summary.spoken}
-                  onFocus={() => setSelected(index)}
+                  onFocus={() => setSelected({ key: keys[index], index })}
                   onClick={() => focusItem(index)}
                 >
                   {/*
@@ -183,7 +196,7 @@ export function ObjectListView({
             })}
           </div>
           <ItemDetail
-            key={current}
+            key={currentKey}
             noun={noun}
             schema={item}
             value={value[current]}
