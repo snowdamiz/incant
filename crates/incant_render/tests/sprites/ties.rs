@@ -135,3 +135,92 @@ fn nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize()
         }
     }
 }
+
+#[test]
+#[ignore = "requires a native GPU; desktop workflows execute this"]
+fn magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties() {
+    let renderer = Renderer::headless().unwrap();
+    eprintln!(
+        "sprite offset sweep adapter: {:?}",
+        renderer.adapter.get_info()
+    );
+    let mut fixture = Fixture::new(&sheet(64), 64, 64);
+    fixture.edit("region", json!([13, 17, 7, 7]));
+    let place = |fixture: &mut Fixture, scale: usize, edge: f64| {
+        let side = (7 * scale) as f64;
+        fixture.edit("size", json!([side / 8., side / 8.]));
+        // Put the top/left edges at a known screen position independently of
+        // magnification. Positive offsets move both toward increasing pixels.
+        let center = edge + side / 2.;
+        fixture
+            .project
+            .scenes
+            .get_mut(&fixture.scene)
+            .unwrap()
+            .entities
+            .get_mut(&fixture.sprite)
+            .unwrap()
+            .components
+            .insert(
+                "Transform".into(),
+                json!(Transform {
+                    translation: [(center - 32.) / 8., (32. - center) / 8., 0.],
+                    ..Default::default()
+                }),
+            );
+    };
+    // Integer edges establish the actual post-display palette without modeling
+    // either the shader's tie formula or the renderer's color curve.
+    place(&mut fixture, 1, 4.);
+    let reference = grid(&fixture.pixels(&renderer), 7);
+    let widths = |line: Vec<[u8; 4]>| {
+        let mut runs = Vec::new();
+        let mut previous = None;
+        for pixel in line {
+            if previous == Some(pixel) {
+                *runs.last_mut().unwrap() += 1;
+            } else {
+                runs.push(1_usize);
+                previous = Some(pixel);
+            }
+        }
+        runs
+    };
+    let mut failures = Vec::new();
+    let mut cases = 0;
+    for scale in [1, 2, 3, 4, 5, 6, 8] {
+        let side = 7 * scale;
+        for offset in [0., 0.625, 1., 2., 3.] {
+            for flipped in [false, true] {
+                fixture.edit("flip_x", json!(flipped));
+                fixture.edit("flip_y", json!(flipped));
+                place(&mut fixture, scale, 4.5 + offset / 256.);
+                let actual = grid(&fixture.pixels(&renderer), side);
+                let expected: Vec<_> = (0..side)
+                    .flat_map(|y| {
+                        let reference = &reference;
+                        (0..side).map(move |x| {
+                            let (u, v) = (x / scale, y / scale);
+                            let (u, v) = if flipped { (6 - u, 6 - v) } else { (u, v) };
+                            reference[v * 7 + u]
+                        })
+                    })
+                    .collect();
+                let horizontal = widths((0..side).map(|x| actual[(side / 2) * side + x]).collect());
+                let vertical = widths((0..side).map(|y| actual[y * side + side / 2]).collect());
+                if actual != expected || horizontal != vec![scale; 7] || vertical != vec![scale; 7]
+                {
+                    failures.push(format!("scale {scale}, offset {offset}/256 px, flipped {flipped}: horizontal {horizontal:?}, vertical {vertical:?}"));
+                }
+                cases += 1;
+            }
+        }
+    }
+    assert_eq!(cases, 70);
+    assert!(
+        failures.is_empty(),
+        "{} of {cases} cases failed:\n{}",
+        failures.len(),
+        failures.join("\n")
+    );
+}

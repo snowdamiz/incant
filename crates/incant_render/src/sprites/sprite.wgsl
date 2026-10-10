@@ -14,16 +14,16 @@ struct Output { @builtin(position) position:vec4f, @location(0) uv:vec2f, @locat
     // clamping prevent adjacent source-sheet frames from bleeding into this one.
     // Derivatives are evaluated in uniform control flow. At a nearest texel
     // boundary, select the side toward increasing screen coordinate on the
-    // dominant axis (X wins equal slopes). A 1/1024-texel band defines
-    // the tie tolerance for the supported 8192-texel region. It is unrelated
-    // to an adapter's raster subpixel precision. Local texels avoid sheet-size
+    // dominant axis (X wins equal slopes). Scale the signed derivative by
+    // 1/1024 screen pixel so magnification does not widen the tie band and
+    // consume nearby non-ties. Local texels avoid sheet-size
     // dependent rounding; textureLoad avoids hardware nearest tie choices.
     let dx=dpdx(input.texel);
     let dy=dpdy(input.texel);
     let direction=select(dy,dx,abs(dx)>=abs(dy));
     var pixel:vec4f;
     if input.sampling==0u {
-        let nearest=vec2i(clamp(floor(input.texel+sign(direction)*(1.0/1024.0)),vec2f(0),input.uv_bounds.zw-vec2f(1)));
+        let nearest=vec2i(clamp(floor(input.texel+direction*(1.0/1024.0)),vec2f(0),input.uv_bounds.zw-vec2f(1)));
         pixel=textureLoad(image,vec2i(input.uv_bounds.xy)+nearest,0);
     } else {
         pixel=textureSampleLevel(image,filtering,clamp(input.uv,input.uv_bounds.xy,input.uv_bounds.zw),0);

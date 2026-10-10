@@ -93,8 +93,12 @@ within its documented workload.
   ties; the correction passes a reproduced GPU regression, all 325 Rust tests,
   Clippy and 53 GPU checks. A follow-up typed diagnostic identifies the entity,
   texture, region and dimensions after an undersized reimport; its GPU regression
-  and workspace Clippy pass. Corrected rendered review and the recommended
-  optional exact display curve remain open;
+  and workspace Clippy pass. Claude's integrated round-two review accepts the
+  duplicated-texel fix but exposed a magnified-nearest regression. The GPU sweep
+  reproduces 15/70 failing cases before the derivative-scaled tolerance fix and
+  0/70 afterward; all six sprite GPU tests and scoped Clippy pass. A rebuilt
+  headless binary is ready for Claude's follow-up. That rendered verification
+  and the recommended optional exact display curve remain open;
   Inspector work follows the full redesign, and native/CI evidence remain open;
   atlas packing, tilemaps and 2D physics are separate unfinished work. See
   [sprite rendering](docs/spikes/sprite-rendering.md).
