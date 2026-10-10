@@ -8,11 +8,19 @@ pub(crate) fn follow(
     gates: &[(Point, Point)],
     flat: &[Point],
 ) -> Result<Vec<Point>, NavigationError> {
+    follow_with_budget(polys, corridor, gates, flat, &mut 0)
+}
+pub(crate) fn follow_with_budget(
+    polys: &[NavigationPolygon],
+    corridor: &[usize],
+    gates: &[(Point, Point)],
+    flat: &[Point],
+    work: &mut usize,
+) -> Result<Vec<Point>, NavigationError> {
     if flat.len() == 1 {
         return Ok(flat.to_vec());
     }
     let mut output = vec![];
-    let mut work = 0usize;
     let mut segment = 0;
     let mut begin = 0.;
     let mut cursor = flat[0];
@@ -23,12 +31,12 @@ pub(crate) fn follow(
             let b = flat[segment + 1];
             if let Some(t) = intersection(a, b, gate.0, gate.1, begin) {
                 let p = Vec3::from_array(a).lerp(Vec3::from_array(b), t).to_array();
-                append_surface(&mut output, &polys[poly], cursor, p, &mut work)?;
+                append_surface(&mut output, &polys[poly], cursor, p, work)?;
                 cursor = p;
                 begin = t;
                 break;
             }
-            append_surface(&mut output, &polys[poly], cursor, b, &mut work)?;
+            append_surface(&mut output, &polys[poly], cursor, b, work)?;
             segment += 1;
             if segment + 1 >= flat.len() {
                 return Err(invalid("funnel did not cross its navigation corridor"));
@@ -42,7 +50,7 @@ pub(crate) fn follow(
 fn cross(a: [f32; 2], b: [f32; 2]) -> f32 {
     a[0] * b[1] - a[1] * b[0]
 }
-fn intersection(a: Point, b: Point, c: Point, d: Point, begin: f32) -> Option<f32> {
+pub(crate) fn intersection(a: Point, b: Point, c: Point, d: Point, begin: f32) -> Option<f32> {
     let r = [b[0] - a[0], b[2] - a[2]];
     let s = [d[0] - c[0], d[2] - c[2]];
     let delta = [c[0] - a[0], c[2] - a[2]];
