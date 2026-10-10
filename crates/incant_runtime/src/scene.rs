@@ -86,7 +86,14 @@ impl CookedScene {
 }
 
 pub(crate) fn validate_values(entity: &CookedEntity) -> Result<(), SceneError> {
-    let t = &entity.transform;
+    validate_components(entity.id, &entity.transform, entity.velocity.as_ref())
+}
+
+pub(crate) fn validate_components(
+    id: StableId,
+    t: &Transform,
+    velocity: Option<&Velocity>,
+) -> Result<(), SceneError> {
     let norm: f64 = t.rotation.iter().map(|v| v * v).sum();
     if !t
         .translation
@@ -97,12 +104,9 @@ pub(crate) fn validate_values(entity: &CookedEntity) -> Result<(), SceneError> {
         || !norm.is_finite()
         || (norm - 1.).abs() > 1e-4
         || t.scale.iter().any(|v| v.abs() < 1e-9)
-        || entity
-            .velocity
-            .as_ref()
-            .is_some_and(|v| !v.linear.iter().all(|x| x.is_finite()))
+        || velocity.is_some_and(|v| !v.linear.iter().all(|x| x.is_finite()))
     {
-        return Err(SceneError::Component(entity.id));
+        return Err(SceneError::Component(id));
     }
     Ok(())
 }
