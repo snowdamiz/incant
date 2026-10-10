@@ -912,3 +912,8 @@ Native renderer input binding/primitive and GPU checks, explicit camera selectio
 Retained native consumers can now attach an opaque world identity that survives moves/restore but rejects a different constructed world before trusting equal scene IDs/generations. Nine spatial regressions and runtime scoped Clippy pass; this is a CPU data-boundary prerequisite, not a rendered frame.
 
 - Canonical renderer authoring boundary is implemented: typed retained cooked input, separate Project adapter, exact loaded-version GPU cache keys and direct input validation. Scoped 68 release tests and 54 native GPU tests plus Clippy/normal-graph checks pass. Native retained frame updates, full editor integration and phone performance remain open; see docs/spikes/native-renderer-boundary.md.
+
+
+## Retained native renderer CPU input (2026-10-10)
+
+Native render input now binds sealed cooked versions once, explicitly selects a camera and reuses typed pose slots at committed native sync points. Different-world input rejects before mutation; motion error/unwind restores preallocated numeric undo, while topology/configuration replacements publish atomically. All 87 scoped release tests/doctests and Clippy pass, with actual source/cache-deleted binding and a bounded zero-allocation motion check. Normal dependencies exclude authoring/importers/GPU. Root's retained GPU consumer integration, native rendered acceptance, full gameplay/pixel placement migration and device/performance gates remain open. [Evidence](docs/spikes/native-render-input.md).
