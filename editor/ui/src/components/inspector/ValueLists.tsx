@@ -309,7 +309,7 @@ function NumberTable({
   const scroller = useRef<HTMLDivElement>(null);
   // The box is at most 8 rows tall inside the Inspector, so its first render (before
   // layout is measured) assumes that size rather than a whole panel.
-  const viewport = useViewport(scroller, CELL_ROW * 4, TABLE_FALLBACK);
+  const [viewport, attachViewport] = useViewport(scroller, CELL_ROW * 4, TABLE_FALLBACK);
   const longest = useMemo(() => values.reduce((n, v) => Math.max(n, formatNumber(v).length), 1), [values]);
   const gutter = String(Math.max(0, values.length - 1)).length;
   // Monospace at 12 px is 7.2 px per character; each cell adds 10 px of padding.
@@ -326,7 +326,7 @@ function NumberTable({
   const style = { '--cell-chars': longest, '--gutter-chars': gutter } as CSSProperties;
   return (
     <div
-      ref={scroller}
+      ref={attachViewport}
       className={`number-table${columns !== null ? ' is-grid' : ''}`}
       id={id}
       role="group"
@@ -409,7 +409,7 @@ export function StringListView({
   const named = value.filter((item) => ctx.refs?.(item)).length;
   const summary = `${count(value.length, noun.toLowerCase())}${named > 0 && named < value.length ? ` · ${named} named` : ''}`;
   const scroller = useRef<HTMLDivElement>(null);
-  const viewport = useViewport(scroller, STRING_ROW * 4);
+  const [viewport, attachViewport] = useViewport(scroller, STRING_ROW * 4);
   const [first, last] = rowRange(viewport, value.length, STRING_ROW, 6, 4);
   const windowed = value.length > 48;
   const indices = windowed ? mountedIndices(first, last, value.length, []) : value.map((_, index) => index);
@@ -422,7 +422,7 @@ export function StringListView({
         </p>
       ) : (
         <div
-          ref={scroller}
+          ref={attachViewport}
           className={`string-list${windowed ? ' is-windowed' : ''}`}
           id={id}
           role="list"

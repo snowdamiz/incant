@@ -177,7 +177,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
   const problems = useMemo(() => indexProblems(tree, snapshot?.diagnostics ?? []), [tree, snapshot?.diagnostics]);
   const active = selection !== null && indexOf.has(selection) ? selection : (rows[0]?.id ?? null);
   const name = (id: Ulid) => tree.nodes[id]?.name ?? '';
-  const viewport = useViewport(listRef, ROW * 4);
+  const [viewport, attachViewport] = useViewport(listRef, ROW * 4);
   const [first, last] = rowRange(viewport, rows.length, ROW, 8, TOP);
   const mounted = mountedIndices(first, last, rows.length, [
     active !== null ? (indexOf.get(active) ?? -1) : -1,
@@ -340,7 +340,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
         </StateView>
       ) : (
         <div
-          ref={listRef}
+          ref={attachViewport}
           id="hierarchy-tree"
           className="tree"
           role="tree"

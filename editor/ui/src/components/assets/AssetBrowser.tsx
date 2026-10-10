@@ -267,7 +267,7 @@ function AssetList({
     groups.forEach((group, g) => group.assets.forEach((asset, r) => map.set(asset.id, { group: g, row: r })));
     return map;
   }, [groups]);
-  const viewport = useViewport(listRef, ROW * 4);
+  const [viewport, attachViewport] = useViewport(listRef, ROW * 4);
   const overscan = ROW * 8;
   const from = viewport.top - overscan;
   const to = viewport.top + viewport.height + overscan;
@@ -329,7 +329,7 @@ function AssetList({
   };
 
   return (
-    <div ref={listRef} id="asset-list" className="asset-list" role="listbox" aria-label="Assets" onKeyDown={onKeyDown}>
+    <div ref={attachViewport} id="asset-list" className="asset-list" role="listbox" aria-label="Assets" onKeyDown={onKeyDown}>
       <div className="asset-list__canvas" role="none" style={{ height: total }}>
         {[...visible.keys()].sort((a, b) => a - b).map((g) => {
           const group = groups[g]!;
