@@ -257,3 +257,39 @@ Logs are `/tmp/incant-native-host-publication-ios-script-bindgen.log` and
 graph results are `/tmp/incant-native-host-mobile-workspace.log`,
 `/tmp/incant-native-host-mobile-clippy.log` and
 `/tmp/incant-native-host-mobile-features.log`.
+
+## Final main integration and publication checks
+
+Verified PR #48 merged as `56c22d408fa3e85aaf6bc37e00f856c664dfd0c8` after all
+17 hosted checks passed. Merging that actual main into this branch produced
+`560ae9806ba863bc72313bad75e00614303a2b80` without changing the source tree.
+The native-host branch also includes the separately reviewed CI refinements
+`bcec1c4b49bb246c9a60f902aeb06d00e8176892` and
+`8bed53205ee9b193a1c81a783033fee165f1f1f4`; their integration changes only
+workflows and evidence after the preceding Rust/mobile checks. The full
+[CI audit](ci-build-performance.md) and [retention policy](ci-cache-retention.md)
+record the measured limits and qualifications.
+
+The exact workspace-selected release build with editor `custom-protocol`
+completed locally in 26.47 seconds, rebuilding only Tauri and the editor and
+emitting exactly the four requested editor/headless/cook/collaboration
+executables. This verifies build reuse in the existing local target directory;
+it is not a controlled hosted speedup or engine-performance result. Regenerated
+schemas stayed unchanged, and the evaluation suite, collaboration example and
+all fifteen public gameplay probes passed again on those binaries.
+
+A new fresh shipping build at `560ae9806ba863bc72313bad75e00614303a2b80` passed
+with the final mobile lockfile. Its manifest confirms portable CPU policy, fat
+LTO, one codegen unit, abort without unwinding, matching Mach-O/dSYM UUID
+`02f2c9d6-a503-3809-b21c-f17be85d5fa7`, and source-free cooked-scene execution.
+The player remains the Transform/Velocity runner, so this is not evidence of a
+shipped script artifact or mobile performance. Logs are
+`/tmp/incant-native-host-final-tools-build.log`,
+`/tmp/incant-native-host-final-tools-artifacts.jsonl`,
+`/tmp/incant-native-host-final-eval.log`,
+`/tmp/incant-native-host-final-collaboration.log` and
+`/tmp/incant-native-host-final-shipping.log`; probe results and the manifest are
+in ignored `artifacts/native-host-final-publication/`. All four changed
+workflows pass actionlint after the cache-policy integration, with the native
+dependency guard and mobile script checks preserved. New native-host hosted
+results remain pending publication; PR #48 results cover its earlier scope.
