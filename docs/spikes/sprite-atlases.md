@@ -168,3 +168,14 @@ watcher recovery, exact Undo/Redo, source removal, corrupt caches and warning-on
 success. Source and workflow inputs stayed frozen during Cargo. Compact results,
 source-art and log hashes are in
 [authoring evidence](evidence/sprite-atlas-authoring-2026-10-10.json).
+
+
+### Short-span integration for follow-up review
+
+`4194240` combines the reviewed skyline/diagnostic authoring corrections with the
+64-texel shared sprite renderer. The single conflict kept atlas region resolution
+and the new 101,400-vertex bound. All 374 ordinary workspace tests, 56 ignored GPU
+checks, release workspace Clippy and the headless build pass. The frozen binary
+SHA256 is `734811cb6053e32cce1ccd0fbb98fb7a515106cf7a8442f93b0be297af065469`.
+Claude's focused atlas delta is pending; 0032's above 128× and two-axis frame-edge
+sampling limitations still apply. This is not a native gameplay or device gate.

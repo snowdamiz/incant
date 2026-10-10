@@ -1,3 +1,61 @@
+# Follow-up: improved packing, diagnostics and 64-texel renderer
+
+This section supersedes the earlier execution/budget instructions below. Resume
+Claude Opus 5.5 over ACP with Max thinking explicitly verified. Review a focused
+delta against your preserved first-round evidence; do not rerun everything merely
+because it exists. Source commit is `4194240` (atlas authoring fixes `bd6abb4` plus
+shared 64-texel renderer `1f72a99` and its independent round-five report).
+Astra has verified 374 ordinary tests, all 56 GPU tests, workspace release Clippy,
+and a fresh headless build on this union. Source, schemas and UI are frozen.
+
+The isolated tools directory preserves your original executable and metadata as
+`incant_headless-pre-followup` / `binary-pre-followup.json`. Active
+`incant_headless` / `binary.json` refer only to the new frozen executable; keep
+hash checks before and after calls. No Cargo or engine/shader/source edits.
+
+Review these changes and public cases:
+- The bounded deterministic skyline packer evaluates fixed width candidates in
+  both axes (without rotating frames), so every candidate admitted at a smaller
+  maximum is retained at a larger maximum. It is not an optimal packer. Your
+  1200x40,1100x4,4x1100 reproduction now fits in 1204x1148 with 2 px padding;
+  also exercise the 130-frame repack workflow and preserve stable frame IDs.
+- Reimport preparation now rejects missing referenced atlas frames, non-color
+  textures, invalid regions and shrunken nine-slice bounds atomically before the
+  command commits. Verify readable public errors, unchanged project/revision/
+  journal on rejection, valid replacement and Undo/Redo. Prepared orphan cache
+  files after a rejected batch are allowed and are not a committed project edit.
+- `validate` now checks cooked sprite bindings and returns typed diagnostics with
+  scene/entity/texture/frame/path context; errors make it exit nonzero. Explicit
+  raw pixel rectangles on an atlas remain supported with a warning. They cannot
+  guarantee stable content after repacking; this limitation must stay visible.
+- Check a focused rendered atlas/control comparison, actual rectangle relocation,
+  extrusion/filtering/pivots/nine-slices/sorting, repeated fresh processes and
+  source removal under the new packer. Reuse original art and old evidence.
+- Re-run the extra source-Y span-cut failures you found at 36×/40×/56×, on this
+  64-texel candidate. Do not infer arbitrary zoom correctness from a passing set.
+
+Read the new 0032 round-five report now integrated in this tree. Its one-axis
+exact/near ties pass through 128×, but above 128× failures remain. Pre-existing
+2-axis frame-edge and 96-square non-dyadic projection exact-tie errors remain on
+all builds; the short-span candidate reduces them but does not eliminate them.
+Its real geometry cap is 341 nearest 2048-square sprites; 342 fail. Keep your
+acceptance scoped to atlas-specific behavior and explicitly conditional on these
+remaining shared-renderer limitations. Camera/follower placement is separately
+under contract review; do not attempt to fix either renderer or camera here.
+
+This follow-up has its own additional budget: at most 600 frames and 512 MiB raw,
+with the existing per-invocation 128-frame/256-MiB caps. Record the new-round and
+lifetime totals separately (your first round 744 frames/810.1 MiB stays preserved).
+Reuse frames when sufficient, plan captures before rendering, and stop with a
+precise reproduction if more budget is necessary. No native-app automation.
+
+Allowed edits remain this packet's helpers/art/evidence/result only. Append the
+new verdict first while preserving the old round, with precise hashes, outputs,
+failures/acceptance and limitations. Do not commit this Astra-owned brief. Commit
+with Built-by: claude. No editor styling, accounts, merging or publishing.
+
+---
+
 # Cooked atlas presentation and rendered correctness review
 
 Status: begin the independent atlas review using the frozen executable/metadata
