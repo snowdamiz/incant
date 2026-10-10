@@ -46,6 +46,8 @@ jobs:
         run: python tools/probes/physics-runtime.py artifacts/physics-runtime-cli --binary target/release/incant_headless${{ matrix.suffix }}
       - name: Verify strict TypeScript character walking and jumping
         run: python tools/probes/character-movement.py artifacts/character-movement-cli --binary target/release/incant_headless${{ matrix.suffix }}
+      - name: Verify compound authoring, recovery and scripted queries
+        run: python tools/probes/compound-colliders.py artifacts/compound-colliders-cli --binary target/release/incant_headless${{ matrix.suffix }}
       - name: Verify versioned game saves across headless process restarts
         run: python tools/probes/game-saves.py artifacts/game-saves-cli --binary target/release/incant_headless${{ matrix.suffix }}
       - name: Verify recorded device input, character control and mid-jump save replay
@@ -79,6 +81,7 @@ jobs:
             artifacts/render-smoke
             artifacts/physics-runtime-cli
             artifacts/character-movement-cli
+            artifacts/compound-colliders-cli
             artifacts/game-saves-cli
             artifacts/game-input-cli
             artifacts/game-audio-cli

@@ -1,0 +1,3177 @@
+{
+  "generated": "2026-10-10T04:27:29.056Z",
+  "browser": "155.0.8059.40",
+  "source": "browser fixture (?fixture=sample)",
+  "captures": [
+    {
+      "file": "arch-valid-1440x900.png",
+      "crop": "arch-valid-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "arch-valid",
+      "entity": "Stone Arch",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.3 × 1.1 × 0.4 m\" [selected]'",
+        "  - 'option \"Part 2: box, half extents 0.3 × 1.1 × 0.4 m\"'",
+        "  - 'option \"Part 3: box, half extents 1.4 × 0.2 × 0.4 m\"'",
+        "  - 'option \"Part 4: box, half extents 0.18 × 0.18 × 0.42 m\"'"
+      ],
+      "measure": {
+        "summary": "4 parts · 4 box",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": 102,
+          "width": 303,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 1 of 4, path /shape/parts/0",
+        "detail": {
+          "x": 1125,
+          "y": 223,
+          "width": 303,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9H"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "-1.1",
+              "1.1",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.3",
+              "1.1",
+              "0.4"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000J-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "arch-rotated-keystone-1440x900.png",
+      "crop": "arch-rotated-keystone-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "arch-rotated-keystone",
+      "entity": "Stone Arch",
+      "keys": [
+        "End"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.3 × 1.1 × 0.4 m\"'",
+        "  - 'option \"Part 2: box, half extents 0.3 × 1.1 × 0.4 m\"'",
+        "  - 'option \"Part 3: box, half extents 1.4 × 0.2 × 0.4 m\"'",
+        "  - 'option \"Part 4: box, half extents 0.18 × 0.18 × 0.42 m\" [selected]'"
+      ],
+      "measure": {
+        "summary": "4 parts · 4 box",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": -45,
+          "width": 303,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 4 of 4, path /shape/parts/3",
+        "detail": {
+          "x": 1125,
+          "y": 76,
+          "width": 303,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9M"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "2.62",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0.3827",
+              "0.9239"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.18",
+              "0.18",
+              "0.42"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000J-Collider_shape_parts_3",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "handcart-mixed-1440x900.png",
+      "crop": "handcart-mixed-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "handcart-mixed",
+      "entity": "Handcart",
+      "keys": [
+        "End"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.6 × 0.06 × 0.4 m\"'",
+        "  - 'option \"Part 2: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 3: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 4: capsule, half height 0.32, radius 0.04 m\" [selected]'"
+      ],
+      "measure": {
+        "summary": "4 parts · 1 box, 2 sphere, 1 capsule",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": 102,
+          "width": 303,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 4 of 4, path /shape/parts/3",
+        "detail": {
+          "x": 1125,
+          "y": 223,
+          "width": 303,
+          "height": 363
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9R"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0.82",
+              "0.55",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "-0.5",
+              "0.866"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "capsule"
+            ]
+          },
+          {
+            "label": "Half height",
+            "values": [
+              "0.32"
+            ]
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "0.04"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000K-Collider_shape_parts_3",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "handcart-end-tab-id-1440x900.png",
+      "crop": "handcart-end-tab-id-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "handcart-end-tab-id",
+      "entity": "Handcart",
+      "keys": [
+        "End",
+        "Tab"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.6 × 0.06 × 0.4 m\"'",
+        "  - 'option \"Part 2: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 3: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 4: capsule, half height 0.32, radius 0.04 m\" [selected]'"
+      ],
+      "measure": {
+        "summary": "4 parts · 1 box, 2 sphere, 1 capsule",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": -45,
+          "width": 303,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 4 of 4, path /shape/parts/3",
+        "detail": {
+          "x": 1125,
+          "y": 76,
+          "width": 303,
+          "height": 363
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9R"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0.82",
+              "0.55",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "-0.5",
+              "0.866"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "capsule"
+            ]
+          },
+          {
+            "label": "Half height",
+            "values": [
+              "0.32"
+            ]
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "0.04"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000K-Collider_shape_parts_3_id",
+        "activeOutline": "none",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "handcart-collision-1440x900.png",
+      "crop": "handcart-collision-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "handcart-collision",
+      "entity": "Handcart",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.6 × 0.06 × 0.4 m\" [selected]'",
+        "  - 'option \"Part 2: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 3: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 4: capsule, half height 0.32, radius 0.04 m\"'"
+      ],
+      "measure": {
+        "summary": "4 parts · 1 box, 2 sphere, 1 capsule",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": -183,
+          "width": 303,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 1 of 4, path /shape/parts/0",
+        "detail": {
+          "x": 1125,
+          "y": -62,
+          "width": 303,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9N"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "0.35",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.6",
+              "0.06",
+              "0.4"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000K-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-axis-error-1440x900.png",
+      "crop": "railing-axis-error-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "railing-axis-error",
+      "entity": "Broken Railing",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\" [selected]'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\"'",
+        "  - 'option \"Part 3: primitive has no type\"'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\"'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\"'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": 102,
+          "width": 303,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 1 of 6, path /shape/parts/0",
+        "detail": {
+          "x": 1125,
+          "y": 277,
+          "width": 303,
+          "height": 366
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9S"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "0.9",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "1.2",
+              "0.05",
+              "0"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [
+          "compound part 0: collider dimensions must be 0.001..10000 meters/shape/parts/0/shape/half_extents/2"
+        ],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-rotation-error-1440x900.png",
+      "crop": "railing-rotation-error-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "railing-rotation-error",
+      "entity": "Broken Railing",
+      "keys": [
+        "ArrowDown"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\"'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\" [selected]'",
+        "  - 'option \"Part 3: primitive has no type\"'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\"'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\"'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": -99,
+          "width": 303,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 2 of 6, path /shape/parts/1",
+        "detail": {
+          "x": 1125,
+          "y": 76,
+          "width": 303,
+          "height": 348
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9T"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "-1.1",
+              "0.45",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0.5",
+              "0.5"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.05",
+              "0.45",
+              "0.05"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [
+          "compound part 1 rotation must be a unit quaternion"
+        ],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_1",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-missing-tag-1440x900.png",
+      "crop": "railing-missing-tag-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "railing-missing-tag",
+      "entity": "Broken Railing",
+      "keys": [
+        "ArrowDown",
+        "ArrowDown"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\"'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\"'",
+        "  - 'option \"Part 3: primitive has no type\" [selected]'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\"'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\"'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": -99,
+          "width": 303,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 3 of 6, path /shape/parts/2",
+        "detail": {
+          "x": 1125,
+          "y": 76,
+          "width": 303,
+          "height": 353
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9V"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "1.1",
+              "0.45",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": []
+          }
+        ],
+        "notices": [
+          "No “type” is set, so the primitive cannot be shown. Expected box, sphere or capsule; raw value:"
+        ],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_2",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-unknown-tag-1440x900.png",
+      "crop": "railing-unknown-tag-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "railing-unknown-tag",
+      "entity": "Broken Railing",
+      "keys": [
+        "ArrowDown",
+        "ArrowDown",
+        "ArrowDown"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\"'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\"'",
+        "  - 'option \"Part 3: primitive has no type\"'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\" [selected]'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\"'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": -99,
+          "width": 303,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 4 of 6, path /shape/parts/3",
+        "detail": {
+          "x": 1125,
+          "y": 76,
+          "width": 303,
+          "height": 393
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9S"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "0.45",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": []
+          }
+        ],
+        "notices": [
+          "Unknown primitive type \"cylinder\". Expected box, sphere or capsule; raw value:"
+        ],
+        "problems": [
+          "compound part 3 requires a unique valid ULID"
+        ],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_3",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-not-object-1440x900.png",
+      "crop": "railing-not-object-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "railing-not-object",
+      "entity": "Broken Railing",
+      "keys": [
+        "End"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\"'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\"'",
+        "  - 'option \"Part 3: primitive has no type\"'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\"'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\" [selected]'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": -59,
+          "width": 303,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 6 of 6, path /shape/parts/5",
+        "detail": {
+          "x": 1125,
+          "y": 116,
+          "width": 303,
+          "height": 130
+        },
+        "detailRows": [],
+        "notices": [
+          "Cannot show part 6 as an object; raw value:"
+        ],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_5",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "rubble-64-end-1440x900.png",
+      "crop": "rubble-64-end-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "rubble-64-end",
+      "entity": "Rubble Pile",
+      "keys": [
+        "End"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.14 × 0.1 × 0.12 m\"'",
+        "  - 'option \"Part 2: box, half extents 0.17 × 0.1 × 0.14 m\"'",
+        "  - 'option \"Part 3: box, half extents 0.2 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 4: sphere, radius 0.12 m\"'",
+        "  - 'option \"Part 5: capsule, half height 0.18, radius 0.08 m\"'",
+        "  - 'option \"Part 6: box, half extents 0.17 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 7: box, half extents 0.2 × 0.1 × 0.12 m\"'"
+      ],
+      "measure": {
+        "summary": "64 parts · 39 box, 13 sphere, 12 capsule",
+        "options": 64,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": 102,
+          "width": 303,
+          "height": 177
+        },
+        "listScroll": {
+          "top": 1558,
+          "height": 1735,
+          "client": 177
+        },
+        "detailCaption": "Part 64 of 64, path /shape/parts/63",
+        "detail": {
+          "x": 1125,
+          "y": 285,
+          "width": 303,
+          "height": 287
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000XBX"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0.508",
+              "0.99",
+              "-0.21"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "sphere"
+            ]
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "0.12"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000N-Collider_shape_parts_63",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "rubble-64-start-1440x900.png",
+      "crop": "rubble-64-start-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "rubble-64-start",
+      "entity": "Rubble Pile",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.14 × 0.1 × 0.12 m\" [selected]'",
+        "  - 'option \"Part 2: box, half extents 0.17 × 0.1 × 0.14 m\"'",
+        "  - 'option \"Part 3: box, half extents 0.2 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 4: sphere, radius 0.12 m\"'",
+        "  - 'option \"Part 5: capsule, half height 0.18, radius 0.08 m\"'",
+        "  - 'option \"Part 6: box, half extents 0.17 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 7: box, half extents 0.2 × 0.1 × 0.12 m\"'"
+      ],
+      "measure": {
+        "summary": "64 parts · 39 box, 13 sphere, 12 capsule",
+        "options": 64,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": 215,
+          "width": 303,
+          "height": 177
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 1735,
+          "client": 177
+        },
+        "detailCaption": "Part 1 of 64, path /shape/parts/0",
+        "detail": {
+          "x": 1125,
+          "y": 398,
+          "width": 303,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9Y"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "1.6",
+              "0.15",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.14",
+              "0.1",
+              "0.12"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000N-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "rubble-64-scrolled-1440x900.png",
+      "crop": "rubble-64-scrolled-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "rubble-64-scrolled",
+      "entity": "Rubble Pile",
+      "keys": [
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "ArrowDown",
+        "ArrowDown"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.14 × 0.1 × 0.12 m\"'",
+        "  - 'option \"Part 2: box, half extents 0.17 × 0.1 × 0.14 m\"'",
+        "  - 'option \"Part 3: box, half extents 0.2 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 4: sphere, radius 0.12 m\"'",
+        "  - 'option \"Part 5: capsule, half height 0.18, radius 0.08 m\"'",
+        "  - 'option \"Part 6: box, half extents 0.17 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 7: box, half extents 0.2 × 0.1 × 0.12 m\"'"
+      ],
+      "measure": {
+        "summary": "64 parts · 39 box, 13 sphere, 12 capsule",
+        "options": 64,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": 102,
+          "width": 303,
+          "height": 177
+        },
+        "listScroll": {
+          "top": 874,
+          "height": 1735,
+          "client": 177
+        },
+        "detailCaption": "Part 38 of 64, path /shape/parts/37",
+        "detail": {
+          "x": 1125,
+          "y": 285,
+          "width": 303,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000XB3"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "-0.344",
+              "0.71",
+              "0.831"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0.8315",
+              "0",
+              "0.5556"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.17",
+              "0.1",
+              "0.14"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000N-Collider_shape_parts_37",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "crate-primitive-1440x900.png",
+      "crop": "crate-primitive-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "crate-primitive",
+      "entity": "Crate 01",
+      "keys": [],
+      "tabStops": [],
+      "listAria": [],
+      "measure": {
+        "summary": null,
+        "options": 0,
+        "tabbableOptions": 0,
+        "list": null,
+        "listScroll": null,
+        "detailCaption": null,
+        "detail": null,
+        "detailRows": [],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "tree-row-01J9ZF1XTR000000000000000D",
+        "activeOutline": "none",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "post-capsule-masks-1440x900.png",
+      "crop": "post-capsule-masks-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "post-capsule-masks",
+      "entity": "Mooring Post",
+      "keys": [],
+      "tabStops": [],
+      "listAria": [],
+      "measure": {
+        "summary": null,
+        "options": 0,
+        "tabbableOptions": 0,
+        "list": null,
+        "listScroll": null,
+        "detailCaption": null,
+        "detail": null,
+        "detailRows": [],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "tree-row-01J9ZF1XTR000000000000000H",
+        "activeOutline": "none",
+        "activeVisible": false,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "saved-accounts-shell-1440x900.png",
+      "crop": "saved-accounts-shell-1440x900-inspector.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": "saved-accounts-shell",
+      "entity": "Handcart",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.6 × 0.06 × 0.4 m\" [selected]'",
+        "  - 'option \"Part 2: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 3: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 4: capsule, half height 0.32, radius 0.04 m\"'"
+      ],
+      "measure": {
+        "summary": "4 parts · 1 box, 2 sphere, 1 capsule",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 1125,
+          "y": 215,
+          "width": 303,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 1 of 4, path /shape/parts/0",
+        "detail": {
+          "x": 1125,
+          "y": 336,
+          "width": 303,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9N"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "0.35",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.6",
+              "0.06",
+              "0.4"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000K-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "arch-valid-1000x650.png",
+      "crop": "arch-valid-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "arch-valid",
+      "entity": "Stone Arch",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.3 × 1.1 × 0.4 m\" [selected]'",
+        "  - 'option \"Part 2: box, half extents 0.3 × 1.1 × 0.4 m\"'",
+        "  - 'option \"Part 3: box, half extents 1.4 × 0.2 × 0.4 m\"'",
+        "  - 'option \"Part 4: box, half extents 0.18 × 0.18 × 0.42 m\"'"
+      ],
+      "measure": {
+        "summary": "4 parts · 4 box",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": 102,
+          "width": 292,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 1 of 4, path /shape/parts/0",
+        "detail": {
+          "x": 696,
+          "y": 223,
+          "width": 292,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9H"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "-1.1",
+              "1.1",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.3",
+              "1.1",
+              "0.4"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000J-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "arch-rotated-keystone-1000x650.png",
+      "crop": "arch-rotated-keystone-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "arch-rotated-keystone",
+      "entity": "Stone Arch",
+      "keys": [
+        "End"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.3 × 1.1 × 0.4 m\"'",
+        "  - 'option \"Part 2: box, half extents 0.3 × 1.1 × 0.4 m\"'",
+        "  - 'option \"Part 3: box, half extents 1.4 × 0.2 × 0.4 m\"'",
+        "  - 'option \"Part 4: box, half extents 0.18 × 0.18 × 0.42 m\" [selected]'"
+      ],
+      "measure": {
+        "summary": "4 parts · 4 box",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": -45,
+          "width": 292,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 4 of 4, path /shape/parts/3",
+        "detail": {
+          "x": 696,
+          "y": 76,
+          "width": 292,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9M"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "2.62",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0.3827",
+              "0.9239"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.18",
+              "0.18",
+              "0.42"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000J-Collider_shape_parts_3",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "handcart-mixed-1000x650.png",
+      "crop": "handcart-mixed-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "handcart-mixed",
+      "entity": "Handcart",
+      "keys": [
+        "End"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.6 × 0.06 × 0.4 m\"'",
+        "  - 'option \"Part 2: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 3: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 4: capsule, half height 0.32, radius 0.04 m\" [selected]'"
+      ],
+      "measure": {
+        "summary": "4 parts · 1 box, 2 sphere, 1 capsule",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": 102,
+          "width": 292,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 4 of 4, path /shape/parts/3",
+        "detail": {
+          "x": 696,
+          "y": 223,
+          "width": 292,
+          "height": 363
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9R"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0.82",
+              "0.55",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "-0.5",
+              "0.866"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "capsule"
+            ]
+          },
+          {
+            "label": "Half height",
+            "values": [
+              "0.32"
+            ]
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "0.04"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000K-Collider_shape_parts_3",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "handcart-end-tab-id-1000x650.png",
+      "crop": "handcart-end-tab-id-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "handcart-end-tab-id",
+      "entity": "Handcart",
+      "keys": [
+        "End",
+        "Tab"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.6 × 0.06 × 0.4 m\"'",
+        "  - 'option \"Part 2: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 3: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 4: capsule, half height 0.32, radius 0.04 m\" [selected]'"
+      ],
+      "measure": {
+        "summary": "4 parts · 1 box, 2 sphere, 1 capsule",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": -45,
+          "width": 292,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 4 of 4, path /shape/parts/3",
+        "detail": {
+          "x": 696,
+          "y": 76,
+          "width": 292,
+          "height": 363
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9R"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0.82",
+              "0.55",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "-0.5",
+              "0.866"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "capsule"
+            ]
+          },
+          {
+            "label": "Half height",
+            "values": [
+              "0.32"
+            ]
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "0.04"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000K-Collider_shape_parts_3_id",
+        "activeOutline": "none",
+        "activeVisible": true,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "handcart-collision-1000x650.png",
+      "crop": "handcart-collision-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "handcart-collision",
+      "entity": "Handcart",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.6 × 0.06 × 0.4 m\" [selected]'",
+        "  - 'option \"Part 2: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 3: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 4: capsule, half height 0.32, radius 0.04 m\"'"
+      ],
+      "measure": {
+        "summary": "4 parts · 1 box, 2 sphere, 1 capsule",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": -396,
+          "width": 292,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 1 of 4, path /shape/parts/0",
+        "detail": {
+          "x": 696,
+          "y": -275,
+          "width": 292,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9N"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "0.35",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.6",
+              "0.06",
+              "0.4"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000K-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-axis-error-1000x650.png",
+      "crop": "railing-axis-error-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "railing-axis-error",
+      "entity": "Broken Railing",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\" [selected]'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\"'",
+        "  - 'option \"Part 3: primitive has no type\"'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\"'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\"'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": 102,
+          "width": 292,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 1 of 6, path /shape/parts/0",
+        "detail": {
+          "x": 696,
+          "y": 277,
+          "width": 292,
+          "height": 382
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9S"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "0.9",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "1.2",
+              "0.05",
+              "0"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [
+          "compound part 0: collider dimensions must be 0.001..10000 meters/shape/parts/0/shape/half_extents/2"
+        ],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-rotation-error-1000x650.png",
+      "crop": "railing-rotation-error-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "railing-rotation-error",
+      "entity": "Broken Railing",
+      "keys": [
+        "ArrowDown"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\"'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\" [selected]'",
+        "  - 'option \"Part 3: primitive has no type\"'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\"'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\"'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": -99,
+          "width": 292,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 2 of 6, path /shape/parts/1",
+        "detail": {
+          "x": 696,
+          "y": 76,
+          "width": 292,
+          "height": 348
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9T"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "-1.1",
+              "0.45",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0.5",
+              "0.5"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.05",
+              "0.45",
+              "0.05"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [
+          "compound part 1 rotation must be a unit quaternion"
+        ],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_1",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-missing-tag-1000x650.png",
+      "crop": "railing-missing-tag-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "railing-missing-tag",
+      "entity": "Broken Railing",
+      "keys": [
+        "ArrowDown",
+        "ArrowDown"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\"'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\"'",
+        "  - 'option \"Part 3: primitive has no type\" [selected]'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\"'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\"'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": -99,
+          "width": 292,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 3 of 6, path /shape/parts/2",
+        "detail": {
+          "x": 696,
+          "y": 76,
+          "width": 292,
+          "height": 353
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9V"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "1.1",
+              "0.45",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": []
+          }
+        ],
+        "notices": [
+          "No “type” is set, so the primitive cannot be shown. Expected box, sphere or capsule; raw value:"
+        ],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_2",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-unknown-tag-1000x650.png",
+      "crop": "railing-unknown-tag-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "railing-unknown-tag",
+      "entity": "Broken Railing",
+      "keys": [
+        "ArrowDown",
+        "ArrowDown",
+        "ArrowDown"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\"'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\"'",
+        "  - 'option \"Part 3: primitive has no type\"'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\" [selected]'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\"'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": -99,
+          "width": 292,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 4 of 6, path /shape/parts/3",
+        "detail": {
+          "x": 696,
+          "y": 76,
+          "width": 292,
+          "height": 409
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9S"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "0.45",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": []
+          }
+        ],
+        "notices": [
+          "Unknown primitive type \"cylinder\". Expected box, sphere or capsule; raw value:"
+        ],
+        "problems": [
+          "compound part 3 requires a unique valid ULID"
+        ],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_3",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "railing-not-object-1000x650.png",
+      "crop": "railing-not-object-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "railing-not-object",
+      "entity": "Broken Railing",
+      "keys": [
+        "End"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 1.2 × 0.05 × 0 m, 1 error\"'",
+        "  - 'option \"Part 2: box, half extents 0.05 × 0.45 × 0.05 m, 1 error\"'",
+        "  - 'option \"Part 3: primitive has no type\"'",
+        "  - 'option \"Part 4: unknown primitive type \\\"cylinder\\\", 1 error\"'",
+        "  - 'option \"Part 5: box, half extents 1.2 × 0.04 × 0.04 m\"'",
+        "  - 'option \"Part 6: not an object: \\\"post-04\\\"\" [selected]'"
+      ],
+      "measure": {
+        "summary": "6 parts · 3 box, 3 unreadable",
+        "options": 6,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": -99,
+          "width": 292,
+          "height": 169
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 169,
+          "client": 169
+        },
+        "detailCaption": "Part 6 of 6, path /shape/parts/5",
+        "detail": {
+          "x": 696,
+          "y": 76,
+          "width": 292,
+          "height": 130
+        },
+        "detailRows": [],
+        "notices": [
+          "Cannot show part 6 as an object; raw value:"
+        ],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000M-Collider_shape_parts_5",
+        "activeOutline": "solid",
+        "activeVisible": false,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "rubble-64-end-1000x650.png",
+      "crop": "rubble-64-end-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "rubble-64-end",
+      "entity": "Rubble Pile",
+      "keys": [
+        "End"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.14 × 0.1 × 0.12 m\"'",
+        "  - 'option \"Part 2: box, half extents 0.17 × 0.1 × 0.14 m\"'",
+        "  - 'option \"Part 3: box, half extents 0.2 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 4: sphere, radius 0.12 m\"'",
+        "  - 'option \"Part 5: capsule, half height 0.18, radius 0.08 m\"'",
+        "  - 'option \"Part 6: box, half extents 0.17 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 7: box, half extents 0.2 × 0.1 × 0.12 m\"'"
+      ],
+      "measure": {
+        "summary": "64 parts · 39 box, 13 sphere, 12 capsule",
+        "options": 64,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": 102,
+          "width": 292,
+          "height": 177
+        },
+        "listScroll": {
+          "top": 1558,
+          "height": 1735,
+          "client": 177
+        },
+        "detailCaption": "Part 64 of 64, path /shape/parts/63",
+        "detail": {
+          "x": 696,
+          "y": 285,
+          "width": 292,
+          "height": 287
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000XBX"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0.508",
+              "0.99",
+              "-0.21"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "sphere"
+            ]
+          },
+          {
+            "label": "Radius",
+            "values": [
+              "0.12"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000N-Collider_shape_parts_63",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "rubble-64-start-1000x650.png",
+      "crop": "rubble-64-start-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "rubble-64-start",
+      "entity": "Rubble Pile",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.14 × 0.1 × 0.12 m\" [selected]'",
+        "  - 'option \"Part 2: box, half extents 0.17 × 0.1 × 0.14 m\"'",
+        "  - 'option \"Part 3: box, half extents 0.2 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 4: sphere, radius 0.12 m\"'",
+        "  - 'option \"Part 5: capsule, half height 0.18, radius 0.08 m\"'",
+        "  - 'option \"Part 6: box, half extents 0.17 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 7: box, half extents 0.2 × 0.1 × 0.12 m\"'"
+      ],
+      "measure": {
+        "summary": "64 parts · 39 box, 13 sphere, 12 capsule",
+        "options": 64,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": 215,
+          "width": 292,
+          "height": 177
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 1735,
+          "client": 177
+        },
+        "detailCaption": "Part 1 of 64, path /shape/parts/0",
+        "detail": {
+          "x": 696,
+          "y": 398,
+          "width": 292,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9Y"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "1.6",
+              "0.15",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.14",
+              "0.1",
+              "0.12"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000N-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "rubble-64-scrolled-1000x650.png",
+      "crop": "rubble-64-scrolled-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "rubble-64-scrolled",
+      "entity": "Rubble Pile",
+      "keys": [
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "PageDown",
+        "ArrowDown",
+        "ArrowDown"
+      ],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.14 × 0.1 × 0.12 m\"'",
+        "  - 'option \"Part 2: box, half extents 0.17 × 0.1 × 0.14 m\"'",
+        "  - 'option \"Part 3: box, half extents 0.2 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 4: sphere, radius 0.12 m\"'",
+        "  - 'option \"Part 5: capsule, half height 0.18, radius 0.08 m\"'",
+        "  - 'option \"Part 6: box, half extents 0.17 × 0.1 × 0.16 m\"'",
+        "  - 'option \"Part 7: box, half extents 0.2 × 0.1 × 0.12 m\"'"
+      ],
+      "measure": {
+        "summary": "64 parts · 39 box, 13 sphere, 12 capsule",
+        "options": 64,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": 102,
+          "width": 292,
+          "height": 177
+        },
+        "listScroll": {
+          "top": 874,
+          "height": 1735,
+          "client": 177
+        },
+        "detailCaption": "Part 38 of 64, path /shape/parts/37",
+        "detail": {
+          "x": 696,
+          "y": 285,
+          "width": 292,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000XB3"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "-0.344",
+              "0.71",
+              "0.831"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0.8315",
+              "0",
+              "0.5556"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.17",
+              "0.1",
+              "0.14"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000N-Collider_shape_parts_37",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "crate-primitive-1000x650.png",
+      "crop": "crate-primitive-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "crate-primitive",
+      "entity": "Crate 01",
+      "keys": [],
+      "tabStops": [],
+      "listAria": [],
+      "measure": {
+        "summary": null,
+        "options": 0,
+        "tabbableOptions": 0,
+        "list": null,
+        "listScroll": null,
+        "detailCaption": null,
+        "detail": null,
+        "detailRows": [],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "tree-row-01J9ZF1XTR000000000000000D",
+        "activeOutline": "none",
+        "activeVisible": false,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "post-capsule-masks-1000x650.png",
+      "crop": "post-capsule-masks-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "post-capsule-masks",
+      "entity": "Mooring Post",
+      "keys": [],
+      "tabStops": [],
+      "listAria": [],
+      "measure": {
+        "summary": null,
+        "options": 0,
+        "tabbableOptions": 0,
+        "list": null,
+        "listScroll": null,
+        "detailCaption": null,
+        "detail": null,
+        "detailRows": [],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "tree-row-01J9ZF1XTR000000000000000H",
+        "activeOutline": "none",
+        "activeVisible": false,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "saved-accounts-shell-1000x650.png",
+      "crop": "saved-accounts-shell-1000x650-inspector.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "state": "saved-accounts-shell",
+      "entity": "Handcart",
+      "keys": [],
+      "tabStops": [
+        null
+      ],
+      "listAria": [
+        "- listbox \"Parts\":",
+        "  - 'option \"Part 1: box, half extents 0.6 × 0.06 × 0.4 m\" [selected]'",
+        "  - 'option \"Part 2: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 3: sphere, radius 0.18 m\"'",
+        "  - 'option \"Part 4: capsule, half height 0.32, radius 0.04 m\"'"
+      ],
+      "measure": {
+        "summary": "4 parts · 1 box, 2 sphere, 1 capsule",
+        "options": 4,
+        "tabbableOptions": 1,
+        "list": {
+          "x": 696,
+          "y": 215,
+          "width": 292,
+          "height": 115
+        },
+        "listScroll": {
+          "top": 0,
+          "height": 115,
+          "client": 115
+        },
+        "detailCaption": "Part 1 of 4, path /shape/parts/0",
+        "detail": {
+          "x": 696,
+          "y": 336,
+          "width": 292,
+          "height": 308
+        },
+        "detailRows": [
+          {
+            "label": "ID",
+            "values": [
+              "01J9ZF1XTR0000000000000X9N"
+            ]
+          },
+          {
+            "label": "Offset",
+            "values": [
+              "0",
+              "0.35",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Primitive",
+            "values": [
+              "box"
+            ]
+          },
+          {
+            "label": "Half extents",
+            "values": [
+              "0.6",
+              "0.06",
+              "0.4"
+            ]
+          }
+        ],
+        "notices": [],
+        "problems": [],
+        "clippedInputs": [],
+        "activeName": "field-01J9ZF1XTR000000000000000K-Collider_shape_parts_0",
+        "activeOutline": "solid",
+        "activeVisible": true,
+        "inspector": {
+          "x": 680,
+          "y": 40,
+          "width": 320,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "dockTabs": [
+          "Hierarchy23 entities",
+          "Assets7 assets",
+          "Problems(9)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    }
+  ]
+}

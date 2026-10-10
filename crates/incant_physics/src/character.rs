@@ -111,6 +111,15 @@ impl PhysicsRuntime {
         let entry = scene.entries.get(&request.entity_id).ok_or_else(|| {
             PhysicsError::Query("character collider does not exist in this scene".into())
         })?;
+        if matches!(
+            entry.config.collider.shape,
+            incant_doc::ColliderShape::Compound { .. }
+        ) {
+            return Err(PhysicsError::Query(
+                "character body must use a primitive collider; compound obstacles are supported"
+                    .into(),
+            ));
+        }
         if entry.config.collider.sensor
             || !entry
                 .config

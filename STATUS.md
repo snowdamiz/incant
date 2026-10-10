@@ -53,84 +53,43 @@ within its documented workload.
 
 ## Active work
 
-- PR #39 now consolidates the steering, off-mesh links and script diagnostics/CPU
-  budget changes from PRs #36–38. The older steering branch failed a repeated
-  public script run with a generic error; its cause was not established. The
-  combined revision must pass its own hosted checks before merging.
+- Compound colliders support 1–64 stable primitive children with parent body/hit
+  identity. Shared edits, recovery, rotated-child walking and the compact read-only
+  Inspector pass. Claude accepted the final native review at 1440×874 and 1000×650,
+  including End→Tab full IDs, the 64-part list and the compact unavailable Agent.
+  Integration with the complete navigation/script foundation passes 315 Rust,
+  334 UI and five tool tests, Clippy, contracts, native packaging, portable core
+  compilation and five public gameplay workflows. Unchanged renderer coverage
+  retains 40 passing GPU checks. Baking preserves
+  transformed child geometry and hollow openings, and re-bakes after edits.
+  The final native draft blocker is resolved; updated hosted checks are required
+  before PR #25 merges.
+  See [compound colliders](docs/spikes/compound-colliders.md).
 
-- Rectangular-grid navigation supports weighted A*, blocked corners, bounded
-  search, shared component edits and `api.findGridPath`. The integrated branch
-  passes 309 Rust tests, Clippy, generated contracts and the public grid,
-  steering and off-mesh saved-game workflows. The native core probe passes
-  weighted detours, edits, blocked corners and reopened routes. All 40 GPU tests,
-  native packaging and WASM/iOS-simulator core compilation pass. Claude 0029
-  passes the rendered movement review: 516 matching frames, exact saved-state
-  restoration, all path costs matching an independent oracle, and arrival at
-  tick 476. Astra audited the evidence and reran all 309 Rust tests and Clippy.
-  Hosted checks remain pending. This
-  does not claim the full 2D renderer/tilemap/physics milestone. See
-  [grid navigation](docs/spikes/grid-navigation.md).
+- PR #39 consolidates steering, off-mesh links and script diagnostics/CPU budgets
+  from PRs #36–38. Its combined revision passes 300 local Rust, 40 GPU, 315 UI and
+  five tool tests, Clippy, contracts, native packaging and public saved workflows.
+  The 100-walker rendered plaza has all agents at goal from tick 2212 through 4990;
+  repeats match 803 frames/13 logs. Off-mesh repeats match 593 frames/26 logs and
+  all 49 mid-drop reopen frames. Quantized height and behavior-level lateral sweeps
+  remain documented. Thread CPU budgets exclude host pauses/other threads;
+  bounded native calls count but are not preemptible. Windows regressions now use
+  the shipped 50 ms allowance without changing production limits. All twelve required checks passed on `12b6092`; PR #39 merged as `72a53df`
+  with the tested tree unchanged, incorporating PRs #36–38. The older steering branch's generic repeated-play CI failure has
+  no established cause and is not counted as passed. See [steering](docs/spikes/navigation-steering.md),
+  [off-mesh links](docs/spikes/navigation-links.md), [diagnostics](docs/spikes/script-diagnostics.md)
+  and [CPU budgets](docs/spikes/script-cpu-budget.md).
 
-- The near-head-on steering correction passes the unchanged public and rendered
-  plaza course: all 100 walkers stay at goal from tick 2212 through 4990, with
-  no body overlap or persistent orbit. Both repetitions match 803 frames and
-  13 logs. Long lateral sweeps and brief goal-slot jostling remain documented.
-  All 286 Rust, 40 GPU, 315 UI and five tool tests, Clippy, contracts, native
-  packaging and target compilation pass. Final hosted checks remain before
-  merging PR #36. See [steering evidence](docs/spikes/navigation-steering.md).
+- PR #40 adds weighted rectangular-grid navigation through `api.findGridPath`,
+  shared edits, blocked-corner rules, bounded search and saved gameplay. Local
+  checks pass 309 Rust, 40 GPU, 315 UI and five tool tests, Clippy, contracts,
+  native packaging and WASM/iOS core compilation. Claude's scoped rendered
+  review passes 516 matching frames, exact saved-state restoration and independent
+  route-cost checks. Arrival is at tick 476 with 0.2 m minimum footprint clearance.
+  Hosted checks remain pending. Sprite/tilemap rendering and 2D physics remain
+  open. See [grid navigation](docs/spikes/grid-navigation.md).
 
-- Script CPU accounting is being verified separately from diagnostics PR #38.
-  Initialization/tick budgets now use the executing thread's CPU time, excluding
-  host pauses and other threads. Real waiting/CPU-exhaustion tests, VM interrupts,
-  zero-budget initialization and fail-closed clock handling cover the change.
-  All 298 Rust, 40 GPU, 315 UI and five tool tests pass, as do Clippy, strict
-  contracts, native packaging and both public steering/off-mesh saved workflows.
-  Integration at `735842c` passes all 300 Rust tests, Clippy, both public saved
-  workflows and native packaging. The full plaza exactly matches the reviewed
-  wall-clock binary. Windows then rejected the old 10 ms test allowance during
-  setup. Runaway initialization/update/getter regressions now use the shipped
-  50 ms allowance; production limits are unchanged. All 300 local Rust tests
-  and Clippy pass again. Updated hosted checks and dependency merges remain. See
-  [CPU budget details](docs/spikes/script-cpu-budget.md).
 
-- Script failures now distinguish bounded initialization/tick JavaScript messages,
-  native allocation failures and wall-clock deadlines. Both CLI paths identify
-  the absolute failing tick, including after save/reopen, and suppress failed-tick
-  logs/state/save publication. Five new behavior tests bring the integrated Rust
-  suite to 294 passing tests. Clippy, both public navigation/steering saved
-  workflows and native packaging pass. No script limit or capability changed;
-  sleep/load sensitivity remains open. Hosted checks and dependency merges are
-  pending. At `bb8b597`, all 296 Rust tests, Clippy, both public saved workflows
-  and native packaging pass with the final steering correction; its rendered
-  review passes too. See [script diagnostics](docs/spikes/script-diagnostics.md).
-
-- Authored off-mesh links support directed/bidirectional gaps, enable toggles,
-  costs, endpoint validation and per-leg route metadata through shared commands.
-  Invalid runtime landings cannot publish partial script/document state. At
-  `ccd6d33`, 289 Rust, 40 GPU, 315 UI and five tool tests pass, alongside Clippy,
-  contracts, native packaging and target compilation. Claude's two rendered runs
-  match 593 frames and 26 logs; mid-drop reopen matches all 49 window frames.
-  Session-local generations differ on reopen. Quantized heights visibly leave
-  an ungrounded logical walker 5 cm above a flat platform; exact source heights
-  remain open. The steering correction is integrated at `61cf71d`; all 289 Rust
-  tests, Clippy, both public saved workflows and native packaging pass again.
-  At `2568cf5`, all 291 Rust tests, Clippy, both public saved workflows and native
-  packaging pass with the final steering correction, whose rendered review now
-  passes too. Hosted checks and dependency merges remain pending. See [off-mesh links](docs/spikes/navigation-links.md).
-
-- Bounded local avoidance exposes read-only `api.steerAgents` proposals for up
-  to 128 agents. Library and public 100-agent save/reopen workflows pass.
-  Claude's four-way plaza review completed twice with 803 identical frames and
-  13 identical logs, no body overlaps and eventual arrival for all walkers.
-  Goal-block standoffs and large lateral detours remain behavior-level limits;
-  host sleep/load can trigger the existing script wall-clock deadline. The
-  integrated branch passes 284 Rust, 40 GPU, 315 UI and five tool tests, Clippy,
-  SDK checks, native packaging and WASM/iOS compilation. PR #36 Linux CI exposed
-  a symmetric-crowd arrival failure while eleven other checks passed. A consistent
-  passing preference now passes twelve rotated/staggered cases locally; full
-  revalidation found a rendered regression: only 26/100 at goal after 2700 ticks.
-  The refined candidate applies the preference only to opposing traffic; the
-  original plaza must pass again before merge despite green hosted checks. See [steering evidence](docs/spikes/navigation-steering.md).
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
   with funnel smoothing and connected visibility repair. Claude's rendered
@@ -279,8 +238,8 @@ within its documented workload.
   in browser fixtures and the native app. Shared schemas supply field order and
   units; WebKit field names and the compact Agent state are fixed. All twelve hosted
   checks passed at `6d5fca0`; PR #23 merged as `eb77419`. Character controllers
-  are implemented in PR #24. Compound colliders remain in draft PR #25 pending
-  the native visual review paused by the director. Mesh colliders, hierarchy/scale,
+  are implemented in PR #24. Compound colliders in PR #25 have accepted native review and await updated
+  hosted checks. Mesh colliders, hierarchy/scale,
   rollback snapshots and device performance remain open. See [runtime evidence](docs/spikes/physics-runtime.md).
 
 - Opt-in directional cascades are implemented with scoped Claude appearance
@@ -541,12 +500,13 @@ networking and service scope follows Revision 3 Sections 6.8/6.10; their open
 director decisions and human-owned production prerequisites remain explicit.
 
 The director reauthorized computer use and screen capture on 2026-10-10.
-Claude's resumed compound review accepted the supplied native and corrected-runtime
-scope, then improved the unavailable Agent pane. Final post-change native captures
-currently await Mac unlock; the unlock request is pending. Compound PR #25 remains
-a separate draft while that final native confirmation is open. All twelve hosted
-checks passed on compound head `5b97ecd`.
-The compound changes have not merged into main.
+Claude accepted the final rebuilt native Inspector at 1440×874 and 1000×650,
+including the compact unavailable Agent, valid 64-part list, End→Tab full IDs
+and primitive regression. PR #25 has passed local integration checks and awaits updated hosted
+checks before merge. All twelve checks passed on its earlier head `5b97ecd`;
+that is not evidence for the new integration. Native reorder/invalid-data
+presentation remains outside the read-only boundary, and the OS sharing pill
+obscures the traffic lights. No phase gate is approved.
 
 ## External prerequisites still required
 

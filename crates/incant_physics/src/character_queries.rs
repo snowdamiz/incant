@@ -11,6 +11,14 @@ fn unit_normal(normal: Vector, witness: Vector, shape: &dyn Shape) -> Vector {
     let Some(normal) = normal.try_normalize() else {
         return normal;
     };
+    // Transforming a recovered child face into its compound frame can shorten
+    // it again through floating-point quaternion arithmetic.
+    exact_face_normal(normal, witness, shape)
+        .and_then(Vector::try_normalize)
+        .unwrap_or(normal)
+}
+
+fn exact_face_normal(normal: Vector, witness: Vector, shape: &dyn Shape) -> Option<Vector> {
     // A box face has an exact geometric normal. GJK can return a slightly short
     // or tilted vector even with its witness strictly inside that planar face;
     // Rapier's slope decomposition may then discard the forward displacement.
@@ -25,11 +33,22 @@ fn unit_normal(normal: Vector, witness: Vector, shape: &dyn Shape) -> Vector {
                 && margins[(i + 2) % 3] > epsilon
                 && normal.dot(axis).abs() > 0.999
             {
-                return axis * witness[i].signum();
+                return Some(axis * witness[i].signum());
             }
         }
     }
-    normal
+    if let Some(compound) = shape.as_compound() {
+        for (pose, child) in compound.shapes() {
+            if let Some(face) = exact_face_normal(
+                pose.rotation.inverse() * normal,
+                pose.inverse_transform_point(witness),
+                child.as_ref(),
+            ) {
+                return Some(pose.rotation * face);
+            }
+        }
+    }
+    None
 }
 
 impl QueryDispatcher for CharacterQueries<'_> {

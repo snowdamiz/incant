@@ -1,11 +1,13 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 mod audio;
+mod collider_shapes;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
 mod navigation;
 mod physics;
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
+pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_input::InputActions;
@@ -13,7 +15,7 @@ pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
 pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
-pub use physics::{AngularVelocity, BodyMotion, Collider, ColliderShape, RigidBody};
+pub use physics::{AngularVelocity, BodyMotion, Collider, RigidBody};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};

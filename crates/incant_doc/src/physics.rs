@@ -1,6 +1,6 @@
 //! Authored physics inputs. Distances are meters, mass density kg/m³, angular
 //! velocity radians/second. Runtime solver handles never enter documents.
-use crate::{Entity, Transform, Velocity};
+use crate::{ColliderShape, Entity, Transform, Velocity};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -38,21 +38,6 @@ impl Default for RigidBody {
             ccd: true,
         }
     }
-}
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
-#[serde(tag = "type", rename_all = "snake_case", deny_unknown_fields)]
-pub enum ColliderShape {
-    Box {
-        half_extents: [f64; 3],
-    },
-    Sphere {
-        radius: f64,
-    },
-    /// Capsule along local Y; half_height excludes the hemispherical ends.
-    Capsule {
-        half_height: f64,
-        radius: f64,
-    },
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -106,18 +91,7 @@ pub(crate) fn validate(kind: &str, value: &serde_json::Value) -> Result<(), Stri
         "Collider" => {
             let collider: Collider =
                 serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
-            let size_ok = |v: f64| (0.001..=10000.).contains(&v);
-            let valid = match collider.shape {
-                ColliderShape::Box { half_extents } => half_extents.into_iter().all(size_ok),
-                ColliderShape::Sphere { radius } => size_ok(radius),
-                ColliderShape::Capsule {
-                    half_height,
-                    radius,
-                } => size_ok(radius) && (0. ..=10000.).contains(&half_height),
-            };
-            if !valid {
-                return Err("collider dimensions must be 0.001..10000 meters (capsule half-height may be zero)".into());
-            }
+            collider.shape.validate()?;
             if !(0.001..=100000.).contains(&collider.density)
                 || !(0. ..=10.).contains(&collider.friction)
                 || !(0. ..=1.).contains(&collider.restitution)
@@ -240,16 +214,19 @@ pub(crate) fn annotate_schemas(
         collider["properties"][key]["x-incant-widget"] = json!("collision-mask");
         collider["properties"][key]["maximum"] = json!(u32::MAX);
     }
-    for variant in collider["$defs"]["ColliderShape"]["oneOf"]
-        .as_array_mut()
-        .expect("shape variants")
-    {
-        for (key, property) in variant["properties"]
-            .as_object_mut()
-            .expect("shape properties")
+    collider["$defs"]["ColliderPart"]["properties"]["translation"]["x-incant-unit"] = json!("m");
+    for shape in ["ColliderShape", "PrimitiveColliderShape"] {
+        for variant in collider["$defs"][shape]["oneOf"]
+            .as_array_mut()
+            .expect("shape variants")
         {
-            if key != "type" {
-                property["x-incant-unit"] = json!("m");
+            for (key, property) in variant["properties"]
+                .as_object_mut()
+                .expect("shape properties")
+            {
+                if ["half_extents", "radius", "half_height"].contains(&key.as_str()) {
+                    property["x-incant-unit"] = json!("m");
+                }
             }
         }
     }

@@ -6,7 +6,8 @@ mod navigation;
 mod steering;
 use incant_core::{CharacterQuery, Engine};
 use incant_doc::{
-    BodyMotion, Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform,
+    BodyMotion, Collider, ColliderPart, ColliderShape, Entity, PrimitiveColliderShape, Project,
+    RigidBody, Scene, Transform,
 };
 use serde_json::json;
 
@@ -38,8 +39,19 @@ pub fn run() -> Result<String, String> {
     floor.components.insert(
         "Collider".into(),
         json!(Collider {
-            shape: ColliderShape::Box {
-                half_extents: [10., 0.5, 10.]
+            shape: ColliderShape::Compound {
+                parts: [-5., 5.]
+                    .into_iter()
+                    .enumerate()
+                    .map(|(i, x)| ColliderPart {
+                        id: format!("{:026}", i + 20),
+                        translation: [x, 0., 0.],
+                        rotation: [0., 0., 0., 1.],
+                        shape: PrimitiveColliderShape::Box {
+                            half_extents: [5., 0.5, 10.]
+                        },
+                    })
+                    .collect(),
             },
             ..Default::default()
         }),
@@ -117,7 +129,10 @@ pub fn run() -> Result<String, String> {
         options: Default::default(),
     })
     .map_err(|e| e.to_string())?;
-    if !movement.grounded || movement.translation[0] < 0.09 || movement.translation[1].abs() > 0.02
+    if !movement.grounded
+        || movement.sliding_down_slope
+        || movement.translation[0] < 0.09
+        || movement.translation[1].abs() > 0.02
     {
         return Err("character movement assertion failed".into());
     }

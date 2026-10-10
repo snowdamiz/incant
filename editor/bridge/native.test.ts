@@ -2,8 +2,22 @@ import { describe, expect, it, vi } from "vitest";
 import { NativeBridge, snapshotFromEngine } from "./native";
 import type { EngineRead, EngineResponse, Invoke } from "./native";
 import type { Ulid, WindowChrome } from "./contract";
+import colliderSchema from '../../schemas/Collider.schema.json';
 const scene = "00000000000000000000000002";
 const entity = "00000000000000000000000010";
+it('preserves real compound part schemas, bounds and nested shape alternatives', () => {
+  const source = read();
+  source.schemas.Collider = colliderSchema;
+  const shape = snapshotFromEngine(source).schemas.Collider!.properties.shape;
+  expect(shape).toMatchObject({type:'tagged-union',discriminator:'type',variants:{compound:{type:'object',properties:{parts:{
+    type:'array',minItems:1,maxItems:64,optional:false,items:{type:'object',properties:{
+      id:{type:'string',optional:false},translation:{type:'array','x-incant-unit':'m',items:{type:'number'}},
+      rotation:{type:'array'},shape:{type:'tagged-union',discriminator:'type',variants:{
+        box:{type:'object'},sphere:{type:'object'},capsule:{type:'object'}
+      }}
+    }}
+  }}}}});
+});
 function read(): EngineRead {
   return {
     project: {

@@ -111,3 +111,11 @@ Memberships, and the short Agent transcript is keyboard scrollable. Captures rem
 label; hashes and sanitized accessibility evidence identify the review artifacts.
 The saved account restored without another login or Keychain prompt. The native
 viewport is an authored static scene; no play-in-editor controls are claimed.
+
+## Hosted integration
+
+All twelve checks passed on final head `6d5fca0`: source checks, both desktop
+editor/GPU jobs, three credential-storage jobs and six actual platform probes.
+PR #23 merged into main as `eb7741973eea3f50c3867b3e554c2c33a33737ab` on
+2026-10-10 UTC. The merge tree equals the reviewed head and the merge commit
+includes `Built-by: astra`. This merge does not approve an open phase gate.

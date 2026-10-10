@@ -42,6 +42,7 @@ jobs:
       - run: cargo run -p incant_headless --release --locked -- schema schemas
       - run: python3 tools/probes/physics-runtime.py artifacts/physics-runtime-cli
       - run: python3 tools/probes/character-movement.py artifacts/character-movement-cli
+      - run: python3 tools/probes/compound-colliders.py artifacts/compound-colliders-cli
       - run: python3 tools/probes/game-saves.py artifacts/game-saves-cli
       - run: python3 tools/probes/game-input.py artifacts/game-input-cli
       - run: python3 tools/probes/game-audio.py artifacts/game-audio-cli

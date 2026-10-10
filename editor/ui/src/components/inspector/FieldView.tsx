@@ -4,6 +4,7 @@ import type { Diagnostic, FieldSchema } from '../../bridge/contract';
 import { Icon } from '../../icons/Icon';
 import type { FieldHint } from './presentation';
 import { MASK_BITS, fieldHint, isMask, maskDescription, maskGroups, maskSummary } from './presentation';
+import { ObjectListView, isObjectList } from './ObjectList';
 
 /** JSON pointer for a property path, matching Diagnostic.path. */
 export function pointer(path: readonly string[]): string {
@@ -50,18 +51,35 @@ export function FieldView({
   }
   if (schema.type === 'object' && 'properties' in schema) {
     const record = isRecord(value) ? value : null;
+    const properties = schema.properties as Readonly<Record<string, FieldSchema>>;
     return (
       <fieldset className="field-group">
         <legend className="field-group__legend">{label}</legend>
         {record ? (
-          Object.entries(schema.properties).map(([key, child]) => (
+          Object.entries(properties).map(([key, child]) => (
             <FieldView key={key} name={key} schema={child} value={record[key]} path={[...path, key]} ctx={ctx} />
           ))
         ) : (
           <Mismatch expected="object" value={value} />
         )}
+        {record
+          ? Object.keys(record)
+              .filter((key) => !Object.hasOwn(properties, key))
+              .map((key) => (
+                <p key={key} className="component__notice">
+                  <span>
+                    <Icon name="warning" size={12} /> Field <code>{key}</code> is not part of {label.toLowerCase()}:{' '}
+                    <code>{safeJson(record[key])}</code>
+                  </span>
+                </p>
+              ))
+          : null}
       </fieldset>
     );
+  }
+  if (schema.type === 'array' && 'items' in schema && isObjectList(schema) && Array.isArray(value)) {
+    // Selection is per entity: a different entity starts at its own first problem (or part 1).
+    return <ObjectListView key={ctx.entity} label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} />;
   }
   return <FieldRow label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} />;
 }
@@ -214,11 +232,7 @@ function FieldRow({
   const here = pointer(path);
   const owns = claim ?? ((target: string) => target === here || target.startsWith(`${here}/`));
   const problems = ctx.diagnostics.filter((d) => d.path !== null && owns(d.path));
-  const severity = problems.some((d) => d.severity === 'error')
-    ? 'error'
-    : problems.some((d) => d.severity === 'warning')
-      ? 'warning'
-      : null;
+  const severity = severityOf(problems);
   const errorPaths = new Set(problems.filter((d) => d.severity === 'error').map((d) => d.path ?? ''));
   const description = schema.description ?? hint.description;
   const descriptionId = description ? `${id}-description` : undefined;
@@ -265,23 +279,37 @@ function FieldRow({
             invalid={severity === 'error'}
             errorPaths={errorPaths}
             describedBy={describedBy}
+            identifier={hint.identifier === true}
           />
         )}
       </div>
-      {problems.length > 0 ? (
-        <ul className="field__problems" id={messageId}>
-          {problems.map((d) => (
-            <li key={d.id} className={`field__problem field__problem--${d.severity}`}>
-              <Icon name={d.severity === 'error' ? 'error' : d.severity === 'warning' ? 'warning' : 'info'} size={12} />
-              <span>
-                {d.message}
-                {d.path !== here ? <code className="field__problem-path">{d.path}</code> : null}
-              </span>
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      {problems.length > 0 ? <ProblemList id={messageId} problems={problems} here={here} /> : null}
     </div>
+  );
+}
+
+export function severityOf(problems: readonly Diagnostic[]): 'error' | 'warning' | null {
+  return problems.some((d) => d.severity === 'error')
+    ? 'error'
+    : problems.some((d) => d.severity === 'warning')
+      ? 'warning'
+      : null;
+}
+
+/** Engine diagnostics under a row; a deeper path than the row's own is shown exactly. */
+export function ProblemList({ id, problems, here }: { id: string; problems: readonly Diagnostic[]; here: string }) {
+  return (
+    <ul className="field__problems" id={id}>
+      {problems.map((d) => (
+        <li key={d.id} className={`field__problem field__problem--${d.severity}`}>
+          <Icon name={d.severity === 'error' ? 'error' : d.severity === 'warning' ? 'warning' : 'info'} size={12} />
+          <span>
+            {d.message}
+            {d.path !== here ? <code className="field__problem-path">{d.path}</code> : null}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -299,6 +327,7 @@ function ValueControl({
   invalid,
   errorPaths,
   describedBy,
+  identifier,
 }: {
   id: string;
   path: readonly string[];
@@ -309,6 +338,7 @@ function ValueControl({
   invalid: boolean;
   errorPaths: ReadonlySet<string>;
   describedBy: string | undefined;
+  identifier: boolean;
 }) {
   const fieldKey = path[path.length - 1] ?? '';
   const here = pointer(path);
@@ -337,6 +367,14 @@ function ValueControl({
         return (
           <span className="control control--ref">
             <Icon name="link" size={12} />
+            <input {...common} className="control__input mono" value={value} title={value} />
+          </span>
+        );
+      }
+      if (identifier) {
+        // The item's own stable ID: monospace like a reference, but no link icon (it points nowhere).
+        return (
+          <span className="control control--ref control--identifier">
             <input {...common} className="control__input mono" value={value} title={value} />
           </span>
         );
@@ -383,6 +421,11 @@ function ValueControl({
     }
     case 'array': {
       if (!('items' in schema)) return <Unsupported id={id} type="array without items" value={value} />;
+      // Lists of records are presented by ObjectListView; only a non-array value reaches here.
+      if (isObjectList(schema)) return <Mismatch id={id} expected="a list" value={value} />;
+      if (schema.items.type !== 'number' && schema.items.type !== 'integer') {
+        return <Unsupported id={id} type={`array of ${schema.items.type}`} value={value} />;
+      }
       if (!Array.isArray(value) || !value.every((item) => typeof item === 'number')) {
         return <Mismatch id={id} expected="a list of numbers" value={value} />;
       }
@@ -526,12 +569,12 @@ export function arrayChannels(
   return (hinted || named) && (length === 3 || length === 4) ? COLOR_CHANNELS.slice(0, length) : null;
 }
 
-function formatNumber(value: number): string {
+export function formatNumber(value: number): string {
   if (Number.isInteger(value)) return String(value);
   return String(Number(value.toFixed(4)));
 }
 
-function Notice({
+export function Notice({
   id,
   children,
   value,
