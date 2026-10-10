@@ -1,0 +1,159 @@
+{
+  "format_version": 1,
+  "target": "aarch64-apple-darwin",
+  "profile": "shipping",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "host": "macOS-26.6-arm64-arm-64bit-Mach-O",
+  "source_commit": "61b812c376d77002a59ca141e326c5518a833b06",
+  "source_sha256": {
+    "Cargo.toml": "a4072cdb98c320879dd780488e266fa1879d73775c23d063e0dad29852652201",
+    "Cargo.lock": "9eae8c5616ab42bf4685c75c35165c4047c0780e6b88d9b543aa346d5ca9cf68",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "crates/incant_runtime/Cargo.toml": "dc40f29bf14545688eaf07c138a5c593c1e80e1b9456b1ad02d02c3d87a051b3",
+    "crates/incant_types/Cargo.toml": "ae094bd227e3e585de808ad18da99b02cc7bc8282720cffeb6d3a8b3275c5e9c",
+    "tools/cargo": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3",
+    "tools/shipping.py": "580032cf37e1b647c21f18c7376853dcd5497da9a46aaa0a58a9697e7994bf9e",
+    "tools/shipping_symbols.py": "de7d4b0c5523a7b2d281ce8713acb899997726c1144199e7ea8d7bd8ea3dc856",
+    "tools/probes/cooked-runtime.py": "169b060462ba482683dfbe09d5ac82d553bf944e291a7ea823ac6127b43cacc6",
+    "crates/incant_runtime/examples/run_scene.rs": "99801aecdfaa80faec156d127fd1aded13b5c86bf15ed544103f2fd0fc315c14",
+    "crates/incant_runtime/src/binary.rs": "ba532cf53f6020f343a952b626019399014c9ae216044e8d79d343e3190cf8cc",
+    "crates/incant_runtime/src/commands.rs": "ccdae6a5e06c011c203bb2dd239f7e6a16750e5f55c12007d51514b66eb1d421",
+    "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+    "crates/incant_runtime/src/lib.rs": "61d9ab4db74d96d02a0730fa930aa37734860447e6781039da917aada43840a9",
+    "crates/incant_runtime/src/scene.rs": "9795bc8b5eca4dd74f961b0e402f719bdd971d170eaa6fea76285d55fd6f1620",
+    "crates/incant_runtime/src/world.rs": "f922116b2817811498887d5a0613aaa271465918daeaf8ba678794a3f2cb038a",
+    "crates/incant_runtime/tests/scenes.rs": "8ad4faeae87aa696f83416ec50338de022153453ea18fa1d5b36b5fcc05e0212",
+    "crates/incant_runtime/tests/structural.rs": "ac002e67cbee6ea7523b30ec94959d5dc2a4e168853bbbe66aa697afcc03cd9b",
+    "crates/incant_types/src/audio.rs": "31a41005ed056423ce3c7d3882429550d6383a58a1ea5799e698c25d150a3feb",
+    "crates/incant_types/src/camera.rs": "b650ca68ef1777b81672f489d17ba98b0557eebda891c97e4de0aa20a0ae8e65",
+    "crates/incant_types/src/collider_shapes.rs": "dc2efc4d76e8671b03bc38eb92e8db0161f4613417772644028e0b4ecb958979",
+    "crates/incant_types/src/lib.rs": "650c7804a556c862fe678502225dafd953fc5f5fb13672d71485de16a5e7ed93",
+    "crates/incant_types/src/lights.rs": "c69e1a4f9b682f1f5bf267d57502387b9f8e6b4a42c32c752c0176f43c9ac935",
+    "crates/incant_types/src/physics.rs": "ec1dd966a85676197f7283133be1b274666135a8cfe6403a477a130a6a43769d",
+    "crates/incant_types/src/render.rs": "e02d42ddcdbcdeb607c4ae307f30b02805adae2b68cd1fadee2eaed603f3d881",
+    "crates/incant_types/src/transform.rs": "ee0f742e2f6e8645d1f61da7acdc080314473e688d7dbe740907d04064b96c74"
+  },
+  "codegen": {
+    "incant_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "debuginfo": "2",
+      "split-debuginfo": "packed"
+    },
+    "run_scene": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "debuginfo": "2",
+      "split-debuginfo": "packed",
+      "lto": "fat"
+    }
+  },
+  "symbols": {
+    "format": "Mach-O/dSYM",
+    "uuids": {
+      "arm64": "2b6e714a-2d45-3352-9935-637175315ff7"
+    }
+  },
+  "player_files": {
+    "run_scene": {
+      "sha256": "ca64d03ef49d65109f54c4d725779fd1b886e130c51b49a990242069bc8b514b",
+      "bytes": 816808
+    }
+  },
+  "symbol_files": {
+    "run_scene.dSYM/Contents/Info.plist": {
+      "sha256": "0bb6499d416475baca22ecf782edfb8271f47afdec74f80b9602c9f555dafdce",
+      "bytes": 655
+    },
+    "run_scene.dSYM/Contents/Resources/DWARF/run_scene-4c3829bd2a4900f8": {
+      "sha256": "4a12519f6ccecf029a3cd3703b1c825d26362ff5962d15a366aa2149b0c6951a",
+      "bytes": 18536022
+    },
+    "run_scene.dSYM/Contents/Resources/Relocations/aarch64/run_scene-4c3829bd2a4900f8.yml": {
+      "sha256": "79d142ed923fc4308cc0bf4d33233330984076565c5e99733102d316f8a3655e",
+      "bytes": 390277
+    }
+  },
+  "executable_checks": {
+    "build_info": "panic=abort debug_assertions=false",
+    "panic_exit_code": -6,
+    "drop_guard_ran": false
+  },
+  "source_free_checks": {
+    "passed": true,
+    "authoring_via_commands": true,
+    "cook_preserves_authoring": {
+      "game.incant.json": "b4a2b71fb99d7fda294dc0c0b231cef88ac7c06c2b21cac7b1212ad8f3d5595e",
+      "history.jsonl": "16e5d924e1a83a2fda5eef518a0a62816dfed895fb2f664b5144f6d3a20e6b45"
+    },
+    "authoring_files_removed_before_runtime": true,
+    "process_restarts_equal": true,
+    "reset_discards_simulation": true,
+    "corruption_rejected": true,
+    "scene_bytes": 304,
+    "scene_sha256": "935f5178a63348e82eeefbda520497eaa94b8011676a8dc2bb076ffa32aafa86",
+    "binaries": {
+      "incant_headless": "8eba9c4672f927af471f864356282b317938d562b7769c0c6ffb7b080ca18fca",
+      "cook_scene": "3654c4de620a965e33a54104984877f63d8f77fed8ad4a51908bae728fa24345",
+      "run_scene": "ca64d03ef49d65109f54c4d725779fd1b886e130c51b49a990242069bc8b514b"
+    },
+    "scope": "Transform/Velocity native-world foundation; no script, render, physics or device performance gate"
+  },
+  "scope": "Native Transform/Velocity runner; no phone, PGO, export-pipeline or phase-gate certification",
+  "recorded_on": "2026-10-10",
+  "executed_symbol_backends": [
+    "macOS dSYM"
+  ],
+  "pending_live_symbol_backends": [
+    "GNU/Linux ELF/DWARF",
+    "Windows MSVC PDB"
+  ],
+  "archive_payload_hashes_verified": true,
+  "archives": {
+    "player.zip": {
+      "bytes": 407853,
+      "sha256": "01e55e93047333ac3d95d03446887f980c17f2b98985491d90c6d8ef0cb1ced5"
+    },
+    "symbols.zip": {
+      "bytes": 4245918,
+      "sha256": "a7ca0a9de9048fa38424da77c2ed24257057d86df21c314046c66512681fab31"
+    }
+  },
+  "validation": [
+    {
+      "command": "python3 tools/shipping.py artifacts/shipping-runtime-verified",
+      "result": "passed: actual packaged runner, matched dSYM, SIGABRT/no unwind, source-free cooked scene"
+    },
+    {
+      "command": "python3 -m unittest discover -s tools/tests -v",
+      "result": "24 tests passed; parser fixtures are not live foreign-platform evidence"
+    },
+    {
+      "command": "./tools/cargo fmt --all --check",
+      "result": "passed"
+    },
+    {
+      "command": "./tools/cargo clippy -j2 -p incant_runtime --all-targets --locked -- -D warnings",
+      "result": "passed"
+    },
+    {
+      "command": "./tools/cargo test -j2 -p incant_runtime -p incant_cook --release --locked",
+      "result": "21 tests passed"
+    },
+    {
+      "command": "./tools/cargo check -j2 -p incant_runtime --lib --profile shipping --target wasm32-unknown-unknown --locked",
+      "result": "passed: compile-only, no symbol packaging or device execution"
+    },
+    {
+      "command": "./tools/cargo check -j2 -p incant_runtime --lib --profile shipping --target aarch64-linux-android --locked",
+      "result": "passed: compile-only, no symbol packaging or device execution"
+    },
+    {
+      "command": "./tools/cargo check -j2 -p incant_runtime --lib --profile shipping --target aarch64-apple-ios-sim --locked",
+      "result": "passed: compile-only, no symbol packaging or device execution"
+    }
+  ],
+  "source_revision_note": "Built before committing this change; source_commit identifies the base revision and source_sha256 identifies the exact verified inputs."
+}

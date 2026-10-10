@@ -1,7 +1,7 @@
 name: Desktop editor and engine
 on:
   pull_request:
-    paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', 'Cargo.toml', 'Cargo.lock', 'package*.json', 'tools/probes/**', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
+    paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'package*.json', 'tools/probes/**', 'tools/shipping*.py', 'tools/tests/test_shipping.py', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -53,6 +53,20 @@ jobs:
       - name: Verify geometry, editor recovery and simulated frame capture
         run: cargo test --workspace --release --locked -- --ignored --test-threads=1 --nocapture
       - run: cargo build -p incant_editor -p incant_headless --release --features incant_editor/custom-protocol --locked
+      - run: cargo build -j2 -p incant_cook --example cook_scene --release --locked
+      - name: Build and execute the shipping runtime with matched crash symbols
+        run: python tools/shipping.py artifacts/shipping-runtime
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with: {name: 'runtime-player-${{ matrix.platform }}', path: artifacts/shipping-runtime/player.zip, if-no-files-found: error}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with: {name: 'runtime-symbols-${{ matrix.platform }}', path: artifacts/shipping-runtime/symbols.zip, if-no-files-found: error}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: runtime-shipping-verification-${{ matrix.platform }}
+          path: |
+            artifacts/shipping-runtime/manifest.json
+            artifacts/shipping-runtime/source-free
+          if-no-files-found: error
       - name: Verify physics commands, persistence and sandbox playback
         run: python tools/probes/physics-runtime.py artifacts/physics-runtime-cli --binary target/release/incant_headless${{ matrix.suffix }}
       - name: Verify strict TypeScript character walking and jumping

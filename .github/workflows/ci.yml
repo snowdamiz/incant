@@ -49,8 +49,20 @@ jobs:
         run: python3 tools/validate_ktx.py
       - run: cargo build -p incant_editor -p incant_headless --release --features incant_editor/custom-protocol --locked
       - run: target/release/incant_headless schema schemas
-      - run: cargo build -p incant_cook -p incant_runtime --examples --release --locked
-      - run: python3 tools/probes/cooked-runtime.py artifacts/cooked-runtime-cli
+      - run: ./tools/cargo build -j2 -p incant_cook --example cook_scene --release --locked
+      - name: Build and execute the shipping runtime with matched crash symbols
+        run: python3 tools/shipping.py artifacts/shipping-runtime
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with: {name: runtime-player-macOS, path: artifacts/shipping-runtime/player.zip, if-no-files-found: error}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with: {name: runtime-symbols-macOS, path: artifacts/shipping-runtime/symbols.zip, if-no-files-found: error}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: runtime-shipping-verification-macOS
+          path: |
+            artifacts/shipping-runtime/manifest.json
+            artifacts/shipping-runtime/source-free
+          if-no-files-found: error
       - run: python3 tools/probes/physics-runtime.py artifacts/physics-runtime-cli
       - run: python3 tools/probes/character-movement.py artifacts/character-movement-cli
       - run: python3 tools/probes/compound-colliders.py artifacts/compound-colliders-cli
