@@ -1,0 +1,270 @@
+{
+ "project": "artifacts/0029-grid-navigation/A/grid.incant.json",
+ "ticks": 540,
+ "runs": [
+  [
+   "plan",
+   "plan",
+   "5"
+  ],
+  [
+   "oblique",
+   "oblique",
+   "6"
+  ],
+  [
+   "gate",
+   "gate",
+   "6"
+  ]
+ ],
+ "windows": [
+  [
+   "gauge",
+   "gauge",
+   "probe-1",
+   "0",
+   "4",
+   "1"
+  ],
+  [
+   "door-close",
+   "door",
+   "close_a",
+   "12",
+   "48",
+   "1"
+  ],
+  [
+   "gate-close",
+   "gate",
+   "close_b",
+   "12",
+   "120",
+   "2"
+  ],
+  [
+   "reopen",
+   "gate",
+   "reopen",
+   "10",
+   "72",
+   "1"
+  ],
+  [
+   "arrive",
+   "oblique",
+   "arrive",
+   "48",
+   "72",
+   "2"
+  ]
+ ],
+ "first_unreachable_tick": 109,
+ "reopen_tick": 204,
+ "resume_save_tick": 156,
+ "authored_before": {
+  "grid.incant.json": "f01b9d70312cf3db9b1ee702c67b269e6cb95c59e6e39779d10b570a8838cf25",
+  "grid.incant.journal.jsonl": "fc51370a4f7b6e72de16b7653be6664840c8a3f03e130c708795fcf36aff47eb"
+ },
+ "authored_after": {
+  "grid.incant.json": "f01b9d70312cf3db9b1ee702c67b269e6cb95c59e6e39779d10b570a8838cf25",
+  "grid.incant.journal.jsonl": "fc51370a4f7b6e72de16b7653be6664840c8a3f03e130c708795fcf36aff47eb"
+ },
+ "authored_unchanged": true,
+ "plays": [
+  {
+   "name": "reference",
+   "ticks": 540,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "repeat",
+   "ticks": 540,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "resume.prefix",
+   "ticks": 156,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "artifacts/0029-grid-navigation/A/resume-t0156.save.json",
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "resume",
+   "ticks": 384,
+   "camera": null,
+   "every": 1,
+   "load": "artifacts/0029-grid-navigation/A/resume-t0156.save.json",
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "plan",
+   "ticks": 540,
+   "camera": "01JA2G00290000000000000059",
+   "every": 5,
+   "load": null,
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "oblique",
+   "ticks": 540,
+   "camera": "01JA2G0029000000000000005A",
+   "every": 6,
+   "load": null,
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "gate",
+   "ticks": 540,
+   "camera": "01JA2G0029000000000000005B",
+   "every": 6,
+   "load": null,
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "gauge.prefix",
+   "ticks": 2,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "artifacts/0029-grid-navigation/A/gauge.start-t0002.save.json",
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "gauge",
+   "ticks": 4,
+   "camera": "01JA2G0029000000000000005D",
+   "every": 1,
+   "load": "artifacts/0029-grid-navigation/A/gauge.start-t0002.save.json",
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": [],
+   "start_tick": 2
+  },
+  {
+   "name": "door-close.prefix",
+   "ticks": 28,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "artifacts/0029-grid-navigation/A/door-close.start-t0028.save.json",
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "door-close",
+   "ticks": 48,
+   "camera": "01JA2G0029000000000000005C",
+   "every": 1,
+   "load": "artifacts/0029-grid-navigation/A/door-close.start-t0028.save.json",
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": [],
+   "start_tick": 28
+  },
+  {
+   "name": "gate-close.prefix",
+   "ticks": 77,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "artifacts/0029-grid-navigation/A/gate-close.start-t0077.save.json",
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "gate-close",
+   "ticks": 120,
+   "camera": "01JA2G0029000000000000005B",
+   "every": 2,
+   "load": "artifacts/0029-grid-navigation/A/gate-close.start-t0077.save.json",
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": [],
+   "start_tick": 77
+  },
+  {
+   "name": "reopen.prefix",
+   "ticks": 194,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "artifacts/0029-grid-navigation/A/reopen.start-t0194.save.json",
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "reopen",
+   "ticks": 72,
+   "camera": "01JA2G0029000000000000005B",
+   "every": 1,
+   "load": "artifacts/0029-grid-navigation/A/reopen.start-t0194.save.json",
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": [],
+   "start_tick": 194
+  },
+  {
+   "name": "arrive.prefix",
+   "ticks": 428,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "artifacts/0029-grid-navigation/A/arrive.start-t0428.save.json",
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": []
+  },
+  {
+   "name": "arrive",
+   "ticks": 72,
+   "camera": "01JA2G0029000000000000005A",
+   "every": 2,
+   "load": "artifacts/0029-grid-navigation/A/arrive.start-t0428.save.json",
+   "save": null,
+   "binary_before": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "binary_after": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+   "failed_attempts": [],
+   "start_tick": 428
+  }
+ ],
+ "binary_sha256": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f"
+}
