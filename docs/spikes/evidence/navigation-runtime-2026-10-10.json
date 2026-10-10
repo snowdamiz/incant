@@ -102,17 +102,29 @@
     "os": "macos"
   },
   "ci": {
-    "status": "all 12 checks passed on initial 9833cf6; updated source not yet pushed",
-    "url": "https://github.com/snowdamiz/incant/pull/35"
+    "url": "https://github.com/snowdamiz/incant/pull/35",
+    "status": "all 12 passed on d7517b0; final report/evidence changes awaiting current-head run",
+    "last_passed_head": "d7517b0943935ba717c4182d9dae74a331b268be"
   },
   "visual_review": {
-    "status": "v8 found rounded shared-edge failure, now fixed; v9 repeated captures and final review running",
+    "status": "complete for this packet; v9 repeated actual rendered review and report correction accepted",
     "model": "claude-opus-5-5",
     "transport": "ACP",
     "packet": "handoffs/0026-navigation-lookdev/brief.md",
     "result": "handoffs/0026-navigation-lookdev/result.md",
     "source_commit": "020c640748c6ec07a6c8c58a4d8260fc2256926b",
-    "binary_sha256": "d4fa87946b174b80c8a850cd20ab533f86c9adf3e017e49752bfc5b3c7326710"
+    "binary_sha256": "d4fa87946b174b80c8a850cd20ab533f86c9adf3e017e49752bfc5b3c7326710",
+    "frames_equal": 726,
+    "all_camera_logs_equal": true,
+    "arrival_tick": 563,
+    "grounded_every_tick": true,
+    "wall_contacts": 0,
+    "new_boundary_queries": 2904,
+    "whole_room_passes": 2,
+    "query_exceptions": 0,
+    "raw_first_segment_m": 0.0005233835900917507,
+    "output_rounding_correction": "first two points are close, not duplicated; no code change required",
+    "remaining": "conservative doorway loss; sampled heights may undershoot step discontinuities; runtime deadline diagnostics remain open"
   },
   "open": [
     "local avoidance and hundred-agent steering: implemented and reviewed in separate branch, not this PR",
@@ -121,8 +133,8 @@
     "navigation Inspector and debug draw",
     "source-conforming height detail near step discontinuities",
     "script wall-clock deadline robustness and diagnostics under host sleep/load",
-    "final v9 rendered review and current-source hosted checks",
-    "Core Sample integration and physical-device performance gates"
+    "Core Sample integration and physical-device performance gates",
+    "current-head hosted checks before merge"
   ],
   "initial_verification": {
     "local": {
@@ -247,7 +259,7 @@
     "height": "quantized piecewise-linear detail can fall below source step discontinuities; v8 worst undershoot 0.069 m over 0.28 m; character grounding uses physics",
     "rasterization": "vendored rerecast 0.4.0 clears empty clip output counts; three capsule facet regressions and 16 restored floor queries pass",
     "endpoint_precision": "f64 closest-point arithmetic and distance ranking; both directions of skinny-triangle centimetre query pass",
-    "boundary_precision": "f64 orientation, portal parameters, interpolation and height weights; two f32 ULP world-space tolerance",
+    "boundary_precision": "f64 orientation, portal parameters, interpolation and height weights; two coordinate-scaled f32 epsilons in world space",
     "short_query_regressions": {
       "local_polygon_queries": 7056,
       "room_queries": 34932,

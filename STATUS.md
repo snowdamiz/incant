@@ -61,8 +61,10 @@ within its documented workload.
   40 GPU, 315 UI and five tool tests, plus public saved-character gameplay,
   Clippy, SDK/generation checks, native packaging and WASM/iOS compilation.
   There are 7,056 local and 34,932 room-wide short-query regressions. See the
-  [navigation evidence](docs/spikes/navigation-runtime.md). PR #35 remains draft
-  pending final v9 rendered review and updated hosted checks. Quantized height
+  [navigation evidence](docs/spikes/navigation-runtime.md). PR #35's scoped implementation
+  and v9 rendered review are complete: both 600-tick runs match 726 frames/logs,
+  with no query exceptions and grounding on every tick. All twelve CI checks
+  passed on d7517b0; final report changes await current-head checks before merge. Quantized height
   detail can undershoot true step discontinuities; physics owns grounding.
   Steering is implemented and reviewed on its separate integration branch;
   off-mesh links are in integration checks. Grid navigation, native Inspector/

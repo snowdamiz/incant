@@ -135,10 +135,13 @@ The six-platform probe now performs a real collider bake and incremental rebuild
 local macOS execution passes, while WASM/iOS compilation is recorded separately.
 Claude's v3–v8 rendered reviews found the corner clearance, detour, phantom
 floor and endpoint-selection issues that drove the corrections above. The v8
-shared-edge failure now uses f64 geometric arithmetic and a two-ULP world-space
+shared-edge failure now uses f64 geometric arithmetic and a coordinate-scaled f32
 boundary tolerance instead of a fixed fraction of a short segment. All 7,056
 local polygon and 34,932 room-wide short-query regressions pass. Current source
 passes 276 Rust tests, 40 GPU tests, 315 UI tests, five tool tests, strict SDK and
-generation checks, Clippy, native packaging and WASM/iOS compilation. Final v9
-rendered review and updated hosted checks are pending; prior captures remain
-historical evidence.
+generation checks, Clippy, native packaging and WASM/iOS compilation. The final v9 review found no query failures across both full-room passes and
+2,904 additional boundary queries. Both 600-tick repetitions matched all 726
+frames and logs; the character stayed grounded and arrived at tick 563. The
+reported duplicate first point was a rounded-log interpretation error: the raw
+points are 0.523 mm apart. All twelve hosted checks passed on d7517b0; the final
+review/evidence commit will run the same checks before merging.
