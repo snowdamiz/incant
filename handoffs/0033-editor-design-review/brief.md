@@ -1,3 +1,35 @@
+## Correctness review follow-up — bounded output lists and clipboard capability
+
+Preserve the comprehensive whole-app design from the current pass. Astra's source
+review found two correctness gaps to address before final native integration.
+This is a focused follow-up to that design, not another restart or a narrowed
+whole-app scope. Continue at explicitly verified Opus 5.5 Max through ACP.
+
+1. BottomDock currently renders every diagnostic in nested group maps, every
+   visible console message, and every history entry. The native bridge does not
+   cap these lists: full history is collected and source-watch/render errors keep
+   appending console events. Unlike the now-bounded hierarchy/assets/Inspector,
+   a large project or long editing session can still mount tens of thousands of
+   output rows. Keep the new grouping, filters and timeline, but bound mounted
+   rows through suitable pagination or virtualization. You own its presentation.
+   Preserve access to ALL entries, full diagnostic text, entity reveal, grouping,
+   filter counts, history applied/undone state and Now marker, keyboard access,
+   focus, and updates while new entries arrive. No silent truncation. Cover both
+   many diagnostic groups and one huge group, large console/history, and filter/
+   selection/update transitions. Record mounted-row bounds and real behavior;
+   do not claim the reference-machine performance gate.
+2. The new hierarchy Copy ID uses navigator.clipboard?.writeText. If clipboard
+   support is absent, it silently does nothing. Explain the unavailable capability
+   or visibly announce failure, and test both absent API and rejected permission.
+   Apply the same existing-path behavior to equivalent Copy ID actions if needed.
+
+Do not change engine Rust, transport schemas, authoring commands or accounts.
+Finish the current full-app result and this focused correction, run all UI tests,
+strict typecheck/build, and review affected rendered surfaces. If this revision
+arrives after your current response, it will be the next resumed packet. Commit
+with Built-by: claude. Final native captures follow the integrated build; do not
+label browser evidence as native acceptance.
+
 ## Priority director feedback — whole-app redesign, 2026-10-10 14:32
 
 The director rejects the current result as too narrow and still visually cramped.
