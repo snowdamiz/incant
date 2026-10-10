@@ -1,6 +1,6 @@
 # Implementation status
 
-Source: [PLAN.md](PLAN.md), revision 2 with director decisions. Current phase:
+Source: [PLAN.md](PLAN.md), revision 3 (2026-10-09) with director decisions. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without
@@ -61,11 +61,56 @@ within its documented workload.
   Integrated checks pass 168 Rust, 40 GPU and 329 UI tests/build, Clippy, generated
   contracts and public CLI probes. Actual macOS/browser/iOS baseline execution
   passes. Initial native keyboard/field/account checks pass. Final native appearance
-  and 64-part review are deferred by the director's renewed computer-use/capture
-  pause. Claude completed the browser/engine report and repeatable numerical replay.
+  and 64-part review resumed after the director authorized screen work on
+  2026-10-10. Claude completed the browser/engine report and repeatable numerical replay.
   A suspected prop instability was investigated; the original energy objection was
-  unsupported, so no solver change was made. Hosted checks/merge remain open.
+  unsupported, so no solver change was made. All twelve hosted checks passed at
+  `18e3406`; integrated review, updated checks and merge remain open.
   See [compound colliders](docs/spikes/compound-colliders.md).
+
+- Fixed-tick script timers, repeat/cancel/replace, copied payloads and a saved
+  game clock are implemented. Version 2 game saves preserve pending deadlines
+  and read version 1 with an empty schedule. Seven script tests and a CLI failure
+  test pass; a strict TypeScript public-CLI probe preserves callbacks, command
+  effects and log continuity across process restarts. All 204 distinct Rust tests,
+  315 UI tests/build, five tool tests, Clippy, generated contracts and the native
+  build/package pass locally. All three hosted checks passed at `54f85a1`;
+  PR #31 merged as `93bc5ed` with the reviewed tree unchanged. Coroutines remain open; Promise/generator behavior
+  callbacks now fail explicitly before commit. See [timers](docs/spikes/script-timers.md).
+
+- Headless `play --assertions FILE` evaluates bounded data-only checks over
+  runtime, behavior and input state at absolute ticks. Failed checks return
+  structured diagnostics, exit nonzero and suppress save publication. Five new
+  CLI tests and the strict TypeScript character probe cover checkpoint seeking,
+  movement/jumping/landing assertions, intentional failure, numeric equivalence,
+  missing/null data, invalid plans and bounded output. All 195 Rust, 315 UI and
+  five tool tests, Clippy, generated contracts and the native build/package pass.
+  Hosted checks and the GPU diagnostic-report extension remain pending; local
+  capture stays paused. See [gameplay assertions](docs/spikes/play-assertions.md).
+
+- Shared fixed-tick keyboard/mouse/gamepad/touch processing, sandbox `api.input()`
+  and bounded headless input replay are implemented. Atomic validation, focus
+  recovery, device lifetimes, gestures and saved-game input seeking pass eighteen
+  new tests. The strict TypeScript public-CLI character probe jumps, reaches a wall
+  and resumes a mid-jump save with exact final state/logs and unchanged authored
+  files. All 190 Rust, 315 UI and five tool tests pass, along with Clippy, generated
+  contracts and the native build/package. macOS normalized-input smoke execution
+  passes; hosted checks and merge are pending. Live OS/browser adapters, action
+  mapping and physical-device verification remain open. No computer use or local
+  captures occurred. See [game input](docs/spikes/game-input.md).
+
+- Versioned logical game saves preserve runtime scenes, hierarchy, spawned/deleted
+  entities, JSON behavior state and the simulation clock. The headless host loads
+  saves into isolated sessions and publishes new files atomically after success.
+  Exact float decoding fixes clock/rotation drift on JSON reload. Nine new tests
+  cover continuity, physical state, hot reload, invalid inputs and publication races;
+  172 Rust tests and workspace Clippy pass. The strict TypeScript public-CLI probe
+  matches uninterrupted state/logs across two process restarts with authored files
+  unchanged. The native release package, 315 UI tests/build and five tool tests pass.
+  All twelve hosted checks passed at `8cea975`; PR #26 merged as `39fed2d`
+  with an identical reviewed tree. The local main app was rebuilt without opening. Physics
+  warm starts, sleeping, VM globals and cross-revision migrations are outside this
+  logical save format. See [game saves](docs/spikes/game-saves.md).
 
 - Read-only character movement queries are implemented on the primitive runtime,
   with script-owned gravity/jumping and Velocity commands. Real motion review
@@ -76,8 +121,8 @@ within its documented workload.
   40 GPU and 315 UI tests plus Clippy and the native release build. Actual macOS,
   browser/WASM and iOS simulator queries pass. Claude accepted the corrected
   course; 303 repeated frames match exactly. Stair speed/smoothing and moving
-  platform behavior remain game-feel work. All nine final-head hosted checks pass;
-  PR #24 merged as `9f5906f`. See
+  platform behavior remain game-feel work. All nine final hosted checks passed at
+  `54985fa`; PR #24 merged as `9f5906f`. See
   [character movement](docs/spikes/character-movement.md).
 
 - Physics runtime integration is in progress on `impl/physics-runtime`. The
@@ -92,10 +137,11 @@ within its documented workload.
   fewer snapshots reduce paired local 512-body p95 from 9.99 to 8.80 ms, with
   exact final-state equality. Claude handoff 0022 implemented and reviewed the new Inspector
   in browser fixtures and the native app. Shared schemas supply field order and
-  units; WebKit field names and the compact Agent state are fixed. All twelve final-head hosted checks passed and PR #23 merged as `eb77419`.
-  Mesh/compound
-  colliders, hierarchy/scale, rollback snapshots and device performance remain
-  open. See [runtime evidence](docs/spikes/physics-runtime.md).
+  units; WebKit field names and the compact Agent state are fixed. All twelve hosted
+  checks passed at `6d5fca0`; PR #23 merged as `eb77419`. Character controllers
+  are implemented in PR #24. Compound colliders remain in draft PR #25 pending
+  the native visual review, now resumed by the director. Mesh colliders, hierarchy/scale,
+  rollback snapshots and device performance remain open. See [runtime evidence](docs/spikes/physics-runtime.md).
 
 - Opt-in directional cascades are implemented with scoped Claude appearance
   and native acceptance. The scheduled depth pass honors imported caster flags,
@@ -340,6 +386,25 @@ within its documented workload.
   **d87436f** has now passed all four workflows: source checks, Windows/Linux
   editor builds and renderer probes, three-desktop credential persistence, and all
   six platform probes. The evidence files retain the exact revision and run links.
+
+## Current screen-work constraint
+
+Revision 3 is the current implementation baseline. Its additional Phase 1 work
+remains open: tiled navmesh generation/pathfinding/steering and 2D grid navigation;
+sprites/atlases/tilemaps and Rapier 2D; shaped text, font fallback and IME; typed
+localized string tables, formatting, locale switching and pseudo-localization;
+and gamepad/mobile haptics. The expanded Core Sample gate includes navigation,
+RTL/CJK/localization coverage and a 2D sample on all four reference devices.
+This does not replace the remaining original renderer, animation, audio/device,
+input-adapter, SDK/coroutine and complete-game performance requirements. Later
+networking and service scope follows Revision 3 Sections 6.8/6.10; their open
+director decisions and human-owned production prerequisites remain explicit.
+
+The director reauthorized computer use and screen capture on 2026-10-10.
+Claude owns resumed visual review; Astra supplies native captures and verifies
+behavior. Prior paused evidence remains explicitly scoped to its recorded runs.
+Compound-collider PR #25 is a separate draft pending its final native appearance
+review; its Inspector and 64-part checks are now being resumed.
 
 ## External prerequisites still required
 

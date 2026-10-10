@@ -1,0 +1,78 @@
+{
+  "source_commit": "0f8812b0042990436b7747fe61835afd2744c0dc",
+  "base": "0021738b8679d52d18de67ae879cfb151ba25944",
+  "checks": {
+    "rust_tests": 195,
+    "new_cli_tests": 5,
+    "ui_tests": 315,
+    "tool_tests": 5,
+    "clippy": "passed",
+    "generated_contracts": "passed",
+    "strict_typescript": "passed",
+    "native_release_build_package": "passed"
+  },
+  "public_cli": {
+    "passed": true,
+    "strict_typescript": true,
+    "rendering": false,
+    "recorded_inputs": [
+      "keyboard",
+      "mouse",
+      "gamepad",
+      "touch"
+    ],
+    "actual_character_jump_and_wall_contact": true,
+    "save_resume_mid_jump_exact": true,
+    "repeat_exact": true,
+    "final_position": [
+      1.9799888134002686,
+      0.8191448450088501,
+      0.10583171993494034
+    ],
+    "script_state": {
+      "clicks": 1,
+      "grounded": true,
+      "isolated": true,
+      "jumps": 1,
+      "maxY": 2.0525166988372803,
+      "presses": 1,
+      "taps": 1,
+      "ticks": 180,
+      "vy": 0,
+      "wheel": 2,
+      "yaw": 0.02
+    },
+    "author_files_unchanged": {
+      "game.incant.json": "2ebf9732c275ba447fb35d19054b966eef0167eed483e9dcc95b78d602e9a929",
+      "history.jsonl": "1213e08f44529bd64a5ecd59b938fe49462bf3140875e8e204e67f315922a3b5",
+      "input.json": "67f232410d648085ffa98a833c2ec624e2c2845128f5a3ca16d89b0695a6d7e1"
+    },
+    "binary_sha256": "37a2faf452dff21f3716b17b04d97f5ace4af920db8e238092f5ef15fa112805",
+    "live_device_adapters": false,
+    "scheduled_gameplay_assertions": true,
+    "failed_assertion_exits_nonzero_with_report_and_no_save": true
+  },
+  "limits": {
+    "file_bytes": 262144,
+    "checks": 256,
+    "name_utf8_bytes": 120,
+    "path_utf8_bytes": 1024,
+    "actual_preview_bytes": 1024
+  },
+  "capture_constraint": {
+    "computer_use": false,
+    "new_local_captures": false,
+    "hosted_gpu_extension": "compiled locally; execution pending on hosted CI"
+  },
+  "pending": [
+    "hosted checks",
+    "reviewed merge"
+  ],
+  "not_claimed": [
+    "arbitrary assertion scripts",
+    "agent play tool",
+    "native play controls",
+    "Core Sample and its device gate"
+  ],
+  "native_binary_sha256": "ada3012f2944b35a36b13de9a8ed0b9fbb50b50cf47160d696813808c2334fa7"
+}

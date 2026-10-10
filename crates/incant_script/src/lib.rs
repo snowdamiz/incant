@@ -1,6 +1,12 @@
 //! QuickJS sandbox for SWC-compiled TypeScript. No OS, filesystem, module loader,
 //! network, native plugins or shell are installed into the runtime.
 mod logs;
+mod play;
+mod saves;
+mod timers;
+pub use play::PlaySession;
+pub use saves::{GameSave, MAX_SAVE_BYTES, SaveError};
+pub use timers::{MAX_TIMERS, ScriptClock, TimerError, TimerEvent, TimerRequest};
 mod queries;
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::Origin;
@@ -25,110 +31,45 @@ pub enum ScriptError {
     Command(#[from] CommandError),
     #[error(transparent)]
     Physics(#[from] incant_core::PhysicsError),
+    #[error(transparent)]
+    Input(#[from] incant_input::InputError),
+    #[error(transparent)]
+    InputRecording(#[from] incant_input::RecordingError),
+    #[error("live input cannot be mixed with an installed input replay")]
+    InputReplayConflict,
+    #[error("play session failed; restart or restore a saved game before continuing")]
+    FailedSession,
     #[error("script input exceeds configured limit")]
     InputLimit,
     #[error("script logs exceed the message, tick or pending-output limit")]
     LogLimit,
+    #[error(
+        "async/Promise and generator behavior callbacks are unsupported; use fixed-tick timers"
+    )]
+    UnsupportedAsync,
+    #[error("a behavior with pending timers requires an onTimer handler")]
+    TimerHandler,
+    #[error(transparent)]
+    Timer(#[from] TimerError),
     #[error(transparent)]
     Document(#[from] incant_doc::DocumentError),
 }
 
-/// A disposable play session. ECS query results enter the same validated runtime
-/// command bus before scripts read them; the author's document never changes.
-pub struct PlaySession {
-    pub host: ScriptHost,
-    bus: CommandBus,
-    engine: incant_core::Engine,
-    dt: f64,
-}
-impl PlaySession {
-    pub fn new(project: &incant_doc::Project, compiled_source: &str) -> Result<Self, ScriptError> {
-        let engine = incant_core::Engine::new(project)?;
-        let mut host = ScriptHost::new(compiled_source)?;
-        host.raycaster = Some(Arc::new(engine.raycaster()));
-        host.character_mover = Some(Arc::new(engine.character_mover()));
-        host.install_queries()?;
-        Ok(Self {
-            host,
-            bus: CommandBus::simulation(project.clone())?,
-            engine,
-            dt: 1. / f64::from(project.settings.tick_rate),
-        })
-    }
-    pub fn project(&self) -> &incant_doc::Project {
-        self.bus.project()
-    }
-    pub fn snapshot(&mut self) -> incant_core::RuntimeSnapshot {
-        self.engine.snapshot()
-    }
-    pub fn tick(&mut self) -> Result<usize, ScriptError> {
-        self.engine.step()?;
-        let mut commands = Vec::new();
-        let snapshot = self.engine.snapshot();
-        for runtime in snapshot.entities.values() {
-            let entity = &self.bus.project().scenes[&runtime.scene_id].entities[&runtime.id];
-            if let Some(value) = entity.components.get("Transform") {
-                let mut transform: incant_doc::Transform = serde_json::from_value(value.clone())?;
-                if transform.translation != runtime.translation
-                    || transform.rotation != runtime.rotation
-                {
-                    transform.translation = runtime.translation;
-                    transform.rotation = runtime.rotation;
-                    commands.push(Command::SetComponent {
-                        scene_id: runtime.scene_id.clone(),
-                        entity_id: runtime.id.clone(),
-                        component: "Transform".into(),
-                        value: serde_json::to_value(transform)?,
-                    });
-                }
-            }
-            if entity.components.contains_key("RigidBody") {
-                for (name, value) in [
-                    ("Velocity", serde_json::json!({"linear": runtime.velocity})),
-                    (
-                        "AngularVelocity",
-                        serde_json::json!({"angular": runtime.angular_velocity}),
-                    ),
-                ] {
-                    if entity.components.get(name) != Some(&value) {
-                        commands.push(Command::SetComponent {
-                            scene_id: runtime.scene_id.clone(),
-                            entity_id: runtime.id.clone(),
-                            component: name.into(),
-                            value,
-                        });
-                    }
-                }
-            }
-        }
-        if !commands.is_empty() {
-            self.bus.execute(
-                commands,
-                Actor {
-                    origin: Origin::Script,
-                    actor: "bevy-simulation".into(),
-                    model: None,
-                    conversation_id: None,
-                },
-                "Simulation tick",
-                None,
-            )?;
-        }
-        let events = snapshot.trigger_events;
-        let count = self
-            .host
-            .tick_with_events(&mut self.bus, self.dt, &events)?;
-        self.engine.sync(self.bus.project())?;
-        Ok(count)
-    }
-}
 #[derive(Deserialize)]
 struct TickResult {
     state: Value,
     commands: Vec<Command>,
     logs: Vec<ScriptLog>,
+    timers: Vec<timers::Action>,
+    asynchronous: bool,
+}
+#[derive(Deserialize)]
+struct InitialState {
+    state: Value,
+    has_timer_handler: bool,
 }
 pub struct ScriptHost {
+    source_sha256: String,
     raycaster: Option<Raycaster>,
     character_mover: Option<CharacterMover>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
@@ -138,6 +79,8 @@ pub struct ScriptHost {
     budget: Duration,
     state: Value,
     logs: Vec<ScriptLog>,
+    has_timer_handler: bool,
+    schedule: timers::Schedule,
 }
 impl ScriptHost {
     pub fn new(compiled_source: &str) -> Result<Self, ScriptError> {
@@ -163,46 +106,20 @@ impl ScriptHost {
 ; return exports.default; }})({{}});
    if (!__behavior || typeof __behavior.update !== 'function') throw new Error('default behavior.update required');
    let __state = JSON.parse(JSON.stringify(__behavior.initialState ?? {{}}));
-   globalThis.__tick = (worldJson, dt, stateJson, eventsJson) => {{
-     const world = JSON.parse(worldJson);
-     const state = JSON.parse(stateJson);
-     const commands = [];
-     const logs = [];
-     const api = Object.freeze({{
-       raycast: (query) => {{
-         const result = JSON.parse(globalThis.__incantRaycast(JSON.stringify(query)));
-         if (result.error) throw new Error(result.error);
-         return result.hit;
-       }},
-       computeCharacterMotion: (query) => {{
-         const result = JSON.parse(globalThis.__incantCharacterMotion(JSON.stringify(query)));
-         if (result.error) throw new Error(result.error);
-         return result.movement;
-       }},
-       triggerEvents: () => JSON.parse(eventsJson),
-       query: (component) => Object.values(world.scenes).flatMap(scene => Object.values(scene.entities)
-         .filter(entity => !component || Object.hasOwn(entity.components, component))
-         .map(entity => ({{...entity, scene_id: scene.id}}))),
-       command: (command) => {{ if (commands.length >= 10000) throw new Error('command limit'); commands.push(command); }},
-       log: (message, level = 'info') => {{
-         if (typeof message !== 'string' || message.length > 4096 || logs.length >= 64 ||
-             !['debug', 'info', 'warn', 'error'].includes(level)) throw new Error('invalid script log');
-         logs.push({{level, message}});
-       }}
-     }});
-     __behavior.update(api, dt, state);
-     return JSON.stringify({{state, commands, logs}});
-   }};
-   JSON.stringify(__state);
-  "#
+   {}
+   JSON.stringify({{state: __state, has_timer_handler: typeof __behavior.onTimer === 'function'}});
+  "#,
+            include_str!("runtime.js")
         );
-        let state = context
+        let initial = context
             .with(|ctx| ctx.eval::<String, _>(source))
             .map_err(|_| ScriptError::Execution)?;
-        if state.len() > 1024 * 1024 {
+        let initial: InitialState = serde_json::from_str(&initial)?;
+        if serde_json::to_vec(&initial.state)?.len() > 1024 * 1024 {
             return Err(ScriptError::InputLimit);
         }
         let mut host = Self {
+            source_sha256: saves::hash(compiled_source.as_bytes()),
             raycaster: None,
             character_mover: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
@@ -210,7 +127,9 @@ impl ScriptHost {
             _runtime: runtime,
             deadline,
             budget,
-            state: serde_json::from_str(&state)?,
+            state: initial.state,
+            has_timer_handler: initial.has_timer_handler,
+            schedule: timers::Schedule::default(),
             logs: Vec::new(),
         };
         host.install_queries()?;
@@ -218,6 +137,9 @@ impl ScriptHost {
     }
     pub fn state(&self) -> &Value {
         &self.state
+    }
+    pub fn clock(&self) -> &ScriptClock {
+        &self.schedule.clock
     }
     /// Consume committed output. Call regularly to keep the pending queue bounded.
     pub fn take_logs(&mut self) -> Vec<ScriptLog> {
@@ -228,25 +150,31 @@ impl ScriptHost {
         next.raycaster = self.raycaster.clone();
         next.character_mover = self.character_mover.clone();
         next.install_queries()?;
+        if self.schedule.has_timers() && !next.has_timer_handler {
+            return Err(ScriptError::TimerHandler);
+        }
+        next.schedule = self.schedule.clone();
         next.state = preserve_compatible(&self.state, &next.state);
         next.logs = std::mem::take(&mut self.logs);
         *self = next;
         Ok(())
     }
     pub fn tick(&mut self, bus: &mut CommandBus, dt: f64) -> Result<usize, ScriptError> {
-        self.tick_with_events(bus, dt, &[])
+        self.tick_with_events(bus, dt, &[], &incant_input::InputFrame::default())
     }
     fn tick_with_events(
         &mut self,
         bus: &mut CommandBus,
         dt: f64,
         events: &[incant_core::TriggerEvent],
+        input: &incant_input::InputFrame,
     ) -> Result<usize, ScriptError> {
         self.query_count
             .store(0, std::sync::atomic::Ordering::Relaxed);
         if !dt.is_finite() || dt <= 0. || dt > 1. {
             return Err(ScriptError::InputLimit);
         }
+        let (mut schedule, timer_events) = self.schedule.advance(dt)?;
         let world = serde_json::to_string(bus.project())?;
         let state = serde_json::to_string(&self.state)?;
         if world.len() > 16 * 1024 * 1024 || state.len() > 1024 * 1024 {
@@ -262,6 +190,9 @@ impl ScriptHost {
                     dt,
                     state,
                     serde_json::to_string(events).expect("serializable trigger events"),
+                    serde_json::to_string(input).expect("validated input frame"),
+                    serde_json::to_string(&schedule.clock).expect("validated script clock"),
+                    serde_json::to_string(&timer_events).expect("validated timer events"),
                 ))
             })
             .map_err(|_| ScriptError::Execution)?;
@@ -275,6 +206,10 @@ impl ScriptHost {
             return Err(ScriptError::InputLimit);
         }
         let output: TickResult = serde_json::from_str(&result)?;
+        if output.asynchronous {
+            return Err(ScriptError::UnsupportedAsync);
+        }
+        schedule.apply(output.timers)?;
         if serde_json::to_vec(&output.state)?.len() > 1024 * 1024 {
             return Err(ScriptError::InputLimit);
         }
@@ -282,6 +217,9 @@ impl ScriptHost {
             return Err(ScriptError::LogLimit);
         }
         let count = output.commands.len();
+        if count > 10_000 {
+            return Err(ScriptError::InputLimit);
+        }
         if count > 0 {
             bus.execute(
                 output.commands,
@@ -296,6 +234,7 @@ impl ScriptHost {
             )?;
         }
         self.state = output.state;
+        self.schedule = schedule;
         self.logs.extend(output.logs);
         Ok(count)
     }
@@ -398,6 +337,24 @@ mod tests {
         assert!(host.tick(&mut bus, 1. / 60.).is_err());
         assert_eq!(bus.project(), &before);
         assert_eq!(host.state()["count"], 0);
+    }
+    #[test]
+    fn command_limit_is_enforced_even_if_script_replaces_the_javascript_wrapper() {
+        let source = r#"exports.default={initialState:{count:0},update(){
+          globalThis.__tick=()=>JSON.stringify({state:{count:1},commands:Array(10001).fill(
+            {op:'set_memory',section:'prefix',text:'must not commit'}),
+            logs:[],timers:[],asynchronous:false});}};"#;
+        let mut host = ScriptHost::new(source).unwrap();
+        let mut bus = CommandBus::new(Project::empty("Untrusted wrapper")).unwrap();
+        host.tick(&mut bus, 1. / 60.).unwrap();
+        let before = bus.project().clone();
+        assert!(matches!(
+            host.tick(&mut bus, 1. / 60.),
+            Err(ScriptError::InputLimit)
+        ));
+        assert_eq!(bus.project(), &before);
+        assert_eq!(host.state()["count"], 0);
+        assert_eq!(host.clock().tick, 1);
     }
     #[test]
     fn scripts_query_live_ecs_and_hot_reload_without_changing_authored_state() {

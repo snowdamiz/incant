@@ -68,8 +68,9 @@ journal. It accepts `--seconds` (rounded up to a fixed tick) or `--ticks`, with 
 it records the initial/final state and every `--capture-every` ticks as actual PNGs,
 plus an atomic `report.json` containing final runtime/script state and capture times.
 Capture is bounded to 128 frames and 256 MiB of raw pixels, with dimensions
-from 16×16 to 1920×1080. A failed run exits
-nonzero and may leave partial PNGs, but never a completed report. Current captures
+from 16×16 to 1920×1080. A simulation failure exits
+nonzero and may leave partial PNGs, but never a completed report. A completed
+run with failed gameplay assertions retains a diagnostic report with `passed: false`. Current captures
 use the shared renderer, including imported materials and HDR lighting followed
 by the preview display transform. `screenshot --camera ENTITY_ID` and
 `play --camera ENTITY_ID --output DIR` select an authored perspective Camera.
@@ -78,7 +79,82 @@ the fixed editor preview. The agent `view_screenshot` tool accepts the same
 optional `camera` ID. Missing/non-camera IDs fail instead of silently falling
 back. Camera edits use the shared command bus and normal Undo/Redo. Asset sources are unnecessary when
 the cooked cache is present; the command reads the saved checkpoint, not unsaved
-editor edits. Assertion-script support remains open.
+editor edits. Data-only gameplay assertions are available as described below;
+arbitrary assertion-script execution remains open.
+
+Game saves preserve the isolated scene, JSON behavior state and simulation clock:
+
+```sh
+tools/cargo run -p incant_headless --release -- play artifacts/demo.incant.json --ticks 60 --compiled-script artifacts/move.js --save-output artifacts/slot1.save.json
+tools/cargo run -p incant_headless --release -- play artifacts/demo.incant.json --ticks 60 --compiled-script artifacts/move.js --load-save artifacts/slot1.save.json --save-output artifacts/slot2.save.json
+```
+
+The second command advances another 60 ticks and reports absolute game tick 120.
+Save files require the same authored project and compiled behavior revision;
+unknown versions, invalid data and changed resource manifests fail explicitly.
+Each output must be a new path, published atomically only after successful play.
+No provider account or GPU is required. Store persistent gameplay values in the
+behavior's `state`; module globals, closures, pending logs and solver contact/sleep
+state are rebuilt. Sensors can emit fresh entry events on the first restored tick.
+This is a logical game save, with no exact physics-rollback guarantee or automatic
+migration between game revisions. See [save format and evidence](docs/spikes/game-saves.md).
+
+Scripts can schedule named one-shot or repeating callbacks with
+`api.setTimer({id, delay_ticks, interval_ticks?, payload?})` and cancel them with
+`api.cancelTimer(id)`. Implement `onTimer(api, event, state)` alongside `update`.
+Callbacks run before update, ordered by deadline and ID, and share its atomic
+command/state transaction. `api.clock()` reports the current fixed tick and time.
+Version 2 saves preserve pending deadlines and JSON payloads; version 1 saves
+remain readable with an empty schedule. Async/Promise and generator callbacks
+fail explicitly; coroutines remain open. See [timer semantics](docs/spikes/script-timers.md).
+
+`python3 tools/probes/game-timers.py artifacts/timer-example` builds and typechecks
+a timed movement/spawn example, then compares uninterrupted play with a saved
+game resumed in separate processes. It uses no renderer or device.
+
+`python3 tools/probes/game-saves.py artifacts/save-example` builds a strict
+TypeScript example through public commands and verifies pickup/spawn state,
+continued log times and separate-process restart continuity without rendering.
+
+Game behaviors read fixed-tick input with `api.input()`: keyboard/mouse edges and
+held buttons, pointer/wheel deltas, analog controller values, active touches and
+tap/long-press/swipe/pinch gestures. Input is validated before simulation advances;
+focus loss releases controls and cancels touches. Platform device adapters and
+configurable action mappings remain open. The current host can replay normalized
+events without accessing hardware:
+
+```sh
+tools/cargo run -p incant_headless --release -- play artifacts/demo.incant.json --ticks 60 --compiled-script artifacts/move.js --input-replay artifacts/input.json
+python3 tools/probes/game-input.py artifacts/input-example
+```
+
+`InputRecording.schema.json` describes an `incant-input` version-1 clip with the
+game's `tick_rate`, absolute `start_tick`, duration `ticks`, and sparse `frames`
+containing one-based tick offsets and ordered events. For example,
+`{"tick":1,"events":[{"type":"key","code":"KeyW","down":true}]}` holds W until
+its corresponding release. The whole clip is validated before play; output
+cannot silently extend beyond it. Provide the same clip with `--load-save` to
+reconstruct held controls and gesture timing at the saved tick without rerunning
+gameplay. Ordinary save loading resets physical devices. See
+[input semantics and evidence](docs/spikes/game-input.md).
+
+`play --assertions FILE` checks runtime, behavior and input state at absolute game
+ticks, including the initial or restored checkpoint. For example:
+
+```json
+{"format":"incant-play-assertions","version":1,"checks":[
+  {"name":"reached tick 60","tick":60,"path":"/state/tick","expect":{"type":"equals","value":60}},
+  {"name":"landed","tick":60,"path":"/script_state/grounded","expect":{"type":"equals","value":true}}
+]}
+```
+
+Conditions also support `approx` (numeric value and absolute tolerance), `range`
+(inclusive min/max) and `exists` (a boolean). Checks must fall within the requested
+play interval. A completed run returns `completed: true`, a `passed` flag and
+per-check results. Failed checks produce a nonzero exit and prevent save
+publication; logs and requested frame/report diagnostics remain available.
+Plans are bounded and validated before output creation. See
+[assertion semantics and evidence](docs/spikes/play-assertions.md).
 
 `init` refuses to overwrite an existing file. `rpc` serves newline-delimited JSON
 on stdin/stdout. `project.read`, `schema.list`, `command.execute`, `history.read`,

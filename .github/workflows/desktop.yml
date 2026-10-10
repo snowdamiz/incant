@@ -47,6 +47,12 @@ jobs:
         run: python tools/probes/character-movement.py artifacts/character-movement-cli --binary target/release/incant_headless${{ matrix.suffix }}
       - name: Verify compound authoring, recovery and scripted queries
         run: python tools/probes/compound-colliders.py artifacts/compound-colliders-cli --binary target/release/incant_headless${{ matrix.suffix }}
+      - name: Verify versioned game saves across headless process restarts
+        run: python tools/probes/game-saves.py artifacts/game-saves-cli --binary target/release/incant_headless${{ matrix.suffix }}
+      - name: Verify recorded device input, character control and mid-jump save replay
+        run: python tools/probes/game-input.py artifacts/game-input-cli --binary target/release/incant_headless${{ matrix.suffix }}
+      - name: Verify saved timer callbacks across headless process restarts
+        run: python tools/probes/game-timers.py artifacts/game-timers-cli --binary target/release/incant_headless${{ matrix.suffix }}
       - name: Exercise native GPU rendering without a user account
         run: python tools/platforms/render-check.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -59,6 +65,9 @@ jobs:
             artifacts/physics-runtime-cli
             artifacts/character-movement-cli
             artifacts/compound-colliders-cli
+            artifacts/game-saves-cli
+            artifacts/game-input-cli
+            artifacts/game-timers-cli
             THIRD_PARTY_NOTICES.md
             licenses/Apache-2.0.txt
           if-no-files-found: error

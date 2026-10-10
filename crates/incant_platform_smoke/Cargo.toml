@@ -11,6 +11,7 @@ crate-type = ["rlib", "staticlib", "cdylib"]
 [dependencies]
 incant_doc = { workspace = true }
 incant_core = { workspace = true }
+incant_input.workspace = true
 serde_json = { workspace = true }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]

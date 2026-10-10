@@ -11,7 +11,8 @@ publish = false
 
 [workspace.dependencies]
 serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+# Preserve serialized f64 values exactly across project/save reloads.
+serde_json = { version = "1.0", features = ["float_roundtrip"] }
 thiserror = "2.0"
 ulid = { version = "1.2", features = ["serde"] }
 schemars = "1.0"
@@ -25,6 +26,7 @@ incant_doc = { path = "crates/incant_doc", default-features = false }
 incant_cmd = { path = "crates/incant_cmd" }
 incant_core = { path = "crates/incant_core" }
 incant_physics = { path = "crates/incant_physics" }
+incant_input = { path = "crates/incant_input" }
 incant_script = { path = "crates/incant_script" }
 incant_agent = { path = "crates/incant_agent" }
 
