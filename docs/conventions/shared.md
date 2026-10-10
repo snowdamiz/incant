@@ -13,7 +13,7 @@ Do not add a GUI-only or agent-only mutation path. Project content is untrusted 
 No engine-agent shell access. No credentials in projects, logs, telemetry, or CI.
 The editor must remain usable offline without an engine account.
 
-PLAN.md revision 4 separates authoring from simulation. Project edits still use
+PLAN.md revisions 4 and 5 separate authoring from simulation. Project edits still use
 incant_cmd; gameplay runs in a disposable native ECS world loaded from cooked
 binary scenes. Do not extend the legacy document/command-bus play path. Migrate
 existing gameplay to typed bulk access and structural command buffers, with no
@@ -21,6 +21,10 @@ per-tick project cloning, JSON serialization or authoring validation. Keep the
 shipped runtime free of document, CRDT, command-bus and agent dependencies.
 Performance claims require the plan's shipping-profile/device measurements;
 desktop tests and compile-only CI do not satisfy the reference-phone gates.
+Section 12 decisions are settled, including wasm2c for shipped native modules,
+Wasmtime for development, and the numerical adoption rules for TypeScript AOT
+and the physics backend. Apply those rules without reopening the decisions;
+record measured outcomes and keep human-owned actions separate.
 
 Astra owns nonvisual implementation and integration. Claude Opus 5.5 through ACP,
 with thinking explicitly set to Max for every new or resumed session, owns
