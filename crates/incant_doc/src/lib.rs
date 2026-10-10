@@ -586,7 +586,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
     // schema properties remain the source of validation and generated types.
     for (name, order) in [
         ("Transform", vec!["translation", "rotation", "scale"]),
-        ("Camera", vec!["fov_degrees", "near", "far"]),
+        ("Camera", vec!["projection", "fov_degrees", "near", "far"]),
         ("MeshRenderer", vec!["mesh", "materials", "cast_shadows"]),
         ("Script", vec!["source", "props"]),
         ("DirectionalLight", vec!["color", "intensity", "shadows"]),
