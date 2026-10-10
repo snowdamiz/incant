@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { Icon } from '../icons/Icon';
 import { WispMark } from '../icons/WispMark';
@@ -32,8 +32,7 @@ export function isNotInEditorReason(reason: string): boolean {
 export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => void }) {
   const { snapshot, capabilities, ask, explainUnavailable, openAccount } = useShell();
   const [draft, setDraft] = useState('');
-  const transcript = useRef<HTMLDivElement>(null);
-  const scrollable = useOverflow(transcript, open);
+  const [transcript, scrollable] = useOverflow();
   const agent = snapshot?.agent;
   const provider = snapshot?.provider;
   const canSend = agent?.status === 'idle' && capabilities.has('agent.send');
@@ -203,10 +202,11 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
 }
 
 /** True while the element's content is taller than its box; tracks resizes of both. */
-function useOverflow(ref: React.RefObject<HTMLElement | null>, active: boolean): boolean {
+function useOverflow() {
   const [overflowing, setOverflowing] = useState(false);
-  useEffect(() => {
-    const element = ref.current;
+  // Observe the actual mount: readiness can replace this element without changing
+  // whether the surrounding panel is open. React runs this cleanup on replacement.
+  const attach = useCallback((element: HTMLDivElement | null) => {
     if (!element) return;
     const update = () => setOverflowing(element.scrollHeight > element.clientHeight + 1);
     update();
@@ -214,6 +214,6 @@ function useOverflow(ref: React.RefObject<HTMLElement | null>, active: boolean):
     observer.observe(element);
     for (const child of element.children) observer.observe(child);
     return () => observer.disconnect();
-  }, [ref, active]);
-  return overflowing;
+  }, []);
+  return [attach, overflowing] as const;
 }
