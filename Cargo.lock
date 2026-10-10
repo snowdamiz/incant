@@ -3568,6 +3568,7 @@ dependencies = [
  "incant_cmd",
  "incant_doc",
  "incant_nav",
+ "incant_types",
  "ktx2",
  "meshopt",
  "mikktspace",

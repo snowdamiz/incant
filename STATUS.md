@@ -98,6 +98,11 @@ within its documented workload.
   UI tests, strict TypeScript and the production build pass. Styling is unchanged;
   native packaging, live screen-reader and Claude rendered acceptance remain
   separate. See [editor correctness evidence](docs/spikes/editor-windowing-correctness.md#account-shortcuts-and-repeated-page-announcements-2026-10-10).
+- Cooked visual readers and sealed retained asset versions are extracted below
+  authoring. Native binary binding descriptors load the same checked versions;
+  the canonical renderer/authoring-adapter split and spatial host are in progress.
+  See [reader boundary](docs/spikes/cooked-visual-assets-boundary.md).
+
 - Existing cooked model/KTX readers and consumed geometry/material/texture values
   now live behind the optional `incant_assets_runtime/visual` feature; authoring
   keeps importing, cooking, writing and project asset synchronization with
