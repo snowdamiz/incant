@@ -53,6 +53,16 @@ within its documented workload.
 
 ## Active work
 
+- Native Rapier now selects its parallel solver while WASM stays serial, with
+  enhanced determinism preserved. Three repeated process trials of serial,
+  one-worker and four-worker builds plus three real Chromium/WASM processes
+  produce 24 identical full body-state streams across contact and joint scenes.
+  All 373 normal workspace tests, Clippy, seven target feature graphs and direct
+  iOS-simulator/Android/WASM physics compile checks pass locally. Hosted desktop
+  parity is pending; old Jolt timings remain separate. No phone performance,
+  fast variant, native physics migration or backend-adoption gate is claimed.
+  See [parallel physics evidence](docs/spikes/physics-parallel.md).
+
 - Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
   SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
   and their exclusive scope ends; rejected batches restore the numeric undo
