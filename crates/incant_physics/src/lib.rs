@@ -1,6 +1,7 @@
 //! Fixed-step, scene-isolated physics. Documents and scripts see stable entity
 //! IDs only; solver handles, contacts and sleeping state belong to the session.
 mod character;
+mod character_queries;
 mod queries;
 pub use character::{CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep};
 use incant_doc::{

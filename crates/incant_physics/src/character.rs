@@ -65,7 +65,9 @@ pub struct CharacterQuery {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 pub struct CharacterMovement {
     pub translation: [f64; 3],
+    /// Touching a supporting surface; steep/sliding slopes may also be grounded.
     pub grounded: bool,
+    /// Moving downward along a contacted slope steeper than the configured limit.
     pub sliding_down_slope: bool,
     /// Stable IDs of colliders encountered during the sweep, sorted and unique.
     pub collisions: Vec<String>,
@@ -160,6 +162,11 @@ impl PhysicsRuntime {
         } else {
             scene.world.query_pipeline_with_filter(filter)
         };
+        let dispatcher = crate::character_queries::CharacterQueries(queries.dispatcher);
+        let queries = QueryPipeline {
+            dispatcher: &dispatcher,
+            ..queries
+        };
         let controller = KinematicCharacterController {
             up: Vector::Y,
             offset: CharacterLength::Absolute(o.offset as f32),
@@ -188,6 +195,27 @@ impl PhysicsRuntime {
             },
         );
         let translation = movement.translation.to_array().map(f64::from);
+        // Inspect final support, including ground snapping which may not produce
+        // a sweep callback. Side-wall contact noise must not turn a level floor
+        // into a slope. The backend's own flag also labels uphill/horizontal
+        // contact projection as "sliding down".
+        let mut steep_support = false;
+        if translation[1] < -1.0e-5 && movement.grounded {
+            let final_pose = Pose::from_translation(movement.translation) * *body.position();
+            if let Some((_, support)) = queries.cast_shape(
+                &final_pose,
+                -Vector::Y,
+                collider.shape(),
+                rapier3d::parry::query::ShapeCastOptions {
+                    max_time_of_impact: (2. * o.offset + 0.001) as f32,
+                    stop_at_penetration: false,
+                    ..Default::default()
+                },
+            ) {
+                let up = f64::from(support.normal1.y);
+                steep_support = up > 1.0e-4 && up < o.min_slope_slide_angle.cos();
+            }
+        }
         if !translation
             .iter()
             .zip(entry.config.state.translation)
@@ -204,7 +232,7 @@ impl PhysicsRuntime {
         Ok(CharacterMovement {
             translation,
             grounded: movement.grounded,
-            sliding_down_slope: movement.is_sliding_down_slope,
+            sliding_down_slope: steep_support,
             collisions: collisions.into_iter().collect(),
         })
     }

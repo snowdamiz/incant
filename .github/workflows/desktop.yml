@@ -1,7 +1,7 @@
 name: Desktop editor and engine
 on:
   pull_request:
-    paths: ['crates/**', 'editor/**', 'Cargo.toml', 'Cargo.lock', 'package*.json', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
+    paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', 'Cargo.toml', 'Cargo.lock', 'package*.json', 'tools/probes/**', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -43,6 +43,8 @@ jobs:
       - run: cargo build -p incant_editor -p incant_headless --release --features incant_editor/custom-protocol --locked
       - name: Verify physics commands, persistence and sandbox playback
         run: python tools/probes/physics-runtime.py artifacts/physics-runtime-cli --binary target/release/incant_headless${{ matrix.suffix }}
+      - name: Verify strict TypeScript character walking and jumping
+        run: python tools/probes/character-movement.py artifacts/character-movement-cli --binary target/release/incant_headless${{ matrix.suffix }}
       - name: Exercise native GPU rendering without a user account
         run: python tools/platforms/render-check.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -53,6 +55,7 @@ jobs:
             target/release/incant_headless${{ matrix.suffix }}
             artifacts/render-smoke
             artifacts/physics-runtime-cli
+            artifacts/character-movement-cli
             THIRD_PARTY_NOTICES.md
             licenses/Apache-2.0.txt
           if-no-files-found: error

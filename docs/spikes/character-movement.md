@@ -25,5 +25,37 @@ and invalid queries without consuming live solver changes. Two additional
 script integration cases pass for movement through commands, hot reload, author
 isolation and the shared query budget. An injected native-query deadline test
 verifies that an expired tick commits neither state nor logs; it is not a live
-provider or device gate. Full integration, public CLI, performance, visual review
-and hosted checks remain open. Claude handoff 0023 owns actual rendered motion.
+provider or device gate. Claude handoff 0023 owns actual rendered motion.
+
+## Corrections from real motion review
+
+Claude's first five-lane course exposed one-tick stalls on flat ground and during
+wall sliding. A real PlaySession regression reproduced the floor stall at tick 6:
+the controller returned no forward movement, only a 0.1 mm upward nudge. GJK had
+returned an approximate floor normal such as `(0, 0.99999994, 0)`. Its slope
+decomposition treated the tiny numerical downward tangent as prohibited slipping
+and discarded forward travel. Increasing the nudge did not fix the underlying
+problem and is not part of the final change.
+
+The character-only query dispatcher normalizes cast normals and recovers exact
+box-face normals when the witness lies within 0.1 mm of one face and strictly
+inside its edges. Edge/corner and curved contacts retain their computed normals.
+This does not change solver contacts or public raycasts. A regression executes
+300 ticks for each combination of capsule/sphere/box, flat floor/wall slide and
+autostep enabled/disabled: all twelve retain at least 95% of expected tangential
+speed on every tick, stable support height and wall separation.
+
+`sliding_down_slope` now requires downward travel beyond 10 micrometers and a final
+support surface steeper than `min_slope_slide_angle`. The extra downward shape
+cast includes support reached by snap-down; side-wall contact noise cannot classify
+the floor as a slope. Tests distinguish uphill, downhill and flat travel.
+
+The public CLI probe creates a scene in one atomic RPC transaction, compiles real
+TypeScript under strict checking, walks into a wall, jumps, reverses and lands.
+Two 360-tick runs produce exact final simulation/script states, and project/journal
+hashes remain unchanged. Source and desktop CI now run this probe; all six platform
+probes exercise an actual grounded character query.
+
+Final corrected-engine visual review and hosted checks remain open. Moving
+platforms, large-world precision, game-specific step feel and physical-device
+performance are not established by this increment.
