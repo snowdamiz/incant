@@ -121,9 +121,11 @@ export function reviewRead() {
     Transform: transform([0, 24, 0], [-0.707107, 0, 0, 0.707107]),
     Camera: { fov_degrees: 60, near: 0.1, far: 100, projection: { kind: 'orthographic', vertical_size: 24 } },
   }, cameras);
-  add('Pixel Camera', {
+  // Only projections main's schemas/Camera.schema.json declares (perspective, orthographic);
+  // Broken Camera below covers a kind the schema lacks.
+  add('Close-up Camera', {
     Transform: transform([0, 2, 10]),
-    Camera: { fov_degrees: 60, near: 0.1, far: 100, projection: { kind: 'pixel_perfect', pixels_per_unit: 32, reference_resolution: [320, 180] } },
+    Camera: { fov_degrees: 35, near: 0.05, far: 60, projection: { kind: 'perspective' } },
   }, cameras);
   const broken = add('Broken Camera', {
     Transform: transform([0, 3, 12]),

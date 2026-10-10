@@ -2,9 +2,18 @@
 
 ## Status
 
-Browser review of revision 4 ("studio") is complete. Native review is pending Astra's
-rebuild.
+Browser review of revision 4 ("studio") is complete on the main-based branch. Native
+review is pending Astra's rebuild.
 
+- **Main-based integration (packet of 2026-10-10 16:55): done.** This branch is main
+  (PR 49) plus my UI commits and Astra's behavioural fixes; it carries no pixel-perfect
+  renderer.
+  - The browser fixture now mirrors main's `schemas/Camera.schema.json` exactly:
+    perspective and orthographic.
+  - The sample's third camera is an authored perspective camera.
+  - Pixel-perfect presentation is tested only against an explicitly synthetic schema.
+  - The native parity tests were not weakened.
+  - 498 tests pass in 28 files.
 - **Whole-app redesign (director feedback, 2026-10-10 14:32): done in the browser.**
   Every surface was reviewed as one product and changed where it fell short. That
   covers the shell, navigation, hierarchy, viewport chrome, assets, Inspector, dock,
@@ -23,9 +32,10 @@ rebuild.
 - **Native End-then-Tab blank list: cause found and fixed in the UI.** The cause is a
   stale scroll measurement that waited for an animation frame. The fix still needs
   verification in a native rebuild; see request 1.
-- **Pre-existing bug fixed: the window could scroll.** 59 of 91 browser states could
-  scroll the whole document, by up to 1,235 px. Following a problem link could slide
-  the titlebar off screen. The document now stays put; 0 of 91 states can scroll it.
+- **Pre-existing bug fixed: the window could scroll.** In revision 3, 64 of 96 browser
+  states could scroll the whole document: by up to 1,235 px in ordinary states, and up
+  to 30,392 px with 450 problems listed. Following a problem link could slide the
+  titlebar off screen. The document now stays put; 0 of 96 states can scroll it.
 - **Native acceptance: not claimed.** All evidence is headless Chrome renders of the
   built UI. Native captures from f78d763 informed the work; they show the previous
   design.
@@ -45,10 +55,81 @@ No phase gate is approved or claimed.
 
 | Revision | What it asked | What I did |
 | --- | --- | --- |
+| Main-based integration, 2026-10-10 16:55 | Match the sample fixture and parity tests to main's Camera schema; no unsupported projection in the sample; a clear split for pixel tests; keep the design | See the next section |
 | Plan revisions 4–6 | Bounded large data; play kept out of authoring; hosted Device Farm phones | Every list stays bounded, the dock included; no Play or Keep Edit control; no device claim |
 | Director feedback, 2026-10-10 14:32 | A proper design improvement through the whole app, not one sidebar; the shortcuts dialog is one example | Revision 4 across every surface (matrix below) |
 | Native evidence from f78d763 | Investigate End then Tab on 64 parts; keep account-bearing captures local | Root cause found, fix and test; captures stayed ignored |
 | Correctness follow-up (Astra) | Bound the dock's output rows without losing anything; Copy ID must not fail silently | Paged dock with explicit ranges; clipboard capability handled |
+
+## Main-based integration
+
+Source files and main's native schema take precedence over older screenshots and
+pixel-branch evidence. Main's `schemas/Camera.schema.json` declares two projections:
+perspective, and orthographic with `vertical_size`. This commit changes the following.
+
+**Fixture and parity:**
+- `bridge/fixture.ts` mirrors main's converted Camera schema exactly. The
+  `pixel_perfect` variant is gone, and the projection description matches main.
+- The parity test is unchanged and strict: the fixture's Camera schema must equal
+  `snapshotFromEngine` over `schemas/Camera.schema.json`.
+- The native-schema test now asserts exactly `perspective` and `orthographic`, with
+  orthographic's unit and description.
+
+**Sample cameras.** The pixel-perfect "Pixel Camera" became "Close-up Camera": the same
+place in the tree, perspective written out explicitly, a 35° field of view. The sample's
+cameras now show every state main supports:
+- the Camera Rig shows the schema default ("Default" tag);
+- the Map Camera shows orthographic, with field of view "Unused";
+- the Close-up Camera shows authored perspective.
+
+A new test checks every fixture variant for a projection kind the native schema lacks.
+
+**Test split.**
+- `CameraFields.test.tsx` covers main's schema only.
+- Every pixel-perfect presentation test moved, unchanged in substance, to
+  `PixelCameraFields.test.tsx`. It runs against main's native schema plus the variant
+  that `handoff/0033-pixel-integration` produces, labelled **SYNTHETIC — NOT ON MAIN**.
+  Its first test is a tripwire: it fails once main declares `pixel_perfect`, prompting a
+  switch to the native schema, which the parity tests then cover.
+- Shared helpers live in `src/test/cameraInspector.tsx`, outside the app's TypeScript
+  project. Nothing pixel-related reaches the sample or the parity tests.
+
+**One behaviour fix.** The field of view's "Unused" tag now only names projections the
+component's schema declares (`FieldContext` carries the schema). On main, a
+`pixel_perfect` value authored on the pixel branch shows "Unknown projection kind
+"pixel_perfect". Expected perspective or orthographic; raw value:". The field of view
+stays live and never claims a mode main lacks; a new test covers it.
+
+**Agent note after Astra's bridge fix.** The bridge now sends "The agent is not available
+in the editor yet." My presentation only recognised the old milestone wording, so the
+native note had regressed to "Use your ChatGPT account" above that sentence. That
+invited a sign-in that would not enable the agent. The UI now recognises both wordings:
+it shows "Not in the editor yet", status "Unavailable", and keeps the real Continue with
+ChatGPT action. A test reads the reason from the native bridge conversion itself.
+
+**Tools and docs:**
+- The capture states use the Close-up Camera, and there are new Camera Rig and Map
+  Camera states.
+- The review double's pixel-perfect camera is now a perspective close-up. Broken Camera
+  still covers an unknown kind, and the later IDs are stable.
+- The DESIGN.md diagram label changed.
+- A presentation comment now points at the preserved branch for the pixel-perfect
+  limits.
+
+**Rendered review** (browser, ignored sets `i1` and `m2`):
+- The Close-up Camera renders at 1440×874, 1000×650, 280 px and 1920×1080, and focused.
+- The Map Camera at 280 px shows the Unused tag.
+- Broken Camera's notice lists "perspective or orthographic".
+- A full re-capture of all 96 states on this branch: 90 states have layout metrics
+  identical to the pre-integration branch. The other 6 are 5 new camera states, and
+  Broken Camera's notice, which is now one line shorter.
+- 0 axe violations, step errors, page errors or window scroll; at most 102 dock rows.
+- Astra's menu, reveal, field-ID and paging fixes keep every layout, and their tests
+  pass.
+
+**Out of scope here.** No pixel-perfect schema or renderer on main, no Rust, schema or
+engine edits, no native capture, and no new redesign. Bridge transport pagination is
+still open.
 
 The director's screenshot (`artifacts/0033-native/director-cramped-sidebar.png`,
 ignored) shows these problems, all addressed:
@@ -61,8 +142,8 @@ ignored) shows these problems, all addressed:
 ## Coverage matrix
 
 Paths are under `screenshots/whole-app/`. "Before" is revision 3 as committed at
-e8ee0d6; "after" is revision 4. Both were captured with the same 91 browser states, data
-and sizes.
+e8ee0d6; "after" is revision 4 on this main-based branch. Both were captured with the same
+96 browser states, data and sizes.
 
 | Surface | What changed | Evidence (before/ and after/) |
 | --- | --- | --- |
@@ -72,7 +153,7 @@ and sizes.
 | Hierarchy | Scene row at heading weight; the selected row adds a 2 px accent edge to the indigo pill; new context menu, described below | `context-menu-normal-1440x874.png` (after only; there was no menu) |
 | Hierarchy context menu | See the Hierarchy context menu section below | same |
 | Viewport chrome | Status pill with tone dot (Live, Not attached, Waiting, Error, No engine); the empty state is a drawn ground grid and outlined cube, dashed red on error | `no-selection-…`, `project-error-normal-1440x874.png` |
-| Inspector: rhythm | 28 px values 6 px apart; 34 px sticky headers; caption groups 10 px apart; 16 px of air below each component; default width 360 px (was 331) | `transform-camera-normal-1440x874.png`, `transform-camera-narrow-1440x874-side.png` |
+| Inspector: rhythm | 28 px values 6 px apart; 34 px sticky headers; caption groups 10 px apart; 16 px of air below each component; default width 360 px (was 331) | `camera-rig-normal-1440x874.png`, `map-camera-narrow-1440x874-side.png`, `transform-camera-normal-1440x874-side.png` (after only: the Close-up Camera) |
 | Inspector: identity | Component marks: icon on a 22 px tile tinted by family (physics mint, light amber, camera sky, audio pink, script orange, navigation lime; transform neutral) | `native-character-normal-1440x874-side.png`, `native-navmesh-normal-1440x874-side.png` |
 | Inspector: problems | One card tinted by the worst severity. Locations read "Collider /path" in quiet text instead of periwinkle links, and paths wrap after slashes | `railing-compound-normal-1440x874-side.png`, `native-malformed-normal-1440x874-side.png` |
 | Inspector: compound Collider | See the Compound Collider section below | `native-rubble-parts-{normal,narrow,minimum}-*-inspector.png`, `railing-parts-normal-1440x874-inspector.png` |
@@ -82,12 +163,12 @@ and sizes.
 | Console | See the dock views section below | `dock-console-normal-1440x874.png`, `dock-paged-console-minimum-1000x650.png` |
 | History | See the dock views section below | `dock-history-normal-1440x874.png`, `dock-paged-history-normal-1440x874.png` |
 | Status line | Shows only the problem counts that exist, or a green check and "No problems" once validated. Shows nothing while opening, or after a failure without diagnostics. Key hints are caps | any full capture; `empty-project-normal-1440x874.png` |
-| Agent pane | The native bridge's milestone reason is shown in plain words: "Not in the editor yet" (presentation only). The no-engine note no longer repeats its title | `native-character-normal-1440x874-side.png`, `no-engine-normal-1440x874.png` |
+| Agent pane | The native bridge's "not in the editor" reason (plain words since Astra's fix, a milestone before) gets its own state: "Not in the editor yet", status Unavailable (presentation only). The no-engine note no longer repeats its title | `native-character-normal-1440x874-side.png`, `no-engine-normal-1440x874.png` |
 | ChatGPT account | The state is a card with a tinted badge; same header and paddings as every dialog | `account-signed-in-normal-1440x874.png` |
 | Keyboard shortcuts | See the shortcuts reference section below | `shortcuts-dialog-normal-1440x874.png`, `shortcuts-filter-minimum-1000x650.png` (after only) |
 | Empty, loading and error states | Pictograms on tone-tinted badges (a pointer for "Nothing selected", the scene mark while no project is open, a check for "No problems"); skeleton rows shaped like tree rows | `project-loading-…`, `project-error-…`, `empty-project-…`, `no-engine-…` |
 | Fatal screens | A card with the product mark, an error tile and the problem as the page's `h1` (axe flagged both before). Protocols are compared side by side and fixture names are chips | `bad-fixture-normal-1440x874.png`, `incompatible-normal-1440x874.png` |
-| Minimum size and keyboard | Container queries stack vectors, notices and stable IDs below 300 px; the parts summary wraps to its own line; scrollable dock lists are keyboard stops; F6, `?` and ⌘/ keep working | `transform-camera-minimum-1000x650.png`, `native-rubble-parts-minimum-1000x650-inspector.png` |
+| Minimum size and keyboard | Container queries stack vectors, notices and stable IDs below 300 px; the parts summary wraps to its own line; scrollable dock lists are keyboard stops; F6, `?` and ⌘/ keep working | `camera-rig-minimum-1000x650.png`, `native-rubble-parts-minimum-1000x650-inspector.png` |
 | Type scale | 12 px minimum everywhere; the 11 px key hints, level badges and menu shortcuts are gone | — |
 
 ### Hierarchy context menu
@@ -175,18 +256,19 @@ row on it:
 - **Kept behaviour.** Grouping, entity reveal, applied and undone state, and the Now
   marker are unchanged.
 
-Browser measurements (`evidence/dock-scale-report.json`, Chrome 155, M5 Pro):
+Browser measurements on this main-based branch, with Astra's paging fixes
+(`evidence/dock-scale-report.json`, Chrome 155, M5 Pro):
 
 | Scenario | Rows mounted | Unthrottled | 4× CPU |
 | --- | --- | --- | --- |
-| 20,000 problems on 10,000 entities: load to first page (from navigation start) | 100 | 167 ms | 660 ms |
-| Next page / last page | 100 | 12.9 / 13.8 ms | 53 / 68 ms |
-| Hide errors (4,000 left) | 100 | 18.1 ms | 89 ms |
-| 20,000 problems in one group: next / last page | 100 | 10.6 / 9.5 ms | 44 / 44 ms |
-| Open Console with 100,000 messages (newest page) | 100 | 9.2 ms | 38 ms |
-| 10 × 500 messages arriving while following | 100 each time | 6.5–8.1 ms each | 29.5–35.7 ms each |
-| Open History with 50,000 edits (page of Now) | 100 + Now marker | 4.6 ms | 20.5 ms |
-| History first page, then Now | 100 | 4.4 / 5.4 ms | 24 / 16 ms |
+| 20,000 problems on 10,000 entities: load to first page (from navigation start) | 100 | 146 ms | 577 ms |
+| Next page / last page | 100 | 11.3 / 13.6 ms | 48.5 / 57.9 ms |
+| Hide errors (4,000 left) | 100 | 16.2 ms | 73.7 ms |
+| 20,000 problems in one group: next / last page | 100 | 8.0 / 7.1 ms | 39.6 / 40.6 ms |
+| Open Console with 100,000 messages (newest page) | 100 | 9.0 ms | 41.5 ms |
+| 10 × 500 messages arriving while following | 100 each time | 5.9–8.1 ms each | 26.8–33.4 ms each |
+| Open History with 50,000 edits (page of Now) | 100 + Now marker | 4.2 ms | 20.7 ms |
+| History first page, then Now | 100 | 3.3 / 2.7 ms | 22.7 / 14.9 ms |
 
 No long tasks occurred in the arrival steps. In the browser captures, the dock mounted up
 to 1,234 rows before and at most 102 after (100 rows plus 2 group items).
@@ -230,10 +312,10 @@ All captures use headless Chrome 155.0.8059.40 at device scale 2. The machine is
 MacBook Pro with an Apple M5 Pro (15 cores), 48 GB and macOS 26.6. Per-state data is in
 `evidence/whole-app-comparison.json`.
 
-| Measure, all 91 states | Before (rev. 3) | After (rev. 4) |
+| Measure, all 96 states | Before (rev. 3) | After (rev. 4, main-based) |
 | --- | --- | --- |
 | Axe violations, colour contrast included | 6 | 0 |
-| States where the window can scroll | 59 (up to 1,235 px) | 0 |
+| States where the window can scroll | 64 (up to 1,235 px; 30,392 px with 450 problems) | 0 |
 | Most rows mounted in the dock | 1,234 | 102 |
 | Clipped values | 37 (0 numeric) | 36 (0 numeric) |
 | Elements outside the Inspector | 0 | 0 |
@@ -259,28 +341,47 @@ when one exists.
 
 ### 100,000 entities (browser, not the device gate)
 
-Re-measured on this build (`evidence/scale-report.json`).
+Re-measured on this main-based branch (`evidence/scale-report.json`).
 
 | Interaction | Unthrottled | 4× CPU |
 | --- | --- | --- |
 | Rows mounted for 100,101 hierarchy nodes; options for 20,000 assets | 34; 37 | 34; 37 |
-| Load to first tree (fixture generated in the page) | 206 ms | 808 ms |
-| Filter matching every entity / one group | 76 / 7.4 ms | 250 / 35 ms |
-| Arrow Down, median and worst of 30 | 0.9 / 26.2 ms | 4.6 / 18.6 ms |
-| End to the last of 1,000 rows | 0.9 ms | 6.8 ms |
-| Assets open / End to the last of 20,000 | 11.6 / 4.6 ms | 47.6 / 25.1 ms |
-| Select the 65,536-value grid / open its table | 13.4 / 4.7 ms | 60.5 / 17.9 ms |
-| Rename through the test double, total | 57.6 ms | 275 ms |
-| … of which the double rebuilds the snapshot | 46 ms | 229 ms |
+| Load to first tree (fixture generated in the page) | 182 ms | 727 ms |
+| Filter matching every entity / one group | 67 / 7.0 ms | 217 / 34 ms |
+| Arrow Down, median and worst of 30 | 0.8 / 24 ms | 4.3 / 17.9 ms |
+| End to the last of 1,000 rows | 0.7 ms | 4.5 ms |
+| Assets open / End to the last of 20,000 | 9.9 / 5.0 ms | 49.4 / 23.7 ms |
+| Select the 65,536-value grid (2 inputs) / open its table (360 cells) | 12.1 / 5.2 ms | 53.6 / 19.6 ms |
+| Rename through the test double, total | 51.2 ms | 261 ms |
+| … of which the double rebuilds the snapshot | 40.9 ms | 214.6 ms |
 
 Long tasks:
-- The first filter over all names is one 108 ms task unthrottled, 467 ms at 4×.
-- Every rename at 4× is a task of about 260 ms, almost all of it the double's snapshot
+- The first filter over all names is one 95 ms task unthrottled, 424 ms at 4×.
+- Every rename at 4× is a task of about 250 ms, almost all of it the double's snapshot
   rebuild.
 
 ## Changed paths
 
-UI code (`editor/ui/src`):
+This integration commit:
+- `editor/ui/src/bridge/fixture.ts`: the Camera schema mirrors main; the Close-up Camera
+  replaces the pixel-perfect sample camera.
+- `editor/ui/src/components/inspector/presentation.ts`, `FieldView.tsx` and
+  `InspectorPanel.tsx`: a schema-aware field-of-view tag, and the component schema in
+  `FieldContext`.
+- `editor/ui/src/components/AgentPanel.tsx` and `AgentPanel.test.tsx`: the plain native
+  reason is recognised, tested against the bridge conversion.
+- `editor/ui/src/components/inspector/CameraFields.test.tsx` (main's schema) and
+  `PixelCameraFields.test.tsx` (new, synthetic schema).
+- `editor/ui/src/test/cameraInspector.tsx` (new shared helpers).
+- `editor/ui/DESIGN.md`: the diagram label.
+- `handoffs/0033-editor-design-review/`:
+  - tools `capture.mjs`, `review-double.mjs` and `curate-whole-app.mjs`;
+  - re-curated `screenshots/whole-app/`;
+  - `evidence/whole-app-comparison.json`, `whole-app.sha256`, `dock-scale-report.json`
+    and `scale-report.json`;
+  - this result.
+
+The whole-app pass (earlier commits on this branch). UI code (`editor/ui/src`):
 - **Shell:**
   - `App.tsx`: status line and fatal screens.
   - `components/Titlebar.tsx` and `ProviderChip.tsx`.
@@ -328,16 +429,16 @@ Tests (`editor/ui/src`):
 
 Handoff (`handoffs/0033-editor-design-review/`):
 - **Tools:**
-  - `tools/capture.mjs`: 91 states, `--root` for the before build, and window-scroll
+  - `tools/capture.mjs`: 96 states, `--root` for the before build, and window-scroll
     and dock-row measures.
   - `tools/curate-whole-app.mjs` (new).
   - `tools/measure-dock.mjs` (new).
-- **Screenshots:** `screenshots/whole-app/before/` (26) and `after/` (28). These are
+- **Screenshots:** `screenshots/whole-app/before/` (26) and `after/` (29). These are
   unedited, account-free PNGs from the sample fixture, the synthetic provider fixtures
   and the evidence test double.
 - **Evidence:**
   - `whole-app-comparison.json`;
-  - `whole-app.sha256` (54 OK);
+  - `whole-app.sha256` (55 OK);
   - `dock-scale-report.json`;
   - `scale-report.json`, re-measured.
 - `brief.md`: the runner's packet updates.
@@ -346,8 +447,12 @@ Handoff (`handoffs/0033-editor-design-review/`):
 
 Not committed (ignored `artifacts/`):
 - `0033-native/`: the native captures, which show the account.
-- Every raw browser set: `v3-before`, `v3-before-paged`, `v4-final2`, iterations
-  `w1`–`w10`, and the e8ee0d6 source extract `src-e8ee0d6`.
+- Every raw browser set:
+  - before: `v3-before`, `v3-before-paged` and `v3-before-cams`;
+  - after: `m2`, on this branch;
+  - pre-integration and iteration sets: `v4-final2`, `m1`, `i1` and `w1`–`w10`;
+  - measurements: `dock-m1` and `scale-m1`;
+  - the e8ee0d6 source extract `src-e8ee0d6`.
 
 No Rust, SDK, CI, schema, transport, auth storage or account setting changed. No Cargo
 command ran.
@@ -358,7 +463,7 @@ command ran.
 npm ci --ignore-scripts                     # workspace root
 cd editor/ui
 npx tsc -b --noEmit                         # strict: 0 errors
-npx vitest run                              # 24 files, 467 tests passed
+npx vitest run                              # 28 files, 498 tests passed (main-based branch)
 npm run build                               # built
 cd ../..
 # before: revision 3 from e8ee0d6, extracted into the ignored artifacts directory
@@ -366,11 +471,12 @@ git archive e8ee0d6 editor/ui editor/bridge | tar -x -C artifacts/0033-editor-de
 (cd artifacts/0033-editor-design-review/src-e8ee0d6/editor/ui && npx vite build)
 node handoffs/0033-editor-design-review/tools/capture.mjs v3-before --root=artifacts/0033-editor-design-review/src-e8ee0d6/editor/ui
 node handoffs/0033-editor-design-review/tools/capture.mjs v3-before-paged --root=… --only=dock-paged-problems,dock-paged-console,dock-paged-history
-node handoffs/0033-editor-design-review/tools/capture.mjs v4-final2      # 91 captures, 0 step errors, 0 axe
-node handoffs/0033-editor-design-review/tools/curate-whole-app.mjs v3-before,v3-before-paged v4-final2
-(cd handoffs/0033-editor-design-review && shasum -a 256 -c evidence/whole-app.sha256)   # 54 OK
-node handoffs/0033-editor-design-review/tools/measure-dock.mjs r2         # no page errors
-node handoffs/0033-editor-design-review/tools/measure-scale.mjs r4        # no page errors
+node handoffs/0033-editor-design-review/tools/capture.mjs v3-before-cams --root=… --only=camera-rig,map-camera
+node handoffs/0033-editor-design-review/tools/capture.mjs m2              # 96 captures, 0 step errors, 0 axe
+node handoffs/0033-editor-design-review/tools/curate-whole-app.mjs v3-before,v3-before-paged,v3-before-cams m2
+(cd handoffs/0033-editor-design-review && shasum -a 256 -c evidence/whole-app.sha256)   # 55 OK
+node handoffs/0033-editor-design-review/tools/measure-dock.mjs m1         # no page errors
+node handoffs/0033-editor-design-review/tools/measure-scale.mjs m1        # no page errors
 ```
 
 Every capture server used the first free port from 4233 and was closed afterwards.
@@ -386,21 +492,25 @@ Every capture server used the first free port from 4233 and was closed afterward
      Parts 52–64 instead of 1–13 plus 64.
    - Repeat while the window is not frontmost, and again after 100 ms.
    - Also follow a Problems link to a deep part path: the titlebar must not move.
-2. **Window title.** `editor/app/src/main.rs:159` sets "Incant — Phase 0". Please change
-   it to "Incant" or the project name; it is Rust, so I left it.
-3. **Agent reason copy.** `editor/bridge/native.ts` still sends "Use the headless agent
-   command for the Phase 0 provider spike." The UI now shows "Not in the editor yet".
-   Please send plain wording at the source and regenerate `native.generated.js`.
-4. **Output lists in snapshots.** The UI now pages Problems, Console and History, but
-   every snapshot still carries every console message and history entry. Consider
-   capping or paging them at the bridge, with totals, as for entity details.
-5. **Carried over from the earlier pass:**
+2. **Window title: done by Astra** (`17bf782`, "Incant").
+3. **Agent reason copy: done by Astra** (`17bf782`). The UI recognises the new plain
+   wording; `AgentPanel.test.tsx` reads it from the bridge conversion. Please keep that
+   test in mind if the sentence changes again.
+4. **Output lists in snapshots: still open,** as Astra noted. The UI pages Problems,
+   Console and History, but every snapshot still carries every console message and
+   history entry. Consider capping or paging them at the bridge, with totals, as for
+   entity details.
+5. **When pixel-perfect lands on main,** switch `PixelCameraFields.test.tsx` to the
+   native schema, as its tripwire test will prompt, and add a pixel camera back to the
+   sample.
+6. **Carried over from the earlier pass:**
    - entity kinds for lights and audio;
    - nullable `type` arrays;
    - nested-object order, units and human titles in the schema registry;
    - snapshot reuse at 100,000 entities.
-6. **Native captures after the rebuild, for my rendered review:**
+7. **Native captures after the rebuild, for my rendered review:**
    - Rubble Pile compound at 1440×874 and 1000×650;
+   - the Close-up and Map cameras;
    - the shortcuts dialog;
    - the hierarchy context menu;
    - a long console;
@@ -419,6 +529,9 @@ Every capture server used the first free port from 4233 and was closed afterward
   unthrottled, 467 ms at 4×.
 - **Read-only Inspector.** Every field stays read-only until the bridge offers a
   component command.
+- **Pixel-perfect only synthetic here.** On this branch the pixel-perfect presentation
+  runs only against a synthetic schema. The real schema, renderer and evidence remain on
+  `handoff/0033-pixel-integration`.
 - **Pages, not continuous scrolling.** The dock pages because rows wrap to full text. A
   very long single message still renders in full on its page.
 - **Capsule glyph.** At 12 px it is a small solid; the tag text beside it carries the

@@ -1,24 +1,25 @@
 {
-  "generated": "2026-10-10T20:43:43.248Z",
+  "generated": "2026-10-10T21:12:31.635Z",
   "browser": "155.0.8059.40",
   "note": "Headless Chrome captures of the built UI at device scale 2; not native WebKit. Sample fixture, provider fixtures and the evidence test double; no account data.",
   "before": {
     "sets": [
       "v3-before",
-      "v3-before-paged"
+      "v3-before-paged",
+      "v3-before-cams"
     ],
     "ui": "revision 3, e8ee0d6",
     "uiRoot": "artifacts/0033-editor-design-review/src-e8ee0d6/editor/ui"
   },
   "after": {
-    "set": "v4-final2",
+    "set": "m2",
     "ui": "revision 4, this commit",
     "uiRoot": "editor/ui"
   },
   "totals": {
     "captures": {
-      "before": 91,
-      "after": 91
+      "before": 96,
+      "after": 96
     },
     "axeViolations": {
       "before": 6,
@@ -33,7 +34,7 @@
       "after": 0
     },
     "statesWithScrollableWindow": {
-      "before": 59,
+      "before": 64,
       "after": 0
     },
     "statesWithHorizontalPageOverflow": {
@@ -505,11 +506,11 @@
         },
         "focus": {
           "name": "Near clip",
-          "value": "0.1",
+          "value": "0.05",
           "outline": "solid 2px rgb(195, 200, 255)",
           "ring": {
             "x": 1207.5,
-            "y": 457,
+            "y": 389,
             "width": 220.5,
             "height": 28
           }
@@ -587,11 +588,11 @@
         },
         "focus": {
           "name": "Near clip",
-          "value": "0.1",
+          "value": "0.05",
           "outline": "solid 2px rgb(195, 200, 255)",
           "ring": {
             "x": 828,
-            "y": 514,
+            "y": 446,
             "width": 160,
             "height": 28
           }
@@ -3218,6 +3219,307 @@
       }
     },
     {
+      "capture": "camera-rig-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": 9,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "camera-rig-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": 9,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "camera-rig-narrow-1440x874",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": 9,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "map-camera-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": 9,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "map-camera-narrow-1440x874",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": 9,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
       "capture": "native-broken-camera-normal-1440x874",
       "before": {
         "inspectorWidth": 331,
@@ -3255,7 +3557,7 @@
         "rowHeights": [
           28,
           57,
-          181
+          165
         ],
         "componentHeaderHeights": [
           20,

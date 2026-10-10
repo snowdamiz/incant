@@ -1,6 +1,6 @@
 import { useId } from 'react';
 import type { CSSProperties, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
-import type { Diagnostic, FieldSchema } from '../../bridge/contract';
+import type { ComponentSchema, Diagnostic, FieldSchema } from '../../bridge/contract';
 import { Icon, iconForKind } from '../../icons/Icon';
 import type { IconName } from '../../icons/Icon';
 import type { AxisName, FieldHint, FieldStatus } from './presentation';
@@ -41,6 +41,8 @@ export interface FieldContext {
   readonly diagnostics: readonly Diagnostic[];
   /** The whole component value, for presentation tags that depend on sibling fields. */
   readonly value?: Readonly<Record<string, unknown>> | undefined;
+  /** The component's schema, so such tags only name modes (variants) it declares. */
+  readonly schema?: ComponentSchema | undefined;
   /** Nesting depth of the rows: each group indents and narrows its label column by one step. */
   readonly depth?: number | undefined;
   /** Names for IDs that exactly match a project asset or entity. Presentation only. */
@@ -380,7 +382,7 @@ export function FieldRow({
   const description = schema.description ?? hint.description;
   const descriptionId = description ? `${id}-description` : undefined;
   const tag: FieldStatus | null =
-    notice || unset ? null : implied ? { short: 'Default', long: implied } : (ctx.value && hint.status?.(ctx.value)) || null;
+    notice || unset ? null : implied ? { short: 'Default', long: implied } : (ctx.value && hint.status?.(ctx.value, ctx.schema)) || null;
   const tagId = tag ? `${id}-tag` : undefined;
   const describedBy =
     [descriptionId, tagId, noteId, problems.length > 0 ? messageId : undefined].filter(Boolean).join(' ') || undefined;

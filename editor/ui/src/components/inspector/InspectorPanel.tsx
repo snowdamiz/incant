@@ -263,7 +263,7 @@ function ComponentSection({
   const title = componentTitle(component.type, schema?.title);
   const family = schema ? componentFamily(component.type) : null;
   const typeId = `${bodyId}-type`;
-  const ctx: FieldContext = { entity, component: component.type, diagnostics, value: component.value, depth: 0, refs };
+  const ctx: FieldContext = { entity, component: component.type, diagnostics, value: component.value, schema, depth: 0, refs };
   return (
     <section className="component" id={id} aria-label={title} aria-describedby={typeId}>
       <h3 className="component__heading">

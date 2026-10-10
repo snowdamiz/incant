@@ -48,7 +48,7 @@ Titlebar host contract: `TITLEBAR.md`. Native viewport: `NATIVE_VIEWPORT.md`.
 ```
 ┌ titlebar 40 ─ ◆ Project / Scene [Sample data] ·· (↶ ↷) (◧ ⬓ ◨) ·· (Ⓐ ChatGPT …) ⌨ ┐
 ├──────────────────┬──────────────────────────────┬─────────────────────────────┤ ← one ruled header line
-│ Hierarchy 25│Assets 7│ Viewport ● Live           │ ▣ Pixel Camera            ⧉ │   (36 px, all three)
+│ Hierarchy 25│Assets 7│ Viewport ● Live           │ ▣ Close-up Camera         ⧉ │   (36 px, all three)
 ├──────────────────┼──────────────────────────────┼─────────────────────────────┤
 │ ⌕ Filter      ⇕  │                              │ Camera · 01J9…00B 🔒 Read-only │ meta strip
 │ ▾ ◈ Scene        │   native surface             │ ▾ [✥] Transform             │ sticky 34 px headers
