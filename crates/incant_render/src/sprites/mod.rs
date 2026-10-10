@@ -154,6 +154,19 @@ impl SpriteSystem {
             let RuntimeAssetData::Texture(source) = plan.source.data() else {
                 return Err(ResourceError::TextureSize.into());
             };
+            // Resolve geometry before allocating GPU resources so an undersized
+            // reimport reports the affected entity and exact region/dimensions.
+            let sprite = &plan.sprite;
+            let texture_size = [source.texture.width, source.texture.height];
+            let geometry = incant_2d::tessellate(sprite, texture_size).map_err(|source| {
+                ResourceError::SpriteGeometry {
+                    entity: plan.id.clone(),
+                    texture: sprite.texture.clone(),
+                    region: sprite.region,
+                    texture_size,
+                    source,
+                }
+            })?;
             let key = plan.source.info().fingerprint.clone();
             let texture = match cache.get(&key).and_then(Weak::upgrade) {
                 Some(texture) => texture,
@@ -168,7 +181,6 @@ impl SpriteSystem {
                     texture
                 }
             };
-            let sprite = &plan.sprite;
             let start = vertices.len() as u32;
             let [x, y, w, h] = sprite
                 .region
@@ -187,9 +199,7 @@ impl SpriteSystem {
                 [f64::from(x), f64::from(y), f64::from(w), f64::from(h)]
             }
             .map(|v| v as f32);
-            for local in
-                incant_2d::tessellate(sprite, [source.texture.width, source.texture.height])?
-            {
+            for local in geometry {
                 let position = plan
                     .world
                     .transform_point3(glam::DVec3::new(local.position[0], local.position[1], 0.))

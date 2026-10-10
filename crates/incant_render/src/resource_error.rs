@@ -1,6 +1,17 @@
 //! Resource preparation errors remain typed even at the renderer's boxed boundary.
 #[derive(Debug, thiserror::Error)]
 pub enum ResourceError {
+    #[error(
+        "sprite entity {entity}, texture {texture}, source region {region:?}, cooked texture size {texture_size:?}: {source}"
+    )]
+    SpriteGeometry {
+        entity: String,
+        texture: String,
+        region: [u32; 4],
+        texture_size: [u32; 2],
+        #[source]
+        source: incant_2d::SpriteError,
+    },
     #[error("directional shadow projection exceeds finite GPU precision")]
     ShadowRange,
     #[error("directional shadow atlas exceeds the four-light / 64 MiB budget or device limits")]
