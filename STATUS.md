@@ -80,6 +80,12 @@ within its documented workload.
   from its smoke apps. These are compile checks, not mobile script execution or
   device performance evidence.
 
+- The macOS texture-format check now reuses the workspace-built `texture_probe`
+  alongside the existing tools, avoiding its separate package feature graph.
+  All three real fixtures pass the unchanged pinned Khronos validator; the build
+  retains 656/658 external artifacts from the test graph (only Tauri variants
+  differ). Hosted timing for this follow-up remains unmeasured. See
+  [CI evidence](docs/spikes/ci-build-performance.md#reuse-the-texture-fixture-generator).
 - CI build reuse now keeps the ignored GPU suite on the workspace feature graph,
   combines macOS editor/headless builds and caches Rust dependencies. The measured
   baseline is a 38m15s median PR check, dominated by compilation; repeated Windows

@@ -276,6 +276,35 @@ especially, removing GPU rebuilds shifted some compilation to subsequent tools.
 The workspace-selector experiment addresses that remaining graph mismatch.
 Warm hosted verification remains open.
 
+## Reuse the texture fixture generator
+
+The same macOS cold log's 2m49s Khronos validation step compiled 143 crates because
+`validate_ktx.py` ran the asset package's `texture_probe` through a separate
+package-selected Cargo graph. The shared workspace build now includes that exact
+example as its fifth target, and validation runs its executable directly through
+`--probe-binary`. The existing standalone build-and-run behavior remains available
+when that argument is omitted. The pinned Khronos 4.4.2 package/checksum and all
+color, linear and HDR validation checks are unchanged; validation follows the
+combined tool build instead of preceding it. Desktop workflows remain unchanged.
+
+On the existing local target directory, the five-target build emitted exactly
+`incant_editor`, `incant_headless`, `cook_scene`, `collaboration_spike` and
+`texture_probe`, with every artifact fresh (Cargo reported 0.27 seconds).
+Comparing exact external library/proc-macro filenames to a workspace release test
+no-run yielded 658 artifacts, of which 656 match; only the required Tauri and
+Tauri macros custom-protocol variants differ. Thus the fixture example introduces
+no additional external-library graph beyond the previously reviewed tools.
+These are artifact-reuse observations, not a cold-hosted speedup measurement.
+
+The real prebuilt probe produced all three fixtures and pinned Khronos 4.4.2
+accepted each with no stdout/stderr diagnostics. An explicit missing probe path
+fails before validation and never falls back to Cargo. Actionlint and diff checks
+pass. Logs are `/tmp/incant-ci-ktx-build-artifacts.jsonl`,
+`/tmp/incant-ci-ktx-test-artifacts.jsonl` and
+`/tmp/incant-ci-ktx-validation.log`; the validation report is in ignored
+`artifacts/ci-ktx-reuse/validation.json`. No runtime source or dependency changed,
+and no test, shipping check, validator or format was dropped.
+
 Final cache sizes and the implemented shared-cache producer policy are recorded
 in [cache retention](ci-cache-retention.md). After preserving those measurements
 and independently rechecking PR #48's merged state and every candidate's key/ref,
