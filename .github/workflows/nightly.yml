@@ -1,7 +1,7 @@
 name: Six platform probes
 on:
   pull_request:
-    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'platforms/**', 'tools/platforms/**', 'Cargo.lock', '.github/workflows/nightly.yml']
+    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', 'Cargo.lock', '.github/workflows/nightly.yml']
   schedule: [{cron: '30 6 * * *'}]
   workflow_dispatch:
 permissions:
@@ -42,6 +42,7 @@ jobs:
       - run: rustup show
       - run: cargo install wasm-bindgen-cli --version 0.2.126 --locked
       - run: tools/platforms/web.sh
+      - run: cargo check -p incant_audio --target wasm32-unknown-unknown --locked
       - run: node_modules/.bin/playwright-core install --with-deps chromium
       - run: python3 -m http.server 4188 --bind 127.0.0.1 --directory artifacts/web > /tmp/incant-web.log 2>&1 &
       - run: node tools/platforms/web-check.mjs
@@ -53,6 +54,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - run: rustup show
       - run: tools/platforms/ios.sh simulator
+      - run: cargo check -p incant_audio --features device --target aarch64-apple-ios-sim --locked
       - run: python3 tools/platforms/ios-check.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with: {name: hello-ios-simulator, path: artifacts/ios-simulator, if-no-files-found: error}
@@ -71,6 +73,7 @@ jobs:
         run: |
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" 'platforms;android-35' 'build-tools;35.0.0' 'ndk;28.0.13004108' 'emulator' 'system-images;android-35;google_apis;x86_64'
       - run: ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.13004108" tools/platforms/android.sh
+      - run: ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.13004108" cargo ndk -t arm64-v8a check -p incant_audio --features device --locked
       - name: Execute native probe in a disposable Android emulator
         run: |
           test -c /dev/kvm

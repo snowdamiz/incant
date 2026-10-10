@@ -44,6 +44,7 @@ def main():
     shutil.copy2(ROOT / 'THIRD_PARTY_NOTICES.md', bundle / 'Resources/THIRD_PARTY_NOTICES.md')
     (bundle / 'Resources/licenses').mkdir(exist_ok=True)
     shutil.copy2(ROOT / 'licenses/Apache-2.0.txt', bundle / 'Resources/licenses/Apache-2.0.txt')
+    shutil.copy2(ROOT / 'licenses/MPL-2.0.txt', bundle / 'Resources/licenses/MPL-2.0.txt')
     with (bundle / 'Info.plist').open('wb') as stream:
         plistlib.dump({
             'CFBundleExecutable': 'incant_editor',

@@ -1,8 +1,10 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
+mod audio;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
 mod physics;
+pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_input::InputActions;
@@ -411,6 +413,9 @@ impl Project {
                 "only one global EnvironmentLight is supported",
             );
         }
+        if let Err(message) = audio::validate_graph(self) {
+            issue("/scenes".into(), &message);
+        }
         errors
     }
 }
@@ -428,6 +433,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
         serde_json::from_value(v.clone()).map_err(|e| e.to_string())
     }
     match kind {
+        "AudioBus" | "AudioSource" | "AudioListener" => audio::validate(kind, value, project)?,
         "RigidBody" | "Collider" | "AngularVelocity" => physics::validate(kind, value)?,
         "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
         "Transform" => {
@@ -531,6 +537,15 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        ("AudioBus".into(), json!(schemars::schema_for!(AudioBus))),
+        (
+            "AudioSource".into(),
+            json!(schemars::schema_for!(AudioSource)),
+        ),
+        (
+            "AudioListener".into(),
+            json!(schemars::schema_for!(AudioListener)),
+        ),
         ("RigidBody".into(), json!(schemars::schema_for!(RigidBody))),
         ("Collider".into(), json!(schemars::schema_for!(Collider))),
         (

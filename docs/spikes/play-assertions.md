@@ -64,12 +64,13 @@ hosted source and Windows/Linux desktop CI.
 The existing ignored GPU test is extended to compare the retained failure frame
 against its previously captured initial frame and verify the failed report/no-save
 behavior. It is compiled locally, but not executed during the director's screen
-capture pause; hosted execution remains pending. No new local computer use or
+capture pause. Hosted source and both desktop jobs passed the actual GPU check. No new local computer use or
 captures are part of this increment.
 
 The final local tree passes 195 Rust tests, 315 UI tests, five tool tests,
 workspace Clippy, generated contracts and strict TypeScript. The native release
-build/package also passes without opening the app. Hosted checks and merge are
-pending. These are synthetic engine/CLI checks, not the full Core Sample gate.
+build/package also passes without opening the app. All three final hosted checks
+passed at `7379f9c`; PR #28 merged as `734d008` with the identical reviewed tree.
+The main app was rebuilt without opening. These are synthetic engine/CLI checks, not the full Core Sample gate.
 
 Machine-readable evidence: [play-assertions-2026-10-09.json](evidence/play-assertions-2026-10-09.json).

@@ -1,4 +1,6 @@
 //! CPU asset import and cooking. No account, renderer or editor is required.
+mod audio;
+mod audio_cook;
 mod cache;
 mod gltf_import;
 mod ktx;
@@ -12,6 +14,8 @@ mod tangents;
 mod texture;
 mod texture_cache;
 
+pub use audio::{AUDIO_CHUNK_FRAMES, AudioMetadata, CookedAudio, MAX_AUDIO_PCM_BYTES, load_audio};
+pub use audio_cook::cook_audio;
 pub use cache::{CookedModel, ModelMetadata, cook_gltf, load_model};
 pub use gltf_import::{ImportedModel, ModelNode, import_gltf};
 pub use ktx::{decode_ktx2, encode_ktx2};

@@ -1,7 +1,9 @@
 //! Editor/tooling import coordination. Runtime cooked-asset loading stays in
 //! incant_assets, without a dependency on the authoring command bus.
 mod watch;
-use incant_assets::{AssetError, Dependency, TextureFormat, TextureUsage, cook_gltf, cook_texture};
+use incant_assets::{
+    AssetError, Dependency, TextureFormat, TextureUsage, cook_audio, cook_gltf, cook_texture,
+};
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::{Asset, AssetImportSettings, Project, new_id};
 use serde::{Deserialize, Serialize};
@@ -24,7 +26,7 @@ pub enum ImportError {
     DuplicateSource(String),
     #[error("multiple assets use source {0}; resolve their identities before reimport")]
     AmbiguousSource(String),
-    #[error("unsupported import source: {0}; expected glTF, GLB, PNG, JPEG or EXR")]
+    #[error("unsupported import source: {0}; expected glTF, GLB, PNG, JPEG, EXR, WAV or OGG")]
     Unsupported(String),
     #[error("texture usage applies only to standalone images: {0}")]
     ModelUsage(String),
@@ -52,6 +54,13 @@ pub struct ImportRequest {
 #[derive(Debug, Serialize)]
 #[serde(untagged)]
 pub enum ImportDetails {
+    Audio {
+        sample_rate: u32,
+        channels: u8,
+        frames: u64,
+        duration_seconds: f64,
+        dependencies: Vec<Dependency>,
+    },
     Model {
         meshes: usize,
         textures: usize,
@@ -129,25 +138,25 @@ impl ImportSnapshot {
                 .and_then(|v| v.to_str())
                 .unwrap_or("")
                 .to_ascii_lowercase();
-            let model = match extension.as_str() {
-                "gltf" | "glb" => true,
-                "png" | "jpg" | "jpeg" | "exr" => false,
+            let kind = match extension.as_str() {
+                "gltf" | "glb" => ImportKind::Model,
+                "png" | "jpg" | "jpeg" | "exr" => ImportKind::Texture,
+                "wav" | "ogg" => ImportKind::Audio,
                 _ => return Err(ImportError::Unsupported(request.source.clone())),
             };
-            if model && request.texture_usage.is_some() {
+            if kind != ImportKind::Texture && request.texture_usage.is_some() {
                 return Err(ImportError::ModelUsage(request.source.clone()));
             }
-            inputs.push((request, previous.first().copied(), model));
+            inputs.push((request, previous.first().copied(), kind));
         }
         let mut imports = Vec::with_capacity(inputs.len());
-        for (request, previous, model) in inputs {
-            let cooked =
-                cook(root, cache_override, request, previous, model).map_err(|source| {
-                    ImportError::Cook {
-                        path: request.source.clone(),
-                        source,
-                    }
-                })?;
+        for (request, previous, kind) in inputs {
+            let cooked = cook(root, cache_override, request, previous, kind).map_err(|source| {
+                ImportError::Cook {
+                    path: request.source.clone(),
+                    source,
+                }
+            })?;
             imports.push(cooked);
         }
         Ok(PreparedImports {
@@ -223,15 +232,22 @@ fn validate_path(source: &str) -> Result<()> {
     Ok(())
 }
 
+#[derive(Clone, Copy, PartialEq)]
+enum ImportKind {
+    Model,
+    Texture,
+    Audio,
+}
+
 fn cook(
     root: &Path,
     cache_override: Option<&Path>,
     request: &ImportRequest,
     previous: Option<&Asset>,
-    model: bool,
+    kind: ImportKind,
 ) -> incant_assets::Result<ImportOutcome> {
     let source = Path::new(&request.source);
-    let (kind, fingerprint, cache_hit, import_settings, details) = if model {
+    let (kind, fingerprint, cache_hit, import_settings, details) = if kind == ImportKind::Model {
         let cache = cache_directory(root, cache_override, "models")?;
         let cooked = cook_gltf(root, source, &cache)?;
         (
@@ -244,6 +260,23 @@ fn cook(
                 textures: cooked.images.len(),
                 vertices: cooked.meshes.iter().map(|m| m.vertices.len()).sum(),
                 dependencies: cooked.metadata.dependencies,
+            },
+        )
+    } else if kind == ImportKind::Audio {
+        let cache = cache_directory(root, cache_override, "audio")?;
+        let cooked = cook_audio(root, source, &cache)?;
+        let metadata = cooked.metadata;
+        (
+            "audio",
+            metadata.fingerprint,
+            cooked.cache_hit,
+            None,
+            ImportDetails::Audio {
+                sample_rate: metadata.sample_rate,
+                channels: metadata.channels,
+                frames: metadata.frames,
+                duration_seconds: metadata.frames as f64 / f64::from(metadata.sample_rate),
+                dependencies: vec![metadata.dependency],
             },
         )
     } else {

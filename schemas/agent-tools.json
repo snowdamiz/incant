@@ -1034,7 +1034,7 @@
     "type": "function"
   },
   {
-    "description": "Cook 1–64 existing project-relative glTF/GLB/PNG/JPEG/EXR sources and commit one atomic undoable transaction. Omit texture_usage to preserve it on reimport. Requires approval under destructive/always modes. No URLs, absolute paths or parent traversal.",
+    "description": "Cook 1–64 existing project-relative glTF/GLB/PNG/JPEG/EXR/WAV/OGG sources and commit one atomic undoable transaction. Omit texture_usage to preserve it on reimport. Requires approval under destructive/always modes. No URLs, absolute paths or parent traversal.",
     "name": "asset_import",
     "parameters": {
       "$defs": {

@@ -1,0 +1,95 @@
+{
+  "$defs": {
+    "AudioSpatial": {
+      "additionalProperties": false,
+      "properties": {
+        "max_distance": {
+          "format": "float",
+          "maximum": 1000000,
+          "minimum": 0.01,
+          "type": "number"
+        },
+        "min_distance": {
+          "format": "float",
+          "maximum": 1000000,
+          "minimum": 0.01,
+          "type": "number"
+        }
+      },
+      "required": [
+        "min_distance",
+        "max_distance"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bus": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "clip": {
+      "type": "string"
+    },
+    "gain_db": {
+      "format": "float",
+      "maximum": 24,
+      "minimum": -80,
+      "type": "number"
+    },
+    "looping": {
+      "type": "boolean"
+    },
+    "pan": {
+      "format": "float",
+      "maximum": 1,
+      "minimum": -1,
+      "type": "number"
+    },
+    "playing": {
+      "type": "boolean"
+    },
+    "rate": {
+      "format": "double",
+      "maximum": 4,
+      "minimum": 0.25,
+      "type": "number"
+    },
+    "spatial": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AudioSpatial"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Distances in world meters; requires Transform and a unique listener."
+    },
+    "start_seconds": {
+      "format": "double",
+      "maximum": 3600,
+      "minimum": 0,
+      "type": "number"
+    },
+    "streaming": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "clip",
+    "gain_db",
+    "pan",
+    "rate",
+    "start_seconds",
+    "playing",
+    "looping",
+    "streaming"
+  ],
+  "title": "AudioSource",
+  "type": "object"
+}

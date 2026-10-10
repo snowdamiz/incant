@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+symphonia = { version = "=0.6.0", default-features = false, features = ["wav", "pcm", "ogg", "vorbis"] }
 incant_doc = { workspace = true }
 exr = { version = "=1.74.2", default-features = false }
 serde = { workspace = true }
