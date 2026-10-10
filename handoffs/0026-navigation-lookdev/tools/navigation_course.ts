@@ -86,7 +86,12 @@ function place(api: ScriptApi, ids: Ids, entity: string, at: Vec3, rotation: num
   });
 }
 
-function drawRoute(api: ScriptApi, ids: Ids, points: number[][], dots: string[], links: string[]) {
+function drawRoute(api: ScriptApi, ids: Ids, points: number[][], dots: string[], links: string[], pool: string, tick: number) {
+  // Coverage record: every returned point needs a dot and every segment a link.
+  const segments = Math.max(points.length - 1, 0);
+  const covered = points.length <= dots.length && segments <= links.length;
+  api.log(JSON.stringify({ event: 'markers', t: tick, pool, points: points.length, dots: dots.length,
+    segments, links: links.length, covered }), covered ? 'info' : 'error');
   dots.forEach((id, i) => {
     const p = points[i];
     place(api, ids, id, p ? [p[0]!, p[1]! + MARK_LIFT, p[2]!] : PARKED);
@@ -129,8 +134,8 @@ export default defineBehavior<State & Record<string, Json>>({
         pocket ? 'error' : 'info');
       if (!route) throw Error(`expected a route at tick ${state.tick}`);
       if (route.generation === state.generation) api.log(`generation unchanged at tick ${state.tick}`, 'warn');
-      if (state.routes > 0) drawRoute(api, ids, state.route, ids.oldDots, ids.oldLinks);
-      drawRoute(api, ids, route.points, ids.activeDots, ids.activeLinks);
+      if (state.routes > 0) drawRoute(api, ids, state.route, ids.oldDots, ids.oldLinks, 'old', state.tick);
+      drawRoute(api, ids, route.points, ids.activeDots, ids.activeLinks, 'active', state.tick);
       state.route = route.points;
       state.index = 1;
       state.routes += 1;
