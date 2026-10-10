@@ -49,19 +49,24 @@ The capture indicator still hides the traffic lights; exact light alignment, a
 settled fullscreen capture, minimum window size and the newest F2 fix need follow-up.
 A browser fixture or compiled app does not prove those native details.
 
-## Open decisions from PLAN.md section 12
+## Decisions from PLAN.md section 12
 
-| Decision | Current disposition |
+On 2026-10-10 the director instructed agents to resolve every open decision with
+engineering judgment. PLAN.md section 12 records all 27 decisions and the
+human-owned actions that remain. Recording these decisions does not approve this
+gate or complete any listed human-owned action.
+
+| Decision | Disposition |
 |---|---|
-| React versus Solid | React is the implemented proposal in ADR 0009 |
-| Loro versus Automerge | Loro is the implemented proposal, with both benchmark results retained in ADR 0008 |
-| Managed identity versus self-hosted accounts | ADR 0012 separates optional cloud metadata from local provider login; the identity operating choice still requires director review before service implementation |
-| RON versus JSON | Canonical typed JSON with derived JSON Schemas is implemented in ADR 0008 |
-| Browser editor in 1.0 or 1.1 | PLAN.md's definition of done includes it in 1.0; the WASM probe is not the delivered browser editor |
-| Engine license/business model | No license or paid-cloud business decision has been made on the director's behalf |
-| Game name and engine-name clearance/reservations | Driftwake remains a placeholder. Incant is the chosen engine name; trademark/domain/package reservations are not represented as complete |
-| Codex execution mode | Phase 0 work has used local Codex/CLI, local Claude ACP and hosted CI; no cloud Codex deployment is claimed |
-| Approval mode by risk | Reversible local implementation/tests proceed autonomously. Claude ACP bypassPermissions was explicitly authorized. Agents merge completed PRs after review and passing checks under the 2026-10-09 authorization. Phase approval, signing, purchases and legal/staffing actions remain director-owned |
+| React versus Solid | React (decision 1, ADR 0009) |
+| Loro versus Automerge | Loro, one document per scene; Automerge fallback with a measured switch rule (decision 2, ADR 0008) |
+| Managed identity versus self-hosted accounts | WorkOS AuthKit behind OpenID Connect, Zitadel as replacement; game player identity self-hosted (decision 3, ADR 0012). Account creation is human-owned |
+| RON versus JSON | Canonical typed JSON with derived JSON Schemas (decision 4, ADR 0008) |
+| Browser editor in 1.0 or 1.1 | 1.0 with a defined scope (decision 5, ADR 0009); not yet delivered |
+| Engine license/business model | MIT OR Apache-2.0, royalty-free, repository public at the Phase 8 beta, revenue from Incant Cloud and Driftwake (decision 6) |
+| Game name and engine-name clearance/reservations | Driftwake, then Hollowtide, then Ebbfall if clearance fails (decision 7). Trademark, domain and package reservations remain human-owned and are not represented as complete |
+| Codex execution mode | Both CLI and cloud tasks (decision 8); no cloud Codex deployment is claimed |
+| Approval mode by risk | Settled by the 2026-10-08 and 2026-10-09 director decisions (decision 9). Claude ACP bypassPermissions was explicitly authorized. Phase approval, signing, purchases and legal/staffing actions remain director-owned |
 
 ## Order for remaining work
 
