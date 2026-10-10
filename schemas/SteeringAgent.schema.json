@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "height": {
+      "format": "float",
+      "type": "number"
+    },
+    "id": {
+      "type": "string"
+    },
+    "max_speed": {
+      "format": "float",
+      "type": "number"
+    },
+    "position": {
+      "description": "World-space feet, with +Y up. Avoidance operates in the horizontal XZ plane.",
+      "items": {
+        "format": "float",
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "preferred_velocity": {
+      "items": {
+        "format": "float",
+        "type": "number"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "radius": {
+      "format": "float",
+      "type": "number"
+    },
+    "responsibility": {
+      "format": "float",
+      "type": "number"
+    },
+    "velocity": {
+      "items": {
+        "format": "float",
+        "type": "number"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "position",
+    "velocity",
+    "preferred_velocity",
+    "radius",
+    "height",
+    "max_speed",
+    "responsibility"
+  ],
+  "title": "SteeringAgent",
+  "type": "object"
+}

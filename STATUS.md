@@ -60,6 +60,63 @@ within its documented workload.
   checks and Claude's rendered review remain pending. This does not claim the
   full 2D renderer/tilemap/physics milestone. See [grid navigation](docs/spikes/grid-navigation.md).
 
+- The near-head-on steering correction passes the unchanged public and rendered
+  plaza course: all 100 walkers stay at goal from tick 2212 through 4990, with
+  no body overlap or persistent orbit. Both repetitions match 803 frames and
+  13 logs. Long lateral sweeps and brief goal-slot jostling remain documented.
+  All 286 Rust, 40 GPU, 315 UI and five tool tests, Clippy, contracts, native
+  packaging and target compilation pass. Final hosted checks remain before
+  merging PR #36. See [steering evidence](docs/spikes/navigation-steering.md).
+
+- Script CPU accounting is being verified separately from diagnostics PR #38.
+  Initialization/tick budgets now use the executing thread's CPU time, excluding
+  host pauses and other threads. Real waiting/CPU-exhaustion tests, VM interrupts,
+  zero-budget initialization and fail-closed clock handling cover the change.
+  All 298 Rust, 40 GPU, 315 UI and five tool tests pass, as do Clippy, strict
+  contracts, native packaging and both public steering/off-mesh saved workflows.
+  Integration at `735842c` passes all 300 Rust tests, Clippy, both public saved
+  workflows and native packaging. The full plaza exactly matches the reviewed
+  wall-clock binary. Updated hosted checks and dependency merges remain. See
+  [CPU budget details](docs/spikes/script-cpu-budget.md).
+
+- Script failures now distinguish bounded initialization/tick JavaScript messages,
+  native allocation failures and wall-clock deadlines. Both CLI paths identify
+  the absolute failing tick, including after save/reopen, and suppress failed-tick
+  logs/state/save publication. Five new behavior tests bring the integrated Rust
+  suite to 294 passing tests. Clippy, both public navigation/steering saved
+  workflows and native packaging pass. No script limit or capability changed;
+  sleep/load sensitivity remains open. Hosted checks and dependency merges are
+  pending. At `bb8b597`, all 296 Rust tests, Clippy, both public saved workflows
+  and native packaging pass with the final steering correction; its rendered
+  review passes too. See [script diagnostics](docs/spikes/script-diagnostics.md).
+
+- Authored off-mesh links support directed/bidirectional gaps, enable toggles,
+  costs, endpoint validation and per-leg route metadata through shared commands.
+  Invalid runtime landings cannot publish partial script/document state. At
+  `ccd6d33`, 289 Rust, 40 GPU, 315 UI and five tool tests pass, alongside Clippy,
+  contracts, native packaging and target compilation. Claude's two rendered runs
+  match 593 frames and 26 logs; mid-drop reopen matches all 49 window frames.
+  Session-local generations differ on reopen. Quantized heights visibly leave
+  an ungrounded logical walker 5 cm above a flat platform; exact source heights
+  remain open. The steering correction is integrated at `61cf71d`; all 289 Rust
+  tests, Clippy, both public saved workflows and native packaging pass again.
+  At `2568cf5`, all 291 Rust tests, Clippy, both public saved workflows and native
+  packaging pass with the final steering correction, whose rendered review now
+  passes too. Hosted checks and dependency merges remain pending. See [off-mesh links](docs/spikes/navigation-links.md).
+
+- Bounded local avoidance exposes read-only `api.steerAgents` proposals for up
+  to 128 agents. Library and public 100-agent save/reopen workflows pass.
+  Claude's four-way plaza review completed twice with 803 identical frames and
+  13 identical logs, no body overlaps and eventual arrival for all walkers.
+  Goal-block standoffs and large lateral detours remain behavior-level limits;
+  host sleep/load can trigger the existing script wall-clock deadline. The
+  integrated branch passes 284 Rust, 40 GPU, 315 UI and five tool tests, Clippy,
+  SDK checks, native packaging and WASM/iOS compilation. PR #36 Linux CI exposed
+  a symmetric-crowd arrival failure while eleven other checks passed. A consistent
+  passing preference now passes twelve rotated/staggered cases locally; full
+  revalidation found a rendered regression: only 26/100 at goal after 2700 ticks.
+  The refined candidate applies the preference only to opposing traffic; the
+  original plaza must pass again before merge despite green hosted checks. See [steering evidence](docs/spikes/navigation-steering.md).
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
   with funnel smoothing and connected visibility repair. Claude's rendered
@@ -71,11 +128,12 @@ within its documented workload.
   [navigation evidence](docs/spikes/navigation-runtime.md). PR #35's scoped implementation
   and v9 rendered review are complete: both 600-tick runs match 726 frames/logs,
   with no query exceptions and grounding on every tick. All twelve CI checks
-  passed on d7517b0; final report changes await current-head checks before merge. Quantized height
+  passed at `1928138`; PR #35 merged as `302613c` with its tested tree unchanged. Quantized height
   detail can undershoot true step discontinuities; physics owns grounding.
   Steering is implemented and reviewed on its separate integration branch;
   off-mesh links are in integration checks. Grid navigation, native Inspector/
   debug draw and Core Sample/device gates remain open.
+
 
 - XLIFF translator exchange exports typed tables and imports matching targets
   through one reversible shared-command transaction. Unknown/stale sources,

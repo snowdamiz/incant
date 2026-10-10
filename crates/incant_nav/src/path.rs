@@ -1,5 +1,5 @@
 use crate::{NavigationError, NavigationMesh, invalid};
-use glam::{DVec3, Vec3};
+use glam::DVec3;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -20,11 +20,16 @@ pub struct NavigationPath {
     pub corridor: Vec<u32>,
     pub visited: u32,
     pub generation: u64,
+    /// Consecutive point pairs that require explicit gameplay traversal. Never
+    /// treat these as walkable segments or feed them directly to ground steering.
+    pub traversals: Vec<crate::OffMeshTraversal>,
 }
 impl NavigationMesh {
     pub fn find_path(&self, q: &PathRequest) -> Result<Option<NavigationPath>, NavigationError> {
         let mut result = self.corridor_path(q)?;
-        if let Some(path) = &mut result {
+        if let Some(path) = &mut result
+            && path.traversals.is_empty()
+        {
             self.shortcut(path, q.max_visited);
         }
         Ok(result)
@@ -52,41 +57,10 @@ impl NavigationMesh {
         let Some((last, end)) = self.nearest(q.end, q.snap_distance) else {
             return Ok(None);
         };
-        let centers: Vec<_> = self
-            .polygons
-            .iter()
-            .map(|p| {
-                p.vertices
-                    .iter()
-                    .map(|p| Vec3::from_array(*p))
-                    .sum::<Vec3>()
-                    / p.vertices.len() as f32
-            })
-            .collect();
         let Some(route) = self.search_portals(first, last, start, end, q.max_visited)? else {
             return Ok(None);
         };
-        let corridor = route.corridor;
-        let mut gates = vec![(start, start)];
-        for (from, edge) in route.edges {
-            let p = &self.portals[from][edge];
-            let a = Vec3::from_array(p.a);
-            let b = Vec3::from_array(p.b);
-            let forward = centers[p.to] - centers[from];
-            let from_mid = a - (a + b) * 0.5;
-            gates.push(if forward.x * from_mid.z - forward.z * from_mid.x > 0. {
-                (p.a, p.b)
-            } else {
-                (p.b, p.a)
-            });
-        }
-        gates.push((end, end));
-        Ok(Some(NavigationPath {
-            points: crate::surface::follow(&self.polygons, &corridor, &gates, &funnel(&gates))?,
-            corridor: corridor.into_iter().map(|i| i as u32).collect(),
-            visited: route.visited,
-            generation: self.generation(),
-        }))
+        self.surface_route(route, start, end).map(Some)
     }
     pub(crate) fn nearest(&self, p: [f32; 3], max: f32) -> Option<(usize, [f32; 3])> {
         // Squared distances at centimetre edges lose their ordering in f32
@@ -142,7 +116,7 @@ fn cross(a: [f32; 3], b: [f32; 3], c: [f32; 3]) -> f64 {
 fn same(a: [f32; 3], b: [f32; 3]) -> bool {
     (a[0] - b[0]).abs() < 1e-5 && (a[2] - b[2]).abs() < 1e-5
 }
-fn funnel(gates: &[([f32; 3], [f32; 3])]) -> Vec<[f32; 3]> {
+pub(crate) fn funnel(gates: &[([f32; 3], [f32; 3])]) -> Vec<[f32; 3]> {
     let mut points = vec![gates[0].0];
     let mut apex = gates[0].0;
     let mut left = apex;
@@ -191,6 +165,7 @@ fn funnel(gates: &[([f32; 3], [f32; 3])]) -> Vec<[f32; 3]> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use glam::Vec3;
     #[test]
     fn snapped_edge_rounding_does_not_break_short_paths() {
         // Three adjacent polygons from the rendered room. Above the floor,

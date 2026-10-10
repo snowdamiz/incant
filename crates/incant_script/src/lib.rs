@@ -1,5 +1,7 @@
 //! QuickJS sandbox for SWC-compiled TypeScript. No OS, filesystem, module loader,
 //! network, native plugins or shell are installed into the runtime.
+mod budget;
+mod diagnostics;
 mod localization;
 mod logs;
 mod play;
@@ -12,20 +14,31 @@ mod queries;
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::Origin;
 pub use logs::{LogLevel, ScriptLog};
-use queries::{CharacterMover, Navigator, Raycaster};
+use queries::{CharacterMover, Navigator, Raycaster, Steerer};
 use rquickjs::{Context, Runtime};
 use serde::Deserialize;
 use serde_json::Value;
 use std::{
     sync::{Arc, Mutex},
-    time::{Duration, Instant},
+    time::Duration,
 };
 use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum ScriptError {
-    #[error("script failed (syntax, exception, memory limit or execution deadline)")]
+    #[error("script engine failed without a JavaScript diagnostic")]
     Execution,
+    #[error("script execution exceeded its {budget_ms} ms thread CPU budget")]
+    ExecutionDeadline { budget_ms: u128 },
+    #[error("script CPU budget clock {reason}")]
+    CpuClock { reason: &'static str },
+    #[error("script engine memory allocation failed (configured limit: 32 MiB)")]
+    MemoryAllocation,
+    #[error("script {phase} failed: {message}")]
+    Javascript {
+        phase: &'static str,
+        message: String,
+    },
     #[error("script result is invalid: {0}")]
     Result(#[from] serde_json::Error),
     #[error(transparent)]
@@ -78,10 +91,11 @@ pub struct ScriptHost {
     character_mover: Option<CharacterMover>,
     navigator: Option<Navigator>,
     grid_navigator: Option<queries::GridNavigator>,
+    steerer: Option<Steerer>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
     context: Context,
     _runtime: Runtime,
-    deadline: Arc<Mutex<Instant>>,
+    deadline: Arc<Mutex<budget::ExecutionBudget>>,
     budget: Duration,
     state: Value,
     logs: Vec<ScriptLog>,
@@ -92,19 +106,22 @@ impl ScriptHost {
     pub fn new(compiled_source: &str) -> Result<Self, ScriptError> {
         Self::with_budget(compiled_source, Duration::from_millis(50))
     }
+    /// Limit initialization and each update to CPU time on the executing thread.
+    /// Descheduling and work on other threads are excluded. Native calls are
+    /// checked on return; this is not a hard wall-time/frame-time deadline.
     pub fn with_budget(compiled_source: &str, budget: Duration) -> Result<Self, ScriptError> {
         if compiled_source.len() > 1_000_000 {
             return Err(ScriptError::InputLimit);
         }
-        let runtime = Runtime::new().map_err(|_| ScriptError::Execution)?;
+        let runtime = Runtime::new().map_err(diagnostics::allocation)?;
         runtime.set_memory_limit(32 * 1024 * 1024);
         runtime.set_max_stack_size(1024 * 1024);
-        let deadline = Arc::new(Mutex::new(Instant::now() + budget));
+        let deadline = Arc::new(Mutex::new(budget::ExecutionBudget::new(budget)?));
         let timer = deadline.clone();
         runtime.set_interrupt_handler(Some(Box::new(move || {
-            Instant::now() >= *timer.lock().unwrap_or_else(|e| e.into_inner())
+            timer.lock().unwrap_or_else(|e| e.into_inner()).expired()
         })));
-        let context = Context::full(&runtime).map_err(|_| ScriptError::Execution)?;
+        let context = Context::full(&runtime).map_err(diagnostics::allocation)?;
         let source = format!(
             r#"
    globalThis.defineBehavior = x => x;
@@ -117,9 +134,11 @@ impl ScriptHost {
   "#,
             include_str!("runtime.js")
         );
-        let initial = context
-            .with(|ctx| ctx.eval::<String, _>(source))
-            .map_err(|_| ScriptError::Execution)?;
+        let initial = context.with(|ctx| {
+            ctx.eval::<String, _>(source)
+                .map_err(|error| diagnostics::javascript(&ctx, error, "initialization", &deadline))
+        })?;
+        diagnostics::check_deadline(&deadline)?;
         let initial: InitialState = serde_json::from_str(&initial)?;
         if serde_json::to_vec(&initial.state)?.len() > 1024 * 1024 {
             return Err(ScriptError::InputLimit);
@@ -131,6 +150,7 @@ impl ScriptHost {
             character_mover: None,
             navigator: None,
             grid_navigator: None,
+            steerer: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
             context,
             _runtime: runtime,
@@ -161,6 +181,7 @@ impl ScriptHost {
         next.character_mover = self.character_mover.clone();
         next.navigator = self.navigator.clone();
         next.grid_navigator = self.grid_navigator.clone();
+        next.steerer = self.steerer.clone();
         next.install_queries()?;
         if self.schedule.has_timers() && !next.has_timer_handler {
             return Err(ScriptError::TimerHandler);
@@ -180,7 +201,7 @@ impl ScriptHost {
     pub fn tick(&mut self, bus: &mut CommandBus, dt: f64) -> Result<usize, ScriptError> {
         let mut input = incant_input::InputRuntime::default();
         input.map_actions(&bus.project().settings.input_actions)?;
-        self.tick_with_events(bus, dt, &[], input.frame())
+        self.tick_with_events(bus, dt, &[], input.frame(), |_| Ok(()))
     }
     fn tick_with_events(
         &mut self,
@@ -188,6 +209,7 @@ impl ScriptHost {
         dt: f64,
         events: &[incant_core::TriggerEvent],
         input: &incant_input::InputFrame,
+        validate_runtime: impl FnOnce(&incant_doc::Project) -> Result<(), ScriptError>,
     ) -> Result<usize, ScriptError> {
         self.query_count
             .store(0, std::sync::atomic::Ordering::Relaxed);
@@ -204,12 +226,17 @@ impl ScriptHost {
         if world.len() > 16 * 1024 * 1024 || state.len() > 1024 * 1024 {
             return Err(ScriptError::InputLimit);
         }
-        *self.deadline.lock().unwrap_or_else(|e| e.into_inner()) = Instant::now() + self.budget;
-        let result = self
-            .context
-            .with(|ctx| {
-                let function: rquickjs::Function = ctx.globals().get("__tick")?;
-                function.call::<_, String>((
+        self.deadline
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .reset()?;
+        let result = self.context.with(|ctx| {
+            let function: rquickjs::Function = ctx
+                .globals()
+                .get("__tick")
+                .map_err(diagnostics::allocation)?;
+            function
+                .call::<_, String>((
                     world,
                     dt,
                     state,
@@ -218,14 +245,12 @@ impl ScriptHost {
                     serde_json::to_string(&schedule.clock).expect("validated script clock"),
                     serde_json::to_string(&timer_events).expect("validated timer events"),
                 ))
-            })
-            .map_err(|_| ScriptError::Execution)?;
+                .map_err(|error| diagnostics::javascript(&ctx, error, "tick", &self.deadline))
+        })?;
         // Native queries cannot be interrupted in the middle of a solver call.
         // Even if script code catches a query error, an expired tick must not
         // commit commands, logs or state after control returns to the host.
-        if Instant::now() >= *self.deadline.lock().unwrap_or_else(|e| e.into_inner()) {
-            return Err(ScriptError::Execution);
-        }
+        diagnostics::check_deadline(&self.deadline)?;
         if result.len() > 16 * 1024 * 1024 {
             return Err(ScriptError::InputLimit);
         }
@@ -257,6 +282,7 @@ impl ScriptHost {
                 None,
             )?;
         }
+        validate_runtime(bus.project())?;
         self.state = output.state;
         self.schedule = schedule;
         self.logs.extend(output.logs);
@@ -294,6 +320,7 @@ mod tests {
     use super::*;
     use incant_doc::Project;
     use serde_json::json;
+    use std::time::Instant;
     #[test]
     fn sandbox_has_no_host_capabilities() {
         let source = r#"exports.default=defineBehavior({initialState:{safe:false},update(api,dt,state){state.safe=[typeof require,typeof process,typeof fetch,typeof std,typeof os].every(x=>x==='undefined');}});"#;
@@ -311,7 +338,10 @@ mod tests {
         .unwrap();
         let mut bus = CommandBus::new(Project::empty("sandbox")).unwrap();
         let start = Instant::now();
-        assert!(host.tick(&mut bus, 1. / 60.).is_err());
+        assert!(matches!(
+            host.tick(&mut bus, 1. / 60.),
+            Err(ScriptError::ExecutionDeadline { budget_ms: 10 })
+        ));
         assert!(start.elapsed() < Duration::from_secs(1));
     }
     #[test]
@@ -326,14 +356,77 @@ mod tests {
         let mark = called.clone();
         host.raycaster = Some(Arc::new(move |_| {
             mark.store(true, std::sync::atomic::Ordering::Relaxed);
-            *deadline.lock().unwrap() = Instant::now() - Duration::from_secs(1);
+            deadline.lock().unwrap().exhaust();
             Ok(None)
         }));
         host.install_queries().unwrap();
         let mut bus = CommandBus::new(Project::empty("query deadline")).unwrap();
-        assert!(host.tick(&mut bus, 1. / 60.).is_err());
+        assert!(matches!(
+            host.tick(&mut bus, 1. / 60.),
+            Err(ScriptError::ExecutionDeadline { budget_ms: 50 })
+        ));
         assert!(called.load(std::sync::atomic::Ordering::Relaxed));
         assert_eq!(host.state()["ok"], false);
+        assert!(host.take_logs().is_empty());
+    }
+    #[test]
+    fn suspended_native_callback_and_other_threads_do_not_consume_script_cpu_budget() {
+        let source = r#"exports.default={initialState:{ok:false},update(api,dt,state){
+          api.raycast({scene_id:'x',origin:[0,0,0],direction:[0,-1,0],max_distance:1,include_sensors:false,exclude_entity:null,memberships:1,filter:1});
+          state.ok=true; api.log('committed');
+        }};"#;
+        let mut host = ScriptHost::new(source).unwrap();
+        host.raycaster = Some(Arc::new(move |_| {
+            let worker = std::thread::spawn(|| {
+                let start = cpu_time::ThreadTime::try_now().unwrap();
+                while start.try_elapsed().unwrap() < Duration::from_millis(100) {
+                    std::hint::black_box(42_u64.wrapping_mul(97));
+                }
+            });
+            // Simulates a descheduled host callback; scripts receive no sleep API.
+            std::thread::sleep(Duration::from_millis(120));
+            worker.join().unwrap();
+            Ok(None)
+        }));
+        host.install_queries().unwrap();
+        let mut bus = CommandBus::new(Project::empty("CPU budget")).unwrap();
+        let start = Instant::now();
+        host.tick(&mut bus, 1. / 60.).unwrap();
+        assert!(start.elapsed() >= Duration::from_millis(120));
+        assert_eq!(host.state()["ok"], true);
+        assert_eq!(host.clock().tick, 1);
+        assert_eq!(host.take_logs()[0].message, "committed");
+    }
+    #[test]
+    fn zero_cpu_budget_rejects_even_short_initialization() {
+        assert!(matches!(
+            ScriptHost::with_budget("exports.default={update(){}};", Duration::ZERO),
+            Err(ScriptError::ExecutionDeadline { budget_ms: 0 })
+        ));
+    }
+    #[test]
+    fn actual_native_cpu_exhaustion_rolls_back_even_if_script_catches_the_error() {
+        let mut host = ScriptHost::new(r#"exports.default={initialState:{ok:false},update(api,dt,state){
+          try { api.raycast({scene_id:'x',origin:[0,0,0],direction:[0,-1,0],max_distance:1,include_sensors:false,exclude_entity:null,memberships:1,filter:1}); } catch(e) {}
+          state.ok=true; api.log('must not commit');
+        }};"#).unwrap();
+        host.raycaster = Some(Arc::new(|_| {
+            let start = cpu_time::ThreadTime::try_now().unwrap();
+            while start.try_elapsed().unwrap() < Duration::from_millis(80) {
+                std::hint::black_box(42_u64.wrapping_mul(97));
+            }
+            Ok(None)
+        }));
+        host.install_queries().unwrap();
+        let mut bus = CommandBus::new(Project::empty("native CPU exhaustion")).unwrap();
+        let before = bus.project().clone();
+        assert!(matches!(
+            host.tick(&mut bus, 1. / 60.),
+            Err(ScriptError::ExecutionDeadline { budget_ms: 50 })
+        ));
+        assert_eq!(host.state()["ok"], false);
+        assert_eq!(host.clock().tick, 0);
+        assert_eq!(bus.project(), &before);
         assert!(host.take_logs().is_empty());
     }
     #[test]

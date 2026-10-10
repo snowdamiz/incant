@@ -4,15 +4,22 @@ use crate::{NavigationError, NavigationMesh, invalid, limit};
 use glam::Vec3;
 use std::{cmp::Ordering, collections::BinaryHeap};
 
+#[derive(Clone, Copy)]
+pub(crate) enum Edge {
+    Portal { from: usize, edge: usize },
+    Link { index: usize, reversed: bool },
+}
 pub(crate) struct Route {
     pub corridor: Vec<usize>,
-    pub edges: Vec<(usize, usize)>,
+    pub edges: Vec<Edge>,
     pub visited: u32,
 }
 struct State {
     poly: usize,
     at: Vec3,
-    edge: Option<(usize, usize)>,
+    edge: Option<Edge>,
+    enter: Vec3,
+    traversal_cost: f32,
 }
 #[derive(Clone, Copy)]
 struct Entry {
@@ -63,6 +70,8 @@ impl NavigationMesh {
             poly: first,
             at: Vec3::from_array(start),
             edge: None,
+            enter: Vec3::from_array(start),
+            traversal_cost: 0.,
         }];
         let mut outgoing = vec![vec![]; self.polygons.len()];
         for (from, portals) in self.portals.iter().enumerate() {
@@ -71,7 +80,31 @@ impl NavigationMesh {
                 states.push(State {
                     poly: p.to,
                     at: (Vec3::from_array(p.a) + Vec3::from_array(p.b)) * 0.5,
-                    edge: Some((from, edge)),
+                    edge: Some(Edge::Portal { from, edge }),
+                    enter: (Vec3::from_array(p.a) + Vec3::from_array(p.b)) * 0.5,
+                    traversal_cost: 0.,
+                });
+            }
+        }
+        for (index, link) in self.links.iter().enumerate() {
+            for reversed in [false, true] {
+                if reversed && !link.bidirectional {
+                    continue;
+                }
+                let (from, to, enter, at) = if reversed {
+                    (link.last, link.first, link.end, link.start)
+                } else {
+                    (link.first, link.last, link.start, link.end)
+                };
+                outgoing[from].push(states.len());
+                let enter = Vec3::from_array(enter);
+                let at = Vec3::from_array(at);
+                states.push(State {
+                    poly: to,
+                    at,
+                    enter,
+                    traversal_cost: enter.distance(at) + link.extra_cost,
+                    edge: Some(Edge::Link { index, reversed }),
                 });
             }
         }
@@ -122,7 +155,8 @@ impl NavigationMesh {
                 }));
             }
             for &next in &outgoing[current.poly] {
-                let cost = g + current.at.distance(states[next].at);
+                let cost =
+                    g + current.at.distance(states[next].enter) + states[next].traversal_cost;
                 if cost < costs[next] {
                     costs[next] = cost;
                     previous[next] = Some(index);

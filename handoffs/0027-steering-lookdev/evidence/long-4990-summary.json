@@ -1,0 +1,270 @@
+{
+ "ticks": [
+  1,
+  4990
+ ],
+ "walkers": 100,
+ "min_separation_m": 0.596,
+ "min_separation_tick": 1230,
+ "overlap_ticks": 0,
+ "ticks_with_pairs_inside_margin": 1804,
+ "min_plinth_gap_m": 0.0494,
+ "min_plinth_gap_tick": 531,
+ "min_post_gap_m": 0.05,
+ "min_post_gap_tick": 1465,
+ "max_actual_speed_mps": 1.465,
+ "all_arrived_tick": 2212,
+ "arrived_at_end": 100,
+ "never_arrived": [],
+ "first_arrival_range": [
+  922,
+  2212
+ ],
+ "latest_first_arrivals": [
+  [
+   2212,
+   "Walker E 2-0"
+  ],
+  [
+   2160,
+   "Walker E 1-0"
+  ],
+  [
+   2049,
+   "Walker W 2-4"
+  ],
+  [
+   1873,
+   "Walker E 4-1"
+  ],
+  [
+   1852,
+   "Walker N 0-1"
+  ],
+  [
+   1827,
+   "Walker S 2-4"
+  ]
+ ],
+ "longest_stalls_ticks_start_walker": [
+  [
+   127,
+   1462,
+   "Walker S 4-4"
+  ],
+  [
+   105,
+   1573,
+   "Walker E 4-3"
+  ],
+  [
+   98,
+   1814,
+   "Walker E 2-1"
+  ],
+  [
+   89,
+   1568,
+   "Walker E 4-4"
+  ],
+  [
+   53,
+   1528,
+   "Walker N 1-3"
+  ],
+  [
+   50,
+   1719,
+   "Walker S 2-3"
+  ]
+ ],
+ "walkers_with_stall_over_60_ticks": 4,
+ "max_detour_m": {
+  "E": [
+   12.78,
+   "Walker E 1-0"
+  ],
+  "N": [
+   11.99,
+   "Walker N 0-1"
+  ],
+  "S": [
+   8.11,
+   "Walker S 4-4"
+  ],
+  "W": [
+   12.65,
+   "Walker W 2-4"
+  ]
+ },
+ "motion": {
+  "heading_window_ticks": 6,
+  "sharp_turn_deg": 45.0,
+  "moving_mps": 0.2,
+  "sharp_turns_total": 250,
+  "walkers_with_sharp_turns": 88,
+  "most_sharp_turns": [
+   [
+    9,
+    "Walker W 0-2"
+   ],
+   [
+    7,
+    "Walker W 2-1"
+   ],
+   [
+    6,
+    "Walker W 1-3"
+   ],
+   [
+    6,
+    "Walker N 4-4"
+   ],
+   [
+    6,
+    "Walker E 4-3"
+   ]
+  ],
+  "reversals_total": 53,
+  "busiest_turn_ticks": [
+   [
+    1243,
+    9
+   ],
+   [
+    1237,
+    8
+   ],
+   [
+    1021,
+    7
+   ],
+   [
+    1279,
+    7
+   ],
+   [
+    1213,
+    6
+   ]
+  ],
+  "path_ratio_mean": 1.222,
+  "path_ratio_max": 1.844,
+  "settle_ticks_max": [
+   1243,
+   "Walker E 3-1"
+  ],
+  "settle_ticks_mean": 466.4
+ },
+ "behavior_row_mismatches": {
+  "separation": 0,
+  "arrived": 25,
+  "plinth_gap": 0
+ },
+ "max_arrived_count_difference": 1,
+ "first_mismatches": [
+  {
+   "t": 976,
+   "kinds": [
+    "arrived"
+   ],
+   "arrived_delta": 1,
+   "behavior": {
+    "t": 976,
+    "sep": 0.6,
+    "pair": [
+     "Walker E 3-4",
+     "Walker E 4-4"
+    ],
+    "overlaps": 0,
+    "in_margin": 9,
+    "plinth_gap": 0.666,
+    "post_gap": 0.789,
+    "v_max": 1.4,
+    "v_mean": 1.211,
+    "arrived": 5,
+    "stalled": 0,
+    "longest_stall": 0,
+    "neighbors": 28,
+    "remaining_max": 15.507
+   },
+   "independent": [
+    0.598965775316086,
+    4,
+    0.6651466421485406
+   ]
+  },
+  {
+   "t": 993,
+   "kinds": [
+    "arrived"
+   ],
+   "arrived_delta": 1,
+   "behavior": {
+    "t": 993,
+    "sep": 0.6,
+    "pair": [
+     "Walker N 2-0",
+     "Walker W 4-4"
+    ],
+    "overlaps": 0,
+    "in_margin": 7,
+    "plinth_gap": 0.886,
+    "post_gap": 1.122,
+    "v_max": 1.4,
+    "v_mean": 1.09,
+    "arrived": 11,
+    "stalled": 0,
+    "longest_stall": 0,
+    "neighbors": 27,
+    "remaining_max": 15.688
+   },
+   "independent": [
+    0.5991402173114406,
+    10,
+    0.886544069920153
+   ]
+  },
+  {
+   "t": 1024,
+   "kinds": [
+    "arrived"
+   ],
+   "arrived_delta": -1,
+   "behavior": {
+    "t": 1024,
+    "sep": 0.6,
+    "pair": [
+     "Walker S 1-2",
+     "Walker W 2-4"
+    ],
+    "overlaps": 0,
+    "in_margin": 2,
+    "plinth_gap": 1.461,
+    "post_gap": 1.725,
+    "v_max": 1.4,
+    "v_mean": 0.866,
+    "arrived": 23,
+    "stalled": 1,
+    "longest_stall": 27,
+    "neighbors": 26,
+    "remaining_max": 15.729
+   },
+   "independent": [
+    0.5994138803864991,
+    24,
+    1.4602992332774098
+   ]
+  }
+ ],
+ "events": [
+  {
+   "tick": 2212,
+   "level": "info",
+   "message": {
+    "event": "all-arrived",
+    "t": 2212
+   }
+  }
+ ]
+}

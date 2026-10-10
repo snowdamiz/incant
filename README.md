@@ -388,3 +388,5 @@ without its original source files. See [audio semantics and limits](docs/spikes/
 and `python3 tools/probes/game-audio.py artifacts/game-audio-cli` for a complete
 strict-TypeScript/import/RPC example. Native device controls and browser audio
 remain open; logical game saves do not preserve mixer playheads.
+
+The runtime also provides bounded reciprocal local avoidance through `api.steerAgents`; see [the contract and measured scope](docs/spikes/navigation-steering.md).

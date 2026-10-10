@@ -53,6 +53,7 @@ fn portal_search_avoids_the_rendered_room_tile_boundary_detour() {
     }
     let mut nav = Entity::new("Navigation");
     let mut component = NavigationMesh {
+        links: vec![],
         settings: Default::default(),
         sources,
     };
@@ -170,6 +171,7 @@ fn fixture() -> (Project, String, String, String) {
     nav.components.insert(
         "NavigationMesh".into(),
         json!(NavigationMesh {
+            links: vec![],
             settings: incant_nav::NavigationSettings {
                 min: [-10., -2., -6.],
                 max: [10., 5., 6.],
