@@ -1,6 +1,6 @@
 //! Native simulation loaded from checked binary scenes. This first migration
-//! slice supports spatial motion and typed 3D rigid-body/collider physics.
-//! Authoring and other gameplay systems remain outside until explicitly migrated.
+//! slice supports spatial motion, typed physics/audio/render declarations and
+//! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod audio;
 mod audio_binary;
 mod binary;
@@ -11,6 +11,10 @@ mod physics;
 mod physics_binary;
 mod save;
 mod scene;
+mod spatial;
+mod spatial_binary;
+mod spatial_commands;
+mod spatial_view;
 mod world;
 
 pub use audio::{
@@ -24,3 +28,9 @@ pub use physics::CookedPhysics;
 pub use save::{MAX_SAVE_BYTES, SaveError};
 pub use scene::{CookedEntity, CookedScene, SceneError, StableId};
 pub use world::{EntitySnapshot, NativeWorld, RuntimeError};
+
+pub use spatial::{
+    CookedSpatial, MAX_DIRECTIONAL_LIGHTS, MAX_LOCAL_LIGHTS, MAX_MESH_ENTITIES, MAX_SHADOW_LIGHTS,
+    MAX_VISUAL_ASSETS, NativeEnvironmentLight, NativeMeshRenderer, VisualAssetKind, VisualAssetRef,
+};
+pub use spatial_view::{SpatialNode, SpatialView};

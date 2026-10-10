@@ -75,12 +75,12 @@ fn unsupported_component_is_a_named_error_not_silently_omitted() {
         .unwrap()
         .components
         .insert(
-            "Camera".into(),
-            json!({"fov_degrees":60.,"near":0.1,"far":100.}),
+            "NavigationGrid".into(),
+            json!({"dimensions":[1,1],"costs":[1]}),
         );
     let error = cook_scene(&project, &scene).unwrap_err();
     assert!(
-        matches!(error, CookError::UnsupportedComponent { entity: id, component } if id == entity && component == "Camera")
+        matches!(error, CookError::UnsupportedComponent { entity: id, component } if id == entity && component == "NavigationGrid")
     );
 }
 

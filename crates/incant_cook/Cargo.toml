@@ -22,3 +22,8 @@ serde_json.workspace = true
 thiserror.workspace = true
 ulid = { workspace = true, optional = true }
 sha2 = { workspace = true, optional = true }
+
+[dev-dependencies]
+incant_assets = { path = "../incant_assets" }
+incant_assets_runtime = { workspace = true, features = ["visual"] }
+tempfile = "3"

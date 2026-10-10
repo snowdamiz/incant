@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "platform": "macOS 26.6 (25G72), aarch64",
+  "toolchain": "Rust/Cargo 1.99.0",
+  "release_tests": 120,
+  "failed_tests": 0,
+  "clippy": "pass; release all targets, warnings denied",
+  "normal_dependency_guard": "incant_runtime, incant_script, incant_assets_runtime pass",
+  "runners": [
+    {
+      "binary": "target/release/examples/run_scene",
+      "fixture": "plain",
+      "returncode": 0,
+      "stdout": "tick=0 entities=1\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\n",
+      "stderr": ""
+    },
+    {
+      "binary": "target/release/examples/run_scene",
+      "fixture": "camera",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: \"this motion probe has no spatial host\"\n"
+    },
+    {
+      "binary": "target/release/examples/run_scene",
+      "fixture": "manifest",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: \"this motion probe has no spatial host\"\n"
+    },
+    {
+      "binary": "target/release/incant_script_player",
+      "fixture": "plain",
+      "returncode": 0,
+      "stdout": "tick=0 entities=1\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\n",
+      "stderr": ""
+    },
+    {
+      "binary": "target/release/incant_script_player",
+      "fixture": "camera",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: \"this script probe has no spatial host\"\n"
+    },
+    {
+      "binary": "target/release/incant_script_player",
+      "fixture": "manifest",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error: \"this script probe has no spatial host\"\n"
+    }
+  ],
+  "source_free_binding": "Real model + scene cook; source directory removed before v4 decode and sealed RuntimeAsset load; stale recipe/wrong kind/corrupt payload reject without mutating retained version.",
+  "source_sha256": {
+    "Cargo.lock": "81baebfc5ca7deb0926fac3d5279ae15df3006acedd62e0ac635d9236ba47cd3",
+    "crates/incant_cook/Cargo.toml": "e00d74ac8f43d6d8e40f34618af2c10f0ce60ccb0e789337e9154cf36b781e30",
+    "crates/incant_cook/src/lib.rs": "d5d5680843e7ec9f2a67698d0e2d2aec83e5369ec098335d509b5d42231b3418",
+    "crates/incant_cook/src/scene.rs": "6a3785f4baebaf0f7adfdb98fddbc191f0812e19ee586b80be4dd3dd51753a3c",
+    "crates/incant_cook/tests/runtime.rs": "848447531ef84c5c9cfc4a0c6dcb5c47e6e152417cab602c4fa05ac33959962d",
+    "crates/incant_runtime/examples/run_scene.rs": "ba5d462927f1b14d3e7dee114cf3f2b1a105e0cd33168369d3a16bce87843e5b",
+    "crates/incant_runtime/src/binary.rs": "8c7a8ec05fa2dbcf3f0e692ebc1ee8f70afd50d2eee3dbca3c536176b975f255",
+    "crates/incant_runtime/src/commands.rs": "f573f62a0d91222fe90c76eba7918ab1c95009e34731f1f633fdad61529dd60d",
+    "crates/incant_runtime/src/lib.rs": "accd44c2d3f5b5a97295980500bf53e5b0dc75794b0a0858e92eb86853dc2cfa",
+    "crates/incant_runtime/src/save.rs": "aead81b02ea23307f8e1632bba6a41b28412cb5d535fcee56d18e5d5c51dfae2",
+    "crates/incant_runtime/src/scene.rs": "eb99228ef410492742b8e0a628a4527a3e825d0e20939e1456b48442cdd437b6",
+    "crates/incant_runtime/src/world.rs": "5d002f4a1cdd5164ac97318a39a75e8985f247f6c372827b429b35ce7421bf41",
+    "crates/incant_runtime/tests/physics.rs": "647d01144e26a5778918e96a42242077b4984719b70833807817ea2f398e76b1",
+    "crates/incant_runtime/tests/scenes.rs": "9f563824789de2357d31beeba034f448505841211d2fa72fa0729e74c25c54ea",
+    "crates/incant_script_player/src/main.rs": "0964e8599945fdd512bd537bc926d2c0de6ca137445db6f4f83b05b921483ab0",
+    "crates/incant_cook/src/spatial.rs": "12b3c1f3711a0c5b65d8fcc50915dde6f8ed8edd83c961828d89339a4b7472db",
+    "crates/incant_cook/tests/spatial.rs": "a5e512342942c5127ab613ee0776df97046d8f8d683e2c0337b3710401c6b3fa",
+    "crates/incant_runtime/src/spatial.rs": "3286909d0497c622063a2a456fa49dfd1667f57679df8bb23881e89e5e437517",
+    "crates/incant_runtime/src/spatial_binary.rs": "f08067177a8afd20ae2aab37f72de067a4d57c13d6d031cbc6eb6e4e71e33d60",
+    "crates/incant_runtime/src/spatial_commands.rs": "c1a003b8460d3667cdfcad95a639bc7a5bea8887b11ceffee2b9ff4e0cafe087",
+    "crates/incant_runtime/src/spatial_view.rs": "edac1dadfeedea65846b4bb369961fb9a49e521320feb8ae736bc27a612747de",
+    "crates/incant_runtime/tests/spatial.rs": "15028c8138cc29b24292b3643572b3c3bcfbb50e59eab672a44448da33864ee2",
+    "crates/incant_script/tests/spatial.rs": "fd4f31f03d78587f4667cc6c65168b2f030a98a225292d44f69d4cca79e21b21"
+  },
+  "local_log_sha256": {
+    "tests": "1bbf64c731f1fe07efee2e1637a7d7f5fc01f8eb9439b7177216dc045257f713",
+    "clippy": "714ec665f72e3b138a72355194839d03231add269c0eea4dab40a8a93d1b15e7",
+    "runners-build": "f380c2dab997d8766ad6adfdea3556e08caed0c830dddd42bf26c90bb545cfb8",
+    "dependencies": "6eedd1b43970ac50dd6e788dadc97dbc883adfd9b45a0c4ec36c188dcc59acd6"
+  },
+  "limitations": [
+    "No renderer, shader, UI or pixel marker implementation.",
+    "Scene fingerprints identify existing cache/source recipes; neither authentication nor necessarily full-payload hashes.",
+    "Renderer host must check Normal environment usage, expanded primitive/material/GPU limits and explicit camera selection.",
+    "No spatial save schema or full Play migration.",
+    "No hosted/device/performance or rendered-pixel gate claimed."
+  ]
+}

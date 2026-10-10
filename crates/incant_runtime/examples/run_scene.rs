@@ -31,6 +31,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     let ticks: u64 = args[1].parse()?;
     let mut world = incant_runtime::NativeWorld::from_bytes(&std::fs::read(&args[0])?)?;
+    let view = world.spatial_view()?;
+    if !view.assets().is_empty() || view.nodes().any(|n| n.declaration.is_some()) {
+        return Err("this motion probe has no spatial host".into());
+    }
     if world.audio_nodes().len() != 0 {
         return Err("this motion probe has no audio host; use the native scene audio host".into());
     }

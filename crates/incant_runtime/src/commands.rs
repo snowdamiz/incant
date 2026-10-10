@@ -28,6 +28,12 @@ pub enum StructuralCommand {
         entity: StableId,
         audio: Option<crate::CookedAudio>,
     },
+    /// Replace/remove render configuration using the immutable startup asset
+    /// table. The final bounded declarations are checked before publication.
+    SetSpatial {
+        entity: StableId,
+        spatial: Option<crate::CookedSpatial>,
+    },
     /// Add/replace/remove a checked physics declaration at this boundary. The
     /// nested entity ID must match. Removal retains linear motion as an ordinary
     /// native mover; body installation supplies missing zero motion components.
@@ -87,6 +93,9 @@ struct Staged {
     spins: BTreeMap<StableId, Option<AngularVelocity>>,
     prepared: BTreeMap<StableId, Option<PreparedBody>>,
     audio: BTreeMap<StableId, Option<crate::CookedAudio>>,
+    spatial: BTreeMap<StableId, Option<crate::CookedSpatial>>,
+    topology_generation: u64,
+    binding_generation: u64,
 }
 
 impl NativeWorld {
@@ -96,6 +105,13 @@ impl NativeWorld {
     pub fn apply(&mut self, commands: &mut FrameCommands) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
         if commands.is_empty() {
+            return Ok(());
+        }
+        if commands
+            .iter()
+            .all(|c| matches!(c, StructuralCommand::SetSpatial { .. }))
+        {
+            self.apply_spatial(commands)?;
             return Ok(());
         }
         // Audio-only changes inspect at most 161 audio nodes; no hierarchy copy.
@@ -200,6 +216,7 @@ impl NativeWorld {
             // handles/IDs are exclusively owned by this world until commit ends.
             for id in staged.removed {
                 self.audio_ids.remove(&id);
+                self.spatial_ids.remove(&id);
                 self.physics.remove(&self.scene_id(), &id);
                 let entity = self.entities.remove(&id).expect("staged entity");
                 self.world.despawn(entity);
@@ -208,6 +225,9 @@ impl NativeWorld {
                 self.entities.insert(id, spawn(&mut self.world, data));
             }
             self.install_velocities(staged.velocities);
+            for (id, node) in staged.spatial {
+                self.install_spatial(id, node);
+            }
             for (id, node) in staged.audio {
                 self.install_audio(id, node);
             }
@@ -246,6 +266,8 @@ impl NativeWorld {
                 hierarchy.nodes.push((entity, node.parent));
                 hierarchy.globals.push(node.world);
             }
+            self.topology_generation = staged.topology_generation;
+            self.binding_generation = staged.binding_generation;
             self.parents = staged.parents;
             self.world.insert_resource(hierarchy);
         }
@@ -297,10 +319,15 @@ impl NativeWorld {
         let mut physics = BTreeMap::new();
         let mut spins = BTreeMap::new();
         let mut audio = BTreeMap::new();
+        let mut spatial = BTreeMap::new();
         for command in commands.iter() {
             match command {
                 StructuralCommand::Spawn(data) => {
                     if data.id == self.scene_id()
+                        || self
+                            .visual_assets
+                            .binary_search_by_key(&data.id, |a| a.id)
+                            .is_ok()
                         || self.entities.contains_key(&data.id)
                         || !seen_spawns.insert(data.id)
                     {
@@ -319,6 +346,7 @@ impl NativeWorld {
                     physics.remove(id);
                     spins.remove(id);
                     audio.remove(id);
+                    spatial.remove(id);
                 }
                 StructuralCommand::SetParent { entity, parent } => {
                     *parents
@@ -336,6 +364,18 @@ impl NativeWorld {
                         return Err(SceneError::Invalid("audio entity reference").into());
                     }
                     audio.insert(*entity, node.clone());
+                }
+                StructuralCommand::SetSpatial {
+                    entity,
+                    spatial: node,
+                } => {
+                    if !parents.contains_key(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    if node.as_ref().is_some_and(|n| n.entity != *entity) {
+                        return Err(SceneError::Invalid("spatial entity reference").into());
+                    }
+                    spatial.insert(*entity, node.clone());
                 }
                 StructuralCommand::SetPhysics {
                     entity,
@@ -375,6 +415,14 @@ impl NativeWorld {
             return Err(SceneError::Invalid("entity limit").into());
         }
         self.validate_audio_changes(&audio, &parents)?;
+        let binding_generation = self.validate_spatial_changes(&spatial, &parents)?;
+        let topology_generation = if parents != self.parents {
+            self.topology_generation
+                .checked_add(1)
+                .ok_or(RuntimeError::GenerationOverflow)?
+        } else {
+            self.topology_generation
+        };
         let mut prepared = BTreeMap::new();
         for (&id, parent) in &parents {
             let live = self
@@ -463,6 +511,9 @@ impl NativeWorld {
             spins,
             prepared,
             audio,
+            spatial,
+            topology_generation,
+            binding_generation,
         })
     }
 }

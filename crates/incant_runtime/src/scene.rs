@@ -22,6 +22,8 @@ pub struct CookedScene {
     pub(crate) entities: Vec<CookedEntity>,
     pub(crate) physics: Vec<crate::CookedPhysics>,
     pub(crate) audio: Vec<crate::CookedAudio>,
+    pub(crate) spatial: Vec<crate::CookedSpatial>,
+    pub(crate) visual_assets: Vec<crate::VisualAssetRef>,
     pub(crate) topology: Vec<(usize, Option<usize>)>,
 }
 
@@ -75,6 +77,8 @@ impl CookedScene {
             topology,
             physics: Vec::new(),
             audio: Vec::new(),
+            spatial: Vec::new(),
+            visual_assets: Vec::new(),
         })
     }
 
@@ -95,7 +99,8 @@ impl CookedScene {
         let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
         let mut size = 72
             + self.entities.len() * 128
-            + 8
+            + 16
+            + self.spatial_bytes()
             + self
                 .audio
                 .iter()
@@ -125,7 +130,8 @@ impl CookedScene {
         audio.sort_unstable_by_key(|node| node.entity);
         let size = 72
             + self.entities.len() * 128
-            + 8
+            + 16
+            + self.spatial_bytes()
             + self
                 .physics
                 .iter()
@@ -143,6 +149,55 @@ impl CookedScene {
     }
     pub fn audio(&self) -> &[crate::CookedAudio] {
         &self.audio
+    }
+
+    /// Install canonical immutable startup asset references and checked render
+    /// declarations. Actual asset loading must match these fingerprints/kinds;
+    /// GPU expansion/precision and material capabilities remain host checks.
+    pub fn with_spatial(
+        mut self,
+        mut assets: Vec<crate::VisualAssetRef>,
+        mut nodes: Vec<crate::CookedSpatial>,
+    ) -> Result<Self, SceneError> {
+        let ids: std::collections::BTreeSet<_> = self.entities.iter().map(|e| e.id).collect();
+        crate::spatial::validate_assets(&assets, self.id, |id| ids.contains(&id))?;
+        assets.sort_unstable_by_key(|asset| asset.id);
+        crate::spatial::validate(&nodes, &assets, |id| ids.contains(&id))?;
+        nodes.sort_unstable_by_key(|node| node.entity);
+        self.visual_assets = assets;
+        self.spatial = nodes;
+        let size = 72
+            + self.entities.len() * 128
+            + 16
+            + self.spatial_bytes()
+            + self
+                .physics
+                .iter()
+                .map(crate::physics_binary::encoded_size)
+                .sum::<usize>()
+            + self
+                .audio
+                .iter()
+                .map(crate::audio_binary::encoded_size)
+                .sum::<usize>();
+        if size > crate::binary::MAX_SCENE_BYTES {
+            return Err(SceneError::Invalid("file size"));
+        }
+        Ok(self)
+    }
+    pub fn spatial(&self) -> &[crate::CookedSpatial] {
+        &self.spatial
+    }
+    pub fn visual_assets(&self) -> &[crate::VisualAssetRef] {
+        &self.visual_assets
+    }
+    fn spatial_bytes(&self) -> usize {
+        self.visual_assets.len() * crate::spatial_binary::ASSET_BYTES
+            + self
+                .spatial
+                .iter()
+                .map(crate::spatial_binary::encoded_size)
+                .sum::<usize>()
     }
 
     pub fn physics(&self) -> &[crate::CookedPhysics] {
