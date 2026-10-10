@@ -3,6 +3,12 @@ on:
   pull_request:
     paths:
       - 'tools/probes/physics/**'
+      - 'tools/probes/physics-parity/**'
+      - 'tools/tests/test_physics_parity.py'
+      - 'crates/incant_physics/**'
+      - 'Cargo.lock'
+      - 'Cargo.toml'
+      - 'package-lock.json'
       - '.cargo/**'
       - '.github/workflows/physics-candidates.yml'
       - 'rust-toolchain.toml'
@@ -33,10 +39,50 @@ jobs:
           name: physics-${{ matrix.os }}
           path: artifacts/physics/results.json
           if-no-files-found: error
+      # Keep the existing candidate timing workload and artifacts separate. These
+      # small independent workspaces do not compile the editor or full engine.
+      - run: cargo fmt --manifest-path tools/probes/physics-parity/Cargo.toml --check
+      - run: cargo clippy -j2 --manifest-path tools/probes/physics-parity/Cargo.toml --all-targets --features parallel --locked -- -D warnings
+      - run: cargo test -j2 --manifest-path tools/probes/physics-parity/Cargo.toml --release --locked
+      - run: cargo test -j2 --manifest-path tools/probes/physics-parity/Cargo.toml --release --features parallel --locked
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        if: runner.os == 'Linux'
+        with: {node-version: '22.23.3', cache: npm}
+      - if: runner.os == 'Linux'
+        name: Install checksum-verified wasm-bindgen CLI and browser
+        run: |
+          rustup target add wasm32-unknown-unknown
+          # Official 0.2.126 release asset; no CLI compile or new Rust cache.
+          tool_dir="$RUNNER_TEMP/wasm-bindgen-0.2.126"
+          archive="$RUNNER_TEMP/wasm-bindgen.tar.gz"
+          mkdir -p "$tool_dir"
+          curl --fail --location --retry 3 --output "$archive" https://github.com/wasm-bindgen/wasm-bindgen/releases/download/0.2.126/wasm-bindgen-0.2.126-x86_64-unknown-linux-musl.tar.gz
+          printf '%s  %s\n' '064948d58e2d6c0a745216477a639ba696216d6309aaa902939d1b865b1d869d' "$archive" | sha256sum --check --strict
+          tar -xzf "$archive" --directory "$tool_dir" --strip-components=1 wasm-bindgen-0.2.126-x86_64-unknown-linux-musl/wasm-bindgen
+          "$tool_dir/wasm-bindgen" --version
+          echo "$tool_dir" >> "$GITHUB_PATH"
+          npm ci
+          node_modules/.bin/playwright-core install --with-deps chromium
+      - name: Compare serial and native worker pools in fresh processes
+        if: runner.os != 'Linux'
+        run: python tools/probes/physics-parity/run.py --output artifacts/solver-parity --trials 3
+      - name: Compare serial, native worker pools and actual browser WASM
+        if: runner.os == 'Linux'
+        run: python tools/probes/physics-parity/run.py --output artifacts/solver-parity --trials 3 --browser
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: solver-parity-${{ matrix.os }}
+          path: |
+            artifacts/solver-parity/report.json
+            artifacts/solver-parity/browser.json
+            artifacts/solver-parity/*.bin
+          if-no-files-found: error
   compare:
     needs: native
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           pattern: physics-*
@@ -56,6 +102,11 @@ jobs:
           print('All candidate position sequences match across three hosted desktops.')
           print('This is one synthetic workload, not complete runtime determinism or a release gate.')
           PY
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: solver-parity-*
+          path: parity-results
+      - run: python3 tools/probes/physics-parity/compare_hosts.py parity-results
   portability:
     runs-on: macos-latest
     steps:
@@ -64,9 +115,16 @@ jobs:
         with: {python-version: '3.12'}
       - run: rustup target add aarch64-apple-ios-sim wasm32-unknown-unknown
       - run: python tools/probes/physics/portability.py --output artifacts/physics-portability
+      - run: python tools/probes/physics-parity/features.py --output artifacts/physics-parallel-features.json
+      - run: python -m unittest discover -s tools/tests -p test_physics_parity.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: candidate-portability
           path: artifacts/physics-portability
+          if-no-files-found: error
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: solver-feature-policy
+          path: artifacts/physics-parallel-features.json
           if-no-files-found: error
