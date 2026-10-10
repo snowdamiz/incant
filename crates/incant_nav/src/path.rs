@@ -1,5 +1,5 @@
 use crate::{NavigationError, NavigationMesh, invalid};
-use glam::Vec3;
+use glam::{DVec3, Vec3};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -89,24 +89,26 @@ impl NavigationMesh {
         }))
     }
     pub(crate) fn nearest(&self, p: [f32; 3], max: f32) -> Option<(usize, [f32; 3])> {
-        let p = Vec3::from_array(p);
-        let mut best = max * max;
+        // Squared distances at centimetre edges lose their ordering in f32
+        // when a larger vertical snap distance dominates the sum.
+        let p = DVec3::from_array(p.map(f64::from));
+        let mut best = f64::from(max).powi(2);
         let mut found = None;
         for (i, poly) in self.polygons.iter().enumerate() {
             for triangle in &poly.triangles {
-                let [a, b, c] = triangle.map(Vec3::from_array);
+                let [a, b, c] = triangle.map(|p| DVec3::from_array(p.map(f64::from)));
                 let point = closest_triangle(p, a, b, c);
                 let d = p.distance_squared(point);
                 if d <= best && (found.is_none() || d < best) {
                     best = d;
-                    found = Some((i, point.to_array()));
+                    found = Some((i, point.as_vec3().to_array()));
                 }
             }
         }
         found
     }
 }
-fn closest_triangle(p: Vec3, a: Vec3, b: Vec3, c: Vec3) -> Vec3 {
+fn closest_triangle(p: DVec3, a: DVec3, b: DVec3, c: DVec3) -> DVec3 {
     // Project onto the triangle plane, then clamp outside points to its three edges.
     let n = (b - a).cross(c - a);
     let n2 = n.length_squared();
@@ -114,7 +116,7 @@ fn closest_triangle(p: Vec3, a: Vec3, b: Vec3, c: Vec3) -> Vec3 {
         let q = p - n * ((p - a).dot(n) / n2);
         if [(a, b), (b, c), (c, a)]
             .into_iter()
-            .all(|(u, v)| (v - u).cross(q - u).dot(n) >= -1e-7 * n2)
+            .all(|(u, v)| (v - u).cross(q - u).dot(n) >= 0.)
         {
             return q;
         }
@@ -188,6 +190,48 @@ fn funnel(gates: &[([f32; 3], [f32; 3])]) -> Vec<[f32; 3]> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn centimetre_queries_choose_the_containing_skinny_triangle_in_both_directions() {
+        // The two distances differ below f32 squared-distance precision when
+        // snapping 5 cm vertically. Picking the outside triangle used to make
+        // a valid 1 cm path throw in funnel/height following.
+        let a = [4.500_000_5, 0.050_000_068, 2.4];
+        let b = [4.8, 0.050_000_068, 1.400_000_1];
+        let triangles = [
+            [b, a, [4.700_001, 0.050_000_068, 2.300_000_2]],
+            [b, [4.400_000_6, 0.050_000_068, 2.5], a],
+        ];
+        let mut mesh = NavigationMesh::default();
+        mesh.settings = Some(Default::default());
+        mesh.polygons = triangles
+            .into_iter()
+            .map(|t| crate::NavigationPolygon {
+                vertices: t.to_vec(),
+                triangles: vec![t],
+            })
+            .collect();
+        mesh.portals = vec![
+            vec![crate::build::Portal { to: 1, a, b }],
+            vec![crate::build::Portal { to: 0, a: b, b: a }],
+        ];
+        for (start, end) in [
+            ([4.7, 0., 1.7], [4.71, 0., 1.7]),
+            ([4.71, 0., 1.7], [4.7, 0., 1.7]),
+        ] {
+            let query = PathRequest {
+                start,
+                end,
+                snap_distance: 1.,
+                max_visited: 100,
+            };
+            let path = mesh.find_path(&query).unwrap().unwrap();
+            assert_eq!(path.corridor, [1]);
+            assert_eq!(path.points.len(), 2);
+            assert!((path.points[0][0] - start[0]).abs() < 1e-6);
+            assert!((path.points[1][0] - end[0]).abs() < 1e-6);
+            assert_eq!(Some(path), mesh.find_path(&query).unwrap());
+        }
+    }
     #[test]
     fn astar_corridor_cost_matches_independent_dijkstra_search() {
         // Two pillars leave several competing corridors. The independent oracle
