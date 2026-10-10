@@ -1,5 +1,5 @@
 use crate::scene::matrix;
-use crate::{CookedScene, SceneError, StableId};
+use crate::{CookedEntity, CookedScene, SceneError, StableId};
 use bevy_ecs::prelude::*;
 use glam::DMat4;
 use incant_types::{Transform, Velocity};
@@ -9,22 +9,23 @@ use thiserror::Error;
 #[derive(Component)]
 struct Identity(StableId);
 #[derive(Component)]
-struct Local(Transform);
+pub(crate) struct Local(pub Transform);
 #[derive(Component)]
-struct Motion(Velocity);
+pub(crate) struct Motion(pub Velocity);
 #[derive(Component)]
-struct Global(DMat4);
+pub(crate) struct Global(pub DMat4);
 #[derive(Resource)]
 struct Step(f64);
 #[derive(Resource)]
-struct Hierarchy {
-    nodes: Vec<(Entity, Option<usize>)>,
-    globals: Vec<DMat4>,
+pub(crate) struct Hierarchy {
+    pub nodes: Vec<(Entity, Option<usize>)>,
+    pub globals: Vec<DMat4>,
 }
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct EntitySnapshot {
     pub id: StableId,
+    pub parent: Option<StableId>,
     pub transform: Transform,
     pub velocity: Option<Velocity>,
     pub world_transform: [[f64; 4]; 4],
@@ -36,14 +37,19 @@ pub enum RuntimeError {
     Scene(#[from] SceneError),
     #[error("runtime tick counter exhausted")]
     TickOverflow,
+    #[error("runtime entity {0:?} does not exist")]
+    MissingEntity(StableId),
+    #[error("frame command buffer is full (maximum {0})")]
+    BufferFull(usize),
 }
 
 /// A disposable Bevy world; no project, command bus, authoring validator or
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
-    world: World,
+    pub(crate) world: World,
     schedule: Schedule,
-    entities: BTreeMap<StableId, Entity>,
+    pub(crate) entities: BTreeMap<StableId, Entity>,
+    pub(crate) parents: BTreeMap<StableId, Option<StableId>>,
     scene_id: StableId,
     tick: u64,
 }
@@ -57,20 +63,14 @@ impl NativeWorld {
         let mut world = World::new();
         world.insert_resource(Step(1. / f64::from(scene.tick_rate)));
         let mut entities = BTreeMap::new();
+        let parents = scene.entities.iter().map(|e| (e.id, e.parent)).collect();
         let handles: Vec<_> = scene
             .entities
             .into_iter()
             .map(|entity| {
-                let mut target = world.spawn((
-                    Identity(entity.id),
-                    Local(entity.transform),
-                    Global(DMat4::IDENTITY),
-                ));
-                if let Some(velocity) = entity.velocity {
-                    target.insert(Motion(velocity));
-                }
-                let handle = target.id();
-                entities.insert(entity.id, handle);
+                let id = entity.id;
+                let handle = spawn(&mut world, entity);
+                entities.insert(id, handle);
                 handle
             })
             .collect();
@@ -93,6 +93,7 @@ impl NativeWorld {
             world,
             schedule,
             entities,
+            parents,
             scene_id: scene.id,
             tick: 0,
         }
@@ -116,8 +117,8 @@ impl NativeWorld {
     }
 
     /// Native bulk access borrows ECS component values directly. Structural
-    /// mutations cannot occur during the borrow; script-host bindings and their
-    /// structural command buffer are separate migration work.
+    /// mutations cannot occur during the borrow. Queue them in FrameCommands and
+    /// apply after this callback returns; foreign script bindings remain open.
     pub fn for_each_moving_mut(
         &mut self,
         mut visit: impl FnMut(StableId, &mut Transform, &mut Velocity),
@@ -145,6 +146,7 @@ impl NativeWorld {
         let entity = self.world.get_entity(*self.entities.get(&id)?).ok()?;
         Some(EntitySnapshot {
             id,
+            parent: self.parents[&id],
             transform: entity.get::<Local>()?.0.clone(),
             velocity: entity.get::<Motion>().map(|m| m.0.clone()),
             world_transform: entity.get::<Global>()?.0.to_cols_array_2d(),
@@ -170,6 +172,18 @@ fn integrate(step: Res<Step>, mut query: Query<(&mut Local, &Motion)>) {
     query.par_iter_mut().for_each(advance);
     #[cfg(target_arch = "wasm32")]
     query.iter_mut().for_each(advance);
+}
+
+pub(crate) fn spawn(world: &mut World, entity: CookedEntity) -> Entity {
+    let mut target = world.spawn((
+        Identity(entity.id),
+        Local(entity.transform),
+        Global(DMat4::IDENTITY),
+    ));
+    if let Some(velocity) = entity.velocity {
+        target.insert(Motion(velocity));
+    }
+    target.id()
 }
 
 fn propagate(mut hierarchy: ResMut<Hierarchy>, mut query: Query<(&Local, &mut Global)>) {
