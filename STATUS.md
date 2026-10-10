@@ -82,6 +82,13 @@ within its documented workload.
   gameplay probes. The final GPU pass compiles nothing. Hosted cold/warm timing
   remains pending; all platform/test coverage and open device/license gates stay
   in force. See [CI evidence](docs/spikes/ci-build-performance.md).
+  The next reuse change combines required binaries/examples, preserves fresh
+  shipping verification and gives cold desktop jobs a bounded 60-minute deadline.
+  At base `588b3ab`, 352 normal tests, the exact 44 GPU tests, 18 direct public
+  commands and a fresh shipping package pass locally. The combined build only
+  recompiles workspace crates. Authorized exact-ID cleanup removed 7.60 GiB of
+  merged-PR Windows npm caches while preserving all other existing entries;
+  [cache evidence](docs/spikes/ci-cache-cleanup-2026-10-10.json) records each result.
 
 - Windows MSVC compilation and doctests now share Cargo's static CRT policy;
   Tauri's package-local shim is disabled after it shadowed the real runtime in
