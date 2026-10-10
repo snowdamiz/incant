@@ -34,15 +34,16 @@ an independent exhaustive-relaxation oracle, stable ties, invalid input, bounded
 search and an overlong corridor. Four integration tests cover shared command
 validation/provenance/Undo/Redo, atomic runtime synchronization, next-tick edits,
 hot reload, save/reopen, failed-query rollback and project-wide storage limits.
-All nine pass locally; core/script/headless compilation and focused Clippy pass.
-Schema regeneration, strict SDK and the public TypeScript probe now pass. The
-public probe changes routes from cost 6828 to 9828, closes both passages, saves
-while blocked, reopens a passage and arrives. Three blocked ticks and the final
-runtime/script states match uninterrupted and repeated playback exactly; authored
-files are unchanged. Durable shared Undo/Redo and invalid-grid rollback pass.
-All 285 Rust tests, 315 UI tests/build and five tool tests pass. Full Clippy also passes.
-GPU/native checks and
-Claude's rendered review remain in progress. No phase gate is approved.
+The public strict-TypeScript probe changes route costs from 6828 to 9828, closes
+both passages, saves while blocked, reopens a passage and arrives. Three blocked
+ticks and the final runtime/script states match uninterrupted and repeated
+playback exactly; authored files remain unchanged. Durable shared Undo/Redo,
+invalid-grid rollback and the project-wide grid count limit pass.
+
+The integrated branch passes 309 Rust tests, 315 UI tests/build, five tool tests,
+full Clippy and generated contracts. After the Windows CPU-budget regression test
+correction, all 54 script tests and Clippy pass again. This test-only correction
+does not change the reviewed binary's production code. No phase gate is approved.
 
 A separate public script measurement fills the 65536-cell bound, with a walkable
 but isolated destination forcing search of 65532 reachable cells. Three runs of

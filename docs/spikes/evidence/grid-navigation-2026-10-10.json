@@ -260,6 +260,12 @@
     "target_compilation": {
       "wasm32-unknown-unknown": "pass",
       "aarch64-apple-ios-sim": "pass"
+    },
+    "portable_budget_test_integration": {
+      "merge_commit": "f7aade0bb818ade418fbc29f4b47facf7466372c",
+      "script_tests": 54,
+      "clippy": "pass",
+      "production_code_changes": false
     }
   },
   "visual_review": {
