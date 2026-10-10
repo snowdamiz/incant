@@ -101,6 +101,13 @@ within its documented workload.
   artifacts match 656 test dependencies, leaving only two required Tauri feature
   variants, versus 45 differences with package selection. All direct probes and
   fresh shipping checks pass; hosted validation of this refinement remains open.
+  All 17 checks on the earlier PR #48 head pass: cold macOS 33m58s, Linux 17m56s,
+  Windows 40m21s; each preserves all 44 GPU cases. The final Rust cache set is
+  7.992 GiB. All Rust saves now target main, with filtered desktop/credential
+  producers; [retention evidence](docs/spikes/ci-cache-retention.md) records the
+  9.114 GiB shared footprint and narrow headroom. After verified merge, exact
+  cleanup freed PR #48's private 7.992 GiB while preserving every other entry.
+  Main cache seeding and subsequent warm PR measurements remain open.
 
 - Windows MSVC compilation and doctests now share Cargo's static CRT policy;
   Tauri's package-local shim is disabled after it shadowed the real runtime in
