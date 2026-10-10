@@ -1,7 +1,344 @@
 # 0032 sprite rendering: original art and real-engine review
 
-The round-three magnification follow-up comes first. Round two follows unchanged,
-then round one from "Status" onward.
+The round-four wide-region follow-up comes first. Rounds three and two follow
+unchanged, then round one from "Status" onward.
+
+## Round 4: 512-texel spans with a flat base
+
+### Verdict
+
+- **The round-three defect is fixed.** Every flipped strip on boards I and J is now
+  uniform at exact ties:
+
+  | Board | Pre-wide build | Candidate |
+  | --- | --- | --- |
+  | J, region widths 512 to 8192 at 1× to 32×, 60 strips | 10 failures | 0 |
+  | I, a 4096-texel strip at 1× to 16×, 40 strips | 2 failures | 0 |
+
+- **Accepted, scoped, up to 16×.** Four new boards hold 606 span rows. At 1× to
+  16×, every exact tie and every near tie one raster step away resolves as the rule
+  requires:
+
+  | Ties at 1× to 16× on boards K to N | Pre-wide build fails | Candidate fails |
+  | --- | --- | --- |
+  | 33,510 exact ties | 6,671 | 0 |
+  | 54,654 near ties, 1/256 px away | 1,428 | 0 |
+
+  The rows cover both source axes, both texel directions, and windows on span cuts
+  and inside spans. They use offsets of 0 and ±1/256 px, odd region origins and
+  widths, and end spans of 1 and 511 texels. They also include mirrors, half and
+  quarter turns, and wide and compressed nine-slices.
+- **Concrete failures above 16×.** A tie at span texels 236 to 511 can resolve to the
+  wrong texel, usually the lower one. On boards K to N, 225 of 3,060 exact ties at
+  24× to 64× fail. A 20× to 128× probe finds the first failure at 20×:
+
+  | Probe ties, 20× to 128× | Pre-wide build fails | Candidate fails |
+  | --- | --- | --- |
+  | 9,684 exact ties | 4,578 | 1,095 |
+  | 9,684 near ties | 5,124 | 132, from 44× up |
+
+  The pre-wide build fails far more of the same ties, so this is a remaining limit of
+  the correction rather than a new defect. Two rows pass only on the pre-wide build,
+  and both are the same 48× and 64× kind. See "Remaining limit".
+- **No seams.** No decoded row has a hole, an extra pixel or an edge error: every
+  candidate mismatch is a tie. Translucent strips at 1× and 8× match the reference
+  exactly in both directions, so spans neither overlap nor leave gaps.
+- **Nothing else changed.** The same scene on both builds:
+
+  | Frames | Byte-identical | Changed | Changed pixels |
+  | --- | --- | --- | --- |
+  | 39 | 31 | 8 | 56,094 |
+
+  The 8 changed frames all show wide strips. Their changed pixels are 53,523 texel
+  ties, 2,537 rule deltas from the new span vertices and 34 edge ties on the rolled
+  view. None has a linear top sprite and none is unexplained. Tone, the gray ramp,
+  alpha, sorting, the linear fringe and the live frames match round three.
+- **Repeatability and resize hold.**
+  - Two fresh candidate runs match byte for byte across 263 common images.
+  - Every source-free frame equals its with-source frame.
+  - Reimporting the strip twice as tall and the column twice as wide leaves all
+    seven span frames byte-identical.
+- **Budget kept.** Five runs used 474 frames and 609.0 MiB raw, out of 2,048 frames
+  and 1 GiB. The largest invocation wrote 34 frames, and the largest frame was
+  7.9 MiB raw.
+
+This verdict covers headless rendering on one Apple M5 Pro with Metal. It does not
+imply portability, phone performance, native editor acceptance, hosted CI or any
+phase gate.
+
+### Decisions acknowledged
+
+- The candidate cuts nearest geometry every 512 source texels and adds a flat integer
+  base after the bias, as Astra describes. I read the source snapshots only. Nothing
+  was built, and no Rust, shader, Cargo or engine file changed.
+- I kept to the packet's budget and wrote no native app or `editor/ui` code: 0033
+  owns that work. I did no merging, publishing or account work.
+- The pixel-camera near-tie follower defect remains open. This round did not test it.
+- Rounds one to three are not rewritten. Their evidence, screenshots and result
+  sections are unchanged. Astra's updated `brief.md` stays uncommitted, as delivered.
+
+### Model, effort and provenance
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`) at Max effort, in the
+  resumed ACP runner session. The runner confirms both settings before sending the
+  prompt; I cannot inspect that handshake from inside the session.
+- **Worktree:** `7950fa8`.
+- **Candidate source:** the four snapshot files under `artifacts/tools/wide-source/`
+  match the hashes in `artifacts/tools/wide-fix-evidence.json`. They are the shader,
+  the sprite module, the span geometry and Astra's wide-region GPU test.
+
+| Build | Source | sha256 |
+| --- | --- | --- |
+| Active candidate, `incant_headless` | `0494b40cf8fcc5e1ad0fc689655a62cb264a2f50` | `1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50` |
+| Pre-wide | `f9aa1da0818313c5c6cac580e54d7107646378bc` | `a4b5ddb905122a55b7d156ad39b39e7f97f5266e70159614fe4cdc7589796828` |
+| Pre-magnification, not run | `c2c7758c14c37d36aa13e322aa2c87e63ce489ad` | `fd65133fc98a0c6d533f23d9583a820271858eecdb0849b44f8b7e996a5e072b` |
+| Pre-ties, not run | `39e5c38107451ba44a02ef7b80f27bef11d4141d` | `848b8294854add3bc672e6ab97e1c3dc1f5f39a9c5b1c234e61e5edace5820ba` |
+
+Each binary matched its metadata before and after all 370 invocations.
+
+### Changed paths (round 4)
+
+All changes are in `handoffs/0032-sprite-rendering/`.
+- `tools/sprite_lookdev.py`:
+  - `--binary` also takes `pre-wide`;
+  - adds boards K, L, M and N, their cameras, and reimport steps for the strip and
+    column at another size;
+  - `--repeats`, `--live` and `--static-only` select a run plan;
+  - `--probe` adds boards O and P and captures only their four views;
+  - every renderer invocation is counted and refused beyond 128 frames or 256 MiB.
+- `tools/sprite_art.py` adds a 2 × 8192 column, resized twins of the strip and column,
+  and a separate label sheet for the new boards. Every earlier art file, including
+  `labels.png`, is byte-identical.
+- `tools/reference.py` models the candidate as rule `span-band`:
+  - an independent port of the span tessellation;
+  - span-local texels with a flat base;
+  - exact predictions for axis-aligned ties, keeping tolerance only for rotated
+    geometry.
+- `tools/analyse.py`:
+  - maps `0494b40` to `span-band`;
+  - checks every pixel of every span row against its exact rational mapping;
+  - counts exact and near ties by magnification and span texel;
+  - checks translucent and linear rows against the reference;
+  - handles static-only and probe runs.
+- `tools/compare_runs.py` reads the shared reimport texture variants.
+- `tools/round4_figures.py` is new.
+- `tools/test_reference.py` has 17 tests. The new ones include a port of the
+  candidate's own geometry invariants, which pass against my tessellation port.
+- `evidence/round4/` holds four analyses, the before/after comparison, five helper
+  records, the scene, the budget ledger, the figure manifest and image hashes.
+- `screenshots/round4/` holds nine images, listed under "Round-four frame set".
+
+The extended scene leaves earlier boards untouched. On the same `f9aa1da` binary, all
+33 earlier frames are byte-identical to round three's run.
+
+### Commands and results (round 4)
+
+```sh
+T=handoffs/0032-sprite-rendering/tools; R=artifacts/0032-sprite-rendering/round4
+python3 -I $T/sprite_lookdev.py $R/c1 --repeats 2 --live e,ne
+python3 -I $T/sprite_lookdev.py $R/pw1 --binary pre-wide --repeats 1 --static-only
+python3 -I $T/sprite_lookdev.py $R/c2 --repeats 1 --live e
+python3 -I $T/sprite_lookdev.py $R/probe-c1 --probe --repeats 2
+python3 -I $T/sprite_lookdev.py $R/probe-pw1 --probe --repeats 1 --binary pre-wide
+python3 -I $T/analyse.py $R/c1 $R/final/analysis-c1-committed.json $R/c2
+python3 -I $T/analyse.py $R/pw1 $R/final/analysis-pw1-committed.json
+python3 -I $T/analyse.py $R/probe-c1 $R/final/analysis-probe-c1.json
+python3 -I $T/analyse.py $R/probe-pw1 $R/final/analysis-probe-pw1.json
+python3 -I $T/compare_runs.py $R/pw1 $R/c1 $R/final/compare-pw1-c1.json
+python3 -I $T/round4_figures.py $R/pw1 $R/c1 $R/figures3
+python3 -I $T/test_reference.py                  # 17 tests OK
+python3 -m unittest discover -s tools/tests       # 10 tests OK
+cd handoffs/0032-sprite-rendering && shasum -a 256 -c evidence/round4/screenshots.sha256   # 9 OK
+```
+
+| Run | Build | Plan | Invocations | Frames | Raw MiB |
+| --- | --- | --- | --- | --- | --- |
+| c1 | candidate | every frame twice, reimport, source-free, live e and ne | 159 | 265 | 276.2 |
+| pw1 | pre-wide | static frames once | 53 | 39 | 81.8 |
+| c2 | candidate | every frame once, reimport, source-free, live e | 118 | 158 | 179.5 |
+| probe-c1 | candidate | probe views twice | 22 | 8 | 47.6 |
+| probe-pw1 | pre-wide | probe views once | 18 | 4 | 23.8 |
+
+- **Every run:** the binary was unchanged across every call, and authored files were
+  unchanged by rendering and play. Frames rendered twice in c1 and probe-c1 were
+  byte-identical, and so were both plays of each live direction.
+- **Budget:** frames are counted per invocation before it runs, including the two
+  expected badge-small failures per reimporting run. `evidence/round4/budget.json`
+  holds the ledger. Nothing is overwritten. Earlier figure drafts sit in ignored
+  `figures/` and `figures2/` directories and are not evidence.
+- **Not run:** I did not rerun the UI suite; no UI file changed. I also did not run
+  Cargo, the GPU suites, native captures or hosted CI.
+
+### Span boards
+
+Each board is 1024 × 1024 px, so pixel-perfect projections stay dyadic. Each row is a
+long strip from an 8192-texel strip or column whose colours name every texel. The row
+is placed so one texel boundary sits on the pixel centre 512.5, plus an offset, and
+the rest runs far off screen. Each row records its exact screen-to-texel mapping. The
+analysis then names the expected texel of every pixel without the CPU model.
+- **K, along screen x:** 1× to 64× in 13 steps, both directions, offsets 0 and
+  ±1/256 px. Windows sit on a span cut and at span texels 256 and 448. Quarter-turned
+  columns put source y on screen x.
+- **L, along screen y:** the same sweep on the column, plus quarter-turned strips and
+  a half-turned column.
+- **M, variants:**
+  - regions `[300, 0, 4097, 1]`, `[1, 0, 8191, 1]` and `[4000, 0, 1000, 1]`, ending in
+    1-, 511- and 488-texel spans;
+  - mirrors and half turns;
+  - a 2000-texel nine-slice with 600- and 700-texel borders at 8× and 32×, and a
+    compressed one;
+  - translucent and linear rows.
+- **N, isotropic:** 32×, 48× and 64× rows, also viewed at 1920 × 1080, whose 60 m
+  half-width is not dyadic, and through a 7° rolled camera.
+- **Probe O and P, opt-in:** 20× to 128× in 13 steps along x and y, at span texels
+  32, 288 and 480, offsets 0 and +1/256 px, at 1024 × 1024 and 1920 × 1080.
+
+Before rendering, I checked each board against the CPU model: the decoders and the
+model agree on every decoded pixel.
+
+| Failed rows | Pre-wide build | Candidate |
+| --- | --- | --- |
+| K, along x | 105 of 226 | 3 |
+| L, along y | 95 of 234 | 6 |
+| M, variants | 36 of 120 | 6 |
+| N, isotropic | 12 of 18 | 2 |
+| N at 1920 × 1080 | 11 of 18 | 6 |
+
+Every candidate failure is an exact tie at 32× to 64×. The pre-wide failures include
+3,021 near-tie pixels; the candidate has none.
+
+### Remaining limit: magnified ties in the upper half of a span
+
+The probe, all four views together. Each cell gives failures out of ties:
+
+| M | Exact ties: candidate | Exact: pre-wide | Near ties: candidate | Near: pre-wide |
+| --- | --- | --- | --- | --- |
+| 20× | 17 / 1,512 | 755 | 0 / 1,512 | 789 |
+| 24× | 0 / 1,266 | 684 | 0 / 1,266 | 568 |
+| 28× | 14 / 1,092 | 508 | 0 / 1,092 | 584 |
+| 32× | 67 / 942 | 478 | 0 / 942 | 464 |
+| 36× | 164 / 846 | 345 | 0 / 846 | 501 |
+| 40× | 188 / 750 | 301 | 0 / 750 | 449 |
+| 44× | 122 / 684 | 219 | 13 / 684 | 465 |
+| 48× | 146 / 630 | 240 | 0 / 630 | 390 |
+| 56× | 124 / 552 | 268 | 13 / 552 | 284 |
+| 64× | 59 / 474 | 244 | 0 / 474 | 230 |
+| 80× | 108 / 378 | 250 | 39 / 378 | 128 |
+| 96× | 58 / 318 | 174 | 47 / 318 | 144 |
+| 128× | 28 / 240 | 112 | 20 / 240 | 128 |
+
+- **Where:** all 1,452 failing pixels, on boards K to N and in the probe, sit at span
+  texels 236 to 511. None is on a span cut. In the probe, span texels 0 to 57 never
+  failed, up to 128×.
+- **Which way:** exact ties fail almost only where texels increase along the screen
+  (1,276 of 1,320). Near ties fail only where texels decrease. In 1,408 of the 1,452
+  failures the engine shows the lower of the two texels.
+- **When:** failures are more frequent in the 1920 × 1080 views and at magnifications
+  that are not powers of two. At 1024 × 1024 along x, 32× and 64× never failed, while
+  36× to 56× did.
+
+**Why, inferred from these measurements, not from hardware documentation.** Span
+texels from 256 to 512 have an f32 spacing of 2^-15, about 3.1 × 10^-5 texel. The tie
+bias is 1/1024 px, which is 1/(1024 M) texel: 6.1 × 10^-5 at 16×, 4.9 × 10^-5 at 20×
+and 3.1 × 10^-5 at 32×. On this GPU the interpolated span texel can come out up to
+about two f32 steps low. An exact tie then lands on the lower texel once the bias
+falls below that error. The 512-texel span removed the region-width dependence of
+round three, but at high magnification the span texel itself is still too large.
+
+**Severity:** low. A failure needs three things at once:
+- a source region wider than about 236 texels;
+- 20× or more magnification;
+- texel boundaries exactly on pixel centres.
+
+One texel then gives one pixel to its neighbour, at most 1/20 of its width. The
+pre-wide build failed in many more of these cells.
+
+**Options for Astra, who owns the decision.**
+- Document the measured bound: exact and near ties hold up to 16×.
+- Use shorter spans. Span texels below 58 never failed up to 128× here, so 64-texel
+  spans would likely move the bound near 128×; this is an inference. They cost 8×
+  more vertices per axis. A simple 8192 × 8192 region would grow from 1,536 to 98,304
+  vertices.
+- A larger bias alone cannot fix it. It must stay below half the 1/256 px raster step
+  to keep near ties apart, so it can at most double the bound.
+
+### Other checks (round 4)
+
+- **Seams:** decoded rows have no hole, extra pixel or edge error.
+  - Translucent strips at 1× and 8× match the reference exactly along their full
+    length. At 48× the only difference is one tie pixel, off by two levels.
+  - Linear rows stay within one level.
+  - The 7° rolled view of board N differs from the model only at 56 pixels the model
+    flags as ambiguous.
+- **Resize invariance:** reimporting the strip at 8192 × 4 and the column at 4 × 8192,
+  with red texels outside every region, leaves boards J, K, L, M and N byte-identical.
+  The taller sheet again changes no nearest pixel on boards A to H, and one linear
+  pixel by one level, as before.
+- **Linear and tone:** the comparison changes no pixel whose top sprite is linear.
+  The gray ramp shows 0 to 234 exactly and 252 to 255 as 243. The fringe numbers
+  equal round three's.
+- **Earlier boards:** ruler stations, orientation, nine-slice flips, painter probes,
+  cracks and the minification mirror results all equal round three. Boards F, G and
+  H report no failures.
+- **Live:** directions e and ne match the model in every frame, with zero latency and
+  equal repeats. All 68 of their frames are byte-identical to round three's. The other
+  six directions were not rerun, to save budget.
+- **Model accounting:** for this build the model predicts axis-aligned span ties
+  instead of flagging them.
+  - Its 7,255 unexplained pixels are exactly the tie failures above, over each row's
+    full height. Reimported copies of the span frames count them again.
+  - Its 209 ambiguous mismatches are 150 such failures on quarter-turned rows, which
+    the model flags, and 59 flagged pixels on rolled views.
+
+### Appearance review (round 4)
+
+I viewed the four engine frames and the five decoded views.
+- **Engine frames.** Rows are continuous, with no background inside a row and no
+  visible step at span cuts. Neighbouring texels differ by two levels of red, so a
+  one-pixel tie error cannot be seen in them.
+- **Decoded views.** These mark each wrong texel in red. At 8× and 16×, the pre-wide
+  flipped rows carry red lines at most texel edges; the candidate rows carry none.
+- **32× to 64×.** In the upper half of a span, the candidate shows red lines only on
+  unflipped rows: at 48× along x, and at 32× and 48× along y. The pre-wide build shows
+  them on most of these rows.
+- **Nine-slice.** Every nine-slice window at 32× is clean on the candidate. On the
+  pre-wide build, three border and centre joins show four red pixels each, and one
+  border cut shows eight.
+
+### Round-four frame set
+
+In `screenshots/round4/`:
+- `engine-board-k-spans-along-x-active-1024x1024.png`,
+  `engine-board-l-spans-along-y-active-1024x1024.png`,
+  `engine-board-m-span-variants-active-1024x1024.png` and
+  `engine-board-n-isotropic-active-1920x1080.png` are unedited candidate frames.
+- `decoded-*.png` files are diagnostics derived from engine pixels, not engine images.
+  Each pixel is redrawn by the parity of the texel it names, and red where that
+  texel differs from the exact rule. The pre-wide window is above the candidate
+  window in each case. `evidence/round4/figure-rows.json` lists every case with its
+  red-pixel counts.
+  - Board K upper-span ties at 32×, 48× and 64×, and K at 8× and 16×.
+  - Board L upper-span ties at 32×, 48× and 64×.
+  - Board M nine-slice windows at 32× and the short end spans at 48×.
+  - Board N at 1920 × 1080, 48× and 64×.
+
+### Limitations (round 4)
+
+- **Hardware:** one GPU (Apple M5 Pro) and one backend (Metal), headless only.
+- **Model inferences:** the f32 explanation of the remaining limit is inferred from
+  measurements, not from hardware documentation.
+- **Coverage gaps:**
+  - Magnifications above 16× sample span texels 0 to 57, about 226 to 286 and about
+    418 to 512. Other span texels were tested only at 16× and below.
+  - Wide nine-slices with both axes above 512 texels are checked only by the geometry
+    unit test.
+  - Perspective cameras are untested.
+  - The 128 MiB geometry bound is not exercised.
+- **Gates:** no phase gate is approved or claimed. The high-magnification limit, the
+  near-tie camera follower defect, the exact display option, the Inspector and
+  native review remain open.
+
+---
 
 ## Round 3: derivative-scaled tie band
 

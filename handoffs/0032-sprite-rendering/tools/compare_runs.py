@@ -28,9 +28,6 @@ import analyse  # noqa: E402
 import pngio  # noqa: E402
 import reference  # noqa: E402
 
-REIMPORT_TEXTURES = {"1-sheet-teal": ("teal", "badge"), "2-badge-orange": ("teal", "orange"),
-                     "4-badge-restore": ("teal", "badge"), "6-sheet-restore": ("sheet", "badge"),
-                     "7-sheet-tall": ("tall", "badge"), "8-sheet-restore": ("sheet", "badge")}
 
 
 def sha(path):
@@ -38,18 +35,18 @@ def sha(path):
 
 
 def frame_spec(rel):
-    """(camera, width, height, sheet, badge) for a static, reimport or source-free PNG."""
+    """(camera, width, height, texture variants) for a static, reimport or source-free PNG."""
     parts = Path(rel).parts
     stem = Path(rel).stem
     if parts[0] == "shots":
         stem = stem.rsplit("-", 1)[0]  # drop -r1
-        textures = ("sheet", "badge")
+        textures = {}
     elif parts[0] == "reimport":
-        step = next(k for k in REIMPORT_TEXTURES if stem.startswith(k + "-"))
+        step = next(k for k in analyse.REIMPORT_VARIANTS if stem.startswith(k + "-"))
         stem = stem[len(step) + 1:]
-        textures = REIMPORT_TEXTURES[step]
+        textures = analyse.REIMPORT_VARIANTS[step]
     elif parts[0] == "source-free":
-        textures = ("sheet", "badge")
+        textures = {}
     else:
         return None
     name, size = stem.rsplit("-", 1)
@@ -94,12 +91,12 @@ def main():
         if spec is None:
             entry["classified"] = False  # live frames: reported raw
         else:
-            name, w, h, (sheet, badge) = spec
+            name, w, h, textures = spec
             reference.NEAREST_RULE = after.rule
-            rows_after, frame_after, view_after = after.render(name, w, h, sheet, badge)
+            rows_after, frame_after, view_after = after.render(name, w, h, **textures)
             reference.NEAREST_RULE = before.rule
-            rows_switched, _, _ = after.render(name, w, h, sheet, badge)
-            _, frame_before, view_before = before.render(name, w, h, sheet, badge)
+            rows_switched, _, _ = after.render(name, w, h, **textures)
+            _, frame_before, view_before = before.render(name, w, h, **textures)
             owners, classes, tops = Counter(), Counter(), Counter()
             for x, y in changed:
                 i = logical_index(view_after, frame_after, x, y)
