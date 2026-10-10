@@ -1,6 +1,8 @@
 # ADR 0012: Optional accounts service; local provider secrets
 
-Date: 2026-10-08. Status: proposed for director review.
+Date: 2026-10-08. Updated: 2026-10-10. Status: decided by director instruction
+in the PLAN.md revision 5 decision record (decisions 3 and 16). This does not
+approve the Phase 0 gate, and no service is deployed.
 
 ## Decision
 
@@ -12,6 +14,6 @@ The editor and CLI share loopback PKCE, callback and ID-token validation, API-ke
 
 ## Consequences and revisit trigger
 
-No server exists or has received user credentials. Managed identity versus self-hosted identity remains a director-reviewed operational decision before service implementation; it cannot be decided from a local credential spike. Follow current OpenAI public-client eligibility and registration requirements rather than borrowing Codex tokens.
+No server exists or has received user credentials. Engine accounts use WorkOS AuthKit as the managed identity provider, reached through WorkOS Connect using standard OpenID Connect. The desktop client is a public PKCE application with no embedded client secret. Self-hosted Zitadel can replace the protocol endpoint, with explicit identity and session migration verification. Passwordless email uses Magic Auth codes; the older Magic Link product is deprecated. The accounts service and the other Incant Cloud services run on AWS. Game player identity is separate: the self-hostable player service uses Steam, Apple and Google sign-in directly and never depends on WorkOS. Creating the WorkOS and AWS accounts is a human-owned action due before Phase 2 cloud sync work. Follow current OpenAI public-client eligibility and registration requirements rather than borrowing Codex tokens.
 
 Source: [PLAN.md](../../PLAN.md), sections 2, 3, 5 and 6.

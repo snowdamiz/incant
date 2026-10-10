@@ -1,6 +1,6 @@
 # Implementation status
 
-Source: [PLAN.md](PLAN.md), revision 3 (2026-10-09) with director decisions. Current phase:
+Source: [PLAN.md](PLAN.md), revision 5 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without
@@ -53,6 +53,22 @@ within its documented workload.
 
 ## Active work
 
+- PLAN.md revision 5 retains revision 4's replacement of document-backed gameplay.
+  The [revision 5 review](docs/spikes/performance-plan-v5-review.md) records the
+  settled decisions: wasm2c exports, WorkOS Connect identity, AWS hosting,
+  explicit TypeScript/physics adoption thresholds and product/business choices.
+  Those decisions do not complete their implementations or human-owned actions.
+  The [review and migration order](docs/spikes/performance-plan-v4-review.md)
+  records concrete gaps and updates ADRs 0002, 0003, 0006 and 0008. The immediate
+  engineering priority is runtime-safe component types, checked cooked scenes,
+  a native ECS world and a real dependency guard, followed by moving the existing
+  systems/script bridge and saves off per-tick project cloning and JSON. Existing
+  feature tests remain valid for their old implementation, not proof of this
+  migration. Claude's editor redesign must also bound large collections.
+  Native/browser/Wasm script hosts, physics variants, shader pre-warming, shipping
+  profile/profiling, reference-phone PR gates and per-scene CRDT scaling remain
+  open. The new device/performance targets have not been passed or waived.
+
 - Sprite rendering is in implementation in an isolated checkout: typed texture
   regions, pivots/flips, nine-slice geometry, deterministic sorting and retained
   premultiplied texture resources. The foundation passes 325 Rust tests, 52 GPU
@@ -76,6 +92,7 @@ within its documented workload.
   and camera roll; final rendered/native review and hosted CI remain open.
   Sprite/tilemap rendering and 2D physics are separate unfinished work. See
   [pixel-perfect cameras](docs/spikes/pixel-perfect-cameras.md).
+
 
 - Orthographic camera projection is implemented through shared component commands,
   renderer geometry, parallel material view rays, light clusters and directional
