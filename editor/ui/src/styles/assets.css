@@ -64,19 +64,6 @@
   border-radius: calc(var(--radius) + 3px);
 }
 
-/* Counts sit in the same small pill as the output dock's tab counts. */
-.navigator__tab .panel__count {
-  min-width: 18px;
-  height: 16px;
-  padding: 0 5px;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-raised);
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
-  line-height: 16px;
-  text-align: center;
-}
-
 .navigator__busy {
   display: inline-grid;
   place-items: center;
@@ -284,10 +271,6 @@
   min-height: 100%;
 }
 
-.inspector__kind-detail {
-  flex: none;
-}
-
 .asset-details {
   display: flex;
   flex-direction: column;
@@ -344,7 +327,11 @@
   user-select: text;
 }
 
+/* The same chevron as a component header, so every disclosure reads alike. */
 .asset-ids > summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   width: fit-content;
   list-style: none;
   cursor: pointer;
@@ -356,20 +343,12 @@
   display: none;
 }
 
-.asset-ids > summary::before {
-  content: '';
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-right: 8px;
-  border-left: 4px solid currentColor;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  vertical-align: 1px;
+.asset-ids__chevron {
+  color: var(--color-text-subtle);
   transition: transform var(--duration-fast);
 }
 
-.asset-ids[open] > summary::before {
+.asset-ids[open] .asset-ids__chevron {
   transform: rotate(90deg);
 }
 

@@ -47,22 +47,22 @@ export function usePage(total: number, anchor?: number): Page {
  * "101–200 of 5,000" with first, previous, next and last page buttons, plus a button
  * back to the anchor (Newest, Now) when it is on another page. Renders nothing for a
  * list that fits on one page. Buttons at an end stay focusable and are marked disabled,
- * so focus never drops to the page.
+ * so focus never drops to the page. A chosen page is announced from the pager itself:
+ * the range is already on screen, so the status bar does not repeat it.
  */
 export function Pager({
   page,
   noun,
   anchorLabel,
-  announce,
 }: {
   page: Page;
   /** Plural noun for the range, as spoken: "problems", "messages", "edits". */
   noun: string;
   /** Visible name of the way back to the anchor ("Newest", "Now"). */
   anchorLabel?: string;
-  announce: (message: string) => void;
 }) {
   const lastButton = useRef<HTMLButtonElement>(null);
+  const [spoken, setSpoken] = useState('');
   if (page.count <= 1) return null;
   const range = (index: number) => {
     const start = index * PAGE_SIZE;
@@ -72,7 +72,7 @@ export function Pager({
   const go = (target: number) => {
     if (target < 0 || target >= page.count || target === page.index) return;
     page.go(target === page.anchorPage ? null : target);
-    announce(`Showing ${noun} ${range(target)} of ${page.total.toLocaleString()}`);
+    setSpoken(`Showing ${noun} ${range(target)} of ${page.total.toLocaleString()}`);
   };
   const atStart = page.index === 0;
   const atEnd = page.index >= page.count - 1;
@@ -96,6 +96,9 @@ export function Pager({
       <PagerButton label="Previous page" icon="pagePrev" disabled={atStart} onClick={() => go(page.index - 1)} />
       <PagerButton label="Next page" icon="pageNext" disabled={atEnd} onClick={() => go(page.index + 1)} />
       <PagerButton buttonRef={lastButton} label="Last page" icon="pageLast" disabled={atEnd} onClick={() => go(page.count - 1)} />
+      <span className="visually-hidden" role="status">
+        {spoken}
+      </span>
     </div>
   );
 }

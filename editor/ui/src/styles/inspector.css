@@ -1,10 +1,10 @@
 /*
- * Inspector, revision 4 ("studio"). See DESIGN.md.
+ * Inspector, revision 5 ("plain"). See DESIGN.md.
  *
- * - The selection's identity lives in the panel's 36 px header line; kind, ID and the
- *   read-only state sit in one slim meta strip beneath it.
- * - Components are hairline-separated sections with 34 px sticky headers; a small tinted
- *   tile marks each component's family (physics, light, audio...).
+ * - The selection's identity lives in the panel's 36 px header line: kind glyph, name,
+ *   a lock for read-only, Copy ID. Kind and ID are spoken with the name, not a row.
+ * - Components are hairline-separated sections with 34 px sticky headers: chevron,
+ *   plain icon, title, problem counts. No tiles, tints or pills.
  * - Rows are a label column and a value column, 28 px values 6 px apart. Only real
  *   nested objects indent (and narrow their label column by the same step, so value
  *   columns align); a union's variant fields and a list's selected item continue at
@@ -21,14 +21,9 @@
   padding: 0 6px 0 var(--inspector-pad);
 }
 
+/* The kind's glyph in its tint, as in the hierarchy; no tile behind it. */
 .inspector-header__glyph {
   flex: none;
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  background: color-mix(in srgb, currentColor 15%, var(--color-bg-side));
 }
 
 /* Kinds without a tint (and the import form) use the quiet text colour. */
@@ -66,102 +61,36 @@
   gap: var(--space-1);
 }
 
-/* ---- Meta strip: kind · ID, and the read-only state ---- */
-
-.inspector__meta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-width: 0;
-  min-height: 30px;
-  margin: 0;
-  padding: 5px 10px 5px var(--inspector-pad);
+/* Read-only: one lock glyph where an edit control would be. */
+.inspector-header__state {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
   color: var(--color-text-subtle);
-  font-size: var(--text-xs);
-  line-height: 16px;
-}
-
-.inspector__kind {
-  flex: none;
-  color: var(--color-text-muted);
-}
-
-.inspector__kind + .inspector__id::before,
-.inspector__kind + .inspector__kind-detail::before {
-  content: '·' / '';
-  margin-right: var(--space-3);
-  color: var(--color-text-subtle);
-}
-
-.inspector__id {
-  flex: 0 1 auto;
-  min-width: 48px;
-  display: inline-flex;
-  color: var(--color-text-subtle);
-  user-select: all;
-}
-
-.inspector__readonly {
-  margin-left: auto;
-}
-
-.middle-truncate {
-  display: inline-flex;
-  min-width: 0;
-  max-width: 100%;
-}
-
-.middle-truncate__head {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.middle-truncate__tail {
-  flex: none;
-  white-space: nowrap;
 }
 
 /* ---- Problems on the selected entity ---- */
 
-/* One card for all of the entity's problems, tinted by the worst severity. The message
-   leads; where it is (component and path) follows as a quiet link to the field. */
+/* A plain list above the components: severity icon, message, then where (component and
+   path) as a quiet link to the field. No card, tint or border. */
 .inspector__problems {
-  --tone: var(--color-danger);
-  --tone-bg: var(--color-danger-bg);
   display: flex;
   flex-direction: column;
-  margin: 2px 12px 14px var(--inspector-pad);
-  padding: 2px 0;
+  gap: 2px;
+  margin: 0;
+  padding: 6px 12px 10px var(--inspector-pad);
   list-style: none;
-  border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--tone-bg) 62%, var(--color-bg-side));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 20%, transparent);
-}
-
-.inspector__problems--warning {
-  --tone: var(--color-warning);
-  --tone-bg: var(--color-warning-bg);
-}
-
-.inspector__problems--info {
-  --tone: var(--color-info);
-  --tone-bg: var(--color-info-bg);
 }
 
 .problem-line {
   display: flex;
-  gap: 9px;
+  gap: 8px;
   align-items: flex-start;
-  padding: 8px 12px 8px 11px;
+  padding: 4px 0;
   font-size: var(--text-xs);
   line-height: var(--leading-tight);
   color: var(--color-danger);
-}
-
-.problem-line + .problem-line {
-  border-top: 1px solid color-mix(in srgb, var(--tone) 14%, transparent);
 }
 
 .problem-line--warning {
@@ -179,7 +108,7 @@
 .problem-line__text {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   min-width: 0;
   color: var(--color-text);
 }
@@ -187,15 +116,14 @@
 .problem-line__where {
   width: fit-content;
   max-width: 100%;
-  color: var(--color-text-muted);
+  color: var(--color-text-subtle);
   text-decoration: none;
   /* Deep paths (/shape/parts/0/shape/half_extents/2) wrap instead of widening the Inspector. */
   overflow-wrap: anywhere;
 }
 
 .problem-line__component {
-  color: var(--color-text-soft);
-  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
 }
 
 .problem-line__where:hover {
@@ -215,7 +143,7 @@
 
 .problem-line__path {
   margin-left: 6px;
-  color: var(--color-text-muted);
+  color: inherit;
 }
 
 /* ---- Components ---- */
@@ -226,8 +154,13 @@
   padding-bottom: var(--space-6);
 }
 
+/* Hairlines between sections; the first one sits on the panel header's own line. */
 .component {
   border-top: 1px solid var(--color-border);
+}
+
+.component:first-child {
+  border-top: 0;
 }
 
 /* Compact and sticky: the header of the component in view stays at the top while its
@@ -267,39 +200,23 @@
   transform: rotate(90deg);
 }
 
-/* The component's mark: its icon on a small tile tinted by its family. */
-.component__mark {
-  --family: var(--color-text-muted);
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  background: color-mix(in srgb, var(--family) 13%, transparent);
-  color: var(--family);
+.component__icon {
+  color: var(--color-text-subtle);
 }
 
-.family--physics {
-  --family: var(--color-family-physics);
+/* Problem counts in a header: the severity icon and number, in its colour, no pill. */
+.component__count {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
 }
-.family--render {
-  --family: var(--color-kind-mesh);
-}
-.family--light {
-  --family: var(--color-kind-light);
-}
-.family--camera {
-  --family: var(--color-kind-camera);
-}
-.family--audio {
-  --family: var(--color-kind-audio);
-}
-.family--script {
-  --family: var(--color-kind-script);
-}
-.family--navigation {
-  --family: var(--color-family-navigation);
+
+.component__count + .component__count {
+  margin-left: 6px;
 }
 
 .component__title {
@@ -355,15 +272,12 @@
 }
 
 /* Data the Inspector cannot present as its schema says (an unknown field, a component
-   without a schema, a version mismatch): the same dashed outline as a field's notice,
-   so every "shown as authored" case reads alike and none shouts. */
+   without a schema, a version mismatch): the warning icon and a sentence, like a
+   field's notice, so every "shown as authored" case reads alike and none shouts. */
 .component__notice {
   display: block;
   margin: 0;
-  padding: 7px 10px;
-  border: 1px dashed color-mix(in srgb, var(--color-warning) 55%, transparent);
-  border-radius: var(--radius);
-  background: color-mix(in srgb, var(--color-warning-bg) 35%, transparent);
+  padding: 2px 0;
   color: var(--color-text);
   font-size: var(--text-xs);
   line-height: var(--leading-tight);
@@ -446,19 +360,6 @@ fieldset.field-group::before {
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
   line-height: var(--leading-tight);
-}
-
-/* Help for the value above (a variant's note): it sits in the value column, close
-   under the value it explains, so the label column stays clean. */
-.field__help {
-  margin-top: -2px;
-  padding-left: calc(var(--label-w, 104px) - var(--depth, 0) * var(--group-indent) + var(--space-3));
-}
-
-@container component (max-width: 299px) {
-  .field__help {
-    padding-left: 0;
-  }
 }
 
 /* ---- Rows ---- */
@@ -687,16 +588,13 @@ input.control.control__input.mono {
 
 /*
  * A short status inside a value box: "Default" for a documented default that is
- * not authored, "Unused" for a value the current mode ignores. Text, not colour,
- * carries the meaning; a hairline outline keeps it distinct from a unit.
+ * not authored, "Unused" for a value the current mode ignores. Plain words at the
+ * box's far end, apart from a unit, which follows its number.
  */
 .control__tag {
   flex: none;
   margin-left: auto;
-  padding: 0 5px;
-  border-radius: var(--radius-sm);
-  box-shadow: inset 0 0 0 1px var(--color-border-control);
-  color: var(--color-text-muted);
+  color: var(--color-text-subtle);
   font-size: var(--text-xs);
   line-height: 16px;
   white-space: nowrap;
@@ -946,12 +844,13 @@ input.control.control__input.mono {
 
 /* ---- Notices: a value that cannot be presented as its schema says ---- */
 
+/* A value shown as authored: the warning icon and sentence, then the raw value in a well.
+   No frame of its own; the well is the data. */
 .control--notice {
   flex-direction: column;
   align-items: stretch;
   gap: 5px;
-  padding: 6px var(--space-3) var(--space-3);
-  border: 1px dashed color-mix(in srgb, var(--color-warning) 55%, transparent);
+  padding: 4px 0;
   border-radius: var(--radius);
   font-size: var(--text-xs);
   line-height: var(--leading-tight);
@@ -990,9 +889,9 @@ input.control.control__input.mono {
   align-items: baseline;
 }
 
-/* A list of records spans the component, so its header does too: the name on the
-   left, the breakdown ("64 parts · 22 box, ...") on the right, or on its own line
-   under the name when both do not fit. */
+/* A list of records spans the component, so its header does too: the name and count
+   ("Parts 64") on the left, the breakdown ("22 box, 21 sphere, 21 capsule") on the
+   right, or on its own line under the name when both do not fit. */
 .object-list > .field--list {
   display: flex;
   flex-wrap: wrap;
@@ -1010,23 +909,21 @@ input.control.control__input.mono {
   font-weight: var(--weight-medium);
 }
 
-.object-list__summary {
-  min-width: 0;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  line-height: 16px;
+.object-list__count {
+  margin-left: 6px;
   color: var(--color-text-subtle);
-  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
   font-variant-numeric: tabular-nums;
 }
 
-.object-list > .field--list > .object-list__summary {
+.object-list__breakdown {
   flex: 1 0 auto;
   max-width: 100%;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: 16px;
   text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .object-list__items {
@@ -1173,17 +1070,6 @@ input.control.control__input.mono {
 
 .object-list__of {
   color: var(--color-text-subtle);
-  font-weight: var(--weight-regular);
-}
-
-/* The item's document path, for matching a diagnostic ("/shape/parts/41" is part 42). */
-.object-list__path {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: var(--color-text-subtle);
-  font-family: var(--font-mono);
   font-weight: var(--weight-regular);
 }
 

@@ -4,18 +4,19 @@ import type { IconName } from '../../icons/Icon';
 import { Icon } from '../../icons/Icon';
 import { projectState } from '../../shell/projectState';
 import { useShell } from '../../shell/ShellContext';
+import { comboText, usePlatform } from '../ShortcutsDialog';
 import { StateView } from '../StateView';
 import { Pager, usePage } from './paging';
 import { formatTime } from './time';
 
 /**
- * Edit history as a timeline, oldest first: each transaction is a dot on a line,
- * coloured by who made it, and a "Now" marker sits between what is applied and what
- * Redo would bring back. At most one page of edits is mounted; the view follows the
+ * Edit history, oldest first: each transaction with who made it and when, and a "Now"
+ * marker between what is applied and what Redo would bring back. At most one page of edits is mounted; the view follows the
  * page that holds Now until another page is chosen, and Now returns to it.
  */
 export function HistoryList() {
-  const { snapshot, run, announce } = useShell();
+  const { snapshot, run } = useShell();
+  const platform = usePlatform();
   const entries = snapshot?.history.entries ?? [];
   const applied = snapshot?.history.applied ?? 0;
   const page = usePage(entries.length, applied);
@@ -26,12 +27,10 @@ export function HistoryList() {
   if (!snapshot) return <StateView icon="plug" title="No engine connected" compact />;
   const project = projectState(snapshot);
   // Without an open project there is no history to undo; no toolbar or "0 of 0" claim.
-  if (project.kind === 'loading') return <StateView icon="history" spinner title="Opening project…" compact />;
+  if (project.kind === 'loading') return <StateView icon="history" title="Opening project…" quiet />;
   if (project.kind === 'failed') {
     return (
-      <StateView icon="history" title="No project loaded" compact>
-        <p>Edit history appears once the project opens.</p>
-      </StateView>
+      <StateView icon="history" title="No project loaded" compact />
     );
   }
   return (
@@ -40,7 +39,8 @@ export function HistoryList() {
         <UnavailableAwareButton
           icon="undo"
           label="Undo"
-          shortcut="⌘Z / Ctrl+Z"
+          shortcut={comboText(['Mod', 'Z'], platform)}
+          keyShortcuts="Meta+Z Control+Z"
           disabled={applied === 0}
           onActivate={() => void run({ type: 'history.undo' })}
           capability="history.undo"
@@ -48,7 +48,8 @@ export function HistoryList() {
         <UnavailableAwareButton
           icon="redo"
           label="Redo"
-          shortcut="⇧⌘Z / Ctrl+Y"
+          shortcut={comboText(platform === 'mac' ? ['Shift', 'Mod', 'Z'] : ['Ctrl', 'Y'], platform)}
+          keyShortcuts="Meta+Shift+Z Control+Y"
           disabled={applied >= entries.length}
           onActivate={() => void run({ type: 'history.redo' })}
           capability="history.redo"
@@ -56,12 +57,10 @@ export function HistoryList() {
         <span className="panel__meta">
           {applied.toLocaleString()} of {entries.length.toLocaleString()} applied
         </span>
-        <Pager page={page} noun="edits" anchorLabel="Now" announce={announce} />
+        <Pager page={page} noun="edits" anchorLabel="Now" />
       </div>
       {entries.length === 0 ? (
-        <StateView icon="history" title="No history yet" compact>
-          <p>Every edit, by you, the agent, a script or an import, is recorded here and can be undone.</p>
-        </StateView>
+        <StateView icon="history" title="No history yet" compact />
       ) : (
         // Focusable: the rows are text, not controls, so the list itself is the keyboard stop that scrolls.
         <ol ref={listRef} className="list timeline" aria-label="Edit history, oldest first" tabIndex={0}>
@@ -73,7 +72,6 @@ export function HistoryList() {
               <Fragment key={entry.transaction}>
                 {index === applied ? <NowMarker /> : null}
                 <li className={`list__row history__row timeline__row origin-row--${entry.origin.kind}${undone ? ' is-undone' : ''}`}>
-                  <span className="timeline__dot" aria-hidden="true" />
                   <span className="list__main">
                     {entry.description}
                     {undone ? <span className="history__undone"> (undone)</span> : null}
@@ -124,13 +122,16 @@ function UnavailableAwareButton({
   icon,
   label,
   shortcut,
+  keyShortcuts,
   disabled,
   onActivate,
   capability,
 }: {
   icon: IconName;
   label: string;
+  /** The keys as written on this platform, for the tooltip. */
   shortcut: string;
+  keyShortcuts: string;
   disabled: boolean;
   onActivate: () => void;
   capability: 'history.undo' | 'history.redo';
@@ -143,7 +144,7 @@ function UnavailableAwareButton({
       className="button button--ghost"
       // aria-disabled keeps the button focusable so activating it can explain why it is unavailable.
       aria-disabled={disabled || unavailable || undefined}
-      aria-keyshortcuts={shortcut.includes('Ctrl+Y') ? 'Meta+Shift+Z Control+Y' : 'Meta+Z Control+Z'}
+      aria-keyshortcuts={keyShortcuts}
       title={`${label} (${shortcut})`}
       onClick={() => {
         if (disabled && !unavailable) return;

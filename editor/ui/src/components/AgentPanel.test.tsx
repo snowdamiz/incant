@@ -65,15 +65,17 @@ describe('Agent that cannot run', () => {
   it('says so in one note, keeps no transcript or composer, and collapses to its status line', () => {
     render(<App resolution={{ kind: 'bridge', bridge: createProviderFixtureBridge('sample', 'signed-in') }} />);
     const agent = document.querySelector<HTMLElement>('[data-region="agent"]')!;
-    expect(within(agent).getByText('Agent not ready')).toBeTruthy();
+    // One sentence, the host's reason; no title repeats the header's state.
+    const reason = 'Agent messaging is not enabled in this build yet.';
+    expect(within(agent).getByText(reason)).toBeTruthy();
     expect(within(agent).queryByRole('log')).toBeNull();
     expect(within(agent).queryByRole('textbox')).toBeNull();
     const toggle = within(agent).getByRole('button', { name: /^Agent/ });
     expect(toggle.textContent).toContain('Unavailable');
     fireEvent.click(toggle);
-    expect(within(agent).queryByText('Agent not ready')).toBeNull();
+    expect(within(agent).queryByText(reason)).toBeNull();
     fireEvent.click(toggle);
-    expect(within(agent).getByText('Agent not ready')).toBeTruthy();
+    expect(within(agent).getByText(reason)).toBeTruthy();
   });
 });
 
@@ -94,13 +96,13 @@ describe('Agent reason wording', () => {
     render(<App resolution={{ kind: 'bridge', bridge }} />);
     const agent = document.querySelector<HTMLElement>('[data-region="agent"]')!;
     expect(agent.textContent).not.toMatch(/headless|Phase 0|spike/);
-    expect(within(agent).getByText('Not in the editor yet')).toBeTruthy();
-    // No invitation to sign in for an agent that signing in would not enable.
-    expect(within(agent).queryByText('Use your ChatGPT account')).toBeNull();
+    expect(within(agent).getByText('The agent is not available in the editor yet.')).toBeTruthy();
     expect(within(agent).getByRole('button', { name: /^Agent/ }).textContent).toContain('Unavailable');
     expect(within(agent).queryByRole('textbox')).toBeNull();
-    // Connecting an account is a real bridge action, so it stays offered.
-    expect(within(agent).getByRole('button', { name: /Continue with ChatGPT/ })).toBeTruthy();
+    // No invitation to sign in for an agent that signing in would not enable. Account
+    // connection stays available from the titlebar's account button.
+    expect(within(agent).queryByRole('button', { name: /Continue with ChatGPT/ })).toBeNull();
+    expect(screen.getByRole('button', { name: /^ChatGPT account, not signed in/ })).toBeTruthy();
   });
 });
 

@@ -194,14 +194,12 @@ kbd {
   color: var(--color-text);
 }
 
-.button--accent,
 .button--primary {
   border-color: transparent;
   background: var(--color-accent);
   color: var(--color-text-on-accent);
 }
 
-.button--accent:hover,
 .button--primary:hover {
   background: var(--color-accent-strong);
 }
@@ -227,12 +225,6 @@ kbd {
   background: transparent;
   color: var(--color-text-subtle);
   opacity: 0.6;
-}
-
-/* An unavailable accent action keeps its emphasis but reads as inactive. */
-.button--accent[aria-disabled='true'] {
-  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
-  color: var(--color-accent-strong);
 }
 
 /* "Continue with ChatGPT": the white format from OpenAI's Sign in with ChatGPT guidance. */
@@ -270,31 +262,12 @@ kbd {
 
 /* ---- Chips and badges ---- */
 
-/* A quiet, focusable status chip; its full explanation is in the tooltip and screen-reader text. */
-.quiet-chip {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  height: 20px;
-  padding: 0 7px 0 6px;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-raised);
-  color: var(--color-text-subtle);
-  font-size: var(--text-xs);
-  line-height: 20px;
-  white-space: nowrap;
-  cursor: help;
-}
-
+/* A problem count: the severity icon and number in its colour. No pill. */
 .badge {
   flex: none;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  height: 18px;
-  padding: 0 6px 0 4px;
-  border-radius: 9px;
+  gap: 2px;
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
   line-height: 18px;
@@ -302,12 +275,10 @@ kbd {
 }
 
 .badge--error {
-  background: var(--color-danger-bg);
   color: var(--color-danger);
 }
 
 .badge--warning {
-  background: var(--color-warning-bg);
   color: var(--color-warning);
 }
 
@@ -401,6 +372,8 @@ kbd {
 
 /* ---- Empty / loading / error states ---- */
 
+/* One quiet line where content would be: no badge, no backdrop. Errors keep an inline
+   icon in their colour, and a detail line (the message and code) when there is one. */
 .state-view {
   flex: 1;
   display: flex;
@@ -408,64 +381,59 @@ kbd {
   align-items: center;
   justify-content: flex-start;
   gap: var(--space-2);
-  padding: 16% var(--space-6) var(--space-6);
+  padding: 72px var(--space-6) var(--space-6);
   text-align: center;
   color: var(--color-text-muted);
 }
 
 .state-view--compact {
-  padding: var(--space-6) var(--space-5);
+  padding: 40px var(--space-5) var(--space-5);
 }
 
-/* A soft disc with a hairline ring: the state's pictogram, tinted by its tone. */
-.state-view__badge {
-  --badge: var(--color-text-muted);
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  margin-bottom: var(--space-3);
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--badge) 16%, var(--color-bg-raised)), var(--color-bg-raised) 70%);
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--badge) 22%, var(--color-border)),
-    0 0 0 6px color-mix(in srgb, var(--badge) 5%, transparent);
-  color: var(--badge);
-}
-
-.state-view--compact .state-view__badge {
-  width: 40px;
-  height: 40px;
-  margin-bottom: var(--space-2);
-}
-
-.state-view--error .state-view__badge {
-  --badge: var(--color-danger);
-}
-
-.state-view--warning .state-view__badge {
-  --badge: var(--color-warning);
-}
-
-.state-view--success .state-view__badge {
-  --badge: var(--color-success);
-}
-
+/* The icon or spinner sits inline before the words, so a title that wraps stays centred
+   with its mark on the first line. */
 .state-view__title {
-  font-size: var(--text-md);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  max-width: 44ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: 20px;
+  text-wrap: balance;
+}
+
+.state-view__title > .icon,
+.state-view__title > .spinner {
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: -2px;
+}
+
+.state-view__title > .spinner--small {
+  vertical-align: 0;
+}
+
+.state-view--error .state-view__title {
   color: var(--color-text);
+}
+
+.state-view--error .state-view__icon {
+  color: var(--color-danger);
+}
+
+.state-view--warning .state-view__icon {
+  color: var(--color-warning);
 }
 
 .state-view__body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  max-width: 38ch;
+  gap: var(--space-1);
+  max-width: 44ch;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: 17px;
   overflow-wrap: anywhere;
-  line-height: 19px;
 }
 
 .state-view__action {
@@ -479,109 +447,48 @@ kbd {
   display: grid;
   place-items: center;
   padding: var(--space-6);
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 40%, color-mix(in srgb, var(--color-danger) 6%, transparent), transparent 70%),
-    var(--color-bg-app);
+  background: var(--color-bg-app);
 }
 
-.fatal__card {
-  width: min(520px, 100%);
+.fatal__content {
+  width: min(480px, 100%);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: var(--space-3);
-  padding: 22px 28px 26px;
-  border-radius: 16px;
-  background: var(--color-bg-panel);
-  box-shadow: var(--shadow-popover);
   color: var(--color-text-muted);
   line-height: var(--leading);
 }
 
-.fatal__brand {
-  display: inline-flex;
+.fatal__title {
+  display: flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
-  color: var(--color-text-soft);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-tight);
-}
-
-.fatal__badge {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--color-danger-bg);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-danger) 28%, transparent);
-  color: var(--color-danger);
-}
-
-.fatal__title {
-  margin: var(--space-2) 0 0;
+  margin: 0;
   color: var(--color-text);
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
-  line-height: 28px;
+}
+
+.fatal__icon {
+  color: var(--color-danger);
 }
 
 .fatal__body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  width: 100%;
+  gap: var(--space-3);
   overflow-wrap: anywhere;
 }
 
 .fatal__body code {
-  padding: 1px 5px;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-raised);
   color: var(--color-text-soft);
-}
-
-/* "Editor UI · Protocol 1  ≠  Engine · Protocol 99": the mismatch at a glance. */
-.fatal__versions {
-  display: flex;
-  align-items: stretch;
-  gap: var(--space-3);
-}
-
-.fatal__version {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--color-bg-raised) 50%, var(--color-bg-panel));
-  box-shadow: inset 0 0 0 1px var(--color-border-strong);
-}
-
-.fatal__version-label {
-  color: var(--color-text-subtle);
-  font-size: var(--text-xs);
-}
-
-.fatal__version-value {
-  color: var(--color-text);
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-}
-
-.fatal__versus {
-  align-self: center;
-  color: var(--color-danger);
-  font-size: var(--text-lg);
 }
 
 .fatal__choices {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-1);
 }
 
 .fatal__choices-title {
@@ -590,21 +497,15 @@ kbd {
   font-weight: var(--weight-semibold);
 }
 
+/* Names as a wrapped run of monospace words. */
 .fatal__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 2px 14px;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.fatal__chips code {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 999px;
-  box-shadow: inset 0 0 0 1px var(--color-border-strong);
-  background: transparent;
+  font-size: var(--text-xs);
 }
 
 /* ---- Menus ---- */
@@ -660,12 +561,14 @@ kbd {
   color: var(--color-danger);
 }
 
+/* The shortcut as plain text at the trailing edge, as in native menus. */
 .menu__shortcut {
   min-width: 0;
-  padding: 0 5px;
+  padding: 0;
+  border: 0;
   background: transparent;
-  box-shadow: inset 0 0 0 1px var(--color-border-strong);
   color: var(--color-text-subtle);
+  font-family: var(--font-ui);
   font-size: var(--text-xs);
   line-height: 16px;
 }

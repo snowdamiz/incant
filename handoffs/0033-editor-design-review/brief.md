@@ -1,3 +1,96 @@
+## Highest priority — director rejects ornamental UI, 2026-10-10
+
+The director has just reviewed the rebuilt native app and supplied five screenshots
+with the following explicit feedback. This supersedes the previous limited native
+delta review: implement a substantive simplification across the whole app now.
+Keep Opus 5.5 and Max thinking explicitly verified through ACP on this resumed run.
+
+> 1. remove this useless text, this useless row, and other similar things from app
+> 2. account dialog is super ugly
+> 3. keybinds is less ugly but looks vibe coded and not proffessional at all with this layout
+> 4. the account badge in top right takes up way too much space. Just the profile icon like it is now by itself instead of this super long badge
+> 5. App looks a bit more vibe coded now which is bad. Things like decorative left borders on buttons, glow behind some empy state icons, and other thngs like this
+
+Read all five supplied screenshots before editing. They are copied under ignored
+`artifacts/0033-native-main/director-feedback/`:
+
+- `01-compound-explanation.png`: the persistent paragraph "One body and material
+  shared by a bounded union of local primitive parts." Remove it from the normal
+  inspector, along with comparable redundant explanations throughout the app.
+- `02-entity-metadata-row.png`: the dedicated Entity / long ID / Read-only row.
+  Remove this visual row. Preserve access to copy identity where actually useful,
+  keyboard/assistive semantics, and truthful behavior without spending a permanent
+  row on implementation metadata or falsely suggesting unsupported editing.
+- `03-account-dialog.png`: the account dialog duplicates identity/state and is
+  dominated by large nested boxes, buttons and explanatory text. Rethink it as a
+  clean, compact, professional desktop account surface. Preserve actual account
+  switching, adding, sign-out, loading/error behavior and focus management.
+- `04-keyboard-shortcuts.png`: the new card-grid layout is still rejected. Rethink
+  the information layout, hierarchy and spacing rather than restyling its cards.
+  Keep all real actions, platform-specific bindings, search and keyboard access.
+- `05-account-badge.png`: replace the long top-right account pill with the profile
+  icon/avatar alone. Do not retain a visible email, provider label or long status
+  badge next to it. Use suitable accessible naming and discoverable account access.
+
+The screenshots illustrate a system-wide problem, not five isolated patches.
+Audit every major surface for decorative left borders on buttons/selection cards,
+glowing icon backdrops, excessive icon tiles, nested containers, repeated titles,
+redundant descriptive prose, metadata rows and other ornament that does not serve
+an interaction. Remove that visual noise and redundant copy. Keep the neutral
+palette, connected workspaces, restrained accent, useful information and clear
+focus/selection/error affordances. Aim for a precise professional desktop tool;
+do not replace decoration with enormous whitespace or hide essential diagnostics.
+You retain creative control over the resulting app-wide design. Account and
+keybinds are explicit redesigns, but do not hyperfocus on them and omit the rest.
+
+Preserve Astra's correctness patches, bounded mounted lists, paging and diagnostic
+reveal, all command-bus mutations, offline usability and actual auth logic. Do not
+touch Rust, schemas, transport or credential storage. Do not add external runtime
+dependencies. Keep direct native automation paused while the user is using the
+preview; browser iteration/capture is available. Astra will rebuild and provide
+fresh native evidence after the implementation returns. Current native captures
+document the rejected design, not acceptance of the new one.
+
+Update the whole-app coverage matrix with the concrete removals/redesigns across
+the app, review normal/minimum layouts and interaction states, run all UI tests,
+strict typecheck and build, and return a complete result with unambiguous remaining
+native checks. Adjust tests for intentional presentation changes while preserving
+behavior coverage. All raw user/native screenshots are private and ignored; never
+commit account-bearing images. Use synthetic account data for shareable evidence.
+Commit Built-by: claude. Do not publish or merge.
+
+## Native review update — 2026-10-10 17:45
+
+Astra built the current main-based whole-app design at 6db60b2, including two
+independently reproduced behavior fixes: AgentPanel observes its actual remounted
+transcript node, and a navigation grid that becomes malformed keeps its raw costs
+visible even if its valid predecessor's values were collapsed. Those fixes are now
+in your checkout; preserve them. All 500 UI tests, strict typecheck, production
+build, six native editor tests, Clippy, and the explicit native GPU recovery test
+pass. Read the manifest in ignored `artifacts/0033-native-main/` for exact source,
+binary identity and commands. It is a new native custom-protocol build; saved
+sign-in restored automatically.
+
+Review the two new actual native captures now available there: compound-first.png
+and grid-current.png. The former shows the current compound panel at its first
+row; it is NOT an End/last-row check. The latter shows the current large grid with
+values collapsed. Both are 1440 by 874 logical pixels. They include the private
+account label: keep raw captures local and ignored. Any committed illustration
+must be an account-free crop. Treat this as a focused native delta review of your
+whole-app work, not another redesign or acceptance of unobserved states.
+
+The user is interacting with the native preview and automated input was blocked
+twice by the focus-change guard. Do not drive the native app during this pass.
+Astra is leaving it available and continuing engineering. Native End then Tab
+last-part reveal, grid values paging, dialogs/menus and the 1000 by 650 minimum
+captures remain explicitly pending; do not claim those checks passed. You may
+review existing browser coverage to decide whether the supplied native states
+have any new visual defect, and inspect the two behavior patches if relevant.
+Report scoped findings and remaining native checklist. Make changes only if a
+clear defect warrants them; preserve the app-wide design and all interactions.
+No Cargo, shader, engine, schema, account or native automation changes. Continue
+through ACP at explicitly verified Opus 5.5 Max; commit Built-by: claude.
+
 ## Current integration priority — publish the whole-app pass on main, 2026-10-10 16:55
 
 Astra integrated your whole-app commit and fixed reproduced menu focus, diagnostic

@@ -42,18 +42,6 @@
   color: var(--color-text);
 }
 
-/* The selection pill carries a short accent edge, so it reads at a glance in a long tree. */
-.tree-row.is-selected::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 7px;
-  bottom: 7px;
-  width: 2px;
-  border-radius: 1px;
-  background: var(--color-accent);
-}
-
 /* A scene is the root of its tree: set like a heading. */
 .tree-row.is-scene {
   color: var(--color-text);
@@ -149,13 +137,6 @@
 
 .tree-row__nested.is-warning {
   background: var(--color-warning);
-}
-
-/* Problem marks in rows are unboxed: an icon and a count. */
-.tree-row .badge {
-  gap: 2px;
-  padding: 0;
-  background: transparent;
 }
 
 /* Entity and asset kind tints. Icons always sit next to a name; color is never the only cue. */

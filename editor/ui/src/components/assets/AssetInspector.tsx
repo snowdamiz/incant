@@ -98,7 +98,9 @@ export function useAssetInspectorHeader(): ReactNode {
   if (pane === 'import') return <IdentityHeader icon="import" name="Import assets" titleId={TITLE_ID} focusable />;
   const asset = pane === 'details' ? assets.find((candidate) => candidate.id === selected) : undefined;
   if (!asset) return null;
-  return <IdentityHeader icon={iconForKind(asset.kind)} kind={asset.kind} name={asset.name} titleId={TITLE_ID} focusable />;
+  // Kind and usage are spoken with the name; the Interpretation section shows the usage.
+  const description = [kindLabel(asset.kind), asset.textureUsage ? USAGE_LABEL[asset.textureUsage] : null].filter(Boolean).join(', ');
+  return <IdentityHeader icon={iconForKind(asset.kind)} kind={asset.kind} name={asset.name} titleId={TITLE_ID} focusable description={description} />;
 }
 
 /**
@@ -116,40 +118,21 @@ export function AssetInspector() {
   let content: ReactNode;
   if (pane === 'import') {
     content = availability.ok ? (
-      <>
-        <p className="inspector__meta">From the project folder</p>
-        <ImportForm assets={assets} />
-      </>
+      <ImportForm assets={assets} />
     ) : (
       <StateView icon="lock" title="Importing is unavailable" compact>
         <p>{availability.reason}</p>
       </StateView>
     );
   } else if (asset) {
-    content = (
-      <>
-        <p className="inspector__meta">
-          <span className="inspector__kind">{kindLabel(asset.kind)}</span>
-          {asset.textureUsage ? <span className="inspector__kind-detail">{USAGE_LABEL[asset.textureUsage]}</span> : null}
-        </p>
-        <AssetDetails asset={asset} availability={availability} />
-      </>
-    );
+    content = <AssetDetails asset={asset} availability={availability} />;
   } else if (pane === 'details') {
     content = (
-      <StateView icon="texture" title="This asset is no longer in the project" compact>
-        <p>It may have been removed by an undo. Choose another asset from the list.</p>
-      </StateView>
+      <StateView icon="texture" title="This asset is no longer in the project" compact />
     );
   } else {
     content = (
-      <StateView icon="texture" title="No asset selected" compact>
-        <p>
-          {availability.ok
-            ? 'Select an asset to see its source and import settings, or import files from the project folder.'
-            : 'Select an asset to see its source and import settings.'}
-        </p>
-      </StateView>
+      <StateView icon="texture" title="No asset selected" compact />
     );
   }
   return (
@@ -298,7 +281,10 @@ function AssetDetails({ asset, availability }: { asset: ProjectAsset; availabili
         </p>
       </section>
       <details className="asset-section asset-ids">
-        <summary className="asset-section__title">Identifiers</summary>
+        <summary className="asset-section__title">
+          <Icon name="chevron" size={12} className="asset-ids__chevron" />
+          Identifiers
+        </summary>
         <dl className="asset-ids__list">
           <div>
             <dt>ID</dt>

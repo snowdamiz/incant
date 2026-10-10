@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { Pager, usePage } from './paging';
 afterEach(cleanup);
 function Probe({ total }: { total: number }) {
   const page = usePage(total, total - 1);
-  return <><Pager page={page} noun="messages" anchorLabel="Newest" announce={() => {}} /><output aria-label="Page">{page.index}</output></>;
+  return <><Pager page={page} noun="messages" anchorLabel="Newest" /><output aria-label="Page">{page.index}</output></>;
 }
 describe('pager focus and list replacement', () => {
   it('keeps keyboard focus within the pager after following its disappearing anchor', () => {
@@ -25,5 +25,12 @@ describe('pager focus and list replacement', () => {
     expect(screen.getByLabelText('Page').textContent).toBe('1');
     rerender(<Probe total={1000} />);
     expect(screen.getByLabelText('Page').textContent).toBe('1');
+  });
+  it('announces a chosen page from the pager, whose range is already visible', () => {
+    render(<Probe total={1000} />);
+    const status = within(screen.getByRole('group', { name: 'Pages of messages' })).getByRole('status');
+    expect(status.textContent).toBe('');
+    fireEvent.click(screen.getByRole('button', { name: 'Previous page' }));
+    expect(status.textContent).toBe('Showing messages 801–900 of 1,000');
   });
 });

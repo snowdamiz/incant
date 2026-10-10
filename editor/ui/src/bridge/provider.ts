@@ -26,17 +26,17 @@ export function signedInLabel(state: ProviderState): string | null {
 
 /** Short status for the titlebar chip. */
 export function providerSummary(state: ProviderState | undefined): { tone: ProviderTone; text: string } {
-  if (!state) return { tone: 'neutral', text: 'No engine' };
+  if (!state) return { tone: 'neutral', text: 'no engine connected' };
   switch (state.status) {
     case 'checking':
-      return { tone: 'pending', text: 'Checking…' };
+      return { tone: 'pending', text: 'checking for a saved sign-in' };
     case 'not-connected':
-      return { tone: 'neutral', text: 'Sign in' };
+      return { tone: 'neutral', text: 'not signed in' };
     case 'connecting':
-      return { tone: 'pending', text: state.phase === 'validating' ? 'Finishing sign-in…' : 'Waiting for browser…' };
+      return { tone: 'pending', text: state.phase === 'validating' ? 'finishing sign-in' : 'waiting for the browser' };
     case 'connected':
-      return { tone: 'ok', text: state.accountLabel };
+      return { tone: 'ok', text: `signed in as ${state.accountLabel}` };
     case 'error':
-      return { tone: 'error', text: 'Needs attention' };
+      return { tone: 'error', text: 'sign-in problem' };
   }
 }

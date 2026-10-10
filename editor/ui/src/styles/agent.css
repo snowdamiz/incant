@@ -125,7 +125,7 @@
   flex-direction: column;
 }
 
-/* Unable to run: one short note and its next step. Long host reasons scroll here. */
+/* Unable to run: one sentence and its next step. Long host reasons scroll here. */
 .agent-note {
   position: relative;
   display: flex;
@@ -134,13 +134,6 @@
   max-height: 34vh;
   padding: var(--space-1) var(--space-4) var(--space-4);
   overflow: auto;
-}
-
-.agent-note__title {
-  color: var(--color-text);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-tight);
 }
 
 .agent-note__body {
@@ -174,57 +167,15 @@
   outline-offset: -2px;
 }
 
+/* An empty conversation: one quiet line above the composer. */
 .agent-empty {
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  max-width: 34ch;
+  max-width: 40ch;
   padding: var(--space-4) var(--space-5);
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: 17px;
   text-align: center;
-}
-
-.agent-empty__mark {
-  display: grid;
-  place-items: center;
-  margin-bottom: var(--space-2);
-  color: var(--color-accent);
-  --wisp-eye: var(--color-bg-side);
-}
-
-.agent-empty__title {
-  font-size: var(--text-md);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-tight);
-}
-
-.agent-empty__body {
-  color: var(--color-text-muted);
-  line-height: 19px;
-}
-
-/* A short pane drops the mark and sets the text smaller, so it stays above the composer. */
-@container agent-transcript (max-height: 140px) {
-  .agent-empty {
-    gap: 0;
-    max-width: none;
-    padding: 6px var(--space-5);
-  }
-
-  .agent-empty__mark {
-    display: none;
-  }
-
-  .agent-empty__title {
-    font-size: var(--text-sm);
-    line-height: 18px;
-  }
-
-  .agent-empty__body {
-    font-size: var(--text-xs);
-    line-height: var(--leading-tight);
-  }
 }
 
 .composer {

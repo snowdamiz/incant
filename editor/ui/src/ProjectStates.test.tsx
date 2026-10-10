@@ -61,10 +61,11 @@ describe('project loading and failure states', () => {
     expect(within(banner).getByRole('status').textContent).toBe('Opening project…');
     expect(screen.getByRole('heading', { level: 1 }).textContent).toContain('Opening project…');
     expect(screen.queryByText('No problems')).toBeNull();
-    expect(within(region('dock')).getByText('Opening project…')).toBeTruthy();
-    expect(within(region('inspector')).getByText('Opening project…')).toBeTruthy();
+    // The banner shows the state once; panels keep it for assistive tech, not on screen.
+    for (const name of ['dock', 'inspector', 'viewport'] as const) {
+      expect(within(region(name)).getByText('Opening project…').className).toBe('visually-hidden');
+    }
     expect(within(region('inspector')).queryByText('Nothing selected')).toBeNull();
-    expect(within(region('viewport')).getByText('Opening project…')).toBeTruthy();
     expect(within(region('hierarchy')).getByRole('status', { name: 'Loading hierarchy' })).toBeTruthy();
     // The status bar shows no error/warning counts before anything was validated.
     expect(document.querySelector('.statusbar')!.textContent).not.toMatch(/errors/);
@@ -75,7 +76,7 @@ describe('project loading and failure states', () => {
     expect(within(region('dock')).queryByRole('button', { name: 'Undo' })).toBeNull();
 
     // Saved account metadata stays visible while the project opens.
-    expect(screen.getByRole('button', { name: /^ChatGPT / }).textContent).toContain('Sample Account');
+    expect(screen.getByRole('button', { name: /^ChatGPT account, signed in as Sample Account/ })).toBeTruthy();
     await expectNoAxeViolations(container);
   });
 
@@ -119,7 +120,7 @@ describe('project loading and failure states', () => {
     expect(screen.queryByText(/applied/)).toBeNull();
     expect(screen.getByRole('button', { name: 'Undo' }).getAttribute('aria-disabled')).toBe('true');
 
-    expect(screen.getByRole('button', { name: /^ChatGPT / }).textContent).toContain('Sample Account');
+    expect(screen.getByRole('button', { name: /^ChatGPT account, signed in as Sample Account/ })).toBeTruthy();
     await expectNoAxeViolations(container);
   });
 
@@ -194,7 +195,8 @@ describe('project loading and failure states', () => {
     render(<App resolution={{ kind: 'bridge', bridge }} />);
     const viewport = region('viewport');
     expect(within(viewport).getByText('No project loaded')).toBeTruthy();
-    expect(within(viewport).getByText('There is nothing to render until the project opens.')).toBeTruthy();
+    // The banner carries the failure; the viewport adds no prose of its own.
+    expect(viewport.querySelector('#viewport-detail')).toBeNull();
     expect(viewport.textContent).not.toMatch(/render error|failed to attach|Nothing in this area is rendered/i);
   });
 });

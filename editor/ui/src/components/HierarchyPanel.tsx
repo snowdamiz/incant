@@ -11,6 +11,7 @@ import { Skeleton, StateView } from './StateView';
 import { AssetBrowser } from './assets/AssetBrowser';
 import { MatchCount } from './MatchCount';
 import { ContextMenu } from './Menu';
+import { comboText, usePlatform } from './ShortcutsDialog';
 import { unavailableMessage } from '../bridge/resolve';
 import { COPY_ID_UNAVAILABLE, canWriteClipboard, copyText } from '../shell/clipboard';
 import { useAssets } from '../assets/AssetsContext';
@@ -24,18 +25,14 @@ export function HierarchyPanel() {
   let body;
   if (!snapshot) {
     body = (
-      <StateView icon="plug" title="No engine connected">
-        <p>The hierarchy appears when the editor process attaches a project.</p>
-      </StateView>
+      <StateView icon="plug" title="No engine connected" />
     );
   } else if (!hierarchy || hierarchy.status === 'loading') {
     body = <Skeleton label="Loading hierarchy" />;
   } else if (hierarchy.status === 'error' && project.kind === 'failed' && sameError(hierarchy.error, project.error)) {
     // The banner carries the full failure; this panel only says what it cannot show.
     body = (
-      <StateView icon="error" tone="error" alert={false} title="No project loaded">
-        <p>Entities appear here once the project opens.</p>
-      </StateView>
+      <StateView icon="error" tone="error" alert={false} title="No project loaded" />
     );
   } else if (hierarchy.status === 'error') {
     body = (
@@ -46,9 +43,7 @@ export function HierarchyPanel() {
     );
   } else if (hierarchy.value.roots.length === 0) {
     body = (
-      <StateView icon="scene" title="This project has no entities">
-        <p>Entities created by any client, including the agent, appear here.</p>
-      </StateView>
+      <StateView icon="scene" title="This project has no entities" />
     );
   } else {
     body = <Tree tree={hierarchy.value} key={bridge?.label ?? 'tree'} />;
@@ -164,6 +159,7 @@ const TOP = 2;
  */
 function Tree({ tree }: { tree: HierarchyTree }) {
   const { snapshot, bridge, selection, select, capabilities, explainUnavailable, run, announce } = useShell();
+  const platform = usePlatform();
   const [menu, setMenu] = useState<{ id: Ulid; at: { x: number; y: number } } | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(() => defaultExpanded(tree));
   const [filter, setFilter] = useState('');
@@ -349,9 +345,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
         </button>
       </div>
       {rows.length === 0 ? (
-        <StateView icon="search" title="No matching entities" compact>
-          <p>Nothing named “{query.trim()}”. Press Escape to clear the filter.</p>
-        </StateView>
+        <StateView icon="search" title="No matching entities" compact />
       ) : (
         <div
           ref={attachViewport}
@@ -429,7 +423,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
               id: 'delete',
               label: 'Delete',
               icon: 'trash',
-              shortcut: 'Del',
+              shortcut: comboText(platform === 'mac' ? ['Mod', 'Backspace'] : ['Delete'], platform),
               danger: true,
               unavailable: capabilities.has('entity.delete') ? undefined : unavailableMessage('entity.delete', bridge),
               onSelect: () => void run({ type: 'entity.delete', entity: menu.id }),

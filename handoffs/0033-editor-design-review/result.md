@@ -2,70 +2,367 @@
 
 ## Status
 
-Browser review of revision 4 ("studio") is complete on the main-based branch. Native
-review is pending Astra's rebuild.
+Revision 5 ("plain") is implemented and reviewed in the browser. It answers the
+director's rejection of ornamental UI (packet of 2026-10-10, top of `brief.md`). Native
+review is pending Astra's rebuild from this commit.
 
-- **Main-based integration (packet of 2026-10-10 16:55): done.** This branch is main
-  (PR 49) plus my UI commits and Astra's behavioural fixes; it carries no pixel-perfect
-  renderer.
-  - The browser fixture now mirrors main's `schemas/Camera.schema.json` exactly:
-    perspective and orthographic.
-  - The sample's third camera is an authored perspective camera.
-  - Pixel-perfect presentation is tested only against an explicitly synthetic schema.
-  - The native parity tests were not weakened.
-  - 498 tests pass in 28 files.
-- **Whole-app redesign (director feedback, 2026-10-10 14:32): done in the browser.**
-  Every surface was reviewed as one product and changed where it fell short. That
-  covers the shell, navigation, hierarchy, viewport chrome, assets, Inspector, dock,
-  agent and account, dialogs, menus, states and keyboard behaviour. The coverage matrix
-  below names each surface, the change and its evidence. It also names what was kept,
-  and why.
-- **Cramped compound Collider: resolved.** The selected part is no longer a bordered
-  card nested inside the list. Its fields continue at the component's own depth,
-  primitive and size first and the stable ID last. Variant fields no longer indent, and
-  rows are 28 px tall and 6 px apart. All editing, diagnostics and identity information
-  is still shown.
-- **Correctness follow-up (Astra's review, top of `brief.md`): done.**
-  - Problems, Console and History mount at most one page of 100 rows.
-  - Every list says which slice of how many it shows.
-  - Copy ID announces a missing or denied clipboard.
-- **Native End-then-Tab blank list: cause found and fixed in the UI.** The cause is a
-  stale scroll measurement that waited for an animation frame. The fix still needs
-  verification in a native rebuild; see request 1.
-- **Pre-existing bug fixed: the window could scroll.** In revision 3, 64 of 96 browser
-  states could scroll the whole document: by up to 1,235 px in ordinary states, and up
-  to 30,392 px with 450 problems listed. Following a problem link could slide the
-  titlebar off screen. The document now stays put; 0 of 96 states can scroll it.
-- **Native acceptance: not claimed.** All evidence is headless Chrome renders of the
-  built UI. Native captures from f78d763 informed the work; they show the previous
-  design.
-- **Performance gate: not claimed.** All timings were measured in a browser on an
-  Apple M5 Pro. They are not M1 MacBook Air numbers and not phone numbers.
+- **The five points: done in the browser.**
+  1. *Useless text and rows.* The compound paragraph is gone. The Inspector's Entity /
+     ID / Read-only row is gone. Comparable sentences and rows went across the app
+     (matrix below).
+  2. *Account dialog.* It is now a compact list: one status line only where the state
+     needs words, the accounts as plain rows, and one row of actions.
+  3. *Keybinds.* The card grid is now one searchable table, with keys as plain text in
+     the platform's notation.
+  4. *Account badge.* The long pill is now the avatar alone: the signed-in initial in its
+     ring, or a profile glyph.
+  5. *Ornament.* Removed across the app: icon tiles, badge discs behind empty-state
+     icons, accent edges, illustrations, keycaps, pills, dashed notice boxes, row tints,
+     timeline dots and entrance animations.
+- **Measured.**
+  - Visible words fall 13.6 % across the same 96 browser states: 19,478 → 16,820.
+  - The first Inspector value sits 30–91 px higher (median 31 px) in 54 of 61 inspected
+    states, and lower in none.
+  - Before and after alike: 0 axe violations, page errors, remote requests, window
+    scroll or step errors.
+- **Behaviour kept.**
+  - Astra's correctness patches, the bounded lists, paging and the diagnostic reveal
+    are unchanged, as are every command-bus mutation, offline use and the auth logic.
+  - Copy ID remains in the Inspector header and the hierarchy menu. "Read-only" is still
+    spoken and still in the tooltip.
+  - No Rust, schema, transport, credential storage or dependency changed.
+- **Checks.** 29 test files and 499 tests pass, with the strict typecheck clean and the
+  production build working. The count was 500 at 5cfa59d: one pager test was added, and
+  two contrast tests went with the two tints they checked.
+  - Tests changed only where the presentation changed on purpose; their behavioural
+    assertions remain.
+  - New test: the pager's own announcement. New assertions: the loading state is spoken
+    once and not repeated on screen, and the fixture label has contrast on the titlebar
+    canvas.
+- **Native acceptance: not claimed.** All evidence is headless Chrome. The two native
+  captures from 6db60b2 show revision 4, now superseded. The remaining native checks are
+  listed exactly in "Remaining native checks".
+- **Earlier work stands as recorded below:** main-based integration, revision 4, the
+  correctness follow-up and the End-then-Tab fix. Revision 4's visuals are superseded
+  wherever the revision 5 matrix says so.
 
 No phase gate is approved or claimed.
 
 ## Model and effort
 
 - Exact model: Claude Opus 5.5, model ID `claude-opus-5-5`.
-- Thinking effort: Max, selected and verified by the runner for each session of this
-  handoff, including this one. I cannot inspect the ACP transport from inside a
-  session. No model or effort substitution occurred.
+- Thinking effort: Max. The session reports reasoning effort "max" to the model. The
+  runner selects and verifies the model and effort through ACP. I cannot inspect the
+  ACP transport from inside the session.
+- No model or effort substitution occurred.
 
 ## Packet revisions acknowledged
 
 | Revision | What it asked | What I did |
 | --- | --- | --- |
-| Main-based integration, 2026-10-10 16:55 | Match the sample fixture and parity tests to main's Camera schema; no unsupported projection in the sample; a clear split for pixel tests; keep the design | See the next section |
-| Plan revisions 4–6 | Bounded large data; play kept out of authoring; hosted Device Farm phones | Every list stays bounded, the dock included; no Play or Keep Edit control; no device claim |
-| Director feedback, 2026-10-10 14:32 | A proper design improvement through the whole app, not one sidebar; the shortcuts dialog is one example | Revision 4 across every surface (matrix below) |
-| Native evidence from f78d763 | Investigate End then Tab on 64 parts; keep account-bearing captures local | Root cause found, fix and test; captures stayed ignored |
-| Correctness follow-up (Astra) | Bound the dock's output rows without losing anything; Copy ID must not fail silently | Paged dock with explicit ranges; clipboard capability handled |
+| Director rejects ornamental UI, 2026-10-10 | Remove useless text and rows app-wide; redesign the account dialog and keybinds; avatar-only account button; remove decorative edges, glows, tiles, nesting and prose; keep diagnostics, behaviour and a professional density | Revision 5 across every surface (next section). I read the five screenshots in the ignored `artifacts/0033-native-main/director-feedback/` first. |
+| Native review update, 2026-10-10 17:45 | Review `compound-first.png` and `grid-current.png` (6db60b2); keep raw captures local; a focused delta review | Both show revision 4 as in the browser. The compound shows Part 1, so it is not an End check. The grid shows its values collapsed. No native-only defect was visible. Their ornament (meta row, paragraph, check disc, account pill) is removed in revision 5. The captures stayed ignored and none is committed. |
+| Main-based integration, 2026-10-10 16:55 | Match main's Camera schema; keep the design | Done in e69f2f8; see the history below |
+| Plan revisions 4–6 | Bounded large data; play kept out of authoring; hosted Device Farm phones | Unchanged: every list bounded; no Play control; no device claim |
+| Director feedback, 2026-10-10 14:32 | Improve the whole app, not one sidebar | Revision 4, now simplified by revision 5 |
+| Correctness follow-up (Astra) | Bounded dock rows; Copy ID never fails silently | Kept. The page announcement moved from the status line into the pager. |
 
-## Main-based integration
+## Plain pass (revision 5)
+
+`editor/ui/DESIGN.md` is rewritten as revision 5. Its principles are no ornament, say
+it once, identity costs no height, and spoken-only text where the screen no longer
+repeats a fact.
+
+### Coverage matrix
+
+Paths are under `screenshots/plain/before/` and `after/`. "Before" is 5cfa59d: revision
+4 with Astra's correctness fixes, built from an extracted copy. "After" is this commit.
+Both come from the same 96 browser states, data and sizes. Account data comes from the
+synthetic provider fixtures.
+
+| Surface | Removed | Now | Evidence |
+| --- | --- | --- | --- |
+| Titlebar | Capsules around the toolbar groups; the amber "Sample data" capsule; the scene crumb that repeats the project name | Plain groups. Pressed panel toggles stay filled. "Sample data" is plain amber words. The scene appears only when it differs from the project | `no-selection-normal-1440x874.png`, `no-selection-minimum-1000x650.png` |
+| Account button | The long pill: provider name, email or status words, status chip | One 28 px button: the signed-in initial in its ringed avatar, kept as the director asked, or a profile glyph. A corner dot marks signing in (amber) or a problem (red). The name is spoken, e.g. "ChatGPT account, signed in as ada@example.com"; the tooltip adds an error's message | `account-signed-in-normal-1440x874.png`, `agent-error-normal-1440x874.png` |
+| Left column tabs | Count pills on Hierarchy and Assets | Plain counts beside the tab names | any full capture |
+| Hierarchy | The 2 px accent edge on the selected row | The indigo selection pill alone; problem counts stay plain | any full capture |
+| Context menu | "Del" on macOS; keycap styling | The platform's notation as plain text: ⌘⌫ on macOS, Delete elsewhere | `context-menu-normal-1440x874.png` |
+| Viewport | The drawn grid-and-cube illustration, the dot grid and vignette, the pulsing pill, the second sentence of each state | The header pill (dot and word). The empty area shows only the host's reason or a render error's message | `no-engine-normal-1440x874.png`, `project-error-normal-1440x874.png` |
+| Inspector header | The Entity / ID / Read-only row; the 22 px kind tile | The kind glyph in its tint, the name, a lock glyph (tooltip "Read-only: values can be inspected but not edited yet", spoken "Read-only") and Copy ID. Kind and full ID are the name's accessible description | `camera-rig-normal-1440x874-inspector.png` |
+| Entity problems | The tinted card | A plain list of severity icon, message and location link | `native-malformed-normal-1440x874-inspector.png` |
+| Component headers | Family-tinted icon tiles and the family colour tokens; count pills | A quiet icon, the name, and counts as a coloured icon and number. No hairline above the first section, so it no longer doubles the header's line | `native-character-normal-1440x874-inspector.png` |
+| Field help | Help lines under values, including "One body and material shared by a bounded union of local primitive parts." | Descriptions and variant notes become the row's tooltip and spoken description | `native-rubble-parts-normal-1440x874-inspector.png` |
+| Value tags | The outlined "Default" / "Unused" chip | Plain quiet words at the box's far end | `camera-rig-normal-1440x874-inspector.png` |
+| Notices | Dashed warning box and tint | A warning icon, one sentence and the raw JSON in a well. Every diagnostic is still shown | `native-malformed-normal-1440x874-inspector.png` |
+| Compound parts | The explanation paragraph; the visible document path "/shape/parts/41" beside the caption | "Parts 64" with the breakdown "39 box, 13 sphere, 12 capsule". The full sentence is spoken. "Part 42 of 64" carries its path as tooltip and spoken text | `native-rubble-parts-{normal-1440x874,minimum-1000x650}-inspector.png`, `railing-parts-normal-1440x874-inspector.png` |
+| Asset details | The kind/usage metadata row; the "From the project folder" subtitle; the filled triangle | Header description (kind and usage, spoken). Identifiers uses the same chevron as every disclosure | `asset-texture-normal-1440x874.png`, `import-form-normal-1440x874-inspector.png` |
+| Dock tabs and filters | Tab icons, count pills, outlined filter chips | Text tabs with plain counts (red for errors). Flat filter toggles, pressed ones filled | `dock-console-normal-1440x874.png` |
+| Problems | The "continued" pill | "continued" as quiet words | `dock-paged-problems-minimum-1000x650.png` |
+| Console | Level badges and error-row tints | The level as a coloured word | `dock-console-normal-1440x874.png` |
+| History | Timeline dots and line; origin chips; hollow dots for undone edits | Description, origin as a coloured word, detail and time. A hairline marked "Now". Undone edits are struck through with "(undone)". Undo and Redo tooltips give this platform's keys only | `dock-history-normal-1440x874.png` |
+| Pager and status line | The status line's persistent "Showing problems 101–200 of 450" echo | The pager announces the chosen page from its own hidden live region; its range stays visible | `dock-paged-problems-minimum-1000x650.png` |
+| Status line | Key-hint caps (F6 Panels, ? Shortcuts) | Source, problem counts and the live message | any full capture |
+| Banner | "You are looking at the editor shell." | "No engine connected. Open a project from the Incant editor to start." | `no-engine-normal-1440x874.png` |
+| Agent pane | Note titles ("Not in the editor yet"), the offline sentence, the empty-transcript mark, title and body | One sentence and its single next step. Empty transcript: "Describe a change. Every edit lands in History and can be undone." | `agent-checking-normal-1440x874-agent.png` |
+| Account dialog | Status card and badge; "Accounts on this computer" label; boxed account rows; the three icon facts; "In use" chips | A 420 px dialog. A status line only for checking, signed out, the browser step and errors. Account rows between hairlines: avatar, label, then "Signed in" or a Use / Sign in button. One action row: Add another account, then Sign out at the trailing end. Inline sign-out question, focus on "Keep signed in". Signed out adds Continue with ChatGPT and one footnote | `account-dialog-…`, `account-saved-…`, `account-signed-in-…`, `agent-error-normal-1440x874.png` |
+| Keyboard shortcuts | The header mark and subtitle; five cards in two columns; tinted group icons; keycaps | One 600 px table. The header holds title, filter ("N of M") and Close. Sections are caption rows. Each row is the action (with a quiet "where") and the keys as plain text ("⇧⌘Z" / "Ctrl+Shift+Z"), with "or" and "/". Each combination is also spoken in words. About 29 px rows; 17 rows and 3 captions fit at 1440×874 | `shortcuts-dialog-normal-1440x874.png`, `shortcuts-filter-minimum-1000x650.png` |
+| Dialog frame | Scrim blur, entrance animation, 14 px radius | Dim scrim, 10 px radius, no motion. Focus trap and focus return unchanged | same |
+| Empty, loading, error states | 48 px tinted badge discs with pictograms (the "glow" behind empty-state icons); explanatory second lines | One quiet title. An inline icon only for errors and warnings, a small spinner for work. A wrapped title keeps its mark on the first line. While a project opens, the banner says so once and panels keep "Opening project…" spoken-only | `project-loading-…`, `hierarchy-error-…`, `empty-project-…`, `no-selection-normal-1440x874.png` |
+| Fatal screens | The card, product mark, error tile, side-by-side version boxes, fixture chips, "The UI will not guess at an unknown protocol." | An error icon and the problem as `h1`, one sentence, the next step; fixture names as a plain monospace list | `incompatible-normal-1440x874.png`, `bad-fixture-normal-1440x874.png` |
+| Tokens and CSS | Family colours, the unused warning and fixture tints, the unused accent button variant, `--text-xl`, the stale `.quiet-chip` selector | `tokens.css` is revision 5. Contrast tests cover the fixture label on the canvas | `editor/ui/src/styles/` |
+
+### Kept on purpose
+
+- **Information colour.** Hierarchy kind tints, History origin words and severity colours
+  identify things; they never fill a decorative surface.
+- **Structure lines.** Tree indent guides and the guide line of real nested objects show
+  nesting.
+- **The avatar's ring.** The director asked for "the profile icon like it is now". The
+  ring is a 1.5 px solid presence mark, not a glow.
+- **Truthful labels.** "Sample data" in the titlebar, "Read-only" in the header's tooltip
+  and spoken name, and the unavailable reasons on disabled actions.
+- **One privacy fact on the sign-in surface.** "Your sign-in stays on this computer and
+  is never saved in your projects."
+- **Behaviour promises.** For example "Reads the source file again. The name and ID stay
+  the same." under Reimport.
+- **Every diagnostic.** The entity problem list, inline field errors, raw values, error
+  codes and paths are all still visible.
+- **Activity motion.** Spinners, skeleton shimmer and the agent's signing-in dot stop
+  under reduced motion.
+
+### Behaviour and accessibility preserved
+
+- **Identity.** Copy ID stays in the Inspector header and the hierarchy menu, with its
+  clipboard handling.
+  - The header's accessible description gives kind and full ID ("Camera, ID 01J…").
+  - The lock glyph speaks "Read-only". No control suggests editing.
+- **Account.** All of it is intact:
+  - switching and adding accounts, signing in to a saved account, and sign-out with
+    inline confirmation and safe focus;
+  - Cancel sign-in, Open browser again, and the checking and validating spinners;
+  - error notices with message and code;
+  - focus trap, initial focus and focus recovery, and `aria-describedby` status.
+- **Shortcuts.** All 29 implemented entries are listed. Bindings follow the platform
+  the native host reports (else the browser's user agent), with the Windows/Linux
+  alternatives. The filter matches action, group and key words, and Escape clears it
+  before closing.
+- **Bounded rendering.** Paging and the diagnostic reveal are untouched; the pager owns
+  its live region now.
+- **Tests adjusted for intentional presentation changes:**
+  - `AccountDialog.test.tsx` asserts the button's accessible name instead of chip text,
+    the single footnote, and "Signed in" instead of "In use".
+  - `ShortcutsDialog.test.tsx` asserts table sections and combos as written.
+  - `AgentPanel.test.tsx` asserts one-sentence notes.
+  - `ProjectStates.test.tsx` asserts the loading title is spoken-only in panels.
+  - `paging.test.tsx` asserts the pager's own announcement.
+  - `tokens.test.ts` drops the removed tints and adds the fixture label on the canvas.
+
+### Measurements
+
+The same 96 states in headless Chrome 155 at device scale 2: sample fixture, synthetic
+provider fixtures and the evidence test double. Per-state data is in
+`evidence/plain-comparison.json`.
+
+`visibleWords` counts words of visible text inside the window and every clipping
+ancestor; spoken-only text is excluded. It also falls when less of a scrolling list fits
+on screen. The shortcuts table shows 17 rows at once where the card grid showed about
+26.
+
+| All 96 states | Before (5cfa59d) | After |
+| --- | --- | --- |
+| Visible words, whole page | 19,478 | 16,820 (−13.6 %) |
+| … titlebar | 886 | 459 |
+| … Inspector | 3,410 | 2,962 |
+| … agent pane | 1,600 | 974 |
+| … status line | 949 | 553 |
+| … dialogs | 712 | 379 |
+| … viewport | 2,088 | 1,781 |
+| First Inspector value, 61 inspected states | — | 30–91 px higher (median 31) in 54; unchanged in 7 (scrolled to a component); lower in 0 |
+| Axe violations, step errors, page errors, remote requests | 0 | 0 |
+| States where the window scrolls, horizontal page overflow | 0 | 0 |
+| Clipped values | 36 | 36, the same long asset paths in reference boxes |
+| Most dock rows mounted | 102 | 102 |
+
+| State | Visible words before → after |
+| --- | --- |
+| Account dialog, signed in (dialog only) | 73 → 17 |
+| Account dialog, signed out with saved accounts (dialog only) | 107 → 59 |
+| Keyboard shortcuts (dialog only) | 211 → 102 |
+| No engine (page) | 92 → 44 |
+| Project opening (page) | 63 → 26 |
+| Empty project (page) | 115 → 65 |
+| Rubble Pile parts (Inspector) | 116 → 102 |
+
+Malformed Props shows more Inspector words (87 → 98) because more of its diagnostics
+now fit on screen.
+
+### Remaining native checks
+
+None of these is claimed. Please rebuild from this commit and check, with account-free
+crops for anything committed:
+
+1. **Titlebar, signed in.** The avatar alone, with its ring and no label. VoiceOver reads
+   "ChatGPT account, signed in as …". Check the corner dot while signing in and after an
+   error.
+2. **Account dialog.**
+   - Signed in with two or more accounts: rows, Use, Add another account, Sign out.
+   - The sign-out question: focus starts on "Keep signed in".
+   - The browser step with Cancel sign-in, and an error state.
+   - All at 1440×874 and 1000×650.
+3. **Keyboard shortcuts** at 1440×874 and 1000×650. Check the macOS glyph rendering in
+   WebKit (⇧⌘Z, ⌥⌘1, ⌘⌫) and filtering by "hierarchy".
+4. **Compound End then Tab** (carried over). In 64 Parts, select Part 1, press End, then
+   Tab.
+   - The trailing rows are visible with no blank region.
+   - AX lists about Parts 52–64, not 1–13 plus 64.
+   - Repeat with the window not frontmost.
+5. **Grid values paging.** In Large Navigation Grid, open Show values and page or scroll
+   through the 65,536 values; the table stays bounded and focusable.
+6. **Inspector header.** VoiceOver reads the name, then "Entity, ID …", and the lock as
+   "Read-only". Copy ID copies the full ID.
+7. **Context menu and dock.** The context menu shows ⌘⌫ for Delete. A long Problems or
+   Console list leaves the status line free of "Showing …" after paging.
+8. **Project opening.** The banner shows "Opening project…" once; panels are blank apart
+   from the hierarchy skeleton.
+9. **Minimum window, 1000×650,** for the Inspector with 64 Parts, the account dialog
+   and the shortcuts dialog.
+
+Revision 5 changes no Rust, bridge or host code, so the native viewport, the titlebar
+inset and window controls should be unchanged; a capture confirms it.
+
+### Changed paths (this commit)
+
+UI code (`editor/ui/src`):
+- **Shell:**
+  - `App.tsx`: status line without key hints; plain fatal screens; shorter banner and
+    protocol text.
+  - `components/Titlebar.tsx`: scene crumb only when it differs.
+  - `components/ProviderChip.tsx`: avatar-only account button.
+  - `components/ViewportPanel.tsx`: no illustration; loading spoken-only.
+  - `components/StateView.tsx`: no badge; inline marks; `quiet`.
+  - `bridge/provider.ts`: spoken account summaries.
+  - `icons/Icon.tsx`: profile glyph.
+- **Hierarchy and assets:**
+  - `components/HierarchyPanel.tsx`: copy; platform Delete label.
+  - `components/assets/AssetBrowser.tsx`: copy.
+  - `components/assets/AssetInspector.tsx`: no meta row; description; chevron.
+- **Inspector** (`components/inspector/`):
+  - `InspectorPanel.tsx`: no meta row; read-only mark; plain headers, problems and
+    loading.
+  - `IdentityHeader.tsx`: plain glyph; accessible description.
+  - `FieldView.tsx`: notes as tooltip and spoken text.
+  - `ObjectList.tsx`: count and breakdown; spoken sentence and path.
+  - `presentation.ts`: families removed.
+- **Dock:** `components/BottomDock.tsx` (text tabs) and, in `components/dock/`,
+  `ProblemsView.tsx`, `ConsoleView.tsx`, `HistoryView.tsx` and `paging.tsx`. The pager
+  announces itself; History drops its timeline and gives this platform's keys in its
+  tooltips.
+- **Dialogs and agent:**
+  - `components/AccountDialog.tsx`: compact body.
+  - `components/ShortcutsDialog.tsx`: table; `comboText`; exported `usePlatform`.
+  - `components/AgentPanel.tsx`: one-sentence notes.
+- **Styles:** `tokens.css`, `base.css`, `shell.css`, `hierarchy.css`, `dock.css`,
+  `inspector.css`, `agent.css`, `dialogs.css`, `assets.css`.
+- **Tests:** `ProjectStates.test.tsx`, `components/AccountDialog.test.tsx`,
+  `components/AgentPanel.test.tsx`, `components/ShortcutsDialog.test.tsx`,
+  `components/dock/paging.test.tsx`, `styles/tokens.test.ts`.
+- **Documents:** `editor/ui/DESIGN.md`, revision 5.
+
+Handoff (`handoffs/0033-editor-design-review/`):
+- `tools/capture.mjs`: a `visibleWords` measure per area.
+- `tools/curate-plain.mjs`: new.
+- `screenshots/plain/before/` and `after/`: 29 pairs, unedited and account-free.
+- `evidence/plain-comparison.json` and `evidence/plain.sha256` (58 OK).
+- This result.
+- `brief.md`: the runner's packet updates.
+
+Not committed (ignored `artifacts/`):
+- `0033-native-main/`: the director's screenshots and native captures, which show the
+  account.
+- Raw browser sets `plain-before`, `plain-final`, `r5-before`, `r5-after`, `p1`–`p5`.
+- The 5cfa59d extract `src-5cfa59d`.
+
+No Rust, SDK, CI, schema, transport, auth storage or account setting changed. No Cargo
+command ran, and no dependency was added.
+
+### Commands and results
+
+```sh
+cd editor/ui
+npx tsc -b --noEmit                         # strict: 0 errors
+npx vitest run                              # 29 files, 499 tests passed
+npm run build                               # built
+cd ../..
+# before: 5cfa59d, extracted (git archive, as for e8ee0d6) and built in the ignored artifacts directory;
+# its 91 tracked UI and bridge source files were checked byte-identical to git
+git archive 5cfa59d editor/ui editor/bridge | tar -x -C artifacts/0033-editor-design-review/src-5cfa59d
+(cd artifacts/0033-editor-design-review/src-5cfa59d/editor/ui && npx vite build)
+node handoffs/0033-editor-design-review/tools/capture.mjs plain-before --root=artifacts/0033-editor-design-review/src-5cfa59d/editor/ui
+node handoffs/0033-editor-design-review/tools/capture.mjs plain-final   # 96 captures, 0 step errors, 0 axe
+node handoffs/0033-editor-design-review/tools/curate-plain.mjs plain-before plain-final
+(cd handoffs/0033-editor-design-review && shasum -a 256 -c evidence/plain.sha256)   # 58 OK
+git diff --check                                                         # clean
+```
+
+Every capture server used the first free port from 4233 and was closed afterwards.
+- **Not run:** Cargo, Clippy, GPU tests, native capture, native WebKit, VoiceOver, phones.
+- **Native:** I drove no native UI. The two 6db60b2 captures and the director's
+  screenshots were read from the ignored directory only.
+
+## Requests for Astra
+
+1. **Native checks for revision 5:** the list in "Remaining native checks". I will
+   review the captures and commit only account-free crops.
+2. **Part numbering in engine messages.** Rust validation numbers compound parts from 0
+   ("compound part 41 rotation must be a unit quaternion"), while the Inspector numbers
+   them from 1 ("Part 42 of 64"). Please consider 1-based numbering, or "index 41", in
+   the message text.
+3. **Output lists in snapshots: still open.** The UI pages Problems, Console and History,
+   but every snapshot carries every console message and history entry.
+4. **When pixel-perfect lands on main,** switch `PixelCameraFields.test.tsx` to the
+   native schema, as its tripwire test will prompt.
+5. **Carried over:**
+   - entity kinds for lights and audio;
+   - nullable `type` arrays;
+   - nested-object order, units and human titles in the schema registry;
+   - snapshot reuse at 100,000 entities.
+
+## Limitations
+
+- **Browser-only evidence.** Native WebKit text rendering, the titlebar, the viewport and
+  VoiceOver were not checked for revision 5.
+- **Word counts are a proxy.** They measure on-screen text, not quality. They also fall
+  when fewer rows of a list fit.
+- **Spoken-only text.** Some facts moved from the screen to tooltips and descriptions:
+  field help, variant notes, part paths, kind and ID. Pointer users get the tooltip,
+  keyboard and assistive users the description. A sighted keyboard user without a
+  screen reader sees them only by hovering.
+- **Not the performance gate.** The browser timings of earlier passes come from one fast
+  desktop machine. This pass changed no data path.
+- **Read-only Inspector.** Every field stays read-only until the bridge offers a
+  component command.
+- **Pixel-perfect only synthetic here.** The real schema, renderer and evidence remain on
+  `handoff/0033-pixel-integration`.
+- **Pages, not continuous scrolling,** in the dock, as before.
+
+## Open questions
+
+- Should field help (now tooltip and spoken) get an explicit "info" affordance for
+  keyboard users who do not use a screen reader?
+- Should the signed-out account dialog keep both "Continue with ChatGPT" and "Add
+  another account"? Both start browser sign-in, but the bridge distinguishes adding
+  (`add: true`), so both stay until the host defines the difference for signed-out
+  users.
+- Should the dock remember a chosen page per tab across tab switches?
+- Should a short window keep the agent collapsed, or should the user's choice persist?
+
+## Earlier in this handoff
+
+### Main-based integration
 
 Source files and main's native schema take precedence over older screenshots and
 pixel-branch evidence. Main's `schemas/Camera.schema.json` declares two projections:
-perspective, and orthographic with `vertical_size`. This commit changes the following.
+perspective, and orthographic with `vertical_size`. Commit e69f2f8 changed the following.
 
 **Fixture and parity:**
 - `bridge/fixture.ts` mirrors main's converted Camera schema exactly. The
@@ -139,7 +436,7 @@ ignored) shows these problems, all addressed:
 - "Offset m" and "Rotation" stacked.
 - Help text and the parts summary wrapping beside narrow labels.
 
-## Coverage matrix
+### Revision 4 coverage matrix (superseded where the plain pass changed it)
 
 Paths are under `screenshots/whole-app/`. "Before" is revision 3 as committed at
 e8ee0d6; "after" is revision 4 on this main-based branch. Both were captured with the same
@@ -171,13 +468,13 @@ e8ee0d6; "after" is revision 4 on this main-based branch. Both were captured wit
 | Minimum size and keyboard | Container queries stack vectors, notices and stable IDs below 300 px; the parts summary wraps to its own line; scrollable dock lists are keyboard stops; F6, `?` and ⌘/ keep working | `camera-rig-minimum-1000x650.png`, `native-rubble-parts-minimum-1000x650-inspector.png` |
 | Type scale | 12 px minimum everywhere; the 11 px key hints, level badges and menu shortcuts are gone | — |
 
-### Hierarchy context menu
+#### Hierarchy context menu
 
 - The menu opens from a right-click, Shift+F10 or the Menu key.
 - It offers Rename (F2), Copy ID and Delete (Del, through the command bus).
 - An unavailable item stays focusable and explains why when chosen.
 
-### Compound Collider
+#### Compound Collider
 
 The compound Collider changes resolve the director's screenshot:
 - **Parts header.** "Parts" and the breakdown span the component; the breakdown moves
@@ -193,7 +490,7 @@ The compound Collider changes resolve the director's screenshot:
 - **Variant help.** Variant help such as "One body and material shared…" sits in the
   value column.
 
-### Dock views
+#### Dock views
 
 **Problems:**
 - Grouped by entity, worst first, with severity filter chips and counts.
@@ -213,7 +510,7 @@ The compound Collider changes resolve the director's screenshot:
 - Paged; it follows Now, and **Now** returns there.
 - The list is a keyboard stop (axe flagged it before).
 
-### Shortcuts reference
+#### Shortcuts reference
 
 The plain list became a searchable reference:
 - **Header.** A tinted keyboard mark and a subtitle that names the platform.
@@ -225,7 +522,7 @@ The plain list became a searchable reference:
 - **Coverage.** All 29 entries are implemented keys. I verified each against the
   handlers.
 
-### Deliberately retained
+#### Deliberately retained
 
 - **Native titlebar inset and traffic-light alignment.** These are `TITLEBAR.md` host
   contracts. Only a native capture can verify them.
@@ -237,7 +534,7 @@ The plain list became a searchable reference:
 - **Application menu (File/Edit/View on Windows/Linux).** Still none; this remains an
   open question in DESIGN.md, not something to fake.
 
-## Correctness follow-up
+### Correctness follow-up
 
 **Bounded output lists.** `src/components/dock/paging.tsx` holds `PAGE_SIZE` (100),
 `usePage` and `Pager`. Each view mounts only its page and renders the full text of every
@@ -281,7 +578,7 @@ to 1,234 rows before and at most 102 after (100 rows plus 2 group items).
 - **Tests** cover the absent API, a rejected permission and a successful copy of the
   exact ID.
 
-## Native End-then-Tab investigation
+### Native End-then-Tab investigation
 
 **Observation (`compound-end-wide.jpg`, AX text).** After End, the detail correctly
 showed Part 64, but the list was blank above the pinned last row. Accessibility listed
@@ -294,7 +591,7 @@ occluded or non-frontmost views, which is likely during computer-use automation.
 UI therefore kept rows 1–13 mounted (the old window) plus the pinned selection, at the
 bottom of a scrolled list.
 
-**Fix (in this commit, with Astra's e8ee0d6 changes kept):**
+**Fix (in the whole-app commits, with Astra's e8ee0d6 changes kept):**
 - `useViewport` returns a synchronous `remeasure`. The tree, the asset list and record
   lists call it right after `revealSpan`, so the target's neighbours mount in the same
   render as the selection.
@@ -306,7 +603,7 @@ bottom of a scrolled list.
 
 `compound-min.jpg` shows Part 1 and is not a last-row test.
 
-## Measurements
+### Revision 3 → 4 measurements
 
 All captures use headless Chrome 155.0.8059.40 at device scale 2. The machine is a
 MacBook Pro with an Apple M5 Pro (15 cores), 48 GB and macOS 26.6. Per-state data is in
@@ -339,7 +636,7 @@ when one exists.
 | Labels, values (contrast on the side column) | 7.98:1, 13.83:1 | unchanged |
 | Keyboard focus ring | solid 2 px `#c3c8ff` | unchanged |
 
-### 100,000 entities (browser, not the device gate)
+#### 100,000 entities (browser, not the device gate)
 
 Re-measured on this main-based branch (`evidence/scale-report.json`).
 
@@ -360,9 +657,9 @@ Long tasks:
 - Every rename at 4× is a task of about 250 ms, almost all of it the double's snapshot
   rebuild.
 
-## Changed paths
+### Changed paths in earlier commits
 
-This integration commit:
+The integration commit (e69f2f8):
 - `editor/ui/src/bridge/fixture.ts`: the Camera schema mirrors main; the Close-up Camera
   replaces the pixel-perfect sample camera.
 - `editor/ui/src/components/inspector/presentation.ts`, `FieldView.tsx` and
@@ -457,7 +754,7 @@ Not committed (ignored `artifacts/`):
 No Rust, SDK, CI, schema, transport, auth storage or account setting changed. No Cargo
 command ran.
 
-## Commands and results
+### Commands and results of earlier commits
 
 ```sh
 npm ci --ignore-scripts                     # workspace root
@@ -481,67 +778,5 @@ node handoffs/0033-editor-design-review/tools/measure-scale.mjs m1        # no p
 
 Every capture server used the first free port from 4233 and was closed afterwards.
 - **Not run:** Cargo, Clippy, GPU tests, native capture, native WebKit, phones.
-- **Native:** I took no native captures and drove no native UI in this session. The
+- **Native:** I took no native captures and drove no native UI in that session. The
   f78d763 captures were read from the ignored directory only.
-
-## Requests for Astra
-
-1. **Rebuild and recheck End then Tab natively.**
-   - Steps: in the 64-part compound, select Part 1, press End, then Tab.
-   - Expected: the trailing rows are visible with no blank region, and AX lists about
-     Parts 52–64 instead of 1–13 plus 64.
-   - Repeat while the window is not frontmost, and again after 100 ms.
-   - Also follow a Problems link to a deep part path: the titlebar must not move.
-2. **Window title: done by Astra** (`17bf782`, "Incant").
-3. **Agent reason copy: done by Astra** (`17bf782`). The UI recognises the new plain
-   wording; `AgentPanel.test.tsx` reads it from the bridge conversion. Please keep that
-   test in mind if the sentence changes again.
-4. **Output lists in snapshots: still open,** as Astra noted. The UI pages Problems,
-   Console and History, but every snapshot still carries every console message and
-   history entry. Consider capping or paging them at the bridge, with totals, as for
-   entity details.
-5. **When pixel-perfect lands on main,** switch `PixelCameraFields.test.tsx` to the
-   native schema, as its tripwire test will prompt, and add a pixel camera back to the
-   sample.
-6. **Carried over from the earlier pass:**
-   - entity kinds for lights and audio;
-   - nullable `type` arrays;
-   - nested-object order, units and human titles in the schema registry;
-   - snapshot reuse at 100,000 entities.
-7. **Native captures after the rebuild, for my rendered review:**
-   - Rubble Pile compound at 1440×874 and 1000×650;
-   - the Close-up and Map cameras;
-   - the shortcuts dialog;
-   - the hierarchy context menu;
-   - a long console;
-   - the titlebar.
-
-   I will commit only account-free crops.
-
-## Limitations
-
-- **Browser-only evidence.** Native WebKit rendering, the titlebar and the viewport were
-  not reviewed in this revision.
-- **Not the performance gate.** All numbers come from one fast desktop machine and
-  headless Chrome; 4× throttling is not an M1 or a phone. The rename and dock doubles
-  stand in for the engine and bridge.
-- **First filter long task.** Filtering 100,000 names is still one long task: 108 ms
-  unthrottled, 467 ms at 4×.
-- **Read-only Inspector.** Every field stays read-only until the bridge offers a
-  component command.
-- **Pixel-perfect only synthetic here.** On this branch the pixel-perfect presentation
-  runs only against a synthetic schema. The real schema, renderer and evidence remain on
-  `handoff/0033-pixel-integration`.
-- **Pages, not continuous scrolling.** The dock pages because rows wrap to full text. A
-  very long single message still renders in full on its page.
-- **Capsule glyph.** At 12 px it is a small solid; the tag text beside it carries the
-  meaning.
-
-## Open questions
-
-- Should the dock remember a chosen page per tab across tab switches? Today each tab
-  returns to its anchor (first page, newest messages, or Now).
-- Should a short window keep the agent collapsed, or should the user's choice persist
-  across sessions?
-- Should component display names and families come from engine schema metadata
-  (request 5)?

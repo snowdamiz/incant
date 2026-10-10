@@ -224,6 +224,45 @@ function measure() {
   out.pageVerticalOverflow = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   // Rows mounted in the output dock (every list item, any design).
   out.dockRows = document.querySelectorAll('[data-region="dock"] li').length;
+  // Words a sighted user can read, per area: visible text inside the window and inside
+  // every clipping ancestor. Visually hidden text (spoken only) is not counted.
+  const inView = (el) => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom <= 0 || r.top >= innerHeight || r.right <= 0 || r.left >= innerWidth) return false;
+    for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+      const s = getComputedStyle(a);
+      if (!/(auto|scroll|hidden|clip)/.test(`${s.overflowX} ${s.overflowY}`)) continue;
+      const ar = a.getBoundingClientRect();
+      if (r.bottom <= ar.top || r.top >= ar.bottom || r.right <= ar.left || r.left >= ar.right) return false;
+    }
+    return true;
+  };
+  const words = (root) => {
+    if (!root) return null;
+    let count = 0;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      const text = node.textContent.trim();
+      const el = node.parentElement;
+      if (text && el && visible(el) && inView(el)) count += text.split(/\s+/).length;
+    }
+    return count;
+  };
+  out.visibleWords = Object.fromEntries(
+    Object.entries({
+      titlebar: '.titlebar',
+      banner: '.notice-region',
+      hierarchy: '[data-region="hierarchy"]',
+      viewport: '[data-region="viewport"]',
+      dock: '[data-region="dock"]',
+      inspector: '[data-region="inspector"]',
+      agent: '[data-region="agent"]',
+      statusbar: '.statusbar',
+      dialog: '[role="dialog"]',
+      menu: '[role="menu"]',
+      page: 'body',
+    }).map(([area, selector]) => [area, words(document.querySelector(selector))]),
+  );
   if (!inspector) return out;
   const box = inspector.getBoundingClientRect();
   const controls = [...inspector.querySelectorAll('input, textarea, [role="checkbox"], [role="listbox"], [role="group"][tabindex="0"]')].filter(visible);

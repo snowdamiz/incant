@@ -26,23 +26,17 @@ export function AssetBrowser() {
   let body;
   if (!snapshot) {
     body = (
-      <StateView icon="plug" title="No engine connected" compact>
-        <p>Assets appear when the editor process attaches a project.</p>
-      </StateView>
+      <StateView icon="plug" title="No engine connected" compact />
     );
   } else if (!assets) {
     body = (
-      <StateView icon="texture" title="Assets are not available" compact>
-        <p>The connected engine does not report project assets.</p>
-      </StateView>
+      <StateView icon="texture" title="Assets are not available" compact />
     );
   } else if (assets.status === 'loading' || project.kind === 'loading') {
     body = <Skeleton rows={6} label="Loading assets" />;
   } else if (assets.status === 'error' && project.kind === 'failed' && sameError(assets.error, project.error)) {
     body = (
-      <StateView icon="texture" title="No project loaded" compact>
-        <p>Assets appear once the project opens.</p>
-      </StateView>
+      <StateView icon="texture" title="No project loaded" compact />
     );
   } else if (assets.status === 'error') {
     body = (
@@ -185,9 +179,7 @@ function Library({ assets }: { assets: readonly ProjectAsset[] }) {
       </div>
       <ImportStatus />
       {order.length === 0 ? (
-        <StateView icon="search" title="No matching assets" compact>
-          <p>Nothing named or stored at “{filter.trim()}”. Press Escape to clear the filter.</p>
-        </StateView>
+        <StateView icon="search" title="No matching assets" compact />
       ) : (
         <AssetList
           groups={groups}
