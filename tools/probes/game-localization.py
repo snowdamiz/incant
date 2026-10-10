@@ -19,7 +19,7 @@ def main():
     binary = args.binary.resolve()
 
     def run(*args):
-        return json.loads(subprocess.check_output([str(binary), *map(str, args)], text=True, cwd=ROOT))
+        return json.loads(subprocess.check_output([str(binary), *map(str, args)], text=True, encoding='utf-8', cwd=ROOT))
 
     project, journal = out / 'game.incant.json', out / 'history.jsonl'
     run('init', project, '--name', 'Runtime localization', '--entities', 0)
@@ -34,7 +34,7 @@ def main():
 
     def rpc(requests):
         result = subprocess.check_output([str(binary), 'rpc', str(project), '--journal', str(journal)],
-                    input=''.join(json.dumps(r) + '\n' for r in requests), text=True, cwd=ROOT)
+                    input=''.join(json.dumps(r) + '\n' for r in requests), text=True, encoding='utf-8', cwd=ROOT)
         replies = [json.loads(line) for line in result.splitlines()]
         assert len(replies) == len(requests) and all('error' not in r for r in replies), replies
         return replies
@@ -45,7 +45,7 @@ def main():
     rpc([{'id': 1, 'method': 'history.undo'}, {'id': 2, 'method': 'history.redo'}, {'id': 3, 'method': 'project.save'}])
     assert project.read_bytes() == authored
     assert run('localization-check', project)['complete'] is True
-    missing = subprocess.run([str(binary), 'localization-check', str(project), '--locale', 'ja'], capture_output=True, text=True)
+    missing = subprocess.run([str(binary), 'localization-check', str(project), '--locale', 'ja'], capture_output=True, text=True, encoding='utf-8')
     assert missing.returncode != 0
     assert [item['key'] for item in json.loads(missing.stdout)['missing']] == ['gender']
     assert run('localization-check', project, '--locale', 'ja', '--allow-fallback')['complete'] is False
@@ -69,7 +69,7 @@ export default defineBehavior<{texts:string[],locales:string[],resolved:string[]
     if(api.clock().tick===8)api.cancelTimer('switch');
   }
 });
-''')
+''', encoding='utf-8')
     subprocess.run(['node', str(ROOT / 'node_modules/typescript/bin/tsc'), '--strict', '--noEmit', '--target', 'ES2022',
                     '--module', 'ESNext', '--moduleResolution', 'bundler', str(source)], check=True, cwd=ROOT)
     compiled = out / 'behavior.js'
@@ -88,15 +88,15 @@ export default defineBehavior<{texts:string[],locales:string[],resolved:string[]
     assert state['resolved'][-2:] == ['en','en']
     assert state['gender'] == ['She won.'] * 10
     assert resumed['logs'] == [log for log in whole['logs'] if log['tick'] > 5]
-    assert json.loads((out / 'two.save.json').read_text())['project']['settings']['localization']['locale'] == 'fr-CA'
+    assert json.loads((out / 'two.save.json').read_text(encoding='utf-8'))['project']['settings']['localization']['locale'] == 'fr-CA'
     assert before == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in [project,journal]}
     result = {'passed': True, 'strict_typescript': True, 'rpc_journal_undo_redo': True,
               'runtime_locales': ['en','ru','ja','ar','fr-CA'], 'timer_switches_saved': True,
               'restored_state_and_log_suffix_equal': True, 'missing_translation_exit_status': True,
               'author_files_unchanged': before, 'shaping_or_visual_acceptance': False,
               'binary_sha256': hashlib.sha256(binary.read_bytes()).hexdigest()}
-    (out / 'runs.json').write_text(json.dumps({'first':first,'resumed':resumed,'whole':whole,'reopened':reopened},indent=2)+'\n')
-    (out / 'result.json').write_text(json.dumps(result,indent=2)+'\n')
+    (out / 'runs.json').write_text(json.dumps({'first':first,'resumed':resumed,'whole':whole,'reopened':reopened},indent=2)+'\n', encoding='utf-8')
+    (out / 'result.json').write_text(json.dumps(result,indent=2)+'\n', encoding='utf-8')
     print(json.dumps(result))
 
 
