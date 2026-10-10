@@ -17,8 +17,8 @@ jobs:
           - {runner: windows-latest, platform: Windows, suffix: '.exe'}
           - {runner: ubuntu-latest, platform: Linux, suffix: ''}
     runs-on: ${{ matrix.runner }}
-    # The camera baseline takes 41.5 minutes on hosted Windows. Leave room for
-    # the additional sprite GPU and saved-gameplay checks in this increment.
+    # Cold Windows runs can exceed 45 minutes as shipping and saved-workflow
+    # coverage grows. Keep every check and allow a bounded recovery margin.
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -54,8 +54,9 @@ jobs:
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
         run: cargo test --workspace --release --locked -- --ignored --test-threads=1 --nocapture
-      - run: cargo build -p incant_editor -p incant_headless --release --features incant_editor/custom-protocol --locked
-      - run: cargo build -j2 -p incant_cook --example cook_scene --release --locked
+      # The shipping probe uses cook_scene; build it with the editor/headless
+      # tools to avoid another package-scoped dependency graph.
+      - run: cargo build -p incant_editor -p incant_headless -p incant_cook --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python tools/shipping.py artifacts/shipping-runtime
       - name: Verify Windows executables do not require redistributable CRT DLLs
