@@ -42,5 +42,21 @@ debug = 1
 [profile.release]
 strip = false
 
+# Runtime/device measurements use this profile through tools/shipping.py, which
+# separates and verifies platform crash symbols before packaging the player.
+[profile.shipping]
+inherits = "release"
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+debug = 2
+debug-assertions = false
+incremental = false
+strip = "none"
+# Stable Rust only supports other modes on selected targets. Keep the common
+# profile portable; the packager selects packed on Apple/MSVC explicitly.
+split-debuginfo = "off"
+
 [patch.crates-io]
 rerecast = { path = "third_party/rerecast" }
