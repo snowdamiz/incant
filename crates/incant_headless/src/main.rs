@@ -489,6 +489,14 @@ fn main() -> Result<()> {
             ]);
             registry.extend([
                 (
+                    "OffMeshLink".into(),
+                    json!(schemars::schema_for!(incant_core::OffMeshLink)),
+                ),
+                (
+                    "OffMeshTraversal".into(),
+                    json!(schemars::schema_for!(incant_core::OffMeshTraversal)),
+                ),
+                (
                     "SteeringQuery".into(),
                     json!(schemars::schema_for!(incant_core::SteeringQuery)),
                 ),

@@ -25,7 +25,7 @@ export type { PhysicsCharacterQuery as CharacterQuery, PhysicsCharacterMovement 
 import type { PhysicsCharacterQuery as CharacterQuery, PhysicsCharacterMovement as CharacterMovement } from './generated';
 export type { StringTable, LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
 import type { LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
-export type { NavigationMesh, NavigationQuery, NavigationPath } from './generated';
+export type { NavigationMesh, NavigationQuery, NavigationPath, OffMeshLink, OffMeshTraversal } from './generated';
 import type { NavigationQuery, NavigationPath } from './generated';
 export type { SteeringQuery, SteeringAgent, SteeringObstacle, SteeringVelocity } from './generated';
 import type { SteeringQuery, SteeringVelocity } from './generated';
@@ -43,7 +43,10 @@ export interface ScriptApi {
    * and is a snapshot; recalculate after source changes. Generation is local to
    * the play session, not durable across saves. Commands become visible next tick.
    * Heights lie on the quantized navigation surface; steps are approximated.
-   * Use physics for grounding/placement. The chosen corridor can include tile bends. */
+   * Use physics for grounding/placement. The chosen corridor can include tile bends.
+   * `traversals` identifies explicit off-mesh edges between consecutive point indices.
+   * Behavior must execute jumps, ladders or teleports itself; those edges are never
+   * smoothed into walking segments or treated as collision-safe movement. */
   findPath(query: NavigationQuery): NavigationPath | null;
   /** Read-only localization snapshot at the start of this tick. Each localization
    * query costs 4 of the shared 256 native-query units. Change locale with the

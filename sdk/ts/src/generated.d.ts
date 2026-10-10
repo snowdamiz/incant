@@ -192,12 +192,14 @@ export namespace NavigationMeshSchema {
   export type NavigationSettings = { "agent_height": number; "agent_radius": number; "cell_height": number; "cell_size": number; "max": [number, number, number]; "max_climb": number; "max_slope_degrees": number; "min": [number, number, number]; "tile_cells": number };
   export type NavigationSource = { "entity": string; "geometry": NavigationSourceKind };
   export type NavigationSourceKind = "collider" | "mesh";
-  export type Root = { "settings": NavigationSettings; "sources": Array<NavigationSource> };
+  export type OffMeshLink = { "bidirectional": boolean; "enabled": boolean; "end": [number, number, number]; "extra_cost": number; "id": string; "snap_distance": number; "start": [number, number, number] };
+  export type Root = { "links"?: Array<OffMeshLink>; "settings": NavigationSettings; "sources": Array<NavigationSource> };
 }
 export type NavigationMesh = NavigationMeshSchema.Root;
 
 export namespace NavigationPathSchema {
-  export type Root = { "corridor": Array<number>; "generation": number; "points": Array<[number, number, number]>; "visited": number };
+  export type OffMeshTraversal = { "from_index": number; "link_id": string; "reversed": boolean; "to_index": number };
+  export type Root = { "corridor": Array<number>; "generation": number; "points": Array<[number, number, number]>; "traversals": Array<OffMeshTraversal>; "visited": number };
 }
 export type NavigationPath = NavigationPathSchema.Root;
 
@@ -206,6 +208,16 @@ export namespace NavigationQuerySchema {
   export type Root = { "mesh_entity": string; "path": PathRequest; "scene_id": string };
 }
 export type NavigationQuery = NavigationQuerySchema.Root;
+
+export namespace OffMeshLinkSchema {
+  export type Root = { "bidirectional": boolean; "enabled": boolean; "end": [number, number, number]; "extra_cost": number; "id": string; "snap_distance": number; "start": [number, number, number] };
+}
+export type OffMeshLink = OffMeshLinkSchema.Root;
+
+export namespace OffMeshTraversalSchema {
+  export type Root = { "from_index": number; "link_id": string; "reversed": boolean; "to_index": number };
+}
+export type OffMeshTraversal = OffMeshTraversalSchema.Root;
 
 export namespace PhysicsCharacterMovementSchema {
   export type Root = { "collisions": Array<string>; "grounded": boolean; "sliding_down_slope": boolean; "translation": [number, number, number] };

@@ -1,5 +1,5 @@
 use crate::{NavigationError, NavigationMesh, invalid};
-use glam::{DVec3, Vec3};
+use glam::DVec3;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -20,6 +20,8 @@ pub struct NavigationPath {
     pub corridor: Vec<u32>,
     pub visited: u32,
     pub generation: u64,
+    /// Consecutive point pairs that require explicit gameplay traversal. Never
+    /// treat these as walkable segments or feed them directly to ground steering.
     pub traversals: Vec<crate::OffMeshTraversal>,
 }
 impl NavigationMesh {

@@ -82,7 +82,7 @@ pub(super) fn check() -> Result<Value, String> {
         .get_mut("Transform")
         .unwrap()["translation"] = json!([0., 1.5, 20.]);
     engine.sync(&project).map_err(|e| e.to_string())?;
-    let second = navigator(query)
+    let second = navigator(query.clone())
         .map_err(|e| e.to_string())?
         .ok_or("no rebuilt path")?;
     let report = engine.snapshot().navigation.remove(&nav_id).unwrap();
@@ -93,7 +93,71 @@ pub(super) fn check() -> Result<Value, String> {
     {
         return Err("incremental navigation rebuild failed".into());
     }
+    // Close the room with a wall, then attach a directed, explicit traversal.
+    let entities = &mut project.scenes.get_mut(&scene_id).unwrap().entities;
+    entities
+        .get_mut(&wall_id)
+        .unwrap()
+        .components
+        .get_mut("Transform")
+        .unwrap()["translation"] = json!([0., 1.5, 0.]);
+    entities
+        .get_mut(&wall_id)
+        .unwrap()
+        .components
+        .get_mut("Collider")
+        .unwrap()["shape"]["half_extents"] = json!([1., 1.5, 6.]);
+    engine.sync(&project).map_err(|e| e.to_string())?;
+    if navigator(query.clone())
+        .map_err(|e| e.to_string())?
+        .is_some()
+    {
+        return Err("closed wall stayed connected".into());
+    }
+    let link_id = "00000000000000000000000001";
+    project
+        .scenes
+        .get_mut(&scene_id)
+        .unwrap()
+        .entities
+        .get_mut(&nav_id)
+        .unwrap()
+        .components
+        .get_mut("NavigationMesh")
+        .unwrap()["links"] = json!([{
+        "id":link_id,"start":[-2.,0.,0.],"end":[2.,0.,0.],"snap_distance":1.,"bidirectional":false,"enabled":true,"extra_cost":0.
+    }]);
+    engine.sync(&project).map_err(|e| e.to_string())?;
+    let linked = navigator(query.clone())
+        .map_err(|e| e.to_string())?
+        .ok_or("off-mesh route missing")?;
+    let mut reverse = query.clone();
+    std::mem::swap(&mut reverse.path.start, &mut reverse.path.end);
+    if linked.traversals.len() != 1
+        || linked.traversals[0].link_id != link_id
+        || navigator(reverse).map_err(|e| e.to_string())?.is_some()
+    {
+        return Err("directed off-mesh traversal failed".into());
+    }
+    let update = engine.snapshot().navigation.remove(&nav_id).unwrap();
+    if !update.rebuilt.is_empty() || update.active_links != 1 {
+        return Err("link-only edit unnecessarily rebuilt tiles".into());
+    }
+    project
+        .scenes
+        .get_mut(&scene_id)
+        .unwrap()
+        .entities
+        .get_mut(&nav_id)
+        .unwrap()
+        .components
+        .get_mut("NavigationMesh")
+        .unwrap()["links"][0]["end"] = json!([50., 0., 0.]);
+    if engine.sync(&project).is_ok() || navigator(query).map_err(|e| e.to_string())? != Some(linked)
+    {
+        return Err("bad link endpoint did not roll back".into());
+    }
     Ok(
-        json!({"recast_tiled":true,"first_corners":first.points.len(),"second_corners":second.points.len(),"changed_tiles":report.rebuilt.len(),"retained_tiles":report.reused.len(),"visual_gate":false}),
+        json!({"recast_tiled":true,"first_corners":first.points.len(),"second_corners":second.points.len(),"changed_tiles":report.rebuilt.len(),"retained_tiles":report.reused.len(),"directed_off_mesh_link":true,"link_endpoint_rollback":true,"visual_gate":false}),
     )
 }

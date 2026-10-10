@@ -5,7 +5,9 @@ mod scene;
 use bevy_app::{App, Update};
 use bevy_ecs::prelude::*;
 use incant_doc::{MeshRenderer, Project};
-pub use incant_nav::{SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity};
+pub use incant_nav::{
+    OffMeshLink, OffMeshTraversal, SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity,
+};
 pub use incant_physics::{
     CharacterMovement, CharacterQuery, PhysicsError, RayHit, RayQuery, TriggerEvent,
 };

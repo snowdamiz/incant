@@ -180,7 +180,7 @@ impl ScriptHost {
     pub fn tick(&mut self, bus: &mut CommandBus, dt: f64) -> Result<usize, ScriptError> {
         let mut input = incant_input::InputRuntime::default();
         input.map_actions(&bus.project().settings.input_actions)?;
-        self.tick_with_events(bus, dt, &[], input.frame())
+        self.tick_with_events(bus, dt, &[], input.frame(), |_| Ok(()))
     }
     fn tick_with_events(
         &mut self,
@@ -188,6 +188,7 @@ impl ScriptHost {
         dt: f64,
         events: &[incant_core::TriggerEvent],
         input: &incant_input::InputFrame,
+        validate_runtime: impl FnOnce(&incant_doc::Project) -> Result<(), ScriptError>,
     ) -> Result<usize, ScriptError> {
         self.query_count
             .store(0, std::sync::atomic::Ordering::Relaxed);
@@ -257,6 +258,7 @@ impl ScriptHost {
                 None,
             )?;
         }
+        validate_runtime(bus.project())?;
         self.state = output.state;
         self.schedule = schedule;
         self.logs.extend(output.logs);
