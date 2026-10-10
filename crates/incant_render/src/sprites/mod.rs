@@ -19,6 +19,8 @@ struct Vertex {
     uv: [f32; 2],
     tint: [f32; 4],
     uv_bounds: [f32; 4],
+    texel: [f32; 2],
+    sampling: u32,
 }
 pub(crate) struct SpritePlan {
     pub source: Arc<RuntimeAsset>,
@@ -96,7 +98,7 @@ impl SpriteSystem {
             label:Some("Sorted sprites in shared HDR graph"),layout:Some(&layout),
             vertex:wgpu::VertexState{module:&shader,entry_point:Some("vertex"),compilation_options:Default::default(),buffers:&[wgpu::VertexBufferLayout {
                 array_stride:size_of::<Vertex>() as u64,step_mode:wgpu::VertexStepMode::Vertex,
-                attributes:&wgpu::vertex_attr_array![0=>Float32x3,1=>Float32x2,2=>Float32x4,3=>Float32x4],
+                attributes:&wgpu::vertex_attr_array![0=>Float32x3,1=>Float32x2,2=>Float32x4,3=>Float32x4,4=>Float32x2,5=>Uint32],
             }]},
             fragment:Some(wgpu::FragmentState{module:&shader,entry_point:Some("fragment"),compilation_options:Default::default(),targets:&[Some(wgpu::ColorTargetState {
                 format:crate::frame::HDR_FORMAT,blend:Some(wgpu::BlendState::PREMULTIPLIED_ALPHA_BLENDING),write_mask:wgpu::ColorWrites::ALL,
@@ -174,12 +176,16 @@ impl SpriteSystem {
                 .ok_or(incant_2d::SpriteError::UnresolvedAtlas)?;
             let tw = source.texture.width as f64;
             let th = source.texture.height as f64;
-            let bounds = [
-                (f64::from(x) + 0.5) / tw,
-                (f64::from(y) + 0.5) / th,
-                (f64::from(x + w) - 0.5) / tw,
-                (f64::from(y + h) - 0.5) / th,
-            ]
+            let bounds = if sprite.sampling == SpriteSampling::Linear {
+                [
+                    (f64::from(x) + 0.5) / tw,
+                    (f64::from(y) + 0.5) / th,
+                    (f64::from(x + w) - 0.5) / tw,
+                    (f64::from(y + h) - 0.5) / th,
+                ]
+            } else {
+                [f64::from(x), f64::from(y), f64::from(w), f64::from(h)]
+            }
             .map(|v| v as f32);
             for local in
                 incant_2d::tessellate(sprite, [source.texture.width, source.texture.height])?
@@ -196,6 +202,13 @@ impl SpriteSystem {
                     uv: local.uv.map(|v| v as f32),
                     tint: sprite.tint.map(|v| v as f32),
                     uv_bounds: bounds,
+                    // Reconstruct in f64 before the f32 vertex boundary, so the
+                    // nearest path never interpolates sheet-normalized UVs.
+                    texel: [
+                        (local.uv[0] * tw - f64::from(x)) as f32,
+                        (local.uv[1] * th - f64::from(y)) as f32,
+                    ],
+                    sampling: u32::from(sprite.sampling == SpriteSampling::Linear),
                 });
             }
             let count = vertices.len() as u32 - start;

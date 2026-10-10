@@ -27,6 +27,25 @@ source-sheet frames do not bleed through lower mip levels. Runtime source files
 are unnecessary. Imported replacements retain old texture and geometry versions.
 Cook-time atlas packing and extruded atlas mip levels remain open.
 
+Claude's first Max-effort engine review is preserved in
+[handoff 0032](../../handoffs/0032-sprite-rendering/result.md). It exposed nearest
+texel ties that duplicated/dropped rows under flips and changed when a source
+sheet was resized. The new GPU regression reproduced that defect before the
+fix. Nearest sampling now interpolates region-local texels and uses an integer
+`textureLoad`, with a 1/1024-texel tie tolerance toward increasing screen
+coordinate on the dominant derivative axis (X wins equal slopes). This is a
+defined sampling rule, not an assumption about GPU raster subpixel precision.
+Linear sampling retains its normalized-UV filtering path. The regression passes
+eight orientations (including quarter turns and a mirrored parent), scales 1–3,
+and sheets of 64 and 80 rows, with every texel represented and resized-sheet
+frames byte-identical. Full checks pass 325 Rust tests, Clippy and 53 GPU checks.
+Claude's broader corrected-renderer review remains required.
+
+The review also requests asset/entity-specific diagnostics for undersized
+reimports and an optional exact 2D display curve. Those remain open. The existing
+linear-light blending and neutral curve are unchanged. The pixel-camera near-tie
+follow defect is separate from these texel-sampling ties and is not fixed here.
+
 Bounds: 32,768 sprites and 256 MiB unique sprite texture storage per prepared
 scene; geometry is bounded to 54 vertices per sprite and 128 MiB total. These
 limits exclude retained prior scenes, staged replacements and allocator overhead.
