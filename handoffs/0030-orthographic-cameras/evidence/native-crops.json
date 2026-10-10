@@ -1,0 +1,118 @@
+{
+ "source": "59f3384cf8e1626da99b7ff9817f297f84482d97",
+ "native_sha256": "7a9cb8a5285ccda04b98cf9ff55e2206b4543469b29304dce4ddea1388ef6c54",
+ "project_sha256": "180a615e13b4cc2ac5e9b5dff7adad208ebe2c20c31509e5e29e54392f5f95e0",
+ "note": "Inspector-region crops made with macOS sips from the original CUA JPEGs (re-encoded by sips). Crops start below the titlebar and contain no account label. Full images stay ignored in artifacts/0030-native-captures.",
+ "crops": [
+  {
+   "file": "explicit-min-crop.jpg",
+   "sha256": "7d67713aea1f743335cc79b79d7a15a0ac4f519969e4f9b06a08bc471f339349",
+   "from": "explicit-min.jpg",
+   "from_sha256": "8c68bce7842cf5cffe46af3849e2b85e46902637efb01e986a286c477d625d95",
+   "entity": "Camera explicit perspective",
+   "logical_size": [
+    1000.0,
+    650.0
+   ]
+  },
+  {
+   "file": "explicit-wide-inspector.jpg",
+   "sha256": "a7544893e4523d34b3cea52bfc64a69510780299de319659ba674e0df68d2c96",
+   "from": "explicit-wide.jpg",
+   "from_sha256": "ccad70b0180f3f359deca45b260fbd5409613efbc1b56ceee9628796a03303e7",
+   "entity": "Camera explicit perspective",
+   "logical_size": [
+    1440.0,
+    874.0
+   ]
+  },
+  {
+   "file": "legacy-min-crop.jpg",
+   "sha256": "12ea4e97e2137a851bd107314d2caa4389b0b4ea087a12ab6fd586dfbebaa457",
+   "from": "legacy-min.jpg",
+   "from_sha256": "d44633d9697405883364a8f5d898e3668c6a6ef6a2ab826d5bcd9b3ee630cd2d",
+   "entity": "Camera persp-d16",
+   "logical_size": [
+    1000.0,
+    650.0
+   ]
+  },
+  {
+   "file": "legacy-wide-inspector.jpg",
+   "sha256": "0301e81568d0e381b853b0a2d9cf4b33bb6454b4726f730d2b2eef3efe460f76",
+   "from": "legacy-wide.jpg",
+   "from_sha256": "de780fafaa6c19224ebc631b96c1a18a91791e5da44a502612956e63de188b58",
+   "entity": "Camera persp-d16",
+   "logical_size": [
+    1440.0,
+    874.0
+   ]
+  },
+  {
+   "file": "ortho-min-crop.jpg",
+   "sha256": "02d26bc8de3875d00353d20cd4c8c993102ce2f1884e170c7f52b2842085b64e",
+   "from": "ortho-min.jpg",
+   "from_sha256": "a74e2e4f634a79d5174f4d44b9fecdbd216568d8a48bc06d77a9734369914c4b",
+   "entity": "Camera ortho-d16-v9",
+   "logical_size": [
+    1000.0,
+    650.0
+   ]
+  },
+  {
+   "file": "ortho-min-keyboard-crop.jpg",
+   "sha256": "2e0f37d7fcfafcea947cc9e4c344a48c7bb5bcf1d92268e280ed14389d3ca846",
+   "from": "ortho-min-keyboard.jpg",
+   "from_sha256": "2373153396c858d9e82a307c88bc08d7a90d2c452ce60cf9cc868ff4ed0bdff5",
+   "entity": "Camera ortho-d16-v9",
+   "logical_size": [
+    1000.0,
+    650.0
+   ]
+  },
+  {
+   "file": "ortho-wide-inspector.jpg",
+   "sha256": "35df4aa792a7a0865449f2c1c9eba925023b318df8c88bb1b32d69ffa35f9ea1",
+   "from": "ortho-wide.jpg",
+   "from_sha256": "4f8d7b919aa14b23bb0948e9ae8c31d6baa9cb32cfec479393b7f2376616a971",
+   "entity": "Camera ortho-d16-v9",
+   "logical_size": [
+    1440.0,
+    874.0
+   ]
+  },
+  {
+   "file": "tiny-min-331-crop.jpg",
+   "sha256": "acc4fbf9dc328e0e01bc776f72d14b211316ad33ac2c8e269a5b68ff751a7659",
+   "from": "tiny-min.jpg",
+   "from_sha256": "877f70e9fd9856fa01082d73ccd0fa98c61a2140650f6d7c43ac8df482cdbc79",
+   "entity": "Camera tiny values",
+   "logical_size": [
+    1000.0,
+    650.0
+   ]
+  },
+  {
+   "file": "tiny-min-inspector-crop.jpg",
+   "sha256": "b28b8e29e53a01507e35523830ea0873a8a387a6d6cdf8924ed034e49a0e56f3",
+   "from": "tiny-min-inspector.jpg",
+   "from_sha256": "346a421acb56e08f8d247b736d084fdaea72ca4a8383952b6f41c912fed13c77",
+   "entity": "Camera tiny values",
+   "logical_size": [
+    1000.0,
+    650.0
+   ]
+  },
+  {
+   "file": "tiny-wide-inspector.jpg",
+   "sha256": "83c7ef743a324d51b8dd944c6951b5bb67ec60715529ff709ebc705450628f8c",
+   "from": "tiny-wide.jpg",
+   "from_sha256": "94144d11de8084e222a15e22affb4ad1251072532524009d3f9acbca9f8f301b",
+   "entity": "Camera tiny values",
+   "logical_size": [
+    1440.0,
+    874.0
+   ]
+  }
+ ]
+}
