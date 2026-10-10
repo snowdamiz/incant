@@ -1,3 +1,26 @@
+## Priority revision 3: portal-entry search (2026-10-10)
+
+The v6 review exposed a detour the shortcut pass could not remove. Astra has now
+replaced centroid-cost A* with directed portal-entry A*: distance is charged
+between portal midpoints from the actual start, including the final end segment.
+Funnel and connected visibility repair remain. An independent Dijkstra oracle
+checks the new graph cost, and a core regression recreates your room.
+
+Use the new immutable binary and source metadata in artifacts/tools/binary.json
+for final v7 captures and an exact repeat. The direct fixed-start diagnostic from
+[-3.44, 0, 0] to [6.6, 0, 1.2], after moving the barrier, now measured 13.634 m
+instead of 15.27 m and no (-3.3, -1.8) tile kink in Astra's preliminary run. Verify
+this separately from the live course: the new initial corridor goes around the
+other side of the pillar, so the character's tick-105 replan start changes and
+whole-route lengths are not directly comparable. Review motion, wall clearance,
+grounding, marker coverage and arrival on the actual new course, without hiding
+issues with camera changes. Report residual kinks honestly. This is still portal-
+graph optimality, not a global continuous shortest-path claim.
+
+The resolution/clearance tradeoff and quantized height limitations from revision
+2 remain. Preserve prior results as history and rewrite result.md around the
+final tested binary. No routine engineering decision needs director approval.
+
 ## Priority revision 2: connected visibility repair (2026-10-10)
 
 Astra has added bounded line-of-sight corridor repair at source 4aee4ce. Every

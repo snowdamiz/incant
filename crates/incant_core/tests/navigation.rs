@@ -5,6 +5,99 @@ use incant_doc::{
 };
 use serde_json::json;
 
+#[test]
+fn portal_search_avoids_the_rendered_room_tile_boundary_detour() {
+    let mut project = Project::empty("Doorway detour regression");
+    let mut scene = Scene::new("Room");
+    let mut sources = vec![];
+    for (name, at, half) in [
+        ("Floor", [0., -0.1, 0.], [8., 0.1, 5.]),
+        ("North", [0., 0.5, -4.7], [0.15, 0.5, 0.3]),
+        ("Middle", [0., 0.5, -1.2], [0.15, 0.5, 1.6]),
+        ("South", [0., 0.5, 3.5], [0.15, 0.5, 1.5]),
+        ("Screen", [3.6, 0.5, -1.6], [0.15, 0.5, 1.8]),
+        ("Pocket west", [5.625, 0.5, 3.], [0.625, 0.5, 0.15]),
+        ("Pocket east", [7.375, 0.5, 3.], [0.625, 0.5, 0.15]),
+        ("Pocket side", [5., 0.5, 3.925], [0.15, 0.5, 1.075]),
+        ("Ridge", [1.3, 0.075, 0.], [0.3, 0.075, 5.]),
+        ("Barrier", [0., 0.5, 1.2], [0.15, 0.5, 0.8]),
+        ("Pillar", [-3.6, 0.7, 1.], [0., 0., 0.]),
+    ] {
+        let mut entity = Entity::new(name);
+        entity.components.insert(
+            "Transform".into(),
+            json!(Transform {
+                translation: at,
+                ..Default::default()
+            }),
+        );
+        entity.components.insert(
+            "Collider".into(),
+            json!(Collider {
+                shape: if name == "Pillar" {
+                    ColliderShape::Capsule {
+                        radius: 0.45,
+                        half_height: 0.25,
+                    }
+                } else {
+                    ColliderShape::Box { half_extents: half }
+                },
+                ..Default::default()
+            }),
+        );
+        sources.push(NavigationSource {
+            entity: entity.id.clone(),
+            geometry: NavigationSourceKind::Collider,
+        });
+        scene.entities.insert(entity.id.clone(), entity);
+    }
+    let mut nav = Entity::new("Navigation");
+    let mut component = NavigationMesh {
+        settings: Default::default(),
+        sources,
+    };
+    component.settings.min = [-8., -1., -5.];
+    component.settings.max = [8., 2.5, 5.];
+    component.settings.cell_size = 0.1;
+    component.settings.cell_height = 0.05;
+    component.settings.tile_cells = 32;
+    component.settings.agent_radius = 0.4;
+    component.settings.agent_height = 1.7;
+    component.settings.max_climb = 0.25;
+    nav.components
+        .insert("NavigationMesh".into(), json!(component));
+    let query = incant_core::NavigationQuery {
+        scene_id: scene.id.clone(),
+        mesh_entity: nav.id.clone(),
+        path: incant_core::PathRequest {
+            start: [-3.44, 0., 0.],
+            end: [6.6, 0., 1.2],
+            snap_distance: 1.,
+            max_visited: 4000,
+        },
+    };
+    scene.entities.insert(nav.id.clone(), nav);
+    project.scenes.insert(scene.id.clone(), scene);
+    let engine = incant_core::Engine::new(&project).unwrap();
+    let path = engine.navigator()(query).unwrap().unwrap();
+    let length = path
+        .points
+        .windows(2)
+        .map(|p| (p[1][0] - p[0][0]).hypot(p[1][2] - p[0][2]))
+        .sum::<f32>();
+    assert!(
+        length < 14.5,
+        "portal route takes {length}m; centroid routing took 15.27m"
+    );
+    assert!(
+        !path
+            .points
+            .iter()
+            .any(|p| (p[0] + 3.3).abs() < 0.01 && (p[2] + 1.8).abs() < 0.01),
+        "arbitrary tile-corner detour remains"
+    );
+}
+
 fn fixture() -> (Project, String, String, String) {
     let mut project = Project::empty("Navigation");
     let mut scene = Scene::new("World");
