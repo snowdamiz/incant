@@ -167,3 +167,100 @@ execution on Linux, and compares cross-host artifacts separately. Local target
 compilation and feature graphs are not device execution. Native character and
 navigation, 2D/joint components, full legacy scripting SDK, physics saves,
 mobile exports and reference-phone/shipping performance gates remain open.
+
+## Publication union with numeric/audio extraction — 2026-10-10
+
+The physics branch merges the reviewed numeric and cooked-audio stack through
+audio head `8fef22cb3a101270cc4a6527ffe8b09cbef75ec2`. Integration source head
+`d4a8505e41cd18c3637854bb17e830762954ff32` has tree
+`0481a0088f5b0243c10bb3b8a2560b62f787ed59`. Physics/runtime/cook/script/type
+source is unchanged from reviewed `32a720c`; audio/assets source is unchanged
+from the reviewed audio stack. Both runtime guards/platform path sets, all tool
+cache/timing changes and existing probes are retained. The only additional Rust
+change is the copied-player test isolation described below. Audio loading/mixing
+remains separate from future native ECS audio integration.
+
+The [union report](evidence/native-physics-audio-union-2026-10-10.json) retains
+source hashes, target features, full body streams, both shipping proofs and log
+identities. The changed dependency union passed 162 scoped runtime/physics/audio/
+asset tests and 428 release workspace tests/doctests (44 existing GPU tests
+ignored), workspace Clippy, compiler-disabled script Clippy and the audio device
+feature compile. All 38 tools tests, generated schema/SDK/bridge checks, strict
+SDK TypeScript, conventions, formatting and actionlint pass. The resolved
+dependency guard covers seven runtime roots under workspace feature unification.
+The current 28 feature graphs and nine native/actual-browser streams pass again;
+the body-stream SHA remains `a2a870b8…` above. The earlier mobile runtime checks
+remain compile-only evidence for the unchanged physics source.
+
+Fresh union shipping observations are separate from the pre-union identities:
+
+| Executable / observed processes | Stripped bytes | SHA-256 | Matching arm64 dSYM UUID |
+| --- | ---: | --- | --- |
+| Compiler-disabled physics/input/script player, 32 | 3,941,816 | `87c14258a11c923ba0635d697db1521d1e7b7bf75e132a922470d883ed2bf10c` | `1cc810aa-38af-365f-b80c-34326d0148b2` |
+| Separate cooked-audio player, 64 | 585,072 | `825acac5f630e559a23ad2e4dbceca021a13da59e74f8e3105d8b121a1084013` | `89de1499-9297-3a3e-9bc4-631e133e3338` |
+
+Both used their normal source-removal proofs on macOS arm64. Physics retained
+the empty/recorded-input and cooked rigid-body checks; audio retained static/
+streaming modes, playback-rate and render-batch invariance. These are separate
+executables, not proof that native world audio or a full game export is complete.
+Raw results remain in `artifacts/native-physics-audio-union-{shipping,audio}`.
+
+### Copied-player test process isolation
+
+Two Linux jobs (main53 and PR54) failed at the copied player's first process
+launch with `ExecutableFileBusy` / `ETXTBSY` 26. That test copied an executable
+while the other test in the same Rust test binary could spawn children. The
+pinned Rust 1.99 [file implementation](https://github.com/rust-lang/rust/blob/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/fs/unix.rs)
+opens the copy's writer with close-on-exec; the [process implementation](https://github.com/rust-lang/rust/blob/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/process/unix/unix.rs)
+uses spawn/fork paths. Close-on-exec does not remove the descriptor from a child
+before exec occurs.
+
+A controlled Linux 7.0.14-linuxkit arm64 probe reproduced that mechanism in all
+16 trials: a forked child retained an `O_CLOEXEC` writer, the parent closed its
+writer, the copied binary still failed with error 26, and it ran successfully
+after the child exec closed the descriptor. The pinned, network-disabled Python
+container identity, complete probe source and observed results are in the union
+report. This supports the race diagnosis; the precise hosted interleaving was
+not traced.
+
+The isolated fix `1de1f209c4d43c38523741b2d80dcad957c74940` adds a test-local mutex
+around both process-launching tests. It preserves the actual copied executable,
+every assertion and immediate launch-error failure; it adds no retries or
+production changes. The existing two-test release run and matching Clippy check
+pass after the fix using the workspace feature graph. Upstream PR54/55 received
+the same fix; the physics merge preserved its already validated tree exactly.
+
+## Final editor-build-context union — 2026-10-10
+
+Integration `c7dbe02` includes reviewed Tauri head
+`961b1d35251aed9b024b6af7b004f8337e29b1b4`. Only STATUS needed conflict
+resolution; both entries are retained. Runtime/physics/cook/script/types match
+`32a720c` byte-for-byte, and audio/assets match `8fef22c`. The root lockfile adds
+only two build-only edges between already pinned Tauri packages. Runtime normal
+dependencies and the preceding physics/audio shipping source inputs are unchanged.
+
+The [focused union checks](evidence/native-physics-tauri-union-2026-10-10.json)
+pass seven editor tests in each feature mode, editor Clippy with warnings denied
+in each mode, the release custom-protocol executable build, all seven runtime
+dependency guards and conventions. Existing 428-test and fresh shipping evidence
+above remains scoped to its recorded source head and binary identities; no new
+shipping artifacts or performance results are asserted for this editor-only
+change. Hosted exact-head validation remains pending.
+
+## Hosted cross-host report paths
+
+Run 38092910737 at head `2512ff0` completed native trials on Windows, Linux and
+macOS plus actual Linux browser WASM trials. Its comparison job rejected source
+metadata before comparing streams: Windows used backslashes in dictionary keys.
+The producer now uses `Path.as_posix()` for repository-relative report keys; the
+strict source and byte-stream comparator is unchanged.
+
+All three original artifact reports were downloaded. The unchanged comparator
+reproduced the rejection. Copies with only path-key separators canonicalized
+passed every source, trial-coverage, stream identity and cross-host byte check:
+all 21 streams are SHA256 `a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c`.
+Changing one source digest still fails. No stream bytes were changed; report
+hashes/counts are retained in
+[evidence](evidence/native-physics-host-paths-2026-10-10.json). This is evidence
+from actual hosted runs with a corrected metadata representation, not a claim
+that the old CI comparison job passed. Corrected exact-head CI remains required.
