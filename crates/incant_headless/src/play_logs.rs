@@ -1,6 +1,6 @@
 //! Structured simulation output with bounded memory and an optional new JSONL file.
 use crate::play::PlayError;
-use incant_script::{LogLevel, ScriptLog};
+use incant_play_legacy::{LogLevel, ScriptLog};
 use serde::Serialize;
 use std::{fs, io::Write, path::Path};
 

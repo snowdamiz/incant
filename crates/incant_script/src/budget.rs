@@ -79,10 +79,6 @@ impl ExecutionBudget {
     pub fn expired(&mut self) -> bool {
         self.check().is_err()
     }
-    #[cfg(test)]
-    pub fn exhaust(&mut self) {
-        self.failure = Some(Failure::Expired);
-    }
 }
 
 #[cfg(test)]

@@ -1,6 +1,6 @@
 //! Host-owned file IO. Sandboxed scripts receive no save-path capability.
 use crate::play::PlayError;
-use incant_script::{MAX_SAVE_BYTES, PlaySession, SaveError};
+use incant_play_legacy::{MAX_SAVE_BYTES, PlaySession, SaveError};
 use std::{
     fs,
     io::{Read, Write},

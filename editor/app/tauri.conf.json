@@ -3,7 +3,11 @@
   "productName": "Incant",
   "version": "0.0.1",
   "identifier": "dev.incant.editor",
-  "build": {"frontendDist": "../ui/dist", "devUrl": "http://localhost:5173"},
+  "build": {
+    "frontendDist": "../ui/dist",
+    "devUrl": "http://localhost:5173",
+    "windows": {"staticVCRuntime": false}
+  },
   "app": {
     "windows": [],
     "macOSPrivateApi": true,

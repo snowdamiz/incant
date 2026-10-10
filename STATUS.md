@@ -53,6 +53,116 @@ within its documented workload.
 
 ## Active work
 
+- Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
+  SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
+  and their exclusive scope ends; rejected batches restore the numeric undo
+  through verified layouts. Retained command functions never reactivate.
+  All 373 workspace tests (21 native host tests) and workspace Clippy pass, including relocation,
+  structural rejection after transform writes, deferred work and caught overflow.
+  Independent review found no actionable issue; twelve standalone development
+  runs passed with the original project/journal absent. Native SDK types and
+  a TypeScript example are included; the legacy gameplay migration and
+  authenticated shipping bytecode remain open. See the
+  [structural script audit](docs/spikes/native-script-structural.md).
+
+- The first authoring-free QuickJS host executes compiler-produced bytecode over
+  actual native numeric columns, with detached views and bounded rollback on
+  exceptions, memory/CPU failures and deferred work. All 363 workspace tests and
+  workspace Clippy pass; schemas/SDK remain unchanged and a repeated standalone
+  native-script probe passes. Hosted CI remains pending. Existing gameplay remains explicitly
+  in `incant_play_legacy` pending migration; SDK/state/timers/queries/saves and
+  authenticated export loading are still open. See the
+  [native script audit](docs/spikes/native-script-columns.md).
+
+  Direct iOS simulator and Android native-host compilation also pass after
+  enabling target-specific QuickJS binding generation. Existing desktop features
+  remain unchanged, and the platform workflow now checks the host separately
+  from its smoke apps. These are compile checks, not mobile script execution or
+  device performance evidence.
+
+- CI build reuse now keeps the ignored GPU suite on the workspace feature graph,
+  combines macOS editor/headless builds and caches Rust dependencies. The measured
+  baseline is a 38m15s median PR check, dominated by compilation; repeated Windows
+  npm archives consumed 8.91 GiB. Local checks pass 339 Rust tests, all 44 exact
+  baseline GPU tests, 387 UI tests, 15 tool tests, combined packaging and public
+  gameplay probes. The final GPU pass compiles nothing. Hosted cold/warm timing
+  remains pending; all platform/test coverage and open device/license gates stay
+  in force. See [CI evidence](docs/spikes/ci-build-performance.md).
+  The next reuse change combines required binaries/examples, preserves fresh
+  shipping verification and gives cold desktop jobs a bounded 60-minute deadline.
+  At base `588b3ab`, 352 normal tests, the exact 44 GPU tests, 18 direct public
+  commands and a fresh shipping package pass locally. The combined build only
+  recompiles workspace crates. Authorized exact-ID cleanup removed 7.60 GiB of
+  merged-PR Windows npm caches while preserving all other existing entries;
+  [cache evidence](docs/spikes/ci-cache-cleanup-2026-10-10.json) records each result.
+  First cold macOS verification passed in 33m58s execution (2m30s queue), but
+  package-selected tools still shifted compilation after the GPU savings.
+  The follow-up keeps workspace selection with exact tool targets: local Cargo
+  artifacts match 656 test dependencies, leaving only two required Tauri feature
+  variants, versus 45 differences with package selection. All direct probes and
+  fresh shipping checks pass; hosted validation of this refinement remains open.
+  All 17 checks on the earlier PR #48 head pass: cold macOS 33m58s, Linux 17m56s,
+  Windows 40m21s; each preserves all 44 GPU cases. The final Rust cache set is
+  7.992 GiB. All Rust saves now target main, with filtered desktop/credential
+  producers; [retention evidence](docs/spikes/ci-cache-retention.md) records the
+  9.114 GiB shared footprint and narrow headroom. After verified merge, exact
+  cleanup freed PR #48's private 7.992 GiB while preserving every other entry.
+  Main cache seeding and subsequent warm PR measurements remain open.
+
+- Windows MSVC compilation and doctests now share Cargo's static CRT policy;
+  Tauri's package-local shim is disabled after it shadowed the real runtime in
+  an unrelated executable doctest. Full-workspace doc coverage remains enabled.
+  The shipping guard records the CRT policy and Windows CI checks distributed
+  executables for CRT DLL imports. Local workspace tests (including all five
+  runtime doctests), editor Clippy and tool tests pass. Native Windows verification
+  remains pending the updated hosted job. See [CRT policy evidence](docs/spikes/windows-crt-policy.md).
+
+- The native runtime now lends actual Transform/Velocity numeric table columns
+  through an exclusive synchronous scope with separate stable IDs. Direct writes,
+  table reallocation, hierarchy/changed-tick publication, caller-owned undo and
+  error/unwind cleanup pass focused tests; schemas/SDK remain unchanged and
+  WASM/Android/iOS simulator compilation passes. Foreign script hosts, gameplay
+  migration and performance/device gates remain open. See
+  [numeric column evidence](docs/spikes/runtime-numeric-columns.md).
+
+- The runtime has a reusable shipping-profile build/package command with fat LTO,
+  one codegen unit, abort-on-panic and separately archived crash symbols. A real
+  packaged macOS runner passed source-free cooked-scene execution, SIGABRT/no-unwind
+  verification and matching dSYM UUID checks. Tool tests, focused Clippy and
+  runtime/cook tests pass; the portable profile compiles for wasm, Android and
+  iOS simulator. Linux/PDB packaging and execution await the updated desktop CI.
+  PGO, export migration, mobile/web symbol packaging, Device Farm/performance
+  measurements and phase gates remain open. See
+  [shipping profile evidence](docs/spikes/shipping-runtime-profile.md).
+
+- The native runtime now stages bounded entity lifecycle batches between steps:
+  spawn/despawn, reparent and Velocity component additions/removals. A rejected
+  batch preserves world state and the submitted commands. Hierarchy checking is
+  iterative; component-only updates avoid scanning the scene. Workspace Clippy,
+  339 Rust tests, portable compilation and the source-free cooked-scene probe
+  pass. Independent Astra Extra High review found no blocking defects. Hosted CI
+  remains pending; foreign script bindings,
+  other component types and legacy play migration remain open. See
+  [structural-buffer evidence](docs/spikes/runtime-structural-buffer.md).
+
+- Checked binary scenes and a real native Bevy world now form the first runtime
+  migration slice. Authoring-side cooking supports Transform/Velocity/hierarchy
+  and rejects every unmigrated component explicitly. A standalone runtime runs
+  after project/journal deletion, with direct bulk mutation and on-demand typed
+  snapshots. Workspace Clippy, 329 Rust tests, 44 GPU checks, 15 tool tests,
+  portable WASM/iOS compilation and contracts pass. The dependency guard covers
+  the real native-world crate. Legacy PlaySession integration, the other systems,
+  script bindings, saves and performance gates remain open.
+  See [native-world evidence](docs/spikes/cooked-native-world.md).
+
+- The first runtime boundary extraction moves shared component values into
+  `incant_types`, retaining incant_doc re-exports and identical generated schemas
+  and SDK. Workspace Clippy, 318 Rust tests, 41 GPU checks, 12 tool tests and
+  WASM/iOS core compilation pass. A resolved Cargo graph guard rejects authoring
+  dependencies in this package. It does not certify the still-unimplemented
+  incant_runtime or remove the legacy per-tick document path; cooked scenes and
+  a real native world are next. See [component boundary evidence](docs/spikes/runtime-component-types.md).
+
 - The [final plan update review](docs/spikes/performance-plan-v6-review.md)
   adopts hosted AWS Device Farm phones, removes name/package reservations and
   moves distribution signing/store accounts to Phase 5 uploads. Phase 0's
@@ -72,9 +182,10 @@ within its documented workload.
   systems/script bridge and saves off per-tick project cloning and JSON. Existing
   feature tests remain valid for their old implementation, not proof of this
   migration. Claude's editor redesign must also bound large collections.
-  Native/browser/Wasm script hosts, physics variants, shader pre-warming, shipping
-  profile/profiling, reference-phone PR gates and per-scene CRDT scaling remain
-  open. The new device/performance targets have not been passed or waived.
+  Native/browser/Wasm script hosts, physics variants, shader pre-warming,
+  PGO/profiling, mobile symbol packaging, reference-phone PR gates and per-scene
+  CRDT scaling remain open. The new device/performance targets have not been passed
+  or waived.
 
 - Claude Opus 5.5 is performing a full editor redesign at explicitly verified
   Max thinking in handoff 0033, prioritizing the Inspector header, hierarchy,

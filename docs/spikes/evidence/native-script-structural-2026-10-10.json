@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-10",
+  "platform": "arm64 macOS",
+  "base_commit": "ca86b026d3963eeab5d12239675906cac23d8802",
+  "scope": "Development native runner; original project and journal absent. TypeScript compiled by SWC before process execution; provided CommonJS compiles to QuickJS bytecode once at process startup. Authenticated source-free shipping bytecode loader remains open.",
+  "versions": {
+    "rust": "1.99.0",
+    "rquickjs": "0.14.0",
+    "bevy_ecs": "0.19.1",
+    "swc_core": "1.16.13",
+    "typescript": "5.9.3"
+  },
+  "cooked_scene_sha256": "935f5178a63348e82eeefbda520497eaa94b8011676a8dc2bb076ffa32aafa86",
+  "binary_sha256": "1867a46427a4e31dfcaa0eadfa0e95905f4fadea007ce059e42ee7b22b0fae28",
+  "compiled_commonjs_sha256": "5690decb5d56e13f12230914039bd28512c5229c81cad920aafd7785a46a31ea",
+  "authoring_files_present": false,
+  "cooked_scene_unchanged": true,
+  "position_tolerance": 1e-12,
+  "runs": [
+    {
+      "ticks": 0,
+      "entity_count": 2,
+      "local_positions": {
+        "1": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "2": [
+          1.0,
+          2.0,
+          3.0
+        ]
+      },
+      "two_runs_identical": true
+    },
+    {
+      "ticks": 1,
+      "entity_count": 3,
+      "local_positions": {
+        "1": [
+          0.05,
+          1.0,
+          0.0
+        ],
+        "2": [
+          1.0,
+          3.0,
+          3.0
+        ],
+        "3": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "two_runs_identical": true
+    },
+    {
+      "ticks": 2,
+      "entity_count": 3,
+      "local_positions": {
+        "1": [
+          0.1,
+          2.0,
+          0.0
+        ],
+        "2": [
+          1.0,
+          4.0,
+          3.0
+        ],
+        "3": [
+          1.0333333333333334,
+          1.0,
+          0.0
+        ]
+      },
+      "two_runs_identical": true
+    },
+    {
+      "ticks": 3,
+      "entity_count": 3,
+      "local_positions": {
+        "1": [
+          0.15000000000000002,
+          3.0,
+          0.0
+        ],
+        "2": [
+          1.0,
+          5.0,
+          3.0
+        ],
+        "3": [
+          1.0666666666666669,
+          2.0,
+          0.0
+        ]
+      },
+      "two_runs_identical": true
+    },
+    {
+      "ticks": 4,
+      "entity_count": 2,
+      "local_positions": {
+        "1": [
+          0.2,
+          4.0,
+          0.0
+        ],
+        "2": [
+          1.0,
+          6.0,
+          3.0
+        ]
+      },
+      "two_runs_identical": true
+    },
+    {
+      "ticks": 60,
+      "entity_count": 2,
+      "local_positions": {
+        "1": [
+          2.9999999999999973,
+          60.0,
+          0.0
+        ],
+        "2": [
+          1.0,
+          62.0,
+          3.0
+        ]
+      },
+      "two_runs_identical": true
+    }
+  ],
+  "workspace_tests": 373,
+  "focused_script_tests": 21,
+  "workspace_clippy": "pass",
+  "tool_tests": 25,
+  "runtime_dependency_guard": "pass",
+  "generated_sdk_bridge_and_typescript": "pass",
+  "review": "Independent parent Astra review: no actionable issue in bindings, revocation, owned rollback, SDK declarations and failure tests.",
+  "limitations": [
+    "Legacy document gameplay remains in incant_play_legacy.",
+    "Development runner still accepts CommonJS and compiles once at startup.",
+    "No hosted Windows/device execution or shipping-performance claim.",
+    "Structural apply CPU is separate host sync work, outside the JS execution budget."
+  ]
+}

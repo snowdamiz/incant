@@ -15,7 +15,7 @@ use incant_agent::{
 use incant_cmd::{Actor, CommandBus};
 use incant_core::Engine;
 use incant_doc::{Entity, Project, Scene, Transform, new_id, schema_registry};
-use incant_script::PlaySession;
+use incant_play_legacy::PlaySession;
 use serde::Serialize;
 use serde_json::{Value, json};
 use std::{
@@ -419,19 +419,19 @@ fn main() -> Result<()> {
             let mut registry = schema_registry();
             registry.insert(
                 "GameSave".into(),
-                json!(schemars::schema_for!(incant_script::GameSave)),
+                json!(schemars::schema_for!(incant_play_legacy::GameSave)),
             );
             registry.insert(
                 "ScriptClock".into(),
-                json!(schemars::schema_for!(incant_script::ScriptClock)),
+                json!(schemars::schema_for!(incant_play_legacy::ScriptClock)),
             );
             registry.insert(
                 "TimerRequest".into(),
-                json!(schemars::schema_for!(incant_script::TimerRequest)),
+                json!(schemars::schema_for!(incant_play_legacy::TimerRequest)),
             );
             registry.insert(
                 "TimerEvent".into(),
-                json!(schemars::schema_for!(incant_script::TimerEvent)),
+                json!(schemars::schema_for!(incant_play_legacy::TimerEvent)),
             );
             registry.insert(
                 "InputEvent".into(),

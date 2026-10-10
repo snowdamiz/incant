@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'tools/probes/physics/**'
+      - '.cargo/**'
       - '.github/workflows/physics-candidates.yml'
       - 'rust-toolchain.toml'
   workflow_dispatch:

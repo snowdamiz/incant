@@ -231,7 +231,7 @@ fn failed_runs_and_invalid_inputs_never_publish_or_replace_a_save() {
     );
     let large = fs::File::create(root.join("oversized.json")).unwrap();
     large
-        .set_len(incant_script::MAX_SAVE_BYTES as u64 + 1)
+        .set_len(incant_play_legacy::MAX_SAVE_BYTES as u64 + 1)
         .unwrap();
     let failed = run(
         root,

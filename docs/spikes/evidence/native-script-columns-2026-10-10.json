@@ -1,0 +1,37 @@
+{
+  "scope": "Development native script runner: CommonJS compiles once at process startup; authenticated exported bytecode loading remains open.",
+  "cooked_scene_sha256": "935f5178a63348e82eeefbda520497eaa94b8011676a8dc2bb076ffa32aafa86",
+  "binary_sha256": "b9067877bda604bc1570382b9915efd1515ec32fea73a56b675f0b5f15dc7284",
+  "ticks": 60,
+  "expected_local_positions": [
+    [
+      3,
+      2,
+      0
+    ],
+    [
+      1,
+      4,
+      3
+    ]
+  ],
+  "position_tolerance": 1e-12,
+  "two_runs_identical": true,
+  "reset_restores_original": true,
+  "authoring_files_present": false,
+  "workspace_tests": 363,
+  "workspace_suites": 114,
+  "focused_script_tests": 11,
+  "workspace_clippy": "pass",
+  "schema_regeneration": "unchanged",
+  "generated_sdk": "pass",
+  "runtime_dependency_guard": "pass",
+  "tool_tests": 24,
+  "review": "Astra Extra High: async finding fixed; no remaining actionable findings",
+  "limitations": [
+    "existing gameplay still uses incant_play_legacy",
+    "source compiled once at development startup",
+    "no shipping/device performance evidence",
+    "no authenticated artifact loader"
+  ]
+}

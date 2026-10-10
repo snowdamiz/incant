@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-10",
+  "base_commit": "ad53e3c153c263eba4aece3336a10df30877d218",
+  "source_sha256": {
+    "crates/incant_runtime/examples/run_scene.rs": "dbeab869e9579144c5b9bf3def9f89ae54fc67581c26ff414be3b4a0f9520626",
+    "crates/incant_runtime/src/binary.rs": "ba532cf53f6020f343a952b626019399014c9ae216044e8d79d343e3190cf8cc",
+    "crates/incant_runtime/src/commands.rs": "ccdae6a5e06c011c203bb2dd239f7e6a16750e5f55c12007d51514b66eb1d421",
+    "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+    "crates/incant_runtime/src/lib.rs": "61d9ab4db74d96d02a0730fa930aa37734860447e6781039da917aada43840a9",
+    "crates/incant_runtime/src/scene.rs": "9795bc8b5eca4dd74f961b0e402f719bdd971d170eaa6fea76285d55fd6f1620",
+    "crates/incant_runtime/src/world.rs": "f922116b2817811498887d5a0613aaa271465918daeaf8ba678794a3f2cb038a",
+    "crates/incant_runtime/tests/scenes.rs": "8ad4faeae87aa696f83416ec50338de022153453ea18fa1d5b36b5fcc05e0212",
+    "crates/incant_runtime/tests/structural.rs": "ac002e67cbee6ea7523b30ec94959d5dc2a4e168853bbbe66aa697afcc03cd9b"
+  },
+  "rust_tests": 339,
+  "rust_suites": 110,
+  "focused_tests": 21,
+  "gpu_tests_not_rerun": 44,
+  "gpu_reason": "Rendering unchanged; preceding foundation explicit GPU runs cover 41 renderer and 3 editor/headless checks.",
+  "workspace_clippy": "pass",
+  "dependency_roots": [
+    "incant_types",
+    "incant_runtime"
+  ],
+  "compile_only_targets": [
+    "wasm32-unknown-unknown",
+    "aarch64-apple-ios-sim"
+  ],
+  "independent_review": {
+    "model": "Astra",
+    "effort": "Extra High",
+    "outcome": "No actionable correctness defects found",
+    "scope": [
+      "atomicity",
+      "identity collisions",
+      "command ordering",
+      "hierarchy",
+      "live archetype queries",
+      "capacity"
+    ]
+  },
+  "probe": {
+    "passed": true,
+    "authoring_via_commands": true,
+    "cook_preserves_authoring": {
+      "game.incant.json": "e2d297704d31f3e580cdfbcc6f29764e16cd4eba86fa712c0facb4c52408a026",
+      "history.jsonl": "0b128db9f8f7a571ed31e99dc6b78c6fd32a5c612ac75b684ca7d44b6a40ae0a"
+    },
+    "authoring_files_removed_before_runtime": true,
+    "process_restarts_equal": true,
+    "reset_discards_simulation": true,
+    "corruption_rejected": true,
+    "scene_bytes": 304,
+    "scene_sha256": "41925f347df908b9588127b1431cf0c6cf7e8edf8d33dab7e182ff8d1cf977c8",
+    "binaries": {
+      "incant_headless": "8eba9c4672f927af471f864356282b317938d562b7769c0c6ffb7b080ca18fca",
+      "cook_scene": "3654c4de620a965e33a54104984877f63d8f77fed8ad4a51908bae728fa24345",
+      "run_scene": "1a567c168f0cf6c85131ad1603fd8f3773ca0fbc6f001fcd6e378f18d56e085d"
+    },
+    "scope": "Transform/Velocity native-world foundation; no script, render, physics or device performance gate"
+  },
+  "unmet": [
+    "foreign script view ABI and numeric fault handling",
+    "remaining cooked components/resources",
+    "legacy PlaySession migration",
+    "physics/navigation/render integration",
+    "binary saves",
+    "shipping-profile and hosted phone performance gates"
+  ]
+}
