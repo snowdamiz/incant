@@ -1,6 +1,6 @@
 # Implementation status
 
-Source: [PLAN.md](PLAN.md), revision 3 (2026-10-09) with director decisions. Current phase:
+Source: [PLAN.md](PLAN.md), revision 4 (2026-10-10) with director decisions. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without
@@ -52,6 +52,18 @@ integration. The thousand-entity script benchmark meets the local frame budget
 within its documented workload.
 
 ## Active work
+
+- PLAN.md revision 4 supersedes the document-backed gameplay architecture.
+  The [review and migration order](docs/spikes/performance-plan-v4-review.md)
+  records concrete gaps and updates ADRs 0002, 0003, 0006 and 0008. The immediate
+  engineering priority is runtime-safe component types, checked cooked scenes,
+  a native ECS world and a real dependency guard, followed by moving the existing
+  systems/script bridge and saves off per-tick project cloning and JSON. Existing
+  feature tests remain valid for their old implementation, not proof of this
+  migration. Claude's editor redesign must also bound large collections.
+  Native/browser/Wasm script hosts, physics variants, shader pre-warming, shipping
+  profile/profiling, reference-phone PR gates and per-scene CRDT scaling remain
+  open. The new device/performance targets have not been passed or waived.
 
 - Orthographic camera projection is implemented through shared component commands,
   renderer geometry, parallel material view rays, light clusters and directional
