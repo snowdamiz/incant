@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "delay_ticks": {
+      "format": "uint64",
+      "maximum": 4294967295,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "id": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "type": "string"
+    },
+    "interval_ticks": {
+      "default": null,
+      "format": "uint64",
+      "maximum": 4294967295,
+      "minimum": 1,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "payload": {
+      "default": null
+    }
+  },
+  "required": [
+    "id",
+    "delay_ticks"
+  ],
+  "title": "TimerRequest",
+  "type": "object"
+}

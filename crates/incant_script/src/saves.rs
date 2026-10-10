@@ -13,7 +13,7 @@ const MAX_PROJECT_BYTES: usize = 16 * 1024 * 1024;
 const MAX_STATE_BYTES: usize = 1024 * 1024;
 pub(super) const MAX_SAVE_TICK: u64 = (1 << 53) - 1;
 const FORMAT: &str = "incant-game-save";
-const VERSION: u32 = 1;
+const VERSION: u32 = 2;
 
 /// The published wire schema. Decode through `PlaySession::from_save` to apply
 /// semantic checks; serde alone does not establish a valid game save.
@@ -28,6 +28,9 @@ pub struct GameSave {
     elapsed_seconds: f64,
     project: Project,
     script_state: Value,
+    /// Version 1 has no schedule; version 2 requires this data-only schedule.
+    #[serde(default)]
+    schedule: Option<super::timers::Schedule>,
 }
 
 #[derive(Debug, Error)]
@@ -42,6 +45,8 @@ pub enum SaveError {
     Size,
     #[error("game-save clock is invalid")]
     Clock,
+    #[error(transparent)]
+    Timer(#[from] super::TimerError),
     #[error("game-save loading cannot change project identity, settings or resource manifests")]
     Manifest,
     #[error(transparent)]
@@ -80,6 +85,7 @@ impl PlaySession {
             elapsed_seconds: self.elapsed_seconds,
             project: self.project().clone(),
             script_state: self.host.state.clone(),
+            schedule: Some(self.host.schedule.clone()),
         };
         save.validate(&self.manifest_sha256)?;
         let text = serde_json::to_string(&save)?;
@@ -102,7 +108,7 @@ impl PlaySession {
             return Err(SaveError::Size);
         }
         let save: GameSave = serde_json::from_str(text)?;
-        if save.format != FORMAT || save.version != VERSION {
+        if save.format != FORMAT || !matches!(save.version, 1 | VERSION) {
             return Err(SaveError::Version);
         }
         let authored_sha256 = hash(authored.canonical_text()?.as_bytes());
@@ -120,12 +126,30 @@ impl PlaySession {
         next.ticks = save.tick;
         next.elapsed_seconds = save.elapsed_seconds;
         next.host.state = save.script_state;
+        next.host.schedule = save
+            .schedule
+            .unwrap_or_else(|| super::timers::Schedule::at(save.tick, save.elapsed_seconds));
+        if next.host.schedule.has_timers() && !next.host.has_timer_handler {
+            return Err(ScriptError::TimerHandler.into());
+        }
         Ok(next)
     }
 }
 
 impl GameSave {
     fn validate(&self, expected_manifest: &str) -> Result<(), SaveError> {
+        match (&self.schedule, self.version) {
+            (None, 1) => {}
+            (Some(schedule), VERSION) => {
+                schedule.validate()?;
+                if schedule.clock.tick != self.tick
+                    || schedule.clock.elapsed_seconds != self.elapsed_seconds
+                {
+                    return Err(SaveError::Clock);
+                }
+            }
+            _ => return Err(SaveError::Version),
+        }
         self.project.validate()?;
         if manifest(&self.project)? != expected_manifest {
             return Err(SaveError::Manifest);

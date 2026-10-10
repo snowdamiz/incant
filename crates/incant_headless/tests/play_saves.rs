@@ -36,7 +36,7 @@ fn separate_processes_save_and_resume_with_continuous_state_time_and_logs() {
     let saved = fs::read(root.join("slots/one.json")).unwrap();
     let envelope: Value = serde_json::from_slice(&saved).unwrap();
     assert_eq!(envelope["format"], "incant-game-save");
-    assert_eq!(envelope["version"], 1);
+    assert_eq!(envelope["version"], 2);
     assert_eq!(envelope["tick"], 17);
     let resumed = success(run(
         root,
