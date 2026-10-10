@@ -165,6 +165,7 @@ pub(crate) fn funnel(gates: &[([f32; 3], [f32; 3])]) -> Vec<[f32; 3]> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use glam::Vec3;
     #[test]
     fn snapped_edge_rounding_does_not_break_short_paths() {
         // Three adjacent polygons from the rendered room. Above the floor,
