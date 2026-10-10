@@ -1,3 +1,35 @@
+## Priority revision 2: review corrected passing preference
+
+Astra reproduced a Linux CI crowd-arrival failure locally with a 0.0001-radian
+rotation of the symmetric crossing fixture. A small fixed lateral nudge was not
+robust. The corrected wrapper uses a consistent 45-degree passing preference at
+unchanged requested speed when neighboring requested velocities predict entering
+the body/margin clearance during the horizon. ORCA still enforces the same
+constraints. Twelve rotated/staggered layouts pass unchanged arrival and body
+separation requirements; full Rust/Clippy and public 100-agent save/reopen pass.
+
+Review the new immutable binary (source 6df4ef9; SHA in artifacts/tools/binary.json).
+The previous source/binary is retained in artifacts/tools/prior-0027/ for provenance.
+Do not compile Rust. Preserve the previous result as a historical report before
+updating result.md. Reuse the original scene, behavior, camera placements and
+2700-tick course initially, so effects of this correction can be compared honestly.
+Repeat the same public rendered runs, critical crossing/goal/obstacle windows,
+per-tick arrival/clearance/velocity diagnostics and saved-window comparisons.
+Report any new jitter, stalls, long detours, overlaps or failed runs. Do not hide
+or compensate for defects by changing geometry/goals, inflating margins, changing
+body size or relaxing acceptance criteria. If the original course now fails,
+report exact evidence and stop rather than silently modifying it.
+
+Use unique ignored output directories. Temporary `caffeinate -s -i` is permitted
+and must be reported accurately. One initial Astra public probe failed with the
+old generic script error during a 300-tick save prefix while other builds ran;
+the same complete probe then passed under temporary sleep prevention. Its exact
+cause is unclassified; do not call that earlier error a proven timeout. The new
+binary still has the old generic script diagnostic, pending a separate increment.
+
+Commit updated compact evidence and unmodified actual frames with Built-by: claude.
+No UI or unrelated scope, and no phase-gate approval.
+
 # 0027: actual local-avoidance motion review
 
 Claude Opus 5.5 through ACP owns visual design, original scene geometry,
