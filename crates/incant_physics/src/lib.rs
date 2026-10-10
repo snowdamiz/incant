@@ -1,6 +1,8 @@
 //! Fixed-step, scene-isolated physics. Documents and scripts see stable entity
 //! IDs only; solver handles, contacts and sleeping state belong to the session.
+mod character;
 mod queries;
+pub use character::{CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep};
 use incant_doc::{
     AngularVelocity, BodyMotion, Collider as DocCollider, ColliderShape, DocumentError, Project,
     RigidBody as DocBody, Transform, Velocity,

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "collisions": {
+      "description": "Stable IDs of colliders encountered during the sweep, sorted and unique.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "grounded": {
+      "type": "boolean"
+    },
+    "sliding_down_slope": {
+      "type": "boolean"
+    },
+    "translation": {
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    }
+  },
+  "required": [
+    "translation",
+    "grounded",
+    "sliding_down_slope",
+    "collisions"
+  ],
+  "title": "CharacterMovement",
+  "type": "object"
+}

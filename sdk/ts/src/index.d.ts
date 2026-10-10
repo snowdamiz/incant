@@ -12,7 +12,13 @@ export type { Command } from './generated';
 import type { Command } from './generated';
 export type { PhysicsRayQuery as RayQuery, PhysicsRayHit as RayHit, PhysicsTriggerEvent as TriggerEvent } from './generated';
 import type { PhysicsRayQuery as RayQuery, PhysicsRayHit as RayHit, PhysicsTriggerEvent as TriggerEvent } from './generated';
+export type { PhysicsCharacterQuery as CharacterQuery, PhysicsCharacterMovement as CharacterMovement } from './generated';
+import type { PhysicsCharacterQuery as CharacterQuery, PhysicsCharacterMovement as CharacterMovement } from './generated';
 export interface ScriptApi {
+  /** Read-only sweep for a nonsensor kinematic body. World +Y is up. Costs 16 of
+   * the shared 256 physics-query units per tick. Apply translation/dt as Velocity
+   * through api.command for the next tick. Gravity/jumping are behavior-owned. */
+  computeCharacterMotion(query: CharacterQuery): CharacterMovement;
   /** Play-session query; at most 256 per tick. Direction is normalized. */
   raycast(query: RayQuery): RayHit | null;
   /** Sorted entry/exit transitions for the just-completed simulation tick. */

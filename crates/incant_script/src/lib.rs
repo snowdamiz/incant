@@ -1,9 +1,11 @@
 //! QuickJS sandbox for SWC-compiled TypeScript. No OS, filesystem, module loader,
 //! network, native plugins or shell are installed into the runtime.
 mod logs;
+mod queries;
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::Origin;
 pub use logs::{LogLevel, ScriptLog};
+use queries::{CharacterMover, Raycaster};
 use rquickjs::{Context, Runtime};
 use serde::Deserialize;
 use serde_json::Value;
@@ -43,7 +45,9 @@ impl PlaySession {
     pub fn new(project: &incant_doc::Project, compiled_source: &str) -> Result<Self, ScriptError> {
         let engine = incant_core::Engine::new(project)?;
         let mut host = ScriptHost::new(compiled_source)?;
-        host.set_raycaster(Arc::new(engine.raycaster()))?;
+        host.raycaster = Some(Arc::new(engine.raycaster()));
+        host.character_mover = Some(Arc::new(engine.character_mover()));
+        host.install_queries()?;
         Ok(Self {
             host,
             bus: CommandBus::simulation(project.clone())?,
@@ -124,13 +128,9 @@ struct TickResult {
     commands: Vec<Command>,
     logs: Vec<ScriptLog>,
 }
-type Raycaster = Arc<
-    dyn Fn(incant_core::RayQuery) -> Result<Option<incant_core::RayHit>, incant_core::PhysicsError>
-        + Send
-        + Sync,
->;
 pub struct ScriptHost {
     raycaster: Option<Raycaster>,
+    character_mover: Option<CharacterMover>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
     context: Context,
     _runtime: Runtime,
@@ -174,6 +174,11 @@ impl ScriptHost {
          if (result.error) throw new Error(result.error);
          return result.hit;
        }},
+       computeCharacterMotion: (query) => {{
+         const result = JSON.parse(globalThis.__incantCharacterMotion(JSON.stringify(query)));
+         if (result.error) throw new Error(result.error);
+         return result.movement;
+       }},
        triggerEvents: () => JSON.parse(eventsJson),
        query: (component) => Object.values(world.scenes).flatMap(scene => Object.values(scene.entities)
          .filter(entity => !component || Object.hasOwn(entity.components, component))
@@ -199,6 +204,7 @@ impl ScriptHost {
         }
         let mut host = Self {
             raycaster: None,
+            character_mover: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
             context,
             _runtime: runtime,
@@ -210,44 +216,6 @@ impl ScriptHost {
         host.install_queries()?;
         Ok(host)
     }
-    fn set_raycaster(&mut self, raycaster: Raycaster) -> Result<(), ScriptError> {
-        self.raycaster = Some(raycaster);
-        self.install_queries()
-    }
-    fn install_queries(&mut self) -> Result<(), ScriptError> {
-        let raycaster = self.raycaster.clone();
-        let count = self.query_count.clone();
-        let deadline = self.deadline.clone();
-        self.context
-            .with(|ctx| {
-                let function =
-                    rquickjs::Function::new(ctx.clone(), move |text: String| -> String {
-                        let result = (|| -> Result<_, String> {
-                            if text.len() > 4096
-                                || count.fetch_add(1, std::sync::atomic::Ordering::Relaxed) >= 256
-                                || Instant::now()
-                                    >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
-                            {
-                                return Err("physics query budget exceeded".into());
-                            }
-                            let query = serde_json::from_str(&text)
-                                .map_err(|e| format!("invalid ray query: {e}"))?;
-                            raycaster
-                                .as_ref()
-                                .ok_or("physics queries require a play session")?(
-                                query
-                            )
-                            .map_err(|e| e.to_string())
-                        })();
-                        match result {
-                            Ok(hit) => serde_json::json!({"hit":hit}).to_string(),
-                            Err(error) => serde_json::json!({"error":error}).to_string(),
-                        }
-                    })?;
-                ctx.globals().set("__incantRaycast", function)
-            })
-            .map_err(|_| ScriptError::Execution)
-    }
     pub fn state(&self) -> &Value {
         &self.state
     }
@@ -258,6 +226,7 @@ impl ScriptHost {
     pub fn hot_reload(&mut self, source: &str) -> Result<(), ScriptError> {
         let mut next = Self::with_budget(source, self.budget)?;
         next.raycaster = self.raycaster.clone();
+        next.character_mover = self.character_mover.clone();
         next.install_queries()?;
         next.state = preserve_compatible(&self.state, &next.state);
         next.logs = std::mem::take(&mut self.logs);
@@ -296,6 +265,12 @@ impl ScriptHost {
                 ))
             })
             .map_err(|_| ScriptError::Execution)?;
+        // Native queries cannot be interrupted in the middle of a solver call.
+        // Even if script code catches a query error, an expired tick must not
+        // commit commands, logs or state after control returns to the host.
+        if Instant::now() >= *self.deadline.lock().unwrap_or_else(|e| e.into_inner()) {
+            return Err(ScriptError::Execution);
+        }
         if result.len() > 16 * 1024 * 1024 {
             return Err(ScriptError::InputLimit);
         }
@@ -375,6 +350,28 @@ mod tests {
         let start = Instant::now();
         assert!(host.tick(&mut bus, 1. / 60.).is_err());
         assert!(start.elapsed() < Duration::from_secs(1));
+    }
+    #[test]
+    fn native_query_expiry_prevents_commit_even_when_the_script_catches_errors() {
+        let source = r#"exports.default={initialState:{ok:false},update(api,dt,state){
+          try { api.raycast({scene_id:'x',origin:[0,0,0],direction:[0,-1,0],max_distance:1,include_sensors:false,exclude_entity:null,memberships:1,filter:1}); } catch(e) {}
+          state.ok=true; api.log('must not commit');
+        }};"#;
+        let mut host = ScriptHost::new(source).unwrap();
+        let deadline = host.deadline.clone();
+        let called = Arc::new(std::sync::atomic::AtomicBool::new(false));
+        let mark = called.clone();
+        host.raycaster = Some(Arc::new(move |_| {
+            mark.store(true, std::sync::atomic::Ordering::Relaxed);
+            *deadline.lock().unwrap() = Instant::now() - Duration::from_secs(1);
+            Ok(None)
+        }));
+        host.install_queries().unwrap();
+        let mut bus = CommandBus::new(Project::empty("query deadline")).unwrap();
+        assert!(host.tick(&mut bus, 1. / 60.).is_err());
+        assert!(called.load(std::sync::atomic::Ordering::Relaxed));
+        assert_eq!(host.state()["ok"], false);
+        assert!(host.take_logs().is_empty());
     }
     #[test]
     fn hot_reload_preserves_matching_types_and_old_program_on_error() {
