@@ -53,6 +53,17 @@ within its documented workload.
 
 ## Active work
 
+- Named button/axis input actions and runtime rebinding now use validated project
+  settings and the shared command bus. Ordered physical transitions preserve
+  short taps, combine alternative bindings, apply dead zones and normalize
+  diagonal movement. Eight new tests, 212 total Rust tests, 315 UI tests/build,
+  five tool tests, Clippy, contracts and native build/package pass. The strict TS
+  public probe verifies Undo/Redo, invalid rollback, exact saved rebinding and
+  expected movement; existing save/input/timer probes pass. Local input-only p95
+  is 0.0025 ms for the typical workload and 2.8033 ms at the configured maximum.
+  Hosted checks, device adapters, haptics and the graphical binding editor remain
+  open. See [input actions](docs/spikes/input-actions.md).
+
 - Fixed-tick script timers, repeat/cancel/replace, copied payloads and a saved
   game clock are implemented. Version 2 game saves preserve pending deadlines
   and read version 1 with an empty schedule. Seven script tests and a CLI failure
@@ -80,7 +91,8 @@ within its documented workload.
   files. All 190 Rust, 315 UI and five tool tests pass, along with Clippy, generated
   contracts and the native build/package. macOS normalized-input smoke execution
   passes; hosted checks and merge are pending. Live OS/browser adapters, action
-  mapping and physical-device verification remain open. No computer use or local
+  mapping is implemented in the increment above; live adapters and physical-device
+  verification remain open. No computer use or local
   captures occurred. See [game input](docs/spikes/game-input.md).
 
 - Versioned logical game saves preserve runtime scenes, hierarchy, spawned/deleted

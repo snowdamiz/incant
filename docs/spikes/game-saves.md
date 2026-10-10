@@ -22,8 +22,9 @@ failed hot reloads leave it unchanged.
 
 Loading rejects a different authored project/script revision, unknown format or
 version, unknown envelope fields, malformed documents, invalid clocks and changed
-resource manifests. Project identity/settings/assets/scripts must match the
-authored baseline. Save input is at most 18 MiB, its project at most 16 MiB and
+resource manifests. Project identity/tick rate/assets/scripts must match the
+authored baseline. Input bindings may change through runtime commands and are
+saved with the runtime project. Save input is at most 18 MiB, its project at most 16 MiB and
 behavior state at most 1 MiB. Restore builds a separate session; failed loading
 cannot damage an existing session or authored files. Saves carry data only; the
 host supplies the compiled behavior and project-bound assets.

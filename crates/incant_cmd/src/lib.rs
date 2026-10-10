@@ -59,6 +59,10 @@ pub enum Command {
         section: String,
         text: String,
     },
+    /// Replace named gameplay bindings through the same undoable transaction.
+    SetInputActions {
+        actions: incant_doc::InputActions,
+    },
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -499,6 +503,9 @@ fn apply(
                 ));
             }
             project.memory.insert(section.clone(), text.clone());
+        }
+        Command::SetInputActions { actions } => {
+            project.settings.input_actions = actions.clone();
         }
     }
     Ok(())

@@ -3212,6 +3212,7 @@ version = "0.0.1"
 dependencies = [
  "automerge",
  "getrandom 0.3.4",
+ "incant_input",
  "loro",
  "schemars 1.2.2",
  "serde",

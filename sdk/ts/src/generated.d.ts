@@ -16,14 +16,22 @@ export namespace ColliderSchema {
 export type Collider = ColliderSchema.Root;
 
 export namespace CommandSchema {
+  export type ActionGesture = "tap" | "long_press" | "swipe";
   export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
   export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
   export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
+  export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
+  export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
   export type Origin = "user" | "agent" | "script" | "import";
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
+  export type Stick = "left" | "right";
   export type TextureUsage = "color" | "linear" | "normal";
-  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "set_memory"; "section": string; "text": string });
+  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" });
 }
 export type Command = CommandSchema.Root;
 
@@ -39,22 +47,43 @@ export namespace EnvironmentLightSchema {
 export type EnvironmentLight = EnvironmentLightSchema.Root;
 
 export namespace GameSaveSchema {
+  export type ActionGesture = "tap" | "long_press" | "swipe";
   export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
   export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
   export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
+  export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
+  export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
   export type Origin = "user" | "agent" | "script" | "import";
   export type Project = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings };
-  export type ProjectSettings = { "tick_rate": number };
+  export type ProjectSettings = { "input_actions"?: { [key: string]: InputAction }; "tick_rate": number };
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type Schedule = { "clock": ScriptClock; "timers": { [key: string]: Timer } };
   export type ScriptClock = { "elapsed_seconds": number; "tick": number };
   export type ScriptSource = { "id": string; "name": string; "path": string };
+  export type Stick = "left" | "right";
   export type TextureUsage = "color" | "linear" | "normal";
   export type Timer = { "due_tick": number; "interval_ticks"?: number | null; "payload": unknown };
   export type Root = { "authored_sha256": string; "elapsed_seconds": number; "format": string; "project": Project; "schedule"?: (Schedule) | (null); "script_sha256": string; "script_state": unknown; "tick": number; "version": number };
 }
 export type GameSave = GameSaveSchema.Root;
+
+export namespace InputActionsSchema {
+  export type ActionGesture = "tap" | "long_press" | "swipe";
+  export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
+  export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
+  export type Stick = "left" | "right";
+  export type Root = { [key: string]: InputAction };
+}
+export type InputActions = InputActionsSchema.Root;
 
 export namespace InputEventSchema {
   export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
@@ -68,6 +97,8 @@ export namespace InputEventSchema {
 export type InputEvent = InputEventSchema.Root;
 
 export namespace InputFrameSchema {
+  export type ActionKind = "button" | "axis1" | "axis2";
+  export type ActionState = { "active": boolean; "kind": ActionKind; "pressed": boolean; "released": boolean; "value": [number, number] };
   export type Buttons = { "held": Array<KeyCode>; "pressed": Array<KeyCode>; "released": Array<KeyCode> };
   export type Buttons2 = { "held": Array<MouseButton>; "pressed": Array<MouseButton>; "released": Array<MouseButton> };
   export type Buttons3 = { "held": Array<GamepadButton>; "pressed": Array<GamepadButton>; "released": Array<GamepadButton> };
@@ -80,7 +111,7 @@ export namespace InputFrameSchema {
   export type TouchChange = { "id": number; "phase": TouchPhase; "position": [number, number] };
   export type TouchPhase = "down" | "move" | "up" | "cancel";
   export type TouchPoint = { "delta": [number, number]; "position": [number, number] };
-  export type Root = { "connected": Array<number>; "disconnected": Array<number>; "focused": boolean; "gamepads": { [key: number]: GamepadFrame | undefined }; "gestures": Array<Gesture>; "keyboard": Buttons; "mouse": MouseFrame; "touch_changes": Array<TouchChange>; "touches": { [key: number]: TouchPoint | undefined } };
+  export type Root = { "actions": { [key: string]: ActionState }; "connected": Array<number>; "disconnected": Array<number>; "focused": boolean; "gamepads": { [key: number]: GamepadFrame | undefined }; "gestures": Array<Gesture>; "keyboard": Buttons; "mouse": MouseFrame; "touch_changes": Array<TouchChange>; "touches": { [key: number]: TouchPoint | undefined } };
 }
 export type InputFrame = InputFrameSchema.Root;
 
@@ -142,14 +173,22 @@ export namespace PointLightSchema {
 export type PointLight = PointLightSchema.Root;
 
 export namespace ProjectSchema {
+  export type ActionGesture = "tap" | "long_press" | "swipe";
   export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
   export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
   export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
+  export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
+  export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
   export type Origin = "user" | "agent" | "script" | "import";
-  export type ProjectSettings = { "tick_rate": number };
+  export type ProjectSettings = { "input_actions"?: { [key: string]: InputAction }; "tick_rate": number };
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
   export type ScriptSource = { "id": string; "name": string; "path": string };
+  export type Stick = "left" | "right";
   export type TextureUsage = "color" | "linear" | "normal";
   export type Root = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings };
 }
