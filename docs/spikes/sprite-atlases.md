@@ -211,3 +211,21 @@ Actual main53 was merged as `70184b1` after the review. Conflict resolution
 retains main's CI timing and pinned-tool cache changes and all atlas/sprite
 workflow probes; no renderer source conflict occurred. The resulting union
 requires its own full correctness checks and hosted CI before publication.
+
+## Reviewed runtime union ready for hosted checks, 2026-10-10
+
+The publication candidate integrates PR57's reviewed physics, native numeric/audio
+extraction and Tauri build-context stack. Renderer, atlas packer and import source
+remain unchanged by those merges. It passes 451 ordinary release workspace tests,
+all 56 explicitly executed GPU tests, all-target release Clippy, 38 tool tests,
+420 UI tests, UI/SDK builds, unchanged generated schemas, workflow lint and the
+authoring-free dependency guard for all seven shipping roots. The combined
+custom-protocol editor/headless/cook build passes.
+
+The rebuilt public atlas, ordinary-sprite and both camera probes preserve stable
+IDs, exact Undo/Redo and saved/repeated state after source removal. These probes
+still use the legacy PlaySession; native 2D migration is open. Exact source, binary
+and log identities are in [publication evidence](evidence/sprite-atlas-publication-union-2026-10-10.json).
+The accepted atlas-specific visual evidence and all shared rendering limitations
+above remain unchanged. Hosted checks, native editor integration and phone gates
+remain distinct requirements.
