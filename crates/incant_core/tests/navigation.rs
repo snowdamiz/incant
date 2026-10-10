@@ -37,7 +37,7 @@ fn portal_search_avoids_the_rendered_room_tile_boundary_detour() {
                 shape: if name == "Pillar" {
                     ColliderShape::Capsule {
                         radius: 0.45,
-                        half_height: 0.25,
+                        half_height: 0.7,
                     }
                 } else {
                     ColliderShape::Box { half_extents: half }
@@ -79,6 +79,18 @@ fn portal_search_avoids_the_rendered_room_tile_boundary_detour() {
     scene.entities.insert(nav.id.clone(), nav);
     project.scenes.insert(scene.id.clone(), scene);
     let engine = incant_core::Engine::new(&project).unwrap();
+    for x in [-2.3, -2.1, -1.9, -1.7] {
+        for z in [0.7, 0.9, 1.1, 1.3] {
+            let mut floor_query = query.clone();
+            floor_query.path.start = [x, 0.05, z];
+            floor_query.path.end = [x + 0.01, 0.05, z];
+            floor_query.path.snap_distance = 0.06;
+            assert!(
+                engine.navigator()(floor_query).unwrap().is_some(),
+                "clear floor missing at {x},{z}"
+            );
+        }
+    }
     let path = engine.navigator()(query).unwrap().unwrap();
     let length = path
         .points
