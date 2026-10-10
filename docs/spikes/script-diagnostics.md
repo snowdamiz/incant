@@ -27,7 +27,12 @@ and infinite-loop Error getters, absolute tick reporting across a process restar
 unchanged authoring files and saves, committed-only logs, and initialization versus
 timeout CLI output. The existing infinite-loop and native-query expiry tests now
 assert the deadline category. All 294 Rust workspace tests and Clippy pass locally;
-additional integration/hosted checks and the steering dependency fix are pending.
+the steering correction is integrated at `b1dcdd7` and all 294 tests and Clippy
+pass again. Public steering and off-mesh save/reopen workflows pass, as does the
+updated unsigned native package. The unchanged UI/GPU/contracts also pass at the
+initial diagnostics source: 315 UI, 40 GPU and five tool tests. See the
+[evidence record](evidence/script-diagnostics-2026-10-10.json). Hosted checks and
+reviewed dependency merges remain pending.
 
 The default 50 ms wall-clock budget, 32 MiB VM limit, shared query limits and
 sandbox capabilities are unchanged. Host sleep or CPU contention can still expire

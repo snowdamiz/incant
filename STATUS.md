@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Script failures now distinguish bounded initialization/tick JavaScript messages,
+  native allocation failures and wall-clock deadlines. Both CLI paths identify
+  the absolute failing tick, including after save/reopen, and suppress failed-tick
+  logs/state/save publication. Five new behavior tests bring the integrated Rust
+  suite to 294 passing tests. Clippy, both public navigation/steering saved
+  workflows and native packaging pass. No script limit or capability changed;
+  sleep/load sensitivity remains open. Hosted checks and dependency merges are
+  pending. See [script diagnostics](docs/spikes/script-diagnostics.md).
+
 - Authored off-mesh links support directed/bidirectional gaps, enable toggles,
   costs, endpoint validation and per-leg route metadata through shared commands.
   Invalid runtime landings cannot publish partial script/document state. At
