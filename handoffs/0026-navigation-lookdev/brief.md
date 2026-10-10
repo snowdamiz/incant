@@ -1,3 +1,23 @@
+## Priority revision 4: phantom raster spans and endpoint precision (2026-10-10)
+
+Both v7 failures now have reproduced, fixed regression cases. The missing floor
+came from rerecast 0.4.0's triangle clipping: when input vertices reached zero,
+old output counts were reused, inventing solid spans more than a metre outside
+capsule facets. A pinned local source patch clears those counts. The open 4x4
+floor-query grid around the pillar now passes. See third_party/rerecast/INCANT_PATCH.md.
+The centimetre query chose the wrong skinny triangle because the f32 squared
+snap distances lost their ordering. Closest-point arithmetic and distance ranking
+now use f64. Both directions of the exact 4.7/4.71 query pass a targeted test.
+
+Review the new verified binary as v8 with an exact repeat, including the hole
+map, query-error probe, live motion/clearance and doorway sweep. Preserve earlier
+results as history. Quantify remaining bends and height artifacts; the raster fix
+may alter the route and arrival timing, so use actual final checkpoints. If a
+camera needs an adjustment to inspect the changed route clearly, you may make it,
+but retain the existing overview/plan views for comparison and disclose changes.
+Use temporary sleep assertions for long command runs if the locked Mac suspends;
+never bypass the lock. No native interaction is needed for this packet.
+
 ## Priority revision 3: portal-entry search (2026-10-10)
 
 The v6 review exposed a detour the shortcut pass could not remove. Astra has now
