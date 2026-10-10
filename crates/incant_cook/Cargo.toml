@@ -5,9 +5,20 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["scene", "script"]
+scene = ["dep:incant_doc", "dep:incant_runtime", "dep:ulid"]
+script = ["dep:incant_script", "dep:sha2"]
+
+[[example]]
+name = "cook_scene"
+required-features = ["scene"]
+
 [dependencies]
-incant_doc.workspace = true
-incant_runtime.workspace = true
+incant_doc = { workspace = true, optional = true }
+incant_runtime = { workspace = true, optional = true }
+incant_script = { workspace = true, features = ["compiler"], optional = true }
 serde_json.workspace = true
 thiserror.workspace = true
-ulid.workspace = true
+ulid = { workspace = true, optional = true }
+sha2 = { workspace = true, optional = true }

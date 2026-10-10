@@ -295,3 +295,58 @@ fn replay_seek_reconstructs_held_action_without_replaying_its_press() {
     let a = &step(&mut input, &actions, replay.events_at(4).unwrap()).actions["jump"];
     assert!(!a.active && a.released);
 }
+
+#[test]
+fn immutable_validated_bindings_match_mapped_frames_through_releases_and_gestures() {
+    let original = map(
+        json!({"jump":{"kind":"button","bindings":[{"type":"key","code":"Space"}]},
+        "use":{"kind":"button","bindings":[{"type":"gesture","gesture":"tap"}]},
+        "move":{"kind":"axis2","bindings":[{"type":"gamepad_stick","id":7,"stick":"left"}]}}),
+    );
+    let validated = ValidatedActions::new(original.clone()).unwrap();
+    let shared = validated.clone();
+    let mut legacy = InputRuntime::default();
+    let mut native = InputRuntime::default();
+    legacy.map_actions(&original).unwrap();
+    native.map_validated(&validated);
+    for events in [
+        vec![
+            key(KeyCode::Space, true),
+            key(KeyCode::Space, false),
+            InputEvent::GamepadConnected { id: 7 },
+        ],
+        vec![InputEvent::GamepadAxis {
+            id: 7,
+            axis: GamepadAxis::LeftX,
+            value: 0.75,
+        }],
+        vec![
+            InputEvent::Touch {
+                id: 1,
+                phase: TouchPhase::Down,
+                position: [1., 2.],
+            },
+            InputEvent::Touch {
+                id: 1,
+                phase: TouchPhase::Up,
+                position: [1., 2.],
+            },
+        ],
+        vec![],
+        vec![key(KeyCode::Space, true)],
+        vec![InputEvent::Focus { focused: false }],
+        vec![InputEvent::GamepadDisconnected { id: 7 }],
+        vec![InputEvent::Focus { focused: true }],
+    ] {
+        assert_eq!(
+            native
+                .advance_validated(&events, 1. / 60., &shared)
+                .unwrap(),
+            legacy.advance_mapped(&events, 1. / 60., &original).unwrap()
+        );
+    }
+    let mut changed = original;
+    changed.insert("bad name".into(), changed["jump"].clone());
+    assert!(ValidatedActions::new(changed).is_err());
+    assert!(!validated.definitions().contains_key("bad name"));
+}

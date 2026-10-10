@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "target": "aarch64-apple-darwin",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "codegen": {
+    "incant_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_script": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_script_player": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "lto": "fat"
+    }
+  },
+  "player_sha256": "68153759c792c171c3229ad5956fb49e8b00ca819faf9b77cf93e303b58ebe40",
+  "player_bytes": 1790136,
+  "symbols": {
+    "format": "Mach-O/dSYM",
+    "uuids": {
+      "arm64": "4f548a69-4db5-38aa-a1a1-3b5cbcd3e16a"
+    }
+  },
+  "script_metadata": {
+    "build_id": "8a09797057b9d9ced4d2510b4ba1a94d146ae79659273bd9c8e00e2467afa2f8",
+    "bytecode_bytes": 2533,
+    "bytecode_sha256": "9a2c716297e51d3b77acbf781b1e63be7bf570673e50762a42056ed01c1ef36d",
+    "debug_line_tables": true,
+    "embedded_source": false,
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "format": 1,
+    "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+    "source_map_sha256": "ee1dd960a521e728038d0186fc0988643ac7b660f84997e5edf8962fea48dc02",
+    "source_name": "embedded-structural.js",
+    "source_sha256": "65026bb18335370280e564161cba5a902ab36d35f9b05019c6cda3a71649bace",
+    "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+    "target": "aarch64-apple-darwin",
+    "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+    "wrapper_prefix_lines": 3
+  },
+  "authoring_preserved": {
+    "game.incant.json": "16dabb87f9d81c9b71699ad9d529b3062b30ee778315b216991a158a7fa04b0f",
+    "history.jsonl": "bd491e12f61d8017efd60cceaf8ad873404e08b3d8e0ec0cbc2f1376c8f10cf4"
+  },
+  "inputs_and_build_storage_removed": true,
+  "runtime_source_compiler_symbols_absent": true,
+  "dynamic_source_routes_rejected": true,
+  "observations": [
+    {
+      "ticks": 0,
+      "entities": 2,
+      "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+    },
+    {
+      "ticks": 1,
+      "entities": 3,
+      "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+    },
+    {
+      "ticks": 2,
+      "entities": 3,
+      "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0333333333333334, 1.0, 0.0]\n"
+    },
+    {
+      "ticks": 3,
+      "entities": 3,
+      "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0666666666666669, 2.0, 0.0]\n"
+    },
+    {
+      "ticks": 4,
+      "entities": 2,
+      "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 4.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 4.0, 0.0]\n"
+    },
+    {
+      "ticks": 60,
+      "entities": 2,
+      "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 60.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 60.0, 0.0]\n"
+    }
+  ],
+  "scope": "Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate"
+}

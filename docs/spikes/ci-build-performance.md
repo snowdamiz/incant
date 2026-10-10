@@ -2,7 +2,9 @@
 
 Measured on 2026-10-10. This changes build reuse, not runtime performance or
 phase-gate evidence. The first cold hosted results and a subsequent local
-feature-graph refinement are recorded below; hosted warm results remain pending.
+feature-graph refinement are recorded below. The completed warm PR #51
+measurement is recorded at the end; it is an observed comparison with an inherited
+dependency/feature delta, not a controlled unchanged-source benchmark.
 
 ## Baseline
 
@@ -276,6 +278,35 @@ especially, removing GPU rebuilds shifted some compilation to subsequent tools.
 The workspace-selector experiment addresses that remaining graph mismatch.
 Warm hosted verification remains open.
 
+## Reuse the texture fixture generator
+
+The same macOS cold log's 2m49s Khronos validation step compiled 143 crates because
+`validate_ktx.py` ran the asset package's `texture_probe` through a separate
+package-selected Cargo graph. The shared workspace build now includes that exact
+example as its fifth target, and validation runs its executable directly through
+`--probe-binary`. The existing standalone build-and-run behavior remains available
+when that argument is omitted. The pinned Khronos 4.4.2 package/checksum and all
+color, linear and HDR validation checks are unchanged; validation follows the
+combined tool build instead of preceding it. Desktop workflows remain unchanged.
+
+On the existing local target directory, the five-target build emitted exactly
+`incant_editor`, `incant_headless`, `cook_scene`, `collaboration_spike` and
+`texture_probe`, with every artifact fresh (Cargo reported 0.27 seconds).
+Comparing exact external library/proc-macro filenames to a workspace release test
+no-run yielded 658 artifacts, of which 656 match; only the required Tauri and
+Tauri macros custom-protocol variants differ. Thus the fixture example introduces
+no additional external-library graph beyond the previously reviewed tools.
+These are artifact-reuse observations, not a cold-hosted speedup measurement.
+
+The real prebuilt probe produced all three fixtures and pinned Khronos 4.4.2
+accepted each with no stdout/stderr diagnostics. An explicit missing probe path
+fails before validation and never falls back to Cargo. Actionlint and diff checks
+pass. Logs are `/tmp/incant-ci-ktx-build-artifacts.jsonl`,
+`/tmp/incant-ci-ktx-test-artifacts.jsonl` and
+`/tmp/incant-ci-ktx-validation.log`; the validation report is in ignored
+`artifacts/ci-ktx-reuse/validation.json`. No runtime source or dependency changed,
+and no test, shipping check, validator or format was dropped.
+
 Final cache sizes and the implemented shared-cache producer policy are recorded
 in [cache retention](ci-cache-retention.md). After preserving those measurements
 and independently rechecking PR #48's merged state and every candidate's key/ref,
@@ -284,3 +315,98 @@ main producers. This freed 8,581,391,005 bytes; all 15 other entries were preser
 [Per-ID cleanup evidence](ci-pr48-cache-cleanup-2026-10-10.json) records the verified
 merge, sizes and before/after IDs. Open PRs, default-branch caches, quota and
 billing settings were unchanged.
+
+
+## Completed warm PR #51
+
+[PR #51](https://github.com/snowdamiz/incant/pull/51), pinned head
+`22a81fc92b07eec0ac6a5285a72d3b7e3a8889a5`, passed all nine applicable checks and
+merged as `a7a6faf3022aebf6c9967c6b62b6d5840ffc9ae4`. Actual-main, local merge-tree
+and GitHub merge-ref trees matched the tested head exactly; parents and the
+`Built-by: astra` trailer were verified. The existing credentials/physics path
+filters excluded unchanged source scopes; no workflow or check was disabled.
+
+All nine jobs restored a shared main49 prefix cache and saved no PR cache. The
+inherited main50 Rayon/crossbeam dependency/feature delta means this is not an
+unchanged-dependency experiment. The [complete machine evidence](evidence/shared-cache-warm-pr51-2026-10-10.json)
+records actual requested/restored keys, bytes, queue, steps, compile events and
+all 44 exact GPU names per native job.
+
+| Check | Cold PR49 execution | Warm PR51 execution | PR51 queue |
+| --- | ---: | ---: | ---: |
+| Windows engine | 34m21s | **21m19s** | **1s** |
+| Linux engine | 18m53s | 12m54s | 1s |
+| macOS general | 20m42s | 12m14s | 5s |
+| Windows platform | 4m56s | 3m34s | 2s |
+| Linux platform | 2m27s | 1m51s | 2s |
+| macOS platform | 3m42s | 1m46s | 6s |
+| Web | 4m48s | 2m52s | 2s |
+| Android | 7m40s | 5m49s | 1s |
+| iOS simulator | 5m57s | 9m24s | 9s |
+
+The longest check improved by **13m02s (38%)**. Simulator execution alone took
+383s in the iOS job, so a cache hit did not make every job faster. The three
+native jobs passed 377 Windows, 380 Linux and 382 macOS ordinary tests (including
+nine new native saves each), plus all 44 exact baseline GPU test names each.
+Platform-specific test totals differ intentionally.
+
+### Remaining build and execution cost
+
+Times below are observed wall time, not CPU attribution. Cargo's reported build
+phase includes its compilation/linking work; ordinary logs cannot separate LLVM
+from linking or quantify overlapping units.
+
+| Operation | Windows | Linux | macOS |
+| --- | ---: | ---: | ---: |
+| Ordinary test step | 681s | 338s | 378s |
+| Cargo build phase within it | 596s | 274s | 328s |
+| Approximate remaining ordinary-test execution | 85s | 64s | 50s |
+| GPU step | 147s | 119s | 53s |
+| Rebuild within GPU step | none | editor 30.53s | editor 5.51s |
+| Explicit custom-protocol tool build step | 88s | 38s | 41s |
+| Fresh shipping profile/symbol/process proof | 99s | 51s | 65s |
+| Shared cache restoration | 34s | 19s | 30s |
+
+Windows still compiled 20 workspace packages and 22 other packages in the
+ordinary pass, versus 569 other compile events on cold PR49. The 22 include
+vendored `rerecast`, four packages newly added by main50 (`rayon`, `rayon-core`,
+`crossbeam-deque`, `crossbeam-epoch`) and 17 existing registry packages in the
+changed dependency graph. The action intentionally removes workspace artifacts;
+source-only cache reuse must not be assumed. Do not enable workspace artifact
+caching blindly: timestamp invalidation and archive size can erase its benefit.
+The exact invalidation reason for each existing unit and compiler/linker split
+need Cargo timing/fingerprint evidence from a compatible-cache follow-up.
+
+The tool pass compiled the editor and one Tauri variant; GPU preserved the same
+workspace feature graph and rebuilt no external dependency. The fresh shipping
+proof uses a different profile and verifies actual compiler flags, symbol
+identity, panic behavior and source-free execution. Its 99s/51s/65s costs are a
+required measured floor for this proof, not a redundant ordinary-release build.
+
+The reviewed [pinned CLI cache](ci-pinned-platform-tools.md) removes a separate
+79s web/30s Android installation opportunity while retaining normal fallback.
+It does not shorten this Windows path by itself. The next native investigation
+should capture Cargo per-unit timings before changing test linkage/layout or
+compiler configuration. The [path-selection proposal](ci-path-selection-proposal.md)
+keeps runtime coverage and existing check names intact, beginning with strict
+prose-only PRs; no coverage reduction has been implemented.
+
+
+### Next hosted unit-timing evidence
+
+The general macOS and Windows/Linux desktop workflows add Cargo `--timings` to
+exactly the existing ordinary tests, ignored GPU tests and explicit tool build.
+All packages, targets, profiles, features and test arguments remain unchanged.
+Each job retains the generated `target/cargo-timings/*.html` reports as a separate
+seven-day artifact, including when a later step fails. This does not enlarge the
+Rust dependency cache or enable workspace artifact caching. Missing reports warn
+rather than change whether the existing required checks pass.
+
+Pinned Cargo 1.99.0 accepted the flag in a scoped release workspace test build
+with `--no-run` and produced a timing report in 0.31s. Its already-fresh build had
+no compiled units; it validates report generation, not Windows compile/link
+attribution or a speed improvement. Actionlint and diff checks pass. The next
+hosted reports can identify expensive unit durations and concurrency; compiler
+backend/link sections are usable only where the generated report exposes them.
+Timing alone does not prove why a dependency fingerprint changed. Do not remove
+coverage or change cache policy based on package counts without that evidence.

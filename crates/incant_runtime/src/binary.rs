@@ -12,6 +12,7 @@ const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
 const MAX_RECORD: usize = 128;
+pub(crate) const MAX_SCENE_BYTES: usize = HEADER + MAX_ENTITIES * MAX_RECORD;
 
 impl CookedScene {
     pub fn to_bytes(&self) -> Vec<u8> {
@@ -68,7 +69,7 @@ impl CookedScene {
     }
 
     pub fn from_bytes(bytes: &[u8]) -> Result<Self, SceneError> {
-        if bytes.len() < HEADER || bytes.len() > HEADER + MAX_ENTITIES * MAX_RECORD {
+        if bytes.len() < HEADER || bytes.len() > MAX_SCENE_BYTES {
             return Err(SceneError::Invalid("file size"));
         }
         let mut header = Reader(&bytes[..PREFIX]);

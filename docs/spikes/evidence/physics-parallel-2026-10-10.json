@@ -1,0 +1,690 @@
+{
+  "status": "passed",
+  "host": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "cpu_count": 15,
+  "trials": 3,
+  "browser_executed": true,
+  "browser": [
+    {
+      "trial": 0,
+      "browser": "156.0.8078.4",
+      "streams": [
+        {
+          "scenario": 0,
+          "file": "browser-0-0.bin",
+          "bytes": 10499644
+        },
+        {
+          "scenario": 1,
+          "file": "browser-0-1.bin",
+          "bytes": 8345884
+        }
+      ]
+    },
+    {
+      "trial": 1,
+      "browser": "156.0.8078.4",
+      "streams": [
+        {
+          "scenario": 0,
+          "file": "browser-1-0.bin",
+          "bytes": 10499644
+        },
+        {
+          "scenario": 1,
+          "file": "browser-1-1.bin",
+          "bytes": 8345884
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "browser": "156.0.8078.4",
+      "streams": [
+        {
+          "scenario": 0,
+          "file": "browser-2-0.bin",
+          "bytes": 10499644
+        },
+        {
+          "scenario": 1,
+          "file": "browser-2-1.bin",
+          "bytes": 8345884
+        }
+      ]
+    }
+  ],
+  "source_sha256": {
+    "Cargo.lock": "abaf675cf6052c076d7fc3f57a606f779afad5f8b9d5254e49f8b5e20328719c",
+    "crates/incant_physics/Cargo.toml": "4f25e45ae8371a214d61f1c7af0bec5da1aa61ad8d887959551784e26cd4cabd",
+    "tools/probes/physics-parity/Cargo.toml": "1ef7c12158122e9dba09959f9278eac9981f4e8e1acf6eedfc8e488b1ae00eed",
+    "tools/probes/physics-parity/Cargo.lock": "bb29e9548de373a6fc644aeb577ccd6a37fbfbbc1d343b9f682a45c2ad6daaad",
+    "tools/probes/physics-parity/src/lib.rs": "6bde1bad0cfd442d8238cfb80da8492c0f5153826d46fd1de926c5652390cb35",
+    "tools/probes/physics-parity/src/main.rs": "4066e043214ac0e5149462501dfee32b7ed42b7c31b6f83f19098c759098a3b6",
+    "tools/probes/physics-parity/run.py": "4677bc10c43579f02848566ec30093069b25d45d882b08eb4e4d798812af6f68",
+    "tools/probes/physics-parity/browser.mjs": "603c73b682d3788bdd2210938e6d8cf1e83cfa2065a9afbc84fdbe1b07acb4e9",
+    ".github/workflows/physics-candidates.yml": "56b71d939cdd94958bb9fb3d1f619745d87051abf77238696bf41dd82ed75843",
+    "tools/probes/physics-parity/features.py": "a69773a56b8975a56858aa4318adf57851da1474b48a448a4a61aad5dc743e60",
+    "tools/probes/physics-parity/compare_hosts.py": "2f67020887f600e5a0b55a9d837b26ad27b0a808c38243fd6da73ed6a879a9e5",
+    "tools/tests/test_physics_parity.py": "218e67169f2c8cfa36b788264920a4e068bf65b707e1a5b655a614c7d18846c2"
+  },
+  "records": [
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 0,
+      "mode": "serial",
+      "workers": 0,
+      "file": "serial-0-0-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 0,
+      "mode": "serial",
+      "workers": 0,
+      "file": "serial-0-0-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 0,
+      "mode": "parallel",
+      "workers": 1,
+      "file": "parallel-1-0-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 0,
+      "mode": "parallel",
+      "workers": 1,
+      "file": "parallel-1-0-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 0,
+      "mode": "parallel",
+      "workers": 4,
+      "file": "parallel-4-0-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 0,
+      "mode": "parallel",
+      "workers": 4,
+      "file": "parallel-4-0-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 1,
+      "mode": "parallel",
+      "workers": 1,
+      "file": "parallel-1-1-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 1,
+      "mode": "parallel",
+      "workers": 1,
+      "file": "parallel-1-1-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 1,
+      "mode": "parallel",
+      "workers": 4,
+      "file": "parallel-4-1-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 1,
+      "mode": "parallel",
+      "workers": 4,
+      "file": "parallel-4-1-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 1,
+      "mode": "serial",
+      "workers": 0,
+      "file": "serial-0-1-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 1,
+      "mode": "serial",
+      "workers": 0,
+      "file": "serial-0-1-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 2,
+      "mode": "parallel",
+      "workers": 4,
+      "file": "parallel-4-2-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 2,
+      "mode": "parallel",
+      "workers": 4,
+      "file": "parallel-4-2-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 2,
+      "mode": "serial",
+      "workers": 0,
+      "file": "serial-0-2-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 2,
+      "mode": "serial",
+      "workers": 0,
+      "file": "serial-0-2-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 2,
+      "mode": "parallel",
+      "workers": 1,
+      "file": "parallel-1-2-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 2,
+      "mode": "parallel",
+      "workers": 1,
+      "file": "parallel-1-2-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 0,
+      "mode": "browser-wasm-serial",
+      "workers": 0,
+      "file": "browser-0-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 0,
+      "mode": "browser-wasm-serial",
+      "workers": 0,
+      "file": "browser-0-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 1,
+      "mode": "browser-wasm-serial",
+      "workers": 0,
+      "file": "browser-1-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 1,
+      "mode": "browser-wasm-serial",
+      "workers": 0,
+      "file": "browser-1-1.bin"
+    },
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985",
+      "trial": 2,
+      "mode": "browser-wasm-serial",
+      "workers": 0,
+      "file": "browser-2-0.bin"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501",
+      "trial": 2,
+      "mode": "browser-wasm-serial",
+      "workers": 0,
+      "file": "browser-2-1.bin"
+    }
+  ],
+  "reference": [
+    {
+      "scenario": 0,
+      "bodies": 273,
+      "frames": 641,
+      "max_contacts": 503,
+      "max_sleeping": 272,
+      "wake_transitions": 560,
+      "joints": 0,
+      "bytes": 10499644,
+      "sha256": "54aa9aff8f1c9774b8a38a3fbd62725d499e0494fa653bdafb6a3e63750d8985"
+    },
+    {
+      "scenario": 1,
+      "bodies": 217,
+      "frames": 641,
+      "max_contacts": 192,
+      "max_sleeping": 192,
+      "wake_transitions": 240,
+      "joints": 192,
+      "bytes": 8345884,
+      "sha256": "6edcbdd4e6f28029f3d7e0d8866fda0bd2ff66b219796e555e267c2f19b37501"
+    }
+  ],
+  "scope": "public body-state parity; no timing, device, backend-adoption or hidden solver-state claim",
+  "date": "2026-10-10",
+  "base_revision": "ed9dc323d98e4f61b8091b661bc02c6da876a389",
+  "hardware": "Apple M5 Pro",
+  "os_version": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6\nBuildVersion:\t\t25G72",
+  "feature_graphs": [
+    {
+      "target": "aarch64-apple-darwin",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "target": "x86_64-pc-windows-msvc",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "target": "x86_64-unknown-linux-gnu",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "target": "aarch64-apple-ios",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "target": "aarch64-apple-ios-sim",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "target": "aarch64-linux-android",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "parallel",
+        "std"
+      ],
+      "parallel": true,
+      "evidence": "resolved feature graph only, not target execution"
+    },
+    {
+      "target": "wasm32-unknown-unknown",
+      "rapier_features": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "std"
+      ],
+      "parallel": false,
+      "evidence": "resolved feature graph only, not target execution"
+    }
+  ],
+  "checks": [
+    [
+      "./tools/cargo fmt --all --check",
+      "passed"
+    ],
+    [
+      "./tools/cargo fmt --manifest-path tools/probes/physics-parity/Cargo.toml --check",
+      "passed"
+    ],
+    [
+      "./tools/cargo clippy -j2 --manifest-path tools/probes/physics-parity/Cargo.toml --all-targets --features parallel --locked -- -D warnings",
+      "passed"
+    ],
+    [
+      "./tools/cargo clippy -j2 --manifest-path tools/probes/physics-parity/Cargo.toml --all-targets --locked -- -D warnings",
+      "passed"
+    ],
+    [
+      "./tools/cargo test -j2 --manifest-path tools/probes/physics-parity/Cargo.toml --release --locked",
+      "1 passed"
+    ],
+    [
+      "./tools/cargo test -j2 --manifest-path tools/probes/physics-parity/Cargo.toml --release --features parallel --locked",
+      "1 passed"
+    ],
+    [
+      "python3 tools/probes/physics-parity/run.py --output artifacts/physics-parity-final --trials 3 --browser --wasm-bindgen /Users/andreyyurlov/.cargo/bin/wasm-bindgen",
+      "24 full-state streams matched"
+    ],
+    [
+      "python3 tools/probes/physics-parity/features.py --output artifacts/physics-parity-features.json",
+      "7 target graphs passed"
+    ],
+    [
+      "./tools/cargo clippy -j2 --workspace --all-targets --locked -- -D warnings",
+      "passed"
+    ],
+    [
+      "./tools/cargo test -j2 --workspace --release --locked",
+      "373 passed; 44 existing ignored GPU cases not rerun"
+    ],
+    [
+      "./tools/cargo check -j2 -p incant_physics --target aarch64-apple-ios-sim --locked",
+      "passed; compile-only"
+    ],
+    [
+      "./tools/cargo check -j2 -p incant_physics --target aarch64-linux-android --locked",
+      "passed; compile-only"
+    ],
+    [
+      "./tools/cargo check -j2 -p incant_physics --target wasm32-unknown-unknown --locked",
+      "passed; compile-only"
+    ],
+    [
+      "python3 -m unittest discover -s tools/tests -v",
+      "28 passed"
+    ],
+    [
+      "python3 tools/generate_conventions.py --check",
+      "passed"
+    ],
+    [
+      "node tools/generate_sdk.mjs --check",
+      "passed"
+    ],
+    [
+      "node tools/build_bridge.mjs --check",
+      "passed"
+    ],
+    [
+      "Workflow parsed with Ruby YAML",
+      "passed"
+    ],
+    [
+      "git diff --exit-code -- tools/probes/physics schemas sdk",
+      "passed; original candidate and public schemas/SDK unchanged"
+    ]
+  ],
+  "logs": {
+    "artifacts/physics-parallel-android-check.log": {
+      "sha256": "f7ecb50be6fd27a4cad4cd7885063c111dc75bb71c4fc729baf55ca4cc4780f4",
+      "bytes": 3539
+    },
+    "artifacts/physics-parallel-ios-check.log": {
+      "sha256": "52540a941c85c5c4f91fe944050006f387ca0759d458a6adbee28b82d9c55313",
+      "bytes": 1612
+    },
+    "artifacts/physics-parallel-wasm-check.log": {
+      "sha256": "36a501615026ff138dce4354b97f28adac6ac3877942106177e898db3d50ca68",
+      "bytes": 1310
+    },
+    "artifacts/physics-parallel-workspace-clippy.log": {
+      "sha256": "20c2df25c363aacb6bdd077fb3f832434f8193d3ec235a121aefa9df3ebf20f5",
+      "bytes": 3115
+    },
+    "artifacts/physics-parallel-workspace-tests.log": {
+      "sha256": "902d09215cf5f3a77d97514c071e6e1610d7305e54f87e9b27a6b7e4ffcad30d",
+      "bytes": 60209
+    },
+    "artifacts/physics-parity-clippy.log": {
+      "sha256": "8a66f1f88624b17eb23357aa4e5e4fa36b7231b8e4fa90c099249c143edcb80e",
+      "bytes": 2126
+    },
+    "artifacts/physics-parity-tests.log": {
+      "sha256": "e635d88510aa9a76b5764e7958d1f5b8b9101aa4c340238a67333952ce701dfd",
+      "bytes": 1776
+    },
+    "artifacts/physics-parity-tools-tests.log": {
+      "sha256": "f8e78b51f8ebca20c79dcba41a715bb7704bd3af94ee721103ef94c700d92df6",
+      "bytes": 4514
+    }
+  },
+  "limits": [
+    "Linux/Windows hosted parity pending; local execution is macOS and Chromium WASM only",
+    "Mobile target feature graphs and compilation are not device execution",
+    "Two synthetic public-body-state workloads, not hidden solver state or complete runtime determinism",
+    "No timing, shipping-profile performance, phone gate, fast variant, 2D physics or backend adoption claim",
+    "Original Jolt/Rapier candidate source, timing artifacts and reference checks remain separate and unchanged"
+  ],
+  "ci_cli_archive": {
+    "url": "https://github.com/wasm-bindgen/wasm-bindgen/releases/download/0.2.126/wasm-bindgen-0.2.126-x86_64-unknown-linux-musl.tar.gz",
+    "sha256": "064948d58e2d6c0a745216477a639ba696216d6309aaa902939d1b865b1d869d",
+    "bytes": 11484249,
+    "local_verification": "downloaded and hash verified; Linux executable not run on macOS"
+  }
+}
