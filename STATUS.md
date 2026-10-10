@@ -71,7 +71,8 @@ within its documented workload.
   40 GPU and 315 UI tests plus Clippy and the native release build. Actual macOS,
   browser/WASM and iOS simulator queries pass. Claude accepted the corrected
   course; 303 repeated frames match exactly. Stair speed/smoothing and moving
-  platform behavior remain game-feel work; hosted checks are pending. See
+  platform behavior remain game-feel work. All nine final-head hosted checks pass;
+  PR #24 merged as `9f5906f`. See
   [character movement](docs/spikes/character-movement.md).
 
 - Physics runtime integration is in progress on `impl/physics-runtime`. The

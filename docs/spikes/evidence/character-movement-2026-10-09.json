@@ -124,7 +124,61 @@
       "brief downhill flag while descending a sharp step edge"
     ]
   },
-  "hosted_checks": "pending",
+  "hosted_checks": {
+    "head": "54985fa6eb5bea8c745bdfe0773a4a68cfec9aff",
+    "checks": [
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942319/job/114087367118",
+        "name": "checks",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942265/job/114087367264",
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942265/job/114087367343",
+        "name": "ios",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942294/job/114087367520",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942294/job/114087367359",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942265/job/114087367185",
+        "name": "web",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942265/job/114087367236",
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942265/job/114087367122",
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38009942265/job/114087366987",
+        "name": "android",
+        "state": "SUCCESS"
+      }
+    ],
+    "pr": 24,
+    "merged_at": "2026-10-10T01:12:03Z",
+    "merge_commit": "9f5906fd0fbe2621ee6494b57983aac97cf8a665",
+    "merge_tree_equals_reviewed_head": true,
+    "tree": "ede6987f5cc347f7278a44727808cfeb37877091"
+  },
   "limits": [
     "No native play controls or new authored component",
     "No mesh terrain, animation, moving-platform guarantee or representative game performance gate",

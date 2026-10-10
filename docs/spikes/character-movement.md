@@ -85,5 +85,7 @@ and debounced animation transitions belong to later character/game-feel tuning;
 the current API does not promise them. Moving platforms, mesh terrain, large-world
 precision and representative physical-device performance remain unverified.
 
-Hosted checks and merge are pending. See the [machine-readable evidence](evidence/character-movement-2026-10-09.json)
+All nine final-head hosted checks passed at `54985fa`: source/macOS, Windows and
+Linux desktop GPU/CLI, and six actual platform jobs. PR #24 merged into main as
+`9f5906f`; the merge tree exactly matches the reviewed head. See the [machine-readable evidence](evidence/character-movement-2026-10-09.json)
 and [Claude's motion review](../../handoffs/0023-character-lookdev/result.md).
