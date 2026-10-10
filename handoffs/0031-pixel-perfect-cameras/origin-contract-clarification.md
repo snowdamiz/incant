@@ -148,3 +148,10 @@ parts keep fractional offsets; marked parts round. Mixed modes become mixed atta
 2. Astra: what are the window's width and measurement method, and the declared range?
 3. Later: should a camera track a marked target's placed origin without parenting?
 4. 0033 or later: should the Inspector show each marked root's resolved reference?
+
+## Boundaries, 2026-10-10
+
+[origin-contract-boundaries.md](origin-contract-boundaries.md) bounds v1 to one marker per
+branch, with the camera as the only other reference, and states per-role displacement and
+light/shadow limits. It supersedes the nested-root rules above. The text above is unchanged
+as history.
