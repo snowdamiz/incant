@@ -1,0 +1,460 @@
+{
+  "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+  "checks": 17,
+  "all_success": true,
+  "measured_at": "2026-10-10T23:05:56.496842+00:00",
+  "limits": [
+    "Mixed numeric/audio/build feature graph and newer prefix than PR53; not a controlled total-latency comparison.",
+    "Editor binary unit times do not separate linker/frontend/codegen.",
+    "GPU no-op is hosted intended-effect evidence; all44 exact baseline identities still pass on each OS.",
+    "Last finishing check is macOS general:1002s execution+260s job queue. Longest execution alone is Windows1070s+3s queue."
+  ],
+  "merge": "4a2d113257ff056ff027b9c24633cea3161f4008",
+  "jobs": [
+    {
+      "label": "pr56-Linux",
+      "job_id": 114331274429,
+      "run_id": 38092361325,
+      "execution_seconds": 689.0,
+      "queue_seconds": 2.0,
+      "requested_cache_key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-61680e07",
+      "restored_cache_key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-9e3156eb",
+      "restored_bytes": "1562653120",
+      "save_if": "false",
+      "gpu_exact_baseline_match": true,
+      "log_sha256": "68486a80405bb759d0ad58102e9c062b2a85b572d4f0342a9870276798b9672a",
+      "cargo_groups": [
+        {
+          "command": "cargo test --workspace --release --locked --timings",
+          "workspace_package_events": 23,
+          "other_package_events": 3,
+          "finished": [
+            [
+              "release",
+              "3m 58s"
+            ]
+          ],
+          "passed_tests": 411
+        },
+        {
+          "command": "cargo test --workspace --release --locked --timings -- --ignored --test-threads=1 --nocapture",
+          "workspace_package_events": 0,
+          "other_package_events": 0,
+          "finished": [
+            [
+              "release",
+              "0.40s"
+            ]
+          ],
+          "passed_tests": 44
+        },
+        {
+          "command": "cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked --timings",
+          "workspace_package_events": 1,
+          "other_package_events": 1,
+          "finished": [
+            [
+              "release",
+              "39.56s"
+            ]
+          ],
+          "passed_tests": 0
+        }
+      ],
+      "units": [
+        {
+          "sha256": "1b1637a1579cf0366dce6d0dfc65f74d2df5d993630553e962794a75e22cdbd9",
+          "compiled_units": 160,
+          "workspace_units": 155,
+          "other_units": 5,
+          "observed_unit_span_seconds": 238.77,
+          "longest_units": [
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\"",
+              "duration": 114.62,
+              "features": []
+            },
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\" (test)",
+              "duration": 43.99,
+              "features": []
+            },
+            {
+              "name": "incant_headless",
+              "target": " incant_headless \"bin\"",
+              "duration": 36.19,
+              "features": []
+            }
+          ]
+        },
+        {
+          "sha256": "34b14510cf7872e5bcec5d9237c0aeeef3712275ec899b1e0150fa733261ce75",
+          "compiled_units": 6,
+          "workspace_units": 3,
+          "other_units": 3,
+          "observed_unit_span_seconds": 39.56,
+          "longest_units": [
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\"",
+              "duration": 31.82,
+              "features": [
+                "custom-protocol"
+              ]
+            },
+            {
+              "name": "tauri",
+              "target": "",
+              "duration": 6.98,
+              "features": [
+                "common-controls-v6",
+                "compression",
+                "custom-protocol",
+                "dbus",
+                "default",
+                "dynamic-acl",
+                "macos-private-api",
+                "tauri-runtime-wry",
+                "unstable",
+                "webkit2gtk",
+                "webview2-com",
+                "wry",
+                "x11"
+              ]
+            },
+            {
+              "name": "incant_editor",
+              "target": " build-script (run)",
+              "duration": 1.16,
+              "features": [
+                "custom-protocol"
+              ]
+            }
+          ]
+        },
+        {
+          "sha256": "8ac0752cf132d6a6ff4c6cb0c3978df52d71a777b1bfd6a3c725cb1fcfe7e3f0",
+          "compiled_units": 0,
+          "workspace_units": 0,
+          "other_units": 0,
+          "observed_unit_span_seconds": 0,
+          "longest_units": []
+        }
+      ]
+    },
+    {
+      "label": "pr56-Windows",
+      "job_id": 114331274391,
+      "run_id": 38092361325,
+      "execution_seconds": 1070.0,
+      "queue_seconds": 3.0,
+      "requested_cache_key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-61680e07",
+      "restored_cache_key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-1340c12d",
+      "restored_bytes": "1306478857",
+      "save_if": "false",
+      "gpu_exact_baseline_match": true,
+      "log_sha256": "7cd7dcdbd7759ea3a2fb887beaa7e62586d72abeb3060c9b291b0e46e18b69d1",
+      "cargo_groups": [
+        {
+          "command": "cargo test --workspace --release --locked --timings",
+          "workspace_package_events": 23,
+          "other_package_events": 3,
+          "finished": [
+            [
+              "release",
+              "7m 10s"
+            ]
+          ],
+          "passed_tests": 408
+        },
+        {
+          "command": "cargo test --workspace --release --locked --timings -- --ignored --test-threads=1 --nocapture",
+          "workspace_package_events": 0,
+          "other_package_events": 0,
+          "finished": [
+            [
+              "release",
+              "0.99s"
+            ]
+          ],
+          "passed_tests": 44
+        },
+        {
+          "command": "cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked --timings",
+          "workspace_package_events": 1,
+          "other_package_events": 1,
+          "finished": [
+            [
+              "release",
+              "1m 14s"
+            ]
+          ],
+          "passed_tests": 0
+        }
+      ],
+      "units": [
+        {
+          "sha256": "95dd352a406a4137059b63d504614cce51b212281954569e56b0ed3880c9189c",
+          "compiled_units": 160,
+          "workspace_units": 155,
+          "other_units": 5,
+          "observed_unit_span_seconds": 430.11,
+          "longest_units": [
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\"",
+              "duration": 189.18,
+              "features": []
+            },
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\" (test)",
+              "duration": 74.84,
+              "features": []
+            },
+            {
+              "name": "incant_headless",
+              "target": " incant_headless \"bin\"",
+              "duration": 62.35,
+              "features": []
+            }
+          ]
+        },
+        {
+          "sha256": "1f3ed52b7f2d40c8cfeae6f1ea6957c3ea8d208f510abdd2fe65b5562b161c00",
+          "compiled_units": 6,
+          "workspace_units": 3,
+          "other_units": 3,
+          "observed_unit_span_seconds": 74.28,
+          "longest_units": [
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\"",
+              "duration": 61.82,
+              "features": [
+                "custom-protocol"
+              ]
+            },
+            {
+              "name": "tauri",
+              "target": "",
+              "duration": 10.77,
+              "features": [
+                "common-controls-v6",
+                "compression",
+                "custom-protocol",
+                "dbus",
+                "default",
+                "dynamic-acl",
+                "macos-private-api",
+                "tauri-runtime-wry",
+                "unstable",
+                "webkit2gtk",
+                "webview2-com",
+                "wry",
+                "x11"
+              ]
+            },
+            {
+              "name": "incant_editor",
+              "target": " build-script (run)",
+              "duration": 1.38,
+              "features": [
+                "custom-protocol"
+              ]
+            }
+          ]
+        },
+        {
+          "sha256": "17a1c1ed359244852f207504cb829fa325ca327939eeb04254a2cb7e6673996d",
+          "compiled_units": 0,
+          "workspace_units": 0,
+          "other_units": 0,
+          "observed_unit_span_seconds": 0,
+          "longest_units": []
+        }
+      ]
+    },
+    {
+      "label": "pr56-macOS",
+      "job_id": 114331278517,
+      "run_id": 38092361237,
+      "execution_seconds": 1002.0,
+      "queue_seconds": 260.0,
+      "requested_cache_key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-61680e07",
+      "restored_cache_key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-1340c12d",
+      "restored_bytes": "1848908069",
+      "save_if": "false",
+      "gpu_exact_baseline_match": true,
+      "log_sha256": "4ea9cfacc4f53248bcf8ff9b1e2dfe2bce0721d0233b0f336d38068e86957220",
+      "cargo_groups": [
+        {
+          "command": "cargo test --workspace --release --locked --timings",
+          "workspace_package_events": 23,
+          "other_package_events": 3,
+          "finished": [
+            [
+              "release",
+              "5m 59s"
+            ]
+          ],
+          "passed_tests": 413
+        },
+        {
+          "command": "cargo test --workspace --release --locked --timings -- --ignored --test-threads=1 --nocapture",
+          "workspace_package_events": 0,
+          "other_package_events": 0,
+          "finished": [
+            [
+              "release",
+              "1.98s"
+            ]
+          ],
+          "passed_tests": 44
+        },
+        {
+          "command": "cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --release --features incant_editor/custom-protocol --locked --timings",
+          "workspace_package_events": 1,
+          "other_package_events": 1,
+          "finished": [
+            [
+              "release",
+              "53.67s"
+            ]
+          ],
+          "passed_tests": 0
+        }
+      ],
+      "units": [
+        {
+          "sha256": "fdf91de1fd9e7a1372c5564c4be3ab352646b8c15d0399bfffb8d2cb5a2747f7",
+          "compiled_units": 160,
+          "workspace_units": 155,
+          "other_units": 5,
+          "observed_unit_span_seconds": 359.21,
+          "longest_units": [
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\"",
+              "duration": 128.85,
+              "features": []
+            },
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\" (test)",
+              "duration": 52.73,
+              "features": []
+            },
+            {
+              "name": "incant_headless",
+              "target": " incant_headless \"bin\"",
+              "duration": 38.71,
+              "features": []
+            }
+          ]
+        },
+        {
+          "sha256": "ffab0ab23970ff23e5f3bc6e94d3ae01105a5877236b29a4d2adc0628e677545",
+          "compiled_units": 6,
+          "workspace_units": 3,
+          "other_units": 3,
+          "observed_unit_span_seconds": 53.67,
+          "longest_units": [
+            {
+              "name": "incant_editor",
+              "target": " incant_editor \"bin\"",
+              "duration": 40.79,
+              "features": [
+                "custom-protocol"
+              ]
+            },
+            {
+              "name": "tauri",
+              "target": "",
+              "duration": 10.17,
+              "features": [
+                "common-controls-v6",
+                "compression",
+                "custom-protocol",
+                "dbus",
+                "default",
+                "dynamic-acl",
+                "macos-private-api",
+                "tauri-runtime-wry",
+                "unstable",
+                "webkit2gtk",
+                "webview2-com",
+                "wry",
+                "x11"
+              ]
+            },
+            {
+              "name": "incant_editor",
+              "target": " build-script (run)",
+              "duration": 1.33,
+              "features": [
+                "custom-protocol"
+              ]
+            }
+          ]
+        },
+        {
+          "sha256": "dae0979d57e838d1591343854f155261a292b82b9514b032a5014755ad9f4da8",
+          "compiled_units": 0,
+          "workspace_units": 0,
+          "other_units": 0,
+          "observed_unit_span_seconds": 0,
+          "longest_units": []
+        }
+      ]
+    }
+  ],
+  "gpu_identities": [
+    "editor_publishes_complete_revisions_and_recovers_after_failed_replacements",
+    "camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection",
+    "headless_play_records_current_simulation_frames_and_publishes_a_complete_report",
+    "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+    "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+    "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+    "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+    "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+    "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+    "alpha_modes_and_back_faces_follow_material_semantics",
+    "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
+    "cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference",
+    "cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects",
+    "cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back",
+    "cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units",
+    "cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose",
+    "cameras::transparency_depth_order_follows_the_selected_camera",
+    "color_maps_use_srgb_and_texture_reimport_keeps_retained_materials",
+    "dark_fill_lit_materials_remain_distinguishable",
+    "emissive_maps_and_samplers_retain_color_and_addressing",
+    "environments::authored_environments_preserve_color_space_versions_and_source_free_loading",
+    "environments::environment_intensity_rotation_and_roughness_change_real_reflections",
+    "environments::malformed_environment_cannot_replace_a_retained_scene",
+    "environments::studio_environment_renders_metal_and_dielectric_across_roughness",
+    "highlight_energy_survives_and_transparency_blends_before_tone_mapping",
+    "imported_geometry_survives_sources_and_retained_versions_survive_reimport",
+    "lights::clustered_masks_match_total_light_energy_and_retain_old_scenes",
+    "lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words",
+    "lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably",
+    "lights::coverage::visible_depth_boundary_patches_match_all_light_oracle",
+    "lights::directional_point_and_spot_lights_obey_authored_physical_parameters",
+    "lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease",
+    "lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting",
+    "lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix",
+    "lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize",
+    "material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength",
+    "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+    "shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions",
+    "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+    "shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary",
+    "shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible",
+    "shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions"
+  ]
+}
