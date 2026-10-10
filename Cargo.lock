@@ -3701,6 +3701,7 @@ dependencies = [
  "incant_doc",
  "incant_import",
  "incant_render",
+ "incant_render_authoring",
  "pollster",
  "serde",
  "serde_json",
@@ -3728,6 +3729,7 @@ dependencies = [
  "incant_localization",
  "incant_play_legacy",
  "incant_render",
+ "incant_render_authoring",
  "rpassword",
  "schemars 1.2.2",
  "serde",
@@ -3860,15 +3862,43 @@ dependencies = [
  "half",
  "incant_2d",
  "incant_assets",
- "incant_core",
+ "incant_assets_runtime",
  "incant_doc",
+ "incant_render_authoring",
+ "incant_render_data",
+ "incant_types",
  "png 0.18.1",
  "pollster",
  "serde",
  "serde_json",
+ "sha2 0.10.9",
  "tempfile",
  "thiserror 2.0.21",
  "wgpu",
+]
+
+[[package]]
+name = "incant_render_authoring"
+version = "0.0.1"
+dependencies = [
+ "glam 0.32.1",
+ "incant_assets",
+ "incant_core",
+ "incant_doc",
+ "incant_render_data",
+ "serde_json",
+]
+
+[[package]]
+name = "incant_render_data"
+version = "0.0.1"
+dependencies = [
+ "glam 0.32.1",
+ "incant_2d",
+ "incant_assets_runtime",
+ "incant_types",
+ "serde",
+ "thiserror 2.0.21",
 ]
 
 [[package]]

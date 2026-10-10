@@ -1,0 +1,37 @@
+{
+  "platform": "macOS-26.6-arm64-arm-64bit-Mach-O",
+  "scope": "typed canonical renderer boundary; not retained native frame host",
+  "source_sha256": {
+    "Cargo.toml": "aff74bae4afbe8b12ae22774f2c79be1fb0cbc4a3fa4fc6b76ce57fa9619c542",
+    "Cargo.lock": "f9ffb812171b88e2868b7e38fde1c058574afbdf7df5d23ff3bd59650aa9683b",
+    "crates/incant_assets_runtime/src/version.rs": "ae5b3551de909b2861fc496dbd1b689bbf2e9811106132165fbd3b26a6a18690",
+    "crates/incant_render/src/scene.rs": "d652f8918db316575ec86d0c7859610f6f1640fbeafc4008b97270383da3c83c",
+    "crates/incant_render/src/models.rs": "177e90c6faeaf1237d8f2ab2e937c32e62ac87d9255295500954566b216f0a9b",
+    "crates/incant_render/src/version_tests.rs": "a049542e0c0cdc9b91c633fad1d3794838a66b42389a1b9defac23fe82ffb06a",
+    "crates/incant_render_data/src/lib.rs": "8bac3a57ed74e0ca5f9eea3f9e2c447d66fe5dad42e574cb25a5ab55da87313a",
+    "crates/incant_render_authoring/src/lib.rs": "8f348114692e14120a1de9d30d0e9b73ce264a1b355d68252e90cb6d44d10e0a"
+  },
+  "logs": {
+    "tests": {
+      "path": "/tmp/incant-renderer-boundary-tests.log",
+      "sha256": "0bbb00b4cc144c91060ca9639d2acba0164d6f278461d2ea9cfc55c5380ad2df"
+    },
+    "gpu": {
+      "path": "/tmp/incant-renderer-boundary-gpu.log",
+      "sha256": "9dfa02488556f4e7225634a9e9dd43370c6cd9af329e0183d788c743e32d20e2"
+    },
+    "clippy": {
+      "path": "/tmp/incant-renderer-boundary-clippy.log",
+      "sha256": "7ab9bd6de3c407273b9c98844898bcb2bfa685ffaf268312017ec720a8d7e845"
+    }
+  },
+  "ordinary_passed": 68,
+  "gpu_passed": 54,
+  "clippy": "pass",
+  "normal_dependency_roots": [
+    "incant_render",
+    "incant_render_data",
+    "incant_assets_runtime"
+  ],
+  "independent_review": "runtime_review: cache version collision and sprite usage findings fixed; no remaining actionable issue in reviewed boundary"
+}

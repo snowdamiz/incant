@@ -2,6 +2,7 @@
 //! bus; the authored project and its journal are never opened for writing.
 use clap::Args;
 use incant_play_legacy::PlaySession;
+use incant_render_authoring::RendererAuthoringExt as _;
 use serde::Serialize;
 use std::{
     fs,

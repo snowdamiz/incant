@@ -25,7 +25,7 @@ impl Renderer {
             for batch in scene.batches.iter().filter(|b| b.casts_shadows) {
                 let material = &batch.model.materials.materials
                     [batch.model.primitives[batch.primitive].material];
-                if material.alpha == incant_assets::AlphaMode::Blend {
+                if material.alpha == incant_assets_runtime::AlphaMode::Blend {
                     return Err(ResourceError::TransparentShadowCaster.into());
                 }
                 bounds.push(batch.bounds);

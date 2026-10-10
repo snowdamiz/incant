@@ -1,5 +1,6 @@
 //! Numerical GPU output checks; screenshot approval is a separate Claude handoff.
 use crate::{Renderer, ResourceError, Viewport, frame::HDR_FORMAT, output::OutputPass};
+use incant_render_authoring::RendererAuthoringExt as _;
 use std::{sync::Arc, time::Duration};
 
 pub(crate) fn texture(

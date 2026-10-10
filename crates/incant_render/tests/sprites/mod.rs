@@ -1,4 +1,5 @@
 //! Numerical sprite contracts; these fixtures do not approve appearance.
+use incant_render_authoring::RendererAuthoringExt as _;
 mod atlas;
 mod ties;
 mod wide;

@@ -1,8 +1,7 @@
 //! Immutable world-space punctual lights resolved from validated components.
 use crate::SceneError;
 use glam::{DMat4, DVec3, Vec3};
-use incant_doc::{DirectionalLight, PointLight, SpotLight};
-use std::collections::BTreeMap;
+use incant_render_data::SceneLight;
 
 pub(crate) const MAX_DIRECTIONAL: usize = 16;
 pub(crate) const MAX_LOCAL: usize = 4096;
@@ -21,37 +20,35 @@ pub(crate) struct LightPlan {
     shadows: Vec<crate::shadows::ShadowLight>,
 }
 impl LightPlan {
-    pub fn add(
-        &mut self,
-        components: &BTreeMap<String, serde_json::Value>,
-        world: DMat4,
-    ) -> Result<(), SceneError> {
-        let decode = |kind| components.get(kind).cloned();
+    pub fn add_typed(&mut self, light: &SceneLight, world: DMat4) -> Result<(), SceneError> {
         let mut shadow_distance = None;
-        let (color, intensity, range, inner, outer, kind) =
-            if let Some(value) = decode("DirectionalLight") {
-                let l: DirectionalLight =
-                    serde_json::from_value(value).map_err(incant_doc::DocumentError::from)?;
-                shadow_distance = l.shadows.map(|s| s.distance as f32);
+        let (color, intensity, range, inner, outer, kind) = match light {
+            SceneLight::Directional(l) => {
+                shadow_distance = l.shadows.as_ref().map(|s| s.distance as f32);
                 (l.color, l.intensity, 0., 1., 1., 0)
-            } else if let Some(value) = decode("PointLight") {
-                let l: PointLight =
-                    serde_json::from_value(value).map_err(incant_doc::DocumentError::from)?;
-                (l.color, l.intensity, l.range, 1., -1., 1)
-            } else if let Some(value) = decode("SpotLight") {
-                let l: SpotLight =
-                    serde_json::from_value(value).map_err(incant_doc::DocumentError::from)?;
-                (
-                    l.color,
-                    l.intensity,
-                    l.range,
-                    l.inner_degrees.to_radians().cos(),
-                    l.outer_degrees.to_radians().cos(),
-                    2,
-                )
-            } else {
-                return Ok(());
-            };
+            }
+            SceneLight::Point(l) => (l.color, l.intensity, l.range, 1., -1., 1),
+            SceneLight::Spot(l) => (
+                l.color,
+                l.intensity,
+                l.range,
+                l.inner_degrees.to_radians().cos(),
+                l.outer_degrees.to_radians().cos(),
+                2,
+            ),
+        };
+        if color.iter().any(|v| !(0.0..=1.).contains(v))
+            || !(0.0..=1_000_000.).contains(&intensity)
+            || (kind != 0 && !(0.001..=10000.).contains(&range))
+            || matches!(light, SceneLight::Spot(l) if !(0.0..=89.9).contains(&l.inner_degrees) || !(0.1..=89.9).contains(&l.outer_degrees) || l.inner_degrees >= l.outer_degrees)
+            || color.iter().any(|v| !((*v * intensity) as f32).is_finite())
+            || !(range as f32).is_finite()
+            || !inner.is_finite()
+            || !outer.is_finite()
+            || shadow_distance.is_some_and(|d| !(0.01..=10000.).contains(&d))
+        {
+            return Err(SceneError::Input("light range"));
+        }
         let position = world.transform_point3(DVec3::ZERO).as_vec3();
         let direction = world.transform_vector3(-DVec3::Z).normalize().as_vec3();
         if !position.is_finite()
@@ -115,9 +112,30 @@ impl LightPlan {
 }
 
 #[cfg(test)]
+impl LightPlan {
+    pub(crate) fn add(
+        &mut self,
+        components: &std::collections::BTreeMap<String, serde_json::Value>,
+        world: DMat4,
+    ) -> Result<(), SceneError> {
+        let light = if let Some(v) = components.get("DirectionalLight") {
+            SceneLight::Directional(serde_json::from_value(v.clone()).unwrap())
+        } else if let Some(v) = components.get("PointLight") {
+            SceneLight::Point(serde_json::from_value(v.clone()).unwrap())
+        } else if let Some(v) = components.get("SpotLight") {
+            SceneLight::Spot(serde_json::from_value(v.clone()).unwrap())
+        } else {
+            return Ok(());
+        };
+        self.add_typed(&light, world)
+    }
+}
+
+#[cfg(test)]
 mod tests {
     use super::*;
     use serde_json::json;
+    use std::collections::BTreeMap;
     #[test]
     fn world_transform_affects_position_direction_but_not_light_range_or_intensity() {
         let world = DMat4::from_translation(DVec3::new(4., 5., 6.))

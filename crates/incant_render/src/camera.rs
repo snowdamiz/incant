@@ -27,11 +27,14 @@ impl CameraView {
             pixel_resolution: None,
         }
     }
-    pub fn authored(camera: &incant_doc::Camera, world: DMat4) -> Result<Self, SceneError> {
+    pub fn authored(camera: &incant_types::Camera, world: DMat4) -> Result<Self, SceneError> {
+        if !(0.1..179.).contains(&camera.fov_degrees) {
+            return Err(SceneError::CameraProjection);
+        }
         // Local -Z looks forward, +Y supplies roll. Normalize before converting
         // to GPU precision; scale changes inherited position/aim, not clip units.
         let mut eye64 = world.transform_point3(DVec3::ZERO);
-        let pixel_resolution = if let incant_doc::CameraProjection::PixelPerfect {
+        let pixel_resolution = if let incant_types::CameraProjection::PixelPerfect {
             pixels_per_unit,
             reference_resolution,
         } = camera.projection
@@ -106,11 +109,11 @@ impl CameraView {
             fov: camera.fov_degrees.to_radians() as f32,
             pixel_resolution,
             orthographic_half_height: match camera.projection {
-                incant_doc::CameraProjection::Perspective {} => None,
-                incant_doc::CameraProjection::Orthographic { vertical_size } => {
+                incant_types::CameraProjection::Perspective {} => None,
+                incant_types::CameraProjection::Orthographic { vertical_size } => {
                     Some((vertical_size * 0.5) as f32)
                 }
-                incant_doc::CameraProjection::PixelPerfect {
+                incant_types::CameraProjection::PixelPerfect {
                     pixels_per_unit,
                     reference_resolution,
                 } => Some((f64::from(reference_resolution[1]) / pixels_per_unit * 0.5) as f32),
@@ -176,8 +179,8 @@ impl CameraView {
 #[cfg(test)]
 mod tests {
     use super::*;
-    fn parameters() -> incant_doc::Camera {
-        incant_doc::Camera {
+    fn parameters() -> incant_types::Camera {
+        incant_types::Camera {
             fov_degrees: 60.,
             near: 0.2,
             far: 500.,
@@ -222,7 +225,7 @@ mod tests {
     #[test]
     fn orthographic_extent_depth_and_view_direction_are_independent_of_distance() {
         let mut parameters = parameters();
-        parameters.projection = incant_doc::CameraProjection::Orthographic { vertical_size: 8. };
+        parameters.projection = incant_types::CameraProjection::Orthographic { vertical_size: 8. };
         let camera = CameraView::authored(&parameters, DMat4::IDENTITY).unwrap();
         let projection = camera.matrix(1.5).unwrap();
         for depth in [0.2, 4., 100., 500.] {
@@ -244,7 +247,7 @@ mod tests {
     fn orthographic_size_rejects_unrepresentable_gpu_extents() {
         let mut parameters = parameters();
         for size in [0., -1., 1e-100, 1e100, f64::INFINITY, f64::NAN] {
-            parameters.projection = incant_doc::CameraProjection::Orthographic {
+            parameters.projection = incant_types::CameraProjection::Orthographic {
                 vertical_size: size,
             };
             assert!(matches!(
@@ -257,7 +260,7 @@ mod tests {
     #[test]
     fn pixel_grid_preserves_logical_framing_and_snaps_only_rendered_camera_motion() {
         let mut p = parameters();
-        p.projection = incant_doc::CameraProjection::PixelPerfect {
+        p.projection = incant_types::CameraProjection::PixelPerfect {
             pixels_per_unit: 32.,
             reference_resolution: [320, 180],
         };

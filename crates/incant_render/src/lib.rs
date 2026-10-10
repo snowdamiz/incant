@@ -24,9 +24,11 @@ mod studio;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;
+#[cfg(test)]
+mod version_tests;
 use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Vec3};
-use incant_doc::Project;
+pub use incant_render_data::{SceneInput, ScenePreparer};
 pub use lighting::LocalLightSelection;
 pub use models::RenderScene;
 pub use resource_error::ResourceError;
@@ -169,25 +171,6 @@ impl Renderer {
             .or_insert_with(|| self.pipeline(format))
             .clone())
     }
-    /// Phase 0 compatibility path. Bound models require prepare_scene and draw_scene.
-    pub fn draw(
-        &self,
-        project: &Project,
-        view: &wgpu::TextureView,
-        format: wgpu::TextureFormat,
-        width: u32,
-        height: u32,
-        viewport: Option<Viewport>,
-    ) -> Result<wgpu::CommandBuffer> {
-        self.draw_scene(
-            &self.diagnostic_scene(project)?,
-            view,
-            format,
-            width,
-            height,
-            viewport,
-        )
-    }
     pub fn draw_scene(
         &self,
         scene: &RenderScene,
@@ -269,9 +252,6 @@ impl Renderer {
                 output,
             },
         )
-    }
-    pub fn screenshot_png(&self, project: &Project, width: u32, height: u32) -> Result<Vec<u8>> {
-        self.screenshot_scene_png(&self.diagnostic_scene(project)?, width, height)
     }
     pub fn screenshot_scene_png(
         &self,
@@ -409,4 +389,19 @@ fn vertices(transforms: &[Mat4], camera: Mat4) -> Vec<Vertex> {
         }
     }
     output
+}
+
+impl ScenePreparer for Renderer {
+    type Prepared = RenderScene;
+    fn prepare_input(&self, input: &SceneInput) -> incant_render_data::Result<RenderScene> {
+        self.prepare(input)
+    }
+    fn capture_prepared(
+        &self,
+        scene: &RenderScene,
+        width: u32,
+        height: u32,
+    ) -> incant_render_data::Result<Vec<u8>> {
+        self.screenshot_scene_png(scene, width, height)
+    }
 }

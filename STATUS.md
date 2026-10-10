@@ -910,3 +910,5 @@ Typed Camera/MeshRenderer/current light/environment declarations now cook to che
 Native renderer input binding/primitive and GPU checks, explicit camera selection, game/audio host refusal on integration, spatial saves and the complete runtime/Play/pixel-placement migration remain open. No renderer/shader/UI change or performance/appearance gate is claimed.
 
 Retained native consumers can now attach an opaque world identity that survives moves/restore but rejects a different constructed world before trusting equal scene IDs/generations. Nine spatial regressions and runtime scoped Clippy pass; this is a CPU data-boundary prerequisite, not a rendered frame.
+
+- Canonical renderer authoring boundary is implemented: typed retained cooked input, separate Project adapter, exact loaded-version GPU cache keys and direct input validation. Scoped 68 release tests and 54 native GPU tests plus Clippy/normal-graph checks pass. Native retained frame updates, full editor integration and phone performance remain open; see docs/spikes/native-renderer-boundary.md.

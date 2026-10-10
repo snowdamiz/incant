@@ -1,5 +1,5 @@
 use super::*;
-use incant_assets::{Texture, TextureFormat};
+use incant_assets_runtime::{Texture, TextureFormat};
 
 fn decode_srgb(v: f32) -> f32 {
     if v <= 0.04045 {

@@ -186,7 +186,7 @@ mod tests {
     use super::*;
     fn camera(x: f64) -> CameraView {
         CameraView::authored(
-            &incant_doc::Camera {
+            &incant_types::Camera {
                 fov_degrees: 60.,
                 near: 0.1,
                 far: 100.,

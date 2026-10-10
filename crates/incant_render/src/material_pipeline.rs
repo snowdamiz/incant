@@ -1,5 +1,5 @@
 use crate::materials::PipelineKey;
-use incant_assets::AlphaMode;
+use incant_assets_runtime::AlphaMode;
 
 pub(crate) fn build(
     device: &wgpu::Device,
@@ -40,7 +40,7 @@ pub(crate) fn build(
             compilation_options: Default::default(),
             buffers: &[
                 wgpu::VertexBufferLayout {
-                    array_stride: size_of::<incant_assets::Vertex>() as u64,
+                    array_stride: size_of::<incant_assets_runtime::Vertex>() as u64,
                     step_mode: wgpu::VertexStepMode::Vertex,
                     attributes: &wgpu::vertex_attr_array![0=>Float32x3,1=>Float32x3,9=>Float32x2,10=>Float32x4],
                 },
