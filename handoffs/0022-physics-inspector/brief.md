@@ -1,3 +1,25 @@
+# Final corrected native captures
+
+Both fixes are integrated at 6cb489a. Review `artifacts/physics-native-v2/`
+(manifest hashes/dimensions; images are unedited CUA capture bytes). Native AX
+now correctly names Friction, CCD and both damping inputs. The Agent transcript
+is keyboard focusable at 180 px; Shift+Tab from Send focuses it, then End scrolls.
+There are before-End/after-End screenshots. `wide-default` and `minimum-default`
+cover the ordinary panel heights. `minimum-ball-shape-keyboard` and
+`minimum-ball-memberships-keyboard` were reached with no mouse interaction:
+F6 to Hierarchy, Up/Return from Pill to Ball, F6 through Viewport and Problems to
+Inspector, then Tab through the read-only status, Copy ID, Collider header,
+Shape, Radius, Density, Friction, Restitution, Sensor, Memberships. Sanitized AX
+and the key sequence are included. The native account label remains on images:
+keep every native image ignored/local, never add it to tracked screenshots.
+
+Please review this final native evidence, append the scoped verdict to result.md,
+and commit Built-by: claude. No rebuild or browser recapture is needed if accepted.
+If a real defect remains, report it precisely. Do not claim native play mode,
+which does not exist. The related headless motion evidence remains unchanged.
+
+---
+
 # Small follow-up: compact Agent empty state
 
 Your native review found the Agent not ready heading clipped behind the composer
