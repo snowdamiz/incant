@@ -88,6 +88,13 @@ def main():
         return
     ensure(args.tool, directory)
     with open(os.environ['GITHUB_PATH'], 'a') as output:
+        if args.tool == 'cargo-ndk':
+            # Cargo prepends its home/bin if absent from PATH. Include it behind
+            # our verified tool so even a runner's preinstalled copy cannot win.
+            # GitHub prepends GITHUB_PATH entries in reverse insertion order.
+            # Cargo compares this spelling without canonicalizing symlinks.
+            cargo_home = Path(os.environ.get('CARGO_HOME', Path.home() / '.cargo')).absolute()
+            output.write(str(cargo_home / 'bin') + '\n')
         output.write(str(directory) + '\n')
 
 
