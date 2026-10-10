@@ -62,8 +62,8 @@ Use browser rendering for iterations; computer use/screenshots are permitted aga
 Astra will build the native app and supply native captures after integration for
 your final rendered-pixel review. Do not claim native acceptance from a browser.
 
-Run `npm ci --prefix editor/ui` if necessary, then all UI tests, typecheck and build
-with the scripts in editor/ui/package.json. Keep meaningful behavior tests, adapt
+Run `npm ci --ignore-scripts` at the workspace root if necessary (the lockfile is
+there), then all UI tests, typecheck and build with editor/ui/package.json scripts. Keep meaningful behavior tests, adapt
 selectors to intentional design changes, do not remove coverage to make it green.
 Use existing pinned tools. No Cargo in this handoff: request native integration.
 Do not start local servers on an occupied port; use a free dedicated port and clean
