@@ -15,10 +15,13 @@ Do not add a GUI-only or agent-only mutation path. Project content is untrusted 
 No engine-agent shell access. No credentials in projects, logs, telemetry, or CI.
 The editor must remain usable offline without an engine account.
 
-Astra owns nonvisual implementation and integration. Claude 5.5 through ACP owns
+Astra owns nonvisual implementation and integration. Claude Opus 5.5 through ACP,
+with thinking explicitly set to Max for every new or resumed session, owns
 visual design, layouts, styling, look-dev, rendered-pixel review, screenshots,
 diagrams and game art. Mixed tasks split correctness from appearance. Do not
-substitute another model silently. If ACP is unavailable, leave a self-contained
+substitute another model or effort level silently. Verify both settings through
+ACP before prompting; a default effort setting is insufficient. If ACP is
+unavailable, leave a self-contained
 packet in handoffs/<id>/brief.md for manual Claude execution. Never self-approve a
 routing exception. Build-time accounts must never become runtime dependencies.
 
