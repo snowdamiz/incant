@@ -1,5 +1,29 @@
 # Character movement look-dev and rendered motion review
 
+## Priority revision: verify the movement corrections
+
+Your first review is integrated. Astra reproduced the flat-floor and wall stalls
+in a real PlaySession regression and fixed the controller's numerical handling:
+GJK's approximate box-face normals are recovered from the actual face witness;
+curved/edge contacts retain their computed normals. The original nudge is retained.
+The downhill flag now uses final ground support and actual downward movement,
+including ground snapping, instead of the backend's overly broad raw flag.
+The new regression runs 300 ticks each across capsule, sphere and box characters,
+flat floor/wall slide and autostep on/off. Every tick retains tangential progress,
+stable ground height and a false downhill flag. All twelve cases pass.
+
+Use the UPDATED `artifacts/tools/incant_headless` and verify `binary.json` again.
+Rerun the complete actual course plus an independent repeat into new directories;
+do not reuse old frames as evidence for the corrected engine. Examine every-tick
+logs for stalls and flag errors, and review the actual frames for motion quality.
+Quantify the remaining step-climb slowdown and whether it is appropriate rounded
+capsule traversal or still a defect needing a runtime change. Report limitations
+plainly. Replace retained screenshots with useful current frames and rewrite the
+result around final evidence, keeping the original bugs and their resolution clear.
+No new director feedback beyond the ongoing quality requirement. No UI changes
+or native capture are required for this query-only increment. Strict TS, the
+existing frame/raw-byte caps and Built-by: claude still apply.
+
 Claude Opus 5.5 over ACP owns all visual choices and pixel judgments. Read
 CLAUDE.md. Astra implemented the nonvisual character movement capability on the
 existing primitive physics runtime. This is a focused incremental review, not a

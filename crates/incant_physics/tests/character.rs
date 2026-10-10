@@ -80,6 +80,10 @@ fn character_sweeps_stop_at_walls_slide_ground_and_preserve_live_world() {
     let before = physics.states();
     let first = physics.compute_character_motion(&query, 1. / 60.).unwrap();
     assert!(first.grounded, "{first:?}");
+    assert!(
+        !first.sliding_down_slope,
+        "horizontal wall travel is not downhill"
+    );
     assert!((1.5..1.61).contains(&first.translation[0]), "{first:?}");
     assert!((first.translation[2] - 1.).abs() < 0.02, "{first:?}");
     assert!(first.translation[1].abs() < 0.02, "{first:?}");
@@ -101,9 +105,18 @@ fn character_sweeps_stop_at_walls_slide_ground_and_preserve_live_world() {
         physics.compute_character_motion(&query, 1. / 60.).unwrap()
     );
     physics.step(1. / 60.).unwrap();
-    assert_eq!(
-        first,
-        physics.compute_character_motion(&query, 1. / 60.).unwrap()
+    let stepped = physics.compute_character_motion(&query, 1. / 60.).unwrap();
+    // The rebuilt query BVH and the stepped BVH may visit simultaneous floor /
+    // wall contacts in different orders, adding a different 0.1 mm normal nudge.
+    // Both must resolve the same contacts and displacement within 1 mm.
+    assert_eq!(first.collisions, stepped.collisions);
+    assert_eq!(first.grounded, stepped.grounded);
+    assert!(
+        first
+            .translation
+            .into_iter()
+            .zip(stepped.translation)
+            .all(|(a, b)| (a - b).abs() < 0.001)
     );
     query.options.slide = false;
     let stopped = physics.compute_character_motion(&query, 1. / 60.).unwrap();
@@ -201,12 +214,30 @@ fn slope_limit_and_ground_snap_change_observable_traversal() {
     query.options.max_slope_climb_angle = 0.2;
     let (blocked, _) = walk(project.clone(), &query, 100);
     query.options.max_slope_climb_angle = 0.8;
-    let (climbed, _) = walk(project, &query, 100);
+    let (climbed, _) = walk(project.clone(), &query, 100);
     assert!(blocked.translation[0] < 1.5, "{blocked:?}");
     assert!(
         climbed.translation[0] > 3. && climbed.translation[1] > 2.,
         "{climbed:?}"
     );
+    project
+        .scenes
+        .get_mut(&query.scene_id)
+        .unwrap()
+        .entities
+        .get_mut(&query.entity_id)
+        .unwrap()
+        .components
+        .get_mut("Transform")
+        .unwrap()["translation"] = json!(climbed.translation);
+    query.options.min_slope_slide_angle = 0.2;
+    let physics = runtime(&project);
+    query.translation = [0.05, 0., 0.];
+    let up = physics.compute_character_motion(&query, 1. / 60.).unwrap();
+    assert!(!up.sliding_down_slope, "{up:?}");
+    query.translation = [-0.05, -0.02, 0.];
+    let down = physics.compute_character_motion(&query, 1. / 60.).unwrap();
+    assert!(down.sliding_down_slope, "{down:?}");
 
     let (mut project, mut query, _) = scene();
     let ledge = box_at("Ledge", [-2., 0.15, 0.], [2., 0.15, 2.]);

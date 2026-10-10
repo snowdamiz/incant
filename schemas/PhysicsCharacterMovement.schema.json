@@ -9,9 +9,11 @@
       "type": "array"
     },
     "grounded": {
+      "description": "Touching a supporting surface; steep/sliding slopes may also be grounded.",
       "type": "boolean"
     },
     "sliding_down_slope": {
+      "description": "Moving downward along a contacted slope steeper than the configured limit.",
       "type": "boolean"
     },
     "translation": {

@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Read-only character movement queries are implemented on the primitive runtime,
+  with script-owned gravity/jumping and Velocity commands. Real motion review
+  found walking stalls and a misleading slope flag; numerical face-normal handling
+  and final-support classification correct both. Twelve 300-tick capsule/sphere/
+  box walking cases pass, along with slope/stair/mask/isolation tests and the real
+  strict-TypeScript CLI jump/landing probe. Claude is reviewing the corrected
+  engine's rendered course; hosted checks remain open. See
+  [character movement](docs/spikes/character-movement.md).
+
 - Physics runtime integration is in progress on `impl/physics-runtime`. The
   [candidate probe](docs/spikes/physics-candidates.md) passed all six checks and
   merged as PR #22 (`a6fd91f`). The engine now takes PLAN.md's Rapier fallback
