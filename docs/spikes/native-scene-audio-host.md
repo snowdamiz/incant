@@ -105,3 +105,13 @@ and check-log hashes and the complete fresh-process result. Full workspace check
 with the optional feature, normal native VM/input/audio session integration,
 audio cursor saves, device/browser audio execution and reference-phone gates
 remain open. No workflow edits or publication are part of this host commit.
+
+## Workspace integration
+
+The parent enables `incant_audio_runtime/scene` consistently in ordinary workspace
+Clippy, release tests, ignored GPU tests and the combined editor/tool builds. The
+GPU pass therefore retains the same feature graph as the preceding tests. The
+dependency guard accepts explicit Cargo features and checks this optional host's
+resolved normal edges. The macOS engine job also runs and uploads the fresh
+source-free native audio proof. Hosted and integrated local checks remain pending
+at this wiring commit; the scoped results above keep their original identity.
