@@ -103,3 +103,33 @@ captures are integrated in handoff 0032; verification of the derivative-scaled
 tie tolerance remains pending. Sprite Inspector work follows the full editor redesign in 0033;
 final native review and hosted CI remain open. No atlas, tilemap, sprite animation library, 2D physics or phase gate
 is claimed complete by this increment.
+
+## Native runtime and CI integration, 2026-10-10
+
+The sprite branch integrates PR #48 source `588b3ab`, including the shared-value
+crate, cooked/native runtime, numeric columns, shipping profile, Windows CRT
+policy and CI build reuse. PixelPerfect's unchanged Camera data moved into
+`incant_types`; authoring validation stays in `incant_doc`. Regenerated schemas
+and the TypeScript SDK are byte-identical. The runtime dependency guard passes.
+
+The integrated source passes 359 workspace Rust tests, all 54 ignored GPU tests
+(including the 70-case magnification and 48-case orientation/sheet sweeps),
+workspace all-target Clippy, formatting, 25 tool tests and 420 UI tests. The GPU
+pass reuses the full workspace graph: zero compile events, with Cargo's initial
+finish reported at 0.37 seconds. The editor/headless custom-protocol release
+build, workflow lint and generated bridge checks also pass.
+
+The sprite, pixel-perfect camera and ordinary orthographic public workflows all
+pass strict TypeScript, exact save/resume/repeat behavior and unchanged authored
+files on rebuilt headless SHA-256
+`bb3747805921569ac14c277e2085090c61da4e05acf1154781e0c35282ad93d4`.
+The sprite workflow also passes source-file removal and shared-command atomic
+rollback/Undo/Redo. These workflows still use the legacy PlaySession; they do not
+prove migration of rendering or gameplay into the new native world. The native
+script host is separate ongoing work. The 20-case eval-check is schema-only,
+with live inference and the phase gate explicitly false.
+
+Claude's ongoing review uses the prior frozen `a4b5ddb9…` renderer binary. The
+integration does not change its shader or sampling rules, but it does not replace
+the required final native review. The near-tie pixel-camera defect, hosted checks
+and physical-device/performance gates remain open.

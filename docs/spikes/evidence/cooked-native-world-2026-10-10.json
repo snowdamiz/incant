@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-10",
+  "base_commit": "fe9cd2a148a8dfcdd995c86ea7570484a3f2e707",
+  "source_sha256": {
+    "crates/incant_cook/examples/cook_scene.rs": "e9edb5d97088a266593e5a1cc3a7ed89596ff87b5b221a89adf46210c710ca16",
+    "crates/incant_cook/src/lib.rs": "e5442e731929264ab78c03092675c5ad9abc0ffd8df89f5a900bc0e263806d05",
+    "crates/incant_cook/tests/runtime.rs": "c0d902fdd9036b7cd7918d7db40cb5fa114af393ebfda84607901c132666385f",
+    "crates/incant_runtime/examples/run_scene.rs": "dbeab869e9579144c5b9bf3def9f89ae54fc67581c26ff414be3b4a0f9520626",
+    "crates/incant_runtime/src/binary.rs": "ba532cf53f6020f343a952b626019399014c9ae216044e8d79d343e3190cf8cc",
+    "crates/incant_runtime/src/lib.rs": "39ef08a7a7b77960948461c69cd5e4d5a4485588b53ef832450a82aeb1ba9a93",
+    "crates/incant_runtime/src/scene.rs": "f92195e55f4c7b6fdf43b5cc8a463e888e34c6ae86fb7fad61d161238552b9c7",
+    "crates/incant_runtime/src/world.rs": "8429b14a9947c2abe2b1a4310ca56f7c20c15957a785a26a0e5bdfc160c422dd",
+    "crates/incant_runtime/tests/scenes.rs": "1c62b2fcd61d7f8325235cb7582a91928efa8ee668278cbbf66fd4d1699c88cb"
+  },
+  "rust_tests": 329,
+  "rust_suites": 109,
+  "gpu_tests": 41,
+  "python_tools": 15,
+  "workspace_clippy": "pass",
+  "schema_and_sdk_parity": "pass",
+  "dependency_roots": [
+    "incant_types",
+    "incant_runtime"
+  ],
+  "compile_only_targets": [
+    "wasm32-unknown-unknown",
+    "aarch64-apple-ios-sim"
+  ],
+  "probe": {
+    "passed": true,
+    "authoring_via_commands": true,
+    "cook_preserves_authoring": {
+      "game.incant.json": "d0dbb78ce76bd83743b21bfdbcd61015841cfe11a51f8fa4320080ea97d2ed53",
+      "history.jsonl": "1143152176290fe612e2f0884e7e1b33ba36d2c6de9de26d1533a06a367edbe6"
+    },
+    "authoring_files_removed_before_runtime": true,
+    "process_restarts_equal": true,
+    "reset_discards_simulation": true,
+    "corruption_rejected": true,
+    "scene_bytes": 304,
+    "scene_sha256": "747536736559932b96281b46aa728937ef0638aced7446b0f1257ff1273109e6",
+    "binaries": {
+      "incant_headless": "23bac3010d929986cea4d508d365747d9fe1392cfb463eb1eb190f2996bbda63",
+      "cook_scene": "3233e3ef812b481e8dbb195ac023e7687be70818f28ab974d9558668d495d135",
+      "run_scene": "58894b68ee69687e89ba01e7180913a4d61d6249dc57e7afa13b173ebee095d0"
+    },
+    "scope": "Transform/Velocity native-world foundation; no script, render, physics or device performance gate"
+  },
+  "unmet": [
+    "legacy PlaySession migration",
+    "remaining cooked components",
+    "script host and structural buffer",
+    "physics/navigation/render integration",
+    "binary saves",
+    "shipping-profile and hosted phone performance gates"
+  ]
+}

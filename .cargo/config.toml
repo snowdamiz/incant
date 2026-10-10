@@ -1,0 +1,6 @@
+# Keep executable tests, doctests and shipped binaries on the same MSVC CRT.
+# Tauri's package-local shim is disabled in editor/app/tauri.conf.json because
+# its synthetic msvcrt.lib leaks into unrelated workspace doctest link paths.
+[target.'cfg(all(windows, target_env = "msvc"))']
+rustflags = ["-C", "target-feature=+crt-static"]
+rustdocflags = ["-C", "target-feature=+crt-static"]
