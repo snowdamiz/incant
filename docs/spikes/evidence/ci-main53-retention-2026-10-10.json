@@ -21,7 +21,7 @@
       "queue_seconds": 7.0,
       "requested_cache_key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-1340c12d",
       "restored_cache_key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-9e3156eb",
-      "restored_bytes": "254922613",
+      "restored_bytes": "1848984039",
       "save_if": "true"
     },
     {
@@ -81,7 +81,7 @@
       "queue_seconds": 194.0,
       "requested_cache_key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-1340c12d",
       "restored_cache_key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-8a00bfbb",
-      "restored_bytes": "523320636",
+      "restored_bytes": "597527973",
       "save_if": "true"
     },
     {
@@ -105,7 +105,7 @@
       "queue_seconds": 75.0,
       "requested_cache_key": "v0-rust-Six platform probes-Linux-X64-android-Linux-x64-b9e20461-1340c12d",
       "restored_cache_key": "v0-rust-Six platform probes-Linux-X64-android-Linux-x64-b9e20461-8a00bfbb",
-      "restored_bytes": "261222",
+      "restored_bytes": "809725962",
       "save_if": "true"
     }
   ],
@@ -549,5 +549,6 @@
     "producer_job": 114328021882,
     "missing_family": "Linux credential persistence"
   },
-  "limitations": "Point-in-time retention, not a full successful producer rollout: native Linux failed and one credential family was lost. Pinned executable caches have been published; this report does not claim later consumption."
+  "limitations": "Point-in-time retention, not a full successful producer rollout: native Linux failed and one credential family was lost. Pinned executable caches have been published; this report does not claim later consumption.",
+  "restored_bytes_parser": "The Cache Size field is scoped to the Swatinem restore step, excluding prior/later npm, Gradle and executable caches."
 }

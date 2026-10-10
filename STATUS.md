@@ -83,9 +83,12 @@ within its documented workload.
   separate local compressed registry/target measurements. The simpler auxiliary
   registry-only alternative now includes exact old-archive totals, historical
   cold execution/queue times and replacement-overlap limits. Actual PR56 consumers
-  restored and verified both pinned tool binaries with PR saves skipped. No cache layout,
-  permission, coverage or shipping-seed change is enabled. Hosted component
-  measurements and bounded replacement-capacity validation remain required.
+  restored and verified both pinned tool binaries with PR saves skipped. A separate
+  [inputs-only follow-up](docs/spikes/ci-auxiliary-registry-cache.md) makes eight
+  auxiliary families registry-only, retaining iOS/native targets and all commands.
+  Local key/equality checks and 36 tool tests pass; hosted archive measurements,
+  consumption and the bounded legacy-cache migration remain pending. No cache
+  deletion, new permission or shipping-seed change is included.
 
 - Native fixed-tick input now owns a fresh cooked world, script VM and bounded
   input timeline. Action bindings validate once at construction/rebind; each

@@ -1,9 +1,11 @@
 # Cache capacity and retention proposal
 
-**Proposal only.** No workflow, key, permission, cache contents, test selection,
-profile, runner or billing setting is changed. PR56 remains fixed while its
-required checks run. Shipping dependency seeds are deferred until the ordinary
-cache set has demonstrated sustainable capacity.
+This document records the measured alternatives. The separate
+[auxiliary registry implementation](ci-auxiliary-registry-cache.md) applies the
+reviewed eight-family inputs-only option; custom packaging/admission remains a
+proposal. PR56 remains fixed while its required checks run. Shipping dependency
+seeds are deferred until the ordinary cache set has demonstrated sustainable
+capacity.
 
 ## Evidence and current limit
 
