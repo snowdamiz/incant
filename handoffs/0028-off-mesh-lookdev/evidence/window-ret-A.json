@@ -1,0 +1,13 @@
+{
+ "full_start": 761,
+ "resumed_start": 801,
+ "shared_frame_ticks": [
+  801,
+  849
+ ],
+ "shared_frames": 49,
+ "mismatched_frames": [],
+ "shared_log_ticks": 48,
+ "mismatched_log_ticks": [],
+ "frame_naming": "absolute tick"
+}

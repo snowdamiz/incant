@@ -1,0 +1,372 @@
+{
+ "project": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/offmesh.incant.json",
+ "ticks": 1000,
+ "runs": [
+  [
+   "overview",
+   "overview",
+   "8"
+  ],
+  [
+   "profile",
+   "profile",
+   "8"
+  ]
+ ],
+ "windows": [
+  [
+   "up-launch",
+   "west-gap",
+   "launch-up-1",
+   "8",
+   "80",
+   "1"
+  ],
+  [
+   "bridge-reverse",
+   "east-gap",
+   "launch-bridge-2",
+   "8",
+   "80",
+   "1"
+  ],
+  [
+   "ret-full",
+   "west-gap",
+   "launch-ret-1",
+   "8",
+   "88",
+   "1"
+  ],
+  [
+   "ret-mid",
+   "west-gap",
+   "mid-ret",
+   "0",
+   "48",
+   "1"
+  ],
+  [
+   "goal-feet",
+   "goal-feet",
+   "arrive-1",
+   "40",
+   "80",
+   "2"
+  ]
+ ],
+ "enable_tick": 486,
+ "disable_tick": 942,
+ "mid_ret_save_tick": 801,
+ "report_ticks": [
+  0,
+  1,
+  2,
+  485,
+  486,
+  487,
+  488,
+  941,
+  942,
+  943,
+  944
+ ],
+ "authored_before": {
+  "offmesh.incant.json": "b3e8c9317cae76450cb9d57e02722e34f11cb1233b8c64c3810f3f2f11449990",
+  "offmesh.incant.journal.jsonl": "286fbc844ea2bce54f9333aac991fa19ee855eb18d36d6d6f98257a14b765222"
+ },
+ "authored_after": {
+  "offmesh.incant.json": "b3e8c9317cae76450cb9d57e02722e34f11cb1233b8c64c3810f3f2f11449990",
+  "offmesh.incant.journal.jsonl": "286fbc844ea2bce54f9333aac991fa19ee855eb18d36d6d6f98257a14b765222"
+ },
+ "authored_unchanged": true,
+ "plays": [
+  {
+   "name": "reference",
+   "ticks": 1000,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0000",
+   "ticks": 0,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0001",
+   "ticks": 1,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0002",
+   "ticks": 2,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0485",
+   "ticks": 485,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0486",
+   "ticks": 486,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0487",
+   "ticks": 487,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0488",
+   "ticks": 488,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0941",
+   "ticks": 941,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0942",
+   "ticks": 942,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0943",
+   "ticks": 943,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "report-t0944",
+   "ticks": 944,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "resume.prefix",
+   "ticks": 801,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/resume-t0801.save.json",
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "resume",
+   "ticks": 199,
+   "camera": null,
+   "every": 1,
+   "load": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/resume-t0801.save.json",
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "overview",
+   "ticks": 1000,
+   "camera": "01JA20FF000000000000000066",
+   "every": 8,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "profile",
+   "ticks": 1000,
+   "camera": "01JA20FF000000000000000067",
+   "every": 8,
+   "load": null,
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "up-launch.prefix",
+   "ticks": 100,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/up-launch.start-t0100.save.json",
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "up-launch",
+   "ticks": 80,
+   "camera": "01JA20FF000000000000000068",
+   "every": 1,
+   "load": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/up-launch.start-t0100.save.json",
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "bridge-reverse.prefix",
+   "ticks": 577,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/bridge-reverse.start-t0577.save.json",
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "bridge-reverse",
+   "ticks": 80,
+   "camera": "01JA20FF000000000000000069",
+   "every": 1,
+   "load": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/bridge-reverse.start-t0577.save.json",
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "ret-full.prefix",
+   "ticks": 761,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/ret-full.start-t0761.save.json",
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "ret-full",
+   "ticks": 88,
+   "camera": "01JA20FF000000000000000068",
+   "every": 1,
+   "load": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/ret-full.start-t0761.save.json",
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "ret-mid.prefix",
+   "ticks": 801,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/ret-mid.start-t0801.save.json",
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "ret-mid",
+   "ticks": 48,
+   "camera": "01JA20FF000000000000000068",
+   "every": 1,
+   "load": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/ret-mid.start-t0801.save.json",
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "goal-feet.prefix",
+   "ticks": 416,
+   "camera": null,
+   "every": 1,
+   "load": null,
+   "save": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/goal-feet.start-t0416.save.json",
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  },
+  {
+   "name": "goal-feet",
+   "ticks": 80,
+   "camera": "01JA20FF00000000000000006A",
+   "every": 2,
+   "load": "/Users/andreyyurlov/.codex/worktrees/navigation-links/incant/.worktrees/0028-off-mesh-lookdev/artifacts/0028-off-mesh/A/goal-feet.start-t0416.save.json",
+   "save": null,
+   "binary_before": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "binary_after": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+   "failed_attempts": []
+  }
+ ],
+ "binary_sha256": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba"
+}
