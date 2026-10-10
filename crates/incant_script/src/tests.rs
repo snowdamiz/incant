@@ -291,3 +291,55 @@ fn deferred_work_during_metadata_exposure_also_rolls_back() {
         "if (metadataView.byteLength !== 0) throw Error('live metadata view');",
     );
 }
+
+#[test]
+fn invalid_direct_components_roll_back_without_structural_commands() {
+    for write in [
+        "c.transforms[0]=NaN;",
+        "c.transforms[1]=Infinity;",
+        "c.transforms[3]=2;",
+        "c.transforms[7]=0;",
+        "c.transforms[9]=1e-10;",
+        "c.transforms[3]=1e300;",
+        "if(c.velocities)c.velocities[0]=Infinity;",
+    ] {
+        let mut host=ScriptHost::new(script(&format!("globalThis.views=chunks.map(c=>c.transforms); for(const c of chunks){{c.transforms[2]=17;{write}}}"))).unwrap();
+        let mut world = world();
+        let before = world.snapshot();
+        assert!(
+            matches!(
+                host.tick(&mut world, 0.125),
+                Err(ScriptError::Structural(
+                    incant_runtime::RuntimeError::Scene(incant_runtime::SceneError::Component(_))
+                ))
+            ),
+            "{write}"
+        );
+        assert_eq!(world.snapshot(), before);
+        check(
+            &host,
+            "for(const view of views) if(view.buffer.byteLength!==0) throw Error('live invalid loan');",
+        );
+        assert!(matches!(
+            host.tick(&mut world, 0.125),
+            Err(ScriptError::FailedSession)
+        ));
+    }
+}
+
+#[test]
+fn finite_motion_signed_unit_quaternion_and_reflected_scale_remain_valid() {
+    let mut host = ScriptHost::new(script("for(const c of chunks) { c.transforms[6]=-1; c.transforms[7]=-1e-9; if(c.velocities)c.velocities[0]=3; }")).unwrap();
+    let mut world = world();
+    host.tick(&mut world, 0.125).unwrap();
+    for n in [1, 2] {
+        let value = world.inspect(id(n)).unwrap();
+        assert_eq!(value.transform.rotation, [0., 0., 0., -1.]);
+        assert_eq!(value.transform.scale, [-1e-9, 1., 1.]);
+    }
+    world.step().unwrap();
+    assert_eq!(
+        world.inspect(id(2)).unwrap().transform.translation,
+        [3. / 60., 0., 0.]
+    );
+}
