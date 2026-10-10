@@ -18,8 +18,11 @@ Initial checks pass 168 Rust tests. New behavior tests cover rotated parts and
 hollow openings, dynamic contact and exact future-state equality while reordering,
 one enter/exit event across overlapping sensor parts, masks, explicit capability
 failure and atomic command rejection with Undo/Redo/journal recovery. The expanded
-walking regression covers 24 combinations, 300 ticks each, including travel over
-adjacent compound-floor seams. The public CLI probe creates an arch and dynamic
+walking regression covers 36 combinations, 300 ticks each, including travel over
+adjacent compound-floor seams and equivalent geometry authored in rotated local
+frames. Review found a 32% movement loss at tick 77 with quarter-turned parts;
+normalizing the recovered face after its quaternion transform fixes that loss.
+Every configuration now retains at least 95% tangential progress on every tick. The public CLI probe creates an arch and dynamic
 dumbbell through atomic commands, rejects duplicate part IDs without changing
 revision, and verifies part edits through Undo/Redo and journal reopening. Two
 360-tick strict-TypeScript runs retain an open arch, return the parent hit ID and

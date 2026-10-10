@@ -76,7 +76,7 @@ fn course(wall: bool) -> (Project, String, String) {
 
 #[test]
 fn walking_and_wall_sliding_keep_tangential_speed_on_every_tick() {
-    for compound in [false, true] {
+    for (compound, rotated) in [(false, false), (true, false), (true, true)] {
         for (shape, height) in [
             (
                 ColliderShape::Capsule {
@@ -106,7 +106,7 @@ fn walking_and_wall_sliding_keep_tangential_speed_on_every_tick() {
                             .filter(|e| e.id != player)
                             .cloned()
                             .collect();
-                        let parts: Vec<_> = obstacles
+                        let mut parts: Vec<_> = obstacles
                             .iter()
                             .flat_map(|e| {
                                 let mut part = incant_doc::ColliderPart {
@@ -137,6 +137,19 @@ fn walking_and_wall_sliding_keep_tangential_speed_on_every_tick() {
                                 }
                             })
                             .collect();
+                        if rotated {
+                            // The same world-space geometry authored through a
+                            // quarter-turned local part frame must stay smooth.
+                            let q = std::f64::consts::FRAC_PI_4.sin();
+                            for part in &mut parts {
+                                part.rotation = [q, 0., 0., q];
+                                if let incant_doc::PrimitiveColliderShape::Box { half_extents } =
+                                    &mut part.shape
+                                {
+                                    half_extents.swap(1, 2);
+                                }
+                            }
+                        }
                         for e in &obstacles {
                             entities.remove(&e.id);
                         }
@@ -181,7 +194,7 @@ fn walking_and_wall_sliding_keep_tangential_speed_on_every_tick() {
                         let delta = state["delta"][0].as_f64().unwrap();
                         assert!(
                             delta > dx / 60. * 0.95,
-                            "compound={compound}, shape={shape:?}, wall={wall}, autostep={autostep}, tick={tick}: {state}"
+                            "compound={compound}, rotated={rotated}, shape={shape:?}, wall={wall}, autostep={autostep}, tick={tick}: {state}"
                         );
                         assert_eq!(state["sliding"], false, "tick={tick}: {state}");
                         let position = play.snapshot().entities[&player].translation;

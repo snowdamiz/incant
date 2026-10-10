@@ -11,7 +11,11 @@ fn unit_normal(normal: Vector, witness: Vector, shape: &dyn Shape) -> Vector {
     let Some(normal) = normal.try_normalize() else {
         return normal;
     };
-    exact_face_normal(normal, witness, shape).unwrap_or(normal)
+    // Transforming a recovered child face into its compound frame can shorten
+    // it again through floating-point quaternion arithmetic.
+    exact_face_normal(normal, witness, shape)
+        .and_then(Vector::try_normalize)
+        .unwrap_or(normal)
 }
 
 fn exact_face_normal(normal: Vector, witness: Vector, shape: &dyn Shape) -> Option<Vector> {

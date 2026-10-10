@@ -8,10 +8,11 @@
     "schemas_sdk_bridge": "passed"
   },
   "character_cases": {
-    "configurations": 24,
+    "configurations": 36,
     "ticks_per_configuration": 300,
     "compound_floor_includes_adjacent_parts": true,
-    "result": "all ticks retain at least 95 percent tangential progress, grounded height and wall separation"
+    "result": "all ticks retain at least 95 percent tangential progress, grounded height and wall separation",
+    "rotated_local_frames": true
   },
   "cli": {
     "passed": true,
@@ -182,5 +183,13 @@
       }
     },
     "host": "Apple M5 Pro; concurrent development load; rendering excluded"
+  },
+  "rotated_face_correction": {
+    "before": {
+      "capsule_tick": 77,
+      "actual_dx": 0.0181839931756258,
+      "requested_dx": 0.02666666666666667
+    },
+    "after": "36 cases x 300 ticks pass >=95% progress; recovered child normals are normalized after local rotation"
   }
 }
