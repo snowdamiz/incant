@@ -135,3 +135,43 @@ locally. The smallest observed separation is 0.5568335 m; every final goal dista
 is below 0.00001 m. The earlier rendered results above describe the prior binary.
 Full checks, the updated public workflow and a new rendered review are required
 for this correction before merging.
+
+
+The first passing preference failed the unchanged rendered plaza course:
+only 26/100 were at their goals after 2700 ticks, compared with all 100 from
+tick 2580 before this correction. Even the 4990-tick diagnostic extension left
+11 walkers that had never arrived. Repeat frames/logs were identical and there
+were no overlaps. PR #36 is held despite all twelve checks passing at `6df4ef9`.
+See the current 0027 report and its retained prior-binary history.
+
+The next candidate limits the preference to opposing requested velocities, so
+parked and co-directed neighbors do not trigger it. All twelve radial/staggered
+library cases and a simple approach beside a parked agent pass locally; the
+simple case also passes the prior rule and is not a reproduction of the plaza
+regression. The unchanged full plaza course remains the acceptance test, with
+updated rendering and integration checks required before merge.
+
+
+The opposing-only candidate `8d56f0c` also failed the public course: 43/100 at
+2700, maximum remaining distance 9.890 m, minimum measured separation
+0.59465769 m and zero overlaps. The new fast numerical plaza regression fails
+that candidate too (31/100 at tick 2640); its Rust floating-point path is not an
+exact replay of the TypeScript host. A fixed 0.0001-scale ID-derived perturbation
+was also rejected after it failed a radial crossing case.
+
+Candidate `4c495e9` restricts the shared passing hand to near-antiparallel desired
+directions (dot product below -0.99 times their lengths, about eight degrees of
+head-on) with a predicted conflict during the horizon. This leaves ordinary
+crossing and goal-seeking objectives unchanged. All twelve radial layouts pass
+with minimum separation 0.5368895 m and final distances below 0.00001 m. The new
+numerical plaza test has all 100 settled throughout its last second, minimum
+separation 0.59696561 m and no body/obstacle overlap. Full public playback and
+Claude's unchanged rendered course must still verify this candidate before merge.
+
+
+The unchanged public TypeScript plaza run also passes candidate `4c495e9`: all
+100 remain at their goals from tick 2212 through 2700, zero overlap ticks,
+minimum separation 0.59603359 m and minimum plinth clearance
+0.05000004 m. All 286 Rust tests and Clippy pass. The independent
+100-agent public workflow repeats and resumes exactly with unchanged authoring
+files. Claude's updated rendered review and final hosted checks remain pending.
