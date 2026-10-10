@@ -1,7 +1,8 @@
 # ADR 0008: Canonical JSON and Loro authoring state
 
 Date: 2026-10-08. Updated: 2026-10-10. Status: per-scene authoring architecture
-adopted by the director in PLAN.md revision 4; scaling migration incomplete.
+adopted by the director in PLAN.md revision 4; Loro confirmed by the revision 5
+decision record (decision 2). Scaling migration incomplete.
 
 ## Decision
 
@@ -25,7 +26,10 @@ Undo/Redo must remain valid across lazy loads and multi-scene transactions.
 
 ## Consequences and revisit trigger
 
-Loro is provisional, not an across-the-board performance winner. Journal entries currently store full states plus CRDT snapshots, so storage and replay costs need compaction before large projects. Arrays do not merge element-by-element. Rejected semantically invalid merges need an explicit conflict-resolution UX in later phases.
+Loro is decided (decision 2) but was not an across-the-board performance winner.
+Automerge stays the fallback behind the document boundary. Switch only if the
+per-scene Loro implementation misses the 100,000-entity gate below while
+Automerge meets it on the same workload. Journal entries currently store full states plus CRDT snapshots, so storage and replay costs need compaction before large projects. Arrays do not merge element-by-element. Rejected semantically invalid merges need an explicit conflict-resolution UX in later phases.
 
 Measure edit latency below 100 ms and viewport responsiveness at 60 fps on the
 M1 MacBook Air with 100,000 entities. Virtualize hierarchy, inspector and asset

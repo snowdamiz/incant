@@ -1,7 +1,8 @@
 # ADR 0002: wgpu renderer with explicit device ownership
 
 Date: 2026-10-08. Updated: 2026-10-10. Status: architecture adopted by the
-director in PLAN.md revision 4; implementation and device gates incomplete.
+director in PLAN.md revision 4 and confirmed by the revision 5 decision record;
+implementation and device gates incomplete.
 
 ## Decision
 
@@ -19,6 +20,12 @@ interop passes declare resource ownership, synchronization and capability needs
 in the render graph and retain a portable fallback. Vendor upscalers, async
 compute and hardware ray tracing do not justify abandoning those fallbacks.
 Claude owns rendered appearance review; Astra owns implementation and timing.
+
+Vendor upscalers arrive on desktop in Phase 4: FSR, DLSS and XeSS, selected by
+hardware, after the human-owned DLSS and XeSS license review. If interop cannot
+deliver vendor upscalers or async compute on a reference desktop, the fallback is
+native Metal and Vulkan backends for the high tiers only; the portable wgpu path
+remains the baseline for every tier and for the web.
 
 ## Evidence and implementation boundary
 
@@ -40,5 +47,6 @@ wgpu 29's public pipeline cache currently supports Vulkan only; Metal archives
 and DX12 libraries require separate interop implementation and measurement. See
 the [revision 4 review](../spikes/performance-plan-v4-review.md) for sources and
 migration sequencing. Adopting this architecture does not approve a phase gate.
+PLAN.md section 12 lists the decisions and the human-owned vendor license actions.
 
 Source: [PLAN.md](../../PLAN.md), sections 2, 3, 5 and 6.

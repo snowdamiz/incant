@@ -1,7 +1,8 @@
 # ADR 0006: Sandboxed script hosts on the native runtime world
 
 Date: 2026-10-08. Updated: 2026-10-10. Status: runtime architecture adopted by
-the director in PLAN.md revision 4. The document-backed play path is superseded
+the director in PLAN.md revision 4; shipped WebAssembly path and the typed-TypeScript
+rule fixed by the revision 5 decision record. The document-backed play path is superseded
 and remains implemented only until migration passes its behavioral checks.
 
 ## Decision
@@ -52,13 +53,21 @@ types, a checked binary cook/load boundary and the dependency guard, then migrat
 systems and script hosts. Keep the old path explicitly labeled until replacement
 passes the existing behavior suite; an empty runtime crate is not completion.
 
-Wasm editor/desktop/Android JIT and hot reload, iOS AOT code linked into the signed
-binary, and browser-native Wasm all need target-specific proof. Wasmtime's ordinary
-serialized AOT loader is not evidence of an iOS-compatible static link/signing
-path. Deterministic Wasm also requires canonical floating-point/NaN behavior,
+Shipped native builds translate modules to C with wasm2c and compile them into
+the signed binary on every native platform (decision 20). This needs no executable
+memory at runtime, so it is the iOS route, and using it everywhere keeps one
+shipped code path. Wasmtime with JIT and hot reload serves the editor and
+development builds; browsers run native WebAssembly. Each target still needs
+proof, which the Phase 1 gate requires on all four reference devices. Wasmtime's
+ordinary serialized AOT loader is not evidence of an iOS-compatible static
+link/signing path, which is why it is not the shipped route. Deterministic Wasm also requires canonical floating-point/NaN behavior,
 stable iteration and deterministic imports; disabling relaxed SIMD alone is not
-sufficient. Static Hermes/typed-TS-to-Wasm remains an evidence-gated Phase 1 spike
-(open decision 18), not an adopted runtime.
+sufficient. Static Hermes/typed-TS-to-Wasm remains a Phase 1 spike, not an adopted runtime.
+Decision 18 fixes the adoption rule: adopt it for shipped builds only if it passes
+100 percent of the SDK conformance suite, runs at least twice as fast as bytecode
+on the script benchmark on both reference phones, needs no JIT on iOS, adds under
+5 MB to the mobile binary and has an upstream release line with security fixes.
+Otherwise TypeScript stays on bytecode. Record the outcome here at the Phase 1 gate.
 
 The script gate is 2 ms/frame at p95 for 10,000 scripted entities on iPhone 13
 and Pixel 6 in the shipping profile. Desktop benchmarks do not pass it. Deadlines
