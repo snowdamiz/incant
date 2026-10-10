@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- Windows MSVC compilation and doctests now share Cargo's static CRT policy;
+  Tauri's package-local shim is disabled after it shadowed the real runtime in
+  an unrelated executable doctest. Full-workspace doc coverage remains enabled.
+  The shipping guard records the CRT policy and Windows CI checks distributed
+  executables for CRT DLL imports. Local workspace tests (including all five
+  runtime doctests), editor Clippy and tool tests pass. Native Windows verification
+  remains pending the updated hosted job. See [CRT policy evidence](docs/spikes/windows-crt-policy.md).
+
 - The native runtime now lends actual Transform/Velocity numeric table columns
   through an exclusive synchronous scope with separate stable IDs. Direct writes,
   table reallocation, hierarchy/changed-tick publication, caller-owned undo and

@@ -1,7 +1,7 @@
 name: Desktop editor and engine
 on:
   pull_request:
-    paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'package*.json', 'tools/probes/**', 'tools/shipping*.py', 'tools/tests/test_shipping.py', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
+    paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', '.cargo/**', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'package*.json', 'tools/probes/**', 'tools/shipping*.py', 'tools/tests/test_shipping.py', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -45,6 +45,28 @@ jobs:
       - run: cargo build -j2 -p incant_cook --example cook_scene --release --locked
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python tools/shipping.py artifacts/shipping-runtime
+      - name: Verify Windows executables do not require redistributable CRT DLLs
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import subprocess
+          def output(*args):
+              return subprocess.check_output(args, text=True)
+          sysroot = Path(output('rustc', '--print', 'sysroot').strip())
+          host = re.search(r'^host: (.+)$', output('rustc', '-vV'), re.MULTILINE).group(1).strip()
+          readobj = sysroot / 'lib/rustlib' / host / 'bin/llvm-readobj.exe'
+          forbidden = re.compile(r'^(?:(?:msvcp|msvcr|vcruntime)\d.*|msvcrtd?|ucrtbased?|api-ms-win-crt-.*)\.dll$', re.IGNORECASE)
+          for binary in ('target/release/incant_editor.exe', 'target/release/incant_headless.exe',
+                         'artifacts/shipping-runtime/player/run_scene.exe'):
+              imports = output(str(readobj), '--coff-imports', binary)
+              libraries = re.findall(r'^\s*Name:\s*(\S+\.dll)\s*$', imports, re.MULTILINE | re.IGNORECASE)
+              assert libraries, f'{binary}: no PE imports found'
+              assert not any(forbidden.match(name) for name in libraries), f'{binary}: dynamic CRT import: {libraries}'
+              print(f'{binary}: CRT import check passed; imports={libraries}')
+          PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with: {name: 'runtime-player-${{ matrix.platform }}', path: artifacts/shipping-runtime/player.zip, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

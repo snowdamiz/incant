@@ -122,6 +122,17 @@ class ShippingCompilerGuard(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'fresh target rustc'):
             shipping.verify_commands('Fresh incant_runtime\nFresh run_scene', self.target, 'packed')
 
+    def test_windows_requires_static_crt_without_weakening_shipping_guards(self):
+        target = 'x86_64-pc-windows-msvc'
+        static = '-C target-feature=+crt-static'
+        commands = self.commands(static).replace(self.target, target)
+        result = shipping.verify_commands(commands, target, 'packed')
+        self.assertEqual(result['run_scene']['target-feature'], '+crt-static')
+        for extra in ('', '-C target-feature=-crt-static', f'{static} -C panic=unwind',
+                      f'{static} -C target-cpu=native'):
+            with self.subTest(extra=extra), self.assertRaises(ValueError):
+                shipping.verify_commands(self.commands(extra).replace(self.target, target), target, 'packed')
+
 
 if __name__ == '__main__':
     unittest.main()
