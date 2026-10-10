@@ -1542,11 +1542,33 @@
  "compare": {
   "other": "artifacts/0029-grid-navigation/B",
   "logs_identical": true,
+  "capture_keys_and_tick_sets_identical": true,
+  "captures": 8,
   "states_identical_raw": false,
   "states_identical_after_generated_id_mapping": true,
   "generated_ids_mapped": 18,
+  "generated_id_aliases": [
+   "ASSET:actor",
+   "ASSET:door_slab",
+   "ASSET:gauge_bar",
+   "ASSET:gauge_cross",
+   "ASSET:gauge_dot",
+   "ASSET:gauge_ring",
+   "ASSET:goal",
+   "ASSET:plinth",
+   "ASSET:route_bar",
+   "ASSET:route_dot",
+   "ASSET:start",
+   "ASSET:tiles",
+   "ASSET:trail_dot",
+   "ASSET:wait_ring",
+   "ASSET:wall_lids",
+   "ASSET:walls",
+   "PROJECT",
+   "SCENE"
+  ],
   "frames": 516,
   "frames_identical": 516,
-  "other_report_ok": true
+  "other_set_checks_passed": true
  }
 }

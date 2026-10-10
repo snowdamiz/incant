@@ -45,8 +45,37 @@ session I cannot inspect the ACP messages themselves.
 
 ### Packet acknowledgement
 
-The current packet has no priority-revision section and carries no new director
-feedback. No files existed from an interrupted attempt; the worktree was clean
+**Priority revision 2 (report and evidence precision only).** The director
+accepted the scoped visual verdict and the actual frames. As instructed, the
+scene, behavior, cameras, binary and all rendered evidence are unchanged. No new
+play or capture runs were made. I made three corrections.
+
+1. **Finishing the step is my choice, not an engine requirement.** Earlier
+   wording said the cell-only API *requires* finishing a committed step, and that
+   reversing needs a fractional-start API. Both claims are withdrawn. A behavior
+   can interpolate back to a known walkable cell with ordinary Transform commands
+   and then query from that cell. My behavior chooses to finish its current step.
+   Safe movement stays behavior-owned. Fractional-start queries would only be a
+   possible convenience.
+2. **Stricter comparison of the independent projects.** `tools/trace_check.py`
+   now refuses to normalize unless each project has exactly one scene, unique
+   asset names and distinct generated IDs. Both projects must also have the same
+   alias set. Before any frame hash is compared, both sets must have identical
+   capture keys, cameras, start ticks and tick sets. A set missing a capture now
+   fails outright instead of being counted. Only the generated IDs are mapped,
+   and the final state must then be exactly equal.
+3. **Duplicate work.** I found no duplicate path-cost recomputation. Each probe
+   and each route event is recomputed once and compared with the engine and the
+   oracle. The repeated work was in the comparison, which normalized each project
+   twice. It now normalizes each project once.
+
+I reran the checker against the existing final A and B artifacts. All measured
+results are unchanged, and only the comparison block of `evidence/check-A-B.json`
+differs. As a negative test, comparing set A with an earlier development set
+that lacks the full gate capture stops with "capture keys differ". The final
+total remains 516 frames, which includes the full gate capture.
+
+**Original session.** The packet then had no priority-revision section. No files existed from an interrupted attempt; the worktree was clean
 at `fd9f46a`. I read `CLAUDE.md`, the packet, `docs/spikes/grid-navigation.md`,
 `tools/probes/navigation-grid.py`, the SDK types and the 0026 and 0028 helpers.
 
@@ -76,7 +105,7 @@ resume. No input-device disconnection is involved.
 |---|---|
 | `tools/grid_course.py` | `373cf4fb0872fd387790c88370b6e083cec1d4e757a55221d753b38f12c3ca4f` |
 | `tools/grid_course.ts` | `676d2b0056caad54d3cfd8a48ccbcbca40f8ccf2ee8457a438741c979ae25344` |
-| `tools/trace_check.py` | `7577a7580bb6863a0e815418ccd8ca02352023a76174dda01b583b8c8f9f5f79` |
+| `tools/trace_check.py` | `c0eea8eeb1fcb3d41593b588d39e53a5122074f864b39a69f8535071832b985d` |
 | `tools/run_set.sh` | `d74008983acc344104b5b74d2f4f65ba5008e982e9fb55cb40437f10a7b39666` |
 | `tools/tsconfig.json` | `d1e9b3e068b70aabe177e4d54d7582280028d37d54cb3fb6b68b56ec2fa16be3` |
 
@@ -227,6 +256,7 @@ arrival, so there are no unexplained snaps or stalls.
 | Reopen window, saved at 194 during the wait, versus uninterrupted gate camera | 12 of 12 shared frames byte-identical |
 | Gate-close window, saved at 77, versus reopen window, saved at 194 | 2 of 2 byte-identical |
 | Arrive window, saved at 428, versus uninterrupted oblique camera | 12 of 12 byte-identical |
+| Set A versus set B: capture keys, cameras, start ticks and tick sets | identical, 8 captures |
 | Set A versus set B: all logs | byte-identical |
 | Set A versus set B: frames | 516 of 516 byte-identical |
 | Set A versus set B: final state | identical after mapping 18 generated IDs |
@@ -237,7 +267,8 @@ arrival, so there are no unexplained snaps or stalls.
   excluded from identity.
 - **Generated IDs.** `init` and `import` generate the project, scene and asset
   IDs, so they differ between independently authored projects. The 18 mapped IDs
-  are one project, one scene and 16 assets.
+  are one project, one scene and 16 assets with unique names. The checker refuses
+  to map anything if a project has more than one scene or duplicate asset names.
 
 ### Script budget and conditions
 
@@ -304,10 +335,12 @@ Look notes about my own behavior, not engine defects:
 2. **Hard corners at cell centres.** Motion is deliberately linear between
    centres with no smoothing. Facing lags by up to five ticks on 45° turns and
    ten ticks on 90° turns. This is visible in `plan-t0310`.
-3. **Committed step after a null route.** The actor completes the step it began
-   on the previous route, for 19 ticks, before stopping. The amber ring announces
-   where it will stop. Reversing mid-step would need a non-cell position as a
-   query start, which this point/cell API does not take.
+3. **Committed step after a null route.** My behavior chooses to complete the
+   step it began on the previous route, for 19 ticks, before stopping. The amber
+   ring announces where it will stop. The engine does not force this. A behavior
+   could instead interpolate back to the cell it just left, which is known to be
+   walkable, using ordinary Transform commands, then query from there. Either
+   way, safe movement remains the behavior's responsibility.
 4. **Small markers in the oblique view.** Trail dots and the gauge line are small
    there. The plan view is the reference for routes.
 5. **Occlusion in the gate view.** The route line passes behind the wall where it
@@ -378,8 +411,8 @@ and finished-game quality remain unapproved.
 
 ## Open questions
 
-- Should a later API accept a fractional start position or a "current step"
-  hint? That would let an actor reverse mid-step when a route disappears.
-  Today's cell-only queries require finishing the committed step.
+- A fractional start position could be a later convenience for actors between
+  cells. It is not a missing prerequisite. Behaviors can already return to a
+  known walkable cell with Transform commands and query from it.
 - Should the probe's corner-gauge pattern become a standing rendered regression
   scene once the 2D tilemap renderer exists?

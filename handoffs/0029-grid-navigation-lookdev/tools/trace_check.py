@@ -95,15 +95,26 @@ def stdout_core(path):
 
 def normalized_core(out):
     """Final state with init/import-generated IDs (project, scene, assets) replaced by
-    stable names, so independently authored projects can be compared exactly."""
+    stable aliases, so independently authored projects can be compared exactly.
+
+    Refuses to normalize unless the project has exactly one scene and every asset
+    name is unique, so no two generated IDs can collapse onto one alias. Only these
+    generated IDs are mapped; everything else must already be equal."""
     project = json.loads((Path(out) / "grid.incant.json").read_text(encoding="utf-8"))
+    if len(project["scenes"]) != 1:
+        raise SystemExit(f"{out}: expected exactly one scene, found {len(project['scenes'])}")
+    asset_names = [v["name"] for v in project["assets"].values()]
+    if len(set(asset_names)) != len(asset_names):
+        raise SystemExit(f"{out}: asset names are not unique; refusing to alias")
     names = {project["id"]: "PROJECT"}
     names.update({s: "SCENE" for s in project["scenes"]})
     names.update({a: f"ASSET:{v['name']}" for a, v in project["assets"].items()})
+    if len(names) != 2 + len(asset_names):
+        raise SystemExit(f"{out}: generated IDs are not distinct")
     text = json.dumps(stdout_core(Path(out) / "reference.stdout.json"), sort_keys=True)
     for ident, name in names.items():
         text = text.replace(ident, name)
-    return json.loads(text), len(names)
+    return json.loads(text), sorted(names.values())
 
 
 def sha(path):
@@ -303,16 +314,31 @@ def main():
         other, other_frames = check_set(args.compare)
         logs = all((args.set / f).read_bytes() == (args.compare / f).read_bytes()
                    for f in ("reference.logs.jsonl", "repeat.logs.jsonl", "resume.prefix.logs.jsonl", "resume.logs.jsonl"))
+        # Both sets must contain the same captures, cameras and tick sets before
+        # any frame hash is compared; a missing frame can never count as a match.
+        keys_a, keys_b = sorted(frames), sorted(other_frames)
+        if keys_a != keys_b:
+            raise SystemExit(f"capture keys differ: {keys_a} != {keys_b}")
+        for k in keys_a:
+            if frames[k]["camera"] != other_frames[k]["camera"] or frames[k]["start"] != other_frames[k]["start"]:
+                raise SystemExit(f"capture {k}: camera or start tick differs")
+            if sorted(frames[k]["shas"]) != sorted(other_frames[k]["shas"]):
+                raise SystemExit(f"capture {k}: tick sets differ")
         frame_total = sum(len(v["shas"]) for v in frames.values())
-        frame_same = sum(frames[k]["shas"].get(t) == s for k, v in other_frames.items() if k in frames
-                         for t, s in v["shas"].items())
+        frame_same = sum(frames[k]["shas"][t] == s for k in keys_a for t, s in other_frames[k]["shas"].items())
+        core_a, aliases_a = normalized_core(args.set)
+        core_b, aliases_b = normalized_core(args.compare)
+        if aliases_a != aliases_b:
+            raise SystemExit("generated-ID alias sets differ between projects")
         report["compare"] = {"other": str(args.compare), "logs_identical": logs,
+                             "capture_keys_and_tick_sets_identical": True, "captures": len(keys_a),
                              "states_identical_raw": stdout_core(args.set / "reference.stdout.json") == stdout_core(args.compare / "reference.stdout.json"),
-                             "states_identical_after_generated_id_mapping": normalized_core(args.set)[0] == normalized_core(args.compare)[0],
-                             "generated_ids_mapped": normalized_core(args.set)[1],
+                             "states_identical_after_generated_id_mapping": core_a == core_b,
+                             "generated_ids_mapped": len(aliases_a),
+                             "generated_id_aliases": aliases_a,
                              "frames": frame_total, "frames_identical": frame_same,
-                             "other_report_ok": True}
-        assert logs and frame_same == frame_total and report["compare"]["states_identical_after_generated_id_mapping"], report["compare"]
+                             "other_set_checks_passed": True}
+        assert logs and frame_same == frame_total and core_a == core_b, report["compare"]
     text = json.dumps(report, indent=1)
     if args.json:
         if args.json.exists():
