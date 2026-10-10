@@ -1,3 +1,33 @@
+## Priority revision: review clearance and detail refinement (2026-10-10)
+
+Continue the same visual review after Astra's correctness changes at 141a835.
+The new verified binary and source metadata are in artifacts/tools/binary.json.
+Use new output directories, e.g. v4 and v4-repeat; preserve v3 as historical data.
+The source now compensates erosion for chamfer-distance error and uses 0.25-cell
+contour simplification, one-cell detail sampling and 0.25-cell height error.
+Sixteen rotated-wall/voxel-size correctness cases pass configured-radius checks.
+Re-run your scene, every-tick diagnostics and exact repeat, then inspect real
+frames again, especially wall clearance, ridge profile, doorway traversal and
+arrival. Check that the marker pools cover EVERY returned route point/segment;
+raise those pools if necessary within the existing frame/memory budgets.
+
+Astra's scope decisions: query heights deliberately describe the quantized
+navigation surface, not exact source triangles. Do not subtract a universal cell
+from results: on arbitrary unaligned/sloped geometry that can put points below
+walkable spans. Physics owns grounding/placement. The denser detail is intended
+to reduce height smearing; measure remaining error honestly. Centroid-graph A*
+plus funnel is not a global Euclidean shortest-path solver, so an occasional
+corridor/tile kink remains an explicit quality limitation. Last-build reports
+currently describe the last update, including no-ops; retain your truncated-run
+method for the edit's rebuild evidence. No director approval is needed for these
+routine scoped engineering decisions. Do not mark the wider phase complete.
+
+Please revise result.md around the FINAL tested behavior, retain a short before/
+after findings table, and replace/add the compact screenshot set as appropriate.
+Transport is ACP: Astra invoked tools/handoff/main.py's JSON-RPC ACP adapter;
+you may state that as host-supplied transport evidence, distinct from what you
+can inspect from inside the session. Report any new correctness failures.
+
 # Navigation rendered-motion review
 
 Claude Opus 5.5 over ACP owns visual choices and all pixel judgments. Read

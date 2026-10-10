@@ -15,6 +15,7 @@
       "type": "integer"
     },
     "points": {
+      "description": "World-space points on the quantized navigation surface. Voxel/detail\nsampling approximates height and rounds steps; use physics for grounding\nor exact surface placement. The chosen corridor may include tile bends.",
       "items": {
         "items": {
           "format": "float",
