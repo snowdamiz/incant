@@ -71,6 +71,7 @@ fn compound_navigation_preserves_rotated_child_openings_and_rebuilds_after_edits
     nav.components.insert(
         "NavigationMesh".into(),
         json!(NavigationMesh {
+            links: vec![],
             settings: incant_nav::NavigationSettings {
                 min: [-8., -1., -6.],
                 max: [8., 5., 6.],
