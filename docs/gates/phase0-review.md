@@ -23,11 +23,11 @@ The separate landing page is [PR #2](https://github.com/snowdamiz/incant/pull/2)
 | OAuth, API-key fallback and credential persistence | [macOS live sign-in/refresh/rebuild evidence](../spikes/auth-login-repair.md), [three-desktop CI](../spikes/evidence/desktop-credentials-2026-10-08.json) and automated API-key protocol tests | Live revocation evidence remains pending. A separate live API key is not required for the director's OAuth workflow |
 | Claude 5.5 ACP roundtrip | [First result packet](../../handoffs/0001-editor-foundation/result.md), later native/account/palette packets and integration commits | No copied coding-agent credentials; handoff 0008 resumes visual review after the director restored capture permission |
 | Runnable artifacts for six targets | [Build and execution evidence](../spikes/evidence/six-platform-2026-10-08.json), including hosted Android emulator execution | PR-triggered runs do not prove scheduled nightly history or signed distribution |
-| Apple and Windows signing certificates | No certificate evidence recorded | Director-provided accounts/certificates are required; unsigned development builds are not substitutes |
+| Apple and Windows signing certificates | Removed from Phase 0 by director decision on 2026-10-10 | First needed for Phase 5 store uploads; unsigned development builds remain development builds, not substitutes |
 | Year 1 director/reviewer/contracts | Director is identified by the plan; reviewer/contracts are not recorded | Director confirmation is required; no staffing or contract commitments were made by an agent |
 
 The ledger at [phase0.json](phase0.json) remains unapproved. The gate command reports
-auth verification, scheduled nightly artifacts, signing, staffing and director
+auth verification, scheduled nightly artifacts, staffing and director
 approval as outstanding. Phase 1 implementation is now separately authorized.
 
 ## Latest requested editor changes
@@ -49,19 +49,24 @@ The capture indicator still hides the traffic lights; exact light alignment, a
 settled fullscreen capture, minimum window size and the newest F2 fix need follow-up.
 A browser fixture or compiled app does not prove those native details.
 
-## Open decisions from PLAN.md section 12
+## Decisions from PLAN.md section 12
 
-| Decision | Current disposition |
+On 2026-10-10 the director instructed agents to resolve every open decision with
+engineering judgment. PLAN.md section 12 records all 27 decisions and the
+human-owned actions that remain. Recording these decisions does not approve this
+gate or complete any listed human-owned action.
+
+| Decision | Disposition |
 |---|---|
-| React versus Solid | React is the implemented proposal in ADR 0009 |
-| Loro versus Automerge | Loro is the implemented proposal, with both benchmark results retained in ADR 0008 |
-| Managed identity versus self-hosted accounts | ADR 0012 separates optional cloud metadata from local provider login; the identity operating choice still requires director review before service implementation |
-| RON versus JSON | Canonical typed JSON with derived JSON Schemas is implemented in ADR 0008 |
-| Browser editor in 1.0 or 1.1 | PLAN.md's definition of done includes it in 1.0; the WASM probe is not the delivered browser editor |
-| Engine license/business model | No license or paid-cloud business decision has been made on the director's behalf |
-| Game name and engine-name clearance/reservations | Driftwake remains a placeholder. Incant is the chosen engine name; trademark/domain/package reservations are not represented as complete |
-| Codex execution mode | Phase 0 work has used local Codex/CLI, local Claude ACP and hosted CI; no cloud Codex deployment is claimed |
-| Approval mode by risk | Reversible local implementation/tests proceed autonomously. Claude ACP bypassPermissions was explicitly authorized. Agents merge completed PRs after review and passing checks under the 2026-10-09 authorization. Phase approval, signing, purchases and legal/staffing actions remain director-owned |
+| React versus Solid | React (decision 1, ADR 0009) |
+| Loro versus Automerge | Loro, one document per scene; Automerge fallback with a measured switch rule (decision 2, ADR 0008) |
+| Managed identity versus self-hosted accounts | WorkOS AuthKit behind OpenID Connect, Zitadel as replacement; game player identity self-hosted (decision 3, ADR 0012). Account creation is human-owned |
+| RON versus JSON | Canonical typed JSON with derived JSON Schemas (decision 4, ADR 0008) |
+| Browser editor in 1.0 or 1.1 | 1.0 with a defined scope (decision 5, ADR 0009); not yet delivered |
+| Engine license/business model | MIT OR Apache-2.0, royalty-free, repository public at the Phase 8 beta, revenue from Incant Cloud and Driftwake (decision 6) |
+| Game name and engine-name clearance/reservations | Driftwake (decision 7). Name clearance, domain registration and package-name reservations were removed as requirements by director decision on 2026-10-10 |
+| Codex execution mode | Both CLI and cloud tasks (decision 8); no cloud Codex deployment is claimed |
+| Approval mode by risk | Settled by the 2026-10-08 and 2026-10-09 director decisions (decision 9). Claude ACP bypassPermissions was explicitly authorized. Phase approval, signing, purchases and legal/staffing actions remain director-owned |
 
 ## Order for remaining work
 
@@ -73,7 +78,7 @@ A browser fixture or compiled app does not prove those native details.
    capture permission; record actual results through Claude visual review.
 4. The foundation is now on main. Record scheduled workflow results from the default
    branch as they become available; a merge or a manual run does not prove nightly history.
-5. Record the human-owned signing, staffing and outstanding strategic decisions.
+5. Record the human-owned staffing actions; signing moves to Phase 5 store uploads.
    Request phase approval only when its evidence is ready; do not self-approve it.
 
 No additional Windows/Linux desktop machines or manual login checks are required.

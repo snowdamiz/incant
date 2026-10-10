@@ -1,9 +1,9 @@
 # AI-Native Game Engine: Start-to-Finish Plan
 
 Engine name: **Incant** (decided 2026-10-08; the shortlist it was chosen from is in Appendix D).
-Working name for the launch game: **Driftwake** (placeholder).
+Launch game: **Driftwake** (decided 2026-10-10).
 
-Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5.
+Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role. Revision 6 (2026-10-10): removed name clearance and package reservations, moved store accounts and signing certificates from Phase 0 to Phase 5 store uploads, and replaced reference-phone purchases with hosted real devices in AWS Device Farm.
 Planning horizon: 36 months, starting November 2026, ending with a shipped game in Q4 2029.
 
 ---
@@ -17,7 +17,7 @@ Planning horizon: 36 months, starting November 2026, ending with a shipped game 
 5. Section 5 is the phase-by-phase timeline with deliverables and exit gates.
 6. Section 6 details each engineering workstream.
 7. Section 7 is the game production plan.
-8. Sections 8 through 12 cover QA, risks, metrics, budget, and open decisions.
+8. Sections 8 through 12 cover QA, risks, metrics, budget, and the decision record.
 9. Appendices contain the agent tool surface spec, the document schema sketch, and a glossary.
 
 Every phase has an **exit gate**. Do not start the next phase until the gate passes. Gates are the only real schedule control in a project this size.
@@ -36,6 +36,26 @@ merge or request repeated merge confirmation. Resolve integration conflicts and
 verify the result. Merging implemented work does not approve a phase gate or mark
 deferred requirements complete; the remaining human-owned actions still apply.
 
+Director decision, 2026-10-10: adopt the performance architecture for a competitive
+engine. Running game simulation leaves the authoring path and runs on a native ECS
+world (Section 2.6); WebAssembly modules become a native-speed script tier beside
+TypeScript; physics determinism becomes a per-project mode; temporal upscaling,
+dynamic resolution and native backend interop join the renderer. Principles 1 and
+7 are amended accordingly. This changes the plan; it does not approve any gate.
+
+Director decision, 2026-10-10 (second): resolve every open decision with
+engineering judgment so the plan leaves nothing to decide. Section 12 records each
+decision and the human-owned actions that remain. Recording a decision does not
+approve a phase gate or perform any human-owned action.
+
+Director decision, 2026-10-10 (third): remove three requirements so the plan
+continues without them. Name clearance, domain registration and package-name
+reservations are not required. Store developer accounts and signing certificates
+are not Phase 0 requirements; they are first needed when Phase 5 uploads builds to
+stores. Incant buys no reference phones: device measurements run on hosted real
+devices in AWS Device Farm, which re-signs iOS test builds with its own
+certificates, so no Apple developer account is needed for them.
+
 Director decision, 2026-10-10: use Claude Opus 5.5 with thinking explicitly set
 to Max for all visual handoffs. Verify model and effort on every new or resumed
 ACP session; do not inherit Default or substitute another level.
@@ -50,13 +70,13 @@ A single application that is a 3D/2D modeling tool, a game engine, and an editor
 
 ### 1.2 Non-negotiable principles
 
-1. **One command bus, many clients.** Every edit, whether from a mouse, a keyboard shortcut, a script, or the agent, is a command on a single bus. There is no GUI-only path and no AI-only path.
+1. **One command bus, many clients.** Every edit to the project, whether from a mouse, a keyboard shortcut, an editor script, or the agent, is a command on a single bus. There is no GUI-only path and no AI-only path. Running the game is not an edit: play mode and shipped games simulate on a native ECS world built from cooked scenes (Section 2.6), and stopping play discards it.
 2. **The project is a text-native, schema'd document.** Scenes, prefabs, materials, graphs, animation state machines, and settings are all human-readable, diffable, and validated against a published schema. Binary data (meshes, textures, audio) lives in referenced asset files, never inline.
 3. **The agent sees what the user sees.** Viewport screenshots, console, profiler, play-test results, and validation errors are all available as tools. No "the AI guessed and hoped."
 4. **Every agent action is an undoable transaction.** The user can review, revert, or amend anything the agent did, with the same history UI used for manual edits.
 5. **Bring-your-own-model.** The user connects their own OpenAI account. We never proxy model calls through our servers by default, and we never store their keys or tokens server-side.
 6. **Dogfood everything.** The launch game is built in the engine, by the team, with the agent. Anything the game needs that the engine lacks is an engine bug.
-7. **Rust core, TypeScript gameplay, web editor chrome.** Chosen for safety, portability, and LLM fluency. Revisit only with strong evidence.
+7. **Rust core, TypeScript gameplay, WebAssembly for hot code, web editor chrome.** Chosen for safety, portability, performance, and LLM fluency. TypeScript is the default for gameplay logic; sandboxed WebAssembly modules, written in Rust first, carry performance-critical gameplay code at native speed on every target, including iOS where JIT compilation is banned. Revisit only with strong evidence.
 8. **Agent-first build with a hard routing rule.** The engine and game are built primarily by Astra running in OpenAI Codex. Any visual work is handed off to Claude 5.5 over ACP (Agent Client Protocol) using the director's already logged-in Claude account. Section 4 defines "visual" precisely. This is a build-time arrangement; the engine's end users still bring their own OpenAI account (Section 3), and the shipped engine never embeds the director's credentials.
 
 ### 1.3 Definition of done
@@ -71,6 +91,12 @@ The project is done when all of the following are true:
 - A new user with an OpenAI account can install the engine, sign in, connect OpenAI, and have a playable prototype from a template with one custom mechanic in under fifteen minutes.
 - Public documentation, a template library, and a sample project gallery exist.
 
+### 1.4 Business model
+
+- **Engine.** The engine, editor, SDKs, templates and online services are open source under MIT OR Apache-2.0, matching Rust and Bevy, and royalty-free: no runtime fees, royalties or revenue share, ever. The repository goes public with the Phase 8 beta. A trademark policy protects the Incant name and logo; contributions use the Developer Certificate of Origin.
+- **Revenue.** Incant Cloud hosts the online services, cloud sync and team collaboration for engine users with usage-based pricing; self-hosting stays free and fully supported. Driftwake is the second revenue source (Section 7.6).
+- **What is never sold.** Model access: the agent stays bring-your-own-model and Incant never resells or meters provider usage. The manual editor is never gated behind an account or payment.
+
 ---
 
 ## 2. Architecture
@@ -80,13 +106,14 @@ The project is done when all of the following are true:
 | Layer | Choice | Why | Fallback |
 |---|---|---|---|
 | Engine core | Rust, built on Bevy (ECS, scheduling, asset system) | Memory safety, cross-compilation to all six targets, active ecosystem | Custom ECS if Bevy's scheduler becomes a bottleneck |
-| Rendering | wgpu, custom render graph on top of Bevy's | Metal, Vulkan, DX12, WebGPU from one codebase | Vulkan-only via ash for desktop high-end tier |
-| Physics | Rapier 3D and Rapier 2D behind a Rust-owned boundary (ADR 0003) | Pure Rust builds on all six targets including the iOS simulator and WASM, where the measured Jolt bindings failed; `enhanced-determinism` for rollback and replay | Jolt through a maintained portable C++ shim if representative game or mobile measurements show a material issue |
+| Rendering | wgpu with a custom render graph; individual passes can use Metal, Vulkan or DX12 directly through wgpu's native interop | Metal, Vulkan, DX12, WebGPU from one codebase, with an escape hatch for features wgpu lacks: vendor upscalers, async compute, hardware ray tracing | Native Metal and Vulkan backends for the high tiers if interop proves insufficient |
+| Physics | Rapier 3D and Rapier 2D behind a Rust-owned boundary (ADR 0003) | Pure Rust builds on all six targets including the iOS simulator and WASM, where the measured Jolt bindings failed. Both native runtime variants enable Rapier's multithreaded solver, which Rapier guarantees bit-identical to its serial path. The fast variant uses hardware math and adds 8-lane SIMD where the target benefits; rollback projects select `enhanced-determinism`, which forces software math and 4-lane SIMD | Jolt through a maintained portable C++ shim if the Driftwake-scale benchmark (6.14) shows a material gap |
 | Audio | Kira plus a thin mixer layer | Pure Rust, good for games | FMOD via FFI for studios who require it |
 | Game UI | Taffy (flexbox layout) plus custom widget tree | Familiar web-style layout, agent writes it easily | None needed |
-| Gameplay scripting | TypeScript on a sandboxed QuickJS runtime, hot reload | LLMs write TS best; sandboxable; users already know it | V8 via deno_core on desktop for perf-heavy projects |
-| Native extensions | Rust plugin ABI with stable C interface | Escape hatch for perf-critical code | None |
-| Project document | Canonical typed JSON with derived JSON Schemas, Loro CRDT in memory (ADR 0008) | Diffable, mergeable, agent-readable; both CRDTs were benchmarked and Loro won | Automerge behind the same document boundary |
+| Gameplay scripting | TypeScript compiled by SWC to QuickJS bytecode in a sandbox, hot reload; in web builds, the browser's own JavaScript engine | LLMs write TS best; sandboxable; users already know it | V8 via deno_core on desktop; ahead-of-time compiled TypeScript if the Phase 1 spike succeeds (decision 18) |
+| Performance scripting | Sandboxed WebAssembly modules, Rust first: JIT with hot reload in the editor, translated to C with wasm2c and compiled into the signed binary at export; browsers run them natively | Native speed inside the sandbox on all six targets, including iOS; deterministic arithmetic for rollback | Rust native plugins with explicit user trust |
+| Native extensions | Rust plugin ABI with stable C interface | Engine extensions and platform integrations that need full native access; gameplay hot code uses WebAssembly modules instead | None |
+| Project document | Canonical typed JSON with derived JSON Schemas, Loro CRDT in memory (ADR 0008) | Diffable, mergeable, agent-readable. In the 10,000-entity benchmark Loro initialized faster while Automerge merged faster with smaller snapshots; per-scene documents and journal compaction address Loro's snapshot cost | Automerge behind the same document boundary |
 | Editor shell | React and TypeScript web UI inside Tauri (ADR 0009) | Fast UI iteration, same UI reused in browser mode | egui native UI |
 | Viewport | Native wgpu surface composited into the Tauri window | Zero-copy rendering | Texture streaming over shared memory |
 | Agent runtime | Local agent loop in the editor process, provider-agnostic | Keeps user data local, supports BYO keys | Hosted agent for teams who opt in |
@@ -94,9 +121,9 @@ The project is done when all of the following are true:
 | Game transport | QUIC via quinn (TLS 1.3, reliable streams, unreliable datagrams, connection migration); WebRTC data channels in browsers | Encrypted and NAT-friendly by default, one code path for reliable and unreliable traffic, survives Wi-Fi to cellular switches | Custom UDP reliability layer over a Noise handshake |
 | Online game services | Rust (axum) plus Postgres: sessions and matchmaking, relay, player identity and cloud saves, dedicated-server allocator; shipped as self-hostable containers | Same stack as accounts; "multiplayer in the box" that Driftwake dogfoods; no third-party runtime dependency | Epic Online Services, Nakama or PlayFab behind the platform-services abstraction |
 | Asset generation | Pluggable providers (image, 3D, audio, animation) | Models change every six months | None |
-| CI/CD | GitHub Actions, self-hosted macOS and Windows runners, device farm | Required for six targets | Buildkite |
+| CI/CD | GitHub Actions, self-hosted macOS and Windows runners, hosted real devices in AWS Device Farm | Required for six targets; real phones without buying or maintaining a device lab | Buildkite; Firebase Test Lab for devices |
 
-Revision 3 added the game transport and online game services rows. Like the stack ADRs, they are engineering proposals until the director reviews them (open decisions 11 and 12). The same revision recorded the physics, project document and editor shell rows as decided in ADRs 0003, 0008 and 0009; those remain engineering decisions pending the director's Phase 0 architecture review.
+Revision 3 added the game transport and online game services rows, decided as decisions 11 and 12. Every row is decided by the director's 2026-10-10 instruction and recorded in its ADR; Phase 0 gate approval remains a separate director action.
 
 ### 2.2 Repository layout (monorepo)
 
@@ -116,16 +143,16 @@ incant/
     incant_text        Fonts, shaping, bidi, line breaking, string tables, locale, IME bridge
     incant_2d          Sprites, atlases, tilemaps, sorting layers, 2D camera and lights
     incant_nav         Navmesh generation, pathfinding, steering, grid navigation
-    incant_script      QuickJS host, TS bindings, hot reload, sandbox
+    incant_script      QuickJS and WebAssembly hosts, TS and Rust SDK bindings, bulk query views, hot reload, sandbox
     incant_net         Transport, sessions, replication, prediction, rollback, authority, determinism toolkit, netsim
-    incant_assets      Cook, stream, hash, cache (CPU only, no editor dependency)
+    incant_assets      Cook (including binary scenes and script bytecode), stream, hash, cache (CPU only, no editor dependency)
     incant_import      Editor and CLI import coordination through the command bus
     incant_input       Fixed-tick input processing, device adapters, recordings
     incant_agent       Agent loop, tool registry, providers, skills
     incant_headless    Headless runner for play-tests and CI
     incant_platform_smoke  Runnable cross-platform probe of the document and Bevy crates
     incant_export      Build pipeline for all targets
-    incant_runtime     The shipped game runtime (no editor)
+    incant_runtime     The shipped game runtime: no editor, document model, CRDT, command bus or agent
   editor/
     app/              Tauri shell
     ui/               Web UI (panels, inspectors, chat, history)
@@ -141,10 +168,11 @@ incant/
     deploy/           Infrastructure as code for every service; never credentials
   sdk/
     ts/               @incant/runtime TypeScript types and helpers
+    rust/             incant-module Rust SDK for WebAssembly modules, generated from the schema registry
     templates/        Starter projects
     skills/           Agent skills and recipes
   games/
-    driftwake/        The launch game
+    core_sample/      Core Sample, the public reference game used by gates and benchmarks
   evals/              In-engine agent eval tasks and recorded results
   platforms/          iOS, Android and web probe projects and packaging
   schemas/            Published JSON Schemas derived from the Rust types
@@ -155,6 +183,8 @@ incant/
   docs/               ADRs, spikes, gate ledgers, generated agent conventions
   tools/
 ```
+
+Driftwake lives in a separate private repository that depends on the engine, from the start of Phase 7 pre-production, because the engine repository becomes public at the Phase 8 beta (Section 1.4).
 
 ### 2.3 The project document model
 
@@ -171,15 +201,26 @@ This is the heart of the system. Treat it as a product in its own right.
 
 - A command is a named operation with typed arguments, a `apply`, an `invert`, and a `describe` for the history panel.
 - Commands compose into transactions. A transaction is atomic and undoable as a unit.
-- The GUI emits commands. Scripts emit commands. The agent emits commands. The headless runner emits commands.
+- The GUI, editor tool scripts, the agent and the headless runner emit commands. Gameplay scripts do not: running game simulation is not a project edit, and Section 2.6 describes its data path.
 - Commands are serialized to a journal, which enables replay, crash recovery, and session sharing.
 
 ### 2.5 Process model
 
 - **Editor process** (Rust): owns the engine, the document, the command bus, the agent loop, and the native viewport surface.
 - **UI process** (Tauri webview): panels, inspector, chat, history, asset browser. Talks to the editor process over a typed IPC channel.
-- **Play-test processes**: spawned headless or windowed runtime instances. They report screenshots and logs back to the editor process.
-- **Browser mode**: engine compiled to WASM runs inside the same web UI. Reduced feature set (no native plugins, no local file system without the File System Access API).
+- **Play-test processes**: spawned headless or windowed runtime instances, built with the project's physics determinism mode. They report screenshots, logs and runtime-state snapshots back to the editor process.
+- **Browser mode**: engine compiled to WASM runs inside the same web UI. Reduced feature set (no native plugins, no Rust module compilation, no local file system without the File System Access API).
+
+### 2.6 Runtime data path
+
+The project document and the command bus serve authoring. Running the game never goes through either. This supersedes the runtime path in ADR 0006, where play sessions simulate by executing commands on a copy of the document and serialize the whole project to JSON for every script tick; the current play session migrates to this model in Phase 1.
+
+- **Cooked scenes.** The cook step turns each scene into a binary, archetype-ordered format that loads into ECS storage without text parsing. Binary loading still checks versions, bounds, references and integrity before publishing a world; it does not reinterpret unchecked bytes as Rust objects. JSON scenes never ship.
+- **Native world.** Play-in-editor, play-test processes, the headless runner and shipped games instantiate a Bevy ECS world from cooked scenes and simulate there, using Bevy's multithreaded scheduler. Stopping play discards the world; the document was never modified.
+- **Direct component access.** TypeScript and WebAssembly scripts read and write component data through typed views into ECS storage, in bulk by default. Spawns, despawns and component additions go through a per-frame command buffer applied at a sync point. Nothing is serialized, journaled or revalidated per tick; validation happens at cook time and on structural changes.
+- **Observation without coupling.** The agent, the inspector, the profiler and headless assertions read runtime state through snapshot queries of the world. Saves serialize the world through the schema registry into a versioned binary format.
+- **Edits during play.** Inspector changes during play are runtime-only. Keeping one is an explicit action that emits a normal command on the bus with normal provenance.
+- **Lean runtime.** `incant_runtime` contains no document model, CRDT, command bus or agent, and parses no JSON on the frame path. A dependency test enforces this on every build.
 
 ---
 
@@ -216,8 +257,8 @@ scope are in docs/spikes/auth-login-repair.md.
 Separate from the OpenAI connection. The engine account provides:
 
 - Identity for licensing, cloud project sync, collaboration invites, and the template gallery.
-- Sign-in methods: email magic link, Google, GitHub, Apple (required for iOS App Store distribution of the editor if we ever ship it there).
-- Implementation: a small Rust service, or a managed provider (Clerk, Auth0, or Cognito) if we decide identity is not core. Recommendation: managed provider for the first two years, with an abstraction so it can be swapped.
+- Sign-in methods: passwordless email code (WorkOS Magic Auth), Google, GitHub, Apple (required for iOS App Store distribution of the editor if we ever ship it there).
+- Implementation: WorkOS AuthKit as the managed identity provider, chosen for passwordless email codes, Google, GitHub and Apple sign-in plus enterprise single sign-on for studios. The editor uses a public WorkOS Connect OIDC application with PKCE; confidential credentials stay in the accounts service. Keep issuer configuration and application-owned identities separate so self-hosted Zitadel can replace it without changing the client protocol if its terms or pricing stop fitting; identity and session migration still requires verification. The accounts service is the Rust (axum) and Postgres service from 2.1, hosted on AWS with the other Incant Cloud services (decisions 3 and 16). Game player identity is separate: the self-hostable player service (Phase 6) uses Steam, Apple and Google sign-in directly, so games never depend on WorkOS.
 
 The engine stores **only metadata** about provider connections server-side: "this user connected OpenAI via OAuth on this date." Never the credential.
 
@@ -238,7 +279,10 @@ The engine stores **only metadata** about provider connections server-side: "thi
 
 - Threat model documented for: stolen keychain entries, malicious project files that contain prompt injection, malicious templates, and malicious scripts.
 - Prompt injection defense: project content shown to the agent is wrapped and labeled as data. The agent cannot execute shell commands on the user's machine, only engine commands and sandboxed scripts.
-- Scripts run in a sandbox with no file system or network access unless the project grants a capability, and the user confirms the grant.
+- Scripts run in a sandbox with no file system or network access unless the project grants a capability, and the user confirms the grant. WebAssembly modules use the same capability model and import only engine-provided functions.
+- Compiling Rust modules can execute code through build scripts and procedural macros. Module builds therefore run offline, against vendored dependencies from an engine-vetted allowlist, with no build scripts or procedural macros outside that allowlist, in a sandboxed compiler process. The Rust toolchain is an optional, pinned, checksum-verified download, never a shell the agent can reach.
+- External penetration test of the editor's network surfaces and every online service before the Phase 8 public beta and again before launch. Critical and high findings block release.
+- QuickJS bytecode and ahead-of-time native WebAssembly artifacts are executable code, not untrusted project assets. Load only artifacts produced by the trusted local cook/compiler or authenticated exports; a content hash alone does not establish that trust. Opening an untrusted project recompiles its source in the sandbox instead of accepting supplied executable caches.
 - Asset imports are parsed with fuzzed, memory-safe parsers. Native plugins require explicit user trust.
 - OpenAI usage policies are surfaced in the connection UI. We do not resell or meter their service.
 
@@ -308,7 +352,7 @@ Repository files that make this work:
 - Astra uses the director's OpenAI account through Codex.
 - Claude uses the director's logged-in Claude Code session. Nothing is stored server-side or in CI.
 - CI never calls either agent. CI runs builds, tests, golden images, device farm, and the in-engine agent eval harness. The eval harness uses dedicated eval provider keys from the CI secrets store, and those keys are only ever used by the eval harness.
-- Human-only: Apple, Google, and Steam developer accounts, signing keys, payment setup, legal filings, age rating submissions, cloud provider accounts and billing for live services, DDoS protection contracts, legal review of the privacy policy, age gates and account deletion flows, and accountability for the on-call rotation.
+- Human-only: Apple, Google, and Steam developer accounts, signing keys, payment setup, legal filings, age rating submissions, cloud provider accounts and billing for live services, DDoS protection contracts, legal review of the privacy policy, age gates and account deletion flows, vendor SDK license agreements (for example NVIDIA DLSS and Intel XeSS), external review contracts, store pricing, and accountability for the on-call rotation.
 
 ### 4.5 Human team
 
@@ -323,7 +367,8 @@ The agents do the building. Humans direct, review, and do what agents cannot.
 | QA and device lab | 0 | 1 | 2 | Physical devices, store-submission dry runs |
 | Audio and composer (contract) | 0 | 0.5 | 1 | |
 | Backend and live operations | 0 | 0.5 | 1 | Owns the online services in production, on-call accountability, load tests and cost; agents triage and fix |
-| **Total** | **1.5** | **6** | **9** | |
+| Community and developer relations | 0 | 0.5 | 1 | Owns Discord, GitHub Discussions, support escalation, moderation and the public beta; agents draft and triage |
+| **Total** | **1.5** | **6.5** | **10** | |
 
 ### 4.6 Operating rules
 
@@ -343,7 +388,7 @@ Baseline (revision 3, 2026-10-09): the dates in the phase headings and in 5.1 ar
 
 | Phase | Baseline window | Actual start | Status on 2026-10-09 |
 |---|---|---|---|
-| 0 | Nov 2026 to Jan 2027 | 2026-10-08 | Spikes done; gate open: signing certificates, staffing, nightly history, live revocation, director approval |
+| 0 | Nov 2026 to Jan 2027 | 2026-10-08 | Spikes done; gate open: staffing, nightly history, live revocation, director approval |
 | 1 | Feb to Sep 2027 | 2026-10-08 | In progress: import and cook pipeline, physics, character movement, input, saves and headless assertions landed |
 | 2 to 9 | As listed below | Not started | Re-baseline at the Phase 1 gate review |
 
@@ -359,7 +404,7 @@ Deliverables:
 - Spike 4: Agent loop against OpenAI with three tools (query scene, patch scene, screenshot) performing a ten-step edit on a sample scene. Measure success rate on twenty scripted tasks.
 - Spike 5: OAuth loopback flow with OpenAI on all three desktop OSes, plus API-key fallback, with keychain storage.
 - Spike 6: Handoff tooling. Astra opens an ACP session to Claude Code using the director's logged-in account, hands off a mock visual task (design the hierarchy panel and return screenshots), and receives the result packet. `AGENTS.md`, `CLAUDE.md`, and `tools/handoff` exist and are used for every spike after this one.
-- Monorepo, CI on all six targets building a hello-world, signing certificates obtained for Apple and Windows.
+- Monorepo and CI on all six targets building a hello-world. Signing certificates and store developer accounts are not Phase 0 requirements (director decision, 2026-10-10); Phase 5 needs them for store uploads.
 - Director, part-time graphics reviewer, and contract arrangements in place for Year 1.
 
 Exit gate:
@@ -383,13 +428,23 @@ Goals: a runtime that can run a real 3D game without an editor.
 
 Deliverables:
 - Render graph with clustered forward+ lighting, PBR materials, shadow cascades, SSAO, bloom, tonemapping, TAA. Mobile tier with reduced features.
-- Asset pipeline: glTF, FBX (via converter), PNG/JPG/EXR, WAV/OGG import. Cook to KTX2 and meshopt. Content-addressed cache. Hot reload of assets.
-- Physics: Rapier 3D and 2D behind a Rust-owned boundary (ADR 0003), colliders, rigid bodies, character controller, raycasts, triggers, deterministic step mode.
+- Shader and pipeline compilation off the frame: WGSL is translated per backend at cook time (MSL, SPIR-V, DXIL/HLSL), driver pipeline caches persist across launches where the backend supports them (Vulkan pipeline caches; Metal binary archives and DX12 pipeline libraries through backend interop), and each level pre-warms the pipeline permutations recorded by headless runs during its load screen. Unrecorded permutations compile asynchronously with a fallback material instead of stalling a frame.
+- Temporal upscaling and dynamic resolution on every tier: a built-in temporal upscaler on all backends and MetalFX on Apple platforms, with frame-time-driven resolution scaling. Mobile renders at reduced internal resolution by default. Vendor upscalers on desktop arrive in Phase 4.
+- Native backend interop in the render graph: a pass can declare that it runs on the underlying Metal, Vulkan or DX12 API through wgpu's interop, for vendor upscalers, async compute on desktop-high, and hardware ray tracing while wgpu's support is experimental. Every interop pass has a portable fallback.
+- Asset pipeline: glTF, FBX (converted with the MIT-licensed ufbx library, so no Autodesk SDK ships), PNG/JPG/EXR, WAV/OGG import. Cook to KTX2 and meshopt. Content-addressed cache. Hot reload of assets.
+- Physics: Rapier 3D and 2D behind a Rust-owned boundary (ADR 0003), colliders, rigid bodies, character controller, raycasts, triggers. Determinism is a per-project setting. Because Rapier selects it at compile time, the export pipeline and play-test processes build the runtime variant the project needs: both native variants enable Rapier's multithreaded solver, which Rapier guarantees bit-identical to its serial path; the fast variant uses hardware math and adds 8-lane SIMD where the target benefits; the deterministic variant uses `enhanced-determinism`, which forces software math and 4-lane SIMD, for rollback and exact cross-platform replays in CI. The current single-threaded deterministic native build gains the multithreaded solver first. Browser builds retain a serial solver until a supported Web Worker pool is available; serial/parallel deterministic parity remains checked across these builds.
 - Audio: mixer with buses, 3D spatialization, streaming for music.
 - Animation: skeletal playback, blend trees, state machines, two-bone IK, root motion.
 - Game UI: flexbox layout, text rendering with font atlases over a shaping stack (cosmic-text: rustybuzz shaping, bidi, Unicode line breaking, font fallback chains for CJK and emoji), a text input widget with IME composition on desktop and the platform on-screen keyboard on mobile, input focus, gamepad navigation.
 - Scripting: full TS SDK covering entities, components, input, haptics, physics queries, navigation, audio, UI, localization, 2D, timers, coroutines. Type definitions generated from the schema registry.
-- Headless runner: run a project for N seconds, capture frames and logs, exit with a status.
+- Bulk script API: scripts can run as systems over queries that read and write whole component columns through typed-array views, so one call updates every matching entity. Per-entity calls remain for convenience; the SDK documentation and agent skills default to the bulk form for anything that runs every tick.
+- Script bytecode: the cook step precompiles every script to QuickJS bytecode, so shipped builds and headless runs parse no TypeScript or JavaScript at startup. Bytecode is tied to the runtime version, produced only by the cook step, and covered by the package's content hashes. The runtime never loads bytecode from project files, mods or the network, because QuickJS does not verify bytecode. Source maps are kept for crash symbolication.
+- Runtime data path (Section 2.6): cooked binary scenes, the native ECS world, direct component access for scripts, the per-frame command buffer, world snapshots for observation, and binary saves. The existing document-backed play session migrates to it.
+- WebAssembly modules: a module host with the same capability model, bulk query views and command buffer as TypeScript; a Rust SDK generated from the schema registry; Wasmtime with JIT and hot reload in the editor and development builds; shipped builds on every native platform translate modules to C with wasm2c, the approach Firefox uses to sandbox libraries, and compile them into the signed binary, which is the only route on iOS. Relaxed SIMD is disabled in rollback projects to keep arithmetic deterministic.
+- Spike: ahead-of-time compilation of typed TypeScript, with Static Hermes as the first candidate and a TypeScript-subset-to-WebAssembly compiler as the alternative. Adopt only if it passes the SDK conformance suite and beats bytecode by a measured margin on the reference phones (decision 18).
+- Profiler: Tracy integration with CPU zones per system and script, GPU timestamp queries, memory and allocation tracking, and on-device capture over the network from phones.
+- Shipping build profile for the runtime: fat link-time optimization, one codegen unit, abort on panic, symbols split for crash reporting. All device performance gates are measured with this profile.
+- Headless runner: run a project for N seconds on the runtime world, capture frames, logs and state snapshots, exit with a status.
 - Input: keyboard, mouse, gamepad, touch with gesture recognition; haptics (gamepad rumble and mobile haptic feedback) through one API.
 - Save system: serialize game state to a versioned format.
 - Navigation: runtime navmesh generation from colliders and meshes (recast-style voxelize, region, contour, polygonize) built in tiles so runtime-assembled rooms rebuild only changed tiles; A* with funnel string-pulling; agent steering with local avoidance; off-mesh links; grid and tilemap navigation for 2D; debug draw. Crowd simulation is out of scope.
@@ -400,6 +455,9 @@ Exit gate:
 - A "Core Sample" test game (third-person character on a terrain with enemies, pickups, UI, music) runs at 60 fps on an M1 MacBook Air, a mid-range Windows laptop, an iPhone 13, and a Pixel 6, written entirely in TypeScript against the SDK with no editor.
 - Headless runner used in CI to play Core Sample and assert on game state.
 - Core Sample's enemies navigate by navmesh, its UI passes pseudo-localization and renders one right-to-left and one CJK locale correctly, and a 2D sample scene (tilemap, sprites, 2D physics) runs on the same four devices.
+- On the iPhone 13 and the Pixel 6, Core Sample's scripts stay within 2 ms per frame at p95 with ten thousand scripted entities, and no gameplay frame exceeds twice the frame budget because of shader or pipeline compilation. Desktop measurements do not count toward this gate.
+- Core Sample runs on the runtime data path: the shipped binary passes the dependency test, and its scripts never serialize world state per tick.
+- A WebAssembly gameplay module runs on all four devices, compiled ahead of time on the iPhone, and its per-frame cost on both phones is recorded against the same system written in TypeScript.
 
 ### Phase 2: Editor and document model (May 2027 to Feb 2028, 10 months, overlaps Phase 1)
 
@@ -411,7 +469,7 @@ Deliverables:
 - Editor panels: hierarchy, inspector (schema-driven, auto-generated for any component), viewport with gizmos (translate, rotate, scale, snapping), asset browser, console, profiler, history.
 - Scene editing: create, parent, duplicate, prefab instancing with overrides, multi-select.
 - Material editor: property-based (node graph arrives in Phase 4).
-- Play-in-editor: press play, the runtime runs in the viewport, pause, step, inspect live state, stop restores the document.
+- Play-in-editor: press play, the runtime world from Section 2.6 runs in the viewport, pause, step, inspect live state, stop discards the world. The document is never modified by play.
 - Project templates: empty, 3D third-person, 2D platformer, top-down, first-person.
 - Settings, project settings, input mapping editor.
 - 2D editing: tilemap painter with autotile rules, sprite and atlas inspector, collider-from-alpha tool.
@@ -423,6 +481,7 @@ Deliverables:
 Exit gate:
 - Core Sample can be rebuilt from an empty project using only the editor in under four hours by someone who has never seen the code.
 - Every editor action is a command on the bus (verified by a test that disables direct document mutation and runs the UI test suite).
+- On a 100,000-entity scene, the editor applies an edit in under 100 ms and keeps the viewport at 60 fps on the M1 MacBook Air.
 - Undo/redo passes a fuzz test of ten thousand random command sequences with document equality checks.
 - The 2D platformer template is rebuilt from an empty project through the editor alone and plays with tilemap collision, sprite animation and a following camera.
 
@@ -435,10 +494,10 @@ Deliverables:
 - Agent loop: planning, tool calls, streaming to chat UI, interruption, approval modes (auto, ask for destructive, ask always).
 - Tool surface v1 (see Appendix A): document query and patch, schema lookup, asset listing, screenshot, console, profiler, play-test, script read/write, validation, search.
 - Context management: project summary, recent history, relevant schemas, and open panels are assembled per turn. Long projects use a maintained project memory file.
-- Skills system: a skill is a markdown playbook plus optional TS helpers. Ship sixteen skills: character controllers (third-person, first-person, 2D platformer, top-down), camera rigs, inventory, dialogue, health and damage, spawners, checkpoints, mobile touch controls, settings menu, main menu, save/load, simple AI (patrol, chase, on the navmesh), day/night cycle, and localize project (drafts translations through the connected provider and flags every string for human review).
+- Skills system: a skill is a markdown playbook plus optional TS helpers. Ship eighteen skills: profile and optimize (reads the profiler, moves per-entity logic to bulk queries and hot loops to a WebAssembly module, and verifies the gain), character controllers (third-person, first-person, 2D platformer, top-down), camera rigs, inventory, dialogue, health and damage, spawners, checkpoints, mobile touch controls, settings menu, main menu, save/load, simple AI (patrol, chase, on the navmesh), day/night cycle, and localize project (drafts translations through the connected provider and flags every string for human review).
 - Eval harness: two hundred scripted tasks with automated graders (document assertions, headless play-test assertions, vision checks). Runs nightly against every supported model. Regressions block release.
 - Chat UI: inline diffs of document changes, clickable entity references, screenshots inline, "revert this turn" button, cost meter.
-- Agent-driven asset generation v1: textures via image models, placeholder meshes via text-to-3D, sound effects via audio models, all through pluggable providers.
+- Agent-driven asset generation v1: textures via image models, placeholder meshes via text-to-3D, sound effects via audio models, all through pluggable providers. Images and texture sets use the user's existing OpenAI connection. For 3D, audio and animation, each phase ships the provider plugin with the highest output-validity pass rate in the eval harness whose terms allow commercial use of outputs and bring-your-own keys (decision 22).
 - Prompt injection defenses and a red-team pass.
 
 Exit gate:
@@ -458,7 +517,8 @@ Deliverables:
 - Terrain: heightmap editing, layered materials, foliage scatter, streaming.
 - Animation tools: retargeting, animation graph editor, IK rigs, timeline for cinematics.
 - VFX: GPU particle system with a graph editor.
-- Global illumination: baked lightmaps and probe volumes for all tiers, screen-space GI for desktop, hardware RT reflections as an optional desktop tier.
+- Global illumination: baked lightmaps and probe volumes for all tiers, screen-space GI for desktop, hardware RT reflections as an optional desktop tier through native backend interop while wgpu ray tracing is experimental.
+- Vendor upscalers on desktop through native backend interop: FSR, DLSS and XeSS, selected automatically by hardware, after the human-owned license review.
 - Lighting for runtime-assembled content: per-template lightmap and probe bakes stored with the template, probe volumes blended across room seams at load, a probe relighting pass on desktop when time of day or destruction changes the lighting, and a mobile path of per-template probes plus analytic lights. Driftwake's room graph is the test case.
 - 2D lighting: normal-mapped sprites, 2D point and spot lights with soft shadows at desktop tier, unlit and vertex-lit at mobile tier.
 - Asset generation v2: image-to-3D with automatic cleanup to engine-ready meshes, texture set generation (albedo, normal, roughness), animation generation from text for humanoid rigs.
@@ -474,15 +534,19 @@ Goals: one-click builds that pass store review.
 
 Deliverables:
 - Export pipeline for Windows (MSIX and portable), macOS (notarized app), Linux (AppImage), iOS (Xcode project generation plus direct archive), Android (Gradle project plus direct APK/AAB), web (WASM plus a hosting bundle).
+- Web builds run TypeScript in the browser's own JavaScript engine, isolated in a worker, instead of QuickJS compiled to WebAssembly; WebAssembly modules run natively in the browser. The shared SDK conformance suite runs against every script host.
+- Profile-guided optimization of the runtime from recorded Core Sample and Driftwake runs on each platform, plus per-platform CPU targets with a baseline fallback.
 - Mobile: touch input layer, safe-area handling, orientation, app lifecycle, battery-aware frame pacing, thermal throttling response, on-device texture compression tiers (ASTC, ETC2).
 - Desktop: Steam integration (achievements, cloud saves, overlay, input), window management, display modes.
-- Steam Deck as a verified-compatibility target: controller glyphs, 1280 by 800 default, on-screen keyboard, suspend and resume, no external launcher; one Deck in the device farm.
+- Steam Deck as a verified-compatibility target: controller glyphs, 1280 by 800 default, on-screen keyboard, suspend and resume, no external launcher; checked in Linux CI at the Deck's resolution and input profile, then confirmed through Valve's Deck Verified review.
 - Video playback through platform decoders (AVFoundation, Media Foundation, MediaCodec, browser video) for WebM/VP9 and MP4/H.264, rendered to a UI texture, with a software VP9 fallback on Linux; for in-game trailers, tutorials and pre-rendered cutscenes.
 - Consoles (Nintendo Switch, PlayStation, Xbox) are out of scope for Engine 1.0 and the Driftwake launch. The export pipeline keeps its platform abstraction so a console port is a 1.x decision; it needs NDA SDKs and developer accounts that only the human team can obtain.
 - Platform services abstraction: achievements, leaderboards, cloud save (Steam Cloud, iCloud and Google Play Saved Games as store-native mirrors; cross-store sync arrives with the Phase 6 player service), IAP (hooks only, not a store), platform friends and invites.
 - Crash reporting and symbolication for all targets.
-- Device farm in CI: ten physical devices across iOS and Android, nightly smoke tests.
+- Device farm in CI: ten hosted real devices across iOS and Android in AWS Device Farm, nightly smoke tests. No devices are bought.
+- Store accounts and signing in place before the first uploads: Apple, Google and Steam developer accounts, and Apple and Windows signing certificates (human-owned).
 - Build size and startup time budgets enforced in CI.
+- Native shipped builds contain precompiled script bytecode and per-backend shaders; no TypeScript, JavaScript source or WGSL is parsed on device. Web exports are the explicit exception: they contain build-transpiled JavaScript for the browser host and WGSL for WebGPU, with compilation and pipeline pre-warming during loading. Pipeline permutation lists are recorded for every level and checked for coverage in CI.
 
 Exit gate:
 - Core Sample ships to TestFlight, Google Play internal testing, and a private Steam app, from CI, with no manual steps beyond pressing a button.
@@ -503,7 +567,7 @@ Deliverables, transport and sessions:
 Deliverables, replication and simulation models:
 - Replication: component-level replication with ownership, interest management, priority and delta compression.
 - Two models on one replication layer: authority with client prediction and reconciliation, and deterministic rollback for small player counts. Server-authoritative and host-authoritative are the same authority code running on a dedicated server or on one player's client.
-- Determinism toolkit for rollback: deterministic physics step (Rapier `enhanced-determinism` per ADR 0003, or Jolt's deterministic mode if the backend changes), a deterministic math library and seeded RNG in the TS SDK, deterministic iteration-order guarantees, per-tick state checksums, a desync report that names the first diverging tick and component path, and a CI job that runs one input script on macOS ARM, Windows x86, Android ARM and iOS and compares checksums. Rollback cross-play between CPU architecture classes is enabled only when that job passes.
+- Determinism toolkit for rollback: the deterministic physics variant selected per project (Rapier `enhanced-determinism` per ADR 0003, or Jolt's deterministic mode if the backend changes), WebAssembly modules as the recommended home for rollback-critical logic, a deterministic math library and seeded RNG in the TS SDK, deterministic iteration-order guarantees, per-tick state checksums, a desync report that names the first diverging tick and component path, and a CI job that runs one input script on macOS ARM, Windows x86, Android ARM and iOS and compares checksums. Rollback cross-play between CPU architecture classes is enabled only when that job passes.
 - Mobile constraints: configurable send rates (20 Hz default on mobile), a data budget of 20 MB per 25-minute run on cellular, battery-aware pacing of network ticks.
 
 Deliverables, services (Rust, axum, Postgres; shipped as container images with a compose file so engine users can self-host):
@@ -517,7 +581,7 @@ Deliverables, services (Rust, axum, Postgres; shipped as container images with a
 
 Deliverables, security and abuse:
 - Encrypted transport everywhere (TLS 1.3 via QUIC, DTLS via WebRTC). Session tickets are short-lived and bound to player and session IDs. Room codes use six symbols from a 32-symbol alphabet with per-address and per-account join rate limits. Service front doors sit behind the provider's DDoS protection; relay nodes never reveal a game host's address.
-- Network message parsers are fuzzed like asset parsers. Hosts and servers validate inputs (speed, cooldown, range); there is no kernel anti-cheat. Co-op has no competitive-integrity requirement, so cheating affects only the cheater's own party. Global leaderboards are out of scope at launch (open decision 17).
+- Network message parsers are fuzzed like asset parsers. Hosts and servers validate inputs (speed, cooldown, range); there is no kernel anti-cheat. Co-op has no competitive-integrity requirement, so cheating affects only the cheater's own party. Global leaderboards are out of scope at launch (decision 17).
 - Report and block for players, enforced in matchmaking.
 
 Deliverables, editor and agent:
@@ -548,6 +612,7 @@ Deliverables:
 - Mobile and desktop input schemes finalized.
 - Friction log: every engine gap found, with a ticket.
 - Analytics dashboards for run completion, death causes, upgrade pick rates and session length, feeding the designer's balance passes.
+- Steam store page live with wishlists open by the end of the phase; devlog and engine case-study posts begin (Section 7.6).
 
 Exit gate:
 - Vertical slice is fun in blind playtests (above 70% "would play more").
@@ -563,7 +628,9 @@ Engine deliverables:
 - Performance pass on all targets. Memory budgets enforced.
 - Documentation site, API reference generated from the schema registry and TS SDK, twenty tutorials, template gallery.
 - Public beta with a thousand invited users. Telemetry opt-in. Weekly releases.
+- Engine repository and documentation go public under MIT OR Apache-2.0 with the beta; Incant Cloud opens to beta users; Discord and GitHub Discussions open with the community lead in place.
 - Engine 1.0 release candidate.
+- Competitive benchmark: Core Sample reimplemented in Unity and Godot by the same team, measured on every reference device for frame time, cold start, memory and build size. Target: Incant within 10 percent or better on each. Publication is subject to each engine's license terms on benchmarks, reviewed by a human.
 - Live-service readiness: load test at twice projected launch concurrency in every launch region, runbooks, status page, alerting, a backup restore drill, a staffed on-call rotation, and cross-version compatibility (current and previous client) tested in CI.
 - Release channels (stable, beta, nightly), a signed editor updater (Tauri updater with a human-held signing key; offline installers stay available), per-project runtime pinning so a shipped game bundles the runtime it was tested with, and a support policy: each 1.x stable receives fixes for twelve months.
 
@@ -572,7 +639,8 @@ Game deliverables:
 - Online: room codes, platform invites, optional account linking for cross-store saves, in-app account deletion and data export, age gate, report and block, forced-update flow.
 - Localization into six languages on the Phase 1 string tables (drafted through the localization skill, human reviewed).
 - Audio: full music and SFX pass.
-- Accessibility: remappable controls, colorblind modes, text scaling, subtitles.
+- Accessibility: remappable controls, colorblind modes, text scaling, subtitles, verified by an external accessibility audit before Phase 9.
+- Playable demo in the June 2029 Steam Next Fest.
 
 Exit gate:
 - Content complete. Alpha milestone: all systems in, all content in rough form.
@@ -584,6 +652,7 @@ Deliverables:
 - Beta: external playtest with five hundred players, balance and bug passes.
 - Platform certification: Apple review, Google Play review, Steam review, age ratings (IARC, ESRB, PEGI).
 - Launch marketing: trailer, store pages, press kit, engine case study showing agent-built content.
+- Store pricing per decision 21, configured by the human team.
 - Engine 1.0 public release the same week as the game.
 - Online launch readiness: services live in all launch regions two weeks before launch, a load test fed by the five-hundred-player beta, an incident drill, and a launch-week on-call schedule.
 - Post-launch plan: two content patches, engine 1.1 roadmap from beta feedback.
@@ -619,6 +688,8 @@ P9        |                               |                             |       
 - Dropping the 2D pipeline from 1.0 saves about two months and removes the 2D platformer and top-down templates.
 - Choosing a 2D game instead of 3D co-op would cut the game production by half but would fail to exercise most of the engine. Not recommended.
 
+Decision: none of these is adopted (decision 27). Browser mode, 2D, screen-space GI and hardware ray tracing stay in 1.0; the agent-first compression in Section 4.6 is the acceleration plan.
+
 ---
 
 ## 6. Workstream detail
@@ -628,26 +699,26 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 ### 6.1 Document model and command bus
 - Owner: engine lead.
 - First milestone: Phase 0 Spike 2.
-- Choices: Loro for the CRDT, chosen after benchmarking Loro and Automerge in Phase 0 (ADR 0008). Canonical typed JSON on disk with a deterministic formatter and derived JSON Schemas; RON was not adopted. Schema in JSON Schema with Rust derive macros generating both the schema and the serializers.
+- Choices: Loro for the CRDT, chosen after benchmarking Loro and Automerge in Phase 0 (ADR 0008). Canonical typed JSON on disk with a deterministic formatter and derived JSON Schemas; RON was not adopted. Schema in JSON Schema with Rust derive macros generating both the schema and the serializers. One CRDT document per scene, loaded lazily, so memory and merge cost scale with open scenes; scale target 100,000 entities per scene, with per-subtree documents as the fallback.
 - Tests: round-trip property tests, CRDT merge fuzzing, undo fuzzing, migration tests for every schema version.
 
 ### 6.2 Rendering
 - Owner: rendering lead.
 - First milestone: Phase 1 clustered forward+ on desktop and mobile tiers.
-- Choices: three quality tiers (mobile, desktop, desktop-high). GPU-driven culling with meshlets on desktop, CPU culling on mobile. Virtual texturing deferred to post-1.0. Nanite-style virtualized geometry explicitly out of scope. The 2D renderer, 2D lights and video textures share the render graph.
-- Tests: golden-image tests per tier per platform, frame-time budgets in CI, shader compile tests across all backends.
+- Choices: three quality tiers (mobile, desktop, desktop-high). GPU-driven culling with meshlets on desktop, CPU culling on mobile. Virtual texturing deferred to post-1.0. Nanite-style virtualized geometry explicitly out of scope. The 2D renderer, 2D lights and video textures share the render graph. Shaders are translated per backend at cook time; pipeline caches persist across launches; levels pre-warm recorded pipeline permutations on load screens. Temporal upscaling with dynamic resolution on every tier. Render-graph passes may use the native API through wgpu interop for vendor upscalers, async compute and ray tracing, always with a portable fallback.
+- Tests: golden-image tests per tier per platform, frame-time budgets in CI, shader compile tests across all backends, a hitch detector that fails any device or headless run where a frame over twice budget coincides with pipeline creation, and permutation-list coverage checks per level.
 
 ### 6.3 Scripting
 - Owner: scripting engineer.
 - First milestone: Phase 0 Spike 3.
-- Choices: QuickJS for portability and sandboxing; V8 optional on desktop. TS compiled with a bundled SWC. Bindings generated from the schema registry so the SDK never drifts. Hot reload preserves entity state where types match.
-- Tests: SDK conformance suite, sandbox escape tests, hot reload state preservation tests, performance tests with ten thousand scripted entities.
+- Choices: QuickJS for portability and sandboxing; V8 optional on desktop. TS compiled with a bundled SWC, then to QuickJS bytecode at cook time. Bindings generated from the schema registry so the SDK never drifts. Hot reload preserves entity state where types match. A bulk query API over typed-array component views is the default for per-tick logic, so script cost scales with systems rather than entities. Scripts get a per-frame time budget of 2 ms at p95 on the reference phones, shown in the profiler and enforced in CI. Scripts access the runtime world directly (Section 2.6), never through the command bus. WebAssembly modules, Rust first, are the native-speed tier: JIT and hot reload in the editor, ahead-of-time native code at export. Web builds run TypeScript in the browser's JavaScript engine. Ahead-of-time TypeScript is a Phase 1 spike (decision 18).
+- Tests: SDK conformance suite, sandbox escape tests, hot reload state preservation tests, bytecode tamper and version-mismatch tests, and performance tests with ten thousand scripted entities measured on the iPhone 13 and the Pixel 6 against the per-frame budget. Desktop benchmarks are informative only. Phase 0 measured one thousand entities on an Apple M5 Pro. The same conformance suite runs against the QuickJS, browser and WebAssembly hosts; module build sandbox tests confirm that disallowed build scripts and procedural macros are refused.
 
 ### 6.4 Editor
 - Owner: editor lead.
 - First milestone: Phase 0 Spike 1.
 - Choices: React inside Tauri (ADR 0009). Schema-driven inspector so new components get UI for free. Panels are plugins so the community can add them.
-- Tests: UI tests driven through the command bus, visual regression on panels, accessibility audit.
+- Tests: UI tests driven through the command bus, visual regression on panels, accessibility audit, and responsiveness on a 100,000-entity scene with virtualized hierarchy, inspector and asset panels.
 
 ### 6.5 AI agent
 - Owner: AI lead.
@@ -664,13 +735,13 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 ### 6.7 Platforms and build
 - Owner: platform lead.
 - First milestone: Phase 0 CI hello-world on six targets.
-- Choices: generate native projects (Xcode, Gradle) rather than hide them, so advanced users can customize. Reproducible builds. Signing in CI with hardware-backed keys. Release channels (stable, beta, nightly) and a signed editor updater; projects pin an engine version range; Steam Deck is a verified-compatibility target; consoles are out of scope for 1.0.
+- Choices: generate native projects (Xcode, Gradle) rather than hide them, so advanced users can customize. Reproducible builds. Signing in CI with hardware-backed keys. Release channels (stable, beta, nightly) and a signed editor updater; projects pin an engine version range; Steam Deck is a verified-compatibility target; consoles are out of scope for 1.0. The runtime ships with a shipping profile (fat link-time optimization, one codegen unit, abort on panic) and profile-guided optimization from recorded runs; the export pipeline links ahead-of-time-compiled WebAssembly modules and selects the physics determinism variant per project.
 - Tests: nightly device farm, size and startup budgets, store-submission dry runs quarterly, Steam Deck smoke run, updater and project-migration tests across the last three stable releases.
 
 ### 6.8 Networking
 - Owner: core engine engineer with netcode experience for the crate; the backend and live-operations engineer for the services (Section 6.10).
 - First milestone: transport, replication and relay working for two clients by Dec 2028 so Phase 7 co-op is not blocked; work may start in Jun 2028 alongside Phase 5.
-- Choices: QUIC via quinn on native targets and WebRTC in browsers, custom UDP layer as fallback (open decision 11). Authority with prediction and deterministic rollback share one replication layer; server-authoritative and host-authoritative are the same authority code in different places. Driftwake's recommended launch topology is host-authoritative over the relay (open decision 10). Relay by default, direct connection opt-in. Deterministic physics step from Rapier's `enhanced-determinism` feature (ADR 0003), or Jolt's deterministic mode if the backend changes. Determinism toolkit in the TS SDK. Protocol versioning with a current-plus-previous compatibility window.
+- Choices: QUIC via quinn on native targets and WebRTC in browsers, custom UDP layer as fallback (decision 11). Authority with prediction and deterministic rollback share one replication layer; server-authoritative and host-authoritative are the same authority code in different places. Driftwake's recommended launch topology is host-authoritative over the relay (decision 10). Relay by default, direct connection opt-in. Deterministic physics step from Rapier's `enhanced-determinism` feature (ADR 0003) in projects that select rollback, or Jolt's deterministic mode if the backend changes; other projects keep the fast physics variant. Determinism toolkit in the TS SDK. Protocol versioning with a current-plus-previous compatibility window.
 - Tests: network simulation suite, desync detection on seeded bugs, determinism checksum CI across the four reference device classes, nightly soak with four bot clients for eight hours, protocol fuzzing, cross-version compatibility tests, mobile network-transition and backgrounding tests on the device farm, relay and sessions load tests, host migration and rejoin tests.
 
 ### 6.9 Accounts and OpenAI integration
@@ -685,12 +756,13 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 - Scope: the sessions, relay, player, analytics and allocator services from Phase 6, the accounts service from Section 3.2, and their production operation for Driftwake.
 
 Hosting and deployment:
-- One managed cloud provider (open decision 16). Containers behind a regional load balancer; Postgres managed by the provider with point-in-time recovery. Infrastructure as code lives in `services/deploy/`. CI deploys through short-lived OIDC credentials from the CI secrets store. No cloud credentials exist in the repo, the editor, the templates or the shipped game.
-- Launch regions: North America east and west, Europe west, Asia-Pacific (Tokyo or Singapore). South America and Oceania are added if beta telemetry shows more than five percent of players with over 120 ms to the nearest relay. Sessions and player run active-active in two regions; relay runs in every region; the allocator is deployed only if Driftwake adopts dedicated servers.
+- AWS (decision 16). HTTP services run on ECS with Fargate behind regional load balancers; relays run on Graviton EC2 instances with public addresses; Postgres runs on RDS Multi-AZ with point-in-time recovery. Shield Standard and AWS WAF protect the front doors; Shield Advanced is added after the first attack that causes more than fifteen minutes of outage. Infrastructure as code in OpenTofu lives in `services/deploy/`. CI deploys through short-lived OIDC credentials from the CI secrets store. No cloud credentials exist in the repo, the editor, the templates or the shipped game.
+- Launch regions: us-east-1 (Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt) and ap-northeast-1 (Tokyo). Singapore, São Paulo and Sydney are added if beta telemetry shows more than five percent of players with over 120 ms to the nearest relay. Sessions and player run active-active in Virginia and Frankfurt; relay runs in every region; the allocator is deployed only if Driftwake adopts dedicated servers.
 - Build-time accounts never become runtime dependencies: deployment never uses the director's Codex or Claude sessions, and self-hosting the services needs no Incant engine account.
 
 Self-hosting for engine users:
-- Every service ships as a container image with a compose file, a configuration reference and a one-page "run it yourself" guide. The Phase 6 exit gate requires a clean-machine self-hosting run. Whether Incant also offers a hosted tier is a business decision tied to open decision 6; the engine never depends on it.
+- Every service ships as a container image with a compose file, a configuration reference and a one-page "run it yourself" guide. The Phase 6 exit gate requires a clean-machine self-hosting run. Incant Cloud hosts the same services for engine users from the Phase 8 beta with usage-based pricing (Section 1.4); the engine never depends on it.
+- Analytics storage: events land in Postgres in time-partitioned tables with hourly aggregates; raw events are deleted after 90 days and aggregates after two years.
 
 Operations:
 - Observability: per-region RTT and loss distributions, relay egress, session durations, matchmaking time, desync incidents, error rates and saturation for every service. Logs carry no player content, addresses are truncated after 24 hours, and the Section 6.9 no-credential test extends to every service.
@@ -711,7 +783,7 @@ Compliance and player safety (legal review is human-owned):
 - Player accounts are optional. Without one, a player gets local saves, store-native cloud saves, join-by-code multiplayer and platform invites. Linking Steam, Apple or Google sign-in enables cross-store saves and friends. Sign in with Apple is offered on iOS whenever any third-party sign-in is.
 - Age gate at first launch. Players under the regional digital-consent age (13 in the United States, 13 to 16 across the EU) get no account linking, no communication features and no telemetry beyond crash reports. Counsel confirms the per-region feature set before beta.
 - In-app account deletion and data export meet Apple App Store guideline 5.1.1(v), Google Play's account deletion requirement, GDPR and CCPA. Privacy policy, terms of service and the telemetry retention schedule are written before the Phase 8 public beta.
-- No voice or free-text chat at launch (open decision 14); pings, emotes and preset phrases only. Report and block exist and are enforced in matchmaking. This keeps store review and moderation obligations small.
+- No voice or free-text chat at launch (decision 14); pings, emotes and preset phrases only. Report and block exist and are enforced in matchmaking. This keeps store review and moderation obligations small.
 - Encryption export compliance declarations for iOS builds use the standard TLS exemption; the platform engineer records them per release.
 
 Editor collaboration: real-time multi-user editing over a collaboration relay is Engine 1.1 scope. Phase 2 single-user sync and journal replay are the 1.0 collaboration story.
@@ -735,6 +807,13 @@ Tests: service load tests at twice projected launch concurrency, chaos tests (re
 - First milestone: Phase 1 shaped text with font fallback and a text input widget with IME.
 - Choices: cosmic-text for shaping, bidi, line breaking and fallback; ICU4X for locale data, plural rules and formatting; string tables as typed document assets with an ICU MessageFormat subset; XLIFF for translator exchange; pseudo-localization as a CI check. The editor UI is English-only in 1.0 and localized in 1.1 on the same tables.
 - Tests: shaping golden images per script (Latin, Arabic, Hebrew, CJK, Devanagari, emoji), IME composition tests on each desktop OS, on-screen keyboard tests on the device farm, string table round-trip and migration tests, a CI check that every user-facing string in Core Sample resolves in every project locale.
+
+### 6.14 Physics
+- Owner: core engine engineer.
+- First milestone: Phase 1 per-project determinism variants with Core Sample on the fast variant.
+- Choices: Rapier 3D and 2D behind the Rust-owned boundary (ADR 0003). Both native variants enable the multithreaded solver, which Rapier guarantees bit-identical to its serial path. The fast variant uses hardware math and adds 8-lane SIMD where the target benefits; the deterministic variant uses `enhanced-determinism`, which forces software math and 4-lane SIMD, and is selected by projects that need rollback or exact cross-platform replays. Stable entity IDs cross the boundary, so a backend change does not touch scripts or documents.
+- Driftwake-scale benchmark, completed before Phase 6 starts: destructible props, five hundred dynamic bodies, four characters and enemy crowds on the mobile and desktop tiers, comparing Rapier fast, Rapier deterministic and Jolt through a maintained C shim. The result updates ADR 0003; the backend changes only on measured evidence (decision 19).
+- Tests: determinism tests per variant, cross-platform checksum comparison for the deterministic variant, per-step budgets on the reference phones, and the benchmark scenes in nightly CI.
 
 ---
 
@@ -777,12 +856,20 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 - 40 minutes of music, roughly 600 sound effects.
 - 6 languages.
 
+### 7.6 Business model, marketing and support
+
+- **Pricing (decision 21).** Desktop: premium at 19.99 USD on Steam, with a free demo. Mobile: free download with one non-consumable full-game unlock at 9.99 USD after the first biome. No ads, consumables, loot boxes or battle pass. Post-launch content patches are free. Purchases are per store; saves sync across stores through the player service, purchases do not.
+- **Repository.** Driftwake moves to its own private repository at the start of pre-production; Core Sample stays public in the engine repository.
+- **Marketing (decision 23).** Steam page with wishlists by the end of Phase 7; devlog and engine case-study posts from Phase 7; playable demo in the June 2029 Steam Next Fest; trailer, press kit and store art in Phase 9, with visual assets routed to Claude per Section 4.2. Wishlists are tracked weekly from the page launch.
+- **Support and community (decision 24).** Engine: GitHub issues and Discussions plus a Discord server from the Phase 8 beta, triaged by agents with the community lead accountable. Driftwake: an in-game bug reporter that attaches logs only with consent and never personal data, a support address answered within two business days, and store review responses. The community lead moderates every channel.
+
 ---
 
 ## 8. Quality, testing, and release engineering
 
-- **CI on every commit:** build all crates, unit tests, schema validation, TS SDK conformance.
-- **Nightly:** full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles, determinism checksum comparison across reference device classes.
+- **CI on every commit:** build all crates, unit tests, schema validation, TS SDK conformance, the runtime dependency test, and a dependency license check (cargo-deny and an npm license checker against an allowlist) that regenerates THIRD_PARTY_NOTICES.md.
+- **Performance gates on every PR touching runtime crates:** a Core Sample run in the shipping profile on a reference desktop and a reference phone, failing on frame-time, script-time or memory regressions over 5 percent, with Tracy captures attached to the PR.
+- **Nightly:** full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles, determinism checksum comparison across reference device classes, script time budget and shader-hitch checks on the reference phones. These run on hosted real devices in AWS Device Farm, using the reference models or the nearest available ones; Incant buys no phones.
 - **Weekly:** store-submission dry run on one platform in rotation, security dependency audit, crash report triage, service load test in one region, backup restore check.
 - **Release trains:** engine beta releases every two weeks during Phase 8; game builds to internal QA daily.
 - **Bug priority:** P0 (data loss, crash on launch, credential exposure), P1 (blocks a workflow), P2 (workaround exists), P3 (cosmetic). P0 and P1 block releases.
@@ -799,9 +886,16 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | OpenAI OAuth not available to third parties when we need it | Medium | Medium | API key path is always available; abstraction supports other providers |
 | OpenAI changes pricing, models, or policy | High | Medium | Provider abstraction, model routing config updated with releases, evals across providers |
 | Tauri plus native viewport is flaky on some platform | Medium | High | Phase 0 spike; fallback to egui-native editor |
-| CRDT performance on large scenes | Medium | High | Phase 0 benchmark; fallback to operational transform or per-subtree CRDTs |
+| CRDT performance on large scenes | Medium | High | Per-scene CRDT documents loaded lazily; 100,000-entity responsiveness in the Phase 2 gate; per-subtree documents as the fallback |
 | Agent quality plateaus below usable | Medium | Fatal | Eval harness from Phase 0, skills to constrain the problem, approval modes, invest in tool ergonomics over prompts |
 | Mobile performance | Medium | High | Mobile rendering engineer from day one, device farm, budgets in CI |
+| Interpreted scripts exceed the frame budget on phones | High | High | Runtime data path without per-tick serialization, bulk query API, build-time bytecode, WebAssembly modules compiled ahead of time for hot code, a 2 ms per-frame script budget enforced on the reference phones |
+| Script hosts diverge in behavior (QuickJS, browser JavaScript, WebAssembly) | Medium | Medium | One SDK surface generated from the schema registry; one conformance suite run against every host; deterministic math in the SDK |
+| Compiling Rust modules runs untrusted code on the user's machine | Medium | High | Offline sandboxed builds, vetted vendored dependencies, no build scripts or procedural macros outside the allowlist, red-team coverage |
+| Native backend interop erodes portability | Medium | Medium | Every interop pass has a portable fallback that golden-image tests cover on all backends |
+| Identity provider changes terms or pricing | Low | Medium | OpenID Connect-only integration; self-hosted Zitadel replacement with identity/session migration tests; game player identity never depends on it |
+| Open-sourcing invites forks or competing hosted services | Medium | Low | Forks are acceptable under the business model; the trademark policy protects the name; Incant Cloud competes on integration with the editor |
+| Shader and pipeline compilation causes gameplay stutter | High | Medium | Cook-time shader translation, persistent pipeline caches, per-level permutation pre-warming, hitch detector in CI |
 | Finding a senior graphics reviewer | Medium | Medium | Part-time or contract in Year 1; contribute to Bevy to build reputation |
 | Bevy breaking changes | High | Medium | Pin versions, upgrade on a schedule, upstream fixes |
 | Store rejection for AI-generated content policies | Low | Medium | Track platform policies, attach provenance and licensing to all assets |
@@ -830,6 +924,10 @@ Tracked continuously from Phase 1 and reviewed at every phase review.
 - Time-to-playable-prototype for a new user (target under fifteen minutes).
 - Agent provenance share in Driftwake (target 60%).
 - Frame time per tier per reference device (targets: 16.6 ms desktop, 16.6 ms mobile high, 33 ms mobile low).
+- Script time per frame on the reference phones (target: 2 ms at p95 in Core Sample and in Driftwake combat).
+- Gameplay frames over twice budget caused by shader or pipeline compilation (target: zero; compilation happens on load screens).
+- Competitive benchmark against Unity and Godot on Core Sample equivalents: frame time, cold start, memory and build size per reference device (target: within 10 percent or better).
+- Editor responsiveness on a 100,000-entity scene (target: edits under 100 ms, viewport at 60 fps on the M1 MacBook Air).
 - Cold start per platform.
 - Build size per platform (targets: under 150 MB mobile base, under 500 MB desktop base).
 - Crash-free sessions (target 99.5% in beta).
@@ -847,46 +945,78 @@ Rough order of magnitude, for planning only. Reflects the agent-first execution 
 
 | Category | Year 1 | Year 2 | Year 3 | Total |
 |---|---|---|---|---|
-| Human salaries and contracts (1.5 / 6 / 9 heads) | 0.4M | 1.3M | 2.0M | 3.7M |
+| Human salaries and contracts (1.5 / 6.5 / 10 heads) | 0.4M | 1.4M | 2.2M | 4.0M |
 | Build agents: Codex usage for Astra, Claude subscription for handoffs | 0.15M | 0.25M | 0.3M | 0.7M |
 | Model usage for the in-engine agent eval harness | 0.1M | 0.3M | 0.3M | 0.7M |
 | Infrastructure, CI, device farm | 0.2M | 0.4M | 0.5M | 1.1M |
 | Live game services: relay, sessions, player, DDoS protection, monitoring, load tests | 0 | 0.05M | 0.2M | 0.25M |
 | Licenses, tools, certificates, stores | 0.1M | 0.1M | 0.2M | 0.4M |
+| External reviews: penetration tests, netcode review, accessibility audit | 0 | 0.05M | 0.1M | 0.15M |
 | Contract art and audio for Driftwake | 0 | 0.3M | 0.6M | 0.9M |
 | Marketing and launch | 0 | 0.1M | 0.8M | 0.9M |
-| Contingency (15%) | 0.15M | 0.4M | 0.75M | 1.3M |
-| **Total** | **1.1M** | **3.2M** | **5.65M** | **9.95M** |
+| Contingency (15%) | 0.15M | 0.45M | 0.8M | 1.4M |
+| **Total** | **1.1M** | **3.4M** | **6.0M** | **10.5M** |
 
-Revision 3 added the live game services line and the backend and live-operations role, raising the total from 9.35M to 9.95M. Post-launch service costs fall outside the 36-month horizon; the run-rate in Section 6.10 (fixed costs plus about a cent per relayed session-hour) is re-estimated from beta telemetry at the Phase 8 gate and funded from game revenue.
+Revision 3 added the live game services line and the backend and live-operations role, raising the total from 9.35M to 9.95M. Revision 5 added the community and developer relations role and the external reviews line, raising it to 10.5M. Post-launch service costs fall outside the 36-month horizon; the run-rate in Section 6.10 (fixed costs plus about a cent per relayed session-hour) is re-estimated from beta telemetry at the Phase 8 gate and funded from game revenue and Incant Cloud.
 
 Figures in USD. The build-agent line is the least certain; it depends on Codex and Claude pricing and limits over three years, and should be re-estimated at every phase gate from actual usage. For comparison, a fully human-staffed version of this plan (15, 29, and 36 heads) was estimated at roughly 23M.
 
 ---
 
-## 12. Open decisions
+## 12. Decisions
 
-Decisions 1 to 9 were to be resolved in Phase 0; `docs/gates/phase0-review.md` records their current disposition. Decisions 10 to 17 concern networking and online services and carry their own deadlines.
+Every decision below was made under the director's instruction of 2026-10-10, unless an earlier date is given. Decisions 18 and 19 are fixed rules whose outcome follows mechanically from measurements; they need no further choice. Recording a decision does not approve a phase gate. The human-owned actions at the end of this section are tasks, not open decisions.
 
-1. Solid vs React for the editor UI. Resolved: React (ADR 0009).
-2. Loro vs Automerge for the CRDT. Resolved: Loro, both benchmarked (ADR 0008).
-3. Managed identity provider vs self-hosted accounts. Open. ADR 0012 separates optional cloud metadata from local provider login; the identity operating choice needs director review before any service is implemented.
-4. RON vs JSON for the on-disk format. Resolved: canonical typed JSON with derived JSON Schemas (ADR 0008).
-5. Whether browser mode is in 1.0 or 1.1. Open. The definition of done includes it in 1.0; the WASM probe is not the delivered browser editor.
-6. Whether to ship the editor itself under an open-source license with a paid cloud tier, or closed with a free tier. Open. This affects hiring, community templates, Bevy upstreaming strategy, and whether Incant hosts services for engine users (decision 16).
-7. Final name for the game, chosen from Appendix D after a trademark, domain, and store search. Open; Driftwake remains a placeholder. The engine name is decided: Incant. Still to do for it: trademark search (USPTO, EUIPO), domain registration, and reserving `incant_*` on crates.io and the `@incant` scope on npm.
-8. Codex execution mode for Astra: cloud tasks only, CLI only, or both. Open in principle; Phase 0 and Phase 1 work has used the local CLI with hosted CI, and no cloud Codex deployment is claimed.
-9. Approval mode per risk level for agent PRs, so the director is not the bottleneck. Largely resolved by the director decisions of 2026-10-08 and 2026-10-09: reversible implementation proceeds autonomously and agents merge reviewed, passing PRs; phase approval, signing, purchases, legal and staffing stay with the director.
-10. Driftwake session topology. Recommended: host-authoritative sessions with client prediction over the relay, desktop host preferred, host migration. Alternative: dedicated servers for every session. Decide by Jun 2028, before Phase 7 pre-production, because it shapes level streaming, enemy ownership and the cost model.
-11. Transport base. Recommended: QUIC via quinn. Alternative: custom UDP reliability layer over a Noise handshake. Decide at Phase 6 start.
-12. Online services. Recommended: the engine's own Rust services, self-hostable, dogfooded by Driftwake. Alternatives: Epic Online Services, Nakama or PlayFab behind the platform-services abstraction. Decide at Phase 6 start.
-13. Driftwake player accounts. Recommended: optional linked accounts for cross-store saves and friends. Alternatives: no accounts (store-native saves only, no cross-store sync) or mandatory accounts. Decide with decision 10.
-14. In-game communication. Recommended: pings, emotes and preset phrases only at launch. Alternatives: text chat or voice chat, each adding moderation, legal and store-review obligations. Decide by Phase 7.
-15. Rollback cross-play scope. Recommended: rollback only within one CPU architecture class unless the determinism CI passes across all four reference device classes; Driftwake does not depend on rollback. Decide at the Phase 6 gate.
-16. Hosting provider, launch regions, and whether Incant offers a hosted services tier for engine users (ties to decision 6). Decide before the Phase 8 beta.
-17. Global leaderboards. Recommended: none at launch. Alternative: server-validated leaderboards, which require run verification. Decide by Phase 7.
+Foundation (originally due in Phase 0):
 
----
+1. **Editor UI framework:** React inside Tauri (ADR 0009).
+2. **CRDT:** Loro, one document per scene, loaded lazily, with journal compaction (ADR 0008). Automerge stays the fallback behind the document boundary.
+3. **Engine accounts:** WorkOS AuthKit as the managed identity provider behind standard OpenID Connect, with self-hosted Zitadel as the protocol-compatible replacement after identity/session migration verification. Game player identity runs in the self-hostable player service with platform sign-ins and never depends on WorkOS (Section 3.2, ADR 0012).
+4. **On-disk format:** canonical typed JSON with derived JSON Schemas (ADR 0008).
+5. **Browser mode:** in 1.0, with a defined scope: open and edit projects, write TypeScript, run the agent, play-test in the browser and export web builds. Rust module compilation, native plugins, native-platform export and file access beyond the File System Access API are desktop-only; prebuilt WebAssembly modules load in the browser. Browsers without WebGPU get a clear unsupported message (ADR 0009).
+6. **Engine license and business model:** open source under MIT OR Apache-2.0, royalty-free, repository public at the Phase 8 beta, revenue from Incant Cloud and Driftwake (Section 1.4).
+7. **Names:** the engine is Incant (decided 2026-10-08). The game is Driftwake. No trademark clearance, domain registration or package-name reservation is required.
+8. **Codex execution mode:** both. The Codex CLI on the director's machine handles work that needs local hardware (macOS and iOS builds, the GPU, the simulator, ACP handoffs) and integration; cloud tasks take parallel crate work that needs only Linux and CI. The work queue lives in the repository so either mode can resume it.
+9. **Approval modes:** settled by the director decisions of 2026-10-08 and 2026-10-09. Reversible implementation proceeds autonomously, agents merge reviewed PRs with passing checks, and phase approval, signing, purchases, legal and staffing stay with the director.
+
+Networking and online services:
+
+10. **Driftwake session topology:** host-authoritative sessions with client prediction over the relay, desktop host preferred, host migration. Dedicated servers remain an engine feature that Driftwake does not use at launch.
+11. **Transport:** QUIC via quinn on native targets, WebRTC data channels in browsers.
+12. **Online services:** the engine's own Rust services, self-hostable and dogfooded by Driftwake.
+13. **Driftwake player accounts:** optional linked accounts (Steam, Apple, Google) for cross-store saves and friends. Without an account, players keep local saves, store-native cloud saves, room codes and platform invites.
+14. **In-game communication:** pings, emotes and preset phrases only. No text or voice chat in 1.0.
+15. **Rollback cross-play:** rollback runs within one CPU architecture class unless the determinism CI passes across all four reference device classes, in which case cross-architecture rollback is enabled automatically. Driftwake does not depend on rollback.
+16. **Hosting:** AWS in us-east-1, us-west-2, eu-central-1 and ap-northeast-1, with OpenTofu for infrastructure. AWS Device Farm provides the hosted real devices for performance CI. Incant Cloud offers the services to engine users from the Phase 8 beta with usage-based pricing (Section 6.10).
+17. **Leaderboards:** none at launch. The first content patch adds friends-only leaderboards through Steam, Game Center and Google Play Games, which need no server-side run verification.
+
+Performance:
+
+18. **Ahead-of-time compiled TypeScript (rule):** adopt it for shipped builds only if the Phase 1 spike passes 100 percent of the SDK conformance suite, runs at least twice as fast as bytecode on the script benchmark on both reference phones, needs no JIT on iOS, adds under 5 MB to the mobile binary, and has an upstream release line with security fixes. Otherwise TypeScript stays on bytecode and WebAssembly modules remain the native-speed tier. The outcome is recorded in ADR 0006 at the Phase 1 gate.
+19. **Physics backend (rule):** keep Rapier unless the Section 6.14 benchmark shows Jolt at least 1.5 times faster in p95 step time on both reference phones at Driftwake scale and a maintained C shim builds for all six targets. If both hold, switch behind the physics boundary before Phase 6. The outcome is recorded in ADR 0003.
+20. **Shipped WebAssembly path:** wasm2c translation compiled into the signed binary on every native platform; Wasmtime with JIT in the editor and development builds; native WebAssembly in browsers (ADR 0006).
+
+Product, business and operations:
+
+21. **Driftwake pricing:** premium 19.99 USD on Steam with a free demo; free mobile download with one 9.99 USD full-game unlock after the first biome; no ads, consumables, loot boxes or battle pass (Section 7.6).
+22. **Asset generation providers:** images and texture sets through the user's OpenAI connection. For 3D, audio and animation, each phase ships the plugin with the highest output-validity pass rate in the eval harness whose terms allow commercial use of outputs and bring-your-own keys (ADR 0013).
+23. **Marketing timeline:** Steam page by the end of Phase 7, Next Fest demo in June 2029, launch campaign in Phase 9 (Section 7.6).
+24. **Support and community:** GitHub and Discord for the engine from the Phase 8 beta; in-game bug reporter and a two-business-day support address for Driftwake; one community lead accountable (Sections 4.5 and 7.6).
+25. **External reviews:** penetration tests before the Phase 8 beta and before launch, a netcode review at the Phase 6 gate, and an accessibility audit before Phase 9.
+26. **FBX conversion:** ufbx, MIT-licensed, so the Autodesk FBX SDK and its redistribution terms never enter the engine.
+27. **Acceleration options:** none adopted (Section 5.2).
+
+Human-owned actions (tasks with deadlines, not decisions):
+
+- **Phase gate approvals:** the director, at each gate.
+- **Store accounts and signing, before Phase 5 store uploads:** Apple, Google and Steam developer accounts; Apple and Windows signing certificates.
+- **Staffing:** the Year 1 graphics reviewer and contracts, then the roles in Section 4.5 on their schedule.
+- **Cloud and identity accounts:** the AWS organization with billing before the first hosted device runs or Phase 2 cloud sync work, whichever comes first; the WorkOS account before Phase 2 cloud sync work.
+- **Vendor SDK licenses, before Phase 4 integration:** NVIDIA DLSS and Intel XeSS.
+- **External review contracts:** netcode review before the Phase 6 gate; penetration test and accessibility audit before the Phase 8 beta and Phase 9 respectively.
+- **Legal, before the Phase 8 beta:** trademark policy, privacy policy, terms for Incant Cloud and Driftwake, the per-region age-gate feature set, the account deletion review, and the benchmark publication review.
+- **Store setup and launch:** Steam page publication and pricing in Phase 7; age ratings and store submissions in Phase 9.
+- **Operations:** on-call accountability from the Phase 8 beta.
 
 ## Appendix A: Agent tool surface v1
 
@@ -905,6 +1035,7 @@ Assets:
 
 Scripts:
 - `script.read(id)`, `script.write(id, source)` (destructive), `script.typecheck(id)`, `script.list_errors()`.
+- `module.read(id)`, `module.write(id, source)` (destructive), `module.build(id)` compiles a Rust WebAssembly module in the sandboxed compiler and returns diagnostics.
 
 Perception:
 - `view.screenshot(camera, size)` returns an image.
@@ -914,7 +1045,7 @@ Perception:
 
 Play-test:
 - `play.run(seconds, inputs_script, cameras)` runs headless, returns screenshots at intervals, logs, final state snapshot, and assertion results.
-- `play.state_query(path)` during a live play session.
+- `play.state_query(path)` reads a snapshot of the runtime world during a live play session.
 
 Network:
 - `net.simulate(profile)` applies a latency, jitter, loss and bandwidth profile to play-in-editor and headless runs.
@@ -944,6 +1075,7 @@ Project
   scenes: [SceneRef]
   assets: [AssetRef]
   scripts: [ScriptRef]
+  modules: [ModuleRef]
   skills: [SkillRef]
   memory: MemoryDoc
   string_tables: [StringTableRef]
@@ -968,6 +1100,7 @@ Component (examples)
   Material { shader: AssetRef | graph: ShaderGraph, params: {...} }
   RigidBody { kind, mass, collider: ColliderShape, layers }
   Script { source: ScriptRef, props: {...} }
+  Module { source: ModuleRef, systems: [SystemName], props: {...} }
   AnimationGraph { graph: AnimGraph, params }
   Replicated { owner, mode: authority|rollback, fields, relevance, priority }
   Predicted { fields, reconcile: snap|smooth }
@@ -1004,10 +1137,13 @@ Component (examples)
 - **Navmesh:** a walkable-surface mesh generated from level geometry that agents find paths over.
 - **String table:** a typed document asset mapping string keys to per-locale text with plural and select rules.
 - **Pseudo-localization:** replacing every string with a lengthened, accented variant to find truncation, hard-coded text and shaping bugs before real translation.
+- **Runtime world:** the native ECS world that play mode, play-tests and shipped games simulate on, built from cooked scenes and discarded when play stops. It never touches the project document or the command bus.
+- **WebAssembly module:** a sandboxed gameplay module, written in Rust first, that runs with a JIT in the editor and as ahead-of-time native code in shipped games.
+- **Temporal upscaling:** rendering at a lower internal resolution and reconstructing a full-resolution image from previous frames.
 
 ## Appendix D: Name shortlist
 
-Registry columns show whether the exact single word is free on crates.io and npm as of 2026-10-08. A taken single word is not disqualifying, since crates and packages will be prefixed (`incant_core`, `@incant/runtime`). Before committing to any name, run a trademark search (USPTO, EUIPO), check domains, and search Steam, the App Store, and Google Play.
+Registry columns show whether the exact single word is free on crates.io and npm as of 2026-10-08. A taken single word is not disqualifying, since crates and packages will be prefixed (`incant_core`, `@incant/runtime`).
 
 ### Engine
 
@@ -1026,7 +1162,9 @@ Registry columns show whether the exact single word is free on crates.io and npm
 
 Avoid: Forge (Minecraft Forge, Autodesk Forge), Lumen (Unreal), Cinder (creative coding framework), Quill (editor library), Loom (video), Mythos and Fable (Anthropic model names).
 
-### Launch game (alternatives to Driftwake)
+### Launch game (the shortlist Driftwake was chosen from)
+
+Driftwake is the decided name (decision 7).
 
 | Name | Feel | crates.io | npm |
 |---|---|---|---|
