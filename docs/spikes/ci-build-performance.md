@@ -1,7 +1,8 @@
 # CI build performance
 
 Measured on 2026-10-10. This changes build reuse, not runtime performance or
-phase-gate evidence. Hosted results for the revised workflows remain pending.
+phase-gate evidence. The first cold hosted results and a subsequent local
+feature-graph refinement are recorded below; hosted warm results remain pending.
 
 ## Baseline
 
@@ -197,3 +198,52 @@ is not treated as deletion evidence. The 5.33 GiB inventory leaves about 4.67 Gi
 of initial headroom under the 10 GiB cap; future cache publication can still
 cause eviction. No broad cache patterns, settings, dispatches or cancellations
 were used.
+
+## Preserve the workspace graph when selecting tools
+
+The first cold [PR #48 macOS check](https://github.com/snowdamiz/incant/actions/runs/38079748085)
+passed in **33m58s execution**, with 2m30s queued. Normal release tests took
+13m04s, the exact 44 baseline GPU tests 1m35s, and shipping 2m09s. The preceding
+PR #47 check executed for 40m57s. These are adjacent revisions on separate hosted
+runners, not a controlled speedup measurement. Rust cache restore missed; the
+successful job published a 1,541,663,384-byte dependency archive in 41 seconds.
+
+The same log shows remaining shifted compilation: editor/headless took 4m28s
+with 69 compile events, cook_scene 1m33s with 63, and collaboration 2m17s with 87.
+The GPU call rebuilt only the editor (37.64s), so its reduction cannot be counted
+as an equal reduction in total time. Khronos validation still took 2m49s and
+compiled 143 crates; that separate graph remains a possible later improvement.
+
+A same-head local experiment at `0b501e9` compared the combined package selection
+with `--workspace`, keeping every explicit binary/example selector and the
+required `incant_editor/custom-protocol` feature. Cargo's JSON artifact messages
+were compared against `cargo test --workspace --release --locked --no-run` by
+exact output filenames, retaining multiple host/target variants of a dependency.
+
+| Selection | External library/proc-macro artifacts | Exact test-artifact matches | Variants absent from test graph |
+| --- | ---: | ---: | ---: |
+| Four selected packages | 656 | 611 | 45 |
+| Workspace, same four targets | 658 | 656 | 2 |
+
+The two necessary differences are `tauri` and `tauri_macros` with
+`custom-protocol`. Package selection additionally changes cryptography, Loro,
+Rapier, image and Tauri dependency fingerprints. Workspace selection emits only
+the four requested executables: editor, headless, cook_scene and collaboration.
+Desktop's three explicit targets likewise produce only its requested tools.
+It does not build every workspace binary/example or execute fewer tests.
+
+In the existing local target directory, the first workspace-selected build took
+24.46 seconds and rebuilt only Tauri and the editor. The package-selected graph
+was already warm (0.37s); these wall times do not establish a cold speedup.
+The subsequent test no-run reference completed in 0.31s without rebuilding;
+desktop's workspace-selected three-target build took 0.24s with no rebuild.
+The two workflow build commands now select the workspace to retain this reuse.
+
+After the refinement, all 18 direct schema/evaluation/collaboration/gameplay
+commands passed in 20.32s, with schemas unchanged. Fresh shipping verification
+passed in 29.37s, including source-free execution, abort behavior and matched
+symbols. The preceding unchanged-source suite passed 352 normal and all 44 exact
+GPU tests; the artifact comparison confirms their graph remains reusable.
+Actionlint v1.7.12 and `git diff --check` pass. Hosted Windows/Linux/macOS results
+for this final selector refinement remain to be measured. Shipping still has an
+independent fresh target directory and unchanged provenance checks.
