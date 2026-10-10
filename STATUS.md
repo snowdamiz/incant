@@ -68,7 +68,9 @@ within its documented workload.
   suite to 294 passing tests. Clippy, both public navigation/steering saved
   workflows and native packaging pass. No script limit or capability changed;
   sleep/load sensitivity remains open. Hosted checks and dependency merges are
-  pending. See [script diagnostics](docs/spikes/script-diagnostics.md).
+  pending. At `bb8b597`, all 296 Rust tests, Clippy, both public saved workflows
+  and native packaging pass with the final steering correction; its rendered
+  review passes too. See [script diagnostics](docs/spikes/script-diagnostics.md).
 
 - Authored off-mesh links support directed/bidirectional gaps, enable toggles,
   costs, endpoint validation and per-leg route metadata through shared commands.

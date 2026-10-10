@@ -44,6 +44,6 @@ allocation failure. No visual surface changes and no phase-gate approval.
 
 At `bb8b597`, the near-head-on steering correction passes all 296 Rust tests and
 Clippy, both public steering/off-mesh repeat-and-save workflows and unsigned
-native packaging. Its final rendered review and updated hosted checks remain
-pending. The diagnostics runtime still uses wall-clock execution limits; the
+native packaging. The final steering rendered review passes; updated hosted
+checks and dependency merges remain pending. The diagnostics runtime still uses wall-clock execution limits; the
 separate CPU-budget increment changes that accounting.
