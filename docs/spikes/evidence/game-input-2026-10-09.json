@@ -1,0 +1,123 @@
+{
+  "source_commit": "fad12586c0203f3cf5617112d841631b6bdf77f2",
+  "base": "8cea975ef2cef88ce990c27e7a9d4b9952100d59",
+  "scope": "Normalized fixed-tick device events, sandbox input, bounded headless replay and saved-game seeking; live OS/browser adapters remain open",
+  "checks": {
+    "rust_tests": 190,
+    "new_behavior_tests": 18,
+    "ui_tests": 315,
+    "tool_tests": 5,
+    "workspace_clippy": "passed",
+    "fmt": "passed",
+    "generated_contracts": "passed",
+    "strict_typescript": "passed",
+    "native_release_build_and_package": "passed"
+  },
+  "public_cli": {
+    "passed": true,
+    "strict_typescript": true,
+    "rendering": false,
+    "recorded_inputs": [
+      "keyboard",
+      "mouse",
+      "gamepad",
+      "touch"
+    ],
+    "actual_character_jump_and_wall_contact": true,
+    "save_resume_mid_jump_exact": true,
+    "repeat_exact": true,
+    "final_position": [
+      1.9799888134002686,
+      0.8191448450088501,
+      0.10583171993494034
+    ],
+    "script_state": {
+      "clicks": 1,
+      "grounded": true,
+      "isolated": true,
+      "jumps": 1,
+      "maxY": 2.0525166988372803,
+      "presses": 1,
+      "taps": 1,
+      "ticks": 180,
+      "vy": 0,
+      "wheel": 2,
+      "yaw": 0.02
+    },
+    "author_files_unchanged": {
+      "game.incant.json": "409c32ec96c42421d36536bfac0b4207c175f5da2f61e1f5ad125537818fd63e",
+      "history.jsonl": "b5995a653adbc7240718c79fad14b263d70159b498f87277dcba92275723de2b",
+      "input.json": "67f232410d648085ffa98a833c2ec624e2c2845128f5a3ca16d89b0695a6d7e1"
+    },
+    "binary_sha256": "fcbea6a34f6694554ba87c275b384faa2df49595de62f10a51777fa2aa718e31",
+    "live_device_adapters": false
+  },
+  "save_regression": {
+    "passed": true,
+    "strict_typescript": true,
+    "rendering": false,
+    "steps": [
+      19,
+      41
+    ],
+    "full_state_equal": true,
+    "nested_state_and_runtime_spawn_delete_preserved": true,
+    "resumed_logs_equal_to_uninterrupted_suffix": true,
+    "second_save_reopened": true,
+    "author_files_unchanged": {
+      "game.incant.json": "c64037262efaaa3d45dcdd04dec54ae28cd50aae6ed8d4f9621791edff03b9a2",
+      "history.jsonl": "9ca5f605c991bd54faee5e3918c9e7720237b82457c4e54a5ebe376231c2bcc0"
+    },
+    "binary_sha256": "23e1e9c5ae69d202d506006e627debb0553733fdafaefd5e3e0fb2ec83c8bcdd"
+  },
+  "character_regression": {
+    "passed": true,
+    "public_rpc": true,
+    "strict_typescript": true,
+    "wall_position": [
+      1.5899943113327026,
+      0.9091004729270935,
+      -9.103992852033116e-06
+    ],
+    "script_state": {
+      "grounded": true,
+      "jumped": true,
+      "landed": true,
+      "maxY": 2.225309371948242,
+      "tick": 360,
+      "vertical": 0
+    },
+    "repeated_final_state_exact": true,
+    "author_files_unchanged": {
+      "game.incant.json": "379a6dec9b2bf5a6e120837ea18a2d232712e08df443e4e87750fe73a3345c63",
+      "history.jsonl": "ccaf56c351d649f49d6a9e16f5ac5dd0d1aadaf2813cc8f989f87ffc1a79062e"
+    },
+    "physical_device_gate": false
+  },
+  "native_binary_sha256": "ada3012f2944b35a36b13de9a8ed0b9fbb50b50cf47160d696813808c2334fa7",
+  "platform_smoke": {
+    "macos_arm64": "passed with normalized synthetic events",
+    "pinch_scale": 2,
+    "pinch_rotation": 1.5707963267948966,
+    "replay_equal": true,
+    "focus_releases_controls": true,
+    "live_device_adapter": false
+  },
+  "capture_constraint": {
+    "computer_use": false,
+    "new_local_captures": false,
+    "local_ignored_gpu_tests": "not rerun during capture pause"
+  },
+  "pending": [
+    "hosted checks",
+    "reviewed merge"
+  ],
+  "not_claimed": [
+    "OS/browser event adapters or live hardware",
+    "input action mapping/dead zones/calibration/rumble",
+    "text and IME input",
+    "native play controls",
+    "mobile lifecycle integration",
+    "Phase 1 input completion"
+  ]
+}

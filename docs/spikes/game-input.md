@@ -93,3 +93,5 @@ gamepad calibration/dead zones, configurable action maps, rumble, native play
 controls and mobile lifecycle integration remain open. This increment is the
 shared runtime and replay path, not completion of Phase 1 input. No visual changes
 or new local captures were made during the director's computer-use pause.
+
+Machine-readable evidence: [game-input-2026-10-09.json](evidence/game-input-2026-10-09.json).
