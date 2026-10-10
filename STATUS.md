@@ -74,6 +74,12 @@ within its documented workload.
   authenticated export loading are still open. See the
   [native script audit](docs/spikes/native-script-columns.md).
 
+  Direct iOS simulator and Android native-host compilation also pass after
+  enabling target-specific QuickJS binding generation. Existing desktop features
+  remain unchanged, and the platform workflow now checks the host separately
+  from its smoke apps. These are compile checks, not mobile script execution or
+  device performance evidence.
+
 - CI build reuse now keeps the ignored GPU suite on the workspace feature graph,
   combines macOS editor/headless builds and caches Rust dependencies. The measured
   baseline is a 38m15s median PR check, dominated by compilation; repeated Windows

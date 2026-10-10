@@ -14,3 +14,8 @@ ulid.workspace = true
 
 [target.'cfg(any(unix, windows))'.dependencies]
 cpu-time.workspace = true
+
+# This pinned QuickJS release has no bundled iOS/Android bindings. Generate
+# them from the actual SDK/NDK headers at build time.
+[target.'cfg(any(target_os = "ios", target_os = "android"))'.dependencies]
+rquickjs = { workspace = true, features = ["bindgen"] }

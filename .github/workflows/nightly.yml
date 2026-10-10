@@ -1,7 +1,7 @@
 name: Six platform probes
 on:
   pull_request:
-    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_types/**', 'crates/incant_runtime/**', 'crates/incant_cook/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', '.cargo/**', 'Cargo.lock', '.github/workflows/nightly.yml']
+    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_types/**', 'crates/incant_runtime/**', 'crates/incant_script/**', 'crates/incant_cook/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', '.cargo/**', 'Cargo.lock', '.github/workflows/nightly.yml']
   schedule: [{cron: '30 6 * * *'}]
   workflow_dispatch:
 permissions:
@@ -76,6 +76,8 @@ jobs:
       - run: tools/platforms/ios.sh simulator
       - run: cargo check -p incant_audio --features device --target aarch64-apple-ios-sim --locked
       - run: cargo check -p incant_runtime --target aarch64-apple-ios-sim --locked
+      # Compile the native QuickJS host too; the smoke app does not link it yet.
+      - run: cargo check -p incant_script --target aarch64-apple-ios-sim --locked
       - run: python3 tools/platforms/ios-check.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with: {name: hello-ios-simulator, path: artifacts/ios-simulator, if-no-files-found: error}
@@ -102,6 +104,11 @@ jobs:
       - run: ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.13004108" tools/platforms/android.sh
       - run: ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.13004108" cargo ndk -t arm64-v8a check -p incant_audio --features device --locked
       - run: cargo check -p incant_runtime --target aarch64-linux-android --locked
+      # QuickJS has C sources, so this check needs the installed NDK toolchain.
+      - name: Compile the native QuickJS host for Android
+        run: |
+          INCANT_SCRIPT_NDK="$ANDROID_HOME/ndk/28.0.13004108"
+          ANDROID_NDK_HOME="$INCANT_SCRIPT_NDK" LIBCLANG_PATH="$INCANT_SCRIPT_NDK/toolchains/llvm/prebuilt/linux-x86_64/lib" cargo ndk -t arm64-v8a check -p incant_script --locked
       - name: Execute native probe in a disposable Android emulator
         run: |
           test -c /dev/kvm

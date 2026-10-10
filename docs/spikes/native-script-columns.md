@@ -217,3 +217,43 @@ the fresh shipping manifest/archives are retained in the ignored
 `artifacts/native-host-publication/` directory. Native-script-only standalone
 evidence remains linked from the structural audit. Hosted checks on the new PR
 remain separate from these local results.
+
+## Native mobile compilation
+
+The platform smoke applications do not yet link `incant_script`. A direct mobile
+check exposed missing bundled bindings in pinned `rquickjs-sys` 0.14.0 for both
+iOS and Android. The native host now enables the supported `bindgen` feature only
+for `target_os = "ios"` or `"android"`; its added build-time resolutions are pinned
+in Cargo.lock. The engine/QuickJS versions and runtime source remain unchanged.
+
+Local compilation passes for `aarch64-apple-ios-sim` using Xcode 27.0 (27A266a),
+iPhoneSimulator SDK 27.0, and for `aarch64-linux-android` using installed NDK r28c
+28.2.13676358 with its API-21 clang/ar and sysroot headers. The Android check uses
+explicit target compiler/archive/linker variables plus target-specific
+`BINDGEN_EXTRA_CLANG_ARGS`; no local cargo-ndk installation is required. Both use
+Rust 1.99.0 and two Cargo jobs. The local NDK differs from hosted CI's pinned
+28.0.13004108, which remains a separate compile check.
+
+The existing iOS and Android jobs now compile `incant_script` explicitly, and
+`crates/incant_script/**` triggers that workflow without removing existing paths.
+Android uses installed cargo-ndk 4.1.2, which configures bindgen sysroot/include
+arguments automatically, plus the pinned NDK's host libclang. This is verified in
+the released cargo-ndk 4.1.2 source (`src/cargo.rs`); no extra compiler download or
+global bindgen feature is introduced. Browser scripts remain a separate backend;
+the web job is not made dependent on QuickJS.
+
+Cargo's resolved feature graph confirms that ordinary macOS/Windows/Linux native
+targets retain their existing QuickJS features and do not enable bindgen. Mobile
+targets enable it. After the manifest/lockfile change, all 373 workspace tests,
+workspace all-target Clippy and the authoring-free dependency guard pass again.
+All existing lockfile package versions/checksums are preserved; nine build-time
+or optional package resolutions are added, including bindgen 0.72.1 and clang-sys
+1.9.1. Actionlint passes for the updated platform workflow.
+These are compile checks only: no mobile VM execution, ABI integration with a
+packaged app, reference-phone performance, or phase-gate completion is claimed.
+Logs are `/tmp/incant-native-host-publication-ios-script-bindgen.log` and
+`/tmp/incant-native-host-publication-android-script.log`. The locked iOS repeat is
+`/tmp/incant-native-host-publication-ios-script-locked.log`; desktop and feature
+graph results are `/tmp/incant-native-host-mobile-workspace.log`,
+`/tmp/incant-native-host-mobile-clippy.log` and
+`/tmp/incant-native-host-mobile-features.log`.
