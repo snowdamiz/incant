@@ -53,6 +53,12 @@ within its documented workload.
 
 ## Active work
 
+- Native scene audio migration has typed version-3 declarations, cooked binary
+  IDs, ECS audio components, final-graph structural validation and explicit
+  unsupported cursor saves. Scoped tests and Clippy pass; host clip/mixer
+  integration and full verification are still in progress. See
+  [native scene audio](docs/spikes/native-scene-audio.md).
+
 - Native cooked 3D rigid bodies, colliders and angular velocity now run in the
   disposable ECS world through a document-free solver backend, typed structural
   commands and direct numeric updates that preserve sleeping bodies. Whole-batch

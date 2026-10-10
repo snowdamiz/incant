@@ -4,7 +4,7 @@ use crate::{CookedEntity, CookedScene, SceneError, StableId};
 use bevy_ecs::prelude::*;
 use glam::DMat4;
 use incant_types::{Transform, Velocity};
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use thiserror::Error;
 
 #[derive(Component)]
@@ -59,6 +59,8 @@ pub struct NativeWorld {
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_failed: bool,
     pub(crate) physics_used: bool,
+    pub(crate) audio_used: bool,
+    pub(crate) audio_ids: BTreeSet<StableId>,
     pub(crate) entities: BTreeMap<StableId, Entity>,
     pub(crate) parents: BTreeMap<StableId, Option<StableId>>,
     scene_id: StableId,
@@ -73,6 +75,7 @@ impl NativeWorld {
 
     pub fn new(scene: CookedScene) -> Self {
         let physics = scene.physics.clone();
+        let audio = scene.audio.clone();
         let mut solver = incant_physics_runtime::PhysicsRuntime::default();
         let by_id: BTreeMap<_, _> = scene.entities.iter().map(|e| (e.id, e)).collect();
         for declaration in &physics {
@@ -116,6 +119,8 @@ impl NativeWorld {
             physics: solver,
             physics_failed: false,
             physics_used: !physics.is_empty(),
+            audio_used: !audio.is_empty(),
+            audio_ids: BTreeSet::new(),
             schedule,
             entities,
             parents,
@@ -123,10 +128,60 @@ impl NativeWorld {
             tick: 0,
             tick_rate: scene.tick_rate,
         };
+        for node in audio {
+            result.install_audio(node.entity, Some(node));
+        }
         for declaration in physics {
             result.install_physics(declaration);
         }
         result
+    }
+
+    /// Bounded typed audio view over committed ECS values. No document, JSON,
+    /// project copy or mixer handle; listeners/sources see derived world poses.
+    pub fn audio_nodes(
+        &self,
+    ) -> impl ExactSizeIterator<Item = (&crate::CookedAudio, [[f64; 4]; 4])> {
+        self.audio_ids.iter().map(|id| {
+            let handle = self.entities[id];
+            (
+                self.world
+                    .get::<crate::CookedAudio>(handle)
+                    .expect("audio node"),
+                self.world
+                    .get::<Global>(handle)
+                    .expect("audio pose")
+                    .0
+                    .to_cols_array_2d(),
+            )
+        })
+    }
+
+    /// Compose local rotations without inherited scale/shear. Intended for the
+    /// single listener: visits its ancestor chain without allocation. Positions
+    /// still use the committed world matrix from audio_nodes.
+    pub fn world_rotation(&self, id: StableId) -> Option<[f64; 4]> {
+        let mut next = Some(id);
+        let mut rotation = glam::DQuat::IDENTITY;
+        while let Some(id) = next {
+            let local = self.world.get::<Local>(*self.entities.get(&id)?)?;
+            rotation =
+                (glam::DQuat::from_array(local.0.rotation).normalize() * rotation).normalize();
+            next = self.parents[&id];
+        }
+        Some(rotation.to_array())
+    }
+
+    pub(crate) fn install_audio(&mut self, id: StableId, node: Option<crate::CookedAudio>) {
+        let mut entity = self.world.entity_mut(self.entities[&id]);
+        if let Some(node) = node {
+            self.audio_used = true;
+            self.audio_ids.insert(id);
+            entity.insert(node);
+        } else {
+            self.audio_ids.remove(&id);
+            entity.remove::<crate::CookedAudio>();
+        }
     }
 
     pub fn scene_id(&self) -> StableId {

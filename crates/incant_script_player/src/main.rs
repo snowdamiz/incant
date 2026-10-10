@@ -38,6 +38,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // format/count limits. This is a player input cap, not an expanded format.
     const MAX_SCENE_BYTES: u64 = 128 * 1024 * 1024;
     let scene = incant_runtime::CookedScene::from_bytes(&read_bounded(&args[0], MAX_SCENE_BYTES)?)?;
+    if !scene.audio().is_empty() {
+        return Err("this script probe has no audio host; use the native scene audio host".into());
+    }
     let ticks: u64 = args[1].parse()?;
     if ticks > 10_000_000 {
         return Err("tick count exceeds player limit".into());

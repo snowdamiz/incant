@@ -1,7 +1,10 @@
 //! Authoring-side scene cooking. The runtime depends on neither this crate nor
 //! incant_doc. Unsupported components fail explicitly until their migration.
 use incant_doc::{Project, Transform, Velocity};
-use incant_runtime::{CookedEntity, CookedPhysics, CookedScene, SceneError, StableId};
+use incant_runtime::{
+    CookedAudio, CookedEntity, CookedPhysics, CookedScene, NativeAudioBus, NativeAudioSource,
+    SceneError, StableId,
+};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -31,6 +34,7 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
         .ok_or_else(|| CookError::MissingScene(scene_id.into()))?;
     let mut entities = Vec::with_capacity(scene.entities.len());
     let mut physics = Vec::new();
+    let mut audio = Vec::new();
     for entity in scene.entities.values() {
         for component in entity.components.keys() {
             if ![
@@ -39,6 +43,9 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                 "RigidBody",
                 "Collider",
                 "AngularVelocity",
+                "AudioBus",
+                "AudioSource",
+                "AudioListener",
             ]
             .contains(&component.as_str())
             {
@@ -75,6 +82,49 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                     .transpose()?,
             });
         }
+        let bus = entity
+            .components
+            .get("AudioBus")
+            .map(|v| serde_json::from_value::<incant_doc::AudioBus>(v.clone()))
+            .transpose()?;
+        let source = entity
+            .components
+            .get("AudioSource")
+            .map(|v| serde_json::from_value::<incant_doc::AudioSource>(v.clone()))
+            .transpose()?;
+        let listener = entity.components.contains_key("AudioListener");
+        if bus.is_some() || source.is_some() || listener {
+            let bus = bus
+                .map(|b| {
+                    Ok::<_, CookError>(NativeAudioBus {
+                        parent: b.parent.as_deref().map(stable_id).transpose()?,
+                        gain_db: b.gain_db,
+                    })
+                })
+                .transpose()?;
+            let source = source
+                .map(|s| {
+                    Ok::<_, CookError>(NativeAudioSource {
+                        clip: stable_id(&s.clip)?,
+                        bus: s.bus.as_deref().map(stable_id).transpose()?,
+                        gain_db: s.gain_db,
+                        pan: s.pan,
+                        rate: s.rate,
+                        start_seconds: s.start_seconds,
+                        playing: s.playing,
+                        looping: s.looping,
+                        streaming: s.streaming,
+                        spatial: s.spatial,
+                    })
+                })
+                .transpose()?;
+            audio.push(CookedAudio {
+                entity: stable_id(&entity.id)?,
+                bus,
+                source,
+                listener,
+            });
+        }
         entities.push(CookedEntity {
             id: stable_id(&entity.id)?,
             parent: entity.parent.as_deref().map(stable_id).transpose()?,
@@ -85,6 +135,7 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
     Ok(
         CookedScene::new(stable_id(&scene.id)?, project.settings.tick_rate, entities)?
             .with_physics(physics)?
+            .with_audio(audio)?
             .to_bytes(),
     )
 }

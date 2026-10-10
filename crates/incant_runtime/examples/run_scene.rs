@@ -31,6 +31,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     let ticks: u64 = args[1].parse()?;
     let mut world = incant_runtime::NativeWorld::from_bytes(&std::fs::read(&args[0])?)?;
+    if world.audio_nodes().len() != 0 {
+        return Err("this motion probe has no audio host; use the native scene audio host".into());
+    }
     for _ in 0..ticks {
         world.step()?;
     }
