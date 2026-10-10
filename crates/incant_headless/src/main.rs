@@ -373,6 +373,18 @@ fn main() -> Result<()> {
                 json!(schemars::schema_for!(incant_script::GameSave)),
             );
             registry.insert(
+                "InputEvent".into(),
+                json!(schemars::schema_for!(incant_input::InputEvent)),
+            );
+            registry.insert(
+                "InputFrame".into(),
+                json!(schemars::schema_for!(incant_input::InputFrame)),
+            );
+            registry.insert(
+                "InputRecording".into(),
+                json!(schemars::schema_for!(incant_input::InputRecording)),
+            );
+            registry.insert(
                 "Command".into(),
                 json!(schemars::schema_for!(incant_cmd::Command)),
             );

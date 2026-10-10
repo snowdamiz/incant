@@ -29,6 +29,12 @@ pub enum ScriptError {
     Command(#[from] CommandError),
     #[error(transparent)]
     Physics(#[from] incant_core::PhysicsError),
+    #[error(transparent)]
+    Input(#[from] incant_input::InputError),
+    #[error(transparent)]
+    InputRecording(#[from] incant_input::RecordingError),
+    #[error("live input cannot be mixed with an installed input replay")]
+    InputReplayConflict,
     #[error("play session failed; restart or restore a saved game before continuing")]
     FailedSession,
     #[error("script input exceeds configured limit")]
@@ -81,12 +87,13 @@ impl ScriptHost {
 ; return exports.default; }})({{}});
    if (!__behavior || typeof __behavior.update !== 'function') throw new Error('default behavior.update required');
    let __state = JSON.parse(JSON.stringify(__behavior.initialState ?? {{}}));
-   globalThis.__tick = (worldJson, dt, stateJson, eventsJson) => {{
+   globalThis.__tick = (worldJson, dt, stateJson, eventsJson, inputJson) => {{
      const world = JSON.parse(worldJson);
      const state = JSON.parse(stateJson);
      const commands = [];
      const logs = [];
      const api = Object.freeze({{
+       input: () => JSON.parse(inputJson),
        raycast: (query) => {{
          const result = JSON.parse(globalThis.__incantRaycast(JSON.stringify(query)));
          if (result.error) throw new Error(result.error);
@@ -153,13 +160,14 @@ impl ScriptHost {
         Ok(())
     }
     pub fn tick(&mut self, bus: &mut CommandBus, dt: f64) -> Result<usize, ScriptError> {
-        self.tick_with_events(bus, dt, &[])
+        self.tick_with_events(bus, dt, &[], &incant_input::InputFrame::default())
     }
     fn tick_with_events(
         &mut self,
         bus: &mut CommandBus,
         dt: f64,
         events: &[incant_core::TriggerEvent],
+        input: &incant_input::InputFrame,
     ) -> Result<usize, ScriptError> {
         self.query_count
             .store(0, std::sync::atomic::Ordering::Relaxed);
@@ -181,6 +189,7 @@ impl ScriptHost {
                     dt,
                     state,
                     serde_json::to_string(events).expect("serializable trigger events"),
+                    serde_json::to_string(input).expect("validated input frame"),
                 ))
             })
             .map_err(|_| ScriptError::Execution)?;

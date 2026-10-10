@@ -53,6 +53,47 @@ export namespace GameSaveSchema {
 }
 export type GameSave = GameSaveSchema.Root;
 
+export namespace InputEventSchema {
+  export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
+  export type TouchPhase = "down" | "move" | "up" | "cancel";
+  export type WheelUnit = "pixels" | "lines";
+  export type Root = ({ "focused": boolean; "type": "focus" }) | ({ "code": KeyCode; "down": boolean; "type": "key" }) | ({ "button": MouseButton; "down": boolean; "type": "mouse_button" }) | ({ "position": [number, number]; "type": "pointer_position" }) | ({ "delta": [number, number]; "type": "pointer_motion" }) | ({ "delta": [number, number]; "type": "wheel"; "unit": WheelUnit }) | ({ "id": number; "type": "gamepad_connected" }) | ({ "id": number; "type": "gamepad_disconnected" }) | ({ "button": GamepadButton; "id": number; "type": "gamepad_button"; "value": number }) | ({ "axis": GamepadAxis; "id": number; "type": "gamepad_axis"; "value": number }) | ({ "id": number; "phase": TouchPhase; "position": [number, number]; "type": "touch" });
+}
+export type InputEvent = InputEventSchema.Root;
+
+export namespace InputFrameSchema {
+  export type Buttons = { "held": Array<KeyCode>; "pressed": Array<KeyCode>; "released": Array<KeyCode> };
+  export type Buttons2 = { "held": Array<MouseButton>; "pressed": Array<MouseButton>; "released": Array<MouseButton> };
+  export type Buttons3 = { "held": Array<GamepadButton>; "pressed": Array<GamepadButton>; "released": Array<GamepadButton> };
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type GamepadFrame = { "buttons": Buttons3; "left_stick": [number, number]; "right_stick": [number, number]; "values": { "dpad_down"?: number; "dpad_left"?: number; "dpad_right"?: number; "dpad_up"?: number; "east"?: number; "guide"?: number; "left_shoulder"?: number; "left_stick"?: number; "left_trigger"?: number; "north"?: number; "right_shoulder"?: number; "right_stick"?: number; "right_trigger"?: number; "select"?: number; "south"?: number; "start"?: number; "west"?: number } };
+  export type Gesture = ({ "id": number; "position": [number, number]; "type": "tap" }) | ({ "id": number; "position": [number, number]; "type": "long_press" }) | ({ "direction": [number, number]; "distance": number; "duration_seconds": number; "id": number; "type": "swipe" }) | ({ "center": [number, number]; "ids": [number, number]; "rotation_delta": number; "scale_delta": number; "type": "pinch" });
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
+  export type MouseFrame = { "buttons": Buttons2; "motion": [number, number]; "position"?: [number, number] | null; "wheel_lines": [number, number]; "wheel_pixels": [number, number] };
+  export type TouchChange = { "id": number; "phase": TouchPhase; "position": [number, number] };
+  export type TouchPhase = "down" | "move" | "up" | "cancel";
+  export type TouchPoint = { "delta": [number, number]; "position": [number, number] };
+  export type Root = { "connected": Array<number>; "disconnected": Array<number>; "focused": boolean; "gamepads": { [key: number]: GamepadFrame | undefined }; "gestures": Array<Gesture>; "keyboard": Buttons; "mouse": MouseFrame; "touch_changes": Array<TouchChange>; "touches": { [key: number]: TouchPoint | undefined } };
+}
+export type InputFrame = InputFrameSchema.Root;
+
+export namespace InputRecordingSchema {
+  export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type InputEvent = ({ "focused": boolean; "type": "focus" }) | ({ "code": KeyCode; "down": boolean; "type": "key" }) | ({ "button": MouseButton; "down": boolean; "type": "mouse_button" }) | ({ "position": [number, number]; "type": "pointer_position" }) | ({ "delta": [number, number]; "type": "pointer_motion" }) | ({ "delta": [number, number]; "type": "wheel"; "unit": WheelUnit }) | ({ "id": number; "type": "gamepad_connected" }) | ({ "id": number; "type": "gamepad_disconnected" }) | ({ "button": GamepadButton; "id": number; "type": "gamepad_button"; "value": number }) | ({ "axis": GamepadAxis; "id": number; "type": "gamepad_axis"; "value": number }) | ({ "id": number; "phase": TouchPhase; "position": [number, number]; "type": "touch" });
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
+  export type RecordedTick = { "events": Array<InputEvent>; "tick": number };
+  export type TouchPhase = "down" | "move" | "up" | "cancel";
+  export type WheelUnit = "pixels" | "lines";
+  export type Root = { "format": string; "frames": Array<RecordedTick>; "start_tick": number; "tick_rate": number; "ticks": number; "version": number };
+}
+export type InputRecording = InputRecordingSchema.Root;
+
 export namespace MeshRendererSchema {
   export type Root = { "cast_shadows": boolean; "materials": Array<string>; "mesh": string };
 }

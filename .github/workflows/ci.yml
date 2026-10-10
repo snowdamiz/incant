@@ -42,6 +42,7 @@ jobs:
       - run: python3 tools/probes/physics-runtime.py artifacts/physics-runtime-cli
       - run: python3 tools/probes/character-movement.py artifacts/character-movement-cli
       - run: python3 tools/probes/game-saves.py artifacts/game-saves-cli
+      - run: python3 tools/probes/game-input.py artifacts/game-input-cli
       - run: node tools/generate_sdk.mjs --check
       - run: git diff --exit-code -- schemas
       - run: node_modules/.bin/tsc -p sdk/ts/tsconfig.json

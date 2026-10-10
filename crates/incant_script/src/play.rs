@@ -15,6 +15,8 @@ pub struct PlaySession {
     pub(super) ticks: u64,
     pub(super) elapsed_seconds: f64,
     pub(super) failed: bool,
+    input: incant_input::InputRuntime,
+    replay: Option<incant_input::InputReplay>,
 }
 impl PlaySession {
     pub fn new(project: &incant_doc::Project, compiled_source: &str) -> Result<Self, ScriptError> {
@@ -30,6 +32,8 @@ impl PlaySession {
             ticks: 0,
             elapsed_seconds: 0.,
             failed: false,
+            input: incant_input::InputRuntime::default(),
+            replay: None,
             bus: CommandBus::simulation(project.clone())?,
             engine,
             dt: 1. / f64::from(project.settings.tick_rate),
@@ -48,10 +52,61 @@ impl PlaySession {
         if self.failed {
             return Err(ScriptError::FailedSession);
         }
+        let events = self
+            .replay
+            .as_ref()
+            .map(|replay| {
+                replay
+                    .events_at(self.ticks + 1)
+                    .map(<[incant_input::InputEvent]>::to_vec)
+            })
+            .transpose()?
+            .unwrap_or_default();
+        self.advance(&events)
+    }
+    /// Validate a complete clip and seed its physical input history at the
+    /// current game clock. A rejected clip leaves the previous input intact.
+    pub fn replay_input(&mut self, text: &str) -> Result<(), ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
+        let replay = incant_input::InputReplay::from_text(
+            text,
+            self.ticks,
+            self.project().settings.tick_rate,
+        )?;
+        self.input = replay.initial_state();
+        self.replay = Some(replay);
+        Ok(())
+    }
+    pub fn input_replay_end(&self) -> Option<u64> {
+        self.replay
+            .as_ref()
+            .map(incant_input::InputReplay::end_tick)
+    }
+    /// Process a device packet for the next successful game tick. Invalid input
+    /// is rejected before physics or script state advances and can be retried.
+    pub fn tick_with_input(
+        &mut self,
+        events: &[incant_input::InputEvent],
+    ) -> Result<usize, ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
+        if self.replay.is_some() {
+            return Err(ScriptError::InputReplayConflict);
+        }
+        self.advance(events)
+    }
+    fn advance(&mut self, events: &[incant_input::InputEvent]) -> Result<usize, ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
         if self.ticks >= super::saves::MAX_SAVE_TICK {
             self.failed = true;
             return Err(ScriptError::InputLimit);
         }
+        self.input.advance(events, self.dt)?;
         match self.tick_inner() {
             Ok(count) => {
                 self.ticks += 1;
@@ -65,6 +120,9 @@ impl PlaySession {
                 Err(error)
             }
         }
+    }
+    pub fn input(&self) -> &incant_input::InputFrame {
+        self.input.frame()
     }
     fn tick_inner(&mut self) -> Result<usize, ScriptError> {
         self.engine.step()?;
@@ -120,9 +178,9 @@ impl PlaySession {
             )?;
         }
         let events = snapshot.trigger_events;
-        let count = self
-            .host
-            .tick_with_events(&mut self.bus, self.dt, &events)?;
+        let count =
+            self.host
+                .tick_with_events(&mut self.bus, self.dt, &events, self.input.frame())?;
         self.engine.sync(self.bus.project())?;
         Ok(count)
     }

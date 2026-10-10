@@ -1,0 +1,675 @@
+{
+  "$defs": {
+    "Buttons": {
+      "properties": {
+        "held": {
+          "items": {
+            "$ref": "#/$defs/KeyCode"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "pressed": {
+          "items": {
+            "$ref": "#/$defs/KeyCode"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "released": {
+          "items": {
+            "$ref": "#/$defs/KeyCode"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "held",
+        "pressed",
+        "released"
+      ],
+      "type": "object"
+    },
+    "Buttons2": {
+      "properties": {
+        "held": {
+          "items": {
+            "$ref": "#/$defs/MouseButton"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "pressed": {
+          "items": {
+            "$ref": "#/$defs/MouseButton"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "released": {
+          "items": {
+            "$ref": "#/$defs/MouseButton"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "held",
+        "pressed",
+        "released"
+      ],
+      "type": "object"
+    },
+    "Buttons3": {
+      "properties": {
+        "held": {
+          "items": {
+            "$ref": "#/$defs/GamepadButton"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "pressed": {
+          "items": {
+            "$ref": "#/$defs/GamepadButton"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "released": {
+          "items": {
+            "$ref": "#/$defs/GamepadButton"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "held",
+        "pressed",
+        "released"
+      ],
+      "type": "object"
+    },
+    "GamepadButton": {
+      "enum": [
+        "south",
+        "east",
+        "west",
+        "north",
+        "left_shoulder",
+        "right_shoulder",
+        "left_trigger",
+        "right_trigger",
+        "select",
+        "start",
+        "guide",
+        "left_stick",
+        "right_stick",
+        "dpad_up",
+        "dpad_down",
+        "dpad_left",
+        "dpad_right"
+      ],
+      "type": "string"
+    },
+    "GamepadFrame": {
+      "properties": {
+        "buttons": {
+          "$ref": "#/$defs/Buttons3"
+        },
+        "left_stick": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "right_stick": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "values": {
+          "additionalProperties": false,
+          "properties": {
+            "dpad_down": {
+              "format": "double",
+              "type": "number"
+            },
+            "dpad_left": {
+              "format": "double",
+              "type": "number"
+            },
+            "dpad_right": {
+              "format": "double",
+              "type": "number"
+            },
+            "dpad_up": {
+              "format": "double",
+              "type": "number"
+            },
+            "east": {
+              "format": "double",
+              "type": "number"
+            },
+            "guide": {
+              "format": "double",
+              "type": "number"
+            },
+            "left_shoulder": {
+              "format": "double",
+              "type": "number"
+            },
+            "left_stick": {
+              "format": "double",
+              "type": "number"
+            },
+            "left_trigger": {
+              "format": "double",
+              "type": "number"
+            },
+            "north": {
+              "format": "double",
+              "type": "number"
+            },
+            "right_shoulder": {
+              "format": "double",
+              "type": "number"
+            },
+            "right_stick": {
+              "format": "double",
+              "type": "number"
+            },
+            "right_trigger": {
+              "format": "double",
+              "type": "number"
+            },
+            "select": {
+              "format": "double",
+              "type": "number"
+            },
+            "south": {
+              "format": "double",
+              "type": "number"
+            },
+            "start": {
+              "format": "double",
+              "type": "number"
+            },
+            "west": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "buttons",
+        "values",
+        "left_stick",
+        "right_stick"
+      ],
+      "type": "object"
+    },
+    "Gesture": {
+      "oneOf": [
+        {
+          "properties": {
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "position": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "tap",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "position"
+          ],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "position": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "long_press",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "position"
+          ],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "direction": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "distance": {
+              "format": "double",
+              "type": "number"
+            },
+            "duration_seconds": {
+              "format": "double",
+              "type": "number"
+            },
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": {
+              "const": "swipe",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "direction",
+            "distance",
+            "duration_seconds"
+          ],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "center": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "ids": {
+              "items": {
+                "format": "uint32",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "rotation_delta": {
+              "format": "double",
+              "type": "number"
+            },
+            "scale_delta": {
+              "format": "double",
+              "type": "number"
+            },
+            "type": {
+              "const": "pinch",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "ids",
+            "center",
+            "scale_delta",
+            "rotation_delta"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "KeyCode": {
+      "description": "Physical key positions. Text entry and IME composition are separate concerns.",
+      "enum": [
+        "KeyA",
+        "KeyB",
+        "KeyC",
+        "KeyD",
+        "KeyE",
+        "KeyF",
+        "KeyG",
+        "KeyH",
+        "KeyI",
+        "KeyJ",
+        "KeyK",
+        "KeyL",
+        "KeyM",
+        "KeyN",
+        "KeyO",
+        "KeyP",
+        "KeyQ",
+        "KeyR",
+        "KeyS",
+        "KeyT",
+        "KeyU",
+        "KeyV",
+        "KeyW",
+        "KeyX",
+        "KeyY",
+        "KeyZ",
+        "Digit0",
+        "Digit1",
+        "Digit2",
+        "Digit3",
+        "Digit4",
+        "Digit5",
+        "Digit6",
+        "Digit7",
+        "Digit8",
+        "Digit9",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "Space",
+        "Enter",
+        "Escape",
+        "Tab",
+        "Backspace",
+        "Delete",
+        "Insert",
+        "Home",
+        "End",
+        "PageUp",
+        "PageDown",
+        "ShiftLeft",
+        "ShiftRight",
+        "ControlLeft",
+        "ControlRight",
+        "AltLeft",
+        "AltRight",
+        "MetaLeft",
+        "MetaRight",
+        "CapsLock",
+        "NumLock",
+        "ScrollLock",
+        "Pause",
+        "PrintScreen",
+        "ContextMenu",
+        "Backquote",
+        "Minus",
+        "Equal",
+        "BracketLeft",
+        "BracketRight",
+        "Backslash",
+        "Semicolon",
+        "Quote",
+        "Comma",
+        "Period",
+        "Slash",
+        "Numpad0",
+        "Numpad1",
+        "Numpad2",
+        "Numpad3",
+        "Numpad4",
+        "Numpad5",
+        "Numpad6",
+        "Numpad7",
+        "Numpad8",
+        "Numpad9",
+        "NumpadAdd",
+        "NumpadSubtract",
+        "NumpadMultiply",
+        "NumpadDivide",
+        "NumpadDecimal",
+        "NumpadEnter",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12"
+      ],
+      "type": "string"
+    },
+    "MouseButton": {
+      "enum": [
+        "left",
+        "right",
+        "middle",
+        "back",
+        "forward"
+      ],
+      "type": "string"
+    },
+    "MouseFrame": {
+      "properties": {
+        "buttons": {
+          "$ref": "#/$defs/Buttons2"
+        },
+        "motion": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "position": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "wheel_lines": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "wheel_pixels": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        }
+      },
+      "required": [
+        "buttons",
+        "motion",
+        "wheel_pixels",
+        "wheel_lines"
+      ],
+      "type": "object"
+    },
+    "TouchChange": {
+      "properties": {
+        "id": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "phase": {
+          "$ref": "#/$defs/TouchPhase"
+        },
+        "position": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "phase",
+        "position"
+      ],
+      "type": "object"
+    },
+    "TouchPhase": {
+      "enum": [
+        "down",
+        "move",
+        "up",
+        "cancel"
+      ],
+      "type": "string"
+    },
+    "TouchPoint": {
+      "properties": {
+        "delta": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "position": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        }
+      },
+      "required": [
+        "position",
+        "delta"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "connected": {
+      "items": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "disconnected": {
+      "items": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "focused": {
+      "type": "boolean"
+    },
+    "gamepads": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^\\d+$": {
+          "$ref": "#/$defs/GamepadFrame"
+        }
+      },
+      "type": "object"
+    },
+    "gestures": {
+      "items": {
+        "$ref": "#/$defs/Gesture"
+      },
+      "type": "array"
+    },
+    "keyboard": {
+      "$ref": "#/$defs/Buttons"
+    },
+    "mouse": {
+      "$ref": "#/$defs/MouseFrame"
+    },
+    "touch_changes": {
+      "items": {
+        "$ref": "#/$defs/TouchChange"
+      },
+      "type": "array"
+    },
+    "touches": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^\\d+$": {
+          "$ref": "#/$defs/TouchPoint"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "focused",
+    "keyboard",
+    "mouse",
+    "gamepads",
+    "connected",
+    "disconnected",
+    "touches",
+    "touch_changes",
+    "gestures"
+  ],
+  "title": "InputFrame",
+  "type": "object"
+}
