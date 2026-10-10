@@ -93,3 +93,27 @@ retained locally in the 2026-10-10 UI-correctness packet. Native recheck and
 Claude's rendered acceptance follow the rebuilt app; unit tests do not count as
 that evidence. Full bridge payloads remain unbounded; paging currently bounds
 mounted UI content and preserves all records, not transport cost.
+
+## Main-based whole-app integration review (2026-10-10)
+
+The full editor design is now based on main PR #49 independently of the pending
+pixel-perfect renderer. Claude Opus 5.5 at explicitly verified Max corrected the
+Camera fixture/native parity and retained the whole-app design and bounded lists.
+Its browser evidence covers 96 states; native acceptance still requires the
+rebuilt app and Claude review.
+
+A separate Astra correctness review reproduced two additional state-transition
+bugs. The agent transcript now attaches its overflow observer to the actual DOM
+mount, so an unavailable-to-ready transition and a later remount keep overflowing
+content keyboard-focusable and clean up the old observer. A collapsed navigation
+grid now reveals the exact cost values if updated dimensions become invalid;
+returning to a valid grid preserves the earlier collapse choice. The regression
+tests failed before their fixes and cover resize/cleanup and diagnostic retention.
+These changes preserve Claude's appearance and capability decisions.
+
+The integrated main-based source passes all 500 UI tests in 29 files, strict
+TypeScript checking and the production build. Bridge generation and repository
+conventions match, and all 25 Python tool tests pass. UI logs:
+`/tmp/incant-ui-main-final-{typecheck,tests,build}.log`. Native build and functional
+verification follow this source freeze; no native acceptance or phase/device gate
+is claimed by these browser tests.

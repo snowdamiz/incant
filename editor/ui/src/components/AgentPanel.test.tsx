@@ -103,3 +103,64 @@ describe('Agent reason wording', () => {
     expect(within(agent).getByRole('button', { name: /Continue with ChatGPT/ })).toBeTruthy();
   });
 });
+
+
+describe('Agent transcript after bridge status changes', () => {
+  it('tracks overflow and releases observations when the transcript mounts, resizes, and remounts', async () => {
+    const { act } = await import('@testing-library/react');
+    const observations: { elements: Set<Element>; update: () => void }[] = [];
+    vi.stubGlobal('ResizeObserver', class {
+      private readonly state: { elements: Set<Element>; update: () => void };
+      constructor(update: () => void) {
+        this.state = { elements: new Set(), update };
+        observations.push(this.state);
+      }
+      observe(element: Element) { this.state.elements.add(element); }
+      unobserve(element: Element) { this.state.elements.delete(element); }
+      disconnect() { this.state.elements.clear(); }
+    });
+    let snapshot: ReturnType<EditorBridge['getSnapshot']> = {
+      ...fixtureSnapshot('sample'), agent: { status: 'unavailable', reason: 'Waiting for the agent.' },
+    };
+    const listeners = new Set<() => void>();
+    const bridge: EditorBridge = {
+      ...readyAgentBridge(),
+      getSnapshot: () => snapshot,
+      subscribe: (listener) => { listeners.add(listener); return () => { listeners.delete(listener); }; },
+    };
+    const changeAgent = (agent: typeof snapshot.agent) => act(() => {
+      snapshot = { ...snapshot, agent };
+      for (const listener of listeners) listener();
+    });
+    restore = stubTranscript(78, 62);
+    const view = render(<App resolution={{ kind: 'bridge', bridge }} />);
+    try {
+      expect(screen.queryByRole('log', { name: 'Agent conversation' })).toBeNull();
+      changeAgent({ status: 'idle' });
+      const first = screen.getByRole('log', { name: 'Agent conversation' });
+      expect(first.tabIndex).toBe(0);
+      const firstObserver = observations.find((entry) => entry.elements.has(first));
+      expect(firstObserver).toBeDefined();
+      restore();
+      restore = stubTranscript(62, 100);
+      act(() => firstObserver!.update());
+      expect(first.hasAttribute('tabindex')).toBe(false);
+      changeAgent({ status: 'unavailable', reason: 'Agent disconnected.' });
+      expect(firstObserver!.elements.size).toBe(0);
+      expect(screen.queryByRole('log', { name: 'Agent conversation' })).toBeNull();
+      restore();
+      restore = stubTranscript(78, 62);
+      changeAgent({ status: 'running', conversation: 'test-conversation' });
+      const second = screen.getByRole('log', { name: 'Agent conversation' });
+      expect(second.tabIndex).toBe(0);
+      const secondObserver = observations.find((entry) => entry.elements.has(second));
+      expect(secondObserver).toBeDefined();
+      expect(secondObserver).not.toBe(firstObserver);
+      view.unmount();
+      expect(secondObserver!.elements.size).toBe(0);
+    } finally {
+      view.unmount();
+      vi.unstubAllGlobals();
+    }
+  });
+});

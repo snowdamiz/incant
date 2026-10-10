@@ -178,7 +178,7 @@ export function NumberListView({
               {showValues ? 'Hide values' : 'Show values'}
             </button>
           ) : null}
-          {showValues ? (
+          {size === null || showValues ? (
             <NumberTable
               id={size ? tableId : id}
               fieldId={id}
