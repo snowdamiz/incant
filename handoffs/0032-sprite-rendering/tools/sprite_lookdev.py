@@ -32,11 +32,21 @@ interfaces and the supplied frozen binary:
      anisotropic scale and 2-4x minification on tie placements plus offsets; I holds
      a 4096-texel strip magnified 1x-16x so region-local texels sit near 4096; J maps
      exact ties across region widths 512-8192 at 1x-32x.
+  9. Round-four span boards (1024 x 1024) for the 512-texel span correction: K and L
+     sweep 1x-64x along screen x and y with windows on a span cut and inside a span,
+     offsets 0 and +-1/256 px; M holds odd region origins and widths, mirrors, half
+     turns, wide and compressed nine-slices, translucent and linear rows; N holds
+     isotropic 32x-64x rows, also at 1920 x 1080 and through a rolled camera. The
+     strip and column are reimported at another size and every capture is budgeted.
+     With --probe, boards O and P (20x-128x, rows and columns) are added and only their
+     1024 x 1024 and 1920 x 1080 views are captured.
 
 Usage (repo root):
   python3 -I handoffs/0032-sprite-rendering/tools/sprite_lookdev.py OUT_DIR [--binary NAME]
-OUT_DIR must not exist. NAME is active (default), pre-magnification or pre-ties; the
-earlier builds are preserved in artifacts/tools for before/after comparisons.
+      [--repeats 1|2] [--live DIRS|none] [--static-only] [--probe]
+OUT_DIR must not exist. NAME is active (default), pre-wide, pre-magnification or
+pre-ties; the earlier builds are preserved in artifacts/tools for before/after
+comparisons. Each renderer invocation is limited to 128 frames and 256 MiB raw.
 """
 
 import argparse
@@ -47,6 +57,7 @@ import shutil
 import struct
 import subprocess
 import sys
+from fractions import Fraction
 from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
@@ -55,8 +66,10 @@ import sprite_art  # noqa: E402
 
 ROOT = TOOLS.parents[2]
 # The active build is the newest tested one; earlier builds are kept for before/after:
-# pre-ties (39e5c38), pre-magnification (c2c7758) and active (f9aa1da at round three).
+# pre-ties (39e5c38), pre-magnification (c2c7758), pre-wide (f9aa1da) and active
+# (0494b40 at round four).
 BINARIES = {"active": ("incant_headless", "binary.json"),
+            "pre-wide": ("pre-wide-incant_headless", "pre-wide-binary.json"),
             "pre-magnification": ("pre-magnification-incant_headless", "pre-magnification-binary.json"),
             "pre-ties": ("pre-ties-incant_headless", "pre-ties-binary.json")}
 CLI = ROOT / "artifacts/tools/incant_headless"
@@ -79,6 +92,13 @@ BOARD_SPEC["G"] = (0.0, -40.0, 1024, 640)
 BOARD_SPEC["H"] = (0.0, 60.0, 1280, 640)  # screenshots allow at most 1920 x 1080
 BOARD_SPEC["I"] = (0.0, 110.0, 1024, 640)
 BOARD_SPEC["J"] = (0.0, 160.0, 1024, 640)
+# Round four: 1024 x 1024 boards (half-extents of 32 m keep projections dyadic). Their
+# strips run tens of kilometres, so each board owns a corridor no other board crosses:
+# K, M and N rows run along x at y = 400, -400 and -800; L columns along y at x = 400.
+BOARD_SPEC["K"] = (0.0, 400.0, 1024, 1024)
+BOARD_SPEC["L"] = (400.0, 0.0, 1024, 1024)
+BOARD_SPEC["M"] = (0.0, -400.0, 1024, 1024)
+BOARD_SPEC["N"] = (0.0, -800.0, 1024, 1024)
 PIXEL = {"kind": "pixel_perfect", "pixels_per_unit": PPU, "reference_resolution": list(LOGICAL)}
 BG = (24, 22, 40)  # board background, sRGB
 STEP = 1.0 / (8 * PPU)  # 1/8 logical pixel per tick
@@ -655,6 +675,286 @@ def board_j(s):
             y += m + 3
 
 
+# Round four: interior spans of the wide-region correction (source 0494b40), which
+# cuts nearest geometry every 512 source texels. Every row is a long strip whose
+# visible window is centred on one region-local texel boundary b, placed on the pixel
+# centre 512.5 plus an offset d, so every texel boundary in a row is an exact tie when
+# d = 0. Each row records its exact screen-to-texel mapping (rational "segments"), so
+# the analysis can name the expected texel of every pixel without the CPU reference.
+SPAN_M = [1, 2, 3, 4, 5, 6, 8, 12, 16, 24, 32, 48, 64]
+SPAN_D = [Fraction(0), Fraction(1, 256), Fraction(-1, 256)]
+SPAN_LOCAL = {"cut": 0, "mid": 256, "upper": 448}  # span texel at the window centre
+SPAN_BASE = 5120  # [5120, 5632] is a span of an 8192-texel region in either direction
+CENTRE = Fraction(1025, 2)  # pixel centre 512.5 of a 1024-px board
+THICK = 3  # rows are 3 px across, 1 px apart
+
+
+def rational(v):
+    v = Fraction(v)
+    return f"{v.numerator}/{v.denominator}"
+
+
+def strip_row(s, board, key, *, tex, region, m, orient, b, d, at, thick=THICK, along="x", decode=True,
+              tint=(1, 1, 1, 1), sampling="nearest", meta=None):
+    """One straight strip whose region-local texel boundary b sits on screen at 512.5 + d.
+
+    `along` is the screen axis of the row ("x": a row at screen y `at`; "y": a column
+    at screen x `at`). The texture axis follows from the texture: strip8192 names texels
+    along x, column8192 along y. `orient` is plain, flip, mirror (parent scale -1),
+    rot180, rot+90 or rot-90.
+    """
+    tex_axis = "y" if tex == "column8192" else "x"
+    n = region[3] if tex_axis == "y" else region[2]
+    length = n * m
+    # Texel coordinates at the screen-start and screen-end of the row.
+    if along == "x":
+        increasing = {"plain": True, "flip": False, "mirror": False, "rot180": False,
+                      "rot+90": True, "rot-90": False}[orient]
+    else:
+        increasing = {"plain": True, "flip": False, "rot180": False, "rot+90": False, "rot-90": True}[orient]
+    t0, t1 = (0, n) if increasing else (n, 0)
+    target = CENTRE + d
+    start = target - abs(b - t0) * m  # screen coordinate of the row's first end
+    cross0, cross1 = at, at + thick
+    flip_x = flip_y = False
+    angle, parent = 0.0, None
+    pivot = (0, 0)
+    # Strips are long in local x and columns in local y, whatever the screen axis.
+    size = (length, thick) if tex_axis == "x" else (thick, length)
+    if along == "x":
+        if orient in ("plain", "flip"):
+            flip_x = orient == "flip"
+            local = (wx(board, start), wy(board, cross1), 0.0)
+        elif orient == "mirror":
+            parent = f"{key}:parent"
+            s.entity(parent, {"Transform": transform((wx(board, start + length), wy(board, cross1), 0.0), IDENT,
+                                                     (-1, 1, 1), exact=True)})
+            local = (0.0, 0.0, 0.0)
+        elif orient == "rot180":
+            angle, local = 180, (wx(board, start + length), wy(board, cross0), 0.0)
+        elif orient == "rot-90":  # local +y runs toward screen +x
+            angle, local = -90, (wx(board, start), wy(board, cross0), 0.0)
+        else:  # rot+90: local +y runs toward screen -x
+            angle, local = 90, (wx(board, start + length), wy(board, cross1), 0.0)
+    else:
+        if orient in ("plain", "flip"):  # columns: local bottom at the far screen-y end
+            flip_y = orient == "flip"
+            local = (wx(board, cross0), wy(board, start + length), 0.0)
+        elif orient == "rot180":
+            angle, local = 180, (wx(board, cross1), wy(board, start), 0.0)
+        elif orient == "rot+90":  # local +x runs toward screen -y
+            angle, local = 90, (wx(board, cross1), wy(board, start + length), 0.0)
+        else:  # rot-90: local +x runs toward screen +y
+            angle, local = -90, (wx(board, cross0), wy(board, start), 0.0)
+    s.sprite(key, board, tex, list(region), None, size=size, pivot=pivot, local=local, angle=angle,
+             flip_x=flip_x, flip_y=flip_y, tint=tint, sampling=sampling, parent=parent, exact=True)
+    s.meta[key].update(kind="span", along=along, line=at + thick // 2, texture_axis=tex_axis, region=list(region),
+                       magnification=m, orient=orient, b=b, d=rational(d), decode=decode and tint[3] == 1
+                       and sampling == "nearest",
+                       segments=[[rational(start), rational(start + length), t0, t1]], **(meta or {}))
+
+
+def nine_row(s, board, key, *, mb, mc, flipped, window, b, at, compressed=False, d=Fraction(0)):
+    """A 2000 x 1 nine-slice strip, borders 600 (left) and 700 (right) texels at mb px
+    per texel and a 700-texel centre at mc, or compressed to half size (no centre)."""
+    left, right, n = 600, 700, 2000
+    if compressed:
+        # Borders at half density, centre collapsed: 300 mb + 350 mb px.
+        quads = [(right, mb // 2, n, n - right), (left, mb // 2, left, 0)] if flipped else \
+                [(left, mb // 2, 0, left), (right, mb // 2, n - right, n)]
+    else:
+        quads = ([(right, mb, n, n - right), (n - left - right, mc, n - right, left), (left, mb, left, 0)]
+                 if flipped else [(left, mb, 0, left), (n - left - right, mc, left, n - right), (right, mb, n - right, n)])
+    segments, x, offset = [], Fraction(0), None
+    for texels, m, ta, tb in quads:
+        segments.append([x, x + texels * m, ta, tb])
+        lo, hi = min(ta, tb), max(ta, tb)
+        if offset is None and lo <= b <= hi:
+            offset = x + abs(b - ta) * m
+        x += texels * m
+    if compressed:  # the junction where the two borders meet
+        offset = segments[0][1] if window == "junction" else offset
+    start = CENTRE + d - offset
+    for seg in segments:
+        seg[0], seg[1] = rational(seg[0] + start), rational(seg[1] + start)
+    s.sprite(key, board, "strip8192", [0, 0, n, 1], None, size=(int(x), THICK), pivot=(0, 0),
+             local=(wx(board, start), wy(board, at + THICK), 0.0), flip_x=flipped,
+             mode=nine((left, right, 0, 0), PPU / mb), exact=True)
+    s.meta[key].update(kind="span", along="x", line=at + THICK // 2, texture_axis="x", region=[0, 0, n, 1],
+                       magnification=[mb, mc], orient="flip" if flipped else "plain", b=b, d=rational(d),
+                       window=window, decode=True, segments=segments, nine_slice=True, compressed=compressed)
+
+
+def label4(s, board, text, x, y):
+    reg = s.regions[("labels4", f"label:{text}")]
+    return s.sprite(f"{board}:label:{text}:{x},{y}", board, "labels4", f"label:{text}", (x, y, reg[2], reg[3]),
+                    pivot=(0, 1), layer=50)
+
+
+def span_windows(m):
+    return ["cut"] if m <= 2 else list(SPAN_LOCAL)
+
+
+def board_k(s):
+    """Spans along screen x: every magnification, both directions, offsets 0 and +-1/256,
+    windows on a cut and inside a span, plus quarter-turned columns (texture y on screen x)."""
+    b = "K"
+    s.plate("K:background", b, (-16, -16, 1056, 1056), BG)
+    label4(s, b, "K", 1012, 4)
+    label4(s, b, "SPANS ALONG X", 8, 4)
+    y = 16
+    for m in SPAN_M:
+        for orient in ("plain", "flip"):
+            for k, d in enumerate(SPAN_D):
+                for window in span_windows(m):
+                    bnd = SPAN_BASE + SPAN_LOCAL[window]
+                    strip_row(s, b, f"K:{m}x:{orient}:{k}:{window}", tex="strip8192", region=(0, 0, 8192, 1),
+                              m=m, orient=orient, b=bnd, d=d, at=y, meta={"window": window, "family": "x"})
+                    y += THICK + 1
+    for m in (8, 48):
+        for orient in ("rot-90", "rot+90"):
+            for k, d in enumerate(SPAN_D[:2]):
+                for window in ("cut", "mid"):
+                    bnd = SPAN_BASE + SPAN_LOCAL[window]
+                    strip_row(s, b, f"K:col:{m}x:{orient}:{k}:{window}", tex="column8192", region=(0, 0, 1, 8192),
+                              m=m, orient=orient, b=bnd, d=d, at=y, meta={"window": window, "family": "column turned"})
+                    y += THICK + 1
+    assert y <= 1024, y
+
+
+def board_l(s):
+    """Spans along screen y: the same sweep on the 1 x 8192 column (source y), plus
+    quarter-turned strips (texture x on screen y) and a half-turned column."""
+    b = "L"
+    s.plate("L:background", b, (-16, -16, 1056, 1056), BG)
+    label4(s, b, "L", 1012, 1012)
+    label4(s, b, "SPANS ALONG Y", 960, 4)
+    x = 16
+    for m in SPAN_M:
+        for orient in ("plain", "flip"):
+            for k, d in enumerate(SPAN_D):
+                for window in span_windows(m):
+                    bnd = SPAN_BASE + SPAN_LOCAL[window]
+                    strip_row(s, b, f"L:{m}x:{orient}:{k}:{window}", tex="column8192", region=(0, 0, 1, 8192),
+                              m=m, orient=orient, b=bnd, d=d, at=x, along="y", meta={"window": window, "family": "y"})
+                    x += THICK + 1
+    for m in (8, 48):
+        for orient in ("rot-90", "rot+90", "rot180"):
+            tex, region = ("column8192", (0, 0, 1, 8192)) if orient == "rot180" else ("strip8192", (0, 0, 8192, 1))
+            for k, d in enumerate(SPAN_D[:2]):
+                for window in ("cut", "mid"):
+                    bnd = SPAN_BASE + SPAN_LOCAL[window]
+                    strip_row(s, b, f"L:turn:{m}x:{orient}:{k}:{window}", tex=tex, region=region, m=m, orient=orient,
+                              b=bnd, d=d, at=x, along="y", meta={"window": window, "family": "y turned"})
+                    x += THICK + 1
+    assert x <= 958, x
+
+
+# Region variants: (name, region, windows as {orientation: {window: boundary b}}).
+# R4097 ends in a 1-texel span; R8191 starts at texel 1; R1000 crosses texel 4096.
+SPAN_REGIONS = [
+    ("r4097", (300, 0, 4097, 1), {"plain": {"cut": 2048, "end": 4097}, "flip": {"cut": 2049, "end": 0}}),
+    ("r8191", (1, 0, 8191, 1), {"plain": {"cut": 4096, "end": 8191}, "flip": {"cut": 4095, "end": 0}}),
+    ("r1000", (4000, 0, 1000, 1), {"plain": {"cut": 512, "end": 1000}, "flip": {"cut": 488, "end": 0}}),
+]
+
+
+def board_m(s):
+    """Span variants: region origins and widths that are not multiples of 512, mirrors,
+    half turns, wide nine-slice borders (also compressed), translucent and linear rows."""
+    b = "M"
+    s.plate("M:background", b, (-16, -16, 1056, 1056), BG)
+    label4(s, b, "M", 1012, 4)
+    label4(s, b, "SPAN VARIANTS", 8, 4)
+    y = 16
+    for name, region, windows in SPAN_REGIONS:
+        for orient in ("plain", "flip"):
+            for m in (1, 8, 48):
+                for k, d in enumerate(SPAN_D[:2]):
+                    for window, bnd in windows[orient].items():
+                        strip_row(s, b, f"M:{name}:{m}x:{orient}:{k}:{window}", tex="strip8192", region=region, m=m,
+                                  orient=orient, b=bnd, d=d, at=y, meta={"window": window, "family": name})
+                        y += THICK + 1
+    for name, region, cut in (("w8192", (0, 0, 8192, 1), SPAN_BASE), ("r4097", (300, 0, 4097, 1), 2048)):
+        for orient in ("mirror", "rot180"):
+            if orient == "rot180" and name != "w8192":
+                continue
+            for m in (8, 48):
+                for k, d in enumerate(SPAN_D[:2]):
+                    for window, bnd in (("cut", cut), ("mid", cut + 256)):
+                        strip_row(s, b, f"M:{name}:{m}x:{orient}:{k}:{window}", tex="strip8192", region=region, m=m,
+                                  orient=orient, b=bnd, d=d, at=y, meta={"window": window, "family": orient})
+                        y += THICK + 1
+    nine_windows = {False: {"left cut": 512, "left|centre": 600, "centre cut": 1112, "centre|right": 1300,
+                            "right cut": 1812},
+                    True: {"left cut": 1488, "left|centre": 1300, "centre cut": 788, "centre|right": 600,
+                           "right cut": 88}}
+    for mb, mc in ((8, 3), (32, 12)):
+        for flipped in (False, True):
+            for window, bnd in nine_windows[flipped].items():
+                nine_row(s, b, f"M:nine:{mb}x{mc}:{'flip' if flipped else 'plain'}:{window}", mb=mb, mc=mc,
+                         flipped=flipped, window=window, b=bnd, at=y)
+                y += THICK + 1
+    for flipped in (False, True):
+        for window, bnd in (("left cut", 1488 if flipped else 512), ("junction", None)):
+            nine_row(s, b, f"M:nine-compressed:8x:{'flip' if flipped else 'plain'}:{window}", mb=8, mc=0,
+                     flipped=flipped, window=window, b=bnd if bnd is not None else (1300 if flipped else 600), at=y,
+                     compressed=True)
+            y += THICK + 1
+    for m in (1, 8, 48):
+        for orient in ("plain", "flip"):
+            strip_row(s, b, f"M:translucent:{m}x:{orient}", tex="strip8192", region=(0, 0, 8192, 1), m=m,
+                      orient=orient, b=SPAN_BASE, d=Fraction(0), at=y, tint=(1, 1, 1, 0.5),
+                      meta={"window": "cut", "family": "translucent"})
+            y += THICK + 1
+    for orient in ("plain", "flip"):
+        strip_row(s, b, f"M:linear:8x:{orient}", tex="strip8192", region=(0, 0, 8192, 1), m=8, orient=orient,
+                  b=SPAN_BASE, d=Fraction(0), at=y, sampling="linear", meta={"window": "cut", "family": "linear"})
+        y += THICK + 1
+    assert y <= 1024, y
+
+
+def board_n(s):
+    """Isotropic rows (1 texel tall, M px high) at 32x, 48x and 64x on cut, mid and upper
+    windows, unflipped and flipped. Also viewed at 1920 x 1080 and through a rolled camera."""
+    b = "N"
+    s.plate("N:background", b, (-16, -16, 1056, 1056), BG)
+    label4(s, b, "N", 1012, 4)
+    label4(s, b, "ISOTROPIC 32X 48X 64X", 8, 4)
+    y = 16
+    for orient in ("plain", "flip"):
+        for m in (32, 48, 64):
+            for window in SPAN_LOCAL:
+                strip_row(s, b, f"N:{m}x:{orient}:{window}", tex="strip8192", region=(0, 0, 8192, 1), m=m,
+                          orient=orient, b=SPAN_BASE + SPAN_LOCAL[window], d=Fraction(0), at=y, thick=m,
+                          meta={"window": window, "family": "isotropic"})
+                y += m + 4
+    assert y <= 1024, y
+
+
+# Opt-in probe (--probe): where exact and near ties start to fail between 20x and 128x,
+# by span texel, along screen x (O) and y (P), on the dyadic 1024 x 1024 view and at
+# 1920 x 1080. The default scene, and so every other frame, is unchanged without it.
+PROBE_M = [20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 80, 96, 128]
+PROBE_LOCAL = [32, 288, 480]
+PROBE_SPEC = {"O": (0.0, 1200.0, 1024, 1024), "P": (800.0, 0.0, 1024, 1024)}
+
+
+def board_probe(s, b):
+    along, tex, region = ("x", "strip8192", (0, 0, 8192, 1)) if b == "O" else ("y", "column8192", (0, 0, 1, 8192))
+    s.plate(f"{b}:background", b, (-16, -16, 1056, 1056), BG)
+    at = 16
+    for m in PROBE_M:
+        for orient in ("plain", "flip"):
+            for k, d in enumerate(SPAN_D[:2]):
+                for local in PROBE_LOCAL:
+                    strip_row(s, b, f"{b}:{m}x:{orient}:{k}:{local}", tex=tex, region=region, m=m, orient=orient,
+                              b=SPAN_BASE + local, d=d, at=at, along=along,
+                              meta={"window": f"span texel {local}", "family": f"probe {along}"})
+                    at += THICK + 1
+    assert at <= 1024, at
+
+
 def occluder_gltf(models):
     """One emissive quad: board C, logical x 252..300, y 86..118, z = 1 (in front of z = 0)."""
     x0, x1, y0, y1 = wx("C", 252), wx("C", 300), wy("C", 118), wy("C", 86)
@@ -720,13 +1020,29 @@ CAMERAS["pp-I"] = {"board": "I", "offset": (0, 0), "roll": 0,
                    "projection": dict(PIXEL, reference_resolution=[1024, 640])}
 CAMERAS["pp-J"] = {"board": "J", "offset": (0, 0), "roll": 0,
                    "projection": dict(PIXEL, reference_resolution=[1024, 640])}
+for _b in ("K", "L", "M", "N"):
+    CAMERAS[f"pp-{_b}"] = {"board": _b, "offset": (0, 0), "roll": 0,
+                           "projection": dict(PIXEL, reference_resolution=[1024, 1024])}
+# The same board N at a common display size, whose 60 m half-width is not dyadic, and rolled.
+CAMERAS["pp-N-hd"] = {"board": "N", "offset": (0, 0), "roll": 0,
+                      "projection": dict(PIXEL, reference_resolution=[1920, 1080])}
+CAMERAS["roll7-N"] = {"board": "N", "offset": (0, 0), "roll": 7, "projection": ortho(64.0)}
 
 SHOTS = ([(f"pp-{b}", (320, 180)) for b in BOARDS] + [(f"pp-{b}", (960, 540)) for b in BOARDS]
          + [(f"ortho3-{b}", (960, 540)) for b in BOARDS] + [(f"orthof-{b}", (960, 540)) for b in BOARDS]
          + [(f"roll7-{b}", (960, 540)) for b in ("B", "D", "E")]
          + [("pp-A-odd", (319, 179)), ("pp-A-sub", (320, 180))]
          + [("pp-F", (320, 180)), ("pp-F", (960, 540)), ("orthof-F", (960, 540)), ("pp-G", (1024, 640))]
-         + [("roll7-G", (960, 540)), ("pp-H", (1280, 640)), ("pp-I", (1024, 640)), ("pp-J", (1024, 640))])
+         + [("roll7-G", (960, 540)), ("pp-H", (1280, 640)), ("pp-I", (1024, 640)), ("pp-J", (1024, 640))]
+         + [(f"pp-{b}", (1024, 1024)) for b in "KLMN"] + [("pp-N-hd", (1920, 1080)), ("roll7-N", (1024, 1024))])
+SPAN_SHOTS = [(f"pp-{b}", (1024, 1024)) for b in "KLMN"] + [("pp-N-hd", (1920, 1080))]
+PROBE_CAMERAS = {}
+for _b in ("O", "P"):
+    PROBE_CAMERAS[f"pp-{_b}"] = {"board": _b, "offset": (0, 0), "roll": 0,
+                                 "projection": dict(PIXEL, reference_resolution=[1024, 1024])}
+    PROBE_CAMERAS[f"pp-{_b}-hd"] = {"board": _b, "offset": (0, 0), "roll": 0,
+                                    "projection": dict(PIXEL, reference_resolution=[1920, 1080])}
+PROBE_SHOTS = [("pp-O", (1024, 1024)), ("pp-P", (1024, 1024)), ("pp-O-hd", (1920, 1080)), ("pp-P-hd", (1920, 1080))]
 
 
 # ---------------------------------------------------------------- live script --
@@ -751,7 +1067,7 @@ export default defineBehavior<{ tick: number }>({
 """
 
 
-def build(out, art):
+def build(out, art, directions, probe=False):
     project_dir = out / "project"
     project = project_dir / "sprites.incant.json"
     journal = project_dir / "sprites.incant.journal.jsonl"
@@ -770,7 +1086,7 @@ def build(out, art):
     textures = {}
     for name, file in (("sheet", "sheet.png"), ("labels", "labels.png"), ("badge", "badge.png"),
                        ("tone16", "tone16.png"), ("ruler64", "ruler64.png"), ("strip", "strip4096.png"),
-                       ("strip8192", "strip8192.png")):
+                       ("strip8192", "strip8192.png"), ("column8192", "column8192.png"), ("labels4", "labels4.png")):
         result = importer(file, file, usage="color")
         reply = json.loads(result.stdout)
         textures[name] = reply["asset"]["id"]
@@ -783,15 +1099,20 @@ def build(out, art):
     s = Scene(textures)
     for tex, table in (("sheet", regions["sheet"]), ("labels", regions["labels"]), ("badge", regions["badge"]),
                        ("tone16", regions["tone16"]), ("ruler64", regions["ruler64"]),
-                       ("strip", regions["strip4096"]), ("strip8192", regions["strip8192"])):
+                       ("strip", regions["strip4096"]), ("strip8192", regions["strip8192"]),
+                       ("column8192", regions["column8192"]), ("labels4", regions["labels4"])):
         for key, rect in table.items():
             s.regions[(tex, key)] = rect
-    for builder in (board_a, board_b, board_c, board_d, board_e, board_f, board_g, board_h, board_i, board_j):
+    for builder in (board_a, board_b, board_c, board_d, board_e, board_f, board_g, board_h, board_i, board_j,
+                    board_k, board_l, board_m, board_n):
         builder(s)
+    if probe:
+        for b in PROBE_SPEC:
+            board_probe(s, b)
     s.entity("C:occluder", {"Transform": transform((0, 0, 0)),
                             "MeshRenderer": {"mesh": occluder_asset, "materials": [], "cast_shadows": False}})
     cameras = {}
-    for name, spec in CAMERAS.items():
+    for name, spec in (dict(CAMERAS, **PROBE_CAMERAS) if probe else CAMERAS).items():
         bx, by = BOARD_SPEC[spec["board"]][:2]
         t = (bx + spec["offset"][0], by + spec["offset"][1], EYE_Z)
         cameras[name] = s.entity(f"camera:{name}", {"Camera": camera_value(spec["projection"]),
@@ -809,7 +1130,7 @@ def build(out, art):
     wisp_id = s.ids["E:wisp"]
     wisp_t0 = s.entities[[e["id"] for e in s.entities].index(wisp_id)]["components"]["Transform"]["translation"]
     scripts = {}
-    for key, (ux, uy) in DIRECTIONS.items():
+    for key, (ux, uy) in directions.items():
         steps = []
         for t in range(LIVE_TICKS):
             k = (t + 1) * STEP  # commanded at tick t
@@ -837,30 +1158,48 @@ def build(out, art):
         "d4": [d[0] for d in D4], "sweep": {"magnifications": SWEEP_M, "deltas_px": SWEEP_D},
         "regions": {f"{t}/{k}": v for (t, k), v in s.regions.items()},
         "entities": s.entities, "meta": s.meta, "ids": s.ids, "occluder": occluder,
-        "cameras": {k: dict(v, id=cameras[k]) for k, v in CAMERAS.items()},
+        "cameras": {k: dict(v, id=cameras[k]) for k, v in (dict(CAMERAS, **PROBE_CAMERAS) if probe
+                                                             else CAMERAS).items()},
         "live": {"id": live, "wisp": wisp_id, "wisp_t0": wisp_t0, "step": STEP, "ticks": LIVE_TICKS,
-                 "directions": DIRECTIONS},
+                 "directions": directions},
     }
     (out / "scene.json").write_text(json.dumps(scene, indent=1), encoding="utf-8")
     return project, journal, scene, scripts
 
 
+BUDGET = {"frames": 0, "raw_bytes": 0, "invocations": 0, "largest_invocation_frames": 0,
+          "largest_invocation_raw_bytes": 0}
+
+
+def account(frames, raw):
+    """Record one renderer invocation; refuse anything beyond the per-invocation limit."""
+    if frames > MAX_FRAMES or raw > MAX_RAW:
+        raise SystemExit(f"invocation of {frames} frames, {raw} raw bytes exceeds the budget")
+    BUDGET["frames"] += frames
+    BUDGET["raw_bytes"] += raw
+    BUDGET["invocations"] += 1
+    BUDGET["largest_invocation_frames"] = max(BUDGET["largest_invocation_frames"], frames)
+    BUDGET["largest_invocation_raw_bytes"] = max(BUDGET["largest_invocation_raw_bytes"], raw)
+
+
 def screenshot(project, path, camera, size, check=True):
     w, h = size
+    account(1, w * h * 4)
     return engine("screenshot", project, path, "--camera", camera, "--width", w, "--height", h, check=check)
 
 
-def shoot_pair(project, folder, name, camera, size, record):
+def shoot_pair(project, folder, name, camera, size, record, repeats=2):
     w, h = size
     hashes, info = [], None
-    for repeat in (1, 2):
+    for repeat in range(1, repeats + 1):
         png = folder / f"{name}-{w}x{h}-r{repeat}.png"
         result = screenshot(project, png, camera, size)
         hashes.append(sha(png))
         if info is None:
             reply = json.loads(result.stdout)
             info = {"adapter": reply.get("adapter"), "geometry": reply.get("geometry")}
-    record[f"{name}-{w}x{h}"] = {"r1": hashes[0], "r2": hashes[1], "equal": hashes[0] == hashes[1], **info}
+    record[f"{name}-{w}x{h}"] = {"r1": hashes[0], "r2": hashes[-1] if repeats > 1 else None,
+                                 "equal": hashes[0] == hashes[-1] if repeats > 1 else None, **info}
 
 
 def authored(project, journal):
@@ -871,8 +1210,20 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("out", type=Path)
     parser.add_argument("--binary", choices=sorted(BINARIES), default="active",
-                        help="active (artifacts/tools/incant_headless), pre-magnification or pre-ties")
+                        help="active (artifacts/tools/incant_headless), pre-wide, pre-magnification or pre-ties")
+    parser.add_argument("--repeats", type=int, choices=(1, 2), default=2, help="renders of each static frame")
+    parser.add_argument("--live", default=",".join(DIRECTIONS),
+                        help="comma-separated live directions to play twice each, or 'none'")
+    parser.add_argument("--static-only", action="store_true", help="static frames only: no reimport, "
+                        "source-free or live captures")
+    parser.add_argument("--probe", action="store_true", help="add probe boards O and P and capture only their "
+                        "four views (implies --static-only)")
     args = parser.parse_args()
+    global SHOTS
+    if args.probe:
+        args.static_only = True
+        BOARD_SPEC.update(PROBE_SPEC)
+        SHOTS = PROBE_SHOTS
     global CLI, BINARY_JSON
     CLI = ROOT / "artifacts/tools" / BINARIES[args.binary][0]
     BINARY_JSON = ROOT / "artifacts/tools" / BINARIES[args.binary][1]
@@ -881,132 +1232,161 @@ def main():
         raise SystemExit(f"Missing {CLI}; see artifacts/tools/binary.json")
     if out.exists():
         raise SystemExit("Output directory already exists; choose a new directory.")
-    frames = 1 + LIVE_TICKS
-    if frames > MAX_FRAMES or frames * LOGICAL[0] * LOGICAL[1] * 4 > MAX_RAW:
-        raise SystemExit("live capture exceeds the budget")
+    keys = [] if args.live == "none" or args.static_only else args.live.split(",")
+    if any(k not in DIRECTIONS for k in keys):
+        raise SystemExit(f"unknown live direction in {args.live}")
+    directions = {k: DIRECTIONS[k] for k in keys}
     start = verify_binary()
     out.mkdir(parents=True)
     run(sys.executable, "-I", TOOLS / "sprite_art.py", out / "art")
     art = out / "art"
-    project, journal, scene, scripts = build(out, art)
+    project, journal, scene, scripts = build(out, art, directions, args.probe)
     project_dir = project.parent
     cams = {k: v["id"] for k, v in scene["cameras"].items()}
     metadata = json.loads(BINARY_JSON.read_text(encoding="utf-8"))
     summary = {"binary": args.binary, "binary_file": CLI.name, "binary_source_commit": metadata["source_commit"],
-               "binary_sha256_start": start}
+               "binary_sha256_start": start, "plan": {"repeats": args.repeats, "live": keys,
+                                                      "static_only": args.static_only, "probe": args.probe}}
 
-    # 1. Static frames, each rendered twice.
+    # 1. Static frames, each rendered `repeats` times.
     before = authored(project, journal)
     shots_dir = out / "shots"
     shots_dir.mkdir()
     shots = {}
     for name, size in SHOTS:
-        shoot_pair(project, shots_dir, name, cams[name], size, shots)
+        shoot_pair(project, shots_dir, name, cams[name], size, shots, args.repeats)
     summary["shots"] = shots
     summary["authored_unchanged_by_rendering"] = before == authored(project, journal)
+    summary["authored_unchanged_by_play"] = True
 
-    # 2. Texture reimport through the public import command.
-    re_dir = out / "reimport"
-    re_dir.mkdir()
-    steps = {}
+    if not args.static_only:
+        # 2. Texture reimport through the public import command.
+        re_dir = out / "reimport"
+        re_dir.mkdir()
+        steps = {}
 
-    def reimport(label, source_name, target_name, usage=None, expect_error=False):
-        prior = authored(project, journal)
-        shutil.copyfile(art / source_name, project_dir / "art" / target_name)
-        args = ["import", project, f"art/{target_name}"] + (["--texture-usage", usage] if usage else [])
-        result = engine(*args, check=not expect_error)
-        entry = {"exit": result.returncode, "stderr": result.stderr.strip()[-600:],
-                 "authored_unchanged": prior == authored(project, journal)}
-        if result.returncode == 0:
-            reply = json.loads(result.stdout)
-            entry.update(asset=reply["asset"], changed=reply["changed"], cache_hit=reply["cache_hit"],
-                         details=reply["details"])
-        steps[label] = entry
-        return entry
+        def reimport(label, source_name, target_name, usage=None, expect_error=False):
+            prior = authored(project, journal)
+            shutil.copyfile(art / source_name, project_dir / "art" / target_name)
+            cmd = ["import", project, f"art/{target_name}"] + (["--texture-usage", usage] if usage else [])
+            result = engine(*cmd, check=not expect_error)
+            entry = {"exit": result.returncode, "stderr": result.stderr.strip()[-600:],
+                     "authored_unchanged": prior == authored(project, journal)}
+            if result.returncode == 0:
+                reply = json.loads(result.stdout)
+                entry.update(asset=reply["asset"], changed=reply["changed"], cache_hit=reply["cache_hit"],
+                             details=reply["details"])
+            steps[label] = entry
+            return entry
 
-    def shoot(label, name, size=(320, 180)):
-        """Never aborts: the analysis judges each recorded exit status and image."""
-        png = re_dir / f"{label}-{name}-{size[0]}x{size[1]}.png"
-        result = screenshot(project, png, cams[name], size, check=False)
-        entry = {"exit": result.returncode, "image_written": png.exists(),
-                 "sha256": sha(png) if png.exists() else None, "stderr": result.stderr.strip()[-600:]}
-        steps.setdefault(f"{label}:shots", {})[f"{name}-{size[0]}x{size[1]}"] = entry
-        return entry
+        def shoot(label, name, size=(320, 180)):
+            """Never aborts: the analysis judges each recorded exit status and image."""
+            png = re_dir / f"{label}-{name}-{size[0]}x{size[1]}.png"
+            result = screenshot(project, png, cams[name], size, check=False)
+            entry = {"exit": result.returncode, "image_written": png.exists(),
+                     "sha256": sha(png) if png.exists() else None, "stderr": result.stderr.strip()[-600:]}
+            steps.setdefault(f"{label}:shots", {})[f"{name}-{size[0]}x{size[1]}"] = entry
+            return entry
 
-    reimport("1-sheet-teal", "sheet-teal.png", "sheet.png")
-    for b in BOARDS:
-        shoot("1-sheet-teal", f"pp-{b}")
-    reimport("2-badge-orange", "badge-orange.png", "badge.png")
-    shoot("2-badge-orange", "pp-C")
-    shoot("2-badge-orange", "pp-E")
-    reimport("3-badge-small", "badge-small.png", "badge.png")
-    shoot("3-badge-small", "pp-C")  # expected: explicit source-region failure, no image
-    shoot("3-badge-small", "pp-A")  # board A does not draw the badge; is the whole project prepared?
-    reimport("4-badge-restore", "badge.png", "badge.png")
-    shoot("4-badge-restore", "pp-C")
-    reimport("5-sheet-linear", "sheet-teal.png", "sheet.png", usage="linear", expect_error=True)
-    reimport("6-sheet-restore", "sheet.png", "sheet.png")
-    for b in BOARDS:
-        shoot("6-sheet-restore", f"pp-{b}")
-    shoot("6-sheet-restore", "ortho3-E", (960, 540))
-    # Same texels and regions in a taller image: frames must not change at all.
-    reimport("7-sheet-tall", "sheet-tall.png", "sheet.png")
-    for b in BOARDS + ["F"]:
-        shoot("7-sheet-tall", f"pp-{b}")
-    shoot("7-sheet-tall", "orthof-D", (960, 540))
-    shoot("7-sheet-tall", "pp-G", (1024, 640))
-    shoot("7-sheet-tall", "pp-H", (1280, 640))
-    reimport("8-sheet-restore", "sheet.png", "sheet.png")
-    shoot("8-sheet-restore", "pp-E")
-    summary["reimport"] = steps
+        reimport("1-sheet-teal", "sheet-teal.png", "sheet.png")
+        for b in BOARDS:
+            shoot("1-sheet-teal", f"pp-{b}")
+        reimport("2-badge-orange", "badge-orange.png", "badge.png")
+        shoot("2-badge-orange", "pp-C")
+        shoot("2-badge-orange", "pp-E")
+        reimport("3-badge-small", "badge-small.png", "badge.png")
+        shoot("3-badge-small", "pp-C")  # expected: explicit source-region failure, no image
+        shoot("3-badge-small", "pp-A")  # board A does not draw the badge; is the whole project prepared?
+        reimport("4-badge-restore", "badge.png", "badge.png")
+        shoot("4-badge-restore", "pp-C")
+        reimport("5-sheet-linear", "sheet-teal.png", "sheet.png", usage="linear", expect_error=True)
+        reimport("6-sheet-restore", "sheet.png", "sheet.png")
+        for b in BOARDS:
+            shoot("6-sheet-restore", f"pp-{b}")
+        shoot("6-sheet-restore", "ortho3-E", (960, 540))
+        # Same texels and regions in a taller image: frames must not change at all.
+        reimport("7-sheet-tall", "sheet-tall.png", "sheet.png")
+        for b in BOARDS + ["F"]:
+            shoot("7-sheet-tall", f"pp-{b}")
+        shoot("7-sheet-tall", "orthof-D", (960, 540))
+        shoot("7-sheet-tall", "pp-G", (1024, 640))
+        shoot("7-sheet-tall", "pp-H", (1280, 640))
+        reimport("8-sheet-restore", "sheet.png", "sheet.png")
+        shoot("8-sheet-restore", "pp-E")
+        # Round four: the wide strip twice as tall and the column twice as wide, with
+        # red texels outside every region. Span frames must not change at all.
+        reimport("9-strip-tall", "strip8192-tall.png", "strip8192.png")
+        shoot("9-strip-tall", "pp-J", (1024, 640))
+        for b in "KMN":
+            shoot("9-strip-tall", f"pp-{b}", (1024, 1024))
+        reimport("10-column-wide", "column8192-wide.png", "column8192.png")
+        shoot("10-column-wide", "pp-L", (1024, 1024))
+        shoot("10-column-wide", "pp-K", (1024, 1024))
+        reimport("11-strip-restore", "strip8192.png", "strip8192.png")
+        reimport("12-column-restore", "column8192.png", "column8192.png")
+        shoot("12-column-restore", "pp-K", (1024, 1024))
+        summary["reimport"] = steps
 
-    # 3. Source-free: delete every source image and model, then render again.
-    removed = sorted(str(p.relative_to(project_dir)) for p in project_dir.glob("art/*") if p.is_file())
-    removed += sorted(str(p.relative_to(project_dir)) for p in project_dir.glob("models/*") if p.is_file())
-    for rel in removed:
-        (project_dir / rel).unlink()
-    free_dir = out / "source-free"
-    free_dir.mkdir()
-    free = {}
-    for name, size in ([(f"pp-{b}", (320, 180)) for b in BOARDS + ["F"]] + [("pp-G", (1024, 640)), ("pp-H", (1280, 640)),
-                                                                          ("pp-I", (1024, 640)), ("pp-J", (1024, 640)),
-                                                                          ("ortho3-E", (960, 540)),
-                                                                     ("orthof-D", (960, 540)),
-                                                                     ("roll7-B", (960, 540))]):
-        png = free_dir / f"{name}-{size[0]}x{size[1]}.png"
-        screenshot(project, png, cams[name], size)
-        free[f"{name}-{size[0]}x{size[1]}"] = sha(png)
-    summary["source_free"] = {"removed": removed, "shots": free}
+        # 3. Source-free: delete every source image and model, then render again.
+        removed = sorted(str(p.relative_to(project_dir)) for p in project_dir.glob("art/*") if p.is_file())
+        removed += sorted(str(p.relative_to(project_dir)) for p in project_dir.glob("models/*") if p.is_file())
+        for rel in removed:
+            (project_dir / rel).unlink()
+        free_dir = out / "source-free"
+        free_dir.mkdir()
+        free = {}
+        for name, size in ([(f"pp-{b}", (320, 180)) for b in BOARDS + ["F"]]
+                           + [("pp-G", (1024, 640)), ("pp-H", (1280, 640)), ("pp-I", (1024, 640)),
+                              ("pp-J", (1024, 640)), ("ortho3-E", (960, 540)), ("orthof-D", (960, 540)),
+                              ("roll7-B", (960, 540))] + SPAN_SHOTS):
+            png = free_dir / f"{name}-{size[0]}x{size[1]}.png"
+            screenshot(project, png, cams[name], size)
+            free[f"{name}-{size[0]}x{size[1]}"] = sha(png)
+        summary["source_free"] = {"removed": removed, "shots": free}
 
-    # 4. Live flipbook + pixel-perfect follow, source-free, twice per direction.
-    plays = {}
-    live_before = authored(project, journal)
-    for key in DIRECTIONS:
-        runs = []
-        for repeat in (1, 2):
-            target = out / f"live-{key}-r{repeat}"
-            result = engine("play", project, "--ticks", LIVE_TICKS, "--compiled-script", scripts[key],
-                            "--camera", scene["live"]["id"], "--capture-every", 1, "--width", LOGICAL[0],
-                            "--height", LOGICAL[1], "--output", target,
-                            "--log-output", out / f"live-{key}-r{repeat}.logs.jsonl")
-            (out / f"live-{key}-r{repeat}.stdout.json").write_text(result.stdout, encoding="utf-8")
-            runs.append({p.name: sha(p) for p in sorted(target.glob("*.png"))})
-        plays[key] = {"frames": runs[0], "repeat_equal": runs[0] == runs[1], "count": len(runs[0])}
-    summary["plays"] = plays
-    summary["authored_unchanged_by_play"] = live_before == authored(project, journal)
+        # 4. Live flipbook + pixel-perfect follow, source-free, twice per direction.
+        plays = {}
+        live_before = authored(project, journal)
+        for key in directions:
+            runs = []
+            for repeat in (1, 2):
+                target = out / f"live-{key}-r{repeat}"
+                account(1 + LIVE_TICKS, (1 + LIVE_TICKS) * LOGICAL[0] * LOGICAL[1] * 4)
+                result = engine("play", project, "--ticks", LIVE_TICKS, "--compiled-script", scripts[key],
+                                "--camera", scene["live"]["id"], "--capture-every", 1, "--width", LOGICAL[0],
+                                "--height", LOGICAL[1], "--output", target,
+                                "--log-output", out / f"live-{key}-r{repeat}.logs.jsonl")
+                (out / f"live-{key}-r{repeat}.stdout.json").write_text(result.stdout, encoding="utf-8")
+                runs.append({p.name: sha(p) for p in sorted(target.glob("*.png"))})
+            plays[key] = {"frames": runs[0], "repeat_equal": runs[0] == runs[1], "count": len(runs[0])}
+        summary["plays"] = plays
+        summary["authored_unchanged_by_play"] = live_before == authored(project, journal)
     summary["binary_sha256_end"] = verify_binary()
     summary["engine_calls"] = CALLS["count"]
     summary["binary_unchanged_every_call"] = CALLS["unchanged"] and start == summary["binary_sha256_end"]
+    # Planned captures, checked per invocation; the written PNGs are counted as well.
+    written = [p for p in out.rglob("*.png") if "art" not in p.parts and "project" not in p.parts]
+    summary["budget"] = dict(BUDGET, written_pngs=len(written),
+                             written_raw_bytes=sum(4 * w * h for w, h in (png_size(p) for p in written)))
     (out / "helper.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
     print(json.dumps({
         "binary_unchanged": summary["binary_unchanged_every_call"], "engine_calls": CALLS["count"],
         "authored_unchanged": summary["authored_unchanged_by_rendering"] and summary["authored_unchanged_by_play"],
-        "screenshot_repeats_equal": all(v["equal"] for v in shots.values()), "screenshots": len(shots),
+        "screenshot_repeats_equal": all(v["equal"] for v in shots.values()) if args.repeats > 1 else None,
+        "screenshots": len(shots),
         "reimport": {k: v.get("exit", v) if isinstance(v, dict) and "exit" in v else
-                     {n: e["exit"] for n, e in v.items()} for k, v in steps.items()},
-        "source_free_shots": len(free),
-        "play_repeats_equal": {k: v["repeat_equal"] for k, v in plays.items()},
-        "play_frames": {k: v["count"] for k, v in plays.items()}}))
+                     {n: e["exit"] for n, e in v.items()} for k, v in summary.get("reimport", {}).items()},
+        "source_free_shots": len(summary.get("source_free", {}).get("shots", {})),
+        "play_repeats_equal": {k: v["repeat_equal"] for k, v in summary.get("plays", {}).items()},
+        "play_frames": {k: v["count"] for k, v in summary.get("plays", {}).items()},
+        "budget": summary["budget"]}))
+
+
+def png_size(path):
+    """(width, height) from a PNG header."""
+    with open(path, "rb") as f:
+        head = f.read(24)
+    return struct.unpack(">II", head[16:24])
 
 
 if __name__ == "__main__":

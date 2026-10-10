@@ -1,0 +1,84 @@
+{
+ "binary": "active",
+ "binary_file": "incant_headless",
+ "binary_source_commit": "0494b40cf8fcc5e1ad0fc689655a62cb264a2f50",
+ "binary_sha256_start": "1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50",
+ "plan": {
+  "repeats": 2,
+  "live": [],
+  "static_only": true,
+  "probe": true
+ },
+ "shots": {
+  "pp-O-1024x1024": {
+   "r1": "a15883330a1487b22807e3dd648111da7aa4fb5677fda0bb4cf24e76645d9fd1",
+   "r2": "a15883330a1487b22807e3dd648111da7aa4fb5677fda0bb4cf24e76645d9fd1",
+   "equal": true,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 1695
+   }
+  },
+  "pp-P-1024x1024": {
+   "r1": "bd20ce522a1858c180c0a23d768284e654cd9728ab0e8e2c5563241a28a337d4",
+   "r2": "bd20ce522a1858c180c0a23d768284e654cd9728ab0e8e2c5563241a28a337d4",
+   "equal": true,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 1695
+   }
+  },
+  "pp-O-hd-1920x1080": {
+   "r1": "ed827e6b9b4727af4b69c18daa04028dd410b8eacb958e9027d55df590f68a5a",
+   "r2": "ed827e6b9b4727af4b69c18daa04028dd410b8eacb958e9027d55df590f68a5a",
+   "equal": true,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 1695
+   }
+  },
+  "pp-P-hd-1920x1080": {
+   "r1": "cf89a7c70a020ecee2351c560e1ce929c57b7839bb82e35ab3b078709874aa2b",
+   "r2": "cf89a7c70a020ecee2351c560e1ce929c57b7839bb82e35ab3b078709874aa2b",
+   "equal": true,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 1695
+   }
+  }
+ },
+ "authored_unchanged_by_rendering": true,
+ "authored_unchanged_by_play": true,
+ "binary_sha256_end": "1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50",
+ "engine_calls": 22,
+ "binary_unchanged_every_call": true,
+ "budget": {
+  "frames": 8,
+  "raw_bytes": 49954816,
+  "invocations": 8,
+  "largest_invocation_frames": 1,
+  "largest_invocation_raw_bytes": 8294400,
+  "written_pngs": 8,
+  "written_raw_bytes": 49954816
+ }
+}
