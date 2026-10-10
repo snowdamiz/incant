@@ -12,8 +12,8 @@ frame so real engine frames can be compared pixel by pixel:
   * raster: vertices snapped to 1/256 px (half steps up), pixel-centre coverage
     with the top-left fill rule, affine attributes;
   * sampling: bilinear (clamp to edge) level zero on normalized UVs clamped to the
-    region's outer texel centres; nearest per NEAREST_RULE, either the corrected
-    region-local tie-band rule or the pre-ties hardware filter;
+    region's outer texel centres; nearest per NEAREST_RULE: the pre-ties hardware
+    filter, the fixed 1/1024-texel tie band, or the derivative-scaled band;
   * painter order: (layer, order, entity ID); depth test LessEqual against opaque
     meshes, no sprite depth writes; premultiplied "over" blending stored as f16;
   * display: unpremultiply, Incant tone curve (identity below a 0.8 peak), mix
@@ -33,14 +33,15 @@ EPS_EDGE = 1.0 / 256  # px: GPU vertex snapping precision
 # Counterfactual switch for evidence only: filter straight-alpha texels (hidden RGB
 # included) and premultiply afterwards. The contract premultiplies before filtering.
 STRAIGHT_ALPHA_FILTERING = False
-# Nearest-sampling contract. "tie-band" is the corrected build (source c2c7758):
-# interpolated region-local texels, a 1/1024-texel band toward increasing screen
-# coordinate on the dominant derivative axis (X wins equal slopes), integer fetch.
-# "hardware" is the pre-ties build: normalized UVs, hardware nearest filter; exact
-# texel-boundary samples are flagged ambiguous instead of guessed.
-# "pixel-band" is an evidence-only counterfactual for the follow-up recommendation:
-# the same rule with the band scaled by the signed derivative (1/1024 px, not texel).
-NEAREST_RULE = "tie-band"
+# Nearest-sampling contract, by build:
+#   "hardware"   pre-ties (source 39e5c38): normalized UVs, hardware nearest filter;
+#                exact texel-boundary samples are flagged ambiguous, not guessed.
+#   "tie-band"   first correction (c2c7758): interpolated region-local texels, a
+#                fixed 1/1024-texel band toward increasing screen coordinate on the
+#                dominant derivative axis (X wins equal slopes), integer fetch.
+#   "pixel-band" magnification correction (f9aa1da): the same rule with the band
+#                scaled by the signed derivative, i.e. 1/1024 screen pixel.
+NEAREST_RULE = "pixel-band"
 TIE_BAND = 1.0 / 1024
 # Clipping a primitive at the target edge creates new, separately snapped vertices;
 # allow two 1/256 px snap steps of attribute-plane movement for such triangles only.
@@ -441,13 +442,14 @@ def plane_gradient(pts, values):
             ((v2 - v0) * (x1 - x0) - (v1 - v0) * (x2 - x0)) / det)
 
 
-def tie_band_index(t, dx, dy, size, slack_px=0.0):
+def tie_band_index(t, dx, dy, size, slack_px=0.0, position_px=1.5e-4):
     """Documented corrected rule for one axis; returns (index, alternative or None).
 
     The alternative is set when f32 interpolation or an equal-slope axis choice could
     make the engine pick the other candidate; callers treat that pixel as ambiguous.
     `slack_px` widens that window for triangles the GPU clips at the target edge,
     whose re-derived, re-snapped vertices can move the attribute plane slightly.
+    `position_px` is the f32 screen-position error assumed for this sprite.
     """
     def pick(direction):
         if NEAREST_RULE == "pixel-band":
@@ -461,10 +463,20 @@ def tie_band_index(t, dx, dy, size, slack_px=0.0):
     v, index = pick(direction)
     alternative = None
     nearest = round(v)
-    # f32 positions, matrix and interpolation error, well inside the 1/1024 band.
-    tolerance = 1.5e-4 * max(1.0, abs(dx), abs(dy)) + 4e-6 * abs(t) + slack_px * max(abs(dx), abs(dy))
-    if v != nearest and abs(v - nearest) < tolerance:
-        other = min(max(nearest - 1 if v > nearest else nearest, 0), size - 1)
+    # f32 positions, matrix and interpolation error, well inside the band. The
+    # derivative-scaled band shrinks with magnification, so its window scales too:
+    # position error in pixels times texels per pixel, plus about 8 f32 ulps of t.
+    spread_px = max(abs(dx), abs(dy))
+    if NEAREST_RULE == "pixel-band":
+        tolerance = position_px * spread_px + 1e-6 * abs(t) + slack_px * spread_px
+    else:
+        tolerance = 1.5e-4 * max(1.0, spread_px) + 4e-6 * abs(t) + slack_px * spread_px
+    # A biased coordinate within the error window of an integer is a knife edge,
+    # including an exact integer: f32 interpolation of a large t need not land there.
+    if abs(v - nearest) < tolerance:
+        other = min(max(nearest - 1 if v >= nearest else nearest, 0), size - 1)
+        if other == index:
+            other = min(max(nearest if v >= nearest else nearest - 1, 0), size - 1)
         if other != index:
             alternative = other
     spread = max(abs(dx), abs(dy))
@@ -500,6 +512,15 @@ def draw_sprite(frame, view, world, sprite, tex, name):
     tr, tg, tb, ta = tint
     tie_band = sampling == "nearest" and NEAREST_RULE in ("tie-band", "pixel-band")
     derivative = {}
+    # Axis-aligned dyadic placements stay exact in f32. Rotated sprites or cameras
+    # carry irrational matrix terms, so allow about 8 f32 ulps of the world
+    # coordinate magnitude, in screen pixels.
+    rotated = bool(world[0][1] or world[1][0]) or view.s != [1.0, 0.0, 0.0]
+    position_px = 1.5e-4
+    if rotated:
+        magnitude = max(abs(world[0][3]), abs(world[1][3]), abs(view.eye[0]), abs(view.eye[1]), 1.0)
+        ulp = 2.0 ** (math.floor(math.log2(magnitude)) - 23)
+        position_px = max(position_px, 8 * ulp * view.height / (2 * view.half_h))
 
     def gradient(pts):
         derivative["x"] = plane_gradient(pts, [a[3] for a in current])
@@ -517,8 +538,8 @@ def draw_sprite(frame, view, world, sprite, tex, name):
         if depth > D[i] + 1e-6:
             return
         if tie_band:
-            ix, altx = tie_band_index(tx, *derivative["x"], reg[2], derivative["slack"])
-            iy, alty = tie_band_index(ty, *derivative["y"], reg[3], derivative["slack"])
+            ix, altx = tie_band_index(tx, *derivative["x"], reg[2], derivative["slack"], position_px)
+            iy, alty = tie_band_index(ty, *derivative["y"], reg[3], derivative["slack"], position_px)
             texel = tex.premul[reg[1] + iy][reg[0] + ix]
             amb = any(alt is not None and tex.premul[reg[1] + (iy if a == "x" else alt)][reg[0] + (alt if a == "x" else ix)]
                       != texel for a, alt in (("x", altx), ("y", alty)))

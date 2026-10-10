@@ -28,11 +28,15 @@ interfaces and the supplied frozen binary:
      orientation (eight square symmetries, a 180-degree transform and a mirror
      parent) on tie and aligned placements at 1x and 3x; G sweeps sub-pixel offsets
      of 0 to 6/256 px at magnifications 1 to 8, unflipped and flipped.
+  8. Round-three falsification boards: H holds 12x-32x strips, quarter turns,
+     anisotropic scale and 2-4x minification on tie placements plus offsets; I holds
+     a 4096-texel strip magnified 1x-16x so region-local texels sit near 4096; J maps
+     exact ties across region widths 512-8192 at 1x-32x.
 
 Usage (repo root):
-  python3 -I handoffs/0032-sprite-rendering/tools/sprite_lookdev.py OUT_DIR [--binary pre-ties]
-OUT_DIR must not exist. The default binary is the active corrected build; pre-ties
-selects the preserved round-one build for before/after comparisons.
+  python3 -I handoffs/0032-sprite-rendering/tools/sprite_lookdev.py OUT_DIR [--binary NAME]
+OUT_DIR must not exist. NAME is active (default), pre-magnification or pre-ties; the
+earlier builds are preserved in artifacts/tools for before/after comparisons.
 """
 
 import argparse
@@ -50,8 +54,10 @@ sys.path.insert(0, str(TOOLS))
 import sprite_art  # noqa: E402
 
 ROOT = TOOLS.parents[2]
-# The active build is the corrected one; the pre-ties build is kept for before/after.
-BINARIES = {"corrected": ("incant_headless", "binary.json"),
+# The active build is the newest tested one; earlier builds are kept for before/after:
+# pre-ties (39e5c38), pre-magnification (c2c7758) and active (f9aa1da at round three).
+BINARIES = {"active": ("incant_headless", "binary.json"),
+            "pre-magnification": ("pre-magnification-incant_headless", "pre-magnification-binary.json"),
             "pre-ties": ("pre-ties-incant_headless", "pre-ties-binary.json")}
 CLI = ROOT / "artifacts/tools/incant_headless"
 BINARY_JSON = ROOT / "artifacts/tools/binary.json"
@@ -70,6 +76,9 @@ BOARD_X = {b: BOARD_PITCH * i for i, b in enumerate(BOARDS)}
 BOARD_SPEC = {b: (BOARD_X[b], 0.0, 320, 180) for b in BOARDS}
 BOARD_SPEC["F"] = (0.0, 24.0, 320, 180)
 BOARD_SPEC["G"] = (0.0, -40.0, 1024, 640)
+BOARD_SPEC["H"] = (0.0, 60.0, 1280, 640)  # screenshots allow at most 1920 x 1080
+BOARD_SPEC["I"] = (0.0, 110.0, 1024, 640)
+BOARD_SPEC["J"] = (0.0, 160.0, 1024, 640)
 PIXEL = {"kind": "pixel_perfect", "pixels_per_unit": PPU, "reference_resolution": list(LOGICAL)}
 BG = (24, 22, 40)  # board background, sRGB
 STEP = 1.0 / (8 * PPU)  # 1/8 logical pixel per tick
@@ -518,6 +527,134 @@ def board_g(s):
         s.meta[key].update(cell=[x, y], delta_px=d, magnification=m, flipped=flipped)
 
 
+# Round three: cases chosen to falsify the derivative-scaled tolerance.
+HIGH_M = [12, 16, 24, 32]
+HIGH_D = [0.0, 5 / 2048, 1 / 256, 2 / 256, 8 / 256]
+HIGH_HEAD = ["0", ".625", "1", "2", "8"]
+TURN_M = [4, 8]
+TURN_D = [0.0, 5 / 2048, 1 / 256, 2 / 256]
+MIN_K = [(2, "ruler64", 64), (3, "ruler63", 63), (4, "ruler64", 64)]
+MIN_PLACE = [("aligned", 0.0, 0.0), ("tie", 0.5, 0.0), ("tie+.625", 0.5, 5 / 2048), ("tie+1", 0.5, 1 / 256),
+             ("tie+2", 0.5, 2 / 256)]
+WIDE_M = [1, 2, 4, 8, 16]
+WIDE_D = [0.0, 5 / 2048, 1 / 256, 3 / 256]
+
+
+def board_h(s):
+    """High magnification (12x-32x strips), quarter turns, anisotropic scale and
+    minification, each on tie placements moved by sub-pixel offsets."""
+    b = "H"
+    rx, ry = s.regions[("sheet", "odd")][:2]
+    s.plate("H:background", b, (-16, -16, 1312, 672), BG)
+    s.label(b, "H", 1240, 632)
+    s.label(b, "HIGH MAGNIFICATION", 70, 4)
+    for c, head in enumerate(HIGH_HEAD):
+        s.label(b, head, 70 + 240 * c, 14)
+    y = 24
+    for m in HIGH_M:
+        for flipped in (False, True):
+            s.label(b, f"{m}X FLIP" if flipped else f"{m}X", 4, y + 1)
+            for c, d in enumerate(HIGH_D):
+                x = 70 + 240 * c
+                key = f"H:high:{m}x:{'flip' if flipped else 'plain'}:{c}"
+                # The ruler's top row as a 7 x 1 strip; left edge on a pixel centre + d.
+                s.sprite(key, b, "sheet", (rx, ry, 7, 1), None, size=(7 * m, m), pivot=(0, 1),
+                         local=(wx(b, x + 0.5 + d), wy(b, y), 0.0), flip_x=flipped, exact=True)
+                s.meta[key].update(cell=[x, y], delta_px=d, magnification=m, flipped=flipped, kind="high")
+            y += m + 6
+    s.label(b, "QUARTER TURNS 4X 8X", 70, 250)
+    k = 0
+    for m in TURN_M:
+        for angle in (90, -90):
+            for c, d in enumerate(TURN_D):
+                x0 = 70 + 68 * k
+                # Centre on a pixel centre: every edge and texel boundary on a pixel centre, then + d.
+                centre = (x0 + 28.5 + d, 262 + 28.5 + d)
+                key = f"H:turn:{m}x:{angle}:{c}"
+                s.sprite(key, b, "sheet", "odd", None, center=centre, size=(7 * m, 7 * m), angle=angle, exact=True)
+                s.meta[key].update(cell=[x0, 262], delta_px=d, magnification=m, angle=angle, kind="turn")
+                k += 1
+    s.label(b, "ANISOTROPIC", 70, 330)
+    k = 0
+    for mx, my in ((1, 8), (8, 1)):
+        for flipped in (False, True):
+            for c, d in enumerate(TURN_D):
+                x0 = 70 + 64 * k
+                key = f"H:aniso:{mx}x{my}:{'flip' if flipped else 'plain'}:{c}"
+                s.sprite(key, b, "sheet", "odd", None, size=(7 * mx, 7 * my), pivot=(0, 1),
+                         local=(wx(b, x0 + 0.5 + d), wy(b, 342 + 0.5 + d), 0.0), flip_x=flipped, flip_y=flipped,
+                         exact=True)
+                s.meta[key].update(cell=[x0, 342], delta_px=d, magnification=[mx, my], flipped=flipped,
+                                   kind="aniso")
+                k += 1
+    s.label(b, "MINIFY", 70, 410)
+    y = 422
+    for k_texels, region, n in MIN_K:
+        s.label(b, f"1/{k_texels}", 4, y + 1)
+        size = n // k_texels
+        c = 0
+        for flipped in (False, True):
+            for name, phase, d in MIN_PLACE:
+                x0 = 70 + 40 * c
+                key = f"H:min:{k_texels}:{'flip' if flipped else 'plain'}:{name}"
+                s.sprite(key, b, "ruler64", region, None, size=(size, size), pivot=(0, 1),
+                         local=(wx(b, x0 + phase + d), wy(b, y + phase + d), 0.0), flip_x=flipped,
+                         flip_y=flipped, exact=True)
+                s.meta[key].update(cell=[x0, y], delta_px=d, phase=phase, texels_per_pixel=k_texels,
+                                   flipped=flipped, placement=name, size_px=size, kind="minify")
+                c += 1
+        y += size + 6
+
+
+def board_i(s):
+    """A 4096 x 1 texel strip magnified 1x-16x, so visible region-local texel
+    coordinates sit near 4096. Plain strips end on screen; flipped ones start on it."""
+    b = "I"
+    s.plate("I:background", b, (-16, -16, 1056, 672), BG)
+    s.label(b, "I", 1016, 632)
+    s.label(b, "WIDE STRIP NEAR T 4096", 100, 4)
+    y = 16
+    for m in WIDE_M:
+        s.label(b, f"{m}X", 4, y)
+        y += 8
+        for flipped in (False, True):
+            for c, d in enumerate(WIDE_D):
+                key = f"I:{m}x:{'flip' if flipped else 'plain'}:{c}"
+                if flipped:
+                    pivot, local = (0, 1), (wx(b, 100 + 0.5 + d), wy(b, y), 0.0)
+                else:
+                    pivot, local = (1, 1), (wx(b, 900 + 0.5 + d), wy(b, y), 0.0)
+                s.sprite(key, b, "strip", "strip", None, size=(4096 * m, m), pivot=pivot, local=local,
+                         flip_x=flipped, exact=True)
+                s.meta[key].update(row_y=y, delta_px=d, magnification=m, flipped=flipped, kind="wide")
+                y += m + 4
+
+
+MAP_W = [512, 1024, 2048, 4096, 8192]
+MAP_M = [1, 2, 4, 8, 16, 32]
+
+
+def board_j(s):
+    """Exact ties across region widths and magnifications: each row holds a plain
+    strip ending at x = 780.5 and a flipped one starting at x = 820.5, so visible
+    region-local texels sit near the region width."""
+    b = "J"
+    s.plate("J:background", b, (-16, -16, 1056, 672), BG)
+    s.label(b, "J", 1016, 632)
+    s.label(b, "TIES ACROSS REGION WIDTH", 100, 4)
+    y = 16
+    for w in MAP_W:
+        s.label(b, f"W{w}", 784, y)
+        for m in MAP_M:
+            for flipped in (False, True):
+                key = f"J:w{w}:{m}x:{'flip' if flipped else 'plain'}"
+                pivot, edge = ((0, 1), 820.5) if flipped else ((1, 1), 780.5)
+                s.sprite(key, b, "strip8192", f"w{w}", None, size=(w * m, m), pivot=pivot,
+                         local=(wx(b, edge), wy(b, y), 0.0), flip_x=flipped, exact=True)
+                s.meta[key].update(row_y=y, width=w, magnification=m, flipped=flipped, kind="map")
+            y += m + 3
+
+
 def occluder_gltf(models):
     """One emissive quad: board C, logical x 252..300, y 86..118, z = 1 (in front of z = 0)."""
     x0, x1, y0, y1 = wx("C", 252), wx("C", 300), wy("C", 118), wy("C", 86)
@@ -576,12 +713,20 @@ CAMERAS["pp-F"] = {"board": "F", "offset": (0, 0), "roll": 0, "projection": PIXE
 CAMERAS["orthof-F"] = {"board": "F", "offset": (0.1037, -0.0491), "roll": 0, "projection": ortho(9.0)}
 CAMERAS["pp-G"] = {"board": "G", "offset": (0, 0), "roll": 0,
                    "projection": dict(PIXEL, reference_resolution=[1024, 640])}
+CAMERAS["roll7-G"] = {"board": "G", "offset": (-10.0, 3.6), "roll": 7, "projection": ortho(32.0)}
+CAMERAS["pp-H"] = {"board": "H", "offset": (0, 0), "roll": 0,
+                   "projection": dict(PIXEL, reference_resolution=[1280, 640])}
+CAMERAS["pp-I"] = {"board": "I", "offset": (0, 0), "roll": 0,
+                   "projection": dict(PIXEL, reference_resolution=[1024, 640])}
+CAMERAS["pp-J"] = {"board": "J", "offset": (0, 0), "roll": 0,
+                   "projection": dict(PIXEL, reference_resolution=[1024, 640])}
 
 SHOTS = ([(f"pp-{b}", (320, 180)) for b in BOARDS] + [(f"pp-{b}", (960, 540)) for b in BOARDS]
          + [(f"ortho3-{b}", (960, 540)) for b in BOARDS] + [(f"orthof-{b}", (960, 540)) for b in BOARDS]
          + [(f"roll7-{b}", (960, 540)) for b in ("B", "D", "E")]
          + [("pp-A-odd", (319, 179)), ("pp-A-sub", (320, 180))]
-         + [("pp-F", (320, 180)), ("pp-F", (960, 540)), ("orthof-F", (960, 540)), ("pp-G", (1024, 640))])
+         + [("pp-F", (320, 180)), ("pp-F", (960, 540)), ("orthof-F", (960, 540)), ("pp-G", (1024, 640))]
+         + [("roll7-G", (960, 540)), ("pp-H", (1280, 640)), ("pp-I", (1024, 640)), ("pp-J", (1024, 640))])
 
 
 # ---------------------------------------------------------------- live script --
@@ -624,7 +769,8 @@ def build(out, art):
 
     textures = {}
     for name, file in (("sheet", "sheet.png"), ("labels", "labels.png"), ("badge", "badge.png"),
-                       ("tone16", "tone16.png")):
+                       ("tone16", "tone16.png"), ("ruler64", "ruler64.png"), ("strip", "strip4096.png"),
+                       ("strip8192", "strip8192.png")):
         result = importer(file, file, usage="color")
         reply = json.loads(result.stdout)
         textures[name] = reply["asset"]["id"]
@@ -636,10 +782,11 @@ def build(out, art):
 
     s = Scene(textures)
     for tex, table in (("sheet", regions["sheet"]), ("labels", regions["labels"]), ("badge", regions["badge"]),
-                       ("tone16", regions["tone16"])):
+                       ("tone16", regions["tone16"]), ("ruler64", regions["ruler64"]),
+                       ("strip", regions["strip4096"]), ("strip8192", regions["strip8192"])):
         for key, rect in table.items():
             s.regions[(tex, key)] = rect
-    for builder in (board_a, board_b, board_c, board_d, board_e, board_f, board_g):
+    for builder in (board_a, board_b, board_c, board_d, board_e, board_f, board_g, board_h, board_i, board_j):
         builder(s)
     s.entity("C:occluder", {"Transform": transform((0, 0, 0)),
                             "MeshRenderer": {"mesh": occluder_asset, "materials": [], "cast_shadows": False}})
@@ -723,8 +870,8 @@ def authored(project, journal):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("out", type=Path)
-    parser.add_argument("--binary", choices=sorted(BINARIES), default="corrected",
-                        help="corrected (active) or pre-ties (round-one build) from artifacts/tools")
+    parser.add_argument("--binary", choices=sorted(BINARIES), default="active",
+                        help="active (artifacts/tools/incant_headless), pre-magnification or pre-ties")
     args = parser.parse_args()
     global CLI, BINARY_JSON
     CLI = ROOT / "artifacts/tools" / BINARIES[args.binary][0]
@@ -808,6 +955,7 @@ def main():
         shoot("7-sheet-tall", f"pp-{b}")
     shoot("7-sheet-tall", "orthof-D", (960, 540))
     shoot("7-sheet-tall", "pp-G", (1024, 640))
+    shoot("7-sheet-tall", "pp-H", (1280, 640))
     reimport("8-sheet-restore", "sheet.png", "sheet.png")
     shoot("8-sheet-restore", "pp-E")
     summary["reimport"] = steps
@@ -820,7 +968,9 @@ def main():
     free_dir = out / "source-free"
     free_dir.mkdir()
     free = {}
-    for name, size in ([(f"pp-{b}", (320, 180)) for b in BOARDS + ["F"]] + [("pp-G", (1024, 640)), ("ortho3-E", (960, 540)),
+    for name, size in ([(f"pp-{b}", (320, 180)) for b in BOARDS + ["F"]] + [("pp-G", (1024, 640)), ("pp-H", (1280, 640)),
+                                                                          ("pp-I", (1024, 640)), ("pp-J", (1024, 640)),
+                                                                          ("ortho3-E", (960, 540)),
                                                                      ("orthof-D", (960, 540)),
                                                                      ("roll7-B", (960, 540))]):
         png = free_dir / f"{name}-{size[0]}x{size[1]}.png"

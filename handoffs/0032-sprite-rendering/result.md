@@ -1,7 +1,266 @@
 # 0032 sprite rendering: original art and real-engine review
 
-The round-two follow-up on the corrected renderer comes first. Round one follows
-unchanged from "Status" onward.
+The round-three magnification follow-up comes first. Round two follows unchanged,
+then round one from "Status" onward.
+
+## Round 3: derivative-scaled tie band
+
+### Verdict
+
+- **Accepted, scoped: the magnified-edge regression is fixed.** On the active build
+  (source `f9aa1da`), every near-boundary case renders uniform texels:
+
+  | Case | Pre-magnification build | Active build |
+  | --- | --- | --- |
+  | Board G sweep, 1× to 8×, 140 cells | 15 failures | 0 |
+  | Board H, 12× to 32× strips, quarter turns, anisotropic, minification, 102 cases | 45 failures | 0 |
+  | Board I offset cases near texel 4096, 1× to 16×, 30 cases | 13 failures | 0 |
+
+- **Earlier corrections still hold.** All 40 board F orientation cases pass, and so
+  does board A's ruler station. A taller sheet with identical texels changes no
+  nearest pixel on any board.
+- **Concrete limitation, found by trying to falsify the change.** Exact ties at large
+  region-local texel coordinates under magnification lose the tie rule. A flipped
+  strip's leading texel then gains one pixel, for example 9 px instead of 8. On this
+  GPU it happens exactly where region width × magnification reaches 32,768. That
+  affects 10 of 60 board J strips and 2 of 40 board I strips. The pre-magnification
+  build passed all of these. See "Remaining limit".
+- **Nothing else changed.** The same scene on both builds:
+
+  | Files compared | Byte-identical | Changed | Changed pixels |
+  | --- | --- | --- | --- |
+  | 342 | 321 | 21 | 74,520 |
+
+  65,099 changed pixels are where the two documented rules predict different
+  colours, and 9,421 are ties that either model marks ambiguous. None are
+  unexplained. Linear sampling, tone, alpha, sorting, depth and all 272 live frames
+  are unchanged.
+- **Repeatability holds.** Two fresh active runs match byte for byte across 647
+  images, and every source-free frame equals its with-source frame.
+- **Diagnostics.** The undersized-reimport error now names the entity, texture,
+  requested region and cooked size, as requested in round one:
+  ```
+  Error: "sprite entity 01JA32SP000000000000000092, texture 01M4KM0XBNCAGTYS3VTWZNAEX4, source region [0, 0, 16, 16], cooked texture size [8, 8]: sprite source region must be nonempty and fit inside a texture of at most 8192 pixels per axis"
+  ```
+
+This verdict covers headless engine rendering on one Apple M5 Pro with Metal. It does
+not imply phone performance, native editor acceptance, hosted CI or any phase gate.
+
+### Decisions acknowledged
+
+- The neutral curve and linear-light blending stay. An exact display option can be
+  per-camera when implemented.
+- Optional sprite-grid snapping is separate work.
+- The pixel-camera near-tie follower defect is separate, untested here and not
+  claimed fixed.
+- The Sprite Inspector and the app-wide redesign stay with packet 0033.
+- No Rust, shader, build, Cargo or `editor/ui` file changed. Astra's updated
+  `brief.md` stays uncommitted, as delivered.
+- Rounds one and two are not rewritten. Their evidence, screenshots and result
+  sections are unchanged.
+
+### Model, effort and provenance
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`) at Max effort, in the
+  resumed ACP runner session. The runner confirms both settings before sending the
+  prompt; I cannot inspect that handshake from inside the session.
+- **Worktree:** `305a95b`. The `f9aa1da` source was read from the shared object store
+  without checking it out. It differs from `c2c7758` in two renderer changes: the
+  nearest bias `direction*(1.0/1024.0)` and the typed reimport diagnostic.
+- **Astra's evidence:** `artifacts/tools/magnification-fix-evidence.json` records a
+  70-case GPU sweep going from 15 failures to 0. My independent sweep extends it.
+
+| Build | Source | sha256 |
+| --- | --- | --- |
+| Active, `incant_headless` | `f9aa1da0818313c5c6cac580e54d7107646378bc` | `a4b5ddb905122a55b7d156ad39b39e7f97f5266e70159614fe4cdc7589796828` |
+| Pre-magnification | `c2c7758c14c37d36aa13e322aa2c87e63ce489ad` | `fd65133fc98a0c6d533f23d9583a820271858eecdb0849b44f8b7e996a5e072b` |
+| Pre-ties, not run this round | `39e5c38107451ba44a02ef7b80f27bef11d4141d` | `848b8294854add3bc672e6ab97e1c3dc1f5f39a9c5b1c234e61e5edace5820ba` |
+
+Each binary matched its metadata before and after all 141 invocations of each run.
+
+### Changed paths (round 3)
+
+All changes are in `handoffs/0032-sprite-rendering/`.
+- `tools/sprite_lookdev.py`:
+  - `--binary` now takes `active`, `pre-magnification` or `pre-ties`;
+  - adds boards H, I and J and a rolled camera on board G.
+- `tools/sprite_art.py` adds a 64 × 64 ruler and 4096- and 8192-texel strips. Every
+  texel names itself by colour, inside the tone curve's identity range. It also
+  appends label words. All earlier art and label regions are byte-identical.
+- `tools/reference.py`:
+  - models the derivative-scaled rule as the active one;
+  - scales its precision allowance with magnification, and with f32 resolution for
+    rotated geometry;
+  - flags biased coordinates that land within f32 error of an integer as ambiguous,
+    including exact integers.
+  
+  With these changes, both round-three analyses report 0 unexplained pixels.
+- `tools/analyse.py` maps each build source to its nearest rule. An unknown build
+  fails explicitly. It also decodes boards H, I and J from engine pixels.
+- `tools/compare_runs.py` classifies each changed pixel as a rule delta, a tie or
+  "other" for any pair of builds.
+- `tools/round3_figures.py` is new.
+- `tools/test_reference.py` now has 13 tests, including the band rules at 8× and
+  the large-coordinate knife edge.
+- `evidence/round3/` holds both analyses, the before/after comparison, three helper
+  records, the scene, the figure rows and the image hashes.
+- `screenshots/round3/` holds eight images, listed under "Round-three frame set".
+
+The extended helper reproduces earlier rounds exactly. Its pre-magnification run
+matches all 635 images of round two's corrected-build run byte for byte.
+
+### Commands and results (round 3)
+
+```sh
+T=handoffs/0032-sprite-rendering/tools; R=artifacts/0032-sprite-rendering/round3
+python3 -I $T/sprite_lookdev.py $R/a1
+python3 -I $T/sprite_lookdev.py $R/a2
+python3 -I $T/sprite_lookdev.py $R/pm1 --binary pre-magnification
+python3 -I $T/analyse.py $R/a1 $R/final/analysis-a1.json $R/a2
+python3 -I $T/analyse.py $R/pm1 $R/final/analysis-pm1.json
+python3 -I $T/compare_runs.py $R/pm1 $R/a1 $R/final/compare-pm1-a1.json
+python3 -I $T/round3_figures.py $R/pm1 $R/a1 $R/figures
+python3 -I $T/test_reference.py                  # 13 tests OK
+python3 -m unittest discover -s tools/tests       # 10 tests OK
+cd handoffs/0032-sprite-rendering && shasum -a 256 -c evidence/round3/screenshots.sha256   # 8 OK
+```
+
+Each run printed:
+```
+binary_unchanged: true, engine_calls: 141, authored_unchanged: true,
+screenshot_repeats_equal: true, screenshots: 33, source_free_shots: 13,
+play_repeats_equal: all 8 true, play_frames: 34 each
+```
+
+- **Budget:** each invocation stays within the packet's limits. The largest frame is
+  3.1 MiB raw, and a play capture writes 34 frames, 7.5 MiB raw. A whole run writes
+  647 frames, 259 MiB raw, over 141 invocations, so it exceeds 256 MiB only if the
+  limit is read per helper run rather than per capture. Nothing is overwritten.
+- **Not run:** I did not rerun the UI suite; no UI file changed. I also did not run
+  Cargo, the GPU suites, native captures or hosted CI.
+
+### Falsification boards
+
+- **Board H, 1280 × 640:** four case families, each starting from tie placements
+  (edges on pixel centres) and moving by offsets measured in 1/256 px:
+  - the ruler's 7 × 1 top row at 12×, 16×, 24× and 32×, unflipped and flipped,
+    offsets 0, 0.625, 1, 2 and 8;
+  - quarter turns of 90° and 270° at 4× and 8×, offsets 0, 0.625, 1 and 2;
+  - anisotropic rulers at 1 × 8 and 8 × 1, both orientations, the same offsets;
+  - the 64 × 64 ruler minified 2×, 3× and 4×, on aligned and tie placements, plus
+    offsets.
+- **Board I, 1024 × 640:** a 4096-texel strip at 1×, 2×, 4×, 8× and 16×, unflipped
+  and flipped, at offsets 0, 0.625, 1 and 3. Its visible texels lie near 4096.
+- **Board J, 1024 × 640:** exact-tie strips of width 512, 1024, 2048, 4096 and 8192
+  at 1× to 32×. Plain strips end on screen and flipped strips start on screen, so
+  visible texels sit near the region width.
+- **Rolled view:** a 7° orthographic camera over board G.
+
+All of these are decoded from engine pixels alone. Each must show every texel
+spanning exactly M pixels, in order. The reference model predicts all other pixels.
+Both analyses report 0 unexplained pixels. In the active run, 3,776 of 3,779
+ambiguous mismatches lie on the board I and J strips: these are large-coordinate
+knife edges the model flags instead of predicting. The other 3 are on rolled frames.
+
+### Remaining limit: exact ties at large region-local coordinates
+
+Board J, flipped strips at exact ties. X marks a strip whose texels are not all M
+pixels wide. Plain strips pass everywhere on both builds.
+
+| Width \ M | 1 | 2 | 4 | 8 | 16 | 32 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 512 | pass | pass | pass | pass | pass | pass |
+| 1024 | pass | pass | pass | pass | pass | X |
+| 2048 | pass | pass | pass | pass | X | X |
+| 4096 | pass | pass | pass | X | X | X |
+| 8192 | pass | pass | X | X | X | X |
+
+The pre-magnification build passes every cell. In each active failure, only the
+strip's first texel is affected. It gains exactly one pixel, for example 9 px at 4096
+× 8 and 33 px at 1024 × 32. Board I agrees: its only active failures are the flipped
+4096-texel strips at exact ties at 8× and 16×.
+
+**Why.** Region-local coordinates reach the region width, and f32 spacing grows with
+them. Near t = 4096 the spacing is about 0.0005 texel, while the scaled bias at 8×
+is 1/8192 texel. Once width × M exceeds about 2^14, adding the bias is lost to
+rounding, and the tie falls back to raw interpolation. The measured failures begin at
+2^15 = 32,768, the first width × M tested past that point.
+
+**Trade-off.** The old fixed band survived large coordinates but swallowed non-ties
+after magnification. No single texel-space bias can do both near t = 4096 at 8×,
+because f32 cannot resolve a 1/256 px raster step there.
+
+**Severity:** low. It needs a region at least 1024 texels wide magnified 32×, or 4096
+at 8×, or 8192 at 4×, placed exactly on a tie. It moves one leading texel by one
+pixel. Typical sprite and tile regions of up to 512 texels pass at every tested
+magnification.
+
+**Recommendation for Astra.** One option is to document the bound: exact ties hold
+while region width × magnification stays at or below 16,384. To remove it, keep
+interpolated coordinates small, for example by splitting regions wider than 512
+texels into spans with a flat integer base. The derivative-scaled band then stays
+above f32 resolution. This is a recommendation only; Astra owns integration and
+verification.
+
+### Other checks (round 3)
+
+- **Minification:** behaviour is identical on both builds. For 14 of 15 placement
+  pairs, a flipped sprite is not the mirror image of the unflipped one. At 2×
+  minification on an aligned placement, the unflipped sprite shows texels 1, 3, 5
+  and so on, and the flipped one shows 62, 60, 58. The rule that ties take the
+  increasing-screen side picks a different texel subset per orientation. This is an
+  inherent property of the rule, not a regression. Only 3× on an aligned placement,
+  which has no ties, is mirror-consistent.
+- **Resized sheet:** reimporting the 128 × 80 sheet changes no nearest pixel on
+  boards A to H. One linear pixel moves by one level, as before.
+- **Fractional and rolled views:** all match the model. Their only changes from the
+  pre-magnification build are rule deltas and ties.
+- **Linear, tone and live:** of 74,520 changed pixels, only one has a linear top
+  sprite, and it is a rule delta beneath translucent content. The gray ramp still
+  shows 0 to 234 exactly and 252 to 255 as 243. The fringe counterfactual is
+  unchanged, no cracks appear, and live frames are identical.
+
+### Appearance review (round 3)
+
+I viewed the active frames and the decoded before/after views.
+- **Board G.** The 8× and 6× cells at offsets 0.625 and 1 lose the narrow first texel
+  and wide last texel they had before. All cells now read as even checkers.
+- **Board H.** In the 32× view the old one-pixel errors are barely visible, so the
+  measured widths carry board H.
+- **Board J.** At width × M of 32,768, the active strips' first stripe is visibly
+  wider than the rest. The pre-magnification strips are even.
+- **Everything else.** The pixel-perfect frames of boards A to F, the showcase and
+  the live follow are byte-identical between builds. The fractional and rolled views
+  of boards B, D and E differ by 2 to 95 pixels each, all rule deltas, and look the
+  same.
+
+### Round-three frame set
+
+In `screenshots/round3/`:
+- `engine-board-g-offset-sweep-active-1024x640.png`,
+  `engine-board-h-falsification-active-1280x640.png`,
+  `engine-board-i-wide-strip-active-1024x640.png` and
+  `engine-board-j-region-width-map-active-1024x640.png` are unedited active frames.
+- `decoded-*.png` files are diagnostics derived from engine pixels, not engine images.
+  Each texel is redrawn by the parity of the texel it names. The pre-magnification
+  build is the upper strip and the active build the lower one.
+  - Board G: 8× unflipped and 6× flipped at offsets 0, 0.625, 1 and 3.
+  - Board H: 32× strips at offsets 0, 0.625, 1, 2 and 8.
+  - Board J: flipped leading texels at width × M of 2048 × 8, 4096 × 4, 4096 × 8,
+    8192 × 4 and 8192 × 8.
+
+### Limitations (round 3)
+
+- **Hardware:** one GPU (Apple M5 Pro) and one backend (Metal), headless only.
+- **Model inferences:** the f32 tolerances in the model and the 2^14 explanation
+  are inferred from measurements, not from hardware documentation.
+- **Coverage:** the large-coordinate bound is measured at widths 512 to 8192 and
+  magnifications 1× to 32×. Perspective cameras and textures wider than 8192
+  texels are untested.
+- **Gates:** no phase gate is approved or claimed. The large-coordinate limit, the
+  exact display option, the Inspector and native review remain open.
+
+---
 
 ## Round 2: corrected nearest sampling
 

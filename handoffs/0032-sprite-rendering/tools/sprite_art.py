@@ -344,6 +344,10 @@ LABELS = [
     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".125", ".25", ".5", "-1",
     "1X", "2X", "3X", "4X", "5X", "6X", "8X", "1X FLIP", "2X FLIP", "3X FLIP", "4X FLIP", "5X FLIP",
     "6X FLIP", "8X FLIP", "F", "G", ".625",
+    # Round-three falsification boards (appended).
+    "H", "I", "HIGH MAGNIFICATION", "QUARTER TURNS 4X 8X", "ANISOTROPIC", "MINIFY", "1/2", "1/3", "1/4",
+    "WIDE STRIP NEAR T 4096", "12X", "16X", "24X", "32X", "12X FLIP", "16X FLIP", "24X FLIP", "32X FLIP",
+    "J", "TIES ACROSS REGION WIDTH", "W512", "W1024", "W2048", "W4096", "W8192",
 ]
 
 
@@ -523,16 +527,32 @@ def main():
         for rgb in TONE_SWATCHES:
             tone16 += [tuple(v * 257 for v in rgb) + (65535,)] * 4
     write_png16(out / "tone16.png", 64, 4, tone16)
+    # Round-three falsification textures: every texel names itself through (R, G),
+    # all inside the tone curve's identity range. 64 x 64 ruler (blue 120) for
+    # minification; 4096 x 2 strip (blue 90) for large region-local texel coordinates,
+    # column i -> R = 60 + 2 (i % 64), G = 60 + 2 (i // 64).
+    pngio.write_rgba(out / "ruler64.png", 64, 64,
+                     [(60 + 2 * i, 60 + 2 * j, 120, 255) for j in range(64) for i in range(64)])
+    pngio.write_rgba(out / "strip4096.png", 4096, 2,
+                     [(60 + 2 * (i % 64), 60 + 2 * (i // 64), 90, 255) for _ in range(2) for i in range(4096)])
+    # 8192 x 2 twin for the precision map: blue 90 for i < 4096, 92 above.
+    pngio.write_rgba(out / "strip8192.png", 8192, 2,
+                     [(60 + 2 * (i % 64), 60 + 2 * ((i // 64) % 64), 90 + 2 * (i // 4096), 255)
+                      for _ in range(2) for i in range(8192)])
     regions = {
         "sheet": sheet.regions, "labels": labels.regions, "badge": badge.regions,
         "badge_small": badge_small.regions, "tone16": {"tone16": [0, 0, 64, 4]},
+        "ruler64": {"ruler64": [0, 0, 64, 64], "ruler63": [0, 0, 63, 63]},
+        "strip4096": {"strip": [0, 0, 4096, 1]},
+        "strip8192": {f"w{w}": [0, 0, w, 1] for w in (512, 1024, 2048, 4096, 8192)},
         "panel_border": PANEL_BORDER, "tone_swatches": TONE_SWATCHES, "alphas": ALPHAS,
     }
     (out / "regions.json").write_text(json.dumps(regions, indent=1), encoding="utf-8")
     if args.preview:
         for name, canvas in files.items():
             preview(canvas, out / f"preview-{name}", scale=8 if canvas.width <= 128 else 4)
-    print(json.dumps({"written": sorted(files) + ["tone16.png", "regions.json"]}))
+    print(json.dumps({"written": sorted(files) + ["tone16.png", "ruler64.png", "strip4096.png", "strip8192.png",
+                                                  "regions.json"]}))
 
 
 if __name__ == "__main__":

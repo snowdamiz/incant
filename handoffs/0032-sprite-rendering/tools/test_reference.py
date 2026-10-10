@@ -89,6 +89,33 @@ class TieBand(unittest.TestCase):
         self.assertEqual((index, alternative), (3, 2))
 
 
+class BandRules(unittest.TestCase):
+    """Fixed-texel band (c2c7758) against the derivative-scaled band (f9aa1da) at 8x."""
+
+    def tearDown(self):
+        reference.NEAREST_RULE = "pixel-band"
+
+    def test_one_raster_step_past_a_tie_at_8x(self):
+        t = 3.0 - (1 / 256) / 8  # an edge one 1/256 px step past a pixel centre, 8 px per texel
+        reference.NEAREST_RULE = "tie-band"
+        self.assertEqual(reference.tie_band_index(t, 1 / 8, 0.0, 7)[0], 3)  # band swallows the non-tie
+        reference.NEAREST_RULE = "pixel-band"
+        self.assertEqual(reference.tie_band_index(t, 1 / 8, 0.0, 7)[0], 2)  # exact geometry
+
+    def test_exact_ties_at_8x_agree(self):
+        for rule in ("tie-band", "pixel-band"):
+            reference.NEAREST_RULE = rule
+            self.assertEqual(reference.tie_band_index(3.0, 1 / 8, 0.0, 7), (3, None))
+            self.assertEqual(reference.tie_band_index(3.0, -1 / 8, 0.0, 7), (2, None))
+
+    def test_large_coordinates_are_knife_edges_not_predictions(self):
+        # Near t = 4096 the scaled band is below f32 resolution: flag, do not guess.
+        reference.NEAREST_RULE = "pixel-band"
+        index, alternative = reference.tie_band_index(4095.0, -1 / 8, 0.0, 4096)
+        self.assertEqual(index, 4094)
+        self.assertIsNotNone(alternative)
+
+
 class Raster(unittest.TestCase):
     def test_shared_diagonal_covers_each_pixel_exactly_once(self):
         frame = reference.Frame(16, 16)

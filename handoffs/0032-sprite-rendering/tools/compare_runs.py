@@ -4,11 +4,14 @@
 Usage (repo root):
   python3 -I handoffs/0032-sprite-rendering/tools/compare_runs.py BEFORE_RUN AFTER_RUN OUT_JSON
 
-BEFORE_RUN is rendered by the pre-ties build, AFTER_RUN by the corrected build. Every
-PNG both runs wrote is compared byte for byte, then pixel by pixel. Each changed
-pixel is classified with the BEFORE model (pre-ties hardware rule): a nearest sample
-on a texel boundary ("texel tie"), otherwise a pixel centre on a sprite's outer edge
-("edge tie"), otherwise "other". The fix may only change ties; "other" must be zero.
+BEFORE_RUN and AFTER_RUN render the same scene on two builds with different nearest
+rules (each run's rule follows its recorded build source). Every PNG both runs wrote
+is compared byte for byte, then pixel by pixel. Each changed pixel is classified:
+  "rule delta"  the AFTER scene predicted with the BEFORE rule and with the AFTER
+                rule gives different colours there, so the rule change explains it;
+  "texel tie"   otherwise, either model marks a nearest sample on a texel boundary;
+  "edge tie"    otherwise, either model marks a pixel centre on an outer edge;
+  "other"       none of these. A sampling-rule change must leave "other" at zero.
 The AFTER frame's top sprite and its sampling mode are reported alongside.
 OUT_JSON must not exist. Standard library only.
 """
@@ -69,8 +72,8 @@ def main():
     out_json = Path(sys.argv[3])
     if out_json.exists():
         raise SystemExit("OUT_JSON exists; choose a new path.")
-    if before.rule != "hardware" or after.rule != "tie-band":
-        raise SystemExit(f"expected a pre-ties BEFORE and corrected AFTER run, got {before.rule}/{after.rule}")
+    if before.rule == after.rule:
+        raise SystemExit(f"both runs use the {before.rule} rule; nothing to compare")
     t0 = time.time()
 
     def pngs(run):
@@ -92,9 +95,10 @@ def main():
             entry["classified"] = False  # live frames: reported raw
         else:
             name, w, h, (sheet, badge) = spec
-            reference.NEAREST_RULE = "tie-band"
-            _, frame_after, view_after = after.render(name, w, h, sheet, badge)
-            reference.NEAREST_RULE = "hardware"
+            reference.NEAREST_RULE = after.rule
+            rows_after, frame_after, view_after = after.render(name, w, h, sheet, badge)
+            reference.NEAREST_RULE = before.rule
+            rows_switched, _, _ = after.render(name, w, h, sheet, badge)
             _, frame_before, view_before = before.render(name, w, h, sheet, badge)
             owners, classes, tops = Counter(), Counter(), Counter()
             for x, y in changed:
@@ -102,9 +106,11 @@ def main():
                 j = logical_index(view_before, frame_before, x, y)
                 owners[frame_after.owner[i] if i is not None else None] += 1
                 tops["linear top" if i is not None and frame_after.top_linear[i] else "nearest or opaque top"] += 1
-                texel_tie = j is not None and frame_before.tie_texel[j]
-                edge_tie = j is not None and frame_before.tie_edge[j]
-                classes["texel tie" if texel_tie else "edge tie" if edge_tie else "other"] += 1
+                delta = rows_after[y][x] != rows_switched[y][x]
+                texel_tie = (j is not None and frame_before.tie_texel[j]) or (i is not None and frame_after.tie_texel[i])
+                edge_tie = (j is not None and frame_before.tie_edge[j]) or (i is not None and frame_after.tie_edge[i])
+                classes["rule delta" if delta else "texel tie" if texel_tie else "edge tie" if edge_tie
+                        else "other"] += 1
             entry.update(classified=True, by_class=dict(classes), by_top_sampling=dict(tops),
                          by_top_sprite=dict(owners.most_common()))
             for k, v in classes.items():
@@ -112,8 +118,9 @@ def main():
         totals["changed_files"] += 1
         totals["changed_pixels"] += len(changed)
         files[rel] = entry
-    reference.NEAREST_RULE = "tie-band"
-    result = {"before": {"run": before.path.name, **{k: before.helper.get(k) for k in ("binary", "binary_source_commit",
+    reference.NEAREST_RULE = after.rule
+    result = {"rules": {"before": before.rule, "after": after.rule},
+              "before": {"run": before.path.name, **{k: before.helper.get(k) for k in ("binary", "binary_source_commit",
                                                                                         "binary_sha256_start")}},
               "after": {"run": after.path.name, **{k: after.helper.get(k) for k in ("binary", "binary_source_commit",
                                                                                      "binary_sha256_start")}},
