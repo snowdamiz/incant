@@ -373,6 +373,14 @@ fn main() -> Result<()> {
             );
             registry.extend([
                 (
+                    "PhysicsCharacterQuery".into(),
+                    json!(schemars::schema_for!(incant_core::CharacterQuery)),
+                ),
+                (
+                    "PhysicsCharacterMovement".into(),
+                    json!(schemars::schema_for!(incant_core::CharacterMovement)),
+                ),
+                (
                     "PhysicsRayQuery".into(),
                     json!(schemars::schema_for!(incant_core::RayQuery)),
                 ),

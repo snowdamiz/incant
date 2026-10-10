@@ -4,7 +4,9 @@ mod scene;
 use bevy_app::{App, Update};
 use bevy_ecs::prelude::*;
 use incant_doc::{MeshRenderer, Project};
-pub use incant_physics::{PhysicsError, RayHit, RayQuery, TriggerEvent};
+pub use incant_physics::{
+    CharacterMovement, CharacterQuery, PhysicsError, RayHit, RayQuery, TriggerEvent,
+};
 use incant_physics::{PhysicsRuntime, PreparedPhysics};
 use scene::{LocalFrame, ParentId, SceneOrder, WorldFrame, prepare, propagate};
 use serde::Serialize;
@@ -117,6 +119,20 @@ impl Engine {
                 .lock()
                 .unwrap_or_else(|e| e.into_inner())
                 .raycast(&query)
+        }
+    }
+    /// A read-only movement capability bound to this session's fixed tick rate.
+    pub fn character_mover(
+        &self,
+    ) -> impl Fn(CharacterQuery) -> Result<CharacterMovement, PhysicsError> + Send + Sync + 'static
+    {
+        let physics = self.physics.clone();
+        let dt = self.dt;
+        move |query| {
+            physics
+                .lock()
+                .unwrap_or_else(|e| e.into_inner())
+                .compute_character_motion(&query, dt)
         }
     }
     pub fn snapshot(&mut self) -> RuntimeSnapshot {

@@ -1,6 +1,8 @@
 //! Small runnable cross-platform probe of the actual document and Bevy crates.
-use incant_core::Engine;
-use incant_doc::{Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform};
+use incant_core::{CharacterQuery, Engine};
+use incant_doc::{
+    BodyMotion, Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform,
+};
 use serde_json::json;
 
 pub fn run() -> Result<String, String> {
@@ -51,6 +53,34 @@ pub fn run() -> Result<String, String> {
     falling
         .components
         .insert("RigidBody".into(), json!(RigidBody::default()));
+    let mut character = Entity::new("Kinematic character");
+    let character_id = character.id.clone();
+    let scene_id = scene.id.clone();
+    character.components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [-3., 0.91, 0.],
+            ..Default::default()
+        }),
+    );
+    character.components.insert(
+        "Collider".into(),
+        json!(Collider {
+            shape: ColliderShape::Capsule {
+                half_height: 0.6,
+                radius: 0.3
+            },
+            ..Default::default()
+        }),
+    );
+    character.components.insert(
+        "RigidBody".into(),
+        json!(RigidBody {
+            motion: BodyMotion::Kinematic,
+            ..Default::default()
+        }),
+    );
+    scene.entities.insert(character_id.clone(), character);
     scene.entities.insert(floor.id.clone(), floor);
     scene.entities.insert(falling.id.clone(), falling);
     project.scenes.insert(scene.id.clone(), scene);
@@ -70,7 +100,18 @@ pub fn run() -> Result<String, String> {
     if (physics_y - 0.5).abs() > 0.02 {
         return Err("physics contact assertion failed".into());
     }
-    Ok(json!({"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
+    let movement = engine.character_mover()(CharacterQuery {
+        scene_id,
+        entity_id: character_id,
+        translation: [0.1, -0.1, 0.],
+        options: Default::default(),
+    })
+    .map_err(|e| e.to_string())?;
+    if !movement.grounded || movement.translation[0] < 0.09 || movement.translation[1].abs() > 0.02
+    {
+        return Err("character movement assertion failed".into());
+    }
+    Ok(json!({"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
 }
 
 #[cfg(not(target_arch = "wasm32"))]

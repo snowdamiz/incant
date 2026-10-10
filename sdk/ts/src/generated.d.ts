@@ -43,6 +43,18 @@ export namespace MeshRendererSchema {
 }
 export type MeshRenderer = MeshRendererSchema.Root;
 
+export namespace PhysicsCharacterMovementSchema {
+  export type Root = { "collisions": Array<string>; "grounded": boolean; "sliding_down_slope": boolean; "translation": [number, number, number] };
+}
+export type PhysicsCharacterMovement = PhysicsCharacterMovementSchema.Root;
+
+export namespace PhysicsCharacterQuerySchema {
+  export type CharacterOptions = { "autostep"?: (CharacterStep) | (null); "max_slope_climb_angle": number; "min_slope_slide_angle": number; "offset": number; "slide": boolean; "snap_to_ground"?: number | null };
+  export type CharacterStep = { "include_dynamic_bodies": boolean; "max_height": number; "min_width": number };
+  export type Root = { "entity_id": string; "options"?: CharacterOptions; "scene_id": string; "translation": [number, number, number] };
+}
+export type PhysicsCharacterQuery = PhysicsCharacterQuerySchema.Root;
+
 export namespace PhysicsRayHitSchema {
   export type Root = { "distance": number; "entity_id": string; "normal": [number, number, number]; "point": [number, number, number] };
 }

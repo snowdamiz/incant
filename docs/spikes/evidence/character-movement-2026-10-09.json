@@ -1,0 +1,137 @@
+{
+  "implementation_commit": "2a510cf324e437191e504c117a174cb44e8844fa",
+  "headless_binary": {
+    "source_commit": "2a510cf324e437191e504c117a174cb44e8844fa",
+    "sha256": "8de710ffa59e97123aa598f62b2a2a5bb3f2faccbab7e600b8b3ac130502d99a",
+    "command": "./tools/cargo build -p incant_headless --release --locked",
+    "note": "Corrected box-face normals and final-support slope classification; 163 workspace tests and Clippy pass."
+  },
+  "rust_workspace_tests": 163,
+  "clippy": "passed workspace all targets with warnings denied",
+  "ui": {
+    "tests_passed": 315,
+    "build": "passed",
+    "changes_from_reviewed_physics_ui": false
+  },
+  "tool_tests": 5,
+  "generated_schemas_sdk_bridge_conventions": "passed",
+  "cli": {
+    "passed": true,
+    "public_rpc": true,
+    "strict_typescript": true,
+    "wall_position": [
+      1.5899943113327026,
+      0.9091004729270935,
+      -9.103992852033116e-06
+    ],
+    "script_state": {
+      "grounded": true,
+      "jumped": true,
+      "landed": true,
+      "maxY": 2.225309371948242,
+      "tick": 360,
+      "vertical": 0
+    },
+    "repeated_final_state_exact": true,
+    "author_files_unchanged": {
+      "game.incant.json": "9c8a9827ab9d5eb86ac04f42f788f9c5623aaa80fe88541076f104087085a9cc",
+      "history.jsonl": "0d06c3547f1a05022e71bb4052714668a1e42a0431552d69d40812703b406299"
+    },
+    "physical_device_gate": false
+  },
+  "platforms": {
+    "macos": {
+      "arch": "aarch64",
+      "character_movement": {
+        "collisions": [
+          "01M4HKM5JAG63YB04HJJK1RX61"
+        ],
+        "grounded": true,
+        "sliding_down_slope": false,
+        "translation": [
+          0.10000000149011612,
+          7.659977563889697e-05,
+          0.0
+        ]
+      },
+      "incant": "hello-world",
+      "ok": true,
+      "os": "macos",
+      "physics_backend": "rapier-0.36-enhanced-determinism",
+      "physics_y": 0.49993008375167847,
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "browser_wasm": {
+      "arch": "wasm32",
+      "character_movement": {
+        "collisions": [
+          "01M4HKK1R5JK3T6C7TPCCFHSFS"
+        ],
+        "grounded": true,
+        "sliding_down_slope": false,
+        "translation": [
+          0.10000000149011612,
+          7.659977563889697e-05,
+          0
+        ]
+      },
+      "incant": "hello-world",
+      "ok": true,
+      "os": "",
+      "physics_backend": "rapier-0.36-enhanced-determinism",
+      "physics_y": 0.49993008375167847,
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "wasm_sha256": "87912cee4aa26966821e2cf263fc44d6e78218d82e1a7cfed1a47d5779fb793b",
+    "ios_simulator": {
+      "ok": true,
+      "status": 0
+    },
+    "ios_simulator_binary_sha256": "7f600aeaa4f075273c8d9870166b7c1f59e17fdada34c14ba9798da7a9f8e445"
+  },
+  "rendered_motion_review": {
+    "status": "accepted for scoped primitive movement",
+    "model": "Claude Opus 5.5",
+    "transport": "ACP",
+    "review_commit": "91e70c241e217f48da5dbaa5349c63087db7d0ee",
+    "repeat_frames_exact": 303,
+    "retained_frames_verified": {
+      "contact-t156-landed.png": "e1625a0805034e135e67993bc02720008f9c4f465a3d571e4d87971450d0f008",
+      "exit-t258-on-floor.png": "623922f08a873f0ef8a79924def8d822b1183af647f3a387c92a2919cc0b06be",
+      "contact-t129-over-hurdle-step-climb.png": "c991ef0a1655a0c0e678240f6e810f7d2cbb0eac8c21d4b2a93ad0f7b9ebf610",
+      "overview-t300-end.png": "ef324d76619236ef53e649ea53e0b7e8372e8ad7753a6bfd6d4a595557e9df1c",
+      "overview-t204-ramp-descent-wall-slide.png": "38d0270a432600b4f604f3065222a7c099a0b09fff76a88cdc36bdf74e1b0b4b",
+      "exit-t243-on-step.png": "19682af1ffc2a9338409acb35387a5bb951557d36b32adab3df819332111d176",
+      "overview-t132-jump-step-climb-block-stop.png": "eb00ca580f254b23ce1a10879387ee2b63e3e0fa4d9e509a0bb07fbec14e37d8",
+      "exit-t252-over-edge.png": "962c411280421ef6b22518cbc85c8e9f636df7c5d0a27bba4e0a2c2a9623054a",
+      "contact-t108-takeoff.png": "99cb653358f5e7f3825b043a6db3f856cde435350da79217ce355e83d260838d",
+      "overview-t000-start.png": "2d4e64f18a8d159a65f2d80e691c0df46d10345e6367813633b5b1e61f69523a"
+    },
+    "runtime_defects_resolved": [
+      "one-tick walking/wall-slide stalls",
+      "flat-ground downhill flag"
+    ],
+    "five_character_tick_p95_ms": [
+      0.54,
+      0.55,
+      0.56
+    ],
+    "remaining_game_feel": [
+      "0.20 m step traversal takes 18 ticks, about 0.13 s slower than level walking",
+      "one 2.7 cm vertical autostep increment",
+      "brief downhill flag while descending a sharp step edge"
+    ]
+  },
+  "hosted_checks": "pending",
+  "limits": [
+    "No native play controls or new authored component",
+    "No mesh terrain, animation, moving-platform guarantee or representative game performance gate",
+    "Character shapes use the primitive root/unit-scale physics boundary",
+    "Queries share 256 weighted units per tick; one sweep costs 16",
+    "Local repeatability is not cross-platform or cross-GPU determinism"
+  ],
+  "gpu_tests": 40,
+  "native_release_build": "passed after the GPU suite; embedded UI packaged"
+}

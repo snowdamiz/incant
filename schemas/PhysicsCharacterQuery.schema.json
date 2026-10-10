@@ -1,0 +1,127 @@
+{
+  "$defs": {
+    "CharacterOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "autostep": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CharacterStep"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "max_slope_climb_angle": {
+          "description": "Radians from the world's +Y direction, in 0..pi/2.",
+          "format": "double",
+          "maximum": 1.5707963267948966,
+          "minimum": 0,
+          "type": "number"
+        },
+        "min_slope_slide_angle": {
+          "description": "Radians from the world's +Y direction, in 0..pi/2.",
+          "format": "double",
+          "maximum": 1.5707963267948966,
+          "minimum": 0,
+          "type": "number"
+        },
+        "offset": {
+          "description": "Skin gap in meters; must be positive.",
+          "format": "double",
+          "maximum": 1000,
+          "minimum": 0.001,
+          "type": "number"
+        },
+        "slide": {
+          "type": "boolean"
+        },
+        "snap_to_ground": {
+          "description": "Downward ground-snap distance in meters, or null to disable.",
+          "format": "double",
+          "maximum": 1000,
+          "minimum": 0.001,
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "offset",
+        "slide",
+        "max_slope_climb_angle",
+        "min_slope_slide_angle"
+      ],
+      "type": "object"
+    },
+    "CharacterStep": {
+      "additionalProperties": false,
+      "properties": {
+        "include_dynamic_bodies": {
+          "type": "boolean"
+        },
+        "max_height": {
+          "description": "Maximum stair height in meters.",
+          "format": "double",
+          "maximum": 1000,
+          "minimum": 0.001,
+          "type": "number"
+        },
+        "min_width": {
+          "description": "Minimum free landing width in meters.",
+          "format": "double",
+          "maximum": 1000,
+          "minimum": 0.001,
+          "type": "number"
+        }
+      },
+      "required": [
+        "max_height",
+        "min_width",
+        "include_dynamic_bodies"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "entity_id": {
+      "description": "A nonsensor primitive collider attached to a velocity-kinematic body.",
+      "type": "string"
+    },
+    "options": {
+      "$ref": "#/$defs/CharacterOptions",
+      "default": {
+        "autostep": null,
+        "max_slope_climb_angle": 0.7853981633974483,
+        "min_slope_slide_angle": 0.7853981633974483,
+        "offset": 0.01,
+        "slide": true,
+        "snap_to_ground": 0.2
+      }
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "translation": {
+      "description": "Desired world-space displacement in meters for one fixed tick.\nGravity and jumping are authored by the calling behavior.",
+      "items": {
+        "format": "double",
+        "type": "number"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    }
+  },
+  "required": [
+    "scene_id",
+    "entity_id",
+    "translation"
+  ],
+  "title": "CharacterQuery",
+  "type": "object"
+}
