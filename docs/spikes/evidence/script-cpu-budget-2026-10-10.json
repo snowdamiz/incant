@@ -64,12 +64,93 @@
     "actual_host_sleep_test_claimed": false
   },
   "runtime_capabilities_added": false,
-  "ci": "pending",
+  "ci": "updated hosted checks pending",
   "open": [
     "hosted Windows/Linux clock behavior tests",
-    "integration of final steering correction and dependency merges",
     "native solver calls remain nonpreemptible and input bounded",
     "no WebAssembly scripting runtime gate",
     "physical-device and phase gates remain open"
-  ]
+  ],
+  "head_on_integration": {
+    "source_commit": "735842c7f3c8c92bb2b93e2675137f61d72eac9b",
+    "rust_tests": 300,
+    "clippy_all_targets": true,
+    "native_package_including_cpu_license": true,
+    "headless": {
+      "source_commit": "735842c7f3c8c92bb2b93e2675137f61d72eac9b",
+      "sha256": "b685d708de3a98bd738894a1bc166bb1f82f4222629ed9df1fdee359b8170fc7"
+    },
+    "native_sha256": "df7ab14c56719ad7727cc6516bd4996f596446b471d304b32cae94b5c7922dad",
+    "public_steering": {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6157673834154757,
+        "neighbors": 17,
+        "remaining": 6.208589198944098e-11,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "f5dd6109507419ae1f97be3236455517e522d29ba83e45a1b9250ab5316cc86b",
+        "game.incant.journal.jsonl": "7b1d118bde66d515151aaf1d6f3edd30ebfa6794196e1b2160585d43255798ab"
+      },
+      "binary_sha256": "b685d708de3a98bd738894a1bc166bb1f82f4222629ed9df1fdee359b8170fc7",
+      "rendering_or_physics_collision_gate": false
+    },
+    "public_links": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_commands": true,
+      "durable_undo_redo": true,
+      "invalid_cost_rollback": true,
+      "explicit_link_traversal": true,
+      "one_way_reverse_null": true,
+      "save_in_flight_exact": true,
+      "repeat_exact": true,
+      "mid_link_progress": 0.30555555555555564,
+      "author_files_unchanged": {
+        "game.incant.json": "e2c17322c9cfbb2b937ad714c5881b5e5517a92938fde3b54be55e6c63b86966",
+        "game.incant.journal.jsonl": "d5f8eeaaa1ec553af61d006624bf6becaa585095ab9f72a3eec66433b1af25ec"
+      },
+      "binary_sha256": "b685d708de3a98bd738894a1bc166bb1f82f4222629ed9df1fdee359b8170fc7",
+      "physics_or_visual_gate": false
+    },
+    "plaza": {
+      "ticks": 2700,
+      "script_and_complete_runtime_state_exactly_match_reviewed_wall_clock_binary": true,
+      "first_all_arrived": 2212,
+      "body_overlap_ticks": 0,
+      "temporary_sleep_prevention": true
+    },
+    "steering_rendered_review": "passed at source 4c495e9; report retained in handoffs/0027-steering-lookdev/result.md"
+  },
+  "thousand_entity_script_only": {
+    "source_commit": "a9a1814d0db49656a439fc81b3a02467238a4a27",
+    "runs": [
+      {
+        "ticks": 120,
+        "commands": 120000,
+        "p95_frame_ms": 12.07925,
+        "max_frame_ms": 13.07025
+      },
+      {
+        "ticks": 120,
+        "commands": 120000,
+        "p95_frame_ms": 12.566875,
+        "max_frame_ms": 13.005374999999999
+      },
+      {
+        "ticks": 120,
+        "commands": 120000,
+        "p95_frame_ms": 12.058417,
+        "max_frame_ms": 12.501916999999999
+      }
+    ],
+    "rendering_included": false,
+    "concurrent_development_work": true,
+    "physical_device_gate_claimed": false
+  }
 }

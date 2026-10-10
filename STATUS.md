@@ -67,7 +67,9 @@ within its documented workload.
   zero-budget initialization and fail-closed clock handling cover the change.
   All 298 Rust, 40 GPU, 315 UI and five tool tests pass, as do Clippy, strict
   contracts, native packaging and both public steering/off-mesh saved workflows.
-  Cross-platform clock tests and final steering integration remain pending. See
+  Integration at `735842c` passes all 300 Rust tests, Clippy, both public saved
+  workflows and native packaging. The full plaza exactly matches the reviewed
+  wall-clock binary. Updated hosted checks and dependency merges remain. See
   [CPU budget details](docs/spikes/script-cpu-budget.md).
 
 - Script failures now distinguish bounded initialization/tick JavaScript messages,

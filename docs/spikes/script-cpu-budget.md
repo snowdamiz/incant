@@ -49,3 +49,17 @@ Cross-platform clock behavior still requires the hosted Windows/Linux workspace
 tests. Compilation of the separate core platform probe does not establish a
 scripting runtime gate. The final steering correction and dependency merges are
 still pending. No phase gate is approved.
+
+
+At integrated source `735842c`, all 300 Rust tests and Clippy pass, as do the
+public steering/off-mesh repeat-and-save workflows and native packaging with
+the CPU clock license. The complete unchanged 2700-tick plaza produces exactly
+the same script state and runtime state as the reviewed `4c495e9` wall-clock
+binary: all 100 remain at goal from 2212, without overlap. The separate rendered
+steering review passes. These public runs used temporary sleep prevention.
+
+Three script-only thousand-entity runs at `a9a1814` each issued 120000 commands
+over 120 ticks: p95 12.079250, 12.566875 and 12.058417 ms, maximum 13.070250,
+13.005375 and 12.501917 ms. They include no rendering and ran during concurrent
+development on this Mac. They are workload measurements, not physical-device
+release gates or a controlled before/after CPU-clock comparison.
