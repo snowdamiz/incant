@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "fallbacks": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "pseudo": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "locale"
+  ],
+  "title": "LocaleSettings",
+  "type": "object"
+}

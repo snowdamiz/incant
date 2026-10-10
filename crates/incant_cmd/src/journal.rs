@@ -10,7 +10,7 @@ use std::{
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "action", rename_all = "snake_case", deny_unknown_fields)]
 pub(super) enum Action {
-    Initialize { project: Project },
+    Initialize { project: Box<Project> },
     Apply { transaction: Box<Transaction> },
     Undo { transaction_id: Id },
     Redo { transaction_id: Id },
@@ -87,7 +87,7 @@ impl Journal {
                             "journal initial project mismatch".into(),
                         ));
                     }
-                    bus = CommandBus::new(project.clone())?;
+                    bus = CommandBus::new(*project.clone())?;
                 }
                 Action::Apply { transaction } => {
                     if journal.sequence == 0 || transaction.before != bus.project {
@@ -127,7 +127,12 @@ impl Journal {
         }
         journal.file.seek(SeekFrom::End(0))?;
         if journal.sequence == 0 {
-            journal.append(Action::Initialize { project: initial }, &bus.export_crdt()?)?;
+            journal.append(
+                Action::Initialize {
+                    project: Box::new(initial),
+                },
+                &bus.export_crdt()?,
+            )?;
         }
         if let Some(encoded) = last_crdt {
             let bytes = STANDARD

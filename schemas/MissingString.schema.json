@@ -1,0 +1,41 @@
+{
+  "$defs": {
+    "MissingKind": {
+      "enum": [
+        "translation",
+        "key"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/MissingKind"
+    },
+    "requested_locale": {
+      "type": "string"
+    },
+    "resolved_locale": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "table_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "table_id",
+    "key",
+    "requested_locale",
+    "kind"
+  ],
+  "title": "MissingString",
+  "type": "object"
+}

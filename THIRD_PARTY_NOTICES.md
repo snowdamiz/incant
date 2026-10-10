@@ -1,5 +1,18 @@
 # Third-party notices
 
+## Localization dependencies
+
+Incant uses unmodified ICU4X 2.3 locale, decimal, date/calendar and plural
+libraries and compiled Unicode/CLDR data. Direct crate versions are 2.3.0;
+Cargo.lock records every transitive library/data version and registry checksum.
+These packages, `fixed_decimal`, and `writeable`
+use [Unicode License V3](licenses/Unicode-3.0.txt). The calendar dependency
+`calendrical_calculations` uses [Apache License 2.0](licenses/Apache-2.0.txt).
+Corresponding sources are
+available in their versioned crates.io packages or `cargo vendor --locked`.
+Incant's bounded MessageFormat parser and pseudo-localization are original code;
+they are not a complete ICU MessageFormat implementation.
+
 ## Audio dependencies
 
 Incant uses unmodified [Kira 0.12.5](https://crates.io/crates/kira/0.12.5),
