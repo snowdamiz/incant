@@ -390,3 +390,23 @@ should capture Cargo per-unit timings before changing test linkage/layout or
 compiler configuration. The [path-selection proposal](ci-path-selection-proposal.md)
 keeps runtime coverage and existing check names intact, beginning with strict
 prose-only PRs; no coverage reduction has been implemented.
+
+
+### Next hosted unit-timing evidence
+
+The general macOS and Windows/Linux desktop workflows add Cargo `--timings` to
+exactly the existing ordinary tests, ignored GPU tests and explicit tool build.
+All packages, targets, profiles, features and test arguments remain unchanged.
+Each job retains the generated `target/cargo-timings/*.html` reports as a separate
+seven-day artifact, including when a later step fails. This does not enlarge the
+Rust dependency cache or enable workspace artifact caching. Missing reports warn
+rather than change whether the existing required checks pass.
+
+Pinned Cargo 1.99.0 accepted the flag in a scoped release workspace test build
+with `--no-run` and produced a timing report in 0.31s. Its already-fresh build had
+no compiled units; it validates report generation, not Windows compile/link
+attribution or a speed improvement. Actionlint and diff checks pass. The next
+hosted reports can identify expensive unit durations and concurrency; compiler
+backend/link sections are usable only where the generated report exposes them.
+Timing alone does not prove why a dependency fingerprint changed. Do not remove
+coverage or change cache policy based on package counts without that evidence.
