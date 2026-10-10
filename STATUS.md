@@ -53,6 +53,18 @@ within its documented workload.
 
 ## Active work
 
+- Versioned logical game saves preserve runtime scenes, hierarchy, spawned/deleted
+  entities, JSON behavior state and the simulation clock. The headless host loads
+  saves into isolated sessions and publishes new files atomically after success.
+  Exact float decoding fixes clock/rotation drift on JSON reload. Nine new tests
+  cover continuity, physical state, hot reload, invalid inputs and publication races;
+  172 Rust tests and workspace Clippy pass. The strict TypeScript public-CLI probe
+  matches uninterrupted state/logs across two process restarts with authored files
+  unchanged. The native release package, 315 UI tests/build and five tool tests pass.
+  Hosted verification and merge remain open. Physics
+  warm starts, sleeping, VM globals and cross-revision migrations are outside this
+  logical save format. See [game saves](docs/spikes/game-saves.md).
+
 - Read-only character movement queries are implemented on the primitive runtime,
   with script-owned gravity/jumping and Velocity commands. Real motion review
   found walking stalls and a misleading slope flag; numerical face-normal handling
@@ -287,7 +299,7 @@ within its documented workload.
   each passed 23 hosted browser checks. Graphical explanations, authentic SVG
   platform marks and the subsequent workflow correction are integrated in PR #2.
   Each workflow icon has a short visible explanation and tighter spacing; all 23
-  hosted checks passed on bf99437. Visual review is resuming under the new permission. See
+  hosted checks passed on bf99437. Visual review subsequently resumed, then was paused again on 2026-10-09. See
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo routes by focus. Actual macOS CUA checks now confirm
   project Cmd+Z/redo, isolated text-field Undo, safe account-dialog focus, divider
   keyboard resizing and fullscreen transitions. Claude reviewed the native captures;
@@ -325,6 +337,14 @@ within its documented workload.
   **d87436f** has now passed all four workflows: source checks, Windows/Linux
   editor builds and renderer probes, three-desktop credential persistence, and all
   six platform probes. The evidence files retain the exact revision and run links.
+
+## Current screen-work constraint
+
+The director paused computer use and screen capture again on 2026-10-09. No new
+native/browser operations or captures are authorized while that pause remains.
+Code, numerical replay, unit tests and hosted build/test work continue.
+Compound-collider PR #25 is a separate draft pending its final native appearance
+review; it is not part of the game-save baseline yet.
 
 ## External prerequisites still required
 

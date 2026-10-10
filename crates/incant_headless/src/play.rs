@@ -27,6 +27,12 @@ pub struct Options {
     /// Sandboxed JavaScript emitted by the bundled TypeScript compiler.
     #[arg(long)]
     pub compiled_script: Option<PathBuf>,
+    /// Restore logical game state for this exact authored project/script revision.
+    #[arg(long)]
+    pub load_save: Option<PathBuf>,
+    /// Atomically publish a new game-save file after successful playback.
+    #[arg(long)]
+    pub save_output: Option<PathBuf>,
     /// New directory for PNG frames and report.json; existing paths are rejected.
     #[arg(long)]
     pub output: Option<PathBuf>,
@@ -55,6 +61,8 @@ pub enum PlayError {
     LogBudget,
     #[error("log output conflicts with a reserved frame or report filename")]
     LogOutputConflict,
+    #[error("save output conflicts with a reserved frame, report or log filename")]
+    SaveOutputConflict,
     #[error("compiled script exceeds 1,000,000 bytes")]
     ScriptSize,
     #[error(transparent)]
@@ -63,6 +71,8 @@ pub enum PlayError {
     Json(#[from] serde_json::Error),
     #[error(transparent)]
     Script(#[from] incant_script::ScriptError),
+    #[error(transparent)]
+    Save(#[from] incant_script::SaveError),
     #[error("project or asset loading failed: {0}")]
     Load(String),
     #[error("frame rendering failed: {0}")]
@@ -83,6 +93,9 @@ pub struct Report {
     format_version: u32,
     completed: bool,
     ticks: u64,
+    start_tick: u64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    save_output: Option<PathBuf>,
     script_commands: usize,
     state: incant_core::RuntimeSnapshot,
     script_state: serde_json::Value,
@@ -138,7 +151,12 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
     } else {
         NOOP.into()
     };
-    let mut play = PlaySession::new(&document, &source)?;
+    let mut play = if let Some(path) = &options.load_save {
+        PlaySession::from_save(&document, &source, &super::play_saves::load(path)?)?
+    } else {
+        PlaySession::new(&document, &source)?
+    };
+    let start_tick = play.snapshot().tick;
     // Reserve a new output directory before GPU setup. Never overwrite a prior run.
     // A failed run may leave partial PNGs, but never a completed report.json.
     if let Some(output) = &options.output {
@@ -147,6 +165,17 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         }
         fs::create_dir(output)?;
     }
+    let save_output = options
+        .save_output
+        .as_deref()
+        .map(|path| {
+            super::play_saves::Output::new(
+                path,
+                options.output.as_deref(),
+                options.log_output.as_deref(),
+            )
+        })
+        .transpose()?;
     let mut logs =
         super::play_logs::Capture::new(options.log_output.as_deref(), options.output.as_deref())?;
     let renderer = options
@@ -170,7 +199,8 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
             commands += play.tick()?;
             let entries = play.host.take_logs();
             if !entries.is_empty() {
-                logs.append(tick, play.snapshot().elapsed_seconds, entries)?;
+                let snapshot = play.snapshot();
+                logs.append(snapshot.tick, snapshot.elapsed_seconds, entries)?;
             }
         }
         if let (Some(renderer), Some(output)) = (&renderer, &options.output)
@@ -193,11 +223,12 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
             let png = renderer
                 .screenshot_scene_png(scene, options.width, options.height)
                 .map_err(|error| PlayError::Render(error.to_string()))?;
-            let file = format!("frame-{tick:06}.png");
+            let clock = play.snapshot();
+            let file = format!("frame-{:06}.png", clock.tick);
             fs::write(output.join(&file), png)?;
             frames.push(Frame {
-                tick,
-                elapsed_seconds: play.snapshot().elapsed_seconds,
+                tick: clock.tick,
+                elapsed_seconds: clock.elapsed_seconds,
                 file,
                 geometry: scene.stats().clone(),
                 shading: scene.shading(),
@@ -208,6 +239,8 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         format_version: 1,
         completed: true,
         ticks: count,
+        start_tick,
+        save_output: options.save_output,
         script_commands: commands,
         state: play.snapshot(),
         script_state: play.host.state().clone(),
@@ -219,6 +252,9 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         camera: options.camera,
         wall_ms: start.elapsed().as_secs_f64() * 1000.,
     };
+    if let Some(save_output) = save_output {
+        save_output.finish(&play)?;
+    }
     if let Some(output) = options.output {
         let mut file = tempfile::NamedTempFile::new_in(&output)?;
         file.write_all(&serde_json::to_vec_pretty(&report)?)?;

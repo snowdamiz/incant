@@ -3,6 +3,7 @@ mod assets;
 mod eval;
 mod play;
 mod play_logs;
+mod play_saves;
 mod watch;
 use incant_agent::{
     Agent, ApprovalMode, Budget, accounts::AccountStore, credentials::CredentialStore,
@@ -367,6 +368,10 @@ fn main() -> Result<()> {
         Cli::Schema { directory } => {
             fs::create_dir_all(&directory)?;
             let mut registry = schema_registry();
+            registry.insert(
+                "GameSave".into(),
+                json!(schemars::schema_for!(incant_script::GameSave)),
+            );
             registry.insert(
                 "Command".into(),
                 json!(schemars::schema_for!(incant_cmd::Command)),

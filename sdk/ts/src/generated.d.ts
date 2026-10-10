@@ -38,6 +38,21 @@ export namespace EnvironmentLightSchema {
 }
 export type EnvironmentLight = EnvironmentLightSchema.Root;
 
+export namespace GameSaveSchema {
+  export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
+  export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
+  export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "provenance"?: (Provenance) | (null) };
+  export type Origin = "user" | "agent" | "script" | "import";
+  export type Project = { "assets": { [key: string]: Asset }; "id": string; "memory": { [key: string]: string }; "name": string; "scenes": { [key: string]: Scene }; "schema_version": number; "scripts": { [key: string]: ScriptSource }; "settings": ProjectSettings };
+  export type ProjectSettings = { "tick_rate": number };
+  export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
+  export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
+  export type ScriptSource = { "id": string; "name": string; "path": string };
+  export type TextureUsage = "color" | "linear" | "normal";
+  export type Root = { "authored_sha256": string; "elapsed_seconds": number; "format": string; "project": Project; "script_sha256": string; "script_state": unknown; "tick": number; "version": number };
+}
+export type GameSave = GameSaveSchema.Root;
+
 export namespace MeshRendererSchema {
   export type Root = { "cast_shadows": boolean; "materials": Array<string>; "mesh": string };
 }

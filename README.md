@@ -80,6 +80,27 @@ back. Camera edits use the shared command bus and normal Undo/Redo. Asset source
 the cooked cache is present; the command reads the saved checkpoint, not unsaved
 editor edits. Assertion-script support remains open.
 
+Game saves preserve the isolated scene, JSON behavior state and simulation clock:
+
+```sh
+tools/cargo run -p incant_headless --release -- play artifacts/demo.incant.json --ticks 60 --compiled-script artifacts/move.js --save-output artifacts/slot1.save.json
+tools/cargo run -p incant_headless --release -- play artifacts/demo.incant.json --ticks 60 --compiled-script artifacts/move.js --load-save artifacts/slot1.save.json --save-output artifacts/slot2.save.json
+```
+
+The second command advances another 60 ticks and reports absolute game tick 120.
+Save files require the same authored project and compiled behavior revision;
+unknown versions, invalid data and changed resource manifests fail explicitly.
+Each output must be a new path, published atomically only after successful play.
+No provider account or GPU is required. Store persistent gameplay values in the
+behavior's `state`; module globals, closures, pending logs and solver contact/sleep
+state are rebuilt. Sensors can emit fresh entry events on the first restored tick.
+This is a logical game save, with no exact physics-rollback guarantee or automatic
+migration between game revisions. See [save format and evidence](docs/spikes/game-saves.md).
+
+`python3 tools/probes/game-saves.py artifacts/save-example` builds a strict
+TypeScript example through public commands and verifies pickup/spawn state,
+continued log times and separate-process restart continuity without rendering.
+
 `init` refuses to overwrite an existing file. `rpc` serves newline-delimited JSON
 on stdin/stdout. `project.read`, `schema.list`, `command.execute`, `history.read`,
 `history.undo`, `history.redo`, `project.save`, and disposable `play.*` operations are
