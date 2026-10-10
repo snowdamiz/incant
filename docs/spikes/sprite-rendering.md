@@ -34,7 +34,7 @@ Source textures retain the asset pipeline's own dimension/texel limits. Each
 source region is nonempty and at most 8192 pixels per axis. World sizes are finite,
 positive and <=1,000,000 metres; normalized pivots/tints cannot contain NaNs.
 
-Numerical verification passes 325 workspace Rust tests, Clippy and 51 native GPU
+Numerical verification passes 325 workspace Rust tests, Clippy and 52 native GPU
 checks, including four sprite tests. Coverage includes source regions, flips,
 painter order, alpha, nine-slice borders, source-free loading, inherited/reflected
 transforms and reverse-order submission of queued reimports after scene drop.
@@ -44,6 +44,9 @@ The strict-TypeScript public probe passes shared Undo/Redo, atomic invalid-regio
 rollback and a source-free scripted flipbook/nine-slice edit. A 25-tick save plus
 35-tick restore exactly matches uninterrupted and repeated 60-tick runs; project
 and journal bytes are unchanged. This is numerical behavior evidence, not
-appearance approval. Final integrated Rust/GPU/portable/native checks, Claude
-appearance/Inspector review and hosted CI are still in progress. No atlas, tilemap, sprite animation library, 2D physics or phase gate
+appearance approval. Integrated checks also pass 420 UI tests, strict typecheck/build, generated
+contracts and seven tool tests. The core compiles for WebAssembly and iOS
+simulator. Claude Opus 5.5 Max is reviewing original engine art and real captures
+in handoff 0032. Sprite Inspector work follows the full editor redesign in 0033;
+final native review and hosted CI remain open. No atlas, tilemap, sprite animation library, 2D physics or phase gate
 is claimed complete by this increment.
