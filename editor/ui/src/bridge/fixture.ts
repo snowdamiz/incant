@@ -166,26 +166,29 @@ const SCHEMAS: Record<string, ComponentSchema> = {
       },
     },
   },
-  // Mirror of the native Camera schema after bridge resolution (bare type name, no
-  // titles or units; the Inspector's Camera profile supplies those). CameraFields.test.tsx
-  // checks it against snapshotFromEngine over schemas/Camera.schema.json.
+  // Mirror of the native Camera schema after bridge resolution: bare type name, units
+  // and the projection default from Rust metadata, no titles (the Inspector's Camera
+  // profile supplies labels). CameraFields.test.tsx checks it against
+  // snapshotFromEngine over schemas/Camera.schema.json.
   Camera: {
     type: 'Camera',
     version: 1,
     title: 'Camera',
-    order: ['fov_degrees', 'near', 'far'],
+    order: ['projection', 'fov_degrees', 'near', 'far'],
     properties: {
-      far: { type: 'number', format: 'double', optional: false },
+      far: { type: 'number', format: 'double', 'x-incant-unit': 'm', optional: false },
       fov_degrees: {
         type: 'number',
         format: 'double',
         description: 'Vertical perspective field of view, retained when switching projection.',
+        'x-incant-unit': '°',
         optional: false,
       },
-      near: { type: 'number', format: 'double', optional: false },
+      near: { type: 'number', format: 'double', 'x-incant-unit': 'm', optional: false },
       projection: {
         type: 'tagged-union',
-        description: 'Missing in legacy documents; those retain perspective projection.',
+        description: 'Perspective, or orthographic with parallel view rays and a fixed world-space height.',
+        default: { kind: 'perspective' },
         discriminator: 'kind',
         variants: {
           perspective: {
@@ -203,6 +206,7 @@ const SCHEMAS: Record<string, ComponentSchema> = {
                 type: 'number',
                 format: 'double',
                 description: 'Visible world-space height. Width follows the output aspect ratio.',
+                'x-incant-unit': 'm',
                 optional: false,
               },
             },

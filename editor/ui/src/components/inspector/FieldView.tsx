@@ -45,19 +45,15 @@ export function FieldView({
   const hint = fieldHint(ctx.component, pointer(path));
   const label = schema.title ?? hint.title ?? humanize(name);
   const unset = unsetKind(schema, value);
-  if (unset === 'omitted' && hint.whenOmitted && schema.type === 'tagged-union' && 'variants' in schema) {
-    // The engine's documented default for an omitted union, shown as that variant and tagged "Default".
-    return (
-      <UnionView
-        label={label}
-        schema={schema}
-        hint={hint}
-        value={hint.whenOmitted.value}
-        path={path}
-        ctx={ctx}
-        implied={hint.whenOmitted.note}
-      />
-    );
+  const fallback = unset === 'omitted' ? presentableDefault(schema) : null;
+  if (fallback) {
+    // An omitted optional field shown as its schema default, always tagged "Default"
+    // so it never reads as authored data. The document is not changed.
+    const note = hint.omittedNote ?? DEFAULT_NOTE;
+    if (schema.type === 'tagged-union' && 'variants' in schema) {
+      return <UnionView label={label} schema={schema} hint={hint} value={fallback.value} path={path} ctx={ctx} implied={note} />;
+    }
+    return <FieldRow label={label} schema={schema} hint={hint} value={fallback.value} path={path} ctx={ctx} implied={note} />;
   }
   if (unset) {
     return <FieldRow label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} unset={unset} />;
@@ -101,6 +97,27 @@ export function FieldView({
 }
 
 type UnionSchema = Extract<FieldSchema, { type: 'tagged-union' }>;
+
+const DEFAULT_NOTE = 'Not authored. The schema default applies.';
+
+/**
+ * The schema's own `default`, when it is something this field can present: a
+ * finite number for a number field, or a record naming a known variant for a
+ * tagged union. Anything else (no default, a mistyped or unknown one) returns
+ * null and the field stays "Not set"; a default is never guessed or repaired.
+ */
+export function presentableDefault(schema: FieldSchema): { value: unknown } | null {
+  if (!Object.hasOwn(schema, 'default')) return null;
+  const value: unknown = schema.default;
+  if ((schema.type === 'number' || schema.type === 'integer') && typeof value === 'number' && Number.isFinite(value)) {
+    return { value };
+  }
+  if (schema.type === 'tagged-union' && 'variants' in schema && isRecord(value)) {
+    const tag = value[schema.discriminator];
+    if (typeof tag === 'string' && Object.hasOwn(schema.variants, tag)) return { value };
+  }
+  return null;
+}
 
 /** "box", "sphere" and "capsule" -> "box, sphere or capsule". */
 function listChoices(choices: readonly string[]): string {
@@ -266,7 +283,7 @@ function FieldRow({
   const tagId = tag ? `${id}-tag` : undefined;
   const describedBy =
     [descriptionId, tagId, noteId, problems.length > 0 ? messageId : undefined].filter(Boolean).join(' ') || undefined;
-  const unit = unitOf(schema) ?? hint.unit;
+  const unit = unitOf(schema);
   const vectorUnit = schema.type === 'array' && !unset && !notice ? unit : undefined;
   return (
     // The hover tooltip lives on the row, never on the <label>: WebKit names a field
@@ -430,7 +447,7 @@ function ValueControl({
       if (typeof value !== 'number') return <Mismatch id={id} expected="a number" value={value} />;
       return (
         <span className="control control--number">
-          <input {...common} className="control__input mono" value={formatNumber(value)} />
+          <input {...common} className="control__input mono" value={formatNumber(value)} title={exactTitle(value)} />
           {unit ? <span className="control__unit">{unit}</span> : null}
           <Tag tag={tag} />
         </span>
@@ -494,6 +511,7 @@ function ValueControl({
                 aria-invalid={errorPaths.has(here) || errorPaths.has(`${here}/${index}`) || undefined}
                 aria-describedby={describedBy}
                 value={formatNumber(item)}
+                title={exactTitle(item)}
               />
             </label>
           ))}
@@ -626,9 +644,24 @@ function Tag({ tag }: { tag: FieldStatus | null }) {
   );
 }
 
+/**
+ * Compact, readable numbers that never hide a nonzero value. Integers are shown
+ * as is; ordinary magnitudes keep up to four decimals (1.5708); values whose
+ * magnitude is below 0.01 or at least 1e9 use four significant digits in
+ * exponent form (1e-6, -2.5e-7, 1.235e-3), so a tiny clip distance never reads 0.
+ */
 export function formatNumber(value: number): string {
-  if (Number.isInteger(value)) return String(value);
+  if (Number.isInteger(value) && Math.abs(value) < 1e9) return String(value);
+  const magnitude = Math.abs(value);
+  if (magnitude !== 0 && (magnitude < 0.01 || magnitude >= 1e9)) {
+    return Number(value.toPrecision(4)).toExponential().replace('e+', 'e');
+  }
   return String(Number(value.toFixed(4)));
+}
+
+/** The exact authored number as a hover title, only when the shown form differs. */
+function exactTitle(value: number): string | undefined {
+  return formatNumber(value) === String(value) ? undefined : String(value);
 }
 
 export function Notice({

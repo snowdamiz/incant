@@ -1,6 +1,6 @@
 {
-  "set": "r1",
-  "generated": "2026-10-10T15:24:17.814Z",
+  "set": "r2",
+  "generated": "2026-10-10T15:38:20.287Z",
   "browser": "155.0.8059.40",
   "captures": [
     {
@@ -18,12 +18,13 @@
       "measure": {
         "rows": [
           {
-            "label": "Field of view",
+            "label": "Projection",
             "labelClipped": false,
-            "value": "70",
+            "value": "Perspective",
+            "exact": null,
             "valueClipped": false,
-            "unit": "°",
-            "tag": null,
+            "unit": null,
+            "tag": "Default",
             "notice": null,
             "box": {
               "x": 1240,
@@ -34,16 +35,17 @@
             "contrast": {
               "label": 7.98,
               "value": 16.28,
-              "unit": 6.96,
-              "tag": null
+              "unit": null,
+              "tag": 8.62
             }
           },
           {
-            "label": "Near clip",
+            "label": "Field of view",
             "labelClipped": false,
-            "value": "0.1",
+            "value": "70",
+            "exact": null,
             "valueClipped": false,
-            "unit": "m",
+            "unit": "°",
             "tag": null,
             "notice": null,
             "box": {
@@ -60,9 +62,10 @@
             }
           },
           {
-            "label": "Far clip",
+            "label": "Near clip",
             "labelClipped": false,
-            "value": "800",
+            "value": "0.1",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
@@ -81,12 +84,13 @@
             }
           },
           {
-            "label": "Projection",
+            "label": "Far clip",
             "labelClipped": false,
-            "value": "Perspective",
+            "value": "800",
+            "exact": null,
             "valueClipped": false,
-            "unit": null,
-            "tag": "Default",
+            "unit": "m",
+            "tag": null,
             "notice": null,
             "box": {
               "x": 1240,
@@ -97,8 +101,8 @@
             "contrast": {
               "label": 7.98,
               "value": 16.28,
-              "unit": null,
-              "tag": 8.62
+              "unit": 6.96,
+              "tag": null
             }
           }
         ],
@@ -141,79 +145,17 @@
       "measure": {
         "rows": [
           {
-            "label": "Field of view",
-            "labelClipped": false,
-            "value": "60",
-            "valueClipped": false,
-            "unit": "°",
-            "tag": "Unused",
-            "notice": null,
-            "box": {
-              "x": 1240,
-              "y": 328,
-              "width": 188,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": 8.62
-            }
-          },
-          {
-            "label": "Near clip",
-            "labelClipped": false,
-            "value": "0.1",
-            "valueClipped": false,
-            "unit": "m",
-            "tag": null,
-            "notice": null,
-            "box": {
-              "x": 1240,
-              "y": 362,
-              "width": 188,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
-            "label": "Far clip",
-            "labelClipped": false,
-            "value": "100",
-            "valueClipped": false,
-            "unit": "m",
-            "tag": null,
-            "notice": null,
-            "box": {
-              "x": 1240,
-              "y": 396,
-              "width": 188,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
             "label": "Projection",
             "labelClipped": false,
             "value": "Orthographic",
+            "exact": null,
             "valueClipped": false,
             "unit": null,
             "tag": null,
             "notice": null,
             "box": {
               "x": 1240,
-              "y": 430,
+              "y": 328,
               "width": 188,
               "height": 28
             },
@@ -228,13 +170,80 @@
             "label": "Vertical size",
             "labelClipped": false,
             "value": "8",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
             "notice": null,
             "box": {
               "x": 1240,
-              "y": 466,
+              "y": 364,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 400,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 434,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 468,
               "width": 188,
               "height": 28
             },
@@ -288,79 +297,17 @@
       "measure": {
         "rows": [
           {
-            "label": "Field of view",
-            "labelClipped": false,
-            "value": "60",
-            "valueClipped": false,
-            "unit": "°",
-            "tag": "Unused",
-            "notice": null,
-            "box": {
-              "x": 1240,
-              "y": 328,
-              "width": 188,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": 8.62
-            }
-          },
-          {
-            "label": "Near clip",
-            "labelClipped": false,
-            "value": "0.1",
-            "valueClipped": false,
-            "unit": "m",
-            "tag": null,
-            "notice": null,
-            "box": {
-              "x": 1240,
-              "y": 362,
-              "width": 188,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
-            "label": "Far clip",
-            "labelClipped": false,
-            "value": "100",
-            "valueClipped": false,
-            "unit": "m",
-            "tag": null,
-            "notice": null,
-            "box": {
-              "x": 1240,
-              "y": 396,
-              "width": 188,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
             "label": "Projection",
             "labelClipped": false,
             "value": "Orthographic",
+            "exact": null,
             "valueClipped": false,
             "unit": null,
             "tag": null,
             "notice": null,
             "box": {
               "x": 1240,
-              "y": 430,
+              "y": 328,
               "width": 188,
               "height": 28
             },
@@ -375,13 +322,80 @@
             "label": "Vertical size",
             "labelClipped": false,
             "value": "8",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
             "notice": null,
             "box": {
               "x": 1240,
-              "y": 466,
+              "y": 364,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 400,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 434,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 468,
               "width": 188,
               "height": 28
             },
@@ -432,16 +446,39 @@
       "measure": {
         "rows": [
           {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": null,
+            "exact": null,
+            "valueClipped": null,
+            "unit": null,
+            "tag": null,
+            "notice": "Unknown projection kind \"isometric\". Expected perspective or orthographic; raw value:{\"kind\":\"isometric\"}",
+            "box": {
+              "x": 1240,
+              "y": 177,
+              "width": 188,
+              "height": 116
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": null,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
             "label": "Field of view",
             "labelClipped": false,
             "value": "60",
+            "exact": null,
             "valueClipped": false,
             "unit": "°",
             "tag": null,
             "notice": null,
             "box": {
               "x": 1240,
-              "y": 177,
+              "y": 299,
               "width": 188,
               "height": 28
             },
@@ -456,13 +493,14 @@
             "label": "Near clip",
             "labelClipped": false,
             "value": "0.1",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
             "notice": null,
             "box": {
               "x": 1240,
-              "y": 211,
+              "y": 333,
               "width": 188,
               "height": 28
             },
@@ -477,13 +515,14 @@
             "label": "Far clip",
             "labelClipped": false,
             "value": "100",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
             "notice": null,
             "box": {
               "x": 1240,
-              "y": 245,
+              "y": 367,
               "width": 188,
               "height": 28
             },
@@ -491,27 +530,6 @@
               "label": 7.98,
               "value": 16.28,
               "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
-            "label": "Projection",
-            "labelClipped": false,
-            "value": null,
-            "valueClipped": null,
-            "unit": null,
-            "tag": null,
-            "notice": "Unknown projection kind \"isometric\". Expected perspective or orthographic; raw value:{\"kind\":\"isometric\"}",
-            "box": {
-              "x": 1240,
-              "y": 279,
-              "width": 188,
-              "height": 116
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": null,
-              "unit": null,
               "tag": null
             }
           }
@@ -529,7 +547,305 @@
         "focused": null,
         "focusOutline": null,
         "outputTabs": [
-          "Hierarchy1 entities",
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "sizeless-ortho-normal-1440x900.png",
+      "crop": "sizeless-ortho-normal-1440x900-inspector.png",
+      "size": {
+        "key": "normal",
+        "width": 1440,
+        "height": 900,
+        "minimum": false
+      },
+      "state": "sizeless-ortho",
+      "entity": "Sizeless Ortho",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 177,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": null,
+            "exact": null,
+            "valueClipped": null,
+            "unit": null,
+            "tag": null,
+            "notice": "Cannot show as a number; raw value:undefined",
+            "box": {
+              "x": 1240,
+              "y": 213,
+              "width": 188,
+              "height": 84
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": null,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 305,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 339,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 373,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "tiny-values-normal-1440x900.png",
+      "crop": "tiny-values-normal-1440x900-inspector.png",
+      "size": {
+        "key": "normal",
+        "width": 1440,
+        "height": 900,
+        "minimum": false
+      },
+      "state": "tiny-values",
+      "entity": "Tiny Shot",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 177,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": "2.5e-6",
+            "exact": "0.0000025",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 213,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 249,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "1e-6",
+            "exact": "0.000001",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 283,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "4.2e-4",
+            "exact": "0.00042",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 317,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
           "Assets",
           "Problems",
           "Console",
@@ -555,12 +871,13 @@
       "measure": {
         "rows": [
           {
-            "label": "Field of view",
+            "label": "Projection",
             "labelClipped": false,
-            "value": "70",
+            "value": "Perspective",
+            "exact": null,
             "valueClipped": false,
-            "unit": "°",
-            "tag": null,
+            "unit": null,
+            "tag": "Default",
             "notice": null,
             "box": {
               "x": 834,
@@ -571,16 +888,17 @@
             "contrast": {
               "label": 7.98,
               "value": 16.28,
-              "unit": 6.96,
-              "tag": null
+              "unit": null,
+              "tag": 8.62
             }
           },
           {
-            "label": "Near clip",
+            "label": "Field of view",
             "labelClipped": false,
-            "value": "0.1",
+            "value": "70",
+            "exact": null,
             "valueClipped": false,
-            "unit": "m",
+            "unit": "°",
             "tag": null,
             "notice": null,
             "box": {
@@ -597,9 +915,10 @@
             }
           },
           {
-            "label": "Far clip",
+            "label": "Near clip",
             "labelClipped": false,
-            "value": "800",
+            "value": "0.1",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
@@ -618,12 +937,13 @@
             }
           },
           {
-            "label": "Projection",
+            "label": "Far clip",
             "labelClipped": false,
-            "value": "Perspective",
+            "value": "800",
+            "exact": null,
             "valueClipped": false,
-            "unit": null,
-            "tag": "Default",
+            "unit": "m",
+            "tag": null,
             "notice": null,
             "box": {
               "x": 834,
@@ -634,8 +954,8 @@
             "contrast": {
               "label": 7.98,
               "value": 16.28,
-              "unit": null,
-              "tag": 8.62
+              "unit": 6.96,
+              "tag": null
             }
           }
         ],
@@ -678,79 +998,17 @@
       "measure": {
         "rows": [
           {
-            "label": "Field of view",
-            "labelClipped": false,
-            "value": "60",
-            "valueClipped": false,
-            "unit": "°",
-            "tag": "Unused",
-            "notice": null,
-            "box": {
-              "x": 834,
-              "y": 173,
-              "width": 154,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": 8.62
-            }
-          },
-          {
-            "label": "Near clip",
-            "labelClipped": false,
-            "value": "0.1",
-            "valueClipped": false,
-            "unit": "m",
-            "tag": null,
-            "notice": null,
-            "box": {
-              "x": 834,
-              "y": 207,
-              "width": 154,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
-            "label": "Far clip",
-            "labelClipped": false,
-            "value": "100",
-            "valueClipped": false,
-            "unit": "m",
-            "tag": null,
-            "notice": null,
-            "box": {
-              "x": 834,
-              "y": 241,
-              "width": 154,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
             "label": "Projection",
             "labelClipped": false,
             "value": "Orthographic",
+            "exact": null,
             "valueClipped": false,
             "unit": null,
             "tag": null,
             "notice": null,
             "box": {
               "x": 834,
-              "y": 275,
+              "y": 173,
               "width": 154,
               "height": 28
             },
@@ -765,13 +1023,80 @@
             "label": "Vertical size",
             "labelClipped": false,
             "value": "8",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
             "notice": null,
             "box": {
               "x": 834,
-              "y": 313,
+              "y": 211,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 249,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 283,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 317,
               "width": 154,
               "height": 28
             },
@@ -825,79 +1150,17 @@
       "measure": {
         "rows": [
           {
-            "label": "Field of view",
-            "labelClipped": false,
-            "value": "60",
-            "valueClipped": false,
-            "unit": "°",
-            "tag": "Unused",
-            "notice": null,
-            "box": {
-              "x": 834,
-              "y": 157,
-              "width": 154,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": 8.62
-            }
-          },
-          {
-            "label": "Near clip",
-            "labelClipped": false,
-            "value": "0.1",
-            "valueClipped": false,
-            "unit": "m",
-            "tag": null,
-            "notice": null,
-            "box": {
-              "x": 834,
-              "y": 191,
-              "width": 154,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
-            "label": "Far clip",
-            "labelClipped": false,
-            "value": "100",
-            "valueClipped": false,
-            "unit": "m",
-            "tag": null,
-            "notice": null,
-            "box": {
-              "x": 834,
-              "y": 225,
-              "width": 154,
-              "height": 28
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": 16.28,
-              "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
             "label": "Projection",
             "labelClipped": false,
             "value": "Orthographic",
+            "exact": null,
             "valueClipped": false,
             "unit": null,
             "tag": null,
             "notice": null,
             "box": {
               "x": 834,
-              "y": 259,
+              "y": 166,
               "width": 154,
               "height": 28
             },
@@ -912,13 +1175,80 @@
             "label": "Vertical size",
             "labelClipped": false,
             "value": "8",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
             "notice": null,
             "box": {
               "x": 834,
-              "y": 297,
+              "y": 204,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 242,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 276,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 310,
               "width": 154,
               "height": 28
             },
@@ -969,16 +1299,39 @@
       "measure": {
         "rows": [
           {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": null,
+            "exact": null,
+            "valueClipped": null,
+            "unit": null,
+            "tag": null,
+            "notice": "Unknown projection kind \"isometric\". Expected perspective or orthographic; raw value:{\"kind\":\"isometric\"}",
+            "box": {
+              "x": 834,
+              "y": 115,
+              "width": 154,
+              "height": 164
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": null,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
             "label": "Field of view",
             "labelClipped": false,
             "value": "60",
+            "exact": null,
             "valueClipped": false,
             "unit": "°",
             "tag": null,
             "notice": null,
             "box": {
               "x": 834,
-              "y": 115,
+              "y": 285,
               "width": 154,
               "height": 28
             },
@@ -993,13 +1346,14 @@
             "label": "Near clip",
             "labelClipped": false,
             "value": "0.1",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
             "notice": null,
             "box": {
               "x": 834,
-              "y": 149,
+              "y": 319,
               "width": 154,
               "height": 28
             },
@@ -1014,13 +1368,14 @@
             "label": "Far clip",
             "labelClipped": false,
             "value": "100",
+            "exact": null,
             "valueClipped": false,
             "unit": "m",
             "tag": null,
             "notice": null,
             "box": {
               "x": 834,
-              "y": 183,
+              "y": 353,
               "width": 154,
               "height": 28
             },
@@ -1028,27 +1383,6 @@
               "label": 7.98,
               "value": 16.28,
               "unit": 6.96,
-              "tag": null
-            }
-          },
-          {
-            "label": "Projection",
-            "labelClipped": false,
-            "value": null,
-            "valueClipped": null,
-            "unit": null,
-            "tag": null,
-            "notice": "Unknown projection kind \"isometric\". Expected perspective or orthographic; raw value:{\"kind\":\"isometric\"}",
-            "box": {
-              "x": 834,
-              "y": 217,
-              "width": 154,
-              "height": 164
-            },
-            "contrast": {
-              "label": 7.98,
-              "value": null,
-              "unit": null,
               "tag": null
             }
           }
@@ -1066,7 +1400,305 @@
         "focused": null,
         "focusOutline": null,
         "outputTabs": [
-          "Hierarchy1 entities",
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "sizeless-ortho-minimum-1000x650.png",
+      "crop": "sizeless-ortho-minimum-1000x650-inspector.png",
+      "size": {
+        "key": "minimum",
+        "width": 1000,
+        "height": 650,
+        "minimum": true
+      },
+      "state": "sizeless-ortho",
+      "entity": "Sizeless Ortho",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 121,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": null,
+            "exact": null,
+            "valueClipped": null,
+            "unit": null,
+            "tag": null,
+            "notice": "Cannot show as a number; raw value:undefined",
+            "box": {
+              "x": 834,
+              "y": 157,
+              "width": 154,
+              "height": 84
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": null,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 249,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 283,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 317,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "tiny-values-minimum-1000x650.png",
+      "crop": "tiny-values-minimum-1000x650-inspector.png",
+      "size": {
+        "key": "minimum",
+        "width": 1000,
+        "height": 650,
+        "minimum": true
+      },
+      "state": "tiny-values",
+      "entity": "Tiny Shot",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 173,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": "2.5e-6",
+            "exact": "0.0000025",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 211,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 249,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "1e-6",
+            "exact": "0.000001",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 283,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "4.2e-4",
+            "exact": "0.00042",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 317,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
           "Assets",
           "Problems",
           "Console",
