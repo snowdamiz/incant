@@ -80,7 +80,10 @@ within its documented workload.
 
 - A [cache layout/retention proposal](docs/spikes/ci-cache-layout-proposal.md) records
   the main53 Linux credential-cache disappearance, final 11-family inventory and
-  separate local compressed registry/target measurements. No cache layout,
+  separate local compressed registry/target measurements. The simpler auxiliary
+  registry-only alternative now includes exact old-archive totals, historical
+  cold execution/queue times and replacement-overlap limits. Actual PR56 consumers
+  restored and verified both pinned tool binaries with PR saves skipped. No cache layout,
   permission, coverage or shipping-seed change is enabled. Hosted component
   measurements and bounded replacement-capacity validation remain required.
 
