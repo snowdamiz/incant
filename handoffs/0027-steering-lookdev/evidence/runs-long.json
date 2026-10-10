@@ -8,14 +8,14 @@
   ]
  ],
  "windows": [],
- "binary_sha256": "d4b62efd369074f130ef059ca535b94827ea7acda15675ece687f4f9a56cd991",
+ "binary_sha256": "29ecd16b38a020670b13b49bb26a653b0d5f95d0f78273477bd456488d85f461",
  "plays": [
   {
    "name": "logs",
    "ticks": 4990,
    "every": 1,
-   "binary_before": "d4b62efd369074f130ef059ca535b94827ea7acda15675ece687f4f9a56cd991",
-   "binary_after": "d4b62efd369074f130ef059ca535b94827ea7acda15675ece687f4f9a56cd991",
+   "binary_before": "29ecd16b38a020670b13b49bb26a653b0d5f95d0f78273477bd456488d85f461",
+   "binary_after": "29ecd16b38a020670b13b49bb26a653b0d5f95d0f78273477bd456488d85f461",
    "failed_attempts": [],
    "load": null
   }
