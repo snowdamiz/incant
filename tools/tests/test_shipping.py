@@ -1,8 +1,11 @@
-"""Parser/guard fixtures only; live desktop artifacts are verified by shipping.py."""
+"""Parser, guard and subprocess regressions; live artifacts are verified by shipping.py."""
 from pathlib import Path
+import json
+import os
 import struct
 import sys
 import unittest
+from unittest.mock import patch
 import uuid
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -97,6 +100,31 @@ class ShippingSymbols(unittest.TestCase):
         self.assertEqual(symbols.section_size(sections, '.debug_info'), 0)
         self.assertEqual(symbols.section_size(sections, '.debug_line'), 32)
         self.assertEqual(symbols.section_size(sections, '.debug'), 0)
+
+
+class ShippingCargoOutput(unittest.TestCase):
+    def test_utf8_artifacts_and_diagnostics_survive_windows_locale(self):
+        artifact = {'reason': 'compiler-artifact', 'executable': 'target/ā/player.exe'}
+        stdout = (json.dumps(artifact, ensure_ascii=False) + '\n').encode('utf-8')
+        stderr = 'diagnostic ā → 日本語\n'.encode('utf-8')
+        # ā contains 0x81 in UTF-8, which is undefined in Windows cp1252.
+        with self.assertRaises(UnicodeDecodeError):
+            stdout.decode('cp1252')
+        script = f'import os; os.write(1, {stdout!r}); os.write(2, {stderr!r})'
+        # A real child emits bytes; only the parent's locale lookup is controlled.
+        with patch('subprocess._text_encoding', return_value='cp1252'):
+            result = shipping.cargo_output([sys.executable, '-c', script],
+                                           cwd=Path.cwd(), env=os.environ.copy())
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(json.loads(result.stdout), artifact)
+        self.assertEqual(result.stderr, stderr.decode('utf-8'))
+
+    def test_nonzero_exit_and_diagnostic_are_preserved(self):
+        result = shipping.cargo_output([sys.executable, '-c',
+            "import os; os.write(2, b'build failed'); raise SystemExit(17)"],
+            cwd=Path.cwd(), env=os.environ.copy())
+        self.assertEqual(result.returncode, 17)
+        self.assertEqual(result.stderr, 'build failed')
 
 
 class ShippingCompilerGuard(unittest.TestCase):

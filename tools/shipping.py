@@ -24,6 +24,11 @@ from shipping_symbols import backend, package, require, run
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def cargo_output(command, *, cwd, env):
+    """Capture Cargo machine output without depending on the host locale."""
+    return subprocess.run(command, cwd=cwd, env=env, capture_output=True, text=True, encoding='utf-8')
+
+
 def codegen(command):
     """Read effective codegen values from Cargo's real rustc invocation."""
     return {key: value.strip('"\'') for key, value in re.findall(r'(?:^|\s)-C\s*([a-z-]+)=([^\s`]+)', command)}
@@ -129,7 +134,7 @@ def main():
                    '--profile', 'shipping', '--locked', '--target', target, '--target-dir', storage,
                    '--config', f'profile.shipping.split-debuginfo="{split}"', '--message-format=json', '-vv']
         print(f'Building standalone runtime for {target} with shipping profile...', flush=True)
-        build = subprocess.run(command, cwd=ROOT, env=environment, capture_output=True, text=True)
+        build = cargo_output(command, cwd=ROOT, env=environment)
         if build.returncode:
             print(build.stderr[-16000:], file=sys.stderr)
             raise ValueError(f'Shipping Cargo build failed with exit code {build.returncode}')

@@ -18,7 +18,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
-from shipping import codegen
+from shipping import cargo_output, codegen
 from shipping_symbols import backend, package, require, run
 
 
@@ -157,8 +157,8 @@ export default {update(context: NativeContext) {
             command = [*cargo, 'build', '-j2', '-p', 'incant_script_player', '--profile', 'shipping',
                        '--locked', '--target', target, '--target-dir', storage,
                        '--config', f'profile.shipping.split-debuginfo="{split}"', '--message-format=json', '-vv']
-            build = subprocess.run(command, cwd=ROOT, env=environment, capture_output=True, text=True)
-            (out / 'build.log').write_text(build.stderr)
+            build = cargo_output(command, cwd=ROOT, env=environment)
+            (out / 'build.log').write_text(build.stderr, encoding='utf-8')
             require(build.returncode == 0, f'Shipping script build failed; see {out / "build.log"}')
             flags = {}
             checked_crates = ['incant_input', 'incant_runtime', 'incant_script', 'incant_script_player']
