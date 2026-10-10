@@ -3,6 +3,7 @@ mod build;
 mod path;
 mod resources;
 pub use resources::{NavigationAsset, NavigationResources};
+mod shortcut;
 mod surface;
 mod types;
 pub use build::{NavigationMesh, RebuildReport};

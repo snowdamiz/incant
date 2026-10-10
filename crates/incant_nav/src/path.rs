@@ -48,6 +48,13 @@ impl Ord for Entry {
 }
 impl NavigationMesh {
     pub fn find_path(&self, q: &PathRequest) -> Result<Option<NavigationPath>, NavigationError> {
+        let mut result = self.corridor_path(q)?;
+        if let Some(path) = &mut result {
+            self.shortcut(path, q.max_visited);
+        }
+        Ok(result)
+    }
+    fn corridor_path(&self, q: &PathRequest) -> Result<Option<NavigationPath>, NavigationError> {
         if self.settings.is_none() {
             return Err(invalid("navigation mesh has not been built"));
         }
@@ -127,7 +134,7 @@ impl NavigationMesh {
                     });
                 }
                 gates.push((end, end));
-                return Ok(Some(NavigationPath {
+                let path = NavigationPath {
                     points: crate::surface::follow(
                         &self.polygons,
                         &corridor,
@@ -137,7 +144,8 @@ impl NavigationMesh {
                     corridor: corridor.into_iter().map(|i| i as u32).collect(),
                     visited,
                     generation: self.generation(),
-                }));
+                };
+                return Ok(Some(path));
             }
             for (edge, p) in self.portals[index].iter().enumerate() {
                 let cost = g + centers[index].distance(centers[p.to]);
@@ -154,7 +162,7 @@ impl NavigationMesh {
         }
         Ok(None)
     }
-    fn nearest(&self, p: [f32; 3], max: f32) -> Option<(usize, [f32; 3])> {
+    pub(crate) fn nearest(&self, p: [f32; 3], max: f32) -> Option<(usize, [f32; 3])> {
         let p = Vec3::from_array(p);
         let mut best = max * max;
         let mut found = None;
@@ -305,9 +313,10 @@ mod tests {
         }
         let mut nav = NavigationMesh::default();
         nav.rebuild(&settings, &sources).unwrap();
+        let mut shortened = false;
         for z in [-3., 0., 3.] {
             let path = nav
-                .find_path(&PathRequest {
+                .corridor_path(&PathRequest {
                     start: [-6., 0., z],
                     end: [6., 0., -z],
                     snap_distance: 1.,
@@ -356,6 +365,44 @@ mod tests {
                 "A* cost {actual} != Dijkstra {}",
                 costs[end]
             );
+            let request = PathRequest {
+                start: [-6., 0., z],
+                end: [6., 0., -z],
+                snap_distance: 1.,
+                max_visited: 1000,
+            };
+            let repaired = nav.find_path(&request).unwrap().unwrap();
+            let length = |p: &NavigationPath| {
+                p.points
+                    .windows(2)
+                    .map(|p| (p[1][0] - p[0][0]).hypot(p[1][2] - p[0][2]))
+                    .sum::<f32>()
+            };
+            assert!(length(&repaired) <= length(&path) + 1e-4);
+            shortened |= length(&repaired) < length(&path) - 0.001;
+            assert!(repaired.visited <= request.max_visited);
+            for pair in repaired.corridor.windows(2) {
+                assert!(
+                    nav.portals[pair[0] as usize]
+                        .iter()
+                        .any(|p| p.to == pair[1] as usize)
+                );
+            }
+            let limited = nav
+                .find_path(&PathRequest {
+                    max_visited: path.visited,
+                    ..request
+                })
+                .unwrap()
+                .unwrap();
+            assert_eq!(
+                limited, path,
+                "optional smoothing must preserve the original when no visit budget remains"
+            );
         }
+        assert!(
+            shortened,
+            "line-of-sight repair should remove a graph-centroid detour"
+        );
     }
 }
