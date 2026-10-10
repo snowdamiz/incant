@@ -1,0 +1,96 @@
+{
+  "source_commit": "d6106c786cbaacb51efe2be744565ce80507b299",
+  "base": "9f5906fd0fbe2621ee6494b57983aac97cf8a665",
+  "format": "incant-game-save",
+  "version": 1,
+  "tests": {
+    "rust": 172,
+    "new_behavior_tests": 9,
+    "ui": 315,
+    "tools": 5,
+    "workspace_clippy": "passed",
+    "strict_typescript": "passed",
+    "schemas_sdk_bridge_conventions": "passed",
+    "native_release_build": "passed",
+    "native_package": "passed"
+  },
+  "capture_constraint": {
+    "computer_use": false,
+    "new_local_captures": false,
+    "local_ignored_gpu_tests": "not rerun during capture pause; hosted automated coverage pending"
+  },
+  "float_roundtrip": {
+    "before": "JSON reload changed elapsed time 0.39999999999999997 to 0.4 and one rotation component at its last bits",
+    "after": "exact serialized f64 values preserved; initial and continued noncontact save snapshots compare exactly"
+  },
+  "public_cli": {
+    "passed": true,
+    "strict_typescript": true,
+    "rendering": false,
+    "steps": [
+      19,
+      41
+    ],
+    "full_state_equal": true,
+    "nested_state_and_runtime_spawn_delete_preserved": true,
+    "resumed_logs_equal_to_uninterrupted_suffix": true,
+    "second_save_reopened": true,
+    "author_files_unchanged": {
+      "game.incant.json": "960fb2f9d01ebed128ec12cb735d736ef2a4ac5f952e1188915ffc7b3cba6447",
+      "history.jsonl": "6cd4fd791e6c096c70dca1c686d6a4d4a89a6a449792caf757b2ce1d85989376"
+    },
+    "binary_sha256": "a99b5030c6755a1430c42d2beec4d1e65247e5f7751a85eb80eb818937b0fcd3"
+  },
+  "primitive_regression": {
+    "passed": true,
+    "public_rpc": true,
+    "atomic_invalid_rejection": true,
+    "undo_redo_and_persistent_reopen": true,
+    "repeated_runtime_exact": true,
+    "sandbox_query_and_velocity_command": true,
+    "author_files_unchanged": {
+      "project.incant.json": "6ea1a991a7b43d1da6fd9eaa3b15643c871ac1e3ee89bc08c2526a893f6824a7",
+      "history.jsonl": "d707512a4a425c3552cb9c485b649ab35918dbcf5e4e6332ed3be14da5290ded"
+    },
+    "settled_y": 0.4999316930770874,
+    "jump_y": 0.5815619230270386,
+    "live_platform_gate": false
+  },
+  "character_regression": {
+    "passed": true,
+    "public_rpc": true,
+    "strict_typescript": true,
+    "wall_position": [
+      1.5899943113327026,
+      0.9091004729270935,
+      -9.103992852033116e-06
+    ],
+    "script_state": {
+      "grounded": true,
+      "jumped": true,
+      "landed": true,
+      "maxY": 2.225309371948242,
+      "tick": 360,
+      "vertical": 0
+    },
+    "repeated_final_state_exact": true,
+    "author_files_unchanged": {
+      "game.incant.json": "3ee2e01386e165f683f698dd6ddee755961cc4c8ace37aecbd96cd6caffa2054",
+      "history.jsonl": "7d94c5c5b6e5b85c11cd38949ec0d82a66ce8da3a72c40ab298f6756aded4f4c"
+    },
+    "physical_device_gate": false
+  },
+  "not_claimed": [
+    "solver warm-start/rollback or sleep preservation",
+    "VM globals/closures/continuations",
+    "replay of prior output or contacts",
+    "cross-game-revision migration",
+    "mobile or physical-device save IO",
+    "native save UI"
+  ],
+  "pending": [
+    "hosted checks",
+    "reviewed merge"
+  ],
+  "native_binary_sha256": "ada3012f2944b35a36b13de9a8ed0b9fbb50b50cf47160d696813808c2334fa7"
+}
