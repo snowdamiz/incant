@@ -111,6 +111,19 @@ class PinnedToolTests(unittest.TestCase):
                     TOOL.main()
             self.assertEqual(output.read_text(), 'existing-path\n')
 
+    def test_verified_ndk_precedes_cargo_home_without_changing_any_proxy(self):
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            home = root / 'cargo-home'
+            cache = root / 'verified-tool'
+            output = root / 'github-path'
+            with patch.dict(TOOL.os.environ, {'CARGO_HOME': str(home), 'GITHUB_PATH': str(output)}), \
+                 patch.object(sys, 'argv', ['pinned-tool.py', 'cargo-ndk', str(cache)]), \
+                 patch.object(TOOL, 'ensure', return_value=cache / 'cargo-ndk'):
+                TOOL.main()
+            self.assertEqual(output.read_text().splitlines(), [str(home / 'bin'), str(cache.resolve())])
+            self.assertFalse(home.exists())
+
 
 if __name__ == '__main__':
     unittest.main()

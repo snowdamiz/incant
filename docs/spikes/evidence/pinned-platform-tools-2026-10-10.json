@@ -2,7 +2,7 @@
   "scope": "Local source install and immediate executable reuse; hosted Linux cache restoration is not yet measured",
   "host": "macOS-26.6-arm64-arm-64bit-Mach-O",
   "recorded_at": "2026-10-10T21:38:20.259420+00:00",
-  "helper_sha256": "ee0ceb7d99d7585a6889f3abaa4a1987e3f47dbda63384f17bf40cceb74bbed6",
+  "helper_sha256": "ca15c2e6a335d1328e1bbad658c004ded9f3694ee9d00879c5af2581efce0bba",
   "wasm_bindgen_first_fresh_cargo_compile_seconds": 74,
   "executables": [
     {
@@ -23,5 +23,14 @@
       "first_seconds": 24.446562791010365,
       "reuse_seconds": 0.1632248329988215
     }
-  ]
+  ],
+  "real_cargo_dispatch": {
+    "before": "cargo-ndk 0.0.0",
+    "after": "cargo-ndk 4.1.2",
+    "cargo_home_untouched": true,
+    "github_path_lines": [
+      "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-ndk-dispatch-arcdwfg1/cargo-home/bin",
+      "/private/tmp/incant-pinned-tool-live/cargo-ndk"
+    ]
+  }
 }

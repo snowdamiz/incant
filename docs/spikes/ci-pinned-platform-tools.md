@@ -20,7 +20,10 @@ file triggers a normal source installation in temporary storage. The newly
 built executable is checked again and atomically published. A failed install or
 bad version fails the step without publishing a PATH. The cargo-ndk version
 check invokes the exact file with Cargo's required invocation marker; a different
-copy elsewhere on PATH cannot satisfy the check.
+copy elsewhere on PATH cannot satisfy the check. Cargo home/bin is included
+behind the verified tool in later steps' PATH, preserving its original path
+spelling, so Cargo cannot silently prepend an older installed copy. No file in
+Cargo home is written or cached.
 
 Only successful default-branch platform jobs save, and only when their exact
 key is absent. PRs restore only. The existing main nightly or one separately
@@ -30,10 +33,12 @@ fallback and needs a reviewed key-version bump to replace it.
 
 ## Verification and budget
 
-- All 35 Python tool tests and workflow actionlint pass. The seven new cases
+- All 36 Python tool tests and workflow actionlint pass. The eight new cases
   exercise reuse, exact locked installation, wrong/unexecutable cached files,
   failed/wrong-version installation, host/architecture separation and failure
-  before PATH publication.
+  before PATH publication. A real Cargo dispatch check also proves that an
+  unrelated older Cargo-home executable cannot shadow the verified cached tool;
+  the older file remains untouched.
 - Actual source installs and immediate version-checked reuse pass on the local
   macOS host. Wasm-bindgen compilation reported 74 seconds; its reuse took
   0.003 seconds. Cargo-ndk installation took 24.45 seconds and reuse 0.16 seconds.
