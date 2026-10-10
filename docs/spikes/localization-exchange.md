@@ -101,3 +101,5 @@ checks, 315 UI tests/build, five tool tests, Clippy, generated contracts, strict
 TypeScript and native release packaging. The new public workflow and existing
 localization/save probes pass. macOS executes the XLIFF smoke check; WASM and
 iOS target checks compile. Hosted results are pending at this checkpoint.
+
+Merged in [PR #34](https://github.com/snowdamiz/incant/pull/34) after all 12 checks passed on `37246330f930628713d19fba1130f4feb011026b`. Merge `106a4cc705a6293083bdccc2cc2be3eb5e0325ff` has the same tree (`848bbc12d124b6e5bb6e37825858557d97faf2df`) as that tested head. Deferred release gates remain open.

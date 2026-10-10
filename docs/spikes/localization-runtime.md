@@ -133,3 +133,5 @@ integration check, not a model-authored complete-game or visual acceptance claim
 
 [Machine-readable evidence](evidence/localization-runtime-2026-10-10.json) retains
 probe hashes and results. Phase 1 and full-engine gates remain open.
+
+Merged in [PR #33](https://github.com/snowdamiz/incant/pull/33) after all 12 checks passed on `184a0fe68a8ce42c8a30fdd31c665d3b6913871e`. Merge `7052e01dfc4d8c580e1023acec13fca5196c0c8c` has the same tree (`f41038667995e5908b9317a62f156446363b71b0`) as that tested head. Deferred release gates remain open.

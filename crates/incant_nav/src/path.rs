@@ -14,6 +14,9 @@ pub struct PathRequest {
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 pub struct NavigationPath {
+    /// World-space points on the quantized navigation surface. Voxel/detail
+    /// sampling approximates height and rounds steps; use physics for grounding
+    /// or exact surface placement. The chosen corridor may include tile bends.
     pub points: Vec<[f32; 3]>,
     pub corridor: Vec<u32>,
     pub visited: u32,

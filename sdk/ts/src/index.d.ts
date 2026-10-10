@@ -32,7 +32,9 @@ export interface ScriptApi {
    * 256 shared native-query units per tick. Null means no nearby/reachable path;
    * invalid inputs or exhausted budgets throw. The path uses world coordinates
    * and is a snapshot; recalculate after source changes. Generation is local to
-   * the play session, not durable across saves. Commands become visible next tick. */
+   * the play session, not durable across saves. Commands become visible next tick.
+   * Heights lie on the quantized navigation surface; steps are approximated.
+   * Use physics for grounding/placement. The chosen corridor can include tile bends. */
   findPath(query: NavigationQuery): NavigationPath | null;
   /** Read-only localization snapshot at the start of this tick. Each localization
    * query costs 4 of the shared 256 native-query units. Change locale with the
