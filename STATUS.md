@@ -53,6 +53,12 @@ within its documented workload.
 
 ## Active work
 
+- The editor context now generates icons/assets during Tauri build preparation,
+  before rustc records input timestamps. Both feature modes have locally verified
+  cold generated outputs and immediate warm no-op builds; hosted validation is
+  pending. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
+  invalidation fix from [measured Windows compilation costs](docs/spikes/ci-cargo-unit-timings.md).
+
 - Native fixed-tick input now owns a fresh cooked world, script VM and bounded
   input timeline. Action bindings validate once at construction/rebind; each
   valid packet advances native simulation before the synchronous script. Raw
