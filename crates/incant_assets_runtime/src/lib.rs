@@ -22,6 +22,8 @@ pub mod texture;
 #[cfg(feature = "visual")]
 pub mod texture_cache;
 #[cfg(feature = "visual")]
+mod version;
+#[cfg(feature = "visual")]
 pub use ktx::decode_ktx2;
 #[cfg(feature = "visual")]
 pub use material::{AlphaMode, Material, MaterialTexture};
@@ -39,6 +41,8 @@ pub use texture::{Texture, TextureFormat, TextureUsage};
 #[cfg(feature = "visual")]
 pub use texture_cache::{CookedTexture, TextureMetadata, load_texture};
 use thiserror::Error;
+#[cfg(feature = "visual")]
+pub use version::{RuntimeAsset, RuntimeAssetData, RuntimeAssetInfo};
 
 pub const MAX_SOURCE_BYTES: usize = 128 * 1024 * 1024;
 pub const MAX_VERTICES: usize = 1_000_000;
