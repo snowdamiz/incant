@@ -1,3 +1,21 @@
+## Priority revision 2: report accuracy only
+
+The rendered review and its measured results are accepted for this scoped link
+increment; the visible height limitation remains explicitly open. Do not rerun
+captures or alter the engine, scene, behavior or evidence.
+
+Correct two descriptions in result.md, then commit with Built-by: claude:
+- The invocation actually ran under `caffeinate -s -i` (both the outer ACP runner
+  and run_set.sh commands). Remove the statement that no temporary sleep
+  assertions were needed. State that there were zero 50 ms failures in the two
+  recorded runs with temporary sleep prevention; this does not show robustness
+  under sleep or CPU contention.
+- Say two independently authored test projects/runs on the same immutable binary,
+  not two independent builds, where the latter implies engine recompilation.
+
+Retain the hover defect, exact measurements, session-local generation difference,
+and all limits. This is an evidence correction, no new visual judgment required.
+
 # Off-mesh link rendered-motion review
 
 Claude Opus 5.5 over ACP owns all visual design, geometry look-dev, cameras,

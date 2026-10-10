@@ -53,21 +53,45 @@ within its documented workload.
 
 ## Active work
 
-- Bounded local avoidance now exposes read-only `api.steerAgents` proposals for
-  up to 128 agents. Two dense 100-agent library fixtures and the public 100-agent
-  TypeScript save/reopen workflow pass. Shared command routing, query budgets,
-  fixed-step binding and malformed-input rollback are covered. See
-  [steering evidence](docs/spikes/navigation-steering.md); Claude's rendered
-  review and new hosted checks remain pending.
-- Tiled runtime navigation now bakes selected static colliders and cooked model
-  meshes, reuses unchanged tiles, and provides bounded A*/funnel queries with
-  terrain height detail to TypeScript. Engine updates stage atomically. The real
-  public character chase, runtime room edit, durable authoring Undo/Redo and
-  save/resume pass without model source files. Local Rust/UI/GPU checks pass;
-  exact counts, binary hashes and workload timings are in the
-  [navigation evidence](docs/spikes/navigation-runtime.md). Hosted CI and Claude's
-  rendered motion review are pending. Local avoidance, off-mesh links, 2D grids,
-  navigation Inspector/debug draw and Core Sample/device gates remain open.
+- Authored off-mesh links support directed/bidirectional gaps, enable toggles,
+  costs, endpoint validation and per-leg route metadata through shared commands.
+  Invalid runtime landings cannot publish partial script/document state. At
+  `ccd6d33`, 289 Rust, 40 GPU, 315 UI and five tool tests pass, alongside Clippy,
+  contracts, native packaging and target compilation. Claude's two rendered runs
+  match 593 frames and 26 logs; mid-drop reopen matches all 49 window frames.
+  Session-local generations differ on reopen. Quantized heights visibly leave
+  an ungrounded logical walker 5 cm above a flat platform; exact source heights
+  remain open. Final integration must include the steering Linux convergence
+  correction and updated checks. See [off-mesh links](docs/spikes/navigation-links.md).
+
+- Bounded local avoidance exposes read-only `api.steerAgents` proposals for up
+  to 128 agents. Library and public 100-agent save/reopen workflows pass.
+  Claude's four-way plaza review completed twice with 803 identical frames and
+  13 identical logs, no body overlaps and eventual arrival for all walkers.
+  Goal-block standoffs and large lateral detours remain behavior-level limits;
+  host sleep/load can trigger the existing script wall-clock deadline. The
+  integrated branch passes 284 Rust, 40 GPU, 315 UI and five tool tests, Clippy,
+  SDK checks, native packaging and WASM/iOS compilation. PR #36 Linux CI exposed
+  a symmetric-crowd arrival failure while eleven other checks passed. A consistent
+  passing preference now passes twelve rotated/staggered cases locally; full
+  revalidation and updated rendered review are in progress. See [steering evidence](docs/spikes/navigation-steering.md).
+- Tiled runtime navigation bakes selected static colliders and cooked model
+  geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
+  with funnel smoothing and connected visibility repair. Claude's rendered
+  reviews exposed clearance, detour, phantom raster spans and short-query
+  precision bugs; all have regression fixes. Current source passes 276 Rust,
+  40 GPU, 315 UI and five tool tests, plus public saved-character gameplay,
+  Clippy, SDK/generation checks, native packaging and WASM/iOS compilation.
+  There are 7,056 local and 34,932 room-wide short-query regressions. See the
+  [navigation evidence](docs/spikes/navigation-runtime.md). PR #35's scoped implementation
+  and v9 rendered review are complete: both 600-tick runs match 726 frames/logs,
+  with no query exceptions and grounding on every tick. All twelve CI checks
+  passed at `1928138`; PR #35 merged as `302613c` with its tested tree unchanged. Quantized height
+  detail can undershoot true step discontinuities; physics owns grounding.
+  Steering is implemented and reviewed on its separate integration branch;
+  off-mesh links are in integration checks. Grid navigation, native Inspector/
+  debug draw and Core Sample/device gates remain open.
+
 
 - XLIFF translator exchange exports typed tables and imports matching targets
   through one reversible shared-command transaction. Unknown/stale sources,
@@ -76,8 +100,9 @@ within its documented workload.
   The public two-table/strict-TypeScript workflow, exact durable Undo/Redo and
   rollback checks pass. Local verification passes 254 Rust tests, 40 GPU checks,
   315 UI tests/build, five tool tests, Clippy, contracts and native packaging;
-  macOS executes the XLIFF smoke check, while WASM/iOS compile. Hosted CI and the
-  graphical localization panel remain open. See
+  macOS executes the XLIFF smoke check, while WASM/iOS compile. All twelve hosted
+  checks passed at `3724633`; PR #34 merged as `106a4cc` with its tested tree
+  unchanged. The graphical localization panel remains open. See
   [translator exchange](docs/spikes/localization-exchange.md).
 
 - Typed string tables, a bounded ICU MessageFormat subset, ICU4X plural/number/date
@@ -88,10 +113,9 @@ within its documented workload.
   Six public gameplay probes pass; the macOS platform probe executes locale data,
   while WASM/iOS target checks compile. A live saved-account Astra run authors and
   verifies a Japanese table that produces the expected gameplay text, without
-  another login or Keychain prompt. Windows CI passed Rust/GPU/native checks but
-  exposed a Python cp1252 decoding error in the public locale probe. Explicit
-  UTF-8 fixes it locally, including a simulated cp1252 subprocess default; updated
-  hosted checks are pending. Shaping/bidi/IME,
+  another login or Keychain prompt. An explicit UTF-8 subprocess fix resolves the Windows cp1252 probe failure.
+  All twelve hosted checks passed at `184a0fe`; PR #33 merged as `7052e01` with
+  its tested tree unchanged. Shaping/bidi/IME,
   localization UI and Core Sample visual/device gates remain open.
   See [localization runtime](docs/spikes/localization-runtime.md).
 

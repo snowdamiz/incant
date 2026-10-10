@@ -35,7 +35,12 @@ teleport, solve a trajectory, reserve capacity, check traversal collisions or
 promise that a proposed movement is safe. Scripts must not feed a link segment
 straight to ground steering. Link endpoints and returned routes are snapshots;
 replan after edits. Save behavior-owned progress and rebuild derived navigation
-when reopening a saved game.
+when reopening a saved game. `generation` is a session-local rebuild counter,
+not a persistent content identity. Reopening starts its counter again. Runtime
+rebuild reports describe the current synchronization: an unchanged tick moves
+previously rebuilt tiles into reused and clears removed tiles. Compare generations
+at the edit tick when measuring link-only reuse; later reused counts alone do not
+prove that a rebuild happened.
 
 ## Atomic runtime publication
 
@@ -63,7 +68,29 @@ runs exactly; authoring files remain unchanged. It makes no physics or rendered
 quality claim. The common platform smoke also checks a directed connection,
 reverse rejection, tile reuse and failed endpoint rollback.
 
-Full integrated checks, current-source platform execution and Claude's real
-rendered-motion review are pending. Native link editing/debug visualization and
+At source `ccd6d33`, full local verification passes 289 Rust tests, 40 GPU
+checks, Clippy, 315 UI tests/build, five tool tests, generated contracts and strict
+TypeScript. macOS executes the common platform smoke; WASM/iOS targets compile.
+The native unsigned package builds at integrated source `8d92904`. The public
+link, navigation and 100-agent steering probes pass. Exact evidence is in
+[evidence/navigation-links-2026-10-10.json](evidence/navigation-links-2026-10-10.json).
+
+Claude Opus 5.5's [rendered review](../../handoffs/0028-off-mesh-lookdev/result.md)
+uses the same immutable link binary: two independent projects/runs match all 593
+frames and all 26 log files. A save at tick 801, 49.30% through a return drop,
+reopens with all 49 mid-drop frames identical and identical final entities.
+Script state and one later log differ only in the session-local generation
+counter, as expected after a rebuild. Link toggles reuse all ten geometry tiles.
+Temporary sleep prevention was active; no script deadline failure occurred.
+
+The review exposes a visible 5 cm hover when gameplay places feet directly on
+quantized navigation heights. Source-conforming navigation heights remain open;
+current gameplay must use physics or raycast grounding. This scene intentionally
+has no physics bodies and validates explicit logical traversal only. Centre
+endpoints also snap about 5 cm inward; movement uses the returned positions.
+
+The dependency steering PR subsequently exposed a Linux symmetric-crowd stall.
+Its correction, updated rendered review and final integrated/hosted checks are
+required before merging this increment. Native link editing/debug visualization and
 grid navigation remain separate outstanding Phase 1 work; this increment does
 not approve a phase gate.

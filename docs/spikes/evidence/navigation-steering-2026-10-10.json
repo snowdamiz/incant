@@ -3,7 +3,7 @@
   "base_commit": "0ab4372",
   "scope": "Bounded reciprocal local avoidance and shared scripted velocity commands",
   "local": {
-    "rust_tests": 279,
+    "rust_tests": 284,
     "gpu_tests": 40,
     "ui_tests": 315,
     "python_tools": 5,
@@ -12,7 +12,11 @@
     "strict_typescript_generated_contracts": true,
     "native_package": true,
     "wasm_compiled": true,
-    "ios_simulator_compiled": true
+    "ios_simulator_compiled": true,
+    "gpu_native_platform_source": "9c430d5d267769ea4572e115acd2fa7946ac97ef",
+    "rust_clippy_public_probe_source": "6d96e76f4b2aa36155185a1e0249d7d7246284a6",
+    "native_pixels_reviewed": false,
+    "wasm_ios_execution_claimed": false
   },
   "public_probe": {
     "passed": true,
@@ -27,10 +31,10 @@
       "tick": 600
     },
     "author_files_unchanged": {
-      "game.incant.json": "e113eb88ba72b966ee5d45eaad99797c642b65a96b4531ee14c1eaa0904bbe3a",
-      "game.incant.journal.jsonl": "f2adf4c384cfab7213ca0a56e301a213dd95c24ed2d007b1ac08a175f02ff562"
+      "game.incant.json": "9187bdaffe1c5e2462a76d8c0446bf622eca65fd5f048c11ecd521e6bf361392",
+      "game.incant.journal.jsonl": "3137a7924de4747e7a2b925d6b0978d115ad4ed4d138cdf8461ed6b1d093fe01"
     },
-    "binary_sha256": "fe03655bfdb8e574111107e68f2ced67d4b229150a4bc76da4e557e46f1eaa09",
+    "binary_sha256": "a6beb3e4dbbf42078c69865420d107f820c4426546386d5e1952ef32b48f1bd0",
     "rendering_or_physics_collision_gate": false
   },
   "benchmark": {
@@ -73,20 +77,129 @@
     "stable_id_order": true,
     "visual_gate": false
   },
-  "native_binary_sha256": "4f28b27e6cbbdccaabab6b1d4330caf44e3049d92533757cbe0c8e472dcaf4c0",
+  "native_binary_sha256": "0ed1a6058ac6a12e7d5905718024ffa2b7e81c5edda5fb16c7577f148ad629ec",
   "visual": {
-    "status": "Claude ACP packet prepared",
-    "packet": "handoffs/0027-steering-lookdev/brief.md"
+    "status": "complete for 100-agent rendered local-avoidance packet",
+    "model": "claude-opus-5-5",
+    "transport": "ACP",
+    "source_commit": "20ca453e59d9a29d57ef2129bb2bb46a93a5c3dd",
+    "binary_sha256": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+    "result": "handoffs/0027-steering-lookdev/result.md",
+    "frames_identical": 803,
+    "logs_identical": 13,
+    "ticks": 2700,
+    "all_arrived_since_tick": 2580,
+    "body_overlaps": 0,
+    "minimum_separation_m": 0.5953,
+    "maximum_goal_standoff_ticks": 1002,
+    "maximum_lateral_sweep_m": 13.3,
+    "physics_collision_claimed": false,
+    "host_deadline_failures": "recorded; final two repetitions passed under temporary sleep assertion; CPU/sleep sensitivity remains open"
   },
   "ci": {
     "status": "not yet published"
   },
   "open": [
-    "Rendered steering review",
-    "Hosted checks",
+    "Hosted checks before merge",
     "Navmesh boundary extraction and moving obstacle prediction",
-    "Off-mesh links and grid navigation",
+    "Off-mesh links and grid navigation (separate increments)",
     "Navigation Inspector and native debug draw",
+    "Host wall-clock deadline robustness and specific script failure diagnostics",
     "Core Sample and device performance gates"
-  ]
+  ],
+  "initial_verification": {
+    "date": "2026-10-10",
+    "base_commit": "0ab4372",
+    "scope": "Bounded reciprocal local avoidance and shared scripted velocity commands",
+    "local": {
+      "rust_tests": 279,
+      "gpu_tests": 40,
+      "ui_tests": 315,
+      "python_tools": 5,
+      "clippy_all_targets": true,
+      "fmt": true,
+      "strict_typescript_generated_contracts": true,
+      "native_package": true,
+      "wasm_compiled": true,
+      "ios_simulator_compiled": true
+    },
+    "public_probe": {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6001229564692269,
+        "neighbors": 17,
+        "remaining": 1.7795514091813223e-13,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "e113eb88ba72b966ee5d45eaad99797c642b65a96b4531ee14c1eaa0904bbe3a",
+        "game.incant.journal.jsonl": "f2adf4c384cfab7213ca0a56e301a213dd95c24ed2d007b1ac08a175f02ff562"
+      },
+      "binary_sha256": "fe03655bfdb8e574111107e68f2ced67d4b229150a4bc76da4e557e46f1eaa09",
+      "rendering_or_physics_collision_gate": false
+    },
+    "benchmark": {
+      "arch": "aarch64",
+      "cases": [
+        {
+          "agents": 100,
+          "max_ms": 0.298375,
+          "name": "crossing_100",
+          "obstacle_edges": 0,
+          "p50_ms": 0.24558300000000002,
+          "p95_ms": 0.29529099999999997,
+          "samples": 100
+        },
+        {
+          "agents": 100,
+          "max_ms": 0.592416,
+          "name": "overlap_100",
+          "obstacle_edges": 0,
+          "p50_ms": 0.522042,
+          "p95_ms": 0.5902080000000001,
+          "samples": 100
+        },
+        {
+          "agents": 128,
+          "max_ms": 1.220667,
+          "name": "limit_128_agents_128_edges",
+          "obstacle_edges": 128,
+          "p50_ms": 1.171916,
+          "p95_ms": 1.197792,
+          "samples": 100
+        }
+      ],
+      "device_gate": false,
+      "os": "macos"
+    },
+    "platform_macos": {
+      "agents": 100,
+      "overlap_recovery_finite": true,
+      "stable_id_order": true,
+      "visual_gate": false
+    },
+    "native_binary_sha256": "4f28b27e6cbbdccaabab6b1d4330caf44e3049d92533757cbe0c8e472dcaf4c0",
+    "visual": {
+      "status": "Claude ACP packet prepared",
+      "packet": "handoffs/0027-steering-lookdev/brief.md"
+    },
+    "ci": {
+      "status": "not yet published"
+    },
+    "open": [
+      "Rendered steering review",
+      "Hosted checks",
+      "Navmesh boundary extraction and moving obstacle prediction",
+      "Off-mesh links and grid navigation",
+      "Navigation Inspector and native debug draw",
+      "Core Sample and device performance gates"
+    ]
+  },
+  "source_commit": "6d96e76f4b2aa36155185a1e0249d7d7246284a6",
+  "integrated_review_source": "9c430d5d267769ea4572e115acd2fa7946ac97ef",
+  "benchmark_source": "original verification retained below; steering solver code unchanged by later navigation integration"
 }

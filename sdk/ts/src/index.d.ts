@@ -47,7 +47,9 @@ export interface ScriptApi {
    * Use physics for grounding/placement. The chosen corridor can include tile bends.
    * `traversals` identifies explicit off-mesh edges between consecutive point indices.
    * Behavior must execute jumps, ladders or teleports itself; those edges are never
-   * smoothed into walking segments or treated as collision-safe movement. */
+   * smoothed into walking segments or treated as collision-safe movement.
+   * `generation` is a session-local rebuild counter, not a durable content ID:
+   * reopening a save rebuilds navigation and restarts this counter. */
   findPath(query: NavigationQuery): NavigationPath | null;
   /** Read-only localization snapshot at the start of this tick. Each localization
    * query costs 4 of the shared 256 native-query units. Change locale with the
