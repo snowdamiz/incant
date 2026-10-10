@@ -56,6 +56,34 @@ Two 360-tick runs produce exact final simulation/script states, and project/jour
 hashes remain unchanged. Source and desktop CI now run this probe; all six platform
 probes exercise an actual grounded character query.
 
-Final corrected-engine visual review and hosted checks remain open. Moving
-platforms, large-world precision, game-specific step feel and physical-device
-performance are not established by this increment.
+## Integrated verification
+
+The corrected tree passes 163 ordinary Rust tests, 40 real GPU checks, full
+workspace Clippy with warnings denied, 315 UI tests/build, five Python tests and
+generated schema/SDK/bridge/convention checks. Strict TypeScript checks include
+both the public CLI example and the rendered course. The native editor release
+build with embedded UI was packaged after the GPU suite.
+
+Actual macOS, browser/WASM and iOS simulator execution passes the character query.
+The browser and native reports both resolve a 0.1 m desired horizontal step while
+grounded and correctly report no downhill sliding. The iOS probe invokes the same
+runtime assertion and returns success. These are execution checks, not physical
+device performance gates.
+
+Claude Opus 5.5 over ACP accepted the corrected course in handoff 0023, after
+fresh 300-tick runs from three cameras. All 303 frames and logs match an independent
+repeat; all ten retained screenshots match the real engine originals. Per-tick
+logs have no unexpected walking stalls with autostep enabled or disabled. The
+five-character script/physics p95 is 0.54–0.56 ms on this M5 Pro in three runs;
+the measurement is neither a cross-host comparison nor a game/device budget.
+
+The 0.20 m step still follows the rounded capsule's edge trajectory: 18 ticks to
+climb, roughly 0.13 s slower than covering that distance on flat ground. One tick
+rises 2.7 cm. A two-tick downhill flag occurs while rolling down the sharp edge,
+consistent with the support-normal definition. Constant-speed stairs, smoothing
+and debounced animation transitions belong to later character/game-feel tuning;
+the current API does not promise them. Moving platforms, mesh terrain, large-world
+precision and representative physical-device performance remain unverified.
+
+Hosted checks and merge are pending. See the [machine-readable evidence](evidence/character-movement-2026-10-09.json)
+and [Claude's motion review](../../handoffs/0023-character-lookdev/result.md).

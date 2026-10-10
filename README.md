@@ -132,8 +132,8 @@ During isolated play, scripts can call `api.raycast` and `api.triggerEvents()`.
 Raycasts return stable entity IDs, support masks and exclusion, and are limited
 to 256 per tick. Trigger events describe the just-completed simulation tick.
 Script commands affect the next physics step; stopping play preserves authored
-data. The Inspector displays these components read-only. Character controllers,
-mesh/compound colliders and rollback remain open.
+data. The Inspector displays these components read-only. Mesh/compound colliders
+and rollback remain open.
 
 Run the reproducible public-CLI example into a new directory:
 
@@ -146,6 +146,22 @@ It creates a falling body and floor, verifies Undo/Redo and persistent reopening
 then compiles a TypeScript behavior that raycasts the floor and makes the body
 jump. Its project, script and results remain in that directory. See
 [physics evidence and limits](docs/spikes/physics-runtime.md).
+
+Kinematic characters use `api.computeCharacterMotion` to resolve a desired
+displacement against primitive colliders, with wall sliding, slope limits,
+optional steps and ground snapping. The behavior owns gravity and jumping, then
+applies `movement.translation / dt` through an ordinary Velocity command. The
+query requires a nonsensor kinematic body with zero angular velocity and does not
+edit the authoring project. It costs 16 of the shared 256 physics-query units per
+tick. Run the strict TypeScript example with:
+
+```sh
+python3 tools/probes/character-movement.py artifacts/character-example
+```
+
+The probe creates and saves a scene through RPC, walks into a wall, jumps and
+lands, and verifies repeatable final state with unchanged authored files. See
+[character movement and current limits](docs/spikes/character-movement.md).
 
 ## OpenAI connection and live evaluation
 
