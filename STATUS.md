@@ -5,7 +5,9 @@
   release Clippy, 420 UI tests, 38 tool tests, generated schemas/SDK, and the four
   public atlas/sprite/camera probes. Those saved workflows are still legacy Play;
   native 2D migration, known sampling/placement limits, native editor acceptance
-  and device/performance gates remain open. Hosted checks are next.
+  and device/performance gates remain open. Hosted Linux/Windows check defects
+  now have scoped probe/test corrections; the replacement matrix is pending.
+  [Portability evidence](docs/spikes/sprite-atlases.md#hosted-probe-portability-corrections-2026-10-10).
   [Exact union evidence](docs/spikes/evidence/sprite-atlas-publication-union-2026-10-10.json).
 
 Source: [PLAN.md](PLAN.md), revision 6 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
