@@ -63,7 +63,9 @@ within its documented workload.
   SDK checks, native packaging and WASM/iOS compilation. PR #36 Linux CI exposed
   a symmetric-crowd arrival failure while eleven other checks passed. A consistent
   passing preference now passes twelve rotated/staggered cases locally; full
-  revalidation and updated rendered review are in progress. See [steering evidence](docs/spikes/navigation-steering.md).
+  revalidation found a rendered regression: only 26/100 at goal after 2700 ticks.
+  The refined candidate applies the preference only to opposing traffic; the
+  original plaza must pass again before merge despite green hosted checks. See [steering evidence](docs/spikes/navigation-steering.md).
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
   with funnel smoothing and connected visibility repair. Claude's rendered

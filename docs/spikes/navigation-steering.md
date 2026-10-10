@@ -135,3 +135,18 @@ locally. The smallest observed separation is 0.5568335 m; every final goal dista
 is below 0.00001 m. The earlier rendered results above describe the prior binary.
 Full checks, the updated public workflow and a new rendered review are required
 for this correction before merging.
+
+
+The first passing preference failed the unchanged rendered plaza course:
+only 26/100 were at their goals after 2700 ticks, compared with all 100 from
+tick 2580 before this correction. Even the 4990-tick diagnostic extension left
+11 walkers that had never arrived. Repeat frames/logs were identical and there
+were no overlaps. PR #36 is held despite all twelve checks passing at `6df4ef9`.
+See the current 0027 report and its retained prior-binary history.
+
+The next candidate limits the preference to opposing requested velocities, so
+parked and co-directed neighbors do not trigger it. All twelve radial/staggered
+library cases and a simple approach beside a parked agent pass locally; the
+simple case also passes the prior rule and is not a reproduction of the plaza
+regression. The unchanged full plaza course remains the acceptance test, with
+updated rendering and integration checks required before merge.

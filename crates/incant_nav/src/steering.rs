@@ -214,10 +214,13 @@ pub fn steer(
             // for every moving agent. This is an objective
             // preference only: obstacle/agent constraints still project it into
             // the feasible velocity region below.
-            let relative_preferred =
-                preferred - vector(other.preferred_velocity).clamp_length_max(other.max_speed);
+            let other_preferred =
+                vector(other.preferred_velocity).clamp_length_max(other.max_speed);
+            let relative_preferred = preferred - other_preferred;
             let closing = position.dot(relative_preferred);
-            if closing > 0. {
+            // This tie-break is for reciprocal opposing traffic. Applying it
+            // around parked or co-directed neighbors can orbit a nearby goal.
+            if preferred.dot(other_preferred) < 0. && closing > 0. {
                 let encounter = closing / relative_preferred.length_squared();
                 let separation = position - relative_preferred * encounter;
                 let clearance = input.radius + other.radius + 2. * query.margin;
