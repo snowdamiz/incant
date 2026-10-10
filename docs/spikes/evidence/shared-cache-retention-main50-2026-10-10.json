@@ -1,0 +1,154 @@
+{
+  "scope": "Verified current producer-family retention after main50 replacements. Six platform families still use the main49 generation and remain usable prefix restores. No duplicate platform dispatch.",
+  "retained_bytes": 9807465275,
+  "retained_entries": 28,
+  "current_rust_families": [
+    {
+      "id": 8780081821,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-9c29ba6f",
+      "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+      "last_accessed_at": "2026-10-10T21:47:19.833141Z",
+      "created_at": "2026-10-10T21:47:19.833141Z",
+      "size_in_bytes": 1157261404
+    },
+    {
+      "id": 8779960199,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-9c29ba6f",
+      "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+      "last_accessed_at": "2026-10-10T21:41:15.358044Z",
+      "created_at": "2026-10-10T21:41:15.358044Z",
+      "size_in_bytes": 1622226417
+    },
+    {
+      "id": 8779055707,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Six platform probes-macOS-ARM64-ios-Darwin-arm64-791fe27b-8a00bfbb",
+      "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+      "last_accessed_at": "2026-10-10T21:40:24.438087Z",
+      "created_at": "2026-10-10T20:54:07.211363Z",
+      "size_in_bytes": 517286617
+    },
+    {
+      "id": 8779693892,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-9c29ba6f",
+      "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+      "last_accessed_at": "2026-10-10T21:39:51.481886Z",
+      "created_at": "2026-10-10T21:27:14.466456Z",
+      "size_in_bytes": 417580331
+    },
+    {
+      "id": 8779922801,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-9c29ba6f",
+      "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+      "last_accessed_at": "2026-10-10T21:39:07.856572Z",
+      "created_at": "2026-10-10T21:39:07.856572Z",
+      "size_in_bytes": 1297863854
+    },
+    {
+      "id": 8779720878,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-9c29ba6f",
+      "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+      "last_accessed_at": "2026-10-10T21:34:15.255963Z",
+      "created_at": "2026-10-10T21:28:35.695707Z",
+      "size_in_bytes": 475325019
+    },
+    {
+      "id": 8779030480,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-8a00bfbb",
+      "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+      "last_accessed_at": "2026-10-10T21:34:05.757063Z",
+      "created_at": "2026-10-10T20:52:49.611847Z",
+      "size_in_bytes": 597527973
+    },
+    {
+      "id": 8779057553,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Six platform probes-Linux-X64-android-Linux-x64-b9e20461-8a00bfbb",
+      "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+      "last_accessed_at": "2026-10-10T21:34:01.634232Z",
+      "created_at": "2026-10-10T20:54:13.250631Z",
+      "size_in_bytes": 809725962
+    },
+    {
+      "id": 8779044221,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Six platform probes-Windows-X64-desktop-Windows_NT-x64-773408be-8a00bfbb",
+      "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+      "last_accessed_at": "2026-10-10T21:34:01.307612Z",
+      "created_at": "2026-10-10T20:53:30.318438Z",
+      "size_in_bytes": 378031891
+    },
+    {
+      "id": 8779003156,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Six platform probes-macOS-ARM64-desktop-Darwin-arm64-791fe27b-8a00bfbb",
+      "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+      "last_accessed_at": "2026-10-10T21:33:57.811109Z",
+      "created_at": "2026-10-10T20:51:22.986480Z",
+      "size_in_bytes": 358883125
+    },
+    {
+      "id": 8779689252,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-9c29ba6f",
+      "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+      "last_accessed_at": "2026-10-10T21:33:55.919162Z",
+      "created_at": "2026-10-10T21:26:59.351467Z",
+      "size_in_bytes": 566349820
+    },
+    {
+      "id": 8778964795,
+      "ref": "refs/heads/main",
+      "key": "v0-rust-Six platform probes-Linux-X64-desktop-Linux-x64-b9e20461-8a00bfbb",
+      "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+      "last_accessed_at": "2026-10-10T21:33:48.673326Z",
+      "created_at": "2026-10-10T20:49:26.630584Z",
+      "size_in_bytes": 404796987
+    }
+  ],
+  "deleted_bytes": 5316930141,
+  "deletions": [
+    {
+      "old_id": 8779013239,
+      "old_bytes": 476675632,
+      "replacement_id": 8779720878,
+      "replacement_key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-9c29ba6f"
+    },
+    {
+      "old_id": 8778991354,
+      "old_bytes": 417358635,
+      "replacement_id": 8779693892,
+      "replacement_key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-9c29ba6f"
+    },
+    {
+      "old_id": 8778967940,
+      "old_bytes": 566027251,
+      "replacement_id": 8779689252,
+      "replacement_key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-9c29ba6f"
+    },
+    {
+      "old_id": 8779220747,
+      "old_bytes": 1219688948,
+      "replacement_id": 8779922801,
+      "replacement_key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-9c29ba6f"
+    },
+    {
+      "old_id": 8779181342,
+      "old_bytes": 1548624881,
+      "replacement_id": 8779960199,
+      "replacement_key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-9c29ba6f"
+    },
+    {
+      "old_id": 8779575313,
+      "old_bytes": 1088554794,
+      "replacement_id": 8780081821,
+      "replacement_key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-9c29ba6f"
+    }
+  ]
+}
