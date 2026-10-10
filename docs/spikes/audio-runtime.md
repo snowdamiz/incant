@@ -110,7 +110,15 @@ macOS CPAL, iOS simulator device-backend and WASM library compilation pass. No
 device was opened, no iOS app launched and no local pixels captured. Hosted source
 and Windows/Linux jobs run the public probe and device-backend compilation;
 platform CI checks Android/iOS device and WASM compilation. Hosted results for
-this increment are pending. Compilation is not playback evidence.
+`246a380` passed all twelve checks, including Windows retained-reader repair.
+The integration with merged timers passes 224 Rust tests, workspace Clippy,
+315 UI tests/build, five tool tests, generated contracts, strict TypeScript and
+the native release package. The public audio probe also drives pause/resume/gain
+from timer callbacks: PCM matches update-driven control exactly. A save at tick
+25 retains the paused source and restores callbacks at ticks 31 and 41; the
+resumed source stays silent until its deadline and the final logical state
+matches uninterrupted play. Public timer/save/input probes pass. Updated hosted
+checks and merge remain pending. Compilation is not playback evidence.
 
 Open: native editor controls/playback wiring, browser resources/streaming and
 autoplay, physical device output/latency, interruptions/device switches, mobile
@@ -131,5 +139,6 @@ The temporary-file guard still cleans up failed publication; no unlink or
 in-place rewrite is used. The regression also imports identical PCM under a
 different source fingerprint while both readers remain alive. Repaired readers
 stay valid, and the retained corrupt reader continues rejecting its old bytes.
-The three local asset-audio tests and asset Clippy pass; hosted Windows
-verification of the correction is pending.
+The three local asset-audio tests and asset Clippy pass. Hosted Windows run
+38021329759 (job 114122758280) passed the corrected asset tests, public audio
+probe, native build and GPU checks at `246a380`.

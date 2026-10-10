@@ -1,6 +1,6 @@
 # Implementation status
 
-Source: [PLAN.md](PLAN.md), revision 2 with director decisions. Current phase:
+Source: [PLAN.md](PLAN.md), revision 3 (2026-10-09) with director decisions. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without
@@ -59,10 +59,24 @@ within its documented workload.
   repeated PCM is exact, pause is silent and bus attenuation matches expected
   levels. Twenty new tests bring the distinct passing Rust total to 215; Clippy,
   315 UI tests/build, five tool tests, generated contracts and native packaging
-  pass. macOS/iOS device-backend and WASM compilation pass. Hosted audio checks
-  and merge remain pending. Native controls/playback, browser resources, hardware,
+  pass. macOS/iOS device-backend and WASM compilation pass. All twelve hosted
+  checks passed at `246a380`, including the Windows retained-reader repair test.
+  Integration with merged timers passes 224 Rust tests, the combined public audio
+  and saved-timer probe, contracts, Clippy, UI checks and native packaging. Updated
+  hosted checks and merge remain pending. Native controls/playback, browser resources, hardware,
   lifecycle/latency and mixer save cursors remain open. No device playback or local
   capture occurred. See [audio runtime](docs/spikes/audio-runtime.md).
+
+- Fixed-tick script timers, repeat/cancel/replace, copied payloads and a saved
+  game clock are implemented. Version 2 game saves preserve pending deadlines
+  and read version 1 with an empty schedule. Seven script tests and a CLI failure
+  test pass; a strict TypeScript public-CLI probe preserves callbacks, command
+  effects and log continuity across process restarts. All 204 distinct Rust tests,
+  315 UI tests/build, five tool tests, Clippy, generated contracts and the native
+  build/package pass locally. All three hosted checks passed at `54f85a1`;
+  PR #31 merged as `93bc5ed` with the reviewed tree unchanged. Coroutines remain
+  open; Promise/generator behavior
+  callbacks now fail explicitly before commit. See [timers](docs/spikes/script-timers.md).
 
 - Headless `play --assertions FILE` evaluates bounded data-only checks over
   runtime, behavior and input state at absolute ticks. Failed checks return
@@ -376,6 +390,17 @@ within its documented workload.
   six platform probes. The evidence files retain the exact revision and run links.
 
 ## Current screen-work constraint
+
+Revision 3 is the current implementation baseline. Its additional Phase 1 work
+remains open: tiled navmesh generation/pathfinding/steering and 2D grid navigation;
+sprites/atlases/tilemaps and Rapier 2D; shaped text, font fallback and IME; typed
+localized string tables, formatting, locale switching and pseudo-localization;
+and gamepad/mobile haptics. The expanded Core Sample gate includes navigation,
+RTL/CJK/localization coverage and a 2D sample on all four reference devices.
+This does not replace the remaining original renderer, animation, audio/device,
+input-adapter, SDK/coroutine and complete-game performance requirements. Later
+networking and service scope follows Revision 3 Sections 6.8/6.10; their open
+director decisions and human-owned production prerequisites remain explicit.
 
 The director paused computer use and screen capture again on 2026-10-09. No new
 native/browser operations or captures are authorized while that pause remains.

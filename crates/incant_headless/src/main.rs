@@ -375,6 +375,18 @@ fn main() -> Result<()> {
                 json!(schemars::schema_for!(incant_script::GameSave)),
             );
             registry.insert(
+                "ScriptClock".into(),
+                json!(schemars::schema_for!(incant_script::ScriptClock)),
+            );
+            registry.insert(
+                "TimerRequest".into(),
+                json!(schemars::schema_for!(incant_script::TimerRequest)),
+            );
+            registry.insert(
+                "TimerEvent".into(),
+                json!(schemars::schema_for!(incant_script::TimerEvent)),
+            );
+            registry.insert(
                 "InputEvent".into(),
                 json!(schemars::schema_for!(incant_input::InputEvent)),
             );

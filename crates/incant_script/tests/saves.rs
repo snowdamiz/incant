@@ -135,7 +135,7 @@ fn invalid_or_incompatible_saves_fail_without_mutating_a_running_session() {
     let before = running.save_text().unwrap();
     let base: Value = serde_json::from_str(&before).unwrap();
     for (pointer, value) in [
-        ("/version".into(), json!(2)),
+        ("/version".into(), json!(3)),
         ("/format".into(), json!("project")),
         ("/authored_sha256".into(), json!("bad")),
         ("/script_sha256".into(), json!("bad")),

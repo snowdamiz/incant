@@ -63,9 +63,12 @@ export namespace GameSaveSchema {
   export type ProjectSettings = { "tick_rate": number };
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
+  export type Schedule = { "clock": ScriptClock; "timers": { [key: string]: Timer } };
+  export type ScriptClock = { "elapsed_seconds": number; "tick": number };
   export type ScriptSource = { "id": string; "name": string; "path": string };
   export type TextureUsage = "color" | "linear" | "normal";
-  export type Root = { "authored_sha256": string; "elapsed_seconds": number; "format": string; "project": Project; "script_sha256": string; "script_state": unknown; "tick": number; "version": number };
+  export type Timer = { "due_tick": number; "interval_ticks"?: number | null; "payload": unknown };
+  export type Root = { "authored_sha256": string; "elapsed_seconds": number; "format": string; "project": Project; "schedule"?: (Schedule) | (null); "script_sha256": string; "script_state": unknown; "tick": number; "version": number };
 }
 export type GameSave = GameSaveSchema.Root;
 
@@ -179,10 +182,25 @@ export namespace ScriptSchema {
 }
 export type Script = ScriptSchema.Root;
 
+export namespace ScriptClockSchema {
+  export type Root = { "elapsed_seconds": number; "tick": number };
+}
+export type ScriptClock = ScriptClockSchema.Root;
+
 export namespace SpotLightSchema {
   export type Root = { "color": [number, number, number]; "inner_degrees": number; "intensity": number; "outer_degrees": number; "range": number };
 }
 export type SpotLight = SpotLightSchema.Root;
+
+export namespace TimerEventSchema {
+  export type Root = { "id": string; "payload": unknown; "scheduled_tick": number };
+}
+export type TimerEvent = TimerEventSchema.Root;
+
+export namespace TimerRequestSchema {
+  export type Root = { "delay_ticks": number; "id": string; "interval_ticks"?: number | null; "payload"?: unknown };
+}
+export type TimerRequest = TimerRequestSchema.Root;
 
 export namespace TransformSchema {
   export type Root = { "rotation": [number, number, number, number]; "scale": [number, number, number]; "translation": [number, number, number] };

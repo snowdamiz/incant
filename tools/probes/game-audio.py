@@ -94,6 +94,48 @@ def main():
     quiet_right = rms(34000, 46000, 1)
     assert abs(left - 8000 / 32768) < .002 and silent == 0 and abs(resumed - left) < .002
     assert .35 < right < .38 and abs(quiet_right / right - 10 ** (-6/20)) < .005
+    # Timers use the same committed audio path. Save while paused, then verify
+    # restored deadlines resume the source and attenuate the bus at exact ticks.
+    # Mixer cursors are deliberately not saved, so resumed PCM need not match.
+    timer_source = out / "timed.ts"
+    timer_source.write_text("import type { ScriptApi, AudioSource, AudioBus } from " +
+        json.dumps((ROOT / "sdk/ts/src/index").as_posix()) + ";\n" + """
+    export default defineBehavior<{ticks:number,events:string[]}>({initialState:{ticks:0,events:[]},
+      update(api:ScriptApi,dt,s){
+        s.ticks++;
+        if(api.clock().tick===1)for(const [id,delay_ticks] of [['pause',20],['resume',30],['quiet',40]] as const)
+          api.setTimer({id,delay_ticks});
+      },
+      onTimer(api,event,s){
+        s.events.push(event.id+':'+api.clock().tick);
+        if(event.id==='quiet')for(const e of api.query('AudioBus'))if(e.name==='Music'){
+          const bus=e.components.AudioBus as AudioBus;
+          api.command({op:'set_component',scene_id:e.scene_id,entity_id:e.id,component:'AudioBus',value:{...bus,gain_db:-6}});
+        }
+        if(event.id==='pause'||event.id==='resume')for(const e of api.query('AudioSource'))if(e.name==='Tone'){
+          const audio=e.components.AudioSource as AudioSource;
+          api.command({op:'set_component',scene_id:e.scene_id,entity_id:e.id,component:'AudioSource',value:{...audio,playing:event.id==='resume'}});
+        }
+      }
+    });
+    """)
+    subprocess.run(["node", str(ROOT / "node_modules/typescript/bin/tsc"), "--strict", "--noEmit", "--target", "ES2022",
+                    "--moduleResolution", "bundler", "--module", "ESNext", str(timer_source)], check=True, cwd=ROOT)
+    timed_script = out / "timed.js"
+    subprocess.run(["node", str(ROOT / "tools/build_script.mjs"), str(timer_source), str(timed_script)], check=True, cwd=ROOT)
+    timed = run("play", project, "--ticks", 60, "--compiled-script", timed_script, "--audio-output", out / "timed.wav")
+    assert timed["audio"]["pcm_sha256"] == full["audio"]["pcm_sha256"]
+    first = run("play", project, "--ticks", 25, "--compiled-script", timed_script, "--save-output", out / "paused.save.json")
+    assert first["script_state"]["events"] == ["pause:21"]
+    resumed_run = run("play", project, "--ticks", 35, "--compiled-script", timed_script,
+                      "--load-save", out / "paused.save.json", "--audio-output", out / "resumed.wav")
+    assert resumed_run["state"] == timed["state"]
+    assert resumed_run["script_state"] == timed["script_state"] == {"ticks":60,"events":["pause:21","resume:31","quiet:41"]}
+    resumed_pcm = list(struct.iter_unpack("<ff", (out / "resumed.wav").read_bytes()[56:]))
+    assert len(resumed_pcm) == 28000 and all(frame[0] == 0 for frame in resumed_pcm[:4000])
+    resumed_rms = math.sqrt(sum(frame[0] ** 2 for frame in resumed_pcm[5000:9000]) / 4000)
+    assert abs(resumed_rms - left) < .002
+    assert all(r["adapter"] is None and not r["frames"] for r in [timed, first, resumed_run])
     # Audio failures cannot overwrite prior outputs or publish successful reports.
     rejected = subprocess.run([str(binary), *map(str, common), "--audio-output", str(out / "mix.wav")],
                                capture_output=True, text=True, cwd=ROOT)
@@ -103,6 +145,8 @@ def main():
     assert before == after
     result = {"passed": True, "public_import_and_rpc": True, "strict_typescript": True,
         "source_free": True, "repeated_pcm_exact": True, "frames": 48000, "sample_rate": 48000,
+        "timer_pcm_matches_update_control": True, "saved_audio_timer_deadlines_restored": True,
+        "restored_paused_source_stays_silent_until_timer": True,
         "left_rms": left, "paused_left_rms": silent, "resumed_left_rms": resumed,
         "right_rms": right, "attenuated_right_rms": quiet_right, "bus_gain_ratio": quiet_right / right,
         "existing_output_untouched": True, "author_files_unchanged": before,

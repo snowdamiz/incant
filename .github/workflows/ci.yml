@@ -45,6 +45,7 @@ jobs:
       - run: python3 tools/probes/game-saves.py artifacts/game-saves-cli
       - run: python3 tools/probes/game-input.py artifacts/game-input-cli
       - run: python3 tools/probes/game-audio.py artifacts/game-audio-cli
+      - run: python3 tools/probes/game-timers.py artifacts/game-timers-cli
       - run: node tools/generate_sdk.mjs --check
       - run: git diff --exit-code -- schemas
       - run: node_modules/.bin/tsc -p sdk/ts/tsconfig.json

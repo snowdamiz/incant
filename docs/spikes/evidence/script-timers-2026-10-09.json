@@ -1,0 +1,79 @@
+{
+  "recorded_at": "2026-10-10T03:45:18.417566+00:00",
+  "revision": "adfdd450198f95ad8ffed802cf7ae3cdcf2db1ce",
+  "plan_revision": 3,
+  "checks": {
+    "workspace_release_tests_before_final_guard": 203,
+    "final_script_suite": "pass with additional command-limit guard test",
+    "distinct_rust_tests_passed": 204,
+    "ui_tests_passed": 315,
+    "python_tool_tests_passed": 5,
+    "workspace_clippy": "pass",
+    "generated_contracts": "pass",
+    "strict_typescript": "pass",
+    "ui_build": "pass",
+    "native_release_build": "pass",
+    "native_release_package": "pass",
+    "public_save_regression": "pass",
+    "public_input_character_assertion_regression": "pass"
+  },
+  "public_probe": {
+    "passed": true,
+    "strict_typescript": true,
+    "rendering": false,
+    "steps": [
+      10,
+      20
+    ],
+    "pending_deadlines_restored": true,
+    "callbacks_mutate_through_commands": true,
+    "same_tick_cancellation": true,
+    "full_state_equal": true,
+    "resumed_logs_equal_to_uninterrupted_suffix": true,
+    "second_save_reopened": true,
+    "author_files_unchanged": {
+      "game.incant.json": "204a43ceae4c8eeb9b56688e12c3485a488b11a11d885d3ad9f621dd1dfb4f52",
+      "history.jsonl": "07a26902d36affc477e3621f6d6dccade14076bfa02e02d8a4b51af872b49ce7"
+    },
+    "binary_sha256": "51122f597c26d4711865094fd71e18d3429621776561d3d44ba60fe2884849e4"
+  },
+  "compatibility": {
+    "save_writer_version": 2,
+    "readable_save_versions": [
+      1,
+      2
+    ],
+    "legacy_schedule": "empty with restored clock"
+  },
+  "scope": {
+    "named_timers": true,
+    "repeating_timers": true,
+    "cancellation_and_replacement": true,
+    "transactional_callbacks": true,
+    "pending_deadline_save_restore": true,
+    "compatible_hot_reload_retains_timers": true,
+    "coroutines": false,
+    "async_callbacks": "explicit unsupported error"
+  },
+  "computer_use": false,
+  "local_captures": false,
+  "native_app_opened": false,
+  "hosted_checks": {
+    "revision": "54f85a1e951f15b011ebaa630f242c581d29d750",
+    "passed": 3,
+    "source_run": 38021712982,
+    "desktop_run": 38021713409
+  },
+  "limitations": [
+    "Callbacks are synchronous; general coroutines remain open.",
+    "VM globals and closures are not saved or transactionally rolled back.",
+    "Logical saves do not preserve physics contacts or exact solver rollback state.",
+    "Phase 1 Core Sample and Revision 3 additions remain unfinished."
+  ],
+  "merge": {
+    "pr": 31,
+    "commit": "93bc5ede02d612a362ec952a6cfc7595b9de5aab",
+    "reviewed_tree": "80d409788e696a56ecbeab886f2597e7407c2cac",
+    "merged_tree": "80d409788e696a56ecbeab886f2597e7407c2cac"
+  }
+}

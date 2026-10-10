@@ -99,6 +99,19 @@ state are rebuilt. Sensors can emit fresh entry events on the first restored tic
 This is a logical game save, with no exact physics-rollback guarantee or automatic
 migration between game revisions. See [save format and evidence](docs/spikes/game-saves.md).
 
+Scripts can schedule named one-shot or repeating callbacks with
+`api.setTimer({id, delay_ticks, interval_ticks?, payload?})` and cancel them with
+`api.cancelTimer(id)`. Implement `onTimer(api, event, state)` alongside `update`.
+Callbacks run before update, ordered by deadline and ID, and share its atomic
+command/state transaction. `api.clock()` reports the current fixed tick and time.
+Version 2 saves preserve pending deadlines and JSON payloads; version 1 saves
+remain readable with an empty schedule. Async/Promise and generator callbacks
+fail explicitly; coroutines remain open. See [timer semantics](docs/spikes/script-timers.md).
+
+`python3 tools/probes/game-timers.py artifacts/timer-example` builds and typechecks
+a timed movement/spawn example, then compares uninterrupted play with a saved
+game resumed in separate processes. It uses no renderer or device.
+
 `python3 tools/probes/game-saves.py artifacts/save-example` builds a strict
 TypeScript example through public commands and verifies pickup/spawn state,
 continued log times and separate-process restart continuity without rendering.

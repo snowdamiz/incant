@@ -57,7 +57,7 @@
   "computer_use": false,
   "local_pixel_capture": false,
   "pending": [
-    "hosted audio checks",
+    "updated hosted checks for timer integration",
     "reviewed merge"
   ],
   "not_claimed": [
@@ -71,5 +71,54 @@
     "Core Sample or complete Phase 1 audio"
   ],
   "native_binary_sha256": "4883172e9af6bb553fcdbd9475e6b4c2ae2ad137d1264f5d8b06ec0e590516b4",
-  "source_commit": "079d1e68bebc87f36f6def13d6a9723b97d1cb57"
+  "source_commit": "079d1e68bebc87f36f6def13d6a9723b97d1cb57",
+  "hosted_checks": {
+    "revision": "246a38035933cfa23e4b0754a5546b80035daa2a",
+    "passed": 12,
+    "source_run": 38021329794,
+    "desktop_run": 38021329759,
+    "platform_run": 38021329817,
+    "credential_run": 38021329758,
+    "windows_retained_reader_repair": "passed"
+  },
+  "timer_integration": {
+    "base": "93bc5ede02d612a362ec952a6cfc7595b9de5aab",
+    "rust_tests_passed": 224,
+    "workspace_clippy": "passed",
+    "ui_tests_passed": 315,
+    "python_tool_tests_passed": 5,
+    "generated_contracts": "passed",
+    "strict_typescript": "passed",
+    "ui_build": "passed",
+    "native_release_build_package": "passed",
+    "public_audio_probe": {
+      "passed": true,
+      "public_import_and_rpc": true,
+      "strict_typescript": true,
+      "source_free": true,
+      "repeated_pcm_exact": true,
+      "frames": 48000,
+      "sample_rate": 48000,
+      "timer_pcm_matches_update_control": true,
+      "saved_audio_timer_deadlines_restored": true,
+      "restored_paused_source_stays_silent_until_timer": true,
+      "left_rms": 0.2441395090272332,
+      "paused_left_rms": 0.0,
+      "resumed_left_rms": 0.2441395090272332,
+      "right_rms": 0.3664044296662817,
+      "attenuated_right_rms": 0.18361455724094905,
+      "bus_gain_ratio": 0.5011253750621514,
+      "existing_output_untouched": true,
+      "author_files_unchanged": {
+        "game.incant.json": "91c8f1e545e15bdb60af3e59aef6ae9e03d91cec346a044b9d5618c9166ef49d",
+        "game.incant.journal.jsonl": "f3f4d4f1d2c0c86d5e5dd9f18c5bd0460e17ae2dc73b4dd185e41a42b62da844"
+      },
+      "pcm_sha256": "4ab70417e9ee9e457b7a83e8f8307825557795e705e4cb6f9afba8550df43225",
+      "binary_sha256": "53b9560bd15335d90c3b957dd924c7ccf07ad7f73bb628f51775921a9e496f03",
+      "audio_device_opened": false,
+      "pixel_capture": false
+    },
+    "public_timer_save_input_regressions": "passed",
+    "native_app_opened": false
+  }
 }
