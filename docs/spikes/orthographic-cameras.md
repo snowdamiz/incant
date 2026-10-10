@@ -25,8 +25,10 @@ mixed-projection queued shadows. All 41 incant_render GPU checks pass locally.
 All 303 Rust tests, full Clippy, 315 UI tests/build, five tool tests and generated
 contracts pass. The public strict-TypeScript workflow passes authored legacy
 cameras, ordinary projection commands, a mid-run save/reopen, exact final/repeated
-runtime/script state and unchanged authored files. Remaining editor/headless GPU,
-native/target builds and Claude visual review are in progress.
+runtime/script state and unchanged authored files. The remaining three editor/headless GPU tests also pass (44 total). The final
+headless executable was frozen after Cargo finished and the public workflow
+passed again against that exact copy. Native/target builds and Claude visual
+review remain in progress.
 
 This is a projection foundation. Pixel-perfect snapping, sprites, tilemaps and
 2D physics are not supplied by this increment. No device or phase gate is claimed.

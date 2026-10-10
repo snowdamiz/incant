@@ -19,3 +19,6 @@ __pycache__/
 *.tsbuildinfo
 
 /editor/app/gen/
+
+# Numerical GPU captures may use crate-relative paths under Cargo.
+**/artifacts/

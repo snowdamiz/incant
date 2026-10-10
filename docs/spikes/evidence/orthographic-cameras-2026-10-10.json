@@ -21,7 +21,6 @@
     "rendering_or_device_gate": false
   },
   "remaining": [
-    "Editor/headless GPU integration",
     "Native and portable target builds",
     "Claude engine/Inspector rendered review"
   ],
@@ -29,5 +28,19 @@
     "No pixel-perfect snapping",
     "No sprite/tilemap renderer",
     "No 2D physics or device gate"
-  ]
+  ],
+  "all_gpu_tests": 44,
+  "public_workflow_frozen": {
+    "passed": true,
+    "strict_typescript": true,
+    "legacy_camera_authored_via_shared_commands": true,
+    "runtime_projection_edits_save_resume_and_repeat_exact": true,
+    "author_files_unchanged": {
+      "camera.incant.json": "14d0c296146e6e07b5cd51225a82bee43216a7b4b008611c63ae5b77895d7ec7",
+      "camera.incant.journal.jsonl": "b050e4c97419703b3f25f52373d1df6696c1bffd67e4e0f84d6f0e40c7dce8ad"
+    },
+    "binary_sha256": "ce79c966d5d4264482829904c0fb9158f244b61fb7ae1dac1c8150c521a4d2ff",
+    "rendering_or_device_gate": false
+  },
+  "binary_capture_note": "The preceding Cargo GPU test command rebuilt the headless executable. This final SHA was frozen after Cargo stopped, and the public workflow passed again against that exact copy."
 }
