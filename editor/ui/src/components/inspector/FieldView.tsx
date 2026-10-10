@@ -2,7 +2,7 @@ import { useId } from 'react';
 import type { InputHTMLAttributes, ReactNode } from 'react';
 import type { Diagnostic, FieldSchema } from '../../bridge/contract';
 import { Icon } from '../../icons/Icon';
-import type { FieldHint } from './presentation';
+import type { FieldHint, FieldStatus } from './presentation';
 import { MASK_BITS, fieldHint, isMask, maskDescription, maskGroups, maskSummary } from './presentation';
 import { ObjectListView, isObjectList } from './ObjectList';
 
@@ -20,6 +20,8 @@ export interface FieldContext {
   readonly component: string;
   /** Diagnostics for this component, matched to fields by path prefix. */
   readonly diagnostics: readonly Diagnostic[];
+  /** The whole component value, for presentation tags that depend on sibling fields. */
+  readonly value?: Readonly<Record<string, unknown>> | undefined;
 }
 
 /**
@@ -43,6 +45,16 @@ export function FieldView({
   const hint = fieldHint(ctx.component, pointer(path));
   const label = schema.title ?? hint.title ?? humanize(name);
   const unset = unsetKind(schema, value);
+  const fallback = unset === 'omitted' ? presentableDefault(schema) : null;
+  if (fallback) {
+    // An omitted optional field shown as its schema default, always tagged "Default"
+    // so it never reads as authored data. The document is not changed.
+    const note = hint.omittedNote ?? DEFAULT_NOTE;
+    if (schema.type === 'tagged-union' && 'variants' in schema) {
+      return <UnionView label={label} schema={schema} hint={hint} value={fallback.value} path={path} ctx={ctx} implied={note} />;
+    }
+    return <FieldRow label={label} schema={schema} hint={hint} value={fallback.value} path={path} ctx={ctx} implied={note} />;
+  }
   if (unset) {
     return <FieldRow label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} unset={unset} />;
   }
@@ -86,6 +98,27 @@ export function FieldView({
 
 type UnionSchema = Extract<FieldSchema, { type: 'tagged-union' }>;
 
+const DEFAULT_NOTE = 'Not authored. The schema default applies.';
+
+/**
+ * The schema's own `default`, when it is something this field can present: a
+ * finite number for a number field, or a record naming a known variant for a
+ * tagged union. Anything else (no default, a mistyped or unknown one) returns
+ * null and the field stays "Not set"; a default is never guessed or repaired.
+ */
+export function presentableDefault(schema: FieldSchema): { value: unknown } | null {
+  if (!Object.hasOwn(schema, 'default')) return null;
+  const value: unknown = schema.default;
+  if ((schema.type === 'number' || schema.type === 'integer') && typeof value === 'number' && Number.isFinite(value)) {
+    return { value };
+  }
+  if (schema.type === 'tagged-union' && 'variants' in schema && isRecord(value)) {
+    const tag = value[schema.discriminator];
+    if (typeof tag === 'string' && Object.hasOwn(schema.variants, tag)) return { value };
+  }
+  return null;
+}
+
 /** "box", "sphere" and "capsule" -> "box, sphere or capsule". */
 function listChoices(choices: readonly string[]): string {
   return choices.length < 2 ? (choices[0] ?? 'nothing') : `${choices.slice(0, -1).join(', ')} or ${choices.at(-1)}`;
@@ -105,6 +138,7 @@ function UnionView({
   value,
   path,
   ctx,
+  implied,
 }: {
   label: string;
   schema: UnionSchema;
@@ -112,6 +146,8 @@ function UnionView({
   value: unknown;
   path: readonly string[];
   ctx: FieldContext;
+  /** Set when the value is the documented default for an omitted field, not authored data. */
+  implied?: string | undefined;
 }) {
   const tagKey = schema.discriminator;
   const choices = Object.keys(schema.variants);
@@ -141,6 +177,8 @@ function UnionView({
   const id = fieldDomId(ctx.entity, ctx.component, path);
   const extra = record && fields ? Object.keys(record).filter((key) => key !== tagKey && !Object.hasOwn(fields, key)) : [];
   const variantNote = variant?.description;
+  // A variant with nothing beneath its tag (perspective) needs no empty group.
+  const grouped = fields && record && (children.length > 0 || extra.length > 0 || variantNote);
   return (
     <>
       <FieldRow
@@ -153,8 +191,9 @@ function UnionView({
         claim={claim}
         notice={notice === null ? undefined : { text: notice, value }}
         noteId={variantNote ? `${id}-variant` : undefined}
+        implied={implied}
       />
-      {fields && record ? (
+      {grouped ? (
         <div className="field-group field-group--variant" role="group" aria-labelledby={`${id}-label`}>
           {variantNote ? (
             <p className="field-group__note" id={`${id}-variant`}>
@@ -212,6 +251,7 @@ function FieldRow({
   claim,
   notice,
   noteId,
+  implied,
 }: {
   label: string;
   schema: FieldSchema;
@@ -226,6 +266,8 @@ function FieldRow({
   notice?: { text: ReactNode; value: unknown } | undefined;
   /** Extra visible text that describes the value (e.g. the selected variant). */
   noteId?: string | undefined;
+  /** The value is a documented default for an omitted field; this sentence says so. */
+  implied?: string | undefined;
 }) {
   const id = fieldDomId(ctx.entity, ctx.component, path);
   const messageId = useId();
@@ -236,8 +278,11 @@ function FieldRow({
   const errorPaths = new Set(problems.filter((d) => d.severity === 'error').map((d) => d.path ?? ''));
   const description = schema.description ?? hint.description;
   const descriptionId = description ? `${id}-description` : undefined;
+  const tag: FieldStatus | null =
+    notice || unset ? null : implied ? { short: 'Default', long: implied } : (ctx.value && hint.status?.(ctx.value)) || null;
+  const tagId = tag ? `${id}-tag` : undefined;
   const describedBy =
-    [descriptionId, noteId, problems.length > 0 ? messageId : undefined].filter(Boolean).join(' ') || undefined;
+    [descriptionId, tagId, noteId, problems.length > 0 ? messageId : undefined].filter(Boolean).join(' ') || undefined;
   const unit = unitOf(schema);
   const vectorUnit = schema.type === 'array' && !unset && !notice ? unit : undefined;
   return (
@@ -261,6 +306,11 @@ function FieldRow({
           {description}
         </span>
       ) : null}
+      {tag ? (
+        <span id={tagId} className="visually-hidden">
+          {tag.long}
+        </span>
+      ) : null}
       <div className="field__value">
         {notice ? (
           <Notice id={id} value={notice.value} describedBy={describedBy}>
@@ -275,6 +325,8 @@ function FieldRow({
             ctx={ctx}
             schema={schema}
             unit={unit}
+            tag={tag}
+            variants={hint.variants}
             value={value}
             invalid={severity === 'error'}
             errorPaths={errorPaths}
@@ -323,6 +375,8 @@ function ValueControl({
   ctx,
   schema,
   unit,
+  tag,
+  variants,
   value,
   invalid,
   errorPaths,
@@ -334,6 +388,8 @@ function ValueControl({
   ctx: FieldContext;
   schema: FieldSchema;
   unit: string | undefined;
+  tag: FieldStatus | null;
+  variants: Readonly<Record<string, string>> | undefined;
   value: unknown;
   invalid: boolean;
   errorPaths: ReadonlySet<string>;
@@ -391,15 +447,23 @@ function ValueControl({
       if (typeof value !== 'number') return <Mismatch id={id} expected="a number" value={value} />;
       return (
         <span className="control control--number">
-          <input {...common} className="control__input mono" value={formatNumber(value)} />
+          <input {...common} className="control__input mono" value={formatNumber(value)} title={exactTitle(value)} />
           {unit ? <span className="control__unit">{unit}</span> : null}
+          <Tag tag={tag} />
         </span>
       );
     }
     case 'tagged-union': {
       // The union row shows the selected variant's tag; UnionView only passes a recognized one.
       if (typeof value !== 'string') return <Mismatch id={id} expected="a variant name" value={value} />;
-      return <input {...common} className="control control__input" value={value} />;
+      const shown = variants && Object.hasOwn(variants, value) ? variants[value]! : value;
+      if (!tag) return <input {...common} className="control control__input" value={shown} />;
+      return (
+        <span className="control control--choice">
+          <input {...common} className="control__input" value={shown} />
+          <Tag tag={tag} />
+        </span>
+      );
     }
     case 'boolean': {
       if (typeof value !== 'boolean') return <Mismatch id={id} expected="on or off" value={value} />;
@@ -447,6 +511,7 @@ function ValueControl({
                 aria-invalid={errorPaths.has(here) || errorPaths.has(`${here}/${index}`) || undefined}
                 aria-describedby={describedBy}
                 value={formatNumber(item)}
+                title={exactTitle(item)}
               />
             </label>
           ))}
@@ -569,9 +634,34 @@ export function arrayChannels(
   return (hinted || named) && (length === 3 || length === 4) ? COLOR_CHANNELS.slice(0, length) : null;
 }
 
+/** Visible short form of a status; the full sentence is in the field's accessible description. */
+function Tag({ tag }: { tag: FieldStatus | null }) {
+  if (!tag) return null;
+  return (
+    <span className="control__tag" aria-hidden="true" title={tag.long}>
+      {tag.short}
+    </span>
+  );
+}
+
+/**
+ * Compact, readable numbers that never hide a nonzero value. Integers are shown
+ * as is; ordinary magnitudes keep up to four decimals (1.5708); values whose
+ * magnitude is below 0.01 or at least 1e9 use four significant digits in
+ * exponent form (1e-6, -2.5e-7, 1.235e-3), so a tiny clip distance never reads 0.
+ */
 export function formatNumber(value: number): string {
-  if (Number.isInteger(value)) return String(value);
+  if (Number.isInteger(value) && Math.abs(value) < 1e9) return String(value);
+  const magnitude = Math.abs(value);
+  if (magnitude !== 0 && (magnitude < 0.01 || magnitude >= 1e9)) {
+    return Number(value.toPrecision(4)).toExponential().replace('e+', 'e');
+  }
   return String(Number(value.toFixed(4)));
+}
+
+/** The exact authored number as a hover title, only when the shown form differs. */
+function exactTitle(value: number): string | undefined {
+  return formatNumber(value) === String(value) ? undefined : String(value);
 }
 
 export function Notice({

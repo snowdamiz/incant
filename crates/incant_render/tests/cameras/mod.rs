@@ -2,6 +2,7 @@ use super::materials::{Fixture, emissive};
 use incant_doc::{Camera, Entity, Transform};
 use incant_render::{LocalLightSelection, Renderer, SceneError};
 use serde_json::json;
+mod orthographic;
 
 fn insert(f: &mut Fixture, entity: Entity) -> String {
     let id = entity.id.clone();
@@ -22,7 +23,8 @@ fn camera(f: &mut Fixture, pose: Transform) -> String {
         json!(Camera {
             fov_degrees: 60.,
             near: 0.1,
-            far: 100.
+            far: 100.,
+            projection: Default::default(),
         }),
     );
     insert(f, e)

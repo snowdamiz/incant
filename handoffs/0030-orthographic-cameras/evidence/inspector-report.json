@@ -1,0 +1,1713 @@
+{
+  "set": "r2",
+  "generated": "2026-10-10T15:38:20.287Z",
+  "browser": "155.0.8059.40",
+  "captures": [
+    {
+      "file": "legacy-normal-1440x900.png",
+      "crop": "legacy-normal-1440x900-inspector.png",
+      "size": {
+        "key": "normal",
+        "width": 1440,
+        "height": 900,
+        "minimum": false
+      },
+      "state": "legacy",
+      "entity": "Camera Rig",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Perspective",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": "Default",
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 328,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "70",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 362,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 396,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "800",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 430,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 0,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy20 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "orthographic-normal-1440x900.png",
+      "crop": "orthographic-normal-1440x900-inspector.png",
+      "size": {
+        "key": "normal",
+        "width": 1440,
+        "height": 900,
+        "minimum": false
+      },
+      "state": "orthographic",
+      "entity": "Map Camera",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 328,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": "8",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 364,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 400,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 434,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 468,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy20 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "ortho-focus-normal-1440x900.png",
+      "crop": "ortho-focus-normal-1440x900-inspector.png",
+      "size": {
+        "key": "normal",
+        "width": 1440,
+        "height": 900,
+        "minimum": false
+      },
+      "state": "ortho-focus",
+      "entity": "Map Camera",
+      "keys": [
+        "field-01J9ZF1XTR000000000000000A-Camera_projection-label",
+        "field-01J9ZF1XTR000000000000000A-Camera_projection_vertical_size-label"
+      ],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 328,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": "8",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 364,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 400,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 434,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 468,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": "field-01J9ZF1XTR000000000000000A-Camera_projection_vertical_size-label",
+        "focusOutline": "none 3px",
+        "outputTabs": [
+          "Hierarchy20 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "malformed-normal-1440x900.png",
+      "crop": "malformed-normal-1440x900-inspector.png",
+      "size": {
+        "key": "normal",
+        "width": 1440,
+        "height": 900,
+        "minimum": false
+      },
+      "state": "malformed",
+      "entity": "Isometric Shot",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": null,
+            "exact": null,
+            "valueClipped": null,
+            "unit": null,
+            "tag": null,
+            "notice": "Unknown projection kind \"isometric\". Expected perspective or orthographic; raw value:{\"kind\":\"isometric\"}",
+            "box": {
+              "x": 1240,
+              "y": 177,
+              "width": 188,
+              "height": 116
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": null,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 299,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 333,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 367,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 0,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "sizeless-ortho-normal-1440x900.png",
+      "crop": "sizeless-ortho-normal-1440x900-inspector.png",
+      "size": {
+        "key": "normal",
+        "width": 1440,
+        "height": 900,
+        "minimum": false
+      },
+      "state": "sizeless-ortho",
+      "entity": "Sizeless Ortho",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 177,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": null,
+            "exact": null,
+            "valueClipped": null,
+            "unit": null,
+            "tag": null,
+            "notice": "Cannot show as a number; raw value:undefined",
+            "box": {
+              "x": 1240,
+              "y": 213,
+              "width": 188,
+              "height": 84
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": null,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 305,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 339,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 373,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "tiny-values-normal-1440x900.png",
+      "crop": "tiny-values-normal-1440x900-inspector.png",
+      "size": {
+        "key": "normal",
+        "width": 1440,
+        "height": 900,
+        "minimum": false
+      },
+      "state": "tiny-values",
+      "entity": "Tiny Shot",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 177,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": "2.5e-6",
+            "exact": "0.0000025",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 213,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 249,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "1e-6",
+            "exact": "0.000001",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 283,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "4.2e-4",
+            "exact": "0.00042",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 1240,
+              "y": 317,
+              "width": 188,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 1109,
+          "y": 40,
+          "width": 331,
+          "height": 534
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "legacy-minimum-1000x650.png",
+      "crop": "legacy-minimum-1000x650-inspector.png",
+      "size": {
+        "key": "minimum",
+        "width": 1000,
+        "height": 650,
+        "minimum": true
+      },
+      "state": "legacy",
+      "entity": "Camera Rig",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Perspective",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": "Default",
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 215,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "70",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 249,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 283,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "800",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 317,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 0,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy20 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "orthographic-minimum-1000x650.png",
+      "crop": "orthographic-minimum-1000x650-inspector.png",
+      "size": {
+        "key": "minimum",
+        "width": 1000,
+        "height": 650,
+        "minimum": true
+      },
+      "state": "orthographic",
+      "entity": "Map Camera",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 173,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": "8",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 211,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 249,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 283,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 317,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy20 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "ortho-focus-minimum-1000x650.png",
+      "crop": "ortho-focus-minimum-1000x650-inspector.png",
+      "size": {
+        "key": "minimum",
+        "width": 1000,
+        "height": 650,
+        "minimum": true
+      },
+      "state": "ortho-focus",
+      "entity": "Map Camera",
+      "keys": [
+        "field-01J9ZF1XTR000000000000000A-Camera_projection-label",
+        "field-01J9ZF1XTR000000000000000A-Camera_projection_vertical_size-label"
+      ],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 166,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": "8",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 204,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 242,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 276,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 310,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": "field-01J9ZF1XTR000000000000000A-Camera_projection_vertical_size-label",
+        "focusOutline": "none 3px",
+        "outputTabs": [
+          "Hierarchy20 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "malformed-minimum-1000x650.png",
+      "crop": "malformed-minimum-1000x650-inspector.png",
+      "size": {
+        "key": "minimum",
+        "width": 1000,
+        "height": 650,
+        "minimum": true
+      },
+      "state": "malformed",
+      "entity": "Isometric Shot",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": null,
+            "exact": null,
+            "valueClipped": null,
+            "unit": null,
+            "tag": null,
+            "notice": "Unknown projection kind \"isometric\". Expected perspective or orthographic; raw value:{\"kind\":\"isometric\"}",
+            "box": {
+              "x": 834,
+              "y": 115,
+              "width": 154,
+              "height": 164
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": null,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 285,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 319,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 353,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 0,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "sizeless-ortho-minimum-1000x650.png",
+      "crop": "sizeless-ortho-minimum-1000x650-inspector.png",
+      "size": {
+        "key": "minimum",
+        "width": 1000,
+        "height": 650,
+        "minimum": true
+      },
+      "state": "sizeless-ortho",
+      "entity": "Sizeless Ortho",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 121,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": null,
+            "exact": null,
+            "valueClipped": null,
+            "unit": null,
+            "tag": null,
+            "notice": "Cannot show as a number; raw value:undefined",
+            "box": {
+              "x": 834,
+              "y": 157,
+              "width": 154,
+              "height": 84
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": null,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 249,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "0.1",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 283,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "100",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 317,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    },
+    {
+      "file": "tiny-values-minimum-1000x650.png",
+      "crop": "tiny-values-minimum-1000x650-inspector.png",
+      "size": {
+        "key": "minimum",
+        "width": 1000,
+        "height": 650,
+        "minimum": true
+      },
+      "state": "tiny-values",
+      "entity": "Tiny Shot",
+      "keys": [],
+      "measure": {
+        "rows": [
+          {
+            "label": "Projection",
+            "labelClipped": false,
+            "value": "Orthographic",
+            "exact": null,
+            "valueClipped": false,
+            "unit": null,
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 173,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": null,
+              "tag": null
+            }
+          },
+          {
+            "label": "Vertical size",
+            "labelClipped": false,
+            "value": "2.5e-6",
+            "exact": "0.0000025",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 211,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Field of view",
+            "labelClipped": false,
+            "value": "60",
+            "exact": null,
+            "valueClipped": false,
+            "unit": "°",
+            "tag": "Unused",
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 249,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": 8.62
+            }
+          },
+          {
+            "label": "Near clip",
+            "labelClipped": false,
+            "value": "1e-6",
+            "exact": "0.000001",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 283,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          },
+          {
+            "label": "Far clip",
+            "labelClipped": false,
+            "value": "4.2e-4",
+            "exact": "0.00042",
+            "valueClipped": false,
+            "unit": "m",
+            "tag": null,
+            "notice": null,
+            "box": {
+              "x": 834,
+              "y": 317,
+              "width": 154,
+              "height": 28
+            },
+            "contrast": {
+              "label": 7.98,
+              "value": 16.28,
+              "unit": 6.96,
+              "tag": null
+            }
+          }
+        ],
+        "inspector": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 321
+        },
+        "horizontalOverflow": 0,
+        "variantGroups": 1,
+        "readOnlyChip": true,
+        "editableInputs": 0,
+        "focused": null,
+        "focusOutline": null,
+        "outputTabs": [
+          "Hierarchy3 entities",
+          "Assets",
+          "Problems",
+          "Console",
+          "History"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "remoteRequests": []
+    }
+  ]
+}

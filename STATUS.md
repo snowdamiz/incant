@@ -53,6 +53,33 @@ within its documented workload.
 
 ## Active work
 
+- Orthographic camera projection is implemented through shared component commands,
+  renderer geometry, parallel material view rays, light clusters and directional
+  cascade fitting. CPU/shared-command checks and all 41 renderer GPU tests pass.
+  Integrated checks pass 318 Rust and 387 UI tests, Clippy, contracts and native
+  packaging. Claude engine/browser/native review is accepted; required hosted
+  checks remain open;
+  pixel-perfect cameras, sprites, tilemaps and 2D physics remain open. See
+  [orthographic cameras](docs/spikes/orthographic-cameras.md).
+
+- PR #39 merged as `72a53df` after all twelve required checks passed on
+  `12b6092`. Its merge tree exactly matches the tested tree. This incorporates
+  PRs #36–38: bounded steering, authored off-mesh routes, script diagnostics
+  and thread CPU budgets. GitHub records all three ancestor PRs as merged.
+  The older steering branch's failed generic-error check is not counted as
+  passed; the combined revision passed its own checks. No phase gate is approved.
+  PR #40 also merged as `9a9db3f` after all twelve checks passed on `533e0d6`,
+  preserving its tested tree.
+
+- The merged steering/links/script foundation passes 300 local Rust, 40 GPU,
+  315 UI and five tool tests, Clippy, contracts, packaging and public saved
+  workflows. Rendered repetitions match 803 steering frames and 593 off-mesh
+  frames; all 100 plaza walkers remain at goal from tick 2212 through 4990.
+  Native CPU budgets exclude host pauses/other threads; synchronous native calls
+  count but are not preemptible. Quantized navigation height and behavior-level
+  lateral sweeps remain documented. See [steering](docs/spikes/navigation-steering.md),
+  [links](docs/spikes/navigation-links.md) and [CPU budgets](docs/spikes/script-cpu-budget.md).
+
 - Compound colliders support 1–64 stable primitive children with parent body/hit
   identity. Shared edits, recovery, rotated-child walking and the compact read-only
   Inspector pass. Claude accepted the final native review at 1440×874 and 1000×650,
@@ -66,27 +93,14 @@ within its documented workload.
   before PR #25 merges.
   See [compound colliders](docs/spikes/compound-colliders.md).
 
-- PR #39 consolidates steering, off-mesh links and script diagnostics/CPU budgets
-  from PRs #36–38. Its combined revision passes 300 local Rust, 40 GPU, 315 UI and
-  five tool tests, Clippy, contracts, native packaging and public saved workflows.
-  The 100-walker rendered plaza has all agents at goal from tick 2212 through 4990;
-  repeats match 803 frames/13 logs. Off-mesh repeats match 593 frames/26 logs and
-  all 49 mid-drop reopen frames. Quantized height and behavior-level lateral sweeps
-  remain documented. Thread CPU budgets exclude host pauses/other threads;
-  bounded native calls count but are not preemptible. Windows regressions now use
-  the shipped 50 ms allowance without changing production limits. All twelve required checks passed on `12b6092`; PR #39 merged as `72a53df`
-  with the tested tree unchanged, incorporating PRs #36–38. The older steering branch's generic repeated-play CI failure has
-  no established cause and is not counted as passed. See [steering](docs/spikes/navigation-steering.md),
-  [off-mesh links](docs/spikes/navigation-links.md), [diagnostics](docs/spikes/script-diagnostics.md)
-  and [CPU budgets](docs/spikes/script-cpu-budget.md).
-
 - PR #40 adds weighted rectangular-grid navigation through `api.findGridPath`,
   shared edits, blocked-corner rules, bounded search and saved gameplay. Local
   checks pass 309 Rust, 40 GPU, 315 UI and five tool tests, Clippy, contracts,
   native packaging and WASM/iOS core compilation. Claude's scoped rendered
   review passes 516 matching frames, exact saved-state restoration and independent
   route-cost checks. Arrival is at tick 476 with 0.2 m minimum footprint clearance.
-  Hosted checks remain pending. Sprite/tilemap rendering and 2D physics remain
+  All twelve hosted checks passed; PR #40 merged as `9a9db3f` with its tested
+  tree unchanged. Sprite/tilemap rendering and 2D physics remain
   open. See [grid navigation](docs/spikes/grid-navigation.md).
 
 

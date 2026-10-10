@@ -276,7 +276,7 @@ function ComponentSection({
                       schema={field}
                       value={component.value[key]}
                       path={[key]}
-                      ctx={{ entity, component: component.type, diagnostics }}
+                      ctx={{ entity, component: component.type, diagnostics, value: component.value }}
                     />
                   ) : null;
                 });

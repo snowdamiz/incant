@@ -66,6 +66,29 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it('retains property defaults across local references and unions without authoring them', () => {
+    const current = read();
+    current.schemas.Camera = {
+      required: [],
+      properties: {
+        projection: { $ref: '#/$defs/Projection', default: { kind: 'perspective' } },
+        enabled: { $ref: '#/$defs/Enabled', default: false },
+        optionalNumber: { anyOf: [{ type: 'number' }, { type: 'null' }], default: null },
+      },
+      $defs: {
+        Enabled: { type: 'boolean', default: true },
+        Projection: { oneOf: ['perspective', 'orthographic'].map(kind => ({
+          type: 'object', required: ['kind'], properties: { kind: { type: 'string', const: kind } },
+        })) },
+      },
+    };
+    const before = JSON.stringify(current);
+    const fields = snapshotFromEngine(current).schemas.Camera!.properties;
+    expect(fields.projection).toMatchObject({ type: 'tagged-union', default: { kind: 'perspective' }, optional: true });
+    expect(fields.enabled).toMatchObject({ type: 'boolean', default: false });
+    expect(fields.optionalNumber).toMatchObject({ type: 'number', nullable: true, default: null });
+    expect(JSON.stringify(current)).toBe(before);
+  });
   it('preserves tagged shape alternatives and refuses ambiguous unions', () => {
     const current = read();
     const variant = (tag: string) => ({ type: 'object', required: ['type', 'radius'], properties: {

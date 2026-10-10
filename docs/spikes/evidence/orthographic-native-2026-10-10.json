@@ -1,0 +1,163 @@
+{
+  "source": "59f3384cf8e1626da99b7ff9817f297f84482d97",
+  "native_sha256": "7a9cb8a5285ccda04b98cf9ff55e2206b4543469b29304dce4ddea1388ef6c54",
+  "headless_sha256": "da0f407d4a29788e4a1496ce5a5700e7a61baa306562452fa203999254aa9303",
+  "project_sha256": "180a615e13b4cc2ac5e9b5dff7adad208ebe2c20c31509e5e29e54392f5f95e0",
+  "startup": "Safe std::process exec wrapper adds the project CLI argument; opened via CUA getApp.",
+  "launch_location_note": "Original disposable Documents fixture open stalled in macOS __open and timed out; moved byte-identical fixture and app to development artifacts outside Documents, without permissions changes.",
+  "fixture": {
+    "source_project": "Claude handoff 0030 engine-r1; original project/cache/assets copied unchanged before two shared-command additions",
+    "original_project_sha256": "2346b1e553aaed0f04c81dbd516ab6310ac840cee98401edd7b2ef7f62751b43",
+    "project_sha256": "180a615e13b4cc2ac5e9b5dff7adad208ebe2c20c31509e5e29e54392f5f95e0",
+    "authoring_binary_sha256": "ce79c966d5d4264482829904c0fb9158f244b61fb7ae1dac1c8150c521a4d2ff",
+    "new_entities": [
+      "Camera explicit perspective",
+      "Camera tiny values"
+    ]
+  },
+  "captures": [
+    {
+      "file": "legacy-wide.jpg",
+      "entity": "Camera persp-d16",
+      "pixel_size": [
+        2880,
+        1748
+      ],
+      "logical_size": [
+        1440.0,
+        874.0
+      ],
+      "sha256": "de780fafaa6c19224ebc631b96c1a18a91791e5da44a502612956e63de188b58"
+    },
+    {
+      "file": "ortho-wide.jpg",
+      "entity": "Camera ortho-d16-v9",
+      "pixel_size": [
+        2880,
+        1748
+      ],
+      "logical_size": [
+        1440.0,
+        874.0
+      ],
+      "sha256": "4f8d7b919aa14b23bb0948e9ae8c31d6baa9cb32cfec479393b7f2376616a971"
+    },
+    {
+      "file": "explicit-wide.jpg",
+      "entity": "Camera explicit perspective",
+      "pixel_size": [
+        2880,
+        1748
+      ],
+      "logical_size": [
+        1440.0,
+        874.0
+      ],
+      "sha256": "ccad70b0180f3f359deca45b260fbd5409613efbc1b56ceee9628796a03303e7"
+    },
+    {
+      "file": "tiny-wide.jpg",
+      "entity": "Camera tiny values",
+      "pixel_size": [
+        2880,
+        1748
+      ],
+      "logical_size": [
+        1440.0,
+        874.0
+      ],
+      "sha256": "94144d11de8084e222a15e22affb4ad1251072532524009d3f9acbca9f8f301b"
+    },
+    {
+      "file": "tiny-min.jpg",
+      "entity": "Camera tiny values",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "877f70e9fd9856fa01082d73ccd0fa98c61a2140650f6d7c43ac8df482cdbc79"
+    },
+    {
+      "file": "tiny-min-inspector.jpg",
+      "entity": "Camera tiny values",
+      "note": "Minimum inspector width",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "346a421acb56e08f8d247b736d084fdaea72ca4a8383952b6f41c912fed13c77"
+    },
+    {
+      "file": "explicit-min.jpg",
+      "entity": "Camera explicit perspective",
+      "note": "Minimum 280px inspector at 1000x650",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "8c68bce7842cf5cffe46af3849e2b85e46902637efb01e986a286c477d625d95"
+    },
+    {
+      "file": "legacy-min.jpg",
+      "entity": "Camera persp-d16",
+      "note": "Minimum 280px inspector at 1000x650",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "d44633d9697405883364a8f5d898e3668c6a6ef6a2ab826d5bcd9b3ee630cd2d"
+    },
+    {
+      "file": "ortho-min.jpg",
+      "entity": "Camera ortho-d16-v9",
+      "note": "Minimum 280px inspector at 1000x650",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "a74e2e4f634a79d5174f4d44b9fecdbd216568d8a48bc06d77a9734369914c4b"
+    },
+    {
+      "file": "ortho-min-keyboard.jpg",
+      "entity": "Camera ortho-d16-v9",
+      "note": "Tab from Projection to Vertical size",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "2373153396c858d9e82a307c88bc08d7a90d2c452ce60cf9cc868ff4ed0bdff5"
+    }
+  ],
+  "capture": "Original CUA App.getScreenshot JPEG bytes, Retina 2x. Full account-bearing images remain ignored; native appearance belongs to Claude.",
+  "project_unchanged": true,
+  "keyboard": "Click Projection then Tab selected Vertical size=9; ortho-min-keyboard.jpg.",
+  "ui_checks": {
+    "tests": 387,
+    "strict_build": "passed",
+    "bridge_regression": "fixed required: [] fixture; 23 native bridge tests pass"
+  }
+}

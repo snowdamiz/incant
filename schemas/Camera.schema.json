@@ -1,7 +1,47 @@
 {
+  "$defs": {
+    "CameraProjection": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "perspective",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "orthographic",
+              "type": "string"
+            },
+            "vertical_size": {
+              "description": "Visible world-space height. Width follows the output aspect ratio.",
+              "format": "double",
+              "type": "number",
+              "x-incant-unit": "m"
+            }
+          },
+          "required": [
+            "kind",
+            "vertical_size"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "order": [
+    "projection",
     "fov_degrees",
     "near",
     "far"
@@ -9,15 +49,26 @@
   "properties": {
     "far": {
       "format": "double",
-      "type": "number"
+      "type": "number",
+      "x-incant-unit": "m"
     },
     "fov_degrees": {
+      "description": "Vertical perspective field of view, retained when switching projection.",
       "format": "double",
-      "type": "number"
+      "type": "number",
+      "x-incant-unit": "°"
     },
     "near": {
       "format": "double",
-      "type": "number"
+      "type": "number",
+      "x-incant-unit": "m"
+    },
+    "projection": {
+      "$ref": "#/$defs/CameraProjection",
+      "default": {
+        "kind": "perspective"
+      },
+      "description": "Perspective, or orthographic with parallel view rays and a fixed world-space height."
     }
   },
   "required": [

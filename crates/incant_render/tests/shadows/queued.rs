@@ -116,11 +116,25 @@ fn queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions() {
             "DirectionalLight",
             json!({"color":[1,1,1],"intensity":if suns==2 {1} else {0},"shadows":{"distance":40}}),
         );
+        let orthographic = i % 2 == 1;
+        set(
+            &mut f,
+            &camera,
+            "Camera",
+            json!({"fov_degrees":60,"near":0.1,"far":100,"projection":if orthographic { json!({"kind":"orthographic","vertical_size":8}) } else {json!({"kind":"perspective"})}}),
+        );
         let scene = f.scene(&r).with_camera(&camera).unwrap();
         let reference = r.screenshot_scene_png(&scene, width, height).unwrap();
         let expected = decode(&reference);
         let shadow_x = ((0.5
-            - 2. / (2. * 8. * 30_f32.to_radians().tan() * width as f32 / height as f32))
+            - 2. / (2.
+                * if orthographic {
+                    4.
+                } else {
+                    8. * 30_f32.to_radians().tan()
+                }
+                * width as f32
+                / height as f32))
             * width as f32)
             .floor() as usize;
         assert!(

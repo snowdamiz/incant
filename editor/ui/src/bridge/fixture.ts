@@ -166,17 +166,57 @@ const SCHEMAS: Record<string, ComponentSchema> = {
       },
     },
   },
-  'incant.Camera': {
-    type: 'incant.Camera',
+  // Mirror of the native Camera schema after bridge resolution: bare type name, units
+  // and the projection default from Rust metadata, no titles (the Inspector's Camera
+  // profile supplies labels). CameraFields.test.tsx checks it against
+  // snapshotFromEngine over schemas/Camera.schema.json.
+  Camera: {
+    type: 'Camera',
     version: 1,
     title: 'Camera',
-    order: ['fov', 'near', 'far'],
+    order: ['projection', 'fov_degrees', 'near', 'far'],
     properties: {
-      fov: { type: 'number', title: 'Field of view', minimum: 1, maximum: 179, 'x-incant-unit': '°' },
-      near: { type: 'number', title: 'Near plane', minimum: 0, 'x-incant-unit': 'm' },
-      far: { type: 'number', title: 'Far plane', minimum: 0, 'x-incant-unit': 'm' },
+      far: { type: 'number', format: 'double', 'x-incant-unit': 'm', optional: false },
+      fov_degrees: {
+        type: 'number',
+        format: 'double',
+        description: 'Vertical perspective field of view, retained when switching projection.',
+        'x-incant-unit': '°',
+        optional: false,
+      },
+      near: { type: 'number', format: 'double', 'x-incant-unit': 'm', optional: false },
+      projection: {
+        type: 'tagged-union',
+        description: 'Perspective, or orthographic with parallel view rays and a fixed world-space height.',
+        default: { kind: 'perspective' },
+        discriminator: 'kind',
+        variants: {
+          perspective: {
+            type: 'object',
+            additionalProperties: false,
+            properties: { kind: { type: 'string', const: 'perspective', enum: ['perspective'], optional: false } },
+            required: ['kind'],
+          },
+          orthographic: {
+            type: 'object',
+            additionalProperties: false,
+            properties: {
+              kind: { type: 'string', const: 'orthographic', enum: ['orthographic'], optional: false },
+              vertical_size: {
+                type: 'number',
+                format: 'double',
+                description: 'Visible world-space height. Width follows the output aspect ratio.',
+                'x-incant-unit': 'm',
+                optional: false,
+              },
+            },
+            required: ['kind', 'vertical_size'],
+          },
+        },
+        optional: true,
+      },
     },
-  },
+  } as ComponentSchema,
   // Physics: mirrors of the native RigidBody / Collider / AngularVelocity schemas after
   // bridge resolution, including the registry's order, units and mask widget (bare
   // type names, no titles). PhysicsFields.test.tsx checks them against
@@ -496,7 +536,20 @@ const SAMPLE_SCENE: Spec = {
               kind: 'camera',
               components: [
                 transform([0, 1.7, -3.5]),
-                { type: 'incant.Camera', schemaVersion: 1, value: { fov: 70, near: 0.1, far: 800 } },
+                // Legacy document: no projection field, so the engine uses perspective.
+                { type: 'Camera', schemaVersion: 1, value: { fov_degrees: 70, near: 0.1, far: 800 } },
+              ],
+            },
+            {
+              name: 'Map Camera',
+              kind: 'camera',
+              components: [
+                transform([0, 24, 0]),
+                {
+                  type: 'Camera',
+                  schemaVersion: 1,
+                  value: { fov_degrees: 60, near: 0.1, far: 100, projection: { kind: 'orthographic', vertical_size: 8 } },
+                },
               ],
             },
             {

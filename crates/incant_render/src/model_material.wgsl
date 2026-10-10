@@ -51,7 +51,8 @@ fn environment_direction(d:vec3f) -> vec3f {
         n=unit(mat3x3f(t,b,n)*mapped);
     }
     if material.flags.z!=0u && !front {n=-n;surface_normal=-surface_normal;}
-    let v=unit(frame.eye.xyz-in.world);let nv=max(dot(n,v),0.0);
+    // w=0 supplies a constant direction for parallel orthographic viewing rays.
+    let v=unit(frame.eye.xyz-in.world*frame.eye.w);let nv=max(dot(n,v),0.0);
     let metallic=clamp(material.factors.x*mr.b,0.0,1.0);let roughness=clamp(material.emissive_roughness.w*mr.g,0.045,1.0);
     let f0=mix(vec3f(0.04),base.rgb,metallic);
     let direct=direct_lighting(in.position.xy,in.world,n,surface_normal,v,base.rgb,metallic,roughness);

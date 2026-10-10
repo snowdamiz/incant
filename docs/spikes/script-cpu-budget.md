@@ -73,3 +73,10 @@ error categories. The hostile-error-getter test also uses 50 ms. Production
 limits and clock accounting are unchanged; the zero-budget setup test and real
 native-CPU exhaustion/rollback tests remain. All 300 local Rust tests and Clippy
 pass after this test correction. Updated Windows validation is pending.
+
+
+PR #39 merged as `72a53df050b96ab5daf74cd2d840aef6bce73356` after all twelve
+required checks passed at `12b6092`. The merged tree is exactly the tested tree.
+This also incorporates ancestor PRs #36–38, all verified contained and recorded
+as merged by GitHub. The older steering branch’s failed check is not counted
+as passed. No phase gate is approved. See [merge evidence](evidence/navigation-script-merge-2026-10-10.json).

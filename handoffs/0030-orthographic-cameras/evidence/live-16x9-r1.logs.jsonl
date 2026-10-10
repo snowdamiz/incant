@@ -1,0 +1,5 @@
+{"tick":1,"elapsed_seconds":0.016666666666666666,"level":"info","message":"{\"t\":0,\"step\":\"t0-d16-legacy\"}"}
+{"tick":11,"elapsed_seconds":0.18333333333333332,"level":"info","message":"{\"t\":10,\"step\":\"t10-d16-orthographic-v9\"}"}
+{"tick":21,"elapsed_seconds":0.35,"level":"info","message":"{\"t\":20,\"step\":\"t20-d24-orthographic-v9\"}"}
+{"tick":31,"elapsed_seconds":0.5166666666666666,"level":"info","message":"{\"t\":30,\"step\":\"t30-d24-orthographic-v6\"}"}
+{"tick":41,"elapsed_seconds":0.6833333333333338,"level":"info","message":"{\"t\":40,\"step\":\"t40-d24-perspective\"}"}

@@ -1920,6 +1920,7 @@ kbd {
  */
 .control--color,
 .control--ref,
+.control--choice,
 .control--number,
 input.control.control__input,
 .vector__axis {
@@ -1937,6 +1938,7 @@ input.control.control__input,
 
 .control--color:hover,
 .control--ref:hover,
+.control--choice:hover,
 .control--number:hover,
 input.control.control__input:hover,
 .vector__axis:hover {
@@ -1945,6 +1947,7 @@ input.control.control__input:hover,
 
 .control--color:focus-within,
 .control--ref:focus-within,
+.control--choice:focus-within,
 .control--number:focus-within,
 .vector__axis:focus-within {
   outline: 2px solid var(--color-focus);
@@ -1953,6 +1956,7 @@ input.control.control__input:hover,
 
 .control--color:has([aria-invalid='true']),
 .control--ref:has([aria-invalid='true']),
+.control--choice:has([aria-invalid='true']),
 .control--number:has([aria-invalid='true']),
 .vector__axis:has([aria-invalid='true']),
 input.control.control__input[aria-invalid='true'] {
@@ -2029,6 +2033,28 @@ input.control.control__input[data-focus-visible] {
   flex: none;
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
+}
+
+/*
+ * A short status inside a value box: "Default" for a documented default that is
+ * not authored, "Unused" for a value the current mode ignores. Text, not colour,
+ * carries the meaning; a hairline outline keeps it distinct from a unit. Pushed
+ * to the trailing edge so values and units stay aligned between rows.
+ */
+.control__tag {
+  flex: none;
+  margin-left: auto;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.control--choice .control__input {
+  font-size: var(--text-sm);
 }
 
 .swatch {

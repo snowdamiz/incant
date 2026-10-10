@@ -38,6 +38,9 @@ function isReady(read) {
         } : {},
         ...typeof raw.description === "string" ? {
             description: raw.description
+        } : {},
+        ...Object.hasOwn(raw, "default") ? {
+            default: raw.default
         } : {}
     };
     if (typeof raw.$ref === "string") {

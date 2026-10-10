@@ -109,6 +109,8 @@ export type FieldSchema = {
   /** Absence/null are authored disabled values, not schema mismatches. */
   readonly optional?: boolean;
   readonly nullable?: boolean;
+  /** Documented fallback metadata; never applied to authored project data by the bridge. */
+  readonly default?: unknown;
 } & (
   | {
       readonly type: 'string';

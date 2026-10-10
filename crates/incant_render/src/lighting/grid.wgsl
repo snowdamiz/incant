@@ -21,6 +21,10 @@ fn intersects(position:vec3f,radius:f32,id:vec3u)->bool {
     let tan_y=grid.depth.w;let tan_x=tan_y*grid.viewport.z/grid.viewport.w;
     let left=(lo.x*2.0-1.0)*tan_x;let right=(hi.x*2.0-1.0)*tan_x;
     let top=(1.0-lo.y*2.0)*tan_y;let bottom=(1.0-hi.y*2.0)*tan_y;
+    if grid.lights.w!=0u {
+        // Parallel rays form a box in each Z slice, with depth-independent XY.
+        return p.x+r>=left && p.x-r<=right && p.y+r>=bottom && p.y-r<=top;
+    }
     // Non-unit plane normals: scale sphere radius by their lengths.
     return p.x-left*p.z>=-r*sqrt(1.0+left*left)
         && right*p.z-p.x>=-r*sqrt(1.0+right*right)

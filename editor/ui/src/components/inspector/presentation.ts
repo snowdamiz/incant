@@ -1,16 +1,36 @@
 /**
  * Inspector presentation profiles: section captions, and labels or tooltips the
- * engine schema does not carry. Units, field order and the collision-mask widget
- * come from the schema (x-incant-unit, order, x-incant-widget), not from here.
+ * engine schema does not carry. Units, field order, defaults and the
+ * collision-mask widget come from the schema (x-incant-unit, order, default,
+ * x-incant-widget), not from here.
  *
  * Presentation only. Nothing here validates, converts, reorders or hides a
  * value, and the engine schema wins: a schema `title` or `description`
  * overrides the matching profile entry, and a schema `order` is kept exactly.
  */
 
+/** A short visible tag beside a value, with a full sentence for assistive tech and hover. */
+export interface FieldStatus {
+  readonly short: string;
+  readonly long: string;
+}
+
 export interface FieldHint {
   readonly title?: string;
   readonly description?: string;
+  /** Display names for a tagged union's variants, keyed by tag. Unlisted tags show as authored. */
+  readonly variants?: Readonly<Record<string, string>>;
+  /**
+   * Sentence announced with the "Default" tag when an omitted optional field is
+   * shown as its schema `default`. The value itself always comes from the schema.
+   */
+  readonly omittedNote?: string;
+  /**
+   * A tag that depends on sibling values in the same component, such as a field
+   * the current mode ignores. Returns null when there is nothing to say or the
+   * siblings are not well-formed (it never guesses or repairs).
+   */
+  readonly status?: (component: Readonly<Record<string, unknown>>) => FieldStatus | null;
   /** Presents a plain string as a stable identifier (monospace, never a reference). */
   readonly identifier?: boolean;
   /** Abbreviation in one-line list summaries ("r" for radius); the full label is spoken. */
@@ -70,7 +90,55 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
       '/shape/parts/*/shape/radius': { short: 'r' },
     },
   },
+  Camera: {
+    // One run in schema order: the projection (with its variant fields beneath
+    // it), then lens and clip planes.
+    sections: [{ title: null, keys: ['projection', 'fov_degrees', 'near', 'far'] }],
+    fields: {
+      '/projection': {
+        title: 'Projection',
+        variants: { perspective: 'Perspective', orthographic: 'Orthographic' },
+        omittedNote: 'Not authored. Cameras without a projection use the schema default.',
+      },
+      '/projection/vertical_size': { title: 'Vertical size' },
+      '/fov_degrees': {
+        title: 'Field of view',
+        status: (camera) =>
+          isOrthographicCamera(camera)
+            ? {
+                short: 'Unused',
+                long: 'Not used by orthographic projection. Kept for switching back to perspective.',
+              }
+            : null,
+      },
+      '/near': { title: 'Near clip', description: 'Distance from the camera to the near clipping plane.' },
+      '/far': { title: 'Far clip', description: 'Distance from the camera to the far clipping plane.' },
+    },
+  },
 };
+
+/**
+ * True only for a well-formed orthographic projection: exactly `kind` and a
+ * finite, positive numeric `vertical_size`. A missing, mistyped or non-positive
+ * size, or any extra field, is malformed; the Inspector reports it on the
+ * Projection row and no sibling tag is derived from it.
+ */
+export function isOrthographicCamera(camera: Readonly<Record<string, unknown>>): boolean {
+  const projection = camera.projection;
+  if (typeof projection !== 'object' || projection === null || Array.isArray(projection)) return false;
+  const record = projection as Record<string, unknown>;
+  const keys = Object.keys(record).sort();
+  const size = record.vertical_size;
+  return (
+    record.kind === 'orthographic' &&
+    keys.length === 2 &&
+    keys[0] === 'kind' &&
+    keys[1] === 'vertical_size' &&
+    typeof size === 'number' &&
+    Number.isFinite(size) &&
+    size > 0
+  );
+}
 
 /** Native component types are bare ("Collider"); the fixture prefixes "incant.". */
 export function componentPresentation(type: string): ComponentPresentation | undefined {
