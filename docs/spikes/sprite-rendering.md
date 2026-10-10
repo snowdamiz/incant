@@ -32,14 +32,43 @@ Claude's first Max-effort engine review is preserved in
 texel ties that duplicated/dropped rows under flips and changed when a source
 sheet was resized. The new GPU regression reproduced that defect before the
 fix. Nearest sampling now interpolates region-local texels and uses an integer
-`textureLoad`, with a 1/1024-texel tie tolerance toward increasing screen
-coordinate on the dominant derivative axis (X wins equal slopes). This is a
-defined sampling rule, not an assumption about GPU raster subpixel precision.
+`textureLoad`, with a derivative-scaled 1/1024-screen-pixel tie tolerance toward
+increasing screen coordinate on the dominant derivative axis (X wins equal
+slopes). This is a defined sampling rule, not a guarantee of GPU raster precision.
 Linear sampling retains its normalized-UV filtering path. The regression passes
 eight orientations (including quarter turns and a mirrored parent), scales 1–3,
 and sheets of 64 and 80 rows, with every texel represented and resized-sheet
-frames byte-identical. Full checks pass 325 Rust tests, Clippy and 53 GPU checks.
-Claude's broader corrected-renderer review remains required.
+frames byte-identical. The initial correction passed 325 Rust tests, Clippy and
+53 GPU checks.
+
+Claude's integrated round-two review accepts the duplicated-texel and sheet-resize
+corrections, but reports a magnification regression from the original fixed
+1/1024-texel tolerance. A new numerical GPU sweep reproduces exactly 15 failures
+among 70 cases before changing the shader: magnifications 1, 2, 3, 4, 5, 6 and 8,
+offsets 0, 0.625, 1, 2 and 3 in units of 1/256 screen pixel, unflipped and flipped
+on both axes. At 8x the failing widths are 7, 8, 8, 8, 8, 8 and 9 pixels rather
+than eight each. Every pixel is compared against the correctly ordered,
+independently aligned source palette; horizontal and vertical run widths are
+also checked. This is actual GPU readback, not a shader-model-only test.
+
+The old signed-unit bias spans M/1024 screen pixels at magnification M: at 4x it
+equals the observed 1/256-pixel raster step and at 8x spans two steps. Using the
+signed derivative instead yields 1/(1024 M) texel, or 1/1024 screen pixel at each
+tested scale. That is one quarter of this GPU's observed raster step and does
+not consume the next non-tie. The corrected shader passes all 70 cases, all 48
+existing orientation/scale/sheet-height combinations and all six sprite GPU tests
+on Apple M5 Pro/Metal. Scoped all-target renderer Clippy and formatting pass. The
+linear branch is unchanged. The test creates no screenshot artifact and does not
+approve appearance.
+
+Exact commands, the 15 measured failures, source hashes and the rebuilt release
+`incant_headless` hash are recorded in
+[magnification evidence](evidence/sprite-magnified-nearest-2026-10-10.json). The
+headless executable is ready for a subsequent Claude review; that review and
+hosted/cross-adapter checks remain open. This sweep does not establish floating
+point behavior at extreme magnification or large local texel coordinates near
+the 8192-region bound. No arbitrary texel-space minimum bias was added because
+it would restore the demonstrated magnification failure.
 
 The undersized-reimport diagnostic now names the sprite entity, texture ID,
 requested source region and actual cooked dimensions through a typed resource
@@ -69,7 +98,8 @@ rollback and a source-free scripted flipbook/nine-slice edit. A 25-tick save plu
 and journal bytes are unchanged. This is numerical behavior evidence, not
 appearance approval. Integrated checks also pass 420 UI tests, strict typecheck/build, generated
 contracts and seven tool tests. The core compiles for WebAssembly and iOS
-simulator. Claude Opus 5.5 Max is reviewing original engine art and real captures
-in handoff 0032. Sprite Inspector work follows the full editor redesign in 0033;
+simulator. Claude Opus 5.5 Max's first two reviews of original engine art and real
+captures are integrated in handoff 0032; verification of the derivative-scaled
+tie tolerance remains pending. Sprite Inspector work follows the full editor redesign in 0033;
 final native review and hosted CI remain open. No atlas, tilemap, sprite animation library, 2D physics or phase gate
 is claimed complete by this increment.
