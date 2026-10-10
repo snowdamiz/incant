@@ -81,6 +81,7 @@ function ListHeader({
 }
 
 const CELL_ROW = 22;
+const TABLE_FALLBACK = { height: 8 * CELL_ROW + 8, width: 320 } as const;
 
 /**
  * A long list of numbers (a navigation grid's costs). The values are text in a
@@ -306,7 +307,9 @@ function NumberTable({
   invalid: boolean;
 }) {
   const scroller = useRef<HTMLDivElement>(null);
-  const viewport = useViewport(scroller, CELL_ROW * 4);
+  // The box is at most 8 rows tall inside the Inspector, so its first render (before
+  // layout is measured) assumes that size rather than a whole panel.
+  const viewport = useViewport(scroller, CELL_ROW * 4, TABLE_FALLBACK);
   const longest = useMemo(() => values.reduce((n, v) => Math.max(n, formatNumber(v).length), 1), [values]);
   const gutter = String(Math.max(0, values.length - 1)).length;
   // Monospace at 12 px is 7.2 px per character; each cell adds 10 px of padding.

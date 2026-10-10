@@ -27,8 +27,12 @@ export interface Viewport {
  * a `step` boundary or the container is resized; callers overscan by at least one
  * step, so the mounted rows always cover what is visible.
  */
-export function useViewport(ref: RefObject<HTMLElement | null>, step: number): Viewport {
-  const [viewport, setViewport] = useState<Viewport>({ top: 0, height: FALLBACK_HEIGHT, left: 0, width: FALLBACK_WIDTH });
+export function useViewport(
+  ref: RefObject<HTMLElement | null>,
+  step: number,
+  fallback: { readonly height: number; readonly width: number } = { height: FALLBACK_HEIGHT, width: FALLBACK_WIDTH },
+): Viewport {
+  const [viewport, setViewport] = useState<Viewport>({ top: 0, height: fallback.height, left: 0, width: fallback.width });
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
@@ -36,9 +40,9 @@ export function useViewport(ref: RefObject<HTMLElement | null>, step: number): V
     const measure = () => {
       frame = 0;
       const top = Math.max(0, Math.floor(element.scrollTop / step) * step);
-      const height = element.clientHeight || FALLBACK_HEIGHT;
+      const height = element.clientHeight || fallback.height;
       const left = Math.max(0, Math.floor(element.scrollLeft / step) * step);
-      const width = element.clientWidth || FALLBACK_WIDTH;
+      const width = element.clientWidth || fallback.width;
       setViewport((current) =>
         current.top === top && current.height === height && current.left === left && current.width === width ? current : { top, height, left, width },
       );
@@ -55,7 +59,7 @@ export function useViewport(ref: RefObject<HTMLElement | null>, step: number): V
       observer.disconnect();
       if (frame !== 0) cancelAnimationFrame(frame);
     };
-  }, [ref, step]);
+  }, [ref, step, fallback.height, fallback.width]);
   return viewport;
 }
 
