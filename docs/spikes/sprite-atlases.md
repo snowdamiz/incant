@@ -62,3 +62,34 @@ remain open; passing numerical tests do not replace that evidence.
 Logs: `/tmp/incant-atlas-integrated-tests.log`,
 `/tmp/incant-atlas-integrated-clippy-r3.log`, and
 `/tmp/incant-atlas-integrated-all-gpu.log`.
+
+## Runtime foundation and wide-span integration, 2026-10-10
+
+The atlas branch integrates the sprite candidate `e4ec2a1`, including PR48's
+native runtime/CRT foundation and the reviewed CI tool-build follow-up. Conflict
+resolution retains stable atlas frame lookup and passes its resolved integer
+pixel rectangle to the nearest span splitter and typed diagnostic. The shader is
+byte-identical to the sprite candidate. Geometry tests retain the typed
+`SpriteRegion` wrapper; both ordinary-sprite and atlas GPU suites remain enabled.
+
+The integrated source passes 365 normal workspace tests and all 56 ignored GPU
+tests, including stable atlas-frame relocation/retained scenes and the 864-case
+wide nearest sweep. Workspace Clippy, formatting, 25 tool tests, 420 UI tests,
+strict UI/SDK builds, workflow lint and the authoring-free dependency guard pass.
+The combined editor/headless/cook/collaboration release command succeeds; generated
+schemas and SDK are unchanged by the merge. The GPU invocation reuses the workspace
+graph instead of rebuilding a package-specific graph.
+
+On headless SHA-256
+`0257f7617d81a479788aaacd40697fe524978ace4a1c136e3a3b057ec0ffd8aa`,
+the atlas probe passes stable asset/frame IDs, actual packed-frame relocation,
+exact import Undo/Redo, source removal and exact saved/repeated runtime state.
+Ordinary sprites and both camera projections pass their public saved-workflow
+probes on the same executable. Authored project/journal bytes remain unchanged
+by play. These still exercise the legacy PlaySession; they do not establish
+migration to native gameplay. The eval check remains schema-only.
+
+Evidence is in [integration results](evidence/sprite-atlas-runtime-spans-2026-10-10.json).
+Claude's rendered wide-region review currently uses the ordinary-sprite frozen
+candidate, not this atlas binary. Atlas-specific rendered/native review, hosted
+checks and phone/performance gates remain open.

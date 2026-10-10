@@ -1,3 +1,108 @@
+## Wide-region precision follow-up — preserve rounds one through three
+
+The immediately interrupted invocation received the old packet after preparation
+failed on the read-only binary. That is resolved: this packet and binary.json now
+identify the NEW candidate. Continue Opus 5.5 at explicitly verified Max over ACP.
+Your third review is integrated. Astra reproduced the wide-region defect and
+fixed it in source 0494b40cf8fcc5e1ad0fc689655a62cb264a2f50. Read
+artifacts/tools/wide-fix-evidence.json and source snapshots under
+artifacts/tools/wide-source/: this child checkout's older Rust files are not the
+candidate source. Do not build or edit Rust/shaders here.
+
+The candidate splits nearest geometry into source spans of at most 512 texels,
+interpolates small local coordinates and carries an exact flat integer base.
+Fractional bias is evaluated before adding that base. It preserves the original
+geometry/source mapping, flips and nine-slice cuts; linear sampling and tone stay
+unchanged. Vertex size 64 bytes and draw batches stay unchanged; wide nearest
+regions add CPU/vertex work (at most 1944 vertices/sprite). The total 128 MiB geometry
+bound is enforced before growing the CPU buffer or uploading the next texture.
+
+Numerical checks: initial large-edge sweep 34/600 failures, arithmetic-only
+attempt 24/600. Candidate passes 600 outer-edge plus 264 internal-span cases on
+Metal, widths 512–8192 and scales 1/2/4/8/16/32, both axes/flips and boundary offsets.
+Independent aligned crops now identify EVERY source texel with unique colors;
+review caught a weaker periodic palette before completion. Deliberately omitting
+the base fails 720/864; restored candidate passes all cases and all 7 sprite GPU
+tests. Full 360 normal/55 GPU workspace tests, Clippy and release build pass.
+
+Use the newly frozen artifacts/tools/incant_headless and binary.json, verify
+hashes. Prior a4b5ddb9 binary/metadata are preserved as pre-wide-incant_headless
+and pre-wide-binary.json. Keep every earlier report/artifact. Re-run your
+independent large-region sweep, particularly the J/I failures and interior 512
+boundaries, plus representative mirrors, rolls, offsets and nine-slice cases.
+Check sheet-resize invariance, unchanged linear/tone behavior and repeated fresh
+source-free execution. Look for tessellation seams and falsify the proposed fix.
+Return scoped rendered/numerical acceptance or concrete failures with provenance.
+Do not infer portability, phone performance, native editor acceptance or phase
+completion. The separate near-tie camera follower defect remains open.
+
+Resource budget for this new pass: each renderer invocation at most 128 frames
+and 256 MiB raw; at most 2048 frames and 1 GiB raw across the whole pass, excluding
+already-preserved prior rounds. Prefer small targeted frames; stop/report if the
+budget is insufficient. Never overwrite evidence. No native app work or UI edits:
+0033 still owns that. No Cargo, engine changes, merging or accounts here.
+
+## Magnification correction follow-up — preserve all earlier evidence
+
+Continue Opus 5.5 at explicitly verified Max through ACP. Astra reproduced your
+magnified-edge defect in the real GPU path: 15/70 failures before, 0/70 after.
+Source f9aa1da changes the nearest tolerance from sign(direction)/1024 to
+ direction/1024, so it stays 1/1024 screen pixel as magnification increases.
+All six sprite GPU tests and 48 existing orientation/scale/sheet-height cases
+pass; scoped renderer Clippy and formatting pass. Read the parent evidence copy
+at artifacts/tools/magnification-fix-evidence.json. The new immutable tool and
+binary.json identify this exact tested build; the previous corrected-tie build
+is preserved as pre-magnification-incant_headless and its metadata. Verify hashes.
+
+Re-run your independent magnified/offset sweep and real-engine rendered review,
+including near-boundary offsets, flips, mirrors, rolls and resized-sheet
+invariance; retain both before and after evidence. Verify linear and tone paths
+remain unchanged and repeated fresh/source-free runs agree. Add any focused cases
+needed to falsify the correction. Return a scoped verdict with numerical and
+rendered evidence; do not infer phone performance or native editor acceptance.
+Do not rewrite original outcomes. No Rust/shader/build changes or Cargo here.
+The app-wide redesign remains in0033; this session owns sprite pixels, art and
+rendered analysis only, not the Inspector. No merging, signing or phase approval.
+
+## Corrected-renderer follow-up — final plan revision 6
+
+Your first engine review is integrated and preserved. Continue the same Opus 5.5
+Max session for a focused follow-up; do not restart art or the Inspector. Read
+PLAN.md and docs/spikes/performance-plan-v6-review.md: the final update is in this
+checkout, with hosted device tests and revised prerequisites. It does not imply
+the runtime migration or any device gate is complete in this frozen build.
+
+Astra reproduced your duplicated-texel defect before the change. The correction
+in source c2c7758 uses region-local texel coordinates and textureLoad for nearest
+sampling. Within a 1/1024-texel band, ties choose the side of increasing screen
+coordinate on the dominant derivative axis (X wins equal slopes). This avoids
+cancelling derivatives at oblique angles. Linear sampling keeps its previous
+path. Read the shader and docs/spikes/sprite-rendering.md for the exact rule.
+All 325 Rust tests, Clippy, 53 GPU checks and 10 tool tests pass. The new regression
+covers eight orientations, a mirrored parent, scales 1/2/3 and 64/80-row sheets;
+it compares each texel and requires full resized-sheet frames to match exactly.
+
+The new immutable artifacts/tools/incant_headless and binary.json identify this
+corrected build. Your original is preserved as artifacts/tools/pre-ties-incant_headless
+and pre-ties-binary.json. Verify SHA before/after calls. Keep all first-round
+art/evidence/results; use distinct follow-up output paths and result sections.
+
+Re-run the real-engine helper and independent analysis, check the odd grid-pivot
+rulers under flips/mirrors/quarter turns, resized-sheet invariance, aligned
+placements, nine-slice and fractional/rolled views. Update only the documented
+nearest tie expectation where needed, never hide unrelated differences. Add
+near-boundary cases if the new rule exposes another issue. Verify unchanged
+linear and tone behavior, repeated source-free runs, and inspect real pixels.
+Return scoped acceptance or concrete failures with retained before/after evidence.
+
+Your undersized-reimport diagnostics request remains with Astra. Keep the neutral
+curve and linear-light blending for this follow-up; an authored exact display
+option can be per-camera when implemented. Optional sprite-grid snapping is
+separate work. These are recorded recommendations, not questions that should
+block this review. The pixel-camera near-tie follower defect is separate and is
+not claimed fixed. Sprite Inspector/native review still follows 0033. No Cargo,
+Rust/shader edits, account changes, merging or phase approval in this worktree.
+
 # Sprite presentation and real rendered review
 
 Status: engine review ready; use the supplied tested frozen engine and schemas. Read CLAUDE.md and docs/spikes/sprite-rendering.md.

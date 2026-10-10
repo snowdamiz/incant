@@ -1,0 +1,852 @@
+{
+ "before": {
+  "run": "p1",
+  "binary": "pre-ties",
+  "binary_source_commit": "39e5c38107451ba44a02ef7b80f27bef11d4141d",
+  "binary_sha256_start": "848b8294854add3bc672e6ab97e1c3dc1f5f39a9c5b1c234e61e5edace5820ba"
+ },
+ "after": {
+  "run": "c1",
+  "binary": "corrected",
+  "binary_source_commit": "c2c7758c14c37d36aa13e322aa2c87e63ce489ad",
+  "binary_sha256_start": "fd65133fc98a0c6d533f23d9583a820271858eecdb0849b44f8b7e996a5e072b"
+ },
+ "compared_files": 334,
+ "only_before": [],
+ "only_after": [],
+ "totals": {
+  "identical_files": 296,
+  "texel tie": 62365,
+  "changed_files": 38,
+  "changed_pixels": 62365
+ },
+ "files": {
+  "reimport/1-sheet-teal-pp-A-320x180.png": {
+   "changed_pixels": 222,
+   "classified": true,
+   "by_class": {
+    "texel tie": 222
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 222
+   },
+   "by_top_sprite": {
+    "A:odd-grid3": 48,
+    "A:odd-grid-rot180": 48,
+    "A:odd-grid1": 42,
+    "A:odd-grid-mirror": 42,
+    "A:odd-grid2": 42
+   }
+  },
+  "reimport/1-sheet-teal-pp-B-320x180.png": {
+   "changed_pixels": 66,
+   "classified": true,
+   "by_class": {
+    "texel tie": 66
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 66
+   },
+   "by_top_sprite": {
+    "B:simple72x44": 63,
+    "B:rot12": 2,
+    "B:density32": 1
+   }
+  },
+  "reimport/1-sheet-teal-pp-D-320x180.png": {
+   "changed_pixels": 40,
+   "classified": true,
+   "by_class": {
+    "texel tie": 40
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 40
+   },
+   "by_top_sprite": {
+    "D:sky-nearest": 40
+   }
+  },
+  "reimport/6-sheet-restore-pp-A-320x180.png": {
+   "changed_pixels": 222,
+   "classified": true,
+   "by_class": {
+    "texel tie": 222
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 222
+   },
+   "by_top_sprite": {
+    "A:odd-grid3": 48,
+    "A:odd-grid-rot180": 48,
+    "A:odd-grid1": 42,
+    "A:odd-grid-mirror": 42,
+    "A:odd-grid2": 42
+   }
+  },
+  "reimport/6-sheet-restore-pp-B-320x180.png": {
+   "changed_pixels": 66,
+   "classified": true,
+   "by_class": {
+    "texel tie": 66
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 66
+   },
+   "by_top_sprite": {
+    "B:simple72x44": 63,
+    "B:rot12": 2,
+    "B:density32": 1
+   }
+  },
+  "reimport/6-sheet-restore-pp-D-320x180.png": {
+   "changed_pixels": 40,
+   "classified": true,
+   "by_class": {
+    "texel tie": 40
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 40
+   },
+   "by_top_sprite": {
+    "D:sky-nearest": 40
+   }
+  },
+  "reimport/7-sheet-tall-orthof-D-960x540.png": {
+   "changed_pixels": 16,
+   "classified": true,
+   "by_class": {
+    "texel tie": 16
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 16
+   },
+   "by_top_sprite": {
+    "D:crate-rot-nearest": 8,
+    "D:tiles-rot:1": 5,
+    "D:tiles-rot:2": 2,
+    "D:tiles-rot:0": 1
+   }
+  },
+  "reimport/7-sheet-tall-pp-A-320x180.png": {
+   "changed_pixels": 222,
+   "classified": true,
+   "by_class": {
+    "texel tie": 222
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 222
+   },
+   "by_top_sprite": {
+    "A:odd-grid3": 47,
+    "A:odd-grid-rot180": 47,
+    "A:odd-grid1": 43,
+    "A:odd-grid-mirror": 43,
+    "A:odd-grid2": 35,
+    "A:odd-grid0": 7
+   }
+  },
+  "reimport/7-sheet-tall-pp-B-320x180.png": {
+   "changed_pixels": 279,
+   "classified": true,
+   "by_class": {
+    "texel tie": 279
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 279
+   },
+   "by_top_sprite": {
+    "B:density32": 127,
+    "B:nine44x9": 87,
+    "B:simple72x44": 63,
+    "B:rot12": 2
+   }
+  },
+  "reimport/7-sheet-tall-pp-D-320x180.png": {
+   "changed_pixels": 20,
+   "classified": true,
+   "by_class": {
+    "texel tie": 20
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 20
+   },
+   "by_top_sprite": {
+    "D:sky-nearest": 20
+   }
+  },
+  "reimport/7-sheet-tall-pp-F-320x180.png": {
+   "changed_pixels": 1935,
+   "classified": true,
+   "by_class": {
+    "texel tie": 1935
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 1935
+   },
+   "by_top_sprite": {
+    "F:TIES 3X:4:rot90": 186,
+    "F:TIES 3X:7:rot90-flip-y": 186,
+    "F:TIES 3X:2:flip-y": 171,
+    "F:TIES 3X:5:rot270": 169,
+    "F:TIES 3X:6:rot90-flip-x": 169,
+    "F:TIES 3X:9:mirror": 156,
+    "F:TIES 3X:8:rot180": 135,
+    "F:TIES 3X:0:none": 126,
+    "F:TIES 3X:1:flip-x": 126,
+    "F:TIES 3X:3:both": 63,
+    "F:TIES 1X:1:flip-x": 48,
+    "F:TIES 1X:3:both": 48,
+    "F:TIES 1X:4:rot90": 48,
+    "F:TIES 1X:8:rot180": 48,
+    "F:TIES 1X:9:mirror": 48,
+    "F:TIES 1X:7:rot90-flip-y": 47,
+    "F:TIES 1X:6:rot90-flip-x": 42,
+    "F:TIES 1X:0:none": 42,
+    "F:TIES 1X:2:flip-y": 42,
+    "F:TIES 1X:5:rot270": 35
+   }
+  },
+  "reimport/7-sheet-tall-pp-G-1024x640.png": {
+   "changed_pixels": 15447,
+   "classified": true,
+   "by_class": {
+    "texel tie": 15447
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 15447
+   },
+   "by_top_sprite": {
+    "G:8x:plain:3": 636,
+    "G:8x:plain:4": 636,
+    "G:8x:plain:5": 636,
+    "G:8x:flip:3": 636,
+    "G:8x:flip:4": 636,
+    "G:8x:flip:0": 586,
+    "G:8x:flip:1": 586,
+    "G:8x:flip:2": 586,
+    "G:6x:plain:3": 468,
+    "G:6x:plain:4": 468,
+    "G:6x:flip:3": 468,
+    "G:6x:flip:4": 468,
+    "G:5x:plain:3": 384,
+    "G:5x:plain:4": 384,
+    "G:5x:flip:3": 384,
+    "G:5x:flip:4": 384,
+    "G:6x:plain:0": 360,
+    "G:6x:plain:2": 360,
+    "G:8x:plain:0": 336,
+    "G:8x:plain:1": 336,
+    "G:8x:plain:2": 336,
+    "G:4x:plain:3": 300,
+    "G:4x:plain:4": 300,
+    "G:5x:plain:2": 268,
+    "G:6x:plain:1": 252,
+    "G:6x:flip:0": 243,
+    "G:6x:flip:2": 243,
+    "G:3x:plain:2": 216,
+    "G:5x:plain:0": 210,
+    "G:5x:plain:1": 210,
+    "G:5x:flip:2": 202,
+    "G:3x:flip:2": 201,
+    "G:4x:flip:0": 190,
+    "G:4x:flip:1": 190,
+    "G:4x:flip:2": 190,
+    "G:4x:plain:0": 168,
+    "G:4x:plain:1": 168,
+    "G:4x:plain:2": 168,
+    "G:5x:flip:0": 140,
+    "G:5x:flip:1": 140,
+    "G:3x:plain:0": 126,
+    "G:3x:plain:1": 126,
+    "G:6x:flip:1": 126,
+    "G:2x:flip:0": 124,
+    "G:2x:flip:1": 124,
+    "G:2x:flip:2": 124,
+    "G:3x:flip:0": 105,
+    "G:3x:flip:1": 105,
+    "G:2x:plain:0": 84,
+    "G:2x:plain:1": 84,
+    "G:2x:plain:2": 84,
+    "G:1x:flip:0": 47,
+    "G:1x:flip:1": 47,
+    "G:1x:flip:2": 47,
+    "G:1x:plain:0": 7,
+    "G:1x:plain:1": 7,
+    "G:1x:plain:2": 7
+   }
+  },
+  "shots/ortho3-A-960x540-r1.png": {
+   "changed_pixels": 564,
+   "classified": true,
+   "by_class": {
+    "texel tie": 564
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 564
+   },
+   "by_top_sprite": {
+    "A:odd-grid-rot180": 186,
+    "A:odd-grid1": 126,
+    "A:odd-grid2": 126,
+    "A:odd-grid3": 126
+   }
+  },
+  "shots/ortho3-B-960x540-r1.png": {
+   "changed_pixels": 1057,
+   "classified": true,
+   "by_class": {
+    "texel tie": 1057
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 1057
+   },
+   "by_top_sprite": {
+    "B:simple72x44": 567,
+    "B:density32": 340,
+    "B:nine44x9": 120,
+    "B:nine8x10": 23,
+    "B:rot12": 7
+   }
+  },
+  "shots/ortho3-D-960x540-r1.png": {
+   "changed_pixels": 70,
+   "classified": true,
+   "by_class": {
+    "texel tie": 70
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 70
+   },
+   "by_top_sprite": {
+    "D:sky-nearest": 60,
+    "D:crate-rot-nearest": 7,
+    "D:tiles-rot:1": 1,
+    "D:tiles-rot:2": 1,
+    "D:tiles-rot:0": 1
+   }
+  },
+  "shots/orthof-B-960x540-r1.png": {
+   "changed_pixels": 2,
+   "classified": true,
+   "by_class": {
+    "texel tie": 2
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 2
+   },
+   "by_top_sprite": {
+    "B:rot12": 2
+   }
+  },
+  "shots/orthof-D-960x540-r1.png": {
+   "changed_pixels": 16,
+   "classified": true,
+   "by_class": {
+    "texel tie": 16
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 16
+   },
+   "by_top_sprite": {
+    "D:crate-rot-nearest": 8,
+    "D:tiles-rot:1": 5,
+    "D:tiles-rot:2": 2,
+    "D:tiles-rot:0": 1
+   }
+  },
+  "shots/pp-A-320x180-r1.png": {
+   "changed_pixels": 222,
+   "classified": true,
+   "by_class": {
+    "texel tie": 222
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 222
+   },
+   "by_top_sprite": {
+    "A:odd-grid3": 48,
+    "A:odd-grid-rot180": 48,
+    "A:odd-grid1": 42,
+    "A:odd-grid-mirror": 42,
+    "A:odd-grid2": 42
+   }
+  },
+  "shots/pp-A-960x540-r1.png": {
+   "changed_pixels": 1998,
+   "classified": true,
+   "by_class": {
+    "texel tie": 1998
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 1998
+   },
+   "by_top_sprite": {
+    "A:odd-grid3": 432,
+    "A:odd-grid-rot180": 432,
+    "A:odd-grid1": 378,
+    "A:odd-grid-mirror": 378,
+    "A:odd-grid2": 378
+   }
+  },
+  "shots/pp-A-odd-319x179-r1.png": {
+   "changed_pixels": 222,
+   "classified": true,
+   "by_class": {
+    "texel tie": 222
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 222
+   },
+   "by_top_sprite": {
+    "A:odd-grid3": 48,
+    "A:odd-grid-rot180": 48,
+    "A:odd-grid1": 42,
+    "A:odd-grid-mirror": 42,
+    "A:odd-grid2": 42
+   }
+  },
+  "shots/pp-A-sub-320x180-r1.png": {
+   "changed_pixels": 222,
+   "classified": true,
+   "by_class": {
+    "texel tie": 222
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 222
+   },
+   "by_top_sprite": {
+    "A:odd-grid3": 48,
+    "A:odd-grid-rot180": 48,
+    "A:odd-grid1": 42,
+    "A:odd-grid-mirror": 42,
+    "A:odd-grid2": 42
+   }
+  },
+  "shots/pp-B-320x180-r1.png": {
+   "changed_pixels": 66,
+   "classified": true,
+   "by_class": {
+    "texel tie": 66
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 66
+   },
+   "by_top_sprite": {
+    "B:simple72x44": 63,
+    "B:rot12": 2,
+    "B:density32": 1
+   }
+  },
+  "shots/pp-B-960x540-r1.png": {
+   "changed_pixels": 594,
+   "classified": true,
+   "by_class": {
+    "texel tie": 594
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 594
+   },
+   "by_top_sprite": {
+    "B:simple72x44": 567,
+    "B:rot12": 18,
+    "B:density32": 9
+   }
+  },
+  "shots/pp-D-320x180-r1.png": {
+   "changed_pixels": 40,
+   "classified": true,
+   "by_class": {
+    "texel tie": 40
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 40
+   },
+   "by_top_sprite": {
+    "D:sky-nearest": 40
+   }
+  },
+  "shots/pp-D-960x540-r1.png": {
+   "changed_pixels": 360,
+   "classified": true,
+   "by_class": {
+    "texel tie": 360
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 360
+   },
+   "by_top_sprite": {
+    "D:sky-nearest": 360
+   }
+  },
+  "shots/pp-F-320x180-r1.png": {
+   "changed_pixels": 1239,
+   "classified": true,
+   "by_class": {
+    "texel tie": 1239
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 1239
+   },
+   "by_top_sprite": {
+    "F:TIES 3X:2:flip-y": 186,
+    "F:TIES 3X:5:rot270": 169,
+    "F:TIES 3X:8:rot180": 152,
+    "F:TIES 3X:3:both": 84,
+    "F:TIES 3X:4:rot90": 84,
+    "F:TIES 3X:6:rot90-flip-x": 84,
+    "F:TIES 3X:7:rot90-flip-y": 84,
+    "F:TIES 1X:3:both": 48,
+    "F:TIES 1X:7:rot90-flip-y": 48,
+    "F:TIES 1X:8:rot180": 48,
+    "F:TIES 1X:1:flip-x": 42,
+    "F:TIES 1X:5:rot270": 42,
+    "F:TIES 1X:9:mirror": 42,
+    "F:TIES 1X:2:flip-y": 42,
+    "F:TIES 1X:4:rot90": 42,
+    "F:TIES 3X:9:mirror": 42
+   }
+  },
+  "shots/pp-F-960x540-r1.png": {
+   "changed_pixels": 11151,
+   "classified": true,
+   "by_class": {
+    "texel tie": 11151
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 11151
+   },
+   "by_top_sprite": {
+    "F:TIES 3X:2:flip-y": 1674,
+    "F:TIES 3X:5:rot270": 1521,
+    "F:TIES 3X:8:rot180": 1368,
+    "F:TIES 3X:3:both": 756,
+    "F:TIES 3X:4:rot90": 756,
+    "F:TIES 3X:6:rot90-flip-x": 756,
+    "F:TIES 3X:7:rot90-flip-y": 756,
+    "F:TIES 1X:3:both": 432,
+    "F:TIES 1X:7:rot90-flip-y": 432,
+    "F:TIES 1X:8:rot180": 432,
+    "F:TIES 1X:1:flip-x": 378,
+    "F:TIES 1X:5:rot270": 378,
+    "F:TIES 1X:9:mirror": 378,
+    "F:TIES 1X:2:flip-y": 378,
+    "F:TIES 1X:4:rot90": 378,
+    "F:TIES 3X:9:mirror": 378
+   }
+  },
+  "shots/pp-G-1024x640-r1.png": {
+   "changed_pixels": 11998,
+   "classified": true,
+   "by_class": {
+    "texel tie": 11998
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 11998
+   },
+   "by_top_sprite": {
+    "G:8x:plain:3": 636,
+    "G:8x:plain:4": 636,
+    "G:8x:plain:5": 636,
+    "G:8x:flip:0": 636,
+    "G:8x:flip:1": 636,
+    "G:8x:flip:2": 636,
+    "G:8x:flip:3": 636,
+    "G:8x:flip:4": 636,
+    "G:6x:plain:3": 468,
+    "G:6x:plain:4": 468,
+    "G:6x:flip:3": 468,
+    "G:6x:flip:4": 468,
+    "G:5x:plain:3": 384,
+    "G:5x:plain:4": 384,
+    "G:5x:flip:3": 384,
+    "G:5x:flip:4": 384,
+    "G:4x:plain:3": 300,
+    "G:4x:plain:4": 300,
+    "G:4x:flip:0": 300,
+    "G:4x:flip:1": 300,
+    "G:4x:flip:2": 300,
+    "G:6x:flip:0": 243,
+    "G:6x:flip:2": 243,
+    "G:5x:flip:2": 136,
+    "G:2x:flip:0": 132,
+    "G:2x:flip:1": 132,
+    "G:2x:flip:2": 132,
+    "G:3x:plain:2": 126,
+    "G:3x:flip:2": 126,
+    "G:6x:plain:0": 126,
+    "G:6x:plain:2": 126,
+    "G:6x:flip:1": 126,
+    "G:5x:plain:2": 70,
+    "G:5x:flip:0": 70,
+    "G:5x:flip:1": 70,
+    "G:1x:flip:0": 48,
+    "G:1x:flip:1": 48,
+    "G:1x:flip:2": 48
+   }
+  },
+  "shots/roll7-B-960x540-r1.png": {
+   "changed_pixels": 120,
+   "classified": true,
+   "by_class": {
+    "texel tie": 120
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 120
+   },
+   "by_top_sprite": {
+    "B:simple72x44": 20,
+    "B:density8": 17,
+    "B:flip2": 16,
+    "B:nine72x44": 12,
+    "B:flip1": 11,
+    "B:flip0": 10,
+    "B:nine44x9": 8,
+    "B:flip3": 8,
+    "B:density32": 7,
+    "B:background": 3,
+    "B:rot12": 3,
+    "B:label:LINEAR:168,120": 2,
+    "B:nine8x10": 1,
+    "B:nine6x30": 1,
+    "B:label:DENSITY 8:8,120": 1
+   }
+  },
+  "shots/roll7-D-960x540-r1.png": {
+   "changed_pixels": 86,
+   "classified": true,
+   "by_class": {
+    "texel tie": 86
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 86
+   },
+   "by_top_sprite": {
+    "D:orb-nearest": 28,
+    "D:background": 7,
+    "D:crate-rot-nearest": 7,
+    "D:wisp2x-nearest": 6,
+    "D:sky-nearest": 6,
+    "D:tone8-tint": 5,
+    "D:tiles0:11": 4,
+    "D:tiles0:9": 3,
+    "D:tiles0:10": 3,
+    "D:tiles0:5": 2,
+    "D:tiles0:7": 2,
+    "D:tiles0:13": 2,
+    "D:tone16": 2,
+    "D:tiles0:6": 1,
+    "D:tiles0:4": 1,
+    "D:tiles0:12": 1,
+    "D:tiles0:14": 1,
+    "D:tiles0:17": 1,
+    "D:tiles0:16": 1,
+    "D:tone8": 1,
+    "D:label:16-BIT:140,148": 1,
+    "D:tiles-rot:2": 1
+   }
+  },
+  "shots/roll7-E-960x540-r1.png": {
+   "changed_pixels": 62,
+   "classified": true,
+   "by_class": {
+    "texel tie": 62
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 60,
+    "linear top": 2
+   },
+   "by_top_sprite": {
+    "E:dialog": 24,
+    "E:ground9": 5,
+    "E:crate": 4,
+    "E:ground5": 3,
+    "E:wisp": 2,
+    "E:crate3": 2,
+    "E:ground2": 2,
+    "E:ground6": 2,
+    "E:ground7": 2,
+    "E:crate2": 2,
+    "E:ground11": 2,
+    "E:label:A WISP STIRS.:160,20": 1,
+    "E:label:FOLLOW THE LIGHT:160,30": 1,
+    "E:sky": 1,
+    "E:star9": 1,
+    "E:star10": 1,
+    "E:gem": 1,
+    "E:gem-glow": 1,
+    "E:ground4": 1,
+    "E:ground8": 1,
+    "E:ground3": 1,
+    "E:ground12": 1,
+    "E:ground14": 1
+   }
+  },
+  "source-free/orthof-D-960x540.png": {
+   "changed_pixels": 16,
+   "classified": true,
+   "by_class": {
+    "texel tie": 16
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 16
+   },
+   "by_top_sprite": {
+    "D:crate-rot-nearest": 8,
+    "D:tiles-rot:1": 5,
+    "D:tiles-rot:2": 2,
+    "D:tiles-rot:0": 1
+   }
+  },
+  "source-free/pp-A-320x180.png": {
+   "changed_pixels": 222,
+   "classified": true,
+   "by_class": {
+    "texel tie": 222
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 222
+   },
+   "by_top_sprite": {
+    "A:odd-grid3": 48,
+    "A:odd-grid-rot180": 48,
+    "A:odd-grid1": 42,
+    "A:odd-grid-mirror": 42,
+    "A:odd-grid2": 42
+   }
+  },
+  "source-free/pp-B-320x180.png": {
+   "changed_pixels": 66,
+   "classified": true,
+   "by_class": {
+    "texel tie": 66
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 66
+   },
+   "by_top_sprite": {
+    "B:simple72x44": 63,
+    "B:rot12": 2,
+    "B:density32": 1
+   }
+  },
+  "source-free/pp-D-320x180.png": {
+   "changed_pixels": 40,
+   "classified": true,
+   "by_class": {
+    "texel tie": 40
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 40
+   },
+   "by_top_sprite": {
+    "D:sky-nearest": 40
+   }
+  },
+  "source-free/pp-F-320x180.png": {
+   "changed_pixels": 1239,
+   "classified": true,
+   "by_class": {
+    "texel tie": 1239
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 1239
+   },
+   "by_top_sprite": {
+    "F:TIES 3X:2:flip-y": 186,
+    "F:TIES 3X:5:rot270": 169,
+    "F:TIES 3X:8:rot180": 152,
+    "F:TIES 3X:3:both": 84,
+    "F:TIES 3X:4:rot90": 84,
+    "F:TIES 3X:6:rot90-flip-x": 84,
+    "F:TIES 3X:7:rot90-flip-y": 84,
+    "F:TIES 1X:3:both": 48,
+    "F:TIES 1X:7:rot90-flip-y": 48,
+    "F:TIES 1X:8:rot180": 48,
+    "F:TIES 1X:1:flip-x": 42,
+    "F:TIES 1X:5:rot270": 42,
+    "F:TIES 1X:9:mirror": 42,
+    "F:TIES 1X:2:flip-y": 42,
+    "F:TIES 1X:4:rot90": 42,
+    "F:TIES 3X:9:mirror": 42
+   }
+  },
+  "source-free/pp-G-1024x640.png": {
+   "changed_pixels": 11998,
+   "classified": true,
+   "by_class": {
+    "texel tie": 11998
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 11998
+   },
+   "by_top_sprite": {
+    "G:8x:plain:3": 636,
+    "G:8x:plain:4": 636,
+    "G:8x:plain:5": 636,
+    "G:8x:flip:0": 636,
+    "G:8x:flip:1": 636,
+    "G:8x:flip:2": 636,
+    "G:8x:flip:3": 636,
+    "G:8x:flip:4": 636,
+    "G:6x:plain:3": 468,
+    "G:6x:plain:4": 468,
+    "G:6x:flip:3": 468,
+    "G:6x:flip:4": 468,
+    "G:5x:plain:3": 384,
+    "G:5x:plain:4": 384,
+    "G:5x:flip:3": 384,
+    "G:5x:flip:4": 384,
+    "G:4x:plain:3": 300,
+    "G:4x:plain:4": 300,
+    "G:4x:flip:0": 300,
+    "G:4x:flip:1": 300,
+    "G:4x:flip:2": 300,
+    "G:6x:flip:0": 243,
+    "G:6x:flip:2": 243,
+    "G:5x:flip:2": 136,
+    "G:2x:flip:0": 132,
+    "G:2x:flip:1": 132,
+    "G:2x:flip:2": 132,
+    "G:3x:plain:2": 126,
+    "G:3x:flip:2": 126,
+    "G:6x:plain:0": 126,
+    "G:6x:plain:2": 126,
+    "G:6x:flip:1": 126,
+    "G:5x:plain:2": 70,
+    "G:5x:flip:0": 70,
+    "G:5x:flip:1": 70,
+    "G:1x:flip:0": 48,
+    "G:1x:flip:1": 48,
+    "G:1x:flip:2": 48
+   }
+  },
+  "source-free/roll7-B-960x540.png": {
+   "changed_pixels": 120,
+   "classified": true,
+   "by_class": {
+    "texel tie": 120
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 120
+   },
+   "by_top_sprite": {
+    "B:simple72x44": 20,
+    "B:density8": 17,
+    "B:flip2": 16,
+    "B:nine72x44": 12,
+    "B:flip1": 11,
+    "B:flip0": 10,
+    "B:nine44x9": 8,
+    "B:flip3": 8,
+    "B:density32": 7,
+    "B:background": 3,
+    "B:rot12": 3,
+    "B:label:LINEAR:168,120": 2,
+    "B:nine8x10": 1,
+    "B:nine6x30": 1,
+    "B:label:DENSITY 8:8,120": 1
+   }
+  }
+ },
+ "seconds": 96.5
+}
