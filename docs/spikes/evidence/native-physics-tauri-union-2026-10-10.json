@@ -1,0 +1,76 @@
+{
+  "integration_head": "c7dbe0272a693a22be5e49403fffa9503c47537c",
+  "integration_tree": "ee4978611ea68ff829453041d2d12355fb7eb321",
+  "tauri_parent": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+  "prior_physics_evidence_head": "e0e9843ed5996031d470ae5ffb079621d920fef5",
+  "scope": "Editor build context only; prior physics/audio runtime sources and normal dependency graph are unchanged. Root lock adds two build-only edges between existing Tauri packages. Prior shipping binary identities remain prior observed artifacts, not rebuilt artifacts for this source-only editor union.",
+  "runtime_source_matches": "32a720cebbb688164c71024dfe7c600b94473858",
+  "audio_source_matches": "8fef22cb3a101270cc4a6527ffe8b09cbef75ec2",
+  "logs": [
+    {
+      "command": "./tools/cargo test -j2 --workspace --release --locked --bin incant_editor",
+      "exit_code": 0,
+      "log": "/tmp/incant-native-physics-tauri-default-tests.log",
+      "sha256": "2e24eba714c5fe74495ac92dd2e3e94b5329c6eccb56ba7f779c1b93c2204f25",
+      "result_lines": [
+        "    Finished `release` profile [optimized] target(s) in 14.27s",
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s"
+      ]
+    },
+    {
+      "command": "./tools/cargo test -j2 --workspace --release --locked --bin incant_editor --features incant_editor/custom-protocol",
+      "exit_code": 0,
+      "log": "/tmp/incant-native-physics-tauri-custom-tests.log",
+      "sha256": "be64b0e73bcd168d7ba4096f0174d99ee3c0a676a6f294890ba6b433d29c0bb4",
+      "result_lines": [
+        "    Finished `release` profile [optimized] target(s) in 13.95s",
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s"
+      ]
+    },
+    {
+      "command": "./tools/cargo clippy -j2 --workspace --bin incant_editor --locked -- -D warnings",
+      "exit_code": 0,
+      "log": "/tmp/incant-native-physics-tauri-default-clippy.log",
+      "sha256": "e236396254d31fab77d9f11b9dbb27e89a722fe89bee648def3d79b8792ec16b",
+      "result_lines": [
+        "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 15.19s"
+      ]
+    },
+    {
+      "command": "./tools/cargo clippy -j2 --workspace --bin incant_editor --features incant_editor/custom-protocol --locked -- -D warnings",
+      "exit_code": 0,
+      "log": "/tmp/incant-native-physics-tauri-custom-clippy.log",
+      "sha256": "37fe5b2ab884b3c97390fd92876b0b8f02d31ab99ef469df05101ef362e7b7a6",
+      "result_lines": [
+        "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.30s"
+      ]
+    },
+    {
+      "command": "./tools/cargo build -j2 --workspace --bin incant_editor --release --locked --features incant_editor/custom-protocol",
+      "exit_code": 0,
+      "log": "/tmp/incant-native-physics-tauri-build.log",
+      "sha256": "3f8cf80e7edf2fee703abcd78bef84a026e6461c56ca5478c0fcf731ac76c781",
+      "result_lines": [
+        "    Finished `release` profile [optimized] target(s) in 1m 54s"
+      ]
+    },
+    {
+      "command": "python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime",
+      "exit_code": 0,
+      "log": "/tmp/incant-native-physics-tauri-guard.log",
+      "sha256": "bb75dacdf114bcf468dd81011f053f3a4c9e6143da910d8343a669dfc7f54fce",
+      "result_lines": [
+        "Authoring-free resolved dependencies: incant_types, incant_physics_runtime, incant_runtime, incant_script, incant_script_player, incant_assets_runtime, incant_audio_runtime"
+      ]
+    },
+    {
+      "command": "python3 tools/generate_conventions.py --check",
+      "exit_code": 0,
+      "log": "/tmp/incant-native-physics-tauri-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result_lines": []
+    }
+  ],
+  "local_editor_tests_per_mode": 7,
+  "hosted_checks_pending": true
+}

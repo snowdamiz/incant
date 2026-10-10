@@ -6,6 +6,10 @@ on:
       - 'tools/probes/physics-parity/**'
       - 'tools/tests/test_physics_parity.py'
       - 'crates/incant_physics/**'
+      - 'crates/incant_physics_runtime/**'
+      - 'crates/incant_runtime/**'
+      - 'crates/incant_types/**'
+      - 'tools/probes/native-physics/**'
       - 'Cargo.lock'
       - 'Cargo.toml'
       - 'package-lock.json'
@@ -78,6 +82,21 @@ jobs:
             artifacts/solver-parity/browser.json
             artifacts/solver-parity/*.bin
           if-no-files-found: error
+      - name: Compare cooked native ECS physics worker pools
+        if: runner.os != 'Linux'
+        run: python tools/probes/native-physics/run.py --output artifacts/native-physics-parity --trials 3
+      - name: Compare cooked native ECS physics with serial browser WASM
+        if: runner.os == 'Linux'
+        run: python tools/probes/native-physics/run.py --output artifacts/native-physics-parity --trials 3 --browser
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: native-ecs-physics-${{ matrix.os }}
+          path: |
+            artifacts/native-physics-parity/report.json
+            artifacts/native-physics-parity/browser.json
+            artifacts/native-physics-parity/*.bin
+          if-no-files-found: error
   compare:
     needs: native
     runs-on: ubuntu-latest
@@ -107,6 +126,11 @@ jobs:
           pattern: solver-parity-*
           path: parity-results
       - run: python3 tools/probes/physics-parity/compare_hosts.py parity-results
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: native-ecs-physics-*
+          path: native-physics-results
+      - run: python3 tools/probes/native-physics/compare_hosts.py native-physics-results
   portability:
     runs-on: macos-latest
     steps:

@@ -74,6 +74,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("tick={} entities={}", world.tick(), world.entity_count());
     for entity in world.snapshot() {
         println!("{:?} {:?}", entity.id, entity.transform.translation);
+        if let Some(state) = world.physics_state(entity.id) {
+            println!(
+                "physics {:?} {:?} {:?} {:?} {:?} {}",
+                entity.id,
+                state.translation,
+                state.rotation,
+                state.velocity,
+                state.angular_velocity,
+                state.sleeping
+            );
+        }
     }
     Ok(())
 }

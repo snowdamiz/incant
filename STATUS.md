@@ -10,6 +10,16 @@ after review and passing checks, without requesting separate merge approval.
 
 ## Implemented and locally verified
 
+- Native physics hosted streams match across all three desktop hosts and actual
+  browser WASM (21 streams). Canonical source-report path keys fix the Windows
+  metadata comparison failure; the strict comparator is unchanged. See
+  [evidence](docs/spikes/native-physics-runtime.md#hosted-cross-host-report-paths).
+
+- Shipping Cargo capture explicitly decodes UTF-8 on all desktop hosts. A real
+  subprocess regression reproduces Windows cp1252 failure before the fix; 40
+  tool tests pass. Corrected hosted Windows packaging remains pending. See
+  [encoding evidence](docs/spikes/shipping-output-utf8.md).
+
 - Typed versioned project JSON, semantic validation, published derived schemas,
   canonical formatting and stable ULIDs.
 - One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,
@@ -52,6 +62,18 @@ integration. The thousand-entity script benchmark meets the local frame budget
 within its documented workload.
 
 ## Active work
+
+- Native cooked 3D rigid bodies, colliders and angular velocity now run in the
+  disposable ECS world through a document-free solver backend, typed structural
+  commands and direct numeric updates that preserve sleeping bodies. Whole-batch
+  validation precedes solver edits; publication failures after solver advancement
+  make the world terminal. Legacy schemas/text IDs and v1 cooked scenes remain
+  compatible. Local union evidence includes 428 release workspace tests, both Clippy
+  modes, nine identical native/browser state streams and 32 fresh source-free
+  shipping processes. Physics saves fail explicitly, including after removal;
+  character/navigation, JS physics query/configuration bindings, cross-host CI
+  for this slice and device/performance gates remain open. See
+  [native physics evidence](docs/spikes/native-physics-runtime.md).
 
 - The editor context now generates icons/assets during Tauri build preparation,
   before rustc records input timestamps. Both feature modes have locally verified

@@ -6,12 +6,29 @@ mod camera;
 mod collider_shapes;
 mod lights;
 mod physics;
+pub mod physics_validation;
 mod render;
 mod transform;
 
 /// Stable project/runtime identifier; allocation and reference validation belong
 /// to the boundary that constructs or loads the data.
 pub type Id = String;
+
+/// Canonical 128 bits of an authored ULID. Runtime storage never reparses text.
+#[derive(
+    Debug,
+    Clone,
+    Copy,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash,
+    serde::Serialize,
+    serde::Deserialize,
+    schemars::JsonSchema,
+)]
+pub struct StableId(pub [u8; 16]);
 
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 pub use camera::{Camera, CameraProjection};
