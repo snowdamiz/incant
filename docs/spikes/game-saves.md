@@ -77,6 +77,18 @@ tools/cargo build -p incant_headless --release --locked
 python3 tools/probes/game-saves.py artifacts/game-save-example
 ```
 
+Three alternating local 1,000-entity trials (120 ticks and 120,000 commands each)
+measure median p95 of 8.471 ms on the main baseline and 8.360 ms on the save tree.
+The paired samples show no observed tick-cost regression from precise JSON
+decoding in this workload. They include concurrent development load and exclude
+rendering; they are not a complete-game or physical-device performance gate.
+
+The existing hosted GPU playback test now resumes at tick 37 and compares the
+actual tick-37 and tick-60 PNGs, final state and logs to uninterrupted playback.
+It also checks that a failed captured run cannot publish a save. This extension
+was compiled locally but intentionally not executed during the capture pause;
+its hosted result is pending.
+
 The director's computer-use/capture pause remains active. No new local captures
 or UI operations were used for this increment. Hosted desktop workflows include
 the same save probe and existing build/GPU tests; their results remain pending.

@@ -89,8 +89,72 @@
     "native save UI"
   ],
   "pending": [
+    "hosted resumed-frame equality test (intentionally not run locally during capture pause)",
     "hosted checks",
     "reviewed merge"
   ],
-  "native_binary_sha256": "ada3012f2944b35a36b13de9a8ed0b9fbb50b50cf47160d696813808c2334fa7"
+  "native_binary_sha256": "ada3012f2944b35a36b13de9a8ed0b9fbb50b50cf47160d696813808c2334fa7",
+  "local_cpu_cost": {
+    "host": "Apple M5 Pro, concurrent development and build load; no rendering",
+    "baseline_source": "9f5906fd0fbe2621ee6494b57983aac97cf8a665",
+    "saves_source": "d6106c786cbaacb51efe2be744565ce80507b299",
+    "entities": 1000,
+    "ticks": 120,
+    "commands": 120000,
+    "order": [
+      [
+        "baseline",
+        "saves"
+      ],
+      [
+        "saves",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "saves"
+      ]
+    ],
+    "trials": {
+      "baseline": [
+        {
+          "p95_frame_ms": 9.091708,
+          "max_frame_ms": 13.21925
+        },
+        {
+          "p95_frame_ms": 8.470709,
+          "max_frame_ms": 9.215209
+        },
+        {
+          "p95_frame_ms": 8.3245,
+          "max_frame_ms": 8.582790999999999
+        }
+      ],
+      "saves": [
+        {
+          "p95_frame_ms": 8.360334,
+          "max_frame_ms": 9.366708
+        },
+        {
+          "p95_frame_ms": 8.581042,
+          "max_frame_ms": 10.305833999999999
+        },
+        {
+          "p95_frame_ms": 8.333292,
+          "max_frame_ms": 9.268042000000001
+        }
+      ]
+    },
+    "median_p95_ms": {
+      "baseline": 8.470709,
+      "saves": 8.360334
+    },
+    "binaries": {
+      "baseline": "8de710ffa59e97123aa598f62b2a2a5bb3f2faccbab7e600b8b3ac130502d99a",
+      "saves": "a99b5030c6755a1430c42d2beec4d1e65247e5f7751a85eb80eb818937b0fcd3"
+    },
+    "project_sha256": "bac2e57f246765e9a63976fce5e139b113c136d5c964850e300429605a90be04",
+    "script_sha256": "7d16c20479ea8cfc20ca545f8d8cce12ac42ec5424f33fa15c88fb2e2c86b7dd",
+    "game_or_device_gate": false
+  }
 }
