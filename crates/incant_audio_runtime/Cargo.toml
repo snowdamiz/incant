@@ -7,15 +7,22 @@ publish.workspace = true
 
 [features]
 default = []
+scene = ["dep:incant_runtime"]
 device = ["kira/cpal"]
 
 [dependencies]
 incant_assets_runtime.workspace = true
+incant_runtime = { workspace = true, optional = true }
 kira = { version = "=0.12.5", default-features = false }
 thiserror.workspace = true
 serde.workspace = true
 schemars.workspace = true
 
 [dev-dependencies]
+incant_types.workspace = true
 serde_json.workspace = true
 tempfile = "3"
+
+[[example]]
+name = "native_scene_audio"
+required-features = ["scene"]

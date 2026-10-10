@@ -1,0 +1,381 @@
+{
+  "base_audio_core": "76c7084",
+  "shipping_utf8_tool_prerequisite": "a1c7be60deeab291c2fa4b19c7ca7b333fe92d86",
+  "source_sha256": {
+    "Cargo.lock": "298af954a83b1c34374da5f62a63fabb292870dc6f1e7be20c38445c53b0ba71",
+    "Cargo.toml": "c84dd70bc624a5719e4544bbbab3957c2a9c156bb5aac15e2ce5108224f1132a",
+    "crates/incant_audio_runtime/Cargo.toml": "c0f5643a950aa754e2da13cb6ec6cb840ece82579529dc3abc844123045d92c3",
+    "tools/probes/native-scene-audio.py": "3f5b53c51c6f5e77ae33e335736349a398055ba72ad94df6f081a925d9d015f3",
+    "crates/incant_audio_runtime/examples/cooked_audio.rs": "60428c8da63065d10df26dd805a86665fa42a70f83e87d5f591e1ce15dbdddd8",
+    "crates/incant_audio_runtime/examples/native_scene_audio.rs": "6a20c436f495b42456aa0996fb5813c23e8f11d12ab81c72830ae3a0f225c9d6",
+    "crates/incant_audio_runtime/src/config.rs": "eb22b9ca8803ef14534c4bd68dfb17d0f96c10ad386cd8f4a9d89dd3c6723f7e",
+    "crates/incant_audio_runtime/src/lib.rs": "754e8deb9221a5bde44900a9d8b799fcedcc71d35e88e9328e0471b030240d93",
+    "crates/incant_audio_runtime/src/mixer.rs": "c2334bf76e6f50c70a7e80113be0bf369f7ada2135b4bf0749b72e8696113d6b",
+    "crates/incant_audio_runtime/src/offline.rs": "df823c9040b925d2d97648abc0c22ea2944b171d43ede70cd6449eb99b874857",
+    "crates/incant_audio_runtime/src/offline_stream.rs": "bcb5d073288778d694857394fdb11ff350cd2e8b79f3d7acd6fd231d0d30ecc5",
+    "crates/incant_audio_runtime/src/scene/binding.rs": "9c88b5ff075ed110838bb553705332e1ea745fff64b9f079f0f1b3444ea403c7",
+    "crates/incant_audio_runtime/src/scene/prepare.rs": "3facf2fe479af79cf7ac80ea858cadbd2fd62d0cb879926c9adffdd54a332867",
+    "crates/incant_audio_runtime/src/scene.rs": "75bc0e6649592d90f8e938e04db4774aca5ec442bc5604942a06dbd7b6c4e0da",
+    "crates/incant_audio_runtime/src/stream.rs": "5c95e5df733637bb7c5f41f807bdbe0977435305b8bbb5977b72e4484c6d16f4",
+    "crates/incant_audio_runtime/tests/cooked.rs": "075a2735389e78eaa5784d16e6858fa6b0be64964046f716113393645fd76a7e",
+    "crates/incant_audio_runtime/tests/scene.rs": "4e0aceb645120235583633a08f1e9706d2a69b4d95abad8d10a65547c8e83d51"
+  },
+  "checks": {
+    "union_release": {
+      "command": "./tools/cargo test -j2 -p incant_audio_runtime -p incant_audio -p incant_runtime -p incant_cook --features incant_audio_runtime/scene --release --locked",
+      "log_sha256": "8d08f04a9801b0385fcec51f3ee09405d9f2ecb7adb0699c6b1f23892db11833",
+      "passed_tests": 92
+    },
+    "union_clippy": {
+      "command": "./tools/cargo clippy -j2 -p incant_audio_runtime -p incant_audio -p incant_runtime -p incant_cook --features incant_audio_runtime/scene --all-targets --locked -- -D warnings",
+      "log_sha256": "a5392d15630227f4fa5556abd449014b75a63be3d67137a2c3afe598700d53d1",
+      "passed_tests": 0
+    },
+    "audio_release_final": {
+      "command": "./tools/cargo test -j2 -p incant_audio_runtime --features scene --release --locked",
+      "log_sha256": "ad349fc0bd1bfec28c57fbfa35a41716904167bafae4e480ec26cb846aee0c32",
+      "passed_tests": 17
+    },
+    "audio_clippy_final": {
+      "command": "./tools/cargo clippy -j2 -p incant_audio_runtime --features scene --all-targets --locked -- -D warnings",
+      "log_sha256": "2381dfcc0d20addd28ff245d5af7aab78d488bb4d5d96a7c7d44e5a536332d90",
+      "passed_tests": 0
+    },
+    "device_compile": {
+      "command": "./tools/cargo check -j2 -p incant_audio_runtime --features scene,device --locked",
+      "log_sha256": "02cfa1e4dd8ef89a8f7ccc6f64e58a61729ce91d2d957f0691f121c25f9b9387",
+      "passed_tests": 0
+    },
+    "wasm_compile": {
+      "command": "./tools/cargo check -j2 -p incant_audio_runtime --features scene --target wasm32-unknown-unknown --locked",
+      "log_sha256": "ef17ed0b0582e02126f2c705fe38d2165ec3d5568c01b2bd52fdd7e01c84b1fb",
+      "passed_tests": 0
+    },
+    "shipping": {
+      "command": "python3 tools/probes/native-scene-audio.py artifacts/native-scene-audio-final",
+      "log_sha256": "c3c9488d37910292216af9e850900033cb91164aab4316d13b7ff80af6d82c52",
+      "passed_tests": 0
+    },
+    "tools": {
+      "command": "python3 -m unittest discover -s tools/tests",
+      "log_sha256": "3c16b419aa9730165de0f8aae7435c5aacc01d698e6022483c45e18bb7192914",
+      "passed_tests": 0
+    },
+    "late_error_before": {
+      "command": "targeted stopped-voice decoder-error regression against previous implementation; expected failure",
+      "log_sha256": "ad13bf54b2591ce6e10802886e4c2339b1f89c18600c61534ebf34d372c33245",
+      "passed_tests": 0
+    }
+  },
+  "dependency_guards": {
+    "roots": [
+      "incant_audio_runtime",
+      "incant_assets_runtime",
+      "incant_runtime",
+      "incant_physics_runtime"
+    ],
+    "default_passed": true,
+    "scene_passed": true
+  },
+  "shipping": {
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_assets_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_audio_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "native_scene_audio": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "debuginfo": "2",
+        "split-debuginfo": "packed",
+        "lto": "fat"
+      }
+    },
+    "symbol_identity": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "7d8f1f32-945a-3c44-9697-0831287d641e"
+      }
+    },
+    "player_bytes": 2885984,
+    "player_sha256": "548408dd09e4fc41c8ca405f9a740c3b7f59da82510ba9d6ccb9c8e1151c2b7b",
+    "built_targets": [
+      "approx",
+      "arrayvec",
+      "async_channel",
+      "async_executor",
+      "async_task",
+      "atomic_arena",
+      "atomic_waker",
+      "autocfg",
+      "bevy_ecs",
+      "bevy_ecs_macro_logic",
+      "bevy_ecs_macros",
+      "bevy_macro_utils",
+      "bevy_platform",
+      "bevy_ptr",
+      "bevy_tasks",
+      "bevy_utils",
+      "bitflags",
+      "block_buffer",
+      "build-script-build",
+      "bumpalo",
+      "bytemuck",
+      "byteorder",
+      "cfg_if",
+      "concurrent_queue",
+      "convert_case",
+      "cpufeatures",
+      "crossbeam_deque",
+      "crossbeam_epoch",
+      "crossbeam_queue",
+      "crossbeam_utils",
+      "crypto_common",
+      "derive_more",
+      "derive_more_impl",
+      "digest",
+      "disqualified",
+      "downcast_rs",
+      "dyn_clone",
+      "either",
+      "ena",
+      "equivalent",
+      "errno",
+      "event_listener",
+      "event_listener_strategy",
+      "fastrand",
+      "fixedbitset",
+      "foldhash",
+      "futures_core",
+      "futures_io",
+      "futures_lite",
+      "generic_array",
+      "getrandom",
+      "glam",
+      "glamx",
+      "hash32",
+      "hashbrown",
+      "heapless",
+      "incant_assets_runtime",
+      "incant_audio_runtime",
+      "incant_physics_runtime",
+      "incant_runtime",
+      "incant_types",
+      "indexmap",
+      "itoa",
+      "kira",
+      "libc",
+      "libm",
+      "log",
+      "matrixmultiply",
+      "memchr",
+      "mint",
+      "nalgebra",
+      "nalgebra_macros",
+      "native_scene_audio",
+      "nonmax",
+      "num_complex",
+      "num_derive",
+      "num_integer",
+      "num_rational",
+      "num_traits",
+      "once_cell",
+      "ordered_float",
+      "parking",
+      "parry3d",
+      "pastey",
+      "pin_project_lite",
+      "proc_macro2",
+      "profiling",
+      "profiling_procmacros",
+      "quote",
+      "rapier3d",
+      "rawpointer",
+      "rayon",
+      "rayon_core",
+      "ref_cast",
+      "ref_cast_impl",
+      "rstar",
+      "rtrb",
+      "rustix",
+      "schemars",
+      "schemars_derive",
+      "serde",
+      "serde_core",
+      "serde_derive",
+      "serde_derive_internals",
+      "serde_json",
+      "sha2",
+      "simba",
+      "slab",
+      "slotmap",
+      "smallvec",
+      "spin",
+      "stable_deref_trait",
+      "static_assertions",
+      "syn",
+      "tempfile",
+      "thiserror",
+      "thiserror_impl",
+      "thread_local",
+      "toml_datetime",
+      "toml_edit",
+      "toml_parser",
+      "triple_buffer",
+      "typenum",
+      "unicode_ident",
+      "unicode_segmentation",
+      "unicode_xid",
+      "variadics_please",
+      "version_check",
+      "wide",
+      "winnow",
+      "zmij"
+    ],
+    "headless_sha256": "77fa87aca0206f2e081a810026c49b7aac35de33df0280cf7aa43851e4b3ddf9",
+    "cook_sha256": "ae0b289ebeac31f60af03fc902e7fbed69377abb974788af2492f77acfb3984b",
+    "public_import": {
+      "asset": {
+        "id": "01M4M15W9MBQ80RYEEAZK6Q08S",
+        "kind": "audio",
+        "name": "tone",
+        "path": "tone.wav",
+        "sha256": "4a24dd0240956f6ad00cd68d2f816e25f6662a170b6a0a92ae86a0a10aa5176e"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "channels": 2,
+        "dependencies": [
+          {
+            "path": "tone.wav",
+            "sha256": "59aca4ec1400bba63489f30c73a82fb29e82c83a923fcb468fa1ba0176dab6e3"
+          }
+        ],
+        "duration_seconds": 0.5,
+        "frames": 24000,
+        "sample_rate": 48000
+      },
+      "revision": 1
+    },
+    "project_hash_before_delete": "8ef348a2cb5bafe936a2810478fe0ce63b1ed50d28e0bbbaf075246aa3b85361",
+    "authoring_and_build_storage_deleted": true,
+    "runtime_package_retained": [
+      "binary scenes",
+      "clips.bin ID/fingerprint table",
+      "cooked manifests and PCM"
+    ],
+    "native_fixed_ticks_per_process": 120,
+    "runs": 16,
+    "results": [
+      {
+        "fixture": "static-0.5",
+        "batch": 97,
+        "pcm_sha256": "e1cdfaf792d5e4f240ed00d9d3d4ba0023db33d2f69c6f85808662da9dbdf540",
+        "rms": 0.055201065777595676,
+        "left_early_balance": 109.37785539384716,
+        "right_late_balance": -113.87727804215658
+      },
+      {
+        "fixture": "static-0.5",
+        "batch": 8192,
+        "pcm_sha256": "e91a0902a7ced66dbe1348c2052e74c02e760e72b2237835120ab03a0b956e1a",
+        "rms": 0.05519786964174115,
+        "left_early_balance": 109.36339810307852,
+        "right_late_balance": -113.89286911220825
+      },
+      {
+        "fixture": "static-1.7",
+        "batch": 97,
+        "pcm_sha256": "84e51bada946f4136ee013d0f6ffcb3797a7bdf2b0229bb3a4251e1ed5a8671b",
+        "rms": 0.05519924752036359,
+        "left_early_balance": 109.38758277808083,
+        "right_late_balance": -113.94347902183993
+      },
+      {
+        "fixture": "static-1.7",
+        "batch": 8192,
+        "pcm_sha256": "5f5d61bb5b24969124ef9cb4075cb3e1f5db6f5d472b950bc56f28b0ffe8e028",
+        "rms": 0.0552039275403174,
+        "left_early_balance": 109.37325925783125,
+        "right_late_balance": -113.9589216232869
+      },
+      {
+        "fixture": "stream-0.5",
+        "batch": 97,
+        "pcm_sha256": "1e2dae840903d9fdc9c6658962f28e46b349df24a01a880b257a3d905081e72c",
+        "rms": 0.055201065874033055,
+        "left_early_balance": 109.37785539384716,
+        "right_late_balance": -113.87727804215658
+      },
+      {
+        "fixture": "stream-0.5",
+        "batch": 8192,
+        "pcm_sha256": "88156dbb9ced8546077456c2c94fcf38a1bb5d4709d2470abe580af9ff9a240c",
+        "rms": 0.05519786973818235,
+        "left_early_balance": 109.36339810307852,
+        "right_late_balance": -113.89286911220825
+      },
+      {
+        "fixture": "stream-1.7",
+        "batch": 97,
+        "pcm_sha256": "27b7bc4c40756287492035b9fc2eeb02b10eb2ce9e17d23fc73f48492c48f9b9",
+        "rms": 0.05519924751637033,
+        "left_early_balance": 109.3875827721512,
+        "right_late_balance": -113.94347898640432
+      },
+      {
+        "fixture": "stream-1.7",
+        "batch": 8192,
+        "pcm_sha256": "b2b0e2c2c88ed0f1af43583375adeef7ffaf7730eaf5240b9152642482b5ceb3",
+        "rms": 0.05520392753624169,
+        "left_early_balance": 109.37325925188458,
+        "right_late_balance": -113.95892158587951
+      }
+    ],
+    "repeat_exact": true,
+    "moving_parameter_cross_batch_bit_equality_claimed": false,
+    "audio_device_opened": false,
+    "vm_input_audio_session_integration": false,
+    "audio_cursor_saves": false,
+    "reference_phone_gate": false,
+    "failure_semantics": "First simulation/sync/render error stops process; no world rollback or partial output is claimed."
+  },
+  "shipping_source_note": {
+    "runtime_sources_equal_final": true,
+    "example_built_sha256": "970cb785d432fabd95056a7d2dc3258b5302cc27307e1495495ae0a8be355de0",
+    "example_final_sha256": "6a20c436f495b42456aa0996fb5813c23e8f11d12ab81c72830ae3a0f225c9d6",
+    "example_delta": "Only header comment clarification after build: output I/O is not atomic.",
+    "other_postproof_changes": "One background-decoder test, UTF-8 build capture and failure-semantics prose in the proof tool; no runtime implementation changes."
+  },
+  "player_delta_from_standalone_cooked_mixer_bytes": 2300912,
+  "delta_scope": "Whole executable graph includes native world/physics; not isolated audio cost.",
+  "limits": [
+    "No full workspace optional-feature CI claim yet",
+    "No audio device or browser playback executed",
+    "No native script/input/audio game-session wiring",
+    "No playback cursor saves",
+    "No phone/performance gate"
+  ]
+}

@@ -3600,6 +3600,8 @@ name = "incant_audio_runtime"
 version = "0.0.1"
 dependencies = [
  "incant_assets_runtime",
+ "incant_runtime",
+ "incant_types",
  "kira",
  "schemars 1.2.2",
  "serde",

@@ -1,6 +1,10 @@
 //! Document-free Kira mixing of retained cooked audio. Offline output uses the real mixer and sample
 //! renderer without creating an OS audio device; device output is explicit.
 mod config;
+#[cfg(feature = "scene")]
+mod scene;
+#[cfg(feature = "scene")]
+pub use scene::{ClipBinding, MAX_CLIP_METADATA_BYTES, MAX_SCENE_CLIPS, SceneAudio, SourceState};
 mod mixer;
 mod offline;
 mod offline_stream;
