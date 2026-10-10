@@ -1,5 +1,6 @@
 //! QuickJS sandbox for SWC-compiled TypeScript. No OS, filesystem, module loader,
 //! network, native plugins or shell are installed into the runtime.
+mod diagnostics;
 mod localization;
 mod logs;
 mod play;
@@ -24,8 +25,17 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum ScriptError {
-    #[error("script failed (syntax, exception, memory limit or execution deadline)")]
+    #[error("script engine failed without a JavaScript diagnostic")]
     Execution,
+    #[error("script execution exceeded its {budget_ms} ms wall-clock budget")]
+    ExecutionDeadline { budget_ms: u128 },
+    #[error("script engine memory allocation failed (configured limit: 32 MiB)")]
+    MemoryAllocation,
+    #[error("script {phase} failed: {message}")]
+    Javascript {
+        phase: &'static str,
+        message: String,
+    },
     #[error("script result is invalid: {0}")]
     Result(#[from] serde_json::Error),
     #[error(transparent)]
@@ -96,7 +106,7 @@ impl ScriptHost {
         if compiled_source.len() > 1_000_000 {
             return Err(ScriptError::InputLimit);
         }
-        let runtime = Runtime::new().map_err(|_| ScriptError::Execution)?;
+        let runtime = Runtime::new().map_err(diagnostics::allocation)?;
         runtime.set_memory_limit(32 * 1024 * 1024);
         runtime.set_max_stack_size(1024 * 1024);
         let deadline = Arc::new(Mutex::new(Instant::now() + budget));
@@ -104,7 +114,7 @@ impl ScriptHost {
         runtime.set_interrupt_handler(Some(Box::new(move || {
             Instant::now() >= *timer.lock().unwrap_or_else(|e| e.into_inner())
         })));
-        let context = Context::full(&runtime).map_err(|_| ScriptError::Execution)?;
+        let context = Context::full(&runtime).map_err(diagnostics::allocation)?;
         let source = format!(
             r#"
    globalThis.defineBehavior = x => x;
@@ -117,9 +127,11 @@ impl ScriptHost {
   "#,
             include_str!("runtime.js")
         );
-        let initial = context
-            .with(|ctx| ctx.eval::<String, _>(source))
-            .map_err(|_| ScriptError::Execution)?;
+        let initial = context.with(|ctx| {
+            ctx.eval::<String, _>(source).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "initialization", &deadline, budget)
+            })
+        })?;
         let initial: InitialState = serde_json::from_str(&initial)?;
         if serde_json::to_vec(&initial.state)?.len() > 1024 * 1024 {
             return Err(ScriptError::InputLimit);
@@ -206,11 +218,13 @@ impl ScriptHost {
             return Err(ScriptError::InputLimit);
         }
         *self.deadline.lock().unwrap_or_else(|e| e.into_inner()) = Instant::now() + self.budget;
-        let result = self
-            .context
-            .with(|ctx| {
-                let function: rquickjs::Function = ctx.globals().get("__tick")?;
-                function.call::<_, String>((
+        let result = self.context.with(|ctx| {
+            let function: rquickjs::Function = ctx
+                .globals()
+                .get("__tick")
+                .map_err(diagnostics::allocation)?;
+            function
+                .call::<_, String>((
                     world,
                     dt,
                     state,
@@ -219,14 +233,14 @@ impl ScriptHost {
                     serde_json::to_string(&schedule.clock).expect("validated script clock"),
                     serde_json::to_string(&timer_events).expect("validated timer events"),
                 ))
-            })
-            .map_err(|_| ScriptError::Execution)?;
+                .map_err(|error| {
+                    diagnostics::javascript(&ctx, error, "tick", &self.deadline, self.budget)
+                })
+        })?;
         // Native queries cannot be interrupted in the middle of a solver call.
         // Even if script code catches a query error, an expired tick must not
         // commit commands, logs or state after control returns to the host.
-        if Instant::now() >= *self.deadline.lock().unwrap_or_else(|e| e.into_inner()) {
-            return Err(ScriptError::Execution);
-        }
+        diagnostics::check_deadline(&self.deadline, self.budget)?;
         if result.len() > 16 * 1024 * 1024 {
             return Err(ScriptError::InputLimit);
         }
@@ -313,7 +327,10 @@ mod tests {
         .unwrap();
         let mut bus = CommandBus::new(Project::empty("sandbox")).unwrap();
         let start = Instant::now();
-        assert!(host.tick(&mut bus, 1. / 60.).is_err());
+        assert!(matches!(
+            host.tick(&mut bus, 1. / 60.),
+            Err(ScriptError::ExecutionDeadline { budget_ms: 10 })
+        ));
         assert!(start.elapsed() < Duration::from_secs(1));
     }
     #[test]
@@ -333,7 +350,10 @@ mod tests {
         }));
         host.install_queries().unwrap();
         let mut bus = CommandBus::new(Project::empty("query deadline")).unwrap();
-        assert!(host.tick(&mut bus, 1. / 60.).is_err());
+        assert!(matches!(
+            host.tick(&mut bus, 1. / 60.),
+            Err(ScriptError::ExecutionDeadline { budget_ms: 50 })
+        ));
         assert!(called.load(std::sync::atomic::Ordering::Relaxed));
         assert_eq!(host.state()["ok"], false);
         assert!(host.take_logs().is_empty());
