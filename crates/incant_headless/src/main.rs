@@ -320,7 +320,16 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
     }
     Ok(())
 }
-fn main() -> Result<()> {
+fn main() -> std::process::ExitCode {
+    match run() {
+        Ok(()) => std::process::ExitCode::SUCCESS,
+        Err(error) => {
+            eprintln!("Error: {error}");
+            std::process::ExitCode::FAILURE
+        }
+    }
+}
+fn run() -> Result<()> {
     match Args::parse().command {
         Cli::Init {
             path,
@@ -358,12 +367,7 @@ fn main() -> Result<()> {
             file.sync_all()?;
             print(json!({"created":project.id,"entities":entities}))?;
         }
-        Cli::Validate { project } => {
-            let project = read_project(&project)?;
-            print(
-                json!({"valid":true,"project_id":project.id,"schema_version":project.schema_version}),
-            )?;
-        }
+        Cli::Validate { project } => assets::validate(&project)?,
         Cli::LocalizationCheck {
             project,
             locale,

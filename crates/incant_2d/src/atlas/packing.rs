@@ -1,9 +1,11 @@
 use super::*;
-use std::cmp::Reverse;
+use std::{cmp::Reverse, collections::BTreeSet};
 
-/// Deterministic unrotated guillotine packing. Several bounded candidate widths
-/// are compared; the smallest occupied area wins. This is not an optimal-packing
-/// guarantee. Failure is explicit and never drops frames or creates extra pages.
+/// Deterministic, unrotated skyline packing with bounded alternative orders and
+/// axis sweeps. Candidate widths come from the frames and a fixed 32-texel grid,
+/// not the requested bound. Larger bounds therefore retain every formerly
+/// eligible layout and cannot increase the chosen page area. This is a heuristic,
+/// not a proof that every feasible packing will be found.
 pub fn pack(
     descriptor: &SpriteAtlas,
     sizes: &BTreeMap<String, [u32; 2]>,
@@ -12,101 +14,154 @@ pub fn pack(
     if descriptor.frames.keys().ne(sizes.keys()) {
         return Err(AtlasError::Frames);
     }
-    let p = descriptor.padding;
-    let mut items = Vec::new();
+    let padding = descriptor.padding;
+    let mut original = Vec::new();
     for (id, &[w, h]) in sizes {
         if w == 0 || h == 0 || w > 8192 || h > 8192 {
             return Err(AtlasError::Region);
         }
-        items.push((id.clone(), w + p * 2, h + p * 2));
-    }
-    items.sort_by_key(|(id, w, h)| {
-        (
-            Reverse((*w).max(*h)),
-            Reverse(u64::from(*w) * u64::from(*h)),
-            id.clone(),
-        )
-    });
-    let minimum = items.iter().map(|(_, w, _)| *w).max().unwrap();
-    if minimum > descriptor.maximum_size[0]
-        || items
+        let size = [w + padding * 2, h + padding * 2];
+        if size
             .iter()
-            .any(|(_, _, h)| *h > descriptor.maximum_size[1])
-    {
-        return Err(AtlasError::NoFit);
+            .zip(descriptor.maximum_size)
+            .any(|(a, b)| *a > b)
+        {
+            return Err(AtlasError::NoFit);
+        }
+        original.push((id.clone(), size[0], size[1]));
     }
-    let mut widths = std::collections::BTreeSet::from([minimum, descriptor.maximum_size[0]]);
-    let mut width = minimum.next_power_of_two();
-    while width < descriptor.maximum_size[0] {
-        widths.insert(width);
-        width *= 2;
-    }
-    let mut best: Option<AtlasLayout> = None;
-    for width in widths {
-        if let Some((size, rectangles)) = attempt(&items, [width, descriptor.maximum_size[1]], p) {
-            let layout = AtlasLayout {
-                id: descriptor.id.clone(),
-                size,
-                padding: p,
-                frames: rectangles
-                    .into_iter()
-                    .map(|(id, region)| {
-                        let name = descriptor.frames[&id].name.clone();
-                        (id, AtlasFrame { name, region })
-                    })
-                    .collect(),
-            };
-            let score = |a: &AtlasLayout| {
+    let mut best: Option<Packed> = None;
+    // Transposing the entire packing problem does not rotate any source frame.
+    // It merely considers a vertical sweep, then transposes coordinates back.
+    for transpose in [false, true] {
+        let mut items = original.clone();
+        let mut maximum = descriptor.maximum_size;
+        if transpose {
+            maximum.swap(0, 1);
+            for (_, w, h) in &mut items {
+                std::mem::swap(w, h);
+            }
+        }
+        for tall_first in [false, true] {
+            items.sort_by_key(|(id, w, h)| {
                 (
-                    u64::from(a.size[0]) * u64::from(a.size[1]),
-                    a.size[0].max(a.size[1]),
-                    a.size[0],
+                    Reverse(if tall_first { *h } else { (*w).max(*h) }),
+                    Reverse(u64::from(*w) * u64::from(*h)),
+                    id.clone(),
                 )
-            };
-            if best.as_ref().is_none_or(|old| score(&layout) < score(old)) {
-                best = Some(layout);
+            });
+            let minimum = items.iter().map(|(_, w, _)| *w).max().unwrap();
+            let mut widths = BTreeSet::from([minimum]);
+            widths.extend((32..=8192).step_by(32).filter(|w| *w >= minimum));
+            let mut sum = 0;
+            for (_, w, _) in &items {
+                sum += w;
+                if sum <= 8192 {
+                    widths.insert(sum);
+                }
+            }
+            let area: u64 = items
+                .iter()
+                .map(|(_, w, h)| u64::from(*w) * u64::from(*h))
+                .sum();
+            for width in widths {
+                if width > maximum[0]
+                    || width > sum
+                    || area > u64::from(width) * u64::from(maximum[1])
+                {
+                    continue;
+                }
+                let Some(mut packed) = attempt(&items, width, padding) else {
+                    continue;
+                };
+                if packed.0[1] > maximum[1] {
+                    continue;
+                }
+                if transpose {
+                    packed.0.swap(0, 1);
+                    for region in packed.1.values_mut() {
+                        region.swap(0, 1);
+                        region.swap(2, 3);
+                    }
+                }
+                if best
+                    .as_ref()
+                    .is_none_or(|old| score(packed.0) < score(old.0))
+                {
+                    best = Some(packed);
+                }
             }
         }
     }
-    let layout = best.ok_or(AtlasError::NoFit)?;
+    let (size, frames) = best.ok_or(AtlasError::NoFit)?;
+    let layout = AtlasLayout {
+        id: descriptor.id.clone(),
+        size,
+        padding,
+        frames: frames
+            .into_iter()
+            .map(|(id, region)| {
+                let name = descriptor.frames[&id].name.clone();
+                (id, AtlasFrame { name, region })
+            })
+            .collect(),
+    };
     layout.validate()?;
     Ok(layout)
 }
+fn score(size: [u32; 2]) -> (u64, u32, u32) {
+    (
+        u64::from(size[0]) * u64::from(size[1]),
+        size[0].max(size[1]),
+        size[0],
+    )
+}
 type Packed = ([u32; 2], BTreeMap<String, [u32; 4]>);
-fn attempt(items: &[(String, u32, u32)], maximum: [u32; 2], padding: u32) -> Option<Packed> {
-    let mut free = vec![[0, 0, maximum[0], maximum[1]]];
+
+fn attempt(items: &[(String, u32, u32)], width: u32, padding: u32) -> Option<Packed> {
+    // Each pair starts a constant-height skyline interval. A placed rectangle
+    // covers all intervals below it; gaps below the skyline are not reused.
+    let mut skyline = vec![(0_u32, 0_u32)];
     let mut regions = BTreeMap::new();
     let mut size = [0, 0];
     for (id, w, h) in items {
-        let index = free
-            .iter()
-            .enumerate()
-            .filter(|(_, r)| r[2] >= *w && r[3] >= *h)
-            .min_by_key(|(i, r)| {
-                (
-                    (r[2] - w).min(r[3] - h),
-                    (r[2] - w).max(r[3] - h),
-                    r[1],
-                    r[0],
-                    *i,
-                )
-            })
-            .map(|(i, _)| i)?;
-        let [x, y, rw, rh] = free.remove(index);
-        let dw = rw - w;
-        let dh = rh - h;
-        let split = if dw > dh {
-            [[x + w, y, dw, rh], [x, y + h, *w, dh]]
-        } else {
-            [[x + w, y, dw, *h], [x, y + h, rw, dh]]
-        };
-        free.extend(split.into_iter().filter(|r| r[2] > 0 && r[3] > 0));
+        let mut best: Option<(u32, u32, usize)> = None;
+        for (index, &(x, y)) in skyline.iter().enumerate() {
+            if x + w > width {
+                continue;
+            }
+            let mut top = y;
+            for &(next_x, next_y) in &skyline[index + 1..] {
+                if next_x >= x + w {
+                    break;
+                }
+                top = top.max(next_y);
+            }
+            if top + h <= 8192 {
+                let candidate = (top + h, x, index);
+                if best.is_none_or(|old| candidate < old) {
+                    best = Some(candidate);
+                }
+            }
+        }
+        let (top, x, index) = best?;
+        let y = top - h;
+        let end = x + w;
+        let after = skyline.partition_point(|(sx, _)| *sx < end);
+        let previous_height = skyline[after - 1].1;
+        let add_tail = end < width && skyline.get(after).is_none_or(|(sx, _)| *sx != end);
+        skyline.splice(index..after, [(x, top)]);
+        if add_tail {
+            skyline.insert(index + 1, (end, previous_height));
+        }
+        // Equal-height neighbours have no meaningful boundary and need not be searched.
+        skyline.dedup_by(|a, b| a.1 == b.1);
         regions.insert(
             id.clone(),
             [x + padding, y + padding, w - padding * 2, h - padding * 2],
         );
-        size[0] = size[0].max(x + w);
-        size[1] = size[1].max(y + h);
+        size[0] = size[0].max(end);
+        size[1] = size[1].max(top);
     }
     Some((size, regions))
 }

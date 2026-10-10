@@ -50,11 +50,17 @@ pub enum AtlasError {
     Identity,
     #[error("atlas must contain 1..256 frames with nonempty bounded names and paths")]
     Frames,
-    #[error("atlas dimensions must be 1..8192 with at most 4194304 texels, and padding 1..16")]
-    Bounds,
+    #[error("atlas width and height must each be in 1..8192")]
+    Dimensions,
+    #[error("atlas page exceeds the 4194304-texel limit")]
+    Texels,
+    #[error("atlas padding must be in 1..16")]
+    Padding,
     #[error("atlas frame rectangles must be nonempty and fit their source/packed extent")]
     Region,
-    #[error("frames do not fit in one atlas within the requested dimensions")]
+    #[error(
+        "could not pack every frame within the requested maximum using the bounded unrotated skyline heuristic"
+    )]
     NoFit,
     #[error("atlas frame extrusion rectangles overlap")]
     Overlap,
@@ -62,8 +68,14 @@ pub enum AtlasError {
 pub fn valid_frame_id(id: &str) -> bool {
     ulid::Ulid::from_string(id).is_ok_and(|value| value.to_string() == id)
 }
-fn valid_size([w, h]: [u32; 2]) -> bool {
-    w != 0 && h != 0 && w <= 8192 && h <= 8192 && u64::from(w) * u64::from(h) <= 4 * 1024 * 1024
+fn validate_size([w, h]: [u32; 2]) -> Result<(), AtlasError> {
+    if w == 0 || h == 0 || w > 8192 || h > 8192 {
+        return Err(AtlasError::Dimensions);
+    }
+    if u64::from(w) * u64::from(h) > 4 * 1024 * 1024 {
+        return Err(AtlasError::Texels);
+    }
+    Ok(())
 }
 impl SpriteAtlas {
     pub fn validate(&self) -> Result<(), AtlasError> {
@@ -84,8 +96,9 @@ impl SpriteAtlas {
         {
             return Err(AtlasError::Frames);
         }
-        if !valid_size(self.maximum_size) || !(1..=16).contains(&self.padding) {
-            return Err(AtlasError::Bounds);
+        validate_size(self.maximum_size)?;
+        if !(1..=16).contains(&self.padding) {
+            return Err(AtlasError::Padding);
         }
         for frame in self.frames.values() {
             if let Some([x, y, w, h]) = frame.region
@@ -106,8 +119,9 @@ impl AtlasLayout {
         if !valid_frame_id(&self.id) || self.frames.keys().any(|id| !valid_frame_id(id)) {
             return Err(AtlasError::Identity);
         }
-        if !valid_size(self.size) || !(1..=16).contains(&self.padding) {
-            return Err(AtlasError::Bounds);
+        validate_size(self.size)?;
+        if !(1..=16).contains(&self.padding) {
+            return Err(AtlasError::Padding);
         }
         if self.frames.is_empty()
             || self.frames.len() > MAX_ATLAS_FRAMES

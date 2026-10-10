@@ -7,10 +7,14 @@ and name, plus atlas size bounds and 1..16 pixels of edge extrusion. Source path
 resolve relative to the descriptor inside the granted project; source files are
 not needed by runtime rendering.
 
-The unrotated guillotine packer compares several candidate widths and chooses the
-smallest occupied area. It preserves all frame sizes/identities and rejects an
-unfittable set explicitly; it does not promise an optimal layout or split into
-multiple pages. The limit is 256 frames, 8192 pixels per axis, at most 4194304
+The unrotated skyline packer compares bounded candidate widths, frame orders and
+axis sweeps and chooses the smallest occupied area it finds. Widths come from a
+fixed 32-texel grid, the widest frame and cumulative frame widths. The search
+family does not depend on `maximum_size`: raising either bound retains all former
+choices, so it cannot increase the selected occupied area. It preserves every
+frame size/identity, but can still reject a feasible set; failure describes that
+heuristic limitation, not a proof of impossibility. There is no rotation, global
+optimality guarantee or multiple-page fallback. The limit is 256 frames, 8192 pixels per axis, at most 4194304
 atlas texels, and at most 4194304 decoded source texels across distinct source-path
 entries. Existing source-byte and runtime resource budgets also apply.
 
@@ -93,3 +97,74 @@ Evidence is in [integration results](evidence/sprite-atlas-runtime-spans-2026-10
 Claude's rendered wide-region review currently uses the ordinary-sprite frozen
 candidate, not this atlas binary. Atlas-specific rendered/native review, hosted
 checks and phone/performance gates remain open.
+
+
+## Authoring follow-up to review 0034, 2026-10-10
+
+The frozen [Claude atlas review](../../handoffs/0034-sprite-atlas-review/result.md)
+accepted atlas-specific rendering conditionally on the separate wide-region work.
+Its binary, captured images, hashes and conclusions remain unchanged. This
+follow-up changes packing and authoring validation, so a new candidate still needs
+Claude's rendered delta review after the shared renderer update is integrated.
+
+Two independently reproduced packing regressions now pass: the explicit three
+frames (1200×40, 1100×4 and 4×1100, padding 2) fit 1204×1148; an 11-frame case no
+longer grows from 31,744 to 32,000 page texels when its height bound increases.
+The packer remains bounded by 256 frames and 8192 texels per axis, and preserves
+unrotated source sizes and nonoverlapping extrusions. Page-area selection is a
+cook-time heuristic; no phone memory, cook-time or runtime performance gate is
+claimed by these tests.
+
+`incant_import::validate_cached_sprites` checks authored sprites against the
+current cooked texture and atlas layout. It reads each unique referenced texture
+once, drops its pixel payload immediately, retains layout metadata, and never
+opens source images. Diagnostics identify scene, entity, texture, optional frame,
+JSON pointer, severity and typed code. Missing frames, a frame ID on an ordinary
+texture, out-of-page rectangles, incompatible nine-slice borders, non-color
+textures and missing/corrupt caches are errors. Headless `validate` retains its
+existing fields and adds `diagnostics`; `valid` now includes these cached sprite
+checks and hard errors return a failing exit code. Other asset types' caches are
+not covered. Pure `Project::validate` and generic document commands remain
+filesystem-free; a syntactically valid but unresolved frame can still be authored
+and is identified by explicit cached validation.
+
+Import preparation checks every sprite referencing the prepared texture versions
+before returning a committable batch. A hard binding error rejects the whole
+explicit batch: no asset-registry publication, revision, journal transaction or
+history entry changes. Cooking can leave unreferenced content-addressed cache
+blobs, which are not authored state. Stale snapshot checks still precede commit.
+The watcher uses the same preparation path: it keeps a rejected asset's old
+fingerprint, reports affected entities and can continue importing unrelated valid
+sources under its existing per-source failure policy. Repair, Undo and Redo use
+existing command-bus history and cached versions, including after source removal.
+
+Raw pixel rectangles on atlas assets remain valid for compatibility and deliberate
+page inspection. They now carry a `raw_atlas_region` warning in import outcomes,
+agent import replies and cached validation: repacking can make them address
+unrelated content. Stable frame IDs are the relocation-safe form. No automatic
+rewrite of authored rectangles or GUI-only mutation was added. Native Inspector
+presentation of these cached diagnostics remains future read-only UI binding.
+The renderer's fallback diagnostics and sampling code are unchanged.
+
+CLI failures now print error Display text instead of Rust Debug structures.
+Atlas dimension, texel-budget and padding failures have separate typed errors.
+Linear-sampling repack differences of up to two levels remain the reviewed
+limitation; this work makes no byte-equality claim for those pixels.
+
+The rebuilt public CLI also packs the three-frame reproduction into 1204×1148
+under all three tested bounds (1204×1148, 1204×1200 and 1204×2048). Claude's
+unchanged 130-frame source set packs into 1204×1148 under a 1204×1170 bound and
+1222×1104 under a 2048×2048 bound. Independent metadata checks preserve all source
+sizes and verify padded bounds and nonoverlap; no pixels were rendered or reviewed.
+The executable SHA-256 is
+`c5256ad99407cea62002edf0ede9e8787d71c097418509b0d133f46a8e9c5fc2`.
+
+Verification passes 374 normal workspace release tests (56 GPU-dependent tests
+remain ignored), workspace all-target release Clippy with warnings denied, 25
+Python tool tests, formatting, generated conventions, the authoring-free dependency
+guard for `incant_types` and `incant_runtime`, and unchanged regenerated schemas
+and SDK. The import/CLI tests exercise atomic batch failure, shared references,
+watcher recovery, exact Undo/Redo, source removal, corrupt caches and warning-only
+success. Source and workflow inputs stayed frozen during Cargo. Compact results,
+source-art and log hashes are in
+[authoring evidence](evidence/sprite-atlas-authoring-2026-10-10.json).

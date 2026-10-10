@@ -10,6 +10,15 @@ after review and passing checks, without requesting separate merge approval.
 
 ## Implemented and locally verified
 
+- Atlas review 0034 authoring follow-up: bounded skyline packing fixes the explicit
+  three-frame false failure and retains previous layouts as maximum bounds grow.
+  Shared import preparation rejects broken frame/nine-slice references atomically;
+  cached source-free validation reports typed entity/texture/frame diagnostics.
+  Raw atlas rectangles receive relocation warnings, and CLI import failures are
+  readable. New packed layouts still need Claude delta review after the shared
+  renderer update; no phone/performance or phase gate is claimed. See
+  [atlas authoring evidence](docs/spikes/sprite-atlases.md#authoring-follow-up-to-review-0034-2026-10-10).
+
 - Typed versioned project JSON, semantic validation, published derived schemas,
   canonical formatting and stable ULIDs.
 - One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,

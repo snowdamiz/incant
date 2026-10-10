@@ -1,0 +1,256 @@
+{
+  "date": "2026-10-10",
+  "source_parent": "fdd9b6ddac747a42c5a4f418c46ee59f86c576ba",
+  "scope": "Nonvisual packing and authoring checks only; frozen Claude review artifacts unchanged.",
+  "regressions_reproduced_before_fix": {
+    "three_frames": {
+      "sizes": [
+        [
+          1200,
+          40
+        ],
+        [
+          1100,
+          4
+        ],
+        [
+          4,
+          1100
+        ]
+      ],
+      "padding": 2,
+      "feasible_page": [
+        1204,
+        1148
+      ],
+      "before": "NoFit",
+      "after": "pass"
+    },
+    "larger_bounds": {
+      "sizes": [
+        [
+          22,
+          23
+        ],
+        [
+          50,
+          55
+        ],
+        [
+          61,
+          26
+        ],
+        [
+          70,
+          67
+        ],
+        [
+          25,
+          3
+        ],
+        [
+          5,
+          77
+        ],
+        [
+          47,
+          63
+        ],
+        [
+          12,
+          61
+        ],
+        [
+          47,
+          50
+        ],
+        [
+          40,
+          38
+        ],
+        [
+          32,
+          27
+        ]
+      ],
+      "padding": 2,
+      "before": {
+        "bounds": [
+          [
+            256,
+            128
+          ],
+          [
+            256,
+            256
+          ]
+        ],
+        "occupied_texels": [
+          31744,
+          32000
+        ]
+      },
+      "after": "area never increases across six nested bounds through 2048x2048"
+    }
+  },
+  "checks": {
+    "workspace_release_tests": 374,
+    "workspace_suites": 120,
+    "ignored_gpu_tests": 56,
+    "workspace_release_all_target_clippy": "pass",
+    "python_tool_tests": 25,
+    "fmt": "pass",
+    "generated_conventions": "pass",
+    "generated_schemas_and_sdk_unchanged": true,
+    "dependency_guard_roots": [
+      "incant_types",
+      "incant_runtime"
+    ],
+    "diff_check": "pass"
+  },
+  "observable_coverage": [
+    "Whole explicit import batch rejection preserves exact project, revision and journal bytes, including unrelated cooked assets.",
+    "Shared missing frames, ordinary texture frame IDs, out-of-page regions and incompatible nine-slice borders identify the affected entity, texture and frame.",
+    "Successful repair, exact Undo/Redo, source-free cache validation and watcher failure/recovery.",
+    "Raw atlas rectangle warnings on unchanged import and cached validation without document mutation.",
+    "Fresh CLI processes prove readable import errors, structured diagnostics and failure status.",
+    "256-frame cap and exact 8192x512 page limit, plus existing generated deterministic/no-overlap cases."
+  ],
+  "public_packing": {
+    "binary_sha256": "c5256ad99407cea62002edf0ede9e8787d71c097418509b0d133f46a8e9c5fc2",
+    "source_parent": "fdd9b6ddac747a42c5a4f418c46ee59f86c576ba",
+    "results": [
+      {
+        "set": "three",
+        "frames": 3,
+        "maximum_size": [
+          1204,
+          1148
+        ],
+        "page": [
+          1204,
+          1148
+        ],
+        "page_texels": 1382192,
+        "fingerprint": "df5680a1589f6baa262a3f0ce33afc20852e766866fed92e095dae113d4425ee"
+      },
+      {
+        "set": "three",
+        "frames": 3,
+        "maximum_size": [
+          1204,
+          1200
+        ],
+        "page": [
+          1204,
+          1148
+        ],
+        "page_texels": 1382192,
+        "fingerprint": "1b794e0d51aaee69fbb5843017706c413c4fbc2051e82a067a5ac44e1a02af9c"
+      },
+      {
+        "set": "three",
+        "frames": 3,
+        "maximum_size": [
+          1204,
+          2048
+        ],
+        "page": [
+          1204,
+          1148
+        ],
+        "page_texels": 1382192,
+        "fingerprint": "e0bf808a99a276d02820efec9aec2014ba37bb95f8d9a9588899b498d5ec7850"
+      },
+      {
+        "set": "review130",
+        "frames": 130,
+        "maximum_size": [
+          1204,
+          1170
+        ],
+        "page": [
+          1204,
+          1148
+        ],
+        "page_texels": 1382192,
+        "fingerprint": "c11ee94c69fac8cb92896d7dd94f97398de4ef3bc9182015e6c97fc6cb08512d"
+      },
+      {
+        "set": "review130",
+        "frames": 130,
+        "maximum_size": [
+          2048,
+          2048
+        ],
+        "page": [
+          1222,
+          1104
+        ],
+        "page_texels": 1349088,
+        "fingerprint": "5395bbc518f178f41ce1571cd245de91c2123093e66e8c7322bbaec0b6177797"
+      }
+    ],
+    "all_frame_sizes_and_extrusions_valid": true,
+    "no_overlap": true,
+    "larger_bounds_never_increase_area_in_cases": true,
+    "rendered_pixels_or_performance_gate": false
+  },
+  "public_source_art": {
+    "directory": "handoffs/0034-sprite-atlas-review/evidence/art",
+    "sha256": {
+      "atlas-v1.atlas.json": "02a786d71aec677699c4809e525c745fe0478992f17c1a44ef4207c0ed90c875",
+      "badge.png": "648441d43c6d8dd8df7fc6bc0a357a41168a223e55163cfe797d552483af9796",
+      "ballast-v1.png": "4c88a7958c01b09680e291df9a32cb227cbe84b8153e604d0342a727572533c6",
+      "ballast-v2.png": "1ced828bc98b27184ef1b2c75015ecca8635d70d127478ac43c3942fa330e3cb",
+      "big2048.png": "524b119ddad767a6b17d18ea2234b16d70af5f7d1793e58b050ff40c1a8f2b6e",
+      "cards.png": "714886d9a78831b071338336ddee4699306a45063fac82dac229f4a54a1c0d90",
+      "halo.png": "fa0c9fad2affbe21dd230ed1ef155e758bc70fa69418a17fe7ca03cd04e55e83",
+      "hstrip.png": "ab0efa89ed722a58685708d3d869a09bac0fd6277b41f2ae148f4281494f8dbb",
+      "labels34.png": "d85c4aad63e2699d3ab300d1d903e9efd6f98983bfaad133b7b7d56b1eaede0c",
+      "one.png": "a5dfa6bdb4097981508398281e5f574583ea4d10607dd702596c20c278add50a",
+      "probe.png": "02a4232f33b43a0464ef3bd72a58f887666f9d782ba395d895102caea8c598f4",
+      "sheet.png": "7451ef95e85b803614deb2e836bad9a9e2fc773512ef3d7570dbf95c7b717cf7",
+      "vstrip.png": "0f58ee5b893ff3622d25a81ac513c0735a023a81165841648745b2b3ffaa4ecd"
+    }
+  },
+  "logs": {
+    "packing_before": {
+      "path": "/tmp/incant-atlas-packing-before.log",
+      "sha256": "6ee6afe8dd5da0e82b27f6a88b51f51bc183fab03db22c94353d6c2efa864608"
+    },
+    "packing_after": {
+      "path": "/tmp/incant-atlas-packing-after.log",
+      "sha256": "302bc884d08ad9ec5c3cf6d10f55e2700fc65ee6470afcdf8bdb6034b7dac893"
+    },
+    "workspace_tests": {
+      "path": "/tmp/incant-atlas-authoring-workspace-tests.log",
+      "sha256": "3e049d0c894817253a20abcbd22da2a61045f93bc06d2c72e50d5c0d6045e894"
+    },
+    "workspace_clippy": {
+      "path": "/tmp/incant-atlas-authoring-clippy.log",
+      "sha256": "55cc265e48f9b394b413273c35edfe1a1e733fe78f8da91e5dc050cbee89a925"
+    },
+    "tools": {
+      "path": "/tmp/incant-atlas-authoring-tools.log",
+      "sha256": "d778e573dae8fe6e14aa6119560f354077d9b398036cd6c56b5d2aaf940f0e3a"
+    },
+    "public_packing": {
+      "path": "/tmp/incant-atlas-authoring-public-proof.log",
+      "sha256": "0a00af3079eaa0f7b6fd025e33f2045c5366a721b30924670b1ef767f0eeade4"
+    },
+    "public_proof_script": {
+      "path": "/tmp/incant-atlas-authoring-proof.py",
+      "sha256": "90242988ddc1164c7d3c9a8c672612542f0b025e5f696c3b01de964b99ed4fb3"
+    }
+  },
+  "limitations": [
+    "Packing remains a bounded unrotated heuristic; no universal feasibility or optimality guarantee.",
+    "Import preparation may leave unreferenced content-addressed cache blobs on rejection; authored state remains unchanged.",
+    "Pure document validation stays filesystem-free. Explicit cached sprite validation does not check other asset kinds.",
+    "Raw atlas page rectangles remain accepted with warnings; native Inspector binding remains future read-only UI work.",
+    "No renderer change, pixel capture or new GPU review was performed. New layouts need Claude delta review after the shared renderer integration.",
+    "Reviewed linear-sampling differences of up to two levels remain informational.",
+    "No phone, memory, cook-time, runtime performance or phase gate is claimed."
+  ]
+}
