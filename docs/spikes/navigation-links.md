@@ -90,7 +90,9 @@ has no physics bodies and validates explicit logical traversal only. Centre
 endpoints also snap about 5 cm inward; movement uses the returned positions.
 
 The dependency steering PR subsequently exposed a Linux symmetric-crowd stall.
-Its correction, updated rendered review and final integrated/hosted checks are
-required before merging this increment. Native link editing/debug visualization and
+Its correction is integrated at `61cf71d`: all 289 Rust tests, Clippy, the
+public link/100-agent saved workflows and the new native package pass. The
+updated steering rendered review and current-head hosted checks remain required
+before merging this increment. Native link editing/debug visualization and
 grid navigation remain separate outstanding Phase 1 work; this increment does
 not approve a phase gate.

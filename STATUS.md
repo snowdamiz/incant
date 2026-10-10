@@ -61,8 +61,9 @@ within its documented workload.
   match 593 frames and 26 logs; mid-drop reopen matches all 49 window frames.
   Session-local generations differ on reopen. Quantized heights visibly leave
   an ungrounded logical walker 5 cm above a flat platform; exact source heights
-  remain open. Final integration must include the steering Linux convergence
-  correction and updated checks. See [off-mesh links](docs/spikes/navigation-links.md).
+  remain open. The steering correction is integrated at `61cf71d`; all 289 Rust
+  tests, Clippy, both public saved workflows and native packaging pass again.
+  Updated steering visual review and hosted checks remain pending. See [off-mesh links](docs/spikes/navigation-links.md).
 
 - Bounded local avoidance exposes read-only `api.steerAgents` proposals for up
   to 128 agents. Library and public 100-agent save/reopen workflows pass.
