@@ -1,5 +1,5 @@
 use incant_doc::{Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform};
-use incant_script::{PlaySession, ScriptHost};
+use incant_play_legacy::{PlaySession, ScriptHost};
 use serde_json::json;
 fn project(sensor: bool) -> (Project, String, String, String) {
     let mut project = Project::empty("Play physics");

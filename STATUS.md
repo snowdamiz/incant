@@ -53,6 +53,33 @@ within its documented workload.
 
 ## Active work
 
+- Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
+  SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
+  and their exclusive scope ends; rejected batches restore the numeric undo
+  through verified layouts. Retained command functions never reactivate.
+  All 373 workspace tests (21 native host tests) and workspace Clippy pass, including relocation,
+  structural rejection after transform writes, deferred work and caught overflow.
+  Independent review found no actionable issue; twelve standalone development
+  runs passed with the original project/journal absent. Native SDK types and
+  a TypeScript example are included; the legacy gameplay migration and
+  authenticated shipping bytecode remain open. See the
+  [structural script audit](docs/spikes/native-script-structural.md).
+
+- The first authoring-free QuickJS host executes compiler-produced bytecode over
+  actual native numeric columns, with detached views and bounded rollback on
+  exceptions, memory/CPU failures and deferred work. All 363 workspace tests and
+  workspace Clippy pass; schemas/SDK remain unchanged and a repeated standalone
+  native-script probe passes. Hosted CI remains pending. Existing gameplay remains explicitly
+  in `incant_play_legacy` pending migration; SDK/state/timers/queries/saves and
+  authenticated export loading are still open. See the
+  [native script audit](docs/spikes/native-script-columns.md).
+
+  Direct iOS simulator and Android native-host compilation also pass after
+  enabling target-specific QuickJS binding generation. Existing desktop features
+  remain unchanged, and the platform workflow now checks the host separately
+  from its smoke apps. These are compile checks, not mobile script execution or
+  device performance evidence.
+
 - CI build reuse now keeps the ignored GPU suite on the workspace feature graph,
   combines macOS editor/headless builds and caches Rust dependencies. The measured
   baseline is a 38m15s median PR check, dominated by compilation; repeated Windows
@@ -61,6 +88,26 @@ within its documented workload.
   gameplay probes. The final GPU pass compiles nothing. Hosted cold/warm timing
   remains pending; all platform/test coverage and open device/license gates stay
   in force. See [CI evidence](docs/spikes/ci-build-performance.md).
+  The next reuse change combines required binaries/examples, preserves fresh
+  shipping verification and gives cold desktop jobs a bounded 60-minute deadline.
+  At base `588b3ab`, 352 normal tests, the exact 44 GPU tests, 18 direct public
+  commands and a fresh shipping package pass locally. The combined build only
+  recompiles workspace crates. Authorized exact-ID cleanup removed 7.60 GiB of
+  merged-PR Windows npm caches while preserving all other existing entries;
+  [cache evidence](docs/spikes/ci-cache-cleanup-2026-10-10.json) records each result.
+  First cold macOS verification passed in 33m58s execution (2m30s queue), but
+  package-selected tools still shifted compilation after the GPU savings.
+  The follow-up keeps workspace selection with exact tool targets: local Cargo
+  artifacts match 656 test dependencies, leaving only two required Tauri feature
+  variants, versus 45 differences with package selection. All direct probes and
+  fresh shipping checks pass; hosted validation of this refinement remains open.
+  All 17 checks on the earlier PR #48 head pass: cold macOS 33m58s, Linux 17m56s,
+  Windows 40m21s; each preserves all 44 GPU cases. The final Rust cache set is
+  7.992 GiB. All Rust saves now target main, with filtered desktop/credential
+  producers; [retention evidence](docs/spikes/ci-cache-retention.md) records the
+  9.114 GiB shared footprint and narrow headroom. After verified merge, exact
+  cleanup freed PR #48's private 7.992 GiB while preserving every other entry.
+  Main cache seeding and subsequent warm PR measurements remain open.
 
 - Windows MSVC compilation and doctests now share Cargo's static CRT policy;
   Tauri's package-local shim is disabled after it shadowed the real runtime in

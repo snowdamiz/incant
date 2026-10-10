@@ -14,7 +14,7 @@ import subprocess
 import sys
 
 FORBIDDEN = frozenset({
-    'incant_doc', 'incant_cmd', 'incant_agent', 'incant_editor',
+    'incant_doc', 'incant_cmd', 'incant_agent', 'incant_editor', 'incant_play_legacy',
     'loro', 'loro-internal', 'automerge',
 })
 

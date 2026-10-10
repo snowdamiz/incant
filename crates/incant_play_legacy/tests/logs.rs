@@ -1,6 +1,6 @@
 use incant_cmd::CommandBus;
 use incant_doc::Project;
-use incant_script::{LogLevel, ScriptError, ScriptHost};
+use incant_play_legacy::{LogLevel, ScriptError, ScriptHost};
 
 #[test]
 fn committed_logs_preserve_order_and_survive_hot_reload_until_consumed() {

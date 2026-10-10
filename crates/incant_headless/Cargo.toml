@@ -11,7 +11,7 @@ serde_json = { workspace = true }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
 incant_core = { workspace = true }
-incant_script = { workspace = true }
+incant_play_legacy = { workspace = true }
 incant_input.workspace = true
 incant_localization.workspace = true
 incant_agent = { workspace = true }

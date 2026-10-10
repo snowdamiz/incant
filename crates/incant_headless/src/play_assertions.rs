@@ -1,5 +1,5 @@
 //! Data-only assertions over completed game ticks. No script or host IO capability.
-use incant_script::PlaySession;
+use incant_play_legacy::PlaySession;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};

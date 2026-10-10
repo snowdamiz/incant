@@ -1,5 +1,10 @@
 name: Desktop editor and engine
 on:
+  push:
+    branches: [main]
+    # Refill shared dependencies when their inputs change, without repeating
+    # this matrix after every source-only merge.
+    paths: ['Cargo.lock', '**/Cargo.lock', 'Cargo.toml', '**/Cargo.toml', 'rust-toolchain', 'rust-toolchain.toml', '.cargo/**', '.github/workflows/desktop.yml']
   pull_request:
     paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', '.cargo/**', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'package*.json', 'tools/probes/**', 'tools/shipping*.py', 'tools/tests/test_shipping.py', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
   workflow_dispatch:
@@ -17,7 +22,9 @@ jobs:
           - {runner: windows-latest, platform: Windows, suffix: '.exe'}
           - {runner: ubuntu-latest, platform: Linux, suffix: ''}
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 45
+    # Cold Windows runs can exceed 45 minutes as shipping and saved-workflow
+    # coverage grows. Keep every check and allow a bounded recovery margin.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
@@ -38,8 +45,8 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # PR caches stay in their merge-ref scope; forks only restore.
-          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+          # Share one default-branch dependency set; all PRs only restore.
+          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       - run: npm ci
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
@@ -52,8 +59,9 @@ jobs:
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
         run: cargo test --workspace --release --locked -- --ignored --test-threads=1 --nocapture
-      - run: cargo build -p incant_editor -p incant_headless --release --features incant_editor/custom-protocol --locked
-      - run: cargo build -j2 -p incant_cook --example cook_scene --release --locked
+      # Keep workspace feature unification from the release tests while building
+      # only the editor, headless and cook tools used below.
+      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python tools/shipping.py artifacts/shipping-runtime
       - name: Verify Windows executables do not require redistributable CRT DLLs

@@ -1,6 +1,6 @@
 use incant_cmd::CommandBus;
 use incant_doc::Project;
-use incant_script::{PlaySession, ScriptError, ScriptHost};
+use incant_play_legacy::{PlaySession, ScriptError, ScriptHost};
 use serde_json::{Value, json};
 
 #[test]

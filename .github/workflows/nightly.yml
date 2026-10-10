@@ -1,7 +1,7 @@
 name: Six platform probes
 on:
   pull_request:
-    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_types/**', 'crates/incant_runtime/**', 'crates/incant_cook/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', '.cargo/**', 'Cargo.lock', '.github/workflows/nightly.yml']
+    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_types/**', 'crates/incant_runtime/**', 'crates/incant_script/**', 'crates/incant_cook/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', '.cargo/**', 'Cargo.lock', '.github/workflows/nightly.yml']
   schedule: [{cron: '30 6 * * *'}]
   workflow_dispatch:
 permissions:
@@ -26,8 +26,8 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # PR caches stay in their merge-ref scope; forks only restore.
-          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+          # Share one default-branch dependency set; all PRs only restore.
+          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       - run: cargo build -p incant_platform_smoke --release --locked
       - run: cargo test -p incant_runtime -p incant_cook --release --locked
       - shell: bash
@@ -51,8 +51,8 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # PR caches stay in their merge-ref scope; forks only restore.
-          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+          # Share one default-branch dependency set; all PRs only restore.
+          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       - run: cargo install wasm-bindgen-cli --version 0.2.126 --locked
       - run: tools/platforms/web.sh
       - run: cargo check -p incant_audio --target wasm32-unknown-unknown --locked
@@ -71,11 +71,13 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # PR caches stay in their merge-ref scope; forks only restore.
-          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+          # Share one default-branch dependency set; all PRs only restore.
+          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       - run: tools/platforms/ios.sh simulator
       - run: cargo check -p incant_audio --features device --target aarch64-apple-ios-sim --locked
       - run: cargo check -p incant_runtime --target aarch64-apple-ios-sim --locked
+      # Compile the native QuickJS host too; the smoke app does not link it yet.
+      - run: cargo check -p incant_script --target aarch64-apple-ios-sim --locked
       - run: python3 tools/platforms/ios-check.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with: {name: hello-ios-simulator, path: artifacts/ios-simulator, if-no-files-found: error}
@@ -93,8 +95,8 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # PR caches stay in their merge-ref scope; forks only restore.
-          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+          # Share one default-branch dependency set; all PRs only restore.
+          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       - run: cargo install cargo-ndk --version 4.1.2 --locked
       - name: Install SDK components already licensed on the hosted runner
         run: |
@@ -102,6 +104,11 @@ jobs:
       - run: ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.13004108" tools/platforms/android.sh
       - run: ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.13004108" cargo ndk -t arm64-v8a check -p incant_audio --features device --locked
       - run: cargo check -p incant_runtime --target aarch64-linux-android --locked
+      # QuickJS has C sources, so this check needs the installed NDK toolchain.
+      - name: Compile the native QuickJS host for Android
+        run: |
+          INCANT_SCRIPT_NDK="$ANDROID_HOME/ndk/28.0.13004108"
+          ANDROID_NDK_HOME="$INCANT_SCRIPT_NDK" LIBCLANG_PATH="$INCANT_SCRIPT_NDK/toolchains/llvm/prebuilt/linux-x86_64/lib" cargo ndk -t arm64-v8a check -p incant_script --locked
       - name: Execute native probe in a disposable Android emulator
         run: |
           test -c /dev/kvm

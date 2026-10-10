@@ -1,7 +1,7 @@
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_core::{Engine, GridNavigationQuery, GridPathRequest};
 use incant_doc::{Entity, NavigationGrid, Project, Scene};
-use incant_script::{PlaySession, ScriptHost};
+use incant_play_legacy::{PlaySession, ScriptHost};
 use serde_json::json;
 
 fn fixture() -> (Project, String, String) {

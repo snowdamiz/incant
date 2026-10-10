@@ -2,7 +2,7 @@ use incant_doc::{
     Collider, ColliderShape, Entity, NavigationMesh, NavigationSource, NavigationSourceKind,
     Project, Scene, Transform,
 };
-use incant_script::{PlaySession, ScriptHost};
+use incant_play_legacy::{PlaySession, ScriptHost};
 use serde_json::json;
 fn fixture() -> (Project, String, String, String) {
     let mut p = Project::empty("Scripted rooms");

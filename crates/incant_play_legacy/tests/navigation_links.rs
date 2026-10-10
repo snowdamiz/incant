@@ -1,5 +1,5 @@
 use incant_doc::{Collider, ColliderShape, Entity, Project, Scene, Transform};
-use incant_script::PlaySession;
+use incant_play_legacy::PlaySession;
 use serde_json::json;
 
 fn fixture() -> (Project, String, String, String, serde_json::Value) {
@@ -108,7 +108,7 @@ fn invalid_enabled_endpoint_cannot_publish_commands_state_or_a_partial_rebuild()
     let mut play = PlaySession::new(&project, &source).unwrap();
     let error = play.tick().unwrap_err();
     assert!(
-        matches!(error, incant_script::ScriptError::Document(_)),
+        matches!(error, incant_play_legacy::ScriptError::Document(_)),
         "{error}"
     );
     assert_eq!(play.project(), &project);

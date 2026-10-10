@@ -64,11 +64,16 @@ impl NativeWorld {
     /// partial writes; process abort does not run cleanup. The simulation tick is
     /// unchanged. An unused scope does no change tracking or propagation work.
     ///
-    /// A script adapter must validate/restore its own bounded undo data *inside*
-    /// this scope and revoke every foreign view before Rust reads/restores the
-    /// component data, the current chunk visit returns, or this scope exits.
+    /// A trusted script adapter may derive raw pointers during visits and retain
+    /// them until this outer scope ends. It must exclusively hold this handle,
+    /// make no further visits while foreign views exist, and revoke every view
+    /// before Rust reads/restores component data or the scope exits. Allocations
+    /// stay fixed for that entire interval. Rollback using retained raw pointers
+    /// belongs inside the outer scope, after revocation. Owned snapshots can be
+    /// restored through a new scope if the caller verifies its matching layout.
     /// This API supplies no foreign pointers,
-    /// detachment, rollback or script host. Native slices cannot outlive a visit.
+    /// detachment, rollback or script host. Native slices cannot outlive a visit;
+    /// extending a raw pointer's use requires the adapter's separate safety proof.
     ///
     /// ```
     /// # use incant_runtime::{CookedScene, NativeWorld, StableId, TRANSFORM_STRIDE};

@@ -1,6 +1,6 @@
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::{LocaleSettings, Project, new_id};
-use incant_script::{PlaySession, SaveError, ScriptHost};
+use incant_play_legacy::{PlaySession, SaveError, ScriptHost};
 use serde_json::{Value, json};
 fn project() -> (Project, String) {
     let mut p = Project::empty("Languages");

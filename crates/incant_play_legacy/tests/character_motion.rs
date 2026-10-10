@@ -1,7 +1,7 @@
 use incant_doc::{
     BodyMotion, Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform,
 };
-use incant_script::PlaySession;
+use incant_play_legacy::PlaySession;
 use serde_json::json;
 
 fn course(wall: bool) -> (Project, String, String) {

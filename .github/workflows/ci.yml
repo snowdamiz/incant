@@ -24,14 +24,14 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # PR caches stay in their merge-ref scope; forks only restore.
-          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+          # Share one default-branch dependency set; all PRs only restore.
+          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       - run: npm ci
       - run: python3 tools/generate_conventions.py --check
       - run: npm run test:tools
       # Check the real binary-scene/native-world slice and its shared values.
       # The legacy PlaySession still requires migration and is not certified here.
-      - run: python3 tools/check_runtime_dependencies.py incant_types incant_runtime
+      - run: python3 tools/check_runtime_dependencies.py incant_types incant_runtime incant_script
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui
@@ -47,9 +47,10 @@ jobs:
         run: cargo test --workspace --release --locked -- --ignored --test-threads=1 --nocapture
       - name: Validate cooked KTX2 with the Khronos reference tool
         run: python3 tools/validate_ktx.py
-      - run: cargo build -p incant_editor -p incant_headless --release --features incant_editor/custom-protocol --locked
+      # Keep workspace feature unification from the release tests while building
+      # only these tools; execute the resulting binaries directly below.
+      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --release --features incant_editor/custom-protocol --locked
       - run: target/release/incant_headless schema schemas
-      - run: ./tools/cargo build -j2 -p incant_cook --example cook_scene --release --locked
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python3 tools/shipping.py artifacts/shipping-runtime
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -82,4 +83,4 @@ jobs:
       - run: git diff --exit-code -- schemas
       - run: node_modules/.bin/tsc -p sdk/ts/tsconfig.json
       - run: target/release/incant_headless eval-check
-      - run: cargo run -p incant_cmd --release --locked --example collaboration_spike
+      - run: target/release/examples/collaboration_spike

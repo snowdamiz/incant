@@ -1,0 +1,23 @@
+[package]
+name = "incant_play_legacy"
+description = "Temporary authoring-side compatibility for document-backed script play"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+rquickjs = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+incant_doc = { workspace = true }
+incant_cmd = { workspace = true }
+incant_core = { workspace = true }
+incant_input.workspace = true
+incant_localization.workspace = true
+sha2.workspace = true
+schemars.workspace = true
+
+[target.'cfg(any(unix, windows))'.dependencies]
+cpu-time.workspace = true

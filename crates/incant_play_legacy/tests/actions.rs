@@ -1,5 +1,5 @@
 use incant_doc::Project;
-use incant_script::PlaySession;
+use incant_play_legacy::PlaySession;
 use serde_json::json;
 
 #[test]

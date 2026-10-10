@@ -1,7 +1,7 @@
 //! Bounded isolated playback. Runtime edits use PlaySession's simulation command
 //! bus; the authored project and its journal are never opened for writing.
 use clap::Args;
-use incant_script::PlaySession;
+use incant_play_legacy::PlaySession;
 use serde::Serialize;
 use std::{
     fs,
@@ -87,15 +87,15 @@ pub enum PlayError {
     #[error(transparent)]
     Json(#[from] serde_json::Error),
     #[error(transparent)]
-    Script(#[from] incant_script::ScriptError),
+    Script(#[from] incant_play_legacy::ScriptError),
     #[error("play failed at tick {tick}: {source}")]
     Tick {
         tick: u64,
         #[source]
-        source: incant_script::ScriptError,
+        source: incant_play_legacy::ScriptError,
     },
     #[error(transparent)]
-    Save(#[from] incant_script::SaveError),
+    Save(#[from] incant_play_legacy::SaveError),
     #[error(transparent)]
     InputRecording(#[from] incant_input::RecordingError),
     #[error(transparent)]
