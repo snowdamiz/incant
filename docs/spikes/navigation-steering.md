@@ -175,3 +175,24 @@ minimum separation 0.59603359 m and minimum plinth clearance
 0.05000004 m. All 286 Rust tests and Clippy pass. The independent
 100-agent public workflow repeats and resumes exactly with unchanged authoring
 files. Claude's updated rendered review and final hosted checks remain pending.
+
+
+## Final correction review
+
+Claude's revision-3 rendered review passes source `4c495e9`: both repetitions
+match 803 frames and 13 logs, every saved window matches, and all 27 plays pass
+on their first attempt with the same immutable binary. All 100 remain at goal
+from tick 2212 through 2700 and through the separate 4990-tick observation. No
+body overlap or persistent orbiting occurs. The rounded trace measures 127 ticks
+of longest stall; the behavior's full-precision speed/arrival accounting reports
+137, so these measurements are retained separately.
+
+Long sideways sweeps remain (12.8 m versus the original 13.3 m), and packed goals
+cause brief shuffling (240 near-goal sharp changes versus 164). All millimetre
+positions freeze from tick 2225. These are documented local-avoidance limitations,
+not approval of the final game's movement quality. Keep this unchanged course as
+a regression fixture. No full crowd planner, physics-collision guarantee, physical
+device performance gate or phase approval is claimed. Final local validation is
+286 Rust, 40 GPU, 315 UI and five tool tests, full Clippy, generated contracts,
+strict TypeScript, native packaging and WASM/iOS compilation. Hosted checks of the
+final PR head remain required before merge.

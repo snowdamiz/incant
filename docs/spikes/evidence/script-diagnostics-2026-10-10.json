@@ -144,8 +144,8 @@
       "rendering_or_physics_collision_gate": false
     },
     "awaiting": [
-      "final steering rendered review",
       "hosted checks and dependency merge"
-    ]
+    ],
+    "steering_rendered_review": "passed at 4c495e9; see handoffs/0027-steering-lookdev/result.md"
   }
 }
