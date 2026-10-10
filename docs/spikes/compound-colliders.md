@@ -92,3 +92,24 @@ patch was made. A fresh project built through public commands repeats the trace
 exactly without captures. The helper supports `--no-captures`; the reproducible
 [energy probe](../../tools/probes/compound-stool-energy.py) and
 [measurements](evidence/compound-stool-energy-2026-10-09.json) retain the method.
+
+
+## Resumed Claude review, 2026-10-10
+
+The director reauthorized computer use. Handoff 0025 reviewed the corrected
+runtime: two runs of 228 frames are byte-identical, with arch/terrace motion and
+falling props accepted and no new solver defect. Native CUA captures verified
+mixed/64-part lists, End/Tab focus, exact part paths and full IDs, scrolling and
+primitive regression. Claude accepted the captured appearance scope. Account
+email-bearing originals remain ignored; committed Inspector crops exclude it.
+Native images are CUA JPEG at Retina scale; the OS sharing indicator obscures
+the unchanged traffic lights. Native reordering and invalid-project display are
+not claimed: the Inspector is read-only and invalid projects reject loading.
+
+Claude then reduced the unavailable Agent pane's default height to 200–240 px,
+while retaining deliberate user resizing and the ready Agent's normal size.
+The browser minimum-size Inspector gains 60 px; all 334 UI tests/build and the
+32 browser states pass. The integrated native build at `19c3be9` is packaged,
+but final post-change captures wait for the Mac to be unlocked. This is a device
+availability issue, not a renewed screen-capture prohibition. PR #25 remains a
+draft until Claude confirms the rebuilt native layout and updated CI passes.

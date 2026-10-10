@@ -65,7 +65,9 @@ within its documented workload.
   2026-10-10. Claude completed the browser/engine report and repeatable numerical replay.
   A suspected prop instability was investigated; the original energy objection was
   unsupported, so no solver change was made. All twelve hosted checks passed at
-  `18e3406`; integrated review, updated checks and merge remain open.
+  `18e3406`. Handoff 0025 accepted the supplied native/64-part and corrected-runtime
+  scope, then improved the unavailable Agent pane. Its 334 UI checks/build pass.
+  Final post-change native captures await Mac unlock; updated CI and merge remain open.
   See [compound colliders](docs/spikes/compound-colliders.md).
 
 - Fixed-tick script timers, repeat/cancel/replace, copied payloads and a saved
@@ -404,7 +406,8 @@ The director reauthorized computer use and screen capture on 2026-10-10.
 Claude owns resumed visual review; Astra supplies native captures and verifies
 behavior. Prior paused evidence remains explicitly scoped to its recorded runs.
 Compound-collider PR #25 is a separate draft pending its final native appearance
-review; its Inspector and 64-part checks are now being resumed.
+review of the compact Agent revision. The Mac is currently locked; the unlock
+request is pending while nonvisual integration continues.
 
 ## External prerequisites still required
 
