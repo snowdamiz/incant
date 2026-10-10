@@ -91,7 +91,7 @@ export function ObjectListView({
   const nameOf: NameOf = (target) => ctx.refs?.(target)?.name ?? null;
   const summaries = value.map((entry, index) => summarize(item, entry, [...path, String(index)], ctx.component, nameOf));
 
-  const viewport = useViewport(listRef, ROW * 4);
+  const [viewport, attachViewport] = useViewport(listRef, ROW * 4);
   const [first, last] = rowRange(viewport, value.length, ROW, 6, 4);
   const mounted = mountedIndices(first, last, value.length, [current]);
 
@@ -146,7 +146,7 @@ export function ObjectListView({
             Read-only. Arrow keys choose a {noun.toLowerCase()}; its fields follow the list.
           </span>
           <div
-            ref={listRef}
+            ref={attachViewport}
             className="object-list__items"
             role="listbox"
             id={id}
