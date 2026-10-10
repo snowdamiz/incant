@@ -712,8 +712,10 @@ mock response, simulator build or unsigned package counts as a shipped product.
   invalid direct numeric writes with no structural commands: 35 scoped tests,
   both Clippy modes and a fresh twelve-process shipping proof pass. Component
   domains are checked after view revocation; existing native simulation/derived
-  hierarchy overflow for huge finite values remains open. Hosted results for the
-  corrected head remain pending. See
+  hierarchy overflow for huge finite values remains open. Main50 plus the
+  reviewed native-save integration passes 75 scoped tests, 28 tool tests, both
+  Clippy modes and fresh source-free shipping/save proofs; hosted exact-head
+  results remain pending. See
   [evidence](docs/spikes/cooked-native-scripts.md). Full gameplay migration,
   authenticated file exports, cross-target embedding, automatic source-map
   diagnostics, MSVC symbol audit and device/performance gates remain open.

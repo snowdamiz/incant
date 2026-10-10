@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "binaries": {
+    "incant_headless": "9e35eddd04669832922a50795167eb8e61309f41816d9cabae35295f8bbb51d8",
+    "cook_scene": "a73509eeb0f71668b5b39c085902439288fbbc754a26cd9951111f6e3b8215ec",
+    "save_world": "19c33cb1dcbb8da9d42254d9e14ddb404339b0b4df7df325018038574f0e91f7"
+  },
+  "authoring_hashes_preserved": {
+    "world.incant.json": "3bb78c5ee1d7f0954e581b6a7975233bf81b895ed01a52d45c782fccbb4a7fa3",
+    "history.jsonl": "fffbbdc3506b129547772cf15f80752e4c8f287bce19674c9f839d13cabd823e"
+  },
+  "authoring_removed_before_execution": true,
+  "scene_removed_before_resume": true,
+  "fresh_process_continuation_equals_uninterrupted": true,
+  "repeated_and_zero_tick_restores_exact": true,
+  "corruption_rejected": true,
+  "existing_save_preserved": true,
+  "observations": [
+    {
+      "operation": "scene",
+      "additional_ticks": 60,
+      "output": "tick=60 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "dfea9ce6fa1c8f1b473930b73b8ad91021334fd46710d033dbc33f7eaee52395"
+    },
+    {
+      "operation": "scene",
+      "additional_ticks": 25,
+      "output": "tick=25 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "98cb839cafb3d411a4640fcc64a14cd239cc40696c34c1a40400df49656d3ba2"
+    },
+    {
+      "operation": "save",
+      "additional_ticks": 35,
+      "output": "tick=60 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "dfea9ce6fa1c8f1b473930b73b8ad91021334fd46710d033dbc33f7eaee52395"
+    },
+    {
+      "operation": "save",
+      "additional_ticks": 35,
+      "output": "tick=60 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "dfea9ce6fa1c8f1b473930b73b8ad91021334fd46710d033dbc33f7eaee52395"
+    },
+    {
+      "operation": "save",
+      "additional_ticks": 0,
+      "output": "tick=25 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "98cb839cafb3d411a4640fcc64a14cd239cc40696c34c1a40400df49656d3ba2"
+    }
+  ],
+  "scope": "Native Transform/Velocity/hierarchy/clock only; no VM, timers, inputs, complete session, durability or device gate"
+}
