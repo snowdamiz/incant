@@ -96,3 +96,10 @@ updated steering rendered review and current-head hosted checks remain required
 before merging this increment. Native link editing/debug visualization and
 grid navigation remain separate outstanding Phase 1 work; this increment does
 not approve a phase gate.
+
+
+The near-head-on steering correction is integrated at `2568cf5`. All 291 Rust
+tests and Clippy pass, as do both public steering/off-mesh save-reopen workflows
+and the unsigned native package. This retains the separately reviewed off-mesh
+behavior and its documented quantized-height limitation. Final steering rendered
+review, hosted checks and dependency merges remain pending.
