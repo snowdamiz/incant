@@ -197,3 +197,29 @@ the previous proof separately. Logs are `/tmp/incant-cooked-numeric-tests.log`,
 `/tmp/incant-cooked-numeric-no-compiler.log` and
 `/tmp/incant-cooked-numeric-shipping.log`. Mobile compile results above belong to
 the earlier tree and do not certify this corrected source or device execution.
+
+### Rollback borrow correction (final pre-publication source)
+
+Deeper independent review found that revisiting columns for numeric validation
+creates fresh mutable slices, so restoring afterward through cached pointers
+from the initial visit would have an invalid Rust aliasing/provenance argument.
+Loan destruction now revokes all JS buffers, verifies the complete saved IDs and
+numeric layouts through a safe visitor, and restores undo with `copy_from_slice`
+through another fresh visitor. It never dereferences the original raw component
+pointers after a subsequent mutable visit. This removes the unsafe rollback
+copy; foreign buffer creation remains the only use of those retained pointers.
+Existing invalid-write, callback-error, deadline/allocation, deferred-work and
+partial-exposure regressions exercise this rollback path.
+
+The same 35 scoped tests/doctests and both Clippy modes above pass on this final
+correction; the full workspace and mobile results still belong to the earlier
+reviewed baseline. A third fresh shipping proof passed the unchanged twelve
+source-free processes and all compiler/dynamic-source/symbol checks. Final
+stripped size is 1,790,136 bytes, SHA256
+`3f7a881619fb8d065cbc25ed9c15d9f3d3324ab928cdabd8a292bb0a0b675f41`,
+with matched dSYM UUID `df418244-4bfe-3281-9421-e4ae3a5b6051`.
+[Final proof](evidence/cooked-native-script-safe-undo-2026-10-10.json) is preserved
+separately from both earlier proofs. Raw output:
+`artifacts/cooked-script-safe-undo-verified/`; logs:
+`/tmp/incant-cooked-safe-undo-{tests,clippy,no-compiler,shipping}.log`.
+The huge-finite simulation/hierarchy limitation above remains open.
