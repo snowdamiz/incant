@@ -126,6 +126,13 @@ export namespace PhysicsTriggerEventSchema {
 }
 export type PhysicsTriggerEvent = PhysicsTriggerEventSchema.Root;
 
+export namespace PlayAssertionsSchema {
+  export type Check = { "expect": Expect; "name": string; "path": string; "tick": number };
+  export type Expect = ({ "type": "equals"; "value": unknown }) | ({ "tolerance": number; "type": "approx"; "value": number }) | ({ "max": number; "min": number; "type": "range" }) | ({ "exists": boolean; "type": "exists" });
+  export type Root = { "checks": Array<Check>; "format": string; "version": number };
+}
+export type PlayAssertions = PlayAssertionsSchema.Root;
+
 export namespace PointLightSchema {
   export type Root = { "color": [number, number, number]; "intensity": number; "range": number };
 }

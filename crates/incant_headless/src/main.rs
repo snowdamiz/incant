@@ -2,6 +2,7 @@ use clap::{Parser, Subcommand};
 mod assets;
 mod eval;
 mod play;
+mod play_assertions;
 mod play_logs;
 mod play_saves;
 mod watch;
@@ -385,6 +386,10 @@ fn main() -> Result<()> {
                 json!(schemars::schema_for!(incant_input::InputRecording)),
             );
             registry.insert(
+                "PlayAssertions".into(),
+                json!(schemars::schema_for!(play_assertions::PlayAssertions)),
+            );
+            registry.insert(
                 "Command".into(),
                 json!(schemars::schema_for!(incant_cmd::Command)),
             );
@@ -434,7 +439,14 @@ fn main() -> Result<()> {
                 json!({"state":engine.snapshot(),"assets":assets.snapshot(),"wall_ms":start.elapsed().as_secs_f64()*1000.}),
             )?;
         }
-        Cli::Play(options) => print(play::run(options).map_err(|error| error.to_string())?)?,
+        Cli::Play(options) => {
+            let report = play::run(options).map_err(|error| error.to_string())?;
+            let passed = report.passed;
+            print(report)?;
+            if !passed {
+                return Err("gameplay assertions failed; see JSON assertion results".into());
+            }
+        }
         Cli::Script {
             project,
             compiled_script,

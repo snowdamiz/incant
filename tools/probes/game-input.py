@@ -103,10 +103,36 @@ def main():
     recording.write_text(json.dumps(clip, indent=2) + "\n")
     before = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in [project, journal, recording]}
     common = ["play", project, "--compiled-script", compiled, "--input-replay", recording]
-    first = run(*common, "--ticks", 75, "--save-output", out / "checkpoint.json")
-    resumed = run(*common, "--ticks", 105, "--load-save", out / "checkpoint.json")
-    full = run(*common, "--ticks", 180)
-    repeat = run(*common, "--ticks", 180)
+    checks = [
+        {"name": "initial position", "tick": 0, "path": f"/state/entities/{player}/translation/0", "expect": {"type": "approx", "value": -2, "tolerance": 1e-8}},
+        {"name": "jump occurred", "tick": 75, "path": "/script_state/jumps", "expect": {"type": "equals", "value": 1}},
+        {"name": "airborne checkpoint", "tick": 75, "path": f"/state/entities/{player}/translation/1", "expect": {"type": "range", "min": 1.5, "max": 3}},
+        {"name": "focus lost", "tick": 150, "path": "/input/focused", "expect": {"type": "equals", "value": False}},
+        {"name": "controls released", "tick": 150, "path": "/input/keyboard/held", "expect": {"type": "equals", "value": []}},
+        {"name": "wall contact", "tick": 180, "path": f"/state/entities/{player}/translation/0", "expect": {"type": "range", "min": 1.9, "max": 2.01}},
+        {"name": "landed", "tick": 180, "path": "/script_state/grounded", "expect": {"type": "equals", "value": True}},
+    ]
+    def assertions(name, selected):
+        path = out / name
+        path.write_text(json.dumps({"format": "incant-play-assertions", "version": 1, "checks": selected}, indent=2) + "\n")
+        return path
+    early = assertions("early-assertions.json", [c for c in checks if c["tick"] <= 75])
+    late = assertions("late-assertions.json", [c for c in checks if c["tick"] >= 75])
+    whole = assertions("all-assertions.json", checks)
+    first = run(*common, "--ticks", 75, "--assertions", early, "--save-output", out / "checkpoint.json")
+    resumed = run(*common, "--ticks", 105, "--assertions", late, "--load-save", out / "checkpoint.json")
+    full = run(*common, "--ticks", 180, "--assertions", whole)
+    repeat = run(*common, "--ticks", 180, "--assertions", whole)
+    assert all(r["passed"] and all(c["passed"] for c in r["assertions"]) for r in [first, resumed, full, repeat])
+    wrong = assertions("wrong-assertions.json", checks + [
+        {"name": "deliberately wrong", "tick": 180, "path": "/script_state/grounded", "expect": {"type": "equals", "value": False}}])
+    failed = subprocess.run([str(binary), *map(str, common), "--ticks", "180", "--assertions", str(wrong),
+                             "--save-output", str(out / "must-not-publish.json")], capture_output=True, text=True, cwd=ROOT)
+    diagnostic = json.loads(failed.stdout)
+    assert failed.returncode != 0 and diagnostic["completed"] and not diagnostic["passed"]
+    assert diagnostic["state"] == full["state"] and diagnostic["assertions"][-1]["passed"] is False
+    assert not (out / "must-not-publish.json").exists()
+    (out / "failed-assertion-report.json").write_text(json.dumps(diagnostic, indent=2) + "\n")
     for field in ["state", "script_state", "input"]:
         assert full[field] == repeat[field] == resumed[field], field
     state = full["script_state"]
@@ -121,7 +147,8 @@ def main():
     result = {"passed": True, "strict_typescript": True, "rendering": False, "recorded_inputs": ["keyboard", "mouse", "gamepad", "touch"],
               "actual_character_jump_and_wall_contact": True, "save_resume_mid_jump_exact": True, "repeat_exact": True,
               "final_position": position, "script_state": state, "author_files_unchanged": before,
-              "binary_sha256": hashlib.sha256(binary.read_bytes()).hexdigest(), "live_device_adapters": False}
+              "binary_sha256": hashlib.sha256(binary.read_bytes()).hexdigest(), "live_device_adapters": False, "scheduled_gameplay_assertions": True,
+              "failed_assertion_exits_nonzero_with_report_and_no_save": True}
     (out / "runs.json").write_text(json.dumps({"first": first, "resumed": resumed, "full": full, "repeat": repeat}, indent=2) + "\n")
     (out / "result.json").write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps(result))

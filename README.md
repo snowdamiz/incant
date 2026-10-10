@@ -68,8 +68,9 @@ journal. It accepts `--seconds` (rounded up to a fixed tick) or `--ticks`, with 
 it records the initial/final state and every `--capture-every` ticks as actual PNGs,
 plus an atomic `report.json` containing final runtime/script state and capture times.
 Capture is bounded to 128 frames and 256 MiB of raw pixels, with dimensions
-from 16×16 to 1920×1080. A failed run exits
-nonzero and may leave partial PNGs, but never a completed report. Current captures
+from 16×16 to 1920×1080. A simulation failure exits
+nonzero and may leave partial PNGs, but never a completed report. A completed
+run with failed gameplay assertions retains a diagnostic report with `passed: false`. Current captures
 use the shared renderer, including imported materials and HDR lighting followed
 by the preview display transform. `screenshot --camera ENTITY_ID` and
 `play --camera ENTITY_ID --output DIR` select an authored perspective Camera.
@@ -78,7 +79,8 @@ the fixed editor preview. The agent `view_screenshot` tool accepts the same
 optional `camera` ID. Missing/non-camera IDs fail instead of silently falling
 back. Camera edits use the shared command bus and normal Undo/Redo. Asset sources are unnecessary when
 the cooked cache is present; the command reads the saved checkpoint, not unsaved
-editor edits. Assertion-script support remains open.
+editor edits. Data-only gameplay assertions are available as described below;
+arbitrary assertion-script execution remains open.
 
 Game saves preserve the isolated scene, JSON behavior state and simulation clock:
 
@@ -122,6 +124,24 @@ cannot silently extend beyond it. Provide the same clip with `--load-save` to
 reconstruct held controls and gesture timing at the saved tick without rerunning
 gameplay. Ordinary save loading resets physical devices. See
 [input semantics and evidence](docs/spikes/game-input.md).
+
+`play --assertions FILE` checks runtime, behavior and input state at absolute game
+ticks, including the initial or restored checkpoint. For example:
+
+```json
+{"format":"incant-play-assertions","version":1,"checks":[
+  {"name":"reached tick 60","tick":60,"path":"/state/tick","expect":{"type":"equals","value":60}},
+  {"name":"landed","tick":60,"path":"/script_state/grounded","expect":{"type":"equals","value":true}}
+]}
+```
+
+Conditions also support `approx` (numeric value and absolute tolerance), `range`
+(inclusive min/max) and `exists` (a boolean). Checks must fall within the requested
+play interval. A completed run returns `completed: true`, a `passed` flag and
+per-check results. Failed checks produce a nonzero exit and prevent save
+publication; logs and requested frame/report diagnostics remain available.
+Plans are bounded and validated before output creation. See
+[assertion semantics and evidence](docs/spikes/play-assertions.md).
 
 `init` refuses to overwrite an existing file. `rpc` serves newline-delimited JSON
 on stdin/stdout. `project.read`, `schema.list`, `command.execute`, `history.read`,
