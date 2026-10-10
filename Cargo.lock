@@ -3584,6 +3584,10 @@ dependencies = [
 name = "incant_assets_runtime"
 version = "0.0.1"
 dependencies = [
+ "incant_2d",
+ "incant_types",
+ "ktx2",
+ "meshopt",
  "serde",
  "serde_json",
  "sha2 0.10.9",

@@ -3,18 +3,9 @@ use gltf::{
     buffer::Source,
     mesh::{Mode, Semantic},
 };
-use serde::{Deserialize, Serialize};
 use std::path::Path;
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct ModelNode {
-    pub name: Option<String>,
-    pub children: Vec<usize>,
-    /// Primitive indices in ImportedModel.meshes.
-    pub meshes: Vec<usize>,
-    /// Column-major local transform, as authored by glTF.
-    pub transform: [[f32; 4]; 4],
-}
+pub use incant_assets_runtime::ModelNode;
 #[derive(Debug, Clone)]
 pub struct ImportedModel {
     pub meshes: Vec<Mesh>,
@@ -258,35 +249,8 @@ pub fn import_gltf(root: &Path, source: &Path) -> Result<ImportedModel> {
         fingerprint: sources.fingerprint(),
     })
 }
-pub(crate) fn validate_nodes(nodes: &[ModelNode]) -> Result<()> {
-    let mut parents = vec![0; nodes.len()];
-    for n in nodes {
-        for &c in &n.children {
-            parents[c] += 1;
-            if parents[c] > 1 {
-                return Err(invalid("node has multiple parents"));
-            }
-        }
-    }
-    let mut queue: Vec<_> = parents
-        .iter()
-        .enumerate()
-        .filter_map(|(i, p)| (*p == 0).then_some(i))
-        .collect();
-    let mut visited = 0;
-    while let Some(i) = queue.pop() {
-        visited += 1;
-        for &c in &nodes[i].children {
-            parents[c] -= 1;
-            if parents[c] == 0 {
-                queue.push(c);
-            }
-        }
-    }
-    if visited != nodes.len() {
-        return Err(invalid("glTF node cycle"));
-    }
-    Ok(())
+fn validate_nodes(nodes: &[ModelNode]) -> Result<()> {
+    incant_assets_runtime::model_node::validate_nodes(nodes).map_err(Into::into)
 }
 // glTF specifies flat normals when NORMAL is absent. Split shared vertices at
 // triangle boundaries rather than smoothing an authored hard edge accidentally.
