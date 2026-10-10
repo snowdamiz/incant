@@ -53,6 +53,13 @@ within its documented workload.
 
 ## Active work
 
+- Rectangular-grid navigation is in progress on `impl/grid-navigation`. Weighted
+  A*, blocked corners, bounded search, authored components, immutable runtime
+  snapshots and `api.findGridPath` are implemented. Nine behavior tests and
+  focused Clippy pass. Generated contracts, public process workflows, full
+  checks and Claude's rendered review remain pending. This does not claim the
+  full 2D renderer/tilemap/physics milestone. See [grid navigation](docs/spikes/grid-navigation.md).
+
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
   with funnel smoothing and connected visibility repair. Claude's rendered

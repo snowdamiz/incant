@@ -489,6 +489,14 @@ fn main() -> Result<()> {
             ]);
             registry.extend([
                 (
+                    "GridNavigationQuery".into(),
+                    json!(schemars::schema_for!(incant_core::GridNavigationQuery)),
+                ),
+                (
+                    "GridPath".into(),
+                    json!(schemars::schema_for!(incant_core::GridPath)),
+                ),
+                (
                     "NavigationQuery".into(),
                     json!(schemars::schema_for!(incant_core::NavigationQuery)),
                 ),

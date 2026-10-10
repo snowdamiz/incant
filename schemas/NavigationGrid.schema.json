@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "costs": {
+      "description": "Row-major entering-cell weights. Zero blocks a cell; 1..1000 are walkable.",
+      "items": {
+        "format": "uint16",
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 65536,
+      "type": "array"
+    },
+    "dimensions": {
+      "description": "Width and height; each 1..1024, with at most 65536 cells in total.",
+      "items": {
+        "format": "uint16",
+        "maximum": 65535,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    }
+  },
+  "required": [
+    "dimensions",
+    "costs"
+  ],
+  "title": "NavigationGrid",
+  "type": "object"
+}

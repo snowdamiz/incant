@@ -1,0 +1,67 @@
+{
+  "$defs": {
+    "GridPathRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "diagonal": {
+          "default": false,
+          "description": "Diagonal steps require both adjacent orthogonal cells to be walkable.",
+          "type": "boolean"
+        },
+        "end": {
+          "items": {
+            "format": "uint16",
+            "maximum": 65535,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "max_expansions": {
+          "default": 65536,
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "start": {
+          "items": {
+            "format": "uint16",
+            "maximum": 65535,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "grid_entity": {
+      "type": "string"
+    },
+    "path": {
+      "$ref": "#/$defs/GridPathRequest"
+    },
+    "scene_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "scene_id",
+    "grid_entity",
+    "path"
+  ],
+  "title": "GridNavigationQuery",
+  "type": "object"
+}

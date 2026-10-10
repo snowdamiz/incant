@@ -36,6 +36,7 @@ impl PlaySession {
         host.raycaster = Some(Arc::new(engine.raycaster()));
         host.character_mover = Some(Arc::new(engine.character_mover()));
         host.navigator = Some(Arc::new(engine.navigator()));
+        host.grid_navigator = Some(Arc::new(engine.grid_navigator()));
         host.install_queries()?;
         let mut input = incant_input::InputRuntime::default();
         input.map_actions(&project.settings.input_actions)?;

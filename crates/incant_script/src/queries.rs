@@ -13,6 +13,11 @@ pub(super) type Navigator = Query<
     Option<incant_core::NavigationPath>,
     incant_core::NavigationError,
 >;
+pub(super) type GridNavigator = Query<
+    incant_core::GridNavigationQuery,
+    Option<incant_core::GridPath>,
+    incant_core::NavigationError,
+>;
 pub(super) type Raycaster = Query<RayQuery, Option<RayHit>>;
 pub(super) type CharacterMover = Query<CharacterQuery, CharacterMovement>;
 
@@ -38,6 +43,13 @@ impl ScriptHost {
             64,
             "path",
             "navigation",
+        )?;
+        self.install_query(
+            "__incantFindGridPath",
+            self.grid_navigator.clone(),
+            64,
+            "path",
+            "grid navigation",
         )
     }
 

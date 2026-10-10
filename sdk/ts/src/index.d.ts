@@ -27,7 +27,17 @@ export type { StringTable, LocaleSettings, LocalizeRequest, LocalizedText, Missi
 import type { LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
 export type { NavigationMesh, NavigationQuery, NavigationPath } from './generated';
 import type { NavigationQuery, NavigationPath } from './generated';
+export type { NavigationGrid, GridNavigationQuery, GridPath } from './generated';
+import type { GridNavigationQuery, GridPath } from './generated';
 export interface ScriptApi {
+  /** Weighted rectangular-grid A* in tile coordinates. Zero-cost cells block;
+   * diagonal moves cannot cut corners. Costs 64 of 256 shared query units.
+   * Returns adjacent cells and exact planner cost (weight * 1000/1414 per step).
+   * Null means blocked/unreachable; invalid inputs or exhausted budgets throw.
+   * This point route does not account for actor radius, world transforms or physics.
+   * Recalculate after grid edits; successful commands become visible next tick.
+   * Generation is local to the session and resets across process/save reopen. */
+  findGridPath(query: GridNavigationQuery): GridPath | null;
   /** Bounded A* with funnel smoothing on the selected scene mesh. Costs 64 of
    * 256 shared native-query units per tick. Null means no nearby/reachable path;
    * invalid inputs or exhausted budgets throw. The path uses world coordinates

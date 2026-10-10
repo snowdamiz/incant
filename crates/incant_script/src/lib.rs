@@ -77,6 +77,7 @@ pub struct ScriptHost {
     raycaster: Option<Raycaster>,
     character_mover: Option<CharacterMover>,
     navigator: Option<Navigator>,
+    grid_navigator: Option<queries::GridNavigator>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
     context: Context,
     _runtime: Runtime,
@@ -129,6 +130,7 @@ impl ScriptHost {
             raycaster: None,
             character_mover: None,
             navigator: None,
+            grid_navigator: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
             context,
             _runtime: runtime,
@@ -158,6 +160,7 @@ impl ScriptHost {
         next.raycaster = self.raycaster.clone();
         next.character_mover = self.character_mover.clone();
         next.navigator = self.navigator.clone();
+        next.grid_navigator = self.grid_navigator.clone();
         next.install_queries()?;
         if self.schedule.has_timers() && !next.has_timer_handler {
             return Err(ScriptError::TimerHandler);
