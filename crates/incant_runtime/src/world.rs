@@ -7,10 +7,13 @@ use std::collections::BTreeMap;
 use thiserror::Error;
 
 #[derive(Component)]
-struct Identity(StableId);
+#[repr(transparent)]
+pub(crate) struct Identity(pub StableId);
 #[derive(Component)]
+#[repr(transparent)]
 pub(crate) struct Local(pub Transform);
 #[derive(Component)]
+#[repr(transparent)]
 pub(crate) struct Motion(pub Velocity);
 #[derive(Component)]
 pub(crate) struct Global(pub DMat4);
@@ -127,6 +130,10 @@ impl NativeWorld {
         for (id, mut local, mut motion) in query.iter_mut(&mut self.world) {
             visit(id.0, &mut local.0, &mut motion.0);
         }
+        self.refresh_globals();
+    }
+
+    pub(crate) fn refresh_globals(&mut self) {
         // Update derived hierarchy once for this bulk operation, without a
         // document projection or per-entity command/serialization round-trip.
         self.world
