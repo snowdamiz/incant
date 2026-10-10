@@ -119,3 +119,17 @@ workloads and the Core Sample. Browser streaming fails explicitly. Offline tests
 do not satisfy these gates.
 
 Machine-readable evidence: [audio-runtime-2026-10-09.json](evidence/audio-runtime-2026-10-09.json).
+
+### Windows cache repair correction
+
+The first Windows desktop run at `0f7390f` failed the corrupt-cache repair test:
+`tempfile::persist` could not replace PCM while an existing reader held it open.
+The cooker now uses the standard library's atomic rename, which includes the
+Windows POSIX replacement fallback absent from tempfile's MoveFileExW path (see
+[Rust rename documentation](https://doc.rust-lang.org/std/fs/fn.rename.html)).
+The temporary-file guard still cleans up failed publication; no unlink or
+in-place rewrite is used. The regression also imports identical PCM under a
+different source fingerprint while both readers remain alive. Repaired readers
+stay valid, and the retained corrupt reader continues rejecting its old bytes.
+The three local asset-audio tests and asset Clippy pass; hosted Windows
+verification of the correction is pending.

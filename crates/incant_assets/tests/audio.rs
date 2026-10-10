@@ -111,5 +111,20 @@ fn invalid_sources_and_corrupted_cache_fail_without_publishing_valid_metadata() 
     let repaired = cook_audio(root, Path::new("tone.wav"), &cache).unwrap();
     assert!(!repaired.cache_hit);
     assert_eq!(repaired.read_chunk(0).unwrap()[0], [1200. / 32768.; 2]);
+    assert!(
+        audio.read_chunk(0).is_err(),
+        "old handle still sees corrupt bytes"
+    );
+    // A different source identity can produce identical cooked PCM. Publishing
+    // it must work with both the repaired and the corrupt reader still alive.
+    fs::copy(root.join("tone.wav"), root.join("copy.wav")).unwrap();
+    let copy = cook_audio(root, Path::new("copy.wav"), &cache).unwrap();
+    assert_eq!(
+        copy.metadata.content_sha256,
+        repaired.metadata.content_sha256
+    );
+    assert_ne!(copy.metadata.fingerprint, repaired.metadata.fingerprint);
+    assert_eq!(copy.read_chunk(0).unwrap(), repaired.read_chunk(0).unwrap());
+    assert!(audio.read_chunk(0).is_err());
     assert!(load_audio(&cache, "../../escape").is_err());
 }

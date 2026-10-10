@@ -134,8 +134,13 @@ pub fn cook_audio(root: &Path, source: &Path, cache: &Path) -> Result<CookedAudi
         chunk_sha256: hashes,
     };
     file.as_file().sync_all()?;
-    file.persist(path(cache, &metadata.content_sha256, "ipcm")?)
-        .map_err(|e| e.error)?;
+    // tempfile::persist uses only MoveFileExW on Windows, which cannot replace
+    // an open destination. std::fs::rename also supports the Windows POSIX
+    // replacement operation, preserving retained readers of the previous file.
+    // Keep the temp-path guard until the rename succeeds; never unlink the
+    // destination first or modify bytes beneath a running decoder.
+    let temporary = file.into_temp_path();
+    fs::rename(&temporary, path(cache, &metadata.content_sha256, "ipcm")?)?;
     let mut manifest = tempfile::NamedTempFile::new_in(cache)?;
     manifest.write_all(&serde_json::to_vec(&metadata)?)?;
     manifest.as_file().sync_all()?;
