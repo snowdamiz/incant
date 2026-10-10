@@ -82,6 +82,88 @@ showed a minimum separation of 0.476 m (overlap). The explicit 5 cm default
 passes both final fixtures; this does not establish collision-free behavior for
 arbitrary crowds. The limitation remains part of the API contract.
 
-Claude's actual rendered review is the next scoped check. Navigation Inspector,
-native debug drawing, off-mesh links, grid navigation, Core Sample integration
-and physical-device performance requirements remain open.
+Claude's actual rendered review is complete for this increment, as recorded
+below. Navigation Inspector, native debug drawing, off-mesh links, grid
+navigation, Core Sample integration and physical-device performance
+requirements remain separate work.
+
+## Rendered verification and remaining behavior limits
+
+Claude Opus 5.5 reviewed a 100-agent, four-direction plaza crossing using the
+actual API and ordinary Velocity commands. Two 2,700-tick runs produced 803/803
+identical frames and 13/13 identical logs, including save/load capture windows.
+Every walker remained at its destination from tick 2580; no 0.5 m body diameter
+overlap occurred. Minimum separation was 0.5953 m with the requested 0.60 m
+combined body/margin distance, and minimum obstacle clearance was 0.0494 m.
+Millimetre log rounding limits those measurements. The 5 cm extra margin is a
+solver input, not a strict numerical clearance guarantee. The review used no
+RigidBody/Collider and makes no physics-collision guarantee.
+
+Local avoidance produced long goal-block standoffs (up to 1,002 ticks) and a
+roundabout with up to 13.3 m sideways drift. These require behavior-level route
+replanning/goal assignment where they are undesirable. Agent and obstacle IDs
+are distinct canonical ULIDs within their respective lists.
+
+The existing 50 ms script wall-clock deadline caused intermittent aborts when
+the Mac slept or compilation loaded the CPU. Final repetitions passed under
+a temporary sleep assertion on a quiet host. This is an open scripting-runtime
+robustness/diagnostic issue, not successful determinism evidence for failed runs.
+The [review packet](../../handoffs/0027-steering-lookdev/result.md) records the
+exact binary, failed attempts, observations and scene reproduction.
+
+
+## Linux convergence regression (2026-10-10)
+
+PR #36's Linux desktop run at `084065a` retained separation but failed arrival:
+one common-radius crowd still had an agent 16.081753 m from its goal after 1500
+steps. Eleven other hosted checks passed. Rotating that same fixture by 0.0001
+radians reproduced the failure on this Mac (22.316338 m remaining). This is a
+local-avoidance symmetry/progress failure, not a compiler failure or a test to
+waive. Fixed small lateral preferences of 5% and 20% did not reliably solve it.
+
+The wrapper now predicts closest approach from the requested velocities. If a
+neighbor would enter the combined body/margin clearance during the horizon,
+the objective turns 45 degrees toward a consistent passing hand without changing
+its requested speed. ORCA still constrains this objective against the same agents
+and obstacles; no constraint or speed limit is relaxed. Stopped preferences remain
+zero. This reduces reciprocal crowd stalls, but is not a guarantee of global
+arrival or feasible separation in every arrangement.
+
+All twelve common/staggered-radius cases at rotations 0, 0.0001, 0.03, 0.17, 0.7
+and 1.2 radians pass the original 1500-step arrival and separation requirements
+locally. The smallest observed separation is 0.5568335 m; every final goal distance
+is below 0.00001 m. The earlier rendered results above describe the prior binary.
+Full checks, the updated public workflow and a new rendered review are required
+for this correction before merging.
+
+
+The first passing preference failed the unchanged rendered plaza course:
+only 26/100 were at their goals after 2700 ticks, compared with all 100 from
+tick 2580 before this correction. Even the 4990-tick diagnostic extension left
+11 walkers that had never arrived. Repeat frames/logs were identical and there
+were no overlaps. PR #36 is held despite all twelve checks passing at `6df4ef9`.
+See the current 0027 report and its retained prior-binary history.
+
+The next candidate limits the preference to opposing requested velocities, so
+parked and co-directed neighbors do not trigger it. All twelve radial/staggered
+library cases and a simple approach beside a parked agent pass locally; the
+simple case also passes the prior rule and is not a reproduction of the plaza
+regression. The unchanged full plaza course remains the acceptance test, with
+updated rendering and integration checks required before merge.
+
+
+The opposing-only candidate `8d56f0c` also failed the public course: 43/100 at
+2700, maximum remaining distance 9.890 m, minimum measured separation
+0.59465769 m and zero overlaps. The new fast numerical plaza regression fails
+that candidate too (31/100 at tick 2640); its Rust floating-point path is not an
+exact replay of the TypeScript host. A fixed 0.0001-scale ID-derived perturbation
+was also rejected after it failed a radial crossing case.
+
+Candidate `4c495e9` restricts the shared passing hand to near-antiparallel desired
+directions (dot product below -0.99 times their lengths, about eight degrees of
+head-on) with a predicted conflict during the horizon. This leaves ordinary
+crossing and goal-seeking objectives unchanged. All twelve radial layouts pass
+with minimum separation 0.5368895 m and final distances below 0.00001 m. The new
+numerical plaza test has all100 settled throughout its last second, minimum
+separation 0.59696561 m and no body/obstacle overlap. Full public playback and
+Claude's unchanged rendered course must still verify this candidate before merge.
