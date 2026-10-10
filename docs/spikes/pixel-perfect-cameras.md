@@ -30,9 +30,26 @@ repeated 60-tick runs. Project and journal bytes stay unchanged. Both pixel-perf
 and ordinary orthographic modes pass. Generated schemas/SDK, bridge, conventions
 and five tool tests pass. This is synthetic behavior evidence, not a device gate.
 
-Claude handoff 0031 owns the Inspector and original real-engine visual review.
-The initial UI run passes 385 tests and fails two Camera-schema parity assertions
-because the presentation fixture has not yet adopted the third projection.
+Claude handoff 0031 supplied the Inspector and original real-engine review;
+all 420 UI tests, strict typecheck and build pass. Two independent scene builds
+produce identical pixels for all 341 compared frames. That review exposed a
+one-pixel flicker at exact half-pixel camera/object follow steps. The correction
+aligns tie-breaking with top-left raster coverage: camera-right ties go down,
+camera-up ties go up. A small f64 rounding band (8 scaled machine epsilons,
+capped at 1e-7 logical pixel) keeps rolled basis dot products on the same tie.
+Odd logical widths frame half a pixel right, and odd heights half a pixel down,
+so world-grid edges still align with logical pixel boundaries. This offset is
+render-only, like camera snapping; authored and simulated poses stay untouched.
+
+The new GPU regression compares exact followed-quad images across four odd/even
+resolution combinations, eight movement directions and eight offsets, at 0°, 90°
+and an arbitrary 0.37-radian roll. It first reproduced the directional tie,
+odd-resolution alignment and rolled floating-point cases; all now pass. This
+checks the numerical contract; Claude still needs to re-review the corrected
+engine capture and inspect the native build before acceptance.
+
 Portable core compilation passes for WASM and iOS simulator, and the macOS
-audio device backend compiles. Native packaging, appearance review and hosted CI
-remain open. No phase-gate pass is claimed.
+audio device backend compiles. Native packaging, final appearance review and
+hosted CI remain open. Handoff 0033 now owns a broader editor redesign at verified
+Opus 5.5 Max thinking, following the director's 2026-10-10 feedback. No phase-gate
+pass is claimed.

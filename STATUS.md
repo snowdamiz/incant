@@ -55,17 +55,24 @@ within its documented workload.
 
 - Sprite rendering is in implementation in an isolated checkout: typed texture
   regions, pivots/flips, nine-slice geometry, deterministic sorting and retained
-  premultiplied texture resources. Initial CPU/GPU checks pass. Full checks,
-  public saved gameplay, Claude presentation/render review and CI remain open;
+  premultiplied texture resources. The foundation passes 325 Rust tests, 51 GPU
+  checks, Clippy and the strict source-free saved-gameplay probe. Integrated
+  verification, Claude presentation/render review and CI remain open;
   atlas packing, tilemaps and 2D physics are separate unfinished work. See
   [sprite rendering](docs/spikes/sprite-rendering.md).
+
+- Claude Opus 5.5 is performing a full editor redesign at explicitly verified
+  Max thinking in handoff 0033, prioritizing the Inspector header, hierarchy,
+  spacing and dense fields. The runner now pins and confirms both model and
+  effort for every new/resumed session; seven transport/tool tests pass.
 
 - Pixel-perfect camera support is in implementation: fixed logical targets,
   integer replication/letterboxing, and render-only camera-plane snapping.
   Local foundation checks pass 320 Rust tests, 47 GPU checks, Clippy, contracts
-  and both public saved-camera workflows. Two UI schema-parity assertions await
-  the third projection. Claude Inspector/look-dev/native review, native/portable
-  builds and hosted CI remain open.
+  and both public saved-camera workflows. Claude supplied the Inspector with
+  420 passing UI tests and a repeated 341-frame engine comparison. Its exact
+  half-pixel follow defect is corrected and covered across odd/even dimensions
+  and camera roll; final rendered/native review and hosted CI remain open.
   Sprite/tilemap rendering and 2D physics are separate unfinished work. See
   [pixel-perfect cameras](docs/spikes/pixel-perfect-cameras.md).
 
@@ -105,8 +112,8 @@ within its documented workload.
   compilation and five public gameplay workflows. Unchanged renderer coverage
   retains 40 passing GPU checks. Baking preserves
   transformed child geometry and hollow openings, and re-bakes after edits.
-  The final native draft blocker is resolved; updated hosted checks are required
-  before PR #25 merges.
+  All twelve hosted checks passed on `c740134`; PR #25 merged into main as
+  `2f32eb7` with its tested tree unchanged. The native draft blocker is resolved.
   See [compound colliders](docs/spikes/compound-colliders.md).
 
 - PR #40 adds weighted rectangular-grid navigation through `api.findGridPath`,
