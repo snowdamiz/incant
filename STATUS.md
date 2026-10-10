@@ -53,6 +53,16 @@ within its documented workload.
 
 ## Active work
 
+- The runtime has a reusable shipping-profile build/package command with fat LTO,
+  one codegen unit, abort-on-panic and separately archived crash symbols. A real
+  packaged macOS runner passed source-free cooked-scene execution, SIGABRT/no-unwind
+  verification and matching dSYM UUID checks. Tool tests, focused Clippy and
+  runtime/cook tests pass; the portable profile compiles for wasm, Android and
+  iOS simulator. Linux/PDB packaging and execution await the updated desktop CI.
+  PGO, export migration, mobile/web symbol packaging, Device Farm/performance
+  measurements and phase gates remain open. See
+  [shipping profile evidence](docs/spikes/shipping-runtime-profile.md).
+
 - The native runtime now stages bounded entity lifecycle batches between steps:
   spawn/despawn, reparent and Velocity component additions/removals. A rejected
   batch preserves world state and the submitted commands. Hierarchy checking is
@@ -100,9 +110,10 @@ within its documented workload.
   systems/script bridge and saves off per-tick project cloning and JSON. Existing
   feature tests remain valid for their old implementation, not proof of this
   migration. Claude's editor redesign must also bound large collections.
-  Native/browser/Wasm script hosts, physics variants, shader pre-warming, shipping
-  profile/profiling, reference-phone PR gates and per-scene CRDT scaling remain
-  open. The new device/performance targets have not been passed or waived.
+  Native/browser/Wasm script hosts, physics variants, shader pre-warming,
+  PGO/profiling, mobile symbol packaging, reference-phone PR gates and per-scene
+  CRDT scaling remain open. The new device/performance targets have not been passed
+  or waived.
 
 - Orthographic camera projection is implemented through shared component commands,
   renderer geometry, parallel material view rays, light clusters and directional

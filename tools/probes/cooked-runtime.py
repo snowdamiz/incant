@@ -4,6 +4,7 @@ import argparse
 import ast
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -14,12 +15,16 @@ ROOT = Path(__file__).resolve().parents[2]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
+    suffix = '.exe' if os.name == 'nt' else ''
+    parser.add_argument('--headless-binary', type=Path, default=ROOT / f'target/release/incant_headless{suffix}')
+    parser.add_argument('--cook-binary', type=Path, default=ROOT / f'target/release/examples/cook_scene{suffix}')
+    parser.add_argument('--runtime-binary', type=Path, default=ROOT / f'target/release/examples/run_scene{suffix}')
     args = parser.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    headless = ROOT / 'target/release/incant_headless'
-    cook = ROOT / 'target/release/examples/cook_scene'
-    runtime = ROOT / 'target/release/examples/run_scene'
+    headless = args.headless_binary.resolve()
+    cook = args.cook_binary.resolve()
+    runtime = args.runtime_binary.resolve()
     project, journal = out / 'game.incant.json', out / 'history.jsonl'
     subprocess.run([str(headless), 'init', str(project), '--name', 'Cooked world', '--entities', '0'],
                    check=True, capture_output=True, text=True)
