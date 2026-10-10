@@ -12,7 +12,8 @@ export type { Command, Transform } from './generated';
 /** Host-managed save envelope; scripts do not receive filesystem access. */
 export type { GameSave, PlayAssertions } from './generated';
 import type { Command } from './generated';
-export type { InputEvent, InputFrame, InputRecording } from './generated';
+export type { AudioSource, AudioBus, AudioListener } from './generated';
+export type { InputActions, InputEvent, InputFrame, InputRecording } from './generated';
 import type { InputFrame } from './generated';
 export type { ScriptClock } from './generated';
 import type { ScriptClock, TimerRequest as GeneratedTimerRequest, TimerEvent as GeneratedTimerEvent } from './generated';

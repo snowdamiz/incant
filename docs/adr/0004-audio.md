@@ -8,7 +8,18 @@ Retain Kira and an engine-owned bus abstraction. Persistent document references 
 
 ## Evidence and implementation boundary
 
-No audio engine exists yet. Phase 1 owns implementation and platform latency measurements.
+Phase 1 now has WAV/OGG Vorbis cooking, typed AudioSource/AudioBus/AudioListener
+components and a Kira 0.12.5 mixer. Shared commands drive isolated gameplay audio;
+the headless runner exports bounded stereo float WAV without opening a device.
+Native streaming uses Kira's decoder worker. Offline streaming uses two validated
+PCM chunks per voice and Kira's public Hermite interpolator so fast exports do not
+depend on worker scheduling. Both paths use Kira routing and spatialization.
+
+Sample tests and the public TypeScript/import/RPC/export probe pass; see
+[audio runtime evidence](../spikes/audio-runtime.md). This establishes cooked
+playback and script control, not production audio completion. Native app/device
+wiring, browser resource streaming, platform latency, interruptions and hardware
+measurements remain open. Offline export is not evidence of device playback.
 
 ## Consequences and revisit trigger
 

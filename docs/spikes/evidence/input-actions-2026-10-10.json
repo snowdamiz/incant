@@ -1,0 +1,165 @@
+{
+  "recorded_at": "2026-10-10T04:07:19.570935+00:00",
+  "revision": "011052f9659618b17b0058826c7bf7bb3ac3cc0b",
+  "plan_revision": 3,
+  "checks": {
+    "rust_tests_passed": 212,
+    "ui_tests_passed": 315,
+    "python_tool_tests_passed": 5,
+    "workspace_clippy": "pass",
+    "input_and_platform_examples_clippy": "pass",
+    "ui_build": "pass",
+    "native_release_build": "pass",
+    "native_release_package": "pass",
+    "generated_contracts": "pass",
+    "strict_typescript": "pass",
+    "public_save_regression": "pass",
+    "public_input_character_assertion_regression": "pass",
+    "public_timer_regression": "pass"
+  },
+  "public_probe": {
+    "passed": true,
+    "strict_typescript": true,
+    "rendering": false,
+    "steps": [
+      7,
+      13
+    ],
+    "atomic_command_undo_redo": true,
+    "runtime_rebind_saved": true,
+    "full_state_equal": true,
+    "continued_logs_equal": true,
+    "subtick_taps": true,
+    "alternative_bindings_do_not_repeat_presses": true,
+    "touch_gesture_binding": true,
+    "author_files_unchanged": {
+      "game.incant.json": "fad689fe9570a094a7af5b4a1d1509259b625146e3cc12828f1523f8ecabe2c1",
+      "history.jsonl": "011f7a1670515781014cc39e785774549909bccc58db9592b87de4686761a09f",
+      "input.json": "4b9ba5d9049d38db47ee22a49a0ed851b4e6718ecf384c5350d036e0ee3d6a6e"
+    },
+    "final_position": [
+      0.275,
+      0.0,
+      0.3
+    ],
+    "binary_sha256": "3cf585767504d1afca4be0f4a87721d0bcae46a6fe1e1438a9cc2a3fc30bb856"
+  },
+  "benchmark": {
+    "arch": "aarch64",
+    "os": "macos",
+    "runs": [
+      {
+        "actions": 0,
+        "bindings_per_action": 0,
+        "events_per_tick": 0,
+        "max_ms": 8.4e-05,
+        "median_ms": 8.3e-05,
+        "p95_ms": 8.4e-05,
+        "samples": 200
+      },
+      {
+        "actions": 12,
+        "bindings_per_action": 3,
+        "events_per_tick": 4,
+        "max_ms": 0.003042,
+        "median_ms": 0.002291,
+        "p95_ms": 0.0025,
+        "samples": 200
+      },
+      {
+        "actions": 64,
+        "bindings_per_action": 16,
+        "events_per_tick": 1024,
+        "max_ms": 2.966541,
+        "median_ms": 2.582917,
+        "p95_ms": 2.803333,
+        "samples": 200
+      }
+    ],
+    "scope": "input CPU only; no renderer or device adapter"
+  },
+  "platform_smoke": {
+    "arch": "aarch64",
+    "character_movement": {
+      "collisions": [
+        "01M4HZQH4VGKXN9P9R0MVYMTKY"
+      ],
+      "grounded": true,
+      "sliding_down_slope": false,
+      "translation": [
+        0.10000000149011612,
+        7.659977563889697e-05,
+        0.0
+      ]
+    },
+    "incant": "hello-world",
+    "input": {
+      "action_dead_zone": true,
+      "focus_releases_controls": true,
+      "named_action_edges": true,
+      "pinch_rotation": 1.5707963267948966,
+      "pinch_scale": 2.0,
+      "replay_equal": true,
+      "scope": "normalized synthetic events; not a live device adapter"
+    },
+    "ok": true,
+    "os": "macos",
+    "physics_backend": "rapier-0.36-enhanced-determinism",
+    "physics_y": 0.49993008375167847,
+    "position_x": 5.999999999999987,
+    "ticks": 120
+  },
+  "hosted_checks": "pending",
+  "computer_use": false,
+  "local_captures": false,
+  "app_opened": false,
+  "limitations": [
+    "Physical OS/browser adapters and hardware calibration remain open.",
+    "No graphical binding editor, haptics, player auto-routing, chords or contexts yet.",
+    "Rebinding baselines held controls and emits no synthetic edges; gameplay flows must reset their own dependent state.",
+    "CPU-only measurements exclude complete-game cost and reference-device gates."
+  ],
+  "audio_timer_integration": {
+    "audio_revision": "de83a4e10b3f6a2215cf5149d897e652ffe0ba7f",
+    "timer_merge": "93bc5ede02d612a362ec952a6cfc7595b9de5aab",
+    "rust_tests_passed": 232,
+    "ui_tests_passed": 315,
+    "python_tool_tests_passed": 5,
+    "workspace_clippy": "pass",
+    "ui_build": "pass",
+    "generated_contracts": "pass",
+    "strict_typescript": "pass",
+    "native_release_build_package": "pass",
+    "public_actions_probe": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "steps": [
+        7,
+        13
+      ],
+      "atomic_command_undo_redo": true,
+      "runtime_rebind_saved": true,
+      "full_state_equal": true,
+      "continued_logs_equal": true,
+      "subtick_taps": true,
+      "alternative_bindings_do_not_repeat_presses": true,
+      "touch_gesture_binding": true,
+      "author_files_unchanged": {
+        "game.incant.json": "145f412de69755f243e3cefa31c5354f4099cf33b7506eb8394f78d527c9cc1e",
+        "history.jsonl": "2d6b2ecbb17fd703e71ba3787b5286c7ee334ec4b784b55c5c03b68c9c74f063",
+        "input.json": "4b9ba5d9049d38db47ee22a49a0ed851b4e6718ecf384c5350d036e0ee3d6a6e"
+      },
+      "final_position": [
+        0.275,
+        0.0,
+        0.3
+      ],
+      "binary_sha256": "13ca77af2288ead996b1481f4d9c3fddf4774bd82d103eb3841db44079107725"
+    },
+    "public_audio_timer_save_input_regressions": "pass",
+    "computer_use": false,
+    "local_capture": false,
+    "native_app_opened": false
+  }
+}

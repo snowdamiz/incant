@@ -58,11 +58,22 @@
   "computer_use": false,
   "local_captures": false,
   "native_app_opened": false,
-  "hosted_checks": "pending",
+  "hosted_checks": {
+    "revision": "54f85a1e951f15b011ebaa630f242c581d29d750",
+    "passed": 3,
+    "source_run": 38021712982,
+    "desktop_run": 38021713409
+  },
   "limitations": [
     "Callbacks are synchronous; general coroutines remain open.",
     "VM globals and closures are not saved or transactionally rolled back.",
     "Logical saves do not preserve physics contacts or exact solver rollback state.",
     "Phase 1 Core Sample and Revision 3 additions remain unfinished."
-  ]
+  ],
+  "merge": {
+    "pr": 31,
+    "commit": "93bc5ede02d612a362ec952a6cfc7595b9de5aab",
+    "reviewed_tree": "80d409788e696a56ecbeab886f2597e7407c2cac",
+    "merged_tree": "80d409788e696a56ecbeab886f2597e7407c2cac"
+  }
 }

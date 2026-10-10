@@ -160,7 +160,9 @@ impl ScriptHost {
         Ok(())
     }
     pub fn tick(&mut self, bus: &mut CommandBus, dt: f64) -> Result<usize, ScriptError> {
-        self.tick_with_events(bus, dt, &[], &incant_input::InputFrame::default())
+        let mut input = incant_input::InputRuntime::default();
+        input.map_actions(&bus.project().settings.input_actions)?;
+        self.tick_with_events(bus, dt, &[], input.frame())
     }
     fn tick_with_events(
         &mut self,

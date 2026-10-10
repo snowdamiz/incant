@@ -3,6 +3,7 @@ mod assets;
 mod eval;
 mod play;
 mod play_assertions;
+mod play_audio;
 mod play_logs;
 mod play_saves;
 mod watch;
@@ -63,7 +64,7 @@ enum Cli {
         #[arg(long, default_value_t = 1)]
         entities: usize,
     },
-    /// Import a project-local static model or image through the shared command bus.
+    /// Import a project-local model, image or WAV/OGG clip through the shared command bus.
     Import {
         project: PathBuf,
         source: PathBuf,
@@ -388,6 +389,10 @@ fn main() -> Result<()> {
             registry.insert(
                 "InputEvent".into(),
                 json!(schemars::schema_for!(incant_input::InputEvent)),
+            );
+            registry.insert(
+                "InputActions".into(),
+                json!(schemars::schema_for!(incant_input::InputActions)),
             );
             registry.insert(
                 "InputFrame".into(),

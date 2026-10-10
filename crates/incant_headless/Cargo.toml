@@ -15,6 +15,8 @@ incant_script = { workspace = true }
 incant_input.workspace = true
 incant_agent = { workspace = true }
 incant_assets = { path = "../incant_assets" }
+incant_audio = { path = "../incant_audio" }
+sha2.workspace = true
 incant_import = { path = "../incant_import" }
 clap = { version = "4.5", features = ["derive"] }
 dirs = "6"

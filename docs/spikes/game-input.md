@@ -16,7 +16,8 @@ Mouse position and motion use logical pixels. Absolute position changes accumula
 motion; relative events add motion directly. Adapters must not report both for the
 same physical movement. Wheel lines and pixels are separate; no guessed conversion
 is applied. Sticks use [-1,1], with positive Y down; analog buttons use [0,1], with
-0.5 as the digital press threshold. Dead zones and action mappings remain open.
+0.5 as the raw digital press threshold. Named actions add configurable thresholds
+and dead zones without changing raw values; see [action mapping](input-actions.md).
 
 At most 16 controllers and 16 concurrent touches are accepted. Controller connect/
 disconnect events continue while unfocused. Focus loss releases held buttons,
@@ -86,10 +87,12 @@ The full workspace passes 190 Rust tests, 315 UI tests, five tool tests and
 Clippy. Generated schemas, SDK/bridge/conventions and strict TypeScript checks
 pass. The native release build and package pass without launching the app.
 Existing public save and character probes pass with the new input host. Hosted
-checks and merge are pending; no local GPU capture tests were rerun.
+checks all passed at `0021738`; PR #27 merged as `72fb2bd` with an identical
+reviewed tree. The main native app was rebuilt without opening it. No local GPU
+capture tests were rerun.
 
 OS/browser event adapters, actual hardware polling, IME/text input, pointer lock,
-gamepad calibration/dead zones, configurable action maps, rumble, native play
+hardware-specific gamepad calibration, rumble, native play
 controls and mobile lifecycle integration remain open. This increment is the
 shared runtime and replay path, not completion of Phase 1 input. No visual changes
 or new local captures were made during the director's computer-use pause.

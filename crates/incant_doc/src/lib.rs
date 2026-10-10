@@ -1,12 +1,15 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 mod collider_shapes;
+mod audio;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
 mod physics;
 pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
+pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
+pub use incant_input::InputActions;
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
 pub use physics::{AngularVelocity, BodyMotion, Collider, RigidBody};
 use schemars::JsonSchema;
@@ -37,6 +40,9 @@ pub struct Project {
 #[serde(deny_unknown_fields)]
 pub struct ProjectSettings {
     pub tick_rate: u32,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    #[schemars(length(max = 64))]
+    pub input_actions: InputActions,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -199,7 +205,10 @@ impl Project {
             scenes: BTreeMap::new(),
             assets: BTreeMap::new(),
             scripts: BTreeMap::new(),
-            settings: ProjectSettings { tick_rate: 60 },
+            settings: ProjectSettings {
+                tick_rate: 60,
+                input_actions: InputActions::new(),
+            },
             memory: BTreeMap::new(),
         }
     }
@@ -274,6 +283,9 @@ impl Project {
         }
         if !(1..=240).contains(&self.settings.tick_rate) {
             issue("/settings/tick_rate".into(), "must be between 1 and 240");
+        }
+        if let Err(error) = incant_input::validate_actions(&self.settings.input_actions) {
+            issue("/settings/input_actions".into(), &error.to_string());
         }
         for (id, asset) in &self.assets {
             if id != &asset.id {
@@ -403,6 +415,9 @@ impl Project {
                 "only one global EnvironmentLight is supported",
             );
         }
+        if let Err(message) = audio::validate_graph(self) {
+            issue("/scenes".into(), &message);
+        }
         errors
     }
 }
@@ -420,6 +435,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
         serde_json::from_value(v.clone()).map_err(|e| e.to_string())
     }
     match kind {
+        "AudioBus" | "AudioSource" | "AudioListener" => audio::validate(kind, value, project)?,
         "RigidBody" | "Collider" | "AngularVelocity" => physics::validate(kind, value)?,
         "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
         "Transform" => {
@@ -523,6 +539,15 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        ("AudioBus".into(), json!(schemars::schema_for!(AudioBus))),
+        (
+            "AudioSource".into(),
+            json!(schemars::schema_for!(AudioSource)),
+        ),
+        (
+            "AudioListener".into(),
+            json!(schemars::schema_for!(AudioListener)),
+        ),
         ("RigidBody".into(), json!(schemars::schema_for!(RigidBody))),
         ("Collider".into(), json!(schemars::schema_for!(Collider))),
         (
