@@ -40,7 +40,7 @@ BEHAVIOR = Path(__file__).resolve().with_name("navigation_course.ts")
 ALL = 0xFFFFFFFF
 WIDTH, HEIGHT = 960, 540
 MAX_FRAMES, MAX_RAW = 128, 256 * 1024 * 1024
-POOL = 16  # route marker entities per pool
+POOL = 48  # route marker entities per pool; the behavior logs an error if a route exceeds it
 
 # Room: x east (-8..8), z south / toward the default camera (-5..5), +Y up.
 FLOOR_HALF = (8.0, 0.1, 5.0)
