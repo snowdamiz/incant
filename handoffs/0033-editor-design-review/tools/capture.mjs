@@ -15,7 +15,10 @@
  * Measurements are DOM-generic so the same run works before and after the redesign.
  *
  * Usage (repo root, after `npm run build --workspace editor/ui`):
- *   node handoffs/0033-editor-design-review/tools/capture.mjs <set> [--only=key,key] [--sizes=normal,minimum]
+ *   node handoffs/0033-editor-design-review/tools/capture.mjs <set> [--only=key,key] [--sizes=normal,minimum] [--root=dir]
+ *
+ * `--root` serves another built copy of editor/ui (its dist/), such as an earlier commit
+ * extracted under the ignored artifacts directory, so before and after use the same states.
  */
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:net';
@@ -28,7 +31,8 @@ import { reviewInitScript } from './review-double.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, '../../..');
-const uiRoot = join(repoRoot, 'editor/ui');
+const rootFlag = process.argv.slice(2).find((a) => a.startsWith('--root='))?.slice('--root='.length);
+const uiRoot = rootFlag ? resolve(rootFlag) : join(repoRoot, 'editor/ui');
 const args = process.argv.slice(2);
 const set = args.find((a) => !a.startsWith('--'));
 if (!set || !/^[a-z0-9-]+$/.test(set)) throw new Error('Usage: capture.mjs <set-name> [--only=a,b] [--sizes=normal,minimum]');
@@ -37,12 +41,33 @@ const only = flag('only');
 const sizeFilter = flag('sizes');
 const outDir = join(repoRoot, 'artifacts/0033-editor-design-review', set);
 if (existsSync(outDir)) throw new Error(`${outDir} exists; choose a new set name.`);
-const axePath = createRequire(join(uiRoot, 'package.json')).resolve('axe-core/axe.min.js');
+const axePath = createRequire(join(repoRoot, 'editor/ui/package.json')).resolve('axe-core/axe.min.js');
 const executablePath = [process.env.CHROME_PATH, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find((p) => p && existsSync(p));
 if (!executablePath) throw new Error('No Chrome found; set CHROME_PATH.');
 if (!existsSync(join(uiRoot, 'dist/index.html'))) throw new Error('Run the UI build first.');
 
 const DOUBLE = reviewInitScript();
+
+/**
+ * The evidence double with long output lists, for the dock's pages: 450 problems (one
+ * group of 300 spans pages), 1,234 console messages and 260 edits with 130 applied.
+ */
+const PAGED = `${DOUBLE}
+  (() => {
+    const bridge = window.__INCANT_BRIDGE__;
+    const base = bridge.getSnapshot();
+    const ids = Object.keys(base.entities);
+    const diagnostics = [];
+    for (let n = 0; n < 450; n += 1) diagnostics.push({ id: 'p' + n, severity: n % 4 === 0 ? 'warning' : 'error', message: 'Problem ' + n + ': compound part ' + (n % 64) + ' collider dimensions must be 0.001..10000 meters', entity: n < 300 ? ids[3] : ids[n % ids.length], component: 'Collider', path: '/shape/parts/' + (n % 64) + '/shape/half_extents/' + (n % 3) });
+    const console_ = [];
+    for (let n = 0; n < 1234; n += 1) console_.push({ id: 'c' + n, level: n % 9 === 0 ? 'warn' : n % 31 === 0 ? 'error' : 'info', source: 'native', message: 'Source watch reloaded scenes/harbor.scene.ron (' + n + ')', at: new Date(Date.UTC(2026, 9, 10, 12, 0, 0) + n * 1000).toISOString() });
+    const entries = [];
+    for (let n = 0; n < 260; n += 1) entries.push({ transaction: 'tx' + n, description: 'Move Crate ' + String(n % 4 + 1).padStart(2, '0') + ' to ' + n + ', 0, 2', origin: n % 5 === 0 ? { kind: 'agent', model: 'review-model', conversation: 'c' } : { kind: 'user' }, at: new Date(Date.UTC(2026, 9, 10, 12, 0, 0) + n * 60000).toISOString() });
+    const snapshot = { ...base, diagnostics, console: console_, history: { entries, applied: 130 } };
+    window.__INCANT_BRIDGE__ = { ...bridge, getSnapshot: () => snapshot };
+  })();
+`;
+const paged = { url: '/', init: PAGED };
 
 /** Window sizes; `inspector` moves the Inspector splitter with the keyboard. */
 const SIZES = [
@@ -71,6 +96,12 @@ const focusField = (name) => async (page) => {
   await page.keyboard.press('Tab');
 };
 
+/** Scrolls the Inspector so the named component's header is at the top. */
+const component = (name) => async (page) => {
+  await page.locator(`[data-region="inspector"] section.component[aria-label="${name}"]`).evaluate((el) => el.scrollIntoView({ block: 'start' }));
+  await page.waitForTimeout(150);
+};
+
 const STATES = [
   { key: 'no-selection', ...fixture(), sizes: ['normal', 'minimum', 'wide'] },
   { key: 'transform-camera', ...fixture(), steps: [tree('Pixel Camera')], sizes: ['normal', 'minimum', 'narrow', 'wide'] },
@@ -93,6 +124,9 @@ const STATES = [
   { key: 'native-env', ...double, steps: [tree('Harbor Sky')], sizes: ['normal'] },
   { key: 'native-mesh', ...double, steps: [tree('Crate Stack')], sizes: ['normal', 'minimum', 'narrow'] },
   { key: 'native-rubble', ...double, steps: [tree('Rubble Pile')], sizes: ['normal'] },
+  { key: 'native-rubble-parts', ...double, steps: [tree('Rubble Pile'), component('Collider')], sizes: ['normal', 'minimum', 'narrow'] },
+  { key: 'railing-parts', ...fixture(), steps: [tree('Broken Railing'), component('Collider')], sizes: ['normal', 'minimum'] },
+  { key: 'native-character-collider', ...double, steps: [tree('Player Character'), component('Collider')], sizes: ['normal', 'minimum'] },
   { key: 'native-audio', ...double, steps: [tree('Audio Emitter')], sizes: ['normal'] },
   { key: 'native-ortho', ...double, steps: [tree('Map Camera')], sizes: ['normal'] },
   { key: 'native-broken-camera', ...double, steps: [tree('Broken Camera')], sizes: ['normal', 'minimum'] },
@@ -113,6 +147,24 @@ const STATES = [
   { key: 'project-error', ...fixture('project-error'), sizes: ['normal'] },
   { key: 'empty-project', ...fixture('empty'), sizes: ['normal'] },
   { key: 'no-engine', url: '/', sizes: ['normal'] },
+  // Whole-app coverage (director feedback 2026-10-10): every reachable route and state.
+  { key: 'hierarchy-loading', ...fixture('loading'), sizes: ['normal'] },
+  { key: 'hierarchy-error', ...fixture('hierarchy-error'), sizes: ['normal'] },
+  { key: 'connection-error', ...fixture('connection-error'), sizes: ['normal'] },
+  { key: 'bad-fixture', url: '/?fixture=nope', sizes: ['normal'] },
+  { key: 'incompatible', url: '/', init: 'window.__INCANT_BRIDGE__ = { protocolVersion: 99, capabilities: [], label: "Future host (test double)", isFixture: false, getSnapshot: () => null, subscribe: () => () => {}, dispatch: async () => ({ ok: false }), request: async () => ({ ok: false }) };', sizes: ['normal'] },
+  { key: 'agent-checking', url: '/?fixture=sample&provider=checking', sizes: ['normal'] },
+  { key: 'agent-error', url: '/?fixture=sample&provider=error', steps: [async (page) => page.getByRole('button', { name: /^ChatGPT/ }).click()], sizes: ['normal'] },
+  { key: 'account-saved', url: '/?fixture=sample&provider=signed-out-saved', steps: [async (page) => page.getByRole('button', { name: /^ChatGPT/ }).click()], sizes: ['normal'] },
+  { key: 'account-signed-in', url: '/?fixture=sample&provider=signed-in-multi', steps: [async (page) => page.getByRole('button', { name: /^ChatGPT/ }).click()], sizes: ['normal'] },
+  { key: 'context-menu', ...fixture(), steps: [async (page) => { await page.getByRole('treeitem', { name: /^Crate 02/ }).click({ button: 'right' }); }], sizes: ['normal', 'minimum'] },
+  { key: 'panels-hidden', ...fixture(), steps: [async (page) => { await page.getByRole('button', { name: /hierarchy/i }).first().click(); await page.getByRole('button', { name: /output/i }).first().click(); }], sizes: ['normal'] },
+  { key: 'large-tree', ...fixture('large'), sizes: ['normal'], axe: false },
+  { key: 'shortcuts-filter', ...fixture(), steps: [async (page) => { await page.getByRole('button', { name: 'Keyboard shortcuts' }).click(); await page.keyboard.type('hierarchy'); }], sizes: ['normal', 'minimum'] },
+  // Long output lists: one page mounted, the range said, a group continued across pages.
+  { key: 'dock-paged-problems', ...paged, steps: [async (page) => page.getByRole('button', { name: 'Next page' }).click()], sizes: ['normal', 'minimum'] },
+  { key: 'dock-paged-console', ...paged, steps: [async (page) => { await page.getByRole('tab', { name: /^Console/ }).click(); await page.getByRole('button', { name: 'First page' }).click(); }], sizes: ['normal', 'minimum'] },
+  { key: 'dock-paged-history', ...paged, steps: [async (page) => page.getByRole('tab', { name: /^History/ }).click()], sizes: ['normal', 'minimum'] },
 ];
 
 async function freePort(start) {
@@ -166,6 +218,10 @@ function measure() {
   const agent = document.querySelector('[data-region="agent"]');
   const out = { inspector: rect(inspector), agent: rect(agent), viewport: rect(document.querySelector('[data-viewport-host]')) };
   out.pageHorizontalOverflow = document.documentElement.scrollWidth - document.documentElement.clientWidth;
+  // The window must never scroll (it would shift the titlebar off screen).
+  out.pageVerticalOverflow = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  // Rows mounted in the output dock (every list item, any design).
+  out.dockRows = document.querySelectorAll('[data-region="dock"] li').length;
   if (!inspector) return out;
   const box = inspector.getBoundingClientRect();
   const controls = [...inspector.querySelectorAll('input, textarea, [role="checkbox"], [role="listbox"], [role="group"][tabindex="0"]')].filter(visible);
@@ -251,13 +307,15 @@ async function captureOne(browser, origin, state, size) {
     }
     await page.screenshot({ path: join(outDir, file) });
     for (const region of ['inspector', 'agent']) {
+      // Fatal screens have no panels: skip instead of waiting for a region that never appears.
+      if ((await page.locator(`[data-region="${region}"]`).count()) === 0) continue;
       const box = await page.locator(`[data-region="${region}"]`).boundingBox().catch(() => null);
       if (!box) continue;
       entry.crops[region] = file.replace('.png', `-${region}.png`);
       await page.screenshot({ path: join(outDir, entry.crops[region]), clip: box });
     }
     // The whole right column, Inspector plus Agent, as one crop.
-    const side = await page.locator('.column--side').boundingBox().catch(() => null);
+    const side = (await page.locator('.column--side').count()) ? await page.locator('.column--side').boundingBox().catch(() => null) : null;
     if (side) {
       entry.crops.side = file.replace('.png', '-side.png');
       await page.screenshot({ path: join(outDir, entry.crops.side), clip: side });
@@ -278,7 +336,7 @@ const port = await freePort(4233);
 const server = await preview({ root: uiRoot, preview: { port, strictPort: true, host: '127.0.0.1' }, logLevel: 'error' });
 const origin = `http://127.0.0.1:${port}`;
 const browser = await chromium.launch({ executablePath, headless: true });
-const report = { set, generated: new Date().toISOString(), browser: browser.version(), port, captures: [] };
+const report = { set, generated: new Date().toISOString(), browser: browser.version(), port, uiRoot, captures: [] };
 const save = () => writeFileSync(join(outDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
 try {
   for (const state of STATES) {

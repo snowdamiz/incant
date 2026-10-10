@@ -1,3 +1,101 @@
+## Correctness review follow-up — bounded output lists and clipboard capability
+
+Preserve the comprehensive whole-app design from the current pass. Astra's source
+review found two correctness gaps to address before final native integration.
+This is a focused follow-up to that design, not another restart or a narrowed
+whole-app scope. Continue at explicitly verified Opus 5.5 Max through ACP.
+
+1. BottomDock currently renders every diagnostic in nested group maps, every
+   visible console message, and every history entry. The native bridge does not
+   cap these lists: full history is collected and source-watch/render errors keep
+   appending console events. Unlike the now-bounded hierarchy/assets/Inspector,
+   a large project or long editing session can still mount tens of thousands of
+   output rows. Keep the new grouping, filters and timeline, but bound mounted
+   rows through suitable pagination or virtualization. You own its presentation.
+   Preserve access to ALL entries, full diagnostic text, entity reveal, grouping,
+   filter counts, history applied/undone state and Now marker, keyboard access,
+   focus, and updates while new entries arrive. No silent truncation. Cover both
+   many diagnostic groups and one huge group, large console/history, and filter/
+   selection/update transitions. Record mounted-row bounds and real behavior;
+   do not claim the reference-machine performance gate.
+2. The new hierarchy Copy ID uses navigator.clipboard?.writeText. If clipboard
+   support is absent, it silently does nothing. Explain the unavailable capability
+   or visibly announce failure, and test both absent API and rejected permission.
+   Apply the same existing-path behavior to equivalent Copy ID actions if needed.
+
+Do not change engine Rust, transport schemas, authoring commands or accounts.
+Finish the current full-app result and this focused correction, run all UI tests,
+strict typecheck/build, and review affected rendered surfaces. If this revision
+arrives after your current response, it will be the next resumed packet. Commit
+with Built-by: claude. Final native captures follow the integrated build; do not
+label browser evidence as native acceptance.
+
+## Priority director feedback — whole-app redesign, 2026-10-10 14:32
+
+The director rejects the current result as too narrow and still visually cramped.
+Their exact feedback is:
+
+> tell claude the sidebar still looks cramped and messy and it looks like all of the work was only done to that one sidebar. I wanted a proper design improvement through the whole app. One example is the keybinds dialog being plain and boring. Note this is JUST AN EXAMPLE, dont hyper focus on that only this time.
+
+This supersedes any impression that the prior Inspector pass is accepted. Resume
+at verified Opus 5.5 with Max thinking and undertake a substantive, coherent design
+improvement across the entire app. You retain full creative authority. The
+keybinds dialog is one example of the broader problem, not the new sole target.
+Review and improve the shell/titlebar and primary navigation, hierarchy, viewport
+chrome and toolbars, asset workspace/details, Inspector, diagnostics/history,
+agent/account surfaces, dialogs (including keybinds), menus, empty/loading/error
+states, and responsive/keyboard interactions as a single product. Review all
+currently reachable routes/screens, not only the fixture that is easiest to open.
+Use your visual judgment to decide the architecture and treatment. Do not limit
+this to restyling the sidebar and keybinds dialog. Include a coverage matrix in
+result.md listing each major surface reviewed, what changed, and representative
+rendered evidence; explain deliberate retained areas rather than silently omitting
+them. Meaningful changes must be visible across the app.
+
+The attached director screenshot is copied to ignored local evidence:
+`artifacts/0033-native/director-cramped-sidebar.png`. Inspect it before designing.
+It illustrates cramped nesting, competing labels and technical metadata, dense
+controls and insufficient breathing room in the compound Collider inspector.
+Resolve that problem as part of the app-wide system, without hiding necessary
+editing or diagnostics or sacrificing useful information. Preserve the prior
+neutral palette with restrained accent and connected-panel preference, but freely
+rethink layout, grouping, navigation and disclosure. Avoid replacing cramped
+content with indiscriminate oversized spacing. Aim for a polished, clear tool at
+both normal and minimum supported sizes. All prior correctness/performance
+constraints below still apply, including bounded mounted rows and command-bus
+mutations; preserve the integrated Astra windowing fixes at e8ee0d6.
+
+### Native evidence from the integrated build
+
+Astra has integrated your previous commits plus the windowing correctness fix and
+built the native app from f78d763530696c5e58bc2bf0a46255a22524bef8. Ignored
+`artifacts/0033-native/` now contains its manifest and native captures: camera-wide,
+grid-wide, grid-values-wide, compound-end-wide and compound-min. Wide captures are
+1440x874 logical pixels at 2x; compound-min is 1000x650 logical at 2x. These show the
+previous design, not acceptance of it. Raw captures include the signed-in account
+label: keep them local and ignored, never commit or publish them. Native fixture
+content is synthetic and account-free.
+
+One possible native scrolling correctness issue needs attention during this pass:
+after selecting compound Part 1 and pressing End then Tab, the identity/detail
+correctly reports Part 64 (/shape/parts/63), but the list in compound-end-wide.jpg
+has a large blank region above the pinned last row. The companion AX text still
+lists Parts 1-13 plus Part 64 instead of the trailing visible range. Investigate
+programmatic reveal/scroll measurement and WebKit scheduling, with browser tests
+where reproducible; report precise remaining native requirements to Astra. The
+minimum capture shows Part 1 and must not be labeled a last-row test. Do not assume
+this behavior is accepted because Chromium tests passed.
+
+Keep native UI interaction/capture through the computer-use tool only; no shell
+native automation. Browser-based rendered iteration is fine. No Cargo in your
+worktree. Astra continues logic, shipping runtime and integration in parallel and
+will rebuild for native verification after your returned changes. You may replace
+obsolete bridge copy with presentation-level concise truthful messaging, but do
+not fabricate an editor-agent capability or modify engine/auth/transport behavior.
+Finish the comprehensive implementation, run all UI tests/typecheck/build, review
+rendered results, commit Built-by: claude, and return a complete result. Do not
+claim native acceptance for changes not yet built into the native app.
+
 ## Final plan revision — revision 6, 2026-10-10
 
 The director confirmed the final update and requested deleting the watcher;

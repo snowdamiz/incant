@@ -5,14 +5,16 @@ import { Icon, iconForKind } from '../../icons/Icon';
 import { kindLabel } from '../../assets/paths';
 import { projectState } from '../../shell/projectState';
 import { useShell } from '../../shell/ShellContext';
+import { COPY_ID_UNAVAILABLE, canWriteClipboard, copyText } from '../../shell/clipboard';
 import { StateView } from '../StateView';
 import { IdentityHeader } from './IdentityHeader';
 import { AssetInspector, useAssetEscape, useAssetInspectorHeader } from '../assets/AssetInspector';
 import { useAssets } from '../../assets/AssetsContext';
 import type { FieldContext, ReferenceResolver } from './FieldView';
-import { FieldView, fieldDomId } from './FieldView';
+import { FieldView, fieldDomId, severityOf } from './FieldView';
+import { breakAfterSlashes } from '../breakAfterSlashes';
 import { safeJson } from './format';
-import { componentIcon, componentTitle, sectionKeys } from './presentation';
+import { componentFamily, componentIcon, componentTitle, sectionKeys } from './presentation';
 
 /**
  * The right column's top panel. Its header line names what is inspected (an entity
@@ -38,10 +40,10 @@ export function InspectorPanel() {
       </StateView>
     );
   } else if (project.kind === 'loading') {
-    body = <StateView icon="entity" spinner title="Opening project…" compact />;
+    body = <StateView icon="scene" spinner title="Opening project…" compact />;
   } else if (project.kind === 'failed') {
     body = (
-      <StateView icon="entity" title="No project loaded" compact>
+      <StateView icon="scene" title="No project loaded" compact>
         <p>Component values appear here once the project opens.</p>
       </StateView>
     );
@@ -50,7 +52,7 @@ export function InspectorPanel() {
     body = <AssetInspector />;
   } else if (selection === null) {
     body = (
-      <StateView icon="entity" title="Nothing selected" compact>
+      <StateView icon="pointer" title="Nothing selected" compact>
         <p>Select an entity in the hierarchy to inspect its components.</p>
       </StateView>
     );
@@ -175,9 +177,14 @@ function MiddleTruncated({ text }: { text: string }) {
   );
 }
 
+/**
+ * The entity's problems as one tinted card, worst severity setting the tint. Each
+ * line is the engine message, then where it is: the component and exact path, a
+ * link that focuses the field.
+ */
 function EntityProblems({ entity, problems }: { entity: EntityDetail; problems: readonly Diagnostic[] }) {
   return (
-    <ul className="inspector__problems" aria-label="Problems on this entity">
+    <ul className={`inspector__problems inspector__problems--${severityOf(problems) ?? 'info'}`} aria-label="Problems on this entity">
       {problems.map((d) => (
         <li key={d.id} className={`problem-line problem-line--${d.severity}`}>
           <Icon name={d.severity === 'error' ? 'error' : d.severity === 'warning' ? 'warning' : 'info'} size={12} />
@@ -192,7 +199,7 @@ function EntityProblems({ entity, problems }: { entity: EntityDetail; problems: 
                   revealField(entity.id, d.component ?? '', d.path);
                 }}
               >
-                {shortType(d.component)}
+                <span className="problem-line__component">{shortType(d.component)}</span>
                 {d.path ? <code className="problem-line__path">{breakAfterSlashes(d.path)}</code> : null}
               </a>
             ) : null}
@@ -220,22 +227,26 @@ function revealField(entity: string, component: string, path: string | null) {
   }, 0);
 }
 
+/** Copies the entity ID; without a clipboard it stays focusable, marked unavailable, and says why. */
 function CopyIdButton({ id }: { id: string }) {
   const { announce } = useShell();
+  const available = canWriteClipboard();
   return (
     <button
       type="button"
       className="tool-button tool-button--small"
       aria-label="Copy entity ID"
-      title="Copy entity ID"
-      onClick={() => {
-        navigator.clipboard
-          ?.writeText(id)
-          .then(() => announce('Entity ID copied'))
-          .catch(() => announce('Could not copy: clipboard access was denied'));
-      }}
+      aria-disabled={available ? undefined : true}
+      aria-describedby={available ? undefined : 'copy-id-unavailable'}
+      title={available ? 'Copy entity ID' : COPY_ID_UNAVAILABLE}
+      onClick={() => void copyText(id, 'Entity ID', announce)}
     >
       <Icon name="copy" size={14} />
+      {available ? null : (
+        <span id="copy-id-unavailable" className="visually-hidden">
+          {COPY_ID_UNAVAILABLE}
+        </span>
+      )}
     </button>
   );
 }
@@ -257,21 +268,6 @@ function shortType(type: string) {
   return type.replace(/^incant\./, '');
 }
 
-/** A path that may wrap after each "/" rather than mid-name; the text is unchanged. */
-function breakAfterSlashes(text: string) {
-  const parts = text.split('/');
-  return parts.map((part, index) => (
-    <Fragment key={index}>
-      {part}
-      {index < parts.length - 1 ? (
-        <>
-          /<wbr />
-        </>
-      ) : null}
-    </Fragment>
-  ));
-}
-
 function ComponentSection({
   entity,
   component,
@@ -291,6 +287,7 @@ function ComponentSection({
   const warnings = diagnostics.filter((d) => d.severity === 'warning').length;
   const keys = schema ? orderedKeys(schema) : [];
   const title = componentTitle(component.type, schema?.title);
+  const family = schema ? componentFamily(component.type) : null;
   const typeId = `${bodyId}-type`;
   const ctx: FieldContext = { entity, component: component.type, diagnostics, value: component.value, depth: 0, refs };
   return (
@@ -305,7 +302,9 @@ function ComponentSection({
           onClick={() => setOpen(!open)}
         >
           <Icon name="chevron" size={12} className={`component__chevron${open ? ' is-open' : ''}`} />
-          <Icon name={schema ? componentIcon(component.type) : 'component'} size={14} className="component__icon" />
+          <span className={`component__mark${family ? ` family--${family}` : ''}`} aria-hidden="true">
+            <Icon name={schema ? componentIcon(component.type) : 'component'} size={14} />
+          </span>
           <span className="component__title">{title}</span>
           {errors ? (
             <span className="badge badge--error">

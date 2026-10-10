@@ -1,5 +1,5 @@
 /*
- * Incant editor design tokens, revision 3 ("calm inspector"). See editor/ui/DESIGN.md.
+ * Incant editor design tokens, revision 4 ("studio"). See editor/ui/DESIGN.md.
  * Contrast pairs are enforced by src/styles/tokens.test.ts; change both together.
  *
  * Structure follows the landing-page product illustration: one continuous frame, panels
@@ -69,6 +69,11 @@
   --color-kind-audio: #f5a3cd;
   --color-kind-texture: #73d6c2;
 
+  /* Component families: the tint of an Inspector component's mark. Families that match an
+     entity kind (light, camera, audio, script, mesh) reuse its colour. */
+  --color-family-physics: #7ed6ae;
+  --color-family-navigation: #b8d97a;
+
   /* Fixture label. */
   --color-fixture: #f0bd55;
   --color-fixture-bg: #2b220f;
@@ -103,9 +108,9 @@
   /* Sizing. */
   --row-height: 28px;
   --control-height: 28px;
-  --field-height: 26px; /* Inspector value boxes */
+  --field-height: 28px; /* Inspector value boxes */
   --header-height: 36px; /* panel headers and the dock tab strip */
-  --section-header-height: 30px; /* Inspector component headers */
+  --section-header-height: 34px; /* Inspector component headers */
   --titlebar-height: 40px; /* native traffic lights are centred for 40 px (TITLEBAR.md) */
   --statusbar-height: 28px;
   --splitter-size: 1px; /* the visible separator; the drag target extends 3 px each side */
