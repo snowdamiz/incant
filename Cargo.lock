@@ -3612,8 +3612,8 @@ dependencies = [
  "incant_import",
  "incant_input",
  "incant_localization",
+ "incant_play_legacy",
  "incant_render",
- "incant_script",
  "rpassword",
  "schemars 1.2.2",
  "serde",
@@ -3707,6 +3707,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_play_legacy"
+version = "0.0.1"
+dependencies = [
+ "cpu-time",
+ "incant_cmd",
+ "incant_core",
+ "incant_doc",
+ "incant_input",
+ "incant_localization",
+ "rquickjs",
+ "schemars 1.2.2",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_render"
 version = "0.0.1"
 dependencies = [
@@ -3742,17 +3760,11 @@ name = "incant_script"
 version = "0.0.1"
 dependencies = [
  "cpu-time",
- "incant_cmd",
- "incant_core",
- "incant_doc",
- "incant_input",
- "incant_localization",
+ "incant_runtime",
+ "incant_types",
  "rquickjs",
- "schemars 1.2.2",
- "serde",
- "serde_json",
- "sha2 0.10.9",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]

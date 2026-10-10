@@ -1,6 +1,6 @@
 use incant_cmd::CommandBus;
 use incant_doc::Project;
-use incant_script::{ScriptError, ScriptHost};
+use incant_play_legacy::{ScriptError, ScriptHost};
 use std::time::{Duration, Instant};
 
 fn js_message(error: ScriptError, expected_phase: &str) -> String {

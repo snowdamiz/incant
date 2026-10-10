@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- The first authoring-free QuickJS host executes compiler-produced bytecode over
+  actual native numeric columns, with detached views and bounded rollback on
+  exceptions, memory/CPU failures and deferred work. All 363 workspace tests and
+  workspace Clippy pass; schemas/SDK remain unchanged and a repeated standalone
+  native-script probe passes. Hosted CI remains pending. Existing gameplay remains explicitly
+  in `incant_play_legacy` pending migration; SDK/state/timers/queries/saves and
+  authenticated export loading are still open. See the
+  [native script audit](docs/spikes/native-script-columns.md).
+
 - The native runtime now lends actual Transform/Velocity numeric table columns
   through an exclusive synchronous scope with separate stable IDs. Direct writes,
   table reallocation, hierarchy/changed-tick publication, caller-owned undo and

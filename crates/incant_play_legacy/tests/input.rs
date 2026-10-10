@@ -1,6 +1,6 @@
 use incant_doc::{Entity, Project, Scene, Transform};
 use incant_input::{InputEvent, KeyCode};
-use incant_script::{PlaySession, ScriptError};
+use incant_play_legacy::{PlaySession, ScriptError};
 use serde_json::{Value, json};
 
 const SOURCE: &str = r#"exports.default={initialState:{ticks:0,presses:0,holds:0,isolated:true},update(api,dt,s){

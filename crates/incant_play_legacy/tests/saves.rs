@@ -1,5 +1,5 @@
 use incant_doc::{Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform};
-use incant_script::{MAX_SAVE_BYTES, PlaySession, SaveError, ScriptError};
+use incant_play_legacy::{MAX_SAVE_BYTES, PlaySession, SaveError, ScriptError};
 use serde_json::{Value, json};
 
 const SOURCE: &str = r#"exports.default={
