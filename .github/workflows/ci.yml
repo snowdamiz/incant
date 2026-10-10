@@ -23,6 +23,9 @@ jobs:
       - run: npm ci
       - run: python3 tools/generate_conventions.py --check
       - run: npm run test:tools
+      # First extracted runtime boundary; add incant_runtime when the real world
+      # implementation lands. This does not certify the legacy PlaySession.
+      - run: python3 tools/check_runtime_dependencies.py incant_types
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui
