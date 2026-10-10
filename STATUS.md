@@ -59,13 +59,14 @@ within its documented workload.
   after measured Jolt binding portability gaps; see ADR 0003. Typed bodies,
   primitive colliders, fixed stepping, sensors, masks and raycasts connect to
   isolated play and the shared command bus. Ten new behavior tests, full workspace Clippy, 154 Rust tests and
-  312 UI tests/build pass locally. The earlier 40 GPU checks pass; all 26 final
+  315 UI tests/build pass locally. The earlier 40 GPU checks pass; all 26 final
   engine look-dev PNGs match Claude’s reviewed originals byte for byte. Public CLI,
   browser/WASM and iOS simulator physics execution pass. Shared validation and
   fewer snapshots reduce paired local 512-body p95 from 9.99 to 8.80 ms, with
   exact final-state equality. Claude handoff 0022 implemented and reviewed the new Inspector
-  in browser fixtures. Shared schemas supply field order and units. Final native
-  CUA review and hosted checks remain pending. Character controllers, mesh/compound
+  in browser fixtures and the native app. Shared schemas supply field order and
+  units; WebKit field names and the compact Agent state are fixed. Final hosted
+  checks and merge of PR #23 remain pending. Character controllers, mesh/compound
   colliders, hierarchy/scale, rollback snapshots and device performance remain
   open. See [runtime evidence](docs/spikes/physics-runtime.md).
 
