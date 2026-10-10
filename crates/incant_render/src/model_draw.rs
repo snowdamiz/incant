@@ -76,7 +76,7 @@ impl Renderer {
                     mirrored: batch.mirrored,
                 },
             )?;
-            if material.alpha == incant_assets::AlphaMode::Blend {
+            if material.alpha == incant_assets_runtime::AlphaMode::Blend {
                 for (index, center) in batch.centers.iter().enumerate() {
                     transparent.push(Draw {
                         batch: Arc::clone(batch),

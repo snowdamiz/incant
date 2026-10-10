@@ -4,8 +4,8 @@ use crate::{
     materials::MaterialResources,
     scene::{ResolvedScene, SceneStats},
 };
-use incant_assets::{AssetStore, RuntimeAsset, RuntimeAssetData};
-use incant_doc::Project;
+use incant_assets_runtime::{RuntimeAsset, RuntimeAssetData};
+use incant_render_data::SceneInput;
 use std::{
     collections::{BTreeMap, HashMap},
     sync::{Arc, Weak},
@@ -88,14 +88,11 @@ impl RenderScene {
         &self.stats
     }
 }
-pub(crate) type ModelCache = HashMap<String, Weak<GpuModel>>;
+pub(crate) type ModelCache = HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuModel>>;
 
 impl Renderer {
-    pub fn prepare_scene(&self, project: &Project, assets: &AssetStore) -> Result<RenderScene> {
-        self.upload_scene(crate::scene::resolve(project, Some(assets))?)
-    }
-    pub(crate) fn diagnostic_scene(&self, project: &Project) -> Result<RenderScene> {
-        self.upload_scene(crate::scene::resolve(project, None)?)
+    pub fn prepare(&self, input: &SceneInput) -> Result<RenderScene> {
+        self.upload_scene(crate::scene::resolve(input)?)
     }
     fn upload_scene(&self, mut resolved: ResolvedScene) -> Result<RenderScene> {
         let environment = if resolved.environment.is_some() || !resolved.models.is_empty() {
@@ -113,7 +110,7 @@ impl Renderer {
             .map_err(|_| ResourceError::CacheLock("GPU model"))?;
         cache.retain(|_, model| model.strong_count() != 0);
         let mut batches = Vec::new();
-        for (key, plan) in resolved.models {
+        for ((_, key), plan) in resolved.models {
             let model = match cache.get(&key).and_then(Weak::upgrade) {
                 Some(model) => model,
                 None => {
@@ -228,7 +225,7 @@ impl Renderer {
             .iter()
             .map(|b| {
                 if b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
-                    == incant_assets::AlphaMode::Blend
+                    == incant_assets_runtime::AlphaMode::Blend
                 {
                     b.count as usize
                 } else {
@@ -241,7 +238,7 @@ impl Renderer {
             && batches.iter().any(|b| {
                 b.casts_shadows
                     && b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
-                        == incant_assets::AlphaMode::Blend
+                        == incant_assets_runtime::AlphaMode::Blend
             })
         {
             return Err(ResourceError::TransparentShadowCaster.into());

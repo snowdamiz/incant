@@ -6,7 +6,7 @@ mod texture;
 use crate::{ResourceError, Result};
 pub(crate) use drawing::SpriteDraw;
 use incant_2d::{SpriteRenderer, SpriteSampling};
-use incant_assets::{RuntimeAsset, RuntimeAssetData};
+use incant_assets_runtime::{RuntimeAsset, RuntimeAssetData};
 use std::{
     collections::HashMap,
     sync::{Arc, Mutex, Weak},
@@ -48,7 +48,7 @@ pub(crate) struct SpriteSystem {
     globals: wgpu::BindGroupLayout,
     textures: wgpu::BindGroupLayout,
     pipeline: wgpu::RenderPipeline,
-    cache: Mutex<HashMap<String, Weak<GpuTexture>>>,
+    cache: Mutex<HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuTexture>>>,
 }
 impl SpriteSystem {
     pub fn new(device: &wgpu::Device) -> Self {
@@ -138,7 +138,7 @@ impl SpriteSystem {
         let mut unique = std::collections::BTreeSet::new();
         let mut texture_bytes = 0_u64;
         for plan in &plans {
-            if unique.insert(&plan.source.info().fingerprint) {
+            if unique.insert(plan.source.version_id()) {
                 let RuntimeAssetData::Texture(source) = plan.source.data() else {
                     return Err(ResourceError::TextureSize.into());
                 };
@@ -192,7 +192,7 @@ impl SpriteSystem {
             {
                 return Err(ResourceError::BufferSize("sprite geometry").into());
             }
-            let key = plan.source.info().fingerprint.clone();
+            let key = plan.source.version_id();
             let texture = match cache.get(&key).and_then(Weak::upgrade) {
                 Some(texture) => texture,
                 None => {

@@ -4,6 +4,7 @@ use crate::{
     hdr_output::{read, texture},
 };
 use incant_doc::{Entity, Transform};
+use incant_render_authoring::RendererAuthoringExt as _;
 use serde_json::json;
 use std::{collections::BTreeMap, time::Duration};
 

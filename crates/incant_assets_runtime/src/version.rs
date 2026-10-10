@@ -5,7 +5,20 @@
 use crate::{CookedAudio, CookedModel, CookedTexture, Result, TextureUsage, invalid};
 use incant_types::{VisualAssetKind, VisualAssetRef};
 use serde::Serialize;
-use std::{path::Path, sync::Arc};
+use std::{
+    path::Path,
+    sync::{
+        Arc,
+        atomic::{AtomicU64, Ordering},
+    },
+};
+
+/// Process-local identity of one successfully loaded immutable version. It is
+/// neither a recipe fingerprint nor a persisted/content identifier. Separate
+/// loads cannot alias even if their caller labels and recipe keys are equal.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct AssetVersionId(u64);
+static NEXT_VERSION: AtomicU64 = AtomicU64::new(1);
 
 #[derive(Debug)]
 pub enum RuntimeAssetData {
@@ -54,11 +67,15 @@ pub struct RuntimeAssetInfo {
 
 #[derive(Debug)]
 pub struct RuntimeAsset {
+    version: AssetVersionId,
     info: RuntimeAssetInfo,
     usage: Option<TextureUsage>,
     data: RuntimeAssetData,
 }
 impl RuntimeAsset {
+    pub fn version_id(&self) -> AssetVersionId {
+        self.version
+    }
     pub fn info(&self) -> &RuntimeAssetInfo {
         &self.info
     }
@@ -71,13 +88,22 @@ impl RuntimeAsset {
 }
 
 impl RuntimeAsset {
-    fn create(id: &str, generation: u64, fingerprint: &str, data: RuntimeAssetData) -> Self {
+    fn create(
+        id: &str,
+        generation: u64,
+        fingerprint: &str,
+        data: RuntimeAssetData,
+    ) -> Result<Self> {
         let (kind, usage) = match &data {
             RuntimeAssetData::Model(_) => ("model", None),
             RuntimeAssetData::Texture(texture) => ("texture", Some(texture.metadata.usage)),
             RuntimeAssetData::Audio(_) => ("audio", None),
         };
-        Self {
+        let version = NEXT_VERSION
+            .try_update(Ordering::Relaxed, Ordering::Relaxed, |v| v.checked_add(1))
+            .map_err(|_| invalid("loaded asset version identity exhausted"))?;
+        Ok(Self {
+            version: AssetVersionId(version),
             info: RuntimeAssetInfo {
                 id: id.into(),
                 kind: kind.into(),
@@ -87,7 +113,7 @@ impl RuntimeAsset {
             },
             usage,
             data,
-        }
+        })
     }
     fn check_id(id: &str) -> Result<()> {
         if id.is_empty() || id.len() > 256 {
@@ -97,12 +123,12 @@ impl RuntimeAsset {
     }
     pub fn load_model(id: &str, generation: u64, cache: &Path, fingerprint: &str) -> Result<Self> {
         Self::check_id(id)?;
-        Ok(Self::create(
+        Self::create(
             id,
             generation,
             fingerprint,
             RuntimeAssetData::Model(crate::load_model(cache, fingerprint)?),
-        ))
+        )
     }
     pub fn load_texture(
         id: &str,
@@ -116,21 +142,21 @@ impl RuntimeAsset {
         if expected_usage.is_some_and(|usage| usage != texture.metadata.usage) {
             return Err(invalid("texture settings do not match the cooked payload"));
         }
-        Ok(Self::create(
+        Self::create(
             id,
             generation,
             fingerprint,
             RuntimeAssetData::Texture(texture),
-        ))
+        )
     }
     pub fn load_audio(id: &str, generation: u64, cache: &Path, fingerprint: &str) -> Result<Self> {
         Self::check_id(id)?;
-        Ok(Self::create(
+        Self::create(
             id,
             generation,
             fingerprint,
             RuntimeAssetData::Audio(Arc::new(crate::load_audio(cache, fingerprint)?)),
-        ))
+        )
     }
     /// Startup-only adapter from a binary package declaration. The caller retains
     /// the binary ID as its lookup key; this informational label is formatted once.

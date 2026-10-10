@@ -897,3 +897,5 @@ mock response, simulator build or unsigned package counts as a shipped product.
   [evidence](docs/spikes/cooked-native-scripts.md). Full gameplay migration,
   authenticated file exports, cross-target embedding, automatic source-map
   diagnostics, MSVC symbol audit and device/performance gates remain open.
+
+- Canonical renderer authoring boundary is implemented: typed retained cooked input, separate Project adapter, exact loaded-version GPU cache keys and direct input validation. Scoped 68 release tests and 54 native GPU tests plus Clippy/normal-graph checks pass. Native retained frame updates, full editor integration and phone performance remain open; see docs/spikes/native-renderer-boundary.md.
