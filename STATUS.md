@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- The integrated editor now preserves live OAuth completion announcements and
+  recovers Close focus instead of reusing Cancel as Sign out. Shortcut cells keep
+  native table semantics with explicit group/action/key context; returning to the
+  same Problems page after filtering announces again with timer cleanup. All 504
+  UI tests, strict TypeScript and the production build pass. Styling is unchanged;
+  native packaging, live screen-reader and Claude rendered acceptance remain
+  separate. See [editor correctness evidence](docs/spikes/editor-windowing-correctness.md#account-shortcuts-and-repeated-page-announcements-2026-10-10).
+
 - Native cooked 3D rigid bodies, colliders and angular velocity now run in the
   disposable ECS world through a document-free solver backend, typed structural
   commands and direct numeric updates that preserve sleeping bodies. Whole-batch

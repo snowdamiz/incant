@@ -117,3 +117,37 @@ conventions match, and all 25 Python tool tests pass. UI logs:
 `/tmp/incant-ui-main-final-{typecheck,tests,build}.log`. Native build and functional
 verification follow this source freeze; no native acceptance or phase/device gate
 is claimed by these browser tests.
+
+## Account, shortcuts and repeated page announcements (2026-10-10)
+
+The nonvisual review of Claude's integrated `99fc393` reproduced four failing
+cases before implementation: two platform-specific shortcut cells lacked their
+group/action context, OAuth completion removed the polite live status, and
+returning to the same Problems page after a filter reset did not change its
+live-region text. The focused baseline had 4 failures and 30 passing tests.
+
+Shortcut sections now use `scope="rowgroup"`; native action and shortcut `td`
+elements remain intact. Explicit group/action/spoken-key references name each
+shortcut cell, including after filtering changes group and row indices. OAuth
+completion retains the same live status node, with its existing visually hidden
+presentation. Separate action keys also prevent React from reusing the focused
+Cancel button as Sign out: the existing focus recovery moves to Close after
+validation completes. Repeated pager announcements clear and republish the same
+message; newer navigation and unmount cancel a pending repeat timer.
+
+Validation from the repository root:
+
+- Focused account, shortcut, Problems and pager suite: **38 tests in 4 files**.
+- `npm --workspace editor/ui test`: **504 tests in 29 files**.
+- `npm --workspace editor/ui run typecheck`: passed.
+- `npm --workspace editor/ui run build`: passed.
+- `python3 tools/generate_conventions.py --check` and `git diff --check`: passed.
+
+Local logs are `/tmp/incant-0033-a11y-{before,focused,ui,typecheck,build}.log`.
+Tests assert computed accessible names across macOS/Windows filters, live-node
+identity through browser wait/validation/completion, exact Close focus, observed
+DOM removal/reinsertion after a real severity-filter reset, and timer cleanup.
+These are jsdom behavior checks, not live screen-reader or rendered acceptance;
+the suite retains its existing missing canvas `getContext` warning. No CSS,
+layout, credentials, bridge contracts or project mutation paths changed. Native
+packaging and Claude's rendered acceptance follow the frozen UI source.
