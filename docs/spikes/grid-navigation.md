@@ -40,7 +40,7 @@ public probe changes routes from cost 6828 to 9828, closes both passages, saves
 while blocked, reopens a passage and arrives. Three blocked ticks and the final
 runtime/script states match uninterrupted and repeated playback exactly; authored
 files are unchanged. Durable shared Undo/Redo and invalid-grid rollback pass.
-All 285 Rust tests, 315 UI tests/build and five tool tests pass. Full Clippy,
+All 285 Rust tests, 315 UI tests/build and five tool tests pass. Full Clippy also passes.
 GPU/native checks and
 Claude's rendered review remain in progress. No phase gate is approved.
 

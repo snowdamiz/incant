@@ -1,4 +1,5 @@
 //! Small runnable cross-platform probe of the actual document and Bevy crates.
+mod grid_navigation;
 mod input;
 mod localization;
 mod navigation;
@@ -10,6 +11,7 @@ use incant_doc::{
 use serde_json::json;
 
 pub fn run() -> Result<String, String> {
+    let grid_navigation = grid_navigation::check()?;
     let input = input::check()?;
     let localization = localization::check()?;
     let navigation = navigation::check()?;

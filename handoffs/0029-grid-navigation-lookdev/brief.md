@@ -61,9 +61,9 @@ is a session cache revision, can reset on save reopen and is not durable identit
 
 Keep scene small and use 960x540 real-engine frames. Each capture invocation is
 limited to 128 frames and 256 MiB raw output. Store raw evidence under ignored
-artifacts/0029-grid-navigation. The supplied initial engine still has a 50 ms
-wall-clock script budget; a separately tested thread-CPU budget change is in the
-merge queue. Record any failures, and record temporary sleep assertions if used.
+artifacts/0029-grid-navigation. The supplied engine uses a 50 ms executing-thread CPU budget. Bounded synchronous
+native queries count toward it, while host pauses do not. Record any failures
+and any temporary sleep assertions used; CPU time is not a frame-time guarantee.
 Computer use is authorized, but the Mac is currently locked: use the supported
 headless renderer and never attempt to bypass the lock. Native UI is out of scope.
 
