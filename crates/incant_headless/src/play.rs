@@ -36,6 +36,9 @@ pub struct Options {
     /// Versioned fixed-tick keyboard/mouse/gamepad/touch clip; no device access.
     #[arg(long)]
     pub input_replay: Option<PathBuf>,
+    /// Data-only assertions at absolute game ticks; failure exits nonzero.
+    #[arg(long)]
+    pub assertions: Option<PathBuf>,
     /// New directory for PNG frames and report.json; existing paths are rejected.
     #[arg(long)]
     pub output: Option<PathBuf>,
@@ -78,6 +81,8 @@ pub enum PlayError {
     Save(#[from] incant_script::SaveError),
     #[error(transparent)]
     InputRecording(#[from] incant_input::RecordingError),
+    #[error(transparent)]
+    Assertions(#[from] super::play_assertions::AssertionError),
     #[error("project or asset loading failed: {0}")]
     Load(String),
     #[error("frame rendering failed: {0}")]
@@ -97,6 +102,8 @@ pub struct Frame {
 pub struct Report {
     format_version: u32,
     completed: bool,
+    pub passed: bool,
+    assertions: Vec<super::play_assertions::Outcome>,
     ticks: u64,
     start_tick: u64,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -173,8 +180,15 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
             return Err(incant_input::RecordingError::Range.into());
         }
     }
+    let mut assertions = options
+        .assertions
+        .as_deref()
+        .map(|path| super::play_assertions::Assertions::load(path, start_tick, start_tick + count))
+        .transpose()?
+        .unwrap_or_default();
     // Reserve a new output directory before GPU setup. Never overwrite a prior run.
-    // A failed run may leave partial PNGs, but never a completed report.json.
+    // A failed simulation may leave partial PNGs, but no completed report.
+    // Completed runs with failed assertions retain a report with passed=false.
     if let Some(output) = &options.output {
         if let Some(parent) = output.parent().filter(|p| !p.as_os_str().is_empty()) {
             fs::create_dir_all(parent)?;
@@ -219,6 +233,7 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
                 logs.append(snapshot.tick, snapshot.elapsed_seconds, entries)?;
             }
         }
+        assertions.evaluate(start_tick + tick, &mut play);
         if let (Some(renderer), Some(output)) = (&renderer, &options.output)
             && (tick % options.capture_every == 0 || tick == count)
         {
@@ -251,12 +266,15 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
             });
         }
     }
+    let passed = assertions.passed();
     let report = Report {
         format_version: 1,
         completed: true,
+        passed,
+        assertions: assertions.results(),
         ticks: count,
         start_tick,
-        save_output: options.save_output,
+        save_output: options.save_output.filter(|_| passed),
         script_commands: commands,
         state: play.snapshot(),
         script_state: play.host.state().clone(),
@@ -269,7 +287,7 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         camera: options.camera,
         wall_ms: start.elapsed().as_secs_f64() * 1000.,
     };
-    if let Some(save_output) = save_output {
+    if let Some(save_output) = save_output.filter(|_| passed) {
         save_output.finish(&play)?;
     }
     if let Some(output) = options.output {

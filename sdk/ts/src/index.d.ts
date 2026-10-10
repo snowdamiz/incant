@@ -10,7 +10,7 @@ export interface Entity {
 }
 export type { Command } from './generated';
 /** Host-managed save envelope; scripts do not receive filesystem access. */
-export type { GameSave } from './generated';
+export type { GameSave, PlayAssertions } from './generated';
 import type { Command } from './generated';
 export type { InputEvent, InputFrame, InputRecording } from './generated';
 import type { InputFrame } from './generated';

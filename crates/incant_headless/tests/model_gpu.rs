@@ -127,6 +127,46 @@ fn headless_play_records_current_simulation_frames_and_publishes_a_complete_repo
             fs::read(root.join("frames").join(name)).unwrap()
         );
     }
+    // Completed-but-failed gameplay retains diagnostic pixels/report, never a save.
+    fs::write(root.join("assertions.json"), serde_json::json!({
+        "format":"incant-play-assertions","version":1,"checks":[
+            {"name":"deliberate failure","tick":0,"path":"/state/tick","expect":{"type":"equals","value":1}}
+        ]}).to_string()).unwrap();
+    let failed_check = run(
+        root,
+        &[
+            "play",
+            "game.incant.json",
+            "--ticks",
+            "0",
+            "--assertions",
+            "assertions.json",
+            "--output",
+            "asserted",
+            "--save-output",
+            "asserted-save.json",
+            "--width",
+            "320",
+            "--height",
+            "180",
+        ],
+    );
+    assert!(!failed_check.status.success());
+    let diagnostic: serde_json::Value = serde_json::from_slice(&failed_check.stdout).unwrap();
+    assert_eq!(diagnostic["completed"], true);
+    assert_eq!(diagnostic["passed"], false);
+    assert_eq!(
+        serde_json::from_slice::<serde_json::Value>(
+            &fs::read(root.join("asserted/report.json")).unwrap()
+        )
+        .unwrap(),
+        diagnostic
+    );
+    assert_eq!(
+        fs::read(root.join("asserted/frame-000000.png")).unwrap(),
+        first
+    );
+    assert!(!root.join("asserted-save.json").exists());
     assert_eq!(fs::read(root.join("game.incant.json")).unwrap(), authored);
     fs::write(
         root.join("failure.js"),
