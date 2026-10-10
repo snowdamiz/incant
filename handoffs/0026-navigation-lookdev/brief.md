@@ -1,3 +1,18 @@
+## Priority revision 6: correct rounded-output interpretation only
+
+The v9 numerical log contradicts the reported zero-length first segment. In
+artifacts/0026-navigation/error-v9/probe.logs.jsonl at tick 19, the first two
+points are [4.29685115814209,0.05017497390508652,2.698483943939209] and
+[4.297078609466553,0.05000009387731552,2.6980462074279785]. They differ by about
+0.523 mm in 3D; rounding both to 3 decimals made them look identical in the
+report. Re-read the full-precision log, calculate the distance and amend the
+result's duplicate/zero-length finding. It is a very short height-detail
+segment, not a zero-length segment. Do not call it a code fix: no engine code or
+binary changed. Preserve all valid v9 rendered evidence and remaining actual
+limitations. No repeat captures are needed for this report-only correction.
+Commit the amended result with Built-by: claude. All prior routing constraints
+remain. This request comes from Astra's numerical validation of the raw log.
+
 ## Priority revision 5: rounded portal boundaries (2026-10-10)
 
 Source 020c640 fixes both v8 query directions without a fallback that hides invalid
