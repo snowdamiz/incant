@@ -108,10 +108,7 @@
     "new_local_captures": false,
     "local_ignored_gpu_tests": "not rerun during capture pause"
   },
-  "pending": [
-    "hosted checks",
-    "reviewed merge"
-  ],
+  "pending": [],
   "not_claimed": [
     "OS/browser event adapters or live hardware",
     "input action mapping/dead zones/calibration/rumble",
@@ -119,5 +116,74 @@
     "native play controls",
     "mobile lifecycle integration",
     "Phase 1 input completion"
-  ]
+  ],
+  "integration": {
+    "pr": 27,
+    "reviewed_head": "0021738b8679d52d18de67ae879cfb151ba25944",
+    "merge_commit": "72fb2bd5afd0e0ef60e0af490856039ea07d62bb",
+    "reviewed_and_merged_tree": "3126868f5cc2ae5ac8e125353dc6c803f041f83e",
+    "checks": [
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633259/job/114108241475",
+        "name": "storage (macos-latest)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633167/job/114108241156",
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633167/job/114108240964",
+        "name": "ios",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633409/job/114108241846",
+        "name": "checks",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633194/job/114108241303",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633194/job/114108241252",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633259/job/114108241447",
+        "name": "storage (windows-latest)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633167/job/114108241104",
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633259/job/114108241366",
+        "name": "storage (ubuntu-latest)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633167/job/114108241260",
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633167/job/114108241203",
+        "name": "web",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38016633167/job/114108241125",
+        "name": "android",
+        "state": "SUCCESS"
+      }
+    ],
+    "main_native_rebuilt_without_opening": true
+  }
 }

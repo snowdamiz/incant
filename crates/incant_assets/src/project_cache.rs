@@ -9,12 +9,14 @@ use std::{
 pub enum CacheKind {
     Models,
     Textures,
+    Audio,
 }
 impl CacheKind {
     pub(crate) fn directory(self) -> &'static str {
         match self {
             Self::Models => "models",
             Self::Textures => "textures",
+            Self::Audio => "audio",
         }
     }
 }

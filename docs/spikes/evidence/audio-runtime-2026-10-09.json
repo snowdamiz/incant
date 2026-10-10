@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-09",
+  "base": "734d008d89a716a1b48766d4d7ef6a0c2bfdbee7",
+  "scope": "Cooked WAV/Vorbis, Kira mixer and shared command-driven offline gameplay audio; not complete Phase 1 audio",
+  "checks": {
+    "full_workspace_rust_tests_before_final_case": 214,
+    "distinct_passing_rust_tests": 215,
+    "new_behavior_tests": 20,
+    "final_audio_and_headless_suites": "passed",
+    "workspace_clippy": "passed",
+    "ui_tests": 315,
+    "ui_build": "passed",
+    "tool_tests": 5,
+    "generated_contracts": "passed",
+    "strict_typescript": "passed",
+    "native_release_build_package": "passed",
+    "macos_device_backend_compile": "passed",
+    "ios_simulator_device_backend_compile": "passed",
+    "wasm_library_compile": "passed"
+  },
+  "public_cli": {
+    "passed": true,
+    "public_import_and_rpc": true,
+    "strict_typescript": true,
+    "source_free": true,
+    "repeated_pcm_exact": true,
+    "frames": 48000,
+    "sample_rate": 48000,
+    "left_rms": 0.2441395090272332,
+    "paused_left_rms": 0.0,
+    "resumed_left_rms": 0.2441395090272332,
+    "right_rms": 0.3664044296662817,
+    "attenuated_right_rms": 0.18361455724094905,
+    "bus_gain_ratio": 0.5011253750621514,
+    "existing_output_untouched": true,
+    "author_files_unchanged": {
+      "game.incant.json": "a862e40356134936d4ae5f3fb624ca7ff7cc41184eac20a437ebe3350e985830",
+      "game.incant.journal.jsonl": "8e63874489bcfc9712cb2c272f220f94118bbd3cf16cb025103872c9305a8fae"
+    },
+    "pcm_sha256": "4ab70417e9ee9e457b7a83e8f8307825557795e705e4cb6f9afba8550df43225",
+    "binary_sha256": "d8db39e596425a3d78e0b1bed733960cf57443c96a036ab381ba0e6059958036",
+    "audio_device_opened": false,
+    "pixel_capture": false
+  },
+  "limits": {
+    "buses": 32,
+    "voices": 128,
+    "listeners": 1,
+    "decoded_clip_bytes": 268435456,
+    "offline_export_pcm_bytes": 268435456,
+    "static_pcm_frames": 8388608,
+    "chunk_frames": 8192,
+    "offline_cached_chunks_per_voice": 2,
+    "error_queue": 1024
+  },
+  "device_playback": false,
+  "computer_use": false,
+  "local_pixel_capture": false,
+  "pending": [
+    "hosted audio checks",
+    "reviewed merge"
+  ],
+  "not_claimed": [
+    "native editor audio controls and playback integration",
+    "browser resource adapter and streaming",
+    "physical audio devices or measured latency",
+    "mobile audio sessions and interruption/device-change recovery",
+    "mixer cursor save/restore",
+    "dynamic bus topology",
+    "DSP effects and production performance",
+    "Core Sample or complete Phase 1 audio"
+  ],
+  "native_binary_sha256": "4883172e9af6bb553fcdbd9475e6b4c2ae2ad137d1264f5d8b06ec0e590516b4"
+}

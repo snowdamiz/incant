@@ -62,17 +62,38 @@
   "capture_constraint": {
     "computer_use": false,
     "new_local_captures": false,
-    "hosted_gpu_extension": "compiled locally; execution pending on hosted CI"
+    "hosted_gpu_extension": "passed on source and both desktop jobs"
   },
-  "pending": [
-    "hosted checks",
-    "reviewed merge"
-  ],
+  "pending": [],
   "not_claimed": [
     "arbitrary assertion scripts",
     "agent play tool",
     "native play controls",
     "Core Sample and its device gate"
   ],
-  "native_binary_sha256": "ada3012f2944b35a36b13de9a8ed0b9fbb50b50cf47160d696813808c2334fa7"
+  "native_binary_sha256": "ada3012f2944b35a36b13de9a8ed0b9fbb50b50cf47160d696813808c2334fa7",
+  "integration": {
+    "pr": 28,
+    "reviewed_head": "7379f9c19e9a129a95d7d113b83b4bec162ce398",
+    "merge_commit": "734d008d89a716a1b48766d4d7ef6a0c2bfdbee7",
+    "reviewed_and_merged_tree": "351782ca35337ac131138ff56cea9c85ef81a7a3",
+    "checks": [
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38017197035/job/114110003771",
+        "name": "checks",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38017197117/job/114110004158",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38017197117/job/114110004285",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "state": "SUCCESS"
+      }
+    ],
+    "main_native_rebuilt_without_opening": true
+  }
 }
