@@ -82,9 +82,10 @@ showed a minimum separation of 0.476 m (overlap). The explicit 5 cm default
 passes both final fixtures; this does not establish collision-free behavior for
 arbitrary crowds. The limitation remains part of the API contract.
 
-Claude's actual rendered review is the next scoped check. Navigation Inspector,
-native debug drawing, off-mesh links, grid navigation, Core Sample integration
-and physical-device performance requirements remain open.
+Claude's actual rendered review is complete for this increment, as recorded
+below. Navigation Inspector, native debug drawing, off-mesh links, grid
+navigation, Core Sample integration and physical-device performance
+requirements remain separate work.
 
 ## Rendered verification and remaining behavior limits
 

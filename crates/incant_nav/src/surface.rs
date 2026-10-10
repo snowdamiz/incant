@@ -50,7 +50,7 @@ fn delta(a: Point, b: Point) -> [f64; 2] {
 }
 fn precision(points: &[Point]) -> f64 {
     // Stored positions are f32. Projection/interpolation can round a boundary
-    // point by an ULP; allow two ULPs in world space, not a fixed percentage of
+    // point by an ULP; allow two coordinate-scaled f32 epsilons, not a fixed percentage of
     // a short segment or a skinny triangle.
     points
         .iter()
