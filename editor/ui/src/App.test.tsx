@@ -69,7 +69,7 @@ describe('editor shell', () => {
   it('renders the hierarchy as an accessible tree with problem counts in names', async () => {
     const { container } = renderFixture('sample');
     const tree = screen.getByRole('tree', { name: 'Hierarchy' });
-    expect(within(tree).getAllByRole('treeitem').length).toBe(24);
+    expect(within(tree).getAllByRole('treeitem').length).toBe(25);
     expect(treeRow('Crate 03').textContent).toContain('1 error');
     await expectNoAxeViolations(container);
   });

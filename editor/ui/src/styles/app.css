@@ -2193,6 +2193,10 @@ input.control.control__input[data-focus-visible] {
 .axis--w {
   color: var(--color-axis-w);
 }
+/* Named, non-spatial entries (W/H of a logical resolution). */
+.axis--plain {
+  color: var(--color-text-muted);
+}
 
 .control--notice {
   flex-direction: column;

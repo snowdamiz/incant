@@ -37,6 +37,17 @@ export interface FieldHint {
   readonly short?: string;
   /** Row order for an object without a schema order (list item detail). */
   readonly order?: readonly string[];
+  /**
+   * Names for the entries of a fixed-length number list that is not a spatial
+   * vector, such as a width and height. `short` is the visible prefix and `name`
+   * the accessible name. A list of any other length is shown as a mismatch.
+   */
+  readonly axes?: readonly AxisName[];
+}
+
+export interface AxisName {
+  readonly short: string;
+  readonly name: string;
 }
 
 export interface FieldSection {
@@ -97,19 +108,32 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
     fields: {
       '/projection': {
         title: 'Projection',
-        variants: { perspective: 'Perspective', orthographic: 'Orthographic' },
+        variants: { perspective: 'Perspective', orthographic: 'Orthographic', pixel_perfect: 'Pixel perfect' },
         omittedNote: 'Not authored. Cameras without a projection use the schema default.',
       },
       '/projection/vertical_size': { title: 'Vertical size' },
+      '/projection/pixels_per_unit': { title: 'Pixel density' },
+      '/projection/reference_resolution': {
+        // Short enough that the "px" unit stays visible at the 280 px minimum
+        // Inspector width; the logical sense is in the entry names and help.
+        title: 'Resolution',
+        axes: [
+          { short: 'W', name: 'Logical width' },
+          { short: 'H', name: 'Logical height' },
+        ],
+      },
       '/fov_degrees': {
         title: 'Field of view',
-        status: (camera) =>
-          isOrthographicCamera(camera)
-            ? {
-                short: 'Unused',
-                long: 'Not used by orthographic projection. Kept for switching back to perspective.',
-              }
-            : null,
+        status: (camera) => {
+          const mode = isOrthographicCamera(camera)
+            ? 'orthographic'
+            : isPixelPerfectCamera(camera)
+              ? 'pixel-perfect'
+              : null;
+          return mode
+            ? { short: 'Unused', long: `Not used by ${mode} projection. Kept for switching back to perspective.` }
+            : null;
+        },
       },
       '/near': { title: 'Near clip', description: 'Distance from the camera to the near clipping plane.' },
       '/far': { title: 'Far clip', description: 'Distance from the camera to the far clipping plane.' },
@@ -137,6 +161,53 @@ export function isOrthographicCamera(camera: Readonly<Record<string, unknown>>):
     typeof size === 'number' &&
     Number.isFinite(size) &&
     size > 0
+  );
+}
+
+/**
+ * The engine's pixel-perfect bounds (docs/spikes/pixel-perfect-cameras.md): each
+ * logical dimension is a whole number from 16 to 4096, the product is at most
+ * 4,194,304 pixels, and density is finite from 1 to 4096 pixels per metre.
+ */
+export const PIXEL_PERFECT_LIMITS = {
+  minDimension: 16,
+  maxDimension: 4096,
+  maxPixels: 4_194_304,
+  minDensity: 1,
+  maxDensity: 4096,
+} as const;
+
+/**
+ * True only for a well-formed pixel-perfect projection: exactly `kind`,
+ * `pixels_per_unit` and `reference_resolution`, all within the engine's bounds.
+ * Anything else is malformed, so no sibling tag is derived from it; the values
+ * are still shown as authored and engine diagnostics explain them.
+ */
+export function isPixelPerfectCamera(camera: Readonly<Record<string, unknown>>): boolean {
+  const projection = camera.projection;
+  if (typeof projection !== 'object' || projection === null || Array.isArray(projection)) return false;
+  const record = projection as Record<string, unknown>;
+  const keys = Object.keys(record).sort();
+  const density = record.pixels_per_unit;
+  const size = record.reference_resolution;
+  const limits = PIXEL_PERFECT_LIMITS;
+  const dimension = (n: unknown): n is number =>
+    typeof n === 'number' && Number.isInteger(n) && n >= limits.minDimension && n <= limits.maxDimension;
+  return (
+    record.kind === 'pixel_perfect' &&
+    keys.length === 3 &&
+    keys[0] === 'kind' &&
+    keys[1] === 'pixels_per_unit' &&
+    keys[2] === 'reference_resolution' &&
+    typeof density === 'number' &&
+    Number.isFinite(density) &&
+    density >= limits.minDensity &&
+    density <= limits.maxDensity &&
+    Array.isArray(size) &&
+    size.length === 2 &&
+    dimension(size[0]) &&
+    dimension(size[1]) &&
+    size[0] * size[1] <= limits.maxPixels
   );
 }
 
