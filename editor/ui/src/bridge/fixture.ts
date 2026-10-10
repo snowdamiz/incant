@@ -57,6 +57,37 @@ export function fixtureId(n: number): Ulid {
   return `01J9ZF1XTR${suffix}` as Ulid;
 }
 
+/** Native PrimitiveColliderShape after bridge resolution: a compound part's shape. */
+const PRIMITIVE_SHAPE = {
+  type: 'tagged-union',
+  discriminator: 'type',
+  variants: {
+    box: {
+      type: 'object',
+      properties: {
+        half_extents: { type: 'array', items: { type: 'number' }, minItems: 3, maxItems: 3, 'x-incant-unit': 'm', optional: false },
+        type: { type: 'string', enum: ['box'], optional: false },
+      },
+    },
+    sphere: {
+      type: 'object',
+      properties: {
+        radius: { type: 'number', 'x-incant-unit': 'm', optional: false },
+        type: { type: 'string', enum: ['sphere'], optional: false },
+      },
+    },
+    capsule: {
+      type: 'object',
+      description: 'Capsule along local Y; half_height excludes the hemispherical ends.',
+      properties: {
+        half_height: { type: 'number', 'x-incant-unit': 'm', optional: false },
+        radius: { type: 'number', 'x-incant-unit': 'm', optional: false },
+        type: { type: 'string', enum: ['capsule'], optional: false },
+      },
+    },
+  },
+} as const;
+
 const SCHEMAS: Record<string, ComponentSchema> = {
   'incant.Transform': {
     type: 'incant.Transform',
@@ -219,6 +250,47 @@ const SCHEMAS: Record<string, ComponentSchema> = {
               type: { type: 'string', enum: ['capsule'], optional: false },
             },
           },
+          compound: {
+            type: 'object',
+            description: 'One body and material shared by a bounded union of local primitive parts.',
+            properties: {
+              parts: {
+                type: 'array',
+                minItems: 1,
+                maxItems: 64,
+                optional: false,
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string',
+                      description: 'Stable ULID, unique within this collider, retained when editing a part.',
+                      optional: false,
+                    },
+                    rotation: {
+                      type: 'array',
+                      description: 'Unit quaternion (x, y, z, w), relative to the collider entity.',
+                      items: { type: 'number' },
+                      minItems: 4,
+                      maxItems: 4,
+                      optional: false,
+                    },
+                    shape: { ...PRIMITIVE_SHAPE, optional: false },
+                    translation: {
+                      type: 'array',
+                      description: "Offset in the collider entity's local frame, in meters.",
+                      items: { type: 'number' },
+                      minItems: 3,
+                      maxItems: 3,
+                      'x-incant-unit': 'm',
+                      optional: false,
+                    },
+                  },
+                },
+              },
+              type: { type: 'string', enum: ['compound'], optional: false },
+            },
+          },
         },
       },
       density: { type: 'number', minimum: 0.001, maximum: 100000, 'x-incant-unit': 'kg/m³', optional: false },
@@ -312,6 +384,52 @@ const body = (motion: string, extra: Record<string, unknown> = {}): ComponentVal
   schemaVersion: 1,
   value: { motion, gravity_scale: 1, linear_damping: 0, angular_damping: 0.05, can_sleep: true, ccd: true, ...extra },
 });
+/** Unit quaternion for a rotation of `degrees` about a unit axis. */
+const turn = (axis: [number, number, number], degrees: number): number[] => {
+  const half = (degrees * Math.PI) / 360;
+  return [...axis.map((v) => Number((v * Math.sin(half)).toFixed(6))), Number(Math.cos(half).toFixed(6))];
+};
+let partSerial = 0;
+const part = (translation: number[], shape: Record<string, unknown>, rotation: number[] = [0, 0, 0, 1]) => ({
+  id: fixtureId(30000 + (partSerial += 1)),
+  translation,
+  rotation,
+  shape,
+});
+const box = (x: number, y: number, z: number) => ({ type: 'box', half_extents: [x, y, z] });
+const compound = (parts: unknown[], extra: Record<string, unknown> = {}) => collider({ type: 'compound', parts }, extra);
+
+/** 64 parts (the maximum) in a deterministic heap: boxes, spheres and capsules. */
+function rubbleParts() {
+  return Array.from({ length: 64 }, (_, i) => {
+    const ring = Math.floor(i / 16);
+    const angle = (i % 16) * 22.5;
+    const radius = 1.6 - ring * 0.35;
+    const at = [
+      Number((Math.cos((angle * Math.PI) / 180) * radius).toFixed(3)),
+      Number((0.15 + ring * 0.28).toFixed(3)),
+      Number((Math.sin((angle * Math.PI) / 180) * radius).toFixed(3)),
+    ];
+    const kind = i % 5;
+    if (kind === 3) return part(at, { type: 'sphere', radius: 0.12 + (i % 3) * 0.04 });
+    if (kind === 4) return part(at, { type: 'capsule', half_height: 0.18, radius: 0.08 }, turn([0, 0, 1], 90));
+    return part(at, box(0.14 + (i % 4) * 0.03, 0.1, 0.12 + (i % 3) * 0.02), turn([0, 1, 0], angle));
+  });
+}
+
+/** One plausible top rail followed by one malformed part of each kind. */
+function railingParts() {
+  const rail = part([0, 0.9, 0], box(1.2, 0.05, 0)); // z half extent 0: out of range
+  return [
+    rail,
+    part([-1.1, 0.45, 0], box(0.05, 0.45, 0.05), [0, 0, 0.5, 0.5]), // not a unit quaternion
+    part([1.1, 0.45, 0], { half_extents: [0.05, 0.45, 0.05] }), // shape without a type
+    { ...part([0, 0.45, 0], { type: 'cylinder', half_height: 0.45, radius: 0.04 }), id: rail.id }, // unknown tag, duplicate ID
+    { ...part([0, 0.2, 0], box(1.2, 0.04, 0.04)), material: 'oak' }, // field outside the schema
+    'post-04', // not an object
+  ];
+}
+
 const crate = (name: string, x: number, half = [0.5, 0.5, 0.5], more: ComponentValue[] = []): Spec => ({
   name,
   kind: 'mesh',
@@ -432,6 +550,57 @@ const SAMPLE_SCENE: Spec = {
           ],
         },
         {
+          name: 'Stone Arch',
+          kind: 'mesh',
+          components: [
+            transform([-4, 0, 1]),
+            mesh('assets/dock_kit/arch.mesh', 'materials/harbor_stone.mat'),
+            body('fixed'),
+            compound([
+              part([-1.1, 1.1, 0], box(0.3, 1.1, 0.4)),
+              part([1.1, 1.1, 0], box(0.3, 1.1, 0.4)),
+              part([0, 2.4, 0], box(1.4, 0.2, 0.4)),
+              part([0, 2.62, 0], box(0.18, 0.18, 0.42), turn([0, 0, 1], 45)),
+            ], { density: 2400, friction: 0.8 }),
+          ],
+        },
+        {
+          name: 'Handcart',
+          kind: 'mesh',
+          components: [
+            transform([-1.5, 1.2, -1]),
+            mesh('assets/dock_kit/handcart.mesh', 'materials/weathered_wood.mat'),
+            body('dynamic'),
+            compound([
+              part([0, 0.35, 0], box(0.6, 0.06, 0.4)),
+              part([-0.3, 0.18, -0.46], { type: 'sphere', radius: 0.18 }),
+              part([-0.3, 0.18, 0.46], { type: 'sphere', radius: 0.18 }),
+              part([0.82, 0.55, 0], { type: 'capsule', half_height: 0.32, radius: 0.04 }, turn([0, 0, 1], -60)),
+            ], { density: 520, friction: 0.6, memberships: 2, filter: 0xfffffffd }),
+          ],
+        },
+        {
+          name: 'Broken Railing',
+          kind: 'mesh',
+          components: [
+            transform([4.5, 0, -1]),
+            mesh('assets/dock_kit/railing.mesh', 'materials/weathered_wood.mat'),
+            body('fixed'),
+            // Deliberately malformed parts: each one must be shown plainly, never repaired.
+            compound(railingParts()),
+          ],
+        },
+        {
+          name: 'Rubble Pile',
+          kind: 'mesh',
+          components: [
+            transform([6.5, 0, 3]),
+            mesh('assets/dock_kit/rubble.mesh', 'materials/harbor_stone.mat'),
+            body('fixed'),
+            compound(rubbleParts(), { density: 2200, friction: 0.9 }),
+          ],
+        },
+        {
           name: 'Wave Trigger',
           kind: 'group',
           components: [
@@ -535,6 +704,31 @@ function sampleDiagnostics(byName: Map<string, Ulid>): Diagnostic[] {
       entity: id('Pier Planks'),
       component: 'Collider',
       path: '/shape/type',
+    },
+    // Engine wording (incant_doc collider_shapes.rs), addressed to the exact part path.
+    {
+      id: 'd7',
+      severity: 'error',
+      message: 'compound part 0: collider dimensions must be 0.001..10000 meters',
+      entity: id('Broken Railing'),
+      component: 'Collider',
+      path: '/shape/parts/0/shape/half_extents/2',
+    },
+    {
+      id: 'd8',
+      severity: 'error',
+      message: 'compound part 1 rotation must be a unit quaternion',
+      entity: id('Broken Railing'),
+      component: 'Collider',
+      path: '/shape/parts/1/rotation',
+    },
+    {
+      id: 'd9',
+      severity: 'error',
+      message: 'compound part 3 requires a unique valid ULID',
+      entity: id('Broken Railing'),
+      component: 'Collider',
+      path: '/shape/parts/3/id',
     },
     {
       id: 'd5',

@@ -11,6 +11,12 @@
 export interface FieldHint {
   readonly title?: string;
   readonly description?: string;
+  /** Presents a plain string as a stable identifier (monospace, never a reference). */
+  readonly identifier?: boolean;
+  /** Abbreviation in one-line list summaries ("r" for radius); the full label is spoken. */
+  readonly short?: string;
+  /** Row order for an object without a schema order (list item detail). */
+  readonly order?: readonly string[];
 }
 
 export interface FieldSection {
@@ -21,7 +27,11 @@ export interface FieldSection {
 
 export interface ComponentPresentation {
   readonly sections: readonly FieldSection[];
-  /** Keyed by JSON pointer relative to the component, e.g. `/shape/radius`. */
+  /**
+   * Keyed by JSON pointer relative to the component, e.g. `/shape/radius`. An
+   * array index may be written as a `*` segment (`/shape/parts/` + `*` + `/id`);
+   * an exact pointer wins.
+   */
   readonly fields: Readonly<Record<string, FieldHint>>;
 }
 
@@ -50,6 +60,14 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
       '/restitution': { description: 'Bounciness, 0 to 1 (dimensionless).' },
       '/sensor': { description: 'Reports overlaps instead of producing contacts.' },
       '/filter': { description: 'Collision groups this collider can interact with.' },
+      // Compound parts: what the part is, where it sits, then its primitive shape.
+      '/shape/parts/*': { order: ['id', 'translation', 'rotation', 'shape'] },
+      '/shape/parts/*/id': { title: 'ID', identifier: true },
+      '/shape/parts/*/translation': { title: 'Offset' },
+      '/shape/parts/*/shape': { title: 'Primitive', description: 'Box, sphere or capsule (local Y). Parts cannot nest.' },
+      '/shape/parts/*/shape/half_extents': { short: '½' },
+      '/shape/parts/*/shape/half_height': { short: '½h' },
+      '/shape/parts/*/shape/radius': { short: 'r' },
     },
   },
 };
@@ -60,7 +78,9 @@ export function componentPresentation(type: string): ComponentPresentation | und
 }
 
 export function fieldHint(component: string, pointerPath: string): FieldHint {
-  return componentPresentation(component)?.fields[pointerPath] ?? {};
+  const fields = componentPresentation(component)?.fields;
+  if (!fields) return {};
+  return fields[pointerPath] ?? fields[pointerPath.replace(/\/\d+(?=\/|$)/g, '/*')] ?? {};
 }
 
 /**

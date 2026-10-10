@@ -119,9 +119,19 @@ function EntityInspector({
                     href={`#${fieldDomId(entity.id, d.component, (d.path ?? '').split('/').filter(Boolean))}`}
                     onClick={(event) => {
                       event.preventDefault();
-                      const target = nearestField(entity.id, d.component ?? '', d.path);
-                      target?.scrollIntoView({ block: 'center' });
-                      (target?.matches('input,[tabindex]') ? target : target?.querySelector<HTMLElement>('input,[tabindex]'))?.focus();
+                      const reveal = () => {
+                        const target = nearestField(entity.id, d.component ?? '', d.path);
+                        target?.scrollIntoView({ block: 'center' });
+                        (target?.matches('input,[tabindex]') ? target : target?.querySelector<HTMLElement>('input,[tabindex]'))?.focus();
+                        return target;
+                      };
+                      const first = reveal();
+                      // Focusing a list row (a compound part) selects it and renders its fields;
+                      // once rendered, continue to the exact field when it now exists.
+                      setTimeout(() => {
+                        const next = nearestField(entity.id, d.component ?? '', d.path);
+                        if (next && next !== first && first?.contains(document.activeElement)) reveal();
+                      }, 0);
                     }}
                   >
                     {shortType(d.component)}
