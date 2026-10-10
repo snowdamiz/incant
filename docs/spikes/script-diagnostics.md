@@ -40,3 +40,10 @@ a healthy script's deadline. This increment makes that failure distinguishable;
 it does not solve scheduling robustness, provide CPU-time accounting, claim
 source-mapped stack traces, or classify every JavaScript memory error as a native
 allocation failure. No visual surface changes and no phase-gate approval.
+
+
+At `bb8b597`, the near-head-on steering correction passes all 296 Rust tests and
+Clippy, both public steering/off-mesh repeat-and-save workflows and unsigned
+native packaging. Its final rendered review and updated hosted checks remain
+pending. The diagnostics runtime still uses wall-clock execution limits; the
+separate CPU-budget increment changes that accounting.
