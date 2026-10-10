@@ -214,21 +214,29 @@ impl Drop for Loan<'_, '_, '_> {
     fn drop(&mut self) {
         self.revoke();
         if !self.committed {
-            for chunk in &self.chunks {
-                for buffer in std::iter::once(&chunk.transforms).chain(chunk.velocities.as_ref()) {
-                    // SAFETY: all foreign views were detached first. The outer
-                    // exclusive scope still keeps these initialized allocations
-                    // fixed. Undo data has the exact original length, is disjoint
-                    // from ECS storage, and contains only initialized f64 values.
-                    unsafe {
-                        ptr::copy_nonoverlapping(
-                            buffer.undo.as_ptr(),
-                            buffer.pointer,
-                            buffer.undo.len(),
-                        );
-                    }
+            // Numeric validation may have created new mutable slices. Do not
+            // dereference raw pointers retained from the initial visit: restore
+            // through fresh safe borrows after every foreign view is detached.
+            // Verify the entire layout before restoring any prefix.
+            let mut saved = self.chunks.iter();
+            self._columns.for_each_chunk(|chunk| {
+                let old = saved.next().expect("exclusive loan retains table count");
+                assert_eq!(chunk.ids, old.ids, "exclusive loan retains row identities");
+                assert_eq!(chunk.transforms.len(), old.transforms.undo.len());
+                assert_eq!(
+                    chunk.velocities.as_ref().map(|v| v.len()),
+                    old.velocities.as_ref().map(|v| v.undo.len())
+                );
+            });
+            assert!(saved.next().is_none(), "exclusive loan retains table count");
+            let mut saved = self.chunks.iter();
+            self._columns.for_each_chunk(|chunk| {
+                let old = saved.next().expect("validated layout");
+                chunk.transforms.copy_from_slice(&old.transforms.undo);
+                if let (Some(current), Some(old)) = (chunk.velocities, &old.velocities) {
+                    current.copy_from_slice(&old.undo);
                 }
-            }
+            });
         }
     }
 }
