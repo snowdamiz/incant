@@ -79,5 +79,25 @@ workspace feature resolution and real model-GPU test targets:
 
 The no-run timing command compiles GPU test targets; it does not claim to execute
 those tests. [Local evidence](evidence/tauri-build-context-2026-10-10.json) records
-commands, generated-output identities, compilation checks and log hashes. Hosted
-Linux/Windows validation and any merge-latency improvement remain to be measured.
+commands, generated-output identities, compilation checks and log hashes.
+
+## Hosted result
+
+PR56 merged as `4a2d113` after all 17 checks passed on exact `961b1d3`; the final
+main tree equals the tested head. [Hosted evidence](evidence/tauri-build-context-hosted-2026-10-10.json)
+records actual keys, log/report hashes, units and exact GPU identities. Linux,
+Windows and macOS each executed the same 44 GPU tests with **zero compilation**
+in that step (Cargo 0.40s, 0.99s and 1.98s respectively). This verifies the intended
+hosted no-op behavior while preserving coverage.
+
+| Native check | Execution | Queue | Ordinary Cargo build | Custom tools build |
+| --- | ---: | ---: | ---: | ---: |
+| Linux | 11m29s | 2s | 3m58s | 39.56s |
+| Windows | 17m50s | 3s | 7m10s | 1m14s |
+| macOS | 16m42s | 4m20s | 5m59s | 53.67s |
+
+macOS completed last because of queue time; Windows had the longest execution.
+The source/feature graph and restored cache generations differ from PR53, so this
+does not attribute the full job-time change to the Tauri fix. Windows default
+editor compilation remains 189.18s and custom editor 61.82s in the unit report;
+neither report separates linking from frontend/backend work.

@@ -31,10 +31,20 @@ archives contain checksummed source/download data; compiled native/iOS archives
 keep their existing separate keys.
 
 The preflight derives new keys from actual observed inputs; hosted publication
-and consumption of the new namespaces are still pending. Different future
-environment inputs may produce additional generations. An immutable shared key
+and consumption of the new namespaces are still pending. The first PR59 head's
+completed credential jobs now confirm all three exact expected keys, cold misses
+and no PR writes: macOS 2m07s plus 1m34s queue, Linux 2m22s plus 1s, Windows 4m18s
+plus 2s. These measurements do not prove new archive sizes or warm restores.
+Different future environment inputs may produce additional generations. An immutable shared key
 can be populated first by a job with only a subset of downloads; normal locked
 Cargo downloads remain the fallback. A hit does not imply every crate is present.
+
+The integration with reviewed PR57 `2512ff0` preserves its runtime, physics,
+audio, editor, Cargo graph and tools exactly. Parsed-YAML comparison against that
+base again finds only the four approved cache input changes; 38 tool tests and
+workflow/convention checks pass. The manifest/lock suffix changes for this union,
+so current-head hosted checks must complete before merge. PR59 is stacked on
+`impl/native-physics-runtime`; no contentless PR56 push is required.
 
 ## Capacity and migration limits
 

@@ -162,5 +162,54 @@
     "runner labels partition registries; this does not pin future hosted image versions. Registry contents remain locked/checksummed sources. Native/iOS target namespaces remain unchanged.",
     "Different future environment/manifest inputs can produce additional generations, so this is not a permanent three-entry or quota guarantee.",
     "No cache deletion, seed dispatch, permission, package resolution or test coverage change."
-  ]
+  ],
+  "integrated_physics_base": "2512ff0ee902c33779114c8f847379bca09eebc1",
+  "integrated_workflow_semantic_equality": {
+    "base": "2512ff0ee902c33779114c8f847379bca09eebc1",
+    "only_four_cache_input_maps_changed": {
+      ".github/workflows/credentials.yml": 1,
+      ".github/workflows/nightly.yml": 3
+    },
+    "expanded_families": 8,
+    "all_commands_steps_permissions_triggers_unchanged": true
+  },
+  "integrated_source_preserved": "git diff 2512ff0 -- crates Cargo.toml Cargo.lock editor sdk tools .cargo ci.yml desktop.yml physics-candidates.yml is empty; only the same four cache input maps differ in the two remaining workflows.",
+  "integrated_tools_tests": 38,
+  "first_head_actual_key_jobs": [
+    {
+      "head": "5548a318d5db03ba8e9c51109a6c874409fcfda3",
+      "job_id": 114335061582,
+      "run_id": 38093677423,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-61680e07",
+      "restored_cache_key": null,
+      "save_if": "false",
+      "execution_seconds": 127.0,
+      "queue_seconds": 94.0,
+      "log_sha256": "6f3e95e592a6895bd9184cca3502f9570739ebd44ac564fbcbc1df75818ccd0b"
+    },
+    {
+      "head": "5548a318d5db03ba8e9c51109a6c874409fcfda3",
+      "job_id": 114335061497,
+      "run_id": 38093677423,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-61680e07",
+      "restored_cache_key": null,
+      "save_if": "false",
+      "execution_seconds": 258.0,
+      "queue_seconds": 2.0,
+      "log_sha256": "cd2c5ab6a9ebe8ebed5f47c5e03b29dbb078de4868b6a8878a51200250701488"
+    },
+    {
+      "head": "5548a318d5db03ba8e9c51109a6c874409fcfda3",
+      "job_id": 114335061338,
+      "run_id": 38093677423,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-61680e07",
+      "restored_cache_key": null,
+      "save_if": "false",
+      "execution_seconds": 142.0,
+      "queue_seconds": 1.0,
+      "log_sha256": "5b904aa17c6e3a270c24977b196da57d7c4b2f6e8b3e6f9ba88ae551233c4b95"
+    }
+  ],
+  "first_head_actual_namespace_count": 3,
+  "first_head_actual_key_caveat": "These completed cold credential jobs prove the predicted key construction and no PR writes on5548a31. The integrated physics head changes the manifest/lock suffix and requires its own checks. New compressed registry saves/restores remain pending."
 }

@@ -67,8 +67,9 @@ within its documented workload.
 
 - The editor context now generates icons/assets during Tauri build preparation,
   before rustc records input timestamps. Both feature modes have locally verified
-  cold generated outputs and immediate warm no-op builds; hosted validation is
-  pending. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
+  cold generated outputs and immediate warm no-op builds. PR56 merged with all 17
+  checks passing; all three hosted OSes run the exact 44 GPU tests with zero
+  recompilation. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
   invalidation fix from [measured Windows compilation costs](docs/spikes/ci-cargo-unit-timings.md).
 
 - Cooked PCM loading and Kira mixing now live in authoring-free runtime crates;
@@ -98,7 +99,8 @@ within its documented workload.
   restored and verified both pinned tool binaries with PR saves skipped. A separate
   [inputs-only follow-up](docs/spikes/ci-auxiliary-registry-cache.md) makes eight
   auxiliary families registry-only, retaining iOS/native targets and all commands.
-  Local key/equality checks and 36 tool tests pass; hosted archive measurements,
+  Three initial hosted keys match the preflight; the frozen physics union preserves
+  all source and commands and passes 38 tool tests. Hosted archive measurements,
   consumption and the bounded legacy-cache migration remain pending. No cache
   deletion, new permission or shipping-seed change is included.
 
