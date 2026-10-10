@@ -57,8 +57,9 @@ within its documented workload.
   search, shared component edits and `api.findGridPath`. The integrated branch
   passes 309 Rust tests, Clippy, generated contracts and the public grid,
   steering and off-mesh saved-game workflows. The native core probe passes
-  weighted detours, edits, blocked corners and reopened routes. GPU/native and
-  target checks are running; Claude 0029 is reviewing rendered movement. This
+  weighted detours, edits, blocked corners and reopened routes. All 40 GPU tests,
+  native packaging and WASM/iOS-simulator core compilation pass. Claude 0029 is
+  reviewing rendered movement; hosted checks remain pending. This
   does not claim the full 2D renderer/tilemap/physics milestone. See
   [grid navigation](docs/spikes/grid-navigation.md).
 

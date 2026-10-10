@@ -253,7 +253,14 @@
       },
       "ticks": 120
     },
-    "status": "Rust/public workflows/Clippy/contracts/native core probe pass; GPU/native packaging and cross-target compilation running"
+    "status": "All local scoped checks pass; Claude rendered review and hosted checks pending",
+    "gpu_tests": 40,
+    "ui_build_after_integration": "pass",
+    "native_package": "pass, development bundle includes the CPU-time MIT notice",
+    "target_compilation": {
+      "wasm32-unknown-unknown": "pass",
+      "aarch64-apple-ios-sim": "pass"
+    }
   },
   "visual_review": {
     "packet": "handoffs/0029-grid-navigation-lookdev/brief.md",

@@ -62,6 +62,8 @@ pass on its immutable binary. The maximum-size grid measurement repeats with
 p95 10.813, 10.921 and 10.971 ms, maxima 10.861, 11.082 and 11.133 ms. The same
 local workload limitations apply; this is not a controlled before/after study.
 
-Claude handoff 0029 is reviewing actual rendered movement on that binary. GPU,
-native packaging, cross-target compilation, hosted checks and the visual verdict
-remain pending. See the [exact evidence](evidence/grid-navigation-2026-10-10.json).
+All 40 GPU tests, the final editor build, native development packaging (including
+the CPU clock license), and WASM/iOS-simulator core compilation pass. These target
+compiles do not establish an interactive device or scripting-VM gate. Claude
+handoff 0029 is reviewing actual rendered movement on the frozen binary; hosted
+checks and the visual verdict remain pending. See the [exact evidence](evidence/grid-navigation-2026-10-10.json).
