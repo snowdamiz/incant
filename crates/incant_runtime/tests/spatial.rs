@@ -454,3 +454,27 @@ fn declaration_caps_and_removal_then_reuse_are_final_state_rules() {
         1
     );
 }
+
+#[test]
+fn retained_world_identity_survives_moves_and_restore_but_never_a_new_world() {
+    let original = NativeWorld::new(scene());
+    let identity = original.spatial_view().unwrap().identity().clone();
+    let mut moved = Box::new(original);
+    assert_eq!(moved.spatial_view().unwrap().identity(), &identity);
+    let save = moved.save_bytes().unwrap();
+    let other = NativeWorld::from_save_bytes(&save).unwrap();
+    assert_ne!(other.spatial_view().unwrap().identity(), &identity);
+    assert_eq!(other.scene_id(), moved.scene_id());
+    assert_eq!(generations(&other), generations(&moved));
+    moved.restore_bytes(&save).unwrap();
+    assert_eq!(moved.spatial_view().unwrap().identity(), &identity);
+    assert_eq!(generations(&moved), (1, 1));
+    drop(moved);
+    // The retained opaque identity keeps its allocation live across later worlds.
+    for _ in 0..32 {
+        assert_ne!(
+            NativeWorld::new(scene()).spatial_view().unwrap().identity(),
+            &identity
+        );
+    }
+}
