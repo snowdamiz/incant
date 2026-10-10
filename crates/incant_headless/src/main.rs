@@ -489,6 +489,30 @@ fn main() -> Result<()> {
             ]);
             registry.extend([
                 (
+                    "OffMeshLink".into(),
+                    json!(schemars::schema_for!(incant_core::OffMeshLink)),
+                ),
+                (
+                    "OffMeshTraversal".into(),
+                    json!(schemars::schema_for!(incant_core::OffMeshTraversal)),
+                ),
+                (
+                    "SteeringQuery".into(),
+                    json!(schemars::schema_for!(incant_core::SteeringQuery)),
+                ),
+                (
+                    "SteeringAgent".into(),
+                    json!(schemars::schema_for!(incant_core::SteeringAgent)),
+                ),
+                (
+                    "SteeringObstacle".into(),
+                    json!(schemars::schema_for!(incant_core::SteeringObstacle)),
+                ),
+                (
+                    "SteeringVelocity".into(),
+                    json!(schemars::schema_for!(incant_core::SteeringVelocity)),
+                ),
+                (
                     "NavigationQuery".into(),
                     json!(schemars::schema_for!(incant_core::NavigationQuery)),
                 ),
@@ -564,13 +588,20 @@ fn main() -> Result<()> {
                 &document,
                 &fs::read_to_string(compiled_script)?,
                 assets.navigation_resources(),
-            )?;
+            )
+            .map_err(|error| error.to_string())?;
             let mut times = vec![];
             let mut count = 0;
             let mut logs = play_logs::Capture::new(None, None)?;
             for tick in 1..=ticks {
                 let start = Instant::now();
-                count += play.tick()?;
+                count += play.tick().map_err(|source| {
+                    self::play::PlayError::Tick {
+                        tick: play.host.clock().tick.saturating_add(1),
+                        source,
+                    }
+                    .to_string()
+                })?;
                 times.push(start.elapsed().as_secs_f64() * 1000.);
                 let entries = play.host.take_logs();
                 if !entries.is_empty() {

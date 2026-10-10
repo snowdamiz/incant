@@ -5,6 +5,9 @@ mod scene;
 use bevy_app::{App, Update};
 use bevy_ecs::prelude::*;
 use incant_doc::{MeshRenderer, Project};
+pub use incant_nav::{
+    OffMeshLink, OffMeshTraversal, SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity,
+};
 pub use incant_physics::{
     CharacterMovement, CharacterQuery, PhysicsError, RayHit, RayQuery, TriggerEvent,
 };
@@ -199,6 +202,15 @@ impl Engine {
                 .unwrap_or_else(|e| e.into_inner())
                 .find_path(query)
         }
+    }
+    /// Read-only batch local avoidance, bound to the play session's fixed step.
+    /// The caller applies proposed velocities through ordinary document commands.
+    pub fn steerer(
+        &self,
+    ) -> impl Fn(SteeringQuery) -> Result<Vec<SteeringVelocity>, NavigationError> + Send + Sync + 'static
+    {
+        let dt = self.dt as f32;
+        move |query| incant_nav::steer(&query, dt)
     }
     pub fn snapshot(&mut self) -> RuntimeSnapshot {
         let mut query = self.app.world_mut().query::<(

@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-10",
+  "source_commit": "b1dcdd768c2d665e9d30d3208860d73cb479f323",
+  "runtime_commit": "b2ca771431b8c83ac111844d05ed0cc86765b5eb",
+  "tests": {
+    "rust_workspace": 294,
+    "new_behavior_tests": 5,
+    "gpu": 40,
+    "ui": 315,
+    "tools": 5,
+    "clippy": "pass",
+    "generated_contracts_and_strict_typescript": "pass"
+  },
+  "gpu_ui_contracts_source": "b2ca771 before the steering dependency correction; their implementation unchanged, corrected steering separately reviewed in packet 0027",
+  "headless_sha256": "a296648f72c089b59affd418faf8081e37c2cc9a9bb7d1f377a206349e9f77d7",
+  "native_sha256": "aee111a987428990c1e93b6a55b215ed0078a2bcaefa5e64000d9622545fd1f9",
+  "native_package": "artifacts/Incant.app",
+  "distribution_signed": false,
+  "public_probes": [
+    {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6157673834154757,
+        "neighbors": 17,
+        "remaining": 6.208589198944098e-11,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "aeab9feb29b063a891e01890601014bbc5f1720bb2755c8fd764229736a64d82",
+        "game.incant.journal.jsonl": "c92564b1529d79e2ad5841dcd9bcdc4326626c3e937a2c1b768cf9e103895e7d"
+      },
+      "binary_sha256": "a296648f72c089b59affd418faf8081e37c2cc9a9bb7d1f377a206349e9f77d7",
+      "rendering_or_physics_collision_gate": false
+    },
+    {
+      "passed": true,
+      "strict_typescript": true,
+      "public_commands": true,
+      "durable_undo_redo": true,
+      "invalid_cost_rollback": true,
+      "explicit_link_traversal": true,
+      "one_way_reverse_null": true,
+      "save_in_flight_exact": true,
+      "repeat_exact": true,
+      "mid_link_progress": 0.30555555555555564,
+      "author_files_unchanged": {
+        "game.incant.json": "7e689efc6315b5e87fd56e3479c604869801d56394ff14ff75903d96378e5e1c",
+        "game.incant.journal.jsonl": "c3554eb6be4e5697e7c5b0fc0a57dc5fb6143493927fe38c51b10b4a407b9190"
+      },
+      "binary_sha256": "a296648f72c089b59affd418faf8081e37c2cc9a9bb7d1f377a206349e9f77d7",
+      "physics_or_visual_gate": false
+    }
+  ],
+  "logs": {
+    "integrated-workspace": {
+      "path": "/tmp/incant-diagnostics-integrated-workspace.log",
+      "sha256": "668041082fc55a45b38ac6e199a7c1fddc5a13a4e9c2bbd9fbc9a4494cd07ca5"
+    },
+    "integrated-clippy": {
+      "path": "/tmp/incant-diagnostics-integrated-clippy.log",
+      "sha256": "276556eac5b4ec61c604f4edac85b4f3a024a5f2c20970c14731626e74ce37d8"
+    },
+    "gpu": {
+      "path": "/tmp/incant-diagnostics-gpu.log",
+      "sha256": "6d118dd6a4090afdd9fde7ddb8132a922215ad1a1eacba71f0b828eda36a74a6"
+    },
+    "ui": {
+      "path": "/tmp/incant-diagnostics-ui.log",
+      "sha256": "35dcaaf59c39cdd68eeb5dea97ffff5149fd875e828c87390f21ffac14182464"
+    },
+    "tools": {
+      "path": "/tmp/incant-diagnostics-tools.log",
+      "sha256": "b9d833a63ac8e2ee2555b64983fdf8e3121a010ab3a458a3572a9a939cbbb720"
+    },
+    "steering-probe": {
+      "path": "/tmp/incant-diagnostics-steering-probe.log",
+      "sha256": "6efd3c95dbbd8739cf053210d562d05cd2f57a2be11cfd63aa122e62f179d793"
+    },
+    "links-probe": {
+      "path": "/tmp/incant-diagnostics-links-probe.log",
+      "sha256": "f5a1c0b106533146bf745e5a3969dac33f442cc05078a0e7efab38ee6df6a5b5"
+    },
+    "integrated-native": {
+      "path": "/tmp/incant-diagnostics-integrated-native.log",
+      "sha256": "bb0410261e507e5a00cfe51d80067256bdcbaa70bec1d82206f09d71b311a1b6"
+    },
+    "integrated-package": {
+      "path": "/tmp/incant-diagnostics-integrated-package.log",
+      "sha256": "681bb564f0208d880534e7550ea7346a70070162743bbad71780d71f8d6f408d"
+    }
+  },
+  "remaining": [
+    "Hosted checks and merge of steering/off-mesh dependencies",
+    "50 ms wall-clock deadline remains sensitive to host sleep and CPU contention",
+    "No source-mapped stack traces"
+  ],
+  "phase_gate_approved": false,
+  "head_on_integration": {
+    "source_commit": "bb8b5977876e088fe16a2065d0d1a11b27f71dc8",
+    "rust_tests": 296,
+    "clippy": true,
+    "native_package": true,
+    "headless_sha256": "9bcd667ea472b62727f74152cca5c8a101a0159ac12f1e788fdd946e76ff4c54",
+    "native_sha256": "aee111a987428990c1e93b6a55b215ed0078a2bcaefa5e64000d9622545fd1f9",
+    "public_links": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_commands": true,
+      "durable_undo_redo": true,
+      "invalid_cost_rollback": true,
+      "explicit_link_traversal": true,
+      "one_way_reverse_null": true,
+      "save_in_flight_exact": true,
+      "repeat_exact": true,
+      "mid_link_progress": 0.30555555555555564,
+      "author_files_unchanged": {
+        "game.incant.json": "563f35df519a724f0394085bba0e3efd0866e22855736d95dc51181c08429131",
+        "game.incant.journal.jsonl": "73e1f465d1499c298c88f134d90c75e1ec9fbd195dcdba9d9f254b2f4ae5cbb2"
+      },
+      "binary_sha256": "9bcd667ea472b62727f74152cca5c8a101a0159ac12f1e788fdd946e76ff4c54",
+      "physics_or_visual_gate": false
+    },
+    "public_steering": {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6157673834154757,
+        "neighbors": 17,
+        "remaining": 6.208589198944098e-11,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "cb85c7eeac55552736a00ba5d9a3972e07b31c93112900b4638398c8170b442a",
+        "game.incant.journal.jsonl": "e8b72fe412d272c017c77585304f3e13a954f53ab7d9a20be36e5bc4fd97ee8e"
+      },
+      "binary_sha256": "9bcd667ea472b62727f74152cca5c8a101a0159ac12f1e788fdd946e76ff4c54",
+      "rendering_or_physics_collision_gate": false
+    },
+    "awaiting": [
+      "hosted checks and dependency merge"
+    ],
+    "steering_rendered_review": "passed at 4c495e9; see handoffs/0027-steering-lookdev/result.md"
+  }
+}

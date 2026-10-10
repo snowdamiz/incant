@@ -1,0 +1,89 @@
+{
+ "crossing": {
+  "frames": 121,
+  "identical": 121,
+  "other_frames": 121
+ },
+ "endpoint": {
+  "frames": 101,
+  "identical": 101,
+  "other_frames": 101
+ },
+ "gantry": {
+  "frames": 121,
+  "identical": 121,
+  "other_frames": 121
+ },
+ "overview": {
+  "frames": 109,
+  "identical": 109,
+  "other_frames": 109
+ },
+ "plan": {
+  "frames": 109,
+  "identical": 109,
+  "other_frames": 109
+ },
+ "plinth-a": {
+  "frames": 121,
+  "identical": 121,
+  "other_frames": 121
+ },
+ "plinth-b": {
+  "frames": 121,
+  "identical": 121,
+  "other_frames": 121
+ },
+ "crossing.logs.jsonl": {
+  "identical": true,
+  "bytes": 356199
+ },
+ "crossing.prefix.logs.jsonl": {
+  "identical": true,
+  "bytes": 447683
+ },
+ "endpoint.logs.jsonl": {
+  "identical": true,
+  "bytes": 2395735
+ },
+ "endpoint.prefix.logs.jsonl": {
+  "identical": true,
+  "bytes": 1495475
+ },
+ "gantry.logs.jsonl": {
+  "identical": true,
+  "bytes": 357813
+ },
+ "gantry.prefix.logs.jsonl": {
+  "identical": true,
+  "bytes": 149717
+ },
+ "logs.logs.jsonl": {
+  "identical": true,
+  "bytes": 4039152
+ },
+ "overview.logs.jsonl": {
+  "identical": true,
+  "bytes": 4039152
+ },
+ "plan.logs.jsonl": {
+  "identical": true,
+  "bytes": 4039152
+ },
+ "plinth-a.logs.jsonl": {
+  "identical": true,
+  "bytes": 356199
+ },
+ "plinth-a.prefix.logs.jsonl": {
+  "identical": true,
+  "bytes": 447683
+ },
+ "plinth-b.logs.jsonl": {
+  "identical": true,
+  "bytes": 721825
+ },
+ "plinth-b.prefix.logs.jsonl": {
+  "identical": true,
+  "bytes": 803882
+ }
+}

@@ -1,0 +1,59 @@
+{
+ "save_tick": 801,
+ "reopen_start_tick": 801,
+ "mid_state": {
+  "phase": "return",
+  "seg": 3,
+  "s": 0.49295996328721786,
+  "pos": [
+   -2.581695927381539,
+   0.9034011412409306,
+   1
+  ]
+ },
+ "log_lines": [
+  1018,
+  814,
+  204
+ ],
+ "log_lines_equal": true,
+ "differing_log_lines": 1,
+ "differences_generation_only": true,
+ "differences": [
+  {
+   "tick": 943,
+   "reference": 3,
+   "reopened": 2,
+   "event": "out-after-lock"
+  }
+ ],
+ "final_entities_equal": true,
+ "script_state_equal": false,
+ "script_state_equal_except_generation": true,
+ "generations": [
+  [
+   1,
+   2,
+   3
+  ],
+  [
+   1,
+   2,
+   2
+  ]
+ ],
+ "reopened_navigation": {
+  "01JA20FF000000000000000065": {
+   "generation": 2,
+   "active_links": 2,
+   "rebuilt": 0,
+   "reused": 10
+  }
+ },
+ "reference_navigation": {
+  "01JA20FF000000000000000065": {
+   "generation": 3,
+   "active_links": 2
+  }
+ }
+}

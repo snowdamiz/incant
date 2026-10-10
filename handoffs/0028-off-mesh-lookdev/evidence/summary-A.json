@@ -1,0 +1,605 @@
+{
+ "plans": [
+  {
+   "t": 1,
+   "name": "out",
+   "null": false,
+   "generation": 1,
+   "traversals": [
+    {
+     "from_index": 1,
+     "link_id": "01JA2NAV000000000000000001",
+     "reversed": false,
+     "to_index": 2
+    },
+    {
+     "from_index": 3,
+     "link_id": "01JA2NAV000000000000000002",
+     "reversed": false,
+     "to_index": 4
+    }
+   ]
+  },
+  {
+   "t": 1,
+   "name": "back-before-unlock",
+   "null": true,
+   "generation": null,
+   "traversals": null
+  },
+  {
+   "t": 486,
+   "name": "back-before-enable",
+   "null": true,
+   "generation": null,
+   "traversals": null
+  },
+  {
+   "t": 487,
+   "name": "back-after-unlock",
+   "null": false,
+   "generation": 2,
+   "traversals": [
+    {
+     "from_index": 1,
+     "link_id": "01JA2NAV000000000000000002",
+     "reversed": true,
+     "to_index": 2
+    },
+    {
+     "from_index": 3,
+     "link_id": "01JA2NAV000000000000000003",
+     "reversed": false,
+     "to_index": 4
+    }
+   ]
+  },
+  {
+   "t": 943,
+   "name": "back-after-lock",
+   "null": true,
+   "generation": null,
+   "traversals": null
+  },
+  {
+   "t": 943,
+   "name": "out-after-lock",
+   "null": false,
+   "generation": 3,
+   "traversals": [
+    {
+     "from_index": 1,
+     "link_id": "01JA2NAV000000000000000001",
+     "reversed": false,
+     "to_index": 2
+    },
+    {
+     "from_index": 3,
+     "link_id": "01JA2NAV000000000000000002",
+     "reversed": false,
+     "to_index": 4
+    }
+   ]
+  }
+ ],
+ "endpoints": [
+  {
+   "plan": "out",
+   "link": "01JA2NAV000000000000000001",
+   "reversed": false,
+   "from_index": 1,
+   "to_index": 2,
+   "launch": [
+    -3.9000000953674316,
+    0.05000000819563866,
+    -1
+   ],
+   "launch_authored": [
+    -3.9,
+    0.0,
+    -1.0
+   ],
+   "launch_delta": [
+    -9.536743172944284e-08,
+    0.05000000819563866,
+    0.0
+   ],
+   "landing": [
+    -1.2999999523162842,
+    0.5500000715255737,
+    -1
+   ],
+   "landing_authored": [
+    -1.35,
+    0.5,
+    -1.0
+   ],
+   "landing_delta": [
+    0.05000004768371591,
+    0.05000007152557373,
+    0.0
+   ]
+  },
+  {
+   "plan": "out",
+   "link": "01JA2NAV000000000000000002",
+   "reversed": false,
+   "from_index": 3,
+   "to_index": 4,
+   "launch": [
+    1.3000001907348633,
+    0.5500000715255737,
+    -1.1102230246251565e-16
+   ],
+   "launch_authored": [
+    1.35,
+    0.5,
+    0.0
+   ],
+   "launch_delta": [
+    -0.04999980926513681,
+    0.05000007152557373,
+    -1.1102230246251565e-16
+   ],
+   "landing": [
+    3.9000003337860107,
+    0.05000000819563866,
+    0
+   ],
+   "landing_authored": [
+    3.9,
+    0.0,
+    0.0
+   ],
+   "landing_delta": [
+    3.3378601083100534e-07,
+    0.05000000819563866,
+    0.0
+   ]
+  },
+  {
+   "plan": "back-after-unlock",
+   "link": "01JA2NAV000000000000000002",
+   "reversed": true,
+   "from_index": 1,
+   "to_index": 2,
+   "launch": [
+    3.9000003337860107,
+    0.05000000819563866,
+    0
+   ],
+   "launch_authored": [
+    3.9,
+    0.0,
+    0.0
+   ],
+   "launch_delta": [
+    3.3378601083100534e-07,
+    0.05000000819563866,
+    0.0
+   ],
+   "landing": [
+    1.3000001907348633,
+    0.5500000715255737,
+    0
+   ],
+   "landing_authored": [
+    1.35,
+    0.5,
+    0.0
+   ],
+   "landing_delta": [
+    -0.04999980926513681,
+    0.05000007152557373,
+    0.0
+   ]
+  },
+  {
+   "plan": "back-after-unlock",
+   "link": "01JA2NAV000000000000000003",
+   "reversed": false,
+   "from_index": 3,
+   "to_index": 4,
+   "launch": [
+    -1.2999999523162842,
+    0.5500000715255737,
+    1
+   ],
+   "launch_authored": [
+    -1.35,
+    0.5,
+    1.0
+   ],
+   "launch_delta": [
+    0.05000004768371591,
+    0.05000007152557373,
+    0.0
+   ],
+   "landing": [
+    -3.9000000953674316,
+    0.05000000819563866,
+    1
+   ],
+   "landing_authored": [
+    -3.9,
+    0.0,
+    1.0
+   ],
+   "landing_delta": [
+    -9.536743172944284e-08,
+    0.05000000819563866,
+    0.0
+   ]
+  },
+  {
+   "plan": "out-after-lock",
+   "link": "01JA2NAV000000000000000001",
+   "reversed": false,
+   "from_index": 1,
+   "to_index": 2,
+   "launch": [
+    -3.9000000953674316,
+    0.05000000819563866,
+    -1
+   ],
+   "launch_authored": [
+    -3.9,
+    0.0,
+    -1.0
+   ],
+   "launch_delta": [
+    -9.536743172944284e-08,
+    0.05000000819563866,
+    0.0
+   ],
+   "landing": [
+    -1.2999999523162842,
+    0.5500000715255737,
+    -1
+   ],
+   "landing_authored": [
+    -1.35,
+    0.5,
+    -1.0
+   ],
+   "landing_delta": [
+    0.05000004768371591,
+    0.05000007152557373,
+    0.0
+   ]
+  },
+  {
+   "plan": "out-after-lock",
+   "link": "01JA2NAV000000000000000002",
+   "reversed": false,
+   "from_index": 3,
+   "to_index": 4,
+   "launch": [
+    1.3000001907348633,
+    0.5500000715255737,
+    -1.1102230246251565e-16
+   ],
+   "launch_authored": [
+    1.35,
+    0.5,
+    0.0
+   ],
+   "launch_delta": [
+    -0.04999980926513681,
+    0.05000007152557373,
+    -1.1102230246251565e-16
+   ],
+   "landing": [
+    3.9000003337860107,
+    0.05000000819563866,
+    0
+   ],
+   "landing_authored": [
+    3.9,
+    0.0,
+    0.0
+   ],
+   "landing_delta": [
+    3.3378601083100534e-07,
+    0.05000000819563866,
+    0.0
+   ]
+  }
+ ],
+ "jumps": [
+  {
+   "link": "01JA2NAV000000000000000001",
+   "key": "up",
+   "reversed": false,
+   "launch_tick": 108,
+   "land_tick": 173,
+   "airborne_ticks": 65,
+   "duration_s": 1.0833333929379783,
+   "peak_feet_y": 0.926007921991588,
+   "peak_above_launch": 0.8760079137959493,
+   "peak_above_landing": 0.37600785046601426,
+   "min_capsule_clearance": 0.06404795821653342,
+   "clearance_at": {
+    "t": 172,
+    "platform": "Centre",
+    "feet": [
+     -1.3194063440892116,
+     0.5640479582165334,
+     -1
+    ]
+   },
+   "speed_before_launch": 1.4000000000000015,
+   "speed_launch_tick": 2.3242277640207254,
+   "speed_last_airborne": 2.9334160991021605,
+   "speed_landing_tick": 2.037739423733349,
+   "speed_after_landing": 1.4000000000000001,
+   "vertical_speed_into_landing": -0.8428732014575813,
+   "landing_feet": [
+    -1.2887877292132681,
+    0.5500000715255737,
+    -0.9956876067361065
+   ],
+   "landing_target": [
+    -1.2999999523162842,
+    0.5500000715255737,
+    -1
+   ]
+  },
+  {
+   "link": "01JA2NAV000000000000000002",
+   "key": "bridge",
+   "reversed": false,
+   "launch_tick": 292,
+   "land_tick": 357,
+   "airborne_ticks": 65,
+   "duration_s": 1.0833333929379783,
+   "peak_feet_y": 0.9259510912428189,
+   "peak_above_launch": 0.3759510197172452,
+   "peak_above_landing": 0.8759510830471803,
+   "min_capsule_clearance": 0.053751186457955624,
+   "clearance_at": {
+    "t": 292,
+    "platform": "Centre",
+    "feet": [
+     1.3051461607568307,
+     0.5537511864579556,
+     -1.1080256499758942e-16
+    ]
+   },
+   "speed_before_launch": 1.4000000000000001,
+   "speed_launch_tick": 1.5287945273548091,
+   "speed_last_airborne": 3.5262135382418798,
+   "speed_landing_tick": 3.237248966427872,
+   "speed_after_landing": 1.4000000000000057,
+   "vertical_speed_into_landing": -2.306670847266388,
+   "landing_feet": [
+    3.9030020661856573,
+    0.05000000819563866,
+    0
+   ],
+   "landing_target": [
+    3.9000003337860107,
+    0.05000000819563866,
+    0
+   ]
+  },
+  {
+   "link": "01JA2NAV000000000000000002",
+   "key": "bridge",
+   "reversed": true,
+   "launch_tick": 585,
+   "land_tick": 650,
+   "airborne_ticks": 65,
+   "duration_s": 1.0833333929379783,
+   "peak_feet_y": 0.926027606103746,
+   "peak_above_launch": 0.8760275979081074,
+   "peak_above_landing": 0.3760275345781723,
+   "min_capsule_clearance": 0.06651734274938914,
+   "clearance_at": {
+    "t": 649,
+    "platform": "Centre",
+    "feet": [
+     1.3228565774645022,
+     0.5665173427493891,
+     0
+    ]
+   },
+   "speed_before_launch": 1.4000000000000057,
+   "speed_launch_tick": 2.155401522743506,
+   "speed_last_airborne": 2.9300395054593062,
+   "speed_landing_tick": 2.181493453732589,
+   "speed_after_landing": 1.3999999999999995,
+   "vertical_speed_into_landing": -0.9910362734289246,
+   "landing_feet": [
+    1.290666322931822,
+    0.5500000715255737,
+    0.0035899489574980755
+   ],
+   "landing_target": [
+    1.3000001907348633,
+    0.5500000715255737,
+    0
+   ]
+  },
+  {
+   "link": "01JA2NAV000000000000000003",
+   "key": "ret",
+   "reversed": false,
+   "launch_tick": 769,
+   "land_tick": 834,
+   "airborne_ticks": 65,
+   "duration_s": 1.0833333929379783,
+   "peak_feet_y": 0.9259860099322293,
+   "peak_above_launch": 0.3759859384066556,
+   "peak_above_landing": 0.8759860017365907,
+   "min_capsule_clearance": 0.05123841670983986,
+   "clearance_at": {
+    "t": 769,
+    "platform": "Centre",
+    "feet": [
+     -1.3016959273815398,
+     0.5512384167098399,
+     1
+    ]
+   },
+   "speed_before_launch": 1.4000000000000001,
+   "speed_launch_tick": 1.4380022113377309,
+   "speed_last_airborne": 3.521908417174823,
+   "speed_landing_tick": 3.4565302268001257,
+   "speed_after_landing": 1.3999999999999988,
+   "vertical_speed_into_landing": -2.5321786469987053,
+   "landing_feet": [
+    -3.9009072934598272,
+    0.05000000819563866,
+    0.99960556599772
+   ],
+   "landing_target": [
+    -3.9000000953674316,
+    0.05000000819563866,
+    1
+   ]
+  }
+ ],
+ "grounding": {
+  "West": [
+   0.05000000819563866
+  ],
+  "Centre": [
+   0.05000007152557373
+  ],
+  "East": [
+   0.05000000819563866
+  ]
+ },
+ "continuity": {
+  "max_tick_speed": [
+   3.5483848405776794,
+   586
+  ],
+  "min_tick_speed_moving": [
+   0.6198645847684503,
+   456
+  ],
+  "walk_speed_min": 0.6198645847684503,
+  "walk_speed_max": 1.400000000000059,
+  "zero_motion_ticks_in_active_legs": [],
+  "max_yaw_step_deg": 9.0
+ },
+ "pauses": {
+  "arrive_ticks": [
+   456,
+   942
+  ],
+  "deliberate_pause_ticks": [
+   457,
+   486
+  ]
+ },
+ "metadata_mismatch": [],
+ "parabola_max_error": 0.0,
+ "min_segment": {
+  "plan": "out",
+  "index": 4,
+  "length": 2.299999475479126,
+  "a": [
+   3.9000003337860107,
+   0.05000000819563866,
+   0
+  ],
+  "b": [
+   6.199999809265137,
+   0.05000000819563866,
+   0
+  ]
+ },
+ "reports": {
+  "0": {
+   "generation": 1,
+   "active_links": 2,
+   "rebuilt": 10,
+   "reused": 0,
+   "removed": 0,
+   "polygons": 10
+  },
+  "1": {
+   "generation": 1,
+   "active_links": 2,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "2": {
+   "generation": 1,
+   "active_links": 2,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "485": {
+   "generation": 1,
+   "active_links": 2,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "486": {
+   "generation": 2,
+   "active_links": 3,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "487": {
+   "generation": 2,
+   "active_links": 3,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "488": {
+   "generation": 2,
+   "active_links": 3,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "941": {
+   "generation": 2,
+   "active_links": 3,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "942": {
+   "generation": 3,
+   "active_links": 2,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "943": {
+   "generation": 3,
+   "active_links": 2,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  },
+  "944": {
+   "generation": 3,
+   "active_links": 2,
+   "rebuilt": 0,
+   "reused": 10,
+   "removed": 0,
+   "polygons": 10
+  }
+ }
+}

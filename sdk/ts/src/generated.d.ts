@@ -192,12 +192,14 @@ export namespace NavigationMeshSchema {
   export type NavigationSettings = { "agent_height": number; "agent_radius": number; "cell_height": number; "cell_size": number; "max": [number, number, number]; "max_climb": number; "max_slope_degrees": number; "min": [number, number, number]; "tile_cells": number };
   export type NavigationSource = { "entity": string; "geometry": NavigationSourceKind };
   export type NavigationSourceKind = "collider" | "mesh";
-  export type Root = { "settings": NavigationSettings; "sources": Array<NavigationSource> };
+  export type OffMeshLink = { "bidirectional": boolean; "enabled": boolean; "end": [number, number, number]; "extra_cost": number; "id": string; "snap_distance": number; "start": [number, number, number] };
+  export type Root = { "links"?: Array<OffMeshLink>; "settings": NavigationSettings; "sources": Array<NavigationSource> };
 }
 export type NavigationMesh = NavigationMeshSchema.Root;
 
 export namespace NavigationPathSchema {
-  export type Root = { "corridor": Array<number>; "generation": number; "points": Array<[number, number, number]>; "visited": number };
+  export type OffMeshTraversal = { "from_index": number; "link_id": string; "reversed": boolean; "to_index": number };
+  export type Root = { "corridor": Array<number>; "generation": number; "points": Array<[number, number, number]>; "traversals": Array<OffMeshTraversal>; "visited": number };
 }
 export type NavigationPath = NavigationPathSchema.Root;
 
@@ -206,6 +208,16 @@ export namespace NavigationQuerySchema {
   export type Root = { "mesh_entity": string; "path": PathRequest; "scene_id": string };
 }
 export type NavigationQuery = NavigationQuerySchema.Root;
+
+export namespace OffMeshLinkSchema {
+  export type Root = { "bidirectional": boolean; "enabled": boolean; "end": [number, number, number]; "extra_cost": number; "id": string; "snap_distance": number; "start": [number, number, number] };
+}
+export type OffMeshLink = OffMeshLinkSchema.Root;
+
+export namespace OffMeshTraversalSchema {
+  export type Root = { "from_index": number; "link_id": string; "reversed": boolean; "to_index": number };
+}
+export type OffMeshTraversal = OffMeshTraversalSchema.Root;
 
 export namespace PhysicsCharacterMovementSchema {
   export type Root = { "collisions": Array<string>; "grounded": boolean; "sliding_down_slope": boolean; "translation": [number, number, number] };
@@ -290,6 +302,28 @@ export namespace SpotLightSchema {
   export type Root = { "color": [number, number, number]; "inner_degrees": number; "intensity": number; "outer_degrees": number; "range": number };
 }
 export type SpotLight = SpotLightSchema.Root;
+
+export namespace SteeringAgentSchema {
+  export type Root = { "height": number; "id": string; "max_speed": number; "position": [number, number, number]; "preferred_velocity": [number, number]; "radius": number; "responsibility": number; "velocity": [number, number] };
+}
+export type SteeringAgent = SteeringAgentSchema.Root;
+
+export namespace SteeringObstacleSchema {
+  export type Root = { "closed": boolean; "id": string; "max_y": number; "min_y": number; "vertices": Array<[number, number]> };
+}
+export type SteeringObstacle = SteeringObstacleSchema.Root;
+
+export namespace SteeringQuerySchema {
+  export type SteeringAgent = { "height": number; "id": string; "max_speed": number; "position": [number, number, number]; "preferred_velocity": [number, number]; "radius": number; "responsibility": number; "velocity": [number, number] };
+  export type SteeringObstacle = { "closed": boolean; "id": string; "max_y": number; "min_y": number; "vertices": Array<[number, number]> };
+  export type Root = { "agents": Array<SteeringAgent>; "margin"?: number; "obstacle_time_horizon": number; "obstacles"?: Array<SteeringObstacle>; "time_horizon": number };
+}
+export type SteeringQuery = SteeringQuerySchema.Root;
+
+export namespace SteeringVelocitySchema {
+  export type Root = { "id": string; "neighbors": number; "velocity": [number, number] };
+}
+export type SteeringVelocity = SteeringVelocitySchema.Root;
 
 export namespace StringTableSchema {
   export type Root = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };

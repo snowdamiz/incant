@@ -1,11 +1,16 @@
 //! Bounded, deterministic navigation geometry. No filesystem, editor or network capability.
 mod build;
+mod linked_path;
+mod links;
 mod path;
+pub use links::{OffMeshLink, OffMeshTraversal, validate_links};
 mod resources;
 mod search;
 pub use resources::{NavigationAsset, NavigationResources};
 mod shortcut;
+mod steering;
 mod surface;
+pub use steering::{SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity, steer};
 mod types;
 pub use build::{NavigationMesh, RebuildReport};
 pub use path::{NavigationPath, PathRequest};
