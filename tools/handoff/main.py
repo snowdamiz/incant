@@ -142,6 +142,40 @@ class AcpClient:
         for stream in (self.proc.stdin, self.proc.stdout):
             stream.close()
 
+def configure_model_and_effort(client, session, config):
+    """Pin both settings on every new/resumed session; never inherit effort."""
+    session_id = session['sessionId']
+    model_config = next((x for x in session.get('configOptions', []) if x.get('category') == 'model'), None)
+    if model_config:
+        selected = next((x for x in model_config.get('options', [])
+                         if x.get('name') == config['model_display_name']), None)
+        if not selected:
+            raise HandoffError('Required Claude Opus 5.5 model is unavailable; no model substitution performed')
+        updated = client.request('session/set_config_option', {'sessionId': session_id,
+            'configId': model_config['id'], 'value': selected['value']})
+        confirmed = next((x for x in updated.get('configOptions', []) if x.get('id') == model_config['id']), None)
+        if not confirmed or confirmed.get('currentValue') != selected['value']:
+            raise HandoffError('ACP did not confirm the required model; prompt was not sent')
+    else:
+        models = session.get('models', {}).get('availableModels', [])
+        matching = next((m for m in models if m.get('modelId') == config['model']), None)
+        if not matching:
+            raise HandoffError('Required Claude Opus 5.5 model is unavailable; no model substitution performed')
+        updated = client.request('session/set_model', {'sessionId': session_id, 'modelId': matching['modelId']})
+    # Model selection can change the available effort options. Use its response,
+    # never stale options from the previously selected model or loaded session.
+    effort = config['effort']
+    effort_config = next((x for x in updated.get('configOptions', []) if x.get('category') == 'thought_level'), None)
+    if not effort_config or not any(x.get('value') == effort for x in effort_config.get('options', [])):
+        raise HandoffError(f'Required Claude effort {effort} is unavailable; no fallback performed')
+    updated = client.request('session/set_config_option', {'sessionId': session_id,
+        'configId': effort_config['id'], 'value': effort})
+    confirmed = next((x for x in updated.get('configOptions', []) if x.get('id') == effort_config['id']), None)
+    if not confirmed or confirmed.get('currentValue') != effort:
+        raise HandoffError('ACP did not confirm the required effort; prompt was not sent')
+    print(f'Claude session verified: {config["model_display_name"]}; thinking: {effort}', flush=True)
+    return {**session, **updated, 'sessionId': session_id}
+
 def run(ident, permission_mode=None):
     packet = ROOT / 'handoffs' / packet_id(ident)
     if not (packet / 'brief.md').is_file():
@@ -188,20 +222,7 @@ def run(ident, permission_mode=None):
                 print('Resumed the latest ACP session scoped to this handoff worktree.', flush=True)
         if session is None:
             session = client.request('session/new', {'cwd': str(worktree), 'mcpServers': []})
-        model_config = next((x for x in session.get('configOptions', []) if x.get('category') == 'model'), None)
-        if model_config:
-            selected = next((x for x in model_config.get('options', [])
-                             if x.get('name') == config['model_display_name']), None)
-            if not selected:
-                raise HandoffError('Required Claude 5.5 model is unavailable; no model substitution performed')
-            client.request('session/set_config_option', {'sessionId': session['sessionId'],
-                'configId': model_config['id'], 'value': selected['value']})
-        else:
-            models = session.get('models', {}).get('availableModels', [])
-            matching = next((m for m in models if m.get('modelId') == config['model']), None)
-            if not matching:
-                raise HandoffError('Required Claude 5.5 model is unavailable; no model substitution performed')
-            client.request('session/set_model', {'sessionId': session['sessionId'], 'modelId': matching['modelId']})
+        session = configure_model_and_effort(client, session, config)
         if permission_mode:
             mode_config = next((x for x in session.get('configOptions', []) if x.get('category') == 'mode'), None)
             if not mode_config or not any(x.get('value') == permission_mode for x in mode_config.get('options', [])):
@@ -215,7 +236,8 @@ def run(ident, permission_mode=None):
             'The packet may have changed since the previous session. Read its priority revisions first, '
             'acknowledge new director feedback, and apply it before continuing any earlier completion steps. '
             f'If files already exist from an interrupted attempt, inspect and finish them. '
-            f'Return handoffs/{ident}/result.md with the exact model, evidence, screenshots, and limitations. '
+            f'Required model: {config["model_display_name"]}; required thinking effort: {config["effort"]}. '
+            f'Return handoffs/{ident}/result.md with the exact model, effort, evidence, screenshots, and limitations. '
             'Do not publish, merge, read credentials, change external accounts, or edit outside this worktree. '
             f'\n\nCURRENT PACKET: handoffs/{ident}/brief.md\n\n' + (packet / 'brief.md').read_text()}]})
         result_path = worktree / 'handoffs' / ident / 'result.md'

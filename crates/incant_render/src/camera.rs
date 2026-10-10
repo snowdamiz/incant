@@ -51,10 +51,37 @@ impl CameraView {
             let forward = world.transform_vector3(-DVec3::Z).normalize();
             let right = forward.cross(world.transform_vector3(DVec3::Y)).normalize();
             let up = right.cross(forward).normalize();
-            for axis in [right, up] {
+            for (axis, is_right) in [(right, true), (up, false)] {
                 let coordinate = eye64.dot(axis);
-                eye64 +=
-                    axis * ((coordinate * pixels_per_unit).round() / pixels_per_unit - coordinate);
+                let pixel = coordinate * pixels_per_unit;
+                // Orthonormal basis dot products can put an exact mathematical
+                // half-pixel a few f64 ULPs on its other side after a roll.
+                // Stabilize only that tiny band, capped far below a GPU pixel.
+                let half = pixel.floor() + 0.5;
+                let tolerance = (8. * f64::EPSILON * pixel.abs().max(1.)).min(1e-7);
+                let pixel = if (pixel - half).abs() <= tolerance {
+                    half
+                } else {
+                    pixel
+                };
+                // Align exact half-pixel ties with top-left raster coverage:
+                // right ties round down, up ties round up (screen Y is inverted).
+                // A grid-aligned object following the camera then stays still.
+                let snapped = if is_right {
+                    (pixel - 0.5).ceil()
+                } else {
+                    (pixel + 0.5).floor()
+                };
+                // Odd logical dimensions place the image centre on a pixel
+                // centre. Offset framing by half a pixel so world-grid edges
+                // still land on pixel boundaries, as they do for even sizes.
+                let dimension = reference_resolution[usize::from(!is_right)];
+                let phase = if dimension % 2 == 1 {
+                    if is_right { 0.5 } else { -0.5 }
+                } else {
+                    0.
+                };
+                eye64 += axis * ((snapped + phase) / pixels_per_unit - coordinate);
             }
             Some(reference_resolution)
         } else {
@@ -242,6 +269,14 @@ mod tests {
         let moved = at(0.51 / 32., -0.51 / 32., 8.);
         assert_eq!(moved.eye, Vec3::new(1. / 32., -1. / 32., 8.));
         assert_eq!(at(0., 0., 8.01).eye.z, 8.01);
+        assert_eq!(
+            at(0.5 / 32., 0.5 / 32., 8.).eye,
+            Vec3::new(0., 1. / 32., 8.)
+        );
+        assert_eq!(
+            at(-0.5 / 32., -0.5 / 32., 8.).eye,
+            Vec3::new(-1. / 32., 0., 8.)
+        );
         assert_eq!(first.matrix(1.).unwrap(), first.matrix(2.).unwrap());
         let edge = first
             .matrix(1.)

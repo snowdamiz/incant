@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import Mock
 
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location('handoff', ROOT / 'tools/handoff/main.py')
@@ -41,6 +42,44 @@ input()
                 self.assertEqual(client.request('test', {}), {'content': 'worktree data\n'})
             finally:
                 client.close()
+
+    def test_model_selection_refreshes_effort_and_pins_max_on_resume(self):
+        model = {'id': 'model', 'category': 'model', 'currentValue': 'opus',
+                 'options': [{'name': 'Opus 5.5', 'value': 'opus'}]}
+        effort = {'id': 'effort', 'category': 'thought_level', 'currentValue': 'default',
+                  'options': [{'name': 'Max', 'value': 'max'}]}
+        client = Mock()
+        client.request.side_effect = [
+            {'configOptions': [model, effort]},
+            {'configOptions': [model, {**effort, 'currentValue': 'max'}]},
+        ]
+        session = {'sessionId': 'test-session', 'configOptions': [model]}
+        config = {'model': 'claude-opus-5-5', 'model_display_name': 'Opus 5.5', 'effort': 'max'}
+        result = handoff.configure_model_and_effort(client, session, config)
+        self.assertEqual(result['configOptions'][1]['currentValue'], 'max')
+        self.assertEqual(client.request.call_args_list[1].args, ('session/set_config_option', {
+            'sessionId': 'test-session', 'configId': 'effort', 'value': 'max'}))
+
+    def test_unavailable_or_unconfirmed_max_prevents_prompt(self):
+        model = {'id': 'model', 'category': 'model', 'currentValue': 'opus',
+                 'options': [{'name': 'Opus 5.5', 'value': 'opus'}]}
+        effort = {'id': 'effort', 'category': 'thought_level', 'currentValue': 'default',
+                  'options': [{'name': 'Max', 'value': 'max'}]}
+        config = {'model': 'claude-opus-5-5', 'model_display_name': 'Opus 5.5', 'effort': 'max'}
+        session = {'sessionId': 'test-session', 'configOptions': [model, effort]}
+        for responses in [
+            [{'configOptions': [model]}],
+            [{'configOptions': [model, {**effort, 'options': [{'value': 'high'}]}]}],
+            [{'configOptions': [model, effort]}, {'configOptions': [model, effort]}],
+            [{'configOptions': [{**model, 'currentValue': 'sonnet'}, effort]}],
+        ]:
+            with self.subTest(responses=responses):
+                client = Mock()
+                client.request.side_effect = responses
+                with self.assertRaises(handoff.HandoffError):
+                    handoff.configure_model_and_effort(client, session, config)
+                self.assertTrue(all(call.args[0] == 'session/set_config_option'
+                                    for call in client.request.call_args_list))
 
     def test_protocol_errors_do_not_echo_sensitive_body(self):
         adapter = '''import json

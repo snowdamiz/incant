@@ -36,6 +36,10 @@ merge or request repeated merge confirmation. Resolve integration conflicts and
 verify the result. Merging implemented work does not approve a phase gate or mark
 deferred requirements complete; the remaining human-owned actions still apply.
 
+Director decision, 2026-10-10: use Claude Opus 5.5 with thinking explicitly set
+to Max for all visual handoffs. Verify model and effort on every new or resumed
+ACP session; do not inherit Default or substitute another level.
+
 ---
 
 ## 1. Vision, principles, and definition of done
@@ -249,7 +253,7 @@ This plan is executed primarily by AI coding agents under human direction. Two a
 | Actor | Runs in | Account used | Owns |
 |---|---|---|---|
 | **Astra** | OpenAI Codex (cloud tasks and the Codex CLI) | Andrey's OpenAI account | Everything that is not visual: architecture, Rust crates, document model, command bus, scripting runtime and TS SDK, physics, audio, animation runtime, networking, asset pipeline, platform and export, backend services, CI, tests, eval graders, documentation text, Driftwake gameplay and systems code. Also integrates every Claude handoff and opens all PRs. |
-| **Claude 5.5** (Opus 5.5 by default) | Claude Code, reached over ACP (Agent Client Protocol) | Andrey's already logged-in Claude account. No API key, nothing stored in the repo or CI | All visual work as defined in 4.2: editor UI and UX design and implementation, viewport and gizmo visuals, look-dev, shader and material appearance, VFX, lighting tuning, golden-image and screenshot review, art direction, Driftwake art, HUD, trailer and store art, diagrams and site design. |
+| **Claude Opus 5.5, Max thinking** | Claude Code, reached over ACP (Agent Client Protocol) | Andrey's already logged-in Claude account. No API key, nothing stored in the repo or CI | All visual work as defined in 4.2: editor UI and UX design and implementation, viewport and gizmo visuals, look-dev, shader and material appearance, VFX, lighting tuning, golden-image and screenshot review, art direction, Driftwake art, HUD, trailer and store art, diagrams and site design. |
 | **Andrey** (director) | | | Priorities, phase gate approvals, routing tie-breaks, and anything requiring a human: store and developer accounts, signing keys, payments, legal, age ratings. |
 
 The build-time agents are separate from the in-engine agent that end users talk to. End users connect their own OpenAI account (Section 3). The engine, the templates, and the shipped game must never contain or depend on the director's Codex or Claude sessions.
