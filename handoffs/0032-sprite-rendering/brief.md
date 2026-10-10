@@ -1,10 +1,26 @@
 # Sprite presentation and real rendered review
 
-Status: packet preparation only; do not run until Astra supplies the tested frozen
-engine and updated schemas. Read CLAUDE.md and docs/spikes/sprite-rendering.md.
+Status: engine review ready; use the supplied tested frozen engine and schemas. Read CLAUDE.md and docs/spikes/sprite-rendering.md.
 Claude Opus 5.5 with explicitly verified Max thinking over ACP owns all visual design, original art/look-dev, Inspector
 presentation, captures and rendered judgment. Astra owns validation, geometry,
 resource lifetime, shared commands, ordering, color/alpha and integration.
+
+## Priority: engine art/review now; UI follows the full redesign
+
+The director requested a broad editor redesign, especially the Inspector. That is
+running concurrently in packet 0033 at Opus 5.5 Max. For this first sprite round,
+work only on original art, real engine scenes, helpers, numerical/rendered review
+and this packet's evidence/result. Do not edit editor/ui yet or compete with the
+redesign. The Sprite Inspector scope below is deferred until 0033 is integrated;
+record that dependency explicitly, and finish the engine review independently.
+
+Astra's integrated foundation passes 325 Rust tests, Clippy, 52 real GPU checks,
+420 UI tests, strict typecheck/build and the source-free saved-gameplay probe.
+It includes the corrected pixel camera half ties and odd-resolution framing.
+Source commit and SHA are in artifacts/tools/binary.json. Portable checks are in
+progress; native/browser Sprite presentation and hosted CI are not claimed passed.
+No Cargo or engine changes in this worktree. Raise concrete renderer defects for
+Astra to fix while you continue independent coverage. Always use Opus 5.5 Max.
 
 Use only the supplied immutable artifacts/tools/incant_headless and binary.json;
 verify SHA before and after every call. Author project changes with public
