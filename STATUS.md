@@ -53,6 +53,12 @@ within its documented workload.
 
 ## Active work
 
+- Steering merge remains held: the broad passing rule left 26/100 at goal, and
+  the opposing-only follow-up left 43/100. Near-head-on-only candidate `4c495e9`
+  passes all twelve radial cases and a new numerical port of the unchanged
+  plaza course with all100 settled. Full public playback, updated Claude review
+  and hosted checks are still required; prior green CI does not clear this.
+
 - Bounded local avoidance exposes read-only `api.steerAgents` proposals for up
   to 128 agents. Library and public 100-agent save/reopen workflows pass.
   Claude's four-way plaza review completed twice with 803 identical frames and

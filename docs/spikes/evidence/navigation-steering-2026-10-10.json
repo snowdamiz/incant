@@ -201,5 +201,31 @@
   },
   "source_commit": "6d96e76f4b2aa36155185a1e0249d7d7246284a6",
   "integrated_review_source": "9c430d5d267769ea4572e115acd2fa7946ac97ef",
-  "benchmark_source": "original verification retained below; steering solver code unchanged by later navigation integration"
+  "benchmark_source": "original verification retained below; steering solver code unchanged by later navigation integration",
+  "latest_regression_status": {
+    "merge_blocked": true,
+    "all_green_but_failed_rendered_source": "6df4ef9e1c6121843d45ee593d678a71b46bfe24",
+    "opposing_only_source": "8d56f0c",
+    "opposing_only_public_course": {
+      "ticks": 2700,
+      "arrived": 43,
+      "maximum_remaining_m": 9.89,
+      "minimum_separation_m": 0.5946576906413522,
+      "overlaps": 0
+    },
+    "current_candidate": "4c495e9",
+    "numerical_checks": {
+      "crossing_layouts": 12,
+      "crossing_minimum_separation_m": 0.5368895,
+      "plaza_settled_last_60_ticks": true,
+      "plaza_minimum_separation_m": 0.5969656054781879,
+      "exact_public_replay_claimed": false
+    },
+    "awaiting": [
+      "full workspace validation",
+      "unchanged public TypeScript course",
+      "Claude rendered repeat review",
+      "hosted checks of final source"
+    ]
+  }
 }

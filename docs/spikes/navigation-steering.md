@@ -150,3 +150,20 @@ library cases and a simple approach beside a parked agent pass locally; the
 simple case also passes the prior rule and is not a reproduction of the plaza
 regression. The unchanged full plaza course remains the acceptance test, with
 updated rendering and integration checks required before merge.
+
+
+The opposing-only candidate `8d56f0c` also failed the public course: 43/100 at
+2700, maximum remaining distance 9.890 m, minimum measured separation
+0.59465769 m and zero overlaps. The new fast numerical plaza regression fails
+that candidate too (31/100 at tick 2640); its Rust floating-point path is not an
+exact replay of the TypeScript host. A fixed 0.0001-scale ID-derived perturbation
+was also rejected after it failed a radial crossing case.
+
+Candidate `4c495e9` restricts the shared passing hand to near-antiparallel desired
+directions (dot product below -0.99 times their lengths, about eight degrees of
+head-on) with a predicted conflict during the horizon. This leaves ordinary
+crossing and goal-seeking objectives unchanged. All twelve radial layouts pass
+with minimum separation 0.5368895 m and final distances below 0.00001 m. The new
+numerical plaza test has all100 settled throughout its last second, minimum
+separation 0.59696561 m and no body/obstacle overlap. Full public playback and
+Claude's unchanged rendered course must still verify this candidate before merge.

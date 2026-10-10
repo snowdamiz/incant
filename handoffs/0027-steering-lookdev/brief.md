@@ -1,34 +1,41 @@
-## Priority revision 2: review corrected passing preference
+## Priority revision 3: verify the near-head-on correction
 
-Astra reproduced a Linux CI crowd-arrival failure locally with a 0.0001-radian
-rotation of the symmetric crossing fixture. A small fixed lateral nudge was not
-robust. The corrected wrapper uses a consistent 45-degree passing preference at
-unchanged requested speed when neighboring requested velocities predict entering
-the body/margin clearance during the horizon. ORCA still enforces the same
-constraints. Twelve rotated/staggered layouts pass unchanged arrival and body
-separation requirements; full Rust/Clippy and public 100-agent save/reopen pass.
+Your revision-2 review correctly blocked the broad passing rule: 26/100 at goal
+at tick 2700 and 11 never arrived by 4990. Preserve that report, evidence and
+frames under a separate historical directory before replacing current results.
+The original revision-1 history must remain intact too.
 
-Review the new immutable binary (source 6df4ef9; SHA in artifacts/tools/binary.json).
-The previous source/binary is retained in artifacts/tools/prior-0027/ for provenance.
-Do not compile Rust. Preserve the previous result as a historical report before
-updating result.md. Reuse the original scene, behavior, camera placements and
-2700-tick course initially, so effects of this correction can be compared honestly.
-Repeat the same public rendered runs, critical crossing/goal/obstacle windows,
-per-tick arrival/clearance/velocity diagnostics and saved-window comparisons.
-Report any new jitter, stalls, long detours, overlaps or failed runs. Do not hide
-or compensate for defects by changing geometry/goals, inflating margins, changing
-body size or relaxing acceptance criteria. If the original course now fails,
-report exact evidence and stop rather than silently modifying it.
+Astra first tried limiting the preference to any opposing traffic. The unchanged
+public course still failed (43/100 at tick 2700). The current correction applies
+the 45-degree preference only when desired directions are within about eight
+degrees of antiparallel AND their paths predict body/margin conflict during the
+horizon. Other crossing, stationary and co-directed traffic retains its original
+objective. All LP constraints and speed caps remain unchanged. A stable tiny
+ID-based jitter was tried and rejected after it failed the crossing regression.
 
-Use unique ignored output directories. Temporary `caffeinate -s -i` is permitted
-and must be reported accurately. One initial Astra public probe failed with the
-old generic script error during a 300-tick save prefix while other builds ran;
-the same complete probe then passed under temporary sleep prevention. Its exact
-cause is unclassified; do not call that earlier error a proven timeout. The new
-binary still has the old generic script diagnostic, pending a separate increment.
+Review the immutable binary sourced from 4c495e9 (exact SHA/source metadata in
+artifacts/tools/binary.json). A new numerical Rust regression ports your existing
+plaza routing and initial positions/goals; it fails the previous opposing rule
+and passes the current rule with all100 settled, as do all12 rotated/staggered
+crossing layouts. That port is numerical coverage, not an exact public replay.
+The unchanged public TypeScript run must also pass before this review begins.
 
-Commit updated compact evidence and unmodified actual frames with Built-by: claude.
-No UI or unrelated scope, and no phase-gate approval.
+Do not compile Rust. Reuse exactly the original scene, behavior, goals, camera
+placements, margins and 2700-tick course. Repeat both public rendered runs and
+critical crossing/goal/obstacle windows, then compare actual frames/logs and
+saved-window results. Inspect jitter, stalls, detours, overlap and final goal
+retention. Keep genuine failures and never compensate for the implementation by
+altering the course or weakening thresholds. Report remaining visible issues.
+No engine changes, unrelated UI work or phase-gate approval.
+
+Use fresh ignored output directories. Prior binaries/metadata remain in
+artifacts/tools/prior-0027/ and artifacts/tools/prior-0027-r2/. Verify the current
+binary hash before and after runs. Temporary `caffeinate -s -i` is permitted;
+report it accurately. This binary still has the old generic wall-clock script
+failure, pending separate diagnostics/CPU-budget increments. Do not attribute
+an unclassified error to a proven timeout.
+
+Commit updated compact evidence and unedited actual frames with Built-by: claude.
 
 # 0027: actual local-avoidance motion review
 
