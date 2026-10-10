@@ -151,6 +151,7 @@ def summary(run_dir, logs, csv_out=None, json_out=None):
         "longest_stalls_ticks_start_walker": stalls[:6],
         "walkers_with_stall_over_60_ticks": sum(s > 60 for s, _, _ in stalls),
         "max_detour_m": max_detour(positions, walkers),
+        "motion": motion_quality(positions, walkers),
         # The behavior measures exact float positions; this script sees 1 mm rounded
         # ones, so walkers within ~1 mm of the 5 cm arrival radius can flip.
         "behavior_row_mismatches": {kind: sum(kind in m["kinds"] for m in mismatches)
@@ -184,6 +185,65 @@ def max_detour(positions, walkers):
         if dev > best.get(group, (0, ""))[0]:
             best[group] = (round(dev, 2), names[i])
     return best
+
+
+def motion_quality(positions, walkers, moving=0.2, sharp=45.0, window=6):
+    """Jitter and settling, from actual displacements only.
+
+    Headings are taken over `window` ticks (0.1 s, ~0.14 m at 1.4 m/s) so the
+    1 mm log rounding cannot fake turns. A sharp turn is a heading change above
+    `sharp` degrees between consecutive windows while both move faster than
+    `moving` m/s; a reversal is a change above 135 degrees. Path ratio is
+    travelled length over the straight start-goal distance. Settling is the
+    time from first coming within 1 m of the goal to the final arrival (5 cm,
+    never left again)."""
+    ordered = sorted(walkers, key=lambda w: w["name"])
+    ticks = sorted(positions)
+    samples = ticks[::window]
+    turns, reversals, ratios, settle = [], [], [], []
+    turns_by_tick = {}
+    for i, w in enumerate(ordered):
+        goal = tuple(w["goal"])
+        straight = math.dist(w["start"], goal)
+        length = sum(math.dist(positions[a][i], positions[b][i]) for a, b in zip(ticks, ticks[1:]))
+        ratios.append(length / straight)
+        n_turn = n_rev = 0
+        prev = None
+        for a, b in zip(samples, samples[1:]):
+            dx = positions[b][i][0] - positions[a][i][0]
+            dz = positions[b][i][1] - positions[a][i][1]
+            speed = math.hypot(dx, dz) * HZ / (b - a)
+            if speed < moving:
+                prev = None
+                continue
+            if prev is not None:
+                change = abs(math.degrees(math.atan2(prev[0] * dz - prev[1] * dx, prev[0] * dx + prev[1] * dz)))
+                if change > sharp:
+                    n_turn += 1
+                    turns_by_tick[a] = turns_by_tick.get(a, 0) + 1
+                if change > 135:
+                    n_rev += 1
+            prev = (dx, dz)
+        turns.append((n_turn, w["name"]))
+        reversals.append(n_rev)
+        near = next((t for t in ticks if math.dist(positions[t][i], goal) < 1.0), None)
+        final = None
+        for t in reversed(ticks):
+            if math.dist(positions[t][i], goal) >= ARRIVE:
+                break
+            final = t
+        if near is not None and final is not None:
+            settle.append((final - near, w["name"]))
+    busiest = sorted(turns_by_tick.items(), key=lambda kv: -kv[1])[:5]
+    return {
+        "heading_window_ticks": window, "sharp_turn_deg": sharp, "moving_mps": moving,
+        "sharp_turns_total": sum(t for t, _ in turns), "walkers_with_sharp_turns": sum(t > 0 for t, _ in turns),
+        "most_sharp_turns": sorted(turns, reverse=True)[:5], "reversals_total": sum(reversals),
+        "busiest_turn_ticks": busiest,
+        "path_ratio_mean": round(sum(ratios) / len(ratios), 3), "path_ratio_max": round(max(ratios), 3),
+        "settle_ticks_max": max(settle) if settle else None,
+        "settle_ticks_mean": round(sum(s for s, _ in settle) / len(settle), 1) if settle else None,
+    }
 
 
 def digest(path):
