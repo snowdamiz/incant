@@ -28,6 +28,13 @@ function type(s) {
     }
     case 'object': {
       const fields=Object.entries(s.properties ?? {}).map(([key,value])=>`${quote(key)}${s.required?.includes(key)?'':'?'}: ${type(value)}`);
+      for(const [pattern,value] of Object.entries(s.patternProperties ?? {})) {
+        // Schemars emits this pattern for integer-keyed maps. A device ID may
+        // be absent; retaining that uncertainty makes consumer code guard it.
+        if(pattern!=='^\\d+$' || fields.length || s.additionalProperties!==false)
+          throw new Error(`Unsupported patterned object: ${pattern}`);
+        fields.push(`[key: number]: ${type(value)} | undefined`);
+      }
       if(s.additionalProperties && s.additionalProperties!==false) fields.push(`[key: string]: ${type(s.additionalProperties)}`);
       return `{ ${fields.join('; ')} }`;
     }

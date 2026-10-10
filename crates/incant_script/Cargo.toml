@@ -13,5 +13,6 @@ thiserror = { workspace = true }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
 incant_core = { workspace = true }
+incant_input.workspace = true
 sha2.workspace = true
 schemars.workspace = true

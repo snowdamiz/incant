@@ -101,6 +101,28 @@ migration between game revisions. See [save format and evidence](docs/spikes/gam
 TypeScript example through public commands and verifies pickup/spawn state,
 continued log times and separate-process restart continuity without rendering.
 
+Game behaviors read fixed-tick input with `api.input()`: keyboard/mouse edges and
+held buttons, pointer/wheel deltas, analog controller values, active touches and
+tap/long-press/swipe/pinch gestures. Input is validated before simulation advances;
+focus loss releases controls and cancels touches. Platform device adapters and
+configurable action mappings remain open. The current host can replay normalized
+events without accessing hardware:
+
+```sh
+tools/cargo run -p incant_headless --release -- play artifacts/demo.incant.json --ticks 60 --compiled-script artifacts/move.js --input-replay artifacts/input.json
+python3 tools/probes/game-input.py artifacts/input-example
+```
+
+`InputRecording.schema.json` describes an `incant-input` version-1 clip with the
+game's `tick_rate`, absolute `start_tick`, duration `ticks`, and sparse `frames`
+containing one-based tick offsets and ordered events. For example,
+`{"tick":1,"events":[{"type":"key","code":"KeyW","down":true}]}` holds W until
+its corresponding release. The whole clip is validated before play; output
+cannot silently extend beyond it. Provide the same clip with `--load-save` to
+reconstruct held controls and gesture timing at the saved tick without rerunning
+gameplay. Ordinary save loading resets physical devices. See
+[input semantics and evidence](docs/spikes/game-input.md).
+
 `init` refuses to overwrite an existing file. `rpc` serves newline-delimited JSON
 on stdin/stdout. `project.read`, `schema.list`, `command.execute`, `history.read`,
 `history.undo`, `history.redo`, `project.save`, and disposable `play.*` operations are

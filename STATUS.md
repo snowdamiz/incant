@@ -53,6 +53,17 @@ within its documented workload.
 
 ## Active work
 
+- Shared fixed-tick keyboard/mouse/gamepad/touch processing, sandbox `api.input()`
+  and bounded headless input replay are implemented. Atomic validation, focus
+  recovery, device lifetimes, gestures and saved-game input seeking pass eighteen
+  new tests. The strict TypeScript public-CLI character probe jumps, reaches a wall
+  and resumes a mid-jump save with exact final state/logs and unchanged authored
+  files. All 190 Rust, 315 UI and five tool tests pass, along with Clippy, generated
+  contracts and the native build/package. macOS normalized-input smoke execution
+  passes; hosted checks and merge are pending. Live OS/browser adapters, action
+  mapping and physical-device verification remain open. No computer use or local
+  captures occurred. See [game input](docs/spikes/game-input.md).
+
 - Versioned logical game saves preserve runtime scenes, hierarchy, spawned/deleted
   entities, JSON behavior state and the simulation clock. The headless host loads
   saves into isolated sessions and publishes new files atomically after success.
@@ -74,7 +85,8 @@ within its documented workload.
   40 GPU and 315 UI tests plus Clippy and the native release build. Actual macOS,
   browser/WASM and iOS simulator queries pass. Claude accepted the corrected
   course; 303 repeated frames match exactly. Stair speed/smoothing and moving
-  platform behavior remain game-feel work; hosted checks are pending. See
+  platform behavior remain game-feel work. All nine final hosted checks passed at
+  `54985fa`; PR #24 merged as `9f5906f`. See
   [character movement](docs/spikes/character-movement.md).
 
 - Physics runtime integration is in progress on `impl/physics-runtime`. The
@@ -89,10 +101,11 @@ within its documented workload.
   fewer snapshots reduce paired local 512-body p95 from 9.99 to 8.80 ms, with
   exact final-state equality. Claude handoff 0022 implemented and reviewed the new Inspector
   in browser fixtures and the native app. Shared schemas supply field order and
-  units; WebKit field names and the compact Agent state are fixed. Final hosted
-  checks and merge of PR #23 remain pending. Character controllers, mesh/compound
-  colliders, hierarchy/scale, rollback snapshots and device performance remain
-  open. See [runtime evidence](docs/spikes/physics-runtime.md).
+  units; WebKit field names and the compact Agent state are fixed. All twelve hosted
+  checks passed at `6d5fca0`; PR #23 merged as `eb77419`. Character controllers
+  are implemented in PR #24. Compound colliders remain in draft PR #25 pending
+  the native visual review paused by the director. Mesh colliders, hierarchy/scale,
+  rollback snapshots and device performance remain open. See [runtime evidence](docs/spikes/physics-runtime.md).
 
 - Opt-in directional cascades are implemented with scoped Claude appearance
   and native acceptance. The scheduled depth pass honors imported caster flags,

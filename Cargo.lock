@@ -3253,6 +3253,7 @@ dependencies = [
  "incant_core",
  "incant_doc",
  "incant_import",
+ "incant_input",
  "incant_render",
  "incant_script",
  "rpassword",
@@ -3279,6 +3280,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_input"
+version = "0.0.1"
+dependencies = [
+ "schemars 1.2.2",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_physics"
 version = "0.0.1"
 dependencies = [
@@ -3296,6 +3307,7 @@ version = "0.0.1"
 dependencies = [
  "incant_core",
  "incant_doc",
+ "incant_input",
  "serde_json",
  "wasm-bindgen",
 ]
@@ -3327,6 +3339,7 @@ dependencies = [
  "incant_cmd",
  "incant_core",
  "incant_doc",
+ "incant_input",
  "rquickjs",
  "schemars 1.2.2",
  "serde",

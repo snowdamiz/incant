@@ -12,6 +12,7 @@ incant_doc = { workspace = true }
 incant_cmd = { workspace = true }
 incant_core = { workspace = true }
 incant_script = { workspace = true }
+incant_input.workspace = true
 incant_agent = { workspace = true }
 incant_assets = { path = "../incant_assets" }
 incant_import = { path = "../incant_import" }

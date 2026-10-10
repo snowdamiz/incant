@@ -1,0 +1,511 @@
+{
+  "$defs": {
+    "GamepadAxis": {
+      "enum": [
+        "left_x",
+        "left_y",
+        "right_x",
+        "right_y"
+      ],
+      "type": "string"
+    },
+    "GamepadButton": {
+      "enum": [
+        "south",
+        "east",
+        "west",
+        "north",
+        "left_shoulder",
+        "right_shoulder",
+        "left_trigger",
+        "right_trigger",
+        "select",
+        "start",
+        "guide",
+        "left_stick",
+        "right_stick",
+        "dpad_up",
+        "dpad_down",
+        "dpad_left",
+        "dpad_right"
+      ],
+      "type": "string"
+    },
+    "InputEvent": {
+      "description": "Device adapters supply ordered events in logical pixels. Sticks use [-1,1],\nwith +Y down; analog buttons use [0,1]. No platform handles enter game state.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "focused": {
+              "type": "boolean"
+            },
+            "type": {
+              "const": "focus",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "focused"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "$ref": "#/$defs/KeyCode"
+            },
+            "down": {
+              "type": "boolean"
+            },
+            "type": {
+              "const": "key",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "code",
+            "down"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "button": {
+              "$ref": "#/$defs/MouseButton"
+            },
+            "down": {
+              "type": "boolean"
+            },
+            "type": {
+              "const": "mouse_button",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "button",
+            "down"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "position": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "pointer_position",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "position"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delta": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "pointer_motion",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "delta"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delta": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "wheel",
+              "type": "string"
+            },
+            "unit": {
+              "$ref": "#/$defs/WheelUnit"
+            }
+          },
+          "required": [
+            "type",
+            "delta",
+            "unit"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": {
+              "const": "gamepad_connected",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": {
+              "const": "gamepad_disconnected",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "button": {
+              "$ref": "#/$defs/GamepadButton"
+            },
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": {
+              "const": "gamepad_button",
+              "type": "string"
+            },
+            "value": {
+              "format": "double",
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "button",
+            "value"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "axis": {
+              "$ref": "#/$defs/GamepadAxis"
+            },
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": {
+              "const": "gamepad_axis",
+              "type": "string"
+            },
+            "value": {
+              "format": "double",
+              "maximum": 1,
+              "minimum": -1,
+              "type": "number"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "axis",
+            "value"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "phase": {
+              "$ref": "#/$defs/TouchPhase"
+            },
+            "position": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "touch",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "phase",
+            "position"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "KeyCode": {
+      "description": "Physical key positions. Text entry and IME composition are separate concerns.",
+      "enum": [
+        "KeyA",
+        "KeyB",
+        "KeyC",
+        "KeyD",
+        "KeyE",
+        "KeyF",
+        "KeyG",
+        "KeyH",
+        "KeyI",
+        "KeyJ",
+        "KeyK",
+        "KeyL",
+        "KeyM",
+        "KeyN",
+        "KeyO",
+        "KeyP",
+        "KeyQ",
+        "KeyR",
+        "KeyS",
+        "KeyT",
+        "KeyU",
+        "KeyV",
+        "KeyW",
+        "KeyX",
+        "KeyY",
+        "KeyZ",
+        "Digit0",
+        "Digit1",
+        "Digit2",
+        "Digit3",
+        "Digit4",
+        "Digit5",
+        "Digit6",
+        "Digit7",
+        "Digit8",
+        "Digit9",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "Space",
+        "Enter",
+        "Escape",
+        "Tab",
+        "Backspace",
+        "Delete",
+        "Insert",
+        "Home",
+        "End",
+        "PageUp",
+        "PageDown",
+        "ShiftLeft",
+        "ShiftRight",
+        "ControlLeft",
+        "ControlRight",
+        "AltLeft",
+        "AltRight",
+        "MetaLeft",
+        "MetaRight",
+        "CapsLock",
+        "NumLock",
+        "ScrollLock",
+        "Pause",
+        "PrintScreen",
+        "ContextMenu",
+        "Backquote",
+        "Minus",
+        "Equal",
+        "BracketLeft",
+        "BracketRight",
+        "Backslash",
+        "Semicolon",
+        "Quote",
+        "Comma",
+        "Period",
+        "Slash",
+        "Numpad0",
+        "Numpad1",
+        "Numpad2",
+        "Numpad3",
+        "Numpad4",
+        "Numpad5",
+        "Numpad6",
+        "Numpad7",
+        "Numpad8",
+        "Numpad9",
+        "NumpadAdd",
+        "NumpadSubtract",
+        "NumpadMultiply",
+        "NumpadDivide",
+        "NumpadDecimal",
+        "NumpadEnter",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12"
+      ],
+      "type": "string"
+    },
+    "MouseButton": {
+      "enum": [
+        "left",
+        "right",
+        "middle",
+        "back",
+        "forward"
+      ],
+      "type": "string"
+    },
+    "RecordedTick": {
+      "additionalProperties": false,
+      "properties": {
+        "events": {
+          "items": {
+            "$ref": "#/$defs/InputEvent"
+          },
+          "maxItems": 1024,
+          "type": "array"
+        },
+        "tick": {
+          "format": "uint64",
+          "maximum": 10000,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "tick",
+        "events"
+      ],
+      "type": "object"
+    },
+    "TouchPhase": {
+      "enum": [
+        "down",
+        "move",
+        "up",
+        "cancel"
+      ],
+      "type": "string"
+    },
+    "WheelUnit": {
+      "enum": [
+        "pixels",
+        "lines"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "type": "string"
+    },
+    "frames": {
+      "description": "Sparse, strictly increasing, one-based offsets within the clip.",
+      "items": {
+        "$ref": "#/$defs/RecordedTick"
+      },
+      "maxItems": 10000,
+      "type": "array"
+    },
+    "start_tick": {
+      "description": "Absolute game tick immediately before this clip begins.",
+      "format": "uint64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "tick_rate": {
+      "format": "uint32",
+      "maximum": 240,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "ticks": {
+      "description": "Number of additional ticks covered by this clip, including empty ticks.",
+      "format": "uint64",
+      "maximum": 10000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "version": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "format",
+    "version",
+    "tick_rate",
+    "start_tick",
+    "ticks",
+    "frames"
+  ],
+  "title": "InputRecording",
+  "type": "object"
+}

@@ -33,6 +33,9 @@ pub struct Options {
     /// Atomically publish a new game-save file after successful playback.
     #[arg(long)]
     pub save_output: Option<PathBuf>,
+    /// Versioned fixed-tick keyboard/mouse/gamepad/touch clip; no device access.
+    #[arg(long)]
+    pub input_replay: Option<PathBuf>,
     /// New directory for PNG frames and report.json; existing paths are rejected.
     #[arg(long)]
     pub output: Option<PathBuf>,
@@ -73,6 +76,8 @@ pub enum PlayError {
     Script(#[from] incant_script::ScriptError),
     #[error(transparent)]
     Save(#[from] incant_script::SaveError),
+    #[error(transparent)]
+    InputRecording(#[from] incant_input::RecordingError),
     #[error("project or asset loading failed: {0}")]
     Load(String),
     #[error("frame rendering failed: {0}")]
@@ -99,6 +104,7 @@ pub struct Report {
     script_commands: usize,
     state: incant_core::RuntimeSnapshot,
     script_state: serde_json::Value,
+    input: incant_input::InputFrame,
     frames: Vec<Frame>,
     logs: Vec<super::play_logs::Entry>,
     adapter: Option<String>,
@@ -157,6 +163,16 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         PlaySession::new(&document, &source)?
     };
     let start_tick = play.snapshot().tick;
+    if let Some(path) = &options.input_replay {
+        let mut text = String::new();
+        fs::File::open(path)?
+            .take(incant_input::MAX_RECORDING_BYTES as u64 + 1)
+            .read_to_string(&mut text)?;
+        play.replay_input(&text)?;
+        if start_tick + count > play.input_replay_end().expect("installed replay") {
+            return Err(incant_input::RecordingError::Range.into());
+        }
+    }
     // Reserve a new output directory before GPU setup. Never overwrite a prior run.
     // A failed run may leave partial PNGs, but never a completed report.json.
     if let Some(output) = &options.output {
@@ -244,6 +260,7 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         script_commands: commands,
         state: play.snapshot(),
         script_state: play.host.state().clone(),
+        input: play.input().clone(),
         frames,
         logs: logs.finish()?,
         adapter: renderer.as_ref().map(|r| r.adapter_name.clone()),
