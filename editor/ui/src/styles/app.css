@@ -2202,6 +2202,13 @@ input.control.control__input[data-focus-visible] {
   overflow: auto;
   display: flex;
   flex-direction: column;
+  container: agent-transcript / size;
+}
+
+.agent__transcript:focus-visible,
+.agent__transcript[data-focus-visible] {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
 }
 
 .agent-empty {
@@ -2236,6 +2243,37 @@ input.control.control__input[data-focus-visible] {
 
 .agent-empty .button {
   margin-top: var(--space-2);
+}
+
+/*
+ * Compact empty state for a short Agent panel (the 180 px minimum, or the default
+ * height at 1000 x 650). The full illustration needs about 150 px, so below
+ * that the mark is dropped and the text is set smaller: title and reason stay
+ * visible above the composer instead of sliding behind it. Any remainder
+ * scrolls, and the transcript is then focusable (AgentPanel).
+ */
+@container agent-transcript (max-height: 160px) {
+  /* Still centred when there is room; auto margins resolve to 0 on overflow, so
+     the title stays at the top and the rest scrolls. */
+  .agent-empty {
+    gap: 0;
+    max-width: none;
+    padding: 6px var(--space-5);
+  }
+
+  .agent-empty__mark {
+    display: none;
+  }
+
+  .agent-empty__title {
+    font-size: var(--text-sm);
+    line-height: 18px;
+  }
+
+  .agent-empty__body {
+    font-size: var(--text-xs);
+    line-height: var(--leading-tight);
+  }
 }
 
 .composer {
