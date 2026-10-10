@@ -3934,6 +3934,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_render_native"
+version = "0.0.1"
+dependencies = [
+ "glam 0.32.1",
+ "incant_assets",
+ "incant_assets_runtime",
+ "incant_cook",
+ "incant_doc",
+ "incant_render_data",
+ "incant_runtime",
+ "incant_types",
+ "png 0.18.1",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_runtime"
 version = "0.0.1"
 dependencies = [
