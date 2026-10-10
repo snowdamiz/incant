@@ -681,3 +681,96 @@ inputs. The bottom dock still shows only Problems, Console and History.
 3. **AX recapture** to confirm that fields are named by their visible label
    (`text field Friction`, `checkbox CCD`), and to record the transcript node's
    focusability at 180 px.
+
+---
+
+# Final corrected native captures (`6cb489a`)
+
+## Scoped verdict
+
+**Native acceptance is granted for the scope of this handoff.** The scope covers:
+- the read-only physics Inspector presentation (RigidBody, all three Collider
+  variants, collision masks, AngularVelocity)
+- its keyboard and accessibility behaviour
+- the compact Agent empty state at the supported 180 px panel height
+
+The motion evidence is the headless CLI `play` frames. They are unchanged, and
+Astra reports they are byte-identical to the current engine. **Native play mode
+does not exist, so it is not claimed.**
+
+This verdict does not approve a phase gate. It does not certify the physics
+runtime, which Astra owns, or any device performance. No rebuild or browser
+recapture was needed.
+
+Exact model and transport: Claude Opus 5.5, model ID `claude-opus-5-5`, through
+the director's Claude subscription via ACP. No model substitution occurred.
+
+## Evidence reviewed
+
+`artifacts/physics-native-v2/` holds 12 files. All SHA-256 values match
+`manifest.json`, which records source `6cb489a` and binary
+`e514b4b8…bd012`. The recorded pixel dimensions are 2002×1302 for the minimum
+captures and 2880×1748 for the wide one. The directory is git-ignored. No native
+image was copied into tracked files, because the images show the account label.
+
+**Field names (`pill-accessibility.txt`).** Every field is now named by its
+visible label: `text field Friction`, `text field Restitution`, `checkbox Sensor`,
+`text field Memberships` and `text field Filter`. The same holds for `text field
+Gravity scale`, `text field Linear damping`, `text field Angular damping`,
+`checkbox Can sleep` and `checkbox CCD`. The descriptions now come after the
+label instead of replacing it. In `memberships-keyboard-ax.txt` the mask's group
+list ("Every collision group, 1 to 32.") is present. **Defect 1 from the
+previous round is fixed natively.**
+
+**Mouse-free keyboard focus** (`keyboard-sequence.json`,
+`minimum-ball-{shape,memberships}-keyboard.jpg`, `*-keyboard-ax.txt`). The
+recorded sequence reaches the Inspector with F6 and then uses only Tab. The trace
+visits these stops in order:
+- the Read-only status
+- Copy entity ID
+- the Collider header
+- Shape
+- Radius `0.35`
+- Density `1000`
+- Friction `0.6`
+- Restitution `0.6`
+- Sensor
+- Memberships `4294967295`
+
+The Shape and Memberships captures each show the standard focus ring on the
+value box. WebKit selects the read-only input's text on keyboard focus, so the
+dumps report those stops as selected text. That is platform behaviour and not a
+defect. The tab order follows the visual order, with no skipped or hidden stops.
+
+**Compact Agent at 180 px** (`minimum-agent-{before-end,end}.jpg`,
+`agent-keyboard-ax.txt`). With the longer native reason:
+- **Before End.** There is no mark. "Agent not ready" and two lines of the
+  reason sit above the composer, and the transcript shows the focus ring.
+- **After End.** The third line, "account needed.", is visible.
+- **AX.** The dump confirms `The focused UI element is … container Agent
+  conversation`, reached with Shift+Tab from Send. This matches the browser
+  probe exactly. **Observation 2 from the previous round is fixed natively.**
+
+**Regular heights** (`minimum-default.jpg`, `wide-default.jpg`):
+- **Agent panel.** At default panel heights it shows the full centred state with
+  the mark, unchanged from before.
+- **Inspector fields.** The capsule note, `m`, `kg/m³`, the Sensor switch and the
+  mask summary render as in the accepted round.
+- **Arrangement.** Hierarchy and Assets on the left, the Inspector in the main
+  right column, and only Problems, Console and History at the bottom, with no regressions.
+
+## Remaining notes (not defects; nothing blocks this verdict)
+
+1. **Verbose row containers.** The row-level hover tooltip makes each described
+   row's AX container carry the description as its name, for example `container
+   Friction coefficient (dimensionless).`. The field itself is named correctly.
+   This only affects verbosity when VoiceOver enters the group. A later
+   accessibility polish could move the tooltip to a `title` on a non-container
+   element, or drop it now that descriptions are announced.
+2. **Scroll position persists.** The Agent transcript keeps its scroll position
+   after End. In the later keyboard captures its title is still scrolled out of
+   view. This is expected and harmless, because the transcript is still
+   focusable and scrolls back with Home.
+3. **Component order.** Unchanged and alphabetical, per the director's instruction.
+4. **Coverage boundary.** Nothing here covers native play mode, mesh or compound
+   colliders, character controllers, hierarchical bodies or rollback.
