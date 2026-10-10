@@ -2,7 +2,7 @@ import { useId } from 'react';
 import type { InputHTMLAttributes, ReactNode } from 'react';
 import type { Diagnostic, FieldSchema } from '../../bridge/contract';
 import { Icon } from '../../icons/Icon';
-import type { FieldHint, FieldStatus } from './presentation';
+import type { AxisName, FieldHint, FieldStatus } from './presentation';
 import { MASK_BITS, fieldHint, isMask, maskDescription, maskGroups, maskSummary } from './presentation';
 import { ObjectListView, isObjectList } from './ObjectList';
 
@@ -117,6 +117,11 @@ export function presentableDefault(schema: FieldSchema): { value: unknown } | nu
     if (typeof tag === 'string' && Object.hasOwn(schema.variants, tag)) return { value };
   }
   return null;
+}
+
+/** "width" and "height" -> "width and height". */
+function listAll(items: readonly string[]): string {
+  return items.length < 2 ? (items[0] ?? 'nothing') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`;
 }
 
 /** "box", "sphere" and "capsule" -> "box, sphere or capsule". */
@@ -327,6 +332,7 @@ function FieldRow({
             unit={unit}
             tag={tag}
             variants={hint.variants}
+            axes={hint.axes}
             value={value}
             invalid={severity === 'error'}
             errorPaths={errorPaths}
@@ -377,6 +383,7 @@ function ValueControl({
   unit,
   tag,
   variants,
+  axes,
   value,
   invalid,
   errorPaths,
@@ -390,6 +397,7 @@ function ValueControl({
   unit: string | undefined;
   tag: FieldStatus | null;
   variants: Readonly<Record<string, string>> | undefined;
+  axes: readonly AxisName[] | undefined;
   value: unknown;
   invalid: boolean;
   errorPaths: ReadonlySet<string>;
@@ -493,13 +501,23 @@ function ValueControl({
       if (!Array.isArray(value) || !value.every((item) => typeof item === 'number')) {
         return <Mismatch id={id} expected="a list of numbers" value={value} />;
       }
-      const channels = arrayChannels(schema['x-incant-widget'], fieldKey, value.length);
+      // Named entries (width, height) are not spatial axes: a list of another
+      // length cannot be labelled honestly, so it is shown raw.
+      if (axes && value.length !== axes.length) {
+        const names = listAll(axes.map((axis) => axis.name.toLowerCase()));
+        return <Mismatch id={id} expected={`${axes.length} numbers (${names})`} value={value} />;
+      }
+      const channels = axes ?? arrayChannels(schema['x-incant-widget'], fieldKey, value.length);
       return (
         <span className="control control--vector" role="group" aria-labelledby={labelledBy} id={id}>
           {value.map((item, index) => (
             <label key={index} className="vector__axis">
-              {/* Tint classes stay positional: R/G/B share the X/Y/Z red/green/blue tints. */}
-              <span className={`vector__axis-name axis--${AXES[index]?.toLowerCase() ?? 'n'}`} aria-hidden={channels ? true : undefined}>
+              {/* Tint classes stay positional: R/G/B share the X/Y/Z red/green/blue tints.
+                  Named entries such as W/H carry no spatial meaning, so they stay neutral. */}
+              <span
+                className={`vector__axis-name ${axes ? 'axis--plain' : `axis--${AXES[index]?.toLowerCase() ?? 'n'}`}`}
+                aria-hidden={channels ? true : undefined}
+              >
                 {channels?.[index]?.short ?? AXES[index] ?? index}
               </span>
               <input
