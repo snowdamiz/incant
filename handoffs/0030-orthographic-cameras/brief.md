@@ -1,5 +1,41 @@
 # Orthographic camera appearance and Inspector review
 
+## Priority revision: final native captures supplied
+
+Review artifacts/0030-native-captures/manifest.json and its ten original native
+JPEGs. They come from integrated source 59f3384, SHA recorded in the manifest.
+The same binary includes PR25's already accepted compact Agent and compound
+Inspector; integrated-ui.diff records those differences from your branch.
+Normal app size is 1440x874; minimum is 1000x650, with explicit 280px Inspector
+width for the final minimum states. The earlier tiny-min.jpg retains 331px;
+tiny-min-inspector.jpg is the 280px state. Legacy, explicit perspective,
+orthographic, tiny values and Tab focus are captured. Astra restored sizes.
+
+The project is your original engine-r1 scene/cache with two shared-command
+Camera additions (explicit perspective and tiny values). Native viewport uses
+its existing preview camera; these are Inspector review captures, not an
+authored-camera selection claim. Full images contain the saved account label;
+keep them ignored and commit only account-free crops. The OS sharing pill
+obscures traffic lights, outside this scope. The original Documents fixture
+open stalled in OS __open, so the identical app/fixture was relocated into the
+development artifacts directory; it opened immediately, with zero engine
+errors/warnings and no permissions changes.
+
+Astra's bridge test fixture correction b769347 is already in your branch.
+Re-run tests before updating the earlier failure wording. Combined root passes
+318 Rust, Clippy, 387 UI tests/build, five tool tests, contracts and the native
+release/package. The public camera save/repeat workflow passes on the frozen
+integrated binary. Independent analysis matches your numeric report exactly;
+all 72 images across your two original engine runs match byte-for-byte, and all
+18 committed frame hashes verify. No renderer changes require new look-dev.
+
+Review the native Camera presentation, labels, units, default/unused tags, tiny
+values, minimum spacing/overflow and keyboard focus. Return a clear final scoped
+native verdict, or a concrete new defect to fix. Do not invent an engine or phase
+gate claim. Preserve measured shadow limits. Commit result/evidence/crops with
+Built-by: claude. You may make a necessary Camera UI fix if the captures reveal
+a defect; explain it so Astra can integrate and recapture the changed state.
+
 ## Priority revision: correctness review, 2026-10-10
 
 Initial checkpoint d9f8769 is accepted for its stated engine/browser scope.
