@@ -1,22 +1,35 @@
-import { Fragment, useState } from 'react';
-import type { ComponentSchema, ComponentValue, Diagnostic, EntityDetail } from '../../bridge/contract';
+import { Fragment, useMemo, useState } from 'react';
+import type { KeyboardEvent, ReactNode } from 'react';
+import type { BridgeSnapshot, ComponentSchema, ComponentValue, Diagnostic, EntityDetail } from '../../bridge/contract';
 import { Icon, iconForKind } from '../../icons/Icon';
+import { kindLabel } from '../../assets/paths';
 import { projectState } from '../../shell/projectState';
 import { useShell } from '../../shell/ShellContext';
 import { StateView } from '../StateView';
-import { AssetInspector } from '../assets/AssetInspector';
+import { IdentityHeader } from './IdentityHeader';
+import { AssetInspector, useAssetEscape, useAssetInspectorHeader } from '../assets/AssetInspector';
 import { useAssets } from '../../assets/AssetsContext';
-import { FieldView, fieldDomId, safeJson } from './FieldView';
-import { sectionKeys } from './presentation';
+import type { FieldContext, ReferenceResolver } from './FieldView';
+import { FieldView, fieldDomId } from './FieldView';
+import { safeJson } from './format';
+import { componentIcon, componentTitle, sectionKeys } from './presentation';
 
+/**
+ * The right column's top panel. Its header line names what is inspected (an entity
+ * or an asset) instead of repeating "Inspector", so the selection's identity costs
+ * no extra height; the panel keeps "Inspector" as its accessible name.
+ */
 export function InspectorPanel() {
   const { snapshot, selection } = useShell();
   // The Inspector follows the left column: entities for Hierarchy, assets for Assets.
   const { view } = useAssets();
   const assetsView = view === 'assets';
-  const editable = false; // No component-edit command exists on the bridge yet (see NATIVE_VIEWPORT.md).
+  const onAssetKey = useAssetEscape();
+  const assetHeader = useAssetInspectorHeader();
   const entity = selection !== null ? snapshot?.entities[selection] : undefined;
   const project = projectState(snapshot);
+  const refs = useReferences(snapshot);
+  let header: ReactNode = null;
   let body;
   if (!snapshot) {
     body = (
@@ -33,6 +46,7 @@ export function InspectorPanel() {
       </StateView>
     );
   } else if (assetsView) {
+    header = assetHeader;
     body = <AssetInspector />;
   } else if (selection === null) {
     body = (
@@ -48,101 +62,79 @@ export function InspectorPanel() {
       </StateView>
     );
   } else {
-    body = <EntityInspector entity={entity} schemas={snapshot.schemas} diagnostics={snapshot.diagnostics} />;
+    header = <IdentityHeader icon={iconForKind(entity.kind)} kind={entity.kind} name={entity.name} actions={<CopyIdButton id={entity.id} />} />;
+    body = <EntityInspector entity={entity} schemas={snapshot.schemas} diagnostics={snapshot.diagnostics} refs={refs} />;
   }
   return (
-    <section className="panel" data-region="inspector" aria-labelledby="inspector-title" tabIndex={-1}>
-      <header className="panel__header">
-        <h2 id="inspector-title" className="panel__title">
+    <section
+      className="panel panel--inspector"
+      data-region="inspector"
+      aria-labelledby="inspector-title"
+      tabIndex={-1}
+      onKeyDown={assetsView ? (event: KeyboardEvent<HTMLElement>) => onAssetKey(event) : undefined}
+    >
+      <header className={`panel__header inspector-header${header ? ' has-identity' : ''}`}>
+        <h2 id="inspector-title" className={header ? 'visually-hidden' : 'panel__title'}>
           Inspector
         </h2>
-        {entity && !editable && !assetsView ? (
-          <span
-            className="quiet-chip"
-            tabIndex={0}
-            title="Read-only: field edits need a component command on the engine bus, which the bridge does not provide yet."
-          >
-            <Icon name="lock" size={12} />
-            Read-only
-            <span className="visually-hidden">
-              : field edits need a component command on the engine bus, which the bridge does not provide yet.
-            </span>
-          </span>
-        ) : null}
+        {header}
       </header>
-      <div className="panel__scroll">{body}</div>
+      <div className="panel__scroll inspector-scroll">{body}</div>
     </section>
   );
+}
+
+/** Exact IDs that name a project asset or entity, for reference fields. Built once per snapshot. */
+function useReferences(snapshot: BridgeSnapshot | null): ReferenceResolver {
+  const assets = snapshot?.assets;
+  const hierarchy = snapshot?.hierarchy;
+  return useMemo(() => {
+    const byId = new Map((assets?.status === 'ready' ? assets.value : []).map((asset) => [asset.id as string, asset]));
+    const nodes = hierarchy?.status === 'ready' ? hierarchy.value.nodes : {};
+    return (id: string) => {
+      const asset = byId.get(id);
+      if (asset) return { name: asset.name, kind: asset.kind, spoken: `${kindLabel(asset.kind)} asset ${asset.name}` };
+      const node = Object.hasOwn(nodes, id) ? nodes[id] : undefined;
+      if (node) return { name: node.name, kind: node.kind, spoken: `Entity ${node.name}` };
+      return null;
+    };
+  }, [assets, hierarchy]);
 }
 
 function EntityInspector({
   entity,
   schemas,
   diagnostics,
+  refs,
 }: {
   entity: EntityDetail;
   schemas: Readonly<Record<string, ComponentSchema>>;
   diagnostics: readonly Diagnostic[];
+  refs: ReferenceResolver;
 }) {
   const mine = diagnostics.filter((d) => d.entity === entity.id);
+  const editable = false; // No component-edit command exists on the bridge yet (see NATIVE_VIEWPORT.md).
   return (
     <div className="inspector">
-      <div className="inspector__identity">
-        <span className={`kind-tile kind--${entity.kind}`} aria-hidden="true">
-          <Icon name={iconForKind(entity.kind)} />
+      <div className="inspector__meta">
+        <span className="inspector__kind">{entityKindLabel(entity.kind)}</span>
+        <span className="inspector__id mono" title={entity.id}>
+          <span className="visually-hidden">ID </span>
+          <MiddleTruncated text={entity.id} />
         </span>
-        <div className="inspector__identity-text">
-          <p className="inspector__name" title={entity.name}>
-            {entity.name}
-          </p>
-          <p className="inspector__meta">
-            <span className="inspector__kind">{entity.kind}</span>
-            <span aria-hidden="true">·</span>
-            <span className="inspector__id mono" title={entity.id}>
-              <span className="visually-hidden">ID </span>
-              {entity.id}
-            </span>
-          </p>
-        </div>
-        <CopyIdButton id={entity.id} />
+        {!editable ? (
+          <span
+            className="quiet-chip inspector__readonly"
+            tabIndex={0}
+            title="Read-only: component values can be inspected here but not edited yet."
+          >
+            <Icon name="lock" size={12} />
+            Read-only
+            <span className="visually-hidden">: component values can be inspected here but not edited yet.</span>
+          </span>
+        ) : null}
       </div>
-      {mine.length > 0 ? (
-        <ul className="inspector__problems" aria-label="Problems on this entity">
-          {mine.map((d) => (
-            <li key={d.id} className={`problem-line problem-line--${d.severity}`}>
-              <Icon name={d.severity === 'error' ? 'error' : d.severity === 'warning' ? 'warning' : 'info'} size={12} />
-              <span>
-                {d.message}
-                {d.component ? (
-                  <a
-                    className="problem-line__where mono"
-                    href={`#${fieldDomId(entity.id, d.component, (d.path ?? '').split('/').filter(Boolean))}`}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      const reveal = () => {
-                        const target = nearestField(entity.id, d.component ?? '', d.path);
-                        target?.scrollIntoView({ block: 'center' });
-                        (target?.matches('input,[tabindex]') ? target : target?.querySelector<HTMLElement>('input,[tabindex]'))?.focus();
-                        return target;
-                      };
-                      const first = reveal();
-                      // Focusing a list row (a compound part) selects it and renders its fields;
-                      // once rendered, continue to the exact field when it now exists.
-                      setTimeout(() => {
-                        const next = nearestField(entity.id, d.component ?? '', d.path);
-                        if (next && next !== first && first?.contains(document.activeElement)) reveal();
-                      }, 0);
-                    }}
-                  >
-                    {shortType(d.component)}
-                    {d.path ?? ''}
-                  </a>
-                ) : null}
-              </span>
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      {mine.length > 0 ? <EntityProblems entity={entity} problems={mine} /> : null}
       {entity.components.length === 0 ? (
         <StateView icon="entity" title="No components" compact>
           <p>{entity.kind === 'scene' ? 'Scenes hold entities, not components.' : 'This entity has no components.'}</p>
@@ -155,6 +147,7 @@ function EntityInspector({
             component={component}
             schema={schemas[component.type]}
             diagnostics={mine.filter((d) => d.component === component.type)}
+            refs={refs}
           />
         ))
       )}
@@ -162,12 +155,77 @@ function EntityInspector({
   );
 }
 
+/** Entity kinds as words; unknown kinds are shown as authored. */
+function entityKindLabel(kind: string): string {
+  return kind ? kind[0]!.toUpperCase() + kind.slice(1) : 'Entity';
+}
+
+/**
+ * A long ID that keeps both ends visible when space runs out: the head ellipsizes and
+ * the last six characters (the random part of a ULID, which tells IDs apart) stay.
+ * The DOM holds the whole ID, so selecting or copying it gets every character.
+ */
+function MiddleTruncated({ text }: { text: string }) {
+  const cut = Math.max(0, text.length - 6);
+  return (
+    <span className="middle-truncate">
+      <span className="middle-truncate__head">{text.slice(0, cut)}</span>
+      <span className="middle-truncate__tail">{text.slice(cut)}</span>
+    </span>
+  );
+}
+
+function EntityProblems({ entity, problems }: { entity: EntityDetail; problems: readonly Diagnostic[] }) {
+  return (
+    <ul className="inspector__problems" aria-label="Problems on this entity">
+      {problems.map((d) => (
+        <li key={d.id} className={`problem-line problem-line--${d.severity}`}>
+          <Icon name={d.severity === 'error' ? 'error' : d.severity === 'warning' ? 'warning' : 'info'} size={12} />
+          <span className="problem-line__text">
+            <span className="problem-line__message">{d.message}</span>
+            {d.component ? (
+              <a
+                className="problem-line__where"
+                href={`#${fieldDomId(entity.id, d.component, (d.path ?? '').split('/').filter(Boolean))}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  revealField(entity.id, d.component ?? '', d.path);
+                }}
+              >
+                {shortType(d.component)}
+                {d.path ? <code className="problem-line__path">{breakAfterSlashes(d.path)}</code> : null}
+              </a>
+            ) : null}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Scrolls to and focuses the field a diagnostic names, continuing into a list item once it renders. */
+function revealField(entity: string, component: string, path: string | null) {
+  const reveal = () => {
+    const target = nearestField(entity, component, path);
+    target?.scrollIntoView({ block: 'center' });
+    (target?.matches('input,[tabindex]') ? target : target?.querySelector<HTMLElement>('input,[tabindex]'))?.focus();
+    return target;
+  };
+  const first = reveal();
+  // Focusing a list row (a compound part) selects it and renders its fields;
+  // once rendered, continue to the exact field when it now exists.
+  setTimeout(() => {
+    const next = nearestField(entity, component, path);
+    if (next && next !== first && first?.contains(document.activeElement)) reveal();
+  }, 0);
+}
+
 function CopyIdButton({ id }: { id: string }) {
   const { announce } = useShell();
   return (
     <button
       type="button"
-      className="tool-button"
+      className="tool-button tool-button--small"
       aria-label="Copy entity ID"
       title="Copy entity ID"
       onClick={() => {
@@ -199,39 +257,56 @@ function shortType(type: string) {
   return type.replace(/^incant\./, '');
 }
 
+/** A path that may wrap after each "/" rather than mid-name; the text is unchanged. */
+function breakAfterSlashes(text: string) {
+  const parts = text.split('/');
+  return parts.map((part, index) => (
+    <Fragment key={index}>
+      {part}
+      {index < parts.length - 1 ? (
+        <>
+          /<wbr />
+        </>
+      ) : null}
+    </Fragment>
+  ));
+}
+
 function ComponentSection({
   entity,
   component,
   schema,
   diagnostics,
+  refs,
 }: {
   entity: string;
   component: ComponentValue;
   schema: ComponentSchema | undefined;
   diagnostics: readonly Diagnostic[];
+  refs: ReferenceResolver;
 }) {
   const [open, setOpen] = useState(true);
   const bodyId = `component-${entity}-${component.type}`.replace(/[^A-Za-z0-9_-]/g, '_');
   const errors = diagnostics.filter((d) => d.severity === 'error').length;
   const warnings = diagnostics.filter((d) => d.severity === 'warning').length;
   const keys = schema ? orderedKeys(schema) : [];
+  const title = componentTitle(component.type, schema?.title);
+  const typeId = `${bodyId}-type`;
+  const ctx: FieldContext = { entity, component: component.type, diagnostics, value: component.value, depth: 0, refs };
   return (
-    <section className="component" aria-label={schema?.title ?? component.type}>
+    <section className="component" aria-label={title} aria-describedby={typeId}>
       <h3 className="component__heading">
         <button
           type="button"
           className="component__toggle"
           aria-expanded={open}
           aria-controls={bodyId}
+          title={title === component.type ? title : `${title} (${component.type})`}
           onClick={() => setOpen(!open)}
         >
           <Icon name="chevron" size={12} className={`component__chevron${open ? ' is-open' : ''}`} />
-          <span className="component__title">{schema?.title ?? shortType(component.type)}</span>
-          {(schema?.title ?? shortType(component.type)) !== component.type ? (
-            <span className="component__type mono" title={component.type}>
-              {component.type}
-            </span>
-          ) : null}
+          <Icon name={schema ? componentIcon(component.type) : 'component'} size={14} className="component__icon" />
+          <span className="component__title">{title}</span>
           {errors ? (
             <span className="badge badge--error">
               <Icon name="error" size={12} />
@@ -248,6 +323,9 @@ function ComponentSection({
           ) : null}
         </button>
       </h3>
+      <span id={typeId} className="visually-hidden">
+        Component type {component.type}
+      </span>
       {open ? (
         <div className="component__body" id={bodyId}>
           {!schema ? (
@@ -270,14 +348,7 @@ function ComponentSection({
                 const rows = section.keys.map((key) => {
                   const field = schema.properties[key];
                   return field ? (
-                    <FieldView
-                      key={key}
-                      name={key}
-                      schema={field}
-                      value={component.value[key]}
-                      path={[key]}
-                      ctx={{ entity, component: component.type, diagnostics, value: component.value }}
-                    />
+                    <FieldView key={key} name={key} schema={field} value={component.value[key]} path={[key]} ctx={ctx} />
                   ) : null;
                 });
                 if (section.title === null) return <Fragment key={`section-${index}`}>{rows}</Fragment>;

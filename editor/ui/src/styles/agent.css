@@ -1,0 +1,298 @@
+/*
+ * Agent pane under the Inspector. Its header is a disclosure: collapsed, the pane is
+ * one 36 px line with the agent's status; open and unable to run, it is one short
+ * note with the next step; open and ready, it is the transcript and the composer.
+ */
+
+.panel--agent {
+  border-top: 1px solid var(--color-border);
+}
+
+/* A resizable pane has the separator above it already. */
+.splitter + .panel--agent {
+  border-top: 0;
+}
+
+.agent__header {
+  padding: 0 var(--space-3) 0 6px;
+  border-bottom: 0;
+}
+
+.agent__heading {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font: inherit;
+}
+
+.agent__toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 30px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-text-muted);
+  text-align: left;
+  cursor: pointer;
+}
+
+.agent__toggle:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.agent__toggle:focus-visible,
+.agent__toggle[data-focus-visible] {
+  outline-offset: -2px;
+}
+
+.agent__chevron {
+  color: var(--color-text-subtle);
+  transition: transform var(--duration-fast);
+}
+
+.agent__chevron.is-open {
+  transform: rotate(90deg);
+}
+
+.agent__mark {
+  display: grid;
+  place-items: center;
+  color: var(--color-accent);
+  --wisp-eye: var(--color-bg-side);
+}
+
+.agent__title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+}
+
+.agent__status {
+  min-width: 0;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.agent__status::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--color-text-subtle);
+}
+
+.agent__status--ok::before {
+  background: var(--color-success);
+  box-shadow: none;
+}
+
+.agent__status--pending::before {
+  box-shadow: inset 0 0 0 1.5px var(--color-warning);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.agent__status--error {
+  color: var(--color-danger);
+}
+
+.agent__status--error::before {
+  background: var(--color-danger);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent__status--pending::before {
+    animation: none;
+  }
+}
+
+.agent__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Unable to run: one short note and its next step. Long host reasons scroll here. */
+.agent-note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-height: 34vh;
+  padding: var(--space-1) var(--space-4) var(--space-4);
+  overflow: auto;
+}
+
+.agent-note__title {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.agent-note__body {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 17px;
+  overflow-wrap: anywhere;
+}
+
+.agent-note__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+/* Ready: transcript and composer. */
+.agent__transcript {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  container: agent-transcript / size;
+}
+
+.agent__transcript:focus-visible,
+.agent__transcript[data-focus-visible] {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+.agent-empty {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: 34ch;
+  padding: var(--space-4) var(--space-5);
+  text-align: center;
+}
+
+.agent-empty__mark {
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--space-2);
+  color: var(--color-accent);
+  --wisp-eye: var(--color-bg-side);
+}
+
+.agent-empty__title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.agent-empty__body {
+  color: var(--color-text-muted);
+  line-height: 19px;
+}
+
+/* A short pane drops the mark and sets the text smaller, so it stays above the composer. */
+@container agent-transcript (max-height: 140px) {
+  .agent-empty {
+    gap: 0;
+    max-width: none;
+    padding: 6px var(--space-5);
+  }
+
+  .agent-empty__mark {
+    display: none;
+  }
+
+  .agent-empty__title {
+    font-size: var(--text-sm);
+    line-height: 18px;
+  }
+
+  .agent-empty__body {
+    font-size: var(--text-xs);
+    line-height: var(--leading-tight);
+  }
+}
+
+.composer {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0 var(--space-4) var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-well);
+  transition: border-color var(--duration-fast);
+}
+
+.composer:focus-within {
+  border-color: var(--color-border-control);
+}
+
+.composer.is-disabled {
+  background: color-mix(in srgb, var(--color-bg-well) 50%, var(--color-bg-side));
+}
+
+.composer__input {
+  resize: none;
+  padding: 10px var(--space-4) 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: var(--text-md);
+  line-height: var(--leading);
+  outline: none;
+}
+
+.composer__input:disabled {
+  color: var(--color-text-subtle);
+  cursor: not-allowed;
+}
+
+.composer__input::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.composer__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) 6px 6px 6px;
+}
+
+.composer__hint {
+  padding-left: 6px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.send-button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  cursor: pointer;
+}
+
+.send-button[aria-disabled='true'] {
+  background: var(--color-bg-raised);
+  color: var(--color-text-subtle);
+  cursor: not-allowed;
+}

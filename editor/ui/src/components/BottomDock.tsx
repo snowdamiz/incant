@@ -133,14 +133,23 @@ function ProblemsList() {
     <ul className="list" aria-label="Problems">
       {sorted.map((d) => {
         const entity = d.entity !== null ? nodes[d.entity] : undefined;
-        const where = [entity?.name, d.component?.replace(/^incant\./, ''), d.path].filter(Boolean).join(' · ');
+        // "Crate 03 · Collider · /shape/half_extents/1": the entity reads as a name, the place in it as code.
+        const place = [d.component?.replace(/^incant\./, ''), d.path].filter(Boolean).join(' · ');
         const content = (
           <>
             <Icon name={SEVERITY_ICON[d.severity]} size={14} className={`sev sev--${d.severity}`} />
             <span className="visually-hidden">{d.severity}: </span>
             <span className="problems__text">
               <span className="list__main">{breakAfterSlashes(d.message)}</span>
-              {where ? <span className="list__meta mono">{breakAfterSlashes(where)}</span> : <span className="list__meta">Project</span>}
+              {entity?.name || place ? (
+                <span className="list__meta">
+                  {entity?.name ? <span className="problems__entity">{entity.name}</span> : null}
+                  {entity?.name && place ? ' · ' : null}
+                  {place ? <span className="problems__where">{breakAfterSlashes(place)}</span> : null}
+                </span>
+              ) : (
+                <span className="list__meta">Project</span>
+              )}
             </span>
           </>
         );

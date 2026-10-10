@@ -44,9 +44,9 @@ describe('readCapabilities', () => {
     expect(caps.unknown).toEqual(['teleport.everything']);
   });
   it('explains why an action is unavailable', () => {
-    expect(unavailableMessage('entity.delete', null)).toMatch(/no engine bridge/);
+    expect(unavailableMessage('entity.delete', null)).toMatch(/no engine is connected/);
     expect(unavailableMessage('entity.delete', createFixtureBridge('sample'))).toMatch(/read-only/);
-    expect(unavailableMessage('entity.delete', fakeBridge(1))).toMatch(/does not support entity\.delete/);
+    expect(unavailableMessage('entity.delete', fakeBridge(1))).toMatch(/^Delete is unavailable in this editor build \(entity\.delete\)\.$/);
   });
 });
 
