@@ -53,12 +53,13 @@ within its documented workload.
 
 ## Active work
 
-- Steering merge remains held: the broad passing rule left 26/100 at goal, and
-  the opposing-only follow-up left 43/100. Near-head-on-only candidate `4c495e9`
-  passes all twelve radial cases and a new numerical port of the unchanged
-  plaza course with all 100 settled. The unchanged public TypeScript plaza also
-  passes: all 100 stay at goal from tick 2212 through 2700 without overlap.
-  Updated Claude review and hosted checks are still required.
+- The near-head-on steering correction passes the unchanged public and rendered
+  plaza course: all 100 walkers stay at goal from tick 2212 through 4990, with
+  no body overlap or persistent orbit. Both repetitions match 803 frames and
+  13 logs. Long lateral sweeps and brief goal-slot jostling remain documented.
+  All 286 Rust, 40 GPU, 315 UI and five tool tests, Clippy, contracts, native
+  packaging and target compilation pass. Final hosted checks remain before
+  merging PR #36. See [steering evidence](docs/spikes/navigation-steering.md).
 
 - Script failures now distinguish bounded initialization/tick JavaScript messages,
   native allocation failures and wall-clock deadlines. Both CLI paths identify
@@ -79,7 +80,9 @@ within its documented workload.
   an ungrounded logical walker 5 cm above a flat platform; exact source heights
   remain open. The steering correction is integrated at `61cf71d`; all 289 Rust
   tests, Clippy, both public saved workflows and native packaging pass again.
-  Updated steering visual review and hosted checks remain pending. See [off-mesh links](docs/spikes/navigation-links.md).
+  At `2568cf5`, all 291 Rust tests, Clippy, both public saved workflows and native
+  packaging pass with the final steering correction, whose rendered review now
+  passes too. Hosted checks and dependency merges remain pending. See [off-mesh links](docs/spikes/navigation-links.md).
 
 - Bounded local avoidance exposes read-only `api.steerAgents` proposals for up
   to 128 agents. Library and public 100-agent save/reopen workflows pass.
