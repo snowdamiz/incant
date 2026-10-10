@@ -5,26 +5,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
-pub struct RayQuery {
-    pub scene_id: String,
+#[schemars(rename = "RayQuery")]
+pub struct RayQuery<I = String> {
+    pub scene_id: I,
     pub origin: [f64; 3],
     /// Normalized by the runtime; a zero vector is rejected.
     pub direction: [f64; 3],
     pub max_distance: f64,
     pub include_sensors: bool,
-    pub exclude_entity: Option<String>,
+    pub exclude_entity: Option<I>,
     pub memberships: u32,
     pub filter: u32,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
-pub struct RayHit {
-    pub entity_id: String,
+#[schemars(rename = "RayHit")]
+pub struct RayHit<I = String> {
+    pub entity_id: I,
     pub distance: f64,
     pub point: [f64; 3],
     pub normal: [f64; 3],
 }
-impl PhysicsRuntime {
-    pub fn raycast(&self, request: &RayQuery) -> Result<Option<RayHit>, PhysicsError> {
+impl<I: Ord + Clone> PhysicsRuntime<I> {
+    pub fn raycast(&self, request: &RayQuery<I>) -> Result<Option<RayHit<I>>, PhysicsError> {
         if self.failed {
             return Err(PhysicsError::NumericRange);
         }

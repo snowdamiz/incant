@@ -3,9 +3,7 @@ use incant_types::{Transform, Velocity};
 use std::collections::BTreeMap;
 use thiserror::Error;
 
-/// The canonical 128 bits of an authored ULID; no string parsing during play.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct StableId(pub [u8; 16]);
+pub use incant_types::StableId;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct CookedEntity {
@@ -22,6 +20,7 @@ pub struct CookedScene {
     pub(crate) id: StableId,
     pub(crate) tick_rate: u32,
     pub(crate) entities: Vec<CookedEntity>,
+    pub(crate) physics: Vec<crate::CookedPhysics>,
     pub(crate) topology: Vec<(usize, Option<usize>)>,
 }
 
@@ -73,7 +72,45 @@ impl CookedScene {
             tick_rate,
             entities,
             topology,
+            physics: Vec::new(),
         })
+    }
+
+    /// Add canonical, bounded physics declarations at the load/cook boundary.
+    /// Existing CookedEntity literals and version-1 scenes remain compatible.
+    pub fn with_physics(
+        mut self,
+        mut physics: Vec<crate::CookedPhysics>,
+    ) -> Result<Self, SceneError> {
+        physics.sort_unstable_by_key(|p| p.entity);
+        if physics.len() > self.entities.len()
+            || physics.windows(2).any(|p| p[0].entity == p[1].entity)
+        {
+            return Err(SceneError::Invalid(
+                "duplicate or excessive physics records",
+            ));
+        }
+        let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
+        let mut size = 72 + self.entities.len() * 128 + 4;
+        for declaration in &mut physics {
+            let entity = entities
+                .get(&declaration.entity)
+                .ok_or(SceneError::Invalid("physics entity reference"))?;
+            declaration.validate(entity)?;
+            if let incant_types::ColliderShape::Compound { parts } = &mut declaration.collider.shape
+            {
+                parts.sort_by(|a, b| a.id.cmp(&b.id));
+            }
+            size += crate::physics_binary::encoded_size(declaration);
+            if size > crate::binary::MAX_SCENE_BYTES {
+                return Err(SceneError::Invalid("file size"));
+            }
+        }
+        self.physics = physics;
+        Ok(self)
+    }
+    pub fn physics(&self) -> &[crate::CookedPhysics] {
+        &self.physics
     }
 
     pub fn id(&self) -> StableId {

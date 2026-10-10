@@ -341,3 +341,64 @@ fn reentrant_getter_cannot_bypass_the_command_limit() {
     ));
     assert_eq!(world.snapshot(), before);
 }
+
+#[test]
+fn physics_domains_and_structural_rejection_restore_all_loans_after_revocation() {
+    use incant_runtime::{CookedEntity, CookedPhysics, CookedScene};
+    use incant_types::{BodyMotion, Collider, RigidBody, Transform};
+    for body in [
+        "for(const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10] = 2000000;",
+        "for(const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10+7] = 2;",
+        &format!(
+            "for(const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10] += 1; commands.setParent('{ONE}','{TWO}');"
+        ),
+        &format!(
+            "for(const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10] += 1; commands.setVelocity('{ONE}',[10001,0,0]);"
+        ),
+        &format!(
+            "for(const c of chunks) for(let i=0;i<c.ids.length;i++) c.transforms[i*10] += 1; commands.setVelocity('{ONE}',null);"
+        ),
+    ] {
+        let scene = CookedScene::new(
+            id(999),
+            60,
+            vec![1, 2]
+                .into_iter()
+                .map(|n| CookedEntity {
+                    id: id(n),
+                    parent: None,
+                    transform: Transform::default(),
+                    velocity: None,
+                })
+                .collect(),
+        )
+        .unwrap()
+        .with_physics(vec![CookedPhysics {
+            entity: id(1),
+            body: Some(RigidBody {
+                motion: BodyMotion::Kinematic,
+                ..Default::default()
+            }),
+            collider: Collider::default(),
+            angular_velocity: None,
+        }])
+        .unwrap();
+        let mut world = NativeWorld::new(scene);
+        let before = world.snapshot();
+        let physics = world.physics_state(id(1));
+        let mut host=ScriptHost::new(code(&format!("globalThis.views=chunks.flatMap(c=>[c.transforms,new DataView(c.transforms.buffer)]);{body}"))).unwrap();
+        assert!(host.tick(&mut world, 1. / 60.).is_err());
+        assert_eq!(world.snapshot(), before);
+        assert_eq!(world.physics_state(id(1)), physics);
+        check(
+            &host,
+            "for(const v of views) if(v.buffer.byteLength!==0) throw Error('live rejected physics loan');",
+        );
+        assert!(matches!(
+            host.tick(&mut world, 1. / 60.),
+            Err(ScriptError::FailedSession)
+        ));
+        world.step().unwrap();
+        assert_eq!(world.physics_state(id(1)), physics);
+    }
+}

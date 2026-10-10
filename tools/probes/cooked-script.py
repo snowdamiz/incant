@@ -29,6 +29,7 @@ def sha(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
+    parser.add_argument('--physics', action='store_true', help='Also cook/run native rigid-body and angular motion fixture')
     suffix = '.exe' if os.name == 'nt' else ''
     parser.add_argument('--headless-binary', type=Path, default=ROOT / f'target/release/incant_headless{suffix}')
     parser.add_argument('--cook-binary', type=Path, default=ROOT / f'target/release/examples/cook_scene{suffix}')
@@ -67,6 +68,36 @@ def main():
         scene = inputs / 'world.scene'
         run([cook, project, scene_id, scene])
         require(before == {path.name: sha(path) for path in (project, journal)}, 'Cook changed authoring')
+        physics_scene = None
+        if args.physics:
+            physics_entities = []
+            for n, position in [(101, [0, -0.5, 0]), (102, [0, 3, 0]), (103, [5, 4, 0])]:
+                spatial = dict(transform, translation=position)
+                collider = {'shape': {'type': 'box', 'half_extents': [20, 0.5, 20] if n == 101 else [0.5, 0.5, 0.5]},
+                            'density': 1000, 'friction': 0.5, 'restitution': 0, 'sensor': False,
+                            'memberships': 4294967295, 'filter': 4294967295}
+                components = {'Transform': spatial, 'Collider': collider}
+                if n != 101:
+                    components['RigidBody'] = {'motion': 'dynamic' if n == 102 else 'kinematic',
+                        'gravity_scale': 1, 'linear_damping': 0, 'angular_damping': 0, 'can_sleep': True, 'ccd': True}
+                if n == 103:
+                    components['Velocity'] = {'linear': [2, 0, 0]}
+                    components['AngularVelocity'] = {'angular': [0, 1, 0]}
+                physics_entities.append({'id': f'{n:026d}', 'name': f'Body {n}', 'parent': None,
+                                         'provenance': None, 'components': components})
+            # Authoring remains an atomic command-bus transaction. The normal
+            # cook command receives the saved document, not handcrafted bytes.
+            commands = [{'op': 'delete_entity', 'scene_id': scene_id, 'entity_id': entity['id']}
+                        for entity in entities]
+            commands += [{'op': 'create_entity', 'scene_id': scene_id, 'entity': entity} for entity in physics_entities]
+            request = [{'id': 3, 'method': 'command.execute', 'params': {
+                'expected_revision': 1, 'description': 'Native physics fixture', 'commands': commands}},
+                {'id': 4, 'method': 'project.save'}]
+            reply = subprocess.check_output([headless, 'rpc', project, '--journal', journal],
+                input=''.join(json.dumps(r) + '\n' for r in request), text=True)
+            require(all('error' not in json.loads(line) for line in reply.splitlines()), 'Physics authoring failed')
+            physics_scene = inputs / 'physics.scene'
+            run([cook, project, scene_id, physics_scene])
         template = (ROOT / 'sdk/templates/native-structural/spawn.ts').read_text()
         sentinel = 'INCANT_SOURCE_ONLY_COMMENT_fbd20c41'
         # This runs as already compiled guest bytecode. Each dynamic source route
@@ -90,6 +121,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
 import type { NativeContext } from '../../ts/src/native';
 let inputTick = 0;
 export default {update(context: NativeContext) {
+    if (context.chunks.some(c => c.ids.includes('00000000000000000000000101'))) return;
     ++inputTick;
     const input = context.input;
     if ('move' in input.actions) {
@@ -129,7 +161,10 @@ export default {update(context: NativeContext) {
             (out / 'build.log').write_text(build.stderr)
             require(build.returncode == 0, f'Shipping script build failed; see {out / "build.log"}')
             flags = {}
-            for crate in ('incant_input', 'incant_runtime', 'incant_script', 'incant_script_player'):
+            checked_crates = ['incant_input', 'incant_runtime', 'incant_script', 'incant_script_player']
+            if args.physics:
+                checked_crates += ['incant_physics_runtime', 'rapier3d']
+            for crate in checked_crates:
                 lines = [line for line in build.stderr.splitlines() if 'Running `' in line
                          and re.search(r'--crate-name ' + crate + r'\b', line) and f'--target {target}' in line]
                 require(len(lines) == 1, f'Missing fresh target compile for {crate}')
@@ -169,6 +204,8 @@ export default {update(context: NativeContext) {
             shutil.copy2(metadata_files[0], out / 'symbols/script-symbols.json')
             shutil.copy2(metadata_files[0].with_name('behavior.js.map'), out / 'symbols/behavior.js.map')
         shutil.copy2(scene, out / 'player/world.scene')
+        if physics_scene is not None:
+            shutil.copy2(physics_scene, out / 'player/physics.scene')
         # These are bounded startup exchange inputs, not cooked binary assets or
         # session saves. Typed packets are retained after one-time decoding.
         clip = {'format': 'incant-input', 'version': 1, 'tick_rate': 60, 'start_tick': 0,
@@ -217,6 +254,27 @@ export default {update(context: NativeContext) {
                     for p in positions[:2]), f'Wrong recorded input movement: {positions}')
         recorded.append({'ticks': ticks, 'entities': expected_count, 'output': first})
     require((out / 'player/world.scene').read_bytes() == original_scene, 'Recorded input changed cooked scene')
+    physics_observations = []
+    if args.physics:
+        physics_bytes = (out / 'player/physics.scene').read_bytes()
+        for ticks in (0, 1, 60, 600):
+            command = [player, 'physics.scene', str(ticks)]
+            first = subprocess.check_output(command, cwd=out / 'player', text=True)
+            second = subprocess.check_output(command, cwd=out / 'player', text=True)
+            require(first == second and first.startswith(f'tick={ticks} entities=3\n'), 'Nonrepeatable native physics')
+            rows = [line for line in first.splitlines() if line.startswith('physics ')]
+            require(len(rows) == 3, 'Missing full typed body-state observations')
+            arrays = [[ast.literal_eval(value) for value in re.findall(r'\[[^\[\]]*\]', line)[1:]] for line in rows]
+            require(arrays[0][0] == [0, -0.5, 0], 'Fixed floor moved')
+            require(abs(arrays[2][0][0] - (5 + ticks * 2 / 60)) < 0.001, 'Kinematic body double-integrated')
+            require(arrays[2][2:] == [[2, 0, 0], [0, 1, 0]], 'Angular/linear state missing')
+            if ticks:
+                require(arrays[1][0][1] < 3, 'Dynamic body did not step')
+                require(arrays[2][1] != [0, 0, 0, 1], 'Angular motion did not step')
+            if ticks == 600:
+                require(abs(arrays[1][0][1] - 0.5) < 0.02 and rows[1].endswith(' true'), 'Collision/sleep missing')
+            physics_observations.append({'ticks': ticks, 'output': first})
+        require((out / 'player/physics.scene').read_bytes() == physics_bytes, 'Runtime changed cooked physics')
     result = {'passed': True, 'target': target, 'compiler': compiler, 'codegen': flags,
               'player_sha256': sha(player), 'player_bytes': player.stat().st_size,
               'symbols': identity, 'script_metadata': metadata, 'authoring_preserved': before,
@@ -225,7 +283,7 @@ export default {update(context: NativeContext) {
               'runtime_exchange_files': ['input.json', 'actions.json'],
               'runtime_source_compiler_symbols_absent': True,
               'dynamic_source_routes_rejected': True, 'observations': observations,
-              'recorded_input_observations': recorded, 'input_exchange_only_at_startup': True,
+              'recorded_input_observations': recorded, 'native_physics_observations': physics_observations, 'input_exchange_only_at_startup': True,
               'scope': 'Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate'}
     (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'passed': True, 'target': target, 'player_bytes': result['player_bytes'], 'evidence': str(out / 'result.json')}))

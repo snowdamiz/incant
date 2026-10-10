@@ -178,7 +178,7 @@ fn unknown_version_flags_and_rehashed_malformed_payloads_fail_closed() {
             1 => scene[88..92].copy_from_slice(&100_u32.to_le_bytes()),
             2 => scene[72..88].copy_from_slice(&id(99).0),
             3 => scene[96..104].copy_from_slice(&f64::NAN.to_le_bytes()),
-            _ => scene[8..12].copy_from_slice(&2_u32.to_le_bytes()),
+            _ => scene[8..12].copy_from_slice(&3_u32.to_le_bytes()),
         }
         rehash(scene, 40, 72);
         rehash(&mut bad, 32, 64);

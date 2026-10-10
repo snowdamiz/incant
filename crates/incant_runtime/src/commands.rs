@@ -1,9 +1,12 @@
 //! Runtime-only structural changes, staged and checked before a sync point.
 //! This is not the authoring command bus: no journal, provenance or JSON path.
+use crate::CookedPhysics;
+use crate::physics::{Binding, Spin};
 use crate::scene::{MAX_ENTITIES, matrix, validate_values};
 use crate::world::{Global, Hierarchy, Local, Motion, spawn};
 use crate::{CookedEntity, NativeWorld, RuntimeError, SceneError, StableId};
-use incant_types::Velocity;
+use incant_physics_runtime::PreparedBody;
+use incant_types::{AngularVelocity, Velocity};
 use std::collections::{BTreeMap, BTreeSet};
 
 pub const MAX_FRAME_COMMANDS: usize = 65_536;
@@ -19,7 +22,21 @@ pub enum StructuralCommand {
         entity: StableId,
         parent: Option<StableId>,
     },
-    /// Adds, replaces or removes the actual Bevy motion component.
+    /// Add/replace/remove a checked physics declaration at this boundary. The
+    /// nested entity ID must match. Removal retains linear motion as an ordinary
+    /// native mover; body installation supplies missing zero motion components.
+    SetPhysics {
+        entity: StableId,
+        physics: Option<CookedPhysics>,
+    },
+    /// Physics angular motion is typed and never included in Transform/Velocity
+    /// foreign numeric buffers. Requires a rigid body; None resets to zero.
+    SetAngularVelocity {
+        entity: StableId,
+        velocity: Option<AngularVelocity>,
+    },
+    /// Adds, replaces or removes the actual Bevy motion component. A rigid body
+    /// requires Velocity; use a zero vector instead of removing it.
     SetVelocity {
         entity: StableId,
         velocity: Option<Velocity>,
@@ -60,6 +77,9 @@ struct Staged {
     removed: BTreeSet<StableId>,
     velocities: BTreeMap<StableId, Option<Velocity>>,
     hierarchy: Vec<crate::hierarchy::Node>,
+    physics: BTreeMap<StableId, Option<CookedPhysics>>,
+    spins: BTreeMap<StableId, Option<AngularVelocity>>,
+    prepared: BTreeMap<StableId, Option<PreparedBody>>,
 }
 
 impl NativeWorld {
@@ -67,32 +87,87 @@ impl NativeWorld {
     /// excludes active native component views and running schedule execution.
     /// Validation reads native values only; it never constructs a Project.
     pub fn apply(&mut self, commands: &mut FrameCommands) -> Result<(), RuntimeError> {
+        self.ensure_usable()?;
         if commands.is_empty() {
             return Ok(());
         }
         // Component-only batches don't copy hierarchy metadata or inspect every
         // entity. In particular, toggling one mover scales with this batch.
-        if commands
-            .iter()
-            .all(|c| matches!(c, StructuralCommand::SetVelocity { .. }))
-        {
+        if commands.iter().all(|c| {
+            matches!(
+                c,
+                StructuralCommand::SetVelocity { .. }
+                    | StructuralCommand::SetAngularVelocity { .. }
+            )
+        }) {
             let mut velocities = BTreeMap::new();
+            let mut spins = BTreeMap::new();
+            let mut touched = BTreeSet::new();
             for command in commands.iter() {
-                let StructuralCommand::SetVelocity { entity, velocity } = command else {
-                    unreachable!()
+                let id = match command {
+                    StructuralCommand::SetVelocity { entity, velocity } => {
+                        validate_velocity(*entity, velocity)?;
+                        velocities.insert(*entity, velocity.clone());
+                        *entity
+                    }
+                    StructuralCommand::SetAngularVelocity { entity, velocity } => {
+                        if let Some(velocity) = velocity {
+                            incant_types::physics_validation::angular(velocity)
+                                .map_err(|_| SceneError::Component(*entity))?;
+                        }
+                        spins.insert(*entity, velocity.clone());
+                        *entity
+                    }
+                    _ => unreachable!(),
                 };
-                if !self.entities.contains_key(entity) {
-                    return Err(RuntimeError::MissingEntity(*entity));
+                if !self.entities.contains_key(&id) {
+                    return Err(RuntimeError::MissingEntity(id));
                 }
-                validate_velocity(*entity, velocity)?;
-                velocities.insert(*entity, velocity.clone());
+                touched.insert(id);
+            }
+            // Resolve all final numeric values before changing a single table.
+            // This work scales with touched IDs, not the world's parent graph.
+            for id in touched {
+                let entity = self.world.entity(self.entities[&id]);
+                let binding = entity.get::<Binding>();
+                let body = binding.and_then(|b| b.body.as_ref());
+                if spins.contains_key(&id) && body.is_none() {
+                    return Err(SceneError::Component(id).into());
+                }
+                if let Some(binding) = binding {
+                    let velocity = velocities
+                        .get(&id)
+                        .map(|v| v.as_ref())
+                        .unwrap_or_else(|| entity.get::<Motion>().map(|v| &v.0));
+                    let spin = spins
+                        .get(&id)
+                        .map(|v| v.as_ref())
+                        .unwrap_or_else(|| entity.get::<Spin>().map(|s| &s.0));
+                    if body.is_some() && velocity.is_none() {
+                        return Err(SceneError::Component(id).into());
+                    }
+                    crate::physics::validate_motion(
+                        id,
+                        self.parents[&id].is_some(),
+                        &entity.get::<Local>().unwrap().0,
+                        velocity,
+                        spin,
+                        binding.body.as_ref(),
+                    )?;
+                }
             }
             self.install_velocities(velocities);
+            for (id, spin) in spins {
+                self.world
+                    .entity_mut(self.entities[&id])
+                    .insert(Spin(spin.unwrap_or(AngularVelocity { angular: [0.; 3] })));
+            }
         } else {
             let staged = self.stage(commands)?;
             // Everything that can reject external data completed above. These
             // handles/IDs are exclusively owned by this world until commit ends.
             for id in staged.removed {
+                self.physics.remove(&self.scene_id(), &id);
                 let entity = self.entities.remove(&id).expect("staged entity");
                 self.world.despawn(entity);
             }
@@ -100,6 +175,28 @@ impl NativeWorld {
                 self.entities.insert(id, spawn(&mut self.world, data));
             }
             self.install_velocities(staged.velocities);
+            for (id, declaration) in staged.physics {
+                if let Some(declaration) = declaration {
+                    self.install_physics(declaration);
+                } else {
+                    self.world
+                        .entity_mut(self.entities[&id])
+                        .remove::<(Binding, Spin)>();
+                }
+            }
+            for (id, spin) in staged.spins {
+                let mut target = self.world.entity_mut(self.entities[&id]);
+                if target.get::<Binding>().is_some_and(|b| b.body.is_some()) {
+                    target.insert(Spin(spin.unwrap_or(AngularVelocity { angular: [0.; 3] })));
+                }
+            }
+            for (id, prepared) in staged.prepared {
+                if let Some(prepared) = prepared {
+                    self.physics.install(self.scene_id(), id, prepared);
+                } else {
+                    self.physics.remove(&self.scene_id(), &id);
+                }
+            }
             let mut hierarchy = Hierarchy {
                 nodes: Vec::with_capacity(staged.hierarchy.len()),
                 globals: Vec::with_capacity(staged.hierarchy.len()),
@@ -139,6 +236,8 @@ impl NativeWorld {
         let mut seen_spawns = BTreeSet::new();
         let mut removed = BTreeSet::new();
         let mut velocities = BTreeMap::new();
+        let mut physics = BTreeMap::new();
+        let mut spins = BTreeMap::new();
         for command in commands.iter() {
             match command {
                 StructuralCommand::Spawn(data) => {
@@ -158,11 +257,38 @@ impl NativeWorld {
                         removed.insert(*id);
                     }
                     velocities.remove(id);
+                    physics.remove(id);
+                    spins.remove(id);
                 }
                 StructuralCommand::SetParent { entity, parent } => {
                     *parents
                         .get_mut(entity)
                         .ok_or(RuntimeError::MissingEntity(*entity))? = *parent;
+                }
+                StructuralCommand::SetPhysics {
+                    entity,
+                    physics: declaration,
+                } => {
+                    if !parents.contains_key(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    if declaration.as_ref().is_some_and(|p| p.entity != *entity) {
+                        return Err(SceneError::Invalid("physics entity reference").into());
+                    }
+                    // Later changes are checked as one final state. No partial
+                    // declaration is installed, and no undo is discarded here.
+                    spins.remove(entity);
+                    physics.insert(*entity, declaration.clone());
+                }
+                StructuralCommand::SetAngularVelocity { entity, velocity } => {
+                    if !parents.contains_key(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    if let Some(velocity) = velocity {
+                        incant_types::physics_validation::angular(velocity)
+                            .map_err(|_| SceneError::Component(*entity))?;
+                    }
+                    spins.insert(*entity, velocity.clone());
                 }
                 StructuralCommand::SetVelocity { entity, velocity } => {
                     if !parents.contains_key(entity) {
@@ -175,6 +301,71 @@ impl NativeWorld {
         }
         if parents.len() > MAX_ENTITIES {
             return Err(SceneError::Invalid("entity limit").into());
+        }
+        let mut prepared = BTreeMap::new();
+        for (&id, parent) in &parents {
+            let live = self
+                .entities
+                .get(&id)
+                .map(|&handle| self.world.entity(handle));
+            let data = spawns.get(&id);
+            let transform = data
+                .map(|e| &e.transform)
+                .unwrap_or_else(|| &live.as_ref().unwrap().get::<Local>().unwrap().0);
+            let velocity = velocities.get(&id).map(|v| v.as_ref()).unwrap_or_else(|| {
+                data.map(|e| e.velocity.as_ref())
+                    .unwrap_or_else(|| live.as_ref().unwrap().get::<Motion>().map(|v| &v.0))
+            });
+            let binding = live.as_ref().and_then(|e| e.get::<Binding>());
+            let changed = physics.get(&id);
+            let body = match changed {
+                Some(Some(p)) => p.body.as_ref(),
+                Some(None) => None,
+                None => binding.and_then(|b| b.body.as_ref()),
+            };
+            let has_physics = changed.map_or(binding.is_some(), |p| p.is_some());
+            let spin = spins
+                .get(&id)
+                .map(|v| v.as_ref())
+                .unwrap_or_else(|| match changed {
+                    Some(Some(p)) => p.angular_velocity.as_ref(),
+                    Some(None) => None,
+                    None => live.as_ref().and_then(|e| e.get::<Spin>()).map(|s| &s.0),
+                });
+            if spins.contains_key(&id) && body.is_none() {
+                return Err(SceneError::Component(id).into());
+            }
+            if has_physics {
+                if body.is_some() && velocities.get(&id).is_some_and(|v| v.is_none()) {
+                    return Err(SceneError::Component(id).into());
+                }
+                crate::scene::validate_components(id, transform, velocity)?;
+                crate::physics::validate_motion(
+                    id,
+                    parent.is_some(),
+                    transform,
+                    velocity,
+                    spin,
+                    body,
+                )?;
+            }
+            if let Some(change) = changed {
+                let value = if let Some(declaration) = change {
+                    let mut declaration = declaration.clone();
+                    declaration.angular_velocity = spin.cloned();
+                    let entity = CookedEntity {
+                        id,
+                        parent: *parent,
+                        transform: transform.clone(),
+                        velocity: velocity.cloned(),
+                    };
+                    declaration.validate(&entity)?;
+                    Some(declaration.prepare(&entity))
+                } else {
+                    None
+                };
+                prepared.insert(id, value);
+            }
         }
         let hierarchy = crate::hierarchy::prepare(&parents, |id| {
             if let Some(data) = spawns.get(&id) {
@@ -195,6 +386,9 @@ impl NativeWorld {
             removed,
             velocities,
             hierarchy,
+            physics,
+            spins,
+            prepared,
         })
     }
 }

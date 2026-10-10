@@ -98,3 +98,41 @@ fn invalid_authoring_and_missing_scene_do_not_produce_bytes() {
     ));
     assert!(stable_id("not-a-ulid").is_err());
 }
+
+#[test]
+fn rigid_body_cook_preserves_full_angular_state_after_project_drop() {
+    let (mut project, scene, entity) = fixture();
+    let components = &mut project
+        .scenes
+        .get_mut(&scene)
+        .unwrap()
+        .entities
+        .get_mut(&entity)
+        .unwrap()
+        .components;
+    components.insert(
+        "RigidBody".into(),
+        serde_json::to_value(incant_doc::RigidBody {
+            motion: incant_doc::BodyMotion::Kinematic,
+            gravity_scale: 0.,
+            ..Default::default()
+        })
+        .unwrap(),
+    );
+    components.insert(
+        "Collider".into(),
+        serde_json::to_value(incant_doc::Collider::default()).unwrap(),
+    );
+    components.insert("AngularVelocity".into(), json!({"angular":[0,1,0]}));
+    let bytes = cook_scene(&project, &scene).unwrap();
+    drop(project);
+    let mut world = NativeWorld::from_bytes(&bytes).unwrap();
+    for _ in 0..60 {
+        world.step().unwrap();
+    }
+    let state = world.physics_state(stable_id(&entity).unwrap()).unwrap();
+    assert!((state.translation[0] - 3.).abs() < 1e-5);
+    assert_eq!(state.velocity, [3., 0., 0.]);
+    assert_eq!(state.angular_velocity, [0., 1., 0.]);
+    assert!((state.rotation[1] - (0.5_f64).sin()).abs() < 1e-5);
+}

@@ -1,7 +1,7 @@
 //! Read-only kinematic movement queries. Applying the result is an ordinary
 //! transform/velocity command owned by the caller, never a second mutation path.
 use crate::{PhysicsError, PhysicsRuntime, groups, vector};
-use incant_doc::BodyMotion;
+use incant_types::BodyMotion;
 use rapier3d::control::{CharacterAutostep, CharacterLength, KinematicCharacterController};
 use rapier3d::prelude::*;
 use schemars::JsonSchema;
@@ -52,10 +52,11 @@ impl Default for CharacterOptions {
 }
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
-pub struct CharacterQuery {
-    pub scene_id: String,
+#[schemars(rename = "CharacterQuery")]
+pub struct CharacterQuery<I = String> {
+    pub scene_id: I,
     /// A nonsensor primitive collider attached to a velocity-kinematic body.
-    pub entity_id: String,
+    pub entity_id: I,
     /// Desired world-space displacement in meters for one fixed tick.
     /// Gravity and jumping are authored by the calling behavior.
     pub translation: [f64; 3],
@@ -63,22 +64,23 @@ pub struct CharacterQuery {
     pub options: CharacterOptions,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
-pub struct CharacterMovement {
+#[schemars(rename = "CharacterMovement")]
+pub struct CharacterMovement<I = String> {
     pub translation: [f64; 3],
     /// Touching a supporting surface; steep/sliding slopes may also be grounded.
     pub grounded: bool,
     /// Moving downward along a contacted slope steeper than the configured limit.
     pub sliding_down_slope: bool,
     /// Stable IDs of colliders encountered during the sweep, sorted and unique.
-    pub collisions: Vec<String>,
+    pub collisions: Vec<I>,
 }
 
-impl PhysicsRuntime {
+impl<I: Ord + Clone> PhysicsRuntime<I> {
     pub fn compute_character_motion(
         &self,
-        request: &CharacterQuery,
+        request: &CharacterQuery<I>,
         dt: f64,
-    ) -> Result<CharacterMovement, PhysicsError> {
+    ) -> Result<CharacterMovement<I>, PhysicsError> {
         if self.failed {
             return Err(PhysicsError::NumericRange);
         }
@@ -113,7 +115,7 @@ impl PhysicsRuntime {
         })?;
         if matches!(
             entry.config.collider.shape,
-            incant_doc::ColliderShape::Compound { .. }
+            incant_types::ColliderShape::Compound { .. }
         ) {
             return Err(PhysicsError::Query(
                 "character body must use a primitive collider; compound obstacles are supported"

@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-10",
+  "status": "passed",
+  "host": "macOS arm64",
+  "scope": "Native cooked 3D rigid-body/collider/angular slice; no physics saves, character/navigation migration, mobile execution or performance/backend adoption gate",
+  "logs": {
+    "scoped_tests": {
+      "local_log": "/tmp/incant-native-physics-final-scoped.log",
+      "sha256": "beba3abedd9b1914a9d3f08f9801cd0208bb8d84e4ad37737d2f948bdf9be539",
+      "status": "passed",
+      "test_suites": 25,
+      "passed": 119,
+      "failed": 0,
+      "ignored": 0
+    },
+    "scoped_clippy": {
+      "local_log": "/tmp/incant-native-physics-final-clippy.log",
+      "sha256": "22b3c237da53a5ce33eddc58921846efd10d3e9cfb87fa491814636af4ad399f",
+      "status": "passed"
+    },
+    "workspace_tests": {
+      "local_log": "/tmp/incant-native-physics-workspace-tests.log",
+      "sha256": "e36814c12471a89a27e87f19861e5de02ad28290f4fa1adb557af8461ba6870d",
+      "status": "passed",
+      "test_suites": 124,
+      "passed": 423,
+      "failed": 0,
+      "ignored": 44
+    },
+    "workspace_clippy": {
+      "local_log": "/tmp/incant-native-physics-workspace-clippy.log",
+      "sha256": "712657160e9c069d841ae78aa12b3cf1c050982f1e4eda71992eef16938218f7",
+      "status": "passed"
+    },
+    "compiler_disabled_clippy": {
+      "local_log": "/tmp/incant-native-physics-no-compiler-clippy.log",
+      "sha256": "0571ca9fe6c8f06609f86cf50bef3b4ad4760f8f63328ce4923078eb38c3c1f4",
+      "status": "passed"
+    },
+    "ui_build": {
+      "local_log": "/tmp/incant-native-physics-ui-build.log",
+      "sha256": "9dd2cc9e01dcf91b9008c4e652513d64c13f343901e66c22836841fdb4882737",
+      "status": "passed"
+    },
+    "release_tools": {
+      "local_log": "/tmp/incant-native-physics-tools-build.log",
+      "sha256": "15d373be47ad080a0d3a21fed8d931dcf5e169236e6807c52be17a2447133595",
+      "status": "passed"
+    },
+    "ios_device_compile": {
+      "local_log": "/tmp/incant-native-physics-ios.log",
+      "sha256": "24654bfba5f1d656f9df5ab39db7566ae5560c7a945889289399ff09e1b52a16",
+      "status": "passed"
+    },
+    "ios_simulator_compile": {
+      "local_log": "/tmp/incant-native-physics-ios-sim.log",
+      "sha256": "9dc6fd75ab10f9178e3eebb4cca252b7b3f7c516b32db6399e9af5373d982ab5",
+      "status": "passed"
+    },
+    "android_compile": {
+      "local_log": "/tmp/incant-native-physics-android.log",
+      "sha256": "f3ef923640ea382a4c8f118b52b784632b2a7c23285d2eb7550bf03c38357049",
+      "status": "passed"
+    },
+    "parity": {
+      "local_log": "/tmp/incant-native-physics-parity-final.log",
+      "sha256": "bfc825900da67a741389900bce832b911b73e948fe412f2a51d199ed2c404a19",
+      "status": "passed"
+    },
+    "shipping": {
+      "local_log": "/tmp/incant-native-physics-shipping-final.log",
+      "sha256": "328e0aa7a36ac93fbd5a51ad40daea09ee9db6d037634dfec4ada4b0cc39c286",
+      "status": "passed"
+    }
+  },
+  "other_checks": {
+    "python_tool_tests": 30,
+    "schema_sdk_bridge_generation": "passed",
+    "strict_sdk_typescript": "passed",
+    "conventions": "passed",
+    "actionlint": "passed",
+    "cargo_fmt_workspace_and_probe": "passed",
+    "runtime_dependency_guard_with_workspace_feature_unification": "passed",
+    "feature_graphs": {
+      "roots": 4,
+      "targets": 7,
+      "pairs": 28
+    }
+  },
+  "shipping_processes": 32,
+  "shipping_baseline_bytes": 2170968,
+  "shipping_player_delta_bytes": 1770848,
+  "size_comparison_scope": "whole fixture/player versus prior numeric-boundary player; not isolated runtime cost or performance measurement",
+  "reports_sha256": {
+    "native-physics-parity-2026-10-10.json": "cd617351c103a1245a31f078dbdd1bdc3c628af0b15505908b4120191e315caa",
+    "native-physics-shipping-2026-10-10.json": "f31373435e2257ecff55f8a35fe03d9a7b25ad49e500d61e48655a69307ab9d7",
+    "native-physics-feature-graphs-2026-10-10.json": "9bbcea44b12d11c1aa555aead706fc6a037edaab066fa92093e70c5483fcf744"
+  },
+  "source_sha256": {
+    "Cargo.lock": "bcfb47a834910c7c20e4dcbedda43f6d5b06bcfc30390aacb3ff7770e99bde98",
+    "Cargo.toml": "7be6a6488246adc98cf84b72212b2479f3ccaa4e9a0a8e3ee40431c64548f29a",
+    "crates/incant_cook/src/scene.rs": "cef9fe20e10cea09b8b083aae35d92a64d2bd5f3b2092ebd98b5c7e3c087ece0",
+    "crates/incant_cook/tests/runtime.rs": "22ffdc199f560ad77a5aca6690543a7a47a9d3c3647084428407ee5d522c4820",
+    "crates/incant_doc/src/lib.rs": "9915ec349ac9ec2997c73eed57e0c7d18363a9d01f79e3f25af94ef2aacc4366",
+    "crates/incant_doc/src/physics.rs": "ae79bb8777f4e03abc441bbe4fd27760a0a000492146a62a82ced08b2bcfc4c5",
+    "crates/incant_physics/Cargo.toml": "59439336a35c4c2853ada5cae9cb197eb5558cb6435e7dd1c06c2b56e5d37fc2",
+    "crates/incant_physics/src/lib.rs": "5fa52ea48230e64f723fe9e5be354d2b450f76cd68042fb19e60347aac00fc26",
+    "crates/incant_physics/tests/facade.rs": "f24dbb52306fdf8c32fed2f17f520f64b14ab9c78dae995e59ca14c17de9f9ab",
+    "crates/incant_physics_runtime/Cargo.toml": "03cbdc41344fade42197ad457b27e00f0f3f537accb7935d77afd52173128885",
+    "crates/incant_physics_runtime/src/character.rs": "a46c7ece3103ce7c8ddbd80d60b1668782028e93c626b655d6f4bab175672a92",
+    "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+    "crates/incant_physics_runtime/src/lib.rs": "6f6195522e75587d678a9e73dc264802d88fd19f8bf02003425c8f5b0dcb506e",
+    "crates/incant_physics_runtime/src/queries.rs": "94e7c8aa5d56977036e4161f8637b5e8221e95312c4df8fe3f9b81b382986668",
+    "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+    "crates/incant_physics_runtime/tests/typed.rs": "99ccbb278d09d655e65c3123efd2c13e12cb112f77a10d666837aa2e9a71e2bb",
+    "crates/incant_runtime/Cargo.toml": "fa06c43719120dc282c59b7ab84ccb0e76d3fcd87c49ff5b41fb24d93cc665ea",
+    "crates/incant_runtime/src/binary.rs": "02f8688a0969606c80aac0a46b35772848dea308f76cd2baa2fba19a483c3fde",
+    "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+    "crates/incant_runtime/src/commands.rs": "cd2bb03392b60f91c459c75da5ff77e9717b5f97e606bbfe3fba94617679082c",
+    "crates/incant_runtime/src/lib.rs": "a88f0754c6ce3af921cb070553e03af8b02383a27b5c37e166ef384ca72bcd4c",
+    "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+    "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+    "crates/incant_runtime/src/save.rs": "f05f56b7833b95050f630209e4f18f063109141d9d109a3b13ba16de3e4a58cb",
+    "crates/incant_runtime/src/scene.rs": "bcd08b83a931615aafde6cef79d80b16f2a717de4e271f96ea4b8ebbc02bd2b8",
+    "crates/incant_runtime/src/world.rs": "4921fc3bdf0f51632f518aeecc6b4916fcf0898a8f9c4bea20a3cc8c90521e05",
+    "crates/incant_runtime/tests/numeric_boundaries.rs": "2d246f6b4bc3a0bb28e0dbeae072b2ad892235aa5f0a30ebb8b462c48d13741f",
+    "crates/incant_runtime/tests/physics.rs": "b3e82a95512235d2bf54c6ce01bb795a81a2ba752176a82d7e3566fe5abece4d",
+    "crates/incant_runtime/tests/saves.rs": "be5a4e056f90574837c83ee8a5fe812267b5ed02198480187dabd4729e5d6458",
+    "crates/incant_runtime/tests/scenes.rs": "b5d870d382843f918c014e218825acac2ae2436bacfa2525a1992de10cf964ba",
+    "crates/incant_script/src/loan.rs": "2ae499a4215bda9bd3192d4bad0bbcf1de292163558e9c8d7c6dc7068716a2ae",
+    "crates/incant_script/src/session_tests.rs": "8c65e0ba4ce7c9a2e1ab7207c869e21f55e822fd3e14cf711513bb2d97de7575",
+    "crates/incant_script/src/structural_tests.rs": "c5c0de0465ad178344571791aa0bd25730272be837d7c314f9cccdd4b3bb787f",
+    "crates/incant_script/src/tests.rs": "e298f443a29a59dd30c3bc8ecc9ec8e9497ceba8f1c413873901463656948b50",
+    "crates/incant_script_player/src/main.rs": "9ee6f5310368f62d558497a5032eaab9232a1e3aac1628fa462e2f644783315b",
+    "crates/incant_types/src/lib.rs": "49094a8f0d5bd4b10ff5194f6adf3a8d297c2532bf067d9df10ec84ff4b5ebe3",
+    "crates/incant_types/src/physics_validation.rs": "c8a2e2e8b77020ea2ae39d047a9be13081003ef6cf236ca292a52aed4f4a3a98",
+    "tools/probes/cooked-script.py": "a5ec3a8af8369dd800581a2034bfe3c80e85b0ee60344ba86d7d2385f55c40e3",
+    "tools/probes/native-physics/.gitignore": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368",
+    "tools/probes/native-physics/Cargo.lock": "2cccf7bc3f0d571712e470fdbc041d594b19a87eebca7cd8df3b4624a5c2488e",
+    "tools/probes/native-physics/Cargo.toml": "2422cfe646cc18cb1b0df4cb1354f1a253f305ada22041b26cfc678aea4c6838",
+    "tools/probes/native-physics/README.md": "24d3b0ab55a308a21d5798dcea45a170e4ce16323eda3690e0cf714fff06521b",
+    "tools/probes/native-physics/browser.mjs": "ca02d571378e7713c792836b87aa5410ba5180f66fdc653eb8afc108947b6792",
+    "tools/probes/native-physics/compare_hosts.py": "a837b19a65c18452bd7ec77bc3dc183732e83d460f3b663f9127853db322a628",
+    "tools/probes/native-physics/run.py": "599772e7b65af1380c8a99c001e3e29a50f65223af1c14428fe4047022300930",
+    "tools/probes/native-physics/src/lib.rs": "854d02f4e233a03b5752f7b300065607e4ad645b43f053ff0067f3e1cc3615ae",
+    "tools/probes/native-physics/src/main.rs": "c53061a63b4b869c8000e915742f6bdf2e588c4e23d9012b04f7ad00fa55e0cf",
+    "tools/probes/physics-parity/features.py": "6fde5c572e6f204f8528773fa97b918bfc7efe198e23ac5173ab9fc3dda0ff1a",
+    "tools/tests/test_native_physics_parity.py": "c354235880ebcaab404cda5628564eca749a173634b4c693b148bbc316b80e93"
+  }
+}
