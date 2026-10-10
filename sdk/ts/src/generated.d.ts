@@ -10,7 +10,9 @@ export namespace CameraSchema {
 export type Camera = CameraSchema.Root;
 
 export namespace ColliderSchema {
-  export type ColliderShape = ({ "half_extents": [number, number, number]; "type": "box" }) | ({ "radius": number; "type": "sphere" }) | ({ "half_height": number; "radius": number; "type": "capsule" });
+  export type ColliderPart = { "id": string; "rotation": [number, number, number, number]; "shape": PrimitiveColliderShape; "translation": [number, number, number] };
+  export type ColliderShape = ({ "half_extents": [number, number, number]; "type": "box" }) | ({ "radius": number; "type": "sphere" }) | ({ "half_height": number; "radius": number; "type": "capsule" }) | ({ "parts": Array<ColliderPart>; "type": "compound" });
+  export type PrimitiveColliderShape = ({ "half_extents": [number, number, number]; "type": "box" }) | ({ "radius": number; "type": "sphere" }) | ({ "half_height": number; "radius": number; "type": "capsule" });
   export type Root = { "density": number; "filter": number; "friction": number; "memberships": number; "restitution": number; "sensor": boolean; "shape": ColliderShape };
 }
 export type Collider = ColliderSchema.Root;

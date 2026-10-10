@@ -86,10 +86,7 @@
     "artifacts/web/pkg/incant_platform_smoke_bg.wasm": "7ee539a674f16e6887d701fb6a10ad59197178ab1264bede930ce8a6ebe79988",
     "artifacts/ios-simulator/IncantSmoke.app/IncantSmoke": "fbb43d236917a6548084eb39966501d60250a6f99e4b55fcc2b0c400113a8095"
   },
-  "pending": [
-    "exact-head hosted checks",
-    "merge"
-  ],
+  "pending": [],
   "not_claimed": [
     "physical-device performance",
     "full physics feature set",
@@ -507,5 +504,76 @@
         }
       ]
     }
+  },
+  "hosted_checks": {
+    "head": "6d5fca09035764d548b08a92ffc0f815ce169fc6",
+    "all_passed": true,
+    "checks": [
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007693158/job/114080281654",
+        "name": "checks",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007695815/job/114080197627",
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007693093/job/114080188874",
+        "name": "storage (macos-latest)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007695815/job/114080197586",
+        "name": "ios",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007693079/job/114080209281",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007693079/job/114080209421",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007695815/job/114080197523",
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007695815/job/114080197660",
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007695815/job/114080197658",
+        "name": "web",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007695815/job/114080197593",
+        "name": "android",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007693093/job/114080188974",
+        "name": "storage (windows-latest)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38007693093/job/114080189046",
+        "name": "storage (ubuntu-latest)",
+        "state": "SUCCESS"
+      }
+    ],
+    "pull_request": 23,
+    "merge_commit": "eb7741973eea3f50c3867b3e554c2c33a33737ab",
+    "merged_at": "2026-10-10T00:41:51Z",
+    "merge_tree_equals_reviewed_head": true,
+    "merge_author_trailer": "Built-by: astra"
   }
 }

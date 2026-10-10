@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- Compound collider foundations support 1–64 stable primitive parts with local
+  offsets/rotations, one parent body and aggregated sensor/hit identity. Atomic
+  edits and recovery, hollow openings, rotated parts, dynamic contacts, stable
+  reordering and continuous character travel pass. The initial tree passes 168
+  Rust and 316 UI tests/build; Claude handoff 0024 will implement the nested-part
+  Inspector and review real motion. Public CLI, integrated native review and
+  hosted checks remain open. See [compound colliders](docs/spikes/compound-colliders.md).
+
 - Read-only character movement queries are implemented on the primitive runtime,
   with script-owned gravity/jumping and Velocity commands. Real motion review
   found walking stalls and a misleading slope flag; numerical face-normal handling
@@ -77,8 +85,8 @@ within its documented workload.
   fewer snapshots reduce paired local 512-body p95 from 9.99 to 8.80 ms, with
   exact final-state equality. Claude handoff 0022 implemented and reviewed the new Inspector
   in browser fixtures and the native app. Shared schemas supply field order and
-  units; WebKit field names and the compact Agent state are fixed. Final hosted
-  checks and merge of PR #23 remain pending. Character controllers, mesh/compound
+  units; WebKit field names and the compact Agent state are fixed. All twelve final-head hosted checks passed and PR #23 merged as `eb77419`.
+  Mesh/compound
   colliders, hierarchy/scale, rollback snapshots and device performance remain
   open. See [runtime evidence](docs/spikes/physics-runtime.md).
 

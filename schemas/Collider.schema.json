@@ -1,6 +1,142 @@
 {
   "$defs": {
+    "ColliderPart": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Stable ULID, unique within this collider, retained when editing a part.",
+          "type": "string"
+        },
+        "rotation": {
+          "description": "Unit quaternion (x, y, z, w), relative to the collider entity.",
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array"
+        },
+        "shape": {
+          "$ref": "#/$defs/PrimitiveColliderShape"
+        },
+        "translation": {
+          "description": "Offset in the collider entity's local frame, in meters.",
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array",
+          "x-incant-unit": "m"
+        }
+      },
+      "required": [
+        "id",
+        "translation",
+        "rotation",
+        "shape"
+      ],
+      "type": "object"
+    },
     "ColliderShape": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "half_extents": {
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array",
+              "x-incant-unit": "m"
+            },
+            "type": {
+              "const": "box",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "half_extents"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "radius": {
+              "format": "double",
+              "type": "number",
+              "x-incant-unit": "m"
+            },
+            "type": {
+              "const": "sphere",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "radius"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Capsule along local Y; half_height excludes the hemispherical ends.",
+          "properties": {
+            "half_height": {
+              "format": "double",
+              "type": "number",
+              "x-incant-unit": "m"
+            },
+            "radius": {
+              "format": "double",
+              "type": "number",
+              "x-incant-unit": "m"
+            },
+            "type": {
+              "const": "capsule",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "half_height",
+            "radius"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "One body and material shared by a bounded union of local primitive parts.",
+          "properties": {
+            "parts": {
+              "items": {
+                "$ref": "#/$defs/ColliderPart"
+              },
+              "maxItems": 64,
+              "minItems": 1,
+              "type": "array"
+            },
+            "type": {
+              "const": "compound",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "parts"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "PrimitiveColliderShape": {
       "oneOf": [
         {
           "additionalProperties": false,

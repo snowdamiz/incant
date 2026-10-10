@@ -1,12 +1,14 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
+mod collider_shapes;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
 mod physics;
+pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
-pub use physics::{AngularVelocity, BodyMotion, Collider, ColliderShape, RigidBody};
+pub use physics::{AngularVelocity, BodyMotion, Collider, RigidBody};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};

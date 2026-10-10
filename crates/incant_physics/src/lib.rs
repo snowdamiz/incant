@@ -3,9 +3,10 @@
 mod character;
 mod character_queries;
 mod queries;
+mod shapes;
 pub use character::{CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep};
 use incant_doc::{
-    AngularVelocity, BodyMotion, Collider as DocCollider, ColliderShape, DocumentError, Project,
+    AngularVelocity, BodyMotion, Collider as DocCollider, DocumentError, Project,
     RigidBody as DocBody, Transform, Velocity,
 };
 pub use queries::{RayHit, RayQuery};
@@ -71,13 +72,19 @@ impl PreparedPhysics {
                 let angular: Option<AngularVelocity> = decode("AngularVelocity")
                     .map(serde_json::from_value)
                     .transpose()?;
+                let mut collider: DocCollider = serde_json::from_value(collider.clone())?;
+                if let incant_doc::ColliderShape::Compound { parts } = &mut collider.shape {
+                    // Reordering the presentation must not rebuild a live body
+                    // and discard its sleep/contact state.
+                    parts.sort_by(|a, b| a.id.cmp(&b.id));
+                }
                 entities.insert(
                     entity.id.clone(),
                     Spec {
                         body: decode("RigidBody")
                             .map(serde_json::from_value)
                             .transpose()?,
-                        collider: serde_json::from_value(collider.clone())?,
+                        collider,
                         state: BodyState {
                             translation: transform.translation,
                             rotation: transform.rotation,
@@ -281,22 +288,13 @@ impl SceneWorld {
         }
     }
     fn insert(&mut self, id: String, spec: Spec) {
-        let shape = match spec.collider.shape {
-            ColliderShape::Box {
-                half_extents: [x, y, z],
-            } => ColliderBuilder::cuboid(x as f32, y as f32, z as f32),
-            ColliderShape::Sphere { radius } => ColliderBuilder::ball(radius as f32),
-            ColliderShape::Capsule {
-                half_height,
-                radius,
-            } => ColliderBuilder::capsule_y(half_height as f32, radius as f32),
-        }
-        .density(spec.collider.density as f32)
-        .friction(spec.collider.friction as f32)
-        .restitution(spec.collider.restitution as f32)
-        .sensor(spec.collider.sensor)
-        .collision_groups(groups(spec.collider.memberships, spec.collider.filter))
-        .active_collision_types(ActiveCollisionTypes::all());
+        let shape = ColliderBuilder::new(shapes::build(&spec.collider.shape))
+            .density(spec.collider.density as f32)
+            .friction(spec.collider.friction as f32)
+            .restitution(spec.collider.restitution as f32)
+            .sensor(spec.collider.sensor)
+            .collision_groups(groups(spec.collider.memberships, spec.collider.filter))
+            .active_collision_types(ActiveCollisionTypes::all());
         let (body, collider) = if let Some(config) = &spec.body {
             let body = match config.motion {
                 BodyMotion::Fixed => RigidBodyBuilder::fixed(),
