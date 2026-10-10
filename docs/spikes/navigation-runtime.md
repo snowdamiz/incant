@@ -74,10 +74,14 @@ keys instead of treating their initial empty values as a new schema.
 
 ## Limits and precision
 
-Pure Rust `rerecast = 0.4.0` supplies voxelization, clearance filters, erosion,
+Pure Rust `rerecast = 0.4.0` with a pinned local raster-clipping patch supplies voxelization, clearance filters, erosion,
 watershed regions, contours, polygons and height detail. `glam = 0.32.1` uses
 libm; workspace feature unification is covered by the renderer/physics regressions.
-No Bevy navigation plugin or alternate physics engine is introduced.
+No Bevy navigation plugin or alternate physics engine is introduced. The vendored
+patch clears stale output counts after a triangle is fully clipped, preventing
+phantom solid spans outside its footprint. Regression tests cover the real capsule
+facets and the restored room floor. Endpoint projection and distance ranking use
+f64 to distinguish neighbouring skinny triangles during centimetre queries.
 
 Each mesh is bounded to 256 tiles, 32768 source triangles/98304 vertices, 32768
 polygons and 262144 detail triangles. Tile sides are 16/32/64/128 cells; horizontal
@@ -96,8 +100,11 @@ voxels can conservatively reject narrow passages: a 1.1 m doorway with 0.4 m
 radius fails at 0.1 m cells and passes at 0.05 m cells. Detail sampling is one
 cell with a quarter-cell height error. Heights describe the quantized navigation
 surface; physics owns grounding. Rendered review still measures step smearing
-and local floor bumps, so query heights must not be treated as exact source mesh
-geometry.
+and local floor bumps. V8 measured a worst 6.9 cm undershoot over a 28 cm segment
+at a true step discontinuity: interpolation between low and high samples can
+lie below source geometry. The quarter-cell sampling error is not a guaranteed
+bound everywhere between samples. Query heights must not be used as exact
+source-mesh placement; source-conforming detail is a quality follow-up.
 
 ## Verification and measured scope
 
@@ -119,11 +126,22 @@ Undo/Redo and invalid rollback, deletes the source file, then runs a strict TS
 character around a wall and replans after a room edit. Repeated gameplay and
 save/resume agree exactly in this local fixture.
 
-The measured small desktop fixture has one-tile rebuild p95 0.168 ms and path
-p95 0.004 ms. A sixteen-tile fixture rebuilding four affected tiles has rebuild
-p95 0.726 ms and path p95 0.007 ms. Each uses 100 samples after 20 warmups on this
+The measured small desktop fixture has one-tile rebuild p95 0.194 ms and path
+p95 0.043 ms. A sixteen-tile fixture rebuilding four affected tiles has rebuild
+p95 0.803 ms and path p95 0.044 ms. Each uses 100 samples after 20 warmups on this
 arm64 Mac; these are workload measurements, not maximum-scene guarantees. The
 one-tile-under-2-ms mobile gate and hundred-agent steering gate remain open.
 The six-platform probe now performs a real collider bake and incremental rebuild;
 local macOS execution passes, while WASM/iOS compilation is recorded separately.
-Claude's actual rendered motion review and new hosted checks are pending.
+Claude's v3–v8 rendered reviews found the corner clearance, detour, phantom
+floor and endpoint-selection issues that drove the corrections above. The v8
+shared-edge failure now uses f64 geometric arithmetic and a coordinate-scaled f32
+boundary tolerance instead of a fixed fraction of a short segment. All 7,056
+local polygon and 34,932 room-wide short-query regressions pass. Current source
+passes 276 Rust tests, 40 GPU tests, 315 UI tests, five tool tests, strict SDK and
+generation checks, Clippy, native packaging and WASM/iOS compilation. The final v9 review found no query failures across both full-room passes and
+2,904 additional boundary queries. Both 600-tick repetitions matched all 726
+frames and logs; the character stayed grounded and arrived at tick 563. The
+reported duplicate first point was a rounded-log interpretation error: the raw
+points are 0.523 mm apart. All twelve hosted checks passed on d7517b0; the final
+review/evidence commit will run the same checks before merging.
