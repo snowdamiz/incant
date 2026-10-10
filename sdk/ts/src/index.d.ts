@@ -9,6 +9,8 @@ export interface Entity {
   readonly components: Readonly<Record<string, Json>>;
 }
 export type { Command } from './generated';
+/** Host-managed save envelope; scripts do not receive filesystem access. */
+export type { GameSave } from './generated';
 import type { Command } from './generated';
 export type { PhysicsRayQuery as RayQuery, PhysicsRayHit as RayHit, PhysicsTriggerEvent as TriggerEvent } from './generated';
 import type { PhysicsRayQuery as RayQuery, PhysicsRayHit as RayHit, PhysicsTriggerEvent as TriggerEvent } from './generated';
@@ -30,6 +32,8 @@ export interface ScriptApi {
   log(message: string, level?: 'debug' | 'info' | 'warn' | 'error'): void;
 }
 export interface Behavior<State extends Record<string, Json>> {
+  /** Keep durable gameplay data here. Save/load preserves this JSON state;
+   * module globals, closures, pending logs and physics contacts are rebuilt. */
   initialState: State;
   update(api: ScriptApi, dt: number, state: State): void;
 }

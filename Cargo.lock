@@ -3328,8 +3328,10 @@ dependencies = [
  "incant_core",
  "incant_doc",
  "rquickjs",
+ "schemars 1.2.2",
  "serde",
  "serde_json",
+ "sha2 0.10.9",
  "thiserror 2.0.21",
 ]
 

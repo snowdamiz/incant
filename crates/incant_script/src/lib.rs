@@ -1,6 +1,10 @@
 //! QuickJS sandbox for SWC-compiled TypeScript. No OS, filesystem, module loader,
 //! network, native plugins or shell are installed into the runtime.
 mod logs;
+mod play;
+mod saves;
+pub use play::PlaySession;
+pub use saves::{GameSave, MAX_SAVE_BYTES, SaveError};
 mod queries;
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::Origin;
@@ -25,6 +29,8 @@ pub enum ScriptError {
     Command(#[from] CommandError),
     #[error(transparent)]
     Physics(#[from] incant_core::PhysicsError),
+    #[error("play session failed; restart or restore a saved game before continuing")]
+    FailedSession,
     #[error("script input exceeds configured limit")]
     InputLimit,
     #[error("script logs exceed the message, tick or pending-output limit")]
@@ -33,95 +39,6 @@ pub enum ScriptError {
     Document(#[from] incant_doc::DocumentError),
 }
 
-/// A disposable play session. ECS query results enter the same validated runtime
-/// command bus before scripts read them; the author's document never changes.
-pub struct PlaySession {
-    pub host: ScriptHost,
-    bus: CommandBus,
-    engine: incant_core::Engine,
-    dt: f64,
-}
-impl PlaySession {
-    pub fn new(project: &incant_doc::Project, compiled_source: &str) -> Result<Self, ScriptError> {
-        let engine = incant_core::Engine::new(project)?;
-        let mut host = ScriptHost::new(compiled_source)?;
-        host.raycaster = Some(Arc::new(engine.raycaster()));
-        host.character_mover = Some(Arc::new(engine.character_mover()));
-        host.install_queries()?;
-        Ok(Self {
-            host,
-            bus: CommandBus::simulation(project.clone())?,
-            engine,
-            dt: 1. / f64::from(project.settings.tick_rate),
-        })
-    }
-    pub fn project(&self) -> &incant_doc::Project {
-        self.bus.project()
-    }
-    pub fn snapshot(&mut self) -> incant_core::RuntimeSnapshot {
-        self.engine.snapshot()
-    }
-    pub fn tick(&mut self) -> Result<usize, ScriptError> {
-        self.engine.step()?;
-        let mut commands = Vec::new();
-        let snapshot = self.engine.snapshot();
-        for runtime in snapshot.entities.values() {
-            let entity = &self.bus.project().scenes[&runtime.scene_id].entities[&runtime.id];
-            if let Some(value) = entity.components.get("Transform") {
-                let mut transform: incant_doc::Transform = serde_json::from_value(value.clone())?;
-                if transform.translation != runtime.translation
-                    || transform.rotation != runtime.rotation
-                {
-                    transform.translation = runtime.translation;
-                    transform.rotation = runtime.rotation;
-                    commands.push(Command::SetComponent {
-                        scene_id: runtime.scene_id.clone(),
-                        entity_id: runtime.id.clone(),
-                        component: "Transform".into(),
-                        value: serde_json::to_value(transform)?,
-                    });
-                }
-            }
-            if entity.components.contains_key("RigidBody") {
-                for (name, value) in [
-                    ("Velocity", serde_json::json!({"linear": runtime.velocity})),
-                    (
-                        "AngularVelocity",
-                        serde_json::json!({"angular": runtime.angular_velocity}),
-                    ),
-                ] {
-                    if entity.components.get(name) != Some(&value) {
-                        commands.push(Command::SetComponent {
-                            scene_id: runtime.scene_id.clone(),
-                            entity_id: runtime.id.clone(),
-                            component: name.into(),
-                            value,
-                        });
-                    }
-                }
-            }
-        }
-        if !commands.is_empty() {
-            self.bus.execute(
-                commands,
-                Actor {
-                    origin: Origin::Script,
-                    actor: "bevy-simulation".into(),
-                    model: None,
-                    conversation_id: None,
-                },
-                "Simulation tick",
-                None,
-            )?;
-        }
-        let events = snapshot.trigger_events;
-        let count = self
-            .host
-            .tick_with_events(&mut self.bus, self.dt, &events)?;
-        self.engine.sync(self.bus.project())?;
-        Ok(count)
-    }
-}
 #[derive(Deserialize)]
 struct TickResult {
     state: Value,
@@ -129,6 +46,7 @@ struct TickResult {
     logs: Vec<ScriptLog>,
 }
 pub struct ScriptHost {
+    source_sha256: String,
     raycaster: Option<Raycaster>,
     character_mover: Option<CharacterMover>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
@@ -203,6 +121,7 @@ impl ScriptHost {
             return Err(ScriptError::InputLimit);
         }
         let mut host = Self {
+            source_sha256: saves::hash(compiled_source.as_bytes()),
             raycaster: None,
             character_mover: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
