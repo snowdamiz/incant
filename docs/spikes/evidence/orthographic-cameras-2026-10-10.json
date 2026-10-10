@@ -21,7 +21,7 @@
     "rendering_or_device_gate": false
   },
   "remaining": [
-    "Native and portable target builds",
+    "Native build with final Claude Camera Inspector",
     "Claude engine/Inspector rendered review"
   ],
   "limits": [
@@ -42,5 +42,9 @@
     "binary_sha256": "ce79c966d5d4264482829904c0fb9158f244b61fb7ae1dac1c8150c521a4d2ff",
     "rendering_or_device_gate": false
   },
-  "binary_capture_note": "The preceding Cargo GPU test command rebuilt the headless executable. This final SHA was frozen after Cargo stopped, and the public workflow passed again against that exact copy."
+  "binary_capture_note": "The preceding Cargo GPU test command rebuilt the headless executable. This final SHA was frozen after Cargo stopped, and the public workflow passed again against that exact copy.",
+  "target_compilation": {
+    "wasm32-unknown-unknown": "pass",
+    "aarch64-apple-ios-sim": "pass"
+  }
 }

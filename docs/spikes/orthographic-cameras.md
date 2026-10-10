@@ -28,7 +28,8 @@ cameras, ordinary projection commands, a mid-run save/reopen, exact final/repeat
 runtime/script state and unchanged authored files. The remaining three editor/headless GPU tests also pass (44 total). The final
 headless executable was frozen after Cargo finished and the public workflow
 passed again against that exact copy. Native/target builds and Claude visual
-review remain in progress.
+review remain in progress. WASM and iOS-simulator core compilation pass; these
+are compilation checks, not live device or browser-renderer acceptance.
 
 This is a projection foundation. Pixel-perfect snapping, sprites, tilemaps and
 2D physics are not supplied by this increment. No device or phase gate is claimed.
