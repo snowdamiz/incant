@@ -1,3 +1,32 @@
+## Priority revision 2: connected visibility repair (2026-10-10)
+
+Astra has added bounded line-of-sight corridor repair at source 4aee4ce. Every
+shortcut traverses real connected polygon portals and restores height detail;
+it uses only the visit budget remaining after A*. An independent Dijkstra
+oracle still verifies initial A* cost. Tests show detour reduction and exact
+fallback when smoothing has no visit allowance. 64 rotated-wall combinations
+(four radii, four cell sizes, four angles) pass the configured-radius check.
+
+Please run a final v6 and exact repeat with the new verified binary. Inspect
+whether the 1.14 m tile-boundary detour disappears; quantify any remaining one.
+Review actual clearance, motion, grounding and arrival. Keep v5 as history.
+Do not re-author cameras to hide defects. The same scene/marker coverage is useful.
+
+The erosion safety margin remains, since reverting it reproduced radius clips
+even with zero contour simplification. This makes configured radius a minimum
+clearance, at the cost of conservative passage loss at coarse voxel resolution.
+A new Rust fixture explicitly demonstrates the 1.1 m doorway fails at 0.1 m
+cells and passes at 0.05 m cells with the same 0.4 m radius. Add the same finer-
+resolution comparison to the doorway sweep if useful; keep actual results and
+state the resolution tradeoff clearly. This is not a claim that every geometric
+fit is discovered. Exact-clearance navmesh construction remains a potential
+quality improvement, not a reason to weaken radius protection. No separate
+director approval is required for these routine implementation decisions.
+
+Quantized heights and remaining step smearing stay explicit. This review must
+not call those exact geometry or mark the phase complete. Report any new actual
+navigation failure to Astra. Source metadata and SHA are in binary.json.
+
 ## Priority revision: review clearance and detail refinement (2026-10-10)
 
 Continue the same visual review after Astra's correctness changes at 141a835.
