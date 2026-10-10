@@ -69,6 +69,7 @@ describe("native bridge", () => {
   it('retains property defaults across local references and unions without authoring them', () => {
     const current = read();
     current.schemas.Camera = {
+      required: [],
       properties: {
         projection: { $ref: '#/$defs/Projection', default: { kind: 'perspective' } },
         enabled: { $ref: '#/$defs/Enabled', default: false },
