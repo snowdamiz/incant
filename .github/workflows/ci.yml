@@ -28,6 +28,7 @@ jobs:
       - run: npm run test --workspace editor/ui
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - run: cargo check -p incant_audio --features device --locked
       - run: cargo test --workspace --release --locked
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.
@@ -43,6 +44,7 @@ jobs:
       - run: python3 tools/probes/character-movement.py artifacts/character-movement-cli
       - run: python3 tools/probes/game-saves.py artifacts/game-saves-cli
       - run: python3 tools/probes/game-input.py artifacts/game-input-cli
+      - run: python3 tools/probes/game-audio.py artifacts/game-audio-cli
       - run: python3 tools/probes/game-timers.py artifacts/game-timers-cli
       - run: python3 tools/probes/game-actions.py artifacts/game-actions-cli
       - run: node tools/generate_sdk.mjs --check

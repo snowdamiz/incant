@@ -93,3 +93,14 @@ device routing, pointer/wheel action sources, touch regions/virtual controls,
 haptics and the graphical binding editor remain open.
 
 Machine-readable evidence: [input-actions-2026-10-10.json](evidence/input-actions-2026-10-10.json).
+
+## Audio and timer integration
+
+The input actions are integrated with audio PR #29 at `de83a4e` and the merged
+script timers. All 232 Rust tests, 315 UI tests/build, five tool tests, Clippy,
+generated contracts, strict TypeScript and native release packaging pass. Public
+action, audio, timer, save and input/character probes all pass on the same binary
+`13ca77af2288ead996b1481f4d9c3fddf4774bd82d103eb3841db44079107725`.
+This includes saved runtime rebinding and timer-controlled audio resume after
+a process restart. Updated hosted checks and the audio dependency merge remain
+pending. No native app, device playback or local capture was used.

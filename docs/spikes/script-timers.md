@@ -87,3 +87,9 @@ Machine-readable results are in
 The director's computer-use/capture pause remains active; this
 increment needs no visual changes. Source and desktop CI run the same public
 probe, with hosted rendering checks unchanged.
+
+## Hosted integration
+
+All three hosted checks passed at `54f85a1`: source run 38021712982 and
+Windows/Linux desktop run 38021713409. PR #31 merged as `93bc5ed`; its tree
+`80d409788e696a56ecbeab886f2597e7407c2cac` exactly matches the reviewed head.

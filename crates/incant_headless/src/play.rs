@@ -48,6 +48,11 @@ pub struct Options {
     /// New JSONL file for committed script logs; does not require GPU captures.
     #[arg(long)]
     pub log_output: Option<PathBuf>,
+    /// New stereo float WAV file mixed offline; never opens an audio device.
+    #[arg(long)]
+    pub audio_output: Option<PathBuf>,
+    #[arg(long, default_value_t = 48000, value_parser = clap::value_parser!(u32).range(8000..=192000))]
+    pub audio_rate: u32,
     /// Capture the initial/final state and every N fixed ticks in between.
     #[arg(long, default_value_t = 60, value_parser = clap::value_parser!(u64).range(1..))]
     pub capture_every: u64,
@@ -69,6 +74,12 @@ pub enum PlayError {
     LogOutputConflict,
     #[error("save output conflicts with a reserved frame, report or log filename")]
     SaveOutputConflict,
+    #[error("audio output conflicts with a reserved frame, report, save or log filename")]
+    AudioOutputConflict,
+    #[error("audio export exceeds 256 MiB or its fixed-tick sample budget")]
+    AudioBudget,
+    #[error(transparent)]
+    Audio(#[from] incant_audio::AudioError),
     #[error("compiled script exceeds 1,000,000 bytes")]
     ScriptSize,
     #[error(transparent)]
@@ -112,6 +123,8 @@ pub struct Report {
     state: incant_core::RuntimeSnapshot,
     script_state: serde_json::Value,
     input: incant_input::InputFrame,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    audio: Option<super::play_audio::Report>,
     frames: Vec<Frame>,
     logs: Vec<super::play_logs::Entry>,
     adapter: Option<String>,
@@ -195,6 +208,26 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         }
         fs::create_dir(output)?;
     }
+    let mut audio = options
+        .audio_output
+        .as_deref()
+        .map(|path| {
+            let snapshot = play.snapshot();
+            super::play_audio::Output::new(
+                path,
+                play.project(),
+                &snapshot,
+                &assets,
+                options.audio_rate,
+                count,
+                [
+                    options.output.as_deref(),
+                    options.save_output.as_deref(),
+                    options.log_output.as_deref(),
+                ],
+            )
+        })
+        .transpose()?;
     let save_output = options
         .save_output
         .as_deref()
@@ -227,6 +260,13 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
     for tick in 0..=count {
         if tick != 0 {
             commands += play.tick()?;
+            if let Some(audio) = &mut audio {
+                assets
+                    .sync_project(play.project(), root)
+                    .map_err(|e| PlayError::Load(e.to_string()))?;
+                let snapshot = play.snapshot();
+                audio.tick(tick, play.project(), &snapshot, &assets)?;
+            }
             let entries = play.host.take_logs();
             if !entries.is_empty() {
                 let snapshot = play.snapshot();
@@ -279,6 +319,7 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         state: play.snapshot(),
         script_state: play.host.state().clone(),
         input: play.input().clone(),
+        audio: audio.map(super::play_audio::Output::finish).transpose()?,
         frames,
         logs: logs.finish()?,
         adapter: renderer.as_ref().map(|r| r.adapter_name.clone()),

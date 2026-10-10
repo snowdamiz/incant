@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "gain_db": {
+      "format": "float",
+      "maximum": 24,
+      "minimum": -80,
+      "type": "number"
+    },
+    "parent": {
+      "description": "Parent AudioBus entity ID, or the main output when absent.",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "gain_db"
+  ],
+  "title": "AudioBus",
+  "type": "object"
+}

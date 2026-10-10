@@ -118,5 +118,48 @@
     "No graphical binding editor, haptics, player auto-routing, chords or contexts yet.",
     "Rebinding baselines held controls and emits no synthetic edges; gameplay flows must reset their own dependent state.",
     "CPU-only measurements exclude complete-game cost and reference-device gates."
-  ]
+  ],
+  "audio_timer_integration": {
+    "audio_revision": "de83a4e10b3f6a2215cf5149d897e652ffe0ba7f",
+    "timer_merge": "93bc5ede02d612a362ec952a6cfc7595b9de5aab",
+    "rust_tests_passed": 232,
+    "ui_tests_passed": 315,
+    "python_tool_tests_passed": 5,
+    "workspace_clippy": "pass",
+    "ui_build": "pass",
+    "generated_contracts": "pass",
+    "strict_typescript": "pass",
+    "native_release_build_package": "pass",
+    "public_actions_probe": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "steps": [
+        7,
+        13
+      ],
+      "atomic_command_undo_redo": true,
+      "runtime_rebind_saved": true,
+      "full_state_equal": true,
+      "continued_logs_equal": true,
+      "subtick_taps": true,
+      "alternative_bindings_do_not_repeat_presses": true,
+      "touch_gesture_binding": true,
+      "author_files_unchanged": {
+        "game.incant.json": "145f412de69755f243e3cefa31c5354f4099cf33b7506eb8394f78d527c9cc1e",
+        "history.jsonl": "2d6b2ecbb17fd703e71ba3787b5286c7ee334ec4b784b55c5c03b68c9c74f063",
+        "input.json": "4b9ba5d9049d38db47ee22a49a0ed851b4e6718ecf384c5350d036e0ee3d6a6e"
+      },
+      "final_position": [
+        0.275,
+        0.0,
+        0.3
+      ],
+      "binary_sha256": "13ca77af2288ead996b1481f4d9c3fddf4774bd82d103eb3841db44079107725"
+    },
+    "public_audio_timer_save_input_regressions": "pass",
+    "computer_use": false,
+    "local_capture": false,
+    "native_app_opened": false
+  }
 }

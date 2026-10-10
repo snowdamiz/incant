@@ -2,8 +2,8 @@
 //! before publication so a missing or corrupt replacement leaves the running
 //! project intact. This store never imports sources or changes project documents.
 use crate::{
-    AssetError, CacheKind, CookedModel, CookedTexture, load_model, load_texture,
-    project_cache_directory,
+    AssetError, CacheKind, CookedAudio, CookedModel, CookedTexture, load_audio, load_model,
+    load_texture, project_cache_directory,
 };
 use incant_doc::{Asset, AssetImportSettings, Project, TextureUsage};
 use serde::Serialize;
@@ -32,11 +32,13 @@ pub enum RuntimeAssetError {
 pub enum RuntimeAssetData {
     Model(CookedModel),
     Texture(CookedTexture),
+    Audio(Arc<CookedAudio>),
 }
 impl RuntimeAssetData {
     /// Decoded vertex/index/mip payload, excluding Rust metadata and allocator
-    /// overhead. Staged replacements and externally retained versions add to the
-    /// process peak; this is a published-set budget, not a process-memory ceiling.
+    /// overhead. Audio counts its manifest; PCM stays in a validated file and
+    /// mixer/decoder buffers have separate bounds. Staged replacements and
+    /// retained versions add to the process peak, outside this published-set cap.
     fn payload_bytes(&self) -> usize {
         match self {
             Self::Model(model) => {
@@ -56,6 +58,7 @@ impl RuntimeAssetData {
                         .sum::<usize>()
             }
             Self::Texture(texture) => texture.texture.levels.iter().map(Vec::len).sum(),
+            Self::Audio(audio) => audio.resident_bytes(),
         }
     }
 }
@@ -133,7 +136,7 @@ impl AssetStore {
             .map(|(id, asset)| (id.clone(), asset.info.clone()))
             .collect()
     }
-    /// Load models from `cache/models` and textures from `cache/textures`. All
+    /// Load models, textures and audio from their respective cache directories. All
     /// dependencies are cooked; source files are neither needed nor consulted.
     /// A failed batch publishes no changes and consumes no generation numbers.
     pub fn sync(
@@ -229,6 +232,7 @@ fn category(asset: &Asset) -> crate::Result<CacheKind> {
     match asset.kind.as_str() {
         "model" => Ok(CacheKind::Models),
         "texture" => Ok(CacheKind::Textures),
+        "audio" => Ok(CacheKind::Audio),
         kind => Err(AssetError::Unsupported(format!(
             "runtime asset kind {kind}"
         ))),
@@ -246,6 +250,9 @@ fn usage(asset: &Asset) -> Option<TextureUsage> {
 fn load(asset: &Asset, cache: &Path) -> crate::Result<RuntimeAssetData> {
     match asset.kind.as_str() {
         "model" => load_model(cache, &asset.sha256).map(RuntimeAssetData::Model),
+        "audio" => {
+            load_audio(cache, &asset.sha256).map(|audio| RuntimeAssetData::Audio(Arc::new(audio)))
+        }
         "texture" => {
             let texture = load_texture(cache, &asset.sha256)?;
             if Some(texture.metadata.usage) != usage(asset) {

@@ -61,8 +61,24 @@ within its documented workload.
   public probe verifies Undo/Redo, invalid rollback, exact saved rebinding and
   expected movement; existing save/input/timer probes pass. Local input-only p95
   is 0.0025 ms for the typical workload and 2.8033 ms at the configured maximum.
-  Hosted checks, device adapters, haptics and the graphical binding editor remain
-  open. See [input actions](docs/spikes/input-actions.md).
+  Integration with audio and merged timers passes 232 Rust tests, the five public
+  gameplay probes, contracts, Clippy and native packaging. Updated hosted checks,
+  device adapters, haptics and the graphical binding editor remain open.
+  See [input actions](docs/spikes/input-actions.md).
+
+- Cooked WAV/OGG audio, typed sources/buses/listeners, Kira mixing/spatialization,
+  bounded native/offline streaming and script-driven WAV export are implemented.
+  The public import/RPC/strict-TypeScript probe works after deleting source files;
+  repeated PCM is exact, pause is silent and bus attenuation matches expected
+  levels. Twenty new tests bring the distinct passing Rust total to 215; Clippy,
+  315 UI tests/build, five tool tests, generated contracts and native packaging
+  pass. macOS/iOS device-backend and WASM compilation pass. All twelve hosted
+  checks passed at `246a380`, including the Windows retained-reader repair test.
+  Integration with merged timers passes 224 Rust tests, the combined public audio
+  and saved-timer probe, contracts, Clippy, UI checks and native packaging. Updated
+  hosted checks and merge remain pending. Native controls/playback, browser resources, hardware,
+  lifecycle/latency and mixer save cursors remain open. No device playback or local
+  capture occurred. See [audio runtime](docs/spikes/audio-runtime.md).
 
 - Fixed-tick script timers, repeat/cancel/replace, copied payloads and a saved
   game clock are implemented. Version 2 game saves preserve pending deadlines
@@ -70,7 +86,9 @@ within its documented workload.
   test pass; a strict TypeScript public-CLI probe preserves callbacks, command
   effects and log continuity across process restarts. All 204 distinct Rust tests,
   315 UI tests/build, five tool tests, Clippy, generated contracts and the native
-  build/package pass locally. Hosted validation is pending. Coroutines remain open; Promise/generator behavior
+  build/package pass locally. All three hosted checks passed at `54f85a1`;
+  PR #31 merged as `93bc5ed` with the reviewed tree unchanged. Coroutines remain
+  open; Promise/generator behavior
   callbacks now fail explicitly before commit. See [timers](docs/spikes/script-timers.md).
 
 - Headless `play --assertions FILE` evaluates bounded data-only checks over
@@ -80,7 +98,8 @@ within its documented workload.
   movement/jumping/landing assertions, intentional failure, numeric equivalence,
   missing/null data, invalid plans and bounded output. All 195 Rust, 315 UI and
   five tool tests, Clippy, generated contracts and the native build/package pass.
-  Hosted checks and the GPU diagnostic-report extension remain pending; local
+  All three hosted checks, including GPU diagnostic-report retention, passed at
+  `7379f9c`; PR #28 merged as `734d008` with the reviewed tree unchanged. Local
   capture stays paused. See [gameplay assertions](docs/spikes/play-assertions.md).
 
 - Shared fixed-tick keyboard/mouse/gamepad/touch processing, sandbox `api.input()`
@@ -90,8 +109,9 @@ within its documented workload.
   and resumes a mid-jump save with exact final state/logs and unchanged authored
   files. All 190 Rust, 315 UI and five tool tests pass, along with Clippy, generated
   contracts and the native build/package. macOS normalized-input smoke execution
-  passes; hosted checks and merge are pending. Action mapping is implemented in
-  the increment above; live OS/browser adapters and physical-device verification
+  passes. All twelve hosted checks passed at `0021738`; PR #27 merged as `72fb2bd`
+  with the reviewed tree unchanged. Action mapping is implemented in the
+  increment above; live OS/browser adapters and physical-device verification
   remain open. No computer use or local
   captures occurred. See [game input](docs/spikes/game-input.md).
 
@@ -399,8 +419,10 @@ director decisions and human-owned production prerequisites remain explicit.
 The director paused computer use and screen capture again on 2026-10-09. No new
 native/browser operations or captures are authorized while that pause remains.
 Code, numerical replay, unit tests and hosted build/test work continue.
-Compound-collider PR #25 is a separate draft pending its final native appearance
-review; it is not part of the game-save baseline yet.
+Compound-collider PR #25 remains a separate draft at `18e3406`. All twelve hosted
+checks pass. Claude still needs to review the native Inspector at normal and
+minimum widths, including the 64-part case; this is paused under the current
+screen-work instruction. The compound changes have not merged into main.
 
 ## External prerequisites still required
 
