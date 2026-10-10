@@ -48,12 +48,17 @@ packed pixel rectangle; a failed nine-slice after frame lookup identifies the
 entity and texture without publishing a replacement scene. Its retained-scene
 regression and the ordinary-texture shrink regression both pass.
 
-The integrated branch passes workspace Clippy, 330 Rust tests across 106 suites,
-and all 54 explicit GPU checks (including six sprite checks). The shader's
-separate magnification regression, identified by Claude's subsequent review of
-the shared sprite path, is still being corrected on the sprite branch. These
-passing tests do not override that rendered evidence; atlas acceptance remains
-open until the correction and scoped atlas rendered review are integrated.
+Before the magnification follow-up, the integrated branch passed workspace
+Clippy, 330 Rust tests across 106 suites, and all 54 explicit GPU checks
+(including six sprite checks). The subsequent magnification correction is now
+integrated as `7fe87ef`: the tie tolerance scales with the signed derivative to
+remain fixed in screen pixels. All seven affected sprite/atlas GPU tests pass,
+including the new 70-case magnification sweep, the 48 orientation/scale/sheet
+cases and retained atlas-frame behavior. The focused command was
+`./tools/cargo test -j2 -p incant_render --release --locked --test model_gpu sprites -- --ignored --test-threads=1`.
+Its log is `/tmp/incant-atlas-magnification-integrated-gpu-r2.log`.
+Claude's independent correction review and scoped atlas rendered acceptance
+remain open; passing numerical tests do not replace that evidence.
 Logs: `/tmp/incant-atlas-integrated-tests.log`,
 `/tmp/incant-atlas-integrated-clippy-r3.log`, and
 `/tmp/incant-atlas-integrated-all-gpu.log`.
