@@ -65,6 +65,15 @@ within its documented workload.
   for this slice and device/performance gates remain open. See
   [native physics evidence](docs/spikes/native-physics-runtime.md).
 
+- Cooked PCM loading and Kira mixing now live in authoring-free runtime crates;
+  legacy import/gameplay adapters retain their existing public behavior. All 412
+  release workspace tests and Clippy pass. A fresh 585,072-byte shipping audio
+  executable passes 64 source-free process checks across static/streaming modes,
+  playback rates and render batch sizes, with matching symbols and no authoring
+  code compiled into its dependency graph. Native ECS audio integration, device
+  playback, lifecycle, browser resources and phone gates remain open. See
+  [cooked audio boundary](docs/spikes/cooked-audio-boundary.md).
+
 - Native numeric publication now rejects finite-value integration/hierarchy
   overflow before advancing live world state. Script loans revoke views before
   the same hierarchy check and restore all numeric writes on failure. Four
@@ -90,6 +99,19 @@ within its documented workload.
   gameplay and device/performance gates stay open. The integrated cooked/save
   union passes 98 scoped tests, 28 tool tests and the fresh 24-process proof;
   hosted checks are pending. See [native input evidence](docs/spikes/native-input-session.md).
+
+- PR #51 is merged after nine passing checks and verified tested-tree identity.
+  Its real shared-cache Windows critical path was 21m19s plus 1s queue, 38%
+  below the cold PR #49 sample; feature/dependency changes remain explicit.
+  All native ordinary tests and 44 exact GPU names per host passed. All 12 Rust
+  cache families remain covered within the observed 9.134 GiB inventory.
+  Further Windows compilation/link attribution and conservative docs/UI path
+  selection remain open; see [warm evidence](docs/spikes/ci-build-performance.md#completed-warm-pr-51).
+
+- Pinned web/Android tool reuse is locally verified: isolated exact-version
+  executable caches, normal install fallback, and default-branch-only saves.
+  Hosted restoration/sizes remain pending; engine/GPU/credential/shipping
+  coverage stays intact. See [tool reuse evidence](docs/spikes/ci-pinned-platform-tools.md).
 
 - Main cache seeding is verified across all 12 Rust jobs after PR #49: the shared
   set uses 7.807 GiB and the retained inventory 8.929 GiB after exact obsolete

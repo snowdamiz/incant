@@ -222,7 +222,7 @@ with matched dSYM UUID `df418244-4bfe-3281-9421-e4ae3a5b6051`.
 separately from both earlier proofs. Raw output:
 `artifacts/cooked-script-safe-undo-verified/`; logs:
 `/tmp/incant-cooked-safe-undo-{tests,clippy,no-compiler,shipping}.log`.
-At this historical checkpoint the huge-finite simulation/hierarchy limitation remained open.
+The huge-finite simulation/hierarchy limitation remained open at this checkpoint.
 
 
 ### Main50 and native-save integration (publication tree)
@@ -263,7 +263,9 @@ rejection and existing-save protection after scene/authoring deletion;
 This proves only the documented native world save slice, not VM/input/session
 restoration. Raw outputs remain under the two artifact paths above; logs are
 `/tmp/incant-cooked-union-{tests,clippy,no-compiler,shipping,save-build,saves,tools}.log`.
-At this historical union, previously listed export/device/performance and huge-finite hierarchy limits remained unchanged.
+At that checkpoint all previously listed export/device/performance and huge-finite
+hierarchy limits remained unchanged. The later numerical-boundary follow-up below
+closes the latter without changing these historical results.
 
 The later [numerical-boundary follow-up](native-numeric-boundaries.md) closes the
 huge-finite simulation/hierarchy limitation for native steps and script loans.

@@ -150,3 +150,24 @@ The current rollout recovers explicit misses without reducing coverage. Future
 warm evidence must name actual restored keys and distinguish prefix reuse from
 exact hits, changed dependency/features, queue time and execution. Reference-phone,
 mobile execution and phase gates are unaffected.
+
+
+## Main50 generation replacement and first warm PR
+
+All six new main50 general/desktop/credential producer jobs restored the prior
+main49 prefix and succeeded. Each new exact-key cache was independently checked
+against its completed save step and API key/version/size before removing only
+the superseded old generation. Six obsolete entries totaling 5,316,930,141 bytes
+were removed; all unrelated/current entries survived each deletion. The final
+observed inventory is 28 entries, 9,807,465,275 bytes (9.134 GiB), covering all
+12 Rust producer families. Six platform families retain their successful main49
+generation; there was no duplicate platform dispatch. Exact IDs and replacement
+keys are in [retention evidence](evidence/shared-cache-retention-main50-2026-10-10.json).
+
+PR51 then proved nine actual shared-cache restores with no PR writes. Its longest
+check was Windows at 21m19s execution plus 1s queue, versus cold PR49's 34m21s.
+The inherited parallel-physics feature/lock delta is explicit in the
+[warm report](ci-build-performance.md#completed-warm-pr-51); producer timings are
+not substituted for PR merge latency. Filtered producers can still leave a
+source-only PR cold after long idle eviction. Preserve finite producer recovery
+and avoid replacing current-family caches with obsolete duplicate generations.
