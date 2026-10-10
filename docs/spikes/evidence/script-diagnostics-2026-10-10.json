@@ -98,5 +98,54 @@
     "50 ms wall-clock deadline remains sensitive to host sleep and CPU contention",
     "No source-mapped stack traces"
   ],
-  "phase_gate_approved": false
+  "phase_gate_approved": false,
+  "head_on_integration": {
+    "source_commit": "bb8b5977876e088fe16a2065d0d1a11b27f71dc8",
+    "rust_tests": 296,
+    "clippy": true,
+    "native_package": true,
+    "headless_sha256": "9bcd667ea472b62727f74152cca5c8a101a0159ac12f1e788fdd946e76ff4c54",
+    "native_sha256": "aee111a987428990c1e93b6a55b215ed0078a2bcaefa5e64000d9622545fd1f9",
+    "public_links": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_commands": true,
+      "durable_undo_redo": true,
+      "invalid_cost_rollback": true,
+      "explicit_link_traversal": true,
+      "one_way_reverse_null": true,
+      "save_in_flight_exact": true,
+      "repeat_exact": true,
+      "mid_link_progress": 0.30555555555555564,
+      "author_files_unchanged": {
+        "game.incant.json": "563f35df519a724f0394085bba0e3efd0866e22855736d95dc51181c08429131",
+        "game.incant.journal.jsonl": "73e1f465d1499c298c88f134d90c75e1ec9fbd195dcdba9d9f254b2f4ae5cbb2"
+      },
+      "binary_sha256": "9bcd667ea472b62727f74152cca5c8a101a0159ac12f1e788fdd946e76ff4c54",
+      "physics_or_visual_gate": false
+    },
+    "public_steering": {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6157673834154757,
+        "neighbors": 17,
+        "remaining": 6.208589198944098e-11,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "cb85c7eeac55552736a00ba5d9a3972e07b31c93112900b4638398c8170b442a",
+        "game.incant.journal.jsonl": "e8b72fe412d272c017c77585304f3e13a954f53ab7d9a20be36e5bc4fd97ee8e"
+      },
+      "binary_sha256": "9bcd667ea472b62727f74152cca5c8a101a0159ac12f1e788fdd946e76ff4c54",
+      "rendering_or_physics_collision_gate": false
+    },
+    "awaiting": [
+      "final steering rendered review",
+      "hosted checks and dependency merge"
+    ]
+  }
 }

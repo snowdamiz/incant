@@ -53,6 +53,13 @@ within its documented workload.
 
 ## Active work
 
+- Steering merge remains held: the broad passing rule left 26/100 at goal, and
+  the opposing-only follow-up left 43/100. Near-head-on-only candidate `4c495e9`
+  passes all twelve radial cases and a new numerical port of the unchanged
+  plaza course with all 100 settled. The unchanged public TypeScript plaza also
+  passes: all 100 stay at goal from tick 2212 through 2700 without overlap.
+  Updated Claude review and hosted checks are still required.
+
 - Script CPU accounting is being verified separately from diagnostics PR #38.
   Initialization/tick budgets now use the executing thread's CPU time, excluding
   host pauses and other threads. Real waiting/CPU-exhaustion tests, VM interrupts,
@@ -93,7 +100,9 @@ within its documented workload.
   SDK checks, native packaging and WASM/iOS compilation. PR #36 Linux CI exposed
   a symmetric-crowd arrival failure while eleven other checks passed. A consistent
   passing preference now passes twelve rotated/staggered cases locally; full
-  revalidation and updated rendered review are in progress. See [steering evidence](docs/spikes/navigation-steering.md).
+  revalidation found a rendered regression: only 26/100 at goal after 2700 ticks.
+  The refined candidate applies the preference only to opposing traffic; the
+  original plaza must pass again before merge despite green hosted checks. See [steering evidence](docs/spikes/navigation-steering.md).
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
   with funnel smoothing and connected visibility repair. Claude's rendered

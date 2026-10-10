@@ -1,0 +1,178 @@
+{
+ "ticks": 2700,
+ "runs": [
+  [
+   "logs",
+   "none",
+   "1"
+  ],
+  [
+   "overview",
+   "overview",
+   "25"
+  ],
+  [
+   "plan",
+   "plan",
+   "25"
+  ]
+ ],
+ "windows": [
+  [
+   "plinth-a",
+   "plinth",
+   "300",
+   "240",
+   "2"
+  ],
+  [
+   "plinth-b",
+   "plinth",
+   "540",
+   "480",
+   "4"
+  ],
+  [
+   "crossing",
+   "crossing",
+   "300",
+   "240",
+   "2"
+  ],
+  [
+   "gantry",
+   "gantry",
+   "100",
+   "240",
+   "2"
+  ],
+  [
+   "endpoint",
+   "endpoint",
+   "1000",
+   "1600",
+   "16"
+  ]
+ ],
+ "binary_sha256": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+ "plays": [
+  {
+   "name": "logs",
+   "ticks": 2700,
+   "every": 1,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": null
+  },
+  {
+   "name": "overview",
+   "ticks": 2700,
+   "every": 25,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": null
+  },
+  {
+   "name": "plan",
+   "ticks": 2700,
+   "every": 25,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": null
+  },
+  {
+   "name": "plinth-a.prefix",
+   "ticks": 300,
+   "every": 1,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": null
+  },
+  {
+   "name": "plinth-a",
+   "ticks": 240,
+   "every": 2,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": "plinth-a.start.save.json"
+  },
+  {
+   "name": "plinth-b.prefix",
+   "ticks": 540,
+   "every": 1,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": null
+  },
+  {
+   "name": "plinth-b",
+   "ticks": 480,
+   "every": 4,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": "plinth-b.start.save.json"
+  },
+  {
+   "name": "crossing.prefix",
+   "ticks": 300,
+   "every": 1,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": null
+  },
+  {
+   "name": "crossing",
+   "ticks": 240,
+   "every": 2,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": "crossing.start.save.json"
+  },
+  {
+   "name": "gantry.prefix",
+   "ticks": 100,
+   "every": 1,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": null
+  },
+  {
+   "name": "gantry",
+   "ticks": 240,
+   "every": 2,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": "gantry.start.save.json"
+  },
+  {
+   "name": "endpoint.prefix",
+   "ticks": 1000,
+   "every": 1,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": null
+  },
+  {
+   "name": "endpoint",
+   "ticks": 1600,
+   "every": 16,
+   "binary_before": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "binary_after": "2c21c3171a59f62b571d3e26957c6faba9d0a5c97b552b0da749d7a223a6374e",
+   "failed_attempts": [],
+   "load": "endpoint.start.save.json"
+  }
+ ],
+ "project_entities": 1304
+}
