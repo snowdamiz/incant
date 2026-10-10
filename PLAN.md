@@ -1,9 +1,9 @@
 # AI-Native Game Engine: Start-to-Finish Plan
 
 Engine name: **Incant** (decided 2026-10-08; the shortlist it was chosen from is in Appendix D).
-Launch game: **Driftwake** (decided 2026-10-10, subject to trademark clearance; fallback names in decision 7).
+Launch game: **Driftwake** (decided 2026-10-10).
 
-Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role.
+Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role. Revision 6 (2026-10-10): removed name clearance and package reservations, moved store accounts and signing certificates from Phase 0 to Phase 5 store uploads, and replaced reference-phone purchases with hosted real devices in AWS Device Farm.
 Planning horizon: 36 months, starting November 2026, ending with a shipped game in Q4 2029.
 
 ---
@@ -47,6 +47,14 @@ Director decision, 2026-10-10 (second): resolve every open decision with
 engineering judgment so the plan leaves nothing to decide. Section 12 records each
 decision and the human-owned actions that remain. Recording a decision does not
 approve a phase gate or perform any human-owned action.
+
+Director decision, 2026-10-10 (third): remove three requirements so the plan
+continues without them. Name clearance, domain registration and package-name
+reservations are not required. Store developer accounts and signing certificates
+are not Phase 0 requirements; they are first needed when Phase 5 uploads builds to
+stores. Incant buys no reference phones: device measurements run on hosted real
+devices in AWS Device Farm, which re-signs iOS test builds with its own
+certificates, so no Apple developer account is needed for them.
 
 Director decision, 2026-10-10: use Claude Opus 5.5 with thinking explicitly set
 to Max for all visual handoffs. Verify model and effort on every new or resumed
@@ -113,7 +121,7 @@ The project is done when all of the following are true:
 | Game transport | QUIC via quinn (TLS 1.3, reliable streams, unreliable datagrams, connection migration); WebRTC data channels in browsers | Encrypted and NAT-friendly by default, one code path for reliable and unreliable traffic, survives Wi-Fi to cellular switches | Custom UDP reliability layer over a Noise handshake |
 | Online game services | Rust (axum) plus Postgres: sessions and matchmaking, relay, player identity and cloud saves, dedicated-server allocator; shipped as self-hostable containers | Same stack as accounts; "multiplayer in the box" that Driftwake dogfoods; no third-party runtime dependency | Epic Online Services, Nakama or PlayFab behind the platform-services abstraction |
 | Asset generation | Pluggable providers (image, 3D, audio, animation) | Models change every six months | None |
-| CI/CD | GitHub Actions, self-hosted macOS and Windows runners, device farm | Required for six targets | Buildkite |
+| CI/CD | GitHub Actions, self-hosted macOS and Windows runners, hosted real devices in AWS Device Farm | Required for six targets; real phones without buying or maintaining a device lab | Buildkite; Firebase Test Lab for devices |
 
 Revision 3 added the game transport and online game services rows, decided as decisions 11 and 12. Every row is decided by the director's 2026-10-10 instruction and recorded in its ADR; Phase 0 gate approval remains a separate director action.
 
@@ -344,7 +352,7 @@ Repository files that make this work:
 - Astra uses the director's OpenAI account through Codex.
 - Claude uses the director's logged-in Claude Code session. Nothing is stored server-side or in CI.
 - CI never calls either agent. CI runs builds, tests, golden images, device farm, and the in-engine agent eval harness. The eval harness uses dedicated eval provider keys from the CI secrets store, and those keys are only ever used by the eval harness.
-- Human-only: Apple, Google, and Steam developer accounts, signing keys, payment setup, legal filings, age rating submissions, cloud provider accounts and billing for live services, DDoS protection contracts, legal review of the privacy policy, age gates and account deletion flows, vendor SDK license agreements (for example NVIDIA DLSS and Intel XeSS), purchase of reference devices for performance CI, external review contracts, store pricing, and accountability for the on-call rotation.
+- Human-only: Apple, Google, and Steam developer accounts, signing keys, payment setup, legal filings, age rating submissions, cloud provider accounts and billing for live services, DDoS protection contracts, legal review of the privacy policy, age gates and account deletion flows, vendor SDK license agreements (for example NVIDIA DLSS and Intel XeSS), external review contracts, store pricing, and accountability for the on-call rotation.
 
 ### 4.5 Human team
 
@@ -380,7 +388,7 @@ Baseline (revision 3, 2026-10-09): the dates in the phase headings and in 5.1 ar
 
 | Phase | Baseline window | Actual start | Status on 2026-10-09 |
 |---|---|---|---|
-| 0 | Nov 2026 to Jan 2027 | 2026-10-08 | Spikes done; gate open: signing certificates, staffing, nightly history, live revocation, director approval |
+| 0 | Nov 2026 to Jan 2027 | 2026-10-08 | Spikes done; gate open: staffing, nightly history, live revocation, director approval |
 | 1 | Feb to Sep 2027 | 2026-10-08 | In progress: import and cook pipeline, physics, character movement, input, saves and headless assertions landed |
 | 2 to 9 | As listed below | Not started | Re-baseline at the Phase 1 gate review |
 
@@ -396,7 +404,7 @@ Deliverables:
 - Spike 4: Agent loop against OpenAI with three tools (query scene, patch scene, screenshot) performing a ten-step edit on a sample scene. Measure success rate on twenty scripted tasks.
 - Spike 5: OAuth loopback flow with OpenAI on all three desktop OSes, plus API-key fallback, with keychain storage.
 - Spike 6: Handoff tooling. Astra opens an ACP session to Claude Code using the director's logged-in account, hands off a mock visual task (design the hierarchy panel and return screenshots), and receives the result packet. `AGENTS.md`, `CLAUDE.md`, and `tools/handoff` exist and are used for every spike after this one.
-- Monorepo, CI on all six targets building a hello-world, signing certificates obtained for Apple and Windows.
+- Monorepo and CI on all six targets building a hello-world. Signing certificates and store developer accounts are not Phase 0 requirements (director decision, 2026-10-10); Phase 5 needs them for store uploads.
 - Director, part-time graphics reviewer, and contract arrangements in place for Year 1.
 
 Exit gate:
@@ -530,12 +538,13 @@ Deliverables:
 - Profile-guided optimization of the runtime from recorded Core Sample and Driftwake runs on each platform, plus per-platform CPU targets with a baseline fallback.
 - Mobile: touch input layer, safe-area handling, orientation, app lifecycle, battery-aware frame pacing, thermal throttling response, on-device texture compression tiers (ASTC, ETC2).
 - Desktop: Steam integration (achievements, cloud saves, overlay, input), window management, display modes.
-- Steam Deck as a verified-compatibility target: controller glyphs, 1280 by 800 default, on-screen keyboard, suspend and resume, no external launcher; one Deck in the device farm.
+- Steam Deck as a verified-compatibility target: controller glyphs, 1280 by 800 default, on-screen keyboard, suspend and resume, no external launcher; checked in Linux CI at the Deck's resolution and input profile, then confirmed through Valve's Deck Verified review.
 - Video playback through platform decoders (AVFoundation, Media Foundation, MediaCodec, browser video) for WebM/VP9 and MP4/H.264, rendered to a UI texture, with a software VP9 fallback on Linux; for in-game trailers, tutorials and pre-rendered cutscenes.
 - Consoles (Nintendo Switch, PlayStation, Xbox) are out of scope for Engine 1.0 and the Driftwake launch. The export pipeline keeps its platform abstraction so a console port is a 1.x decision; it needs NDA SDKs and developer accounts that only the human team can obtain.
 - Platform services abstraction: achievements, leaderboards, cloud save (Steam Cloud, iCloud and Google Play Saved Games as store-native mirrors; cross-store sync arrives with the Phase 6 player service), IAP (hooks only, not a store), platform friends and invites.
 - Crash reporting and symbolication for all targets.
-- Device farm in CI: ten physical devices across iOS and Android, nightly smoke tests.
+- Device farm in CI: ten hosted real devices across iOS and Android in AWS Device Farm, nightly smoke tests. No devices are bought.
+- Store accounts and signing in place before the first uploads: Apple, Google and Steam developer accounts, and Apple and Windows signing certificates (human-owned).
 - Build size and startup time budgets enforced in CI.
 - Native shipped builds contain precompiled script bytecode and per-backend shaders; no TypeScript, JavaScript source or WGSL is parsed on device. Web exports are the explicit exception: they contain build-transpiled JavaScript for the browser host and WGSL for WebGPU, with compilation and pipeline pre-warming during loading. Pipeline permutation lists are recorded for every level and checked for coverage in CI.
 
@@ -860,7 +869,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 
 - **CI on every commit:** build all crates, unit tests, schema validation, TS SDK conformance, the runtime dependency test, and a dependency license check (cargo-deny and an npm license checker against an allowlist) that regenerates THIRD_PARTY_NOTICES.md.
 - **Performance gates on every PR touching runtime crates:** a Core Sample run in the shipping profile on a reference desktop and a reference phone, failing on frame-time, script-time or memory regressions over 5 percent, with Tracy captures attached to the PR.
-- **Nightly:** full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles, determinism checksum comparison across reference device classes, script time budget and shader-hitch checks on the reference phones. Until the Phase 5 device farm exists, these run on the two Phase 1 reference phones; buying them is a human-owned purchase.
+- **Nightly:** full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles, determinism checksum comparison across reference device classes, script time budget and shader-hitch checks on the reference phones. These run on hosted real devices in AWS Device Farm, using the reference models or the nearest available ones; Incant buys no phones.
 - **Weekly:** store-submission dry run on one platform in rotation, security dependency audit, crash report triage, service load test in one region, backup restore check.
 - **Release trains:** engine beta releases every two weeks during Phase 8; game builds to internal QA daily.
 - **Bug priority:** P0 (data loss, crash on launch, credential exposure), P1 (blocks a workflow), P2 (workaround exists), P3 (cosmetic). P0 and P1 block releases.
@@ -966,7 +975,7 @@ Foundation (originally due in Phase 0):
 4. **On-disk format:** canonical typed JSON with derived JSON Schemas (ADR 0008).
 5. **Browser mode:** in 1.0, with a defined scope: open and edit projects, write TypeScript, run the agent, play-test in the browser and export web builds. Rust module compilation, native plugins, native-platform export and file access beyond the File System Access API are desktop-only; prebuilt WebAssembly modules load in the browser. Browsers without WebGPU get a clear unsupported message (ADR 0009).
 6. **Engine license and business model:** open source under MIT OR Apache-2.0, royalty-free, repository public at the Phase 8 beta, revenue from Incant Cloud and Driftwake (Section 1.4).
-7. **Names:** the engine is Incant (decided 2026-10-08). The game is Driftwake. If trademark clearance fails, the game becomes Hollowtide, then Ebbfall, in that order, without reopening this decision.
+7. **Names:** the engine is Incant (decided 2026-10-08). The game is Driftwake. No trademark clearance, domain registration or package-name reservation is required.
 8. **Codex execution mode:** both. The Codex CLI on the director's machine handles work that needs local hardware (macOS and iOS builds, the GPU, the simulator, ACP handoffs) and integration; cloud tasks take parallel crate work that needs only Linux and CI. The work queue lives in the repository so either mode can resume it.
 9. **Approval modes:** settled by the director decisions of 2026-10-08 and 2026-10-09. Reversible implementation proceeds autonomously, agents merge reviewed PRs with passing checks, and phase approval, signing, purchases, legal and staffing stay with the director.
 
@@ -978,7 +987,7 @@ Networking and online services:
 13. **Driftwake player accounts:** optional linked accounts (Steam, Apple, Google) for cross-store saves and friends. Without an account, players keep local saves, store-native cloud saves, room codes and platform invites.
 14. **In-game communication:** pings, emotes and preset phrases only. No text or voice chat in 1.0.
 15. **Rollback cross-play:** rollback runs within one CPU architecture class unless the determinism CI passes across all four reference device classes, in which case cross-architecture rollback is enabled automatically. Driftwake does not depend on rollback.
-16. **Hosting:** AWS in us-east-1, us-west-2, eu-central-1 and ap-northeast-1, with OpenTofu for infrastructure. Incant Cloud offers the services to engine users from the Phase 8 beta with usage-based pricing (Section 6.10).
+16. **Hosting:** AWS in us-east-1, us-west-2, eu-central-1 and ap-northeast-1, with OpenTofu for infrastructure. AWS Device Farm provides the hosted real devices for performance CI. Incant Cloud offers the services to engine users from the Phase 8 beta with usage-based pricing (Section 6.10).
 17. **Leaderboards:** none at launch. The first content patch adds friends-only leaderboards through Steam, Game Center and Google Play Games, which need no server-side run verification.
 
 Performance:
@@ -1000,11 +1009,9 @@ Product, business and operations:
 Human-owned actions (tasks with deadlines, not decisions):
 
 - **Phase gate approvals:** the director, at each gate.
-- **Name clearance and reservations, now:** trademark searches for Incant and Driftwake (USPTO, EUIPO), domain registration, and reserving `incant_*` on crates.io and the `@incant` scope on npm.
-- **Developer accounts and signing, for the Phase 0 gate:** Apple, Google and Steam developer accounts; Apple and Windows signing certificates.
+- **Store accounts and signing, before Phase 5 store uploads:** Apple, Google and Steam developer accounts; Apple and Windows signing certificates.
 - **Staffing:** the Year 1 graphics reviewer and contracts, then the roles in Section 4.5 on their schedule.
-- **Reference phones, before the Phase 1 gate:** an iPhone 13 and a Pixel 6 for performance CI; the ten-device farm in Phase 5.
-- **Cloud and identity accounts, before Phase 2 cloud sync work:** the AWS organization with billing, and the WorkOS account.
+- **Cloud and identity accounts:** the AWS organization with billing before the first hosted device runs or Phase 2 cloud sync work, whichever comes first; the WorkOS account before Phase 2 cloud sync work.
 - **Vendor SDK licenses, before Phase 4 integration:** NVIDIA DLSS and Intel XeSS.
 - **External review contracts:** netcode review before the Phase 6 gate; penetration test and accessibility audit before the Phase 8 beta and Phase 9 respectively.
 - **Legal, before the Phase 8 beta:** trademark policy, privacy policy, terms for Incant Cloud and Driftwake, the per-region age-gate feature set, the account deletion review, and the benchmark publication review.
@@ -1136,7 +1143,7 @@ Component (examples)
 
 ## Appendix D: Name shortlist
 
-Registry columns show whether the exact single word is free on crates.io and npm as of 2026-10-08. A taken single word is not disqualifying, since crates and packages will be prefixed (`incant_core`, `@incant/runtime`). Before committing to any name, run a trademark search (USPTO, EUIPO), check domains, and search Steam, the App Store, and Google Play.
+Registry columns show whether the exact single word is free on crates.io and npm as of 2026-10-08. A taken single word is not disqualifying, since crates and packages will be prefixed (`incant_core`, `@incant/runtime`).
 
 ### Engine
 
@@ -1155,9 +1162,9 @@ Registry columns show whether the exact single word is free on crates.io and npm
 
 Avoid: Forge (Minecraft Forge, Autodesk Forge), Lumen (Unreal), Cinder (creative coding framework), Quill (editor library), Loom (video), Mythos and Fable (Anthropic model names).
 
-### Launch game (fallbacks for Driftwake)
+### Launch game (the shortlist Driftwake was chosen from)
 
-Driftwake is the decided name (decision 7). If clearance fails, use Hollowtide, then Ebbfall.
+Driftwake is the decided name (decision 7).
 
 | Name | Feel | crates.io | npm |
 |---|---|---|---|

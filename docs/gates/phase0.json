@@ -53,7 +53,6 @@
     "android": false,
     "web": false
   },
-  "signing_certificates_obtained": false,
   "year_one_staffing_confirmed": false,
   "platform_build_evidence": "docs/spikes/evidence/six-platform-2026-10-08.json",
   "android_execution_evidence": "docs/spikes/evidence/android-emulator-2026-10-08.json",
@@ -65,10 +64,16 @@
     "deferred_items": [
       "live revocation verification",
       "nightly history from main",
-      "distribution signing certificates",
       "year-one staffing",
       "phase-completion approval"
     ],
     "scope": "Authorizes implementation progress only. Deferred items remain open and final engine/game requirements are unchanged."
+  },
+  "requirements_removed": {
+    "date": "2026-10-10",
+    "director_decision": "Signing certificates and store developer accounts are not Phase 0 requirements; they are first needed for Phase 5 store uploads. Reference phones are not bought; device measurements use hosted real devices.",
+    "removed": [
+      "signing_certificates_obtained"
+    ]
   }
 }
