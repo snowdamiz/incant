@@ -11,6 +11,9 @@ pub struct NavigationMesh {
     pub settings: incant_nav::NavigationSettings,
     #[schemars(length(max = 1024))]
     pub sources: Vec<NavigationSource>,
+    #[serde(default)]
+    #[schemars(length(max = 128))]
+    pub links: Vec<incant_nav::OffMeshLink>,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -29,6 +32,7 @@ pub enum NavigationSourceKind {
 pub(crate) fn validate(value: &serde_json::Value) -> Result<(), String> {
     let mesh: NavigationMesh = serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
     mesh.settings.validate().map_err(|e| e.to_string())?;
+    incant_nav::validate_links(&mesh.links).map_err(|e| e.to_string())?;
     if mesh.sources.len() > 1024 {
         return Err("navigation mesh exceeds 1024 sources".into());
     }

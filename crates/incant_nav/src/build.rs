@@ -23,6 +23,8 @@ pub struct NavigationMesh {
     pub(crate) polygons: Vec<NavigationPolygon>,
     pub(crate) portals: Vec<Vec<Portal>>,
     generation: u64,
+    authored_links: Vec<OffMeshLink>,
+    pub(crate) links: Vec<crate::links::ResolvedLink>,
 }
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct RebuildReport {
@@ -31,6 +33,7 @@ pub struct RebuildReport {
     pub removed: Vec<TileId>,
     pub polygons: usize,
     pub generation: u64,
+    pub active_links: usize,
 }
 impl NavigationMesh {
     pub fn polygons(&self) -> &[NavigationPolygon] {
@@ -45,7 +48,19 @@ impl NavigationMesh {
         settings: &NavigationSettings,
         sources: &BTreeMap<String, NavigationGeometry>,
     ) -> Result<RebuildReport, NavigationError> {
+        self.rebuild_with_links(settings, sources, &[])
+    }
+    /// Links are staged and snapped with the geometry; failure preserves the old mesh.
+    pub fn rebuild_with_links(
+        &mut self,
+        settings: &NavigationSettings,
+        sources: &BTreeMap<String, NavigationGeometry>,
+        links: &[OffMeshLink],
+    ) -> Result<RebuildReport, NavigationError> {
         settings.validate()?;
+        validate_links(links)?;
+        let mut authored_links = links.to_vec();
+        authored_links.sort_by(|a, b| a.id.cmp(&b.id));
         let mut triangles = Vec::new();
         if sources.len() > 4096 {
             return Err(limit("more than 4096 geometry sources"));
@@ -75,6 +90,7 @@ impl NavigationMesh {
             removed: vec![],
             polygons: 0,
             generation: self.generation,
+            active_links: self.links.len(),
         };
         let [nx, nz] = settings.tile_counts();
         let mut raster_work = 0usize;
@@ -143,7 +159,10 @@ impl NavigationMesh {
             .filter(|id| !tiles.contains_key(id))
             .copied()
             .collect();
-        if report.rebuilt.is_empty() && report.removed.is_empty() {
+        if report.rebuilt.is_empty()
+            && report.removed.is_empty()
+            && self.authored_links == authored_links
+        {
             return Ok(report);
         }
         let (polygons, portals) = connect_tiles(settings, &tiles)?;
@@ -151,13 +170,18 @@ impl NavigationMesh {
             .generation
             .checked_add(1)
             .ok_or_else(|| limit("generation exhausted"))?;
-        *self = Self {
+        let mut next = Self {
             settings: Some(settings.clone()),
             tiles,
             polygons,
             portals,
             generation: report.generation,
+            authored_links,
+            links: vec![],
         };
+        next.links = next.resolve_links(&next.authored_links)?;
+        report.active_links = next.links.len();
+        *self = next;
         Ok(report)
     }
 }

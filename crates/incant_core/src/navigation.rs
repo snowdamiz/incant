@@ -119,7 +119,12 @@ impl NavigationRuntime {
                         fingerprint
                     ]));
                 }
-                let stamp = serde_json::to_string(&(&scene.id, &authored.settings, stamps))?;
+                let stamp = serde_json::to_string(&(
+                    &scene.id,
+                    &authored.settings,
+                    &authored.links,
+                    stamps,
+                ))?;
                 let old = self.entries.get(&entity.id);
                 if let Some(old) = old.filter(|old| old.stamp == stamp) {
                     let mut entry = old.clone();
@@ -162,7 +167,7 @@ impl NavigationRuntime {
                 }
                 let mut mesh = old.map_or_else(NavigationMesh::default, |e| (*e.mesh).clone());
                 let mut report = mesh
-                    .rebuild(&authored.settings, &geometry)
+                    .rebuild_with_links(&authored.settings, &geometry, &authored.links)
                     .map_err(failure)?;
                 if let Some(old) = old.filter(|old| old.mesh.generation() == mesh.generation()) {
                     report.generation = old.report.generation;

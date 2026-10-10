@@ -31,6 +31,7 @@ pub(super) fn check() -> Result<Value, String> {
     }
     let mut nav = Entity::new("Navigation");
     let mut component = NavigationMesh {
+        links: vec![],
         settings: Default::default(),
         sources: [&floor, &wall]
             .map(|e| NavigationSource {
