@@ -18,6 +18,8 @@ pub enum SceneError {
     MissingModel(String),
     #[error("environment texture {0} is not loaded at the document's current fingerprint")]
     MissingEnvironment(String),
+    #[error("sprite texture {0} is not loaded at the document's current fingerprint")]
+    MissingSprite(String),
     #[error("authored material asset overrides are not supported by the imported preview")]
     MaterialOverrides,
     #[error("model {0} has no scene to instantiate")]
@@ -53,6 +55,7 @@ pub struct SceneStats {
     pub primitive_instances: usize,
     pub model_triangles: u64,
     pub model_draw_calls: usize,
+    pub sprite_entities: usize,
 }
 
 #[repr(C)]
@@ -91,6 +94,7 @@ pub(crate) struct ResolvedScene {
     pub environment: Option<crate::environment::EnvironmentPlan>,
     pub lights: crate::lighting::scene::LightPlan,
     pub cameras: BTreeMap<String, crate::camera::CameraView>,
+    pub sprites: Vec<crate::sprites::SpritePlan>,
 }
 
 /// A model's default scene is used, falling back to its first declared scene.
@@ -108,6 +112,7 @@ pub(crate) fn resolve(
         environment: None,
         lights: Default::default(),
         cameras: BTreeMap::new(),
+        sprites: Vec::new(),
     };
     for entity in project
         .scenes
@@ -131,18 +136,16 @@ pub(crate) fn resolve(
             });
         }
     }
-    // Empty frames used by a camera rig are not drawable diagnostic geometry.
+    // Empty camera/sprite rig ancestors are not drawable diagnostic geometry.
     // Explicit MeshRenderer bindings on those entities still render normally.
-    let mut camera_frames = BTreeSet::new();
+    let mut render_frames = BTreeSet::new();
     for scene in project.scenes.values() {
-        for camera in scene
-            .entities
-            .values()
-            .filter(|e| e.components.contains_key("Camera"))
-        {
+        for camera in scene.entities.values().filter(|e| {
+            e.components.contains_key("Camera") || e.components.contains_key("SpriteRenderer")
+        }) {
             let mut current = Some(camera.id.as_str());
             while let Some(id) = current {
-                if !camera_frames.insert(id.to_owned()) {
+                if !render_frames.insert(id.to_owned()) {
                     break;
                 }
                 current = scene.entities[id].parent.as_deref();
@@ -162,12 +165,31 @@ pub(crate) fn resolve(
             );
         }
         let world = world64.as_mat4();
-        // Validate even empty mesh nodes so invalid ranges never reach GPU buffers.
+        // Sprite and mesh instances share finite, invertible world-transform rules.
         Instance::new(world)?;
+        if let Some(value) = components.get("SpriteRenderer") {
+            let sprite: incant_doc::SpriteRenderer =
+                serde_json::from_value(value.clone()).map_err(incant_doc::DocumentError::from)?;
+            let registered = &project.assets[&sprite.texture];
+            let source = assets
+                .and_then(|assets| assets.get(&sprite.texture))
+                .filter(|asset| {
+                    asset.info().fingerprint == registered.sha256 && asset.info().kind == "texture"
+                })
+                .ok_or_else(|| SceneError::MissingSprite(sprite.texture.clone()))?;
+            result.sprites.push(crate::sprites::SpritePlan {
+                source,
+                sprite,
+                world: world64,
+                id: entity.id.clone(),
+            });
+            result.stats.sprite_entities += 1;
+            continue;
+        }
         let Some(binding) = &entity.mesh else {
             let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
             if components.contains_key("Transform")
-                && !camera_frames.contains(&entity.id)
+                && !render_frames.contains(&entity.id)
                 && ![
                     "Camera",
                     "EnvironmentLight",

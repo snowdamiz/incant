@@ -53,6 +53,13 @@ within its documented workload.
 
 ## Active work
 
+- Sprite rendering is in implementation in an isolated checkout: typed texture
+  regions, pivots/flips, nine-slice geometry, deterministic sorting and retained
+  premultiplied texture resources. Initial CPU/GPU checks pass. Full checks,
+  public saved gameplay, Claude presentation/render review and CI remain open;
+  atlas packing, tilemaps and 2D physics are separate unfinished work. See
+  [sprite rendering](docs/spikes/sprite-rendering.md).
+
 - Pixel-perfect camera support is in implementation: fixed logical targets,
   integer replication/letterboxing, and render-only camera-plane snapping.
   Local foundation checks pass 320 Rust tests, 47 GPU checks, Clippy, contracts

@@ -19,6 +19,7 @@ mod preview_environment;
 mod resource_error;
 mod scene;
 mod shadows;
+mod sprites;
 mod studio;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
@@ -57,6 +58,7 @@ pub struct Renderer {
     pipelines: Mutex<HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>>,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
+    sprites: sprites::SpriteSystem,
     environments: environment::EnvironmentSystem,
     lighting: lighting::LightingSystem,
     shadows: shadows::ShadowSystem,
@@ -88,7 +90,9 @@ impl Renderer {
         let shadows = shadows::ShadowSystem::new(&device);
         let materials =
             materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
+        let sprites = sprites::SpriteSystem::new(&device);
         Ok(Self {
+            sprites,
             device,
             queue,
             adapter,
@@ -238,6 +242,16 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
+        let sprites = self.sprites.prepare(
+            &self.device,
+            scene,
+            models::ModelTarget {
+                color: attachments.color.clone(),
+                depth: attachments.depth.clone(),
+                format: frame::HDR_FORMAT,
+                rect: scene_rect,
+            },
+        )?;
         let output = self.output.prepare(
             &self.device,
             &attachments.color,
@@ -251,6 +265,7 @@ impl Renderer {
             graph::PreparedFrame {
                 diagnostics,
                 models,
+                sprites,
                 output,
             },
         )

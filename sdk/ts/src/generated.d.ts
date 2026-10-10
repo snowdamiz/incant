@@ -322,6 +322,13 @@ export namespace SpotLightSchema {
 }
 export type SpotLight = SpotLightSchema.Root;
 
+export namespace SpriteRendererSchema {
+  export type SpriteMode = ({ "kind": "simple" }) | ({ "border": [number, number, number, number]; "kind": "nine_slice"; "pixels_per_unit": number });
+  export type SpriteSampling = "nearest" | "linear";
+  export type Root = { "flip_x"?: boolean; "flip_y"?: boolean; "layer"?: number; "mode"?: SpriteMode; "order"?: number; "pivot": [number, number]; "region": [number, number, number, number]; "sampling"?: SpriteSampling; "size": [number, number]; "texture": string; "tint": [number, number, number, number] };
+}
+export type SpriteRenderer = SpriteRendererSchema.Root;
+
 export namespace SteeringAgentSchema {
   export type Root = { "height": number; "id": string; "max_speed": number; "position": [number, number, number]; "preferred_velocity": [number, number]; "radius": number; "responsibility": number; "velocity": [number, number] };
 }
