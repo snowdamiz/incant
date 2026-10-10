@@ -50,3 +50,17 @@ export function clampLayout(layout: Layout, width: number, height: number): Layo
   const agent = clamp(layout.agent, 180, Math.max(180, Math.min(560, workspace - SPLITTER - 160)));
   return { left, right, dock, agent };
 }
+
+/** Room for the compact unavailable message and the one-line composer (measured). */
+export const IDLE_AGENT_MIN = 200;
+
+/**
+ * Agent height while no agent can run (signed out, not ready, unsupported). The pane
+ * then only explains why and offers sign-in, so it keeps just the compact empty
+ * state plus the disabled composer and gives the rest of a short window to the
+ * Inspector. Never taller than the regular agent height for the same window.
+ */
+export function idleAgentHeight(height: number): number {
+  const workspace = Math.max(0, height - CHROME_HEIGHT);
+  return clamp(height * 0.24, IDLE_AGENT_MIN, Math.max(180, Math.min(240, workspace - SPLITTER - 160)));
+}

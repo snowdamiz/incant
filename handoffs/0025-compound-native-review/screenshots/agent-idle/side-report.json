@@ -1,0 +1,375 @@
+{
+  "generated": "2026-10-10T04:44:06.674Z",
+  "browser": "155.0.8059.40",
+  "source": "browser fixture",
+  "captures": [
+    {
+      "file": "signed-out-1000x650.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "provider": "signed-out",
+      "measure": {
+        "inspector": 381,
+        "inspectorScroll": 345,
+        "agent": 200,
+        "transcript": {
+          "client": 82,
+          "scroll": 82,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "200"
+      },
+      "errors": []
+    },
+    {
+      "file": "signed-in-1000x650.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "provider": "signed-in",
+      "measure": {
+        "inspector": 381,
+        "inspectorScroll": 345,
+        "agent": 200,
+        "transcript": {
+          "client": 82,
+          "scroll": 82,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Agent not ready Agent messaging is not enabled in this build yet. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "200"
+      },
+      "errors": []
+    },
+    {
+      "file": "checking-1000x650.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "provider": "checking",
+      "measure": {
+        "inspector": 381,
+        "inspectorScroll": 345,
+        "agent": 200,
+        "transcript": {
+          "client": 82,
+          "scroll": 82,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "200"
+      },
+      "errors": []
+    },
+    {
+      "file": "error-1000x650.png",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "provider": "error",
+      "measure": {
+        "inspector": 381,
+        "inspectorScroll": 345,
+        "agent": 200,
+        "transcript": {
+          "client": 82,
+          "scroll": 82,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "200"
+      },
+      "errors": []
+    },
+    {
+      "file": "signed-out-1440x874.png",
+      "size": {
+        "width": 1440,
+        "height": 874
+      },
+      "provider": "signed-out",
+      "measure": {
+        "inspector": 595,
+        "inspectorScroll": 559,
+        "agent": 210,
+        "transcript": {
+          "client": 92,
+          "scroll": 92,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "210"
+      },
+      "errors": []
+    },
+    {
+      "file": "signed-in-1440x874.png",
+      "size": {
+        "width": 1440,
+        "height": 874
+      },
+      "provider": "signed-in",
+      "measure": {
+        "inspector": 595,
+        "inspectorScroll": 559,
+        "agent": 210,
+        "transcript": {
+          "client": 92,
+          "scroll": 92,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Agent not ready Agent messaging is not enabled in this build yet. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "210"
+      },
+      "errors": []
+    },
+    {
+      "file": "checking-1440x874.png",
+      "size": {
+        "width": 1440,
+        "height": 874
+      },
+      "provider": "checking",
+      "measure": {
+        "inspector": 595,
+        "inspectorScroll": 559,
+        "agent": 210,
+        "transcript": {
+          "client": 92,
+          "scroll": 92,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "210"
+      },
+      "errors": []
+    },
+    {
+      "file": "error-1440x874.png",
+      "size": {
+        "width": 1440,
+        "height": 874
+      },
+      "provider": "error",
+      "measure": {
+        "inspector": 595,
+        "inspectorScroll": 559,
+        "agent": 210,
+        "transcript": {
+          "client": 92,
+          "scroll": 92,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "210"
+      },
+      "errors": []
+    },
+    {
+      "file": "signed-out-1440x900.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "provider": "signed-out",
+      "measure": {
+        "inspector": 615,
+        "inspectorScroll": 579,
+        "agent": 216,
+        "transcript": {
+          "client": 98,
+          "scroll": 98,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "216"
+      },
+      "errors": []
+    },
+    {
+      "file": "signed-in-1440x900.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "provider": "signed-in",
+      "measure": {
+        "inspector": 615,
+        "inspectorScroll": 579,
+        "agent": 216,
+        "transcript": {
+          "client": 98,
+          "scroll": 98,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Agent not ready Agent messaging is not enabled in this build yet. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "216"
+      },
+      "errors": []
+    },
+    {
+      "file": "checking-1440x900.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "provider": "checking",
+      "measure": {
+        "inspector": 615,
+        "inspectorScroll": 579,
+        "agent": 216,
+        "transcript": {
+          "client": 98,
+          "scroll": 98,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "216"
+      },
+      "errors": []
+    },
+    {
+      "file": "error-1440x900.png",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "provider": "error",
+      "measure": {
+        "inspector": 615,
+        "inspectorScroll": 579,
+        "agent": 216,
+        "transcript": {
+          "client": 98,
+          "scroll": 98,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "216"
+      },
+      "errors": []
+    },
+    {
+      "file": "signed-out-1920x1080.png",
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "provider": "signed-out",
+      "measure": {
+        "inspector": 771,
+        "inspectorScroll": 735,
+        "agent": 240,
+        "transcript": {
+          "client": 122,
+          "scroll": 122,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "240"
+      },
+      "errors": []
+    },
+    {
+      "file": "signed-in-1920x1080.png",
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "provider": "signed-in",
+      "measure": {
+        "inspector": 771,
+        "inspectorScroll": 735,
+        "agent": 240,
+        "transcript": {
+          "client": 122,
+          "scroll": 122,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Agent not ready Agent messaging is not enabled in this build yet. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "240"
+      },
+      "errors": []
+    },
+    {
+      "file": "checking-1920x1080.png",
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "provider": "checking",
+      "measure": {
+        "inspector": 771,
+        "inspectorScroll": 735,
+        "agent": 240,
+        "transcript": {
+          "client": 122,
+          "scroll": 122,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "240"
+      },
+      "errors": []
+    },
+    {
+      "file": "error-1920x1080.png",
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "provider": "error",
+      "measure": {
+        "inspector": 771,
+        "inspectorScroll": 735,
+        "agent": 240,
+        "transcript": {
+          "client": 122,
+          "scroll": 122,
+          "overflow": false,
+          "tabbable": false
+        },
+        "emptyText": "Use your ChatGPT account Sign in with ChatGPT to use the agent. Everything else works offline, no account needed.",
+        "composerInside": true,
+        "splitter": "240"
+      },
+      "errors": []
+    }
+  ]
+}
