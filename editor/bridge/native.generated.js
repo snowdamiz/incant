@@ -342,7 +342,7 @@ function snapshotFromEngine(read) {
         },
         agent: {
             status: "unavailable",
-            reason: "Use the headless agent command for the Phase 0 provider spike."
+            reason: "The agent is not available in the editor yet."
         },
         viewport: read.viewport_error ? {
             status: "error",

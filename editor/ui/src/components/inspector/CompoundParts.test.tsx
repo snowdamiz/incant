@@ -328,13 +328,17 @@ describe('compound parts in the editor', () => {
   });
 
   it('follows a Problems link to the exact field of a part that was not selected', async () => {
-    render(<App resolution={{ kind: 'bridge', bridge: createFixtureBridge('sample') }} />);
+    const bridge = createFixtureBridge('sample');
+    const entity = Object.values(bridge.getSnapshot().entities).find((item) => item.name === 'Broken Railing')!.id;
+    render(<App resolution={{ kind: 'bridge', bridge }} />);
     fireEvent.click(screen.getByRole('button', { name: /compound part 3 requires a unique valid ULID/ }));
     await waitFor(() => expect(screen.getByRole('treeitem', { name: /^Broken Railing/ }).getAttribute('aria-selected')).toBe('true'));
     // The railing starts on its first problem, part 1.
     await waitFor(() => expect(detail().textContent).toContain('Part 1 of 6'));
     fireEvent.click(await waitFor(() => screen.getByRole('link', { name: /Collider\/shape\/parts\/3\/id/ })));
-    await waitFor(() => expect(document.activeElement?.id).toMatch(/-Collider_shape_parts_3_id$/));
+    await waitFor(() => expect(document.activeElement).toBe(document.getElementById(
+      fieldDomId(entity, 'Collider', ['shape', 'parts', '3', 'id']),
+    )));
     expect(detail().textContent).toContain('Part 4 of 6');
     expect(rows()[3]!.getAttribute('aria-selected')).toBe('true');
   });

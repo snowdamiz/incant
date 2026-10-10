@@ -335,12 +335,14 @@ describe('physics component layout', () => {
   });
 
   it('jumps from a nested problem to the exact axis and from an unknown tag to the Shape row', async () => {
-    render(<App resolution={{ kind: 'bridge', bridge: createFixtureBridge('sample') }} />);
+    const bridge = createFixtureBridge('sample');
+    const crate = Object.values(bridge.getSnapshot().entities).find((item) => item.name === 'Crate 03')!.id;
+    render(<App resolution={{ kind: 'bridge', bridge }} />);
     fireEvent.click(screen.getByRole('button', { name: /Half extents must be positive/ }));
     await waitFor(() => expect(screen.getByRole('treeitem', { name: /^Crate 03/ }).getAttribute('aria-selected')).toBe('true'));
     const link = await waitFor(() => screen.getByRole('link', { name: /Collider\/shape\/half_extents\/1/ }));
     fireEvent.click(link);
-    expect(document.activeElement?.id).toMatch(/_shape_half_extents_1$/);
+    expect(document.activeElement?.id).toBe(fieldDomId(crate, 'Collider', ['shape', 'half_extents', '1']));
 
     fireEvent.click(screen.getByRole('button', { name: /Unknown collider shape/ }));
     await waitFor(() => expect(screen.getByRole('treeitem', { name: /^Pier Planks/ }).getAttribute('aria-selected')).toBe('true'));

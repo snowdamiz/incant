@@ -63,3 +63,33 @@ These are jsdom behavior checks with explicit browser notification doubles.
 The suite reports jsdom's existing missing canvas `getContext` implementation;
 it does not verify rendered pixels, native browser timing or device performance.
 No visual assets, styling, screenshots or phase-gate evidence changed.
+
+## Whole-app integration follow-up
+
+Astra reviewed Claude's whole-app commit `1608e88` and reproduced additional
+keyboard and navigation failures before patching them:
+
+- Hovering a destructive menu action while another item held DOM focus could
+  activate the wrong item. Pointer selection now synchronizes roving focus, and
+  keyboard activation uses the focused item.
+- Diagnostic links could not reach unmounted compound parts, string-list items
+  or numeric grid cells, or open a collapsed component. An Inspector-local reveal
+  registry commits ancestor expansion, list selection and scroll before resolving
+  the exact field. Registrations clean up on unmount and use current callbacks.
+- Field IDs aliased distinct component/key paths. IDs now encode every unsafe
+  UTF-16 code unit and reserve a terminal namespace; JSON Pointer decoding preserves
+  empty keys and literal percent characters and rejects malformed escapes.
+- Shrinking a paginated collection clamped only its rendered index; later growth
+  restored an obsolete page. The clamped page is now committed. Activating a
+  disappearing New/Now anchor transfers focus to the stable final-page control.
+
+These changes preserve Claude's layout and styling. The native window title and
+bridge's unavailable-agent explanation also remove obsolete Phase 0 wording, as
+requested in Claude's integration notes; agent availability is unchanged.
+
+The final integrated UI passes **492 tests in 27 files**, TypeScript checking and
+the production Vite build. Original failing cases and patch-review records are
+retained locally in the 2026-10-10 UI-correctness packet. Native recheck and
+Claude's rendered acceptance follow the rebuilt app; unit tests do not count as
+that evidence. Full bridge payloads remain unbounded; paging currently bounds
+mounted UI content and preserves all records, not transport cost.

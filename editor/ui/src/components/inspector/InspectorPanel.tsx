@@ -13,8 +13,9 @@ import { useAssets } from '../../assets/AssetsContext';
 import type { FieldContext, ReferenceResolver } from './FieldView';
 import { FieldView, fieldDomId, severityOf } from './FieldView';
 import { breakAfterSlashes } from '../breakAfterSlashes';
-import { safeJson } from './format';
+import { parsePointer, safeJson } from './format';
 import { componentFamily, componentIcon, componentTitle, sectionKeys } from './presentation';
+import { FieldRevealProvider, useFieldReveal, useRevealField } from './reveal';
 
 /**
  * The right column's top panel. Its header line names what is inspected (an entity
@@ -65,7 +66,7 @@ export function InspectorPanel() {
     );
   } else {
     header = <IdentityHeader icon={iconForKind(entity.kind)} kind={entity.kind} name={entity.name} actions={<CopyIdButton id={entity.id} />} />;
-    body = <EntityInspector entity={entity} schemas={snapshot.schemas} diagnostics={snapshot.diagnostics} refs={refs} />;
+    body = <FieldRevealProvider><EntityInspector entity={entity} schemas={snapshot.schemas} diagnostics={snapshot.diagnostics} refs={refs} /></FieldRevealProvider>;
   }
   return (
     <section
@@ -183,6 +184,7 @@ function MiddleTruncated({ text }: { text: string }) {
  * link that focuses the field.
  */
 function EntityProblems({ entity, problems }: { entity: EntityDetail; problems: readonly Diagnostic[] }) {
+  const revealField = useRevealField();
   return (
     <ul className={`inspector__problems inspector__problems--${severityOf(problems) ?? 'info'}`} aria-label="Problems on this entity">
       {problems.map((d) => (
@@ -193,7 +195,7 @@ function EntityProblems({ entity, problems }: { entity: EntityDetail; problems: 
             {d.component ? (
               <a
                 className="problem-line__where"
-                href={`#${fieldDomId(entity.id, d.component, (d.path ?? '').split('/').filter(Boolean))}`}
+                href={`#${fieldDomId(entity.id, d.component, parsePointer(d.path) ?? [])}`}
                 onClick={(event) => {
                   event.preventDefault();
                   revealField(entity.id, d.component ?? '', d.path);
@@ -208,23 +210,6 @@ function EntityProblems({ entity, problems }: { entity: EntityDetail; problems: 
       ))}
     </ul>
   );
-}
-
-/** Scrolls to and focuses the field a diagnostic names, continuing into a list item once it renders. */
-function revealField(entity: string, component: string, path: string | null) {
-  const reveal = () => {
-    const target = nearestField(entity, component, path);
-    target?.scrollIntoView({ block: 'center' });
-    (target?.matches('input,[tabindex]') ? target : target?.querySelector<HTMLElement>('input,[tabindex]'))?.focus();
-    return target;
-  };
-  const first = reveal();
-  // Focusing a list row (a compound part) selects it and renders its fields;
-  // once rendered, continue to the exact field when it now exists.
-  setTimeout(() => {
-    const next = nearestField(entity, component, path);
-    if (next && next !== first && first?.contains(document.activeElement)) reveal();
-  }, 0);
 }
 
 /** Copies the entity ID; without a clipboard it stays focusable, marked unavailable, and says why. */
@@ -251,19 +236,6 @@ function CopyIdButton({ id }: { id: string }) {
   );
 }
 
-/**
- * The field element for a diagnostic path, or the closest rendered ancestor: a
- * path inside a mismatched union or past a vector axis still lands on its row.
- */
-function nearestField(entity: string, component: string, path: string | null): HTMLElement | null {
-  const parts = (path ?? '').split('/').filter(Boolean).map((part) => part.replace(/~1/g, '/').replace(/~0/g, '~'));
-  for (let length = parts.length; length >= 0; length -= 1) {
-    const target = document.getElementById(fieldDomId(entity, component, parts.slice(0, length)));
-    if (target) return target;
-  }
-  return null;
-}
-
 function shortType(type: string) {
   return type.replace(/^incant\./, '');
 }
@@ -282,7 +254,9 @@ function ComponentSection({
   refs: ReferenceResolver;
 }) {
   const [open, setOpen] = useState(true);
-  const bodyId = `component-${entity}-${component.type}`.replace(/[^A-Za-z0-9_-]/g, '_');
+  const id = fieldDomId(entity, component.type, []);
+  useFieldReveal(id, () => setOpen(true));
+  const bodyId = `${id}-body`;
   const errors = diagnostics.filter((d) => d.severity === 'error').length;
   const warnings = diagnostics.filter((d) => d.severity === 'warning').length;
   const keys = schema ? orderedKeys(schema) : [];
@@ -291,7 +265,7 @@ function ComponentSection({
   const typeId = `${bodyId}-type`;
   const ctx: FieldContext = { entity, component: component.type, diagnostics, value: component.value, depth: 0, refs };
   return (
-    <section className="component" aria-label={title} aria-describedby={typeId}>
+    <section className="component" id={id} aria-label={title} aria-describedby={typeId}>
       <h3 className="component__heading">
         <button
           type="button"

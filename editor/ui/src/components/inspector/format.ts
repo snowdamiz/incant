@@ -12,6 +12,14 @@ export function unescapePointer(part: string): string {
   return part.replace(/~1/g, '/').replace(/~0/g, '~');
 }
 
+/** JSON Pointer string form: null/empty names the component; '/' names its empty key. */
+export function parsePointer(path: string | null): readonly string[] | null {
+  if (path === null || path === '') return [];
+  // Reject malformed pointers instead of silently addressing a different key.
+  if (!path.startsWith('/') || /~(?:[^01]|$)/.test(path)) return null;
+  return path.slice(1).split('/').map(unescapePointer);
+}
+
 /**
  * Compact, readable numbers that never hide a nonzero value. Integers are shown
  * as is; ordinary magnitudes keep up to four decimals (1.5708); values whose
