@@ -47,6 +47,7 @@ def main():
     shutil.copy2(ROOT / 'licenses/MPL-2.0.txt', bundle / 'Resources/licenses/MPL-2.0.txt')
     shutil.copy2(ROOT / 'licenses/Unicode-3.0.txt', bundle / 'Resources/licenses/Unicode-3.0.txt')
     shutil.copy2(ROOT / 'licenses/quick-xml-MIT.txt', bundle / 'Resources/licenses/quick-xml-MIT.txt')
+    shutil.copy2(ROOT / 'licenses/cpu-time-MIT.txt', bundle / 'Resources/licenses/cpu-time-MIT.txt')
     shutil.copy2(ROOT / 'licenses/rerecast-MIT.txt', bundle / 'Resources/licenses/rerecast-MIT.txt')
     shutil.copy2(ROOT / 'licenses/dodgy-MIT.txt', bundle / 'Resources/licenses/dodgy-MIT.txt')
     shutil.copy2(ROOT / 'licenses/dodgy-RVO2-original.txt', bundle / 'Resources/licenses/dodgy-RVO2-original.txt')

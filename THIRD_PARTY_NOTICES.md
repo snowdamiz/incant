@@ -1,5 +1,13 @@
 # Third-party notices
 
+## Script execution clock
+
+Incant uses unmodified [cpu-time 1.0.0](https://crates.io/crates/cpu-time/1.0.0)
+for Unix/Windows thread CPU accounting, copyright (c) 2017 The cpu-time
+Developers, under its [MIT license](licenses/cpu-time-MIT.txt).
+Cargo.lock pins the exact version and registry checksum. Corresponding sources
+are available from the versioned registry package or `cargo vendor --locked`.
+
 ## Navigation dependencies
 
 Local avoidance uses unmodified [dodgy_2d 0.5.5](https://crates.io/crates/dodgy_2d/0.5.5),

@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- Script CPU accounting is being verified separately from diagnostics PR #38.
+  Initialization/tick budgets now use the executing thread's CPU time, excluding
+  host pauses and other threads. Real waiting/CPU-exhaustion tests, VM interrupts,
+  zero-budget initialization and fail-closed clock handling cover the change.
+  Full workspace and public checks are in progress; cross-platform clock tests
+  and integration of the final steering correction remain pending. See
+  [CPU budget details](docs/spikes/script-cpu-budget.md).
+
 - Script failures now distinguish bounded initialization/tick JavaScript messages,
   native allocation failures and wall-clock deadlines. Both CLI paths identify
   the absolute failing tick, including after save/reopen, and suppress failed-tick

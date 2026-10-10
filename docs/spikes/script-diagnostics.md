@@ -40,3 +40,7 @@ a healthy script's deadline. This increment makes that failure distinguishable;
 it does not solve scheduling robustness, provide CPU-time accounting, claim
 source-mapped stack traces, or classify every JavaScript memory error as a native
 allocation failure. No visual surface changes and no phase-gate approval.
+
+The subsequent [CPU-budget increment](script-cpu-budget.md) changes execution
+accounting. The wall-clock limitations above describe this diagnostics increment
+and its original recorded binaries.

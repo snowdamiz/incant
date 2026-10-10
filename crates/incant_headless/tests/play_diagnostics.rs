@@ -101,7 +101,7 @@ fn cli_distinguishes_invalid_initialization_from_tick_timeout() {
             let expected = if file == "syntax.js" {
                 "script initialization failed: SyntaxError:"
             } else {
-                "play failed at tick 1: script execution exceeded its 50 ms wall-clock budget"
+                "play failed at tick 1: script execution exceeded its 50 ms thread CPU budget"
             };
             assert!(text.contains(expected), "{text}");
             assert!(failed.stdout.is_empty());

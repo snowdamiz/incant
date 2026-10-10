@@ -1,10 +1,7 @@
 //! Bounded diagnostics from untrusted JavaScript; never stringify arbitrary objects.
-use crate::ScriptError;
+use crate::{ScriptError, budget::ExecutionBudget};
 use rquickjs::{Ctx, Error, Object, Value};
-use std::{
-    sync::Mutex,
-    time::{Duration, Instant},
-};
+use std::sync::Mutex;
 
 pub(super) fn allocation(error: Error) -> ScriptError {
     if matches!(error, Error::Allocation) {
@@ -13,18 +10,15 @@ pub(super) fn allocation(error: Error) -> ScriptError {
         ScriptError::Execution
     }
 }
-fn expired(deadline: &Mutex<Instant>, budget: Duration) -> Option<ScriptError> {
-    (Instant::now() >= *deadline.lock().unwrap_or_else(|e| e.into_inner())).then_some(
-        ScriptError::ExecutionDeadline {
-            budget_ms: budget.as_millis(),
-        },
-    )
+fn expired(deadline: &Mutex<ExecutionBudget>) -> Option<ScriptError> {
+    deadline
+        .lock()
+        .unwrap_or_else(|e| e.into_inner())
+        .check()
+        .err()
 }
-pub(super) fn check_deadline(
-    deadline: &Mutex<Instant>,
-    budget: Duration,
-) -> Result<(), ScriptError> {
-    expired(deadline, budget).map_or(Ok(()), Err)
+pub(super) fn check_deadline(deadline: &Mutex<ExecutionBudget>) -> Result<(), ScriptError> {
+    deadline.lock().unwrap_or_else(|e| e.into_inner()).check()
 }
 fn primitive_text(value: Value<'_>) -> Option<String> {
     // No Coerced<String>, toString(), stack getter or source dump. String values
@@ -60,10 +54,9 @@ pub(super) fn javascript(
     ctx: &Ctx<'_>,
     error: Error,
     phase: &'static str,
-    deadline: &Mutex<Instant>,
-    budget: Duration,
+    deadline: &Mutex<ExecutionBudget>,
 ) -> ScriptError {
-    if let Some(error) = expired(deadline, budget) {
+    if let Some(error) = expired(deadline) {
         return error;
     }
     if !matches!(error, Error::Exception) {
@@ -84,7 +77,7 @@ pub(super) fn javascript(
     } else {
         "non-string JavaScript exception".into()
     };
-    if let Some(error) = expired(deadline, budget) {
+    if let Some(error) = expired(deadline) {
         return error;
     }
     ScriptError::Javascript {

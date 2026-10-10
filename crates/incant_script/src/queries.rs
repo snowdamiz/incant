@@ -2,10 +2,7 @@
 use crate::{ScriptError, ScriptHost};
 use incant_core::{CharacterMovement, CharacterQuery, PhysicsError, RayHit, RayQuery};
 use serde::{Serialize, de::DeserializeOwned};
-use std::{
-    sync::{Arc, atomic::Ordering},
-    time::Instant,
-};
+use std::sync::{Arc, atomic::Ordering};
 
 type Query<Q, R, E = PhysicsError> = Arc<dyn Fn(Q) -> Result<R, E> + Send + Sync>;
 pub(super) type Navigator = Query<
@@ -93,8 +90,7 @@ impl ScriptHost {
                             if text.len() > budget.bytes
                                 || count.fetch_add(budget.cost, Ordering::Relaxed)
                                     > 256 - budget.cost
-                                || Instant::now()
-                                    >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
+                                || deadline.lock().unwrap_or_else(|e| e.into_inner()).expired()
                             {
                                 return Err(format!("{family} query budget exceeded"));
                             }
@@ -104,8 +100,7 @@ impl ScriptHost {
                                 format!("{family} queries require a play session")
                             })?(request)
                             .map_err(|e| e.to_string())?;
-                            if Instant::now() >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
-                            {
+                            if deadline.lock().unwrap_or_else(|e| e.into_inner()).expired() {
                                 return Err(format!("{family} query deadline exceeded"));
                             }
                             Ok(value)

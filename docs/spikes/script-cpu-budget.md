@@ -1,0 +1,44 @@
+# Script execution CPU budgets
+
+Gameplay previously used an `Instant` wall-clock deadline for initialization and
+each update. A host pause or descheduling could therefore reject a script even
+though the script had not used its execution allowance. The budget now charges
+CPU time on the executing thread. The default remains 50 ms. Explicit
+`ScriptHost::with_budget` durations use the same CPU-time basis.
+
+The interrupt handler, native-query guards, hostile exception getters and the
+final pre-publication check share one budget. Synchronous native query work on
+the executing thread counts toward it. A failed update still cannot publish its
+commands, state, timers or logs, even if JavaScript catches a native-query error.
+Initialization is checked after successful evaluation too, so a zero budget
+cannot silently admit a short program.
+
+Pinned `cpu-time` 1.0.0 reads the Unix thread CPU clock or Windows thread times.
+Incant uses its fallible clock API. An unavailable clock, backwards reading or
+thread change during an execution fails explicitly; there is no silent unbounded
+fallback. A new execution resets the clock and owning thread. Saved game data
+contains neither OS clock readings nor wall-clock deadlines. Unsupported target
+families fail explicitly. This increment does not add WebAssembly QuickJS support.
+The dependency's MIT text is retained in source and development packages.
+
+Behavior tests cover a 120 ms host callback wait while another thread burns
+100 ms of CPU: the 50 ms script succeeds and publishes exactly one update.
+Another callback consumes 80 ms on the executing thread: the script catches its
+query exception, but the host still rejects the update without publication.
+Existing runaway-loop and hostile-getter tests exercise real VM interruption.
+Zero-budget initialization and clock fault/reset cases are covered separately.
+The synthetic forced-expiry test remains a guard-placement test, not timing
+performance evidence.
+
+CPU time is not frame time. Heavy contention or suspension can make wall elapsed
+time much longer than the budget. OS clock resolution and VM interrupt intervals
+also permit some overshoot. Native calls cannot be interrupted inside their
+solver; bounded input/query limits remain necessary and unchanged. Work executed
+by other threads is excluded, so any future parallel query implementation needs
+its own bounded work accounting. No new host capability, script sleep function,
+filesystem access or process control is exposed.
+
+Validation and exact source/binary records will be recorded after the workspace
+and public workflows finish. Cross-platform clock behavior still requires the
+hosted Windows/Linux workspace tests; compilation of the separate core platform
+probe does not establish a scripting runtime gate. No phase gate is approved.
