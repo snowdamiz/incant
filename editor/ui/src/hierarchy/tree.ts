@@ -14,14 +14,29 @@ export interface Row {
   readonly ancestorOfMatch: boolean;
 }
 
+/**
+ * Lower-cased names, built once per tree snapshot: filtering 100,000 entities then
+ * costs one substring test per name per keystroke instead of a case conversion too.
+ */
+const lowerNames = new WeakMap<HierarchyTree, readonly (readonly [string, string])[]>();
+function namesOf(tree: HierarchyTree): readonly (readonly [string, string])[] {
+  let names = lowerNames.get(tree);
+  if (!names) {
+    names = Object.values(tree.nodes).map((node) => [node.id, node.name.toLocaleLowerCase()] as const);
+    lowerNames.set(tree, names);
+  }
+  return names;
+}
+
 /** Rows to render, in order. With a filter, matches and their ancestors show, expanded. */
 export function visibleRows(tree: HierarchyTree, expanded: ReadonlySet<string>, filter: string): Row[] {
   const query = filter.trim().toLocaleLowerCase();
   const matches = new Set<string>();
   const keep = new Set<string>();
   if (query) {
-    for (const node of Object.values(tree.nodes)) {
-      if (node.name.toLocaleLowerCase().includes(query)) {
+    for (const [id, name] of namesOf(tree)) {
+      const node = tree.nodes[id]!;
+      if (name.includes(query)) {
         matches.add(node.id);
         let current: Ulid | null = node.id;
         while (current !== null && !keep.has(current)) {

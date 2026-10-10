@@ -261,7 +261,7 @@
 .component__body {
   container: component / inline-size;
   /* The label column: a third of the component, within readable bounds. */
-  --label-w: clamp(80px, 32cqi, 168px);
+  --label-w: clamp(88px, 32cqi, 168px);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);

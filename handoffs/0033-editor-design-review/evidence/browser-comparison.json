@@ -1,0 +1,2569 @@
+{
+  "generated": "2026-10-10T18:17:06.114Z",
+  "browser": "155.0.8059.40",
+  "note": "Headless Chrome captures of the built UI; not native WebKit. Sample fixture and evidence test double data.",
+  "before": "before",
+  "after": "final",
+  "states": [
+    {
+      "capture": "no-selection-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "no-selection-minimum-1000x650",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "no-selection-wide-1920x1080",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 240,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "transform-camera-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "transform-camera-minimum-1000x650",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "transform-camera-narrow-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "transform-camera-wide-1920x1080",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 240,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "camera-focus-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": {
+          "name": "Near clip",
+          "value": "0.1",
+          "outline": "solid 2px rgb(195, 200, 255)",
+          "ring": {
+            "x": 1240,
+            "y": 468,
+            "width": 188,
+            "height": 28
+          }
+        },
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": {
+          "name": "Near clip",
+          "value": "0.1",
+          "outline": "solid 2px rgb(195, 200, 255)",
+          "ring": {
+            "x": 1227.9,
+            "y": 417,
+            "width": 202.1,
+            "height": 26
+          }
+        },
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "camera-focus-minimum-1000x650",
+      "before": {
+        "firstValueTop": -12,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": {
+          "name": "Near clip",
+          "value": "0.1",
+          "outline": "solid 2px rgb(195, 200, 255)",
+          "ring": {
+            "x": 833.7,
+            "y": 327,
+            "width": 154.3,
+            "height": 28
+          }
+        },
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": {
+          "name": "Near clip",
+          "value": "0.1",
+          "outline": "solid 2px rgb(195, 200, 255)",
+          "ring": {
+            "x": 828,
+            "y": 478,
+            "width": 162,
+            "height": 26
+          }
+        },
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "light-fixture-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "crate-error-normal-1440x874",
+      "before": {
+        "firstValueTop": 198,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (154/187 px)",
+          "Material: materials/weathered_wood.mat (154/202 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 159,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (168/187 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "crate-error-minimum-1000x650",
+      "before": {
+        "firstValueTop": 214,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (120/187 px)",
+          "Material: materials/weathered_wood.mat (120/202 px)",
+          "?: -0.5 (23/29 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 194,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (128/187 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "railing-compound-normal-1440x874",
+      "before": {
+        "firstValueTop": 350,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (154/202 px)",
+          "Material: materials/weathered_wood.mat (154/202 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 305,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (168/202 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "railing-compound-minimum-1000x650",
+      "before": {
+        "firstValueTop": 382,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (120/202 px)",
+          "Material: materials/weathered_wood.mat (120/202 px)"
+        ],
+        "clippedText": 4,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 340,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (128/202 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "handcart-compound-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/handcart.mesh (154/209 px)",
+          "Material: materials/weathered_wood.mat (154/202 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/handcart.mesh (168/209 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "handcart-compound-narrow-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "?: -1.5 (23/29 px)",
+          "Mesh: assets/dock_kit/handcart.mesh (120/209 px)",
+          "Material: materials/weathered_wood.mat (120/202 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/handcart.mesh (128/209 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "script-unsupported-normal-1440x874",
+      "before": {
+        "firstValueTop": 266,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 17.82
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 224,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 17.82
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "script-unsupported-minimum-1000x650",
+      "before": {
+        "firstValueTop": 282,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "Source: scripts/grapple.ts (120/130 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 17.82
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 240,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Source: scripts/grapple.ts (128/130 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 17.82
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "long-name-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/post.mesh (154/180 px)",
+          "Material: materials/weathered_wood.mat (154/202 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/post.mesh (168/180 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "long-name-minimum-1000x650",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/post.mesh (120/180 px)",
+          "Material: materials/weathered_wood.mat (120/202 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/post.mesh (128/180 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "asset-texture-normal-1440x874",
+      "before": {
+        "firstValueTop": 226,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 192,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "asset-texture-minimum-1000x650",
+      "before": {
+        "firstValueTop": 226,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 192,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "asset-long-normal-1440x874",
+      "before": {
+        "firstValueTop": 280,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 246,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "?: -4.75 (34/36 px)",
+          "?: 0.2588 (18/43 px)",
+          "?: 0.9659 (18/43 px)",
+          "?: -0.21 (34/36 px)",
+          "Source: 01JA33RV00000000000000003A (186/228 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-minimum-1000x650",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "?: 1.02 (23/29 px)",
+          "?: -4.75 (23/36 px)",
+          "?: 0.2588 (9/43 px)",
+          "?: 0.9659 (9/43 px)",
+          "?: 1.35 (23/29 px)",
+          "?: -0.21 (23/36 px)",
+          "Source: 01JA33RV00000000000000003A (152/228 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Source: 01JA33RV00000000000000003A (146/187 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-narrow-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "?: 1.02 (23/29 px)",
+          "?: -4.75 (23/36 px)",
+          "?: 0.2588 (9/43 px)",
+          "?: 0.9659 (9/43 px)",
+          "?: 1.35 (23/29 px)",
+          "?: -0.21 (23/36 px)",
+          "Source: 01JA33RV00000000000000003A (152/228 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Source: 01JA33RV00000000000000003A (146/187 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-wide-1920x1080",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 240,
+        "clippedValues": [
+          "?: 0.2588 (29/43 px)",
+          "?: 0.9659 (29/43 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-navmesh-normal-1440x874",
+      "before": {
+        "firstValueTop": 223,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Id: 01JA33RV00000000000000003V (195/228 px)",
+          "Entity: 01JA33RV00000000000000003S (195/227 px)"
+        ],
+        "clippedText": 7,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 185,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Entity: 01JA33RV00000000000000003S (175/187 px)"
+        ],
+        "clippedText": 3,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-navmesh-minimum-1000x650",
+      "before": {
+        "firstValueTop": 255,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "Id: 01JA33RV00000000000000003V (158/228 px)",
+          "?: -40 (20/22 px)",
+          "?: -40 (20/22 px)",
+          "Entity: 01JA33RV00000000000000003S (158/227 px)"
+        ],
+        "clippedText": 7,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 236,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Entity: 01JA33RV00000000000000003S (135/187 px)"
+        ],
+        "clippedText": 6,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-grid-normal-1440x874",
+      "before": {
+        "firstValueTop": 172,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 20,
+        "horizontalOverflow": 1361,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-grid-minimum-1000x650",
+      "before": {
+        "firstValueTop": 172,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 20,
+        "horizontalOverflow": 1394,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-grid-large-normal-1440x874",
+      "before": {
+        "firstValueTop": 172,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 20,
+        "horizontalOverflow": 261983,
+        "axe": "not run",
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": "not run",
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-sun-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "?: -0.4384 (18/50 px)",
+          "?: 0.8988 (18/43 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-sun-minimum-1000x650",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "?: -0.4384 (9/50 px)",
+          "?: 0.8988 (9/43 px)",
+          "Green: 0.92 (23/29 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-spot-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "?: -0.3007 (18/50 px)",
+          "?: 0.9537 (18/43 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-env-normal-1440x874",
+      "before": {
+        "firstValueTop": 137,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Texture: 01JA33RV000000000000000037 (186/226 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Image: 01JA33RV000000000000000037 (97/187 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 5.91
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-mesh-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "?: 0.1089 (18/43 px)",
+          "?: 0.9941 (18/43 px)",
+          "Mesh: 01JA33RV000000000000000035 (186/227 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (94/187 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-mesh-minimum-1000x650",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "?: -1.5 (23/29 px)",
+          "?: 0.1089 (9/43 px)",
+          "?: 0.9941 (9/43 px)",
+          "Mesh: 01JA33RV000000000000000035 (152/227 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (54/187 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-mesh-narrow-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "?: -1.5 (23/29 px)",
+          "?: 0.1089 (9/43 px)",
+          "?: 0.9941 (9/43 px)",
+          "Mesh: 01JA33RV000000000000000035 (152/227 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (54/187 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-rubble-normal-1440x874",
+      "before": {
+        "firstValueTop": 214,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 175,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-audio-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Clip: 01JA33RV000000000000000039 (186/227 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Clip: 01JA33RV000000000000000039 (91/187 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-ortho-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "?: -0.7071 (18/50 px)",
+          "?: 0.7071 (18/43 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-broken-camera-normal-1440x874",
+      "before": {
+        "firstValueTop": 198,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 159,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-broken-camera-minimum-1000x650",
+      "before": {
+        "firstValueTop": 214,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 194,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-malformed-normal-1440x874",
+      "before": {
+        "firstValueTop": 317,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (186/227 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 273,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (94/187 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-malformed-minimum-1000x650",
+      "before": {
+        "firstValueTop": 349,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (152/227 px)"
+        ],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 324,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (54/187 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-long-name-normal-1440x874",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000036 (186/227 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 158,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000036 (81/187 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-long-name-minimum-1000x650",
+      "before": {
+        "firstValueTop": 138,
+        "fixedChrome": 36,
+        "agentHeight": 200,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000036 (152/227 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 16.28
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": 118,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000036 (41/187 px)"
+        ],
+        "clippedText": 2,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "agent-signed-in-normal-1440x874",
+      "before": null,
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 107,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "agent-signing-in-normal-1440x874",
+      "before": null,
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "agent-collapsed-normal-1440x874",
+      "before": null,
+      "after": {
+        "firstValueTop": 159,
+        "fixedChrome": 36,
+        "agentHeight": 37,
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (168/187 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "import-form-normal-1440x874",
+      "before": null,
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": {
+          "name": null,
+          "value": null,
+          "outline": null,
+          "ring": null
+        },
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "tree-focus-normal-1440x874",
+      "before": null,
+      "after": {
+        "firstValueTop": 99,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 1,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "stress-tree-normal-1440x874",
+      "before": null,
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "stress-assets-normal-1440x874",
+      "before": null,
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-history-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-console-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "account-dialog-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "shortcuts-dialog-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "project-loading-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "project-error-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "empty-project-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 141,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "no-engine-normal-1440x874",
+      "before": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 210,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "firstValueTop": null,
+        "fixedChrome": 36,
+        "agentHeight": 107,
+        "clippedValues": [],
+        "clippedText": 0,
+        "outOfBounds": 0,
+        "horizontalOverflow": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    }
+  ],
+  "totals": {
+    "captures": {
+      "before": 56,
+      "after": 63
+    },
+    "axeViolations": {
+      "before": 0,
+      "after": 0
+    },
+    "clippedValues": {
+      "before": 72,
+      "after": 32
+    },
+    "outOfBoundsElements": {
+      "before": 60,
+      "after": 0
+    },
+    "pageErrors": {
+      "before": 0,
+      "after": 0
+    }
+  }
+}
