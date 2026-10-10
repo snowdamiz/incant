@@ -53,12 +53,14 @@ within its documented workload.
 
 ## Active work
 
-- Rectangular-grid navigation is in progress on `impl/grid-navigation`. Weighted
-  A*, blocked corners, bounded search, authored components, immutable runtime
-  snapshots and `api.findGridPath` are implemented. Nine behavior tests and
-  focused Clippy pass. Generated contracts, public process workflows, full
-  checks and Claude's rendered review remain pending. This does not claim the
-  full 2D renderer/tilemap/physics milestone. See [grid navigation](docs/spikes/grid-navigation.md).
+- Rectangular-grid navigation supports weighted A*, blocked corners, bounded
+  search, shared component edits and `api.findGridPath`. The integrated branch
+  passes 309 Rust tests, Clippy, generated contracts and the public grid,
+  steering and off-mesh saved-game workflows. The native core probe passes
+  weighted detours, edits, blocked corners and reopened routes. GPU/native and
+  target checks are running; Claude 0029 is reviewing rendered movement. This
+  does not claim the full 2D renderer/tilemap/physics milestone. See
+  [grid navigation](docs/spikes/grid-navigation.md).
 
 - The near-head-on steering correction passes the unchanged public and rendered
   plaza course: all 100 walkers stay at goal from tick 2212 through 4990, with

@@ -51,3 +51,17 @@ maxima 10.373, 9.796 and 9.941 ms. These include host synchronization and ran on
 this Mac during concurrent compilation. They exclude rendering, are not a
 controlled benchmark or device gate, and do not guarantee a frame deadline.
 The repeatable helper is tools/probes/navigation-grid-scale.py.
+
+
+Integrated source `fd9f46a` includes the final steering correction, off-mesh links,
+bounded script diagnostics and executing-thread CPU budgets. All 309 Rust tests
+passed at `ac81c4b`; the next change only includes the already-computed grid result
+in the portable probe's JSON. Clippy, generated contracts and the native core
+probe pass at `fd9f46a`. All three public grid/steering/off-mesh save workflows
+pass on its immutable binary. The maximum-size grid measurement repeats with
+p95 10.813, 10.921 and 10.971 ms, maxima 10.861, 11.082 and 11.133 ms. The same
+local workload limitations apply; this is not a controlled before/after study.
+
+Claude handoff 0029 is reviewing actual rendered movement on that binary. GPU,
+native packaging, cross-target compilation, hosted checks and the visual verdict
+remain pending. See the [exact evidence](evidence/grid-navigation-2026-10-10.json).
