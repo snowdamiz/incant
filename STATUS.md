@@ -98,8 +98,8 @@ within its documented workload.
   compilation and five public gameplay workflows. Unchanged renderer coverage
   retains 40 passing GPU checks. Baking preserves
   transformed child geometry and hollow openings, and re-bakes after edits.
-  The final native draft blocker is resolved; updated hosted checks are required
-  before PR #25 merges.
+  All twelve hosted checks passed on `c740134`; PR #25 merged into main as
+  `2f32eb7` with its tested tree unchanged. The native draft blocker is resolved.
   See [compound colliders](docs/spikes/compound-colliders.md).
 
 - PR #40 adds weighted rectangular-grid navigation through `api.findGridPath`,
