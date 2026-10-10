@@ -60,9 +60,135 @@ separate compressed measurements on successful representative native, credential
 and platform producers, at least once per host OS. Record registry versus target,
 old unused variants, largest new archive and total repository footprint.
 
-## Candidate layout and projected range
+## Simpler priority alternative: evaluate before a custom publisher
 
-The candidate to validate first is **one registry layer per supported host family,
+The director requested an explicit tradeoff before introducing custom packaging
+or a global admission layer. Keeping native engine dependency targets warm has
+more merge-latency value than keeping every short auxiliary build warm. Changing
+which artifacts are cached does not remove a check, assertion, target, feature or
+locked build. The existing pinned action supports registry/download-only caching
+with `cache-targets: 'false'`; no custom archive implementation is needed for that
+option.
+
+[Exact arithmetic and historical jobs](evidence/ci-cache-priority-options-2026-10-10.json)
+use the complete reconstructed main53 inventory. Removed totals below are the
+old combined archives, not a claimed measured target-only size. They include the
+already missing 566,356,126-byte Linux credential family. Thus actual bytes freed
+from the observed inventory would be that much lower. No cache was deleted for
+this proposal.
+
+| Auxiliary families losing target caches | Old combined archives | Steady bytes if caching omitted | Steady bytes with three shared registries, local central estimate |
+| --- | ---: | ---: | ---: |
+| Three credential jobs | 1,459,334,055 | 9,137,231,851 | 9,589,579,102 |
+| Credentials + three desktop platform probes | 2,754,982,491 | 7,841,583,415 | 8,293,930,666 |
+| Above + Android + web; retain iOS target cache | 4,252,113,850 | 6,344,452,056 | 6,796,799,307 |
+| Credentials + all six platform probes | 4,815,428,923 | 5,781,136,983 | 6,233,484,234 |
+
+The shared-registry column adds three times the local 150,782,417-byte sample;
+the hosted total remains unmeasured. A 75–200 MB per-host planning range adds
+225–600 MB instead. Keep the native macOS/Linux/Windows target caches, pinned
+tool binaries, npm and Gradle unchanged in every option.
+
+Credential caches alone are insufficient: even omitting them entirely leaves
+9.14 GB before a 1.85 GB macOS replacement. The six-family registry-only option
+fits one such replacement plus a 256 MiB reserve, including at the 600 MB registry
+upper estimate: **10,558,926,940 bytes**, below 10 GiB (10,737,418,240 bytes).
+However, it fails the observed near-simultaneous macOS/Windows replacement case:
+**11,865,405,797 bytes** at that estimate. Merely removing credential caches would
+not solve the observed failure mode.
+
+The smallest set in this comparison that accommodates that observed two-upload
+overlap throughout the planning range is eight auxiliary families: credentials,
+desktop probes, Android and web. At the 600 MB registry estimate it reaches
+**10,368,274,438 bytes**, already including the 256 MiB reserve. Keeping iOS's
+target cache favors its queue-sensitive macOS job. Removing all nine auxiliary
+target caches increases that margin by another 563,315,073 bytes. These are
+candidate tradeoffs for review, not authorization to broaden the running change.
+
+Neither registry-only variant guarantees room for three simultaneous native
+replacement archives. All nine auxiliary families converted, the central estimate
+plus three replacements and reserve is **11,219,959,736 bytes**. Do not describe a
+two-upload fit as a general retention guarantee. Before rollout, measure actual
+hosted registry sizes and the three-native overlap; consider a narrowly scoped
+successful-producer cleanup or a bounded write policy only if the measured
+headroom still requires it. Avoid building a global publisher preemptively.
+
+### Historical execution and queue tradeoff
+
+Every auxiliary main49 job below had a Rust-cache miss. The source head/graph is
+older, and the timings include then-current installation/upload behavior; these
+are observed cold bounds for that run, not predictions for current code. The new
+pinned binary caches remain enabled in the proposal.
+
+| Cold job | Execution | Queue |
+| --- | ---: | ---: |
+| Credential macOS / Linux / Windows | 3m53 / 2m44 / 5m01 | 12s / 2s / 2s |
+| Desktop platform macOS / Linux / Windows | 4m03 / 2m09 / 6m14 | 7s / 2s / 2s |
+| Web / Android / iOS | 5m32 / 7m05 / 6m47 | 3s / 2s / 6s |
+| Native Linux / Windows | 15m36 / 34m27 | 2s / 2s |
+
+At those observed queues, all nine auxiliary cold jobs completed before the
+native critical path. Credentials alone topped out at 5m03 including queue; the
+six-family set at 6m16; all nine at 7m07. Current main53 native Windows was 14m43
+plus 2s queue, while PR53 Windows was 23m24 plus 2s queue. This supports giving
+native target caches priority, but does not prove unchanged merge time: current
+features and runner contention differ, and longer auxiliary compilation increases
+runner occupancy. Main53 iOS already took 7m40 plus **6m42 queue** despite a prefix
+restore, nearly reaching the native producer's wall time. Queue must remain a
+separate measured outcome.
+
+The first [actual pinned-tool consumers](evidence/ci-pinned-tool-consumers-2026-10-10.json)
+are now verified on PR56 head `961b1d3`:
+web reused wasm-bindgen 0.2.126 and Android reused cargo-ndk 4.1.2 from the main53
+keys, with no installation and both PR save steps skipped. Their execution/queue
+were 1m38/5m57 and 4m09/1m46 respectively. This proves the narrow binary caches are
+working; it does not measure registry-only builds or isolate all timing changes.
+
+### Minimal implementation and bounded validation, if approved
+
+Use the existing pinned rust-cache action's `cache-targets: 'false'`, retain
+`cache-bin: 'false'`, and use a new `shared-key` namespace for auxiliary registries.
+The action's shared key replaces the workflow/job key prefix, then still includes
+host OS/architecture, compiler/environment and manifest/lock hashes. Include the
+explicit host image/distro in the proposed prefix; keep the current default-branch
+save predicate and PR restore-only policy. Do not share across host architectures,
+overwrite Cargo proxies, change RUSTFLAGS, or grant new permissions. The three-host
+projection must be checked against actual generated keys: differing environment
+or lock inputs can legitimately create more groups.
+
+With an immutable shared key, the first successful auxiliary producer may have
+only a subset of downloaded crates. Cargo's ordinary locked/checksummed download
+fallback remains necessary; a cache hit is not proof that every dependency was
+present. Verify both credential and platform consumers. Removing target caching
+also means their compiler work happens normally on every runner.
+
+1. Review an inputs-only workflow diff with identical steps, commands, targets,
+   permissions and timeouts. Keep current PR56/57 heads unchanged.
+2. Measure separate registry compression on one successful producer per host,
+   without changing publication or deleting files. Confirm projected namespace
+   count and storage including one complete replacement cycle, not just steady
+   state. Require enough headroom for the chosen overlap policy before rollout.
+3. In one reviewed substantive PR, verify normal locked cold builds, every native,
+   GPU, credential and platform check, exact GPU identities and fresh shipping
+   proof. Then verify trusted default-branch saves and a later PR's actual restores
+   with no PR writes. Compare longest execution and queue separately on a matched
+   dependency graph.
+4. Retire only the specifically approved old auxiliary target-cache families after
+   new registry production/consumption is proved. This is an intentional policy
+   migration, not the existing same-family/version replacement cleanup rule.
+   Preserve native, active PR and unrelated caches. Retain a rollback workflow
+   diff and normal installation fallback.
+
+**Recommendation:** prefer this supported inputs-only priority approach over
+custom split archives. Credential-only changes lack capacity; six families are a
+useful small experiment but do not meet observed overlapping replacement needs.
+Measure the eight-family registry-only option first, retain iOS targets, and use
+the nine-family alternative only if the extra headroom outweighs measured iOS
+latency. No implementation is enabled by this recommendation.
+
+## Deferred alternative: split every target and registry archive
+
+The more complex alternative is **one registry layer per supported host family,
 plus the existing 12 independent third-party target families**. Keep all dependency
 artifacts currently eligible for each family, keep workspace artifacts excluded,
 and preserve every check and command. Do not silently make auxiliary jobs
