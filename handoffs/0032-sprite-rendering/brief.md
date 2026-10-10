@@ -1,3 +1,47 @@
+## Wide-region precision follow-up — preserve rounds one through three
+
+The immediately interrupted invocation received the old packet after preparation
+failed on the read-only binary. That is resolved: this packet and binary.json now
+identify the NEW candidate. Continue Opus 5.5 at explicitly verified Max over ACP.
+Your third review is integrated. Astra reproduced the wide-region defect and
+fixed it in source 0494b40cf8fcc5e1ad0fc689655a62cb264a2f50. Read
+artifacts/tools/wide-fix-evidence.json and source snapshots under
+artifacts/tools/wide-source/: this child checkout's older Rust files are not the
+candidate source. Do not build or edit Rust/shaders here.
+
+The candidate splits nearest geometry into source spans of at most 512 texels,
+interpolates small local coordinates and carries an exact flat integer base.
+Fractional bias is evaluated before adding that base. It preserves the original
+geometry/source mapping, flips and nine-slice cuts; linear sampling and tone stay
+unchanged. Vertex size 64 bytes and draw batches stay unchanged; wide nearest
+regions add CPU/vertex work (at most 1944 vertices/sprite). The total 128 MiB geometry
+bound is enforced before growing the CPU buffer or uploading the next texture.
+
+Numerical checks: initial large-edge sweep 34/600 failures, arithmetic-only
+attempt 24/600. Candidate passes 600 outer-edge plus 264 internal-span cases on
+Metal, widths 512–8192 and scales 1/2/4/8/16/32, both axes/flips and boundary offsets.
+Independent aligned crops now identify EVERY source texel with unique colors;
+review caught a weaker periodic palette before completion. Deliberately omitting
+the base fails 720/864; restored candidate passes all cases and all 7 sprite GPU
+tests. Full 360 normal/55 GPU workspace tests, Clippy and release build pass.
+
+Use the newly frozen artifacts/tools/incant_headless and binary.json, verify
+hashes. Prior a4b5ddb9 binary/metadata are preserved as pre-wide-incant_headless
+and pre-wide-binary.json. Keep every earlier report/artifact. Re-run your
+independent large-region sweep, particularly the J/I failures and interior 512
+boundaries, plus representative mirrors, rolls, offsets and nine-slice cases.
+Check sheet-resize invariance, unchanged linear/tone behavior and repeated fresh
+source-free execution. Look for tessellation seams and falsify the proposed fix.
+Return scoped rendered/numerical acceptance or concrete failures with provenance.
+Do not infer portability, phone performance, native editor acceptance or phase
+completion. The separate near-tie camera follower defect remains open.
+
+Resource budget for this new pass: each renderer invocation at most 128 frames
+and 256 MiB raw; at most 2048 frames and 1 GiB raw across the whole pass, excluding
+already-preserved prior rounds. Prefer small targeted frames; stop/report if the
+budget is insufficient. Never overwrite evidence. No native app work or UI edits:
+0033 still owns that. No Cargo, engine changes, merging or accounts here.
+
 ## Magnification correction follow-up — preserve all earlier evidence
 
 Continue Opus 5.5 at explicitly verified Max through ACP. Astra reproduced your
