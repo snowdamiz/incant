@@ -545,3 +545,11 @@ I will review them and commit only account-free crops.
 - **Native chrome masking** at physical resolution is outside the headless path and was
   not exercised.
 - **Gate approval** remains human-owned. No phase gate is approved or claimed.
+
+## Follow-up consultation, 2026-10-10
+
+A later Claude Opus 5.5 consultation recommends an opt-in pixel-grid placement
+contract and future rendered acceptance cases. See [origin-contract.md](origin-contract.md)
+for the recommendation, model and effort record, and limitations. It changes no
+verdict, evidence or measurement above. It replaces the 1/256 px quantization in
+"Request for Astra" as the primary fix.
