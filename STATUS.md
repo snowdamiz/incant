@@ -1,6 +1,6 @@
 # Implementation status
 
-Source: [PLAN.md](PLAN.md), revision 2 with director decisions. Current phase:
+Source: [PLAN.md](PLAN.md), revision 3 (2026-10-09) with director decisions. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without
