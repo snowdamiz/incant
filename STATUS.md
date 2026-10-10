@@ -68,6 +68,12 @@ within its documented workload.
   recompiles workspace crates. Authorized exact-ID cleanup removed 7.60 GiB of
   merged-PR Windows npm caches while preserving all other existing entries;
   [cache evidence](docs/spikes/ci-cache-cleanup-2026-10-10.json) records each result.
+  First cold macOS verification passed in 33m58s execution (2m30s queue), but
+  package-selected tools still shifted compilation after the GPU savings.
+  The follow-up keeps workspace selection with exact tool targets: local Cargo
+  artifacts match 656 test dependencies, leaving only two required Tauri feature
+  variants, versus 45 differences with package selection. All direct probes and
+  fresh shipping checks pass; hosted validation of this refinement remains open.
 
 - Windows MSVC compilation and doctests now share Cargo's static CRT policy;
   Tauri's package-local shim is disabled after it shadowed the real runtime in
