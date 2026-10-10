@@ -78,6 +78,12 @@ within its documented workload.
   remaining gameplay migration stay explicit. See
   [numerical-boundary evidence](docs/spikes/native-numeric-boundaries.md).
 
+- A [cache layout/retention proposal](docs/spikes/ci-cache-layout-proposal.md) records
+  the main53 Linux credential-cache disappearance, final 11-family inventory and
+  separate local compressed registry/target measurements. No cache layout,
+  permission, coverage or shipping-seed change is enabled. Hosted component
+  measurements and bounded replacement-capacity validation remain required.
+
 - Native fixed-tick input now owns a fresh cooked world, script VM and bounded
   input timeline. Action bindings validate once at construction/rebind; each
   valid packet advances native simulation before the synchronous script. Raw
