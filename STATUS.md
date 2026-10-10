@@ -1,6 +1,6 @@
 # Implementation status
 
-Source: [PLAN.md](PLAN.md), revision 5 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
+Source: [PLAN.md](PLAN.md), revision 6 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
 Phase 0 items deferred, and instructed agents to continue sensible work without
@@ -52,6 +52,13 @@ integration. The thousand-entity script benchmark meets the local frame budget
 within its documented workload.
 
 ## Active work
+
+- The [final plan update review](docs/spikes/performance-plan-v6-review.md)
+  adopts hosted AWS Device Farm phones, removes name/package reservations and
+  moves distribution signing/store accounts to Phase 5 uploads. Phase 0's
+  executable gate no longer requires certificates; its unmet evidence, staffing
+  and director approval remain open. No hosted device run is claimed. The
+  temporary plan-update watcher was deleted at the director's request.
 
 - PLAN.md revision 5 retains revision 4's replacement of document-backed gameplay.
   The [revision 5 review](docs/spikes/performance-plan-v5-review.md) records the
@@ -540,10 +547,11 @@ obscures the traffic lights. No phase gate is approved.
 
 ## External prerequisites still required
 
-- Physical-device
-  coverage, self-hosted graphics/device runners, and nightly artifact history.
-- Apple/Windows distribution signing, store/developer accounts, staffing and the
-  director's phase gate approvals. These are human-only under PLAN.md.
+- Hosted real-device coverage in AWS Device Farm (no phones are bought),
+  self-hosted graphics runners, and nightly artifact history.
+- Staffing and the director's phase gate approvals. Apple/Windows distribution
+  signing and store/developer accounts are first needed for Phase 5 store uploads.
+  These are human-only under PLAN.md.
 
 [Phase 0 review checklist](docs/gates/phase0-review.md) maps requirements to evidence
 and distinguishes the remaining director decisions.
