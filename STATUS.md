@@ -53,6 +53,14 @@ within its documented workload.
 
 ## Active work
 
+- The native runtime now lends actual Transform/Velocity numeric table columns
+  through an exclusive synchronous scope with separate stable IDs. Direct writes,
+  table reallocation, hierarchy/changed-tick publication, caller-owned undo and
+  error/unwind cleanup pass focused tests; schemas/SDK remain unchanged and
+  WASM/Android/iOS simulator compilation passes. Foreign script hosts, gameplay
+  migration and performance/device gates remain open. See
+  [numeric column evidence](docs/spikes/runtime-numeric-columns.md).
+
 - The runtime has a reusable shipping-profile build/package command with fat LTO,
   one codegen unit, abort-on-panic and separately archived crash symbols. A real
   packaged macOS runner passed source-free cooked-scene execution, SIGABRT/no-unwind
