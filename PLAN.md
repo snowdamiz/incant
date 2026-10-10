@@ -3,7 +3,7 @@
 Engine name: **Incant** (decided 2026-10-08; the shortlist it was chosen from is in Appendix D).
 Working name for the launch game: **Driftwake** (placeholder).
 
-Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5.
+Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 need updates to match.
 Planning horizon: 36 months, starting November 2026, ending with a shipped game in Q4 2029.
 
 ---
@@ -36,6 +36,13 @@ merge or request repeated merge confirmation. Resolve integration conflicts and
 verify the result. Merging implemented work does not approve a phase gate or mark
 deferred requirements complete; the remaining human-owned actions still apply.
 
+Director decision, 2026-10-10: adopt the performance architecture for a competitive
+engine. Running game simulation leaves the authoring path and runs on a native ECS
+world (Section 2.6); WebAssembly modules become a native-speed script tier beside
+TypeScript; physics determinism becomes a per-project mode; temporal upscaling,
+dynamic resolution and native backend interop join the renderer. Principles 1 and
+7 are amended accordingly. This changes the plan; it does not approve any gate.
+
 Director decision, 2026-10-10: use Claude Opus 5.5 with thinking explicitly set
 to Max for all visual handoffs. Verify model and effort on every new or resumed
 ACP session; do not inherit Default or substitute another level.
@@ -50,13 +57,13 @@ A single application that is a 3D/2D modeling tool, a game engine, and an editor
 
 ### 1.2 Non-negotiable principles
 
-1. **One command bus, many clients.** Every edit, whether from a mouse, a keyboard shortcut, a script, or the agent, is a command on a single bus. There is no GUI-only path and no AI-only path.
+1. **One command bus, many clients.** Every edit to the project, whether from a mouse, a keyboard shortcut, an editor script, or the agent, is a command on a single bus. There is no GUI-only path and no AI-only path. Running the game is not an edit: play mode and shipped games simulate on a native ECS world built from cooked scenes (Section 2.6), and stopping play discards it.
 2. **The project is a text-native, schema'd document.** Scenes, prefabs, materials, graphs, animation state machines, and settings are all human-readable, diffable, and validated against a published schema. Binary data (meshes, textures, audio) lives in referenced asset files, never inline.
 3. **The agent sees what the user sees.** Viewport screenshots, console, profiler, play-test results, and validation errors are all available as tools. No "the AI guessed and hoped."
 4. **Every agent action is an undoable transaction.** The user can review, revert, or amend anything the agent did, with the same history UI used for manual edits.
 5. **Bring-your-own-model.** The user connects their own OpenAI account. We never proxy model calls through our servers by default, and we never store their keys or tokens server-side.
 6. **Dogfood everything.** The launch game is built in the engine, by the team, with the agent. Anything the game needs that the engine lacks is an engine bug.
-7. **Rust core, TypeScript gameplay, web editor chrome.** Chosen for safety, portability, and LLM fluency. Revisit only with strong evidence.
+7. **Rust core, TypeScript gameplay, WebAssembly for hot code, web editor chrome.** Chosen for safety, portability, performance, and LLM fluency. TypeScript is the default for gameplay logic; sandboxed WebAssembly modules, written in Rust first, carry performance-critical gameplay code at native speed on every target, including iOS where JIT compilation is banned. Revisit only with strong evidence.
 8. **Agent-first build with a hard routing rule.** The engine and game are built primarily by Astra running in OpenAI Codex. Any visual work is handed off to Claude 5.5 over ACP (Agent Client Protocol) using the director's already logged-in Claude account. Section 4 defines "visual" precisely. This is a build-time arrangement; the engine's end users still bring their own OpenAI account (Section 3), and the shipped engine never embeds the director's credentials.
 
 ### 1.3 Definition of done
@@ -80,12 +87,13 @@ The project is done when all of the following are true:
 | Layer | Choice | Why | Fallback |
 |---|---|---|---|
 | Engine core | Rust, built on Bevy (ECS, scheduling, asset system) | Memory safety, cross-compilation to all six targets, active ecosystem | Custom ECS if Bevy's scheduler becomes a bottleneck |
-| Rendering | wgpu, custom render graph on top of Bevy's | Metal, Vulkan, DX12, WebGPU from one codebase | Vulkan-only via ash for desktop high-end tier |
-| Physics | Rapier 3D and Rapier 2D behind a Rust-owned boundary (ADR 0003) | Pure Rust builds on all six targets including the iOS simulator and WASM, where the measured Jolt bindings failed; `enhanced-determinism` for rollback and replay | Jolt through a maintained portable C++ shim if representative game or mobile measurements show a material issue |
+| Rendering | wgpu with a custom render graph; individual passes can use Metal, Vulkan or DX12 directly through wgpu's native interop | Metal, Vulkan, DX12, WebGPU from one codebase, with an escape hatch for features wgpu lacks: vendor upscalers, async compute, hardware ray tracing | Native Metal and Vulkan backends for the high tiers if interop proves insufficient |
+| Physics | Rapier 3D and Rapier 2D behind a Rust-owned boundary (ADR 0003) | Pure Rust builds on all six targets including the iOS simulator and WASM, where the measured Jolt bindings failed. Determinism is a per-project mode: the default build uses Rapier's vector-instruction and multithreaded paths, and rollback projects select `enhanced-determinism` | Jolt through a maintained portable C++ shim if the Driftwake-scale benchmark (6.14) shows a material gap |
 | Audio | Kira plus a thin mixer layer | Pure Rust, good for games | FMOD via FFI for studios who require it |
 | Game UI | Taffy (flexbox layout) plus custom widget tree | Familiar web-style layout, agent writes it easily | None needed |
-| Gameplay scripting | TypeScript on a sandboxed QuickJS runtime, hot reload | LLMs write TS best; sandboxable; users already know it | V8 via deno_core on desktop for perf-heavy projects |
-| Native extensions | Rust plugin ABI with stable C interface | Escape hatch for perf-critical code | None |
+| Gameplay scripting | TypeScript compiled by SWC to QuickJS bytecode in a sandbox, hot reload; in web builds, the browser's own JavaScript engine | LLMs write TS best; sandboxable; users already know it | V8 via deno_core on desktop; ahead-of-time compiled TypeScript if the Phase 1 spike succeeds (open decision 18) |
+| Performance scripting | Sandboxed WebAssembly modules, Rust first: JIT with hot reload in the editor, compiled ahead of time to native code and linked into the signed binary at export; browsers run them natively | Native speed inside the sandbox on all six targets, including iOS; deterministic arithmetic for rollback | Rust native plugins with explicit user trust |
+| Native extensions | Rust plugin ABI with stable C interface | Engine extensions and platform integrations that need full native access; gameplay hot code uses WebAssembly modules instead | None |
 | Project document | Canonical typed JSON with derived JSON Schemas, Loro CRDT in memory (ADR 0008) | Diffable, mergeable, agent-readable; both CRDTs were benchmarked and Loro won | Automerge behind the same document boundary |
 | Editor shell | React and TypeScript web UI inside Tauri (ADR 0009) | Fast UI iteration, same UI reused in browser mode | egui native UI |
 | Viewport | Native wgpu surface composited into the Tauri window | Zero-copy rendering | Texture streaming over shared memory |
@@ -116,16 +124,16 @@ incant/
     incant_text        Fonts, shaping, bidi, line breaking, string tables, locale, IME bridge
     incant_2d          Sprites, atlases, tilemaps, sorting layers, 2D camera and lights
     incant_nav         Navmesh generation, pathfinding, steering, grid navigation
-    incant_script      QuickJS host, TS bindings, hot reload, sandbox
+    incant_script      QuickJS and WebAssembly hosts, TS and Rust SDK bindings, bulk query views, hot reload, sandbox
     incant_net         Transport, sessions, replication, prediction, rollback, authority, determinism toolkit, netsim
-    incant_assets      Cook, stream, hash, cache (CPU only, no editor dependency)
+    incant_assets      Cook (including binary scenes and script bytecode), stream, hash, cache (CPU only, no editor dependency)
     incant_import      Editor and CLI import coordination through the command bus
     incant_input       Fixed-tick input processing, device adapters, recordings
     incant_agent       Agent loop, tool registry, providers, skills
     incant_headless    Headless runner for play-tests and CI
     incant_platform_smoke  Runnable cross-platform probe of the document and Bevy crates
     incant_export      Build pipeline for all targets
-    incant_runtime     The shipped game runtime (no editor)
+    incant_runtime     The shipped game runtime: no editor, document model, CRDT, command bus or agent
   editor/
     app/              Tauri shell
     ui/               Web UI (panels, inspectors, chat, history)
@@ -141,6 +149,7 @@ incant/
     deploy/           Infrastructure as code for every service; never credentials
   sdk/
     ts/               @incant/runtime TypeScript types and helpers
+    rust/             incant-module Rust SDK for WebAssembly modules, generated from the schema registry
     templates/        Starter projects
     skills/           Agent skills and recipes
   games/
@@ -171,15 +180,26 @@ This is the heart of the system. Treat it as a product in its own right.
 
 - A command is a named operation with typed arguments, a `apply`, an `invert`, and a `describe` for the history panel.
 - Commands compose into transactions. A transaction is atomic and undoable as a unit.
-- The GUI emits commands. Scripts emit commands. The agent emits commands. The headless runner emits commands.
+- The GUI, editor tool scripts, the agent and the headless runner emit commands. Gameplay scripts do not: running game simulation is not a project edit, and Section 2.6 describes its data path.
 - Commands are serialized to a journal, which enables replay, crash recovery, and session sharing.
 
 ### 2.5 Process model
 
 - **Editor process** (Rust): owns the engine, the document, the command bus, the agent loop, and the native viewport surface.
 - **UI process** (Tauri webview): panels, inspector, chat, history, asset browser. Talks to the editor process over a typed IPC channel.
-- **Play-test processes**: spawned headless or windowed runtime instances. They report screenshots and logs back to the editor process.
-- **Browser mode**: engine compiled to WASM runs inside the same web UI. Reduced feature set (no native plugins, no local file system without the File System Access API).
+- **Play-test processes**: spawned headless or windowed runtime instances, built with the project's physics determinism mode. They report screenshots, logs and runtime-state snapshots back to the editor process.
+- **Browser mode**: engine compiled to WASM runs inside the same web UI. Reduced feature set (no native plugins, no Rust module compilation, no local file system without the File System Access API).
+
+### 2.6 Runtime data path
+
+The project document and the command bus serve authoring. Running the game never goes through either. This supersedes the runtime path in ADR 0006, where play sessions simulate by executing commands on a copy of the document and serialize the whole project to JSON for every script tick; the current play session migrates to this model in Phase 1.
+
+- **Cooked scenes.** The cook step turns each scene into a binary, archetype-ordered format that loads into ECS storage without text parsing. Binary loading still checks versions, bounds, references and integrity before publishing a world; it does not reinterpret unchecked bytes as Rust objects. JSON scenes never ship.
+- **Native world.** Play-in-editor, play-test processes, the headless runner and shipped games instantiate a Bevy ECS world from cooked scenes and simulate there, using Bevy's multithreaded scheduler. Stopping play discards the world; the document was never modified.
+- **Direct component access.** TypeScript and WebAssembly scripts read and write component data through typed views into ECS storage, in bulk by default. Spawns, despawns and component additions go through a per-frame command buffer applied at a sync point. Nothing is serialized, journaled or revalidated per tick; validation happens at cook time and on structural changes.
+- **Observation without coupling.** The agent, the inspector, the profiler and headless assertions read runtime state through snapshot queries of the world. Saves serialize the world through the schema registry into a versioned binary format.
+- **Edits during play.** Inspector changes during play are runtime-only. Keeping one is an explicit action that emits a normal command on the bus with normal provenance.
+- **Lean runtime.** `incant_runtime` contains no document model, CRDT, command bus or agent, and parses no JSON on the frame path. A dependency test enforces this on every build.
 
 ---
 
@@ -238,7 +258,9 @@ The engine stores **only metadata** about provider connections server-side: "thi
 
 - Threat model documented for: stolen keychain entries, malicious project files that contain prompt injection, malicious templates, and malicious scripts.
 - Prompt injection defense: project content shown to the agent is wrapped and labeled as data. The agent cannot execute shell commands on the user's machine, only engine commands and sandboxed scripts.
-- Scripts run in a sandbox with no file system or network access unless the project grants a capability, and the user confirms the grant.
+- Scripts run in a sandbox with no file system or network access unless the project grants a capability, and the user confirms the grant. WebAssembly modules use the same capability model and import only engine-provided functions.
+- Compiling Rust modules can execute code through build scripts and procedural macros. Module builds therefore run offline, against vendored dependencies from an engine-vetted allowlist, with no build scripts or procedural macros outside that allowlist, in a sandboxed compiler process. The Rust toolchain is an optional, pinned, checksum-verified download, never a shell the agent can reach.
+- QuickJS bytecode and ahead-of-time native WebAssembly artifacts are executable code, not untrusted project assets. Load only artifacts produced by the trusted local cook/compiler or authenticated exports; a content hash alone does not establish that trust. Opening an untrusted project recompiles its source in the sandbox instead of accepting supplied executable caches.
 - Asset imports are parsed with fuzzed, memory-safe parsers. Native plugins require explicit user trust.
 - OpenAI usage policies are surfaced in the connection UI. We do not resell or meter their service.
 
@@ -308,7 +330,7 @@ Repository files that make this work:
 - Astra uses the director's OpenAI account through Codex.
 - Claude uses the director's logged-in Claude Code session. Nothing is stored server-side or in CI.
 - CI never calls either agent. CI runs builds, tests, golden images, device farm, and the in-engine agent eval harness. The eval harness uses dedicated eval provider keys from the CI secrets store, and those keys are only ever used by the eval harness.
-- Human-only: Apple, Google, and Steam developer accounts, signing keys, payment setup, legal filings, age rating submissions, cloud provider accounts and billing for live services, DDoS protection contracts, legal review of the privacy policy, age gates and account deletion flows, and accountability for the on-call rotation.
+- Human-only: Apple, Google, and Steam developer accounts, signing keys, payment setup, legal filings, age rating submissions, cloud provider accounts and billing for live services, DDoS protection contracts, legal review of the privacy policy, age gates and account deletion flows, vendor SDK license agreements (for example NVIDIA DLSS and Intel XeSS), purchase of reference devices for performance CI, and accountability for the on-call rotation.
 
 ### 4.5 Human team
 
@@ -383,13 +405,23 @@ Goals: a runtime that can run a real 3D game without an editor.
 
 Deliverables:
 - Render graph with clustered forward+ lighting, PBR materials, shadow cascades, SSAO, bloom, tonemapping, TAA. Mobile tier with reduced features.
+- Shader and pipeline compilation off the frame: WGSL is translated per backend at cook time (MSL, SPIR-V, DXIL/HLSL), driver pipeline caches persist across launches where the backend supports them (Vulkan pipeline caches; Metal binary archives and DX12 pipeline libraries through backend interop), and each level pre-warms the pipeline permutations recorded by headless runs during its load screen. Unrecorded permutations compile asynchronously with a fallback material instead of stalling a frame.
+- Temporal upscaling and dynamic resolution on every tier: a built-in temporal upscaler on all backends and MetalFX on Apple platforms, with frame-time-driven resolution scaling. Mobile renders at reduced internal resolution by default. Vendor upscalers on desktop arrive in Phase 4.
+- Native backend interop in the render graph: a pass can declare that it runs on the underlying Metal, Vulkan or DX12 API through wgpu's interop, for vendor upscalers, async compute on desktop-high, and hardware ray tracing while wgpu's support is experimental. Every interop pass has a portable fallback.
 - Asset pipeline: glTF, FBX (via converter), PNG/JPG/EXR, WAV/OGG import. Cook to KTX2 and meshopt. Content-addressed cache. Hot reload of assets.
-- Physics: Rapier 3D and 2D behind a Rust-owned boundary (ADR 0003), colliders, rigid bodies, character controller, raycasts, triggers, deterministic step mode.
+- Physics: Rapier 3D and 2D behind a Rust-owned boundary (ADR 0003), colliders, rigid bodies, character controller, raycasts, triggers. Determinism is a per-project setting. Because Rapier selects it at compile time, the export pipeline and play-test processes build the runtime variant the project needs: the fast variant uses vector instructions and multithreading; the deterministic variant uses `enhanced-determinism` for rollback and exact-state replays in CI.
 - Audio: mixer with buses, 3D spatialization, streaming for music.
 - Animation: skeletal playback, blend trees, state machines, two-bone IK, root motion.
 - Game UI: flexbox layout, text rendering with font atlases over a shaping stack (cosmic-text: rustybuzz shaping, bidi, Unicode line breaking, font fallback chains for CJK and emoji), a text input widget with IME composition on desktop and the platform on-screen keyboard on mobile, input focus, gamepad navigation.
 - Scripting: full TS SDK covering entities, components, input, haptics, physics queries, navigation, audio, UI, localization, 2D, timers, coroutines. Type definitions generated from the schema registry.
-- Headless runner: run a project for N seconds, capture frames and logs, exit with a status.
+- Bulk script API: scripts can run as systems over queries that read and write whole component columns through typed-array views, so one call updates every matching entity. Per-entity calls remain for convenience; the SDK documentation and agent skills default to the bulk form for anything that runs every tick.
+- Script bytecode: the cook step precompiles every script to QuickJS bytecode, so shipped builds and headless runs parse no TypeScript or JavaScript at startup. Bytecode is tied to the runtime version, produced only by the cook step, and covered by the package's content hashes. The runtime never loads bytecode from project files, mods or the network, because QuickJS does not verify bytecode. Source maps are kept for crash symbolication.
+- Runtime data path (Section 2.6): cooked binary scenes, the native ECS world, direct component access for scripts, the per-frame command buffer, world snapshots for observation, and binary saves. The existing document-backed play session migrates to it.
+- WebAssembly modules: a module host with the same capability model, bulk query views and command buffer as TypeScript; a Rust SDK generated from the schema registry; Wasmtime with JIT and hot reload in the editor and on desktop and Android; ahead-of-time compilation to native code linked into the signed binary on iOS. Relaxed SIMD is disabled in rollback projects to keep arithmetic deterministic.
+- Spike: ahead-of-time compilation of typed TypeScript, with Static Hermes as the first candidate and a TypeScript-subset-to-WebAssembly compiler as the alternative. Adopt only if it passes the SDK conformance suite and beats bytecode by a measured margin on the reference phones (open decision 18).
+- Profiler: Tracy integration with CPU zones per system and script, GPU timestamp queries, memory and allocation tracking, and on-device capture over the network from phones.
+- Shipping build profile for the runtime: fat link-time optimization, one codegen unit, abort on panic, symbols split for crash reporting. All device performance gates are measured with this profile.
+- Headless runner: run a project for N seconds on the runtime world, capture frames, logs and state snapshots, exit with a status.
 - Input: keyboard, mouse, gamepad, touch with gesture recognition; haptics (gamepad rumble and mobile haptic feedback) through one API.
 - Save system: serialize game state to a versioned format.
 - Navigation: runtime navmesh generation from colliders and meshes (recast-style voxelize, region, contour, polygonize) built in tiles so runtime-assembled rooms rebuild only changed tiles; A* with funnel string-pulling; agent steering with local avoidance; off-mesh links; grid and tilemap navigation for 2D; debug draw. Crowd simulation is out of scope.
@@ -400,6 +432,9 @@ Exit gate:
 - A "Core Sample" test game (third-person character on a terrain with enemies, pickups, UI, music) runs at 60 fps on an M1 MacBook Air, a mid-range Windows laptop, an iPhone 13, and a Pixel 6, written entirely in TypeScript against the SDK with no editor.
 - Headless runner used in CI to play Core Sample and assert on game state.
 - Core Sample's enemies navigate by navmesh, its UI passes pseudo-localization and renders one right-to-left and one CJK locale correctly, and a 2D sample scene (tilemap, sprites, 2D physics) runs on the same four devices.
+- On the iPhone 13 and the Pixel 6, Core Sample's scripts stay within 2 ms per frame at p95 with ten thousand scripted entities, and no gameplay frame exceeds twice the frame budget because of shader or pipeline compilation. Desktop measurements do not count toward this gate.
+- Core Sample runs on the runtime data path: the shipped binary passes the dependency test, and its scripts never serialize world state per tick.
+- A WebAssembly gameplay module runs on all four devices, compiled ahead of time on the iPhone, and its per-frame cost on both phones is recorded against the same system written in TypeScript.
 
 ### Phase 2: Editor and document model (May 2027 to Feb 2028, 10 months, overlaps Phase 1)
 
@@ -411,7 +446,7 @@ Deliverables:
 - Editor panels: hierarchy, inspector (schema-driven, auto-generated for any component), viewport with gizmos (translate, rotate, scale, snapping), asset browser, console, profiler, history.
 - Scene editing: create, parent, duplicate, prefab instancing with overrides, multi-select.
 - Material editor: property-based (node graph arrives in Phase 4).
-- Play-in-editor: press play, the runtime runs in the viewport, pause, step, inspect live state, stop restores the document.
+- Play-in-editor: press play, the runtime world from Section 2.6 runs in the viewport, pause, step, inspect live state, stop discards the world. The document is never modified by play.
 - Project templates: empty, 3D third-person, 2D platformer, top-down, first-person.
 - Settings, project settings, input mapping editor.
 - 2D editing: tilemap painter with autotile rules, sprite and atlas inspector, collider-from-alpha tool.
@@ -423,6 +458,7 @@ Deliverables:
 Exit gate:
 - Core Sample can be rebuilt from an empty project using only the editor in under four hours by someone who has never seen the code.
 - Every editor action is a command on the bus (verified by a test that disables direct document mutation and runs the UI test suite).
+- On a 100,000-entity scene, the editor applies an edit in under 100 ms and keeps the viewport at 60 fps on the M1 MacBook Air.
 - Undo/redo passes a fuzz test of ten thousand random command sequences with document equality checks.
 - The 2D platformer template is rebuilt from an empty project through the editor alone and plays with tilemap collision, sprite animation and a following camera.
 
@@ -435,7 +471,7 @@ Deliverables:
 - Agent loop: planning, tool calls, streaming to chat UI, interruption, approval modes (auto, ask for destructive, ask always).
 - Tool surface v1 (see Appendix A): document query and patch, schema lookup, asset listing, screenshot, console, profiler, play-test, script read/write, validation, search.
 - Context management: project summary, recent history, relevant schemas, and open panels are assembled per turn. Long projects use a maintained project memory file.
-- Skills system: a skill is a markdown playbook plus optional TS helpers. Ship sixteen skills: character controllers (third-person, first-person, 2D platformer, top-down), camera rigs, inventory, dialogue, health and damage, spawners, checkpoints, mobile touch controls, settings menu, main menu, save/load, simple AI (patrol, chase, on the navmesh), day/night cycle, and localize project (drafts translations through the connected provider and flags every string for human review).
+- Skills system: a skill is a markdown playbook plus optional TS helpers. Ship seventeen skills: profile and optimize (reads the profiler, moves per-entity logic to bulk queries and hot loops to a WebAssembly module, and verifies the gain), character controllers (third-person, first-person, 2D platformer, top-down), camera rigs, inventory, dialogue, health and damage, spawners, checkpoints, mobile touch controls, settings menu, main menu, save/load, simple AI (patrol, chase, on the navmesh), day/night cycle, and localize project (drafts translations through the connected provider and flags every string for human review).
 - Eval harness: two hundred scripted tasks with automated graders (document assertions, headless play-test assertions, vision checks). Runs nightly against every supported model. Regressions block release.
 - Chat UI: inline diffs of document changes, clickable entity references, screenshots inline, "revert this turn" button, cost meter.
 - Agent-driven asset generation v1: textures via image models, placeholder meshes via text-to-3D, sound effects via audio models, all through pluggable providers.
@@ -458,7 +494,8 @@ Deliverables:
 - Terrain: heightmap editing, layered materials, foliage scatter, streaming.
 - Animation tools: retargeting, animation graph editor, IK rigs, timeline for cinematics.
 - VFX: GPU particle system with a graph editor.
-- Global illumination: baked lightmaps and probe volumes for all tiers, screen-space GI for desktop, hardware RT reflections as an optional desktop tier.
+- Global illumination: baked lightmaps and probe volumes for all tiers, screen-space GI for desktop, hardware RT reflections as an optional desktop tier through native backend interop while wgpu ray tracing is experimental.
+- Vendor upscalers on desktop through native backend interop: FSR, DLSS and XeSS, selected automatically by hardware, after the human-owned license review.
 - Lighting for runtime-assembled content: per-template lightmap and probe bakes stored with the template, probe volumes blended across room seams at load, a probe relighting pass on desktop when time of day or destruction changes the lighting, and a mobile path of per-template probes plus analytic lights. Driftwake's room graph is the test case.
 - 2D lighting: normal-mapped sprites, 2D point and spot lights with soft shadows at desktop tier, unlit and vertex-lit at mobile tier.
 - Asset generation v2: image-to-3D with automatic cleanup to engine-ready meshes, texture set generation (albedo, normal, roughness), animation generation from text for humanoid rigs.
@@ -474,6 +511,8 @@ Goals: one-click builds that pass store review.
 
 Deliverables:
 - Export pipeline for Windows (MSIX and portable), macOS (notarized app), Linux (AppImage), iOS (Xcode project generation plus direct archive), Android (Gradle project plus direct APK/AAB), web (WASM plus a hosting bundle).
+- Web builds run TypeScript in the browser's own JavaScript engine, isolated in a worker, instead of QuickJS compiled to WebAssembly; WebAssembly modules run natively in the browser. The shared SDK conformance suite runs against every script host.
+- Profile-guided optimization of the runtime from recorded Core Sample and Driftwake runs on each platform, plus per-platform CPU targets with a baseline fallback.
 - Mobile: touch input layer, safe-area handling, orientation, app lifecycle, battery-aware frame pacing, thermal throttling response, on-device texture compression tiers (ASTC, ETC2).
 - Desktop: Steam integration (achievements, cloud saves, overlay, input), window management, display modes.
 - Steam Deck as a verified-compatibility target: controller glyphs, 1280 by 800 default, on-screen keyboard, suspend and resume, no external launcher; one Deck in the device farm.
@@ -483,6 +522,7 @@ Deliverables:
 - Crash reporting and symbolication for all targets.
 - Device farm in CI: ten physical devices across iOS and Android, nightly smoke tests.
 - Build size and startup time budgets enforced in CI.
+- Native shipped builds contain precompiled script bytecode and per-backend shaders; no TypeScript, JavaScript source or WGSL is parsed on device. Web exports are the explicit exception: they contain build-transpiled JavaScript for the browser host and WGSL for WebGPU, with compilation and pipeline pre-warming during loading. Pipeline permutation lists are recorded for every level and checked for coverage in CI.
 
 Exit gate:
 - Core Sample ships to TestFlight, Google Play internal testing, and a private Steam app, from CI, with no manual steps beyond pressing a button.
@@ -503,7 +543,7 @@ Deliverables, transport and sessions:
 Deliverables, replication and simulation models:
 - Replication: component-level replication with ownership, interest management, priority and delta compression.
 - Two models on one replication layer: authority with client prediction and reconciliation, and deterministic rollback for small player counts. Server-authoritative and host-authoritative are the same authority code running on a dedicated server or on one player's client.
-- Determinism toolkit for rollback: deterministic physics step (Rapier `enhanced-determinism` per ADR 0003, or Jolt's deterministic mode if the backend changes), a deterministic math library and seeded RNG in the TS SDK, deterministic iteration-order guarantees, per-tick state checksums, a desync report that names the first diverging tick and component path, and a CI job that runs one input script on macOS ARM, Windows x86, Android ARM and iOS and compares checksums. Rollback cross-play between CPU architecture classes is enabled only when that job passes.
+- Determinism toolkit for rollback: the deterministic physics variant selected per project (Rapier `enhanced-determinism` per ADR 0003, or Jolt's deterministic mode if the backend changes), WebAssembly modules as the recommended home for rollback-critical logic, a deterministic math library and seeded RNG in the TS SDK, deterministic iteration-order guarantees, per-tick state checksums, a desync report that names the first diverging tick and component path, and a CI job that runs one input script on macOS ARM, Windows x86, Android ARM and iOS and compares checksums. Rollback cross-play between CPU architecture classes is enabled only when that job passes.
 - Mobile constraints: configurable send rates (20 Hz default on mobile), a data budget of 20 MB per 25-minute run on cellular, battery-aware pacing of network ticks.
 
 Deliverables, services (Rust, axum, Postgres; shipped as container images with a compose file so engine users can self-host):
@@ -564,6 +604,7 @@ Engine deliverables:
 - Documentation site, API reference generated from the schema registry and TS SDK, twenty tutorials, template gallery.
 - Public beta with a thousand invited users. Telemetry opt-in. Weekly releases.
 - Engine 1.0 release candidate.
+- Competitive benchmark: Core Sample reimplemented in Unity and Godot by the same team, measured on every reference device for frame time, cold start, memory and build size. Target: Incant within 10 percent or better on each. Publication is subject to each engine's license terms on benchmarks, reviewed by a human.
 - Live-service readiness: load test at twice projected launch concurrency in every launch region, runbooks, status page, alerting, a backup restore drill, a staffed on-call rotation, and cross-version compatibility (current and previous client) tested in CI.
 - Release channels (stable, beta, nightly), a signed editor updater (Tauri updater with a human-held signing key; offline installers stay available), per-project runtime pinning so a shipped game bundles the runtime it was tested with, and a support policy: each 1.x stable receives fixes for twelve months.
 
@@ -628,26 +669,26 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 ### 6.1 Document model and command bus
 - Owner: engine lead.
 - First milestone: Phase 0 Spike 2.
-- Choices: Loro for the CRDT, chosen after benchmarking Loro and Automerge in Phase 0 (ADR 0008). Canonical typed JSON on disk with a deterministic formatter and derived JSON Schemas; RON was not adopted. Schema in JSON Schema with Rust derive macros generating both the schema and the serializers.
+- Choices: Loro for the CRDT, chosen after benchmarking Loro and Automerge in Phase 0 (ADR 0008). Canonical typed JSON on disk with a deterministic formatter and derived JSON Schemas; RON was not adopted. Schema in JSON Schema with Rust derive macros generating both the schema and the serializers. One CRDT document per scene, loaded lazily, so memory and merge cost scale with open scenes; scale target 100,000 entities per scene, with per-subtree documents as the fallback.
 - Tests: round-trip property tests, CRDT merge fuzzing, undo fuzzing, migration tests for every schema version.
 
 ### 6.2 Rendering
 - Owner: rendering lead.
 - First milestone: Phase 1 clustered forward+ on desktop and mobile tiers.
-- Choices: three quality tiers (mobile, desktop, desktop-high). GPU-driven culling with meshlets on desktop, CPU culling on mobile. Virtual texturing deferred to post-1.0. Nanite-style virtualized geometry explicitly out of scope. The 2D renderer, 2D lights and video textures share the render graph.
-- Tests: golden-image tests per tier per platform, frame-time budgets in CI, shader compile tests across all backends.
+- Choices: three quality tiers (mobile, desktop, desktop-high). GPU-driven culling with meshlets on desktop, CPU culling on mobile. Virtual texturing deferred to post-1.0. Nanite-style virtualized geometry explicitly out of scope. The 2D renderer, 2D lights and video textures share the render graph. Shaders are translated per backend at cook time; pipeline caches persist across launches; levels pre-warm recorded pipeline permutations on load screens. Temporal upscaling with dynamic resolution on every tier. Render-graph passes may use the native API through wgpu interop for vendor upscalers, async compute and ray tracing, always with a portable fallback.
+- Tests: golden-image tests per tier per platform, frame-time budgets in CI, shader compile tests across all backends, a hitch detector that fails any device or headless run where a frame over twice budget coincides with pipeline creation, and permutation-list coverage checks per level.
 
 ### 6.3 Scripting
 - Owner: scripting engineer.
 - First milestone: Phase 0 Spike 3.
-- Choices: QuickJS for portability and sandboxing; V8 optional on desktop. TS compiled with a bundled SWC. Bindings generated from the schema registry so the SDK never drifts. Hot reload preserves entity state where types match.
-- Tests: SDK conformance suite, sandbox escape tests, hot reload state preservation tests, performance tests with ten thousand scripted entities.
+- Choices: QuickJS for portability and sandboxing; V8 optional on desktop. TS compiled with a bundled SWC, then to QuickJS bytecode at cook time. Bindings generated from the schema registry so the SDK never drifts. Hot reload preserves entity state where types match. A bulk query API over typed-array component views is the default for per-tick logic, so script cost scales with systems rather than entities. Scripts get a per-frame time budget of 2 ms at p95 on the reference phones, shown in the profiler and enforced in CI. Scripts access the runtime world directly (Section 2.6), never through the command bus. WebAssembly modules, Rust first, are the native-speed tier: JIT and hot reload in the editor, ahead-of-time native code at export. Web builds run TypeScript in the browser's JavaScript engine. Ahead-of-time TypeScript is a Phase 1 spike (open decision 18).
+- Tests: SDK conformance suite, sandbox escape tests, hot reload state preservation tests, bytecode tamper and version-mismatch tests, and performance tests with ten thousand scripted entities measured on the iPhone 13 and the Pixel 6 against the per-frame budget. Desktop benchmarks are informative only. Phase 0 measured one thousand entities on an Apple M5 Pro. The same conformance suite runs against the QuickJS, browser and WebAssembly hosts; module build sandbox tests confirm that disallowed build scripts and procedural macros are refused.
 
 ### 6.4 Editor
 - Owner: editor lead.
 - First milestone: Phase 0 Spike 1.
 - Choices: React inside Tauri (ADR 0009). Schema-driven inspector so new components get UI for free. Panels are plugins so the community can add them.
-- Tests: UI tests driven through the command bus, visual regression on panels, accessibility audit.
+- Tests: UI tests driven through the command bus, visual regression on panels, accessibility audit, and responsiveness on a 100,000-entity scene with virtualized hierarchy, inspector and asset panels.
 
 ### 6.5 AI agent
 - Owner: AI lead.
@@ -664,13 +705,13 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 ### 6.7 Platforms and build
 - Owner: platform lead.
 - First milestone: Phase 0 CI hello-world on six targets.
-- Choices: generate native projects (Xcode, Gradle) rather than hide them, so advanced users can customize. Reproducible builds. Signing in CI with hardware-backed keys. Release channels (stable, beta, nightly) and a signed editor updater; projects pin an engine version range; Steam Deck is a verified-compatibility target; consoles are out of scope for 1.0.
+- Choices: generate native projects (Xcode, Gradle) rather than hide them, so advanced users can customize. Reproducible builds. Signing in CI with hardware-backed keys. Release channels (stable, beta, nightly) and a signed editor updater; projects pin an engine version range; Steam Deck is a verified-compatibility target; consoles are out of scope for 1.0. The runtime ships with a shipping profile (fat link-time optimization, one codegen unit, abort on panic) and profile-guided optimization from recorded runs; the export pipeline links ahead-of-time-compiled WebAssembly modules and selects the physics determinism variant per project.
 - Tests: nightly device farm, size and startup budgets, store-submission dry runs quarterly, Steam Deck smoke run, updater and project-migration tests across the last three stable releases.
 
 ### 6.8 Networking
 - Owner: core engine engineer with netcode experience for the crate; the backend and live-operations engineer for the services (Section 6.10).
 - First milestone: transport, replication and relay working for two clients by Dec 2028 so Phase 7 co-op is not blocked; work may start in Jun 2028 alongside Phase 5.
-- Choices: QUIC via quinn on native targets and WebRTC in browsers, custom UDP layer as fallback (open decision 11). Authority with prediction and deterministic rollback share one replication layer; server-authoritative and host-authoritative are the same authority code in different places. Driftwake's recommended launch topology is host-authoritative over the relay (open decision 10). Relay by default, direct connection opt-in. Deterministic physics step from Rapier's `enhanced-determinism` feature (ADR 0003), or Jolt's deterministic mode if the backend changes. Determinism toolkit in the TS SDK. Protocol versioning with a current-plus-previous compatibility window.
+- Choices: QUIC via quinn on native targets and WebRTC in browsers, custom UDP layer as fallback (open decision 11). Authority with prediction and deterministic rollback share one replication layer; server-authoritative and host-authoritative are the same authority code in different places. Driftwake's recommended launch topology is host-authoritative over the relay (open decision 10). Relay by default, direct connection opt-in. Deterministic physics step from Rapier's `enhanced-determinism` feature (ADR 0003) in projects that select rollback, or Jolt's deterministic mode if the backend changes; other projects keep the fast physics variant. Determinism toolkit in the TS SDK. Protocol versioning with a current-plus-previous compatibility window.
 - Tests: network simulation suite, desync detection on seeded bugs, determinism checksum CI across the four reference device classes, nightly soak with four bot clients for eight hours, protocol fuzzing, cross-version compatibility tests, mobile network-transition and backgrounding tests on the device farm, relay and sessions load tests, host migration and rejoin tests.
 
 ### 6.9 Accounts and OpenAI integration
@@ -736,6 +777,13 @@ Tests: service load tests at twice projected launch concurrency, chaos tests (re
 - Choices: cosmic-text for shaping, bidi, line breaking and fallback; ICU4X for locale data, plural rules and formatting; string tables as typed document assets with an ICU MessageFormat subset; XLIFF for translator exchange; pseudo-localization as a CI check. The editor UI is English-only in 1.0 and localized in 1.1 on the same tables.
 - Tests: shaping golden images per script (Latin, Arabic, Hebrew, CJK, Devanagari, emoji), IME composition tests on each desktop OS, on-screen keyboard tests on the device farm, string table round-trip and migration tests, a CI check that every user-facing string in Core Sample resolves in every project locale.
 
+### 6.14 Physics
+- Owner: core engine engineer.
+- First milestone: Phase 1 per-project determinism variants with Core Sample on the fast variant.
+- Choices: Rapier 3D and 2D behind the Rust-owned boundary (ADR 0003). The fast variant uses vector instructions and multithreading; the deterministic variant uses `enhanced-determinism` and is selected by projects that need rollback or exact cross-platform replays. Stable entity IDs cross the boundary, so a backend change does not touch scripts or documents.
+- Driftwake-scale benchmark, completed before Phase 6 starts: destructible props, five hundred dynamic bodies, four characters and enemy crowds on the mobile and desktop tiers, comparing Rapier fast, Rapier deterministic and Jolt through a maintained C shim. The result updates ADR 0003; the backend changes only on measured evidence (open decision 19).
+- Tests: determinism tests per variant, cross-platform checksum comparison for the deterministic variant, per-step budgets on the reference phones, and the benchmark scenes in nightly CI.
+
 ---
 
 ## 7. Driftwake production plan
@@ -781,8 +829,9 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 
 ## 8. Quality, testing, and release engineering
 
-- **CI on every commit:** build all crates, unit tests, schema validation, TS SDK conformance.
-- **Nightly:** full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles, determinism checksum comparison across reference device classes.
+- **CI on every commit:** build all crates, unit tests, schema validation, TS SDK conformance, the runtime dependency test.
+- **Performance gates on every PR touching runtime crates:** a Core Sample run in the shipping profile on a reference desktop and a reference phone, failing on frame-time, script-time or memory regressions over 5 percent, with Tracy captures attached to the PR.
+- **Nightly:** full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles, determinism checksum comparison across reference device classes, script time budget and shader-hitch checks on the reference phones. Until the Phase 5 device farm exists, these run on the two Phase 1 reference phones; buying them is a human-owned purchase.
 - **Weekly:** store-submission dry run on one platform in rotation, security dependency audit, crash report triage, service load test in one region, backup restore check.
 - **Release trains:** engine beta releases every two weeks during Phase 8; game builds to internal QA daily.
 - **Bug priority:** P0 (data loss, crash on launch, credential exposure), P1 (blocks a workflow), P2 (workaround exists), P3 (cosmetic). P0 and P1 block releases.
@@ -799,9 +848,14 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | OpenAI OAuth not available to third parties when we need it | Medium | Medium | API key path is always available; abstraction supports other providers |
 | OpenAI changes pricing, models, or policy | High | Medium | Provider abstraction, model routing config updated with releases, evals across providers |
 | Tauri plus native viewport is flaky on some platform | Medium | High | Phase 0 spike; fallback to egui-native editor |
-| CRDT performance on large scenes | Medium | High | Phase 0 benchmark; fallback to operational transform or per-subtree CRDTs |
+| CRDT performance on large scenes | Medium | High | Per-scene CRDT documents loaded lazily; 100,000-entity responsiveness in the Phase 2 gate; per-subtree documents as the fallback |
 | Agent quality plateaus below usable | Medium | Fatal | Eval harness from Phase 0, skills to constrain the problem, approval modes, invest in tool ergonomics over prompts |
 | Mobile performance | Medium | High | Mobile rendering engineer from day one, device farm, budgets in CI |
+| Interpreted scripts exceed the frame budget on phones | High | High | Runtime data path without per-tick serialization, bulk query API, build-time bytecode, WebAssembly modules compiled ahead of time for hot code, a 2 ms per-frame script budget enforced on the reference phones |
+| Script hosts diverge in behavior (QuickJS, browser JavaScript, WebAssembly) | Medium | Medium | One SDK surface generated from the schema registry; one conformance suite run against every host; deterministic math in the SDK |
+| Compiling Rust modules runs untrusted code on the user's machine | Medium | High | Offline sandboxed builds, vetted vendored dependencies, no build scripts or procedural macros outside the allowlist, red-team coverage |
+| Native backend interop erodes portability | Medium | Medium | Every interop pass has a portable fallback that golden-image tests cover on all backends |
+| Shader and pipeline compilation causes gameplay stutter | High | Medium | Cook-time shader translation, persistent pipeline caches, per-level permutation pre-warming, hitch detector in CI |
 | Finding a senior graphics reviewer | Medium | Medium | Part-time or contract in Year 1; contribute to Bevy to build reputation |
 | Bevy breaking changes | High | Medium | Pin versions, upgrade on a schedule, upstream fixes |
 | Store rejection for AI-generated content policies | Low | Medium | Track platform policies, attach provenance and licensing to all assets |
@@ -830,6 +884,10 @@ Tracked continuously from Phase 1 and reviewed at every phase review.
 - Time-to-playable-prototype for a new user (target under fifteen minutes).
 - Agent provenance share in Driftwake (target 60%).
 - Frame time per tier per reference device (targets: 16.6 ms desktop, 16.6 ms mobile high, 33 ms mobile low).
+- Script time per frame on the reference phones (target: 2 ms at p95 in Core Sample and in Driftwake combat).
+- Gameplay frames over twice budget caused by shader or pipeline compilation (target: zero; compilation happens on load screens).
+- Competitive benchmark against Unity and Godot on Core Sample equivalents: frame time, cold start, memory and build size per reference device (target: within 10 percent or better).
+- Editor responsiveness on a 100,000-entity scene (target: edits under 100 ms, viewport at 60 fps on the M1 MacBook Air).
 - Cold start per platform.
 - Build size per platform (targets: under 150 MB mobile base, under 500 MB desktop base).
 - Crash-free sessions (target 99.5% in beta).
@@ -885,6 +943,8 @@ Decisions 1 to 9 were to be resolved in Phase 0; `docs/gates/phase0-review.md` r
 15. Rollback cross-play scope. Recommended: rollback only within one CPU architecture class unless the determinism CI passes across all four reference device classes; Driftwake does not depend on rollback. Decide at the Phase 6 gate.
 16. Hosting provider, launch regions, and whether Incant offers a hosted services tier for engine users (ties to decision 6). Decide before the Phase 8 beta.
 17. Global leaderboards. Recommended: none at launch. Alternative: server-validated leaderboards, which require run verification. Decide by Phase 7.
+18. Ahead-of-time compiled TypeScript. Recommended: adopt only if the Phase 1 spike passes the SDK conformance suite and measurably beats bytecode on the reference phones; otherwise TypeScript stays on bytecode and WebAssembly modules remain the native-speed tier. Decide at the Phase 1 gate.
+19. Physics backend at Driftwake scale. Recommended: keep Rapier unless the 6.14 benchmark shows Jolt materially faster on the reference phones. Decide before Phase 6 starts.
 
 ---
 
@@ -905,6 +965,7 @@ Assets:
 
 Scripts:
 - `script.read(id)`, `script.write(id, source)` (destructive), `script.typecheck(id)`, `script.list_errors()`.
+- `module.read(id)`, `module.write(id, source)` (destructive), `module.build(id)` compiles a Rust WebAssembly module in the sandboxed compiler and returns diagnostics.
 
 Perception:
 - `view.screenshot(camera, size)` returns an image.
@@ -914,7 +975,7 @@ Perception:
 
 Play-test:
 - `play.run(seconds, inputs_script, cameras)` runs headless, returns screenshots at intervals, logs, final state snapshot, and assertion results.
-- `play.state_query(path)` during a live play session.
+- `play.state_query(path)` reads a snapshot of the runtime world during a live play session.
 
 Network:
 - `net.simulate(profile)` applies a latency, jitter, loss and bandwidth profile to play-in-editor and headless runs.
@@ -944,6 +1005,7 @@ Project
   scenes: [SceneRef]
   assets: [AssetRef]
   scripts: [ScriptRef]
+  modules: [ModuleRef]
   skills: [SkillRef]
   memory: MemoryDoc
   string_tables: [StringTableRef]
@@ -968,6 +1030,7 @@ Component (examples)
   Material { shader: AssetRef | graph: ShaderGraph, params: {...} }
   RigidBody { kind, mass, collider: ColliderShape, layers }
   Script { source: ScriptRef, props: {...} }
+  Module { source: ModuleRef, systems: [SystemName], props: {...} }
   AnimationGraph { graph: AnimGraph, params }
   Replicated { owner, mode: authority|rollback, fields, relevance, priority }
   Predicted { fields, reconcile: snap|smooth }
@@ -1004,6 +1067,9 @@ Component (examples)
 - **Navmesh:** a walkable-surface mesh generated from level geometry that agents find paths over.
 - **String table:** a typed document asset mapping string keys to per-locale text with plural and select rules.
 - **Pseudo-localization:** replacing every string with a lengthened, accented variant to find truncation, hard-coded text and shaping bugs before real translation.
+- **Runtime world:** the native ECS world that play mode, play-tests and shipped games simulate on, built from cooked scenes and discarded when play stops. It never touches the project document or the command bus.
+- **WebAssembly module:** a sandboxed gameplay module, written in Rust first, that runs with a JIT in the editor and as ahead-of-time native code in shipped games.
+- **Temporal upscaling:** rendering at a lower internal resolution and reconstructing a full-resolution image from previous frames.
 
 ## Appendix D: Name shortlist
 
