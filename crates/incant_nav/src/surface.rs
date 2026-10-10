@@ -1,6 +1,6 @@
 //! Restore height detail after XZ funnel smoothing, following the ordered corridor.
 use crate::{NavigationError, NavigationPolygon, invalid, limit};
-use glam::Vec3;
+use glam::{DVec3, Vec3};
 type Point = [f32; 3];
 pub(crate) fn follow_with_budget(
     polys: &[NavigationPolygon],
@@ -22,7 +22,7 @@ pub(crate) fn follow_with_budget(
             let a = flat[segment];
             let b = flat[segment + 1];
             if let Some(t) = intersection(a, b, gate.0, gate.1, begin) {
-                let p = Vec3::from_array(a).lerp(Vec3::from_array(b), t).to_array();
+                let p = lerp(a, b, t);
                 append_surface(&mut output, &polys[poly], cursor, p, work)?;
                 cursor = p;
                 begin = t;
@@ -39,55 +39,101 @@ pub(crate) fn follow_with_budget(
     }
     Ok(output)
 }
-fn cross(a: [f32; 2], b: [f32; 2]) -> f32 {
+fn cross(a: [f64; 2], b: [f64; 2]) -> f64 {
     a[0] * b[1] - a[1] * b[0]
 }
-pub(crate) fn intersection(a: Point, b: Point, c: Point, d: Point, begin: f32) -> Option<f32> {
-    let r = [b[0] - a[0], b[2] - a[2]];
-    let s = [d[0] - c[0], d[2] - c[2]];
-    let delta = [c[0] - a[0], c[2] - a[2]];
-    let denominator = cross(r, s);
-    let eps = 1e-5;
-    if denominator.abs() > 1e-8 {
-        let t = cross(delta, s) / denominator;
-        let u = cross(delta, r) / denominator;
-        if t >= begin - eps && t <= 1. + eps && u >= -eps && u <= 1. + eps {
-            Some(t.clamp(begin, 1.))
-        } else {
-            None
-        }
-    } else {
-        let length = r[0] * r[0] + r[1] * r[1];
-        if length < 1e-12 {
-            return if (a[0] - c[0]).abs() + (a[2] - c[2]).abs() < eps {
-                Some(begin)
-            } else {
-                None
-            };
-        }
-        if cross(delta, r).abs() > eps * length.sqrt() {
-            return None;
-        }
-        let t = (delta[0] * r[0] + delta[1] * r[1]) / length;
-        let u = ((d[0] - a[0]) * r[0] + (d[2] - a[2]) * r[1]) / length;
-        let low = t.min(u).max(begin);
-        let high = t.max(u).min(1.);
-        if low <= high + eps {
-            Some(low.clamp(begin, 1.))
-        } else {
-            None
-        }
-    }
+fn delta(a: Point, b: Point) -> [f64; 2] {
+    [
+        f64::from(a[0]) - f64::from(b[0]),
+        f64::from(a[2]) - f64::from(b[2]),
+    ]
 }
-fn barycentric(p: Point, triangle: &[Point; 3]) -> Option<[f32; 3]> {
-    let [a, b, c] = *triangle;
-    let denominator = cross([b[0] - a[0], b[2] - a[2]], [c[0] - a[0], c[2] - a[2]]);
-    if denominator.abs() < 1e-10 {
+fn precision(points: &[Point]) -> f64 {
+    // Stored positions are f32. Projection/interpolation can round a boundary
+    // point by an ULP; allow two ULPs in world space, not a fixed percentage of
+    // a short segment or a skinny triangle.
+    points
+        .iter()
+        .flat_map(|p| [p[0], p[2]])
+        .map(|x| f64::from(x.abs()))
+        .fold(1., f64::max)
+        * f64::from(f32::EPSILON)
+        * 2.
+}
+fn lerp(a: Point, b: Point, t: f64) -> Point {
+    DVec3::from_array(a.map(f64::from))
+        .lerp(DVec3::from_array(b.map(f64::from)), t)
+        .as_vec3()
+        .to_array()
+}
+pub(crate) fn intersection(a: Point, b: Point, c: Point, d: Point, begin: f64) -> Option<f64> {
+    let r = delta(b, a);
+    let s = delta(d, c);
+    let offset = delta(c, a);
+    let length = r[0].hypot(r[1]);
+    let gate_length = s[0].hypot(s[1]);
+    let eps = precision(&[a, b, c, d]);
+    let on_gate = |point: [f64; 2]| {
+        let u = if gate_length == 0. {
+            0.
+        } else {
+            ((point[0] - f64::from(c[0])) * s[0] + (point[1] - f64::from(c[2])) * s[1])
+                / (gate_length * gate_length)
+        }
+        .clamp(0., 1.);
+        (point[0] - f64::from(c[0]) - s[0] * u).hypot(point[1] - f64::from(c[2]) - s[1] * u) <= eps
+    };
+    // Two independently rounded projections may run almost along the portal
+    // without their infinite lines meeting within the short segment. Test the
+    // actual boundary distance before dividing by that tiny determinant.
+    if on_gate([
+        f64::from(a[0]) + r[0] * begin,
+        f64::from(a[2]) + r[1] * begin,
+    ]) {
+        return Some(begin);
+    }
+    if length == 0. {
         return None;
     }
-    let v = cross([p[0] - a[0], p[2] - a[2]], [c[0] - a[0], c[2] - a[2]]) / denominator;
-    let w = cross([b[0] - a[0], b[2] - a[2]], [p[0] - a[0], p[2] - a[2]]) / denominator;
+    let teps = eps / length;
+    let denominator = cross(r, s);
+    let found = if denominator.abs() > f64::EPSILON * length * gate_length * 16. {
+        let t = cross(offset, s) / denominator;
+        let u = cross(offset, r) / denominator;
+        let ueps = eps / gate_length;
+        (t >= begin - teps && t <= 1. + teps && u >= -ueps && u <= 1. + ueps)
+            .then(|| t.clamp(begin, 1.))
+    } else {
+        if cross(offset, r).abs() > eps * length {
+            return None;
+        }
+        let t = (offset[0] * r[0] + offset[1] * r[1]) / (length * length);
+        let end = delta(d, a);
+        let u = (end[0] * r[0] + end[1] * r[1]) / (length * length);
+        let low = t.min(u).max(begin);
+        let high = t.max(u).min(1.);
+        (low <= high + teps).then(|| low.clamp(begin, 1.))
+    };
+    found.or_else(|| on_gate([f64::from(b[0]), f64::from(b[2])]).then_some(1.))
+}
+fn barycentric(p: Point, triangle: &[Point; 3]) -> Option<[f64; 3]> {
+    let [a, b, c] = *triangle;
+    let denominator = cross(delta(b, a), delta(c, a));
+    if denominator == 0. {
+        return None;
+    }
+    let v = cross(delta(p, a), delta(c, a)) / denominator;
+    let w = cross(delta(b, a), delta(p, a)) / denominator;
     Some([1. - v - w, v, w])
+}
+fn weight_tolerance(triangle: &[Point; 3]) -> [f64; 3] {
+    let [a, b, c] = *triangle;
+    let area = cross(delta(b, a), delta(c, a)).abs();
+    let eps = precision(triangle);
+    [(b, c), (c, a), (a, b)].map(|(u, v)| {
+        let d = delta(u, v);
+        eps * d[0].hypot(d[1]) / area
+    })
 }
 fn append_surface(
     out: &mut Vec<Point>,
@@ -108,11 +154,12 @@ fn append_surface(
             continue;
         };
         let end = barycentric(b, triangle).unwrap();
-        let (mut low, mut high) = (0_f32, 1_f32);
+        let tolerance = weight_tolerance(triangle);
+        let (mut low, mut high) = (0_f64, 1_f64);
         for j in 0..3 {
             let d = end[j] - start[j];
-            if d.abs() < 1e-8 {
-                if start[j] < -1e-4 {
+            if d.abs() < 1e-14 {
+                if start[j] < -tolerance[j] {
                     high = -1.;
                 }
             } else if d > 0. {
@@ -126,19 +173,27 @@ fn append_surface(
             breaks.push(high.clamp(0., 1.));
         }
     }
-    breaks.sort_by(f32::total_cmp);
+    breaks.sort_by(f64::total_cmp);
     breaks.dedup_by(|a, b| (*a - *b).abs() < 1e-5);
     for t in breaks {
-        let mut p = Vec3::from_array(a).lerp(Vec3::from_array(b), t).to_array();
+        let mut p = lerp(a, b, t);
         let height = poly
             .triangles
             .iter()
             .find_map(|tri| {
                 let weights = barycentric(p, tri)?;
-                if weights.iter().any(|w| *w < -1e-3) {
+                let tolerance = weight_tolerance(tri);
+                if (0..3).any(|i| weights[i] < -tolerance[i]) {
                     return None;
                 }
-                Some(weights[0] * tri[0][1] + weights[1] * tri[1][1] + weights[2] * tri[2][1])
+                let weights = weights.map(|w| w.max(0.));
+                let sum: f64 = weights.iter().sum();
+                Some(
+                    ((weights[0] * f64::from(tri[0][1])
+                        + weights[1] * f64::from(tri[1][1])
+                        + weights[2] * f64::from(tri[2][1]))
+                        / sum) as f32,
+                )
             })
             .ok_or_else(|| invalid("smoothed navigation segment left its polygon"))?;
         p[1] = height;

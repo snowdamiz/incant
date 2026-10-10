@@ -32,6 +32,7 @@ import type { SteeringQuery, SteeringVelocity } from './generated';
 export interface ScriptApi {
   /** Read-only reciprocal local avoidance in world XZ coordinates. One snapshot
    * of at most 128 agents and 32 convex obstacles (128 total edges); 64 KiB input.
+   * Agent and obstacle IDs must be distinct canonical ULIDs within each list.
    * Costs 128 of the shared 256 query units. Returns ID-sorted proposed velocities,
    * never moves entities. Apply with ordinary commands and account for physics.
    * Heights filter separate floors; routes, navmesh containment, arrival and

@@ -22,7 +22,7 @@ Usage (repo root):
   python3 -I handoffs/0026-navigation-lookdev/tools/navigation_lookdev.py OUT_DIR \
       [--ticks N] [--run NAME:CAMERA:CAPTURE_EVERY ...]
 
-CAMERA is one of overview, plan, pillar, ridge, profile. OUT_DIR must not exist.
+CAMERA is one of overview, plan, pillar, pillar_south, ridge, profile. OUT_DIR must not exist.
 """
 
 import argparse
@@ -78,6 +78,9 @@ CAMERAS = {
     "overview": ((-0.6, 9.6, 10.4), (0.3, 0.0, 0.4)),
     "plan": ((0.0, 15.2, 0.001), (0.0, 0.0, 0.0)),
     "pillar": ((-6.4, 1.45, -4.6), (-3.4, 0.55, 0.7)),
+    # Added in revision 4: the route has passed SOUTH of the pillar since v7, so the
+    # original north-side "pillar" camera (kept for comparison) sees it occluded.
+    "pillar_south": ((-6.2, 1.45, 5.8), (-3.0, 0.55, 1.4)),
     "ridge": ((1.6, 1.15, -7.4), (1.4, 0.25, -3.4)),
     # Narrow lens, perpendicular to the doorway-B ridge crossing: route heights in profile.
     "profile": ((1.3, 0.55, -8.2), (1.3, 0.12, -3.45), 18),

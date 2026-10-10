@@ -85,3 +85,27 @@ arbitrary crowds. The limitation remains part of the API contract.
 Claude's actual rendered review is the next scoped check. Navigation Inspector,
 native debug drawing, off-mesh links, grid navigation, Core Sample integration
 and physical-device performance requirements remain open.
+
+## Rendered verification and remaining behavior limits
+
+Claude Opus 5.5 reviewed a 100-agent, four-direction plaza crossing using the
+actual API and ordinary Velocity commands. Two 2,700-tick runs produced 803/803
+identical frames and 13/13 identical logs, including save/load capture windows.
+Every walker remained at its destination from tick 2580; no 0.5 m body diameter
+overlap occurred. Minimum separation was 0.5953 m with the requested 0.60 m
+combined body/margin distance, and minimum obstacle clearance was 0.0494 m.
+Millimetre log rounding limits those measurements. The 5 cm extra margin is a
+solver input, not a strict numerical clearance guarantee. The review used no
+RigidBody/Collider and makes no physics-collision guarantee.
+
+Local avoidance produced long goal-block standoffs (up to 1,002 ticks) and a
+roundabout with up to 13.3 m sideways drift. These require behavior-level route
+replanning/goal assignment where they are undesirable. Agent and obstacle IDs
+are distinct canonical ULIDs within their respective lists.
+
+The existing 50 ms script wall-clock deadline caused intermittent aborts when
+the Mac slept or compilation loaded the CPU. Final repetitions passed under
+a temporary sleep assertion on a quiet host. This is an open scripting-runtime
+robustness/diagnostic issue, not successful determinism evidence for failed runs.
+The [review packet](../../handoffs/0027-steering-lookdev/result.md) records the
+exact binary, failed attempts, observations and scene reproduction.
