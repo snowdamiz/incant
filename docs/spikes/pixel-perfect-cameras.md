@@ -45,8 +45,19 @@ The new GPU regression compares exact followed-quad images across four odd/even
 resolution combinations, eight movement directions and eight offsets, at 0°, 90°
 and an arbitrary 0.37-radian roll. It first reproduced the directional tie,
 odd-resolution alignment and rolled floating-point cases; all now pass. This
-checks the numerical contract; Claude still needs to re-review the corrected
-engine capture and inspect the native build before acceptance.
+checks the numerical contract at those offsets. Claude's Max-effort follow-up
+confirms all 1560 follower frames, 108 stable cells and 780 background frames
+across the measured odd/even/roll cases, plus exact repeatability. Its denser
+near-tie probe finds a remaining one-pixel follow jump within about 1/512 logical
+pixel of a tie, and an even narrower possible edge stretch. The measured Apple
+GPU raster precision and f32 vertex rounding do not match the CPU f64 tie band.
+See the [complete follow-up](../../handoffs/0031-pixel-perfect-cameras/result.md).
+
+This remains a renderer defect. Claude's proposed 1/256-pixel quantization is a
+candidate, not an accepted portable fix: it was measured on one adapter and still
+leaves a narrower edge case. Do not broaden the tie epsilon or claim arbitrary
+continuous followers are stable without rerunning the near-tie evidence and
+portable GPU checks. Native review follows handoff 0033's UI integration.
 
 Portable core compilation passes for WASM and iOS simulator, and the macOS
 audio device backend compiles. Native packaging, final appearance review and

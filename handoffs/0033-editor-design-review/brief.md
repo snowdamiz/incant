@@ -1,3 +1,12 @@
+## Final plan revision — revision 6, 2026-10-10
+
+The director confirmed the final update and requested deleting the watcher;
+Astra deleted it and reviewed revision 6 in source commit 83ebd58. This revision
+is now in your checkout. It changes hosted-device testing and phase prerequisites,
+not the current design scope. Continue the Inspector/editor redesign and bounded
+views at Opus 5.5 Max without restarting captures. Read the revision 6 review
+before final reporting; do not claim phone performance or phase approval.
+
 ## Latest priority — PLAN.md revision 5, 2026-10-10
 
 The director's final small follow-up has now landed in this worktree (source

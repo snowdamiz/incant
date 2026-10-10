@@ -87,7 +87,9 @@ within its documented workload.
   and both public saved-camera workflows. Claude supplied the Inspector with
   420 passing UI tests and a repeated 341-frame engine comparison. Its exact
   half-pixel follow defect is corrected and covered across odd/even dimensions
-  and camera roll; final rendered/native review and hosted CI remain open.
+  and camera roll. The Max-effort follow-up confirms those results but finds a
+  narrower near-tie follow jump/edge stretch; a portable correction, native
+  review and hosted CI remain open. The measured result is preserved in 0031.
   Sprite/tilemap rendering and 2D physics are separate unfinished work. See
   [pixel-perfect cameras](docs/spikes/pixel-perfect-cameras.md).
 
