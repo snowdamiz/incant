@@ -1,6 +1,7 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 mod audio;
 mod camera;
+mod collider_shapes;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
@@ -8,13 +9,15 @@ mod navigation;
 mod physics;
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 pub use camera::{Camera, CameraProjection};
+pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
+pub use incant_nav::NavigationGrid;
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
 pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
-pub use physics::{AngularVelocity, BodyMotion, Collider, ColliderShape, RigidBody};
+pub use physics::{AngularVelocity, BodyMotion, Collider, RigidBody};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -454,6 +457,9 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
     }
     match kind {
         "NavigationMesh" => navigation::validate(value)?,
+        "NavigationGrid" => decode::<NavigationGrid>(value)?
+            .validate()
+            .map_err(|e| e.to_string())?,
         "AudioBus" | "AudioSource" | "AudioListener" => audio::validate(kind, value, project)?,
         "RigidBody" | "Collider" | "AngularVelocity" => physics::validate(kind, value)?,
         "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
@@ -549,6 +555,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        (
+            "NavigationGrid".into(),
+            json!(schemars::schema_for!(NavigationGrid)),
+        ),
         (
             "NavigationMesh".into(),
             json!(schemars::schema_for!(NavigationMesh)),

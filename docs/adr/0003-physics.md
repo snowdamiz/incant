@@ -37,8 +37,10 @@ pinned dependency graph support reproducibility. The probe proves only one
 position workload, not universal determinism or a rollback release gate.
 
 See [runtime integration](../spikes/physics-runtime.md) for supported shapes,
-queries, script semantics and current limitations. Character controllers, mesh
-colliders, hierarchy/scale support, runtime rollback snapshots and physical-device
+queries, script semantics and current limitations. Read-only character movement
+queries are implemented in the [character increment](../spikes/character-movement.md),
+including actual platform execution and rendered review. Mesh colliders,
+hierarchy/scale support, runtime rollback snapshots and physical-device
 performance gates remain open. Revisit the backend if representative game/mobile
 measurements show a material issue; keep the stable-ID boundary.
 

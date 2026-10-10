@@ -69,10 +69,10 @@ const diagnostic = (path: string, message = 'Engine says no.'): Diagnostic => ({
 });
 
 describe('native physics schemas', () => {
-  it('reach the Inspector as a tagged union over box, sphere and capsule', () => {
+  it('reach the Inspector as a tagged union over box, sphere, capsule and compound', () => {
     expect(SHAPE.type).toBe('tagged-union');
     expect(SHAPE).toMatchObject({ discriminator: 'type' });
-    expect(Object.keys((SHAPE as { variants: object }).variants)).toEqual(['box', 'sphere', 'capsule']);
+    expect(Object.keys((SHAPE as { variants: object }).variants)).toEqual(['box', 'sphere', 'capsule', 'compound']);
   });
 
   it('are mirrored exactly by the browser fixture (no drift in what the fixture shows)', () => {
@@ -125,7 +125,7 @@ describe('Collider shape union', () => {
     const { container } = show('shape', SHAPE, { type: 'cylinder', half_height: 0.1, radius: 4 });
     const notice = screen.getByRole('group', { name: 'Shape' });
     expect(notice.textContent).toContain('Unknown shape type "cylinder"');
-    expect(notice.textContent).toContain('Expected box, sphere or capsule');
+    expect(notice.textContent).toContain('Expected box, sphere, capsule or compound');
     expect(notice.textContent).toContain('"radius":4');
     expect(notice.tabIndex).toBe(0);
     expect(notice.id).toBe(fieldDomId(ENTITY, 'Collider', ['shape']));

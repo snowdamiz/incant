@@ -78,6 +78,27 @@ within its documented workload.
   lateral sweeps remain documented. See [steering](docs/spikes/navigation-steering.md),
   [links](docs/spikes/navigation-links.md) and [CPU budgets](docs/spikes/script-cpu-budget.md).
 
+- Compound colliders support 1–64 stable primitive children with parent body/hit
+  identity. Shared edits, recovery, rotated-child walking and the compact read-only
+  Inspector pass. Claude accepted the final native review at 1440×874 and 1000×650,
+  including End→Tab full IDs, the 64-part list and the compact unavailable Agent.
+  Integration with main passes 282 Rust, 40 GPU, 334 UI and five tool tests,
+  Clippy, contracts and public compound/navigation workflows. Baking preserves
+  transformed child geometry and hollow openings, and re-bakes after edits.
+  The branch now incorporates PR #40's complete navigation/script foundation;
+  this newer integration is being tested before PR #25 leaves draft and merges.
+  See [compound colliders](docs/spikes/compound-colliders.md).
+
+- PR #40 adds weighted rectangular-grid navigation through `api.findGridPath`,
+  shared edits, blocked-corner rules, bounded search and saved gameplay. Local
+  checks pass 309 Rust, 40 GPU, 315 UI and five tool tests, Clippy, contracts,
+  native packaging and WASM/iOS core compilation. Claude's scoped rendered
+  review passes 516 matching frames, exact saved-state restoration and independent
+  route-cost checks. Arrival is at tick 476 with 0.2 m minimum footprint clearance.
+  Hosted checks remain pending. Sprite/tilemap rendering and 2D physics remain
+  open. See [grid navigation](docs/spikes/grid-navigation.md).
+
+
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
   with funnel smoothing and connected visibility repair. Claude's rendered
@@ -227,7 +248,7 @@ within its documented workload.
   units; WebKit field names and the compact Agent state are fixed. All twelve hosted
   checks passed at `6d5fca0`; PR #23 merged as `eb77419`. Character controllers
   are implemented in PR #24. Compound colliders remain in draft PR #25 pending
-  the native visual review paused by the director. Mesh colliders, hierarchy/scale,
+  the native visual review, now resumed by the director. Mesh colliders, hierarchy/scale,
   rollback snapshots and device performance remain open. See [runtime evidence](docs/spikes/physics-runtime.md).
 
 - Opt-in directional cascades are implemented with scoped Claude appearance
@@ -488,12 +509,13 @@ networking and service scope follows Revision 3 Sections 6.8/6.10; their open
 director decisions and human-owned production prerequisites remain explicit.
 
 The director reauthorized computer use and screen capture on 2026-10-10.
-Claude's resumed compound review accepted the supplied native and corrected-runtime
-scope, then improved the unavailable Agent pane. Final post-change native captures
-currently await Mac unlock; the unlock request is pending. Compound PR #25 remains
-a separate draft while that final native confirmation is open. All twelve hosted
-checks passed on compound head `5b97ecd`.
-The compound changes have not merged into main.
+Claude accepted the final rebuilt native Inspector at 1440×874 and 1000×650,
+including the compact unavailable Agent, valid 64-part list, End→Tab full IDs
+and primitive regression. PR #25 is integrating current main and rerunning
+checks before merge. All twelve checks passed on its earlier head `5b97ecd`;
+that is not evidence for the new integration. Native reorder/invalid-data
+presentation remains outside the read-only boundary, and the OS sharing pill
+obscures the traffic lights. No phase gate is approved.
 
 ## External prerequisites still required
 

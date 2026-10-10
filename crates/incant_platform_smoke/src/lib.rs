@@ -1,15 +1,18 @@
 //! Small runnable cross-platform probe of the actual document and Bevy crates.
+mod grid_navigation;
 mod input;
 mod localization;
 mod navigation;
 mod steering;
 use incant_core::{CharacterQuery, Engine};
 use incant_doc::{
-    BodyMotion, Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform,
+    BodyMotion, Collider, ColliderPart, ColliderShape, Entity, PrimitiveColliderShape, Project,
+    RigidBody, Scene, Transform,
 };
 use serde_json::json;
 
 pub fn run() -> Result<String, String> {
+    let grid_navigation = grid_navigation::check()?;
     let input = input::check()?;
     let localization = localization::check()?;
     let navigation = navigation::check()?;
@@ -36,8 +39,19 @@ pub fn run() -> Result<String, String> {
     floor.components.insert(
         "Collider".into(),
         json!(Collider {
-            shape: ColliderShape::Box {
-                half_extents: [10., 0.5, 10.]
+            shape: ColliderShape::Compound {
+                parts: [-5., 5.]
+                    .into_iter()
+                    .enumerate()
+                    .map(|(i, x)| ColliderPart {
+                        id: format!("{:026}", i + 20),
+                        translation: [x, 0., 0.],
+                        rotation: [0., 0., 0., 1.],
+                        shape: PrimitiveColliderShape::Box {
+                            half_extents: [5., 0.5, 10.]
+                        },
+                    })
+                    .collect(),
             },
             ..Default::default()
         }),
@@ -115,11 +129,14 @@ pub fn run() -> Result<String, String> {
         options: Default::default(),
     })
     .map_err(|e| e.to_string())?;
-    if !movement.grounded || movement.translation[0] < 0.09 || movement.translation[1].abs() > 0.02
+    if !movement.grounded
+        || movement.sliding_down_slope
+        || movement.translation[0] < 0.09
+        || movement.translation[1].abs() > 0.02
     {
         return Err("character movement assertion failed".into());
     }
-    Ok(json!({"steering":steering,"navigation":navigation,"localization":localization,"input":input,"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
+    Ok(json!({"grid_navigation":grid_navigation,"steering":steering,"navigation":navigation,"localization":localization,"input":input,"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
 }
 
 #[cfg(not(target_arch = "wasm32"))]

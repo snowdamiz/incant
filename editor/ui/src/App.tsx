@@ -19,7 +19,7 @@ import { ShellProvider, useShell } from './shell/ShellContext';
 import { installInputModality } from './shell/inputModality';
 import { projectState } from './shell/projectState';
 import { focusRegion, nextRegion, regionOf } from './shell/regions';
-import { clampLayout, defaultLayout } from './shell/layout';
+import { clampLayout, defaultLayout, idleAgentHeight } from './shell/layout';
 import type { Layout } from './shell/layout';
 
 export function App({ resolution }: { resolution: BridgeResolution }) {
@@ -68,6 +68,9 @@ function Workbench() {
   const shell = useShell();
   const { bridge, snapshot, run, accountOpen, panels, togglePanel } = shell;
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
+  const [windowHeight, setWindowHeight] = useState(() => window.innerHeight);
+  // Until someone drags the Agent splitter, an agent that cannot run keeps a compact pane.
+  const [agentSized, setAgentSized] = useState(false);
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const shortcutsReturn = useRef<HTMLElement | null>(null);
 
@@ -82,7 +85,10 @@ function Workbench() {
   }, [attached]);
 
   useEffect(() => {
-    const onResize = () => setLayout((current) => clampLayout(current, window.innerWidth, window.innerHeight));
+    const onResize = () => {
+      setWindowHeight(window.innerHeight);
+      setLayout((current) => clampLayout(current, window.innerWidth, window.innerHeight));
+    };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
@@ -143,6 +149,12 @@ function Workbench() {
   const resize = (patch: Partial<Layout>) =>
     setLayout((current) => clampLayout({ ...current, ...patch }, window.innerWidth, window.innerHeight));
 
+  const agentStatus = snapshot?.agent?.status;
+  const agentHeight =
+    agentSized || agentStatus === 'idle' || agentStatus === 'running'
+      ? layout.agent
+      : Math.min(layout.agent, idleAgentHeight(windowHeight));
+
   const columns = [
     panels.hierarchy ? `${layout.left}px var(--splitter-size)` : '',
     'minmax(0, 1fr)',
@@ -190,9 +202,20 @@ function Workbench() {
         {panels.inspector ? (
           <>
             <Splitter label="Resize inspector and agent" orientation="vertical" invert value={layout.right} min={280} max={560} onChange={(right) => resize({ right })} />
-            <div className="column column--side" style={{ gridTemplateRows: `minmax(0, 1fr) var(--splitter-size) ${layout.agent}px` }}>
+            <div className="column column--side" style={{ gridTemplateRows: `minmax(0, 1fr) var(--splitter-size) ${agentHeight}px` }}>
               <InspectorPanel />
-              <Splitter label="Resize agent panel" orientation="horizontal" invert value={layout.agent} min={180} max={560} onChange={(agent) => resize({ agent })} />
+              <Splitter
+                label="Resize agent panel"
+                orientation="horizontal"
+                invert
+                value={agentHeight}
+                min={180}
+                max={560}
+                onChange={(agent) => {
+                  setAgentSized(true);
+                  resize({ agent });
+                }}
+              />
               <AgentPanel />
             </div>
           </>

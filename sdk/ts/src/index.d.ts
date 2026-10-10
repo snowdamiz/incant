@@ -27,9 +27,19 @@ export type { StringTable, LocaleSettings, LocalizeRequest, LocalizedText, Missi
 import type { LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
 export type { NavigationMesh, NavigationQuery, NavigationPath, OffMeshLink, OffMeshTraversal } from './generated';
 import type { NavigationQuery, NavigationPath } from './generated';
+export type { NavigationGrid, GridNavigationQuery, GridPath } from './generated';
+import type { GridNavigationQuery, GridPath } from './generated';
 export type { SteeringQuery, SteeringAgent, SteeringObstacle, SteeringVelocity } from './generated';
 import type { SteeringQuery, SteeringVelocity } from './generated';
 export interface ScriptApi {
+  /** Weighted rectangular-grid A* in tile coordinates. Zero-cost cells block;
+   * diagonal moves cannot cut corners. Costs 64 of 256 shared query units.
+   * Returns adjacent cells and exact planner cost (weight * 1000/1414 per step).
+   * Null means blocked/unreachable; invalid inputs or exhausted budgets throw.
+   * This point route does not account for actor radius, world transforms or physics.
+   * Recalculate after grid edits; successful commands become visible next tick.
+   * Generation is local to the session and resets across process/save reopen. */
+  findGridPath(query: GridNavigationQuery): GridPath | null;
   /** Read-only reciprocal local avoidance in world XZ coordinates. One snapshot
    * of at most 128 agents and 32 convex obstacles (128 total edges); 64 KiB input.
    * Agent and obstacle IDs must be distinct canonical ULIDs within each list.

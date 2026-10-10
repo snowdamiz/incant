@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "cells": {
+      "description": "Ordered adjacent cells including both endpoints. Never smoothed through obstacles.",
+      "items": {
+        "items": {
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "maxItems": 2,
+        "minItems": 2,
+        "type": "array"
+      },
+      "type": "array"
+    },
+    "cost": {
+      "description": "Exact integer planner cost: entering weight * 1000 straight or * 1414 diagonal.",
+      "format": "uint64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "generation": {
+      "description": "Host session revision; zero for a standalone library query.",
+      "format": "uint64",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "cells",
+    "cost",
+    "generation"
+  ],
+  "title": "GridPath",
+  "type": "object"
+}

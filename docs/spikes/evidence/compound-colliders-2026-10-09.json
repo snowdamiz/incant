@@ -1,0 +1,334 @@
+{
+  "runtime_commit": "8b7f211981337ce95611aff9fe6d37394f83603b",
+  "headless_sha256": "37b787280810e19cfd3448a241189ff86c9077805f967ff4d1a113f52df4fe79",
+  "initial_checks": {
+    "rust_tests": 168,
+    "ui_baseline_tests": 316,
+    "clippy": "workspace all-targets passed",
+    "schemas_sdk_bridge": "passed"
+  },
+  "character_cases": {
+    "configurations": 36,
+    "ticks_per_configuration": 300,
+    "compound_floor_includes_adjacent_parts": true,
+    "result": "all ticks retain at least 95 percent tangential progress, grounded height and wall separation",
+    "rotated_local_frames": true
+  },
+  "cli": {
+    "passed": true,
+    "atomic_duplicate_rejection": true,
+    "stable_part_edit_undo_redo_reopen": true,
+    "strict_typescript": true,
+    "hollow_arch_query": true,
+    "parent_hit_identity": true,
+    "dynamic_compound_height": 0.2999277710914612,
+    "repeated_final_state_exact": true,
+    "author_files_unchanged": {
+      "compound.incant.json": "92096128e3d550d1e2b7943680cf5d2a007f9d2143e24996678243c430a68c7b",
+      "history.jsonl": "191b764fd092f4a58501d5756d1c883f6c894a2aaf4b7417a8fc798849266643"
+    },
+    "physical_device_gate": false
+  },
+  "platforms": {
+    "macos": {
+      "arch": "aarch64",
+      "character_movement": {
+        "collisions": [
+          "01M4HMNPR8KF6W092M0Y298YCQ"
+        ],
+        "grounded": true,
+        "sliding_down_slope": false,
+        "translation": [
+          0.10000000149011612,
+          5.1684826757991686e-05,
+          0.0
+        ]
+      },
+      "incant": "hello-world",
+      "ok": true,
+      "os": "macos",
+      "physics_backend": "rapier-0.36-enhanced-determinism",
+      "physics_y": 0.49993008375167847,
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "browser_wasm": {
+      "arch": "wasm32",
+      "character_movement": {
+        "collisions": [
+          "01M4HMR6ZW9R63F8AARM2XWBMD"
+        ],
+        "grounded": true,
+        "sliding_down_slope": false,
+        "translation": [
+          0.10000000149011612,
+          5.1684826757991686e-05,
+          0
+        ]
+      },
+      "incant": "hello-world",
+      "ok": true,
+      "os": "",
+      "physics_backend": "rapier-0.36-enhanced-determinism",
+      "physics_y": 0.49993008375167847,
+      "position_x": 5.999999999999987,
+      "ticks": 120
+    },
+    "wasm_sha256": "6edef5d60c27f4570e67df74ed4194f69c2dc43a73aee2246a95e029512ae4fd",
+    "ios_simulator": {
+      "ok": true,
+      "status": 0
+    },
+    "ios_sha256": "a4344373b2988fdeb0853f51a092d0051e6231694a090ba56fd75e1d20ab218a",
+    "workload": "Two adjacent box parts form the floor; a sphere settles on their seam and a primitive character sweeps on the compound surface."
+  },
+  "pending": [
+    "native wide/minimum appearance and 64-part review (director paused computer use and captures)",
+    "corrected-runtime visual review if numerical replay changes motion",
+    "hosted checks and merge"
+  ],
+  "not_claimed": [
+    "mesh terrain",
+    "nested compound parts",
+    "per-part materials or masks",
+    "compound character bodies",
+    "physical-device game performance",
+    "universal determinism"
+  ],
+  "local_cost": {
+    "binary_sha256": "37b787280810e19cfd3448a241189ff86c9077805f967ff4d1a113f52df4fe79",
+    "bodies": 32,
+    "ticks": 180,
+    "trials": 3,
+    "sleeping": false,
+    "ccd": true,
+    "rendering": false,
+    "game_or_device_gate": false,
+    "cases": {
+      "1": {
+        "median_p95_ms": 0.754208,
+        "trials": [
+          {
+            "p95_ms": 0.777833,
+            "max_ms": 0.948667
+          },
+          {
+            "p95_ms": 0.738417,
+            "max_ms": 1.032834
+          },
+          {
+            "p95_ms": 0.754208,
+            "max_ms": 0.917667
+          }
+        ],
+        "final_state_equal": true,
+        "author_unchanged": true
+      },
+      "4": {
+        "median_p95_ms": 1.157875,
+        "trials": [
+          {
+            "p95_ms": 1.324541,
+            "max_ms": 1.472292
+          },
+          {
+            "p95_ms": 1.157875,
+            "max_ms": 1.276625
+          },
+          {
+            "p95_ms": 1.137917,
+            "max_ms": 1.342917
+          }
+        ],
+        "final_state_equal": true,
+        "author_unchanged": true
+      },
+      "16": {
+        "median_p95_ms": 3.3956250000000003,
+        "trials": [
+          {
+            "p95_ms": 3.184208,
+            "max_ms": 3.579708
+          },
+          {
+            "p95_ms": 3.3956250000000003,
+            "max_ms": 3.702542
+          },
+          {
+            "p95_ms": 4.309375,
+            "max_ms": 5.13225
+          }
+        ],
+        "final_state_equal": true,
+        "author_unchanged": true
+      },
+      "64": {
+        "median_p95_ms": 11.578417,
+        "trials": [
+          {
+            "p95_ms": 11.018167,
+            "max_ms": 11.255832999999999
+          },
+          {
+            "p95_ms": 11.578417,
+            "max_ms": 15.128166
+          },
+          {
+            "p95_ms": 12.335291,
+            "max_ms": 14.529583
+          }
+        ],
+        "final_state_equal": true,
+        "author_unchanged": true
+      }
+    },
+    "host": "Apple M5 Pro; concurrent development load; rendering excluded"
+  },
+  "rotated_face_correction": {
+    "before": {
+      "capsule_tick": 77,
+      "actual_dx": 0.0181839931756258,
+      "requested_dx": 0.02666666666666667
+    },
+    "after": "36 cases x 300 ticks pass >=95% progress; recovered child normals are normalized after local rotation"
+  },
+  "corrected_runtime": {
+    "source": "aa2a4d5beaa93d7ef6d8a6b3be15cca84fdaad79",
+    "headless_sha256": "8235a36a825de9a989787a439dc28c30a7d42a04eb2a05c4714b47f95661de99",
+    "rust_tests": 168,
+    "gpu_tests": 40,
+    "ui_tests": 329,
+    "clippy": "passed",
+    "native_release_build": "passed",
+    "generated_schemas_sdk_bridge_conventions": "passed",
+    "tool_tests": 5,
+    "public_primitive_cli": "passed",
+    "public_character_cli": "passed",
+    "public_compound_cli": {
+      "passed": true,
+      "atomic_duplicate_rejection": true,
+      "stable_part_edit_undo_redo_reopen": true,
+      "strict_typescript": true,
+      "hollow_arch_query": true,
+      "parent_hit_identity": true,
+      "dynamic_compound_height": 0.2999277710914612,
+      "repeated_final_state_exact": true,
+      "author_files_unchanged": {
+        "compound.incant.json": "29169be9a1627054c3f2a3a1e6ca615cf9a065b9ab779a1895a5a7eb7936034c",
+        "history.jsonl": "262c1f15800c7cbef0ee2d01124af29f25251425eba16069e630c9efaca31360"
+      },
+      "physical_device_gate": false
+    }
+  },
+  "native_before_pause": {
+    "source": "eb261ab",
+    "binary_sha256": "91945e8c0a5e42b911ce4bafc7a1e691e85a10031cdbf3c02a6ef610c7a50ead",
+    "project": "public compound CLI probe",
+    "verified": [
+      "native schema displays 3 compound parts",
+      "End selects part 3 and matching nested path",
+      "Tab leaves list for full stable ID",
+      "saved login restored without prompting",
+      "engine reports zero errors/warnings"
+    ],
+    "appearance_approval": false
+  },
+  "claude_review": {
+    "handoff": "0024-compound-inspector",
+    "browser_states": 28,
+    "axe_violations": 0,
+    "horizontal_overflow_px": 0,
+    "original_repeated_frames_equal": 228,
+    "corrected_runtime_repeats_equal": true,
+    "final_character_difference_max_m": 0.0001809597015,
+    "props_and_arch_equal": true,
+    "new_captures_after_pause": false,
+    "stool_report": "Initial diagnosis unsupported by numerical energy trace; no solver patch",
+    "stool_evidence": "compound-stool-energy-2026-10-09.json"
+  },
+  "resumed_integration_2026_10_10": {
+    "main": "68f6004b11c0d78a0bfdc9d47b0705821015f15c",
+    "integration_commit": "f867fc2d0ea4c4b28fb41e62d662b0839e81ad21",
+    "rust_tests": 237,
+    "gpu_tests": 40,
+    "ui_tests": 334,
+    "tool_tests": 5,
+    "clippy": true,
+    "contracts": true,
+    "strict_typescript": true,
+    "native_build_package": true,
+    "compound_probe": {
+      "passed": true,
+      "atomic_duplicate_rejection": true,
+      "stable_part_edit_undo_redo_reopen": true,
+      "strict_typescript": true,
+      "hollow_arch_query": true,
+      "parent_hit_identity": true,
+      "dynamic_compound_height": 0.2999277710914612,
+      "repeated_final_state_exact": true,
+      "author_files_unchanged": {
+        "compound.incant.json": "f0045e0cb9a78d4f4d4fc19f7294bc1a53e8be441dfdc7a6880bde52a75003c1",
+        "history.jsonl": "c364ea384171399c6ffe0362f58f22b4ab62735953d2c43ffc308f349e7e845d"
+      },
+      "physical_device_gate": false
+    },
+    "audio_probe": {
+      "passed": true,
+      "public_import_and_rpc": true,
+      "strict_typescript": true,
+      "source_free": true,
+      "repeated_pcm_exact": true,
+      "frames": 48000,
+      "sample_rate": 48000,
+      "timer_pcm_matches_update_control": true,
+      "saved_audio_timer_deadlines_restored": true,
+      "restored_paused_source_stays_silent_until_timer": true,
+      "left_rms": 0.2441395090272332,
+      "paused_left_rms": 0.0,
+      "resumed_left_rms": 0.2441395090272332,
+      "right_rms": 0.3664044296662817,
+      "attenuated_right_rms": 0.18361455724094905,
+      "bus_gain_ratio": 0.5011253750621514,
+      "existing_output_untouched": true,
+      "author_files_unchanged": {
+        "game.incant.json": "bbdf41a7e48702c0280478698ee2890931c1b942f5ac07ba68cfa3031e51fe91",
+        "game.incant.journal.jsonl": "063adcdd2f707fd0b480fee0332c720d0f9d90d43af39b9558c468be6018e9d4"
+      },
+      "pcm_sha256": "4ab70417e9ee9e457b7a83e8f8307825557795e705e4cb6f9afba8550df43225",
+      "binary_sha256": "2f4cb5dad9c845aefc6e7af05cd727b183c1528577901d1d2ae6e87b1fdc038d",
+      "audio_device_opened": false,
+      "pixel_capture": false
+    },
+    "actions_probe": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "steps": [
+        7,
+        13
+      ],
+      "atomic_command_undo_redo": true,
+      "runtime_rebind_saved": true,
+      "full_state_equal": true,
+      "continued_logs_equal": true,
+      "subtick_taps": true,
+      "alternative_bindings_do_not_repeat_presses": true,
+      "touch_gesture_binding": true,
+      "author_files_unchanged": {
+        "game.incant.json": "5991e8081ac7230796512a467de60ae1b61fe7e6aaa173f10d42a4bc170be16f",
+        "history.jsonl": "650f4382b1cc2f2abc54174dc6592a8baf2614f070c800d5ef2071a6feaf65b9",
+        "input.json": "4b9ba5d9049d38db47ee22a49a0ed851b4e6718ecf384c5350d036e0ee3d6a6e"
+      },
+      "final_position": [
+        0.275,
+        0.0,
+        0.3
+      ],
+      "binary_sha256": "2f4cb5dad9c845aefc6e7af05cd727b183c1528577901d1d2ae6e87b1fdc038d"
+    },
+    "claude_result": "handoffs/0025-compound-native-review/result.md",
+    "visual_status": "Supplied native/64-part and corrected-runtime scopes accepted; compact idle Agent improvement needs final rebuilt native confirmation.",
+    "native_capture_availability": "Mac locked; human unlock requested; screen use is authorized.",
+    "updated_hosted_ci": "pending"
+  }
+}

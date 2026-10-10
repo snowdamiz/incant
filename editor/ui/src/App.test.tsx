@@ -6,6 +6,7 @@ import type { BridgeSnapshot, EditorBridge, EditorCommand } from './bridge/contr
 import { createFixtureBridge, fixtureSnapshot } from './bridge/fixture';
 import type { FixtureVariant } from './bridge/fixture';
 import { humanize } from './components/inspector/FieldView';
+import { defaultLayout, idleAgentHeight } from './shell/layout';
 
 /**
  * TEST DOUBLE, not a bridge implementation: serves the sample snapshot, advertises
@@ -68,8 +69,7 @@ describe('editor shell', () => {
   it('renders the hierarchy as an accessible tree with problem counts in names', async () => {
     const { container } = renderFixture('sample');
     const tree = screen.getByRole('tree', { name: 'Hierarchy' });
-    // 19 sample entities plus the orthographic Map Camera (handoff 0030).
-    expect(within(tree).getAllByRole('treeitem').length).toBe(20);
+    expect(within(tree).getAllByRole('treeitem').length).toBe(24);
     expect(treeRow('Crate 03').textContent).toContain('1 error');
     await expectNoAxeViolations(container);
   });
@@ -267,6 +267,25 @@ describe('editor shell', () => {
     expect(Number(splitter.getAttribute('aria-valuenow'))).toBe(before + 16);
     fireEvent.keyDown(splitter, { key: 'Home' });
     expect(splitter.getAttribute('aria-valuenow')).toBe('200');
+  });
+
+  it('keeps an unavailable agent compact until its separator is moved, and sizes a ready agent normally', () => {
+    const sideRows = () => (document.querySelector('.column--side') as HTMLElement).style.gridTemplateRows;
+    const { unmount } = renderFixture('sample');
+    const splitter = screen.getByRole('separator', { name: 'Resize agent panel' });
+    const idle = idleAgentHeight(window.innerHeight);
+    expect(splitter.getAttribute('aria-valuenow')).toBe(String(idle));
+    expect(sideRows()).toMatch(new RegExp(`${idle}px$`));
+    // A deliberate size wins over the compact default, even while the agent is unavailable.
+    fireEvent.keyDown(splitter, { key: 'ArrowUp' });
+    expect(splitter.getAttribute('aria-valuenow')).toBe(String(idle + 16));
+    unmount();
+
+    const ready = { ...fixtureSnapshot('sample'), agent: { status: 'idle' as const } };
+    renderWith(recordingBridge(['agent.send'], ready).bridge);
+    const full = defaultLayout(window.innerWidth, window.innerHeight).agent;
+    expect(full).toBeGreaterThan(idle);
+    expect(screen.getByRole('separator', { name: 'Resize agent panel' }).getAttribute('aria-valuenow')).toBe(String(full));
   });
 
   it.each([
