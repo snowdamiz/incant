@@ -36,23 +36,23 @@
  },
  "crossing.logs.jsonl": {
   "identical": true,
-  "bytes": 354596
+  "bytes": 356199
  },
  "crossing.prefix.logs.jsonl": {
   "identical": true,
-  "bytes": 447045
+  "bytes": 447683
  },
  "endpoint.logs.jsonl": {
   "identical": true,
-  "bytes": 2449397
+  "bytes": 2395735
  },
  "endpoint.prefix.logs.jsonl": {
   "identical": true,
-  "bytes": 1488325
+  "bytes": 1495475
  },
  "gantry.logs.jsonl": {
   "identical": true,
-  "bytes": 356421
+  "bytes": 357813
  },
  "gantry.prefix.logs.jsonl": {
   "identical": true,
@@ -60,30 +60,30 @@
  },
  "logs.logs.jsonl": {
   "identical": true,
-  "bytes": 4093433
+  "bytes": 4039152
  },
  "overview.logs.jsonl": {
   "identical": true,
-  "bytes": 4093433
+  "bytes": 4039152
  },
  "plan.logs.jsonl": {
   "identical": true,
-  "bytes": 4093433
+  "bytes": 4039152
  },
  "plinth-a.logs.jsonl": {
   "identical": true,
-  "bytes": 354596
+  "bytes": 356199
  },
  "plinth-a.prefix.logs.jsonl": {
   "identical": true,
-  "bytes": 447045
+  "bytes": 447683
  },
  "plinth-b.logs.jsonl": {
   "identical": true,
-  "bytes": 716798
+  "bytes": 721825
  },
  "plinth-b.prefix.logs.jsonl": {
   "identical": true,
-  "bytes": 801641
+  "bytes": 803882
  }
 }
