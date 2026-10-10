@@ -7,6 +7,7 @@ import type { FieldContext } from './FieldView';
 import { ProblemList, fieldDomId, severityOf } from './FieldView';
 import { count, formatNumber, pointer } from './format';
 import type { FieldHint } from './presentation';
+import { revealIndex, useFieldReveal } from './reveal';
 
 type ArraySchema = Extract<FieldSchema, { type: 'array' }>;
 
@@ -129,6 +130,9 @@ export function NumberListView({
   }, [value]);
   const size = gridSize(hint, ctx, value.length);
   const [showValues, setShowValues] = useState(size === null);
+  useFieldReveal(id, (remaining) => {
+    if (revealIndex(remaining, value.length) !== null) setShowValues(true);
+  });
   const description = schema.description ?? hint.description;
   const range = value.length === 0 ? '' : stats.min === stats.max ? ` · all ${formatNumber(stats.min)}` : ` · ${formatNumber(stats.min)} to ${formatNumber(stats.max)}`;
   const blocked = size && hint.grid ? value.reduce((n, v) => (v === hint.grid!.blocked ? n + 1 : n), 0) : 0;
@@ -142,7 +146,7 @@ export function NumberListView({
     : summary;
   const tableId = `${id}-values`;
   return (
-    <div className="value-list" data-severity={severity ?? undefined}>
+    <div className="value-list" id={size ? id : undefined} data-severity={severity ?? undefined}>
       <ListHeader
         id={id}
         label={label}
@@ -177,6 +181,8 @@ export function NumberListView({
           {showValues ? (
             <NumberTable
               id={size ? tableId : id}
+              fieldId={id}
+              cellId={(index) => fieldDomId(ctx.entity, ctx.component, [...path, String(index)])}
               values={value}
               columns={size ? size.width : null}
               label={label}
@@ -289,6 +295,8 @@ function mix(a: readonly number[], b: readonly number[], t: number): [number, nu
  */
 function NumberTable({
   id,
+  fieldId,
+  cellId,
   values,
   columns,
   label,
@@ -298,6 +306,8 @@ function NumberTable({
   invalid,
 }: {
   id: string;
+  fieldId: string;
+  cellId: (index: number) => string;
   values: readonly number[];
   columns: number | null;
   label: string;
@@ -309,7 +319,7 @@ function NumberTable({
   const scroller = useRef<HTMLDivElement>(null);
   // The box is at most 8 rows tall inside the Inspector, so its first render (before
   // layout is measured) assumes that size rather than a whole panel.
-  const [viewport, attachViewport] = useViewport(scroller, CELL_ROW * 4, TABLE_FALLBACK);
+  const [viewport, attachViewport, remeasure] = useViewport(scroller, CELL_ROW * 4, TABLE_FALLBACK);
   const longest = useMemo(() => values.reduce((n, v) => Math.max(n, formatNumber(v).length), 1), [values]);
   const gutter = String(Math.max(0, values.length - 1)).length;
   // Monospace at 12 px is 7.2 px per character; each cell adds 10 px of padding.
@@ -317,6 +327,14 @@ function NumberTable({
   const gutterWidth = (gutter + 2) * 7.2;
   const fit = Math.max(1, Math.floor((viewport.width - gutterWidth - 16) / cellWidth));
   const perRow = columns ?? fit;
+  useFieldReveal(fieldId, (remaining) => {
+    const index = revealIndex(remaining, values.length);
+    const element = scroller.current;
+    if (index === null || !element) return;
+    element.scrollTop = revealOffset(element.scrollTop, element.clientHeight || viewport.height, Math.floor(index / perRow) * CELL_ROW + 4, CELL_ROW);
+    element.scrollLeft = revealOffset(element.scrollLeft, element.clientWidth || viewport.width, gutterWidth + (index % perRow) * cellWidth, cellWidth);
+    remeasure();
+  });
   const rows = Math.ceil(values.length / perRow);
   const [first, last] = rowRange(viewport, rows, CELL_ROW, 6, 4);
   const indices = mountedIndices(first, last, rows, []);
@@ -362,6 +380,8 @@ function NumberTable({
                 return (
                   <span
                     key={index}
+                    id={cellId(index)}
+                    tabIndex={-1}
                     className={`number-table__cell${errorIndexes.has(index) ? ' is-error' : ''}`}
                     title={columns !== null ? `x ${index - start}, y ${row}: ${v}` : `[${index}] ${v}`}
                   >
@@ -378,6 +398,11 @@ function NumberTable({
 }
 
 const STRING_ROW = 26;
+
+/** Scroll the minimum distance; fallback viewport sizes also work before layout. */
+function revealOffset(offset: number, size: number, start: number, span: number): number {
+  return start < offset ? start : start + span > offset + size ? start + span - size : offset;
+}
 
 /**
  * A list of text values, such as a mesh's material IDs. Each value is a read-only
@@ -409,9 +434,18 @@ export function StringListView({
   const named = value.filter((item) => ctx.refs?.(item)).length;
   const summary = `${count(value.length, noun.toLowerCase())}${named > 0 && named < value.length ? ` · ${named} named` : ''}`;
   const scroller = useRef<HTMLDivElement>(null);
-  const [viewport, attachViewport] = useViewport(scroller, STRING_ROW * 4);
+  const [viewport, attachViewport, remeasure] = useViewport(scroller, STRING_ROW * 4);
   const [first, last] = rowRange(viewport, value.length, STRING_ROW, 6, 4);
   const windowed = value.length > 48;
+  useFieldReveal(id, (remaining) => {
+    const index = revealIndex(remaining, value.length);
+    const element = scroller.current;
+    if (index === null || !element) return;
+    if (windowed) {
+      element.scrollTop = revealOffset(element.scrollTop, element.clientHeight || viewport.height, index * STRING_ROW + 4, STRING_ROW);
+      remeasure();
+    }
+  });
   const indices = windowed ? mountedIndices(first, last, value.length, []) : value.map((_, index) => index);
   return (
     <div className="value-list" data-severity={severity ?? undefined}>

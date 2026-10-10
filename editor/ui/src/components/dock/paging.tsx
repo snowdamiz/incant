@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
+import type { Ref } from 'react';
 import type { IconName } from '../../icons/Icon';
 import { Icon } from '../../icons/Icon';
 
@@ -32,6 +33,10 @@ export interface Page {
 export function usePage(total: number, anchor?: number): Page {
   const count = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const [chosen, setChosen] = useState<number | null>(null);
+  // Commit a shrink's clamp, so later growth cannot resurrect an old page.
+  useLayoutEffect(() => {
+    if (chosen !== null && chosen >= count) setChosen(count - 1);
+  }, [chosen, count]);
   const anchorPage = anchor === undefined ? null : Math.min(count - 1, Math.max(0, Math.floor(anchor / PAGE_SIZE)));
   const index = chosen === null ? (anchorPage ?? 0) : Math.min(chosen, count - 1);
   const start = index * PAGE_SIZE;
@@ -57,6 +62,7 @@ export function Pager({
   anchorLabel?: string;
   announce: (message: string) => void;
 }) {
+  const lastButton = useRef<HTMLButtonElement>(null);
   if (page.count <= 1) return null;
   const range = (index: number) => {
     const start = index * PAGE_SIZE;
@@ -73,7 +79,12 @@ export function Pager({
   return (
     <div className="pager" role="group" aria-label={`Pages of ${noun}`}>
       {anchorLabel && page.anchorPage !== null && page.anchorPage !== page.index ? (
-        <button type="button" className="pager__anchor" onClick={() => go(page.anchorPage!)}>
+        <button type="button" className="pager__anchor" onClick={() => {
+          go(page.anchorPage!);
+          // This anchor disappears when followed. Keep focus on a stable final
+          // pager control, so Tab can continue into the list instead of the page.
+          lastButton.current?.focus({ preventScroll: true });
+        }}>
           {anchorLabel}
         </button>
       ) : null}
@@ -84,15 +95,16 @@ export function Pager({
       <PagerButton label="First page" icon="pageFirst" disabled={atStart} onClick={() => go(0)} />
       <PagerButton label="Previous page" icon="pagePrev" disabled={atStart} onClick={() => go(page.index - 1)} />
       <PagerButton label="Next page" icon="pageNext" disabled={atEnd} onClick={() => go(page.index + 1)} />
-      <PagerButton label="Last page" icon="pageLast" disabled={atEnd} onClick={() => go(page.count - 1)} />
+      <PagerButton buttonRef={lastButton} label="Last page" icon="pageLast" disabled={atEnd} onClick={() => go(page.count - 1)} />
     </div>
   );
 }
 
-function PagerButton({ label, icon, disabled, onClick }: { label: string; icon: IconName; disabled: boolean; onClick: () => void }) {
+function PagerButton({ label, icon, disabled, onClick, buttonRef }: { label: string; icon: IconName; disabled: boolean; onClick: () => void; buttonRef?: Ref<HTMLButtonElement> }) {
   return (
     <button
       type="button"
+      ref={buttonRef}
       className="tool-button tool-button--small pager__button"
       aria-label={label}
       title={label}

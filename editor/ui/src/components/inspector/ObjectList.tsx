@@ -9,6 +9,7 @@ import { FieldView, Notice, ProblemList, depthStyle, fieldDomId, orderedProperti
 import { formatNumber, humanize, isRecord, pointer, safeJson, unescapePointer } from './format';
 import type { FieldHint, NameOf } from './presentation';
 import { fieldHint } from './presentation';
+import { revealIndex, useFieldReveal } from './reveal';
 
 type ObjectSchema = Extract<FieldSchema, { type: 'object' }>;
 type UnionSchema = Extract<FieldSchema, { type: 'tagged-union' }>;
@@ -142,6 +143,10 @@ export function ObjectListView({
     else return;
     event.preventDefault();
   };
+  useFieldReveal(id, (remaining) => {
+    const index = revealIndex(remaining, value.length);
+    if (index !== null) focusItem(index);
+  });
 
   return (
     <div className="object-list" data-severity={severity ?? undefined}>

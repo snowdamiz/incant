@@ -66,19 +66,25 @@ export function ContextMenu({
     else item.onSelect();
   };
   const move = (index: number) => {
+    if (items.length === 0) return;
     const next = (index + items.length) % items.length;
     setActive(next);
     ref.current?.querySelectorAll<HTMLElement>('[role="menuitem"]')[next]?.focus();
   };
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'ArrowDown') move(active + 1);
-    else if (event.key === 'ArrowUp') move(active - 1);
+    // Focus is authoritative even if a programmatic focus event and this key
+    // arrive in the same React batch, before the roving tab stop has committed.
+    const focused = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('[role="menuitem"]'))
+      .findIndex((item) => item.contains(document.activeElement));
+    const current = focused >= 0 ? focused : active;
+    if (event.key === 'ArrowDown') move(current + 1);
+    else if (event.key === 'ArrowUp') move(current - 1);
     else if (event.key === 'Home') move(0);
     else if (event.key === 'End') move(items.length - 1);
     else if (event.key === 'Escape') onClose(true);
     else if (event.key === 'Tab') onClose(true);
     else if (event.key === 'Enter' || event.key === ' ') {
-      const item = items[active];
+      const item = items[current];
       if (item) choose(item);
     } else return;
     event.preventDefault();
@@ -103,7 +109,8 @@ export function ContextMenu({
           aria-disabled={item.unavailable ? true : undefined}
           className={`menu__item${item.danger ? ' menu__item--danger' : ''}`}
           title={item.unavailable}
-          onMouseEnter={() => setActive(index)}
+          onMouseEnter={() => move(index)}
+          onFocus={() => setActive(index)}
           onClick={() => choose(item)}
         >
           {item.icon ? <Icon name={item.icon} size={14} className="menu__icon" /> : <span className="menu__icon" aria-hidden="true" />}

@@ -13,7 +13,15 @@ import { breakAfterSlashes } from '../breakAfterSlashes';
 export { formatNumber, humanize, pointer, safeJson } from './format';
 
 export function fieldDomId(entity: string, component: string, path: readonly string[]): string {
-  return `field-${entity}-${component}${pointer(path)}`.replace(/[^A-Za-z0-9_-]/g, '_');
+  // Encode each UTF-16 code unit outside the alphanumeric alphabet (including
+  // the escape marker and separator). Empty tokens and token boundaries remain
+  // distinct, even for arbitrary schema keys or malformed Unicode in input data.
+  const tokens = [entity, component, ...path].map((token) =>
+    token.replace(/[^A-Za-z0-9]/g, (unit) => `_${unit.charCodeAt(0).toString(16).padStart(4, '0')}`),
+  );
+  // A terminal marker keeps derived IDs such as `${id}-label` outside the field
+  // ID namespace: a child named "label" cannot claim its parent's label ID.
+  return `field-${tokens.join('-')}--value`;
 }
 
 /** What an exact ID in the open project names: an asset or an entity. */
