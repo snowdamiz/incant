@@ -1,3 +1,55 @@
+## Priority revision 3: portal-entry search (2026-10-10)
+
+The v6 review exposed a detour the shortcut pass could not remove. Astra has now
+replaced centroid-cost A* with directed portal-entry A*: distance is charged
+between portal midpoints from the actual start, including the final end segment.
+Funnel and connected visibility repair remain. An independent Dijkstra oracle
+checks the new graph cost, and a core regression recreates your room.
+
+Use the new immutable binary and source metadata in artifacts/tools/binary.json
+for final v7 captures and an exact repeat. The direct fixed-start diagnostic from
+[-3.44, 0, 0] to [6.6, 0, 1.2], after moving the barrier, now measured 13.634 m
+instead of 15.27 m and no (-3.3, -1.8) tile kink in Astra's preliminary run. Verify
+this separately from the live course: the new initial corridor goes around the
+other side of the pillar, so the character's tick-105 replan start changes and
+whole-route lengths are not directly comparable. Review motion, wall clearance,
+grounding, marker coverage and arrival on the actual new course, without hiding
+issues with camera changes. Report residual kinks honestly. This is still portal-
+graph optimality, not a global continuous shortest-path claim.
+
+The resolution/clearance tradeoff and quantized height limitations from revision
+2 remain. Preserve prior results as history and rewrite result.md around the
+final tested binary. No routine engineering decision needs director approval.
+
+## Priority revision 2: connected visibility repair (2026-10-10)
+
+Astra has added bounded line-of-sight corridor repair at source 4aee4ce. Every
+shortcut traverses real connected polygon portals and restores height detail;
+it uses only the visit budget remaining after A*. An independent Dijkstra
+oracle still verifies initial A* cost. Tests show detour reduction and exact
+fallback when smoothing has no visit allowance. 64 rotated-wall combinations
+(four radii, four cell sizes, four angles) pass the configured-radius check.
+
+Please run a final v6 and exact repeat with the new verified binary. Inspect
+whether the 1.14 m tile-boundary detour disappears; quantify any remaining one.
+Review actual clearance, motion, grounding and arrival. Keep v5 as history.
+Do not re-author cameras to hide defects. The same scene/marker coverage is useful.
+
+The erosion safety margin remains, since reverting it reproduced radius clips
+even with zero contour simplification. This makes configured radius a minimum
+clearance, at the cost of conservative passage loss at coarse voxel resolution.
+A new Rust fixture explicitly demonstrates the 1.1 m doorway fails at 0.1 m
+cells and passes at 0.05 m cells with the same 0.4 m radius. Add the same finer-
+resolution comparison to the doorway sweep if useful; keep actual results and
+state the resolution tradeoff clearly. This is not a claim that every geometric
+fit is discovered. Exact-clearance navmesh construction remains a potential
+quality improvement, not a reason to weaken radius protection. No separate
+director approval is required for these routine implementation decisions.
+
+Quantized heights and remaining step smearing stay explicit. This review must
+not call those exact geometry or mark the phase complete. Report any new actual
+navigation failure to Astra. Source metadata and SHA are in binary.json.
+
 ## Priority revision: review clearance and detail refinement (2026-10-10)
 
 Continue the same visual review after Astra's correctness changes at 141a835.

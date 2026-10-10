@@ -51,12 +51,17 @@ const path = api.findPath({
 `null` means no nearby/reachable path. Bad input, missing meshes and exhausted
 budgets throw. Positions are in world space with +Y up. Endpoints snap to the
 nearest detail triangle within a bounded 3D distance; stacked floors stay
-separate. A* minimizes centroid-edge cost in the polygon adjacency graph. Funnel
-smoothing shortens the route within that corridor; height-detail intersections
-retain terrain ridges and steps. This is not an exact global surface-geodesic
-solver. A separate Dijkstra oracle checks the graph cost on competing routes.
+separate. A* searches directed portal entries, minimizing distance through portal
+midpoints from the actual snapped start to the end. Charging polygon centroids
+previously favored arbitrary tile boundaries; the rendered-room regression now
+avoids its 1.14 m lateral detour. Funnel smoothing shortens the chosen corridor,
+then bounded visibility repair traverses real connected portals using the remaining
+visit allowance. Exhausting that optional allowance retains the valid original
+route. Height-detail intersections retain terrain ridges and steps. A separate
+Dijkstra oracle checks portal-graph cost on competing routes. This is not an exact
+global surface-geodesic solver.
 
-Results include points, corridor indices, visited polygons and generation.
+Results include points, corridor indices, visited search states and generation.
 They are snapshots: behavior must replan after source changes. Generations are
 not durable save identifiers. Each path query costs 64 of the shared 256 native
 query units per tick and observes the script deadline before/after native work.
@@ -80,9 +85,19 @@ cells are 0.05–2 m and vertical cells 0.025–1 m. Radius, height, climb, slop
 vertical extent and distant-coordinate precision are checked before allocation.
 The bake caps projected raster work at eight million cell visits, tile spans at
 262144, tile polygons at 4096 and border comparisons at four million. Paths cap
-visited polygons at 32768, corridor/output points at 4096 and height-detail work
-at two million units. Rebuilds are synchronous. These are explicit initial limits,
+settled search/visibility states at 32768, corridor/output points at 4096, directed
+portal states at 262144 and height-detail work at two million units. Rebuilds are synchronous. These are explicit initial limits,
 not a streaming-world or crowd simulation implementation.
+
+Erosion compensates for the chamfer metric and contour simplification, so the
+configured radius is a minimum clearance rather than an exact geometric offset.
+64 rotated-wall cases cover four radii, four cell sizes and four angles. Coarse
+voxels can conservatively reject narrow passages: a 1.1 m doorway with 0.4 m
+radius fails at 0.1 m cells and passes at 0.05 m cells. Detail sampling is one
+cell with a quarter-cell height error. Heights describe the quantized navigation
+surface; physics owns grounding. Rendered review still measures step smearing
+and local floor bumps, so query heights must not be treated as exact source mesh
+geometry.
 
 ## Verification and measured scope
 
