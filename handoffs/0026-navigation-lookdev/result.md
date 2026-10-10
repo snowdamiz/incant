@@ -34,9 +34,11 @@ Remaining limitations, stated explicitly:
   is unaffected: physics holds it at exactly ridge-top rest height there.
   **This is not exact source geometry.** Source-conforming height detail
   remains a navigation quality follow-up.
-- **Duplicated first point.** A query starting 7 cm above the floor at
-  (4.3, 0.12, 2.7) toward the goal returns its first point twice. It is a minor
-  output defect that does not throw.
+- **Very short first segment.** A query starting 7 cm above the floor at
+  (4.3, 0.12, 2.7) toward the goal begins with a 0.52 mm height-detail segment.
+  It does not throw. An earlier version of this report called it a duplicated,
+  zero-length point; that was a misreading of 3-decimal rounding. See priority
+  revision 6 below.
 - **Doorways.** The configured radius is a minimum clearance, and convex corners
   keep 0.50–0.60 m. At 0.1 m cells, doorways need at least 1.2 m; at 0.05 m
   cells, at least 1.1 m. A 0.4 m-radius agent physically fits anything wider
@@ -58,6 +60,32 @@ Transport is ACP, on host-supplied evidence. The director states that Astra
 invoked the JSON-RPC ACP adapter in `tools/handoff/main.py`. From inside the
 session I can see only a Claude Code agent session in this worktree. I cannot
 inspect the transport layer myself.
+
+### Priority revision 6 acknowledged: rounded-output correction
+
+This revision is report-only, at Astra's request after numerically validating
+the raw log. Astra pointed out that the v9 log contradicts my
+"zero-length first segment" finding. I re-read
+`artifacts/0026-navigation/error-v9/probe.logs.jsonl` at tick 19 at full
+precision:
+
+| Point | x | y | z |
+|---|---|---|---|
+| first | 4.29685115814209 | 0.05017497390508652 | 2.698483943939209 |
+| second | 4.297078609466553 | 0.05000009387731552 | 2.6980462074279785 |
+
+The points are **0.523 mm apart in 3D**: 0.493 mm horizontally and 0.175 mm
+vertically. My analysis printed coordinates rounded to 3 decimals, so both
+showed as (4.297, 0.05, 2.698).
+
+**This is a very short height-detail segment, not a duplicated point or a
+zero-length segment.** I have amended that finding throughout. The v8 log for
+the same query shows the same 0.523 mm separation, so the v8 report's
+"returned twice" wording was the same misreading.
+
+No engine code or binary changed, and this is not a code fix. Every v9 capture,
+probe, frame and screenshot below is unchanged and still valid. No new captures
+were run.
 
 ### Priority revision 5 acknowledged (2026-10-10)
 
@@ -190,12 +218,14 @@ The `error_probe.ts` cases cover:
 - (4.3, 0.12, 2.7) ↔ (4.31, 0.12, 2.7)
 - their neighbours
 
-The v8 throwing pair now returns a 3-point path. The start snaps 3.6 mm onto
-(4.297, 0.05, 2.698), then the path continues to the end.
+The v8 throwing pair now returns a 3-point path. The start snaps 3.5 mm
+horizontally onto (4.29685, 0.05017, 2.69848), then the path continues to the
+end.
 
-**Remaining output defect.** (4.3, 0.12, 2.7) → goal returns
-(4.297, 0.05, 2.698) twice as its first two points, which is a zero-length
-first segment. It does not throw, and it is unchanged from v8.
+**Very short first segment (corrected in revision 6).** (4.3, 0.12, 2.7) → goal
+begins at (4.29685, 0.05017, 2.69848) and then goes to (4.29708, 0.05000,
+2.69805). That is a **0.523 mm** height-detail segment, not a duplicated point.
+It does not throw. The full-precision v8 log shows the same values.
 
 ### Heights and grounding (documented approximation)
 
@@ -345,6 +375,13 @@ in the ignored `artifacts/0026-navigation/`:
 
 ## Changed paths (this revision)
 
+Revision 6 changed only `handoffs/0026-navigation-lookdev/result.md`. It amends
+the short-segment finding in the status, the robustness section and the open
+items, and corrects the snap distance from 3.6 mm to 3.5 mm. No tool, binary,
+capture or screenshot changed.
+
+Revision 5 changed:
+
 - `handoffs/0026-navigation-lookdev/result.md`: rewritten.
 - `handoffs/0026-navigation-lookdev/tools/boundary_probe.ts`: new dense
   short-query probe.
@@ -373,8 +410,10 @@ in the ignored `artifacts/0026-navigation/`:
 
 ## Open items for Astra
 
-1. **Duplicated first point.** (4.3, 0.12, 2.7) → goal returns its first point
-   twice, giving a zero-length first segment. This is minor and does not throw.
+1. **Very short first segment.** (4.3, 0.12, 2.7) → goal starts with a
+   0.523 mm height-detail segment. It is not zero-length and does not throw;
+   this is noted for completeness only. An earlier version of this report
+   misread it as a duplicate; see revision 6.
 2. **Source-conforming height detail.** This is the follow-up for the 6.9 cm
    undershoot near the ridge's near face.
 3. **Script-failure reason.** `play` reports a generic failure that does not say
