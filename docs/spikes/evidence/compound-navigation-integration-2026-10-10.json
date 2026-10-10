@@ -1,0 +1,152 @@
+{
+  "source": "fc60bcf1326b69f7288a8698eeb78aedd39847de",
+  "binary": {
+    "source": "fc60bcf1326b69f7288a8698eeb78aedd39847de",
+    "sha256": "f8075cb97c2d9f460695573a1d3b3edcc2ebefa279b2f9aaad2b10e5803d989d"
+  },
+  "rust_tests": 315,
+  "clippy": "passed",
+  "gpu_coverage": {
+    "tests": 40,
+    "source": "debe4ed16fd373bf2d821ccaa23bd0b46446fb9e",
+    "note": "Same renderer as grid-integrated head; PR40 also passed 40 GPU checks. No claim of a repeated combined-head GPU run."
+  },
+  "ui_tests": 334,
+  "tools": 5,
+  "contracts": "passed",
+  "native_release_build": "passed",
+  "unsigned_package": "passed",
+  "portable_core_compilation": [
+    "wasm32-unknown-unknown",
+    "aarch64-apple-ios-sim"
+  ],
+  "native_appearance": {
+    "verdict": "accepted",
+    "source": "5b97ecd190f9fab0cb9c4d8bec07f777e91ae14d",
+    "evidence": "compound-native-final-2026-10-10.json",
+    "ui_unchanged": true
+  },
+  "public_workflows": {
+    "public": {
+      "passed": true,
+      "atomic_duplicate_rejection": true,
+      "stable_part_edit_undo_redo_reopen": true,
+      "strict_typescript": true,
+      "hollow_arch_query": true,
+      "parent_hit_identity": true,
+      "compound_navigation_opening": true,
+      "dynamic_compound_height": 0.2999277710914612,
+      "repeated_final_state_exact": true,
+      "author_files_unchanged": {
+        "compound.incant.json": "761df2773595692ae5ec637f77a32114a75b6085386092bcf07daa34d79641c3",
+        "history.jsonl": "921557e9fec1da74ebbaeb51d77b91b26f8db037fbd65edff3eb17ce2ca71c89"
+      },
+      "physical_device_gate": false
+    },
+    "navigation": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_import_rpc": true,
+      "durable_undo_redo": true,
+      "invalid_command_rollback": true,
+      "cooked_mesh_without_source": true,
+      "runtime_room_rebuild": true,
+      "navmesh_character_chase": true,
+      "saved_path_following": true,
+      "repeated_gameplay_exact": true,
+      "position": [
+        7.926244258880615,
+        0.9099835753440857,
+        -0.015796080231666565
+      ],
+      "first_corners": 4,
+      "second_corners": 2,
+      "author_files_unchanged": {
+        "game.incant.json": "5b7735ddfc702a190423a42afaf48f3d2559712107a378223d5b2a8abc8fe709",
+        "game.incant.journal.jsonl": "dc9123f7bd2e17fb5e92264f39175ca3b69086df9e14382da600556592735c76"
+      },
+      "binary_sha256": "f8075cb97c2d9f460695573a1d3b3edcc2ebefa279b2f9aaad2b10e5803d989d",
+      "visual_or_device_gate": false
+    },
+    "steering": {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6157673834154757,
+        "neighbors": 17,
+        "remaining": 6.208589198944098e-11,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "3461265880f94a48f43df5865927a7f4aeea4ffc27a8cebf8032b2f41875dd10",
+        "game.incant.journal.jsonl": "c2426dd698ab1db9f968b63e0b90cfe45479568688dbab0d9fa057f2e8bbf909"
+      },
+      "binary_sha256": "f8075cb97c2d9f460695573a1d3b3edcc2ebefa279b2f9aaad2b10e5803d989d",
+      "rendering_or_physics_collision_gate": false
+    },
+    "links": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_commands": true,
+      "durable_undo_redo": true,
+      "invalid_cost_rollback": true,
+      "explicit_link_traversal": true,
+      "one_way_reverse_null": true,
+      "save_in_flight_exact": true,
+      "repeat_exact": true,
+      "mid_link_progress": 0.30555555555555564,
+      "author_files_unchanged": {
+        "game.incant.json": "d34beb7cd9c8b6f8096160cbf371ee4625064f055ccdc398b13a325c0d5b005f",
+        "game.incant.journal.jsonl": "013afb06bd907d953bd9a6d8420dc1201224ece0d6dcd33f89e1f9e386341191"
+      },
+      "binary_sha256": "f8075cb97c2d9f460695573a1d3b3edcc2ebefa279b2f9aaad2b10e5803d989d",
+      "physics_or_visual_gate": false
+    },
+    "paths": {
+      "passed": true,
+      "strict_typescript": true,
+      "shared_commands_and_undo_redo": true,
+      "invalid_grid_rollback": true,
+      "project_grid_count_limit": true,
+      "blocked_door_save_resume_exact": true,
+      "repeat_exact": true,
+      "state": {
+        "arrived": true,
+        "blocked": [
+          6,
+          7,
+          8
+        ],
+        "costs": [
+          6828,
+          6828,
+          6828,
+          9828,
+          9828,
+          null,
+          null,
+          null,
+          6828,
+          6828
+        ],
+        "pos": [
+          6,
+          2
+        ],
+        "tick": 120
+      },
+      "author_files_unchanged": {
+        "grid.incant.json": "bec36a3edd36e1862d95a8b95b1d2f47f96e6a4d6240cbdf41e835297078be90",
+        "grid.incant.journal.jsonl": "82f5407cc90122941605233e8fc2a153f2bcee5d61e98af831034c0ed1b78a83"
+      },
+      "binary_sha256": "f8075cb97c2d9f460695573a1d3b3edcc2ebefa279b2f9aaad2b10e5803d989d",
+      "rendering_or_physics_gate": false
+    }
+  },
+  "hosted_ci": "pending on updated PR25",
+  "phase_gate_approved": false,
+  "native_binary_sha256": "d9bb0192e20da63aa3b858355ba59bdb3f41c3c2eadd426ad6e1ad2c2ef89ff5"
+}

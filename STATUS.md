@@ -57,11 +57,13 @@ within its documented workload.
   identity. Shared edits, recovery, rotated-child walking and the compact read-only
   Inspector pass. Claude accepted the final native review at 1440×874 and 1000×650,
   including End→Tab full IDs, the 64-part list and the compact unavailable Agent.
-  Integration with main passes 282 Rust, 40 GPU, 334 UI and five tool tests,
-  Clippy, contracts and public compound/navigation workflows. Baking preserves
+  Integration with the complete navigation/script foundation passes 315 Rust,
+  334 UI and five tool tests, Clippy, contracts, native packaging, portable core
+  compilation and five public gameplay workflows. Unchanged renderer coverage
+  retains 40 passing GPU checks. Baking preserves
   transformed child geometry and hollow openings, and re-bakes after edits.
-  The branch now incorporates PR #40's complete navigation/script foundation;
-  this newer integration is being tested before PR #25 leaves draft and merges.
+  The final native draft blocker is resolved; updated hosted checks are required
+  before PR #25 merges.
   See [compound colliders](docs/spikes/compound-colliders.md).
 
 - PR #39 consolidates steering, off-mesh links and script diagnostics/CPU budgets
@@ -72,8 +74,8 @@ within its documented workload.
   all 49 mid-drop reopen frames. Quantized height and behavior-level lateral sweeps
   remain documented. Thread CPU budgets exclude host pauses/other threads;
   bounded native calls count but are not preemptible. Windows regressions now use
-  the shipped 50 ms allowance without changing production limits. Required CI is
-  still pending. The older steering branch's generic repeated-play CI failure has
+  the shipped 50 ms allowance without changing production limits. All twelve required checks passed on `12b6092`; PR #39 merged as `72a53df`
+  with the tested tree unchanged, incorporating PRs #36–38. The older steering branch's generic repeated-play CI failure has
   no established cause and is not counted as passed. See [steering](docs/spikes/navigation-steering.md),
   [off-mesh links](docs/spikes/navigation-links.md), [diagnostics](docs/spikes/script-diagnostics.md)
   and [CPU budgets](docs/spikes/script-cpu-budget.md).
@@ -236,8 +238,8 @@ within its documented workload.
   in browser fixtures and the native app. Shared schemas supply field order and
   units; WebKit field names and the compact Agent state are fixed. All twelve hosted
   checks passed at `6d5fca0`; PR #23 merged as `eb77419`. Character controllers
-  are implemented in PR #24. Compound colliders remain in draft PR #25 pending
-  the native visual review, now resumed by the director. Mesh colliders, hierarchy/scale,
+  are implemented in PR #24. Compound colliders in PR #25 have accepted native review and await updated
+  hosted checks. Mesh colliders, hierarchy/scale,
   rollback snapshots and device performance remain open. See [runtime evidence](docs/spikes/physics-runtime.md).
 
 - Opt-in directional cascades are implemented with scoped Claude appearance
@@ -500,7 +502,7 @@ director decisions and human-owned production prerequisites remain explicit.
 The director reauthorized computer use and screen capture on 2026-10-10.
 Claude accepted the final rebuilt native Inspector at 1440×874 and 1000×650,
 including the compact unavailable Agent, valid 64-part list, End→Tab full IDs
-and primitive regression. PR #25 is integrating current main and rerunning
+and primitive regression. PR #25 has passed local integration checks and awaits updated hosted
 checks before merge. All twelve checks passed on its earlier head `5b97ecd`;
 that is not evidence for the new integration. Native reorder/invalid-data
 presentation remains outside the read-only boundary, and the OS sharing pill

@@ -140,5 +140,16 @@ instead of substituting the union's bounding box. A real engine regression
 bakes an arch with a rotated box pillar, capsule pillar and beam, checks the
 straight route through its opening, reverses presentation order, then inserts
 a sphere and verifies re-baking forces a route around the closed arch. This
-regression passes; full integration checks are in progress. This is numerical
-coverage, not a new rendered appearance or phase-gate claim.
+regression passes. At `fc60bcf`, the complete integration passes 315 Rust tests,
+Clippy, 334 UI tests/build, five tool tests, generated contracts, native release
+build/package and WASM/iOS simulator core compilation. The frozen headless binary
+passes the public compound, saved navigation, 100-agent steering, off-mesh links
+and weighted-grid workflows, including exact repeats and saved restoration.
+
+The 40 GPU checks passed on `debe4ed`; the renderer is unchanged by the later
+navigation/script integration, and PR #40 independently passed the same 40. This
+is retained coverage, not a claim of another combined-head GPU run. Native UI
+source is unchanged from Claude's accepted `5b97ecd` capture. Updated hosted CI
+is required before merge. Machine-readable results are in
+[evidence](evidence/compound-navigation-integration-2026-10-10.json). No phase
+gate or physical-device gate is claimed.
