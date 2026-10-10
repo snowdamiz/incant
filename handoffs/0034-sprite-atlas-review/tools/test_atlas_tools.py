@@ -120,6 +120,34 @@ class Compare(unittest.TestCase):
                              (1, 2, {"corner": 1}, [(1, 1, 2)]))
 
 
+class FollowupHelpers(unittest.TestCase):
+    def test_unproject_inverts_project_for_rolled_and_fractional_cameras(self):
+        import atlas_followup_analyse as fa
+        for camera, size in (("rl-W", (1280, 288)), ("rl-V", (360, 1080)), ("of-S", (640, 360))):
+            board = sc.CAMERAS[camera]["board"]
+            point = (sc.BOARD_SPEC[board][0] + 3.25, sc.BOARD_SPEC[board][1] - 1.5)
+            sx, sy = an.project(camera, size, point)
+            x, y, _ = fa.unproject(camera, size, sx, sy)
+            self.assertAlmostEqual(x, point[0], places=9)
+            self.assertAlmostEqual(y, point[1], places=9)
+
+    def test_round_and_binary_selectors_switch_ledger_limits_and_executable(self):
+        import atlas_lookdev as lk
+        try:
+            lk.use_round("r1")
+            self.assertEqual((lk.LEDGER.name, lk.PACKET_FRAMES, lk.PACKET_RAW), ("ledger.jsonl", 2048, 1 << 30))
+            lk.use_round("followup")
+            self.assertEqual((lk.LEDGER.name, lk.PACKET_FRAMES, lk.PACKET_RAW),
+                             ("ledger-followup.jsonl", 600, 512 << 20))
+            lk.use_binary("pre-followup")
+            self.assertEqual((lk.CLI.name, lk.BINARY_JSON.name),
+                             ("incant_headless-pre-followup", "binary-pre-followup.json"))
+        finally:
+            lk.use_binary("active")
+            lk.use_round("followup")
+        self.assertEqual((lk.CLI.name, lk.BINARY_JSON.name), ("incant_headless", "binary.json"))
+
+
 class Ulids(unittest.TestCase):
     def test_generated_ids_are_canonical(self):
         alphabet = set("0123456789ABCDEFGHJKMNPQRSTVWXYZ")

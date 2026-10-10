@@ -1,0 +1,546 @@
+{
+ "upper-1|atlas|x|36x": {
+  "run": "upper-1",
+  "kind": "atlas",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 36,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 324,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|atlas|x|40x": {
+  "run": "upper-1",
+  "kind": "atlas",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 40,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 288,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|atlas|x|48x": {
+  "run": "upper-1",
+  "kind": "atlas",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 48,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 320,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|atlas|x|56x": {
+  "run": "upper-1",
+  "kind": "atlas",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 56,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 315,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|atlas|y|36x": {
+  "run": "upper-1",
+  "kind": "atlas",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 36,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 300,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|atlas|y|40x": {
+  "run": "upper-1",
+  "kind": "atlas",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 40,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 297,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|atlas|y|48x": {
+  "run": "upper-1",
+  "kind": "atlas",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 48,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 322,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|atlas|y|56x": {
+  "run": "upper-1",
+  "kind": "atlas",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 56,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 320,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|control|x|36x": {
+  "run": "upper-1",
+  "kind": "control",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 36,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 324,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|control|x|40x": {
+  "run": "upper-1",
+  "kind": "control",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 40,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 288,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|control|x|48x": {
+  "run": "upper-1",
+  "kind": "control",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 48,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 320,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|control|x|56x": {
+  "run": "upper-1",
+  "kind": "control",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 56,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 315,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|control|y|36x": {
+  "run": "upper-1",
+  "kind": "control",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 36,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 300,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|control|y|40x": {
+  "run": "upper-1",
+  "kind": "control",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 40,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 297,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|control|y|48x": {
+  "run": "upper-1",
+  "kind": "control",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 48,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 322,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-1|control|y|56x": {
+  "run": "upper-1",
+  "kind": "control",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 56,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 320,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|atlas|x|36x": {
+  "run": "upper-2-swapped",
+  "kind": "atlas",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 36,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 324,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|atlas|x|40x": {
+  "run": "upper-2-swapped",
+  "kind": "atlas",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 40,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 288,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|atlas|x|48x": {
+  "run": "upper-2-swapped",
+  "kind": "atlas",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 48,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 320,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|atlas|x|56x": {
+  "run": "upper-2-swapped",
+  "kind": "atlas",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 56,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 315,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|atlas|y|36x": {
+  "run": "upper-2-swapped",
+  "kind": "atlas",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 36,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 300,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|atlas|y|40x": {
+  "run": "upper-2-swapped",
+  "kind": "atlas",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 40,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 297,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|atlas|y|48x": {
+  "run": "upper-2-swapped",
+  "kind": "atlas",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 48,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 322,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|atlas|y|56x": {
+  "run": "upper-2-swapped",
+  "kind": "atlas",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 56,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 320,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|control|x|36x": {
+  "run": "upper-2-swapped",
+  "kind": "control",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 36,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 324,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|control|x|40x": {
+  "run": "upper-2-swapped",
+  "kind": "control",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 40,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 288,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|control|x|48x": {
+  "run": "upper-2-swapped",
+  "kind": "control",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 48,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 320,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|control|x|56x": {
+  "run": "upper-2-swapped",
+  "kind": "control",
+  "screen_axis": "x",
+  "source_axis": "x",
+  "m": 56,
+  "board_centre": [
+   500.0,
+   500.0
+  ],
+  "exact_ties": 315,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|control|y|36x": {
+  "run": "upper-2-swapped",
+  "kind": "control",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 36,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 300,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|control|y|40x": {
+  "run": "upper-2-swapped",
+  "kind": "control",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 40,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 297,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|control|y|48x": {
+  "run": "upper-2-swapped",
+  "kind": "control",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 48,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 322,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ },
+ "upper-2-swapped|control|y|56x": {
+  "run": "upper-2-swapped",
+  "kind": "control",
+  "screen_axis": "y",
+  "source_axis": "y",
+  "m": 56,
+  "board_centre": [
+   0.0,
+   0.0
+  ],
+  "exact_ties": 320,
+  "failed": 0,
+  "failed_lower": 0,
+  "failed_below_58": [],
+  "non_tie_mismatches": 0,
+  "failed_span_texel_range": null
+ }
+}

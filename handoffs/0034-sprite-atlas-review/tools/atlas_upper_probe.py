@@ -172,7 +172,9 @@ def main():
                         help="put the vertical board at the world origin and the horizontal one at (500, 500)")
     parser.add_argument("--stats", type=Path, nargs="+", metavar="PROBE_DIR",
                         help="write exact per-column tie statistics of decoded probe directories to OUT_DIR (a file)")
+    lk.add_selectors(parser)
     args = parser.parse_args()
+    lk.apply_selectors(args)
     if args.stats:
         if args.out.exists():
             raise SystemExit(f"refusing to overwrite {args.out}")

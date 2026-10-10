@@ -1,0 +1,48 @@
+{
+ "followup_limits": {
+  "per_invocation": {
+   "frames": 128,
+   "raw_mib": 256
+  },
+  "round": {
+   "frames": 600,
+   "raw_mib": 512
+  }
+ },
+ "followup_runs": {
+  "fu-1": {
+   "frames": 184,
+   "raw_bytes": 172842752
+  },
+  "upper-1": {
+   "frames": 4,
+   "raw_bytes": 33177600
+  },
+  "upper-2-swapped": {
+   "frames": 4,
+   "raw_bytes": 33177600
+  },
+  "extra-1": {
+   "frames": 9,
+   "raw_bytes": 12288000
+  }
+ },
+ "followup_total": {
+  "frames": 201,
+  "raw_bytes": 251485952
+ },
+ "followup_total_raw_mib": 239.8,
+ "largest_frame_raw_bytes": 8294400,
+ "frames_per_invocation": 1,
+ "round1_total": {
+  "frames": 744,
+  "raw_bytes": 849431040
+ },
+ "round1_total_raw_mib": 810.1,
+ "lifetime_total": {
+  "frames": 945,
+  "raw_bytes": 1100916992
+ },
+ "lifetime_total_raw_mib": 1049.9,
+ "overwrites": 0
+}

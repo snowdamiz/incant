@@ -7,7 +7,8 @@ budget.json and screenshots.sha256. Existing identical files are kept; it refuse
 replace any file with different content.
 
 Usage (repo root):
-  python3 -I handoffs/0034-sprite-atlas-review/tools/atlas_evidence.py
+  python3 -I handoffs/0034-sprite-atlas-review/tools/atlas_evidence.py              # round one
+  python3 -I handoffs/0034-sprite-atlas-review/tools/atlas_evidence.py --followup   # follow-up round
 """
 
 import hashlib
@@ -62,6 +63,89 @@ JSON = {
     "packing/packing-probe.json": ("packing-probe-1/packing-probe.json", True),
     "packing/packing-repro.json": ("packing-repro-1/packing-repro.json", True),
 }
+
+
+FU = "followup"
+FU_ENGINE = {f"v1-board-{b.lower()}-pp-320x180.png": f"followup/fu-1/states/f0-v1-r1/pp-{b}-320x180.png"
+             for b in "STNOLB"}
+FU_ENGINE.update({
+    "v1-board-w-strips-1x-pp-1280x200.png": "followup/fu-1/states/f0-v1-r1/pp-W-1280x200.png",
+    "v1-board-x-magnified-pp-1024x832.png": "followup/fu-1/states/f0-v1-r1/pp-X-1024x832.png",
+    "v1-board-y-magnified-pp-832x1024.png": "followup/fu-1/states/f0-v1-r1/pp-Y-832x1024.png",
+    "v1-board-w-ortho-roll3-1280x288.png": "followup/fu-1/states/f0-v1-r1/rl-W-1280x288.png",
+    "v1-board-v-ortho-roll3-360x1080.png": "followup/fu-1/states/f0-v1-r1/rl-V-360x1080.png",
+    "v2-board-b-relocated-pp-320x180.png": "followup/fu-1/states/f1-v2/pp-B-320x180.png",
+    "v2-board-b-relocated-roll7-640x360.png": "followup/fu-1/states/f1-v2/rl-B-640x360.png",
+    "v3-board-b-repacked-pp-320x180.png": "followup/fu-1/states/f4-v3/pp-B-320x180.png",
+    "v3-board-b-repacked-ortho-2.5x-640x360.png": "followup/fu-1/states/f4-v3/of-B-640x360.png",
+    "watch-mixed-board-o-orange-badge-pp-320x180.png": "followup/fu-1/states/f7-watch-mixed/pp-O-320x180.png",
+    "extra-board-z-packed-x6266-pp-1280x240.png": "followup/extra-1/states/atlas-r1/pp-Z-1280x240.png",
+    "upper-span-source-x-36x-56x-pp-1920x1080.png": "followup/upper-1/states/atlas/pp-U-1920x1080.png",
+    "upper-span-source-y-36x-56x-pp-1920x1080.png": "followup/upper-2-swapped/states/atlas/pp-UV-1920x1080.png",
+})
+FU_FIGURES = ["atlas-pages-v1-v2-v3-quarter.png", "board-b-v1-v2-v3-zoom3.png", "decoded-upper-y-40x-cut-ties.png",
+              "decoded-x-cuts-1024x832.png", "decoded-y-cuts-832x1024.png", "knife-edges-control-rl-V-360x1080.png",
+              "knife-edges-control-rl-W-1280x288.png", "linear-diff-rl-L-v1-v3-x64.png"]
+FU_JSON = {
+    "analysis-fu-1.json": ("followup/analysis/fu-1-final.json", True),
+    "helper-fu-1.json": ("followup/fu-1/helper.json", False),
+    "scene-atlas-fu-1.json": ("followup/fu-1/scene-atlas.json", False),
+    "import-diagnostics.json": ("followup/import-diag-1/import-diagnostics.json", True),
+    "rejection-messages.json": ("followup/rejection-messages.json", True),
+    "packing/packing-residual.json": ("followup/packing-residual-1/packing-residual.json", True),
+    "packing/packing-repro.json": ("followup/packing-repro-1/packing-repro.json", True),
+    "packing/packing-probe.json": ("followup/packing-probe-1/packing-probe.json", True),
+    "packing/packing-sweep.json": ("followup/packing-sweep-1/packing-sweep.json", True),
+    "packing/feasible-1217x1104.json": ("followup/feasible-1217x1104-tool.json", True),
+    "upper/summary.json": ("followup/analysis/upper-span-stats.json", True),
+    "upper/helper-upper-1.json": ("followup/upper-1/helper.json", False),
+    "upper/helper-upper-2-swapped.json": ("followup/upper-2-swapped/helper.json", False),
+    "upper/decode-upper-1.json": ("followup/upper-1/decode.json", False),
+    "upper/decode-upper-2-swapped.json": ("followup/upper-2-swapped/decode.json", False),
+    "extra/helper.json": ("followup/extra-1/helper.json", True),
+    "extra/analysis.json": ("followup/analysis/extra-1.json", True),
+}
+
+
+def ledger_totals(path):
+    runs = {}
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        e = json.loads(line)
+        r = runs.setdefault(e["run"], {"frames": 0, "raw_bytes": 0})
+        r["frames"] += e["frames"]
+        r["raw_bytes"] += e["raw"]
+    total = {"frames": sum(r["frames"] for r in runs.values()), "raw_bytes": sum(r["raw_bytes"] for r in runs.values())}
+    return runs, total
+
+
+def followup():
+    ev, shots = EVIDENCE / FU, SHOTS / FU
+    for name, rel in FU_ENGINE.items():
+        put(shots / "engine" / name, src=A / rel)
+    for name in FU_FIGURES:
+        put(shots / "figures" / name, src=A / "followup/figures-1" / name)
+    for name, (rel, indent) in FU_JSON.items():
+        value = json.loads((A / rel).read_text(encoding="utf-8"))
+        put(ev / name, json.dumps(value, indent=1 if indent else None, separators=None if indent else (",", ":"))
+            + "\n")
+    put(ev / "art-followup/drop-unused.atlas.json", src=A / "followup/fu-1/art-followup/drop-unused.atlas.json")
+    runs, total = ledger_totals(A / "ledger-followup.jsonl")
+    r1_runs, r1_total = ledger_totals(A / "ledger.jsonl")
+    ledger = [json.loads(line) for line in (A / "ledger-followup.jsonl").read_text(encoding="utf-8").splitlines()]
+    put(ev / "budget.json", json.dumps({
+        "followup_limits": {"per_invocation": {"frames": 128, "raw_mib": 256}, "round": {"frames": 600, "raw_mib": 512}},
+        "followup_runs": runs, "followup_total": total, "followup_total_raw_mib": round(total["raw_bytes"] / 2 ** 20, 1),
+        "largest_frame_raw_bytes": max(e["raw"] for e in ledger), "frames_per_invocation": 1,
+        "round1_total": r1_total, "round1_total_raw_mib": round(r1_total["raw_bytes"] / 2 ** 20, 1),
+        "lifetime_total": {"frames": total["frames"] + r1_total["frames"],
+                           "raw_bytes": total["raw_bytes"] + r1_total["raw_bytes"]},
+        "lifetime_total_raw_mib": round((total["raw_bytes"] + r1_total["raw_bytes"]) / 2 ** 20, 1),
+        "overwrites": 0}, indent=1) + "\n")
+    put(ev / "budget-ledger-followup.jsonl", src=A / "ledger-followup.jsonl")
+    lines = [f"{sha(p)}  {p.relative_to(PACKET)}" for p in sorted(shots.rglob("*.png"))]
+    put(ev / "screenshots.sha256", "\n".join(lines) + "\n")
+    print(json.dumps({"engine_frames": len(FU_ENGINE), "figures": len(FU_FIGURES), "json": len(FU_JSON),
+                      "followup_budget": total, "round1_budget": r1_total}))
 
 
 def sha(path):
@@ -125,4 +209,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    followup() if "--followup" in sys.argv[1:] else main()

@@ -20,7 +20,9 @@ replacements -> s7 live watcher with a failing descriptor -> s8 accepted imports
 that cannot render, each undone -> s9 every source file removed.
 
 Usage (repo root):
-  python3 -I handoffs/0034-sprite-atlas-review/tools/atlas_lookdev.py OUT_DIR
+  python3 -I handoffs/0034-sprite-atlas-review/tools/atlas_lookdev.py OUT_DIR [--binary B] [--round R]
+Round one ran this sequence on the pre-followup binary: --binary pre-followup --round r1.
+(Its s8 imports are rejected at import time on the follow-up build by design.)
 """
 
 import argparse
@@ -37,12 +39,43 @@ ROOT = TOOLS.parents[2]
 sys.path.insert(0, str(TOOLS))
 import atlas_scene as sc  # noqa: E402
 
-CLI = ROOT / "artifacts/tools/incant_headless"
-BINARY_JSON = ROOT / "artifacts/tools/binary.json"
 PACKET_DIR = ROOT / "artifacts/0034-sprite-atlas-review"
-LEDGER = PACKET_DIR / "ledger.jsonl"
-PACKET_FRAMES, PACKET_RAW = 2048, 1 << 30
+# Frozen executables: "active" is the current candidate; "pre-followup" is round one's
+# b72389ee build, preserved by Astra for before/after comparisons.
+BINARIES = {"active": ("incant_headless", "binary.json"),
+            "pre-followup": ("incant_headless-pre-followup", "binary-pre-followup.json")}
+# Each review round has its own budget and ledger: round one 2,048 frames / 1 GiB,
+# the follow-up 600 frames / 512 MiB. Lifetime totals are their sum.
+ROUNDS = {"r1": ("ledger.jsonl", 2048, 1 << 30), "followup": ("ledger-followup.jsonl", 600, 512 << 20)}
 CALL_FRAMES, CALL_RAW = 128, 256 << 20
+
+
+def use_binary(name):
+    global CLI, BINARY_JSON
+    executable, metadata = BINARIES[name]
+    CLI, BINARY_JSON = ROOT / "artifacts/tools" / executable, ROOT / "artifacts/tools" / metadata
+
+
+def use_round(name):
+    global LEDGER, PACKET_FRAMES, PACKET_RAW
+    ledger, PACKET_FRAMES, PACKET_RAW = ROUNDS[name]
+    LEDGER = PACKET_DIR / ledger
+
+
+def add_selectors(parser):
+    """--binary and --round for every engine-driving tool (defaults: active, followup).
+    Round one's commands are reproduced with --binary pre-followup --round r1."""
+    parser.add_argument("--binary", choices=sorted(BINARIES), default="active")
+    parser.add_argument("--round", choices=sorted(ROUNDS), default="followup")
+
+
+def apply_selectors(args):
+    use_binary(args.binary)
+    use_round(args.round)
+
+
+use_binary("active")
+use_round("followup")
 SOURCES = ["sheet.png", "cards.png", "probe.png", "hstrip.png", "vstrip.png", "halo.png", "labels34.png"]
 FAILURES = ["fail-nofit", "fail-bounds-area", "fail-bounds-axis", "fail-padding0", "fail-padding17",
             "fail-identity", "fail-rect", "fail-frames257", "fail-texels"]
@@ -117,11 +150,12 @@ class Project:
         args = ["import", self.file, source] + (["--texture-usage", usage] if usage else [])
         result = engine(*args, check=not expect_error)
         entry = {"source": source, "usage": usage, "exit": result.returncode,
-                 "stderr": result.stderr.strip()[-1500:], "authored_unchanged": prior == self.authored()}
+                 "stderr": result.stderr.strip()[-20000:], "authored_unchanged": prior == self.authored()}
         if result.returncode == 0:
             reply = json.loads(result.stdout)
             entry.update(asset=reply["asset"], changed=reply["changed"], cache_hit=reply["cache_hit"],
-                         details=reply["details"], revision=reply.get("revision"))
+                         details=reply["details"], revision=reply.get("revision"),
+                         diagnostics=reply.get("diagnostics", []))
         return entry
 
     def fingerprint(self, asset_id):
@@ -230,7 +264,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("out", type=Path)
     parser.add_argument("--smoke", action="store_true", help="build both projects, render the subset once each")
+    add_selectors(parser)
     args = parser.parse_args()
+    apply_selectors(args)
     out = args.out.resolve()
     if not CLI.exists():
         raise SystemExit(f"Missing {CLI}; see artifacts/tools/binary.json")
