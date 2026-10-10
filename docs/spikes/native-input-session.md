@@ -155,6 +155,34 @@ The existing general CI shipping step runs the extended proof without a second
 shipping build or a new large dependency cache. Hosted results for this slice
 remain pending publication.
 
+## Publication union verification
+
+Approved input head `4fbe57d` was merged with published cooked-player PR #52 head
+`3900247` (including main50 physics and reviewed PR #51 native saves), producing
+`241f0ea`. Only STATUS/evidence text conflicted; both histories were retained.
+Input, script host/session and player sources are unchanged from the reviewed
+head. Existing native save access remains world-only and does not add session
+restore/seek or persist the VM/input timeline.
+
+The combined tree passes 98 scoped tests/doctests, normal and compiler-disabled
+Clippy, 28 Python tool tests, fmt, strict SDK TypeScript, all generated checks and
+the runtime dependency guard. The earlier 394-test workspace result remains
+historical baseline evidence; hosted exact-head checks are still required after
+publication. A fresh shipping proof again passes all 24 empty/recorded processes,
+compiler isolation, actual codegen and matched-symbol checks. Final player size
+remains 2,154,408 bytes (+364,272 against the integrated corrected cooked player),
+SHA256 `3f01bbe10ca66234de06616dec94b454031311a122872a6e67ee10c3121dc18b`,
+arm64 dSYM UUID `51eef9f7-d099-318d-88af-b9fbbe3eac63`.
+[Union proof](evidence/native-input-session-union-2026-10-10.json) preserves the
+previous result separately. Runtime exchange files remain intentionally present;
+only authoring/compile inputs and temporary build storage were deleted. This is
+still a whole-fixture binary-size observation, not a device/frame-time claim.
+
+Commands use the scoped test/Clippy forms above, adding all four packages to the
+normal `clippy --all-targets` invocation. The proof command changes its output to
+`artifacts/native-input-publication-shipping` and uses the same read-only tool
+paths. Logs: `/tmp/incant-native-input-union-{tests,clippy,no-compiler,shipping,tools}.log`.
+
 ## Remaining scope
 
 This is fresh native input/session execution, not persistence or complete gameplay

@@ -65,8 +65,9 @@ within its documented workload.
   source deletion; retained JSON files are startup-only runtime exchanges. Its
   stripped size is 2,154,408 bytes (+364,272 vs the corrected cooked-script
   baseline). Native input/VM save/seek, live platform adapters, remaining legacy
-  gameplay and device/performance gates stay open. Hosted checks are pending;
-  see [native input evidence](docs/spikes/native-input-session.md).
+  gameplay and device/performance gates stay open. The integrated cooked/save
+  union passes 98 scoped tests, 28 tool tests and the fresh 24-process proof;
+  hosted checks are pending. See [native input evidence](docs/spikes/native-input-session.md).
 
 - Main cache seeding is verified across all 12 Rust jobs after PR #49: the shared
   set uses 7.807 GiB and the retained inventory 8.929 GiB after exact obsolete
