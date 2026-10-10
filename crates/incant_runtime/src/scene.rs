@@ -21,6 +21,7 @@ pub struct CookedScene {
     pub(crate) tick_rate: u32,
     pub(crate) entities: Vec<CookedEntity>,
     pub(crate) physics: Vec<crate::CookedPhysics>,
+    pub(crate) audio: Vec<crate::CookedAudio>,
     pub(crate) topology: Vec<(usize, Option<usize>)>,
 }
 
@@ -73,6 +74,7 @@ impl CookedScene {
             entities,
             topology,
             physics: Vec::new(),
+            audio: Vec::new(),
         })
     }
 
@@ -91,7 +93,14 @@ impl CookedScene {
             ));
         }
         let entities: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
-        let mut size = 72 + self.entities.len() * 128 + 4;
+        let mut size = 72
+            + self.entities.len() * 128
+            + 8
+            + self
+                .audio
+                .iter()
+                .map(crate::audio_binary::encoded_size)
+                .sum::<usize>();
         for declaration in &mut physics {
             let entity = entities
                 .get(&declaration.entity)
@@ -109,6 +118,33 @@ impl CookedScene {
         self.physics = physics;
         Ok(self)
     }
+    /// Canonical checked audio nodes, separate from mixer/device state.
+    pub fn with_audio(mut self, mut audio: Vec<crate::CookedAudio>) -> Result<Self, SceneError> {
+        let ids: std::collections::BTreeSet<_> = self.entities.iter().map(|e| e.id).collect();
+        crate::audio::validate(&audio, |id| ids.contains(&id))?;
+        audio.sort_unstable_by_key(|node| node.entity);
+        let size = 72
+            + self.entities.len() * 128
+            + 8
+            + self
+                .physics
+                .iter()
+                .map(crate::physics_binary::encoded_size)
+                .sum::<usize>()
+            + audio
+                .iter()
+                .map(crate::audio_binary::encoded_size)
+                .sum::<usize>();
+        if size > crate::binary::MAX_SCENE_BYTES {
+            return Err(SceneError::Invalid("file size"));
+        }
+        self.audio = audio;
+        Ok(self)
+    }
+    pub fn audio(&self) -> &[crate::CookedAudio] {
+        &self.audio
+    }
+
     pub fn physics(&self) -> &[crate::CookedPhysics] {
         &self.physics
     }

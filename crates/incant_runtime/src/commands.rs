@@ -22,6 +22,12 @@ pub enum StructuralCommand {
         entity: StableId,
         parent: Option<StableId>,
     },
+    /// Replace/remove typed audio state; the final bus/listener graph is checked
+    /// before any component changes. Mixer/device state belongs to the audio host.
+    SetAudio {
+        entity: StableId,
+        audio: Option<crate::CookedAudio>,
+    },
     /// Add/replace/remove a checked physics declaration at this boundary. The
     /// nested entity ID must match. Removal retains linear motion as an ordinary
     /// native mover; body installation supplies missing zero motion components.
@@ -80,6 +86,7 @@ struct Staged {
     physics: BTreeMap<StableId, Option<CookedPhysics>>,
     spins: BTreeMap<StableId, Option<AngularVelocity>>,
     prepared: BTreeMap<StableId, Option<PreparedBody>>,
+    audio: BTreeMap<StableId, Option<crate::CookedAudio>>,
 }
 
 impl NativeWorld {
@@ -89,6 +96,31 @@ impl NativeWorld {
     pub fn apply(&mut self, commands: &mut FrameCommands) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
         if commands.is_empty() {
+            return Ok(());
+        }
+        // Audio-only changes inspect at most 161 audio nodes; no hierarchy copy.
+        if commands
+            .iter()
+            .all(|c| matches!(c, StructuralCommand::SetAudio { .. }))
+        {
+            let mut changes = BTreeMap::new();
+            for command in commands.iter() {
+                let StructuralCommand::SetAudio { entity, audio } = command else {
+                    unreachable!()
+                };
+                if !self.entities.contains_key(entity) {
+                    return Err(RuntimeError::MissingEntity(*entity));
+                }
+                if audio.as_ref().is_some_and(|a| a.entity != *entity) {
+                    return Err(SceneError::Invalid("audio entity reference").into());
+                }
+                changes.insert(*entity, audio.clone());
+            }
+            self.validate_audio_changes(&changes, &self.parents)?;
+            for (id, node) in changes {
+                self.install_audio(id, node);
+            }
+            commands.clear();
             return Ok(());
         }
         // Component-only batches don't copy hierarchy metadata or inspect every
@@ -167,6 +199,7 @@ impl NativeWorld {
             // Everything that can reject external data completed above. These
             // handles/IDs are exclusively owned by this world until commit ends.
             for id in staged.removed {
+                self.audio_ids.remove(&id);
                 self.physics.remove(&self.scene_id(), &id);
                 let entity = self.entities.remove(&id).expect("staged entity");
                 self.world.despawn(entity);
@@ -175,6 +208,9 @@ impl NativeWorld {
                 self.entities.insert(id, spawn(&mut self.world, data));
             }
             self.install_velocities(staged.velocities);
+            for (id, node) in staged.audio {
+                self.install_audio(id, node);
+            }
             for (id, declaration) in staged.physics {
                 if let Some(declaration) = declaration {
                     self.install_physics(declaration);
@@ -217,6 +253,28 @@ impl NativeWorld {
         Ok(())
     }
 
+    fn validate_audio_changes(
+        &self,
+        changes: &BTreeMap<StableId, Option<crate::CookedAudio>>,
+        parents: &BTreeMap<StableId, Option<StableId>>,
+    ) -> Result<(), SceneError> {
+        let mut final_nodes: BTreeMap<_, _> = self
+            .audio_nodes()
+            .filter(|(node, _)| parents.contains_key(&node.entity))
+            .map(|(node, _)| (node.entity, node.clone()))
+            .collect();
+        for (&id, node) in changes {
+            if let Some(node) = node {
+                final_nodes.insert(id, node.clone());
+            } else {
+                final_nodes.remove(&id);
+            }
+        }
+        crate::audio::validate(&final_nodes.into_values().collect::<Vec<_>>(), |id| {
+            parents.contains_key(&id)
+        })
+    }
+
     fn install_velocities(&mut self, velocities: BTreeMap<StableId, Option<Velocity>>) {
         for (id, velocity) in velocities {
             let mut entity = self.world.entity_mut(self.entities[&id]);
@@ -238,6 +296,7 @@ impl NativeWorld {
         let mut velocities = BTreeMap::new();
         let mut physics = BTreeMap::new();
         let mut spins = BTreeMap::new();
+        let mut audio = BTreeMap::new();
         for command in commands.iter() {
             match command {
                 StructuralCommand::Spawn(data) => {
@@ -259,11 +318,24 @@ impl NativeWorld {
                     velocities.remove(id);
                     physics.remove(id);
                     spins.remove(id);
+                    audio.remove(id);
                 }
                 StructuralCommand::SetParent { entity, parent } => {
                     *parents
                         .get_mut(entity)
                         .ok_or(RuntimeError::MissingEntity(*entity))? = *parent;
+                }
+                StructuralCommand::SetAudio {
+                    entity,
+                    audio: node,
+                } => {
+                    if !parents.contains_key(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    if node.as_ref().is_some_and(|a| a.entity != *entity) {
+                        return Err(SceneError::Invalid("audio entity reference").into());
+                    }
+                    audio.insert(*entity, node.clone());
                 }
                 StructuralCommand::SetPhysics {
                     entity,
@@ -302,6 +374,7 @@ impl NativeWorld {
         if parents.len() > MAX_ENTITIES {
             return Err(SceneError::Invalid("entity limit").into());
         }
+        self.validate_audio_changes(&audio, &parents)?;
         let mut prepared = BTreeMap::new();
         for (&id, parent) in &parents {
             let live = self
@@ -389,6 +462,7 @@ impl NativeWorld {
             physics,
             spins,
             prepared,
+            audio,
         })
     }
 }

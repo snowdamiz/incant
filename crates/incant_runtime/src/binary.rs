@@ -1,4 +1,4 @@
-//! Versions 1/2, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1/2/3, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 2;
+const VERSION: u32 = 3;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,7 +24,14 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        bytes.extend((if self.physics.is_empty() { 1 } else { VERSION }).to_le_bytes());
+        let version = if !self.audio.is_empty() {
+            VERSION
+        } else if !self.physics.is_empty() {
+            2
+        } else {
+            1
+        };
+        bytes.extend(version.to_le_bytes());
         bytes.extend(self.tick_rate.to_le_bytes());
         bytes.extend(self.id.0);
         bytes.extend((self.entities.len() as u32).to_le_bytes());
@@ -61,10 +68,16 @@ impl CookedScene {
                 }
             }
         }
-        if !self.physics.is_empty() {
+        if version >= 2 {
             bytes.extend((self.physics.len() as u32).to_le_bytes());
             for declaration in &self.physics {
                 crate::physics_binary::write(&mut bytes, declaration);
+            }
+        }
+        if version >= 3 {
+            bytes.extend((self.audio.len() as u32).to_le_bytes());
+            for node in &self.audio {
+                crate::audio_binary::write(&mut bytes, node);
             }
         }
         let length = (bytes.len() - HEADER) as u32;
@@ -83,7 +96,7 @@ impl CookedScene {
             return Err(SceneError::Invalid("magic"));
         }
         let version = header.u32()?;
-        if version != 1 && version != VERSION {
+        if !(1..=VERSION).contains(&version) {
             return Err(SceneError::Version(version));
         }
         let tick_rate = header.u32()?;
@@ -136,9 +149,12 @@ impl CookedScene {
             });
         }
         let mut physics = Vec::new();
-        if version == 2 {
+        if version >= 2 {
             let physics_count = reader.u32()? as usize;
-            if physics_count == 0 || physics_count > count || physics_count > reader.0.len() / 52 {
+            if (version == 2 && physics_count == 0)
+                || physics_count > count
+                || physics_count > reader.0.len() / 52
+            {
                 return Err(SceneError::Invalid("physics record count"));
             }
             physics.reserve(physics_count);
@@ -153,6 +169,24 @@ impl CookedScene {
                 physics.push(record);
             }
         }
+        let mut audio = Vec::new();
+        if version >= 3 {
+            let count = reader.u32()? as usize;
+            if count == 0 || count > crate::MAX_AUDIO_NODES || count > reader.0.len() / 17 {
+                return Err(SceneError::Invalid("audio record count"));
+            }
+            audio.reserve(count);
+            for _ in 0..count {
+                let node = crate::audio_binary::read(&mut reader)?;
+                if audio
+                    .last()
+                    .is_some_and(|prior: &crate::CookedAudio| prior.entity >= node.entity)
+                {
+                    return Err(SceneError::Invalid("noncanonical audio order"));
+                }
+                audio.push(node);
+            }
+        }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
         }
@@ -165,7 +199,9 @@ impl CookedScene {
                 entities[i].parent = Some(id);
             }
         }
-        Self::new(id, tick_rate, entities)?.with_physics(physics)
+        Self::new(id, tick_rate, entities)?
+            .with_physics(physics)?
+            .with_audio(audio)
     }
 }
 
