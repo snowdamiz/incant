@@ -1,0 +1,392 @@
+{
+  "base_head": "17e4e64b48a72db9a72bb74ece88762940c7f5a4",
+  "scope": "Cold editor-generated outputs in an isolated target seeded with existing dependency artifacts; not a fully cold dependency build or hosted speed result.",
+  "tauri": "2.12.1",
+  "tauri_build": "2.7.1",
+  "tauri_codegen": "2.7.1",
+  "rust_toolchain": "1.99.0-aarch64-apple-darwin",
+  "runs": [
+    {
+      "mode": "default",
+      "state": "cold",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--workspace",
+        "--release",
+        "--locked",
+        "--test",
+        "model_gpu",
+        "--bin",
+        "incant_editor",
+        "-j2",
+        "--no-run",
+        "--timings"
+      ],
+      "exit_code": 0,
+      "any_compilation": true,
+      "editor_compilations": 1,
+      "generated_contexts": [
+        "target/release/build/incant_editor-0e56b2c9f0bd4535/out/tauri-build-context.rs"
+      ],
+      "cargo_finished": [
+        "32.78s"
+      ],
+      "log_sha256": "075503c6861389495ea92881cda7b8ac5a14f0376386c341f2f6d5e2d7283cd1"
+    },
+    {
+      "mode": "default",
+      "state": "warm",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--workspace",
+        "--release",
+        "--locked",
+        "--test",
+        "model_gpu",
+        "--bin",
+        "incant_editor",
+        "-j2",
+        "--no-run",
+        "--timings"
+      ],
+      "exit_code": 0,
+      "any_compilation": false,
+      "editor_compilations": 0,
+      "generated_contexts": [
+        "target/release/build/incant_editor-0e56b2c9f0bd4535/out/tauri-build-context.rs"
+      ],
+      "cargo_finished": [
+        "0.27s"
+      ],
+      "log_sha256": "97823c3c7d746b63ff134308f63b4301902a9507f02de890f1c643f6f3b325e9"
+    },
+    {
+      "mode": "default",
+      "state": "behavior",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--workspace",
+        "--release",
+        "--locked",
+        "--test",
+        "model_gpu",
+        "--bin",
+        "incant_editor",
+        "-j2",
+        "context_tests::build_context_preserves_configuration_assets_and_icon",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "any_compilation": false,
+      "editor_compilations": 0,
+      "generated_contexts": [
+        "target/release/build/incant_editor-0e56b2c9f0bd4535/out/tauri-build-context.rs"
+      ],
+      "cargo_finished": [
+        "0.23s"
+      ],
+      "log_sha256": "76e958cdd8e27dd5cf1a2569305e28f6e59e80f70e93cb6183814be8eea7ac31"
+    },
+    {
+      "mode": "custom-protocol",
+      "state": "cold",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--workspace",
+        "--release",
+        "--locked",
+        "--test",
+        "model_gpu",
+        "--bin",
+        "incant_editor",
+        "-j2",
+        "--features",
+        "incant_editor/custom-protocol",
+        "--no-run",
+        "--timings"
+      ],
+      "exit_code": 0,
+      "any_compilation": true,
+      "editor_compilations": 1,
+      "generated_contexts": [
+        "target/release/build/incant_editor-0e56b2c9f0bd4535/out/tauri-build-context.rs",
+        "target/release/build/incant_editor-19d23ba409556ffa/out/tauri-build-context.rs"
+      ],
+      "cargo_finished": [
+        "36.08s"
+      ],
+      "log_sha256": "9d8b2b8efd230c4fc898dc6cec1d7f204a45fbf909093a1eca6c3f8d3a3dc5e4"
+    },
+    {
+      "mode": "custom-protocol",
+      "state": "warm",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--workspace",
+        "--release",
+        "--locked",
+        "--test",
+        "model_gpu",
+        "--bin",
+        "incant_editor",
+        "-j2",
+        "--features",
+        "incant_editor/custom-protocol",
+        "--no-run",
+        "--timings"
+      ],
+      "exit_code": 0,
+      "any_compilation": false,
+      "editor_compilations": 0,
+      "generated_contexts": [
+        "target/release/build/incant_editor-0e56b2c9f0bd4535/out/tauri-build-context.rs",
+        "target/release/build/incant_editor-19d23ba409556ffa/out/tauri-build-context.rs"
+      ],
+      "cargo_finished": [
+        "0.23s"
+      ],
+      "log_sha256": "09aacf6acb3645dc66240693ef00f6fa26b661d4894dce189df72b7e8552f6f3"
+    },
+    {
+      "mode": "custom-protocol",
+      "state": "behavior",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--workspace",
+        "--release",
+        "--locked",
+        "--test",
+        "model_gpu",
+        "--bin",
+        "incant_editor",
+        "-j2",
+        "--features",
+        "incant_editor/custom-protocol",
+        "context_tests::build_context_preserves_configuration_assets_and_icon",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "any_compilation": false,
+      "editor_compilations": 0,
+      "generated_contexts": [
+        "target/release/build/incant_editor-0e56b2c9f0bd4535/out/tauri-build-context.rs",
+        "target/release/build/incant_editor-19d23ba409556ffa/out/tauri-build-context.rs"
+      ],
+      "cargo_finished": [
+        "0.23s"
+      ],
+      "log_sha256": "d93f50113461c34d7c453b79b1e955fcc3deff0fa7ebe94806e317d9bf006efe"
+    }
+  ],
+  "prior_macro_reproduction": {
+    "head": "22a81fc92b07eec0ac6a5285a72d3b7e3a8889a5",
+    "generated_input_sha256": "f750998df0dd5d556b99e84ee5d690fd4831fba54b62e1a88a7e284449a3e23e",
+    "source_bytes_and_timestamp_restored": true,
+    "runs": [
+      {
+        "index": 1,
+        "generated_input_mtime_ns": 1791670628296471680,
+        "generated_input_sha256": "f750998df0dd5d556b99e84ee5d690fd4831fba54b62e1a88a7e284449a3e23e",
+        "cargo_finished": [
+          "24.22s"
+        ],
+        "dirty_reasons": [
+          "Dirty incant_editor v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/editor/app): the file `target/release/build/incant_editor-ae46edb53fc0b01d/out/854408a0b39810659559ff71b6fffc661d747cf058f0253ea6a779f9527c4009` is missing"
+        ],
+        "log_sha256": "0e8d31986311f291b2879c6c4f2af4ad2ae6bfdf701a0107329e921f64c06311"
+      },
+      {
+        "index": 2,
+        "generated_input_mtime_ns": 1791670628296471680,
+        "generated_input_sha256": "f750998df0dd5d556b99e84ee5d690fd4831fba54b62e1a88a7e284449a3e23e",
+        "cargo_finished": [
+          "23.58s"
+        ],
+        "dirty_reasons": [
+          "Dirty incant_editor v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/editor/app): the file `target/release/build/incant_editor-ae46edb53fc0b01d/out/854408a0b39810659559ff71b6fffc661d747cf058f0253ea6a779f9527c4009` has changed (1791670628.296471680s, 115096747ns after last build at 1791670628.181374933s)"
+        ],
+        "log_sha256": "917480b63f9dfb26f6a4e8e6f1ea6bb576eca5c4e96987f4828d753135a3fd52"
+      },
+      {
+        "index": 3,
+        "generated_input_mtime_ns": 1791670628296471680,
+        "generated_input_sha256": "f750998df0dd5d556b99e84ee5d690fd4831fba54b62e1a88a7e284449a3e23e",
+        "cargo_finished": [
+          "0.39s"
+        ],
+        "dirty_reasons": [],
+        "log_sha256": "167514a8fbb62c72a38bd65bb8e2ca615acbea027e00c42f48a8e43aa2b0bae3"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "default-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--workspace",
+        "--release",
+        "--locked",
+        "--bin",
+        "incant_editor",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "test_results": [
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s"
+      ],
+      "log_sha256": "90e707935f65b7ad66ffb28e1375cde00ef1ddd96b92d4ab934d74fb90964c15"
+    },
+    {
+      "name": "custom-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--workspace",
+        "--release",
+        "--locked",
+        "--bin",
+        "incant_editor",
+        "--features",
+        "incant_editor/custom-protocol",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "test_results": [
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s"
+      ],
+      "log_sha256": "2ea454d0b9b2358a19c07266f7737ffb7321244a71b45048ae29a0db29f84d7e"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--release",
+        "--locked",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "test_results": [],
+      "log_sha256": "2105062d3088dbbc13be9d12bd00a7e1b51afb49175fe71e92c9a8162b31216a"
+    },
+    {
+      "name": "custom-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--workspace",
+        "--all-targets",
+        "--release",
+        "--locked",
+        "--features",
+        "incant_editor/custom-protocol",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "test_results": [],
+      "log_sha256": "6ea3ee3d5af0e05bad53b861b1d52389ae420ae1fbbedbbc84f093f8c3a394eb"
+    }
+  ],
+  "frontend_invalidation": {
+    "scope": "Synthetic asset in owned generated dist; no authoring/user/UI source asset modified. Temporary example includes same production build context and compares decompressed embedded bytes with changed file.",
+    "runs": [
+      {
+        "name": "added",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--workspace",
+          "--release",
+          "--locked",
+          "--features",
+          "incant_editor/custom-protocol",
+          "-j2",
+          "--example",
+          "context_asset_probe"
+        ],
+        "exit_code": 0,
+        "compiles_editor": true,
+        "log_sha256": "f2e7576d73515a4e3b4e4299fad5ec94fb574708541bd9ea9a1651b84c7024e7"
+      },
+      {
+        "name": "changed",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--workspace",
+          "--release",
+          "--locked",
+          "--features",
+          "incant_editor/custom-protocol",
+          "-j2",
+          "--example",
+          "context_asset_probe"
+        ],
+        "exit_code": 0,
+        "compiles_editor": true,
+        "log_sha256": "0f99f30600a27b8b25e5a205f536c3a00933b6535877dc2bfd07cbf7f212382e"
+      },
+      {
+        "name": "restored",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--workspace",
+          "--release",
+          "--locked",
+          "--features",
+          "incant_editor/custom-protocol",
+          "-j2",
+          "--bin",
+          "incant_editor",
+          "context_tests::build_context_preserves_configuration_assets_and_icon"
+        ],
+        "exit_code": 0,
+        "compiles_editor": true,
+        "log_sha256": "13913f5df5c9f01a8cfd239c2e953dcc5c21ca4b2de9fdfc81cd8c7056d21943"
+      },
+      {
+        "name": "warm",
+        "command": [
+          "./tools/cargo",
+          "test",
+          "--workspace",
+          "--release",
+          "--locked",
+          "--features",
+          "incant_editor/custom-protocol",
+          "-j2",
+          "--bin",
+          "incant_editor",
+          "context_tests::build_context_preserves_configuration_assets_and_icon"
+        ],
+        "exit_code": 0,
+        "compiles_editor": false,
+        "log_sha256": "09b65c51556d938d14b06d86858195714afd774aef1bb55a1bf2dca174cc60ef"
+      }
+    ],
+    "synthetic_files_removed": true,
+    "original_dist_mtime_restored": true,
+    "temporary_probe_source": "#[test]\nfn generated_assets_follow_frontend_changes() {\n    let context: tauri::Context<tauri::Wry> = tauri::tauri_build_context!();\n    let expected = std::fs::read(concat!(env!(\"CARGO_MANIFEST_DIR\"), \"/../ui/dist/incant-build-context-probe.txt\")).unwrap();\n    let key = tauri::utils::assets::AssetKey::from(\"/incant-build-context-probe.txt\");\n    let actual = context.assets().get(&key).expect(\"synthetic embedded frontend asset\");\n    assert_eq!(actual.as_ref(), expected);\n}\n",
+    "initial_asset": "context asset version one\n",
+    "changed_asset": "context asset version two: changed bytes\n"
+  }
+}

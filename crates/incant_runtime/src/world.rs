@@ -1,4 +1,5 @@
-use crate::scene::matrix;
+use crate::physics::{Binding, Spin};
+use crate::scene::{matrix, validate_components};
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
 use bevy_ecs::prelude::*;
 use glam::DMat4;
@@ -40,6 +41,10 @@ pub enum RuntimeError {
     Scene(#[from] SceneError),
     #[error("runtime tick counter exhausted")]
     TickOverflow,
+    #[error(transparent)]
+    Physics(#[from] incant_physics_runtime::PhysicsError),
+    #[error("native physics world failed; construct a new session")]
+    PhysicsFailed,
     #[error("runtime entity {0:?} does not exist")]
     MissingEntity(StableId),
     #[error("frame command buffer is full (maximum {0})")]
@@ -51,6 +56,9 @@ pub enum RuntimeError {
 pub struct NativeWorld {
     pub(crate) world: World,
     schedule: Schedule,
+    pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
+    pub(crate) physics_failed: bool,
+    pub(crate) physics_used: bool,
     pub(crate) entities: BTreeMap<StableId, Entity>,
     pub(crate) parents: BTreeMap<StableId, Option<StableId>>,
     scene_id: StableId,
@@ -64,6 +72,16 @@ impl NativeWorld {
     }
 
     pub fn new(scene: CookedScene) -> Self {
+        let physics = scene.physics.clone();
+        let mut solver = incant_physics_runtime::PhysicsRuntime::default();
+        let by_id: BTreeMap<_, _> = scene.entities.iter().map(|e| (e.id, e)).collect();
+        for declaration in &physics {
+            solver.install(
+                scene.id,
+                declaration.entity,
+                declaration.prepare(by_id[&declaration.entity]),
+            );
+        }
         let mut world = World::new();
         world.insert_resource(Step(1. / f64::from(scene.tick_rate)));
         let mut entities = BTreeMap::new();
@@ -92,16 +110,23 @@ impl NativeWorld {
         let mut schedule = Schedule::default();
         // Native builds enable Bevy's multi_threaded executor and parallel
         // queries. Browser builds remain serial until their worker host exists.
-        schedule.add_systems((integrate, propagate).chain());
-        Self {
+        schedule.add_systems((integrate, publish_globals).chain());
+        let mut result = Self {
             world,
+            physics: solver,
+            physics_failed: false,
+            physics_used: !physics.is_empty(),
             schedule,
             entities,
             parents,
             scene_id: scene.id,
             tick: 0,
             tick_rate: scene.tick_rate,
+        };
+        for declaration in physics {
+            result.install_physics(declaration);
         }
+        result
     }
 
     pub fn scene_id(&self) -> StableId {
@@ -118,10 +143,61 @@ impl NativeWorld {
     }
 
     pub fn step(&mut self) -> Result<(), RuntimeError> {
+        self.ensure_usable()?;
         let next = self.tick.checked_add(1).ok_or(RuntimeError::TickOverflow)?;
+        let dt = self.world.resource::<Step>().0;
+        // Validate the whole numeric input set and ordinary integration before
+        // the first solver write. No cloned configuration or document exists.
+        self.prepare_globals(Some(dt))?;
+        if self.physics_used {
+            let mut query = self
+                .world
+                .query::<(&Identity, &Local, Option<&Motion>, Option<&Spin>, &Binding)>();
+            for (id, local, velocity, spin, _) in query.iter(&self.world) {
+                let state =
+                    crate::physics::state(&local.0, velocity.map(|v| &v.0), spin.map(|s| &s.0));
+                // The full set was validated above; this repeats only bounded
+                // numeric checks in the standalone solver API, never authoring.
+                if let Err(error) = self.physics.sync_motion(&self.scene_id, &id.0, &state) {
+                    self.physics_failed = true;
+                    return Err(error.into());
+                }
+            }
+            if let Err(error) = self.physics.step(dt) {
+                self.physics_failed = true;
+                return Err(error.into());
+            }
+            // Solver advancement cannot be undone. If candidate hierarchy
+            // publication fails, the ECS/clock stay unchanged and this world is
+            // terminal. NativeSession also closes access to the failed session.
+            if let Err(error) = self.prepare_candidate_globals(Some(dt), true) {
+                self.physics_failed = true;
+                return Err(error.into());
+            }
+            for (id, state) in self.physics.state_iter() {
+                let mut entity = self.world.entity_mut(self.entities[id]);
+                let mut local = entity.get_mut::<Local>().expect("physics transform");
+                local.0.translation = state.translation;
+                local.0.rotation = state.rotation;
+                if let Some(mut velocity) = entity.get_mut::<Motion>() {
+                    velocity.0.linear = state.velocity;
+                }
+                if let Some(mut spin) = entity.get_mut::<Spin>() {
+                    spin.0.angular = state.angular_velocity;
+                }
+            }
+        }
         self.schedule.run(&mut self.world);
         self.tick = next;
         Ok(())
+    }
+
+    pub(crate) fn ensure_usable(&self) -> Result<(), RuntimeError> {
+        if self.physics_failed {
+            Err(RuntimeError::PhysicsFailed)
+        } else {
+            Ok(())
+        }
     }
 
     /// Native bulk access borrows ECS component values directly. Structural
@@ -154,6 +230,71 @@ impl NativeWorld {
             });
     }
 
+    /// Check immediate numeric writes or the next integration step without
+    /// publishing derived state. A failed pass may overwrite scratch entries;
+    /// every later pass fills them parent-first before reading them again.
+    pub(crate) fn prepare_globals(&mut self, step: Option<f64>) -> Result<(), SceneError> {
+        self.prepare_candidate_globals(step, false)
+    }
+
+    fn prepare_candidate_globals(
+        &mut self,
+        step: Option<f64>,
+        solved: bool,
+    ) -> Result<(), SceneError> {
+        let physics = &self.physics;
+        let scene_id = self.scene_id;
+        self.world
+            .resource_scope(|world, mut hierarchy: Mut<Hierarchy>| {
+                let mut query = world.query::<(
+                    &Identity,
+                    &Local,
+                    Option<&Motion>,
+                    Option<&Spin>,
+                    Option<&Binding>,
+                )>();
+                for index in 0..hierarchy.nodes.len() {
+                    let (entity, parent) = hierarchy.nodes[index];
+                    let (id, local, motion, spin, binding) =
+                        query.get(world, entity).expect("fixed topology");
+                    let velocity = motion.map(|v| &v.0);
+                    validate_components(id.0, &local.0, velocity)?;
+                    if let Some(binding) = binding {
+                        crate::physics::validate_motion(
+                            id.0,
+                            parent.is_some(),
+                            &local.0,
+                            velocity,
+                            spin.map(|s| &s.0),
+                            binding.body.as_ref(),
+                        )?;
+                    }
+                    let local_matrix = if solved && binding.is_some() {
+                        let state = physics.state(&scene_id, &id.0).expect("physics binding");
+                        let mut candidate = local.0.clone();
+                        candidate.translation = state.translation;
+                        candidate.rotation = state.rotation;
+                        validate_components(id.0, &candidate, None)?;
+                        matrix(&candidate)
+                    } else if let (Some(step), Some(velocity), None) = (step, velocity, binding) {
+                        let mut candidate = local.0.clone();
+                        advance_translation(&mut candidate, velocity, step);
+                        matrix(&candidate)
+                    } else {
+                        matrix(&local.0)
+                    };
+                    let value = parent.map_or(local_matrix, |parent| {
+                        hierarchy.globals[parent] * local_matrix
+                    });
+                    if !value.is_finite() {
+                        return Err(SceneError::Component(id.0));
+                    }
+                    hierarchy.globals[index] = value;
+                }
+                Ok(())
+            })
+    }
+
     pub fn inspect(&self, id: StableId) -> Option<EntitySnapshot> {
         let entity = self.world.get_entity(*self.entities.get(&id)?).ok()?;
         Some(EntitySnapshot {
@@ -174,16 +315,26 @@ impl NativeWorld {
     }
 }
 
-fn integrate(step: Res<Step>, mut query: Query<(&mut Local, &Motion)>) {
+fn integrate(step: Res<Step>, mut query: Query<(&mut Local, &Motion), Without<Binding>>) {
     let advance = |(mut local, motion): (Mut<Local>, &Motion)| {
-        for axis in 0..3 {
-            local.0.translation[axis] += motion.0.linear[axis] * step.0;
-        }
+        advance_translation(&mut local.0, &motion.0, step.0);
     };
     #[cfg(not(target_arch = "wasm32"))]
     query.par_iter_mut().for_each(advance);
     #[cfg(target_arch = "wasm32")]
     query.iter_mut().for_each(advance);
+}
+
+fn advance_translation(transform: &mut Transform, velocity: &Velocity, step: f64) {
+    for axis in 0..3 {
+        transform.translation[axis] += velocity.linear[axis] * step;
+    }
+}
+
+fn publish_globals(hierarchy: Res<Hierarchy>, mut query: Query<&mut Global>) {
+    for (index, &(entity, _)) in hierarchy.nodes.iter().enumerate() {
+        query.get_mut(entity).expect("fixed topology").0 = hierarchy.globals[index];
+    }
 }
 
 pub(crate) fn spawn(world: &mut World, entity: CookedEntity) -> Entity {

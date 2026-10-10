@@ -80,6 +80,8 @@ pub enum PlayError {
     AudioBudget,
     #[error(transparent)]
     Audio(#[from] incant_audio::AudioError),
+    #[error(transparent)]
+    SceneAudio(#[from] incant_audio::SceneAudioError),
     #[error("compiled script exceeds 1,000,000 bytes")]
     ScriptSize,
     #[error(transparent)]

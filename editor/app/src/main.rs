@@ -1,3 +1,5 @@
+#[cfg(test)]
+mod context_tests;
 use incant_cmd::{Actor, Command};
 use incant_doc::schema_registry;
 use incant_render::{Renderer, Viewport, wgpu};
@@ -18,6 +20,11 @@ mod provider;
 mod render_scene;
 mod source_watch;
 mod window;
+
+fn app_context() -> tauri::Context<tauri::Wry> {
+    tauri::tauri_build_context!()
+}
+
 struct Editor {
     provider: Arc<provider::ProviderRuntime>,
     bus: Arc<Mutex<project::LoadState>>,
@@ -317,7 +324,7 @@ fn main() {
             });
             Ok(())
         })
-        .run(tauri::generate_context!())
+        .run(app_context())
         .expect("Incant native editor failed");
 }
 

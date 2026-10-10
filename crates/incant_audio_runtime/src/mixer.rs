@@ -1,5 +1,5 @@
 use crate::{AudioError, Bus, PlayOptions, Result, config};
-use incant_assets::CookedAudio;
+use incant_assets_runtime::CookedAudio;
 #[cfg(not(target_arch = "wasm32"))]
 use kira::sound::streaming::{StreamingSoundData, StreamingSoundHandle};
 use kira::{
@@ -36,7 +36,7 @@ enum VoiceSound {
     Static(StaticSoundHandle),
     Offline(crate::offline_stream::Handle),
     #[cfg(not(target_arch = "wasm32"))]
-    Streaming(StreamingSoundHandle<incant_assets::AssetError>),
+    Streaming(StreamingSoundHandle<incant_assets_runtime::AssetError>),
 }
 impl VoiceSound {
     fn state(&self) -> PlaybackState {

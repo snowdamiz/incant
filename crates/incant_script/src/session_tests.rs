@@ -41,6 +41,25 @@ fn key(down: bool) -> InputEvent {
 }
 
 #[test]
+fn numeric_runtime_failure_is_terminal_after_input_acceptance() {
+    let mut bad = scene(1).entities()[0].clone();
+    bad.transform.translation[0] = 1e308;
+    bad.velocity.as_mut().unwrap().linear[0] = 1e308;
+    let scene = CookedScene::new(id(99), 1, vec![bad]).unwrap();
+    let mut session =
+        NativeSession::new(scene, code("throw Error('script must not run')"), actions()).unwrap();
+    assert!(
+        matches!(session.tick(&[key(true)]), Err(SessionError::Runtime(
+        RuntimeError::Scene(incant_runtime::SceneError::Component(entity))
+    )) if entity == id(1))
+    );
+    assert!(session.is_failed());
+    assert!(matches!(session.world(), Err(SessionError::Failed)));
+    assert!(matches!(session.input(), Err(SessionError::Failed)));
+    assert!(matches!(session.tick(&[]), Err(SessionError::Failed)));
+}
+
+#[test]
 fn fixed_rate_native_step_precedes_script_and_retained_input_is_owned() {
     for rate in [1, 30, 60, 120, 240] {
         let script = code(

@@ -1,4 +1,4 @@
-use incant_assets::{AUDIO_CHUNK_FRAMES, AssetError, CookedAudio};
+use incant_assets_runtime::{AUDIO_CHUNK_FRAMES, AssetError, CookedAudio};
 use kira::{Frame, sound::streaming::Decoder};
 use std::sync::Arc;
 

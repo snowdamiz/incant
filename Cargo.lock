@@ -3553,6 +3553,7 @@ dependencies = [
  "glam 0.32.1",
  "gltf",
  "image",
+ "incant_assets_runtime",
  "incant_cmd",
  "incant_doc",
  "incant_nav",
@@ -3569,13 +3570,36 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_assets_runtime"
+version = "0.0.1"
+dependencies = [
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "tempfile",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_audio"
 version = "0.0.1"
 dependencies = [
  "glam 0.32.1",
  "incant_assets",
+ "incant_audio_runtime",
  "incant_core",
  "incant_doc",
+ "kira",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "incant_audio_runtime"
+version = "0.0.1"
+dependencies = [
+ "incant_assets_runtime",
  "kira",
  "schemars 1.2.2",
  "serde",
@@ -3757,10 +3781,22 @@ version = "0.0.1"
 dependencies = [
  "incant_doc",
  "incant_nav",
+ "incant_physics_runtime",
  "rapier3d",
  "schemars 1.2.2",
  "serde",
  "serde_json",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "incant_physics_runtime"
+version = "0.0.1"
+dependencies = [
+ "incant_types",
+ "rapier3d",
+ "schemars 1.2.2",
+ "serde",
  "thiserror 2.0.21",
 ]
 
@@ -3820,6 +3856,7 @@ version = "0.0.1"
 dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
+ "incant_physics_runtime",
  "incant_types",
  "sha2 0.10.9",
  "thiserror 2.0.21",
@@ -7526,10 +7563,12 @@ dependencies = [
  "glob",
  "heck 0.5.0",
  "json-patch",
+ "quote",
  "schemars 0.8.22",
  "semver",
  "serde",
  "serde_json",
+ "tauri-codegen",
  "tauri-utils",
  "tauri-winres",
  "walkdir",

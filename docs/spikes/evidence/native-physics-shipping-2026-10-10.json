@@ -1,0 +1,159 @@
+{
+  "passed": true,
+  "target": "aarch64-apple-darwin",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "codegen": {
+    "incant_input": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_script": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_script_player": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "lto": "fat"
+    },
+    "incant_physics_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "rapier3d": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    }
+  },
+  "player_sha256": "1339df08dfe10453a50cb275ea6ae1dc79834f4d8db899465188418b859de378",
+  "player_bytes": 3941816,
+  "symbols": {
+    "format": "Mach-O/dSYM",
+    "uuids": {
+      "arm64": "b1d8affe-951b-3b24-a9de-cceaef229ed0"
+    }
+  },
+  "script_metadata": {
+    "build_id": "d171a0ca2fa87d20747769650a122b1a954a67c2c2ffe570fa28ba17b9300586",
+    "bytecode_bytes": 4008,
+    "bytecode_sha256": "6c08e49d602e33f463973c7101aa866098ccd3be66882be0c11399bf07edd95a",
+    "debug_line_tables": true,
+    "embedded_source": false,
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "format": 1,
+    "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+    "source_map_sha256": "fe0c3ae5f9bcb417fe94d5bde10535e56074c731ab8ea5044a1865d10651fc19",
+    "source_name": "embedded-structural.js",
+    "source_sha256": "fe7d1e50e909399b8b455ee2c96023d47c9b4aaad1e28c395a354fb07d1a9243",
+    "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+    "target": "aarch64-apple-darwin",
+    "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+    "wrapper_prefix_lines": 3
+  },
+  "authoring_preserved": {
+    "game.incant.json": "4eeae6c574f847238bcde862db72293abf843aff110d507beb5eda4be2a2f847",
+    "history.jsonl": "2d36e7d1c66115eff90e10a0255a28dad768b0d4c710b5110ac82a3a1d185eaa"
+  },
+  "inputs_and_build_storage_removed": true,
+  "removed_input_scope": "authoring/compile inputs and temporary Cargo storage; runtime exchange files retained",
+  "runtime_exchange_files": [
+    "input.json",
+    "actions.json"
+  ],
+  "runtime_source_compiler_symbols_absent": true,
+  "dynamic_source_routes_rejected": true,
+  "observations": [
+    {
+      "ticks": 0,
+      "entities": 2,
+      "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+    },
+    {
+      "ticks": 1,
+      "entities": 3,
+      "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 1.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+    },
+    {
+      "ticks": 2,
+      "entities": 3,
+      "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 2.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0333333333333334, 1.0, 0.0]\n"
+    },
+    {
+      "ticks": 3,
+      "entities": 3,
+      "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 3.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0666666666666669, 2.0, 0.0]\n"
+    },
+    {
+      "ticks": 4,
+      "entities": 2,
+      "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 4.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 4.0, 0.0]\n"
+    },
+    {
+      "ticks": 60,
+      "entities": 2,
+      "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 60.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 60.0, 0.0]\n"
+    }
+  ],
+  "recorded_input_observations": [
+    {
+      "ticks": 0,
+      "entities": 2,
+      "output": "tick=0 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0, 0.0, 0.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0, 0.0, 0.0]\n"
+    },
+    {
+      "ticks": 1,
+      "entities": 3,
+      "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.0125, 1.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0, 0.0, 0.0]\n"
+    },
+    {
+      "ticks": 2,
+      "entities": 3,
+      "output": "tick=2 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 2.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0375, 1.0, 0.0]\n"
+    },
+    {
+      "ticks": 3,
+      "entities": 3,
+      "output": "tick=3 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 3.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3]) [1.0708333333333335, 2.0, 0.0]\n"
+    },
+    {
+      "ticks": 4,
+      "entities": 2,
+      "output": "tick=4 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 4.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 4.0, 3.0]\n"
+    },
+    {
+      "ticks": 60,
+      "entities": 2,
+      "output": "tick=60 entities=2\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]) [0.016666666666666666, 60.0, 3.0]\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]) [0.016666666666666666, 60.0, 3.0]\n"
+    }
+  ],
+  "native_physics_observations": [
+    {
+      "ticks": 0,
+      "output": "tick=0 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 3.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 3.0, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.0, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.0, 4.0, 0.0] [0.0, 0.0, 0.0, 1.0] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+    },
+    {
+      "ticks": 1,
+      "output": "tick=1 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 2.9982969760894775, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0, 2.9982969760894775, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, -0.16350001096725464, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.033332824707031, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [5.033332824707031, 4.0, 0.0] [0.0, 0.00833322573453188, 0.0, 0.999965250492096] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+    },
+    {
+      "ticks": 60,
+      "output": "tick=60 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.00595275592058897, 0.4997122585773468, 0.0025561037473380566]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.00595275592058897, 0.4997122585773468, 0.0025561037473380566] [-0.00012970506213605404, 1.568111542837869e-6, 0.00012519564188551158, 1.0] [0.00020080046670045704, -0.0002750213607214391, 0.00047549817827530205] [0.0009513464756309986, -8.687531583007058e-9, -0.0004017487808596343] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [6.999969482421875, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [6.999969482421875, 4.0, 0.0] [0.0, 0.47942492365837097, 0.0, 0.8775829672813416] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+    },
+    {
+      "ticks": 600,
+      "output": "tick=600 entities=3\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1]) [0.0, -0.5, 0.0] [0.0, 0.0, 0.0, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] false\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0059583005495369434, 0.4999309182167053, 0.0025801181327551603]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2]) [0.0059583005495369434, 0.4999309182167053, 0.0025801181327551603] [-7.640940111741656e-7, 1.5690386589994887e-6, 2.5463174324613647e-7, 1.0] [0.0, 0.0, 0.0] [0.0, 0.0, 0.0] true\nStableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [24.99969482421875, 4.0, 0.0]\nphysics StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3]) [24.99969482421875, 4.0, 0.0] [0.0, -0.958926260471344, 0.0, 0.28365570306777954] [2.0, 0.0, 0.0] [0.0, 1.0, 0.0] false\n"
+    }
+  ],
+  "input_exchange_only_at_startup": true,
+  "scope": "Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate"
+}

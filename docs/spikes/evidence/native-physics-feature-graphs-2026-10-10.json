@@ -1,0 +1,418 @@
+[
+  {
+    "root": "incant_physics",
+    "target": "aarch64-apple-darwin",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics",
+    "target": "x86_64-pc-windows-msvc",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics",
+    "target": "x86_64-unknown-linux-gnu",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics",
+    "target": "aarch64-apple-ios",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics",
+    "target": "aarch64-apple-ios-sim",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics",
+    "target": "aarch64-linux-android",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics",
+    "target": "wasm32-unknown-unknown",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "std"
+    ],
+    "parallel": false,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics_runtime",
+    "target": "aarch64-apple-darwin",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics_runtime",
+    "target": "x86_64-pc-windows-msvc",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics_runtime",
+    "target": "x86_64-unknown-linux-gnu",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics_runtime",
+    "target": "aarch64-apple-ios",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics_runtime",
+    "target": "aarch64-apple-ios-sim",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics_runtime",
+    "target": "aarch64-linux-android",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_physics_runtime",
+    "target": "wasm32-unknown-unknown",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "std"
+    ],
+    "parallel": false,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_runtime",
+    "target": "aarch64-apple-darwin",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_runtime",
+    "target": "x86_64-pc-windows-msvc",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_runtime",
+    "target": "x86_64-unknown-linux-gnu",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_runtime",
+    "target": "aarch64-apple-ios",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_runtime",
+    "target": "aarch64-apple-ios-sim",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_runtime",
+    "target": "aarch64-linux-android",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_runtime",
+    "target": "wasm32-unknown-unknown",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "std"
+    ],
+    "parallel": false,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_script_player",
+    "target": "aarch64-apple-darwin",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_script_player",
+    "target": "x86_64-pc-windows-msvc",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_script_player",
+    "target": "x86_64-unknown-linux-gnu",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_script_player",
+    "target": "aarch64-apple-ios",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_script_player",
+    "target": "aarch64-apple-ios-sim",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_script_player",
+    "target": "aarch64-linux-android",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "parallel",
+      "std"
+    ],
+    "parallel": true,
+    "evidence": "resolved feature graph only, not target execution"
+  },
+  {
+    "root": "incant_script_player",
+    "target": "wasm32-unknown-unknown",
+    "rapier_features": [
+      "alloc",
+      "default",
+      "dim3",
+      "enhanced-determinism",
+      "f32",
+      "std"
+    ],
+    "parallel": false,
+    "evidence": "resolved feature graph only, not target execution"
+  }
+]
