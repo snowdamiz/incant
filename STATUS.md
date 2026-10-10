@@ -68,6 +68,31 @@ within its documented workload.
   gameplay and device/performance gates stay open. Hosted checks are pending;
   see [native input evidence](docs/spikes/native-input-session.md).
 
+- Main cache seeding is verified across all 12 Rust jobs after PR #49: the shared
+  set uses 7.807 GiB and the retained inventory 8.929 GiB after exact obsolete
+  cache cleanup. All checks remained enabled. Independent warm-PR latency and
+  retention after dependency changes remain to be measured. See
+  [cache rollout](docs/spikes/ci-cache-retention.md#completed-main-producer-rollout).
+
+- Native world binary save/restore now preserves Transform/Velocity/hierarchy,
+  scene identity and fixed-step clock, with atomic checked replacement. Nine new
+  runtime tests and focused Clippy pass. A copied process resumes after deleting
+  authoring and scene files, matching uninterrupted execution byte for byte.
+  All 382 workspace tests, 44 GPU tests, workspace Clippy and WASM/iOS/Android
+  compilation pass. Hosted checks, complete session state, other systems and
+  durable save-slot integration remain open. See
+  [native save evidence](docs/spikes/native-world-saves.md).
+
+- Native Rapier now selects its parallel solver while WASM stays serial, with
+  enhanced determinism preserved. Three repeated process trials of serial,
+  one-worker and four-worker builds plus three real Chromium/WASM processes
+  produce 24 identical full body-state streams across contact and joint scenes.
+  All 373 normal workspace tests, Clippy, seven target feature graphs and direct
+   iOS-simulator/Android/WASM physics compile checks pass locally. Hosted desktop
+   and browser parity passed in PR #50; old Jolt timings remain separate. No phone performance,
+  fast variant, native physics migration or backend-adoption gate is claimed.
+  See [parallel physics evidence](docs/spikes/physics-parallel.md).
+
 - Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
   SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
   and their exclusive scope ends; rejected batches restore the numeric undo
@@ -95,6 +120,12 @@ within its documented workload.
   from its smoke apps. These are compile checks, not mobile script execution or
   device performance evidence.
 
+- The macOS texture-format check now reuses the workspace-built `texture_probe`
+  alongside the existing tools, avoiding its separate package feature graph.
+  All three real fixtures pass the unchanged pinned Khronos validator; the build
+  retains 656/658 external artifacts from the test graph (only Tauri variants
+  differ). Hosted timing for this follow-up remains unmeasured. See
+  [CI evidence](docs/spikes/ci-build-performance.md#reuse-the-texture-fixture-generator).
 - CI build reuse now keeps the ignored GPU suite on the workspace feature graph,
   combines macOS editor/headless builds and caches Rust dependencies. The measured
   baseline is a 38m15s median PR check, dominated by compilation; repeated Windows
@@ -696,8 +727,10 @@ mock response, simulator build or unsigned package counts as a shipped product.
   invalid direct numeric writes with no structural commands: 35 scoped tests,
   both Clippy modes and a fresh twelve-process shipping proof pass. Component
   domains are checked after view revocation; existing native simulation/derived
-  hierarchy overflow for huge finite values remains open. Hosted results for the
-  corrected head remain pending. See
+  hierarchy overflow for huge finite values remains open. Main50 plus the
+  reviewed native-save integration passes 75 scoped tests, 28 tool tests, both
+  Clippy modes and fresh source-free shipping/save proofs; hosted exact-head
+  results remain pending. See
   [evidence](docs/spikes/cooked-native-scripts.md). Full gameplay migration,
   authenticated file exports, cross-target embedding, automatic source-map
   diagnostics, MSVC symbol audit and device/performance gates remain open.

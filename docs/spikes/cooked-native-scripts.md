@@ -223,3 +223,45 @@ separately from both earlier proofs. Raw output:
 `artifacts/cooked-script-safe-undo-verified/`; logs:
 `/tmp/incant-cooked-safe-undo-{tests,clippy,no-compiler,shipping}.log`.
 The huge-finite simulation/hierarchy limitation above remains open.
+
+
+### Main50 and native-save integration (publication tree)
+
+The final safe-undo host `b2e6859` was merged with actual main50 `4933a88` and
+reviewed native-save PR #51 head `22a81fc`, producing `517b6aa`. Both merges were
+clean. Host/cook/player sources are unchanged from the independently reviewed
+safe-undo fix. CI retains the native-save probe, direct KTX reference probe,
+`save_world`/`texture_probe` build targets and the embedded-script shipping proof.
+The lockfile change updates the embedded compatibility identity, so the earlier
+executable hashes are historical results rather than evidence for this union.
+
+Verification on the union:
+
+```sh
+./tools/cargo test -j2 -p incant_runtime -p incant_script -p incant_script_player -p incant_cook --locked
+./tools/cargo clippy -j2 -p incant_runtime -p incant_script -p incant_script_player -p incant_cook --all-targets --locked -- -D warnings
+./tools/cargo clippy -j2 -p incant_script --no-default-features --all-targets --locked -- -D warnings
+python3 tools/probes/cooked-script.py artifacts/cooked-script-main51-verified
+./tools/cargo build -j2 -p incant_runtime --example save_world --release --locked
+python3 tools/probes/native-saves.py artifacts/cooked-native-save-union
+```
+
+All 75 scoped tests/doctests (including nine native-save tests), both Clippy
+modes, 28 Python tool tests, fmt, generated conventions/SDK/bridge checks,
+runtime dependency guard and CI actionlint passed. No broad workspace rebuild
+was needed for this clean source union; hosted exact-head checks remain required.
+The fresh shipping proof passed all twelve processes after authoring/compile
+inputs and build storage were removed, with unchanged scene bytes, source parser
+symbols absent and dynamic compilation rejected. The player is 1,790,136 bytes,
+SHA256 `687caa60b02d54157c883213fa07c34d27bc7a144459e0510d0f09ba8ab0cdff`,
+with matched arm64 dSYM UUID `3f43e715-fb87-31c4-98e5-10c97ba618fb`.
+[Publication shipping result](evidence/cooked-native-script-main51-2026-10-10.json)
+is separate from earlier proofs. The independently rebuilt native-save example
+also passed fresh-process continuation, repeated/zero-tick restore, corruption
+rejection and existing-save protection after scene/authoring deletion;
+[save union result](evidence/cooked-native-script-save-union-2026-10-10.json).
+This proves only the documented native world save slice, not VM/input/session
+restoration. Raw outputs remain under the two artifact paths above; logs are
+`/tmp/incant-cooked-union-{tests,clippy,no-compiler,shipping,save-build,saves,tools}.log`.
+All previously listed export/device/performance and huge-finite hierarchy limits
+remain unchanged.

@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "binaries": {
+    "incant_headless": "29386edc8563662888bb0f27bafacfb1116e791d5a252260954bd378251bedfa",
+    "cook_scene": "505cb6bc9c0f41a489403dc3cd5d70aad6818283a2692dab281762ea80633594",
+    "save_world": "ed2cfc02b4a7b19f6f876d16f6742fcafdaad9d34203da949a0595989c87339c"
+  },
+  "authoring_hashes_preserved": {
+    "world.incant.json": "855ccd438eeed29baca4e13a7437302483d0457756690dadbcd3aa2758779e5a",
+    "history.jsonl": "1fdc3154ba9472fa7235b254f0e633f5d4fe26abd10a3d8790df9aa1e9fe5e21"
+  },
+  "authoring_removed_before_execution": true,
+  "scene_removed_before_resume": true,
+  "fresh_process_continuation_equals_uninterrupted": true,
+  "repeated_and_zero_tick_restores_exact": true,
+  "corruption_rejected": true,
+  "existing_save_preserved": true,
+  "observations": [
+    {
+      "operation": "scene",
+      "additional_ticks": 60,
+      "output": "tick=60 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "0ff9eae6e95bf107c5a4c8b23bb58040a6615bcac8af82a7500970f117582d3d"
+    },
+    {
+      "operation": "scene",
+      "additional_ticks": 25,
+      "output": "tick=25 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "036309e28aa35ebf20700dbf0862295e14c34903190244dbd23c7863cdc62d31"
+    },
+    {
+      "operation": "save",
+      "additional_ticks": 35,
+      "output": "tick=60 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "0ff9eae6e95bf107c5a4c8b23bb58040a6615bcac8af82a7500970f117582d3d"
+    },
+    {
+      "operation": "save",
+      "additional_ticks": 35,
+      "output": "tick=60 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "0ff9eae6e95bf107c5a4c8b23bb58040a6615bcac8af82a7500970f117582d3d"
+    },
+    {
+      "operation": "save",
+      "additional_ticks": 0,
+      "output": "tick=25 rate=60 entities=2 bytes=368\n",
+      "save_sha256": "036309e28aa35ebf20700dbf0862295e14c34903190244dbd23c7863cdc62d31"
+    }
+  ],
+  "scope": "Native Transform/Velocity/hierarchy/clock only; no VM, timers, inputs, complete session, durability or device gate",
+  "local_platform": "arm64 macOS; release profile for this process proof, not a shipping/device performance gate",
+  "format": {
+    "magic": "INCANTSV",
+    "version": 1,
+    "header_bytes": 64,
+    "max_bytes": 128000136,
+    "nested_scene_version": 1
+  }
+}

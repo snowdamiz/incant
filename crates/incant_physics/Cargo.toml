@@ -13,3 +13,8 @@ serde_json.workspace = true
 schemars.workspace = true
 thiserror.workspace = true
 rapier3d = { version = "=0.36.0", features = ["enhanced-determinism"] }
+
+# Browser/WASI builds stay serial until an explicit supported worker pool exists.
+# Native stepping uses Rapier's calling/global Rayon pool without changing APIs.
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+rapier3d = { version = "=0.36.0", features = ["parallel"] }
