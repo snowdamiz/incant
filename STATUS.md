@@ -44,6 +44,10 @@ after review and passing checks, without requesting separate merge approval.
   is verified above; hosted optional-feature CI, device output, cursor saves and
   phone gates remain open. See [host evidence](docs/spikes/native-scene-audio-host.md).
 
+- Shipping Cargo capture explicitly decodes UTF-8 on all desktop hosts. A real
+  subprocess regression reproduces Windows cp1252 failure before the fix; 40
+  tool tests pass. Corrected hosted Windows packaging remains pending. See
+  [encoding evidence](docs/spikes/shipping-output-utf8.md).
 
 - Typed versioned project JSON, semantic validation, published derived schemas,
   canonical formatting and stable ULIDs.
