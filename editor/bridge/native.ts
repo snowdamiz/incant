@@ -79,6 +79,7 @@ function inspectorField(
   const metadata = {
     ...(typeof raw.title === "string" ? { title: raw.title } : {}),
     ...(typeof raw.description === "string" ? { description: raw.description } : {}),
+    ...(Object.hasOwn(raw, "default") ? { default: raw.default } : {}),
   };
   if (typeof raw.$ref === "string") {
     const name = raw.$ref.startsWith("#/$defs/") ? raw.$ref.slice(8) : "";

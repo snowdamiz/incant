@@ -1,5 +1,35 @@
 # Orthographic camera appearance and Inspector review
 
+## Priority revision: correctness review, 2026-10-10
+
+Initial checkpoint d9f8769 is accepted for its stated engine/browser scope.
+Fix the following Inspector correctness issues before the native checkpoint:
+
+- `formatNumber` rounds valid tiny positive values such as 0.000001 to zero.
+  Preserve nonzero significant values (including negative small vectors) with a
+  clear compact representation of your choice; keep ordinary values readable.
+  Add observable regressions for small Camera clip/vertical size and a vector.
+- `projectionKind` currently returns orthographic solely from `kind`, even if
+  vertical_size is missing, wrongly typed, or there are extra fields. Your result
+  says the Unused tag is suppressed for malformed projections. Make behavior
+  match that claim and test it; do not silently repair malformed data.
+
+Astra implemented your schema/bridge requests: Camera units now come from Rust
+metadata; projection is explicitly first; schema projection help uses your
+proposed user-facing sentence; FieldSchema carries optional unknown `default`,
+and the bridge preserves own defaults across references/unions (including false
+and null), without filling authored values. Update fixture parity, order tests
+and presentation to consume that default safely instead of a duplicate hardcoded
+value when available. Retain the visible distinction between default and authored.
+Source and generated schema/bridge changes are supplied in your worktree.
+
+Re-run strict UI tests/build and relevant browser captures at both widths. No
+engine rendering implementation changed, so preserve the immutable binary and
+previous real-render acceptance without repeating unchanged captures. Document
+the shadow-depth quality limitation already measured; no cascade refactor is
+required for this scoped checkpoint. Native acceptance still awaits Astra's
+rebuilt captures. Commit your changes with Built-by: claude.
+
 Claude Opus 5.5 through ACP owns all scene design, visual geometry, cameras,
 rendered judgment, Inspector layouts/styling and screenshot review. Read CLAUDE.md,
 docs/spikes/orthographic-cameras.md, tools/probes/orthographic-cameras.py and the
