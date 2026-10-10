@@ -1,0 +1,148 @@
+{
+ "limits": {
+  "per_invocation": {
+   "frames": 128,
+   "raw_bytes": 268435456
+  },
+  "pass": {
+   "frames": 2048,
+   "raw_bytes": 1073741824
+  }
+ },
+ "runs": {
+  "d1": {
+   "binary": "active",
+   "source": "1f72a990b04f9bd87a2e8e88f1fa5760006f3911",
+   "plan": {
+    "repeats": 1,
+    "live": [
+     "e",
+     "ne"
+    ],
+    "static_only": false,
+    "probe": false
+   },
+   "engine_calls": 331,
+   "binary_unchanged_every_call": true,
+   "frames": 434,
+   "raw_bytes": 283078708,
+   "invocations": 302,
+   "largest_invocation_frames": 34,
+   "largest_invocation_raw_bytes": 8294400,
+   "written_pngs": 432,
+   "written_raw_bytes": 282617908
+  },
+  "d2": {
+   "binary": "active",
+   "source": "1f72a990b04f9bd87a2e8e88f1fa5760006f3911",
+   "plan": {
+    "repeats": 1,
+    "live": [
+     "e"
+    ],
+    "static_only": false,
+    "probe": false,
+    "shots": null
+   },
+   "engine_calls": 329,
+   "binary_unchanged_every_call": true,
+   "frames": 366,
+   "raw_bytes": 267411508,
+   "invocations": 300,
+   "largest_invocation_frames": 34,
+   "largest_invocation_raw_bytes": 8294400,
+   "written_pngs": 364,
+   "written_raw_bytes": 266950708
+  },
+  "probe-d1": {
+   "binary": "active",
+   "source": "1f72a990b04f9bd87a2e8e88f1fa5760006f3911",
+   "plan": {
+    "repeats": 1,
+    "live": [],
+    "static_only": true,
+    "probe": true,
+    "shots": null
+   },
+   "engine_calls": 19,
+   "binary_unchanged_every_call": true,
+   "frames": 4,
+   "raw_bytes": 24977408,
+   "invocations": 4,
+   "largest_invocation_frames": 1,
+   "largest_invocation_raw_bytes": 8294400,
+   "written_pngs": 4,
+   "written_raw_bytes": 24977408
+  },
+  "q-psp": {
+   "binary": "pre-short-spans",
+   "source": "0494b40cf8fcc5e1ad0fc689655a62cb264a2f50",
+   "plan": {
+    "repeats": 1,
+    "live": [],
+    "static_only": true,
+    "probe": false,
+    "shots": "pp-Q,pp96-Q,roll7-Q"
+   },
+   "engine_calls": 114,
+   "binary_unchanged_every_call": true,
+   "frames": 99,
+   "raw_bytes": 6144000,
+   "invocations": 99,
+   "largest_invocation_frames": 1,
+   "largest_invocation_raw_bytes": 65536,
+   "written_pngs": 99,
+   "written_raw_bytes": 6144000
+  },
+  "q-pw": {
+   "binary": "pre-wide",
+   "source": "f9aa1da0818313c5c6cac580e54d7107646378bc",
+   "plan": {
+    "repeats": 1,
+    "live": [],
+    "static_only": true,
+    "probe": false,
+    "shots": "pp-Q,pp96-Q,roll7-Q"
+   },
+   "engine_calls": 114,
+   "binary_unchanged_every_call": true,
+   "frames": 99,
+   "raw_bytes": 6144000,
+   "invocations": 99,
+   "largest_invocation_frames": 1,
+   "largest_invocation_raw_bytes": 65536,
+   "written_pngs": 99,
+   "written_raw_bytes": 6144000
+  },
+  "cap-d": {
+   "binary": "active",
+   "engine_calls": 8,
+   "binary_unchanged_every_call": true,
+   "frames": 2,
+   "raw_bytes": 32768,
+   "invocations": 2,
+   "largest_invocation_frames": 1,
+   "largest_invocation_raw_bytes": 16384
+  },
+  "cap-psp": {
+   "binary": "pre-short-spans",
+   "engine_calls": 8,
+   "binary_unchanged_every_call": true,
+   "frames": 2,
+   "raw_bytes": 32768,
+   "invocations": 2,
+   "largest_invocation_frames": 1,
+   "largest_invocation_raw_bytes": 16384
+  }
+ },
+ "pass_total": {
+  "frames": 1006,
+  "raw_bytes": 587821160,
+  "raw_mib": 560.6,
+  "frames_left": 1042,
+  "raw_mib_left": 463.4,
+  "largest_invocation_frames": 34,
+  "largest_invocation_raw_bytes": 8294400
+ },
+ "note": "Counted per renderer invocation before it runs (a screenshot is one frame of width x height x 4 bytes; a play capture 34 frames), including expected failing screenshots that write no image. Round four's 0494b40 frames are reused as the baseline and not re-rendered."
+}

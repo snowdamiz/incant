@@ -37,13 +37,15 @@ TOL_NEAREST, TOL_LINEAR = 1, 2
 RULES = {"39e5c38107451ba44a02ef7b80f27bef11d4141d": "hardware",
          "c2c7758c14c37d36aa13e322aa2c87e63ce489ad": "tie-band",
          "f9aa1da0818313c5c6cac580e54d7107646378bc": "pixel-band",
-         "0494b40cf8fcc5e1ad0fc689655a62cb264a2f50": "span-band"}
+         "0494b40cf8fcc5e1ad0fc689655a62cb264a2f50": "span-band",
+         "1f72a990b04f9bd87a2e8e88f1fa5760006f3911": "span64-band"}
+SPAN_LENGTH = {"span64-band": 64}  # source texels per span; every other rule is read with 512
 # Textures in effect after each reimport step that captured frames.
 REIMPORT_VARIANTS = {"1-sheet-teal": {"sheet": "teal"}, "2-badge-orange": {"sheet": "teal", "badge": "orange"},
                      "4-badge-restore": {"sheet": "teal"}, "6-sheet-restore": {}, "7-sheet-tall": {"sheet": "tall"},
                      "8-sheet-restore": {}, "9-strip-tall": {"strip": "strip8192-tall"},
                      "10-column-wide": {"strip": "strip8192-tall", "column": "column8192-wide"},
-                     "12-column-restore": {}}
+                     "12-column-restore": {}, "13-grid-tall": {"grid": "grid512-tall"}, "14-grid-restore": {}}
 
 
 def sha(path):
@@ -63,7 +65,7 @@ class Run:
             ("tone16", "tone16.png"), ("ruler64", "ruler64.png"), ("strip", "strip4096.png"),
             ("strip8192", "strip8192.png"), ("strip8192-tall", "strip8192-tall.png"),
             ("column8192", "column8192.png"), ("column8192-wide", "column8192-wide.png"),
-            ("labels4", "labels4.png"))
+            ("labels4", "labels4.png"), ("grid512", "grid512.png"), ("grid512-tall", "grid512-tall.png"))
             if (art / f).exists()}
         self.ids = self.scene["ids"]
         commit = self.helper.get("binary_source_commit")
@@ -77,19 +79,19 @@ class Run:
         self.meshes = [(self.ids["C:occluder"], occ["positions"], occ["emissive"])]
         self.asset = t
 
-    def textures(self, sheet="sheet", badge="badge", strip="strip8192", column="column8192"):
+    def textures(self, sheet="sheet", badge="badge", strip="strip8192", column="column8192", grid="grid512"):
         t = self.asset
         out = {t["sheet"]: self.tex[sheet], t["labels"]: self.tex["labels"], t["badge"]: self.tex[badge],
                t["tone16"]: self.tex["tone16"]}
         for name, variant in (("ruler64", "ruler64"), ("strip", "strip"), ("strip8192", strip),
-                              ("column8192", column), ("labels4", "labels4")):
+                              ("column8192", column), ("labels4", "labels4"), ("grid512", grid)):
             if name in t:
                 out[t[name]] = self.tex[variant]
         return out
 
     def render(self, camera, w, h, sheet="sheet", badge="badge", overrides=None, strip="strip8192",
-               column="column8192"):
-        return reference.render(self.scene["entities"], self.textures(sheet, badge, strip, column),
+               column="column8192", grid="grid512"):
+        return reference.render(self.scene["entities"], self.textures(sheet, badge, strip, column, grid),
                                 self.scene["cameras"][camera]["id"] if camera in self.scene["cameras"] else camera,
                                 w, h, self.meshes, overrides)
 
@@ -541,12 +543,93 @@ def span_summary(rows):
 
 SPAN_FRAMES = (("pp-K-1024x1024", "K", (0, 0)), ("pp-L-1024x1024", "L", (0, 0)), ("pp-M-1024x1024", "M", (0, 0)),
                ("pp-N-1024x1024", "N", (0, 0)), ("pp-N-hd-1920x1080", "N", (448, 28)))
+SHORT_FRAMES = tuple((f"pp-{b}-1024x1024", b, (0, 0)) for b in ("R1", "R2", "S1", "S2")) + tuple(
+    (f"pp-{b}-hd-1920x1080", b, (448, 28)) for b in ("R1", "R2", "S1", "S2"))
 
 
-def span_local(meta, t):
+def grid_texel(rgb):
+    """(x, y) named by a grid512 colour, else None."""
+    r, g, b = rgb
+    if (90 <= b <= 216 and b % 2 == 0 and (r - 60) % 2 == 0 and (g - 60) % 2 == 0 and 60 <= r <= 186
+            and 60 <= g <= 186):
+        block = (b - 90) // 2
+        return (r - 60) // 2 + 64 * (block % 8), (g - 60) // 2 + 64 * (block // 8)
+    return None
+
+
+def grid_cases(images, scene, frames):
+    """Two-axis nine-slice cases: every pixel of each view against the exact rule on both
+    texture axes. `frames` maps a frame key to (board, offset of board px in the frame).
+    Mismatches are classed by the worse axis: exact tie, near tie, edge or other."""
+    out = {}
+    for key, (board, (ox, oy)) in frames.items():
+        img = images.get(key)
+        meta = next((m for m in scene["meta"].values() if m.get("kind") == "span2d" and m["board"] == board), None)
+        if img is None or meta is None or not meta["decode"]:
+            continue
+        axes = {}
+        for name, axis_index in (("u", 0), ("v", 1)):
+            spec = meta[name]
+            segments = [(snap(Fraction(a)), snap(Fraction(b)), Fraction(ta), Fraction(tb))
+                        for a, b, ta, tb in spec["segments"]]
+            axes[name] = (spec["axis"], segments, meta["region"][axis_index], meta["region"][2 + axis_index],
+                          [segments[0][0], segments[-1][1]])
+        classes, ties, examples = Counter(), Counter(), []
+        for y in range(img.height):
+            for x in range(img.width):
+                c = {"x": Fraction(2 * (x - ox) + 1, 2), "y": Fraction(2 * (y - oy) + 1, 2)}
+                want, kinds = [], []
+                for name in ("u", "v"):
+                    axis, segments, origin, size, edges = axes[name]
+                    index, t, k = span_expected(segments, c[axis], size)
+                    want.append(None if index is None else origin + index)
+                    if t is None:
+                        kinds.append("edge" if any(abs(c[axis] - e) <= Fraction(2, 256) for e in edges) else "off")
+                    elif t == round(t):
+                        kinds.append("exact")
+                    elif abs(t - round(t)) <= abs(k) * Fraction(2, 256):
+                        kinds.append("near")
+                    else:
+                        kinds.append("edge" if any(abs(c[axis] - e) <= Fraction(2, 256) for e in edges) else "plain")
+                for kind in set(kinds) & {"exact", "near"}:
+                    ties[kind] += 1
+                expected = None if None in want else tuple(want)
+                got = grid_texel(img.rgb(x, y))
+                if got == expected:
+                    continue
+                cls = ("exact tie" if "exact" in kinds else "near tie" if "near" in kinds
+                       else "edge" if "edge" in kinds else "other")
+                classes[cls] += 1
+                if len(examples) < 6:
+                    examples.append({"pixel": [x, y], "expected": expected, "engine": got, "class": cls})
+        out[key] = {"case": next(k for k, m in scene["meta"].items() if m is meta), "set": meta["set"],
+                    "orient": meta["orient"], "window": meta["window"], "d": meta["d"],
+                    "pixels_with_exact_tie": ties["exact"], "pixels_with_near_tie": ties["near"],
+                    "mismatches": sum(classes.values()), "by_class": dict(classes), "examples": examples,
+                    "pass": not classes}
+    return out
+
+
+def grid_frames(scene, shots):
+    """Frame key -> (board, board-px offset in the frame) for every captured grid view."""
+    frames = {}
+    for key in shots:
+        name, size = key.rsplit("-", 1)
+        camera = scene["cameras"].get(name)
+        if camera is None or not camera["board"].startswith("Q"):
+            continue
+        w = int(size.split("x")[0])
+        offset = (w // 2 - 64, w // 2 - 64)  # views are centred on the 128 px board
+        if name.startswith("roll7-"):
+            continue  # rolled: judged against the reference only
+        frames[key] = (camera["board"], offset)
+    return frames
+
+
+def span_local(meta, t, span=512):
     """Candidate span texel of region-local boundary t on a simple strip, or "cut".
 
-    Cuts run every 512 texels from the source coordinate of the quad's first (local
+    Cuts run every `span` texels from the source coordinate of the quad's first (local
     bottom-left) vertex: texel 0 of an unflipped strip, texel w of a flip_x strip, the
     last row of an unflipped column (local bottom) and row 0 of a flip_y column.
     """
@@ -554,21 +637,22 @@ def span_local(meta, t):
     flipped = meta["orient"] == "flip"
     start = (n if flipped else 0) if meta["texture_axis"] == "x" else (0 if flipped else n)
     if start == 0:
-        return "cut" if t % 512 == 0 else t % 512
-    if (n - t) % 512 == 0:
+        return "cut" if t % span == 0 else t % span
+    if (n - t) % span == 0:
         return "cut"
-    upper = n - 512 * ((n - t) // 512)
-    return t - max(0, upper - 512)
+    upper = n - span * ((n - t) // span)
+    return t - max(0, upper - span)
 
 
 PROBE_FRAMES = (("pp-O-1024x1024", "O", (0, 0)), ("pp-P-1024x1024", "P", (0, 0)),
                 ("pp-O-hd-1920x1080", "O", (448, 28)), ("pp-P-hd-1920x1080", "P", (448, 28)))
 
 
-def tie_census(images, scene, frames=SPAN_FRAMES):
+def tie_census(images, scene, frames=SPAN_FRAMES, span=512):
     """Ties on simple span rows: failures / pixels by frame, magnification, screen
-    direction of increasing texels, span-texel range of the boundary and kind: "exact"
-    (centre on the boundary) or "near" (within two 1/256 px raster steps of it)."""
+    direction of increasing texels, span-texel range of the boundary (quarters of a
+    `span`-texel span) and kind: "exact" (centre on the boundary) or "near" (within two
+    1/256 px raster steps of it)."""
     counts = {}
     for key, board, offset in frames:
         if key not in images:
@@ -596,8 +680,9 @@ def tie_census(images, scene, frames=SPAN_FRAMES):
                     kind = "near"
                 else:
                     continue
-                local = span_local(meta, boundary)
-                band = "cut" if local == "cut" else f"{128 * (local // 128)}-{128 * (local // 128) + 127}"
+                local = span_local(meta, boundary, span)
+                q = span // 4
+                band = "cut" if local == "cut" else f"{q * (local // q)}-{q * (local // q) + q - 1}"
                 group = (f"{key.rsplit('-', 1)[0]} {meta['magnification']}x {'increasing' if k > 0 else 'decreasing'}"
                          f" {band} {kind}")
                 entry = counts.setdefault(group, [0, 0])
@@ -645,8 +730,8 @@ def main():
     helper_shots = run.helper["shots"]
     first = next(iter(helper_shots.values()))
     result["adapter"] = first.get("adapter")
-    if run.helper.get("plan", {}).get("probe"):
-        probe(run, result, out_json, t0)
+    if run.helper.get("plan", {}).get("probe") or run.helper.get("plan", {}).get("shots"):
+        partial(run, result, out_json, t0)
         return
 
     # 1. Every static frame against the reference.
@@ -718,14 +803,27 @@ def main():
         result["board_i"] = board_i(images["pp-I-1024x640"], run.scene)
     if "pp-J-1024x640" in images:
         result["board_j"] = board_j(images["pp-J-1024x640"], run.scene)
-    spans = {key: span_rows(images[key], run.scene, board, offset) for key, board, offset in SPAN_FRAMES
+    span = SPAN_LENGTH.get(run.rule, 512)
+    spans = {key: span_rows(images[key], run.scene, board, offset) for key, board, offset in SPAN_FRAMES + SHORT_FRAMES
              if key in images}
     if spans:
         result["span_rows"] = spans
         result["span_summary"] = {k: span_summary(v) for k, v in spans.items()}
-        result["tie_census"] = tie_census(images, run.scene)
+        result["tie_census"] = tie_census(images, run.scene, SPAN_FRAMES, span)
+        if any(key in images for key, _, _ in SHORT_FRAMES):
+            result["short_tie_census"] = tie_census(images, run.scene, SHORT_FRAMES, span)
         result["span_blended_rows"] = blended_rows(images["pp-M-1024x1024"], predictions["pp-M-1024x1024"],
                                                    run.scene, "M")
+    frames = grid_frames(run.scene, images)
+    if frames:
+        result["grid_cases"] = grid_cases(images, run.scene, frames)
+        result["grid_summary"] = {
+            "views": len(result["grid_cases"]), "failed_views": sorted(k for k, v in result["grid_cases"].items()
+                                                                       if not v["pass"]),
+            "mismatched_pixels": sum(v["mismatches"] for v in result["grid_cases"].values()),
+            "pixels_with_exact_tie": sum(v["pixels_with_exact_tie"] for v in result["grid_cases"].values()),
+            "pixels_with_near_tie": sum(v["pixels_with_near_tie"] for v in result["grid_cases"].values()),
+            "by_class": dict(sum((Counter(v["by_class"]) for v in result["grid_cases"].values()), Counter()))}
     if run.rule == "tie-band" and "pp-G-1024x640" in images and "pp-F-320x180" in images:
         # Model-only counterfactual for the recommendation, not engine evidence: the
         # corrected rule with the band scaled by the signed derivative (1/1024 px).
@@ -918,8 +1016,8 @@ def main():
             continue
         item = {"exit": entry["exit"], "authored_unchanged": entry["authored_unchanged"], "stderr": entry["stderr"]}
         if entry["exit"] == 0:
-            tex_name = next(t for t in ("sheet", "badge", "strip8192", "column8192")
-                            if t.split("8192")[0] in label)
+            tex_name = next(t for word, t in (("sheet", "sheet"), ("badge", "badge"), ("strip", "strip8192"),
+                                              ("column", "column8192"), ("grid", "grid512")) if word in label)
             item.update(same_asset_id=entry["asset"]["id"] == initial[tex_name]["id"], sha256=entry["asset"]["sha256"],
                         changed=entry["changed"], width=entry["details"]["width"], height=entry["details"]["height"],
                         initial_sha256=initial[tex_name]["sha256"])
@@ -980,7 +1078,8 @@ def main():
         # Round four: the strip and column at another size must leave span frames unchanged.
         re["span_resize_equals_original"] = {k: v.get("equals_original_static") for k, v in shots_cmp.items()
                                              if k.split(":")[0] in ("9-strip-tall", "10-column-wide",
-                                                                    "12-column-restore")}
+                                                                    "12-column-restore", "13-grid-tall",
+                                                                    "14-grid-restore")}
     result["reimport"] = re
 
     # 13. Source-free frames equal the frames rendered with sources present.
@@ -1096,6 +1195,7 @@ def main():
                       "span": {k: {f: v[f] for f in ("rows", "failed_rows", "mismatched_pixels", "by_class")}
                                for k, v in result.get("span_summary", {}).items()},
                       "span_resize_equal": result["reimport"].get("span_resize_equals_original"),
+                      "grid": result.get("grid_summary"),
                       "span_blended": result.get("span_blended_rows"),
                       "orientation": result["orientation_mismatched_pixels"],
                       "nine_slice_flips": result["nine_slice_flip_mismatched_pixels"],
@@ -1113,23 +1213,36 @@ def main():
                      default=list))
 
 
-def probe(run, result, out_json, t0):
-    """Probe runs (helper --probe): only boards O and P, decoded against the exact rule,
-    plus each frame against the reference and the in-run repeat."""
+def partial(run, result, out_json, t0):
+    """Probe runs (helper --probe) and shot-filtered runs (--shots): each captured frame
+    against the reference and its in-run repeat, every span row and two-axis case
+    decoded against the exact rule, and the tie census."""
     images, static = {}, {}
     for key, entry in run.helper["shots"].items():
         name, size = key.rsplit("-", 1)
         w, h = map(int, size.split("x"))
         stats, images[key] = compare(run.path / "shots" / f"{key}-r1.png", run.render(name, w, h))
         static[key] = dict(stats, repeat_equal=entry["equal"])
-    rows = {key: span_rows(images[key], run.scene, board, offset) for key, board, offset in PROBE_FRAMES}
+    span = SPAN_LENGTH.get(run.rule, 512)
+    frames = [f for f in PROBE_FRAMES + SPAN_FRAMES + SHORT_FRAMES if f[0] in images]
+    rows = {key: span_rows(images[key], run.scene, board, offset) for key, board, offset in frames}
     result.update(static=static, span_rows=rows, span_summary={k: span_summary(v) for k, v in rows.items()},
-                  tie_census=tie_census(images, run.scene, PROBE_FRAMES), seconds=round(time.time() - t0, 1))
+                  tie_census=tie_census(images, run.scene, frames, span))
+    grids = grid_frames(run.scene, images)
+    if grids:
+        cases = grid_cases(images, run.scene, grids)
+        result.update(grid_cases=cases, grid_summary={
+            "views": len(cases), "failed_views": sorted(k for k, v in cases.items() if not v["pass"]),
+            "mismatched_pixels": sum(v["mismatches"] for v in cases.values()),
+            "by_class": dict(sum((Counter(v["by_class"]) for v in cases.values()), Counter()))})
+    result["seconds"] = round(time.time() - t0, 1)
     out_json.write_text(json.dumps(result, indent=1, default=list), encoding="utf-8")
-    print(json.dumps({"static": {k: (v["unexplained"], v["ambiguous_mismatch"], v["repeat_equal"])
-                                 for k, v in static.items()},
+    print(json.dumps({"static_unexplained": sum(v["unexplained"] for v in static.values()),
+                      "static_ambiguous_mismatch": sum(v["ambiguous_mismatch"] for v in static.values()),
                       "span": {k: {f: v[f] for f in ("rows", "failed_rows", "mismatched_pixels", "by_class")}
-                               for k, v in result["span_summary"].items()}, "seconds": result["seconds"]}))
+                               for k, v in result["span_summary"].items()},
+                      "grid": {k: v for k, v in result.get("grid_summary", {}).items() if k != "failed_views"},
+                      "seconds": result["seconds"]}))
 
 
 if __name__ == "__main__":

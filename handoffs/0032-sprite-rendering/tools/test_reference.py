@@ -172,6 +172,29 @@ class Spans(unittest.TestCase):
             if mode["kind"] == "simple":
                 self.assertEqual({v[4:] for v in spans}, {(0.0, 0.0)})
 
+    def test_short_spans_cut_every_64_texels(self):
+        self.assertEqual(reference.span_cuts(0.0, 200.0, 64.0),
+                         [(0.0, 0.0), (0.32, 64.0), (0.64, 128.0), (0.96, 192.0), (1.0, 200.0)])
+        self.assertEqual(reference.span_cuts(200.0, 0.0, 64.0)[1:3], [(0.32, 136.0), (0.64, 72.0)])
+        self.assertEqual(reference.SPAN_RULES, {"span-band": 512.0, "span64-band": 64.0})
+
+    def test_short_span_geometry_invariants_from_the_candidate_unit_test(self):
+        # geometry.rs at 1f72a99: at most 101,400 vertices; span texels within [0, 64].
+        for flipped in (False, True):
+            for mode in ({"kind": "simple"}, {"kind": "nine_slice", "border": [511, 1, 17, 3], "pixels_per_unit": 8.0}):
+                value = sprite(region=[0, 0, 8192, 8192], size=[1024.0, 1024.0], pivot=[0.25, 0.75], flip_x=flipped,
+                               flip_y=flipped, mode=mode)
+                original = reference.tessellate(value, 8192, 8192)
+                spans = reference.nearest_spans(original, value["region"], 8192, 8192, 64.0)
+                self.assertLessEqual(len(spans), 101400)
+                self.assertEqual(len(spans) % 6, 0)
+                area = sum(abs((b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])) * 0.5
+                           for a, b, c in (spans[k:k + 3] for k in range(0, len(spans), 3)))
+                self.assertAlmostEqual(area, 1024.0 * 1024.0, delta=1e-9 * area)
+                self.assertTrue(all(0.0 <= v[2] <= 64.0 and 0.0 <= v[3] <= 64.0 for v in spans))
+                self.assertTrue(all(a[4:] == b[4:] == c[4:] for a, b, c in
+                                    (spans[k:k + 3] for k in range(0, len(spans), 3))))
+
     def test_exact_ties_at_large_coordinates_become_predictions(self):
         # Texel 4096 of a flipped strip at 8x: base 3584 + span texel 512.
         reference.NEAREST_RULE = "span-band"

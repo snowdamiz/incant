@@ -40,13 +40,19 @@ interfaces and the supplied frozen binary:
      strip and column are reimported at another size and every capture is budgeted.
      With --probe, boards O and P (20x-128x, rows and columns) are added and only their
      1024 x 1024 and 1920 x 1080 views are captured.
+ 10. Round-five short-span boards for the 64-texel span correction: R and S sweep
+     48x-512x along x and y with windows at span texels 0, 16, 36, 44, 52 and 60, at
+     1024 x 1024 and 1920 x 1080; 86 two-axis nine-slice cases on a 512 x 512 grid
+     texture (eight orientations, junction and span-cut windows, 4x-48x, translucent
+     and rolled) each get a 128 x 128 view, set C also 96 x 96. The grid is reimported
+     taller. Each case owns a packed world cell no other sprite or view touches.
 
 Usage (repo root):
   python3 -I handoffs/0032-sprite-rendering/tools/sprite_lookdev.py OUT_DIR [--binary NAME]
-      [--repeats 1|2] [--live DIRS|none] [--static-only] [--probe]
-OUT_DIR must not exist. NAME is active (default), pre-wide, pre-magnification or
-pre-ties; the earlier builds are preserved in artifacts/tools for before/after
-comparisons. Each renderer invocation is limited to 128 frames and 256 MiB raw.
+      [--repeats 1|2] [--live DIRS|none] [--static-only] [--probe] [--shots PREFIXES]
+OUT_DIR must not exist. NAME is active (default), pre-short-spans, pre-wide,
+pre-magnification or pre-ties; the earlier builds are preserved in artifacts/tools for
+before/after comparisons. Each renderer invocation is limited to 128 frames and 256 MiB raw.
 """
 
 import argparse
@@ -66,9 +72,10 @@ import sprite_art  # noqa: E402
 
 ROOT = TOOLS.parents[2]
 # The active build is the newest tested one; earlier builds are kept for before/after:
-# pre-ties (39e5c38), pre-magnification (c2c7758), pre-wide (f9aa1da) and active
-# (0494b40 at round four).
+# pre-ties (39e5c38), pre-magnification (c2c7758), pre-wide (f9aa1da), pre-short-spans
+# (0494b40) and active (1f72a99 at round five).
 BINARIES = {"active": ("incant_headless", "binary.json"),
+            "pre-short-spans": ("pre-short-spans-incant_headless", "pre-short-spans-binary.json"),
             "pre-wide": ("pre-wide-incant_headless", "pre-wide-binary.json"),
             "pre-magnification": ("pre-magnification-incant_headless", "pre-magnification-binary.json"),
             "pre-ties": ("pre-ties-incant_headless", "pre-ties-binary.json")}
@@ -955,6 +962,195 @@ def board_probe(s, b):
     assert at <= 1024, at
 
 
+# Round five: the 64-texel span candidate (1f72a99). Boards R (rows along x) and S
+# (columns along y) sweep 48x-512x with windows at span texels 0 (a cut), 16, 36, 44,
+# 52 and 60 of a 64-texel span, offsets 0 and +-1/256 px, both directions, on 1024-texel
+# regions (16 spans). R1/S1 hold 48x-128x and R2/S2 160x-512x; span vertices stay within
+# 2048 m of the origin, where f32 positions still resolve 1/256 px.
+SPAN64_LOCAL = {"cut": 0, "16": 16, "36": 36, "44": 44, "52": 52, "60": 60}
+SPAN64_BASE = 512  # region-local start of a 64-texel span in either direction
+SHORT_M = {"1": [48, 64, 80, 96, 112, 128], "2": [160, 192, 256, 320, 384, 512]}
+BOARD_SPEC["R1"] = (0.0, 1600.0, 1024, 1024)
+BOARD_SPEC["R2"] = (0.0, 2000.0, 1024, 1024)
+BOARD_SPEC["S1"] = (1600.0, 0.0, 1024, 1024)
+BOARD_SPEC["S2"] = (2000.0, 0.0, 1024, 1024)
+
+
+def board_short(s, b):
+    along = "x" if b[0] == "R" else "y"
+    tex, region = ("strip8192", (4096, 0, 1024, 1)) if along == "x" else ("column8192", (0, 4096, 1, 1024))
+    s.plate(f"{b}:background", b, (-16, -16, 1056, 1056), BG)
+    at = 16
+    for m in SHORT_M[b[1]]:
+        for orient in ("plain", "flip"):
+            for k, d in enumerate(SPAN_D):
+                for window, local in SPAN64_LOCAL.items():
+                    strip_row(s, b, f"{b}:{m}x:{orient}:{k}:{window}", tex=tex, region=region, m=m, orient=orient,
+                              b=SPAN64_BASE + local, d=d, at=at, along=along,
+                              meta={"window": window, "family": f"short {along}"})
+                    at += THICK + 1
+    assert at <= 1024, at
+
+
+# Two-axis nine-slices on the 512 x 512 grid: (region, border [left, right, top, bottom],
+# border px per texel, centre px per texel along x and y). Every border and the centre
+# exceed 64 texels in A and B, so each quad is cut along both axes.
+GRID_SETS = {"A": ((0, 0, 240, 220), (90, 70, 80, 75), 4, (3, 5)),
+             "B": ((0, 0, 240, 220), (90, 70, 80, 75), 16, (20, 28)),
+             "C": ((0, 0, 144, 144), (66, 70, 72, 65), 32, (48, 48))}
+GRID_ORIENTS = ["none", "flip-x", "flip-y", "both", "mirror", "rot180", "rot+90", "rot-90"]
+GRID_WINDOWS = ["corner cut", "junction", "centre cut"]
+
+
+def nine_axis(n, low, high, mb, mc, flipped, axis):
+    """Local segments (local px start, end, texel at start, at end) of one nine-slice axis,
+    from local 0 (the quad's first vertex side), as incant_2d::tessellate lays them out."""
+    if flipped:
+        low, high = high, low
+    centre = n - low - high
+    px = [0, low * mb, low * mb + centre * mc, low * mb + centre * mc + high * mb]
+    tx = [0, low, n - high, n]
+    if axis == "x":
+        t = [n - v for v in tx] if flipped else tx
+    else:
+        t = tx if flipped else [n - v for v in tx]
+    return [(px[k], px[k + 1], t[k], t[k + 1]) for k in range(3) if px[k] != px[k + 1]]
+
+
+def segment_point(segments, which):
+    """Local px of a window point on one axis: the first span cut inside the first or
+    second segment, or the end of the first segment (the junction)."""
+    if which == "junction":
+        return segments[0][1]
+    a, b, ta, tb = segments[0 if which == "corner cut" else 1]
+    if abs(tb - ta) > 64:
+        return a + Fraction(64 * (b - a), abs(tb - ta))
+    return b
+
+
+# Screen offset from the entity translation T (board px, y down) of local point (lx, ly)
+# for each orientation, as (sx_x, sx_y, sy_x, sy_y): screen = T + (sx_x lx + sx_y ly, sy_x lx + sy_y ly).
+ORIENT_MAP = {"none": (1, 0, 0, -1), "flip-x": (1, 0, 0, -1), "flip-y": (1, 0, 0, -1), "both": (1, 0, 0, -1),
+              "mirror": (-1, 0, 0, -1), "rot180": (-1, 0, 0, 1), "rot+90": (0, -1, -1, 0), "rot-90": (0, 1, 1, 0)}
+
+
+def grid_case(name, set_name, orient, window, d, tint=1.0):
+    region, (left, right, top, bottom), mb, (mcx, mcy) = GRID_SETS[set_name]
+    flip_x, flip_y = orient in ("flip-x", "both"), orient in ("flip-y", "both")
+    xs = nine_axis(region[2], left, right, mb, mcx, flip_x, "x")
+    ys = nine_axis(region[3], bottom, top, mb, mcy, flip_y, "y")
+    lx, ly = segment_point(xs, window), segment_point(ys, window)
+    a, b, c, e = ORIENT_MAP[orient]
+    target = Fraction(129, 2) + d  # pixel centre 64.5 of a 128 px board
+    tx, ty = target - (a * lx + b * ly), target - (c * lx + e * ly)
+    size = (xs[-1][1], ys[-1][1])
+    corners = [(tx + a * x + b * y, ty + c * x + e * y) for x in (0, size[0]) for y in (0, size[1])]
+
+    def screen_segments(segments, along_local):
+        # Which screen axis this texture axis follows, and its segments in screen order.
+        if along_local == "x":
+            k_x, k_y = a, c
+        else:
+            k_x, k_y = b, e
+        axis, sign, origin = ("x", k_x, tx) if k_x else ("y", k_y, ty)
+        out = []
+        for s0, s1, t0, t1 in segments:
+            p0, p1 = origin + sign * s0, origin + sign * s1
+            out.append((p0, p1, t0, t1) if p0 < p1 else (p1, p0, t1, t0))
+        return axis, sorted(out)
+
+    u_axis, u_segments = screen_segments(xs, "x")
+    v_axis, v_segments = screen_segments(ys, "y")
+    return {"name": name, "set": set_name, "orient": orient, "window": window, "d": d, "tint": tint,
+            "region": region, "border": (left, right, top, bottom), "mb": mb, "flip_x": flip_x, "flip_y": flip_y,
+            "translation_px": (tx, ty), "size_px": size, "corners_px": corners,
+            "u": (u_axis, u_segments), "v": (v_axis, v_segments)}
+
+
+def grid_case_list():
+    cases = []
+    for set_name in "ABC":
+        orients = GRID_ORIENTS if set_name != "C" else ["none", "both", "mirror", "rot+90"]
+        offsets = [Fraction(0), Fraction(1, 256)] if set_name == "B" else [Fraction(0)]
+        for orient in orients:
+            for window in GRID_WINDOWS:
+                for k, d in enumerate(offsets):
+                    cases.append(grid_case(f"{set_name}:{orient}:{window}:{k}", set_name, orient, window, d))
+    for orient in ("none", "rot+90"):
+        cases.append(grid_case(f"B:{orient}:junction:translucent", "B", orient, "junction", Fraction(0), 0.5))
+    return cases
+
+
+# Where nothing else is drawn: windows avoid the long-row and long-column corridors,
+# and no case sprite touches another case's sprite or window or any board's view.
+CORRIDOR_Y = [400.0, -400.0, -800.0, 1200.0, 1600.0, 2000.0]
+CORRIDOR_X = [400.0, 800.0, 1600.0, 2000.0]
+VIEW_RECTS = [(-100.0, -120.0, 200.0, 220.0)] + [(cx - 80, cy - 80, cx + 80, cy + 80) for cx, cy in (
+    (0, 400), (400, 0), (0, -400), (0, -800), (0, 1200), (800, 0), (0, 1600), (0, 2000), (1600, 0), (2000, 0))]
+
+
+def pack_grid_cases(cases):
+    """Assigns each case a board centre (world m); deterministic first fit on a 25 m grid."""
+    def overlap(r, q):
+        return r[0] < q[2] and q[0] < r[2] and r[1] < q[3] and q[1] < r[3]
+
+    placed, sprites, windows = {}, [], []
+    candidates = [(x * 25.0, y * 25.0) for y in range(-150, 151) for x in range(-150, 151)]
+    for case in sorted(cases, key=lambda c: -(c["size_px"][0] * c["size_px"][1])):
+        xs = [float(p[0]) for p in case["corners_px"]]
+        ys = [float(p[1]) for p in case["corners_px"]]
+        for cx, cy in candidates:
+            window = (cx - 10, cy - 10, cx + 10, cy + 10)
+            if any(abs(cy - y) < 50 for y in CORRIDOR_Y) or any(abs(cx - x) < 50 for x in CORRIDOR_X):
+                continue
+            # Board px (64, 64) is the board centre; px grow right and down.
+            rect = (cx + (min(xs) - 64) / PPU - 10, cy - (max(ys) - 64) / PPU - 10,
+                    cx + (max(xs) - 64) / PPU + 10, cy - (min(ys) - 64) / PPU + 10)
+            if any(overlap(rect, q) for q in sprites + windows + VIEW_RECTS) or any(overlap(window, q) for q in sprites):
+                continue
+            placed[case["name"]] = (cx, cy)
+            sprites.append(rect)
+            windows.append(window)
+            break
+        else:
+            raise SystemExit(f"no room for grid case {case['name']}")
+    return placed
+
+
+GRID_CASES = grid_case_list()
+GRID_PLACES = pack_grid_cases(GRID_CASES)
+for _k, _case in enumerate(GRID_CASES):
+    _case["board"] = f"Q{_k}"
+    BOARD_SPEC[_case["board"]] = (*GRID_PLACES[_case["name"]], 128, 128)
+
+
+def board_grid(s):
+    for case in GRID_CASES:
+        b = case["board"]
+        s.plate(f"{b}:background", b, (-16, -16, 160, 160), BG)
+        tx, ty = case["translation_px"]
+        left, right, top, bottom = case["border"]
+        key = f"{b}:{case['name']}"
+        sizes = tuple(int(v) for v in case["size_px"])
+        common = dict(size=sizes, pivot=(0, 0), flip_x=case["flip_x"], flip_y=case["flip_y"],
+                      mode=nine((left, right, top, bottom), PPU / case["mb"]), tint=(1, 1, 1, case["tint"]), exact=True)
+        if case["orient"] == "mirror":
+            s.entity(f"{key}:parent", {"Transform": transform((wx(b, tx), wy(b, ty), 0.0), IDENT, (-1, 1, 1),
+                                                              exact=True)})
+            s.sprite(key, b, "grid512", list(case["region"]), None, local=(0.0, 0.0, 0.0), parent=f"{key}:parent",
+                     **common)
+        else:
+            angle = {"rot180": 180, "rot+90": 90, "rot-90": -90}.get(case["orient"], 0)
+            s.sprite(key, b, "grid512", list(case["region"]), None, local=(wx(b, tx), wy(b, ty), 0.0), angle=angle,
+                     **common)
+        s.meta[key].update(kind="span2d", set=case["set"], orient=case["orient"], window=case["window"],
+                           d=rational(case["d"]), decode=case["tint"] == 1, region=list(case["region"]),
+                           u={"axis": case["u"][0], "segments": [[rational(v) for v in seg[:2]] + list(seg[2:])
+                                                                 for seg in case["u"][1]]},
+                           v={"axis": case["v"][0], "segments": [[rational(v) for v in seg[:2]] + list(seg[2:])
+                                                                 for seg in case["v"][1]]})
+
+
 def occluder_gltf(models):
     """One emissive quad: board C, logical x 252..300, y 86..118, z = 1 (in front of z = 0)."""
     x0, x1, y0, y1 = wx("C", 252), wx("C", 300), wy("C", 118), wy("C", 86)
@@ -1036,6 +1232,32 @@ SHOTS = ([(f"pp-{b}", (320, 180)) for b in BOARDS] + [(f"pp-{b}", (960, 540)) fo
          + [("roll7-G", (960, 540)), ("pp-H", (1280, 640)), ("pp-I", (1024, 640)), ("pp-J", (1024, 640))]
          + [(f"pp-{b}", (1024, 1024)) for b in "KLMN"] + [("pp-N-hd", (1920, 1080)), ("roll7-N", (1024, 1024))])
 SPAN_SHOTS = [(f"pp-{b}", (1024, 1024)) for b in "KLMN"] + [("pp-N-hd", (1920, 1080))]
+# Round five: short-span boards at 1024 x 1024 and 1920 x 1080, and one 128 x 128 view
+# per two-axis nine-slice case (set C also at 96 x 96, whose 3 m half-width is not
+# dyadic; one set B junction also through a 7-degree rolled camera).
+for _b in ("R1", "R2", "S1", "S2"):
+    CAMERAS[f"pp-{_b}"] = {"board": _b, "offset": (0, 0), "roll": 0,
+                           "projection": dict(PIXEL, reference_resolution=[1024, 1024])}
+    CAMERAS[f"pp-{_b}-hd"] = {"board": _b, "offset": (0, 0), "roll": 0,
+                              "projection": dict(PIXEL, reference_resolution=[1920, 1080])}
+SHORT_SHOTS = [(f"pp-{b}", (1024, 1024)) for b in ("R1", "R2", "S1", "S2")]
+SHOTS += SHORT_SHOTS + [(f"pp-{b}-hd", (1920, 1080)) for b in ("R1", "R2", "S1", "S2")]
+GRID_SHOTS, GRID_RESIZE_SHOTS = [], []
+for _case in GRID_CASES:
+    _b = _case["board"]
+    CAMERAS[f"pp-{_b}"] = {"board": _b, "offset": (0, 0), "roll": 0,
+                           "projection": dict(PIXEL, reference_resolution=[128, 128])}
+    GRID_SHOTS.append((f"pp-{_b}", (128, 128)))
+    if _case["set"] == "B" and _case["tint"] == 1:
+        GRID_RESIZE_SHOTS.append((f"pp-{_b}", (128, 128)))
+    if _case["set"] == "C":
+        CAMERAS[f"pp96-{_b}"] = {"board": _b, "offset": (0, 0), "roll": 0,
+                                 "projection": dict(PIXEL, reference_resolution=[96, 96])}
+        GRID_SHOTS.append((f"pp96-{_b}", (96, 96)))
+    if _case["name"] == "B:none:junction:0":
+        CAMERAS[f"roll7-{_b}"] = {"board": _b, "offset": (0, 0), "roll": 7, "projection": ortho(8.0)}
+        GRID_SHOTS.append((f"roll7-{_b}", (128, 128)))
+SHOTS += GRID_SHOTS
 PROBE_CAMERAS = {}
 for _b in ("O", "P"):
     PROBE_CAMERAS[f"pp-{_b}"] = {"board": _b, "offset": (0, 0), "roll": 0,
@@ -1086,7 +1308,8 @@ def build(out, art, directions, probe=False):
     textures = {}
     for name, file in (("sheet", "sheet.png"), ("labels", "labels.png"), ("badge", "badge.png"),
                        ("tone16", "tone16.png"), ("ruler64", "ruler64.png"), ("strip", "strip4096.png"),
-                       ("strip8192", "strip8192.png"), ("column8192", "column8192.png"), ("labels4", "labels4.png")):
+                       ("strip8192", "strip8192.png"), ("column8192", "column8192.png"), ("labels4", "labels4.png"),
+                       ("grid512", "grid512.png")):
         result = importer(file, file, usage="color")
         reply = json.loads(result.stdout)
         textures[name] = reply["asset"]["id"]
@@ -1100,12 +1323,16 @@ def build(out, art, directions, probe=False):
     for tex, table in (("sheet", regions["sheet"]), ("labels", regions["labels"]), ("badge", regions["badge"]),
                        ("tone16", regions["tone16"]), ("ruler64", regions["ruler64"]),
                        ("strip", regions["strip4096"]), ("strip8192", regions["strip8192"]),
-                       ("column8192", regions["column8192"]), ("labels4", regions["labels4"])):
+                       ("column8192", regions["column8192"]), ("labels4", regions["labels4"]),
+                       ("grid512", regions["grid512"])):
         for key, rect in table.items():
             s.regions[(tex, key)] = rect
     for builder in (board_a, board_b, board_c, board_d, board_e, board_f, board_g, board_h, board_i, board_j,
                     board_k, board_l, board_m, board_n):
         builder(s)
+    for b in ("R1", "R2", "S1", "S2"):
+        board_short(s, b)
+    board_grid(s)
     if probe:
         for b in PROBE_SPEC:
             board_probe(s, b)
@@ -1218,12 +1445,19 @@ def main():
                         "source-free or live captures")
     parser.add_argument("--probe", action="store_true", help="add probe boards O and P and capture only their "
                         "four views (implies --static-only)")
+    parser.add_argument("--shots", help="comma-separated camera-name prefixes: capture only those static views "
+                        "(implies --static-only)")
     args = parser.parse_args()
     global SHOTS
     if args.probe:
         args.static_only = True
         BOARD_SPEC.update(PROBE_SPEC)
         SHOTS = PROBE_SHOTS
+    if args.shots:
+        args.static_only = True
+        SHOTS = [(n, size) for n, size in SHOTS if n.startswith(tuple(args.shots.split(",")))]
+        if not SHOTS:
+            raise SystemExit(f"no static view matches {args.shots}")
     global CLI, BINARY_JSON
     CLI = ROOT / "artifacts/tools" / BINARIES[args.binary][0]
     BINARY_JSON = ROOT / "artifacts/tools" / BINARIES[args.binary][1]
@@ -1246,7 +1480,8 @@ def main():
     metadata = json.loads(BINARY_JSON.read_text(encoding="utf-8"))
     summary = {"binary": args.binary, "binary_file": CLI.name, "binary_source_commit": metadata["source_commit"],
                "binary_sha256_start": start, "plan": {"repeats": args.repeats, "live": keys,
-                                                      "static_only": args.static_only, "probe": args.probe}}
+                                                      "static_only": args.static_only, "probe": args.probe,
+                                                      "shots": args.shots}}
 
     # 1. Static frames, each rendered `repeats` times.
     before = authored(project, journal)
@@ -1325,6 +1560,12 @@ def main():
         reimport("11-strip-restore", "strip8192.png", "strip8192.png")
         reimport("12-column-restore", "column8192.png", "column8192.png")
         shoot("12-column-restore", "pp-K", (1024, 1024))
+        # Round five: the grid with eight red rows below every region.
+        reimport("13-grid-tall", "grid512-tall.png", "grid512.png")
+        for name, size in GRID_RESIZE_SHOTS:
+            shoot("13-grid-tall", name, size)
+        reimport("14-grid-restore", "grid512.png", "grid512.png")
+        shoot("14-grid-restore", GRID_RESIZE_SHOTS[0][0], GRID_RESIZE_SHOTS[0][1])
         summary["reimport"] = steps
 
         # 3. Source-free: delete every source image and model, then render again.
@@ -1338,7 +1579,7 @@ def main():
         for name, size in ([(f"pp-{b}", (320, 180)) for b in BOARDS + ["F"]]
                            + [("pp-G", (1024, 640)), ("pp-H", (1280, 640)), ("pp-I", (1024, 640)),
                               ("pp-J", (1024, 640)), ("ortho3-E", (960, 540)), ("orthof-D", (960, 540)),
-                              ("roll7-B", (960, 540))] + SPAN_SHOTS):
+                              ("roll7-B", (960, 540))] + SPAN_SHOTS + SHORT_SHOTS + GRID_RESIZE_SHOTS):
             png = free_dir / f"{name}-{size[0]}x{size[1]}.png"
             screenshot(project, png, cams[name], size)
             free[f"{name}-{size[0]}x{size[1]}"] = sha(png)
