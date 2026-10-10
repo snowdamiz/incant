@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
+#[repr(C)]
 pub struct Transform {
     pub translation: [f64; 3],
     pub rotation: [f64; 4],
@@ -19,6 +20,7 @@ impl Default for Transform {
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
+#[repr(C)]
 pub struct Velocity {
     pub linear: [f64; 3],
 }

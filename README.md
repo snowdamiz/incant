@@ -12,6 +12,13 @@ The pinned Rust toolchain includes rustfmt, clippy and LLVM tools. On macOS, use
 Xcode and its command-line tools. Tauri also requires its native system prerequisites
 on Windows/Linux. `tools/cargo` finds the rustup toolchain when Cargo is not on PATH.
 
+Windows MSVC builds use the workspace's static CRT policy for executables and
+doctests. Tauri's separate CRT shim is disabled; `.cargo/config.toml` supplies
+the compiler setting, so run Cargo from this checkout. The editor still needs
+WebView2 and the Windows system libraries, but its CRT does not require a separate
+Visual C++ Redistributable installation. See the
+[Windows linking policy and verification](docs/spikes/windows-crt-policy.md).
+
 ```sh
 npm ci
 npm run build --workspace editor/ui

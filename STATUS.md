@@ -53,6 +53,41 @@ within its documented workload.
 
 ## Active work
 
+- CI build reuse now keeps the ignored GPU suite on the workspace feature graph,
+  combines macOS editor/headless builds and caches Rust dependencies. The measured
+  baseline is a 38m15s median PR check, dominated by compilation; repeated Windows
+  npm archives consumed 8.91 GiB. Local checks pass 339 Rust tests, all 44 exact
+  baseline GPU tests, 387 UI tests, 15 tool tests, combined packaging and public
+  gameplay probes. The final GPU pass compiles nothing. Hosted cold/warm timing
+  remains pending; all platform/test coverage and open device/license gates stay
+  in force. See [CI evidence](docs/spikes/ci-build-performance.md).
+
+- Windows MSVC compilation and doctests now share Cargo's static CRT policy;
+  Tauri's package-local shim is disabled after it shadowed the real runtime in
+  an unrelated executable doctest. Full-workspace doc coverage remains enabled.
+  The shipping guard records the CRT policy and Windows CI checks distributed
+  executables for CRT DLL imports. Local workspace tests (including all five
+  runtime doctests), editor Clippy and tool tests pass. Native Windows verification
+  remains pending the updated hosted job. See [CRT policy evidence](docs/spikes/windows-crt-policy.md).
+
+- The native runtime now lends actual Transform/Velocity numeric table columns
+  through an exclusive synchronous scope with separate stable IDs. Direct writes,
+  table reallocation, hierarchy/changed-tick publication, caller-owned undo and
+  error/unwind cleanup pass focused tests; schemas/SDK remain unchanged and
+  WASM/Android/iOS simulator compilation passes. Foreign script hosts, gameplay
+  migration and performance/device gates remain open. See
+  [numeric column evidence](docs/spikes/runtime-numeric-columns.md).
+
+- The runtime has a reusable shipping-profile build/package command with fat LTO,
+  one codegen unit, abort-on-panic and separately archived crash symbols. A real
+  packaged macOS runner passed source-free cooked-scene execution, SIGABRT/no-unwind
+  verification and matching dSYM UUID checks. Tool tests, focused Clippy and
+  runtime/cook tests pass; the portable profile compiles for wasm, Android and
+  iOS simulator. Linux/PDB packaging and execution await the updated desktop CI.
+  PGO, export migration, mobile/web symbol packaging, Device Farm/performance
+  measurements and phase gates remain open. See
+  [shipping profile evidence](docs/spikes/shipping-runtime-profile.md).
+
 - The native runtime now stages bounded entity lifecycle batches between steps:
   spawn/despawn, reparent and Velocity component additions/removals. A rejected
   batch preserves world state and the submitted commands. Hierarchy checking is
@@ -100,9 +135,10 @@ within its documented workload.
   systems/script bridge and saves off per-tick project cloning and JSON. Existing
   feature tests remain valid for their old implementation, not proof of this
   migration. Claude's editor redesign must also bound large collections.
-  Native/browser/Wasm script hosts, physics variants, shader pre-warming, shipping
-  profile/profiling, reference-phone PR gates and per-scene CRDT scaling remain
-  open. The new device/performance targets have not been passed or waived.
+  Native/browser/Wasm script hosts, physics variants, shader pre-warming,
+  PGO/profiling, mobile symbol packaging, reference-phone PR gates and per-scene
+  CRDT scaling remain open. The new device/performance targets have not been passed
+  or waived.
 
 - Orthographic camera projection is implemented through shared component commands,
   renderer geometry, parallel material view rays, light clusters and directional

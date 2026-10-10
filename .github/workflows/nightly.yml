@@ -1,7 +1,7 @@
 name: Six platform probes
 on:
   pull_request:
-    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_types/**', 'crates/incant_runtime/**', 'crates/incant_cook/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', 'Cargo.lock', '.github/workflows/nightly.yml']
+    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_types/**', 'crates/incant_runtime/**', 'crates/incant_cook/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', '.cargo/**', 'Cargo.lock', '.github/workflows/nightly.yml']
   schedule: [{cron: '30 6 * * *'}]
   workflow_dispatch:
 permissions:
@@ -22,6 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - run: rustup show
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
+          cache-bin: 'false'
+          # PR caches stay in their merge-ref scope; forks only restore.
+          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
       - run: cargo build -p incant_platform_smoke --release --locked
       - run: cargo test -p incant_runtime -p incant_cook --release --locked
       - shell: bash
@@ -41,6 +47,12 @@ jobs:
         with: {node-version: '22.23.3', cache: npm}
       - run: npm ci
       - run: rustup show
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
+          cache-bin: 'false'
+          # PR caches stay in their merge-ref scope; forks only restore.
+          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
       - run: cargo install wasm-bindgen-cli --version 0.2.126 --locked
       - run: tools/platforms/web.sh
       - run: cargo check -p incant_audio --target wasm32-unknown-unknown --locked
@@ -55,6 +67,12 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - run: rustup show
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
+          cache-bin: 'false'
+          # PR caches stay in their merge-ref scope; forks only restore.
+          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
       - run: tools/platforms/ios.sh simulator
       - run: cargo check -p incant_audio --features device --target aarch64-apple-ios-sim --locked
       - run: cargo check -p incant_runtime --target aarch64-apple-ios-sim --locked
@@ -71,6 +89,12 @@ jobs:
       - uses: gradle/actions/setup-gradle@0b6dd653ba04f4f93bf581ec31e66cbd7dcb644d
         with: {gradle-version: '8.11.1'}
       - run: rustup show
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
+          cache-bin: 'false'
+          # PR caches stay in their merge-ref scope; forks only restore.
+          save-if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
       - run: cargo install cargo-ndk --version 4.1.2 --locked
       - name: Install SDK components already licensed on the hosted runner
         run: |
