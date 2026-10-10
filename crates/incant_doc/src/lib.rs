@@ -7,6 +7,7 @@ mod physics;
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
+pub use incant_input::InputActions;
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
 pub use physics::{AngularVelocity, BodyMotion, Collider, ColliderShape, RigidBody};
 use schemars::JsonSchema;
@@ -37,6 +38,9 @@ pub struct Project {
 #[serde(deny_unknown_fields)]
 pub struct ProjectSettings {
     pub tick_rate: u32,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    #[schemars(length(max = 64))]
+    pub input_actions: InputActions,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -199,7 +203,10 @@ impl Project {
             scenes: BTreeMap::new(),
             assets: BTreeMap::new(),
             scripts: BTreeMap::new(),
-            settings: ProjectSettings { tick_rate: 60 },
+            settings: ProjectSettings {
+                tick_rate: 60,
+                input_actions: InputActions::new(),
+            },
             memory: BTreeMap::new(),
         }
     }
@@ -274,6 +281,9 @@ impl Project {
         }
         if !(1..=240).contains(&self.settings.tick_rate) {
             issue("/settings/tick_rate".into(), "must be between 1 and 240");
+        }
+        if let Err(error) = incant_input::validate_actions(&self.settings.input_actions) {
+            issue("/settings/input_actions".into(), &error.to_string());
         }
         for (id, asset) in &self.assets {
             if id != &asset.id {

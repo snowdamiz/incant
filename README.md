@@ -138,6 +138,16 @@ reconstruct held controls and gesture timing at the saved tick without rerunning
 gameplay. Ordinary save loading resets physical devices. See
 [input semantics and evidence](docs/spikes/game-input.md).
 
+Named controls live in `settings.input_actions` and are replaced through the
+undoable `set_input_actions` command. `api.input().actions.jump` exposes an action's
+`value`, `active`, `pressed` and `released` state. Button, one-axis and two-axis
+actions combine keyboard, mouse-button, gamepad and touch-gesture bindings, with
+analog thresholds and dead zones. Gameplay can rebind through the same command;
+logical saves preserve those runtime bindings without editing the authored file.
+See [action mapping](docs/spikes/input-actions.md), or run
+`python3 tools/probes/game-actions.py artifacts/actions-example` for a strict
+TypeScript game that authors, undoes, rebinds, saves and resumes controls.
+
 `play --assertions FILE` checks runtime, behavior and input state at absolute game
 ticks, including the initial or restored checkpoint. For example:
 

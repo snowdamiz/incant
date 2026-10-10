@@ -47,7 +47,7 @@ pub enum SaveError {
     Clock,
     #[error(transparent)]
     Timer(#[from] super::TimerError),
-    #[error("game-save loading cannot change project identity, settings or resource manifests")]
+    #[error("game-save loading cannot change project identity, tick rate or resource manifests")]
     Manifest,
     #[error(transparent)]
     Json(#[from] serde_json::Error),
@@ -63,7 +63,9 @@ pub(super) fn hash(bytes: &[u8]) -> String {
 pub(super) fn manifest(project: &Project) -> Result<String, serde_json::Error> {
     Ok(hash(&serde_json::to_vec(&(
         &project.id,
-        &project.settings,
+        // Input bindings can be changed by gameplay through the command bus.
+        // Keep the historical settings shape for saves from before bindings.
+        serde_json::json!({"tick_rate": project.settings.tick_rate}),
         &project.assets,
         &project.scripts,
     ))?))

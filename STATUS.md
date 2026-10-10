@@ -53,6 +53,19 @@ within its documented workload.
 
 ## Active work
 
+- Named button/axis input actions and runtime rebinding now use validated project
+  settings and the shared command bus. Ordered physical transitions preserve
+  short taps, combine alternative bindings, apply dead zones and normalize
+  diagonal movement. Eight new tests, 212 total Rust tests, 315 UI tests/build,
+  five tool tests, Clippy, contracts and native build/package pass. The strict TS
+  public probe verifies Undo/Redo, invalid rollback, exact saved rebinding and
+  expected movement; existing save/input/timer probes pass. Local input-only p95
+  is 0.0025 ms for the typical workload and 2.8033 ms at the configured maximum.
+  Integration with audio and merged timers passes 232 Rust tests, the five public
+  gameplay probes, contracts, Clippy and native packaging. Updated hosted checks,
+  device adapters, haptics and the graphical binding editor remain open.
+  See [input actions](docs/spikes/input-actions.md).
+
 - Cooked WAV/OGG audio, typed sources/buses/listeners, Kira mixing/spatialization,
   bounded native/offline streaming and script-driven WAV export are implemented.
   The public import/RPC/strict-TypeScript probe works after deleting source files;
@@ -97,8 +110,9 @@ within its documented workload.
   files. All 190 Rust, 315 UI and five tool tests pass, along with Clippy, generated
   contracts and the native build/package. macOS normalized-input smoke execution
   passes. All twelve hosted checks passed at `0021738`; PR #27 merged as `72fb2bd`
-  with the reviewed tree unchanged. Live OS/browser adapters, action
-  mapping and physical-device verification remain open. No computer use or local
+  with the reviewed tree unchanged. Action mapping is implemented in the
+  increment above; live OS/browser adapters and physical-device verification
+  remain open. No computer use or local
   captures occurred. See [game input](docs/spikes/game-input.md).
 
 - Versioned logical game saves preserve runtime scenes, hierarchy, spawned/deleted
@@ -405,8 +419,10 @@ director decisions and human-owned production prerequisites remain explicit.
 The director paused computer use and screen capture again on 2026-10-09. No new
 native/browser operations or captures are authorized while that pause remains.
 Code, numerical replay, unit tests and hosted build/test work continue.
-Compound-collider PR #25 is a separate draft pending its final native appearance
-review; it is not part of the game-save baseline yet.
+Compound-collider PR #25 remains a separate draft at `18e3406`. All twelve hosted
+checks pass. Claude still needs to review the native Inspector at normal and
+minimum widths, including the 64-part case; this is paused under the current
+screen-work instruction. The compound changes have not merged into main.
 
 ## External prerequisites still required
 

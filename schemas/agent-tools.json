@@ -24,6 +24,14 @@
     "name": "doc_patch",
     "parameters": {
       "$defs": {
+        "ActionGesture": {
+          "enum": [
+            "tap",
+            "long_press",
+            "swipe"
+          ],
+          "type": "string"
+        },
         "Asset": {
           "additionalProperties": false,
           "properties": {
@@ -320,6 +328,27 @@
                 "text"
               ],
               "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "description": "Replace named gameplay bindings through the same undoable transaction.",
+              "properties": {
+                "actions": {
+                  "additionalProperties": {
+                    "$ref": "#/$defs/InputAction"
+                  },
+                  "type": "object"
+                },
+                "op": {
+                  "const": "set_input_actions",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "actions"
+              ],
+              "type": "object"
             }
           ]
         },
@@ -359,6 +388,432 @@
             "components"
           ],
           "type": "object"
+        },
+        "GamepadAxis": {
+          "enum": [
+            "left_x",
+            "left_y",
+            "right_x",
+            "right_y"
+          ],
+          "type": "string"
+        },
+        "GamepadButton": {
+          "enum": [
+            "south",
+            "east",
+            "west",
+            "north",
+            "left_shoulder",
+            "right_shoulder",
+            "left_trigger",
+            "right_trigger",
+            "select",
+            "start",
+            "guide",
+            "left_stick",
+            "right_stick",
+            "dpad_up",
+            "dpad_down",
+            "dpad_left",
+            "dpad_right"
+          ],
+          "type": "string"
+        },
+        "InputAction": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "bindings": {
+                  "items": {
+                    "$ref": "#/$defs/InputBinding"
+                  },
+                  "maxItems": 16,
+                  "type": "array"
+                },
+                "kind": {
+                  "const": "button",
+                  "type": "string"
+                },
+                "threshold": {
+                  "default": 0.5,
+                  "format": "double",
+                  "type": "number"
+                }
+              },
+              "required": [
+                "kind",
+                "bindings"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "bindings": {
+                  "items": {
+                    "$ref": "#/$defs/InputBinding"
+                  },
+                  "maxItems": 16,
+                  "type": "array"
+                },
+                "dead_zone": {
+                  "default": 0.15,
+                  "format": "double",
+                  "type": "number"
+                },
+                "kind": {
+                  "const": "axis1",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "bindings"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "bindings": {
+                  "items": {
+                    "$ref": "#/$defs/InputBinding"
+                  },
+                  "maxItems": 16,
+                  "type": "array"
+                },
+                "dead_zone": {
+                  "default": 0.15,
+                  "format": "double",
+                  "type": "number"
+                },
+                "kind": {
+                  "const": "axis2",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "bindings"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "InputBinding": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "$ref": "#/$defs/KeyCode"
+                },
+                "scale": {
+                  "default": [
+                    1.0,
+                    0.0
+                  ],
+                  "items": {
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": {
+                  "const": "key",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "code"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "button": {
+                  "$ref": "#/$defs/MouseButton"
+                },
+                "scale": {
+                  "default": [
+                    1.0,
+                    0.0
+                  ],
+                  "items": {
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": {
+                  "const": "mouse_button",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "button"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "button": {
+                  "$ref": "#/$defs/GamepadButton"
+                },
+                "id": {
+                  "format": "uint32",
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "scale": {
+                  "default": [
+                    1.0,
+                    0.0
+                  ],
+                  "items": {
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": {
+                  "const": "gamepad_button",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "id",
+                "button"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "axis": {
+                  "$ref": "#/$defs/GamepadAxis"
+                },
+                "id": {
+                  "format": "uint32",
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "scale": {
+                  "default": [
+                    1.0,
+                    0.0
+                  ],
+                  "items": {
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": {
+                  "const": "gamepad_axis",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "id",
+                "axis"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "format": "uint32",
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "invert_y": {
+                  "default": false,
+                  "type": "boolean"
+                },
+                "stick": {
+                  "$ref": "#/$defs/Stick"
+                },
+                "type": {
+                  "const": "gamepad_stick",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "id",
+                "stick"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "gesture": {
+                  "$ref": "#/$defs/ActionGesture"
+                },
+                "scale": {
+                  "default": [
+                    1.0,
+                    0.0
+                  ],
+                  "items": {
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": {
+                  "const": "gesture",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "gesture"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "KeyCode": {
+          "description": "Physical key positions. Text entry and IME composition are separate concerns.",
+          "enum": [
+            "KeyA",
+            "KeyB",
+            "KeyC",
+            "KeyD",
+            "KeyE",
+            "KeyF",
+            "KeyG",
+            "KeyH",
+            "KeyI",
+            "KeyJ",
+            "KeyK",
+            "KeyL",
+            "KeyM",
+            "KeyN",
+            "KeyO",
+            "KeyP",
+            "KeyQ",
+            "KeyR",
+            "KeyS",
+            "KeyT",
+            "KeyU",
+            "KeyV",
+            "KeyW",
+            "KeyX",
+            "KeyY",
+            "KeyZ",
+            "Digit0",
+            "Digit1",
+            "Digit2",
+            "Digit3",
+            "Digit4",
+            "Digit5",
+            "Digit6",
+            "Digit7",
+            "Digit8",
+            "Digit9",
+            "ArrowUp",
+            "ArrowDown",
+            "ArrowLeft",
+            "ArrowRight",
+            "Space",
+            "Enter",
+            "Escape",
+            "Tab",
+            "Backspace",
+            "Delete",
+            "Insert",
+            "Home",
+            "End",
+            "PageUp",
+            "PageDown",
+            "ShiftLeft",
+            "ShiftRight",
+            "ControlLeft",
+            "ControlRight",
+            "AltLeft",
+            "AltRight",
+            "MetaLeft",
+            "MetaRight",
+            "CapsLock",
+            "NumLock",
+            "ScrollLock",
+            "Pause",
+            "PrintScreen",
+            "ContextMenu",
+            "Backquote",
+            "Minus",
+            "Equal",
+            "BracketLeft",
+            "BracketRight",
+            "Backslash",
+            "Semicolon",
+            "Quote",
+            "Comma",
+            "Period",
+            "Slash",
+            "Numpad0",
+            "Numpad1",
+            "Numpad2",
+            "Numpad3",
+            "Numpad4",
+            "Numpad5",
+            "Numpad6",
+            "Numpad7",
+            "Numpad8",
+            "Numpad9",
+            "NumpadAdd",
+            "NumpadSubtract",
+            "NumpadMultiply",
+            "NumpadDivide",
+            "NumpadDecimal",
+            "NumpadEnter",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12"
+          ],
+          "type": "string"
+        },
+        "MouseButton": {
+          "enum": [
+            "left",
+            "right",
+            "middle",
+            "back",
+            "forward"
+          ],
+          "type": "string"
         },
         "Origin": {
           "enum": [
@@ -423,6 +878,13 @@
             "entities"
           ],
           "type": "object"
+        },
+        "Stick": {
+          "enum": [
+            "left",
+            "right"
+          ],
+          "type": "string"
         },
         "TextureUsage": {
           "enum": [

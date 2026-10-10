@@ -2,6 +2,10 @@ use incant_input::*;
 use serde_json::{Value, json};
 
 pub fn check() -> Result<Value, String> {
+    let actions: InputActions = serde_json::from_value(json!({
+        "forward":{"kind":"button","bindings":[{"type":"key","code":"KeyW"}]},
+        "steer":{"kind":"axis1","dead_zone":0.2,"bindings":[{"type":"gamepad_axis","id":0,"axis":"left_x"}]}
+    })).map_err(|e| e.to_string())?;
     let events = vec![
         InputEvent::Key {
             code: KeyCode::KeyW,
@@ -31,11 +35,11 @@ pub fn check() -> Result<Value, String> {
     }];
     let mut input = InputRuntime::default();
     input
-        .advance(&events, 1. / 60.)
+        .advance_mapped(&events, 1. / 60., &actions)
         .map_err(|e| e.to_string())?;
     let first = input.frame().clone();
     input
-        .advance(&movement, 1. / 60.)
+        .advance_mapped(&movement, 1. / 60., &actions)
         .map_err(|e| e.to_string())?;
     let (scale, rotation) = match &input.frame().gestures[..] {
         [
@@ -51,6 +55,9 @@ pub fn check() -> Result<Value, String> {
         || (rotation - std::f64::consts::FRAC_PI_2).abs() > 1e-12
         || !first.keyboard.held.contains(&KeyCode::KeyW)
         || first.gamepads[&0].left_stick[0] != 0.5
+        || !first.actions["forward"].pressed
+        || input.frame().actions["forward"].pressed
+        || (first.actions["steer"].value[0] - 0.375).abs() > 1e-12
     {
         return Err("physical input state assertion failed".into());
     }
@@ -60,22 +67,29 @@ pub fn check() -> Result<Value, String> {
     let replay = InputReplay::from_text(&clip, 1, 60).map_err(|e| e.to_string())?;
     let mut resumed = replay.initial_state();
     resumed
-        .advance(replay.events_at(2).map_err(|e| e.to_string())?, 1. / 60.)
+        .advance_mapped(
+            replay.events_at(2).map_err(|e| e.to_string())?,
+            1. / 60.,
+            &actions,
+        )
         .map_err(|e| e.to_string())?;
     if resumed.frame() != input.frame() {
         return Err("input history replay differs".into());
     }
     input
-        .advance(&[InputEvent::Focus { focused: false }], 1. / 60.)
+        .advance_mapped(&[InputEvent::Focus { focused: false }], 1. / 60., &actions)
         .map_err(|e| e.to_string())?;
     if !input.frame().keyboard.held.is_empty()
         || !input.frame().touches.is_empty()
         || input.frame().gamepads[&0].left_stick != [0., 0.]
+        || !input.frame().actions["forward"].released
+        || input.frame().actions["forward"].active
     {
         return Err("focus loss left active controls".into());
     }
     Ok(
         json!({"pinch_scale":scale,"pinch_rotation":rotation,"replay_equal":true,"focus_releases_controls":true,
+        "named_action_edges":true,"action_dead_zone":true,
         "scope":"normalized synthetic events; not a live device adapter"}),
     )
 }

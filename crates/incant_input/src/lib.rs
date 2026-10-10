@@ -1,5 +1,10 @@
 //! Bounded fixed-tick input processing. Device adapters and recordings use the
 //! same validated events; scripts see snapshots, never device or window handles.
+mod actions;
+pub use actions::{
+    ActionError, ActionGesture, ActionKind, ActionState, InputAction, InputActions, InputBinding,
+    Stick, validate_actions,
+};
 mod gestures;
 mod recording;
 mod types;
@@ -14,6 +19,8 @@ pub const MAX_TOUCHES: usize = 16;
 
 #[derive(Debug, Error, PartialEq)]
 pub enum InputError {
+    #[error(transparent)]
+    Actions(#[from] ActionError),
     #[error("input tick must be finite and between 1/240 and 1 seconds")]
     Step,
     #[error("input tick exceeds {MAX_EVENTS_PER_TICK} events")]
@@ -45,8 +52,28 @@ impl InputRuntime {
         &self.frame
     }
 
+    /// Seed named values after loading/seeking or changing bindings, without
+    /// inventing edges or advancing the physical-input clock.
+    pub fn map_actions(&mut self, actions: &InputActions) -> Result<(), InputError> {
+        validate_actions(actions)?;
+        self.frame.actions = actions::baseline(actions, &self.frame);
+        Ok(())
+    }
+
     /// An invalid packet changes no state, time, edges or gesture recognition.
     pub fn advance(&mut self, events: &[InputEvent], dt: f64) -> Result<&InputFrame, InputError> {
+        self.advance_mapped(events, dt, &InputActions::new())
+    }
+
+    /// Rebinding derives the new baseline from held physical controls, without
+    /// synthesizing a press. Ordered packet transitions retain even sub-tick taps.
+    pub fn advance_mapped(
+        &mut self,
+        events: &[InputEvent],
+        dt: f64,
+        actions: &InputActions,
+    ) -> Result<&InputFrame, InputError> {
+        validate_actions(actions)?;
         if !dt.is_finite() || !(1. / 240. ..=1.).contains(&dt) || self.time + dt <= self.time {
             return Err(InputError::Step);
         }
@@ -55,12 +82,17 @@ impl InputRuntime {
         }
         let previous_pair = gestures::pair(&self.frame.touches);
         let mut next = self.clone();
+        let mut mapped = actions::baseline(actions, &self.frame);
         next.time += dt;
         next.clear_edges();
+        actions::observe(actions, &next.frame, &mut mapped);
         for event in events {
             next.apply(event, dt)?;
+            actions::observe(actions, &next.frame, &mut mapped);
         }
         next.finish_gestures(previous_pair);
+        actions::observe(actions, &next.frame, &mut mapped);
+        next.frame.actions = mapped;
         *self = next;
         Ok(&self.frame)
     }

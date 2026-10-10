@@ -1,5 +1,47 @@
 {
   "$defs": {
+    "ActionKind": {
+      "enum": [
+        "button",
+        "axis1",
+        "axis2"
+      ],
+      "type": "string"
+    },
+    "ActionState": {
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "kind": {
+          "$ref": "#/$defs/ActionKind"
+        },
+        "pressed": {
+          "type": "boolean"
+        },
+        "released": {
+          "type": "boolean"
+        },
+        "value": {
+          "description": "Button/axis1 use X only; axis2 uses a unit disc. Button value is analog.",
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "active",
+        "pressed",
+        "released"
+      ],
+      "type": "object"
+    },
     "Buttons": {
       "properties": {
         "held": {
@@ -601,6 +643,12 @@
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
+    "actions": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ActionState"
+      },
+      "type": "object"
+    },
     "connected": {
       "items": {
         "format": "uint32",
@@ -660,6 +708,7 @@
     }
   },
   "required": [
+    "actions",
     "focused",
     "keyboard",
     "mouse",

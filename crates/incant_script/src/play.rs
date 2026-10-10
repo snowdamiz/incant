@@ -25,6 +25,8 @@ impl PlaySession {
         host.raycaster = Some(Arc::new(engine.raycaster()));
         host.character_mover = Some(Arc::new(engine.character_mover()));
         host.install_queries()?;
+        let mut input = incant_input::InputRuntime::default();
+        input.map_actions(&project.settings.input_actions)?;
         Ok(Self {
             host,
             authored_sha256: super::saves::hash(project.canonical_text()?.as_bytes()),
@@ -32,7 +34,7 @@ impl PlaySession {
             ticks: 0,
             elapsed_seconds: 0.,
             failed: false,
-            input: incant_input::InputRuntime::default(),
+            input,
             replay: None,
             bus: CommandBus::simulation(project.clone())?,
             engine,
@@ -75,7 +77,9 @@ impl PlaySession {
             self.ticks,
             self.project().settings.tick_rate,
         )?;
-        self.input = replay.initial_state();
+        let mut input = replay.initial_state();
+        input.map_actions(&self.project().settings.input_actions)?;
+        self.input = input;
         self.replay = Some(replay);
         Ok(())
     }
@@ -106,7 +110,8 @@ impl PlaySession {
             self.failed = true;
             return Err(ScriptError::InputLimit);
         }
-        self.input.advance(events, self.dt)?;
+        self.input
+            .advance_mapped(events, self.dt, &self.bus.project().settings.input_actions)?;
         match self.tick_inner() {
             Ok(count) => {
                 self.ticks += 1;

@@ -391,6 +391,10 @@ fn main() -> Result<()> {
                 json!(schemars::schema_for!(incant_input::InputEvent)),
             );
             registry.insert(
+                "InputActions".into(),
+                json!(schemars::schema_for!(incant_input::InputActions)),
+            );
+            registry.insert(
                 "InputFrame".into(),
                 json!(schemars::schema_for!(incant_input::InputFrame)),
             );
