@@ -190,7 +190,8 @@ migration. VM state/input save/restore/seek, live device adapters, remaining leg
 SDK systems, general exports and native phone execution remain open. Startup
 InputReplay seeking support does not imply session/VM seeking. Shipped embedding
 still requires host==target; the symbol audit supports Mach-O/ELF and explicitly
-lacks MSVC parser-symbol auditing. The existing native schedule/derived-hierarchy
-overflow limitation for huge finite component values remains documented in the
-[cooked-script follow-up](cooked-native-scripts.md). No physics/backend adoption,
+lacks MSVC parser-symbol auditing. The subsequent
+[numerical-boundary follow-up](native-numeric-boundaries.md) closes finite-value
+overflow during native steps and script hierarchy publication. Trusted native
+immediate writes retain their documented unchecked semantics. No physics/backend adoption,
 AOT, 100k-entity performance or reference-phone gate is claimed here.

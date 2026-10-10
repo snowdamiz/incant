@@ -1,0 +1,197 @@
+{
+  "status": "passed",
+  "host": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "trials": 3,
+  "browser_executed": true,
+  "browser": [
+    {
+      "trial": 0,
+      "browser": "156.0.8078.4",
+      "streams": [
+        {
+          "scenario": 0,
+          "file": "browser-0.bin",
+          "bytes": 2714667
+        }
+      ]
+    },
+    {
+      "trial": 1,
+      "browser": "156.0.8078.4",
+      "streams": [
+        {
+          "scenario": 0,
+          "file": "browser-1.bin",
+          "bytes": 2714667
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "browser": "156.0.8078.4",
+      "streams": [
+        {
+          "scenario": 0,
+          "file": "browser-2.bin",
+          "bytes": 2714667
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "native-1-0.bin",
+      "trial": 0,
+      "workers": 1,
+      "mode": "native-parallel"
+    },
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "native-4-0.bin",
+      "trial": 0,
+      "workers": 4,
+      "mode": "native-parallel"
+    },
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "native-4-1.bin",
+      "trial": 1,
+      "workers": 4,
+      "mode": "native-parallel"
+    },
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "native-1-1.bin",
+      "trial": 1,
+      "workers": 1,
+      "mode": "native-parallel"
+    },
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "native-1-2.bin",
+      "trial": 2,
+      "workers": 1,
+      "mode": "native-parallel"
+    },
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "native-4-2.bin",
+      "trial": 2,
+      "workers": 4,
+      "mode": "native-parallel"
+    },
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "browser-0.bin",
+      "trial": 0,
+      "workers": 0,
+      "mode": "browser-wasm-serial"
+    },
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "browser-1.bin",
+      "trial": 1,
+      "workers": 0,
+      "mode": "browser-wasm-serial"
+    },
+    {
+      "bodies": 35,
+      "frames": 641,
+      "record_bytes": 121,
+      "max_sleeping": 32,
+      "wake_transitions": 16,
+      "events": 4,
+      "bytes": 2714667,
+      "sha256": "a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c",
+      "file": "browser-2.bin",
+      "trial": 2,
+      "workers": 0,
+      "mode": "browser-wasm-serial"
+    }
+  ],
+  "source_sha256": {
+    "crates/incant_runtime/src/scene.rs": "bcd08b83a931615aafde6cef79d80b16f2a717de4e271f96ea4b8ebbc02bd2b8",
+    "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+    "crates/incant_runtime/src/lib.rs": "a88f0754c6ce3af921cb070553e03af8b02383a27b5c37e166ef384ca72bcd4c",
+    "crates/incant_runtime/src/save.rs": "f05f56b7833b95050f630209e4f18f063109141d9d109a3b13ba16de3e4a58cb",
+    "crates/incant_runtime/src/binary.rs": "02f8688a0969606c80aac0a46b35772848dea308f76cd2baa2fba19a483c3fde",
+    "crates/incant_runtime/src/world.rs": "4921fc3bdf0f51632f518aeecc6b4916fcf0898a8f9c4bea20a3cc8c90521e05",
+    "crates/incant_runtime/src/commands.rs": "cd2bb03392b60f91c459c75da5ff77e9717b5f97e606bbfe3fba94617679082c",
+    "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+    "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+    "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+    "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+    "crates/incant_physics_runtime/src/lib.rs": "6f6195522e75587d678a9e73dc264802d88fd19f8bf02003425c8f5b0dcb506e",
+    "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+    "crates/incant_physics_runtime/src/queries.rs": "94e7c8aa5d56977036e4161f8637b5e8221e95312c4df8fe3f9b81b382986668",
+    "crates/incant_physics_runtime/src/character.rs": "a46c7ece3103ce7c8ddbd80d60b1668782028e93c626b655d6f4bab175672a92",
+    "Cargo.lock": "bcfb47a834910c7c20e4dcbedda43f6d5b06bcfc30390aacb3ff7770e99bde98",
+    "tools/probes/native-physics/Cargo.lock": "2cccf7bc3f0d571712e470fdbc041d594b19a87eebca7cd8df3b4624a5c2488e",
+    "tools/probes/native-physics/Cargo.toml": "2422cfe646cc18cb1b0df4cb1354f1a253f305ada22041b26cfc678aea4c6838",
+    "tools/probes/native-physics/src/lib.rs": "854d02f4e233a03b5752f7b300065607e4ad645b43f053ff0067f3e1cc3615ae",
+    "tools/probes/native-physics/src/main.rs": "c53061a63b4b869c8000e915742f6bdf2e588c4e23d9012b04f7ad00fa55e0cf",
+    "tools/probes/native-physics/run.py": "599772e7b65af1380c8a99c001e3e29a50f65223af1c14428fe4047022300930",
+    "tools/probes/native-physics/browser.mjs": "ca02d571378e7713c792836b87aa5410ba5180f66fdc653eb8afc108947b6792"
+  },
+  "scope": "native cooked ECS full public rigid-body state; original native serial/joint solver proof remains separate; no timings, phone, backend-adoption or hidden solver-state claim"
+}

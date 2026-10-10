@@ -1,4 +1,4 @@
-//! Version 1, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1/2, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,12 +7,12 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 1;
+const VERSION: u32 = 2;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
 const MAX_RECORD: usize = 128;
-pub(crate) const MAX_SCENE_BYTES: usize = HEADER + MAX_ENTITIES * MAX_RECORD;
+pub(crate) const MAX_SCENE_BYTES: usize = 128 * 1024 * 1024;
 
 impl CookedScene {
     pub fn to_bytes(&self) -> Vec<u8> {
@@ -24,7 +24,7 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        bytes.extend(VERSION.to_le_bytes());
+        bytes.extend((if self.physics.is_empty() { 1 } else { VERSION }).to_le_bytes());
         bytes.extend(self.tick_rate.to_le_bytes());
         bytes.extend(self.id.0);
         bytes.extend((self.entities.len() as u32).to_le_bytes());
@@ -61,6 +61,12 @@ impl CookedScene {
                 }
             }
         }
+        if !self.physics.is_empty() {
+            bytes.extend((self.physics.len() as u32).to_le_bytes());
+            for declaration in &self.physics {
+                crate::physics_binary::write(&mut bytes, declaration);
+            }
+        }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
         let checksum = checksum(&bytes);
@@ -77,7 +83,7 @@ impl CookedScene {
             return Err(SceneError::Invalid("magic"));
         }
         let version = header.u32()?;
-        if version != VERSION {
+        if version != 1 && version != VERSION {
             return Err(SceneError::Version(version));
         }
         let tick_rate = header.u32()?;
@@ -87,7 +93,7 @@ impl CookedScene {
         if count > MAX_ENTITIES
             || size != bytes.len() - HEADER
             || size < count * MIN_RECORD
-            || size > count * MAX_RECORD
+            || (version == 1 && size > count * MAX_RECORD)
         {
             return Err(SceneError::Invalid("record count or payload size"));
         }
@@ -129,6 +135,24 @@ impl CookedScene {
                 velocity,
             });
         }
+        let mut physics = Vec::new();
+        if version == 2 {
+            let physics_count = reader.u32()? as usize;
+            if physics_count == 0 || physics_count > count || physics_count > reader.0.len() / 52 {
+                return Err(SceneError::Invalid("physics record count"));
+            }
+            physics.reserve(physics_count);
+            for _ in 0..physics_count {
+                let record = crate::physics_binary::read(&mut reader)?;
+                if physics
+                    .last()
+                    .is_some_and(|p: &crate::CookedPhysics| p.entity >= record.entity)
+                {
+                    return Err(SceneError::Invalid("noncanonical physics order"));
+                }
+                physics.push(record);
+            }
+        }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
         }
@@ -141,7 +165,7 @@ impl CookedScene {
                 entities[i].parent = Some(id);
             }
         }
-        Self::new(id, tick_rate, entities)
+        Self::new(id, tick_rate, entities)?.with_physics(physics)
     }
 }
 
@@ -152,9 +176,12 @@ fn checksum(bytes: &[u8]) -> [u8; 32] {
     hash.finalize().into()
 }
 
-struct Reader<'a>(&'a [u8]);
+pub(crate) struct Reader<'a>(&'a [u8]);
 impl Reader<'_> {
-    fn array<const N: usize>(&mut self) -> Result<[u8; N], SceneError> {
+    pub(crate) fn byte(&mut self) -> Result<u8, SceneError> {
+        Ok(self.array::<1>()?[0])
+    }
+    pub(crate) fn array<const N: usize>(&mut self) -> Result<[u8; N], SceneError> {
         let part = self
             .0
             .get(..N)
@@ -164,10 +191,10 @@ impl Reader<'_> {
         self.0 = &self.0[N..];
         Ok(array)
     }
-    fn u32(&mut self) -> Result<u32, SceneError> {
+    pub(crate) fn u32(&mut self) -> Result<u32, SceneError> {
         Ok(u32::from_le_bytes(self.array()?))
     }
-    fn floats<const N: usize>(&mut self) -> Result<[f64; N], SceneError> {
+    pub(crate) fn floats<const N: usize>(&mut self) -> Result<[f64; N], SceneError> {
         let mut values = [0.; N];
         for value in &mut values {
             *value = f64::from_le_bytes(self.array()?);

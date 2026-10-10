@@ -1,7 +1,6 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 mod audio;
 mod camera;
-mod collider_shapes;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;

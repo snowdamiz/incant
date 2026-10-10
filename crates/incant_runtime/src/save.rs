@@ -24,6 +24,8 @@ pub enum SaveError {
     Scene(#[from] SceneError),
     #[error("native world save belongs to a different scene or tick rate")]
     WorldMismatch,
+    #[error("physics world save/restore is not supported")]
+    PhysicsUnsupported,
 }
 
 impl NativeWorld {
@@ -34,6 +36,9 @@ impl NativeWorld {
     /// The schema versions/component masks come from the nested cooked scene.
     /// Invalid numeric state fails without changing the running world.
     pub fn save_bytes(&self) -> Result<Vec<u8>, SaveError> {
+        if self.physics_failed || self.physics_used {
+            return Err(SaveError::PhysicsUnsupported);
+        }
         let entities = self
             .entities
             .iter()
@@ -89,6 +94,9 @@ impl NativeWorld {
             return Err(SaveError::Integrity);
         }
         let scene = CookedScene::from_bytes(&bytes[HEADER..])?;
+        if !scene.physics().is_empty() {
+            return Err(SaveError::PhysicsUnsupported);
+        }
         let mut world = Self::new(scene);
         world.tick = tick;
         Ok(world)
@@ -98,6 +106,9 @@ impl NativeWorld {
     /// A malformed, unsupported or different-world save leaves it untouched.
     /// External script hosts and command buffers are not restored by this API.
     pub fn restore_bytes(&mut self, bytes: &[u8]) -> Result<(), SaveError> {
+        if self.physics_failed || self.physics_used {
+            return Err(SaveError::PhysicsUnsupported);
+        }
         let candidate = Self::from_save_bytes(bytes)?;
         if candidate.scene_id() != self.scene_id() || candidate.tick_rate != self.tick_rate {
             return Err(SaveError::WorldMismatch);

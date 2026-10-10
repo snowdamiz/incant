@@ -1,0 +1,307 @@
+{
+  "passed": true,
+  "target": "aarch64-apple-darwin",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "codegen": {
+    "incant_assets_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "debuginfo": "2",
+      "split-debuginfo": "packed"
+    },
+    "incant_audio_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "debuginfo": "2",
+      "split-debuginfo": "packed"
+    },
+    "cooked_audio": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "debuginfo": "2",
+      "split-debuginfo": "packed",
+      "lto": "fat"
+    }
+  },
+  "symbol_identity": {
+    "format": "Mach-O/dSYM",
+    "uuids": {
+      "arm64": "89fd95b9-7acf-3a74-b88d-4765946c0e39"
+    }
+  },
+  "player_sha256": "52125cdd829c2a9de317bcd9c6b18c43e62ef144138b10c393d8fb612330e246",
+  "player_bytes": 585072,
+  "headless_sha256": "058ad5d04b1eccf6729873968b37bff1060a83f5f400bce51c5c6340f96c25ad",
+  "built_targets": [
+    "atomic_arena",
+    "bitflags",
+    "block_buffer",
+    "build-script-build",
+    "cfg_if",
+    "cooked_audio",
+    "cpufeatures",
+    "crossbeam_utils",
+    "crypto_common",
+    "digest",
+    "dyn_clone",
+    "errno",
+    "fastrand",
+    "generic_array",
+    "getrandom",
+    "glam",
+    "incant_assets_runtime",
+    "incant_audio_runtime",
+    "itoa",
+    "kira",
+    "libc",
+    "memchr",
+    "mint",
+    "once_cell",
+    "pastey",
+    "proc_macro2",
+    "quote",
+    "ref_cast",
+    "ref_cast_impl",
+    "rtrb",
+    "rustix",
+    "schemars",
+    "schemars_derive",
+    "serde",
+    "serde_core",
+    "serde_derive",
+    "serde_derive_internals",
+    "serde_json",
+    "sha2",
+    "syn",
+    "tempfile",
+    "thiserror",
+    "thiserror_impl",
+    "triple_buffer",
+    "typenum",
+    "unicode_ident",
+    "version_check",
+    "zmij"
+  ],
+  "public_command_imports": {
+    "tone.wav": {
+      "asset": {
+        "id": "01M4KYC6PHAY68H9M5PQCKBW70",
+        "kind": "audio",
+        "name": "tone",
+        "path": "tone.wav",
+        "sha256": "895bbb7dcd996159e69e5e56f2e6003a3d28a50b84e5d2c93b0c2fd552d7f4f0"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "channels": 2,
+        "dependencies": [
+          {
+            "path": "tone.wav",
+            "sha256": "4ca7a19ec2ba590d736fede622d89acfcbc6c060988e6f6fe43885eef8255e09"
+          }
+        ],
+        "duration_seconds": 0.5,
+        "frames": 24000,
+        "sample_rate": 48000
+      },
+      "revision": 1
+    },
+    "music.ogg": {
+      "asset": {
+        "id": "01M4KYC6QAWB9V2AMFWVQJBMXW",
+        "kind": "audio",
+        "name": "music",
+        "path": "music.ogg",
+        "sha256": "dc3c6e191132813ecf27244c3d45093115d6bbd742b82145b579c444583ba5e0"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "channels": 2,
+        "dependencies": [
+          {
+            "path": "music.ogg",
+            "sha256": "7ba839f62023b3b0dd3e7bf7c9da7bc905bf53f8c59a8d65bdaf6e0315596126"
+          }
+        ],
+        "duration_seconds": 0.5,
+        "frames": 24000,
+        "sample_rate": 48000
+      },
+      "revision": 2
+    }
+  },
+  "project_hash_before_delete": "a306fc90f68458d4c7f2d3991978afe30a43756dead32acc23b61dd06bfa4326",
+  "source_and_build_storage_deleted": true,
+  "read_only_cache": {
+    "dc3c6e191132813ecf27244c3d45093115d6bbd742b82145b579c444583ba5e0.json": "06ca052b058a54d9c7aeef368f433b2b9f7271a42de0076ceb44276eea831eca",
+    "895bbb7dcd996159e69e5e56f2e6003a3d28a50b84e5d2c93b0c2fd552d7f4f0.json": "8e7e32db5d5a430bb32119eabe5468f92d93acaae27a927f589f26e8ce0f63d4",
+    "4bec823bf765f9ff9114ae0c13540081740ae2aaa16c754dd47ca79a81916bc9.ipcm": "4bec823bf765f9ff9114ae0c13540081740ae2aaa16c754dd47ca79a81916bc9",
+    "1443195168415a5e5d3563cd98410751810552f6bd141110d04097ddd4eb3f60.ipcm": "1443195168415a5e5d3563cd98410751810552f6bd141110d04097ddd4eb3f60"
+  },
+  "runs": 64,
+  "audio_device_opened": false,
+  "batch_and_process_repeat_exact": true,
+  "results": [
+    {
+      "clip": "music.ogg",
+      "mode": "static",
+      "rate": 0.25,
+      "pcm_sha256": "7b6494d28a2e55900564585a74cca3aab605f7940db091e3b5de0164f672c042",
+      "rms": 0.2589230118370836
+    },
+    {
+      "clip": "music.ogg",
+      "mode": "static",
+      "rate": 1,
+      "pcm_sha256": "7d2309f64a178533c2afce36145bce32bc3a86d6cdf7560cd8a4e5f5333ebe56",
+      "rms": 0.25904700160495914
+    },
+    {
+      "clip": "music.ogg",
+      "mode": "static",
+      "rate": 1.7,
+      "pcm_sha256": "e9270e56a2502dde36b56d4f1b31d0c6cceeb7cede2861610b2d98c386aa5993",
+      "rms": 0.25902899040013344
+    },
+    {
+      "clip": "music.ogg",
+      "mode": "static",
+      "rate": 4,
+      "pcm_sha256": "a22006ac16f3cc83a7026e2639dadeddc26d8b9b0a9283983ea1f6a40f104ab4",
+      "rms": 0.25905318208616984
+    },
+    {
+      "clip": "music.ogg",
+      "mode": "stream",
+      "rate": 0.25,
+      "pcm_sha256": "049de7160b52f47eeb29a969ac811aba0ab983c0e737cd8d1d5a821ee5e34033",
+      "rms": 0.2589230118385115
+    },
+    {
+      "clip": "music.ogg",
+      "mode": "stream",
+      "rate": 1,
+      "pcm_sha256": "fbb5774023bc97d467cfd98ebeee64e1d799539ea8752780f23382cf83cd1336",
+      "rms": 0.2590470015812859
+    },
+    {
+      "clip": "music.ogg",
+      "mode": "stream",
+      "rate": 1.7,
+      "pcm_sha256": "9838822bcc3a98baabf37da18eca4bc860ba94568d82c13b8bb8affc85618409",
+      "rms": 0.2590289903938025
+    },
+    {
+      "clip": "music.ogg",
+      "mode": "stream",
+      "rate": 4,
+      "pcm_sha256": "cbe115cbd05386de19189f294c1b76419778769e041a204507d3d5822ab7eebd",
+      "rms": 0.2590531820636073
+    },
+    {
+      "clip": "tone.wav",
+      "mode": "static",
+      "rate": 0.25,
+      "pcm_sha256": "bd9e06543aa1e25610987bec13c4da9cadb8aeddb856b4cb810a6e5596ca7b28",
+      "rms": 0.17256246513630763
+    },
+    {
+      "clip": "tone.wav",
+      "mode": "static",
+      "rate": 1,
+      "pcm_sha256": "1052ebd39a933510050b5be5b9d2c42a541ab3fd847a86677409aba64c6df690",
+      "rms": 0.17263721176127847
+    },
+    {
+      "clip": "tone.wav",
+      "mode": "static",
+      "rate": 1.7,
+      "pcm_sha256": "8c4987e5c3ea97d20981d51180b97b341fe082e195e66dd7622be44cc53d8e69",
+      "rms": 0.17262353894176635
+    },
+    {
+      "clip": "tone.wav",
+      "mode": "static",
+      "rate": 4,
+      "pcm_sha256": "59a77ea311e5bb2df850a3068059a37d3030d7e9d6d21a7f64c4207022f8bf96",
+      "rms": 0.17263738160312644
+    },
+    {
+      "clip": "tone.wav",
+      "mode": "stream",
+      "rate": 0.25,
+      "pcm_sha256": "cab931b9b164b93ee8bff8d69fe98d7c4052119810194a1723d60abf13465f02",
+      "rms": 0.1725624651399248
+    },
+    {
+      "clip": "tone.wav",
+      "mode": "stream",
+      "rate": 1,
+      "pcm_sha256": "a48731a700fa10011248c60ee222a6603a5069226dc16cb7dede663c6095a1db",
+      "rms": 0.17263721176655294
+    },
+    {
+      "clip": "tone.wav",
+      "mode": "stream",
+      "rate": 1.7,
+      "pcm_sha256": "03cee43efb57156701d21ec009345d01a3dde1bbc2beb785ee39729c2751bbf5",
+      "rms": 0.17262353894547477
+    },
+    {
+      "clip": "tone.wav",
+      "mode": "stream",
+      "rate": 4,
+      "pcm_sha256": "f6fbcaea73f0c3590ab7d3ed6c7a6e8066c5dfd25ed096aad2d346168e02e819",
+      "rms": 0.17263738160514516
+    }
+  ],
+  "native_ecs_audio_integration": false,
+  "reference_phone_gate": false,
+  "legacy_audio_probe": {
+    "passed": true,
+    "public_import_and_rpc": true,
+    "strict_typescript": true,
+    "source_free": true,
+    "repeated_pcm_exact": true,
+    "frames": 48000,
+    "sample_rate": 48000,
+    "timer_pcm_matches_update_control": true,
+    "saved_audio_timer_deadlines_restored": true,
+    "restored_paused_source_stays_silent_until_timer": true,
+    "left_rms": 0.2441395090272332,
+    "paused_left_rms": 0.0,
+    "resumed_left_rms": 0.2441395090272332,
+    "right_rms": 0.3664044296662817,
+    "attenuated_right_rms": 0.18361455724094905,
+    "bus_gain_ratio": 0.5011253750621514,
+    "existing_output_untouched": true,
+    "author_files_unchanged": {
+      "game.incant.json": "ce555117881d0250cac6d5ff53ef6818986c3aa2f3b6e629bc02780bf40d9665",
+      "game.incant.journal.jsonl": "05fc19cb3f614a9a61dbabfa2aeb5fec5aca203824b6edf7a5d8ff768b605c7f"
+    },
+    "pcm_sha256": "4ab70417e9ee9e457b7a83e8f8307825557795e705e4cb6f9afba8550df43225",
+    "binary_sha256": "058ad5d04b1eccf6729873968b37bff1060a83f5f400bce51c5c6340f96c25ad",
+    "audio_device_opened": false,
+    "pixel_capture": false
+  },
+  "release_workspace": {
+    "passed": 412,
+    "ignored_gpu": 44,
+    "all_targets_clippy": true
+  },
+  "review": {
+    "independent": "runtime_review",
+    "result": "no actionable blockers in extraction or headless conversion"
+  },
+  "target_checks": {
+    "macos_device_backend": "compiled",
+    "aarch64_apple_ios_device_backend": "compiled",
+    "wasm32_unknown_unknown": "compiled",
+    "device_or_browser_execution": false
+  }
+}

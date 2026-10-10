@@ -1,7 +1,7 @@
 #[path = "../../incant_assets/tests/support/audio.rs"]
 mod support;
 use incant_assets::{AssetStore, cook_audio};
-use incant_audio::{AudioError, SceneAudio};
+use incant_audio::{AudioError, SceneAudio, SceneAudioError};
 use incant_core::Engine;
 use incant_doc::{Asset, AudioSource, AudioSpatial, Entity, Project, Scene, Transform, new_id};
 use serde_json::json;
@@ -172,14 +172,14 @@ fn finished_sources_stay_finished_until_a_play_edge_and_bad_sync_is_terminal() {
     // Invalid retained asset resolution cannot be silently resumed after repair.
     assert!(matches!(
         audio.sync(&project, &engine.snapshot(), &AssetStore::default()),
-        Err(AudioError::MissingAsset(_))
+        Err(SceneAudioError::MissingAsset(_))
     ));
     assert!(matches!(
         audio.render(&mut samples),
-        Err(AudioError::FailedSession)
+        Err(SceneAudioError::Runtime(AudioError::FailedSession))
     ));
     assert!(matches!(
         audio.sync(&project, &engine.snapshot(), &assets),
-        Err(AudioError::FailedSession)
+        Err(SceneAudioError::Runtime(AudioError::FailedSession))
     ));
 }

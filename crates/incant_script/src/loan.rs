@@ -113,39 +113,7 @@ impl<'js, 'scope, 'world> Loan<'js, 'scope, 'world> {
     /// Failure leaves this loan uncommitted so Drop restores the whole write set.
     pub fn validate_numeric(&mut self) -> Result<(), ScriptError> {
         self.revoke();
-        self._columns.try_for_each_chunk(|chunk| {
-            let invalid = |id| {
-                ScriptError::Structural(incant_runtime::RuntimeError::Scene(
-                    incant_runtime::SceneError::Component(id),
-                ))
-            };
-            for (id, transform) in chunk
-                .ids
-                .iter()
-                .zip(chunk.transforms.as_chunks::<TRANSFORM_STRIDE>().0)
-            {
-                let norm: f64 = transform[3..7].iter().map(|v| v * v).sum();
-                if !transform.iter().all(|v| v.is_finite())
-                    || !norm.is_finite()
-                    || (norm - 1.).abs() > 1e-4
-                    || transform[7..10].iter().any(|v| v.abs() < 1e-9)
-                {
-                    return Err(invalid(*id));
-                }
-            }
-            if let Some(values) = chunk.velocities {
-                for (id, velocity) in chunk
-                    .ids
-                    .iter()
-                    .zip(values.as_chunks::<VELOCITY_STRIDE>().0)
-                {
-                    if velocity.iter().any(|v| !v.is_finite()) {
-                        return Err(invalid(*id));
-                    }
-                }
-            }
-            Ok(())
-        })
+        self._columns.validate().map_err(ScriptError::Structural)
     }
 
     pub fn finish(mut self) -> Undo {

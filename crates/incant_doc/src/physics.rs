@@ -2,53 +2,25 @@
 //! velocity radians/second. Runtime solver handles never enter documents.
 use crate::{Entity, Transform, Velocity};
 
-use incant_types::{AngularVelocity, BodyMotion, Collider, RigidBody};
+use incant_types::{AngularVelocity, Collider, RigidBody};
 
 pub(crate) fn validate(kind: &str, value: &serde_json::Value) -> Result<(), String> {
+    use incant_types::physics_validation as check;
     match kind {
-        "RigidBody" => {
-            let body: RigidBody =
-                serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
-            if !(-100. ..=100.).contains(&body.gravity_scale)
-                || ![body.linear_damping, body.angular_damping]
-                    .iter()
-                    .all(|v| (0. ..=100.).contains(v))
-            {
-                return Err("gravity scale must be -100..100; damping must be 0..100".into());
-            }
-        }
-        "Collider" => {
-            let collider: Collider =
-                serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
-            crate::collider_shapes::validate(&collider.shape)?;
-            if !(0.001..=100000.).contains(&collider.density)
-                || !(0. ..=10.).contains(&collider.friction)
-                || !(0. ..=1.).contains(&collider.restitution)
-            {
-                return Err(
-                    "collider density must be 0.001..100000, friction 0..10, restitution 0..1"
-                        .into(),
-                );
-            }
-        }
-        "AngularVelocity" => {
-            let velocity: AngularVelocity =
-                serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
-            if !velocity
-                .angular
-                .iter()
-                .all(|v| v.is_finite() && v.abs() <= 10000.)
-            {
-                return Err("angular velocity must be finite and within ±10000 rad/s".into());
-            }
-        }
-        _ => return Err("unregistered physics component".into()),
+        "RigidBody" => check::rigid_body(
+            &serde_json::from_value::<RigidBody>(value.clone()).map_err(|e| e.to_string())?,
+        ),
+        "Collider" => check::collider(
+            &serde_json::from_value::<Collider>(value.clone()).map_err(|e| e.to_string())?,
+        ),
+        "AngularVelocity" => check::angular(
+            &serde_json::from_value::<AngularVelocity>(value.clone()).map_err(|e| e.to_string())?,
+        ),
+        _ => Err("unregistered physics component".into()),
     }
-    Ok(())
 }
 
-/// Cross-component constraints are checked on the complete transaction, so adding
-/// a body, collider and transform together is atomic for every authoring client.
+/// Cross-component checks still run on the complete authoring transaction.
 pub(crate) fn validate_entity(entity: &Entity) -> Result<(), String> {
     let c = &entity.components;
     if c.contains_key("AngularVelocity") && !c.contains_key("RigidBody") {
@@ -66,46 +38,31 @@ pub(crate) fn validate_entity(entity: &Entity) -> Result<(), String> {
             .clone(),
     )
     .map_err(|e| e.to_string())?;
-    // Explicit initial runtime boundary; never silently flatten a rig or ignore scale.
-    if entity.parent.is_some() || transform.scale != [1.; 3] {
-        return Err("physics entities currently require a scene-root Transform with unit scale; size the Collider shape explicitly".into());
-    }
-    if !transform
-        .translation
-        .iter()
-        .all(|v| v.is_finite() && v.abs() <= 1_000_000.)
-    {
-        return Err("physics position must be finite and within ±1000000 meters".into());
-    }
     let body: Option<RigidBody> = c
         .get("RigidBody")
         .cloned()
         .map(serde_json::from_value)
         .transpose()
         .map_err(|e| e.to_string())?;
-    let fixed = body.as_ref().is_none_or(|b| b.motion == BodyMotion::Fixed);
-    if fixed && let Some(value) = c.get("AngularVelocity") {
-        let velocity: AngularVelocity =
-            serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
-        if velocity.angular != [0.; 3] {
-            return Err("fixed bodies cannot have angular velocity".into());
-        }
-    }
-    if let Some(value) = c.get("Velocity") {
-        let velocity: Velocity =
-            serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
-        if !velocity
-            .linear
-            .iter()
-            .all(|v| v.is_finite() && v.abs() <= 10000.)
-        {
-            return Err("physics velocity must be finite and within ±10000 m/s".into());
-        }
-        if fixed && velocity.linear != [0.; 3] {
-            return Err("moving colliders require a dynamic or kinematic RigidBody".into());
-        }
-    }
-    Ok(())
+    let velocity: Option<Velocity> = c
+        .get("Velocity")
+        .cloned()
+        .map(serde_json::from_value)
+        .transpose()
+        .map_err(|e| e.to_string())?;
+    let angular: Option<AngularVelocity> = c
+        .get("AngularVelocity")
+        .cloned()
+        .map(serde_json::from_value)
+        .transpose()
+        .map_err(|e| e.to_string())?;
+    incant_types::physics_validation::motion(
+        entity.parent.is_some(),
+        &transform,
+        body.as_ref(),
+        velocity.as_ref(),
+        angular.as_ref(),
+    )
 }
 
 pub(crate) fn annotate_schemas(
