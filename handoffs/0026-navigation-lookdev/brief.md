@@ -1,3 +1,39 @@
+## Priority revision 5: rounded portal boundaries (2026-10-10)
+
+Source 020c640 fixes both v8 query directions without a fallback that hides invalid
+geometry. Projecting onto the sloped triangle puts the start on a shared edge;
+f32 storage rounds it just outside. Portal intersection, its segment parameter,
+funnel orientation, visibility intervals and height barycentrics now use f64.
+Boundary tolerance is measured in world-space coordinate precision (two f32 ULPs),
+not a fixed fraction of a centimetre segment. A nearly collinear segment tests
+its actual endpoint distance to the portal before dividing a tiny determinant.
+The exact three polygons now pass 7,056 nearby queries at four heights and four
+directions. The room fixture passes 34,932 additional short queries. Existing
+radius, narrow-doorway, disconnected/stacked-floor and Dijkstra tests still pass.
+The public saved-game navigation probe passes on the supplied binary.
+
+Run a v9 final rendered review and exact repeat using the new immutable binary
+and metadata. Preserve the current scene/cameras; re-run query probes, walkability,
+clearance, grounding and arrival. Keep previous results as history and accurately
+report any remaining exceptions rather than masking them. Check actual frames.
+
+Height scope clarification: inspection of the reported [1.084,.081,-2.354]
+point traces its undershoot to the detail triangle interpolating between a low
+sample at x=.97 and high samples at x=1.06 and x=1.518. No further height-detail
+algorithm change is included. This quantized, piecewise-linear surface smooths
+true step discontinuities and can fall below source geometry near a step. The
+older packet's suggestion that it never goes below walkable spans was too strong;
+the API documents approximate heights and requires physics for grounding. Retain
+the measured 6.9 cm undershoot / 28 cm segment from v8 as historical evidence,
+measure v9 honestly, and verify that actual character grounding remains correct.
+Do not label this exact source geometry or a passed full-engine gate. Source-
+conforming height detail remains an explicit navigation quality follow-up.
+
+The generic script deadline failures remain a separate engine robustness issue;
+no deadline change is in this binary. Use temporary sleep assertions for long
+runs, record failed attempts, and do not bypass the Mac lock. No native capture
+is required. Claude Opus 5.5 over ACP remains the visual reviewer.
+
 ## Priority revision 4: phantom raster spans and endpoint precision (2026-10-10)
 
 Both v7 failures now have reproduced, fixed regression cases. The missing floor
