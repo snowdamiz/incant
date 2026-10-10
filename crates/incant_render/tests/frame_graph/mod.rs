@@ -7,6 +7,106 @@ use crate::{
 
 #[test]
 #[ignore = "requires a native GPU; run by all desktop workflows"]
+fn queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing() {
+    let renderer = crate::Renderer::headless().unwrap();
+    let directory = tempfile::tempdir().unwrap();
+    let (mut project, assets, _) = test_support::fixture(directory.path());
+    let mut camera = incant_doc::Entity::new("Retained logical camera");
+    camera.components.insert(
+        "Transform".into(),
+        serde_json::json!(incant_doc::Transform {
+            translation: [0., 0., 8.],
+            ..Default::default()
+        }),
+    );
+    let id = camera.id.clone();
+    project
+        .scenes
+        .values_mut()
+        .next()
+        .unwrap()
+        .entities
+        .insert(id.clone(), camera);
+    let mut jobs = Vec::new();
+    let mut references = Vec::new();
+    for (index, resolution) in [Some([64, 48]), Some([96, 64]), Some([64, 48]), None]
+        .into_iter()
+        .enumerate()
+    {
+        let projection=resolution.map_or_else(|| serde_json::json!({"kind":"perspective"}), |r|
+            serde_json::json!({"kind":"pixel_perfect","pixels_per_unit":8,"reference_resolution":r}));
+        project
+            .scenes
+            .values_mut()
+            .next()
+            .unwrap()
+            .entities
+            .get_mut(&id)
+            .unwrap()
+            .components
+            .insert(
+                "Camera".into(),
+                serde_json::json!({"fov_degrees":60,"near":0.1,"far":100,"projection":projection}),
+            );
+        let scene = renderer
+            .prepare_scene(&project, &assets)
+            .unwrap()
+            .with_camera(&id)
+            .unwrap();
+        let (w, h) = (321 + index as u32 * 16, 241 + index as u32 * 8);
+        let viewport = crate::Viewport {
+            rect: [13.25, 29.75, 280.5, 160.5],
+            corner_radii: [0.; 4],
+            canvas_srgb: [64, 80, 96],
+        };
+        let format = wgpu::TextureFormat::Rgba8UnormSrgb;
+        let reference = texture(&renderer, format, w, h);
+        renderer.queue.submit([renderer
+            .draw_scene(
+                &scene,
+                &reference.create_view(&Default::default()),
+                format,
+                w,
+                h,
+                Some(viewport),
+            )
+            .unwrap()]);
+        let expected = read(&renderer, &reference);
+        assert_eq!(&expected[..4], &[64, 80, 96, 255]);
+        assert!(
+            expected
+                .as_chunks::<4>()
+                .0
+                .iter()
+                .filter(|p| p[..3] != [64, 80, 96] && p[..3] != [20, 21, 25])
+                .count()
+                > 100
+        );
+        references.push(expected.clone());
+        let target = texture(&renderer, format, w, h);
+        let command = renderer
+            .draw_scene(
+                &scene,
+                &target.create_view(&Default::default()),
+                format,
+                w,
+                h,
+                Some(viewport),
+            )
+            .unwrap();
+        jobs.push((target, command, expected));
+    }
+    assert_ne!(references[0], references[1]);
+    drop(project);
+    drop(assets);
+    for (target, command, expected) in jobs {
+        renderer.queue.submit([command]);
+        assert_eq!(read(&renderer, &target), expected);
+    }
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by all desktop workflows"]
 fn queued_graph_frames_outlive_scene_versions_and_failed_preparation() {
     let renderer = crate::Renderer::headless().unwrap();
     let directory = tempfile::tempdir().unwrap();

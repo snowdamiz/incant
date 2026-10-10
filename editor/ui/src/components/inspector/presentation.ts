@@ -181,7 +181,7 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
         title: 'Field of view',
         status: (camera, schema) => {
           // Only a projection the schema declares makes the field of view unused. A kind
-          // it lacks (pixel-perfect, which main's schema does not have yet) is shown as
+          // it lacks is shown as
           // unknown on the Projection row and never assumed here.
           const kinds = unionVariants(schema?.properties.projection);
           const mode =
@@ -316,9 +316,8 @@ export function isOrthographicCamera(camera: Readonly<Record<string, unknown>>):
 /**
  * The pixel-perfect renderer's bounds: each logical dimension is a whole number from
  * 16 to 4096, the product is at most 4,194,304 pixels, and density is finite from 1
- * to 4096 pixels per metre. That renderer and its schema variant are not on main yet
- * (they live on handoff/0033-pixel-integration, docs/spikes/pixel-perfect-cameras.md);
- * the Inspector only applies this to a schema that declares `pixel_perfect`.
+ * to 4096 pixels per metre. The Inspector only applies this to a schema that
+ * declares `pixel_perfect` (docs/spikes/pixel-perfect-cameras.md).
  */
 export const PIXEL_PERFECT_LIMITS = {
   minDimension: 16,

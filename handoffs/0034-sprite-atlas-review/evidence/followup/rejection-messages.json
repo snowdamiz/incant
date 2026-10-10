@@ -1,0 +1,39 @@
+{
+ "binary_unchanged_every_call": true,
+ "engine_calls": 12,
+ "binary_sha256": "734811cb6053e32cce1ccd0fbb98fb7a515106cf7a8442f93b0be297af065469",
+ "cases": {
+  "render-fail-shrink-panel": {
+   "exit": 1,
+   "authored_unchanged": true,
+   "revision_unchanged": true,
+   "asset_fingerprints_unchanged": true,
+   "new_cache_files": 2,
+   "stderr": "Error: import rejected: 15 invalid sprite reference(s)\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN000000000000000056 texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005A texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005E texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005F texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005G texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005H texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005K texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005M texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005N texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005Q texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005T texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005W texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000005Y texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN000000000000000060 texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN000000000000000082 texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000F: nine-slice borders [3, 6, 4, 8] exceed resolved frame [443, 46, 8, 8]"
+  },
+  "render-fail-drop-cardB": {
+   "exit": 1,
+   "authored_unchanged": true,
+   "revision_unchanged": true,
+   "asset_fingerprints_unchanged": true,
+   "new_cache_files": 2,
+   "stderr": "Error: import rejected: 2 invalid sprite reference(s)\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000000G texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000V: referenced frame does not exist in the cooked atlas\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000001F texture 01M4KYED9NRGKT2EHYVRHMXD6Y frame 01JA34FR00000000000000000V: referenced frame does not exist in the cooked atlas"
+  },
+  "badge-undersized-8x8": {
+   "exit": 1,
+   "authored_unchanged": true,
+   "revision_unchanged": true,
+   "asset_fingerprints_unchanged": true,
+   "new_cache_files": 2,
+   "stderr": "Error: import rejected: 2 invalid sprite reference(s)\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000006N texture 01M4KYEDD4YJ4EPR04SJDVJNEA: source rectangle [0, 0, 16, 16] exceeds cooked texture [8, 8]\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000006Q texture 01M4KYEDD4YJ4EPR04SJDVJNEA: source rectangle [0, 0, 16, 16] exceeds cooked texture [8, 8]"
+  },
+  "badge-usage-linear": {
+   "exit": 1,
+   "authored_unchanged": true,
+   "revision_unchanged": true,
+   "asset_fingerprints_unchanged": true,
+   "new_cache_files": 2,
+   "stderr": "Error: import rejected: 2 invalid sprite reference(s)\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000006N texture 01M4KYEDD4YJ4EPR04SJDVJNEA: sprites require a cooked color texture\n  scene 01M4KYED6K1Q74QAXEHSJ4QD40 entity 01JA34EN00000000000000006Q texture 01M4KYEDD4YJ4EPR04SJDVJNEA: sprites require a cooked color texture"
+  }
+ }
+}

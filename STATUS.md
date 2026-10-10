@@ -1,5 +1,13 @@
 # Implementation status
 
+- The sprite/atlas publication union now includes the reviewed native runtime and
+  Tauri stack. Local checks pass: 451 ordinary Rust tests, all 56 GPU tests,
+  release Clippy, 420 UI tests, 38 tool tests, generated schemas/SDK, and the four
+  public atlas/sprite/camera probes. Those saved workflows are still legacy Play;
+  native 2D migration, known sampling/placement limits, native editor acceptance
+  and device/performance gates remain open. Hosted checks are next.
+  [Exact union evidence](docs/spikes/evidence/sprite-atlas-publication-union-2026-10-10.json).
+
 Source: [PLAN.md](PLAN.md), revision 6 (2026-10-10) with director decisions; every open decision is resolved in its section 12. Current phase:
 **1, in progress**. The complete engine/game release is not implemented.
 On 2026-10-08 the director authorized beginning Phase 1 while keeping the open
@@ -9,6 +17,24 @@ On 2026-10-09 the director authorized agents to merge completed PRs into main
 after review and passing checks, without requesting separate merge approval.
 
 ## Implemented and locally verified
+
+- Atlas review 0034 authoring follow-up: bounded skyline packing fixes the explicit
+  three-frame false failure and retains previous layouts as maximum bounds grow.
+  Shared import preparation rejects broken frame/nine-slice references atomically;
+  cached source-free validation reports typed entity/texture/frame diagnostics.
+  Raw atlas rectangles receive relocation warnings, and CLI import failures are
+  readable. New packed layouts still need Claude delta review after the shared
+  renderer update; no phone/performance or phase gate is claimed. See
+  [atlas authoring evidence](docs/spikes/sprite-atlases.md#authoring-follow-up-to-review-0034-2026-10-10).
+- Native physics hosted streams match across all three desktop hosts and actual
+  browser WASM (21 streams). Canonical source-report path keys fix the Windows
+  metadata comparison failure; the strict comparator is unchanged. See
+  [evidence](docs/spikes/native-physics-runtime.md#hosted-cross-host-report-paths).
+
+- Shipping Cargo capture explicitly decodes UTF-8 on all desktop hosts. A real
+  subprocess regression reproduces Windows cp1252 failure before the fix; 40
+  tool tests pass. Corrected hosted Windows packaging remains pending. See
+  [encoding evidence](docs/spikes/shipping-output-utf8.md).
 
 - Typed versioned project JSON, semantic validation, published derived schemas,
   canonical formatting and stable ULIDs.
@@ -61,6 +87,25 @@ within its documented workload.
   native packaging, live screen-reader and Claude rendered acceptance remain
   separate. See [editor correctness evidence](docs/spikes/editor-windowing-correctness.md#account-shortcuts-and-repeated-page-announcements-2026-10-10).
 
+- Atlas-specific rendering and public import/repack behavior are accepted in
+  Claude's scoped follow-up on `4194240`: 201 new frames, stable frame IDs,
+  atomic rejected imports, source-free repeats and atlas/control equality.
+  Thirteen tooling tests and 55 screenshot hashes pass after integration.
+  Main53 is integrated; full union checks and hosted CI remain pending. Shared
+  magnification/two-axis ties, geometry capacity and phone gates remain open;
+  see [atlas follow-up](docs/spikes/sprite-atlases.md#follow-up-rendered-acceptance-2026-10-10).
+
+- Sprite high-zoom follow-up uses 64-source-texel retained spans. The old spans
+  fail 95/2,856 expanded GPU cases; the fix passes all 5,768 exact/near-tie cases
+  through tested 128× magnification. All 360 workspace and 55 GPU tests plus
+  Clippy pass. Large sprites use more vertices, still under explicit total caps;
+  the theoretical maximum nine-slice bound is 6.19 MiB. Claude confirms the
+  one-axis fix through 128× in 1,006 frames, with repeat/reimport/source-free parity.
+  Higher magnifications and pre-existing two-axis frame-edge/non-dyadic tie
+  errors remain open. The measured cap is 341 nearest 2048-square sprites;
+  342 fail explicitly. Pixel-camera near-tie follower work is separate. See
+  [sprite evidence](docs/spikes/sprite-rendering.md).
+
 - Native cooked 3D rigid bodies, colliders and angular velocity now run in the
   disposable ECS world through a document-free solver backend, typed structural
   commands and direct numeric updates that preserve sleeping bodies. Whole-batch
@@ -75,8 +120,9 @@ within its documented workload.
 
 - The editor context now generates icons/assets during Tauri build preparation,
   before rustc records input timestamps. Both feature modes have locally verified
-  cold generated outputs and immediate warm no-op builds; hosted validation is
-  pending. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
+  cold generated outputs and immediate warm no-op builds. PR56 merged with all 17
+  checks passing; all three hosted OSes run the exact 44 GPU tests with zero
+  recompilation. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
   invalidation fix from [measured Windows compilation costs](docs/spikes/ci-cargo-unit-timings.md).
 
 - Cooked PCM loading and Kira mixing now live in authoring-free runtime crates;
@@ -97,6 +143,19 @@ within its documented workload.
   shipping/phone performance, trusted native immediate-write responsibility and
   remaining gameplay migration stay explicit. See
   [numerical-boundary evidence](docs/spikes/native-numeric-boundaries.md).
+
+- A [cache layout/retention proposal](docs/spikes/ci-cache-layout-proposal.md) records
+  the main53 Linux credential-cache disappearance, final 11-family inventory and
+  separate local compressed registry/target measurements. The simpler auxiliary
+  registry-only alternative now includes exact old-archive totals, historical
+  cold execution/queue times and replacement-overlap limits. Actual PR56 consumers
+  restored and verified both pinned tool binaries with PR saves skipped. A separate
+  [inputs-only follow-up](docs/spikes/ci-auxiliary-registry-cache.md) makes eight
+  auxiliary families registry-only, retaining iOS/native targets and all commands.
+  Three initial hosted keys match the preflight; the corrected physics union preserves
+  all source and commands and passes 40 tool tests. Hosted archive measurements,
+  consumption and the bounded legacy-cache migration remain pending. No cache
+  deletion, new permission or shipping-seed change is included.
 
 - Native fixed-tick input now owns a fresh cooked world, script VM and bounded
   input timeline. Action bindings validate once at construction/rebind; each
@@ -292,13 +351,75 @@ within its documented workload.
   CRDT scaling remain open. The new device/performance targets have not been passed
   or waived.
 
+- Claude's third sprite review exposed large-region nearest precision loss.
+  Bounded source spans preserve the original mapping and now pass 864 edge/span
+  cases with unique source colors; removing the flat base fails 720 cases.
+  All 360 normal/55 GPU workspace tests and Clippy pass; seven focused GPU tests
+  pass after the test-oracle improvement. Independent rendered review of the
+  rebuilt candidate, native acceptance and hosted/device checks remain open.
+  See [wide-region evidence](docs/spikes/sprite-rendering.md#wide-nearest-regions-2026-10-10).
+
+- The sprite branch now integrates the native runtime/CRT/CI foundation with
+  unchanged camera schemas and SDK. Checks pass 359 Rust tests, 54 GPU tests,
+  420 UI tests, 25 tool tests, Clippy and combined packaging. The GPU pass builds
+  nothing; the three public sprite/camera saved workflows pass on the integrated
+  binary. Gameplay still uses the legacy path, and native visual review, the
+  near-tie camera defect and hosted/device gates remain open. See the
+  [integration evidence](docs/spikes/sprite-rendering.md#native-runtime-and-ci-integration-2026-10-10).
+
+- Cook-time sprite atlases are in implementation: typed source descriptors,
+  stable frame identities, deterministic packing, edge extrusion, cache metadata
+  and dependency-aware reimport. Integrated nearest sampling and resolved-frame
+  diagnostics now integrate the native runtime/CRT/CI foundation and bounded
+  nearest spans. All 365 normal/56 GPU tests, 420 UI tests, 25 tool tests, Clippy
+  and the combined release build pass. Atlas reimport Undo/Redo, source removal,
+  stable frame relocation and exact saved/repeated state pass on the rebuilt
+  executable. Atlas rendered/native review and hosted/device checks remain open;
+  the saved-workflow probe still uses legacy gameplay.
+  See [sprite atlas work](docs/spikes/sprite-atlases.md).
+
+- Sprite rendering is in implementation in an isolated checkout: typed texture
+  regions, pivots/flips, nine-slice geometry, deterministic sorting and retained
+  premultiplied texture resources. The foundation passes 325 Rust tests, 52 GPU
+  checks, Clippy, 420 UI tests, portable core compilation and the strict
+  source-free saved-gameplay probe. Claude's Max review exposed nearest-sampling
+  ties; the correction passes a reproduced GPU regression, all 325 Rust tests,
+  Clippy and 53 GPU checks. A follow-up typed diagnostic identifies the entity,
+  texture, region and dimensions after an undersized reimport; its GPU regression
+  and workspace Clippy pass. Claude's integrated round-two review accepts the
+  duplicated-texel fix but exposed a magnified-nearest regression. The GPU sweep
+  reproduces 15/70 failing cases before the derivative-scaled tolerance fix and
+  0/70 afterward; all six sprite GPU tests and scoped Clippy pass. A rebuilt
+  headless binary is ready for Claude's follow-up. That rendered verification
+  and the recommended optional exact display curve remain open;
+  Inspector work follows the full redesign, and native/CI evidence remain open;
+  atlas packing, tilemaps and 2D physics are separate unfinished work. See
+  [sprite rendering](docs/spikes/sprite-rendering.md).
+
+- Claude Opus 5.5 is performing a full editor redesign at explicitly verified
+  Max thinking in handoff 0033, prioritizing the Inspector header, hierarchy,
+  spacing and dense fields. The runner now pins and confirms both model and
+  effort for every new/resumed session; seven transport/tool tests pass.
+
+- Pixel-perfect camera support is in implementation: fixed logical targets,
+  integer replication/letterboxing, and render-only camera-plane snapping.
+  Local foundation checks pass 320 Rust tests, 47 GPU checks, Clippy, contracts
+  and both public saved-camera workflows. Claude supplied the Inspector with
+  420 passing UI tests and a repeated 341-frame engine comparison. Its exact
+  half-pixel follow defect is corrected and covered across odd/even dimensions
+  and camera roll; final rendered/native review and hosted CI remain open.
+  Sprite/tilemap rendering and 2D physics are separate unfinished work. See
+  [pixel-perfect cameras](docs/spikes/pixel-perfect-cameras.md).
+
+
 - Orthographic camera projection is implemented through shared component commands,
   renderer geometry, parallel material view rays, light clusters and directional
   cascade fitting. CPU/shared-command checks and all 41 renderer GPU tests pass.
   Integrated checks pass 318 Rust and 387 UI tests, Clippy, contracts and native
-  packaging. Claude engine/browser/native review is accepted; required hosted
-  checks remain open;
-  pixel-perfect cameras, sprites, tilemaps and 2D physics remain open. See
+  packaging. Claude engine/browser/native review is accepted. PR #41 merged as
+  `af15941` after all twelve checks passed on `a88343e`; its tested tree is
+  unchanged by the merge. Pixel-perfect cameras, sprites, tilemaps and 2D physics
+  remain open. See
   [orthographic cameras](docs/spikes/orthographic-cameras.md).
 
 - PR #39 merged as `72a53df` after all twelve required checks passed on
@@ -328,8 +449,8 @@ within its documented workload.
   compilation and five public gameplay workflows. Unchanged renderer coverage
   retains 40 passing GPU checks. Baking preserves
   transformed child geometry and hollow openings, and re-bakes after edits.
-  The final native draft blocker is resolved; updated hosted checks are required
-  before PR #25 merges.
+  All twelve hosted checks passed on `c740134`; PR #25 merged into main as
+  `2f32eb7` with its tested tree unchanged. The native draft blocker is resolved.
   See [compound colliders](docs/spikes/compound-colliders.md).
 
 - PR #40 adds weighted rectangular-grid navigation through `api.findGridPath`,

@@ -164,6 +164,7 @@ fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
                 &target.create_view(&Default::default()),
                 format,
                 None,
+                None,
             )
             .unwrap()
             .encode(&mut encoder);

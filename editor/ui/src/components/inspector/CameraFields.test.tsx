@@ -9,9 +9,8 @@ import { isOrthographicCamera } from './presentation';
 
 /*
  * The Camera Inspector against main's native schema (schemas/Camera.schema.json):
- * perspective and orthographic projections. Pixel-perfect presentation is tested
- * separately in PixelCameraFields.test.tsx against an explicitly synthetic schema,
- * because main does not declare that projection yet.
+ * perspective, orthographic and pixel-perfect projections. Pixel-specific behavior
+ * is covered by PixelCameraFields.test.tsx against the same generated schema.
  */
 
 afterEach(cleanup);
@@ -21,7 +20,7 @@ const variantsOf = (schema: typeof NATIVE) =>
   (schema.properties.projection as { variants: Record<string, { properties: Record<string, Record<string, unknown>> }> }).variants;
 
 describe('native Camera schema', () => {
-  it('reaches the Inspector with projection as an optional perspective/orthographic union', () => {
+  it('reaches the Inspector with projection as an optional perspective/orthographic/pixel-perfect union', () => {
     expect(NATIVE.order).toEqual(['projection', 'fov_degrees', 'near', 'far']);
     const projection = NATIVE.properties.projection!;
     expect(projection).toMatchObject({
@@ -33,9 +32,9 @@ describe('native Camera schema', () => {
     // Units come from Rust metadata, not from the Inspector profile.
     expect(['fov_degrees', 'near', 'far'].map((key) => (NATIVE.properties[key] as { 'x-incant-unit'?: string })['x-incant-unit']))
       .toEqual(['°', 'm', 'm']);
-    // Exactly the projections main's Rust schema declares; pixel-perfect is not among them yet.
+    // Exactly the projections the generated Rust schema declares.
     const variants = variantsOf(NATIVE);
-    expect(Object.keys(variants)).toEqual(['perspective', 'orthographic']);
+    expect(Object.keys(variants)).toEqual(['perspective', 'orthographic', 'pixel_perfect']);
     expect(Object.keys(variants.perspective!.properties)).toEqual(['kind']);
     const orthographic = variants.orthographic!.properties;
     expect(Object.keys(orthographic)).toEqual(['kind', 'vertical_size']);
@@ -94,12 +93,10 @@ describe('Camera Inspector', () => {
   });
 
   it.each([
-    ['an unknown kind', { kind: 'isometric', vertical_size: 8 }, 'Unknown projection kind "isometric". Expected perspective or orthographic; raw value:'],
-    // Authored where the pixel-perfect renderer exists (not on main): unknown here, shown raw.
-    ['a pixel-perfect kind', PIXEL, 'Unknown projection kind "pixel_perfect". Expected perspective or orthographic; raw value:'],
-    ['a missing kind', { vertical_size: 8 }, 'No “kind” is set, so the projection cannot be shown. Expected perspective or orthographic; raw value:'],
-    ['null', null, 'Cannot show as a projection (perspective or orthographic); raw value:'],
-    ['a string', 'orthographic', 'Cannot show as a projection (perspective or orthographic); raw value:'],
+    ['an unknown kind', { kind: 'isometric', vertical_size: 8 }, 'Unknown projection kind "isometric". Expected perspective, orthographic or pixel_perfect; raw value:'],
+    ['a missing kind', { vertical_size: 8 }, 'No “kind” is set, so the projection cannot be shown. Expected perspective, orthographic or pixel_perfect; raw value:'],
+    ['null', null, 'Cannot show as a projection (perspective, orthographic or pixel_perfect); raw value:'],
+    ['a string', 'orthographic', 'Cannot show as a projection (perspective, orthographic or pixel_perfect); raw value:'],
   ])('reports %s explicitly instead of assuming perspective', async (_name, projection, message) => {
     const camera = await inspect({ ...LEGACY, projection });
     const notice = camera.getByRole('group', { name: 'Projection' });

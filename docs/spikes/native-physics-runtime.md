@@ -229,3 +229,38 @@ every assertion and immediate launch-error failure; it adds no retries or
 production changes. The existing two-test release run and matching Clippy check
 pass after the fix using the workspace feature graph. Upstream PR54/55 received
 the same fix; the physics merge preserved its already validated tree exactly.
+
+## Final editor-build-context union — 2026-10-10
+
+Integration `c7dbe02` includes reviewed Tauri head
+`961b1d35251aed9b024b6af7b004f8337e29b1b4`. Only STATUS needed conflict
+resolution; both entries are retained. Runtime/physics/cook/script/types match
+`32a720c` byte-for-byte, and audio/assets match `8fef22c`. The root lockfile adds
+only two build-only edges between already pinned Tauri packages. Runtime normal
+dependencies and the preceding physics/audio shipping source inputs are unchanged.
+
+The [focused union checks](evidence/native-physics-tauri-union-2026-10-10.json)
+pass seven editor tests in each feature mode, editor Clippy with warnings denied
+in each mode, the release custom-protocol executable build, all seven runtime
+dependency guards and conventions. Existing 428-test and fresh shipping evidence
+above remains scoped to its recorded source head and binary identities; no new
+shipping artifacts or performance results are asserted for this editor-only
+change. Hosted exact-head validation remains pending.
+
+## Hosted cross-host report paths
+
+Run 38092910737 at head `2512ff0` completed native trials on Windows, Linux and
+macOS plus actual Linux browser WASM trials. Its comparison job rejected source
+metadata before comparing streams: Windows used backslashes in dictionary keys.
+The producer now uses `Path.as_posix()` for repository-relative report keys; the
+strict source and byte-stream comparator is unchanged.
+
+All three original artifact reports were downloaded. The unchanged comparator
+reproduced the rejection. Copies with only path-key separators canonicalized
+passed every source, trial-coverage, stream identity and cross-host byte check:
+all 21 streams are SHA256 `a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c`.
+Changing one source digest still fails. No stream bytes were changed; report
+hashes/counts are retained in
+[evidence](evidence/native-physics-host-paths-2026-10-10.json). This is evidence
+from actual hosted runs with a corrected metadata representation, not a claim
+that the old CI comparison job passed. Corrected exact-head CI remains required.

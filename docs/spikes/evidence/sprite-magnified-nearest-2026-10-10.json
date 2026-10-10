@@ -1,0 +1,414 @@
+{
+  "recorded": "2026-10-10",
+  "kind": "numerical_gpu_correctness_only",
+  "host": {
+    "os": "26.6",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal"
+  },
+  "claude_evidence_source_commit": "305a95b23e7af463b5b51aa28414a35293587ffc",
+  "claude_evidence_integrated_commit": "51969c0e1131f8773ac2dc1d94a954d73dee53ce",
+  "sweep": {
+    "scales": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    "offsets_256px": [
+      0,
+      0.625,
+      1,
+      2,
+      3
+    ],
+    "flips_xy": [
+      false,
+      true
+    ],
+    "cases": 70,
+    "expected": "Each of seven source texels spans M pixels on both axes; all pixels match the independently aligned source palette in the requested orientation."
+  },
+  "before": {
+    "shader_sha256": "e6003f420fc36db6c057913fb817dc8827d3e8dc5da3d283b4786d8f90e05f5e",
+    "command": "./tools/cargo test --locked -j2 -p incant_render --release --test model_gpu magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties -- --ignored --test-threads=1 --nocapture",
+    "exit_code": 101,
+    "failed_cases": [
+      {
+        "scale": 4,
+        "offset_256px": 0.625,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          5
+        ],
+        "vertical_widths": [
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          5
+        ]
+      },
+      {
+        "scale": 4,
+        "offset_256px": 1.0,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          5
+        ],
+        "vertical_widths": [
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          5
+        ]
+      },
+      {
+        "scale": 5,
+        "offset_256px": 0.625,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          4,
+          5,
+          5,
+          5,
+          5,
+          5,
+          6
+        ],
+        "vertical_widths": [
+          4,
+          5,
+          5,
+          5,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "scale": 5,
+        "offset_256px": 0.625,
+        "flipped_xy": true,
+        "horizontal_widths": [
+          4,
+          5,
+          5,
+          5,
+          5,
+          5,
+          6
+        ],
+        "vertical_widths": [
+          4,
+          5,
+          5,
+          5,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "scale": 5,
+        "offset_256px": 1.0,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          4,
+          5,
+          5,
+          5,
+          5,
+          5,
+          6
+        ],
+        "vertical_widths": [
+          4,
+          5,
+          5,
+          5,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "scale": 5,
+        "offset_256px": 1.0,
+        "flipped_xy": true,
+        "horizontal_widths": [
+          4,
+          5,
+          5,
+          5,
+          5,
+          5,
+          6
+        ],
+        "vertical_widths": [
+          4,
+          5,
+          5,
+          5,
+          5,
+          5,
+          6
+        ]
+      },
+      {
+        "scale": 6,
+        "offset_256px": 0.625,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7
+        ],
+        "vertical_widths": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7
+        ]
+      },
+      {
+        "scale": 6,
+        "offset_256px": 0.625,
+        "flipped_xy": true,
+        "horizontal_widths": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7
+        ],
+        "vertical_widths": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7
+        ]
+      },
+      {
+        "scale": 6,
+        "offset_256px": 1.0,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7
+        ],
+        "vertical_widths": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7
+        ]
+      },
+      {
+        "scale": 6,
+        "offset_256px": 1.0,
+        "flipped_xy": true,
+        "horizontal_widths": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7
+        ],
+        "vertical_widths": [
+          5,
+          6,
+          6,
+          6,
+          6,
+          6,
+          7
+        ]
+      },
+      {
+        "scale": 8,
+        "offset_256px": 0.625,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ],
+        "vertical_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ]
+      },
+      {
+        "scale": 8,
+        "offset_256px": 0.625,
+        "flipped_xy": true,
+        "horizontal_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ],
+        "vertical_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ]
+      },
+      {
+        "scale": 8,
+        "offset_256px": 1.0,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ],
+        "vertical_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ]
+      },
+      {
+        "scale": 8,
+        "offset_256px": 1.0,
+        "flipped_xy": true,
+        "horizontal_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ],
+        "vertical_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ]
+      },
+      {
+        "scale": 8,
+        "offset_256px": 2.0,
+        "flipped_xy": false,
+        "horizontal_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ],
+        "vertical_widths": [
+          7,
+          8,
+          8,
+          8,
+          8,
+          8,
+          9
+        ]
+      }
+    ]
+  },
+  "after": {
+    "shader_sha256": "6a18d080ddbe749c4041f290750a01576827f1e40d7d9bf7ced9f635c4cdd9d2",
+    "test_sha256": "e6f45b5d41c172904c7a717e23d62cdf3cf6ac69657fdc90f9ed0213b6f231ff",
+    "command": "./tools/cargo test --locked -j2 -p incant_render --release --test model_gpu sprites:: -- --ignored --test-threads=1 --nocapture",
+    "exit_code": 0,
+    "sprite_gpu_tests_passed": 6,
+    "sweep_failed_cases": 0,
+    "existing_orientation_resize_cases": 48
+  },
+  "checks": [
+    "./tools/cargo fmt --all --check",
+    "./tools/cargo clippy --locked -j2 -p incant_render --all-targets -- -D warnings",
+    "./tools/cargo build --locked -j2 -p incant_headless --release"
+  ],
+  "headless_binary": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/target/release/incant_headless",
+    "sha256": "a4b5ddb905122a55b7d156ad39b39e7f97f5266e70159614fe4cdc7589796828",
+    "bytes": 37422688,
+    "purpose": "Rebuilt executable for a later Claude review; this record does not claim that review ran."
+  },
+  "limitations": [
+    "Single local GPU/backend; no cross-adapter or hosted-CI execution.",
+    "Sweep covers scales 1 through 8 listed above and a 7x7 region; extreme magnification and large-region f32 precision are not established.",
+    "No screenshot creation or rendered appearance review by Astra.",
+    "Linear path, display curve, art and pixel-camera follower defect unchanged.",
+    "No performance/device/phase gate claimed."
+  ]
+}

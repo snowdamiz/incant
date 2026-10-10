@@ -85,7 +85,7 @@ def main():
     sources=list((ROOT/'crates/incant_runtime/src').glob('*.rs'))+list((ROOT/'crates/incant_physics_runtime/src').glob('*.rs'))+[ROOT/'Cargo.lock',HERE/'Cargo.lock',HERE/'Cargo.toml',HERE/'src/lib.rs',HERE/'src/main.rs',HERE/'run.py',HERE/'browser.mjs']
     report=dict(status='passed',host=dict(system=platform.system(),machine=platform.machine()),trials=args.trials,
                 browser_executed=args.browser,browser=json.loads((out/'browser.json').read_text()) if args.browser else [],
-                records=records,source_sha256={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},
+                records=records,source_sha256={p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},
                 scope='native cooked ECS full public rigid-body state; original native serial/joint solver proof remains separate; no timings, phone, backend-adoption or hidden solver-state claim')
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(dict(status='passed',streams=len(records),browser_executed=args.browser)))

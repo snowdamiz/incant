@@ -1,0 +1,23 @@
+{
+ "version": 1,
+ "id": "01JA34AA00000000000000R001",
+ "maximum_size": [
+  1204,
+  2048
+ ],
+ "padding": 2,
+ "frames": {
+  "01JA34FR00000000000000R001": {
+   "name": "wide",
+   "path": "wide.png"
+  },
+  "01JA34FR00000000000000R002": {
+   "name": "row",
+   "path": "row.png"
+  },
+  "01JA34FR00000000000000R003": {
+   "name": "col",
+   "path": "col.png"
+  }
+ }
+}

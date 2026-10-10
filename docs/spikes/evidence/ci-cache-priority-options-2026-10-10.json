@@ -1,0 +1,341 @@
+{
+  "source_inventory": "ci-main53-retention-2026-10-10.json",
+  "source_cold": "shared-cache-seed-2026-10-10.json",
+  "complete_inventory_reconstruction_bytes": 10596565906,
+  "observed_inventory_bytes": 10030209780,
+  "missing_family_bytes": 566356126,
+  "quota_bytes": 10737418240,
+  "proposed_reserve_bytes": 268435456,
+  "largest_native_archive_bytes": 1848908069,
+  "observed_mac_windows_overlap_bytes": 3155386926,
+  "three_native_overlap_bytes": 4718040046,
+  "variants": [
+    {
+      "name": "credentials",
+      "old_ids": [
+        8780787844,
+        8780799870,
+        8780777374
+      ],
+      "old_archive_bytes": 1459334055,
+      "currently_present_old_bytes": 892977929,
+      "no_aux_cache_steady_bytes": 9137231851,
+      "shared_registry_projection": {
+        "lower": {
+          "registry_bytes": 225000000,
+          "steady_bytes": 9362231851,
+          "with_largest_and_reserve": 11479575376,
+          "with_observed_mac_windows_overlap_and_reserve": 12786054233,
+          "with_three_native_overlap_and_reserve": 14348707353
+        },
+        "local_central": {
+          "registry_bytes": 452347251,
+          "steady_bytes": 9589579102,
+          "with_largest_and_reserve": 11706922627,
+          "with_observed_mac_windows_overlap_and_reserve": 13013401484,
+          "with_three_native_overlap_and_reserve": 14576054604
+        },
+        "upper": {
+          "registry_bytes": 600000000,
+          "steady_bytes": 9737231851,
+          "with_largest_and_reserve": 11854575376,
+          "with_observed_mac_windows_overlap_and_reserve": 13161054233,
+          "with_three_native_overlap_and_reserve": 14723707353
+        }
+      }
+    },
+    {
+      "name": "credentials_and_desktop_platforms",
+      "old_ids": [
+        8780787844,
+        8780799870,
+        8780777374,
+        8780883154,
+        8780995675,
+        8780909132
+      ],
+      "old_archive_bytes": 2754982491,
+      "currently_present_old_bytes": 2188626365,
+      "no_aux_cache_steady_bytes": 7841583415,
+      "shared_registry_projection": {
+        "lower": {
+          "registry_bytes": 225000000,
+          "steady_bytes": 8066583415,
+          "with_largest_and_reserve": 10183926940,
+          "with_observed_mac_windows_overlap_and_reserve": 11490405797,
+          "with_three_native_overlap_and_reserve": 13053058917
+        },
+        "local_central": {
+          "registry_bytes": 452347251,
+          "steady_bytes": 8293930666,
+          "with_largest_and_reserve": 10411274191,
+          "with_observed_mac_windows_overlap_and_reserve": 11717753048,
+          "with_three_native_overlap_and_reserve": 13280406168
+        },
+        "upper": {
+          "registry_bytes": 600000000,
+          "steady_bytes": 8441583415,
+          "with_largest_and_reserve": 10558926940,
+          "with_observed_mac_windows_overlap_and_reserve": 11865405797,
+          "with_three_native_overlap_and_reserve": 13428058917
+        }
+      }
+    },
+    {
+      "name": "plus_android",
+      "old_ids": [
+        8780787844,
+        8780799870,
+        8780777374,
+        8780883154,
+        8780995675,
+        8780909132,
+        8780952278
+      ],
+      "old_archive_bytes": 3654414346,
+      "currently_present_old_bytes": 3088058220,
+      "no_aux_cache_steady_bytes": 6942151560,
+      "shared_registry_projection": {
+        "lower": {
+          "registry_bytes": 225000000,
+          "steady_bytes": 7167151560,
+          "with_largest_and_reserve": 9284495085,
+          "with_observed_mac_windows_overlap_and_reserve": 10590973942,
+          "with_three_native_overlap_and_reserve": 12153627062
+        },
+        "local_central": {
+          "registry_bytes": 452347251,
+          "steady_bytes": 7394498811,
+          "with_largest_and_reserve": 9511842336,
+          "with_observed_mac_windows_overlap_and_reserve": 10818321193,
+          "with_three_native_overlap_and_reserve": 12380974313
+        },
+        "upper": {
+          "registry_bytes": 600000000,
+          "steady_bytes": 7542151560,
+          "with_largest_and_reserve": 9659495085,
+          "with_observed_mac_windows_overlap_and_reserve": 10965973942,
+          "with_three_native_overlap_and_reserve": 12528627062
+        }
+      }
+    },
+    {
+      "name": "plus_android_web",
+      "old_ids": [
+        8780787844,
+        8780799870,
+        8780777374,
+        8780883154,
+        8780995675,
+        8780909132,
+        8780952278,
+        8780916771
+      ],
+      "old_archive_bytes": 4252113850,
+      "currently_present_old_bytes": 3685757724,
+      "no_aux_cache_steady_bytes": 6344452056,
+      "shared_registry_projection": {
+        "lower": {
+          "registry_bytes": 225000000,
+          "steady_bytes": 6569452056,
+          "with_largest_and_reserve": 8686795581,
+          "with_observed_mac_windows_overlap_and_reserve": 9993274438,
+          "with_three_native_overlap_and_reserve": 11555927558
+        },
+        "local_central": {
+          "registry_bytes": 452347251,
+          "steady_bytes": 6796799307,
+          "with_largest_and_reserve": 8914142832,
+          "with_observed_mac_windows_overlap_and_reserve": 10220621689,
+          "with_three_native_overlap_and_reserve": 11783274809
+        },
+        "upper": {
+          "registry_bytes": 600000000,
+          "steady_bytes": 6944452056,
+          "with_largest_and_reserve": 9061795581,
+          "with_observed_mac_windows_overlap_and_reserve": 10368274438,
+          "with_three_native_overlap_and_reserve": 11930927558
+        }
+      }
+    },
+    {
+      "name": "all_auxiliary",
+      "old_ids": [
+        8780787844,
+        8780799870,
+        8780777374,
+        8780883154,
+        8780995675,
+        8780909132,
+        8780952278,
+        8780916771,
+        8781047567
+      ],
+      "old_archive_bytes": 4815428923,
+      "currently_present_old_bytes": 4249072797,
+      "no_aux_cache_steady_bytes": 5781136983,
+      "shared_registry_projection": {
+        "lower": {
+          "registry_bytes": 225000000,
+          "steady_bytes": 6006136983,
+          "with_largest_and_reserve": 8123480508,
+          "with_observed_mac_windows_overlap_and_reserve": 9429959365,
+          "with_three_native_overlap_and_reserve": 10992612485
+        },
+        "local_central": {
+          "registry_bytes": 452347251,
+          "steady_bytes": 6233484234,
+          "with_largest_and_reserve": 8350827759,
+          "with_observed_mac_windows_overlap_and_reserve": 9657306616,
+          "with_three_native_overlap_and_reserve": 11219959736
+        },
+        "upper": {
+          "registry_bytes": 600000000,
+          "steady_bytes": 6381136983,
+          "with_largest_and_reserve": 8498480508,
+          "with_observed_mac_windows_overlap_and_reserve": 9804959365,
+          "with_three_native_overlap_and_reserve": 11367612485
+        }
+      }
+    }
+  ],
+  "cold_jobs": [
+    {
+      "name": "checks",
+      "run_id": 38085082368,
+      "job_id": 114309804567,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 823,
+      "queue_seconds": 8,
+      "restore": "restored",
+      "pr49_cold_duration_seconds": 1242,
+      "pr49_cold_queue_seconds": 7
+    },
+    {
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "run_id": 38085082417,
+      "job_id": 114309804609,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 2067,
+      "queue_seconds": 2,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 2061,
+      "pr49_cold_queue_seconds": 2
+    },
+    {
+      "name": "desktop (ubuntu-latest, Linux)",
+      "run_id": 38085082417,
+      "job_id": 114309804772,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 936,
+      "queue_seconds": 2,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 1133,
+      "pr49_cold_queue_seconds": 2
+    },
+    {
+      "name": "storage (macos-latest)",
+      "run_id": 38085082454,
+      "job_id": 114309804916,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 233,
+      "queue_seconds": 12,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 165,
+      "pr49_cold_queue_seconds": 7
+    },
+    {
+      "name": "storage (ubuntu-latest)",
+      "run_id": 38085082454,
+      "job_id": 114309804974,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 164,
+      "queue_seconds": 2,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 146,
+      "pr49_cold_queue_seconds": 2
+    },
+    {
+      "name": "storage (windows-latest)",
+      "run_id": 38085082454,
+      "job_id": 114309805037,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 301,
+      "queue_seconds": 2,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 250,
+      "pr49_cold_queue_seconds": 2
+    },
+    {
+      "name": "web",
+      "run_id": 38085106886,
+      "job_id": 114309879846,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 332,
+      "queue_seconds": 3,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 288,
+      "pr49_cold_queue_seconds": 2
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "run_id": 38085106886,
+      "job_id": 114309879957,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 374,
+      "queue_seconds": 2,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 296,
+      "pr49_cold_queue_seconds": 3
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "run_id": 38085106886,
+      "job_id": 114309879993,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 129,
+      "queue_seconds": 2,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 147,
+      "pr49_cold_queue_seconds": 2
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "run_id": 38085106886,
+      "job_id": 114309880019,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 243,
+      "queue_seconds": 7,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 222,
+      "pr49_cold_queue_seconds": 7
+    },
+    {
+      "name": "ios",
+      "run_id": 38085106886,
+      "job_id": 114309880052,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 407,
+      "queue_seconds": 6,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 357,
+      "pr49_cold_queue_seconds": 6
+    },
+    {
+      "name": "android",
+      "run_id": 38085106886,
+      "job_id": 114309880091,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "duration_seconds": 425,
+      "queue_seconds": 2,
+      "restore": "miss",
+      "pr49_cold_duration_seconds": 460,
+      "pr49_cold_queue_seconds": 2
+    }
+  ],
+  "limits": [
+    "Archive removal totals are exact snapshot bytes including one missing family; projected registry bytes are not hosted measurements.",
+    "Removing all auxiliary target caches preserves tests but may increase compute time and queue occupancy.",
+    "All simultaneous native replacements exceed quota even for all-auxiliary registry-only at this estimate; no durable admission guarantee is claimed."
+  ]
+}

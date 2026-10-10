@@ -1,0 +1,2336 @@
+{
+ "atlas_id": "01JA34AA000000000000000001",
+ "frames": {
+  "01JA34FR000000000000000001": {
+   "name": "wisp0",
+   "path": "sheet.png",
+   "region": [
+    0,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000002": {
+   "name": "wisp1",
+   "path": "sheet.png",
+   "region": [
+    16,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000003": {
+   "name": "wisp2",
+   "path": "sheet.png",
+   "region": [
+    32,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000004": {
+   "name": "wisp3",
+   "path": "sheet.png",
+   "region": [
+    48,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000005": {
+   "name": "orb",
+   "path": "sheet.png",
+   "region": [
+    64,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000006": {
+   "name": "key",
+   "path": "sheet.png",
+   "region": [
+    80,
+    0,
+    8,
+    8
+   ]
+  },
+  "01JA34FR000000000000000007": {
+   "name": "odd",
+   "path": "sheet.png",
+   "region": [
+    88,
+    0,
+    7,
+    7
+   ]
+  },
+  "01JA34FR000000000000000008": {
+   "name": "marker",
+   "path": "sheet.png",
+   "region": [
+    80,
+    8,
+    2,
+    2
+   ]
+  },
+  "01JA34FR000000000000000009": {
+   "name": "solid",
+   "path": "sheet.png",
+   "region": [
+    82,
+    8,
+    1,
+    1
+   ]
+  },
+  "01JA34FR00000000000000000A": {
+   "name": "star",
+   "path": "sheet.png",
+   "region": [
+    83,
+    8,
+    3,
+    3
+   ]
+  },
+  "01JA34FR00000000000000000B": {
+   "name": "crate",
+   "path": "sheet.png",
+   "region": [
+    97,
+    1,
+    12,
+    12
+   ]
+  },
+  "01JA34FR00000000000000000C": {
+   "name": "glow",
+   "path": "sheet.png",
+   "region": [
+    110,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR00000000000000000D": {
+   "name": "tile0",
+   "path": "sheet.png",
+   "region": [
+    0,
+    16,
+    16,
+    16
+   ]
+  },
+  "01JA34FR00000000000000000E": {
+   "name": "tile1",
+   "path": "sheet.png",
+   "region": [
+    16,
+    16,
+    16,
+    16
+   ]
+  },
+  "01JA34FR00000000000000000F": {
+   "name": "panel",
+   "path": "sheet.png",
+   "region": [
+    0,
+    32,
+    24,
+    24
+   ]
+  },
+  "01JA34FR00000000000000000G": {
+   "name": "card0",
+   "path": "cards.png",
+   "region": [
+    2,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000H": {
+   "name": "card1",
+   "path": "cards.png",
+   "region": [
+    16,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000J": {
+   "name": "card2",
+   "path": "cards.png",
+   "region": [
+    30,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000K": {
+   "name": "card3",
+   "path": "cards.png",
+   "region": [
+    44,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000M": {
+   "name": "card4",
+   "path": "cards.png",
+   "region": [
+    2,
+    18,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000N": {
+   "name": "card5",
+   "path": "cards.png",
+   "region": [
+    16,
+    18,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000P": {
+   "name": "card6",
+   "path": "cards.png",
+   "region": [
+    30,
+    18,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000Q": {
+   "name": "card7",
+   "path": "cards.png",
+   "region": [
+    44,
+    18,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000R": {
+   "name": "card8",
+   "path": "cards.png",
+   "region": [
+    2,
+    34,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000S": {
+   "name": "card9",
+   "path": "cards.png",
+   "region": [
+    16,
+    34,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000T": {
+   "name": "cardA",
+   "path": "cards.png",
+   "region": [
+    30,
+    34,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000V": {
+   "name": "cardB",
+   "path": "cards.png",
+   "region": [
+    44,
+    34,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000W": {
+   "name": "probe",
+   "path": "probe.png",
+   "region": [
+    1,
+    1,
+    11,
+    9
+   ]
+  },
+  "01JA34FR00000000000000000X": {
+   "name": "hstrip",
+   "path": "hstrip.png",
+   "region": [
+    3,
+    2,
+    1100,
+    4
+   ]
+  },
+  "01JA34FR00000000000000000Y": {
+   "name": "vstrip",
+   "path": "vstrip.png",
+   "region": [
+    2,
+    3,
+    4,
+    1100
+   ]
+  },
+  "01JA34FR00000000000000000Z": {
+   "name": "hrow",
+   "path": "hstrip.png",
+   "region": [
+    3,
+    3,
+    1100,
+    1
+   ]
+  },
+  "01JA34FR000000000000000010": {
+   "name": "hmid",
+   "path": "hstrip.png",
+   "region": [
+    103,
+    4,
+    700,
+    1
+   ]
+  },
+  "01JA34FR000000000000000011": {
+   "name": "vcol",
+   "path": "vstrip.png",
+   "region": [
+    3,
+    3,
+    1,
+    1100
+   ]
+  },
+  "01JA34FR000000000000000012": {
+   "name": "vmid",
+   "path": "vstrip.png",
+   "region": [
+    4,
+    103,
+    1,
+    700
+   ]
+  },
+  "01JA34FR000000000000000013": {
+   "name": "halo",
+   "path": "halo.png",
+   "region": [
+    1,
+    1,
+    24,
+    24
+   ]
+  },
+  "01JA34FR000000000000000014": {
+   "name": "ballast",
+   "path": "ballast.png",
+   "region": null
+  },
+  "01JA34FR000000000000000015": {
+   "name": "label:S",
+   "path": "labels34.png",
+   "region": [
+    0,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR000000000000000016": {
+   "name": "label:T",
+   "path": "labels34.png",
+   "region": [
+    5,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR000000000000000017": {
+   "name": "label:N",
+   "path": "labels34.png",
+   "region": [
+    10,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR000000000000000018": {
+   "name": "label:O",
+   "path": "labels34.png",
+   "region": [
+    15,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR000000000000000019": {
+   "name": "label:L",
+   "path": "labels34.png",
+   "region": [
+    20,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001A": {
+   "name": "label:B",
+   "path": "labels34.png",
+   "region": [
+    25,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001B": {
+   "name": "label:W",
+   "path": "labels34.png",
+   "region": [
+    30,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001C": {
+   "name": "label:V",
+   "path": "labels34.png",
+   "region": [
+    35,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001D": {
+   "name": "label:X",
+   "path": "labels34.png",
+   "region": [
+    40,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001E": {
+   "name": "label:Y",
+   "path": "labels34.png",
+   "region": [
+    45,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001F": {
+   "name": "label:STABLE FRAMES",
+   "path": "labels34.png",
+   "region": [
+    50,
+    0,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001G": {
+   "name": "label:CARDS 1X",
+   "path": "labels34.png",
+   "region": [
+    103,
+    0,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001H": {
+   "name": "label:CARDS 2X",
+   "path": "labels34.png",
+   "region": [
+    136,
+    0,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001J": {
+   "name": "label:WISP",
+   "path": "labels34.png",
+   "region": [
+    169,
+    0,
+    15,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001K": {
+   "name": "label:KEY",
+   "path": "labels34.png",
+   "region": [
+    186,
+    0,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001M": {
+   "name": "label:RULER",
+   "path": "labels34.png",
+   "region": [
+    199,
+    0,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001N": {
+   "name": "label:CRATE",
+   "path": "labels34.png",
+   "region": [
+    220,
+    0,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001P": {
+   "name": "label:PROBE",
+   "path": "labels34.png",
+   "region": [
+    241,
+    0,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001Q": {
+   "name": "label:TILES",
+   "path": "labels34.png",
+   "region": [
+    262,
+    0,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001R": {
+   "name": "label:STAR",
+   "path": "labels34.png",
+   "region": [
+    283,
+    0,
+    15,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001S": {
+   "name": "label:TRANSFORMS",
+   "path": "labels34.png",
+   "region": [
+    0,
+    6,
+    39,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001T": {
+   "name": "label:PROBE 1X",
+   "path": "labels34.png",
+   "region": [
+    41,
+    6,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001V": {
+   "name": "label:PROBE 2X",
+   "path": "labels34.png",
+   "region": [
+    74,
+    6,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001W": {
+   "name": "label:RULER TIES 1X",
+   "path": "labels34.png",
+   "region": [
+    107,
+    6,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001X": {
+   "name": "label:RULER TIES 3X",
+   "path": "labels34.png",
+   "region": [
+    160,
+    6,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001Y": {
+   "name": "label:RULER ALIGNED",
+   "path": "labels34.png",
+   "region": [
+    213,
+    6,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001Z": {
+   "name": "label:PIVOTS",
+   "path": "labels34.png",
+   "region": [
+    266,
+    6,
+    23,
+    5
+   ]
+  },
+  "01JA34FR000000000000000020": {
+   "name": "label:NONE",
+   "path": "labels34.png",
+   "region": [
+    291,
+    6,
+    15,
+    5
+   ]
+  },
+  "01JA34FR000000000000000021": {
+   "name": "label:FX",
+   "path": "labels34.png",
+   "region": [
+    308,
+    6,
+    7,
+    5
+   ]
+  },
+  "01JA34FR000000000000000022": {
+   "name": "label:FY",
+   "path": "labels34.png",
+   "region": [
+    0,
+    12,
+    7,
+    5
+   ]
+  },
+  "01JA34FR000000000000000023": {
+   "name": "label:FXY",
+   "path": "labels34.png",
+   "region": [
+    9,
+    12,
+    11,
+    5
+   ]
+  },
+  "01JA34FR000000000000000024": {
+   "name": "label:MIR",
+   "path": "labels34.png",
+   "region": [
+    22,
+    12,
+    11,
+    5
+   ]
+  },
+  "01JA34FR000000000000000025": {
+   "name": "label:R90",
+   "path": "labels34.png",
+   "region": [
+    35,
+    12,
+    11,
+    5
+   ]
+  },
+  "01JA34FR000000000000000026": {
+   "name": "label:R180",
+   "path": "labels34.png",
+   "region": [
+    48,
+    12,
+    15,
+    5
+   ]
+  },
+  "01JA34FR000000000000000027": {
+   "name": "label:R270",
+   "path": "labels34.png",
+   "region": [
+    65,
+    12,
+    15,
+    5
+   ]
+  },
+  "01JA34FR000000000000000028": {
+   "name": "label:R90FX",
+   "path": "labels34.png",
+   "region": [
+    82,
+    12,
+    19,
+    5
+   ]
+  },
+  "01JA34FR000000000000000029": {
+   "name": "label:9-SLICE",
+   "path": "labels34.png",
+   "region": [
+    103,
+    12,
+    27,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002A": {
+   "name": "label:NATIVE",
+   "path": "labels34.png",
+   "region": [
+    132,
+    12,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002B": {
+   "name": "label:SIMPLE",
+   "path": "labels34.png",
+   "region": [
+    157,
+    12,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002C": {
+   "name": "label:STRETCH 72X44",
+   "path": "labels34.png",
+   "region": [
+    182,
+    12,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002D": {
+   "name": "label:SIMPLE 72X44",
+   "path": "labels34.png",
+   "region": [
+    235,
+    12,
+    47,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002E": {
+   "name": "label:SMALL",
+   "path": "labels34.png",
+   "region": [
+    284,
+    12,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002F": {
+   "name": "label:FLIPS",
+   "path": "labels34.png",
+   "region": [
+    0,
+    18,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002G": {
+   "name": "label:ROT 180",
+   "path": "labels34.png",
+   "region": [
+    21,
+    18,
+    27,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002H": {
+   "name": "label:MIRROR",
+   "path": "labels34.png",
+   "region": [
+    50,
+    18,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002J": {
+   "name": "label:DENSITY 8",
+   "path": "labels34.png",
+   "region": [
+    75,
+    18,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002K": {
+   "name": "label:DENSITY 32",
+   "path": "labels34.png",
+   "region": [
+    112,
+    18,
+    39,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002M": {
+   "name": "label:ROT 12",
+   "path": "labels34.png",
+   "region": [
+    153,
+    18,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002N": {
+   "name": "label:PROBE 1-1-1-1",
+   "path": "labels34.png",
+   "region": [
+    178,
+    18,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002P": {
+   "name": "label:ORDER",
+   "path": "labels34.png",
+   "region": [
+    231,
+    18,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002Q": {
+   "name": "label:LAYER",
+   "path": "labels34.png",
+   "region": [
+    252,
+    18,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002R": {
+   "name": "label:ID TIE",
+   "path": "labels34.png",
+   "region": [
+    273,
+    18,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002S": {
+   "name": "label:Z IGNORED",
+   "path": "labels34.png",
+   "region": [
+    0,
+    24,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002T": {
+   "name": "label:BATCH",
+   "path": "labels34.png",
+   "region": [
+    37,
+    24,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002V": {
+   "name": "label:ALPHA 0.5",
+   "path": "labels34.png",
+   "region": [
+    58,
+    24,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002W": {
+   "name": "label:LIGHT",
+   "path": "labels34.png",
+   "region": [
+    95,
+    24,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002X": {
+   "name": "label:LINEAR",
+   "path": "labels34.png",
+   "region": [
+    116,
+    24,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002Y": {
+   "name": "label:ORB 4X",
+   "path": "labels34.png",
+   "region": [
+    141,
+    24,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002Z": {
+   "name": "label:ORB ON LIGHT",
+   "path": "labels34.png",
+   "region": [
+    166,
+    24,
+    47,
+    5
+   ]
+  },
+  "01JA34FR000000000000000030": {
+   "name": "label:HALO 3X",
+   "path": "labels34.png",
+   "region": [
+    215,
+    24,
+    27,
+    5
+   ]
+  },
+  "01JA34FR000000000000000031": {
+   "name": "label:HALO 2.5X",
+   "path": "labels34.png",
+   "region": [
+    244,
+    24,
+    35,
+    5
+   ]
+  },
+  "01JA34FR000000000000000032": {
+   "name": "label:GLOW",
+   "path": "labels34.png",
+   "region": [
+    281,
+    24,
+    15,
+    5
+   ]
+  },
+  "01JA34FR000000000000000033": {
+   "name": "label:WISP 2X",
+   "path": "labels34.png",
+   "region": [
+    0,
+    30,
+    27,
+    5
+   ]
+  },
+  "01JA34FR000000000000000034": {
+   "name": "label:CRATE 30",
+   "path": "labels34.png",
+   "region": [
+    29,
+    30,
+    31,
+    5
+   ]
+  },
+  "01JA34FR000000000000000035": {
+   "name": "label:PANEL",
+   "path": "labels34.png",
+   "region": [
+    62,
+    30,
+    19,
+    5
+   ]
+  },
+  "01JA34FR000000000000000036": {
+   "name": "label:PROBE 3X",
+   "path": "labels34.png",
+   "region": [
+    83,
+    30,
+    31,
+    5
+   ]
+  },
+  "01JA34FR000000000000000037": {
+   "name": "label:BALLAST",
+   "path": "labels34.png",
+   "region": [
+    116,
+    30,
+    27,
+    5
+   ]
+  },
+  "01JA34FR000000000000000038": {
+   "name": "label:PIXEL RECT",
+   "path": "labels34.png",
+   "region": [
+    145,
+    30,
+    39,
+    5
+   ]
+  },
+  "01JA34FR000000000000000039": {
+   "name": "label:STABLE ID",
+   "path": "labels34.png",
+   "region": [
+    186,
+    30,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003A": {
+   "name": "label:WIDE 1100 1X",
+   "path": "labels34.png",
+   "region": [
+    223,
+    30,
+    47,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003B": {
+   "name": "label:ALIGNED",
+   "path": "labels34.png",
+   "region": [
+    272,
+    30,
+    27,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003C": {
+   "name": "label:TIE",
+   "path": "labels34.png",
+   "region": [
+    301,
+    30,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003D": {
+   "name": "label:FLIP",
+   "path": "labels34.png",
+   "region": [
+    0,
+    36,
+    15,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003E": {
+   "name": "label:FLIP TIE",
+   "path": "labels34.png",
+   "region": [
+    17,
+    36,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003F": {
+   "name": "label:TIE +1/256",
+   "path": "labels34.png",
+   "region": [
+    50,
+    36,
+    39,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003G": {
+   "name": "label:FLIP +1/256",
+   "path": "labels34.png",
+   "region": [
+    91,
+    36,
+    43,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003H": {
+   "name": "label:TIE -1/256",
+   "path": "labels34.png",
+   "region": [
+    136,
+    36,
+    39,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003J": {
+   "name": "label:FLIP -1/256",
+   "path": "labels34.png",
+   "region": [
+    177,
+    36,
+    43,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003K": {
+   "name": "label:SPAN 512",
+   "path": "labels34.png",
+   "region": [
+    222,
+    36,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003M": {
+   "name": "label:SPAN 1024",
+   "path": "labels34.png",
+   "region": [
+    255,
+    36,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003N": {
+   "name": "label:2X",
+   "path": "labels34.png",
+   "region": [
+    292,
+    36,
+    7,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003P": {
+   "name": "label:4X",
+   "path": "labels34.png",
+   "region": [
+    301,
+    36,
+    7,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003Q": {
+   "name": "label:8X",
+   "path": "labels34.png",
+   "region": [
+    310,
+    36,
+    7,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003R": {
+   "name": "label:16X",
+   "path": "labels34.png",
+   "region": [
+    0,
+    42,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003S": {
+   "name": "label:32X",
+   "path": "labels34.png",
+   "region": [
+    13,
+    42,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003T": {
+   "name": "label:MID",
+   "path": "labels34.png",
+   "region": [
+    26,
+    42,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003V": {
+   "name": "label:MID TIE",
+   "path": "labels34.png",
+   "region": [
+    39,
+    42,
+    27,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003W": {
+   "name": "label:MID FLIP",
+   "path": "labels34.png",
+   "region": [
+    68,
+    42,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003X": {
+   "name": "label:MID FLIP TIE",
+   "path": "labels34.png",
+   "region": [
+    101,
+    42,
+    47,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003Y": {
+   "name": "label:ORB 2X",
+   "path": "labels34.png",
+   "region": [
+    150,
+    42,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003Z": {
+   "name": "label:GLOW 2X",
+   "path": "labels34.png",
+   "region": [
+    175,
+    42,
+    27,
+    5
+   ]
+  },
+  "01JA34FR000000000000000040": {
+   "name": "label:CARD 7",
+   "path": "labels34.png",
+   "region": [
+    204,
+    42,
+    23,
+    5
+   ]
+  },
+  "01JA34FR000000000000000041": {
+   "name": "label:TILES TIE",
+   "path": "labels34.png",
+   "region": [
+    229,
+    42,
+    35,
+    5
+   ]
+  },
+  "01JA34FR000000000000000042": {
+   "name": "label:SCOPED ID",
+   "path": "labels34.png",
+   "region": [
+    266,
+    42,
+    35,
+    5
+   ]
+  }
+ },
+ "ballast_frame": "01JA34FR000000000000000014",
+ "panel_frame": "01JA34FR00000000000000000F",
+ "dropped_frame": "01JA34FR00000000000000000V",
+ "regions": {
+  "cards.png": {
+   "card0": [
+    2,
+    2,
+    12,
+    14
+   ],
+   "card1": [
+    16,
+    2,
+    12,
+    14
+   ],
+   "card2": [
+    30,
+    2,
+    12,
+    14
+   ],
+   "card3": [
+    44,
+    2,
+    12,
+    14
+   ],
+   "card4": [
+    2,
+    18,
+    12,
+    14
+   ],
+   "card5": [
+    16,
+    18,
+    12,
+    14
+   ],
+   "card6": [
+    30,
+    18,
+    12,
+    14
+   ],
+   "card7": [
+    44,
+    18,
+    12,
+    14
+   ],
+   "card8": [
+    2,
+    34,
+    12,
+    14
+   ],
+   "card9": [
+    16,
+    34,
+    12,
+    14
+   ],
+   "cardA": [
+    30,
+    34,
+    12,
+    14
+   ],
+   "cardB": [
+    44,
+    34,
+    12,
+    14
+   ]
+  },
+  "probe.png": {
+   "probe": [
+    1,
+    1,
+    11,
+    9
+   ]
+  },
+  "hstrip.png": {
+   "hstrip": [
+    3,
+    2,
+    1100,
+    4
+   ]
+  },
+  "vstrip.png": {
+   "vstrip": [
+    2,
+    3,
+    4,
+    1100
+   ]
+  },
+  "halo.png": {
+   "halo": [
+    1,
+    1,
+    24,
+    24
+   ]
+  },
+  "labels34.png": {
+   "label:S": [
+    0,
+    0,
+    3,
+    5
+   ],
+   "label:T": [
+    5,
+    0,
+    3,
+    5
+   ],
+   "label:N": [
+    10,
+    0,
+    3,
+    5
+   ],
+   "label:O": [
+    15,
+    0,
+    3,
+    5
+   ],
+   "label:L": [
+    20,
+    0,
+    3,
+    5
+   ],
+   "label:B": [
+    25,
+    0,
+    3,
+    5
+   ],
+   "label:W": [
+    30,
+    0,
+    3,
+    5
+   ],
+   "label:V": [
+    35,
+    0,
+    3,
+    5
+   ],
+   "label:X": [
+    40,
+    0,
+    3,
+    5
+   ],
+   "label:Y": [
+    45,
+    0,
+    3,
+    5
+   ],
+   "label:STABLE FRAMES": [
+    50,
+    0,
+    51,
+    5
+   ],
+   "label:CARDS 1X": [
+    103,
+    0,
+    31,
+    5
+   ],
+   "label:CARDS 2X": [
+    136,
+    0,
+    31,
+    5
+   ],
+   "label:WISP": [
+    169,
+    0,
+    15,
+    5
+   ],
+   "label:KEY": [
+    186,
+    0,
+    11,
+    5
+   ],
+   "label:RULER": [
+    199,
+    0,
+    19,
+    5
+   ],
+   "label:CRATE": [
+    220,
+    0,
+    19,
+    5
+   ],
+   "label:PROBE": [
+    241,
+    0,
+    19,
+    5
+   ],
+   "label:TILES": [
+    262,
+    0,
+    19,
+    5
+   ],
+   "label:STAR": [
+    283,
+    0,
+    15,
+    5
+   ],
+   "label:TRANSFORMS": [
+    0,
+    6,
+    39,
+    5
+   ],
+   "label:PROBE 1X": [
+    41,
+    6,
+    31,
+    5
+   ],
+   "label:PROBE 2X": [
+    74,
+    6,
+    31,
+    5
+   ],
+   "label:RULER TIES 1X": [
+    107,
+    6,
+    51,
+    5
+   ],
+   "label:RULER TIES 3X": [
+    160,
+    6,
+    51,
+    5
+   ],
+   "label:RULER ALIGNED": [
+    213,
+    6,
+    51,
+    5
+   ],
+   "label:PIVOTS": [
+    266,
+    6,
+    23,
+    5
+   ],
+   "label:NONE": [
+    291,
+    6,
+    15,
+    5
+   ],
+   "label:FX": [
+    308,
+    6,
+    7,
+    5
+   ],
+   "label:FY": [
+    0,
+    12,
+    7,
+    5
+   ],
+   "label:FXY": [
+    9,
+    12,
+    11,
+    5
+   ],
+   "label:MIR": [
+    22,
+    12,
+    11,
+    5
+   ],
+   "label:R90": [
+    35,
+    12,
+    11,
+    5
+   ],
+   "label:R180": [
+    48,
+    12,
+    15,
+    5
+   ],
+   "label:R270": [
+    65,
+    12,
+    15,
+    5
+   ],
+   "label:R90FX": [
+    82,
+    12,
+    19,
+    5
+   ],
+   "label:9-SLICE": [
+    103,
+    12,
+    27,
+    5
+   ],
+   "label:NATIVE": [
+    132,
+    12,
+    23,
+    5
+   ],
+   "label:SIMPLE": [
+    157,
+    12,
+    23,
+    5
+   ],
+   "label:STRETCH 72X44": [
+    182,
+    12,
+    51,
+    5
+   ],
+   "label:SIMPLE 72X44": [
+    235,
+    12,
+    47,
+    5
+   ],
+   "label:SMALL": [
+    284,
+    12,
+    19,
+    5
+   ],
+   "label:FLIPS": [
+    0,
+    18,
+    19,
+    5
+   ],
+   "label:ROT 180": [
+    21,
+    18,
+    27,
+    5
+   ],
+   "label:MIRROR": [
+    50,
+    18,
+    23,
+    5
+   ],
+   "label:DENSITY 8": [
+    75,
+    18,
+    35,
+    5
+   ],
+   "label:DENSITY 32": [
+    112,
+    18,
+    39,
+    5
+   ],
+   "label:ROT 12": [
+    153,
+    18,
+    23,
+    5
+   ],
+   "label:PROBE 1-1-1-1": [
+    178,
+    18,
+    51,
+    5
+   ],
+   "label:ORDER": [
+    231,
+    18,
+    19,
+    5
+   ],
+   "label:LAYER": [
+    252,
+    18,
+    19,
+    5
+   ],
+   "label:ID TIE": [
+    273,
+    18,
+    23,
+    5
+   ],
+   "label:Z IGNORED": [
+    0,
+    24,
+    35,
+    5
+   ],
+   "label:BATCH": [
+    37,
+    24,
+    19,
+    5
+   ],
+   "label:ALPHA 0.5": [
+    58,
+    24,
+    35,
+    5
+   ],
+   "label:LIGHT": [
+    95,
+    24,
+    19,
+    5
+   ],
+   "label:LINEAR": [
+    116,
+    24,
+    23,
+    5
+   ],
+   "label:ORB 4X": [
+    141,
+    24,
+    23,
+    5
+   ],
+   "label:ORB ON LIGHT": [
+    166,
+    24,
+    47,
+    5
+   ],
+   "label:HALO 3X": [
+    215,
+    24,
+    27,
+    5
+   ],
+   "label:HALO 2.5X": [
+    244,
+    24,
+    35,
+    5
+   ],
+   "label:GLOW": [
+    281,
+    24,
+    15,
+    5
+   ],
+   "label:WISP 2X": [
+    0,
+    30,
+    27,
+    5
+   ],
+   "label:CRATE 30": [
+    29,
+    30,
+    31,
+    5
+   ],
+   "label:PANEL": [
+    62,
+    30,
+    19,
+    5
+   ],
+   "label:PROBE 3X": [
+    83,
+    30,
+    31,
+    5
+   ],
+   "label:BALLAST": [
+    116,
+    30,
+    27,
+    5
+   ],
+   "label:PIXEL RECT": [
+    145,
+    30,
+    39,
+    5
+   ],
+   "label:STABLE ID": [
+    186,
+    30,
+    35,
+    5
+   ],
+   "label:WIDE 1100 1X": [
+    223,
+    30,
+    47,
+    5
+   ],
+   "label:ALIGNED": [
+    272,
+    30,
+    27,
+    5
+   ],
+   "label:TIE": [
+    301,
+    30,
+    11,
+    5
+   ],
+   "label:FLIP": [
+    0,
+    36,
+    15,
+    5
+   ],
+   "label:FLIP TIE": [
+    17,
+    36,
+    31,
+    5
+   ],
+   "label:TIE +1/256": [
+    50,
+    36,
+    39,
+    5
+   ],
+   "label:FLIP +1/256": [
+    91,
+    36,
+    43,
+    5
+   ],
+   "label:TIE -1/256": [
+    136,
+    36,
+    39,
+    5
+   ],
+   "label:FLIP -1/256": [
+    177,
+    36,
+    43,
+    5
+   ],
+   "label:SPAN 512": [
+    222,
+    36,
+    31,
+    5
+   ],
+   "label:SPAN 1024": [
+    255,
+    36,
+    35,
+    5
+   ],
+   "label:2X": [
+    292,
+    36,
+    7,
+    5
+   ],
+   "label:4X": [
+    301,
+    36,
+    7,
+    5
+   ],
+   "label:8X": [
+    310,
+    36,
+    7,
+    5
+   ],
+   "label:16X": [
+    0,
+    42,
+    11,
+    5
+   ],
+   "label:32X": [
+    13,
+    42,
+    11,
+    5
+   ],
+   "label:MID": [
+    26,
+    42,
+    11,
+    5
+   ],
+   "label:MID TIE": [
+    39,
+    42,
+    27,
+    5
+   ],
+   "label:MID FLIP": [
+    68,
+    42,
+    31,
+    5
+   ],
+   "label:MID FLIP TIE": [
+    101,
+    42,
+    47,
+    5
+   ],
+   "label:ORB 2X": [
+    150,
+    42,
+    23,
+    5
+   ],
+   "label:GLOW 2X": [
+    175,
+    42,
+    27,
+    5
+   ],
+   "label:CARD 7": [
+    204,
+    42,
+    23,
+    5
+   ],
+   "label:TILES TIE": [
+    229,
+    42,
+    35,
+    5
+   ],
+   "label:SCOPED ID": [
+    266,
+    42,
+    35,
+    5
+   ]
+  },
+  "ballast-v1.png": {
+   "ballast": [
+    0,
+    0,
+    1200,
+    40
+   ]
+  },
+  "ballast-v2.png": {
+   "ballast": [
+    0,
+    0,
+    1240,
+    150
+   ]
+  }
+ },
+ "regions_0032_sheet": {
+  "wisp0": [
+   0,
+   0,
+   16,
+   16
+  ],
+  "wisp1": [
+   16,
+   0,
+   16,
+   16
+  ],
+  "wisp2": [
+   32,
+   0,
+   16,
+   16
+  ],
+  "wisp3": [
+   48,
+   0,
+   16,
+   16
+  ],
+  "orb": [
+   64,
+   0,
+   16,
+   16
+  ],
+  "key": [
+   80,
+   0,
+   8,
+   8
+  ],
+  "odd": [
+   88,
+   0,
+   7,
+   7
+  ],
+  "marker": [
+   80,
+   8,
+   2,
+   2
+  ],
+  "solid": [
+   82,
+   8,
+   1,
+   1
+  ],
+  "star": [
+   83,
+   8,
+   3,
+   3
+  ],
+  "crate": [
+   97,
+   1,
+   12,
+   12
+  ],
+  "sky": [
+   127,
+   0,
+   1,
+   32
+  ],
+  "tile0": [
+   0,
+   16,
+   16,
+   16
+  ],
+  "tile1": [
+   16,
+   16,
+   16,
+   16
+  ],
+  "dirt": [
+   32,
+   32,
+   16,
+   16
+  ],
+  "moon": [
+   48,
+   32,
+   12,
+   12
+  ],
+  "ramp": [
+   64,
+   32,
+   16,
+   16
+  ],
+  "glow": [
+   110,
+   0,
+   16,
+   16
+  ],
+  "fog": [
+   32,
+   16,
+   16,
+   4
+  ],
+  "tone": [
+   32,
+   20,
+   64,
+   4
+  ],
+  "alpha_white": [
+   32,
+   24,
+   36,
+   4
+  ],
+  "alpha_black": [
+   68,
+   24,
+   36,
+   4
+  ],
+  "panel": [
+   0,
+   32,
+   24,
+   24
+  ]
+ },
+ "panel_border": [
+  3,
+  6,
+  4,
+  8
+ ],
+ "card_colours": [
+  [
+   196,
+   64,
+   64
+  ],
+  [
+   204,
+   120,
+   48
+  ],
+  [
+   196,
+   172,
+   52
+  ],
+  [
+   120,
+   172,
+   56
+  ],
+  [
+   56,
+   160,
+   88
+  ],
+  [
+   48,
+   156,
+   152
+  ],
+  [
+   52,
+   128,
+   196
+  ],
+  [
+   72,
+   88,
+   200
+  ],
+  [
+   128,
+   72,
+   196
+  ],
+  [
+   180,
+   64,
+   168
+  ],
+  [
+   150,
+   110,
+   80
+  ],
+  [
+   110,
+   120,
+   130
+  ]
+ ],
+ "card_glyphs": "0123456789AB",
+ "probe": {
+  "sides": {
+   "top": [
+    214,
+    64,
+    72
+   ],
+   "right": [
+    72,
+    186,
+    112
+   ],
+   "bottom": [
+    76,
+    120,
+    222
+   ],
+   "left": [
+    226,
+    182,
+    72
+   ]
+  },
+  "corners": {
+   "tl": [
+    224,
+    224,
+    224
+   ],
+   "tr": [
+    64,
+    200,
+    210
+   ],
+   "bl": [
+    226,
+    140,
+    180
+   ],
+   "br": [
+    20,
+    20,
+    24
+   ]
+  },
+  "check": [
+   [
+    44,
+    40,
+    70
+   ],
+   [
+    58,
+    54,
+    88
+   ]
+  ],
+  "glyph": [
+   206,
+   202,
+   222
+  ]
+ },
+ "strip": {
+  "length": 1100,
+  "thickness": 4,
+  "h_base": [
+   100,
+   120,
+   140,
+   160
+  ],
+  "v_base": [
+   180,
+   190,
+   200,
+   210
+  ],
+  "phase": 32
+ },
+ "halo": [
+  226,
+  180,
+  110
+ ],
+ "reused": {
+  "sheet.png": {
+   "from": "handoffs/0032-sprite-rendering/evidence/art/sheet.png",
+   "sha256": "7451ef95e85b803614deb2e836bad9a9e2fc773512ef3d7570dbf95c7b717cf7"
+  },
+  "badge.png": {
+   "from": "handoffs/0032-sprite-rendering/evidence/art/badge.png",
+   "sha256": "648441d43c6d8dd8df7fc6bc0a357a41168a223e55163cfe797d552483af9796"
+  }
+ },
+ "reused_code": {
+  "pngio.py": {
+   "from": "handoffs/0032-sprite-rendering/tools/pngio.py",
+   "sha256": "5b73bef8fefbb5c3b89515d677d8fa71a2a44fc1cb9980cb4fdb9d10ddde9e86"
+  },
+  "sprite_art.py": {
+   "from": "handoffs/0032-sprite-rendering/tools/sprite_art.py",
+   "sha256": "45aec9a21c55b4e3e9aa2abc9b42c84864bf228a8218feb6b2b27f79ee3f9e5e"
+  }
+ },
+ "files": {
+  "alt.atlas.json": "5b05919b5185e3f5004a7ec52e25d39183a6017e986437755a8ac16efd25c88d",
+  "atlas-v1.atlas.json": "02a786d71aec677699c4809e525c745fe0478992f17c1a44ef4207c0ed90c875",
+  "atlas-v3.atlas.json": "d0dcc0d33d5c6b6c932acf238f3c4de872c2f5d52466b85af3129644961a8bb7",
+  "badge.png": "648441d43c6d8dd8df7fc6bc0a357a41168a223e55163cfe797d552483af9796",
+  "ballast-v1.png": "4c88a7958c01b09680e291df9a32cb227cbe84b8153e604d0342a727572533c6",
+  "ballast-v2.png": "1ced828bc98b27184ef1b2c75015ecca8635d70d127478ac43c3942fa330e3cb",
+  "big2048.png": "524b119ddad767a6b17d18ea2234b16d70af5f7d1793e58b050ff40c1a8f2b6e",
+  "cards.png": "714886d9a78831b071338336ddee4699306a45063fac82dac229f4a54a1c0d90",
+  "fail-bounds-area.atlas.json": "ec8e36d18948e5d4a53f3bc022c1be86d58ca9706dfb3b0513ebcdd064e4f608",
+  "fail-bounds-axis.atlas.json": "a8b7e93e96fd8c5cc59f31d69a897efa06e73f40c00234a0f875650dfd847fc5",
+  "fail-frames257.atlas.json": "067c40e20d5120d808b567f4add3f0df91674c796e2ed0b0c7f3e1d2a913edb6",
+  "fail-identity.atlas.json": "c120ef1de5a14534dbb9afde4a1d855d062b51887d3b2e28924257616cb8044f",
+  "fail-nofit.atlas.json": "816b6a29089638c6959b59f8c30c62095be4ef6ef607673e3dca9eda90fc2497",
+  "fail-padding0.atlas.json": "5633b56b9ac217e2d906efc3ad478840b480f2f2f885a8acc9b7109c60c153ce",
+  "fail-padding17.atlas.json": "ccd7a56432e5e14d74f7f44683a4504eb868947222b24e1dc65e3089703fa281",
+  "fail-rect.atlas.json": "b197adb4cfacd87849e6cf9b7416800ed0f6dc55f95933fe6486b24c80813567",
+  "fail-texels.atlas.json": "fe5039f9d97610f92ef42bd6e3e78fe3b7c2247b15653696b1fce84dc5947460",
+  "halo.png": "fa0c9fad2affbe21dd230ed1ef155e758bc70fa69418a17fe7ca03cd04e55e83",
+  "hstrip.png": "ab0efa89ed722a58685708d3d869a09bac0fd6277b41f2ae148f4281494f8dbb",
+  "labels34.png": "d85c4aad63e2699d3ab300d1d903e9efd6f98983bfaad133b7b7d56b1eaede0c",
+  "limit-texels-exact.atlas.json": "90aa908415ee83538c9f4154bc4f9c6ade20776947d958a55d23a5c4a406ae16",
+  "one.png": "a5dfa6bdb4097981508398281e5f574583ea4d10607dd702596c20c278add50a",
+  "probe.png": "02a4232f33b43a0464ef3bd72a58f887666f9d782ba395d895102caea8c598f4",
+  "render-fail-drop-cardB.atlas.json": "be4d18fa691eddcc726589fb48000e40c9ec1311afa13eed1edb767dcbfb922b",
+  "render-fail-shrink-panel.atlas.json": "7cfea59bfb85713dc8e62482ddf7ca7a4129c3bf16f259de66c8a1c536679205",
+  "sheet.png": "7451ef95e85b803614deb2e836bad9a9e2fc773512ef3d7570dbf95c7b717cf7",
+  "vstrip.png": "0f58ee5b893ff3622d25a81ac513c0735a023a81165841648745b2b3ffaa4ecd"
+ }
+}

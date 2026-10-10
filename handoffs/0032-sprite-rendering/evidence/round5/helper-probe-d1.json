@@ -1,0 +1,85 @@
+{
+ "binary": "active",
+ "binary_file": "incant_headless",
+ "binary_source_commit": "1f72a990b04f9bd87a2e8e88f1fa5760006f3911",
+ "binary_sha256_start": "44e75204010c4275d24c2566c089deb44efc028ffc38fc7e03c7523f77a3ca85",
+ "plan": {
+  "repeats": 1,
+  "live": [],
+  "static_only": true,
+  "probe": true,
+  "shots": null
+ },
+ "shots": {
+  "pp-O-1024x1024": {
+   "r1": "7f3d7c5f90d683541e7babcd0ec6b01e23e4439d408cc5a1997fba06a1221c7d",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2735
+   }
+  },
+  "pp-P-1024x1024": {
+   "r1": "efcfd0f5677ad84b741854a0aedf12ab355149fe7a288838b17df20af8497652",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2735
+   }
+  },
+  "pp-O-hd-1920x1080": {
+   "r1": "837770e0f9a3ccd1b239f48395da2e3f758828f960ccd8936e40a01e0d145520",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2735
+   }
+  },
+  "pp-P-hd-1920x1080": {
+   "r1": "22f6b9a548e83de8a75910d082b3408846040270220cddd2fe713b8a23d191b0",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2735
+   }
+  }
+ },
+ "authored_unchanged_by_rendering": true,
+ "authored_unchanged_by_play": true,
+ "binary_sha256_end": "44e75204010c4275d24c2566c089deb44efc028ffc38fc7e03c7523f77a3ca85",
+ "engine_calls": 19,
+ "binary_unchanged_every_call": true,
+ "budget": {
+  "frames": 4,
+  "raw_bytes": 24977408,
+  "invocations": 4,
+  "largest_invocation_frames": 1,
+  "largest_invocation_raw_bytes": 8294400,
+  "written_pngs": 4,
+  "written_raw_bytes": 24977408
+ }
+}

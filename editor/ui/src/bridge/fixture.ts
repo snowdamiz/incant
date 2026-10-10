@@ -188,7 +188,7 @@ const SCHEMAS: Record<string, ComponentSchema> = {
       near: { type: 'number', format: 'double', 'x-incant-unit': 'm', optional: false },
       projection: {
         type: 'tagged-union',
-        description: 'Perspective, or orthographic with parallel view rays and a fixed world-space height.',
+        description: 'Perspective, orthographic, or pixel-perfect with a fixed logical resolution.',
         default: { kind: 'perspective' },
         discriminator: 'kind',
         variants: {
@@ -212,6 +212,32 @@ const SCHEMAS: Record<string, ComponentSchema> = {
               },
             },
             required: ['kind', 'vertical_size'],
+          },
+          pixel_perfect: {
+            type: 'object',
+            additionalProperties: false,
+            properties: {
+              kind: { type: 'string', const: 'pixel_perfect', enum: ['pixel_perfect'], optional: false },
+              pixels_per_unit: {
+                type: 'number',
+                format: 'double',
+                description: 'Logical pixels per world metre. Camera motion snaps to this grid.',
+                minimum: 1,
+                maximum: 4096,
+                'x-incant-unit': 'px/m',
+                optional: false,
+              },
+              reference_resolution: {
+                type: 'array',
+                description: 'Fixed logical width and height, scaled by whole pixels with letterboxing.',
+                items: { type: 'integer', format: 'uint32', minimum: 0 },
+                minItems: 2,
+                maxItems: 2,
+                'x-incant-unit': 'px',
+                optional: false,
+              },
+            },
+            required: ['kind', 'pixels_per_unit', 'reference_resolution'],
           },
         },
         optional: true,

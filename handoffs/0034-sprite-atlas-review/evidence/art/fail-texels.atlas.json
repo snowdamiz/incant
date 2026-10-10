@@ -1,0 +1,61 @@
+{
+ "version": 1,
+ "id": "01JA34AA000000000000000001",
+ "maximum_size": [
+  2048,
+  2048
+ ],
+ "padding": 2,
+ "frames": {
+  "01JA34FR0000000000000001YG": {
+   "name": "big0",
+   "path": "big2048.png",
+   "region": [
+    0,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR0000000000000001YH": {
+   "name": "big1",
+   "path": "big2048.png",
+   "region": [
+    16,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR0000000000000001YJ": {
+   "name": "big2",
+   "path": "big2048.png",
+   "region": [
+    32,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR0000000000000001YK": {
+   "name": "big3",
+   "path": "big2048.png",
+   "region": [
+    48,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR00000000000000021M": {
+   "name": "one",
+   "path": "one.png",
+   "region": [
+    0,
+    0,
+    1,
+    1
+   ]
+  }
+ }
+}

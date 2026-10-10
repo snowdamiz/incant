@@ -1,82 +1,32 @@
 import { cleanup, within } from '@testing-library/react';
 import axe from 'axe-core';
 import { afterEach, describe, expect, it } from 'vitest';
-import type { ComponentSchema, Diagnostic, FieldSchema } from '../../bridge/contract';
+import type { Diagnostic, FieldSchema } from '../../bridge/contract';
 import { LEGACY, PIXEL, description, expectFieldOfViewLive, inspect, nativeCamera, regionOf, rows } from '../../test/cameraInspector';
 import { isPixelPerfectCamera } from './presentation';
 
-/*
- * SYNTHETIC SCHEMA — NOT ON MAIN.
- *
- * Main's schemas/Camera.schema.json declares perspective and orthographic projections
- * only. The pixel-perfect renderer, its Rust schema and its acceptance evidence live on
- * the preserved handoff/0033-pixel-integration branch. These tests keep the Inspector's
- * pixel-perfect presentation (density in px/m, a W × H logical resolution, the "Unused"
- * field of view) exercised by injecting that branch's converted variant into main's
- * native schema. Nothing here reaches the sample fixture or the native parity tests.
- *
- * When pixel-perfect lands on main: delete SYNTHETIC, test against nativeCamera(), and
- * let CameraFields.test.tsx's parity tests cover the variant. The first test below
- * fails at that point as a reminder.
- */
+/** Pixel camera behavior uses the actual Rust-generated native schema. */
 
 afterEach(cleanup);
-
-/** The pixel-perfect variant as handoff/0033-pixel-integration's bridge conversion produces it. */
-const PIXEL_PERFECT_VARIANT = {
-  type: 'object',
-  additionalProperties: false,
-  properties: {
-    kind: { type: 'string', const: 'pixel_perfect', enum: ['pixel_perfect'], optional: false },
-    pixels_per_unit: {
-      type: 'number',
-      format: 'double',
-      description: 'Logical pixels per world metre. Camera motion snaps to this grid.',
-      minimum: 1,
-      maximum: 4096,
-      'x-incant-unit': 'px/m',
-      optional: false,
-    },
-    reference_resolution: {
-      type: 'array',
-      description: 'Fixed logical width and height, scaled by whole pixels with letterboxing.',
-      items: { type: 'integer', format: 'uint32', minimum: 0 },
-      minItems: 2,
-      maxItems: 2,
-      'x-incant-unit': 'px',
-      optional: false,
-    },
-  },
-  required: ['kind', 'pixels_per_unit', 'reference_resolution'],
-} as unknown as FieldSchema;
 
 const NATIVE = nativeCamera();
 type Union = Extract<FieldSchema, { type: 'tagged-union' }>;
 const nativeProjection = NATIVE.properties.projection as Union;
 
-/** Main's native Camera schema plus the synthetic pixel-perfect variant. */
-const SYNTHETIC: ComponentSchema = {
-  ...NATIVE,
-  properties: {
-    ...NATIVE.properties,
-    projection: {
-      ...nativeProjection,
-      description: 'Perspective, orthographic, or pixel-perfect with a fixed logical resolution.',
-      variants: { ...nativeProjection.variants, pixel_perfect: PIXEL_PERFECT_VARIANT },
-    } as FieldSchema,
-  },
-};
-
-describe('synthetic pixel-perfect schema', () => {
-  it('extends main, which does not declare pixel-perfect yet', () => {
-    // If this fails, main's schema now has the variant: switch these tests to nativeCamera().
-    expect(Object.keys(nativeProjection.variants)).toEqual(['perspective', 'orthographic']);
-    expect(Object.keys((SYNTHETIC.properties.projection as Union).variants)).toEqual(['perspective', 'orthographic', 'pixel_perfect']);
+describe('native pixel-perfect schema', () => {
+  it('declares pixel-perfect bounds and units through the native bridge', () => {
+    expect(Object.keys(nativeProjection.variants)).toEqual(['perspective', 'orthographic', 'pixel_perfect']);
+    expect(nativeProjection.variants.pixel_perfect).toMatchObject({
+      properties: {
+        pixels_per_unit: { type: 'number', minimum: 1, maximum: 4096, 'x-incant-unit': 'px/m' },
+        reference_resolution: { type: 'array', minItems: 2, maxItems: 2, 'x-incant-unit': 'px' },
+      },
+    });
   });
 
   it('has no axe violations for well-formed and malformed pixel-perfect cameras', async () => {
     for (const value of [{ ...LEGACY, projection: PIXEL }, { ...LEGACY, projection: { ...PIXEL, reference_resolution: [320] } }]) {
-      await inspect(value, [], SYNTHETIC);
+      await inspect(value, [], NATIVE);
       const panel = document.querySelector<HTMLElement>('[data-region="inspector"]')!;
       const results = await axe.run(panel, { rules: { 'color-contrast': { enabled: false } } });
       expect(results.violations.map((v) => v.id)).toEqual([]);
@@ -87,7 +37,7 @@ describe('synthetic pixel-perfect schema', () => {
 
 describe('pixel-perfect Camera Inspector', () => {
   it('shows density in px/m and the logical resolution as a labelled width and height', async () => {
-    const camera = await inspect({ ...LEGACY, projection: PIXEL }, [], SYNTHETIC);
+    const camera = await inspect({ ...LEGACY, projection: PIXEL }, [], NATIVE);
     expect(rows(camera)).toEqual([
       'Projection: Pixel perfect',
       'Pixel density: 32 px/m',
@@ -117,7 +67,7 @@ describe('pixel-perfect Camera Inspector', () => {
   });
 
   it('is read-only and reachable by Tab in reading order, with no projection controls', async () => {
-    const camera = await inspect({ ...LEGACY, projection: PIXEL }, [], SYNTHETIC);
+    const camera = await inspect({ ...LEGACY, projection: PIXEL }, [], NATIVE);
     const region = regionOf(camera);
     expect(region.querySelectorAll('button:not(.component__toggle), select, [role="combobox"], [role="radio"]')).toHaveLength(0);
     const inputs = Array.from(region.querySelectorAll<HTMLInputElement>('input'));
@@ -133,7 +83,7 @@ describe('pixel-perfect Camera Inspector', () => {
     ['three numbers', [320, 180, 1], '[320,180,1]'],
     ['an empty list', [], '[]'],
   ])('reports a resolution of %s as a mismatch instead of guessing a width or height', async (_name, size, raw) => {
-    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, reference_resolution: size } }, [], SYNTHETIC);
+    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, reference_resolution: size } }, [], NATIVE);
     expect(camera.getByRole('textbox', { name: 'Projection' })).toHaveProperty('value', 'Pixel perfect');
     const notice = camera.getByRole('group', { name: /^Resolution/ });
     expect(notice.textContent).toContain('Cannot show as 2 numbers (logical width and logical height); raw value:');
@@ -149,7 +99,7 @@ describe('pixel-perfect Camera Inspector', () => {
     ['a missing density', { kind: 'pixel_perfect', reference_resolution: [320, 180] }, 'Pixel density', 'Cannot show as a number; raw value:', 'undefined'],
     ['a text density', { ...PIXEL, pixels_per_unit: '32' }, 'Pixel density', 'Cannot show as a number; raw value:', '"32"'],
   ])('reports %s with its raw value', async (_name, projection, label, message, raw) => {
-    const camera = await inspect({ ...LEGACY, projection }, [], SYNTHETIC);
+    const camera = await inspect({ ...LEGACY, projection }, [], NATIVE);
     expect(camera.getByRole('textbox', { name: 'Projection' })).toHaveProperty('value', 'Pixel perfect');
     const notice = camera.getByRole('group', { name: new RegExp(`^${label}`) });
     expect(notice.textContent).toContain(message);
@@ -158,7 +108,7 @@ describe('pixel-perfect Camera Inspector', () => {
   });
 
   it('flags a field that is not part of the pixel-perfect projection', async () => {
-    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, vertical_size: 8 } }, [], SYNTHETIC);
+    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, vertical_size: 8 } }, [], NATIVE);
     expect(camera.getByRole('group', { name: 'Projection' }).textContent).toContain(
       'Field vertical_size is not part of the “pixel_perfect” projection: 8',
     );
@@ -174,7 +124,7 @@ describe('pixel-perfect Camera Inspector', () => {
       component: 'Camera',
       path: '/projection/reference_resolution/1',
     };
-    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, reference_resolution: [320, 8] } }, [problem], SYNTHETIC);
+    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, reference_resolution: [320, 8] } }, [problem], NATIVE);
     const width = camera.getByRole('textbox', { name: 'Logical width' });
     const height = camera.getByRole('textbox', { name: 'Logical height' });
     expect([width, height].map((input) => (input as HTMLInputElement).value)).toEqual(['320', '8']);
@@ -185,14 +135,14 @@ describe('pixel-perfect Camera Inspector', () => {
   });
 
   it('shows a tiny or fractional density as a nonzero authored value', async () => {
-    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, pixels_per_unit: 0.0000025 } }, [], SYNTHETIC);
+    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, pixels_per_unit: 0.0000025 } }, [], NATIVE);
     const density = camera.getByRole('textbox', { name: 'Pixel density' });
     expect(density).toHaveProperty('value', '2.5e-6');
     expect(density.getAttribute('title')).toBe('0.0000025');
     // Out of the engine's 1..4096 range, so field of view is not marked unused.
     expectFieldOfViewLive(camera);
     cleanup();
-    const fractional = await inspect({ ...LEGACY, projection: { ...PIXEL, pixels_per_unit: 16.5 } }, [], SYNTHETIC);
+    const fractional = await inspect({ ...LEGACY, projection: { ...PIXEL, pixels_per_unit: 16.5 } }, [], NATIVE);
     expect(fractional.getByRole('textbox', { name: 'Pixel density' })).toHaveProperty('value', '16.5');
     expect(rows(fractional)[3]).toBe('Field of view: 60 °Unused');
   });

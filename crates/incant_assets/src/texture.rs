@@ -64,7 +64,7 @@ pub(crate) fn dimensions(w: u32, h: u32) -> Result<()> {
 pub(crate) fn mip_count(w: u32, h: u32) -> usize {
     (w.max(h).ilog2() + 1) as usize
 }
-fn decode_srgb(v: f32) -> f32 {
+pub(crate) fn decode_srgb(v: f32) -> f32 {
     if v <= 0.04045 {
         v / 12.92
     } else {
@@ -137,6 +137,20 @@ pub fn import_image(bytes: &[u8], usage: TextureUsage) -> Result<Texture> {
                 *v = decode_srgb(*v);
             }
         }
+    }
+    from_linear(width, height, pixels, target, usage)
+}
+
+pub(crate) fn from_linear(
+    width: u32,
+    height: u32,
+    mut pixels: Vec<[f32; 4]>,
+    target: TextureFormat,
+    usage: TextureUsage,
+) -> Result<Texture> {
+    dimensions(width, height)?;
+    if pixels.len() != width as usize * height as usize {
+        return Err(invalid("linear texture pixel count mismatch"));
     }
     let mut levels = Vec::new();
     let (mut w, mut h) = (width, height);
