@@ -53,6 +53,16 @@ within its documented workload.
 
 ## Active work
 
+- Native numeric publication now rejects finite-value integration/hierarchy
+  overflow before advancing live world state. Script loans revoke views before
+  the same hierarchy check and restore all numeric writes on failure. Four
+  regressions first failed on the old code; 407 release workspace tests and both
+  Clippy modes pass. A fresh 2,170,968-byte shipping player passes 24 source-free
+  checks. Local release timing is recorded as diagnostic only; controlled
+  shipping/phone performance, trusted native immediate-write responsibility and
+  remaining gameplay migration stay explicit. See
+  [numerical-boundary evidence](docs/spikes/native-numeric-boundaries.md).
+
 - Native fixed-tick input now owns a fresh cooked world, script VM and bounded
   input timeline. Action bindings validate once at construction/rebind; each
   valid packet advances native simulation before the synchronous script. Raw

@@ -222,4 +222,6 @@ with matched dSYM UUID `df418244-4bfe-3281-9421-e4ae3a5b6051`.
 separately from both earlier proofs. Raw output:
 `artifacts/cooked-script-safe-undo-verified/`; logs:
 `/tmp/incant-cooked-safe-undo-{tests,clippy,no-compiler,shipping}.log`.
-The huge-finite simulation/hierarchy limitation above remains open.
+The later [numerical-boundary follow-up](native-numeric-boundaries.md) closes the
+huge-finite simulation/hierarchy limitation for native steps and script loans.
+The results above remain the historical evidence for this earlier correction.
