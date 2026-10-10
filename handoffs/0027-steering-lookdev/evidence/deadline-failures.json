@@ -1,0 +1,27 @@
+{
+ "summary": "Identical inputs aborted with 'script failed (syntax, exception, memory limit or execution deadline)' at varying ticks, and the same commands passed on a quiet, awake host. Every completed run is byte-identical. The aborts follow host suspension (system sleep while the Mac was locked) or CPU contention (a concurrent rustc build from another worktree). That is consistent with the 50 ms wall-clock script budget, not with the steering solver or a deterministic script error.",
+ "budget": {
+  "source": "crates/incant_script/src/lib.rs: ScriptHost::new uses Duration::from_millis(50); the deadline is set before __tick and checked again after it returns",
+  "covers": "crates/incant_script/src/runtime.js __tick: JSON.parse(worldJson) of the WHOLE project, JSON.parse(state), the behavior update (including native queries), and JSON.stringify of the result",
+  "project_compact_json_bytes": 542054,
+  "project_entities": 1304,
+  "error_text_distinguishes_deadline": false
+ },
+ "quiet_host_timing_probe": {
+  "note": "Timed copy of the behavior (Date.now, 1 ms resolution) on the same project, 900 ticks; NOT the committed behavior. Measured on this arm64 Mac only.",
+  "update_body_ms": {"mean": 1.81, "p50": 2, "p95": 2, "p99": 2, "max": 3},
+  "update_to_update_gap_ms": {"p50": 12, "p95": 13, "p99": 15, "max": 15},
+  "full_2700_tick_log_only_run_wall_ms": 38131.3
+ },
+ "failures": [
+  {"run": "v1-A logs (no sleep assertion)", "last_logged_tick": 1702, "context": "screen locked; positions identical to an earlier passing run through tick 1702"},
+  {"run": "r1 logs (no sleep assertion)", "last_logged_tick": 2313, "wall_s": 91.8, "context": "screen locked"},
+  {"run": "r2 logs (no sleep assertion)", "passed": true, "wall_s": 39.2},
+  {"run": "r3 logs (no sleep assertion)", "last_logged_tick": 442, "wall_s": 80.9, "context": "screen locked"},
+  {"run": "timing probe (no sleep assertion)", "last_logged_tick": 252, "context": "pmset: Sleep 03:22:52, DarkWake 03:32:06; preceding gaps 12-15 ms"},
+  {"run": "v2-A overview (caffeinate -i)", "last_logged_tick": 698, "context": "pmset: 'Maintenance Sleep' 03:48:51 despite PreventUserIdleSystemSleep; log mtime 03:48:52"},
+  {"run": "v3-A endpoint window attempt 1 (caffeinate -s -i)", "last_logged_tick": 1542, "context": "PreventSystemSleep held 03:50:41-03:54:40 with no sleep entry; failure at 03:54:08 while another worktree ran rustc (load average 9.47 at 03:55); retry passed"},
+  {"run": "v3-B logs attempts 1-4 (caffeinate -s -i)", "last_logged_ticks": [1738, 31, 24, 15], "context": "same concurrent rustc build; failing earlier as load rose"},
+  {"run": "v4-A and v4-B, all 26 plays (caffeinate -s -i)", "passed": true, "failed_attempts": 0, "context": "load average 2.5-3.8, no sleep"}
+ ]
+}
