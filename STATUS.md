@@ -70,6 +70,15 @@ within its documented workload.
 
 ## Active work
 
+- Existing cooked model/KTX readers and consumed geometry/material/texture values
+  now live behind the optional `incant_assets_runtime/visual` feature; authoring
+  keeps importing, cooking, writing and project asset synchronization with
+  compatibility exports. All 40 scoped release tests, 3 default audio-reader
+  tests and both Clippy modes pass; default audio dependencies remain lean and
+  the explicit visual graph excludes authoring/importers. Native render scene
+  cooking/extraction and pixel placement remain unimplemented. See
+  [reader boundary evidence](docs/spikes/cooked-visual-assets-boundary.md).
+
 - Atlas-specific rendering and public import/repack behavior are accepted in
   Claude's scoped follow-up on `4194240`: 201 new frames, stable frame IDs,
   atomic rejected imports, source-free repeats and atlas/control equality.
