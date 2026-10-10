@@ -9,9 +9,11 @@ frame so real engine frames can be compared pixel by pixel:
   * geometry: the SpriteRenderer tessellation (simple and nine-slice, flips swap
     asymmetric borders), the entity's inherited Transform, pixel-perfect camera
     snapping (half-pixel ties, odd-size phase) and an orthographic projection;
-  * raster: pixel-centre coverage with the top-left fill rule, affine UVs, UV
-    clamped to the region's outer texel centres, nearest or bilinear (clamp to
-    edge) level-zero sampling;
+  * raster: vertices snapped to 1/256 px (half steps up), pixel-centre coverage
+    with the top-left fill rule, affine attributes;
+  * sampling: bilinear (clamp to edge) level zero on normalized UVs clamped to the
+    region's outer texel centres; nearest per NEAREST_RULE, either the corrected
+    region-local tie-band rule or the pre-ties hardware filter;
   * painter order: (layer, order, entity ID); depth test LessEqual against opaque
     meshes, no sprite depth writes; premultiplied "over" blending stored as f16;
   * display: unpremultiply, Incant tone curve (identity below a 0.8 peak), mix
@@ -31,6 +33,18 @@ EPS_EDGE = 1.0 / 256  # px: GPU vertex snapping precision
 # Counterfactual switch for evidence only: filter straight-alpha texels (hidden RGB
 # included) and premultiply afterwards. The contract premultiplies before filtering.
 STRAIGHT_ALPHA_FILTERING = False
+# Nearest-sampling contract. "tie-band" is the corrected build (source c2c7758):
+# interpolated region-local texels, a 1/1024-texel band toward increasing screen
+# coordinate on the dominant derivative axis (X wins equal slopes), integer fetch.
+# "hardware" is the pre-ties build: normalized UVs, hardware nearest filter; exact
+# texel-boundary samples are flagged ambiguous instead of guessed.
+# "pixel-band" is an evidence-only counterfactual for the follow-up recommendation:
+# the same rule with the band scaled by the signed derivative (1/1024 px, not texel).
+NEAREST_RULE = "tie-band"
+TIE_BAND = 1.0 / 1024
+# Clipping a primitive at the target edge creates new, separately snapped vertices;
+# allow two 1/256 px snap steps of attribute-plane movement for such triangles only.
+CLIP_SLACK_PX = 2.0 / 256
 EPS_TEXEL = 1.0 / 256  # texel: sampler sub-texel precision
 BACKDROP_SRGB = (20, 21, 25)
 
@@ -311,7 +325,10 @@ class Frame:
         self.r, self.g, self.b, self.a = [0.0] * n, [0.0] * n, [0.0] * n, [0.0] * n
         self.depth = [1.0] * n
         self.ambiguous = [False] * n
-        self.linear = [False] * n
+        self.tie_texel = [False] * n  # a nearest sample sat on a texel boundary
+        self.tie_edge = [False] * n  # a pixel centre sat on a drawable's outer edge
+        self.linear = [False] * n  # any linear-sampled contribution
+        self.top_linear = [False] * n  # the top-most contribution was linear-sampled
         self.owner = [None] * n  # top-most contributing entity name
 
 
@@ -331,20 +348,24 @@ def _edges(p0, p1, p2):
     return edges, area * sign
 
 
-def raster_triangle(frame, pts, attrs, shade, outer=(True, True, True)):
+def raster_triangle(frame, pts, attrs, shade, outer=(True, True, True), gradient=None):
     """pts: 3 x (sx, sy). attrs: 3 x tuple. shade(i, attr, ambiguous_edge, inside) per pixel.
 
     `outer` marks which edges (01, 12, 20) lie on the drawable's outer boundary. Only
     those can make coverage ambiguous: internal diagonals and nine-slice cut lines
     are shared by neighbours with continuous UVs, so either side gives the same colour.
+    `gradient(snapped_pts)`, if given, runs once before any pixel is shaded.
     """
     # Snap to the rasterizer's 1/256 px fixed-point grid, as GPUs do. Edge values
     # are then exact in f64, so shared edges are watertight under the fill rule.
-    pts = [(round(x * 256) / 256, round(y * 256) / 256) for x, y in pts]
+    # Half steps round up (toward increasing screen coordinate), as measured.
+    pts = [(math.floor(x * 256 + 0.5) / 256, math.floor(y * 256 + 0.5) / 256) for x, y in pts]
     res = _edges(*pts)
     if res is None:
         return
     edges, area = res
+    if gradient is not None:
+        gradient(pts)
     xs = [p[0] for p in pts]
     ys = [p[1] for p in pts]
     x0, x1 = max(0, int(math.floor(min(xs) - 0.5))), min(frame.w - 1, int(math.ceil(max(xs) + 0.5)))
@@ -407,6 +428,53 @@ def sample(tex, u, v, sampling, bounds):
     return out, False
 
 
+def f32(x):
+    return struct.unpack("<f", struct.pack("<f", x))[0]
+
+
+def plane_gradient(pts, values):
+    """d(value)/dx and d(value)/dy of the affine function through three screen points."""
+    (x0, y0), (x1, y1), (x2, y2) = pts
+    v0, v1, v2 = values
+    det = (x1 - x0) * (y2 - y0) - (x2 - x0) * (y1 - y0)
+    return (((v1 - v0) * (y2 - y0) - (v2 - v0) * (y1 - y0)) / det,
+            ((v2 - v0) * (x1 - x0) - (v1 - v0) * (x2 - x0)) / det)
+
+
+def tie_band_index(t, dx, dy, size, slack_px=0.0):
+    """Documented corrected rule for one axis; returns (index, alternative or None).
+
+    The alternative is set when f32 interpolation or an equal-slope axis choice could
+    make the engine pick the other candidate; callers treat that pixel as ambiguous.
+    `slack_px` widens that window for triangles the GPU clips at the target edge,
+    whose re-derived, re-snapped vertices can move the attribute plane slightly.
+    """
+    def pick(direction):
+        if NEAREST_RULE == "pixel-band":
+            v = t + direction * TIE_BAND
+        else:
+            s = (direction > 0) - (direction < 0)
+            v = t + s * TIE_BAND
+        return v, min(max(math.floor(v), 0), size - 1)
+
+    direction = dx if abs(dx) >= abs(dy) else dy
+    v, index = pick(direction)
+    alternative = None
+    nearest = round(v)
+    # f32 positions, matrix and interpolation error, well inside the 1/1024 band.
+    tolerance = 1.5e-4 * max(1.0, abs(dx), abs(dy)) + 4e-6 * abs(t) + slack_px * max(abs(dx), abs(dy))
+    if v != nearest and abs(v - nearest) < tolerance:
+        other = min(max(nearest - 1 if v > nearest else nearest, 0), size - 1)
+        if other != index:
+            alternative = other
+    spread = max(abs(dx), abs(dy))
+    if spread and abs(abs(dx) - abs(dy)) <= 1e-6 * spread and (dx > 0) != (dy > 0):
+        _, other = pick(dy if direction is dx else dx)
+        if other != index:
+            alternative = other
+    return index, alternative
+
+
 def draw_sprite(frame, view, world, sprite, tex, name):
     reg = sprite["region"]
     tw, th = tex.width, tex.height
@@ -423,22 +491,42 @@ def draw_sprite(frame, view, world, sprite, tex, name):
 
     projected = []
     for lx, ly, u, v in verts:
-        sx, sy, depth = view.project(apply(world, (lx, ly, 0.0)))
-        projected.append(((sx, sy), (u, v, depth), (lx, ly)))
+        # World positions reach the GPU as f32 vertex attributes.
+        sx, sy, depth = view.project([f32(c) for c in apply(world, (lx, ly, 0.0))])
+        # Region-local texels, reconstructed in f64 and stored as f32 like the engine.
+        texel = (f32(u * tw - reg[0]), f32(v * th - reg[1]))
+        projected.append(((sx, sy), (u, v, depth) + texel, (lx, ly)))
     R, G, B, A, D = frame.r, frame.g, frame.b, frame.a, frame.depth
     tr, tg, tb, ta = tint
+    tie_band = sampling == "nearest" and NEAREST_RULE in ("tie-band", "pixel-band")
+    derivative = {}
+
+    def gradient(pts):
+        derivative["x"] = plane_gradient(pts, [a[3] for a in current])
+        derivative["y"] = plane_gradient(pts, [a[4] for a in current])
+        clipped = any(not (0 <= x <= frame.w and 0 <= y <= frame.h) for x, y in pts)
+        derivative["slack"] = CLIP_SLACK_PX if clipped else 0.0
 
     def shade(i, attr, amb_edge, inside):
-        u, v, depth = attr
+        u, v, depth, tx, ty = attr
         if amb_edge:
             frame.ambiguous[i] = True
+            frame.tie_edge[i] = True
         if not inside:
             return
         if depth > D[i] + 1e-6:
             return
-        texel, amb = sample(tex, u, v, sampling, bounds)
+        if tie_band:
+            ix, altx = tie_band_index(tx, *derivative["x"], reg[2], derivative["slack"])
+            iy, alty = tie_band_index(ty, *derivative["y"], reg[3], derivative["slack"])
+            texel = tex.premul[reg[1] + iy][reg[0] + ix]
+            amb = any(alt is not None and tex.premul[reg[1] + (iy if a == "x" else alt)][reg[0] + (alt if a == "x" else ix)]
+                      != texel for a, alt in (("x", altx), ("y", alty)))
+        else:
+            texel, amb = sample(tex, u, v, sampling, bounds)
         if amb:
             frame.ambiguous[i] = True
+            frame.tie_texel[i] = True
         sr, sg, sb, sa = texel[0] * tr * ta, texel[1] * tg * ta, texel[2] * tb * ta, texel[3] * ta
         if sa == 0 and sr == 0 and sg == 0 and sb == 0:
             return
@@ -449,6 +537,7 @@ def draw_sprite(frame, view, world, sprite, tex, name):
         A[i] = f16(sa + A[i] * k)
         if sampling == "linear":
             frame.linear[i] = True
+        frame.top_linear[i] = sampling == "linear"
         frame.owner[i] = name
 
     for t in range(0, len(projected), 3):
@@ -458,7 +547,9 @@ def draw_sprite(frame, view, world, sprite, tex, name):
             (ax, ay), (bx, by) = tri[a][2], tri[b][2]
             outer.append((on(ax, bx) and (on(ax, xmin) or on(ax, xmax)))
                          or (on(ay, by) and (on(ay, ymin) or on(ay, ymax))))
-        raster_triangle(frame, [p[0] for p in tri], [p[1] for p in tri], shade, tuple(outer))
+        current = [p[1] for p in tri]
+        raster_triangle(frame, [p[0] for p in tri], current, shade, tuple(outer),
+                        gradient if tie_band else None)
 
 
 def draw_mesh_quad(frame, view, world, positions, radiance, name):
@@ -468,10 +559,12 @@ def draw_mesh_quad(frame, view, world, positions, radiance, name):
     def shade(i, attr, amb_edge, inside):
         if amb_edge:
             frame.ambiguous[i] = True
+            frame.tie_edge[i] = True
         if not inside or attr[0] >= D[i]:
             return
         D[i] = attr[0]
         R[i], G[i], B[i], A[i] = f16(radiance[0]), f16(radiance[1]), f16(radiance[2]), 1.0
+        frame.top_linear[i] = False
         frame.owner[i] = name
 
     for tri, outer in (((0, 1, 2), (True, True, False)), ((0, 2, 3), (False, True, True))):

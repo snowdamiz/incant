@@ -69,6 +69,26 @@ class Display(unittest.TestCase):
         self.assertEqual(reference.f16(70000.0), 65504.0)
 
 
+class TieBand(unittest.TestCase):
+    """The corrected nearest rule (source c2c7758), one axis at a time."""
+
+    def test_exact_ties_take_the_increasing_screen_side(self):
+        self.assertEqual(reference.tie_band_index(3.0, 1.0, 0.0, 7), (3, None))   # texels grow rightward
+        self.assertEqual(reference.tie_band_index(3.0, -1.0, 0.0, 7), (2, None))  # flipped: texel 2 lies right
+        self.assertEqual(reference.tie_band_index(7.0, -1.0, 0.0, 7), (6, None))  # clamped to the region
+
+    def test_band_is_one_1024th_of_a_texel(self):
+        self.assertEqual(reference.tie_band_index(3.0 - 0.9 / 1024, 1.0, 0.0, 7)[0], 3)
+        self.assertEqual(reference.tie_band_index(3.0 - 1.1 / 1024, 1.0, 0.0, 7)[0], 2)
+
+    def test_dominant_axis_and_equal_slopes(self):
+        # A quarter turn: this texel axis follows screen Y only.
+        self.assertEqual(reference.tie_band_index(3.0, 0.0, -1.0, 7), (2, None))
+        # Equal slopes: X wins, and an opposite-signed Y makes the pixel ambiguous.
+        index, alternative = reference.tie_band_index(3.0, 0.5, -0.5, 7)
+        self.assertEqual((index, alternative), (3, 2))
+
+
 class Raster(unittest.TestCase):
     def test_shared_diagonal_covers_each_pixel_exactly_once(self):
         frame = reference.Frame(16, 16)
