@@ -3,7 +3,8 @@
 The authored Collider union now includes one-level compounds of 1–64 local
 primitive parts. Parts retain stable ULIDs and their own translation/quaternion,
 while the parent entity supplies one body, material, sensor state and collision
-masks. Nested compounds fail explicitly. Existing primitive documents remain
+masks. Primitive volumes contribute additively to mass/inertia, so overlapping
+parts are not a boolean volume union. Nested compounds fail explicitly. Existing primitive documents remain
 compatible. All authoring still uses the shared atomic command bus.
 
 Preparation sorts parts by stable ID without changing authored presentation order.
@@ -36,3 +37,18 @@ open. Machine-readable results are in
 Claude handoff 0024 owns the object-array Inspector and real rendered look-dev.
 Mesh terrain, hierarchical body ownership, local material/mask overrides, nested
 compounds and physical-device game performance remain outside this increment.
+
+
+## Local simulation cost
+
+`python3 tools/probes/compound-cost.py artifacts/compound-cost` creates every
+project through the public command bus. Thirty-two awake dynamic bodies each
+contain 1, 4, 16 or 64 parts tiling the same unit-cube extent. Three 180-tick runs
+include the solver, ECS, document validation/synchronization and no-op JavaScript;
+CCD is enabled and rendering is excluded. Median p95 costs on this M5 Pro are
+0.754, 1.158, 3.396 and 11.578 ms respectively. The largest observed tick is
+15.128 ms at 64 parts. All samples are retained, including development-load
+variation; repeated playback final states match and author files stay unchanged.
+This small synthetic workload shows that high part counts are costly, even when
+the visible extent is identical. Prefer a simple primitive when it describes the
+shape. These measurements do not satisfy a complete-game or target-device gate.

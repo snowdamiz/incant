@@ -93,5 +93,94 @@
     "compound character bodies",
     "physical-device game performance",
     "universal determinism"
-  ]
+  ],
+  "local_cost": {
+    "binary_sha256": "37b787280810e19cfd3448a241189ff86c9077805f967ff4d1a113f52df4fe79",
+    "bodies": 32,
+    "ticks": 180,
+    "trials": 3,
+    "sleeping": false,
+    "ccd": true,
+    "rendering": false,
+    "game_or_device_gate": false,
+    "cases": {
+      "1": {
+        "median_p95_ms": 0.754208,
+        "trials": [
+          {
+            "p95_ms": 0.777833,
+            "max_ms": 0.948667
+          },
+          {
+            "p95_ms": 0.738417,
+            "max_ms": 1.032834
+          },
+          {
+            "p95_ms": 0.754208,
+            "max_ms": 0.917667
+          }
+        ],
+        "final_state_equal": true,
+        "author_unchanged": true
+      },
+      "4": {
+        "median_p95_ms": 1.157875,
+        "trials": [
+          {
+            "p95_ms": 1.324541,
+            "max_ms": 1.472292
+          },
+          {
+            "p95_ms": 1.157875,
+            "max_ms": 1.276625
+          },
+          {
+            "p95_ms": 1.137917,
+            "max_ms": 1.342917
+          }
+        ],
+        "final_state_equal": true,
+        "author_unchanged": true
+      },
+      "16": {
+        "median_p95_ms": 3.3956250000000003,
+        "trials": [
+          {
+            "p95_ms": 3.184208,
+            "max_ms": 3.579708
+          },
+          {
+            "p95_ms": 3.3956250000000003,
+            "max_ms": 3.702542
+          },
+          {
+            "p95_ms": 4.309375,
+            "max_ms": 5.13225
+          }
+        ],
+        "final_state_equal": true,
+        "author_unchanged": true
+      },
+      "64": {
+        "median_p95_ms": 11.578417,
+        "trials": [
+          {
+            "p95_ms": 11.018167,
+            "max_ms": 11.255832999999999
+          },
+          {
+            "p95_ms": 11.578417,
+            "max_ms": 15.128166
+          },
+          {
+            "p95_ms": 12.335291,
+            "max_ms": 14.529583
+          }
+        ],
+        "final_state_equal": true,
+        "author_unchanged": true
+      }
+    },
+    "host": "Apple M5 Pro; concurrent development load; rendering excluded"
+  }
 }
