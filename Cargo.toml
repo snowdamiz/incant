@@ -1,6 +1,7 @@
 [workspace]
 resolver = "3"
 members = ["crates/*", "editor/app"]
+exclude = ["third_party/rerecast"]
 default-members = ["crates/*"]
 
 [workspace.package]
@@ -28,6 +29,7 @@ incant_core = { path = "crates/incant_core" }
 incant_physics = { path = "crates/incant_physics" }
 incant_input = { path = "crates/incant_input" }
 incant_localization = { path = "crates/incant_localization" }
+incant_nav = { path = "crates/incant_nav" }
 incant_script = { path = "crates/incant_script" }
 incant_agent = { path = "crates/incant_agent" }
 
@@ -36,3 +38,6 @@ debug = 1
 
 [profile.release]
 strip = false
+
+[patch.crates-io]
+rerecast = { path = "third_party/rerecast" }

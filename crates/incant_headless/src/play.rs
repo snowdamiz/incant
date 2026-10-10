@@ -178,9 +178,14 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
         NOOP.into()
     };
     let mut play = if let Some(path) = &options.load_save {
-        PlaySession::from_save(&document, &source, &super::play_saves::load(path)?)?
+        PlaySession::from_save_with_navigation_resources(
+            &document,
+            &source,
+            &super::play_saves::load(path)?,
+            assets.navigation_resources(),
+        )?
     } else {
-        PlaySession::new(&document, &source)?
+        PlaySession::with_navigation_resources(&document, &source, assets.navigation_resources())?
     };
     let start_tick = play.snapshot().tick;
     if let Some(path) = &options.input_replay {

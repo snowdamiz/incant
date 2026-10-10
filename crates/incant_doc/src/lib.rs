@@ -3,6 +3,7 @@ mod audio;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
+mod navigation;
 mod physics;
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 #[cfg(feature = "crdt")]
@@ -10,6 +11,7 @@ pub use crdt::CollaborativeDocument;
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
+pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
 pub use physics::{AngularVelocity, BodyMotion, Collider, ColliderShape, RigidBody};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -433,6 +435,9 @@ impl Project {
                 "only one global EnvironmentLight is supported",
             );
         }
+        if let Err(message) = navigation::validate_graph(self) {
+            issue("/scenes".into(), &message);
+        }
         if let Err(message) = audio::validate_graph(self) {
             issue("/scenes".into(), &message);
         }
@@ -453,6 +458,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
         serde_json::from_value(v.clone()).map_err(|e| e.to_string())
     }
     match kind {
+        "NavigationMesh" => navigation::validate(value)?,
         "AudioBus" | "AudioSource" | "AudioListener" => audio::validate(kind, value, project)?,
         "RigidBody" | "Collider" | "AngularVelocity" => physics::validate(kind, value)?,
         "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
@@ -557,6 +563,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        (
+            "NavigationMesh".into(),
+            json!(schemars::schema_for!(NavigationMesh)),
+        ),
         ("AudioBus".into(), json!(schemars::schema_for!(AudioBus))),
         (
             "AudioSource".into(),

@@ -1,5 +1,16 @@
 # Third-party notices
 
+## Navigation dependencies
+
+Incant uses a patched [rerecast 0.4.0](https://crates.io/crates/rerecast/0.4.0)
+for voxelization, regions, contours and tile polygonization, under the
+[MIT license](licenses/rerecast-MIT.txt). The license text is retained from the
+official repository's v0.4.0 tag. The complete patched source is retained in
+`third_party/rerecast`, selected by Cargo's path patch. Its `INCANT_PATCH.md`
+records the original registry checksum, source revision and the small raster
+clipping/compatibility changes. Incant's tile cache, adjacency construction,
+path search, funnel and terrain-following code are original implementations.
+
 ## Localization dependencies
 
 Incant uses unmodified ICU4X 2.3 locale, decimal, date/calendar and plural

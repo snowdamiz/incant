@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "corridor": {
+      "items": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "generation": {
+      "format": "uint64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "points": {
+      "description": "World-space points on the quantized navigation surface. Voxel/detail\nsampling approximates height and rounds steps; use physics for grounding\nor exact surface placement. The chosen corridor may include tile bends.",
+      "items": {
+        "items": {
+          "format": "float",
+          "type": "number"
+        },
+        "maxItems": 3,
+        "minItems": 3,
+        "type": "array"
+      },
+      "type": "array"
+    },
+    "visited": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "points",
+    "corridor",
+    "visited",
+    "generation"
+  ],
+  "title": "NavigationPath",
+  "type": "object"
+}

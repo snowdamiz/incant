@@ -20,10 +20,22 @@ pub struct PlaySession {
 }
 impl PlaySession {
     pub fn new(project: &incant_doc::Project, compiled_source: &str) -> Result<Self, ScriptError> {
-        let engine = incant_core::Engine::new(project)?;
+        Self::with_navigation_resources(
+            project,
+            compiled_source,
+            incant_core::NavigationResources::new(),
+        )
+    }
+    pub fn with_navigation_resources(
+        project: &incant_doc::Project,
+        compiled_source: &str,
+        resources: incant_core::NavigationResources,
+    ) -> Result<Self, ScriptError> {
+        let engine = incant_core::Engine::with_navigation_resources(project, resources)?;
         let mut host = ScriptHost::new(compiled_source)?;
         host.raycaster = Some(Arc::new(engine.raycaster()));
         host.character_mover = Some(Arc::new(engine.character_mover()));
+        host.navigator = Some(Arc::new(engine.navigator()));
         host.install_queries()?;
         let mut input = incant_input::InputRuntime::default();
         input.map_actions(&project.settings.input_actions)?;

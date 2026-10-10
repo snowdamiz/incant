@@ -25,7 +25,17 @@ export type { PhysicsCharacterQuery as CharacterQuery, PhysicsCharacterMovement 
 import type { PhysicsCharacterQuery as CharacterQuery, PhysicsCharacterMovement as CharacterMovement } from './generated';
 export type { StringTable, LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
 import type { LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
+export type { NavigationMesh, NavigationQuery, NavigationPath } from './generated';
+import type { NavigationQuery, NavigationPath } from './generated';
 export interface ScriptApi {
+  /** Bounded A* with funnel smoothing on the selected scene mesh. Costs 64 of
+   * 256 shared native-query units per tick. Null means no nearby/reachable path;
+   * invalid inputs or exhausted budgets throw. The path uses world coordinates
+   * and is a snapshot; recalculate after source changes. Generation is local to
+   * the play session, not durable across saves. Commands become visible next tick.
+   * Heights lie on the quantized navigation surface; steps are approximated.
+   * Use physics for grounding/placement. The chosen corridor can include tile bends. */
+  findPath(query: NavigationQuery): NavigationPath | null;
   /** Read-only localization snapshot at the start of this tick. Each localization
    * query costs 4 of the shared 256 native-query units. Change locale with the
    * set_locale command; successful changes are visible next tick and saved.

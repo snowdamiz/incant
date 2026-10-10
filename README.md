@@ -163,6 +163,13 @@ validates source identity and imports all targets in one reversible transaction.
 See the [exchange profile and limits](docs/spikes/localization-exchange.md).
 Text shaping, localization UI and rendered RTL/CJK acceptance remain open.
 
+Typed `NavigationMesh` components select static collider and cooked model sources
+for incremental tiled baking. `api.findPath` provides bounded A*/funnel paths with
+terrain heights; gameplay moves through the shared command bus. Run
+`python3 tools/probes/game-navigation.py artifacts/navigation-example` for a real
+TypeScript character chase, room edit and save/resume without source model files.
+See [navigation behavior, limits and open work](docs/spikes/navigation-runtime.md).
+
 `play --assertions FILE` checks runtime, behavior and input state at absolute game
 ticks, including the initial or restored checkpoint. For example:
 
