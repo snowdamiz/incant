@@ -1,6 +1,6 @@
 use glam::{DMat4, DQuat, DVec3};
 use incant_types::{Transform, Velocity};
-use std::collections::{BTreeMap, VecDeque};
+use std::collections::BTreeMap;
 use thiserror::Error;
 
 /// The canonical 128 bits of an authored ULID; no string parsing during play.
@@ -29,13 +29,13 @@ pub const MAX_ENTITIES: usize = 1_000_000;
 
 #[derive(Debug, Error, PartialEq)]
 pub enum SceneError {
-    #[error("invalid cooked scene: {0}")]
+    #[error("invalid scene data: {0}")]
     Invalid(&'static str),
     #[error("unsupported cooked-scene version {0}")]
     Version(u32),
     #[error("cooked scene integrity check failed")]
     Integrity,
-    #[error("duplicate runtime entity {0:?}")]
+    #[error("duplicate runtime ID {0:?}")]
     Duplicate(StableId),
     #[error("invalid transform or velocity on {0:?}")]
     Component(StableId),
@@ -57,40 +57,17 @@ impl CookedScene {
         entities.sort_unstable_by_key(|e| (e.velocity.is_some(), e.id));
         let mut indices = BTreeMap::new();
         for (index, entity) in entities.iter().enumerate() {
-            if indices.insert(entity.id, index).is_some() {
+            if entity.id == id || indices.insert(entity.id, index).is_some() {
                 return Err(SceneError::Duplicate(entity.id));
             }
             validate_values(entity)?;
         }
-        let mut children = vec![Vec::new(); entities.len()];
-        let mut pending = VecDeque::new();
-        for (index, entity) in entities.iter().enumerate() {
-            if let Some(parent) = entity.parent {
-                let parent = indices
-                    .get(&parent)
-                    .copied()
-                    .ok_or(SceneError::Parent(entity.id))?;
-                children[parent].push(index);
-            } else {
-                pending.push_back((index, None));
-            }
-        }
-        let mut topology: Vec<(usize, Option<usize>)> = Vec::with_capacity(entities.len());
-        let mut globals: Vec<DMat4> = Vec::with_capacity(entities.len());
-        while let Some((index, parent)) = pending.pop_front() {
-            let local = matrix(&entities[index].transform);
-            let global = parent.map_or(local, |parent| globals[parent] * local);
-            if !global.is_finite() {
-                return Err(SceneError::Component(entities[index].id));
-            }
-            let slot = topology.len();
-            topology.push((index, parent));
-            globals.push(global);
-            pending.extend(children[index].iter().map(|child| (*child, Some(slot))));
-        }
-        if topology.len() != entities.len() {
-            return Err(SceneError::Invalid("parent cycle"));
-        }
+        let parents = entities.iter().map(|e| (e.id, e.parent)).collect();
+        let topology =
+            crate::hierarchy::prepare(&parents, |id| matrix(&entities[indices[&id]].transform))?
+                .into_iter()
+                .map(|node| (indices[&node.id], node.parent))
+                .collect();
         Ok(Self {
             id,
             tick_rate,
@@ -110,7 +87,7 @@ impl CookedScene {
     }
 }
 
-fn validate_values(entity: &CookedEntity) -> Result<(), SceneError> {
+pub(crate) fn validate_values(entity: &CookedEntity) -> Result<(), SceneError> {
     let t = &entity.transform;
     let norm: f64 = t.rotation.iter().map(|v| v * v).sum();
     if !t

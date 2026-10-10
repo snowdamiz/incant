@@ -172,8 +172,12 @@ fn native_step_and_bulk_write_update_parent_local_and_global_values() {
 
 #[test]
 fn ten_thousand_native_entities_repeat_and_discard_without_authoring_state() {
-    let scene =
-        CookedScene::new(id(90), 60, (1..=10_000).map(|i| entity(i, true)).collect()).unwrap();
+    let scene = CookedScene::new(
+        id(u128::MAX),
+        60,
+        (1..=10_000).map(|i| entity(i, true)).collect(),
+    )
+    .unwrap();
     let bytes = scene.to_bytes();
     let mut a = NativeWorld::from_bytes(&bytes).unwrap();
     let mut b = NativeWorld::from_bytes(&bytes).unwrap();
@@ -199,7 +203,7 @@ fn deeply_nested_hierarchy_loads_iteratively_and_empty_scene_steps() {
             e
         })
         .collect();
-    let scene = CookedScene::new(id(90), 60, entities).unwrap();
+    let scene = CookedScene::new(id(u128::MAX), 60, entities).unwrap();
     let world = NativeWorld::from_bytes(&scene.to_bytes()).unwrap();
     assert_eq!(
         world.inspect(id(10_000)).unwrap().world_transform[3][0],
@@ -208,4 +212,21 @@ fn deeply_nested_hierarchy_loads_iteratively_and_empty_scene_steps() {
     let mut empty = NativeWorld::new(CookedScene::new(id(91), 60, vec![]).unwrap());
     empty.step().unwrap();
     assert!(empty.snapshot().is_empty());
+}
+
+#[test]
+fn scene_identity_cannot_be_reused_by_an_entity_even_in_a_rehashed_image() {
+    assert!(matches!(
+        CookedScene::new(id(3), 60, vec![entity(3, false)]),
+        Err(SceneError::Duplicate(_))
+    ));
+    let mut bytes = CookedScene::new(id(9), 60, vec![entity(3, false)])
+        .unwrap()
+        .to_bytes();
+    bytes[16..32].copy_from_slice(&id(3).0);
+    checksum(&mut bytes);
+    assert!(matches!(
+        CookedScene::from_bytes(&bytes),
+        Err(SceneError::Duplicate(_))
+    ));
 }

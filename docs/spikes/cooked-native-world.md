@@ -62,8 +62,8 @@ simulation and ten-thousand-level iterative hierarchy loading. Workspace Clippy
 passes with warnings denied. The resolved dependency guard passes for the real
 native-world crate as well as the shared component values.
 
-Full workspace verification passes 329 Rust tests across 109 suites, all 41 GPU
-checks, 15 Python tool tests, generated schema/SDK parity and conventions.
+Full workspace verification passes 329 Rust tests across 109 suites, 41 renderer GPU
+checks plus three editor/headless GPU integration checks (44 total), 15 Python tool tests, generated schema/SDK parity and conventions.
 WASM and iOS simulator compilation of `incant_runtime` pass. The standalone probe
 passes with freshly built executables; its 304-byte image runs after source and
 journal deletion, repeats across processes, resets, and rejects corruption.
@@ -72,8 +72,9 @@ adds the native-world tests on three desktops and compilation on mobile/web.
 These are correctness/compile checks, not phone performance measurements or a
 shipping-profile regression gate; those requirements remain open.
 
-Still required: remaining cooked components/resources, a structural command
-buffer and entity lifecycle, script host views, physics/navigation integration,
+The follow-up [structural buffer](runtime-structural-buffer.md) adds checked native
+entity lifecycle operations. Still required: remaining cooked components/resources,
+script host views, physics/navigation integration,
 binary saves, editor/play-process wiring, renderer snapshots, shipping profile,
 Tracy/device performance gates and the rest of Section 2.6. The native callback
 is for trusted engine code; foreign script bindings must supply their sandbox,

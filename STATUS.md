@@ -53,14 +53,24 @@ within its documented workload.
 
 ## Active work
 
+- The native runtime now stages bounded entity lifecycle batches between steps:
+  spawn/despawn, reparent and Velocity component additions/removals. A rejected
+  batch preserves world state and the submitted commands. Hierarchy checking is
+  iterative; component-only updates avoid scanning the scene. Workspace Clippy,
+  339 Rust tests, portable compilation and the source-free cooked-scene probe
+  pass. Independent Astra Extra High review found no blocking defects. Hosted CI
+  remains pending; foreign script bindings,
+  other component types and legacy play migration remain open. See
+  [structural-buffer evidence](docs/spikes/runtime-structural-buffer.md).
+
 - Checked binary scenes and a real native Bevy world now form the first runtime
   migration slice. Authoring-side cooking supports Transform/Velocity/hierarchy
   and rejects every unmigrated component explicitly. A standalone runtime runs
   after project/journal deletion, with direct bulk mutation and on-demand typed
-  snapshots. Workspace Clippy, 329 Rust tests, 41 GPU checks, 15 tool tests,
+  snapshots. Workspace Clippy, 329 Rust tests, 44 GPU checks, 15 tool tests,
   portable WASM/iOS compilation and contracts pass. The dependency guard covers
   the real native-world crate. Legacy PlaySession integration, the other systems,
-  script bindings, structural changes, saves and performance gates remain open.
+  script bindings, saves and performance gates remain open.
   See [native-world evidence](docs/spikes/cooked-native-world.md).
 
 - The first runtime boundary extraction moves shared component values into
