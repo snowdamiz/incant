@@ -228,6 +228,46 @@
       ],
       "type": "object"
     },
+    "Schedule": {
+      "additionalProperties": false,
+      "properties": {
+        "clock": {
+          "$ref": "#/$defs/ScriptClock"
+        },
+        "timers": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Timer"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "clock",
+        "timers"
+      ],
+      "type": "object"
+    },
+    "ScriptClock": {
+      "additionalProperties": false,
+      "properties": {
+        "elapsed_seconds": {
+          "format": "double",
+          "minimum": 0,
+          "type": "number"
+        },
+        "tick": {
+          "format": "uint64",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "tick",
+        "elapsed_seconds"
+      ],
+      "type": "object"
+    },
     "ScriptSource": {
       "additionalProperties": false,
       "properties": {
@@ -255,6 +295,30 @@
         "normal"
       ],
       "type": "string"
+    },
+    "Timer": {
+      "additionalProperties": false,
+      "properties": {
+        "due_tick": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "interval_ticks": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "payload": true
+      },
+      "required": [
+        "due_tick",
+        "payload"
+      ],
+      "type": "object"
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -273,6 +337,18 @@
     },
     "project": {
       "$ref": "#/$defs/Project"
+    },
+    "schedule": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Schedule"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Version 1 has no schedule; version 2 requires this data-only schedule."
     },
     "script_sha256": {
       "type": "string"

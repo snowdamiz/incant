@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Fixed-tick script timers, repeat/cancel/replace, copied payloads and a saved
+  game clock are implemented. Version 2 game saves preserve pending deadlines
+  and read version 1 with an empty schedule. Seven script tests and a CLI failure
+  test pass; a strict TypeScript public-CLI probe preserves callbacks, command
+  effects and log continuity across process restarts. All 204 distinct Rust tests,
+  315 UI tests/build, five tool tests, Clippy, generated contracts and the native
+  build/package pass locally. Hosted validation is pending. Coroutines remain open; Promise/generator behavior
+  callbacks now fail explicitly before commit. See [timers](docs/spikes/script-timers.md).
+
 - Headless `play --assertions FILE` evaluates bounded data-only checks over
   runtime, behavior and input state at absolute ticks. Failed checks return
   structured diagnostics, exit nonzero and suppress save publication. Five new
@@ -363,6 +372,17 @@ within its documented workload.
   six platform probes. The evidence files retain the exact revision and run links.
 
 ## Current screen-work constraint
+
+Revision 3 is the current implementation baseline. Its additional Phase 1 work
+remains open: tiled navmesh generation/pathfinding/steering and 2D grid navigation;
+sprites/atlases/tilemaps and Rapier 2D; shaped text, font fallback and IME; typed
+localized string tables, formatting, locale switching and pseudo-localization;
+and gamepad/mobile haptics. The expanded Core Sample gate includes navigation,
+RTL/CJK/localization coverage and a 2D sample on all four reference devices.
+This does not replace the remaining original renderer, animation, audio/device,
+input-adapter, SDK/coroutine and complete-game performance requirements. Later
+networking and service scope follows Revision 3 Sections 6.8/6.10; their open
+director decisions and human-owned production prerequisites remain explicit.
 
 The director paused computer use and screen capture again on 2026-10-09. No new
 native/browser operations or captures are authorized while that pause remains.

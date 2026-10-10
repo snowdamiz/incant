@@ -9,8 +9,12 @@ projects are fully validated before a new engine is constructed.
 ## Format and boundaries
 
 `GameSave.schema.json` and the generated SDK type describe the JSON envelope.
-Version 1 has an explicit `incant-game-save` marker, authored-project and compiled
-script SHA-256 revisions, tick/time, the runtime project and JSON behavior state.
+Version 2 has an explicit `incant-game-save` marker, authored-project and compiled
+script SHA-256 revisions, tick/time, the runtime project, JSON behavior state and
+the data-only fixed-tick timer schedule. Version 1 remains readable: it restores
+the clock with no pending timers. Current writers always emit version 2. The
+schedule's clock must match the save envelope, and pending timers require an
+`onTimer` behavior handler. See [timer validation and semantics](script-timers.md).
 It preserves stable entity IDs, hierarchy, component values, spawns/deletions,
 velocities and gameplay data such as inventory or quest flags. The project hash
 uses canonical text. A successful hot reload changes the saved script revision;
