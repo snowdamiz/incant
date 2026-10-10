@@ -1,0 +1,557 @@
+{
+  "captured_at": "2026-10-10T19:30:44.450467+00:00",
+  "scope": "Only exact IDs from the previously reviewed Windows npm inventory; closed/merged PR merge refs only. Open PR and default-branch entries excluded.",
+  "usage_before": {
+    "full_name": "snowdamiz/incant",
+    "active_caches_size_in_bytes": 10494390193,
+    "active_caches_count": 45
+  },
+  "selected": [
+    {
+      "id": 8775568586,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/44/merge",
+      "size_in_bytes": 281443368,
+      "last_accessed_at": "2026-10-10T18:21:38.280781Z",
+      "pr": 44,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T18:59:04Z",
+      "merged_at": "2026-10-10T18:59:04Z"
+    },
+    {
+      "id": 8773826278,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/41/merge",
+      "size_in_bytes": 281445551,
+      "last_accessed_at": "2026-10-10T16:49:06.336505Z",
+      "pr": 41,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T16:50:06Z",
+      "merged_at": "2026-10-10T16:50:05Z"
+    },
+    {
+      "id": 8772431233,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/40/merge",
+      "size_in_bytes": 281445600,
+      "last_accessed_at": "2026-10-10T15:45:17.580542Z",
+      "pr": 40,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T15:47:08Z",
+      "merged_at": "2026-10-10T15:47:08Z"
+    },
+    {
+      "id": 8756304344,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/25/merge",
+      "size_in_bytes": 281444510,
+      "last_accessed_at": "2026-10-10T15:37:46.072663Z",
+      "pr": 25,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T16:15:57Z",
+      "merged_at": "2026-10-10T16:15:57Z"
+    },
+    {
+      "id": 8771989458,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/39/merge",
+      "size_in_bytes": 281459941,
+      "last_accessed_at": "2026-10-10T15:26:04.807607Z",
+      "pr": 39,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T15:27:02Z",
+      "merged_at": "2026-10-10T15:27:02Z"
+    },
+    {
+      "id": 8770133262,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/38/merge",
+      "size_in_bytes": 281456395,
+      "last_accessed_at": "2026-10-10T14:15:34.515356Z",
+      "pr": 38,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T15:27:03Z",
+      "merged_at": "2026-10-10T15:27:03Z"
+    },
+    {
+      "id": 8770305417,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/37/merge",
+      "size_in_bytes": 281458811,
+      "last_accessed_at": "2026-10-10T14:12:38.041399Z",
+      "pr": 37,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T15:27:03Z",
+      "merged_at": "2026-10-10T15:27:03Z"
+    },
+    {
+      "id": 8767334345,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/36/merge",
+      "size_in_bytes": 281457619,
+      "last_accessed_at": "2026-10-10T14:12:04.470508Z",
+      "pr": 36,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T15:27:03Z",
+      "merged_at": "2026-10-10T15:27:03Z"
+    },
+    {
+      "id": 8761662415,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/35/merge",
+      "size_in_bytes": 281457856,
+      "last_accessed_at": "2026-10-10T11:06:00.342201Z",
+      "pr": 35,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T11:56:16Z",
+      "merged_at": "2026-10-10T11:56:16Z"
+    },
+    {
+      "id": 8761204569,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/33/merge",
+      "size_in_bytes": 281458664,
+      "last_accessed_at": "2026-10-10T06:25:14.513949Z",
+      "pr": 33,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T06:25:44Z",
+      "merged_at": "2026-10-10T06:25:44Z"
+    },
+    {
+      "id": 8761063527,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/34/merge",
+      "size_in_bytes": 281445022,
+      "last_accessed_at": "2026-10-10T06:17:33.625891Z",
+      "pr": 34,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T06:26:27Z",
+      "merged_at": "2026-10-10T06:26:27Z"
+    },
+    {
+      "id": 8759583886,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/32/merge",
+      "size_in_bytes": 281457246,
+      "last_accessed_at": "2026-10-10T04:50:58.933811Z",
+      "pr": 32,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T04:58:50Z",
+      "merged_at": "2026-10-10T04:58:50Z"
+    },
+    {
+      "id": 8758942603,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/29/merge",
+      "size_in_bytes": 281446669,
+      "last_accessed_at": "2026-10-10T04:21:31.347056Z",
+      "pr": 29,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T04:58:12Z",
+      "merged_at": "2026-10-10T04:58:12Z"
+    },
+    {
+      "id": 8758929011,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/31/merge",
+      "size_in_bytes": 281446019,
+      "last_accessed_at": "2026-10-10T04:13:51.433339Z",
+      "pr": 31,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T04:17:46Z",
+      "merged_at": "2026-10-10T04:17:46Z"
+    },
+    {
+      "id": 8757517147,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/28/merge",
+      "size_in_bytes": 281459200,
+      "last_accessed_at": "2026-10-10T02:57:28.188950Z",
+      "pr": 28,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T03:04:32Z",
+      "merged_at": "2026-10-10T03:04:32Z"
+    },
+    {
+      "id": 8757434202,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/27/merge",
+      "size_in_bytes": 281458702,
+      "last_accessed_at": "2026-10-10T02:52:55.091808Z",
+      "pr": 27,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T02:55:29Z",
+      "merged_at": "2026-10-10T02:55:29Z"
+    },
+    {
+      "id": 8756824405,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/26/merge",
+      "size_in_bytes": 281444891,
+      "last_accessed_at": "2026-10-10T02:20:15.221474Z",
+      "pr": 26,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T02:21:44Z",
+      "merged_at": "2026-10-10T02:21:44Z"
+    },
+    {
+      "id": 8755450832,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/24/merge",
+      "size_in_bytes": 281458772,
+      "last_accessed_at": "2026-10-10T01:11:15.227944Z",
+      "pr": 24,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T01:12:03Z",
+      "merged_at": "2026-10-10T01:12:03Z"
+    },
+    {
+      "id": 8754763233,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/23/merge",
+      "size_in_bytes": 281445707,
+      "last_accessed_at": "2026-10-10T00:39:19.914047Z",
+      "pr": 23,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-10T00:41:51Z",
+      "merged_at": "2026-10-10T00:41:51Z"
+    },
+    {
+      "id": 8750891466,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/21/merge",
+      "size_in_bytes": 281455896,
+      "last_accessed_at": "2026-10-09T22:24:06.384870Z",
+      "pr": 21,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T23:07:14Z",
+      "merged_at": "2026-10-09T23:07:14Z"
+    },
+    {
+      "id": 8750148824,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/20/merge",
+      "size_in_bytes": 281445938,
+      "last_accessed_at": "2026-10-09T21:46:42.432010Z",
+      "pr": 20,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T21:48:19Z",
+      "merged_at": "2026-10-09T21:48:19Z"
+    },
+    {
+      "id": 8749492464,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/19/merge",
+      "size_in_bytes": 281443863,
+      "last_accessed_at": "2026-10-09T21:17:44.469252Z",
+      "pr": 19,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T21:48:04Z",
+      "merged_at": "2026-10-09T21:48:04Z"
+    },
+    {
+      "id": 8749318325,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/18/merge",
+      "size_in_bytes": 281458062,
+      "last_accessed_at": "2026-10-09T21:07:37.970450Z",
+      "pr": 18,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T21:08:35Z",
+      "merged_at": "2026-10-09T21:08:35Z"
+    },
+    {
+      "id": 8749133577,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/17/merge",
+      "size_in_bytes": 281457264,
+      "last_accessed_at": "2026-10-09T20:59:22.184162Z",
+      "pr": 17,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T21:08:05Z",
+      "merged_at": "2026-10-09T21:08:05Z"
+    },
+    {
+      "id": 8746423163,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/16/merge",
+      "size_in_bytes": 281444699,
+      "last_accessed_at": "2026-10-09T19:54:39.645812Z",
+      "pr": 16,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T20:21:05Z",
+      "merged_at": "2026-10-09T20:21:05Z"
+    },
+    {
+      "id": 8745254769,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/15/merge",
+      "size_in_bytes": 281458843,
+      "last_accessed_at": "2026-10-09T19:09:09.194123Z",
+      "pr": 15,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T19:12:31Z",
+      "merged_at": "2026-10-09T19:12:31Z"
+    },
+    {
+      "id": 8744193472,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/14/merge",
+      "size_in_bytes": 281459721,
+      "last_accessed_at": "2026-10-09T18:39:20.011070Z",
+      "pr": 14,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T18:41:19Z",
+      "merged_at": "2026-10-09T18:41:19Z"
+    },
+    {
+      "id": 8743849791,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/13/merge",
+      "size_in_bytes": 281458643,
+      "last_accessed_at": "2026-10-09T18:29:47.848600Z",
+      "pr": 13,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T18:31:23Z",
+      "merged_at": "2026-10-09T18:31:23Z"
+    },
+    {
+      "id": 8742332509,
+      "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+      "ref": "refs/pull/12/merge",
+      "size_in_bytes": 281444469,
+      "last_accessed_at": "2026-10-09T17:48:31.870649Z",
+      "pr": 12,
+      "pr_state": "MERGED",
+      "closed_at": "2026-10-09T17:51:04Z",
+      "merged_at": "2026-10-09T17:51:04Z"
+    }
+  ],
+  "deletions": [
+    {
+      "id": 8775568586,
+      "size_in_bytes": 281443368,
+      "deleted_at": "2026-10-10T19:32:10.450596+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8773826278,
+      "size_in_bytes": 281445551,
+      "deleted_at": "2026-10-10T19:32:11.075089+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8772431233,
+      "size_in_bytes": 281445600,
+      "deleted_at": "2026-10-10T19:32:11.397657+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8756304344,
+      "size_in_bytes": 281444510,
+      "deleted_at": "2026-10-10T19:32:11.879093+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8771989458,
+      "size_in_bytes": 281459941,
+      "deleted_at": "2026-10-10T19:32:12.394902+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8770133262,
+      "size_in_bytes": 281456395,
+      "deleted_at": "2026-10-10T19:32:12.658108+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8770305417,
+      "size_in_bytes": 281458811,
+      "deleted_at": "2026-10-10T19:32:13.131392+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8767334345,
+      "size_in_bytes": 281457619,
+      "deleted_at": "2026-10-10T19:32:13.626421+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8761662415,
+      "size_in_bytes": 281457856,
+      "deleted_at": "2026-10-10T19:32:14.080345+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8761204569,
+      "size_in_bytes": 281458664,
+      "deleted_at": "2026-10-10T19:32:14.599510+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8761063527,
+      "size_in_bytes": 281445022,
+      "deleted_at": "2026-10-10T19:32:15.055965+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8759583886,
+      "size_in_bytes": 281457246,
+      "deleted_at": "2026-10-10T19:32:15.319007+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8758942603,
+      "size_in_bytes": 281446669,
+      "deleted_at": "2026-10-10T19:32:15.779523+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8758929011,
+      "size_in_bytes": 281446019,
+      "deleted_at": "2026-10-10T19:32:16.240400+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8757517147,
+      "size_in_bytes": 281459200,
+      "deleted_at": "2026-10-10T19:32:16.735503+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8757434202,
+      "size_in_bytes": 281458702,
+      "deleted_at": "2026-10-10T19:32:17.168110+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8756824405,
+      "size_in_bytes": 281444891,
+      "deleted_at": "2026-10-10T19:32:17.626746+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8755450832,
+      "size_in_bytes": 281458772,
+      "deleted_at": "2026-10-10T19:32:17.962157+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8754763233,
+      "size_in_bytes": 281445707,
+      "deleted_at": "2026-10-10T19:32:18.208208+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8750891466,
+      "size_in_bytes": 281455896,
+      "deleted_at": "2026-10-10T19:32:18.706462+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8750148824,
+      "size_in_bytes": 281445938,
+      "deleted_at": "2026-10-10T19:32:19.006576+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8749492464,
+      "size_in_bytes": 281443863,
+      "deleted_at": "2026-10-10T19:32:19.404342+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8749318325,
+      "size_in_bytes": 281458062,
+      "deleted_at": "2026-10-10T19:32:19.800484+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8749133577,
+      "size_in_bytes": 281457264,
+      "deleted_at": "2026-10-10T19:32:20.289304+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8746423163,
+      "size_in_bytes": 281444699,
+      "deleted_at": "2026-10-10T19:32:20.728669+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8745254769,
+      "size_in_bytes": 281458843,
+      "deleted_at": "2026-10-10T19:32:21.074280+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8744193472,
+      "size_in_bytes": 281459721,
+      "deleted_at": "2026-10-10T19:32:21.565512+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8743849791,
+      "size_in_bytes": 281458643,
+      "deleted_at": "2026-10-10T19:32:21.804488+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    },
+    {
+      "id": 8742332509,
+      "size_in_bytes": 281444469,
+      "deleted_at": "2026-10-10T19:32:22.192410+00:00",
+      "returncode": 0,
+      "result": "deleted"
+    }
+  ],
+  "verification": {
+    "captured_at": "2026-10-10T19:32:31.491522+00:00",
+    "usage_after": {
+      "full_name": "snowdamiz/incant",
+      "active_caches_size_in_bytes": 10494390193,
+      "active_caches_count": 45
+    },
+    "before_list_count": 48,
+    "before_list_bytes": 11633972224,
+    "after_list_count": 23,
+    "after_list_bytes": 5719550745,
+    "selected_still_present": [],
+    "nonselected_before_now_missing": [],
+    "new_cache_ids": [
+      8777350785,
+      8777353587,
+      8777368920,
+      8777381088
+    ],
+    "successfully_deleted_count": 29,
+    "successfully_deleted_bytes": 8162117941
+  }
+}

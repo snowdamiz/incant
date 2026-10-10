@@ -57,8 +57,9 @@ waited 12m35s before 32m27s execution. More concurrent macOS jobs can worsen thi
 - Stop creating a Windows npm cache for each PR. Keep `npm ci` unchanged.
 
 The cache API reported 47 entries using 10.03 GiB, all npm/Gradle. Thirty-four
-Windows npm archives used 8.91 GiB despite an observed 13-second install. No
-caches were deleted or repository settings changed in this work.
+Windows npm archives used 8.91 GiB despite an observed 13-second install. A later
+authorized cleanup of exact merged-PR entries is recorded below; repository
+settings remain unchanged.
 
 The [pinned Rust cache action](https://github.com/Swatinem/rust-cache/tree/6323deb102c322ba6fcbdcafc7e3dddab59af2b6)
 uses only Cargo registry/git and target paths with bin caching disabled; it does
@@ -130,3 +131,69 @@ The static CRT policy and PE import checks are documented in
 [Windows CRT evidence](windows-crt-policy.md). Its local 352 Rust and 25 tool
 tests passed before this workflow-only integration; hosted Windows behavior and
 cold/warm timings remain unverified.
+
+## Combine the required authoring tools and examples
+
+The next workflow change builds macOS's `incant_editor`, `incant_headless`,
+`cook_scene` and `collaboration_spike` in one Cargo invocation, with explicit
+binary/example selectors and `incant_editor/custom-protocol`. Schema generation,
+collaboration and evaluation execute the resulting binaries directly. Desktop
+combines only its editor, headless and cook targets; it does not build an unused
+collaboration example. The separate cook build is removed on both workflows.
+Cargo metadata confirms each target name. Shipping still uses its own fresh
+target directory and independently verifies codegen, execution and symbols.
+
+This avoids the remaining standalone cook/collaboration feature-graph changes.
+It does not combine the Khronos texture example yet. The normal workspace tests,
+all ignored GPU tests, every gameplay/render probe, shipping execution and
+artifact uploads remain. A source comparison confirms the existing
+test/probe/dependency/shipping commands in each workflow are unchanged.
+
+Local macOS validation at base `588b3ab`, using `./tools/cargo -j2` and existing
+dependency outputs, produced:
+
+| Operation | Wall time | Result |
+| --- | ---: | --- |
+| Workspace release tests | 176.00s | 352 pass; 16 workspace compile events |
+| Serialized ignored workspace tests | 19.50s | Exact 44 baseline GPU names; zero compile events; Cargo 0.22s |
+| Combined four-target build | 56.75s | 14 workspace compile events; zero external dependency rebuilds |
+| Desktop three-target selection immediately afterward | 0.26s | Zero compile events; Cargo 0.21s |
+| Schema, evaluation, collaboration and 15 gameplay probes | 20.79s | All 18 commands pass; schema files unchanged |
+| Fresh shipping package and source-free execution | 30.46s | Mach-O/dSYM match, abort and source-free checks pass |
+
+The shipping Mach-O/dSYM UUID is `23815991-967c-395d-afb3-5628752edc2d`.
+All 25 Python tool tests, generated conventions, runtime dependency guard,
+actionlint v1.7.12 and `git diff --check` pass. These are local reuse/correctness
+measurements, not a matched hosted speedup or reference-device performance gate.
+
+Desktop's deadline increases from 45 to 60 minutes as bounded cold-run
+resilience, without a speedup claim. The old
+[PR #47 Windows job](https://github.com/snowdamiz/incant/actions/runs/38076760529)
+timed out at 45m06s during saved steering replay, after shipping and its artifact
+uploads had passed. It spent 21m55s on normal workspace tests, 13m49s on the old
+GPU calls (11m30s compilation), 1m32s on editor/headless, 1m30s on cook_scene and
+1m42s on shipping. Keeping shipping provenance intact is inexpensive relative
+to repeated development-graph compilation. Its macOS check spent 40m57s executing;
+the standalone cook and collaboration steps took 54s and 2m05s respectively.
+New hosted cold/warm measurements remain pending.
+
+## Authorized cache cleanup
+
+On 2026-10-10 at 19:30 UTC, exact IDs from the reviewed Windows npm inventory
+were rechecked against current keys, PR merge refs and freshly fetched PR states.
+All 29 remaining candidates belonged to merged PRs and had keys matching
+`node-cache-Windows-x64-npm-[0-9a-f]{64}`; five original IDs were already absent.
+After explicit authorization, the 29 exact DELETE requests succeeded between
+19:32:10 and 19:32:22 UTC, removing **8,162,117,941 bytes (7.60 GiB)**.
+The [complete per-ID evidence](ci-cache-cleanup-2026-10-10.json) records keys,
+refs, PR state, individual sizes, request outcomes and before/after verification.
+
+Immediate re-listing confirmed every deleted ID absent and every nonselected
+preexisting ID still present. Open-PR/default-branch/Rust/Gradle caches were
+preserved. Inventory moved from 48 entries / 11,633,972,224 bytes to 23 entries /
+5,719,550,745 bytes while four new Rust caches arrived concurrently. The aggregate
+usage endpoint lagged at 45 entries / 10,494,390,193 bytes both times, so its delta
+is not treated as deletion evidence. The 5.33 GiB inventory leaves about 4.67 GiB
+of initial headroom under the 10 GiB cap; future cache publication can still
+cause eviction. No broad cache patterns, settings, dispatches or cancellations
+were used.
