@@ -53,6 +53,12 @@ within its documented workload.
 
 ## Active work
 
+- Main cache seeding is verified across all 12 Rust jobs after PR #49: the shared
+  set uses 7.807 GiB and the retained inventory 8.929 GiB after exact obsolete
+  cache cleanup. All checks remained enabled. Independent warm-PR latency and
+  retention after dependency changes remain to be measured. See
+  [cache rollout](docs/spikes/ci-cache-retention.md#completed-main-producer-rollout).
+
 - Native world binary save/restore now preserves Transform/Velocity/hierarchy,
   scene identity and fixed-step clock, with atomic checked replacement. Nine new
   runtime tests and focused Clippy pass. A copied process resumes after deleting

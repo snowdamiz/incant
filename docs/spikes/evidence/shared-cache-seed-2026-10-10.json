@@ -1,0 +1,541 @@
+{
+  "measured_at": "2026-10-10T21:21:47.265501+00:00",
+  "main": "646095e78268c70a3216e5d146412be5abf6ec83",
+  "source_pr": 49,
+  "source_pr_head": "ed9dc323d98e4f61b8091b661bc02c6da876a389",
+  "source_pr_all_12_rust_caches_missed": true,
+  "source_pr_all_rust_saves_disabled": true,
+  "seed_dispatch_observation": {
+    "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+    "automatic": [
+      {
+        "conclusion": "",
+        "createdAt": "2026-10-10T20:46:53Z",
+        "databaseId": 38085082368,
+        "event": "push",
+        "headSha": "646095e78268c70a3216e5d146412be5abf6ec83",
+        "name": "Incant checks",
+        "status": "in_progress",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38085082368"
+      },
+      {
+        "conclusion": "",
+        "createdAt": "2026-10-10T20:46:53Z",
+        "databaseId": 38085082417,
+        "event": "push",
+        "headSha": "646095e78268c70a3216e5d146412be5abf6ec83",
+        "name": "Desktop editor and engine",
+        "status": "in_progress",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38085082417"
+      },
+      {
+        "conclusion": "",
+        "createdAt": "2026-10-10T20:46:53Z",
+        "databaseId": 38085082367,
+        "event": "push",
+        "headSha": "646095e78268c70a3216e5d146412be5abf6ec83",
+        "name": "Website \u00b7 check and deploy",
+        "status": "in_progress",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38085082367"
+      },
+      {
+        "conclusion": "",
+        "createdAt": "2026-10-10T20:46:53Z",
+        "databaseId": 38085082454,
+        "event": "push",
+        "headSha": "646095e78268c70a3216e5d146412be5abf6ec83",
+        "name": "Desktop credential persistence",
+        "status": "in_progress",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38085082454"
+      }
+    ],
+    "nightly_dispatched_once": {
+      "conclusion": "",
+      "createdAt": "2026-10-10T20:47:16Z",
+      "databaseId": 38085106886,
+      "event": "workflow_dispatch",
+      "headSha": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "name": "Six platform probes",
+      "status": "queued",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38085106886"
+    },
+    "nightly_before": [
+      {
+        "conclusion": "success",
+        "createdAt": "2026-10-10T12:48:41Z",
+        "databaseId": 38053332749,
+        "event": "schedule",
+        "headSha": "302613c1550f3d890bca0193982ed03df3e2eb47",
+        "name": "Six platform probes",
+        "status": "completed",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/38053332749"
+      },
+      {
+        "conclusion": "success",
+        "createdAt": "2026-10-09T13:33:33Z",
+        "databaseId": 37937699124,
+        "event": "schedule",
+        "headSha": "130d24992e2a3de66f558d9ed98c13ece9405328",
+        "name": "Six platform probes",
+        "status": "completed",
+        "url": "https://github.com/snowdamiz/incant/actions/runs/37937699124"
+      }
+    ],
+    "reason": "No equivalent main platform run; prior scheduled run has different Cargo.lock and nightly workflow."
+  },
+  "all_12_main_jobs_successful": true,
+  "jobs": [
+    {
+      "name": "checks",
+      "run_id": 38085082368,
+      "job_id": 114309804567,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:47:01Z",
+      "completed_at": "2026-10-10T21:00:44Z",
+      "duration_seconds": 823,
+      "created_at": "2026-10-10T20:46:53Z",
+      "queue_seconds": 8,
+      "pr49_cold_duration_seconds": 1242,
+      "pr49_cold_queue_seconds": 7,
+      "restore": "restored",
+      "restored_key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-ead72dce",
+      "restored_bytes": "1541591502",
+      "restored_main_cache_id": 8778772672,
+      "published": {
+        "id": 8779181342,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-8a00bfbb",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "size_in_bytes": 1548624881,
+        "created_at": "2026-10-10T21:00:38.907656Z",
+        "last_accessed_at": "2026-10-10T21:00:38.907656Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "1548624881"
+    },
+    {
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "run_id": 38085082417,
+      "job_id": 114309804609,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:46:55Z",
+      "completed_at": "2026-10-10T21:21:22Z",
+      "duration_seconds": 2067,
+      "created_at": "2026-10-10T20:46:53Z",
+      "queue_seconds": 2,
+      "pr49_cold_duration_seconds": 2061,
+      "pr49_cold_queue_seconds": 2,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8779575313,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-8a00bfbb",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "size_in_bytes": 1088554794,
+        "created_at": "2026-10-10T21:21:17.046362Z",
+        "last_accessed_at": "2026-10-10T21:21:17.046362Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "1088554794"
+    },
+    {
+      "name": "desktop (ubuntu-latest, Linux)",
+      "run_id": 38085082417,
+      "job_id": 114309804772,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:46:55Z",
+      "completed_at": "2026-10-10T21:02:31Z",
+      "duration_seconds": 936,
+      "created_at": "2026-10-10T20:46:53Z",
+      "queue_seconds": 2,
+      "pr49_cold_duration_seconds": 1133,
+      "pr49_cold_queue_seconds": 2,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8779220747,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-8a00bfbb",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "size_in_bytes": 1219688948,
+        "created_at": "2026-10-10T21:02:27.564225Z",
+        "last_accessed_at": "2026-10-10T21:02:27.564225Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "1219688948"
+    },
+    {
+      "name": "storage (macos-latest)",
+      "run_id": 38085082454,
+      "job_id": 114309804916,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:47:05Z",
+      "completed_at": "2026-10-10T20:50:58Z",
+      "duration_seconds": 233,
+      "created_at": "2026-10-10T20:46:53Z",
+      "queue_seconds": 12,
+      "pr49_cold_duration_seconds": 165,
+      "pr49_cold_queue_seconds": 7,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8778991354,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-8a00bfbb",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "size_in_bytes": 417358635,
+        "created_at": "2026-10-10T20:50:53.360350Z",
+        "last_accessed_at": "2026-10-10T20:57:54.221319Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "417358635"
+    },
+    {
+      "name": "storage (ubuntu-latest)",
+      "run_id": 38085082454,
+      "job_id": 114309804974,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:46:55Z",
+      "completed_at": "2026-10-10T20:49:39Z",
+      "duration_seconds": 164,
+      "created_at": "2026-10-10T20:46:53Z",
+      "queue_seconds": 2,
+      "pr49_cold_duration_seconds": 146,
+      "pr49_cold_queue_seconds": 2,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8778967940,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-8a00bfbb",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "size_in_bytes": 566027251,
+        "created_at": "2026-10-10T20:49:37.116886Z",
+        "last_accessed_at": "2026-10-10T20:52:21.982995Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "566027251"
+    },
+    {
+      "name": "storage (windows-latest)",
+      "run_id": 38085082454,
+      "job_id": 114309805037,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:46:55Z",
+      "completed_at": "2026-10-10T20:51:56Z",
+      "duration_seconds": 301,
+      "created_at": "2026-10-10T20:46:53Z",
+      "queue_seconds": 2,
+      "pr49_cold_duration_seconds": 250,
+      "pr49_cold_queue_seconds": 2,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8779013239,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-8a00bfbb",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "size_in_bytes": 476675632,
+        "created_at": "2026-10-10T20:51:53.141307Z",
+        "last_accessed_at": "2026-10-10T20:52:49.958835Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "476675632"
+    },
+    {
+      "name": "web",
+      "run_id": 38085106886,
+      "job_id": 114309879846,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:47:20Z",
+      "completed_at": "2026-10-10T20:52:52Z",
+      "duration_seconds": 332,
+      "created_at": "2026-10-10T20:47:17Z",
+      "queue_seconds": 3,
+      "pr49_cold_duration_seconds": 288,
+      "pr49_cold_queue_seconds": 2,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8779030480,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-8a00bfbb",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "size_in_bytes": 597527973,
+        "created_at": "2026-10-10T20:52:49.611847Z",
+        "last_accessed_at": "2026-10-10T20:52:49.611847Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "597527973"
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "run_id": 38085106886,
+      "job_id": 114309879957,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:47:19Z",
+      "completed_at": "2026-10-10T20:53:33Z",
+      "duration_seconds": 374,
+      "created_at": "2026-10-10T20:47:17Z",
+      "queue_seconds": 2,
+      "pr49_cold_duration_seconds": 296,
+      "pr49_cold_queue_seconds": 3,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8779044221,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-Windows-X64-desktop-Windows_NT-x64-773408be-8a00bfbb",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "size_in_bytes": 378031891,
+        "created_at": "2026-10-10T20:53:30.318438Z",
+        "last_accessed_at": "2026-10-10T20:53:30.318438Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "378031891"
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "run_id": 38085106886,
+      "job_id": 114309879993,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:47:19Z",
+      "completed_at": "2026-10-10T20:49:28Z",
+      "duration_seconds": 129,
+      "created_at": "2026-10-10T20:47:17Z",
+      "queue_seconds": 2,
+      "pr49_cold_duration_seconds": 147,
+      "pr49_cold_queue_seconds": 2,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8778964795,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-Linux-X64-desktop-Linux-x64-b9e20461-8a00bfbb",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "size_in_bytes": 404796987,
+        "created_at": "2026-10-10T20:49:26.630584Z",
+        "last_accessed_at": "2026-10-10T20:52:22.577372Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "404796987"
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "run_id": 38085106886,
+      "job_id": 114309880019,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:47:24Z",
+      "completed_at": "2026-10-10T20:51:27Z",
+      "duration_seconds": 243,
+      "created_at": "2026-10-10T20:47:17Z",
+      "queue_seconds": 7,
+      "pr49_cold_duration_seconds": 222,
+      "pr49_cold_queue_seconds": 7,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8779003156,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-macOS-ARM64-desktop-Darwin-arm64-791fe27b-8a00bfbb",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "size_in_bytes": 358883125,
+        "created_at": "2026-10-10T20:51:22.986480Z",
+        "last_accessed_at": "2026-10-10T20:52:27.953679Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "358883125"
+    },
+    {
+      "name": "ios",
+      "run_id": 38085106886,
+      "job_id": 114309880052,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:47:23Z",
+      "completed_at": "2026-10-10T20:54:10Z",
+      "duration_seconds": 407,
+      "created_at": "2026-10-10T20:47:17Z",
+      "queue_seconds": 6,
+      "pr49_cold_duration_seconds": 357,
+      "pr49_cold_queue_seconds": 6,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8779055707,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-macOS-ARM64-ios-Darwin-arm64-791fe27b-8a00bfbb",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "size_in_bytes": 517286617,
+        "created_at": "2026-10-10T20:54:07.211363Z",
+        "last_accessed_at": "2026-10-10T20:54:07.211363Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "517286617"
+    },
+    {
+      "name": "android",
+      "run_id": 38085106886,
+      "job_id": 114309880091,
+      "head": "646095e78268c70a3216e5d146412be5abf6ec83",
+      "conclusion": "success",
+      "save_if": "true",
+      "started_at": "2026-10-10T20:47:19Z",
+      "completed_at": "2026-10-10T20:54:24Z",
+      "duration_seconds": 425,
+      "created_at": "2026-10-10T20:47:17Z",
+      "queue_seconds": 2,
+      "pr49_cold_duration_seconds": 460,
+      "pr49_cold_queue_seconds": 2,
+      "restore": "miss",
+      "restored_key": null,
+      "restored_bytes": null,
+      "restored_main_cache_id": null,
+      "published": {
+        "id": 8779057553,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Six platform probes-Linux-X64-android-Linux-x64-b9e20461-8a00bfbb",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "size_in_bytes": 809725962,
+        "created_at": "2026-10-10T20:54:13.250631Z",
+        "last_accessed_at": "2026-10-10T20:54:13.250631Z"
+      },
+      "save_attempted": true,
+      "uploaded_bytes": "809725962"
+    }
+  ],
+  "shared_rust_bytes": 8383182696,
+  "inventory_before": {
+    "entries": 16,
+    "bytes": 3308623239
+  },
+  "inventory_after": {
+    "entries": 28,
+    "bytes": 9587788571
+  },
+  "before_cache_ids_no_longer_present": [
+    8776796913,
+    8776838551,
+    8778772672
+  ],
+  "manual_cache_deletions": [
+    8776796913,
+    8776838551,
+    8778772672
+  ],
+  "unexplained_before_cache_disappearances": [],
+  "cleanup_freed_bytes": 2104495841,
+  "cleanup_evidence": [
+    {
+      "old_cache": {
+        "id": 8776796913,
+        "ref": "refs/pull/45/merge",
+        "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+        "version": "5d872498bb5e5b45b82b88123868c17b1ad68f6ac2d6ca194037d636acb7fa90",
+        "last_accessed_at": "2026-10-10T19:04:09.385733Z",
+        "created_at": "2026-10-10T19:04:09.385733Z",
+        "size_in_bytes": 281446397
+      },
+      "merged_pr": 45,
+      "merge": {
+        "mergeCommit": {
+          "oid": "c1add7cbdede09f127c1bd426cd60559a7e33fd4"
+        },
+        "mergedAt": "2026-10-10T19:07:03Z",
+        "state": "MERGED"
+      },
+      "reason": "Merged private Windows npm cache; Windows npm saving disabled."
+    },
+    {
+      "old_cache": {
+        "id": 8776838551,
+        "ref": "refs/pull/46/merge",
+        "key": "node-cache-Windows-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+        "version": "5d872498bb5e5b45b82b88123868c17b1ad68f6ac2d6ca194037d636acb7fa90",
+        "last_accessed_at": "2026-10-10T19:06:04.580462Z",
+        "created_at": "2026-10-10T19:06:04.580462Z",
+        "size_in_bytes": 281457942
+      },
+      "merged_pr": 46,
+      "merge": {
+        "mergeCommit": {
+          "oid": "23637edc2028f0b47f58afc743b01b86c51689a3"
+        },
+        "mergedAt": "2026-10-10T19:12:56Z",
+        "state": "MERGED"
+      },
+      "reason": "Merged private Windows npm cache; Windows npm saving disabled."
+    },
+    {
+      "old_cache": {
+        "id": 8778772672,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-ead72dce",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-10T20:52:47.585196Z",
+        "created_at": "2026-10-10T20:40:26.999301Z",
+        "size_in_bytes": 1541591502
+      },
+      "replacement": {
+        "id": 8779181342,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-8a00bfbb",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-10T21:00:38.907656Z",
+        "created_at": "2026-10-10T21:00:38.907656Z",
+        "size_in_bytes": 1548624881
+      },
+      "completed_producer_run": 38085082368,
+      "completed_producer_job": 114309804567,
+      "reason": "Superseded main macOS cache; successful upload and same-prefix/version replacement metadata verified. No independent warm consumption claimed at deletion."
+    }
+  ],
+  "limitations": [
+    "Job wall times include runner variation and overlapping physics PR50 workflows; not a controlled performance benchmark.",
+    "Main producer completion and API publication establish cache availability at this observation, not later retention or warm-PR speedup.",
+    "Desktop and credentials producers use filtered pushes or manual dispatch; after long idle/eviction a source-only PR can remain cold until a producer runs.",
+    "Platform checks and desktop CI do not satisfy reference-phone, mobile execution or phase gates."
+  ]
+}
