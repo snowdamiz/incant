@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "NavigationSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_height": {
+          "format": "float",
+          "type": "number"
+        },
+        "agent_radius": {
+          "format": "float",
+          "type": "number"
+        },
+        "cell_height": {
+          "format": "float",
+          "type": "number"
+        },
+        "cell_size": {
+          "format": "float",
+          "type": "number"
+        },
+        "max": {
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        },
+        "max_climb": {
+          "format": "float",
+          "type": "number"
+        },
+        "max_slope_degrees": {
+          "format": "float",
+          "type": "number"
+        },
+        "min": {
+          "description": "World-space build bounds, independent of an entity's local transform.",
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        },
+        "tile_cells": {
+          "format": "uint16",
+          "maximum": 65535,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "min",
+        "max",
+        "cell_size",
+        "cell_height",
+        "tile_cells",
+        "agent_radius",
+        "agent_height",
+        "max_climb",
+        "max_slope_degrees"
+      ],
+      "type": "object"
+    },
+    "NavigationSource": {
+      "additionalProperties": false,
+      "properties": {
+        "entity": {
+          "type": "string"
+        },
+        "geometry": {
+          "$ref": "#/$defs/NavigationSourceKind"
+        }
+      },
+      "required": [
+        "entity",
+        "geometry"
+      ],
+      "type": "object"
+    },
+    "NavigationSourceKind": {
+      "enum": [
+        "collider",
+        "mesh"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "settings": {
+      "$ref": "#/$defs/NavigationSettings"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/NavigationSource"
+      },
+      "maxItems": 1024,
+      "type": "array"
+    }
+  },
+  "required": [
+    "settings",
+    "sources"
+  ],
+  "title": "NavigationMesh",
+  "type": "object"
+}

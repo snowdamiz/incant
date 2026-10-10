@@ -1,5 +1,6 @@
 //! QuickJS sandbox for SWC-compiled TypeScript. No OS, filesystem, module loader,
 //! network, native plugins or shell are installed into the runtime.
+mod localization;
 mod logs;
 mod play;
 mod saves;
@@ -11,7 +12,7 @@ mod queries;
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::Origin;
 pub use logs::{LogLevel, ScriptLog};
-use queries::{CharacterMover, Raycaster};
+use queries::{CharacterMover, Navigator, Raycaster};
 use rquickjs::{Context, Runtime};
 use serde::Deserialize;
 use serde_json::Value;
@@ -52,6 +53,8 @@ pub enum ScriptError {
     #[error(transparent)]
     Timer(#[from] TimerError),
     #[error(transparent)]
+    Localization(#[from] incant_localization::LocalizationError),
+    #[error(transparent)]
     Document(#[from] incant_doc::DocumentError),
 }
 
@@ -70,8 +73,10 @@ struct InitialState {
 }
 pub struct ScriptHost {
     source_sha256: String,
+    localization: Arc<Mutex<localization::State>>,
     raycaster: Option<Raycaster>,
     character_mover: Option<CharacterMover>,
+    navigator: Option<Navigator>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
     context: Context,
     _runtime: Runtime,
@@ -120,8 +125,10 @@ impl ScriptHost {
         }
         let mut host = Self {
             source_sha256: saves::hash(compiled_source.as_bytes()),
+            localization: Arc::new(Mutex::new(localization::State::default())),
             raycaster: None,
             character_mover: None,
+            navigator: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
             context,
             _runtime: runtime,
@@ -133,6 +140,7 @@ impl ScriptHost {
             logs: Vec::new(),
         };
         host.install_queries()?;
+        host.install_localization()?;
         Ok(host)
     }
     pub fn state(&self) -> &Value {
@@ -149,12 +157,19 @@ impl ScriptHost {
         let mut next = Self::with_budget(source, self.budget)?;
         next.raycaster = self.raycaster.clone();
         next.character_mover = self.character_mover.clone();
+        next.navigator = self.navigator.clone();
         next.install_queries()?;
         if self.schedule.has_timers() && !next.has_timer_handler {
             return Err(ScriptError::TimerHandler);
         }
         next.schedule = self.schedule.clone();
-        next.state = preserve_compatible(&self.state, &next.state);
+        // Recreating the VM for identical source has no schema migration: keep
+        // runtime-grown arrays and dynamic object keys as well as scalar fields.
+        next.state = if next.source_sha256 == self.source_sha256 {
+            self.state.clone()
+        } else {
+            preserve_compatible(&self.state, &next.state)
+        };
         next.logs = std::mem::take(&mut self.logs);
         *self = next;
         Ok(())
@@ -176,6 +191,10 @@ impl ScriptHost {
         if !dt.is_finite() || dt <= 0. || dt > 1. {
             return Err(ScriptError::InputLimit);
         }
+        self.localization
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .prepare(bus.project())?;
         let (mut schedule, timer_events) = self.schedule.advance(dt)?;
         let world = serde_json::to_string(bus.project())?;
         let state = serde_json::to_string(&self.state)?;

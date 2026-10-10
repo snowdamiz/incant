@@ -1,0 +1,1 @@
+{"compilerOptions":{"target":"ES2022","module":"ESNext","moduleResolution":"bundler","strict":true,"noEmit":true,"lib":["ES2022"],"types":[]},"files":["navigation_course.ts","doorway_probe.ts","detour_probe.ts","walkable_probe.ts","error_probe.ts","boundary_probe.ts"]}

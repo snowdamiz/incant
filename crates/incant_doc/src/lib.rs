@@ -4,13 +4,16 @@ mod collider_shapes;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
+mod navigation;
 mod physics;
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
 pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_input::InputActions;
+pub use incant_localization::{LocaleSettings, StringTable};
 pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
+pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
 pub use physics::{AngularVelocity, BodyMotion, Collider, RigidBody};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -33,6 +36,8 @@ pub struct Project {
     pub scenes: BTreeMap<Id, Scene>,
     pub assets: BTreeMap<Id, Asset>,
     pub scripts: BTreeMap<Id, ScriptSource>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub string_tables: BTreeMap<Id, StringTable>,
     pub settings: ProjectSettings,
     pub memory: BTreeMap<String, String>,
 }
@@ -43,6 +48,8 @@ pub struct ProjectSettings {
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     #[schemars(length(max = 64))]
     pub input_actions: InputActions,
+    #[serde(default, skip_serializing_if = "LocaleSettings::is_default")]
+    pub localization: LocaleSettings,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -205,9 +212,11 @@ impl Project {
             scenes: BTreeMap::new(),
             assets: BTreeMap::new(),
             scripts: BTreeMap::new(),
+            string_tables: BTreeMap::new(),
             settings: ProjectSettings {
                 tick_rate: 60,
                 input_actions: InputActions::new(),
+                localization: LocaleSettings::default(),
             },
             memory: BTreeMap::new(),
         }
@@ -275,6 +284,9 @@ impl Project {
         for sid in self.scripts.keys() {
             check_id(sid, format!("/scripts/{sid}/id"));
         }
+        for id in self.string_tables.keys() {
+            check_id(id, format!("/string_tables/{id}/id"));
+        }
         if self.schema_version != SCHEMA_VERSION {
             issue("/schema_version".into(), "unsupported schema version");
         }
@@ -286,6 +298,16 @@ impl Project {
         }
         if let Err(error) = incant_input::validate_actions(&self.settings.input_actions) {
             issue("/settings/input_actions".into(), &error.to_string());
+        }
+        if let Err(error) = self.settings.localization.validate() {
+            issue("/settings/localization".into(), &error.to_string());
+        }
+        if let Err(error) = incant_localization::Catalog::compile(&self.string_tables) {
+            let path = match &error {
+                incant_localization::LocalizationError::Validation { path, .. } => path.clone(),
+                _ => "/string_tables".into(),
+            };
+            issue(path, &error.to_string());
         }
         for (id, asset) in &self.assets {
             if id != &asset.id {
@@ -415,6 +437,9 @@ impl Project {
                 "only one global EnvironmentLight is supported",
             );
         }
+        if let Err(message) = navigation::validate_graph(self) {
+            issue("/scenes".into(), &message);
+        }
         if let Err(message) = audio::validate_graph(self) {
             issue("/scenes".into(), &message);
         }
@@ -435,6 +460,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
         serde_json::from_value(v.clone()).map_err(|e| e.to_string())
     }
     match kind {
+        "NavigationMesh" => navigation::validate(value)?,
         "AudioBus" | "AudioSource" | "AudioListener" => audio::validate(kind, value, project)?,
         "RigidBody" | "Collider" | "AngularVelocity" => physics::validate(kind, value)?,
         "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
@@ -539,6 +565,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        (
+            "NavigationMesh".into(),
+            json!(schemars::schema_for!(NavigationMesh)),
+        ),
         ("AudioBus".into(), json!(schemars::schema_for!(AudioBus))),
         (
             "AudioSource".into(),

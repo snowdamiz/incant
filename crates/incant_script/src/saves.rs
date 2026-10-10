@@ -61,14 +61,26 @@ pub(super) fn hash(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
 }
 pub(super) fn manifest(project: &Project) -> Result<String, serde_json::Error> {
-    Ok(hash(&serde_json::to_vec(&(
+    let prefix = (
         &project.id,
-        // Input bindings can be changed by gameplay through the command bus.
-        // Keep the historical settings shape for saves from before bindings.
+        // Runtime locale and input choices are saved without changing resources.
         serde_json::json!({"tick_rate": project.settings.tick_rate}),
         &project.assets,
         &project.scripts,
-    ))?))
+    );
+    // Retain the original tuple serialization, including struct field ordering.
+    let bytes = if project.string_tables.is_empty() {
+        serde_json::to_vec(&prefix)?
+    } else {
+        serde_json::to_vec(&(
+            prefix.0,
+            prefix.1,
+            prefix.2,
+            prefix.3,
+            &project.string_tables,
+        ))?
+    };
+    Ok(hash(&bytes))
 }
 
 impl PlaySession {
@@ -106,6 +118,19 @@ impl PlaySession {
         compiled_source: &str,
         text: &str,
     ) -> Result<Self, SaveError> {
+        Self::from_save_with_navigation_resources(
+            authored,
+            compiled_source,
+            text,
+            incant_core::NavigationResources::new(),
+        )
+    }
+    pub fn from_save_with_navigation_resources(
+        authored: &Project,
+        compiled_source: &str,
+        text: &str,
+        resources: incant_core::NavigationResources,
+    ) -> Result<Self, SaveError> {
         if text.len() > MAX_SAVE_BYTES {
             return Err(SaveError::Size);
         }
@@ -122,7 +147,7 @@ impl PlaySession {
         }
         let manifest_sha256 = manifest(authored)?;
         save.validate(&manifest_sha256)?;
-        let mut next = Self::new(&save.project, compiled_source)?;
+        let mut next = Self::with_navigation_resources(&save.project, compiled_source, resources)?;
         next.authored_sha256 = authored_sha256;
         next.manifest_sha256 = manifest_sha256;
         next.ticks = save.tick;

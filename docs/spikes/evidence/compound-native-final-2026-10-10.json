@@ -1,0 +1,122 @@
+{
+  "source": "5b97ecd190f9fab0cb9c4d8bec07f777e91ae14d",
+  "native_sha256": "f23c403fceb9bca3418bd0dc317e9e316c808fe665eb9fc8fb99748afabf5224",
+  "project_sha256": "a945aeee47b47dccdc73fa6f0a605955a27109941979a5d88a1a4c7cc36bd419",
+  "startup": "CUA launches a test app bundle whose safe std::process exec wrapper adds only the project CLI argument. No Terminal or shell GUI automation.",
+  "note": "Old app quit with CUA Cmd+Q, then relaunched fresh with CUA getApp. Final compact Agent splitter is 210px at 1440x874 and 200px at 1000x650. No authored project mutation.",
+  "previous_engine_review": {
+    "source_revision": "64b9efe",
+    "binary_sha256": "290d85195933866c5cb4793d0374f6354b8a69397d9743bdd7e557511ebc580e"
+  },
+  "capture": "CUA native App.getScreenshot; original JPEG bytes at 2x Retina scale, no resampling/editing. Native OS screen-sharing pill obscures traffic lights.",
+  "captures": [
+    {
+      "file": "mixed-min-end-tab.jpg",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size_at_retina_2x": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "b752932448a940df05f18a3b273778312a4bb5da56d85010689407be0c266091"
+    },
+    {
+      "file": "mixed-wide-end-tab.jpg",
+      "pixel_size": [
+        2880,
+        1748
+      ],
+      "logical_size_at_retina_2x": [
+        1440.0,
+        874.0
+      ],
+      "sha256": "d132b169d6addfeebc79700b1639f22c82dfdfc3bd007553c967827155323c7f"
+    },
+    {
+      "file": "parts-64-min-end-tab.jpg",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size_at_retina_2x": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "5bcd498bd9a8b375f472509d8b98ce446a2fd8200f0d8cdd63a63f285ff41d0a"
+    },
+    {
+      "file": "parts-64-min-end.jpg",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size_at_retina_2x": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "6319b601c6898660d17e904d81bc13f8ede91b785a862ca8920eeb1e2267fe3c"
+    },
+    {
+      "file": "parts-64-wide-end-tab.jpg",
+      "pixel_size": [
+        2880,
+        1748
+      ],
+      "logical_size_at_retina_2x": [
+        1440.0,
+        874.0
+      ],
+      "sha256": "528ede1f4d68737b169a4ea810feac7690c5d05ceffe20a7d084caeb0aaf8999"
+    },
+    {
+      "file": "parts-64-wide-end.jpg",
+      "pixel_size": [
+        2880,
+        1748
+      ],
+      "logical_size_at_retina_2x": [
+        1440.0,
+        874.0
+      ],
+      "sha256": "3237e5f43da48d43b91642a2641ab6b5cb3211373e9bd94d2d0949d5777f6b4e"
+    },
+    {
+      "file": "primitive-min-top.jpg",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size_at_retina_2x": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "89e620e5d366350baabe6bb9765eefa4ef91f384f4fba56600ed051c51d5ebe9"
+    },
+    {
+      "file": "primitive-wide-top.jpg",
+      "pixel_size": [
+        2880,
+        1748
+      ],
+      "logical_size_at_retina_2x": [
+        1440.0,
+        874.0
+      ],
+      "sha256": "ac3404a85eb2cb0d713d335a669f92014873ce772b0396027996603d6340f335"
+    },
+    {
+      "file": "resize-observation.jpg",
+      "pixel_size": [
+        2000,
+        1300
+      ],
+      "logical_size_at_retina_2x": [
+        1000.0,
+        650.0
+      ],
+      "sha256": "89e620e5d366350baabe6bb9765eefa4ef91f384f4fba56600ed051c51d5ebe9"
+    }
+  ]
+}

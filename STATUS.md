@@ -68,9 +68,53 @@ within its documented workload.
   `18e3406`. Handoff 0025 accepted the supplied native/64-part and corrected-runtime
   scope, then improved the unavailable Agent pane. Its 334 UI checks/build pass.
   Integration with merged audio/input passes 237 Rust, 40 GPU, 334 UI and five tool
-  tests, contracts, Clippy and native packaging. Final post-change native captures
-  await Mac unlock; updated CI and merge remain open.
+  tests, contracts, Clippy and native packaging. Claude now accepts final
+  post-change native captures at both sizes, including the compact Agent pane.
+  Current-main integration, updated checks and merge remain open.
   See [compound colliders](docs/spikes/compound-colliders.md).
+
+- Tiled runtime navigation bakes selected static colliders and cooked model
+  geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
+  with funnel smoothing and connected visibility repair. Claude's rendered
+  reviews exposed clearance, detour, phantom raster spans and short-query
+  precision bugs; all have regression fixes. Current source passes 276 Rust,
+  40 GPU, 315 UI and five tool tests, plus public saved-character gameplay,
+  Clippy, SDK/generation checks, native packaging and WASM/iOS compilation.
+  There are 7,056 local and 34,932 room-wide short-query regressions. See the
+  [navigation evidence](docs/spikes/navigation-runtime.md). PR #35's scoped implementation
+  and v9 rendered review are complete: both 600-tick runs match 726 frames/logs,
+  with no query exceptions and grounding on every tick. All twelve CI checks
+  passed on d7517b0; final report changes await current-head checks before merge. Quantized height
+  detail can undershoot true step discontinuities; physics owns grounding.
+  Steering is implemented and reviewed on its separate integration branch;
+  off-mesh links are in integration checks. Grid navigation, native Inspector/
+  debug draw and Core Sample/device gates remain open.
+
+- XLIFF translator exchange exports typed tables and imports matching targets
+  through one reversible shared-command transaction. Unknown/stale sources,
+  malformed XML and incompatible arguments reject the full batch. No-op imports
+  preserve history; empty targets and absent targets retain distinct meanings.
+  The public two-table/strict-TypeScript workflow, exact durable Undo/Redo and
+  rollback checks pass. Local verification passes 254 Rust tests, 40 GPU checks,
+  315 UI tests/build, five tool tests, Clippy, contracts and native packaging;
+  macOS executes the XLIFF smoke check, while WASM/iOS compile. All twelve hosted
+  checks passed at `3724633`; PR #34 merged as `106a4cc` with its tested tree
+  unchanged. The graphical localization panel remains open. See
+  [translator exchange](docs/spikes/localization-exchange.md).
+
+- Typed string tables, a bounded ICU MessageFormat subset, ICU4X plural/number/date
+  formatting, fallback, pseudo-localization, missing-string reports and saved
+  runtime locale switching are implemented. Shared commands preserve provenance,
+  journal history and Undo/Redo. Local checks pass 245 Rust tests, 40 GPU checks,
+  315 UI tests/build, five tool tests, Clippy, contracts and native packaging.
+  Six public gameplay probes pass; the macOS platform probe executes locale data,
+  while WASM/iOS target checks compile. A live saved-account Astra run authors and
+  verifies a Japanese table that produces the expected gameplay text, without
+  another login or Keychain prompt. An explicit UTF-8 subprocess fix resolves the Windows cp1252 probe failure.
+  All twelve hosted checks passed at `184a0fe`; PR #33 merged as `7052e01` with
+  its tested tree unchanged. Shaping/bidi/IME,
+  localization UI and Core Sample visual/device gates remain open.
+  See [localization runtime](docs/spikes/localization-runtime.md).
 
 - Named button/axis input actions and runtime rebinding now use validated project
   settings and the shared command bus. Ordered physical transitions preserve
@@ -427,10 +471,10 @@ within its documented workload.
 ## Current screen-work constraint
 
 Revision 3 is the current implementation baseline. Its additional Phase 1 work
-remains open: tiled navmesh generation/pathfinding/steering and 2D grid navigation;
-sprites/atlases/tilemaps and Rapier 2D; shaped text, font fallback and IME; typed
-localized string tables, formatting, locale switching and pseudo-localization;
-and gamepad/mobile haptics. The expanded Core Sample gate includes navigation,
+includes the implemented tiled navmesh/path-query and localization runtime above.
+Still open are navigation steering/local avoidance, off-mesh links and 2D grids;
+sprites/atlases/tilemaps and Rapier 2D; shaped text, font fallback and IME;
+localization UI and gamepad/mobile haptics. The expanded Core Sample gate includes navigation,
 RTL/CJK/localization coverage and a 2D sample on all four reference devices.
 This does not replace the remaining original renderer, animation, audio/device,
 input-adapter, SDK/coroutine and complete-game performance requirements. Later
@@ -438,11 +482,13 @@ networking and service scope follows Revision 3 Sections 6.8/6.10; their open
 director decisions and human-owned production prerequisites remain explicit.
 
 The director reauthorized computer use and screen capture on 2026-10-10.
-Claude owns resumed visual review; Astra supplies native captures and verifies
-behavior. Prior paused evidence remains explicitly scoped to its recorded runs.
-Compound-collider PR #25 is a separate draft pending its final native appearance
-review of the compact Agent revision. The Mac is currently locked; the unlock
-request is pending while nonvisual integration continues.
+Claude accepted the final rebuilt native Inspector at 1440×874 and 1000×650,
+including the compact unavailable Agent, valid 64-part list, End→Tab full IDs
+and primitive regression. PR #25 is integrating current main and rerunning
+checks before merge. All twelve checks passed on its earlier head `5b97ecd`;
+that is not evidence for the new integration. Native reorder/invalid-data
+presentation remains outside the read-only boundary, and the OS sharing pill
+obscures the traffic lights. No phase gate is approved.
 
 ## External prerequisites still required
 

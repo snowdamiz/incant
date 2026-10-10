@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "CalendarDate": {
+      "additionalProperties": false,
+      "properties": {
+        "day": {
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "month": {
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "year": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "year",
+        "month",
+        "day"
+      ],
+      "type": "object"
+    },
+    "MessageArgument": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "format": "double",
+          "type": "number"
+        },
+        {
+          "$ref": "#/$defs/CalendarDate"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arguments": {
+      "additionalProperties": {
+        "$ref": "#/$defs/MessageArgument"
+      },
+      "default": {},
+      "type": "object"
+    },
+    "key": {
+      "type": "string"
+    },
+    "table_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "table_id",
+    "key"
+  ],
+  "title": "LocalizeRequest",
+  "type": "object"
+}

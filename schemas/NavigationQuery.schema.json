@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "PathRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        },
+        "max_visited": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "snap_distance": {
+          "format": "float",
+          "type": "number"
+        },
+        "start": {
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "snap_distance",
+        "max_visited"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "mesh_entity": {
+      "type": "string"
+    },
+    "path": {
+      "$ref": "#/$defs/PathRequest"
+    },
+    "scene_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "scene_id",
+    "mesh_entity",
+    "path"
+  ],
+  "title": "NavigationQuery",
+  "type": "object"
+}

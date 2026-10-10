@@ -142,3 +142,9 @@ stay valid, and the retained corrupt reader continues rejecting its old bytes.
 The three local asset-audio tests and asset Clippy pass. Hosted Windows run
 38021329759 (job 114122758280) passed the corrected asset tests, public audio
 probe, native build and GPU checks at `246a380`.
+
+
+All twelve updated hosted checks passed at `de83a4e`. PR #29 merged on
+2026-10-10 as `f96dca7cf307abe68e480a2ec4d7356333ceb1db`; its tree
+`8f32f1ded090c2c5e45ceb020291b1f0832fac4c` equals the reviewed head.
+Hardware/lifecycle and native playback requirements above remain open.

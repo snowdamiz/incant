@@ -1,5 +1,33 @@
 # Third-party notices
 
+## Navigation dependencies
+
+Incant uses a patched [rerecast 0.4.0](https://crates.io/crates/rerecast/0.4.0)
+for voxelization, regions, contours and tile polygonization, under the
+[MIT license](licenses/rerecast-MIT.txt). The license text is retained from the
+official repository's v0.4.0 tag. The complete patched source is retained in
+`third_party/rerecast`, selected by Cargo's path patch. Its `INCANT_PATCH.md`
+records the original registry checksum, source revision and the small raster
+clipping/compatibility changes. Incant's tile cache, adjacency construction,
+path search, funnel and terrain-following code are original implementations.
+
+## Localization dependencies
+
+Incant uses unmodified ICU4X 2.3 locale, decimal, date/calendar and plural
+libraries and compiled Unicode/CLDR data. Direct crate versions are 2.3.0;
+Cargo.lock records every transitive library/data version and registry checksum.
+These packages, `fixed_decimal`, and `writeable`
+use [Unicode License V3](licenses/Unicode-3.0.txt). The calendar dependency
+`calendrical_calculations` uses [Apache License 2.0](licenses/Apache-2.0.txt).
+Corresponding sources are
+available in their versioned crates.io packages or `cargo vendor --locked`.
+Incant's bounded MessageFormat parser and pseudo-localization are original code;
+they are not a complete ICU MessageFormat implementation.
+
+Translator exchange uses unmodified [quick-xml 0.42.0](https://crates.io/crates/quick-xml/0.42.0),
+copyright (c) 2016 Johann Tuffe, under the [MIT license](licenses/quick-xml-MIT.txt).
+The pinned source and checksum are recorded in Cargo.lock.
+
 ## Audio dependencies
 
 Incant uses unmodified [Kira 0.12.5](https://crates.io/crates/kira/0.12.5),

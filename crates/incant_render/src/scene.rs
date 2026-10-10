@@ -98,7 +98,7 @@ pub(crate) fn resolve(
     project: &Project,
     assets: Option<&AssetStore>,
 ) -> Result<ResolvedScene, SceneError> {
-    let state = incant_core::Engine::new(project)?.snapshot();
+    let entities = incant_core::project_entities(project)?;
     let mut result = ResolvedScene {
         diagnostics: Vec::new(),
         models: BTreeMap::new(),
@@ -147,7 +147,7 @@ pub(crate) fn resolve(
             }
         }
     }
-    for entity in state.entities.values() {
+    for entity in entities.values() {
         let world64 = glam::DMat4::from_cols_array_2d(&entity.world_transform);
         let components = &project.scenes[&entity.scene_id].entities[&entity.id].components;
         result.lights.add(components, world64)?;

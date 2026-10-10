@@ -7,27 +7,51 @@ use std::{
     time::Instant,
 };
 
-type Query<Q, R> = Arc<dyn Fn(Q) -> Result<R, PhysicsError> + Send + Sync>;
+type Query<Q, R, E = PhysicsError> = Arc<dyn Fn(Q) -> Result<R, E> + Send + Sync>;
+pub(super) type Navigator = Query<
+    incant_core::NavigationQuery,
+    Option<incant_core::NavigationPath>,
+    incant_core::NavigationError,
+>;
 pub(super) type Raycaster = Query<RayQuery, Option<RayHit>>;
 pub(super) type CharacterMover = Query<CharacterQuery, CharacterMovement>;
 
 impl ScriptHost {
     pub(super) fn install_queries(&mut self) -> Result<(), ScriptError> {
-        self.install_query("__incantRaycast", self.raycaster.clone(), 1, "hit")?;
+        self.install_query(
+            "__incantRaycast",
+            self.raycaster.clone(),
+            1,
+            "hit",
+            "physics",
+        )?;
         self.install_query(
             "__incantCharacterMotion",
             self.character_mover.clone(),
             16,
             "movement",
+            "physics",
+        )?;
+        self.install_query(
+            "__incantFindPath",
+            self.navigator.clone(),
+            64,
+            "path",
+            "navigation",
         )
     }
 
-    fn install_query<Q: DeserializeOwned + 'static, R: Serialize + 'static>(
+    fn install_query<
+        Q: DeserializeOwned + 'static,
+        R: Serialize + 'static,
+        E: std::fmt::Display + 'static,
+    >(
         &self,
         name: &str,
-        query: Option<Query<Q, R>>,
+        query: Option<Query<Q, R, E>>,
         cost: usize,
         output_key: &'static str,
+        family: &'static str,
     ) -> Result<(), ScriptError> {
         let count = self.query_count.clone();
         let deadline = self.deadline.clone();
@@ -36,26 +60,23 @@ impl ScriptHost {
                 let function =
                     rquickjs::Function::new(ctx.clone(), move |text: String| -> String {
                         let result = (|| -> Result<_, String> {
-                            // A character sweep costs 16 units; a ray costs one. Both
-                            // contribute to the same 256-unit fixed-tick allowance.
+                            // Every native query shares the 256-unit tick allowance.
                             if text.len() > 4096
                                 || count.fetch_add(cost, Ordering::Relaxed) > 256 - cost
                                 || Instant::now()
                                     >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
                             {
-                                return Err("physics query budget exceeded".into());
+                                return Err(format!("{family} query budget exceeded"));
                             }
                             let request = serde_json::from_str(&text)
-                                .map_err(|e| format!("invalid physics query: {e}"))?;
-                            let value = query
-                                .as_ref()
-                                .ok_or("physics queries require a play session")?(
-                                request
-                            )
+                                .map_err(|e| format!("invalid {family} query: {e}"))?;
+                            let value = query.as_ref().ok_or_else(|| {
+                                format!("{family} queries require a play session")
+                            })?(request)
                             .map_err(|e| e.to_string())?;
                             if Instant::now() >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
                             {
-                                return Err("physics query deadline exceeded".into());
+                                return Err(format!("{family} query deadline exceeded"));
                             }
                             Ok(value)
                         })();

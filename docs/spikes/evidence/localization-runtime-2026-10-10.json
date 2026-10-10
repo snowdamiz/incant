@@ -1,0 +1,406 @@
+{
+  "date": "2026-10-10",
+  "base_commit": "68f6004b11c0d78a0bfdc9d47b0705821015f15c",
+  "scope": "nonvisual localization runtime; no phase gate",
+  "local": {
+    "rust": {
+      "passed": 245,
+      "ignored": 40
+    },
+    "gpu": {
+      "passed": 40,
+      "ignored": 0
+    },
+    "ui_tests": 315,
+    "tool_tests": 5,
+    "clippy_all_targets": true,
+    "generated_contracts": true,
+    "strict_typescript": true,
+    "native_build_and_package": true,
+    "macos_platform_execution": true,
+    "wasm_compile": true,
+    "ios_compile": true
+  },
+  "probe_results": {
+    "localization": {
+      "passed": true,
+      "strict_typescript": true,
+      "rpc_journal_undo_redo": true,
+      "runtime_locales": [
+        "en",
+        "ru",
+        "ja",
+        "ar",
+        "fr-CA"
+      ],
+      "timer_switches_saved": true,
+      "restored_state_and_log_suffix_equal": true,
+      "missing_translation_exit_status": true,
+      "author_files_unchanged": {
+        "game.incant.json": "d31a1ed172635d41cbbddb972b3a0c257b26aa321068553ade1c1375d56f168c",
+        "history.jsonl": "94a95df90eb09fbbd4a7fa6927e6ef44ff796dde4614dc72ad18f8609d235b98"
+      },
+      "shaping_or_visual_acceptance": false,
+      "binary_sha256": "09c6d612b71f4ad8958460e96f45ee6a0dc2df40caa9ce1cd8fd125a4579fb95"
+    },
+    "saves": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "steps": [
+        19,
+        41
+      ],
+      "full_state_equal": true,
+      "nested_state_and_runtime_spawn_delete_preserved": true,
+      "resumed_logs_equal_to_uninterrupted_suffix": true,
+      "second_save_reopened": true,
+      "author_files_unchanged": {
+        "game.incant.json": "3c5cc44c27ca1afe6176601a2e1d5eae3e373c990e644bf2f2238230d916527f",
+        "history.jsonl": "6030cafd7665ade77287af29b2c85e21359c4211c8b19fdaf1aa3793305d7b9c"
+      },
+      "binary_sha256": "09c6d612b71f4ad8958460e96f45ee6a0dc2df40caa9ce1cd8fd125a4579fb95"
+    },
+    "actions": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "steps": [
+        7,
+        13
+      ],
+      "atomic_command_undo_redo": true,
+      "runtime_rebind_saved": true,
+      "full_state_equal": true,
+      "continued_logs_equal": true,
+      "subtick_taps": true,
+      "alternative_bindings_do_not_repeat_presses": true,
+      "touch_gesture_binding": true,
+      "author_files_unchanged": {
+        "game.incant.json": "e1793fb533a9547d1f79649e57fb40df8cc0a61504da698630a1c2eba524cde2",
+        "history.jsonl": "dbc60e7d6159bc568c03979d67a76a1180ea4ef102e691b99d9dbe65d48c22bf",
+        "input.json": "4b9ba5d9049d38db47ee22a49a0ed851b4e6718ecf384c5350d036e0ee3d6a6e"
+      },
+      "final_position": [
+        0.275,
+        0.0,
+        0.3
+      ],
+      "binary_sha256": "09c6d612b71f4ad8958460e96f45ee6a0dc2df40caa9ce1cd8fd125a4579fb95"
+    },
+    "audio": {
+      "passed": true,
+      "public_import_and_rpc": true,
+      "strict_typescript": true,
+      "source_free": true,
+      "repeated_pcm_exact": true,
+      "frames": 48000,
+      "sample_rate": 48000,
+      "timer_pcm_matches_update_control": true,
+      "saved_audio_timer_deadlines_restored": true,
+      "restored_paused_source_stays_silent_until_timer": true,
+      "left_rms": 0.2441395090272332,
+      "paused_left_rms": 0.0,
+      "resumed_left_rms": 0.2441395090272332,
+      "right_rms": 0.3664044296662817,
+      "attenuated_right_rms": 0.18361455724094905,
+      "bus_gain_ratio": 0.5011253750621514,
+      "existing_output_untouched": true,
+      "author_files_unchanged": {
+        "game.incant.json": "ee89c39bfdb072ceb14ae7cfb2593711a386145e93e2afa284d26a59572edd51",
+        "game.incant.journal.jsonl": "eabea6168687cd70dcb8b7e733b15504b346f21983611091c62ae49f783ab476"
+      },
+      "pcm_sha256": "4ab70417e9ee9e457b7a83e8f8307825557795e705e4cb6f9afba8550df43225",
+      "binary_sha256": "09c6d612b71f4ad8958460e96f45ee6a0dc2df40caa9ce1cd8fd125a4579fb95",
+      "audio_device_opened": false,
+      "pixel_capture": false
+    },
+    "timers": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "steps": [
+        10,
+        20
+      ],
+      "pending_deadlines_restored": true,
+      "callbacks_mutate_through_commands": true,
+      "same_tick_cancellation": true,
+      "full_state_equal": true,
+      "resumed_logs_equal_to_uninterrupted_suffix": true,
+      "second_save_reopened": true,
+      "author_files_unchanged": {
+        "game.incant.json": "71814cc51eacd282e41e492ed37085c610242de03bbf28bb8b0a159b1e44c317",
+        "history.jsonl": "6badfc7e76bd15858c72a272098b974bcea093fc21c5ff88d081374df0fe0095"
+      },
+      "binary_sha256": "09c6d612b71f4ad8958460e96f45ee6a0dc2df40caa9ce1cd8fd125a4579fb95"
+    },
+    "input": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "recorded_inputs": [
+        "keyboard",
+        "mouse",
+        "gamepad",
+        "touch"
+      ],
+      "actual_character_jump_and_wall_contact": true,
+      "save_resume_mid_jump_exact": true,
+      "repeat_exact": true,
+      "final_position": [
+        1.9799888134002686,
+        0.8191448450088501,
+        0.10583171993494034
+      ],
+      "script_state": {
+        "clicks": 1,
+        "grounded": true,
+        "isolated": true,
+        "jumps": 1,
+        "maxY": 2.0525166988372803,
+        "presses": 1,
+        "taps": 1,
+        "ticks": 180,
+        "vy": 0,
+        "wheel": 2,
+        "yaw": 0.02
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "77d38430738caa303771d170d332ce9eedbfc70c9eedf0a1efc02efd4088f465",
+        "history.jsonl": "5090b6b3af0b3ba4666bf00a23b836c55bd9ec2bfc737c7d35a5aff9ff3b827e",
+        "input.json": "67f232410d648085ffa98a833c2ec624e2c2845128f5a3ca16d89b0695a6d7e1"
+      },
+      "binary_sha256": "09c6d612b71f4ad8958460e96f45ee6a0dc2df40caa9ce1cd8fd125a4579fb95",
+      "live_device_adapters": false,
+      "scheduled_gameplay_assertions": true,
+      "failed_assertion_exits_nonzero_with_report_and_no_save": true
+    }
+  },
+  "live_saved_account": {
+    "model": "gpt-6-astra",
+    "existing_saved_oauth": true,
+    "new_login_or_keychain_prompts": false,
+    "report": {
+      "steps": 4,
+      "tool_calls": [
+        {
+          "name": "doc_query",
+          "succeeded": true
+        },
+        {
+          "name": "doc_patch",
+          "succeeded": true
+        },
+        {
+          "name": "doc_query",
+          "succeeded": true
+        }
+      ],
+      "transaction_ids": [
+        "01M4J32ZXW7B0ZPB8XFQ5MGX4M"
+      ],
+      "usage": {
+        "input_tokens": 18086,
+        "output_tokens": 282
+      }
+    },
+    "transaction_actor": {
+      "origin": "agent",
+      "actor": "incant-agent",
+      "model": "gpt-6-astra",
+      "conversation_id": "01M4J326B62NFHY440YP5AYE05"
+    },
+    "authored_table_and_locale_verified": true,
+    "played_text": "2\u679a",
+    "phase_gate_claim": false,
+    "playback_verification_binary_sha256": "40a5f90a686c70adaede3ce48a05df03cfa37b8b4d0eecd44f06bd00ff6cf119"
+  },
+  "measurement": {
+    "hardware": "Apple M5 Pro",
+    "single_local_run": {
+      "catalog_json_bytes": 699432,
+      "compile_ms": 10.566749999999999,
+      "format_mean_us": 1.8173084,
+      "format_total_ms": 18.173084,
+      "iterations": 10000,
+      "keys": 4096,
+      "locales": 2,
+      "reference_device_gate": false,
+      "sample": "Ada: 1.234 coins, 8. Mai 2024"
+    },
+    "reference_device_gate": false
+  },
+  "ci": {
+    "status": "pending UTF-8 probe repair",
+    "prior_head": "0ee5532d06277dafaf82c12c89f50d8179233958",
+    "windows_failure": {
+      "run": "https://github.com/snowdamiz/incant/actions/runs/38026340265/job/114137866330",
+      "stage": "public locale-switching Python probe",
+      "cause": "Python default cp1252 decoding of UTF-8 Rust RPC output",
+      "rust_tests_gpu_and_native_build_passed": true
+    },
+    "repair": "Use explicit UTF-8 for every localized subprocess and file text operation; rerun hosted checks.",
+    "local_utf8_repair": {
+      "default_encoding_warnings_as_errors": true,
+      "simulated_subprocess_default_cp1252": true,
+      "scope": "real public CLI workflow on macOS with Windows code-page fallback injected in the Python harness; not a Windows execution claim",
+      "probe_result": {
+        "passed": true,
+        "strict_typescript": true,
+        "rpc_journal_undo_redo": true,
+        "runtime_locales": [
+          "en",
+          "ru",
+          "ja",
+          "ar",
+          "fr-CA"
+        ],
+        "timer_switches_saved": true,
+        "restored_state_and_log_suffix_equal": true,
+        "missing_translation_exit_status": true,
+        "author_files_unchanged": {
+          "game.incant.json": "d2cb2b8784142aa6dd8c4e17d3b5650345a8bbb9f0001423a81a21ca49960932",
+          "history.jsonl": "4811865bc76d2dca656afba7afd69584ef0bea9b080998f73241ee02dadb8570"
+        },
+        "shaping_or_visual_acceptance": false,
+        "binary_sha256": "d4fb0ec64853c8a2916546769d454d20809f818ee66f26142122dba644e8df06"
+      }
+    }
+  },
+  "open": [
+    "Text shaping, bidi layout, font fallback and IME",
+    "XLIFF translator exchange",
+    "Localization panel and pseudo/RTL/CJK rendered-pixel acceptance",
+    "Core Sample/reference-device complete-game gates"
+  ],
+  "merge_verification": {
+    "pull_request": "https://github.com/snowdamiz/incant/pull/33",
+    "tested_head": "184a0fe68a8ce42c8a30fdd31c665d3b6913871e",
+    "merge_commit": "7052e01dfc4d8c580e1023acec13fca5196c0c8c",
+    "tested_and_merged_tree": "f41038667995e5908b9317a62f156446363b71b0",
+    "all_12_checks_passed": true,
+    "checks": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:48:19Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577961/job/114144550051",
+        "name": "storage (macos-latest)",
+        "startedAt": "2026-10-10T05:45:26Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T06:25:19Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577878/job/114144549928",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "startedAt": "2026-10-10T05:45:20Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T06:17:15Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577994/job/114144606375",
+        "name": "checks",
+        "startedAt": "2026-10-10T05:45:44Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:47:45Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577865/job/114144549728",
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "startedAt": "2026-10-10T05:45:26Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:50:01Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577961/job/114144550316",
+        "name": "storage (windows-latest)",
+        "startedAt": "2026-10-10T05:45:23Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T06:05:29Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577878/job/114144550114",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "startedAt": "2026-10-10T05:45:20Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:48:45Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577865/job/114144549920",
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "startedAt": "2026-10-10T05:45:20Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:47:41Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577961/job/114144550164",
+        "name": "storage (ubuntu-latest)",
+        "startedAt": "2026-10-10T05:45:20Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:46:29Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577865/job/114144549964",
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "startedAt": "2026-10-10T05:45:20Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:49:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577865/job/114144549930",
+        "name": "web",
+        "startedAt": "2026-10-10T05:45:20Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:51:18Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577865/job/114144549965",
+        "name": "ios",
+        "startedAt": "2026-10-10T05:45:24Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-10T05:51:40Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38028577865/job/114144549900",
+        "name": "android",
+        "startedAt": "2026-10-10T05:45:20Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      }
+    ]
+  }
+}

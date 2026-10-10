@@ -7,7 +7,17 @@ globalThis.__tick = (worldJson, dt, stateJson, eventsJson, inputJson, clockJson,
   const timers = [];
   const replaced = new Set();
   let asynchronous = false;
+  const localization = request => {
+    const result = JSON.parse(globalThis.__incantLocalization(JSON.stringify(request)));
+    if (result.error) throw new Error(result.error);
+    return result.value;
+  };
   const api = Object.freeze({
+    localize: request => localization({op:"message", request}),
+    locale: () => localization({op:"settings"}),
+    formatNumber: value => localization({op:"number", value}),
+    formatDate: (value, length = "medium") => localization({op:"date", value, length}),
+    localizationReport: () => localization({op:"coverage"}),
     input: () => JSON.parse(inputJson),
     clock: () => JSON.parse(clockJson),
     setTimer: timer => {
@@ -21,6 +31,11 @@ globalThis.__tick = (worldJson, dt, stateJson, eventsJson, inputJson, clockJson,
       if (timers.length >= 256) throw Error('timer action limit');
       timers.push({op:'cancel', id});
       replaced.add(id);
+    },
+    findPath: (query) => {
+      const result = JSON.parse(globalThis.__incantFindPath(JSON.stringify(query)));
+      if (result.error) throw new Error(result.error);
+      return result.path;
     },
     raycast: (query) => {
       const result = JSON.parse(globalThis.__incantRaycast(JSON.stringify(query)));

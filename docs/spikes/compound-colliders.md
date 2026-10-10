@@ -120,3 +120,25 @@ All 237 Rust tests, 40 explicit GPU checks, 334 UI tests/build, five tool tests,
 Clippy, strict TypeScript, generated contracts and the native release build/package
 pass. Public compound, audio/timer and input-action probes pass. Updated hosted
 CI and post-layout native appearance acceptance remain pending.
+
+
+## Final native review and navigation integration, 2026-10-10
+
+Claude handoff 0025 now accepts the rebuilt native Inspector at 1440×874 and
+1000×650: mixed/64-part lists, exact paths, End→Tab full IDs, primitive regression
+and compact unavailable-Agent allocation. The reviewed app is source `5b97ecd`,
+SHA `f23c403fceb9bca3418bd0dc317e9e316c808fe665eb9fc8fb99748afabf5224`.
+Astra quit the old process and reopened the rebuilt bundle through CUA before
+capture. Full account-bearing JPEGs stay ignored; Claude committed account-free
+Inspector/Agent crops. Native reorder and invalid-data display remain outside
+the read-only/rejection boundary. The OS sharing pill obscures traffic lights.
+
+Integrating current main exposed navigation baking's missing compound-shape
+case. Baking now combines each primitive's conservative tessellation after its
+local rotation and translation, in stable part-ID order. It preserves openings
+instead of substituting the union's bounding box. A real engine regression
+bakes an arch with a rotated box pillar, capsule pillar and beam, checks the
+straight route through its opening, reverses presentation order, then inserts
+a sphere and verifies re-baking forces a route around the closed arch. This
+regression passes; full integration checks are in progress. This is numerical
+coverage, not a new rendered appearance or phase-gate claim.

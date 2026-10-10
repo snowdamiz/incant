@@ -1,0 +1,487 @@
+{
+  "date": "2026-10-10",
+  "base_commit": "106a4cc705a6293083bdccc2cc2be3eb5e0325ff",
+  "scope": "Tiled collider/model navigation, bounded script path queries and public saved-character gameplay",
+  "local": {
+    "full_workspace_tests_passed": 276,
+    "clippy_all_targets": true,
+    "fmt": true,
+    "gpu_tests_passed": 40,
+    "ui_tests_passed": 315,
+    "python_tool_tests_passed": 5,
+    "strict_typescript_and_generated_contracts": true,
+    "wasm_compiled": true,
+    "ios_simulator_compiled": true,
+    "wasm_ios_execution_claimed": false,
+    "native_custom_protocol_build_package": true,
+    "native_visual_review": false,
+    "packaged_native_sha256": "f734a3d643db980af08ca8c3ce064ebb08ad57dbcdf6be7f2c746237fb7513f3"
+  },
+  "public_probe": {
+    "passed": true,
+    "strict_typescript": true,
+    "public_import_rpc": true,
+    "durable_undo_redo": true,
+    "invalid_command_rollback": true,
+    "cooked_mesh_without_source": true,
+    "runtime_room_rebuild": true,
+    "navmesh_character_chase": true,
+    "saved_path_following": true,
+    "repeated_gameplay_exact": true,
+    "position": [
+      7.926244258880615,
+      0.9099835753440857,
+      -0.015796080231666565
+    ],
+    "first_corners": 4,
+    "second_corners": 2,
+    "author_files_unchanged": {
+      "game.incant.json": "012869043becfddf7562045f9481fe54ba6165cf21da91482fbf480e716ffbe4",
+      "game.incant.journal.jsonl": "753c47cf9ea1da60c4a408f9831ffc4d8c592f6d790b4f82d1398191fbeb310e"
+    },
+    "binary_sha256": "d4fa87946b174b80c8a850cd20ab533f86c9adf3e017e49752bfc5b3c7326710",
+    "visual_or_device_gate": false
+  },
+  "benchmark": {
+    "arch": "aarch64",
+    "cases": [
+      {
+        "changed_tiles": [
+          1
+        ],
+        "initial_build_ms": 0.562917,
+        "name": "one_tile",
+        "path": {
+          "max_ms": 0.043167000000000004,
+          "p50_ms": 0.037583000000000005,
+          "p95_ms": 0.042624999999999996,
+          "samples": 100
+        },
+        "rebuild": {
+          "max_ms": 0.19854200000000002,
+          "p50_ms": 0.171666,
+          "p95_ms": 0.193625,
+          "samples": 100
+        },
+        "tiles": 1,
+        "unchanged": {
+          "max_ms": 0.003792,
+          "p50_ms": 0.003291,
+          "p95_ms": 0.003791,
+          "samples": 100
+        }
+      },
+      {
+        "changed_tiles": [
+          4
+        ],
+        "initial_build_ms": 3.452792,
+        "name": "sixteen_tiles",
+        "path": {
+          "max_ms": 0.05075,
+          "p50_ms": 0.039833,
+          "p95_ms": 0.043708000000000004,
+          "samples": 100
+        },
+        "rebuild": {
+          "max_ms": 0.8317920000000001,
+          "p50_ms": 0.721792,
+          "p95_ms": 0.8028339999999999,
+          "samples": 100
+        },
+        "tiles": 16,
+        "unchanged": {
+          "max_ms": 0.032417,
+          "p50_ms": 0.010750000000000001,
+          "p95_ms": 0.011916999999999999,
+          "samples": 100
+        }
+      }
+    ],
+    "mobile_gate": false,
+    "os": "macos"
+  },
+  "ci": {
+    "url": "https://github.com/snowdamiz/incant/pull/35",
+    "status": "all 12 passed on d7517b0; final report/evidence changes awaiting current-head run",
+    "last_passed_head": "d7517b0943935ba717c4182d9dae74a331b268be"
+  },
+  "visual_review": {
+    "status": "complete for this packet; v9 repeated actual rendered review and report correction accepted",
+    "model": "claude-opus-5-5",
+    "transport": "ACP",
+    "packet": "handoffs/0026-navigation-lookdev/brief.md",
+    "result": "handoffs/0026-navigation-lookdev/result.md",
+    "source_commit": "020c640748c6ec07a6c8c58a4d8260fc2256926b",
+    "binary_sha256": "d4fa87946b174b80c8a850cd20ab533f86c9adf3e017e49752bfc5b3c7326710",
+    "frames_equal": 726,
+    "all_camera_logs_equal": true,
+    "arrival_tick": 563,
+    "grounded_every_tick": true,
+    "wall_contacts": 0,
+    "new_boundary_queries": 2904,
+    "whole_room_passes": 2,
+    "query_exceptions": 0,
+    "raw_first_segment_m": 0.0005233835900917507,
+    "output_rounding_correction": "first two points are close, not duplicated; no code change required",
+    "remaining": "conservative doorway loss; sampled heights may undershoot step discontinuities; runtime deadline diagnostics remain open"
+  },
+  "open": [
+    "local avoidance and hundred-agent steering: implemented and reviewed in separate branch, not this PR",
+    "off-mesh links: implementation and integration checks in separate branch",
+    "2D grid navigation",
+    "navigation Inspector and debug draw",
+    "source-conforming height detail near step discontinuities",
+    "script wall-clock deadline robustness and diagnostics under host sleep/load",
+    "Core Sample integration and physical-device performance gates",
+    "current-head hosted checks before merge"
+  ],
+  "initial_verification": {
+    "local": {
+      "rust_distinct_tests_passed": 270,
+      "full_workspace_tests_passed": 268,
+      "additional_navigation_tests_passed": 2,
+      "gpu_tests_passed": 40,
+      "ui_tests_passed": 315,
+      "python_tool_tests_passed": 5,
+      "clippy_all_targets": true,
+      "fmt": true,
+      "strict_typescript_and_generated_contracts": true,
+      "native_custom_protocol_build_package": true
+    },
+    "public_probe": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_import_rpc": true,
+      "durable_undo_redo": true,
+      "invalid_command_rollback": true,
+      "cooked_mesh_without_source": true,
+      "runtime_room_rebuild": true,
+      "navmesh_character_chase": true,
+      "saved_path_following": true,
+      "repeated_gameplay_exact": true,
+      "position": [
+        7.927345275878906,
+        0.90993732213974,
+        -0.013149266131222248
+      ],
+      "first_corners": 6,
+      "second_corners": 2,
+      "author_files_unchanged": {
+        "game.incant.json": "b39c6ecb55a6fbcdb0f1f46bca0749345265bffd929e07f4207fafcf599e1bbd",
+        "game.incant.journal.jsonl": "7ce7f44f0a390feca2e80501cbd27ef08931e9f88622d8e97b9d45c6b6b14ca3"
+      },
+      "binary_sha256": "135b3feff61a53953fddb280b026a895c077b3f5d820a82a6ec1edf0f7757e0d",
+      "visual_or_device_gate": false
+    },
+    "packaged_native_sha256": "7e5f40d426fb3037f60b4db0ff48c7c49388f5236f09094a7cabaa7b230cebac",
+    "platform_local": {
+      "macos_executed": {
+        "changed_tiles": 9,
+        "first_corners": 6,
+        "recast_tiled": true,
+        "retained_tiles": 6,
+        "second_corners": 2,
+        "visual_gate": false
+      },
+      "wasm_compiled": true,
+      "ios_simulator_compiled": true,
+      "wasm_ios_execution_claimed": false
+    },
+    "benchmark": {
+      "arch": "aarch64",
+      "cases": [
+        {
+          "changed_tiles": [
+            1
+          ],
+          "initial_build_ms": 0.49,
+          "name": "one_tile",
+          "path": {
+            "max_ms": 0.00675,
+            "p50_ms": 0.003167,
+            "p95_ms": 0.003625,
+            "samples": 100
+          },
+          "rebuild": {
+            "max_ms": 0.16875,
+            "p50_ms": 0.150917,
+            "p95_ms": 0.1675,
+            "samples": 100
+          },
+          "tiles": 1,
+          "unchanged": {
+            "max_ms": 0.004,
+            "p50_ms": 0.003417,
+            "p95_ms": 0.0038330000000000005,
+            "samples": 100
+          }
+        },
+        {
+          "changed_tiles": [
+            4
+          ],
+          "initial_build_ms": 2.940167,
+          "name": "sixteen_tiles",
+          "path": {
+            "max_ms": 0.009417,
+            "p50_ms": 0.005666,
+            "p95_ms": 0.006959,
+            "samples": 100
+          },
+          "rebuild": {
+            "max_ms": 0.881084,
+            "p50_ms": 0.63075,
+            "p95_ms": 0.725958,
+            "samples": 100
+          },
+          "tiles": 16,
+          "unchanged": {
+            "max_ms": 0.018542,
+            "p50_ms": 0.011375,
+            "p95_ms": 0.013834,
+            "samples": 100
+          }
+        }
+      ],
+      "mobile_gate": false,
+      "os": "macos"
+    },
+    "source_commit": "9833cf6f82e05c47170c37cad687a84ca4bbbf58"
+  },
+  "source_commit": "020c640748c6ec07a6c8c58a4d8260fc2256926b",
+  "quality_refinement": {
+    "search": "directed portal entry A* with independent Dijkstra oracle",
+    "visibility_repair": "connected portals, remaining query visit allowance, deterministic fallback",
+    "clearance_cases": 64,
+    "doorway_tradeoff": "1.1 m opening at radius 0.4 m fails at 0.1 m cells and passes at 0.05 m cells",
+    "fixed_start_room_regression": "route below 14.5 m and no former (-3.3,-1.8) tile corner; centroid route was 15.27 m",
+    "height": "quantized piecewise-linear detail can fall below source step discontinuities; v8 worst undershoot 0.069 m over 0.28 m; character grounding uses physics",
+    "rasterization": "vendored rerecast 0.4.0 clears empty clip output counts; three capsule facet regressions and 16 restored floor queries pass",
+    "endpoint_precision": "f64 closest-point arithmetic and distance ranking; both directions of skinny-triangle centimetre query pass",
+    "boundary_precision": "f64 orientation, portal parameters, interpolation and height weights; two coordinate-scaled f32 epsilons in world space",
+    "short_query_regressions": {
+      "local_polygon_queries": 7056,
+      "room_queries": 34932,
+      "original_reported_cases": "both directions pass"
+    }
+  },
+  "portal_search_verification": {
+    "source_commit": "afeac5f1ae7a4e86ed5ae7178bf1e4eea3c64dde",
+    "local": {
+      "full_workspace_tests_passed": 273,
+      "clippy_all_targets": true,
+      "fmt": true,
+      "gpu_tests_passed": 40,
+      "ui_tests_passed": 315,
+      "python_tool_tests_passed": 5,
+      "strict_typescript_and_generated_contracts": true,
+      "wasm_compiled": true,
+      "ios_simulator_compiled": true,
+      "wasm_ios_execution_claimed": false
+    },
+    "public_probe": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_import_rpc": true,
+      "durable_undo_redo": true,
+      "invalid_command_rollback": true,
+      "cooked_mesh_without_source": true,
+      "runtime_room_rebuild": true,
+      "navmesh_character_chase": true,
+      "saved_path_following": true,
+      "repeated_gameplay_exact": true,
+      "position": [
+        7.926244258880615,
+        0.9099835753440857,
+        -0.015796080231666565
+      ],
+      "first_corners": 4,
+      "second_corners": 2,
+      "author_files_unchanged": {
+        "game.incant.json": "35a4705ec08962871244f29cb215d4392e4614408ff6e74f4a7ac0fccbdd3dd4",
+        "game.incant.journal.jsonl": "9376248181ff4e0e303156656a00bae5025a2f18d772acc742ae297f648c8a6f"
+      },
+      "binary_sha256": "f63fc28cdf44a3c86aad1793a1d3ea14ee6640597acc1ba0955a8facbe352ef2",
+      "visual_or_device_gate": false
+    },
+    "benchmark": {
+      "arch": "aarch64",
+      "cases": [
+        {
+          "changed_tiles": [
+            1
+          ],
+          "initial_build_ms": 0.30174999999999996,
+          "name": "one_tile",
+          "path": {
+            "max_ms": 0.03025,
+            "p50_ms": 0.023125,
+            "p95_ms": 0.024791999999999998,
+            "samples": 100
+          },
+          "rebuild": {
+            "max_ms": 0.168708,
+            "p50_ms": 0.117542,
+            "p95_ms": 0.127,
+            "samples": 100
+          },
+          "tiles": 1,
+          "unchanged": {
+            "max_ms": 0.00425,
+            "p50_ms": 0.0022919999999999998,
+            "p95_ms": 0.002375,
+            "samples": 100
+          }
+        },
+        {
+          "changed_tiles": [
+            4
+          ],
+          "initial_build_ms": 2.574042,
+          "name": "sixteen_tiles",
+          "path": {
+            "max_ms": 0.045625,
+            "p50_ms": 0.037417,
+            "p95_ms": 0.039833,
+            "samples": 100
+          },
+          "rebuild": {
+            "max_ms": 0.8476659999999999,
+            "p50_ms": 0.752917,
+            "p95_ms": 0.8025,
+            "samples": 100
+          },
+          "tiles": 16,
+          "unchanged": {
+            "max_ms": 0.017041,
+            "p50_ms": 0.011083,
+            "p95_ms": 0.011625,
+            "samples": 100
+          }
+        }
+      ],
+      "mobile_gate": false,
+      "os": "macos"
+    }
+  },
+  "raster_fix_verification": {
+    "source_commit": "6962fdb92032062d894f8fb6fd6d3c1daa3eb6e3",
+    "local": {
+      "full_workspace_tests_passed": 275,
+      "clippy_all_targets": true,
+      "fmt": true,
+      "gpu_tests_passed": 40,
+      "ui_tests_passed": 315,
+      "python_tool_tests_passed": 5,
+      "strict_typescript_and_generated_contracts": true,
+      "wasm_compiled": true,
+      "ios_simulator_compiled": true,
+      "wasm_ios_execution_claimed": false,
+      "gpu_ui_platform_previous_source": "afeac5f1ae7a4e86ed5ae7178bf1e4eea3c64dde",
+      "post_raster_gpu_platform": "passed on 6962fdb; UI/tool results retained from afeac5f",
+      "native_custom_protocol_build": true
+    },
+    "public_probe": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_import_rpc": true,
+      "durable_undo_redo": true,
+      "invalid_command_rollback": true,
+      "cooked_mesh_without_source": true,
+      "runtime_room_rebuild": true,
+      "navmesh_character_chase": true,
+      "saved_path_following": true,
+      "repeated_gameplay_exact": true,
+      "position": [
+        7.926244258880615,
+        0.9099835753440857,
+        -0.015796080231666565
+      ],
+      "first_corners": 4,
+      "second_corners": 2,
+      "author_files_unchanged": {
+        "game.incant.json": "2d3c3ea4cdadbca6b1d5cd4fa5cc46074a400abe1a0c521f5e1a8188ebbb273a",
+        "game.incant.journal.jsonl": "9a44cb52964635ea63bf2ec77d263301ddc0addb8bdc217eae8555982edcb532"
+      },
+      "binary_sha256": "6aa9812380b89787509a7c8971e22a5e9ab9058a6c9cbda95ae483973626445e",
+      "visual_or_device_gate": false
+    },
+    "benchmark": {
+      "arch": "aarch64",
+      "cases": [
+        {
+          "changed_tiles": [
+            1
+          ],
+          "initial_build_ms": 0.306875,
+          "name": "one_tile",
+          "path": {
+            "max_ms": 0.031792,
+            "p50_ms": 0.023541,
+            "p95_ms": 0.024833,
+            "samples": 100
+          },
+          "rebuild": {
+            "max_ms": 0.196458,
+            "p50_ms": 0.11649999999999999,
+            "p95_ms": 0.125417,
+            "samples": 100
+          },
+          "tiles": 1,
+          "unchanged": {
+            "max_ms": 0.005125,
+            "p50_ms": 0.0022500000000000003,
+            "p95_ms": 0.0024159999999999997,
+            "samples": 100
+          }
+        },
+        {
+          "changed_tiles": [
+            4
+          ],
+          "initial_build_ms": 2.684125,
+          "name": "sixteen_tiles",
+          "path": {
+            "max_ms": 0.042166,
+            "p50_ms": 0.036542,
+            "p95_ms": 0.037791,
+            "samples": 100
+          },
+          "rebuild": {
+            "max_ms": 0.859209,
+            "p50_ms": 0.719791,
+            "p95_ms": 0.747666,
+            "samples": 100
+          },
+          "tiles": 16,
+          "unchanged": {
+            "max_ms": 0.012459000000000001,
+            "p50_ms": 0.010708,
+            "p95_ms": 0.011125,
+            "samples": 100
+          }
+        }
+      ],
+      "mobile_gate": false,
+      "os": "macos"
+    },
+    "visual_review": {
+      "status": "v7 confirmed portal detour repair and found phantom floor hole/short query error; both fixed, v8 final review running",
+      "model": "claude-opus-5-5",
+      "transport": "ACP",
+      "packet": "handoffs/0026-navigation-lookdev/brief.md",
+      "result": "handoffs/0026-navigation-lookdev/result.md"
+    },
+    "quality_refinement": {
+      "search": "directed portal entry A* with independent Dijkstra oracle",
+      "visibility_repair": "connected portals, remaining query visit allowance, deterministic fallback",
+      "clearance_cases": 64,
+      "doorway_tradeoff": "1.1 m opening at radius 0.4 m fails at 0.1 m cells and passes at 0.05 m cells",
+      "fixed_start_room_regression": "route below 14.5 m and no former (-3.3,-1.8) tile corner; centroid route was 15.27 m",
+      "height": "quantized navigation surface; step smearing and bumps remain; physics owns grounding",
+      "rasterization": "vendored rerecast 0.4.0 clears empty clip output counts; three capsule facet regressions and 16 restored floor queries pass",
+      "endpoint_precision": "f64 closest-point arithmetic and distance ranking; both directions of skinny-triangle centimetre query pass"
+    }
+  }
+}

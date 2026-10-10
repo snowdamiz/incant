@@ -1,10 +1,12 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
 mod journal;
+mod localization;
 use incant_doc::{
     Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene,
     new_id,
 };
 pub use journal::Journal;
+pub use localization::{PreparedTranslations, TranslationImportResult};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -58,6 +60,16 @@ pub enum Command {
     SetMemory {
         section: String,
         text: String,
+    },
+    /// Replace a typed translation table through the shared undoable transaction.
+    UpsertStringTable {
+        table: incant_doc::StringTable,
+    },
+    RemoveStringTable {
+        table_id: Id,
+    },
+    SetLocale {
+        settings: incant_doc::LocaleSettings,
     },
     /// Replace named gameplay bindings through the same undoable transaction.
     SetInputActions {
@@ -503,6 +515,19 @@ fn apply(
                 ));
             }
             project.memory.insert(section.clone(), text.clone());
+        }
+        Command::UpsertStringTable { table } => {
+            project
+                .string_tables
+                .insert(table.id.clone(), table.clone());
+        }
+        Command::RemoveStringTable { table_id } => {
+            project.string_tables.remove(table_id).ok_or_else(|| {
+                CommandError::Invalid(format!("unknown string table: {table_id}"))
+            })?;
+        }
+        Command::SetLocale { settings } => {
+            project.settings.localization = settings.clone();
         }
         Command::SetInputActions { actions } => {
             project.settings.input_actions = actions.clone();

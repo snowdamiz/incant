@@ -119,8 +119,7 @@ continued log times and separate-process restart continuity without rendering.
 Game behaviors read fixed-tick input with `api.input()`: keyboard/mouse edges and
 held buttons, pointer/wheel deltas, analog controller values, active touches and
 tap/long-press/swipe/pinch gestures. Input is validated before simulation advances;
-focus loss releases controls and cancels touches. Platform device adapters and
-configurable action mappings remain open. The current host can replay normalized
+focus loss releases controls and cancels touches. Platform device adapters remain open. The current host can replay normalized
 events without accessing hardware:
 
 ```sh
@@ -147,6 +146,29 @@ logical saves preserve those runtime bindings without editing the authored file.
 See [action mapping](docs/spikes/input-actions.md), or run
 `python3 tools/probes/game-actions.py artifacts/actions-example` for a strict
 TypeScript game that authors, undoes, rebinds, saves and resumes controls.
+
+Typed `string_tables` and `settings.localization` support plural/select messages,
+locale-aware numbers/dates, ordered fallback and pseudo-localization. Use the
+shared `upsert_string_table`/`remove_string_table`/`set_locale` commands and
+`api.localize({table_id,key,arguments})`. Successful locale changes apply next tick
+and survive game saves. `api.locale()`, `api.formatNumber`, `api.formatDate` and
+`api.localizationReport()` use the same bounded native-query budget.
+`incant localization-check PROJECT --locale ja` reports missing translations and
+fails unless `--allow-fallback` is explicit. See the
+[format and limits](docs/spikes/localization-runtime.md), or run
+`python3 tools/probes/game-localization.py artifacts/localization-example`.
+For translators, `incant localization-export PROJECT TABLE_ID ja OUTPUT.xlf`
+publishes a new XLIFF file. `incant localization-import PROJECT TRANSLATED.xlf`
+validates source identity and imports all targets in one reversible transaction.
+See the [exchange profile and limits](docs/spikes/localization-exchange.md).
+Text shaping, localization UI and rendered RTL/CJK acceptance remain open.
+
+Typed `NavigationMesh` components select static collider and cooked model sources
+for incremental tiled baking. `api.findPath` provides bounded A*/funnel paths with
+terrain heights; gameplay moves through the shared command bus. Run
+`python3 tools/probes/game-navigation.py artifacts/navigation-example` for a real
+TypeScript character chase, room edit and save/resume without source model files.
+See [navigation behavior, limits and open work](docs/spikes/navigation-runtime.md).
 
 `play --assertions FILE` checks runtime, behavior and input state at absolute game
 ticks, including the initial or restored checkpoint. For example:

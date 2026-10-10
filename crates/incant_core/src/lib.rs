@@ -1,5 +1,6 @@
 //! Bevy ECS projection and fixed-step simulation. The editor document is immutable
 //! during play; stopping discards the runtime projection, preserving authored state.
+mod navigation;
 mod scene;
 use bevy_app::{App, Update};
 use bevy_ecs::prelude::*;
@@ -8,6 +9,10 @@ pub use incant_physics::{
     CharacterMovement, CharacterQuery, PhysicsError, RayHit, RayQuery, TriggerEvent,
 };
 use incant_physics::{PhysicsRuntime, PreparedPhysics};
+pub use navigation::{
+    NavigationError, NavigationPath, NavigationQuery, NavigationResources, PathRequest,
+    RebuildReport,
+};
 use scene::{LocalFrame, ParentId, SceneOrder, WorldFrame, prepare, propagate};
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet};
@@ -52,11 +57,49 @@ pub struct RuntimeSnapshot {
     pub entities: BTreeMap<String, RuntimeEntity>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub trigger_events: Vec<TriggerEvent>,
+    #[serde(skip_serializing_if = "BTreeMap::is_empty")]
+    pub navigation: BTreeMap<String, RebuildReport>,
+}
+
+/// Immutable authoring projection for rendering and inspection. This does not
+/// start simulation, bake navigation or require cooked gameplay resources.
+pub fn project_entities(
+    project: &Project,
+) -> Result<BTreeMap<String, RuntimeEntity>, incant_doc::DocumentError> {
+    prepare(project.validated()?)?
+        .into_iter()
+        .map(|entity| {
+            let angular: Option<incant_doc::AngularVelocity> = project.scenes[&entity.scene]
+                .entities[&entity.id]
+                .components
+                .get("AngularVelocity")
+                .cloned()
+                .map(serde_json::from_value)
+                .transpose()?;
+            Ok((
+                entity.id.clone(),
+                RuntimeEntity {
+                    id: entity.id,
+                    scene_id: entity.scene,
+                    translation: entity.local.translation,
+                    velocity: entity.velocity,
+                    angular_velocity: angular.map_or([0.; 3], |a| a.angular),
+                    parent: entity.parent_id,
+                    rotation: entity.local.rotation,
+                    scale: entity.local.scale,
+                    world_transform: entity.world.to_cols_array_2d(),
+                    mesh: entity.mesh,
+                },
+            ))
+        })
+        .collect()
 }
 
 pub struct Engine {
     app: App,
     physics: Arc<Mutex<PhysicsRuntime>>,
+    navigation: Arc<Mutex<navigation::NavigationRuntime>>,
+    navigation_resources: NavigationResources,
     entities: BTreeMap<String, Entity>,
     tick: u64,
     dt: f64,
@@ -64,11 +107,19 @@ pub struct Engine {
 }
 impl Engine {
     pub fn new(project: &Project) -> Result<Self, incant_doc::DocumentError> {
+        Self::with_navigation_resources(project, NavigationResources::new())
+    }
+    pub fn with_navigation_resources(
+        project: &Project,
+        resources: NavigationResources,
+    ) -> Result<Self, incant_doc::DocumentError> {
         let mut app = App::new();
         app.add_systems(Update, (integrate, propagate).chain());
         let mut engine = Self {
             app,
             physics: Arc::new(Mutex::new(PhysicsRuntime::default())),
+            navigation: Arc::new(Mutex::new(navigation::NavigationRuntime::default())),
+            navigation_resources: resources,
             entities: BTreeMap::new(),
             tick: 0,
             dt: 0.,
@@ -135,6 +186,20 @@ impl Engine {
                 .compute_character_motion(&query, dt)
         }
     }
+    pub fn navigator(
+        &self,
+    ) -> impl Fn(NavigationQuery) -> Result<Option<NavigationPath>, NavigationError>
+    + Send
+    + Sync
+    + 'static {
+        let navigation = self.navigation.clone();
+        move |query| {
+            navigation
+                .lock()
+                .unwrap_or_else(|e| e.into_inner())
+                .find_path(query)
+        }
+    }
     pub fn snapshot(&mut self) -> RuntimeSnapshot {
         let mut query = self.app.world_mut().query::<(
             &StableId,
@@ -172,6 +237,11 @@ impl Engine {
         RuntimeSnapshot {
             tick: self.tick,
             elapsed_seconds: self.elapsed_seconds,
+            navigation: self
+                .navigation
+                .lock()
+                .unwrap_or_else(|e| e.into_inner())
+                .reports(),
             entities,
             trigger_events: self
                 .physics
@@ -188,8 +258,14 @@ impl Engine {
         let validated = project.validated()?;
         let staged = prepare(validated)?;
         let prepared_physics = PreparedPhysics::from_validated(validated)?;
+        let staged_navigation = self
+            .navigation
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .prepare(project, &staged, &self.navigation_resources)?;
         let mut physics = self.physics.lock().unwrap_or_else(|e| e.into_inner());
         physics.sync(prepared_physics);
+        *self.navigation.lock().unwrap_or_else(|e| e.into_inner()) = staged_navigation;
         let physics_states = physics.states();
         drop(physics);
         let retained: BTreeSet<_> = staged.iter().map(|entity| entity.id.as_str()).collect();

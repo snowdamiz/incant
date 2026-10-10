@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 mod assets;
 mod eval;
+mod localization;
 mod play;
 mod play_assertions;
 mod play_audio;
@@ -86,6 +87,26 @@ enum Cli {
     },
     Validate {
         project: PathBuf,
+    },
+    /// Report absent translations; exits unsuccessfully unless fallback is explicitly allowed.
+    LocalizationCheck {
+        project: PathBuf,
+        #[arg(long)]
+        locale: Option<String>,
+        #[arg(long)]
+        allow_fallback: bool,
+    },
+    /// Export one table as a new UTF-8 XLIFF file.
+    LocalizationExport {
+        project: PathBuf,
+        table_id: String,
+        locale: String,
+        output: PathBuf,
+    },
+    /// Import matching XLIFF targets in one reversible shared transaction.
+    LocalizationImport {
+        project: PathBuf,
+        input: PathBuf,
     },
     Schema {
         directory: PathBuf,
@@ -283,7 +304,7 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
   "history.read"=>Ok(json!(bus.history().iter().map(|t|json!({"id":t.id,"description":t.description,"actor":t.actor,"commands":t.commands.len()})).collect::<Vec<_>>())),
   "history.undo"=>{let tx=bus.undo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
   "history.redo"=>{let tx=bus.redo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
-  "play.start"=>{engine=Some(Engine::new(bus.project())?);Ok(json!({"playing":true}))},
+  "play.start"=>{let assets=assets::load_runtime(&project,bus.project())?;engine=Some(Engine::with_navigation_resources(bus.project(),assets.navigation_resources())?);Ok(json!({"playing":true}))},
   "play.step"=>{let engine=engine.as_mut().ok_or("no play session")?;engine.step()?;Ok(json!(engine.snapshot()))},
   "play.state"=>Ok(json!(engine.as_mut().ok_or("no play session")?.snapshot())),
   "play.stop"=>{engine=None;Ok(json!({"playing":false,"project":bus.project()}))},
@@ -343,6 +364,32 @@ fn main() -> Result<()> {
                 json!({"valid":true,"project_id":project.id,"schema_version":project.schema_version}),
             )?;
         }
+        Cli::LocalizationCheck {
+            project,
+            locale,
+            allow_fallback,
+        } => {
+            let project = read_project(&project)?;
+            let mut settings = project.settings.localization.clone();
+            if let Some(locale) = locale {
+                settings.locale = locale;
+            }
+            let catalog = incant_localization::Catalog::compile(&project.string_tables)?;
+            let missing = catalog.missing_strings(&settings)?;
+            let complete = missing.is_empty();
+            print(json!({"project_id":project.id,"locale":settings.locale,
+                "complete":complete,"fallback_allowed":allow_fallback,"missing":missing}))?;
+            if !complete && !allow_fallback {
+                return Err("localization has missing translations".into());
+            }
+        }
+        Cli::LocalizationExport {
+            project,
+            table_id,
+            locale,
+            output,
+        } => localization::export(&project, &table_id, &locale, &output)?,
+        Cli::LocalizationImport { project, input } => localization::import(&project, &input)?,
         Cli::Import {
             project,
             source,
@@ -412,6 +459,44 @@ fn main() -> Result<()> {
             );
             registry.extend([
                 (
+                    "StringTable".into(),
+                    json!(schemars::schema_for!(incant_localization::StringTable)),
+                ),
+                (
+                    "LocaleSettings".into(),
+                    json!(schemars::schema_for!(incant_localization::LocaleSettings)),
+                ),
+                (
+                    "LocalizeRequest".into(),
+                    json!(schemars::schema_for!(incant_localization::LocalizeRequest)),
+                ),
+                (
+                    "LocalizedText".into(),
+                    json!(schemars::schema_for!(incant_localization::LocalizedText)),
+                ),
+                (
+                    "MissingString".into(),
+                    json!(schemars::schema_for!(incant_localization::MissingString)),
+                ),
+                (
+                    "CalendarDate".into(),
+                    json!(schemars::schema_for!(incant_localization::CalendarDate)),
+                ),
+                (
+                    "DateLength".into(),
+                    json!(schemars::schema_for!(incant_localization::DateLength)),
+                ),
+            ]);
+            registry.extend([
+                (
+                    "NavigationQuery".into(),
+                    json!(schemars::schema_for!(incant_core::NavigationQuery)),
+                ),
+                (
+                    "NavigationPath".into(),
+                    json!(schemars::schema_for!(incant_core::NavigationPath)),
+                ),
+                (
                     "PhysicsCharacterQuery".into(),
                     json!(schemars::schema_for!(incant_core::CharacterQuery)),
                 ),
@@ -449,7 +534,8 @@ fn main() -> Result<()> {
             }
             let document = read_project(&project)?;
             let assets = assets::load_runtime(&project, &document)?;
-            let mut engine = Engine::new(&document)?;
+            let mut engine =
+                Engine::with_navigation_resources(&document, assets.navigation_resources())?;
             let start = Instant::now();
             engine.run_ticks(ticks)?;
             print(
@@ -472,9 +558,12 @@ fn main() -> Result<()> {
             if ticks > 10000 {
                 return Err("script tick count exceeds limit".into());
             }
-            let mut play = PlaySession::new(
-                &read_project(&project)?,
+            let document = read_project(&project)?;
+            let assets = assets::load_runtime(&project, &document)?;
+            let mut play = PlaySession::with_navigation_resources(
+                &document,
                 &fs::read_to_string(compiled_script)?,
+                assets.navigation_resources(),
             )?;
             let mut times = vec![];
             let mut count = 0;

@@ -2,6 +2,7 @@
 //! IDs only; solver handles, contacts and sleeping state belong to the session.
 mod character;
 mod character_queries;
+mod navigation;
 mod queries;
 mod shapes;
 pub use character::{CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep};
@@ -9,6 +10,7 @@ use incant_doc::{
     AngularVelocity, BodyMotion, Collider as DocCollider, DocumentError, Project,
     RigidBody as DocBody, Transform, Velocity,
 };
+pub use navigation::navigation_geometry;
 pub use queries::{RayHit, RayQuery};
 use rapier3d::prelude::*;
 use schemars::JsonSchema;
