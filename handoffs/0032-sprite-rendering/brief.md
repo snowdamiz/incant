@@ -1,3 +1,25 @@
+## Magnification correction follow-up — preserve all earlier evidence
+
+Continue Opus 5.5 at explicitly verified Max through ACP. Astra reproduced your
+magnified-edge defect in the real GPU path: 15/70 failures before, 0/70 after.
+Source f9aa1da changes the nearest tolerance from sign(direction)/1024 to
+ direction/1024, so it stays 1/1024 screen pixel as magnification increases.
+All six sprite GPU tests and 48 existing orientation/scale/sheet-height cases
+pass; scoped renderer Clippy and formatting pass. Read the parent evidence copy
+at artifacts/tools/magnification-fix-evidence.json. The new immutable tool and
+binary.json identify this exact tested build; the previous corrected-tie build
+is preserved as pre-magnification-incant_headless and its metadata. Verify hashes.
+
+Re-run your independent magnified/offset sweep and real-engine rendered review,
+including near-boundary offsets, flips, mirrors, rolls and resized-sheet
+invariance; retain both before and after evidence. Verify linear and tone paths
+remain unchanged and repeated fresh/source-free runs agree. Add any focused cases
+needed to falsify the correction. Return a scoped verdict with numerical and
+rendered evidence; do not infer phone performance or native editor acceptance.
+Do not rewrite original outcomes. No Rust/shader/build changes or Cargo here.
+The app-wide redesign remains in0033; this session owns sprite pixels, art and
+rendered analysis only, not the Inspector. No merging, signing or phase approval.
+
 ## Corrected-renderer follow-up — final plan revision 6
 
 Your first engine review is integrated and preserved. Continue the same Opus 5.5
