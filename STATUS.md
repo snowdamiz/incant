@@ -53,6 +53,12 @@ within its documented workload.
 
 ## Active work
 
+- Bounded local avoidance now exposes read-only `api.steerAgents` proposals for
+  up to 128 agents. Two dense 100-agent library fixtures and the public 100-agent
+  TypeScript save/reopen workflow pass. Shared command routing, query budgets,
+  fixed-step binding and malformed-input rollback are covered. See
+  [steering evidence](docs/spikes/navigation-steering.md); Claude's rendered
+  review and new hosted checks remain pending.
 - Tiled runtime navigation now bakes selected static colliders and cooked model
   meshes, reuses unchanged tiles, and provides bounded A*/funnel queries with
   terrain height detail to TypeScript. Engine updates stage atomically. The real

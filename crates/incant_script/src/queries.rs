@@ -15,29 +15,58 @@ pub(super) type Navigator = Query<
 >;
 pub(super) type Raycaster = Query<RayQuery, Option<RayHit>>;
 pub(super) type CharacterMover = Query<CharacterQuery, CharacterMovement>;
+pub(super) type Steerer = Query<
+    incant_core::SteeringQuery,
+    Vec<incant_core::SteeringVelocity>,
+    incant_core::NavigationError,
+>;
+
+struct Budget {
+    cost: usize,
+    bytes: usize,
+}
 
 impl ScriptHost {
     pub(super) fn install_queries(&mut self) -> Result<(), ScriptError> {
         self.install_query(
             "__incantRaycast",
             self.raycaster.clone(),
-            1,
+            Budget {
+                cost: 1,
+                bytes: 4096,
+            },
             "hit",
             "physics",
         )?;
         self.install_query(
             "__incantCharacterMotion",
             self.character_mover.clone(),
-            16,
+            Budget {
+                cost: 16,
+                bytes: 4096,
+            },
             "movement",
             "physics",
         )?;
         self.install_query(
             "__incantFindPath",
             self.navigator.clone(),
-            64,
+            Budget {
+                cost: 64,
+                bytes: 4096,
+            },
             "path",
             "navigation",
+        )?;
+        self.install_query(
+            "__incantSteerAgents",
+            self.steerer.clone(),
+            Budget {
+                cost: 128,
+                bytes: 65536,
+            },
+            "velocities",
+            "steering",
         )
     }
 
@@ -49,7 +78,7 @@ impl ScriptHost {
         &self,
         name: &str,
         query: Option<Query<Q, R, E>>,
-        cost: usize,
+        budget: Budget,
         output_key: &'static str,
         family: &'static str,
     ) -> Result<(), ScriptError> {
@@ -61,8 +90,9 @@ impl ScriptHost {
                     rquickjs::Function::new(ctx.clone(), move |text: String| -> String {
                         let result = (|| -> Result<_, String> {
                             // Every native query shares the 256-unit tick allowance.
-                            if text.len() > 4096
-                                || count.fetch_add(cost, Ordering::Relaxed) > 256 - cost
+                            if text.len() > budget.bytes
+                                || count.fetch_add(budget.cost, Ordering::Relaxed)
+                                    > 256 - budget.cost
                                 || Instant::now()
                                     >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
                             {

@@ -27,7 +27,16 @@ export type { StringTable, LocaleSettings, LocalizeRequest, LocalizedText, Missi
 import type { LocaleSettings, LocalizeRequest, LocalizedText, MissingString, CalendarDate, DateLength } from './generated';
 export type { NavigationMesh, NavigationQuery, NavigationPath } from './generated';
 import type { NavigationQuery, NavigationPath } from './generated';
+export type { SteeringQuery, SteeringAgent, SteeringObstacle, SteeringVelocity } from './generated';
+import type { SteeringQuery, SteeringVelocity } from './generated';
 export interface ScriptApi {
+  /** Read-only reciprocal local avoidance in world XZ coordinates. One snapshot
+   * of at most 128 agents and 32 convex obstacles (128 total edges); 64 KiB input.
+   * Costs 128 of the shared 256 query units. Returns ID-sorted proposed velocities,
+   * never moves entities. Apply with ordinary commands and account for physics.
+   * Heights filter separate floors; routes, navmesh containment, arrival and
+   * recovery from infeasible crowding remain behavior-owned. */
+  steerAgents(query: SteeringQuery): readonly SteeringVelocity[];
   /** Bounded A* with funnel smoothing on the selected scene mesh. Costs 64 of
    * 256 shared native-query units per tick. Null means no nearby/reachable path;
    * invalid inputs or exhausted budgets throw. The path uses world coordinates

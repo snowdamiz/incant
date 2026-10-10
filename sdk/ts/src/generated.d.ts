@@ -291,6 +291,28 @@ export namespace SpotLightSchema {
 }
 export type SpotLight = SpotLightSchema.Root;
 
+export namespace SteeringAgentSchema {
+  export type Root = { "height": number; "id": string; "max_speed": number; "position": [number, number, number]; "preferred_velocity": [number, number]; "radius": number; "responsibility": number; "velocity": [number, number] };
+}
+export type SteeringAgent = SteeringAgentSchema.Root;
+
+export namespace SteeringObstacleSchema {
+  export type Root = { "closed": boolean; "id": string; "max_y": number; "min_y": number; "vertices": Array<[number, number]> };
+}
+export type SteeringObstacle = SteeringObstacleSchema.Root;
+
+export namespace SteeringQuerySchema {
+  export type SteeringAgent = { "height": number; "id": string; "max_speed": number; "position": [number, number, number]; "preferred_velocity": [number, number]; "radius": number; "responsibility": number; "velocity": [number, number] };
+  export type SteeringObstacle = { "closed": boolean; "id": string; "max_y": number; "min_y": number; "vertices": Array<[number, number]> };
+  export type Root = { "agents": Array<SteeringAgent>; "margin"?: number; "obstacle_time_horizon": number; "obstacles"?: Array<SteeringObstacle>; "time_horizon": number };
+}
+export type SteeringQuery = SteeringQuerySchema.Root;
+
+export namespace SteeringVelocitySchema {
+  export type Root = { "id": string; "neighbors": number; "velocity": [number, number] };
+}
+export type SteeringVelocity = SteeringVelocitySchema.Root;
+
 export namespace StringTableSchema {
   export type Root = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
 }

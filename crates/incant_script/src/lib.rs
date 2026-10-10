@@ -12,7 +12,7 @@ mod queries;
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::Origin;
 pub use logs::{LogLevel, ScriptLog};
-use queries::{CharacterMover, Navigator, Raycaster};
+use queries::{CharacterMover, Navigator, Raycaster, Steerer};
 use rquickjs::{Context, Runtime};
 use serde::Deserialize;
 use serde_json::Value;
@@ -77,6 +77,7 @@ pub struct ScriptHost {
     raycaster: Option<Raycaster>,
     character_mover: Option<CharacterMover>,
     navigator: Option<Navigator>,
+    steerer: Option<Steerer>,
     query_count: Arc<std::sync::atomic::AtomicUsize>,
     context: Context,
     _runtime: Runtime,
@@ -129,6 +130,7 @@ impl ScriptHost {
             raycaster: None,
             character_mover: None,
             navigator: None,
+            steerer: None,
             query_count: Arc::new(std::sync::atomic::AtomicUsize::new(0)),
             context,
             _runtime: runtime,
@@ -158,6 +160,7 @@ impl ScriptHost {
         next.raycaster = self.raycaster.clone();
         next.character_mover = self.character_mover.clone();
         next.navigator = self.navigator.clone();
+        next.steerer = self.steerer.clone();
         next.install_queries()?;
         if self.schedule.has_timers() && !next.has_timer_handler {
             return Err(ScriptError::TimerHandler);

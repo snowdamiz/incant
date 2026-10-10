@@ -489,6 +489,22 @@ fn main() -> Result<()> {
             ]);
             registry.extend([
                 (
+                    "SteeringQuery".into(),
+                    json!(schemars::schema_for!(incant_core::SteeringQuery)),
+                ),
+                (
+                    "SteeringAgent".into(),
+                    json!(schemars::schema_for!(incant_core::SteeringAgent)),
+                ),
+                (
+                    "SteeringObstacle".into(),
+                    json!(schemars::schema_for!(incant_core::SteeringObstacle)),
+                ),
+                (
+                    "SteeringVelocity".into(),
+                    json!(schemars::schema_for!(incant_core::SteeringVelocity)),
+                ),
+                (
                     "NavigationQuery".into(),
                     json!(schemars::schema_for!(incant_core::NavigationQuery)),
                 ),

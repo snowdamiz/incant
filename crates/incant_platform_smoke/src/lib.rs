@@ -2,6 +2,7 @@
 mod input;
 mod localization;
 mod navigation;
+mod steering;
 use incant_core::{CharacterQuery, Engine};
 use incant_doc::{
     BodyMotion, Collider, ColliderShape, Entity, Project, RigidBody, Scene, Transform,
@@ -12,6 +13,7 @@ pub fn run() -> Result<String, String> {
     let input = input::check()?;
     let localization = localization::check()?;
     let navigation = navigation::check()?;
+    let steering = steering::check()?;
     let mut project = Project::empty("Incant platform smoke");
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Hello world");
@@ -117,7 +119,7 @@ pub fn run() -> Result<String, String> {
     {
         return Err("character movement assertion failed".into());
     }
-    Ok(json!({"navigation":navigation,"localization":localization,"input":input,"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
+    Ok(json!({"steering":steering,"navigation":navigation,"localization":localization,"input":input,"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
 }
 
 #[cfg(not(target_arch = "wasm32"))]

@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-10",
+  "base_commit": "0ab4372",
+  "scope": "Bounded reciprocal local avoidance and shared scripted velocity commands",
+  "local": {
+    "rust_tests": 279,
+    "gpu_tests": 40,
+    "ui_tests": 315,
+    "python_tools": 5,
+    "clippy_all_targets": true,
+    "fmt": true,
+    "strict_typescript_generated_contracts": true,
+    "native_package": true,
+    "wasm_compiled": true,
+    "ios_simulator_compiled": true
+  },
+  "public_probe": {
+    "passed": true,
+    "agents": 100,
+    "strict_typescript": true,
+    "shared_velocity_commands": true,
+    "repeat_and_save_resume_exact": true,
+    "state": {
+      "minimum": 0.6001229564692269,
+      "neighbors": 17,
+      "remaining": 1.7795514091813223e-13,
+      "tick": 600
+    },
+    "author_files_unchanged": {
+      "game.incant.json": "e113eb88ba72b966ee5d45eaad99797c642b65a96b4531ee14c1eaa0904bbe3a",
+      "game.incant.journal.jsonl": "f2adf4c384cfab7213ca0a56e301a213dd95c24ed2d007b1ac08a175f02ff562"
+    },
+    "binary_sha256": "fe03655bfdb8e574111107e68f2ced67d4b229150a4bc76da4e557e46f1eaa09",
+    "rendering_or_physics_collision_gate": false
+  },
+  "benchmark": {
+    "arch": "aarch64",
+    "cases": [
+      {
+        "agents": 100,
+        "max_ms": 0.298375,
+        "name": "crossing_100",
+        "obstacle_edges": 0,
+        "p50_ms": 0.24558300000000002,
+        "p95_ms": 0.29529099999999997,
+        "samples": 100
+      },
+      {
+        "agents": 100,
+        "max_ms": 0.592416,
+        "name": "overlap_100",
+        "obstacle_edges": 0,
+        "p50_ms": 0.522042,
+        "p95_ms": 0.5902080000000001,
+        "samples": 100
+      },
+      {
+        "agents": 128,
+        "max_ms": 1.220667,
+        "name": "limit_128_agents_128_edges",
+        "obstacle_edges": 128,
+        "p50_ms": 1.171916,
+        "p95_ms": 1.197792,
+        "samples": 100
+      }
+    ],
+    "device_gate": false,
+    "os": "macos"
+  },
+  "platform_macos": {
+    "agents": 100,
+    "overlap_recovery_finite": true,
+    "stable_id_order": true,
+    "visual_gate": false
+  },
+  "native_binary_sha256": "4f28b27e6cbbdccaabab6b1d4330caf44e3049d92533757cbe0c8e472dcaf4c0",
+  "visual": {
+    "status": "Claude ACP packet prepared",
+    "packet": "handoffs/0027-steering-lookdev/brief.md"
+  },
+  "ci": {
+    "status": "not yet published"
+  },
+  "open": [
+    "Rendered steering review",
+    "Hosted checks",
+    "Navmesh boundary extraction and moving obstacle prediction",
+    "Off-mesh links and grid navigation",
+    "Navigation Inspector and native debug draw",
+    "Core Sample and device performance gates"
+  ]
+}
