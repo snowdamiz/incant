@@ -27,6 +27,15 @@ after review and passing checks, without requesting separate merge approval.
   renderer update; no phone/performance or phase gate is claimed. See
   [atlas authoring evidence](docs/spikes/sprite-atlases.md#authoring-follow-up-to-review-0034-2026-10-10).
 
+- Optional native scene audio host reads typed committed ECS poses and retained
+  fingerprint-checked cooked clips, with bounded playback/lifecycle/spatial state
+  and explicit retryable-preflight versus terminal-apply semantics. 92 scoped
+  union tests plus the final 17-test audio suite pass; 16 source-free shipping
+  processes exercise actual native ticks/offline mixing. Full workspace optional
+  feature CI, game-session integration, device output, cursor saves and phone
+  gates remain open. See [host evidence](docs/spikes/native-scene-audio-host.md).
+
+
 - Typed versioned project JSON, semantic validation, published derived schemas,
   canonical formatting and stable ULIDs.
 - One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,

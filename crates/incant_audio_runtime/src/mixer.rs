@@ -16,7 +16,7 @@ use std::{collections::BTreeMap, fmt::Debug, sync::Arc, time::Duration};
 
 pub const MAX_VOICES: usize = 128;
 pub const MAX_BUSES: usize = 32;
-const MAX_STATIC_FRAMES: usize = 8 * 1024 * 1024;
+pub(crate) const MAX_STATIC_FRAMES: usize = 8 * 1024 * 1024;
 pub type VoiceId = u64;
 pub struct Mixer<B: Backend> {
     manager: AudioManager<B>,
@@ -147,6 +147,24 @@ where
         Ok(())
     }
     pub fn play(&mut self, clip: Arc<CookedAudio>, options: PlayOptions) -> Result<VoiceId> {
+        self.play_inner(clip, options, true)
+    }
+    #[cfg(feature = "scene")]
+    pub(crate) fn play_owned(
+        &mut self,
+        clip: Arc<CookedAudio>,
+        options: PlayOptions,
+    ) -> Result<VoiceId> {
+        // The scene host owns every handle until explicit acknowledgement. A
+        // device can finish a different voice concurrently with this call.
+        self.play_inner(clip, options, false)
+    }
+    fn play_inner(
+        &mut self,
+        clip: Arc<CookedAudio>,
+        options: PlayOptions,
+        reap: bool,
+    ) -> Result<VoiceId> {
         options.validate(clip.metadata.frames as f64 / f64::from(clip.metadata.sample_rate))?;
         if options
             .bus
@@ -156,8 +174,10 @@ where
             return Err(AudioError::UnknownBus);
         }
         self.collect_stream_errors()?;
-        self.voices
-            .retain(|_, v| v.sound.state() != PlaybackState::Stopped);
+        if reap {
+            self.voices
+                .retain(|_, v| v.sound.state() != PlaybackState::Stopped);
+        }
         if self.voices.len() >= MAX_VOICES || self.next == u64::MAX {
             return Err(AudioError::Capacity);
         }
@@ -402,6 +422,54 @@ where
         }
         Ok(())
     }
+    #[cfg(feature = "scene")]
+    pub(crate) fn can_start(&mut self, bus: Option<&str>, spatial: bool) -> Result<bool> {
+        // A stopped sound remains in Kira's arena until the renderer's next
+        // processing boundary. Observe actual capacity rather than treating the
+        // handle's Stopped state as proof that its allocation was reclaimed.
+        if let Some(bus) = bus {
+            let track = self.buses.get(bus).ok_or(AudioError::UnknownBus)?;
+            Ok(if spatial {
+                track.num_sub_tracks() < track.sub_track_capacity()
+            } else {
+                track.num_sounds() < track.sound_capacity()
+            })
+        } else if spatial {
+            Ok(self.manager.num_sub_tracks() < self.manager.sub_track_capacity())
+        } else {
+            let track = self.manager.main_track();
+            Ok(track.num_sounds() < track.sound_capacity())
+        }
+    }
+    #[cfg(feature = "scene")]
+    pub(crate) fn check_stream_errors(&mut self) -> Result<()> {
+        self.collect_stream_errors()?;
+        if let Some((_, error)) = self.errors.pop_front() {
+            return Err(AudioError::Stream(error));
+        }
+        Ok(())
+    }
+    #[cfg(feature = "scene")]
+    pub(crate) fn forget_stopped(&mut self, id: VoiceId) -> Result<()> {
+        if self.state(id)? != PlaybackState::Stopped {
+            return Err(AudioError::Invalid("voice still playing"));
+        }
+        // The decoder publishes an error before the renderer marks it Stopped.
+        // Recheck after observing that state: the initial host poll may have
+        // preceded the error. Never silently discard it with its last handle.
+        let voice = self.voices.get_mut(&id).ok_or(AudioError::UnknownVoice)?;
+        let error = match &mut voice.sound {
+            VoiceSound::Static(_) => None,
+            VoiceSound::Offline(h) => h.pop_error(),
+            #[cfg(not(target_arch = "wasm32"))]
+            VoiceSound::Streaming(h) => h.pop_error().map(|error| error.to_string()),
+        };
+        if let Some(error) = error {
+            return Err(AudioError::Stream(error));
+        }
+        self.voices.remove(&id);
+        Ok(())
+    }
     /// Drain bounded diagnostics, including errors from voices already reaped.
     /// Hosts should poll this regularly; a full error queue blocks new playback.
     pub fn stream_errors(&mut self) -> Vec<(VoiceId, String)> {
@@ -427,5 +495,75 @@ impl Mixer<crate::OfflineBackend> {
             .backend_mut()
             .render(output)
             .map_err(|e| AudioError::Backend(e.into()))
+    }
+}
+
+#[cfg(all(test, feature = "scene"))]
+mod owned_handle_tests {
+    mod support {
+        include!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../incant_assets_runtime/tests/support/mod.rs"
+        ));
+    }
+    use super::*;
+    #[test]
+    fn forgetting_a_finished_voice_cannot_hide_an_error_after_the_last_poll() {
+        use std::io::{Seek, SeekFrom, Write};
+        let temp = tempfile::tempdir().unwrap();
+        let key = support::cooked(temp.path(), &vec![[0.2; 2]; 20000]);
+        let clip = Arc::new(incant_assets_runtime::load_audio(temp.path(), &key).unwrap());
+        let pcm = temp
+            .path()
+            .join(format!("{}.ipcm", clip.metadata.content_sha256));
+        let mut mixer = Mixer::offline(48000, &[]).unwrap();
+        let voice = mixer
+            .play_owned(
+                clip,
+                PlayOptions {
+                    streaming: true,
+                    ..Default::default()
+                },
+            )
+            .unwrap();
+        mixer.render(&mut [0.; 2048]).unwrap();
+        mixer.check_stream_errors().unwrap();
+        let mut file = std::fs::OpenOptions::new().write(true).open(pcm).unwrap();
+        file.seek(SeekFrom::Start(15000 * 8)).unwrap();
+        file.write_all(&[255; 8]).unwrap();
+        drop(file);
+        // A renderer may finish with an error after the host's previous poll.
+        mixer.render(&mut vec![0.; 40000]).unwrap();
+        assert_eq!(mixer.state(voice).unwrap(), PlaybackState::Stopped);
+        assert!(matches!(
+            mixer.forget_stopped(voice),
+            Err(AudioError::Stream(_))
+        ));
+    }
+
+    #[test]
+    fn scene_play_cannot_reap_another_voice_that_finished_since_host_inspection() {
+        let temp = tempfile::tempdir().unwrap();
+        let key = support::cooked(temp.path(), &[[0.2; 2]; 16]);
+        let clip = Arc::new(incant_assets_runtime::load_audio(temp.path(), &key).unwrap());
+        let mut mixer = Mixer::offline(48000, &[]).unwrap();
+        let old = mixer
+            .play_owned(clip.clone(), PlayOptions::default())
+            .unwrap();
+        assert_eq!(mixer.state(old).unwrap(), PlaybackState::Playing);
+        // Model the device finishing after the host's last observation, before
+        // the host starts another source. No scheduling-sensitive sleep needed.
+        mixer.render(&mut [0.; 128]).unwrap();
+        let _new = mixer
+            .play_owned(clip.clone(), PlayOptions::default())
+            .unwrap();
+        assert_eq!(mixer.state(old).unwrap(), PlaybackState::Stopped);
+        mixer.forget_stopped(old).unwrap();
+        assert!(matches!(mixer.state(old), Err(AudioError::UnknownVoice)));
+        // Preserve the standalone Mixer's original automatic cleanup contract.
+        let legacy = mixer.play(clip.clone(), PlayOptions::default()).unwrap();
+        mixer.render(&mut [0.; 128]).unwrap();
+        mixer.play(clip, PlayOptions::default()).unwrap();
+        assert!(matches!(mixer.state(legacy), Err(AudioError::UnknownVoice)));
     }
 }
