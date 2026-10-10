@@ -13,11 +13,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--binary', type=Path, default=ROOT/'target/release/incant_headless')
+    parser.add_argument('--pixel-perfect', action='store_true', help='Verify logical-resolution cameras and unsnapped simulation movement')
     args = parser.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
     binary = args.binary.resolve()
     digest = hashlib.sha256(binary.read_bytes()).hexdigest()
+    kind = 'pixel_perfect' if args.pixel_perfect else 'orthographic'
+    def projection(size):
+        return ({'kind':kind,'pixels_per_unit':size*8,'reference_resolution':[320,180]}
+                if args.pixel_perfect else {'kind':kind,'vertical_size':size})
 
     def run(*arguments):
         return json.loads(subprocess.check_output([str(binary), *map(str, arguments)], cwd=ROOT,
@@ -44,7 +49,7 @@ def main():
          'expected_revision': revision, 'description': 'Author camera for saved projection test'}},
          {'id': 2, 'method': 'project.save'}])
     source, compiled = out/'camera.ts', out/'camera.js'
-    source.write_text('import type { ScriptApi, Camera } from '+json.dumps((ROOT/'sdk/ts/src/index').as_posix())+';\n'+
+    source.write_text('import type { ScriptApi, Camera, Transform } from '+json.dumps((ROOT/'sdk/ts/src/index').as_posix())+';\n'+
         'const sid='+json.dumps(sid)+'; const cid='+json.dumps(cid)+';\n'+'''
 export default defineBehavior<{tick:number,size:number}>({initialState:{tick:0,size:0},
   update(api:ScriptApi,_dt,s){
@@ -52,13 +57,18 @@ export default defineBehavior<{tick:number,size:number}>({initialState:{tick:0,s
     const camera=api.query('Camera').find(e=>e.id===cid)!.components.Camera as Camera;
     if(s.tick===1 || s.tick===40){
       s.size=s.tick===1?4:8;
-      const value:Camera={...camera,projection:{kind:'orthographic',vertical_size:s.size}};
+      const value:Camera={...camera,projection:PROJECTION_VALUE};
       api.command({op:'set_component',scene_id:sid,entity_id:cid,component:'Camera',value});
     }
-    if(s.tick>1 && camera.projection?.kind!=='orthographic')throw Error('projection was lost');
+    if(s.tick>1 && camera.projection?.kind!==PROJECTION_KIND)throw Error('projection was lost');
+    UNSNAPPED_MOTION
   }
 });
-''', encoding='utf-8')
+'''.replace('PROJECTION_VALUE', "{kind:'pixel_perfect',pixels_per_unit:s.size*8,reference_resolution:[320,180]}" if args.pixel_perfect else "{kind:'orthographic',vertical_size:s.size}")
+        .replace('PROJECTION_KIND',json.dumps(kind))
+        .replace('UNSNAPPED_MOTION', '''const pose=api.query('Camera').find(e=>e.id===cid)!.components.Transform as Transform;
+    if(s.tick>1 && pose.translation[0] !== (s.tick-1)/256)throw Error('Camera snapping leaked into simulation');
+    api.command({op:'set_component',scene_id:sid,entity_id:cid,component:'Transform',value:{...pose,translation:[s.tick/256,0,8]}});''' if args.pixel_perfect else ''), encoding='utf-8')
     subprocess.run(['node',str(ROOT/'node_modules/typescript/bin/tsc'),'--strict','--noEmit','--target','ES2022',
         '--module','ESNext','--moduleResolution','bundler',str(source)],cwd=ROOT,check=True)
     subprocess.run(['node',str(ROOT/'tools/build_script.mjs'),str(source),str(compiled)],cwd=ROOT,check=True)
@@ -72,10 +82,11 @@ export default defineBehavior<{tick:number,size:number}>({initialState:{tick:0,s
     assert whole['state']==resumed['state']==repeat['state']
     for file,size in [('mid.save.json',4),('final.save.json',8)]:
         saved=json.loads((out/file).read_text(encoding='utf-8'))
-        assert saved['project']['scenes'][sid]['entities'][cid]['components']['Camera']['projection']=={'kind':'orthographic','vertical_size':size}
+        assert saved['project']['scenes'][sid]['entities'][cid]['components']['Camera']['projection']==projection(size)
     assert authored=={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [project,journal]}
     assert digest==hashlib.sha256(binary.read_bytes()).hexdigest()
     result={'passed':True,'strict_typescript':True,'legacy_camera_authored_via_shared_commands':True,
+        'projection_kind':kind,'subpixel_simulation_movement_checked':args.pixel_perfect,
         'runtime_projection_edits_save_resume_and_repeat_exact':True,'author_files_unchanged':authored,
         'binary_sha256':digest,'rendering_or_device_gate':False}
     (out/'runs.json').write_text(json.dumps({'whole':whole,'first':first,'resumed':resumed,'repeat':repeat},indent=2)+'\n',encoding='utf-8')

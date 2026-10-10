@@ -3519,6 +3519,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_2d"
+version = "0.0.1"
+dependencies = [
+ "schemars 1.2.2",
+ "serde",
+ "thiserror 2.0.21",
+ "ulid",
+]
+
+[[package]]
 name = "incant_agent"
 version = "0.0.1"
 dependencies = [
@@ -3553,6 +3563,7 @@ dependencies = [
  "glam 0.32.1",
  "gltf",
  "image",
+ "incant_2d",
  "incant_assets_runtime",
  "incant_cmd",
  "incant_doc",
@@ -3660,6 +3671,7 @@ version = "0.0.1"
 dependencies = [
  "automerge",
  "getrandom 0.3.4",
+ "incant_2d",
  "incant_input",
  "incant_localization",
  "incant_nav",
@@ -3840,6 +3852,7 @@ dependencies = [
  "bytemuck",
  "glam 0.32.1",
  "half",
+ "incant_2d",
  "incant_assets",
  "incant_core",
  "incant_doc",

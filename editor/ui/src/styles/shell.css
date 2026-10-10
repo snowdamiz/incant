@@ -1,0 +1,722 @@
+/*
+ * The frame: titlebar, notices, the workspace grid, separators, panel chrome, the
+ * viewport and the status line.
+ *
+ * Composition: one continuous frame, after the landing-page product illustration. The
+ * titlebar, panels and status line butt together and are divided by 1 px opaque separators
+ * (which are also the resize handles). There are no gutters and no floating cards. Chrome is
+ * opaque. When a native surface is attached (html.native-viewport) only the viewport hole
+ * becomes transparent; it is square, so the host clips with zero corner radii.
+ */
+
+html.native-viewport,
+html.native-viewport body,
+html.native-viewport .app,
+html.native-viewport .workspace,
+html.native-viewport .panel--viewport {
+  background: transparent;
+}
+
+/* The window itself never scrolls: not for scrollIntoView, focus or find-in-page. The app
+   contains its absolutely positioned descendants (visually hidden text inside long panels)
+   and clips them, so they cannot extend the document past the window. Each panel scrolls
+   its own content. `clip` where supported; `hidden` on older WebKit. */
+.app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 960px;
+  overflow: hidden;
+  overflow: clip;
+  background: var(--color-bg-app);
+}
+
+/* Centred so it never lands on macOS traffic lights or Windows caption buttons. */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  background: var(--color-focus);
+  color: var(--color-text-on-accent);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 6px; /* vertically centred in the 40 px titlebar */
+}
+
+/* ---- Titlebar ---- */
+
+/* One strip of the frame: identity at the start, the edit/layout tool cluster centred,
+   account and help at the end. A hairline separates it from the panels, as in the reference. */
+.titlebar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: var(--titlebar-height);
+  padding: 0 var(--space-3) 0 var(--space-4);
+  /* The hairline is a shadow, not a border, so content centres on the full 40 px bar,
+     the same line the native traffic lights are centred on. */
+  box-shadow: inset 0 -1px 0 var(--color-border);
+  background: var(--color-bg-app);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.titlebar:has(.window-controls) {
+  padding-right: 0;
+}
+
+.titlebar__inset {
+  flex: none;
+  align-self: stretch;
+}
+
+/* Equal-basis start and end sections keep the tool cluster centred in the window. */
+.titlebar__start,
+.titlebar__end {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: var(--space-3);
+}
+
+.titlebar__end {
+  justify-content: flex-end;
+}
+
+/* macOS: the 78 px inset covers the traffic lights (green ends at 73.5 pt). The logo box
+   starts at 86 pt, so the glyph sits 15 pt after the green light: clearly its own group,
+   wider than the 9 pt between lights. Measured natively; see handoff 0006 result. */
+.titlebar__inset + .titlebar__start {
+  margin-left: calc(var(--space-3) - var(--space-4));
+}
+
+.titlebar__identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.titlebar__logo {
+  flex: none;
+  display: block;
+}
+
+.titlebar__project {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+/* Opening or failed: the label is a state, not a project name. */
+.titlebar__project.is-pending {
+  color: var(--color-text-muted);
+  font-weight: var(--weight-medium);
+}
+
+/* "Project / Scene": the open scene, quieter than the project. */
+.titlebar__scene {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.titlebar__slash {
+  margin-right: var(--space-3);
+  color: var(--color-border-control);
+}
+
+.titlebar[data-window-focused='false'] .titlebar__identity,
+.titlebar[data-window-focused='false'] .titlebar__tools,
+.titlebar[data-window-focused='false'] .titlebar__end > * {
+  opacity: 0.55;
+}
+
+.titlebar__spacer {
+  flex: 1;
+  align-self: stretch;
+  min-width: var(--space-3);
+}
+
+/* Undo/redo, then the panel layout toggles: plain buttons, the groups set apart by space. */
+.titlebar__tools {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  margin: 0 var(--space-4);
+}
+
+.titlebar__group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.titlebar__help {
+  width: 30px;
+}
+
+.fixture-tag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 2px;
+  color: var(--color-fixture);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  cursor: help;
+}
+
+/* A shown panel's toggle is filled, like a pressed segment; a hidden one recedes. */
+.tool-button--toggle[aria-pressed='true'] {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.tool-button--toggle[aria-pressed='false'] {
+  color: var(--color-text-subtle);
+}
+
+/* Windows/Linux caption buttons (only when the host advertises them). */
+.window-controls {
+  display: flex;
+  align-self: stretch;
+  margin-left: var(--space-2);
+}
+
+.window-control {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+.window-control:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.window-control--close:hover {
+  background: var(--color-window-close);
+  color: #fff;
+}
+
+.window-control:focus-visible,
+.window-control[data-focus-visible] {
+  outline-offset: -2px;
+}
+
+/* The ChatGPT account: one avatar-sized button; the dialog holds the details. */
+.account-button {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.account-button:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+/* The signed-in account's initial, ringed as before: the avatar alone, no label. */
+.account-button__avatar {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-bg-selected);
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--color-success) 70%, transparent);
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+}
+
+/* Signing in (amber) or a sign-in problem (red): a small dot on the corner. */
+.account-button__dot {
+  position: absolute;
+  right: 5px;
+  bottom: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-warning);
+  box-shadow: 0 0 0 2px var(--color-bg-app);
+}
+
+.account-button--error .account-button__dot {
+  background: var(--color-danger);
+}
+
+/* ---- Connection notice: a full-width strip of the frame, under the titlebar ---- */
+
+.notice-region {
+  flex: none;
+  background: var(--color-bg-app);
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 32px;
+  padding: 6px var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+  line-height: 18px;
+}
+
+.notice strong {
+  font-weight: var(--weight-semibold);
+}
+
+.notice--info {
+  background: var(--color-info-bg);
+}
+
+.notice--info > .icon {
+  color: var(--color-info);
+}
+
+.notice--error {
+  background: var(--color-danger-bg);
+}
+
+.notice--error > .icon {
+  color: var(--color-danger);
+}
+
+.notice__code {
+  margin-left: auto;
+  color: var(--color-text-muted);
+}
+
+/* ---- Workspace: panels joined edge to edge ---- */
+
+.workspace {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  background: var(--color-bg-app);
+}
+
+.column {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+}
+
+.column--side {
+  background: var(--color-bg-side);
+}
+
+/* Separators are the resize handles: a 1 px opaque line with a wider invisible drag
+   target that overlaps both neighbours. Hover lights them grey and focus periwinkle. */
+.splitter {
+  position: relative;
+  z-index: 3;
+  touch-action: none;
+  background: var(--color-border);
+}
+
+.splitter::before {
+  content: '';
+  position: absolute;
+}
+
+.splitter--vertical {
+  cursor: col-resize;
+}
+
+.splitter--vertical::before {
+  top: 0;
+  bottom: 0;
+  left: calc(-1 * var(--splitter-hit));
+  right: calc(-1 * var(--splitter-hit));
+}
+
+.splitter--horizontal {
+  cursor: row-resize;
+}
+
+.splitter--horizontal::before {
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--splitter-hit));
+  bottom: calc(-1 * var(--splitter-hit));
+}
+
+.splitter::after {
+  content: '';
+  position: absolute;
+  background: transparent;
+  transition: background var(--duration-fast);
+  pointer-events: none;
+}
+
+.splitter--vertical::after {
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 3px;
+}
+
+.splitter--horizontal::after {
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 3px;
+}
+
+.splitter:hover::after {
+  background: var(--color-border-control);
+}
+
+.splitter:focus-visible,
+.splitter[data-focus-visible] {
+  outline: none;
+}
+
+.splitter:focus-visible::after,
+.splitter[data-focus-visible]::after,
+.splitter:active::after {
+  background: var(--color-focus);
+}
+
+/* ---- Panels ---- */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--color-bg-panel);
+}
+
+.column--side .panel {
+  background: var(--color-bg-side);
+}
+
+/* Panel headers share one height so the hierarchy, viewport and inspector headers form a
+   single ruled line across the window. Titles are quiet labels, as in the reference. */
+.panel__header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--header-height);
+  padding: 0 var(--space-3) 0 var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.panel__title {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-muted);
+}
+
+.panel__count {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.panel__meta {
+  margin-left: auto;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* A state beside a panel title: a dot and a word, no pill. */
+.panel__header > .status-pill {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-text-subtle);
+}
+
+.status-pill--ok {
+  color: var(--color-success);
+}
+
+.status-pill--ok::before {
+  background: var(--color-success);
+}
+
+.status-pill--pending::before {
+  background: var(--color-warning);
+}
+
+.status-pill--error {
+  color: var(--color-danger);
+}
+
+.status-pill--error::before {
+  background: var(--color-danger);
+}
+
+.panel__toolbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+}
+
+.panel__scroll {
+  position: relative; /* hidden text scrolls with the panel, not the window */
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: var(--control-height);
+  padding: 0 var(--space-3) 0 9px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-bg-raised);
+  color: var(--color-text-subtle);
+  transition: border-color var(--duration-fast);
+}
+
+.search-field:hover {
+  border-color: var(--color-border-strong);
+}
+
+.search-field:focus-within {
+  border-color: var(--color-border-control);
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.search-field input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  outline: none;
+}
+
+.search-field input::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.search-field input::-webkit-search-cancel-button {
+  filter: invert(0.7);
+}
+
+.search-field__status {
+  flex: none;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.search-field__status:empty {
+  display: none;
+}
+
+/* ---- Viewport ---- */
+
+/* The viewport strip is opaque frame; only the host below it goes transparent. */
+.panel--viewport > .panel__header {
+  background: var(--color-bg-panel);
+}
+
+.viewport-host {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  /* Square and flush with its neighbours, so the host clips with zero corner radii. */
+  border-radius: 0;
+  background-color: var(--color-bg-viewport);
+}
+
+/* The native child surface draws here. Nothing may paint over it. */
+.viewport-host.is-attached {
+  background: transparent;
+}
+
+.viewport-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 46ch;
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-text-subtle);
+}
+
+.viewport-empty__title {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.viewport-empty__detail {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: 17px;
+  overflow-wrap: anywhere;
+}
+
+/* ---- Status line ---- */
+
+.statusbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--statusbar-height);
+  padding: 0 var(--space-3) 0 var(--space-4);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-app);
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.statusbar__conn,
+.statusbar__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusbar__conn {
+  color: var(--color-text-muted);
+}
+
+.statusbar__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-text-subtle);
+}
+
+.statusbar__conn--ok .statusbar__dot {
+  background: var(--color-success);
+}
+.statusbar__conn--fixture .statusbar__dot {
+  background: var(--color-fixture);
+}
+.statusbar__conn--pending .statusbar__dot {
+  background: var(--color-warning);
+}
+.statusbar__conn--error .statusbar__dot {
+  background: var(--color-danger);
+}
+
+/* Problem counts open the Problems list. */
+.statusbar__problems {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.statusbar__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.statusbar__count + .statusbar__count {
+  margin-left: 6px;
+}
+
+.sev--clear {
+  color: var(--color-success);
+}
+
+.statusbar__problems:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.statusbar__problems:focus-visible,
+.statusbar__problems[data-focus-visible] {
+  outline-offset: 0;
+}
+
+.statusbar__message {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text-muted);
+}

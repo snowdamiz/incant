@@ -14,6 +14,8 @@ fn source(format: incant_assets::TextureFormat, color: [f32; 4]) -> incant_asset
     incant_assets::CookedTexture {
         metadata: incant_assets::TextureMetadata {
             version: 1,
+            dependencies: Vec::new(),
+            atlas: None,
             fingerprint: "ab".repeat(32),
             dependency: incant_assets::Dependency {
                 path: "environment.exr".into(),

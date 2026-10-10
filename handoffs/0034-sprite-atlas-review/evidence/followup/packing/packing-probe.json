@@ -1,0 +1,113 @@
+{
+ "binary_unchanged_every_call": true,
+ "engine_calls": 9,
+ "binary_sha256": "734811cb6053e32cce1ccd0fbb98fb7a515106cf7a8442f93b0be297af065469",
+ "results": [
+  {
+   "maximum_size": [
+    2048,
+    2048
+   ],
+   "exit": 0,
+   "page": [
+    1222,
+    1104
+   ],
+   "page_texels": 1349088,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0901,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    1204,
+    1170
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    1148
+   ],
+   "page_texels": 1382192,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0879,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    2048,
+    1170
+   ],
+   "exit": 0,
+   "page": [
+    1222,
+    1104
+   ],
+   "page_texels": 1349088,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0901,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    1300,
+    1200
+   ],
+   "exit": 0,
+   "page": [
+    1222,
+    1104
+   ],
+   "page_texels": 1349088,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0901,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    1600,
+    2600
+   ],
+   "exit": 0,
+   "page": [
+    1222,
+    1104
+   ],
+   "page_texels": 1349088,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0901,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    4096,
+    1024
+   ],
+   "exit": 1,
+   "message": "Error: could not cook art/max-4096x1024.atlas.json: could not pack every frame within the requested maximum using the bounded unrotated skyline heuristic"
+  },
+  {
+   "maximum_size": [
+    1204,
+    1148
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    1148
+   ],
+   "page_texels": 1382192,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0879,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    1204,
+    1147
+   ],
+   "exit": 1,
+   "message": "Error: could not cook art/max-1204x1147.atlas.json: could not pack every frame within the requested maximum using the bounded unrotated skyline heuristic"
+  }
+ ]
+}

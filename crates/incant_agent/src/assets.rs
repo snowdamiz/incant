@@ -180,7 +180,7 @@ pub fn dispatch(
             } else {
                 None
             };
-            let imports: Vec<_> = committed.imports.iter().map(|outcome| json!({"asset":outcome.asset,"changed":outcome.changed,"cache_hit":outcome.cache_hit})).collect();
+            let imports: Vec<_> = committed.imports.iter().map(|outcome| json!({"asset":outcome.asset,"changed":outcome.changed,"cache_hit":outcome.cache_hit,"diagnostics":outcome.diagnostics})).collect();
             Ok(
                 json!({"revision":committed.revision,"transaction_id":transaction,"untrusted_project_data":imports}),
             )

@@ -17,15 +17,17 @@ const clamp = (value: number, min: number, max: number) => Math.round(Math.min(m
 
 /**
  * Proportional defaults after the landing-page illustration (a narrow outline, a wide
- * viewport, a ~20 rem inspector), tuned so 1280×800 and 1920×1080 both keep a readable
- * hierarchy (≥ 232 px), an inspector wide enough for a vec3 row (≥ 320 px), and a
- * viewport at least half the window wide.
+ * viewport, a roomy inspector), tuned so 1280×800 and 1920×1080 both keep a readable
+ * hierarchy (≥ 232 px), an inspector wide enough for aligned rows (≥ 340 px by default),
+ * and a viewport at least half the window wide.
  */
 export function defaultLayout(width: number, height: number): Layout {
   return clampLayout(
     {
       left: clamp(width * 0.17, 232, 296),
-      right: clamp(width * 0.23, 320, 400),
+      // A quarter of the window (360 px at 1440): enough for aligned label and value
+      // columns and three-axis vectors without crowding.
+      right: clamp(width * 0.25, 340, 420),
       dock: clamp(height * 0.27, 160, 340),
       agent: clamp(height * 0.33, 260, 340),
     },
@@ -49,18 +51,4 @@ export function clampLayout(layout: Layout, width: number, height: number): Layo
   const dock = clamp(layout.dock, 120, Math.max(120, Math.min(640, workspace - SPLITTER - MIN_VIEWPORT.height)));
   const agent = clamp(layout.agent, 180, Math.max(180, Math.min(560, workspace - SPLITTER - 160)));
   return { left, right, dock, agent };
-}
-
-/** Room for the compact unavailable message and the one-line composer (measured). */
-export const IDLE_AGENT_MIN = 200;
-
-/**
- * Agent height while no agent can run (signed out, not ready, unsupported). The pane
- * then only explains why and offers sign-in, so it keeps just the compact empty
- * state plus the disabled composer and gives the rest of a short window to the
- * Inspector. Never taller than the regular agent height for the same window.
- */
-export function idleAgentHeight(height: number): number {
-  const workspace = Math.max(0, height - CHROME_HEIGHT);
-  return clamp(height * 0.24, IDLE_AGENT_MIN, Math.max(180, Math.min(240, workspace - SPLITTER - 160)));
 }

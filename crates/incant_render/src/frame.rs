@@ -15,7 +15,7 @@ pub(crate) struct FrameTargets {
 #[derive(Default)]
 pub(crate) struct FrameCache(Mutex<Option<Arc<FrameTargets>>>);
 impl FrameCache {
-    pub fn get(&self, device: &wgpu::Device, width: u32, height: u32) -> Result<Arc<FrameTargets>> {
+    pub fn validate(device: &wgpu::Device, width: u32, height: u32) -> Result<()> {
         let limit = device.limits().max_texture_dimension_2d.min(8192);
         if width == 0
             || height == 0
@@ -25,6 +25,10 @@ impl FrameCache {
         {
             return Err(ResourceError::RenderTargetSize.into());
         }
+        Ok(())
+    }
+    pub fn get(&self, device: &wgpu::Device, width: u32, height: u32) -> Result<Arc<FrameTargets>> {
+        Self::validate(device, width, height)?;
         let mut cached = self
             .0
             .lock()
