@@ -8,13 +8,16 @@ mod compiled;
 #[cfg(feature = "compiler")]
 mod compiler;
 mod diagnostics;
+mod input;
 mod loan;
+mod session;
 mod synchronous;
 
 pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
 use rquickjs::{Context, Function, Persistent, Runtime, Value};
+pub use session::{NativeSession, SessionError};
 use std::{
     sync::{Arc, Mutex},
     time::Duration,
@@ -60,7 +63,7 @@ pub enum ScriptError {
 /// private, compiler-produced bytecode. Ticks borrow real numeric ECS columns;
 /// they neither parse code nor serialize project/component values.
 ///
-/// This native host exposes `update({chunks, dt, commands})`. Each chunk has stable
+/// This native host exposes `update({chunks, dt, commands, input})`. Each chunk has stable
 /// ID strings, Transform stride 10, and optional Velocity stride 3. Views are
 /// detached on every exit. A failed callback restores its component writes and
 /// permanently fails this host. Tick-local structural commands apply only after
@@ -118,6 +121,17 @@ impl ScriptHost {
     /// Undo storage is bounded to 32 MiB of numeric columns, separate from the
     /// VM's 32 MiB memory cap. No per-tick authoring validation is performed.
     pub fn tick(&mut self, world: &mut NativeWorld, dt: f64) -> Result<(), ScriptError> {
+        self.tick_with_input(world, dt, &incant_input::InputRuntime::default())
+    }
+
+    /// Typed input comes only from an engine-validated, bounded runtime. This
+    /// method owns the script phase only; NativeSession owns fixed-step ordering.
+    pub fn tick_with_input(
+        &mut self,
+        world: &mut NativeWorld,
+        dt: f64,
+        input: &incant_input::InputRuntime,
+    ) -> Result<(), ScriptError> {
         if self.failed {
             return Err(ScriptError::FailedSession);
         }
@@ -130,6 +144,10 @@ impl ScriptHost {
             .reset()?;
         self.synchronous.reset();
         let result = self.context.with(|ctx| {
+            let input = input::expose(&ctx, input.frame()).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "input snapshot", &self.deadline)
+            })?;
+            diagnostics::check_deadline(&self.deadline)?;
             let function = self
                 .update
                 .clone()
@@ -139,6 +157,9 @@ impl ScriptHost {
             let api = commands.expose(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "command bindings", &self.deadline)
             })?;
+            // Input publication/command construction must fit the script budget
+            // before any ECS table is borrowed or its numeric views are created.
+            diagnostics::check_deadline(&self.deadline)?;
             world.with_numeric_columns(|columns| {
                 let mut loan = loan::Loan::new(columns)?;
                 let chunks = match loan.expose(&ctx) {
@@ -156,7 +177,7 @@ impl ScriptHost {
                     }
                 };
                 commands.activate();
-                let result = function.call::<_, Value>((chunks, dt, api));
+                let result = function.call::<_, Value>((chunks, dt, api, input));
                 commands.revoke();
                 // Revoke before diagnostics can execute a user-defined getter,
                 // and before Rust reads or restores any component bytes.
@@ -235,3 +256,6 @@ fn bytecode_context(runtime: &Runtime, allow_source: bool) -> Result<Context, Sc
 mod structural_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod input_tests;

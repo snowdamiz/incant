@@ -85,3 +85,110 @@ fn copied_player_runs_scene_and_structural_behavior_without_script_arguments() {
     let damaged = execute(&["world.scene", "1"]);
     assert!(!damaged.status.success() && damaged.stdout.is_empty());
 }
+
+#[test]
+fn recording_boundary_rejects_incompatible_unbounded_or_conflicting_inputs_before_play() {
+    let temporary = Temporary(std::env::temp_dir().join(format!(
+        "incant-input-player-{}-{}", std::process::id(),
+        SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos()
+    )));
+    fs::create_dir(&temporary.0).unwrap();
+    let scene = CookedScene::new(StableId(999u128.to_be_bytes()), 60, vec![])
+        .unwrap()
+        .to_bytes();
+    fs::write(temporary.0.join("world.scene"), scene).unwrap();
+    fs::write(temporary.0.join("actions.json"), "{}").unwrap();
+    let original = serde_json::json!({"format":"incant-input","version":1,"tick_rate":60,"start_tick":0,"ticks":4,"frames":[
+        {"tick":1,"events":[{"type":"key","code":"Space","down":true}]},
+        {"tick":2,"events":[{"type":"key","code":"Space","down":false}]}]});
+    let execute = |extra: &[&str]| {
+        Command::new(env!("CARGO_BIN_EXE_incant_script_player"))
+            .args(["world.scene", "4"])
+            .args(extra)
+            .current_dir(&temporary.0)
+            .output()
+            .unwrap()
+    };
+    let args = [
+        "--input-recording",
+        "input.json",
+        "--input-actions",
+        "actions.json",
+    ];
+    for (field, value) in [("tick_rate", 30), ("start_tick", 1), ("ticks", 2)] {
+        let mut invalid = original.clone();
+        invalid[field] = value.into();
+        fs::write(temporary.0.join("input.json"), invalid.to_string()).unwrap();
+        let result = execute(&args);
+        assert!(
+            !result.status.success() && result.stdout.is_empty(),
+            "{field}"
+        );
+    }
+    let mut invalid = original.clone();
+    invalid["frames"][1]["events"] =
+        serde_json::json!([{"type":"gamepad_axis","id":7,"axis":"left_x","value":0.5}]);
+    fs::write(temporary.0.join("input.json"), invalid.to_string()).unwrap();
+    assert!(!execute(&args).status.success());
+    fs::write(temporary.0.join("input.json"), original.to_string()).unwrap();
+    let result = execute(&args);
+    assert!(
+        result.status.success(),
+        "{}",
+        String::from_utf8_lossy(&result.stderr)
+    );
+    assert!(
+        String::from_utf8(result.stdout)
+            .unwrap()
+            .starts_with("tick=4 entities=0\n")
+    );
+    fs::write(
+        temporary.0.join("actions.json"),
+        r#"{"bad name":{"kind":"button","bindings":[]}}"#,
+    )
+    .unwrap();
+    let result = execute(&args);
+    assert!(!result.status.success() && result.stdout.is_empty());
+    fs::write(temporary.0.join("actions.json"), vec![b' '; 256 * 1024 + 1]).unwrap();
+    let result = execute(&args);
+    assert!(!result.status.success() && result.stdout.is_empty());
+    assert!(
+        String::from_utf8(result.stderr)
+            .unwrap()
+            .contains("input file exceeds player limit")
+    );
+    fs::write(temporary.0.join("actions.json"), "{}").unwrap();
+    fs::write(
+        temporary.0.join("input.json"),
+        vec![b' '; incant_input::MAX_RECORDING_BYTES + 1],
+    )
+    .unwrap();
+    let result = execute(&args);
+    assert!(!result.status.success() && result.stdout.is_empty());
+    assert!(
+        String::from_utf8(result.stderr)
+            .unwrap()
+            .contains("input file exceeds player limit")
+    );
+    for extra in [
+        vec!["--input-recording", "input.json"],
+        vec![
+            "--input-recording",
+            "input.json",
+            "--input-recording",
+            "input.json",
+        ],
+        vec![
+            "--input-recording",
+            "input.json",
+            "--input-actions",
+            "actions.json",
+            "--event",
+            "key",
+        ],
+    ] {
+        let result = execute(&extra);
+        assert!(!result.status.success() && result.stdout.is_empty());
+        assert!(String::from_utf8(result.stderr).unwrap().contains("usage:"));
+    }
+}

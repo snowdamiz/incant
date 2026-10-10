@@ -53,6 +53,35 @@ within its documented workload.
 
 ## Active work
 
+- Native fixed-tick input now owns a fresh cooked world, script VM and bounded
+  input timeline. Action bindings validate once at construction/rebind; each
+  valid packet advances native simulation before the synchronous script. Raw
+  devices, gestures and named actions reach JS as direct bounded VM copies,
+  without tick-time JSON or project projection. Invalid packets preserve input
+  edges/clock and world/VM state; a later script failure makes the session
+  unusable. All 394 release workspace tests/doctests, workspace Clippy, 89 scoped
+  tests and strict SDK checks pass. A fresh compiler-free shipping player passes
+  twelve empty-input and twelve recorded-input processes after authoring/compile
+  source deletion; retained JSON files are startup-only runtime exchanges. Its
+  stripped size is 2,154,408 bytes (+364,272 vs the corrected cooked-script
+  baseline). Native input/VM save/seek, live platform adapters, remaining legacy
+  gameplay and device/performance gates stay open. The integrated cooked/save
+  union passes 98 scoped tests, 28 tool tests and the fresh 24-process proof;
+  hosted checks are pending. See [native input evidence](docs/spikes/native-input-session.md).
+
+- PR #51 is merged after nine passing checks and verified tested-tree identity.
+  Its real shared-cache Windows critical path was 21m19s plus 1s queue, 38%
+  below the cold PR #49 sample; feature/dependency changes remain explicit.
+  All native ordinary tests and 44 exact GPU names per host passed. All 12 Rust
+  cache families remain covered within the observed 9.134 GiB inventory.
+  Further Windows compilation/link attribution and conservative docs/UI path
+  selection remain open; see [warm evidence](docs/spikes/ci-build-performance.md#completed-warm-pr-51).
+
+- Pinned web/Android tool reuse is locally verified: isolated exact-version
+  executable caches, normal install fallback, and default-branch-only saves.
+  Hosted restoration/sizes remain pending; engine/GPU/credential/shipping
+  coverage stays intact. See [tool reuse evidence](docs/spikes/ci-pinned-platform-tools.md).
+
 - Main cache seeding is verified across all 12 Rust jobs after PR #49: the shared
   set uses 7.807 GiB and the retained inventory 8.929 GiB after exact obsolete
   cache cleanup. All checks remained enabled. Independent warm-PR latency and

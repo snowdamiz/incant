@@ -1,7 +1,7 @@
 name: Six platform probes
 on:
   pull_request:
-    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_types/**', 'crates/incant_runtime/**', 'crates/incant_script/**', 'crates/incant_cook/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', '.cargo/**', 'Cargo.lock', '.github/workflows/nightly.yml']
+    paths: ['crates/incant_platform_smoke/**', 'crates/incant_core/**', 'crates/incant_physics/**', 'crates/incant_doc/**', 'crates/incant_types/**', 'crates/incant_runtime/**', 'crates/incant_script/**', 'crates/incant_cook/**', 'crates/incant_audio/**', 'crates/incant_assets/**', 'platforms/**', 'tools/platforms/**', 'tools/tests/test_pinned_tool.py', '.cargo/**', 'Cargo.lock', '.github/workflows/nightly.yml']
   schedule: [{cron: '30 6 * * *'}]
   workflow_dispatch:
 permissions:
@@ -53,7 +53,16 @@ jobs:
           cache-bin: 'false'
           # Share one default-branch dependency set; all PRs only restore.
           save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
-      - run: cargo install wasm-bindgen-cli --version 0.2.126 --locked
+      - name: Select pinned wasm-bindgen cache
+        id: tool-key
+        run: python3 tools/platforms/pinned-tool.py wasm-bindgen "$RUNNER_TEMP/incant-tools/wasm-bindgen" --prepare
+      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: tool-cache
+        with:
+          path: ${{ steps.tool-key.outputs.path }}
+          key: ${{ steps.tool-key.outputs.key }}
+      - name: Verify or install pinned wasm-bindgen
+        run: python3 tools/platforms/pinned-tool.py wasm-bindgen "$RUNNER_TEMP/incant-tools/wasm-bindgen"
       - run: tools/platforms/web.sh
       - run: cargo check -p incant_audio --target wasm32-unknown-unknown --locked
       - run: cargo check -p incant_runtime --target wasm32-unknown-unknown --locked
@@ -62,6 +71,12 @@ jobs:
       - run: node tools/platforms/web-check.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with: {name: hello-web, path: artifacts/web, if-no-files-found: error}
+      - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && steps.tool-cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.tool-key.outputs.path }}
+          key: ${{ steps.tool-key.outputs.key }}
+
   ios:
     runs-on: macos-latest
     steps:
@@ -97,7 +112,16 @@ jobs:
           cache-bin: 'false'
           # Share one default-branch dependency set; all PRs only restore.
           save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
-      - run: cargo install cargo-ndk --version 4.1.2 --locked
+      - name: Select pinned cargo-ndk cache
+        id: tool-key
+        run: python3 tools/platforms/pinned-tool.py cargo-ndk "$RUNNER_TEMP/incant-tools/cargo-ndk" --prepare
+      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: tool-cache
+        with:
+          path: ${{ steps.tool-key.outputs.path }}
+          key: ${{ steps.tool-key.outputs.key }}
+      - name: Verify or install pinned cargo-ndk
+        run: python3 tools/platforms/pinned-tool.py cargo-ndk "$RUNNER_TEMP/incant-tools/cargo-ndk"
       - name: Install SDK components already licensed on the hosted runner
         run: |
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" 'platforms;android-35' 'build-tools;35.0.0' 'ndk;28.0.13004108' 'emulator' 'system-images;android-35;google_apis;x86_64'
@@ -123,3 +147,9 @@ jobs:
         if: always()
         with: {name: hello-android-debug, path: artifacts/android, if-no-files-found: error}
       # Hosted emulation does not replace later physical-device/performance gates.
+
+      - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && steps.tool-cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.tool-key.outputs.path }}
+          key: ${{ steps.tool-key.outputs.key }}
