@@ -1,54 +1,214 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
+import type { IconName } from '../icons/Icon';
 import { Icon } from '../icons/Icon';
+import { useShell } from '../shell/ShellContext';
 
-const GROUPS: { title: string; items: [keys: string, action: string][] }[] = [
+export type KeyPlatform = 'mac' | 'other';
+
+/** Keys pressed together. `Mod` is ⌘ on macOS and Ctrl elsewhere. */
+type Combo = readonly string[];
+
+interface Shortcut {
+  readonly action: string;
+  /** Alternatives, each pressed as one combination. */
+  readonly keys: readonly Combo[];
+  /** Replaces `keys` on Windows and Linux when the keys differ there. */
+  readonly other?: readonly Combo[];
+  /** Where the keys apply, when the group does not already say. */
+  readonly where?: string;
+  /** The alternatives are the action's two directions ("First or last": Home / End). */
+  readonly paired?: boolean;
+}
+
+interface ShortcutGroup {
+  readonly title: string;
+  readonly icon: IconName;
+  /** The agent's group wears the agent's colour, as its mark does elsewhere. */
+  readonly agent?: boolean;
+  readonly items: readonly Shortcut[];
+}
+
+/**
+ * Every shortcut the editor handles, as implemented (App.tsx, HierarchyPanel,
+ * AssetBrowser, Splitter, the Inspector lists, Menu and AgentPanel). Nothing is
+ * listed that the code does not do.
+ */
+export const SHORTCUT_GROUPS: readonly ShortcutGroup[] = [
   {
-    title: 'Everywhere',
+    title: 'General',
+    icon: 'keyboard',
     items: [
-      ['F6 / Shift+F6', 'Move to the next / previous panel'],
-      ['⌘Z / Ctrl+Z', 'Undo the last change'],
-      ['⇧⌘Z / Ctrl+Y', 'Redo'],
-      ['?', 'Show this list'],
+      { action: 'Next panel', keys: [['F6']] },
+      { action: 'Previous panel', keys: [['Shift', 'F6']] },
+      { action: 'Undo', keys: [['Mod', 'Z']] },
+      { action: 'Redo', keys: [['Shift', 'Mod', 'Z']], other: [['Ctrl', 'Y'], ['Ctrl', 'Shift', 'Z']] },
+      { action: 'Keyboard shortcuts', keys: [['?'], ['Mod', '/']] },
+      { action: 'Close a dialog or menu', keys: [['Esc']] },
     ],
   },
   {
     title: 'Hierarchy',
+    icon: 'scene',
     items: [
-      ['↑ ↓', 'Move selection'],
-      ['→ ←', 'Expand / collapse, or move to child / parent'],
-      ['Home / End', 'First / last entity'],
-      ['Type letters', 'Jump to an entity by name'],
-      ['⌘F / Ctrl+F', 'Filter by name; Escape clears'],
-      ['F2', 'Rename'],
-      ['Delete', 'Delete'],
+      { action: 'Move selection', keys: [['↑'], ['↓']], paired: true },
+      { action: 'Expand or collapse; go to child or parent', keys: [['→'], ['←']], paired: true },
+      { action: 'First or last entity', keys: [['Home'], ['End']], paired: true },
+      { action: 'Page up or down', keys: [['Page Up'], ['Page Down']], paired: true },
+      { action: 'Jump to an entity by name', keys: [['Type its name']] },
+      { action: 'Filter by name', keys: [['Mod', 'F']] },
+      { action: 'Rename', keys: [['F2']] },
+      { action: 'Delete', keys: [['Mod', 'Backspace'], ['Delete']], other: [['Delete'], ['Ctrl', 'Backspace']] },
+      { action: 'Actions menu', keys: [['Shift', 'F10'], ['Menu']] },
     ],
   },
   {
-    title: 'Panels',
+    title: 'Panels and layout',
+    icon: 'sidebarLeft',
     items: [
-      ['← → on tabs', 'Switch Problems, Console, History'],
-      ['Arrows on a divider', 'Resize panels (Shift for larger steps)'],
-      ['⌥⌘1 · 2 · 3', 'Show or hide hierarchy, output, inspector'],
-      ['⌘Enter / Ctrl+Enter', 'Send a message to the agent'],
+      { action: 'Show or hide the hierarchy', keys: [['Alt', 'Mod', '1']], other: [['Ctrl', 'Alt', '1']] },
+      { action: 'Show or hide the output', keys: [['Alt', 'Mod', '2']], other: [['Ctrl', 'Alt', '2']] },
+      { action: 'Show or hide the inspector', keys: [['Alt', 'Mod', '3']], other: [['Ctrl', 'Alt', '3']] },
+      { action: 'Switch tabs', keys: [['←'], ['→']], where: 'on a tab', paired: true },
+      { action: 'Resize a panel', keys: [['←'], ['→']], where: 'on a divider; ↑ ↓ on a horizontal one, Shift for big steps', paired: true },
+      { action: 'Smallest or largest size', keys: [['Home'], ['End']], where: 'on a divider', paired: true },
     ],
+  },
+  {
+    title: 'Lists, assets and inspector',
+    icon: 'problems',
+    items: [
+      { action: 'Choose an item', keys: [['↑'], ['↓']], paired: true },
+      { action: 'First or last item', keys: [['Home'], ['End']], paired: true },
+      { action: 'Page up or down', keys: [['Page Up'], ['Page Down']], paired: true },
+      { action: 'Open the selected asset', keys: [['Enter'], ['Space']] },
+      { action: 'Back to the asset list', keys: [['Esc']], where: 'in asset details' },
+      { action: 'Filter assets', keys: [['Mod', 'F']] },
+      { action: 'Add an import path below', keys: [['Shift', 'Enter']], where: 'in the import form' },
+    ],
+  },
+  {
+    title: 'Agent',
+    icon: 'spark',
+    agent: true,
+    items: [{ action: 'Send the message', keys: [['Mod', 'Enter']], other: [['Ctrl', 'Enter']] }],
   },
 ];
 
-/** Modal list of keyboard shortcuts. Traps focus; Escape closes and focus returns to the opener. */
+const MAC_GLYPHS: Readonly<Record<string, string>> = {
+  Mod: '⌘',
+  Shift: '⇧',
+  Alt: '⌥',
+  Ctrl: '⌃',
+  Enter: '↩',
+  Backspace: '⌫',
+  Delete: '⌦',
+  Esc: 'esc',
+};
+const MAC_WORDS: Readonly<Record<string, string>> = {
+  Mod: 'Command',
+  Shift: 'Shift',
+  Alt: 'Option',
+  Ctrl: 'Control',
+  Enter: 'Return',
+  Backspace: 'Delete',
+  Delete: 'Forward Delete',
+  Esc: 'Escape',
+};
+const OTHER_WORDS: Readonly<Record<string, string>> = { Mod: 'Ctrl', Esc: 'Escape' };
+const ARROW_WORDS: Readonly<Record<string, string>> = { '↑': 'Up', '↓': 'Down', '←': 'Left', '→': 'Right', '?': 'Question mark', '/': 'Slash' };
+
+/** What a key cap shows: Mac glyphs on macOS, names elsewhere. */
+export function keyLabel(key: string, platform: KeyPlatform): string {
+  if (platform === 'mac') return MAC_GLYPHS[key] ?? key;
+  return key === 'Mod' ? 'Ctrl' : key;
+}
+
+/** A combination in words, for assistive tech and the filter: "Command Shift Z". */
+export function spokenCombo(combo: Combo, platform: KeyPlatform): string {
+  return combo.map((key) => ARROW_WORDS[key] ?? (platform === 'mac' ? MAC_WORDS[key] : OTHER_WORDS[key]) ?? key).join(' ');
+}
+
+function combosFor(item: Shortcut, platform: KeyPlatform): readonly Combo[] {
+  return platform === 'other' && item.other ? item.other : item.keys;
+}
+
+/**
+ * Two columns of groups, in reading order down each column, balanced by height
+ * (rows plus a header each). Recomputed as the filter narrows the list.
+ */
+function balance<T extends { readonly items: readonly unknown[] }>(groups: readonly T[]): { group: T; index: number }[][] {
+  const height = (group: T) => group.items.length + 1.5;
+  const total = groups.reduce((sum, group) => sum + height(group), 0);
+  const left: { group: T; index: number }[] = [];
+  const right: { group: T; index: number }[] = [];
+  let used = 0;
+  groups.forEach((group, index) => {
+    // Fill the left column until it holds about half, then continue on the right.
+    if (right.length === 0 && (left.length === 0 || used + height(group) / 2 <= total / 2)) {
+      left.push({ group, index });
+      used += height(group);
+    } else right.push({ group, index });
+  });
+  return right.length > 0 ? [left, right] : [left];
+}
+
+/** macOS when the native host says so; in a browser, the user agent decides. */
+function usePlatform(): KeyPlatform {
+  const { snapshot } = useShell();
+  const host = snapshot?.window?.platform;
+  if (host) return host === 'macos' ? 'mac' : 'other';
+  const agent = typeof navigator === 'undefined' ? '' : `${navigator.platform} ${navigator.userAgent}`;
+  return /Mac|iPhone|iPad/.test(agent) ? 'mac' : 'other';
+}
+
+/**
+ * Modal reference of keyboard shortcuts, grouped by where they apply, with the
+ * current platform's keys as individual caps. The filter matches actions, groups
+ * and key names. Traps focus; Escape clears a filter, then closes, and focus
+ * returns to the opener.
+ */
 export function ShortcutsDialog({ onClose }: { onClose: () => void }) {
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const platform = usePlatform();
+  const filterRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
-  useEffect(() => closeRef.current?.focus(), []);
+  const [query, setQuery] = useState('');
+  const statusId = useId();
+  useEffect(() => filterRef.current?.focus(), []);
+
+  const groups = useMemo(() => {
+    const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    return SHORTCUT_GROUPS.map((group) => ({
+      ...group,
+      items: group.items.filter((item) => {
+        if (words.length === 0) return true;
+        const combos = combosFor(item, platform);
+        const haystack = [
+          group.title,
+          item.action,
+          item.where ?? '',
+          ...combos.map((combo) => spokenCombo(combo, platform)),
+          ...combos.map((combo) => combo.map((key) => keyLabel(key, platform)).join('')),
+        ]
+          .join(' ')
+          .toLowerCase();
+        return words.every((word) => haystack.includes(word));
+      }),
+    })).filter((group) => group.items.length > 0);
+  }, [query, platform]);
+  const total = SHORTCUT_GROUPS.reduce((sum, group) => sum + group.items.length, 0);
+  const shown = groups.reduce((sum, group) => sum + group.items.length, 0);
+  const columns = balance(groups);
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
       event.preventDefault();
-      onClose();
+      if (query && document.activeElement === filterRef.current) setQuery('');
+      else onClose();
       return;
     }
     if (event.key !== 'Tab') return;
-    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button, [tabindex="0"]');
+    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button, input, [tabindex="0"]');
     if (!focusable || focusable.length === 0) return;
     const first = focusable[0]!;
     const last = focusable[focusable.length - 1]!;
@@ -65,39 +225,106 @@ export function ShortcutsDialog({ onClose }: { onClose: () => void }) {
     <div className="scrim" onMouseDown={onClose}>
       <div
         ref={dialogRef}
-        className="dialog"
+        className="dialog dialog--shortcuts"
         role="dialog"
         aria-modal="true"
         aria-labelledby="shortcuts-title"
+        aria-describedby="shortcuts-subtitle"
         onKeyDown={onKeyDown}
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <div className="dialog__header">
-          <h2 id="shortcuts-title" className="dialog__title">
-            Keyboard shortcuts
-          </h2>
-          <button ref={closeRef} type="button" className="icon-button" aria-label="Close" onClick={onClose}>
+        <div className="dialog__header shortcuts__header">
+          <span className="dialog__mark" aria-hidden="true">
+            <Icon name="keyboard" size={18} />
+          </span>
+          <div className="dialog__heading">
+            <h2 id="shortcuts-title" className="dialog__title">
+              Keyboard shortcuts
+            </h2>
+            <p id="shortcuts-subtitle" className="dialog__subtitle">
+              Every panel works from the keyboard. Keys shown for {platform === 'mac' ? 'macOS' : 'Windows and Linux'}.
+            </p>
+          </div>
+          <button type="button" className="icon-button" aria-label="Close" onClick={onClose}>
             <Icon name="close" />
           </button>
         </div>
-        <div className="dialog__body" tabIndex={0} aria-label="Shortcut list">
-          {GROUPS.map((group) => (
-            <div key={group.title} className="shortcuts__group">
-              <h3 className="shortcuts__title">
-                {group.title}
-              </h3>
-              <dl className="shortcuts__list">
-                {group.items.map(([keys, action]) => (
-                  <div key={keys} className="shortcuts__item">
-                    <dt>
-                      <kbd>{keys}</kbd>
-                    </dt>
-                    <dd>{action}</dd>
-                  </div>
+        <div className="shortcuts__search">
+          <div className="search-field">
+            <Icon name="search" size={14} />
+            <label htmlFor="shortcuts-filter" className="visually-hidden">
+              Filter shortcuts
+            </label>
+            <input
+              id="shortcuts-filter"
+              ref={filterRef}
+              type="search"
+              placeholder="Filter by action or key"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              aria-describedby={statusId}
+              autoComplete="off"
+              spellCheck={false}
+            />
+            <span id={statusId} className="search-field__status" role="status">
+              {query.trim() ? `${shown} of ${total}` : ''}
+            </span>
+          </div>
+        </div>
+        <div className="dialog__body shortcuts__body" tabIndex={0} aria-label="Shortcut list">
+          {groups.length === 0 ? (
+            <p className="shortcuts__empty">No shortcut matches “{query.trim()}”.</p>
+          ) : (
+            columns.map((column, columnIndex) => (
+              <div key={columnIndex} className="shortcuts__column">
+                {column.map(({ group, index: groupIndex }) => (
+              // A group, not a <section>: named sections are landmarks, and "Agent" would repeat the Agent panel's.
+              <div
+                key={group.title}
+                className={`shortcuts__group${group.agent ? ' shortcuts__group--agent' : ''}`}
+                role="group"
+                aria-labelledby={`shortcuts-group-${groupIndex}`}
+              >
+                <h3 className="shortcuts__title" id={`shortcuts-group-${groupIndex}`}>
+                  <span className="shortcuts__icon" aria-hidden="true">
+                    <Icon name={group.icon} size={14} />
+                  </span>
+                  {group.title}
+                </h3>
+                <dl className="shortcuts__list">
+                  {group.items.map((item) => (
+                    <div key={item.action} className="shortcuts__item">
+                      <dt className="shortcuts__action">
+                        {item.action}
+                        {item.where ? <span className="shortcuts__where"> {item.where}</span> : null}
+                      </dt>
+                      <dd className="shortcuts__keys">
+                        {combosFor(item, platform).map((combo, index) => (
+                          <span key={index} className="shortcuts__combo">
+                            {index > 0 ? (
+                              <span className={`shortcuts__or${item.paired ? ' is-paired' : ''}`} aria-hidden="true">
+                                {item.paired ? '/' : 'or'}
+                              </span>
+                            ) : null}
+                            <span className="visually-hidden">{index > 0 ? ', or ' : ''}{spokenCombo(combo, platform)}</span>
+                            <kbd className="keys" aria-hidden="true">
+                              {combo.map((key) => (
+                                <kbd key={key} className={`keycap${key.length > 3 && !(platform === 'mac' && MAC_GLYPHS[key]) ? ' keycap--word' : ''}`}>
+                                  {keyLabel(key, platform)}
+                                </kbd>
+                              ))}
+                            </kbd>
+                          </span>
+                        ))}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
                 ))}
-              </dl>
-            </div>
-          ))}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

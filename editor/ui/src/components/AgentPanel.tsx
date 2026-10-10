@@ -12,6 +12,15 @@ export function agentReady(status: string | undefined): boolean {
 }
 
 /**
+ * The native bridge explains the missing in-editor agent with internal milestone
+ * wording (a headless command, a "Phase 0 provider spike"). Presentation only: such
+ * a reason is shown in plain words and the state stays "unavailable".
+ */
+export function isMilestoneReason(reason: string): boolean {
+  return /headless agent command|provider spike|\bphase \d/i.test(reason);
+}
+
+/**
  * Agent area under the Inspector. It never fabricates a transcript or a reply.
  * While the agent cannot run, the pane is one short note with its single next
  * step (sign in, or why it is unavailable) instead of a disabled composer, so the
@@ -27,13 +36,16 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
   const provider = snapshot?.provider;
   const canSend = agent?.status === 'idle' && capabilities.has('agent.send');
   const project = projectState(snapshot);
+  const milestone = agent?.status === 'unavailable' && isMilestoneReason(agent.reason);
   const reason = !snapshot
     ? 'No engine is connected.'
     : project.kind === 'failed'
       ? // The banner shows the failure itself; repeating it here adds nothing.
         'The agent needs an open project.'
       : agent?.status === 'unavailable'
-        ? agent.reason
+        ? milestone
+          ? 'The agent is not part of the editor yet.'
+          : agent.reason
         : !capabilities.has('agent.send')
           ? 'This bridge does not support sending messages to the agent.'
           : agent?.status === 'running'
@@ -52,7 +64,7 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
         ? 'Sign-in problem'
         : signingIn
           ? 'Signing in…'
-          : signedIn
+          : signedIn || milestone
             ? 'Unavailable'
             : 'Not signed in';
   const tone = ready ? 'ok' : provider?.status === 'error' ? 'error' : signingIn ? 'pending' : 'idle';
@@ -153,10 +165,11 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
           ) : (
             <div className="agent-note">
               <p className="agent-note__title">
-                {!snapshot ? 'No engine connected' : signedIn ? 'Agent not ready' : 'Use your ChatGPT account'}
+                {!snapshot ? 'No engine connected' : milestone ? 'Not in the editor yet' : signedIn ? 'Agent not ready' : 'Use your ChatGPT account'}
               </p>
               <p className="agent-note__body" id="agent-reason">
-                {reason} Everything else works offline, no account needed.
+                {/* The title already says the agent is not in the editor; the body adds what still works. */}
+                {milestone || !snapshot ? '' : `${reason} `}Everything else works offline, no account needed.
               </p>
               {snapshot && provider?.status === 'not-connected' ? (
                 <div className="agent-note__actions">

@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { Icon } from '../icons/Icon';
 import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 
@@ -52,7 +51,7 @@ export function ViewportPanel() {
     title = 'No viewport';
     detail = 'Connect the editor process to see the scene here.';
   } else if (viewport.status === 'attached') {
-    status = 'Attached';
+    status = 'Live';
     title = '';
     detail = '';
   } else if (project.kind === 'loading') {
@@ -77,13 +76,17 @@ export function ViewportPanel() {
     detail = viewport.reason;
   }
 
+  const tone = viewport?.status === 'error' ? 'error' : attached ? 'ok' : project.kind === 'loading' ? 'pending' : 'idle';
   return (
     <section className="panel panel--viewport" data-region="viewport" aria-labelledby="viewport-title" tabIndex={-1}>
       <header className="panel__header">
         <h2 id="viewport-title" className="panel__title">
           Viewport
         </h2>
-        <span className={`status-pill${viewport?.status === 'error' ? ' status-pill--error' : attached ? ' status-pill--ok' : ''}`}>
+        <span
+          className={`status-pill status-pill--${tone}`}
+          title={attached ? 'The engine’s view is attached and drawing here.' : undefined}
+        >
           {status}
         </span>
       </header>
@@ -94,10 +97,8 @@ export function ViewportPanel() {
         aria-describedby="viewport-detail"
       >
         {attached ? null : (
-          <div className={`viewport-empty${viewport?.status === 'error' ? ' viewport-empty--error' : ''}`}>
-            <span className="viewport-empty__tile" aria-hidden="true">
-              <Icon name={viewport?.status === 'error' ? 'error' : 'viewport'} size={22} />
-            </span>
+          <div className={`viewport-empty viewport-empty--${tone}`}>
+            <ViewportIllustration tone={tone} />
             <p className="viewport-empty__title">{title}</p>
             <p id="viewport-detail" className="viewport-empty__detail">
               {detail}
@@ -106,6 +107,51 @@ export function ViewportPanel() {
         )}
       </div>
     </section>
+  );
+}
+
+/**
+ * A quiet picture of what the viewport holds: a ground grid running to the horizon
+ * and an outlined cube. Decorative; the title and detail say the state in words.
+ */
+function ViewportIllustration({ tone }: { tone: 'idle' | 'pending' | 'error' | 'ok' }) {
+  const horizon = 44;
+  const vanish = { x: 120, y: 30 };
+  const t = (132 - horizon) / (132 - vanish.y);
+  const rays = Array.from({ length: 13 }, (_, i) => {
+    const x = 120 + (i - 6) * 40;
+    return `M${x} 132L${(x + (vanish.x - x) * t).toFixed(1)} ${horizon}`;
+  }).join('');
+  const rows = [50, 58, 70, 88, 113].map((y) => `M0 ${y}H240`).join('');
+  return (
+    <svg className={`viewport-art viewport-art--${tone}`} viewBox="0 0 240 132" width="240" height="132" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="viewport-art-fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0.28" stopColor="#fff" stopOpacity="0" />
+          <stop offset="1" stopColor="#fff" stopOpacity="1" />
+        </linearGradient>
+        <radialGradient id="viewport-art-edge" cx="0.5" cy="0.7" r="0.62">
+          <stop offset="0.55" stopColor="#fff" stopOpacity="1" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </radialGradient>
+        <mask id="viewport-art-mask">
+          <rect width="240" height="132" fill="url(#viewport-art-fade)" />
+        </mask>
+        <mask id="viewport-art-vignette">
+          <rect width="240" height="132" fill="url(#viewport-art-edge)" />
+        </mask>
+      </defs>
+      <g mask="url(#viewport-art-vignette)">
+        <path className="viewport-art__grid" d={rays + rows} mask="url(#viewport-art-mask)" />
+        <path className="viewport-art__horizon" d={`M0 ${horizon}H240`} />
+      </g>
+      <ellipse className="viewport-art__shadow" cx="122" cy="103" rx="30" ry="6" />
+      <g className="viewport-art__cube">
+        <path d="M104 74L118 66L142 66L128 74Z" className="viewport-art__face viewport-art__face--top" />
+        <path d="M128 74L142 66L142 92L128 100Z" className="viewport-art__face viewport-art__face--side" />
+        <path d="M104 74H128V100H104Z" className="viewport-art__face" />
+      </g>
+    </svg>
   );
 }
 

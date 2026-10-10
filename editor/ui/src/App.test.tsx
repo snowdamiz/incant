@@ -252,7 +252,8 @@ describe('editor shell', () => {
     act(() => opener.focus());
     fireEvent.keyDown(opener, { key: '?' });
     const dialog = screen.getByRole('dialog', { name: 'Keyboard shortcuts' });
-    expect(document.activeElement).toBe(within(dialog).getByRole('button', { name: 'Close' }));
+    // The reference opens on its filter, so typing narrows the list at once.
+    expect(document.activeElement).toBe(within(dialog).getByRole('searchbox', { name: 'Filter shortcuts' }));
     await expectNoAxeViolations(container);
     fireEvent.keyDown(dialog, { key: 'Escape' });
     expect(screen.queryByRole('dialog')).toBeNull();
@@ -312,9 +313,30 @@ describe('editor shell', () => {
     expect(alerts.some((a) => a.textContent?.includes('Lost connection to the editor process'))).toBe(true);
   });
 
-  it('refuses an incompatible bridge protocol', () => {
-    render(<App resolution={{ kind: 'incompatible', protocolVersion: 7 }} />);
-    expect(screen.getByText('Engine bridge version mismatch')).toBeTruthy();
+  it('refuses an incompatible bridge protocol', async () => {
+    const { container } = render(<App resolution={{ kind: 'incompatible', protocolVersion: 7 }} />);
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Engine bridge version mismatch');
+    expect(screen.getByRole('alert').textContent).toContain('the engine offered protocol 7');
+    await expectNoAxeViolations(container);
+  });
+
+  it('lists the valid fixture and account names when a fixture is unknown', () => {
+    render(<App resolution={{ kind: 'bad-fixture', requested: 'nope' }} />);
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Unknown sample fixture');
+    const fixtures = screen.getByRole('list', { name: 'Sample fixtures (fixture=)' });
+    expect(within(fixtures).getAllByRole('listitem').map((item) => item.textContent)).toContain('stress');
+    expect(within(screen.getByRole('list', { name: 'Account states (provider=)' })).getByText('signed-in')).toBeTruthy();
+  });
+
+  it('counts only the problems that exist in the status line, and says when a validated project has none', () => {
+    const { unmount } = renderFixture('sample');
+    const counts = screen.getByRole('button', { name: /errors/ });
+    expect(counts.textContent).toMatch(/6 errors, 2 warnings/);
+    fireEvent.click(counts);
+    expect(screen.getByRole('tab', { name: /^Problems/ }).getAttribute('aria-selected')).toBe('true');
+    unmount();
+    renderFixture('empty');
+    expect(screen.getByRole('button', { name: 'No problems' })).toBeTruthy();
   });
 
   it('offers no composer while the agent cannot run, and gives the reason and the next step', () => {

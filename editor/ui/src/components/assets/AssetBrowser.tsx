@@ -267,7 +267,7 @@ function AssetList({
     groups.forEach((group, g) => group.assets.forEach((asset, r) => map.set(asset.id, { group: g, row: r })));
     return map;
   }, [groups]);
-  const [viewport, attachViewport] = useViewport(listRef, ROW * 4);
+  const [viewport, attachViewport, remeasure] = useViewport(listRef, ROW * 4);
   const overscan = ROW * 8;
   const from = viewport.top - overscan;
   const to = viewport.top + viewport.height + overscan;
@@ -287,7 +287,10 @@ function AssetList({
   useEffect(() => {
     if (active === null) return;
     const spot = where.get(active);
-    if (spot) revealSpan(listRef.current, placed[spot.group]!.rows[spot.row]!, ROW, 4);
+    if (spot) {
+      revealSpan(listRef.current, placed[spot.group]!.rows[spot.row]!, ROW, 4);
+      remeasure();
+    }
     if (pendingFocus.current === active) {
       pendingFocus.current = null;
       document.getElementById(assetRowId(active))?.focus();

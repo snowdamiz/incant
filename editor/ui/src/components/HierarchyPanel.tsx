@@ -10,6 +10,9 @@ import { mountedIndices, revealSpan, rowRange, useViewport } from '../shell/wind
 import { Skeleton, StateView } from './StateView';
 import { AssetBrowser } from './assets/AssetBrowser';
 import { MatchCount } from './MatchCount';
+import { ContextMenu } from './Menu';
+import { unavailableMessage } from '../bridge/resolve';
+import { COPY_ID_UNAVAILABLE, canWriteClipboard, copyText } from '../shell/clipboard';
 import { useAssets } from '../assets/AssetsContext';
 import type { NavigatorView } from '../assets/AssetsContext';
 
@@ -160,7 +163,8 @@ const TOP = 2;
  * scrolling them out of view.
  */
 function Tree({ tree }: { tree: HierarchyTree }) {
-  const { snapshot, selection, select, capabilities, explainUnavailable, run, announce } = useShell();
+  const { snapshot, bridge, selection, select, capabilities, explainUnavailable, run, announce } = useShell();
+  const [menu, setMenu] = useState<{ id: Ulid; at: { x: number; y: number } } | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(() => defaultExpanded(tree));
   const [filter, setFilter] = useState('');
   // Typing stays responsive in a large tree: the filter applies at a lower priority.
@@ -177,7 +181,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
   const problems = useMemo(() => indexProblems(tree, snapshot?.diagnostics ?? []), [tree, snapshot?.diagnostics]);
   const active = selection !== null && indexOf.has(selection) ? selection : (rows[0]?.id ?? null);
   const name = (id: Ulid) => tree.nodes[id]?.name ?? '';
-  const [viewport, attachViewport] = useViewport(listRef, ROW * 4);
+  const [viewport, attachViewport, remeasure] = useViewport(listRef, ROW * 4);
   const [first, last] = rowRange(viewport, rows.length, ROW, 8, TOP);
   const mounted = mountedIndices(first, last, rows.length, [
     active !== null ? (indexOf.get(active) ?? -1) : -1,
@@ -209,6 +213,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     if (revealPending.current === selection || pendingFocus.current === selection) {
       revealPending.current = null;
       revealSpan(listRef.current, TOP + index * ROW, ROW, 4);
+      remeasure();
     }
     if (pendingFocus.current === selection) {
       pendingFocus.current = null;
@@ -221,7 +226,10 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     select(id);
     if (id === selection) {
       const index = indexOf.get(id);
-      if (index !== undefined) revealSpan(listRef.current, TOP + index * ROW, ROW, 4);
+      if (index !== undefined) {
+        revealSpan(listRef.current, TOP + index * ROW, ROW, 4);
+        remeasure();
+      }
       document.getElementById(rowDomId(id))?.focus();
     }
   };
@@ -250,6 +258,12 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     if (event.key === 'F2' && active !== null) {
       event.preventDefault();
       beginRename(active);
+      return;
+    }
+    if ((event.key === 'ContextMenu' || (event.shiftKey && event.key === 'F10')) && active !== null) {
+      event.preventDefault();
+      const rect = document.getElementById(rowDomId(active))?.getBoundingClientRect();
+      setMenu({ id: active, at: { x: (rect?.left ?? 0) + 28, y: (rect?.bottom ?? 0) + 2 } });
       return;
     }
     if ((event.key === 'Delete' || (event.key === 'Backspace' && mod)) && active !== null) {
@@ -364,6 +378,11 @@ function Tree({ tree }: { tree: HierarchyTree }) {
                   onActivate={() => moveTo(row.id)}
                   onToggle={() => toggle(row.id, !row.expanded)}
                   onRename={() => beginRename(row.id)}
+                  onMenu={(at) => {
+                    // Select without moving focus: the menu takes focus, and returns it on close.
+                    select(row.id);
+                    setMenu({ id: row.id, at });
+                  }}
                   onRenameDone={async (value) => {
                     setRenaming(null);
                     const trimmed = value.trim();
@@ -379,6 +398,45 @@ function Tree({ tree }: { tree: HierarchyTree }) {
           </div>
         </div>
       )}
+      {menu ? (
+        <ContextMenu
+          label={`Actions for ${name(menu.id)}`}
+          at={menu.at}
+          onClose={(restore) => {
+            const id = menu.id;
+            setMenu(null);
+            if (restore) document.getElementById(rowDomId(id))?.focus();
+          }}
+          onUnavailable={announce}
+          items={[
+            {
+              id: 'rename',
+              label: 'Rename',
+              icon: 'pencil',
+              shortcut: 'F2',
+              unavailable: capabilities.has('entity.rename') ? undefined : unavailableMessage('entity.rename', bridge),
+              onSelect: () => beginRename(menu.id),
+            },
+            {
+              id: 'copy-id',
+              label: 'Copy ID',
+              icon: 'copy',
+              // Without a clipboard the item says so instead of doing nothing.
+              unavailable: canWriteClipboard() ? undefined : COPY_ID_UNAVAILABLE,
+              onSelect: () => void copyText(menu.id, 'Entity ID', announce),
+            },
+            {
+              id: 'delete',
+              label: 'Delete',
+              icon: 'trash',
+              shortcut: 'Del',
+              danger: true,
+              unavailable: capabilities.has('entity.delete') ? undefined : unavailableMessage('entity.delete', bridge),
+              onSelect: () => void run({ type: 'entity.delete', entity: menu.id }),
+            },
+          ]}
+        />
+      ) : null}
     </>
   );
 }
@@ -407,6 +465,7 @@ function TreeRow({
   onActivate,
   onToggle,
   onRename,
+  onMenu,
   onRenameDone,
 }: {
   row: Row;
@@ -420,6 +479,8 @@ function TreeRow({
   onActivate: () => void;
   onToggle: () => void;
   onRename: () => void;
+  /** Opens the row's context menu at viewport coordinates. */
+  onMenu: (at: { x: number; y: number }) => void;
   onRenameDone: (value: string) => void;
 }) {
   const node = tree.nodes[row.id];
@@ -430,7 +491,7 @@ function TreeRow({
     <div
       id={rowDomId(row.id)}
       role="treeitem"
-      className={`tree-row${selected ? ' is-selected' : ''}${row.ancestorOfMatch ? ' is-context' : ''}`}
+      className={`tree-row${selected ? ' is-selected' : ''}${row.ancestorOfMatch ? ' is-context' : ''}${node.kind === 'scene' && row.depth === 1 ? ' is-scene' : ''}`}
       aria-level={row.depth}
       aria-posinset={row.posinset}
       aria-setsize={row.setsize}
@@ -442,6 +503,10 @@ function TreeRow({
       data-depth={row.depth}
       onClick={onActivate}
       onDoubleClick={onRename}
+      onContextMenu={(event) => {
+        event.preventDefault();
+        onMenu({ x: event.clientX, y: event.clientY });
+      }}
     >
       {row.depth > 1 ? (
         <span className="tree-row__guides" aria-hidden="true" style={{ width: `calc(${row.depth - 1} * var(--indent))` }} />

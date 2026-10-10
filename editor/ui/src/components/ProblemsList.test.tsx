@@ -37,7 +37,10 @@ describe('Problems rows', () => {
       },
     ]);
     render(<App resolution={{ kind: 'bridge', bridge }} />);
-    const rows = within(screen.getByRole('list', { name: 'Problems' })).getAllByRole('listitem');
+    const list = screen.getByRole('list', { name: 'Problems' });
+    // Project-level problems form their own group.
+    expect(list.querySelector('.problems__heading')?.textContent).toContain('Project');
+    const rows = [...list.querySelectorAll<HTMLElement>('.problems__item')];
 
     // The precise error, including line and column, is the row's own text, not a tooltip.
     const first = rows[0]!;
@@ -73,9 +76,13 @@ describe('Problems rows', () => {
       ];
     });
     render(<App resolution={{ kind: 'bridge', bridge }} />);
-    const button = within(screen.getByRole('list', { name: 'Problems' })).getByRole('button');
+    const list = screen.getByRole('list', { name: 'Problems' });
+    const button = within(list).getByRole('button');
     expect(button.textContent).toContain('warning: Intensity is negative and is clamped to 0 at line 3 column 18');
-    expect(button.querySelector('.list__meta')!.textContent).toBe(`${name} · light · intensity`);
+    // The entity heads its group once; each row still names it for assistive tech.
+    expect(list.querySelector('.problems__heading')?.textContent).toContain(name);
+    expect(button.textContent).toContain(`, ${name}`);
+    expect(button.querySelector('.list__meta')!.textContent).toBe('light · intensity');
 
     fireEvent.click(button);
     expect(screen.getByRole('treeitem', { selected: true }).textContent).toContain(name);

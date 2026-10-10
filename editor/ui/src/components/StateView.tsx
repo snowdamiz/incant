@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import type { IconName } from '../icons/Icon';
 import { Icon } from '../icons/Icon';
 
-type Tone = 'neutral' | 'error' | 'warning';
+type Tone = 'neutral' | 'error' | 'warning' | 'success';
 
 /** Shared empty / error presentation for panels. Loading uses `Skeleton` instead. */
 export function StateView({
@@ -31,7 +31,7 @@ export function StateView({
 }) {
   return (
     <div className={`state-view state-view--${tone}${compact ? ' state-view--compact' : ''}`} role={alert ? 'alert' : undefined}>
-      <span className="state-view__tile" aria-hidden="true">
+      <span className="state-view__badge" aria-hidden="true">
         {spinner ? <span className="spinner" /> : <Icon name={icon} size={compact ? 16 : 20} className="state-view__icon" />}
       </span>
       <p className="state-view__title">{title}</p>
@@ -41,18 +41,16 @@ export function StateView({
   );
 }
 
-/** Loading placeholder rows. Announces once via aria-busy on the owning region. */
+/** Loading placeholder rows shaped like tree rows: an icon and a name, at varied depths. */
 export function Skeleton({ rows = 8, label }: { rows?: number; label: string }) {
   return (
     <div className="skeleton" role="status" aria-label={label}>
       <span className="visually-hidden">{label}</span>
       {Array.from({ length: rows }, (_, index) => (
-        <span
-          key={index}
-          className="skeleton__row"
-          aria-hidden="true"
-          style={{ marginInlineStart: `${(index % 3) * 16}px`, width: `${70 - (index % 4) * 12}%` }}
-        />
+        <span key={index} className="skeleton__line" aria-hidden="true" style={{ paddingInlineStart: `${(index % 3) * 14}px` }}>
+          <span className="skeleton__icon" />
+          <span className="skeleton__row" style={{ width: `${68 - (index % 4) * 11}%` }} />
+        </span>
       ))}
     </div>
   );

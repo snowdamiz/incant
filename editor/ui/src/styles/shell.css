@@ -17,11 +17,18 @@ html.native-viewport .panel--viewport {
   background: transparent;
 }
 
+/* The window itself never scrolls: not for scrollIntoView, focus or find-in-page. The app
+   contains its absolutely positioned descendants (visually hidden text inside long panels)
+   and clips them, so they cannot extend the document past the window. Each panel scrolls
+   its own content. `clip` where supported; `hidden` on older WebKit. */
 .app {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   min-width: 960px;
+  overflow: hidden;
+  overflow: clip;
   background: var(--color-bg-app);
 }
 
@@ -112,7 +119,7 @@ html.native-viewport .panel--viewport {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
   color: var(--color-text);
 }
@@ -120,6 +127,23 @@ html.native-viewport .panel--viewport {
 /* Opening or failed: the label is a state, not a project name. */
 .titlebar__project.is-pending {
   color: var(--color-text-muted);
+  font-weight: var(--weight-medium);
+}
+
+/* "Project / Scene": the open scene, quieter than the project. */
+.titlebar__scene {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.titlebar__slash {
+  margin-right: var(--space-3);
+  color: var(--color-border-control);
 }
 
 .titlebar[data-window-focused='false'] .titlebar__identity,
@@ -134,11 +158,12 @@ html.native-viewport .panel--viewport {
   min-width: var(--space-3);
 }
 
+/* Tool groups are capsules: undo/redo, then the panel layout toggles. */
 .titlebar__tools {
   flex: none;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
   margin: 0 var(--space-4);
 }
 
@@ -146,13 +171,20 @@ html.native-viewport .panel--viewport {
   display: flex;
   align-items: center;
   gap: var(--space-1);
+  padding: 2px;
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-bg-raised) 55%, var(--color-bg-app));
+  box-shadow: inset 0 0 0 1px var(--color-border);
 }
 
-.titlebar__divider {
-  width: 1px;
-  height: 16px;
-  margin: 0 var(--space-2);
-  background: var(--color-border-strong);
+.titlebar__group .tool-button {
+  width: 28px;
+  height: 26px;
+  border-radius: var(--radius);
+}
+
+.titlebar__help {
+  width: 30px;
 }
 
 .fixture-tag {
@@ -170,15 +202,14 @@ html.native-viewport .panel--viewport {
   cursor: help;
 }
 
-/* Shown panels are bright; hidden ones recede and gain a faint well, so the state reads
-   from shape as well as colour without filling every button in the cluster. */
+/* A shown panel's toggle is filled, like a pressed segment; a hidden one recedes. */
 .tool-button--toggle[aria-pressed='true'] {
+  background: var(--color-bg-hover);
   color: var(--color-text);
 }
 
 .tool-button--toggle[aria-pressed='false'] {
   color: var(--color-text-subtle);
-  box-shadow: inset 0 0 0 1px var(--color-border-strong);
 }
 
 /* Windows/Linux caption buttons (only when the host advertises them). */
@@ -221,18 +252,23 @@ html.native-viewport .panel--viewport {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  height: 26px;
-  max-width: 260px;
-  padding: 0 10px 0 9px;
+  height: 28px;
+  max-width: 280px;
+  padding: 0 11px 0 9px;
   border: 0;
-  border-radius: var(--radius);
-  background: var(--color-bg-raised);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg-raised) 55%, var(--color-bg-app));
+  box-shadow: inset 0 0 0 1px var(--color-border);
   color: var(--color-text-muted);
   font: inherit;
   font-size: var(--text-xs);
   white-space: nowrap;
   cursor: pointer;
   transition: background var(--duration-fast);
+}
+
+.provider-chip:has(.provider-chip__avatar) {
+  padding-left: 4px;
 }
 
 .provider-chip:hover {
@@ -258,9 +294,19 @@ html.native-viewport .panel--viewport {
   box-shadow: inset 0 0 0 1.5px var(--color-text-subtle);
 }
 
-.provider-chip--ok .provider-chip__dot {
-  background: var(--color-success);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 20%, transparent);
+/* A signed-in account: its initial in a circle with a green presence ring. */
+.provider-chip__avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-bg-selected);
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--color-success) 70%, transparent);
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
 }
 
 .provider-chip--pending .provider-chip__dot {
@@ -471,7 +517,54 @@ html.native-viewport .panel--viewport {
 
 .panel__header > .quiet-chip,
 .panel__header > .status-pill {
-  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 9px 0 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg-raised) 70%, var(--color-bg-panel));
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-text-subtle);
+}
+
+.status-pill--ok {
+  color: var(--color-success);
+}
+
+.status-pill--ok::before {
+  background: var(--color-success);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 22%, transparent);
+}
+
+.status-pill--pending::before {
+  background: var(--color-warning);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.status-pill--error {
+  color: var(--color-danger);
+}
+
+.status-pill--error::before {
+  background: var(--color-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-pill--pending::before {
+    animation: none;
+  }
 }
 
 .panel__toolbar {
@@ -483,6 +576,7 @@ html.native-viewport .panel--viewport {
 }
 
 .panel__scroll {
+  position: relative; /* hidden text scrolls with the panel, not the window */
   flex: 1;
   min-height: 0;
   overflow: auto;
@@ -495,9 +589,9 @@ html.native-viewport .panel--viewport {
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   height: var(--control-height);
-  padding: 0 var(--space-3);
+  padding: 0 var(--space-3) 0 9px;
   border: 1px solid transparent;
   border-radius: var(--radius);
   background: var(--color-bg-raised);
@@ -550,43 +644,6 @@ html.native-viewport .panel--viewport {
   background: var(--color-bg-panel);
 }
 
-.status-pill {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 22px;
-  padding: 0 8px;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-raised);
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
-}
-
-.status-pill::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-text-subtle);
-}
-
-.status-pill--ok {
-  color: var(--color-success);
-}
-
-.status-pill--ok::before {
-  background: var(--color-success);
-}
-
-.status-pill--error {
-  color: var(--color-danger);
-}
-
-.status-pill--error::before {
-  background: var(--color-danger);
-}
-
 .viewport-host {
   flex: 1;
   min-height: 0;
@@ -615,27 +672,67 @@ html.native-viewport .panel--viewport {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
-  max-width: 44ch;
+  gap: var(--space-2);
+  max-width: 46ch;
   padding: var(--space-6);
   text-align: center;
   color: var(--color-text-subtle);
 }
 
-.viewport-empty__tile {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  margin-bottom: var(--space-2);
-  border-radius: 12px;
-  background: var(--color-bg-raised);
-  color: var(--color-text-muted);
+/* The empty viewport's picture: a ground grid to the horizon and an outlined cube. */
+.viewport-art {
+  display: block;
+  width: 240px;
+  height: 132px;
+  margin-bottom: var(--space-3);
 }
 
-.viewport-empty--error .viewport-empty__tile {
-  background: var(--color-danger-bg);
-  color: var(--color-danger);
+.viewport-art__grid {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.12);
+  stroke-width: 1;
+}
+
+.viewport-art__horizon {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.16);
+  stroke-width: 1;
+}
+
+.viewport-art__shadow {
+  fill: rgb(0 0 0 / 0.5);
+}
+
+.viewport-art__face {
+  fill: rgb(255 255 255 / 0.035);
+  stroke: rgb(255 255 255 / 0.42);
+  stroke-width: 1.25;
+  stroke-linejoin: round;
+}
+
+.viewport-art__face--top {
+  fill: rgb(255 255 255 / 0.09);
+}
+
+.viewport-art__face--side {
+  fill: rgb(255 255 255 / 0.015);
+}
+
+/* Opening: the cube takes the accent while the project loads. */
+.viewport-art--pending .viewport-art__face {
+  fill: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  stroke: color-mix(in srgb, var(--color-accent) 80%, transparent);
+}
+
+.viewport-art--pending .viewport-art__face--top {
+  fill: color-mix(in srgb, var(--color-accent) 18%, transparent);
+}
+
+/* An error: the cube is drawn dashed in the danger colour. */
+.viewport-art--error .viewport-art__face {
+  fill: color-mix(in srgb, var(--color-danger) 6%, transparent);
+  stroke: color-mix(in srgb, var(--color-danger) 85%, transparent);
+  stroke-dasharray: 3 3;
 }
 
 .viewport-empty__title {
@@ -657,9 +754,9 @@ html.native-viewport .panel--viewport {
   flex: none;
   display: flex;
   align-items: center;
-  gap: var(--space-5);
+  gap: var(--space-4);
   height: var(--statusbar-height);
-  padding: 0 var(--space-5);
+  padding: 0 var(--space-3) 0 var(--space-4);
   border-top: 1px solid var(--color-border);
   background: var(--color-bg-app);
   color: var(--color-text-subtle);
@@ -671,7 +768,7 @@ html.native-viewport .panel--viewport {
 .statusbar__item {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .statusbar__conn {
@@ -687,6 +784,7 @@ html.native-viewport .panel--viewport {
 
 .statusbar__conn--ok .statusbar__dot {
   background: var(--color-success);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 18%, transparent);
 }
 .statusbar__conn--fixture .statusbar__dot {
   background: var(--color-fixture);
@@ -696,6 +794,46 @@ html.native-viewport .panel--viewport {
 }
 .statusbar__conn--error .statusbar__dot {
   background: var(--color-danger);
+}
+
+/* Problem counts open the Problems list. */
+.statusbar__problems {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.statusbar__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.statusbar__count + .statusbar__count {
+  margin-left: 6px;
+}
+
+.sev--clear {
+  color: var(--color-success);
+}
+
+.statusbar__problems:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.statusbar__problems:focus-visible,
+.statusbar__problems[data-focus-visible] {
+  outline-offset: 0;
 }
 
 .statusbar__message {
@@ -709,12 +847,21 @@ html.native-viewport .panel--viewport {
 .statusbar__hint {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--space-4);
+}
+
+.statusbar__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .statusbar__hint kbd {
-  min-width: 16px;
+  min-width: 18px;
   padding: 0 4px;
-  line-height: 15px;
-  font-size: 11px;
+  border-radius: 4px;
+  background: var(--color-bg-raised);
+  box-shadow: inset 0 -1px 0 var(--color-border-strong);
+  line-height: 16px;
+  font-size: var(--text-xs);
 }

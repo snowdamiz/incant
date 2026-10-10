@@ -96,6 +96,7 @@
 }
 
 .list {
+  position: relative;
   flex: 1;
   min-height: 0;
   margin: 0;
@@ -147,6 +148,210 @@
   font-size: var(--text-xs);
 }
 
+/* ---- Shared dock toolbar: filters and actions above a list ---- */
+
+.dock-view {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dock-toolbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dock-toolbar .panel__meta {
+  margin-left: auto;
+}
+
+.dock-toolbar__group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---- Pager: one page of a long list, and where it sits in the whole ---- */
+
+.pager {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.dock-toolbar .panel__meta + .pager {
+  margin-left: var(--space-4);
+}
+
+.pager__range {
+  margin-right: 6px;
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pager__of {
+  color: var(--color-text-subtle);
+}
+
+/* Back to the newest messages or to Now: the one accent-tinted control in the strip. */
+.pager__anchor {
+  height: 22px;
+  margin-right: var(--space-3);
+  padding: 0 9px;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  color: var(--color-accent-strong);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}
+
+.pager__anchor:hover {
+  background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+.pager__anchor:focus-visible,
+.pager__anchor[data-focus-visible] {
+  outline-offset: 1px;
+}
+
+/* A filter that is on is filled; off, it recedes to an outline. Text and count, not colour,
+   carry the state. */
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 8px 0 7px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--color-border-strong);
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.filter-chip:hover {
+  color: var(--color-text);
+}
+
+.filter-chip[aria-pressed='true'] {
+  background: var(--color-bg-raised);
+  box-shadow: inset 0 0 0 1px var(--color-border-strong);
+  color: var(--color-text-soft);
+}
+
+.filter-chip .icon {
+  color: var(--color-text-subtle);
+}
+
+.filter-chip[aria-pressed='true'].filter-chip--error .icon {
+  color: var(--color-danger);
+}
+
+.filter-chip[aria-pressed='true'].filter-chip--warning .icon,
+.filter-chip[aria-pressed='true'].filter-chip--warn .icon {
+  color: var(--color-warning);
+}
+
+.filter-chip[aria-pressed='true'].filter-chip--info .icon {
+  color: var(--color-info);
+}
+
+.filter-chip__count {
+  min-width: 14px;
+  color: var(--color-text-subtle);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.filter-chip:focus-visible,
+.filter-chip[data-focus-visible] {
+  outline-offset: 1px;
+}
+
+/* ---- Problems: grouped by entity ---- */
+
+.problems {
+  padding-top: var(--space-1);
+}
+
+.problems__group + .problems__group {
+  margin-top: var(--space-2);
+}
+
+.problems__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 28px;
+  margin: 0 var(--space-3);
+  padding: 0 10px;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.problems__heading-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A group that began on an earlier page. */
+.problems__continued {
+  flex: none;
+  padding: 0 7px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--color-border-strong);
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  line-height: 18px;
+}
+
+/* "312 more problems on Crate 03 on the next pages": the group goes on. */
+.problems__later {
+  margin: 2px var(--space-3) 0;
+  padding: 4px 10px 4px 32px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+}
+
+.problems__heading-counts {
+  display: inline-flex;
+  gap: var(--space-3);
+  margin-left: auto;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.problems__heading-counts > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.problems__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 /* Problems rows wrap: the precise error (line, column) must stay readable at the minimum
    window width. The location stays in its own right-hand column while it fits beside at
    least half the row; a longer path drops below the message and uses the full width.
@@ -155,6 +360,7 @@
   align-items: flex-start;
   /* 4 + 20 + 4 keeps a one-line row at the shared 28px list height. */
   padding-block: 4px;
+  padding-inline-start: 32px;
 }
 
 .problems__row > .icon {
@@ -185,67 +391,12 @@
   line-height: 18px;
 }
 
-/* "Crate 03 · Collider /shape/half_extents/1": the entity reads as a name, the place
-   inside it as a quiet code path. */
-.problems__entity {
-  color: var(--color-text-muted);
-  font-family: var(--font-ui);
-}
-
+/* "Collider · /shape/half_extents/1": where the problem is, as a quiet code path. */
 .problems__where {
   font-family: var(--font-mono);
 }
 
-.problems__sep {
-  margin: 0 6px;
-  color: var(--color-text-subtle);
-}
-
-.console,
-.history {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.console__filters,
-.history__toolbar {
-  flex: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: var(--space-3) var(--space-4) var(--space-1);
-}
-
-.toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 24px;
-  padding: 0 9px;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius);
-  background: transparent;
-  color: var(--color-text-subtle);
-  font-size: var(--text-xs);
-  cursor: pointer;
-}
-
-.toggle:hover {
-  color: var(--color-text);
-}
-
-.toggle[aria-pressed='true'] {
-  border-color: var(--color-border-control);
-  background: var(--color-bg-raised);
-  color: var(--color-text);
-}
-
-.toggle__count {
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-subtle);
-}
+/* ---- Console: a table of messages ---- */
 
 .console__log {
   flex: 1;
@@ -255,7 +406,10 @@
 }
 
 .console__row {
+  display: grid;
+  grid-template-columns: 64px 52px minmax(56px, max-content) minmax(0, 1fr);
   align-items: baseline;
+  gap: var(--space-3);
 }
 
 .console__row .list__main {
@@ -263,32 +417,105 @@
   overflow-wrap: anywhere;
 }
 
-.console__level {
-  flex: none;
-  width: 40px;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
+.console__time {
   color: var(--color-text-subtle);
 }
 
+.console__level {
+  justify-self: start;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-raised);
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
 .console__level--error {
+  background: var(--color-danger-bg);
   color: var(--color-danger);
 }
 .console__level--warn {
+  background: var(--color-warning-bg);
   color: var(--color-warning);
 }
 .console__level--info {
+  background: var(--color-info-bg);
   color: var(--color-info);
 }
 
 .console__row--error {
-  background: color-mix(in srgb, var(--color-danger-bg) 70%, transparent);
+  background: color-mix(in srgb, var(--color-danger-bg) 55%, transparent);
 }
 
 .console__source {
-  flex: none;
-  min-width: 64px;
   color: var(--color-text-muted);
+}
+
+/* ---- History: a timeline ---- */
+
+.timeline {
+  position: relative;
+  padding-top: var(--space-2);
+}
+
+/* Dot, description, origin chip, detail (model or script), time. The time column has a
+   fixed width and the last place in every row, so times line up down the list. */
+.timeline__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr) auto auto 8.5ch;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* The line through every dot. */
+.timeline__row::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-border-strong);
+}
+
+.timeline__row:first-of-type::before {
+  top: 50%;
+}
+
+.timeline__dot {
+  position: relative;
+  z-index: 1;
+  width: 9px;
+  height: 9px;
+  margin-left: 2px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 3px var(--color-bg-panel);
+}
+
+.origin-row--user .timeline__dot {
+  color: var(--color-origin-user);
+}
+.origin-row--agent .timeline__dot {
+  color: var(--color-origin-agent);
+}
+.origin-row--script .timeline__dot {
+  color: var(--color-origin-script);
+}
+.origin-row--import .timeline__dot {
+  color: var(--color-origin-import);
+}
+
+.history__row.is-undone .timeline__dot {
+  background: transparent;
+  box-shadow:
+    inset 0 0 0 1.5px currentColor,
+    0 0 0 3px var(--color-bg-panel);
 }
 
 .history__row.is-undone .list__main {
@@ -297,32 +524,75 @@
   text-decoration-color: var(--color-text-subtle);
 }
 
+/* " (undone)" keeps its leading space in the text, so it is read apart from the description;
+   inline-block keeps the strike-through on the description only. */
 .history__undone {
-  text-decoration: none;
   display: inline-block;
-  margin-left: 0.35em;
+  white-space: pre;
+  text-decoration: none;
 }
 
-.history__toolbar .panel__meta {
-  margin-left: auto;
+.timeline__detail {
+  grid-column: 4;
+  max-width: 22ch;
+}
+
+.timeline__time {
+  grid-column: 5;
+  max-width: none;
+  overflow: visible;
+  text-align: right;
+}
+
+.timeline:focus-visible,
+.timeline[data-focus-visible] {
+  outline-offset: -2px;
+}
+
+/* "Now": the current position between applied and undone edits. */
+.timeline__now {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 22px;
+  margin: 0 var(--space-3);
+  padding-left: 30px;
+}
+
+.timeline__now::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  right: 10px;
+  top: 50%;
+  height: 1px;
+  background: color-mix(in srgb, var(--color-accent) 55%, transparent);
+}
+
+.timeline__now-label {
+  position: relative;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--color-bg-panel);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 55%, transparent);
+  color: var(--color-accent-strong);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .origin {
   flex: none;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  width: 64px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 12%, transparent);
   font-size: var(--text-xs);
   font-weight: var(--weight-medium);
-}
-
-.origin::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
 }
 
 .origin--user {

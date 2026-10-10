@@ -1,6 +1,7 @@
 /* Hierarchy tree and the entity-kind tints shared by every panel. */
 
 .tree {
+  position: relative;
   flex: 1;
   min-height: 0;
   overflow: auto;
@@ -39,6 +40,28 @@
 .tree-row.is-selected {
   background: var(--color-bg-selected);
   color: var(--color-text);
+}
+
+/* The selection pill carries a short accent edge, so it reads at a glance in a long tree. */
+.tree-row.is-selected::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  bottom: 7px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--color-accent);
+}
+
+/* A scene is the root of its tree: set like a heading. */
+.tree-row.is-scene {
+  color: var(--color-text);
+}
+
+.tree-row.is-scene .tree-row__name {
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
 }
 
 .tree-row.is-selected .tree-row__name {

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import type { RefCallback, RefObject } from 'react';
 
 /**
@@ -29,19 +29,33 @@ export interface Viewport {
  * Attach the returned callback ref to the container. It keeps `ref.current` available
  * for imperative scrolling and follows DOM replacement even when the owner stays
  * mounted (for example, a filter temporarily has no results).
+ *
+ * Scroll and resize notifications are coalesced into one animation frame. WebKit
+ * pauses or throttles animation frames for views that are hidden, occluded or not
+ * frontmost, so a timer also runs the same measurement if the frame has not come
+ * within FRAME_FALLBACK_MS. After moving the scroll position itself (revealSpan),
+ * a caller runs the returned `remeasure` so the mounted rows follow at once rather
+ * than waiting for either notification.
  */
+export const FRAME_FALLBACK_MS = 100;
+
 export function useViewport(
   ref: RefObject<HTMLElement | null>,
   step: number,
   fallback: { readonly height: number; readonly width: number } = { height: FALLBACK_HEIGHT, width: FALLBACK_WIDTH },
-): readonly [Viewport, RefCallback<HTMLElement>] {
+): readonly [Viewport, RefCallback<HTMLElement>, () => void] {
   const [viewport, setViewport] = useState<Viewport>({ top: 0, height: fallback.height, left: 0, width: fallback.width });
+  const measureNow = useRef<() => void>(() => undefined);
   const attach = useCallback<RefCallback<HTMLElement>>((element) => {
     ref.current = element;
     if (!element) return;
     let frame = 0;
+    let timer = 0;
     const measure = () => {
+      if (frame !== 0) cancelAnimationFrame(frame);
+      if (timer !== 0) window.clearTimeout(timer);
       frame = 0;
+      timer = 0;
       const top = Math.max(0, Math.floor(element.scrollTop / step) * step);
       const height = element.clientHeight || fallback.height;
       const left = Math.max(0, Math.floor(element.scrollLeft / step) * step);
@@ -51,20 +65,26 @@ export function useViewport(
       );
     };
     const schedule = () => {
-      if (frame === 0) frame = requestAnimationFrame(measure);
+      if (frame !== 0 || timer !== 0) return;
+      frame = requestAnimationFrame(measure);
+      timer = window.setTimeout(measure, FRAME_FALLBACK_MS);
     };
+    measureNow.current = measure;
     measure();
     element.addEventListener('scroll', schedule, { passive: true });
     const observer = new ResizeObserver(schedule);
     observer.observe(element);
     return () => {
       ref.current = null;
+      measureNow.current = () => undefined;
       element.removeEventListener('scroll', schedule);
       observer.disconnect();
       if (frame !== 0) cancelAnimationFrame(frame);
+      if (timer !== 0) window.clearTimeout(timer);
     };
   }, [ref, step, fallback.height, fallback.width]);
-  return [viewport, attach];
+  const remeasure = useCallback(() => measureNow.current(), []);
+  return [viewport, attach, remeasure];
 }
 
 /** First and last (exclusive) index of fixed-height rows to mount for a viewport. */

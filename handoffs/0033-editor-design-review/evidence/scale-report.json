@@ -1,6 +1,6 @@
 {
-  "set": "r3",
-  "generated": "2026-10-10T18:13:39.742Z",
+  "set": "r4",
+  "generated": "2026-10-10T20:38:59.144Z",
   "browser": "Chrome 155.0.8059.40 (headless, playwright-core)",
   "machine": {
     "cpu": "Apple M5 Pro",
@@ -19,96 +19,97 @@
           "options": 0,
           "inputs": 1,
           "tableCells": 0,
-          "domNodes": 428
+          "domNodes": 445
         },
         "filterAll": {
-          "ms": 47.4,
+          "ms": 76.1,
           "counts": {
             "treeitems": 34,
             "options": 0,
             "inputs": 1,
             "tableCells": 0,
-            "domNodes": 367
+            "domNodes": 384
           }
         },
         "filterGroup": {
-          "ms": 9.1,
+          "ms": 7.4,
           "counts": {
             "treeitems": 34,
             "options": 0,
             "inputs": 1,
             "tableCells": 0,
-            "domNodes": 364
+            "domNodes": 381
           }
         },
         "arrowDown": {
-          "medianMs": 0.7,
-          "maxMs": 27.2,
+          "medianMs": 0.9,
+          "maxMs": 26.2,
           "samples": 30
         },
         "end": {
-          "ms": 0.7,
+          "ms": 0.9,
           "focused": "Entity 050.1000",
           "counts": {
-            "treeitems": 35,
+            "treeitems": 39,
             "options": 0,
             "inputs": 11,
             "tableCells": 0,
-            "domNodes": 436
+            "domNodes": 478
           }
         },
         "scroll": {
-          "ms": 25.7,
+          "ms": 24.7,
           "counts": {
             "treeitems": 44,
             "options": 0,
             "inputs": 11,
             "tableCells": 0,
-            "domNodes": 487
+            "domNodes": 505
           }
         },
         "assets": {
-          "openMs": 14.7,
-          "endMs": 4.3,
+          "openMs": 11.6,
+          "endMs": 4.6,
           "counts": {
             "treeitems": 0,
-            "options": 35,
+            "options": 37,
             "inputs": 4,
             "tableCells": 0,
-            "domNodes": 419
+            "domNodes": 442
           }
         },
         "longTasksMs": [
-          113
+          108,
+          50
         ],
         "pageErrors": []
       },
       "renameDouble": {
-        "loadToTreeMs": 138,
+        "loadToTreeMs": 156,
         "rename": {
-          "totalMedianMs": 48.5,
-          "totalMaxMs": 49.9,
-          "doubleSnapshotBuildMedianMs": 38.3,
+          "totalMedianMs": 57.6,
+          "totalMaxMs": 59.6,
+          "doubleSnapshotBuildMedianMs": 46,
           "samples": [
             {
-              "totalMs": 49.2,
-              "snapshotBuildMs": 39.1
+              "totalMs": 57.9,
+              "snapshotBuildMs": 46
             },
             {
-              "totalMs": 49.9,
-              "snapshotBuildMs": 39.4
+              "totalMs": 59.6,
+              "snapshotBuildMs": 48.9
             },
             {
-              "totalMs": 48,
-              "snapshotBuildMs": 38.3
+              "totalMs": 57.6,
+              "snapshotBuildMs": 46
             },
             {
-              "totalMs": 48.5,
-              "snapshotBuildMs": 38
+              "totalMs": 56.3,
+              "snapshotBuildMs": 44.6
             },
             {
-              "totalMs": 48.4,
-              "snapshotBuildMs": 38.2
+              "totalMs": 57,
+              "snapshotBuildMs": 45.6
             }
           ]
         },
@@ -117,32 +118,38 @@
           "options": 0,
           "inputs": 1,
           "tableCells": 0,
-          "domNodes": 449
+          "domNodes": 466
         },
-        "longTasksMs": [],
+        "longTasksMs": [
+          57,
+          58,
+          56,
+          54,
+          55
+        ],
         "pageErrors": []
       },
       "navigationGrid": {
-        "selectMs": 11.8,
+        "selectMs": 13.4,
         "inspectorInputs": 2,
         "showValues": {
-          "ms": 3.4,
+          "ms": 4.7,
           "counts": {
             "treeitems": 23,
             "options": 0,
             "inputs": 3,
-            "tableCells": 345,
-            "domNodes": 821
+            "tableCells": 360,
+            "domNodes": 917
           }
         },
         "scrollTable": {
-          "ms": 43.1,
+          "ms": 43.5,
           "counts": {
             "treeitems": 23,
             "options": 0,
             "inputs": 3,
             "tableCells": 616,
-            "domNodes": 1128
+            "domNodes": 1209
           }
         },
         "longTasksMs": [],
@@ -152,104 +159,104 @@
     {
       "cpuThrottle": 4,
       "stressFixture": {
-        "loadToTreeMs": 678,
+        "loadToTreeMs": 808,
         "initialCounts": {
           "treeitems": 34,
           "options": 0,
           "inputs": 1,
           "tableCells": 0,
-          "domNodes": 428
+          "domNodes": 445
         },
         "filterAll": {
-          "ms": 210.2,
+          "ms": 249.7,
           "counts": {
             "treeitems": 34,
             "options": 0,
             "inputs": 1,
             "tableCells": 0,
-            "domNodes": 367
+            "domNodes": 384
           }
         },
         "filterGroup": {
-          "ms": 27.9,
+          "ms": 35.3,
           "counts": {
             "treeitems": 34,
             "options": 0,
             "inputs": 1,
             "tableCells": 0,
-            "domNodes": 364
+            "domNodes": 381
           }
         },
         "arrowDown": {
-          "medianMs": 3,
-          "maxMs": 15.2,
+          "medianMs": 4.6,
+          "maxMs": 18.6,
           "samples": 30
         },
         "end": {
-          "ms": 3.1,
+          "ms": 6.8,
           "focused": "Entity 050.1000",
           "counts": {
             "treeitems": 39,
             "options": 0,
             "inputs": 11,
             "tableCells": 0,
-            "domNodes": 460
+            "domNodes": 478
           }
         },
         "scroll": {
-          "ms": 32.4,
+          "ms": 33.1,
           "counts": {
             "treeitems": 44,
             "options": 0,
             "inputs": 11,
             "tableCells": 0,
-            "domNodes": 487
+            "domNodes": 505
           }
         },
         "assets": {
-          "openMs": 38.6,
-          "endMs": 13.8,
+          "openMs": 47.6,
+          "endMs": 25.1,
           "counts": {
             "treeitems": 0,
-            "options": 35,
+            "options": 37,
             "inputs": 4,
             "tableCells": 0,
-            "domNodes": 419
+            "domNodes": 442
           }
         },
         "longTasksMs": [
-          392,
-          127,
-          189
+          467,
+          209,
+          227
         ],
         "pageErrors": []
       },
       "renameDouble": {
-        "loadToTreeMs": 514,
+        "loadToTreeMs": 641,
         "rename": {
-          "totalMedianMs": 205.3,
-          "totalMaxMs": 208.1,
-          "doubleSnapshotBuildMedianMs": 162.2,
+          "totalMedianMs": 275.2,
+          "totalMaxMs": 285.1,
+          "doubleSnapshotBuildMedianMs": 228.6,
           "samples": [
             {
-              "totalMs": 205.3,
-              "snapshotBuildMs": 162.2
+              "totalMs": 285.1,
+              "snapshotBuildMs": 233.4
             },
             {
-              "totalMs": 208.1,
-              "snapshotBuildMs": 166.6
+              "totalMs": 279.1,
+              "snapshotBuildMs": 231.5
             },
             {
-              "totalMs": 200.6,
-              "snapshotBuildMs": 161
+              "totalMs": 264.7,
+              "snapshotBuildMs": 215
             },
             {
-              "totalMs": 197,
-              "snapshotBuildMs": 158.7
+              "totalMs": 275.2,
+              "snapshotBuildMs": 228.6
             },
             {
-              "totalMs": 206.1,
-              "snapshotBuildMs": 167.1
+              "totalMs": 266.1,
+              "snapshotBuildMs": 217.4
             }
           ]
         },
@@ -258,42 +265,45 @@
           "options": 0,
           "inputs": 1,
           "tableCells": 0,
-          "domNodes": 449
+          "domNodes": 466
         },
         "longTasksMs": [
-          111,
-          202,
-          205,
-          197,
-          193,
-          202
+          191,
+          281,
+          275,
+          258,
+          271,
+          261
         ],
         "pageErrors": []
       },
       "navigationGrid": {
-        "selectMs": 47.9,
+        "selectMs": 60.5,
         "inspectorInputs": 2,
         "showValues": {
-          "ms": 14.2,
+          "ms": 17.9,
           "counts": {
             "treeitems": 23,
             "options": 0,
             "inputs": 3,
-            "tableCells": 345,
-            "domNodes": 821
+            "tableCells": 360,
+            "domNodes": 917
           }
         },
         "scrollTable": {
-          "ms": 34.8,
+          "ms": 23.3,
           "counts": {
             "treeitems": 23,
             "options": 0,
             "inputs": 3,
             "tableCells": 616,
-            "domNodes": 1128
+            "domNodes": 1209
           }
         },
-        "longTasksMs": [],
+        "longTasksMs": [
+          111,
+          55
+        ],
         "pageErrors": []
       }
     }

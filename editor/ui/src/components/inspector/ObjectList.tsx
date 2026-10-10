@@ -1,7 +1,8 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import type { Diagnostic, FieldSchema } from '../../bridge/contract';
 import { Icon } from '../../icons/Icon';
+import type { IconName } from '../../icons/Icon';
 import { mountedIndices, revealSpan, rowRange, useViewport } from '../../shell/windowing';
 import type { FieldContext } from './FieldView';
 import { FieldView, Notice, ProblemList, depthStyle, fieldDomId, orderedProperties, severityOf } from './FieldView';
@@ -30,6 +31,10 @@ export function isObjectList(schema: FieldSchema): boolean {
  * mounted, plus the selected one. Only the selected item's fields are rendered,
  * below the list, with exact diagnostic paths (`/shape/parts/3/shape/radius`).
  * Items with problems are marked in the list; the first one starts selected.
+ *
+ * The selected item's fields are not boxed: a captioned hairline opens them and
+ * they continue at the list's own depth, so their labels and values line up with
+ * the rest of the component.
  *
  * Presentation only: nothing here validates, reorders or edits. A malformed
  * item stays listed in place and its raw value is shown.
@@ -91,25 +96,43 @@ export function ObjectListView({
   const nameOf: NameOf = (target) => ctx.refs?.(target)?.name ?? null;
   const summaries = value.map((entry, index) => summarize(item, entry, [...path, String(index)], ctx.component, nameOf));
 
-  const [viewport, attachViewport] = useViewport(listRef, ROW * 4);
+  const [viewport, attachViewport, remeasure] = useViewport(listRef, ROW * 4);
   const [first, last] = rowRange(viewport, value.length, ROW, 6, 4);
   const mounted = mountedIndices(first, last, value.length, [current]);
+  const pendingFocus = useRef<number | null>(null);
 
   // A first problem past the visible rows starts scrolled into view, inside the list only.
   useEffect(() => {
     const list = listRef.current;
-    if (list && list.clientHeight > 0) list.scrollTop = Math.max(0, current * ROW + 4 - (list.clientHeight - ROW) / 2);
+    if (list && list.clientHeight > 0) {
+      list.scrollTop = Math.max(0, current * ROW + 4 - (list.clientHeight - ROW) / 2);
+      remeasure();
+    }
     // Mount only: later selection moves focus and reveals the row itself.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // A keyboard move focuses its row once the row is committed (it is always mounted as
+  // the selection). This runs after React's commit, not on an animation frame, so it
+  // also holds where WebKit throttles frames.
+  useLayoutEffect(() => {
+    if (pendingFocus.current !== current) return;
+    pendingFocus.current = null;
+    listRef.current?.querySelector<HTMLElement>(`[data-index="${current}"]`)?.focus();
+  }, [current]);
+
   const focusItem = (index: number) => {
     const next = Math.max(0, Math.min(value.length - 1, index));
-    setSelected({ key: keys[next], index: next });
+    // Scroll first and measure at once, so the rows around the target mount in the
+    // same render as the new selection instead of after a scroll notification.
     revealSpan(listRef.current, next * ROW + 4, ROW);
-    // The selected row is always mounted, so it can take focus at once.
-    requestAnimationFrame(() => listRef.current?.querySelector<HTMLElement>(`[data-index="${next}"]`)?.focus());
-    listRef.current?.querySelector<HTMLElement>(`[data-index="${next}"]`)?.focus();
+    remeasure();
+    if (next === current) {
+      listRef.current?.querySelector<HTMLElement>(`[data-index="${next}"]`)?.focus();
+      return;
+    }
+    pendingFocus.current = next;
+    setSelected({ key: keys[next], index: next });
   };
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     const step: Record<string, number> = { ArrowDown: 1, ArrowUp: -1, PageDown: 5, PageUp: -5 };
@@ -198,7 +221,11 @@ export function ObjectListView({
                       {index + 1}
                     </span>
                     <span className={`object-list__tag${summary.unreadable ? ' is-unreadable' : ''}`} aria-hidden="true">
-                      {summary.unreadable ? <Icon name="warning" size={12} /> : null}
+                      {summary.unreadable ? (
+                        <Icon name="warning" size={12} />
+                      ) : summary.icon ? (
+                        <Icon name={summary.icon} size={12} className="object-list__glyph" />
+                      ) : null}
                       {summary.tag}
                     </span>
                     <span className="object-list__dims mono" aria-hidden="true">
@@ -263,13 +290,10 @@ function ItemDetail({
     return !record || !keys.includes(unescapePointer(key));
   });
   const extra = record ? Object.keys(record).filter((key) => !Object.hasOwn(schema.properties, key)) : [];
-  // The card's padding counts as one indent step, so its value column lines up with the rows above.
-  const depth = (ctx.depth ?? 0) + 1;
-  const inner = { ...ctx, depth };
   return (
-    <div className="object-list__detail" role="group" aria-labelledby={captionId} style={depthStyle(depth)}>
+    <div className="object-list__detail" role="group" aria-labelledby={captionId} style={depthStyle(ctx.depth ?? 0)}>
       <p className="object-list__caption" id={captionId}>
-        <span>
+        <span className="object-list__title">
           {noun} {index + 1} <span className="object-list__of">of {count}</span>
         </span>
         <code className="object-list__path" title={`Document path ${here}`}>
@@ -280,7 +304,7 @@ function ItemDetail({
       {own.length > 0 ? <ProblemList id={messageId} problems={own} here={here} /> : null}
       {record ? (
         keys.map((key) => (
-          <FieldView key={key} name={key} schema={schema.properties[key]!} value={record[key]} path={[...path, key]} ctx={inner} />
+          <FieldView key={key} name={key} schema={schema.properties[key]!} value={record[key]} path={[...path, key]} ctx={ctx} />
         ))
       ) : (
         <Notice value={value}>
@@ -302,6 +326,8 @@ function ItemDetail({
 interface ItemSummary {
   /** Variant tag, or a short mismatch phrase. */
   readonly tag: string;
+  /** Glyph for the variant tag (a collider primitive), when the profile names one. */
+  readonly icon?: IconName | undefined;
   readonly unreadable: boolean;
   /** The variant's values, shown compactly ("½ 0.6 × 0.08 × 0.5 m"). */
   readonly parts: readonly ValuePart[];
@@ -333,7 +359,8 @@ function summarize(schema: ObjectSchema, value: unknown, path: readonly string[]
   }
   const union = schema.properties[unionKey] as UnionSchema;
   const inner = value[unionKey];
-  const noun = (union.title ?? fieldHint(component, pointer([...path, unionKey])).title ?? humanize(unionKey)).toLowerCase();
+  const unionHint = fieldHint(component, pointer([...path, unionKey]));
+  const noun = (union.title ?? unionHint.title ?? humanize(unionKey)).toLowerCase();
   if (!isRecord(inner)) {
     return { tag: `no ${noun}`, unreadable: true, parts: [], raw: safeJson(inner), spoken: `${noun} cannot be shown: ${safeJson(inner)}` };
   }
@@ -346,7 +373,8 @@ function summarize(schema: ObjectSchema, value: unknown, path: readonly string[]
   }
   const variant = objectSchema(union.variants[tag]);
   const parts = variant ? valueParts(variant, inner, [...path, unionKey], component, nameOf, disc) : [];
-  return { tag, unreadable: false, parts, spoken: [tag, spokenParts(parts)].filter(Boolean).join(', ') };
+  const icon = unionHint.variantIcons && Object.hasOwn(unionHint.variantIcons, tag) ? unionHint.variantIcons[tag] : undefined;
+  return { tag, icon, unreadable: false, parts, spoken: [tag, spokenParts(parts)].filter(Boolean).join(', ') };
 }
 
 interface ValuePart {

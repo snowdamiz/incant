@@ -2,390 +2,433 @@
 
 ## Status
 
-Browser review complete. Native review is pending Astra's integration and captures.
+Browser review of revision 4 ("studio") is complete. Native review is pending Astra's
+rebuild.
 
-- **Inspector redesign: done in the browser.** The selection's identity moves into the
-  panel's header line, components get compact sticky headers, and rows align across
-  nesting levels. No numeric value is clipped at 1440×874, at 1000×650, or with the
-  Inspector at its 280 px minimum.
-- **Whole-app pass: done in the browser.** I reviewed the agent pane, viewport and dock
-  copy, kind colours, dialogs and every empty, loading and error state, and changed
-  them where needed.
-- **Bounded large data (PLAN.md revisions 4 and 5): done in the browser.** The
-  hierarchy, the asset list and the Inspector's lists mount only the rows in view. The
-  65,536-value navigation grid that stalled the old Inspector now mounts no control
-  per cell.
-- **Native acceptance: not claimed.** All captures are headless Chrome renders of the
-  built UI. Astra builds the native app and supplies native captures for my final
-  rendered-pixel review.
-- **Performance gate: not claimed.** The 100,000-entity numbers below come from a
-  browser on an Apple M5 Pro. They are not the M1 MacBook Air device gate, and they
-  are not phone measurements.
+- **Whole-app redesign (director feedback, 2026-10-10 14:32): done in the browser.**
+  Every surface was reviewed as one product and changed where it fell short. That
+  covers the shell, navigation, hierarchy, viewport chrome, assets, Inspector, dock,
+  agent and account, dialogs, menus, states and keyboard behaviour. The coverage matrix
+  below names each surface, the change and its evidence. It also names what was kept,
+  and why.
+- **Cramped compound Collider: resolved.** The selected part is no longer a bordered
+  card nested inside the list. Its fields continue at the component's own depth,
+  primitive and size first and the stable ID last. Variant fields no longer indent, and
+  rows are 28 px tall and 6 px apart. All editing, diagnostics and identity information
+  is still shown.
+- **Correctness follow-up (Astra's review, top of `brief.md`): done.**
+  - Problems, Console and History mount at most one page of 100 rows.
+  - Every list says which slice of how many it shows.
+  - Copy ID announces a missing or denied clipboard.
+- **Native End-then-Tab blank list: cause found and fixed in the UI.** The cause is a
+  stale scroll measurement that waited for an animation frame. The fix still needs
+  verification in a native rebuild; see request 1.
+- **Pre-existing bug fixed: the window could scroll.** 59 of 91 browser states could
+  scroll the whole document, by up to 1,235 px. Following a problem link could slide
+  the titlebar off screen. The document now stays put; 0 of 91 states can scroll it.
+- **Native acceptance: not claimed.** All evidence is headless Chrome renders of the
+  built UI. Native captures from f78d763 informed the work; they show the previous
+  design.
+- **Performance gate: not claimed.** All timings were measured in a browser on an
+  Apple M5 Pro. They are not M1 MacBook Air numbers and not phone numbers.
 
 No phase gate is approved or claimed.
 
 ## Model and effort
 
 - Exact model: Claude Opus 5.5, model ID `claude-opus-5-5`.
-- Thinking effort: Max. The runner selected and verified it for each of the three
-  sessions of this handoff; two plan-revision interrupts started the second and third.
-- I cannot inspect the ACP transport from inside a session. No model or effort
-  substitution occurred.
+- Thinking effort: Max, selected and verified by the runner for each session of this
+  handoff, including this one. I cannot inspect the ACP transport from inside a
+  session. No model or effort substitution occurred.
 
-## Plan revisions and director feedback acknowledged
+## Packet revisions acknowledged
 
-The packet changed during the work. I read each revision before continuing and kept
-all earlier edits and captures.
-
-| Revision | What changed for this pass | What I did |
+| Revision | What it asked | What I did |
 | --- | --- | --- |
-| 4 (`54dcf1d`) | Authoring stays on the command bus; play runs in a separate native world. Large Inspector arrays, hierarchy rows and asset collections must be bounded. | Windowed every long collection, measured 100,000 entities, and added no Play or Keep Edit control. |
-| 5 (`da0ed53`) | All 27 Section 12 decisions are settled; ADR 0009 lists virtualization as required work. | Nothing in the UI implies an unimplemented runtime or browser capability. |
-| 6 (`c52a37d`) | Hosted AWS Device Farm phones; store accounts and signing move to Phase 5. | Recorded the browser and hardware for every number; no phone or device claim. |
+| Plan revisions 4–6 | Bounded large data; play kept out of authoring; hosted Device Farm phones | Every list stays bounded, the dock included; no Play or Keep Edit control; no device claim |
+| Director feedback, 2026-10-10 14:32 | A proper design improvement through the whole app, not one sidebar; the shortcuts dialog is one example | Revision 4 across every surface (matrix below) |
+| Native evidence from f78d763 | Investigate End then Tab on 64 parts; keep account-bearing captures local | Root cause found, fix and test; captures stayed ignored |
+| Correctness follow-up (Astra) | Bound the dock's output rows without losing anything; Copy ID must not fail silently | Paged dock with explicit ranges; clipboard capability handled |
 
-The director's feedback in this packet: the right sidebar is "messy, cluttered, and
-sloppy, header too tall with bad layout", with full creative freedom over the app.
-That drove every change below.
+The director's screenshot (`artifacts/0033-native/director-cramped-sidebar.png`,
+ignored) shows these problems, all addressed:
+- Part card inside the list's box, with a third indent level for the primitive's
+  fields.
+- The ID as the first, input-like row.
+- "Offset m" and "Rotation" stacked.
+- Help text and the parts summary wrapping beside narrow labels.
 
-## Design
+## Coverage matrix
 
-### Inspector
+Paths are under `screenshots/whole-app/`. "Before" is revision 3 as committed at
+e8ee0d6; "after" is revision 4. Both were captured with the same 91 browser states, data
+and sizes.
 
-- **Identity in the header line.** The panel's 36 px header names what is inspected: a
-  22 px kind tile, the name, and Copy entity ID. The separate 58 px identity block is
-  gone. "Inspector" stays the panel's accessible name and returns as the visible title
-  when nothing is selected.
-- **One meta strip.** Kind, ID and the read-only chip share one 30 px line. The ID is
-  middle-truncated in CSS, so both ends stay visible and the DOM keeps every character
-  for copying. The chip now says "component values can be inspected here but not
-  edited yet" instead of naming the engine bus and the bridge.
-- **Problems block.** Entity problems are one rounded block of rows. Each link wraps at
-  slashes and keeps the tested accessible name, such as `Collider/shape/parts/3/id`.
-- **Component headers.** Headers are 30 px instead of 36 px and stick while their rows
-  scroll. They show an icon per component type and a display name ("Rigid Body",
-  "Navigation Mesh"). The raw type ID moved from every header into the tooltip and the
-  section's accessible description.
-- **Aligned columns.** The label column is `clamp(88px, 32cqi, 168px)` of the
-  component's width. Every nested group indents 12 px and narrows its label column by
-  12 px, so all value columns line up.
-- **Quiet values.** Values sit in raised boxes without borders, instead of black wells
-  with hover borders. Units follow their number ("0.1 m"), not the far edge of the box.
-- **Segmented vectors.** A vector is one box of axis cells. A quaternion wraps to 2 × 2
-  when its value column is under 340 px. Below 300 px of component width, vectors and
-  notices stack under their label.
-- **Lights.** Linear RGB colours lead with an sRGB swatch.
-- **References.** An ID that exactly matches a project asset or entity shows that
-  thing's icon and name ("crate_stack", "Player Character") before the authored ID.
-- **Script props.** Open objects list each key as authored, instead of an
-  "Unsupported field type object" notice.
-- **Long lists.** Navigation grid costs draw as a pixel map with a legend, and their
-  exact values open in a bounded table. Other long number lists use the table
-  directly. Material ID lists are a bounded list. Compound parts, navigation sources
-  and off-mesh links keep the master/detail list, with profile summaries such as
-  "4, 0, 2 ↔ 4, 1.2, 4.5".
-- **Native profiles.** Navigation, audio and light components get readable order and
-  labels where the schema has none: build settings in struct order, the size as W and H,
-  and Playback and Mix captions.
-
-### Rest of the app
-
-- **Agent pane.** The header is a disclosure with a status ("Not signed in", "Ready",
-  and so on). While the agent cannot run, the pane is one short note and its next step,
-  instead of a 200–240 px empty state with a disabled composer. A window under 720 px
-  tall starts collapsed. A ready agent keeps the resizable transcript and composer.
-- **Viewport.** "Native viewport not attached" is now "Viewport not attached", and the
-  redundant note "Nothing in this area is rendered by the engine" is gone. The fixture
-  text no longer mentions wgpu, and the console sample no longer mentions Spike 1.
-  Render errors get an error tile.
-- **Dock.** In Problems rows the entity name reads as a name, and the component and
-  path read as code. The active tab icon is neutral; only its underline uses the accent.
-- **Colour.** Meshes and models use a neutral tint, so long hierarchies read calm.
-  Scripts moved from violet to a warm orange, and the dialog scrim lost its violet tint.
-- **Status messages.** "Rename is unavailable: the connected bridge does not support
-  entity.rename" is now "Rename is unavailable in this editor build (entity.rename)".
-- **Styles.** The 3,039-line `app.css` is replaced by seven focused files (base, shell,
-  hierarchy, dock, inspector, agent, dialogs), plus the updated `assets.css`.
-- **Design document.** `editor/ui/DESIGN.md` is rewritten as revision 3.
-
-### Bounded rendering
-
-`src/shell/windowing.ts` tracks a scroller's viewport. It updates only when the offset
-crosses a step, and each list mounts its visible rows plus overscan:
-
-| Collection | Always mounted | Keyboard |
+| Surface | What changed | Evidence (before/ and after/) |
 | --- | --- | --- |
-| Hierarchy, a flat ARIA tree with level, position and set size | active row, renaming row | arrows, Home/End, Page Up/Down, type-ahead |
-| Assets, a listbox of labelled folder groups | each visible folder label, active row | arrows, Home/End, Page Up/Down |
-| Record lists (parts, sources, links) | selected item | arrows, Home/End, Page Up/Down |
-| Value table, rows and grid columns | — | scroll keys in the focused box |
+| Window frame | The app contains and clips its content, and every scroller is a containing block, so `scrollIntoView`, focus and hidden text can no longer scroll the window | `evidence/whole-app-comparison.json`: scrollable states 59 → 0 |
+| Titlebar | Breadcrumb "Project / Scene" with the project as `h1`; History and panel toggles in two capsules; pressed toggles filled; the ChatGPT pill shows the account's initial with a presence ring | `no-selection-normal-1440x874.png` |
+| Left column navigation | Hierarchy and Assets counts in the same pill as the dock's tab counts; the filter toolbar (search icon, match count) restored after a regression in this pass | same |
+| Hierarchy | Scene row at heading weight; the selected row adds a 2 px accent edge to the indigo pill; new context menu, described below | `context-menu-normal-1440x874.png` (after only; there was no menu) |
+| Hierarchy context menu | See the Hierarchy context menu section below | same |
+| Viewport chrome | Status pill with tone dot (Live, Not attached, Waiting, Error, No engine); the empty state is a drawn ground grid and outlined cube, dashed red on error | `no-selection-…`, `project-error-normal-1440x874.png` |
+| Inspector: rhythm | 28 px values 6 px apart; 34 px sticky headers; caption groups 10 px apart; 16 px of air below each component; default width 360 px (was 331) | `transform-camera-normal-1440x874.png`, `transform-camera-narrow-1440x874-side.png` |
+| Inspector: identity | Component marks: icon on a 22 px tile tinted by family (physics mint, light amber, camera sky, audio pink, script orange, navigation lime; transform neutral) | `native-character-normal-1440x874-side.png`, `native-navmesh-normal-1440x874-side.png` |
+| Inspector: problems | One card tinted by the worst severity. Locations read "Collider /path" in quiet text instead of periwinkle links, and paths wrap after slashes | `railing-compound-normal-1440x874-side.png`, `native-malformed-normal-1440x874-side.png` |
+| Inspector: compound Collider | See the Compound Collider section below | `native-rubble-parts-{normal,narrow,minimum}-*-inspector.png`, `railing-parts-normal-1440x874-inspector.png` |
+| Inspector: notices | Unknown fields, missing schemas and version mismatches use the same dashed outline as field notices, not a solid yellow block | `native-malformed-normal-1440x874-side.png` |
+| Asset workspace and details | Section rhythm matches the Inspector; the source path sits on the raised value fill; the chosen interpretation is the selection fill; tab count pills | `asset-texture-normal-1440x874.png` |
+| Problems | See the dock views section below | `no-selection-…`, `dock-paged-problems-normal-1440x874.png` |
+| Console | See the dock views section below | `dock-console-normal-1440x874.png`, `dock-paged-console-minimum-1000x650.png` |
+| History | See the dock views section below | `dock-history-normal-1440x874.png`, `dock-paged-history-normal-1440x874.png` |
+| Status line | Shows only the problem counts that exist, or a green check and "No problems" once validated. Shows nothing while opening, or after a failure without diagnostics. Key hints are caps | any full capture; `empty-project-normal-1440x874.png` |
+| Agent pane | The native bridge's milestone reason is shown in plain words: "Not in the editor yet" (presentation only). The no-engine note no longer repeats its title | `native-character-normal-1440x874-side.png`, `no-engine-normal-1440x874.png` |
+| ChatGPT account | The state is a card with a tinted badge; same header and paddings as every dialog | `account-signed-in-normal-1440x874.png` |
+| Keyboard shortcuts | See the shortcuts reference section below | `shortcuts-dialog-normal-1440x874.png`, `shortcuts-filter-minimum-1000x650.png` (after only) |
+| Empty, loading and error states | Pictograms on tone-tinted badges (a pointer for "Nothing selected", the scene mark while no project is open, a check for "No problems"); skeleton rows shaped like tree rows | `project-loading-…`, `project-error-…`, `empty-project-…`, `no-engine-…` |
+| Fatal screens | A card with the product mark, an error tile and the problem as the page's `h1` (axe flagged both before). Protocols are compared side by side and fixture names are chips | `bad-fixture-normal-1440x874.png`, `incompatible-normal-1440x874.png` |
+| Minimum size and keyboard | Container queries stack vectors, notices and stable IDs below 300 px; the parts summary wraps to its own line; scrollable dock lists are keyboard stops; F6, `?` and ⌘/ keep working | `transform-camera-minimum-1000x650.png`, `native-rubble-parts-minimum-1000x650-inspector.png` |
+| Type scale | 12 px minimum everywhere; the 11 px key hints, level badges and menu shortcuts are gone | — |
 
-Keyboard moves to an unmounted item reveal it and then focus it. A rename stays mounted
-while its row scrolls away; Enter commits through the command bus and Escape cancels.
-The hierarchy filter applies through `useDeferredValue`, and lower-cased names are
-computed once per tree.
+### Hierarchy context menu
+
+- The menu opens from a right-click, Shift+F10 or the Menu key.
+- It offers Rename (F2), Copy ID and Delete (Del, through the command bus).
+- An unavailable item stays focusable and explains why when chosen.
+
+### Compound Collider
+
+The compound Collider changes resolve the director's screenshot:
+- **Parts header.** "Parts" and the breakdown span the component; the breakdown moves
+  to its own line at the minimum width.
+- **Part rows.** Each row gets a primitive glyph (box, sphere or capsule).
+- **Selected part.** It opens under a hairline caption, "Part 42 of 64
+  /shape/parts/41", instead of a bordered card. Its fields follow at the component's
+  depth: Primitive, its size, Offset, Rotation, then ID.
+- **ID.** The ID is quiet metadata, outlined and muted, and stacks to show all 26
+  characters at 280 px.
+- **Errors.** A non-unit quaternion outlines the whole vector once, instead of drawing
+  a red grid.
+- **Variant help.** Variant help such as "One body and material shared…" sits in the
+  value column.
+
+### Dock views
+
+**Problems:**
+- Grouped by entity, worst first, with severity filter chips and counts.
+- Paged at 100 rows. A group that spans pages repeats its heading with a "continued"
+  tag, keeps its whole-group counts, and says "N more … on the next pages".
+- Rows reveal their entity.
+
+**Console:**
+- A table of time, level badge, source and message, with level filters.
+- Paged; it follows the newest page as messages arrive, and **Newest** returns there.
+- The list is a keyboard stop.
+
+**History:**
+- A timeline with origin-coloured dots, origin chips and a fixed time column; times
+  no longer truncate.
+- The "Now" marker sits between applied and undone edits.
+- Paged; it follows Now, and **Now** returns there.
+- The list is a keyboard stop (axe flagged it before).
+
+### Shortcuts reference
+
+The plain list became a searchable reference:
+- **Header.** A tinted keyboard mark and a subtitle that names the platform.
+- **Filter.** Focused on open. It matches actions, groups and key names, and shows
+  "N of M". Escape clears it first, then closes the dialog.
+- **Layout.** Five category cards in two balanced columns, one column when narrow.
+- **Keys.** Platform keys as individual caps (⌘ ⇧ ⌥ on macOS, names elsewhere), with
+  "or" between alternatives and "/" between paired directions.
+- **Coverage.** All 29 entries are implemented keys. I verified each against the
+  handlers.
+
+### Deliberately retained
+
+- **Native titlebar inset and traffic-light alignment.** These are `TITLEBAR.md` host
+  contracts. Only a native capture can verify them.
+- **Asset list structure.** The windowed, grouped listbox from revision 3 already meets
+  the bounded-rendering rules. It now uses the shared counts, search field and colours.
+- **Navigation grid map and value table.** Revision 3 layout, inside the new rhythm.
+- **Import form.** Structure unchanged; it inherits the new type, spacing and dialog
+  vocabulary. With the read-only fixture it only shows its unavailable state.
+- **Application menu (File/Edit/View on Windows/Linux).** Still none; this remains an
+  open question in DESIGN.md, not something to fake.
+
+## Correctness follow-up
+
+**Bounded output lists.** `src/components/dock/paging.tsx` holds `PAGE_SIZE` (100),
+`usePage` and `Pager`. Each view mounts only its page and renders the full text of every
+row on it:
+- **No silent truncation.** The pager always shows "101–200 of 20,000". Filter chips
+  count every entry. A list that fits on one page shows no pager.
+- **Keyboard.** First, previous, next and last buttons stay focusable at the ends
+  (`aria-disabled`). A page change is announced on the status line and scrolls to the
+  page's top.
+- **Updates.**
+  - The Console follows the newest page while new messages arrive; another page stays
+    put and its total grows.
+  - History follows the page that holds Now.
+  - A list that shrinks clamps to its last page.
+  - A filter change returns to the first page.
+- **Kept behaviour.** Grouping, entity reveal, applied and undone state, and the Now
+  marker are unchanged.
+
+Browser measurements (`evidence/dock-scale-report.json`, Chrome 155, M5 Pro):
+
+| Scenario | Rows mounted | Unthrottled | 4× CPU |
+| --- | --- | --- | --- |
+| 20,000 problems on 10,000 entities: load to first page (from navigation start) | 100 | 167 ms | 660 ms |
+| Next page / last page | 100 | 12.9 / 13.8 ms | 53 / 68 ms |
+| Hide errors (4,000 left) | 100 | 18.1 ms | 89 ms |
+| 20,000 problems in one group: next / last page | 100 | 10.6 / 9.5 ms | 44 / 44 ms |
+| Open Console with 100,000 messages (newest page) | 100 | 9.2 ms | 38 ms |
+| 10 × 500 messages arriving while following | 100 each time | 6.5–8.1 ms each | 29.5–35.7 ms each |
+| Open History with 50,000 edits (page of Now) | 100 + Now marker | 4.6 ms | 20.5 ms |
+| History first page, then Now | 100 | 4.4 / 5.4 ms | 24 / 16 ms |
+
+No long tasks occurred in the arrival steps. In the browser captures, the dock mounted up
+to 1,234 rows before and at most 102 after (100 rows plus 2 group items).
+
+**Copy ID.** `src/shell/clipboard.ts` checks for `navigator.clipboard.writeText`:
+- **Without it,** the hierarchy menu's Copy ID and the Inspector's copy button are
+  marked unavailable. They stay focusable and explain the reason ("this editor has no
+  clipboard access. Select the ID in the Inspector to copy it").
+- **A refused write** announces "Could not copy: clipboard access was denied."
+- **Tests** cover the absent API, a rejected permission and a successful copy of the
+  exact ID.
+
+## Native End-then-Tab investigation
+
+**Observation (`compound-end-wide.jpg`, AX text).** After End, the detail correctly
+showed Part 64, but the list was blank above the pinned last row. Accessibility listed
+Parts 1–13 and Part 64.
+
+**Cause.** `useViewport` re-measured the scroller only on an animation frame after a
+scroll event. A programmatic reveal (End) scrolled the list, but the window state kept
+the old top until a frame arrived. WebKit throttles or pauses frames for hidden,
+occluded or non-frontmost views, which is likely during computer-use automation. The
+UI therefore kept rows 1–13 mounted (the old window) plus the pinned selection, at the
+bottom of a scrolled list.
+
+**Fix (in this commit, with Astra's e8ee0d6 changes kept):**
+- `useViewport` returns a synchronous `remeasure`. The tree, the asset list and record
+  lists call it right after `revealSpan`, so the target's neighbours mount in the same
+  render as the selection.
+- Scroll and resize notifications are coalesced on a frame with a 100 ms timer
+  fallback.
+- Keyboard focus moves after React commits (a layout effect), not on a frame.
+- `ThrottledFrames.test.tsx` reproduces the failure with frames disabled: it fails on
+  the old code and passes with the fix.
+
+`compound-min.jpg` shows Part 1 and is not a last-row test.
 
 ## Measurements
 
 All captures use headless Chrome 155.0.8059.40 at device scale 2. The machine is a
-MacBook Pro (Mac17,9) with an Apple M5 Pro (15 cores), 48 GB and macOS 26.6. Full
-per-capture data: `evidence/browser-comparison.json`.
+MacBook Pro with an Apple M5 Pro (15 cores), 48 GB and macOS 26.6. Per-state data is in
+`evidence/whole-app-comparison.json`.
 
-### Layout and accessibility
-
-| Measure | Before | After |
+| Measure, all 91 states | Before (rev. 3) | After (rev. 4) |
 | --- | --- | --- |
-| Captures | 56 | 63 |
-| Axe violations, colour contrast included | 0 | 0 |
-| Elements outside the Inspector box | 60 | 0 |
-| Clipped numeric values | 39 | 0 |
-| Clipped values of any kind | 72 | 32 |
+| Axe violations, colour contrast included | 6 | 0 |
+| States where the window can scroll | 59 (up to 1,235 px) | 0 |
+| Most rows mounted in the dock | 1,234 | 102 |
+| Clipped values | 37 (0 numeric) | 36 (0 numeric) |
+| Elements outside the Inspector | 0 | 0 |
 | Page errors and remote requests | 0 | 0 |
+| Step errors | 4 | 0 |
 
-The 32 remaining clipped values are long asset paths and IDs in reference boxes. Each
-ends in an ellipsis, keeps the full value in its tooltip, and shows the resolved name
-first when one exists.
+The six "before" axe violations:
+- Two fatal screens had no `h1`.
+- Four long consoles or histories were not keyboard-scrollable.
 
-| State | Inspector top to first value | Agent pane height |
+The four "before" step errors are pager clicks in the paged states; revision 3 had no
+pager. The 36 clipped values are long asset paths and IDs in reference boxes. Each ends
+in an ellipsis, keeps the full value in its tooltip, and shows the resolved name first
+when one exists.
+
+| Inspector | Before | After |
 | --- | --- | --- |
-| 1440×874, 331 px Inspector | 138 → 99 px | 210 → 141 px |
-| 1000×650, 280 px Inspector | 138 → 118 px | 200 → 37 px |
-| 1440×874, 280 px Inspector | 138 → 118 px | 210 → 158 px |
-
-The 118 px cases are taller only because vectors stack under their labels instead of
-clipping.
-
-| Grid | Before | After |
-| --- | --- | --- |
-| 24 × 16 costs (384 values) | an empty-looking box 1,361 px wider than the Inspector | 0 overflow; map and legend |
-| 256 × 256 costs (65,536 values) | 65,536 inputs; 261,983 px overflow; the first capture run stalled | 2 inputs in the Inspector; 345 table cells when opened |
-
-Other checks:
-- **Focus.** A keyboard-focused value box draws a solid 2 px `#c3c8ff` ring.
-- **Contrast.** Labels measure 7.98:1 and values 13.83:1 on the side column.
-- **Reduced motion.** Status dots stop pulsing.
+| Default width at 1440×874 | 331 px | 360 px |
+| Value boxes, component headers | 26 px, 30 px | 28 px, 34 px |
+| Gap between rows | 4 px | 6 px |
+| Labels, values (contrast on the side column) | 7.98:1, 13.83:1 | unchanged |
+| Keyboard focus ring | solid 2 px `#c3c8ff` | unchanged |
 
 ### 100,000 entities (browser, not the device gate)
 
-Interaction times run from the input to React's commit (DOM updated, effects run). The
-next paint follows within one frame. "4×" uses Chrome's CPU throttling as a rough
-stand-in for slower hardware; it is not an M1 measurement.
-Data: `evidence/scale-report.json`.
+Re-measured on this build (`evidence/scale-report.json`).
 
-| Interaction | Unthrottled | 4× CPU throttle |
+| Interaction | Unthrottled | 4× CPU |
 | --- | --- | --- |
-| Rows mounted for 100,101 hierarchy nodes | 34 | 34 |
-| Options mounted for 20,000 assets | 35 | 35 |
-| Load to first tree, including generating the fixture in the page | 206 ms | 678 ms |
-| Filter matching every entity (first keystroke) | 47 ms | 210 ms |
-| Filter matching one group of 1,000 | 9 ms | 28 ms |
-| Arrow Down, median of 30 | 0.7 ms | 3.0 ms |
-| Arrow Down, worst of 30 | 27.2 ms | 15.2 ms |
-| End to the last of 1,000 rows | 0.7 ms | 3.1 ms |
-| Assets tab open | 14.7 ms | 38.6 ms |
-| End to the last of 20,000 assets | 4.3 ms | 13.8 ms |
-| Select the 65,536-value grid entity | 11.8 ms | 47.9 ms |
-| Open its value table | 3.4 ms | 14.2 ms |
-| Rename through a test double, total | 48.5 ms | 205.3 ms |
-| of which the double copies the 100,000-entity snapshot | 38.3 ms | 162.2 ms |
+| Rows mounted for 100,101 hierarchy nodes; options for 20,000 assets | 34; 37 | 34; 37 |
+| Load to first tree (fixture generated in the page) | 206 ms | 808 ms |
+| Filter matching every entity / one group | 76 / 7.4 ms | 250 / 35 ms |
+| Arrow Down, median and worst of 30 | 0.9 / 26.2 ms | 4.6 / 18.6 ms |
+| End to the last of 1,000 rows | 0.9 ms | 6.8 ms |
+| Assets open / End to the last of 20,000 | 11.6 / 4.6 ms | 47.6 / 25.1 ms |
+| Select the 65,536-value grid / open its table | 13.4 / 4.7 ms | 60.5 / 17.9 ms |
+| Rename through the test double, total | 57.6 ms | 275 ms |
+| … of which the double rebuilds the snapshot | 46 ms | 229 ms |
 
-Long tasks (50 ms or more):
-- The first filter over all 100,000 names takes one 113 ms task unthrottled and
-  392 ms at 4×. Typing stays responsive because the input commits first.
-- At 4×, every rename has a task of about 200 ms, almost all of it the test double's
-  snapshot copy.
-
-The UI side of a rename is about 10 ms unthrottled and 43 ms at 4×. A real bridge that
-rebuilds the whole snapshot per edit will dominate the 100 ms budget; see the requests.
+Long tasks:
+- The first filter over all names is one 108 ms task unthrottled, 467 ms at 4×.
+- Every rename at 4× is a task of about 260 ms, almost all of it the double's snapshot
+  rebuild.
 
 ## Changed paths
 
 UI code (`editor/ui/src`):
-- `components/inspector/InspectorPanel.tsx`: identity header, meta strip, problems
-  block, component sections, reference resolution.
-- `components/inspector/FieldView.tsx`: rows, groups, value boxes, vectors,
-  references, open objects, notices.
-- `components/inspector/ObjectList.tsx`: windowed record lists, profile summaries,
-  aligned detail card.
-- New in `components/inspector`:
-  - `ValueLists.tsx`: number tables, grid map, string lists;
-  - `IdentityHeader.tsx`;
-  - `format.ts`: shared text helpers, re-exported from FieldView.
-- `components/inspector/presentation.ts`: display names, icons, native profiles,
-  summaries, grid hint, caption rule.
-- `components/AgentPanel.tsx` and `App.tsx`: collapsible agent pane and its layout.
-- `components/HierarchyPanel.tsx`: windowed tree, Page Up/Down, deferred filter.
-- `components/assets/AssetBrowser.tsx`: windowed, grouped listbox.
-- `components/assets/AssetInspector.tsx`: header-line identity, panel-level Escape.
-- `components/MatchCount.tsx` (new): compact counts from 10,000.
-- `components/ViewportPanel.tsx`, `BottomDock.tsx`, `ShortcutsDialog.tsx`: copy and
-  Problems rows.
-- `shell/windowing.ts` (new) and `shell/layout.ts`: viewport tracking; the old
-  compact-agent sizing is removed.
-- `hierarchy/tree.ts`: cached lower-cased names for filtering.
-- `icons/Icon.tsx`: 13 component icons.
-- `bridge/fixture.ts`: the 100,000-entity `stress` variant and fixture copy.
-- `bridge/resolve.ts`: plain-language unavailable messages.
-- Styles: `tokens.css`, `base.css`, `shell.css`, `hierarchy.css`, `dock.css`,
-  `inspector.css`, `agent.css`, `dialogs.css`, `assets.css`. `app.css` is deleted.
-- `main.tsx`: the stylesheet imports.
+- **Shell:**
+  - `App.tsx`: status line and fatal screens.
+  - `components/Titlebar.tsx` and `ProviderChip.tsx`.
+  - `components/ViewportPanel.tsx`.
+  - `components/StateView.tsx`.
+  - `components/Menu.tsx` (new).
+  - `components/breakAfterSlashes.tsx` (new).
+  - `shell/layout.ts`: the 360 px Inspector default.
+  - `shell/clipboard.ts` (new).
+  - `shell/windowing.ts`: synchronous `remeasure` and the timer fallback.
+- **Hierarchy and assets:** `components/HierarchyPanel.tsx` (context menu, scene rows,
+  remeasure, Copy ID) and `components/assets/AssetBrowser.tsx` (remeasure).
+- **Inspector** (`components/inspector/`):
+  - `InspectorPanel.tsx`: problems card, family marks, pictograms, Copy ID.
+  - `FieldView.tsx`: flat variants, help text, variant glyphs, whole-vector errors.
+  - `ObjectList.tsx`: flat detail, glyphs, remeasure, layout-effect focus.
+  - `presentation.ts`: families, shape glyphs, part order.
+- **Dock:** `components/BottomDock.tsx` keeps only the tabs. New in `components/dock/`:
+  `ProblemsView.tsx`, `ConsoleView.tsx`, `HistoryView.tsx`, `paging.tsx`, `time.ts`.
+- **Other components:**
+  - `components/ShortcutsDialog.tsx` (rewritten).
+  - `components/AgentPanel.tsx` (milestone wording).
+  - `icons/Icon.tsx`: pointer, shape and pager icons.
+- **Styles:** `tokens.css` (field and header heights, family tints), `base.css`,
+  `shell.css`, `hierarchy.css`, `dock.css`, `inspector.css`, `dialogs.css`,
+  `assets.css`, `agent.css`.
+- **Documents:** `editor/ui/DESIGN.md`, revision 4.
 
-Tests in `editor/ui/src`:
-- `components/Windowing.test.tsx` (new, 11 tests):
-  - windowing helpers;
-  - the 100,000-entity tree: mounted counts, End and Page Down, selection kept while
-    scrolling, rename commit and Escape cancel after window changes;
-  - the 20,000-asset list;
-  - the 65,536-value grid, its exact-cell diagnostic, and a size mismatch.
-- Adapted to intentional design changes:
-  - `App.test.tsx` and `AgentPanel.test.tsx`: the agent behaviour is replaced with
-    equivalent assertions. The pane sizes to its note, collapses to its status, and a
-    ready agent stays resizable. No composer is offered while the agent cannot run,
-    and the composer is disabled with a reason while it works.
-  - `CompoundParts.test.tsx`: the 64-part list asserts the bounded window, the set
-    size, the pinned selection, and End reaching part 64.
-  - `PhysicsFields.test.tsx`: display names.
-  - `bridge/resolve.test.ts`: message wording.
-  - `shell/layout.test.ts`: the removed compact-agent height cases. Their behaviour is
-    now covered in `App.test.tsx`.
-
-Documents: `editor/ui/DESIGN.md`, revision 3.
+Tests (`editor/ui/src`):
+- New:
+  - `components/DockPaging.test.tsx`: 6 tests, covering many groups, one huge group,
+    filter and update transitions, a console with arrivals, and history with Now.
+  - `components/Clipboard.test.tsx`: 4 tests.
+  - `components/ShortcutsDialog.test.tsx`: 4 tests.
+  - `components/Dock.test.tsx`: 4 tests.
+  - `components/HierarchyMenu.test.tsx`: 3 tests.
+  - `components/ThrottledFrames.test.tsx`: 2 tests.
+- Extended:
+  - `App.test.tsx`: fatal screens, status line, filter focus, the execCommand guard.
+  - `AgentPanel.test.tsx`: milestone wording.
+- Adapted to intentional changes:
+  - `CompoundParts.test.tsx`: part order, and no nested boxes.
+  - `ProblemsList.test.tsx`: grouped rows.
+  - `ProjectStates.test.tsx`: the "Live" pill.
 
 Handoff (`handoffs/0033-editor-design-review/`):
-- `tools/review-double.mjs`: native-shaped evidence data through the real
-  `snapshotFromEngine`.
-- `tools/capture.mjs`: browser captures and DOM-generic measurements.
-- `tools/measure-scale.mjs`: the 100,000-entity measurements.
-- `tools/curate.mjs`: copies the committed subset.
-- `screenshots/before/` (18) and `screenshots/after/` (21): unedited PNG captures.
-- `evidence/browser-comparison.json`, `evidence/scale-report.json`,
-  `evidence/screenshots.sha256`.
-- `brief.md`: the runner's packet revisions.
+- **Tools:**
+  - `tools/capture.mjs`: 91 states, `--root` for the before build, and window-scroll
+    and dock-row measures.
+  - `tools/curate-whole-app.mjs` (new).
+  - `tools/measure-dock.mjs` (new).
+- **Screenshots:** `screenshots/whole-app/before/` (26) and `after/` (28). These are
+  unedited, account-free PNGs from the sample fixture, the synthetic provider fixtures
+  and the evidence test double.
+- **Evidence:**
+  - `whole-app-comparison.json`;
+  - `whole-app.sha256` (54 OK);
+  - `dock-scale-report.json`;
+  - `scale-report.json`, re-measured.
+- `brief.md`: the runner's packet updates.
+- **Unchanged from b7ba9bb:** the earlier pass's evidence (`screenshots/before/`,
+  `screenshots/after/`, `evidence/browser-comparison.json`, `evidence/screenshots.sha256`).
 
-Ignored, not committed, under `artifacts/0033-editor-design-review/`:
-- `before`: 56 captures.
-- `final`: 63 captures, the source of the committed after set.
-- `after`, `after-1`, `iter-1` and `iter-2`: superseded iterations.
-- `scale-r1`, `scale-r2` and `scale-r3`. The committed report is r3; r1 and r2 used
-  frame-based timing or predate the last two optimisations.
+Not committed (ignored `artifacts/`):
+- `0033-native/`: the native captures, which show the account.
+- Every raw browser set: `v3-before`, `v3-before-paged`, `v4-final2`, iterations
+  `w1`–`w10`, and the e8ee0d6 source extract `src-e8ee0d6`.
 
-No Rust, SDK, CI, bridge transport (`editor/bridge`), schema, auth storage or account
-setting changed. No Cargo command ran.
+No Rust, SDK, CI, schema, transport, auth storage or account setting changed. No Cargo
+command ran.
 
 ## Commands and results
 
 ```sh
-npm ci --ignore-scripts                 # workspace root; editor/ui has no lockfile of its own
+npm ci --ignore-scripts                     # workspace root
 cd editor/ui
-npx tsc -b --noEmit                     # strict: 0 errors
-npx vitest run                          # 17 files, 430 tests passed (baseline: 16 files, 420)
-npm run build                           # built
+npx tsc -b --noEmit                         # strict: 0 errors
+npx vitest run                              # 24 files, 467 tests passed
+npm run build                               # built
 cd ../..
-node handoffs/0033-editor-design-review/tools/capture.mjs before      # before any change: 56 captures
-node handoffs/0033-editor-design-review/tools/capture.mjs final       # 63 captures, 0 step errors
-node handoffs/0033-editor-design-review/tools/measure-scale.mjs r3    # unthrottled and 4x, no page errors
-node handoffs/0033-editor-design-review/tools/curate.mjs before final r3
-(cd handoffs/0033-editor-design-review && shasum -a 256 -c evidence/screenshots.sha256)   # 39 OK
+# before: revision 3 from e8ee0d6, extracted into the ignored artifacts directory
+git archive e8ee0d6 editor/ui editor/bridge | tar -x -C artifacts/0033-editor-design-review/src-e8ee0d6
+(cd artifacts/0033-editor-design-review/src-e8ee0d6/editor/ui && npx vite build)
+node handoffs/0033-editor-design-review/tools/capture.mjs v3-before --root=artifacts/0033-editor-design-review/src-e8ee0d6/editor/ui
+node handoffs/0033-editor-design-review/tools/capture.mjs v3-before-paged --root=… --only=dock-paged-problems,dock-paged-console,dock-paged-history
+node handoffs/0033-editor-design-review/tools/capture.mjs v4-final2      # 91 captures, 0 step errors, 0 axe
+node handoffs/0033-editor-design-review/tools/curate-whole-app.mjs v3-before,v3-before-paged v4-final2
+(cd handoffs/0033-editor-design-review && shasum -a 256 -c evidence/whole-app.sha256)   # 54 OK
+node handoffs/0033-editor-design-review/tools/measure-dock.mjs r2         # no page errors
+node handoffs/0033-editor-design-review/tools/measure-scale.mjs r4        # no page errors
 ```
 
-The packet's `npm ci --prefix editor/ui` fails because the lockfile is at the workspace
-root, so I used the root install, as handoff 0031 did. The first BEFORE run stalled on
-the 65,536-input grid and was stopped and rerun with a per-capture time limit; the rerun
-completed all 56 captures. Each capture server used the first free port from 4233 and
-was closed afterwards.
-
-Not run: Cargo, Clippy, GPU tests, native capture, native WebKit, phones.
-
-## Screenshots
-
-All are browser captures of the built UI at device scale 2. The "side" crops show the
-whole right column, Inspector and agent pane.
-
-| Subject | Before | After |
-| --- | --- | --- |
-| Shell, 1440×874, Pixel Camera | `screenshots/before/transform-camera-normal-1440x874.png` | `screenshots/after/transform-camera-normal-1440x874.png` |
-| Shell, 1000×650 | `screenshots/before/transform-camera-minimum-1000x650.png` | `screenshots/after/transform-camera-minimum-1000x650.png` |
-| Camera, 331 px and 280 px | `screenshots/before/transform-camera-*-side.png` | `screenshots/after/transform-camera-*-side.png` |
-| Focused Near clip | `screenshots/before/camera-focus-normal-1440x874-side.png` | `screenshots/after/camera-focus-normal-1440x874-side.png` |
-| Character: transform, body, capsule, velocity, script props | `screenshots/before/native-character-*-side.png` | `screenshots/after/native-character-*-side.png` |
-| Mesh renderer, materials, compound collider | `screenshots/before/native-mesh-normal-1440x874-side.png` | `screenshots/after/native-mesh-normal-1440x874-side.png` |
-| Directional light | `screenshots/before/native-sun-normal-1440x874-side.png` | `screenshots/after/native-sun-normal-1440x874-side.png` |
-| Navigation mesh with a field error | `screenshots/before/native-navmesh-normal-1440x874-side.png` | `screenshots/after/native-navmesh-normal-1440x874-side.png` |
-| Navigation grids, 384 and 65,536 values | `screenshots/before/native-grid*-side.png` | `screenshots/after/native-grid*-side.png` |
-| Malformed and unregistered data | `screenshots/before/native-malformed-normal-1440x874-side.png` | `screenshots/after/native-malformed-normal-1440x874-side.png` |
-| Compound with three errors | `screenshots/before/railing-compound-normal-1440x874-side.png` | `screenshots/after/railing-compound-normal-1440x874-side.png` |
-| Unsupported and mismatched script fields | `screenshots/before/script-unsupported-normal-1440x874-side.png` | `screenshots/after/script-unsupported-normal-1440x874-side.png` |
-| Long name at the minimum | `screenshots/before/long-name-minimum-1000x650-side.png` | `screenshots/after/long-name-minimum-1000x650-side.png` |
-| Asset details | `screenshots/before/asset-texture-normal-1440x874-side.png` | `screenshots/after/asset-texture-normal-1440x874-side.png` |
-| Agent collapsed, and signed in but unavailable | — | `screenshots/after/agent-*-side.png` |
-| 100,000 entities filtered to 99,000 matches | — | `screenshots/after/stress-tree-normal-1440x874.png` |
-
-The "Character" state shows the native agent reason, "Use the headless agent command
-for the Phase 0 provider spike". That text comes from the bridge, not the UI; see
-request 1.
+Every capture server used the first free port from 4233 and was closed afterwards.
+- **Not run:** Cargo, Clippy, GPU tests, native capture, native WebKit, phones.
+- **Native:** I took no native captures and drove no native UI in this session. The
+  f78d763 captures were read from the ignored directory only.
 
 ## Requests for Astra
 
-1. **Agent reason copy.** In `editor/bridge/native.ts`, `snapshotFromEngine` sets
-   `agent.reason` to "Use the headless agent command for the Phase 0 provider spike."
-   The agent note shows it verbatim. Replace it with product copy such as "The agent is
-   not available in the editor yet." and regenerate `native.generated.js`.
-2. **Entity kinds.** The native kind is only camera, mesh, script or entity. Derive
-   `light` from DirectionalLight, PointLight, SpotLight or EnvironmentLight, and
-   `audio` from AudioSource, AudioListener or AudioBus. The UI already has those icons
-   and tints.
-3. **Nullable type arrays.** `type: ["string", "null"]` (AudioSource.bus,
-   AudioBus.parent) converts to `unsupported`. Convert it to the base type with
-   `nullable: true`, as `anyOf` with null already does. The UI then shows "Not set" or
-   the value.
-4. **Order and units in the schema registry.** Nested object properties reach the UI in
-   alphabetical order, so profiles restore NavigationMesh settings order. Please emit
-   a field order for nested objects, and an `order` for NavigationMesh, NavigationGrid,
-   AudioSource, Velocity and AngularVelocity. Add `x-incant-unit` where values have one:
-   NavigationMesh lengths in m and max slope in °, AudioSource gain in dB and start in s,
-   EnvironmentLight rotation in °, Velocity in m/s. Human `title`s such as "Rigid Body"
-   would let the UI drop its name map.
-5. **Snapshots at 100,000 entities.** `snapshotFromEngine` rebuilds every node and
-   entity on each change. Copying a 100,000-entity snapshot alone cost 38 ms (162 ms at
-   4×) per edit in my double, against about 10 ms (43 ms) for the UI. To keep edits under
-   100 ms on the M1:
-   - page entity details by selection, as the contract's comment anticipates;
-   - keep unchanged hierarchy nodes as the same objects across revisions;
-   - publish a revision number with each snapshot.
-6. **Native captures after integration.** I need:
-   - the sample Pixel Camera and Rubble Pile at 1440×874 and with the 280 px Inspector;
-   - a Tab-focused value box;
-   - the agent collapsed and open;
-   - a real project with a light, a navigation grid and a script with props;
-   - the macOS titlebar, to confirm the unchanged traffic-light alignment.
+1. **Rebuild and recheck End then Tab natively.**
+   - Steps: in the 64-part compound, select Part 1, press End, then Tab.
+   - Expected: the trailing rows are visible with no blank region, and AX lists about
+     Parts 52–64 instead of 1–13 plus 64.
+   - Repeat while the window is not frontmost, and again after 100 ms.
+   - Also follow a Problems link to a deep part path: the titlebar must not move.
+2. **Window title.** `editor/app/src/main.rs:159` sets "Incant — Phase 0". Please change
+   it to "Incant" or the project name; it is Rust, so I left it.
+3. **Agent reason copy.** `editor/bridge/native.ts` still sends "Use the headless agent
+   command for the Phase 0 provider spike." The UI now shows "Not in the editor yet".
+   Please send plain wording at the source and regenerate `native.generated.js`.
+4. **Output lists in snapshots.** The UI now pages Problems, Console and History, but
+   every snapshot still carries every console message and history entry. Consider
+   capping or paging them at the bridge, with totals, as for entity details.
+5. **Carried over from the earlier pass:**
+   - entity kinds for lights and audio;
+   - nullable `type` arrays;
+   - nested-object order, units and human titles in the schema registry;
+   - snapshot reuse at 100,000 entities.
+6. **Native captures after the rebuild, for my rendered review:**
+   - Rubble Pile compound at 1440×874 and 1000×650;
+   - the shortcuts dialog;
+   - the hierarchy context menu;
+   - a long console;
+   - the titlebar.
 
    I will commit only account-free crops.
 
 ## Limitations
 
-- **Browser-only evidence.** Native WebKit rendering, the native titlebar and the
-  native viewport were not reviewed.
-- **Not the performance gate.** The scale numbers are from one fast desktop machine and
-  headless Chrome; 4× throttling is not an M1 or a phone. The stress fixture is
-  generated in the page, so its load time includes that work. The rename test double
-  stands in for the engine and bridge, whose real edit latency is not measured here.
-- **First filter long task.** Filtering all 100,000 names still runs as one long task:
-  113 ms unthrottled and 392 ms at 4×.
+- **Browser-only evidence.** Native WebKit rendering, the titlebar and the viewport were
+  not reviewed in this revision.
+- **Not the performance gate.** All numbers come from one fast desktop machine and
+  headless Chrome; 4× throttling is not an M1 or a phone. The rename and dock doubles
+  stand in for the engine and bridge.
+- **First filter long task.** Filtering 100,000 names is still one long task: 108 ms
+  unthrottled, 467 ms at 4×.
 - **Read-only Inspector.** Every field stays read-only until the bridge offers a
-  component command. Value boxes are shaped for later editing.
-- **Unsupported until the bridge changes.** Nullable `type` arrays show a notice until
-  request 3 lands. Lights and audio show the generic entity icon until request 2.
-- **Profile coverage.** Native profiles cover the registered components. A new
-  component gets the generic presentation, and a profile applies only when every key
-  it captions exists.
-- **Grid map orientation.** The map draws engine row 0 at the top and says so. Whether
-  authors expect world +Z up is an open design question.
-- **Play mode.** There is no Play or live-runtime presentation. Distinguishing observed
-  runtime values from authored ones remains future work under PLAN.md section 2.6.
+  component command.
+- **Pages, not continuous scrolling.** The dock pages because rows wrap to full text. A
+  very long single message still renders in full on its page.
+- **Capsule glyph.** At 12 px it is a small solid; the tag text beside it carries the
+  meaning.
 
 ## Open questions
 
+- Should the dock remember a chosen page per tab across tab switches? Today each tab
+  returns to its anchor (first page, newest messages, or Now).
 - Should a short window keep the agent collapsed, or should the user's choice persist
-  across sessions? It persists for the session now; there is no storage, by design.
-- Should component display names come from engine schema titles (request 4)?
-- Should the navigation grid map follow world axes once the engine documents its grid
-  orientation?
+  across sessions?
+- Should component display names and families come from engine schema metadata
+  (request 5)?

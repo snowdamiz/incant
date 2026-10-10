@@ -17,15 +17,17 @@ const clamp = (value: number, min: number, max: number) => Math.round(Math.min(m
 
 /**
  * Proportional defaults after the landing-page illustration (a narrow outline, a wide
- * viewport, a ~20 rem inspector), tuned so 1280×800 and 1920×1080 both keep a readable
- * hierarchy (≥ 232 px), an inspector wide enough for a vec3 row (≥ 320 px), and a
- * viewport at least half the window wide.
+ * viewport, a roomy inspector), tuned so 1280×800 and 1920×1080 both keep a readable
+ * hierarchy (≥ 232 px), an inspector wide enough for aligned rows (≥ 340 px by default),
+ * and a viewport at least half the window wide.
  */
 export function defaultLayout(width: number, height: number): Layout {
   return clampLayout(
     {
       left: clamp(width * 0.17, 232, 296),
-      right: clamp(width * 0.23, 320, 400),
+      // A quarter of the window (360 px at 1440): enough for aligned label and value
+      // columns and three-axis vectors without crowding.
+      right: clamp(width * 0.25, 340, 420),
       dock: clamp(height * 0.27, 160, 340),
       agent: clamp(height * 0.33, 260, 340),
     },
