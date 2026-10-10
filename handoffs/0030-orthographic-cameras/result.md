@@ -30,7 +30,7 @@ tilemaps or 2D physics.
 
 ## Director feedback acknowledged
 
-**Final native captures, 2026-10-10.** The director supplied ten native captures
+**Final native captures, 2026-10-10.** Astra supplied ten native captures under the director’s screen-capture authorization
 from `59f3384` and asked for a final scoped native verdict or a concrete defect.
 I did the following:
 - verified every image against `manifest.json`;
