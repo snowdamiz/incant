@@ -1,0 +1,190 @@
+{
+  "reason": "Verified merged PR48 caches cannot seed main; measured full inventory is near10GiB and default-branch refill needs room. Preserve all other entries.",
+  "verified_at": "2026-10-10T20:07:49.176294+00:00",
+  "pr": {
+    "number": 48,
+    "state": "closed",
+    "merged_at": "2026-10-10T20:06:24Z",
+    "merge_commit_sha": "56c22d408fa3e85aaf6bc37e00f856c664dfd0c8"
+  },
+  "deletions": [
+    {
+      "id": 8778079335,
+      "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 1254563806,
+      "at": "2026-10-10T20:07:49.598412+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777999525,
+      "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 1541663384,
+      "at": "2026-10-10T20:07:49.885235+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777612834,
+      "key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 1360676550,
+      "at": "2026-10-10T20:07:50.171569+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777474024,
+      "key": "v0-rust-Six platform probes-macOS-ARM64-ios-Darwin-arm64-791fe27b-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 471968257,
+      "at": "2026-10-10T20:07:50.641796+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777381088,
+      "key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 417400032,
+      "at": "2026-10-10T20:07:51.209829+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777368920,
+      "key": "v0-rust-Six platform probes-Linux-X64-android-Linux-x64-b9e20461-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 758476041,
+      "at": "2026-10-10T20:07:51.491171+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777353587,
+      "key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 596838543,
+      "at": "2026-10-10T20:07:51.885436+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777350785,
+      "key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 474981846,
+      "at": "2026-10-10T20:07:52.235101+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777348208,
+      "key": "v0-rust-Six platform probes-Windows-X64-desktop-Windows_NT-x64-773408be-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 377416934,
+      "at": "2026-10-10T20:07:52.569813+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777307482,
+      "key": "v0-rust-Six platform probes-macOS-ARM64-desktop-Darwin-arm64-791fe27b-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 358100899,
+      "at": "2026-10-10T20:07:52.855347+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777294987,
+      "key": "v0-rust-Six platform probes-Linux-X64-desktop-Linux-x64-b9e20461-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 404064198,
+      "at": "2026-10-10T20:07:53.236411+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    },
+    {
+      "id": 8777292774,
+      "key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-ead72dce",
+      "ref": "refs/pull/48/merge",
+      "size_in_bytes": 565240515,
+      "at": "2026-10-10T20:07:53.450462+00:00",
+      "exit_code": 0,
+      "response": "",
+      "error": ""
+    }
+  ],
+  "verified_after_at": "2026-10-10T20:07:53.671420+00:00",
+  "removed_bytes": 8581391005,
+  "all_selected_absent": true,
+  "all_nonselected_preserved": true,
+  "before": {
+    "count": 27,
+    "bytes": 10348422742,
+    "ids": [
+      8713169553,
+      8713231628,
+      8731567803,
+      8731693054,
+      8731739063,
+      8731739121,
+      8731739484,
+      8731739839,
+      8731740814,
+      8768808250,
+      8768808254,
+      8768808403,
+      8768809204,
+      8776796913,
+      8776838551,
+      8777292774,
+      8777294987,
+      8777307482,
+      8777348208,
+      8777350785,
+      8777353587,
+      8777368920,
+      8777381088,
+      8777474024,
+      8777612834,
+      8777999525,
+      8778079335
+    ]
+  },
+  "after": {
+    "count": 15,
+    "bytes": 1767031737,
+    "ids": [
+      8713169553,
+      8713231628,
+      8731567803,
+      8731693054,
+      8731739063,
+      8731739121,
+      8731739484,
+      8731739839,
+      8731740814,
+      8768808250,
+      8768808254,
+      8768808403,
+      8768809204,
+      8776796913,
+      8776838551
+    ]
+  }
+}
