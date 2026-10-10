@@ -21,13 +21,13 @@
     "rendering_or_device_gate": false
   },
   "remaining": [
-    "Native build with final Claude Camera Inspector",
-    "Claude engine/Inspector rendered review"
+    "Required hosted checks"
   ],
   "limits": [
     "No pixel-perfect snapping",
     "No sprite/tilemap renderer",
-    "No 2D physics or device gate"
+    "No 2D physics or device gate",
+    "Orthographic dolly distance changes depth cascade allocation and directional shadow-edge softness; equal-size geometry and parallel lighting remain unchanged."
   ],
   "all_gpu_tests": 44,
   "public_workflow_frozen": {
@@ -46,5 +46,56 @@
   "target_compilation": {
     "wasm32-unknown-unknown": "pass",
     "aarch64-apple-ios-sim": "pass"
+  },
+  "initial_checks_note": "Counts above are the projection-only foundation before compound/grid/UI integration.",
+  "integrated": {
+    "source": "59f3384cf8e1626da99b7ff9817f297f84482d97",
+    "rust_tests": 318,
+    "ui_tests": 387,
+    "tool_tests": 5,
+    "clippy": "passed",
+    "ui_strict_build": "passed",
+    "generated_contracts": "passed",
+    "native_release_build_package": "passed",
+    "binary": {
+      "source": "59f3384cf8e1626da99b7ff9817f297f84482d97",
+      "native_sha256": "7a9cb8a5285ccda04b98cf9ff55e2206b4543469b29304dce4ddea1388ef6c54",
+      "headless_sha256": "da0f407d4a29788e4a1496ce5a5700e7a61baa306562452fa203999254aa9303",
+      "project_sha256": "180a615e13b4cc2ac5e9b5dff7adad208ebe2c20c31509e5e29e54392f5f95e0",
+      "startup": "Safe std::process exec wrapper adds the project CLI argument; opened via CUA getApp."
+    },
+    "public_workflow": {
+      "passed": true,
+      "strict_typescript": true,
+      "legacy_camera_authored_via_shared_commands": true,
+      "runtime_projection_edits_save_resume_and_repeat_exact": true,
+      "author_files_unchanged": {
+        "camera.incant.json": "6ac63a6c6f06e8286831ac4539cd9eae4979bcf3f25633c4f1d3ee025df4211c",
+        "camera.incant.journal.jsonl": "1bcc761a6296b3eb2fdd8ad4ab897ee9e2f73e5306dfc2ef0853cf05af450f11"
+      },
+      "binary_sha256": "da0f407d4a29788e4a1496ce5a5700e7a61baa306562452fa203999254aa9303",
+      "rendering_or_device_gate": false
+    },
+    "gpu_coverage": {
+      "tests": 44,
+      "source": "298b846",
+      "note": "Unchanged renderer source/tests; retained original GPU run, not another combined-head invocation."
+    },
+    "claude_engine_and_browser": "accepted, cb5d2db",
+    "astra_render_audit": {
+      "committed_images_verified": 18,
+      "independent_run_images_exact": 72,
+      "numeric_analysis_exact": true
+    },
+    "native_review": {
+      "accepted": true,
+      "claude_commit": "7924ff3",
+      "captures": 10,
+      "native_evidence": "orthographic-native-2026-10-10.json"
+    },
+    "portable_core_compilation": [
+      "wasm32-unknown-unknown",
+      "aarch64-apple-ios-sim"
+    ]
   }
 }

@@ -56,7 +56,9 @@ within its documented workload.
 - Orthographic camera projection is implemented through shared component commands,
   renderer geometry, parallel material view rays, light clusters and directional
   cascade fitting. CPU/shared-command checks and all 41 renderer GPU tests pass.
-  Full integrated checks and Claude appearance/Inspector review remain in progress;
+  Integrated checks pass 318 Rust and 387 UI tests, Clippy, contracts and native
+  packaging. Claude engine/browser/native review is accepted; required hosted
+  checks remain open;
   pixel-perfect cameras, sprites, tilemaps and 2D physics remain open. See
   [orthographic cameras](docs/spikes/orthographic-cameras.md).
 
