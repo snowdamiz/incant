@@ -2,6 +2,7 @@
 mod build;
 mod path;
 mod resources;
+mod search;
 pub use resources::{NavigationAsset, NavigationResources};
 mod shortcut;
 mod surface;

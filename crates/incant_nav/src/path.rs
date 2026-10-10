@@ -1,8 +1,7 @@
-use crate::{NavigationError, NavigationMesh, invalid, limit};
+use crate::{NavigationError, NavigationMesh, invalid};
 use glam::Vec3;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use std::{cmp::Ordering, collections::BinaryHeap};
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -21,30 +20,6 @@ pub struct NavigationPath {
     pub corridor: Vec<u32>,
     pub visited: u32,
     pub generation: u64,
-}
-#[derive(Clone, Copy)]
-struct Entry {
-    f: f32,
-    g: f32,
-    index: usize,
-}
-impl PartialEq for Entry {
-    fn eq(&self, o: &Self) -> bool {
-        self.cmp(o) == Ordering::Equal
-    }
-}
-impl Eq for Entry {}
-impl PartialOrd for Entry {
-    fn partial_cmp(&self, o: &Self) -> Option<Ordering> {
-        Some(self.cmp(o))
-    }
-}
-impl Ord for Entry {
-    fn cmp(&self, o: &Self) -> Ordering {
-        o.f.total_cmp(&self.f)
-            .then_with(|| o.g.total_cmp(&self.g))
-            .then_with(|| o.index.cmp(&self.index))
-    }
 }
 impl NavigationMesh {
     pub fn find_path(&self, q: &PathRequest) -> Result<Option<NavigationPath>, NavigationError> {
@@ -88,79 +63,30 @@ impl NavigationMesh {
                     / p.vertices.len() as f32
             })
             .collect();
-        let mut costs = vec![f32::INFINITY; centers.len()];
-        let mut previous: Vec<Option<(usize, usize)>> = vec![None; centers.len()];
-        let mut open = BinaryHeap::new();
-        costs[first] = 0.;
-        open.push(Entry {
-            f: centers[first].distance(centers[last]),
-            g: 0.,
-            index: first,
-        });
-        let mut visited = 0;
-        while let Some(Entry { g, index, .. }) = open.pop() {
-            if g > costs[index] {
-                continue;
-            }
-            if visited == q.max_visited {
-                return Err(limit("path search visit budget"));
-            }
-            visited += 1;
-            if index == last {
-                let mut corridor = vec![last];
-                let mut cursor = last;
-                while cursor != first {
-                    let (from, _) =
-                        previous[cursor].ok_or_else(|| invalid("incomplete path parent"))?;
-                    corridor.push(from);
-                    cursor = from;
-                    if corridor.len() > 4096 {
-                        return Err(limit("path corridor exceeds 4096 polygons"));
-                    }
-                }
-                corridor.reverse();
-                let mut gates = vec![(start, start)];
-                for pair in corridor.windows(2) {
-                    let (_, edge) = previous[pair[1]].unwrap();
-                    let p = &self.portals[pair[0]][edge];
-                    let a = Vec3::from_array(p.a);
-                    let b = Vec3::from_array(p.b);
-                    let forward = centers[pair[1]] - centers[pair[0]];
-                    let from_mid = a - (a + b) * 0.5;
-                    gates.push(if forward.x * from_mid.z - forward.z * from_mid.x > 0. {
-                        (p.a, p.b)
-                    } else {
-                        (p.b, p.a)
-                    });
-                }
-                gates.push((end, end));
-                let path = NavigationPath {
-                    points: crate::surface::follow(
-                        &self.polygons,
-                        &corridor,
-                        &gates,
-                        &funnel(&gates),
-                    )?,
-                    corridor: corridor.into_iter().map(|i| i as u32).collect(),
-                    visited,
-                    generation: self.generation(),
-                };
-                return Ok(Some(path));
-            }
-            for (edge, p) in self.portals[index].iter().enumerate() {
-                let cost = g + centers[index].distance(centers[p.to]);
-                if cost < costs[p.to] {
-                    costs[p.to] = cost;
-                    previous[p.to] = Some((index, edge));
-                    open.push(Entry {
-                        f: cost + centers[p.to].distance(centers[last]),
-                        g: cost,
-                        index: p.to,
-                    });
-                }
-            }
+        let Some(route) = self.search_portals(first, last, start, end, q.max_visited)? else {
+            return Ok(None);
+        };
+        let corridor = route.corridor;
+        let mut gates = vec![(start, start)];
+        for (from, edge) in route.edges {
+            let p = &self.portals[from][edge];
+            let a = Vec3::from_array(p.a);
+            let b = Vec3::from_array(p.b);
+            let forward = centers[p.to] - centers[from];
+            let from_mid = a - (a + b) * 0.5;
+            gates.push(if forward.x * from_mid.z - forward.z * from_mid.x > 0. {
+                (p.a, p.b)
+            } else {
+                (p.b, p.a)
+            });
         }
-        Ok(None)
+        gates.push((end, end));
+        Ok(Some(NavigationPath {
+            points: crate::surface::follow(&self.polygons, &corridor, &gates, &funnel(&gates))?,
+            corridor: corridor.into_iter().map(|i| i as u32).collect(),
+            visited: route.visited,
+            generation: self.generation(),
+        }))
     }
     pub(crate) fn nearest(&self, p: [f32; 3], max: f32) -> Option<(usize, [f32; 3])> {
         let p = Vec3::from_array(p);
@@ -324,46 +250,65 @@ mod tests {
                 })
                 .unwrap()
                 .unwrap();
-            let centers: Vec<_> = nav
-                .polygons
-                .iter()
-                .map(|p| {
-                    p.vertices
-                        .iter()
-                        .map(|p| Vec3::from_array(*p))
-                        .sum::<Vec3>()
-                        / p.vertices.len() as f32
-                })
-                .collect();
-            let start = path.corridor[0] as usize;
-            let end = *path.corridor.last().unwrap() as usize;
-            let mut costs = vec![f64::INFINITY; centers.len()];
-            let mut settled = vec![false; centers.len()];
-            costs[start] = 0.;
-            loop {
-                let i = (0..costs.len())
-                    .filter(|&i| !settled[i])
-                    .min_by(|&a, &b| costs[a].total_cmp(&costs[b]))
-                    .unwrap();
-                if i == end {
-                    break;
-                }
-                assert!(costs[i].is_finite());
-                settled[i] = true;
-                for p in &nav.portals[i] {
-                    costs[p.to] =
-                        costs[p.to].min(costs[i] + f64::from(centers[i].distance(centers[p.to])));
+            // Independent Dijkstra oracle over the directed-entry graph, using
+            // an unsorted scan rather than the production A* queue/heuristic.
+            let first = path.corridor[0] as usize;
+            let last = *path.corridor.last().unwrap() as usize;
+            let start = Vec3::from_array(path.points[0]);
+            let end = Vec3::from_array(*path.points.last().unwrap());
+            let mut nodes = vec![(first, first, start)];
+            for (from, portals) in nav.portals.iter().enumerate() {
+                for p in portals {
+                    nodes.push((
+                        from,
+                        p.to,
+                        (Vec3::from_array(p.a) + Vec3::from_array(p.b)) * 0.5,
+                    ));
                 }
             }
-            let actual = path
-                .corridor
+            let mut costs = vec![f64::INFINITY; nodes.len()];
+            let mut settled = vec![false; nodes.len()];
+            costs[0] = 0.;
+            let mut goal = f64::INFINITY;
+            while let Some(i) = (0..nodes.len())
+                .filter(|&i| !settled[i])
+                .min_by(|&a, &b| costs[a].total_cmp(&costs[b]))
+            {
+                if costs[i] >= goal {
+                    break;
+                }
+                settled[i] = true;
+                if nodes[i].1 == last {
+                    goal = goal.min(costs[i] + f64::from(nodes[i].2.distance(end)));
+                }
+                for j in 1..nodes.len() {
+                    if nodes[j].0 == nodes[i].1 {
+                        costs[j] =
+                            costs[j].min(costs[i] + f64::from(nodes[i].2.distance(nodes[j].2)));
+                    }
+                }
+            }
+            let mut points = vec![start];
+            for pair in path.corridor.windows(2) {
+                let gates: Vec<_> = nav.portals[pair[0] as usize]
+                    .iter()
+                    .filter(|p| p.to == pair[1] as usize)
+                    .collect();
+                assert_eq!(
+                    gates.len(),
+                    1,
+                    "this oracle fixture has unique polygon-to-polygon gates"
+                );
+                points.push((Vec3::from_array(gates[0].a) + Vec3::from_array(gates[0].b)) * 0.5);
+            }
+            points.push(end);
+            let actual = points
                 .windows(2)
-                .map(|p| f64::from(centers[p[0] as usize].distance(centers[p[1] as usize])))
+                .map(|p| f64::from(p[0].distance(p[1])))
                 .sum::<f64>();
             assert!(
-                (actual - costs[end]).abs() < 1e-4,
-                "A* cost {actual} != Dijkstra {}",
-                costs[end]
+                (actual - goal).abs() < 1e-4,
+                "portal A* cost {actual} != Dijkstra {goal}"
             );
             let request = PathRequest {
                 start: [-6., 0., z],
@@ -402,7 +347,7 @@ mod tests {
         }
         assert!(
             shortened,
-            "line-of-sight repair should remove a graph-centroid detour"
+            "line-of-sight repair should remove a remaining portal-graph detour"
         );
     }
 }
