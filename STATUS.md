@@ -939,3 +939,9 @@ mock response, simulator build or unsigned package counts as a shipped product.
   [evidence](docs/spikes/cooked-native-scripts.md). Full gameplay migration,
   authenticated file exports, cross-target embedding, automatic source-map
   diagnostics, MSVC symbol audit and device/performance gates remain open.
+
+## Native spatial scene data and committed views (2026-10-10)
+
+Typed Camera/MeshRenderer/current light/environment declarations now cook to checked scene v4 with binary stable asset references and existing recipe fingerprints; old scene encodings remain supported. Read-only parent-first ECS views expose continuous f64 locals/committed globals with accepted-change topology/configuration generations. Structural configuration batches are atomic, saves refuse unsupported spatial state, and no-render probes refuse spatial scenes. Real source-deleted cook→scene→sealed-model loading, 120 scoped release tests/doctests, scoped Clippy and six runner cases pass; runtime dependencies stay authoring-free. [Evidence](docs/spikes/native-spatial-scene.md).
+
+Native renderer input binding/primitive and GPU checks, explicit camera selection, game/audio host refusal on integration, spatial saves and the complete runtime/Play/pixel-placement migration remain open. No renderer/shader/UI change or performance/appearance gate is claimed.

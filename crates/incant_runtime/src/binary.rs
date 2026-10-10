@@ -1,4 +1,4 @@
-//! Versions 1/2/3, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1/2/3/4, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 3;
+const VERSION: u32 = 4;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if !self.audio.is_empty() {
+        let version = if !self.spatial.is_empty() || !self.visual_assets.is_empty() {
             VERSION
+        } else if !self.audio.is_empty() {
+            3
         } else if !self.physics.is_empty() {
             2
         } else {
@@ -78,6 +80,16 @@ impl CookedScene {
             bytes.extend((self.audio.len() as u32).to_le_bytes());
             for node in &self.audio {
                 crate::audio_binary::write(&mut bytes, node);
+            }
+        }
+        if version >= 4 {
+            bytes.extend((self.visual_assets.len() as u32).to_le_bytes());
+            for asset in &self.visual_assets {
+                crate::spatial_binary::write_asset(&mut bytes, asset);
+            }
+            bytes.extend((self.spatial.len() as u32).to_le_bytes());
+            for node in &self.spatial {
+                crate::spatial_binary::write(&mut bytes, node);
             }
         }
         let length = (bytes.len() - HEADER) as u32;
@@ -172,7 +184,10 @@ impl CookedScene {
         let mut audio = Vec::new();
         if version >= 3 {
             let count = reader.u32()? as usize;
-            if count == 0 || count > crate::MAX_AUDIO_NODES || count > reader.0.len() / 17 {
+            if (version == 3 && count == 0)
+                || count > crate::MAX_AUDIO_NODES
+                || count > reader.0.len() / 17
+            {
                 return Err(SceneError::Invalid("audio record count"));
             }
             audio.reserve(count);
@@ -185,6 +200,45 @@ impl CookedScene {
                     return Err(SceneError::Invalid("noncanonical audio order"));
                 }
                 audio.push(node);
+            }
+        }
+        let mut assets = Vec::new();
+        let mut spatial = Vec::new();
+        if version >= 4 {
+            let asset_count = reader.u32()? as usize;
+            if asset_count > crate::MAX_VISUAL_ASSETS
+                || asset_count > reader.0.len() / crate::spatial_binary::ASSET_BYTES
+            {
+                return Err(SceneError::Invalid("visual asset count"));
+            }
+            assets.reserve(asset_count);
+            for _ in 0..asset_count {
+                let asset = crate::spatial_binary::read_asset(&mut reader)?;
+                if assets
+                    .last()
+                    .is_some_and(|p: &crate::VisualAssetRef| p.id >= asset.id)
+                {
+                    return Err(SceneError::Invalid("noncanonical visual asset order"));
+                }
+                assets.push(asset);
+            }
+            let spatial_count = reader.u32()? as usize;
+            if spatial_count > count
+                || spatial_count > reader.0.len() / 17
+                || (spatial_count == 0 && asset_count == 0)
+            {
+                return Err(SceneError::Invalid("spatial record count"));
+            }
+            spatial.reserve(spatial_count);
+            for _ in 0..spatial_count {
+                let node = crate::spatial_binary::read(&mut reader)?;
+                if spatial
+                    .last()
+                    .is_some_and(|p: &crate::CookedSpatial| p.entity >= node.entity)
+                {
+                    return Err(SceneError::Invalid("noncanonical spatial order"));
+                }
+                spatial.push(node);
             }
         }
         if !reader.0.is_empty() {
@@ -201,7 +255,8 @@ impl CookedScene {
         }
         Self::new(id, tick_rate, entities)?
             .with_physics(physics)?
-            .with_audio(audio)
+            .with_audio(audio)?
+            .with_spatial(assets, spatial)
     }
 }
 

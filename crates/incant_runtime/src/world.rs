@@ -41,6 +41,8 @@ pub enum RuntimeError {
     Scene(#[from] SceneError),
     #[error("runtime tick counter exhausted")]
     TickOverflow,
+    #[error("runtime spatial generation exhausted")]
+    GenerationOverflow,
     #[error(transparent)]
     Physics(#[from] incant_physics_runtime::PhysicsError),
     #[error("native physics world failed; construct a new session")]
@@ -59,6 +61,11 @@ pub struct NativeWorld {
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_failed: bool,
     pub(crate) physics_used: bool,
+    pub(crate) spatial_used: bool,
+    pub(crate) spatial_ids: BTreeSet<StableId>,
+    pub(crate) visual_assets: Vec<crate::VisualAssetRef>,
+    pub(crate) topology_generation: u64,
+    pub(crate) binding_generation: u64,
     pub(crate) audio_used: bool,
     pub(crate) audio_ids: BTreeSet<StableId>,
     pub(crate) entities: BTreeMap<StableId, Entity>,
@@ -76,6 +83,8 @@ impl NativeWorld {
     pub fn new(scene: CookedScene) -> Self {
         let physics = scene.physics.clone();
         let audio = scene.audio.clone();
+        let spatial = scene.spatial;
+        let visual_assets = scene.visual_assets;
         let mut solver = incant_physics_runtime::PhysicsRuntime::default();
         let by_id: BTreeMap<_, _> = scene.entities.iter().map(|e| (e.id, e)).collect();
         for declaration in &physics {
@@ -119,6 +128,11 @@ impl NativeWorld {
             physics: solver,
             physics_failed: false,
             physics_used: !physics.is_empty(),
+            spatial_used: !spatial.is_empty() || !visual_assets.is_empty(),
+            spatial_ids: BTreeSet::new(),
+            visual_assets,
+            topology_generation: 0,
+            binding_generation: 0,
             audio_used: !audio.is_empty(),
             audio_ids: BTreeSet::new(),
             schedule,
@@ -128,6 +142,9 @@ impl NativeWorld {
             tick: 0,
             tick_rate: scene.tick_rate,
         };
+        for node in spatial {
+            result.install_spatial(node.entity, Some(node));
+        }
         for node in audio {
             result.install_audio(node.entity, Some(node));
         }
@@ -135,6 +152,18 @@ impl NativeWorld {
             result.install_physics(declaration);
         }
         result
+    }
+
+    pub(crate) fn install_spatial(&mut self, id: StableId, node: Option<crate::CookedSpatial>) {
+        let mut entity = self.world.entity_mut(self.entities[&id]);
+        if let Some(node) = node {
+            self.spatial_used = true;
+            self.spatial_ids.insert(id);
+            entity.insert(node);
+        } else {
+            self.spatial_ids.remove(&id);
+            entity.remove::<crate::CookedSpatial>();
+        }
     }
 
     /// Bounded typed audio view over committed ECS values. No document, JSON,

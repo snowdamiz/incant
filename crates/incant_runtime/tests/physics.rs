@@ -144,10 +144,10 @@ fn invalid_physics_records_tags_pairs_and_versions_fail_closed() {
     rehash(&mut invalid);
     assert!(CookedScene::from_bytes(&invalid).is_err());
     let mut invalid = bytes.clone();
-    invalid[8..12].copy_from_slice(&4_u32.to_le_bytes());
+    invalid[8..12].copy_from_slice(&5_u32.to_le_bytes());
     assert_eq!(
         CookedScene::from_bytes(&invalid).unwrap_err(),
-        SceneError::Version(4)
+        SceneError::Version(5)
     );
     for len in [72, record, bytes.len() - 1] {
         assert!(CookedScene::from_bytes(&bytes[..len]).is_err());

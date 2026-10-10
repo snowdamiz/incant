@@ -17,6 +17,10 @@ pub enum CookError {
     MissingScene(String),
     #[error("component {component} on {entity} has not migrated to the cooked runtime")]
     UnsupportedComponent { entity: String, component: String },
+    #[error("material overrides on {0} have not migrated to the native renderer")]
+    MaterialOverrides(String),
+    #[error("invalid visual asset binding {0}")]
+    VisualAsset(String),
     #[error("invalid stable ID {0}")]
     InvalidId(String),
     #[error("component decoding failed: {0}")]
@@ -35,6 +39,8 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
     let mut entities = Vec::with_capacity(scene.entities.len());
     let mut physics = Vec::new();
     let mut audio = Vec::new();
+    let mut spatial = Vec::new();
+    let mut visual_assets = std::collections::BTreeMap::new();
     for entity in scene.entities.values() {
         for component in entity.components.keys() {
             if ![
@@ -46,6 +52,12 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                 "AudioBus",
                 "AudioSource",
                 "AudioListener",
+                "Camera",
+                "MeshRenderer",
+                "DirectionalLight",
+                "PointLight",
+                "SpotLight",
+                "EnvironmentLight",
             ]
             .contains(&component.as_str())
             {
@@ -54,6 +66,9 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                     component: component.clone(),
                 });
             }
+        }
+        if let Some(node) = crate::spatial::cook(project, entity, &mut visual_assets)? {
+            spatial.push(node);
         }
         let transform: Transform = entity
             .components
@@ -136,6 +151,7 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
         CookedScene::new(stable_id(&scene.id)?, project.settings.tick_rate, entities)?
             .with_physics(physics)?
             .with_audio(audio)?
+            .with_spatial(visual_assets.into_values().collect(), spatial)?
             .to_bytes(),
     )
 }

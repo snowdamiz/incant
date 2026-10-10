@@ -3646,11 +3646,14 @@ dependencies = [
 name = "incant_cook"
 version = "0.0.1"
 dependencies = [
+ "incant_assets",
+ "incant_assets_runtime",
  "incant_doc",
  "incant_runtime",
  "incant_script",
  "serde_json",
  "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
  "ulid",
 ]
