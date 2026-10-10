@@ -3,6 +3,7 @@ mod build;
 mod path;
 mod resources;
 pub use resources::{NavigationAsset, NavigationResources};
+mod shortcut;
 mod steering;
 mod surface;
 pub use steering::{SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity, steer};
