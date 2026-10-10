@@ -3,8 +3,15 @@ use std::{
     fs,
     path::PathBuf,
     process::Command,
+    sync::Mutex,
     time::{SystemTime, UNIX_EPOCH},
 };
+
+// A concurrent child spawn can inherit the copy's writable descriptor until
+// exec closes it, even with CLOEXEC. Linux may then reject the copied player
+// with ETXTBSY after fs::copy has returned in the parent. Keep this test binary's
+// copy/spawn windows disjoint; do not retry or hide any player launch failure.
+static PROCESS_TESTS: Mutex<()> = Mutex::new(());
 
 struct Temporary(PathBuf);
 impl Drop for Temporary {
@@ -15,6 +22,7 @@ impl Drop for Temporary {
 
 #[test]
 fn copied_player_runs_scene_and_structural_behavior_without_script_arguments() {
+    let _process_guard = PROCESS_TESTS.lock().unwrap();
     let temporary = Temporary(std::env::temp_dir().join(format!(
             "incant-embedded-{}-{}",
             std::process::id(),
@@ -88,6 +96,7 @@ fn copied_player_runs_scene_and_structural_behavior_without_script_arguments() {
 
 #[test]
 fn recording_boundary_rejects_incompatible_unbounded_or_conflicting_inputs_before_play() {
+    let _process_guard = PROCESS_TESTS.lock().unwrap();
     let temporary = Temporary(std::env::temp_dir().join(format!(
         "incant-input-player-{}-{}", std::process::id(),
         SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos()
