@@ -102,6 +102,17 @@ export namespace GameSaveSchema {
 }
 export type GameSave = GameSaveSchema.Root;
 
+export namespace GridNavigationQuerySchema {
+  export type GridPathRequest = { "diagonal"?: boolean; "end": [number, number]; "max_expansions"?: number; "start": [number, number] };
+  export type Root = { "grid_entity": string; "path": GridPathRequest; "scene_id": string };
+}
+export type GridNavigationQuery = GridNavigationQuerySchema.Root;
+
+export namespace GridPathSchema {
+  export type Root = { "cells": Array<[number, number]>; "cost": number; "generation": number };
+}
+export type GridPath = GridPathSchema.Root;
+
 export namespace InputActionsSchema {
   export type ActionGesture = "tap" | "long_press" | "swipe";
   export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
@@ -187,6 +198,11 @@ export namespace MissingStringSchema {
   export type Root = { "key": string; "kind": MissingKind; "requested_locale": string; "resolved_locale"?: string | null; "table_id": string };
 }
 export type MissingString = MissingStringSchema.Root;
+
+export namespace NavigationGridSchema {
+  export type Root = { "costs": Array<number>; "dimensions": [number, number] };
+}
+export type NavigationGrid = NavigationGridSchema.Root;
 
 export namespace NavigationMeshSchema {
   export type NavigationSettings = { "agent_height": number; "agent_radius": number; "cell_height": number; "cell_size": number; "max": [number, number, number]; "max_climb": number; "max_slope_degrees": number; "min": [number, number, number]; "tile_cells": number };

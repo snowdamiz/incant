@@ -1,0 +1,1574 @@
+{
+ "set": "artifacts/0029-grid-navigation/A",
+ "ticks": 540,
+ "dt": 0.016666666666666666,
+ "door_edits": [
+  {
+   "t": 40,
+   "ev": "close_a",
+   "cell": [
+    8,
+    2
+   ],
+   "actor_from": [
+    4,
+    4
+   ],
+   "actor_to": [
+    4,
+    4
+   ]
+  },
+  {
+   "t": 89,
+   "ev": "close_b",
+   "cell": [
+    8,
+    7
+   ],
+   "actor_from": [
+    6,
+    5
+   ],
+   "actor_to": [
+    6,
+    5
+   ]
+  },
+  {
+   "t": 204,
+   "ev": "reopen",
+   "cell": [
+    8,
+    2
+   ],
+   "actor_from": [
+    6,
+    6
+   ],
+   "actor_to": [
+    6,
+    6
+   ]
+  }
+ ],
+ "probes": {
+  "gauge_null": {
+   "engine": null,
+   "oracle": null
+  },
+  "gauge_detour": {
+   "engine": 4000,
+   "recomputed": 4000,
+   "oracle": 4000,
+   "cells": [
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     4,
+     9
+    ],
+    [
+     3,
+     9
+    ]
+   ]
+  },
+  "metric_cardinal_into_mud": {
+   "engine": 5000,
+   "recomputed": 5000,
+   "oracle": 5000,
+   "cells": [
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ]
+   ]
+  },
+  "metric_start_on_mud_not_charged": {
+   "engine": 1000,
+   "recomputed": 1000,
+   "oracle": 1000,
+   "cells": [
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     5
+    ]
+   ]
+  },
+  "metric_diagonal_into_floor": {
+   "engine": 1414,
+   "recomputed": 1414,
+   "oracle": 1414,
+   "cells": [
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ]
+   ]
+  },
+  "doorway_corner": {
+   "engine": 10000,
+   "recomputed": 10000,
+   "oracle": 10000,
+   "cells": [
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     7
+    ]
+   ]
+  },
+  "four_way_start_goal": {
+   "engine": 16000,
+   "recomputed": 16000,
+   "oracle": 16000,
+   "cells": [
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ]
+  },
+  "error_out_of_bounds": {
+   "error": "invalid navigation input: grid path endpoint is outside the grid"
+  },
+  "error_exhausted": {
+   "error": "navigation resource limit exceeded: grid path exhausted its expansion budget"
+  }
+ },
+ "routes": [
+  {
+   "t": 1,
+   "anchor": [
+    2,
+    4
+   ],
+   "cost": 14242,
+   "generation": 1,
+   "cells": [
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 14242,
+   "door_a": true,
+   "gate_b": true
+  },
+  {
+   "t": 2,
+   "anchor": [
+    3,
+    4
+   ],
+   "cost": 13242,
+   "generation": 1,
+   "cells": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 13242,
+   "door_a": true,
+   "gate_b": true
+  },
+  {
+   "t": 21,
+   "anchor": [
+    4,
+    4
+   ],
+   "cost": 12242,
+   "generation": 1,
+   "cells": [
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 12242,
+   "door_a": true,
+   "gate_b": true
+  },
+  {
+   "t": 41,
+   "anchor": [
+    5,
+    4
+   ],
+   "cost": 23242,
+   "generation": 2,
+   "cells": [
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     10,
+     7
+    ],
+    [
+     11,
+     7
+    ],
+    [
+     12,
+     6
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 23242,
+   "door_a": false,
+   "gate_b": true
+  },
+  {
+   "t": 61,
+   "anchor": [
+    6,
+    5
+   ],
+   "cost": 21828,
+   "generation": 2,
+   "cells": [
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     10,
+     7
+    ],
+    [
+     11,
+     7
+    ],
+    [
+     12,
+     6
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 21828,
+   "door_a": false,
+   "gate_b": true
+  },
+  {
+   "t": 90,
+   "anchor": [
+    6,
+    6
+   ],
+   "cost": null,
+   "generation": null,
+   "cells": null,
+   "oracle": null,
+   "door_a": false,
+   "gate_b": false
+  },
+  {
+   "t": 205,
+   "anchor": [
+    6,
+    6
+   ],
+   "cost": 12828,
+   "generation": 4,
+   "cells": [
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 12828,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 221,
+   "anchor": [
+    7,
+    5
+   ],
+   "cost": 11414,
+   "generation": 4,
+   "cells": [
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 11414,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 249,
+   "anchor": [
+    7,
+    4
+   ],
+   "cost": 10414,
+   "generation": 4,
+   "cells": [
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 10414,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 269,
+   "anchor": [
+    7,
+    3
+   ],
+   "cost": 9414,
+   "generation": 4,
+   "cells": [
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 9414,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 289,
+   "anchor": [
+    7,
+    2
+   ],
+   "cost": 8414,
+   "generation": 4,
+   "cells": [
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 8414,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 309,
+   "anchor": [
+    8,
+    2
+   ],
+   "cost": 7414,
+   "generation": 4,
+   "cells": [
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 7414,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 329,
+   "anchor": [
+    9,
+    2
+   ],
+   "cost": 6414,
+   "generation": 4,
+   "cells": [
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 6414,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 349,
+   "anchor": [
+    9,
+    3
+   ],
+   "cost": 5414,
+   "generation": 4,
+   "cells": [
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 5414,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 369,
+   "anchor": [
+    9,
+    4
+   ],
+   "cost": 4414,
+   "generation": 4,
+   "cells": [
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 4414,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 389,
+   "anchor": [
+    10,
+    5
+   ],
+   "cost": 3000,
+   "generation": 4,
+   "cells": [
+    [
+     10,
+     5
+    ],
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 3000,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 417,
+   "anchor": [
+    11,
+    5
+   ],
+   "cost": 2000,
+   "generation": 4,
+   "cells": [
+    [
+     11,
+     5
+    ],
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 2000,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 437,
+   "anchor": [
+    12,
+    5
+   ],
+   "cost": 1000,
+   "generation": 4,
+   "cells": [
+    [
+     12,
+     5
+    ],
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 1000,
+   "door_a": true,
+   "gate_b": false
+  },
+  {
+   "t": 457,
+   "anchor": [
+    13,
+    5
+   ],
+   "cost": 0,
+   "generation": 4,
+   "cells": [
+    [
+     13,
+     5
+    ]
+   ],
+   "oracle": 0,
+   "door_a": true,
+   "gate_b": false
+  }
+ ],
+ "per_tick_cost_mismatches": 0,
+ "motion": {
+  "steps": 17,
+  "max_displacement_per_tick_m": 0.05000000000000071,
+  "speed_limit_per_tick_m": 0.05,
+  "max_yaw_change_per_tick_rad": 0.1570796326794898,
+  "turn_limit_per_tick_rad": 0.15707963267948966,
+  "min_footprint_clearance_m": 0.2,
+  "stationary_ticks_by_phase": {
+   "wait": 95,
+   "move-turning": 15,
+   "arrived": 64
+  },
+  "step_log": [
+   {
+    "t": 1,
+    "from": [
+     2,
+     4
+    ],
+    "to": [
+     3,
+     4
+    ],
+    "route_t": 1
+   },
+   {
+    "t": 20,
+    "from": [
+     3,
+     4
+    ],
+    "to": [
+     4,
+     4
+    ],
+    "route_t": 2
+   },
+   {
+    "t": 40,
+    "from": [
+     4,
+     4
+    ],
+    "to": [
+     5,
+     4
+    ],
+    "route_t": 21
+   },
+   {
+    "t": 60,
+    "from": [
+     5,
+     4
+    ],
+    "to": [
+     6,
+     5
+    ],
+    "route_t": 41
+   },
+   {
+    "t": 89,
+    "from": [
+     6,
+     5
+    ],
+    "to": [
+     6,
+     6
+    ],
+    "route_t": 61
+   },
+   {
+    "t": 220,
+    "from": [
+     6,
+     6
+    ],
+    "to": [
+     7,
+     5
+    ],
+    "route_t": 205
+   },
+   {
+    "t": 248,
+    "from": [
+     7,
+     5
+    ],
+    "to": [
+     7,
+     4
+    ],
+    "route_t": 221
+   },
+   {
+    "t": 268,
+    "from": [
+     7,
+     4
+    ],
+    "to": [
+     7,
+     3
+    ],
+    "route_t": 249
+   },
+   {
+    "t": 288,
+    "from": [
+     7,
+     3
+    ],
+    "to": [
+     7,
+     2
+    ],
+    "route_t": 269
+   },
+   {
+    "t": 308,
+    "from": [
+     7,
+     2
+    ],
+    "to": [
+     8,
+     2
+    ],
+    "route_t": 289
+   },
+   {
+    "t": 328,
+    "from": [
+     8,
+     2
+    ],
+    "to": [
+     9,
+     2
+    ],
+    "route_t": 309
+   },
+   {
+    "t": 348,
+    "from": [
+     9,
+     2
+    ],
+    "to": [
+     9,
+     3
+    ],
+    "route_t": 329
+   },
+   {
+    "t": 368,
+    "from": [
+     9,
+     3
+    ],
+    "to": [
+     9,
+     4
+    ],
+    "route_t": 349
+   },
+   {
+    "t": 388,
+    "from": [
+     9,
+     4
+    ],
+    "to": [
+     10,
+     5
+    ],
+    "route_t": 369
+   },
+   {
+    "t": 416,
+    "from": [
+     10,
+     5
+    ],
+    "to": [
+     11,
+     5
+    ],
+    "route_t": 389
+   },
+   {
+    "t": 436,
+    "from": [
+     11,
+     5
+    ],
+    "to": [
+     12,
+     5
+    ],
+    "route_t": 417
+   },
+   {
+    "t": 456,
+    "from": [
+     12,
+     5
+    ],
+    "to": [
+     13,
+     5
+    ],
+    "route_t": 437
+   }
+  ]
+ },
+ "events": [
+  {
+   "t": 1,
+   "ev": "layout",
+   "dt": 0.016666666666666666,
+   "w": 16,
+   "h": 10,
+   "start": [
+    2,
+    4
+   ],
+   "goal": [
+    13,
+    5
+   ],
+   "door_a": [
+    8,
+    2
+   ],
+   "gate_b": [
+    8,
+    7
+   ],
+   "gauge": [
+    2,
+    8
+   ],
+   "speed_cells_per_s": 3,
+   "wait_ticks": 96
+  },
+  {
+   "t": 40,
+   "ev": "close_a",
+   "cell": [
+    8,
+    2
+   ],
+   "actor_from": [
+    4,
+    4
+   ],
+   "actor_to": [
+    4,
+    4
+   ],
+   "cost_written": 0
+  },
+  {
+   "t": 89,
+   "ev": "close_b",
+   "cell": [
+    8,
+    7
+   ],
+   "actor_from": [
+    6,
+    5
+   ],
+   "actor_to": [
+    6,
+    5
+   ],
+   "cost_written": 0
+  },
+  {
+   "t": 90,
+   "ev": "stopping",
+   "at": [
+    6,
+    6
+   ],
+   "from": [
+    6,
+    5
+   ]
+  },
+  {
+   "t": 109,
+   "ev": "unreachable",
+   "at": [
+    6,
+    6
+   ],
+   "door_a": false,
+   "gate_b": false
+  },
+  {
+   "t": 204,
+   "ev": "reopen",
+   "cell": [
+    8,
+    2
+   ],
+   "actor_from": [
+    6,
+    6
+   ],
+   "actor_to": [
+    6,
+    6
+   ],
+   "cost_written": 1
+  },
+  {
+   "t": 205,
+   "ev": "resume",
+   "at": [
+    6,
+    6
+   ],
+   "cost": 12828,
+   "waited_ticks": 96
+  },
+  {
+   "t": 205,
+   "ev": "turn_in_place",
+   "at": [
+    6,
+    6
+   ],
+   "toward": [
+    7,
+    5
+   ],
+   "heading_change_deg": 135
+  },
+  {
+   "t": 476,
+   "ev": "arrive",
+   "at": [
+    13,
+    5
+   ],
+   "steps": 17,
+   "null_ticks": 96,
+   "queries": 485
+  }
+ ],
+ "repeat_logs_identical": true,
+ "repeat_state_identical": true,
+ "resume_save_tick": 156,
+ "resume_messages_identical_except_generation": true,
+ "resume_generation_differences": {
+  "4->2": {
+   "first_tick": 205,
+   "last_tick": 476
+  }
+ },
+ "resume_raw_log_bytes_identical": false,
+ "resume_max_elapsed_seconds_difference": 0.0,
+ "resume_state_identical": true,
+ "authored_unchanged": true,
+ "binary_sha256": [
+  "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f"
+ ],
+ "failed_attempts": [],
+ "window_frame_overlaps": [
+  {
+   "window": "gate-close",
+   "against": "reopen",
+   "shared_ticks": 2,
+   "identical": 2
+  },
+  {
+   "window": "reopen",
+   "against": "gate",
+   "shared_ticks": 12,
+   "identical": 12
+  },
+  {
+   "window": "arrive",
+   "against": "oblique",
+   "shared_ticks": 12,
+   "identical": 12
+  }
+ ],
+ "frames": {
+  "plan": {
+   "camera": "01JA2G00290000000000000059",
+   "start": 0,
+   "count": 109
+  },
+  "oblique": {
+   "camera": "01JA2G0029000000000000005A",
+   "start": 0,
+   "count": 91
+  },
+  "gate": {
+   "camera": "01JA2G0029000000000000005B",
+   "start": 0,
+   "count": 91
+  },
+  "gauge": {
+   "camera": "01JA2G0029000000000000005D",
+   "start": 2,
+   "count": 5
+  },
+  "door-close": {
+   "camera": "01JA2G0029000000000000005C",
+   "start": 28,
+   "count": 49
+  },
+  "gate-close": {
+   "camera": "01JA2G0029000000000000005B",
+   "start": 77,
+   "count": 61
+  },
+  "reopen": {
+   "camera": "01JA2G0029000000000000005B",
+   "start": 194,
+   "count": 73
+  },
+  "arrive": {
+   "camera": "01JA2G0029000000000000005A",
+   "start": 428,
+   "count": 37
+  }
+ },
+ "compare": {
+  "other": "artifacts/0029-grid-navigation/B",
+  "logs_identical": true,
+  "capture_keys_and_tick_sets_identical": true,
+  "captures": 8,
+  "states_identical_raw": false,
+  "states_identical_after_generated_id_mapping": true,
+  "generated_ids_mapped": 18,
+  "generated_id_aliases": [
+   "ASSET:actor",
+   "ASSET:door_slab",
+   "ASSET:gauge_bar",
+   "ASSET:gauge_cross",
+   "ASSET:gauge_dot",
+   "ASSET:gauge_ring",
+   "ASSET:goal",
+   "ASSET:plinth",
+   "ASSET:route_bar",
+   "ASSET:route_dot",
+   "ASSET:start",
+   "ASSET:tiles",
+   "ASSET:trail_dot",
+   "ASSET:wait_ring",
+   "ASSET:wall_lids",
+   "ASSET:walls",
+   "PROJECT",
+   "SCENE"
+  ],
+  "frames": 516,
+  "frames_identical": 516,
+  "other_set_checks_passed": true
+ }
+}

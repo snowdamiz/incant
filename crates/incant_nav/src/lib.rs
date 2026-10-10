@@ -1,5 +1,7 @@
 //! Bounded, deterministic navigation geometry. No filesystem, editor or network capability.
 mod build;
+mod grid;
+pub use grid::{GridPath, GridPathRequest, MAX_GRID_CELLS, NavigationGrid};
 mod linked_path;
 mod links;
 mod path;

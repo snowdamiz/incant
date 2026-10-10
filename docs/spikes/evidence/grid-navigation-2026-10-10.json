@@ -1,0 +1,334 @@
+{
+  "phase_gate_approved": false,
+  "scope": "Weighted rectangular cell navigation, not tilemap rendering or 2D physics",
+  "initial_implementation": {
+    "source_commit": "d979d7e549f2d090324753d2480844c8b4a3cfb2",
+    "rust_tests": 285,
+    "clippy": "pass",
+    "ui_tests": 315,
+    "tool_tests": 5,
+    "public_workflow": {
+      "passed": true,
+      "strict_typescript": true,
+      "shared_commands_and_undo_redo": true,
+      "invalid_grid_rollback": true,
+      "project_grid_count_limit": true,
+      "blocked_door_save_resume_exact": true,
+      "repeat_exact": true,
+      "state": {
+        "arrived": true,
+        "blocked": [
+          6,
+          7,
+          8
+        ],
+        "costs": [
+          6828,
+          6828,
+          6828,
+          9828,
+          9828,
+          null,
+          null,
+          null,
+          6828,
+          6828
+        ],
+        "pos": [
+          6,
+          2
+        ],
+        "tick": 120
+      },
+      "author_files_unchanged": {
+        "grid.incant.json": "7d841f61034f03ccaaeba0fe7cc3da128f278555b6feb5b82cf074e895b1fe21",
+        "grid.incant.journal.jsonl": "0ab0c0c13aa7729e0ffb73108dda9822fbdc2f15b1f51e9f13f0b43608841785"
+      },
+      "binary_sha256": "d4a3f6f65aede04f4c67aef9e840f3463c2e2370d42f507b0b2925d5197c6639",
+      "rendering_or_physics_gate": false
+    },
+    "search_bound": {
+      "passed": true,
+      "cells": 65536,
+      "reachable_cells_per_query": 65532,
+      "queries_per_run": 30,
+      "runs": [
+        {
+          "p95_frame_ms": 10.267999999999999,
+          "max_frame_ms": 10.372917000000001
+        },
+        {
+          "p95_frame_ms": 9.725791,
+          "max_frame_ms": 9.796292
+        },
+        {
+          "p95_frame_ms": 9.799499999999998,
+          "max_frame_ms": 9.941291999999999
+        }
+      ],
+      "binary_sha256": "d4a3f6f65aede04f4c67aef9e840f3463c2e2370d42f507b0b2925d5197c6639",
+      "project_sha256": "a4ae86f405a74c986b11e64c9cfcaf963cafa66c1182a2e0561b87213e869f8d",
+      "measurement": "Headless script ticks including host synchronization; no rendering, no controlled contention or device gate"
+    },
+    "binary_provenance_note": "Initial release binary was built from the grid implementation before its formatting/commit; final integrated binary will be recorded separately."
+  },
+  "integration": {
+    "source_commit": "fd9f46a34f52127e06dfcc529b0e8d5907301b16",
+    "rust_test_source": "ac81c4b",
+    "rust_tests": 309,
+    "clippy": "pass",
+    "contracts": "pass",
+    "binary": {
+      "source_commit": "fd9f46a34f52127e06dfcc529b0e8d5907301b16",
+      "sha256": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+      "binary": "incant_headless",
+      "built_with": "./tools/cargo build -j2 -p incant_headless -p incant_platform_smoke --release --locked"
+    },
+    "public_grid": {
+      "passed": true,
+      "strict_typescript": true,
+      "shared_commands_and_undo_redo": true,
+      "invalid_grid_rollback": true,
+      "project_grid_count_limit": true,
+      "blocked_door_save_resume_exact": true,
+      "repeat_exact": true,
+      "state": {
+        "arrived": true,
+        "blocked": [
+          6,
+          7,
+          8
+        ],
+        "costs": [
+          6828,
+          6828,
+          6828,
+          9828,
+          9828,
+          null,
+          null,
+          null,
+          6828,
+          6828
+        ],
+        "pos": [
+          6,
+          2
+        ],
+        "tick": 120
+      },
+      "author_files_unchanged": {
+        "grid.incant.json": "e22bd6bd76f854203e1dc43b124bbea6075e9380d27ce571cc0f14bcd0792a87",
+        "grid.incant.journal.jsonl": "8de2a5ae25128019c5cb7eca72b8530aed5a34ab5427fd336826e0bdb697200b"
+      },
+      "binary_sha256": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+      "rendering_or_physics_gate": false
+    },
+    "search_bound": {
+      "passed": true,
+      "cells": 65536,
+      "reachable_cells_per_query": 65532,
+      "queries_per_run": 30,
+      "runs": [
+        {
+          "p95_frame_ms": 10.812584,
+          "max_frame_ms": 10.860666
+        },
+        {
+          "p95_frame_ms": 10.921042,
+          "max_frame_ms": 11.082208
+        },
+        {
+          "p95_frame_ms": 10.971,
+          "max_frame_ms": 11.133000000000001
+        }
+      ],
+      "binary_sha256": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+      "project_sha256": "55aa87b6cd230ec654ea59aab7a6e730f892820926b0c883e9fc9532088627e4",
+      "measurement": "Headless script ticks including host synchronization; no rendering, no controlled contention or device gate"
+    },
+    "public_steering": {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6157673834154757,
+        "neighbors": 17,
+        "remaining": 6.208589198944098e-11,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "f795931490f11aba4a16cb925f7d82632efd29012e644c777b08291317d2f9a6",
+        "game.incant.journal.jsonl": "a04f65d526d6e95d80e06541cc3f59faa87ead8939a9bdbff18766c2298cc66e"
+      },
+      "binary_sha256": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+      "rendering_or_physics_collision_gate": false
+    },
+    "public_links": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_commands": true,
+      "durable_undo_redo": true,
+      "invalid_cost_rollback": true,
+      "explicit_link_traversal": true,
+      "one_way_reverse_null": true,
+      "save_in_flight_exact": true,
+      "repeat_exact": true,
+      "mid_link_progress": 0.30555555555555564,
+      "author_files_unchanged": {
+        "game.incant.json": "a1f49ec807d63be3cb262e574fa4ae1011a06671df2b0f6f55ca31c485d2446d",
+        "game.incant.journal.jsonl": "e10dcf492ebf51e42d2353bfe9c8ea766128cbe095a92ac3d643af853f116103"
+      },
+      "binary_sha256": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+      "physics_or_visual_gate": false
+    },
+    "native_core_probe": {
+      "arch": "aarch64",
+      "character_movement": {
+        "collisions": [
+          "01M4K3V2F7T10ME7V670ECX58H"
+        ],
+        "grounded": true,
+        "sliding_down_slope": false,
+        "translation": [
+          0.10000000149011612,
+          7.659977563889697e-05,
+          0.0
+        ]
+      },
+      "grid_navigation": {
+        "corner_cost": 2000,
+        "edited_cost": 2000,
+        "restart_route_equal": true,
+        "script_vm": false,
+        "snapshot_changed": true,
+        "visual_gate": false,
+        "weighted_cost": 2828
+      },
+      "incant": "hello-world",
+      "input": {
+        "action_dead_zone": true,
+        "focus_releases_controls": true,
+        "named_action_edges": true,
+        "pinch_rotation": 1.5707963267948966,
+        "pinch_scale": 2.0,
+        "replay_equal": true,
+        "scope": "normalized synthetic events; not a live device adapter"
+      },
+      "localization": {
+        "date": "5/8/24",
+        "number": "1.234,5",
+        "shaping_verified": false,
+        "text_values": [
+          "1 coin",
+          "2 \u043c\u043e\u043d\u0435\u0442\u044b",
+          "5 \u043c\u043e\u043d\u0435\u0442",
+          "\u3053\u3093\u306b\u3061\u306f \u6d77",
+          "\u0645\u0631\u062d\u0628\u0627 \u0646\u0648\u0631"
+        ],
+        "xliff_roundtrip": true
+      },
+      "navigation": {
+        "changed_tiles": 9,
+        "directed_off_mesh_link": true,
+        "first_corners": 4,
+        "link_endpoint_rollback": true,
+        "recast_tiled": true,
+        "retained_tiles": 6,
+        "second_corners": 2,
+        "visual_gate": false
+      },
+      "ok": true,
+      "os": "macos",
+      "physics_backend": "rapier-0.36-enhanced-determinism",
+      "physics_y": 0.49993008375167847,
+      "position_x": 5.999999999999987,
+      "steering": {
+        "agents": 100,
+        "overlap_recovery_finite": true,
+        "stable_id_order": true,
+        "visual_gate": false
+      },
+      "ticks": 120
+    },
+    "status": "All local scoped checks and Claude rendered review pass; hosted checks pending",
+    "gpu_tests": 40,
+    "ui_build_after_integration": "pass",
+    "native_package": "pass, development bundle includes the CPU-time MIT notice",
+    "target_compilation": {
+      "wasm32-unknown-unknown": "pass",
+      "aarch64-apple-ios-sim": "pass"
+    },
+    "portable_budget_test_integration": {
+      "merge_commit": "f7aade0bb818ade418fbc29f4b47facf7466372c",
+      "script_tests": 54,
+      "clippy": "pass",
+      "production_code_changes": false
+    },
+    "post_review": {
+      "source_commit": "d3c8f0f53130e01740d3878511eb1cdb05d994dc",
+      "rust_tests": 309,
+      "gpu_tests_previously_run_separately": 40,
+      "clippy": "pass",
+      "production_changes_since_reviewed_binary": false
+    }
+  },
+  "visual_review": {
+    "packet": "handoffs/0029-grid-navigation-lookdev/brief.md",
+    "result": "handoffs/0029-grid-navigation-lookdev/result.md",
+    "status": "Scoped rendered-movement review passed by Claude Opus 5.5 over ACP",
+    "source_commit": "fd9f46a34f52127e06dfcc529b0e8d5907301b16",
+    "binary_sha256": "3b9e91fe3c0165d5333c5836154f40fa3a711230e57fb1bb5f2a4d955b39702f",
+    "independent_runs": {
+      "other": "artifacts/0029-grid-navigation/B",
+      "logs_identical": true,
+      "capture_keys_and_tick_sets_identical": true,
+      "captures": 8,
+      "states_identical_raw": false,
+      "states_identical_after_generated_id_mapping": true,
+      "generated_ids_mapped": 18,
+      "generated_id_aliases": [
+        "ASSET:actor",
+        "ASSET:door_slab",
+        "ASSET:gauge_bar",
+        "ASSET:gauge_cross",
+        "ASSET:gauge_dot",
+        "ASSET:gauge_ring",
+        "ASSET:goal",
+        "ASSET:plinth",
+        "ASSET:route_bar",
+        "ASSET:route_dot",
+        "ASSET:start",
+        "ASSET:tiles",
+        "ASSET:trail_dot",
+        "ASSET:wait_ring",
+        "ASSET:wall_lids",
+        "ASSET:walls",
+        "PROJECT",
+        "SCENE"
+      ],
+      "frames": 516,
+      "frames_identical": 516,
+      "other_set_checks_passed": true
+    },
+    "resume_state_identical": true,
+    "resume_log_limit": "Session-local grid generations differ after reopening; other messages match",
+    "committed_screenshots": 14,
+    "screenshot_dimensions": [
+      960,
+      540
+    ],
+    "screenshot_bytes_verified_against_both_runs": true,
+    "arrival_tick": 476,
+    "minimum_footprint_clearance_m": 0.2,
+    "astra_review": "Mutation routing, checker and raw evidence audited; no production changes in handoff",
+    "limits": [
+      "Point-cell navigation; footprint and motion owned by behavior, no physics bodies",
+      "Route overlays observe the start-of-tick grid",
+      "Linear turns and marker occlusion remain documented look-dev limitations",
+      "No sprite, tilemap, 2D physics, device or phase gate claimed"
+    ]
+  }
+}

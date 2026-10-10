@@ -50,8 +50,21 @@ pub(crate) fn validate(value: &serde_json::Value) -> Result<(), String> {
 }
 pub(crate) fn validate_graph(project: &Project) -> Result<(), String> {
     let mut count = 0;
+    let mut grids = 0;
+    let mut grid_cells = 0;
     for scene in project.scenes.values() {
         for entity in scene.entities.values() {
+            if let Some(value) = entity.components.get("NavigationGrid") {
+                let grid: incant_nav::NavigationGrid =
+                    serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
+                grids += 1;
+                grid_cells += grid.costs.len();
+                if grids > 8 || grid_cells > incant_nav::MAX_GRID_CELLS {
+                    return Err(
+                        "project exceeds eight navigation grids or 65536 total grid cells".into(),
+                    );
+                }
+            }
             let Some(value) = entity.components.get("NavigationMesh") else {
                 continue;
             };
