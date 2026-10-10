@@ -13,13 +13,13 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use thiserror::Error;
 
-#[derive(Debug, Error)]
+#[derive(Debug, Error, PartialEq)]
 pub enum PhysicsError {
     #[error("physics step must be finite and between 1/240 and 1 seconds")]
     InvalidStep,
     #[error("physics state exceeded the supported numeric range; restart this play session")]
     NumericRange,
-    #[error("physics entity limit exceeded")]
+    #[error("physics collection limit exceeded")]
     Limit,
     #[error("invalid typed physics component: {0}")]
     Component(String),
@@ -51,6 +51,22 @@ pub struct PhysicsSpec {
     pub collider: DocCollider,
     pub state: BodyState,
 }
+
+/// Validated owned declaration for one structural installation. Construction is
+/// the only fallible step; installing it never revalidates a running world.
+pub struct PreparedBody(PhysicsSpec);
+impl PreparedBody {
+    pub fn new(mut spec: PhysicsSpec) -> Result<Self, PhysicsError> {
+        spec.validate()?;
+        if let incant_types::ColliderShape::Compound { parts } = &mut spec.collider.shape {
+            parts.sort_by(|a, b| a.id.cmp(&b.id));
+        }
+        Ok(Self(spec))
+    }
+}
+
+pub const MAX_TRIGGER_PAIRS: usize = 65_536;
+pub const MAX_TRIGGER_EVENTS: usize = MAX_TRIGGER_PAIRS * 2;
 
 pub struct PreparedPhysics<I: Ord>(BTreeMap<I, BTreeMap<I, PhysicsSpec>>);
 impl<I: Ord> PreparedPhysics<I> {
@@ -207,6 +223,31 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
             .update_motion(id, state)
     }
 
+    /// Apply a previously checked structural delta, preserving unrelated bodies.
+    /// The owner bounds its entity collection before committing this operation.
+    pub fn install(&mut self, scene: I, id: I, body: PreparedBody) {
+        let scene = self.scenes.entry(scene).or_default();
+        let spec = body.0;
+        if scene.entries.get(&id).is_some_and(|entry| {
+            entry.config.body == spec.body && entry.config.collider == spec.collider
+        }) {
+            scene
+                .update_motion(&id, &spec.state)
+                .expect("prepared state");
+        } else {
+            scene.remove(&id);
+            scene.insert(id, spec);
+            scene.query_dirty = true;
+        }
+    }
+
+    pub fn remove(&mut self, scene: &I, id: &I) {
+        if let Some(scene) = self.scenes.get_mut(scene) {
+            scene.remove(id);
+            scene.query_dirty = true;
+        }
+    }
+
     pub fn state(&self, scene: &I, id: &I) -> Option<&BodyState> {
         Some(&self.scenes.get(scene)?.entries.get(id)?.config.state)
     }
@@ -239,16 +280,7 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
                         angular_velocity: body.angvel().to_array().map(f64::from),
                         sleeping: body.is_sleeping(),
                     };
-                    if !state
-                        .translation
-                        .iter()
-                        .all(|v| v.is_finite() && v.abs() <= 1_000_000.)
-                        || !state
-                            .velocity
-                            .iter()
-                            .chain(&state.angular_velocity)
-                            .all(|v| v.is_finite() && v.abs() <= 10000.)
-                    {
+                    if entry.config.validate_state(&state).is_err() {
                         self.failed = true;
                         return Err(PhysicsError::NumericRange);
                     }
@@ -262,6 +294,10 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
                 let (a, b) = (&scene.ids[&a], &scene.ids[&b]);
                 let (a, b) = if a < b { (a, b) } else { (b, a) };
                 overlaps.insert((scene_id.clone(), a.clone(), b.clone()));
+                if overlaps.len() > MAX_TRIGGER_PAIRS {
+                    self.failed = true;
+                    return Err(PhysicsError::Limit);
+                }
             }
         }
         self.events = overlaps

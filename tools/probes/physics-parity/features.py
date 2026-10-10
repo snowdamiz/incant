@@ -17,19 +17,20 @@ def main():
     args = parser.parse_args()
     cargo = 'cargo' if sys.platform == 'win32' else str(ROOT / 'tools/cargo')
     records = []
-    for target in TARGETS:
-        result = subprocess.run([cargo, 'tree', '--locked', '-p', 'incant_physics', '--target', target,
-                                 '-e', 'normal', '--prefix', 'none', '--format', '{p}|{f}'],
-                                cwd=ROOT, check=True, text=True, capture_output=True)
-        matches = [line for line in result.stdout.splitlines() if line.startswith('rapier3d v0.36.0|')]
-        if not matches:
-            raise ValueError(f'{target}: missing pinned Rapier dependency')
-        features = set(matches[0].split('|')[1].replace(' (*)', '').split(','))
-        parallel = target != 'wasm32-unknown-unknown'
-        if ('parallel' in features) != parallel or 'enhanced-determinism' not in features:
-            raise ValueError(f'{target}: unexpected features: {sorted(features)}')
-        records.append({'target': target, 'rapier_features': sorted(features), 'parallel': parallel,
-                        'evidence': 'resolved feature graph only, not target execution'})
+    for root in ['incant_physics', 'incant_physics_runtime', 'incant_runtime', 'incant_script_player']:
+        for target in TARGETS:
+            result = subprocess.run([cargo, 'tree', '--locked', '-p', root, '--target', target,
+                                     '-e', 'normal', '--prefix', 'none', '--format', '{p}|{f}'],
+                                    cwd=ROOT, check=True, text=True, capture_output=True)
+            matches = [line for line in result.stdout.splitlines() if line.startswith('rapier3d v0.36.0|')]
+            if not matches:
+                raise ValueError(f'{target}: missing pinned Rapier dependency')
+            features = set(matches[0].split('|')[1].replace(' (*)', '').split(','))
+            parallel = target != 'wasm32-unknown-unknown'
+            if ('parallel' in features) != parallel or 'enhanced-determinism' not in features:
+                raise ValueError(f'{target}: unexpected features: {sorted(features)}')
+            records.append({'root': root, 'target': target, 'rapier_features': sorted(features), 'parallel': parallel,
+                            'evidence': 'resolved feature graph only, not target execution'})
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(records, indent=2) + '\n')
     print(f'Rapier feature policy passed for {len(records)} targets.')

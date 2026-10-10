@@ -1,7 +1,7 @@
 //! Authoring-side scene cooking. The runtime depends on neither this crate nor
 //! incant_doc. Unsupported components fail explicitly until their migration.
 use incant_doc::{Project, Transform, Velocity};
-use incant_runtime::{CookedEntity, CookedScene, SceneError, StableId};
+use incant_runtime::{CookedEntity, CookedPhysics, CookedScene, SceneError, StableId};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -30,9 +30,18 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
         .get(scene_id)
         .ok_or_else(|| CookError::MissingScene(scene_id.into()))?;
     let mut entities = Vec::with_capacity(scene.entities.len());
+    let mut physics = Vec::new();
     for entity in scene.entities.values() {
         for component in entity.components.keys() {
-            if component != "Transform" && component != "Velocity" {
+            if ![
+                "Transform",
+                "Velocity",
+                "RigidBody",
+                "Collider",
+                "AngularVelocity",
+            ]
+            .contains(&component.as_str())
+            {
                 return Err(CookError::UnsupportedComponent {
                     entity: entity.id.clone(),
                     component: component.clone(),
@@ -50,6 +59,22 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
             .get("Velocity")
             .map(|v| serde_json::from_value(v.clone()))
             .transpose()?;
+        if let Some(collider) = entity.components.get("Collider") {
+            physics.push(CookedPhysics {
+                entity: stable_id(&entity.id)?,
+                collider: serde_json::from_value(collider.clone())?,
+                body: entity
+                    .components
+                    .get("RigidBody")
+                    .map(|v| serde_json::from_value(v.clone()))
+                    .transpose()?,
+                angular_velocity: entity
+                    .components
+                    .get("AngularVelocity")
+                    .map(|v| serde_json::from_value(v.clone()))
+                    .transpose()?,
+            });
+        }
         entities.push(CookedEntity {
             id: stable_id(&entity.id)?,
             parent: entity.parent.as_deref().map(stable_id).transpose()?,
@@ -57,7 +82,11 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
             velocity,
         });
     }
-    Ok(CookedScene::new(stable_id(&scene.id)?, project.settings.tick_rate, entities)?.to_bytes())
+    Ok(
+        CookedScene::new(stable_id(&scene.id)?, project.settings.tick_rate, entities)?
+            .with_physics(physics)?
+            .to_bytes(),
+    )
 }
 
 pub fn stable_id(id: &str) -> Result<StableId, CookError> {

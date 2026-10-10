@@ -3832,6 +3832,7 @@ version = "0.0.1"
 dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
+ "incant_physics_runtime",
  "incant_types",
  "sha2 0.10.9",
  "thiserror 2.0.21",

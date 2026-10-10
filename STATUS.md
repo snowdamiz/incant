@@ -53,11 +53,16 @@ within its documented workload.
 
 ## Active work
 
-- Native physics migration has a locally tested document-free typed backend
-  extraction with unchanged legacy schemas and case-sensitive ID behavior.
-  Direct motion updates preserve sleep and contacts without per-tick world
-  reconstruction. Native cooked/ECS integration and its shipping proof remain
-  in progress; physics save/restore and device gates remain open. See
+- Native cooked 3D rigid bodies, colliders and angular velocity now run in the
+  disposable ECS world through a document-free solver backend, typed structural
+  commands and direct numeric updates that preserve sleeping bodies. Whole-batch
+  validation precedes solver edits; publication failures after solver advancement
+  make the world terminal. Legacy schemas/text IDs and v1 cooked scenes remain
+  compatible. Local evidence includes 423 release workspace tests, both Clippy
+  modes, nine identical native/browser state streams and 32 fresh source-free
+  shipping processes. Physics saves fail explicitly, including after removal;
+  character/navigation, JS physics query/configuration bindings, cross-host CI
+  for this slice and device/performance gates remain open. See
   [native physics evidence](docs/spikes/native-physics-runtime.md).
 
 - Native numeric publication now rejects finite-value integration/hierarchy
