@@ -2,28 +2,24 @@
 
 ## Status
 
-Correctness revision complete: **engine and browser scopes accepted; native
-scope still waiting.**
+Final native review complete. Final scoped verdict: **pass for engine, browser
+and native Camera presentation, with no new Camera defect.**
 
-- **Correctness fixes: done.** Tiny nonzero numbers no longer display as zero.
-  The field-of-view "Unused" tag now appears only for a well-formed
-  orthographic projection. Both have new regression tests.
-- **Schema defaults: consumed.** The Inspector reads the projection default from
-  Astra's preserved schema `default` and no longer hardcodes it. Units come from
-  the schema, and projection is listed first as the schema now orders it.
-- **Engine appearance: unchanged pass.** No rendering code changed, so I did not
-  repeat the real-render captures. The binary SHA still matches `binary.json`.
-- **Camera Inspector (browser): pass.** Strict typecheck and build pass. All 12
-  new browser captures at both widths have zero axe violations and no overflow.
-- **One failing test, not mine.** Astra's new bridge test fails because of a
-  fixture or bridge mismatch outside my allowed paths. Details are under
-  "Requests for Astra".
-- **Native editor: not reviewed.** Astra will supply native CUA captures after
-  integration and rebuild. I make no native acceptance claim until I see them.
-  I did not use computer use in this session.
+- **Native Camera Inspector: pass.** I reviewed all ten original native JPEGs
+  from integrated source `59f3384`. Projection, vertical size, units, the
+  "Default" and "Unused" tags, tiny values, minimum-width spacing and keyboard
+  focus all render as designed. No Camera UI fix was needed.
+- **Engine appearance: pass, unchanged.** No rendering code changed and the
+  binary SHA still matches. The measured shadow-distance limitation remains, as
+  documented below.
+- **Browser Inspector: pass.** Strict typecheck, all 368 UI tests on this branch,
+  the build and the five tool tests pass. The earlier bridge test failure is
+  resolved by Astra's `b769347`.
 
-No phase gate is approved or claimed. Pixel snapping, sprites, tilemaps and 2D
-physics are not part of this increment and are not claimed.
+This verdict covers the read-only Camera presentation and the reviewed
+orthographic rendering only. It does not approve a phase gate, an authored-camera
+viewport selection feature, an agent-ready claim, pixel snapping, sprites,
+tilemaps or 2D physics.
 
 ## Model and transport
 
@@ -34,107 +30,99 @@ physics are not part of this increment and are not claimed.
 
 ## Director feedback acknowledged
 
-The 2026-10-10 correctness review accepted checkpoint `d9f8769` for its engine
-and browser scope and asked for three changes. I applied all three before
-anything else:
-1. **Small numbers.** `formatNumber` rounded 0.000001 to "0". It now keeps every
-   nonzero value visible, including negative small vector components.
-2. **Strict orthographic check.** The "Unused" tag was derived from `kind`
-   alone. It now requires exactly `kind` plus a finite, positive numeric
-   `vertical_size`, which matches what my earlier result claimed.
-3. **Schema metadata.** The fixture, order tests and presentation now use
-   Astra's schema units, order, help text and preserved `default`. The "Default"
-   tag still distinguishes implied values from authored ones.
+**Final native captures, 2026-10-10.** The director supplied ten native captures
+from `59f3384` and asked for a final scoped native verdict or a concrete defect.
+I did the following:
+- verified every image against `manifest.json`;
+- confirmed `integrated-ui.diff` adds only PR25's compact Agent and compound
+  Inspector, and leaves the Camera paths intact;
+- reviewed every state;
+- committed only account-free Inspector crops;
+- re-ran tests before rewording the earlier bridge failure.
+
+Because there was no Camera defect, there was no UI change for Astra to
+integrate or recapture.
+
+**Correctness review, 2026-10-10.** This was applied in `cb5d2db`:
+- tiny values stay nonzero;
+- the strict orthographic check gates the "Unused" tag;
+- defaults, units and order come from the schema, and the "Default" tag stays.
+
+**First checkpoint.** `d9f8769` was accepted for its engine and browser scope.
 
 The standing preferences still apply: neutral connected panels, clean spacing,
-a restrained accent and no floating cards. Assets stays in the left workspace,
-and the bottom dock stays Problems/Console/History.
+a restrained accent and no floating cards. The native captures confirm Assets
+in the left workspace and Problems/Console/History in the bottom dock.
 
 ## Provenance
 
 | Item | Value |
 | --- | --- |
-| Engine captures source commit | `298b846` |
-| This revision's base | `9dccfb1` (Astra's schema and bridge changes) |
-| Binary | `artifacts/tools/incant_headless`, supplied by Astra |
-| `binary.json` sha256 | `ce79c966d5d4264482829904c0fb9158f244b61fb7ae1dac1c8150c521a4d2ff` |
-| Measured again for this revision | same value |
+| Engine captures source | `298b846` |
+| Headless binary | `artifacts/tools/incant_headless` |
+| Headless binary sha256 (`binary.json`, re-verified) | `ce79c966d5d4264482829904c0fb9158f244b61fb7ae1dac1c8150c521a4d2ff` |
+| Native captures source | `59f3384cf8e1626da99b7ff9817f297f84482d97` |
+| Native app sha256 | `7a9cb8a5285ccda04b98cf9ff55e2206b4543469b29304dce4ddea1388ef6c54` |
+| Integrated headless sha256 | `da0f407d4a29788e4a1496ce5a5700e7a61baa306562452fa203999254aa9303` |
+| Native project sha256 | `180a615e13b4cc2ac5e9b5dff7adad208ebe2c20c31509e5e29e54392f5f95e0` |
+| Native image hashes | all 10 match `manifest.json` |
+| This review's base | `5ac55b4` |
 
-The engine helpers check the SHA before and after every engine invocation, and
-both earlier runs report `binary_unchanged_every_call: true`. I used no Cargo and
-no other worktree's build.
+The native project is my engine-r1 scene with two cameras Astra added through
+shared commands: "Camera explicit perspective" and "Camera tiny values". The
+native viewport uses its existing preview camera. These are Inspector review
+captures, not a claim that the viewport renders through an authored camera.
 
 ## Changed paths
 
-This revision, all under `editor/ui/src`:
-- `components/inspector/FieldView.tsx`:
-  - `formatNumber` keeps up to four decimals for ordinary values. It switches to
-    four significant digits in exponent form below 0.01 or at 1e9 and above. An
-    input whose display differs from the authored number gets the exact value
-    as a hover title.
-  - `presentableDefault` shows an omitted optional field as its schema
-    `default` only when that default is presentable. That means a finite number
-    for a number field, or a record naming a known variant for a tagged union.
-    Otherwise the field stays "Not set", with no guessing or repair.
-  - The profile unit fallback is removed; units now come only from the schema.
-- `components/inspector/presentation.ts`:
-  - `isOrthographicCamera` replaces `projectionKind` and is strict.
-  - `FieldHint` loses `unit` and `whenOmitted` and gains `omittedNote`, which is
-    wording only.
-  - The Camera profile keeps labels, variant names and near/far help, in the new
-    schema order.
-- `bridge/fixture.ts`: the Camera mirror gains units, the `projection`-first
-  order, the new description and the `default`.
-- `components/inspector/CameraFields.test.tsx`: updated order and default
-  expectations, plus 36 new cases covering (52 in the file):
-  - orthographic detection, 12 cases;
-  - number formatting, 16 cases including a small vector;
-  - small Camera clip planes and vertical size;
-  - schema-default handling;
-  - the Default-versus-authored distinction;
-  - no "Unused" tag for malformed orthographic values.
-
-Handoff:
-- `tools/capture-inspector.mjs`: the test double is now built from the current
-  schema, with two new states, "sizeless-ortho" and "tiny-values".
-- `screenshots/inspector/*.png`: replaced with 8 crops from set `r2`.
-- `evidence/inspector-report.json` and `evidence/screenshots.sha256`: updated.
+This final review:
+- `screenshots/native/*.jpg`: 10 account-free Inspector crops.
+- `evidence/native-crops.json`: each crop's hash, source image, source hash,
+  entity and logical size.
+- `evidence/screenshots.sha256`: now covers the engine, browser and native
+  images, 28 in total.
 - `result.md`.
 
-Unchanged from the first checkpoint:
-- the engine helpers;
-- the 10 engine frames in `screenshots/engine/`;
-- the engine evidence files.
+No UI source changed in this round.
 
-Ignored, not committed: `artifacts/0030-orthographic-cameras/inspector/r2/` with
-24 PNGs, plus the earlier engine runs, analyses and review sheets.
+Earlier rounds:
+- `cb5d2db`: the correctness fixes, schema-driven defaults and the browser
+  capture set `r2`.
+- `d9f8769`: the Camera profile, the engine look-dev helpers, the engine frames
+  and evidence.
 
-No Rust, SDK, bridge, mutation routing, CI or account settings were changed.
+Ignored, not committed:
+- `artifacts/0030-native-captures/`: Astra's full native JPEGs, which show the
+  saved account label.
+- `artifacts/0030-orthographic-cameras/native-review/`: the crop working copies.
+- Earlier engine runs, analyses and browser sets.
+
+No Rust, SDK, bridge, mutation routing, CI or account settings were changed in
+any round.
 
 ## Commands and results
 
-This revision:
+This final review:
 ```sh
-shasum -a 256 artifacts/tools/incant_headless        # matches binary.json
-cd editor/ui && npx tsc -b --noEmit                  # strict: 0 errors
-npx vitest run                                       # 15 files: 367 passed, 1 failed (bridge test, see below)
-npm run build                                        # built
-node handoffs/0030-orthographic-cameras/tools/capture-inspector.mjs r2   # 12 captures
+python3 -I -c '...'      # all 10 native JPEG sha256 values match manifest.json
+sips -c H W --cropOffset Y X <copy>.jpg   # Inspector crops below the titlebar
+cd editor/ui && npx tsc -b --noEmit       # strict: 0 errors
+npx vitest run                            # 15 files, 368 tests passed
+npm run build                             # built
+python3 -m unittest discover -s tools/tests   # 5 tests OK
+shasum -a 256 artifacts/tools/incant_headless # matches binary.json
+shasum -a 256 -c evidence/screenshots.sha256  # 18 earlier images verified before adding the crops
 ```
 
-The single failure is `editor/bridge/native.test.ts`, "retains property
-defaults across local references and unions without authoring them":
-```
-expected { type: 'tagged-union', default: { kind: 'perspective' }, optional: true }
-received ... optional: false
-```
-
-This revision does not change `native.ts` or `native.test.ts`, and that test
-imports only `snapshotFromEngine`. The failure is therefore independent of my
-changes.
+Astra reports results on the combined integrated root that I did not run:
+- 318 Rust tests, Clippy, 387 UI tests and build, five tool tests, contracts,
+  and the native release and package;
+- the public camera save and repeat workflow on the frozen integrated binary;
+- an independent analysis that reproduces my numbers and verifies all 72 engine
+  images byte for byte.
 
 The first checkpoint ran the engine commands below. They are not repeated
-because the binary and rendering did not change.
+because rendering did not change.
 ```sh
 python3 -I handoffs/0030-orthographic-cameras/tools/ortho_lookdev.py artifacts/0030-orthographic-cameras/engine-r1
 python3 -I handoffs/0030-orthographic-cameras/tools/ortho_lookdev.py artifacts/0030-orthographic-cameras/engine-r2
@@ -147,8 +135,8 @@ binary_unchanged: true, authored_unchanged: true,
 screenshot_repeats_equal: true, play_repeats_equal: {16x9: true, 4x3: true}
 ```
 
-Not run: Cargo, GPU unit tests, the native editor and native WebKit. Those are
-Astra's.
+Not run by me: Cargo, GPU tests, and native capture. Astra captured natively
+through CUA, and I did not use computer use.
 
 ## Engine scene
 
@@ -316,6 +304,59 @@ These are browser captures of the built UI in headless Chrome. They are not
 native WebKit evidence. The malformed, sizeless and tiny states use a labelled
 evidence test-double bridge that rejects all commands.
 
+## Native review
+
+I reviewed these states from the original CUA JPEGs at Retina 2x. Each committed
+crop is named here.
+
+| State | Size | Crop |
+| --- | --- | --- |
+| Legacy camera (`persp-d16`) | 1440×874, 331 px Inspector | `legacy-wide-inspector.jpg` |
+| Legacy camera | 1000×650, 280 px Inspector | `legacy-min-crop.jpg` |
+| Explicit perspective | 1440×874 | `explicit-wide-inspector.jpg` |
+| Explicit perspective | 1000×650, 280 px | `explicit-min-crop.jpg` |
+| Orthographic V9 | 1440×874 | `ortho-wide-inspector.jpg` |
+| Orthographic V9 | 1000×650, 280 px | `ortho-min-crop.jpg` |
+| Orthographic, Tab focus | 1000×650, 280 px | `ortho-min-keyboard-crop.jpg` |
+| Tiny values | 1440×874 | `tiny-wide-inspector.jpg` |
+| Tiny values | 1000×650, 331 px | `tiny-min-331-crop.jpg` |
+| Tiny values | 1000×650, 280 px | `tiny-min-inspector-crop.jpg` |
+
+Findings, all matching the browser design:
+- **Order and labels.** Rows read Projection, Vertical size when orthographic,
+  Field of view, Near clip, Far clip. Labels are sentence case, and units come
+  from the schema: `°`, `m`, `m`, `m`.
+- **Default versus authored.** The legacy camera shows "Perspective" with the
+  hairline "Default" tag. Explicit perspective shows "Perspective" with no tag.
+  The two states are visibly distinct at both widths.
+- **Unused tag.** Orthographic and tiny-value cameras show "Unused" beside field
+  of view. Both perspective cameras show none.
+- **Tiny values.** Vertical size and near clip read `1e-6 m`, not `0`, and far
+  clip reads `80`.
+- **Minimum width.** At 280 px, "Vertical size" wraps to two lines, as designed.
+  Every value, unit and tag stays inside its box, with no Camera-row overflow or
+  clipping. At 331 px the label fits on one line.
+- **Keyboard.** Clicking Projection and pressing Tab moves focus to Vertical
+  size, which shows the 2 px focus ring around the whole value box. The value
+  text is selected, which is normal for a read-only input.
+- **Mutation boundary.** The "Read-only" chip is present. There are no projection
+  controls and no new floating surfaces.
+
+Capture artifacts, which are not defects:
+- The pointer covers part of "Orthographic" in the keyboard frame.
+- The 280 px tiny-values frame shows a text selection across the Inspector
+  header and the first Camera rows. This most likely comes from the CUA resize
+  drag, because no other frame shows it. If a manual splitter drag reproduces
+  it, the splitter should suppress text selection while dragging. That is a
+  shell issue, not a Camera one.
+- The OS sharing pill covers the traffic lights, which is outside this scope.
+
+Outside Camera scope, for a future Inspector pass: at 280 px, the shared
+Transform vector rows truncate four-axis rotation to almost nothing, such as
+`X -.` and `Y 0.`. At 331 px they show `X 7.9…`. The truncated text has no full
+value on hover. This existed before this handoff and is not caused by the Camera
+changes.
+
 ## Known limitation: shadow quality and orthographic distance
 
 This was measured at the first checkpoint and no cascade change is in scope.
@@ -337,24 +378,22 @@ cameras near their subject.
 
 ## Requests for Astra
 
-**Resolved by `9dccfb1` and consumed in this revision:** Camera units, the
-projection order, user-facing projection help, and preserved schema defaults.
+All Camera requests are resolved:
+- `9dccfb1` supplied Camera units, the projection order, user-facing projection
+  help and preserved defaults.
+- `b769347` corrected the bridge default test fixture. All 368 UI tests on this
+  branch pass after it.
 
-**New: the bridge default test fails.** In `editor/bridge/native.test.ts`, the
-test's `Camera` schema has no `required` array. `snapshotFromEngine` treats a
-missing `required` as "every property required", so `projection` comes back
-with `optional: false` and the test expects `true`. Choose one fix:
-- add `required: []` to the test schema; or
-- treat a missing `required` as "none required", which matches JSON Schema
-  semantics. Real generated schemas always carry `required`, so this changes no
-  shipped behaviour.
+No Camera UI change came out of the native review, so nothing needs
+re-integration or recapture.
 
-**Still open, low severity:** fitting orthographic shadow cascades to the
-receiver depth range. Measurements are in the limitation above.
+These remain open and non-blocking:
+- **Shadow cascades and orthographic distance**, low severity. Fitting
+  orthographic cascades to the receiver depth range would remove the
+  limitation measured above.
+- **Transform vectors at 280 px**, outside this scope. They need a full value on
+  hover or a wider layout.
 
 ## Open items
 
-- **Native captures.** Astra's CUA captures are needed for native acceptance.
-  Account-bearing full images should stay ignored, with account-free crops
-  committed.
-- **Gate approval** remains human-owned.
+- **Gate approval** remains human-owned. No phase gate is approved or claimed.
