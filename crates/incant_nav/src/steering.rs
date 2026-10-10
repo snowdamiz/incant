@@ -208,16 +208,20 @@ pub fn steer(
             if position.length_squared() > range * range {
                 continue;
             }
-            // A perfectly reciprocal head-on crowd can satisfy ORCA by stopping
-            // forever. Choose a 45-degree passing preference at unchanged speed when
-            // requested velocities predict a collision. The hand is consistent
-            // for every moving agent. This is an objective
-            // preference only: obstacle/agent constraints still project it into
-            // the feasible velocity region below.
-            let relative_preferred =
-                preferred - vector(other.preferred_velocity).clamp_length_max(other.max_speed);
+            // Near-antiparallel traffic can satisfy reciprocal constraints by
+            // stopping forever. Within about eight degrees of head-on, choose
+            // a shared passing hand when the requested paths predict collision.
+            // Broader crossing traffic keeps its original goal preference:
+            // forcing it sideways can create circulation and goal orbiting.
+            // This changes only the LP objective, never the safety constraints.
+            let other_preferred =
+                vector(other.preferred_velocity).clamp_length_max(other.max_speed);
+            let relative_preferred = preferred - other_preferred;
             let closing = position.dot(relative_preferred);
-            if closing > 0. {
+            if preferred.dot(other_preferred)
+                < -0.99 * preferred.length() * other_preferred.length()
+                && closing > 0.
+            {
                 let encounter = closing / relative_preferred.length_squared();
                 let separation = position - relative_preferred * encounter;
                 let clearance = input.radius + other.radius + 2. * query.margin;

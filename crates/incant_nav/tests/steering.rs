@@ -168,6 +168,41 @@ fn wall() -> SteeringObstacle {
     }
 }
 #[test]
+fn full_speed_goal_requests_settle_beside_parked_agents_without_orbiting() {
+    // Goal is physically clear, but a preferred velocity extrapolated beyond
+    // that goal points into a parked neighbor. The caller stops only on arrival.
+    for clearance in [0.65, 0.8, 1.] {
+        let mut moving = agent(1, -3., 0.);
+        let mut parked = agent(2, clearance, 0.);
+        parked.preferred_velocity = [0.; 2];
+        parked.max_speed = 0.;
+        parked.responsibility = 0.1;
+        moving.max_speed = 1.4;
+        let mut q = query(vec![moving, parked]);
+        for tick in 0..900 {
+            let a = &mut q.agents[0];
+            let d = [-a.position[0], -a.position[2]];
+            let length = d[0].hypot(d[1]);
+            a.preferred_velocity = if length < 0.01 {
+                [0.; 2]
+            } else {
+                [d[0] / length * a.max_speed, d[1] / length * a.max_speed]
+            };
+            advance(&mut q, 1. / 60.);
+            let a = &q.agents[0];
+            assert!((a.position[0] - clearance).hypot(a.position[2]) >= 0.5);
+            assert_eq!(q.agents[1].position, [clearance, 0., 0.]);
+            if tick >= 840 {
+                assert!(
+                    a.position[0].hypot(a.position[2]) < 0.01,
+                    "clearance {clearance}, tick {tick}: {:?}",
+                    a.position
+                );
+            }
+        }
+    }
+}
+#[test]
 fn obstacles_stop_motion_at_radius_and_height_filtering_preserves_stacked_motion() {
     let mut q = query(vec![agent(1, -3., 0.)]);
     q.obstacles.push(wall());
