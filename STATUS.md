@@ -59,8 +59,8 @@ within its documented workload.
   13 identical logs, no body overlaps and eventual arrival for all walkers.
   Goal-block standoffs and large lateral detours remain behavior-level limits;
   host sleep/load can trigger the existing script wall-clock deadline. The
-  integrated branch passes 284 Rust tests and Clippy. Updated native/GPU/platform
-  checks and hosted CI are in progress. See [steering evidence](docs/spikes/navigation-steering.md).
+  integrated branch passes 284 Rust, 40 GPU, 315 UI and five tool tests, Clippy,
+  SDK checks, native packaging and WASM/iOS compilation. Hosted CI is pending. See [steering evidence](docs/spikes/navigation-steering.md).
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
   with funnel smoothing and connected visibility repair. Claude's rendered
