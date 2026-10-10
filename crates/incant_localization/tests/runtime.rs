@@ -370,3 +370,39 @@ fn catalog_and_parser_bounds_reject_excess_work() {
     too_many.fallbacks = vec!["en".into(); 2];
     assert!(too_many.validate().is_err());
 }
+
+#[test]
+fn translations_preserve_argument_contracts_across_every_branch() {
+    for (source, translated) in [
+        ("Hello {name}", "{extra}"),
+        ("Hello {name}", "{name,number}"),
+        ("{n,plural,other{#}}", "{n,select,other{text}}"),
+        ("{date,date}", "{date,number}"),
+        ("{n,number} {n,select,other{text}}", "text"),
+        (
+            "{choice,select,other{{n,number}}}",
+            "{choice,select,other{{n,date}}}",
+        ),
+    ] {
+        assert!(
+            Catalog::compile(&table(&[(
+                "invalid",
+                &[("en", source), ("fr", translated)]
+            )]))
+            .is_err(),
+            "{source} → {translated}"
+        );
+    }
+    // A translation may omit an argument, or render a typed argument with plain substitution.
+    assert!(
+        Catalog::compile(&table(&[(
+            "valid",
+            &[
+                ("en", "{n,plural,other{#}}"),
+                ("ja", "{n}個"),
+                ("fr", "Beaucoup")
+            ]
+        )]))
+        .is_ok()
+    );
+}

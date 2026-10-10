@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 mod assets;
 mod eval;
+mod localization;
 mod play;
 mod play_assertions;
 mod play_audio;
@@ -94,6 +95,18 @@ enum Cli {
         locale: Option<String>,
         #[arg(long)]
         allow_fallback: bool,
+    },
+    /// Export one table as a new UTF-8 XLIFF file.
+    LocalizationExport {
+        project: PathBuf,
+        table_id: String,
+        locale: String,
+        output: PathBuf,
+    },
+    /// Import matching XLIFF targets in one reversible shared transaction.
+    LocalizationImport {
+        project: PathBuf,
+        input: PathBuf,
     },
     Schema {
         directory: PathBuf,
@@ -370,6 +383,13 @@ fn main() -> Result<()> {
                 return Err("localization has missing translations".into());
             }
         }
+        Cli::LocalizationExport {
+            project,
+            table_id,
+            locale,
+            output,
+        } => localization::export(&project, &table_id, &locale, &output)?,
+        Cli::LocalizationImport { project, input } => localization::import(&project, &input)?,
         Cli::Import {
             project,
             source,

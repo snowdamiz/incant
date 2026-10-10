@@ -71,6 +71,12 @@ impl Catalog {
                         parse(pattern).map_err(|e| invalid(&location, e.to_string()))?,
                     );
                 }
+                let source = &translated[&table.source_locale];
+                for (language, nodes) in &translated {
+                    crate::contracts::validate(source, nodes).map_err(|e| {
+                        invalid(format!("{message_path}/{language}"), e.to_string())
+                    })?;
+                }
                 patterns.insert(name.clone(), translated);
             }
             compiled.insert(

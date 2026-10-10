@@ -16,3 +16,4 @@ icu_decimal = "=2.3.0"
 icu_datetime = { version = "=2.3.0", default-features = false, features = ["compiled_data"] }
 icu_plurals = "=2.3.0"
 writeable = "=0.6.4"
+quick-xml = "=0.42.0"

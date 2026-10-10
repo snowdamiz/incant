@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-10",
+  "base_commit": "0ee5532d06277dafaf82c12c89f50d8179233958",
+  "scope": "XLIFF translator exchange through shared history; no phase gate",
+  "local": {
+    "rust": {
+      "passed": 254,
+      "ignored": 40
+    },
+    "gpu": {
+      "passed": 40,
+      "ignored": 0
+    },
+    "ui_tests": 315,
+    "tool_tests": 5,
+    "clippy_all_targets": true,
+    "generated_contracts": true,
+    "strict_typescript": true,
+    "native_build_and_package": true,
+    "macos_platform_execution": true,
+    "wasm_compile": true,
+    "ios_compile": true
+  },
+  "probe_results": {
+    "exchange": {
+      "passed": true,
+      "binary_sha256": "d4fb0ec64853c8a2916546769d454d20809f818ee66f26142122dba644e8df06",
+      "changed_messages": 4,
+      "changed_tables": 2,
+      "one_atomic_transaction": true,
+      "invalid_suffix_and_stale_source_rollback": true,
+      "no_clobber_export": true,
+      "no_op_history_unchanged": true,
+      "durable_undo_redo_exact": true,
+      "empty_and_missing_targets_distinguished": true,
+      "strict_typescript": true,
+      "runtime_texts": [
+        "2\u679a",
+        " \u3053\u3093\u306b\u3061\u306f \u6d77 & <\u4e16\u754c>!\n\t\ud83d\ude42 ",
+        "",
+        "Fallback remains"
+      ],
+      "author_files_unchanged": {
+        "game.incant.json": "7bd73352077a5254420a99b848ef009c9ea42b60bd1cf499254888325d9fa690",
+        "game.incant.journal.jsonl": "ef32f8e458a0af2cc47e6f976a6891240f0cd7ea57e89ad7b891a8837317e041"
+      },
+      "rendered_text_review": false
+    },
+    "localization_regression": {
+      "passed": true,
+      "strict_typescript": true,
+      "rpc_journal_undo_redo": true,
+      "runtime_locales": [
+        "en",
+        "ru",
+        "ja",
+        "ar",
+        "fr-CA"
+      ],
+      "timer_switches_saved": true,
+      "restored_state_and_log_suffix_equal": true,
+      "missing_translation_exit_status": true,
+      "author_files_unchanged": {
+        "game.incant.json": "f7393c4496a5b3f488e80114d4c78045189d4707ac31f45a721fbbccede972f0",
+        "history.jsonl": "fcd0a1b17c0858e229679131297422cc24528e90177aee85e8e82cc6ae6012b1"
+      },
+      "shaping_or_visual_acceptance": false,
+      "binary_sha256": "d4fb0ec64853c8a2916546769d454d20809f818ee66f26142122dba644e8df06"
+    },
+    "saves_regression": {
+      "passed": true,
+      "strict_typescript": true,
+      "rendering": false,
+      "steps": [
+        19,
+        41
+      ],
+      "full_state_equal": true,
+      "nested_state_and_runtime_spawn_delete_preserved": true,
+      "resumed_logs_equal_to_uninterrupted_suffix": true,
+      "second_save_reopened": true,
+      "author_files_unchanged": {
+        "game.incant.json": "f0fcb50bad88e2555e2572ec5afdc697c9d0253ae47b8e022c326427143e5be5",
+        "history.jsonl": "8655753067bdfc5fd25db12c0aeee73895005e38f496736ec0d0e905e90815e6"
+      },
+      "binary_sha256": "d4fb0ec64853c8a2916546769d454d20809f818ee66f26142122dba644e8df06"
+    }
+  },
+  "packaged_native_sha256": "de52ad7b35431d480a7230c8c1041e2dec170815667d4bcc586da38ff8e97d99",
+  "platform_localization": {
+    "date": "5/8/24",
+    "number": "1.234,5",
+    "shaping_verified": false,
+    "text_values": [
+      "1 coin",
+      "2 \u043c\u043e\u043d\u0435\u0442\u044b",
+      "5 \u043c\u043e\u043d\u0435\u0442",
+      "\u3053\u3093\u306b\u3061\u306f \u6d77",
+      "\u0645\u0631\u062d\u0628\u0627 \u0646\u0648\u0631"
+    ],
+    "xliff_roundtrip": true
+  },
+  "ci": {
+    "status": "pending"
+  },
+  "open": [
+    "Graphical localization panel",
+    "External CAT-tool interoperability beyond the documented bounded profile",
+    "Text shaping, bidi, font fallback and IME",
+    "Core Sample, rendered pseudo/RTL/CJK and reference-device gates"
+  ]
+}

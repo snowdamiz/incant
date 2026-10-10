@@ -2,9 +2,11 @@
 
 This increment implements the nonvisual localization runtime in PLAN revision 3.
 The editor remains English-only. Text shaping, bidi layout, font fallback, IME,
-XLIFF translator exchange, localization panel design and Core Sample visual
+localization panel design and Core Sample visual
 acceptance remain separate open work; Unicode string output alone proves none
 of those rendered behaviors.
+The subsequent [translator exchange increment](localization-exchange.md) adds
+XLIFF import/export and source/translation argument-contract validation.
 
 ## Authored documents and commands
 

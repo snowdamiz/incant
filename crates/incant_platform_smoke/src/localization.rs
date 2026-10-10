@@ -49,5 +49,14 @@ pub(super) fn check() -> Result<Value, String> {
     if number != "1.234,5" || date != "5/8/24" {
         return Err("ICU number/date mismatch".into());
     }
-    Ok(json!({"text_values":values,"number":number,"date":date,"shaping_verified":false}))
+    let xml = incant_localization::export_xliff(&tables[id], "ja").map_err(|e| e.to_string())?;
+    let updates =
+        incant_localization::translations_from_xliff(&tables, &xml).map_err(|e| e.to_string())?;
+    if updates.len() != 1 || updates[0].key != "hello" || updates[0].value != "こんにちは {name}"
+    {
+        return Err("XLIFF roundtrip mismatch".into());
+    }
+    Ok(
+        json!({"text_values":values,"number":number,"date":date,"xliff_roundtrip":true,"shaping_verified":false}),
+    )
 }

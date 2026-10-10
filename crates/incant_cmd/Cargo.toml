@@ -12,6 +12,7 @@ thiserror = { workspace = true }
 ulid = { workspace = true }
 sha2 = { workspace = true }
 incant_doc = { workspace = true, features = ["crdt"] }
+incant_localization.workspace = true
 schemars = { workspace = true }
 base64 = "0.22"
 

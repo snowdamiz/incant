@@ -105,3 +105,92 @@ fn invalid_translation_or_locale_cannot_commit_a_valid_prefix() {
     assert!(!before.contains("string_tables"));
     assert!(!before.contains("localization"));
 }
+
+#[test]
+fn xliff_import_is_one_reversible_transaction_and_replays_after_restart() {
+    use incant_cmd::PreparedTranslations;
+    let mut initial = Project::empty("Exchange");
+    let table = table();
+    let id = table.id.clone();
+    initial.string_tables.insert(id.clone(), table.clone());
+    let xml = incant_localization::export_xliff(&table, "ja")
+        .unwrap()
+        .replace("{n}枚", "{n}個");
+    let path = std::env::temp_dir().join(format!("incant-xliff-{}.jsonl", new_id()));
+    let mut bus = CommandBus::persistent(&path, initial.clone()).unwrap();
+    let actor = Actor::import("xliff");
+    let result = PreparedTranslations::prepare(&bus, &xml)
+        .unwrap()
+        .commit(&mut bus, actor.clone())
+        .unwrap();
+    assert_eq!(result.changed_messages, 1);
+    assert_eq!(result.changed_tables, 1);
+    assert!(result.transaction_id.is_some());
+    assert_eq!(
+        bus.project().string_tables[&id].messages["coins"]["ja"],
+        "{n}個"
+    );
+    assert_eq!(bus.history()[0].actor, actor);
+    assert!(matches!(
+        &bus.history()[0].commands[0],
+        Command::UpsertStringTable { .. }
+    ));
+    let before_repeat = bus.revision();
+    assert!(
+        PreparedTranslations::prepare(&bus, &xml)
+            .unwrap()
+            .commit(&mut bus, actor)
+            .unwrap()
+            .transaction_id
+            .is_none()
+    );
+    assert_eq!(bus.revision(), before_repeat);
+    bus.undo().unwrap();
+    assert_eq!(bus.project(), &initial);
+    bus.redo().unwrap();
+    let expected = bus.project().clone();
+    drop(bus);
+    let mut reopened = CommandBus::persistent(&path, initial.clone()).unwrap();
+    assert_eq!(reopened.project(), &expected);
+    reopened.undo().unwrap();
+    assert_eq!(reopened.project(), &initial);
+    drop(reopened);
+    std::fs::remove_file(path).unwrap();
+}
+#[test]
+fn xliff_rejects_invalid_batches_and_stale_preparations_without_losing_concurrent_edits() {
+    use incant_cmd::PreparedTranslations;
+    let mut initial = Project::empty("Concurrent exchange");
+    let table = table();
+    let id = table.id.clone();
+    initial.string_tables.insert(id.clone(), table.clone());
+    let xml = incant_localization::export_xliff(&table, "ja")
+        .unwrap()
+        .replace("{n}枚", "{n}個");
+    let mut bus = CommandBus::new(initial.clone()).unwrap();
+    for bad in [xml.replace("{n}個","{unknown}"),xml.replace("# coin","# changed coin"),xml.replace("</unit>","</unit><unit id=\"absent\"><segment><source>bad</source><target>partial</target></segment></unit>")] {
+        assert!(PreparedTranslations::prepare(&bus,&bad).is_err());assert_eq!(bus.project(),&initial);assert!(bus.history().is_empty());
+    }
+    let prepared = PreparedTranslations::prepare(&bus, &xml).unwrap();
+    bus.execute(
+        vec![Command::SetMemory {
+            section: "concurrent".into(),
+            text: "keep".into(),
+        }],
+        Actor::user("test"),
+        "Concurrent",
+        None,
+    )
+    .unwrap();
+    let concurrent = bus.project().clone();
+    assert!(prepared.commit(&mut bus, Actor::import("xliff")).is_err());
+    assert_eq!(bus.project(), &concurrent);
+    // A different bus with the same project ID/revision must not accept an old snapshot.
+    let bus = CommandBus::new(initial.clone()).unwrap();
+    let prepared = PreparedTranslations::prepare(&bus, &xml).unwrap();
+    let mut changed = initial;
+    changed.name = "Same ID, different document".into();
+    let mut other = CommandBus::new(changed.clone()).unwrap();
+    assert!(prepared.commit(&mut other, Actor::import("xliff")).is_err());
+    assert_eq!(other.project(), &changed);
+}
