@@ -85,12 +85,12 @@ fn hostile_error_getters_cannot_escape_the_deadline_or_poison_later_calls() {
     host.tick(&mut bus, 1. / 60.).unwrap();
     let mut host = ScriptHost::with_budget(
         "exports.default={update(){let e=new Error();Object.defineProperty(e,'message',{get(){while(true){}}});throw e;}};",
-        Duration::from_millis(20),
+        Duration::from_millis(50),
     ).unwrap();
     let start = Instant::now();
     assert!(matches!(
         host.tick(&mut bus, 1. / 60.),
-        Err(ScriptError::ExecutionDeadline { budget_ms: 20 })
+        Err(ScriptError::ExecutionDeadline { budget_ms: 50 })
     ));
     assert!(start.elapsed() < Duration::from_secs(1));
     assert_eq!(host.clock().tick, 0);

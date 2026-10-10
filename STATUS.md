@@ -69,7 +69,10 @@ within its documented workload.
   contracts, native packaging and both public steering/off-mesh saved workflows.
   Integration at `735842c` passes all 300 Rust tests, Clippy, both public saved
   workflows and native packaging. The full plaza exactly matches the reviewed
-  wall-clock binary. Updated hosted checks and dependency merges remain. See
+  wall-clock binary. Windows then rejected the old 10 ms test allowance during
+  setup. Runaway initialization/update/getter regressions now use the shipped
+  50 ms allowance; production limits are unchanged. All 300 local Rust tests
+  and Clippy pass again. Updated hosted checks and dependency merges remain. See
   [CPU budget details](docs/spikes/script-cpu-budget.md).
 
 - Script failures now distinguish bounded initialization/tick JavaScript messages,
