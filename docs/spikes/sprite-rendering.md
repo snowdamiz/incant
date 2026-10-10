@@ -41,8 +41,12 @@ and sheets of 64 and 80 rows, with every texel represented and resized-sheet
 frames byte-identical. Full checks pass 325 Rust tests, Clippy and 53 GPU checks.
 Claude's broader corrected-renderer review remains required.
 
-The review also requests asset/entity-specific diagnostics for undersized
-reimports and an optional exact 2D display curve. Those remain open. The existing
+The undersized-reimport diagnostic now names the sprite entity, texture ID,
+requested source region and actual cooked dimensions through a typed resource
+error. Geometry validates before that sprite allocates GPU resources. The GPU
+regression shrinks a 2×2 texture to 1×1, verifies every diagnostic field and proves
+retained scenes still render their previous content. Workspace Clippy passes.
+The optional exact 2D display curve remains open. The existing
 linear-light blending and neutral curve are unchanged. The pixel-camera near-tie
 follow defect is separate from these texel-sampling ties and is not fixed here.
 

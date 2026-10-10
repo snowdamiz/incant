@@ -205,14 +205,32 @@ fn sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels() {
         decode(&r.screenshot_scene_png(&from_cache, 64, 64).unwrap()),
         updated
     );
-    f.edit("region", json!([1, 0, 2, 2]));
-    assert!(
-        r.prepare_scene(&f.project, &f.assets)
-            .err()
-            .unwrap()
-            .to_string()
-            .contains("source region")
-    );
+    // A valid authored region can become invalid after a smaller reimport.
+    // The error identifies both the entity and cooked source dimensions, while
+    // already retained GPU scenes remain renderable.
+    f.cook(&[0, 255, 0, 255], 1, 1);
+    let error = r.prepare_scene(&f.project, &f.assets).err().unwrap();
+    let incant_render::ResourceError::SpriteGeometry {
+        entity,
+        texture,
+        region,
+        texture_size,
+        source,
+    } = error
+        .downcast_ref::<incant_render::ResourceError>()
+        .unwrap()
+    else {
+        panic!("unexpected error: {error}");
+    };
+    assert_eq!(entity, &f.sprite);
+    assert_eq!(texture, &f.texture);
+    assert_eq!(*region, [0, 0, 2, 2]);
+    assert_eq!(*texture_size, [1, 1]);
+    assert_eq!(*source, incant_2d::SpriteError::Region);
+    let message = error.to_string();
+    assert!(message.contains(&f.sprite) && message.contains(&f.texture));
+    assert!(message.contains("source region [0, 0, 2, 2]"));
+    assert!(message.contains("cooked texture size [1, 1]"));
     assert_eq!(
         decode(&r.screenshot_scene_png(&retained, 64, 64).unwrap()),
         base

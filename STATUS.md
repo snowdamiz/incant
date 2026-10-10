@@ -82,8 +82,10 @@ within its documented workload.
   checks, Clippy, 420 UI tests, portable core compilation and the strict
   source-free saved-gameplay probe. Claude's Max review exposed nearest-sampling
   ties; the correction passes a reproduced GPU regression, all 325 Rust tests,
-  Clippy and 53 GPU checks. Corrected rendered review, more specific reimport
-  diagnostics and the recommended optional exact display curve remain open;
+  Clippy and 53 GPU checks. A follow-up typed diagnostic identifies the entity,
+  texture, region and dimensions after an undersized reimport; its GPU regression
+  and workspace Clippy pass. Corrected rendered review and the recommended
+  optional exact display curve remain open;
   Inspector work follows the full redesign, and native/CI evidence remain open;
   atlas packing, tilemaps and 2D physics are separate unfinished work. See
   [sprite rendering](docs/spikes/sprite-rendering.md).
