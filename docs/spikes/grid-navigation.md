@@ -66,5 +66,18 @@ local workload limitations apply; this is not a controlled before/after study.
 All 40 GPU tests, the final editor build, native development packaging (including
 the CPU clock license), and WASM/iOS-simulator core compilation pass. These target
 compiles do not establish an interactive device or scripting-VM gate. Claude
-handoff 0029 is reviewing actual rendered movement on the frozen binary; hosted
-checks and the visual verdict remain pending. See the [exact evidence](evidence/grid-navigation-2026-10-10.json).
+handoff 0029 passes its scoped rendered-movement review on the frozen binary.
+Two independently authored runs match all 516 frames and logs; their states
+match after strict mapping of the 18 generated project/scene/asset IDs. Save at
+tick 156 while unreachable reproduces runtime and script state exactly. Reopened
+log messages differ only in session-local grid generation. Every route cost
+matches the independent Dijkstra oracle; arrival is at tick 476, with 0.2 m
+minimum footprint clearance and no corner cutting. Astra verified all 14
+committed screenshots against both raw runs, audited shared mutation routing
+and the strengthened checker, then reran all 309 Rust tests and full Clippy.
+
+The behavior chooses to finish its current cell step when a route becomes null;
+this is not an API requirement. Route overlays see the start-of-tick grid, and
+linear turns and small/occluded markers remain documented visual limitations.
+Hosted checks remain pending. See the [Claude result](../../handoffs/0029-grid-navigation-lookdev/result.md)
+and [exact evidence](evidence/grid-navigation-2026-10-10.json).

@@ -53,13 +53,21 @@ within its documented workload.
 
 ## Active work
 
+- PR #39 now consolidates the steering, off-mesh links and script diagnostics/CPU
+  budget changes from PRs #36–38. The older steering branch failed a repeated
+  public script run with a generic error; its cause was not established. The
+  combined revision must pass its own hosted checks before merging.
+
 - Rectangular-grid navigation supports weighted A*, blocked corners, bounded
   search, shared component edits and `api.findGridPath`. The integrated branch
   passes 309 Rust tests, Clippy, generated contracts and the public grid,
   steering and off-mesh saved-game workflows. The native core probe passes
   weighted detours, edits, blocked corners and reopened routes. All 40 GPU tests,
-  native packaging and WASM/iOS-simulator core compilation pass. Claude 0029 is
-  reviewing rendered movement; hosted checks remain pending. This
+  native packaging and WASM/iOS-simulator core compilation pass. Claude 0029
+  passes the rendered movement review: 516 matching frames, exact saved-state
+  restoration, all path costs matching an independent oracle, and arrival at
+  tick 476. Astra audited the evidence and reran all 309 Rust tests and Clippy.
+  Hosted checks remain pending. This
   does not claim the full 2D renderer/tilemap/physics milestone. See
   [grid navigation](docs/spikes/grid-navigation.md).
 
