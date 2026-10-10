@@ -135,8 +135,9 @@ fn closest_triangle(p: DVec3, a: DVec3, b: DVec3, c: DVec3) -> DVec3 {
         .min_by(|a, b| p.distance_squared(*a).total_cmp(&p.distance_squared(*b)))
         .unwrap()
 }
-fn cross(a: [f32; 3], b: [f32; 3], c: [f32; 3]) -> f32 {
-    (b[0] - a[0]) * (c[2] - a[2]) - (b[2] - a[2]) * (c[0] - a[0])
+fn cross(a: [f32; 3], b: [f32; 3], c: [f32; 3]) -> f64 {
+    (f64::from(b[0]) - f64::from(a[0])) * (f64::from(c[2]) - f64::from(a[2]))
+        - (f64::from(b[2]) - f64::from(a[2])) * (f64::from(c[0]) - f64::from(a[0]))
 }
 fn same(a: [f32; 3], b: [f32; 3]) -> bool {
     (a[0] - b[0]).abs() < 1e-5 && (a[2] - b[2]).abs() < 1e-5
@@ -190,6 +191,71 @@ fn funnel(gates: &[([f32; 3], [f32; 3])]) -> Vec<[f32; 3]> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn snapped_edge_rounding_does_not_break_short_paths() {
+        // Three adjacent polygons from the rendered room. Above the floor,
+        // nearest-point projection lands on a sloped shared edge; converting
+        // that point to f32 rounds it a fraction of an ULP outside the polygon.
+        let mut mesh = NavigationMesh::default();
+        mesh.settings = Some(Default::default());
+        mesh.polygons =
+            serde_json::from_str(include_str!("../tests/fixtures/precision-polygons.json"))
+                .unwrap();
+        let a = mesh.polygons[0].vertices[0];
+        let b = mesh.polygons[0].vertices[2];
+        let c = mesh.polygons[1].vertices[3];
+        mesh.portals = vec![
+            vec![crate::build::Portal { to: 1, a: b, b: a }],
+            vec![
+                crate::build::Portal { to: 0, a, b },
+                crate::build::Portal { to: 2, a: c, b: a },
+            ],
+            vec![crate::build::Portal { to: 1, a, b: c }],
+        ];
+        let mut count = 0;
+        for ix in 0..21 {
+            for iz in 0..21 {
+                for y in [0., 0.05, 0.12, 0.5] {
+                    for [dx, dz] in [[0.01, 0.], [-0.01, 0.], [0., 0.01], [0., -0.01]] {
+                        let start = [4.2 + ix as f32 * 0.01, y, 2.6 + iz as f32 * 0.01];
+                        let q = PathRequest {
+                            start,
+                            end: [start[0] + dx, y, start[2] + dz],
+                            snap_distance: 1.,
+                            max_visited: 100,
+                        };
+                        let path = mesh
+                            .find_path(&q)
+                            .unwrap_or_else(|e| panic!("{q:?}: {e}"))
+                            .unwrap();
+                        assert!(path.points.iter().flatten().all(|n| n.is_finite()));
+                        assert!(
+                            path.points.len() < 10,
+                            "tiny route has excessive points: {q:?}"
+                        );
+                        count += 1;
+                    }
+                }
+            }
+        }
+        assert_eq!(count, 7056);
+        for (x, end) in [(4.3, 4.31), (4.31, 4.3)] {
+            let q = PathRequest {
+                start: [x, 0.12, 2.7],
+                end: [end, 0.12, 2.7],
+                snap_distance: 1.,
+                max_visited: 100,
+            };
+            let path = mesh.find_path(&q).unwrap().unwrap();
+            assert_eq!(Some(path.clone()), mesh.find_path(&q).unwrap());
+            let length: f32 = path
+                .points
+                .windows(2)
+                .map(|p| Vec3::from_array(p[0]).distance(Vec3::from_array(p[1])))
+                .sum();
+            assert!(length < 0.02);
+        }
+    }
     #[test]
     fn centimetre_queries_choose_the_containing_skinny_triangle_in_both_directions() {
         // The two distances differ below f32 squared-distance precision when
