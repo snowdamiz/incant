@@ -1,0 +1,285 @@
+{
+ "scene": "01M4K6VFS5EW2KS4936EWD53JZ",
+ "target": [
+  0.0,
+  0.8,
+  -3.0
+ ],
+ "yaw": 35.0,
+ "pitch": -30.0,
+ "near": 0.1,
+ "far": 80.0,
+ "fov": 40.0,
+ "pillar": [
+  1.0,
+  1.6,
+  1.0
+ ],
+ "pillars": {
+  "near": [
+   [
+    0.0,
+    4.0
+   ],
+   "red"
+  ],
+  "middle": [
+   [
+    0.0,
+    -3.0
+   ],
+   "teal"
+  ],
+  "far": [
+   [
+    0.0,
+    -10.0
+   ],
+   "amber"
+  ]
+ },
+ "rails": [
+  -1.5,
+  1.5
+ ],
+ "rail_z": [
+  -15.0,
+  8.0
+ ],
+ "floor": [
+  -11.0,
+  11.0,
+  -18.0,
+  10.0
+ ],
+ "cameras": {
+  "persp-d16": {
+   "id": "01JA30AA00000000000000000A",
+   "distance": 16,
+   "projection": null,
+   "eye": [
+    7.947708238274465,
+    8.799999999999999,
+    8.35050367865956
+   ]
+  },
+  "ortho-d16-v9": {
+   "id": "01JA30AA00000000000000000B",
+   "distance": 16,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 9
+   },
+   "eye": [
+    7.947708238274465,
+    8.799999999999999,
+    8.35050367865956
+   ]
+  },
+  "ortho-d24-v9": {
+   "id": "01JA30AA00000000000000000C",
+   "distance": 24,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 9
+   },
+   "eye": [
+    11.921562357411696,
+    12.799999999999999,
+    14.025755517989339
+   ]
+  },
+  "ortho-d34-v9": {
+   "id": "01JA30AA00000000000000000D",
+   "distance": 34,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 9
+   },
+   "eye": [
+    16.88888000633324,
+    17.799999999999997,
+    21.119820317151564
+   ]
+  },
+  "ortho-d16-v6": {
+   "id": "01JA30AA00000000000000000E",
+   "distance": 16,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 6
+   },
+   "eye": [
+    7.947708238274465,
+    8.799999999999999,
+    8.35050367865956
+   ]
+  },
+  "ortho-d16-v13": {
+   "id": "01JA30AA00000000000000000F",
+   "distance": 16,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 13
+   },
+   "eye": [
+    7.947708238274465,
+    8.799999999999999,
+    8.35050367865956
+   ]
+  },
+  "ortho-d5-v9": {
+   "id": "01JA30AA00000000000000000G",
+   "distance": 5,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 9
+   },
+   "eye": [
+    2.48365882446077,
+    3.3,
+    0.5470323995811128
+   ]
+  }
+ },
+ "live": {
+  "id": "01JA30AA00000000000000000H",
+  "steps": [
+   {
+    "tick": 0,
+    "label": "t0-d16-legacy",
+    "projection": null,
+    "transform": {
+     "translation": [
+      7.947708238,
+      8.8,
+      8.350503679
+     ],
+     "rotation": [
+      -0.246840110491,
+      0.290459497856,
+      0.077828387884,
+      0.921219833697
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   },
+   {
+    "tick": 10,
+    "label": "t10-d16-orthographic-v9",
+    "projection": {
+     "kind": "orthographic",
+     "vertical_size": 9
+    },
+    "transform": {
+     "translation": [
+      7.947708238,
+      8.8,
+      8.350503679
+     ],
+     "rotation": [
+      -0.246840110491,
+      0.290459497856,
+      0.077828387884,
+      0.921219833697
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   },
+   {
+    "tick": 20,
+    "label": "t20-d24-orthographic-v9",
+    "projection": {
+     "kind": "orthographic",
+     "vertical_size": 9
+    },
+    "transform": {
+     "translation": [
+      11.921562357,
+      12.8,
+      14.025755518
+     ],
+     "rotation": [
+      -0.246840110491,
+      0.290459497856,
+      0.077828387884,
+      0.921219833697
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   },
+   {
+    "tick": 30,
+    "label": "t30-d24-orthographic-v6",
+    "projection": {
+     "kind": "orthographic",
+     "vertical_size": 6
+    },
+    "transform": {
+     "translation": [
+      11.921562357,
+      12.8,
+      14.025755518
+     ],
+     "rotation": [
+      -0.246840110491,
+      0.290459497856,
+      0.077828387884,
+      0.921219833697
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   },
+   {
+    "tick": 40,
+    "label": "t40-d24-perspective",
+    "projection": {
+     "kind": "perspective"
+    },
+    "transform": {
+     "translation": [
+      11.921562357,
+      12.8,
+      14.025755518
+     ],
+     "rotation": [
+      -0.246840110491,
+      0.290459497856,
+      0.077828387884,
+      0.921219833697
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    }
+   }
+  ],
+  "ticks": 50,
+  "every": 5
+ },
+ "rotation": [
+  -0.2468401104907439,
+  0.29045949785607994,
+  0.07782838788448602,
+  0.9212198336973718
+ ],
+ "entities": 17
+}
