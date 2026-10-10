@@ -389,19 +389,21 @@ def build(out):
     return project, script, cameras
 
 
-def play(project, script, out, name, camera, every):
+def play(project, script, out, name, camera, every, capture=True):
     ticks = math.ceil(SECONDS * 60)
     frames = 1 + math.ceil(ticks / every)
     if frames > MAX_FRAMES or frames * WIDTH * HEIGHT * 4 > MAX_RAW:
         raise SystemExit(f"run {name}: {frames} frames exceeds the capture budget")
     started = time.monotonic()
+    capture_args = (["--output", out / name, "--camera", camera, "--capture-every", every,
+                     "--width", WIDTH, "--height", HEIGHT] if capture else [])
     report = run(CLI, "play", project, "--seconds", SECONDS, "--compiled-script", script,
-                 "--output", out / name, "--camera", camera, "--capture-every", every,
-                 "--width", WIDTH, "--height", HEIGHT, "--log-output", out / f"{name}.logs.jsonl")
+                 *capture_args, "--log-output", out / f"{name}.logs.jsonl")
     elapsed = time.monotonic() - started
     (out / f"{name}.stdout.json").write_text(report)
     (out / f"{name}.timing.json").write_text(json.dumps(
-        {"wall_seconds": round(elapsed, 3), "ticks": ticks, "frames": frames, "raw_bytes": frames * WIDTH * HEIGHT * 4,
+        {"wall_seconds": round(elapsed, 3), "ticks": ticks, "frames": frames if capture else 0,
+         "raw_bytes": frames * WIDTH * HEIGHT * 4 if capture else 0,
          "size": [WIDTH, HEIGHT], "capture_every": every}))
 
 
@@ -430,11 +432,15 @@ def new_ulid(n, prefix="01JA2CMPND"):
 
 
 def main():
+    global CLI
     parser = argparse.ArgumentParser()
     parser.add_argument("out", type=Path)
     parser.add_argument("--run", action="append", default=[], help="NAME:CAMERA:CAPTURE_EVERY")
     parser.add_argument("--stool", help="TILT_DEGREES:DROP_HEIGHT for the stool (default 0:2.0)")
+    parser.add_argument("--binary", type=Path, default=CLI, help="explicit headless executable")
+    parser.add_argument("--no-captures", action="store_true", help="build and replay numerically; no GPU frames")
     args = parser.parse_args()
+    CLI = args.binary.resolve()
     if args.stool:
         tilt, height = (float(v) for v in args.stool.split(":"))
         if not (0 <= tilt <= 90 and 0.05 <= height <= 5):
@@ -451,7 +457,7 @@ def main():
             raise SystemExit(f"invalid --run {name}:{camera}:{every}")
     project, script, cameras = build(out)
     for name, camera, every in runs:
-        play(project, script, out, name, cameras[camera], int(every))
+        play(project, script, out, name, cameras[camera], int(every), capture=not args.no_captures)
     print(json.dumps({"project": str(project), "runs": [r[0] for r in runs]}))
 
 

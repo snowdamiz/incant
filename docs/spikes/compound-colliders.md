@@ -70,3 +70,25 @@ checks confirmed the three-part list, End/Tab navigation, exact nested paths, fu
 stable ID and saved-account restoration without prompts. Final wide/minimum native
 appearance and 64-part review are pending; no acceptance is claimed for them.
 Code, numerical replay, tests and CI continue while capture is paused.
+
+## Claude replay and numerical investigation
+
+Claude completed 28 browser-fixture states with zero axe violations, clipping or
+horizontal overflow. The original runtime produced 228 repeated engine frames
+with byte-for-byte equality. After capture was paused, two corrected-runtime
+replays have exactly equal state/logs; only two characters differ from the original
+runtime, by at most 0.18 mm at the final position. Props and arch motion are equal.
+These numerical results do not substitute for the pending native appearance review.
+
+A suspected stool instability was investigated with 301 numerical states and an
+independent additive mass/inertia calculation. The original report mistook a
+near-upright moving body for rest and overestimated the tipping-energy barrier.
+Release energy is 80.4162 J, never exceeded by the sampled simulation; the final
+value is 14.0716 J. A simple point-foot barrier estimate is 2.4283 J above upright,
+below the release's 9.3252 J excess. Contact steps are not strictly energy-monotonic
+(the largest local increase is 0.8868 J), so this is a fixture-specific rejection
+of the original diagnosis, not a general energy-conservation guarantee. No solver
+patch was made. A fresh project built through public commands repeats the trace
+exactly without captures. The helper supports `--no-captures`; the reproducible
+[energy probe](../../tools/probes/compound-stool-energy.py) and
+[measurements](evidence/compound-stool-energy-2026-10-09.json) retain the method.

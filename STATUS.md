@@ -62,7 +62,9 @@ within its documented workload.
   contracts and public CLI probes. Actual macOS/browser/iOS baseline execution
   passes. Initial native keyboard/field/account checks pass. Final native appearance
   and 64-part review are deferred by the director's renewed computer-use/capture
-  pause; numerical work and CI continue. Hosted checks/merge remain open.
+  pause. Claude completed the browser/engine report and repeatable numerical replay.
+  A suspected prop instability was investigated; the original energy objection was
+  unsupported, so no solver change was made. Hosted checks/merge remain open.
   See [compound colliders](docs/spikes/compound-colliders.md).
 
 - Read-only character movement queries are implemented on the primitive runtime,
@@ -300,7 +302,7 @@ within its documented workload.
   each passed 23 hosted browser checks. Graphical explanations, authentic SVG
   platform marks and the subsequent workflow correction are integrated in PR #2.
   Each workflow icon has a short visible explanation and tighter spacing; all 23
-  hosted checks passed on bf99437. Visual review is resuming under the new permission. See
+  hosted checks passed on bf99437. Visual review subsequently resumed, then was paused again on 2026-10-09. See
   [integration evidence](docs/spikes/connected-editor.md). Native menu Undo routes by focus. Actual macOS CUA checks now confirm
   project Cmd+Z/redo, isolated text-field Undo, safe account-dialog focus, divider
   keyboard resizing and fullscreen transitions. Claude reviewed the native captures;

@@ -157,7 +157,7 @@ Three kinematic capsule characters walk the lanes using `computeCharacterMotion`
 
 **Numeric reading of the logs** (each matches its frames):
 
-- **Arch lane:** crosses x≈0.6 at z=2.4 with no extra contact, so the opening is hollow.
+- **Arch lane:** crosses x≈0.6 at z=0 with no extra contact, so the opening is hollow.
 - **Terrace lane:** climbs the rotated ramp part to y=1.32 (0.5 deck + 0.82 capsule centre), steps down to 1.07 and returns to the floor at 0.82.
 - **Wall lane:** clamps at z=−2.73 (face at −3.05 + radius 0.3 + offset 0.02). The rotated return part then pushes it out to z=−2.33.
 - **Dumbbell:** lands by t≈50 and rests at y=0.16 (the sphere radius), level, with only yaw left.
@@ -208,22 +208,24 @@ I replayed the same saved course and compiled script with `incant_headless-v2`, 
 
 ## Defects and requests for Astra
 
-1. **Suspected compound dynamic-body defect: a statically stable stool topples (not root-caused; solver untouched).**
+1. **Investigated stool toppling: the original stability/energy objection below was not supported by numerical replay. Solver untouched.**
    - **Repro (numeric, no images needed):**
      ```sh
-     compound_lookdev.py OUT --stool 9:0.05
-     # then: play ... --log-output, without --output
+     python3 handoffs/0024-compound-inspector/tools/compound_lookdev.py OUT \
+       --stool 9:0.05 --no-captures --binary target/release/incant_headless
+     python3 tools/probes/compound-stool-energy.py OUT ENERGY_OUT
      ```
      This tilts the stool 9° about its local X axis and releases it 5 cm above the floor.
-   - **Expected:** the COM (≈0.427 m up) leans 0.067 m toward the +Z leg, well inside the tripod (0.22 m to that leg, inradius 0.11 m). The stool should settle upright.
+   - **Initial expectation (corrected below):** the COM (≈0.427 m up) leans 0.067 m toward the +Z leg, well inside the tripod (0.22 m to that leg, inradius 0.11 m). The stool should settle upright.
    - **Observed:**
      - At t13 it rests upright on all three legs (up·Y = 1.0).
      - It then slides about 0.16 m toward −Z while the +Z leg steadily lifts.
      - It rolls through 180° (t57–t97) and rests inverted at (3.49, 0.51, −2.08).
-   - A 3 cm fall cannot supply the energy to lift the COM over an edge, so this looks like energy injection or wrong effective mass properties or contact.
+   - **Initial hypothesis (withdrawn below):** a 3 cm fall cannot supply the energy to lift the COM over an edge, suggesting energy injection or wrong mass/contact properties.
    - **Controls:** 0° from 0.05 m and from 2 m, and 6° from 0.05 m, all settle upright. 6° from 0.3 m and 12° from 0.3 m also topple.
    - The trace is **bit-identical under v1 and v2**.
-   - The default look-dev scene therefore drops the stool upright. The topple sheet is retained as evidence.
+   - The default look-dev scene drops the stool upright. The historical topple sheet is retained.
+   - **Astra numerical investigation, after the capture pause:** independent additive primitive mass/inertia calculation gives 17.3657 kg and local COM y=0.427306 m. A point-foot tipping estimate needs a COM rise of only 0.014254 m (2.4283 J); the release has 9.3252 J above the upright equilibrium. Rounded-foot contact changes the exact barrier, but the claim of insufficient release energy is unsupported. At t13 the body is near upright, **not at rest**: velocity is (−0.2444, −0.2847, −0.5241) m/s and angular velocity (−1.2390, approximately 0, 0.5778) rad/s. At t97 it is near sideways, not inverted yet. Across all 301 state samples, total energy never exceeds its 80.4162 J release value and finishes at 14.0716 J. Energy is not strictly monotonic: the largest local increase is 0.8868 J at a later contact. This fixture does not establish an engine defect or prove universal energy conservation. A fresh public-command-built project reproduces the complete numeric trace exactly; no images were generated. See `docs/spikes/evidence/compound-stool-energy-2026-10-09.json`.
 2. **Data-binding gap: no per-field component diagnostics from the native bridge.** `snapshotFromEngine` only emits viewport and asset-source diagnostics. The engine's compound validation returns a single rejection string such as `compound part 3 rotation must be a unit quaternion`, with no JSON pointer. The Inspector consumes `Diagnostic.path` as contracted and was verified with fixture diagnostics using the engine's wording. **Request:** document-level component diagnostics with pointers such as `/shape/parts/3/rotation` and `/shape/parts/0/shape/half_extents/2`, so the native editor can place them at the exact field.
 3. **Provenance labelling (observation):** RPC `command.execute` transactions record origin `user` with actor `editor`, even when a tool script sends them. Consider an explicit script/tool origin for public RPC callers.
 
@@ -250,4 +252,4 @@ Also pending:
 - There is no environment or HDR lighting in the look-dev scene.
 - Row values truncate with an ellipsis in very narrow Inspectors. The full text is in the row's accessible name and tooltip, and in the detail card.
 - The compound Inspector is read-only by design. There is no authoring UI or new mutation path, and the existing Read-only chip stays.
-- The stool toppling is reported, not fixed (solver code is outside my scope).
+- The stool toppling report was numerically investigated by Astra; its original energy objection was withdrawn. No solver change or universal solver-correctness claim follows from this fixture.

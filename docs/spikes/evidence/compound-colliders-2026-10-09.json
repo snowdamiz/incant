@@ -83,7 +83,6 @@
     "workload": "Two adjacent box parts form the floor; a sphere settles on their seam and a primitive character sweeps on the compound surface."
   },
   "pending": [
-    "Claude completed report and corrected-runtime numeric replay",
     "native wide/minimum appearance and 64-part review (director paused computer use and captures)",
     "corrected-runtime visual review if numerical replay changes motion",
     "hosted checks and merge"
@@ -233,5 +232,18 @@
       "engine reports zero errors/warnings"
     ],
     "appearance_approval": false
+  },
+  "claude_review": {
+    "handoff": "0024-compound-inspector",
+    "browser_states": 28,
+    "axe_violations": 0,
+    "horizontal_overflow_px": 0,
+    "original_repeated_frames_equal": 228,
+    "corrected_runtime_repeats_equal": true,
+    "final_character_difference_max_m": 0.0001809597015,
+    "props_and_arch_equal": true,
+    "new_captures_after_pause": false,
+    "stool_report": "Initial diagnosis unsupported by numerical energy trace; no solver patch",
+    "stool_evidence": "compound-stool-energy-2026-10-09.json"
   }
 }
