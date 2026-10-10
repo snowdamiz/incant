@@ -322,10 +322,17 @@ export namespace SpotLightSchema {
 }
 export type SpotLight = SpotLightSchema.Root;
 
+export namespace SpriteAtlasSchema {
+  export type AtlasSource = { "name": string; "path": string; "region"?: [number, number, number, number] | null };
+  export type Root = { "frames": { [key: string]: AtlasSource }; "id": string; "maximum_size": [number, number]; "padding": number; "version": number };
+}
+export type SpriteAtlas = SpriteAtlasSchema.Root;
+
 export namespace SpriteRendererSchema {
   export type SpriteMode = ({ "kind": "simple" }) | ({ "border": [number, number, number, number]; "kind": "nine_slice"; "pixels_per_unit": number });
+  export type SpriteRegion = ([number, number, number, number]) | ({ "frame": string });
   export type SpriteSampling = "nearest" | "linear";
-  export type Root = { "flip_x"?: boolean; "flip_y"?: boolean; "layer"?: number; "mode"?: SpriteMode; "order"?: number; "pivot": [number, number]; "region": [number, number, number, number]; "sampling"?: SpriteSampling; "size": [number, number]; "texture": string; "tint": [number, number, number, number] };
+  export type Root = { "flip_x"?: boolean; "flip_y"?: boolean; "layer"?: number; "mode"?: SpriteMode; "order"?: number; "pivot": [number, number]; "region": SpriteRegion; "sampling"?: SpriteSampling; "size": [number, number]; "texture": string; "tint": [number, number, number, number] };
 }
 export type SpriteRenderer = SpriteRendererSchema.Root;
 

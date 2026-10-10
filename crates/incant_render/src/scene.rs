@@ -20,6 +20,10 @@ pub enum SceneError {
     MissingEnvironment(String),
     #[error("sprite texture {0} is not loaded at the document's current fingerprint")]
     MissingSprite(String),
+    #[error("sprite atlas frame {frame} is unavailable in texture {texture}")]
+    MissingSpriteFrame { texture: String, frame: String },
+    #[error(transparent)]
+    Sprite(#[from] incant_2d::SpriteError),
     #[error("authored material asset overrides are not supported by the imported preview")]
     MaterialOverrides,
     #[error("model {0} has no scene to instantiate")]
@@ -168,7 +172,7 @@ pub(crate) fn resolve(
         // Sprite and mesh instances share finite, invertible world-transform rules.
         Instance::new(world)?;
         if let Some(value) = components.get("SpriteRenderer") {
-            let sprite: incant_doc::SpriteRenderer =
+            let mut sprite: incant_doc::SpriteRenderer =
                 serde_json::from_value(value.clone()).map_err(incant_doc::DocumentError::from)?;
             let registered = &project.assets[&sprite.texture];
             let source = assets
@@ -177,6 +181,23 @@ pub(crate) fn resolve(
                     asset.info().fingerprint == registered.sha256 && asset.info().kind == "texture"
                 })
                 .ok_or_else(|| SceneError::MissingSprite(sprite.texture.clone()))?;
+            if let incant_doc::SpriteRegion::Atlas { frame } = &sprite.region {
+                let region = match source.data() {
+                    RuntimeAssetData::Texture(texture) => texture
+                        .metadata
+                        .atlas
+                        .as_ref()
+                        .and_then(|atlas| atlas.frames.get(frame))
+                        .map(|frame| frame.region),
+                    _ => None,
+                }
+                .ok_or_else(|| SceneError::MissingSpriteFrame {
+                    texture: sprite.texture.clone(),
+                    frame: frame.clone(),
+                })?;
+                sprite.region = region.into();
+                sprite.validate()?;
+            }
             result.sprites.push(crate::sprites::SpritePlan {
                 source,
                 sprite,

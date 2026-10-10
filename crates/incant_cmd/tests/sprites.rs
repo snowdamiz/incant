@@ -42,6 +42,11 @@ fn sprites_share_atomic_commands_reference_validation_and_exact_history() {
         ("texture", json!(incant_doc::new_id())),
         ("region", json!([4294967295u32, 0, 1, 1])),
         ("region", json!([0, 0, 0, 16])),
+        ("region", json!({"frame":"invalid"})),
+        (
+            "region",
+            json!({"frame":"00000000000000000000000001","extra":true}),
+        ),
         ("size", json!([0, 1])),
         ("pivot", json!([2, 0])),
         ("tint", json!([1, 1, 1, 1.01])),

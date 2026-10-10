@@ -9,3 +9,4 @@ publish.workspace = true
 serde = { workspace = true }
 schemars = { workspace = true }
 thiserror = { workspace = true }
+ulid = { workspace = true }

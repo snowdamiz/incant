@@ -1,4 +1,5 @@
 //! Numerical sprite contracts; these fixtures do not approve appearance.
+mod atlas;
 use incant_assets::{AssetStore, cook_texture};
 use incant_doc::{
     Asset, AssetImportSettings, Camera, CameraProjection, Entity, Project, Scene, SpriteMode,
@@ -52,7 +53,7 @@ impl Fixture {
             "SpriteRenderer".into(),
             json!(SpriteRenderer {
                 texture: texture.clone(),
-                region: [0, 0, w, h],
+                region: [0, 0, w, h].into(),
                 size: [4., 4.],
                 pivot: [0.5, 0.5],
                 tint: [1.; 4],

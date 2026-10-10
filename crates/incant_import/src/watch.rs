@@ -309,7 +309,7 @@ fn cached_dependencies(root: &Path, asset: &Asset) -> Option<Vec<Dependency>> {
             if usage != texture.metadata.usage {
                 return None;
             }
-            vec![texture.metadata.dependency]
+            texture.metadata.all_dependencies()
         }
         _ => return None,
     };

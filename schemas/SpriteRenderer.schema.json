@@ -48,6 +48,34 @@
         }
       ]
     },
+    "SpriteRegion": {
+      "anyOf": [
+        {
+          "description": "Explicit source rectangle in top-left pixel coordinates.",
+          "items": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Stable frame identity, resolved from the current cooked atlas metadata.",
+          "properties": {
+            "frame": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "frame"
+          ],
+          "type": "object"
+        }
+      ]
+    },
     "SpriteSampling": {
       "enum": [
         "nearest",
@@ -97,15 +125,8 @@
       "type": "array"
     },
     "region": {
-      "description": "Top-left source pixel x/y followed by width/height. No implicit cropping.",
-      "items": {
-        "format": "uint32",
-        "minimum": 0,
-        "type": "integer"
-      },
-      "maxItems": 4,
-      "minItems": 4,
-      "type": "array"
+      "$ref": "#/$defs/SpriteRegion",
+      "description": "Explicit source rectangle or stable atlas frame. No implicit cropping."
     },
     "sampling": {
       "$ref": "#/$defs/SpriteSampling",

@@ -12,7 +12,8 @@ pub use camera::{Camera, CameraProjection};
 pub use collider_shapes::{ColliderPart, ColliderShape, PrimitiveColliderShape};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
-pub use incant_2d::{SpriteMode, SpriteRenderer, SpriteSampling};
+pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
+pub use incant_2d::{SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling};
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
@@ -576,6 +577,10 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
 pub fn schema_registry() -> BTreeMap<String, Value> {
     let mut registry = BTreeMap::from([
         ("Project".into(), json!(schemars::schema_for!(Project))),
+        (
+            "SpriteAtlas".into(),
+            json!(schemars::schema_for!(SpriteAtlas)),
+        ),
         ("Transform".into(), json!(schemars::schema_for!(Transform))),
         ("Velocity".into(), json!(schemars::schema_for!(Velocity))),
         (

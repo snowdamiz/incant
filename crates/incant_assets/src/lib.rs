@@ -1,4 +1,5 @@
 //! CPU asset import and cooking. No account, renderer or editor is required.
+mod atlas;
 mod audio;
 mod audio_cook;
 mod cache;
@@ -39,6 +40,8 @@ pub const MAX_INDICES: usize = 3_000_000;
 
 #[derive(Debug, Error)]
 pub enum AssetError {
+    #[error(transparent)]
+    Atlas(#[from] incant_2d::atlas::AtlasError),
     #[error("asset IO: {0}")]
     Io(#[from] std::io::Error),
     #[error("invalid glTF: {0}")]

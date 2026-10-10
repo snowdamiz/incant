@@ -57,6 +57,7 @@ jobs:
       - run: python3 tools/probes/orthographic-cameras.py artifacts/orthographic-cameras-cli
       - run: python3 tools/probes/orthographic-cameras.py artifacts/pixel-perfect-cameras-cli --pixel-perfect
       - run: python3 tools/probes/sprite-rendering.py artifacts/sprite-rendering-cli
+      - run: python3 tools/probes/sprite-atlases.py artifacts/sprite-atlases-cli
       - run: node tools/generate_sdk.mjs --check
       - run: git diff --exit-code -- schemas
       - run: node_modules/.bin/tsc -p sdk/ts/tsconfig.json

@@ -168,7 +168,10 @@ impl SpriteSystem {
             };
             let sprite = &plan.sprite;
             let start = vertices.len() as u32;
-            let [x, y, w, h] = sprite.region;
+            let [x, y, w, h] = sprite
+                .region
+                .pixels()
+                .ok_or(incant_2d::SpriteError::UnresolvedAtlas)?;
             let tw = source.texture.width as f64;
             let th = source.texture.height as f64;
             let bounds = [

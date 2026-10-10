@@ -3453,6 +3453,7 @@ dependencies = [
  "schemars 1.2.2",
  "serde",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]
@@ -3490,6 +3491,7 @@ dependencies = [
  "glam 0.32.1",
  "gltf",
  "image",
+ "incant_2d",
  "incant_cmd",
  "incant_doc",
  "incant_nav",

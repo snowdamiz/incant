@@ -26,7 +26,9 @@ pub enum ImportError {
     DuplicateSource(String),
     #[error("multiple assets use source {0}; resolve their identities before reimport")]
     AmbiguousSource(String),
-    #[error("unsupported import source: {0}; expected glTF, GLB, PNG, JPEG, EXR, WAV or OGG")]
+    #[error(
+        "unsupported import source: {0}; expected glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG"
+    )]
     Unsupported(String),
     #[error("texture usage applies only to standalone images: {0}")]
     ModelUsage(String),
@@ -73,6 +75,8 @@ pub enum ImportDetails {
         format: TextureFormat,
         mip_levels: usize,
         usage: TextureUsage,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        atlas: Option<incant_doc::AtlasLayout>,
         dependencies: Vec<Dependency>,
     },
 }
@@ -142,6 +146,9 @@ impl ImportSnapshot {
                 "gltf" | "glb" => ImportKind::Model,
                 "png" | "jpg" | "jpeg" | "exr" => ImportKind::Texture,
                 "wav" | "ogg" => ImportKind::Audio,
+                "json" if request.source.to_ascii_lowercase().ends_with(".atlas.json") => {
+                    ImportKind::Texture
+                }
                 _ => return Err(ImportError::Unsupported(request.source.clone())),
             };
             if kind != ImportKind::Texture && request.texture_usage.is_some() {
@@ -288,6 +295,7 @@ fn cook(
             }
         });
         let cooked = cook_texture(root, source, &cache, usage)?;
+        let dependencies = cooked.metadata.all_dependencies();
         (
             "texture",
             cooked.metadata.fingerprint,
@@ -299,7 +307,8 @@ fn cook(
                 format: cooked.texture.format,
                 mip_levels: cooked.texture.levels.len(),
                 usage,
-                dependencies: vec![cooked.metadata.dependency],
+                dependencies,
+                atlas: cooked.metadata.atlas,
             },
         )
     };

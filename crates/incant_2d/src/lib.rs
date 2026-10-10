@@ -1,4 +1,5 @@
 //! Bounded sprite geometry and document values. No GPU, filesystem or mutation path.
+pub mod atlas;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
@@ -24,13 +25,35 @@ pub enum SpriteMode {
     },
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(untagged, deny_unknown_fields)]
+pub enum SpriteRegion {
+    /// Explicit source rectangle in top-left pixel coordinates.
+    Pixels([u32; 4]),
+    /// Stable frame identity, resolved from the current cooked atlas metadata.
+    Atlas { frame: String },
+}
+impl From<[u32; 4]> for SpriteRegion {
+    fn from(value: [u32; 4]) -> Self {
+        Self::Pixels(value)
+    }
+}
+impl SpriteRegion {
+    pub fn pixels(&self) -> Option<[u32; 4]> {
+        match self {
+            Self::Pixels(region) => Some(*region),
+            Self::Atlas { .. } => None,
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct SpriteRenderer {
     /// Stable ID of a cooked color texture. Source files are unnecessary at runtime.
     pub texture: String,
-    /// Top-left source pixel x/y followed by width/height. No implicit cropping.
-    pub region: [u32; 4],
+    /// Explicit source rectangle or stable atlas frame. No implicit cropping.
+    pub region: SpriteRegion,
     /// Local width and height in metres, before the entity's inherited transform.
     #[schemars(extend("x-incant-unit" = "m"))]
     pub size: [f64; 2],
@@ -55,6 +78,10 @@ pub struct SpriteRenderer {
 
 #[derive(Debug, Clone, PartialEq, Error)]
 pub enum SpriteError {
+    #[error("sprite atlas frame must be a canonical ULID")]
+    Frame,
+    #[error("sprite atlas frame must be resolved before tessellation")]
+    UnresolvedAtlas,
     #[error("sprite size must be finite, positive and at most 1000000 metres per axis")]
     Size,
     #[error("sprite pivot and tint must be finite normalized values")]
@@ -86,7 +113,16 @@ impl SpriteRenderer {
         {
             return Err(SpriteError::Normalized);
         }
-        let [x, y, w, h] = self.region;
+        let [x, y, w, h] = match &self.region {
+            SpriteRegion::Pixels(region) => *region,
+            SpriteRegion::Atlas { frame } => {
+                if !atlas::valid_frame_id(frame) {
+                    return Err(SpriteError::Frame);
+                }
+                // Actual frame extents are validated again after cache lookup.
+                [0, 0, 8192, 8192]
+            }
+        };
         if w == 0
             || h == 0
             || u64::from(x) + u64::from(w) > 8192
@@ -116,14 +152,14 @@ pub struct SpriteVertex {
     pub uv: [f64; 2],
 }
 
-/// At most 54 vertices. No authored value is changed; flipping affects UVs only.
+/// At most 54 vertices. Flipping mirrors source and borders within the same bounds.
 /// Degenerate middle cells (a target smaller than its borders) are omitted.
 pub fn tessellate(
     sprite: &SpriteRenderer,
     texture_size: [u32; 2],
 ) -> Result<Vec<SpriteVertex>, SpriteError> {
     sprite.validate()?;
-    let [x, y, w, h] = sprite.region;
+    let [x, y, w, h] = sprite.region.pixels().ok_or(SpriteError::UnresolvedAtlas)?;
     if texture_size.contains(&0)
         || texture_size.iter().any(|v| *v > 8192)
         || u64::from(x) + u64::from(w) > u64::from(texture_size[0])
@@ -224,7 +260,7 @@ mod tests {
     fn sprite() -> SpriteRenderer {
         SpriteRenderer {
             texture: "test".into(),
-            region: [16, 32, 32, 16],
+            region: [16, 32, 32, 16].into(),
             size: [4., 2.],
             pivot: [0.25, 0.5],
             tint: [1.; 4],
@@ -310,7 +346,7 @@ mod tests {
     fn malformed_and_out_of_bounds_regions_fail_before_geometry_allocation() {
         let mut s = sprite();
         assert!(matches!(tessellate(&s, [32, 64]), Err(SpriteError::Region)));
-        s.region = [u32::MAX, 0, 16, 16];
+        s.region = [u32::MAX, 0, 16, 16].into();
         assert!(matches!(s.validate(), Err(SpriteError::Region)));
         s = sprite();
         s.size[0] = f64::NAN;
