@@ -1,0 +1,21 @@
+[package]
+name = "incant_audio_runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+device = ["kira/cpal"]
+
+[dependencies]
+incant_assets_runtime.workspace = true
+kira = { version = "=0.12.5", default-features = false }
+thiserror.workspace = true
+serde.workspace = true
+schemars.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+tempfile = "3"

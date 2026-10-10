@@ -3,7 +3,7 @@
 //! routing, mixing and spatialization; its public Hermite interpolator handles
 //! fractional source positions without depending on a decoder thread's timing.
 use crate::PlayOptions;
-use incant_assets::{AUDIO_CHUNK_FRAMES, CookedAudio};
+use incant_assets_runtime::{AUDIO_CHUNK_FRAMES, CookedAudio};
 use kira::{
     Frame, Panning,
     info::Info,
@@ -97,7 +97,7 @@ struct OfflineSound {
     shared: Arc<Shared>,
 }
 impl OfflineSound {
-    fn frame(&mut self, mut index: i64) -> Result<Frame, incant_assets::AssetError> {
+    fn frame(&mut self, mut index: i64) -> Result<Frame, incant_assets_runtime::AssetError> {
         let length = self.clip.metadata.frames as i64;
         if self.options.looping {
             index = index.rem_euclid(length);
@@ -116,7 +116,7 @@ impl OfflineSound {
             [index as usize % AUDIO_CHUNK_FRAMES];
         Ok(Frame::new(sample[0], sample[1]))
     }
-    fn next(&mut self, dt: f64) -> Result<Frame, incant_assets::AssetError> {
+    fn next(&mut self, dt: f64) -> Result<Frame, incant_assets_runtime::AssetError> {
         let length = self.clip.metadata.frames as f64;
         if self.options.looping {
             self.position = self.position.rem_euclid(length);

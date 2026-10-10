@@ -56,7 +56,14 @@ pub type Result<T> = std::result::Result<T, AssetError>;
 fn invalid(reason: impl Into<String>) -> AssetError {
     AssetError::Invalid(reason.into())
 }
-pub fn sha256(bytes: &[u8]) -> String {
-    use sha2::{Digest, Sha256};
-    format!("{:x}", Sha256::digest(bytes))
+pub use incant_assets_runtime::sha256;
+impl From<incant_assets_runtime::AssetError> for AssetError {
+    fn from(error: incant_assets_runtime::AssetError) -> Self {
+        match error {
+            incant_assets_runtime::AssetError::Io(e) => Self::Io(e),
+            incant_assets_runtime::AssetError::Json(e) => Self::Json(e),
+            incant_assets_runtime::AssetError::Invalid(e) => Self::Invalid(e),
+            incant_assets_runtime::AssetError::Limit(e) => Self::Limit(e),
+        }
+    }
 }
