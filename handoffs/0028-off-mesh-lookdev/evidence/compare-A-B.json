@@ -1,0 +1,128 @@
+{
+ "logs": {
+  "bridge-reverse.logs.jsonl": true,
+  "bridge-reverse.prefix.logs.jsonl": true,
+  "goal-feet.logs.jsonl": true,
+  "goal-feet.prefix.logs.jsonl": true,
+  "overview.logs.jsonl": true,
+  "profile.logs.jsonl": true,
+  "reference.logs.jsonl": true,
+  "report-t0000.logs.jsonl": true,
+  "report-t0001.logs.jsonl": true,
+  "report-t0002.logs.jsonl": true,
+  "report-t0485.logs.jsonl": true,
+  "report-t0486.logs.jsonl": true,
+  "report-t0487.logs.jsonl": true,
+  "report-t0488.logs.jsonl": true,
+  "report-t0941.logs.jsonl": true,
+  "report-t0942.logs.jsonl": true,
+  "report-t0943.logs.jsonl": true,
+  "report-t0944.logs.jsonl": true,
+  "resume.logs.jsonl": true,
+  "resume.prefix.logs.jsonl": true,
+  "ret-full.logs.jsonl": true,
+  "ret-full.prefix.logs.jsonl": true,
+  "ret-mid.logs.jsonl": true,
+  "ret-mid.prefix.logs.jsonl": true,
+  "up-launch.logs.jsonl": true,
+  "up-launch.prefix.logs.jsonl": true
+ },
+ "frames": {
+  "bridge-reverse": {
+   "count": 81,
+   "identical": true,
+   "mismatched": []
+  },
+  "goal-feet": {
+   "count": 41,
+   "identical": true,
+   "mismatched": []
+  },
+  "overview": {
+   "count": 126,
+   "identical": true,
+   "mismatched": []
+  },
+  "profile": {
+   "count": 126,
+   "identical": true,
+   "mismatched": []
+  },
+  "ret-full": {
+   "count": 89,
+   "identical": true,
+   "mismatched": []
+  },
+  "ret-mid": {
+   "count": 49,
+   "identical": true,
+   "mismatched": []
+  },
+  "up-launch": {
+   "count": 81,
+   "identical": true,
+   "mismatched": []
+  }
+ },
+ "states": {
+  "bridge-reverse.prefix.stdout.json": true,
+  "bridge-reverse.stdout.json": true,
+  "goal-feet.prefix.stdout.json": true,
+  "goal-feet.stdout.json": true,
+  "overview.stdout.json": true,
+  "profile.stdout.json": true,
+  "reference.stdout.json": true,
+  "report-t0000.stdout.json": true,
+  "report-t0001.stdout.json": true,
+  "report-t0002.stdout.json": true,
+  "report-t0485.stdout.json": true,
+  "report-t0486.stdout.json": true,
+  "report-t0487.stdout.json": true,
+  "report-t0488.stdout.json": true,
+  "report-t0941.stdout.json": true,
+  "report-t0942.stdout.json": true,
+  "report-t0943.stdout.json": true,
+  "report-t0944.stdout.json": true,
+  "resume.prefix.stdout.json": true,
+  "resume.stdout.json": true,
+  "ret-full.prefix.stdout.json": true,
+  "ret-full.stdout.json": true,
+  "ret-mid.prefix.stdout.json": true,
+  "ret-mid.stdout.json": true,
+  "up-launch.prefix.stdout.json": true,
+  "up-launch.stdout.json": true
+ },
+ "states_raw_equal": {
+  "bridge-reverse.prefix.stdout.json": false,
+  "bridge-reverse.stdout.json": false,
+  "goal-feet.prefix.stdout.json": false,
+  "goal-feet.stdout.json": false,
+  "overview.stdout.json": false,
+  "profile.stdout.json": false,
+  "reference.stdout.json": false,
+  "report-t0000.stdout.json": false,
+  "report-t0001.stdout.json": false,
+  "report-t0002.stdout.json": false,
+  "report-t0485.stdout.json": false,
+  "report-t0486.stdout.json": false,
+  "report-t0487.stdout.json": false,
+  "report-t0488.stdout.json": false,
+  "report-t0941.stdout.json": false,
+  "report-t0942.stdout.json": false,
+  "report-t0943.stdout.json": false,
+  "report-t0944.stdout.json": false,
+  "resume.prefix.stdout.json": false,
+  "resume.stdout.json": false,
+  "ret-full.prefix.stdout.json": false,
+  "ret-full.stdout.json": false,
+  "ret-mid.prefix.stdout.json": false,
+  "ret-mid.stdout.json": false,
+  "up-launch.prefix.stdout.json": false,
+  "up-launch.stdout.json": false
+ },
+ "normalized": "scene ULID and imported asset ULIDs (random per init/import) replaced by stable labels",
+ "all_logs_identical": true,
+ "all_states_identical": true,
+ "all_frames_identical": true,
+ "total_frames": 593
+}
