@@ -2,14 +2,6 @@
 use crate::{NavigationError, NavigationPolygon, invalid, limit};
 use glam::{DVec3, Vec3};
 type Point = [f32; 3];
-pub(crate) fn follow(
-    polys: &[NavigationPolygon],
-    corridor: &[usize],
-    gates: &[(Point, Point)],
-    flat: &[Point],
-) -> Result<Vec<Point>, NavigationError> {
-    follow_with_budget(polys, corridor, gates, flat, &mut 0)
-}
 pub(crate) fn follow_with_budget(
     polys: &[NavigationPolygon],
     corridor: &[usize],

@@ -1,0 +1,265 @@
+{
+  "date": "2026-10-10",
+  "source_commit": "ccd6d33e0bc144debffd70890792aa70a6cc47c6",
+  "headless_sha256": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+  "local": {
+    "rust_tests": 289,
+    "gpu_tests": 40,
+    "ui_tests": 315,
+    "tool_tests": 5,
+    "clippy": "pass",
+    "contracts_and_strict_typescript": "pass",
+    "macos_common_platform_smoke": "executed/pass",
+    "wasm": "compilation/pass",
+    "ios_simulator": "compilation/pass"
+  },
+  "native": {
+    "source_commit": "8d929049f88ff4e40115aab78a080d44d1ef608c",
+    "package": "artifacts/Incant.app",
+    "signed_for_distribution": false,
+    "binary_sha256": "aee111a987428990c1e93b6a55b215ed0078a2bcaefa5e64000d9622545fd1f9"
+  },
+  "public_probes": [
+    {
+      "path": "artifacts/navigation-links-final/result.json",
+      "result": {
+        "passed": true,
+        "strict_typescript": true,
+        "public_commands": true,
+        "durable_undo_redo": true,
+        "invalid_cost_rollback": true,
+        "explicit_link_traversal": true,
+        "one_way_reverse_null": true,
+        "save_in_flight_exact": true,
+        "repeat_exact": true,
+        "mid_link_progress": 0.30555555555555564,
+        "author_files_unchanged": {
+          "game.incant.json": "ef0aeaa248b2e65b4a43fc7967354b06e4c92ee4c3fcf29e513712bd9754c64c",
+          "game.incant.journal.jsonl": "e63e189fe024cdffa7375b39352d2adc921ccdaf93cf75edac06913dc6887c81"
+        },
+        "binary_sha256": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+        "physics_or_visual_gate": false
+      }
+    },
+    {
+      "path": "artifacts/steering-links-regression/result.json",
+      "result": {
+        "passed": true,
+        "agents": 100,
+        "strict_typescript": true,
+        "shared_velocity_commands": true,
+        "repeat_and_save_resume_exact": true,
+        "state": {
+          "minimum": 0.6001229564692269,
+          "neighbors": 17,
+          "remaining": 1.7795514091813223e-13,
+          "tick": 600
+        },
+        "author_files_unchanged": {
+          "game.incant.json": "dabae2334111c210abdd1da51be73ef9ae7cf2b4991d8d0b4513de88a7e2539d",
+          "game.incant.journal.jsonl": "6963dc51034b61bd0c0f926bd76c68b8844881fbe03291c18528dcf546166e06"
+        },
+        "binary_sha256": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+        "rendering_or_physics_collision_gate": false
+      }
+    },
+    {
+      "path": "artifacts/navigation-links-regression/result.json",
+      "result": {
+        "passed": true,
+        "strict_typescript": true,
+        "public_import_rpc": true,
+        "durable_undo_redo": true,
+        "invalid_command_rollback": true,
+        "cooked_mesh_without_source": true,
+        "runtime_room_rebuild": true,
+        "navmesh_character_chase": true,
+        "saved_path_following": true,
+        "repeated_gameplay_exact": true,
+        "position": [
+          7.926244258880615,
+          0.9099835753440857,
+          -0.015796080231666565
+        ],
+        "first_corners": 4,
+        "second_corners": 2,
+        "author_files_unchanged": {
+          "game.incant.json": "1d6cf3d8b9bd6a42180e55bfbb1cc60f4925f5e69d2563c823307bd898fd3fdd",
+          "game.incant.journal.jsonl": "b24d57b49edefb7e09bc1622969f4181d2e468c9f0ba7eff6fefbbd0abcee8b9"
+        },
+        "binary_sha256": "dbbb6627a6e7878a302fb9f035a3a4e456707f476a950a6395e1e81d9d25b6ba",
+        "visual_or_device_gate": false
+      }
+    }
+  ],
+  "rendered_review": {
+    "packet": "0028-off-mesh-lookdev",
+    "model": "claude-opus-5-5",
+    "transport": "ACP",
+    "commit": "d05e8c8e421e44629627a6456cee2338a5518315",
+    "correction": "816fd59e50d8d1b3ef462eaf604d86a024bfc90f",
+    "frames_equal": 593,
+    "log_files_equal": 26,
+    "resume_frames_equal": 49,
+    "final_entities_equal": true,
+    "script_state_and_log_exception": "session-local generation counter resets on rebuild",
+    "temporary_sleep_prevention": true,
+    "limitations": [
+      "5 cm hover from quantized source heights",
+      "no physics bodies or collision guarantee",
+      "same machine and binary only"
+    ]
+  },
+  "logs": {
+    "workspace": {
+      "path": "/tmp/incant-links-workspace.log",
+      "sha256": "e14f058c67c58feb2becc83d54853654fcf590326729f1d773f529a5ca260b74"
+    },
+    "workspace-clippy": {
+      "path": "/tmp/incant-links-workspace-clippy.log",
+      "sha256": "bc2b252784ca489f1a9a92df2684fdfd20eb0e5f942a4103029eff09dc7db8a3"
+    },
+    "gpu": {
+      "path": "/tmp/incant-links-gpu.log",
+      "sha256": "8052ed27a4289d0b03e623139089ec6eb808f5ac93ecec80af85a9540cf1fd45"
+    },
+    "ui": {
+      "path": "/tmp/incant-links-ui.log",
+      "sha256": "061df7eba8b04e31c4c4b88d0769290d5191a310356abc7683c3312b78624e5d"
+    },
+    "tools": {
+      "path": "/tmp/incant-links-tools.log",
+      "sha256": "0f95cb5348b55c00ff4d32c14cdb23d5f7381e6544bbe759c3626d58e5b2bb72"
+    },
+    "wasm": {
+      "path": "/tmp/incant-links-wasm.log",
+      "sha256": "b108b0db122c55b2afe99d7cc65d5eb77c1f25659666e8c2948cc1cf5507ef34"
+    },
+    "ios": {
+      "path": "/tmp/incant-links-ios.log",
+      "sha256": "fe4238b34d3a6d7cec4e14cb497c525d3c7b138d572af25d2625c13ab948e548"
+    },
+    "native": {
+      "path": "/tmp/incant-links-native.log",
+      "sha256": "a3a780ef69f08afa9e4accc5aee6df8d986d697dbdd073e6376ccb8bd129d033"
+    },
+    "package": {
+      "path": "/tmp/incant-links-package.log",
+      "sha256": "b96151ecce8fbb99d5e7ea23ade0b61675a4d999e8a056af6efae55fe1a2b397"
+    },
+    "final-probe": {
+      "path": "/tmp/incant-links-final-probe.log",
+      "sha256": "62507ed2acda32afc05b83a61a7985a22a950c249aaed8566355b44284c11723"
+    },
+    "steering-regression": {
+      "path": "/tmp/incant-links-steering-regression.log",
+      "sha256": "4ee3e9c4c572d1aff8366afe41022d6b772b1a8cb2f232e006b2044cf802bcea"
+    },
+    "navigation-regression": {
+      "path": "/tmp/incant-links-navigation-regression.log",
+      "sha256": "5d54fc98bdfe82ceff2c7a3d7880f1e5db1ce4d358590e291421fd9cd5268f0c"
+    },
+    "final-platform": {
+      "path": "/tmp/incant-links-final-platform.log",
+      "sha256": "b6e52bbadc689e96b6afad5f521210f3f73f4341e7b11b5d05b7ecac862e044a"
+    }
+  },
+  "hosted_checks": "pending publication; depends on reviewed PR #36",
+  "phase_gate_approved": false,
+  "integration_after_steering_fix": {
+    "source_commit": "61cf71d1dcd4856b54a3839add443c99cb4cc2ef",
+    "rust_tests": 289,
+    "clippy": "pass",
+    "public_probes": [
+      {
+        "passed": true,
+        "strict_typescript": true,
+        "public_commands": true,
+        "durable_undo_redo": true,
+        "invalid_cost_rollback": true,
+        "explicit_link_traversal": true,
+        "one_way_reverse_null": true,
+        "save_in_flight_exact": true,
+        "repeat_exact": true,
+        "mid_link_progress": 0.30555555555555564,
+        "author_files_unchanged": {
+          "game.incant.json": "56b80bc96d10320f363c437c4327521cd026e77d01068a0da35c4a986111cf26",
+          "game.incant.journal.jsonl": "8dee3845b109e6da8879861272cab8c53723acf30a52c29016197ebc7a6b8788"
+        },
+        "binary_sha256": "6205ce3f85333597da97323bd0612b1692cc1744669e4ab33cf3e0f890d34721",
+        "physics_or_visual_gate": false
+      },
+      {
+        "passed": true,
+        "agents": 100,
+        "strict_typescript": true,
+        "shared_velocity_commands": true,
+        "repeat_and_save_resume_exact": true,
+        "state": {
+          "minimum": 0.6157673834154757,
+          "neighbors": 17,
+          "remaining": 6.208589198944098e-11,
+          "tick": 600
+        },
+        "author_files_unchanged": {
+          "game.incant.json": "836b2a455e9e09eac2c169dd17f8f178b0159ddf1b55fdc464c3420d0423921b",
+          "game.incant.journal.jsonl": "05265ed16b58ddf3599534e914f08af43930ef226d0d99dda1f0e4dcc5fbd73a"
+        },
+        "binary_sha256": "6205ce3f85333597da97323bd0612b1692cc1744669e4ab33cf3e0f890d34721",
+        "rendering_or_physics_collision_gate": false
+      }
+    ],
+    "native_binary_sha256": "aee111a987428990c1e93b6a55b215ed0078a2bcaefa5e64000d9622545fd1f9",
+    "native_package": "artifacts/Incant.app",
+    "notes": "Navigation/steering changes validated together; earlier GPU/UI/contracts still apply to their unchanged code. Updated steering visual review and current-head hosted checks remain required."
+  },
+  "head_on_integration": {
+    "source_commit": "2568cf5436cda0729427da529748f6765e8523d5",
+    "rust_tests": 291,
+    "clippy": true,
+    "native_package": true,
+    "headless_sha256": "8d0fb2a9315583195cdad9dec6985b391301c1d67e494c500bef7f0644712f01",
+    "native_sha256": "df7ab14c56719ad7727cc6516bd4996f596446b471d304b32cae94b5c7922dad",
+    "public_links": {
+      "passed": true,
+      "strict_typescript": true,
+      "public_commands": true,
+      "durable_undo_redo": true,
+      "invalid_cost_rollback": true,
+      "explicit_link_traversal": true,
+      "one_way_reverse_null": true,
+      "save_in_flight_exact": true,
+      "repeat_exact": true,
+      "mid_link_progress": 0.30555555555555564,
+      "author_files_unchanged": {
+        "game.incant.json": "becf09a5e905956325a93b6b97c63d23570ddc09d382da80779d502b42febd01",
+        "game.incant.journal.jsonl": "7215db6e88654e5a104a2bc3e1e4051281acad5fd10e088f24c153eab0b92d30"
+      },
+      "binary_sha256": "8d0fb2a9315583195cdad9dec6985b391301c1d67e494c500bef7f0644712f01",
+      "physics_or_visual_gate": false
+    },
+    "public_steering": {
+      "passed": true,
+      "agents": 100,
+      "strict_typescript": true,
+      "shared_velocity_commands": true,
+      "repeat_and_save_resume_exact": true,
+      "state": {
+        "minimum": 0.6157673834154757,
+        "neighbors": 17,
+        "remaining": 6.208589198944098e-11,
+        "tick": 600
+      },
+      "author_files_unchanged": {
+        "game.incant.json": "84e6f77f3940c2988ad2bec40ac20bf79e6554a65f71ac0514f626518988ce7d",
+        "game.incant.journal.jsonl": "ccbd4aa3222ed6bdbe1673284686051b2a73e57db88e1b35760c0601171dbaf6"
+      },
+      "binary_sha256": "8d0fb2a9315583195cdad9dec6985b391301c1d67e494c500bef7f0644712f01",
+      "rendering_or_physics_collision_gate": false
+    },
+    "awaiting": [
+      "hosted checks and dependency merge"
+    ],
+    "steering_rendered_review": "passed at source 4c495e9; see handoffs/0027-steering-lookdev/result.md"
+  }
+}

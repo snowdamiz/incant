@@ -32,6 +32,16 @@ globalThis.__tick = (worldJson, dt, stateJson, eventsJson, inputJson, clockJson,
       timers.push({op:'cancel', id});
       replaced.add(id);
     },
+    findGridPath: (query) => {
+      const result = JSON.parse(globalThis.__incantFindGridPath(JSON.stringify(query)));
+      if (result.error) throw new Error(result.error);
+      return result.path;
+    },
+    steerAgents: (query) => {
+      const result = JSON.parse(globalThis.__incantSteerAgents(JSON.stringify(query)));
+      if (result.error) throw new Error(result.error);
+      return result.velocities;
+    },
     findPath: (query) => {
       const result = JSON.parse(globalThis.__incantFindPath(JSON.stringify(query)));
       if (result.error) throw new Error(result.error);

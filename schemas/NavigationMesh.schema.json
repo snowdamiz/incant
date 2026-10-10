@@ -88,11 +88,71 @@
         "mesh"
       ],
       "type": "string"
+    },
+    "OffMeshLink": {
+      "additionalProperties": false,
+      "properties": {
+        "bidirectional": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "end": {
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        },
+        "extra_cost": {
+          "description": "Nonnegative distance-equivalent penalty, added to straight-line length.",
+          "format": "float",
+          "type": "number"
+        },
+        "id": {
+          "description": "Stable project ULID used by gameplay to choose a traversal behavior.",
+          "type": "string"
+        },
+        "snap_distance": {
+          "format": "float",
+          "type": "number"
+        },
+        "start": {
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "snap_distance",
+        "bidirectional",
+        "enabled",
+        "extra_cost"
+      ],
+      "type": "object"
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
+    "links": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/OffMeshLink"
+      },
+      "maxItems": 128,
+      "type": "array"
+    },
     "settings": {
       "$ref": "#/$defs/NavigationSettings"
     },

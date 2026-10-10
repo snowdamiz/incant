@@ -88,6 +88,12 @@ pub enum PlayError {
     Json(#[from] serde_json::Error),
     #[error(transparent)]
     Script(#[from] incant_script::ScriptError),
+    #[error("play failed at tick {tick}: {source}")]
+    Tick {
+        tick: u64,
+        #[source]
+        source: incant_script::ScriptError,
+    },
     #[error(transparent)]
     Save(#[from] incant_script::SaveError),
     #[error(transparent)]
@@ -264,7 +270,10 @@ pub fn run(options: Options) -> Result<Report, PlayError> {
     let mut retained_scene = None;
     for tick in 0..=count {
         if tick != 0 {
-            commands += play.tick()?;
+            commands += play.tick().map_err(|source| PlayError::Tick {
+                tick: play.host.clock().tick.saturating_add(1),
+                source,
+            })?;
             if let Some(audio) = &mut audio {
                 assets
                     .sync_project(play.project(), root)

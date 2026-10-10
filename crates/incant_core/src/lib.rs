@@ -1,10 +1,15 @@
 //! Bevy ECS projection and fixed-step simulation. The editor document is immutable
 //! during play; stopping discards the runtime projection, preserving authored state.
+mod grid;
 mod navigation;
+pub use grid::{GridNavigationQuery, GridPath, GridPathRequest};
 mod scene;
 use bevy_app::{App, Update};
 use bevy_ecs::prelude::*;
 use incant_doc::{MeshRenderer, Project};
+pub use incant_nav::{
+    OffMeshLink, OffMeshTraversal, SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity,
+};
 pub use incant_physics::{
     CharacterMovement, CharacterQuery, PhysicsError, RayHit, RayQuery, TriggerEvent,
 };
@@ -99,6 +104,7 @@ pub struct Engine {
     app: App,
     physics: Arc<Mutex<PhysicsRuntime>>,
     navigation: Arc<Mutex<navigation::NavigationRuntime>>,
+    grid_navigation: Arc<Mutex<grid::GridNavigationRuntime>>,
     navigation_resources: NavigationResources,
     entities: BTreeMap<String, Entity>,
     tick: u64,
@@ -119,6 +125,7 @@ impl Engine {
             app,
             physics: Arc::new(Mutex::new(PhysicsRuntime::default())),
             navigation: Arc::new(Mutex::new(navigation::NavigationRuntime::default())),
+            grid_navigation: Arc::new(Mutex::new(grid::GridNavigationRuntime::default())),
             navigation_resources: resources,
             entities: BTreeMap::new(),
             tick: 0,
@@ -200,6 +207,27 @@ impl Engine {
                 .find_path(query)
         }
     }
+    pub fn grid_navigator(
+        &self,
+    ) -> impl Fn(GridNavigationQuery) -> Result<Option<GridPath>, NavigationError> + Send + Sync + 'static
+    {
+        let grids = self.grid_navigation.clone();
+        move |query| {
+            grids
+                .lock()
+                .unwrap_or_else(|e| e.into_inner())
+                .find_path(query)
+        }
+    }
+    /// Read-only batch local avoidance, bound to the play session's fixed step.
+    /// The caller applies proposed velocities through ordinary document commands.
+    pub fn steerer(
+        &self,
+    ) -> impl Fn(SteeringQuery) -> Result<Vec<SteeringVelocity>, NavigationError> + Send + Sync + 'static
+    {
+        let dt = self.dt as f32;
+        move |query| incant_nav::steer(&query, dt)
+    }
     pub fn snapshot(&mut self) -> RuntimeSnapshot {
         let mut query = self.app.world_mut().query::<(
             &StableId,
@@ -258,6 +286,11 @@ impl Engine {
         let validated = project.validated()?;
         let staged = prepare(validated)?;
         let prepared_physics = PreparedPhysics::from_validated(validated)?;
+        let staged_grids = self
+            .grid_navigation
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .prepare(project)?;
         let staged_navigation = self
             .navigation
             .lock()
@@ -266,6 +299,10 @@ impl Engine {
         let mut physics = self.physics.lock().unwrap_or_else(|e| e.into_inner());
         physics.sync(prepared_physics);
         *self.navigation.lock().unwrap_or_else(|e| e.into_inner()) = staged_navigation;
+        *self
+            .grid_navigation
+            .lock()
+            .unwrap_or_else(|e| e.into_inner()) = staged_grids;
         let physics_states = physics.states();
         drop(physics);
         let retained: BTreeSet<_> = staged.iter().map(|entity| entity.id.as_str()).collect();

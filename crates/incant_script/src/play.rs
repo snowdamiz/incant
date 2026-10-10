@@ -36,6 +36,8 @@ impl PlaySession {
         host.raycaster = Some(Arc::new(engine.raycaster()));
         host.character_mover = Some(Arc::new(engine.character_mover()));
         host.navigator = Some(Arc::new(engine.navigator()));
+        host.grid_navigator = Some(Arc::new(engine.grid_navigator()));
+        host.steerer = Some(Arc::new(engine.steerer()));
         host.install_queries()?;
         let mut input = incant_input::InputRuntime::default();
         input.map_actions(&project.settings.input_actions)?;
@@ -142,11 +144,15 @@ impl PlaySession {
         self.input.frame()
     }
     fn tick_inner(&mut self) -> Result<usize, ScriptError> {
+        // Stage the complete tick on the same command bus before publishing it.
+        // A runtime rebuild can reject otherwise schema-valid authored data,
+        // such as an enabled off-mesh endpoint with no walkable landing.
+        let mut bus = CommandBus::simulation(self.bus.project().clone())?;
         self.engine.step()?;
         let mut commands = Vec::new();
         let snapshot = self.engine.snapshot();
         for runtime in snapshot.entities.values() {
-            let entity = &self.bus.project().scenes[&runtime.scene_id].entities[&runtime.id];
+            let entity = &bus.project().scenes[&runtime.scene_id].entities[&runtime.id];
             if let Some(value) = entity.components.get("Transform") {
                 let mut transform: incant_doc::Transform = serde_json::from_value(value.clone())?;
                 if transform.translation != runtime.translation
@@ -182,7 +188,7 @@ impl PlaySession {
             }
         }
         if !commands.is_empty() {
-            self.bus.execute(
+            bus.execute(
                 commands,
                 Actor {
                     origin: Origin::Script,
@@ -195,10 +201,14 @@ impl PlaySession {
             )?;
         }
         let events = snapshot.trigger_events;
-        let count =
-            self.host
-                .tick_with_events(&mut self.bus, self.dt, &events, self.input.frame())?;
-        self.engine.sync(self.bus.project())?;
+        let count = self.host.tick_with_events(
+            &mut bus,
+            self.dt,
+            &events,
+            self.input.frame(),
+            |project| self.engine.sync(project).map_err(ScriptError::from),
+        )?;
+        self.bus = bus;
         Ok(count)
     }
 }

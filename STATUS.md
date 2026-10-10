@@ -53,25 +53,40 @@ within its documented workload.
 
 ## Active work
 
-- Compound colliders support 1–64 stable local primitive parts with one body and
-  parent sensor/hit identity. Atomic edits/recovery, hollow openings, rotated parts,
-  stable reordering and 36 continuous character-walking cases pass. A rotated-face
-  normal correction fixes a measured walking slowdown. Claude's compact part
-  Inspector is integrated; selection follows stable IDs through reordered snapshots.
-  Integrated checks pass 168 Rust, 40 GPU and 329 UI tests/build, Clippy, generated
-  contracts and public CLI probes. Actual macOS/browser/iOS baseline execution
-  passes. Initial native keyboard/field/account checks pass. Final native appearance
-  and 64-part review resumed after the director authorized screen work on
-  2026-10-10. Claude completed the browser/engine report and repeatable numerical replay.
-  A suspected prop instability was investigated; the original energy objection was
-  unsupported, so no solver change was made. All twelve hosted checks passed at
-  `18e3406`. Handoff 0025 accepted the supplied native/64-part and corrected-runtime
-  scope, then improved the unavailable Agent pane. Its 334 UI checks/build pass.
-  Integration with merged audio/input passes 237 Rust, 40 GPU, 334 UI and five tool
-  tests, contracts, Clippy and native packaging. Claude now accepts final
-  post-change native captures at both sizes, including the compact Agent pane.
-  Current-main integration, updated checks and merge remain open.
+- Compound colliders support 1–64 stable primitive children with parent body/hit
+  identity. Shared edits, recovery, rotated-child walking and the compact read-only
+  Inspector pass. Claude accepted the final native review at 1440×874 and 1000×650,
+  including End→Tab full IDs, the 64-part list and the compact unavailable Agent.
+  Integration with main passes 282 Rust, 40 GPU, 334 UI and five tool tests,
+  Clippy, contracts and public compound/navigation workflows. Baking preserves
+  transformed child geometry and hollow openings, and re-bakes after edits.
+  The branch now incorporates PR #40's complete navigation/script foundation;
+  this newer integration is being tested before PR #25 leaves draft and merges.
   See [compound colliders](docs/spikes/compound-colliders.md).
+
+- PR #39 consolidates steering, off-mesh links and script diagnostics/CPU budgets
+  from PRs #36–38. Its combined revision passes 300 local Rust, 40 GPU, 315 UI and
+  five tool tests, Clippy, contracts, native packaging and public saved workflows.
+  The 100-walker rendered plaza has all agents at goal from tick 2212 through 4990;
+  repeats match 803 frames/13 logs. Off-mesh repeats match 593 frames/26 logs and
+  all 49 mid-drop reopen frames. Quantized height and behavior-level lateral sweeps
+  remain documented. Thread CPU budgets exclude host pauses/other threads;
+  bounded native calls count but are not preemptible. Windows regressions now use
+  the shipped 50 ms allowance without changing production limits. Required CI is
+  still pending. The older steering branch's generic repeated-play CI failure has
+  no established cause and is not counted as passed. See [steering](docs/spikes/navigation-steering.md),
+  [off-mesh links](docs/spikes/navigation-links.md), [diagnostics](docs/spikes/script-diagnostics.md)
+  and [CPU budgets](docs/spikes/script-cpu-budget.md).
+
+- PR #40 adds weighted rectangular-grid navigation through `api.findGridPath`,
+  shared edits, blocked-corner rules, bounded search and saved gameplay. Local
+  checks pass 309 Rust, 40 GPU, 315 UI and five tool tests, Clippy, contracts,
+  native packaging and WASM/iOS core compilation. Claude's scoped rendered
+  review passes 516 matching frames, exact saved-state restoration and independent
+  route-cost checks. Arrival is at tick 476 with 0.2 m minimum footprint clearance.
+  Hosted checks remain pending. Sprite/tilemap rendering and 2D physics remain
+  open. See [grid navigation](docs/spikes/grid-navigation.md).
+
 
 - Tiled runtime navigation bakes selected static colliders and cooked model
   geometry, reuses unchanged tiles and returns bounded portal-graph A* paths
@@ -84,11 +99,12 @@ within its documented workload.
   [navigation evidence](docs/spikes/navigation-runtime.md). PR #35's scoped implementation
   and v9 rendered review are complete: both 600-tick runs match 726 frames/logs,
   with no query exceptions and grounding on every tick. All twelve CI checks
-  passed on d7517b0; final report changes await current-head checks before merge. Quantized height
+  passed at `1928138`; PR #35 merged as `302613c` with its tested tree unchanged. Quantized height
   detail can undershoot true step discontinuities; physics owns grounding.
   Steering is implemented and reviewed on its separate integration branch;
   off-mesh links are in integration checks. Grid navigation, native Inspector/
   debug draw and Core Sample/device gates remain open.
+
 
 - XLIFF translator exchange exports typed tables and imports matching targets
   through one reversible shared-command transaction. Unknown/stale sources,

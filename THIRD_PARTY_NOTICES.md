@@ -1,6 +1,23 @@
 # Third-party notices
 
+## Script execution clock
+
+Incant uses unmodified [cpu-time 1.0.0](https://crates.io/crates/cpu-time/1.0.0)
+for Unix/Windows thread CPU accounting, copyright (c) 2017 The cpu-time
+Developers, under its [MIT license](licenses/cpu-time-MIT.txt).
+Cargo.lock pins the exact version and registry checksum. Corresponding sources
+are available from the versioned registry package or `cargo vendor --locked`.
+
 ## Navigation dependencies
+
+Local avoidance uses unmodified [dodgy_2d 0.5.5](https://crates.io/crates/dodgy_2d/0.5.5),
+copyright 2023 Andriy Dzikh, under its [MIT license](licenses/dodgy-MIT.txt).
+Its port of RVO2 retains the [original Apache-2.0 license and attribution](licenses/dodgy-RVO2-original.txt).
+The MIT text is from the package's recorded source revision
+`ca08530013dd916693e3b9dea8d9373689a3360d`; the original RVO2 notice is copied from
+the registry package. Cargo.lock records exact versions and checksums; sources
+are available from the versioned registry package or `cargo vendor --locked`.
+Incant's bounded, deterministic batch wrapper is original code.
 
 Incant uses a patched [rerecast 0.4.0](https://crates.io/crates/rerecast/0.4.0)
 for voxelization, regions, contours and tile polygonization, under the

@@ -32,6 +32,7 @@ fn fixture() -> (Project, String, String, String) {
     nav.components.insert(
         "NavigationMesh".into(),
         json!(NavigationMesh {
+            links: vec![],
             settings: Default::default(),
             sources: [&floor, &wall]
                 .map(|e| NavigationSource {

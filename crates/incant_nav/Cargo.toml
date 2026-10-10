@@ -13,3 +13,8 @@ thiserror.workspace = true
 sha2.workspace = true
 rerecast = { version = "=0.4.0", default-features = false, features = ["std", "libm"] }
 glam = { version = "=0.32.1", features = ["libm"] }
+dodgy_2d = "=0.5.5"
+glam_avoidance = { package = "glam", version = "=0.29.3", features = ["libm"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.3", features = ["wasm_js"] }

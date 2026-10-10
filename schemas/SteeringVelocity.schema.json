@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "neighbors": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "velocity": {
+      "items": {
+        "format": "float",
+        "type": "number"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "velocity",
+    "neighbors"
+  ],
+  "title": "SteeringVelocity",
+  "type": "object"
+}

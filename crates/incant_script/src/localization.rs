@@ -6,7 +6,7 @@ use incant_localization::{
     StringTable,
 };
 use serde::Deserialize;
-use std::{collections::BTreeMap, sync::atomic::Ordering, time::Instant};
+use std::{collections::BTreeMap, sync::atomic::Ordering};
 
 #[derive(Default)]
 pub(super) struct State {
@@ -54,8 +54,7 @@ impl ScriptHost {
                         let response = (|| -> Result<serde_json::Value, String> {
                             if text.len() > 128 * 1024
                                 || count.fetch_add(4, Ordering::Relaxed) > 252
-                                || Instant::now()
-                                    >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
+                                || deadline.lock().unwrap_or_else(|e| e.into_inner()).expired()
                             {
                                 return Err("localization query budget exceeded".into());
                             }
@@ -93,8 +92,7 @@ impl ScriptHost {
                                 ),
                             }
                             .map_err(|e| e.to_string())?;
-                            if Instant::now() >= *deadline.lock().unwrap_or_else(|e| e.into_inner())
-                            {
+                            if deadline.lock().unwrap_or_else(|e| e.into_inner()).expired() {
                                 return Err("localization query deadline exceeded".into());
                             }
                             Ok(value)

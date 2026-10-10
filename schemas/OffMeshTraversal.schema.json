@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "from_index": {
+      "description": "The consecutive point pair crosses a link, not walkable mesh.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "link_id": {
+      "type": "string"
+    },
+    "reversed": {
+      "type": "boolean"
+    },
+    "to_index": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "link_id",
+    "from_index",
+    "to_index",
+    "reversed"
+  ],
+  "title": "OffMeshTraversal",
+  "type": "object"
+}

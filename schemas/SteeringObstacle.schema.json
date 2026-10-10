@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "closed": {
+      "type": "boolean"
+    },
+    "id": {
+      "type": "string"
+    },
+    "max_y": {
+      "format": "float",
+      "type": "number"
+    },
+    "min_y": {
+      "format": "float",
+      "type": "number"
+    },
+    "vertices": {
+      "description": "Convex closed polygon, or a two-point one-sided segment. Solid is on the\nleft of each directed edge: CCW polygons block their interior; CW enclose.",
+      "items": {
+        "items": {
+          "format": "float",
+          "type": "number"
+        },
+        "maxItems": 2,
+        "minItems": 2,
+        "type": "array"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "vertices",
+    "closed",
+    "min_y",
+    "max_y"
+  ],
+  "title": "SteeringObstacle",
+  "type": "object"
+}
