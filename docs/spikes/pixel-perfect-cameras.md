@@ -33,5 +33,6 @@ and five tool tests pass. This is synthetic behavior evidence, not a device gate
 Claude handoff 0031 owns the Inspector and original real-engine visual review.
 The initial UI run passes 385 tests and fails two Camera-schema parity assertions
 because the presentation fixture has not yet adopted the third projection.
-Native packaging, portable compilation, appearance review and hosted CI remain
-open. No phase-gate pass is claimed.
+Portable core compilation passes for WASM and iOS simulator, and the macOS
+audio device backend compiles. Native packaging, appearance review and hosted CI
+remain open. No phase-gate pass is claimed.
