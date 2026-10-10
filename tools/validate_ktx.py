@@ -39,11 +39,16 @@ def prepare(directory):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ktx', type=Path, help='Use an existing Khronos validator')
+    parser.add_argument('--probe-binary', type=Path,
+                        help='Run an already-built texture_probe without invoking Cargo')
     parser.add_argument('--output', type=Path, default=ROOT / 'artifacts/texture-format-probe')
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    subprocess.run([str(ROOT / 'tools/cargo'), 'run', '-p', 'incant_assets', '--release', '--locked', '--example', 'texture_probe', '--', str(output)], cwd=ROOT, check=True)
+    if args.probe_binary:
+        subprocess.run([str(args.probe_binary.resolve()), str(output)], cwd=ROOT, check=True)
+    else:
+        subprocess.run([str(ROOT / 'tools/cargo'), 'run', '-p', 'incant_assets', '--release', '--locked', '--example', 'texture_probe', '--', str(output)], cwd=ROOT, check=True)
     with tempfile.TemporaryDirectory(prefix='incant-ktx-validator-') as temporary:
         tool = args.ktx.resolve() if args.ktx else prepare(Path(temporary))
         version = subprocess.check_output([str(tool), '--version'], text=True).strip()
