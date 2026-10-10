@@ -73,7 +73,7 @@ pub(crate) fn fit(
     if !camera_world.is_finite() {
         return Err(ResourceError::ShadowRange);
     }
-    let tangent = (f64::from(camera.fov) * 0.5).tan();
+    let vertical = camera.half_height_at(1.);
     let mut boundaries = [near; CASCADES + 1];
     for (i, split) in boundaries.iter_mut().enumerate().skip(1) {
         let t = i as f64 / CASCADES as f64;
@@ -101,11 +101,16 @@ pub(crate) fn fit(
         let corners: Vec<_> = [start, end]
             .into_iter()
             .flat_map(|depth| {
+                let scale = if camera.orthographic_half_height.is_some() {
+                    1.
+                } else {
+                    depth
+                };
                 [-1., 1.].into_iter().flat_map(move |y| {
                     [-1., 1.].into_iter().map(move |x| {
                         camera_world.transform_point3(DVec3::new(
-                            x * tangent * f64::from(aspect) * depth,
-                            y * tangent * depth,
+                            x * vertical * f64::from(aspect) * scale,
+                            y * vertical * scale,
                             -depth,
                         ))
                     })
@@ -185,6 +190,7 @@ mod tests {
                 fov_degrees: 60.,
                 near: 0.1,
                 far: 100.,
+                projection: Default::default(),
             },
             DMat4::from_translation(DVec3::new(x, 0., 8.)),
         )
@@ -192,7 +198,15 @@ mod tests {
     }
     #[test]
     fn receiver_frustum_and_offscreen_caster_depth_are_covered() {
-        let view = camera(0.);
+        for orthographic in [false, true] {
+            let mut view = camera(0.);
+            if orthographic {
+                view.orthographic_half_height = Some(8.);
+            }
+            check_receiver_coverage(view);
+        }
+    }
+    fn check_receiver_coverage(view: CameraView) {
         let bounds = Bounds {
             minimum: Vec3::new(99., -1., 39.),
             maximum: Vec3::new(101., 1., 41.),
@@ -205,7 +219,7 @@ mod tests {
             assert!(c.far > previous && c.blend_start > previous && c.blend_start < c.far);
             assert!(c.texel_world > 0. && c.inverse_depth > 0.);
             for z in [previous, c.far] {
-                let half_height = z * (30_f32.to_radians()).tan();
+                let half_height = view.half_height_at(f64::from(z)) as f32;
                 for (x, y) in [(-1., -1.), (-1., 1.), (1., -1.), (1., 1.)] {
                     let p = c.matrix.project_point3(Vec3::new(
                         x * half_height * 1.5,

@@ -53,6 +53,17 @@ within its documented workload.
 
 ## Active work
 
+- Orthographic camera projection is implemented through shared component commands,
+  renderer geometry, parallel material view rays, light clusters and directional
+  cascade fitting. CPU/shared-command checks and all 41 renderer GPU tests pass.
+  Full integrated checks and Claude appearance/Inspector review remain in progress;
+  pixel-perfect cameras, sprites, tilemaps and 2D physics remain open. See
+  [orthographic cameras](docs/spikes/orthographic-cameras.md).
+
+- PR #39 consolidates steering, off-mesh links and script diagnostics/CPU budgets
+  from PRs #36–38. Its own hosted checks must pass before merge. Grid navigation
+  has completed scoped local/rendered review in PR #40 and awaits hosted checks.
+
 - The near-head-on steering correction passes the unchanged public and rendered
   plaza course: all 100 walkers stay at goal from tick 2212 through 4990, with
   no body overlap or persistent orbit. Both repetitions match 803 frames and

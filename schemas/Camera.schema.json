@@ -1,4 +1,42 @@
 {
+  "$defs": {
+    "CameraProjection": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "perspective",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "orthographic",
+              "type": "string"
+            },
+            "vertical_size": {
+              "description": "Visible world-space height. Width follows the output aspect ratio.",
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "required": [
+            "kind",
+            "vertical_size"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "order": [
@@ -12,12 +50,20 @@
       "type": "number"
     },
     "fov_degrees": {
+      "description": "Vertical perspective field of view, retained when switching projection.",
       "format": "double",
       "type": "number"
     },
     "near": {
       "format": "double",
       "type": "number"
+    },
+    "projection": {
+      "$ref": "#/$defs/CameraProjection",
+      "default": {
+        "kind": "perspective"
+      },
+      "description": "Missing in legacy documents; those retain perspective projection."
     }
   },
   "required": [

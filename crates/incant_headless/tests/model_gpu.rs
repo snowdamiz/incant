@@ -221,7 +221,8 @@ fn camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection()
         json!(Camera {
             fov_degrees: 60.,
             near: 0.1,
-            far: 100.
+            far: 100.,
+            projection: Default::default(),
         }),
     );
     camera.components.insert(

@@ -199,7 +199,25 @@ fn clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_da
         .entities
         .insert(camera.id.clone(), camera);
     let r = Renderer::headless().unwrap();
-    for selected in [None, Some(camera_id.as_str())] {
+    for (selected, orthographic) in [
+        (None, false),
+        (Some(camera_id.as_str()), false),
+        (Some(camera_id.as_str()), true),
+    ] {
+        p.scenes
+            .values_mut()
+            .next()
+            .unwrap()
+            .entities
+            .get_mut(&camera_id)
+            .unwrap()
+            .components
+            .get_mut("Camera")
+            .unwrap()["projection"] = if orthographic {
+            json!({"kind":"orthographic","vertical_size":8})
+        } else {
+            json!({"kind":"perspective"})
+        };
         let scene = r.prepare_scene(&p, &assets).unwrap();
         let scene = if let Some(id) = selected {
             scene.with_camera(id).unwrap()

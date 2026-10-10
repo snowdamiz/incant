@@ -26,7 +26,8 @@ export namespace CalendarDateSchema {
 export type CalendarDate = CalendarDateSchema.Root;
 
 export namespace CameraSchema {
-  export type Root = { "far": number; "fov_degrees": number; "near": number };
+  export type CameraProjection = ({ "kind": "perspective" }) | ({ "kind": "orthographic"; "vertical_size": number });
+  export type Root = { "far": number; "fov_degrees": number; "near": number; "projection"?: CameraProjection };
 }
 export type Camera = CameraSchema.Root;
 

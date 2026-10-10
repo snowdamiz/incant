@@ -3,6 +3,14 @@ use super::*;
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance() {
+    check_cascade_coverage(false);
+}
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance() {
+    check_cascade_coverage(true);
+}
+fn check_cascade_coverage(orthographic: bool) {
     let r = Renderer::headless().unwrap();
     let (mut f, camera, _caster, light) = fixture();
     f.project
@@ -13,6 +21,14 @@ fn cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance() {
         .entities
         .retain(|_, e| !e.components.contains_key("MeshRenderer"));
     set(&mut f, &camera, "Transform", json!(Transform::default()));
+    if orthographic {
+        set(
+            &mut f,
+            &camera,
+            "Camera",
+            json!({"fov_degrees":60,"near":0.1,"far":100,"projection":{"kind":"orthographic","vertical_size":16}}),
+        );
+    }
     let split = |i: f64| 0.5 * (0.1 * 400_f64.powf(i / 4.) + 0.1 + 39.9 * i / 4.);
     let depths = [
         split(1.) * 0.995,
@@ -28,7 +44,11 @@ fn cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance() {
     for (i, depth) in depths.into_iter().enumerate() {
         let nx = -0.6 + (i % 4) as f64 * 0.4;
         let ny = if i < 4 { 0.3 } else { -0.3 };
-        let half_height = depth * 30_f64.to_radians().tan();
+        let half_height = if orthographic {
+            8.
+        } else {
+            depth * 30_f64.to_radians().tan()
+        };
         let x = nx * half_height * 4. / 3.;
         let y = ny * half_height;
         let mut receiver = Entity::new(format!("Receiver {i}"));
@@ -65,14 +85,32 @@ fn cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance() {
                 * 4,
         );
     }
-    let shadow = capture(&f, &r, &camera, "shadow-cascade-boundaries");
+    let shadow = capture(
+        &f,
+        &r,
+        &camera,
+        if orthographic {
+            "orthographic-shadow-cascade-boundaries"
+        } else {
+            "shadow-cascade-boundaries"
+        },
+    );
     set(
         &mut f,
         &light,
         "DirectionalLight",
         json!({"color":[1,1,1],"intensity":2}),
     );
-    let reference = capture(&f, &r, &camera, "shadow-cascade-boundaries-reference");
+    let reference = capture(
+        &f,
+        &r,
+        &camera,
+        if orthographic {
+            "orthographic-shadow-cascade-boundaries-reference"
+        } else {
+            "shadow-cascade-boundaries-reference"
+        },
+    );
     let decode = |png: Vec<u8>| {
         let mut reader = png::Decoder::new(std::io::Cursor::new(png))
             .read_info()

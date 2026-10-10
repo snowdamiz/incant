@@ -28,7 +28,7 @@ impl Renderer {
                 .camera
                 .matrix(target.rect[2] / target.rect[3])?
                 .to_cols_array_2d(),
-            eye: scene.camera.eye.extend(1.).to_array(),
+            eye: scene.camera.shading_eye(),
             environment: [
                 environment.intensity,
                 environment.rotation.cos(),

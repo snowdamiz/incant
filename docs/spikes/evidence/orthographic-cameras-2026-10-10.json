@@ -1,0 +1,33 @@
+{
+  "scope": "Orthographic projection foundation",
+  "phase_gate_approved": false,
+  "rust_tests": 303,
+  "renderer_gpu_tests": 41,
+  "clippy": "pass",
+  "ui_tests": 315,
+  "ui_build": "pass",
+  "tool_tests": 5,
+  "generated_contracts": "pass",
+  "public_workflow": {
+    "passed": true,
+    "strict_typescript": true,
+    "legacy_camera_authored_via_shared_commands": true,
+    "runtime_projection_edits_save_resume_and_repeat_exact": true,
+    "author_files_unchanged": {
+      "camera.incant.json": "42811c2d1ae0dab51ab8ff0b60ba017889f0b19c839a34ad440b5857f15ad8db",
+      "camera.incant.journal.jsonl": "174667dad44de22ad54df39582f7859eedefd287c7d72b044d7d3abe5d8ae131"
+    },
+    "binary_sha256": "8340530e616fa7396afc98a5fda22857c36999a745dff4957b682c5884ab8641",
+    "rendering_or_device_gate": false
+  },
+  "remaining": [
+    "Editor/headless GPU integration",
+    "Native and portable target builds",
+    "Claude engine/Inspector rendered review"
+  ],
+  "limits": [
+    "No pixel-perfect snapping",
+    "No sprite/tilemap renderer",
+    "No 2D physics or device gate"
+  ]
+}

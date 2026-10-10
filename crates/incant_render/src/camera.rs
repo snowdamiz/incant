@@ -1,4 +1,4 @@
-//! Authored perspective cameras share one frame with geometry and light clusters.
+//! Authored cameras share one projection with geometry, clusters and shadows.
 use crate::SceneError;
 use glam::{DMat4, DVec3, Mat4, Vec3};
 
@@ -10,6 +10,7 @@ pub(crate) struct CameraView {
     pub near: f32,
     pub far: f32,
     pub fov: f32,
+    pub orthographic_half_height: Option<f32>,
 }
 impl CameraView {
     pub fn preview() -> Self {
@@ -21,6 +22,7 @@ impl CameraView {
             near: crate::CAMERA_NEAR,
             far: crate::CAMERA_FAR,
             fov: crate::CAMERA_FOV,
+            orthographic_half_height: None,
         }
     }
     pub fn authored(camera: &incant_doc::Camera, world: DMat4) -> Result<Self, SceneError> {
@@ -43,6 +45,12 @@ impl CameraView {
             near: camera.near as f32,
             far: camera.far as f32,
             fov: camera.fov_degrees.to_radians() as f32,
+            orthographic_half_height: match camera.projection {
+                incant_doc::CameraProjection::Perspective {} => None,
+                incant_doc::CameraProjection::Orthographic { vertical_size } => {
+                    Some((vertical_size * 0.5) as f32)
+                }
+            },
         };
         let ratio = result.far / result.near;
         if !result.view.is_finite()
@@ -53,6 +61,9 @@ impl CameraView {
             || !ratio.is_finite()
             || ratio <= 1.
             || !result.fov.is_finite()
+            || result
+                .orthographic_half_height
+                .is_some_and(|h| !h.is_finite() || h <= 0.)
         {
             return Err(SceneError::CameraProjection);
         }
@@ -63,12 +74,35 @@ impl CameraView {
         if !aspect.is_finite() || aspect <= 0. {
             return Err(SceneError::CameraProjection);
         }
-        let projection = Mat4::perspective_rh(self.fov, aspect, self.near, self.far);
+        let projection = if let Some(h) = self.orthographic_half_height {
+            let w = h * aspect;
+            Mat4::orthographic_rh(-w, w, -h, h, self.near, self.far)
+        } else {
+            Mat4::perspective_rh(self.fov, aspect, self.near, self.far)
+        };
         let matrix = projection * self.view;
         if !matrix.is_finite() {
             return Err(SceneError::CameraProjection);
         }
         Ok(matrix)
+    }
+    /// View-space half height at a forward distance, for fitting shadow receivers.
+    pub fn half_height_at(self, depth: f64) -> f64 {
+        self.orthographic_half_height
+            .map_or_else(|| (f64::from(self.fov) * 0.5).tan() * depth, f64::from)
+    }
+    /// Cluster shader parameter: perspective tangent or fixed orthographic extent.
+    pub fn vertical_parameter(self) -> f32 {
+        self.orthographic_half_height
+            .unwrap_or_else(|| (self.fov * 0.5).tan())
+    }
+    /// Perspective uses an eye position (w=1); parallel rays use a direction (w=0).
+    pub fn shading_eye(self) -> [f32; 4] {
+        if self.orthographic_half_height.is_some() {
+            (-self.forward).extend(0.).to_array()
+        } else {
+            self.eye.extend(1.).to_array()
+        }
     }
 }
 
@@ -80,6 +114,7 @@ mod tests {
             fov_degrees: 60.,
             near: 0.2,
             far: 500.,
+            projection: Default::default(),
         }
     }
     #[test]
@@ -116,5 +151,39 @@ mod tests {
         ));
         assert!(CameraView::preview().matrix(0.).is_err());
         assert!(CameraView::preview().matrix(f32::from_bits(1)).is_err());
+    }
+    #[test]
+    fn orthographic_extent_depth_and_view_direction_are_independent_of_distance() {
+        let mut parameters = parameters();
+        parameters.projection = incant_doc::CameraProjection::Orthographic { vertical_size: 8. };
+        let camera = CameraView::authored(&parameters, DMat4::IDENTITY).unwrap();
+        let projection = camera.matrix(1.5).unwrap();
+        for depth in [0.2, 4., 100., 500.] {
+            let edge = projection.project_point3(Vec3::new(6., 4., -depth));
+            assert!((edge.x - 1.).abs() < 1e-6 && (edge.y - 1.).abs() < 1e-6);
+            assert_eq!(camera.half_height_at(f64::from(depth)), 4.);
+        }
+        assert!(projection.project_point3(Vec3::new(0., 0., -0.2)).z.abs() < 1e-6);
+        assert!((projection.project_point3(Vec3::new(0., 0., -500.)).z - 1.).abs() < 1e-6);
+        assert_eq!(camera.shading_eye(), [0., 0., 1., 0.]);
+        assert_eq!(camera.vertical_parameter(), 4.);
+        let square = camera
+            .matrix(1.)
+            .unwrap()
+            .project_point3(Vec3::new(4., 4., -20.));
+        assert!((square.x - 1.).abs() < 1e-6 && (square.y - 1.).abs() < 1e-6);
+    }
+    #[test]
+    fn orthographic_size_rejects_unrepresentable_gpu_extents() {
+        let mut parameters = parameters();
+        for size in [0., -1., 1e-100, 1e100, f64::INFINITY, f64::NAN] {
+            parameters.projection = incant_doc::CameraProjection::Orthographic {
+                vertical_size: size,
+            };
+            assert!(matches!(
+                CameraView::authored(&parameters, DMat4::IDENTITY),
+                Err(SceneError::CameraProjection)
+            ));
+        }
     }
 }

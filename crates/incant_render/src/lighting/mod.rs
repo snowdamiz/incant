@@ -242,9 +242,14 @@ impl LightingSystem {
                 camera.near,
                 camera.far,
                 DEPTH_SLICES as f32 / (camera.far / camera.near).ln(),
-                (camera.fov * 0.5).tan(),
+                camera.vertical_parameter(),
             ],
-            lights: [lights.directional, lights.local, u32::from(!clustered), 0],
+            lights: [
+                lights.directional,
+                lights.local,
+                u32::from(!clustered),
+                u32::from(camera.orthographic_half_height.is_some()),
+            ],
         };
         let uniform = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("Immutable light grid frame"),

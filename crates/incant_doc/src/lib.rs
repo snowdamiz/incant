@@ -1,11 +1,13 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 mod audio;
+mod camera;
 #[cfg(feature = "crdt")]
 mod crdt;
 mod lights;
 mod navigation;
 mod physics;
 pub use audio::{AudioBus, AudioListener, AudioSource, AudioSpatial};
+pub use camera::{Camera, CameraProjection};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_input::InputActions;
@@ -150,13 +152,6 @@ pub struct MeshRenderer {
     pub mesh: Id,
     pub materials: Vec<Id>,
     pub cast_shadows: bool,
-}
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
-#[serde(deny_unknown_fields)]
-pub struct Camera {
-    pub fov_degrees: f64,
-    pub near: f64,
-    pub far: f64,
 }
 /// A distant, equirectangular image light. Rotation is about world +Y and does
 /// not inherit the entity transform. One environment is allowed per project
@@ -535,16 +530,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("environment requires a color or linear texture asset".into());
             }
         }
-        "Camera" => {
-            let c: Camera = decode(value)?;
-            if !(0.1..179.).contains(&c.fov_degrees)
-                || c.near <= 0.
-                || c.far <= c.near
-                || !c.far.is_finite()
-            {
-                return Err("invalid camera projection".into());
-            }
-        }
+        "Camera" => decode::<Camera>(value)?.validate()?,
         _ => return Err(format!("unregistered component type: {kind}")),
     }
     Ok(())
