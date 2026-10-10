@@ -53,12 +53,18 @@ within its documented workload.
 
 ## Active work
 
+- Claude Opus 5.5 is performing a full editor redesign at explicitly verified
+  Max thinking in handoff 0033, prioritizing the Inspector header, hierarchy,
+  spacing and dense fields. The runner now pins and confirms both model and
+  effort for every new/resumed session; seven transport/tool tests pass.
+
 - Pixel-perfect camera support is in implementation: fixed logical targets,
   integer replication/letterboxing, and render-only camera-plane snapping.
   Local foundation checks pass 320 Rust tests, 47 GPU checks, Clippy, contracts
-  and both public saved-camera workflows. Two UI schema-parity assertions await
-  the third projection. Claude Inspector/look-dev/native review, native/portable
-  builds and hosted CI remain open.
+  and both public saved-camera workflows. Claude supplied the Inspector with
+  420 passing UI tests and a repeated 341-frame engine comparison. Its exact
+  half-pixel follow defect is corrected and covered across odd/even dimensions
+  and camera roll; final rendered/native review and hosted CI remain open.
   Sprite/tilemap rendering and 2D physics are separate unfinished work. See
   [pixel-perfect cameras](docs/spikes/pixel-perfect-cameras.md).
 

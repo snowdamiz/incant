@@ -132,3 +132,103 @@ fn subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_p
     );
     save("pixel-perfect-one-grid-step", &moved);
 }
+
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions() {
+    let r = Renderer::headless().unwrap();
+    let (mut f, id) = fixture();
+    f.edit(|g| {
+        g["nodes"][0]["scale"] = json!([0.25, 0.25, 1.]);
+        g["nodes"][0]["translation"] = json!([0., 0., 0.]);
+    });
+    let model = f
+        .project
+        .scenes
+        .values()
+        .next()
+        .unwrap()
+        .entities
+        .values()
+        .find(|e| e.components.contains_key("MeshRenderer"))
+        .unwrap()
+        .id
+        .clone();
+    for angle in [0., std::f64::consts::FRAC_PI_2, 0.37] {
+        let rotation = glam::DQuat::from_rotation_z(angle);
+        for resolution in [[64, 48], [65, 49], [64, 49], [65, 48]] {
+            edit(
+                &mut f,
+                &id,
+                "Camera",
+                json!({"fov_degrees":60,"near":0.1,"far":100,
+        "projection":{"kind":"pixel_perfect","pixels_per_unit":8,"reference_resolution":resolution}}),
+            );
+            edit(
+                &mut f,
+                &id,
+                "Transform",
+                json!(Transform {
+                    translation: [0., 0., 8.],
+                    rotation: rotation.to_array(),
+                    ..Default::default()
+                }),
+            );
+            edit(
+                &mut f,
+                &model,
+                "Transform",
+                json!(Transform {
+                    rotation: rotation.to_array(),
+                    ..Default::default()
+                }),
+            );
+            let baseline = r
+                .screenshot_scene_png(&f.scene(&r).with_camera(&id).unwrap(), 192, 144)
+                .unwrap();
+            assert!(red_pixels(&baseline) > 100);
+            for axis in [
+                [1., 0.],
+                [-1., 0.],
+                [0., 1.],
+                [0., -1.],
+                [1., 1.],
+                [-1., -1.],
+                [1., -1.],
+                [-1., 1.],
+            ] {
+                for step in [0.25, 0.49, 0.5, 0.51, 0.75, 1., 1.5, 2.5] {
+                    let [x, y] = axis.map(|v| v * step / 8.);
+                    let delta = rotation * glam::DVec3::new(x, y, 0.);
+                    edit(
+                        &mut f,
+                        &id,
+                        "Transform",
+                        json!(Transform {
+                            translation: (delta + glam::DVec3::new(0., 0., 8.)).to_array(),
+                            rotation: rotation.to_array(),
+                            ..Default::default()
+                        }),
+                    );
+                    edit(
+                        &mut f,
+                        &model,
+                        "Transform",
+                        json!(Transform {
+                            translation: delta.to_array(),
+                            rotation: rotation.to_array(),
+                            ..Default::default()
+                        }),
+                    );
+                    let image = r
+                        .screenshot_scene_png(&f.scene(&r).with_camera(&id).unwrap(), 192, 144)
+                        .unwrap();
+                    assert!(
+                        image == baseline,
+                        "followed quad changed at {axis:?} * {step} logical pixels, resolution {resolution:?}, roll {angle}"
+                    );
+                }
+            }
+        }
+    }
+}
