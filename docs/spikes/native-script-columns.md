@@ -139,3 +139,41 @@ node tools/generate_sdk.mjs --check
 python3 tools/check_runtime_dependencies.py incant_types incant_runtime incant_script
 python3 -m unittest discover -s tools/tests -q
 ```
+
+## Integration with reviewed runtime and CI changes
+
+On 2026-10-10, native-host commit `9a463ca` was merged with reviewed PR #48 head
+`588b3ab96b31bcebfbff753959c9b8e6bf13f053`. The original numeric-column cherry-pick
+`b472121` and its upstream commit `9a18e3f` had identical trees. The merge retains
+the native host's newer outer-scope raw-pointer contract and execution-failure
+rollback documentation, including the prohibition on per-tick authoring
+validation. All crate sources, Cargo manifests/lockfile and the runtime dependency
+guard remain byte-for-byte identical to the native-host commit.
+
+The integrated CI retains `incant_script` as an authoring-free guard root and
+includes the reviewed dependency caches, common workspace GPU feature graph,
+combined editor/headless builds, shipping verification, and Windows CRT policy.
+The native-host, CI-performance and CRT status entries are all preserved.
+
+Local arm64 macOS verification of the merged tree passed:
+
+- Full release workspace suite: 363 tests, including all eleven native-script
+  tests and all five runtime doctests.
+- Consolidated ignored workspace suite: all 44 GPU tests, serialized as in CI.
+  This invocation compiled no packages; that is local build-reuse evidence, not
+  a hosted cold/warm performance measurement.
+- Workspace all-target Clippy with `-D warnings`, formatting and generated
+  conventions checks.
+- All 25 Python tool tests and the resolved `incant_types`, `incant_runtime`,
+  `incant_script` dependency guard.
+- Generated bridge/SDK checks and SDK TypeScript compilation. The first bridge
+  attempt found missing local npm dependencies; `npm ci` restored the pinned
+  graph and the repeated checks passed without tracked output changes.
+
+All Cargo builds used two jobs. Full logs are retained locally as
+`/tmp/incant-native-host-integration-workspace.log`,
+`/tmp/incant-native-host-integration-gpu.log`,
+`/tmp/incant-native-host-integration-clippy.log` and
+`/tmp/incant-native-host-integration-tools.log`. Hosted Windows linkage/imports,
+PDB packaging, CI cache timing and the migration/device gates above remain
+pending; local integration checks do not certify them.

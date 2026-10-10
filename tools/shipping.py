@@ -38,6 +38,8 @@ def verify_commands(stderr, target, split):
         require(len(commands) == 1, f'Expected a fresh target rustc invocation for {crate}')
         flags = codegen(commands[0])
         expected = {'opt-level': '3', 'codegen-units': '1', 'panic': 'abort', 'debuginfo': '2', 'split-debuginfo': split}
+        if target.endswith('-windows-msvc'):
+            expected['target-feature'] = '+crt-static'
         if crate == 'run_scene':
             expected['lto'] = 'fat'
         require(all(flags.get(key) == value for key, value in expected.items()), f'Incorrect shipping codegen for {crate}: {flags}')
@@ -146,7 +148,7 @@ def main():
                     '--runtime-binary', str(player)], check=True, cwd=ROOT, capture_output=True, text=True)
     source_free = json.loads((out / 'source-free/result.json').read_text())
     require(source_free['passed'] and source_free['binaries'][player.name] == digest(player), 'Source-free probe did not verify the packaged player')
-    sources = [ROOT / name for name in ('Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml',
+    sources = [ROOT / name for name in ('Cargo.toml', 'Cargo.lock', '.cargo/config.toml', 'rust-toolchain.toml',
                'crates/incant_runtime/Cargo.toml', 'crates/incant_types/Cargo.toml', 'tools/cargo',
                'tools/shipping.py', 'tools/shipping_symbols.py', 'tools/probes/cooked-runtime.py')]
     sources += sorted((ROOT / 'crates/incant_runtime').rglob('*.rs'))
