@@ -163,9 +163,9 @@
     "Different future environment/manifest inputs can produce additional generations, so this is not a permanent three-entry or quota guarantee.",
     "No cache deletion, seed dispatch, permission, package resolution or test coverage change."
   ],
-  "integrated_physics_base": "2512ff0ee902c33779114c8f847379bca09eebc1",
+  "integrated_physics_base": "aecee49908f22bceb9c020c9b0a67506df9467b1",
   "integrated_workflow_semantic_equality": {
-    "base": "2512ff0ee902c33779114c8f847379bca09eebc1",
+    "base": "aecee49908f22bceb9c020c9b0a67506df9467b1",
     "only_four_cache_input_maps_changed": {
       ".github/workflows/credentials.yml": 1,
       ".github/workflows/nightly.yml": 3
@@ -173,8 +173,8 @@
     "expanded_families": 8,
     "all_commands_steps_permissions_triggers_unchanged": true
   },
-  "integrated_source_preserved": "git diff 2512ff0 -- crates Cargo.toml Cargo.lock editor sdk tools .cargo ci.yml desktop.yml physics-candidates.yml is empty; only the same four cache input maps differ in the two remaining workflows.",
-  "integrated_tools_tests": 38,
+  "integrated_source_preserved": "git diff aecee499 -- crates Cargo.toml Cargo.lock editor sdk tools .cargo ci.yml desktop.yml physics-candidates.yml is empty; only the same four cache input maps differ in the two remaining workflows.",
+  "integrated_tools_tests": 40,
   "first_head_actual_key_jobs": [
     {
       "head": "5548a318d5db03ba8e9c51109a6c874409fcfda3",
@@ -211,5 +211,9 @@
     }
   ],
   "first_head_actual_namespace_count": 3,
-  "first_head_actual_key_caveat": "These completed cold credential jobs prove the predicted key construction and no PR writes on5548a31. The integrated physics head changes the manifest/lock suffix and requires its own checks. New compressed registry saves/restores remain pending."
+  "first_head_actual_key_caveat": "These completed cold credential jobs prove the predicted key construction and no PR writes on5548a31. The integrated physics head changes the manifest/lock suffix and requires its own checks. New compressed registry saves/restores remain pending.",
+  "inherited_corrections": [
+    "a1c7be60deeab291c2fa4b19c7ca7b333fe92d86: explicit UTF-8 Cargo capture and regressions",
+    "aecee49908f22bceb9c020c9b0a67506df9467b1: canonical physics source-report paths; strict comparator unchanged"
+  ]
 }

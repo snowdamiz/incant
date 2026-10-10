@@ -39,12 +39,14 @@ Different future environment inputs may produce additional generations. An immut
 can be populated first by a job with only a subset of downloads; normal locked
 Cargo downloads remain the fallback. A hit does not imply every crate is present.
 
-The integration with reviewed PR57 `2512ff0` preserves its runtime, physics,
+The integration with corrected, reviewed PR57 `aecee499` preserves its runtime, physics,
 audio, editor, Cargo graph and tools exactly. Parsed-YAML comparison against that
-base again finds only the four approved cache input changes; 38 tool tests and
+base again finds only the four approved cache input changes; 40 tool tests and
 workflow/convention checks pass. The manifest/lock suffix changes for this union,
 so current-head hosted checks must complete before merge. PR59 is stacked on
 `impl/native-physics-runtime`; no contentless PR56 push is required.
+The inherited corrections decode Cargo machine output as UTF-8 on Windows and
+canonicalize physics report paths; neither changes runtime code or build flags.
 
 ## Capacity and migration limits
 

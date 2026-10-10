@@ -109,8 +109,8 @@ within its documented workload.
   restored and verified both pinned tool binaries with PR saves skipped. A separate
   [inputs-only follow-up](docs/spikes/ci-auxiliary-registry-cache.md) makes eight
   auxiliary families registry-only, retaining iOS/native targets and all commands.
-  Three initial hosted keys match the preflight; the frozen physics union preserves
-  all source and commands and passes 38 tool tests. Hosted archive measurements,
+  Three initial hosted keys match the preflight; the corrected physics union preserves
+  all source and commands and passes 40 tool tests. Hosted archive measurements,
   consumption and the bounded legacy-cache migration remain pending. No cache
   deletion, new permission or shipping-seed change is included.
 
