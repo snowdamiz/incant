@@ -2,6 +2,7 @@
 //! command bus, JSON projection or filesystem/network capability is installed.
 //! The prior document-backed host lives temporarily in incant_play_legacy.
 mod budget;
+mod commands;
 mod compiled;
 mod diagnostics;
 mod loan;
@@ -31,8 +32,14 @@ pub enum ScriptError {
         phase: &'static str,
         message: String,
     },
-    #[error("script source, component loan or metadata exceeds the configured limit")]
+    #[error(
+        "script source, component loan, metadata or command buffer exceeds the configured limit"
+    )]
     InputLimit,
+    #[error("invalid or throwing native structural command arguments")]
+    CommandInput,
+    #[error("native structural batch failed: {0}")]
+    Structural(#[from] incant_runtime::RuntimeError),
     #[error("promises and deferred work are unsupported in synchronous native behaviors")]
     UnsupportedAsync,
     #[error("native bulk behavior callbacks must return undefined")]
@@ -45,11 +52,13 @@ pub enum ScriptError {
 /// private, compiler-produced bytecode. Ticks borrow real numeric ECS columns;
 /// they neither parse code nor serialize project/component values.
 ///
-/// This first native host exposes `update({chunks, dt})`. Each chunk has stable
+/// This native host exposes `update({chunks, dt, commands})`. Each chunk has stable
 /// ID strings, Transform stride 10, and optional Velocity stride 3. Views are
 /// detached on every exit. A failed callback restores its component writes and
-/// permanently fails this host. Persistent state, structural commands, timers,
-/// logs, queries and the legacy PlaySession are not migrated by this boundary.
+/// permanently fails this host. Tick-local structural commands apply only after
+/// detachment and scope exit; rejection restores numeric writes too.
+/// Persistent state, timers, logs, queries and the legacy PlaySession are not
+/// migrated by this boundary.
 pub struct ScriptHost {
     // Drop VM roots/context/runtime before bytecode: QuickJS's ROM-data module
     // loader may retain references to its input allocation.
@@ -79,7 +88,7 @@ impl ScriptHost {
                 diagnostics::javascript(&ctx, error, "initialization", &deadline)
             })?;
             synchronous.check(&ctx, true)?;
-            Ok(Persistent::save(&ctx, update))
+            Ok::<_, ScriptError>(Persistent::save(&ctx, update))
         })?;
         diagnostics::check_deadline(&deadline)?;
         Ok(Self {
@@ -115,6 +124,10 @@ impl ScriptHost {
                 .clone()
                 .restore(&ctx)
                 .map_err(diagnostics::allocation)?;
+            let commands = commands::TickCommands::default();
+            let api = commands.expose(&ctx).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "command bindings", &self.deadline)
+            })?;
             world.with_numeric_columns(|columns| {
                 let mut loan = loan::Loan::new(columns)?;
                 let chunks = match loan.expose(&ctx) {
@@ -131,7 +144,9 @@ impl ScriptHost {
                         ));
                     }
                 };
-                let result = function.call::<_, Value>((chunks, dt));
+                commands.activate();
+                let result = function.call::<_, Value>((chunks, dt, api));
+                commands.revoke();
                 // Revoke before diagnostics can execute a user-defined getter,
                 // and before Rust reads or restores any component bytes.
                 loan.revoke();
@@ -146,10 +161,14 @@ impl ScriptHost {
                 if !returned.is_undefined() {
                     return Err(ScriptError::UnsupportedReturn);
                 }
-                loan.commit();
-                Ok(())
+                let commands = commands.take()?;
+                Ok((loan.finish(), commands))
             })
         });
+        // No JS value or raw column pointer crosses this sync point. Apply is
+        // native host work, after the script CPU/deferred-work checks; its time
+        // is separate from the JS execution budget, not a claimed phone budget.
+        let result = result.and_then(|(undo, mut commands)| undo.apply(world, &mut commands));
         if result.is_err() {
             self.failed = true;
         }
@@ -174,5 +193,7 @@ fn vm(limit: Duration) -> Result<Vm, ScriptError> {
     Ok((runtime, context, deadline))
 }
 
+#[cfg(test)]
+mod structural_tests;
 #[cfg(test)]
 mod tests;

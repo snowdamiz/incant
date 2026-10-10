@@ -24,6 +24,9 @@ optional Velocity f64 stride 3. A call updates all matching entities in bulk;
 there is no project clone, command bus, JSON conversion or per-tick code parsing.
 The caller owns native stepping; the script phase does not increment world time.
 No filesystem, network, module loader or engine-agent shell capability is installed.
+The follow-up [structural binding slice](native-script-structural.md) adds a
+tick-local `commands` capability to this same context without changing existing
+bulk callbacks.
 
 `examples/native_bulk` is explicitly a development runner: it loads a checked
 binary scene and compiles CommonJS **once at process startup**. Shipped bytecode
@@ -119,7 +122,7 @@ memory-safety defect, identified the async gap above, and confirmed it resolved
 on re-review.
 
 Persistent behavior state, timers, logs, input/actions, queries/physics,
-structural bindings, hot reload, saves, SDK compatibility, real gameplay migration,
+other structural components, hot reload, saves, SDK compatibility, real gameplay migration,
 browser/Wasm hosts, authenticated cook/export artifacts, profiling and performance
 work remain. Each tick currently rebuilds metadata/IDs and copies numeric undo;
 these costs need measurements and optimization. No shipping-profile improvement,

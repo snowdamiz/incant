@@ -7,12 +7,10 @@ publish.workspace = true
 
 [dependencies]
 incant_runtime.workspace = true
+incant_types.workspace = true
 rquickjs.workspace = true
 thiserror.workspace = true
 ulid.workspace = true
 
 [target.'cfg(any(unix, windows))'.dependencies]
 cpu-time.workspace = true
-
-[dev-dependencies]
-incant_types.workspace = true

@@ -1,7 +1,7 @@
 //! Foreign numeric views. The outer ECS scope, rooted buffers and undo values
 //! share one owner so detachment always precedes Rust access or scope release.
 use crate::ScriptError;
-use incant_runtime::{NumericColumns, TRANSFORM_STRIDE, VELOCITY_STRIDE};
+use incant_runtime::{NativeWorld, NumericColumns, StableId, TRANSFORM_STRIDE, VELOCITY_STRIDE};
 use rquickjs::{Array, ArrayBuffer, Ctx, Object, TypedArray, Value, qjs};
 use std::{mem::size_of, ptr};
 
@@ -16,7 +16,7 @@ impl Buffer {
     }
 }
 struct Chunk {
-    ids: Vec<String>,
+    ids: Vec<StableId>,
     transforms: Buffer,
     velocities: Option<Buffer>,
 }
@@ -56,11 +56,7 @@ impl<'js, 'scope, 'world> Loan<'js, 'scope, 'world> {
         };
         columns.try_for_each_chunk(|chunk| {
             chunks.push(Chunk {
-                ids: chunk
-                    .ids
-                    .iter()
-                    .map(|id| ulid::Ulid::from_bytes(id.0).to_string())
-                    .collect(),
+                ids: chunk.ids.to_vec(),
                 transforms: buffer(chunk.transforms)?,
                 velocities: chunk.velocities.map(&mut buffer).transpose()?,
             });
@@ -84,7 +80,14 @@ impl<'js, 'scope, 'world> Loan<'js, 'scope, 'world> {
         let chunks = Array::new(ctx.clone())?;
         for (index, chunk) in self.chunks.iter().enumerate() {
             let object = Object::new(ctx.clone())?;
-            object.set("ids", chunk.ids.clone())?;
+            object.set(
+                "ids",
+                chunk
+                    .ids
+                    .iter()
+                    .map(|id| ulid::Ulid::from_bytes(id.0).to_string())
+                    .collect::<Vec<_>>(),
+            )?;
             object.set("transformStride", TRANSFORM_STRIDE)?;
             object.set("velocityStride", VELOCITY_STRIDE)?;
             object.set("transforms", view(ctx, &chunk.transforms, &mut self.roots)?)?;
@@ -106,9 +109,65 @@ impl<'js, 'scope, 'world> Loan<'js, 'scope, 'world> {
             buffer.detach();
         }
     }
-    pub fn commit(&mut self) {
+    pub fn finish(mut self) -> Undo {
         self.revoke();
         self.committed = true;
+        Undo(
+            std::mem::take(&mut self.chunks)
+                .into_iter()
+                .map(|chunk| UndoChunk {
+                    ids: chunk.ids,
+                    transforms: chunk.transforms.undo,
+                    velocities: chunk.velocities.map(|buffer| buffer.undo),
+                })
+                .collect(),
+        )
+    }
+}
+
+struct UndoChunk {
+    ids: Vec<StableId>,
+    transforms: Vec<f64>,
+    velocities: Option<Vec<f64>>,
+}
+
+/// Owned numeric data and identity/layout metadata only. No table pointer or JS
+/// value survives the exclusive loan scope in this record.
+pub(crate) struct Undo(Vec<UndoChunk>);
+
+impl Undo {
+    pub fn apply(
+        self,
+        world: &mut NativeWorld,
+        commands: &mut incant_runtime::FrameCommands,
+    ) -> Result<(), ScriptError> {
+        if let Err(error) = world.apply(commands) {
+            // NativeWorld::apply rejects before changing ECS storage. Validate
+            // the entire saved layout anyway, before writing any restored byte.
+            world.with_numeric_columns(|columns| {
+                let mut saved = self.0.iter();
+                columns.for_each_chunk(|chunk| {
+                    let old = saved.next().expect("rejected batch retains table count");
+                    assert_eq!(chunk.ids, old.ids, "rejected batch retains row identities");
+                    assert_eq!(chunk.transforms.len(), old.transforms.len());
+                    assert_eq!(
+                        chunk.velocities.as_ref().map(|v| v.len()),
+                        old.velocities.as_ref().map(|v| v.len())
+                    );
+                });
+                assert!(saved.next().is_none(), "rejected batch retains table count");
+                let mut saved = self.0.iter();
+                columns.for_each_chunk(|chunk| {
+                    let old = saved.next().expect("validated layout");
+                    chunk.transforms.copy_from_slice(&old.transforms);
+                    if let (Some(current), Some(old)) = (chunk.velocities, &old.velocities) {
+                        current.copy_from_slice(old);
+                    }
+                });
+            });
+            return Err(ScriptError::Structural(error));
+        }
+        Ok(())
     }
 }
 

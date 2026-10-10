@@ -2,10 +2,10 @@ use super::*;
 use incant_runtime::{CookedEntity, CookedScene, FrameCommands, StableId, StructuralCommand};
 use incant_types::{Transform, Velocity};
 
-fn id(n: u128) -> StableId {
+pub(super) fn id(n: u128) -> StableId {
     StableId(n.to_be_bytes())
 }
-fn world() -> NativeWorld {
+pub(super) fn world() -> NativeWorld {
     NativeWorld::new(
         CookedScene::new(
             id(999),
@@ -36,7 +36,7 @@ fn script(body: &str) -> CompiledScript {
     ))
     .unwrap()
 }
-fn check(host: &ScriptHost, source: &str) {
+pub(super) fn check(host: &ScriptHost, source: &str) {
     host.context.with(|ctx| ctx.eval::<(), _>(source)).unwrap();
 }
 

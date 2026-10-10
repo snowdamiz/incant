@@ -53,6 +53,18 @@ within its documented workload.
 
 ## Active work
 
+- Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
+  SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
+  and their exclusive scope ends; rejected batches restore the numeric undo
+  through verified layouts. Retained command functions never reactivate.
+  All 373 workspace tests (21 native host tests) and workspace Clippy pass, including relocation,
+  structural rejection after transform writes, deferred work and caught overflow.
+  Independent review found no actionable issue; twelve standalone development
+  runs passed with the original project/journal absent. Native SDK types and
+  a TypeScript example are included; the legacy gameplay migration and
+  authenticated shipping bytecode remain open. See the
+  [structural script audit](docs/spikes/native-script-structural.md).
+
 - The first authoring-free QuickJS host executes compiler-produced bytecode over
   actual native numeric columns, with detached views and bounded rollback on
   exceptions, memory/CPU failures and deferred work. All 363 workspace tests and

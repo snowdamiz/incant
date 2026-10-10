@@ -28,7 +28,7 @@ impl CompiledScript {
             }})({{}});
             if (!behavior || typeof behavior.update !== 'function') throw new Error('default behavior.update required');
             if ('initialState' in behavior || 'onTimer' in behavior) throw new Error('state and timers are not migrated to the native bulk host');
-            export function update(chunks, dt) {{ return behavior.update({{chunks, dt}}); }}
+            export function update(chunks, dt, commands) {{ return behavior.update({{chunks, dt, commands}}); }}
         "#
         );
         let bytes = context.with(|ctx| {
