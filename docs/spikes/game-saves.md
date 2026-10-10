@@ -87,10 +87,13 @@ The existing hosted GPU playback test now resumes at tick 37 and compares the
 actual tick-37 and tick-60 PNGs, final state and logs to uninterrupted playback.
 It also checks that a failed captured run cannot publish a save. This extension
 was compiled locally but intentionally not executed during the capture pause;
-its hosted result is pending.
+the hosted macOS, Windows and Linux results all pass at `8cea975`.
 
 The director's computer-use/capture pause remains active. No new local captures
 or UI operations were used for this increment. Hosted desktop workflows include
-the same save probe and existing build/GPU tests; their results remain pending.
+the same save probe and existing build/GPU tests. All twelve hosted checks passed
+at `8cea975`; PR #26 merged as `39fed2d`. The merged tree exactly matches reviewed
+tree `bf9232e971356005770666cd6fb5455384d98a36`. The local main release app was rebuilt
+and packaged after merging without opening it.
 Machine-readable evidence is in
 [game-saves-2026-10-09.json](evidence/game-saves-2026-10-09.json).

@@ -17,7 +17,7 @@
   "capture_constraint": {
     "computer_use": false,
     "new_local_captures": false,
-    "local_ignored_gpu_tests": "not rerun during capture pause; hosted automated coverage pending"
+    "local_ignored_gpu_tests": "not rerun during capture pause; final hosted macOS/Windows/Linux coverage passed"
   },
   "float_roundtrip": {
     "before": "JSON reload changed elapsed time 0.39999999999999997 to 0.4 and one rotation component at its last bits",
@@ -88,11 +88,7 @@
     "mobile or physical-device save IO",
     "native save UI"
   ],
-  "pending": [
-    "hosted resumed-frame equality test (intentionally not run locally during capture pause)",
-    "hosted checks",
-    "reviewed merge"
-  ],
+  "pending": [],
   "native_binary_sha256": "ada3012f2944b35a36b13de9a8ed0b9fbb50b50cf47160d696813808c2334fa7",
   "local_cpu_cost": {
     "host": "Apple M5 Pro, concurrent development and build load; no rendering",
@@ -156,5 +152,72 @@
     "project_sha256": "bac2e57f246765e9a63976fce5e139b113c136d5c964850e300429605a90be04",
     "script_sha256": "7d16c20479ea8cfc20ca545f8d8cce12ac42ec5424f33fa15c88fb2e2c86b7dd",
     "game_or_device_gate": false
+  },
+  "hosted": {
+    "head": "8cea975ef2cef88ce990c27e7a9d4b9952100d59",
+    "checks": [
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563707/job/114102087769",
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563707/job/114102087719",
+        "name": "ios",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563707/job/114102087774",
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563707/job/114102087516",
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563707/job/114102087469",
+        "name": "web",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563707/job/114102087603",
+        "name": "android",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563820/job/114101939614",
+        "name": "checks",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563701/job/114101922283",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563701/job/114101922475",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563720/job/114101867588",
+        "name": "storage (macos-latest)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563720/job/114101867535",
+        "name": "storage (windows-latest)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/snowdamiz/incant/actions/runs/38014563720/job/114101867358",
+        "name": "storage (ubuntu-latest)",
+        "state": "SUCCESS"
+      }
+    ],
+    "merge": "39fed2d73a0d51eeb92bdd7b5a7eeca0eb63b35e",
+    "merged_tree_equals_reviewed": "bf9232e971356005770666cd6fb5455384d98a36"
   }
 }

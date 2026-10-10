@@ -53,6 +53,16 @@ within its documented workload.
 
 ## Active work
 
+- Headless `play --assertions FILE` evaluates bounded data-only checks over
+  runtime, behavior and input state at absolute ticks. Failed checks return
+  structured diagnostics, exit nonzero and suppress save publication. Five new
+  CLI tests and the strict TypeScript character probe cover checkpoint seeking,
+  movement/jumping/landing assertions, intentional failure, numeric equivalence,
+  missing/null data, invalid plans and bounded output. All 195 Rust, 315 UI and
+  five tool tests, Clippy, generated contracts and the native build/package pass.
+  Hosted checks and the GPU diagnostic-report extension remain pending; local
+  capture stays paused. See [gameplay assertions](docs/spikes/play-assertions.md).
+
 - Shared fixed-tick keyboard/mouse/gamepad/touch processing, sandbox `api.input()`
   and bounded headless input replay are implemented. Atomic validation, focus
   recovery, device lifetimes, gestures and saved-game input seeking pass eighteen
@@ -72,7 +82,8 @@ within its documented workload.
   172 Rust tests and workspace Clippy pass. The strict TypeScript public-CLI probe
   matches uninterrupted state/logs across two process restarts with authored files
   unchanged. The native release package, 315 UI tests/build and five tool tests pass.
-  Hosted verification and merge remain open. Physics
+  All twelve hosted checks passed at `8cea975`; PR #26 merged as `39fed2d`
+  with an identical reviewed tree. The local main app was rebuilt without opening. Physics
   warm starts, sleeping, VM globals and cross-revision migrations are outside this
   logical save format. See [game saves](docs/spikes/game-saves.md).
 
