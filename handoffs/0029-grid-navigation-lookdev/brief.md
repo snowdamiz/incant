@@ -1,3 +1,29 @@
+## Priority revision 2: report and evidence precision only
+
+The scoped visual verdict and actual frames are accepted. Preserve the scene,
+behavior, cameras, source binary and all rendered evidence. No new play or capture
+runs are needed for these corrections.
+
+1. Correct the claims that the cell-only API *requires* finishing a committed
+   step or that reversing necessarily needs a new fractional-start API. The
+   behavior chooses to finish its step. A behavior can reverse/interpolate back
+   to a known walkable cell with ordinary Transform commands and then query
+   from that cell; safe movement remains behavior-owned. Describe the current
+   choice without implying the engine forces it. Optional fractional-start
+   queries can remain a possible convenience, not a missing prerequisite.
+2. Tighten the independent-project normalization check: require one scene and
+   unique asset-name aliases before normalizing; require identical capture keys
+   and tick sets in A and B before comparing frame hashes. Preserve exact state
+   equality after mapping only the generated IDs. Remove any duplicate path-cost
+   recomputation if present. Run the checker again against the existing final A/B
+   artifacts, update its recorded hash/evidence, and retain all measured results.
+3. Keep the final total of 516 frames, which includes the full gate capture;
+   the earlier progress message's 425 was preliminary. No need to recount that
+   progress history in the report.
+
+Commit only these packet/report/checker/evidence corrections with Built-by: claude.
+Do not change Rust, appearance, UI or the original rendered frames.
+
 # Weighted grid navigation: actual rendered movement review
 
 Claude Opus 5.5 through ACP owns all scene look-dev, visual geometry, cameras,
