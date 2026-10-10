@@ -41,6 +41,10 @@ impl NativeWorld {
     }
 }
 impl<'a> SpatialView<'a> {
+    /// Check this identity before trusting retained generation/index mappings.
+    pub fn identity(&self) -> &'a crate::WorldIdentity {
+        &self.world.identity
+    }
     pub fn scene_id(&self) -> StableId {
         self.world.scene_id()
     }

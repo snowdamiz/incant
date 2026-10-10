@@ -80,3 +80,18 @@ Machine-readable results and source hashes:
 Local full logs are `/tmp/incant-native-spatial-{tests,clippy,runners-build,dependencies}.log`
 and `/tmp/incant-native-spatial-runners.json`. This scope did not run hosted/device
 performance, render pixels, or claim completion of native rendering/Play migration.
+
+## Retained consumer identity follow-up
+
+`SpatialView::identity()` now lends an opaque `WorldIdentity`. The consumer clones
+it once at attachment and compares borrowed identities before using generation or
+index caches. Its private `Arc<()>` allocation survives world moves and in-place
+restores; restore still advances both generations. A newly constructed/loaded
+world always has a distinct allocation, and retaining the old identity prevents
+address reuse from matching a different world. This adds one startup allocation,
+no frame refcount operation, no serialized identifier and no unsafe code.
+
+The nine spatial integration tests (including move/restore/new-world distinction)
+and runtime release all-target Clippy pass. Logs:
+`/tmp/incant-world-identity-{tests,clippy}.log`. The native renderer adapter will
+reject a different world before mutating its retained input.
