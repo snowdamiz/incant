@@ -1,3 +1,31 @@
+## Priority revision — PLAN.md revision 4, 2026-10-10
+
+The director has adopted a substantially revised performance architecture. This
+is why the session was interrupted; all of your edits and before captures are
+preserved. Continue the full creative redesign at Opus 5.5, explicitly Max.
+
+Read the updated PLAN.md, generated CLAUDE.md and
+`docs/spikes/performance-plan-v4-review.md` now, before continuing. They are
+present in this worktree from plan commit 981d545. Acknowledge these changes in
+your next progress update and record the plan revision in your result.
+
+For this UI pass, the concrete new requirement is bounded large-data rendering:
+virtualize or page large Inspector arrays, hierarchy rows and asset collections;
+never mount a control for every cell of a 65,536-value grid. Preserve keyboard
+navigation, focus, validation, commit/cancel and selection through window changes.
+Use realistic native-shaped fixtures, including your reproduced grid stall.
+Measure mounted row/control counts and interaction behavior with a 100,000-entity
+fixture where feasible; report the browser/hardware used, and do not claim this
+passes the M1 MacBook Air <100 ms / 60 fps device gate.
+
+The runtime world/backend migration belongs to Astra. Authoring edits continue
+through the existing command bridge. Do not add fake Play/Keep Edit functionality
+or imply the new runtime is available. You may improve all presentation and
+interaction structure as already authorized. Keep the tall/cluttered Inspector
+header and poor spacing as central design problems; performance does not justify
+losing the intended visual quality. No Cargo in this worktree. Finish, test and
+return your complete design result; Astra will perform native integration.
+
 # Full editor design pass — Opus 5.5, Max thinking
 
 ## Director's latest request — overrides earlier narrow visual scopes
