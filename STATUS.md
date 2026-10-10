@@ -53,6 +53,17 @@ within its documented workload.
 
 ## Active work
 
+- Authored off-mesh links support directed/bidirectional gaps, enable toggles,
+  costs, endpoint validation and per-leg route metadata through shared commands.
+  Invalid runtime landings cannot publish partial script/document state. At
+  `ccd6d33`, 289 Rust, 40 GPU, 315 UI and five tool tests pass, alongside Clippy,
+  contracts, native packaging and target compilation. Claude's two rendered runs
+  match 593 frames and 26 logs; mid-drop reopen matches all 49 window frames.
+  Session-local generations differ on reopen. Quantized heights visibly leave
+  an ungrounded logical walker 5 cm above a flat platform; exact source heights
+  remain open. Final integration must include the steering Linux convergence
+  correction and updated checks. See [off-mesh links](docs/spikes/navigation-links.md).
+
 - Bounded local avoidance exposes read-only `api.steerAgents` proposals for up
   to 128 agents. Library and public 100-agent save/reopen workflows pass.
   Claude's four-way plaza review completed twice with 803 identical frames and
