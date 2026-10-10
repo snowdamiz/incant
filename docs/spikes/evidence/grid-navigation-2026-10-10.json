@@ -1,0 +1,84 @@
+{
+  "phase_gate_approved": false,
+  "scope": "Weighted rectangular cell navigation, not tilemap rendering or 2D physics",
+  "initial_implementation": {
+    "source_commit": "d979d7e549f2d090324753d2480844c8b4a3cfb2",
+    "rust_tests": 285,
+    "clippy": "pass",
+    "ui_tests": 315,
+    "tool_tests": 5,
+    "public_workflow": {
+      "passed": true,
+      "strict_typescript": true,
+      "shared_commands_and_undo_redo": true,
+      "invalid_grid_rollback": true,
+      "project_grid_count_limit": true,
+      "blocked_door_save_resume_exact": true,
+      "repeat_exact": true,
+      "state": {
+        "arrived": true,
+        "blocked": [
+          6,
+          7,
+          8
+        ],
+        "costs": [
+          6828,
+          6828,
+          6828,
+          9828,
+          9828,
+          null,
+          null,
+          null,
+          6828,
+          6828
+        ],
+        "pos": [
+          6,
+          2
+        ],
+        "tick": 120
+      },
+      "author_files_unchanged": {
+        "grid.incant.json": "7d841f61034f03ccaaeba0fe7cc3da128f278555b6feb5b82cf074e895b1fe21",
+        "grid.incant.journal.jsonl": "0ab0c0c13aa7729e0ffb73108dda9822fbdc2f15b1f51e9f13f0b43608841785"
+      },
+      "binary_sha256": "d4a3f6f65aede04f4c67aef9e840f3463c2e2370d42f507b0b2925d5197c6639",
+      "rendering_or_physics_gate": false
+    },
+    "search_bound": {
+      "passed": true,
+      "cells": 65536,
+      "reachable_cells_per_query": 65532,
+      "queries_per_run": 30,
+      "runs": [
+        {
+          "p95_frame_ms": 10.267999999999999,
+          "max_frame_ms": 10.372917000000001
+        },
+        {
+          "p95_frame_ms": 9.725791,
+          "max_frame_ms": 9.796292
+        },
+        {
+          "p95_frame_ms": 9.799499999999998,
+          "max_frame_ms": 9.941291999999999
+        }
+      ],
+      "binary_sha256": "d4a3f6f65aede04f4c67aef9e840f3463c2e2370d42f507b0b2925d5197c6639",
+      "project_sha256": "a4ae86f405a74c986b11e64c9cfcaf963cafa66c1182a2e0561b87213e869f8d",
+      "measurement": "Headless script ticks including host synchronization; no rendering, no controlled contention or device gate"
+    },
+    "binary_provenance_note": "Initial release binary was built from the grid implementation before its formatting/commit; final integrated binary will be recorded separately."
+  },
+  "integration": {
+    "source_commit": "ac81c4be838eff3ab6cb70bee58fddc178022c04",
+    "status": "309 Rust tests pass; report field fixed, final Clippy and binaries pending",
+    "rust_tests": 309
+  },
+  "visual_review": {
+    "packet": "handoffs/0029-grid-navigation-lookdev/brief.md",
+    "status": "Pending immutable integrated binary"
+  }
+}

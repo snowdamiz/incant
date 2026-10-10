@@ -121,7 +121,7 @@ pub fn run() -> Result<String, String> {
     {
         return Err("character movement assertion failed".into());
     }
-    Ok(json!({"steering":steering,"navigation":navigation,"localization":localization,"input":input,"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
+    Ok(json!({"grid_navigation":grid_navigation,"steering":steering,"navigation":navigation,"localization":localization,"input":input,"character_movement":movement,"physics_backend":"rapier-0.36-enhanced-determinism","physics_y":physics_y,"incant":"hello-world","ok":true,"ticks":state.tick,"position_x":x,"os":std::env::consts::OS,"arch":std::env::consts::ARCH}).to_string())
 }
 
 #[cfg(not(target_arch = "wasm32"))]
