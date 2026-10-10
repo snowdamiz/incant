@@ -2,207 +2,428 @@
 
 ## Status
 
-Engine and browser review complete. Native review is pending Astra's captures.
+The corrected-renderer follow-up is complete. Native review is pending.
 
-- **Engine rendering: pass, with one concrete renderer request.** The pixel-perfect
-  path is exact in every measured case:
-  - integer replication;
-  - letterbox placement;
-  - sub-pixel stability;
-  - one-cell steps;
-  - inherited roll;
-  - projection switching;
-  - from-scratch repeatability.
+- **Exact half-pixel follow flick: fixed.** On the corrected build, a grid-aligned
+  object moving with the camera holds its pixels in every pixel-perfect frame of
+  the original runs. The foundation build failed 17 of those frames.
+- **Odd logical sizes and inherited roll: fixed.** Across 12 new configurations,
+  followed geometry holds its expected pixels in 1560 of 1560 follower frames. The
+  foundation build managed 1056.
+- **No regressions found.** Replication, letterboxing, explicit failures, sub-pixel
+  stability, projection switching and repeatability all still pass. Against the
+  foundation run, exactly the 34 images that the documented rule changes predict
+  have changed, and no others.
+- **One defect remains, much narrower than the original.** When the camera sits
+  just past a half-pixel tie, within about 1/512 logical pixel, a followed object
+  still jumps 1 px for that frame. Exact ties are now correct. The band matches the
+  GPU's sub-pixel precision. See "Request for Astra".
+- **Browser Inspector: unchanged and passing.** This round made no UI edits.
+  Strict typecheck, 420 UI tests, the build and 7 tool tests pass.
+- **Native Inspector and the broader editor redesign: pending.** Handoff 0033 owns
+  the redesign. Native review follows its integration.
 
-  One defect remains. Camera snapping breaks exact half-pixel ties away from zero, while the
-  rasterizer's top-left fill rule breaks them the other way on two of the four
-  screen directions. The result is a 1 px flick of a grid-aligned object that moves
-  with the camera, on tie ticks only. See "Request for Astra".
-- **Browser Inspector: pass.** The Camera Inspector presents Pixel perfect, pixel
-  density and the logical resolution at the normal and the 280 px minimum widths.
-  Strict typecheck, all 420 UI tests, the build and the five tool tests pass.
-- **Native Inspector: not reviewed.** The packet states that Astra supplies native
-  captures after UI integration and a rebuild. Browser and headless evidence are
-  not native acceptance.
-
-This verdict covers the Camera presentation and the reviewed pixel-perfect camera
-path only. It does not approve a phase gate, sprites, atlases, tilemaps, 2D physics
+This verdict covers the reviewed camera path and the read-only Camera presentation.
+It approves no phase gate. It does not cover sprites, atlases, tilemaps, 2D physics
 or an agent-ready claim.
 
-## Model and transport
+## Model, effort and transport
 
 - Exact model: Claude Opus 5.5, model ID `claude-opus-5-5`.
+- Thinking effort: Max. This session's reasoning effort is set to max.
+  `tools/acp/config.json` pins model `claude-opus-5-5` with effort `max`.
 - The runner started this session in the handoff worktree through the Claude agent
-  harness. I cannot independently inspect the ACP transport from inside the
-  session. No model substitution occurred.
+  harness. I cannot inspect the ACP handshake from inside the session, so I cannot
+  independently confirm how the effort setting was verified. No model or effort
+  substitution happened on my side.
+- The first round did not run at Max. That round built the Inspector and the foundation
+  engine review, and its session showed a lower reasoning-effort setting of 10. Its
+  engine measurements are reproducible from committed helpers, and this Max
+  session re-ran the whole engine suite. I did not re-review the Inspector design at
+  Max, because handoff 0033 now owns the Inspector redesign.
 
-## Director feedback acknowledged
+## Director feedback and priority revision
 
-The current packet has no priority-revision section and no new director feedback
-beyond its brief. I applied the standing preferences:
-- neutral connected panels;
-- restrained accent;
-- correct spacing;
-- no floating cards;
-- no redesign of unrelated UI.
-
-No files from an interrupted attempt existed. The worktree was clean at `04a39ac`.
+I read the priority revision before changing anything and applied it:
+- This resumed session runs Opus 5.5 at Max thinking.
+- Scope is limited to this packet's engine helpers, screenshots, measurements and
+  result. No edits were made to editor/ui, Rust, SDK, CI, the bridge or unrelated UI.
+- I read Astra's correction at `72ede59` and the updated spike note before any capture:
+  - camera-right half ties round down, and camera-up half ties round up;
+  - a band of 8 scaled f64 epsilons, capped at 1e-7 px, stabilises exact ties after a roll;
+  - odd widths frame half a pixel right, and odd heights frame half a pixel down.
+- The original results stay intact as historical evidence. All new output is versioned.
+- The original look-dev helper ran byte-unchanged. Any difference therefore comes from the
+  binary alone.
+- Expectations changed only where the documented rule changes them: the direction of
+  +x and −y ties, and the odd-size framing phase. The follower check is strict and
+  rule-independent, and it reports the remaining near-tie jump as a failure.
 
 ## Provenance
 
 | Item | Value |
 | --- | --- |
-| Base commit | `04a39ac` (also `binary.json` `source_commit`) |
-| Headless binary | `artifacts/tools/incant_headless` |
-| Binary sha256 | `f9a9ed5506cd49b5b2597230b5f34cc8ea35713e6cc57b0321c779abe0fa5cb6` |
-| Binary check | Matched `binary.json` before and after every engine call in all runs |
-| Browser | Headless Chrome 155.0.8059.40 through pinned `playwright-core` 1.64.0 |
-| Node dependencies | `npm ci --ignore-scripts` from the pinned lockfile |
+| Corrected binary | `artifacts/tools/incant_headless` |
+| Corrected sha256 | `e88177b23628cccff53e189a62bc189f175cce6978c780f065bad423f01a9cec` |
+| Corrected source | `72ede59a7d1a908439f18c38bf35f47b07b5ddd4`, per `binary.json` |
+| Foundation binary, baseline only | `artifacts/tools/foundation-incant_headless` |
+| Foundation sha256 | `f9a9ed5506cd49b5b2597230b5f34cc8ea35713e6cc57b0321c779abe0fa5cb6` |
+| Foundation source | `04a39acf7ff87aa24f4996fc9672fca6b782c00e`, per `foundation-binary.json` |
+| Binary check | Each binary matched its metadata before and after every engine call |
+| Review base | `2c20e3a` |
+
+I ran the foundation binary only as a labelled before-baseline for the new
+scenarios. Its earlier evidence, `engine-r3` and `engine-r4`, is untouched.
+
+## Before and after
+
+### Original follow captures, repeated twice from scratch
+
+These runs use the same helper and scene on both binaries. A mover keeps a fixed
+offset from the camera and should hold its home pixels.
+
+| Run, camera step 1/8 px per tick | Mover at home, foundation | Mover at home, corrected |
+| --- | --- | --- |
+| x: +x, with projection switches | 74 / 85 | 85 / 85 |
+| diag: −x, +y | 49 / 49 | 49 / 49 |
+| diag2: +x, −y | 43 / 49 | 49 / 49 |
+
+- Every corrected pixel-perfect frame shows the predicted whole-pixel content shift,
+  with 0 residual mismatches.
+- The content now steps at ticks 5, 13, 21 and so on, rather than 4, 12, 20, because
+  a right tie now rounds down. Frames 5 to 12 equal the static +1 px screenshot,
+  where previously frames 4 to 11 did.
+- Both corrected runs are byte-identical: 341 of 341 images. Their frame-set digest
+  is `4a1b6d952a10bb248c227311edb6843081a3ebb9ced058380c1ddaef177a8ac9`.
+
+### Followed geometry at odd sizes and inherited roll
+
+The new helper `pixel_follow.py` builds 12 configurations. These are 4 logical sizes
+(320×180, 255×143, 256×143 and 255×144) times 3 inherited rolls (0°, 90° and 0.37 rad).
+Each configuration has:
+- a camera as the child of a rolled rig;
+- two followers, an 8×8 and a 5×3 px quad, rotated with the rig and placed on the
+  rolled pixel grid;
+- its own copy of the test card, 100 m apart in depth.
+
+One script moves every rig and follower along 16 one-pixel legs at 1/8 px per tick.
+The legs cover ±x, ±y and all four diagonals, over −1 to 1 px. Every leg crosses an
+exact tie on each moving axis. Each configuration gives 65 frames at logical size.
+The rolled 255×143 configuration is also captured at 768×432.
+
+Three checks run on every frame:
+- each follower sits exactly at x from `floor(W/2) + r` and y from `floor(H/2) − u − h`,
+  where (r, u) is its grid corner and (w, h) its size;
+- frames inside one snapping cell are byte-identical;
+- the background shows the predicted whole-pixel shift.
+
+| Configuration | Followers exact, before | after | Cells identical, before | after | Background exact, before | after |
+| --- | --- | --- | --- | --- | --- | --- |
+| 320×180, 0° | 110 / 130 | 130 / 130 | 4 / 9 | 9 / 9 | 65 / 65 | 65 / 65 |
+| 320×180, 90° | 110 / 130 | 130 / 130 | 4 / 9 | 9 / 9 | 65 / 65 | 65 / 65 |
+| 320×180, 0.37 rad | 106 / 130 | 130 / 130 | 2 / 9 | 9 / 9 | 57 / 65 | 65 / 65 |
+| 255×143, 0° | 70 / 130 | 130 / 130 | 3 / 9 | 9 / 9 | 65 / 65 | 65 / 65 |
+| 255×143, 90° | 70 / 130 | 130 / 130 | 3 / 9 | 9 / 9 | 65 / 65 | 65 / 65 |
+| 255×143, 0.37 rad | 66 / 130 | 130 / 130 | 1 / 9 | 9 / 9 | 57 / 65 | 65 / 65 |
+| 256×143, 0° | 86 / 130 | 130 / 130 | 3 / 9 | 9 / 9 | 65 / 65 | 65 / 65 |
+| 256×143, 90° | 86 / 130 | 130 / 130 | 3 / 9 | 9 / 9 | 65 / 65 | 65 / 65 |
+| 256×143, 0.37 rad | 90 / 130 | 130 / 130 | 2 / 9 | 9 / 9 | 57 / 65 | 65 / 65 |
+| 255×144, 0° | 86 / 130 | 130 / 130 | 3 / 9 | 9 / 9 | 65 / 65 | 65 / 65 |
+| 255×144, 90° | 86 / 130 | 130 / 130 | 3 / 9 | 9 / 9 | 65 / 65 | 65 / 65 |
+| 255×144, 0.37 rad | 90 / 130 | 130 / 130 | 2 / 9 | 9 / 9 | 57 / 65 | 65 / 65 |
+| **Total** | **1056 / 1560** | **1560 / 1560** | **33 / 108** | **108 / 108** | **748 / 780** | **780 / 780** |
+
+The foundation failures fall into three classes. The corrected build has none:
+- **Even sizes at 0° and 90°.** Each follower is wrong on 10 of 65 frames. All are
+  exact ties where the camera coordinate is a positive x or a negative y.
+- **Odd sizes.** World-grid edges land on pixel centres, so a follower alternates
+  between two positions within each cell. At 255×143 it is wrong on 30 of 65 frames
+  per follower.
+- **0.37 rad roll.** Eight frames per configuration land in a different cell than any
+  rule predicts. All eight are exact up ties where rolled f64 dot products fell on
+  the other side.
+
+Other results:
+- The 768×432 capture replicates its logical frame exactly in 33 of 33 frames, with
+  1 px of backdrop at the left and top and 2 px at the right and bottom.
+- Each binary repeats 813 of 813 frames byte for byte across two from-scratch runs.
+- The corrected digest is
+  `2701de542d23079453c4dbb9fc0eca0fe1186dd7ca861959e6973f3e911e3ba3`.
+- The foundation digest is
+  `f7747f725dea8f4756e6107aeeaa324e026488e26c4c0078dc577d3292d1e229`.
+- Followers land on `floor(W/2) + r` at odd widths and `floor(H/2) − u − h` at odd
+  heights. This confirms the documented direction of the half-pixel framing phase.
+
+### Regression check of the other contracts
+
+All of these come from the unchanged original helper on the corrected binary.
+- **Replication and letterboxing.** The table under "Contract measurements" shows 0
+  mismatches at every size. The values are identical to the foundation run.
+- **Other configurations.** 160×90, 256×224 and 255×143 replicate with 0 mismatches.
+- **Explicit failures.** Outputs of 319×180 and 320×179 for the 320×180 camera, and
+  320×180 for the 256×224 camera, each exit 1 with the same messages and write no
+  image.
+- **Static camera motion.** All 14 cameras match the documented rule. Only the two
+  tie cameras changed: +0.50 px in x and −0.50 px in y now stay in place, where they
+  previously moved one pixel.
+- **Roll.** The direct and inherited 90° rolls are byte-identical. A 0.3 px rig offset
+  leaves the frame unchanged, and 0.7 px moves it one pixel. The 10° roll replicates
+  exactly at 3x.
+- **Projection switching.** The orthographic segment differs from a pure translation
+  by 21, 38, 106, 213, 112, 46, 28 and 0 pixels. That matches the foundation exactly.
+  In the 961×541 run, 22 of 22 pixel-perfect frames are exact 3x replications with 1 px
+  of backdrop at the right and bottom. The 4 orthographic and perspective frames fill
+  the output.
+- **Repeatability.** 341 of 341 images match across the two corrected runs.
+- **Against the foundation run.** Of 283 images, 249 are identical and 34 changed. The
+  34 are exactly the predicted set:
+  - 11 tie frames each in the x run at 1x and at 961×541;
+  - 6 tie frames in the diag2 run;
+  - the two tie cameras at two sizes each;
+  - the odd 255×143 camera at two sizes, from the half-pixel phase.
+
+  No image changed unexpectedly, and none that should have changed stayed the same.
+
+### Real pixels reviewed
+
+I inspected before-and-after crops at 8 to 12 times nearest-neighbour zoom. The
+crops are kept in the ignored artifacts folder.
+- **x run, tick 4.** Before, the mover sits at x = 39, 1 px left of home. After, it
+  is at x = 40.
+- **diag2 run, tick 4.** Before, the mover is off by (−1, −1). After, it is home.
+- **255×143 follower, tick 2.** Before, the follower sits 1 px right of its pixels.
+  After, it is exact. The background stair steps sit half a pixel over, as documented.
+- **0.37 rad, tick 36, an exact up tie.** Before, the follower jumps 1 px up. After, it
+  holds while the background takes its whole-cell step.
+- **Edges.** Edges are hard in every frame, with no blended colours. Blocks are uniform
+  in the 3x frames. The 1 and 2 px letterbox is placed as specified.
+- **Odd static frame.** The 255×143 frame keeps complete bars with no stretching. Its
+  framing moved half a pixel, as documented.
+
+## Remaining defect: near-tie follow jump
+
+The new probe `pixel_neartie.py` places the camera and both followers at a tie plus a
+small delta, from 1e-15 to 1e-2 px:
+- on the right axis at +0.5 px and at −0.5 px;
+- on the up axis at +0.5 px.
+
+That gives 117 positions, one per frame. They run at 320×180 with 0° and 0.37 rad,
+and at 255×143 with 0°. Results on the corrected build are the same in all three
+configurations:
+
+| Camera position | Followed object |
+| --- | --- |
+| Exact tie, or within ±1e-15 px of it | Holds its pixels |
+| Right axis, tie +1e-14 to +1.9e-3 px | Jumps 1 px left |
+| Right axis, tie +1.95e-3 px or more, or any tie − delta | Holds its pixels |
+| Up axis, tie −1e-14 to −1.9e-3 px | Jumps 1 px up |
+| Up axis, tie −1.95e-3 px | In 2 of 3 configurations, the 5×3 follower jumps or stretches to 5×4 |
+| Up axis, tie −2e-3 px or more, or any tie + delta | Holds its pixels |
+
+- 30, 31 and 31 of 117 frames are displaced per configuration. The foundation build
+  shows the same band. It is also wrong at some exact ties, and at 255×143 about half
+  of all positions are wrong.
+- **Cause.** The CPU treats a coordinate as a tie only within 8 f64 epsilons, about
+  1.8e-15 px. The GPU snaps vertex positions to its sub-pixel grid. The measured band
+  edge lies between 1.9e-3 and 2.0e-3 px, which matches 1/512 px and is consistent
+  with 8-bit sub-pixel precision. Inside that band the GPU sees an exact tie and
+  applies the top-left rule. The CPU has already snapped the camera the other way.
+- **Impact.** Steps in multiples of 1/256 px, such as the original 1/8 px runs, never
+  land in the band. Arbitrary continuous motion does. The band covers about 1/512 of
+  each pixel. That predicts a single-frame jump on about 0.2% of frames per moving
+  axis, or roughly once every 4 seconds of diagonal motion at 60 fps. This frequency
+  is an estimate from the measured band width, not a measured rate.
+- **Why the existing regression passes.** Astra's GPU regression uses offsets of 0.25,
+  0.49, 0.5, 0.51 px and similar. The nearest non-tie is 0.01 px from a tie, outside
+  the band.
+
+## Request for Astra
+
+Severity is low to medium. The camera itself stays exact. The jump affects
+grid-aligned objects that follow the camera under arbitrary-speed motion, such as a
+player sprite.
+
+- **Fix.** Quantize the camera-plane coordinate, in logical pixels, to the rasterizer's
+  sub-pixel grid before the tie rule. For example:
+
+  ```rust
+  let pixel = (pixel * 256.0).round() / 256.0;
+  ```
+
+  Then apply `ceil(pixel - 0.5)` along right and `floor(pixel + 0.5)` along up. CPU and
+  GPU then agree on what counts as a tie, and the f64 epsilon band becomes unnecessary.
+- **Precision.** I measured 1/256 on this Apple M5 Pro adapter. Other adapters may
+  differ, and wgpu does not report the value. It should be a documented constant,
+  guarded by a GPU regression that fails explicitly where it does not hold.
+- **Second-order case.** Within a few millionths of a pixel of the 1/512 rounding
+  boundary, f32 vertex noise can round one edge of a follower differently from the
+  other. At 1.95e-3 px, 3.1e-6 px inside the boundary, a 5×3 follower stretched to
+  5×4. At 1.9e-3 px, 5.3e-5 px inside, it behaved consistently. This case would remain
+  after the fix, but far more rarely.
+- **Regression.** Add near-tie offsets on both axes: tie ±1e-12, 1e-6, 1e-3, 1.9e-3 and
+  2e-3 px. Run them at 0°, 90°, 0.37 rad and odd sizes. This probe is a ready reference.
+- **Wording.** The code comment says a grid-aligned follower "then stays still". That is
+  true at exact ties and dyadic steps, but not yet for arbitrary positions.
 
 ## Changed paths
 
-UI presentation and tests:
-- `editor/ui/src/components/inspector/presentation.ts`:
-  - the "Pixel perfect" variant name;
-  - "Pixel density" and "Resolution" rows with Width and Height entry names;
-  - the strict `isPixelPerfectCamera` check behind the field-of-view "Unused" tag.
-- `editor/ui/src/components/inspector/FieldView.tsx`: a fixed-length list can carry
-  named entries (W, H) with neutral prefixes. A list of another length is shown raw
-  as a mismatch.
-- `editor/ui/src/styles/app.css`: one neutral `.axis--plain` prefix colour.
-- `editor/ui/src/bridge/fixture.ts`: the Camera schema mirror now equals the native
-  conversion exactly. A "Pixel Camera" (32 px/m, 320×180) joins the sample scene.
-- `editor/ui/src/components/inspector/CameraFields.test.tsx`: parity and behaviour
-  tests, listed below.
-- `editor/ui/src/App.test.tsx`: the sample hierarchy count rises from 24 to 25 for
-  the new camera.
+This follow-up, all under `handoffs/0031-pixel-perfect-cameras/`:
+- `tools/analyse.py`: now takes `--rule` (required), `--repeat`, `--baseline` and
+  `--baseline-rule`. Static tie cameras get explicit expected shifts. With
+  `--rule away-from-zero` on `engine-r3`, it reproduces every value in the committed
+  `analysis-r3.json`.
+- `tools/pixel_follow.py` and `tools/analyse_follow.py`: the follow scenarios at odd
+  sizes and inherited roll.
+- `tools/pixel_neartie.py` and `tools/analyse_neartie.py`: the near-tie probe.
+- `tools/summarise.py`: the compact before/after summary and run digests.
+- `evidence/followup/`:
+  - `summary.json`;
+  - `analysis-corrected-r1.json`;
+  - `helper-corrected-r1.json` and `helper-corrected-r2.json`;
+  - `follow-helper-corrected-r1.json` and `neartie-helper-corrected-r1.json`;
+  - both scene definitions and both generated scripts.
+- `screenshots/corrected/`: 11 unedited corrected-build frames.
+- `screenshots/foundation-baseline/`: 2 unedited foundation frames of the new scenarios.
+- `evidence/screenshots.sha256`: 13 entries appended, 49 in total.
+- `result.md`.
 
-Handoff evidence:
-- `tools/pixel_lookdev.py`: builds and renders the engine scene.
-- `tools/analyse.py`: measures it from the PNG bytes.
-- `tools/capture-inspector.mjs`: the browser captures.
-- `screenshots/engine/`: 26 unedited engine PNGs.
-- `screenshots/inspector/`: 10 browser PNGs.
-- `evidence/`:
-  - `analysis-r3.json`;
-  - `helper-r3.json` and `helper-r4.json`;
-  - `scene.json`;
-  - `live_x.generated.ts`;
-  - `inspector-report.json`;
-  - `screenshots.sha256`.
+Unchanged in this follow-up:
+- `tools/pixel_lookdev.py` and `tools/capture-inspector.mjs`;
+- all earlier evidence and screenshots;
+- every UI, Rust, SDK, CI and bridge file.
 
-Ignored, not committed, under `artifacts/0031-pixel-perfect-cameras/`:
-- `engine-r3` and `engine-r4`: the two final from-scratch runs with all raw frames.
-- `inspector/r1` and `inspector/r2`: the full browser sets.
-- Superseded probes:
-  - `engine-p1`, which stopped on an expected failure the helper did not yet tolerate;
-  - `engine-p2`, `engine-r1` and `engine-r2`, which predate the tie cameras and the diagonal runs.
+Earlier round, at `34f348d`: the Inspector presentation and tests, the browser
+captures, the foundation engine evidence and helpers.
 
-No Rust, SDK, CI, bridge transport, mutation routing or account settings changed.
-No Cargo command ran.
+Ignored and not committed, under `artifacts/0031-pixel-perfect-cameras/`:
+- `engine-corrected-r1` and `engine-corrected-r2`;
+- `follow-corrected-r1`, `follow-corrected-r2`, `follow-foundation-r1` and
+  `follow-foundation-r2`;
+- `neartie-corrected-r1`, `neartie-corrected-r2`, `neartie-foundation-r1` and
+  `neartie-foundation-r2`;
+- the full analyses;
+- the probes `follow-probe-1`, `follow-probe-f1`, `neartie-probe-c1` and `neartie-probe-f1`;
+- the inspection crops;
+- every earlier run.
 
 ## Commands and results
 
 ```sh
-npm ci --ignore-scripts                    # pinned lockfile, 0 vulnerabilities
-cd editor/ui && npx tsc -b --noEmit        # strict: 0 errors
-npx vitest run                             # 16 files, 420 tests passed
-npm run build                              # built
-python3 -m unittest discover -s tools/tests   # 5 tests OK
-node handoffs/0031-pixel-perfect-cameras/tools/capture-inspector.mjs r2
-python3 -I handoffs/0031-pixel-perfect-cameras/tools/pixel_lookdev.py artifacts/0031-pixel-perfect-cameras/engine-r3
-python3 -I handoffs/0031-pixel-perfect-cameras/tools/pixel_lookdev.py artifacts/0031-pixel-perfect-cameras/engine-r4
-python3 -I handoffs/0031-pixel-perfect-cameras/tools/analyse.py \
-  artifacts/0031-pixel-perfect-cameras/engine-r3 artifacts/0031-pixel-perfect-cameras/analysis-r3.json \
-  artifacts/0031-pixel-perfect-cameras/engine-r4
-shasum -a 256 -c handoffs/0031-pixel-perfect-cameras/evidence/screenshots.sha256   # 36 OK
+shasum -a 256 artifacts/tools/incant_headless artifacts/tools/foundation-incant_headless
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/pixel_lookdev.py artifacts/0031-pixel-perfect-cameras/engine-corrected-r1
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/pixel_lookdev.py artifacts/0031-pixel-perfect-cameras/engine-corrected-r2
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/pixel_follow.py artifacts/0031-pixel-perfect-cameras/follow-corrected-r1
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/pixel_follow.py artifacts/0031-pixel-perfect-cameras/follow-foundation-r1 --binary foundation
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/pixel_neartie.py artifacts/0031-pixel-perfect-cameras/neartie-corrected-r1
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/pixel_neartie.py artifacts/0031-pixel-perfect-cameras/neartie-foundation-r1 --binary foundation
+# The follow and near-tie helpers also ran into -r2 directories for both binaries.
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/analyse.py artifacts/0031-pixel-perfect-cameras/engine-r3 \
+  artifacts/0031-pixel-perfect-cameras/reanalysis-r3-away.json --rule away-from-zero \
+  --repeat artifacts/0031-pixel-perfect-cameras/engine-r4
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/analyse.py artifacts/0031-pixel-perfect-cameras/engine-corrected-r1 \
+  artifacts/0031-pixel-perfect-cameras/analysis-corrected-r1.json --rule top-left \
+  --repeat artifacts/0031-pixel-perfect-cameras/engine-corrected-r2 \
+  --baseline artifacts/0031-pixel-perfect-cameras/engine-r3 --baseline-rule away-from-zero
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/analyse_follow.py artifacts/0031-pixel-perfect-cameras/follow-corrected-r1 \
+  artifacts/0031-pixel-perfect-cameras/follow-analysis-corrected-r1.json --rule top-left \
+  --repeat artifacts/0031-pixel-perfect-cameras/follow-corrected-r2
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/analyse_follow.py artifacts/0031-pixel-perfect-cameras/follow-foundation-r1 \
+  artifacts/0031-pixel-perfect-cameras/follow-analysis-foundation-r1.json --rule away-from-zero \
+  --repeat artifacts/0031-pixel-perfect-cameras/follow-foundation-r2
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/analyse_neartie.py artifacts/0031-pixel-perfect-cameras/neartie-corrected-r1 \
+  artifacts/0031-pixel-perfect-cameras/neartie-analysis-corrected-r1.json \
+  --repeat artifacts/0031-pixel-perfect-cameras/neartie-corrected-r2
+# The same near-tie analysis ran for the foundation pair.
+python3 -I handoffs/0031-pixel-perfect-cameras/tools/summarise.py artifacts/0031-pixel-perfect-cameras \
+  artifacts/0031-pixel-perfect-cameras/followup-summary.json
+(cd handoffs/0031-pixel-perfect-cameras && shasum -a 256 -c evidence/screenshots.sha256)   # 49 OK
+cd editor/ui && npx tsc -b --noEmit && npx vitest run && npm run build   # 0 errors, 16 files / 420 tests passed, built
+python3 -m unittest discover -s tools/tests                              # 7 tests OK
 ```
 
-Each helper run printed:
-```
-binary_unchanged: true, authored_unchanged: true, screenshot_repeats_equal: true,
-screenshots: 58, failures: {base-319x180: [1, false], base-320x179: [1, false],
-ppu32-256x224-320x180: [1, false]},
-play_repeats_equal: {1x: true, 3x-odd: true, diag-1x: true, diag2-1x: true}
-```
+Every engine helper run printed these results:
+- the binary under test unchanged;
+- authored project and journal bytes unchanged;
+- every capture completed.
 
-The baseline before my changes was 385 passing and 2 failing UI tests. Both
-failures were Camera-schema parity expectations, as the packet stated.
+The original-suite runs also printed equal screenshot and play repeats, and the same
+three expected failures.
+
+Re-analysing the foundation run under its own rule reproduced every previously
+reported value in `analysis-r3.json`, with 0 differences. The adapted analysis
+therefore measures the same way; only the rule differs.
+
+| Run pair | Frames | Byte-identical | Digest |
+| --- | --- | --- | --- |
+| `engine-r3` and `engine-r4`, foundation | 283 | yes | `6b08363b94e0b28edf1cf4937ed0fc943d77a1f6e3b3e50b03abec4f475b387a` |
+| `engine-corrected` r1 and r2 | 283 | yes | `4a1b6d952a10bb248c227311edb6843081a3ebb9ced058380c1ddaef177a8ac9` |
+| `follow-foundation` r1 and r2 | 813 | yes | `f7747f725dea8f4756e6107aeeaa324e026488e26c4c0078dc577d3292d1e229` |
+| `follow-corrected` r1 and r2 | 813 | yes | `2701de542d23079453c4dbb9fc0eca0fe1186dd7ca861959e6973f3e911e3ba3` |
+| `neartie-foundation` r1 and r2 | 354 | yes | `502202529a805d1a494192ce87448b54648c3aeee245ef5d32ada0307e84b39c` |
+| `neartie-corrected` r1 and r2 | 354 | yes | `e2ed97754f50fe482b3b766fa0e9ad9ff08af182bc223ad57d01d10df3b039b3` |
+
+Each digest is the sha256 of the sorted "capture/frame sha256" lines from the r1 run's
+`helper.json`. The original-suite digests cover r1 screenshots and r1 play frames.
 
 Not run by me:
-- Cargo, Clippy and the GPU tests;
+- Cargo, Clippy and the GPU tests, which Astra reports in `binary.json`;
 - native capture;
-- native WebKit.
+- a browser re-capture, because no UI changed.
 
-## Engine scene
+## Committed frames
 
-The scene is original and authored only through public commands:
+Corrected build, in `screenshots/corrected/`:
+- `live-x-1x-t04.png`, `live-diag2-1x-t04.png` and `live-x-961x541-t04.png`: the original
+  tie ticks, now with the mover at home. Compare with `screenshots/engine/live-x-1x-t04.png`
+  and `live-diag2-1x-t04.png` from the foundation build.
+- `ppu32-255x143-960x540.png`: the odd-size framing phase.
+- `follow-255x143-r0-t002.png`, `follow-320x180-r0.37-t036.png` and
+  `follow-255x143-r0.37-768x432-t036.png`: followers at an odd size, at an exact
+  rolled tie, and at 3x with an odd spare.
+- `neartie-320x180-r0-f001-right-tie.png`: the follower holds at an exact tie.
+- `neartie-320x180-r0-f010-right-tie+1e-6.png`: the remaining defect, a 1 px jump.
+- `neartie-320x180-r0-f026-right-tie+2e-3.png`: just outside the band, where it holds.
+- `neartie-320x180-r0.37-f103-up-tie-1.95e-3.png`: the band edge, where the 5×3
+  follower stretches.
+
+Foundation build, in `screenshots/foundation-baseline/`, using the same names for direct
+comparison:
+- `follow-255x143-r0-t002.png`;
+- `follow-320x180-r0.37-t036.png`.
+
+## Engine scene and contract measurements
+
+These tables come from the corrected build, `evidence/followup/analysis-corrected-r1.json`.
+They are identical to the foundation measurements in `evidence/analysis-r3.json`,
+except for the documented changes listed above.
+
+**Scene.** The scene is original and authored only through public commands:
 1. `init` creates the project.
-2. Mathematical glTF is written by the helper and registered with `import`.
+2. Mathematical glTF is registered with `import`.
 3. One `rpc command.execute` transaction with provenance creates every entity.
 4. `project.save` and `validate` follow.
 
-No project JSON was edited.
+The scene is a 10 × 5.625 m "pixel test card" with every edge on the 1/32 m grid.
+Materials are emissive, so pixels are flat and independent of lighting. The card
+contains:
+- a 1 px amber ring on the outermost logical pixels;
+- four coloured corner markers;
+- bar gauges of 1 to 4 px;
+- checkers with 1, 2 and 4 px cells;
+- a disc;
+- strips at 45°, 1:2 and 17°;
+- 1 px crosshairs;
+- an 8 × 8 px mover.
 
-The scene is a 10 × 5.625 m "pixel test card". Every edge lies on the 1/32 m grid,
-so at 32 px/m each logical pixel is either fully inside or fully outside a shape.
-Materials are emissive on a black metallic base, so pixels are flat and independent
-of lighting. The card contains:
-- a 1 px amber ring on the outermost logical pixels, so any crop or offset breaks it;
-- red, green, blue and white corner markers, which check orientation and flips;
-- vertical and horizontal bar gauges: four bars each of 1, 2, 3 and 4 px with equal gaps;
-- 16 × 16 px checkers with 1, 2 and 4 px cells;
-- a disc of radius 24 px;
-- 2 px strips at 45°, 1:2 and 17°;
-- 1 px crosshair lines;
-- an 8 × 8 px green mover that scripts move with the camera.
+Cameras use 32 px/m at 320×180 unless named otherwise.
 
-Cameras use pixels per unit 32 and logical 320×180 unless named otherwise. They sit
-at z = 10 looking down −Z. Variants:
-- sub-pixel offsets in x and y, including exact ±0.5 ties;
-- one cell and more than one cell;
-- a forward-depth move of 3.3 m;
-- a direct 90° roll and the same roll inherited from a parent rig, with 0.3 and 0.7 px rig offsets;
-- a 10° roll;
-- an orthographic twin with vertical size 5.625 and a legacy perspective twin;
-- 16 px/m at 160×90, 32 px/m at 256×224 (8:7), and 32 px/m at an odd 255×143.
+**Native frame.** The 320×180 frame has exactly 8 colours. All four bar gauges and all
+three checkers are exact, all 1000 ring pixels are amber, and every corner marker is
+correct.
 
-Live runs use strict-TypeScript behaviours with ordinary `set_component` commands.
-The camera and the mover advance 1/256 m, which is 1/8 logical pixel, per tick:
-
-| Run | Direction | Ticks | Output | Captured |
-| --- | --- | --- | --- | --- |
-| `1x` | +x, with projection switches | 100 | 320×180 | every tick, 101 frames |
-| `3x-odd` | the same script | 100 | 961×541 | every 4 ticks, 26 frames |
-| `diag-1x` | −x, +y | 48 | 320×180 | every tick, 49 frames |
-| `diag2-1x` | +x, −y | 48 | 320×180 | every tick, 49 frames |
-
-The `x` script switches projection with this sequence:
-1. pixel perfect at the start;
-2. orthographic at tick 64;
-3. pixel perfect at tick 72;
-4. legacy perspective at tick 80;
-5. pixel perfect at tick 88.
-
-Each switch is visible from the following frame, as with 0030. Every capture
-stays within 128 frames and 256 MiB. The largest is about 54 MB raw.
-
-## Measured results
-
-All values come from `evidence/analysis-r3.json`, measured from PNG bytes.
-
-**Native logical frame.** The 320×180 frame has exactly 8 colours: the
-background plus 7 emissive colours. No pixel shows an intermediate edge colour.
-- Bar gauges measure 1,1,1,1 / 2,2,2,2 / 3,3,3,3 / 4,4,4,4 px with matching gaps, in
-  both directions.
-- All three checkers are 256/256 correct.
-- All 1000 ring pixels are amber.
-- All four corner markers are the right colour in the right corner.
-
-**Integer replication and letterboxing.** Every physical pixel is compared with
-the logical frame replicated by the expected scale and offset. The letterbox
-widths are also measured from the image alone, as whole backdrop rows and
-columns. The two methods agree everywhere, with 0 mismatched pixels.
+**Integer replication and letterboxing.** Every output has 0 mismatched pixels. The
+letterbox measured from the image alone matches the contract. Odd spare pixels go to
+the right and bottom.
 
 | Output | Scale | Left | Right | Top | Bottom |
 | --- | --- | --- | --- | --- | --- |
@@ -216,15 +437,6 @@ columns. The two methods agree everywhere, with 0 mismatched pixels.
 | 360×640 (portrait) | 1 | 20 | 20 | 230 | 230 |
 | 1280×360 (32:9) | 2 | 320 | 320 | 0 | 0 |
 
-- **Odd spare pixels.** These go to the right and bottom, as the contract requires.
-- **Colours.** Scaled outputs contain only the 8 scene colours plus the backdrop
-  `(20, 21, 25)`. Nothing is blurred or filtered.
-- **Block sizes.** Every block is exactly s × s pixels.
-- **Stretching.** Aspect is never stretched.
-
-Other logical configurations, each against its own scale-1 frame, also have 0
-mismatches:
-
 | Camera | Output | Scale | Left / Right | Top / Bottom |
 | --- | --- | --- | --- | --- |
 | 16 px/m, 160×90 | 320×180 | 2 | 0 / 0 | 0 / 0 |
@@ -233,146 +445,36 @@ mismatches:
 | 32 px/m, 255×143 | 320×180 | 1 | 32 / 33 | 18 / 19 |
 | 32 px/m, 255×143 | 960×540 | 3 | 97 / 98 | 55 / 56 |
 
-**Explicit failure.** Each of these cases exits 1 and writes no image:
+**Camera motion at 1x.** Each frame is compared with the base frame shifted by whole
+pixels. Every case has 0 residual mismatches, and every 960×540 version is an exact 3x
+replication.
 
-| Camera | Output | Error |
+| Camera offset, logical px | Content shift, corrected | Foundation, where different |
 | --- | --- | --- |
-| 320×180 | 319×180 | `viewport is smaller than the pixel-perfect camera's 320x180 logical resolution` |
-| 320×180 | 320×179 | the same |
-| 256×224 | 320×180 | the same, naming `256x224` |
+| x +0.25, +0.49, −0.49; y +0.49; depth +3.3 m | none | |
+| x +0.50 (tie) | none | −1 |
+| x −0.50 (tie) | +1 | |
+| y +0.50 (tie) | +1 down | |
+| y −0.50 (tie) | none | −1 |
+| x +0.51, +1.00, +1.49 | −1 | |
+| y −0.51 | −1 | |
+| x +2.3, y +2.3 | −2, +2 | |
 
-The 256×224 case is wider than its output needs but too short, so a single short
-dimension is enough to fail.
+**Appearance.** The appearance findings from the foundation review still hold:
+- edges are hard and blocks uniform;
+- aspect is never stretched;
+- the letterbox uses the neutral backdrop `(20, 21, 25)`, which is darker than the
+  card background `(48, 52, 63)`;
+- the camera is stable inside a cell, while orthographic motion shimmers on curves.
 
-**Camera motion.** Each frame is compared at 1x with the base frame shifted by a
-whole number of pixels. Every case has 0 residual mismatches. Every 960×540
-version is an exact 3x replication of its 1x frame.
+At 16 px/m, art smaller than one logical pixel is sampled honestly: the 1 px checker
+fills solid and half-pixel lines vanish. Authors should keep details at least one
+logical pixel wide.
 
-| Camera offset, logical px | Content shift | Hash equal to base |
-| --- | --- | --- |
-| x +0.25, +0.49, −0.49 | none | yes |
-| y +0.49 | none | yes |
-| depth +3.3 m | none | yes |
-| x +0.50 / −0.50 (tie) | −1 / +1 | no |
-| y +0.50 / −0.50 (tie) | +1 down / −1 | no |
-| x +0.51, +1.00, +1.49 | −1 | no |
-| y −0.51 | −1 | no |
-| x +2.3, y +2.3 | −2, +2 | no |
+## Inspector design, first round
 
-Inside a cell the frame is byte-identical, with no shimmer. Crossing the boundary
-moves the whole image by exactly one logical pixel. Exact ties round away from
-zero on both axes.
-
-**Roll.** These results show that snapping happens in the camera plane, including
-inherited roll:
-- A direct 90° roll and the same roll inherited from a parent rig are
-  byte-identical.
-- A rig offset of 0.3 px leaves the frame unchanged.
-- A rig offset of 0.7 px shifts it by exactly one pixel along the rolled camera's
-  vertical, with 0 mismatches.
-
-The 10° roll keeps its authored rotation. It renders crisp stair-stepped edges
-with no blended colours, and its 3x output replicates its 1x frame exactly.
-
-**Ordinary projections are retained.**
-- The orthographic twin at 320×180 is byte-identical to the pixel-perfect frame.
-- At 960×540 the orthographic twin renders at full resolution. 1507 pixels differ
-  from the pixel-perfect 3x frame: 288 on the disc edge, 1219 on the diagonals and
-  none elsewhere.
-- Neither ordinary projection letterboxes.
-
-**Live sequence.** Frame 0 equals the static base screenshot byte for byte.
-- **1x pixel frames.** In all three 1x runs, every pixel-perfect frame shows exactly
-  the predicted whole-pixel shift with 0 residual mismatches. That is 85, 49 and 49 frames.
-  The shift steps by exactly 1 px every 8 ticks and never moves backwards.
-- **Match with static screenshots.** Frames 4 to 11, at camera x from 0.5 to
-  1.375 px, equal the static +1.00 px screenshot outside the mover.
-- **Orthographic segment.** Ticks 65 to 72 differ from a pure translation by 21, 38,
-  106, 213, 112, 46, 28 and 0 pixels on the disc and diagonals. This is the
-  sub-pixel shimmer that pixel-perfect removes. It is 0 at tick 72, where the
-  camera sits exactly on a cell.
-- **961×541 run.** Every pixel-perfect frame is an exact 3x replication of the 1x
-  frame from the same tick, with 1 px of backdrop at the right and bottom. The
-  orthographic and perspective frames fill the whole output. Switching back
-  restores the letterbox on the next pixel-perfect frame.
-
-**Repeatability.**
-- Within each run, every screenshot pair and both `play` repeats are hash-equal.
-- Across the two from-scratch runs, `engine-r3` and `engine-r4`, all 341 screenshots
-  and live frames are byte-identical.
-- Authored project and journal bytes are unchanged by rendering and playback
-  within each run.
-- They differ between runs only because `init` assigns new project and scene IDs.
-
-## Appearance review
-
-I viewed the frames themselves, not only their statistics.
-
-- **Aliasing and blur.** Edges are hard everywhere. The 17° strip shows the
-  expected irregular steps, and the disc shows clean stair steps. Neither is
-  blurred or ghosted.
-- **Pixel blocks.** Blocks are uniform at 2x, 3x, 4x and 6x. No column or row is
-  doubled or dropped, including at odd sizes.
-- **Stretching.** None. 4:3, portrait, 32:9 and 8:7 all keep the card's proportions.
-- **Letterbox placement.** It is centred and uses the neutral backdrop
-  `(20, 21, 25)`. That is darker than the card's background `(48, 52, 63)`, so the
-  frame edge reads clearly without a bright border.
-- **Movement and stability.** The camera is perfectly stable inside a cell and
-  steps cleanly across cells. Orthographic motion at the same speed visibly
-  shimmers on curves and diagonals.
-- **Density mismatch is honest, not hidden.** The card's 1 px details are half a
-  logical pixel at 16 px/m:
-  - the 1 px checker becomes a solid white square;
-  - the 1 px bar group and the top and left ring sides vanish;
-  - the right and bottom ring sides survive.
-
-  This is point sampling of art below one logical pixel, not a renderer fault.
-  Authors should keep details at least one logical pixel wide at their camera's
-  density.
-
-Committed frames in `screenshots/engine/`:
-- `base-*`: every replication size.
-- `x+0.51` and `xy+2.3` at 960×540.
-- `roll10`, `rig90-base`, `ortho` and `persp` at 960×540.
-- The three other configurations.
-- Live 1x ticks 3, 4 and 5, where tick 4 is the follower flick.
-- Live 961×541 ticks 64 (pixel perfect), 68 (orthographic), 84 (perspective) and 92
-  (pixel perfect again).
-- Live diagonal tick 4.
-
-## Request for Astra: tie-break camera snapping to match the fill rule
-
-Severity is low to medium. Camera behaviour itself is exact. The flaw only shows on
-grid-aligned objects that move with the camera, such as a followed player.
-
-- **What happens.** The mover keeps a fixed offset from the camera, so it should hold
-  one screen position. In the +x run it jumps 1 px left on 11 of 85 pixel-perfect
-  frames: ticks 4, 12, 20 and every 8 ticks after. Those are exactly the ticks where
-  the camera sits on a half pixel. In the +x/−y run it jumps by (−1, −1) on 6 of 49
-  frames. In the −x/+y run it never moves.
-- **Why.** Snapping rounds ties away from zero, as the tie cameras measure. The
-  object's edge then lands exactly on a pixel centre. The rasterizer's top-left rule
-  includes a pixel whose centre lies on a left or top edge. A follower is stable
-  only when its offset from the snapped camera is:
-  - in (−0.5, 0.5] along camera right;
-  - in [−0.5, 0.5) along camera up.
-
-  Rounding away from zero violates this for +x and −y ties. The two measured
-  quadrants confirm the prediction in both directions.
-- **Fix.** Snap along camera right with `ceil(v - 0.5)` and along camera up with
-  `floor(v + 0.5)`. Here `v` is the camera-plane coordinate times pixels per unit.
-  In screen space, which points right and down, that rounds ties toward −∞ on both
-  axes. Everything else measured here is unchanged, because only exact ties move.
-- **Regression test.** Run the same scene with a grid-aligned follower moving
-  1/(8·ppu) per tick in all four diagonal directions. Its screen position must stay
-  constant.
-
-Ties are common in practice, because games often step in dyadic sub-pixel units
-such as 1/8 px. Followers that are not grid-aligned will still jitter by up to
-1 px. That is the stated contract, since objects are not snapped, and it is
-authoring guidance rather than a defect.
-
-## Inspector design
+The Inspector presentation is unchanged since `34f348d`. Handoff 0033 now owns the
+broader redesign, so this record documents the shipped state only.
 
 The Camera section keeps its schema order:
 
@@ -385,110 +487,61 @@ The Camera section keeps its schema order:
 | Near clip | `m` | |
 | Far clip | `m` | |
 
-- **Copy.** "Pixel density" with the schema's `px/m` unit reads as pixels per
-  metre without repeating it. The schema help, "Logical pixels per world metre.
-  Camera motion snaps to this grid.", is announced and shown on hover.
-  "Resolution" was first "Logical resolution". At the 280 px minimum the clamped
-  two-line label then cut off the `px` unit, which the first browser set measured,
-  so I shortened it.
-- **Width and height entries.** The visible prefixes are `W` and `H`. Their
-  accessible names are "Logical width" and "Logical height". The help reads "Fixed
-  logical width and height, scaled by whole pixels with letterboxing." The
-  prefixes use the neutral muted colour, not the X/Y axis tints, because they are
-  not spatial axes.
-- **Field of view.** The "Unused" tag's sentence is "Not used by pixel-perfect
-  projection. Kept for switching back to perspective."
-- **Strict "Unused" rule.** The tag appears only when the projection is well formed.
-  That means exactly `kind`, `pixels_per_unit` and `reference_resolution`, a finite
-  density from 1 to 4096, two whole sides from 16 to 4096, and at most 4,194,304
-  pixels. Anything else suppresses the tag and is still shown as authored.
-- **Malformed data stays visible.**
-  - A resolution with 1, 3 or 0 entries shows the dashed notice "Cannot show as 2
-    numbers (logical width and logical height); raw value:" with the raw JSON. It
-    never guesses a width or height.
-  - Missing or text density or resolution values show the existing number and list
-    mismatch notices.
-  - Extra fields are flagged by name.
-  - Out-of-range values are shown as authored, with the engine diagnostic attached
-    to the exact entry: `aria-invalid` on Height only for `/reference_resolution/1`.
-  - Unknown kinds now list "perspective, orthographic or pixel_perfect".
-- **Tiny numbers.** A density of 2.5e-6 shows as `2.5e-6`, with the exact value on
-  hover.
-- **Preserved behaviour.** Legacy cameras, the "Default" tag, explicit perspective,
-  orthographic rows and every existing test are unchanged.
-- **Read-only.** There is no selector, button or write path. The "Read-only" chip
-  stays. Tab order is Projection, Pixel density, Logical width, Logical height,
-  Field of view, Near clip, Far clip.
+- **Copy.** "Pixel density" with the schema's `px/m` reads as pixels per metre, and the
+  schema help is announced and shown on hover. "Resolution" replaced "Logical
+  resolution", which clipped its unit at the 280 px minimum width.
+- **Width and height entries.** The prefixes are `W` and `H`, in a neutral colour.
+  Their accessible names are "Logical width" and "Logical height".
+- **Strict "Unused" rule.** The field-of-view tag appears only for a well-formed
+  projection: exactly the three fields, a density from 1 to 4096, two whole sides from
+  16 to 4096, and at most 4,194,304 pixels.
+- **Malformed data stays visible.** A wrong-length resolution shows "Cannot show as 2
+  numbers (logical width and logical height); raw value:". Missing or text values use
+  the existing mismatch notices, extra fields are named, and out-of-range values are
+  shown as authored with the engine diagnostic on the exact entry.
+- **Read-only.** There are no new controls or write paths, and the "Read-only" chip
+  stays. Tab order follows the rows.
 
-Tests added or updated in `CameraFields.test.tsx`:
-- native schema parity, now requiring three variants, the density bounds and unit,
-  and the two-integer `px` resolution;
-- exact fixture equality with the native conversion;
-- pixel-perfect rows, names, help and neutral prefixes;
-- Tab order and read-only state;
-- wrong-length, missing, text and extra-field cases;
-- an out-of-range resolution with a diagnostic;
-- tiny and fractional densities;
-- axe on pixel-perfect and malformed cameras;
-- a 20-case `isPixelPerfectCamera` table and a non-mutation check.
+Tests covering this live in `editor/ui/src/components/inspector/CameraFields.test.tsx`.
+They include exact native-schema parity, three variants, the density bounds, the
+two-integer `px` resolution, keyboard order, malformed and out-of-range cases, tiny
+values, axe checks and a 20-case detection table.
 
-**Browser measurement** is recorded in `evidence/inspector-report.json`.
+Browser measurement from the first round is in `evidence/inspector-report.json`. It
+covers headless Chrome 155, seven states, and 1440×900 and 1000×650 with the
+280 px minimum. Across all 14 captures:
+- horizontal overflow, clipping, page errors, remote requests and axe violations
+  were all zero;
+- contrast was 7.98:1 for labels, 16.28:1 for values, 6.96:1 for units and 8.62:1
+  for tags.
 
-States, each at 1440×900 with a 331 px Inspector and at 1000×650 with the 280 px
-minimum, 14 captures in all:
-- legacy;
-- orthographic;
-- pixel perfect;
-- pixel perfect with keyboard focus;
-- short resolution list;
-- tiny density with 4096×1024;
-- out-of-range resolution with a diagnostic.
+These are browser captures, not native WebKit evidence.
 
-Results across all 14 captures:
-- zero horizontal overflow;
-- no clipped labels or values;
-- no page errors;
-- no remote requests;
-- zero axe violations, with the contrast rule enabled.
+## Native review, pending
 
-Contrast:
-
-| Element | Contrast |
-| --- | --- |
-| Labels | 7.98:1 |
-| Error label | 6.99:1 |
-| Values | 16.28:1 |
-| Units | 6.96:1 |
-| Tags | 8.62:1 |
-
-At 280 px, "Pixel density" wraps to two lines and the `px` unit drops under
-"Resolution", which is the shared vector-unit behaviour. Each W/H box is 75 px
-wide and fits `4096`.
-
-These are headless Chrome captures of the built UI. They are not native WebKit
-evidence. The short-list, tiny-large and out-of-range states use a labelled
-evidence test-double bridge that rejects every command.
-
-## Native captures requested from Astra
-
-After integrating this branch and rebuilding, please capture these states:
+The packet defers native review until handoff 0033's redesign is integrated. When it
+is, these native captures are still needed:
 - the sample "Pixel Camera" at 1440×874 and at the 280 px minimum;
 - a Tab-focus frame on Logical width or Logical height;
-- an out-of-range or short resolution camera;
+- an out-of-range or short-resolution camera;
 - a legacy camera, for regression.
 
 I will review them and commit only account-free crops.
 
 ## Limitations and open items
 
-- **Native acceptance** is open until native captures are reviewed.
-- **The tie-break request above** is open.
-- **Spacing in the accessible name.** Chrome computes a unit-bearing vector group's
-  name as "Resolution , in px", with a stray space before the comma. All existing
-  vector rows with units share this. It is harmless when spoken. It is noted for a
-  later shared FieldView pass and was not changed here.
-- **Unexercised path.** Native chrome masking at physical resolution is outside the
-  headless path and was not exercised.
-- **Scope of this verdict.** Sprites, atlases, tilemaps and 2D physics are not
-  implemented and not reviewed.
+- **The near-tie follow jump is open.** See "Request for Astra".
+- **Native acceptance is open,** for both the camera presentation and the 0033 redesign.
+- **Max effort in the first round.** The Inspector design and the first engine review
+  ran below Max. I re-ran the engine work at Max here; the Inspector design was not
+  re-reviewed.
+- **Sub-pixel precision.** 1/256 was measured on one Apple M5 Pro adapter through the
+  headless path. Other adapters were not tested.
+- **Untested camera rotations.** Pitched or yawed pixel-perfect cameras were not
+  exercised. Only roll about the view axis was.
+- **Followers off the grid.** Followers that are not grid-aligned still move by up to
+  1 px as they cross pixel centres. That is the stated contract, because objects are
+  not snapped.
+- **Native chrome masking** at physical resolution is outside the headless path and was
+  not exercised.
 - **Gate approval** remains human-owned. No phase gate is approved or claimed.

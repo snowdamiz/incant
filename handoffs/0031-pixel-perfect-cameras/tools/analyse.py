@@ -2,17 +2,30 @@
 """Measures pixel_lookdev.py output. Pure standard library; reads PNGs only.
 
 Usage (repo root):
-  python3 -I handoffs/0031-pixel-perfect-cameras/tools/analyse.py RUN_DIR OUT_JSON [OTHER_RUN_DIR]
+  python3 -I handoffs/0031-pixel-perfect-cameras/tools/analyse.py RUN_DIR OUT_JSON \
+      --rule {top-left,away-from-zero} [--repeat OTHER_RUN_DIR] \
+      [--baseline BASE_RUN_DIR --baseline-rule {top-left,away-from-zero}]
 
-OUT_JSON must not exist. With OTHER_RUN_DIR, every screenshot and live frame is
-also compared byte for byte with the other from-scratch run.
+--rule names how the binary under test documents half-pixel camera ties:
+  away-from-zero  foundation 04a39ac: both camera-plane axes round ties away from zero.
+  top-left        corrected 72ede59: camera-right ties round down, camera-up ties round
+                  up, matching top-left raster coverage. Odd logical sizes also frame
+                  half a pixel right/down; that phase is constant per camera.
+The rule only predicts where the camera content moves. The mover (a grid-aligned
+object travelling with the camera) must stay on its home pixels under either rule.
+
+--repeat compares every screenshot and live frame byte for byte with another
+from-scratch run of the same binary. --baseline compares them with a run of a
+different binary and checks that exactly the images the two rules predict to
+differ have changed. OUT_JSON must not exist. The handoff 0031 foundation analysis
+(analysis-r3.json) used the equivalent of --rule away-from-zero.
 """
 
+import argparse
 import hashlib
 import json
 import math
 import struct
-import sys
 import zlib
 from collections import Counter
 from pathlib import Path
@@ -220,9 +233,42 @@ def mover_box(img, green, region=(24, 64, 140, 170)):
     return [min(xs), max(xs) + 1, min(ys), max(ys) + 1] if xs else None
 
 
-def snap(v):
-    """Nearest integer, ties away from zero: the rule the static tie cameras measure."""
+def snap_right(rule, v):
+    """Snapped camera-right coordinate in logical pixels under `rule`."""
+    if rule == "top-left":
+        return math.ceil(v - 0.5)
     return int(math.copysign(math.floor(abs(v) + 0.5), v))
+
+
+def snap_up(rule, v):
+    """Snapped camera-up coordinate in logical pixels under `rule`."""
+    if rule == "top-left":
+        return math.floor(v + 0.5)
+    return int(math.copysign(math.floor(abs(v) + 0.5), v))
+
+
+def camera_plane_px(scene, name):
+    """(right, up) of a static camera's eye in logical pixels, for the cameras this helper authors."""
+    cam = scene["cameras"][name]
+    ppu = scene["ppu"]
+    if cam["rig"]:
+        # Rigs roll 90 deg about Z: camera right is world +Y, camera up is world -X.
+        return 0.0, -cam["rig_offset"] * ppu
+    if cam["rotation"] != [0.0, 0.0, 0.0, 1.0]:
+        return 0.0, 0.0  # rolled about its own eye at the origin: both coordinates are zero
+    return cam["translation"][0] * ppu, cam["translation"][1] * ppu
+
+
+def odd_pixel_camera(scene, name):
+    projection = scene["cameras"][name]["projection"]
+    return bool(projection and projection["kind"] == "pixel_perfect"
+                and any(d % 2 for d in projection["reference_resolution"]))
+
+
+def live_projection(script, tick):
+    """Projection kind visible in frame `tick`; a switch commanded at tick t shows from t + 1."""
+    kinds = [v for t, v in sorted((int(t), p) for t, p in script["switches"].items()) if t < tick]
+    return (kinds[-1] or {"kind": "perspective"})["kind"] if kinds else "pixel_perfect"
 
 
 def sha(path):
@@ -230,10 +276,19 @@ def sha(path):
 
 
 def main():
-    run, out = Path(sys.argv[1]), Path(sys.argv[2])
-    other = Path(sys.argv[3]) if len(sys.argv) > 3 else None
+    parser = argparse.ArgumentParser()
+    parser.add_argument("run", type=Path)
+    parser.add_argument("out", type=Path)
+    parser.add_argument("--rule", required=True, choices=["top-left", "away-from-zero"])
+    parser.add_argument("--repeat", type=Path)
+    parser.add_argument("--baseline", type=Path)
+    parser.add_argument("--baseline-rule", choices=["top-left", "away-from-zero"])
+    args = parser.parse_args()
+    run, out, other, rule = args.run, args.out, args.repeat, args.rule
     if out.exists():
         raise SystemExit("Output exists; choose a new file.")
+    if args.baseline and not args.baseline_rule:
+        raise SystemExit("--baseline needs --baseline-rule")
     scene = json.loads((run / "scene.json").read_text())
     lw, lh = scene["logical"]
     cache = {}
@@ -243,7 +298,7 @@ def main():
             cache[name] = read_png(run / "shots" / f"{name}-r1.png")
         return cache[name]
 
-    report = {"run": str(run)}
+    report = {"run": str(run), "rule": rule}
     base = shot("base-320x180")
     hist = colours(base[2])
     report["palette_1x"] = {str(tuple(k)): v for k, v in hist.most_common()}
@@ -282,12 +337,15 @@ def main():
     report["other_configs"] = configs
 
     # Camera motion at 1x relative to the base camera. Expected: content moves by
-    # -round(dx_px) horizontally and +round(dy_px) vertically (screen y points down).
+    # -snap_right(dx_px) horizontally and +snap_up(dy_px) vertically (screen y points down).
     motion = {}
     for cam in ("x+0.25", "x+0.49", "x-0.49", "x+0.50", "x-0.50", "x+0.51", "x+1.00", "x+1.49", "y+0.49",
                 "y+0.50", "y-0.50", "y-0.51", "xy+2.3", "depth+3.3"):
         img = shot(f"{cam}-320x180")
         m = best_shift(base, img)
+        r_px, u_px = camera_plane_px(scene, cam)
+        m["expected"] = [-snap_right(rule, r_px), snap_up(rule, u_px)]
+        m["as_expected"] = [m["dx"], m["dy"]] == m["expected"] and m["mismatched"] == 0
         m["identical_to_base"] = img[2] == base[2]
         m["hash_equal_to_base"] = sha(run / "shots" / f"{cam}-320x180-r1.png") == sha(run / "shots" / "base-320x180-r1.png")
         r3 = replication(shot(f"{cam}-960x540"), img)
@@ -302,6 +360,9 @@ def main():
         "roll90_equals_rig90_base": roll90[2] == rig[2],
         "rig90+0.3_vs_rig90_base": best_shift(rig, shot("rig90+0.3-320x180")),
         "rig90+0.7_vs_rig90_base": best_shift(rig, shot("rig90+0.7-320x180")),
+        "rig_expected": {name: [-snap_right(rule, camera_plane_px(scene, name)[0]),
+                                snap_up(rule, camera_plane_px(scene, name)[1])]
+                         for name in ("rig90+0.3", "rig90+0.7")},
         "roll10_distinct_colours_1x": len(colours(shot("roll10-320x180")[2])),
         "roll10_3x_replicates_its_1x": replication(shot("roll10-960x540"), shot("roll10-320x180")),
     }
@@ -341,7 +402,7 @@ def main():
             kind = (kinds[-1] or {"kind": "perspective"})["kind"] if kinds else "pixel_perfect"
             img = read_png(p)
             cx, cy = ux * tick * step * ppu, uy * tick * step * ppu
-            expect = (-snap(cx), snap(cy))
+            expect = (-snap_right(rule, cx), snap_up(rule, cy))
             entry = {"tick": tick, "projection": kind, "camera_px": [cx, cy], "expected_shift": expect,
                      "mover": mover_box(img, green)}
             if kind != "perspective":
@@ -388,8 +449,46 @@ def main():
         report["from_scratch_comparison"] = {"other": str(other), "compared": len(same),
                                              "equal": sum(same.values()),
                                              "different": [k for k, v in same.items() if not v]}
+    if args.baseline:
+        report["baseline_comparison"] = compare_baseline(run, args.baseline, scene, rule, args.baseline_rule)
     out.write_text(json.dumps(report, indent=1, default=list), encoding="utf-8")
     print(json.dumps({k: report[k] for k in ("background", "base_replication")}, default=list)[:3000])
+
+
+def compare_baseline(run, baseline, scene, rule, baseline_rule):
+    """Image-by-image comparison with a run of another binary, against the rules' prediction."""
+    ppu, step = scene["ppu"], scene["live"]["step"]
+    cameras = sorted(scene["cameras"], key=len, reverse=True)
+    changed, identical, predicted = [], [], set()
+    for p in sorted((run / "shots").glob("*-r1.png")):
+        stem = p.name[:-7]
+        name = next(c for c in cameras if stem.startswith(c + "-"))
+        r_px, u_px = camera_plane_px(scene, name)
+        projection = scene["cameras"][name]["projection"]
+        if projection and projection["kind"] == "pixel_perfect" and (
+                odd_pixel_camera(scene, name)
+                or snap_right(rule, r_px) != snap_right(baseline_rule, r_px)
+                or snap_up(rule, u_px) != snap_up(baseline_rule, u_px)):
+            predicted.add(f"shots/{p.name}")
+        q = baseline / "shots" / p.name
+        (identical if q.exists() and sha(p) == sha(q) else changed).append(f"shots/{p.name}")
+    for key, spec in scene["live"]["runs"].items():
+        script = scene["live"]["scripts"][spec["script"]]
+        ux, uy = script["direction"]
+        for p in sorted((run / f"live-{key}-r1").glob("frame-*.png")):
+            tick = int(p.stem.split("-")[1])
+            cx, cy = ux * tick * step * ppu, uy * tick * step * ppu
+            if live_projection(script, tick) == "pixel_perfect" and (
+                    snap_right(rule, cx) != snap_right(baseline_rule, cx)
+                    or snap_up(rule, cy) != snap_up(baseline_rule, cy)):
+                predicted.add(f"live-{key}-r1/{p.name}")
+            q = baseline / f"live-{key}-r1" / p.name
+            (identical if q.exists() and sha(p) == sha(q) else changed).append(f"live-{key}-r1/{p.name}")
+    changed_set = set(changed)
+    return {"baseline": str(baseline), "baseline_rule": baseline_rule, "compared": len(changed) + len(identical),
+            "identical": len(identical), "changed": sorted(changed_set), "predicted": sorted(predicted),
+            "unexpected_changes": sorted(changed_set - predicted),
+            "predicted_but_identical": sorted(predicted - changed_set)}
 
 
 if __name__ == "__main__":
