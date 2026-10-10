@@ -53,6 +53,16 @@ within its documented workload.
 
 ## Active work
 
+- Checked binary scenes and a real native Bevy world now form the first runtime
+  migration slice. Authoring-side cooking supports Transform/Velocity/hierarchy
+  and rejects every unmigrated component explicitly. A standalone runtime runs
+  after project/journal deletion, with direct bulk mutation and on-demand typed
+  snapshots. Workspace Clippy, 329 Rust tests, 41 GPU checks, 15 tool tests,
+  portable WASM/iOS compilation and contracts pass. The dependency guard covers
+  the real native-world crate. Legacy PlaySession integration, the other systems,
+  script bindings, structural changes, saves and performance gates remain open.
+  See [native-world evidence](docs/spikes/cooked-native-world.md).
+
 - The first runtime boundary extraction moves shared component values into
   `incant_types`, retaining incant_doc re-exports and identical generated schemas
   and SDK. Workspace Clippy, 318 Rust tests, 41 GPU checks, 12 tool tests and

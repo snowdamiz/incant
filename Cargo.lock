@@ -587,6 +587,7 @@ dependencies = [
  "critical-section",
  "foldhash 0.2.0",
  "futures-channel",
+ "futures-lite",
  "hashbrown 0.16.1",
  "js-sys",
  "portable-atomic",
@@ -652,9 +653,12 @@ version = "0.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1f787d4ba7237b64b30bd2d690a8cbae1ba775e0eec326711c446654cb720e7c"
 dependencies = [
+ "async-channel",
+ "async-executor",
  "async-task",
  "atomic-waker",
  "bevy_platform",
+ "concurrent-queue",
  "crossbeam-queue",
  "derive_more",
  "futures-lite",
@@ -3529,6 +3533,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_cook"
+version = "0.0.1"
+dependencies = [
+ "incant_doc",
+ "incant_runtime",
+ "serde_json",
+ "thiserror 2.0.21",
+ "ulid",
+]
+
+[[package]]
 name = "incant_core"
 version = "0.0.1"
 dependencies = [
@@ -3709,6 +3724,17 @@ dependencies = [
  "tempfile",
  "thiserror 2.0.21",
  "wgpu",
+]
+
+[[package]]
+name = "incant_runtime"
+version = "0.0.1"
+dependencies = [
+ "bevy_ecs",
+ "glam 0.32.1",
+ "incant_types",
+ "sha2 0.10.9",
+ "thiserror 2.0.21",
 ]
 
 [[package]]

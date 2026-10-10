@@ -25,6 +25,7 @@ bevy_ecs = { version = "=0.19.1", default-features = false, features = ["std"] }
 rquickjs = "=0.14.0"
 cpu-time = "=1.0.0"
 incant_types = { path = "crates/incant_types" }
+incant_runtime = { path = "crates/incant_runtime" }
 incant_doc = { path = "crates/incant_doc", default-features = false }
 incant_cmd = { path = "crates/incant_cmd" }
 incant_core = { path = "crates/incant_core" }

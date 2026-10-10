@@ -23,9 +23,9 @@ jobs:
       - run: npm ci
       - run: python3 tools/generate_conventions.py --check
       - run: npm run test:tools
-      # First extracted runtime boundary; add incant_runtime when the real world
-      # implementation lands. This does not certify the legacy PlaySession.
-      - run: python3 tools/check_runtime_dependencies.py incant_types
+      # Check the real binary-scene/native-world slice and its shared values.
+      # The legacy PlaySession still requires migration and is not certified here.
+      - run: python3 tools/check_runtime_dependencies.py incant_types incant_runtime
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui
@@ -43,6 +43,8 @@ jobs:
         run: python3 tools/validate_ktx.py
       - run: cargo build -p incant_editor --release --features custom-protocol --locked
       - run: cargo run -p incant_headless --release --locked -- schema schemas
+      - run: cargo build -p incant_cook -p incant_runtime --examples --release --locked
+      - run: python3 tools/probes/cooked-runtime.py artifacts/cooked-runtime-cli
       - run: python3 tools/probes/physics-runtime.py artifacts/physics-runtime-cli
       - run: python3 tools/probes/character-movement.py artifacts/character-movement-cli
       - run: python3 tools/probes/compound-colliders.py artifacts/compound-colliders-cli
