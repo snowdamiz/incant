@@ -553,3 +553,131 @@ registry (Astra) or the UI.
    pointer-click focus evidence.
 3. **Optional.** A capture of the Agent empty state at 180 px divider height, if
    Observation 2 is scheduled.
+
+---
+
+# Follow-up: compact Agent empty state
+
+## Status
+
+**Fixed and checked in the browser fixture. Native verification is pending
+Astra's rebuild and recapture.** No phase gate is approved. Component ordering is
+unchanged, as directed.
+
+Exact model and transport: Claude Opus 5.5, model ID `claude-opus-5-5`, through
+the director's Claude subscription via ACP. No model substitution occurred.
+
+### Director feedback acknowledged
+
+This is a small follow-up within this packet, so no separate task was needed.
+The scope is only compact-panel clipping, scrolling and accessibility.
+- **Unchanged:** the neutral styling; the left Assets, main Inspector and
+  bottom-diagnostics arrangement; capabilities; engine logic; component order.
+- **Not touched:** Rust and the motion fixtures.
+
+## Cause, as measured in the browser fixture
+
+`?fixture=sample&provider=signed-in` reproduces the native state: the account is
+connected and the agent is unavailable ("Agent not ready"). With the Agent
+splitter at its 180 px minimum (set with the keyboard Home key, as in the native
+captures), the transcript box above the composer is **62 px tall, but the
+centred empty state needs 149 px**. The 28 px mark, its margin, the title and
+three lines of body text push the title behind the composer.
+
+Chrome's axe also reported `scrollable-region-focusable` on `.agent__transcript`.
+The overflowing region had no keyboard stop, which WebKit needs.
+
+The default height at 1000×650 (260 px panel, 142 px transcript) already
+overflowed by 7 px. Wide layouts have 179 px and fit.
+
+## Fix
+
+- **CSS (`app.css`).** `.agent__transcript` is now a size container. Below
+  160 px it switches to the compact layout:
+  - the mark is hidden
+  - the title is 13/18 and the body 12/16
+  - padding is 6 px with no gap
+  - the text stays centred, as in the full state
+
+  When the text overflows, the auto margins resolve to 0, so the title stays
+  at the top and the rest scrolls instead of sliding under the composer. The
+  transcript also gets a `:focus-visible` ring.
+- **`AgentPanel.tsx`.** A small `useOverflow` hook (ResizeObserver) sets
+  `tabIndex=0` on the transcript only while its content overflows. Keyboard users
+  can then focus it and scroll with arrows or End. When everything fits, there
+  is no extra Tab stop. No text or capability changed.
+- **`AgentPanel.test.tsx` (new).** Two behaviour tests with stubbed heights: the
+  transcript becomes a keyboard stop when it overflows, and adds no tab stop when
+  the text fits.
+
+Container queries need Safari/WebKit 16 or later, which the macOS WKWebView
+target supports. This still needs native confirmation (request 1).
+
+## Browser fixture evidence (Chrome, DPR 2; synthetic, not native)
+
+Tool: `handoffs/0022-physics-inspector/tools/capture-agent.mjs <set>`. It records
+transcript box and content heights, element visibility, Tab focus, keyboard
+scrolling and axe for each state.
+
+| State | Transcript box / content | Title | Body | Transcript tabindex | axe |
+| --- | --- | --- | --- | --- | --- |
+| Before: 180 px, signed in | 62 / 149 | **hidden behind composer** | hidden | none | `scrollable-region-focusable` |
+| After: 180 px, signed in | 62 / 62 | visible | visible (2 lines) | none (fits) | 0 |
+| After: 180 px, signed out (ChatGPT button in bar) | 62 / 62 | visible | visible | none | 0 |
+| After: 180 px, native reason probe¹ | 62 / 78 | visible | 3rd line scrolls | **0** (Tab focuses it; End scrolls 11 px) | 0 |
+| After: default 1000×650 (260 px panel) | 142 / 142 | visible, centred | visible | none | 0 |
+| After: default 1440×900, signed in and signed out | 179 / 179 | full layout with mark, unchanged | visible | none | 0 |
+
+¹ This is a layout probe only. The capture replaces the rendered body text with
+the native build's longer reason ("Use the headless agent command for the Phase
+0 provider spike. …") to exercise the overflow path. It is not a different app
+state. At 180 px the native text wraps to three lines at 12 px. The title and
+two lines stay visible, and the rest can be reached with the keyboard.
+
+**Pixel review:**
+- **Before** (`screenshots/agent-before/agent-180-signed-in-agent.png`): the
+  title is cut in half by the composer.
+- **After at 180 px:** the title and both body lines sit cleanly above the
+  composer with even spacing (`screenshots/agent-after/agent-180-*-agent.png`).
+- **Probe:** the focus ring and the scrolled state are captured
+  (`agent-180-native-reason-probe{,-scrolled}-agent.png`).
+- **Default 1000×650:** the text is centred in the box, without the mark.
+- **Wide:** unchanged.
+
+**Regression check.** I reran the physics capture set (`agent-regression`):
+- **Inspector crops.** All 12 are byte-identical to the previous round.
+- **1440 full windows.** All are byte-identical.
+- **1000 full windows.** They differ only inside the Agent column (x 699–981 px),
+  as the compact default intends.
+
+Every capture had 0 axe violations, no errors, no overflow and no clipped
+inputs. The bottom dock still shows only Problems, Console and History.
+
+## Commands and results
+
+| Command | Result |
+| --- | --- |
+| `npm run test --workspace editor/ui` | 14 files, **315 passed** (313 plus 2 new) |
+| `npm run build --workspace editor/ui` | ok, strict tsc; Vite reports 105.26 kB gzip (≈ 102.8 KiB; budget 110 KiB) |
+| `node handoffs/0022-physics-inspector/tools/capture-agent.mjs agent-before`, then `agent-after` | 5 and 6 states; results above |
+| `node handoffs/0022-physics-inspector/tools/capture-inspector.mjs agent-regression` | 12 states; Inspector unchanged |
+
+## Changed paths
+
+- `editor/ui/src/components/AgentPanel.tsx`, `editor/ui/src/components/AgentPanel.test.tsx` (new)
+- `editor/ui/src/styles/app.css`: Agent compact container query and transcript focus ring
+- `handoffs/0022-physics-inspector/tools/capture-agent.mjs` (new)
+- `handoffs/0022-physics-inspector/screenshots/agent-before/`, `agent-after/`, `agent-regression/report.json`, `result.md`
+
+## Requests for Astra (native, CUA only, after integration and rebuild)
+
+1. **Agent panel at 180 px.** At minimum size, set the divider with Home and
+   capture the "Agent not ready" panel. Expected: no mark, title fully visible,
+   and the reason text above the composer. With the native reason, the third
+   line should be reachable: Tab to "Agent conversation", which shows a focus
+   ring, then press End. Capture before and after scrolling. Also capture the
+   default minimum height (260 px) and the wide layout, to check for regressions.
+2. **Mouse-free Tab focus,** as requested earlier, on Ball's Shape and Memberships.
+3. **AX recapture** to confirm that fields are named by their visible label
+   (`text field Friction`, `checkbox CCD`), and to record the transcript node's
+   focusability at 180 px.

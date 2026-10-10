@@ -1,0 +1,491 @@
+{
+  "set": "agent-after",
+  "generated": "2026-10-09T23:59:41.259Z",
+  "browser": "155.0.8059.40",
+  "captures": [
+    {
+      "file": "agent-180-signed-in.png",
+      "crop": "agent-180-signed-in-agent.png",
+      "key": "agent-180-signed-in",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "provider": "signed-in",
+      "minimum": true,
+      "measure": {
+        "panel": {
+          "x": 680,
+          "y": 442,
+          "width": 320,
+          "height": 180,
+          "bottom": 622
+        },
+        "transcript": {
+          "x": 680,
+          "y": 478,
+          "width": 320,
+          "height": 62,
+          "bottom": 540,
+          "scrollHeight": 62,
+          "clientHeight": 62
+        },
+        "composer": {
+          "x": 692,
+          "y": 540,
+          "width": 296,
+          "height": 70,
+          "bottom": 610
+        },
+        "mark": {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bottom": 0
+          },
+          "visible": false
+        },
+        "title": {
+          "text": "Agent not ready",
+          "rect": {
+            "x": 791,
+            "y": 484,
+            "width": 99,
+            "height": 18,
+            "bottom": 502
+          },
+          "visible": true
+        },
+        "body": {
+          "rect": {
+            "x": 696,
+            "y": 502,
+            "width": 288,
+            "height": 32,
+            "bottom": 534
+          },
+          "visible": true
+        },
+        "separator": "180",
+        "transcriptTabIndex": null,
+        "activeElement": "send-button",
+        "activeOutline": "solid",
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "keyboardScrollTop": null
+    },
+    {
+      "file": "agent-180-signed-out.png",
+      "crop": "agent-180-signed-out-agent.png",
+      "key": "agent-180-signed-out",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "provider": "signed-out",
+      "minimum": true,
+      "measure": {
+        "panel": {
+          "x": 680,
+          "y": 442,
+          "width": 320,
+          "height": 180,
+          "bottom": 622
+        },
+        "transcript": {
+          "x": 680,
+          "y": 478,
+          "width": 320,
+          "height": 62,
+          "bottom": 540,
+          "scrollHeight": 62,
+          "clientHeight": 62
+        },
+        "composer": {
+          "x": 692,
+          "y": 540,
+          "width": 296,
+          "height": 70,
+          "bottom": 610
+        },
+        "mark": {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bottom": 0
+          },
+          "visible": false
+        },
+        "title": {
+          "text": "Use your ChatGPT account",
+          "rect": {
+            "x": 757,
+            "y": 484,
+            "width": 167,
+            "height": 18,
+            "bottom": 502
+          },
+          "visible": true
+        },
+        "body": {
+          "rect": {
+            "x": 696,
+            "y": 502,
+            "width": 288,
+            "height": 32,
+            "bottom": 534
+          },
+          "visible": true
+        },
+        "separator": "180",
+        "transcriptTabIndex": null,
+        "activeElement": "button button--chatgpt button--small",
+        "activeOutline": "solid",
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "keyboardScrollTop": null
+    },
+    {
+      "file": "agent-180-native-reason-probe.png",
+      "crop": "agent-180-native-reason-probe-agent.png",
+      "key": "agent-180-native-reason-probe",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "provider": "signed-in",
+      "minimum": true,
+      "probeText": "Use the headless agent command for the Phase 0 provider spike. Everything else works offline, no account needed.",
+      "measure": {
+        "panel": {
+          "x": 680,
+          "y": 442,
+          "width": 320,
+          "height": 180,
+          "bottom": 622
+        },
+        "transcript": {
+          "x": 680,
+          "y": 478,
+          "width": 320,
+          "height": 62,
+          "bottom": 540,
+          "scrollHeight": 78,
+          "clientHeight": 62
+        },
+        "composer": {
+          "x": 692,
+          "y": 540,
+          "width": 296,
+          "height": 70,
+          "bottom": 610
+        },
+        "mark": {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bottom": 0
+          },
+          "visible": false
+        },
+        "title": {
+          "text": "Agent not ready",
+          "rect": {
+            "x": 791,
+            "y": 484,
+            "width": 99,
+            "height": 18,
+            "bottom": 502
+          },
+          "visible": true
+        },
+        "body": {
+          "rect": {
+            "x": 696,
+            "y": 502,
+            "width": 288,
+            "height": 48,
+            "bottom": 550
+          },
+          "visible": false
+        },
+        "separator": "180",
+        "transcriptTabIndex": "0",
+        "activeElement": "agent__transcript",
+        "activeOutline": "solid",
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "keyboardScrollTop": 11
+    },
+    {
+      "file": "agent-default-signed-in-1000.png",
+      "crop": "agent-default-signed-in-1000-agent.png",
+      "key": "agent-default-signed-in-1000",
+      "size": {
+        "width": 1000,
+        "height": 650
+      },
+      "provider": "signed-in",
+      "measure": {
+        "panel": {
+          "x": 680,
+          "y": 362,
+          "width": 320,
+          "height": 260,
+          "bottom": 622
+        },
+        "transcript": {
+          "x": 680,
+          "y": 398,
+          "width": 320,
+          "height": 142,
+          "bottom": 540,
+          "scrollHeight": 142,
+          "clientHeight": 142
+        },
+        "composer": {
+          "x": 692,
+          "y": 540,
+          "width": 296,
+          "height": 70,
+          "bottom": 610
+        },
+        "mark": {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "bottom": 0
+          },
+          "visible": false
+        },
+        "title": {
+          "text": "Agent not ready",
+          "rect": {
+            "x": 791,
+            "y": 444,
+            "width": 99,
+            "height": 18,
+            "bottom": 462
+          },
+          "visible": true
+        },
+        "body": {
+          "rect": {
+            "x": 696,
+            "y": 462,
+            "width": 288,
+            "height": 32,
+            "bottom": 494
+          },
+          "visible": true
+        },
+        "separator": "260",
+        "transcriptTabIndex": null,
+        "activeElement": "send-button",
+        "activeOutline": "solid",
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "keyboardScrollTop": null
+    },
+    {
+      "file": "agent-default-signed-in-1440.png",
+      "crop": "agent-default-signed-in-1440-agent.png",
+      "key": "agent-default-signed-in-1440",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "provider": "signed-in",
+      "measure": {
+        "panel": {
+          "x": 1109,
+          "y": 575,
+          "width": 331,
+          "height": 297,
+          "bottom": 872
+        },
+        "transcript": {
+          "x": 1109,
+          "y": 611,
+          "width": 331,
+          "height": 179,
+          "bottom": 790,
+          "scrollHeight": 179,
+          "clientHeight": 179
+        },
+        "composer": {
+          "x": 1121,
+          "y": 790,
+          "width": 307,
+          "height": 70,
+          "bottom": 860
+        },
+        "mark": {
+          "rect": {
+            "x": 1260,
+            "y": 638,
+            "width": 28,
+            "height": 28,
+            "bottom": 666
+          },
+          "visible": true
+        },
+        "title": {
+          "text": "Agent not ready",
+          "rect": {
+            "x": 1221,
+            "y": 680,
+            "width": 106,
+            "height": 20,
+            "bottom": 700
+          },
+          "visible": true
+        },
+        "body": {
+          "rect": {
+            "x": 1150,
+            "y": 706,
+            "width": 248,
+            "height": 57,
+            "bottom": 763
+          },
+          "visible": true
+        },
+        "separator": "297",
+        "transcriptTabIndex": null,
+        "activeElement": "send-button",
+        "activeOutline": "solid",
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "keyboardScrollTop": null
+    },
+    {
+      "file": "agent-default-signed-out-1440.png",
+      "crop": "agent-default-signed-out-1440-agent.png",
+      "key": "agent-default-signed-out-1440",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "provider": "signed-out",
+      "measure": {
+        "panel": {
+          "x": 1109,
+          "y": 575,
+          "width": 331,
+          "height": 297,
+          "bottom": 872
+        },
+        "transcript": {
+          "x": 1109,
+          "y": 611,
+          "width": 331,
+          "height": 179,
+          "bottom": 790,
+          "scrollHeight": 179,
+          "clientHeight": 179
+        },
+        "composer": {
+          "x": 1121,
+          "y": 790,
+          "width": 307,
+          "height": 70,
+          "bottom": 860
+        },
+        "mark": {
+          "rect": {
+            "x": 1260,
+            "y": 638,
+            "width": 28,
+            "height": 28,
+            "bottom": 666
+          },
+          "visible": true
+        },
+        "title": {
+          "text": "Use your ChatGPT account",
+          "rect": {
+            "x": 1185,
+            "y": 680,
+            "width": 180,
+            "height": 20,
+            "bottom": 700
+          },
+          "visible": true
+        },
+        "body": {
+          "rect": {
+            "x": 1150,
+            "y": 706,
+            "width": 248,
+            "height": 57,
+            "bottom": 763
+          },
+          "visible": true
+        },
+        "separator": "297",
+        "transcriptTabIndex": null,
+        "activeElement": "button button--chatgpt button--small",
+        "activeOutline": "solid",
+        "outputTabs": [
+          "Hierarchy19 entities",
+          "Assets7 assets",
+          "Problems(6)",
+          "Console(5)",
+          "History(5)"
+        ]
+      },
+      "axe": [],
+      "errors": [],
+      "keyboardScrollTop": null
+    }
+  ]
+}
