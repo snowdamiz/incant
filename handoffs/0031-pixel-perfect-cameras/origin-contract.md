@@ -605,3 +605,9 @@ head and tail of /tmp/incant-pixel-camera-precision-before.log
 
 Not run: Cargo, Clippy, the GPU tests, any build, the headless binary, screenshots,
 captures and UI tests. This session produced no screenshots.
+
+## Clarification, 2026-10-10
+
+[origin-contract-clarification.md](origin-contract-clarification.md) withdraws §3 rule 6.
+It makes attachment, rather than a tolerance test, the source of follower stillness, and it
+corrects the §2 and §4 claim about marked children. The text above is unchanged as history.
