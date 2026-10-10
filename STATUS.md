@@ -71,7 +71,9 @@ within its documented workload.
   an ungrounded logical walker 5 cm above a flat platform; exact source heights
   remain open. The steering correction is integrated at `61cf71d`; all 289 Rust
   tests, Clippy, both public saved workflows and native packaging pass again.
-  Updated steering visual review and hosted checks remain pending. See [off-mesh links](docs/spikes/navigation-links.md).
+  At `2568cf5`, all 291 Rust tests, Clippy, both public saved workflows and native
+  packaging pass with the final steering correction, whose rendered review now
+  passes too. Hosted checks and dependency merges remain pending. See [off-mesh links](docs/spikes/navigation-links.md).
 
 - Bounded local avoidance exposes read-only `api.steerAgents` proposals for up
   to 128 agents. Library and public 100-agent save/reopen workflows pass.
