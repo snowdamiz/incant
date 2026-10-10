@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import axe from 'axe-core';
 import { afterEach, describe, expect, it } from 'vitest';
 import { App } from '../../App';
@@ -237,14 +237,25 @@ describe('compound parts', () => {
       })),
     };
     const { container } = show(many, [diagnostic('/shape/parts/41/shape/radius')]);
-    expect(rows()).toHaveLength(64);
+    // Bounded: only rows near the scroll position are mounted, each telling its place in all 64,
+    // plus the selected row (the single Tab stop) even though it starts outside that window.
+    expect(rows().length).toBeLessThan(64);
+    expect(rows().every((row) => row.getAttribute('aria-setsize') === '64')).toBe(true);
     expect(container.querySelector('.object-list__summary')?.textContent).toBe('64 parts · 32 box, 32 sphere');
     expect(rows().filter((row) => row.tabIndex === 0).map((row) => row.dataset.index)).toEqual(['41']);
     expect(detail().textContent).toContain('Part 42 of 64');
     // Only the selected part's fields exist: ID, 3 offset, 4 rotation, shape tag and radius.
     expect(within(detail()).getAllByRole('textbox')).toHaveLength(10);
     const results = await axe.run(container, { rules: { 'color-contrast': { enabled: false } } });
-    expect(results.violations.map((v) => v.id)).toEqual([]);
+    expect(results.violations.map((v) => v.id)).toEqual([]);    // Keyboard moves reach rows that were not mounted: End selects and mounts part 64.
+    const listbox = screen.getByRole('listbox', { name: 'Parts' });
+    act(() => rows().find((row) => row.tabIndex === 0)!.focus());
+    fireEvent.keyDown(listbox, { key: 'End' });
+    await waitFor(() => expect(detail().textContent).toContain('Part 64 of 64'));
+    expect(rows().find((row) => row.dataset.index === '63')?.getAttribute('aria-selected')).toBe('true');
+    expect(rows().length).toBeLessThan(64);
+    fireEvent.keyDown(listbox, { key: 'Home' });
+    await waitFor(() => expect(detail().textContent).toContain('Part 1 of 64'));
   });
 
   it('starts each entity at its own first problem rather than keeping another entity’s selection', () => {
@@ -297,7 +308,9 @@ describe('compound parts in the editor', () => {
       return element;
     });
     const collider = within(inspector).getByRole('region', { name: 'Collider' });
-    expect(within(collider).getAllByRole('option')).toHaveLength(64);
+    const options = within(collider).getAllByRole('option');
+    expect(options.length).toBeLessThan(64);
+    expect(options[0]!.getAttribute('aria-setsize')).toBe('64');
     expect([...collider.querySelectorAll('input')].every((input) => input.readOnly)).toBe(true);
     expect([...collider.querySelectorAll('button')].map((b) => b.className)).toEqual(['component__toggle']);
     // Material and collision rows are unchanged beneath the parts.

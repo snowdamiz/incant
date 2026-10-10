@@ -293,7 +293,7 @@ describe('physics component layout', () => {
       expect(element.textContent).toContain('Crate 01');
       return element;
     });
-    const body = within(inspector).getByRole('region', { name: 'RigidBody' });
+    const body = within(inspector).getByRole('region', { name: 'Rigid Body' });
     expect((within(body).getByRole('textbox', { name: 'Motion' }) as HTMLInputElement).value).toBe('dynamic');
     const damping = within(body).getByRole('group', { name: 'Gravity and damping' });
     expect((within(damping).getByRole('textbox', { name: 'Gravity scale' }) as HTMLInputElement).value).toBe('1');
@@ -318,7 +318,7 @@ describe('physics component layout', () => {
     expect(within(collision).getByRole('checkbox', { name: 'Sensor' }).getAttribute('aria-checked')).toBe('false');
     expect(within(collision).getAllByText('All groups')).toHaveLength(2);
 
-    const angular = within(inspector).getByRole('region', { name: 'AngularVelocity' });
+    const angular = within(inspector).getByRole('region', { name: 'Angular Velocity' });
     const vector = within(angular).getByRole('group', { name: /Angular/ });
     expect(vector.closest('.field')?.querySelector('.field__unit')?.textContent).toContain('rad/s');
     expect(within(vector).getAllByRole('textbox').map((input) => (input as HTMLInputElement).value)).toEqual(['0', '1.5708', '0']);

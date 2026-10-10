@@ -5,10 +5,10 @@ import { defaultUsage, draftProblems, filledRows, useAssets } from '../../assets
 import type { DraftRow, ImportOutcome } from '../../assets/AssetsContext';
 import { ACCEPTED_FORMATS, MAX_BATCH, USAGE_HINT, USAGE_LABEL, isConflict, kindLabel, sourceKind, splitPaste } from '../../assets/paths';
 import { Icon, iconForKind } from '../../icons/Icon';
-import type { IconName } from '../../icons/Icon';
 import { useShell } from '../../shell/ShellContext';
 import { StateView } from '../StateView';
 import { assetRowId, countFiles, importAvailability } from '../../assets/library';
+import { IdentityHeader } from '../inspector/IdentityHeader';
 import type { ImportAvailability } from '../../assets/library';
 
 /** A path that wraps after each "/" rather than mid-name. Text only; never parsed as markup. */
@@ -73,44 +73,65 @@ function scrollPaneTop() {
   document.getElementById('asset-inspector')?.closest('.panel__scroll')?.scrollTo?.({ top: 0 });
 }
 
-/**
- * The Inspector body while the Assets view is active: the selected asset's details and
- * reimport, or the import form. Entity details stay in the same column for the
- * Hierarchy view, so "select on the left, inspect on the right" holds for both.
- */
-export function AssetInspector() {
-  const { snapshot, bridge, capabilities, showPanel } = useShell();
-  const { pane, selected } = useAssets();
-  const assets = snapshot?.assets?.status === 'ready' ? snapshot.assets.value : [];
-  const availability = importAvailability(snapshot, bridge, capabilities);
-  const asset = pane === 'details' ? assets.find((candidate) => candidate.id === selected) : undefined;
-
-  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+/** Escape anywhere in the Inspector (its header included) returns to the asset list row. */
+export function useAssetEscape() {
+  const { showPanel } = useShell();
+  const { selected } = useAssets();
+  return (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Escape' && !event.defaultPrevented) {
       event.preventDefault();
       showPanel('hierarchy');
       returnToList(selected);
     }
   };
+}
+
+/**
+ * The Inspector's header line while the Assets view is active: the selected asset's
+ * kind and name (the focus target when details open), or the import form's title.
+ * Null when nothing is shown, so the panel keeps its plain "Inspector" title.
+ */
+export function useAssetInspectorHeader(): ReactNode {
+  const { snapshot } = useShell();
+  const { pane, selected } = useAssets();
+  const assets = snapshot?.assets?.status === 'ready' ? snapshot.assets.value : [];
+  if (pane === 'import') return <IdentityHeader icon="import" name="Import assets" titleId={TITLE_ID} focusable />;
+  const asset = pane === 'details' ? assets.find((candidate) => candidate.id === selected) : undefined;
+  if (!asset) return null;
+  return <IdentityHeader icon={iconForKind(asset.kind)} kind={asset.kind} name={asset.name} titleId={TITLE_ID} focusable />;
+}
+
+/**
+ * The Inspector body while the Assets view is active: the selected asset's details and
+ * reimport, or the import form. Entity details stay in the same column for the
+ * Hierarchy view, so "select on the left, inspect on the right" holds for both.
+ */
+export function AssetInspector() {
+  const { snapshot, bridge, capabilities } = useShell();
+  const { pane, selected } = useAssets();
+  const assets = snapshot?.assets?.status === 'ready' ? snapshot.assets.value : [];
+  const availability = importAvailability(snapshot, bridge, capabilities);
+  const asset = pane === 'details' ? assets.find((candidate) => candidate.id === selected) : undefined;
 
   let content: ReactNode;
   if (pane === 'import') {
-    content = (
+    content = availability.ok ? (
       <>
-        <Identity icon="import" title="Import assets" meta="From the project folder" />
-        {availability.ok ? (
-          <ImportForm assets={assets} />
-        ) : (
-          <StateView icon="lock" title="Importing is unavailable" compact>
-            <p>{availability.reason}</p>
-          </StateView>
-        )}
+        <p className="inspector__meta">From the project folder</p>
+        <ImportForm assets={assets} />
       </>
+    ) : (
+      <StateView icon="lock" title="Importing is unavailable" compact>
+        <p>{availability.reason}</p>
+      </StateView>
     );
   } else if (asset) {
     content = (
       <>
-        <Identity icon={iconForKind(asset.kind)} kind={asset.kind} title={asset.name} meta={kindLabel(asset.kind)} />
+        <p className="inspector__meta">
+          <span className="inspector__kind">{kindLabel(asset.kind)}</span>
+          {asset.textureUsage ? <span className="inspector__kind-detail">{USAGE_LABEL[asset.textureUsage]}</span> : null}
+        </p>
         <AssetDetails asset={asset} availability={availability} />
       </>
     );
@@ -132,24 +153,8 @@ export function AssetInspector() {
     );
   }
   return (
-    <div id="asset-inspector" className="asset-inspector" onKeyDown={onKeyDown}>
+    <div id="asset-inspector" className="asset-inspector">
       {content}
-    </div>
-  );
-}
-
-function Identity({ icon, kind, title, meta }: { icon: IconName; kind?: string; title: string; meta: string }) {
-  return (
-    <div className="inspector__identity asset-inspector__identity">
-      <span className={`kind-tile${kind ? ` kind--${kind}` : ''}`} aria-hidden="true">
-        <Icon name={icon} />
-      </span>
-      <div className="inspector__identity-text">
-        <h3 id={TITLE_ID} className="inspector__name asset-inspector__title" tabIndex={-1} title={title}>
-          {title}
-        </h3>
-        <p className="inspector__meta">{meta}</p>
-      </div>
     </div>
   );
 }

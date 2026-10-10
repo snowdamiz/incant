@@ -5,7 +5,7 @@ import { PROVIDER_FIXTURE_NAMES } from './bridge/providerFixture';
 import { UI_PROTOCOL_VERSION } from './bridge/contract';
 import { AssetsProvider } from './assets/AssetsContext';
 import { AccountDialog } from './components/AccountDialog';
-import { AgentPanel } from './components/AgentPanel';
+import { AgentPanel, agentReady } from './components/AgentPanel';
 import { BottomDock } from './components/BottomDock';
 import { HierarchyPanel } from './components/HierarchyPanel';
 import { InspectorPanel } from './components/inspector/InspectorPanel';
@@ -19,8 +19,11 @@ import { ShellProvider, useShell } from './shell/ShellContext';
 import { installInputModality } from './shell/inputModality';
 import { projectState } from './shell/projectState';
 import { focusRegion, nextRegion, regionOf } from './shell/regions';
-import { clampLayout, defaultLayout, idleAgentHeight } from './shell/layout';
+import { clampLayout, defaultLayout } from './shell/layout';
 import type { Layout } from './shell/layout';
+
+/** Below this window height the agent pane starts collapsed (its status line stays visible). */
+export const AGENT_OPEN_MIN_HEIGHT = 720;
 
 export function App({ resolution }: { resolution: BridgeResolution }) {
   if (resolution.kind === 'incompatible') {
@@ -68,9 +71,9 @@ function Workbench() {
   const shell = useShell();
   const { bridge, snapshot, run, accountOpen, panels, togglePanel } = shell;
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
-  const [windowHeight, setWindowHeight] = useState(() => window.innerHeight);
-  // Until someone drags the Agent splitter, an agent that cannot run keeps a compact pane.
-  const [agentSized, setAgentSized] = useState(false);
+  // The agent pane's disclosure; collapsing leaves its one-line status. A short window
+  // starts with it collapsed, so the Inspector keeps the column; the choice then sticks.
+  const [agentOpen, setAgentOpen] = useState(() => window.innerHeight >= AGENT_OPEN_MIN_HEIGHT);
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const shortcutsReturn = useRef<HTMLElement | null>(null);
 
@@ -85,10 +88,7 @@ function Workbench() {
   }, [attached]);
 
   useEffect(() => {
-    const onResize = () => {
-      setWindowHeight(window.innerHeight);
-      setLayout((current) => clampLayout(current, window.innerWidth, window.innerHeight));
-    };
+    const onResize = () => setLayout((current) => clampLayout(current, window.innerWidth, window.innerHeight));
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
@@ -149,11 +149,9 @@ function Workbench() {
   const resize = (patch: Partial<Layout>) =>
     setLayout((current) => clampLayout({ ...current, ...patch }, window.innerWidth, window.innerHeight));
 
-  const agentStatus = snapshot?.agent?.status;
-  const agentHeight =
-    agentSized || agentStatus === 'idle' || agentStatus === 'running'
-      ? layout.agent
-      : Math.min(layout.agent, idleAgentHeight(windowHeight));
+  // Only an open, ready agent (transcript and composer) is a resizable pane. Otherwise the
+  // pane is as tall as its content: one status line, or a short note with its next step.
+  const agentResizable = agentOpen && agentReady(snapshot?.agent?.status);
 
   const columns = [
     panels.hierarchy ? `${layout.left}px var(--splitter-size)` : '',
@@ -202,21 +200,15 @@ function Workbench() {
         {panels.inspector ? (
           <>
             <Splitter label="Resize inspector and agent" orientation="vertical" invert value={layout.right} min={280} max={560} onChange={(right) => resize({ right })} />
-            <div className="column column--side" style={{ gridTemplateRows: `minmax(0, 1fr) var(--splitter-size) ${agentHeight}px` }}>
+            <div
+              className="column column--side"
+              style={{ gridTemplateRows: agentResizable ? `minmax(0, 1fr) var(--splitter-size) ${layout.agent}px` : 'minmax(0, 1fr) auto' }}
+            >
               <InspectorPanel />
-              <Splitter
-                label="Resize agent panel"
-                orientation="horizontal"
-                invert
-                value={agentHeight}
-                min={180}
-                max={560}
-                onChange={(agent) => {
-                  setAgentSized(true);
-                  resize({ agent });
-                }}
-              />
-              <AgentPanel />
+              {agentResizable ? (
+                <Splitter label="Resize agent panel" orientation="horizontal" invert value={layout.agent} min={180} max={560} onChange={(agent) => resize({ agent })} />
+              ) : null}
+              <AgentPanel open={agentOpen} onToggle={() => setAgentOpen((open) => !open)} />
             </div>
           </>
         ) : null}

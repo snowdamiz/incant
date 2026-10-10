@@ -48,6 +48,21 @@ const PATHS = {
   import: 'M8 2.5v7M5 6.5l3 3 3-3M2.5 10v3.5h11V10',
   reimport: 'M13 8a5 5 0 01-8.6 3.5M3 8a5 5 0 018.6-3.5M11.5 2v2.6H8.9M4.5 14v-2.6h2.6',
   back: 'M13 8H3.5M7 4.5L3.5 8 7 11.5',
+  // Component marks for Inspector section headers.
+  move: 'M8 2v12M2 8h12M6.25 3.75L8 2l1.75 1.75M6.25 12.25L8 14l1.75-1.75M3.75 6.25L2 8l1.75 1.75M12.25 6.25L14 8l-1.75 1.75',
+  // A moving ball with speed lines: a body the solver moves.
+  body: 'M10 4a4 4 0 110 8 4 4 0 010-8zM2 6h3M2.75 8.5h2.5M2 11h3',
+  collider: 'M2.5 5.5v-3h3M10.5 2.5h3v3M13.5 10.5v3h-3M5.5 13.5h-3v-3M6 6h4v4H6z',
+  bulb: 'M8 2.25a4 4 0 00-2.4 7.2c.5.4.9 1 .9 1.55v.5h3v-.5c0-.55.4-1.15.9-1.55A4 4 0 008 2.25zM6.5 13.75h3',
+  spot: 'M6 2.5h4v2.25L13 13H3l3-8.25zM6 4.75h4',
+  globe: 'M8 2a6 6 0 110 12A6 6 0 018 2zM2 8h12M8 2c-1.9 1.7-2.6 3.7-2.6 6s.7 4.3 2.6 6M8 2c1.9 1.7 2.6 3.7 2.6 6s-.7 4.3-2.6 6',
+  mixer: 'M4 2.5v11M8 2.5v11M12 2.5v11M2.5 10h3M6.5 5.5h3M10.5 8h3',
+  velocity: 'M5.5 8h8M10.5 5l3 3-3 3M2.5 5.5h3M2.5 10.5h3',
+  spin: 'M13.2 8.6A5.25 5.25 0 113 6.7M13.5 3v3.25h-3.25M13.4 6.1A5.25 5.25 0 008 2.75',
+  grid: 'M2.5 2.5h11v11h-11zM2.5 6.17h11M2.5 9.83h11M6.17 2.5v11M9.83 2.5v11',
+  navmesh: 'M2.5 12.5L5.25 3.5l8.25 3-1.75 6.5zM5.25 3.5l6.5 9.5M2.5 12.5l11-6',
+  // A puzzle piece: a component type the Inspector has no profile for.
+  component: 'M3 4.5h3a1.5 1.5 0 013 0h3v3a1.5 1.5 0 010 3v3H3z',
 } as const;
 
 export type IconName = keyof typeof PATHS;

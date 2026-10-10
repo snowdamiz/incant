@@ -1,19 +1,32 @@
 /**
- * Inspector presentation profiles: section captions, and labels or tooltips the
- * engine schema does not carry. Units, field order, defaults and the
- * collision-mask widget come from the schema (x-incant-unit, order, default,
- * x-incant-widget), not from here.
+ * Inspector presentation profiles: component display names and icons, section
+ * captions, and labels, tooltips or list summaries the engine schema does not
+ * carry. Units, field order, defaults and the collision-mask widget come from the
+ * schema (x-incant-unit, order, default, x-incant-widget), not from here.
  *
- * Presentation only. Nothing here validates, converts, reorders or hides a
- * value, and the engine schema wins: a schema `title` or `description`
+ * Presentation only. Nothing here validates, converts, reorders stored data or
+ * hides a value, and the engine schema wins: a schema `title` or `description`
  * overrides the matching profile entry, and a schema `order` is kept exactly.
  */
+
+import type { IconName } from '../../icons/Icon';
+import { formatNumber, isRecord, splitIdentifier } from './format';
 
 /** A short visible tag beside a value, with a full sentence for assistive tech and hover. */
 export interface FieldStatus {
   readonly short: string;
   readonly long: string;
 }
+
+/** One-line summary of a list item: a short tag, compact values, and the same in words. */
+export interface ItemSummaryText {
+  readonly tag: string;
+  readonly text: string;
+  readonly spoken: string;
+}
+
+/** Name for an exact ID: an asset or an entity of the open project, or null. */
+export type NameOf = (id: string) => string | null;
 
 export interface FieldHint {
   readonly title?: string;
@@ -35,7 +48,7 @@ export interface FieldHint {
   readonly identifier?: boolean;
   /** Abbreviation in one-line list summaries ("r" for radius); the full label is spoken. */
   readonly short?: string;
-  /** Row order for an object without a schema order (list item detail). */
+  /** Row order for an object without a schema order (a nested object or a list item). */
   readonly order?: readonly string[];
   /**
    * Names for the entries of a fixed-length number list that is not a spatial
@@ -43,6 +56,17 @@ export interface FieldHint {
    * the accessible name. A list of any other length is shown as a mismatch.
    */
   readonly axes?: readonly AxisName[];
+  /**
+   * One-line summary for each item of a list of records. Returns null when the
+   * item is not well-formed, and the generic summary (with its raw value) is used.
+   */
+  readonly summary?: (item: Readonly<Record<string, unknown>>, nameOf: NameOf) => ItemSummaryText | null;
+  /**
+   * A row-major number list laid out by a sibling width and height (a navigation
+   * grid's costs). `size` is the sibling's component-relative pointer. Only a size
+   * of two whole numbers whose product equals the list length draws the map.
+   */
+  readonly grid?: { readonly size: string; readonly blocked: number };
 }
 
 export interface AxisName {
@@ -57,6 +81,9 @@ export interface FieldSection {
 }
 
 export interface ComponentPresentation {
+  /** Display name, when the schema title is a bare type identifier ("RigidBody"). */
+  readonly title?: string;
+  readonly icon?: IconName;
   readonly sections: readonly FieldSection[];
   /**
    * Keyed by JSON pointer relative to the component, e.g. `/shape/radius`. An
@@ -66,8 +93,16 @@ export interface ComponentPresentation {
   readonly fields: Readonly<Record<string, FieldHint>>;
 }
 
+const point = (value: unknown): string | null =>
+  Array.isArray(value) && value.length > 0 && value.every((n) => typeof n === 'number' && Number.isFinite(n))
+    ? value.map((n) => formatNumber(n as number)).join(', ')
+    : null;
+
 const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
+  Transform: { icon: 'move', sections: [], fields: {} },
   RigidBody: {
+    title: 'Rigid Body',
+    icon: 'body',
     sections: [
       { title: null, keys: ['motion'] },
       { title: 'Gravity and damping', keys: ['gravity_scale', 'linear_damping', 'angular_damping'] },
@@ -81,6 +116,7 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
     },
   },
   Collider: {
+    icon: 'collider',
     sections: [
       { title: null, keys: ['shape'] },
       { title: 'Material', keys: ['density', 'friction', 'restitution'] },
@@ -102,6 +138,7 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
     },
   },
   Camera: {
+    icon: 'camera',
     // One run in schema order: the projection (with its variant fields beneath
     // it), then lens and clip planes.
     sections: [{ title: null, keys: ['projection', 'fov_degrees', 'near', 'far'] }],
@@ -139,6 +176,86 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
       '/far': { title: 'Far clip', description: 'Distance from the camera to the far clipping plane.' },
     },
   },
+  MeshRenderer: { title: 'Mesh Renderer', icon: 'model', sections: [], fields: {} },
+  Light: { icon: 'light', sections: [], fields: {} },
+  DirectionalLight: { title: 'Directional Light', icon: 'light', sections: [], fields: {} },
+  PointLight: { title: 'Point Light', icon: 'bulb', sections: [], fields: {} },
+  SpotLight: {
+    title: 'Spot Light',
+    icon: 'spot',
+    sections: [],
+    fields: { '/inner_degrees': { title: 'Inner angle' }, '/outer_degrees': { title: 'Outer angle' } },
+  },
+  EnvironmentLight: { title: 'Environment Light', icon: 'globe', sections: [], fields: { '/texture': { title: 'Image' } } },
+  Script: { icon: 'script', sections: [], fields: { '/props': { title: 'Properties' } } },
+  AudioSource: {
+    title: 'Audio Source',
+    icon: 'audio',
+    sections: [
+      { title: null, keys: ['clip', 'bus'] },
+      { title: 'Playback', keys: ['playing', 'looping', 'streaming', 'start_seconds', 'rate'] },
+      { title: 'Mix', keys: ['gain_db', 'pan', 'spatial'] },
+    ],
+    fields: { '/gain_db': { title: 'Gain (dB)' }, '/start_seconds': { title: 'Start time (s)' } },
+  },
+  AudioListener: { title: 'Audio Listener', icon: 'audio', sections: [], fields: {} },
+  AudioBus: { title: 'Audio Bus', icon: 'mixer', sections: [], fields: { '/gain_db': { title: 'Gain (dB)' } } },
+  Velocity: { icon: 'velocity', sections: [], fields: {} },
+  AngularVelocity: { title: 'Angular Velocity', icon: 'spin', sections: [], fields: {} },
+  NavigationGrid: {
+    title: 'Navigation Grid',
+    icon: 'grid',
+    sections: [{ title: null, keys: ['dimensions', 'costs'] }],
+    fields: {
+      '/dimensions': {
+        title: 'Size',
+        axes: [
+          { short: 'W', name: 'Width' },
+          { short: 'H', name: 'Height' },
+        ],
+      },
+      '/costs': { grid: { size: '/dimensions', blocked: 0 } },
+    },
+  },
+  NavigationMesh: {
+    title: 'Navigation Mesh',
+    icon: 'navmesh',
+    sections: [{ title: null, keys: ['settings', 'sources', 'links'] }],
+    fields: {
+      '/settings': {
+        title: 'Build settings',
+        order: ['min', 'max', 'cell_size', 'cell_height', 'tile_cells', 'agent_radius', 'agent_height', 'max_climb', 'max_slope_degrees'],
+      },
+      '/settings/min': { title: 'Bounds min' },
+      '/settings/max': { title: 'Bounds max' },
+      '/sources/*': {
+        order: ['entity', 'geometry'],
+        summary: (item, nameOf) => {
+          const { entity, geometry } = item;
+          if (typeof entity !== 'string' || typeof geometry !== 'string') return null;
+          const name = nameOf(entity);
+          return { tag: geometry, text: name ?? entity, spoken: `${geometry} of ${name ?? `entity ${entity}`}` };
+        },
+      },
+      '/links': { title: 'Off-mesh links' },
+      '/links/*': {
+        order: ['id', 'start', 'end', 'snap_distance', 'extra_cost', 'bidirectional', 'enabled'],
+        summary: (item) => {
+          const start = point(item.start);
+          const end = point(item.end);
+          if (start === null || end === null || typeof item.bidirectional !== 'boolean') return null;
+          const off = item.enabled === false;
+          const tag = item.bidirectional ? 'two-way' : 'one-way';
+          return {
+            tag,
+            text: `${start} ${item.bidirectional ? '↔' : '→'} ${end}${off ? ' · off' : ''}`,
+            spoken: `${tag} link from ${start} to ${end}${off ? ', disabled' : ''}`,
+          };
+        },
+      },
+      '/links/*/id': { title: 'ID', identifier: true },
+    },
+  },
 };
 
 /**
@@ -149,12 +266,11 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
  */
 export function isOrthographicCamera(camera: Readonly<Record<string, unknown>>): boolean {
   const projection = camera.projection;
-  if (typeof projection !== 'object' || projection === null || Array.isArray(projection)) return false;
-  const record = projection as Record<string, unknown>;
-  const keys = Object.keys(record).sort();
-  const size = record.vertical_size;
+  if (!isRecord(projection)) return false;
+  const keys = Object.keys(projection).sort();
+  const size = projection.vertical_size;
   return (
-    record.kind === 'orthographic' &&
+    projection.kind === 'orthographic' &&
     keys.length === 2 &&
     keys[0] === 'kind' &&
     keys[1] === 'vertical_size' &&
@@ -185,16 +301,15 @@ export const PIXEL_PERFECT_LIMITS = {
  */
 export function isPixelPerfectCamera(camera: Readonly<Record<string, unknown>>): boolean {
   const projection = camera.projection;
-  if (typeof projection !== 'object' || projection === null || Array.isArray(projection)) return false;
-  const record = projection as Record<string, unknown>;
-  const keys = Object.keys(record).sort();
-  const density = record.pixels_per_unit;
-  const size = record.reference_resolution;
+  if (!isRecord(projection)) return false;
+  const keys = Object.keys(projection).sort();
+  const density = projection.pixels_per_unit;
+  const size = projection.reference_resolution;
   const limits = PIXEL_PERFECT_LIMITS;
   const dimension = (n: unknown): n is number =>
     typeof n === 'number' && Number.isInteger(n) && n >= limits.minDimension && n <= limits.maxDimension;
   return (
-    record.kind === 'pixel_perfect' &&
+    projection.kind === 'pixel_perfect' &&
     keys.length === 3 &&
     keys[0] === 'kind' &&
     keys[1] === 'pixels_per_unit' &&
@@ -216,6 +331,24 @@ export function componentPresentation(type: string): ComponentPresentation | und
   return PROFILES[type.replace(/^incant\./, '')];
 }
 
+/**
+ * The component's display name. A schema title with words ("Mesh Renderer") is used
+ * as is; a bare type identifier ("RigidBody", "ScriptComponent") gives way to the
+ * profile's name, or is split into words. The type itself stays in the tooltip.
+ */
+export function componentTitle(type: string, schemaTitle?: string): string {
+  if (schemaTitle && /\s/.test(schemaTitle)) return schemaTitle;
+  const profile = componentPresentation(type);
+  if (profile?.title) return profile.title;
+  if (profile) return splitIdentifier(type.replace(/^incant\./, ''));
+  return splitIdentifier(schemaTitle ?? type.replace(/^incant\./, ''));
+}
+
+/** The component's header icon; unknown types get a neutral component mark. */
+export function componentIcon(type: string): IconName {
+  return componentPresentation(type)?.icon ?? 'component';
+}
+
 export function fieldHint(component: string, pointerPath: string): FieldHint {
   const fields = componentPresentation(component)?.fields;
   if (!fields) return {};
@@ -229,11 +362,16 @@ export function fieldHint(component: string, pointerPath: string): FieldHint {
  * would split a section into separate runs, grouping is incompatible with it and
  * the rows stay in schema order with no captions at all.
  *
+ * A profile describes one shape of component: when any key it captions is
+ * missing (an older or different component that shares the type name), its
+ * sections do not apply and the rows keep their own order without captions.
+ *
  * Only when the schema has no order does the profile also supply the order.
  */
 export function sectionKeys(type: string, keys: readonly string[], schemaOrdered: boolean): FieldSection[] {
   const profile = componentPresentation(type);
-  if (!profile) return [{ title: null, keys }];
+  if (!profile || profile.sections.length === 0) return [{ title: null, keys }];
+  if (!profile.sections.every((section) => section.keys.every((key) => keys.includes(key)))) return [{ title: null, keys }];
   const sectionOf = (key: string) => profile.sections.find((section) => section.keys.includes(key));
   const ordered = schemaOrdered
     ? keys

@@ -7,7 +7,7 @@ const GROUPS: { title: string; items: [keys: string, action: string][] }[] = [
     title: 'Everywhere',
     items: [
       ['F6 / Shift+F6', 'Move to the next / previous panel'],
-      ['⌘Z / Ctrl+Z', 'Undo the last transaction'],
+      ['⌘Z / Ctrl+Z', 'Undo the last change'],
       ['⇧⌘Z / Ctrl+Y', 'Redo'],
       ['?', 'Show this list'],
     ],

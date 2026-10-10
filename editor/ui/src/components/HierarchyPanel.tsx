@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent, ReactNode } from 'react';
 import type { HierarchyTree, Ulid } from '../bridge/contract';
 import type { ProblemCounts, Row } from '../hierarchy/tree';
@@ -6,8 +6,10 @@ import { defaultExpanded, indexProblems, treeKey, typeAhead, visibleRows } from 
 import { Icon, iconForKind } from '../icons/Icon';
 import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
+import { mountedIndices, revealSpan, rowRange, useViewport } from '../shell/windowing';
 import { Skeleton, StateView } from './StateView';
 import { AssetBrowser } from './assets/AssetBrowser';
+import { MatchCount } from './MatchCount';
 import { useAssets } from '../assets/AssetsContext';
 import type { NavigatorView } from '../assets/AssetsContext';
 
@@ -48,7 +50,7 @@ export function HierarchyPanel() {
   } else {
     body = <Tree tree={hierarchy.value} key={bridge?.label ?? 'tree'} />;
   }
-  const count = hierarchy?.status === 'ready' ? Object.keys(hierarchy.value.nodes).length : null;
+  const count = useMemo(() => (hierarchy?.status === 'ready' ? Object.keys(hierarchy.value.nodes).length : null), [hierarchy]);
   return (
     <section className="panel" data-region="hierarchy" aria-label="Hierarchy and assets" tabIndex={-1}>
       <NavigatorTabs entityCount={count} />
@@ -146,20 +148,41 @@ function NavigatorTabs({ entityCount }: { entityCount: number | null }) {
   );
 }
 
+/** Height of one tree row (--row-height) and the tree's top padding (--space-1). */
+const ROW = 28;
+const TOP = 2;
+
+/**
+ * The scene tree. Rows are a flat ARIA tree (level, position and set size on each
+ * row), so it can mount only the rows near the scroll position: a 100,000-entity
+ * project mounts a few dozen rows. The active row (the roving Tab stop) and a row
+ * being renamed always stay mounted, so focus, keyboard moves and rename survive
+ * scrolling them out of view.
+ */
 function Tree({ tree }: { tree: HierarchyTree }) {
   const { snapshot, selection, select, capabilities, explainUnavailable, run, announce } = useShell();
   const [expanded, setExpanded] = useState<Set<string>>(() => defaultExpanded(tree));
   const [filter, setFilter] = useState('');
+  // Typing stays responsive in a large tree: the filter applies at a lower priority.
+  const query = useDeferredValue(filter);
   const [renaming, setRenaming] = useState<Ulid | null>(null);
   const pendingFocus = useRef<Ulid | null>(null);
+  const revealPending = useRef<Ulid | null>(null);
   const typed = useRef({ text: '', at: 0 });
   const listRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLInputElement>(null);
 
-  const rows = useMemo(() => visibleRows(tree, expanded, filter), [tree, expanded, filter]);
+  const rows = useMemo(() => visibleRows(tree, expanded, query), [tree, expanded, query]);
+  const indexOf = useMemo(() => new Map(rows.map((row, index) => [row.id as string, index])), [rows]);
   const problems = useMemo(() => indexProblems(tree, snapshot?.diagnostics ?? []), [tree, snapshot?.diagnostics]);
-  const active = selection !== null && rows.some((row) => row.id === selection) ? selection : (rows[0]?.id ?? null);
+  const active = selection !== null && indexOf.has(selection) ? selection : (rows[0]?.id ?? null);
   const name = (id: Ulid) => tree.nodes[id]?.name ?? '';
+  const viewport = useViewport(listRef, ROW * 4);
+  const [first, last] = rowRange(viewport, rows.length, ROW, 8, TOP);
+  const mounted = mountedIndices(first, last, rows.length, [
+    active !== null ? (indexOf.get(active) ?? -1) : -1,
+    renaming !== null ? (indexOf.get(renaming) ?? -1) : -1,
+  ]);
 
   // Reveal a selection made elsewhere (e.g. the Problems list) by expanding its ancestors.
   // Runs only when the selection changes, so collapsing an ancestor afterwards sticks.
@@ -167,6 +190,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
   useEffect(() => {
     if (selection === null || revealed.current === selection) return;
     revealed.current = selection;
+    revealPending.current = selection;
     const ancestors: string[] = [];
     let parent = tree.nodes[selection]?.parent ?? null;
     while (parent !== null) {
@@ -177,20 +201,29 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     setExpanded((current) => (ancestors.every((id) => current.has(id)) ? current : new Set([...current, ...ancestors])));
   }, [selection, tree]);
 
+  // Once a new selection's row exists, scroll it into view (it is always mounted) and focus it if asked.
   useEffect(() => {
     if (selection === null) return;
-    const element = document.getElementById(rowDomId(selection));
-    element?.scrollIntoView({ block: 'nearest' });
+    const index = indexOf.get(selection);
+    if (index === undefined) return;
+    if (revealPending.current === selection || pendingFocus.current === selection) {
+      revealPending.current = null;
+      revealSpan(listRef.current, TOP + index * ROW, ROW, 4);
+    }
     if (pendingFocus.current === selection) {
       pendingFocus.current = null;
-      element?.focus();
+      document.getElementById(rowDomId(selection))?.focus();
     }
-  }, [selection, rows]);
+  }, [selection, indexOf]);
 
   const moveTo = (id: Ulid) => {
     pendingFocus.current = id;
     select(id);
-    if (id === selection) document.getElementById(rowDomId(id))?.focus();
+    if (id === selection) {
+      const index = indexOf.get(id);
+      if (index !== undefined) revealSpan(listRef.current, TOP + index * ROW, ROW, 4);
+      document.getElementById(rowDomId(id))?.focus();
+    }
   };
 
   const toggle = (id: string, open: boolean) =>
@@ -229,6 +262,15 @@ function Tree({ tree }: { tree: HierarchyTree }) {
       select(active);
       return;
     }
+    if ((event.key === 'PageDown' || event.key === 'PageUp') && active !== null) {
+      // A viewport of rows at a time, like a native list.
+      event.preventDefault();
+      const page = Math.max(1, Math.floor((listRef.current?.clientHeight || viewport.height) / ROW) - 1);
+      const index = indexOf.get(active) ?? 0;
+      const target = rows[Math.max(0, Math.min(rows.length - 1, index + (event.key === 'PageDown' ? page : -page)))];
+      if (target) moveTo(target.id);
+      return;
+    }
     const result = treeKey(rows, active, event.key);
     if (result.kind !== 'none') {
       event.preventDefault();
@@ -239,7 +281,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     if (event.key.length === 1 && !mod && !event.altKey && event.key !== ' ') {
       const now = event.timeStamp;
       typed.current = { text: now - typed.current.at < 700 ? typed.current.text + event.key : event.key, at: now };
-      const from = typed.current.text.length > 1 ? rows[rows.findIndex((row) => row.id === active) - 1]?.id ?? null : active;
+      const from = typed.current.text.length > 1 ? rows[(indexOf.get(active ?? '') ?? 0) - 1]?.id ?? null : active;
       const match = typeAhead(rows, name, from, typed.current.text);
       if (match) moveTo(match);
     }
@@ -257,7 +299,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     }
   };
 
-  const matchCount = filter.trim() ? rows.filter((row) => !row.ancestorOfMatch).length : null;
+  const matchCount = query.trim() ? rows.filter((row) => !row.ancestorOfMatch).length : null;
 
   return (
     <>
@@ -279,7 +321,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
             aria-describedby="hierarchy-filter-status"
           />
           <span id="hierarchy-filter-status" className="search-field__status" role="status">
-            {matchCount === null ? '' : `${matchCount} ${matchCount === 1 ? 'match' : 'matches'}`}
+            {matchCount === null ? '' : <MatchCount count={matchCount} />}
           </span>
         </div>
         <button
@@ -294,7 +336,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
       </div>
       {rows.length === 0 ? (
         <StateView icon="search" title="No matching entities" compact>
-          <p>Nothing named “{filter.trim()}”. Press Escape to clear the filter.</p>
+          <p>Nothing named “{query.trim()}”. Press Escape to clear the filter.</p>
         </StateView>
       ) : (
         <div
@@ -305,30 +347,36 @@ function Tree({ tree }: { tree: HierarchyTree }) {
           aria-labelledby="hierarchy-title"
           onKeyDown={onKeyDown}
         >
-          {rows.map((row) => (
-            <TreeRow
-              key={row.id}
-              row={row}
-              tree={tree}
-              active={row.id === active}
-              selected={row.id === selection}
-              own={problems.own.get(row.id)}
-              hidden={!row.expanded ? problems.descendants.get(row.id) : undefined}
-              renaming={renaming === row.id}
-              onActivate={() => moveTo(row.id)}
-              onToggle={() => toggle(row.id, !row.expanded)}
-              onRename={() => beginRename(row.id)}
-              onRenameDone={async (value) => {
-                setRenaming(null);
-                const trimmed = value.trim();
-                if (trimmed && trimmed !== name(row.id)) {
-                  const ok = await run({ type: 'entity.rename', entity: row.id, name: trimmed });
-                  if (ok) announce(`Renamed to ${trimmed}`);
-                }
-                moveTo(row.id);
-              }}
-            />
-          ))}
+          <div className="tree__canvas" role="none" style={{ height: TOP + rows.length * ROW }}>
+            {mounted.map((index) => {
+              const row = rows[index]!;
+              return (
+                <TreeRow
+                  key={row.id}
+                  row={row}
+                  top={TOP + index * ROW}
+                  tree={tree}
+                  active={row.id === active}
+                  selected={row.id === selection}
+                  own={problems.own.get(row.id)}
+                  hidden={!row.expanded ? problems.descendants.get(row.id) : undefined}
+                  renaming={renaming === row.id}
+                  onActivate={() => moveTo(row.id)}
+                  onToggle={() => toggle(row.id, !row.expanded)}
+                  onRename={() => beginRename(row.id)}
+                  onRenameDone={async (value) => {
+                    setRenaming(null);
+                    const trimmed = value.trim();
+                    if (trimmed && trimmed !== name(row.id)) {
+                      const ok = await run({ type: 'entity.rename', entity: row.id, name: trimmed });
+                      if (ok) announce(`Renamed to ${trimmed}`);
+                    }
+                    moveTo(row.id);
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
       )}
     </>
@@ -349,6 +397,7 @@ function problemText(counts: ProblemCounts | undefined) {
 
 function TreeRow({
   row,
+  top,
   tree,
   active,
   selected,
@@ -361,6 +410,7 @@ function TreeRow({
   onRenameDone,
 }: {
   row: Row;
+  top: number;
   tree: HierarchyTree;
   active: boolean;
   selected: boolean;
@@ -388,7 +438,7 @@ function TreeRow({
       aria-selected={selected}
       tabIndex={active ? 0 : -1}
       data-focus-target={active ? '' : undefined}
-      style={{ paddingInlineStart: `calc(${row.depth - 1} * var(--indent) + var(--space-2))` }}
+      style={{ top, paddingInlineStart: `calc(${row.depth - 1} * var(--indent) + var(--space-2))` }}
       data-depth={row.depth}
       onClick={onActivate}
       onDoubleClick={onRename}

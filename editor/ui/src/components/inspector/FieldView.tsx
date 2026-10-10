@@ -1,19 +1,28 @@
 import { useId } from 'react';
-import type { InputHTMLAttributes, ReactNode } from 'react';
+import type { CSSProperties, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
 import type { Diagnostic, FieldSchema } from '../../bridge/contract';
-import { Icon } from '../../icons/Icon';
+import { Icon, iconForKind } from '../../icons/Icon';
 import type { AxisName, FieldHint, FieldStatus } from './presentation';
 import { MASK_BITS, fieldHint, isMask, maskDescription, maskGroups, maskSummary } from './presentation';
+import { exactTitle, formatNumber, humanize, isRecord, listAll, listChoices, looksLikeUlid, pointer, safeJson, unescapePointer } from './format';
 import { ObjectListView, isObjectList } from './ObjectList';
+import { NumberListView, StringListView, isLongNumberList, isStringList } from './ValueLists';
 
-/** JSON pointer for a property path, matching Diagnostic.path. */
-export function pointer(path: readonly string[]): string {
-  return path.map((part) => `/${part.replace(/~/g, '~0').replace(/\//g, '~1')}`).join('');
-}
+export { formatNumber, humanize, pointer, safeJson } from './format';
 
 export function fieldDomId(entity: string, component: string, path: readonly string[]): string {
   return `field-${entity}-${component}${pointer(path)}`.replace(/[^A-Za-z0-9_-]/g, '_');
 }
+
+/** What an exact ID in the open project names: an asset or an entity. */
+export interface Reference {
+  readonly name: string;
+  /** The asset or entity kind, for its icon. */
+  readonly kind: string;
+  /** Words for assistive tech: "Model asset crate_stack", "Entity Player". */
+  readonly spoken: string;
+}
+export type ReferenceResolver = (id: string) => Reference | null;
 
 export interface FieldContext {
   readonly entity: string;
@@ -22,6 +31,10 @@ export interface FieldContext {
   readonly diagnostics: readonly Diagnostic[];
   /** The whole component value, for presentation tags that depend on sibling fields. */
   readonly value?: Readonly<Record<string, unknown>> | undefined;
+  /** Nesting depth of the rows: each group indents and narrows its label column by one step. */
+  readonly depth?: number | undefined;
+  /** Names for IDs that exactly match a project asset or entity. Presentation only. */
+  readonly refs?: ReferenceResolver | undefined;
 }
 
 /**
@@ -62,43 +75,36 @@ export function FieldView({
     return <UnionView label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} />;
   }
   if (schema.type === 'object' && 'properties' in schema) {
-    const record = isRecord(value) ? value : null;
-    const properties = schema.properties as Readonly<Record<string, FieldSchema>>;
-    return (
-      <fieldset className="field-group">
-        <legend className="field-group__legend">{label}</legend>
-        {record ? (
-          Object.entries(properties).map(([key, child]) => (
-            <FieldView key={key} name={key} schema={child} value={record[key]} path={[...path, key]} ctx={ctx} />
-          ))
-        ) : (
-          <Mismatch expected="object" value={value} />
-        )}
-        {record
-          ? Object.keys(record)
-              .filter((key) => !Object.hasOwn(properties, key))
-              .map((key) => (
-                <p key={key} className="component__notice">
-                  <span>
-                    <Icon name="warning" size={12} /> Field <code>{key}</code> is not part of {label.toLowerCase()}:{' '}
-                    <code>{safeJson(record[key])}</code>
-                  </span>
-                </p>
-              ))
-          : null}
-      </fieldset>
-    );
+    return <ObjectGroup label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} />;
   }
-  if (schema.type === 'array' && 'items' in schema && isObjectList(schema) && Array.isArray(value)) {
-    // Selection is per entity: a different entity starts at its own first problem (or part 1).
-    return <ObjectListView key={ctx.entity} label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} />;
+  if (schema.type === 'object' && isRecord(value)) {
+    // An open object (additionalProperties, no listed properties), such as a script's props.
+    return <FreeformGroup label={label} value={value} path={path} ctx={ctx} />;
+  }
+  if (schema.type === 'array' && 'items' in schema && Array.isArray(value)) {
+    if (isObjectList(schema)) {
+      // Selection is per entity: a different entity starts at its own first problem (or part 1).
+      return <ObjectListView key={ctx.entity} label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} />;
+    }
+    if (isLongNumberList(schema, value, hint)) {
+      return <NumberListView key={ctx.entity} label={label} schema={schema} hint={hint} value={value as number[]} path={path} ctx={ctx} />;
+    }
+    if (isStringList(schema, value)) {
+      return <StringListView label={label} schema={schema} hint={hint} value={value as string[]} path={path} ctx={ctx} />;
+    }
   }
   return <FieldRow label={label} schema={schema} hint={hint} value={value} path={path} ctx={ctx} />;
 }
 
 type UnionSchema = Extract<FieldSchema, { type: 'tagged-union' }>;
+type ObjectSchema = Extract<FieldSchema, { type: 'object' }>;
 
 const DEFAULT_NOTE = 'Not authored. The schema default applies.';
+
+/** Style for a group's rows: one indent step deeper than its parent. */
+export function depthStyle(depth: number): CSSProperties {
+  return { '--depth': depth } as CSSProperties;
+}
 
 /**
  * The schema's own `default`, when it is something this field can present: a
@@ -119,14 +125,93 @@ export function presentableDefault(schema: FieldSchema): { value: unknown } | nu
   return null;
 }
 
-/** "width" and "height" -> "width and height". */
-function listAll(items: readonly string[]): string {
-  return items.length < 2 ? (items[0] ?? 'nothing') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`;
+/** Profile order first (the authored meaning), then any other keys in schema order. */
+export function orderedProperties(properties: Readonly<Record<string, FieldSchema>>, order: readonly string[] | undefined): string[] {
+  const all = Object.keys(properties);
+  const first = (order ?? []).filter((key) => all.includes(key));
+  return [...first, ...all.filter((key) => !first.includes(key))];
 }
 
-/** "box", "sphere" and "capsule" -> "box, sphere or capsule". */
-function listChoices(choices: readonly string[]): string {
-  return choices.length < 2 ? (choices[0] ?? 'nothing') : `${choices.slice(0, -1).join(', ')} or ${choices.at(-1)}`;
+/** A nested object with listed properties: a captioned, indented group of rows. */
+function ObjectGroup({
+  label,
+  schema,
+  hint,
+  value,
+  path,
+  ctx,
+}: {
+  label: string;
+  schema: ObjectSchema;
+  hint: FieldHint;
+  value: unknown;
+  path: readonly string[];
+  ctx: FieldContext;
+}) {
+  const record = isRecord(value) ? value : null;
+  const properties = schema.properties as Readonly<Record<string, FieldSchema>>;
+  const depth = (ctx.depth ?? 0) + 1;
+  const inner = { ...ctx, depth };
+  return (
+    <fieldset className="field-group" style={depthStyle(depth)}>
+      <legend className="field-group__legend">{label}</legend>
+      {record ? (
+        orderedProperties(properties, hint.order).map((key) => (
+          <FieldView key={key} name={key} schema={properties[key]!} value={record[key]} path={[...path, key]} ctx={inner} />
+        ))
+      ) : (
+        <Mismatch expected="object" value={value} />
+      )}
+      {record
+        ? Object.keys(record)
+            .filter((key) => !Object.hasOwn(properties, key))
+            .map((key) => (
+              <ExtraField key={key} name={key} owner={label.toLowerCase()} value={record[key]} />
+            ))
+        : null}
+    </fieldset>
+  );
+}
+
+/** A value's own shape, for an open object whose schema lists no properties. */
+function inferredSchema(key: string, value: unknown): FieldSchema {
+  if (typeof value === 'number') return { type: 'number', title: key };
+  if (typeof value === 'string') return { type: 'string', title: key };
+  if (typeof value === 'boolean') return { type: 'boolean', title: key };
+  if (isRecord(value)) return { type: 'object', title: key } as FieldSchema;
+  return { type: 'x-json', title: key } as FieldSchema;
+}
+
+/**
+ * An open object (a script's props): each authored key as it is written, with its
+ * value presented by its own type. Lists and null show as raw JSON. Nothing is
+ * inferred beyond the value itself, and nothing is hidden.
+ */
+function FreeformGroup({ label, value, path, ctx }: { label: string; value: Record<string, unknown>; path: readonly string[]; ctx: FieldContext }) {
+  const depth = (ctx.depth ?? 0) + 1;
+  const inner = { ...ctx, depth };
+  const keys = Object.keys(value);
+  return (
+    <fieldset className="field-group field-group--open" style={depthStyle(depth)}>
+      <legend className="field-group__legend" title="Keys and values as authored; the schema does not list them.">
+        {label}
+      </legend>
+      {keys.length === 0 ? <p className="field-group__note">No entries.</p> : null}
+      {keys.map((key) => (
+        <FieldView key={key} name={key} schema={inferredSchema(key, value[key])} value={value[key]} path={[...path, key]} ctx={inner} />
+      ))}
+    </fieldset>
+  );
+}
+
+function ExtraField({ name, owner, value }: { name: string; owner: string; value: unknown }) {
+  return (
+    <p className="component__notice">
+      <span>
+        <Icon name="warning" size={12} /> Field <code>{name}</code> is not part of {owner}: <code>{safeJson(value)}</code>
+      </span>
+    </p>
+  );
 }
 
 /**
@@ -184,6 +269,10 @@ function UnionView({
   const variantNote = variant?.description;
   // A variant with nothing beneath its tag (perspective) needs no empty group.
   const grouped = fields && record && (children.length > 0 || extra.length > 0 || variantNote);
+  const depth = (ctx.depth ?? 0) + 1;
+  const inner = { ...ctx, depth };
+  // A variant whose only field is a list (a compound's parts) gives the list the full width.
+  const listOnly = fields && children.length === 1 && extra.length === 0 && fields[children[0]!]?.type === 'array' && isObjectList(fields[children[0]!]!);
   return (
     <>
       <FieldRow
@@ -199,22 +288,22 @@ function UnionView({
         implied={implied}
       />
       {grouped ? (
-        <div className="field-group field-group--variant" role="group" aria-labelledby={`${id}-label`}>
+        <div
+          className={`field-group field-group--variant${listOnly ? ' field-group--flush' : ''}`}
+          role="group"
+          aria-labelledby={`${id}-label`}
+          style={depthStyle(listOnly ? ctx.depth ?? 0 : depth)}
+        >
           {variantNote ? (
             <p className="field-group__note" id={`${id}-variant`}>
               {variantNote}
             </p>
           ) : null}
           {children.map((key) => (
-            <FieldView key={key} name={key} schema={fields[key]!} value={record[key]} path={[...path, key]} ctx={ctx} />
+            <FieldView key={key} name={key} schema={fields[key]!} value={record[key]} path={[...path, key]} ctx={listOnly ? ctx : inner} />
           ))}
           {extra.map((key) => (
-            <p key={key} className="component__notice">
-              <span>
-                <Icon name="warning" size={12} /> Field <code>{key}</code> is not part of the “{String(tag)}” {label.toLowerCase()}:{' '}
-                <code>{safeJson(record[key])}</code>
-              </span>
-            </p>
+            <ExtraField key={key} name={key} owner={`the “${String(tag)}” ${label.toLowerCase()}`} value={record[key]} />
           ))}
         </div>
       ) : null}
@@ -226,10 +315,6 @@ function objectProperties(schema: FieldSchema | undefined): Readonly<Record<stri
   return schema?.type === 'object' && 'properties' in schema
     ? (schema.properties as Readonly<Record<string, FieldSchema>>)
     : undefined;
-}
-
-function unescapePointer(part: string): string {
-  return part.replace(/~1/g, '/').replace(/~0/g, '~');
 }
 
 /**
@@ -245,7 +330,12 @@ export function unsetKind(schema: FieldSchema, value: unknown): UnsetKind | null
   return null;
 }
 
-function FieldRow({
+/** True for a value shown as a row of axis cells (2 to 4 numbers). */
+function isVectorValue(schema: FieldSchema, value: unknown): boolean {
+  return schema.type === 'array' && Array.isArray(value) && value.length >= 3 && value.every((item) => typeof item === 'number');
+}
+
+export function FieldRow({
   label,
   schema,
   hint,
@@ -290,19 +380,22 @@ function FieldRow({
     [descriptionId, tagId, noteId, problems.length > 0 ? messageId : undefined].filter(Boolean).join(' ') || undefined;
   const unit = unitOf(schema);
   const vectorUnit = schema.type === 'array' && !unset && !notice ? unit : undefined;
+  const vector = !unset && !notice && isVectorValue(schema, value);
   return (
     // The hover tooltip lives on the row, never on the <label>: WebKit names a field
     // from its label's title attribute, which would replace the visible label with
     // the description (seen in the native AX tree). The description is announced
     // through aria-describedby instead.
-    <div className={`field${severity ? ` field--${severity}` : ''}`} title={description ?? label}>
+    <div
+      className={`field${severity ? ` field--${severity}` : ''}${vector ? ' field--vector' : ''}`}
+      title={description ?? label}
+    >
       {/* A real <label> (plus aria-labelledby for non-input controls) keeps the name robust even when clipped. */}
       <label className="field__label" id={`${id}-label`} htmlFor={id}>
         {label}
         {vectorUnit ? (
           <span className="field__unit">
-            <span className="visually-hidden">, in </span>
-            {vectorUnit}
+            <span className="visually-hidden">, in</span> {vectorUnit}
           </span>
         ) : null}
       </label>
@@ -371,8 +464,21 @@ export function ProblemList({ id, problems, here }: { id: string; problems: read
   );
 }
 
-function unitOf(schema: FieldSchema): string | undefined {
+export function unitOf(schema: FieldSchema): string | undefined {
   return 'x-incant-unit' in schema ? schema['x-incant-unit'] : undefined;
+}
+
+/** A click anywhere in a value box focuses its input, as it would in a text field. */
+function focusOwnInput(event: MouseEvent<HTMLElement>) {
+  const input = event.currentTarget.querySelector('input');
+  if (!input || event.target === input) return;
+  event.preventDefault();
+  input.focus();
+}
+
+/** Width of a monospace value in `ch`, so a unit can sit right after the number. */
+function charsStyle(text: string): CSSProperties {
+  return { width: `calc(${Math.max(1, text.length)}ch + 1px)` };
 }
 
 function ValueControl({
@@ -421,27 +527,23 @@ function ValueControl({
       const format = 'format' in schema ? schema.format : undefined;
       if (format === 'color') {
         return (
-          <span className="control control--color">
+          <span className="control control--color" onMouseDown={focusOwnInput}>
             <span className="swatch" style={{ background: value }} aria-hidden="true" />
             <input {...common} className="control__input mono" value={value} />
-          </span>
-        );
-      }
-      if (format === 'asset-ref' || format === 'ulid') {
-        return (
-          <span className="control control--ref">
-            <Icon name="link" size={12} />
-            <input {...common} className="control__input mono" value={value} title={value} />
           </span>
         );
       }
       if (identifier) {
         // The item's own stable ID: monospace like a reference, but no link icon (it points nowhere).
         return (
-          <span className="control control--ref control--identifier">
+          <span className="control control--ref control--identifier" onMouseDown={focusOwnInput}>
             <input {...common} className="control__input mono" value={value} title={value} />
           </span>
         );
+      }
+      const reference = ctx.refs?.(value) ?? null;
+      if (format === 'asset-ref' || format === 'ulid' || reference || looksLikeUlid(value)) {
+        return <ReferenceControl common={common} value={value} reference={reference} linked={format === 'asset-ref' || format === 'ulid'} />;
       }
       return <input {...common} className="control control__input" value={value} />;
     }
@@ -453,9 +555,10 @@ function ValueControl({
         return <MaskControl common={common} value={value} />;
       }
       if (typeof value !== 'number') return <Mismatch id={id} expected="a number" value={value} />;
+      const text = formatNumber(value);
       return (
-        <span className="control control--number">
-          <input {...common} className="control__input mono" value={formatNumber(value)} title={exactTitle(value)} />
+        <span className={`control control--number${unit || tag ? ' has-suffix' : ''}`} onMouseDown={focusOwnInput}>
+          <input {...common} className="control__input mono" value={text} title={exactTitle(value)} style={unit || tag ? charsStyle(text) : undefined} />
           {unit ? <span className="control__unit">{unit}</span> : null}
           <Tag tag={tag} />
         </span>
@@ -467,7 +570,7 @@ function ValueControl({
       const shown = variants && Object.hasOwn(variants, value) ? variants[value]! : value;
       if (!tag) return <input {...common} className="control control__input" value={shown} />;
       return (
-        <span className="control control--choice">
+        <span className="control control--choice" onMouseDown={focusOwnInput}>
           <input {...common} className="control__input" value={shown} />
           <Tag tag={tag} />
         </span>
@@ -491,10 +594,16 @@ function ValueControl({
         </span>
       );
     }
+    case 'object':
+      return <Mismatch id={id} expected="an object" value={value} />;
+    case 'x-json':
+      // An open object's list or null: the authored JSON, in full on hover.
+      return <input {...common} className="control control__input control--json mono" value={safeJson(value)} title={JSON.stringify(value) ?? 'undefined'} />;
     case 'array': {
       if (!('items' in schema)) return <Unsupported id={id} type="array without items" value={value} />;
       // Lists of records are presented by ObjectListView; only a non-array value reaches here.
       if (isObjectList(schema)) return <Mismatch id={id} expected="a list" value={value} />;
+      if (schema.items.type === 'string') return <Mismatch id={id} expected="a list of text" value={value} />;
       if (schema.items.type !== 'number' && schema.items.type !== 'integer') {
         return <Unsupported id={id} type={`array of ${schema.items.type}`} value={value} />;
       }
@@ -507,9 +616,12 @@ function ValueControl({
         const names = listAll(axes.map((axis) => axis.name.toLowerCase()));
         return <Mismatch id={id} expected={`${axes.length} numbers (${names})`} value={value} />;
       }
-      const channels = axes ?? arrayChannels(schema['x-incant-widget'], fieldKey, value.length);
+      const widget = schema['x-incant-widget'];
+      const channels = axes ?? arrayChannels(widget, fieldKey, value.length);
+      const preview = (widget === 'rgb' || widget === 'rgba') && channels ? linearPreview(value) : null;
       return (
-        <span className="control control--vector" role="group" aria-labelledby={labelledBy} id={id}>
+        <span className={`control control--vector${preview ? ' has-swatch' : ''}`} role="group" aria-labelledby={labelledBy} id={id} data-count={value.length}>
+          {preview ? <span className="vector__swatch" style={{ background: preview }} aria-hidden="true" title={`Preview of linear RGB ${value.map(formatNumber).join(', ')}, shown in sRGB`} /> : null}
           {value.map((item, index) => (
             <label key={index} className="vector__axis">
               {/* Tint classes stay positional: R/G/B share the X/Y/Z red/green/blue tints.
@@ -542,6 +654,61 @@ function ValueControl({
 }
 
 /**
+ * A stable ID that names something in the project. When the ID exactly matches an
+ * asset or entity, its icon and name lead the box and the authored ID follows in
+ * monospace; the name is also spoken. Other IDs show as authored.
+ */
+function ReferenceControl({
+  common,
+  value,
+  reference,
+  linked,
+}: {
+  common: InputHTMLAttributes<HTMLInputElement> & { readonly id: string };
+  value: string;
+  reference: Reference | null;
+  linked: boolean;
+}) {
+  const spokenId = `${common.id}-ref`;
+  return (
+    <span className={`control control--ref${reference ? ' is-resolved' : ''}`} onMouseDown={focusOwnInput}>
+      {reference ? (
+        <Icon name={iconForKind(reference.kind)} size={12} className={`kind--${reference.kind}`} />
+      ) : linked ? (
+        <Icon name="link" size={12} />
+      ) : null}
+      {reference ? (
+        <span className="ref__name" title={reference.name} aria-hidden="true">
+          {reference.name}
+        </span>
+      ) : null}
+      <input
+        {...common}
+        aria-describedby={[reference ? spokenId : undefined, common['aria-describedby']].filter(Boolean).join(' ') || undefined}
+        className="control__input mono"
+        value={value}
+        title={value}
+      />
+      {reference ? (
+        <span id={spokenId} className="visually-hidden">
+          {reference.spoken}
+        </span>
+      ) : null}
+    </span>
+  );
+}
+
+/** Linear RGB (0..1, clamped) as an sRGB CSS colour, for a swatch beside the channels. */
+function linearPreview(value: readonly number[]): string | null {
+  if (value.length < 3 || !value.every((n) => Number.isFinite(n))) return null;
+  const encode = (c: number) => {
+    const v = Math.min(1, Math.max(0, c));
+    return Math.round(255 * (v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055));
+  };
+  return `rgb(${encode(value[0]!)}, ${encode(value[1]!)}, ${encode(value[2]!)})`;
+}
+
+/**
  * A 32-bit collision group mask. The raw integer stays the focusable value; a
  * short summary sits where a unit would, and a strip of 32 cells (group 1 on the
  * left, in four bytes) shows which groups are set. The full list is spoken.
@@ -556,14 +723,16 @@ function MaskControl({
   const spokenId = `${common.id}-groups`;
   const set = new Set(maskGroups(value));
   const description = maskDescription(value);
+  const text = String(value);
   return (
     <span className="control control--mask">
-      <span className="control--number">
+      <span className="control--number has-suffix" onMouseDown={focusOwnInput}>
         <input
           {...common}
           aria-describedby={[spokenId, common['aria-describedby']].filter(Boolean).join(' ')}
           className="control__input mono"
-          value={String(value)}
+          value={text}
+          style={charsStyle(text)}
         />
         <span className="control__unit control--mask__summary" aria-hidden="true">
           {maskSummary(value)}
@@ -662,26 +831,6 @@ function Tag({ tag }: { tag: FieldStatus | null }) {
   );
 }
 
-/**
- * Compact, readable numbers that never hide a nonzero value. Integers are shown
- * as is; ordinary magnitudes keep up to four decimals (1.5708); values whose
- * magnitude is below 0.01 or at least 1e9 use four significant digits in
- * exponent form (1e-6, -2.5e-7, 1.235e-3), so a tiny clip distance never reads 0.
- */
-export function formatNumber(value: number): string {
-  if (Number.isInteger(value) && Math.abs(value) < 1e9) return String(value);
-  const magnitude = Math.abs(value);
-  if (magnitude !== 0 && (magnitude < 0.01 || magnitude >= 1e9)) {
-    return Number(value.toPrecision(4)).toExponential().replace('e+', 'e');
-  }
-  return String(Number(value.toFixed(4)));
-}
-
-/** The exact authored number as a hover title, only when the shown form differs. */
-function exactTitle(value: number): string | undefined {
-  return formatNumber(value) === String(value) ? undefined : String(value);
-}
-
 export function Notice({
   id,
   children,
@@ -705,14 +854,14 @@ export function Notice({
     >
       <span className="control--notice__text">
         <Icon name="warning" size={12} />
-        {children}
+        <span>{children}</span>
       </span>
       <code className="control--notice__raw">{safeJson(value)}</code>
     </span>
   );
 }
 
-function Mismatch({ id, expected, value }: { id?: string | undefined; expected: string; value: unknown }) {
+export function Mismatch({ id, expected, value }: { id?: string | undefined; expected: string; value: unknown }) {
   return (
     <Notice id={id} value={value}>
       Cannot show as {expected}; raw value:
@@ -723,30 +872,7 @@ function Mismatch({ id, expected, value }: { id?: string | undefined; expected: 
 function Unsupported({ id, type, value }: { id?: string | undefined; type: string; value: unknown }) {
   return (
     <Notice id={id} value={value}>
-      Unsupported field type “{type}”; raw value:
+      {type === 'unsupported' ? 'This field’s type is not supported yet; raw value:' : `Unsupported field type “${type}”; raw value:`}
     </Notice>
   );
-}
-
-/** "translation" -> "Translation", "castShadows" / "cast_shadows" -> "Cast shadows". */
-export function humanize(key: string): string {
-  const words = key
-    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
-    .replace(/[_-]+/g, ' ')
-    .trim()
-    .toLowerCase();
-  return words ? words[0]!.toUpperCase() + words.slice(1) : key;
-}
-
-export function safeJson(value: unknown): string {
-  try {
-    const text = JSON.stringify(value);
-    return text === undefined ? 'undefined' : text.length > 160 ? `${text.slice(0, 157)}…` : text;
-  } catch {
-    return '[unserializable]';
-  }
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
