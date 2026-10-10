@@ -26,7 +26,7 @@ class PhaseZeroGate(unittest.TestCase):
         return {
             'spikes': {'auth': {'passed': True}},
             'nightly_runnable_targets': {'ios': True},
-            'year_one_staffing_confirmed': True,
+            'initial_staffing_confirmed': True,
             'director_approval': True,
         }
 
@@ -42,7 +42,7 @@ class PhaseZeroGate(unittest.TestCase):
 
     def test_every_remaining_category_still_blocks_strict_gate(self):
         cases = [('spike:auth', 'spike'), ('nightly:ios', 'nightly'),
-                 ('year_one_staffing_confirmed', 'field'), ('director_approval', 'field')]
+                 ('initial_staffing_confirmed', 'field'), ('director_approval', 'field')]
         for expected, category in cases:
             with self.subTest(expected=expected):
                 ledger = self.ready()

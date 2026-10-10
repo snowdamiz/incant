@@ -53,7 +53,7 @@
     "android": false,
     "web": false
   },
-  "year_one_staffing_confirmed": false,
+  "initial_staffing_confirmed": false,
   "platform_build_evidence": "docs/spikes/evidence/six-platform-2026-10-08.json",
   "android_execution_evidence": "docs/spikes/evidence/android-emulator-2026-10-08.json",
   "advance_authorization": {
