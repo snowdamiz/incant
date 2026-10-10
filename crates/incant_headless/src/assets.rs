@@ -51,3 +51,24 @@ pub fn import(
     response["revision"] = serde_json::json!(committed.revision);
     print(response)
 }
+
+/// Document semantics plus cached sprite bindings; no source reimport or mutation.
+pub fn validate(path: &Path) -> Result<()> {
+    let project = read_project(path)?;
+    let root = path
+        .parent()
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or(Path::new("."));
+    let diagnostics = incant_import::validate_cached_sprites(&project, root, None)?;
+    let valid = !diagnostics
+        .iter()
+        .any(|d| d.severity == incant_import::SpriteDiagnosticSeverity::Error);
+    print(
+        serde_json::json!({"valid":valid,"project_id":project.id,"schema_version":project.schema_version,
+        "diagnostics":diagnostics}),
+    )?;
+    if !valid {
+        return Err("cached sprite reference validation failed; see diagnostics".into());
+    }
+    Ok(())
+}

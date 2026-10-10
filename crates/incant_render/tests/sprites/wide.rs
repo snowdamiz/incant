@@ -60,7 +60,7 @@ fn wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels() {
                 "every source texel must remain distinguishable after display"
             );
             fixture.edit("region", json!([0, 0, w, h]));
-            for scale in [1_usize, 2, 4, 8, 16, 32] {
+            for scale in [1_usize, 2, 4, 8, 16, 20, 28, 32, 36, 44, 48, 64, 96, 128] {
                 for offset in [0., 0.625, 1., 2., 3.] {
                     for flipped in [false, true] {
                         fixture.edit(if vertical { "flip_y" } else { "flip_x" }, json!(flipped));
@@ -123,62 +123,75 @@ fn wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels() {
                 // flat source base must never introduce a seam or change the
                 // texel selected on either side of a shared edge.
                 let anchors = std::collections::BTreeSet::from([
+                    288,
+                    448,
+                    480,
                     width / 2,
                     512.min(width / 2),
                     width.saturating_sub(512).max(width / 2),
                 ]);
-                for anchor in anchors {
-                    for flipped in [false, true] {
-                        fixture.edit(if vertical { "flip_y" } else { "flip_x" }, json!(flipped));
-                        let side = f64::from(width) * scale as f64;
-                        let from_left = if flipped { width - anchor } else { anchor };
-                        let center = 4.5 - f64::from(from_left) * scale as f64 + side / 2.;
-                        let translation = if vertical {
-                            [0., (32. - center) / 8., 0.]
-                        } else {
-                            [(center - 32.) / 8., 0., 0.]
-                        };
-                        fixture
-                            .project
-                            .scenes
-                            .get_mut(&fixture.scene)
-                            .unwrap()
-                            .entities
-                            .get_mut(&fixture.sprite)
-                            .unwrap()
-                            .components
-                            .insert(
-                                "Transform".into(),
-                                json!(Transform {
-                                    translation,
-                                    ..Default::default()
-                                }),
-                            );
-                        let actual = line(fixture.pixels(&renderer));
-                        let incorrect = actual
-                            .iter()
-                            .enumerate()
-                            .filter(|(i, pixel)| {
-                                let displacement = (*i as i32 - 4).div_euclid(scale as i32);
-                                let texel = if flipped {
-                                    anchor as i32 - 1 - displacement
-                                } else {
-                                    anchor as i32 + displacement
-                                };
-                                **pixel != palette[texel as usize]
-                            })
-                            .count();
-                        if incorrect != 0 {
-                            failures.push(format!("interior width {width}, scale {scale}, anchor {anchor}, vertical {vertical}, flipped {flipped}: {incorrect} wrong pixels"));
+                for offset in [-1, 0, 1] {
+                    for &anchor in &anchors {
+                        for flipped in [false, true] {
+                            fixture
+                                .edit(if vertical { "flip_y" } else { "flip_x" }, json!(flipped));
+                            let side = f64::from(width) * scale as f64;
+                            let from_left = if flipped { width - anchor } else { anchor };
+                            let center = 4.5 + f64::from(offset) / 256.
+                                - f64::from(from_left) * scale as f64
+                                + side / 2.;
+                            let translation = if vertical {
+                                [0., (32. - center) / 8., 0.]
+                            } else {
+                                [(center - 32.) / 8., 0., 0.]
+                            };
+                            fixture
+                                .project
+                                .scenes
+                                .get_mut(&fixture.scene)
+                                .unwrap()
+                                .entities
+                                .get_mut(&fixture.sprite)
+                                .unwrap()
+                                .components
+                                .insert(
+                                    "Transform".into(),
+                                    json!(Transform {
+                                        translation,
+                                        ..Default::default()
+                                    }),
+                                );
+                            let actual = line(fixture.pixels(&renderer));
+                            let incorrect = actual
+                                .iter()
+                                .enumerate()
+                                .filter(|(i, pixel)| {
+                                    let displacement = (256 * (*i as i32 - 4) - offset)
+                                        .div_euclid(256 * scale as i32);
+                                    let texel = if flipped {
+                                        anchor as i32 - 1 - displacement
+                                    } else {
+                                        anchor as i32 + displacement
+                                    };
+                                    **pixel
+                                        != palette
+                                            .get(texel as usize)
+                                            .copied()
+                                            .unwrap_or(background)
+                                })
+                                .count();
+                            if incorrect != 0 {
+                                failures.push(format!("interior width {width}, scale {scale}, anchor {anchor}, offset {offset}/256 px, vertical {vertical}, flipped {flipped}: {incorrect} wrong pixels"));
+                            }
+                            interior_cases += 1;
                         }
-                        interior_cases += 1;
                     }
                 }
             }
         }
     }
-    assert_eq!(cases, 600);
-    assert_eq!(interior_cases, 264);
+    assert_eq!(cases, 1400);
+    assert_eq!(interior_cases, 4368);
     cases += interior_cases;
     assert!(
         failures.is_empty(),

@@ -5,7 +5,10 @@ Everything here is drawn from scratch for this packet: a 16 px pixel rendition o
 the project's own Wisp mascot (four idle frames), an asymmetric nine-slice dialog
 panel, an orientation key, a soft glow orb with hidden RGB under zero alpha, a
 guarded crate tile, two ground tiles, sky/fog strips, tone and alpha swatches, a
-3x5 label font and a gem badge used for reimport tests.
+3x5 label font and a gem badge used for reimport tests. Later review rounds add test
+textures whose colours name every texel: a ruler, 4096- and 8192-texel strips, an
+8192-texel column, a 512 x 512 grid and resized twins, plus a separate label sheet
+for round four.
 
 Usage (repo root):
   python3 -I handoffs/0032-sprite-rendering/tools/sprite_art.py OUT_DIR [--preview]
@@ -351,6 +354,10 @@ LABELS = [
 ]
 
 
+# Round-four words live on their own sheet, so labels.png stays byte-identical.
+LABELS4 = ["K", "L", "M", "N", "SPANS ALONG X", "SPANS ALONG Y", "SPAN VARIANTS", "ISOTROPIC 32X 48X 64X"]
+
+
 def text_cells(text, ink):
     cells = [[] for _ in range(5)]
     for i, ch in enumerate(text):
@@ -431,10 +438,10 @@ def build_sheet(wisp_palette=WISP):
     return c
 
 
-def build_labels():
-    c = Canvas(256, 64)
+def build_labels(words=None, width=256, height=64):
+    c = Canvas(width, height)
     x, y = 0, 0
-    for text in LABELS:
+    for text in LABELS if words is None else words:
         cells = text_cells(text, LABEL_MUTED if len(text) == 1 else LABEL_INK)
         w = len(cells[0])
         if x + w > c.width:
@@ -539,12 +546,35 @@ def main():
     pngio.write_rgba(out / "strip8192.png", 8192, 2,
                      [(60 + 2 * (i % 64), 60 + 2 * ((i // 64) % 64), 90 + 2 * (i // 4096), 255)
                       for _ in range(2) for i in range(8192)])
+    # Round four: a 2 x 8192 column naming texel row i like strip column i, resized
+    # twins of the strip and column whose extra texels are an unmistakable red, and
+    # labels for the span boards on a separate sheet.
+    def strip_texel(i):
+        return (60 + 2 * (i % 64), 60 + 2 * ((i // 64) % 64), 90 + 2 * (i // 4096), 255)
+    red = (200, 40, 40, 255)
+    pngio.write_rgba(out / "column8192.png", 2, 8192, [strip_texel(i) for i in range(8192) for _ in range(2)])
+    pngio.write_rgba(out / "strip8192-tall.png", 8192, 4,
+                     [strip_texel(i) for _ in range(2) for i in range(8192)] + [red] * (2 * 8192))
+    pngio.write_rgba(out / "column8192-wide.png", 4, 8192,
+                     [p for i in range(8192) for p in (strip_texel(i), strip_texel(i), red, red)])
+    labels4 = build_labels(LABELS4, 128, 32)
+    pngio.write_rgba(out / "labels4.png", labels4.width, labels4.height, labels4.pixels())
+    # Round five: a 512 x 512 grid naming texel (x, y) by R = 60 + 2 (x % 64),
+    # G = 60 + 2 (y % 64) and B = 90 + 2 (x // 64 + 8 (y // 64)), all within the tone
+    # curve's identity range, for two-axis nine-slices; and a taller twin with red rows.
+    def grid_texel(x, y):
+        return (60 + 2 * (x % 64), 60 + 2 * (y % 64), 90 + 2 * (x // 64 + 8 * (y // 64)), 255)
+    grid = [grid_texel(x, y) for y in range(512) for x in range(512)]
+    pngio.write_rgba(out / "grid512.png", 512, 512, grid)
+    pngio.write_rgba(out / "grid512-tall.png", 512, 520, grid + [red] * (8 * 512))
     regions = {
         "sheet": sheet.regions, "labels": labels.regions, "badge": badge.regions,
         "badge_small": badge_small.regions, "tone16": {"tone16": [0, 0, 64, 4]},
         "ruler64": {"ruler64": [0, 0, 64, 64], "ruler63": [0, 0, 63, 63]},
         "strip4096": {"strip": [0, 0, 4096, 1]},
         "strip8192": {f"w{w}": [0, 0, w, 1] for w in (512, 1024, 2048, 4096, 8192)},
+        "column8192": {"c8192": [0, 0, 1, 8192]}, "labels4": labels4.regions,
+        "grid512": {"grid": [0, 0, 512, 512]},
         "panel_border": PANEL_BORDER, "tone_swatches": TONE_SWATCHES, "alphas": ALPHAS,
     }
     (out / "regions.json").write_text(json.dumps(regions, indent=1), encoding="utf-8")
@@ -552,6 +582,8 @@ def main():
         for name, canvas in files.items():
             preview(canvas, out / f"preview-{name}", scale=8 if canvas.width <= 128 else 4)
     print(json.dumps({"written": sorted(files) + ["tone16.png", "ruler64.png", "strip4096.png", "strip8192.png",
+                                                  "column8192.png", "strip8192-tall.png", "column8192-wide.png",
+                                                  "labels4.png", "grid512.png", "grid512-tall.png",
                                                   "regions.json"]}))
 
 

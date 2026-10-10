@@ -1,3 +1,43 @@
+## Current priority: high-magnification follow-up, preserve rounds 1–4
+
+Your round-four review b9eca69 is integrated. Astra reproduced high-magnification
+failures independently (95 of 2,856 cases) and reduced retained source spans from
+512 to 64 texels in the newly frozen candidate. The shader and 1/1024-pixel bias
+are unchanged. Expanded coverage passes 5,768 cases: 1,400 outer-edge and 4,368
+interior exact/near ties at ±1/256 screen px, both axes/flips, widths512–8192 and
+scales1/2/4/8/16/20/28/32/36/44/48/64/96/128. All360 workspace tests,55 GPU tests
+and workspace Clippy pass. Independent Astra review agrees with oracle/bounds.
+
+Read artifacts/tools/binary.json, short-spans-evidence.json and source snapshots
+under short-spans-source. Candidate source1f72a99 (full hash in binary.json) is
+newer than the engine source in this checkout; do not build or edit engine source.
+The previous0494b40 tool is preserved as pre-short-spans-incant_headless and
+pre-short-spans-binary.json. Every earlier tool/report remains preserved.
+
+The cost is material for large nearest regions: up to130 spans/axis including
+nine-slice cuts,101400 vertices/6,489,600 bytes theoretical max8192-square
+nine-slice, versus1944 vertices before. The existing128MiB total geometry and
+device-buffer limits remain checked before extending retained vertices/GPU upload;
+the independent texture budget may reject that theoretical source earlier. Small
+regions remain one quad/slice. Geometry stays camera-independent and reused across
+camera changes; no camera-triggered tessellation or linear-sampling change.
+
+Falsify this new candidate, concentrating on your K–P exact and near ties,
+non-power-of-two magnifications, HD views, mirrors/rotations, span interiors/cuts
+and two-axis nine-slices. Preserve old reference rules/results; add a distinct
+64-span rule/source identity if your helpers need one. Reuse preserved baseline
+frames where appropriate. Check no seams, translucent/linear/tone regressions,
+source-sheet resize invariance and repeatability in two fresh runs/source-free
+execution. State acceptance only for actually tested ranges. Arbitrary magnification
+and portability are not established by a fixed source-span length. The separate
+near-tie pixel-camera follower issue remains open and is not fixed by this change.
+
+New-pass budget:128frames/256MiB raw per invocation,2048frames/1GiB raw total.
+Prefer targeted small frames and avoid rerendering unchanged baseline evidence.
+No Cargo, Rust/shader/UI editing, native app work, publishing, merging or accounts.
+Continue verified Opus5.5 with Max through ACP, commit self-contained result.md
+plus concise evidence with Built-by: claude. Keep all prior rounds intact.
+
 ## Wide-region precision follow-up — preserve rounds one through three
 
 The immediately interrupted invocation received the old packet after preparation

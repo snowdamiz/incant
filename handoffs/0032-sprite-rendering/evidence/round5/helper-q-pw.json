@@ -1,0 +1,1415 @@
+{
+ "binary": "pre-wide",
+ "binary_file": "pre-wide-incant_headless",
+ "binary_source_commit": "f9aa1da0818313c5c6cac580e54d7107646378bc",
+ "binary_sha256_start": "a4b5ddb905122a55b7d156ad39b39e7f97f5266e70159614fe4cdc7589796828",
+ "plan": {
+  "repeats": 1,
+  "live": [],
+  "static_only": true,
+  "probe": false,
+  "shots": "pp-Q,pp96-Q,roll7-Q"
+ },
+ "shots": {
+  "pp-Q0-128x128": {
+   "r1": "515d3785456a4849c9306631a4062c9aa02231735bdaba6f47ad815d259c65a8",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q1-128x128": {
+   "r1": "c8bb727d95b085bd7f44b06a14242e1aca1f1f6f05107281c9d28e5a21c85538",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q2-128x128": {
+   "r1": "5d147d1ce40f5579f0befcca18317f96db8778848ab3e04174822f0f8ba87d4d",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q3-128x128": {
+   "r1": "9332ed29bd68b9a2581a1e29f0486ed9624404cada644c3ea94e50c84a55c35d",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q4-128x128": {
+   "r1": "0e1ebfb4127f9d7f4b9fce298cb89577fb3fe278f4c343e5b6432fea0ff39058",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q5-128x128": {
+   "r1": "8db0c732ca51c5d948eff77c362e7cd8d2bb5bb877ce2e42abe49b7493e52f85",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q6-128x128": {
+   "r1": "f71590d359cedf72bd2e99adf425abc0b9e339f7153a2f19941229ee2036fe7b",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q7-128x128": {
+   "r1": "3dab571c946392cd874408c3134a7154dbb97112eda670775c876b155c9cb969",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q8-128x128": {
+   "r1": "dd4ee19335249aebbf3b4a4d5588cb7f7628d524f95149614eecc21338dd0248",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q9-128x128": {
+   "r1": "d283b25e29e8f74f1c193e264fc3cb856a6262611c67d2cf9b9a9a3b41242961",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q10-128x128": {
+   "r1": "546a6253f09a01c78a74d976c567a6fad49b64e841235ffeaf708828f2e024ed",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q11-128x128": {
+   "r1": "b4829bddd0808c2727b434a5f8c01950745ec70436095078f257f43b7bc86b2c",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q12-128x128": {
+   "r1": "ba11be610f394bd077690522334bdefe0722dcbf4c54c511c80e4967c0760fbb",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q13-128x128": {
+   "r1": "92ceeb439a402727afa6ca79ca262a9303b5c18d0ae2214a8fda443a5e9c9ecb",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q14-128x128": {
+   "r1": "cd2da419ba2ae52e6e02663e0200f82b9b20f9df560d229b36181ae6bfcbd4eb",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q15-128x128": {
+   "r1": "3b30b2e48535593df4b5253a20e6402e67d2e09ea92e6c5ffa80ca012b92c51d",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q16-128x128": {
+   "r1": "84e2f621d9971f525bec2906598008aba77206823079a82b59468a129937fc1e",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q17-128x128": {
+   "r1": "6e6dc433f239999827682224eb01d30815ac62f525afbfc1e034205e310e38b0",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q18-128x128": {
+   "r1": "125c1c6886179bb46a398f391ba193b05c02661a77e68cba9cbbefbb53b94855",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q19-128x128": {
+   "r1": "96c6ec8bf880d6ed04f7b9fdbe6e28a5ac67d21eb5b0575e94491735f61eeba3",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q20-128x128": {
+   "r1": "0ac041d9597b325f0b12a109abfc5f03d6b549f70f97aea43e639fba65c37914",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q21-128x128": {
+   "r1": "d70b92361c4a61b9e608b897a1032a63065b29440932ea710b368946fce0a54c",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q22-128x128": {
+   "r1": "4441d22049f7322f469c5763ac863ecdf72aaa71ad46e6ede223e2877058e735",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q23-128x128": {
+   "r1": "5e807274b40efaa0faebc2f319a7634052de619eaa08dc61b38bd51ac11a34f5",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q24-128x128": {
+   "r1": "3fc52aa4f6b2542a104eddfaeb0fef88ac00eef872e323a351bea0a6c2b44d98",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q25-128x128": {
+   "r1": "ca6c12198fadf77fa37ac1658e48ad8f4503a65c7fd346a5bde4bd858684e747",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q26-128x128": {
+   "r1": "3d4365451e00736dde74eb9c551d97889d1d18f2c0968c4379ab8646acabe809",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "roll7-Q26-128x128": {
+   "r1": "b3d6616bb1509c42930d2b4f714267b8f001e3f75ec352c87bd565b879c83fbb",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q27-128x128": {
+   "r1": "9e82becf54a9b4a9f08d3db100a2ce9b510fae436f4aa62e7fcfa0c97a08a4bc",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q28-128x128": {
+   "r1": "21b0654d475efba45cd4c9f54583ef2e3d579d0c0c083e059057c286bcfbc7fd",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q29-128x128": {
+   "r1": "d951bc25f89e71a57bdbfd0c107074889fad62a4227af3cd0bf3bf43ba7581fe",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q30-128x128": {
+   "r1": "c957be8a98d19cda4408c65f4acbcd512df58504e5bbb7e6b95b82c8bc47144c",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q31-128x128": {
+   "r1": "bebe5ded79c13c4dc534c380ebe662775131d272ed0cf8fd9a60a30dcdc7156d",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q32-128x128": {
+   "r1": "bf6e681309997651757c8959ccb743c8d65a2a9b1b00489255f14e75527a5119",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q33-128x128": {
+   "r1": "9fb82b76c87d84001362f2091d8431a379328a9c7ca11a9e79f1762dd2aa4b8d",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q34-128x128": {
+   "r1": "2ccef9744b551e4a1ba9e7137748d44c771b8cd60476eca27a0a4c8083d58f55",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q35-128x128": {
+   "r1": "b8802fa85f6235e62c06b6eb30db964a02efd88c5904765c1829322131b6d17f",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q36-128x128": {
+   "r1": "4b2cc859ad6bb317efdfe4f6a7cabc64a4c67f54335759bae1c21a92e40d9cf2",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q37-128x128": {
+   "r1": "b772e9de92b201dd414ba9edf670ebdc11971a442fff7cbcce324ea34f0087b1",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q38-128x128": {
+   "r1": "6c66378a042000e7f4ac8a1e6a8cc34428e4dfe9d5f4a395f4cad4edcc039f44",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q39-128x128": {
+   "r1": "38239219aa737a2e995f5edea60e3617263a3c87c1263daa548882d7ec8640aa",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q40-128x128": {
+   "r1": "c45eb1b782731e8f591228f9f20b316d32d4d69df81e7c12ce91e67922a9ce25",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q41-128x128": {
+   "r1": "ef6ee3fbb76cfad0ab7dca2d537433340804cb84bffb8c5a7a37a3ab739c4cac",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q42-128x128": {
+   "r1": "90bb92618b29b7ee063fe048d6d53df0b1e4783df4454550432d293f667e17e7",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q43-128x128": {
+   "r1": "a459a51b9ea08b92586ac85fc092aff0fed2ca67a0ee36ba5658046418e34065",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q44-128x128": {
+   "r1": "f89554f626205b7412a4676b8fc5648546191cff012693bfd3f379496c170a39",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q45-128x128": {
+   "r1": "06373856f762fb8cd04745c593f741cbe8320aa798992db64dcfec5e3bfd02ba",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q46-128x128": {
+   "r1": "297cb3f852eece7ecb38bee1ab8a5a03469129301186d4e266d10c2ae6a2f654",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q47-128x128": {
+   "r1": "87ec6aed3d585f50f9684daf383cab42517e7b7659407ebe062f4f3a2c325d13",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q48-128x128": {
+   "r1": "9cdd8a6a42de4db3f1128e87db7f21783bd19500f01dd5e43e445c09bb8758d3",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q49-128x128": {
+   "r1": "7ee4faa4f729e9ed38100307a4c0df8a86026b39f87206ac9623df00b79d333e",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q50-128x128": {
+   "r1": "f4e25a10777ac2bf28d591873fed9c4ffc4aa299f91e7db94bbe00e8a5872d2b",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q51-128x128": {
+   "r1": "a58a86fc123fc946aa53605d0aa28f2b8343596ab516bfe795ef7667f3af771b",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q52-128x128": {
+   "r1": "ca34dcedec506bae20c741e6c4801262f312567a4b2b72adf924fab7abaf731d",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q53-128x128": {
+   "r1": "bd9e297ee35ab1dbcdffc3cfff4504928181b2f720aa720a4e93b4dc353c1a16",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q54-128x128": {
+   "r1": "d0072cc76ab9554fe5113c40e3edf68415d4fac7315ac56c986f6ce58851ce40",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q55-128x128": {
+   "r1": "e51ef81c95fd258e56f7aecc238854a760cbd1a593de81db1294be4dae03f8d7",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q56-128x128": {
+   "r1": "7f792f033998a8319f3aef982dc957eac81acdd0a8d38f70e81ee06ca7c395fa",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q57-128x128": {
+   "r1": "2660bf92f2f2d61eec2a4182f0a42ae98df31d85ddc700f12ac230b8135df193",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q58-128x128": {
+   "r1": "adf8df9aad238b6394e06efcba720a425acdc1925e9241c3560d4bc409ab0f03",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q59-128x128": {
+   "r1": "c4e6fd62ba0fd857e0b47e6b492637e13146e6106450b3c3bd9859a68aef9cb8",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q60-128x128": {
+   "r1": "dd397338f5c7094af63cb622c026a157b00a97b30e42e4869faec61179c0a0bf",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q61-128x128": {
+   "r1": "0068c3b44ec522a9a915ef38389ee807c777b306517499a6644497ee116ab941",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q62-128x128": {
+   "r1": "f55fdeb553c4e1d8a47ca8a9a2c6d16d58fb5d328b9aa94933efae00bb356688",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q63-128x128": {
+   "r1": "45a56466c02f13720e79b0e41913e849b4121b1110b3906ca7eaf3c461d92f43",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q64-128x128": {
+   "r1": "4db1e34d7910c74ca975aa0d82dd79774df6ff44c208c355e9dcc84e5fee55ac",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q65-128x128": {
+   "r1": "9ae36b3f7fae44320a1a17920f3c6f0d9035c399bff0fa4a9a3600ba0447bbf8",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q66-128x128": {
+   "r1": "1324c72ef7da0965a4683a23b386d1d1816613368848c51f2ef0fa30602898bb",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q67-128x128": {
+   "r1": "ae63c6185b24d3cf1397657b9c930c1524a2e2ea2ce73a3b623dc89059daf1df",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q68-128x128": {
+   "r1": "25684eaeb7c898635e67b1d0013d3d663dde8c5fdb4cac9db1f0600cd4e867c9",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q69-128x128": {
+   "r1": "9c43df14e059438aba12776814f342cfbec235f98ad5e91081002c89d33928d4",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q70-128x128": {
+   "r1": "11754f390c13b4893ddb7d17d59b0342af79880b831a4d4c40b120fd559a2ffb",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q71-128x128": {
+   "r1": "8176d84be402dba0878a6ce8694f1e34bd574a3010aa4989c63d0f06f5176bcb",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q72-128x128": {
+   "r1": "35cb3bad6f94cc32fb5c4f821e780154ec7b9f1c8c350661c888884863d6d3cb",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q72-96x96": {
+   "r1": "6d4199c79682676397093e11640b9a24bdee74519c351736837d68a50062d045",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q73-128x128": {
+   "r1": "5ab984dd367b0ec680951e44faa6478fcf028056c29ecabebddc2e64fd929bcd",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q73-96x96": {
+   "r1": "784aeb94de5fec11d01d91f5a4069ad9f94b8e7f0de0f59fa507999a6b2f3a6e",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q74-128x128": {
+   "r1": "0f3cb22ac56386198bdc16a7a7db2e201c5962abbcd87af618e5c40f19e6f388",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q74-96x96": {
+   "r1": "fb93c7ccd61ac0a35fb52fcdfd6c24ac1c219b96ef418f4e5eaf315c925e4796",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q75-128x128": {
+   "r1": "f57eaaea51e0e9d53e7759ddffcc7bfb73e8a28ae617d304b7421bc50cb57bee",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q75-96x96": {
+   "r1": "7674e8677610f4c394efe4e9b009775502fb48da90ffc9930a561af4b1f5a009",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q76-128x128": {
+   "r1": "507bba94d8c11ae33bdc838510272a9e9244202d505433404017ef50c0e7b1f6",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q76-96x96": {
+   "r1": "a2b38a8cee30d236f5cc4355d67ad15365dd4cb3be2be30d642bd0c0a12231a6",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q77-128x128": {
+   "r1": "dba2a584238c8dde38a4c4aa759aa834ddf86d46f495568d0f6a19a44942c072",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q77-96x96": {
+   "r1": "def070114fbcdb6ee0b7e8fb4280d9d3fa3a84a6784957d60d7b7108503b8f95",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q78-128x128": {
+   "r1": "19751bdc48c95211cc03e64e5bf40072540d908edd2986ad5e8cd70659e7bca4",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q78-96x96": {
+   "r1": "9b4a4cf51b2ed399008955f56c31817ab2925350e060bd1216a908a9689e2900",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q79-128x128": {
+   "r1": "8f3bf551302636ad01a72e1dbe66d86594241eec66b04723d229c805e6f274d4",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q79-96x96": {
+   "r1": "fd272640b4d9f09d59ca079c58a6397f96b3161017f003a2ddf1e9fced90a1b3",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q80-128x128": {
+   "r1": "5ec24e94f0aef838aa37b08ad1e89176379271029b959d3241562e8bc1110383",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q80-96x96": {
+   "r1": "648a79263c3b5c022f90559beed27847d1123d2929b79ab69c85315142f5977c",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q81-128x128": {
+   "r1": "af7e67426596dde860467e53bab391bdaf038a647d4599408fbf6e4c8645fa49",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q81-96x96": {
+   "r1": "e9b7fff4f3fbbbd8947242e3e986556d05f43e6a00127210ce86b2014f148e9d",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q82-128x128": {
+   "r1": "151d2a545b3ac49c2dcee6ce4413169dafdb516b65d4d7804a26e4ad6c324da2",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q82-96x96": {
+   "r1": "ee9869dc3adb929aabc644fa5db2dfd1dbbf4521de2a0b0f215e54eb4fd76b8c",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q83-128x128": {
+   "r1": "ddc5736a15c27e8d92beb2e86f5a2cbfba520bdd043bf697795330439f611e84",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp96-Q83-96x96": {
+   "r1": "ea816745b50a95e2f54ecbba42fee90eb418f2e526629f70185e55707c823e9b",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q84-128x128": {
+   "r1": "9efd851fd4c3a7116663dd394b9607ae37bd50b9fc30018f1033afd20cef1738",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  },
+  "pp-Q85-128x128": {
+   "r1": "bb11c8d157d28603651a4a39d44521138cdb3555c2f598e81ad0627fa7ab6506",
+   "r2": null,
+   "equal": null,
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 1,
+    "model_entities": 1,
+    "model_triangles": 2,
+    "primitive_instances": 1,
+    "sprite_entities": 2421
+   }
+  }
+ },
+ "authored_unchanged_by_rendering": true,
+ "authored_unchanged_by_play": true,
+ "binary_sha256_end": "a4b5ddb905122a55b7d156ad39b39e7f97f5266e70159614fe4cdc7589796828",
+ "engine_calls": 114,
+ "binary_unchanged_every_call": true,
+ "budget": {
+  "frames": 99,
+  "raw_bytes": 6144000,
+  "invocations": 99,
+  "largest_invocation_frames": 1,
+  "largest_invocation_raw_bytes": 65536,
+  "written_pngs": 99,
+  "written_raw_bytes": 6144000
+ }
+}

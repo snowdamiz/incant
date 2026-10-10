@@ -1,0 +1,27 @@
+{
+ "candidate_source_snapshots": {
+  "geometry.rs": "bb7a7c94d1e0f0958463c57de9a426d6105c432ae2be741e9070828a95d7cbd0",
+  "mod.rs": "c23ce2a0bad22d606d92e5dab709d433a0371f6c0f7ee18d5e2abe2cf57b2c45",
+  "sprite.wgsl": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+  "wide.rs": "570300f3da218b6e493f01fb369ade5908f155068306dce379d142862e3c5719"
+ },
+ "evidence_file": "artifacts/tools/short-spans-evidence.json",
+ "evidence_sha256": "2e12f3b973d8a46c58b81548eb6eeb9d1ed58846c4c457469063f6e974c2fc89",
+ "binaries": {
+  "incant_headless": "44e75204010c4275d24c2566c089deb44efc028ffc38fc7e03c7523f77a3ca85",
+  "pre-short-spans-incant_headless": "1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50",
+  "pre-wide-incant_headless": "a4b5ddb905122a55b7d156ad39b39e7f97f5266e70159614fe4cdc7589796828"
+ },
+ "scene_sha256": {
+  "d1": "e308834b06578d885c73e12df8b6785e981594bf80e18a9a14274937c4cb0494",
+  "d2": "6ce5d3bbd47c7aa60dd9d5635051095cfea687e6d0d4b198e1b41dbafc2a51e7",
+  "probe-d1": "82188ceda4a9626682ba7edd366b0def7b6fe7adee1be355e45e233dcb50521a",
+  "q-psp": "ad543b4c24aa87c5c6c1da875f5188df8de7b09293ed6cc610d0b9a22f90df2e",
+  "q-pw": "c9431062dd12d889bb9b9c802f29eacfeacbd93fdfa371c2c4781abdb8f39c0e"
+ },
+ "scene_note": "Scenes are not committed (3.2 MB each); the committed helper rebuilds d1's scene exactly.",
+ "baseline_runs_reused": {
+  "artifacts/0032-sprite-rendering/round4/c1": "0494b40cf8fcc5e1ad0fc689655a62cb264a2f50",
+  "artifacts/0032-sprite-rendering/round4/probe-c1": "0494b40cf8fcc5e1ad0fc689655a62cb264a2f50"
+ }
+}

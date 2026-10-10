@@ -1,0 +1,219 @@
+{
+ "K": {
+  "file": "decoded-board-k-upper-span-ties-32x-48x-64x-before-above-after-zoom2.png",
+  "red_pixels_on_first_line": {
+   "K:32x:plain:0:upper": {
+    "before": 0,
+    "after": 0
+   },
+   "K:32x:flip:0:upper": {
+    "before": 8,
+    "after": 0
+   },
+   "K:48x:plain:0:upper": {
+    "before": 2,
+    "after": 2
+   },
+   "K:48x:flip:0:upper": {
+    "before": 5,
+    "after": 0
+   },
+   "K:64x:plain:0:upper": {
+    "before": 0,
+    "after": 0
+   },
+   "K:64x:flip:0:upper": {
+    "before": 2,
+    "after": 0
+   }
+  }
+ },
+ "L": {
+  "file": "decoded-board-l-upper-span-ties-32x-48x-64x-before-above-after-zoom2.png",
+  "red_pixels_on_first_line": {
+   "L:32x:plain:0:upper": {
+    "before": 8,
+    "after": 1
+   },
+   "L:32x:flip:0:upper": {
+    "before": 0,
+    "after": 0
+   },
+   "L:48x:plain:0:upper": {
+    "before": 4,
+    "after": 4
+   },
+   "L:48x:flip:0:upper": {
+    "before": 2,
+    "after": 0
+   },
+   "L:64x:plain:0:upper": {
+    "before": 4,
+    "after": 0
+   },
+   "L:64x:flip:0:upper": {
+    "before": 4,
+    "after": 0
+   }
+  }
+ },
+ "K low": {
+  "file": "decoded-board-k-8x-16x-ties-before-above-after-zoom2.png",
+  "red_pixels_on_first_line": {
+   "K:8x:plain:0:cut": {
+    "before": 0,
+    "after": 0
+   },
+   "K:8x:plain:0:upper": {
+    "before": 0,
+    "after": 0
+   },
+   "K:8x:flip:0:cut": {
+    "before": 32,
+    "after": 0
+   },
+   "K:8x:flip:0:upper": {
+    "before": 32,
+    "after": 0
+   },
+   "K:16x:plain:0:cut": {
+    "before": 0,
+    "after": 0
+   },
+   "K:16x:plain:0:upper": {
+    "before": 0,
+    "after": 0
+   },
+   "K:16x:flip:0:cut": {
+    "before": 16,
+    "after": 0
+   },
+   "K:16x:flip:0:upper": {
+    "before": 16,
+    "after": 0
+   }
+  }
+ },
+ "M": {
+  "file": "decoded-board-m-nine-slice-and-short-spans-before-above-after-zoom2.png",
+  "red_pixels_on_first_line": {
+   "M:nine:32x12:flip:centre cut": {
+    "before": 0,
+    "after": 0
+   },
+   "M:nine:32x12:flip:centre|right": {
+    "before": 4,
+    "after": 0
+   },
+   "M:nine:32x12:flip:left cut": {
+    "before": 0,
+    "after": 0
+   },
+   "M:nine:32x12:flip:left|centre": {
+    "before": 4,
+    "after": 0
+   },
+   "M:nine:32x12:flip:right cut": {
+    "before": 0,
+    "after": 0
+   },
+   "M:nine:32x12:plain:centre cut": {
+    "before": 0,
+    "after": 0
+   },
+   "M:nine:32x12:plain:centre|right": {
+    "before": 4,
+    "after": 0
+   },
+   "M:nine:32x12:plain:left cut": {
+    "before": 0,
+    "after": 0
+   },
+   "M:nine:32x12:plain:left|centre": {
+    "before": 0,
+    "after": 0
+   },
+   "M:nine:32x12:plain:right cut": {
+    "before": 8,
+    "after": 0
+   },
+   "M:r4097:48x:plain:0:end": {
+    "before": 2,
+    "after": 0
+   },
+   "M:r4097:48x:flip:0:end": {
+    "before": 0,
+    "after": 0
+   },
+   "M:r8191:48x:plain:0:end": {
+    "before": 0,
+    "after": 0
+   },
+   "M:r8191:48x:flip:0:end": {
+    "before": 0,
+    "after": 0
+   },
+   "M:r1000:48x:plain:0:end": {
+    "before": 1,
+    "after": 1
+   },
+   "M:r1000:48x:flip:0:end": {
+    "before": 0,
+    "after": 0
+   }
+  }
+ },
+ "N hd": {
+  "file": "decoded-board-n-hd-48x-64x-before-above-after-zoom2.png",
+  "red_pixels_on_first_line": {
+   "N:48x:plain:cut": {
+    "before": 3,
+    "after": 2
+   },
+   "N:48x:plain:mid": {
+    "before": 7,
+    "after": 7
+   },
+   "N:48x:plain:upper": {
+    "before": 7,
+    "after": 7
+   },
+   "N:48x:flip:cut": {
+    "before": 4,
+    "after": 0
+   },
+   "N:48x:flip:mid": {
+    "before": 0,
+    "after": 0
+   },
+   "N:48x:flip:upper": {
+    "before": 0,
+    "after": 0
+   },
+   "N:64x:plain:cut": {
+    "before": 5,
+    "after": 0
+   },
+   "N:64x:plain:mid": {
+    "before": 0,
+    "after": 0
+   },
+   "N:64x:plain:upper": {
+    "before": 5,
+    "after": 1
+   },
+   "N:64x:flip:cut": {
+    "before": 0,
+    "after": 0
+   },
+   "N:64x:flip:mid": {
+    "before": 5,
+    "after": 0
+   },
+   "N:64x:flip:upper": {
+    "before": 0,
+    "after": 0
+   }
+  }
+ }
+}

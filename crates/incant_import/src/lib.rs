@@ -1,5 +1,6 @@
 //! Editor/tooling import coordination. Runtime cooked-asset loading stays in
 //! incant_assets, without a dependency on the authoring command bus.
+mod sprites;
 mod watch;
 use incant_assets::{
     AssetError, Dependency, TextureFormat, TextureUsage, cook_audio, cook_gltf, cook_texture,
@@ -7,6 +8,10 @@ use incant_assets::{
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::{Asset, AssetImportSettings, Project, new_id};
 use serde::{Deserialize, Serialize};
+pub use sprites::{
+    SpriteDiagnostic, SpriteDiagnosticCode, SpriteDiagnosticSeverity, SpriteReferenceErrors,
+    validate_cached_sprites,
+};
 use std::{
     collections::BTreeSet,
     path::{Component, Path},
@@ -40,6 +45,8 @@ pub enum ImportError {
     StaleWatch,
     #[error("the project changed since import preparation; prepare again")]
     ChangedProject,
+    #[error(transparent)]
+    SpriteReferences(#[from] SpriteReferenceErrors),
     #[error(transparent)]
     Command(#[from] CommandError),
 }
@@ -86,6 +93,8 @@ pub struct ImportOutcome {
     pub changed: bool,
     pub cache_hit: bool,
     pub details: ImportDetails,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub diagnostics: Vec<SpriteDiagnostic>,
 }
 #[derive(Debug, Serialize)]
 pub struct CommittedImports {
@@ -166,6 +175,7 @@ impl ImportSnapshot {
             })?;
             imports.push(cooked);
         }
+        sprites::check_imports(&self.project, &mut imports)?;
         Ok(PreparedImports {
             snapshot: self,
             imports,
@@ -331,6 +341,7 @@ fn cook(
         asset,
         cache_hit,
         details,
+        diagnostics: Vec::new(),
     })
 }
 

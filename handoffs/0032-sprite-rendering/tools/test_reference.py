@@ -92,8 +92,11 @@ class TieBand(unittest.TestCase):
 class BandRules(unittest.TestCase):
     """Fixed-texel band (c2c7758) against the derivative-scaled band (f9aa1da) at 8x."""
 
+    def setUp(self):
+        self.default_rule = reference.NEAREST_RULE
+
     def tearDown(self):
-        reference.NEAREST_RULE = "pixel-band"
+        reference.NEAREST_RULE = self.default_rule
 
     def test_one_raster_step_past_a_tie_at_8x(self):
         t = 3.0 - (1 / 256) / 8  # an edge one 1/256 px step past a pixel centre, 8 px per texel
@@ -114,6 +117,92 @@ class BandRules(unittest.TestCase):
         index, alternative = reference.tie_band_index(4095.0, -1 / 8, 0.0, 4096)
         self.assertEqual(index, 4094)
         self.assertIsNotNone(alternative)
+
+
+class Spans(unittest.TestCase):
+    """Bounded spans with a flat integer base (source 0494b40)."""
+
+    def setUp(self):
+        self.default_rule = reference.NEAREST_RULE
+
+    def tearDown(self):
+        reference.NEAREST_RULE = self.default_rule
+
+    def test_cuts_start_at_the_first_vertex_in_either_direction(self):
+        self.assertEqual(reference.span_cuts(0.0, 1000.0), [(0.0, 0.0), (0.512, 512.0), (1.0, 1000.0)])
+        self.assertEqual(reference.span_cuts(1000.0, 0.0), [(0.0, 1000.0), (0.512, 488.0), (1.0, 0.0)])
+        self.assertEqual(reference.span_cuts(4097.0, 0.0)[-2:], [(4096 / 4097, 1.0), (1.0, 0.0)])
+        self.assertEqual(reference.span_cuts(5.0, 5.0), [(0.0, 5.0), (1.0, 5.0)])
+
+    def test_geometry_invariants_from_the_candidate_unit_test(self):
+        # The same sprites as geometry.rs's own test: flips, a collapsed nine-slice
+        # border and both a large and a tiny size, on an 8192 x 8192 region.
+        for flipped in (False, True):
+            for mode in ({"kind": "simple"}, {"kind": "nine_slice", "border": [511, 1, 17, 3], "pixels_per_unit": 8.0}):
+                for size in ([1024.0, 1024.0], [0.5, 0.25]):
+                    value = sprite(region=[0, 0, 8192, 8192], size=size, pivot=[0.25, 0.75], flip_x=flipped,
+                                   flip_y=flipped, mode=mode)
+                    original = reference.tessellate(value, 8192, 8192)
+                    spans = reference.nearest_spans(original, value["region"], 8192, 8192)
+                    self.assertLessEqual(len(spans), 1944)
+                    self.assertEqual(len(spans) % 6, 0)
+                    area = 0.0
+                    for k in range(0, len(spans), 3):
+                        a, b, c = spans[k:k + 3]
+                        self.assertTrue(a[4:] == b[4:] == c[4:])  # flat base per triangle
+                        area += abs((b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])) * 0.5
+                    self.assertAlmostEqual(area, size[0] * size[1], delta=1e-9 * max(area, 1.0))
+                    for v in spans:
+                        self.assertTrue(0.0 <= v[2] <= 512.0 and 0.0 <= v[3] <= 512.0)
+                        texel = (v[4] + v[2], v[5] + v[3])
+                        self.assertTrue(any(all(
+                            -1e-10 <= (v[i] - q[0][i]) / (q[2][i] - q[0][i]) <= 1 + 1e-10
+                            and abs((q[0][2 + i] + (q[2][2 + i] - q[0][2 + i]) * (v[i] - q[0][i]) / (q[2][i] - q[0][i]))
+                                    * 8192 - texel[i]) < 1e-8 for i in range(2))
+                            for q in (original[j:j + 6] for j in range(0, len(original), 6))))
+
+    def test_small_regions_keep_their_quads_and_region_local_texels(self):
+        for mode in ({"kind": "simple"}, {"kind": "nine_slice", "border": [4, 8, 2, 6], "pixels_per_unit": 4.0}):
+            value = sprite(flip_x=True, mode=mode)
+            original = reference.tessellate(value, 128, 64)
+            spans = reference.nearest_spans(original, value["region"], 128, 64)
+            self.assertEqual([v[:2] for v in spans], [v[:2] for v in original])  # one span per quad
+            for v, o in zip(spans, original):
+                self.assertEqual((v[4] + v[2], v[5] + v[3]), (round(o[2] * 128 - 16), round(o[3] * 64 - 32)))
+            if mode["kind"] == "simple":
+                self.assertEqual({v[4:] for v in spans}, {(0.0, 0.0)})
+
+    def test_short_spans_cut_every_64_texels(self):
+        self.assertEqual(reference.span_cuts(0.0, 200.0, 64.0),
+                         [(0.0, 0.0), (0.32, 64.0), (0.64, 128.0), (0.96, 192.0), (1.0, 200.0)])
+        self.assertEqual(reference.span_cuts(200.0, 0.0, 64.0)[1:3], [(0.32, 136.0), (0.64, 72.0)])
+        self.assertEqual(reference.SPAN_RULES, {"span-band": 512.0, "span64-band": 64.0})
+
+    def test_short_span_geometry_invariants_from_the_candidate_unit_test(self):
+        # geometry.rs at 1f72a99: at most 101,400 vertices; span texels within [0, 64].
+        for flipped in (False, True):
+            for mode in ({"kind": "simple"}, {"kind": "nine_slice", "border": [511, 1, 17, 3], "pixels_per_unit": 8.0}):
+                value = sprite(region=[0, 0, 8192, 8192], size=[1024.0, 1024.0], pivot=[0.25, 0.75], flip_x=flipped,
+                               flip_y=flipped, mode=mode)
+                original = reference.tessellate(value, 8192, 8192)
+                spans = reference.nearest_spans(original, value["region"], 8192, 8192, 64.0)
+                self.assertLessEqual(len(spans), 101400)
+                self.assertEqual(len(spans) % 6, 0)
+                area = sum(abs((b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])) * 0.5
+                           for a, b, c in (spans[k:k + 3] for k in range(0, len(spans), 3)))
+                self.assertAlmostEqual(area, 1024.0 * 1024.0, delta=1e-9 * area)
+                self.assertTrue(all(0.0 <= v[2] <= 64.0 and 0.0 <= v[3] <= 64.0 for v in spans))
+                self.assertTrue(all(a[4:] == b[4:] == c[4:] for a, b, c in
+                                    (spans[k:k + 3] for k in range(0, len(spans), 3))))
+
+    def test_exact_ties_at_large_coordinates_become_predictions(self):
+        # Texel 4096 of a flipped strip at 8x: base 3584 + span texel 512.
+        reference.NEAREST_RULE = "span-band"
+        self.assertEqual(reference.tie_band_index(4096.0, -1 / 8, 0.0, 8192, local=512.0), (4095, None))
+        self.assertEqual(reference.tie_band_index(4096.0, 1 / 8, 0.0, 8192, local=0.0), (4096, None))
+        # The region-local rule leaves the same pixel to f32 rounding.
+        reference.NEAREST_RULE = "pixel-band"
+        self.assertIsNotNone(reference.tie_band_index(4096.0, -1 / 8, 0.0, 8192)[1])
 
 
 class Raster(unittest.TestCase):

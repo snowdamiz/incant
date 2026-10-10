@@ -10,6 +10,15 @@ after review and passing checks, without requesting separate merge approval.
 
 ## Implemented and locally verified
 
+- Atlas review 0034 authoring follow-up: bounded skyline packing fixes the explicit
+  three-frame false failure and retains previous layouts as maximum bounds grow.
+  Shared import preparation rejects broken frame/nine-slice references atomically;
+  cached source-free validation reports typed entity/texture/frame diagnostics.
+  Raw atlas rectangles receive relocation warnings, and CLI import failures are
+  readable. New packed layouts still need Claude delta review after the shared
+  renderer update; no phone/performance or phase gate is claimed. See
+  [atlas authoring evidence](docs/spikes/sprite-atlases.md#authoring-follow-up-to-review-0034-2026-10-10).
+
 - Typed versioned project JSON, semantic validation, published derived schemas,
   canonical formatting and stable ULIDs.
 - One command bus with atomic edits, provenance, revisions, undo/redo, CRDT merging,
@@ -52,6 +61,17 @@ integration. The thousand-entity script benchmark meets the local frame budget
 within its documented workload.
 
 ## Active work
+
+- Sprite high-zoom follow-up uses 64-source-texel retained spans. The old spans
+  fail 95/2,856 expanded GPU cases; the fix passes all 5,768 exact/near-tie cases
+  through tested 128× magnification. All 360 workspace and 55 GPU tests plus
+  Clippy pass. Large sprites use more vertices, still under explicit total caps;
+  the theoretical maximum nine-slice bound is 6.19 MiB. Claude confirms the
+  one-axis fix through 128× in 1,006 frames, with repeat/reimport/source-free parity.
+  Higher magnifications and pre-existing two-axis frame-edge/non-dyadic tie
+  errors remain open. The measured cap is 341 nearest 2048-square sprites;
+  342 fail explicitly. Pixel-camera near-tie follower work is separate. See
+  [sprite evidence](docs/spikes/sprite-rendering.md).
 
 - The macOS texture-format check now reuses the workspace-built `texture_probe`
   alongside the existing tools, avoiding its separate package feature graph.
