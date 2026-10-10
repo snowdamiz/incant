@@ -662,7 +662,6 @@ html.native-viewport .panel--viewport {
 
 .statusbar__conn--ok .statusbar__dot {
   background: var(--color-success);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 18%, transparent);
 }
 .statusbar__conn--fixture .statusbar__dot {
   background: var(--color-fixture);
