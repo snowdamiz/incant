@@ -7,8 +7,9 @@ across three separate platforms using actual `api.findPath` off-mesh links. It
 uses a directed jump-up, a bidirectional bridge taken forward and then reversed,
 and a return drop that ordinary `set_component NavigationMesh` commands enable
 and later disable. Traversal metadata alone drives every jump. Saving mid-drop
-and reopening reproduces the uninterrupted frames byte for byte. Two independent
-builds produced byte-identical frames and logs.
+and reopening reproduces the uninterrupted frames byte for byte. Two
+independently authored test projects and runs on the same immutable binary
+produced byte-identical frames and logs. The engine was not recompiled.
 
 The review found **one visible engine defect** and several look notes:
 
@@ -40,7 +41,24 @@ cannot inspect the ACP messages themselves.
 
 ### Packet acknowledgement
 
-The current packet has no priority-revision section and carries no new director
+**Priority revision 2 (report accuracy only).** The director accepted the
+rendered review and measured results for this scoped link increment, and kept
+the visible height limitation explicitly open. As instructed, I made two wording
+corrections in this file and nothing else. No captures were rerun, and the
+engine, scene, behavior and evidence are unchanged.
+
+1. **Sleep prevention.** All recorded runs executed under `caffeinate -s -i`,
+   both the outer ACP runner and each `run_set.sh` command. The earlier claim
+   that no temporary sleep assertions were needed is withdrawn. Script budget
+   and Run results below now state the actual conditions.
+2. **Repeat wording.** "Two independent builds" is replaced by two
+   independently authored test projects and runs on the same immutable binary.
+   No engine recompilation occurred.
+
+The hover defect, exact measurements, session-local generation difference and
+all limits are retained unchanged.
+
+The original packet had no priority-revision section and carried no new director
 feedback. No files existed from an interrupted attempt: the worktree was clean
 at commit `1a9769d`. I read `CLAUDE.md`, the packet, the navigation-links spike
 document, the SDK types, `tools/probes/navigation-links.py` and the 0026 and 0027
@@ -224,7 +242,11 @@ the reversed route is exactly its authored end.
 | Repeat set A versus set B frames | 593 of 593 byte-identical |
 | Repeat set A versus set B logs | 26 of 26 files byte-identical |
 | Repeat set A versus set B stdout states | identical after replacing the random scene and asset ULIDs from `init`/`import` |
-| Failed play attempts from the 50 ms wall-clock budget | 0 in both sets |
+| Failed play attempts from the 50 ms wall-clock budget | 0 in both recorded sets, run under `caffeinate -s -i` sleep prevention |
+
+Sets A and B are two independently authored test projects, each built from
+scratch through `init`, `import` and `rpc`, and played on the same immutable
+binary. They are not separate engine builds; nothing was recompiled.
 
 The generation difference is the documented session-local behavior. The
 reopened session rebuilds its mesh at generation 1 with the return link already
@@ -347,7 +369,7 @@ existing output directory.
 |---|---|
 | `npm ci` | 0 vulnerabilities, success |
 | strict `tsc -p tools/tsconfig.json`, inside helper | pass |
-| `run_set.sh` A and B | both complete, about 1 min 3 s together; 0 failed attempts |
+| `run_set.sh` A and B, each under `caffeinate -s -i` | both complete, about 1 min 3 s together; 0 failed attempts from the 50 ms budget |
 | `trace_check.py compare` | all logs, frames and states identical |
 | `trace_check.py window` A and B | 49 of 49 frames identical, 0 log mismatches |
 | `trace_check.py resume` A and B | identical except session-local generation |
@@ -402,9 +424,11 @@ All are unmodified 960×540 engine frames copied from set A. Hashes are in
   binary. No cross-device claim is made.
 - **No native UI.** Native editor capture and link debug draw were not
   exercised. The Mac's lock state was not touched.
-- **Script budget.** The 50 ms wall-clock budget was never hit, so no temporary
-  sleep assertions were needed. Healthy full-course runs took 1899.465292 ms
-  wall time for 1000 log-only ticks.
+- **Script budget.** The two recorded runs had zero 50 ms wall-clock failures.
+  Both ran with temporary sleep prevention under `caffeinate -s -i`, applied to
+  the outer ACP runner and to each `run_set.sh` command. This does not show
+  robustness under host sleep or CPU contention. The full-course reference run
+  took 1899.465292 ms wall time for 1000 log-only ticks.
 - **Unconfirmed boundary.** The erosion explanation in the second finding is an
   inference.
 
