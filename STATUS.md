@@ -677,7 +677,12 @@ mock response, simulator build or unsigned package counts as a shipped product.
   rejects cross-target exports. A fresh shipping player runs the structural TS
   example after source/build-tree deletion. All 382 release workspace tests,
   workspace and compiler-disabled Clippy, and iOS/Android compiler-disabled host
-  compilation passed locally; hosted results remain pending. See
+  compilation passed locally on the original reviewed tree. A follow-up fixes
+  invalid direct numeric writes with no structural commands: 35 scoped tests,
+  both Clippy modes and a fresh twelve-process shipping proof pass. Component
+  domains are checked after view revocation; existing native simulation/derived
+  hierarchy overflow for huge finite values remains open. Hosted results for the
+  corrected head remain pending. See
   [evidence](docs/spikes/cooked-native-scripts.md). Full gameplay migration,
   authenticated file exports, cross-target embedding, automatic source-map
   diagnostics, MSVC symbol audit and device/performance gates remain open.

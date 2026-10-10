@@ -149,3 +149,51 @@ Raw proof: ignored `artifacts/cooked-script-native-verified/`; test logs:
 `/tmp/incant-cooked-script-no-compiler-clippy.log`,
 `/tmp/incant-cooked-script-tools.log`, `/tmp/incant-cooked-script-ios.log` and
 `/tmp/incant-cooked-script-android.log`.
+
+### Direct-write validation follow-up (2026-10-10)
+
+A native-session regression reproduced a missed host defect on the reviewed
+baseline: with no structural commands, a callback writing `NaN` into Transform
+returned success. The old-host regression failed before the fix. After all JS
+views are revoked, the host now reads the actual numeric columns through the safe
+native visitor and checks every Transform and Velocity. Values must be finite,
+quaternion squared norm must be within `1e-4` of one, and each scale magnitude
+must be at least `1e-9`, matching native component construction. Invalid data
+returns the existing typed component error; the uncommitted loan restores the
+entire numeric write set before scope refresh and permanently fails the host.
+No JSON, authoring validation or new unsafe code is involved. This adds a bounded
+linear scan of the already limited numeric loan (maximum 32 MiB); it is not a
+measured performance claim.
+
+Observable regressions cover NaN/Infinity, quaternion norm/overflow, zero/tiny
+scale and nonfinite Velocity across Transform-only and moving tables, complete
+undo and detached retained views. Signed unit quaternions, reflected scale at the
+threshold and finite velocity remain accepted. The fix checks component domains;
+it does **not** resolve the existing native simulation/hierarchy overflow case
+where individually finite, huge parent/child values compose to a nonfinite world
+matrix. Native schedule integration and scope-derived refresh remain unchecked
+for that case; this is not full hierarchy-domain validation.
+
+Verification on the corrected source:
+
+```sh
+./tools/cargo test -j2 -p incant_script -p incant_script_player -p incant_cook --locked
+./tools/cargo clippy -j2 -p incant_script -p incant_script_player -p incant_cook --all-targets --locked -- -D warnings
+./tools/cargo clippy -j2 -p incant_script --no-default-features --all-targets --locked -- -D warnings
+python3 tools/probes/cooked-script.py artifacts/cooked-script-numeric-verified
+```
+
+All 35 scoped tests/doctests passed, including 27 host tests; both Clippy commands
+passed. The earlier 382-test workspace result belongs to the pre-follow-up tree;
+required hosted checks will test the new PR head. The fresh shipping proof again
+passed all twelve source-free processes, compiler-symbol/dynamic-source checks,
+and matched dSYM packaging. The player remains 1,790,136 bytes (zero byte-size
+delta), with new SHA256
+`68153759c792c171c3229ad5956fb49e8b00ca819faf9b77cf93e303b58ebe40`
+and arm64 dSYM UUID `4f548a69-4db5-38aa-a1a1-3b5cbcd3e16a`.
+[Recorded result](evidence/cooked-native-script-numeric-2026-10-10.json) preserves
+the previous proof separately. Logs are `/tmp/incant-cooked-numeric-tests.log`,
+`/tmp/incant-cooked-numeric-clippy.log`,
+`/tmp/incant-cooked-numeric-no-compiler.log` and
+`/tmp/incant-cooked-numeric-shipping.log`. Mobile compile results above belong to
+the earlier tree and do not certify this corrected source or device execution.

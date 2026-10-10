@@ -172,6 +172,7 @@ impl ScriptHost {
                 if !returned.is_undefined() {
                     return Err(ScriptError::UnsupportedReturn);
                 }
+                loan.validate_numeric()?;
                 let commands = commands.take()?;
                 Ok((loan.finish(), commands))
             })
