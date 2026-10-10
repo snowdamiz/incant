@@ -1,7 +1,339 @@
 # 0032 sprite rendering: original art and real-engine review
 
-The round-four wide-region follow-up comes first. Rounds three and two follow
+The round-five short-span follow-up comes first. Rounds four, three and two follow
 unchanged, then round one from "Status" onward.
+
+## Round 5: 64-texel spans
+
+### Verdict
+
+- **Round four's limit is fixed, up to 128×.** On the candidate, every tested
+  one-axis tie from 1× to 128× resolves as the rule requires:
+
+  | Ties at 1× to 128× | Exact | Near, 1/256 px away | Candidate fails |
+  | --- | --- | --- | --- |
+  | Boards K to N, 1× to 64× | 36,570 | 57,864 | 0 |
+  | Probe O and P, 20× to 128× | 9,684 | 9,684 | 0 |
+  | New boards R1 and S1, 48× to 128× | 4,608 | 9,216 | 0 |
+
+  Every row that failed in round four now passes. Against round four's frames, 13,938
+  of 13,965 changed pixels on the main boards are fixes, and so are all 3,698 on the
+  probe. The views include 1920 × 1080, both axes and both directions, and windows on
+  span cuts and inside spans.
+- **Concrete failures above 128×.** On boards R2 and S2, at 160× to 512×, 138 of 1,404
+  exact ties and 4 of 2,808 near ties fail:
+  - nearly all at span texels 32 to 63, usually landing on the lower texel;
+  - the first failures are at 160× in the 1920 × 1080 view and at 192× at 1024².
+
+  This is round four's mechanism with spans 8× shorter, so the bound moved up 8×.
+- **Two-axis nine-slices: no seams; edge ties fail on every build.** The 84 cases
+  cover 8 orientations and border/centre magnifications from 4×/3× to 32×/48×. No
+  view shows a seam or a wrong base. On the candidate:
+  - in 128 × 128 views, every pixel more than 3 px from the frame edge is correct;
+  - nearer the edge, 121 exact-tie pixels fail in 7 of 84 views;
+  - in 96 × 96 views, whose projection is not dyadic, 646 pixels fail in 6 of 12,
+    some along interior tie lines.
+
+  Both earlier builds fail more pixels in these views, in other places and also away
+  from the edge:
+
+  | Two-axis views | Pre-wide | 512-texel spans | Candidate |
+  | --- | --- | --- | --- |
+  | 128 × 128, failing pixels | 336 | 332 | 121 |
+  | of which more than 3 px from an edge | 241 | 238 | 0 |
+  | 96 × 96, failing pixels | 1,017 | 1,214 | 646 |
+
+  This defect predates the span work; it is not a regression. See "Frame-edge ties".
+- **Nothing else changed.** Boards A to J, every live frame, and the reimport and
+  source-free copies of unchanged boards are byte-identical to round four. That is
+  139 of 156 common images. Every translucent span row now matches the reference
+  exactly, including 48×, and linear rows stay within one level. Tone, the gray ramp,
+  alpha, sorting and the linear fringe equal round three's numbers.
+- **Repeatability and resize hold.**
+  - Two fresh runs match byte for byte across 432 common images.
+  - Every source-free frame equals its with-source frame.
+  - Reimporting the strip, the column and the new grid at another size leaves all
+    56 checked frames byte-identical.
+- **The cost is real and the cap is explicit.** In a scene of nearest sprites showing
+  2048 × 2048 regions:
+  - the candidate renders 341 sprites, and 342 fail with
+    `Error: "sprite geometry exceeds GPU buffer limit"` and no image;
+  - the 512-texel build renders both counts, identically.
+
+  The message names neither the sprite count nor spans.
+- **Budget kept.** Seven runs used 1,006 frames and 560.6 MiB raw, out of 2,048 frames
+  and 1 GiB. Round four's frames of the previous build were reused, not re-rendered.
+
+This verdict covers headless rendering on one Apple M5 Pro with Metal, at the
+magnifications listed. It does not establish arbitrary magnification, portability,
+phone performance, native editor acceptance, hosted CI or any phase gate.
+
+### Decisions acknowledged
+
+- The candidate changes one constant: `cuts` in `geometry.rs` now splits every
+  64 source texels instead of 512. The shader and sprite module are byte-identical to
+  round four's snapshots. I read the snapshots only. Nothing was built, and no Rust,
+  shader, Cargo, UI or engine file changed.
+- I kept to the budget and reused round four's 512-texel frames as the baseline.
+  0033 owns the native app and UI work. I did no merging, publishing or account work.
+- The pixel-camera near-tie follower defect remains open. This round did not test it.
+- Rounds one to four are not rewritten. Astra's updated `brief.md` stays uncommitted,
+  as delivered.
+
+### Model, effort and provenance
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`) at Max effort, in the
+  resumed ACP runner session. The runner confirms both settings before sending the
+  prompt; I cannot inspect that handshake from inside the session.
+- **Worktree:** `b9eca69`.
+- **Candidate source:** the four snapshots under `artifacts/tools/short-spans-source/`
+  match the hashes in `artifacts/tools/short-spans-evidence.json`. Astra reports
+  5,768 passing cases up to 128×; my results agree within that range.
+
+| Build | Source | sha256 |
+| --- | --- | --- |
+| Active candidate, `incant_headless` | `1f72a990b04f9bd87a2e8e88f1fa5760006f3911` | `44e75204010c4275d24c2566c089deb44efc028ffc38fc7e03c7523f77a3ca85` |
+| Pre-short-spans | `0494b40cf8fcc5e1ad0fc689655a62cb264a2f50` | `1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50` |
+| Pre-wide | `f9aa1da0818313c5c6cac580e54d7107646378bc` | `a4b5ddb905122a55b7d156ad39b39e7f97f5266e70159614fe4cdc7589796828` |
+| Pre-magnification, not run | `c2c7758c14c37d36aa13e322aa2c87e63ce489ad` | `fd65133fc98a0c6d533f23d9583a820271858eecdb0849b44f8b7e996a5e072b` |
+| Pre-ties, not run | `39e5c38107451ba44a02ef7b80f27bef11d4141d` | `848b8294854add3bc672e6ab97e1c3dc1f5f39a9c5b1c234e61e5edace5820ba` |
+
+Each binary matched its metadata before and after all 923 invocations.
+
+### Changed paths (round 5)
+
+All changes are in `handoffs/0032-sprite-rendering/`.
+- `tools/sprite_lookdev.py`:
+  - `--binary` also takes `pre-short-spans`;
+  - adds boards R1, R2, S1 and S2 and 86 two-axis nine-slice cases, each with its own
+    view, and a reimport of the grid at another size;
+  - a deterministic packer gives every case a world cell, checked so that no sprite
+    touches another case, view or long-row corridor;
+  - `--shots` captures only chosen static views.
+- `tools/sprite_art.py` adds a 512 × 512 grid whose colours name each texel's x and y,
+  and a taller twin. Every earlier art file is byte-identical.
+- `tools/reference.py`:
+  - adds rule `span64-band`, keeping `span-band` and every earlier rule unchanged;
+  - skips sprites wholly outside the frame, which leaves round four's predictions
+    identical.
+- `tools/analyse.py`:
+  - maps `1f72a99` to `span64-band`;
+  - decodes the short-span boards and every two-axis case pixel by pixel;
+  - counts ties by span texel at the build's span length;
+  - analyses probe and shot-filtered runs.
+- `tools/compare_runs.py` adds "fixed" and "new mismatch" classes, each build judged
+  against its own model.
+- `tools/cap_probe.py` and `tools/round5_figures.py` are new.
+- `tools/test_reference.py` has 19 tests, including a port of the candidate's own
+  64-texel geometry test.
+- `evidence/round5/` holds the analyses, comparisons, run records, cap results,
+  budget ledger, figure manifest, provenance and image hashes. The 3.2 MB scenes are
+  not committed; their hashes are, and the helper rebuilds `d1`'s scene exactly.
+- `screenshots/round5/` holds seven images, listed under "Round-five frame set".
+
+### Commands and results (round 5)
+
+```sh
+T=handoffs/0032-sprite-rendering/tools; R=artifacts/0032-sprite-rendering/round5
+P=artifacts/0032-sprite-rendering/round4   # round four's 0494b40 runs, reused
+python3 -I $T/sprite_lookdev.py $R/d1 --repeats 1 --live e,ne
+python3 -I $T/sprite_lookdev.py $R/d2 --repeats 1 --live e
+python3 -I $T/sprite_lookdev.py $R/probe-d1 --probe --repeats 1
+python3 -I $T/sprite_lookdev.py $R/q-psp --binary pre-short-spans --repeats 1 --shots pp-Q,pp96-Q,roll7-Q
+python3 -I $T/sprite_lookdev.py $R/q-pw --binary pre-wide --repeats 1 --shots pp-Q,pp96-Q,roll7-Q
+python3 -I $T/cap_probe.py $R/cap-d
+python3 -I $T/cap_probe.py $R/cap-psp --binary pre-short-spans
+python3 -I $T/analyse.py $R/d1 $R/final/analysis-d1.json $R/d2
+python3 -I $T/analyse.py $R/probe-d1 $R/final/analysis-probe-d1.json
+python3 -I $T/analyse.py $R/q-psp $R/final/analysis-q-psp.json
+python3 -I $T/analyse.py $R/q-pw $R/final/analysis-q-pw.json
+python3 -I $T/compare_runs.py $P/c1 $R/d1 $R/final/compare-r4c1-d1-v3.json
+python3 -I $T/compare_runs.py $P/probe-c1 $R/probe-d1 $R/final/compare-r4probe-probe-d1-v3.json
+python3 -I $T/round5_figures.py $P/c1 $R/d1 $P/probe-c1 $R/probe-d1 $R/q-pw $R/q-psp $R/figures2
+python3 -I $T/test_reference.py                  # 19 tests OK
+python3 -m unittest discover -s tools/tests       # 10 tests OK
+cd handoffs/0032-sprite-rendering && shasum -a 256 -c evidence/round5/screenshots.sha256   # 7 OK
+```
+
+| Run | Build | Plan | Engine calls | Frames | Raw MiB |
+| --- | --- | --- | --- | --- | --- |
+| d1 | candidate | every frame once, reimport, source-free, live e and ne | 331 | 434 | 270.0 |
+| d2 | candidate | the same with live e only | 329 | 366 | 255.0 |
+| probe-d1 | candidate | probe views | 19 | 4 | 23.8 |
+| q-psp | 512-texel spans | two-axis views only | 114 | 99 | 5.9 |
+| q-pw | pre-wide | two-axis views only | 114 | 99 | 5.9 |
+| cap-d, cap-psp | candidate, 512-texel spans | cap scene at 341 and 342 sprites | 16 | 4 | 0.1 |
+
+- **Every run:** the binary was unchanged across every call, and authored files were
+  unchanged by rendering and play. Both plays of each live direction were
+  byte-identical.
+- **Rerun outputs:** the first `d1` analysis stopped on the new grid reimport step
+  before writing anything, and was rerun after the fix. The comparisons were rerun
+  twice as their classes were refined. The `-v3` files are committed as
+  `evidence/round5/compare-round4-*.json`, and the two-axis baseline analyses as
+  `analysis-grid-pre-*.json`. Earlier drafts and figure directories stay in ignored
+  `artifacts/` and are not evidence.
+- **Not run:** the UI suite, Cargo, the GPU suites, native captures and hosted CI.
+
+### New boards
+
+- **R1, R2 along screen x; S1, S2 along screen y.** Each row is a 1,024-texel strip or
+  column region of 16 spans. Its window centres on one texel boundary at span texel
+  0 (a cut), 16, 36, 44, 52 or 60. R1 and S1 cover 48× to 128×, and R2 and S2 cover
+  160× to 512×. Rows use both directions and offsets of 0 and ±1/256 px. Each board
+  is viewed at 1024 × 1024 and 1920 × 1080. Span vertices stay within 2,048 m of the
+  origin, where f32 positions still resolve 1/256 px.
+- **Two-axis nine-slices.** Regions come from the 512 × 512 grid with asymmetric
+  borders, so every border and centre spans more than 64 texels in sets A and B:
+
+  | Set | Region and borders | Border, centre |
+  | --- | --- | --- |
+  | A | 240 × 220, borders 90, 70, 80, 75 | 4×, 3× and 5× |
+  | B | the same | 16×, 20× and 28× |
+  | C | 144 × 144, borders 66, 70, 72, 65 | 32×, 48× |
+
+  - Orientations: none, flip x, flip y, both flips, mirror parent, half turn and both
+    quarter turns. Set C uses four of them.
+  - Each case places a junction, a span cut inside a corner quad, or a span cut in the
+    centre on a pixel centre, so every texel boundary in its 128 × 128 view is an
+    exact tie on both axes.
+  - Set B adds a +1/256 px offset, two translucent cases and a 7° rolled view. Set C
+    is also viewed at 96 × 96.
+
+Before rendering, I checked every new view against the CPU model: the decoders and
+the model agree on every decoded pixel.
+
+| Failed rows, candidate | 1024 × 1024 | 1920 × 1080 |
+| --- | --- | --- |
+| R1, x, 48× to 128× | 0 of 216 | 0 of 216 |
+| S1, y, 48× to 128× | 0 of 216 | 0 of 216 |
+| R2, x, 160× to 512× | 8 of 216 | 17 of 216 |
+| S2, y, 160× to 512× | 9 of 216 | 15 of 216 |
+
+### Remaining limit: magnification above 128×
+
+Boards R and S together, both views. Each cell gives failures out of ties:
+
+| M | Exact ties | Near ties |
+| --- | --- | --- |
+| 48× to 128×, six steps | 0 / 4,608 | 0 / 9,216 |
+| 160× | 6 / 396 | 0 / 792 |
+| 192× | 8 / 300 | 0 / 600 |
+| 256× | 19 / 240 | 0 / 480 |
+| 320× | 52 / 180 | 0 / 360 |
+| 384× | 39 / 168 | 0 / 336 |
+| 512× | 14 / 120 | 4 / 240 |
+
+- **Where:** 130 of the 138 exact failures are at span texels 32 to 63, where the
+  texel increases along the screen. Span cuts never failed, and nor did span texels 0
+  to 15.
+- **Why, inferred from measurements:** span texels from 32 to 64 have an f32 spacing
+  of 2^-18, about 3.8 × 10^-6 texel. The tie bias, 1/(1024 M) texel, is 6.1 × 10^-6 at
+  160× and 3.8 × 10^-6 at 256×. As in round four, failures begin once the bias falls
+  to about one or two of those steps.
+- **Severity:** low. It needs 160× or more, a region wider than 32 texels, and
+  boundaries exactly on pixel centres.
+- **Options for Astra, who owns the decision:** document exact ties up to 128× for
+  64-texel spans. A shorter span would raise the bound further, at a vertex cost that
+  grows with the square of the span count for two-axis regions.
+
+### Frame-edge ties on two-axis sprites (pre-existing)
+
+- **What:** a sprite whose texels vary along both axes can show the neighbouring texel
+  at an exact tie near the frame edge. The affected axis is the one running along that
+  edge. In 128 × 128 views the candidate fails only within 3 px of the edge. In
+  96 × 96 views at 32× and 48×, whole tie rows and columns flip.
+- **Every build has it:** each of the three builds fails 13 of the 96 decoded views,
+  but different ones. The decoded figure shows the failing pixels move as the
+  triangulation changes. The candidate has the fewest.
+- **Why, inferred:** clipping a triangle at the viewport creates new vertices that
+  are snapped to the 1/256 px grid. An attribute that depends on the other screen axis
+  then shifts by up to half a step, twice the 1/1024 px tie bias. One-axis strips
+  escape this, because their texel does not depend on the clipped coordinate. This
+  is consistent with the slack for clipped triangles that the reference model needed
+  in rounds two and three.
+- **Severity:** low for full-screen games, where an edge pixel may show its neighbour
+  at an exact tie. It is more visible in small or split viewports at high
+  magnification. For Astra: derive nearest texels from the fragment position with flat
+  per-span coefficients, or document the edge exception. This is a recommendation
+  only.
+
+### Other checks (round 5)
+
+- **Seams:** no decoded one- or two-axis view has a hole, an extra pixel or an edge
+  error.
+  - Every mismatch is a tie.
+  - Translucent rows and both translucent two-axis cases match the reference.
+  - The rolled two-axis view differs from the model at one pixel only, which the
+    model flags as ambiguous.
+- **Rolled board N:** 19 pixels change as rule deltas from the new span vertices. Eight
+  more change at pixels the model flags as ties or edges.
+- **Resize invariance:** the strip at 8192 × 4, the column at 4 × 8192 and the grid at
+  512 × 520 each carry red texels outside every region. With them, all seven span
+  frames and all 48 set-B two-axis views stay byte-identical, as does the restored
+  grid. The taller sheet again changes no nearest pixel.
+- **Linear and tone:** no changed pixel has a linear top sprite. The gray ramp shows 0
+  to 234 exactly and 252 to 255 as 243.
+- **Model accounting:** the candidate analysis compares 294 frames with the model.
+  - Its 1,018 unexplained pixels are exactly the high-magnification and frame-edge
+    tie failures above, over each row's full height, including reimported copies.
+  - Its 218 ambiguous mismatches are flagged pixels on rolled and quarter-turned
+    views.
+
+### Appearance review (round 5)
+
+I viewed the three engine frames and the four decoded views.
+- **Engine frames.** Rows are continuous with no visible step at span cuts. As in round
+  four, single-pixel tie errors are invisible at these colour steps.
+- **Round-four rows and probe windows.** In the before/after views, red marks in the
+  512-texel strips disappear on the candidate.
+- **Short spans.** In the 1920 × 1080 view, rows at 128× are clean. Rows at 160× to
+  512× show red pixels at the central tie.
+- **Two-axis views.** Each row shows pre-wide, the 512-texel build and the candidate.
+  - The earlier builds' red staircases and lines run in from the frame edge. On the
+    candidate they clear in three views and shrink to four edge pixels in a fourth.
+  - Two other views gain short red ticks on the candidate's edge row or column.
+  - The 96 × 96 views keep red edge rows and interior tie lines on every build.
+
+### Round-five frame set
+
+In `screenshots/round5/`:
+- `engine-board-r1-short-spans-48x-128x-along-x-1024x1024.png`,
+  `engine-board-r2-short-spans-160x-512x-along-x-1024x1024.png` and
+  `engine-board-s2-short-spans-160x-512x-along-y-1920x1080.png` are unedited
+  candidate frames.
+- `decoded-*.png` are diagnostics derived from engine pixels, not engine images. A
+  pixel is drawn by texel parity, red where its texel differs from the exact rule.
+  Two-axis views use the parity of x + y. `evidence/round5/figure-rows.json` lists every
+  case and its red-pixel counts.
+  - `decoded-round4-failing-rows-before-above-after-zoom2.png`: round four's failing
+    rows, before above after.
+  - `decoded-probe-hd-36x-128x-before-above-after-zoom2.png`: probe windows at 36× to
+    128×, before above after.
+  - `decoded-short-spans-hd-128x-512x-candidate-zoom2.png`: 128× rows, then measured
+    failures at 160× to 512×.
+  - `decoded-grid-failing-views-pre-wide-512-span-candidate-zoom2.png`: eight two-axis
+    views on the three builds.
+
+### Limitations (round 5)
+
+- **Hardware:** one GPU (Apple M5 Pro) and one backend (Metal), headless only.
+- **Ranges tested:**
+  - one-axis ties at 1× to 512× with integer magnifications;
+  - two-axis nine-slices at 3× to 48×;
+  - non-dyadic projections at 1920 × 1080 and, for set C, at 96 × 96.
+  Acceptance covers one-axis ties from 1× to 128×, and two-axis views in dyadic
+  128 × 128 framing more than 3 px from the frame edge.
+- **Model inferences:** the explanations of the high-magnification limit and of the
+  frame-edge defect are inferred from measurements, not hardware documentation.
+- **Coverage gaps:** perspective cameras, magnifications above 512×, and two-axis
+  regions wider than 512 texels per axis are untested. The cap was checked at one
+  sprite size.
+- **Gates:** no phase gate is approved or claimed. The high-magnification bound, the
+  frame-edge defect, the cap diagnostic, the near-tie camera follower defect, the
+  exact display option, the Inspector and native review remain open.
+
+---
 
 ## Round 4: 512-texel spans with a flat base
 

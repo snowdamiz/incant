@@ -9,6 +9,10 @@ rules (each run's rule follows its recorded build source). Every PNG both runs w
 is compared byte for byte, then pixel by pixel. Each changed pixel is classified:
   "rule delta"  the AFTER scene predicted with the BEFORE rule and with the AFTER
                 rule gives different colours there, so the rule change explains it;
+  "fixed"       otherwise, AFTER is within tolerance of its own model and closer to it
+                than BEFORE was to BEFORE's model;
+  "new mismatch" otherwise, the reverse ("new mismatch at a flagged pixel" when the AFTER
+                model itself marks the pixel ambiguous: a texel tie or an outer edge);
   "texel tie"   otherwise, either model marks a nearest sample on a texel boundary;
   "edge tie"    otherwise, either model marks a pixel centre on an outer edge;
   "other"       none of these. A sampling-rule change must leave "other" at zero.
@@ -96,7 +100,7 @@ def main():
             rows_after, frame_after, view_after = after.render(name, w, h, **textures)
             reference.NEAREST_RULE = before.rule
             rows_switched, _, _ = after.render(name, w, h, **textures)
-            _, frame_before, view_before = before.render(name, w, h, **textures)
+            rows_before, frame_before, view_before = before.render(name, w, h, **textures)
             owners, classes, tops = Counter(), Counter(), Counter()
             for x, y in changed:
                 i = logical_index(view_after, frame_after, x, y)
@@ -104,10 +108,15 @@ def main():
                 owners[frame_after.owner[i] if i is not None else None] += 1
                 tops["linear top" if i is not None and frame_after.top_linear[i] else "nearest or opaque top"] += 1
                 delta = rows_after[y][x] != rows_switched[y][x]
+                tol = analyse.TOL_LINEAR if i is not None and frame_after.linear[i] else analyse.TOL_NEAREST
+                bd = max(abs(p - q) for p, q in zip(ia.rgb(x, y), rows_before[y][x]))
+                ad = max(abs(p - q) for p, q in zip(ib.rgb(x, y), rows_after[y][x]))
                 texel_tie = (j is not None and frame_before.tie_texel[j]) or (i is not None and frame_after.tie_texel[i])
                 edge_tie = (j is not None and frame_before.tie_edge[j]) or (i is not None and frame_after.tie_edge[i])
-                classes["rule delta" if delta else "texel tie" if texel_tie else "edge tie" if edge_tie
-                        else "other"] += 1
+                flagged = i is not None and frame_after.ambiguous[i]
+                classes["rule delta" if delta else "fixed" if ad < bd and ad <= tol
+                        else ("new mismatch at a flagged pixel" if flagged else "new mismatch") if bd < ad and bd <= tol
+                        else "texel tie" if texel_tie else "edge tie" if edge_tie else "other"] += 1
             entry.update(classified=True, by_class=dict(classes), by_top_sampling=dict(tops),
                          by_top_sprite=dict(owners.most_common()))
             for k, v in classes.items():

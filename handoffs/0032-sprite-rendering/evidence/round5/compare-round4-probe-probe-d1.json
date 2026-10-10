@@ -1,0 +1,154 @@
+{
+ "rules": {
+  "before": "span-band",
+  "after": "span64-band"
+ },
+ "before": {
+  "run": "probe-c1",
+  "binary": "active",
+  "binary_source_commit": "0494b40cf8fcc5e1ad0fc689655a62cb264a2f50",
+  "binary_sha256_start": "1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50"
+ },
+ "after": {
+  "run": "probe-d1",
+  "binary": "active",
+  "binary_source_commit": "1f72a990b04f9bd87a2e8e88f1fa5760006f3911",
+  "binary_sha256_start": "44e75204010c4275d24c2566c089deb44efc028ffc38fc7e03c7523f77a3ca85"
+ },
+ "compared_files": 4,
+ "only_before": [],
+ "only_after": [],
+ "totals": {
+  "fixed": 3698,
+  "changed_files": 4,
+  "changed_pixels": 3698
+ },
+ "files": {
+  "shots/pp-O-1024x1024-r1.png": {
+   "changed_pixels": 470,
+   "classified": true,
+   "by_class": {
+    "fixed": 470
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 470
+   },
+   "by_top_sprite": {
+    "O:36x:plain:0:288": 87,
+    "O:44x:plain:0:288": 68,
+    "O:56x:flip:0:480": 48,
+    "O:80x:plain:0:480": 39,
+    "O:80x:plain:0:288": 36,
+    "O:40x:plain:0:288": 35,
+    "O:40x:plain:0:480": 34,
+    "O:96x:plain:0:288": 33,
+    "O:40x:flip:0:480": 30,
+    "O:96x:flip:1:288": 15,
+    "O:128x:flip:1:288": 15,
+    "O:44x:plain:0:480": 12,
+    "O:128x:plain:0:480": 12,
+    "O:80x:flip:1:480": 6
+   }
+  },
+  "shots/pp-O-hd-1920x1080-r1.png": {
+   "changed_pixels": 1930,
+   "classified": true,
+   "by_class": {
+    "fixed": 1930
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 1930
+   },
+   "by_top_sprite": {
+    "O:32x:plain:0:288": 164,
+    "O:40x:plain:0:288": 144,
+    "O:40x:plain:0:480": 141,
+    "O:36x:plain:0:480": 132,
+    "O:44x:plain:0:288": 129,
+    "O:48x:plain:0:288": 120,
+    "O:48x:plain:0:480": 120,
+    "O:56x:plain:0:288": 105,
+    "O:56x:plain:0:480": 105,
+    "O:64x:plain:0:288": 90,
+    "O:80x:plain:0:288": 72,
+    "O:80x:plain:0:480": 72,
+    "O:36x:plain:0:288": 64,
+    "O:96x:plain:0:288": 60,
+    "O:96x:flip:1:288": 60,
+    "O:80x:flip:1:288": 51,
+    "O:128x:plain:0:480": 45,
+    "O:128x:flip:1:480": 45,
+    "O:44x:plain:0:480": 42,
+    "O:28x:plain:0:288": 41,
+    "O:64x:plain:0:480": 40,
+    "O:20x:plain:0:288": 31,
+    "O:56x:flip:1:288": 18,
+    "O:56x:flip:1:480": 15,
+    "O:36x:flip:0:288": 12,
+    "O:36x:flip:0:480": 12
+   }
+  },
+  "shots/pp-P-1024x1024-r1.png": {
+   "changed_pixels": 578,
+   "classified": true,
+   "by_class": {
+    "fixed": 578
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 578
+   },
+   "by_top_sprite": {
+    "P:36x:plain:0:288": 84,
+    "P:64x:plain:0:480": 48,
+    "P:56x:plain:0:288": 48,
+    "P:48x:plain:0:288": 48,
+    "P:48x:plain:0:480": 48,
+    "P:80x:plain:0:288": 39,
+    "P:36x:plain:0:480": 36,
+    "P:44x:plain:0:288": 33,
+    "P:96x:plain:0:288": 33,
+    "P:40x:plain:0:288": 33,
+    "P:40x:plain:0:480": 33,
+    "P:80x:flip:1:480": 24,
+    "P:20x:plain:0:288": 20,
+    "P:96x:plain:0:480": 15,
+    "P:44x:plain:0:480": 12,
+    "P:80x:flip:0:288": 12,
+    "P:80x:flip:0:480": 12
+   }
+  },
+  "shots/pp-P-hd-1920x1080-r1.png": {
+   "changed_pixels": 720,
+   "classified": true,
+   "by_class": {
+    "fixed": 720
+   },
+   "by_top_sampling": {
+    "nearest or opaque top": 720
+   },
+   "by_top_sprite": {
+    "P:40x:plain:0:288": 81,
+    "P:56x:plain:0:480": 57,
+    "P:44x:plain:0:480": 51,
+    "P:48x:plain:0:288": 51,
+    "P:48x:plain:0:480": 51,
+    "P:32x:plain:0:288": 42,
+    "P:44x:flip:1:480": 39,
+    "P:36x:plain:0:288": 36,
+    "P:36x:plain:0:480": 36,
+    "P:80x:flip:1:288": 36,
+    "P:40x:plain:0:480": 34,
+    "P:96x:plain:0:288": 33,
+    "P:96x:flip:1:288": 33,
+    "P:96x:flip:1:480": 33,
+    "P:128x:plain:0:480": 27,
+    "P:80x:plain:0:288": 26,
+    "P:80x:plain:0:480": 21,
+    "P:44x:plain:0:288": 18,
+    "P:56x:plain:0:288": 9,
+    "P:56x:flip:1:288": 6
+   }
+  }
+ },
+ "seconds": 97.7
+}
