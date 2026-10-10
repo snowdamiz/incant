@@ -59,7 +59,7 @@ const CAPABILITY_LABELS: Record<Capability, string> = {
   'provider.disconnect': 'Sign out',
   'provider.switch': 'Switch account',
   'agent.send': 'Send to agent',
-  'viewport.bounds': 'Native viewport placement',
+  'viewport.bounds': 'Viewport placement',
   'window.drag': 'Window dragging',
   'window.minimize': 'Minimize',
   'window.maximize': 'Maximize',
@@ -68,7 +68,8 @@ const CAPABILITY_LABELS: Record<Capability, string> = {
 
 export function unavailableMessage(capability: Capability, bridge: EditorBridge | null): string {
   const action = CAPABILITY_LABELS[capability];
-  if (!bridge) return `${action} is unavailable: no engine bridge is connected.`;
+  if (!bridge) return `${action} is unavailable: no engine is connected.`;
   if (bridge.isFixture) return `${action} is unavailable: the sample fixture is read-only.`;
-  return `${action} is unavailable: the connected bridge does not support ${capability}.`;
+  // The capability name stays in the message so a report says exactly what is missing.
+  return `${action} is unavailable in this editor build (${capability}).`;
 }

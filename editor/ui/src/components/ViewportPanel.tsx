@@ -4,8 +4,8 @@ import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 
 /**
- * The area the native wgpu surface will occupy (Spike 1). The UI never draws
- * engine pixels here. When the bridge supports `viewport.bounds`, the host is
+ * The area the engine's native surface occupies. The UI never draws engine pixels
+ * here. When the bridge supports `viewport.bounds`, the host is
  * told where the hole is so it can position the native child surface; see
  * NATIVE_VIEWPORT.md for the constraints this layout is designed around.
  */
@@ -49,8 +49,8 @@ export function ViewportPanel() {
   let detail: string;
   if (!viewport) {
     status = 'No engine';
-    title = 'Native viewport not attached';
-    detail = 'Connect the editor process to attach a viewport.';
+    title = 'No viewport';
+    detail = 'Connect the editor process to see the scene here.';
   } else if (viewport.status === 'attached') {
     status = 'Attached';
     title = '';
@@ -73,7 +73,7 @@ export function ViewportPanel() {
     detail = viewport.error.message;
   } else {
     status = 'Not attached';
-    title = 'Native viewport not attached';
+    title = 'Viewport not attached';
     detail = viewport.reason;
   }
 
@@ -94,17 +94,14 @@ export function ViewportPanel() {
         aria-describedby="viewport-detail"
       >
         {attached ? null : (
-          <div className="viewport-empty">
+          <div className={`viewport-empty${viewport?.status === 'error' ? ' viewport-empty--error' : ''}`}>
             <span className="viewport-empty__tile" aria-hidden="true">
-              <Icon name="viewport" size={22} />
+              <Icon name={viewport?.status === 'error' ? 'error' : 'viewport'} size={22} />
             </span>
             <p className="viewport-empty__title">{title}</p>
             <p id="viewport-detail" className="viewport-empty__detail">
               {detail}
             </p>
-            {viewport?.status === 'error' ? null : (
-              <p className="viewport-empty__note">Nothing in this area is rendered by the engine.</p>
-            )}
           </div>
         )}
       </div>

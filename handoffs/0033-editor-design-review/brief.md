@@ -1,3 +1,53 @@
+## Final plan revision — revision 6, 2026-10-10
+
+The director confirmed the final update and requested deleting the watcher;
+Astra deleted it and reviewed revision 6 in source commit 83ebd58. This revision
+is now in your checkout. It changes hosted-device testing and phase prerequisites,
+not the current design scope. Continue the Inspector/editor redesign and bounded
+views at Opus 5.5 Max without restarting captures. Read the revision 6 review
+before final reporting; do not claim phone performance or phase approval.
+
+## Latest priority — PLAN.md revision 5, 2026-10-10
+
+The director's final small follow-up has now landed in this worktree (source
+commit 03d7746). Read PLAN.md section 12 and
+`docs/spikes/performance-plan-v5-review.md`, acknowledge revision 5, and continue
+from your preserved design edits. Do not restart your redesign or before captures.
+The revision 4 runtime/scaling constraints below remain in force. Revision 5 fixes
+all decisions, including browser editing/TypeScript/agent/play/web-export in 1.0,
+wasm2c native exports, the business model and human-owned operations. It does not
+make any unimplemented runtime or browser capability available. Keep the current
+UI pass focused on the thorough Inspector/editor redesign and bounded data views.
+No model/effort change: Opus 5.5 Max is mandatory. Return the full result and tests.
+
+## Priority revision — PLAN.md revision 4, 2026-10-10
+
+The director has adopted a substantially revised performance architecture. This
+is why the session was interrupted; all of your edits and before captures are
+preserved. Continue the full creative redesign at Opus 5.5, explicitly Max.
+
+Read the updated PLAN.md, generated CLAUDE.md and
+`docs/spikes/performance-plan-v4-review.md` now, before continuing. They are
+present in this worktree from plan commit 981d545. Acknowledge these changes in
+your next progress update and record the plan revision in your result.
+
+For this UI pass, the concrete new requirement is bounded large-data rendering:
+virtualize or page large Inspector arrays, hierarchy rows and asset collections;
+never mount a control for every cell of a 65,536-value grid. Preserve keyboard
+navigation, focus, validation, commit/cancel and selection through window changes.
+Use realistic native-shaped fixtures, including your reproduced grid stall.
+Measure mounted row/control counts and interaction behavior with a 100,000-entity
+fixture where feasible; report the browser/hardware used, and do not claim this
+passes the M1 MacBook Air <100 ms / 60 fps device gate.
+
+The runtime world/backend migration belongs to Astra. Authoring edits continue
+through the existing command bridge. Do not add fake Play/Keep Edit functionality
+or imply the new runtime is available. You may improve all presentation and
+interaction structure as already authorized. Keep the tall/cluttered Inspector
+header and poor spacing as central design problems; performance does not justify
+losing the intended visual quality. No Cargo in this worktree. Finish, test and
+return your complete design result; Astra will perform native integration.
+
 # Full editor design pass — Opus 5.5, Max thinking
 
 ## Director's latest request — overrides earlier narrow visual scopes
@@ -62,8 +112,8 @@ Use browser rendering for iterations; computer use/screenshots are permitted aga
 Astra will build the native app and supply native captures after integration for
 your final rendered-pixel review. Do not claim native acceptance from a browser.
 
-Run `npm ci --prefix editor/ui` if necessary, then all UI tests, typecheck and build
-with the scripts in editor/ui/package.json. Keep meaningful behavior tests, adapt
+Run `npm ci --ignore-scripts` at the workspace root if necessary (the lockfile is
+there), then all UI tests, typecheck and build with editor/ui/package.json scripts. Keep meaningful behavior tests, adapt
 selectors to intentional design changes, do not remove coverage to make it green.
 Use existing pinned tools. No Cargo in this handoff: request native integration.
 Do not start local servers on an occupied port; use a free dedicated port and clean
