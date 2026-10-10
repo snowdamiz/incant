@@ -1,5 +1,277 @@
 # 0032 sprite rendering: original art and real-engine review
 
+The round-two follow-up on the corrected renderer comes first. Round one follows
+unchanged from "Status" onward.
+
+## Round 2: corrected nearest sampling
+
+### Verdict
+
+- **Accepted, scoped: the duplicated-texel defect is fixed.** On the corrected build
+  (source `c2c7758`), a 7 × 7 unique-texel ruler shows every texel exactly once on
+  tie placements:
+  - 40 of 40 cases pass on the new orientation board F. The pre-ties build passes
+    24 of 40.
+  - Board F covers the eight symmetries of the square, a 180° transform and a mirror
+    parent, on tie and aligned placements, at 1× and 3×.
+  - Board A's round-one ruler station passes in all ten placements, before and after
+    the taller-sheet reimport.
+- **Resized sheets no longer change nearest pixels.** Reimporting the same texels in
+  a 128 × 80 sheet changes no nearest pixel on any board. One linear pixel moves by
+  one level, from the unchanged linear path. The pre-ties build changed 6,442 nearest
+  pixels in the same test.
+- **The engine follows the documented rule.** The reference model now implements it:
+  region-local texels, a 1/1024-texel band toward increasing screen coordinate on the
+  dominant derivative axis, and an integer fetch.
+  - 324 corrected frames match it with 0 unexplained pixels.
+  - Only 19 pixels differ at positions the model marks ambiguous. Round one had 3,372.
+- **Concrete failure: a new near-boundary regression at 4× and above.** Magnified
+  nearest sprites whose edge lies one or two 1/256 px raster steps past a pixel centre,
+  toward increasing screen coordinate, render their first texel one pixel narrow and
+  their last one pixel wide. At 8× that gives widths of 7, 8, 8, 8, 8, 8 and 9 px. The
+  pre-ties build drew these cases correctly. It affects 15 of 140 offset-sweep cells.
+  See "Request for Astra: scale the tie band".
+- **Nothing else changed.** Pre-ties and corrected runs of the same scene differ only
+  at former ties:
+
+  | Files compared | Byte-identical | Changed | Changed pixels |
+  | --- | --- | --- | --- |
+  | 334 | 296 | 38 | 62,365 |
+
+  Every changed pixel was a nearest texel tie under the pre-ties model. Linear
+  sampling, tone, alpha, painter order, depth and all 272 live frames are unchanged.
+- **Repeatability holds.** Two fresh corrected runs are byte-identical across 635
+  PNGs. In both, every source-free frame equals its with-source frame.
+
+This scoped verdict covers headless engine rendering on one Apple GPU. It approves no
+phase gate and claims no native, Inspector or hosted-CI result.
+
+### Decisions acknowledged
+
+- The undersized-reimport diagnostics request stays with Astra.
+- The neutral curve and linear-light blending stay for this follow-up. An exact
+  display option can be per-camera when implemented.
+- Optional sprite-grid snapping is separate work.
+- The pixel-camera near-tie follower defect is separate. It is neither tested nor
+  claimed fixed here.
+- The Sprite Inspector and native review still follow packet 0033.
+- No Cargo, Rust, shader or `editor/ui` file changed. I did not commit Astra's
+  updated `brief.md`, so it remains as delivered in the working tree.
+
+### Model, effort and provenance
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`) at Max effort, in the same
+  resumed ACP runner session as round one. The runner confirms both settings before
+  sending the prompt; I cannot inspect that handshake from inside the session.
+- **Worktree:** `5d662f6`.
+
+| Build | Source | sha256 |
+| --- | --- | --- |
+| Corrected, `incant_headless` | `c2c7758c14c37d36aa13e322aa2c87e63ce489ad` | `fd65133fc98a0c6d533f23d9583a820271858eecdb0849b44f8b7e996a5e072b` |
+| Pre-ties, `pre-ties-incant_headless` | `39e5c38107451ba44a02ef7b80f27bef11d4141d` | `848b8294854add3bc672e6ab97e1c3dc1f5f39a9c5b1c234e61e5edace5820ba` |
+
+Each build matched its metadata before and after all 126 invocations of each run.
+
+### Changed paths (round 2)
+
+All changes are in `handoffs/0032-sprite-rendering/`. Round-one evidence, screenshots
+and result sections are untouched. The round-one tools were extended in place. Run
+on the pre-ties build, the extended helper reproduces all 623 round-one images byte
+for byte, so the new boards disturb nothing.
+- `tools/sprite_lookdev.py` gains a `--binary pre-ties` option. It also adds boards F
+  and G and authors board G's offsets exactly.
+- `tools/reference.py` implements the corrected rule and keeps the pre-ties
+  hardware rule for older runs. Three precision refinements model the GPU, not the
+  nearest rule:
+  - vertex positions round to f32, as in the vertex buffer;
+  - half steps of the 1/256 px raster grid round up, as measured;
+  - triangles clipped at the frame edge get a tolerance of two raster steps.
+  
+  With these, the round-one frames still match with 0 unexplained pixels.
+- `tools/analyse.py` takes the rule from the run's binary, decodes boards F and G,
+  checks every resized-sheet frame and adds a model-only counterfactual.
+- `tools/compare_runs.py` and `tools/followup_figures.py` are new.
+- `tools/sprite_art.py` only appends label words. The sheet and all earlier label
+  regions are byte-identical.
+- `tools/test_reference.py` adds three tie-band tests.
+- `evidence/followup/` holds both analyses, the before/after comparison, the round-one
+  re-analysis, three helper records, the scene and image hashes.
+- `screenshots/followup/` holds 16 images, listed under "Round-two frame set".
+
+### Commands and results (round 2)
+
+```sh
+T=handoffs/0032-sprite-rendering/tools; F=artifacts/0032-sprite-rendering/followup
+python3 -I $T/sprite_lookdev.py $F/c1
+python3 -I $T/sprite_lookdev.py $F/c2
+python3 -I $T/sprite_lookdev.py $F/p1 --binary pre-ties
+python3 -I $T/analyse.py $F/c1 $F/final/analysis-c1.json $F/c2
+python3 -I $T/analyse.py $F/p1 $F/final/analysis-p1.json
+python3 -I $T/analyse.py artifacts/0032-sprite-rendering/engine-r1 $F/round1-reanalysis.json
+python3 -I $T/compare_runs.py $F/p1 $F/c1 $F/final/compare-p1-c1.json
+python3 -I $T/followup_figures.py $F/p1 $F/c1 $F/figures-1
+python3 -I $T/test_reference.py                     # 10 tests OK
+python3 -m unittest discover -s tools/tests          # 10 tests OK
+cd editor/ui && npx tsc -b --noEmit && npx vitest run && npm run build
+cd handoffs/0032-sprite-rendering && shasum -a 256 -c evidence/followup/screenshots.sha256   # 16 OK
+```
+
+Each run printed:
+```
+binary_unchanged: true, engine_calls: 126, authored_unchanged: true,
+screenshot_repeats_equal: true, screenshots: 29, source_free_shots: 10,
+play_repeats_equal: all 8 true, play_frames: 34 each
+```
+
+The UI checks are an unchanged baseline. Strict typecheck reports 0 errors, all 420
+tests in 16 files pass, and the build succeeds.
+
+Each invocation stays within budget. The largest frame is 2.5 MiB raw. A play capture
+writes 34 frames, 7.5 MiB raw. A whole run writes 635 frames, 228 MiB raw, over 126
+invocations. Nothing is overwritten.
+
+Not run by me: Cargo, Clippy, the Rust and GPU suites, native captures and hosted CI.
+Astra reports 325 Rust tests, Clippy, 53 GPU checks and 10 tool tests passing.
+
+### New boards
+
+- **Board F, orientations:** a 7 × 7 ruler in ten orientations, numbered 0 to 9:
+  none, flip X, flip Y, both flips, 90°, 270°, 90° with flip X, 90° with flip Y, a
+  180° transform and a mirror parent. Rows place the centred pivot on a grid point
+  (ties) or a pixel centre (aligned), at 1× and 3×.
+- **Board G, offset sweep:** the ruler at magnifications 1, 2, 3, 4, 5, 6 and 8,
+  unflipped and flipped. Its left and top edges start on a pixel centre and move
+  toward increasing screen coordinate by an offset, in 1/256 px:
+  −1, 0, 0.125, 0.25, 0.625, 1, 2, 3, 4 or 6.
+  - The raster snaps to 1/256 px, so 0.125 and 0.25 snap to an exact tie and 0.625
+    snaps to one step.
+  - An exact half step, 0.5, was replaced by 0.625. Its snapping direction is itself
+    a knife edge that f32 and f64 arithmetic resolve differently.
+- Both boards sit near x = 0, far from the other boards, so f32 positions resolve
+  every offset.
+
+### Offset sweep, measured from engine pixels
+
+Each cell lists the offsets, in 1/256 px, whose texels do not all span exactly M
+pixels. All other cells are uniform.
+
+| Magnification | Pre-ties, unflipped | Pre-ties, flipped | Corrected, unflipped | Corrected, flipped |
+| --- | --- | --- | --- | --- |
+| 1× | none | 0, 0.125, 0.25 | none | none |
+| 2× | none | 0, 0.125, 0.25 | none | none |
+| 3× | 0.25 | 0.25 | none | none |
+| 4× | none | 0, 0.125, 0.25 | 0.625, 1 | none |
+| 5× | 0.25 | 0, 0.125, 0.25 | 0.625, 1 | 0.625, 1 |
+| 6× | 0, 0.25 | 0, 0.125, 0.25 | 0.625, 1 | 0.625, 1 |
+| 8× | none | 0, 0.125, 0.25 | 0.625, 1, 2 | 0.625, 1 |
+
+The corrected build fixes all 23 tie failures and introduces 15 near-boundary ones.
+Widths in the corrected failures follow one pattern:
+
+| Case | Corrected widths, px | Pre-ties widths, px |
+| --- | --- | --- |
+| 4×, unflipped, 0.625 | 3, 4, 4, 4, 4, 4, 5 | 4 each |
+| 5×, flipped, 1 | 4, 5, 5, 5, 5, 5, 6 | 5 each |
+| 8×, unflipped, 2 | 7, 8, 8, 8, 8, 8, 9 | 8 each |
+
+Rows behave the same way as columns.
+
+### Request for Astra: scale the tie band (regression, low to medium)
+
+**Why it happens.** The band is fixed at 1/1024 of a texel, so on screen it spans
+M/1024 px, while the raster snaps edges in 1/256 px steps. Once M exceeds 4, the band
+is wider than one raster step. An edge snapped one step past a pixel centre then puts
+the next texel boundary just after that centre. Instead of rendering the earlier
+texel there, the band assigns the pixel to the next one. At exactly 4×, the band edge
+coincides with one step: unflipped sprites fail and flipped ones do not.
+
+**Impact.** Pixel art drawn at 1× to 3× of the camera density is unaffected. The
+regression needs nearest sprites magnified at least 4× whose edge falls within M/4
+raster steps after a pixel centre. Moving magnified sprites can show a one-pixel
+flicker of their first and last texel.
+
+**Proposed fix.** In the shader's nearest branch, replace `sign(direction)*(1.0/1024.0)`
+with `direction*(1.0/1024.0)`. The band then becomes 1/1024 px along the dominant
+screen axis:
+- at 1:1 it is identical to today;
+- at M× it is 1/(1024 M) texel, a quarter of a raster step;
+- under minification it stays 1/1024 px.
+
+The reference model with this change predicts all 40 orientation cases and all 140
+sweep cells uniform; the shipped rule predicts exactly the 15 failing cells the
+engine shows. That is model evidence only, and Astra owns integration and
+verification. Very large magnification, or regions near 8,192 texels, may need a
+lower bound on the band for f32 noise.
+
+**Regression test.** Use the board G sweep: magnifications 1 to 8, offsets of 0, 0.625,
+1, 2 and 3/256 px, both orientations. Every texel must span exactly M pixels. Keep
+the existing eight-orientation and resized-sheet test.
+
+### Other checks (round 2)
+
+- **Aligned placements:** all 20 aligned cases on board F pass on both builds. In
+  the before/after comparison every changed pixel was a former tie.
+- **Nine-slice:** only former ties change. In the pixel-perfect 1× frame they lie in
+  the simple panel stretched to 72 × 44, the 12° rotated panel and the density-32
+  border. The 3× orthographic and rolled frames add tie pixels across the other
+  panels. No seams or cracks appear in any of eight checked frames.
+- **Fractional and rolled views:** the 3.75× and 7° rolled frames match the model.
+  Their only changes from the pre-ties build are former ties: 2 to 120 pixels per
+  frame.
+- **Linear and tone:** no linear-only, tone, alpha or gray-ramp pixel changes. The
+  gray ramp still shows 0 to 234 exactly and 252 to 255 as 243. The straight-alpha
+  counterfactual still tints 1,128 pixels while the engine tints none.
+- **Live:** all 272 frames are byte-identical between builds. The Wisp's box stays at
+  (98, 113) to (109, 127) in every frame.
+
+### Appearance review (round 2)
+
+I viewed the engine crops and the decoded views.
+- **Decoded tie rows.** Before, 8 of 10 rulers at 1× and 8 of 10 at 3× show broken
+  checkers, meaning texels repeat or vanish. After, all 20 are clean checkers, and
+  quarter turns and diagonal reflections read correctly.
+- **Nine-slice.** The panel and density-32 frames look equally clean before and after.
+  The fix only changes which texel survives on tie rows of non-integer stretches.
+- **Sky strip.** One gradient row shifts at a tie row and reads the same.
+- **Magnified rulers.** The 4× to 8× rulers in the corrected build show the narrow
+  first and wide last texel at one and two steps. This is visible when zoomed and
+  subtle at 1×.
+- **Unchanged scenes.** The showcase, live follow and flipbook are pixel-identical to
+  the pre-ties build.
+
+### Round-two frame set
+
+In `screenshots/followup/`:
+- `engine-board-f-orientations-after-960x540.png` and
+  `engine-board-g-offset-sweep-after-1024x640.png` are unedited corrected frames.
+- These `*-before-after-zoomN.png` files are nearest-neighbour enlargements, pre-ties
+  on the left and corrected on the right:
+  - the board A ruler station, from the 64 px and 80 px sheets;
+  - board F's tie rows at 1× and 3×;
+  - the nine-slice stretch and density panels;
+  - the nearest sky strip.
+- `board-g-4x-to-8x-before-zoom2.png` and `board-g-4x-to-8x-after-zoom2.png` enlarge
+  offset columns 0 to 6.
+- The `decoded-*.png` files are diagnostics derived from engine pixels, not engine
+  images. Each ruler pixel is redrawn as a two-tone checker by the texel it names,
+  so a repeated or dropped texel breaks the checker. They cover board F's tie rows,
+  board G's 4× to 8× rows, and offsets 0, 0.625, 1 and 3 at 8× unflipped and 6×
+  flipped.
+
+### Limitations (round 2)
+
+- **Hardware:** one GPU (Apple M5 Pro) and one OS, headless only.
+- **Precision modelling:** the f32 vertices, half-up snapping and clip tolerance are
+  inferred from measurements on this GPU, not from published hardware specifications.
+- **Remaining ambiguity:** the 19 ambiguous mismatches lie on board G's band edges and
+  on clipped triangles in rolled frames. They are reported, not judged.
+- **Untested:** the pixel-camera near-tie follower defect.
+- **Gates:** no phase gate is approved or claimed. The tie-band regression, the
+  diagnostics request, the display option, the Inspector and native review remain
+  open.
+
+---
+
 ## Status
 
 Engine art and rendered review are complete for this round. The Sprite Inspector is

@@ -9,6 +9,11 @@ live frames) is compared pixel by pixel with reference.py's prediction. Relation
 checks (3x replication, odd-size phase, snapping, flips, nine-slice mirrors) use
 engine pixels only. With OTHER_RUN_DIR, every PNG is also compared byte for byte
 with a second from-scratch run.
+
+The nearest-sampling expectation follows the run's binary, recorded by the helper:
+the corrected build uses the documented tie-band rule, the pre-ties build (and
+round-one runs, which predate the field) the hardware rule with ambiguity flags.
+Rulers on the follow-up boards are also decoded from engine pixels alone.
 """
 
 import hashlib
@@ -42,6 +47,7 @@ class Run:
             ("labels", "labels.png"), ("badge", "badge.png"), ("orange", "badge-orange.png"),
             ("tone16", "tone16.png"))}
         self.ids = self.scene["ids"]
+        self.rule = "hardware" if self.helper.get("binary", "pre-ties") == "pre-ties" else "tie-band"
         occ = self.scene["occluder"]
         self.meshes = [(self.ids["C:occluder"], occ["positions"], occ["emissive"])]
         self.asset = t
@@ -160,6 +166,86 @@ def ruler_texels(img, x0, y0, x1, y1):
             "each_texel_once": sorted(columns) == list(range(7)) and sorted(rows) == list(range(7))}
 
 
+# Screen block (u, v) -> source texel (i, j) for each board F orientation.
+D4_MAP = {
+    "none": lambda u, v: (u, v), "flip-x": lambda u, v: (6 - u, v), "flip-y": lambda u, v: (u, 6 - v),
+    "both": lambda u, v: (6 - u, 6 - v), "rot90": lambda u, v: (6 - v, u), "rot270": lambda u, v: (v, 6 - u),
+    "rot90-flip-x": lambda u, v: (v, u), "rot90-flip-y": lambda u, v: (6 - v, 6 - u),
+    "rot180": lambda u, v: (6 - u, 6 - v), "mirror": lambda u, v: (6 - u, v),
+}
+
+
+def decode_window(img, x0, y0, x1, y1):
+    """Ruler pixels in a window: (x, y) -> source texel (i, j)."""
+    found = {}
+    for y in range(max(0, y0), min(img.height, y1)):
+        for x in range(max(0, x0), min(img.width, x1)):
+            r, g, b = img.rgb(x, y)
+            if b == 150 and (r - 60) % 25 == 0 and (g - 60) % 25 == 0 and 60 <= r <= 210 and 60 <= g <= 210:
+                found[(x, y)] = ((r - 60) // 25, (g - 60) // 25)
+    return found
+
+
+def runs(values):
+    out = []
+    for v in values:
+        if out and out[-1][0] == v:
+            out[-1][1] += 1
+        else:
+            out.append([v, 1])
+    return out
+
+
+def board_f(img, scene):
+    """Every orientation on tie and aligned placements: each pixel must name the texel
+    the orientation maps to, and every texel must cover exactly M x M pixels."""
+    out = {}
+    rows = [("TIES 1X", 1, 0.0, 24, 16), ("ALIGNED 1X", 1, 0.5, 54, 16),
+            ("TIES 3X", 3, 0.0, 100, 30), ("ALIGNED 3X", 3, 0.5, 150, 30)]
+    for caption, m, phase, centre_y, pitch in rows:
+        for k, name in enumerate(scene["d4"]):
+            cx, cy = 20 + pitch * k + phase, centre_y + phase
+            half = 3.5 * m
+            found = decode_window(img, int(cx - half) - 2, int(cy - half) - 2, int(cx + half) + 3, int(cy + half) + 3)
+            xs = [x for x, _ in found]
+            ys = [y for _, y in found]
+            bx, by = min(xs), min(ys)
+            size = (max(xs) - bx + 1, max(ys) - by + 1)
+            wrong = sum(1 for (x, y), texel in found.items()
+                        if texel != D4_MAP[name]((x - bx) // m, (y - by) // m))
+            counts = Counter(found.values())
+            out[f"{caption} {k} {name}"] = {
+                "box": [bx, by, size[0], size[1]], "pixels": len(found), "wrong_texel_pixels": wrong,
+                "each_texel_m_squared": len(counts) == 49 and set(counts.values()) == {m * m},
+                "pass": size == (7 * m, 7 * m) and len(found) == 49 * m * m and wrong == 0}
+    return out
+
+
+def board_g(img, scene):
+    """Offset sweep: per cell, texel runs along the middle row and column."""
+    out = {}
+    deltas = scene["sweep"]["deltas_px"]
+    for key, meta in scene["meta"].items():
+        if not key.startswith("G:") or "cell" not in meta:
+            continue
+        m, flipped, (x, y) = meta["magnification"], meta["flipped"], meta["cell"]
+        found = decode_window(img, x - 2, y - 2, x + 7 * m + 3, y + 7 * m + 3)
+        xs = sorted({px for px, _ in found})
+        ys = sorted({py for _, py in found})
+        mid_y, mid_x = ys[len(ys) // 2], xs[len(xs) // 2]
+        columns = runs([found[(px, mid_y)][0] for px in xs if (px, mid_y) in found])
+        rows_ = runs([found[(mid_x, py)][1] for py in ys if (mid_x, py) in found])
+        order = list(range(6, -1, -1)) if flipped else list(range(7))
+        uniform = ([t for t, _ in columns] == order and [t for t, _ in rows_] == order
+                   and all(n == m for _, n in columns + rows_))
+        out[key] = {"magnification": m, "flipped": flipped, "delta_px": meta["delta_px"],
+                    "delta_steps_of_1_256": round(meta["delta_px"] * 256, 4),
+                    "column_widths": [n for _, n in columns], "row_heights": [n for _, n in rows_],
+                    "column_texels": [t for t, _ in columns], "row_texels": [t for t, _ in rows_],
+                    "uniform": uniform, "first_x": xs[0] - x, "first_y": ys[0] - y}
+    return out
+
+
 def odd_station(img):
     out = {}
     for k, name in enumerate(("normal", "flip_x", "flip_y", "both")):
@@ -188,7 +274,10 @@ def main():
         raise SystemExit("OUT_JSON exists; choose a new path.")
     other = Path(sys.argv[3]) if len(sys.argv) == 4 else None
     t0 = time.time()
-    result = {"run": run.path.name, "helper_summary": {
+    reference.NEAREST_RULE = run.rule
+    result = {"run": run.path.name, "nearest_rule": run.rule,
+              "binary": {k: run.helper.get(k) for k in ("binary", "binary_file", "binary_source_commit")},
+              "helper_summary": {
         k: run.helper[k] for k in ("binary_sha256_start", "binary_sha256_end", "binary_unchanged_every_call",
                                    "engine_calls", "authored_unchanged_by_rendering", "authored_unchanged_by_play")}}
     shots_dir = run.path / "shots"
@@ -255,6 +344,28 @@ def main():
         "normal != flip_x (asymmetric art)": eq(n, boxes["flip-x"]) > 0,
     }
     result["ruler_station"] = odd_station(A)
+    if "pp-F-320x180" in images:
+        result["board_f"] = board_f(images["pp-F-320x180"], run.scene)
+    if "pp-G-1024x640" in images:
+        result["board_g"] = board_g(images["pp-G-1024x640"], run.scene)
+    if run.rule == "tie-band" and "pp-G-1024x640" in images and "pp-F-320x180" in images:
+        # Model-only counterfactual for the recommendation, not engine evidence: the
+        # corrected rule with the band scaled by the signed derivative (1/1024 px).
+        reference.NEAREST_RULE = "pixel-band"
+        modelled = {}
+        for key, decode_board in (("pp-F-320x180", board_f), ("pp-G-1024x640", board_g)):
+            name, size = key.rsplit("-", 1)
+            w, h = map(int, size.split("x"))
+            rows = run.render(name, w, h)[0]
+            img = pngio.Image(w, h, [bytes(c for p in row for c in (*p, 255)) for row in rows])
+            modelled[key] = decode_board(img, run.scene)
+        reference.NEAREST_RULE = run.rule
+        result["counterfactual_pixel_band_model_only"] = {
+            "board_f_pass": sum(v["pass"] for v in modelled["pp-F-320x180"].values()),
+            "board_f_cases": len(modelled["pp-F-320x180"]),
+            "board_g_nonuniform": sorted([v["magnification"], v["flipped"], v["delta_steps_of_1_256"]]
+                                         for v in modelled["pp-G-1024x640"].values() if not v["uniform"]),
+            "board_g_cases": len(modelled["pp-G-1024x640"])}
     B = images["pp-B-320x180"]
     panels = [block(B, 8 + 74 * k, 74, 64, 40) for k in range(4)]
     result["nine_slice_flip_mismatched_pixels"] = {
@@ -467,19 +578,25 @@ def main():
         teal_diff[b] = dict(owners.most_common())
     re["teal_changed_pixels_by_top_sprite"] = teal_diff
     tall_diff = {}
-    for b in "ABD":
-        key = f"pp-{b}-320x180"
+    for key in steps.get("7-sheet-tall:shots", {}):
+        if key not in images or not steps["7-sheet-tall:shots"][key]["image_written"]:
+            continue
         img = pngio.read(re_dir / f"7-sheet-tall-{key}.png")
-        _, frame, _ = predictions[key]
-        owners, unflagged = Counter(), 0
-        for y in range(180):
-            for x in range(320):
+        _, frame, view = predictions[key]
+        if view.output is not None and view.output[2] != 1:
+            continue
+        owners, unflagged, nearest, linear = Counter(), 0, 0, 0
+        for y in range(img.height):
+            for x in range(img.width):
                 if img.px(x, y) != images[key].px(x, y):
-                    i = y * 320 + x
+                    i = y * frame.w + x
                     owners[frame.owner[i]] += 1
                     unflagged += not frame.ambiguous[i] and not frame.linear[i]
-        tall_diff[b] = {"changed_pixels": sum(owners.values()), "by_top_sprite": dict(owners.most_common()),
-                        "changed_outside_ambiguous_or_linear_pixels": unflagged}
+                    linear += frame.linear[i]
+                    nearest += not frame.linear[i]
+        tall_diff[key] = {"changed_pixels": sum(owners.values()), "changed_nearest_or_uncovered": nearest,
+                          "changed_linear": linear, "by_top_sprite": dict(owners.most_common()),
+                          "changed_outside_ambiguous_or_linear_pixels": unflagged}
     re["tall_sheet_changed_pixels"] = tall_diff
     re["ruler_station_after_tall_sheet"] = odd_station(pngio.read(re_dir / "7-sheet-tall-pp-A-320x180.png"))
     c1 = steps["1-sheet-teal:shots"]["pp-C-320x180"]["sha256"]
@@ -586,7 +703,11 @@ def main():
                       "ruler": {k: (v or {}).get("each_texel_once") for k, v in result["ruler_station"].items()},
                       "ruler_tall": {k: (v or {}).get("each_texel_once")
                                      for k, v in result["reimport"]["ruler_station_after_tall_sheet"].items()},
-                      "tall_changed": {k: v["changed_pixels"] for k, v in result["reimport"]["tall_sheet_changed_pixels"].items()},
+                      "tall_changed": {k: (v["changed_nearest_or_uncovered"], v["changed_linear"])
+                                       for k, v in result["reimport"]["tall_sheet_changed_pixels"].items()},
+                      "board_f_failures": [k for k, v in result.get("board_f", {}).items() if not v["pass"]],
+                      "board_g_nonuniform": sorted({(v["magnification"], v["flipped"], v["delta_steps_of_1_256"])
+                                                    for v in result.get("board_g", {}).values() if not v["uniform"]}),
                       "orientation": result["orientation_mismatched_pixels"],
                       "nine_slice_flips": result["nine_slice_flip_mismatched_pixels"],
                       "painter_all_pass": all(v["pass"] for v in result["painter_probes"].values()),

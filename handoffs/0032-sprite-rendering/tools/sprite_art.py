@@ -339,6 +339,11 @@ LABELS = [
     "BATCH", "ALPHA", "DEPTH", "SEAM", "TONE", "16-BIT", "SKY", "A WISP STIRS.", "FOLLOW THE LIGHT",
     "GRAY 0-255",
     "A", "B", "C", "D", "E",
+    # Follow-up tie boards (appended, so earlier label regions keep their places).
+    "TIES 1X", "ALIGNED 1X", "TIES 3X", "ALIGNED 3X", "OFFSET IN 1/256 PX",
+    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".125", ".25", ".5", "-1",
+    "1X", "2X", "3X", "4X", "5X", "6X", "8X", "1X FLIP", "2X FLIP", "3X FLIP", "4X FLIP", "5X FLIP",
+    "6X FLIP", "8X FLIP", "F", "G", ".625",
 ]
 
 
