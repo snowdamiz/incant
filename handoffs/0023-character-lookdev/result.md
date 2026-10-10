@@ -2,37 +2,212 @@
 
 ## Status
 
-Scoped verdict: **headless real-engine look-dev and rendered motion review are
-complete for this handoff.** All five behaviours read correctly on screen and in
-the logs: walk, low-step climb, tall-obstacle stop, wall slide and jump/landing.
-There is also a ramp/snap-down lane. **Three real defects or questions are reported
-to Astra below.** Numeric fixes belong to Astra. No native static review was done,
-because this session has no native CUA. Specific captures are requested below.
+Scoped verdict: **I verified the corrected movement engine in actual rendered
+motion and every-tick logs. The two reported runtime defects are resolved in
+this course.** The remaining step-climb slowdown matches rounded-capsule
+geometry; it is not a numerical defect. It is still a game-feel limitation,
+explained below.
+
 This verdict does not approve a phase gate. It does not certify the movement
-runtime, the CLI or platform performance, and it does not claim production
-character art.
+runtime, the CLI, platform performance or cross-device determinism. It does not
+claim production character art.
 
 Exact model and transport: Claude Opus 5.5, model ID `claude-opus-5-5`, through
 the director's Claude subscription via ACP. No model substitution occurred.
 
-Packet check: the current brief (`c094719`) has no priority-revision or
-director-feedback section, so nothing new needed acknowledging. This was a fresh
-attempt. The worktree was clean at `e8dd4d0`, with no files from an earlier attempt.
-No Inspector, shell or design-system files were touched. The left Assets
-workspace, the diagnostics-only bottom dock and the neutral shell are unchanged.
+### Priority revision acknowledged
 
-Binary: `artifacts/tools/incant_headless`. Its sha256 was checked against
-`artifacts/tools/binary.json`:
-`b4f5387f…46ca1c0` (source `e8dd4d0`). No Rust was compiled. No other worktree's
-target directory was used.
+- The brief at `2de0c06` asks for verification of Astra's corrections:
+  - box-face normal recovery from the face witness
+  - the downhill flag derived from final support and actual downward travel
+- It asks for a fresh course run plus an independent repeat into new directories.
+- It asks for every-tick log review, a step-climb quantification, replaced
+  screenshots and a rewritten result.
 
-## What was built
+All of this was done. There was no other new director feedback. No UI changes
+or native capture were requested, and none were made. The left Assets workspace,
+the diagnostics-only bottom dock and the neutral shell are untouched. No evidence
+below reuses frames or logs from the old engine, except where it is explicitly
+labelled as the "before" comparison.
+
+Binary: `artifacts/tools/incant_headless`. Its sha256 is
+`8de710ffa59e97123aa598f62b2a2a5bb3f2faccbab7e600b8b3ac130502d99a`, which matches
+`artifacts/tools/binary.json` (source `2a510cf`). No Rust was compiled. No other
+worktree's target directory was used.
+
+## Original bugs and their resolution
+
+The first review used binary `b4f5387f…46ca1c0` (source `e8dd4d0`), in run
+`artifacts/0023-character/f1`.
+
+| # | Reported issue | Before (`f1`) | After (`v2` and `v2-repeat`) |
+|---|---|---|---|
+| 1 | One-tick stalls while walking | 16 ticks below 50% of input progress, across all five lanes. Three were exact zeros (block t6, wall t59, ramp t248); 13 were 1–2 mm ticks (for example, wall t7/20/27/40, step t73/105/155/208). With autostep off, the wall lane had 3 more exact zeros. | **0** outside the designed slowdowns, on every tick of every lane, with autostep on and off. The wall lane keeps 0.023 m/tick (100% of its tangential input) on every tick from first contact to the end. |
+| 2 | `sliding_down_slope` true on flat ground | True on 218–295 of 300 ticks per lane, including 291 for the mostly stationary block lane | **False on every tick of every lane, except step lane ticks 252–253.** That is the rounded capsule moving downward over the step's 90° edge (see below). It is never true on flat floor, the wall, the ramp or the landing. |
+| 3 | Slow autostep climb | 18 ticks; horizontal speed 15–40% of input | Unchanged in shape; quantified and classified below |
+
+Side effects of the fix that can be observed in this course:
+
+- Characters reach obstacles 2–3 ticks earlier, because they no longer lose
+  distance to stalls. The block-lane contact moved from t123 to t120.
+- Final x positions increased by 0.03–0.11 m.
+- Wall-slide progress no longer depends on autostep: the final x is 3.337 in both
+  configurations. Before the fix it was 3.226 with autostep and 3.134 without.
+
+## Step-climb slowdown: quantified and classified
+
+The 0.20 m step lane (`v2/overview.logs.jsonl`, ticks 118–140):
+
+- Contact at t121, x = −0.300.
+- On top at t139, x = −0.022, y = 1.020. The climb takes **18 ticks (0.30 s)**.
+- Covering the same 0.278 m at walking speed would take 10.4 ticks, so the step
+  costs **about 7.6 ticks (0.13 s)**.
+- Horizontal progress during the climb is 0.005–0.026 m/tick, that is **19–97%**
+  of input. It ramps up smoothly: 19% at contact, 50% at t130 and 90% by t136.
+- One irregular tick, t128, moves (0.027, 0.027): a 2.7 cm upward pop between
+  1.2 cm ticks. At this camera distance and a 3-tick capture interval it is not
+  visible in the frames.
+
+Classification:
+
+- **The path is the rounded-capsule trajectory around the step edge.** The lower
+  hemisphere's centre stays r + offset = 0.32 m from the corner.
+  - At x = −0.247, the predicted height is y = 0.82 − 0.12 + √(0.32² − 0.247²) = 0.903.
+  - The log has 0.905.
+  - The per-tick horizontal fraction matches projecting the walking input onto
+    the arc's tangent. At contact the tangent is 68° from horizontal, which gives
+    an expected 37% along-arc speed, about 0.004–0.005 m/tick horizontally. The
+    log has 0.005–0.006.
+- **Autostep is what permits it.** With autostep disabled on the new binary
+  (`diag-v2`), the character stops at x = −0.295, as expected, since the edge
+  normal is steeper than the 45° climb limit.
+- **So this is not a stall or numerical defect.** It is the controller sliding
+  the input along a curved contact, with no speed preservation. I see **no reason
+  to change the runtime for correctness.**
+- **As game feel, it is a real limitation.** A 0.13 s hitch on every low step
+  would read as "sticky stairs" in a third-person game. Fixing it needs a design
+  decision rather than a numerical fix: either a one-tick vertical step when the
+  landing is clear, or a behaviour-side speed preservation option. The decision
+  belongs to Astra and the director.
+
+The step-off at the far end:
+
+- Over ticks 247–255 the capsule rolls down over the edge, staying grounded
+  through the snap, and is at rest height (0.82) at t256.
+- `sliding_down_slope` is true for t252–253, when the support is the step's
+  edge, its normal is steeper than 45°, and the capsule is moving down.
+- That fits the new documented definition ("moving downward along a contacted
+  slope steeper than the configured limit"). A game that drives a slide animation
+  from this flag would see a 2-tick blip on every step-down, though. I'm noting
+  it as a semantic edge case, not a defect.
+
+## Motion verdict (corrected engine; `v2`, identical in `v2-repeat`)
+
+The rest height is y = 0.82 (capsule half-height 0.8 plus the 0.02 offset).
+
+- **Walk:** 0.0267 m/tick (1.6 m/s) on every flat-floor tick of every lane;
+  grounded throughout.
+- **Tall block (0.60 m):** contact at t120. Stopped at x = −0.320, which is the
+  face minus the radius minus the offset. Zero translation from t121 to t300,
+  with y fixed at 0.820.
+- **Wall slide:**
+  - First contact at t54.
+  - z is pinned at −3.930 (the face minus the radius minus the offset).
+  - x advances 0.023 m/tick on every tick. There are no stalls, so the earlier
+    tick-59 hitch is gone.
+- **Jump:**
+  - Takeoff at t108 (x = −0.647); airborne for t108–154 (0.78 s).
+  - The capsule bottom peaks 0.80 m above the floor and clears the 0.35 m hurdle.
+  - Grounded at t155 and at rest height from t156. No bounce; at most 1 mm below
+    rest.
+- **Ramp:**
+  - Uphill horizontal progress on the 17° ramp is 0.023–0.024 m/tick (about
+    88–90%). That is consistent with projecting the input onto the slope:
+    cos 17° × 0.0267 = 0.0255, minus mm rounding.
+  - The top is flat and grounded.
+  - The 27° descent is grounded on every tick through the snap, with no downhill
+    flag (it is under the 45° limit). Back on the floor at full speed.
+- **Frames.** I reviewed the frames for all three cameras:
+  - no penetration, popping or jitter on the step, block, wall or landing
+  - contact shadows stay attached
+  - the climb reads as a smooth ride-up over the edge, and the step-off as a
+    short roll-down
+
+  The motion matches the logs.
+
+## Repeat-run stability (local equality only)
+
+`v2` and `v2-repeat` were each built from scratch by the helper.
+
+- **Frames:** 303/303 frames across the overview, contact and exit cameras are
+  byte-identical PNGs.
+- **Logs:** identical across the two runs, and across all three cameras within
+  each run.
+- **Reports:** each `report.json` is equal once the engine-minted scene and asset
+  ULIDs are normalized, apart from `wall_ms`.
+- **Old versus new:** 300 of the 303 frames differ from the old-engine `f1`
+  frames. The identical ones are tick 0 of each camera. So the retained
+  screenshots genuinely come from the corrected engine.
+
+This is local equality on one machine (Apple M5 Pro, macOS 25.6) with one
+binary. It is **not** evidence of cross-platform or cross-GPU determinism.
+
+## Commands and results (run from the worktree root)
+
+```sh
+shasum -a 256 artifacts/tools/incant_headless      # 8de710ff…502d99a = binary.json
+node_modules/.bin/tsc -p handoffs/0023-character-lookdev/tools/tsconfig.json   # strict, exit 0
+python3 -I handoffs/0023-character-lookdev/tools/character_lookdev.py artifacts/0023-character/v2 \
+  --run overview:overview:3 --run contact:contact:3 --run exit:exit:3          # 6.8 s wall
+python3 -I handoffs/0023-character-lookdev/tools/character_lookdev.py artifacts/0023-character/v2-repeat \
+  --run overview:overview:3 --run contact:contact:3 --run exit:exit:3          # 7.3 s wall
+python3 -I handoffs/0023-character-lookdev/tools/character_lookdev.py artifacts/0023-character/v2   # refused, exit 1
+python3 -I handoffs/0023-character-lookdev/tools/trace_summary.py artifacts/0023-character/v2/overview.logs.jsonl --check
+python3 -I handoffs/0023-character-lookdev/tools/trace_summary.py artifacts/0023-character/v2/overview.logs.jsonl step 118 140
+artifacts/tools/incant_headless script v2/character.incant.json v2/character_course.js --ticks 300   # ×3
+artifacts/tools/incant_headless play v2/character.incant.json --seconds 5 --compiled-script v2/character_course.js   # ×3
+artifacts/tools/incant_headless play v2/character.incant.json --seconds 5 --compiled-script diag-v2/no_autostep.js \
+  --log-output diag-v2/no_autostep.logs.jsonl                                  # autostep-off diagnostic
+```
+
+The `npm ci` from the first session was still present (SWC 1.16.13, TypeScript 5.9.3).
+
+The compiled behaviour JS is byte-identical to the first session's, so only the
+engine changed. Each report has `completed: true`, 300 ticks, 1500 Velocity
+commands, adapter `Apple M5 Pro`, 18 model entities and 8156 triangles.
+
+Capture plan per run:
+
+- 300 ticks with `--capture-every 3` gives 101 frames.
+- 101 × 960 × 540 × 4 = 209,433,600 bytes (199.7 MiB). This is under both caps of
+  128 frames and 256 MiB.
+
+`trace_summary.py --check` scans every tick of every lane and reports:
+
+- spans with +X progress below 95% of input (allowing for 1 mm log rounding)
+- every tick with `sliding_down_slope` true
+- airborne spans
+
+On `v2` the only slow spans are the designed ones: the step climb t121–136, the
+block stop t120–300 and the ramp ascent t71–137.
+
+## Performance observations (this Mac only; not platform budgets)
+
+- **Behaviour plus physics** (`script --ticks 300`; 5 characters; 80 of 256 query
+  units per tick; one JSON debug log per tick): p95 was 0.54, 0.55 and 0.56 ms per
+  tick over three runs; maximum 0.77–0.94 ms. The first session's binary measured
+  p95 0.74–0.88 ms. These were single-session measurements, so I am not claiming
+  a speed-up.
+- **`play` with no GPU** (300 ticks): 142–143 ms wall.
+- **`play` with 101 GPU captures at 960×540:** 1.7–2.2 s wall per run.
+- **Full helper** (build, import and three captured runs): about 7 s.
+
+## What was built (unchanged from the first review except `--check`)
 
 Everything is under `handoffs/0023-character-lookdev/tools/`.
 
 - `character_lookdev.py` is the reproducible helper. It refuses an existing output
-  directory (verified: `Output directory already exists; choose a new directory.`
-  and exit 1). It works only through engine interfaces:
+  directory. It works only through engine interfaces:
   1. `init`
   2. For each piece, writes a glTF with the dimensions baked into the vertices,
      then calls `import`.
@@ -42,242 +217,99 @@ Everything is under `handoffs/0023-character-lookdev/tools/`.
   5. `node tools/build_script.mjs`
   6. `play --compiled-script --camera --log-output` at 960×540, once per camera.
 
-  Every physics root has unit scale. Each collider box or capsule matches its own
-  mesh exactly; the ramps are rotated boxes, not scaled ones.
+  Every physics root has unit scale. Each collider matches its own mesh exactly;
+  the ramps are rotated boxes, not scaled ones.
 - `character_course.ts` is the behaviour, typechecked under `strict`.
   - Every `Character · <lane>` entity calls `api.computeCharacterMotion` once per
-    tick. All lanes share one option set: offset 0.02, slide on, 45° climb/slide
-    limits, snap 0.3 m, and autostep with max 0.25, min width 0.15, no dynamic bodies.
-  - It applies `translation/dt` as an ordinary `set_component Velocity` command.
-  - The behaviour owns gravity (9.81 m/s²) and a single jump (4.0 m/s, triggered
-    at x ≥ −0.65).
-  - It logs one compact per-tick debug row plus jump, land and contact-change
-    events. It uses no solver handles and no other mutation path.
-- `trace_summary.py` summarizes or slices the per-tick logs.
-- `tsconfig.json` is the strict typecheck config for the behaviour.
+    tick. All lanes share one option set: offset 0.02, slide on, 45° limits,
+    snap 0.3 m, and autostep with max 0.25 and min width 0.15.
+  - It applies `translation/dt` through an ordinary Velocity `set_component`
+    command.
+  - The behaviour owns gravity (9.81 m/s²) and one jump (4.0 m/s).
+  - It logs one compact row per tick, plus jump, land and contact events.
+- `trace_summary.py` summarizes, slices and (with `--check`) scans every tick.
+- `tsconfig.json` is the strict typecheck config.
 
-### Scene design
+### Scene
 
-There are five parallel lanes along +X, 1.8 m apart. Every capsule starts at
-x = −3.5 and walks at 1.6 m/s for 5 s (300 ticks at 60 Hz). Rendering is
-`material_preview`, with one shadowed directional light and no environment map.
+There are five lanes along +X, 1.8 m apart. Every capsule (1.6 m tall, r 0.3,
+warm off-white) starts at x = −3.5 and walks at 1.6 m/s for 5 s at 60 Hz.
 
-| Lane (near → far) | Test piece and colour | What it demonstrates |
+| Lane (near → far) | Piece and colour | Demonstrates |
 |---|---|---|
-| jump (z 3.6) | 0.35 m amber hurdle at x 0 | Takeoff, clearance, landing |
-| step (z 1.8) | 0.20 m blue platform, x 0…2.8 | Autostep climb, walk, step-off with snap |
-| block (z 0) | 0.60 m red block at x 0…0.8 | Stops (taller than the 0.25 autostep) |
-| ramp (z −1.8) | Green 17° up-ramp, flat top, 27° down-ramp | Slope climb, snap-down on descent |
-| wall (z −3.6) | 1.0 m slate wall along X | Diagonal input slides along the wall |
+| jump (z 3.6) | 0.35 m amber hurdle | Takeoff, clearance, landing |
+| step (z 1.8) | 0.20 m blue platform, x 0…2.8 | Autostep climb, step-off with snap |
+| block (z 0) | 0.60 m red block | Stop at an obstacle taller than the autostep |
+| ramp (z −1.8) | Green 17° up, flat top, 27° down | Slope climb, snap-down descent |
+| wall (z −3.6) | 1.0 m slate wall | Diagonal input slides along the wall |
 
-Characters are a single warm off-white capsule (1.6 m tall, radius 0.3). Test pieces
-use one saturated, distinct hue each, so the obstacle type reads without labels.
-The floor is neutral grey, with darker 5 mm lane strips. The strips are visual
-only and have no collider; they sit inside the 0.02 m skin offset, below the
-capsule. The background is the renderer's clear colour.
+The rest of the scene:
 
-I chose the cameras after rejecting several attempts, all kept under ignored
-`artifacts/0023-character/a1`, `a2`, `r2` and `t3`–`t5`:
+- The floor is neutral grey, with darker 5 mm lane strips. The strips are visual
+  only and have no collider; they sit inside the skin offset.
+- One shadowed sun; `material_preview` shading; no environment light.
+- Three cameras:
+  - **overview**: high oblique view of the whole course.
+  - **contact**: low view of the jump and step climb.
+  - **exit**: low view from behind the step's far end.
+- Lower or front-on single views overlap the lockstep characters. The rejected
+  angles remain in the ignored artifacts.
 
-- A front-on camera stacks all five characters into one column, because every
-  lane moves in lockstep.
-- A steep top-down camera hides the step and jump heights.
-- **overview** is a high oblique view of the whole course.
-- **contact** is a low oblique view of the jump and step-climb lanes.
-- **exit** is a low view from behind the step's far end, to show the step-off.
-
-## Commands and results (run from the worktree root)
-
-```sh
-shasum -a 256 artifacts/tools/incant_headless          # matches binary.json
-npm ci                                                  # SWC local modules; 0 vulnerabilities
-node_modules/.bin/tsc -p handoffs/0023-character-lookdev/tools/tsconfig.json   # exit 0
-python3 -I handoffs/0023-character-lookdev/tools/character_lookdev.py artifacts/0023-character/f1 \
-  --run overview:overview:3 --run contact:contact:3 --run exit:exit:3      # 10.7 s wall
-python3 -I handoffs/0023-character-lookdev/tools/character_lookdev.py artifacts/0023-character/f1-repeat \
-  --run overview:overview:3 --run contact:contact:3 --run exit:exit:3      # 9.8 s wall
-python3 -I handoffs/0023-character-lookdev/tools/trace_summary.py artifacts/0023-character/f1/overview.logs.jsonl
-artifacts/tools/incant_headless script f1/character.incant.json f1/character_course.js --ticks 300   # ×3
-artifacts/tools/incant_headless play f1/character.incant.json --seconds 5 --compiled-script f1/character_course.js  # ×3, no GPU
-```
-
-Capture plan per run:
-
-- 300 ticks with `--capture-every 3` gives 101 frames.
-- 101 × 960 × 540 × 4 = 209,433,600 bytes (199.7 MiB) of raw pixels. This is
-  under both caps of 128 frames and 256 MiB.
-- Every report has `completed: true`, 300 ticks, 1500 script commands (5 per
-  tick), adapter `Apple M5 Pro`, 18 model entities and 8156 triangles.
-
-### Repeat-run stability (local equality only)
-
-`f1` and `f1-repeat` were each built from scratch by the helper.
-
-- **Frames:** 303/303 frames across all three cameras are byte-identical PNGs.
-- **Logs:** each camera's log JSONL is identical across the two runs. It is also
-  identical across the three cameras within a run.
-- **Reports:** after the engine-minted scene and asset ULIDs are normalized, each
-  `report.json` is equal except for `wall_ms`. The scene and asset IDs are the only
-  differences between the two project files.
-
-This shows local equality on one machine (Apple M5 Pro, macOS 25.6) with one
-binary. It is **not** evidence of cross-platform or cross-GPU determinism.
-
-## Motion verdict
-
-These values come from the logs, checked against the frames. The rest height is
-y = 0.82 (capsule half-height 0.8 plus the 0.02 offset).
-
-- **Walk:** 0.0267 m/tick (1.6 m/s) on flat ground. Grounded on every walking tick.
-- **Low step (0.20 m):**
-  - The character climbs and stays on top at y = 1.02 (+0.20 exactly).
-  - Disabling autostep (diagnostic `artifacts/0023-character/diag/no_autostep.js`)
-    stops it at x = −0.297, which shows autostep is what climbs it.
-  - At the far end, the snap keeps it grounded through the 0.2 m step-off. It rolls
-    over the edge on its hemisphere in about 10 ticks and returns to y = 0.82 with
-    no airborne tick. This reads well in the `exit` frames.
-- **Tall block (0.60 m):** stops at x = −0.320, which is the face minus the radius
-  minus the offset, exactly. It holds there for 177 ticks (124–300) with zero translation and
-  no jitter, at y between 0.819 and 0.82.
-- **Wall slide:**
-  - The diagonal input (1, −0.6) reaches the wall at tick 54.
-  - From then on z is pinned at −3.93, which is the face minus the radius minus the
-    offset, exactly.
-  - The tangential x motion continues at 0.023 m/tick, the full tangential share
-    of the input.
-- **Jump:**
-  - Takeoff at tick 108 (x = −0.647); airborne for ticks 108–154 (0.78 s).
-  - The apex puts the capsule bottom 0.80 m above the floor, so it clears the
-    0.35 m hurdle with no contact.
-  - Lands at tick 155 at −3.85 m/s and is at rest height the next tick. No bounce,
-    and at most 1 mm of penetration.
-- **Ramp:**
-  - Climbs the 17° ramp at 0.024 m/tick horizontally, about 10% slower than on
-    flat ground (consistent with slope projection).
-  - Grounded across the top.
-  - Follows the 27° descent at −0.013 m/tick vertical with no airborne ticks, so
-    the snap-down works.
-
-### Real issues for Astra (numeric/runtime; not fixed here)
-
-1. **Intermittent one-tick stalls (zero translation) during ordinary walking.** The
-   query returns `[0,0,0]` for a single tick, then resumes. In `f1`:
-   - block lane, tick 6: flat floor, one contact, x = −3.367
-   - wall lane, tick 59: sliding along the wall
-   - ramp lane, tick 248: flat floor after the descent, x = 2.822
-
-   With autostep disabled, the wall lane stalls at ticks 59, 138, 180 and 215.
-   Each stall costs 2.7 cm and leaves Velocity at zero for that tick. This is a
-   one-frame hitch. It is not obvious in captures taken every 3 ticks, but it
-   would show in a 60 Hz camera follow. The two flat-floor stalls (ticks 6 and
-   248) coincide with `sliding_down_slope` being false; the wall stall (tick 59)
-   does not, so that flag is not a reliable predictor.
-
-   Repro: run the helper, then
-   `trace_summary.py <run>/overview.logs.jsonl block 4 8`.
-2. **`sliding_down_slope` is true on flat ground most of the time.** It was true on
-   218–295 of 300 ticks per lane, including 291 of 300 for the mostly
-   stationary block lane. On the flat top of the step it flickers between true
-   and false from tick to tick. Behaviours cannot rely on it to
-   mean "on a too-steep slope". Either the semantics need documenting or the flag
-   needs gating (for example on the slope angle exceeding `min_slope_slide_angle`).
-3. **The autostep climb is gradual and slows forward motion sharply.** The 0.20 m
-   step takes about 18 ticks (0.3 s) to climb. Horizontal speed drops to 15–40% of
-   input (0.004–0.011 m/tick) while the capsule rises about 0.012 m/tick. It reads
-   as a smooth ride-up rather than a pop, which is visually acceptable for a
-   capsule. A game designer expecting the stair step to keep walk speed would see
-   a hitch. Also, enabling autostep changed wall-slide progress: the final x was
-   3.226 with it and 3.134 without, because of the extra stalls described above.
-
-### Performance observations (this Mac only; not platform budgets)
-
-- **Behaviour plus physics only** (`script --ticks 300`, 5 characters, 80 of 256
-  query units per tick, including one JSON debug log per tick): p95 was 0.74, 0.87
-  and 0.88 ms per tick over three runs; maximum 1.12–1.24 ms.
-- **`play` with no GPU** (300 ticks, including report and logs): 190–199 ms wall.
-- **`play` with 101 GPU captures at 960×540:** 2.3–3.7 s wall per run.
-- **Full helper** (build, import and three captured runs): about 10 s.
-
-## Screenshots (public, real engine frames from `f1`; no accounts or credentials)
+## Screenshots (public; current corrected-engine frames from `v2`)
 
 All are under `handoffs/0023-character-lookdev/screenshots/`. Each is an unedited
-`play` frame, byte-identical to the same tick in `f1-repeat`.
+`play` frame, byte-identical to the same tick in `v2-repeat`. The first review's
+old-engine frames were removed.
 
 | File | Camera | Tick | Shows |
 |---|---|---|---|
-| `overview-t000-start.png` | overview | 0 | Course and lanes, all at the start line |
-| `overview-t132-jump-apex-step-climb.png` | overview | 132 | Jumper near apex over hurdle; step climb; block stop |
+| `overview-t000-start.png` | overview | 0 | Course and lanes at the start line |
+| `overview-t132-jump-step-climb-block-stop.png` | overview | 132 | Jumper airborne over the hurdle; step lane mid-climb; block stop |
 | `overview-t204-ramp-descent-wall-slide.png` | overview | 204 | Ramp descent; wall slide; step lane on top |
-| `overview-t300-end.png` | overview | 300 | Final poses; blocked character waits at the red block |
-| `contact-t108-takeoff.png` | contact | 108 | Jump takeoff before the hurdle |
-| `contact-t129-over-hurdle-step-climb.png` | contact | 129 | Airborne over hurdle; step lane mid-climb |
-| `contact-t156-landed.png` | contact | 156 | Landed beyond hurdle; contact shadow |
-| `exit-t240-step-edge.png` | exit | 240 | Step lane at the platform's far edge |
-| `exit-t255-rolling-off.png` | exit | 255 | Snapped step-off, mid-descent |
-| `exit-t270-on-floor.png` | exit | 270 | Back on the floor, grounded |
+| `overview-t300-end.png` | overview | 300 | Final poses; blocked character held at the red block |
+| `contact-t108-takeoff.png` | contact | 108 | Jump takeoff in front of the hurdle |
+| `contact-t129-over-hurdle-step-climb.png` | contact | 129 | Airborne over the hurdle; step lane on the edge arc |
+| `contact-t156-landed.png` | contact | 156 | Landed at rest height beyond the hurdle |
+| `exit-t243-on-step.png` | exit | 243 | Step lane walking on the platform before the edge |
+| `exit-t252-over-edge.png` | exit | 252 | Rolling over the edge, grounded through the snap |
+| `exit-t258-on-floor.png` | exit | 258 | Back on the floor at rest height |
 
-All other raw output is in ignored `artifacts/0023-character/`:
+All raw output is in ignored `artifacts/0023-character/`:
 
-- projects, journals and imported models
-- compiled JS and source maps
-- all 606 frames of `f1` and `f1-repeat`
-- reports, logs, the autostep diagnostic and contact sheets
-- earlier camera iterations
+- `v2`, `v2-repeat` and `diag-v2`: the corrected engine
+- `f1`, `f1-repeat` and `diag`: the original engine, kept for the before/after
+  comparison
+- earlier camera iterations and contact sheets
 
-### Visual notes and limitations
+## Limitations
 
-- The camera angles were chosen for readability, not to hide defects. The stalls
-  above come from the logs, because one-tick hitches fall between captures taken
-  every 3 ticks.
-- Characters move in lockstep. Low angles therefore overlap them at some ticks,
-  which is why the review uses three cameras rather than one.
-- There is no facing indicator, animation or character art. A capsule is the
-  correct proxy for this primitive-collider review.
-- `material_preview` shading has no environment light. The floor and pieces read
-  slightly flat. This is acceptable for motion review, but it is not look-dev
-  for a shipping environment.
-- The behaviour finds lanes by entity name (`Character · <lane>`). This is a
-  demo convention, not a proposed API.
-
-## Native captures requested from Astra (no native CUA in this session)
-
-Optional static check. Open `artifacts/0023-character/f1/character.incant.json` in
-the native editor and capture:
-
-1. The viewport through `Camera · overview`
-   (`01JA2CHAR0000000000000002T`) at 960×540, to compare against
-   `overview-t000-start.png` for material and shadow parity.
-2. The Outliner/Inspector with `Character · step` selected, to confirm that the
-   kinematic RigidBody, capsule Collider and Velocity render with the 0022 physics
-   presentation. No new component was added.
-
-Neither capture is required for this verdict, and no native play controls are
-claimed.
+- The course and its checks only cover this geometry: flat floor, box step,
+  block, wall, a 17°/27° box ramp, and one capsule size. Moving platforms, mesh
+  terrain, other shapes, high speeds and large-world coordinates were not
+  exercised here. Astra's regression covers sphere and box characters.
+- Captures every 3 ticks cannot show one-tick events. Per-tick claims come from
+  the logs, which are rounded to 1 mm.
+- Characters move in lockstep, so low cameras overlap them at some ticks.
+- There is no facing indicator, animation or character art. `material_preview`
+  without an environment light reads slightly flat. That is fine for motion
+  review, but it is not shipping look-dev.
+- Stability was checked on one machine and one GPU only. No hosted CI, Rust tests
+  or Clippy were run here (no Rust changed). Native static capture was not
+  requested for this query-only increment.
 
 ## Changed paths
 
-- `handoffs/0023-character-lookdev/result.md`
-- `handoffs/0023-character-lookdev/tools/character_lookdev.py`
-- `handoffs/0023-character-lookdev/tools/character_course.ts`
-- `handoffs/0023-character-lookdev/tools/trace_summary.py`
-- `handoffs/0023-character-lookdev/tools/tsconfig.json`
-- `handoffs/0023-character-lookdev/screenshots/*.png` (10 files, 436 KB)
+- `handoffs/0023-character-lookdev/result.md` (rewritten)
+- `handoffs/0023-character-lookdev/tools/trace_summary.py` (added `--check`)
+- `handoffs/0023-character-lookdev/screenshots/*.png`: the old-engine frames were
+  removed and replaced by 10 current frames (436 KB)
 
-## Unavailable or not run
+## Open questions for Astra and the director
 
-- Native editor capture, because there is no CUA in this ACP session (requested
-  above).
-- Cross-machine and cross-GPU determinism, and other platforms' performance.
-- Rust tests and clippy, because no Rust was changed and the binary was reused as
-  directed.
-- Hosted CI.
-
-## Open questions
-
-1. Should `sliding_down_slope` be gated by `min_slope_slide_angle`, or documented
-   as Rapier's raw flag?
-2. Is the one-tick zero-translation stall known Rapier behaviour (for example,
-   from the snap or offset interaction)? If so, should the runtime retry or
-   document it?
-3. Should the default step-climb keep horizontal speed, for example by stepping
-   in one tick when the landing is clear?
+1. Should low-step traversal preserve walking speed (game feel)? For example, a
+   one-tick vertical step when the landing is clear, or an opt-in option. The
+   current behaviour is geometrically correct but costs about 0.13 s per 0.20 m step.
+2. Should `sliding_down_slope` exclude brief edge or corner support (the 2-tick
+   blip at a step-down)? Or should the docs warn behaviours to debounce it?
+3. Is the single 2.7 cm vertical tick mid-climb (t128) expected from Rapier's
+   autostep, or worth smoothing?
