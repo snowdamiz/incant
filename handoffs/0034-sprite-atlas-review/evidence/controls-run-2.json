@@ -1,0 +1,63 @@
+{
+ "strips": {
+  "documented rule": {
+   "cases": 112,
+   "failing_cases": 0
+  },
+  "wrong tie side": {
+   "cases": 112,
+   "failing_cases": 44
+  },
+  "origin one texel off": {
+   "cases": 112,
+   "failing_cases": 112
+  },
+  "flips inverted": {
+   "cases": 112,
+   "failing_cases": 112
+  }
+ },
+ "pages": {
+  "packed texel": {
+   "at": [
+    349,
+    85
+   ],
+   "pass": false,
+   "content_mismatches": 1,
+   "extrusion_mismatches": 0,
+   "nonzero_empty_texels": 0
+  },
+  "extruded texel": {
+   "at": [
+    345,
+    85
+   ],
+   "pass": false,
+   "content_mismatches": 0,
+   "extrusion_mismatches": 1,
+   "nonzero_empty_texels": 0
+  },
+  "empty texel": {
+   "at": [
+    1203,
+    1864
+   ],
+   "pass": false,
+   "content_mismatches": 0,
+   "extrusion_mismatches": 0,
+   "nonzero_empty_texels": 1
+  },
+  "unmodified": {
+   "pass": true
+  }
+ },
+ "painter_order_reversed": {
+  "LAYER": 232,
+  "ORDER": 232,
+  "ID TIE": 232,
+  "Z IGNORED": 232,
+  "BATCH": 50,
+  "WISP STACK": 232
+ }
+}

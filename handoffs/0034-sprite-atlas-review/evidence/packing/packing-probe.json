@@ -1,0 +1,106 @@
+{
+ "binary_unchanged_every_call": true,
+ "engine_calls": 9,
+ "binary_sha256": "b72389ee24276459938705850b5cfe3efe2ffb1b744ba94ecf1f5d2ba8cc27a2",
+ "results": [
+  {
+   "maximum_size": [
+    2048,
+    2048
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    1865
+   ],
+   "page_texels": 2245460,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0541,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    1204,
+    1170
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    1166
+   ],
+   "page_texels": 1403864,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0866,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    2048,
+    1170
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    1166
+   ],
+   "page_texels": 1403864,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0866,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    1300,
+    1200
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    1166
+   ],
+   "page_texels": 1403864,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0866,
+   "mip_levels": 11
+  },
+  {
+   "maximum_size": [
+    1600,
+    2600
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    2260
+   ],
+   "page_texels": 2721040,
+   "frame_and_extrusion_texels": 121548,
+   "coverage": 0.0447,
+   "mip_levels": 12
+  },
+  {
+   "maximum_size": [
+    4096,
+    1024
+   ],
+   "exit": 1,
+   "message": "Error: Cook { path: \"art/max-4096x1024.atlas.json\", source: Atlas(NoFit) }"
+  },
+  {
+   "maximum_size": [
+    1204,
+    1148
+   ],
+   "exit": 1,
+   "message": "Error: Cook { path: \"art/max-1204x1148.atlas.json\", source: Atlas(NoFit) }"
+  },
+  {
+   "maximum_size": [
+    1204,
+    1147
+   ],
+   "exit": 1,
+   "message": "Error: Cook { path: \"art/max-1204x1147.atlas.json\", source: Atlas(NoFit) }"
+  }
+ ]
+}

@@ -1,0 +1,1516 @@
+{
+ "binary_sha256_start": "b72389ee24276459938705850b5cfe3efe2ffb1b744ba94ecf1f5d2ba8cc27a2",
+ "planned": {
+  "frames": 9,
+  "raw_bytes": 12288000
+ },
+ "imports": {
+  "wide": {
+   "source": "art/wide.atlas.json",
+   "usage": "color",
+   "exit": 0,
+   "stderr": "",
+   "authored_unchanged": false,
+   "asset": {
+    "id": "01M4KT5K8P8YRAVQGVWJM2GW5A",
+    "import_settings": {
+     "type": "texture",
+     "usage": "color"
+    },
+    "kind": "texture",
+    "name": "wide.atlas",
+    "path": "art/wide.atlas.json",
+    "sha256": "0e7ba5533f20f2517ac2f90d82bc4b886fc3647adbb34db5066eac26e2f853ee"
+   },
+   "changed": true,
+   "cache_hit": false,
+   "details": {
+    "atlas": {
+     "frames": {
+      "01JA34FR0000000000000W0000": {
+       "name": "w0",
+       "region": [
+        2,
+        2,
+        1040,
+        1
+       ]
+      },
+      "01JA34FR0000000000000W0001": {
+       "name": "w1",
+       "region": [
+        1046,
+        2,
+        1040,
+        1
+       ]
+      },
+      "01JA34FR0000000000000W0002": {
+       "name": "w2",
+       "region": [
+        2090,
+        2,
+        1040,
+        1
+       ]
+      },
+      "01JA34FR0000000000000W0003": {
+       "name": "w3",
+       "region": [
+        3134,
+        2,
+        1040,
+        1
+       ]
+      },
+      "01JA34FR0000000000000W0004": {
+       "name": "w4",
+       "region": [
+        4178,
+        2,
+        1040,
+        1
+       ]
+      },
+      "01JA34FR0000000000000W0005": {
+       "name": "w5",
+       "region": [
+        5222,
+        2,
+        1040,
+        1
+       ]
+      },
+      "01JA34FR0000000000000W0006": {
+       "name": "w6",
+       "region": [
+        6266,
+        2,
+        1040,
+        1
+       ]
+      }
+     },
+     "id": "01JA34AA000000000000000003",
+     "padding": 2,
+     "size": [
+      7308,
+      5
+     ]
+    },
+    "dependencies": [
+     {
+      "path": "art/wide.atlas.json",
+      "sha256": "44585a47d9aeb08f6e091a4323fd0e46c2825e938fa8fcfdb393b5e71ec13553"
+     },
+     {
+      "path": "art/hstrip.png",
+      "sha256": "ab0efa89ed722a58685708d3d869a09bac0fd6277b41f2ae148f4281494f8dbb"
+     }
+    ],
+    "format": "rgba8_srgb",
+    "height": 5,
+    "mip_levels": 13,
+    "usage": "color",
+    "width": 7308
+   },
+   "revision": 1
+  },
+  "main": {
+   "source": "art/atlas.atlas.json",
+   "usage": "color",
+   "exit": 0,
+   "stderr": "",
+   "authored_unchanged": false,
+   "asset": {
+    "id": "01M4KT5KCA1VB8DGQ0XDJCMZJS",
+    "import_settings": {
+     "type": "texture",
+     "usage": "color"
+    },
+    "kind": "texture",
+    "name": "atlas.atlas",
+    "path": "art/atlas.atlas.json",
+    "sha256": "336afbb5b077b5f3f72d60c01e665b814b7a61192c75931372830746d44fd270"
+   },
+   "changed": true,
+   "cache_hit": false,
+   "details": {
+    "atlas": {
+     "frames": {
+      "01JA34FR000000000000000001": {
+       "name": "wisp0",
+       "region": [
+        71,
+        82,
+        16,
+        16
+       ]
+      },
+      "01JA34FR000000000000000002": {
+       "name": "wisp1",
+       "region": [
+        91,
+        82,
+        16,
+        16
+       ]
+      },
+      "01JA34FR000000000000000003": {
+       "name": "wisp2",
+       "region": [
+        111,
+        82,
+        16,
+        16
+       ]
+      },
+      "01JA34FR000000000000000004": {
+       "name": "wisp3",
+       "region": [
+        131,
+        82,
+        16,
+        16
+       ]
+      },
+      "01JA34FR000000000000000005": {
+       "name": "orb",
+       "region": [
+        151,
+        82,
+        16,
+        16
+       ]
+      },
+      "01JA34FR000000000000000006": {
+       "name": "key",
+       "region": [
+        426,
+        98,
+        8,
+        8
+       ]
+      },
+      "01JA34FR000000000000000007": {
+       "name": "odd",
+       "region": [
+        457,
+        82,
+        7,
+        7
+       ]
+      },
+      "01JA34FR000000000000000008": {
+       "name": "marker",
+       "region": [
+        442,
+        104,
+        2,
+        2
+       ]
+      },
+      "01JA34FR000000000000000009": {
+       "name": "solid",
+       "region": [
+        373,
+        100,
+        1,
+        1
+       ]
+      },
+      "01JA34FR00000000000000000A": {
+       "name": "star",
+       "region": [
+        457,
+        102,
+        3,
+        3
+       ]
+      },
+      "01JA34FR00000000000000000B": {
+       "name": "crate",
+       "region": [
+        426,
+        82,
+        12,
+        12
+       ]
+      },
+      "01JA34FR00000000000000000C": {
+       "name": "glow",
+       "region": [
+        171,
+        82,
+        16,
+        16
+       ]
+      },
+      "01JA34FR00000000000000000D": {
+       "name": "tile0",
+       "region": [
+        191,
+        82,
+        16,
+        16
+       ]
+      },
+      "01JA34FR00000000000000000E": {
+       "name": "tile1",
+       "region": [
+        211,
+        82,
+        16,
+        16
+       ]
+      },
+      "01JA34FR00000000000000000F": {
+       "name": "panel",
+       "region": [
+        15,
+        82,
+        24,
+        24
+       ]
+      },
+      "01JA34FR00000000000000000G": {
+       "name": "card0",
+       "region": [
+        231,
+        91,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000H": {
+       "name": "card1",
+       "region": [
+        250,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000J": {
+       "name": "card2",
+       "region": [
+        266,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000K": {
+       "name": "card3",
+       "region": [
+        282,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000M": {
+       "name": "card4",
+       "region": [
+        298,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000N": {
+       "name": "card5",
+       "region": [
+        314,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000P": {
+       "name": "card6",
+       "region": [
+        330,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000Q": {
+       "name": "card7",
+       "region": [
+        346,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000R": {
+       "name": "card8",
+       "region": [
+        362,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000S": {
+       "name": "card9",
+       "region": [
+        378,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000T": {
+       "name": "cardA",
+       "region": [
+        394,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000V": {
+       "name": "cardB",
+       "region": [
+        410,
+        82,
+        12,
+        14
+       ]
+      },
+      "01JA34FR00000000000000000W": {
+       "name": "probe",
+       "region": [
+        442,
+        82,
+        11,
+        9
+       ]
+      },
+      "01JA34FR00000000000000000X": {
+       "name": "hstrip",
+       "region": [
+        2,
+        46,
+        1100,
+        4
+       ]
+      },
+      "01JA34FR00000000000000000Y": {
+       "name": "vstrip",
+       "region": [
+        2,
+        54,
+        4,
+        1100
+       ]
+      },
+      "01JA34FR00000000000000000Z": {
+       "name": "hrow",
+       "region": [
+        10,
+        54,
+        1100,
+        1
+       ]
+      },
+      "01JA34FR000000000000000010": {
+       "name": "hmid",
+       "region": [
+        15,
+        59,
+        700,
+        1
+       ]
+      },
+      "01JA34FR000000000000000011": {
+       "name": "vcol",
+       "region": [
+        10,
+        59,
+        1,
+        1100
+       ]
+      },
+      "01JA34FR000000000000000012": {
+       "name": "vmid",
+       "region": [
+        10,
+        1163,
+        1,
+        700
+       ]
+      },
+      "01JA34FR000000000000000013": {
+       "name": "halo",
+       "region": [
+        43,
+        82,
+        24,
+        24
+       ]
+      },
+      "01JA34FR000000000000000014": {
+       "name": "ballast",
+       "region": [
+        2,
+        2,
+        1200,
+        40
+       ]
+      },
+      "01JA34FR000000000000000015": {
+       "name": "label:S",
+       "region": [
+        2,
+        1158,
+        3,
+        5
+       ]
+      },
+      "01JA34FR000000000000000016": {
+       "name": "label:T",
+       "region": [
+        2,
+        1167,
+        3,
+        5
+       ]
+      },
+      "01JA34FR000000000000000017": {
+       "name": "label:N",
+       "region": [
+        2,
+        1176,
+        3,
+        5
+       ]
+      },
+      "01JA34FR000000000000000018": {
+       "name": "label:O",
+       "region": [
+        2,
+        1185,
+        3,
+        5
+       ]
+      },
+      "01JA34FR000000000000000019": {
+       "name": "label:L",
+       "region": [
+        2,
+        1194,
+        3,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001A": {
+       "name": "label:B",
+       "region": [
+        2,
+        1203,
+        3,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001B": {
+       "name": "label:W",
+       "region": [
+        2,
+        1212,
+        3,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001C": {
+       "name": "label:V",
+       "region": [
+        2,
+        1221,
+        3,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001D": {
+       "name": "label:X",
+       "region": [
+        2,
+        1230,
+        3,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001E": {
+       "name": "label:Y",
+       "region": [
+        2,
+        1239,
+        3,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001F": {
+       "name": "label:STABLE FRAMES",
+       "region": [
+        15,
+        64,
+        51,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001G": {
+       "name": "label:CARDS 1X",
+       "region": [
+        1170,
+        64,
+        31,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001H": {
+       "name": "label:CARDS 2X",
+       "region": [
+        15,
+        73,
+        31,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001J": {
+       "name": "label:WISP",
+       "region": [
+        1089,
+        73,
+        15,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001K": {
+       "name": "label:KEY",
+       "region": [
+        442,
+        95,
+        11,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001M": {
+       "name": "label:RULER",
+       "region": [
+        813,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001N": {
+       "name": "label:CRATE",
+       "region": [
+        836,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001P": {
+       "name": "label:PROBE",
+       "region": [
+        859,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001Q": {
+       "name": "label:TILES",
+       "region": [
+        882,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001R": {
+       "name": "label:STAR",
+       "region": [
+        1108,
+        73,
+        15,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001S": {
+       "name": "label:TRANSFORMS",
+       "region": [
+        643,
+        64,
+        39,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001T": {
+       "name": "label:PROBE 1X",
+       "region": [
+        50,
+        73,
+        31,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001V": {
+       "name": "label:PROBE 2X",
+       "region": [
+        85,
+        73,
+        31,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001W": {
+       "name": "label:RULER TIES 1X",
+       "region": [
+        70,
+        64,
+        51,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001X": {
+       "name": "label:RULER TIES 3X",
+       "region": [
+        125,
+        64,
+        51,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001Y": {
+       "name": "label:RULER ALIGNED",
+       "region": [
+        180,
+        64,
+        51,
+        5
+       ]
+      },
+      "01JA34FR00000000000000001Z": {
+       "name": "label:PIVOTS",
+       "region": [
+        543,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR000000000000000020": {
+       "name": "label:NONE",
+       "region": [
+        1127,
+        73,
+        15,
+        5
+       ]
+      },
+      "01JA34FR000000000000000021": {
+       "name": "label:FX",
+       "region": [
+        457,
+        93,
+        7,
+        5
+       ]
+      },
+      "01JA34FR000000000000000022": {
+       "name": "label:FY",
+       "region": [
+        362,
+        100,
+        7,
+        5
+       ]
+      },
+      "01JA34FR000000000000000023": {
+       "name": "label:FXY",
+       "region": [
+        250,
+        100,
+        11,
+        5
+       ]
+      },
+      "01JA34FR000000000000000024": {
+       "name": "label:MIR",
+       "region": [
+        266,
+        100,
+        11,
+        5
+       ]
+      },
+      "01JA34FR000000000000000025": {
+       "name": "label:R90",
+       "region": [
+        282,
+        100,
+        11,
+        5
+       ]
+      },
+      "01JA34FR000000000000000026": {
+       "name": "label:R180",
+       "region": [
+        1146,
+        73,
+        15,
+        5
+       ]
+      },
+      "01JA34FR000000000000000027": {
+       "name": "label:R270",
+       "region": [
+        1165,
+        73,
+        15,
+        5
+       ]
+      },
+      "01JA34FR000000000000000028": {
+       "name": "label:R90FX",
+       "region": [
+        905,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR000000000000000029": {
+       "name": "label:9-SLICE",
+       "region": [
+        295,
+        73,
+        27,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002A": {
+       "name": "label:NATIVE",
+       "region": [
+        570,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002B": {
+       "name": "label:SIMPLE",
+       "region": [
+        597,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002C": {
+       "name": "label:STRETCH 72X44",
+       "region": [
+        235,
+        64,
+        51,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002D": {
+       "name": "label:SIMPLE 72X44",
+       "region": [
+        345,
+        64,
+        47,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002E": {
+       "name": "label:SMALL",
+       "region": [
+        928,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002F": {
+       "name": "label:FLIPS",
+       "region": [
+        951,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002G": {
+       "name": "label:ROT 180",
+       "region": [
+        326,
+        73,
+        27,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002H": {
+       "name": "label:MIRROR",
+       "region": [
+        624,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002J": {
+       "name": "label:DENSITY 8",
+       "region": [
+        858,
+        64,
+        35,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002K": {
+       "name": "label:DENSITY 32",
+       "region": [
+        686,
+        64,
+        39,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002M": {
+       "name": "label:ROT 12",
+       "region": [
+        651,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002N": {
+       "name": "label:PROBE 1-1-1-1",
+       "region": [
+        290,
+        64,
+        51,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002P": {
+       "name": "label:ORDER",
+       "region": [
+        974,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002Q": {
+       "name": "label:LAYER",
+       "region": [
+        997,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002R": {
+       "name": "label:ID TIE",
+       "region": [
+        678,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002S": {
+       "name": "label:Z IGNORED",
+       "region": [
+        897,
+        64,
+        35,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002T": {
+       "name": "label:BATCH",
+       "region": [
+        1020,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002V": {
+       "name": "label:ALPHA 0.5",
+       "region": [
+        936,
+        64,
+        35,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002W": {
+       "name": "label:LIGHT",
+       "region": [
+        1043,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002X": {
+       "name": "label:LINEAR",
+       "region": [
+        705,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002Y": {
+       "name": "label:ORB 4X",
+       "region": [
+        732,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR00000000000000002Z": {
+       "name": "label:ORB ON LIGHT",
+       "region": [
+        396,
+        64,
+        47,
+        5
+       ]
+      },
+      "01JA34FR000000000000000030": {
+       "name": "label:HALO 3X",
+       "region": [
+        357,
+        73,
+        27,
+        5
+       ]
+      },
+      "01JA34FR000000000000000031": {
+       "name": "label:HALO 2.5X",
+       "region": [
+        975,
+        64,
+        35,
+        5
+       ]
+      },
+      "01JA34FR000000000000000032": {
+       "name": "label:GLOW",
+       "region": [
+        1184,
+        73,
+        15,
+        5
+       ]
+      },
+      "01JA34FR000000000000000033": {
+       "name": "label:WISP 2X",
+       "region": [
+        388,
+        73,
+        27,
+        5
+       ]
+      },
+      "01JA34FR000000000000000034": {
+       "name": "label:CRATE 30",
+       "region": [
+        120,
+        73,
+        31,
+        5
+       ]
+      },
+      "01JA34FR000000000000000035": {
+       "name": "label:PANEL",
+       "region": [
+        1066,
+        73,
+        19,
+        5
+       ]
+      },
+      "01JA34FR000000000000000036": {
+       "name": "label:PROBE 3X",
+       "region": [
+        155,
+        73,
+        31,
+        5
+       ]
+      },
+      "01JA34FR000000000000000037": {
+       "name": "label:BALLAST",
+       "region": [
+        419,
+        73,
+        27,
+        5
+       ]
+      },
+      "01JA34FR000000000000000038": {
+       "name": "label:PIXEL RECT",
+       "region": [
+        729,
+        64,
+        39,
+        5
+       ]
+      },
+      "01JA34FR000000000000000039": {
+       "name": "label:STABLE ID",
+       "region": [
+        1014,
+        64,
+        35,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003A": {
+       "name": "label:WIDE 1100 1X",
+       "region": [
+        447,
+        64,
+        47,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003B": {
+       "name": "label:ALIGNED",
+       "region": [
+        450,
+        73,
+        27,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003C": {
+       "name": "label:TIE",
+       "region": [
+        298,
+        100,
+        11,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003D": {
+       "name": "label:FLIP",
+       "region": [
+        231,
+        82,
+        15,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003E": {
+       "name": "label:FLIP TIE",
+       "region": [
+        190,
+        73,
+        31,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003F": {
+       "name": "label:TIE +1/256",
+       "region": [
+        772,
+        64,
+        39,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003G": {
+       "name": "label:FLIP +1/256",
+       "region": [
+        549,
+        64,
+        43,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003H": {
+       "name": "label:TIE -1/256",
+       "region": [
+        815,
+        64,
+        39,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003J": {
+       "name": "label:FLIP -1/256",
+       "region": [
+        596,
+        64,
+        43,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003K": {
+       "name": "label:SPAN 512",
+       "region": [
+        225,
+        73,
+        31,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003M": {
+       "name": "label:SPAN 1024",
+       "region": [
+        1053,
+        64,
+        35,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003N": {
+       "name": "label:2X",
+       "region": [
+        378,
+        100,
+        7,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003P": {
+       "name": "label:4X",
+       "region": [
+        394,
+        100,
+        7,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003Q": {
+       "name": "label:8X",
+       "region": [
+        410,
+        100,
+        7,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003R": {
+       "name": "label:16X",
+       "region": [
+        314,
+        100,
+        11,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003S": {
+       "name": "label:32X",
+       "region": [
+        330,
+        100,
+        11,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003T": {
+       "name": "label:MID",
+       "region": [
+        346,
+        100,
+        11,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003V": {
+       "name": "label:MID TIE",
+       "region": [
+        481,
+        73,
+        27,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003W": {
+       "name": "label:MID FLIP",
+       "region": [
+        260,
+        73,
+        31,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003X": {
+       "name": "label:MID FLIP TIE",
+       "region": [
+        498,
+        64,
+        47,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003Y": {
+       "name": "label:ORB 2X",
+       "region": [
+        759,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR00000000000000003Z": {
+       "name": "label:GLOW 2X",
+       "region": [
+        512,
+        73,
+        27,
+        5
+       ]
+      },
+      "01JA34FR000000000000000040": {
+       "name": "label:CARD 7",
+       "region": [
+        786,
+        73,
+        23,
+        5
+       ]
+      },
+      "01JA34FR000000000000000041": {
+       "name": "label:TILES TIE",
+       "region": [
+        1092,
+        64,
+        35,
+        5
+       ]
+      },
+      "01JA34FR000000000000000042": {
+       "name": "label:SCOPED ID",
+       "region": [
+        1131,
+        64,
+        35,
+        5
+       ]
+      }
+     },
+     "id": "01JA34AA000000000000000001",
+     "padding": 2,
+     "size": [
+      1204,
+      1865
+     ]
+    },
+    "dependencies": [
+     {
+      "path": "art/atlas.atlas.json",
+      "sha256": "02a786d71aec677699c4809e525c745fe0478992f17c1a44ef4207c0ed90c875"
+     },
+     {
+      "path": "art/ballast.png",
+      "sha256": "4c88a7958c01b09680e291df9a32cb227cbe84b8153e604d0342a727572533c6"
+     },
+     {
+      "path": "art/cards.png",
+      "sha256": "714886d9a78831b071338336ddee4699306a45063fac82dac229f4a54a1c0d90"
+     },
+     {
+      "path": "art/halo.png",
+      "sha256": "fa0c9fad2affbe21dd230ed1ef155e758bc70fa69418a17fe7ca03cd04e55e83"
+     },
+     {
+      "path": "art/hstrip.png",
+      "sha256": "ab0efa89ed722a58685708d3d869a09bac0fd6277b41f2ae148f4281494f8dbb"
+     },
+     {
+      "path": "art/labels34.png",
+      "sha256": "d85c4aad63e2699d3ab300d1d903e9efd6f98983bfaad133b7b7d56b1eaede0c"
+     },
+     {
+      "path": "art/probe.png",
+      "sha256": "02a4232f33b43a0464ef3bd72a58f887666f9d782ba395d895102caea8c598f4"
+     },
+     {
+      "path": "art/sheet.png",
+      "sha256": "7451ef95e85b803614deb2e836bad9a9e2fc773512ef3d7570dbf95c7b717cf7"
+     },
+     {
+      "path": "art/vstrip.png",
+      "sha256": "0f58ee5b893ff3622d25a81ac513c0735a023a81165841648745b2b3ffaa4ecd"
+     }
+    ],
+    "format": "rgba8_srgb",
+    "height": 1865,
+    "mip_levels": 11,
+    "usage": "color",
+    "width": 1204
+   },
+   "revision": 2
+  }
+ },
+ "shots": {
+  "r1": {
+   "pp-Z-1280x240": {
+    "exit": 0,
+    "written": true,
+    "stderr": "",
+    "sha256": "64e916535b161005e8cc1d1b7c6411d5249de396c001e71aa6b3698b2d84e71e",
+    "adapter": "Apple M5 Pro",
+    "geometry": {
+     "diagnostic_entities": 0,
+     "model_draw_calls": 0,
+     "model_entities": 0,
+     "model_triangles": 0,
+     "primitive_instances": 0,
+     "sprite_entities": 22
+    }
+   },
+   "of-Z-1280x240": {
+    "exit": 0,
+    "written": true,
+    "stderr": "",
+    "sha256": "40ebf4bc5bedc4cece81162cfaab3a7b0508e74ce97b90bdec6b648f91488977",
+    "adapter": "Apple M5 Pro",
+    "geometry": {
+     "diagnostic_entities": 0,
+     "model_draw_calls": 0,
+     "model_entities": 0,
+     "model_triangles": 0,
+     "primitive_instances": 0,
+     "sprite_entities": 22
+    }
+   },
+   "rl-Z-1280x320": {
+    "exit": 0,
+    "written": true,
+    "stderr": "",
+    "sha256": "f138451a14deffa808306fef41f10f9c439bb54b1ab5d93d968112b0e3323916",
+    "adapter": "Apple M5 Pro",
+    "geometry": {
+     "diagnostic_entities": 0,
+     "model_draw_calls": 0,
+     "model_entities": 0,
+     "model_triangles": 0,
+     "primitive_instances": 0,
+     "sprite_entities": 22
+    }
+   }
+  },
+  "r2": {
+   "pp-Z-1280x240": {
+    "exit": 0,
+    "written": true,
+    "stderr": "",
+    "sha256": "64e916535b161005e8cc1d1b7c6411d5249de396c001e71aa6b3698b2d84e71e",
+    "adapter": "Apple M5 Pro",
+    "geometry": {
+     "diagnostic_entities": 0,
+     "model_draw_calls": 0,
+     "model_entities": 0,
+     "model_triangles": 0,
+     "primitive_instances": 0,
+     "sprite_entities": 22
+    }
+   },
+   "of-Z-1280x240": {
+    "exit": 0,
+    "written": true,
+    "stderr": "",
+    "sha256": "40ebf4bc5bedc4cece81162cfaab3a7b0508e74ce97b90bdec6b648f91488977",
+    "adapter": "Apple M5 Pro",
+    "geometry": {
+     "diagnostic_entities": 0,
+     "model_draw_calls": 0,
+     "model_entities": 0,
+     "model_triangles": 0,
+     "primitive_instances": 0,
+     "sprite_entities": 22
+    }
+   },
+   "rl-Z-1280x320": {
+    "exit": 0,
+    "written": true,
+    "stderr": "",
+    "sha256": "f138451a14deffa808306fef41f10f9c439bb54b1ab5d93d968112b0e3323916",
+    "adapter": "Apple M5 Pro",
+    "geometry": {
+     "diagnostic_entities": 0,
+     "model_draw_calls": 0,
+     "model_entities": 0,
+     "model_triangles": 0,
+     "primitive_instances": 0,
+     "sprite_entities": 22
+    }
+   }
+  }
+ },
+ "control_shots": {
+  "pp-Z-1280x240": {
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "64e916535b161005e8cc1d1b7c6411d5249de396c001e71aa6b3698b2d84e71e",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 22
+   }
+  },
+  "of-Z-1280x240": {
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "be2626144893d397ef9b2092930a0e9326b5c4a2b92eff9e926154ca26ff471b",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 22
+   }
+  },
+  "rl-Z-1280x320": {
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "142bd4b76f28be4554dc6444430ab505a70ac851927194cba4013cb84c9634df",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 22
+   }
+  }
+ },
+ "binary_sha256_end": "b72389ee24276459938705850b5cfe3efe2ffb1b744ba94ecf1f5d2ba8cc27a2",
+ "binary_unchanged_every_call": true,
+ "engine_calls": 23,
+ "ledger_after": [
+  736,
+  783075840
+ ]
+}

@@ -1,0 +1,100 @@
+{
+ "binary_unchanged_every_call": true,
+ "engine_calls": 4,
+ "results": [
+  {
+   "maximum_size": [
+    1204,
+    1148
+   ],
+   "exit": 1,
+   "page": null,
+   "regions": {},
+   "message": "Error: Cook { path: \"art/repro-1204x1148.atlas.json\", source: Atlas(NoFit) }"
+  },
+  {
+   "maximum_size": [
+    1204,
+    2048
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    1156
+   ],
+   "regions": {
+    "wide": [
+     2,
+     2,
+     1200,
+     40
+    ],
+    "row": [
+     2,
+     46,
+     1100,
+     4
+    ],
+    "col": [
+     2,
+     54,
+     4,
+     1100
+    ]
+   },
+   "message": ""
+  },
+  {
+   "maximum_size": [
+    1204,
+    1200
+   ],
+   "exit": 0,
+   "page": [
+    1204,
+    1156
+   ],
+   "regions": {
+    "wide": [
+     2,
+     2,
+     1200,
+     40
+    ],
+    "row": [
+     2,
+     46,
+     1100,
+     4
+    ],
+    "col": [
+     2,
+     54,
+     4,
+     1100
+    ]
+   },
+   "message": ""
+  }
+ ],
+ "existing_layout_for_1204x1148": {
+  "wide": [
+   2,
+   2,
+   1200,
+   40
+  ],
+  "col": [
+   2,
+   46,
+   4,
+   1100
+  ],
+  "row": [
+   10,
+   46,
+   1100,
+   4
+  ]
+ }
+}

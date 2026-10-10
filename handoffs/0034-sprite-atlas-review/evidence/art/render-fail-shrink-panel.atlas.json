@@ -1,0 +1,1305 @@
+{
+ "version": 1,
+ "id": "01JA34AA000000000000000001",
+ "maximum_size": [
+  2048,
+  2048
+ ],
+ "padding": 2,
+ "frames": {
+  "01JA34FR000000000000000001": {
+   "name": "wisp0",
+   "path": "sheet.png",
+   "region": [
+    0,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000002": {
+   "name": "wisp1",
+   "path": "sheet.png",
+   "region": [
+    16,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000003": {
+   "name": "wisp2",
+   "path": "sheet.png",
+   "region": [
+    32,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000004": {
+   "name": "wisp3",
+   "path": "sheet.png",
+   "region": [
+    48,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000005": {
+   "name": "orb",
+   "path": "sheet.png",
+   "region": [
+    64,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR000000000000000006": {
+   "name": "key",
+   "path": "sheet.png",
+   "region": [
+    80,
+    0,
+    8,
+    8
+   ]
+  },
+  "01JA34FR000000000000000007": {
+   "name": "odd",
+   "path": "sheet.png",
+   "region": [
+    88,
+    0,
+    7,
+    7
+   ]
+  },
+  "01JA34FR000000000000000008": {
+   "name": "marker",
+   "path": "sheet.png",
+   "region": [
+    80,
+    8,
+    2,
+    2
+   ]
+  },
+  "01JA34FR000000000000000009": {
+   "name": "solid",
+   "path": "sheet.png",
+   "region": [
+    82,
+    8,
+    1,
+    1
+   ]
+  },
+  "01JA34FR00000000000000000A": {
+   "name": "star",
+   "path": "sheet.png",
+   "region": [
+    83,
+    8,
+    3,
+    3
+   ]
+  },
+  "01JA34FR00000000000000000B": {
+   "name": "crate",
+   "path": "sheet.png",
+   "region": [
+    97,
+    1,
+    12,
+    12
+   ]
+  },
+  "01JA34FR00000000000000000C": {
+   "name": "glow",
+   "path": "sheet.png",
+   "region": [
+    110,
+    0,
+    16,
+    16
+   ]
+  },
+  "01JA34FR00000000000000000D": {
+   "name": "tile0",
+   "path": "sheet.png",
+   "region": [
+    0,
+    16,
+    16,
+    16
+   ]
+  },
+  "01JA34FR00000000000000000E": {
+   "name": "tile1",
+   "path": "sheet.png",
+   "region": [
+    16,
+    16,
+    16,
+    16
+   ]
+  },
+  "01JA34FR00000000000000000F": {
+   "name": "panel",
+   "path": "sheet.png",
+   "region": [
+    0,
+    32,
+    8,
+    8
+   ]
+  },
+  "01JA34FR00000000000000000G": {
+   "name": "card0",
+   "path": "cards.png",
+   "region": [
+    2,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000H": {
+   "name": "card1",
+   "path": "cards.png",
+   "region": [
+    16,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000J": {
+   "name": "card2",
+   "path": "cards.png",
+   "region": [
+    30,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000K": {
+   "name": "card3",
+   "path": "cards.png",
+   "region": [
+    44,
+    2,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000M": {
+   "name": "card4",
+   "path": "cards.png",
+   "region": [
+    2,
+    18,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000N": {
+   "name": "card5",
+   "path": "cards.png",
+   "region": [
+    16,
+    18,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000P": {
+   "name": "card6",
+   "path": "cards.png",
+   "region": [
+    30,
+    18,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000Q": {
+   "name": "card7",
+   "path": "cards.png",
+   "region": [
+    44,
+    18,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000R": {
+   "name": "card8",
+   "path": "cards.png",
+   "region": [
+    2,
+    34,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000S": {
+   "name": "card9",
+   "path": "cards.png",
+   "region": [
+    16,
+    34,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000T": {
+   "name": "cardA",
+   "path": "cards.png",
+   "region": [
+    30,
+    34,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000V": {
+   "name": "cardB",
+   "path": "cards.png",
+   "region": [
+    44,
+    34,
+    12,
+    14
+   ]
+  },
+  "01JA34FR00000000000000000W": {
+   "name": "probe",
+   "path": "probe.png",
+   "region": [
+    1,
+    1,
+    11,
+    9
+   ]
+  },
+  "01JA34FR00000000000000000X": {
+   "name": "hstrip",
+   "path": "hstrip.png",
+   "region": [
+    3,
+    2,
+    1100,
+    4
+   ]
+  },
+  "01JA34FR00000000000000000Y": {
+   "name": "vstrip",
+   "path": "vstrip.png",
+   "region": [
+    2,
+    3,
+    4,
+    1100
+   ]
+  },
+  "01JA34FR00000000000000000Z": {
+   "name": "hrow",
+   "path": "hstrip.png",
+   "region": [
+    3,
+    3,
+    1100,
+    1
+   ]
+  },
+  "01JA34FR000000000000000010": {
+   "name": "hmid",
+   "path": "hstrip.png",
+   "region": [
+    103,
+    4,
+    700,
+    1
+   ]
+  },
+  "01JA34FR000000000000000011": {
+   "name": "vcol",
+   "path": "vstrip.png",
+   "region": [
+    3,
+    3,
+    1,
+    1100
+   ]
+  },
+  "01JA34FR000000000000000012": {
+   "name": "vmid",
+   "path": "vstrip.png",
+   "region": [
+    4,
+    103,
+    1,
+    700
+   ]
+  },
+  "01JA34FR000000000000000013": {
+   "name": "halo",
+   "path": "halo.png",
+   "region": [
+    1,
+    1,
+    24,
+    24
+   ]
+  },
+  "01JA34FR000000000000000014": {
+   "name": "ballast",
+   "path": "ballast.png"
+  },
+  "01JA34FR000000000000000015": {
+   "name": "label:S",
+   "path": "labels34.png",
+   "region": [
+    0,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR000000000000000016": {
+   "name": "label:T",
+   "path": "labels34.png",
+   "region": [
+    5,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR000000000000000017": {
+   "name": "label:N",
+   "path": "labels34.png",
+   "region": [
+    10,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR000000000000000018": {
+   "name": "label:O",
+   "path": "labels34.png",
+   "region": [
+    15,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR000000000000000019": {
+   "name": "label:L",
+   "path": "labels34.png",
+   "region": [
+    20,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001A": {
+   "name": "label:B",
+   "path": "labels34.png",
+   "region": [
+    25,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001B": {
+   "name": "label:W",
+   "path": "labels34.png",
+   "region": [
+    30,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001C": {
+   "name": "label:V",
+   "path": "labels34.png",
+   "region": [
+    35,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001D": {
+   "name": "label:X",
+   "path": "labels34.png",
+   "region": [
+    40,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001E": {
+   "name": "label:Y",
+   "path": "labels34.png",
+   "region": [
+    45,
+    0,
+    3,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001F": {
+   "name": "label:STABLE FRAMES",
+   "path": "labels34.png",
+   "region": [
+    50,
+    0,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001G": {
+   "name": "label:CARDS 1X",
+   "path": "labels34.png",
+   "region": [
+    103,
+    0,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001H": {
+   "name": "label:CARDS 2X",
+   "path": "labels34.png",
+   "region": [
+    136,
+    0,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001J": {
+   "name": "label:WISP",
+   "path": "labels34.png",
+   "region": [
+    169,
+    0,
+    15,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001K": {
+   "name": "label:KEY",
+   "path": "labels34.png",
+   "region": [
+    186,
+    0,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001M": {
+   "name": "label:RULER",
+   "path": "labels34.png",
+   "region": [
+    199,
+    0,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001N": {
+   "name": "label:CRATE",
+   "path": "labels34.png",
+   "region": [
+    220,
+    0,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001P": {
+   "name": "label:PROBE",
+   "path": "labels34.png",
+   "region": [
+    241,
+    0,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001Q": {
+   "name": "label:TILES",
+   "path": "labels34.png",
+   "region": [
+    262,
+    0,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001R": {
+   "name": "label:STAR",
+   "path": "labels34.png",
+   "region": [
+    283,
+    0,
+    15,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001S": {
+   "name": "label:TRANSFORMS",
+   "path": "labels34.png",
+   "region": [
+    0,
+    6,
+    39,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001T": {
+   "name": "label:PROBE 1X",
+   "path": "labels34.png",
+   "region": [
+    41,
+    6,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001V": {
+   "name": "label:PROBE 2X",
+   "path": "labels34.png",
+   "region": [
+    74,
+    6,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001W": {
+   "name": "label:RULER TIES 1X",
+   "path": "labels34.png",
+   "region": [
+    107,
+    6,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001X": {
+   "name": "label:RULER TIES 3X",
+   "path": "labels34.png",
+   "region": [
+    160,
+    6,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001Y": {
+   "name": "label:RULER ALIGNED",
+   "path": "labels34.png",
+   "region": [
+    213,
+    6,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000001Z": {
+   "name": "label:PIVOTS",
+   "path": "labels34.png",
+   "region": [
+    266,
+    6,
+    23,
+    5
+   ]
+  },
+  "01JA34FR000000000000000020": {
+   "name": "label:NONE",
+   "path": "labels34.png",
+   "region": [
+    291,
+    6,
+    15,
+    5
+   ]
+  },
+  "01JA34FR000000000000000021": {
+   "name": "label:FX",
+   "path": "labels34.png",
+   "region": [
+    308,
+    6,
+    7,
+    5
+   ]
+  },
+  "01JA34FR000000000000000022": {
+   "name": "label:FY",
+   "path": "labels34.png",
+   "region": [
+    0,
+    12,
+    7,
+    5
+   ]
+  },
+  "01JA34FR000000000000000023": {
+   "name": "label:FXY",
+   "path": "labels34.png",
+   "region": [
+    9,
+    12,
+    11,
+    5
+   ]
+  },
+  "01JA34FR000000000000000024": {
+   "name": "label:MIR",
+   "path": "labels34.png",
+   "region": [
+    22,
+    12,
+    11,
+    5
+   ]
+  },
+  "01JA34FR000000000000000025": {
+   "name": "label:R90",
+   "path": "labels34.png",
+   "region": [
+    35,
+    12,
+    11,
+    5
+   ]
+  },
+  "01JA34FR000000000000000026": {
+   "name": "label:R180",
+   "path": "labels34.png",
+   "region": [
+    48,
+    12,
+    15,
+    5
+   ]
+  },
+  "01JA34FR000000000000000027": {
+   "name": "label:R270",
+   "path": "labels34.png",
+   "region": [
+    65,
+    12,
+    15,
+    5
+   ]
+  },
+  "01JA34FR000000000000000028": {
+   "name": "label:R90FX",
+   "path": "labels34.png",
+   "region": [
+    82,
+    12,
+    19,
+    5
+   ]
+  },
+  "01JA34FR000000000000000029": {
+   "name": "label:9-SLICE",
+   "path": "labels34.png",
+   "region": [
+    103,
+    12,
+    27,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002A": {
+   "name": "label:NATIVE",
+   "path": "labels34.png",
+   "region": [
+    132,
+    12,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002B": {
+   "name": "label:SIMPLE",
+   "path": "labels34.png",
+   "region": [
+    157,
+    12,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002C": {
+   "name": "label:STRETCH 72X44",
+   "path": "labels34.png",
+   "region": [
+    182,
+    12,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002D": {
+   "name": "label:SIMPLE 72X44",
+   "path": "labels34.png",
+   "region": [
+    235,
+    12,
+    47,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002E": {
+   "name": "label:SMALL",
+   "path": "labels34.png",
+   "region": [
+    284,
+    12,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002F": {
+   "name": "label:FLIPS",
+   "path": "labels34.png",
+   "region": [
+    0,
+    18,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002G": {
+   "name": "label:ROT 180",
+   "path": "labels34.png",
+   "region": [
+    21,
+    18,
+    27,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002H": {
+   "name": "label:MIRROR",
+   "path": "labels34.png",
+   "region": [
+    50,
+    18,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002J": {
+   "name": "label:DENSITY 8",
+   "path": "labels34.png",
+   "region": [
+    75,
+    18,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002K": {
+   "name": "label:DENSITY 32",
+   "path": "labels34.png",
+   "region": [
+    112,
+    18,
+    39,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002M": {
+   "name": "label:ROT 12",
+   "path": "labels34.png",
+   "region": [
+    153,
+    18,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002N": {
+   "name": "label:PROBE 1-1-1-1",
+   "path": "labels34.png",
+   "region": [
+    178,
+    18,
+    51,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002P": {
+   "name": "label:ORDER",
+   "path": "labels34.png",
+   "region": [
+    231,
+    18,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002Q": {
+   "name": "label:LAYER",
+   "path": "labels34.png",
+   "region": [
+    252,
+    18,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002R": {
+   "name": "label:ID TIE",
+   "path": "labels34.png",
+   "region": [
+    273,
+    18,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002S": {
+   "name": "label:Z IGNORED",
+   "path": "labels34.png",
+   "region": [
+    0,
+    24,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002T": {
+   "name": "label:BATCH",
+   "path": "labels34.png",
+   "region": [
+    37,
+    24,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002V": {
+   "name": "label:ALPHA 0.5",
+   "path": "labels34.png",
+   "region": [
+    58,
+    24,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002W": {
+   "name": "label:LIGHT",
+   "path": "labels34.png",
+   "region": [
+    95,
+    24,
+    19,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002X": {
+   "name": "label:LINEAR",
+   "path": "labels34.png",
+   "region": [
+    116,
+    24,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002Y": {
+   "name": "label:ORB 4X",
+   "path": "labels34.png",
+   "region": [
+    141,
+    24,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000002Z": {
+   "name": "label:ORB ON LIGHT",
+   "path": "labels34.png",
+   "region": [
+    166,
+    24,
+    47,
+    5
+   ]
+  },
+  "01JA34FR000000000000000030": {
+   "name": "label:HALO 3X",
+   "path": "labels34.png",
+   "region": [
+    215,
+    24,
+    27,
+    5
+   ]
+  },
+  "01JA34FR000000000000000031": {
+   "name": "label:HALO 2.5X",
+   "path": "labels34.png",
+   "region": [
+    244,
+    24,
+    35,
+    5
+   ]
+  },
+  "01JA34FR000000000000000032": {
+   "name": "label:GLOW",
+   "path": "labels34.png",
+   "region": [
+    281,
+    24,
+    15,
+    5
+   ]
+  },
+  "01JA34FR000000000000000033": {
+   "name": "label:WISP 2X",
+   "path": "labels34.png",
+   "region": [
+    0,
+    30,
+    27,
+    5
+   ]
+  },
+  "01JA34FR000000000000000034": {
+   "name": "label:CRATE 30",
+   "path": "labels34.png",
+   "region": [
+    29,
+    30,
+    31,
+    5
+   ]
+  },
+  "01JA34FR000000000000000035": {
+   "name": "label:PANEL",
+   "path": "labels34.png",
+   "region": [
+    62,
+    30,
+    19,
+    5
+   ]
+  },
+  "01JA34FR000000000000000036": {
+   "name": "label:PROBE 3X",
+   "path": "labels34.png",
+   "region": [
+    83,
+    30,
+    31,
+    5
+   ]
+  },
+  "01JA34FR000000000000000037": {
+   "name": "label:BALLAST",
+   "path": "labels34.png",
+   "region": [
+    116,
+    30,
+    27,
+    5
+   ]
+  },
+  "01JA34FR000000000000000038": {
+   "name": "label:PIXEL RECT",
+   "path": "labels34.png",
+   "region": [
+    145,
+    30,
+    39,
+    5
+   ]
+  },
+  "01JA34FR000000000000000039": {
+   "name": "label:STABLE ID",
+   "path": "labels34.png",
+   "region": [
+    186,
+    30,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003A": {
+   "name": "label:WIDE 1100 1X",
+   "path": "labels34.png",
+   "region": [
+    223,
+    30,
+    47,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003B": {
+   "name": "label:ALIGNED",
+   "path": "labels34.png",
+   "region": [
+    272,
+    30,
+    27,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003C": {
+   "name": "label:TIE",
+   "path": "labels34.png",
+   "region": [
+    301,
+    30,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003D": {
+   "name": "label:FLIP",
+   "path": "labels34.png",
+   "region": [
+    0,
+    36,
+    15,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003E": {
+   "name": "label:FLIP TIE",
+   "path": "labels34.png",
+   "region": [
+    17,
+    36,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003F": {
+   "name": "label:TIE +1/256",
+   "path": "labels34.png",
+   "region": [
+    50,
+    36,
+    39,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003G": {
+   "name": "label:FLIP +1/256",
+   "path": "labels34.png",
+   "region": [
+    91,
+    36,
+    43,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003H": {
+   "name": "label:TIE -1/256",
+   "path": "labels34.png",
+   "region": [
+    136,
+    36,
+    39,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003J": {
+   "name": "label:FLIP -1/256",
+   "path": "labels34.png",
+   "region": [
+    177,
+    36,
+    43,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003K": {
+   "name": "label:SPAN 512",
+   "path": "labels34.png",
+   "region": [
+    222,
+    36,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003M": {
+   "name": "label:SPAN 1024",
+   "path": "labels34.png",
+   "region": [
+    255,
+    36,
+    35,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003N": {
+   "name": "label:2X",
+   "path": "labels34.png",
+   "region": [
+    292,
+    36,
+    7,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003P": {
+   "name": "label:4X",
+   "path": "labels34.png",
+   "region": [
+    301,
+    36,
+    7,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003Q": {
+   "name": "label:8X",
+   "path": "labels34.png",
+   "region": [
+    310,
+    36,
+    7,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003R": {
+   "name": "label:16X",
+   "path": "labels34.png",
+   "region": [
+    0,
+    42,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003S": {
+   "name": "label:32X",
+   "path": "labels34.png",
+   "region": [
+    13,
+    42,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003T": {
+   "name": "label:MID",
+   "path": "labels34.png",
+   "region": [
+    26,
+    42,
+    11,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003V": {
+   "name": "label:MID TIE",
+   "path": "labels34.png",
+   "region": [
+    39,
+    42,
+    27,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003W": {
+   "name": "label:MID FLIP",
+   "path": "labels34.png",
+   "region": [
+    68,
+    42,
+    31,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003X": {
+   "name": "label:MID FLIP TIE",
+   "path": "labels34.png",
+   "region": [
+    101,
+    42,
+    47,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003Y": {
+   "name": "label:ORB 2X",
+   "path": "labels34.png",
+   "region": [
+    150,
+    42,
+    23,
+    5
+   ]
+  },
+  "01JA34FR00000000000000003Z": {
+   "name": "label:GLOW 2X",
+   "path": "labels34.png",
+   "region": [
+    175,
+    42,
+    27,
+    5
+   ]
+  },
+  "01JA34FR000000000000000040": {
+   "name": "label:CARD 7",
+   "path": "labels34.png",
+   "region": [
+    204,
+    42,
+    23,
+    5
+   ]
+  },
+  "01JA34FR000000000000000041": {
+   "name": "label:TILES TIE",
+   "path": "labels34.png",
+   "region": [
+    229,
+    42,
+    35,
+    5
+   ]
+  },
+  "01JA34FR000000000000000042": {
+   "name": "label:SCOPED ID",
+   "path": "labels34.png",
+   "region": [
+    266,
+    42,
+    35,
+    5
+   ]
+  }
+ }
+}

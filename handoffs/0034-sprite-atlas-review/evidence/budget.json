@@ -1,0 +1,54 @@
+{
+ "limits": {
+  "per_invocation": {
+   "frames": 128,
+   "raw_mib": 256
+  },
+  "packet": {
+   "frames": 2048,
+   "raw_mib": 1024
+  }
+ },
+ "largest_frame_raw_bytes": 8294400,
+ "frames_per_invocation": 1,
+ "runs": {
+  "run-smoke1": {
+   "frames": 20,
+   "raw_bytes": 18063360
+  },
+  "run-1": {
+   "frames": 229,
+   "raw_bytes": 234401280
+  },
+  "run-smoke2": {
+   "frames": 20,
+   "raw_bytes": 21209088
+  },
+  "run-2": {
+   "frames": 229,
+   "raw_bytes": 248557056
+  },
+  "run-3": {
+   "frames": 229,
+   "raw_bytes": 248557056
+  },
+  "extra-1": {
+   "frames": 9,
+   "raw_bytes": 12288000
+  },
+  "upper-1": {
+   "frames": 4,
+   "raw_bytes": 33177600
+  },
+  "upper-2-swapped": {
+   "frames": 4,
+   "raw_bytes": 33177600
+  }
+ },
+ "total": {
+  "frames": 744,
+  "raw_bytes": 849431040
+ },
+ "total_raw_mib": 810.1,
+ "overwrites": 0
+}
