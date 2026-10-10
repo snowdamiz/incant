@@ -3606,7 +3606,9 @@ version = "0.0.1"
 dependencies = [
  "incant_doc",
  "incant_runtime",
+ "incant_script",
  "serde_json",
+ "sha2 0.10.9",
  "thiserror 2.0.21",
  "ulid",
 ]
@@ -3831,8 +3833,19 @@ dependencies = [
  "incant_runtime",
  "incant_types",
  "rquickjs",
+ "sha2 0.10.9",
  "thiserror 2.0.21",
  "ulid",
+]
+
+[[package]]
+name = "incant_script_player"
+version = "0.0.1"
+dependencies = [
+ "incant_cook",
+ "incant_runtime",
+ "incant_script",
+ "incant_types",
 ]
 
 [[package]]

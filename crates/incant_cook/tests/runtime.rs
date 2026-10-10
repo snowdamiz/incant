@@ -1,3 +1,4 @@
+#![cfg(feature = "scene")]
 use incant_cook::{CookError, cook_scene, stable_id};
 use incant_doc::{Entity, Project, Scene, Transform, Velocity, new_id};
 use incant_runtime::NativeWorld;

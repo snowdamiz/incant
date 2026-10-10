@@ -109,6 +109,45 @@ impl<'js, 'scope, 'world> Loan<'js, 'scope, 'world> {
             buffer.detach();
         }
     }
+    /// Called only after revocation: safe native reads cannot overlap JS views.
+    /// Failure leaves this loan uncommitted so Drop restores the whole write set.
+    pub fn validate_numeric(&mut self) -> Result<(), ScriptError> {
+        self.revoke();
+        self._columns.try_for_each_chunk(|chunk| {
+            let invalid = |id| {
+                ScriptError::Structural(incant_runtime::RuntimeError::Scene(
+                    incant_runtime::SceneError::Component(id),
+                ))
+            };
+            for (id, transform) in chunk
+                .ids
+                .iter()
+                .zip(chunk.transforms.as_chunks::<TRANSFORM_STRIDE>().0)
+            {
+                let norm: f64 = transform[3..7].iter().map(|v| v * v).sum();
+                if !transform.iter().all(|v| v.is_finite())
+                    || !norm.is_finite()
+                    || (norm - 1.).abs() > 1e-4
+                    || transform[7..10].iter().any(|v| v.abs() < 1e-9)
+                {
+                    return Err(invalid(*id));
+                }
+            }
+            if let Some(values) = chunk.velocities {
+                for (id, velocity) in chunk
+                    .ids
+                    .iter()
+                    .zip(values.as_chunks::<VELOCITY_STRIDE>().0)
+                {
+                    if velocity.iter().any(|v| !v.is_finite()) {
+                        return Err(invalid(*id));
+                    }
+                }
+            }
+            Ok(())
+        })
+    }
+
     pub fn finish(mut self) -> Undo {
         self.revoke();
         self.committed = true;
@@ -175,21 +214,29 @@ impl Drop for Loan<'_, '_, '_> {
     fn drop(&mut self) {
         self.revoke();
         if !self.committed {
-            for chunk in &self.chunks {
-                for buffer in std::iter::once(&chunk.transforms).chain(chunk.velocities.as_ref()) {
-                    // SAFETY: all foreign views were detached first. The outer
-                    // exclusive scope still keeps these initialized allocations
-                    // fixed. Undo data has the exact original length, is disjoint
-                    // from ECS storage, and contains only initialized f64 values.
-                    unsafe {
-                        ptr::copy_nonoverlapping(
-                            buffer.undo.as_ptr(),
-                            buffer.pointer,
-                            buffer.undo.len(),
-                        );
-                    }
+            // Numeric validation may have created new mutable slices. Do not
+            // dereference raw pointers retained from the initial visit: restore
+            // through fresh safe borrows after every foreign view is detached.
+            // Verify the entire layout before restoring any prefix.
+            let mut saved = self.chunks.iter();
+            self._columns.for_each_chunk(|chunk| {
+                let old = saved.next().expect("exclusive loan retains table count");
+                assert_eq!(chunk.ids, old.ids, "exclusive loan retains row identities");
+                assert_eq!(chunk.transforms.len(), old.transforms.undo.len());
+                assert_eq!(
+                    chunk.velocities.as_ref().map(|v| v.len()),
+                    old.velocities.as_ref().map(|v| v.undo.len())
+                );
+            });
+            assert!(saved.next().is_none(), "exclusive loan retains table count");
+            let mut saved = self.chunks.iter();
+            self._columns.for_each_chunk(|chunk| {
+                let old = saved.next().expect("validated layout");
+                chunk.transforms.copy_from_slice(&old.transforms.undo);
+                if let (Some(current), Some(old)) = (chunk.velocities, &old.velocities) {
+                    current.copy_from_slice(&old.undo);
                 }
-            }
+            });
         }
     }
 }

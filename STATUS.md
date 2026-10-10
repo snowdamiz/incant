@@ -700,3 +700,22 @@ and distinguishes the remaining director decisions.
 
 `python3 tools/check_gate.py` reports remaining evidence. No source-code scaffold,
 mock response, simulator build or unsigned package counts as a shipped product.
+
+- Native cooked-script startup: the canonical host now accepts only trusted
+  build-produced embedded bytecode through an explicit unsafe boundary, with
+  compiler-free normal player dependencies, precompiled hardening and disabled
+  dynamic source evaluation. The cook preserves bounded symbol/map metadata and
+  rejects cross-target exports. A fresh shipping player runs the structural TS
+  example after source/build-tree deletion. All 382 release workspace tests,
+  workspace and compiler-disabled Clippy, and iOS/Android compiler-disabled host
+  compilation passed locally on the original reviewed tree. A follow-up fixes
+  invalid direct numeric writes with no structural commands: 35 scoped tests,
+  both Clippy modes and a fresh twelve-process shipping proof pass. Component
+  domains are checked after view revocation; existing native simulation/derived
+  hierarchy overflow for huge finite values remains open. Main50 plus the
+  reviewed native-save integration passes 75 scoped tests, 28 tool tests, both
+  Clippy modes and fresh source-free shipping/save proofs; hosted exact-head
+  results remain pending. See
+  [evidence](docs/spikes/cooked-native-scripts.md). Full gameplay migration,
+  authenticated file exports, cross-target embedding, automatic source-map
+  diagnostics, MSVC symbol audit and device/performance gates remain open.
