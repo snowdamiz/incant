@@ -87,7 +87,6 @@
     "artifacts/ios-simulator/IncantSmoke.app/IncantSmoke": "fbb43d236917a6548084eb39966501d60250a6f99e4b55fcc2b0c400113a8095"
   },
   "pending": [
-    "Claude native Inspector review",
     "exact-head hosted checks",
     "merge"
   ],
@@ -175,7 +174,7 @@
     "recorded_utc": "2026-10-09T23:55:45.355017+00:00",
     "checks": {
       "ordinary_rust": 154,
-      "ui": 312,
+      "ui": 315,
       "python": 5,
       "clippy": true,
       "fmt": true,
@@ -192,16 +191,16 @@
         "sha256": "87b7c20dfd2cb9574afbcf0685933c43f1ecce3dc620700e6fb6110dc53b1435"
       },
       "ui": {
-        "file": "incant-physics-final-ui.log",
-        "sha256": "e37755b0e011f643257014b2683480a3f832028c1d19d9acac7cbf40377324ab"
+        "file": "incant-physics-final-ui-v2.log",
+        "sha256": "c3d534939efc7d6e438795667c658a36fd393bd1d72a49292d8543f02088ad46"
       },
       "python": {
         "file": "incant-physics-final-python.log",
         "sha256": "cb0480cbda0db1b1b6f871ff3e58705555dbf3e6e741f8cd1218cbc5dbd6b29e"
       },
       "native_build": {
-        "file": "incant-physics-final-editor-build.log",
-        "sha256": "f9702a5f2285cca46ed255797888019c92f88e6fd80a8a416dc274ffff76d818"
+        "file": "incant-physics-final-editor-v2.log",
+        "sha256": "d7fdbbe8153ddb12a2ad78cae9e0ed0626a8fc5b93ee1d41fa54c02d7ddfa4a8"
       }
     },
     "native_capture_manifest": {
@@ -274,7 +273,7 @@
         }
       ]
     },
-    "native_visual_verdict": "pending Claude review",
+    "native_visual_verdict": "accepted by Claude Opus 5.5 over ACP in 6c2b511",
     "headless_lookdev_frame_equality": [
       {
         "name": "frame-000000.png",
@@ -432,6 +431,81 @@
         "before_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053",
         "after_sha256": "b39a5ae08833121101e919b6a7f924f44eee2b6a6f1b9839ddd97c15a7a25053"
       }
-    ]
+    ],
+    "native_corrected_source_commit": "6cb489a",
+    "native_corrected_manifest": {
+      "source_commit": "6cb489a",
+      "native_binary_sha256": "e514b4b81e6dd769a1e38639fd083e43ee137cbc12e521111be913b3b9fbd012",
+      "files": [
+        {
+          "file": "agent-keyboard-ax.txt",
+          "sha256": "69b16f34f9ca97e1f0bc2a19eb870df3a04e5553539f2c2f5049e31cb8206d41"
+        },
+        {
+          "file": "keyboard-sequence.json",
+          "sha256": "16a1f07ef0d649fca6c50ceaadc9c73827d7c09d5e80717f4c84c07c01bd886f"
+        },
+        {
+          "file": "memberships-keyboard-ax.txt",
+          "sha256": "67945724fa7787a6b66aaa5dfbd265acbfb97eb8e67b953417fdf75c30de5565"
+        },
+        {
+          "file": "minimum-agent-before-end.jpg",
+          "sha256": "e4e58006b7567b1e6a155722542f19e926fe7f794ec1e73430c449df96d70130",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "minimum-agent-end.jpg",
+          "sha256": "6bd8dcd8ce6cfd160f2007674b131575ec7c5b7d0ea51967508ac11d2c944d7e",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "minimum-ball-memberships-keyboard.jpg",
+          "sha256": "62c2b38b30249c0ed40aacab5f1a6090c990c52182e11282635fe147d01d0e9a",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "minimum-ball-shape-keyboard.jpg",
+          "sha256": "3a72fd42151937ee8f9e9bf87ff4b183683d7b931bf43e6eae2f888e4c9f1dd3",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "minimum-default.jpg",
+          "sha256": "cdca0fb907247459bc9e561fa47e79b83d06e723f52977d6ba220bda7124e001",
+          "pixels": [
+            2002,
+            1302
+          ]
+        },
+        {
+          "file": "pill-accessibility.txt",
+          "sha256": "9621d61af42fa342cc488721bf1d6963d2764d664a425d356e4ca0b162a0c265"
+        },
+        {
+          "file": "shape-keyboard-ax.txt",
+          "sha256": "0e2f962f46acd2244aea65a6fc2346a9291c7a376732df03f5afe5bb323a16a9"
+        },
+        {
+          "file": "wide-default.jpg",
+          "sha256": "8d11bbe45686c195f0047e83da049cc1326db336da5cd13b1d59a34c4c170ec8",
+          "pixels": [
+            2880,
+            1748
+          ]
+        }
+      ]
+    }
   }
 }

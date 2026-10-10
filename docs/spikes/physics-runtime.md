@@ -1,10 +1,10 @@
-# Physics runtime integration — in progress
+# Physics runtime integration
 
 The engine now uses pinned Rapier 0.36 with enhanced determinism. The fallback
 choice and Jolt binding evidence are recorded in ADR 0003; no phase gate is
-claimed. This working increment has not yet completed native visual review or
-hosted checks. The full local workspace, actual GPU regression, browser and iOS
-simulator checks below pass.
+claimed. Claude’s scoped browser, headless motion and native Inspector reviews pass.
+Final hosted checks remain pending. The local workspace, actual GPU regression,
+browser and iOS simulator checks below pass.
 
 `RigidBody`, `Collider` and `AngularVelocity` are typed authored components.
 Create and modify them through ordinary `incant_cmd` transactions, including
@@ -54,7 +54,7 @@ behavior evidence, not live-device or complete engine acceptance.
 
 ## Integration evidence
 
-The final integrated workspace passes 154 ordinary Rust tests, Clippy, 312 UI
+The final integrated workspace passes 154 ordinary Rust tests, Clippy, 315 UI
 tests/build, five Python tool tests, Rust format, generated bridge/SDK and
 convention checks. The earlier 40 explicit real-GPU checks pass; all 26 final
 physics look-dev captures are byte-identical to Claude’s reviewed engine frames.
@@ -105,8 +105,9 @@ units were corrected to 1/s before the final native build.
 Claude approved the browser fixture at 1440×900 and 1000×650 and actual headless
 physics motion. Final native CUA captures cover the three shapes, AngularVelocity,
 damping, collision fields, keyboard focus and scroll/resize behavior at 1440×874
-logical and the true 1000×650 minimum. Native visual acceptance is pending Claude’s
-review. Captures remain ignored because the titlebar contains the saved account
+logical and the true 1000×650 minimum. Claude accepted the final native captures after correcting field accessibility
+names and the compact Agent empty state. Mouse-free Tab reaches Shape and
+Memberships, and the short Agent transcript is keyboard scrollable. Captures remain ignored because the titlebar contains the saved account
 label; hashes and sanitized accessibility evidence identify the review artifacts.
 The saved account restored without another login or Keychain prompt. The native
 viewport is an authored static scene; no play-in-editor controls are claimed.

@@ -771,6 +771,6 @@ defect. The tab order follows the visual order, with no skipped or hidden stops.
    after End. In the later keyboard captures its title is still scrolled out of
    view. This is expected and harmless, because the transcript is still
    focusable and scrolls back with Home.
-3. **Component order.** Unchanged and alphabetical, per the director's instruction.
+3. **Component order.** Unchanged and alphabetical, per Astra’s integration brief.
 4. **Coverage boundary.** Nothing here covers native play mode, mesh or compound
    colliders, character controllers, hierarchical bodies or rollback.
