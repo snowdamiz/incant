@@ -3,9 +3,16 @@
 ## Status
 
 Revision 5 ("plain") is implemented and reviewed in the browser. It answers the
-director's rejection of ornamental UI (packet of 2026-10-10, top of `brief.md`). Native
-review is pending Astra's rebuild from this commit.
+director's rejection of ornamental UI (packet of 2026-10-10 in `brief.md`).
 
+- **Native delta of the 0d14f4f binary (packet of 19:08): reviewed;
+  [`native-delta-0d14f4f.md`](native-delta-0d14f4f.md).**
+  - The one current native capture matches the plain design on every surface it shows,
+    with one exception: the status line's connected dot carried a tinted halo.
+  - That halo is removed in this commit (style only). It needs a native rebuild to
+    confirm.
+  - The minimum size, End then Tab, grid paging, dialogs and menus remain unobserved on
+    that binary; the appendix lists them.
 - **The five points: done in the browser.**
   1. *Useless text and rows.* The compound paragraph is gone. The Inspector's Entity /
      ID / Read-only row is gone. Comparable sentences and rows went across the app
@@ -31,9 +38,11 @@ review is pending Astra's rebuild from this commit.
   - Copy ID remains in the Inspector header and the hierarchy menu. "Read-only" is still
     spoken and still in the tooltip.
   - No Rust, schema, transport, credential storage or dependency changed.
-- **Checks.** 29 test files and 499 tests pass, with the strict typecheck clean and the
-  production build working. The count was 500 at 5cfa59d: one pager test was added, and
-  two contrast tests went with the two tints they checked.
+- **Checks.** 29 test files and 504 tests pass at this commit, with the strict
+  typecheck clean and the production build working.
+  - The plain pass itself left 499: from 500 at 5cfa59d, one pager test was added and
+    two contrast tests went with the two tints they checked.
+  - Astra's accessibility fixes (`0d14f4f`, here `bab8883`) added 5.
   - Tests changed only where the presentation changed on purpose; their behavioural
     assertions remain.
   - New test: the pager's own announcement. New assertions: the loading state is spoken
@@ -60,6 +69,7 @@ No phase gate is approved or claimed.
 
 | Revision | What it asked | What I did |
 | --- | --- | --- |
+| Final native read-only delta, 2026-10-10 19:08 | Review `artifacts/0033-native-clean/current.png` (binary from 0d14f4f) for a narrow visual delta; preserve Astra's three accessibility fixes; no native driving or captures; report any clear defect precisely; list what stays unobserved | Done in [`native-delta-0d14f4f.md`](native-delta-0d14f4f.md). Every surface shown matches. The status dot's halo (a glow) is reported there with exact selector and crops, and removed by deleting one CSS declaration. Astra's fixes are untouched. Raw captures stay ignored; only account-free crops are committed. |
 | Director rejects ornamental UI, 2026-10-10 | Remove useless text and rows app-wide; redesign the account dialog and keybinds; avatar-only account button; remove decorative edges, glows, tiles, nesting and prose; keep diagnostics, behaviour and a professional density | Revision 5 across every surface (next section). I read the five screenshots in the ignored `artifacts/0033-native-main/director-feedback/` first. |
 | Native review update, 2026-10-10 17:45 | Review `compound-first.png` and `grid-current.png` (6db60b2); keep raw captures local; a focused delta review | Both show revision 4 as in the browser. The compound shows Part 1, so it is not an End check. The grid shows its values collapsed. No native-only defect was visible. Their ornament (meta row, paragraph, check disc, account pill) is removed in revision 5. The captures stayed ignored and none is committed. |
 | Main-based integration, 2026-10-10 16:55 | Match main's Camera schema; keep the design | Done in e69f2f8; see the history below |
@@ -198,11 +208,14 @@ now fit on screen.
 
 ### Remaining native checks
 
-None of these is claimed. Please rebuild from this commit and check, with account-free
-crops for anything committed:
+None of these is claimed. The 0d14f4f capture shows only the default-size shell with
+a collapsed selection (see [`native-delta-0d14f4f.md`](native-delta-0d14f4f.md)).
+Please rebuild from this commit and check the following, with account-free crops for
+anything committed:
 
-1. **Titlebar, signed in.** The avatar alone, with its ring and no label. VoiceOver reads
-   "ChatGPT account, signed in as …". Check the corner dot while signing in and after an
+1. **Titlebar, signed in.** The avatar alone, with its ring and no label, was seen in
+   the 0d14f4f capture with the window inactive. Still to check: VoiceOver reads
+   "ChatGPT account, signed in as …", and the corner dot while signing in and after an
    error.
 2. **Account dialog.**
    - Signed in with two or more accounts: rows, Use, Add another account, Sign out.
@@ -226,6 +239,7 @@ crops for anything committed:
    from the hierarchy skeleton.
 9. **Minimum window, 1000×650,** for the Inspector with 64 Parts, the account dialog
    and the shortcuts dialog.
+10. **Status dot.** After this commit, the connected dot is plain, with no halo.
 
 Revision 5 changes no Rust, bridge or host code, so the native viewport, the titlebar
 inset and window controls should be unchanged; a capture confirms it.

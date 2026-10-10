@@ -1,3 +1,34 @@
+## Current priority — final native read-only delta, 2026-10-10 19:08
+
+The director's plain-editor pass is integrated at99fc393. Astra fixed three
+reproduced accessibility issues in0d14f4f: shortcut group/action associations,
+stable account completion live status and safe Cancel→Close focus (React had
+reused Cancel as Sign out), and repeated local pager announcements. These fixes
+are now in your checkout; preserve them. All504 UI tests, strict TypeScript,
+production build and the fresh custom-protocol native release build pass.
+
+The rebuilt native app is open and the director has resumed interacting with it.
+Its saved ChatGPT sign-in restored automatically. Do not drive/close the native
+app or request screenshots from the director. One current native capture and
+exact binary manifest are in ignored artifacts/0033-native-clean/current.png and
+manifest.json. Review that actual current native state for a narrow visual delta
+against your plain design. It shows the director's chosen selection/collapsed
+sections and sidebar size; do not infer unobserved interactions or other sizes.
+Raw captures may contain private account information; keep all raw images local
+and ignored. If needed, commit only account-free crops. No render or capture is
+required during this pass. You may inspect the source accessibility corrections.
+
+Native minimum-size, compound End→Tab last-part reveal, grid paging, account and
+shortcut dialogs/menus remain unobserved on this rebuilt binary because user
+input took priority. Keep those explicit. Browser evidence is already broad and
+unchanged. Do not restart the design or expand the task. If the supplied native
+state reveals a clear new defect, report it precisely before making any new
+layout revision. Return a concise scoped native-delta note with observed states,
+exact source/binary, verdict and remaining native checklist, preferably a new
+appendix linked from result.md. No Rust/Cargo/engine/schema/storage changes.
+Continue through ACP with Opus5.5 and Max explicitly verified before prompting.
+Commit Built-by: claude; do not publish or merge.
+
 ## Highest priority — director rejects ornamental UI, 2026-10-10
 
 The director has just reviewed the rebuilt native app and supplied five screenshots
