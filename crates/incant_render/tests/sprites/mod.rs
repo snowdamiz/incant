@@ -1,4 +1,5 @@
 //! Numerical sprite contracts; these fixtures do not approve appearance.
+mod ties;
 use incant_assets::{AssetStore, cook_texture};
 use incant_doc::{
     Asset, AssetImportSettings, Camera, CameraProjection, Entity, Project, Scene, SpriteMode,

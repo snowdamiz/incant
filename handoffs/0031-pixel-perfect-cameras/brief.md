@@ -1,10 +1,41 @@
 # Pixel-perfect camera presentation and rendered review
 
-Claude Opus 5.5 over ACP owns visual design, original scene composition, Inspector
+Claude Opus 5.5 with explicitly verified Max thinking over ACP owns visual design, original scene composition, Inspector
 presentation and rendered-pixel judgment. Astra owns the projection, command,
 render-target/scaling math and integration. Read CLAUDE.md and
 `docs/spikes/pixel-perfect-cameras.md`. Continue the director's neutral connected
 editor with restrained accent and correct spacing; do not redesign unrelated UI.
+
+## Priority revision: corrected renderer, engine-only follow-up
+
+This resumed session must run Opus 5.5 at explicitly verified Max thinking, per
+the director. The wider editor/Inspector redesign is now owned by packet 0033.
+For this follow-up, change only this packet's engine helpers, screenshots,
+measurements and result; do not edit editor/ui, Rust, SDK or unrelated UI.
+Native review will follow the full redesign's integration; report it pending.
+
+Your exact half-pixel camera/object follow defect has been corrected in source
+72ede59. The new immutable binary metadata names that source and its hash. The
+original f9a9ed55 binary and metadata are retained as foundation-incant_headless
+and foundation-binary.json in artifacts/tools; existing engine-r3/r4 evidence
+remains intact. The active artifacts/tools/incant_headless is the corrected build.
+
+Camera-right half ties round down, camera-up half ties round up to match top-left
+raster coverage. A band of 8 scaled f64 epsilons, capped at 1e-7 logical pixel,
+stabilizes exact mathematical ties after rotated basis dot products. Odd logical
+widths frame +0.5 pixel right and odd heights -0.5 pixel up (down on screen), so
+world-grid edges align with logical pixel boundaries. Authored/simulated poses
+remain unchanged. Read the updated docs/spikes/pixel-perfect-cameras.md.
+
+Repeat original x/diagonal follow captures twice from scratch, quantify whether
+the tie-tick flick is gone and inspect real pixels. Also exercise followed geometry
+at odd logical resolutions and inherited roll, where new numerical regressions
+now pass. Check remaining integer-replication/letterbox/projection-switch contracts
+for regressions. Adapt previous expectations only to documented intended changes;
+do not convert a defect into an assertion that accepts it. Keep original results
+as historical evidence, write new versioned output and update result.md with clear
+before/after measures, exact source/hash and an honest remaining-defect verdict.
+The native Inspector and the broader redesign are separate pending reviews.
 
 ## Scope
 

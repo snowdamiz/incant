@@ -1,0 +1,39 @@
+{
+  "source_commit": "39e5c38107451ba44a02ef7b80f27bef11d4141d",
+  "headless_sha256": "848b8294854add3bc672e6ab97e1c3dc1f5f39a9c5b1c234e61e5edace5820ba",
+  "tests": {
+    "rust": 325,
+    "gpu_unit": 7,
+    "gpu_integration": 45
+  },
+  "ui_tests": 420,
+  "tool_tests": 7,
+  "strict_typecheck": "pass",
+  "ui_build": "pass",
+  "clippy": "pass",
+  "contracts": "pass",
+  "portable_core": {
+    "wasm32-unknown-unknown": "compile passed",
+    "aarch64-apple-ios-sim": "compile passed"
+  },
+  "public_probe": {
+    "passed": true,
+    "strict_typescript": true,
+    "source_removed_before_runtime": true,
+    "exact_saved_and_repeated_state": true,
+    "atomic_rollback_and_undo_redo": true,
+    "authored_hashes": {
+      "game.incant.json": "f6939d7a8e8ee589a00c439d068d76cf6921c9fc5d9443bef1d821190fe22504",
+      "game.incant.journal.jsonl": "dec1f770d1ca5d6cc2c687564558661ba144053b9097cf794202cab8e6607cee"
+    },
+    "binary_sha256": "848b8294854add3bc672e6ab97e1c3dc1f5f39a9c5b1c234e61e5edace5820ba",
+    "rendering_or_device_gate": false
+  },
+  "review": {
+    "claude_engine": "pending, Opus 5.5 Max",
+    "claude_inspector": "deferred until handoff 0033 integration",
+    "native": "pending",
+    "hosted_ci": "pending",
+    "phase_gate": "not approved"
+  }
+}

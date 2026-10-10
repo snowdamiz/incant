@@ -1,10 +1,31 @@
 # ADR 0002: wgpu renderer with explicit device ownership
 
-Date: 2026-10-08. Status: proposed for director review.
+Date: 2026-10-08. Updated: 2026-10-10. Status: architecture adopted by the
+director in PLAN.md revision 4 and confirmed by the revision 5 decision record;
+implementation and device gates incomplete.
 
 ## Decision
 
 Use wgpu 29 over Metal, Vulkan, DX12 and WebGPU. The renderer owns its adapter, device, queue, surface configuration and readback buffers. Feed validated engine state into it; screenshots must read the actual GPU target.
+
+Cook native shaders per backend, persist device/driver-compatible pipeline caches,
+and pre-warm each level's recorded permutations while loading. An unexpected
+permutation compiles asynchronously with a pre-warmed fallback material; pipeline
+creation must not block gameplay. WebGPU retains WGSL, compiled during loading.
+Track compilation events alongside frame times so hitch checks measure causality.
+
+Use temporal upscaling and dynamic resolution on every tier, including a portable
+temporal implementation and MetalFX on Apple platforms. Native Metal/Vulkan/DX12
+interop passes declare resource ownership, synchronization and capability needs
+in the render graph and retain a portable fallback. Vendor upscalers, async
+compute and hardware ray tracing do not justify abandoning those fallbacks.
+Claude owns rendered appearance review; Astra owns implementation and timing.
+
+Vendor upscalers arrive on desktop in Phase 4: FSR, DLSS and XeSS, selected by
+hardware, after the human-owned DLSS and XeSS license review. If interop cannot
+deliver vendor upscalers or async compute on a reference desktop, the fallback is
+native Metal and Vulkan backends for the high tiers only; the portable wgpu path
+remains the baseline for every tier and for the web.
 
 ## Evidence and implementation boundary
 
@@ -12,6 +33,20 @@ The initial surface/readback proof now also renders retained imported PBR models
 
 ## Consequences and revisit trigger
 
-Pipeline, geometry, environment and bounded attachment/light-grid caches retain GPU resources. Per-frame uniforms are immutable; the caller still owns submission and presentation. The schedule uses pinned bevy_ecs directly rather than Bevy's default RenderPlugin and window driver. Shadows, post-processing beyond tone mapping, mobile tiers, golden-image certification and platform parity remain open. Vulkan-only ash is a fallback requiring a separate portability decision. This implementation update does not change the proposed director-review status.
+Pipeline, geometry, environment and bounded attachment/light-grid caches retain
+GPU resources in memory. They are not persistent driver caches. Per-frame uniforms
+are immutable; the caller still owns submission and presentation. The schedule
+uses pinned bevy_ecs directly rather than Bevy's default RenderPlugin and window
+driver. Current shader modules are created from WGSL; cook-time translation,
+persistent caches, pre-warming, hitch instrumentation, temporal reconstruction,
+dynamic resolution and native interop remain implementation work. Existing
+directional shadows do not complete the full lighting/post-processing or mobile
+tier gates. Golden-image certification and platform parity remain open.
+
+wgpu 29's public pipeline cache currently supports Vulkan only; Metal archives
+and DX12 libraries require separate interop implementation and measurement. See
+the [revision 4 review](../spikes/performance-plan-v4-review.md) for sources and
+migration sequencing. Adopting this architecture does not approve a phase gate.
+PLAN.md section 12 lists the decisions and the human-owned vendor license actions.
 
 Source: [PLAN.md](../../PLAN.md), sections 2, 3, 5 and 6.

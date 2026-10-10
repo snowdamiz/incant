@@ -1,6 +1,8 @@
 # ADR 0007: Stable C interfaces at native boundaries
 
-Date: 2026-10-08. Status: proposed for director review.
+Date: 2026-10-08. Updated: 2026-10-10. Status: decided by director instruction
+in the PLAN.md revision 5 decision record. This does not approve the Phase 0
+gate or claim later-phase work is implemented. Gameplay hot code uses sandboxed WebAssembly modules (ADR 0006); native plugins remain for trusted engine extensions.
 
 ## Decision
 

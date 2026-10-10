@@ -17,7 +17,9 @@ jobs:
           - {runner: windows-latest, platform: Windows, suffix: '.exe'}
           - {runner: ubuntu-latest, platform: Linux, suffix: ''}
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 45
+    # The camera baseline takes 41.5 minutes on hosted Windows. Leave room for
+    # the additional sprite GPU and saved-gameplay checks in this increment.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020

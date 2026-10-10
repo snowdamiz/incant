@@ -75,4 +75,9 @@ shadow quality would require a separate receiver-depth fitting change.
 The final combined source also compiles for WASM and iOS simulator core targets.
 These do not count as physical-device or live browser rendering gates. Native
 Camera selection and GUI field mutation remain outside this read-only increment.
-Required hosted checks must pass before merge.
+The required hosted checks passed before merge, as recorded below.
+
+PR #41 merged on 2026-10-10 as `af1594192c097af6737c06ce4d26d87b77a4cd77`
+after all twelve checks passed on `a88343e`. The merge preserves tested tree
+`9d8ac331fc106e64cab241acc063651046cd4694` exactly. See the committed merge
+evidence for all job results. No phase gate is approved.
