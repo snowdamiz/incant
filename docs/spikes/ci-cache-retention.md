@@ -1,7 +1,8 @@
 # Shared Rust cache retention
 
-Measured 2026-10-10 after all PR #48 jobs completed, before cleanup. This policy
-retains all checks and has no measured warm-hosted speedup yet.
+The capacity baseline was measured 2026-10-10 after PR #48, before cleanup.
+The completed main #49 producer rollout is recorded below. All checks remain;
+a complete independent warm-PR measurement is still pending.
 
 ## Capacity and visibility
 
@@ -85,3 +86,67 @@ succeeded and all nonselected entries remained. Inventory changed from 27 /
 10,348,422,742 bytes to 15 / 1,767,031,737 bytes. This allows main refill without
 using private cache eviction as hidden evidence of a workable steady-state quota.
 No default-branch/open-PR cache or cache setting was changed.
+
+
+## Completed main producer rollout
+
+PR #49 merged as `646095e78268c70a3216e5d146412be5abf6ec83` after all 12
+current-head checks passed. Its PR jobs all missed Rust caches and all used
+`save-if: false`; no private Rust fallback was published. The main push started
+[full checks](https://github.com/snowdamiz/incant/actions/runs/38085082368),
+[desktop](https://github.com/snowdamiz/incant/actions/runs/38085082417) and
+[credentials](https://github.com/snowdamiz/incant/actions/runs/38085082454).
+A fresh inventory found no equivalent main platform run: the prior scheduled run
+had different lock/workflow inputs. Exactly one existing
+[nightly main dispatch](https://github.com/snowdamiz/incant/actions/runs/38085106886)
+filled that family. No producer was duplicated or rerun.
+
+All 12 producer jobs passed and each exact cache key was verified under
+`refs/heads/main` through the cache API. Queue is each job's creation-to-start
+interval; execution is start-to-completion including artifact/cache publication.
+
+| Producer job | Execution | Queue | Rust restore |
+| --- | ---: | ---: | --- |
+| macOS full checks | 13m43s | 8s | Prior main prefix |
+| Windows full desktop | 34m27s | 2s | Miss |
+| Linux full desktop | 15m36s | 2s | Miss |
+| macOS credentials | 3m53s | 12s | Miss |
+| Linux credentials | 2m44s | 2s | Miss |
+| Windows credentials | 5m01s | 2s | Miss |
+| Web platform | 5m32s | 3s | Miss |
+| Windows platform | 6m14s | 2s | Miss |
+| Linux platform | 2m09s | 2s | Miss |
+| macOS platform | 4m03s | 7s | Miss |
+| iOS simulator | 6m47s | 6s | Miss |
+| Android platform | 7m05s | 2s | Miss |
+
+The macOS full check restored 1,541,591,502 bytes from the prior main prefix and
+published its new exact key. Its release workspace step took 327s, GPU suite 66s,
+Khronos validation 35s and combined tool build 55s. The other 11 producers were
+cold. These are observed producer times, with runner variation and overlapping
+physics PR #50 work; they are not a controlled cache-only benchmark or the next
+PR's warm-consumer result. Every existing test, platform, shipping, CRT and probe
+step remained enabled.
+
+Final shared Rust storage is **8,383,182,696 bytes (7.807 GiB)** across 12 entries.
+The complete retained inventory is **28 entries / 9,587,788,571 bytes (8.929 GiB)**,
+leaving about 1.071 GiB below the default 10 GiB limit at this observation.
+Detailed run/job IDs, keys, versions, sizes, timestamps and queue times are in
+[the rollout evidence](evidence/shared-cache-seed-2026-10-10.json).
+
+Three exact obsolete entries were removed after fresh verification, reclaiming
+2,104,495,841 bytes: private Windows npm caches for merged PRs #45/#46
+(`8776796913`, `8776838551`), with Windows npm saving still disabled, and the old
+main macOS Rust cache (`8778772672`). The replacement (`8779181342`) had a
+successful completed upload, the same restore prefix/version and an intact API
+entry. At deletion its independent consumer restore was still unverified; no
+extra consumer run was forced. Every nonselected entry remained, and the final
+inventory has no unexplained disappearance from the initial snapshot.
+
+This establishes publication and point-in-time retention, not permanent cache
+availability. Desktop/credential producers run on filtered changes or dispatch;
+a source-only PR after long idle/eviction can remain cold until a producer runs.
+The current rollout recovers explicit misses without reducing coverage. Future
+warm evidence must name actual restored keys and distinguish prefix reuse from
+exact hits, changed dependency/features, queue time and execution. Reference-phone,
+mobile execution and phase gates are unaffected.
