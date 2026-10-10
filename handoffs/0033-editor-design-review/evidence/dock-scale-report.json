@@ -1,0 +1,415 @@
+{
+  "set": "r2",
+  "generated": "2026-10-10T20:38:47.367Z",
+  "browser": "155.0.8059.40",
+  "machine": {
+    "cpu": "Apple M5 Pro",
+    "cores": 15,
+    "memoryGB": 48,
+    "platform": "darwin 25.6.0"
+  },
+  "note": "Browser numbers on this machine with an in-page test double; not the M1 MacBook Air device gate and not phone evidence.",
+  "port": 4233,
+  "scenarios": [
+    {
+      "layout": "many-groups",
+      "throttle": 1,
+      "errors": [],
+      "steps": [
+        {
+          "label": "Load to first Problems page (from navigation start)",
+          "ms": 166.9,
+          "mounted": 100,
+          "range": "1–100 of 20,000 problems"
+        },
+        {
+          "label": "Problems: next page",
+          "ms": 12.9,
+          "mounted": 100,
+          "range": "101–200 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: last page",
+          "ms": 13.8,
+          "mounted": 100,
+          "range": "19,901–20,000 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: hide errors",
+          "ms": 18.1,
+          "mounted": 100,
+          "range": "1–100 of 4,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: show errors",
+          "ms": 20.8,
+          "mounted": 100,
+          "range": "1–100 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Open Console (100,000 messages)",
+          "ms": 9.2,
+          "mounted": 100,
+          "range": "99,901–100,000 of 100,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: first page",
+          "ms": 6.2,
+          "mounted": 100,
+          "range": "1–100 of 100,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: Newest",
+          "ms": 5,
+          "mounted": 100,
+          "range": "99,901–100,000 of 100,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (100,500 total), following",
+          "ms": 7,
+          "mounted": 100,
+          "range": "100,401–100,500 of 100,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (101,000 total), following",
+          "ms": 6.9,
+          "mounted": 100,
+          "range": "100,901–101,000 of 101,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (101,500 total), following",
+          "ms": 7,
+          "mounted": 100,
+          "range": "101,401–101,500 of 101,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (102,000 total), following",
+          "ms": 7.2,
+          "mounted": 100,
+          "range": "101,901–102,000 of 102,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (102,500 total), following",
+          "ms": 6.8,
+          "mounted": 100,
+          "range": "102,401–102,500 of 102,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (103,000 total), following",
+          "ms": 6.9,
+          "mounted": 100,
+          "range": "102,901–103,000 of 103,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (103,500 total), following",
+          "ms": 6.5,
+          "mounted": 100,
+          "range": "103,401–103,500 of 103,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (104,000 total), following",
+          "ms": 8,
+          "mounted": 100,
+          "range": "103,901–104,000 of 104,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (104,500 total), following",
+          "ms": 8.1,
+          "mounted": 100,
+          "range": "104,401–104,500 of 104,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (105,000 total), following",
+          "ms": 6.7,
+          "mounted": 100,
+          "range": "104,901–105,000 of 105,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Open History (50,000 edits, 25,000 applied)",
+          "ms": 4.6,
+          "mounted": 100,
+          "range": "25,001–25,100 of 50,000 edits",
+          "longTasks": []
+        },
+        {
+          "label": "History: first page",
+          "ms": 4.4,
+          "mounted": 100,
+          "range": "1–100 of 50,000 edits",
+          "longTasks": []
+        },
+        {
+          "label": "History: Now",
+          "ms": 5.4,
+          "mounted": 100,
+          "range": "25,001–25,100 of 50,000 edits",
+          "longTasks": []
+        },
+        {
+          "label": "History: Now marker on the shown page",
+          "ms": null,
+          "mounted": 1,
+          "range": null
+        }
+      ]
+    },
+    {
+      "layout": "one-group",
+      "throttle": 1,
+      "errors": [],
+      "steps": [
+        {
+          "label": "Load to first Problems page (from navigation start)",
+          "ms": 145.3,
+          "mounted": 100,
+          "range": "1–100 of 20,000 problems"
+        },
+        {
+          "label": "Problems: next page",
+          "ms": 10.6,
+          "mounted": 100,
+          "range": "101–200 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: last page",
+          "ms": 9.5,
+          "mounted": 100,
+          "range": "19,901–20,000 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: hide errors",
+          "ms": 10.2,
+          "mounted": 100,
+          "range": "1–100 of 4,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: show errors",
+          "ms": 5,
+          "mounted": 100,
+          "range": "1–100 of 20,000 problems",
+          "longTasks": []
+        }
+      ]
+    },
+    {
+      "layout": "many-groups",
+      "throttle": 4,
+      "errors": [],
+      "steps": [
+        {
+          "label": "Load to first Problems page (from navigation start)",
+          "ms": 659.8,
+          "mounted": 100,
+          "range": "1–100 of 20,000 problems"
+        },
+        {
+          "label": "Problems: next page",
+          "ms": 53,
+          "mounted": 100,
+          "range": "101–200 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: last page",
+          "ms": 67.7,
+          "mounted": 100,
+          "range": "19,901–20,000 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: hide errors",
+          "ms": 89.3,
+          "mounted": 100,
+          "range": "1–100 of 4,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: show errors",
+          "ms": 78.5,
+          "mounted": 100,
+          "range": "1–100 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Open Console (100,000 messages)",
+          "ms": 37.6,
+          "mounted": 100,
+          "range": "99,901–100,000 of 100,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: first page",
+          "ms": 33.2,
+          "mounted": 100,
+          "range": "1–100 of 100,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: Newest",
+          "ms": 31.2,
+          "mounted": 100,
+          "range": "99,901–100,000 of 100,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (100,500 total), following",
+          "ms": 35.7,
+          "mounted": 100,
+          "range": "100,401–100,500 of 100,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (101,000 total), following",
+          "ms": 31.7,
+          "mounted": 100,
+          "range": "100,901–101,000 of 101,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (101,500 total), following",
+          "ms": 30.2,
+          "mounted": 100,
+          "range": "101,401–101,500 of 101,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (102,000 total), following",
+          "ms": 29.5,
+          "mounted": 100,
+          "range": "101,901–102,000 of 102,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (102,500 total), following",
+          "ms": 31,
+          "mounted": 100,
+          "range": "102,401–102,500 of 102,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (103,000 total), following",
+          "ms": 30.2,
+          "mounted": 100,
+          "range": "102,901–103,000 of 103,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (103,500 total), following",
+          "ms": 30.7,
+          "mounted": 100,
+          "range": "103,401–103,500 of 103,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (104,000 total), following",
+          "ms": 30.5,
+          "mounted": 100,
+          "range": "103,901–104,000 of 104,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (104,500 total), following",
+          "ms": 32.4,
+          "mounted": 100,
+          "range": "104,401–104,500 of 104,500 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Console: 500 messages arrive (105,000 total), following",
+          "ms": 29.6,
+          "mounted": 100,
+          "range": "104,901–105,000 of 105,000 messages",
+          "longTasks": []
+        },
+        {
+          "label": "Open History (50,000 edits, 25,000 applied)",
+          "ms": 20.5,
+          "mounted": 100,
+          "range": "25,001–25,100 of 50,000 edits",
+          "longTasks": []
+        },
+        {
+          "label": "History: first page",
+          "ms": 24.3,
+          "mounted": 100,
+          "range": "1–100 of 50,000 edits",
+          "longTasks": []
+        },
+        {
+          "label": "History: Now",
+          "ms": 15.7,
+          "mounted": 100,
+          "range": "25,001–25,100 of 50,000 edits",
+          "longTasks": []
+        },
+        {
+          "label": "History: Now marker on the shown page",
+          "ms": null,
+          "mounted": 1,
+          "range": null
+        }
+      ]
+    },
+    {
+      "layout": "one-group",
+      "throttle": 4,
+      "errors": [],
+      "steps": [
+        {
+          "label": "Load to first Problems page (from navigation start)",
+          "ms": 585.3,
+          "mounted": 100,
+          "range": "1–100 of 20,000 problems"
+        },
+        {
+          "label": "Problems: next page",
+          "ms": 44.2,
+          "mounted": 100,
+          "range": "101–200 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: last page",
+          "ms": 44.1,
+          "mounted": 100,
+          "range": "19,901–20,000 of 20,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: hide errors",
+          "ms": 51.4,
+          "mounted": 100,
+          "range": "1–100 of 4,000 problems",
+          "longTasks": []
+        },
+        {
+          "label": "Problems: show errors",
+          "ms": 20.7,
+          "mounted": 100,
+          "range": "1–100 of 20,000 problems",
+          "longTasks": []
+        }
+      ]
+    }
+  ]
+}

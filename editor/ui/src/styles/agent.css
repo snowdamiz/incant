@@ -127,6 +127,7 @@
 
 /* Unable to run: one short note and its next step. Long host reasons scroll here. */
 .agent-note {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
@@ -158,6 +159,7 @@
 
 /* Ready: transcript and composer. */
 .agent__transcript {
+  position: relative;
   flex: 1;
   min-height: 0;
   overflow: auto;

@@ -1,0 +1,5379 @@
+{
+  "generated": "2026-10-10T20:43:43.248Z",
+  "browser": "155.0.8059.40",
+  "note": "Headless Chrome captures of the built UI at device scale 2; not native WebKit. Sample fixture, provider fixtures and the evidence test double; no account data.",
+  "before": {
+    "sets": [
+      "v3-before",
+      "v3-before-paged"
+    ],
+    "ui": "revision 3, e8ee0d6",
+    "uiRoot": "artifacts/0033-editor-design-review/src-e8ee0d6/editor/ui"
+  },
+  "after": {
+    "set": "v4-final2",
+    "ui": "revision 4, this commit",
+    "uiRoot": "editor/ui"
+  },
+  "totals": {
+    "captures": {
+      "before": 91,
+      "after": 91
+    },
+    "axeViolations": {
+      "before": 6,
+      "after": 0
+    },
+    "clippedValues": {
+      "before": 37,
+      "after": 36
+    },
+    "outOfBoundsElements": {
+      "before": 0,
+      "after": 0
+    },
+    "statesWithScrollableWindow": {
+      "before": 59,
+      "after": 0
+    },
+    "statesWithHorizontalPageOverflow": {
+      "before": 0,
+      "after": 0
+    },
+    "mostDockRowsMounted": {
+      "before": 1234,
+      "after": 102
+    },
+    "stepErrors": {
+      "before": 4,
+      "after": 0
+    },
+    "pageErrors": {
+      "before": 0,
+      "after": 0
+    },
+    "remoteRequests": {
+      "before": 0,
+      "after": 0
+    }
+  },
+  "states": [
+    {
+      "capture": "no-selection-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "no-selection-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "no-selection-wide-1920x1080",
+      "before": {
+        "inspectorWidth": 400,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 420,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "transform-camera-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "transform-camera-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "transform-camera-narrow-1440x874",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "transform-camera-wide-1920x1080",
+      "before": {
+        "inspectorWidth": 400,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 420,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "camera-focus-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": {
+          "name": "Near clip",
+          "value": "0.1",
+          "outline": "solid 2px rgb(195, 200, 255)",
+          "ring": {
+            "x": 1227.9,
+            "y": 417,
+            "width": 202.1,
+            "height": 26
+          }
+        },
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": {
+          "name": "Near clip",
+          "value": "0.1",
+          "outline": "solid 2px rgb(195, 200, 255)",
+          "ring": {
+            "x": 1207.5,
+            "y": 457,
+            "width": 220.5,
+            "height": 28
+          }
+        },
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "camera-focus-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": {
+          "name": "Near clip",
+          "value": "0.1",
+          "outline": "solid 2px rgb(195, 200, 255)",
+          "ring": {
+            "x": 828,
+            "y": 478,
+            "width": 162,
+            "height": 26
+          }
+        },
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": {
+          "name": "Near clip",
+          "value": "0.1",
+          "outline": "solid 2px rgb(195, 200, 255)",
+          "ring": {
+            "x": 828,
+            "y": 514,
+            "width": 160,
+            "height": 28
+          }
+        },
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "light-fixture-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "crate-error-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 159,
+        "rowHeights": [
+          26,
+          53,
+          82,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (168/187 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 260,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 174,
+        "rowHeights": [
+          28,
+          57,
+          84,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Material: materials/weathered_wood.mat (186/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "crate-error-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 194,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          85,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (128/187 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 568,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 209,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          87,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (126/187 px)",
+          "Material: materials/weathered_wood.mat (126/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "railing-compound-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 305,
+        "rowHeights": [
+          26,
+          53,
+          22,
+          45,
+          72,
+          101,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (168/202 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 888,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 310,
+        "rowHeights": [
+          28,
+          57,
+          22,
+          116,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (186/202 px)",
+          "Material: materials/weathered_wood.mat (186/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "railing-compound-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 340,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          32,
+          133,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (128/202 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 1235,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 393,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          22,
+          119,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (126/202 px)",
+          "Material: materials/weathered_wood.mat (126/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "handcart-compound-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53,
+          22,
+          45,
+          72,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/handcart.mesh (168/209 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 574,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57,
+          22,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/handcart.mesh (186/209 px)",
+          "Material: materials/weathered_wood.mat (186/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "handcart-compound-narrow-1440x874",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          32,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/handcart.mesh (128/209 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 649,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          22,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/handcart.mesh (126/209 px)",
+          "Material: materials/weathered_wood.mat (126/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "script-unsupported-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 224,
+        "rowHeights": [
+          64,
+          26,
+          115,
+          77
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 17.82
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 242,
+        "rowHeights": [
+          66,
+          28,
+          115,
+          77
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 17.82
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "script-unsupported-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 240,
+        "rowHeights": [
+          64,
+          26,
+          134,
+          96
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Source: scripts/grapple.ts (128/130 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 17.82
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 258,
+        "rowHeights": [
+          66,
+          28,
+          134,
+          96
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Source: scripts/grapple.ts (126/130 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 17.82
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "long-name-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/post.mesh (168/180 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Material: materials/weathered_wood.mat (186/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "long-name-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/post.mesh (128/180 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/post.mesh (126/180 px)",
+          "Material: materials/weathered_wood.mat (126/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "asset-texture-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 192,
+        "rowHeights": [],
+        "componentHeaderHeights": [
+          20
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 198,
+        "rowHeights": [],
+        "componentHeaderHeights": [
+          20
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "asset-texture-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 192,
+        "rowHeights": [],
+        "componentHeaderHeights": [
+          20
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 198,
+        "rowHeights": [],
+        "componentHeaderHeights": [
+          20
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "asset-long-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 246,
+        "rowHeights": [],
+        "componentHeaderHeights": [
+          20
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 252,
+        "rowHeights": [],
+        "componentHeaderHeights": [
+          20
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 198,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Source: 01JA33RV00000000000000003A (146/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 506,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Source: 01JA33RV00000000000000003A (144/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-narrow-1440x874",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Source: 01JA33RV00000000000000003A (146/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 282,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 141,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Source: 01JA33RV00000000000000003A (144/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-wide-1920x1080",
+      "before": {
+        "inspectorWidth": 400,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 420,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-navmesh-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 185,
+        "rowHeights": [
+          26,
+          64,
+          30,
+          22,
+          32,
+          45
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Entity: 01JA33RV00000000000000003S (175/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 248,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 202,
+        "rowHeights": [
+          28,
+          66,
+          30,
+          22
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-navmesh-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 236,
+        "rowHeights": [
+          45,
+          64,
+          26,
+          30,
+          32
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Entity: 01JA33RV00000000000000003S (135/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 556,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 253,
+        "rowHeights": [
+          47,
+          66,
+          28,
+          30,
+          22,
+          33
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Entity: 01JA33RV00000000000000003S (144/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-grid-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          22
+        ],
+        "componentHeaderHeights": [
+          20,
+          30,
+          22
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          22
+        ],
+        "componentHeaderHeights": [
+          20,
+          34,
+          22
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-grid-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          22
+        ],
+        "componentHeaderHeights": [
+          20,
+          30,
+          22
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 70,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          22
+        ],
+        "componentHeaderHeights": [
+          20,
+          34,
+          22
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-grid-large-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          22
+        ],
+        "componentHeaderHeights": [
+          20,
+          30,
+          22
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": "not run",
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          22
+        ],
+        "componentHeaderHeights": [
+          20,
+          34,
+          22
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": "not run",
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-sun-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-sun-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 70,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-spot-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-env-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Image: 01JA33RV000000000000000037 (97/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 5.91
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Image: 01JA33RV000000000000000037 (115/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 5.91
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-mesh-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53,
+          22,
+          45,
+          72,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (94/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 632,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57,
+          22,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (113/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-mesh-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          22,
+          30,
+          32,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (54/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 931,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          22,
+          30,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (52/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-mesh-narrow-1440x874",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          22,
+          30,
+          32,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (54/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 707,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 141,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          22,
+          30,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (52/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-rubble-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 175,
+        "rowHeights": [
+          26,
+          53,
+          32,
+          45,
+          110,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 602,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 190,
+        "rowHeights": [
+          28,
+          57,
+          22,
+          95,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-rubble-parts-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": -370,
+        "rowHeights": [
+          26,
+          53,
+          32,
+          45,
+          110,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 602,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": -428,
+        "rowHeights": [
+          28,
+          57,
+          22,
+          95,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-rubble-parts-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": -416,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          32,
+          110,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 907,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": -470,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          33,
+          114,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-rubble-parts-narrow-1440x874",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 158,
+        "firstValueTop": -416,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          32,
+          110,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 683,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 141,
+        "firstValueTop": -470,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          33,
+          114,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "railing-parts-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": -531,
+        "rowHeights": [
+          26,
+          53,
+          22,
+          45,
+          72,
+          101,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (168/202 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 888,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": -611,
+        "rowHeights": [
+          28,
+          57,
+          22,
+          116,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (186/202 px)",
+          "Material: materials/weathered_wood.mat (186/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "railing-parts-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": -577,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          32,
+          133,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (128/202 px)",
+          "Material: materials/weathered_wood.mat (128/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 1235,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": -653,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          22,
+          119,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/railing.mesh (126/202 px)",
+          "Material: materials/weathered_wood.mat (126/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-collider-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": -370,
+        "rowHeights": [
+          26,
+          53,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 198,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": -428,
+        "rowHeights": [
+          28,
+          57,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-character-collider-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": -416,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          30,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Source: 01JA33RV00000000000000003A (146/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 506,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": -470,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Source: 01JA33RV00000000000000003A (144/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-audio-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53,
+          77
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Clip: 01JA33RV000000000000000039 (91/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57,
+          77
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Clip: 01JA33RV000000000000000039 (109/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-ortho-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-broken-camera-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 159,
+        "rowHeights": [
+          26,
+          53,
+          181
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 174,
+        "rowHeights": [
+          28,
+          57,
+          181
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-broken-camera-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 194,
+        "rowHeights": [
+          45,
+          72,
+          152,
+          26
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 70,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 209,
+        "rowHeights": [
+          47,
+          76,
+          152,
+          28
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-malformed-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 273,
+        "rowHeights": [
+          115,
+          53,
+          26,
+          99,
+          77
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (94/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 294,
+        "rowHeights": [
+          115,
+          57,
+          28,
+          99,
+          77
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (113/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-malformed-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 324,
+        "rowHeights": [
+          118,
+          72,
+          45,
+          26,
+          80
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (54/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 294,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 345,
+        "rowHeights": [
+          118,
+          76,
+          47,
+          28,
+          80
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000035 (52/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 6.99,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-long-name-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53,
+          22,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000036 (81/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57,
+          22,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000036 (99/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "native-long-name-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 118,
+        "rowHeights": [
+          45,
+          72,
+          26,
+          22,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000036 (41/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 216,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          22,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: 01JA33RV000000000000000036 (39/187 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 10,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "agent-signed-in-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 107,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 107,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "agent-signing-in-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "agent-collapsed-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 37,
+        "firstValueTop": 159,
+        "rowHeights": [
+          26,
+          53,
+          82,
+          35
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (168/187 px)",
+          "Material: materials/weathered_wood.mat (168/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 260,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 37,
+        "firstValueTop": 174,
+        "rowHeights": [
+          28,
+          57,
+          84,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Material: materials/weathered_wood.mat (186/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "import-form-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [
+          20
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": {
+          "name": null,
+          "value": null,
+          "outline": null,
+          "ring": null
+        },
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [
+          20
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": {
+          "name": null,
+          "value": null,
+          "outline": null,
+          "ring": null
+        },
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "tree-focus-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": 99,
+        "rowHeights": [
+          26,
+          53
+        ],
+        "componentHeaderHeights": [
+          20,
+          30
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "stress-tree-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "stress-assets-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-history-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 6,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-console-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 4,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "account-dialog-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "shortcuts-dialog-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "project-loading-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "project-error-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 2,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "empty-project-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "no-engine-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 107,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 90,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "hierarchy-loading-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "hierarchy-error-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "connection-error-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 2,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "bad-fixture-normal-1440x874",
+      "before": {
+        "inspectorWidth": null,
+        "agentHeight": null,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [
+          "page-has-heading-one"
+        ],
+        "contrast": null,
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": null,
+        "agentHeight": null,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": null,
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "incompatible-normal-1440x874",
+      "before": {
+        "inspectorWidth": null,
+        "agentHeight": null,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [
+          "page-has-heading-one"
+        ],
+        "contrast": null,
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": null,
+        "agentHeight": null,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": null,
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "agent-checking-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "agent-error-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "account-saved-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "account-signed-in-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 107,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 107,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "context-menu-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": 103,
+        "rowHeights": [
+          28,
+          57,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Material: materials/weathered_wood.mat (186/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "context-menu-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": 122,
+        "rowHeights": [
+          47,
+          76,
+          28,
+          30,
+          37
+        ],
+        "componentHeaderHeights": [
+          20,
+          34
+        ],
+        "clippedValues": [
+          "Mesh: assets/dock_kit/crate.mesh (126/187 px)",
+          "Material: materials/weathered_wood.mat (126/202 px)"
+        ],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": 7.98,
+          "value": 13.83
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "panels-hidden-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "large-tree-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": null,
+        "axe": "not run",
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 0,
+        "axe": "not run",
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "shortcuts-filter-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 22,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 141,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "shortcuts-filter-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 228,
+        "dockRowsMounted": null,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 14,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-paged-problems-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 20574,
+        "dockRowsMounted": 450,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Next page' })\u001b[22m\n",
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 102,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-paged-problems-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 30392,
+        "dockRowsMounted": 450,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Next page' })\u001b[22m\n",
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 102,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-paged-console-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 1234,
+        "axe": [
+          "scrollable-region-focusable"
+        ],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'First page' })\u001b[22m\n",
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 100,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-paged-console-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 1234,
+        "axe": [
+          "scrollable-region-focusable"
+        ],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'First page' })\u001b[22m\n",
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 100,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-paged-history-normal-1440x874",
+      "before": {
+        "inspectorWidth": 331,
+        "agentHeight": 158,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 260,
+        "axe": [
+          "scrollable-region-focusable"
+        ],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 360,
+        "agentHeight": 124,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 101,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    },
+    {
+      "capture": "dock-paged-history-minimum-1000x650",
+      "before": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 260,
+        "axe": [
+          "scrollable-region-focusable"
+        ],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      },
+      "after": {
+        "inspectorWidth": 280,
+        "agentHeight": 37,
+        "firstValueTop": null,
+        "rowHeights": [],
+        "componentHeaderHeights": [],
+        "clippedValues": [],
+        "outOfBounds": 0,
+        "pageHorizontalOverflow": 0,
+        "pageVerticalOverflow": 0,
+        "dockRowsMounted": 101,
+        "axe": [],
+        "contrast": {
+          "label": null,
+          "value": null
+        },
+        "focus": null,
+        "stepError": null,
+        "timedOut": false,
+        "pageErrors": 0,
+        "remoteRequests": 0
+      }
+    }
+  ]
+}

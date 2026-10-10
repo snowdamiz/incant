@@ -11,7 +11,6 @@ import { HierarchyPanel } from './components/HierarchyPanel';
 import { InspectorPanel } from './components/inspector/InspectorPanel';
 import { ShortcutsDialog } from './components/ShortcutsDialog';
 import { Splitter } from './components/Splitter';
-import { StateView } from './components/StateView';
 import { Titlebar } from './components/Titlebar';
 import { ViewportPanel } from './components/ViewportPanel';
 import { Icon } from './icons/Icon';
@@ -33,6 +32,17 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
           This editor UI speaks bridge protocol {UI_PROTOCOL_VERSION}; the engine offered protocol{' '}
           {resolution.protocolVersion}. The UI will not guess at an unknown protocol.
         </p>
+        <div className="fatal__versions" aria-hidden="true">
+          <span className="fatal__version">
+            <span className="fatal__version-label">Editor UI</span>
+            <span className="fatal__version-value">Protocol {UI_PROTOCOL_VERSION}</span>
+          </span>
+          <span className="fatal__versus">≠</span>
+          <span className="fatal__version">
+            <span className="fatal__version-label">Engine</span>
+            <span className="fatal__version-value">Protocol {resolution.protocolVersion}</span>
+          </span>
+        </div>
         <p className="subtle">Rebuild the editor so the UI and engine come from the same version.</p>
       </FatalScreen>
     );
@@ -43,8 +53,8 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
         <p>
           No fixture is named <code>{resolution.requested}</code>.
         </p>
-        <p className="subtle">Available: {FIXTURE_VARIANTS.join(', ')}.</p>
-        <p className="subtle">Account states (provider=): {PROVIDER_FIXTURE_NAMES.join(', ')}.</p>
+        <FatalChoices title="Sample fixtures (fixture=)" names={FIXTURE_VARIANTS} />
+        <FatalChoices title="Account states (provider=)" names={PROVIDER_FIXTURE_NAMES} />
       </FatalScreen>
     );
   }
@@ -57,13 +67,41 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
   );
 }
 
+/**
+ * The whole window when the shell cannot start: a card with the product mark, the
+ * problem as the page's heading, and what to do next. Announced as an alert.
+ */
 function FatalScreen({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <main className="fatal">
-      <StateView icon="error" tone="error" title={title}>
-        {children}
-      </StateView>
+      <div className="fatal__card" role="alert">
+        <p className="fatal__brand">
+          <img src="./icon.svg" alt="" width={16} height={16} />
+          Incant
+        </p>
+        <span className="fatal__badge" aria-hidden="true">
+          <Icon name="error" size={20} />
+        </span>
+        <h1 className="fatal__title">{title}</h1>
+        <div className="fatal__body">{children}</div>
+      </div>
     </main>
+  );
+}
+
+/** Valid names for a URL parameter, as a labelled list of chips. */
+function FatalChoices({ title, names }: { title: string; names: readonly string[] }) {
+  return (
+    <div className="fatal__choices">
+      <p className="fatal__choices-title">{title}</p>
+      <ul className="fatal__chips" aria-label={title}>
+        {names.map((name) => (
+          <li key={name}>
+            <code>{name}</code>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -103,8 +141,9 @@ function Workbench() {
     if (isTextEntry(document.activeElement)) {
       // WebKit owns the text edit buffer, including React-controlled inputs.
       // No standard API exposes its undo stack. Never fall back to project undo
-      // if this draft has nothing to undo or the browser refuses the command.
-      document.execCommand(action);
+      // if this draft has nothing to undo or the browser refuses the command
+      // (or no longer offers execCommand at all).
+      if (typeof document.execCommand === 'function') document.execCommand(action);
       return;
     }
     if (shortcutsOpen || accountOpen || document.activeElement?.closest('[role="dialog"]')) return;
@@ -285,26 +324,53 @@ function ConnectionBanner() {
 }
 
 function StatusBar() {
-  const { snapshot, bridge, message, capabilities } = useShell();
+  const { snapshot, bridge, message, capabilities, showPanel, setDockTab } = useShell();
   const connection = snapshot?.connection.status;
   const tone = !bridge ? 'idle' : bridge.isFixture ? 'fixture' : connection === 'ready' ? 'ok' : connection === 'error' ? 'error' : 'pending';
   const errors = snapshot?.diagnostics.filter((d) => d.severity === 'error').length ?? 0;
   const warnings = snapshot?.diagnostics.filter((d) => d.severity === 'warning').length ?? 0;
-  // While the project is opening nothing has been validated, so no counts are claimed.
-  const loading = projectState(snapshot).kind === 'loading';
+  // While the project is opening nothing has been validated, so no counts are claimed;
+  // a project that failed to open is not "clear" either, only its reported problems count.
+  const project = projectState(snapshot).kind;
+  const unvalidated = project === 'loading' || (project === 'failed' && errors === 0 && warnings === 0);
   return (
     <footer className="statusbar">
       <span className={`statusbar__conn statusbar__conn--${tone}`}>
         <span className="statusbar__dot" aria-hidden="true" />
         {bridge ? bridge.label : 'No engine'}
       </span>
-      {snapshot && !loading ? (
-        <span className="statusbar__item">
-          <Icon name="error" size={12} className="sev sev--error" />
-          {errors} <span className="visually-hidden">errors,</span>
-          <Icon name="warning" size={12} className="sev sev--warning" />
-          {warnings} <span className="visually-hidden">warnings</span>
-        </span>
+      {snapshot && !unvalidated ? (
+        <button
+          type="button"
+          className={`statusbar__problems${errors ? ' has-errors' : warnings ? ' has-warnings' : ' is-clear'}`}
+          title="Show problems"
+          onClick={() => {
+            showPanel('dock');
+            setDockTab('problems');
+          }}
+        >
+          {errors === 0 && warnings === 0 ? (
+            <>
+              <Icon name="check" size={12} className="sev sev--clear" />
+              No problems
+            </>
+          ) : (
+            <>
+              {errors ? (
+                <span className="statusbar__count">
+                  <Icon name="error" size={12} className="sev sev--error" />
+                  {errors} <span className="visually-hidden">{errors === 1 ? 'error' : 'errors'}{warnings ? ', ' : ''}</span>
+                </span>
+              ) : null}
+              {warnings ? (
+                <span className="statusbar__count">
+                  <Icon name="warning" size={12} className="sev sev--warning" />
+                  {warnings} <span className="visually-hidden">{warnings === 1 ? 'warning' : 'warnings'}</span>
+                </span>
+              ) : null}
+            </>
+          )}
+        </button>
       ) : null}
       <span className="statusbar__message" role="status" aria-live="polite">
         {message}
@@ -315,7 +381,12 @@ function StatusBar() {
         </span>
       ) : null}
       <span className="statusbar__hint">
-        <kbd>F6</kbd> next panel · <kbd>?</kbd> shortcuts
+        <span className="statusbar__key">
+          <kbd>F6</kbd> Panels
+        </span>
+        <span className="statusbar__key">
+          <kbd>?</kbd> Shortcuts
+        </span>
       </span>
     </footer>
   );

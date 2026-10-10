@@ -74,3 +74,21 @@ describe('Agent that cannot run', () => {
     expect(within(agent).getByText('Agent not ready')).toBeTruthy();
   });
 });
+
+describe('Agent reason wording', () => {
+  it('shows a milestone reason from the bridge in plain words, without claiming the agent works', () => {
+    const snapshot = {
+      ...fixtureSnapshot('sample'),
+      agent: { status: 'unavailable' as const, reason: 'Use the headless agent command for the Phase 0 provider spike.' },
+    };
+    const bridge: EditorBridge = { ...readyAgentBridge(), capabilities: ['provider.connect'], getSnapshot: () => snapshot };
+    render(<App resolution={{ kind: 'bridge', bridge }} />);
+    const agent = document.querySelector<HTMLElement>('[data-region="agent"]')!;
+    expect(agent.textContent).not.toMatch(/headless|Phase 0|spike/);
+    expect(within(agent).getByText('Not in the editor yet')).toBeTruthy();
+    expect(within(agent).getByRole('button', { name: /^Agent/ }).textContent).toContain('Unavailable');
+    expect(within(agent).queryByRole('textbox')).toBeNull();
+    // Connecting an account is a real bridge action, so it stays offered.
+    expect(within(agent).getByRole('button', { name: /Continue with ChatGPT/ })).toBeTruthy();
+  });
+});

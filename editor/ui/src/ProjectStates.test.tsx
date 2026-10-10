@@ -184,7 +184,7 @@ describe('project loading and failure states', () => {
 
     // A later valid revision recovers: the host is clear for the native surface again.
     publish({ ...fixtureSnapshot('sample'), viewport: { status: 'attached', surface: 'Native wgpu' } });
-    expect(within(viewport).getByText('Attached')).toBeTruthy();
+    expect(within(viewport).getByText('Live')).toBeTruthy();
     expect(within(viewport).queryByText('Viewport render error')).toBeNull();
     expect(viewport.querySelector('.viewport-empty')).toBeNull();
   });

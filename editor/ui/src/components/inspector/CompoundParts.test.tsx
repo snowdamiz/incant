@@ -83,7 +83,7 @@ describe('compound schema reaches the Inspector intact', () => {
 });
 
 describe('compound parts', () => {
-  it('lists mixed parts compactly and shows the selected part’s fields in authored order', () => {
+  it('lists mixed parts compactly and shows the selected part’s fields, primitive first and ID last', () => {
     const { container } = show(MIXED);
     expect((screen.getByRole('textbox', { name: 'Shape' }) as HTMLInputElement).value).toBe('compound');
     expect(screen.getAllByRole('textbox', { name: 'Shape' })).toHaveLength(1); // the part's is "Primitive"
@@ -104,8 +104,12 @@ describe('compound parts', () => {
 
     expect(detail().textContent).toContain('Part 1 of 3');
     expect(detail().querySelector('.object-list__path')?.textContent).toContain('/shape/parts/0');
-    const labels = [...detail().querySelectorAll(':scope > .field > .field__label')].map((label) => label.firstChild?.textContent);
-    expect(labels).toEqual(['ID', 'Offset', 'Rotation', 'Primitive']);
+    // What the part is (primitive and size), where it sits, then its stable ID. The
+    // primitive's fields follow it at the same depth: nothing is boxed or indented.
+    const labels = [...detail().querySelectorAll('.field__label')].map((label) => label.firstChild?.textContent);
+    expect(labels).toEqual(['Primitive', 'Half extents', 'Offset', 'Rotation', 'ID']);
+    expect(detail().querySelectorAll('fieldset')).toHaveLength(0);
+    expect([...detail().querySelectorAll('.field-group')].every((group) => group.classList.contains('field-group--variant'))).toBe(true);
     const partId = within(detail()).getByRole('textbox', { name: 'ID' }) as HTMLInputElement;
     expect(partId.value).toBe(id(1));
     expect(partId.readOnly).toBe(true);

@@ -55,6 +55,9 @@ export function Titlebar({
     if (capabilities.has('window.maximize')) void ask({ type: 'window.maximize' });
   };
 
+  // The open scene, when the project shows exactly one, follows the project name.
+  const scene = sceneLabel(snapshot);
+
   return (
     <header
       className="titlebar"
@@ -76,6 +79,15 @@ export function Titlebar({
             {connection?.status === 'ready' ? <span className="visually-hidden">Project: </span> : null}
             {project}
           </h1>
+          {scene ? (
+            <span className="titlebar__scene" title={scene.title}>
+              <span className="titlebar__slash" aria-hidden="true">
+                /
+              </span>
+              <span className="visually-hidden">, </span>
+              {scene.label}
+            </span>
+          ) : null}
           {bridge?.isFixture ? (
             <span
               className="fixture-tag"
@@ -112,7 +124,6 @@ export function Titlebar({
             onClick={() => void run({ type: 'history.redo' })}
           />
         </div>
-        <span className="titlebar__divider" aria-hidden="true" />
         <div className="titlebar__group" role="group" aria-label="Layout">
           <ToggleButton icon="sidebarLeft" label="Hierarchy panel" pressed={panels.hierarchy} onClick={() => onTogglePanel('hierarchy')} />
           <ToggleButton icon="panelBottom" label="Output panel" pressed={panels.dock} onClick={() => onTogglePanel('dock')} />
@@ -125,7 +136,7 @@ export function Titlebar({
         <ProviderChip />
         <button
           type="button"
-          className="tool-button"
+          className="tool-button titlebar__help"
           aria-label="Keyboard shortcuts"
           aria-keyshortcuts="Shift+Slash"
           title="Keyboard shortcuts (?)"
@@ -141,6 +152,16 @@ export function Titlebar({
       ) : null}
     </header>
   );
+}
+
+/** "Main" for a project with one scene, "3 scenes" for several; nothing until the tree is ready. */
+function sceneLabel(snapshot: ReturnType<typeof useShell>['snapshot']): { label: string; title: string } | null {
+  const hierarchy = snapshot?.hierarchy;
+  if (hierarchy?.status !== 'ready') return null;
+  const scenes = hierarchy.value.roots.map((id) => hierarchy.value.nodes[id]).filter((node) => node?.kind === 'scene');
+  if (scenes.length === 1) return { label: scenes[0]!.name, title: `Scene: ${scenes[0]!.name}` };
+  if (scenes.length > 1) return { label: `${scenes.length} scenes`, title: scenes.map((node) => node!.name).join(', ') };
+  return null;
 }
 
 function ToolButton({

@@ -2,11 +2,13 @@ import { useId } from 'react';
 import type { CSSProperties, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
 import type { Diagnostic, FieldSchema } from '../../bridge/contract';
 import { Icon, iconForKind } from '../../icons/Icon';
+import type { IconName } from '../../icons/Icon';
 import type { AxisName, FieldHint, FieldStatus } from './presentation';
 import { MASK_BITS, fieldHint, isMask, maskDescription, maskGroups, maskSummary } from './presentation';
 import { exactTitle, formatNumber, humanize, isRecord, listAll, listChoices, looksLikeUlid, pointer, safeJson, unescapePointer } from './format';
 import { ObjectListView, isObjectList } from './ObjectList';
 import { NumberListView, StringListView, isLongNumberList, isStringList } from './ValueLists';
+import { breakAfterSlashes } from '../breakAfterSlashes';
 
 export { formatNumber, humanize, pointer, safeJson } from './format';
 
@@ -220,6 +222,11 @@ function ExtraField({ name, owner, value }: { name: string; owner: string; value
  * value is a record whose tag names a known variant; a missing, non-string or
  * unknown tag is a visible mismatch and no variant (and no default) is shown.
  * The engine still validates: this only refuses to guess.
+ *
+ * The variant's fields continue at the selector's own depth, with no indent or
+ * guide: the selector names the variant, and the variant's note sits under its
+ * value. Nesting stays for real nested objects, so a compound part is not boxed
+ * three levels deep.
  */
 function UnionView({
   label,
@@ -269,10 +276,6 @@ function UnionView({
   const variantNote = variant?.description;
   // A variant with nothing beneath its tag (perspective) needs no empty group.
   const grouped = fields && record && (children.length > 0 || extra.length > 0 || variantNote);
-  const depth = (ctx.depth ?? 0) + 1;
-  const inner = { ...ctx, depth };
-  // A variant whose only field is a list (a compound's parts) gives the list the full width.
-  const listOnly = fields && children.length === 1 && extra.length === 0 && fields[children[0]!]?.type === 'array' && isObjectList(fields[children[0]!]!);
   return (
     <>
       <FieldRow
@@ -288,19 +291,14 @@ function UnionView({
         implied={implied}
       />
       {grouped ? (
-        <div
-          className={`field-group field-group--variant${listOnly ? ' field-group--flush' : ''}`}
-          role="group"
-          aria-labelledby={`${id}-label`}
-          style={depthStyle(listOnly ? ctx.depth ?? 0 : depth)}
-        >
+        <div className="field-group field-group--variant" role="group" aria-labelledby={`${id}-label`} style={depthStyle(ctx.depth ?? 0)}>
           {variantNote ? (
-            <p className="field-group__note" id={`${id}-variant`}>
+            <p className="field-group__note field__help" id={`${id}-variant`}>
               {variantNote}
             </p>
           ) : null}
           {children.map((key) => (
-            <FieldView key={key} name={key} schema={fields[key]!} value={record[key]} path={[...path, key]} ctx={listOnly ? ctx : inner} />
+            <FieldView key={key} name={key} schema={fields[key]!} value={record[key]} path={[...path, key]} ctx={ctx} />
           ))}
           {extra.map((key) => (
             <ExtraField key={key} name={key} owner={`the “${String(tag)}” ${label.toLowerCase()}`} value={record[key]} />
@@ -425,6 +423,7 @@ export function FieldRow({
             unit={unit}
             tag={tag}
             variants={hint.variants}
+            variantIcons={hint.variantIcons}
             axes={hint.axes}
             value={value}
             invalid={severity === 'error'}
@@ -456,7 +455,7 @@ export function ProblemList({ id, problems, here }: { id: string; problems: read
           <Icon name={d.severity === 'error' ? 'error' : d.severity === 'warning' ? 'warning' : 'info'} size={12} />
           <span>
             {d.message}
-            {d.path !== here ? <code className="field__problem-path">{d.path}</code> : null}
+            {d.path !== here ? <code className="field__problem-path">{breakAfterSlashes(d.path ?? '')}</code> : null}
           </span>
         </li>
       ))}
@@ -489,6 +488,7 @@ function ValueControl({
   unit,
   tag,
   variants,
+  variantIcons,
   axes,
   value,
   invalid,
@@ -503,6 +503,7 @@ function ValueControl({
   unit: string | undefined;
   tag: FieldStatus | null;
   variants: Readonly<Record<string, string>> | undefined;
+  variantIcons: Readonly<Record<string, IconName>> | undefined;
   axes: readonly AxisName[] | undefined;
   value: unknown;
   invalid: boolean;
@@ -568,9 +569,11 @@ function ValueControl({
       // The union row shows the selected variant's tag; UnionView only passes a recognized one.
       if (typeof value !== 'string') return <Mismatch id={id} expected="a variant name" value={value} />;
       const shown = variants && Object.hasOwn(variants, value) ? variants[value]! : value;
-      if (!tag) return <input {...common} className="control control__input" value={shown} />;
+      const glyph = variantIcons && Object.hasOwn(variantIcons, value) ? variantIcons[value]! : null;
+      if (!tag && !glyph) return <input {...common} className="control control__input" value={shown} />;
       return (
         <span className="control control--choice" onMouseDown={focusOwnInput}>
+          {glyph ? <Icon name={glyph} size={14} className="control__glyph" /> : null}
           <input {...common} className="control__input" value={shown} />
           <Tag tag={tag} />
         </span>
@@ -620,7 +623,15 @@ function ValueControl({
       const channels = axes ?? arrayChannels(widget, fieldKey, value.length);
       const preview = (widget === 'rgb' || widget === 'rgba') && channels ? linearPreview(value) : null;
       return (
-        <span className={`control control--vector${preview ? ' has-swatch' : ''}`} role="group" aria-labelledby={labelledBy} id={id} data-count={value.length}>
+        <span
+          className={`control control--vector${preview ? ' has-swatch' : ''}`}
+          role="group"
+          aria-labelledby={labelledBy}
+          id={id}
+          data-count={value.length}
+          // An error on the whole vector (a non-unit quaternion) outlines the box once.
+          data-invalid={errorPaths.has(here) ? 'all' : undefined}
+        >
           {preview ? <span className="vector__swatch" style={{ background: preview }} aria-hidden="true" title={`Preview of linear RGB ${value.map(formatNumber).join(', ')}, shown in sRGB`} /> : null}
           {value.map((item, index) => (
             <label key={index} className="vector__axis">
