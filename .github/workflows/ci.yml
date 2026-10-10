@@ -45,11 +45,11 @@ jobs:
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
         run: cargo test --workspace --release --locked -- --ignored --test-threads=1 --nocapture
-      - name: Validate cooked KTX2 with the Khronos reference tool
-        run: python3 tools/validate_ktx.py
       # Keep workspace feature unification from the release tests while building
       # only these tools; execute the resulting binaries directly below.
-      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --release --features incant_editor/custom-protocol --locked
+      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --release --features incant_editor/custom-protocol --locked
+      - name: Validate cooked KTX2 with the Khronos reference tool
+        run: python3 tools/validate_ktx.py --probe-binary target/release/examples/texture_probe
       - run: target/release/incant_headless schema schemas
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python3 tools/shipping.py artifacts/shipping-runtime
