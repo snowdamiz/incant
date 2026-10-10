@@ -1,122 +1,162 @@
-# 0025 — Compound native Inspector and corrected-runtime review: result
+# 0025: Compound native Inspector and corrected-runtime review — result
 
-**Status: reviewable checkpoint, waiting on Astra's native inputs.** The browser-fixture re-check on the integrated code passes, and I found no UI defect, so no `editor/ui/src` change was made. **Native appearance acceptance is NOT claimed:** `artifacts/0025-native/manifest.json` and its native screenshots were not in this worktree. **No corrected-runtime frames were reviewed:** `artifacts/tools/incant_headless` and `binary.json` were not supplied either (the worktree has no `artifacts/` directory at all). This is not a phase-gate approval or a complete-engine claim.
+**Status: partial native appearance acceptance. The corrected-runtime look-dev is accepted.**
+
+- **Native (Inspector compound states):** accepted from Astra's native pixels at normal (1440×874) and minimum (1000×650) window sizes. The states are mixed parts, exact paths, full readable IDs, End then Tab, and the 64-part bounded list with scroll and focus.
+- **Native, still open:** three items:
+  - traffic-light alignment, which a CUA overlay hides;
+  - selection after reorder, which was not captured natively;
+  - an unambiguous primitive-regression frame.
+- **Runtime:** the corrected-runtime frames of the 0024 course were reviewed on the SHA-verified binary. They show no new defect.
+- **No changes to `editor/ui/src`:** no UI defect was found.
+- **Not claimed:** this is not a phase-gate approval or a complete-engine claim.
 
 ## Model and transport
 
-- Model: **Claude Opus 5.5** (`claude-opus-5-5`) in Claude Code (Claude Agent SDK). The handoff runner provides the ACP transport and the director's subscription; I cannot verify that transport from inside the session.
+- Model: **Claude Opus 5.5** (`claude-opus-5-5`), in Claude Code (Claude Agent SDK). The handoff runner supplies the ACP transport and the director's subscription; I cannot verify the transport from inside the session.
 - No other model was substituted.
 
 ## Director feedback acknowledged
 
-- **Computer use and screen capture are reauthorized (2026-10-10).** This lifts the 0024 pause. I used screen capture only for headless browser-fixture captures. Native desktop interaction and capture stay with Astra through CUA, as the packet requires, so I ran no shell native automation.
-- **Validated against the current integrated code** (HEAD `64b9efe`: current main plus Astra's `eb261ab` stable-selection and rotated-child normal corrections), not the old 0024 HEAD.
-- **Layout preserved:** clean neutral connected panels, the separate Assets workspace, and a bottom dock with only Problems, Console and History. All 32 captures report exactly those three dock tabs. Titlebar and traffic-light alignment can only be judged from native pixels; that check is pending.
-- **Stool:** I make no solver inference, in line with `docs/spikes/compound-colliders.md`.
+- **Computer use and screen capture are reauthorized (2026-10-10).** This supersedes the 0024 pause, and screen work has resumed.
+- **Native interaction stayed with Astra.** Astra supplied the native interactions and captures through CUA. I reviewed them with the image reader and ran no shell native automation.
+- **Validated on the integrated code:** source `64b9efe` (current main plus `eb261ab` and the rotated-child normal fix). This handoff's commits touch only handoff files.
+- **Director's layout preserved and seen in native pixels:**
+  - neutral connected panels;
+  - Hierarchy and Assets as separate workspace tabs;
+  - a bottom dock with only Problems, Console and History.
+- **No solver inference from spawn height.** I did not alter the solver or runtime.
 
-## Changed paths
+## Inputs and provenance
 
-- `handoffs/0025-compound-native-review/tools/capture-inspector.mjs`: copied from 0024. Changes: port 4195, plus two new states, `handcart-end-tab-id` (End, then Tab) and `rubble-64-end` (End on 64 parts). It still refuses an existing output directory.
-- `handoffs/0025-compound-native-review/screenshots/browser/`: 7 PNGs and `report.json`, copied unchanged from `artifacts/0025-ui-r1`.
-- `handoffs/0025-compound-native-review/result.md`.
+Binary, from `artifacts/tools/binary.json`:
 
-## Commands and results
+| Item | Value |
+|---|---|
+| Source | `64b9efe5e7ab0e1bdf464539b65c73a570b37e88` |
+| `binary_sha256` | `290d85195933866c5cb4793d0374f6354b8a69397d9743bdd7e557511ebc580e` |
+| `shasum -a 256 artifacts/tools/incant_headless` | **matches** |
+
+Native captures:
+
+- Astra's native app, per `binary.json`: `native_sha256` `9ce81f7e…bca5980`, project `a945aeee…6bd419`.
+- There are 10 captures in `artifacts/0025-native/`. **`manifest.json` was not supplied**, so I inferred the state names from the file names and pixels.
+- The captures are **JPEG data with a `.png` extension** (JFIF, 2× Retina): 2880×1748/1746 for 1440-wide windows and 2000×1300 for 1000×650. They are lossy, not raw.
+- **They show the director's real ChatGPT account email in the titlebar, so they stay ignored and uncommitted.**
+- Committed derivatives are Inspector-column crops only (`sips` crop, re-encoded as PNG with no other edits), and they exclude the account chip.
+
+Truncated SHA-256 of the originals:
+
+| Capture | SHA-256 (truncated) |
+|---|---|
+| `mixed-default` | `64e9bb37…` |
+| `mixed-end-tab` | `2ff08103…` |
+| `mixed-min` | `222504c7…` |
+| `parts-64-default` | `1e8a2b0c…` |
+| `parts-64-min-end` | `02043384…` |
+| `parts-64-min-end-tab` | `f25f422e…` |
+| `parts-64-wide-end-tab` | `42499d7e…` |
+| `parts-64-wide-detail-scrolled` | `2caf55df…` |
+| `primitive-min` | `9a29f4e7…` |
+| `resize-observation` | `988817d2…` |
+
+## Native review (Astra's pixels)
+
+| State | Size | Verdict |
+|---|---|---|
+| Dumbbell mixed parts, default | 1440 | **Pass.** Summary `3 parts · 2 sphere, 1 box`. Compact rows: `r 0.3 m` and `½ 0.7 × 0.1 × 0.1 m`. Card `Part 1 of 3` with `/shape/parts/0`. Full ID `000…0110` readable. |
+| Dumbbell End then Tab | 1440 | **Pass.** Row 3 is selected (tinted), and the hovered row 1 is visibly different (neutral grey). Caption `/shape/parts/2`. Tab puts focus on the ID: a full-width lavender ring, all 26 characters selected, and nothing clipped. |
+| Dumbbell | 1000×650 | **Pass.** The Inspector scrolls inside its own panel. The list, card, Offset and the 2×2 quaternion are legible. |
+| 64 parts, default | 1440 | **Pass.** The well is bounded at about 6.5 rows, and row 7 is cut by the well edge as the scroll cue. The summary truncates (`…21 sphere, 21…`); the full text is in `title` and `aria-describedby`. |
+| 64 parts End | 1000×650 | **Pass.** Row 64 is focused with its ring fully inside the well. A list scrollbar is visible. Card `Part 64 of 64` with `/shape/parts/63`. |
+| 64 parts End then Tab | 1000×650 and 1440 | **Pass.** The row ring hands off to the ID ring, and row 64 stays selected. The full ID `…1063` is readable. `parts-64-min-end-tab-ax.txt` reports the selected text as the ID. |
+| 64 parts, detail scrolled | 1440 | **Pass.** Half extents `0.25 / 0.3 / 0.4`, Material, Collision, and the mask bars render like the primitive masks. There is no horizontal overflow. |
+| `resize-observation` | 1000×650 | **Pass, with an observation.** After resizing to the minimum, the Inspector half of the right column is about 255 pt tall, so only list rows 1–2 show before the Agent pane. Everything scrolls and nothing clips or overlaps. The shell's equal Inspector/Agent split is director-owned layout, so I left it unchanged; see Open questions. |
+| `primitive-min` (Floor) | 1000×650 | **Inconclusive.** The Inspector is scrolled to Friction/Restitution/Collision/masks, which render correctly. The Shape row is off-screen, and without the manifest I cannot tell whether the scroll offset was carried over from the previous entity or set by Astra on purpose. |
+| Shell and titlebar | both | **Panels pass, traffic lights not reviewable.** Panels are connected, the toolbar is centred, the dock is correct, and the Read-only chip is present. A purple CUA/control overlay pill covers the traffic-light area in every capture, so I **cannot confirm traffic-light alignment**. |
+| Viewport | both | **Out of scope.** The compound entities draw as the default cube meshes, because this native project has no compound render mesh. That is not an Inspector defect, and there is no collider debug draw. |
+
+The browser-fixture pass from the first checkpoint still stands for hostile malformed data: 32 captures, 0 axe violations, 0 clipped inputs and 0 overflow. See `screenshots/browser/`.
+
+## Corrected-runtime look-dev (SHA-verified binary)
 
 ```sh
-npm ci                                     # pass, 0 vulnerabilities
-cd editor/ui && npx tsc -b --noEmit        # strict typecheck: pass, no output
-npx vitest run                             # 15 files, 329 tests: pass (includes eb261ab's reorder test)
-npm run build                              # pass
-node handoffs/0025-compound-native-review/tools/capture-inspector.mjs artifacts/0025-ui-r1
-                                           # 32 captures (16 states × 1440×900 and 1000×650), headless Chrome 155.0.8059.40
+python3 -I handoffs/0024-compound-inspector/tools/compound_lookdev.py artifacts/0025-lookdev-A \
+  --run overview:overview:4 --run arch:arch:4 --run props:props:4
+python3 -I handoffs/0024-compound-inspector/tools/compound_lookdev.py artifacts/0025-lookdev-B \
+  --run overview:overview:4 --run arch:arch:4 --run props:props:4
 ```
 
-Not run, because the inputs are absent: native review, `shasum` of `incant_headless` against `binary.json`, and engine look-dev frames. I did not use another worktree's Cargo target or binary.
+**Authoring path:** the original 0024 helper and models. The scene is built with `init`, `import` and one RPC `command.execute` transaction through the journal, then `project.save`, `validate`, and `play --compiled-script --camera`. These are real GPU frames; none is painted or substituted.
 
-## Browser-fixture evidence (not native WebKit)
+**Budget:** each run captures 76 frames at 960×540, 157.6 MB raw. Wall time per run was 1.13–1.36 s on this host (Apple M5 Pro), an informal timing.
 
-These are the built UI in headless Chrome at 2× DPR over the read-only `?fixture=sample` data.
+**Repeatability:** runs A and B produced **228/228 byte-identical frames** and byte-identical logs. Only `report.json` timing differs. This is local only.
 
-**Across all 32 captures** (`screenshots/browser/report.json`):
+Numeric evidence from `props.logs.jsonl` (300 samples) matches the 0024 v2 baseline:
 
-| Check | Result |
+| Check | Measured |
 |---|---|
-| axe violations | 0 |
-| Page errors | 0 |
-| Remote requests | 0 |
-| Canvas-measured clipped inputs | 0 |
-| Inspector horizontal overflow | 0 px |
-| Tabbable options per list | exactly 1, including 64 parts |
-| Dock tabs | Problems, Console, History |
+| Arch lane | crosses x≈0.55–0.6 at y 0.82, z 0. The contact count stays 1 (floor only), so the **opening is hollow**. y range 0.819–0.83. |
+| Rotated ramp (terrace) | peak y **1.321** (0.5 deck + capsule centre). Final (4.26, 0.82, 2.4). z stays **exactly 2.4** for the whole run, so the 8 µm v1 drift is gone. |
+| Wall with −35° return | clamps at z **−2.73**, then is pushed out to **−2.328**. |
+| Stool (dropped upright from 2 m) | lands by t40. up·Y 1.000 from t24 to t300, at rest at (3.889, −0.01, −1.201). |
+| Dumbbell (released tilted 18°) | up·Y 0.951 at t24, then 0.999 at t40. Rests from t60 at y **0.16** (the sphere radius), level. |
 
-**Per-state findings:**
+**Visual review:**
+- `arch-t156` puts the character inside the opening, with the keystone reading as a 45° ridge.
+- The overview at t148 shows the climb up the ramp.
+- The props frames show the dumbbell tumbling (t24), then both props landed (t40) and at rest (t300).
+- Characters move smoothly, with no visible interpenetration.
+- The 0024 cosmetic notes still apply: the landed stool is cropped in the arch camera's foreground, the backdrop edge reads as a dark band, and lighting is a single sun with no HDR.
 
-- **Keyboard End, then Tab** (`handcart-end-tab-id`, both sizes): End selects part 4 and the caption reads `Part 4 of 4, path /shape/parts/3`. Tab focuses `…parts_3_id`. The full 26-character ID `01J9ZF1XTR0000000000000X9R` is unclipped at 1000×650, inside the card-width focus-within ring. (The input's own `outline: none` is intended; the ring is on the box.)
-- **64 parts** (`rubble-64-*`):
-  - The list is bounded at 177 px.
-  - End focuses part 64, and the focused row is visible inside the list.
-  - After 7 Page Down and 2 Arrow Down presses, part 38 is focused and visible.
-  - The list uses one Tab stop.
-  - At 1000×650 the shared Inspector/Agent column is short. The list and the start of the card fit, and the rest of the card scrolls in the Inspector's own scroller. That is acceptable, not a defect.
-- **Exact paths and diagnostics** (`railing-axis-error`):
-  - Part 1 is preselected as the first part with an error.
-  - The Z half-extent axis is invalid and shown at its nested path.
-  - Unreadable parts show their explicit tags: `no type`, `"cylinder"` and `not an object "post-04"`.
-- **Rotated keystone** (`arch-rotated-keystone`): the quaternion card is unclipped at both sizes.
-- **Primitive regression** (`crate-primitive`, `post-capsule-masks`): no compound UI appears, and the 0024 presentation is unchanged.
-- **Selection after reorder:** the browser fixture is static and cannot reorder parts. This is covered only by the `eb261ab` behaviour test, which keeps the stable part selected and focused through a reordered snapshot. **Native visual confirmation is pending.**
-- **Minor observation, no change made:** at 1000×650 the list summary truncates (`64 parts · 39 box, 13 sphere, …`). The full text is in its `title` and in the listbox's `aria-describedby`. It was the same in 0024.
+**New runtime defects:** none.
 
-**Retained screenshots** (`screenshots/browser/`):
+## Changed paths (this checkpoint)
 
-- `handcart-end-tab-id-1000x650-inspector.png`
-- `rubble-64-end-1000x650.png` (full window)
-- `rubble-64-scrolled-1440x900-inspector.png`
-- `railing-axis-error-1440x900-inspector.png`
-- `arch-rotated-keystone-1000x650-inspector.png`
-- `crate-primitive-1000x650-inspector.png`
-- `post-capsule-masks-1440x900-inspector.png`
+- `handoffs/0025-compound-native-review/result.md` (rewritten).
+- `handoffs/0025-compound-native-review/screenshots/native/`: 7 Inspector-column crops with no account content:
+  - `mixed-end-tab`
+  - `mixed-min`
+  - `parts-64-min-end`
+  - `parts-64-min-end-tab`
+  - `parts-64-wide-end-tab`
+  - `parts-64-wide-detail-scrolled`
+  - `resize-observation`
+- `handoffs/0025-compound-native-review/screenshots/engine/`: four frames copied unchanged from run A, plus two 2×2 pixel-copy sheets made with `contact_sheet.py`:
+  - `arch-t156-through-opening.png`
+  - `overview-t148-arch-and-terrace.png`
+  - `props-t024-falling.png`
+  - `props-t040-landed.png`
+  - `sheet-arch-t100-t156-t200-overview-t148.png`
+  - `sheet-props-t024-t040-t300-overview-t300.png`
+- Committed in the earlier checkpoint `caf019d`: `tools/capture-inspector.mjs` and `screenshots/browser/`.
 
-All other captures are in the ignored `artifacts/0025-ui-r1`. None of them uses a real account.
+## Tests
 
-## Requests for Astra (precise native states)
+Results on this code; no UI source changed after them:
 
-Please supply `artifacts/0025-native/manifest.json`. For each capture, record the source SHA, app build, window size and the exact steps. Capture each state at **~1440×900 and at the minimum ~1000×650**, as raw unscaled Retina PNGs:
+| Command | Result |
+|---|---|
+| `npx tsc -b --noEmit` (strict) | pass |
+| `npx vitest run` | 15 files, 329 tests pass, including `eb261ab`'s reorder test |
+| `npm run build` | pass |
 
-1. **Shell:** the whole window, to check titlebar and traffic-light alignment, connected panels, Hierarchy/Assets as separate workspaces, and a dock with only Problems/Console/History. Use a signed-out or synthetic account; keep any account-bearing frames ignored.
-2. **Handcart:** click the Shape row, Tab, then End. Capture the list and card. Then press Tab and capture again, focused on part 4's full ID with the focus ring visible.
-3. **Broken Railing, initial view:** part 1 preselected, the Z half-extent axis invalid with its exact path, the summary row, and the unreadable rows 3, 4 and 6.
-4. **Rubble Pile (64 parts):**
-   - list focused at rest;
-   - after End;
-   - after End then 3× Page Up (focused row inside the list, focus ring not clipped by the well);
-   - the Inspector scrolled to the 2×2 quaternion;
-   - if available, the VoiceOver caption for one row.
-5. **Reorder:** using the real 3-part compound, select part 3, then apply a reorder through the normal command path (a shared `incant_cmd` transaction, not a UI-only edit). Capture before and after, showing the same stable ID still selected and focused.
-6. **Inspector Problems link:** follow the link for `/shape/parts/3/id` while part 1 is selected. Focus should land on part 4's ID.
-7. **Primitive regression:** Crate 01 and Mooring Post.
-8. **Stone Arch:** the keystone part, showing the 45° quaternion.
+## Remaining requests for Astra
 
-For runtime: supply `artifacts/tools/incant_headless` plus `binary.json` (the SHA-256 and the exact source commit). I will then re-run `handoffs/0024-compound-inspector/tools/compound_lookdev.py` into new `artifacts/0025-lookdev-*` directories (≤128 frames and ≤256 MiB raw each) using:
+1. **Traffic lights:** a titlebar capture at both sizes with the CUA overlay hidden (or moved), so I can check traffic-light alignment against the titlebar row.
+2. **Reorder:** select part 3 of the Dumbbell, then reorder its parts through a shared `incant_cmd` transaction. Capture before and after; the same stable ID should stay selected and focused.
+3. **Primitive regression:** a primitive collider (Floor) with the Inspector scrolled to the top, so the Shape and dimension rows are visible. Also confirm whether `primitive-min`'s scroll offset was carried over from the previous selection. If it was, that is a behaviour question for the Inspector: should the scroll reset per entity?
+4. **Diagnostics:** native diagnostics at exact nested paths still depend on the bridge emitting per-field component pointers (carried over from 0024). The native project had 0 problems, so native error presentation is unreviewed.
+5. **Manifest:** please add `manifest.json` with exact steps per capture, and supply raw PNGs if lossless review is required.
 
-- `--run overview:overview:4`
-- `--run arch:arch:4`
-- `--run props:props:4`
+## Open questions
 
-I will review the arch opening, the rotated ramp, the falling props and the character motion against the 0024 numeric baseline.
-
-## Defects
-
-**New:** none found in this pass.
-
-**Carried from 0024 and still open for Astra:**
-- **Bridge diagnostics:** the native bridge does not emit per-field component diagnostics with JSON pointers, so in the native app exact-path placement is only proven with fixture diagnostics.
-- **Provenance:** RPC `command.execute` transactions record origin `user` and actor `editor` even when a tool script sends them.
+- **Minimum-size Inspector/Agent split:** at the minimum window size, should the Inspector/Agent split favour the Inspector when the Agent pane is in its not-ready empty state? This is a director-owned layout choice, so I made no change.
 
 ## Limitations
 
-- **No native pixels were reviewed.** Native appearance acceptance for normal and minimum sizes is open.
-- **No corrected-runtime frames were reviewed.**
-- Browser fixture results are not native WebKit evidence.
-- Selection after reorder is verified only by a jsdom behaviour test.
-- Timings and determinism were not re-measured in this pass.
+- Native acceptance covers only the states listed. Traffic lights, reorder, the primitive Shape rows and native diagnostics remain open.
+- The native images are lossy JPEG, and there was no manifest.
+- Determinism is local to one host only.
+- The runtime frames are headless engine output, not native editor viewport evidence.
