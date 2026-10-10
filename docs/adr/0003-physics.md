@@ -1,14 +1,25 @@
 # ADR 0003: Rapier behind a Rust-owned physics boundary
 
-Date: 2026-10-08. Updated: 2026-10-09. Status: implemented fallback; Phase 1 remains in progress.
+Date: 2026-10-08. Updated: 2026-10-10. Status: per-project modes adopted by
+the director in PLAN.md revision 4; only the original deterministic variant is
+implemented. Phase 1 remains in progress.
 
 ## Decision
 
-Use pinned Rapier 0.36 with `enhanced-determinism` for the first engine physics
-integration. This takes PLAN.md's explicit Rapier fallback after measuring the
-binding limitations below. It is an implementation decision, not director phase
-gate approval. Stable entity IDs cross scripts and documents; solver handles,
-contacts and sleeping state belong to disposable play sessions.
+Use pinned Rapier 0.36 behind the stable Rust boundary with a per-project physics
+mode. The default fast variant uses supported vector instructions and parallel
+stepping; the rollback/exact-replay variant uses `enhanced-determinism`. Export
+and play-test processes select a separately built compatible runtime. Cargo
+feature unification means this cannot be a runtime toggle in one linked Rapier
+build. The current unconditional `enhanced-determinism` dependency is migration
+work, not evidence that both variants already exist.
+
+Select features against the pinned version and target capabilities: 0.36 exposes
+`parallel` and `simd8`; do not assume older `simd-stable` flags or force x86-only
+instructions on reference phones. Cross-platform deterministic mode remains
+conditional on measured checksums for the complete simulation, including scripts.
+Stable entity IDs cross scripts and documents; solver handles, contacts and
+sleeping state belong to disposable native runtime worlds.
 
 ## Evidence
 
@@ -32,16 +43,21 @@ No SDK accounts, signing identities or development credentials are needed.
 ## Consequences and remaining work
 
 One independently simulated world per scene prevents accidental cross-scene
-contacts. Stable insertion ordering, fixed timesteps, serial stepping and the
-pinned dependency graph support reproducibility. The probe proves only one
-position workload, not universal determinism or a rollback release gate.
+contacts. The original implementation uses stable insertion ordering, fixed
+timesteps and serial stepping. Preserve its regression evidence for that build;
+do not require fast-mode cross-platform bit equality or imply those measurements
+cover parallel stepping. The probe proves only one position workload, not
+universal determinism or a rollback release gate.
 
 See [runtime integration](../spikes/physics-runtime.md) for supported shapes,
 queries, script semantics and current limitations. Read-only character movement
 queries are implemented in the [character increment](../spikes/character-movement.md),
 including actual platform execution and rendered review. Mesh colliders,
 hierarchy/scale support, runtime rollback snapshots and physical-device
-performance gates remain open. Revisit the backend if representative game/mobile
-measurements show a material issue; keep the stable-ID boundary.
+performance gates remain open. Before Phase 6, compare the fast and deterministic
+variants with Jolt through a maintained portable shim on the Section 6.14 workload:
+500 dynamic bodies, destructible props, four characters and enemy crowds. Measure
+on reference phones and desktops, then resolve open decision 19; a binding failure
+or a microbenchmark alone does not establish which solver is faster.
 
 Source: [PLAN.md](../../PLAN.md), sections 2, 3, 5 and 6.
