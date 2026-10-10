@@ -38,6 +38,8 @@ pub enum SceneError {
     CameraTransform,
     #[error("camera projection exceeds GPU numeric precision")]
     CameraProjection,
+    #[error("viewport is smaller than the pixel-perfect camera's {0}x{1} logical resolution")]
+    PixelPerfectViewport(u32, u32),
     #[error("scene exceeds four enabled directional shadow lights")]
     ShadowLightLimit,
     #[error("scene exceeds 16 directional or 4096 local lights")]

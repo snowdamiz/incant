@@ -3,6 +3,7 @@ use incant_doc::{Camera, Entity, Transform};
 use incant_render::{LocalLightSelection, Renderer, SceneError};
 use serde_json::json;
 mod orthographic;
+mod pixel_perfect;
 
 fn insert(f: &mut Fixture, entity: Entity) -> String {
     let id = entity.id.clone();

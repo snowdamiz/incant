@@ -28,6 +28,13 @@ fn projection_changes_share_atomic_history_and_legacy_cameras_keep_perspective()
         json!({"kind":"orthographic"}),
         json!({"kind":"unknown"}),
         json!({"kind":"perspective","vertical_size":5.}),
+        json!({"kind":"pixel_perfect","pixels_per_unit":0,"reference_resolution":[320,180]}),
+        json!({"kind":"pixel_perfect","pixels_per_unit":4097,"reference_resolution":[320,180]}),
+        json!({"kind":"pixel_perfect","pixels_per_unit":32,"reference_resolution":[0,180]}),
+        json!({"kind":"pixel_perfect","pixels_per_unit":32,"reference_resolution":[320,1]}),
+        json!({"kind":"pixel_perfect","pixels_per_unit":32,"reference_resolution":[4096,4096]}),
+        json!({"kind":"pixel_perfect","pixels_per_unit":32,"reference_resolution":[320.5,180]}),
+        json!({"kind":"pixel_perfect","pixels_per_unit":32,"reference_resolution":[320,180],"vertical_size":8}),
     ] {
         assert!(
             bus.execute(
@@ -72,4 +79,30 @@ fn projection_changes_share_atomic_history_and_legacy_cameras_keep_perspective()
     assert_eq!(bus.project().canonical_text().unwrap(), authored);
     bus.redo().unwrap();
     assert_eq!(bus.project().canonical_text().unwrap(), changed);
+    bus.execute(
+        vec![set(
+            json!({"kind":"pixel_perfect","pixels_per_unit":32,"reference_resolution":[320,180]}),
+        )],
+        Actor::agent("camera-test", "test"),
+        "pixel grid",
+        None,
+    )
+    .unwrap();
+    let pixel = bus.project().canonical_text().unwrap();
+    let reloaded = Project::from_text(&pixel).unwrap();
+    assert_eq!(
+        serde_json::from_value::<Camera>(
+            reloaded.scenes[&ids.0].entities[&ids.1].components["Camera"].clone()
+        )
+        .unwrap()
+        .projection,
+        CameraProjection::PixelPerfect {
+            pixels_per_unit: 32.,
+            reference_resolution: [320, 180]
+        }
+    );
+    bus.undo().unwrap();
+    assert_eq!(bus.project().canonical_text().unwrap(), changed);
+    bus.redo().unwrap();
+    assert_eq!(bus.project().canonical_text().unwrap(), pixel);
 }

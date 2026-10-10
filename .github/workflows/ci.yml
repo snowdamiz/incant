@@ -55,6 +55,7 @@ jobs:
       - run: python3 tools/probes/game-steering.py artifacts/game-steering-cli
       - run: python3 tools/probes/navigation-links.py artifacts/navigation-links-cli
       - run: python3 tools/probes/orthographic-cameras.py artifacts/orthographic-cameras-cli
+      - run: python3 tools/probes/orthographic-cameras.py artifacts/pixel-perfect-cameras-cli --pixel-perfect
       - run: node tools/generate_sdk.mjs --check
       - run: git diff --exit-code -- schemas
       - run: node_modules/.bin/tsc -p sdk/ts/tsconfig.json

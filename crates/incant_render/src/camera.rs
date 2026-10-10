@@ -11,6 +11,7 @@ pub(crate) struct CameraView {
     pub far: f32,
     pub fov: f32,
     pub orthographic_half_height: Option<f32>,
+    pub pixel_resolution: Option<[u32; 2]>,
 }
 impl CameraView {
     pub fn preview() -> Self {
@@ -23,12 +24,43 @@ impl CameraView {
             far: crate::CAMERA_FAR,
             fov: crate::CAMERA_FOV,
             orthographic_half_height: None,
+            pixel_resolution: None,
         }
     }
     pub fn authored(camera: &incant_doc::Camera, world: DMat4) -> Result<Self, SceneError> {
         // Local -Z looks forward, +Y supplies roll. Normalize before converting
         // to GPU precision; scale changes inherited position/aim, not clip units.
-        let eye = world.transform_point3(DVec3::ZERO).as_vec3();
+        let mut eye64 = world.transform_point3(DVec3::ZERO);
+        let pixel_resolution = if let incant_doc::CameraProjection::PixelPerfect {
+            pixels_per_unit,
+            reference_resolution,
+        } = camera.projection
+        {
+            if !pixels_per_unit.is_finite()
+                || !(1.0..=4096.0).contains(&pixels_per_unit)
+                || reference_resolution
+                    .iter()
+                    .any(|d| !(16..=4096).contains(d))
+                || u64::from(reference_resolution[0]) * u64::from(reference_resolution[1])
+                    > 4 * 1024 * 1024
+            {
+                return Err(SceneError::CameraProjection);
+            }
+            // Snap only camera-plane translation. Simulation state and forward
+            // depth stay authored; inherited roll defines the grid's axes.
+            let forward = world.transform_vector3(-DVec3::Z).normalize();
+            let right = forward.cross(world.transform_vector3(DVec3::Y)).normalize();
+            let up = right.cross(forward).normalize();
+            for axis in [right, up] {
+                let coordinate = eye64.dot(axis);
+                eye64 +=
+                    axis * ((coordinate * pixels_per_unit).round() / pixels_per_unit - coordinate);
+            }
+            Some(reference_resolution)
+        } else {
+            None
+        };
+        let eye = eye64.as_vec3();
         let forward = world.transform_vector3(-DVec3::Z).normalize().as_vec3();
         let up = world.transform_vector3(DVec3::Y).normalize().as_vec3();
         if !eye.is_finite()
@@ -45,11 +77,16 @@ impl CameraView {
             near: camera.near as f32,
             far: camera.far as f32,
             fov: camera.fov_degrees.to_radians() as f32,
+            pixel_resolution,
             orthographic_half_height: match camera.projection {
                 incant_doc::CameraProjection::Perspective {} => None,
                 incant_doc::CameraProjection::Orthographic { vertical_size } => {
                     Some((vertical_size * 0.5) as f32)
                 }
+                incant_doc::CameraProjection::PixelPerfect {
+                    pixels_per_unit,
+                    reference_resolution,
+                } => Some((f64::from(reference_resolution[1]) / pixels_per_unit * 0.5) as f32),
             },
         };
         let ratio = result.far / result.near;
@@ -74,6 +111,9 @@ impl CameraView {
         if !aspect.is_finite() || aspect <= 0. {
             return Err(SceneError::CameraProjection);
         }
+        let aspect = self
+            .pixel_resolution
+            .map_or(aspect, |[w, h]| w as f32 / h as f32);
         let projection = if let Some(h) = self.orthographic_half_height {
             let w = h * aspect;
             Mat4::orthographic_rh(-w, w, -h, h, self.near, self.far)
@@ -185,5 +225,36 @@ mod tests {
                 Err(SceneError::CameraProjection)
             ));
         }
+    }
+
+    #[test]
+    fn pixel_grid_preserves_logical_framing_and_snaps_only_rendered_camera_motion() {
+        let mut p = parameters();
+        p.projection = incant_doc::CameraProjection::PixelPerfect {
+            pixels_per_unit: 32.,
+            reference_resolution: [320, 180],
+        };
+        let at = |x, y, z| {
+            CameraView::authored(&p, DMat4::from_translation(DVec3::new(x, y, z))).unwrap()
+        };
+        let first = at(0., 0., 8.);
+        assert_eq!(first.view, at(0.49 / 32., -0.49 / 32., 8.).view);
+        let moved = at(0.51 / 32., -0.51 / 32., 8.);
+        assert_eq!(moved.eye, Vec3::new(1. / 32., -1. / 32., 8.));
+        assert_eq!(at(0., 0., 8.01).eye.z, 8.01);
+        assert_eq!(first.matrix(1.).unwrap(), first.matrix(2.).unwrap());
+        let edge = first
+            .matrix(1.)
+            .unwrap()
+            .project_point3(Vec3::new(5., 180. / 64., 0.));
+        assert!((edge.x - 1.).abs() < 1e-6 && (edge.y - 1.).abs() < 1e-6);
+        let rotation = DMat4::from_rotation_z(0.37);
+        let pose = DMat4::from_translation(rotation.transform_vector3(DVec3::new(
+            0.49 / 32.,
+            -0.49 / 32.,
+            8.,
+        ))) * rotation;
+        let rolled = CameraView::authored(&p, pose).unwrap();
+        assert!((rolled.eye - Vec3::new(0., 0., 8.)).length() < 1e-6);
     }
 }

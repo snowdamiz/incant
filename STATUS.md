@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Pixel-perfect camera support is in implementation: fixed logical targets,
+  integer replication/letterboxing, and render-only camera-plane snapping.
+  Local foundation checks pass 320 Rust tests, 47 GPU checks, Clippy, contracts
+  and both public saved-camera workflows. Two UI schema-parity assertions await
+  the third projection. Claude Inspector/look-dev/native review, native/portable
+  builds and hosted CI remain open.
+  Sprite/tilemap rendering and 2D physics are separate unfinished work. See
+  [pixel-perfect cameras](docs/spikes/pixel-perfect-cameras.md).
+
 - Orthographic camera projection is implemented through shared component commands,
   renderer geometry, parallel material view rays, light clusters and directional
   cascade fitting. CPU/shared-command checks and all 41 renderer GPU tests pass.
