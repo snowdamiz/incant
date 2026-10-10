@@ -229,3 +229,20 @@ every assertion and immediate launch-error failure; it adds no retries or
 production changes. The existing two-test release run and matching Clippy check
 pass after the fix using the workspace feature graph. Upstream PR54/55 received
 the same fix; the physics merge preserved its already validated tree exactly.
+
+## Final editor-build-context union — 2026-10-10
+
+Integration `c7dbe02` includes reviewed Tauri head
+`961b1d35251aed9b024b6af7b004f8337e29b1b4`. Only STATUS needed conflict
+resolution; both entries are retained. Runtime/physics/cook/script/types match
+`32a720c` byte-for-byte, and audio/assets match `8fef22c`. The root lockfile adds
+only two build-only edges between already pinned Tauri packages. Runtime normal
+dependencies and the preceding physics/audio shipping source inputs are unchanged.
+
+The [focused union checks](evidence/native-physics-tauri-union-2026-10-10.json)
+pass seven editor tests in each feature mode, editor Clippy with warnings denied
+in each mode, the release custom-protocol executable build, all seven runtime
+dependency guards and conventions. Existing 428-test and fresh shipping evidence
+above remains scoped to its recorded source head and binary identities; no new
+shipping artifacts or performance results are asserted for this editor-only
+change. Hosted exact-head validation remains pending.
