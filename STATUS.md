@@ -53,6 +53,15 @@ within its documented workload.
 
 ## Active work
 
+- Native world binary save/restore now preserves Transform/Velocity/hierarchy,
+  scene identity and fixed-step clock, with atomic checked replacement. Nine new
+  runtime tests and focused Clippy pass. A copied process resumes after deleting
+  authoring and scene files, matching uninterrupted execution byte for byte.
+  All 382 workspace tests, 44 GPU tests, workspace Clippy and WASM/iOS/Android
+  compilation pass. Hosted checks, complete session state, other systems and
+  durable save-slot integration remain open. See
+  [native save evidence](docs/spikes/native-world-saves.md).
+
 - Native QuickJS bulk callbacks now enqueue bounded Spawn/Despawn/SetParent/
   SetVelocity commands with stable ULIDs. Sync runs after numeric views detach
   and their exclusive scope ends; rejected batches restore the numeric undo

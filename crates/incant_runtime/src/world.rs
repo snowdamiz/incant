@@ -54,7 +54,8 @@ pub struct NativeWorld {
     pub(crate) entities: BTreeMap<StableId, Entity>,
     pub(crate) parents: BTreeMap<StableId, Option<StableId>>,
     scene_id: StableId,
-    tick: u64,
+    pub(crate) tick: u64,
+    pub(crate) tick_rate: u32,
 }
 
 impl NativeWorld {
@@ -99,6 +100,7 @@ impl NativeWorld {
             parents,
             scene_id: scene.id,
             tick: 0,
+            tick_rate: scene.tick_rate,
         }
     }
 
@@ -107,6 +109,9 @@ impl NativeWorld {
     }
     pub fn tick(&self) -> u64 {
         self.tick
+    }
+    pub fn tick_rate(&self) -> u32 {
+        self.tick_rate
     }
     pub fn entity_count(&self) -> usize {
         self.entities.len()
