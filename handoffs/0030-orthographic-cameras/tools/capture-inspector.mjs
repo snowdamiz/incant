@@ -11,8 +11,11 @@
  *   legacy        sample fixture "Camera Rig": no projection field (legacy JSON)
  *   orthographic  sample fixture "Map Camera": { kind: orthographic, vertical_size: 8 }
  *   ortho-focus   the same, keyboard focus moved by Tab onto Vertical size
- *   malformed     EVIDENCE TEST DOUBLE bridge holding one camera with projection
- *                 { kind: "isometric" }; it rejects every command and holds no document
+ *   malformed, sizeless-ortho, tiny-values
+ *                 EVIDENCE TEST DOUBLE bridge (rejects every command, holds no document)
+ *                 with cameras whose projection is { kind: "isometric" },
+ *                 { kind: "orthographic" } without a size, and near 1e-6 / far 4.2e-4 /
+ *                 vertical_size 2.5e-6
  *
  * Widths: 1440x900 with the default Inspector width, and 1000x650 with the Inspector
  * splitter moved to its minimum by the keyboard (Home). Every image is the built UI
@@ -45,26 +48,42 @@ if (!existsSync(join(uiRoot, 'dist/index.html'))) throw new Error('Run the UI bu
 // Same resolved schema as the fixture's Camera mirror (CameraFields.test.tsx proves the
 // fixture equals snapshotFromEngine over schemas/Camera.schema.json).
 const nativeSchema = JSON.parse(readFileSync(join(repoRoot, 'schemas/Camera.schema.json'), 'utf8'));
+// Test-double schema built the same way as the fixture mirror (units, order and the
+// projection default all from schemas/Camera.schema.json).
+const ortho = nativeSchema.$defs.CameraProjection.oneOf[1].properties.vertical_size;
+const DOUBLE_SCHEMA = {
+  type: 'Camera', version: 1, title: 'Camera', order: nativeSchema.order,
+  properties: {
+    far: { ...nativeSchema.properties.far, optional: false },
+    fov_degrees: { ...nativeSchema.properties.fov_degrees, optional: false },
+    near: { ...nativeSchema.properties.near, optional: false },
+    projection: {
+      type: 'tagged-union', description: nativeSchema.properties.projection.description,
+      default: nativeSchema.properties.projection.default, discriminator: 'kind', optional: true,
+      variants: {
+        perspective: { type: 'object', properties: { kind: { type: 'string', enum: ['perspective'], optional: false } } },
+        orthographic: { type: 'object', properties: { kind: { type: 'string', enum: ['orthographic'], optional: false },
+          vertical_size: { ...ortho, optional: false } } },
+      },
+    },
+  },
+};
+const CAMERAS = {
+  '01JA30CA000000000000000001': ['Isometric Shot', { fov_degrees: 60, near: 0.1, far: 100, projection: { kind: 'isometric' } }],
+  '01JA30CA000000000000000002': ['Sizeless Ortho', { fov_degrees: 60, near: 0.1, far: 100, projection: { kind: 'orthographic' } }],
+  '01JA30CA000000000000000003': ['Tiny Shot', { fov_degrees: 60, near: 0.000001, far: 0.00042, projection: { kind: 'orthographic', vertical_size: 0.0000025 } }],
+};
 const MALFORMED_DOUBLE = `
   (() => {
-    const id = '01JA30CA000000000000000001';
-    const variant = (kind, extra = {}) => ({ type: 'object', additionalProperties: false,
-      properties: { kind: { type: 'string', const: kind, enum: [kind], optional: false }, ...extra }, required: ['kind', ...Object.keys(extra)] });
-    const camera = { type: 'Camera', version: 1, title: 'Camera', order: ['fov_degrees', 'near', 'far'], properties: {
-      far: { type: 'number', format: 'double', optional: false },
-      fov_degrees: { type: 'number', format: 'double', description: ${JSON.stringify(nativeSchema.properties.fov_degrees.description)}, optional: false },
-      near: { type: 'number', format: 'double', optional: false },
-      projection: { type: 'tagged-union', description: ${JSON.stringify(nativeSchema.properties.projection.description)}, discriminator: 'kind',
-        variants: { perspective: variant('perspective'), orthographic: variant('orthographic', { vertical_size: { type: 'number', format: 'double',
-          description: ${JSON.stringify(nativeSchema.$defs.CameraProjection.oneOf[1].properties.vertical_size.description)}, optional: false } }) },
-        optional: true },
-    } };
+    const cameras = ${JSON.stringify(CAMERAS)};
+    const ids = Object.keys(cameras);
     const snapshot = {
-      connection: { status: 'ready', project: { id: '01JA30CA000000000000000000', name: 'Malformed camera (test double)' } },
-      hierarchy: { status: 'ready', value: { roots: [id], nodes: { [id]: { id, name: 'Isometric Shot', kind: 'camera', parent: null, children: [] } } } },
-      schemas: { Camera: camera },
-      entities: { [id]: { id, name: 'Isometric Shot', kind: 'camera', components: [
-        { type: 'Camera', schemaVersion: 1, value: { fov_degrees: 60, near: 0.1, far: 100, projection: { kind: 'isometric' } } }] } },
+      connection: { status: 'ready', project: { id: '01JA30CA000000000000000000', name: 'Camera edge cases (test double)' } },
+      hierarchy: { status: 'ready', value: { roots: ids, nodes: Object.fromEntries(ids.map((id) =>
+        [id, { id, name: cameras[id][0], kind: 'camera', parent: null, children: [] }])) } },
+      schemas: { Camera: ${JSON.stringify(DOUBLE_SCHEMA)} },
+      entities: Object.fromEntries(ids.map((id) => [id, { id, name: cameras[id][0], kind: 'camera',
+        components: [{ type: 'Camera', schemaVersion: 1, value: cameras[id][1] }] }])),
       diagnostics: [], history: { entries: [], applied: 0 }, console: [],
       provider: { status: 'not-connected', provider: 'openai' },
       agent: { status: 'unavailable', reason: 'Evidence test double.' },
@@ -85,6 +104,8 @@ const STATES = [
   { key: 'orthographic', entity: 'Map Camera', url: '/?fixture=sample' },
   { key: 'ortho-focus', entity: 'Map Camera', url: '/?fixture=sample', focus: 'Vertical size' },
   { key: 'malformed', entity: 'Isometric Shot', url: '/', init: MALFORMED_DOUBLE },
+  { key: 'sizeless-ortho', entity: 'Sizeless Ortho', url: '/', init: MALFORMED_DOUBLE },
+  { key: 'tiny-values', entity: 'Tiny Shot', url: '/', init: MALFORMED_DOUBLE },
 ];
 
 mkdirSync(outDir, { recursive: true });
@@ -163,6 +184,7 @@ try {
             label: label?.textContent,
             labelClipped: label ? label.scrollHeight > label.clientHeight + 1 : null,
             value: input?.value ?? null,
+            exact: input?.getAttribute('title') ?? null,
             valueClipped: input ? input.scrollWidth > input.clientWidth + 1 : null,
             unit: unit?.textContent ?? null,
             tag: tag?.textContent ?? null,
