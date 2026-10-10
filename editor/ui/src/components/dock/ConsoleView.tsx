@@ -17,7 +17,7 @@ const LEVEL_ICON: Record<ConsoleLevel, IconName> = { error: 'error', warn: 'warn
  * messages arrive, until another page is chosen; Newest returns to it.
  */
 export function ConsoleList() {
-  const { snapshot, announce } = useShell();
+  const { snapshot } = useShell();
   const [hidden, setHidden] = useState<Set<ConsoleLevel>>(() => new Set(['debug']));
   const entries = useMemo(() => snapshot?.console ?? [], [snapshot?.console]);
   const visible = useMemo(() => entries.filter((entry) => !hidden.has(entry.level)), [entries, hidden]);
@@ -54,7 +54,7 @@ export function ConsoleList() {
             );
           })}
         </div>
-        <Pager page={page} noun="messages" anchorLabel="Newest" announce={announce} />
+        <Pager page={page} noun="messages" anchorLabel="Newest" />
       </div>
       {!snapshot ? (
         <StateView icon="plug" title="No engine connected" compact />

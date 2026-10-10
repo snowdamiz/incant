@@ -86,23 +86,17 @@ export function ProblemsList() {
   // Nothing has been validated while the project opens; never claim "No problems" then.
   if (project.kind === 'loading') {
     return (
-      <StateView icon="problems" spinner title="Opening project…" compact>
-        <p>Problems appear when validation finishes.</p>
-      </StateView>
+      <StateView icon="problems" title="Opening project…" quiet />
     );
   }
   if (diagnostics.length === 0 && project.kind === 'failed') {
     return (
-      <StateView icon="problems" title="Not validated" compact>
-        <p>The project did not open, so it has not been checked.</p>
-      </StateView>
+      <StateView icon="problems" title="Not validated" compact />
     );
   }
   if (diagnostics.length === 0) {
     return (
-      <StateView icon="check" tone="success" title="No problems" compact>
-        <p>Validation errors and warnings from the engine appear here.</p>
-      </StateView>
+      <StateView icon="check" tone="success" title="No problems" compact />
     );
   }
   const reveal = (d: Diagnostic) => {
@@ -130,12 +124,10 @@ export function ProblemsList() {
             page.go(null);
           }}
         />
-        <Pager page={page} noun="problems" announce={announce} />
+        <Pager page={page} noun="problems" />
       </div>
       {groups.length === 0 ? (
-        <StateView icon="problems" title="All problems are filtered out" compact>
-          <p>Turn a severity back on above to list its problems.</p>
-        </StateView>
+        <StateView icon="problems" title="All problems are filtered out" compact />
       ) : (
         <ul ref={listRef} className="list problems" aria-label="Problems">
           {runs.map((run) => {

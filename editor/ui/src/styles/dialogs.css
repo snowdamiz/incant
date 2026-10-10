@@ -6,8 +6,7 @@
   z-index: 50;
   display: grid;
   place-items: center;
-  background: rgb(6 7 9 / 0.62);
-  backdrop-filter: blur(2px);
+  background: rgb(6 7 9 / 0.6);
 }
 
 .dialog {
@@ -15,17 +14,9 @@
   max-height: calc(100vh - 96px);
   display: flex;
   flex-direction: column;
-  border-radius: 14px;
+  border-radius: 10px;
   background: var(--color-bg-panel);
   box-shadow: var(--shadow-popover);
-  animation: dialog-in var(--duration) ease-out;
-}
-
-@keyframes dialog-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px) scale(0.985);
-  }
 }
 
 .dialog__header {
@@ -34,34 +25,6 @@
   justify-content: space-between;
   gap: var(--space-4);
   padding: 16px 14px 6px 20px;
-}
-
-/* A dialog's mark: its subject as an icon on a softly tinted tile. */
-.dialog__mark {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-raised));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 22%, transparent);
-  color: var(--color-accent-strong);
-}
-
-.dialog__heading {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.dialog__subtitle {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
-  line-height: 17px;
 }
 
 .dialog__header .icon-button {
@@ -84,7 +47,7 @@
 
 .dialog__title {
   margin: 0;
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
 }
@@ -93,277 +56,159 @@
   position: relative;
   overflow: auto;
   padding: 0 20px 20px;
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 10px 10px;
 }
 
-/* ---- Keyboard shortcuts: a searchable reference in cards ---- */
+/* ---- Keyboard shortcuts: one searchable table ---- */
 
+/* A reference table: section captions, actions on the left, keys on the right as plain
+   glyphs, hairlines between rows. The filter sits in the header. No cards or caps. */
 .dialog--shortcuts {
-  width: min(840px, calc(100vw - 48px));
-  height: min(720px, calc(100vh - 96px));
+  width: min(600px, calc(100vw - 48px));
+  height: min(680px, calc(100vh - 80px));
 }
 
 .shortcuts__header {
-  padding: 18px 14px 14px 20px;
-}
-
-.shortcuts__search {
-  flex: none;
-  padding: 0 20px 14px;
+  padding: 14px 12px 12px 20px;
   border-bottom: 1px solid var(--color-border);
 }
 
-.shortcuts__search .search-field {
-  height: 34px;
-  background: var(--color-bg-side);
-  box-shadow: inset 0 0 0 1px var(--color-border-strong);
+.shortcuts__header .dialog__title {
+  flex: 1;
 }
 
-/* Two columns of cards, balanced in the component; one column in a narrow window. */
+.shortcuts__header .search-field {
+  flex: 0 1 220px;
+  height: 28px;
+}
+
 .shortcuts__body {
-  container: shortcuts / inline-size;
   flex: 1;
   min-height: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-content: start;
-  align-items: start;
-  gap: 14px;
-  padding: 16px 20px 20px;
-}
-
-.shortcuts__column {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
-}
-
-@container shortcuts (max-width: 600px) {
-  .shortcuts__body {
-    grid-template-columns: minmax(0, 1fr);
-  }
+  padding: 4px 20px 16px;
 }
 
 .shortcuts__body:focus-visible,
 .shortcuts__body[data-focus-visible] {
   outline-offset: -3px;
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 10px 10px;
 }
 
-.shortcuts__group {
-  padding: 10px 12px 6px;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--color-bg-raised) 42%, var(--color-bg-panel));
-  box-shadow: inset 0 0 0 1px var(--color-border);
+.shortcuts__table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.shortcuts__title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin: 0 0 4px;
-  color: var(--color-text);
-  font-size: var(--text-sm);
+.shortcuts__section th {
+  padding: 14px 0 4px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-tight);
+  text-align: left;
 }
 
-.shortcuts__icon {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 7px;
-  background: color-mix(in srgb, var(--color-accent) 13%, transparent);
-  color: var(--color-accent-strong);
-}
-
-.shortcuts__group--agent .shortcuts__icon {
-  background: color-mix(in srgb, var(--color-origin-agent) 14%, transparent);
-  color: var(--color-origin-agent);
-}
-
-.shortcuts__list {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.shortcuts__item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--space-4);
-  min-height: 34px;
-  padding: 5px 0;
-}
-
-.shortcuts__item + .shortcuts__item {
-  border-top: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
-}
-
-.shortcuts__item dt,
-.shortcuts__item dd {
-  margin: 0;
+.shortcuts__row td {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: baseline;
 }
 
 .shortcuts__action {
   color: var(--color-text-soft);
-  line-height: 18px;
 }
 
 .shortcuts__where {
-  display: block;
+  margin-left: 6px;
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
-  line-height: 16px;
 }
 
 .shortcuts__keys {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 4px 0;
+  padding-left: var(--space-5) !important;
+  color: var(--color-text-muted);
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
-.shortcuts__combo {
-  display: inline-flex;
-  align-items: center;
-}
-
-.shortcuts__or {
-  margin: 0 7px;
-  color: var(--color-text-subtle);
-  font-size: var(--text-xs);
-}
-
-.shortcuts__or.is-paired {
-  margin: 0 4px;
-}
-
-/* A combination: caps side by side. The outer <kbd> only groups them. */
-kbd.keys {
-  display: inline-flex;
-  gap: 3px;
+/* Keys pressed together, as text: "⇧⌘Z" on macOS, "Ctrl+Shift+Z" elsewhere. */
+kbd.shortcuts__combo {
   min-width: 0;
   padding: 0;
   border: 0;
   background: none;
-}
-
-/* One key: a small raised cap with a darker lip, in the UI face so ⌘ ⇧ ⌥ sit well. */
-kbd.keycap {
-  display: inline-grid;
-  place-items: center;
-  min-width: 24px;
-  height: 24px;
-  padding: 0 6px;
-  border: 0;
-  border-radius: 6px;
-  background: linear-gradient(to bottom, var(--color-bg-hover), var(--color-bg-raised));
-  box-shadow:
-    inset 0 0 0 1px var(--color-border-strong),
-    inset 0 -2px 0 rgb(0 0 0 / 0.28),
-    0 1px 2px rgb(0 0 0 / 0.35);
   color: var(--color-text);
   font-family: var(--font-ui);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-medium);
-  line-height: 1;
+  font-size: var(--text-sm);
+  line-height: inherit;
+  letter-spacing: 0.04em;
 }
 
-kbd.keycap--word {
-  padding: 0 8px;
-  color: var(--color-text-soft);
+.shortcuts__or {
+  margin: 0 6px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
 }
 
 .shortcuts__empty {
-  grid-column: 1 / -1;
-  margin: 48px 0;
+  margin: 40px 0;
   color: var(--color-text-muted);
   text-align: center;
 }
 
 /* ---- ChatGPT account dialog ---- */
 
+/* A compact account surface: a status line, the accounts as plain rows, one row of
+   actions. No cards, badges or explanatory lists. */
 .dialog--account {
-  width: min(460px, calc(100vw - 48px));
+  width: min(420px, calc(100vw - 48px));
 }
 
 .account {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
-  padding-top: var(--space-3);
+  gap: var(--space-4);
+  padding-top: var(--space-2);
 }
 
 .account p {
   margin: 0;
 }
 
-/* The account's state: a soft card with its badge, headline and next step. */
-.account__status {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 14px;
-  align-items: start;
-  padding: 14px 16px 14px 14px;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--color-bg-raised) 42%, var(--color-bg-panel));
-  box-shadow: inset 0 0 0 1px var(--color-border);
-}
-
-.account__badge {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-raised));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 24%, transparent);
-  color: var(--color-accent-strong);
-}
-
-.account__badge .spinner {
-  width: 16px;
-  height: 16px;
-}
-
-.account__status--ok .account__badge {
-  background: color-mix(in srgb, var(--color-success) 14%, var(--color-bg-raised));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-success) 26%, transparent);
-  color: var(--color-success);
-}
-
-.account__status--error .account__badge {
-  background: var(--color-danger-bg);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-danger) 26%, transparent);
-  color: var(--color-danger);
-}
-
 .account__headline {
-  font-size: var(--text-md);
-  font-weight: var(--weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-soft);
   line-height: var(--leading);
   overflow-wrap: anywhere;
 }
 
-.account__body {
-  margin-top: var(--space-1) !important;
+.account__status--error .account__headline {
+  color: var(--color-text);
+}
+
+.account__detail {
+  margin-top: 2px !important;
   color: var(--color-text-muted);
-  line-height: var(--leading);
-  overflow-wrap: anywhere;
+  font-size: var(--text-xs);
+  line-height: 17px;
 }
 
-.account__body strong {
+.account__headline strong,
+.account__note strong,
+.account__confirm strong {
   color: var(--color-text);
   font-weight: var(--weight-medium);
 }
 
 .account__error {
+  display: flex;
+  gap: var(--space-3);
   align-items: flex-start;
+  color: var(--color-danger);
+  font-size: var(--text-xs);
+  line-height: 17px;
   overflow-wrap: anywhere;
 }
 
@@ -374,60 +219,28 @@ kbd.keycap--word {
 .account__error-text {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 2px;
   min-width: 0;
+  color: var(--color-text);
 }
 
 .account__error-code {
-  color: var(--color-text-muted);
+  color: var(--color-text-subtle);
 }
 
-.account__message {
-  display: flex;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius);
-  background: var(--color-info-bg);
-  line-height: 18px;
+.account__note {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 17px;
   overflow-wrap: anywhere;
 }
 
-.account__message > .icon {
-  margin-top: 2px;
-  color: var(--color-info);
-}
-
-.account__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.account__actions .button {
-  height: 32px;
-}
-
-.account__actions .button--chatgpt {
-  flex: 1 1 100%;
-  justify-content: center;
-  height: 36px;
-  font-size: var(--text-md);
-}
-
-.account__list-title {
-  margin: 0 0 var(--space-3);
-  color: var(--color-text-subtle);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-}
-
-.account__list ul {
+/* The accounts: rows between hairlines, the signed-in one marked in words. */
+.account__list {
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius);
-  overflow: hidden;
+  border-top: 1px solid var(--color-border);
 }
 
 .account-row {
@@ -435,15 +248,8 @@ kbd.keycap--word {
   align-items: center;
   gap: var(--space-3);
   min-height: 40px;
-  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
-}
-
-.account-row + .account-row {
-  border-top: 1px solid var(--color-border-strong);
-}
-
-.account-row.is-active {
-  background: var(--color-bg-raised);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .account-row__avatar {
@@ -453,7 +259,7 @@ kbd.keycap--word {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--color-bg-hover);
+  background: var(--color-bg-raised);
   color: var(--color-text-muted);
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
@@ -470,52 +276,41 @@ kbd.keycap--word {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--color-text-soft);
 }
 
 .account-row__state {
   flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--color-text-muted);
+  color: var(--color-text-subtle);
   font-size: var(--text-xs);
 }
 
-.account-row__state.is-signed-in {
-  color: var(--color-success);
-  font-weight: var(--weight-medium);
+.account__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Sign out sits apart from adding an account, at the trailing edge. */
+.account__actions > .button--danger:last-child {
+  margin-left: auto;
+}
+
+.dialog--account .button--chatgpt {
+  justify-content: center;
+  height: 34px;
 }
 
 .account__confirm {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-4);
-  border: 1px solid color-mix(in srgb, var(--color-danger) 35%, transparent);
-  border-radius: var(--radius);
-  background: var(--color-danger-bg);
+  gap: var(--space-3);
+  color: var(--color-text-soft);
   line-height: var(--leading);
 }
 
-.account__facts {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  margin: 0;
-  padding: var(--space-4) 0 0;
-  border-top: 1px solid var(--color-border);
-  list-style: none;
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
-  line-height: 18px;
-}
-
-.account__facts li {
-  display: flex;
-  gap: var(--space-3);
-}
-
-.account__facts .icon {
-  margin-top: 2px;
+.account__footnote {
   color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: 17px;
 }

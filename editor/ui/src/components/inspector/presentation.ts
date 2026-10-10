@@ -84,17 +84,10 @@ export interface FieldSection {
   readonly keys: readonly string[];
 }
 
-/**
- * What a component is about, for the tint of its header mark. Colour is never the
- * only cue: the title always names the component.
- */
-export type ComponentFamily = 'spatial' | 'physics' | 'render' | 'light' | 'camera' | 'audio' | 'script' | 'navigation';
-
 export interface ComponentPresentation {
   /** Display name, when the schema title is a bare type identifier ("RigidBody"). */
   readonly title?: string;
   readonly icon?: IconName;
-  readonly family?: ComponentFamily;
   readonly sections: readonly FieldSection[];
   /**
    * Keyed by JSON pointer relative to the component, e.g. `/shape/radius`. An
@@ -118,11 +111,10 @@ const SHAPE_ICONS: Readonly<Record<string, IconName>> = {
 };
 
 const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
-  Transform: { icon: 'move', family: 'spatial', sections: [], fields: {} },
+  Transform: { icon: 'move', sections: [], fields: {} },
   RigidBody: {
     title: 'Rigid Body',
     icon: 'body',
-    family: 'physics',
     sections: [
       { title: null, keys: ['motion'] },
       { title: 'Gravity and damping', keys: ['gravity_scale', 'linear_damping', 'angular_damping'] },
@@ -137,7 +129,6 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
   },
   Collider: {
     icon: 'collider',
-    family: 'physics',
     sections: [
       { title: null, keys: ['shape'] },
       { title: 'Material', keys: ['density', 'friction', 'restitution'] },
@@ -166,7 +157,6 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
   },
   Camera: {
     icon: 'camera',
-    family: 'camera',
     // One run in schema order: the projection (with its variant fields beneath
     // it), then lens and clip planes.
     sections: [{ title: null, keys: ['projection', 'fov_degrees', 'near', 'far'] }],
@@ -209,29 +199,26 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
       '/far': { title: 'Far clip', description: 'Distance from the camera to the far clipping plane.' },
     },
   },
-  MeshRenderer: { title: 'Mesh Renderer', icon: 'model', family: 'render', sections: [], fields: {} },
-  Light: { icon: 'light', family: 'light', sections: [], fields: {} },
-  DirectionalLight: { title: 'Directional Light', icon: 'light', family: 'light', sections: [], fields: {} },
-  PointLight: { title: 'Point Light', icon: 'bulb', family: 'light', sections: [], fields: {} },
+  MeshRenderer: { title: 'Mesh Renderer', icon: 'model', sections: [], fields: {} },
+  Light: { icon: 'light', sections: [], fields: {} },
+  DirectionalLight: { title: 'Directional Light', icon: 'light', sections: [], fields: {} },
+  PointLight: { title: 'Point Light', icon: 'bulb', sections: [], fields: {} },
   SpotLight: {
     title: 'Spot Light',
     icon: 'spot',
-    family: 'light',
     sections: [],
     fields: { '/inner_degrees': { title: 'Inner angle' }, '/outer_degrees': { title: 'Outer angle' } },
   },
   EnvironmentLight: {
     title: 'Environment Light',
     icon: 'globe',
-    family: 'light',
     sections: [],
     fields: { '/texture': { title: 'Image' } },
   },
-  Script: { icon: 'script', family: 'script', sections: [], fields: { '/props': { title: 'Properties' } } },
+  Script: { icon: 'script', sections: [], fields: { '/props': { title: 'Properties' } } },
   AudioSource: {
     title: 'Audio Source',
     icon: 'audio',
-    family: 'audio',
     sections: [
       { title: null, keys: ['clip', 'bus'] },
       { title: 'Playback', keys: ['playing', 'looping', 'streaming', 'start_seconds', 'rate'] },
@@ -239,14 +226,13 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
     ],
     fields: { '/gain_db': { title: 'Gain (dB)' }, '/start_seconds': { title: 'Start time (s)' } },
   },
-  AudioListener: { title: 'Audio Listener', icon: 'audio', family: 'audio', sections: [], fields: {} },
-  AudioBus: { title: 'Audio Bus', icon: 'mixer', family: 'audio', sections: [], fields: { '/gain_db': { title: 'Gain (dB)' } } },
-  Velocity: { icon: 'velocity', family: 'physics', sections: [], fields: {} },
-  AngularVelocity: { title: 'Angular Velocity', icon: 'spin', family: 'physics', sections: [], fields: {} },
+  AudioListener: { title: 'Audio Listener', icon: 'audio', sections: [], fields: {} },
+  AudioBus: { title: 'Audio Bus', icon: 'mixer', sections: [], fields: { '/gain_db': { title: 'Gain (dB)' } } },
+  Velocity: { icon: 'velocity', sections: [], fields: {} },
+  AngularVelocity: { title: 'Angular Velocity', icon: 'spin', sections: [], fields: {} },
   NavigationGrid: {
     title: 'Navigation Grid',
     icon: 'grid',
-    family: 'navigation',
     sections: [{ title: null, keys: ['dimensions', 'costs'] }],
     fields: {
       '/dimensions': {
@@ -262,7 +248,6 @@ const PROFILES: Readonly<Record<string, ComponentPresentation>> = {
   NavigationMesh: {
     title: 'Navigation Mesh',
     icon: 'navmesh',
-    family: 'navigation',
     sections: [{ title: null, keys: ['settings', 'sources', 'links'] }],
     fields: {
       '/settings': {
@@ -397,11 +382,6 @@ export function componentTitle(type: string, schemaTitle?: string): string {
 /** The component's header icon; unknown types get a neutral component mark. */
 export function componentIcon(type: string): IconName {
   return componentPresentation(type)?.icon ?? 'component';
-}
-
-/** The component's family, for its header tint; unknown types stay neutral. */
-export function componentFamily(type: string): ComponentFamily | null {
-  return componentPresentation(type)?.family ?? null;
 }
 
 export function fieldHint(component: string, pointerPath: string): FieldHint {

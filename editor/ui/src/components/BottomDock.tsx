@@ -1,17 +1,15 @@
 import { useRef } from 'react';
 import type { KeyboardEvent } from 'react';
-import type { IconName } from '../icons/Icon';
-import { Icon } from '../icons/Icon';
 import type { DockTab } from '../shell/ShellContext';
 import { useShell } from '../shell/ShellContext';
 import { ConsoleList } from './dock/ConsoleView';
 import { HistoryList } from './dock/HistoryView';
 import { ProblemsList } from './dock/ProblemsView';
 
-const TABS: { id: DockTab; label: string; icon: IconName }[] = [
-  { id: 'problems', label: 'Problems', icon: 'problems' },
-  { id: 'console', label: 'Console', icon: 'console' },
-  { id: 'history', label: 'History', icon: 'history' },
+const TABS: { id: DockTab; label: string }[] = [
+  { id: 'problems', label: 'Problems' },
+  { id: 'console', label: 'Console' },
+  { id: 'history', label: 'History' },
 ];
 
 /**
@@ -63,7 +61,6 @@ export function BottomDock() {
             data-focus-target={dockTab === tab.id ? '' : undefined}
             onClick={() => setDockTab(tab.id)}
           >
-            <Icon name={tab.icon} size={14} />
             {tab.label}
             {counts[tab.id] ? (
               <span className={`tab__count${tab.id === 'problems' && errors ? ' tab__count--error' : ''}`}>

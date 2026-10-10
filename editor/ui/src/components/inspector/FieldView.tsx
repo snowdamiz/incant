@@ -298,14 +298,17 @@ function UnionView({
         claim={claim}
         notice={notice === null ? undefined : { text: notice, value }}
         noteId={variantNote ? `${id}-variant` : undefined}
+        noteText={variantNote}
         implied={implied}
       />
       {grouped ? (
         <div className="field-group field-group--variant" role="group" aria-labelledby={`${id}-label`} style={depthStyle(ctx.depth ?? 0)}>
+          {/* The variant's explanation is not shown inline: it is the row's tooltip and
+              part of its accessible description. */}
           {variantNote ? (
-            <p className="field-group__note field__help" id={`${id}-variant`}>
+            <span className="visually-hidden" id={`${id}-variant`}>
               {variantNote}
-            </p>
+            </span>
           ) : null}
           {children.map((key) => (
             <FieldView key={key} name={key} schema={fields[key]!} value={record[key]} path={[...path, key]} ctx={ctx} />
@@ -354,6 +357,7 @@ export function FieldRow({
   claim,
   notice,
   noteId,
+  noteText,
   implied,
 }: {
   label: string;
@@ -367,8 +371,10 @@ export function FieldRow({
   claim?: ((target: string) => boolean) | undefined;
   /** Replaces the value with an explicit mismatch notice. */
   notice?: { text: ReactNode; value: unknown } | undefined;
-  /** Extra visible text that describes the value (e.g. the selected variant). */
+  /** Text that describes the value (e.g. the selected variant), referenced for assistive tech. */
   noteId?: string | undefined;
+  /** The same text, added to the row's tooltip. */
+  noteText?: string | undefined;
   /** The value is a documented default for an omitted field; this sentence says so. */
   implied?: string | undefined;
 }) {
@@ -396,7 +402,7 @@ export function FieldRow({
     // through aria-describedby instead.
     <div
       className={`field${severity ? ` field--${severity}` : ''}${vector ? ' field--vector' : ''}`}
-      title={description ?? label}
+      title={[description ?? label, noteText].filter(Boolean).join('\n')}
     >
       {/* A real <label> (plus aria-labelledby for non-input controls) keeps the name robust even when clipped. */}
       <label className="field__label" id={`${id}-label`} htmlFor={id}>

@@ -11,10 +11,10 @@ import { IdentityHeader } from './IdentityHeader';
 import { AssetInspector, useAssetEscape, useAssetInspectorHeader } from '../assets/AssetInspector';
 import { useAssets } from '../../assets/AssetsContext';
 import type { FieldContext, ReferenceResolver } from './FieldView';
-import { FieldView, fieldDomId, severityOf } from './FieldView';
+import { FieldView, fieldDomId } from './FieldView';
 import { breakAfterSlashes } from '../breakAfterSlashes';
 import { parsePointer, safeJson } from './format';
-import { componentFamily, componentIcon, componentTitle, sectionKeys } from './presentation';
+import { componentIcon, componentTitle, sectionKeys } from './presentation';
 import { FieldRevealProvider, useFieldReveal, useRevealField } from './reveal';
 
 /**
@@ -36,26 +36,20 @@ export function InspectorPanel() {
   let body;
   if (!snapshot) {
     body = (
-      <StateView icon="plug" title="No engine connected" compact>
-        <p>Component values appear here once a project is attached.</p>
-      </StateView>
+      <StateView icon="plug" title="No engine connected" compact />
     );
   } else if (project.kind === 'loading') {
-    body = <StateView icon="scene" spinner title="Opening project…" compact />;
+    body = <StateView icon="scene" title="Opening project…" quiet />;
   } else if (project.kind === 'failed') {
     body = (
-      <StateView icon="scene" title="No project loaded" compact>
-        <p>Component values appear here once the project opens.</p>
-      </StateView>
+      <StateView icon="scene" title="No project loaded" compact />
     );
   } else if (assetsView) {
     header = assetHeader;
     body = <AssetInspector />;
   } else if (selection === null) {
     body = (
-      <StateView icon="pointer" title="Nothing selected" compact>
-        <p>Select an entity in the hierarchy to inspect its components.</p>
-      </StateView>
+      <StateView icon="pointer" title="Nothing selected" compact />
     );
   } else if (!entity) {
     body = (
@@ -65,7 +59,20 @@ export function InspectorPanel() {
       </StateView>
     );
   } else {
-    header = <IdentityHeader icon={iconForKind(entity.kind)} kind={entity.kind} name={entity.name} actions={<CopyIdButton id={entity.id} />} />;
+    header = (
+      <IdentityHeader
+        icon={iconForKind(entity.kind)}
+        kind={entity.kind}
+        name={entity.name}
+        description={`${entityKindLabel(entity.kind)}, ID ${entity.id}`}
+        actions={
+          <>
+            <ReadOnlyMark />
+            <CopyIdButton id={entity.id} />
+          </>
+        }
+      />
+    );
     body = <FieldRevealProvider><EntityInspector entity={entity} schemas={snapshot.schemas} diagnostics={snapshot.diagnostics} refs={refs} /></FieldRevealProvider>;
   }
   return (
@@ -116,32 +123,11 @@ function EntityInspector({
   refs: ReferenceResolver;
 }) {
   const mine = diagnostics.filter((d) => d.entity === entity.id);
-  const editable = false; // No component-edit command exists on the bridge yet (see NATIVE_VIEWPORT.md).
   return (
     <div className="inspector">
-      <div className="inspector__meta">
-        <span className="inspector__kind">{entityKindLabel(entity.kind)}</span>
-        <span className="inspector__id mono" title={entity.id}>
-          <span className="visually-hidden">ID </span>
-          <MiddleTruncated text={entity.id} />
-        </span>
-        {!editable ? (
-          <span
-            className="quiet-chip inspector__readonly"
-            tabIndex={0}
-            title="Read-only: component values can be inspected here but not edited yet."
-          >
-            <Icon name="lock" size={12} />
-            Read-only
-            <span className="visually-hidden">: component values can be inspected here but not edited yet.</span>
-          </span>
-        ) : null}
-      </div>
       {mine.length > 0 ? <EntityProblems entity={entity} problems={mine} /> : null}
       {entity.components.length === 0 ? (
-        <StateView icon="entity" title="No components" compact>
-          <p>{entity.kind === 'scene' ? 'Scenes hold entities, not components.' : 'This entity has no components.'}</p>
-        </StateView>
+        <StateView icon="entity" title="No components" compact />
       ) : (
         entity.components.map((component, index) => (
           <ComponentSection
@@ -164,29 +150,27 @@ function entityKindLabel(kind: string): string {
 }
 
 /**
- * A long ID that keeps both ends visible when space runs out: the head ellipsizes and
- * the last six characters (the random part of a ULID, which tells IDs apart) stay.
- * The DOM holds the whole ID, so selecting or copying it gets every character.
+ * Component values are read-only: no component-edit command exists on the bridge yet
+ * (see NATIVE_VIEWPORT.md). One lock glyph in the header line says so, instead of a
+ * row; its tooltip and spoken text carry the sentence.
  */
-function MiddleTruncated({ text }: { text: string }) {
-  const cut = Math.max(0, text.length - 6);
+function ReadOnlyMark() {
   return (
-    <span className="middle-truncate">
-      <span className="middle-truncate__head">{text.slice(0, cut)}</span>
-      <span className="middle-truncate__tail">{text.slice(cut)}</span>
+    <span className="inspector-header__state" title="Read-only: values can be inspected but not edited yet.">
+      <Icon name="lock" size={14} />
+      <span className="visually-hidden">Read-only</span>
     </span>
   );
 }
 
 /**
- * The entity's problems as one tinted card, worst severity setting the tint. Each
- * line is the engine message, then where it is: the component and exact path, a
- * link that focuses the field.
+ * The entity's problems, at the top: each line is the severity icon, the engine message,
+ * then where it is (the component and exact path) as a link that focuses the field.
  */
 function EntityProblems({ entity, problems }: { entity: EntityDetail; problems: readonly Diagnostic[] }) {
   const revealField = useRevealField();
   return (
-    <ul className={`inspector__problems inspector__problems--${severityOf(problems) ?? 'info'}`} aria-label="Problems on this entity">
+    <ul className="inspector__problems" aria-label="Problems on this entity">
       {problems.map((d) => (
         <li key={d.id} className={`problem-line problem-line--${d.severity}`}>
           <Icon name={d.severity === 'error' ? 'error' : d.severity === 'warning' ? 'warning' : 'info'} size={12} />
@@ -261,7 +245,6 @@ function ComponentSection({
   const warnings = diagnostics.filter((d) => d.severity === 'warning').length;
   const keys = schema ? orderedKeys(schema) : [];
   const title = componentTitle(component.type, schema?.title);
-  const family = schema ? componentFamily(component.type) : null;
   const typeId = `${bodyId}-type`;
   const ctx: FieldContext = { entity, component: component.type, diagnostics, value: component.value, schema, depth: 0, refs };
   return (
@@ -276,19 +259,17 @@ function ComponentSection({
           onClick={() => setOpen(!open)}
         >
           <Icon name="chevron" size={12} className={`component__chevron${open ? ' is-open' : ''}`} />
-          <span className={`component__mark${family ? ` family--${family}` : ''}`} aria-hidden="true">
-            <Icon name={schema ? componentIcon(component.type) : 'component'} size={14} />
-          </span>
+          <Icon name={schema ? componentIcon(component.type) : 'component'} size={14} className="component__icon" />
           <span className="component__title">{title}</span>
           {errors ? (
-            <span className="badge badge--error">
+            <span className="component__count sev--error">
               <Icon name="error" size={12} />
               {errors}
               <span className="visually-hidden"> {errors === 1 ? 'error' : 'errors'}</span>
             </span>
           ) : null}
           {warnings ? (
-            <span className="badge badge--warning">
+            <span className="component__count sev--warning">
               <Icon name="warning" size={12} />
               {warnings}
               <span className="visually-hidden"> {warnings === 1 ? 'warning' : 'warnings'}</span>

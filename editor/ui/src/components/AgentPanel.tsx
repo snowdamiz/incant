@@ -45,7 +45,7 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
         'The agent needs an open project.'
       : agent?.status === 'unavailable'
         ? notInEditor
-          ? 'The agent is not part of the editor yet.'
+          ? 'The agent is not available in the editor yet.'
           : agent.reason
         : !capabilities.has('agent.send')
           ? 'This bridge does not support sending messages to the agent.'
@@ -115,13 +115,7 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
                 aria-label="Agent conversation"
                 tabIndex={scrollable ? 0 : undefined}
               >
-                <div className="agent-empty">
-                  <span className="agent-empty__mark" aria-hidden="true">
-                    <WispMark size={24} />
-                  </span>
-                  <p className="agent-empty__title">Describe a change</p>
-                  <p className="agent-empty__body">Every edit the agent makes lands in History and can be undone.</p>
-                </div>
+                <p className="agent-empty">Describe a change. Every edit lands in History and can be undone.</p>
               </div>
               <form
                 className={`composer${canSend ? '' : ' is-disabled'}`}
@@ -164,15 +158,13 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
               </form>
             </>
           ) : (
+            // One sentence: why the agent cannot run, and the single next step when one
+            // exists. The header already carries the state; no title repeats it.
             <div className="agent-note">
-              <p className="agent-note__title">
-                {!snapshot ? 'No engine connected' : notInEditor ? 'Not in the editor yet' : signedIn ? 'Agent not ready' : 'Use your ChatGPT account'}
-              </p>
               <p className="agent-note__body" id="agent-reason">
-                {/* The title already says the agent is not in the editor; the body adds what still works. */}
-                {notInEditor || !snapshot ? '' : `${reason} `}Everything else works offline, no account needed.
+                {reason}
               </p>
-              {snapshot && provider?.status === 'not-connected' ? (
+              {notInEditor ? null : snapshot && provider?.status === 'not-connected' ? (
                 <div className="agent-note__actions">
                   <ChatGPTButton small available={capabilities.has('provider.connect')} onClick={connect} />
                 </div>

@@ -30,19 +30,8 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
       <FatalScreen title="Engine bridge version mismatch">
         <p>
           This editor UI speaks bridge protocol {UI_PROTOCOL_VERSION}; the engine offered protocol{' '}
-          {resolution.protocolVersion}. The UI will not guess at an unknown protocol.
+          {resolution.protocolVersion}.
         </p>
-        <div className="fatal__versions" aria-hidden="true">
-          <span className="fatal__version">
-            <span className="fatal__version-label">Editor UI</span>
-            <span className="fatal__version-value">Protocol {UI_PROTOCOL_VERSION}</span>
-          </span>
-          <span className="fatal__versus">≠</span>
-          <span className="fatal__version">
-            <span className="fatal__version-label">Engine</span>
-            <span className="fatal__version-value">Protocol {resolution.protocolVersion}</span>
-          </span>
-        </div>
         <p className="subtle">Rebuild the editor so the UI and engine come from the same version.</p>
       </FatalScreen>
     );
@@ -68,28 +57,24 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
 }
 
 /**
- * The whole window when the shell cannot start: a card with the product mark, the
- * problem as the page's heading, and what to do next. Announced as an alert.
+ * The whole window when the shell cannot start: the problem as the page's heading and
+ * what to do next, as plain text. Announced as an alert.
  */
 function FatalScreen({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <main className="fatal">
-      <div className="fatal__card" role="alert">
-        <p className="fatal__brand">
-          <img src="./icon.svg" alt="" width={16} height={16} />
-          Incant
-        </p>
-        <span className="fatal__badge" aria-hidden="true">
-          <Icon name="error" size={20} />
-        </span>
-        <h1 className="fatal__title">{title}</h1>
+      <div className="fatal__content" role="alert">
+        <h1 className="fatal__title">
+          <Icon name="error" size={16} className="fatal__icon" />
+          {title}
+        </h1>
         <div className="fatal__body">{children}</div>
       </div>
     </main>
   );
 }
 
-/** Valid names for a URL parameter, as a labelled list of chips. */
+/** Valid names for a URL parameter, as a labelled list. */
 function FatalChoices({ title, names }: { title: string; names: readonly string[] }) {
   return (
     <div className="fatal__choices">
@@ -287,8 +272,7 @@ function ConnectionBanner() {
       <div className="notice notice--info" role="note">
         <Icon name="plug" size={14} />
         <span>
-          <strong>No engine connected.</strong> You are looking at the editor shell. Open a project from the Incant
-          editor to start.
+          <strong>No engine connected.</strong> Open a project from the Incant editor to start.
         </span>
       </div>
     );
@@ -380,14 +364,6 @@ function StatusBar() {
           {capabilities.unknown.length} unknown capabilities ignored
         </span>
       ) : null}
-      <span className="statusbar__hint">
-        <span className="statusbar__key">
-          <kbd>F6</kbd> Panels
-        </span>
-        <span className="statusbar__key">
-          <kbd>?</kbd> Shortcuts
-        </span>
-      </span>
     </footer>
   );
 }

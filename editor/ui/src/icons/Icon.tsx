@@ -70,6 +70,8 @@ const PATHS = {
   navmesh: 'M2.5 12.5L5.25 3.5l8.25 3-1.75 6.5zM5.25 3.5l6.5 9.5M2.5 12.5l11-6',
   // An arrow pointer: nothing is selected yet.
   pointer: 'M4 2.75l8.5 5.25-3.9.9 2.15 4.1-1.5.8-2.15-4.1L4 12.25z',
+  // A head and shoulders: the account button while no account is signed in.
+  profile: 'M8 2.75a2.75 2.75 0 110 5.5 2.75 2.75 0 010-5.5zM3 13.25c.6-2.3 2.6-3.75 5-3.75s4.4 1.45 5 3.75',
   // A puzzle piece: a component type the Inspector has no profile for.
   component: 'M3 4.5h3a1.5 1.5 0 013 0h3v3a1.5 1.5 0 010 3v3H3z',
   // Collider primitives, for shape rows and compound part lists.

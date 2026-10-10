@@ -56,7 +56,7 @@ export function Titlebar({
   };
 
   // The open scene, when the project shows exactly one, follows the project name.
-  const scene = sceneLabel(snapshot);
+  const scene = sceneLabel(snapshot, connection?.status === 'ready' ? project : null);
 
   return (
     <header
@@ -154,11 +154,15 @@ export function Titlebar({
   );
 }
 
-/** "Main" for a project with one scene, "3 scenes" for several; nothing until the tree is ready. */
-function sceneLabel(snapshot: ReturnType<typeof useShell>['snapshot']): { label: string; title: string } | null {
+/**
+ * "Main" for a project with one scene, "3 scenes" for several; nothing until the tree is
+ * ready, and nothing when the only scene carries the project's own name (it would repeat).
+ */
+function sceneLabel(snapshot: ReturnType<typeof useShell>['snapshot'], project: string | null): { label: string; title: string } | null {
   const hierarchy = snapshot?.hierarchy;
   if (hierarchy?.status !== 'ready') return null;
   const scenes = hierarchy.value.roots.map((id) => hierarchy.value.nodes[id]).filter((node) => node?.kind === 'scene');
+  if (scenes.length === 1 && scenes[0]!.name === project) return null;
   if (scenes.length === 1) return { label: scenes[0]!.name, title: `Scene: ${scenes[0]!.name}` };
   if (scenes.length > 1) return { label: `${scenes.length} scenes`, title: scenes.map((node) => node!.name).join(', ') };
   return null;

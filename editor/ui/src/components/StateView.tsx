@@ -4,7 +4,12 @@ import { Icon } from '../icons/Icon';
 
 type Tone = 'neutral' | 'error' | 'warning' | 'success';
 
-/** Shared empty / error presentation for panels. Loading uses `Skeleton` instead. */
+/**
+ * Shared empty / error presentation for panels: one quiet title, and a detail line only
+ * where it carries information (an error message, a reason). No badge or backdrop; an
+ * icon appears inline only for errors and warnings, and a spinner for work in progress.
+ * Loading lists use `Skeleton` instead.
+ */
 export function StateView({
   icon,
   title,
@@ -14,6 +19,7 @@ export function StateView({
   compact = false,
   spinner = false,
   alert = tone === 'error',
+  quiet = false,
 }: {
   icon: IconName;
   title: string;
@@ -28,13 +34,29 @@ export function StateView({
    * is already announced elsewhere (the connection banner), so it is read once.
    */
   alert?: boolean;
+  /**
+   * The banner already shows this state (the project opening): the panel keeps the
+   * title for assistive tech instead of repeating it on screen.
+   */
+  quiet?: boolean;
 }) {
+  if (quiet) {
+    return (
+      <div className="state-view state-view--quiet">
+        <p className="visually-hidden">{title}</p>
+      </div>
+    );
+  }
   return (
     <div className={`state-view state-view--${tone}${compact ? ' state-view--compact' : ''}`} role={alert ? 'alert' : undefined}>
-      <span className="state-view__badge" aria-hidden="true">
-        {spinner ? <span className="spinner" /> : <Icon name={icon} size={compact ? 16 : 20} className="state-view__icon" />}
-      </span>
-      <p className="state-view__title">{title}</p>
+      <p className="state-view__title">
+        {spinner ? (
+          <span className="spinner spinner--small" aria-hidden="true" />
+        ) : tone === 'error' || tone === 'warning' ? (
+          <Icon name={icon} size={14} className="state-view__icon" />
+        ) : null}
+        {title}
+      </p>
       {children ? <div className="state-view__body">{children}</div> : null}
       {action ? <div className="state-view__action">{action}</div> : null}
     </div>

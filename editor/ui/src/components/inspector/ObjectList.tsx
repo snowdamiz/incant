@@ -151,10 +151,19 @@ export function ObjectListView({
   return (
     <div className="object-list" data-severity={severity ?? undefined}>
       <div className={`field field--list${severity ? ` field--${severity}` : ''}`} title={description ?? label}>
+        {/* "Parts 64" and the breakdown; the sentence form is for assistive tech only. */}
         <span className="field__label" id={`${id}-label`}>
           {label}
+          {value.length > 0 ? (
+            <span className="object-list__count" aria-hidden="true">
+              {value.length}
+            </span>
+          ) : null}
         </span>
-        <span className="object-list__summary" id={summaryId} title={listSummary(noun, summaries)}>
+        <span className="object-list__breakdown" aria-hidden="true">
+          {listBreakdown(summaries)}
+        </span>
+        <span className="object-list__summary visually-hidden" id={summaryId}>
           {listSummary(noun, summaries)}
         </span>
         {description ? (
@@ -297,14 +306,12 @@ function ItemDetail({
   const extra = record ? Object.keys(record).filter((key) => !Object.hasOwn(schema.properties, key)) : [];
   return (
     <div className="object-list__detail" role="group" aria-labelledby={captionId} style={depthStyle(ctx.depth ?? 0)}>
-      <p className="object-list__caption" id={captionId}>
+      {/* The document path (/shape/parts/41) is the tooltip and spoken, not a visible column. */}
+      <p className="object-list__caption" id={captionId} title={`Document path ${here}`}>
         <span className="object-list__title">
           {noun} {index + 1} <span className="object-list__of">of {count}</span>
         </span>
-        <code className="object-list__path" title={`Document path ${here}`}>
-          <span className="visually-hidden">, path </span>
-          {here}
-        </code>
+        <span className="object-list__path visually-hidden">, path {here}</span>
       </p>
       {own.length > 0 ? <ProblemList id={messageId} problems={own} here={here} /> : null}
       {record ? (
@@ -444,17 +451,22 @@ function ItemValues({ parts }: { parts: readonly ValuePart[] }) {
   return <>{shared && body ? `${body} ${shared}` : body}</>;
 }
 
-/** "4 parts · 3 box, 1 capsule". */
-function listSummary(noun: string, summaries: readonly ItemSummary[]): string {
-  const count = `${summaries.length} ${summaries.length === 1 ? noun.toLowerCase() : `${noun.toLowerCase()}s`}`;
+/** "3 box, 1 capsule": how many items of each kind, or empty when items have no kind. */
+function listBreakdown(summaries: readonly ItemSummary[]): string {
   const tags = new Map<string, number>();
   let unreadable = 0;
   for (const summary of summaries) {
     if (summary.unreadable) unreadable += 1;
     else if (summary.tag) tags.set(summary.tag, (tags.get(summary.tag) ?? 0) + 1);
   }
-  const breakdown = [...[...tags].map(([tag, n]) => `${n} ${tag}`), ...(unreadable ? [`${unreadable} unreadable`] : [])];
-  return breakdown.length > 0 ? `${count} · ${breakdown.join(', ')}` : count;
+  return [...[...tags].map(([tag, n]) => `${n} ${tag}`), ...(unreadable ? [`${unreadable} unreadable`] : [])].join(', ');
+}
+
+/** "4 parts · 3 box, 1 capsule", spoken with the list. */
+function listSummary(noun: string, summaries: readonly ItemSummary[]): string {
+  const count = `${summaries.length} ${summaries.length === 1 ? noun.toLowerCase() : `${noun.toLowerCase()}s`}`;
+  const breakdown = listBreakdown(summaries);
+  return breakdown ? `${count} · ${breakdown}` : count;
 }
 
 function itemProblems(diagnostics: readonly Diagnostic[], itemPointer: string): Diagnostic[] {
