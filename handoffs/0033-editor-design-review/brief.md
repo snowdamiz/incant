@@ -1,3 +1,16 @@
+## Latest priority — PLAN.md revision 5, 2026-10-10
+
+The director's final small follow-up has now landed in this worktree (source
+commit 03d7746). Read PLAN.md section 12 and
+`docs/spikes/performance-plan-v5-review.md`, acknowledge revision 5, and continue
+from your preserved design edits. Do not restart your redesign or before captures.
+The revision 4 runtime/scaling constraints below remain in force. Revision 5 fixes
+all decisions, including browser editing/TypeScript/agent/play/web-export in 1.0,
+wasm2c native exports, the business model and human-owned operations. It does not
+make any unimplemented runtime or browser capability available. Keep the current
+UI pass focused on the thorough Inspector/editor redesign and bounded data views.
+No model/effort change: Opus 5.5 Max is mandatory. Return the full result and tests.
+
 ## Priority revision — PLAN.md revision 4, 2026-10-10
 
 The director has adopted a substantially revised performance architecture. This
