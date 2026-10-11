@@ -54,13 +54,25 @@ Do not broaden into an unrelated redesign after the scoped review passes.
   size. Check custom titlebar/traffic-light clearance, viewport hole, keyboard
   focus, scrolling, wrapping, resize, errors, menus and accessible names.
 
-Astra will separately specify whether a bounded real-account WebView turn is
-needed. Until that explicit grant, do not send provider requests or change account
+The final immutable grant will include one bounded real-account WebView turn on a
+disposable saved fixture, using the existing selected ChatGPT account and model.
+Until that final grant is appended, do not send provider requests or change account
 state. Existing saved-login and four-turn73,259-token native-handler evidence does
 not by itself prove WebView interaction; do not relabel it as such. Never read raw
 credential files/keychains or include account identities in published screenshots,
 logs or receipts. Keep actual app account state intact. No account sign-out/login,
 permission changes, unsolicited browser tabs or unrelated app interactions.
+
+For that one turn, set a 64,000-token project allowance through the actual UI,
+then request only a clearly named fixture entity rename. Observe the actual
+stream, inspect and approve the matching in-engine transaction, verify the new
+name and History entry, then Undo. Record the usage before and after Undo and
+after quitting/reopening the same fixture. A new process must retain the selected
+account and usage without another login or provider request. Keep the account
+dialog closed in published captures. Do not issue additional turns automatically
+if the request fails or the cap is exhausted; record the actual outcome for Astra.
+Any unrelated edit proposal must be denied. This is UI/transport acceptance of one
+small operation, not the plan's game-creation or agent-quality evaluation.
 
 ## Operating the granted native build
 
