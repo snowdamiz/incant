@@ -109,10 +109,12 @@ def mail(stack, suffix):
     found = [m for m in json.loads(raw)['messages'] if m['Subject'] == subject]
     require(len(found) == 1, 'SMTP message captured once')
     ident = found[0]['ID']
-    status, _, raw = request(stack.url('MAIL') + '/api/v1/message/' + ident)
-    require(status == 200 and 'no external delivery' in json.loads(raw)['Text'], 'exact captured SMTP body')
-    status, _, _ = request(stack.url('MAIL') + '/api/v1/messages', 'DELETE', json.dumps({'IDs': [ident]}).encode(), {'Content-Type': 'application/json'})
-    require(status in (200, 204), 'delete only probe mail')
+    try:
+        status, _, raw = request(stack.url('MAIL') + '/api/v1/message/' + ident)
+        require(status == 200 and json.loads(raw)['Text'].replace('\r\n', '\n') == message.get_content(), 'exact captured SMTP body')
+    finally:
+        status, _, _ = request(stack.url('MAIL') + '/api/v1/messages', 'DELETE', json.dumps({'IDs': [ident]}).encode(), {'Content-Type': 'application/json'})
+        require(status in (200, 204), 'delete only probe mail')
     return ['smtp_local_capture_exact_body']
 
 

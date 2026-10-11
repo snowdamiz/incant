@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import local_services as local
+import local_services_probe as probe
 
 
 class LocalState(unittest.TestCase):
@@ -88,6 +89,21 @@ class LocalState(unittest.TestCase):
         s = self.stack(); (s.state/'settings.json').chmod(0o644)
         with self.assertRaisesRegex(ValueError, 'private'): s.prepare()
 
+    @unittest.skipIf(os.name == 'nt', 'POSIX permissions')
+    def test_nonprivate_state_parent_refuses_creation_and_existing_state(self):
+        parent = self.root / 'private-services'
+        parent.mkdir(mode=0o755)
+        parent.chmod(0o755)
+        with self.assertRaisesRegex(ValueError, 'parents must remain private'):
+            local.Stack('test').prepare()
+        self.assertFalse((parent / 'test').exists())
+        parent.chmod(0o700)
+        s = self.stack()
+        before = (s.state / 'settings.json').read_bytes()
+        parent.chmod(0o777)
+        with self.assertRaisesRegex(ValueError, 'parents must remain private'): s.prepare()
+        self.assertEqual((s.state / 'settings.json').read_bytes(), before)
+
     def test_invalid_names_and_ports_never_create_state(self):
         for name, offset in [('../other',0),('Upper',0),('ok',-1),('ok',40001)]:
             with self.assertRaises(ValueError): local.Stack(name,offset)
@@ -140,6 +156,22 @@ class LocalBoundary(unittest.TestCase):
             stack=local.Stack('test')
             self.assertNotIn('INCANT_LOCAL_STATE', stack.child_env)
             with self.assertRaisesRegex(ValueError, 'remote Docker'): stack.check_runtime()
+
+
+class ProtocolRefusals(unittest.TestCase):
+    def test_mail_body_mismatch_is_refused_and_only_its_fixture_is_deleted(self):
+        stack = local.Stack('test')
+        stack.values = {'SMTP_PORT': '11025', 'MAIL_PORT': '18025'}
+        responses = [
+            (200, {}, json.dumps({'messages': [{'Subject': 'Incant local capture exact', 'ID': 'fixture'}]}).encode()),
+            (200, {}, json.dumps({'Text': 'Local-only protocol proof; no external delivery.\nUnexpected appended body'}).encode()),
+            (204, {}, b''),
+        ]
+        with patch.object(probe.smtplib, 'SMTP'), patch.object(probe, 'request', side_effect=responses) as request:
+            with self.assertRaisesRegex(RuntimeError, 'exact captured SMTP body'):
+                probe.mail(stack, 'exact')
+        self.assertEqual(request.call_args.args[1], 'DELETE')
+        self.assertEqual(json.loads(request.call_args.args[2]), {'IDs': ['fixture']})
 
 
 if __name__ == '__main__':

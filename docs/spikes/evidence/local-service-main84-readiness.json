@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "scope": "Local service foundation after actual main84; no hosted/production gate",
+  "source_base": "3b3b56557ce18cd6c65c3d7bb1d4183d5c5e0eb7",
+  "authored_frozen": "337c93b1fe5723ddcd9f8036ce60da775679e79a",
+  "actual_main84": "b84a9bf318c9fa6005d7a5d3524941da2eb4546e",
+  "actual_main84_tree": "601bd42377ecf81a2bb3fbd102b2e249c51479bf",
+  "host": {
+    "system": "Darwin",
+    "release": "25.6.0",
+    "architecture": "arm64",
+    "python": "3.14.8",
+    "docker": "29.8.2",
+    "compose": "5.5.1"
+  },
+  "result": {
+    "elapsed_seconds": 43.36,
+    "hosted_gates_satisfied": false,
+    "protocols_after": {
+      "checks": [
+        "postgres_tcp_commit",
+        "postgres_tcp_rollback",
+        "postgres_wrong_password_refused",
+        "s3_create_put_exact_get_list_delete",
+        "s3_wrong_signature_refused",
+        "s3_anonymous_write_refused",
+        "s3_missing_key_refused",
+        "smtp_local_capture_exact_body",
+        "oidc_discovery_local_issuer_jwks",
+        "oidc_pkce_code_exchange_userinfo",
+        "oidc_state_nonce_audience_subject",
+        "oidc_wrong_password_refused",
+        "oidc_wrong_pkce_refused",
+        "oidc_code_replay_refused"
+      ],
+      "count": 14,
+      "hosted_gates_satisfied": false,
+      "id_token_signature_validation": "not a client-library validation; provider userinfo validates the access token",
+      "scope": "local protocol fixtures only"
+    },
+    "protocols_before": {
+      "checks": [
+        "postgres_tcp_commit",
+        "postgres_tcp_rollback",
+        "postgres_wrong_password_refused",
+        "s3_create_put_exact_get_list_delete",
+        "s3_wrong_signature_refused",
+        "s3_anonymous_write_refused",
+        "s3_missing_key_refused",
+        "smtp_local_capture_exact_body",
+        "oidc_discovery_local_issuer_jwks",
+        "oidc_pkce_code_exchange_userinfo",
+        "oidc_state_nonce_audience_subject",
+        "oidc_wrong_password_refused",
+        "oidc_wrong_pkce_refused",
+        "oidc_code_replay_refused"
+      ],
+      "count": 14,
+      "hosted_gates_satisfied": false,
+      "id_token_signature_validation": "not a client-library validation; provider userinfo validates the access token",
+      "scope": "local protocol fixtures only"
+    },
+    "restart_checks": [
+      "private_state",
+      "oidc_issuer",
+      "postgres_row",
+      "s3_bytes"
+    ],
+    "scope": "fresh local containers only"
+  },
+  "validation": {
+    "preflight": "fresh private instance; actual Compose/image/license/runtime boundary; cleaned without starting containers",
+    "python_tests": 154,
+    "node_tests": 17,
+    "local_service_tests": 16,
+    "release_policy_tests": 5,
+    "actionlint": "scoped local-services workflow passed",
+    "conventions": "regenerated unchanged; check passed",
+    "whitespace": "scoped delta passed",
+    "rust_or_gpu_runs": false
+  },
+  "source_sha256": {
+    ".github/workflows/local-services.yml": "5456fbf39e5fdc3d8d6d39e5a8b473284d146e771a878c6bcc133dccb41ebaec",
+    ".github/release-checks.json": "7840814e7f90346667697b9c19bf8e2be90937a06d20eb2ecd974be231bc1ca0",
+    "tools/local_services.py": "11c197d53ec291d5e630b2fd7f911ece6c229d5c9e1879e6f44c59b790259436",
+    "tools/local_services_probe.py": "5a5099b1331417d1fa7c4f4bd46d26537872f02325de7f52023da091c155a6b8",
+    "tools/local_services_smoke.py": "2efecc6f71572eae5eaefcab71955dc8ca04767d26f1da8d43a2ac88202a0e07",
+    "tools/tests/test_local_services.py": "e2c077d1e8a93524d65787ea5b7345ab3f4e97c647ceaef5fb032924ce719e45",
+    "tools/tests/test_release_policy.py": "e91864dd6a3cf5cd561d88bc834ae8a34fa6a0264438ab9b6f097192246a80e9",
+    "services/local/compose.yaml": "1bd1429ea9ec11f91acd095c88e47763b73ec3cf6d7441a18338be43689910b1",
+    "services/local/gateway.cfg": "0cc816f8b2324415d316d23500f8c0d73fa4a9f2500c6a08e9660d4ff4352d47",
+    "services/local/images.lock.json": "0e7ca0cb8d159a15637a76a55859f2f33f61d67af32c172ee0689a2be0f7f5f7"
+  },
+  "raw_artifacts": {
+    "incant-local-services-main84-final-proof.json": {
+      "bytes": 1521,
+      "sha256": "8a0d07b7ac869a204e3be395521df2bd5c59e528762651afac0c55a2e8eee932"
+    },
+    "incant-local-services-main84-final-tools.log": {
+      "bytes": 30590,
+      "sha256": "a1a4642527b9e09960174e9fe9c9b80924d0de1dfb6a7370a1265eee8083f6e9"
+    },
+    "incant-local-services-main84-scoped.log": {
+      "bytes": 2527,
+      "sha256": "2e42fda09019ef31feb408efb3ad0101951436ed72d085552f4959af2f9fac92"
+    }
+  },
+  "release_rollout": {
+    "new_required_context": "local-service-protocols",
+    "next_context_count": 23,
+    "initial_candidate_contexts_unchanged": 22,
+    "install_protection": "Next candidate containing this reviewed workflow, after initial frozen main84 checkpoint",
+    "public_writes_performed": false
+  },
+  "cleanup": "Fresh proof containers, volumes and private state removed by successful finalizer; both pre-existing unrelated containers remained running; fresh preflight private state removed.",
+  "limitations": [
+    "Local macOS ARM64 Docker Desktop execution only; Linux hosted execution pending",
+    "No accounts/player service, editor/browser sign-in, or production ID-token verifier",
+    "No WAL archival/PITR, application object adapters, relay/TURN, observability or other complete local substitutes",
+    "No full transitive image SBOM/security/production distribution approval",
+    "No hosted provider/device/region/performance/production gate"
+  ]
+}

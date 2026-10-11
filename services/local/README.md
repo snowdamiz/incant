@@ -11,6 +11,10 @@ python3 tools/local_services.py probe
 python3 tools/local_services.py down
 ```
 
+`python3 tools/local_services.py check` prepares private instance configuration
+and validates pinned images, retained licenses, the local Docker endpoint and
+the Compose boundary without starting containers.
+
 `up` waits for all five containers and checks local OIDC discovery. `probe`
 creates uniquely named disposable protocol fixtures, then removes them. `down`
 stops only this Compose project and retains its data volumes. To run a complete
@@ -36,8 +40,10 @@ removed by these commands.
 
 Use the same `--instance NAME --port-offset NUMBER` on each command to select a
 separate project. Port collisions fail startup. The helper refuses remote Docker
-contexts, ambient `INCANT_LOCAL_*` overrides, symlinked/incomplete state and
+contexts, symlinked/incomplete state and
 non-private POSIX state. No Docker socket enters a container.
+Ambient `INCANT_LOCAL_*` variables are stripped before invoking Docker; only the
+validated private instance configuration controls the stack.
 
 Generated database passwords, S3 keys, the local identity bootstrap token and
 master key stay in `~/.incant-local-services/NAME/` outside the checkout and authored projects, private to the local
@@ -93,6 +99,13 @@ vulnerability audit or production distribution/legal review. License or digest
 changes require review of the retained source and notices.
 
 ## Explicit remaining work
+
+The dedicated Linux `local-service-protocols` job runs on frozen release-candidate
+pushes or explicit dispatch. It adds no per-PR or main container matrix. Its
+required context is introduced only when the next candidate contains this
+workflow; the initial active 22-context checkpoint remains unchanged. The local
+source revalidation is recorded in
+[integration evidence](../../docs/spikes/local-service-foundation.md#main84-integration-and-checkpoint-readiness).
 
 No Incant accounts/player service, object adapter, CRDT collaboration service,
 relay/TURN, payment fake, platform sign-in fake, store/cloud-save abstraction,

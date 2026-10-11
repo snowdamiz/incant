@@ -90,6 +90,8 @@ class Stack:
             if directory.is_symlink():
                 raise ValueError('Local service state parents cannot be symlinks')
             directory.mkdir(exist_ok=True, mode=0o700)
+            if os.name != 'nt' and stat.S_IMODE(directory.stat().st_mode) & 0o077:
+                raise ValueError('Local service state parents must remain private to their owner')
         if self.state.is_symlink():
             raise ValueError('Local service state cannot be a symlink')
         if self.state.exists():

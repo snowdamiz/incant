@@ -6,7 +6,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOWS = ROOT / '.github/workflows'
 FULL = ('ci.yml', 'desktop.yml', 'credentials.yml', 'development-wasm.yml',
-        'physics-candidates.yml', 'nightly.yml', 'website.yml')
+        'physics-candidates.yml', 'nightly.yml', 'website.yml', 'local-services.yml')
 
 
 class ReleasePolicyTests(unittest.TestCase):
@@ -53,9 +53,10 @@ class ReleasePolicyTests(unittest.TestCase):
     def test_full_context_contract_is_unique_and_excludes_development_and_deploy(self):
         contexts = json.loads((ROOT / '.github/release-checks.json').read_text())['required_contexts']
         self.assertEqual(len(contexts), len(set(contexts)))
-        self.assertEqual(len(contexts), 22)
-        for required in ('checks', 'classify', 'build', 'compare', 'android', 'ios', 'web', 'portability'):
+        self.assertEqual(len(contexts), 23)
+        for required in ('checks', 'classify', 'build', 'compare', 'android', 'ios', 'web', 'portability', 'local-service-protocols'):
             self.assertIn(required, contexts)
+        self.assertIn('  local-service-protocols:', (WORKFLOWS / 'local-services.yml').read_text())
         for os in ('macos-latest', 'ubuntu-latest', 'windows-latest'):
             for job in ('storage', 'native', 'conformance'):
                 self.assertIn(f'{job} ({os})', contexts)

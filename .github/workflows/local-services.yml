@@ -1,18 +1,8 @@
 name: Local service protocols
+# Full protocol validation belongs to the frozen release checkpoint.
 on:
   push:
-    branches: [main]
-    paths:
-      - 'services/local/**'
-      - 'tools/local_services*.py'
-      - 'tools/tests/test_local_services.py'
-      - '.github/workflows/local-services.yml'
-  pull_request:
-    paths:
-      - 'services/local/**'
-      - 'tools/local_services*.py'
-      - 'tools/tests/test_local_services.py'
-      - '.github/workflows/local-services.yml'
+    branches: [codex/release-candidate]
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,7 +10,7 @@ concurrency:
   group: local-services-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  protocols:
+  local-service-protocols:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

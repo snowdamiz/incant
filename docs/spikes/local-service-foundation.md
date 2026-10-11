@@ -43,9 +43,61 @@ licenses and a service-specific allowlist cover these unmodified local processes
 a full transitive OS-image SBOM, security and production distribution review
 remains open.
 
-The dedicated Linux workflow runs only for this service stack, its helpers/tests
-or its own workflow. It does not widen unrelated PR matrices or alter an existing
-engine check. Its first hosted execution remains pending publication. No local
+The dedicated Linux workflow runs only for a frozen release-candidate push or
+explicit dispatch. It adds no PR/main container matrix and does not alter an
+existing engine check. Its first hosted execution remains pending publication. No local
 protocol test substitutes for real WorkOS/AWS/store/device/region gates. Accounts
 service implementation, WAL-to-S3/PITR, the other PLAN §2.7 services and production
 operations remain separate work.
+
+## Main84 integration and checkpoint readiness
+
+The reviewed foundation was preserved while integrating frozen authored PR84
+`337c93b1fe5723ddcd9f8036ce60da775679e79a` and then actual main84
+`b84a9bf318c9fa6005d7a5d3524941da2eb4546e` (tree
+`601bd42377ecf81a2bb3fbd102b2e249c51479bf`). Only status and license notices
+conflicted; both scoped records were retained. The service delta does not change
+engine Rust, simulation, the player dependency graph, schemas or UI appearance.
+
+Two substantive corrections were made during revalidation. A nonprivate POSIX
+state-home directory now refuses both initial creation and reuse without changing
+existing state. SMTP proof now compares the complete message body after CRLF
+normalization instead of accepting a matching substring, and deletes only its
+own message even when that assertion fails. Behavioral regressions cover both.
+The README now accurately states that ambient `INCANT_LOCAL_*` variables are
+stripped from child environments, rather than claiming their presence is rejected.
+
+On frozen source and cached image digests, a fresh macOS ARM64 Docker Desktop
+run passed all 28 actual protocol checks and four recreation/persistence controls
+in 43.36 seconds. This is a local functional observation, not a capacity or hosted
+measurement. A separate fresh `check` preflight passed and removed its private
+state without starting containers. All 154 Python tooling tests and 17 Node
+compiler tests passed, including 16 local-service refusal/protocol tests and the
+five release-policy contract tests. Scoped actionlint, regenerated conventions
+and the scoped whitespace check passed. Locked npm dependencies were installed
+after the initial broader tooling attempt found the reused worktree had none;
+the final run passed. No engine compilation or GPU execution was needed for this
+Python/configuration slice. Generated proof containers, volumes and private state
+were removed; both pre-existing unrelated containers remained running.
+[Exact source/result ledger](evidence/local-service-main84-readiness.json).
+
+The workflow job is explicitly named `local-service-protocols`, and its required
+context joins the release manifest and tested name contract for a total of 23.
+The coordinator must install the additional branch-protection context **only for
+the next candidate containing this reviewed workflow**, after the initial frozen
+22-context main84 checkpoint. This local source change neither changes that
+active candidate nor claims the new hosted job has run. Publication and all
+main/release/candidate writes remain with the sole coordinator.
+
+Review against PLAN revision 8 §2.7 confirms this is a bounded foundation:
+
+| Boundary | Locally exercised | Still required |
+| --- | --- | --- |
+| PostgreSQL | Pinned major 17, TCP commit/rollback, wrong-password refusal and recreated-container persistence | Application services, a matched deployed RDS version, WAL archival/PITR, managed failover/backup gates |
+| S3-compatible storage | SigV4 create/write/read/list/delete, exact bytes, negative authentication and persisted bytes | Application object adapters, full required S3 behavior and backup/cloud-sync integration |
+| Local OIDC issuer | Discovery/JWKS, native public-client S256 exchange, state/nonce/audience/subject, provider userinfo and refusal controls | Accounts/player service, editor/browser login, a production client token verifier and WorkOS staging behavior |
+| Captured SMTP | Local delivery, complete normalized message body and exact fixture deletion | Accounts-service email sign-in flows and production delivery |
+| Service isolation | Digest/license pins, private generated values, internal backend network and verified loopback gateway | Full local-stack substitutes, production routes/rate limits, OpenTofu tests, observability, relay/TURN and network shaping |
+
+No new outside service was introduced. The existing explicit business-feature,
+license/SBOM, platform and hosted/device/production limitations remain in force.
