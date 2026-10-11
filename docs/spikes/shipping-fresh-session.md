@@ -47,11 +47,28 @@ any Cargo build or player launch because dynamic loading did not supply the GPU
 probe's sibling-module search path. The loader correction temporarily supplies
 that path and restores it afterward; an isolated-process regression imports all
 three actual probe modules. [Initial evidence](evidence/shipping-four-proof-initial-2026-10-11.json)
-retains the failure without claiming a speedup. Both chains must be repeated on
+retains the failure without claiming a speedup. Both chains were then repeated on
 the same corrected frozen revision in a newly coordinated interval. Public
-authoring-tool preparation stays outside that measurement. The four-proof extension is not enabled in CI, has no measured speed
-claim and does not use a persistent shipping target cache. The older two-proof
-numbers below apply only to their recorded source revision.
+authoring-tool preparation stayed outside that measurement. The four-proof extension is not enabled in CI, has no measured speed
+claim for hosted CI or devices and does not use a persistent shipping target cache.
+
+The corrected frozen revision `023c8bb` completed both four-proof chains in one
+exclusive agent CPU/GPU interval: standalone **526.43s**, then shared **437.96s**,
+a local saving of **88.47s (16.80%)**. Exact resolved target graphs, compiler and
+code-generation flags, numerical results, negative-control identities, logs and
+observations match. The shared ledger records 101 fresh runtime units; audio
+reuses 82 of 113 target units, GPU game 85 of 168, and script/physics 98 of 113.
+Each player is freshly compiled and packaged independently; all build/authoring
+storage is deleted before the first packaged-player execution.
+[Matched evidence](evidence/shipping-four-proof-matched-2026-10-11.json) retains
+the report hashes, source/tool identities, timings and comparison scope.
+
+This is one local macOS sample, measured standalone then shared on the PR80
+graph; it is not randomized, a persistent-cache result, a Windows projection or
+a phone-performance gate. Root independently verified all eight report hashes.
+The current flipbook/SDK controls must be integrated and reviewed before any CI
+adoption. The older two-proof numbers below apply only to their recorded source
+revision.
 
 The original commands passed locally on the same runtime sources in 78.82 and
 121.71 seconds, respectively. This is a local baseline with concurrent unrelated
