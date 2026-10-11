@@ -418,6 +418,7 @@ impl Agent {
         };
         for step in 0..self.max_steps {
             access.with_bus(cancel, |_| Ok(()))?;
+            provider.check_active()?;
             // Conservative input reservation: serialized bytes plus message framing. No
             // dollar estimate is invented without provider/model-specific pricing.
             let tool_bytes = conversation::encoded_len(&tools, conversation::MAX_REQUEST_BYTES)
@@ -443,7 +444,16 @@ impl Agent {
                         _ => reserve.saturating_add(max_output),
                     };
                     self.budget.used_tokens = self.budget.used_tokens.saturating_add(spent);
-                    return Err(error);
+                    // Preserve known response usage. Other failed requests were
+                    // charged conservatively, which the caller must not display
+                    // as measured usage or confuse with a metadata fence failure.
+                    return Err(match error {
+                        error @ AgentError::Response { .. } => error,
+                        _ => AgentError::Response {
+                            reason: "Provider request failed",
+                            usage: None,
+                        },
+                    });
                 }
             };
             let spent = completion
@@ -461,6 +471,9 @@ impl Agent {
                 .saturating_add(completion.usage.output_tokens);
             report.steps = step + 1;
             access.with_bus(cancel, |_| Ok(()))?;
+            // A response may arrive after another process changed the account.
+            // Charge it first, then refuse its tool batch without reading secrets.
+            provider.check_active()?;
             if self.budget.used_tokens > self.budget.max_tokens {
                 return Err(AgentError::Budget);
             }
@@ -474,13 +487,14 @@ impl Agent {
                 if cancel.load(Ordering::Relaxed) {
                     return Err(AgentError::Interrupted);
                 }
+                provider.check_active()?;
                 let name = item["name"]
                     .as_str()
                     .ok_or_else(|| AgentError::Tool("missing tool name".into()))?;
                 let call_id = item["call_id"]
                     .as_str()
                     .ok_or_else(|| AgentError::Tool("missing call ID".into()))?;
-                let result = (|| {
+                let arguments = (|| {
                     let arguments: Value = serde_json::from_str(
                         item["arguments"]
                             .as_str()
@@ -495,6 +509,12 @@ impl Agent {
                     if ask && !approve(name, &arguments) {
                         return Err(AgentError::Tool("user denied this operation".into()));
                     }
+                    Ok(arguments)
+                })();
+                // Approvals may wait across sign-out/reconnection. The fence
+                // error is terminal, not an ordinary tool error to send back.
+                provider.check_active()?;
+                let result = arguments.and_then(|arguments| {
                     dispatch_cancellable(
                         access,
                         perception,
@@ -503,7 +523,7 @@ impl Agent {
                         Actor::agent(provider.model(), conversation_id),
                         cancel,
                     )
-                })();
+                });
                 report.tool_calls.push(ToolObservation {
                     name: name.into(),
                     succeeded: result.is_ok(),

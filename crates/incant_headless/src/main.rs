@@ -226,6 +226,7 @@ fn auth_command(action: AuthCli) -> Result<()> {
             let key = rpassword::prompt_password("OpenAI API key (hidden): ")?;
             OpenAiProvider::new(key.clone(), "connection-validation".into())?.models()?;
             let mut store = AccountStore::open()?;
+            store.invalidate_selection()?;
             CredentialStore::save("api-key", &key)?;
             store.data.api_key_connected = true;
             store.data.active = None;

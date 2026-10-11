@@ -38,6 +38,13 @@ capture are separate work; no new GPU or live-provider gate is claimed.
 
 ## Native agent worker controller — locally verified
 
+Account-backed turns now carry a durable non-secret selection receipt and check
+it after responses/approvals and before tools, retaining actual response usage
+when a stale account is refused. The 73-test agent suite and agent/headless
+Clippy pass. [Account fence evidence](docs/spikes/agent-account-fence.md).
+Native start/account/shutdown admission remains part of editor integration;
+these checks do not atomically combine account changes with project commits.
+
 The provider-independent session controller now supports one physical native
 worker, immediate cancellation of stream/approval publication, stale-decision
 rejection and bounded versioned snapshots. Session token accounting survives
