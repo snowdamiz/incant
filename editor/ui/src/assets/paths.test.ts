@@ -33,6 +33,23 @@ describe('import source paths (mirrors incant_import validate_path)', () => {
     expect(sourceKind('a.b/c')).toBeNull();
   });
 
+  it('accepts typed atlas and audio sources without admitting arbitrary JSON', () => {
+    for (const path of ['sprites/sheet.atlas.json', 'sprites/SHEET.ATLAS.JSON']) {
+      expect(sourceKind(path)).toBe('atlas');
+      expect(pathProblem(path)).toBeNull();
+    }
+    for (const path of ['audio/theme.wav', 'audio/effect.OGG']) {
+      expect(sourceKind(path)).toBe('audio');
+      expect(pathProblem(path)).toBeNull();
+    }
+    for (const path of ['sprites/sheet.json', 'sprites/sheet.atlas.json.bak', 'audio/theme.mp3']) {
+      expect(sourceKind(path)).toBeNull();
+      expect(pathProblem(path)).toMatch(/Unsupported/);
+    }
+    expect(pathProblem('../sheet.atlas.json')).toMatch(/leave the project/);
+    expect(pathProblem('C:/theme.wav')).toMatch(/absolute/);
+  });
+
   it('splits pasted lines and display paths', () => {
     expect(splitPaste(' a.png\r\n\n b.glb \r')).toEqual(['a.png', 'b.glb']);
     expect(splitPath('a/b/c.png')).toEqual({ folder: 'a/b/', file: 'c.png' });

@@ -1,0 +1,28 @@
+{
+ "binary": "pre-short-spans",
+ "binary_sha256_start": "1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50",
+ "counts": {
+  "341": {
+   "exit": 0,
+   "image_written": true,
+   "sha256": "75b3c62e7eea84989e959a866261a42f793161c4f984773ec9306d54875c19b9",
+   "stderr": ""
+  },
+  "342": {
+   "exit": 0,
+   "image_written": true,
+   "sha256": "75b3c62e7eea84989e959a866261a42f793161c4f984773ec9306d54875c19b9",
+   "stderr": ""
+  }
+ },
+ "binary_sha256_end": "1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50",
+ "binary_unchanged_every_call": true,
+ "engine_calls": 8,
+ "budget": {
+  "frames": 2,
+  "raw_bytes": 32768,
+  "invocations": 2,
+  "largest_invocation_frames": 1,
+  "largest_invocation_raw_bytes": 16384
+ }
+}

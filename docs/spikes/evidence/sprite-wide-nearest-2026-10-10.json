@@ -1,0 +1,111 @@
+{
+  "recorded": "2026-10-10",
+  "kind": "numerical_gpu_correctness_only",
+  "host": {
+    "os": "26.6",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal"
+  },
+  "parent_commit": "35f0178684402620435152055a449a74be8bba27",
+  "source_sha256": {
+    "crates/incant_render/src/sprites/geometry.rs": "537c4f3a25b6defd62400833c188637555e321b4361a35c62477df09e2235eed",
+    "crates/incant_render/src/sprites/mod.rs": "c23ce2a0bad22d606d92e5dab709d433a0371f6c0f7ee18d5e2abe2cf57b2c45",
+    "crates/incant_render/src/sprites/sprite.wgsl": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+    "crates/incant_render/tests/sprites/wide.rs": "f749151603242a157b05d6d439335e5efefde1e2f08451c1d15530c4a913bce4"
+  },
+  "sweep": {
+    "widths": [
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "magnifications": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "offsets_256px": [
+      0,
+      0.625,
+      1,
+      2,
+      3
+    ],
+    "axes": [
+      "x",
+      "y"
+    ],
+    "flips": [
+      false,
+      true
+    ],
+    "outer_edge_cases": 600,
+    "interior_span_cases": 264,
+    "oracle": "Independent aligned GPU crops measure every unique source color; full palette identity and post-display uniqueness asserted."
+  },
+  "historical_before": {
+    "periodic_palette_outer_edge_failures": 34,
+    "cases": 600,
+    "fractional_arithmetic_only_failures": 24,
+    "note": "Earlier periodic-color outer-edge sweep exposed precision errors but could not detect missing source bases; final strengthened sweep uses unique colors."
+  },
+  "after": {
+    "failed_cases": 0,
+    "cases": 864,
+    "sprite_gpu_tests": 7,
+    "existing_orientation_resize_cases": 48,
+    "existing_small_offset_cases": 70
+  },
+  "negative_control": {
+    "mutation": "omit input.texel_base only",
+    "failed_cases": 720,
+    "cases": 864,
+    "exit_code": 101,
+    "restored_shader_sha256": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c"
+  },
+  "checks": {
+    "workspace_normal_passed": 360,
+    "workspace_ignored_gpu_passed": 55,
+    "workspace_clippy": "pass",
+    "combined_release_build": "pass",
+    "after_test_strengthening_sprite_gpu_passed": 7,
+    "after_test_strengthening_renderer_clippy": "pass"
+  },
+  "headless_binary": {
+    "sha256": "1f338d8403fae4829d01c0a3e2dfcf5af81cac3c876a155b7d9f489231096c50",
+    "bytes": 37833856,
+    "purpose": "Frozen candidate for Claude review, pending rendered acceptance."
+  },
+  "log_sha256": {
+    "/tmp/incant-sprite-wide-before.log": "1f19350b064da43f593f3f2f17c8eb620553cb66911d43aad6ad23d60a111517",
+    "/tmp/incant-sprite-wide-fractional.log": "d1081a00e8759b22829957188609590105572f3b0f74740f71271bdd7b40c773",
+    "/tmp/incant-sprite-spans-workspace-tests.log": "e7e355822ea3b150f049502224659654507bd4afffa0922cdda1e01936a1a7f4",
+    "/tmp/incant-sprite-spans-workspace-gpu.log": "594a6bcedacd5a936981c14331ec16fa8d858aa61bde74928f6d1a48e5d4fa56",
+    "/tmp/incant-sprite-spans-workspace-clippy.log": "fe518ce06a16840a2d03cde4a552e898b5ebd1c0276bb43273095092b1ac521f",
+    "/tmp/incant-sprite-spans-build.log": "05abd5e8c743a65207a07d8b6ef7b4de46edc208af42fe375c21fc98273d8de8",
+    "/tmp/incant-sprite-wide-unique.log": "f83239edb2fa9149076cec36298446b3d94503b17831701b122688e9912854b0",
+    "/tmp/incant-sprite-wide-zero-base.log": "9b29f050db543a0544151a396a6a19c0bbbce5bb89f6c14b361a94b1730e5316",
+    "/tmp/incant-sprite-spans-unique-final-gpu.log": "ed0f1f560edd74e52f080e311aa0540c9777760b3679fc308ef8d075f4d0f560",
+    "/tmp/incant-sprite-spans-unique-final-clippy.log": "e2002ab4f2dccb4fe69f2b604cc21a174725d1e92b5529ce8f0f5f0d0280cfbf"
+  },
+  "limitations": [
+    "One Metal adapter; hosted and other adapters remain open.",
+    "Tests cover listed widths, magnifications and axis-aligned flips; independent rolled/mirrored rendered review remains pending.",
+    "Nearest uses at most1944 vertices per sprite; linear remains at most54; vertex layout64 bytes and batching unchanged. No performance claim.",
+    "Pixel-camera near-tie follower defect, optional exact display curve, native editor acceptance and phone/phase gates remain open."
+  ],
+  "commands": [
+    "./tools/cargo test -j2 --workspace --release --locked",
+    "./tools/cargo test -j2 --workspace --release --locked -- --ignored --test-threads=1 --nocapture",
+    "./tools/cargo clippy -j2 --workspace --all-targets --locked -- -D warnings",
+    "./tools/cargo build -j2 -p incant_editor -p incant_headless -p incant_cook -p incant_cmd --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --release --features incant_editor/custom-protocol --locked",
+    "./tools/cargo test -j2 -p incant_render --release --locked wide_magnified_nearest_regions -- --ignored --test-threads=1 --nocapture",
+    "./tools/cargo test -j2 -p incant_render --release --locked sprites:: -- --ignored --test-threads=1 --nocapture",
+    "./tools/cargo clippy -j2 -p incant_render --all-targets --locked -- -D warnings"
+  ]
+}

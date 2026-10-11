@@ -1,0 +1,128 @@
+{
+  "source_head": "944fea613bbf1c06ed21c5f88d8a1058d6de088c",
+  "rust_test_source_head": "889cdfb",
+  "date": "2026-10-10",
+  "base_pr": 57,
+  "checks": {
+    "release_workspace": 451,
+    "ignored_gpu_executed": 56,
+    "ui": 420,
+    "tools": 38,
+    "workspace_clippy": "pass",
+    "combined_custom_protocol_release_build": "pass",
+    "ui_sdk_types_build": "pass",
+    "schema_generation_unchanged": true,
+    "workflow_lint": "pass",
+    "dependency_guard": "seven shipped roots pass"
+  },
+  "logs": {
+    "workspace": {
+      "path": "/tmp/incant-atlas-runtime-union-workspace.log",
+      "sha256": "5c4ea0f1326232c8bc34eb0b408bf7bdebcec87dbec93e59ec13ff015f966e16"
+    },
+    "gpu": {
+      "path": "/tmp/incant-atlas-runtime-union-gpu.log",
+      "sha256": "542468f402883547c0fb0f673df3244caaaf679dc83a519da6787f4f2b9ab504"
+    },
+    "clippy": {
+      "path": "/tmp/incant-atlas-runtime-union-clippy.log",
+      "sha256": "4d076028c98b5385f7bc854b1bcc35fb21185ad102daa8c5f1fd876f35a889f5"
+    },
+    "tools": {
+      "path": "/tmp/incant-atlas-publication-tools.log",
+      "sha256": "14b6802422030f7d3bc46c8303ecdf70b49ce54209567b3f006e649891e7ca2f"
+    },
+    "ui-tests": {
+      "path": "/tmp/incant-atlas-publication-ui-tests.log",
+      "sha256": "1b59521cb02c07fa4579bc9b3197c89306c6adae19ca65b3ebc74fab3597a683"
+    },
+    "ui-build": {
+      "path": "/tmp/incant-atlas-publication-ui-build.log",
+      "sha256": "170f6ef0b16a73e09b69ecc6da4bf93a0c0615c8b4040ae78a13cb309528744b"
+    },
+    "build": {
+      "path": "/tmp/incant-atlas-publication-build.log",
+      "sha256": "e38116e7dc415195587f56a8c75a0e73eb968840ebab7da6a2b522bea1be7b67"
+    },
+    "public": {
+      "path": "/tmp/incant-atlas-publication-public.log",
+      "sha256": "58d51948b05e54d6ea0668863a2380d3bd3b6cf7f33e5eaafb29633965ff8a67"
+    },
+    "sprite": {
+      "path": "/tmp/incant-atlas-publication-sprite.log",
+      "sha256": "eb349593ca460fa80a04c0b5ad3230260cc8b2d7fa2388b998ac322fb66a9e7a"
+    },
+    "camera": {
+      "path": "/tmp/incant-atlas-publication-camera.log",
+      "sha256": "fb5db6cde90e71d5e42ee6393f5db67723bc2ff4806029f60891e0e65ccd1525"
+    },
+    "pixel": {
+      "path": "/tmp/incant-atlas-publication-pixel.log",
+      "sha256": "0823166eae3dd474e2d9d5bd4e3405416cd8e9d9bc6228415b6ebe0326fb51cd"
+    }
+  },
+  "public_probes": {
+    "public": {
+      "passed": true,
+      "strict_typescript": true,
+      "stable_asset_and_frame_ids": true,
+      "target_frame_relocated": true,
+      "exact_reimport_undo_redo": true,
+      "sources_removed_before_runtime": true,
+      "exact_saved_and_repeated_state": true,
+      "binary_sha256": "6541cdcd2f1d6019974919e458d9af45c7988d26f7834ff81717aef9300621fd",
+      "authored_hashes": {
+        "game.incant.json": "f1d6ac835726bffb1d598d907a4889de456a2e5775d3cd567a5a0227ade1f262",
+        "game.incant.journal.jsonl": "4abbea5413181ecb6e3c32b915c1a6af745de0f71e7290ecb103715a62b29950"
+      },
+      "rendering_or_device_gate": false
+    },
+    "sprite": {
+      "passed": true,
+      "strict_typescript": true,
+      "source_removed_before_runtime": true,
+      "exact_saved_and_repeated_state": true,
+      "atomic_rollback_and_undo_redo": true,
+      "authored_hashes": {
+        "game.incant.json": "45c06ebd3e587ab4cdbf725671411b72bbd251c244d3d3ca09554f0291c94d78",
+        "game.incant.journal.jsonl": "1c9ce9f4d2ad0ad1a0826e2e9324172387363276fa5fbe7aa8a1937d9ae0e238"
+      },
+      "binary_sha256": "6541cdcd2f1d6019974919e458d9af45c7988d26f7834ff81717aef9300621fd",
+      "rendering_or_device_gate": false
+    },
+    "camera": {
+      "passed": true,
+      "strict_typescript": true,
+      "legacy_camera_authored_via_shared_commands": true,
+      "projection_kind": "orthographic",
+      "subpixel_simulation_movement_checked": false,
+      "runtime_projection_edits_save_resume_and_repeat_exact": true,
+      "author_files_unchanged": {
+        "camera.incant.json": "0b94aaed287634a6cb50eb4e1bc9486392fbfd2ccf4e9de0876d6803cc1bc99a",
+        "camera.incant.journal.jsonl": "a1749183c70dadf399d68caef6c4008bfcedaac772df434255c655c2ee7bfdaa"
+      },
+      "binary_sha256": "6541cdcd2f1d6019974919e458d9af45c7988d26f7834ff81717aef9300621fd",
+      "rendering_or_device_gate": false
+    },
+    "pixel": {
+      "passed": true,
+      "strict_typescript": true,
+      "legacy_camera_authored_via_shared_commands": true,
+      "projection_kind": "pixel_perfect",
+      "subpixel_simulation_movement_checked": true,
+      "runtime_projection_edits_save_resume_and_repeat_exact": true,
+      "author_files_unchanged": {
+        "camera.incant.json": "0b92519ecd209d47bf983e6039000797df73251e55e18fa25577ee3e70f6be26",
+        "camera.incant.journal.jsonl": "64f8b178d1e5e131d2fd69cb63b8c4d207f0b653119aca32e1d405de2728ffc9"
+      },
+      "binary_sha256": "6541cdcd2f1d6019974919e458d9af45c7988d26f7834ff81717aef9300621fd",
+      "rendering_or_device_gate": false
+    }
+  },
+  "limits": [
+    "Probes exercise the legacy PlaySession, not native ECS gameplay migration.",
+    "Claude atlas acceptance is scoped to the frozen renderer; native editor review remains pending.",
+    "Known shared nearest-sampling, camera placement and geometry-budget limits remain open.",
+    "No device, reference-phone performance, arbitrary-zoom or phase-gate claim."
+  ]
+}

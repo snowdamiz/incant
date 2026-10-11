@@ -34,6 +34,41 @@
             "vertical_size"
           ],
           "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "pixel_perfect",
+              "type": "string"
+            },
+            "pixels_per_unit": {
+              "description": "Logical pixels per world metre. Camera motion snaps to this grid.",
+              "format": "double",
+              "maximum": 4096,
+              "minimum": 1,
+              "type": "number",
+              "x-incant-unit": "px/m"
+            },
+            "reference_resolution": {
+              "description": "Fixed logical width and height, scaled by whole pixels with letterboxing.",
+              "items": {
+                "format": "uint32",
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array",
+              "x-incant-unit": "px"
+            }
+          },
+          "required": [
+            "kind",
+            "pixels_per_unit",
+            "reference_resolution"
+          ],
+          "type": "object"
         }
       ]
     }
@@ -68,7 +103,7 @@
       "default": {
         "kind": "perspective"
       },
-      "description": "Perspective, or orthographic with parallel view rays and a fixed world-space height."
+      "description": "Perspective, orthographic, or pixel-perfect with a fixed logical resolution."
     }
   },
   "required": [

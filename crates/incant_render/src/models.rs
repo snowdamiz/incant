@@ -47,6 +47,7 @@ struct Batch {
 /// Source bytes are not needed after AssetStore has loaded the cooked model.
 pub struct RenderScene {
     pub(crate) diagnostics: Vec<glam::Mat4>,
+    pub(crate) sprites: Option<Arc<crate::sprites::SpriteScene>>,
     batches: Vec<Arc<Batch>>,
     stats: SceneStats,
     environment: Option<crate::environment::Binding>,
@@ -75,7 +76,9 @@ impl RenderScene {
     }
     /// Identifies the available appearance without claiming production lighting.
     pub fn shading(&self) -> &'static str {
-        if self.batches.is_empty() {
+        if self.sprites.is_some() {
+            "sprites_and_materials"
+        } else if self.batches.is_empty() {
             "diagnostic"
         } else {
             "material_preview"
@@ -243,7 +246,11 @@ impl Renderer {
         {
             return Err(ResourceError::TransparentShadowCaster.into());
         }
+        let sprites = self
+            .sprites
+            .upload(&self.device, &self.queue, resolved.sprites)?;
         Ok(RenderScene {
+            sprites,
             lights,
             light_selection: crate::LocalLightSelection::Clustered,
             cameras: resolved.cameras,

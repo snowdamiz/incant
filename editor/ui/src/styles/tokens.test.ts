@@ -72,13 +72,11 @@ describe('design token contrast', () => {
 
   it.each([
     ['color-danger', 'color-danger-bg'],
-    ['color-warning', 'color-warning-bg'],
     ['color-info', 'color-info-bg'],
     ['color-text', 'color-danger-bg'],
-    ['color-text', 'color-warning-bg'],
     ['color-text', 'color-info-bg'],
     ['color-text-muted', 'color-info-bg'],
-    ['color-fixture', 'color-fixture-bg'],
+    ['color-fixture', 'color-bg-app'],
     ['color-text-on-accent', 'color-accent'],
     ['color-text', 'color-bg-selected-inactive'],
     ['color-text-subtle', 'color-bg-viewport'],

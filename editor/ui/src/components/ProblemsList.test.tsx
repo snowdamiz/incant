@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { App } from '../App';
 import type { BridgeSnapshot, Diagnostic, EditorBridge } from '../bridge/contract';
@@ -24,6 +24,35 @@ const LONG_PATH = 'models/environment/harbor/district_02/props/weathered_pier_la
 const SOURCE_ERROR = 'could not cook triangle.gltf: invalid glTF: expected value at line 1 column 1';
 
 describe('Problems rows', () => {
+  it('announces the same page again after a severity filter resets its position', async () => {
+    const bridge = bridgeWith(() => Array.from({ length: 300 }, (_, index) => ({
+      id: `problem-${index}`, severity: index % 2 ? 'error' : 'warning', message: `Problem ${index}`,
+      entity: null, component: null, path: null,
+    })));
+    render(<App resolution={{ kind: 'bridge', bridge }} />);
+    const pager = screen.getByRole('group', { name: 'Pages of problems' });
+    const status = within(pager).getByRole('status');
+    const next = within(pager).getByRole('button', { name: 'Next page' });
+    fireEvent.click(next);
+    const message = 'Showing problems 101–200 of 300';
+    await waitFor(() => expect(status.textContent).toBe(message));
+    const errors = screen.getByRole('button', { name: /errors/i, pressed: true });
+    fireEvent.click(errors);
+    fireEvent.click(errors);
+    expect(within(pager).getByRole('button', { name: 'First page' }).getAttribute('aria-disabled')).toBe('true');
+    const changes: string[] = [];
+    const observer = new MutationObserver(() => changes.push(status.textContent ?? ''));
+    observer.observe(status, { childList: true, characterData: true, subtree: true });
+    try {
+      fireEvent.click(next);
+      await waitFor(() => expect(changes).toContain(''));
+      await waitFor(() => expect(changes).toContain(message));
+      expect(within(pager).getByRole('status')).toBe(status);
+    } finally {
+      observer.disconnect();
+    }
+  });
+
   it('show the full message and keep the source path in its own location column', () => {
     const bridge = bridgeWith(() => [
       { id: 'asset-source:1', severity: 'error', message: SOURCE_ERROR, entity: null, component: null, path: 'triangle.gltf' },
@@ -37,7 +66,10 @@ describe('Problems rows', () => {
       },
     ]);
     render(<App resolution={{ kind: 'bridge', bridge }} />);
-    const rows = within(screen.getByRole('list', { name: 'Problems' })).getAllByRole('listitem');
+    const list = screen.getByRole('list', { name: 'Problems' });
+    // Project-level problems form their own group.
+    expect(list.querySelector('.problems__heading')?.textContent).toContain('Project');
+    const rows = [...list.querySelectorAll<HTMLElement>('.problems__item')];
 
     // The precise error, including line and column, is the row's own text, not a tooltip.
     const first = rows[0]!;
@@ -73,9 +105,13 @@ describe('Problems rows', () => {
       ];
     });
     render(<App resolution={{ kind: 'bridge', bridge }} />);
-    const button = within(screen.getByRole('list', { name: 'Problems' })).getByRole('button');
+    const list = screen.getByRole('list', { name: 'Problems' });
+    const button = within(list).getByRole('button');
     expect(button.textContent).toContain('warning: Intensity is negative and is clamped to 0 at line 3 column 18');
-    expect(button.querySelector('.list__meta')!.textContent).toBe(`${name} · light · intensity`);
+    // The entity heads its group once; each row still names it for assistive tech.
+    expect(list.querySelector('.problems__heading')?.textContent).toContain(name);
+    expect(button.textContent).toContain(`, ${name}`);
+    expect(button.querySelector('.list__meta')!.textContent).toBe('light · intensity');
 
     fireEvent.click(button);
     expect(screen.getByRole('treeitem', { selected: true }).textContent).toContain(name);

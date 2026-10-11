@@ -1,0 +1,56 @@
+{
+ "binary_unchanged_every_call": true,
+ "engine_calls": 9,
+ "binary_sha256": "734811cb6053e32cce1ccd0fbb98fb7a515106cf7a8442f93b0be297af065469",
+ "imports": {
+  "v1-before-scene": {
+   "exit": 0,
+   "fingerprint": "8079ce3724e404ea477c28bc6e176456afe341dc09a45fdc59eb9850617774fb",
+   "page": [
+    1222,
+    1104
+   ],
+   "diagnostics": []
+  },
+  "v2": {
+   "exit": 0,
+   "fingerprint": "dcaefe33ce2060a8b6617fa7d674056347d5d3a750afe10fe5c732cd7873b86a",
+   "page": [
+    1262,
+    1104
+   ],
+   "diagnostics": [
+    {
+     "code": "raw_atlas_region",
+     "entity_id": "01JA34EN00000000000000008E",
+     "message": "raw pixel rectangles address the packed page and can show unrelated content after repacking; use a stable atlas frame ID",
+     "path": "/scenes/01M4KYED6K1Q74QAXEHSJ4QD40/entities/01JA34EN00000000000000008E/components/SpriteRenderer/region",
+     "scene_id": "01M4KYED6K1Q74QAXEHSJ4QD40",
+     "severity": "warning",
+     "texture_id": "01M4KYED9NRGKT2EHYVRHMXD6Y",
+     "entity": "B:raw-card7"
+    }
+   ]
+  },
+  "v3": {
+   "exit": 0,
+   "fingerprint": "04cd9527fe9182f13007b4ac175e3a90105a2661e82ed2e9bcc1a365cafcc71c",
+   "page": [
+    1246,
+    1110
+   ],
+   "diagnostics": [
+    {
+     "code": "raw_atlas_region",
+     "entity_id": "01JA34EN00000000000000008E",
+     "message": "raw pixel rectangles address the packed page and can show unrelated content after repacking; use a stable atlas frame ID",
+     "path": "/scenes/01M4KYED6K1Q74QAXEHSJ4QD40/entities/01JA34EN00000000000000008E/components/SpriteRenderer/region",
+     "scene_id": "01M4KYED6K1Q74QAXEHSJ4QD40",
+     "severity": "warning",
+     "texture_id": "01M4KYED9NRGKT2EHYVRHMXD6Y",
+     "entity": "B:raw-card7"
+    }
+   ]
+  }
+ }
+}

@@ -11,6 +11,7 @@ struct OutputUniform {
     rect: [f32; 4],
     radii: [f32; 4],
     canvas: [f32; 4],
+    pixel_grid: [f32; 4],
 }
 fn decode(byte: u8) -> f32 {
     let s = f32::from(byte) / 255.;
@@ -39,6 +40,7 @@ impl OutputPass {
         target: &wgpu::TextureView,
         format: wgpu::TextureFormat,
         viewport: Option<Viewport>,
+        pixel_grid: Option<[f32; 4]>,
     ) -> Result<OutputDraw> {
         let pipeline = {
             let mut pipelines = self
@@ -63,6 +65,7 @@ impl OutputPass {
             rect: [0.; 4],
             radii: [0.; 4],
             canvas: [0.; 4],
+            pixel_grid: pixel_grid.unwrap_or([0.; 4]),
         };
         if let Some(viewport) = viewport {
             let color = viewport.canvas_srgb.map(decode);

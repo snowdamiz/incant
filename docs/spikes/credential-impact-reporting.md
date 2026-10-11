@@ -63,3 +63,11 @@ target family is currently absent and a later substantive consumer must establis
 actual restoration. [Exact metadata, log hashes and cleanup boundaries](evidence/ci-registry-rollout-2026-10-11.json)
 include the earlier concurrent disappearance and the separately preserved user
 PLAN merge whose historical merge message lacks an author trailer.
+
+## Reviewed editor/sprite union
+
+Integrating corrected editor headc620868 adds incant_2d to the conservative local
+credential dependency closure through incant_doc. The dynamic trigger-coverage
+test fails before adding that source directory and passes afterward. The report
+remains diagnostic only: every outcome still runs every credential command.
+No current PR matrix or skip policy changes.

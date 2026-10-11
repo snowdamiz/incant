@@ -1,90 +1,26 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import axe from 'axe-core';
 import { afterEach, describe, expect, it } from 'vitest';
-import { App } from '../../App';
-import { snapshotFromEngine } from '../../../../bridge/native';
-import type { EngineRead } from '../../../../bridge/native';
-import type { BridgeSnapshot, ComponentSchema, Diagnostic, EditorBridge } from '../../bridge/contract';
-import { createFixtureBridge, fixtureSnapshot } from '../../bridge/fixture';
+import type { Diagnostic } from '../../bridge/contract';
+import { FIXTURE_VARIANTS, fixtureSnapshot } from '../../bridge/fixture';
+import { LEGACY, PIXEL, description, expectFieldOfViewLive, inspect, nativeCamera, regionOf, rows } from '../../test/cameraInspector';
 import { FieldView, formatNumber, presentableDefault } from './FieldView';
 import { isOrthographicCamera } from './presentation';
 
+/*
+ * The Camera Inspector against main's native schema (schemas/Camera.schema.json):
+ * perspective, orthographic and pixel-perfect projections. Pixel-specific behavior
+ * is covered by PixelCameraFields.test.tsx against the same generated schema.
+ */
+
 afterEach(cleanup);
 
-/** The real bridge conversion of the Rust-generated Camera schema, as the native editor sees it. */
-function nativeCamera(): ComponentSchema {
-  const schema = JSON.parse(readFileSync(resolve(__dirname, '../../../../../schemas/Camera.schema.json'), 'utf8'));
-  const read = {
-    project: { id: '00000000000000000000000001', name: 'Cameras', scenes: {} },
-    revision: 1,
-    can_redo: false,
-    history: [],
-    applied: 0,
-    schemas: { Camera: schema },
-    console: [],
-    viewport_error: null,
-  } as unknown as EngineRead;
-  return snapshotFromEngine(read).schemas.Camera!;
-}
-
 const NATIVE = nativeCamera();
-const LEGACY = { fov_degrees: 60, near: 0.1, far: 100 };
-
-/** Field of view carries no "Unused" tag: it is live, or the projection is not well-formed. */
-function expectFieldOfViewLive(camera: { getByRole: (role: string, options: { name: string }) => HTMLElement }) {
-  const fov = camera.getByRole('textbox', { name: 'Field of view' });
-  expect(fov.closest('.field')?.querySelector('.control__tag')).toBeNull();
-  expect(description(fov)).not.toContain('Not used');
-}
-
-/** Mounts the real editor on the sample fixture with this value on the Camera Rig. */
-async function inspect(value: unknown, diagnostics: readonly Diagnostic[] = []) {
-  const base = fixtureSnapshot('sample');
-  const rig = Object.values(base.entities).find((entity) => entity.name === 'Camera Rig')!;
-  const snapshot: BridgeSnapshot = {
-    ...base,
-    entities: {
-      ...base.entities,
-      [rig.id]: {
-        ...rig,
-        components: rig.components.map((c) => (c.type === 'Camera' ? { ...c, value: value as Record<string, unknown> } : c)),
-      },
-    },
-    diagnostics: [...base.diagnostics, ...diagnostics.map((d) => ({ ...d, entity: rig.id }))],
-  };
-  const bridge: EditorBridge = {
-    ...createFixtureBridge('sample'),
-    getSnapshot: () => snapshot,
-    subscribe: () => () => undefined,
-  };
-  render(<App resolution={{ kind: 'bridge', bridge }} />);
-  fireEvent.click(screen.getByRole('treeitem', { name: /^Camera Rig/ }));
-  const inspector = document.querySelector<HTMLElement>('[data-region="inspector"]')!;
-  return within(await waitFor(() => within(inspector).getByRole('region', { name: 'Camera' })));
-}
-
-const description = (element: Element) =>
-  (element.getAttribute('aria-describedby') ?? '')
-    .split(' ')
-    .filter(Boolean)
-    .map((id) => document.getElementById(id)?.textContent ?? '')
-    .join(' ');
-
-/** Visible row text: label, then the value box's text and input value. */
-type Queries = { getAllByRole: (role: string) => HTMLElement[] };
-const regionOf = (camera: Queries) => camera.getAllByRole('textbox')[0]!.closest<HTMLElement>('section.component')!;
-const rows = (camera: Queries) =>
-  Array.from(regionOf(camera).querySelectorAll<HTMLElement>('.field')).map((row) => {
-    const label = row.querySelector('.field__label')?.textContent ?? '';
-    const box = row.querySelector('.field__value')!;
-    const input = box.querySelector('input');
-    return `${label}: ${input ? input.value : ''} ${box.textContent ?? ''}`.replace(/\s+/g, ' ').trim();
-  });
+const variantsOf = (schema: typeof NATIVE) =>
+  (schema.properties.projection as { variants: Record<string, { properties: Record<string, Record<string, unknown>> }> }).variants;
 
 describe('native Camera schema', () => {
-  it('reaches the Inspector with projection as an optional perspective/orthographic union', () => {
+  it('reaches the Inspector with projection as an optional perspective/orthographic/pixel-perfect union', () => {
     expect(NATIVE.order).toEqual(['projection', 'fov_degrees', 'near', 'far']);
     const projection = NATIVE.properties.projection!;
     expect(projection).toMatchObject({
@@ -96,7 +32,17 @@ describe('native Camera schema', () => {
     // Units come from Rust metadata, not from the Inspector profile.
     expect(['fov_degrees', 'near', 'far'].map((key) => (NATIVE.properties[key] as { 'x-incant-unit'?: string })['x-incant-unit']))
       .toEqual(['°', 'm', 'm']);
-    expect(Object.keys((projection as { variants: object }).variants)).toEqual(['perspective', 'orthographic']);
+    // Exactly the projections the generated Rust schema declares.
+    const variants = variantsOf(NATIVE);
+    expect(Object.keys(variants)).toEqual(['perspective', 'orthographic', 'pixel_perfect']);
+    expect(Object.keys(variants.perspective!.properties)).toEqual(['kind']);
+    const orthographic = variants.orthographic!.properties;
+    expect(Object.keys(orthographic)).toEqual(['kind', 'vertical_size']);
+    expect(orthographic.vertical_size).toMatchObject({
+      type: 'number',
+      'x-incant-unit': 'm',
+      description: 'Visible world-space height. Width follows the output aspect ratio.',
+    });
   });
 
   it('is mirrored exactly by the browser fixture', () => {
@@ -147,10 +93,10 @@ describe('Camera Inspector', () => {
   });
 
   it.each([
-    ['an unknown kind', { kind: 'isometric', vertical_size: 8 }, 'Unknown projection kind "isometric". Expected perspective or orthographic; raw value:'],
-    ['a missing kind', { vertical_size: 8 }, 'No “kind” is set, so the projection cannot be shown. Expected perspective or orthographic; raw value:'],
-    ['null', null, 'Cannot show as a projection (perspective or orthographic); raw value:'],
-    ['a string', 'orthographic', 'Cannot show as a projection (perspective or orthographic); raw value:'],
+    ['an unknown kind', { kind: 'isometric', vertical_size: 8 }, 'Unknown projection kind "isometric". Expected perspective, orthographic or pixel_perfect; raw value:'],
+    ['a missing kind', { vertical_size: 8 }, 'No “kind” is set, so the projection cannot be shown. Expected perspective, orthographic or pixel_perfect; raw value:'],
+    ['null', null, 'Cannot show as a projection (perspective, orthographic or pixel_perfect); raw value:'],
+    ['a string', 'orthographic', 'Cannot show as a projection (perspective, orthographic or pixel_perfect); raw value:'],
   ])('reports %s explicitly instead of assuming perspective', async (_name, projection, message) => {
     const camera = await inspect({ ...LEGACY, projection });
     const notice = camera.getByRole('group', { name: 'Projection' });
@@ -238,10 +184,13 @@ describe('Camera Inspector', () => {
     expect(screen.getByText('Read-only')).toBeTruthy();
   });
 
-  it('has no axe violations for legacy, orthographic and malformed cameras', async () => {
+  it('has no axe violations for legacy, perspective, orthographic and malformed cameras', async () => {
     for (const value of [
       LEGACY,
+      { ...LEGACY, projection: { kind: 'perspective' } },
       { ...LEGACY, projection: { kind: 'orthographic', vertical_size: 8 } },
+      { ...LEGACY, projection: { kind: 'orthographic' } },
+      { ...LEGACY, projection: PIXEL },
       { ...LEGACY, projection: { kind: 'isometric' } },
     ]) {
       await inspect(value);
@@ -254,14 +203,33 @@ describe('Camera Inspector', () => {
 });
 
 describe('sample fixture cameras', () => {
-  it('holds a legacy rig and an orthographic map camera', () => {
+  it('holds a legacy rig, an orthographic map camera and an explicitly perspective close-up camera', () => {
     const cameras = Object.values(fixtureSnapshot('sample').entities).flatMap((entity) =>
       entity.components.filter((c) => c.type === 'Camera').map((c) => [entity.name, c.value.projection ?? null]),
     );
     expect(cameras).toEqual([
       ['Camera Rig', null],
       ['Map Camera', { kind: 'orthographic', vertical_size: 8 }],
+      ['Close-up Camera', { kind: 'perspective' }],
     ]);
+  });
+
+  it('advertises no projection the native schema lacks, in any fixture', () => {
+    const declared = Object.keys(variantsOf(NATIVE));
+    for (const variant of FIXTURE_VARIANTS) {
+      for (const entity of Object.values(fixtureSnapshot(variant).entities)) {
+        for (const component of entity.components.filter((c) => c.type === 'Camera')) {
+          const projection = component.value.projection as { kind?: unknown } | undefined;
+          if (projection !== undefined) expect(declared, `${variant}: ${entity.name}`).toContain(projection.kind);
+        }
+      }
+    }
+  });
+
+  it('shows the close-up camera as authored perspective with a live field of view', async () => {
+    const camera = await inspect({ fov_degrees: 35, near: 0.05, far: 60, projection: { kind: 'perspective' } });
+    expect(rows(camera)).toEqual(['Projection: Perspective', 'Field of view: 35 °', 'Near clip: 0.05 m', 'Far clip: 60 m']);
+    expectFieldOfViewLive(camera);
   });
 });
 

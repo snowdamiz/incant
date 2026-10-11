@@ -48,6 +48,39 @@ const PATHS = {
   import: 'M8 2.5v7M5 6.5l3 3 3-3M2.5 10v3.5h11V10',
   reimport: 'M13 8a5 5 0 01-8.6 3.5M3 8a5 5 0 018.6-3.5M11.5 2v2.6H8.9M4.5 14v-2.6h2.6',
   back: 'M13 8H3.5M7 4.5L3.5 8 7 11.5',
+  // Pager: first, previous, next and last page.
+  pageFirst: 'M11 4L7 8l4 4M4.5 4v8',
+  pagePrev: 'M10 4L6 8l4 4',
+  pageNext: 'M6 4l4 4-4 4',
+  pageLast: 'M5 4l4 4-4 4M11.5 4v8',
+  pencil: 'M10.25 3.25l2.5 2.5L6 12.5H3.5V10zM8.75 4.75l2.5 2.5',
+  trash: 'M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.75 9h5.5l.75-9M6.75 7v4.25M9.25 7v4.25',
+  // Component marks for Inspector section headers.
+  move: 'M8 2v12M2 8h12M6.25 3.75L8 2l1.75 1.75M6.25 12.25L8 14l1.75-1.75M3.75 6.25L2 8l1.75 1.75M12.25 6.25L14 8l-1.75 1.75',
+  // A moving ball with speed lines: a body the solver moves.
+  body: 'M10 4a4 4 0 110 8 4 4 0 010-8zM2 6h3M2.75 8.5h2.5M2 11h3',
+  collider: 'M2.5 5.5v-3h3M10.5 2.5h3v3M13.5 10.5v3h-3M5.5 13.5h-3v-3M6 6h4v4H6z',
+  bulb: 'M8 2.25a4 4 0 00-2.4 7.2c.5.4.9 1 .9 1.55v.5h3v-.5c0-.55.4-1.15.9-1.55A4 4 0 008 2.25zM6.5 13.75h3',
+  spot: 'M6 2.5h4v2.25L13 13H3l3-8.25zM6 4.75h4',
+  globe: 'M8 2a6 6 0 110 12A6 6 0 018 2zM2 8h12M8 2c-1.9 1.7-2.6 3.7-2.6 6s.7 4.3 2.6 6M8 2c1.9 1.7 2.6 3.7 2.6 6s-.7 4.3-2.6 6',
+  mixer: 'M4 2.5v11M8 2.5v11M12 2.5v11M2.5 10h3M6.5 5.5h3M10.5 8h3',
+  velocity: 'M5.5 8h8M10.5 5l3 3-3 3M2.5 5.5h3M2.5 10.5h3',
+  spin: 'M13.2 8.6A5.25 5.25 0 113 6.7M13.5 3v3.25h-3.25M13.4 6.1A5.25 5.25 0 008 2.75',
+  grid: 'M2.5 2.5h11v11h-11zM2.5 6.17h11M2.5 9.83h11M6.17 2.5v11M9.83 2.5v11',
+  navmesh: 'M2.5 12.5L5.25 3.5l8.25 3-1.75 6.5zM5.25 3.5l6.5 9.5M2.5 12.5l11-6',
+  // An arrow pointer: nothing is selected yet.
+  pointer: 'M4 2.75l8.5 5.25-3.9.9 2.15 4.1-1.5.8-2.15-4.1L4 12.25z',
+  // A head and shoulders: the account button while no account is signed in.
+  profile: 'M8 2.75a2.75 2.75 0 110 5.5 2.75 2.75 0 010-5.5zM3 13.25c.6-2.3 2.6-3.75 5-3.75s4.4 1.45 5 3.75',
+  // A puzzle piece: a component type the Inspector has no profile for.
+  component: 'M3 4.5h3a1.5 1.5 0 013 0h3v3a1.5 1.5 0 010 3v3H3z',
+  // Collider primitives, for shape rows and compound part lists.
+  shapeBox: 'M3 5.25L8 2.75l5 2.5v5.5l-5 2.5-5-2.5zM3 5.25L8 7.75l5-2.5M8 7.75v5.5',
+  shapeSphere: 'M8 2.75a5.25 5.25 0 110 10.5 5.25 5.25 0 010-10.5zM2.75 8c1.3 1.05 3.1 1.6 5.25 1.6s3.95-.55 5.25-1.6',
+  // Wide, with the top cap's rim drawn like the sphere's equator, so it reads as a solid
+  // and never as a zero beside a part's index.
+  shapeCapsule: 'M4.75 6a3.25 3.25 0 016.5 0v4a3.25 3.25 0 01-6.5 0zM4.75 6c.9.7 2 1 3.25 1s2.35-.3 3.25-1',
+  shapeCompound: 'M2.5 9.5h5v4h-5zM9.75 4.25a2.25 2.25 0 110 4.5 2.25 2.25 0 010-4.5zM4 7.5V5a2 2 0 014 0',
 } as const;
 
 export type IconName = keyof typeof PATHS;

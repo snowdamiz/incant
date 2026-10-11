@@ -8,6 +8,8 @@ mod navigation;
 mod physics;
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
+pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
+pub use incant_2d::{SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling};
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
@@ -344,6 +346,20 @@ impl Project {
                         );
                     }
                 }
+                if entity.components.contains_key("SpriteRenderer") {
+                    if !entity.components.contains_key("Transform") {
+                        issue(
+                            format!("{path}/components"),
+                            "a sprite requires a Transform",
+                        );
+                    }
+                    if entity.components.contains_key("MeshRenderer") {
+                        issue(
+                            format!("{path}/components"),
+                            "sprite and mesh rendering require separate entities",
+                        );
+                    }
+                }
                 if let Err(message) = physics::validate_entity(entity) {
                     issue(format!("{path}/components"), &message);
                 }
@@ -440,6 +456,23 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("script source does not exist".into());
             }
         }
+        "SpriteRenderer" => {
+            let sprite: SpriteRenderer = decode(value)?;
+            sprite.validate().map_err(|e| e.to_string())?;
+            let Some(asset) = project.assets.get(&sprite.texture) else {
+                return Err("sprite texture does not exist".into());
+            };
+            if asset.kind != "texture"
+                || matches!(
+                    asset.import_settings,
+                    Some(AssetImportSettings::Texture {
+                        usage: TextureUsage::Normal | TextureUsage::Linear
+                    })
+                )
+            {
+                return Err("sprite requires a color texture asset".into());
+            }
+        }
         "MeshRenderer" => {
             let m: MeshRenderer = decode(value)?;
             if !project.assets.contains_key(&m.mesh)
@@ -490,6 +523,10 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
 pub fn schema_registry() -> BTreeMap<String, Value> {
     let mut registry = BTreeMap::from([
         ("Project".into(), json!(schemars::schema_for!(Project))),
+        (
+            "SpriteAtlas".into(),
+            json!(schemars::schema_for!(SpriteAtlas)),
+        ),
         ("Transform".into(), json!(schemars::schema_for!(Transform))),
         ("Velocity".into(), json!(schemars::schema_for!(Velocity))),
         (
@@ -501,6 +538,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        (
+            "SpriteRenderer".into(),
+            json!(schemars::schema_for!(SpriteRenderer)),
+        ),
         (
             "NavigationGrid".into(),
             json!(schemars::schema_for!(NavigationGrid)),

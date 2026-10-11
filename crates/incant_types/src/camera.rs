@@ -10,6 +10,14 @@ pub enum CameraProjection {
         #[schemars(extend("x-incant-unit" = "m"))]
         vertical_size: f64,
     },
+    PixelPerfect {
+        /// Logical pixels per world metre. Camera motion snaps to this grid.
+        #[schemars(range(min = 1, max = 4096), extend("x-incant-unit" = "px/m"))]
+        pixels_per_unit: f64,
+        /// Fixed logical width and height, scaled by whole pixels with letterboxing.
+        #[schemars(extend("x-incant-unit" = "px"))]
+        reference_resolution: [u32; 2],
+    },
 }
 impl Default for CameraProjection {
     fn default() -> Self {
@@ -27,7 +35,7 @@ pub struct Camera {
     pub near: f64,
     #[schemars(extend("x-incant-unit" = "m"))]
     pub far: f64,
-    /// Perspective, or orthographic with parallel view rays and a fixed world-space height.
+    /// Perspective, orthographic, or pixel-perfect with a fixed logical resolution.
     #[serde(default)]
     pub projection: CameraProjection,
 }

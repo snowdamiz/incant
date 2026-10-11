@@ -1,0 +1,414 @@
+{
+  "generated": "2026-10-11T00:05:07.404Z",
+  "baselineDir": "./handoffs/0033-editor-design-review/screenshots/plain/after",
+  "candidateDir": "./artifacts/0033-editor-design-review/u35-sweep",
+  "compared": 29,
+  "identical": 27,
+  "results": [
+    {
+      "name": "account-dialog-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "account-saved-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "account-signed-in-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "agent-checking-normal-1440x874-agent.png",
+      "sameSize": true,
+      "size": [
+        720,
+        204
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "agent-error-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "asset-texture-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "bad-fixture-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "camera-rig-minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "camera-rig-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1408
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "context-menu-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "dock-console-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "dock-history-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "dock-paged-problems-minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 442,
+      "box": [
+        18,
+        66,
+        1827,
+        1285
+      ],
+      "clusters": [
+        {
+          "at": "0,1248",
+          "count": 165
+        },
+        {
+          "at": "32,1248",
+          "count": 153
+        },
+        {
+          "at": "0,1280",
+          "count": 57
+        },
+        {
+          "at": "32,1280",
+          "count": 45
+        },
+        {
+          "at": "1792,1184",
+          "count": 8
+        },
+        {
+          "at": "1824,1184",
+          "count": 8
+        },
+        {
+          "at": "1088,64",
+          "count": 1
+        },
+        {
+          "at": "1152,64",
+          "count": 1
+        },
+        {
+          "at": "1056,992",
+          "count": 1
+        },
+        {
+          "at": "1344,992",
+          "count": 1
+        },
+        {
+          "at": "1056,1024",
+          "count": 1
+        },
+        {
+          "at": "1344,1024",
+          "count": 1
+        }
+      ],
+      "mask": "dock-paged-problems-minimum-1000x650-diff.png"
+    },
+    {
+      "name": "empty-project-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "hierarchy-error-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "import-form-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1408
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "incompatible-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "native-character-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "native-malformed-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "native-rubble-parts-minimum-1000x650-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1090
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "native-rubble-parts-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-engine-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "no-selection-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 7,
+      "box": [
+        516,
+        1310,
+        2678,
+        1524
+      ],
+      "clusters": [
+        {
+          "at": "1056,1344",
+          "count": 2
+        },
+        {
+          "at": "512,1280",
+          "count": 1
+        },
+        {
+          "at": "928,1280",
+          "count": 1
+        },
+        {
+          "at": "512,1312",
+          "count": 1
+        },
+        {
+          "at": "928,1312",
+          "count": 1
+        },
+        {
+          "at": "2656,1504",
+          "count": 1
+        }
+      ],
+      "mask": "no-selection-normal-1440x874-diff.png"
+    },
+    {
+      "name": "project-error-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "project-loading-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "railing-parts-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1408
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "shortcuts-dialog-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "shortcuts-filter-minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    }
+  ]
+}

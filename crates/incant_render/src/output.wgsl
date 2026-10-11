@@ -1,6 +1,6 @@
 // Transfer/composition math. tone_map is supplied by Claude's look-dev snippet.
 @group(0) @binding(0) var scene: texture_2d<f32>;
-struct Output { backdrop: vec4f, rect: vec4f, radii: vec4f, canvas: vec4f }
+struct Output { backdrop: vec4f, rect: vec4f, radii: vec4f, canvas: vec4f, pixel_grid: vec4f }
 @group(0) @binding(1) var<uniform> display: Output;
 @vertex fn vertex(@builtin(vertex_index) index: u32) -> @builtin(position) vec4f {
     let positions = array<vec2f, 3>(vec2f(-1,-1),vec2f(3,-1),vec2f(-1,3));
@@ -11,7 +11,14 @@ fn srgb_encode(value: vec3f) -> vec3f {
         12.92*value, value<=vec3f(0.0031308));
 }
 @fragment fn fragment(@builtin(position) position: vec4f) -> @location(0) vec4f {
-    let hdr = textureLoad(scene,vec2i(position.xy),0);
+    var sample_position = position.xy;
+    var inside = true;
+    if display.pixel_grid.w != 0.0 {
+        sample_position = (position.xy - display.pixel_grid.xy) / display.pixel_grid.z;
+        inside = all(sample_position >= vec2f(0)) && all(sample_position < vec2f(textureDimensions(scene)));
+    }
+    var hdr = vec4f(0);
+    if inside { hdr = textureLoad(scene,vec2i(sample_position),0); }
     let coverage = clamp(hdr.a,0.0,1.0);
     // The HDR pass stores the scene over transparent black. Unpremultiply only
     // after all scene layers blend; keep display-referred editor colors outside

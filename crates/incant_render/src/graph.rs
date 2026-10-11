@@ -17,12 +17,14 @@ enum Pass {
     AssignLights,
     Shadows,
     Models,
+    Sprites,
     Display,
 }
 #[derive(Resource)]
 pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
     pub models: Option<ModelDraw>,
+    pub sprites: Option<crate::sprites::SpriteDraw>,
     pub output: OutputDraw,
 }
 #[derive(Resource)]
@@ -40,12 +42,14 @@ impl Default for FrameGraph {
             Pass::InitializeScene.before(Pass::Models),
             Pass::AssignLights.before(Pass::Models),
             Pass::Shadows.before(Pass::Models),
-            Pass::Models.before(Pass::Display),
+            Pass::Models.before(Pass::Sprites),
+            Pass::Sprites.before(Pass::Display),
         ));
         // Registration order is deliberately unrelated to dependency order.
         schedule.add_systems((
             display.in_set(Pass::Display),
             models.in_set(Pass::Models),
+            sprites.in_set(Pass::Sprites),
             shadows.in_set(Pass::Shadows),
             assign_lights.in_set(Pass::AssignLights),
             initialize_scene.in_set(Pass::InitializeScene),
@@ -107,5 +111,11 @@ fn display(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
 fn shadows(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
     if let Some(pass) = &frame.models {
         pass.shadows.encode(&mut encoder.0);
+    }
+}
+
+fn sprites(frame: Res<PreparedFrame>, mut encoder: ResMut<Encoder>) {
+    if let Some(pass) = &frame.sprites {
+        pass.encode(&mut encoder.0);
     }
 }

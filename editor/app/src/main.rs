@@ -163,7 +163,7 @@ fn main() {
                 ..Default::default()
             };
             let builder = tauri::window::WindowBuilder::from_config(app, &config)?
-                .title("Incant — Phase 0")
+                .title("Incant")
                 .inner_size(1440., 900.)
                 .min_inner_size(1000., 650.);
             #[cfg(target_os = "macos")]

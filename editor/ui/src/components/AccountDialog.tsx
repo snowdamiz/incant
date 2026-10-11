@@ -53,7 +53,7 @@ export function AccountDialog() {
   const [failure, setFailure] = useState<BridgeError | null>(null);
   const [confirmingSignOut, setConfirmingSignOut] = useState(false);
 
-  const stateKey = provider ? `${provider.status}:${provider.status === 'connecting' ? (provider.phase ?? '') : ''}` : 'none';
+  const stateKey = provider ? `${provider.status}:${provider.status === 'connecting' ? (provider.phase ?? '') : ''}:${provider.activeAccount ?? ''}` : 'none';
   // A new host state supersedes an earlier request failure and any pending sign-out question.
   useEffect(() => {
     setFailure(null);
@@ -140,9 +140,7 @@ export function AccountDialog() {
               setConfirmingSignOut={setConfirmingSignOut}
             />
           ) : (
-            <Status id="account-status" icon="plug" title="No engine connected">
-              Open a project from the Incant editor to sign in.
-            </Status>
+            <Status id="account-status">No engine connected. Open a project in the Incant editor to sign in.</Status>
           )}
         </div>
       </div>
@@ -173,53 +171,50 @@ function AccountBody({
   const signInAvailable = can('provider.connect');
   const showAccounts = accounts.length > 0 && provider.status !== 'connecting' && provider.status !== 'checking';
 
-  let status: ReactNode;
+  // One status line, then the accounts, then one row of actions. The account list is
+  // the identity: no headline repeats who is signed in.
+  let status: ReactNode = null;
   let actions: ReactNode = null;
+  let primary: ReactNode = null;
   let note: ReactNode = null;
   switch (provider.status) {
     case 'checking':
       status = (
-        <Status id="account-status" spinner title="Checking for a saved sign-in…">
-          This only takes a moment. The rest of the editor is ready to use.
+        <Status id="account-status" spinner>
+          Checking for a saved sign-in…
         </Status>
       );
       break;
     case 'not-connected':
       status = (
-        <Status id="account-status" icon="spark" title="Use the agent with your ChatGPT account">
+        <Status id="account-status">
           {!signInAvailable
             ? 'Signing in is not available from this editor build yet.'
             : accounts.length > 0
-              ? 'Sign in to one of your saved accounts, or continue with ChatGPT in your web browser.'
-              : 'Incant opens ChatGPT in your web browser. Approve access there, then come back here.'}
+              ? 'Sign in to a saved account, or continue in your browser.'
+              : 'Sign in to use the agent. ChatGPT opens in your browser.'}
         </Status>
       );
-      actions = (
-        <>
-          <ChatGPTButton available={signInAvailable && !busy} autoFocusTarget onClick={() => connect()} />
-          {accounts.length > 0 && signInAvailable ? (
-            <ActionButton icon="plus" onClick={() => connect({ add: true })} disabled={busy}>
-              Add another account
-            </ActionButton>
-          ) : null}
-        </>
-      );
-      break;
-    case 'connecting':
-      if (provider.phase === 'validating') {
-        status = (
-          <Status id="account-status" spinner title="Finishing sign-in…">
-            Confirming your ChatGPT account. This usually takes a few seconds.
-          </Status>
-        );
-      } else {
-        status = (
-          <Status id="account-status" spinner title="Continue in your browser">
-            ChatGPT sign-in is open in your default browser. Approve access there and Incant will finish automatically. You
-            never need to copy a code into the editor.
-          </Status>
+      primary = <ChatGPTButton available={signInAvailable && !busy} autoFocusTarget onClick={() => connect()} />;
+      if (accounts.length > 0 && signInAvailable) {
+        actions = (
+          <ActionButton icon="plus" onClick={() => connect({ add: true })} disabled={busy}>
+            Add another account
+          </ActionButton>
         );
       }
+      break;
+    case 'connecting':
+      status =
+        provider.phase === 'validating' ? (
+          <Status id="account-status" spinner>
+            Finishing sign-in…
+          </Status>
+        ) : (
+          <Status id="account-status" spinner detail="Approve access in ChatGPT; Incant finishes automatically.">
+            Continue in your browser
+          </Status>
+        );
       if (signedIn) {
         note = (
           <>
@@ -235,6 +230,7 @@ function AccountBody({
             </ActionButton>
           ) : null}
           <ActionButton
+            key="cancel-sign-in"
             onClick={() => void send({ type: 'provider.cancel' })}
             disabled={busy || !can('provider.cancel')}
             autoFocusTarget={provider.phase === 'validating'}
@@ -245,16 +241,13 @@ function AccountBody({
       );
       break;
     case 'connected':
-      status =
-        provider.method === 'api-key' ? (
-          <Status id="account-status" icon="check" tone="ok" title="Connected with an API key">
-            This key was set up from the command line, where you can also change it.
-          </Status>
-        ) : (
-          <Status id="account-status" icon="check" tone="ok" title="Signed in">
-            The agent uses <strong>{provider.accountLabel}</strong>.
-          </Status>
-        );
+      if (provider.method === 'api-key') {
+        status = <Status id="account-status">Connected with an API key, set up from the command line, where you can change it.</Status>;
+      } else {
+        // Keep the existing live node for asynchronous completion; the account list
+        // already shows this identity visibly.
+        status = <Status id="account-status" visuallyHidden>Signed in as {provider.accountLabel}</Status>;
+      }
       actions = confirmingSignOut ? null : (
         <>
           {provider.method === 'oauth' ? (
@@ -265,6 +258,7 @@ function AccountBody({
           {/* Never the initial focus: opening account settings must not put Enter on a
               destructive path. With no autofocus target here, focus starts on Close. */}
           <ActionButton
+            key="sign-out"
             icon="signOut"
             tone="danger"
             onClick={() => setConfirmingSignOut(true)}
@@ -279,8 +273,11 @@ function AccountBody({
       if (signedIn) {
         // A failed add or switch. The signed-in account is untouched; rows offer switching, this offers adding.
         status = (
-          <Status id="account-status" icon="error" tone="error" title="That didn't finish">
-            You are still signed in as <strong>{signedIn}</strong>.
+          <Status id="account-status" tone="error">
+            That didn't finish.{' '}
+            <span>
+              You are still signed in as <strong>{signedIn}</strong>.
+            </span>
           </Status>
         );
         actions = (
@@ -290,11 +287,11 @@ function AccountBody({
         );
       } else {
         status = (
-          <Status id="account-status" icon="error" tone="error" title="Sign-in didn't finish">
-            You can try again now.
+          <Status id="account-status" tone="error">
+            Sign-in didn't finish. You can try again now.
           </Status>
         );
-        actions = <ChatGPTButton available={signInAvailable && !busy} autoFocusTarget onClick={() => connect()} />;
+        primary = <ChatGPTButton available={signInAvailable && !busy} autoFocusTarget onClick={() => connect()} />;
       }
       break;
   }
@@ -305,15 +302,13 @@ function AccountBody({
       {provider.status === 'error' ? <ErrorNotice error={provider.error} /> : null}
       {failure ? <ErrorNotice error={failure} /> : null}
       {note ? (
-        <p className="account__message" role="note">
-          <Icon name="check" size={14} />
-          <span>{note}</span>
+        <p className="account__note" role="note">
+          {note}
         </p>
       ) : null}
       {provider.message ? (
-        <p className="account__message" role="note">
-          <Icon name="info" size={14} />
-          <span>{provider.message}</span>
+        <p className="account__note" role="note">
+          {provider.message}
         </p>
       ) : null}
       {showAccounts ? (
@@ -324,11 +319,12 @@ function AccountBody({
           onSwitch={(accountId) => void send({ type: 'provider.switch', accountId })}
         />
       ) : null}
+      {primary}
       {confirmingSignOut && provider.status === 'connected' ? (
         <div className="account__confirm" role="group" aria-labelledby="signout-question">
           <p id="signout-question">
             Sign out of <strong>{provider.accountLabel}</strong> on this computer? The agent stops working until you sign in
-            again. Other saved accounts stay listed.
+            again.
           </p>
           <div className="account__actions">
             <ActionButton tone="danger-solid" onClick={() => void send({ type: 'provider.disconnect' })} disabled={busy}>
@@ -342,55 +338,43 @@ function AccountBody({
         </div>
       ) : null}
       {actions ? <div className="account__actions">{actions}</div> : null}
-      <ul className="account__facts">
-        <li>
-          <Icon name="lock" size={14} />
-          <span>You stay signed in on this computer when you quit, restart or install a new build of Incant.</span>
-        </li>
-        <li>
-          <Icon name="info" size={14} />
-          <span>Your sign-in stays private to your user account on this computer and is never saved in your projects.</span>
-        </li>
-        <li>
-          <Icon name="plug" size={14} />
-          <span>Everything except the agent works offline, without an account.</span>
-        </li>
-      </ul>
+      {provider.status === 'not-connected' ? (
+        <p className="account__footnote">Your sign-in stays on this computer and is never saved in your projects.</p>
+      ) : null}
     </>
   );
 }
 
+/** The account's state in one line, with a spinner while working and an optional detail. */
 function Status({
   id,
-  title,
   children,
-  icon,
+  detail,
   spinner = false,
   tone = 'neutral',
+  visuallyHidden = false,
 }: {
   id: string;
-  title: string;
   children: ReactNode;
-  icon?: 'spark' | 'check' | 'error' | 'plug';
+  detail?: string;
   spinner?: boolean;
-  tone?: 'neutral' | 'ok' | 'error';
+  tone?: 'neutral' | 'error';
+  visuallyHidden?: boolean;
 }) {
   return (
-    <div id={id} className={`account__status account__status--${tone}`} role="status" aria-live="polite">
-      <span className="account__badge" aria-hidden="true">
-        {spinner ? <span className="spinner" /> : icon ? <Icon name={icon} size={18} /> : null}
-      </span>
-      <div>
-        <p className="account__headline">{title}</p>
-        <p className="account__body">{children}</p>
-      </div>
+    <div id={id} className={visuallyHidden ? 'visually-hidden' : `account__status account__status--${tone}`} role="status" aria-live="polite">
+      <p className="account__headline">
+        {spinner ? <span className="spinner spinner--small" aria-hidden="true" /> : null}
+        <span>{children}</span>
+      </p>
+      {detail ? <p className="account__detail">{detail}</p> : null}
     </div>
   );
 }
 
 function ErrorNotice({ error }: { error: BridgeError }) {
   return (
-    <div className="notice notice--error account__error" role="alert">
+    <div className="account__error" role="alert">
       <Icon name="error" size={14} />
       <span className="account__error-text">
         <span>{error.message}</span>
@@ -414,43 +398,35 @@ function AccountList({
   // Only a signed-in account is marked. Saved, signed-out registrations are listed for sign-in, never as active.
   const activeId = signedInLabel(provider) === null ? undefined : (provider.activeAccount ?? accounts[0]?.id);
   return (
-    <section className="account__list" aria-labelledby="accounts-title">
-      <h3 id="accounts-title" className="account__list-title">
-        Accounts on this computer
-      </h3>
-      <ul>
-        {accounts.map((account) => {
-          const active = account.id === activeId;
-          const verb = activeId === undefined ? 'Sign in' : 'Use';
-          return (
-            <li key={account.id} className={`account-row${active ? ' is-active' : ''}`} aria-current={active || undefined}>
-              <span className="account-row__avatar" aria-hidden="true">
-                {account.label.trim().charAt(0).toUpperCase() || '?'}
-              </span>
-              <span className="account-row__label" title={account.label}>
-                {account.label}
-              </span>
-              {active ? (
-                <span className="account-row__state is-signed-in">
-                  <Icon name="check" size={12} />
-                  In use
-                </span>
-              ) : (
-                <button
-                  type="button"
-                  className="button button--small account-row__switch"
-                  aria-label={`${verb} ${verb === 'Sign in' ? 'as ' : ''}${account.label}`}
-                  aria-disabled={!canSwitch || undefined}
-                  onClick={() => canSwitch && onSwitch(account.id)}
-                >
-                  {verb}
-                </button>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <ul className="account__list" aria-label="Accounts on this computer">
+      {accounts.map((account) => {
+        const active = account.id === activeId;
+        const verb = activeId === undefined ? 'Sign in' : 'Use';
+        return (
+          <li key={account.id} className={`account-row${active ? ' is-active' : ''}`} aria-current={active || undefined}>
+            <span className="account-row__avatar" aria-hidden="true">
+              {account.label.trim().charAt(0).toUpperCase() || '?'}
+            </span>
+            <span className="account-row__label" title={account.label}>
+              {account.label}
+            </span>
+            {active ? (
+              <span className="account-row__state">Signed in</span>
+            ) : (
+              <button
+                type="button"
+                className="button button--small account-row__switch"
+                aria-label={`${verb} ${verb === 'Sign in' ? 'as ' : ''}${account.label}`}
+                aria-disabled={!canSwitch || undefined}
+                onClick={() => canSwitch && onSwitch(account.id)}
+              >
+                {verb}
+              </button>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

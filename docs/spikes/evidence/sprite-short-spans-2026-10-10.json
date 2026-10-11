@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-10",
+  "renderer_baseline": "0494b40cf8fcc5e1ad0fc689655a62cb264a2f50",
+  "device": "Apple M5 Pro",
+  "backend": "Metal",
+  "os": "26.6",
+  "change": "64-source-texel retained geometry spans instead of 512; shader unchanged",
+  "before": {
+    "source_span": 512,
+    "cases": 2856,
+    "failing_cases": 95,
+    "interior_offsets_screen_pixels": [
+      0
+    ]
+  },
+  "after": {
+    "source_span": 64,
+    "cases": 5768,
+    "failing_cases": 0,
+    "outer_cases": 1400,
+    "interior_cases": 4368,
+    "interior_offsets_screen_pixels": [
+      -0.00390625,
+      0,
+      0.00390625
+    ],
+    "source_widths": [
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "magnifications": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      20,
+      28,
+      32,
+      36,
+      44,
+      48,
+      64,
+      96,
+      128
+    ],
+    "axes": [
+      "x",
+      "y"
+    ],
+    "flipped": [
+      false,
+      true
+    ]
+  },
+  "cost": {
+    "vertex_bytes": 64,
+    "max_vertices_theoretical_8192_square_nine_slice": 101400,
+    "max_vertex_bytes_theoretical": 6489600,
+    "total_retained_geometry_cap_bytes": 134217728,
+    "camera_independent": true,
+    "phone_performance_gate": false
+  },
+  "checks": {
+    "workspace_tests": 360,
+    "gpu_tests": 55,
+    "workspace_clippy": true,
+    "geometry_property_test": true
+  },
+  "source_sha256": {
+    "crates/incant_render/src/sprites/geometry.rs": "bb7a7c94d1e0f0958463c57de9a426d6105c432ae2be741e9070828a95d7cbd0",
+    "crates/incant_render/src/sprites/mod.rs": "c23ce2a0bad22d606d92e5dab709d433a0371f6c0f7ee18d5e2abe2cf57b2c45",
+    "crates/incant_render/src/sprites/sprite.wgsl": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+    "crates/incant_render/tests/sprites/wide.rs": "570300f3da218b6e493f01fb369ade5908f155068306dce379d142862e3c5719"
+  },
+  "rendered_acceptance": "Pending Claude Opus 5.5 Max review of the rebuilt candidate; no portability or native editor acceptance claimed"
+}

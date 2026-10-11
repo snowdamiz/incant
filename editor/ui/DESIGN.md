@@ -1,223 +1,348 @@
-# Incant editor design system, Phase 0 proposal (revision 2, "connected")
+# Incant editor design system, revision 5 ("plain")
 
-Status: proposal from handoff 0006 (Claude). Not approved. Revision 2 keeps revision 1's
-neutral palette and components, and replaces its floating "islands" with the connected
-panel structure of the landing-page product illustration, at the director's request.
-Tokens: `src/styles/tokens.css`. Styles: `src/styles/app.css`. Titlebar host contract:
-`TITLEBAR.md`. Native viewport: `NATIVE_VIEWPORT.md`.
+Status: proposal from handoff 0033 (Claude Opus 5.5, Max thinking). Not approved.
+Revision 5 keeps revision 4's connected frame, neutral palette, layout, rhythm and
+bounded rendering, and removes its ornament. The director rejected revision 4 as
+ornamental: explanatory paragraphs, a metadata row, a boxy account dialog, a card grid
+of keycaps, a long account pill, tinted icon tiles, glowing badges behind empty-state
+icons and accent edges. Revision 5 spends pixels only on content, state and
+interaction. Bounded rendering for large projects (PLAN.md revisions 4 and 5, ADR 0009)
+is unchanged.
+
+Tokens: `src/styles/tokens.css`. Styles, one file per area:
+
+| File | Covers |
+| --- | --- |
+| `base.css` | Reset, type, focus, buttons, badges, spinners, empty states, menus, fatal screens |
+| `shell.css` | Frame, titlebar, account button, notices, workspace grid, separators, panel chrome, search fields, viewport, status line |
+| `hierarchy.css` | Tree rows and the entity/asset kind tints |
+| `dock.css` | Output tabs, filters, pager, Problems, Console, History |
+| `inspector.css` | Inspector identity, problems, components, rows, value boxes, lists |
+| `agent.css` | Agent pane and composer |
+| `dialogs.css` | Dialog frame, keyboard shortcuts, ChatGPT account |
+| `assets.css` | Left-column tabs, asset list and asset details |
+
+Titlebar host contract: `TITLEBAR.md`. Native viewport: `NATIVE_VIEWPORT.md`.
 
 ## Principles
 
 1. **The viewport is the content.** Chrome is quiet neutral graphite. Colour is spent on
-   status, provenance and one periwinkle accent. The viewport is the largest region.
-2. **One frame, not cards.** Panels butt together and are divided by 1 px hairlines, as in
-   the landing-page illustration. There are no gutters, no rounded panel cards and no panel
-   shadows. Breathing room lives inside controls and rows, not between panels.
-3. **Calm, not empty.** Every panel has a designed loading, empty, error and "no engine"
-   state, each with a one-line explanation.
-4. **Honest, but quiet.** Fixture data and read-only limits are labelled as small chips with
-   full explanations in tooltips and screen-reader text. Unavailable actions stay focusable
-   and explain why.
-5. **Keyboard first.** Every action is reachable without a pointer. Focus is a ring and
-   selection is a fill.
+   status, provenance, kinds and one periwinkle accent.
+2. **One frame, not cards.** Panels butt together and are divided by 1 px hairlines.
+   Only floating things (dialogs, menus) have a surface of their own. Nothing is boxed
+   more than one level deep, and nothing is boxed for decoration.
+3. **No ornament.** No icon tiles, glows, badge discs, accent edges, illustrations,
+   gradients or entrance animations. An icon appears only beside the words it marks.
+4. **Say it once.** A fact appears in one place: the header line names what is shown,
+   a banner states the project's condition, a panel states only what is its own. No
+   sentence explains what the layout already shows. Spoken-only text (visually hidden)
+   keeps assistive tech complete where the screen no longer repeats a fact.
+5. **Identity costs no extra height.** What a panel shows is named in its header line.
+   Kind and stable ID are the header's accessible description, not a visible row.
+6. **Scan by column.** Labels in one column, values in another. Only real nested
+   objects indent.
+7. **Room to read, not padding for its own sake.** 28 px values 6 px apart; spacing
+   grows between groups, not inside them. Removed ornament is not replaced by air.
+8. **Honest, but quiet.** Read-only limits, unsupported fields and malformed values are
+   always shown, in words, without alarm colour unless the engine reports a problem.
+   Nothing claims a state it has not verified ("No problems" only after validation).
+9. **Bounded.** No panel mounts one element per item of a large collection.
+10. **Keyboard first.** Every action is reachable without a pointer. Focus is a ring and
+    selection is a fill. The window never scrolls; each panel scrolls its own content.
 
 ## Composition
 
 ```
-┌ titlebar 40 ── wisp Project [Sample data] ·· drag ·· ↶ ↷ │ ◧ ⬓ ◨ ·· drag ·· (● ChatGPT …) ⌨ ┐
-├──────────────┬──────────────────────────────────┬──────────────────────┤ ← one ruled header line
-│ Hierarchy 17 │ Viewport              ● Attached │ Inspector  Read-only │   (36 px, all three)
-├──────────────┼──────────────────────────────────┼──────────────────────┤
-│ filter       │                                  │ entity · id · copy   │
-│ tree         │   native surface (square hole)   │ components           │
-│              ├──────────────────────────────────┤──────────────────────┤
-│              │ Problems · Console · History     │ Agent                │
-│              │                                  │ composer             │
-├──────────────┴──────────────────────────────────┴──────────────────────┤
-└ status line 28 ─ source · problems · live messages ············ F6 · ? ┘
+┌ titlebar 40 ─ ◆ Project / Scene  Sample data ·· ↶ ↷  ◧ ⬓ ◨ ·············· Ⓢ ⌨ ┐
+├──────────────────┬──────────────────────────────┬─────────────────────────────┤ ← one ruled header line
+│ Hierarchy 25 Assets 7 │ Viewport ● Live         │ ▭ Close-up Camera      🔒 ⧉ │   (36 px, all three)
+├──────────────────┼──────────────────────────────┼─────────────────────────────┤
+│ ⌕ Filter      ⇕  │                              │ ▾ ✥ Transform               │ sticky 34 px headers
+│ ▾ ◈ Scene        │   native surface             │   Translation [X 0│Y 2│Z 10]│ 28 px values, 6 px apart
+│   ▸ ▢ Group      │                              │ ▾ ▭ Camera                  │
+│   ▣ Selected     ├──────────────────────────────┤   Projection [Perspective  Default]
+│   (windowed)     │ Problems 9  Console 5  History│ ...                         │
+│                  │ Errors 6  Warnings 2  Info 1 ├─────────────────────────────┤
+│                  │ ◈ Crate 03               ⓘ 1 │ ▾ ✧ Agent      ○ Not signed in │ collapsible
+├──────────────────┴──────────────────────────────┴─────────────────────────────┤
+└ status line 28 ─ ● source  ⓘ 6 ⚠ 2  live message ┘
 ```
 
-- **Frame:** the titlebar and status line use the canvas colour. The hierarchy, viewport
-  strip and dock use the panel colour. The inspector/agent column is one step lighter, as the
-  reference's inspector is. Hairlines separate everything.
-- **Separators** are 1 px opaque lines and are also the resize handles. Their drag target
-  extends 3 px into each neighbour. Hover lights them grey and focus lights them periwinkle.
-- **Titlebar:** identity sits at the start, the history and layout tool cluster is centred in
-  the window, and the account chip and help sit at the end. Empty space on either side is a
-  drag area. Window controls follow the platform (TITLEBAR.md).
-- **Header line:** the hierarchy, viewport and inspector headers share one 36 px height and
-  one bottom hairline, so a single ruled line crosses the window. Titles are quiet 13 px
-  muted labels, as in the reference.
-- **Collapsible panels:** the three layout toggles (and ⌥⌘1/2/3) hide the hierarchy, output
-  dock or inspector/agent column. The viewport takes the space.
-- **Defaults** (`src/shell/layout.ts`): hierarchy 17 % of width (232–296 px), inspector 23 %
-  (320–400 px), dock 27 % of height (160–340 px), agent 33 % (260–340 px). The viewport never
-  drops below 360 × 200.
-
-Measured in Chrome over the sample fixture (handoff 0006, `report.json`):
-
-| Window | Viewport host | Hierarchy width | Inspector width |
-| --- | --- | --- | --- |
-| 1000×650 | 446×369 | 232 | 320 |
-| 1280×800 | 726×479 | 232 | 320 |
-| 1440×900 | 862×552 | 245 | 331 |
+- **Defaults** (`src/shell/layout.ts`): hierarchy 17 % of width (232–296 px), inspector
+  25 % (340–420 px; 360 px at 1440 px), dock 27 % of height (160–340 px). The viewport
+  never drops below 360 × 200. The Inspector's minimum is 280 px.
+- **Agent pane.** Only an open, ready agent is a resizable pane with a separator
+  (default 33 % of height, 260–340 px). Otherwise the pane is as tall as its content:
+  a 36 px status line when collapsed, or the line plus one sentence when open.
+- **The window never scrolls.** `.app` contains and clips its descendants, and every
+  scroller is a containing block, so `scrollIntoView`, focus and visually hidden text
+  cannot shift the titlebar off screen.
 
 ## Color
 
-Dark only for Phase 0. Revision 2 returns to revision 1's neutral graphite after the director
-found the violet-tinted first pass "a bit too purple". Every pair below is enforced by
-`src/styles/tokens.test.ts`, which also checks that frame surfaces stay low-chroma. Pairs are
-re-checked in Chrome by axe-core `color-contrast`.
+Dark only. Every text pair is enforced by `src/styles/tokens.test.ts`, which also keeps
+frame surfaces low-chroma.
 
-| Role | Token | Value | Rule |
+| Role | Token | Value | Use |
 | --- | --- | --- | --- |
-| Canvas | `--color-bg-app` | `#0b0c0f` | titlebar, status line; equals the native window background |
-| Panel | `--color-bg-panel` | `#131418` | hierarchy, viewport strip, dock, dialogs |
-| Side column | `--color-bg-side` | `#17181c` | inspector and agent |
-| Raised | `--color-bg-raised` | `#1e2026` | fields on panels, chips, counts |
-| Well | `--color-bg-well` | `#0e0f12` | value fields and composer on the side column |
-| Hover | `--color-bg-hover` | `#24272e` | |
-| Selection | `--color-bg-selected` | `#262b52` | indigo-tinted pill, the one tinted surface |
-| Separator | `--color-border` | `#25282f` | opaque, so it stays solid over the native surface |
-| Text | `--color-text` / `-soft` | `#ececf1` / `#d3d6dd` | ≥ 4.5:1 on every surface |
-| Muted / subtle | `--color-text-muted` / `-subtle` | `#a9aeb9` / `#959cab` | ≥ 4.5:1 on every surface, incl. selection |
-| Accent | `--color-accent` | `#8c95ff` | selection, active tab underline, switches, agent wisp |
-| Focus | `--color-focus` | `#c3c8ff` | ring, ≥ 3:1 on every surface |
-| Control border | `--color-border-control` | `#676e7b` | ≥ 3:1 |
-| Status | danger / warning / success / info | `#ff7a70` / `#f0bd55` / `#5dd39a` / `#7ab8ff` | ≥ 4.5:1 |
-| Provenance | user / agent / script / import | blue / orchid / green / amber | always with a word |
+| Canvas | `--color-bg-app` | `#0b0c0f` | titlebar, status line, native window background, fatal screens |
+| Panel | `--color-bg-panel` | `#131418` | hierarchy, viewport strip, dock, dialogs, menus |
+| Side column | `--color-bg-side` | `#17181c` | Inspector and agent |
+| Raised | `--color-bg-raised` | `#1e2026` | value boxes, pressed filters |
+| Sunken | `--color-bg-sunken` | `#131418` | list wells, the grid map and value tables inside the side column |
+| Well | `--color-bg-well` | `#0e0f12` | raw values, composer |
+| Selection | `--color-bg-selected` | `#262b52` | the one tinted surface; avatars |
+| Accent | `--color-accent` | `#8c95ff` | tab underlines, switches, the chosen segment, mask cells, primary and send buttons, the Now line, agent mark |
+| Focus | `--color-focus` | `#c3c8ff` | 2 px ring, ≥ 3:1 everywhere |
 
-Colour is never the only cue: problems carry icons and counts, provenance carries a word,
-switches carry "On/Off", and axes carry letters.
+**Kind tints.** Meshes and models are neutral (`--color-kind-mesh: #b9c0cd`), so a long
+hierarchy reads calm; cameras (sky), lights (amber), scripts (warm orange), prefabs and
+textures (teal) and audio (pink) stand out. Icons always sit next to a name. Component
+marks in the Inspector are not tinted (revision 4's family colours are gone).
+
+**Status.** Danger, warning, info and success colour icons, counts and words; they never
+fill a decorative surface. Text, icons and counts always carry the meaning too.
 
 ## Typography
 
-Inter Variable for the UI and JetBrains Mono Variable for ids, paths, numbers and code. Both
-are bundled locally, so nothing is fetched from a network.
+Inter Variable for the UI and JetBrains Mono Variable for numbers, IDs, paths and raw
+values. Both are bundled locally.
 
-- 13 px default and 12 px minimum for content. Status-line key hints use 11 px; that is the
-  measured minimum.
-- 13 px muted medium for panel titles, 14 px for inputs, chat and state titles, 15 px for the
-  inspected entity name, 16 px for dialog titles, 20 px for full-screen errors.
-- Sentence case with −0.011 em tracking. Weights are 420, 530 and 620. Tabular numerals are
-  used for counts and values.
+- 13 px default UI text; 12 px for labels, values, meta and captions. 12 px is the
+  minimum everywhere.
+- Numbers are monospace, so a unit can follow its number at an exact width (`ch`).
+- Sentence case. Weights 420, 530 and 620. Dialog titles 14 px; fatal titles 16 px.
 
-## Space and size
+## Shell
 
-- Spacing follows a 4 px grid.
-- Rows are 28 px, fields 28 px, panel headers and the dock tab strip 36 px, the titlebar 40 px
-  (the native traffic lights are centred for it) and the status line 28 px.
-- Separators are 1 px with a 7 px drag target. Tree indent is 14 px.
-- Radii are 4 and 6 px for chips and controls, and 8 px for the composer. The dialog uses 12 px.
-  Panels and the viewport are square.
+**Titlebar (40 px).** Product mark, then a breadcrumb: the project name (the page's
+`h1`) and, when the project shows one scene whose name differs from the project's, a
+slash and the scene's name ("N scenes" for several). A sample project adds "Sample data"
+as plain amber words. History and panel toggles are two plain groups; a pressed toggle
+is filled. The account is one 28 px button showing only the signed-in account's initial
+in a ringed avatar, or a profile glyph when nobody is signed in; a small corner dot
+marks signing in (amber) or a sign-in problem (red). Its accessible name says the state
+("ChatGPT account, signed in as …") and its tooltip adds an error's message. Keyboard
+shortcuts is the last button.
 
-## Components
+**Left column.** "Hierarchy" and "Assets" are tabs in the header line with plain
+counts. The search field has a leading icon and a live match count.
 
-- **Titlebar:** a 16 px wisp, then the project name. On macOS the logo box starts at 86 pt, so
-  the glyph sits 15 pt after the green traffic light and is centred on the light row. The
-  hairline below is an inset shadow so content centres on the full 40 px bar. Layout toggles
-  are bright when their panel is shown and recede with a faint outline when hidden. The
-  ChatGPT chip is a raised 26 px button like the reference's Play button.
-- **Hierarchy:** 28 px rows inset 8 px from the panel edge, with one hairline indent guide per
-  ancestor level. Resting names use the soft text colour. Selection is the indigo pill with
-  full-white medium text. Problem marks are an unboxed icon and count, and collapsed parents
-  show a dot for problems inside.
-- **Inspector:** the identity block shows the kind tile, entity name, kind · ULID and copy-ID.
-  "Read-only" is a quiet lock chip in the header. Components are disclosure rows separated by
-  hairlines, with fields in a 34/66 label/value grid. Long labels wrap to a second line at
-  16 px leading and truncate only on a third, so names like "Rotation degrees" stay readable
-  in the fixed-width column. Values sit in recessed 28 px wells with
-  prefixes and suffixes inside: axis letters, link icons, swatches and units.
-- **Output dock:** text tabs with a 2 px periwinkle underline on the active tab and counts in
-  small raised boxes. Console level filters and history undo/redo are chips.
-- **Viewport:** a quiet dotted field with a vignette and a centred tile explaining the state.
-  With a surface attached, the hole is transparent and square. It reports corner radii
-  `[0, 0, 0, 0]`, so the native surface needs no corner mask. Only the strip above it is painted.
-- **Agent:** a periwinkle wisp mark and one honest sentence. The composer is a recessed
-  rounded field with the send button inside, and it stays disabled while the bridge cannot
-  send. No transcript is ever invented.
-- **ChatGPT account (handoff 0003):** unchanged in behaviour. A 460 px modal has one status
-  row, host errors verbatim with their code, saved accounts with "In use" only for the signed-in
-  one, actions, and three facts. No field ever accepts a token, code or key. Initial focus is
-  never destructive: when signed in, the dialog opens on Close, and the inline sign-out question
-  opens on "Keep signed in".
-- **Notices:** absent, opening and failed states show as one full-width strip under the
-  titlebar. A failure uses an alert role and is the only place its full text and code appear.
-  `project.*` codes read "The project could not be opened."; other codes read "Lost connection
-  to the editor process." Reopening is the retry path, and the strip says so once.
-- **Project states (handoff 0009):** while the project opens, nothing claims a result. The
-  titlebar and the strip say "Opening project…". The hierarchy shows its skeleton, and the
-  inspector, Problems and History show a spinner tile. The viewport pill reads "Waiting", and
-  the status bar hides its error and warning counts. When the open fails, the hierarchy,
-  viewport, inspector and History say "No project loaded" in one short line. Problems lists
-  the engine's diagnostic. Without one, it says "Not validated", never "No problems". Saved
-  account metadata in the titlebar chip stays visible in every project state.
-- **Asset library (handoff 0010, revision 4).** Assets are content navigation, not output,
-  so they live in the left column as a second view beside the Hierarchy. Problems, Console
-  and History keep the bottom dock to themselves.
-  - **Left column.** The header is a two-tab switcher, "Hierarchy" and "Assets", each with a
-    count, in the dock-tab style.
-  - **Asset list.** A filter and an Import button sit above the list. Assets are grouped
-    under their source folder, and long folders keep their last segments, such as
-    "…/surfaces/wood/". Rows reuse the hierarchy's 28 px pill: a kind icon, the name, and
-    for textures a quiet interpretation tag on the right.
-  - **Inspector.** It follows the left column. Hierarchy shows entity components, and Assets
-    shows the selected asset or the import form, so "pick on the left, inspect on the right"
-    holds everywhere. Asset details use the entity identity block, then sections for
-    Source, Interpretation, Reimport and a collapsed Identifiers disclosure.
-  - **Import form.** It sits in the Inspector, with a pinned action row at the bottom.
-  - **Notices.** A running or failed import shows one line under the list toolbar, wherever
-    the Inspector is. The Assets tab also carries a spinner or a red dot. The full error
-    stays in the Inspector until it is dismissed or retried. The cooking note reads "You
-    can keep working. Editing now means retrying the import." There is never a percentage
-    or a cancel control.
-  - **Leaving the asset list.** Revealing a problem from the dock returns the left column
-    to the Hierarchy. Styles live in `src/styles/assets.css`.
+**Status line (28 px).** The source (with a tone dot), a problems button (only the
+counts that exist, or a green check and "No problems" once the project is validated;
+nothing while it opens or after it fails without diagnostics) and the live message. No
+key hints: the shortcut reference is one keystroke or one titlebar button away.
+
+**Banner.** A one-line strip under the titlebar only when the engine is absent, the
+project is opening, or it failed. It is the one place the project's condition is stated
+in full; panels show a short state of their own (or, while opening, keep it spoken-only).
+
+## Viewport
+
+The header says Live, Not attached, Waiting, Error or No engine with a tone dot. The
+empty area shows only what the header does not: the host's reason or a render error's
+message, in one quiet paragraph. No illustration, grid or vignette.
+
+## Hierarchy
+
+Flat ARIA tree, 28 px rows. The scene row is a heading weight; the selected row is the
+indigo pill (no accent edge). Problem counts sit at the trailing edge.
+
+**Context menu** (right-click, Shift+F10 or the Menu key): Rename (F2), Copy ID, Delete
+(⌘⌫ on macOS, Delete elsewhere; danger). Shortcut labels are plain text in the
+platform's notation. Items the bridge cannot do stay focusable, are marked unavailable
+and explain why instead of acting; Delete runs through the command bus. Copy ID (here
+and the Inspector's copy button) is marked unavailable, with the reason, where the
+runtime has no clipboard, and a refused write is announced; neither fails silently.
+Roving focus, arrows, Home/End, Enter/Space and Escape (focus returns to the row).
+
+## Inspector
+
+**Header line (36 px).** When something is inspected, the panel's header line names it:
+the kind's glyph in its tint (no tile), the name (13 px semibold, ellipsis, full name in
+the tooltip) and trailing marks: a lock glyph meaning read-only (tooltip "Read-only:
+values can be inspected but not edited yet", spoken "Read-only") and the Copy ID button.
+The kind and the stable ID are the name's accessible description. There is no meta row.
+The visible "Inspector" title returns when nothing is inspected; the panel's accessible
+name is always "Inspector". Assets and the import form use the same line.
+
+**Assets by source type.** The list tags an ordinary image with its interpretation
+(Color, Linear, Normal map) and a sprite atlas (`.atlas.json`) with "Atlas"; models and
+audio are icon-only, their kind spoken. Details are Source, Interpretation, Reimport and
+Identifiers: an image's interpretation is a choice, an atlas shows its saved value in a
+plain value box ("Sprite atlases are always color"), and audio has no Interpretation.
+Import rows name their type in quiet text under the path ("Model", "Color atlas", "WAV
+audio", "OGG audio"); image rows show the interpretation choice instead.
+
+**Problems on the entity.** A plain list under the header: each line is the severity
+icon, the engine's message, then where it is (the component name and the exact path in
+quiet monospace, as a link that focuses the field). Paths wrap after slashes.
+
+**Components.** Hairline-separated sections (none above the first) with 34 px sticky
+headers: chevron, the component's icon in quiet grey, the display name and problem
+counts as coloured icon and number. Display names come from the schema title when it has
+words, otherwise from the profile or by splitting the identifier. The type ID is in the
+tooltip and the section's accessible description.
+
+**Rhythm.** Values are 28 px tall and 6 px apart. Captioned runs (Collider: Material,
+Collision) start 10 px below the previous row with a caption and a trailing hairline.
+Component bodies end with 16 px of air.
+
+**Rows.** A label column of `clamp(88px, 32cqi, 168px)` of the component's width, an
+8 px gap, and the value column. Labels are muted 12 px, wrap to two lines and clamp at a
+third. A vector that wraps (a quaternion's X Y / Z W) keeps its label on its first line.
+Field descriptions and union variant notes are the row's tooltip and spoken description,
+not a visible help line.
+
+**Nesting.** Only real nested objects (NavigationMesh build settings, script props)
+indent 12 px with a guide line, and narrow their label column by the same step, so value
+columns align. A union's variant fields continue under the selector at its own depth.
+
+**Value boxes.** Quiet raised boxes (28 px, radius 5) with no border; focus draws the
+ring. Units follow the number. Status words ("Default", "Unused") sit at the trailing
+edge as plain quiet text. Unset optional values are an outline with "Not set" or "Off".
+A stable ID (a part's own ID) is metadata: an outline and muted text instead of a fill.
+Union selectors can lead with a glyph (collider box, sphere, capsule, compound).
+
+**Errors.** An invalid value tints its box and draws a red hairline; a whole invalid
+vector (a non-unit quaternion) tints every cell and outlines the box once.
+
+**References.** An ID that exactly matches a project asset or entity shows that thing's
+icon and name, then the authored ID in quieter monospace; the name is also spoken.
+
+**Notices.** A value, field or component that cannot be presented as its schema says
+shows a warning icon, one sentence and the raw JSON in a well. No dashed box or tint.
+
+**Lists of records** (compound parts, navigation sources and links) are one Tab stop:
+a header with the name and count on the left and the breakdown on the right ("Parts 64
+… 39 box, 13 sphere, 12 capsule"; the full sentence is spoken), a sunken well of 26 px
+rows (index, glyph, tag, compact values, problem mark) and, below a hairline, the
+selected item: "Part 42 of 64" (its document path is the tooltip and spoken), then its
+fields at the list's own depth. No paragraph explains what a compound is.
+
+**Long number lists.** A grid of costs with a matching width × height draws as a pixel
+map with a legend and a "Show values" disclosure; values open in a bounded, focusable
+table. String lists are a bounded list of read-only boxes.
+
+## Output dock
+
+Text tabs with plain counts (red for errors). Each view starts with a 40 px toolbar.
+
+**Pages.** The bridge caps none of these lists and their rows wrap to their full text, so
+each view mounts at most one page of 100 rows. When a list is longer, the toolbar's
+trailing edge says which slice is shown ("101–200 of 20,000") with first, previous,
+next and last page buttons (at an end they stay focusable and are marked disabled). A
+chosen page is announced from the pager itself (the status line does not repeat the
+range) and starts at its top. Nothing is hidden: every entry is one page away, filters
+count every entry, and a list that fits one page shows no pager at all.
+
+- **Problems.** Severity filters (Errors, Warnings, Info, with counts) are flat toggles:
+  pressed is filled with a coloured icon, released is quiet text. Problems are grouped by
+  entity, worst first, project-level problems last; each group has a heading with the
+  entity's kind icon, name and counts, and each row the severity icon, the message, and
+  "Component · /path" in monospace, wrapping under the message when space runs out. All
+  filtered out, and validated with nothing to report, are distinct states. A group that
+  spans pages repeats its heading followed by "continued", keeps its whole-group counts,
+  and ends with "312 more problems on Crate 03 on the next pages". A filter change
+  returns to the first page.
+- **Console.** Time, level as a coloured word (info, warn, error, debug), source and
+  message, with level filters; debug is hidden by default. No row tints. It opens on the
+  newest page and follows it as messages arrive; another page stays put (only its total
+  grows) until **Newest** returns to the end.
+- **History.** Oldest first: the description, the origin as a coloured word (User,
+  Agent, Script, Import), the model or script, and the time in a fixed last column. A
+  hairline marked "Now" separates applied edits from those Redo would restore; undone
+  edits are struck through and say "(undone)". The toolbar has Undo, Redo (tooltips give
+  the platform's keys) and "4 of 5 applied". The list is a keyboard stop so it can
+  scroll. It opens on the page that holds Now and follows it; **Now** returns there.
+
+## Agent pane
+
+The header is a disclosure: chevron, wisp mark, "Agent", and a status with a dot
+(Ready, Working…, Signing in…, Sign-in problem, Unavailable, Not signed in, No engine).
+
+- **Ready:** transcript (one line: "Describe a change. Every edit lands in History and
+  can be undone.") and composer, in a resizable pane.
+- **Cannot run:** one sentence (why, or the host's reason) and its single next step.
+  A reason that names an internal milestone is shown in plain words ("The agent is not
+  available in the editor yet.") without a sign-in invitation that would not help.
+- **Collapsed:** the 36 px status line. A window shorter than 720 px starts collapsed.
+
+## Dialogs
+
+Floating surfaces: 10 px radius, a dim scrim without blur, no entrance animation, focus
+trapped, Escape closes and focus returns to the opener.
+
+- **Keyboard shortcuts.** One searchable reference table, 600 px wide. The header holds
+  the title, the filter (focused on open; it matches actions, groups and key names,
+  shows "N of M", and Escape clears it before closing) and Close. Sections (General,
+  Hierarchy, Panels and layout, Lists, assets and inspector, Agent) are caption rows;
+  each row is the action (with a quiet "where" when needed) and, right-aligned, the
+  current platform's keys as plain text: "⇧⌘Z" on macOS, "Ctrl+Shift+Z" elsewhere, "or"
+  between alternatives and "/" between paired directions. Hairlines between rows; no
+  cards, caps or icons. Every listed key is implemented, and each combination is also
+  spoken in words.
+- **ChatGPT account.** 420 px. One status line only where the state needs words
+  (checking, signed out, browser step, error); the accounts on this computer as plain
+  rows between hairlines (avatar, label, "Signed in" for the active account, or a small
+  Use / Sign in button); one row of actions (Add another account; Sign out at the
+  trailing end, in danger colour). Sign-out asks inline and focuses "Keep signed in".
+  The signed-out state adds the "Continue with ChatGPT" button and one footnote: "Your
+  sign-in stays on this computer and is never saved in your projects." No status card,
+  badge, section label or list of facts.
+
+## States
+
+Every panel has loading, empty, error and "no engine" states, each one quiet title
+(13 px, muted) with a detail line only where it carries information (an error message,
+the host's reason). An icon appears inline before the title only for errors and
+warnings; work in progress shows a small spinner. No badge disc or pictogram. Wrapped
+titles stay centred with their mark on the first line. While a project opens, the banner
+says so once; the Inspector, viewport and dock keep "Opening project…" spoken-only, and
+the hierarchy shows skeleton rows. **Fatal screens** (an incompatible bridge, an unknown
+fixture) are plain text on the canvas: an error icon and the problem as the page's `h1`,
+what happened in one sentence, and what to do next; valid fixture names are listed in
+monospace.
+
+## Bounded rendering
+
+Long collections mount only what is near their scroll position (`src/shell/windowing.ts`):
+
+| Collection | Row | Always mounted | Keyboard |
+| --- | --- | --- | --- |
+| Hierarchy tree | 28 px, flat ARIA tree with level, position and set size | active row, renaming row | arrows, Home/End, Page Up/Down, type-ahead |
+| Asset list | 26 px folder label, 28 px row | each visible folder's label, active row | arrows, Home/End, Page Up/Down |
+| Record lists | 26 px | selected item | arrows, Home/End, Page Up/Down |
+| Value table | 22 px rows; grid columns too | — | scroll keys in the focused box |
+| String list | 26 px, windowed above 48 items | — | Tab through boxes |
+| Problems, Console, History | wrapping rows, 100 per page | the page's rows only | Tab through rows and the pager; lists scroll with keys |
+
+Keyboard moves to an unmounted item reveal it first, measure the scroller at once, and
+then focus it after React commits, so the rows around the target mount in the same
+render. Scroll and resize notifications are coalesced on an animation frame with a
+100 ms timer fallback, because WebKit throttles frames for hidden or occluded views.
+A rename stays mounted and keeps focus while its row scrolls out of view.
 
 ## Focus and keyboard
 
-- Focus ring: 2 px `--color-focus` (`:focus-visible`), inset inside lists and islands so
-  it is never clipped. Field boxes ring on `:focus-within`.
-- Keyboard modality (handoff 0009): WebKit draws no `:focus-visible` ring when script moves
-  focus after a key press. `src/shell/inputModality.ts` sets `data-focus-visible` on the
-  focused element while the last input was a key without ⌘, Ctrl or Alt. A pointer press
-  clears it. `:focus-visible` rules have `[data-focus-visible]` twins. Keyboard behavior
-  is covered by interaction tests and pixel review. A keyboard-opened dialog rings Close. A pointer-opened dialog
-  focuses Close without a ring, as before.
-- F6 / Shift+F6 cycle visible panels (hidden panels are skipped). Hierarchy is an ARIA
-  tree with roving tabindex, type-ahead, F2 rename, Delete. Tabs use arrow keys. The left
-  column's Hierarchy and Assets switcher is a tab list, so arrows move between the views.
-  The asset list is an ARIA listbox grouped by folder, with a roving tabindex. Arrows, Home
-  and End move the selection, and the Inspector follows it. Enter or Space moves focus to
-  the asset's name in the Inspector, ⌘/Ctrl+F filters, and Escape in the Inspector returns
-  to the row. Shift+Enter in a path field adds a row. A paste of several lines adds one row per
-  line. If the field was empty or wholly selected, the first line replaces it.
-  Dividers are `separator`s resizable with arrows (Shift = 64 px). `?` opens the
-  shortcut list (modal, focus trapped, Escape returns focus). A skip link is first.
+- Focus ring: 2 px `--color-focus` (`:focus-visible` and its `[data-focus-visible]`
+  twin for WebKit script focus). Value boxes ring on `:focus-within`; vector cells, list
+  rows and menu items ring inside their box.
+- F6 / Shift+F6 cycle visible panels; `?` or ⌘/ opens the shortcut reference.
 
 ## Motion
 
 90 ms / 160 ms on hover, disclosure, switch and divider highlight; none under
-`prefers-reduced-motion`.
-
-## Revision 2 vs. revision 1
-
-| Area | Revision 1 "islands" (`handoffs/0006-connected-editor/screenshots/before/`) | Revision 2 "connected" (`screenshots/after/`) |
-| --- | --- | --- |
-| Frame | Rounded 10 px cards on a canvas, 6 px gutters | One frame; panels butt together with 1 px hairlines |
-| Headers | 40 px, semibold white titles, uneven lines | One 36 px ruled line across all three columns; quiet muted titles |
-| Titlebar | Tools pushed right; logo, slash, name | Centred tool cluster; logo and name; 15 pt clear of the lights |
-| Inspector column | Same surface as other cards | One step lighter, like the reference; fields in recessed wells |
-| Dock | Pill tabs | Underlined text tabs |
-| Agent | Gradient spark tile | Periwinkle wisp mark |
-| Viewport | Rounded bottom corners, GPU corner mask | Square and flush; zero radii |
-| Palette | Neutral graphite | Same graphite (a violet-tinted pass was rejected as too purple) |
+`prefers-reduced-motion`. Spinners, skeleton shimmer and the agent's signing-in dot are
+the only continuous motion, and they stop under reduced motion.
 
 ## Open design questions
 
 - No light theme and no forced-colors (Windows high contrast) theme yet.
-- There is no application menu (File/Edit/View) on Windows/Linux. See TITLEBAR.md.
-- Long entity names with two problem marks still truncate at 1280 px in the default
-  240 px hierarchy.
-- No measured platform performance budgets were supplied for the webview. See the
-  handoff 0006 result for the current bundle sizes.
+- No application menu (File/Edit/View) on Windows/Linux. See TITLEBAR.md.
+- Editing: value boxes are shaped for future editing, but every field is read-only
+  until the bridge offers a component command.
+- Live runtime values during play (PLAN.md 2.6) will need a visible distinction from
+  authored values; nothing in this revision implies play is available.
+- Engine messages number compound parts from 0 ("compound part 41") while the Inspector
+  numbers them from 1 ("Part 42 of 64"); the message text comes from Rust validation.

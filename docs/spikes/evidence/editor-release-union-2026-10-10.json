@@ -1,0 +1,91 @@
+{
+  "head": "a20d258ba75fd00b2c8bea91cf71de8bead78370",
+  "logs": [
+    {
+      "name": "workspace",
+      "path": "/tmp/incant-editor-plain-union-workspace.log",
+      "sha256": "139d5a4f7c4dadebee79771b315ae28206d3c967ae4f0637203507fa652f4bf0",
+      "passed": 451,
+      "results": 138,
+      "finished": [
+        "Finished `release` profile [optimized] target(s) in 4m 18s"
+      ]
+    },
+    {
+      "name": "gpu",
+      "path": "/tmp/incant-editor-plain-union-gpu.log",
+      "sha256": "07feb7fa004073bf920a6f6ad7ffacde87f131c653f48036c53d0699fb75724c",
+      "passed": 56,
+      "results": 138,
+      "finished": [
+        "Finished `release` profile [optimized] target(s) in 0.50s"
+      ]
+    },
+    {
+      "name": "clippy",
+      "path": "/tmp/incant-editor-plain-union-clippy.log",
+      "sha256": "776a3210702a4c96e9547f3966009975a60460ca6a52893031a46b696c364eb3",
+      "passed": 0,
+      "results": 0,
+      "finished": [
+        "Finished `release` profile [optimized] target(s) in 1m 01s"
+      ]
+    },
+    {
+      "name": "native",
+      "path": "/tmp/incant-editor-plain-union-native.log",
+      "sha256": "d4422e698d4b59a78333409dd07a59ccfba147648f53a9b7de3c99bcce181c36",
+      "passed": 0,
+      "results": 0,
+      "finished": [
+        "Finished `release` profile [optimized] target(s) in 45.50s"
+      ]
+    },
+    {
+      "name": "ui-tests",
+      "path": "/tmp/incant-ui-atlas-union-tests.log",
+      "sha256": "cf860a81ad26932e28f6eba2510a09e03593946b4a3496145d987ac6fd4aa1f8",
+      "tests": [
+        "503"
+      ],
+      "build_completed": false
+    },
+    {
+      "name": "ui-build",
+      "path": "/tmp/incant-ui-atlas-union-build.log",
+      "sha256": "aaa5356391eddacc80cefd67bdc93ce97d0e366ebea4b9b47f32be28b14508d5",
+      "tests": [],
+      "build_completed": true
+    }
+  ],
+  "plan_union_head": "65129c86a6d0b5066cf9cf2b2ec89f04c73d71be",
+  "plan_authored_commit": "8fe00eca7bed7af4b664ce7131aa9707b8fbdce9",
+  "plan_union_production_source_unchanged": true,
+  "source_objects": {
+    "editor/ui": "5b13ad49138676647a9a54ca55c5754397d527a1",
+    "editor/app": "b9add18c28aa6b5718dd3ff84f46900ff2c503d3",
+    "editor/bridge": "4dca211275642510f0e03cf8e9774c857a953a95",
+    "crates": "76662041fdad5aedcd1d8707dfe4796053c45a01",
+    "sdk": "bfa5e87a5dc39d6680810c9265161f3a9b433617",
+    "schemas": "0c1743775c5cc4b20504d06715edd183fa891c1b",
+    "Cargo.toml": "d606b1a673950fb4be1c56a64328277befcaf5d6",
+    "Cargo.lock": "f6f3f870b307cfdf4e08ecaad77bf796b3dd90d2"
+  },
+  "native_binary": {
+    "path": "target/release/incant_editor",
+    "bytes": 37032704,
+    "sha256": "03f02e90c9527780b5affc842a8d3e89a4ecf3c937cd982ef7e7073f4ebee50f",
+    "visual_acceptance": false
+  },
+  "post_plan_checks": {
+    "tools_tests": 40,
+    "generated_conventions": "pass",
+    "generated_bridge": "pass",
+    "diff_whitespace": "pass"
+  },
+  "limitations": [
+    "The current native binary was built but not opened/reviewed. The running0d14f4f preview is older.",
+    "The logs are local functional/build evidence, not reference-device or phase-gate evidence.",
+    "Final Claude rendered union review and hosted integrated-head checks remain pending."
+  ]
+}

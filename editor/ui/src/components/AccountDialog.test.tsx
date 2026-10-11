@@ -55,18 +55,38 @@ async function expectNoAxeViolations(container: HTMLElement) {
 }
 
 describe('ChatGPT account dialog', () => {
-  it('signed out: offers Continue with ChatGPT, explains retention and starts browser sign-in', async () => {
+  it('keeps one polite live status through browser wait, validation and OAuth completion', () => {
+    const { bridge, publish } = providerBridge(PROVIDER_FIXTURES.browser);
+    renderBridge(bridge);
+    const d = openDialog();
+    const status = within(d).getByRole('status');
+    expect(status.getAttribute('aria-live')).toBe('polite');
+    expect(status.textContent).toContain('Continue in your browser');
+    publish(PROVIDER_FIXTURES.validating);
+    expect(within(d).getByRole('status')).toBe(status);
+    expect(status.textContent).toContain('Finishing sign-in');
+    publish(PROVIDER_FIXTURES['signed-in']);
+    expect(within(d).getByRole('status')).toBe(status);
+    expect(status.textContent).toBe('Signed in as ada@example.com');
+    expect(status.classList.contains('visually-hidden')).toBe(true);
+    expect(d.contains(document.activeElement)).toBe(true);
+    expect(document.activeElement).not.toBe(within(d).getByRole('button', { name: 'Sign out' }));
+    expect(document.activeElement).toBe(within(d).getByRole('button', { name: 'Close' }));
+  });
+
+  it('signed out: offers Continue with ChatGPT, says where the sign-in is kept, and starts browser sign-in', async () => {
     const { bridge, requests } = providerBridge(PROVIDER_FIXTURES['signed-out']);
     renderBridge(bridge);
-    expect(chip().textContent).toContain('Sign in');
+    // The titlebar shows a profile glyph only; its name carries the state.
+    expect(chip().getAttribute('aria-label')).toBe('ChatGPT account, not signed in');
+    expect(chip().textContent).toBe('');
     const d = openDialog();
     const cta = within(d).getByRole('button', { name: 'Continue with ChatGPT' });
     expect(document.activeElement).toBe(cta);
-    expect(within(d).getByText(/stay signed in on this computer when you quit, restart or install a new build of Incant/)).toBeTruthy();
-    expect(within(d).getByText(/private to your user account on this computer and is never saved in your projects/)).toBeTruthy();
+    // One footnote replaces the list of facts.
+    expect(within(d).getByText('Your sign-in stays on this computer and is never saved in your projects.')).toBeTruthy();
     // No storage implementation details or OS permission prompts are promised or described.
     expect(d.textContent).not.toMatch(/may ask|keychain|permission|encrypt/i);
-    expect(within(d).getByText(/works offline, without an account/)).toBeTruthy();
     await expectNoAxeViolations(document.body);
     fireEvent.click(cta);
     await waitFor(() => expect(requests).toEqual([{ type: 'provider.connect', method: 'oauth' }]));
@@ -110,7 +130,9 @@ describe('ChatGPT account dialog', () => {
     publish(PROVIDER_FIXTURES['signed-in']);
     expect(within(d).getByText('Signed in')).toBeTruthy();
     expect(d.contains(document.activeElement)).toBe(true);
-    expect(chip().textContent).toContain('ada@example.com');
+    // The avatar shows the initial; the name carries the account.
+    expect(chip().textContent).toBe('A');
+    expect(chip().getAttribute('aria-label')).toBe('ChatGPT account, signed in as ada@example.com');
   });
 
   it('signed in: keyboard focus never starts on a destructive action', async () => {
@@ -150,7 +172,7 @@ describe('ChatGPT account dialog', () => {
     const d = openDialog();
     const active = d.querySelector('[aria-current="true"]')!;
     expect(active.textContent).toContain('studio@example.org');
-    expect(active.textContent).toContain('In use');
+    expect(active.textContent).toContain('Signed in');
     fireEvent.click(within(d).getByRole('button', { name: 'Use ada@example.com' }));
     await waitFor(() => expect(d.getAttribute('aria-busy')).toBeNull());
     fireEvent.click(within(d).getByRole('button', { name: 'Add another account' }));
@@ -176,10 +198,41 @@ describe('ChatGPT account dialog', () => {
     await expectNoAxeViolations(document.body);
   });
 
+  it('recovers focus after a connected-to-connected account switch so Escape still closes', async () => {
+    const initial = PROVIDER_FIXTURES['signed-in-multi'];
+    const { bridge, requests, publish } = providerBridge(initial);
+    renderBridge(bridge);
+    const d = openDialog();
+    const useAccount = within(d).getByRole('button', { name: 'Use ada@example.com' });
+    useAccount.focus();
+    // Activation of the focused button models Enter; publish the native host's
+    // connected-to-connected result after the request has been accepted.
+    fireEvent.click(document.activeElement as HTMLElement);
+    await waitFor(() => expect(requests).toEqual([{ type: 'provider.switch', accountId: 'acct-fixture-1' }]));
+    publish(simulateProvider(initial, { type: 'provider.switch', accountId: 'acct-fixture-1' }));
+    expect(within(d).queryByRole('button', { name: 'Use ada@example.com' })).toBeNull();
+    expect(document.activeElement).toBe(within(d).getByRole('button', { name: 'Close' }));
+    fireEvent.keyDown(document.activeElement as HTMLElement, { key: 'Escape' });
+    expect(screen.queryByRole('dialog', { name: 'ChatGPT account' })).toBeNull();
+    expect(document.activeElement).toBe(chip());
+  });
+
+  it('clears a pending sign-out question when the host changes the active account', () => {
+    const initial = PROVIDER_FIXTURES['signed-in-multi'];
+    const { bridge, publish } = providerBridge(initial);
+    renderBridge(bridge);
+    const d = openDialog();
+    fireEvent.click(within(d).getByRole('button', { name: 'Sign out' }));
+    expect(within(d).getByRole('group', { name: /Sign out of studio@example.org/ })).toBeTruthy();
+    publish(simulateProvider(initial, { type: 'provider.switch', accountId: 'acct-fixture-1' }));
+    expect(within(d).queryByRole('group', { name: /Sign out of/ })).toBeNull();
+    expect(document.activeElement).toBe(within(d).getByRole('button', { name: 'Close' }));
+  });
+
   it('error: shows the exact host message and code, and retries', async () => {
     const { bridge, requests } = providerBridge(PROVIDER_FIXTURES.error);
     renderBridge(bridge);
-    expect(chip().textContent).toContain('Needs attention');
+    expect(chip().getAttribute('aria-label')).toBe('ChatGPT account, sign-in problem');
     const d = openDialog();
     const alert = within(d).getByRole('alert');
     expect(alert.textContent).toContain('Could not open the default browser: no handler is registered for https links.');
@@ -285,7 +338,9 @@ describe('account semantics in the dialog', () => {
     renderBridge(bridge);
     const d = openDialog();
     expect(d.querySelector('[aria-current]')).toBeNull();
-    expect(within(d).queryByText('In use')).toBeNull();
+    // Signed out: no saved account is marked as signed in.
+    expect(within(d).queryByText('Signed in')).toBeNull();
+    expect(d.querySelector('[aria-current="true"]')).toBeNull();
     expect(within(d).getByText(/Remote revocation could not be confirmed/)).toBeTruthy();
     fireEvent.click(within(d).getByRole('button', { name: 'Sign in as studio@example.org' }));
     await waitFor(() => expect(requests).toEqual([{ type: 'provider.switch', accountId: 'acct-fixture-2' }]));
@@ -308,10 +363,10 @@ describe('account semantics in the dialog', () => {
     const { bridge, requests } = providerBridge(PROVIDER_FIXTURES['error-while-signed-in']);
     renderBridge(bridge);
     const d = openDialog();
-    expect(within(d).getByText("That didn't finish")).toBeTruthy();
+    expect(within(d).getByText(/That didn't finish/)).toBeTruthy();
     expect(within(d).getByText(/You are still signed in as/).textContent).toContain('ada@example.com');
     expect(within(d).getByRole('alert').textContent).toContain('The sign-in window expired after 5 minutes.');
-    expect(d.querySelector('[aria-current="true"]')!.textContent).toContain('In use');
+    expect(d.querySelector('[aria-current="true"]')!.textContent).toContain('Signed in');
     const retry = within(d).getByRole('button', { name: 'Add another account' });
     expect(document.activeElement).toBe(retry);
     fireEvent.click(retry);
