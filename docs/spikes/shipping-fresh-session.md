@@ -70,6 +70,16 @@ The current flipbook/SDK controls must be integrated and reviewed before any CI
 adoption. The older two-proof numbers below apply only to their recorded source
 revision.
 
+The local renderer/import union `ef2897af60d74efdd193288108206d4858ef75ae`
+is now integrated into a separate experiment branch. `--four-proofs --flipbook`
+forwards the existing animated/static-frame numerical controls without changing
+their fixtures or assertions. The original four-proof mode remains available;
+`--flipbook` without all four proofs is refused before output creation. All 110
+Python tooling tests pass, including option forwarding and global barrier order.
+This integrated graph has not yet run the fresh player proofs, and the later
+flipbook SDK controls remain pending. The 16.8% sample above does not measure
+this newer graph. CI remains unchanged.
+
 The original commands passed locally on the same runtime sources in 78.82 and
 121.71 seconds, respectively. This is a local baseline with concurrent unrelated
 development builds, not a hosted or device performance result. Shared-session

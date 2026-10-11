@@ -6,7 +6,13 @@ mod audio_binary;
 mod binary;
 mod columns;
 mod commands;
+mod flipbook;
+mod flipbook_binary;
 mod hierarchy;
+pub use flipbook::{
+    FlipbookControl, FlipbookState, FrameRate, MAX_FLIPBOOK_FRAMES, MAX_SCENE_FLIPBOOK_FRAMES,
+    NativeFlipbook,
+};
 mod physics;
 mod physics_2d;
 mod physics_2d_binary;

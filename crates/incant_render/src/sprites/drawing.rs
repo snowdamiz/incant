@@ -73,6 +73,12 @@ impl SpriteDraw {
         pass.set_vertex_buffer(0, self.scene.positions.slice(..));
         pass.set_vertex_buffer(1, self.scene.geometry.attributes.slice(..));
         for batch in &self.scene.geometry.batches {
+            if batch
+                .selection
+                .is_some_and(|(node, frame)| self.scene.active_frames[node] != frame)
+            {
+                continue;
+            }
             pass.set_bind_group(1, &batch.texture.groups[batch.sampling], &[]);
             pass.draw(batch.start..batch.start + batch.count, 0..1);
         }

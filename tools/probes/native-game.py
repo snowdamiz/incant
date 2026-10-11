@@ -25,7 +25,7 @@ from shipping import cargo_output, codegen
 from shipping_symbols import backend, package, require, run
 from native_observations import verify as verify_observations
 from native_logs import ACTIONS as LOG_ACTIONS, BEHAVIOR as LOG_BEHAVIOR, BASELINE as LOG_BASELINE, verify as verify_logs
-from native_game_sprites import FRAME, component as sprite_component, import_atlas
+from native_game_sprites import FRAME, MIDDLE_FRAME, LAST_FRAME, component as sprite_component, import_atlas
 
 
 def sha(path):
@@ -45,6 +45,7 @@ def arguments():
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument('--render-input', action='store_true', help='Enable CPU render input with real cooked model/camera')
     modes.add_argument('--gpu', action='store_true', help='Enable real retained offscreen GPU submission and first/final numeric readback')
+    parser.add_argument('--flipbook', action='store_true', help='Add native animated/static-frame numerical controls; requires --gpu')
     suffix = '.exe' if os.name == 'nt' else ''
     for name, default in (
         ('headless', f'incant_headless{suffix}'), ('cook', f'examples/cook_scene{suffix}'),
@@ -55,6 +56,7 @@ def arguments():
 
 def phases(args, session=None):
     suffix = '.exe' if os.name == 'nt' else ''
+    require(not args.flipbook or args.gpu, '--flipbook requires actual --gpu execution')
     if args.gpu: args.render_input = True
     out = args.output.resolve(); out.mkdir(parents=True, exist_ok=False)
     headless, cook, audio, fixture_tool = (getattr(args, f'{n}_binary').resolve() for n in ('headless', 'cook', 'audio', 'fixture'))
@@ -101,14 +103,16 @@ def phases(args, session=None):
             updated = json.loads(project.read_text())
             model = next(ident for ident in updated['assets'] if ident not in document['assets'])
             revision += 1
-        atlas_import = import_atlas(inputs, project, headless, run) if args.gpu else None
+        atlas_import = import_atlas(inputs, project, headless, run, args.flipbook) if args.gpu else None
         if atlas_import:
             revision += 1
-        variants = [(False, False), (True, False)]
+        variants = [(False, False, None), (True, False, None)]
         if args.gpu:
-            variants += [(False, True), (True, True)]
-        for streaming, sprite in variants:
-            name = ('stream' if streaming else 'static') + ('-sprite' if sprite else '')
+            variants += [(False, True, None), (True, True, None)]
+        if args.flipbook:
+            variants += [(stream, True, mode) for stream in (False, True) for mode in ('animated', 'final-reference')]
+        for streaming, sprite, animation in variants:
+            name = ('stream' if streaming else 'static') + ('-sprite' if sprite else '') + (f'-{animation}' if animation else '')
             components = {
                 1: {'Transform': dict(transform, translation=[-3, 0, 0]),
                     'Velocity': {'linear': [0, 0, 0]},
@@ -124,6 +128,11 @@ def phases(args, session=None):
             if args.render_input:
                 if sprite:
                     components[1]['SpriteRenderer'] = sprite_component(atlas_import['asset']['id'], streaming)
+                    if animation == 'animated':
+                        components[1]['SpriteFlipbook'] = {'frames': [{'frame': f} for f in (FRAME, MIDDLE_FRAME, LAST_FRAME)],
+                            'rate': {'numerator': 13, 'denominator': 3}, 'looping': True, 'playing': True}
+                    elif animation == 'final-reference':
+                        components[1]['SpriteRenderer']['region'] = {'frame': LAST_FRAME}
                 else:
                     components[1]['MeshRenderer'] = {'mesh': model, 'materials': [], 'cast_shadows': True}
                 components[4] = {'Transform': dict(transform, translation=[0,0,8] if args.gpu else [0,0,0]), 'Camera': {'fov_degrees': 60, 'near': 0.1, 'far': 100, 'projection': {'kind': 'perspective'}}}
@@ -137,9 +146,9 @@ def phases(args, session=None):
             require(all('error' not in json.loads(line) for line in reply.splitlines()), f'Authoring failed: {reply}')
             revision += 1
             destination = inputs / f'{name}.scene'; run([cook, project, scene, destination])
-            version = 5 if sprite else (4 if args.render_input else 3)
+            version = 8 if animation == 'animated' else (5 if sprite else (4 if args.render_input else 3))
             require(destination.read_bytes()[8:12] == struct.pack('<I', version), 'Unexpected cooked scene version')
-            fixtures.append({'name': name, 'path': destination, 'sprite': sprite, 'version': version})
+            fixtures.append({'name': name, 'path': destination, 'sprite': sprite, 'version': version, 'animation': animation})
         authoring_hash = sha(project)
         source = inputs / 'game.js'
         checks = '''
@@ -263,6 +272,25 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
                 reports.append(report)
             require(reports[0] == reports[1], 'Fresh-process replay changed output')
             results.append({'fixture': fixture['name'], 'rate': rate, 'report': reports[0], 'rms': rms, 'early_balance': left, 'late_balance': right})
+    flipbook_controls = []
+    if args.flipbook:
+        # Identical script/input/physics poses and audio; the oracle uses the
+        # existing static sprite path, independent of the cached frame selector.
+        by_key = {(r['fixture'], r['rate']): r['report'] for r in results}
+        for prefix in ('static-sprite', 'stream-sprite'):
+            for rate in (44117, 48000):
+                base = by_key[prefix, rate]
+                animated = by_key[prefix + '-animated', rate]
+                final = by_key[prefix + '-final-reference', rate]
+                images = lambda r: [c['sha256'] for c in r['render_input']['gpu']['captures']]
+                require(images(animated)[0] == images(base)[0], 'Flipbook did not start at frame zero')
+                require(images(animated)[1] == images(final)[1], 'Flipbook final frame differs from static frame oracle')
+                require(images(animated)[1] != images(base)[1], 'Flipbook did not change actual GPU output')
+                require(animated['pcm_sha256'] == base['pcm_sha256'] == final['pcm_sha256'], 'Animation changed audio/simulation')
+                require(animated['render_input']['binding_generation'] == 0 and animated['render_input']['topology_generation'] == 0,
+                        'Frame selection rebuilt native bindings')
+                flipbook_controls.append({'fixture': prefix, 'rate': rate, 'first_frame': 0, 'last_frame': 2,
+                                          'first_matches_static': True, 'last_matches_static': True, 'gpu_output_changed': True})
     require(before == package_hashes(), 'Runtime changed retained package')
     failures = []
     def reject(label, cmd, dest, message=None):
@@ -336,13 +364,27 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             reject(label, cmd, dest, message)
         bad_frame = out/'unknown-frame.scene'; blob = Path(sprite_fixture['path']).read_bytes()
         require(blob.count(binary_id(FRAME)) == 1, 'Ambiguous frame mutation fixture')
-        changed = bytearray(blob.replace(binary_id(FRAME), binary_id(f'{43:026d}')))
+        changed = bytearray(blob.replace(binary_id(FRAME), binary_id(f'{99:026d}')))
         # Keep the checked binary envelope valid so this reaches atlas binding,
         # rather than merely testing the unrelated corruption checksum.
         changed[40:72] = hashlib.sha256(changed[:40] + changed[72:]).digest()
         bad_frame.write_bytes(changed)
         dest = out/'unknown-frame.pcm'
         reject('unknown-sprite-frame', command(bad_frame, record_path, 48000, dest), dest, 'Sprite')
+        if args.flipbook:
+            animated_fixture = next(f for f in fixtures if f['animation'] == 'animated')
+            dest = out/'flipbook-default.pcm'
+            reject('flipbook-default-stays-strict', command(animated_fixture['path'], record_path, 48000, dest, spatial=False),
+                   dest, 'no spatial host')
+            # The bad frame is not selected at startup. All retained frame
+            # bindings still must validate before the first accepted game tick.
+            blob = Path(animated_fixture['path']).read_bytes()
+            require(blob.count(binary_id(MIDDLE_FRAME)) == 1, 'Ambiguous noncurrent frame mutation fixture')
+            changed = bytearray(blob.replace(binary_id(MIDDLE_FRAME), binary_id(f'{99:026d}')))
+            changed[40:72] = hashlib.sha256(changed[:40] + changed[72:]).digest()
+            bad_frame = out/'unknown-noncurrent-frame.scene'; bad_frame.write_bytes(changed)
+            dest = out/'unknown-noncurrent-frame.pcm'
+            reject('unknown-noncurrent-flipbook-frame', command(bad_frame, record_path, 48000, dest), dest, 'Sprite')
     existing = out/'preserved.pcm'; existing.write_bytes(b'keep')
     result = subprocess.run(command(fixtures[0]['path'], record_path, 48000, existing), capture_output=True)
     require(result.returncode != 0 and not result.stdout and existing.read_bytes() == b'keep', 'Existing output overwritten')
@@ -360,7 +402,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
               'headless_sha256': sha(headless), 'cook_sha256': sha(cook), 'audio_example_sha256': sha(audio), 'fixture_tool_sha256': sha(fixture_tool),
               'public_import': imported, 'public_model_import': model_import, 'public_atlas_import': atlas_import,
               'cpu_render_input': args.render_input and not args.gpu, 'gpu_submitted': args.gpu, 'on_screen_presentation': False,
-              'gpu_build_cpu_mode_preserved': cpu_mode_preserved, 'sprite_cpu_mode_preserved': sprite_cpu_mode_preserved, 'project_hash_before_delete': authoring_hash,
+              'flipbook_controls': flipbook_controls, 'gpu_build_cpu_mode_preserved': cpu_mode_preserved, 'sprite_cpu_mode_preserved': sprite_cpu_mode_preserved, 'project_hash_before_delete': authoring_hash,
               'authoring_and_build_storage_deleted': True, 'removed_scope': 'authoring project/WAV/glTF/bin/PNG/atlas/journal/script source and fresh Cargo storage',
               'retained_runtime_inputs': ['binary scenes', 'clips.bin', 'cooked PCM/manifests', 'startup input.json/actions.json'] + (['cooked model payloads/manifests'] if args.render_input else []) + (['cooked KTX2/atlas metadata'] if args.gpu else []),
               'native_logs': logs, 'native_observations': observations, 'repeat_exact': True, 'recorded_ticks_per_process': 120, 'audio_processes': len(fixtures)*4, 'results': results, 'rejected': failures,

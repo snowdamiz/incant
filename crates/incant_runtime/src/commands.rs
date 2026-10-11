@@ -31,6 +31,12 @@ pub enum StructuralCommand {
     },
     /// Replace/remove render configuration using the immutable startup asset
     /// table. The final bounded declarations are checked before publication.
+    /// Controls use the final declaration of this batch, in submitted order.
+    /// Pause/resume preserves phase; restart/seek resets it.
+    ControlFlipbook {
+        entity: StableId,
+        control: crate::FlipbookControl,
+    },
     SetSpatial {
         entity: StableId,
         spatial: Option<crate::CookedSpatial>,
@@ -111,6 +117,7 @@ struct Staged {
     spatial: BTreeMap<StableId, Option<crate::CookedSpatial>>,
     topology_generation: u64,
     binding_generation: u64,
+    flipbook_states: BTreeMap<StableId, crate::FlipbookState>,
 }
 
 impl NativeWorld {
@@ -128,6 +135,17 @@ impl NativeWorld {
             && !commands.iter().any(|c| matches!(c, StructuralCommand::SetSpatial{entity,spatial} if self.tilemap_collision_ids.contains(entity) || spatial.as_ref().is_some_and(|n|n.tilemap.as_ref().is_some_and(|m|m.layers.iter().any(|l|l.solid)))))
         {
             self.apply_spatial(commands)?;
+            return Ok(());
+        }
+        if commands
+            .iter()
+            .all(|c| matches!(c, StructuralCommand::ControlFlipbook { .. }))
+        {
+            let states = self.prepare_flipbook_controls(commands, &BTreeMap::new(), |id| {
+                self.entities.contains_key(&id)
+            })?;
+            self.install_flipbook_states(states);
+            commands.clear();
             return Ok(());
         }
         // Audio-only changes inspect at most 161 audio nodes; no hierarchy copy.
@@ -291,6 +309,7 @@ impl NativeWorld {
             for (id, node) in staged.spatial {
                 self.install_spatial(id, node);
             }
+            self.install_flipbook_states(staged.flipbook_states);
             for (id, node) in staged.audio {
                 self.install_audio(id, node);
             }
@@ -424,6 +443,7 @@ impl NativeWorld {
                     audio.remove(id);
                     spatial.remove(id);
                 }
+                StructuralCommand::ControlFlipbook { .. } => {}
                 StructuralCommand::SetParent { entity, parent } => {
                     *parents
                         .get_mut(entity)
@@ -515,6 +535,8 @@ impl NativeWorld {
         }
         self.validate_audio_changes(&audio, &parents)?;
         let binding_generation = self.validate_spatial_changes(&spatial, &parents)?;
+        let flipbook_states =
+            self.prepare_flipbook_controls(commands, &spatial, |id| parents.contains_key(&id))?;
         let topology_generation = if parents != self.parents {
             self.topology_generation
                 .checked_add(1)
@@ -719,6 +741,7 @@ impl NativeWorld {
             spatial,
             topology_generation,
             binding_generation,
+            flipbook_states,
         })
     }
 }

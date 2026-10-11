@@ -67,15 +67,12 @@ impl Renderer {
         for batch in scene.batches.iter().filter(|batch| batch.count > 0) {
             let material =
                 &batch.model.materials.materials[batch.model.primitives[batch.primitive].material];
-            let pipeline = self.materials.pipeline(
-                &self.device,
-                PipelineKey {
-                    format: target.format,
-                    alpha: material.alpha,
-                    double_sided: material.double_sided,
-                    mirrored: batch.mirrored,
-                },
-            )?;
+            let pipeline = self.materials.pipeline(PipelineKey {
+                format: target.format,
+                alpha: material.alpha,
+                double_sided: material.double_sided,
+                mirrored: batch.mirrored,
+            })?;
             if material.alpha == incant_assets_runtime::AlphaMode::Blend {
                 for (index, center) in batch.centers.iter().enumerate() {
                     transparent.push(Draw {

@@ -43,7 +43,11 @@ def main():
                         help='Also retain the complete scene-audio and native-game GPU proofs')
     parser.add_argument('--audio-binary', type=Path, default=ROOT / 'target/release/examples/native_scene_audio')
     parser.add_argument('--fixture-binary', type=Path, default=ROOT / 'target/release/examples/no_renderer_fixtures')
+    parser.add_argument('--flipbook', action='store_true',
+                        help='Retain native flipbook numerical controls; requires --four-proofs')
     args = parser.parse_args()
+    if args.flipbook and not args.four_proofs:
+        parser.error('--flipbook requires --four-proofs')
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
     rustc = Path(run(['rustup', 'which', 'rustc']).strip())
@@ -62,10 +66,12 @@ def main():
         # invocation may be reused. Every player and its symbol package is distinct.
         phases[1:1] = [
             audio.phases(argparse.Namespace(output=out / 'audio', **common), session),
-            game.phases(argparse.Namespace(output=out / 'game', gpu=True, render_input=True,
+            game.phases(argparse.Namespace(output=out / 'game', gpu=True, render_input=True, flipbook=args.flipbook,
                 audio_binary=args.audio_binary, fixture_binary=args.fixture_binary, **common), session),
         ]
-        probes = ['shipping.py', 'native-scene-audio.py', 'native-game.py --gpu', 'cooked-script.py --physics']
+        probes = ['shipping.py', 'native-scene-audio.py',
+                  'native-game.py --gpu' + (' --flipbook' if args.flipbook else ''),
+                  'cooked-script.py --physics']
     begin = time.monotonic()
     try:
         for phase in phases:

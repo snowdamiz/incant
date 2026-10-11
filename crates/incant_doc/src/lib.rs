@@ -11,7 +11,7 @@ mod physics_2d;
 pub use crdt::CollaborativeDocument;
 pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
 pub use incant_2d::{
-    SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling, Tilemap, TilemapLayer,
+    SpriteFlipbook, SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling, Tilemap, TilemapLayer,
 };
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
@@ -349,6 +349,22 @@ impl Project {
                         );
                     }
                 }
+                if let Some(flipbook) = entity.components.get("SpriteFlipbook") {
+                    let checked = (|| -> Result<(), String> {
+                        let flipbook: SpriteFlipbook =
+                            serde_json::from_value(flipbook.clone()).map_err(|e| e.to_string())?;
+                        let sprite = entity
+                            .components
+                            .get("SpriteRenderer")
+                            .ok_or("SpriteFlipbook requires SpriteRenderer")?;
+                        let sprite: SpriteRenderer =
+                            serde_json::from_value(sprite.clone()).map_err(|e| e.to_string())?;
+                        flipbook.validate(&sprite).map_err(|e| e.to_string())
+                    })();
+                    if let Err(message) = checked {
+                        issue(format!("{path}/components/SpriteFlipbook"), &message);
+                    }
+                }
                 if entity.components.contains_key("SpriteRenderer") {
                     if !entity.components.contains_key("Transform") {
                         issue(
@@ -497,6 +513,15 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("tilemap requires a color atlas texture asset".into());
             }
         }
+        "SpriteFlipbook" => {
+            let flipbook: SpriteFlipbook = decode(value)?;
+            flipbook.rate.validate().map_err(|e| e.to_string())?;
+            if flipbook.frames.is_empty()
+                || flipbook.frames.len() > incant_2d::flipbook::MAX_FLIPBOOK_FRAMES
+            {
+                return Err("flipbook frame count".into());
+            }
+        }
         "SpriteRenderer" => {
             let sprite: SpriteRenderer = decode(value)?;
             sprite.validate().map_err(|e| e.to_string())?;
@@ -580,6 +605,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
         ("Tilemap".into(), json!(schemars::schema_for!(Tilemap))),
+        (
+            "SpriteFlipbook".into(),
+            json!(schemars::schema_for!(SpriteFlipbook)),
+        ),
         (
             "SpriteRenderer".into(),
             json!(schemars::schema_for!(SpriteRenderer)),

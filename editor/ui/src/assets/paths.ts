@@ -14,6 +14,7 @@ export type SourceKind = 'model' | 'image' | 'atlas' | 'audio';
 const EXTENSIONS: Readonly<Record<string, SourceKind>> = {
   gltf: 'model',
   glb: 'model',
+  fbx: 'model',
   png: 'image',
   jpg: 'image',
   jpeg: 'image',
@@ -22,7 +23,7 @@ const EXTENSIONS: Readonly<Record<string, SourceKind>> = {
   ogg: 'audio',
 };
 
-export const ACCEPTED_FORMATS = 'glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG';
+export const ACCEPTED_FORMATS = 'glTF, GLB, FBX, PNG, JPEG, EXR, .atlas.json, WAV or OGG';
 
 /** The import kind implied by the path's extension, or null when it is not importable. */
 export function sourceKind(path: string): SourceKind | null {

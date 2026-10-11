@@ -294,3 +294,75 @@ fn tilemap_cook_preserves_binary_ids_local_cells_and_native_solid_collision() {
     world.step().unwrap();
     assert_eq!(world.tick(), 1);
 }
+
+#[test]
+fn flipbook_cook_validates_authoring_contract_and_preserves_exact_rational_frames() {
+    let (mut project, sid, entity, _, texture) = fixture();
+    let components = &mut project
+        .scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&entity)
+        .unwrap()
+        .components;
+    components.remove("MeshRenderer");
+    let animation = json!({"frames":[[0,0,2,2],{"frame":"00000000000000000000000001"}],"rate":{"numerator":30000,"denominator":1001},"looping":false,"playing":true});
+    components.insert("Transform".into(), json!(incant_doc::Transform::default()));
+    components.insert("SpriteFlipbook".into(), animation.clone());
+    assert!(matches!(
+        cook_scene(&project, &sid),
+        Err(CookError::Document(_))
+    ));
+    project.scenes.get_mut(&sid).unwrap().entities.get_mut(&entity).unwrap().components.insert("SpriteRenderer".into(),json!({"texture":texture,"region":[0,0,2,2],"size":[1,1],"pivot":[0.5,0.5],"tint":[1,1,1,1],"mode":{"kind":"simple"}}));
+    let before = project.clone();
+    let bytes = cook_scene(&project, &sid).unwrap();
+    assert_eq!(project, before);
+    assert_eq!(&bytes[8..12], &8u32.to_le_bytes());
+    let scene = CookedScene::from_bytes(&bytes).unwrap();
+    let f = scene
+        .spatial()
+        .iter()
+        .find(|s| s.entity == stable_id(&entity).unwrap())
+        .unwrap()
+        .flipbook
+        .as_ref()
+        .unwrap();
+    assert_eq!(
+        f.rate,
+        incant_runtime::FrameRate {
+            numerator: 30000,
+            denominator: 1001
+        }
+    );
+    assert!(!f.looping);
+    assert!(f.playing);
+    assert_eq!(f.frames.len(), 2);
+    assert_eq!(
+        f.frames[1],
+        incant_runtime::NativeSpriteRegion::Atlas {
+            frame: stable_id("00000000000000000000000001").unwrap()
+        }
+    );
+    for invalid in [
+        json!([]),
+        json!([[0, 0, 0, 1]]),
+        json!([{"frame":"invalid"}]),
+    ] {
+        let mut changed = animation.clone();
+        changed["frames"] = invalid;
+        project
+            .scenes
+            .get_mut(&sid)
+            .unwrap()
+            .entities
+            .get_mut(&entity)
+            .unwrap()
+            .components
+            .insert("SpriteFlipbook".into(), changed);
+        assert!(matches!(
+            cook_scene(&project, &sid),
+            Err(CookError::Document(_))
+        ));
+    }
+}

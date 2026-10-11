@@ -1,7 +1,7 @@
 //! Scene-linear HDR to display-linear output, then exactly one sRGB transfer.
 use crate::{ResourceError, Result, Viewport};
 use bytemuck::{Pod, Zeroable};
-use std::{collections::HashMap, sync::Mutex};
+use std::collections::HashMap;
 use wgpu::util::DeviceExt;
 
 #[repr(C)]
@@ -21,9 +21,22 @@ fn decode(byte: u8) -> f32 {
         ((s + 0.055) / 1.055).powf(2.4)
     }
 }
-#[derive(Default)]
-pub(crate) struct OutputPass(Mutex<HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>>);
+pub(crate) struct OutputPass(HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>);
 impl OutputPass {
+    pub fn new(device: &wgpu::Device) -> Self {
+        let shader = shader(device);
+        Self(
+            [
+                wgpu::TextureFormat::Rgba8Unorm,
+                wgpu::TextureFormat::Rgba8UnormSrgb,
+                wgpu::TextureFormat::Bgra8Unorm,
+                wgpu::TextureFormat::Bgra8UnormSrgb,
+            ]
+            .into_iter()
+            .map(|format| (format, build(device, &shader, format)))
+            .collect(),
+        )
+    }
     pub fn validate(format: wgpu::TextureFormat) -> Result<()> {
         match format {
             wgpu::TextureFormat::Rgba8Unorm
@@ -42,16 +55,11 @@ impl OutputPass {
         viewport: Option<Viewport>,
         pixel_grid: Option<[f32; 4]>,
     ) -> Result<OutputDraw> {
-        let pipeline = {
-            let mut pipelines = self
-                .0
-                .lock()
-                .map_err(|_| ResourceError::CacheLock("output"))?;
-            pipelines
-                .entry(format)
-                .or_insert_with(|| build(device, format))
-                .clone()
-        };
+        let pipeline = self
+            .0
+            .get(&format)
+            .cloned()
+            .ok_or(ResourceError::OutputFormat(format))?;
         // The backdrop is display-referred and is not exposed or tone mapped.
         // These values retain Claude's neutral #141519 viewport surround.
         let backdrop = [20, 21, 25].map(decode);
@@ -125,21 +133,28 @@ impl OutputDraw {
     }
 }
 
-fn build(device: &wgpu::Device, format: wgpu::TextureFormat) -> wgpu::RenderPipeline {
+fn shader(device: &wgpu::Device) -> wgpu::ShaderModule {
     let source = format!(
         "{}\n{}",
         include_str!("output.wgsl"),
         include_str!("tone_map.wgsl")
     );
-    let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+    device.create_shader_module(wgpu::ShaderModuleDescriptor {
         label: Some("HDR display transform"),
         source: wgpu::ShaderSource::Wgsl(source.into()),
-    });
+    })
+}
+
+fn build(
+    device: &wgpu::Device,
+    shader: &wgpu::ShaderModule,
+    format: wgpu::TextureFormat,
+) -> wgpu::RenderPipeline {
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("HDR display transform"),
         layout: None,
         vertex: wgpu::VertexState {
-            module: &shader,
+            module: shader,
             entry_point: Some("vertex"),
             compilation_options: Default::default(),
             buffers: &[],
@@ -148,7 +163,7 @@ fn build(device: &wgpu::Device, format: wgpu::TextureFormat) -> wgpu::RenderPipe
         depth_stencil: None,
         multisample: Default::default(),
         fragment: Some(wgpu::FragmentState {
-            module: &shader,
+            module: shader,
             entry_point: Some("fragment"),
             compilation_options: Default::default(),
             targets: &[Some(wgpu::ColorTargetState {

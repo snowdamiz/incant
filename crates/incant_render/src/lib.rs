@@ -59,7 +59,7 @@ pub struct Renderer {
     pub queue: wgpu::Queue,
     pub adapter: wgpu::Adapter,
     pub adapter_name: String,
-    pipelines: Mutex<HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>>,
+    diagnostic_pipeline: wgpu::RenderPipeline,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
     sprites: sprites::SpriteSystem,
@@ -94,12 +94,20 @@ impl Renderer {
         device.set_device_lost_callback(move |_, _| {
             lost.store(true, std::sync::atomic::Ordering::Release);
         });
+        // The renderer owns a finite pipeline catalog. Prepare it before any
+        // caller can submit a frame; frame preparation only looks up handles.
+        let validation = device.push_error_scope(wgpu::ErrorFilter::Validation);
         let environments = environment::EnvironmentSystem::new(&device, &queue);
         let lighting = lighting::LightingSystem::new(&device);
-        let shadows = shadows::ShadowSystem::new(&device);
         let materials =
             materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
+        let shadows = shadows::ShadowSystem::new(&device, &materials.layout);
+        let diagnostic_pipeline = Self::pipeline(&device, frame::HDR_FORMAT);
+        let output = output::OutputPass::new(&device);
         let sprites = sprites::SpriteSystem::new(&device);
+        if let Some(error) = validation.pop().await {
+            return Err(ResourceError::Preparation(error).into());
+        }
         Ok(Self {
             identity: std::sync::Arc::new(()),
             device_lost,
@@ -108,14 +116,14 @@ impl Renderer {
             queue,
             adapter,
             adapter_name,
-            pipelines: Mutex::new(HashMap::new()),
+            diagnostic_pipeline,
             models: Mutex::new(HashMap::new()),
             materials,
             environments,
             lighting,
             shadows,
             frames: Default::default(),
-            output: Default::default(),
+            output,
             graph: Default::default(),
         })
     }
@@ -133,62 +141,49 @@ impl Renderer {
         }
         Ok(())
     }
-    fn pipeline(&self, format: wgpu::TextureFormat) -> wgpu::RenderPipeline {
-        let shader = self
-            .device
-            .create_shader_module(wgpu::ShaderModuleDescriptor {
-                label: Some("Phase 0 diagnostic shader"),
-                source: wgpu::ShaderSource::Wgsl(include_str!("fixture.wgsl").into()),
-            });
-        self.device
-            .create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-                label: Some("Phase 0 geometry"),
-                layout: None,
-                vertex: wgpu::VertexState {
-                    module: &shader,
-                    entry_point: Some("vertex"),
-                    compilation_options: Default::default(),
-                    buffers: &[wgpu::VertexBufferLayout {
-                        array_stride: std::mem::size_of::<Vertex>() as u64,
-                        step_mode: wgpu::VertexStepMode::Vertex,
-                        attributes: &wgpu::vertex_attr_array![0=>Float32x4,1=>Float32x3],
-                    }],
-                },
-                primitive: wgpu::PrimitiveState {
-                    cull_mode: None,
-                    ..Default::default()
-                },
-                depth_stencil: Some(wgpu::DepthStencilState {
-                    format: wgpu::TextureFormat::Depth32Float,
-                    depth_write_enabled: Some(true),
-                    depth_compare: Some(wgpu::CompareFunction::Less),
-                    stencil: Default::default(),
-                    bias: Default::default(),
-                }),
-                multisample: Default::default(),
-                fragment: Some(wgpu::FragmentState {
-                    module: &shader,
-                    entry_point: Some("fragment"),
-                    compilation_options: Default::default(),
-                    targets: &[Some(wgpu::ColorTargetState {
-                        format,
-                        blend: None,
-                        write_mask: wgpu::ColorWrites::ALL,
-                    })],
-                }),
-                multiview_mask: None,
-                cache: None,
-            })
-    }
-    fn cached_pipeline(&self, format: wgpu::TextureFormat) -> Result<wgpu::RenderPipeline> {
-        let mut pipelines = self
-            .pipelines
-            .lock()
-            .map_err(|_| ResourceError::CacheLock("diagnostic pipeline"))?;
-        Ok(pipelines
-            .entry(format)
-            .or_insert_with(|| self.pipeline(format))
-            .clone())
+    fn pipeline(device: &wgpu::Device, format: wgpu::TextureFormat) -> wgpu::RenderPipeline {
+        let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("Phase 0 diagnostic shader"),
+            source: wgpu::ShaderSource::Wgsl(include_str!("fixture.wgsl").into()),
+        });
+        device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+            label: Some("Phase 0 geometry"),
+            layout: None,
+            vertex: wgpu::VertexState {
+                module: &shader,
+                entry_point: Some("vertex"),
+                compilation_options: Default::default(),
+                buffers: &[wgpu::VertexBufferLayout {
+                    array_stride: std::mem::size_of::<Vertex>() as u64,
+                    step_mode: wgpu::VertexStepMode::Vertex,
+                    attributes: &wgpu::vertex_attr_array![0=>Float32x4,1=>Float32x3],
+                }],
+            },
+            primitive: wgpu::PrimitiveState {
+                cull_mode: None,
+                ..Default::default()
+            },
+            depth_stencil: Some(wgpu::DepthStencilState {
+                format: wgpu::TextureFormat::Depth32Float,
+                depth_write_enabled: Some(true),
+                depth_compare: Some(wgpu::CompareFunction::Less),
+                stencil: Default::default(),
+                bias: Default::default(),
+            }),
+            multisample: Default::default(),
+            fragment: Some(wgpu::FragmentState {
+                module: &shader,
+                entry_point: Some("fragment"),
+                compilation_options: Default::default(),
+                targets: &[Some(wgpu::ColorTargetState {
+                    format,
+                    blend: None,
+                    write_mask: wgpu::ColorWrites::ALL,
+                })],
+            }),
+            multiview_mask: None,
+            cache: None,
+        })
     }
     pub fn draw_scene(
         &self,
