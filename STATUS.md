@@ -35,10 +35,10 @@ with comprehensive cross-platform CI on one frozen release checkpoint approximat
 every three hours. [ADR 0014](docs/adr/0014-ci.md) defines integration, cache and
 failure handling. The integrated policy passes 138 Python, 12 Node and 536 UI tests, strict types/build,
 formatting, generated checks and actionlint; [evidence](docs/spikes/release-checkpoints.md).
-PR83 merged after its exact-head fast check passed: 2s queue and119s execution. Main requires that fast check; release was bootstrapped at fully checked main82 and now requires all 23 full contexts, including local-service protocols. Both enforce administrators and prohibit force pushes/deletion. The three-hour heartbeat is active; the first three checkpoints remain unpromoted after diagnosed failures. The historical missing-Wasm-target failure remains recorded separately.
+PR83 merged after its exact-head fast check passed: 2s queue and119s execution. Main requires that fast check; release was bootstrapped at fully checked main82 and now requires all 23 full contexts, including local-service protocols. Both enforce administrators and prohibit force pushes/deletion. The three-hour heartbeat is active; checkpoints 1–4 remained unpromoted after diagnosed failures. Checkpoint 5 promoted exact main97 into release at `c603ca07bbe1e6e1ad46b2fd3aa2f70aaec07f50` after all 23 required contexts passed. [Promotion and timing evidence](docs/spikes/evidence/release-checkpoint-5.json). The historical missing-Wasm-target failure remains recorded separately.
 No phase, live-provider or physical-device performance gate is waived.
 
-The initial frozen checkpoint PR85 found a Windows-only journal test lock violation. A reviewed test-only lifetime correction passes all six scoped cases and Clippy locally; Checkpoint 2 confirmed these Windows cases; complete release promotion remains pending. [Failure and repair evidence](docs/spikes/script-journal-test-portability.md).
+The initial frozen checkpoint PR85 found a Windows-only journal test lock violation. A reviewed test-only lifetime correction passes all six scoped cases and Clippy locally; checkpoint 2 confirmed these Windows cases; checkpoint 5 subsequently completed release promotion. [Failure and repair evidence](docs/spikes/script-journal-test-portability.md).
 
 The second frozen checkpoint includes the Windows journal repair and all 23 release
 contexts. Its local-service job exposed a Linux private S3 config UID mismatch;
@@ -62,19 +62,20 @@ validation took 49m39s plus 4m37s queue. Its failed result remains historical,
 and checkpoint 4 confirmed that exact authored TypeScript native-agent regression on Windows.
 [Evidence](docs/spikes/windows-native-compiler-entry.md#checkpoint-3-restricted-typescript-host-lookup).
 
-Checkpoint 4 is frozen at reviewed main94. All three native physics jobs exposed
+Historical checkpoint 4 was frozen at reviewed main94. All three native physics jobs exposed
 a stale isolated probe lock missing navigation/localization dependencies. The
 reviewed repair preserves existing pins and the engine's vendored source patch;
 the fast structural regression adds no Rust compilation or new check context.
-The candidate remains unchanged while the repair is validated on main.
+Main95/96 carried the reviewed repairs; checkpoint 5 passed all three native
+physics jobs and strict comparison.
 [Failure and repair scope](docs/spikes/checkpoint-4-probe-lock.md).
 
 A later checkpoint 4 Windows export audit failed after the fresh shipping build:
 PE bytecode symbols were incorrectly read with llvm-nm. The reviewed correction
 uses a fresh final-link map and preserves parser/codegen checks and matched PDB
 packaging. Local PE/PDB fixture validation, 206 Python tests (four skipped), and
-a fresh macOS export with three source-deleted runs pass; complete Windows export
-confirmation is required in the next frozen checkpoint.
+a fresh macOS export with three source-deleted runs pass; checkpoint 5 completed the actual Windows export
+with three source/build-deleted runs and independently verified PE/PDB/map identities.
 [Exact failure and repair evidence](docs/spikes/checkpoint-4-export-symbols.md).
 
 ## Authored source and native package — locally integrated
@@ -102,8 +103,8 @@ private authoring fixture. 786 workspace, 75 GPU, 15 optional window/project,
 build/generation and shipping audits. Independent review removed a resurrected
 old workflow and duplicate tests. [Evidence](docs/spikes/native-project-package.md).
 Existing full checkpoint jobs include the export probe. Checkpoint 4 passed hosted
-Linux and macOS export execution; Windows symbol-audit correction, window package
-execution and complete UI/export/device gates remain open.
+Linux and macOS export execution; checkpoint 5 also passed the repaired Windows
+export. Window package execution and complete UI/export/device gates remain open.
 
 The shared-agent backend's actual main92 integration preserves all nine reviewed
 source identities and passes95 Agent/headless tests, scoped Clippy,62 exact
@@ -126,7 +127,8 @@ Python tests (four Windows-only skips).
 - Checkpoint 2 Windows native TypeScript startup has a reviewed local path adapter
   correction: fixed engine-relative entry and canonical-equivalent ordinary launch
   cwd; the scrubbed environment remains unchanged. Nine local tests and scoped
-  Clippy pass; actual Windows helper/workspace execution remains required.
+  Clippy pass; checkpoint 5 passed the actual Windows helper/workspace and export
+  execution after the additional restricted-host correction.
   [Diagnosis and evidence](docs/spikes/windows-native-compiler-entry.md).
 
 - Local native TypeScript navigation queries are implemented and independently reviewed:
