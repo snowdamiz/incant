@@ -1,0 +1,29 @@
+      40 ms  game-front
+     504 ms  c01-start.png                centroid_x=  181.0 left_px=164
+     523 ms  D down
+     579 ms  c02-held-00.png              centroid_x=  183.7 left_px=167
+     690 ms  c02-held-01.png              centroid_x=  199.0 left_px=182
+     797 ms  c02-held-02.png              centroid_x=  217.0 left_px=200
+     861 ms  finder-activate
+    1264 ms  c03-unfocused-00.png         centroid_x=  230.0 left_px=213
+    1483 ms  c03-unfocused-01.png         centroid_x=  230.0 left_px=213
+    1692 ms  c03-unfocused-02.png         centroid_x=  230.0 left_px=213
+    1893 ms  c03-unfocused-03.png         centroid_x=  230.0 left_px=213
+    2102 ms  c03-unfocused-04.png         centroid_x=  230.0 left_px=213
+    2312 ms  c03-unfocused-05.png         centroid_x=  230.0 left_px=213
+    2475 ms  game-front
+    2865 ms  c04-refocused-00.png         centroid_x=  233.0 left_px=216
+    3091 ms  c04-refocused-01.png         centroid_x=  233.0 left_px=216
+    3300 ms  c04-refocused-02.png         centroid_x=  233.0 left_px=216
+    3509 ms  c04-refocused-03.png         centroid_x=  233.0 left_px=216
+    3716 ms  c04-refocused-04.png         centroid_x=  233.0 left_px=216
+    3923 ms  c04-refocused-05.png         centroid_x=  233.0 left_px=216
+    4105 ms  D down
+    4169 ms  c05-new-press-00.png         centroid_x=  238.0 left_px=221
+    4279 ms  c05-new-press-01.png         centroid_x=  256.0 left_px=239
+    4360 ms  D up
+    4419 ms  c06-released-00.png          centroid_x=  274.7 left_px=258
+    4582 ms  c06-released-01.png          centroid_x=  274.7 left_px=258
+    4738 ms  c06-released-02.png          centroid_x=  274.7 left_px=258
+    4891 ms  c06-released-03.png          centroid_x=  274.7 left_px=258
+slope over 3 'c02' captures: 152.4 px/s

@@ -1,0 +1,19 @@
+     143 ms  c03-before-d.png             centroid_x=  181.0 left_px=164
+     159 ms  D down
+     213 ms  c04-hold-00.png              centroid_x=  183.7 left_px=167
+     321 ms  c04-hold-01.png              centroid_x=  199.0 left_px=182
+     425 ms  c04-hold-02.png              centroid_x=  214.7 left_px=198
+     527 ms  c04-hold-03.png              centroid_x=  230.0 left_px=213
+     630 ms  c04-hold-04.png              centroid_x=  248.7 left_px=232
+     736 ms  c04-hold-05.png              centroid_x=  264.0 left_px=247
+     838 ms  c04-hold-06.png              centroid_x=  279.7 left_px=263
+     942 ms  c04-hold-07.png              centroid_x=  295.0 left_px=278
+    1088 ms  D up
+    1138 ms  c05-released-00.png          centroid_x=  323.7 left_px=307
+    1248 ms  c05-released-01.png          centroid_x=  323.7 left_px=307
+    1354 ms  c05-released-02.png          centroid_x=  323.7 left_px=307
+    1457 ms  c05-released-03.png          centroid_x=  323.7 left_px=307
+    1565 ms  c05-released-04.png          centroid_x=  323.7 left_px=307
+    1670 ms  c05-released-05.png          centroid_x=  323.7 left_px=307
+    2347 ms  c06-stopped.png              centroid_x=  323.7 left_px=307
+slope over 8 'c04' captures: 154.7 px/s

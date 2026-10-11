@@ -1,0 +1,67 @@
+{
+ "run": "handoffs/0037-native-player-window/evidence/run-03-stream",
+ "audio": "s-audio-min",
+ "buffers": 212,
+ "phases": [
+  {
+   "phase": "audio-start",
+   "start_ms": 0,
+   "duration_ms": 663,
+   "buffers": 33,
+   "settled_buffers": 28,
+   "rms_left": 0.0031797125344308745,
+   "rms_right": 0.08036440828610474,
+   "silent_settled_buffers": 0
+  },
+  {
+   "phase": "down D",
+   "start_ms": 663,
+   "duration_ms": 207,
+   "buffers": 10,
+   "settled_buffers": 5,
+   "rms_left": 0.003147563899224703,
+   "rms_right": 0.07955186836022085,
+   "silent_settled_buffers": 0
+  },
+  {
+   "phase": "minimize",
+   "start_ms": 870,
+   "duration_ms": 1517,
+   "buffers": 75,
+   "settled_buffers": 70,
+   "rms_left": 0.0011680413019596032,
+   "rms_right": 0.029521205799042338,
+   "silent_settled_buffers": 43
+  },
+  {
+   "phase": "restore",
+   "start_ms": 2387,
+   "duration_ms": 544,
+   "buffers": 28,
+   "settled_buffers": 22,
+   "rms_left": 0.0,
+   "rms_right": 0.0,
+   "silent_settled_buffers": 22
+  },
+  {
+   "phase": "game-front",
+   "start_ms": 2931,
+   "duration_ms": 1000,
+   "buffers": 50,
+   "settled_buffers": 46,
+   "rms_left": 0.0030502309698978852,
+   "rms_right": 0.07709187619970527,
+   "silent_settled_buffers": 0
+  },
+  {
+   "phase": "up D",
+   "start_ms": 3931,
+   "duration_ms": 351,
+   "buffers": 16,
+   "settled_buffers": 11,
+   "rms_left": 0.0030480682941191706,
+   "rms_right": 0.0770372164906503,
+   "silent_settled_buffers": 0
+  }
+ ]
+}

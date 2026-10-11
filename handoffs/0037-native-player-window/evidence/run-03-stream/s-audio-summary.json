@@ -1,0 +1,87 @@
+{
+ "run": "handoffs/0037-native-player-window/evidence/run-03-stream",
+ "audio": "s-audio",
+ "buffers": 592,
+ "phases": [
+  {
+   "phase": "audio-start",
+   "start_ms": 0,
+   "duration_ms": 1617,
+   "buffers": 80,
+   "settled_buffers": 75,
+   "rms_left": 0.0723863369041652,
+   "rms_right": 0.0028640507532857245,
+   "silent_settled_buffers": 0
+  },
+  {
+   "phase": "down D",
+   "start_ms": 1617,
+   "duration_ms": 1517,
+   "buffers": 76,
+   "settled_buffers": 71,
+   "rms_left": 0.055978924640405214,
+   "rms_right": 0.02385955205245808,
+   "silent_settled_buffers": 0
+  },
+  {
+   "phase": "up D",
+   "start_ms": 3134,
+   "duration_ms": 941,
+   "buffers": 47,
+   "settled_buffers": 42,
+   "rms_left": 0.0031800039169968754,
+   "rms_right": 0.08037177271638982,
+   "silent_settled_buffers": 0
+  },
+  {
+   "phase": "finder-activate",
+   "start_ms": 4075,
+   "duration_ms": 1853,
+   "buffers": 93,
+   "settled_buffers": 87,
+   "rms_left": 0.0,
+   "rms_right": 0.0,
+   "silent_settled_buffers": 87
+  },
+  {
+   "phase": "game-front",
+   "start_ms": 5928,
+   "duration_ms": 1837,
+   "buffers": 92,
+   "settled_buffers": 88,
+   "rms_left": 0.0031061963494680056,
+   "rms_right": 0.07850635204205413,
+   "silent_settled_buffers": 1
+  },
+  {
+   "phase": "minimize",
+   "start_ms": 7765,
+   "duration_ms": 1600,
+   "buffers": 79,
+   "settled_buffers": 74,
+   "rms_left": 0.0011410533303540388,
+   "rms_right": 0.028839108791975307,
+   "silent_settled_buffers": 47
+  },
+  {
+   "phase": "restore",
+   "start_ms": 9365,
+   "duration_ms": 563,
+   "buffers": 29,
+   "settled_buffers": 23,
+   "rms_left": 0.0,
+   "rms_right": 0.0,
+   "silent_settled_buffers": 23
+  },
+  {
+   "phase": "game-front",
+   "start_ms": 9928,
+   "duration_ms": 1956,
+   "buffers": 96,
+   "settled_buffers": 92,
+   "rms_left": 0.0031802226605928048,
+   "rms_right": 0.080377301265249,
+   "silent_settled_buffers": 0
+  }
+ ]
+}

@@ -1,0 +1,337 @@
+{"epoch": 1791683206.2560868, "pid": 85986, "plan": "state; game-front; sleep 300; require-focus; cap c01-start; require-focus; down D; burst c02-held 3 100; finder-activate; sleep 300; require-unfocus; state; burst c03-unfocused 6 200; game-front; sleep 300; require-focus; state; burst c04-refocused 6 200; require-focus; down D; burst c05-new-press 2 100; require-focus; up D; burst c06-released 4 150; state", "step": "begin", "t": 0, "window_id": 29742}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 596, "y": 184}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 596, "Y": 184}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683206.294251, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 38.16413879394531}
+{"epoch": 1791683206.29629, "step": "game-front", "t": 40.203094482421875}
+{"epoch": 1791683206.616396, "ms": 300, "step": "sleep", "t": 360.3091239929199}
+{"epoch": 1791683206.628705, "focused_pid": 85986, "step": "require-focus", "t": 372.6181983947754}
+{"capture_ms": 83.35685729980469, "epoch": 1791683206.7603312, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c01-start.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 504.244327545166}
+{"epoch": 1791683206.766922, "focused_pid": 85986, "step": "require-focus", "t": 510.8351707458496}
+{"epoch": 1791683206.779088, "key": "D", "step": "down", "t": 523.0011940002441}
+{"capture_ms": 24.86896514892578, "epoch": 1791683206.834618, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 0, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c02-held-00.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 578.5312652587891}
+{"capture_ms": 31.995296478271484, "epoch": 1791683206.946344, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 1, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c02-held-01.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 690.2570724487305}
+{"capture_ms": 36.638736724853516, "epoch": 1791683207.0531359, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 2, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c02-held-02.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 797.0490455627441}
+{"accepted": true, "epoch": 1791683207.117569, "step": "finder-activate", "t": 861.4821434020996}
+{"epoch": 1791683207.421494, "ms": 300, "step": "sleep", "t": 1165.4071807861328}
+{"epoch": 1791683207.441163, "focused_pid": 1608, "step": "require-unfocus", "t": 1185.0762367248535}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 596, "y": 184}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 596, "Y": 184}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683207.456109, "focused_pid": 1608, "game_focused": false, "step": "state", "t": 1200.0222206115723}
+{"capture_ms": 27.649879455566406, "epoch": 1791683207.520234, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 0, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c03-unfocused-00.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 1264.1472816467285}
+{"capture_ms": 40.96078872680664, "epoch": 1791683207.739573, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 1, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c03-unfocused-01.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 1483.4861755371094}
+{"capture_ms": 46.5550422668457, "epoch": 1791683207.947947, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 2, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c03-unfocused-02.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 1691.8601989746094}
+{"capture_ms": 44.86799240112305, "epoch": 1791683208.14882, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 3, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c03-unfocused-03.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 1892.733097076416}
+{"capture_ms": 45.47595977783203, "epoch": 1791683208.35846, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 4, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c03-unfocused-04.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 2102.3731231689453}
+{"capture_ms": 45.166015625, "epoch": 1791683208.567896, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 5, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c03-unfocused-05.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 2311.8090629577637}
+{"epoch": 1791683208.7306361, "step": "game-front", "t": 2474.5492935180664}
+{"epoch": 1791683209.031464, "ms": 300, "step": "sleep", "t": 2775.3772735595703}
+{"epoch": 1791683209.04465, "focused_pid": 85986, "step": "require-focus", "t": 2788.5632514953613}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 596, "y": 184}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 596, "Y": 184}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683209.057297, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2801.2101650238037}
+{"capture_ms": 28.399944305419922, "epoch": 1791683209.120806, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 0, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c04-refocused-00.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 2864.7191524505615}
+{"capture_ms": 41.14484786987305, "epoch": 1791683209.346848, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 1, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c04-refocused-01.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 3090.761184692383}
+{"capture_ms": 42.57488250732422, "epoch": 1791683209.5556998, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 2, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c04-refocused-02.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 3299.6129989624023}
+{"capture_ms": 42.21916198730469, "epoch": 1791683209.7654939, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 3, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c04-refocused-03.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 3509.4070434570312}
+{"capture_ms": 45.393943786621094, "epoch": 1791683209.972117, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 4, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c04-refocused-04.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 3716.0301208496094}
+{"capture_ms": 43.946027755737305, "epoch": 1791683210.179041, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 5, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c04-refocused-05.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 3922.9540824890137}
+{"epoch": 1791683210.34871, "focused_pid": 85986, "step": "require-focus", "t": 4092.623233795166}
+{"epoch": 1791683210.360742, "key": "D", "step": "down", "t": 4104.6552658081055}
+{"capture_ms": 29.027223587036133, "epoch": 1791683210.424868, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 0, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c05-new-press-00.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 4168.781280517578}
+{"capture_ms": 36.329030990600586, "epoch": 1791683210.534703, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 1, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c05-new-press-01.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 4278.616189956665}
+{"epoch": 1791683210.609519, "focused_pid": 85986, "step": "require-focus", "t": 4353.432178497314}
+{"epoch": 1791683210.616226, "key": "D", "step": "up", "t": 4360.1391315460205}
+{"capture_ms": 27.978897094726562, "epoch": 1791683210.6751962, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 0, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c06-released-00.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 4419.109344482422}
+{"capture_ms": 35.729169845581055, "epoch": 1791683210.838073, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 1, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c06-released-01.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 4581.98618888855}
+{"capture_ms": 38.44881057739258, "epoch": 1791683210.993795, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 2, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c06-released-02.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 4737.70809173584}
+{"capture_ms": 37.76812553405762, "epoch": 1791683211.147542, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "index": 3, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/c06-released-03.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 4891.455173492432}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 596, "y": 184}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 596, "Y": 184}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683211.2751389, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 5019.052028656006}
+{"epoch": 1791683211.2752771, "step": "end", "t": 5019.190311431885}
+{"epoch": 1791683404.806717, "pid": 85986, "plan": "state; game-front; sleep 300; require-focus; pos 40 80; sleep 300; state; cap r00-moved; require-focus; down D; sleep 230; up D; sleep 300; cap r01-centered; require-focus; size 480 302; sleep 500; state; cap r02-req-960x540; require-focus; size 960 572; sleep 500; state; cap r03-req-1920x1080; require-focus; size 400 332; sleep 500; state; cap r04-req-800x600; require-focus; size 160 572; sleep 500; state; cap r05-req-320x1080; require-focus; size 960 132; sleep 500; state; cap r06-req-1920x200; require-focus; size 120 122; sleep 500; state; cap r07-req-240x180; require-focus; size 8 40; sleep 500; state; cap r08-req-16x16; require-focus; size 320 272; sleep 500; state; cap r09-req-640x480", "step": "begin", "t": 0, "window_id": 29742}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 596, "y": 184}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 596, "Y": 184}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683404.8357558, "focused_pid": 60169, "game_focused": false, "step": "state", "t": 29.03890609741211}
+{"epoch": 1791683404.841691, "step": "game-front", "t": 34.974098205566406}
+{"epoch": 1791683405.142621, "ms": 300, "step": "sleep", "t": 335.9041213989258}
+{"epoch": 1791683405.218656, "focused_pid": 85986, "step": "require-focus", "t": 411.9391441345215}
+{"epoch": 1791683405.221803, "requested_pt": [40, 80], "step": "pos", "t": 415.086030960083}
+{"epoch": 1791683405.526259, "ms": 300, "step": "sleep", "t": 719.5420265197754}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683405.5372949, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 730.5779457092285}
+{"capture_ms": 82.7641487121582, "epoch": 1791683405.6589441, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r00-moved.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 852.2272109985352}
+{"epoch": 1791683405.667077, "focused_pid": 85986, "step": "require-focus", "t": 860.3601455688477}
+{"epoch": 1791683405.687696, "key": "D", "step": "down", "t": 880.979061126709}
+{"epoch": 1791683405.924749, "ms": 230, "step": "sleep", "t": 1118.0319786071777}
+{"epoch": 1791683405.933092, "key": "D", "step": "up", "t": 1126.3751983642578}
+{"epoch": 1791683406.2517319, "ms": 300, "step": "sleep", "t": 1445.0149536132812}
+{"capture_ms": 27.53901481628418, "epoch": 1791683406.308624, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r01-centered.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 1501.9071102142334}
+{"epoch": 1791683406.316462, "focused_pid": 85986, "step": "require-focus", "t": 1509.7451210021973}
+{"epoch": 1791683406.319306, "requested_pt": [480, 302], "step": "size", "t": 1512.5889778137207}
+{"epoch": 1791683406.85251, "ms": 500, "step": "sleep", "t": 2045.793056488037}
+{"ax": {"focused": true, "h": 302, "main": true, "minimized": false, "w": 480, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 302, "Width": 480, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683406.8628259, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2056.1089515686035}
+{"capture_ms": 30.72214126586914, "epoch": 1791683406.9220262, "frame_pt": {"h": 302, "w": 480, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r02-req-960x540.png", "px_h": 604, "px_w": 960, "scale": 2, "step": "cap", "t": 2115.309238433838}
+{"epoch": 1791683406.930217, "focused_pid": 85986, "step": "require-focus", "t": 2123.500108718872}
+{"epoch": 1791683406.931579, "requested_pt": [960, 572], "step": "size", "t": 2124.8621940612793}
+{"epoch": 1791683407.463107, "ms": 500, "step": "sleep", "t": 2656.3901901245117}
+{"ax": {"focused": true, "h": 572, "main": true, "minimized": false, "w": 960, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 572, "Width": 960, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683407.47395, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2667.2329902648926}
+{"capture_ms": 30.579090118408203, "epoch": 1791683407.538867, "frame_pt": {"h": 572, "w": 960, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r03-req-1920x1080.png", "px_h": 1144, "px_w": 1920, "scale": 2, "step": "cap", "t": 2732.150077819824}
+{"epoch": 1791683407.546283, "focused_pid": 85986, "step": "require-focus", "t": 2739.5660877227783}
+{"epoch": 1791683407.5476289, "requested_pt": [400, 332], "step": "size", "t": 2740.9119606018066}
+{"epoch": 1791683408.054486, "ms": 500, "step": "sleep", "t": 3247.7691173553467}
+{"ax": {"focused": true, "h": 332, "main": true, "minimized": false, "w": 400, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 332, "Width": 400, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683408.064577, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 3257.8601837158203}
+{"capture_ms": 29.380083084106445, "epoch": 1791683408.1198301, "frame_pt": {"h": 332, "w": 400, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r04-req-800x600.png", "px_h": 664, "px_w": 800, "scale": 2, "step": "cap", "t": 3313.113212585449}
+{"epoch": 1791683408.1952848, "focused_pid": 85986, "step": "require-focus", "t": 3388.5679244995117}
+{"epoch": 1791683408.196641, "requested_pt": [160, 572], "step": "size", "t": 3389.9240493774414}
+{"epoch": 1791683408.7081308, "ms": 500, "step": "sleep", "t": 3901.413917541504}
+{"ax": {"focused": true, "h": 572, "main": true, "minimized": false, "w": 160, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 572, "Width": 160, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683408.722059, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 3915.342092514038}
+{"capture_ms": 30.612945556640625, "epoch": 1791683408.7795482, "frame_pt": {"h": 572, "w": 160, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r05-req-320x1080.png", "px_h": 1144, "px_w": 320, "scale": 2, "step": "cap", "t": 3972.8312492370605}
+{"epoch": 1791683408.787229, "focused_pid": 85986, "step": "require-focus", "t": 3980.5121421813965}
+{"epoch": 1791683408.7883291, "requested_pt": [960, 132], "step": "size", "t": 3981.612205505371}
+{"epoch": 1791683409.2963228, "ms": 500, "step": "sleep", "t": 4489.605903625488}
+{"ax": {"focused": true, "h": 132, "main": true, "minimized": false, "w": 960, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 132, "Width": 960, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683409.306788, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 4500.071048736572}
+{"capture_ms": 32.60493278503418, "epoch": 1791683409.3674312, "frame_pt": {"h": 132, "w": 960, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r06-req-1920x200.png", "px_h": 264, "px_w": 1920, "scale": 2, "step": "cap", "t": 4560.714244842529}
+{"epoch": 1791683409.374874, "focused_pid": 85986, "step": "require-focus", "t": 4568.157196044922}
+{"epoch": 1791683409.377983, "requested_pt": [120, 122], "step": "size", "t": 4571.266174316406}
+{"epoch": 1791683409.889979, "ms": 500, "step": "sleep", "t": 5083.261966705322}
+{"ax": {"focused": true, "h": 122, "main": true, "minimized": false, "w": 120, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 122, "Width": 120, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683409.899344, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 5092.627048492432}
+{"capture_ms": 26.922941207885742, "epoch": 1791683409.951535, "frame_pt": {"h": 122, "w": 120, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r07-req-240x180.png", "px_h": 244, "px_w": 240, "scale": 2, "step": "cap", "t": 5144.818067550659}
+{"epoch": 1791683409.959156, "focused_pid": 85986, "step": "require-focus", "t": 5152.439117431641}
+{"epoch": 1791683409.961635, "requested_pt": [8, 40], "step": "size", "t": 5154.918193817139}
+{"epoch": 1791683410.470862, "ms": 500, "step": "sleep", "t": 5664.144992828369}
+{"ax": {"focused": true, "h": 40, "main": true, "minimized": false, "w": 87, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 40, "Width": 87, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683410.480562, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 5673.845052719116}
+{"capture_ms": 27.344703674316406, "epoch": 1791683410.5328112, "frame_pt": {"h": 40, "w": 87, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r08-req-16x16.png", "px_h": 80, "px_w": 174, "scale": 2, "step": "cap", "t": 5726.0942459106445}
+{"epoch": 1791683410.5398622, "focused_pid": 85986, "step": "require-focus", "t": 5733.145236968994}
+{"epoch": 1791683410.541658, "requested_pt": [320, 272], "step": "size", "t": 5734.941005706787}
+{"epoch": 1791683411.045312, "ms": 500, "step": "sleep", "t": 6238.595008850098}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683411.058507, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 6251.7900466918945}
+{"capture_ms": 31.141042709350586, "epoch": 1791683411.115714, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/r09-req-640x480.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 6308.99715423584}
+{"epoch": 1791683411.115765, "step": "end", "t": 6309.048175811768}
+{"epoch": 1791683453.704134, "pid": 85986, "plan": "game-front; sleep 300; require-focus; cap u00-focused-640x480; finder-activate; sleep 300; require-unfocus; state; size 480 302; sleep 600; require-unfocus; state; cap u01-unfocused-req-960x540; size 200 182; sleep 600; require-unfocus; state; cap u02-unfocused-req-400x300; game-front; sleep 400; require-focus; state; cap u03-refocused-400x300; size 320 272; sleep 500; require-focus; cap u04-refocused-640x480", "step": "begin", "t": 0, "window_id": 29742}
+{"epoch": 1791683453.725518, "step": "game-front", "t": 21.384000778198242}
+{"epoch": 1791683454.032866, "ms": 300, "step": "sleep", "t": 328.7320137023926}
+{"epoch": 1791683454.040615, "focused_pid": 85986, "step": "require-focus", "t": 336.48109436035156}
+{"capture_ms": 78.01413536071777, "epoch": 1791683454.1516, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/u00-focused-640x480.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 447.4658966064453}
+{"accepted": true, "epoch": 1791683454.154743, "step": "finder-activate", "t": 450.6089687347412}
+{"epoch": 1791683454.462621, "ms": 300, "step": "sleep", "t": 758.4869861602783}
+{"epoch": 1791683454.5386581, "focused_pid": 1608, "step": "require-unfocus", "t": 834.5241546630859}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683454.553976, "focused_pid": 1608, "game_focused": false, "step": "state", "t": 849.8420715332031}
+{"epoch": 1791683454.555519, "requested_pt": [480, 302], "step": "size", "t": 851.3851165771484}
+{"epoch": 1791683455.183835, "ms": 600, "step": "sleep", "t": 1479.701042175293}
+{"epoch": 1791683455.191564, "focused_pid": 1608, "step": "require-unfocus", "t": 1487.4300956726074}
+{"ax": {"focused": true, "h": 302, "main": true, "minimized": false, "w": 480, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 302, "Width": 480, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683455.1998029, "focused_pid": 1608, "game_focused": false, "step": "state", "t": 1495.668888092041}
+{"capture_ms": 27.281999588012695, "epoch": 1791683455.257524, "frame_pt": {"h": 302, "w": 480, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/u01-unfocused-req-960x540.png", "px_h": 604, "px_w": 960, "scale": 2, "step": "cap", "t": 1553.3900260925293}
+{"epoch": 1791683455.260426, "requested_pt": [200, 182], "step": "size", "t": 1556.2920570373535}
+{"epoch": 1791683455.8987122, "ms": 600, "step": "sleep", "t": 2194.578170776367}
+{"epoch": 1791683455.905745, "focused_pid": 1608, "step": "require-unfocus", "t": 2201.611042022705}
+{"ax": {"focused": true, "h": 182, "main": true, "minimized": false, "w": 200, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 182, "Width": 200, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683455.913542, "focused_pid": 1608, "game_focused": false, "step": "state", "t": 2209.4080448150635}
+{"capture_ms": 30.382871627807617, "epoch": 1791683455.9708471, "frame_pt": {"h": 182, "w": 200, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/u02-unfocused-req-400x300.png", "px_h": 364, "px_w": 400, "scale": 2, "step": "cap", "t": 2266.7131423950195}
+{"epoch": 1791683455.97581, "step": "game-front", "t": 2271.6760635375977}
+{"epoch": 1791683456.400105, "ms": 400, "step": "sleep", "t": 2695.9710121154785}
+{"epoch": 1791683456.407541, "focused_pid": 85986, "step": "require-focus", "t": 2703.407049179077}
+{"ax": {"focused": true, "h": 182, "main": true, "minimized": false, "w": 200, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 182, "Width": 200, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683456.418237, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2714.1029834747314}
+{"capture_ms": 30.41219711303711, "epoch": 1791683456.4752722, "frame_pt": {"h": 182, "w": 200, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/u03-refocused-400x300.png", "px_h": 364, "px_w": 400, "scale": 2, "step": "cap", "t": 2771.1381912231445}
+{"epoch": 1791683456.47667, "requested_pt": [320, 272], "step": "size", "t": 2772.536039352417}
+{"epoch": 1791683456.9794412, "ms": 500, "step": "sleep", "t": 3275.3071784973145}
+{"epoch": 1791683456.987252, "focused_pid": 85986, "step": "require-focus", "t": 3283.1180095672607}
+{"capture_ms": 28.449058532714844, "epoch": 1791683457.045718, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/u04-refocused-640x480.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 3341.5839672088623}
+{"epoch": 1791683457.045768, "step": "end", "t": 3341.6340351104736}
+{"epoch": 1791683480.0767841, "pid": 85986, "plan": "game-front; sleep 300; require-focus; cap m00-before; minimize; sleep 1000; state; restore; sleep 150; state; cap m01-restored-150ms; sleep 500; state; cap m02-restored-650ms; game-front; sleep 300; state; cap m03-restored-front; minimize; sleep 400; restore; sleep 400; minimize; sleep 400; restore; sleep 400; minimize; sleep 400; restore; sleep 400; state; game-front; sleep 400; require-focus; state; cap m04-after-3-cycles", "step": "begin", "t": 0, "window_id": 29742}
+{"epoch": 1791683480.0958672, "step": "game-front", "t": 19.083023071289062}
+{"epoch": 1791683480.398, "ms": 300, "step": "sleep", "t": 321.2158679962158}
+{"epoch": 1791683480.405585, "focused_pid": 85986, "step": "require-focus", "t": 328.80091667175293}
+{"capture_ms": 81.78901672363281, "epoch": 1791683480.523728, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/m00-before.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 446.9437599182129}
+{"epoch": 1791683480.524654, "step": "minimize", "t": 447.86977767944336}
+{"epoch": 1791683481.531003, "ms": 1000, "step": "sleep", "t": 1454.218864440918}
+{"ax": {"focused": false, "h": 272, "main": false, "minimized": true, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": false}], "epoch": 1791683481.542976, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 1466.1917686462402}
+{"epoch": 1791683481.543684, "step": "restore", "t": 1466.8998718261719}
+{"epoch": 1791683481.695271, "ms": 150, "step": "sleep", "t": 1618.4868812561035}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 215, "Width": 135, "X": 955, "Y": 744}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683482.082546, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2005.7618618011475}
+{"capture_ms": 33.24079513549805, "epoch": 1791683482.147232, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/m01-restored-150ms.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 2070.4479217529297}
+{"epoch": 1791683482.663467, "ms": 500, "step": "sleep", "t": 2586.6827964782715}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683482.677795, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2601.010799407959}
+{"capture_ms": 28.34010124206543, "epoch": 1791683482.732235, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/m02-restored-650ms.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 2655.4508209228516}
+{"epoch": 1791683482.733996, "step": "game-front", "t": 2657.2117805480957}
+{"epoch": 1791683483.050066, "ms": 300, "step": "sleep", "t": 2973.2818603515625}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683483.059883, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2983.0989837646484}
+{"capture_ms": 27.4960994720459, "epoch": 1791683483.113172, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/m03-restored-front.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 3036.3879203796387}
+{"epoch": 1791683483.1138391, "step": "minimize", "t": 3037.055015563965}
+{"epoch": 1791683483.520045, "ms": 400, "step": "sleep", "t": 3443.260908126831}
+{"epoch": 1791683483.6591392, "step": "restore", "t": 3582.35502243042}
+{"epoch": 1791683484.078697, "ms": 400, "step": "sleep", "t": 4001.912832260132}
+{"epoch": 1791683484.1987891, "step": "minimize", "t": 4122.004985809326}
+{"epoch": 1791683484.624485, "ms": 400, "step": "sleep", "t": 4547.700881958008}
+{"epoch": 1791683484.7508302, "step": "restore", "t": 4674.046039581299}
+{"epoch": 1791683485.175216, "ms": 400, "step": "sleep", "t": 5098.431825637817}
+{"epoch": 1791683485.29374, "step": "minimize", "t": 5216.955900192261}
+{"epoch": 1791683485.713835, "ms": 400, "step": "sleep", "t": 5637.0508670806885}
+{"epoch": 1791683485.852957, "step": "restore", "t": 5776.172876358032}
+{"epoch": 1791683486.258203, "ms": 400, "step": "sleep", "t": 6181.418895721436}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 273, "Width": 372, "X": 42, "Y": 129}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683486.39111, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 6314.32580947876}
+{"epoch": 1791683486.393328, "step": "game-front", "t": 6316.543817520142}
+{"epoch": 1791683486.812794, "ms": 400, "step": "sleep", "t": 6736.009836196899}
+{"epoch": 1791683486.8203568, "focused_pid": 85986, "step": "require-focus", "t": 6743.57271194458}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683486.829272, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 6752.487897872925}
+{"capture_ms": 32.629966735839844, "epoch": 1791683486.889536, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/m04-after-3-cycles.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 6812.751770019531}
+{"epoch": 1791683486.889585, "step": "end", "t": 6812.800884246826}
+{"epoch": 1791683519.177549, "pid": 85986, "plan": "game-front; sleep 300; require-focus; cap h00-before; require-focus; down D; sleep 150; minimize; sleep 800; state; restore; sleep 300; game-front; sleep 300; require-focus; state; burst h01-after-restore 4 200; require-focus; up D; sleep 200; cap h02-after-up; finder-activate; sleep 300; game-front; sleep 300; finder-activate; sleep 300; game-front; sleep 300; finder-activate; sleep 300; game-front; sleep 400; require-focus; state; cap f01-after-3-switches", "step": "begin", "t": 0, "window_id": 29742}
+{"epoch": 1791683519.197829, "step": "game-front", "t": 20.280122756958008}
+{"epoch": 1791683519.500145, "ms": 300, "step": "sleep", "t": 322.59607315063477}
+{"epoch": 1791683519.5094628, "focused_pid": 85986, "step": "require-focus", "t": 331.91394805908203}
+{"capture_ms": 86.46392822265625, "epoch": 1791683519.6328778, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/h00-before.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 455.32894134521484}
+{"epoch": 1791683519.708365, "focused_pid": 85986, "step": "require-focus", "t": 530.8160781860352}
+{"epoch": 1791683519.727777, "key": "D", "step": "down", "t": 550.2281188964844}
+{"epoch": 1791683519.878281, "ms": 150, "step": "sleep", "t": 700.7322311401367}
+{"epoch": 1791683519.879096, "step": "minimize", "t": 701.5471458435059}
+{"epoch": 1791683520.697678, "ms": 800, "step": "sleep", "t": 1520.1292037963867}
+{"ax": {"focused": false, "h": 272, "main": false, "minimized": true, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": false}], "epoch": 1791683520.707077, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 1529.5281410217285}
+{"epoch": 1791683520.707444, "step": "restore", "t": 1529.8950672149658}
+{"epoch": 1791683521.017355, "ms": 300, "step": "sleep", "t": 1839.806079864502}
+{"epoch": 1791683521.25239, "step": "game-front", "t": 2074.841022491455}
+{"epoch": 1791683521.5613542, "ms": 300, "step": "sleep", "t": 2383.805274963379}
+{"epoch": 1791683521.570101, "focused_pid": 85986, "step": "require-focus", "t": 2392.552137374878}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683521.5808148, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2403.265953063965}
+{"capture_ms": 39.97492790222168, "epoch": 1791683521.651987, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "index": 0, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/h01-after-restore-00.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 2474.438190460205}
+{"capture_ms": 37.220001220703125, "epoch": 1791683521.857157, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "index": 1, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/h01-after-restore-01.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 2679.608106613159}
+{"capture_ms": 31.399011611938477, "epoch": 1791683522.053947, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "index": 2, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/h01-after-restore-02.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 2876.3980865478516}
+{"capture_ms": 31.369924545288086, "epoch": 1791683522.265647, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "index": 3, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/h01-after-restore-03.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "burst", "t": 3088.0980491638184}
+{"epoch": 1791683522.449183, "focused_pid": 85986, "step": "require-focus", "t": 3271.634101867676}
+{"epoch": 1791683522.456502, "key": "D", "step": "up", "t": 3278.9530754089355}
+{"epoch": 1791683522.6570048, "ms": 200, "step": "sleep", "t": 3479.4559478759766}
+{"capture_ms": 30.88212013244629, "epoch": 1791683522.723009, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/h02-after-up.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 3545.4602241516113}
+{"accepted": true, "epoch": 1791683522.726063, "step": "finder-activate", "t": 3548.5141277313232}
+{"epoch": 1791683523.0372128, "ms": 300, "step": "sleep", "t": 3859.663963317871}
+{"epoch": 1791683523.045144, "step": "game-front", "t": 3867.5951957702637}
+{"epoch": 1791683523.359596, "ms": 300, "step": "sleep", "t": 4182.047128677368}
+{"accepted": true, "epoch": 1791683523.362261, "step": "finder-activate", "t": 4184.712171554565}
+{"epoch": 1791683523.678024, "ms": 300, "step": "sleep", "t": 4500.475168228149}
+{"epoch": 1791683523.683677, "step": "game-front", "t": 4506.1280727386475}
+{"epoch": 1791683523.9889898, "ms": 300, "step": "sleep", "t": 4811.440944671631}
+{"accepted": true, "epoch": 1791683523.9916759, "step": "finder-activate", "t": 4814.126968383789}
+{"epoch": 1791683524.311893, "ms": 300, "step": "sleep", "t": 5134.344100952148}
+{"epoch": 1791683524.316462, "step": "game-front", "t": 5138.913154602051}
+{"epoch": 1791683524.742048, "ms": 400, "step": "sleep", "t": 5564.499139785767}
+{"epoch": 1791683524.7501302, "focused_pid": 85986, "step": "require-focus", "t": 5572.5812911987305}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683524.7606459, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 5583.096981048584}
+{"capture_ms": 30.914783477783203, "epoch": 1791683524.817637, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/f01-after-3-switches.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 5640.088081359863}
+{"epoch": 1791683524.8177161, "step": "end", "t": 5640.167236328125}
+{"epoch": 1791683538.375624, "pid": 85986, "plan": "game-front; sleep 300; require-focus; cap q00-before; size 340 282; sleep 16; size 360 292; sleep 16; size 380 302; sleep 16; size 400 312; sleep 16; size 420 322; sleep 16; size 440 332; sleep 16; size 460 342; sleep 16; size 480 352; sleep 16; cap q-transient-8; size 500 362; sleep 16; size 520 372; sleep 16; size 540 382; sleep 16; size 560 392; sleep 16; size 580 402; sleep 16; size 600 412; sleep 16; size 620 422; sleep 16; size 640 432; sleep 16; cap q-transient-16; size 660 442; sleep 16; size 680 452; sleep 16; size 700 462; sleep 16; size 720 472; sleep 16; size 740 482; sleep 16; size 760 492; sleep 16; size 780 502; sleep 16; size 800 512; sleep 16; cap q-transient-24; sleep 600; require-focus; state; cap q01-settled-big; size 780 502; sleep 16; size 760 492; sleep 16; size 740 482; sleep 16; size 720 472; sleep 16; size 700 462; sleep 16; size 680 452; sleep 16; size 660 442; sleep 16; size 640 432; sleep 16; size 620 422; sleep 16; size 600 412; sleep 16; size 580 402; sleep 16; size 560 392; sleep 16; size 540 382; sleep 16; size 520 372; sleep 16; size 500 362; sleep 16; size 480 352; sleep 16; size 460 342; sleep 16; size 440 332; sleep 16; size 420 322; sleep 16; size 400 312; sleep 16; size 380 302; sleep 16; size 360 292; sleep 16; size 340 282; sleep 16; size 320 272; sleep 16; sleep 600; require-focus; state; cap q02-settled-640x480", "step": "begin", "t": -0.0011920928955078125, "window_id": 29742}
+{"epoch": 1791683538.3945398, "step": "game-front", "t": 18.91469955444336}
+{"epoch": 1791683538.713943, "ms": 300, "step": "sleep", "t": 338.31787109375}
+{"epoch": 1791683538.7223701, "focused_pid": 85986, "step": "require-focus", "t": 346.7450141906738}
+{"capture_ms": 80.97410202026367, "epoch": 1791683538.836288, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/q00-before.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 460.662841796875}
+{"epoch": 1791683538.8375502, "requested_pt": [340, 282], "step": "size", "t": 461.9250297546387}
+{"epoch": 1791683538.857723, "ms": 16, "step": "sleep", "t": 482.097864151001}
+{"epoch": 1791683538.858948, "requested_pt": [360, 292], "step": "size", "t": 483.3228588104248}
+{"epoch": 1791683538.8753018, "ms": 16, "step": "sleep", "t": 499.6767044067383}
+{"epoch": 1791683538.877378, "requested_pt": [380, 302], "step": "size", "t": 501.7528533935547}
+{"epoch": 1791683538.89754, "ms": 16, "step": "sleep", "t": 521.9149589538574}
+{"epoch": 1791683538.89954, "requested_pt": [400, 312], "step": "size", "t": 523.9148139953613}
+{"epoch": 1791683538.918371, "ms": 16, "step": "sleep", "t": 542.74582862854}
+{"epoch": 1791683538.919344, "requested_pt": [420, 322], "step": "size", "t": 543.7188148498535}
+{"epoch": 1791683538.939466, "ms": 16, "step": "sleep", "t": 563.8408660888672}
+{"epoch": 1791683538.940356, "requested_pt": [440, 332], "step": "size", "t": 564.7308826446533}
+{"epoch": 1791683538.959163, "ms": 16, "step": "sleep", "t": 583.5378170013428}
+{"epoch": 1791683538.960264, "requested_pt": [460, 342], "step": "size", "t": 584.6388339996338}
+{"epoch": 1791683538.980377, "ms": 16, "step": "sleep", "t": 604.7518253326416}
+{"epoch": 1791683538.981889, "requested_pt": [480, 352], "step": "size", "t": 606.2638759613037}
+{"epoch": 1791683539.001333, "ms": 16, "step": "sleep", "t": 625.7078647613525}
+{"capture_ms": 26.433944702148438, "epoch": 1791683539.056525, "frame_pt": {"h": 352, "w": 480, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/q-transient-8.png", "px_h": 704, "px_w": 960, "scale": 2, "step": "cap", "t": 680.8998584747314}
+{"epoch": 1791683539.0577989, "requested_pt": [500, 362], "step": "size", "t": 682.1737289428711}
+{"epoch": 1791683539.074451, "ms": 16, "step": "sleep", "t": 698.8258361816406}
+{"epoch": 1791683539.0753999, "requested_pt": [520, 372], "step": "size", "t": 699.7747421264648}
+{"epoch": 1791683539.093796, "ms": 16, "step": "sleep", "t": 718.1708812713623}
+{"epoch": 1791683539.0947108, "requested_pt": [540, 382], "step": "size", "t": 719.085693359375}
+{"epoch": 1791683539.1125011, "ms": 16, "step": "sleep", "t": 736.8760108947754}
+{"epoch": 1791683539.1153998, "requested_pt": [560, 392], "step": "size", "t": 739.7747039794922}
+{"epoch": 1791683539.135556, "ms": 16, "step": "sleep", "t": 759.9308490753174}
+{"epoch": 1791683539.1366491, "requested_pt": [580, 402], "step": "size", "t": 761.023998260498}
+{"epoch": 1791683539.15679, "ms": 16, "step": "sleep", "t": 781.1648845672607}
+{"epoch": 1791683539.157933, "requested_pt": [600, 412], "step": "size", "t": 782.3078632354736}
+{"epoch": 1791683539.178071, "ms": 16, "step": "sleep", "t": 802.4458885192871}
+{"epoch": 1791683539.1792521, "requested_pt": [620, 422], "step": "size", "t": 803.6270141601562}
+{"epoch": 1791683539.1993961, "ms": 16, "step": "sleep", "t": 823.7709999084473}
+{"epoch": 1791683539.2005482, "requested_pt": [640, 432], "step": "size", "t": 824.923038482666}
+{"epoch": 1791683539.21696, "ms": 16, "step": "sleep", "t": 841.3348197937012}
+{"capture_ms": 26.89814567565918, "epoch": 1791683539.272997, "frame_pt": {"h": 432, "w": 640, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/q-transient-16.png", "px_h": 864, "px_w": 1280, "scale": 2, "step": "cap", "t": 897.371768951416}
+{"epoch": 1791683539.274177, "requested_pt": [660, 442], "step": "size", "t": 898.5519409179688}
+{"epoch": 1791683539.29432, "ms": 16, "step": "sleep", "t": 918.6949729919434}
+{"epoch": 1791683539.2954888, "requested_pt": [680, 452], "step": "size", "t": 919.8637008666992}
+{"epoch": 1791683539.315637, "ms": 16, "step": "sleep", "t": 940.0119781494141}
+{"epoch": 1791683539.3168921, "requested_pt": [700, 462], "step": "size", "t": 941.2670135498047}
+{"epoch": 1791683539.3337069, "ms": 16, "step": "sleep", "t": 958.0817222595215}
+{"epoch": 1791683539.335561, "requested_pt": [720, 472], "step": "size", "t": 959.9359035491943}
+{"epoch": 1791683539.3534331, "ms": 16, "step": "sleep", "t": 977.8079986572266}
+{"epoch": 1791683539.3568048, "requested_pt": [740, 482], "step": "size", "t": 981.1797142028809}
+{"epoch": 1791683539.3769841, "ms": 16, "step": "sleep", "t": 1001.3589859008789}
+{"epoch": 1791683539.377933, "requested_pt": [760, 492], "step": "size", "t": 1002.3078918457031}
+{"epoch": 1791683539.397145, "ms": 16, "step": "sleep", "t": 1021.5198993682861}
+{"epoch": 1791683539.399545, "requested_pt": [780, 502], "step": "size", "t": 1023.9198207855225}
+{"epoch": 1791683539.416528, "ms": 16, "step": "sleep", "t": 1040.902853012085}
+{"epoch": 1791683539.417623, "requested_pt": [800, 512], "step": "size", "t": 1041.9979095458984}
+{"epoch": 1791683539.437767, "ms": 16, "step": "sleep", "t": 1062.1418952941895}
+{"capture_ms": 27.566909790039062, "epoch": 1791683539.497597, "frame_pt": {"h": 512, "w": 800, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/q-transient-24.png", "px_h": 1024, "px_w": 1600, "scale": 2, "step": "cap", "t": 1121.971845626831}
+{"epoch": 1791683540.124395, "ms": 600, "step": "sleep", "t": 1748.769760131836}
+{"epoch": 1791683540.132061, "focused_pid": 85986, "step": "require-focus", "t": 1756.4358711242676}
+{"ax": {"focused": true, "h": 512, "main": true, "minimized": false, "w": 800, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 512, "Width": 800, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683540.142153, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 1766.5278911590576}
+{"capture_ms": 29.463768005371094, "epoch": 1791683540.2040548, "frame_pt": {"h": 512, "w": 800, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/q01-settled-big.png", "px_h": 1024, "px_w": 1600, "scale": 2, "step": "cap", "t": 1828.4296989440918}
+{"epoch": 1791683540.207284, "requested_pt": [780, 502], "step": "size", "t": 1831.6588401794434}
+{"epoch": 1791683540.227466, "ms": 16, "step": "sleep", "t": 1851.8409729003906}
+{"epoch": 1791683540.228715, "requested_pt": [760, 492], "step": "size", "t": 1853.0898094177246}
+{"epoch": 1791683540.248866, "ms": 16, "step": "sleep", "t": 1873.2409477233887}
+{"epoch": 1791683540.250126, "requested_pt": [740, 482], "step": "size", "t": 1874.5007514953613}
+{"epoch": 1791683540.266964, "ms": 16, "step": "sleep", "t": 1891.33882522583}
+{"epoch": 1791683540.268758, "requested_pt": [720, 472], "step": "size", "t": 1893.1329250335693}
+{"epoch": 1791683540.288924, "ms": 16, "step": "sleep", "t": 1913.2988452911377}
+{"epoch": 1791683540.290894, "requested_pt": [700, 462], "step": "size", "t": 1915.268898010254}
+{"epoch": 1791683540.308666, "ms": 16, "step": "sleep", "t": 1933.0408573150635}
+{"epoch": 1791683540.309824, "requested_pt": [680, 452], "step": "size", "t": 1934.1988563537598}
+{"epoch": 1791683540.329976, "ms": 16, "step": "sleep", "t": 1954.3509483337402}
+{"epoch": 1791683540.3311481, "requested_pt": [660, 442], "step": "size", "t": 1955.5230140686035}
+{"epoch": 1791683540.350285, "ms": 16, "step": "sleep", "t": 1974.6599197387695}
+{"epoch": 1791683540.352047, "requested_pt": [640, 432], "step": "size", "t": 1976.42183303833}
+{"epoch": 1791683540.372212, "ms": 16, "step": "sleep", "t": 1996.586799621582}
+{"epoch": 1791683540.373996, "requested_pt": [620, 422], "step": "size", "t": 1998.370885848999}
+{"epoch": 1791683540.391973, "ms": 16, "step": "sleep", "t": 2016.347885131836}
+{"epoch": 1791683540.393217, "requested_pt": [600, 412], "step": "size", "t": 2017.591953277588}
+{"epoch": 1791683540.413351, "ms": 16, "step": "sleep", "t": 2037.7259254455566}
+{"epoch": 1791683540.41447, "requested_pt": [580, 402], "step": "size", "t": 2038.8448238372803}
+{"epoch": 1791683540.4336329, "ms": 16, "step": "sleep", "t": 2058.0077171325684}
+{"epoch": 1791683540.435391, "requested_pt": [560, 392], "step": "size", "t": 2059.7658157348633}
+{"epoch": 1791683540.455302, "ms": 16, "step": "sleep", "t": 2079.676866531372}
+{"epoch": 1791683540.457613, "requested_pt": [540, 382], "step": "size", "t": 2081.9878578186035}
+{"epoch": 1791683540.474276, "ms": 16, "step": "sleep", "t": 2098.6509323120117}
+{"epoch": 1791683540.476111, "requested_pt": [520, 372], "step": "size", "t": 2100.4858016967773}
+{"epoch": 1791683540.496241, "ms": 16, "step": "sleep", "t": 2120.6159591674805}
+{"epoch": 1791683540.4973888, "requested_pt": [500, 362], "step": "size", "t": 2121.7637062072754}
+{"epoch": 1791683540.516961, "ms": 16, "step": "sleep", "t": 2141.335964202881}
+{"epoch": 1791683540.518834, "requested_pt": [480, 352], "step": "size", "t": 2143.2089805603027}
+{"epoch": 1791683540.539011, "ms": 16, "step": "sleep", "t": 2163.3858680725098}
+{"epoch": 1791683540.540518, "requested_pt": [460, 342], "step": "size", "t": 2164.8929119110107}
+{"epoch": 1791683540.5606608, "ms": 16, "step": "sleep", "t": 2185.0357055664062}
+{"epoch": 1791683540.56179, "requested_pt": [440, 332], "step": "size", "t": 2186.1648559570312}
+{"epoch": 1791683540.5819368, "ms": 16, "step": "sleep", "t": 2206.3117027282715}
+{"epoch": 1791683540.583159, "requested_pt": [420, 322], "step": "size", "t": 2207.533836364746}
+{"epoch": 1791683540.600285, "ms": 16, "step": "sleep", "t": 2224.6599197387695}
+{"epoch": 1791683540.602237, "requested_pt": [400, 312], "step": "size", "t": 2226.611852645874}
+{"epoch": 1791683540.622406, "ms": 16, "step": "sleep", "t": 2246.7808723449707}
+{"epoch": 1791683540.624366, "requested_pt": [380, 302], "step": "size", "t": 2248.7409114837646}
+{"epoch": 1791683540.642, "ms": 16, "step": "sleep", "t": 2266.3748264312744}
+{"epoch": 1791683540.643218, "requested_pt": [360, 292], "step": "size", "t": 2267.5929069519043}
+{"epoch": 1791683540.663367, "ms": 16, "step": "sleep", "t": 2287.7418994903564}
+{"epoch": 1791683540.664554, "requested_pt": [340, 282], "step": "size", "t": 2288.928985595703}
+{"epoch": 1791683540.684725, "ms": 16, "step": "sleep", "t": 2309.0999126434326}
+{"epoch": 1791683540.6866379, "requested_pt": [320, 272], "step": "size", "t": 2311.0127449035645}
+{"epoch": 1791683540.70681, "ms": 16, "step": "sleep", "t": 2331.1848640441895}
+{"epoch": 1791683541.3457088, "ms": 600, "step": "sleep", "t": 2970.083713531494}
+{"epoch": 1791683541.3539882, "focused_pid": 85986, "step": "require-focus", "t": 2978.363037109375}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683541.3639278, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 2988.302707672119}
+{"capture_ms": 30.7159423828125, "epoch": 1791683541.422481, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/q02-settled-640x480.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 3046.855926513672}
+{"epoch": 1791683541.422532, "step": "end", "t": 3046.9069480895996}
+{"epoch": 1791683618.734801, "pid": 85986, "plan": "game-front; sleep 300; require-focus; state; drag 358 350 200 100 20; sleep 500; state; cap l01-after-drag", "step": "begin", "t": 0, "window_id": 29742}
+{"epoch": 1791683618.762467, "step": "game-front", "t": 27.66585350036621}
+{"epoch": 1791683619.081349, "ms": 300, "step": "sleep", "t": 346.54784202575684}
+{"epoch": 1791683619.158517, "focused_pid": 85986, "step": "require-focus", "t": 423.71582984924316}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683619.169479, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 434.6778392791748}
+{"delta": [200, 100], "epoch": 1791683619.575241, "from": [358, 350], "moves": 20, "step": "drag", "t": 840.440034866333}
+{"epoch": 1791683620.0775661, "ms": 500, "step": "sleep", "t": 1342.7650928497314}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 40, "y": 80}, "cg": [{"alpha": 1, "bounds": {"Height": 64, "Width": 64, "X": 0, "Y": 482}, "id": 29743, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 40, "Y": 80}, "id": 29742, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683620.094327, "focused_pid": 85986, "game_focused": true, "step": "state", "t": 1359.5259189605713}
+{"capture_ms": 87.78572082519531, "epoch": 1791683620.225446, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/l01-after-drag.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 1490.644931793213}
+{"epoch": 1791683620.2255511, "step": "end", "t": 1490.7500743865967}
+{"epoch": 1791683634.432211, "pid": 85986, "plan": "game-front; sleep 300; require-focus; cap fs00-before; fullscreen 1; sleep 2500; state; cap fs01-fullscreen; sleep 1000; cap fs02-fullscreen-later; fullscreen 0; sleep 2000; state; cap fs03-exited", "step": "begin", "t": -0.00095367431640625, "window_id": 29742}
+{"epoch": 1791683634.456785, "step": "game-front", "t": 24.573087692260742}
+{"epoch": 1791683634.776235, "ms": 300, "step": "sleep", "t": 344.0232276916504}
+{"epoch": 1791683634.783612, "focused_pid": 85986, "step": "require-focus", "t": 351.40013694763184}
+{"capture_ms": 84.32483673095703, "epoch": 1791683634.904341, "frame_pt": {"h": 272, "w": 320, "x": 40, "y": 80}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-02-static/fs00-before.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 472.12910652160645}
+{"epoch": 1791683634.927943, "step": "fullscreen", "t": 495.7311153411865, "value": "1"}
+{"epoch": 1791683637.475106, "ms": 2500, "step": "sleep", "t": 3042.894124984741}

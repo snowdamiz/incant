@@ -1,0 +1,9 @@
+{"epoch": 1791683851.355622, "pid": 99077, "plan": "state; game-front; sleep 300; require-focus; cap f00-before; require-focus; down F", "step": "begin", "t": 0, "window_id": 29862}
+{"ax": {"focused": true, "h": 272, "main": true, "minimized": false, "w": 320, "x": 596, "y": 184}, "cg": [{"alpha": 1, "bounds": {"Height": 500, "Width": 500, "X": 0, "Y": 482}, "id": 29863, "layer": 0, "name": "", "on_screen": false}, {"alpha": 1, "bounds": {"Height": 272, "Width": 320, "X": 596, "Y": 184}, "id": 29862, "layer": 0, "name": "Incant native game", "on_screen": true}], "epoch": 1791683851.3941422, "focused_pid": 99077, "game_focused": true, "step": "state", "t": 38.520097732543945}
+{"epoch": 1791683851.3972569, "step": "game-front", "t": 41.63479804992676}
+{"epoch": 1791683851.698195, "ms": 300, "step": "sleep", "t": 342.5729274749756}
+{"epoch": 1791683851.706002, "focused_pid": 99077, "step": "require-focus", "t": 350.37994384765625}
+{"capture_ms": 88.02485466003418, "epoch": 1791683851.829688, "frame_pt": {"h": 272, "w": 320, "x": 596, "y": 184}, "on_screen": true, "path": "handoffs/0037-native-player-window/evidence/run-04-static-fail/f00-before.png", "px_h": 544, "px_w": 640, "scale": 2, "step": "cap", "t": 474.06601905822754}
+{"epoch": 1791683851.837151, "focused_pid": 99077, "step": "require-focus", "t": 481.52899742126465}
+{"epoch": 1791683851.852652, "key": "F", "step": "down", "t": 497.03001976013184}
+{"epoch": 1791683851.852713, "step": "end", "t": 497.09105491638184}
