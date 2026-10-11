@@ -3986,6 +3986,7 @@ dependencies = [
  "incant_input",
  "incant_localization",
  "incant_observe",
+ "incant_play",
  "incant_play_legacy",
  "incant_render",
  "incant_render_authoring",
@@ -4123,6 +4124,26 @@ dependencies = [
  "incant_localization",
  "serde_json",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "incant_play"
+version = "0.0.1"
+dependencies = [
+ "incant_assets",
+ "incant_audio_runtime",
+ "incant_cook",
+ "incant_doc",
+ "incant_game_runtime",
+ "incant_input",
+ "incant_render_game",
+ "incant_runtime",
+ "incant_script",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]
