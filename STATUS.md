@@ -27,6 +27,13 @@ after review and passing checks, without requesting separate merge approval.
   session restoration and phone/performance gates remain open. See
   [native game session evidence](docs/spikes/native-game-session.md).
 
+- Optional native scene audio host reads typed committed ECS poses and retained
+  fingerprint-checked cooked clips, with bounded playback/lifecycle/spatial state
+  and explicit retryable-preflight versus terminal-apply semantics. 92 scoped
+  union tests plus the final 17-test audio suite pass; 16 source-free shipping
+  processes exercise actual native ticks/offline mixing. Composite game integration
+  is verified above; hosted optional-feature CI, device output, cursor saves and
+  phone gates remain open. See [host evidence](docs/spikes/native-scene-audio-host.md).
 - Atlas review 0034 authoring follow-up: bounded skyline packing fixes the explicit
   three-frame false failure and retains previous layouts as maximum bounds grow.
   Shared import preparation rejects broken frame/nine-slice references atomically;
@@ -35,14 +42,10 @@ after review and passing checks, without requesting separate merge approval.
   readable. New packed layouts still need Claude delta review after the shared
   renderer update; no phone/performance or phase gate is claimed. See
   [atlas authoring evidence](docs/spikes/sprite-atlases.md#authoring-follow-up-to-review-0034-2026-10-10).
-
-- Optional native scene audio host reads typed committed ECS poses and retained
-  fingerprint-checked cooked clips, with bounded playback/lifecycle/spatial state
-  and explicit retryable-preflight versus terminal-apply semantics. 92 scoped
-  union tests plus the final 17-test audio suite pass; 16 source-free shipping
-  processes exercise actual native ticks/offline mixing. Composite game integration
-  is verified above; hosted optional-feature CI, device output, cursor saves and
-  phone gates remain open. See [host evidence](docs/spikes/native-scene-audio-host.md).
+- Native physics hosted streams match across all three desktop hosts and actual
+  browser WASM (21 streams). Canonical source-report path keys fix the Windows
+  metadata comparison failure; the strict comparator is unchanged. See
+  [evidence](docs/spikes/native-physics-runtime.md#hosted-cross-host-report-paths).
 
 - Shipping Cargo capture explicitly decodes UTF-8 on all desktop hosts. A real
   subprocess regression reproduces Windows cp1252 failure before the fix; 40
@@ -92,6 +95,19 @@ within its documented workload.
 
 ## Active work
 
+- Native scene audio migration has typed version-3 declarations, cooked binary
+  IDs, ECS audio components, final-graph structural validation and explicit
+  unsupported cursor saves. Typed host/composite integration and local full
+  checks pass; device playback, cursor restoration and hosted verification
+  remain separate. See
+  [native scene audio](docs/spikes/native-scene-audio.md).
+- The integrated editor now preserves live OAuth completion announcements and
+  recovers Close focus instead of reusing Cancel as Sign out. Shortcut cells keep
+  native table semantics with explicit group/action/key context; returning to the
+  same Problems page after filtering announces again with timer cleanup. All 504
+  UI tests, strict TypeScript and the production build pass. Styling is unchanged;
+  native packaging, live screen-reader and Claude rendered acceptance remain
+  separate. See [editor correctness evidence](docs/spikes/editor-windowing-correctness.md#account-shortcuts-and-repeated-page-announcements-2026-10-10).
 - Cooked visual readers and sealed retained asset versions are extracted below
   authoring. Native binary binding descriptors load the same checked versions;
   the canonical renderer/authoring-adapter split and spatial host are in progress.
@@ -124,12 +140,6 @@ within its documented workload.
   errors remain open. The measured cap is 341 nearest 2048-square sprites;
   342 fail explicitly. Pixel-camera near-tie follower work is separate. See
   [sprite evidence](docs/spikes/sprite-rendering.md).
-- Native scene audio migration has typed version-3 declarations, cooked binary
-  IDs, ECS audio components, final-graph structural validation and explicit
-  unsupported cursor saves. Typed host/composite integration and local full
-  checks pass; device playback, cursor restoration and hosted verification
-  remain separate. See
-  [native scene audio](docs/spikes/native-scene-audio.md).
 
 - Native cooked 3D rigid bodies, colliders and angular velocity now run in the
   disposable ECS world through a document-free solver backend, typed structural
@@ -145,8 +155,9 @@ within its documented workload.
 
 - The editor context now generates icons/assets during Tauri build preparation,
   before rustc records input timestamps. Both feature modes have locally verified
-  cold generated outputs and immediate warm no-op builds; hosted validation is
-  pending. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
+  cold generated outputs and immediate warm no-op builds. PR56 merged with all 17
+  checks passing; all three hosted OSes run the exact 44 GPU tests with zero
+  recompilation. [Evidence](docs/spikes/tauri-build-context.md) separates this Unix
   invalidation fix from [measured Windows compilation costs](docs/spikes/ci-cargo-unit-timings.md).
 
 - Cooked PCM loading and Kira mixing now live in authoring-free runtime crates;
@@ -167,6 +178,19 @@ within its documented workload.
   shipping/phone performance, trusted native immediate-write responsibility and
   remaining gameplay migration stay explicit. See
   [numerical-boundary evidence](docs/spikes/native-numeric-boundaries.md).
+
+- A [cache layout/retention proposal](docs/spikes/ci-cache-layout-proposal.md) records
+  the main53 Linux credential-cache disappearance, final 11-family inventory and
+  separate local compressed registry/target measurements. The simpler auxiliary
+  registry-only alternative now includes exact old-archive totals, historical
+  cold execution/queue times and replacement-overlap limits. Actual PR56 consumers
+  restored and verified both pinned tool binaries with PR saves skipped. A separate
+  [inputs-only follow-up](docs/spikes/ci-auxiliary-registry-cache.md) makes eight
+  auxiliary families registry-only, retaining iOS/native targets and all commands.
+  Three initial hosted keys match the preflight; the corrected physics union preserves
+  all source and commands and passes 40 tool tests. Hosted archive measurements,
+  consumption and the bounded legacy-cache migration remain pending. No cache
+  deletion, new permission or shipping-seed change is included.
 
 - Native fixed-tick input now owns a fresh cooked world, script VM and bounded
   input timeline. Action bindings validate once at construction/rebind; each
@@ -926,20 +950,33 @@ mock response, simulator build or unsigned package counts as a shipped product.
   authenticated file exports, cross-target embedding, automatic source-map
   diagnostics, MSVC symbol audit and device/performance gates remain open.
 
+- Canonical renderer authoring boundary is implemented: typed retained cooked input, separate Project adapter, exact loaded-version GPU cache keys and direct input validation. Scoped 68 release tests and 54 native GPU tests plus Clippy/normal-graph checks pass. Native retained frame updates, full editor integration and phone performance remain open; see docs/spikes/native-renderer-boundary.md.
+
+### Retained native GPU frames (2026-10-10)
+
+- `RetainedScene` now stages fixed-binding camera/model/light/environment poses into
+  private reserved CPU/GPU storage and self-submits only after all ordinary checked
+  validation/encoding succeeds. Source/cache-deleted moving frames match fresh
+  output; reflection transitions, rejection/retry and renderer ownership are covered.
+- Passed 27 ordinary + 57 native GPU renderer tests, scoped release Clippy and the
+  authoring-free normal dependency guard. Sixty-four instrumented CPU pose-staging
+  calls allocated nothing; complete frame encoding still allocates. Independent
+  nonvisual review found no blocker. Evidence: `docs/spikes/native-retained-render-frames.md`.
+- Native game/visual host integration continues separately. Native sprites, full
+  frame resource retention/culling, memory/device budgets and appearance approval
+  remain open; this does not pass a phase or performance gate.
 ## Native spatial scene data and committed views (2026-10-10)
 
 Typed Camera/MeshRenderer/current light/environment declarations now cook to checked scene v4 with binary stable asset references and existing recipe fingerprints; old scene encodings remain supported. Read-only parent-first ECS views expose continuous f64 locals/committed globals with accepted-change topology/configuration generations. Structural configuration batches are atomic, saves refuse unsupported spatial state, and no-render probes refuse spatial scenes. Real source-deleted cook→scene→sealed-model loading, 120 scoped release tests/doctests, scoped Clippy and six runner cases pass; runtime dependencies stay authoring-free. [Evidence](docs/spikes/native-spatial-scene.md).
 
-Game/audio host refusal is now covered by the composition tests and actual version-4 runner checks above. Retained CPU renderer input is recorded below; native primitive/GPU host integration, spatial saves and the complete runtime/Play/pixel-placement migration remain open. No performance/appearance gate is claimed.
+Game/audio host refusal is now covered by the composition tests and actual version-4 runner checks above. Native renderer input binding/primitive and GPU checks, explicit camera selection, spatial saves and the complete runtime/Play/pixel-placement migration remain open. No renderer/shader/UI change or performance/appearance gate is claimed.
 
 Retained native consumers can now attach an opaque world identity that survives moves/restore but rejects a different constructed world before trusting equal scene IDs/generations. Nine spatial regressions and runtime scoped Clippy pass; this is a CPU data-boundary prerequisite, not a rendered frame.
-
-- Canonical renderer authoring boundary is implemented: typed retained cooked input, separate Project adapter, exact loaded-version GPU cache keys and direct input validation. Scoped 68 release tests and 54 native GPU tests plus Clippy/normal-graph checks pass. Native retained frame updates, full editor integration and phone performance remain open; see docs/spikes/native-renderer-boundary.md.
-
 
 ## Retained native renderer CPU input (2026-10-10)
 
 Native render input now binds sealed cooked versions once, explicitly selects a camera and reuses typed pose slots at committed native sync points. Different-world input rejects before mutation; motion error/unwind restores preallocated numeric undo, while topology/configuration replacements publish atomically. All 87 scoped release tests/doctests and Clippy pass, with actual source/cache-deleted binding and a bounded zero-allocation motion check. Normal dependencies exclude authoring/importers/GPU. Root's retained GPU consumer integration, native rendered acceptance, full gameplay/pixel placement migration and device/performance gates remain open. [Evidence](docs/spikes/native-render-input.md).
+
 ## Explicit native game hosts
 
 The native game composition now retains a trusted `SceneHost` prepared against
@@ -955,5 +992,9 @@ remain separate; no runtime saves, rendering/performance or phase gate is claime
 ## Mandatory native render-input host (2026-10-10)
 
 One checked retained native input now composes with mandatory generic consumer preparation/sync inside the native game lifecycle. Seven actual cook/QuickJS/physics/PCM integration regressions and release Clippy/normal dependency checks pass, including source/cache removal, reparent, retry and terminal consumer failure/unwind. Default observation is explicitly CPU-only; GPU hosting and the opt-in source-free player proof remain separate. [Evidence](docs/spikes/native-render-game.md).
+
+## Native game GPU host (2026-10-10)
+
+The real retained GPU consumer now runs inside the mandatory native game tick, with source-free input/physics/PCM/render agreement and terminal target/presentation/observed-device-loss cleanup. Combined release checks pass 102 ordinary tests/doctests and 61 native GPU tests, scoped Clippy and authoring-free dependency checks. This is numerical in-process evidence; standalone compiler-free GPU player execution, native surface ownership, 2D migration and device/performance gates remain open. [Evidence](docs/spikes/native-render-gpu-host.md).
 
 The existing game player now has an explicit opt-in CPU render-input mode. A fresh 4,521,424-byte shipping executable passes 27 source-free launches with real v4 model/camera/physics/audio, repeated retained pose/PCM agreement and late camera failure refusal. Default build/invocation remain nonvisual and strict; actual normal graphs and executable compiler/codegen audits pass. The union passes 75 scoped release tests/doctests, both player Clippy configurations and 40 tools tests. Actual GPU hosting, visible acceptance and phone/performance gates remain separate. [Proof](docs/spikes/native-render-game.md#source-free-existing-player-cpu-mode).

@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { Icon } from '../icons/Icon';
 import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
 
 /**
- * The area the native wgpu surface will occupy (Spike 1). The UI never draws
- * engine pixels here. When the bridge supports `viewport.bounds`, the host is
+ * The area the engine's native surface occupies. The UI never draws engine pixels
+ * here. When the bridge supports `viewport.bounds`, the host is
  * told where the hole is so it can position the native child surface; see
  * NATIVE_VIEWPORT.md for the constraints this layout is designed around.
  */
@@ -47,23 +46,26 @@ export function ViewportPanel() {
   let status: string;
   let title: string;
   let detail: string;
+  // The header's status says the state; the empty area adds only what it does not:
+  // a title where the state needs one, and the host's reason or error verbatim.
   if (!viewport) {
     status = 'No engine';
-    title = 'Native viewport not attached';
-    detail = 'Connect the editor process to attach a viewport.';
+    title = 'No viewport';
+    detail = '';
   } else if (viewport.status === 'attached') {
-    status = 'Attached';
+    status = 'Live';
     title = '';
     detail = '';
   } else if (project.kind === 'loading') {
+    // The banner says the project is opening; the title stays for assistive tech only.
     status = 'Waiting';
     title = 'Opening project…';
-    detail = 'The viewport attaches when the project has loaded.';
+    detail = '';
   } else if (viewport.status === 'error' && project.kind === 'failed' && sameError(viewport.error, project.error)) {
     // The project failed, not the surface. The banner carries the full message.
     status = 'Error';
     title = 'No project loaded';
-    detail = 'There is nothing to render until the project opens.';
+    detail = '';
   } else if (viewport.status === 'error') {
     // One state covers surface setup, scene preparation and drawing failures. The
     // surface may still be attached with an earlier scene underneath, so this names
@@ -72,18 +74,23 @@ export function ViewportPanel() {
     title = 'Viewport render error';
     detail = viewport.error.message;
   } else {
+    // "Not attached" is already the status; only the host's reason follows.
     status = 'Not attached';
-    title = 'Native viewport not attached';
+    title = '';
     detail = viewport.reason;
   }
 
+  const tone = viewport?.status === 'error' ? 'error' : attached ? 'ok' : project.kind === 'loading' ? 'pending' : 'idle';
   return (
     <section className="panel panel--viewport" data-region="viewport" aria-labelledby="viewport-title" tabIndex={-1}>
       <header className="panel__header">
         <h2 id="viewport-title" className="panel__title">
           Viewport
         </h2>
-        <span className={`status-pill${viewport?.status === 'error' ? ' status-pill--error' : attached ? ' status-pill--ok' : ''}`}>
+        <span
+          className={`status-pill status-pill--${tone}`}
+          title={attached ? 'The engine’s view is attached and drawing here.' : undefined}
+        >
           {status}
         </span>
       </header>
@@ -91,20 +98,16 @@ export function ViewportPanel() {
         ref={hostRef}
         className={`viewport-host${attached ? ' is-attached' : ''}`}
         data-viewport-host=""
-        aria-describedby="viewport-detail"
+        aria-describedby={!attached && detail ? 'viewport-detail' : undefined}
       >
         {attached ? null : (
-          <div className="viewport-empty">
-            <span className="viewport-empty__tile" aria-hidden="true">
-              <Icon name="viewport" size={22} />
-            </span>
-            <p className="viewport-empty__title">{title}</p>
-            <p id="viewport-detail" className="viewport-empty__detail">
-              {detail}
-            </p>
-            {viewport?.status === 'error' ? null : (
-              <p className="viewport-empty__note">Nothing in this area is rendered by the engine.</p>
-            )}
+          <div className={`viewport-empty viewport-empty--${tone}`}>
+            {title ? <p className={project.kind === 'loading' ? 'visually-hidden' : 'viewport-empty__title'}>{title}</p> : null}
+            {detail ? (
+              <p id="viewport-detail" className="viewport-empty__detail">
+                {detail}
+              </p>
+            ) : null}
           </div>
         )}
       </div>

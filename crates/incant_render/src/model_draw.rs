@@ -64,7 +64,7 @@ impl Renderer {
         let mut transparent = Vec::new();
         let eye = scene.camera.eye.as_dvec3();
         let forward = scene.camera.forward.as_dvec3();
-        for batch in &scene.batches {
+        for batch in scene.batches.iter().filter(|batch| batch.count > 0) {
             let material =
                 &batch.model.materials.materials[batch.model.primitives[batch.primitive].material];
             let pipeline = self.materials.pipeline(

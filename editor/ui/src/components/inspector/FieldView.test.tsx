@@ -1,7 +1,7 @@
 import { cleanup, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import type { Diagnostic, FieldSchema, Ulid } from '../../bridge/contract';
-import { FieldView, unsetKind } from './FieldView';
+import { FieldView, fieldDomId, unsetKind } from './FieldView';
 
 afterEach(cleanup);
 
@@ -132,6 +132,6 @@ describe('FieldView optional and nullable values', () => {
     const control = screen.getByRole('textbox', { name: 'Shadows' });
     expect(description(control)).toContain('Shadows are off for the only sun.');
     expect(container.querySelector('.field--warning')).not.toBeNull();
-    expect(control.id).toBe(`field-${ENTITY}-DirectionalLight_shadows`);
+    expect(control.id).toBe(fieldDomId(ENTITY, 'DirectionalLight', ['shadows']));
   });
 });

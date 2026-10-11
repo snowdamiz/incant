@@ -1,0 +1,308 @@
+{
+  "set": "m1",
+  "generated": "2026-10-10T21:12:58.047Z",
+  "browser": "Chrome 155.0.8059.40 (headless, playwright-core)",
+  "machine": {
+    "cpu": "Apple M5 Pro",
+    "cores": 15,
+    "memoryGb": 48,
+    "platform": "darwin 25.6.0"
+  },
+  "note": "Browser measurements on this machine only. Not the M1 MacBook Air device gate (PLAN.md: edit under 100 ms, viewport 60 fps on a 100,000-entity scene).",
+  "runs": [
+    {
+      "cpuThrottle": 1,
+      "stressFixture": {
+        "loadToTreeMs": 182,
+        "initialCounts": {
+          "treeitems": 34,
+          "options": 0,
+          "inputs": 1,
+          "tableCells": 0,
+          "domNodes": 445
+        },
+        "filterAll": {
+          "ms": 67.2,
+          "counts": {
+            "treeitems": 34,
+            "options": 0,
+            "inputs": 1,
+            "tableCells": 0,
+            "domNodes": 384
+          }
+        },
+        "filterGroup": {
+          "ms": 7,
+          "counts": {
+            "treeitems": 34,
+            "options": 0,
+            "inputs": 1,
+            "tableCells": 0,
+            "domNodes": 381
+          }
+        },
+        "arrowDown": {
+          "medianMs": 0.8,
+          "maxMs": 24,
+          "samples": 30
+        },
+        "end": {
+          "ms": 0.7,
+          "focused": "Entity 050.1000",
+          "counts": {
+            "treeitems": 39,
+            "options": 0,
+            "inputs": 11,
+            "tableCells": 0,
+            "domNodes": 478
+          }
+        },
+        "scroll": {
+          "ms": 30.5,
+          "counts": {
+            "treeitems": 44,
+            "options": 0,
+            "inputs": 11,
+            "tableCells": 0,
+            "domNodes": 505
+          }
+        },
+        "assets": {
+          "openMs": 9.9,
+          "endMs": 5,
+          "counts": {
+            "treeitems": 0,
+            "options": 37,
+            "inputs": 4,
+            "tableCells": 0,
+            "domNodes": 442
+          }
+        },
+        "longTasksMs": [
+          95
+        ],
+        "pageErrors": []
+      },
+      "renameDouble": {
+        "loadToTreeMs": 137,
+        "rename": {
+          "totalMedianMs": 51.2,
+          "totalMaxMs": 72.7,
+          "doubleSnapshotBuildMedianMs": 40.9,
+          "samples": [
+            {
+              "totalMs": 72.7,
+              "snapshotBuildMs": 44.1
+            },
+            {
+              "totalMs": 53.7,
+              "snapshotBuildMs": 43.2
+            },
+            {
+              "totalMs": 51.2,
+              "snapshotBuildMs": 40.9
+            },
+            {
+              "totalMs": 50,
+              "snapshotBuildMs": 39.9
+            },
+            {
+              "totalMs": 49.9,
+              "snapshotBuildMs": 39.6
+            }
+          ]
+        },
+        "counts": {
+          "treeitems": 34,
+          "options": 0,
+          "inputs": 1,
+          "tableCells": 0,
+          "domNodes": 466
+        },
+        "longTasksMs": [
+          54,
+          52,
+          50
+        ],
+        "pageErrors": []
+      },
+      "navigationGrid": {
+        "selectMs": 12.1,
+        "inspectorInputs": 2,
+        "showValues": {
+          "ms": 5.2,
+          "counts": {
+            "treeitems": 23,
+            "options": 0,
+            "inputs": 3,
+            "tableCells": 360,
+            "domNodes": 917
+          }
+        },
+        "scrollTable": {
+          "ms": 35.8,
+          "counts": {
+            "treeitems": 23,
+            "options": 0,
+            "inputs": 3,
+            "tableCells": 616,
+            "domNodes": 1209
+          }
+        },
+        "longTasksMs": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "cpuThrottle": 4,
+      "stressFixture": {
+        "loadToTreeMs": 727,
+        "initialCounts": {
+          "treeitems": 34,
+          "options": 0,
+          "inputs": 1,
+          "tableCells": 0,
+          "domNodes": 445
+        },
+        "filterAll": {
+          "ms": 217,
+          "counts": {
+            "treeitems": 34,
+            "options": 0,
+            "inputs": 1,
+            "tableCells": 0,
+            "domNodes": 384
+          }
+        },
+        "filterGroup": {
+          "ms": 34.4,
+          "counts": {
+            "treeitems": 34,
+            "options": 0,
+            "inputs": 1,
+            "tableCells": 0,
+            "domNodes": 381
+          }
+        },
+        "arrowDown": {
+          "medianMs": 4.3,
+          "maxMs": 17.9,
+          "samples": 30
+        },
+        "end": {
+          "ms": 4.5,
+          "focused": "Entity 050.1000",
+          "counts": {
+            "treeitems": 39,
+            "options": 0,
+            "inputs": 11,
+            "tableCells": 0,
+            "domNodes": 478
+          }
+        },
+        "scroll": {
+          "ms": 22.1,
+          "counts": {
+            "treeitems": 44,
+            "options": 0,
+            "inputs": 11,
+            "tableCells": 0,
+            "domNodes": 505
+          }
+        },
+        "assets": {
+          "openMs": 49.4,
+          "endMs": 23.7,
+          "counts": {
+            "treeitems": 0,
+            "options": 37,
+            "inputs": 4,
+            "tableCells": 0,
+            "domNodes": 442
+          }
+        },
+        "longTasksMs": [
+          424,
+          190,
+          195
+        ],
+        "pageErrors": []
+      },
+      "renameDouble": {
+        "loadToTreeMs": 570,
+        "rename": {
+          "totalMedianMs": 261,
+          "totalMaxMs": 265.3,
+          "doubleSnapshotBuildMedianMs": 214.6,
+          "samples": [
+            {
+              "totalMs": 261.7,
+              "snapshotBuildMs": 214.6
+            },
+            {
+              "totalMs": 254.6,
+              "snapshotBuildMs": 210.3
+            },
+            {
+              "totalMs": 249.9,
+              "snapshotBuildMs": 206.5
+            },
+            {
+              "totalMs": 265.3,
+              "snapshotBuildMs": 220.5
+            },
+            {
+              "totalMs": 261,
+              "snapshotBuildMs": 217.9
+            }
+          ]
+        },
+        "counts": {
+          "treeitems": 34,
+          "options": 0,
+          "inputs": 1,
+          "tableCells": 0,
+          "domNodes": 466
+        },
+        "longTasksMs": [
+          171,
+          258,
+          251,
+          246,
+          261,
+          257
+        ],
+        "pageErrors": []
+      },
+      "navigationGrid": {
+        "selectMs": 53.6,
+        "inspectorInputs": 2,
+        "showValues": {
+          "ms": 19.6,
+          "counts": {
+            "treeitems": 23,
+            "options": 0,
+            "inputs": 3,
+            "tableCells": 360,
+            "domNodes": 917
+          }
+        },
+        "scrollTable": {
+          "ms": 27.5,
+          "counts": {
+            "treeitems": 23,
+            "options": 0,
+            "inputs": 3,
+            "tableCells": 616,
+            "domNodes": 1209
+          }
+        },
+        "longTasksMs": [
+          105,
+          52
+        ],
+        "pageErrors": []
+      }
+    }
+  ]
+}

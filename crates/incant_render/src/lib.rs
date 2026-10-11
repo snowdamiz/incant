@@ -30,7 +30,7 @@ use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Vec3};
 pub use incant_render_data::{SceneInput, ScenePreparer};
 pub use lighting::LocalLightSelection;
-pub use models::RenderScene;
+pub use models::{RenderScene, RetainedScene, RetainedTarget};
 pub use resource_error::ResourceError;
 pub use scene::{SceneError, SceneStats};
 use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
@@ -53,6 +53,8 @@ pub struct Viewport {
     pub canvas_srgb: [u8; 3],
 }
 pub struct Renderer {
+    identity: std::sync::Arc<()>,
+    device_lost: std::sync::Arc<std::sync::atomic::AtomicBool>,
     pub device: wgpu::Device,
     pub queue: wgpu::Queue,
     pub adapter: wgpu::Adapter,
@@ -87,6 +89,11 @@ impl Renderer {
                 ..Default::default()
             })
             .await?;
+        let device_lost = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
+        let lost = std::sync::Arc::clone(&device_lost);
+        device.set_device_lost_callback(move |_, _| {
+            lost.store(true, std::sync::atomic::Ordering::Release);
+        });
         let environments = environment::EnvironmentSystem::new(&device, &queue);
         let lighting = lighting::LightingSystem::new(&device);
         let shadows = shadows::ShadowSystem::new(&device);
@@ -94,6 +101,8 @@ impl Renderer {
             materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
         let sprites = sprites::SpriteSystem::new(&device);
         Ok(Self {
+            identity: std::sync::Arc::new(()),
+            device_lost,
             sprites,
             device,
             queue,
@@ -113,6 +122,16 @@ impl Renderer {
     pub fn headless() -> Result<Self> {
         let instance = wgpu::Instance::default();
         pollster::block_on(Self::new(&instance, None))
+    }
+    /// Drive native callbacks without waiting for GPU completion and reject a
+    /// reported device loss. Successfully queued work cannot be rolled back.
+    /// The owning renderer installs the callback once, shared by all consumers.
+    pub fn check_device(&self) -> Result<()> {
+        self.device.poll(wgpu::PollType::Poll)?;
+        if self.device_lost.load(std::sync::atomic::Ordering::Acquire) {
+            return Err(ResourceError::DeviceLost.into());
+        }
+        Ok(())
     }
     fn pipeline(&self, format: wgpu::TextureFormat) -> wgpu::RenderPipeline {
         let shader = self
@@ -180,6 +199,7 @@ impl Renderer {
         height: u32,
         viewport: Option<Viewport>,
     ) -> Result<wgpu::CommandBuffer> {
+        self.check_device()?;
         output::OutputPass::validate(format)?;
         let rect = viewport
             .map(|v| v.rect)

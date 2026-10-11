@@ -246,3 +246,21 @@ dependency guards and conventions. Existing 428-test and fresh shipping evidence
 above remains scoped to its recorded source head and binary identities; no new
 shipping artifacts or performance results are asserted for this editor-only
 change. Hosted exact-head validation remains pending.
+
+## Hosted cross-host report paths
+
+Run 38092910737 at head `2512ff0` completed native trials on Windows, Linux and
+macOS plus actual Linux browser WASM trials. Its comparison job rejected source
+metadata before comparing streams: Windows used backslashes in dictionary keys.
+The producer now uses `Path.as_posix()` for repository-relative report keys; the
+strict source and byte-stream comparator is unchanged.
+
+All three original artifact reports were downloaded. The unchanged comparator
+reproduced the rejection. Copies with only path-key separators canonicalized
+passed every source, trial-coverage, stream identity and cross-host byte check:
+all 21 streams are SHA256 `a2a870b8ce1ae3be839dd968a39f8fdcc259c374f06e5c1080674e9dc6f2df4c`.
+Changing one source digest still fails. No stream bytes were changed; report
+hashes/counts are retained in
+[evidence](evidence/native-physics-host-paths-2026-10-10.json). This is evidence
+from actual hosted runs with a corrected metadata representation, not a claim
+that the old CI comparison job passed. Corrected exact-head CI remains required.

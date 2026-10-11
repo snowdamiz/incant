@@ -91,7 +91,19 @@ impl LightPlan {
         }
         Ok(())
     }
-    pub fn finish(mut self) -> (Vec<Light>, u32, Vec<crate::shadows::ShadowLight>) {
+    pub fn with_capacity(directional: usize, local: usize, shadows: usize) -> Self {
+        Self {
+            directional: Vec::with_capacity(directional.max(1)),
+            local: Vec::with_capacity(local),
+            shadows: Vec::with_capacity(shadows),
+        }
+    }
+    pub fn clear(&mut self) {
+        self.directional.clear();
+        self.local.clear();
+        self.shadows.clear();
+    }
+    fn preview_if_empty(&mut self) {
         // Explicitly authored zero-intensity lights still disable the preview key.
         if self.directional.is_empty() && self.local.is_empty() {
             self.directional.push(Light {
@@ -105,6 +117,22 @@ impl LightPlan {
                 kind: [0; 4],
             });
         }
+    }
+    pub fn copy_into(
+        &mut self,
+        lights: &mut Vec<Light>,
+        shadows: &mut Vec<crate::shadows::ShadowLight>,
+    ) -> u32 {
+        self.preview_if_empty();
+        lights.clear();
+        lights.extend_from_slice(&self.directional);
+        lights.extend_from_slice(&self.local);
+        shadows.clear();
+        shadows.extend_from_slice(&self.shadows);
+        self.directional.len() as u32
+    }
+    pub fn finish(mut self) -> (Vec<Light>, u32, Vec<crate::shadows::ShadowLight>) {
+        self.preview_if_empty();
         let directional = self.directional.len() as u32;
         self.directional.extend(self.local);
         (self.directional, directional, self.shadows)
