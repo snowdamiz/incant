@@ -17,6 +17,22 @@ spec.loader.exec_module(probe)
 
 
 class StaticShippingTests(unittest.TestCase):
+    def test_localization_conformance_prepares_the_fixed_sample_and_all_controls(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(probe.rust_guest, 'compile') as compile:
+            inputs = Path(directory)
+            guests = inputs/'sdk-guests'
+            guests.mkdir()
+            modules = probe.localization_guests('pinned-rustc', inputs, guests, {'fixed': 'environment'})
+            self.assertEqual([name for name, _ in modules], ['rust-localization', 'rust-localization-capacity', 'rust-localization-number', 'rust-localization-duplicate', 'rust-localization-callback'])
+            self.assertEqual(compile.call_count, 5)
+            for call, (name, output) in zip(compile.call_args_list, modules):
+                self.assertEqual(call.args[0], 'pinned-rustc')
+                self.assertEqual(call.args[2], output)
+                self.assertEqual(call.kwargs['env'], {'fixed': 'environment'})
+                self.assertEqual(call.kwargs['cfg'], ['sdk_locale_'+name.removeprefix('rust-localization-')] if name != 'rust-localization' else ())
+                source = probe.ROOT/('sdk/rust/fixtures/localization_failure.rs' if name != 'rust-localization' else 'sdk/rust/samples/localization.rs')
+                self.assertEqual(call.args[1].read_bytes(), source.read_bytes())
+
     def test_windows_archive_extracts_only_verified_named_executables(self):
         archive = io.BytesIO()
         with tarfile.open(fileobj=archive, mode='w:gz') as bundle:

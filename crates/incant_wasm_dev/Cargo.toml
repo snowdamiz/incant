@@ -29,6 +29,7 @@ incant_wasm_cook = { path = "../incant_wasm_cook" }
 wat = "=1.258.3"
 incant_script = { workspace = true, features = ["compiler"] }
 serde_json.workspace = true
+incant_localization.workspace = true
 
 [[test]]
 name = "conformance"
