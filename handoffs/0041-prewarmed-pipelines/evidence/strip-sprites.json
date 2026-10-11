@@ -1,0 +1,32 @@
+{
+ "removed": [
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/sprites/flag.png",
+   "sha256": "4a894de0b4d9189c81861ad1f2e2f554cc29c4add86739b45d0c1d148a315f52"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/sprites/occluder.bin",
+   "sha256": "3308e1b2a1de460460632e796cd0ea9e11fd16ee52a6a9a75e1af4c5418300b8"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/sprites/occluder.gltf",
+   "sha256": "ac072c036eeda93178fe35f93d9660ac8bbca0e4401d9faa029cfb4851c4eaa8"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/sprites/panel_b.png",
+   "sha256": "d3c744087835abaedec95fbe96412a80e2bb3de5072189637b802390b4767d08"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/sprites/sheet.png",
+   "sha256": "7087027407a2dfb665e7ff9d056e995959c99c5007d35c655048f45b9f525da9"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/sprites/sprites.atlas.json",
+   "sha256": "198111b8962c513dc6b2637f264531469d4f209a49e733f7bc310515c7f74043"
+  }
+ ],
+ "remaining": [
+  "artifacts/0041-prewarmed-pipelines/projects/sprites/sprites.incant.journal.jsonl",
+  "artifacts/0041-prewarmed-pipelines/projects/sprites/sprites.incant.json"
+ ]
+}
