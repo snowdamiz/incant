@@ -395,5 +395,268 @@
     },
     "verified_source": "wgpu-hal 29.0.4 metal/command.rs set_compute_pipeline"
   },
-  "independent_review": "windowing_correctness: source hashes and compiler evidence verified; logical-versus-allocated threadgroup-size wording corrected; no scoped code blocker"
+  "independent_review": "windowing_correctness: source hashes and compiler evidence verified; logical-versus-allocated threadgroup-size wording corrected; no scoped code blocker",
+  "hlsl_translation": {
+    "naga": "29.0.4",
+    "shader_model": "6.0",
+    "fake_missing_bindings": false,
+    "entry_points": [
+      {
+        "family": "diagnostic",
+        "entry": "vertex",
+        "stage": "Vertex",
+        "hlsl_entry": "vertex",
+        "hlsl_bytes": 774
+      },
+      {
+        "family": "diagnostic",
+        "entry": "fragment",
+        "stage": "Fragment",
+        "hlsl_entry": "fragment",
+        "hlsl_bytes": 560
+      },
+      {
+        "family": "material",
+        "entry": "vertex",
+        "stage": "Vertex",
+        "hlsl_entry": "vertex",
+        "hlsl_bytes": 1579
+      },
+      {
+        "family": "material",
+        "entry": "fragment",
+        "stage": "Fragment",
+        "hlsl_entry": "fragment",
+        "hlsl_bytes": 19681
+      },
+      {
+        "family": "shadow",
+        "entry": "vertex",
+        "stage": "Vertex",
+        "hlsl_entry": "vertex",
+        "hlsl_bytes": 911
+      },
+      {
+        "family": "shadow",
+        "entry": "fragment",
+        "stage": "Fragment",
+        "hlsl_entry": "fragment",
+        "hlsl_bytes": 1243
+      },
+      {
+        "family": "sprite",
+        "entry": "vertex",
+        "stage": "Vertex",
+        "hlsl_entry": "vertex",
+        "hlsl_bytes": 1520
+      },
+      {
+        "family": "sprite",
+        "entry": "fragment",
+        "stage": "Fragment",
+        "hlsl_entry": "fragment",
+        "hlsl_bytes": 2332
+      },
+      {
+        "family": "grid",
+        "entry": "build",
+        "stage": "Compute",
+        "hlsl_entry": "build",
+        "hlsl_bytes": 7008
+      },
+      {
+        "family": "output",
+        "entry": "vertex",
+        "stage": "Vertex",
+        "hlsl_entry": "vertex",
+        "hlsl_bytes": 621
+      },
+      {
+        "family": "output",
+        "entry": "fragment",
+        "stage": "Fragment",
+        "hlsl_entry": "fragment",
+        "hlsl_bytes": 3708
+      }
+    ],
+    "repeat_outputs": [
+      {
+        "file": "diagnostic-fragment.hlsl",
+        "bytes": 560,
+        "sha256": "7e393eb8ed884fdefcb07225de5675e748dbd5d020be06152af7504511a60940"
+      },
+      {
+        "file": "diagnostic-fragment.metal",
+        "bytes": 590,
+        "sha256": "63927d714f873e30bbb5a8dd38816f29f77a2743efa603699c4503a13e94adca"
+      },
+      {
+        "file": "diagnostic-fragment.spv",
+        "bytes": 700,
+        "sha256": "f06b6946d10a3e2392caf228a49ca94145b2e77f9edfafa3bfa7a0f3027a6929"
+      },
+      {
+        "file": "diagnostic-vertex.hlsl",
+        "bytes": 774,
+        "sha256": "e19a52383d0e67221883a9745127b4ebeb05a4c7988243159ed45bac23b82853"
+      },
+      {
+        "file": "diagnostic-vertex.metal",
+        "bytes": 879,
+        "sha256": "018b2e540636d28327a67094a75d12a0d15006f06c79f828bef7aa766a5073a3"
+      },
+      {
+        "file": "diagnostic-vertex.spv",
+        "bytes": 1216,
+        "sha256": "05a9629ff8aa873bd8b31350ba089ed87693f888685cf9a4d0b340af192accb9"
+      },
+      {
+        "file": "grid-build.hlsl",
+        "bytes": 7008,
+        "sha256": "76ac4dc5bf158f980539d40ba8280d76c1c4bb8fd59ff1cbf606f6547b784076"
+      },
+      {
+        "file": "grid-build.metal",
+        "bytes": 7844,
+        "sha256": "da0386bcaf8a094fd02e4d8de61f8e0822d6b3bd7dbf820446b0113b99814cf3"
+      },
+      {
+        "file": "grid-build.spv",
+        "bytes": 10124,
+        "sha256": "ea9ff361b0ff60c296292a60ddd3ecdfd22d46407922e55ce8e12313aef6c832"
+      },
+      {
+        "file": "material-fragment.hlsl",
+        "bytes": 19681,
+        "sha256": "cd12bc666d4c52e99e348146dee41c1da85296f2c6be32c8142245460beabc28"
+      },
+      {
+        "file": "material-fragment.metal",
+        "bytes": 20897,
+        "sha256": "98bfd23cb430029366407c0364b9a1abb0cc73f27a5c4fa41dfaa98b787dfba7"
+      },
+      {
+        "file": "material-fragment.spv",
+        "bytes": 23580,
+        "sha256": "e2333b2a22b4395d277d7934f843c4515c5c6a2b187cfc935a72c459f46072fb"
+      },
+      {
+        "file": "material-vertex.hlsl",
+        "bytes": 1579,
+        "sha256": "ca4fca2e2b16cff1cc0c26dac7c510534d4db7d1fc7c51865e7c3b8bd48099cb"
+      },
+      {
+        "file": "material-vertex.metal",
+        "bytes": 2302,
+        "sha256": "fde4b32300454a31f98c2ea27c6dfb02cf34ae14e7a8340db37dd55eff56fa4f"
+      },
+      {
+        "file": "material-vertex.spv",
+        "bytes": 3148,
+        "sha256": "fea5dfd76b05f15d1ee28f15157453d0cc8d63566cb05c925122114631f6f8aa"
+      },
+      {
+        "file": "output-fragment.hlsl",
+        "bytes": 3708,
+        "sha256": "e75153718cafbb39e2dba4ca09808791c508d6b628134bdcc883fb18a472cc8f"
+      },
+      {
+        "file": "output-fragment.metal",
+        "bytes": 4275,
+        "sha256": "cc2a7197769ba09090757dc93a79ba67001b86ba6cd987545199450a2040410e"
+      },
+      {
+        "file": "output-fragment.spv",
+        "bytes": 5600,
+        "sha256": "66b8f089b7c0a5a55ccd8b644b997ea507b2bb06f78851df7d48c32216e7e354"
+      },
+      {
+        "file": "output-vertex.hlsl",
+        "bytes": 621,
+        "sha256": "c82dc4ab3faedfc5664d7c96d442b78fb0d6a35bf60a14a344039fba06313bac"
+      },
+      {
+        "file": "output-vertex.metal",
+        "bytes": 508,
+        "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+      },
+      {
+        "file": "output-vertex.spv",
+        "bytes": 792,
+        "sha256": "b49c64a7c70ec99be3211ba266d449711e8e12335994ea7dffe062d0070b536a"
+      },
+      {
+        "file": "shadow-fragment.hlsl",
+        "bytes": 1243,
+        "sha256": "e82a22675db9b8159b1f21936feba085f16d5f92474969c48f9540f62a954e41"
+      },
+      {
+        "file": "shadow-fragment.metal",
+        "bytes": 979,
+        "sha256": "6af72e99f6832fa300acddd5488297f28b3c3cdb87e5084f901651f3b65e2e3e"
+      },
+      {
+        "file": "shadow-fragment.spv",
+        "bytes": 1560,
+        "sha256": "9035013a000d8b59ebd3ffaaab924bd86942f481eac4defa92dc4154034d4d6a"
+      },
+      {
+        "file": "shadow-vertex.hlsl",
+        "bytes": 911,
+        "sha256": "4c64cd86e08a776ba6d3d7fe1353cb4cef85d0aeb36600dbc2632a9bbf7dcb4e"
+      },
+      {
+        "file": "shadow-vertex.metal",
+        "bytes": 1210,
+        "sha256": "4a4b503fa86f893ea96e30ab66ee401bf208f6c7bfa00b959d558a211b95bbc7"
+      },
+      {
+        "file": "shadow-vertex.spv",
+        "bytes": 1628,
+        "sha256": "3aef2c291ca7c06d4f7a8aed39f6f4cc5cd82687faa066b6a618374d3bb30b51"
+      },
+      {
+        "file": "sprite-fragment.hlsl",
+        "bytes": 2332,
+        "sha256": "62cdcb39cb660100e243542ceb6f3802fd74ccb844c3a21d9694d79929325329"
+      },
+      {
+        "file": "sprite-fragment.metal",
+        "bytes": 2562,
+        "sha256": "bd271ef6aaac933a5ab9715fff6a5babc0499c6eed0b4545c4a05a4c6b7f37d6"
+      },
+      {
+        "file": "sprite-fragment.spv",
+        "bytes": 3172,
+        "sha256": "303c6eec636e5f601f5a4dd67d26e8b69f0a3818a5a2b10684460d44e6676586"
+      },
+      {
+        "file": "sprite-vertex.hlsl",
+        "bytes": 1520,
+        "sha256": "78bf32ebc0e12907f65074d334717431bb9b86ebed4f9269d071c42deeadfc38"
+      },
+      {
+        "file": "sprite-vertex.metal",
+        "bytes": 1934,
+        "sha256": "7d13bb2a28f3f00cdde4b1eebdc55ccc2a2df0eb2b79e1a44860c03c0a6259f7"
+      },
+      {
+        "file": "sprite-vertex.spv",
+        "bytes": 3052,
+        "sha256": "548c806b3fa59b03c482a89002a4e1940f0c476fa5481c08ccf12e9265a46ac7"
+      }
+    ],
+    "repeat_exact": true,
+    "prior_msl_spirv_unchanged": true,
+    "clippy_passed": true,
+    "spv_flags": "explicit ADJUST_COORDINATE_SPACE|LABEL_VARYINGS|CLAMP_FRAG_DEPTH|DEBUG; avoid Naga profile-dependent debug default",
+    "native_hlsl_compiler": "not installed; no DXIL or driver acceptance claim",
+    "scope": "Compiler output only. Explicit probe registers/sampler heaps are not the engine root signature. No output loaded into renderer.",
+    "probe_sha256": {
+      "tools/probes/shader-cook/src/hlsl.rs": "297d71e4cf3624296116fd0cd332a174e3b3cb3768c7fe972ef902d886e23b8f",
+      "tools/probes/shader-cook/src/main.rs": "a52f1b0d747e010d4dd2fc51acefa3152ef029f7be8275e79ba769356003c415",
+      "tools/probes/shader-cook/Cargo.toml": "bdf9bbba0644ae734c54c170caff8f7f4cf7e28ffcdf458b1d51314cf5936550",
+      "tools/probes/shader-cook/Cargo.lock": "466d5c495b79a3dec428d26f167239ec71174373e229fb57896ba341805df963"
+    }
+  }
 }

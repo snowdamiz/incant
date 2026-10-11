@@ -5,6 +5,7 @@ use naga::{
 };
 use serde_json::json;
 use std::{fs, path::Path};
+mod hlsl;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let root = std::env::args().nth(1).expect("repository source path");
     let out = std::env::args().nth(2).expect("new output path");
@@ -129,19 +130,29 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let spv = spv::write_vec(
                 &m,
                 &i,
-                &spv::Options::default(),
+                &spv::Options {
+                    // Keep this probe's output independent of Cargo's profile.
+                    // Naga's default conditionally adds DEBUG in debug builds.
+                    flags: spv::WriterFlags::ADJUST_COORDINATE_SPACE
+                        | spv::WriterFlags::LABEL_VARYINGS
+                        | spv::WriterFlags::CLAMP_FRAG_DEPTH
+                        | spv::WriterFlags::DEBUG,
+                    ..Default::default()
+                },
                 Some(&spv::PipelineOptions {
                     shader_stage: ep.stage,
                     entry_point: ep.name.clone(),
                 }),
             )?;
             let stem = format!("{family}-{}", ep.name);
+            let (hlsl, hlsl_entry) = hlsl::translate(&m, &i, &module, ep.stage, &ep.name)?;
+            fs::write(Path::new(&out).join(format!("{stem}.hlsl")), &hlsl)?;
             fs::write(Path::new(&out).join(format!("{stem}.metal")), &msl)?;
             fs::write(
                 Path::new(&out).join(format!("{stem}.spv")),
                 spv.iter().flat_map(|x| x.to_le_bytes()).collect::<Vec<_>>(),
             )?;
-            rows.push(json!({"family":family,"entry":ep.name,"stage":format!("{:?}",ep.stage),"workgroup_size":ep.workgroup_size,"runtime_buffers":dynamic,"workgroup_memory":workgroup,"msl_bytes":msl.len(),"spv_bytes":spv.len()*4,"vertex_stage":ep.stage==ShaderStage::Vertex}));
+            rows.push(json!({"family":family,"entry":ep.name,"stage":format!("{:?}",ep.stage),"workgroup_size":ep.workgroup_size,"runtime_buffers":dynamic,"workgroup_memory":workgroup,"msl_bytes":msl.len(),"spv_bytes":spv.len()*4,"hlsl_bytes":hlsl.len(),"hlsl_entry":hlsl_entry,"vertex_stage":ep.stage==ShaderStage::Vertex}));
         }
     }
     let report = json!({"naga":"29.0.4","scope":"CPU translation and metadata reflection only; compact probe bindings are not the engine pipeline ABI; vertex pulling omitted; no runtime, device, appearance or shipping claim","entry_points":rows});

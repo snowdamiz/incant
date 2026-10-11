@@ -6,8 +6,8 @@ does not satisfy PLAN's offline shader or persistent driver-cache requirements.
 
 The standalone [probe](../../tools/probes/shader-cook/README.md) establishes the
 next compiler boundary using the same pinned Naga 29.0.4 as wgpu. All six current
-shader families (11 entry points) parse, validate, and translate to MSL and
-SPIR-V. All 11 emitted MSL stages compile with Apple Metal 32023.921 and link
+shader families (11 entry points) parse, validate, and translate to MSL,
+SPIR-V and HLSL shader model 6.0. All 11 emitted MSL stages compile with Apple Metal 32023.921 and link
 into separate Metal libraries, totaling 65,567 bytes on this host. Source,
 compiler, output hashes and exact scope are retained in the
 [local evidence](evidence/shader-cook-translation-local.json). The Xcode Metal
@@ -16,9 +16,19 @@ that the optional component was missing.
 
 This is compiler evidence, not a usable runtime library bundle. Probe resource
 bindings are compact fixtures rather than the actual renderer layout, and
-vertex pulling is omitted. No generated library was submitted to a GPU. HLSL/
-DXIL, driver acceptance of the SPIR-V output, appearance, runtime integration,
+vertex pulling is omitted. No generated library was submitted to a GPU. DXIL
+compilation, driver acceptance of the SPIR-V output, appearance, runtime integration,
 cache persistence and the phone hitch gates remain open.
+
+The HLSL extension supplies explicit register mappings and sampler-index buffer
+bindings with missing-binding fallback disabled. It links vertex output
+interfaces to the original paired fragment inputs. All 33 generated MSL,
+SPIR-V and HLSL outputs are byte-identical across two fresh translation runs;
+the 22 MSL/SPIR-V outputs also equal the earlier Metal-compiled inputs. Scoped
+release Clippy passes. SPIR-V writer flags are explicit because Naga otherwise
+adds debug names only in a debug build of the compiler. HLSL source was not compiled by DXC on this Mac, and its
+probe registers are not wgpu's root signature or sampler-heap layout. These
+results establish translation feasibility, not executable DX12 shader validity.
 
 ## Metadata that a native backend must preserve
 
