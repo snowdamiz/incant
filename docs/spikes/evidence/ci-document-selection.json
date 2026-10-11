@@ -1,0 +1,32 @@
+{
+  "audited_main": "77d86b83b9947d78d4643df0ae71f421e8168f7b",
+  "source_sha256": {
+    "tools/ci_scope.py": "cbb54e5f95f05bd418a2a6dcd187dcd9360ac17f710344b9a11d46022b11fc55",
+    "tools/tests/test_ci_scope.py": "6ab09621bf5f9464c9825bf62ea17e83ea8ba4e2e7114a25bc2d47cf4bded108",
+    "tools/tests/fixtures/docs-scope-history.json": "c05644ec63884c77f72ff4b78a4a19b314f158db8abd7e65cd4e8215020d51bb",
+    ".github/workflows/ci.yml": "ef9bc5f86c6d52d3dbda41eb1a282b20846ece5b02e841ae0d99936a41944265"
+  },
+  "historical_plan8": {
+    "scope": "docs",
+    "base": "774e7b2238227fb4db9b34f3c6db0406b5c1fb58",
+    "head": "638bf8f409c96842f07c6cb7f1434123aecfaee6",
+    "reason": "explicit documentation inputs only",
+    "changed": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "PLAN.md",
+      "STATUS.md",
+      "docs/adr/0012-accounts.md",
+      "docs/adr/0014-ci.md",
+      "docs/conventions/shared.md"
+    ]
+  },
+  "tests": 82,
+  "logs": {
+    "/tmp/incant-docs-selection-tools-final.log": "94877dc70e1463173d00e77c354bfce8a27614b115c899505e5791e0bd3fd8e5",
+    "/tmp/incant-docs-input-audit-main64.txt": "6e560fc0a253a2435089d4b142cbc5c6d484e79e6a0e986c3f3a40c96f00197a"
+  },
+  "full_command_strings_preserved": 45,
+  "hosted": "pending",
+  "graph_classifier": "report-only"
+}

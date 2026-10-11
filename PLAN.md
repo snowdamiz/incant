@@ -3,7 +3,7 @@
 Engine name: **Incant** (decided 2026-10-08; the shortlist it was chosen from is in Appendix D).
 Launch game: **Driftwake** (decided 2026-10-10).
 
-Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role. Revision 6 (2026-10-10): removed name clearance and package reservations, moved store accounts and signing certificates from Phase 0 to Phase 5 store uploads, and replaced reference-phone purchases with hosted real devices in AWS Device Farm. Revision 7 (2026-10-10): removed calendar windows, phase durations, the timeline chart and the ship-date target by director instruction; phases advance only through their exit gates.
+Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role. Revision 6 (2026-10-10): removed name clearance and package reservations, moved store accounts and signing certificates from Phase 0 to Phase 5 store uploads, and replaced reference-phone purchases with hosted real devices in AWS Device Farm. Revision 7 (2026-10-10): removed calendar windows, phase durations, the timeline chart and the ship-date target by director instruction; phases advance only through their exit gates. Revision 8 (2026-10-10): made outside services local-first by director instruction: development, CI and integration tests run every third-party service the plan depends on as a local container or in-process substitute, and hosted services are used only where a gate needs the real one (Section 2.7).
 Scope: from the engine foundation to Driftwake live on three stores and Engine 1.0 released. The plan sets no calendar dates; exit gates alone mark progress.
 
 ---
@@ -65,6 +65,12 @@ the ship-date target. Agents build far faster than a human-paced calendar, so
 dates are neither forecasts nor limits. A phase is complete when its exit gate
 passes; human-owned actions are tied to the gates that need them.
 
+Director decision, 2026-10-10: run third-party services locally whenever
+possible, using containers such as Docker. Development, CI and integration tests
+use local substitutes; hosted services are reserved for what cannot be reproduced
+locally (Section 2.7). Cloud and identity accounts are therefore needed only when
+a gate requires the real service. This changes the plan; it does not approve any gate.
+
 ---
 
 ## 1. Vision, principles, and definition of done
@@ -83,6 +89,7 @@ A single application that is a 3D/2D modeling tool, a game engine, and an editor
 6. **Dogfood everything.** The launch game is built in the engine, by the team, with the agent. Anything the game needs that the engine lacks is an engine bug.
 7. **Rust core, TypeScript gameplay, WebAssembly for hot code, web editor chrome.** Chosen for safety, portability, performance, and LLM fluency. TypeScript is the default for gameplay logic; sandboxed WebAssembly modules, written in Rust first, carry performance-critical gameplay code at native speed on every target, including iOS where JIT compilation is banned. Revisit only with strong evidence.
 8. **Agent-first build with a hard routing rule.** The engine and game are built primarily by Astra running in OpenAI Codex. Any visual work is handed off to Claude 5.5 over ACP (Agent Client Protocol) using the director's already logged-in Claude account. Section 4 defines "visual" precisely. This is a build-time arrangement; the engine's end users still bring their own OpenAI account (Section 3), and the shipped engine never embeds the director's credentials.
+9. **Outside services run locally first.** Every third-party service the engine, its online services or the build depends on has a local substitute, run as a container (Docker or a compatible runtime) or in-process, so development and CI need no cloud, identity or store account. Hosted services are used only for what cannot run locally: real phones, store review, production hosting and live provider evaluations (Section 2.7).
 
 ### 1.3 Definition of done
 
@@ -171,6 +178,7 @@ incant/
     analytics/        Consent-gated gameplay event ingestion and aggregation
     allocator/        Dedicated-server fleet allocation (reference deployment; optional for Driftwake)
     deploy/           Infrastructure as code for every service; never credentials
+    local/            Compose stack with local substitutes for every outside service (Section 2.7)
   sdk/
     ts/               @incant/runtime TypeScript types and helpers
     rust/             incant-module Rust SDK for WebAssembly modules, generated from the schema registry
@@ -227,6 +235,31 @@ The project document and the command bus serve authoring. Running the game never
 - **Edits during play.** Inspector changes during play are runtime-only. Keeping one is an explicit action that emits a normal command on the bus with normal provenance.
 - **Lean runtime.** `incant_runtime` contains no document model, CRDT, command bus or agent, and parses no JSON on the frame path. A dependency test enforces this on every build.
 
+### 2.7 Local service stack
+
+Every third-party service in this plan is developed and tested against a local substitute first. `services/local/` holds one compose file that starts the whole stack with a single command on a developer machine or a Linux CI runner, using Docker or a compatible OCI runtime such as Podman or Colima. The stack needs no account, credential or network access beyond pulling images, and every image is pinned by digest.
+
+| Hosted service | Local substitute | What still needs the hosted service |
+|---|---|---|
+| AWS ECS with Fargate and EC2 (services and relays) | The same service and relay container images on a local network, with several relays standing in for regions | Production capacity, real regional latency, the Phase 6 and Phase 8 load tests |
+| AWS RDS Postgres | Postgres container at the same major version, with WAL archiving to the local object store for point-in-time recovery drills | Multi-AZ failover and managed backups |
+| S3 object storage (cloud sync, backups, crash symbols) | S3-compatible object store container | Nothing for correctness |
+| Load balancers, Shield and AWS WAF | A local reverse proxy with the same routes and rate limits; OpenTofu `validate` and `tofu test` with mock providers in CI | DDoS protection and edge behavior, verified in staging |
+| CloudWatch metrics, logs and alarms | OpenTelemetry collector feeding a local metrics, logs and alerting stack | Production alerting and the public status page |
+| WorkOS AuthKit (engine accounts) | Self-hosted Zitadel container, the decision-3 replacement, behind the same OpenID Connect client configuration; an SMTP capture container receives email sign-in codes | WorkOS-specific sign-in behavior, verified in staging |
+| Steam, Apple and Google player sign-in | Local fakes of the Steam ticket API and Apple/Google OpenID Connect behind the player service's provider boundary | Real platform sign-in in each store's sandbox |
+| Store-native cloud saves, achievements and purchase hooks | A file-backed implementation of the platform-services abstraction; StoreKit configuration files for Apple purchase flows | Store-specific behavior in each store's sandbox, then store review |
+| TURN and STUN for WebRTC | coturn container | Carrier-grade NAT on real cellular networks |
+| Network conditions | Container network shaping (latency, jitter, loss, NAT) driven by the Section 6.8 latency profiles | The Phase 6 cellular and Wi-Fi-to-cellular gate on real phones |
+| AWS Device Farm phones | iOS simulator and Android emulator for functional runs | Every performance, shader-hitch and device gate; simulators never count |
+| OpenAI (in-engine agent) | A recorded-response replay server for protocol and tool-loop tests; an optional local OpenAI-compatible model server for smoke runs | Live agent evaluations, which measure the real provider |
+
+Rules:
+- Code may depend on a hosted-only API only through a boundary that has a local substitute in this table. A new outside dependency adds its row before code relies on it.
+- Local substitutes are open source under licenses the dependency allowlist accepts, and run without accounts, tokens or telemetry.
+- Development, CI, staging and engine users' self-hosted deployments run the same service images (Section 6.10). AWS-specific code is limited to deployment in `services/deploy/` and thin adapters behind those boundaries.
+- Results from the local stack are labeled as local. They prove behavior against the protocol, not the hosted service, and never satisfy a gate that names real devices, a real provider, a store or a production region.
+
 ---
 
 ## 3. Accounts, login, and OpenAI integration
@@ -263,7 +296,7 @@ Separate from the OpenAI connection. The engine account provides:
 
 - Identity for licensing, cloud project sync, collaboration invites, and the template gallery.
 - Sign-in methods: passwordless email code (WorkOS Magic Auth), Google, GitHub, Apple (required for iOS App Store distribution of the editor if we ever ship it there).
-- Implementation: WorkOS AuthKit as the managed identity provider, chosen for passwordless email codes, Google, GitHub and Apple sign-in plus enterprise single sign-on for studios. The editor uses a public WorkOS Connect OIDC application with PKCE; confidential credentials stay in the accounts service. Keep issuer configuration and application-owned identities separate so self-hosted Zitadel can replace it without changing the client protocol if its terms or pricing stop fitting; identity and session migration still requires verification. The accounts service is the Rust (axum) and Postgres service from 2.1, hosted on AWS with the other Incant Cloud services (decisions 3 and 16). Game player identity is separate: the self-hostable player service (Phase 6) uses Steam, Apple and Google sign-in directly, so games never depend on WorkOS.
+- Implementation: WorkOS AuthKit as the managed identity provider, chosen for passwordless email codes, Google, GitHub and Apple sign-in plus enterprise single sign-on for studios. The editor uses a public WorkOS Connect OIDC application with PKCE; confidential credentials stay in the accounts service. Keep issuer configuration and application-owned identities separate so self-hosted Zitadel can replace it without changing the client protocol if its terms or pricing stop fitting; identity and session migration still requires verification. The accounts service is the Rust (axum) and Postgres service from 2.1, hosted on AWS with the other Incant Cloud services (decisions 3 and 16). Game player identity is separate: the self-hostable player service (Phase 6) uses Steam, Apple and Google sign-in directly, so games never depend on WorkOS. Development and CI use a local Zitadel container as the OpenID Connect issuer (Section 2.7), which also keeps the replacement path exercised.
 
 The engine stores **only metadata** about provider connections server-side: "this user connected OpenAI via OAuth on this date." Never the credential.
 
@@ -356,6 +389,7 @@ Repository files that make this work:
 
 - Astra uses the director's OpenAI account through Codex.
 - Claude uses the director's logged-in Claude Code session. Nothing is stored server-side or in CI.
+- Development and CI use the Section 2.7 local service stack and need no cloud, identity or store account. Hosted accounts (AWS, WorkOS, store sandboxes) are used only by the jobs whose gates need the real service.
 - CI never calls either agent. CI runs builds, tests, golden images, device farm, and the in-engine agent eval harness. The eval harness uses dedicated eval provider keys from the CI secrets store, and those keys are only ever used by the eval harness.
 - Human-only: Apple, Google, and Steam developer accounts, signing keys, payment setup, legal filings, age rating submissions, cloud provider accounts and billing for live services, DDoS protection contracts, legal review of the privacy policy, age gates and account deletion flows, vendor SDK license agreements (for example NVIDIA DLSS and Intel XeSS), external review contracts, store pricing, and accountability for the on-call rotation.
 
@@ -479,7 +513,7 @@ Deliverables:
 - Localization panel: string table editor with per-locale columns, a missing-string filter, and XLIFF export and import for translators.
 - Engine version pinning: a project declares the engine version range it requires. Opening an older project offers migration as a reviewable transaction with a backup; a newer format is refused with a clear message.
 - Browser mode: the editor web UI running against the WASM engine, read-only viewport first, editing second.
-- Engine account sign-in and project cloud sync (single user, last-write-wins at file level, CRDT merge at document level).
+- Engine account sign-in and project cloud sync (single user, last-write-wins at file level, CRDT merge at document level), built and tested against the Section 2.7 local stack.
 
 Exit gate:
 - Core Sample can be rebuilt from an empty project using only the editor in under four hours by someone who has never seen the code.
@@ -573,7 +607,7 @@ Deliverables, replication and simulation models:
 - Determinism toolkit for rollback: the deterministic physics variant selected per project (Rapier `enhanced-determinism` per ADR 0003, or Jolt's deterministic mode if the backend changes), WebAssembly modules as the recommended home for rollback-critical logic, a deterministic math library and seeded RNG in the TS SDK, deterministic iteration-order guarantees, per-tick state checksums, a desync report that names the first diverging tick and component path, and a CI job that runs one input script on macOS ARM, Windows x86, Android ARM and iOS and compares checksums. Rollback cross-play between CPU architecture classes is enabled only when that job passes.
 - Mobile constraints: configurable send rates (20 Hz default on mobile), a data budget of 20 MB per 25-minute run on cellular, battery-aware pacing of network ticks.
 
-Deliverables, services (Rust, axum, Postgres; shipped as container images with a compose file so engine users can self-host):
+Deliverables, services (Rust, axum, Postgres; shipped as container images with a compose file so engine users can self-host, and developed against the Section 2.7 local stack):
 - Sessions: lobbies, room codes, latency-aware matchmaking (minimal, extensible), session tickets, WebRTC signaling.
 - Relay: stateless regional QUIC/UDP relay that forwards only for ticketed peers, rate-limited and horizontally scaled.
 - Player: optional cross-store player identity (sign in with Steam, Apple or Google; Sign in with Apple is offered on iOS whenever any third-party sign-in is), account linking, cloud saves with the last five versions retained, conflict resolution by version vectors with last-write-wins and a choose-save UI, in-app account deletion, data export, and age-gate flags.
@@ -731,12 +765,13 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 
 ### 6.10 Online services and live operations
 - Owner: backend and live-operations engineer (Section 4.5); the director is accountable until that role is staffed.
-- First milestone: sessions and relay deployed to one staging region before Phase 7 co-op testing begins.
+- First milestone: sessions and relay running on the Section 2.7 local stack, then deployed to one staging region before Phase 7 co-op testing begins.
 - Scope: the sessions, relay, player, analytics and allocator services from Phase 6, the accounts service from Section 3.2, and their production operation for Driftwake.
 
 Hosting and deployment:
 - AWS (decision 16). HTTP services run on ECS with Fargate behind regional load balancers; relays run on Graviton EC2 instances with public addresses; Postgres runs on RDS Multi-AZ with point-in-time recovery. Shield Standard and AWS WAF protect the front doors; Shield Advanced is added after the first attack that causes more than fifteen minutes of outage. Infrastructure as code in OpenTofu lives in `services/deploy/`. CI deploys through short-lived OIDC credentials from the CI secrets store. No cloud credentials exist in the repo, the editor, the templates or the shipped game.
 - Launch regions: us-east-1 (Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt) and ap-northeast-1 (Tokyo). Singapore, São Paulo and Sydney are added if beta telemetry shows more than five percent of players with over 120 ms to the nearest relay. Sessions and player run active-active in Virginia and Frankfurt; relay runs in every region; the allocator is deployed only if Driftwake adopts dedicated servers.
+- Local first (Section 2.7): every service, relay and dependency runs in the local compose stack, and staging and production run the same images. Features are built and tested locally; AWS is needed only for staging, production and hosted device runs.
 - Build-time accounts never become runtime dependencies: deployment never uses the director's Codex or Claude sessions, and self-hosting the services needs no Incant engine account.
 
 Self-hosting for engine users:
@@ -767,7 +802,7 @@ Compliance and player safety (legal review is human-owned):
 
 Editor collaboration: real-time multi-user editing over a collaboration relay is Engine 1.1 scope. Phase 2 single-user sync and journal replay are the 1.0 collaboration story.
 
-Tests: service load tests at twice projected launch concurrency, chaos tests (region loss, Postgres failover, relay node kill), backup restore drills, the no-credential-in-logs test, and a clean-machine self-hosting run in CI.
+Tests: service integration and chaos tests (simulated region loss, Postgres failover, relay node kill) and backup restore drills on the local stack for every service change; load tests at twice projected launch concurrency and the same drills in staging and production; the no-credential-in-logs test; and a clean-machine self-hosting run in CI.
 
 ### 6.11 Navigation and gameplay AI
 - Owner: core engine engineer.
@@ -846,9 +881,9 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 
 ## 8. Quality, testing, and release engineering
 
-- **CI on every commit:** build all crates, unit tests, schema validation, TS SDK conformance, the runtime dependency test, and a dependency license check (cargo-deny and an npm license checker against an allowlist) that regenerates THIRD_PARTY_NOTICES.md.
+- **CI on every commit:** build all crates, unit tests, schema validation, TS SDK conformance, the runtime dependency test, service and multi-client integration tests against the Section 2.7 local stack on Linux runners, and a dependency license check (cargo-deny and an npm license checker against an allowlist) that regenerates THIRD_PARTY_NOTICES.md.
 - **Performance gates on every PR touching runtime crates:** a Core Sample run in the shipping profile on a reference desktop and a reference phone, failing on frame-time, script-time or memory regressions over 5 percent, with Tracy captures attached to the PR.
-- **Nightly:** full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles, determinism checksum comparison across reference device classes, script time budget and shader-hitch checks on the reference phones. These run on hosted real devices in AWS Device Farm, using the reference models or the nearest available ones; Incant buys no phones.
+- **Nightly:** full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles on the local stack, determinism checksum comparison across reference device classes, script time budget and shader-hitch checks on the reference phones. These run on hosted real devices in AWS Device Farm, using the reference models or the nearest available ones; Incant buys no phones.
 - **Weekly:** store-submission dry run on one platform in rotation, security dependency audit, crash report triage, service load test in one region, backup restore check.
 - **Release trains:** engine beta releases every two weeks during Phase 8; game builds to internal QA daily.
 - **Bug priority:** P0 (data loss, crash on launch, credential exposure), P1 (blocks a workflow), P2 (workaround exists), P3 (cosmetic). P0 and P1 block releases.
@@ -891,6 +926,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | Host leaves or lags in host-authoritative co-op | High | Medium | Host selection by device class and connection quality, host migration with periodic state handoff, run state checkpointed at room transitions |
 | Live-service outage or cost spike at launch | Medium | High | Relay topology keeps variable cost near egress price; load test at twice projected peak; runbooks and on-call before beta; dedicated servers optional |
 | Online features trigger legal and store obligations late (age gates, account deletion, moderation) | High | Medium | Optional accounts, no chat at launch, age gate and in-app deletion designed in Phase 6, counsel review before beta (human-owned) |
+| Local substitutes drift from hosted service behavior | Medium | Medium | Pinned versions matching production; the same contract tests run against the local stack and staging; local results labeled; hosted verification before any gate that names the real service |
 | Services become a single point of failure for a game that should work offline | Medium | High | Offline degradation is a tested requirement; single-player and local saves never touch services; self-hosting keeps the services alive if Incant stops hosting them |
 
 ---
@@ -984,13 +1020,14 @@ Product, business and operations:
 25. **External reviews:** penetration tests before the Phase 8 beta and before launch, a netcode review at the Phase 6 gate, and an accessibility audit before Phase 9.
 26. **FBX conversion:** ufbx, MIT-licensed, so the Autodesk FBX SDK and its redistribution terms never enter the engine.
 27. **Scope reductions:** none adopted (Section 5.1).
+28. **Local-first outside services:** every third-party service has a local container or in-process substitute in the Section 2.7 stack; development and CI use it, and hosted services are used only where a gate needs the real one.
 
 Human-owned actions (tasks tied to the gates that need them, not decisions):
 
 - **Phase gate approvals:** the director, at each gate.
 - **Store accounts and signing, before Phase 5 store uploads:** Apple, Google and Steam developer accounts; Apple and Windows signing certificates.
 - **Staffing:** the graphics reviewer and contracts for Phases 0 and 1, then the roles in Section 4.5 as their phases begin.
-- **Cloud and identity accounts:** the AWS organization with billing before the first hosted device runs or Phase 2 cloud sync work, whichever comes first; the WorkOS account before Phase 2 cloud sync work.
+- **Cloud and identity accounts:** the AWS organization with billing before the first hosted device runs or the first staging deployment, whichever comes first; the WorkOS account before the accounts service's first staging deployment. Neither is needed to build or test a feature (Section 2.7).
 - **Vendor SDK licenses, before Phase 4 integration:** NVIDIA DLSS and Intel XeSS.
 - **External review contracts:** netcode review before the Phase 6 gate; penetration test and accessibility audit before the Phase 8 beta and Phase 9 respectively.
 - **Legal, before the Phase 8 beta:** trademark policy, privacy policy, terms for Incant Cloud and Driftwake, the per-region age-gate feature set, the account deletion review, and the benchmark publication review.
