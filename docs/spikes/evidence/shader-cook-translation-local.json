@@ -382,5 +382,18 @@
     "files": 22,
     "identical": true,
     "clippy": "passed with warnings denied"
-  }
+  },
+  "metal_threadgroup_contract": {
+    "reflected_bytes": {
+      "hits": 4,
+      "membership": 512
+    },
+    "allocation_alignment": 16,
+    "actual_hal_allocation_bytes": {
+      "hits": 16,
+      "membership": 512
+    },
+    "verified_source": "wgpu-hal 29.0.4 metal/command.rs set_compute_pipeline"
+  },
+  "independent_review": "windowing_correctness: source hashes and compiler evidence verified; logical-versus-allocated threadgroup-size wording corrected; no scoped code blocker"
 }

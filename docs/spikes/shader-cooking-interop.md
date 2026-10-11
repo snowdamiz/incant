@@ -33,11 +33,16 @@ material and light-grid shaders.
 
 The actual stage-specific translation confirms these requirements:
 
-| Entry point | Dynamic storage-buffer lengths | Threadgroup allocation |
+| Entry point | Dynamic storage-buffer lengths | Logical reflected threadgroup sizes |
 | --- | --- | --- |
 | Material fragment | `punctual_lights`, `cluster_counts`, `cluster_masks` | None |
 | Light-grid compute | `lights`, `counts`, `masks` | `hits`: 4 bytes; `membership`: 512 bytes |
 | Other nine stages | None after selecting and compacting the entry point | None |
+
+These are logical sizes, not the final Metal allocation sizes. The pinned
+`metal/command.rs` rounds each threadgroup allocation up to 16 bytes before
+calling `setThreadgroupMemoryLength`; the actual allocations are 16 and 512
+bytes. A native backend contract must preserve that alignment rule too.
 
 Naga emits a buffer-size structure used by bounds checks. Its compute kernel
 also receives the two threadgroup objects as arguments. A precompiled shader
