@@ -1,0 +1,53 @@
+{
+  "reviewer": "astra /root",
+  "recorded_at": "2026-10-11T23:10:56.587124+00:00",
+  "base": "8bd9a96a0b88fda327c7ce5552d75c9a9a2fe461",
+  "disposition": "accepted for scoped integration; no material findings",
+  "scope": "ordinary-load GameSession and exported offline bytecode player, explicit persistent-data opt-in",
+  "source_evidence_sha256": "84dc516409b6edba8ca28499111bd8d3b025cfad7f99df3abee745ba489a7455",
+  "verified_counts": {
+    "production_test_probe_sources": 14,
+    "unchanged_build_inputs": 8,
+    "logs": 13,
+    "passed_tests_doctests": 311,
+    "groups": 37,
+    "failed": 0,
+    "ignored": 0
+  },
+  "sources": {
+    "crates/incant_game_player/Cargo.toml": "ca0b83f48edc0735fec75481d56a2ab3cd4ab644e5dcac42b02efeb45a519522",
+    "crates/incant_game_player/src/main.rs": "fb91810f935f49ccc23b04a91cbed7f71e01a0166f5567875d903f294c8207bb",
+    "crates/incant_game_player/src/session.rs": "16a56e61f2fed54c28266e872c7915b4147687addb8fd536e49a6284973f1318",
+    "crates/incant_game_runtime/src/core.rs": "0aad2fefc868473503e009ad215a997106c36aac6de95d71e431acda9fbecde4",
+    "crates/incant_game_runtime/src/hosted.rs": "1bda9ead25e6afc482d4a2b0d2eb24f7b98f3ed341e4cf411aa0e8bbf6b3dae7",
+    "crates/incant_game_runtime/src/lib.rs": "5722984028e6f8e7cfced44e07994403cd16970e46163e57a0648da0ab84cd11",
+    "crates/incant_game_runtime/src/offline.rs": "af67d4540ef05a770b2a8d7f4b5bdfa81607ad35e996b3281f1b4447c77094f3",
+    "crates/incant_script/build.rs": "6440efe0852d1199bd5a3348aa14466a1b1bf04c9a04baeac768e958a5188d8c",
+    "crates/incant_script/src/checkpoint/mod.rs": "c24d42025a75c1596190275650e420354594f72b0c2805fddfa3eac5d9ab3609",
+    "crates/incant_script/src/lib.rs": "3ca019aaac9280b897015df9a72f31cfbe0c7b9028a82c68bbe5cc493e0218ad",
+    "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+    "crates/incant_game_runtime/tests/checkpoints.rs": "b0f77daf3577d4e9b6a07e4f432bcd6c6881cb092bde85e4ca49e09ff4656f48",
+    "crates/incant_script/src/checkpoint/pending.rs": "5a6d6601268c2400349ba0ba79b3db73289d1dee9e68e7997381050c75b5cfe6",
+    "tools/probes/game-checkpoint-export.py": "42a03b7f92337793cd35284782ad9511c06c803aabaefe5094e35af75d265805"
+  },
+  "process_receipt_sha256": "e25bfd65b0f16bc95e603ea4bbfd5550cc66458bb1b4bdd91585fbded601e5cf",
+  "reviewed_behaviors": [
+    "Private pending-checkpoint authority validates trusted initial scene, program identity and membership before VM initialization; input attaches to same restored world identity.",
+    "Candidate GameSession factories preserve existing caller-owned sessions on refusal and validate actual restored spatial state before host/device setup.",
+    "CLI route and size bounds, absolute observations, fresh relative input, rational PCM continuation, save-on-success ordering and no-clobber complete-file publication.",
+    "Public command-authored fixture invokes actual exporter; source/private build deletion precedes five successful and nine refusal processes.",
+    "Independently verified physical player/package/save hashes, byte-identical baseline/resume/repeat state and PCM concatenation, preserved no-clobber sentinel and no ordinary staging residue."
+  ],
+  "findings": [],
+  "limits": [
+    "No retained physics/audio or static/Wasm checkpoint continuation",
+    "No arbitrary VM globals/closures/callback heap snapshot",
+    "Ordinary neutral fresh physical input, not exact replay",
+    "No GPU/window checkpoint route, native device/provider or performance evidence",
+    "Create-only complete-file publication, no universal power-loss durability; hard-link fallback may leave staging link",
+    "PCM and checkpoint are not a multifile atomic transaction",
+    "No production Rapier snapshot adoption; full save feature remains incomplete",
+    "Actual main integration remains a separate check; this receipt does not approve a phase gate.",
+    "Earlier physical process-proof verification and full source review were completed in the same ongoing review; no redundant shipping rebuild was requested."
+  ]
+}

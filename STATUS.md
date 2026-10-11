@@ -25,9 +25,22 @@ checked before VM execution; invalid replacement preserves the live session.
 Integrated main101 passes 324 affected tests/doctests, scoped Clippy/contracts and four successful fresh
 source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
 bytes match uninterrupted execution. Module globals/closures remain explicitly
-ephemeral and physical input restarts neutral. Physics/audio/static modules,
-complete GameSession/player/export loading and durable file publication remain
-unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+ephemeral and physical input restarts neutral. Physics/audio/static continuation
+and platform durability remain unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+
+## Native game and exported-player checkpoints — locally verified
+
+The existing GameSession families can create ordinary checkpoints and construct a
+validated candidate on its exact restored WorldIdentity before VM/audio startup.
+The public exported offline player accepts create-only `--save-checkpoint` and
+`--load-checkpoint`, retains rational sample phase, uses new neutral relative input
+and absolute observations, and refuses unsupported window/GPU/static routes.
+311 affected tests, scoped Clippy and a fresh shipping export pass. After source
+and private build deletion, five successful processes and nine refusal controls
+pass; uninterrupted and twice-resumed final checkpoint bytes match. This remains
+opt-in typed gameplay persistence, not arbitrary VM, physics/audio or complete
+Phase1 saves. PCM/checkpoint are not a multifile atomic transaction, and full
+power-loss durability is not claimed. [Contract/evidence](docs/spikes/native-game-checkpoints.md).
 
 ## Shared agent project access — locally verified
 
