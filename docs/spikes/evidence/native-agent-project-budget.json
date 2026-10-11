@@ -170,5 +170,20 @@
   "limitations": [
     "Local CPU and synthetic provider verification only; no hosted platform execution, current live provider or native UI budget proof.",
     "Bridge command, Claude budget controls, cost estimates and phase gates remain open."
-  ]
+  ],
+  "main_integration": {
+    "head": "a8eb6bb00ca5e0d5ce1e451a5c50ec52a8e3c30a",
+    "main": "04f8d9b18a4b29893c63a346841fffd41ce437c7",
+    "merged_without_conflicts": true,
+    "tests_passed": 152,
+    "existing_native_gpu_tests_ignored": 1,
+    "clippy": "four packages, all targets, passed",
+    "bridge_sdk_conventions": "generated checks passed; SDK strict types passed",
+    "editor_build": "strict types and Vite build passed",
+    "logs_sha256": {
+      "/tmp/incant-native-budget-main97-tests.log": "b38500d2ba2bc3b1c5cc85001f90c860248dd9bb64cc222db6964b8d36151a7e",
+      "/tmp/incant-native-budget-main97-clippy.log": "0f8291489c075953c7df767968a90878d44145e5cff04db479acb45e40715e74",
+      "/tmp/incant-native-budget-main97-ui-build.log": "6b927964b9dc4160312ff042c34afc2f17bf93e9b6bbc5cd66150b2bb86fb7b9"
+    }
+  }
 }

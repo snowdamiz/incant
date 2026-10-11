@@ -26,8 +26,9 @@ Play host and conversation across same-account/project turns without moving its
 QuickJS state between threads. Actual cross-turn query, failed candidate and
 replacement controls pass alongside cancellation/shutdown/panic checks. The
 provider invalidation listener is integrated with its intervening-read race fixed.
-The combined slice passes 118 scoped Rust tests, four-package all-target Clippy,
-658 UI tests, strict types and native build. Four real native-handler turns used
+The current native slice passes 152 scoped Rust tests and four-package all-target
+Clippy after integrating main97. The earlier UI slice passed 658 UI tests; current
+strict types and the editor build pass, with the new chat integration pending. Four real native-handler turns used
 the saved ChatGPT login for approved edits, native Play and a later retained-state
 query; Undo and exact journal/account recovery passed after reopening. Claude's
 Play UI is integrated; chat UI and native visual/WebView interaction acceptance
