@@ -15,8 +15,8 @@ release contract. The full engine build/test/probe bodies remain present; changi
 triggers does not count as rerunning their correctness or performance proofs.
 
 All feasible scoped engine tests and review are still required before development
-merges. The new hosted fast job's duration, branch protections, initial release
-baseline and first candidate results must be recorded after deployment. This
+merges. The first fast job and deployed branch rules are recorded below; the first full
+candidate result remains pending. This
 local verification does not claim hosted success, physical-device performance,
 phase completion, or a signed/published distribution release.
 
@@ -36,7 +36,26 @@ SDK compilation, UI production build, generated bridge/SDK/conventions, Rust
 formatting and workflow lint. The policy's earlier 17-Node result was on a private
 authored-script union; this PR preserves its separate 12-test source scope.
 The root created the active `incant-release-checkpoints` heartbeat at the agreed
-three-hour cadence. Repository settings, exact final fast-check success and the
-first full candidate result are deployment evidence still to be recorded; neither
+three-hour cadence. Repository settings and exact final fast-check success are recorded below. The
+first full candidate result remains pending; neither
 the historical failure nor local verification is presented as full hosted success.
 [Machine-readable evidence](evidence/release-checkpoint-transition.json).
+
+## Deployed development gate
+
+[PR83](https://github.com/snowdamiz/incant/pull/83) merged at actual main
+`290b69078922db4369bfe2ff8485f82013e0fb63` after exact-head `development-checks`
+succeeded. Its queue was **2 seconds**, execution **119 seconds**. This is a
+deliberately narrower per-merge gate, not faster full Rust compilation. The new
+restore-only npm action reused the existing exact Linux cache key successfully
+and registered no PR save hook.
+
+`release` was bootstrapped at the fully checked main82 integration
+`cde3d7279ffe09204f853f3ce342175a14035b1e`. API readback confirms main requires
+only the GitHub Actions `development-checks` context, with strict up-to-date off;
+release requires all22 listed GitHub Actions contexts with strict up-to-date on.
+Both require PRs, enforce the rules for administrators, and prohibit force pushes
+and deletion. No extra approval count is imposed. The active three-hour thread
+heartbeat is `incant-release-checkpoints`. No candidate has yet been promoted;
+release remains on its known baseline until the complete frozen suite succeeds.
+[Deployment and first-run identities](evidence/release-checkpoint-deployment.json).

@@ -2,28 +2,28 @@
 //! host clock access. Retained functions cannot affect a later update.
 use crate::{
     ScriptError,
-    schedule::{Action, Event, MAX_TIMER_ACTIONS, Schedule},
+    schedule::{Action, Event, MAX_TIMER_ACTIONS, Schedule, Scope, ScopedAction},
 };
 use rquickjs::{Array, Ctx, Exception, Function, Object, Value, function::Rest, object::Property};
 use std::{cell::RefCell, rc::Rc};
 
 #[derive(Default)]
 struct State {
-    active: bool,
+    active: Option<Scope>,
     calls: usize,
     failure: Option<ScriptError>,
-    actions: Vec<Action>,
+    actions: Vec<ScopedAction>,
 }
 #[derive(Default)]
 pub(crate) struct TickTimers(Rc<RefCell<State>>);
 impl TickTimers {
-    pub fn activate(&self) {
-        self.0.borrow_mut().active = true;
+    pub fn activate(&self, scope: Scope) {
+        self.0.borrow_mut().active = Some(scope);
     }
     pub fn revoke(&self) {
-        self.0.borrow_mut().active = false;
+        self.0.borrow_mut().active = None;
     }
-    pub fn take(&self) -> Result<Vec<Action>, ScriptError> {
+    pub fn take(&self) -> Result<Vec<ScopedAction>, ScriptError> {
         self.revoke();
         let mut state = self.0.borrow_mut();
         if let Some(error) = state.failure.take() {
@@ -31,12 +31,21 @@ impl TickTimers {
         }
         Ok(std::mem::take(&mut state.actions))
     }
-    pub fn expose<'js>(&self, ctx: &Ctx<'js>, events: Vec<Event>) -> rquickjs::Result<Object<'js>> {
+    pub fn expose<'js>(
+        &self,
+        ctx: &Ctx<'js>,
+        scope: Scope,
+        events: &[Event],
+    ) -> rquickjs::Result<Object<'js>> {
         let object = Object::new_proto(ctx.clone(), None)?;
         let array = Array::new(ctx.clone())?;
-        for (index, event) in events.into_iter().enumerate() {
+        for (index, event) in events
+            .iter()
+            .filter(|event| event.scope == scope)
+            .enumerate()
+        {
             let value = Object::new_proto(ctx.clone(), None)?;
-            value.prop("id", Property::from(event.id).enumerable())?;
+            value.prop("id", Property::from(event.id.clone()).enumerable())?;
             value.prop(
                 "scheduled_tick",
                 Property::from(event.scheduled_tick as f64).enumerable(),
@@ -52,7 +61,7 @@ impl TickTimers {
                 Function::new(ctx.clone(), move |ctx: Ctx<'js>, args: Rest<Value<'js>>| {
                     let rejected = {
                         let mut state = state.borrow_mut();
-                        if !state.active {
+                        if state.active != Some(scope) {
                             Some("timer functions belong to their active update only")
                         } else if state.failure.is_some() {
                             Some("timer capability already failed")
@@ -78,7 +87,10 @@ impl TickTimers {
                             return Err(error);
                         }
                     };
-                    state.borrow_mut().actions.push(action);
+                    state
+                        .borrow_mut()
+                        .actions
+                        .push(ScopedAction { scope, action });
                     Ok(())
                 })?;
             object.set(name, function)?;
@@ -89,7 +101,7 @@ impl TickTimers {
 impl Drop for TickTimers {
     fn drop(&mut self) {
         let mut state = self.0.borrow_mut();
-        state.active = false;
+        state.active = None;
         state.actions = Vec::new();
     }
 }

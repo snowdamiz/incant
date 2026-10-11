@@ -11,20 +11,67 @@ impl CompiledScript {
     /// Compile bounded SWC CommonJS output without executing project code.
     /// Source text is stripped; bytecode line tables and the module name remain.
     pub fn compile_named(name: &str, source: &str) -> Result<Self, ScriptError> {
+        Self::compile_inner(name, source, None)
+    }
+
+    /// Compile the source-keyed output of the trusted union TypeScript cook.
+    /// Initial attachments/props are paired with the canonical binary scene.
+    pub fn compile_project(
+        name: &str,
+        source: &str,
+        bindings: crate::ScriptBindings,
+    ) -> Result<Self, ScriptError> {
+        Self::compile_inner(name, source, Some(bindings))
+    }
+
+    fn compile_inner(
+        name: &str,
+        source: &str,
+        bindings: Option<crate::ScriptBindings>,
+    ) -> Result<Self, ScriptError> {
         if source.len() > MAX_SOURCE_BYTES || !valid_name(name) {
             return Err(ScriptError::InputLimit);
         }
         let (_runtime, context, deadline) = vm(Duration::from_millis(50), true)?;
+        let dispatch = if let Some(bindings) = &bindings {
+            let ids = bindings
+                .sources()
+                .iter()
+                .map(|id| format!("{:?}", ulid::Ulid::from_bytes(id.0).to_string()))
+                .collect::<Vec<_>>()
+                .join(",");
+            let entries = bindings
+                .sources()
+                .iter()
+                .enumerate()
+                .map(|(index, id)| {
+                    format!(
+                        "entry({index}, {:?})",
+                        ulid::Ulid::from_bytes(id.0).to_string()
+                    )
+                })
+                .collect::<Vec<_>>()
+                .join(",");
+            format!(
+                "const expected = [{ids}];\n\
+                if (!behavior || !nativeIsArray(behavior.sources) || behavior.sources.length !== expected.length) throw new Error('native source catalog mismatch');\n\
+                function entry(i, id) {{ const item = behavior.sources[i]; if (!item || item.id !== id) throw new Error('native source identity mismatch'); const value = item.behavior; check(value); return value; }}\n\
+                const updates = [{entries}];\n\
+                export function update(chunks, dt, commands, input, physics, clock, timers, log, flipbooks, group, instances) {{ return updates[group].update({{chunks, dt, commands, input, physics, clock, timers, log, flipbooks, instances}}); }}\n"
+            )
+        } else {
+            "check(behavior);\nexport function update(chunks, dt, commands, input, physics, clock, timers, log, flipbooks, group, instances) { return behavior.update({chunks, dt, commands, input, physics, clock, timers, log, flipbooks, instances}); }\n".into()
+        };
         let wrapper = format!(
-            "const defineBehavior = value => value;\n\
+            "const defineBehavior = value => value; const nativeIsArray = Array.isArray;\n\
              const behavior = (function(exports) {{\n\
              \"use strict\";\n\
              {source}\n\
              ; return exports.default;\n\
              }})({{}});\n\
-             if (!behavior || typeof behavior.update !== 'function') throw new Error('default behavior.update required');\n\
-             if ('initialState' in behavior || 'onTimer' in behavior) throw new Error('legacy initialState/onTimer are unsupported; handle native timers.events in update');\n\
-             export function update(chunks, dt, commands, input, physics, clock, timers, log, flipbooks) {{ return behavior.update({{chunks, dt, commands, input, physics, clock, timers, log, flipbooks}}); }}\n"
+             function check(value) {{ if (!value || typeof value.update !== 'function') throw new Error('default behavior.update required');\n\
+             if ('initialState' in value || 'onTimer' in value) throw new Error('legacy initialState/onTimer are unsupported; handle native timers.events in update'); }}\n\
+             {dispatch}"
         );
         let (bytes, hardening) = context.with(|ctx| {
             let compile = |name: &str, text: &str| {
@@ -53,13 +100,17 @@ impl CompiledScript {
             wrapper_prefix_lines: WRAPPER_PREFIX_LINES,
             bytecode_sha256: digest(&bytes),
             hardening_sha256: digest(&hardening),
+            bindings_sha256: bindings.as_ref().map(crate::ScriptBindings::fingerprint),
         };
         validate(&metadata, &bytes, &hardening)?;
         Ok(Self {
             bytes: bytes.into(),
             hardening: hardening.into(),
             metadata,
-            allow_source: true,
+            // Authored gameplay executes bytecode only. Source parsing belongs
+            // to this fresh cook VM; eval/Function stay absent during updates.
+            allow_source: bindings.is_none(),
+            bindings: bindings.map(std::sync::Arc::new),
         })
     }
 
@@ -75,8 +126,8 @@ impl CompiledScript {
              metadata: incant_script::ScriptMetadata {{\n\
              format: {}, engine: {:?}.into(), build_id: {:?}.into(), target: {:?}.into(),\n\
              source_name: {:?}.into(), source_sha256: {:?}, wrapper_prefix_lines: {},\n\
-             bytecode_sha256: {:?}, hardening_sha256: {:?},\n\
-             }}, bytecode: &{:?}, hardening: &{:?},\n\
+             bytecode_sha256: {:?}, hardening_sha256: {:?}, bindings_sha256: {:?},\n\
+             }}, bytecode: &{:?}, hardening: &{:?}, bindings: {},\n\
              }};\n\
              // SAFETY: this module was emitted directly from the trusted compiler\n\
              // in this native build, not read from a project executable cache.\n\
@@ -91,8 +142,13 @@ impl CompiledScript {
             m.wrapper_prefix_lines,
             m.bytecode_sha256,
             m.hardening_sha256,
+            m.bindings_sha256,
             self.bytes,
             self.hardening,
+            self.bindings.as_ref().map_or_else(
+                || "None".into(),
+                |bindings| format!("Some({})", crate::bindings_embed::rust(bindings))
+            ),
         )
     }
 }

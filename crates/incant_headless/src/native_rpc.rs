@@ -138,7 +138,7 @@ impl Live {
             started_revision: self.started_revision,
             scene: &self.session.scene,
             script_source_sha256: &self.session.script_source_sha256,
-            script_source_parsing: false,
+            script_source_parsing: self.session.authored_scripts,
             tick: world.tick(),
             tick_rate: world.tick_rate(),
             entity_count: world.entity_count(),

@@ -19,6 +19,8 @@ fn main() {
         Path::new("Cargo.toml").into(),
         Path::new("src/compiler.rs").into(),
         Path::new("src/compiled.rs").into(),
+        Path::new("src/bindings.rs").into(),
+        Path::new("src/bindings_embed.rs").into(),
         Path::new("src/lib.rs").into(),
         Path::new("src/input.rs").into(),
         Path::new("src/flipbooks.rs").into(),

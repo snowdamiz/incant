@@ -1,0 +1,84 @@
+{
+  "deployment": {
+    "observed_at": "2026-10-11T16:09:44.899284+00:00",
+    "bootstrap_release": "cde3d7279ffe09204f853f3ce342175a14035b1e",
+    "bootstrap_basis": "PR82 merge verified with all21 prior full contexts successful; website is added to subsequent22-context checkpoints",
+    "policy_pr": 83,
+    "policy_head": "3f68e0d3a77a1272951147d7fa34e8e488289733",
+    "heartbeat": {
+      "id": "incant-release-checkpoints",
+      "state": "ACTIVE",
+      "cadence_hours": 3,
+      "confirmed_by_root": true
+    },
+    "main": {
+      "required": [
+        "development-checks"
+      ],
+      "strict": false
+    },
+    "release": {
+      "required": [
+        "android",
+        "build",
+        "checks",
+        "classify",
+        "compare",
+        "conformance (macos-latest)",
+        "conformance (ubuntu-latest)",
+        "conformance (windows-latest)",
+        "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "desktop (macos, macos-latest, incant_platform_smoke)",
+        "desktop (ubuntu-latest, Linux)",
+        "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "desktop (windows-latest, Windows, .exe)",
+        "ios",
+        "native (macos-latest)",
+        "native (ubuntu-latest)",
+        "native (windows-latest)",
+        "portability",
+        "storage (macos-latest)",
+        "storage (ubuntu-latest)",
+        "storage (windows-latest)",
+        "web"
+      ],
+      "strict": true
+    },
+    "github_actions_app_id": 15368,
+    "enforce_admins": true,
+    "required_approval_count": 0,
+    "force_pushes": false,
+    "deletions": false,
+    "candidate_created": false,
+    "other_repository_settings_changed": false
+  },
+  "first_fast_check": {
+    "run_id": 38154233518,
+    "job_id": 114513780485,
+    "head": "3f68e0d3a77a1272951147d7fa34e8e488289733",
+    "created_at": "2026-10-11T16:08:53Z",
+    "started_at": "2026-10-11T16:08:55Z",
+    "completed_at": "2026-10-11T16:10:54Z",
+    "queue_seconds": 2.0,
+    "execution_seconds": 119.0,
+    "conclusion": "success",
+    "log_sha256": "3093c03d1dde7b3780305d900ebb5341eb5deaac38aa4fc2af3c0bd57b9a4102",
+    "npm_restored_key": "node-cache-Linux-x64-npm-cc5583e1c617d5173b900d08e240977372a527c60c11ac60a54a5698be77145c",
+    "npm_action": "restore only; no save post-hook in PR",
+    "limit": "Fast job performs a deliberately different scope from full general/macOS; not a compiler speedup."
+  },
+  "merge": {
+    "merge": "290b69078922db4369bfe2ff8485f82013e0fb63",
+    "head": "3f68e0d3a77a1272951147d7fa34e8e488289733",
+    "parents": [
+      "cde3d7279ffe09204f853f3ce342175a14035b1e",
+      "3f68e0d3a77a1272951147d7fa34e8e488289733"
+    ],
+    "tested_tree": "fc1dba58985c2a8755e72f50cfeee813531c7df3",
+    "tree_verified": true,
+    "trailer_verified": true,
+    "merged_at": "2026-10-11T16:11:39Z"
+  },
+  "release_promoted": false,
+  "candidate_checks_pending": true
+}

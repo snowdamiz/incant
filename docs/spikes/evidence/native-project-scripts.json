@@ -1,0 +1,274 @@
+{
+  "recorded_at": "2026-10-11T15:02:39.688578+00:00",
+  "scope": "Local authored native TypeScript implementation before integration with generated Rust SDK/color union or script registration",
+  "base_commit": "1ddb78e243edb3407cc485307fcbf477cbbed7b2",
+  "plan_sha256": "296ea546a33a7fe8fa0b8c7ee795e1c34476cb087ab9deaa4ac84e8a5fda808e",
+  "host": {
+    "system": "Darwin",
+    "release": "25.6.0",
+    "machine": "arm64"
+  },
+  "source_sha256": {
+    "crates/incant_cook/src/lib.rs": "12baee7851848eeca206c89c175ab9a8ab5799be4a0484a765312b573bad3d45",
+    "crates/incant_cook/src/project_script.rs": "dd6877bfd8362a000cb3104c03ade25d7b72115b9cb6ae015be95dee6cbf4fcc",
+    "crates/incant_cook/src/scene.rs": "6ce846288cd194d9bbaf3f5dc7f58ed02f02e8674749dd62a2ad6b2d6c8dc4a0",
+    "crates/incant_cook/tests/project_scripts.rs": "4eacdca0fed23a83eb2ec47baade1c033a39dda1680b8517716d385304d92c45",
+    "crates/incant_headless/Cargo.toml": "a27844396f5939996ee2ee532dd86dd93b318a5d99f9f54742976dbae6b4b9d7",
+    "crates/incant_headless/src/native_agent_play/tests.rs": "02e653a5c5d545a29e08a3b1e68e279eb30301fad6586eae77513aa29bf6c059",
+    "crates/incant_headless/src/native_play.rs": "470ccd407689d491c491ade9965bec46075f41ec03bb0d6fbaacaee773010703",
+    "crates/incant_headless/src/native_play/compiler.rs": "86292f025574f18cbad7629753777a3b49e75726d2825d8b702c1a74f8c3ee9c",
+    "crates/incant_headless/src/native_play/session.rs": "b4d9304edb34698002b155707abb3a0ab6dd4edb918512d2d067fb41b92c9e70",
+    "crates/incant_headless/src/native_rpc.rs": "d0060a0ee4c3f3779c68c8945d4bea9a027e9e5ab360ac5bd57f0528b72a3498",
+    "crates/incant_runtime/src/entity_identity.rs": "d6e19121b1fbe2b43f98a628a4b33af92b695c6d5cd74e897e342d351aa5badf",
+    "crates/incant_runtime/src/lib.rs": "bbede6ff8808d19de7b8421b41cdbb05ad8d4535f920f5d814a8b4cd8cdf481d",
+    "crates/incant_runtime/src/world.rs": "e741d039a3fefea18763b6dc220fb11ec79b6e68328e8d1a22cb4cfeb607b1da",
+    "crates/incant_script/build.rs": "cf3fbf5a2fc13a1c8d0687c20493305afbdebe195df0d30456ffa333d19ddfd7",
+    "crates/incant_script/src/artifact.rs": "1ebcd08372283253ef643cb65ef26ea8a5a6d57f7e4a612323efa449626c014b",
+    "crates/incant_script/src/bindings.rs": "c644821be0c32202a992c508ab7605ffa6b254725873c8babcb030b79b7ec948",
+    "crates/incant_script/src/bindings_embed.rs": "d3d3e1f52fb8422eb48ea1f4981ffcf82689d5723cc2f971f867bc6a11f1dd1e",
+    "crates/incant_script/src/compiled.rs": "45d9cd25832dc0d172ec9301f1d69cd9e696060226299b2f0ef0d1693153fd5c",
+    "crates/incant_script/src/compiler.rs": "1664b822ab3e3b12032c68376a1fc8a6f06557a8ab03900a2809384a962f4ce3",
+    "crates/incant_script/src/harden.js": "bea413115ef4d4237c779c4c0e3619b1ab69390888beffcb8672e35f9b3beb59",
+    "crates/incant_script/src/lib.rs": "2fc9f4878223ee32ab29868c9ec9da11f15479154a9384890a8ffdfe5ff1737c",
+    "crates/incant_script/src/program.rs": "9d50ade283037553cdfe64303621ce79cad78083c91bb4e5eebfe765c616f2f2",
+    "crates/incant_script/src/schedule.rs": "45d42c230e54dc8cbc5a5dfca9925d67b504abe35153abc5ffc08d371ae6a9d1",
+    "crates/incant_script/src/session.rs": "9cddd250475df1e5d23aa5af02b52f5b29db2f92d3fb448f90a5ad9384a788c7",
+    "crates/incant_script/src/timer_tests.rs": "ea0723a703ed129848ae4d4d11e9aa5ecf0ecbc77e1afbc3b13d05c719bfce76",
+    "crates/incant_script/src/timers.rs": "f89600ff440aea682795dff941c9be43473931ca42c708e70634dd7705ed6e29",
+    "crates/incant_script/tests/project_bindings.rs": "01df6e09858c36ab27c0693051d20914cc6263d6d500e76cabc47b007e4824b0",
+    "sdk/ts/src/native.d.ts": "91196b9262783ea3f1bad35aee4a0c94db464bc54a473c39d96ab8716d175c78",
+    "tools/build_native_script.mjs": "543e3b8f9a20ac0d84f3466c9176dbd638a2f9c3dced367f48d6cb75a8f5849b",
+    "tools/native_script/cook.mjs": "aecb0df7c4080763c7c44bbe25ee07fef9f2b235f23b8f6657fce858862d79b6",
+    "tools/native_script/graph.mjs": "b681b4df2feecbaba82ce55dc13cc26aebfc9e9c1062753338e9312415554841",
+    "tools/tests/native_script.test.mjs": "bc33dcf3ab61ac11ce174a5fce5d0917d9faac69248daac2953b8f3d3b6e1d4d",
+    "crates/incant_agent/src/play.rs": "ded045316e6a1980b95bba4af262d423b9471bcd7e47514d253028db09bf0121",
+    "schemas/agent-tools.json": "b79b27c9ca50f733d6f5e752009e449dd490e830a0242b896dea3a390a66838c"
+  },
+  "validation": {
+    "scoped_rust_tests": 264,
+    "scoped_groups": 45,
+    "workspace_release_tests": 730,
+    "workspace_groups": 208,
+    "hardware_tests_ignored": 73,
+    "workspace_all_target_clippy": "passed",
+    "agent_description_delta_tests": 35,
+    "python_tests": 98,
+    "node_tests": 17,
+    "ui_tests": 536,
+    "ui_files": 30,
+    "sdk_types": "passed",
+    "ui_types_and_build": "passed",
+    "generated_bridge_and_sdk": "passed",
+    "schema_regeneration": "only agent tool description changed",
+    "conventions_and_fmt": "passed",
+    "normal_runtime_dependency_roots": 14,
+    "runtime_guard_features": [
+      "incant_audio_runtime/scene",
+      "incant_game_player/native-window"
+    ]
+  },
+  "logs": {
+    "scoped_tests": {
+      "file": "/tmp/incant-project-script-canonical-scoped-tests.log",
+      "sha256": "cd1d3290f5f112389ce84798566417fec5312db443019e91b268571a0b7c3a01",
+      "bytes": 48980
+    },
+    "scoped_clippy": {
+      "file": "/tmp/incant-project-script-canonical-scoped-clippy.log",
+      "sha256": "46fb4c0c9a12f3127670cd4f9e5e1b556629ab6a7745f71a8943833b2fd83cb9",
+      "bytes": 16679
+    },
+    "python": {
+      "file": "/tmp/incant-project-script-python.log",
+      "sha256": "8b47ffeada2117905679a162a8f6d00d57b2c7de2bf62faf5fd4f2c675f8abdd",
+      "bytes": 2250
+    },
+    "node": {
+      "file": "/tmp/incant-project-script-node-final.log",
+      "sha256": "7b2aec8819b08b3dcf972a4d315c28cb67da361ec08ddb0394e1edc1a02d5149",
+      "bytes": 3865
+    },
+    "ui_tests": {
+      "file": "/tmp/incant-project-script-ui-tests.log",
+      "sha256": "816a75a199071b7404de48b939719c0b7dd2fcdcaf0a1aba0ff295dad65d7b15",
+      "bytes": 2316
+    },
+    "ui_types": {
+      "file": "/tmp/incant-project-script-ui-types.log",
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3",
+      "bytes": 56
+    },
+    "workspace_tests": {
+      "file": "/tmp/incant-project-script-workspace-tests.log",
+      "sha256": "c39dc0d26fcd968ca60b7fe51a1ab1668d1c4ea7fbc6a6056065959db40d09da",
+      "bytes": 128283
+    },
+    "workspace_clippy": {
+      "file": "/tmp/incant-project-script-workspace-clippy.log",
+      "sha256": "2b38a436075894af3217ca7cfab421323bbbd6a8a267ad5a19c9e5aecdc12ef4",
+      "bytes": 12838
+    },
+    "headless_build": {
+      "file": "/tmp/incant-project-script-final-host-build.log",
+      "sha256": "bcf895bdbd12c7ecba8acb6ae0f7fccd7e947090b60ea9d1e20bf836c602b9bc",
+      "bytes": 307
+    },
+    "agent_delta_tests": {
+      "file": "/tmp/incant-project-script-agent-delta-tests.log",
+      "sha256": "e8eb975e4a789fe65ed3b8d4d77c8c64536839f0bca5c1e9c1608c5b36dc3c34",
+      "bytes": 10082
+    },
+    "agent_delta_clippy": {
+      "file": "/tmp/incant-project-script-agent-delta-clippy.log",
+      "sha256": "b8d5b9906f4180ef3019f28b064ff5295b191a049252778d6ac4c6bb558293b3",
+      "bytes": 6045
+    },
+    "schema_generation": {
+      "file": "/tmp/incant-project-script-schema-generation.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "ui_build": {
+      "file": "/tmp/incant-project-script-ui-build.log",
+      "sha256": "34b90eb8b3186600613c5207ada92466e60c107938e7df4a8183a5a0caeb3229",
+      "bytes": 1551
+    },
+    "runtime_guard": {
+      "file": "/tmp/incant-project-script-full-runtime-graph.log",
+      "sha256": "da87c4b6027ca44b4d7cdbaccbb0e004ca05ac553d71a2d2b8332e280588f8e7",
+      "bytes": 387
+    }
+  },
+  "review": {
+    "file": "/tmp/incant-project-script-root-review.md",
+    "sha256": "664b3ce39f3643d9c274d93779712c3bcd0f0b3f94f725b332c7a16917fdc524",
+    "resolved_findings": [
+      "authored runtime dynamic evaluation",
+      "noncanonical source ULIDs"
+    ],
+    "followup": "Reviewer accepted canonical private SWC cache after real Node failure; cleared environment remains."
+  },
+  "live_saved_oauth": {
+    "model": "gpt-6-astra",
+    "exit_code": 0,
+    "binary_sha256": "8b3b1afdae44a407ba306317e1092971f31c3e70dc18aa788bc774d8cc0b8cd3",
+    "fixture_sha256": {
+      "project.json": "710f1dabd840ea6688a624e56acad1e1a27e65142fd281428f1c54742a6ab8aa",
+      "b.ts": "f013a587cc93b0631cf375d5fe8e155c043dd97866a24193b81b10a681f1725f",
+      "shared.ts": "80ebf5ef376dfde65a42784b622c18f2288e5a32f65b8d303764543a3b31d540",
+      "observe.json": "ed58af4ea8a87d5b03e5d024bde64e0b30bd0d2c956a8660e0f6f883b7c0bc64",
+      "a.ts": "f013a587cc93b0631cf375d5fe8e155c043dd97866a24193b81b10a681f1725f"
+    },
+    "fixture_unchanged": true,
+    "report": {
+      "steps": 5,
+      "tool_calls": [
+        {
+          "name": "play_run",
+          "succeeded": true
+        },
+        {
+          "name": "play_state_query",
+          "succeeded": true
+        },
+        {
+          "name": "play_state_query",
+          "succeeded": true
+        },
+        {
+          "name": "play_state_query",
+          "succeeded": true
+        }
+      ],
+      "transaction_ids": [],
+      "usage": {
+        "input_tokens": 35756,
+        "output_tokens": 544
+      }
+    },
+    "reported_startup_source_parsing": true,
+    "report_sha256": "78bb1614e656b14845349026f67d476de9639460e8eab2df67e866dc5968b0d8",
+    "scope": "Actual saved-login provider invoked native play_run and three state queries. Turn report proves successful tool invocation, not returned numeric values."
+  },
+  "public_cli": {
+    "binary_sha256": "8b3b1afdae44a407ba306317e1092971f31c3e70dc18aa788bc774d8cc0b8cd3",
+    "report_sha256": "44cb5e28f18923597943f0def8b422a0192c4f9342202e887ad5f0185570a3f3",
+    "ticks": 20,
+    "tick_rate": 20,
+    "checks": [
+      {
+        "name": "motion-0",
+        "tick": 20,
+        "expect": {
+          "type": "vector",
+          "entity": "00000000000000000000000001",
+          "property": "translation",
+          "value": [
+            2.0,
+            0.0,
+            0.0
+          ],
+          "tolerance": 1e-09
+        },
+        "passed": true,
+        "actual": [
+          2.0000000000000004,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "motion-1",
+        "tick": 20,
+        "expect": {
+          "type": "vector",
+          "entity": "00000000000000000000000002",
+          "property": "translation",
+          "value": [
+            3.0,
+            0.0,
+            0.0
+          ],
+          "tolerance": 1e-09
+        },
+        "passed": true,
+        "actual": [
+          2.999999999999999,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "motion-2",
+        "tick": 20,
+        "expect": {
+          "type": "vector",
+          "entity": "00000000000000000000000003",
+          "property": "translation",
+          "value": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "tolerance": 1e-09
+        },
+        "passed": true,
+        "actual": [
+          4.000000000000001,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "gpu_submitted": false,
+    "source_parsing_at_startup": true,
+    "scope": "Separate actual public CLI numerical proof with new engine-owned fixture; no existing project mutation."
+  },
+  "fresh_source_deleted_embedding": "native-project-script-embedding.json",
+  "limitations": [
+    "No full editor Play/source-file editing/export workflow yet",
+    "No source or JSON parsing during simulation; developer startup still parses TypeScript with pinned Node compiler",
+    "No GPU/device/performance gate or final hosted integration claim",
+    "No phase gate approval"
+  ]
+}

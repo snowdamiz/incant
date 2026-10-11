@@ -1,3 +1,5 @@
+// Capture before any guest code can replace the global property.
+export const freeze = Object.freeze;
 // Runs once in a fresh context before any project code. Fixed, non-owning
 // external buffers must not transfer their backing storage to another object.
 (() => {

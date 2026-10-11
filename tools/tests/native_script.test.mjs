@@ -7,13 +7,14 @@ import { test } from 'node:test';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { decode } from '@jridgewell/sourcemap-codec';
-import { cookNativeScript } from '../native_script/cook.mjs';
-import { snapshotGraph, LIMITS } from '../native_script/graph.mjs';
+import { cookNativeScript, cookNativeProjectScripts } from '../native_script/cook.mjs';
+import { snapshotGraph, snapshotProjectGraph, sourceCatalog, LIMITS } from '../native_script/graph.mjs';
 import { publishArtifact } from '../native_script/publish.mjs';
 
 const REPO = fileURLToPath(new URL('../../', import.meta.url));
 const ENTRY = `import type { NativeBehavior } from '@incant/runtime/native';
 export default { update() { return undefined; } } satisfies NativeBehavior;\n`;
+const A = '00000000000000000000000001', B = '00000000000000000000000002';
 async function fixture(files, action) {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'incant-native-ts-test-'));
   try {
@@ -205,5 +206,97 @@ test('rollback preserves unrelated files added inside a newly created output', a
     } };
     await assert.rejects(publishArtifact(destination, { code: 'code' }, io), /incomplete cleanup/u);
     assert.equal(await fs.readFile(path.join(destination, 'keep.txt'), 'utf8'), 'preserve');
+  });
+});
+
+test('project entries share one graph, deterministic source order and module identity', async () => {
+  const entry = `import { next } from './shared';
+import type { NativeBehavior } from '@incant/runtime/native';
+const initialized = next();
+export default { update({ chunks }) {
+  chunks[0].transforms[0] = initialized * 10 + next(); return undefined;
+} } satisfies NativeBehavior;`;
+  await fixture({ 'z.ts': entry, 'a.ts': entry, 'shared.ts':
+    'let count = 0; export function next() { return ++count; }' }, async root => {
+    // IDs, not paths or caller ordering, define entry initialization order.
+    const catalog = [{ id: B, path: 'a.ts' }, { id: A, path: 'z.ts' }];
+    const first = await cookNativeProjectScripts(root, catalog);
+    assert.deepEqual(first, await cookNativeProjectScripts(root, catalog.toReversed()));
+    assert.equal(first.manifest.format, 'incant-native-typescript-project');
+    assert.deepEqual(first.manifest.sources, catalog.toReversed());
+    assert.deepEqual(first.manifest.modules.map(m => m.path), ['a.ts', 'shared.ts', 'z.ts']);
+    assert.equal(first.manifest.sourceBytes, Buffer.byteLength(entry) * 2
+      + Buffer.byteLength('let count = 0; export function next() { return ++count; }'));
+    const exports = Object.create(null), transforms = new Float64Array(10);
+    vm.runInNewContext(first.code, { exports }, { timeout: 1000 });
+    assert.deepEqual(Array.from(exports.default.sources, source => source.id), [A, B]);
+    exports.default.sources[0].behavior.update({ chunks: [{ transforms }] });
+    assert.equal(transforms[0], 13);
+    exports.default.sources[1].behavior.update({ chunks: [{ transforms }] });
+    assert.equal(transforms[0], 24);
+    const map = JSON.parse(first.map);
+    assert.deepEqual(map.sources, ['a.ts', 'shared.ts', 'z.ts']);
+    assert.ok(!first.map.includes(root));
+  });
+});
+
+test('each project entry satisfies the contract without executing initialization', async () => {
+  await fixture({ 'a.ts': ENTRY, 'b.ts': `throw Error('NOT_RUN');\n${ENTRY}` }, async root => {
+    const catalog = [{ id: A, path: 'a.ts' }, { id: B, path: 'b.ts' }];
+    assert.ok((await cookNativeProjectScripts(root, catalog)).code.includes('NOT_RUN'));
+    for (const text of ['export default false;', ENTRY.replace('return undefined;',
+      'const invalid: number = "wrong"; void invalid; return undefined;')]) {
+      await fs.writeFile(path.join(root, 'b.ts'), text);
+      await assert.rejects(cookNativeProjectScripts(root, catalog), /strict typecheck failed/u);
+    }
+  });
+});
+
+test('source catalog rejects ambiguous identities and nonportable entry paths', () => {
+  const entry = { id: A, path: 'a.ts' };
+  for (const value of [null, [], {}, [null], [entry, entry], [entry, { id: B, path: 'a.ts' }],
+    [{ ...entry, id: '80000000000000000000000001' }], [{ ...entry, id: A.toLowerCase().replace('1', 'i') }],
+    [{ ...entry, compilerOptions: {} }], Array(65).fill(entry),
+    ...['/a.ts', '../a.ts', './a.ts', 'x//a.ts', 'x/../a.ts', 'C:/a.ts', 'x\\a.ts',
+      'a.d.ts', 'a.js', 'x\0a.ts', 'x\na.ts', `${'x'.repeat(1024)}.ts`].map(file => [{ ...entry, path: file }])]) {
+    assert.throws(() => sourceCatalog(value), /Native TypeScript cook:/u);
+  }
+  assert.deepEqual(sourceCatalog([{ id: B, path: 'nested/é.ts' }, entry]),
+    [entry, { id: B, path: 'nested/é.ts' }]);
+});
+
+test('project graphs share aggregate byte and module limits across separate entry trees', async () => {
+  await fixture({}, async root => {
+    const catalog = [];
+    for (let i = 0; i < 5; i++) {
+      const file = `${i}.ts`;
+      await fs.writeFile(path.join(root, file), '//'+ 'x'.repeat(LIMITS.fileBytes - 2));
+      catalog.push({ id: String(i).padStart(26, '0'), path: file });
+    }
+    await assert.rejects(snapshotProjectGraph(root, catalog), /aggregate source byte limit/u);
+    for (let i = 0; i < 64; i++) {
+      await fs.writeFile(path.join(root, `${i}.ts`), i === 63 ? 'import "./helper";' : '');
+    }
+    await fs.writeFile(path.join(root, 'helper.ts'), '');
+    const entries = Array.from({ length: 64 }, (_, i) =>
+      ({ id: String(i).padStart(26, '0'), path: `${i}.ts` }));
+    await assert.rejects(snapshotProjectGraph(root, entries), /module count limit/u);
+  });
+});
+
+test('project CLI accepts only bounded catalog data and publishes no failed artifact', async () => {
+  await fixture({ 'a.ts': ENTRY, 'b.ts': ENTRY }, async root => {
+    const run = (input, name) => spawnSync(process.execPath, ['--max-old-space-size=512',
+      path.join(REPO, 'tools/build_native_script.mjs'), '--project', root, path.join(root, name)],
+    { input, encoding: 'utf8', timeout: 60_000 });
+    const valid = JSON.stringify([{ id: B, path: 'b.ts' }, { id: A, path: 'a.ts' }]);
+    const result = run(valid, 'cooked');
+    assert.equal(result.status, 0, result.stderr);
+    assert.deepEqual(JSON.parse(result.stdout).sources, JSON.parse(valid).toReversed());
+    for (const [input, name] of [['{', 'bad-json'], [' '.repeat(96 * 1024 + 1), 'large'],
+      [JSON.stringify([{ id: A, path: '../a.ts' }]), 'escape']]) {
+      assert.notEqual(run(input, name).status, 0);
+      await assert.rejects(fs.stat(path.join(root, name)), { code: 'ENOENT' });
+    }
   });
 });

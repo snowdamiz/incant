@@ -31,9 +31,11 @@ impl From<incant_wasm_runtime::ModuleExports> for SessionProgram {
     }
 }
 impl SessionProgram {
-    pub(crate) fn start(self) -> Result<SessionVm, SessionError> {
+    pub(crate) fn start(self, world: &NativeWorld) -> Result<SessionVm, SessionError> {
         match self {
-            Self::Bytecode(script) => Ok(SessionVm::Bytecode(Box::new(ScriptHost::new(script)?))),
+            Self::Bytecode(script) => Ok(SessionVm::Bytecode(Box::new(ScriptHost::for_world(
+                script, world,
+            )?))),
             #[cfg(feature = "static-module")]
             Self::Static(module) => Ok(SessionVm::Static(Box::new(
                 incant_wasm_runtime::StaticModule::new(module)?,

@@ -40,7 +40,7 @@ pub(crate) fn tools() -> Vec<Value> {
     vec![
         tool(
             "play_run",
-            "Run a fresh cooked native game session using trusted build-embedded behavior. Input is recorded event data, never executable script. Returns bounded logs, final selected state and assertion results; keeps that session available for play_state_query. Does not modify the project or capture gameplay images. Unmigrated Script components fail explicitly.",
+            "Run a fresh cooked native game session. The native headless host cooks attached project TypeScript once at startup; scenes without Script components use trusted build-embedded behavior. Input is recorded event data, never executable script. Returns bounded logs, final selected state and assertion results; keeps that session available for play_state_query. Does not modify the project or capture gameplay images. Unsupported capabilities fail explicitly.",
             json!(schemars::schema_for!(RunRequest)),
         ),
         tool(

@@ -10,6 +10,7 @@ pub struct CompiledScript {
     pub(crate) hardening: Arc<[u8]>,
     pub(crate) metadata: ScriptMetadata,
     pub(crate) allow_source: bool,
+    pub(crate) bindings: Option<Arc<crate::ScriptBindings>>,
 }
 
 impl CompiledScript {
@@ -31,11 +32,20 @@ impl CompiledScript {
     /// ```
     pub unsafe fn from_embedded(artifact: EmbeddedScript) -> Result<Self, ScriptError> {
         artifact::validate(&artifact.metadata, artifact.bytecode, artifact.hardening)?;
+        if artifact
+            .bindings
+            .as_ref()
+            .map(crate::ScriptBindings::fingerprint)
+            != artifact.metadata.bindings_sha256
+        {
+            return Err(ScriptError::ArtifactIntegrity);
+        }
         Ok(Self {
             bytes: artifact.bytecode.into(),
             hardening: artifact.hardening.into(),
             metadata: artifact.metadata,
             allow_source: false,
+            bindings: artifact.bindings.map(Arc::new),
         })
     }
 
@@ -47,12 +57,13 @@ impl CompiledScript {
         &self.metadata
     }
 
-    pub(crate) fn harden(&self, ctx: &Ctx<'_>) -> rquickjs::Result<()> {
+    pub(crate) fn harden<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Function<'js>> {
         // SAFETY: compiler or the documented native-build trust crossing above
         // is the sole source. The fixed engine module precedes all guest code.
         let module = unsafe { Module::load(ctx.clone(), &self.hardening) }?;
-        let (_, promise) = module.eval()?;
-        promise.result::<()>().ok_or(rquickjs::Error::Unknown)?
+        let (module, promise) = module.eval()?;
+        promise.result::<()>().ok_or(rquickjs::Error::Unknown)??;
+        module.get("freeze")
     }
 
     pub(crate) fn instantiate<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Function<'js>> {
