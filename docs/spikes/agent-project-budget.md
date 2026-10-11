@@ -77,3 +77,20 @@ updated live harness has not yet run; earlier live evidence predates this ledger
 - Hosted platform checks and the broader agent-quality/phase gates remain open.
 
 [Ledger foundation evidence](evidence/agent-project-budget-ledger.json).
+
+## Actual native durable usage acceptance
+
+The saved ChatGPT connection completed four real gpt-6-astra native-handler turns
+on a disposable public-command-authored fixture. Six exact scoped approvals
+allowed two atomic memory edits, native Play, and a later retained-world query.
+All four turns streamed before completion and charged 73,259 measured tokens.
+Two actual Undo operations restored authoring without refunding usage. A new
+editor process restored the same saved login, project usage, journal revision and
+ordered transaction IDs with no further provider turn. Both receipts report no
+accounting uncertainty; saved project and script bytes remained unchanged.
+
+[Source, binary hashes and receipts](evidence/native-agent-durable-budget-live.json)
+identify the exact 79b5b7c build. This validates the durable native adapter and
+account recovery, not WebView dispatch, current rendered UI, model quality, device
+performance or a phase gate. Claude0044 corrections and0046/0047 controls were not
+in that binary and still require their own native acceptance.

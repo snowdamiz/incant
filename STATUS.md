@@ -29,7 +29,7 @@ provider invalidation listener is integrated with its intervening-read race fixe
 The current native slice passes 152 scoped Rust tests and four-package all-target
 Clippy after integrating main97. Claude’s chat UI is integrated with retained
 conversation resizing, accurate denial/failure messages and cause-neutral uncertain
-usage. The combined UI suite passes 777 tests; strict types and the editor build
+usage. The combined UI suite passes 782 tests; strict types and the editor build
 pass. The corrected native cap-change fences pass 38 editor tests and Clippy. Four real native-handler turns used
 the saved ChatGPT login for approved edits, native Play and a later retained-state
 query; Undo and exact journal/account recovery passed after reopening. Claude's
@@ -46,9 +46,11 @@ now connected to native admission and reads. Usage survives new service instance
 cap changes and account changes without being part of Undo. Independent reviews
 closed cancellation and cap-installation races. The verified bridge cap command and
 dynamic shell capabilities are integrated, including offline edits and unchanged
-usage across cap/history recovery. Its combined UI suite passes 777 tests.
-Claude-owned controls and fresh native/live reopen acceptance remain in progress; the earlier live
-handler evidence predates this ledger integration.
+usage across cap/history recovery. Its combined UI suite passes 782 tests.
+A fresh live native check completed four saved-account turns and retained all
+73,259 measured tokens through Undo and a separate app process, with the same
+login and exact journal restored. Claude-owned controls and combined native
+WebView/appearance acceptance remain in progress.
 [Budget accounting evidence](docs/spikes/agent-project-budget.md).
 
 ## Agent conversation context — locally verified
