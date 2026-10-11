@@ -1,21 +1,29 @@
 //! Authoring-free composition of native input/VM/physics and retained scene audio.
 //! Input rejection is retryable. Accepted ticks run simulation, script, audio
-//! sync, then (offline only) render; any later failure destroys the entire live
-//! session. Neither world nor asynchronous device cursors are rolled back.
+//! sync, (offline only) render, then the explicitly retained scene host if present.
+//! Any post-acceptance failure or unwind destroys the live session; neither the
+//! world nor asynchronous device cursors are rolled back. Plain constructors
+//! refuse spatial declarations. Hosted variants require a trusted native host.
+mod core;
+mod hosted;
 mod offline;
+use core::{Core, NoHost};
+pub use hosted::{HostedGameSession, HostedOfflineGameSession, SceneHost};
 use incant_audio_runtime::{
     AudioError, AudioManagerSettings, ClipBinding, SceneAudio, SourceState,
 };
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld, StableId};
-use incant_script::{CompiledScript, NativeSession, SessionError};
+use incant_script::{CompiledScript, SessionError};
 use kira::backend::Backend;
 pub use offline::OfflineGameSession;
-use std::fmt::Debug;
+use std::{convert::Infallible, fmt::Debug};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
-pub enum GameError {
+pub enum GameError<E = Infallible> {
+    #[error("scene host failed: {0}")]
+    Host(#[source] E),
     #[error(transparent)]
     Session(#[from] SessionError),
     #[error(transparent)]
@@ -31,78 +39,13 @@ pub enum GameError {
     #[error("native sample clock exhausted")]
     Clock,
 }
-pub type Result<T> = std::result::Result<T, GameError>;
+pub type Result<T, E = Infallible> = std::result::Result<T, GameError<E>>;
 
-struct Live<B: Backend> {
-    audio: SceneAudio<B>,
-    native: NativeSession,
-}
-struct Core<B: Backend> {
-    live: Option<Live<B>>,
-}
-impl<B: Backend> Core<B>
-where
-    B::Error: Debug,
-{
-    fn new(
-        scene: CookedScene,
-        script: CompiledScript,
-        actions: InputActions,
-        audio: impl FnOnce(&NativeWorld) -> incant_audio_runtime::Result<SceneAudio<B>>,
-    ) -> Result<Self> {
-        if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
-            return Err(GameError::SpatialHost);
-        }
-        let native = NativeSession::new(scene, script, actions)?;
-        let audio = audio(native.world()?)?;
-        Ok(Self {
-            live: Some(Live { audio, native }),
-        })
+fn require_nonspatial(scene: &CookedScene) -> Result<()> {
+    if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
+        return Err(GameError::SpatialHost);
     }
-    fn ready(&self) -> Result<&Live<B>> {
-        self.live.as_ref().ok_or(GameError::Failed)
-    }
-    fn ready_mut(&mut self) -> Result<&mut Live<B>> {
-        self.live.as_mut().ok_or(GameError::Failed)
-    }
-    fn world(&self) -> Result<&NativeWorld> {
-        Ok(self.ready()?.native.world()?)
-    }
-    fn input(&self) -> Result<&InputFrame> {
-        Ok(self.ready()?.native.input()?)
-    }
-    fn rebind(&mut self, actions: InputActions) -> Result<()> {
-        Ok(self.ready_mut()?.native.rebind(actions)?)
-    }
-    fn source_state(&self, id: StableId) -> Result<SourceState> {
-        Ok(self.ready()?.audio.source_state(id)?)
-    }
-    fn poll_audio(&mut self) -> Result<()> {
-        let result = self.ready_mut()?.audio.check_errors();
-        self.audio_result(result)
-    }
-    fn audio_result<T>(&mut self, result: incant_audio_runtime::Result<T>) -> Result<T> {
-        match result {
-            Ok(value) => Ok(value),
-            Err(error) => {
-                self.live.take();
-                Err(error.into())
-            }
-        }
-    }
-    fn advance(&mut self, events: &[InputEvent]) -> Result<()> {
-        let live = self.ready_mut()?;
-        if let Err(error) = live.native.tick(events) {
-            if live.native.is_failed() {
-                self.live.take();
-            }
-            return Err(error.into());
-        }
-        // Even standalone audio's retryable preflight rejection is terminal here:
-        // accepted simulation/input/VM state already advanced and is not undone.
-        let result = live.audio.sync(live.native.world()?);
-        self.audio_result(result)
-    }
+    Ok(())
 }
 
 /// Backend-driven playback. The backend owns its asynchronous audio clock.
@@ -122,14 +65,19 @@ where
         clips: Vec<ClipBinding>,
         settings: AudioManagerSettings<B>,
     ) -> Result<Self> {
+        require_nonspatial(&scene)?;
         Ok(Self {
-            core: Core::new(scene, script, actions, |world| {
-                SceneAudio::new(world, clips, settings)
-            })?,
+            core: Core::prepare(
+                scene,
+                script,
+                actions,
+                |_| Ok(NoHost),
+                |world| SceneAudio::new(world, clips, settings),
+            )?,
         })
     }
     pub fn tick(&mut self, events: &[InputEvent]) -> Result<()> {
-        self.core.advance(events)
+        self.core.tick(events, |_| Ok(()))
     }
     /// Poll failures between simulation ticks; a backend/decoder error destroys
     /// the session even when no new input packet has been accepted.

@@ -936,3 +936,14 @@ Retained native consumers can now attach an opaque world identity that survives 
 ## Retained native renderer CPU input (2026-10-10)
 
 Native render input now binds sealed cooked versions once, explicitly selects a camera and reuses typed pose slots at committed native sync points. Different-world input rejects before mutation; motion error/unwind restores preallocated numeric undo, while topology/configuration replacements publish atomically. All 87 scoped release tests/doctests and Clippy pass, with actual source/cache-deleted binding and a bounded zero-allocation motion check. Normal dependencies exclude authoring/importers/GPU. Root's retained GPU consumer integration, native rendered acceptance, full gameplay/pixel placement migration and device/performance gates remain open. [Evidence](docs/spikes/native-render-input.md).
+## Explicit native game hosts
+
+The native game composition now retains a trusted `SceneHost` prepared against
+its exact pending world, with scheduled synchronization after every accepted
+tick and terminal cleanup on post-acceptance error or Rust unwind. Existing
+nonvisual constructors and players still refuse camera-only and manifest-only
+scenes. Seven new behavior regressions plus existing game/script coverage total
+57 passing scoped tests/doctests; release Clippy, device-feature compilation and
+normal/device authoring-free dependency guards pass. [Evidence](docs/spikes/native-game-hosting.md).
+Real render-input/GPU consumer integration and its fresh player/union proof
+remain separate; no runtime saves, rendering/performance or phase gate is claimed.
