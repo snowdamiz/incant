@@ -108,42 +108,41 @@ jobs:
       - name: Verify native binary world saves across process restarts
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         run: python3 tools/probes/native-saves.py artifacts/native-world-saves --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene --runtime-binary target/ci/examples/save_world
-      - name: Build and execute the shipping runtime with matched crash symbols
+      - name: Verify four source-free shipping players in one fresh session
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        run: python3 tools/shipping.py artifacts/shipping-runtime --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene
-      - name: Verify cooked native scene audio without authoring inputs
-        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        run: python3 tools/probes/native-scene-audio.py artifacts/native-scene-audio --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene
+        run: python3 tools/shipping_suite.py artifacts/shipping-session --four-proofs --flipbook --flipbook-sdk --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene --audio-binary target/ci/examples/native_scene_audio --fixture-binary target/ci/examples/no_renderer_fixtures
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        with: {name: native-scene-audio-macOS, path: artifacts/native-scene-audio, if-no-files-found: error}
-      # This remains a separate fresh build until shared-session provenance is verified.
-      - name: Verify source-free native game GPU frames and audio
-        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        run: python3 tools/probes/native-game.py artifacts/native-game-gpu --gpu --flipbook --flipbook-sdk --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene --audio-binary target/ci/examples/native_scene_audio --fixture-binary target/ci/examples/no_renderer_fixtures
+        with: {name: native-scene-audio-macOS, path: artifacts/shipping-session/audio, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        with: {name: native-game-gpu-macOS, path: artifacts/native-game-gpu/result.json, if-no-files-found: error}
-      - name: Verify embedded scripts with no runtime source compiler
-        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        run: python3 tools/probes/cooked-script.py artifacts/cooked-native-script --physics --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene
+        with: {name: native-game-gpu-macOS, path: artifacts/shipping-session/game/result.json, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        with: {name: cooked-native-script-macOS, path: artifacts/cooked-native-script, if-no-files-found: error}
+        with: {name: cooked-native-script-macOS, path: artifacts/shipping-session/script, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        with: {name: runtime-player-macOS, path: artifacts/shipping-runtime/player.zip, if-no-files-found: error}
+        with: {name: runtime-player-macOS, path: artifacts/shipping-session/runtime/player.zip, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        with: {name: runtime-symbols-macOS, path: artifacts/shipping-runtime/symbols.zip, if-no-files-found: error}
+        with: {name: runtime-symbols-macOS, path: artifacts/shipping-session/runtime/symbols.zip, if-no-files-found: error}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         with:
           name: runtime-shipping-verification-macOS
           path: |
-            artifacts/shipping-runtime/manifest.json
-            artifacts/shipping-runtime/source-free
+            artifacts/shipping-session/runtime/manifest.json
+            artifacts/shipping-session/runtime/source-free
           if-no-files-found: error
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: ${{ !cancelled() && (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs') }}
+        with:
+          name: shipping-fresh-session-macOS
+          path: |
+            artifacts/shipping-session/session.json
+            artifacts/shipping-session/build-*.stdout.jsonl
+            artifacts/shipping-session/build-*.stderr.log
+          if-no-files-found: warn
       - run: python3 tools/probes/physics-runtime.py artifacts/physics-runtime-cli --binary target/ci/incant_headless
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
       - run: python3 tools/probes/character-movement.py artifacts/character-movement-cli --binary target/ci/incant_headless

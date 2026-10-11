@@ -201,6 +201,8 @@ class WorkflowContractTests(unittest.TestCase):
         def evaluate(expression, result, output):
             # Evaluate this trusted repository workflow's boolean/string expressions,
             # using synthetic job outcomes; no event or project text becomes code.
+            expression = expression.removeprefix('${{').removesuffix('}}').strip()
+            expression = expression.replace('!cancelled()', 'True')
             expression = expression.replace('needs.classify.result', 'result')
             expression = expression.replace('needs.classify.outputs.scope', 'output')
             expression = expression.replace('always()', 'True')

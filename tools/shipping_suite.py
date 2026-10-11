@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run shipping proofs in one fresh macOS session with a global deletion barrier.
 
-This is an opt-in local experiment until matched coverage and timing are reviewed.
-Standalone shipping.py and cooked-script.py commands remain supported.
+The macOS CI job uses all four proofs with the flipbook/SDK controls. Standalone
+shipping.py and cooked-script.py commands remain supported on their own storage.
 """
 import argparse
 import importlib.util

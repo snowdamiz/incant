@@ -2,6 +2,7 @@ import contextlib
 import io
 import json
 from pathlib import Path
+import shlex
 import sys
 import tempfile
 from types import SimpleNamespace
@@ -35,8 +36,9 @@ class ShippingSuiteSelectionTests(unittest.TestCase):
                 self.assertFalse(output.exists())
 
     def test_four_proofs_forward_exact_flipbook_selection_before_global_barrier(self):
-        for flipbook, sdk in ((False, False), (True, False), (True, True)):
-            with self.subTest(flipbook=flipbook, sdk=sdk), tempfile.TemporaryDirectory() as storage:
+        for flipbook, sdk, ci in ((False, False, False), (True, False, False),
+                                  (True, True, False), (True, True, True)):
+            with self.subTest(flipbook=flipbook, sdk=sdk, ci=ci), tempfile.TemporaryDirectory() as storage:
                 output = Path(storage) / 'proof'
                 events, arguments = [], {}
                 session = Mock(path=Path(storage) / 'absent-build')
@@ -56,6 +58,15 @@ class ShippingSuiteSelectionTests(unittest.TestCase):
                 probes = {name: SimpleNamespace(phases=phase(name)) for name in (
                     'native-scene-audio', 'native-game', 'cooked-script')}
                 argv = ['suite', str(output), '--four-proofs'] + (['--flipbook'] if flipbook else []) + (['--flipbook-sdk'] if sdk else [])
+                if ci:
+                    # Exercise the actual hosted CLI selection through the parser
+                    # and phase dispatch, not a second handwritten option list.
+                    workflow = (shipping_suite.ROOT / '.github/workflows/ci.yml').read_text()
+                    commands = [line.strip()[5:] for line in workflow.splitlines()
+                                if line.strip().startswith('run: python3 tools/shipping_suite.py ')]
+                    self.assertEqual(len(commands), 1)
+                    argv = shlex.split(commands[0])[1:]
+                    argv[1] = str(output)
                 with patch.object(sys, 'argv', argv), \
                         patch.object(shipping_suite, 'FreshSession', return_value=session), \
                         patch.object(shipping_suite, 'run', side_effect=['/trusted/rustc', 'host: aarch64-apple-darwin']), \
@@ -66,6 +77,7 @@ class ShippingSuiteSelectionTests(unittest.TestCase):
                 self.assertEqual(arguments['native-game'].flipbook, flipbook)
                 self.assertEqual(arguments['native-game'].flipbook_sdk, sdk)
                 self.assertTrue(arguments['native-game'].gpu)
+                self.assertTrue(arguments['native-game'].render_input)
                 self.assertTrue(arguments['cooked-script'].physics)
                 self.assertEqual(events[:5], ['prepare:' + name for name in (
                     'runtime', 'native-scene-audio', 'native-game', 'cooked-script')] + ['sealed'])

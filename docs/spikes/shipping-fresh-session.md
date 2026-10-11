@@ -1,9 +1,10 @@
 # Shared fresh shipping session
 
-This opt-in macOS experiment shares one initially absent temporary Cargo target
-between the existing standalone Transform/Velocity player and embedded script
-player with its physics cases. It does not change any CI command. Controlled
-comparison and independent review remain required before CI adoption.
+The macOS workflow now selects one initially absent temporary Cargo target for
+all four existing shipping proofs, including the complete flipbook/SDK controls.
+Each player still compiles freshly and preserves its own symbol package and
+refusal checks. The hosted result for this integration remains pending.
+Standalone commands and Linux/Windows shipping jobs remain unchanged.
 
 `python3 tools/shipping_suite.py <new-output-directory>` prepares and packages
 both players, removes all fixture authoring inputs and the complete shared build
@@ -26,9 +27,10 @@ retained authoring storage and changed packaged players fail before execution.
 
 The suite preserves runtime abort/no-unwind and corrupted-scene checks, each
 symbol package/archive, all script structural/input cases and four native physics
-tick boundaries. It does not replace native-scene-audio or native-game proofs.
-Optional `incant_game_player/render-gpu` needs separate feature compilation and
-the actual source-deleted GPU proof; default workspace checks cannot certify it.
+tick boundaries. Its default two-proof mode leaves audio/game proofs separate;
+the CI-selected four-proof mode includes their unchanged verification bodies.
+The GPU player is explicitly compiled with its optional feature and exercised
+after source deletion; default workspace checks alone cannot certify it.
 
 The local follow-up adds `--four-proofs` to include the complete scene-audio and
 native-game `--gpu` commands, on the frozen PR80 source graph. Preparation follows
@@ -49,7 +51,7 @@ that path and restores it afterward; an isolated-process regression imports all
 three actual probe modules. [Initial evidence](evidence/shipping-four-proof-initial-2026-10-11.json)
 retains the failure without claiming a speedup. Both chains were then repeated on
 the same corrected frozen revision in a newly coordinated interval. Public
-authoring-tool preparation stayed outside that measurement. The four-proof extension is not enabled in CI, has no measured speed
+authoring-tool preparation stayed outside that measurement. At that checkpoint the four-proof extension was not enabled in CI. It has no measured speed
 claim for hosted CI or devices and does not use a persistent shipping target cache.
 
 The corrected frozen revision `023c8bb` completed both four-proof chains in one
@@ -66,8 +68,8 @@ the report hashes, source/tool identities, timings and comparison scope.
 This is one local macOS sample, measured standalone then shared on the PR80
 graph; it is not randomized, a persistent-cache result, a Windows projection or
 a phone-performance gate. Root independently verified all eight report hashes.
-The current flipbook/SDK controls must be integrated and reviewed before any CI
-adoption. The older two-proof numbers below apply only to their recorded source
+That checkpoint required current flipbook/SDK integration before CI adoption;
+the final integrated proof below supplies that correctness evidence. The older two-proof numbers below apply only to their recorded source
 revision.
 
 The local renderer/import union `ef2897af60d74efdd193288108206d4858ef75ae`
@@ -86,8 +88,8 @@ bundle, guest source, module and translator before any packaged player launch.
 The trusted host cooker remains a separate authoring tool, outside the target
 shipping ledger. The suite forwards no new default behavior to standalone probes.
 The corrected integrated graph passes its fresh four-player proof below. The 16.8% sample above
-does not measure this newer graph; shared storage remains off CI. The inherited
-SDK CI command continues to run its full standalone proof.
+does not measure this newer graph. At that checkpoint shared storage remained
+off CI and the inherited SDK CI command ran its full standalone proof.
 
 The first fresh SDK preparation correctly refused a repeated QuickJS target unit
 before any player launch. Cargo identified a change in `CC_ENABLE_DEBUG_OUTPUT`:
@@ -109,8 +111,8 @@ and unchanged/reused in the later script build.
 [Current SDK proof](evidence/shipping-sdk-shared-proof.json) records exact source,
 commands, profile/feature evidence, tool/player identities and all report hashes.
 Elapsed time includes a coordinated wait and unrelated CPU work, so no speedup
-is inferred. The newer generated public Rust SDK and color-correction union still
-need integration and scoped proof before CI adoption, which remains disabled.
+is inferred. That checkpoint left the generated public Rust SDK and color
+correction for the final integration below.
 
 The original commands passed locally on the same runtime sources in 78.82 and
 121.71 seconds, respectively. This is a local baseline with concurrent unrelated
@@ -123,8 +125,39 @@ dependencies. Owned libraries compiled again as distinct dependency/feature unit
 Each player compiled freshly and independently passed its symbol identity/audit.
 
 The roughly12s difference in this sample and8s in an earlier sample are noisy local
-results, not a demonstrated material hosted improvement. CI adoption stays off.
+results, not a demonstrated material hosted improvement. Those two-proof
+measurements alone did not justify CI adoption.
 All55 tools tests pass, including wrong-source/revision/compiler, ambient override,
 ambiguous/missing unit, changed feature/bytes and deletion-barrier refusal cases.
 Standalone runtime and script/physics commands passed again after the refactor.
 [Exact final evidence](evidence/shipping-fresh-session-2026-10-11.json).
+
+## Final SDK/color integration and macOS workflow
+
+Frozen `61d41be7566d6139d11b2e0f5686529f71022297` preserves the generated
+public Rust SDK, accepted Claude0043 color correction and corrected native-agent
+PR82 ancestry. It passes 739 workspace ordinary tests/doctests, all 75 serialized
+ignored/GPU cases, workspace Clippy, 536 UI tests/build and 125 Python tool tests.
+The same frozen source then passes the complete fresh four-player proof: 32
+baseline game repeats, 32 SDK repeats, all 43 runtime refusals, four spatial
+refusals, four animated/static comparisons and retained observation/log controls.
+The game player is 9,145,040 bytes; its matching symbols, static C flags, generated
+SDK provenance and compiler exclusion are recorded independently.
+
+The ledger proves 232 distinct freshly compiled target units. Runtime starts with
+101 fresh units; audio adds 31 and reuses 82, game adds 85 and reuses 85, and script
+adds 15 and reuses 98. Each player is fresh. All shared build storage and all four
+authoring input directories are removed before any packaged player is launched.
+[Final proof](evidence/shipping-sdk-color-shared-proof.json) retains exact source,
+raw ledger/build/report hashes, compiler/profile and player identities. Its
+460.52-second elapsed time includes other CPU activity and no matched standalone
+run, so it establishes no new speedup.
+
+The reviewed workflow replaces the four macOS invocations with
+`shipping_suite.py --four-proofs --flipbook --flipbook-sdk`. Original artifact
+names point to the corresponding per-player outputs. A separate diagnostic
+artifact retains the ledger and raw compiler logs even when a proof fails.
+Classifier failure still selects the full job, and all other macOS commands,
+required check identities, Linux/Windows shipping and device gates are unchanged.
+The actual hosted CLI is exercised through the suite parser/phase dispatch in a
+regression test. Hosted correctness and latency remain to be measured.
