@@ -1,0 +1,1170 @@
+{
+  "scope": "Completed same-family default-branch replacement retention and one natural release-profile consumer. No workspace cache, broad deletion or new dispatch.",
+  "cleanup_records": [
+    {
+      "at": "2026-10-11T03:11:02.140103+00:00",
+      "scope": "Authorized exact same-family default-branch replacement only",
+      "deleted": {
+        "id": 8784532934,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-6d6e6ef3",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "last_accessed_at": "2026-10-11T02:54:09.721864Z",
+        "created_at": "2026-10-11T02:06:25.357679Z",
+        "size_in_bytes": 1836267481
+      },
+      "preserved_replacement": {
+        "id": 8785440322,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-76d42afe",
+        "version": "bf82a304796dbcd8bcbc13e51f5ae6177649a3834092da345bcd281c649b401b",
+        "last_accessed_at": "2026-10-11T03:10:27.620582Z",
+        "created_at": "2026-10-11T03:00:38.303813Z",
+        "size_in_bytes": 2385763329
+      },
+      "job": {
+        "id": 114370059198,
+        "run_id": 38105504223,
+        "workflow_name": "Desktop editor and engine",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38105504223",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOVBtUrs8AAAAaoPybvg",
+        "head_sha": "4cee80db3c3cf9c4c193a0cdf99bfc6bd5a3334a",
+        "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/114370059198",
+        "html_url": "https://github.com/snowdamiz/incant/actions/runs/38105504223/job/114370059198",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-11T02:32:47Z",
+        "started_at": "2026-10-11T02:39:34Z",
+        "completed_at": "2026-10-11T03:00:42Z",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-11T02:39:35Z",
+            "completed_at": "2026-10-11T02:39:37Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-11T02:39:37Z",
+            "completed_at": "2026-10-11T02:39:43Z"
+          },
+          {
+            "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-11T02:39:43Z",
+            "completed_at": "2026-10-11T02:39:49Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-11T02:39:49Z",
+            "completed_at": "2026-10-11T02:39:50Z"
+          },
+          {
+            "name": "Run sudo apt-get update",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-11T02:39:50Z",
+            "completed_at": "2026-10-11T02:40:21Z"
+          },
+          {
+            "name": "Run rustup show",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-11T02:40:21Z",
+            "completed_at": "2026-10-11T02:40:32Z"
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-11T02:40:32Z",
+            "completed_at": "2026-10-11T02:41:01Z"
+          },
+          {
+            "name": "Run npm ci",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-11T02:41:01Z",
+            "completed_at": "2026-10-11T02:41:13Z"
+          },
+          {
+            "name": "Run node tools/build_bridge.mjs --check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-11T02:41:13Z",
+            "completed_at": "2026-10-11T02:41:13Z"
+          },
+          {
+            "name": "Run npm run build --workspace editor/ui",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-11T02:41:13Z",
+            "completed_at": "2026-10-11T02:41:22Z"
+          },
+          {
+            "name": "Run npm test --workspace editor/ui",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-11T02:41:22Z",
+            "completed_at": "2026-10-11T02:42:18Z"
+          },
+          {
+            "name": "Run cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-11T02:42:18Z",
+            "completed_at": "2026-10-11T02:52:23Z"
+          },
+          {
+            "name": "Run cargo check -p incant_audio --features device --locked",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-11T02:52:23Z",
+            "completed_at": "2026-10-11T02:52:26Z"
+          },
+          {
+            "name": "Run cargo clippy -p incant_game_player --features render-gpu --all-targets --release --locked -- -D warnings",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-11T02:52:26Z",
+            "completed_at": "2026-10-11T02:53:51Z"
+          },
+          {
+            "name": "Verify geometry, editor recovery and simulated frame capture",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15,
+            "started_at": "2026-10-11T02:53:51Z",
+            "completed_at": "2026-10-11T02:55:32Z"
+          },
+          {
+            "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-11T02:55:32Z",
+            "completed_at": "2026-10-11T02:56:13Z"
+          },
+          {
+            "name": "Build and execute the shipping runtime with matched crash symbols",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-11T02:56:13Z",
+            "completed_at": "2026-10-11T02:58:26Z"
+          },
+          {
+            "name": "Verify Windows executables do not require redistributable CRT DLLs",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 18,
+            "started_at": "2026-10-11T02:58:26Z",
+            "completed_at": "2026-10-11T02:58:26Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-11T02:58:26Z",
+            "completed_at": "2026-10-11T02:58:27Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20,
+            "started_at": "2026-10-11T02:58:27Z",
+            "completed_at": "2026-10-11T02:58:29Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21,
+            "started_at": "2026-10-11T02:58:29Z",
+            "completed_at": "2026-10-11T02:58:30Z"
+          },
+          {
+            "name": "Verify physics commands, persistence and sandbox playback",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22,
+            "started_at": "2026-10-11T02:58:30Z",
+            "completed_at": "2026-10-11T02:58:31Z"
+          },
+          {
+            "name": "Verify strict TypeScript character walking and jumping",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23,
+            "started_at": "2026-10-11T02:58:31Z",
+            "completed_at": "2026-10-11T02:58:35Z"
+          },
+          {
+            "name": "Verify compound authoring, recovery and scripted queries",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24,
+            "started_at": "2026-10-11T02:58:35Z",
+            "completed_at": "2026-10-11T02:58:38Z"
+          },
+          {
+            "name": "Verify versioned game saves across headless process restarts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25,
+            "started_at": "2026-10-11T02:58:38Z",
+            "completed_at": "2026-10-11T02:58:42Z"
+          },
+          {
+            "name": "Verify recorded device input, character control and mid-jump save replay",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-11T02:58:42Z",
+            "completed_at": "2026-10-11T02:58:46Z"
+          },
+          {
+            "name": "Verify script-driven WAV and Vorbis mixing without an audio device",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-11T02:58:46Z",
+            "completed_at": "2026-10-11T02:58:52Z"
+          },
+          {
+            "name": "Verify saved timer callbacks across headless process restarts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-11T02:58:52Z",
+            "completed_at": "2026-10-11T02:58:56Z"
+          },
+          {
+            "name": "Verify saved runtime rebinding and named input actions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-11T02:58:56Z",
+            "completed_at": "2026-10-11T02:58:59Z"
+          },
+          {
+            "name": "Verify locale switching and string tables across process restarts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30,
+            "started_at": "2026-10-11T02:58:59Z",
+            "completed_at": "2026-10-11T02:59:03Z"
+          },
+          {
+            "name": "Verify translator exchange, atomic import and shared Undo/Redo",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31,
+            "started_at": "2026-10-11T02:59:03Z",
+            "completed_at": "2026-10-11T02:59:06Z"
+          },
+          {
+            "name": "Verify runtime navigation and saved character chase",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 32,
+            "started_at": "2026-10-11T02:59:06Z",
+            "completed_at": "2026-10-11T02:59:11Z"
+          },
+          {
+            "name": "Verify weighted grid doors and blocked-route save replay",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 33,
+            "started_at": "2026-10-11T02:59:11Z",
+            "completed_at": "2026-10-11T02:59:14Z"
+          },
+          {
+            "name": "Verify one hundred steering agents and saved replay",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 34,
+            "started_at": "2026-10-11T02:59:14Z",
+            "completed_at": "2026-10-11T02:59:28Z"
+          },
+          {
+            "name": "Verify directed off-mesh traversal and saved replay",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 35,
+            "started_at": "2026-10-11T02:59:28Z",
+            "completed_at": "2026-10-11T02:59:32Z"
+          },
+          {
+            "name": "Verify authored and saved orthographic camera projections",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 36,
+            "started_at": "2026-10-11T02:59:32Z",
+            "completed_at": "2026-10-11T02:59:35Z"
+          },
+          {
+            "name": "Verify pixel-perfect camera saves preserve unsnapped simulation",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 37,
+            "started_at": "2026-10-11T02:59:35Z",
+            "completed_at": "2026-10-11T02:59:39Z"
+          },
+          {
+            "name": "Verify sprite authoring and source-free saved animation",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 38,
+            "started_at": "2026-10-11T02:59:39Z",
+            "completed_at": "2026-10-11T02:59:42Z"
+          },
+          {
+            "name": "Verify atlas repacking and source-free saved frame references",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 39,
+            "started_at": "2026-10-11T02:59:42Z",
+            "completed_at": "2026-10-11T02:59:46Z"
+          },
+          {
+            "name": "Exercise native GPU rendering without a user account",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 40,
+            "started_at": "2026-10-11T02:59:46Z",
+            "completed_at": "2026-10-11T02:59:52Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 41,
+            "started_at": "2026-10-11T02:59:52Z",
+            "completed_at": "2026-10-11T02:59:56Z"
+          },
+          {
+            "name": "Preserve Cargo unit timing diagnostics",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 42,
+            "started_at": "2026-10-11T02:59:56Z",
+            "completed_at": "2026-10-11T02:59:58Z"
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 81,
+            "started_at": "2026-10-11T02:59:58Z",
+            "completed_at": "2026-10-11T03:00:38Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 82,
+            "started_at": "2026-10-11T03:00:38Z",
+            "completed_at": "2026-10-11T03:00:38Z"
+          },
+          {
+            "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 83,
+            "started_at": "2026-10-11T03:00:38Z",
+            "completed_at": "2026-10-11T03:00:38Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 84,
+            "started_at": "2026-10-11T03:00:38Z",
+            "completed_at": "2026-10-11T03:00:39Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 85,
+            "started_at": "2026-10-11T03:00:39Z",
+            "completed_at": "2026-10-11T03:00:39Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/114370059198",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000011412,
+        "runner_name": "GitHub Actions 1000011412",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      "log_sha256": "bbee00336263d7edf64c1507a7f3ebc53b8e50a3e3e84a61943b43263c8bf60d",
+      "before_bytes": 10123466561,
+      "after_bytes": 8287199080,
+      "other_ids_absent_without_attributed_cause": [],
+      "raw_record_sha256": "f4345d9156d41d57c64ec2096b801b7889cc14022ab4eac35117a4f17ed8a115",
+      "preserved_count": 0
+    },
+    {
+      "at": "2026-10-11T03:14:26.935277+00:00",
+      "scope": "Authorized exact same-family completed default-branch generation replacements only",
+      "deleted": [
+        {
+          "id": 8784281173,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-6d6e6ef3",
+          "version": "5328310fed3fbcf4a5d63860117f259451587b32b8ee8db3d77c90a63d0e59b6",
+          "last_accessed_at": "2026-10-11T02:37:47.627933Z",
+          "created_at": "2026-10-11T01:50:57.243828Z",
+          "size_in_bytes": 151800884
+        },
+        {
+          "id": 8782638666,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-9fdba862",
+          "version": "5328310fed3fbcf4a5d63860117f259451587b32b8ee8db3d77c90a63d0e59b6",
+          "last_accessed_at": "2026-10-11T01:49:15.640647Z",
+          "created_at": "2026-10-11T00:15:20.486564Z",
+          "size_in_bytes": 151846679
+        },
+        {
+          "id": 8784349874,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-6d6e6ef3",
+          "version": "effa1b635e2251e9e6df490948666d13e101664fbd554445b9cf3f59ebada01a",
+          "last_accessed_at": "2026-10-11T02:40:25.099916Z",
+          "created_at": "2026-10-11T01:55:09.531230Z",
+          "size_in_bytes": 151326525
+        },
+        {
+          "id": 8782685741,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-9fdba862",
+          "version": "effa1b635e2251e9e6df490948666d13e101664fbd554445b9cf3f59ebada01a",
+          "last_accessed_at": "2026-10-11T01:51:48.493990Z",
+          "created_at": "2026-10-11T00:17:56.432370Z",
+          "size_in_bytes": 151304098
+        }
+      ],
+      "already_absent": [],
+      "proof": [
+        {
+          "replacement": {
+            "id": 8785104429,
+            "ref": "refs/heads/main",
+            "key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-76d42afe",
+            "version": "5328310fed3fbcf4a5d63860117f259451587b32b8ee8db3d77c90a63d0e59b6",
+            "last_accessed_at": "2026-10-11T03:11:45.523929Z",
+            "created_at": "2026-10-11T02:39:57.533288Z",
+            "size_in_bytes": 157566287
+          },
+          "job": {
+            "id": 114370059147,
+            "run_id": 38105504256,
+            "workflow_name": "Desktop credential persistence",
+            "head_branch": "main",
+            "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38105504256",
+            "run_attempt": 1,
+            "node_id": "CR_kwDOVBtUrs8AAAAaoPybiw",
+            "head_sha": "4cee80db3c3cf9c4c193a0cdf99bfc6bd5a3334a",
+            "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/114370059147",
+            "html_url": "https://github.com/snowdamiz/incant/actions/runs/38105504256/job/114370059147",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-10-11T02:32:47Z",
+            "started_at": "2026-10-11T02:37:28Z",
+            "completed_at": "2026-10-11T02:39:59Z",
+            "name": "storage (ubuntu-latest)",
+            "steps": [
+              {
+                "name": "Set up job",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 1,
+                "started_at": "2026-10-11T02:37:28Z",
+                "completed_at": "2026-10-11T02:37:29Z"
+              },
+              {
+                "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 2,
+                "started_at": "2026-10-11T02:37:29Z",
+                "completed_at": "2026-10-11T02:37:35Z"
+              },
+              {
+                "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 3,
+                "started_at": "2026-10-11T02:37:35Z",
+                "completed_at": "2026-10-11T02:37:35Z"
+              },
+              {
+                "name": "Run rustup show",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 4,
+                "started_at": "2026-10-11T02:37:35Z",
+                "completed_at": "2026-10-11T02:37:46Z"
+              },
+              {
+                "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 5,
+                "started_at": "2026-10-11T02:37:46Z",
+                "completed_at": "2026-10-11T02:37:49Z"
+              },
+              {
+                "name": "Run cargo test -p incant_agent --locked",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 6,
+                "started_at": "2026-10-11T02:37:49Z",
+                "completed_at": "2026-10-11T02:39:33Z"
+              },
+              {
+                "name": "Run sudo apt-get update && sudo apt-get install -y gnome-keyring dbus-x11",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 7,
+                "started_at": "2026-10-11T02:39:33Z",
+                "completed_at": "2026-10-11T02:39:46Z"
+              },
+              {
+                "name": "Check Linux Secret Service with a disposable CI keyring",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 8,
+                "started_at": "2026-10-11T02:39:46Z",
+                "completed_at": "2026-10-11T02:39:49Z"
+              },
+              {
+                "name": "Check native storage across changed builds",
+                "status": "completed",
+                "conclusion": "skipped",
+                "number": 9,
+                "started_at": "2026-10-11T02:39:49Z",
+                "completed_at": "2026-10-11T02:39:49Z"
+              },
+              {
+                "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 10,
+                "started_at": "2026-10-11T02:39:49Z",
+                "completed_at": "2026-10-11T02:39:49Z"
+              },
+              {
+                "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 18,
+                "started_at": "2026-10-11T02:39:49Z",
+                "completed_at": "2026-10-11T02:39:57Z"
+              },
+              {
+                "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 19,
+                "started_at": "2026-10-11T02:39:57Z",
+                "completed_at": "2026-10-11T02:39:57Z"
+              },
+              {
+                "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 20,
+                "started_at": "2026-10-11T02:39:57Z",
+                "completed_at": "2026-10-11T02:39:57Z"
+              },
+              {
+                "name": "Complete job",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 21,
+                "started_at": "2026-10-11T02:39:57Z",
+                "completed_at": "2026-10-11T02:39:58Z"
+              }
+            ],
+            "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/114370059147",
+            "labels": [
+              "ubuntu-latest"
+            ],
+            "runner_id": 1000011404,
+            "runner_name": "GitHub Actions 1000011404",
+            "runner_group_id": 0,
+            "runner_group_name": "GitHub Actions"
+          },
+          "log_sha256": "4009e4644a87f0ed17ac6c50ca588c10b2a4adca8c31e91b8781d1e1c8343ed5"
+        },
+        {
+          "replacement": {
+            "id": 8785115724,
+            "ref": "refs/heads/main",
+            "key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-76d42afe",
+            "version": "effa1b635e2251e9e6df490948666d13e101664fbd554445b9cf3f59ebada01a",
+            "last_accessed_at": "2026-10-11T03:14:12.064704Z",
+            "created_at": "2026-10-11T02:40:35.758891Z",
+            "size_in_bytes": 157159697
+          },
+          "job": {
+            "id": 114370059200,
+            "run_id": 38105504256,
+            "workflow_name": "Desktop credential persistence",
+            "head_branch": "main",
+            "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38105504256",
+            "run_attempt": 1,
+            "node_id": "CR_kwDOVBtUrs8AAAAaoPybwA",
+            "head_sha": "4cee80db3c3cf9c4c193a0cdf99bfc6bd5a3334a",
+            "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/114370059200",
+            "html_url": "https://github.com/snowdamiz/incant/actions/runs/38105504256/job/114370059200",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-10-11T02:32:47Z",
+            "started_at": "2026-10-11T02:35:01Z",
+            "completed_at": "2026-10-11T02:40:40Z",
+            "name": "storage (windows-latest)",
+            "steps": [
+              {
+                "name": "Set up job",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 1,
+                "started_at": "2026-10-11T02:35:02Z",
+                "completed_at": "2026-10-11T02:35:04Z"
+              },
+              {
+                "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 2,
+                "started_at": "2026-10-11T02:35:04Z",
+                "completed_at": "2026-10-11T02:35:14Z"
+              },
+              {
+                "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 3,
+                "started_at": "2026-10-11T02:35:14Z",
+                "completed_at": "2026-10-11T02:35:15Z"
+              },
+              {
+                "name": "Run rustup show",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 4,
+                "started_at": "2026-10-11T02:35:15Z",
+                "completed_at": "2026-10-11T02:35:29Z"
+              },
+              {
+                "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 5,
+                "started_at": "2026-10-11T02:35:29Z",
+                "completed_at": "2026-10-11T02:35:49Z"
+              },
+              {
+                "name": "Run cargo test -p incant_agent --locked",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 6,
+                "started_at": "2026-10-11T02:35:49Z",
+                "completed_at": "2026-10-11T02:39:24Z"
+              },
+              {
+                "name": "Run sudo apt-get update && sudo apt-get install -y gnome-keyring dbus-x11",
+                "status": "completed",
+                "conclusion": "skipped",
+                "number": 7,
+                "started_at": "2026-10-11T02:39:24Z",
+                "completed_at": "2026-10-11T02:39:24Z"
+              },
+              {
+                "name": "Check Linux Secret Service with a disposable CI keyring",
+                "status": "completed",
+                "conclusion": "skipped",
+                "number": 8,
+                "started_at": "2026-10-11T02:39:24Z",
+                "completed_at": "2026-10-11T02:39:24Z"
+              },
+              {
+                "name": "Check native storage across changed builds",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 9,
+                "started_at": "2026-10-11T02:39:24Z",
+                "completed_at": "2026-10-11T02:39:32Z"
+              },
+              {
+                "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 10,
+                "started_at": "2026-10-11T02:39:32Z",
+                "completed_at": "2026-10-11T02:39:33Z"
+              },
+              {
+                "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 18,
+                "started_at": "2026-10-11T02:39:33Z",
+                "completed_at": "2026-10-11T02:40:35Z"
+              },
+              {
+                "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 19,
+                "started_at": "2026-10-11T02:40:35Z",
+                "completed_at": "2026-10-11T02:40:36Z"
+              },
+              {
+                "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 20,
+                "started_at": "2026-10-11T02:40:36Z",
+                "completed_at": "2026-10-11T02:40:39Z"
+              },
+              {
+                "name": "Complete job",
+                "status": "completed",
+                "conclusion": "success",
+                "number": 21,
+                "started_at": "2026-10-11T02:40:39Z",
+                "completed_at": "2026-10-11T02:40:39Z"
+              }
+            ],
+            "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/114370059200",
+            "labels": [
+              "windows-latest"
+            ],
+            "runner_id": 1000011398,
+            "runner_name": "GitHub Actions 1000011398",
+            "runner_group_id": 0,
+            "runner_group_name": "GitHub Actions"
+          },
+          "log_sha256": "332edd8d82a2c5a66b5803bbd2e96e0f0f47dff8dd160574c5faac42d1b21eac"
+        }
+      ],
+      "before_bytes": 8287199080,
+      "after_bytes": 7680920894,
+      "other_ids_absent_without_attributed_cause": [],
+      "raw_record_sha256": "c7e525adeda9f28a2d11c6a255ccb8dd20bf4da8f0bf20410654b604553a626c",
+      "preserved_count": 0
+    },
+    {
+      "recorded_at": "2026-10-11T03:28:24.531377+00:00",
+      "reason": "Verified completed same-family main62 replacement; bounded retirement of obsolete main61 Windows native cache.",
+      "old": {
+        "id": 8784575488,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-6d6e6ef3",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "last_accessed_at": "2026-10-11T03:12:28.413404Z",
+        "created_at": "2026-10-11T02:08:54.225980Z",
+        "size_in_bytes": 1456712647
+      },
+      "replacement": {
+        "id": 8785751754,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-76d42afe",
+        "version": "b8c7260acabdf13b21a4d2afac75b9c957be9f3f26540be324aaa1b498062cd2",
+        "last_accessed_at": "2026-10-11T03:25:14.244894Z",
+        "created_at": "2026-10-11T03:18:58.877833Z",
+        "size_in_bytes": 1880842548
+      },
+      "writer_job": 114370058847,
+      "writer_run": 38105504223,
+      "writer_conclusion": "success",
+      "writer_log_sha256": "2967d8a52dc8969256d1b57dbc91a3afc6b1aab812624eb9fed6a3a179dc9286",
+      "upload_bytes_confirmed": 1880842548,
+      "before_bytes": 9719371113,
+      "after_bytes": 8262658466,
+      "before_count": 20,
+      "after_count": 19,
+      "deleted_ids": [
+        8784575488
+      ],
+      "other_disappeared_ids": [],
+      "concurrent_new_ids": [],
+      "raw_record_sha256": "0d6eb053496d371d8819fb7aa8230e3872b413b52d464c56d173ed006c20e309",
+      "preserved_count": 19
+    },
+    {
+      "recorded_at": "2026-10-11T03:31:05.270538+00:00",
+      "reason": "Two exact obsolete default-branch registry generations retired after successful same-family/version main64 upload.",
+      "old": [
+        {
+          "id": 8784770896,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-6d6e6ef3",
+          "version": "ad15a212ac8e047da6cc0acacc752804ce97f0f107cf07aaf2e4ccf0b6998518",
+          "last_accessed_at": "2026-10-11T03:11:42.813237Z",
+          "created_at": "2026-10-11T02:20:40.309137Z",
+          "size_in_bytes": 151617607
+        },
+        {
+          "id": 8782652939,
+          "ref": "refs/heads/main",
+          "key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-9fdba862",
+          "version": "ad15a212ac8e047da6cc0acacc752804ce97f0f107cf07aaf2e4ccf0b6998518",
+          "last_accessed_at": "2026-10-11T02:19:14.622323Z",
+          "created_at": "2026-10-11T00:16:10.209497Z",
+          "size_in_bytes": 151575645
+        }
+      ],
+      "replacement": {
+        "id": 8785695807,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-76d42afe",
+        "version": "ad15a212ac8e047da6cc0acacc752804ce97f0f107cf07aaf2e4ccf0b6998518",
+        "last_accessed_at": "2026-10-11T03:29:26.456327Z",
+        "created_at": "2026-10-11T03:15:29.985499Z",
+        "size_in_bytes": 157607671
+      },
+      "writer_job": 114370165398,
+      "writer_run": 38105538042,
+      "writer_log_sha256": "8c7ad44683daaef4d3673d1efd061b23ec026d1e14838a5ef21613fe9373dd82",
+      "before_bytes": 11002324357,
+      "after_bytes": 10699131105,
+      "retired_bytes": 303193252,
+      "deleted_ids": [
+        8784770896,
+        8782652939
+      ],
+      "other_disappeared_ids": [],
+      "concurrent_new_ids": [],
+      "raw_record_sha256": "c2670d01eeb40e525924dc41399b443400ee8b6ff66cbf2b0ea531a7205c9bd5",
+      "preserved_count": 18
+    },
+    {
+      "recorded_at": "2026-10-11T03:31:45.987788+00:00",
+      "reason": "Exact obsolete main61 macOS native generation retired after completed successful main64 same-family/version replacement upload.",
+      "old": {
+        "id": 8784650306,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-6d6e6ef3",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-11T03:26:06.901365Z",
+        "created_at": "2026-10-11T02:13:44.081967Z",
+        "size_in_bytes": 2104808538
+      },
+      "replacement": {
+        "id": 8785915732,
+        "ref": "refs/heads/main",
+        "key": "v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-76d42afe",
+        "version": "f921a7b611ccc7239385e0204f1cf9d92bd7b7f5ec5e63fceff396df787af734",
+        "last_accessed_at": "2026-10-11T03:28:58.322748Z",
+        "created_at": "2026-10-11T03:28:58.322748Z",
+        "size_in_bytes": 2739665891
+      },
+      "writer_job": 114370165677,
+      "writer_run": 38105538054,
+      "writer_log_sha256": "5d9284627c0331a9a52fcd35fdcd9ff92fb8e219ab7e2de496126ee59165bdfc",
+      "before_bytes": 10699131105,
+      "after_bytes": 8594322567,
+      "retired_bytes": 2104808538,
+      "deleted_ids": [
+        8784650306
+      ],
+      "other_disappeared_ids": [],
+      "concurrent_new_ids": [],
+      "raw_record_sha256": "6aa038ce5a83d65b0366181b8887fc3cdc2d5ce6a115961d923258212bc9a464",
+      "preserved_count": 17
+    }
+  ],
+  "natural_pr72_linux_consumer": {
+    "head": "9e0976c8348dad5fe9b40f1366065b33e8e501a4",
+    "run_id": 38107075399,
+    "job_id": 114374735461,
+    "execution_seconds": 590.0,
+    "run_creation_to_start_seconds": 235.0,
+    "steps": [
+      {
+        "name": "Set up job",
+        "seconds": 3.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "seconds": 6.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "seconds": 4.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+        "seconds": 0.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run sudo apt-get update",
+        "seconds": 27.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run rustup show",
+        "seconds": 8.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+        "seconds": 57.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm ci",
+        "seconds": 6.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run node tools/build_bridge.mjs --check",
+        "seconds": 1.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run build --workspace editor/ui",
+        "seconds": 5.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm test --workspace editor/ui",
+        "seconds": 30.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings",
+        "seconds": 218.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run cargo check -p incant_audio --features device --locked",
+        "seconds": 1.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run cargo clippy -p incant_game_player --features render-gpu --all-targets --release --locked -- -D warnings",
+        "seconds": 3.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify geometry, editor recovery and simulated frame capture",
+        "seconds": 60.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings",
+        "seconds": 21.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Build and execute the shipping runtime with matched crash symbols",
+        "seconds": 84.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify Windows executables do not require redistributable CRT DLLs",
+        "seconds": 0.0,
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "seconds": 1.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "seconds": 1.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify physics commands, persistence and sandbox playback",
+        "seconds": 0.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify strict TypeScript character walking and jumping",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify compound authoring, recovery and scripted queries",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify versioned game saves across headless process restarts",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify recorded device input, character control and mid-jump save replay",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify script-driven WAV and Vorbis mixing without an audio device",
+        "seconds": 4.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify saved timer callbacks across headless process restarts",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify saved runtime rebinding and named input actions",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify locale switching and string tables across process restarts",
+        "seconds": 1.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify translator exchange, atomic import and shared Undo/Redo",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify runtime navigation and saved character chase",
+        "seconds": 3.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify weighted grid doors and blocked-route save replay",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify one hundred steering agents and saved replay",
+        "seconds": 7.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify directed off-mesh traversal and saved replay",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify authored and saved orthographic camera projections",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify pixel-perfect camera saves preserve unsnapped simulation",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify sprite authoring and source-free saved animation",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify atlas repacking and source-free saved frame references",
+        "seconds": 2.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Exercise native GPU rendering without a user account",
+        "seconds": 3.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "seconds": 3.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Preserve Cargo unit timing diagnostics",
+        "seconds": 1.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+        "seconds": 0.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+        "seconds": 0.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "seconds": 0.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "seconds": 1.0,
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "seconds": 0.0,
+        "conclusion": "success"
+      }
+    ],
+    "cache_restore_lines": [
+      "2026-10-11T03:07:37.2404669Z Restored from cache key \"v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-76d42afe\" full match: true."
+    ],
+    "log_sha256": "b89b01684a4996e71715b4fcc2cdda242a437d71ba9b1d908476f6f2485f2b2e",
+    "profile": "unchanged release opt3; candidate profile not yet published",
+    "scope": "Natural import72 warm consumer after main62 cache publication; not matched profile experiment."
+  },
+  "consumer_raw_sha256": "17c539cdadf7b7a29ea0d836464cc9bed7f32a6079efb9814ad84692ec75dc83",
+  "final_retained_bytes": 8594322567,
+  "final_retained_entries": 17,
+  "limitations": [
+    "Current retained iOS target-cache entry is absent; its disappearance was not attributed to a specific cause.",
+    "PR72 used the existing release opt3 graph, not the proposed ci profile.",
+    "Whole-job timing differences cannot be attributed solely to cache restoration.",
+    "Local profile archive projections are not hosted cache measurements."
+  ]
+}

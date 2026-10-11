@@ -173,8 +173,8 @@ class WorkflowContractTests(unittest.TestCase):
         checks = workflow.split('  checks:\n', 1)[1]
         self.assertIn('needs: classify\n', checks)
         self.assertIn('if: ${{ !cancelled() }}', checks)
-        self.assertIn("needs.classify.outputs.scope == 'docs' && 'ubuntu-latest' || 'macos-latest'", checks)
-        self.assertIn("needs.classify.outputs.scope == 'docs' && '0' || '1'", checks)
+        self.assertIn("needs.classify.result == 'success' && needs.classify.outputs.scope == 'docs' && 'ubuntu-latest' || 'macos-latest'", checks)
+        self.assertIn("needs.classify.result == 'success' && needs.classify.outputs.scope == 'docs' && '0' || '1'", checks)
         blocks = re.split(r'(?m)^      - ', checks.split('    steps:\n', 1)[1])[1:]
         allowed = ['uses: actions/checkout@', 'uses: actions/setup-python@',
                    'run: python3 tools/generate_conventions.py --check',
@@ -183,11 +183,40 @@ class WorkflowContractTests(unittest.TestCase):
         for block in blocks:
             if not any(block.startswith(prefix) for prefix in allowed):
                 with self.subTest(step=block.splitlines()[0]):
-                    self.assertIn("needs.classify.outputs.scope != 'docs'", block)
+                    self.assertIn("(needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')", block)
         convention = next(block for block in blocks if block.startswith('run: python3 tools/generate_conventions.py --check'))
         self.assertNotIn('if:', convention)
         diagnostics = next(block for block in blocks if block.startswith('name: Preserve Cargo unit timing diagnostics'))
-        self.assertIn("if: always() && needs.classify.outputs.scope != 'docs'", diagnostics)
+        self.assertIn("if: always() && (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')", diagnostics)
+
+    def test_failed_classifier_with_retained_docs_output_selects_every_full_step(self):
+        workflow = (ROOT / '.github/workflows/ci.yml').read_text()
+        checks = workflow.split('  checks:\n', 1)[1]
+        runner = next(line.split('${{', 1)[1].split('}}', 1)[0].strip()
+                      for line in checks.splitlines() if 'runs-on:' in line)
+        conditions = [line.strip()[4:] for line in checks.splitlines()
+                      if line.strip().startswith('if: ') and 'needs.classify.' in line]
+        self.assertTrue(conditions)
+
+        def evaluate(expression, result, output):
+            # Evaluate this trusted repository workflow's boolean/string expressions,
+            # using synthetic job outcomes; no event or project text becomes code.
+            expression = expression.replace('needs.classify.result', 'result')
+            expression = expression.replace('needs.classify.outputs.scope', 'output')
+            expression = expression.replace('always()', 'True')
+            expression = expression.replace('&&', ' and ').replace('||', ' or ')
+            return eval(expression, {'__builtins__': {}}, {'result': result, 'output': output})
+
+        for result in ('success', 'failure', 'skipped', 'cancelled'):
+            for output in ('docs', 'full', ''):
+                with self.subTest(result=result, output=output):
+                    docs = result == 'success' and output == 'docs'
+                    self.assertEqual(evaluate(runner, result, output),
+                                     'ubuntu-latest' if docs else 'macos-latest')
+                    for condition in conditions:
+                        is_docs_step = "outputs.scope == 'docs'" in condition
+                        self.assertEqual(bool(evaluate(condition, result, output)),
+                                         docs if is_docs_step else not docs, condition)
 
     def test_new_literal_document_readers_require_policy_review(self):
         # Guard common include_str/read/build-input mistakes in later source edits.

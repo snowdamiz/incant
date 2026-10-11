@@ -27,21 +27,24 @@ PR classification uses the base/head merge base. Main pushes require the before
 commit to be an ancestor of after. Raw NUL-delimited Git records preserve both
 file modes; deletes, renames, symlinks, executable mode changes, empty diffs,
 unknown paths, invalid revisions, missing/shallow history and parse/Git failures
-select full validation. A failed classifier job also runs the full checks job;
+select full validation. A failed classifier job also runs the full checks job, including when it wrote
+`docs` output before failing;
 normal cancellation of superseded runs remains respected. Dispatch always runs
 full checks. Only fixed scope strings and validated hexadecimal commit IDs enter
 workflow outputs.
 
-All 45 prior full-path command strings remain identical and in the same order.
+At selector commit `30e6dc7`, all 45 prior full-path command strings remain
+identical and in the same order. The separately measured functional CI profile
+then changes only the explicit profile and executable-path arguments described
+in [its evidence](ci-test-profile.md).
 No engine, GPU, shipping, schema, SDK, bridge, UI or credential assertion is
 removed for source changes. The classification workflow and helper themselves
 are unknown paths and therefore require full validation when edited.
 
-Local verification: 82 tool tests, including real temporary repositories,
+Initial selector verification: 82 tool tests, including real temporary repositories,
 malformed/incomplete event and Git failures, unsafe file modes, convention drift,
 workflow fallback/identity checks and recorded historical diffs. Original PLAN8
 commit `638bf8f` selects docs; UI/runtime source changes select full. Actionlint,
 generated conventions and whitespace checks pass. Hosted duration and actual
 queue reduction remain unmeasured; full-history checkout is an explicit Linux
-classification cost. No profile optimization or broad graph-based skip follows
-from this selector. The credential dependency classifier remains report-only.
+classification cost. The selector itself implies no profile optimization or broad graph-based skip. The credential dependency classifier remains report-only.
