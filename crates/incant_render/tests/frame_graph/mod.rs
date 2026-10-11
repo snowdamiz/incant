@@ -215,8 +215,16 @@ fn queued_graph_frames_outlive_scene_versions_and_failed_preparation() {
                 .is_err()
         );
         let state = renderer.graph.0.lock().unwrap();
-        assert!(!state.world.contains_resource::<PreparedFrame>());
-        assert!(!state.world.contains_resource::<Encoder>());
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            assert!(!state.world.contains_resource::<PreparedFrame>());
+            assert!(!state.world.contains_resource::<Encoder>());
+        }
+        #[cfg(target_arch = "wasm32")]
+        {
+            assert!(!state.world.contains_non_send::<PreparedFrame>());
+            assert!(!state.world.contains_non_send::<Encoder>());
+        }
     }
     assert_ne!(
         references[0], references[2],

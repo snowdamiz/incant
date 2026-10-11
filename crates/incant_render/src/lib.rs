@@ -26,14 +26,18 @@ mod studio;
 mod test_support;
 #[cfg(test)]
 mod version_tests;
+#[cfg(any(target_arch = "wasm32", test))]
+mod web_error;
 use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Vec3};
 pub use incant_render_data::{SceneInput, ScenePreparer};
 pub use lighting::LocalLightSelection;
 pub use models::{RenderScene, RetainedScene, RetainedTarget};
-pub use resource_error::ResourceError;
+pub use resource_error::{PreparationError, ResourceError};
 pub use scene::{SceneError, SceneStats};
 use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
+#[cfg(target_arch = "wasm32")]
+pub use web_error::PreparationErrorKind;
 pub use wgpu;
 type Result<T> = std::result::Result<T, Box<dyn Error + Send + Sync>>;
 pub const MIN_SCREENSHOT_DIMENSION: u32 = 16;
@@ -106,6 +110,8 @@ impl Renderer {
         let output = output::OutputPass::new(&device);
         let sprites = sprites::SpriteSystem::new(&device);
         if let Some(error) = validation.pop().await {
+            #[cfg(target_arch = "wasm32")]
+            let error = error.into();
             return Err(ResourceError::Preparation(error).into());
         }
         Ok(Self {

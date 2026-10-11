@@ -387,6 +387,16 @@ applicable checks passed; its actual-main tree equals the tested head. [Integrat
   and release scope in PLAN.md. Phase 1 progress is not Engine 1.0 or Driftwake
   release completion.
 
+## WebGPU renderer compile portability
+
+The default renderer library compiles for wasm32 with explicit browser
+NonSend graph ownership and copied GPU error diagnostics. Desktop Send/Sync
+resources and typed errors remain intact. Local 36 CPU tests, scoped Clippy,
+formatting, actionlint and 12 workflow-policy cases pass; 18 GPU tests stayed ignored.
+The existing web checkpoint job now checks the renderer library. Browser
+rendering acceptance and device/performance gates remain open.
+[Evidence](docs/spikes/web-renderer-portability.md).
+
 ## Deferred gates and human-owned actions
 
 The [Phase 0 ledger](docs/gates/phase0-review.md) remains unapproved: live
