@@ -1,0 +1,37 @@
+{
+  "scope": "Test-harness isolation only; no production UI/native source changes. Intended follow-up in PR62; PR61 head remains frozen.",
+  "source_before": "276535e49fbbdc9c44c8fb7d4953fa062e5c423d",
+  "failed_hosted_head": "9cf1712",
+  "diagnosis": "The Camera accessibility test put six real fixture renders and axe scans under one default 5000ms deadline. Windows timed out; the surviving async loop overlapped a later fixture, followed by root.getElementById failure.",
+  "change": "Use six independently named it.each cases with the existing default test deadline; preserve all six fixture values, axe rules and empty-violation assertions. Track each entire mount/scan promise and drain it before cleanup/next test, with a bounded 20s teardown deadline.",
+  "validation": {
+    "scoped": "59 tests pass (five additional test identities from splitting the aggregate case).",
+    "full": "529 tests across 30 files pass.",
+    "typescript": "Strict typecheck passes.",
+    "forced_timeout": "Temporarily injected the same real legacy render/axe sequence with a 1ms deadline. Exactly that deliberate test failed; all 59 following/original cases passed, with no getElementById or concurrent-axe error. Injection removed and exact source hash restored before full suite.",
+    "hosted_followup": "Pending current-source hosted verification on PR62."
+  },
+  "source_sha256": "b871d8a0c2e4fd8c8d9d1e728cc65849aaff51204310fe3fb50a502e74cf2a2e",
+  "logs": [
+    {
+      "path": "/tmp/incant-pr62-corrected-desktop-windows.log",
+      "sha256": "c74bd84e73a75c5c7b6416ab2d9e9d3a29922adcb740a9de071200a95a7285d8"
+    },
+    {
+      "path": "/tmp/incant-camera-isolation-scoped.log",
+      "sha256": "9de6ac14a66de5239de29f75bc98b66353512046d537d8e64a6e1362334a8d83"
+    },
+    {
+      "path": "/tmp/incant-camera-isolation-typecheck.log",
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+    },
+    {
+      "path": "/tmp/incant-camera-isolation-forced-timeout.log",
+      "sha256": "56a5a256796c9c44ca7c46ab9290087dda0998f1364fcf18bdda769f5a28429a"
+    },
+    {
+      "path": "/tmp/incant-camera-isolation-full.log",
+      "sha256": "b61812cdf0aa9a0c7b58c03b854d09658fea31bf4a5edf6c8fed676f7705d9ec"
+    }
+  ]
+}

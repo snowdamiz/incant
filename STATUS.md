@@ -89,14 +89,18 @@ review; concurrent native reviews coordinate foreground ownership.
 
 Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
-Clippy; 524 UI tests, strict TypeScript and production build; 43 Python tool tests.
+Clippy; 529 UI tests, strict TypeScript and production build; 43 Python tool tests.
 The renderer's unchanged frozen implementation separately passed all 66 actual
 GPU tests. Exact sources, scopes and logs are retained in the linked reports;
 these local results do not replace pending hosted checks or device gates.
 The first hosted runtime run exposed stderr/JSON mixing in the Wasm audit and a
 stale isolated physics lockfile. Reviewed fixes pass real combined Wasm
 conformance, browser-target physics compilation and six native parity streams.
-[Correction evidence](docs/spikes/runtime-ci-corrections.md).
+[Correction evidence](docs/spikes/runtime-ci-corrections.md). A subsequent Linux
+C11 trap-link failure now has a reproduced POSIX declaration fix; the Windows
+Camera accessibility test is split into its six independent scans with unchanged
+coverage and bounded asynchronous cleanup. Both corrections pass local checks
+and await the next hosted run.
 
 ## Remaining engineering requirements
 
