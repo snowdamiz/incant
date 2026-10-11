@@ -1,0 +1,210 @@
+{
+  "kind": "actual native window review (not the browser double)",
+  "binary": {
+    "path": "/tmp/incant-native-review-0044/incant_editor",
+    "sha256": "718ea75b9d792015fa2af4d939d4af2e2e412c01c706b046a910075cf70bd1b6",
+    "launch": "executable plus one absolute fixture path; no probe flags; never rebuilt or replaced"
+  },
+  "helper": {
+    "path": "/tmp/incant-native-review-0044/incant_headless",
+    "sha256": "4aae16cedbe4feaae7d6e59d2a01dc19e1e4afc0a1285a287210a9bacf156c0f",
+    "use": "public init + command.execute + project.save only (tools/native/author-input-variant.py)"
+  },
+  "host": {
+    "os": "macOS 26.6 (25G72)",
+    "arch": "arm64",
+    "display": "built-in Retina, 2 device px per pt"
+  },
+  "method": {
+    "capture": "screencapture -o -x -l <window id> of the review PID's own window only (tools/native/winctl.swift prints the id)",
+    "input": "CGEvents posted only while the review PID is frontmost, rechecked before every event; a step starts only after 15 s without HID input, then the front and the pointer are handed back",
+    "measure": "tools/native/pixels.swift colour runs and bounding boxes on the captures"
+  },
+  "fixtures": {
+    "granted": "artifacts/native-review-0044/project.json (entity 00000000000000000000000002 moves X by 2 per tick; camera 00000000000000000000000003)",
+    "input-variant": "artifacts/native-review-0044/input-variant/project.json, revision 2: picker and error captures; its probes iterated every entity (chunks are world-wide), so its translation values mix both probes",
+    "input-variant-2": "artifacts/native-review-0044/input-variant-2/project.json, revision 2: probes filtered by instances; input and keyboard captures"
+  },
+  "layouts_pt": {
+    "wide": "1440x874",
+    "minimum": "1000x650",
+    "narrow": "1440x866 window (visible-frame clamp) with the Inspector dragged to 280"
+  },
+  "titlebar_px": {
+    "note": "2 px = 1 pt; identical in wide-01, minimum focused, narrow and minimum unfocused captures",
+    "header_bottom_border_y": [
+      78,
+      79
+    ],
+    "traffic_lights": {
+      "close_x": [
+        28,
+        55
+      ],
+      "minimize_x": [
+        74,
+        101
+      ],
+      "zoom_x": [
+        120,
+        147
+      ],
+      "y": [
+        26,
+        53
+      ],
+      "centre_y": 39.5
+    },
+    "logo": {
+      "x": [
+        177,
+        198
+      ],
+      "y": [
+        24,
+        54
+      ],
+      "centre_y": 39.0,
+      "centre_y_unfocused": 39.5
+    },
+    "title_ink_y": [
+      30,
+      55
+    ],
+    "result": "traffic lights, logo and title share one centre line within 0.5 px (0.25 pt) in the 39 pt header; the logo starts 15 pt after the zoom button"
+  },
+  "viewport_px": {
+    "wide_host": {
+      "x": [
+        492,
+        2157
+      ],
+      "y": [
+        152,
+        1217
+      ],
+      "css": {
+        "x": 246,
+        "y": 76,
+        "width": 833,
+        "height": 533
+      }
+    },
+    "under_error_notice": {
+      "notice_y": [
+        152,
+        223
+      ],
+      "border_y": [
+        224,
+        225
+      ],
+      "host_starts_y": 226,
+      "result": "the native surface follows the smaller hole; the diagnostic cube re-centres"
+    }
+  },
+  "input_variant_2_results": [
+    {
+      "capture": "input-01-key-d-held-64-ticks.png",
+      "tick": 326,
+      "steps": "Key Probe selected; F6 to the game view (keyboard focus, pointer outside the view); D down, 1.0 s, D up; Shift+Cmd+P",
+      "key_probe": {
+        "translation": [
+          64,
+          0,
+          0
+        ],
+        "scale_x": 2
+      }
+    },
+    {
+      "capture": "input-02-left-34-ticks-wheel-120.png",
+      "tick": 441,
+      "steps": "Shift+Cmd+P from the game view; left down at window (520,320), 0.5 s, up; CGEvent scroll wheel1=+3 lines at (520,320); move to (800,450); Shift+Cmd+P",
+      "key_probe": {
+        "translation": [
+          64,
+          34,
+          120
+        ],
+        "scale_x": 2
+      }
+    },
+    {
+      "capture": "input-03-pointer-554-374-css-px.png",
+      "tick": 441,
+      "pointer_probe": {
+        "translation": [
+          554,
+          374,
+          0
+        ]
+      },
+      "expected": "window (800,450) minus host origin (246,76) = (554,374) CSS px"
+    },
+    {
+      "capture": "defect-input-resume-unfocused-game-keeps-focus.png",
+      "tick": 485,
+      "steps": "Key Probe clicked (focus in the Hierarchy); Shift+Cmd+P resume; 0.6 s; Shift+Cmd+P",
+      "key_probe": {
+        "translation": [
+          64,
+          34,
+          120
+        ],
+        "scale_x": 2
+      },
+      "expected_scale_x": 1,
+      "cause": "the worker queues focus false then true itself when a held session continues (worktree editor/app/src/play/worker.rs:340-345), from window focus; the UI sent nothing because the view never had focus"
+    },
+    {
+      "capture": "input-04-f6-released-held-key.png",
+      "tick": 637,
+      "steps": "F6 to the game view; Shift+Cmd+P; 0.7 s; D down; 0.5 s; F6 (to the dock); 1.0 s; Shift+Cmd+P; D up",
+      "key_probe": {
+        "translation": [
+          102,
+          34,
+          120
+        ],
+        "scale_x": 1
+      },
+      "result": "X rose 38 in 152 ticks: only while D was held in the view; F6 released it and the game lost focus"
+    }
+  ],
+  "keyboard": [
+    "Shift+F6 and F6 reach the game view with its inset ring (wide-06, input-01)",
+    "Cmd+P, Shift+Cmd+P, Alt+Cmd+P work from the game view and from panels",
+    "Shift+Tab from the game view reaches Stop, then Step: buttons are in this WKWebView's Tab order (keyboard-01)",
+    "Space on the unavailable Stop announced 'Play is not running.' in the status line",
+    "Dismiss reached by Tab (keyboard-02); after Space no element had focus (defect-keyboard-*); the next Tab restarted at the picker (keyboard-03)",
+    "Picker: arrow keys and Enter choose; focus returns to the picker with its ring (picker-02)"
+  ],
+  "inconclusive": [
+    "One Cmd+P right after the first activation of the fresh input-variant-2 window did not open the picker; the person at the Mac became active in the same second and the guard aborted the step. Repeated twice afterwards (after activation, and after a click), Cmd+P opened the picker both times."
+  ],
+  "defects": [
+    {
+      "id": "game-focus-after-resume",
+      "owner": "UI (fixed in this packet's source; not in the reviewed binary) with a worker note for Astra"
+    },
+    {
+      "id": "keyboard-dismiss-loses-focus",
+      "owner": "UI (fixed in this packet's source; not in the reviewed binary)"
+    },
+    {
+      "id": "splitter-drag-selects-text",
+      "owner": "shell UI from handoff 0001, outside this packet's paths: reported, not changed"
+    }
+  ],
+  "engine_wording": "The camera-less refusal reads 'native play: spatial content requires an explicit --camera and native render host': a command-line flag in editor text (Astra-owned, non-blocking).",
+  "not_covered": [
+    "visible game geometry (no mesh in either fixture)",
+    "Windows and Linux hosts",
+    "VoiceOver",
+    "IME composition",
+    "touch and trackpad gestures; only synthetic CGEvent wheel input",
+    "other device pixel ratios and multiple displays",
+    "the three fixes in a rebuilt binary"
+  ]
+}

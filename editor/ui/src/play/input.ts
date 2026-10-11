@@ -70,7 +70,9 @@ export interface GameInputOptions {
  * - held keys and buttons are tracked: releases are sent only for sent presses. Every
  *   stream opens with a focus cycle, which releases whatever the game still holds; a
  *   stream the editor ends while the worker still takes input, a refused packet or a
- *   backlog of 1024 events sends a release instead of leaving a key held in the game.
+ *   backlog of 1024 events sends a release instead of leaving a key held in the game;
+ * - the game has focus only while the view has: when the worker starts taking input
+ *   while another panel has focus, the game is told it has none.
  */
 export class GameInput {
   private state: GameInputState = { generation: null, accepting: false, focused: false };
@@ -106,10 +108,12 @@ export class GameInput {
 
   update(next: GameInputState): void {
     const before = this.state;
+    const sameSession = next.generation === before.generation;
     // Another session starts its own stream, opened like any other.
-    const wasActive = this.active && next.generation === before.generation;
+    const wasActive = this.active && sameSession;
+    const wasAccepting = before.accepting && sameSession;
     this.state = next;
-    if (next.generation !== before.generation) {
+    if (!sameSession) {
       // Collected input belongs to its own session only.
       this.drop();
       this.suspect = null;
@@ -117,19 +121,25 @@ export class GameInput {
       this.setError(null);
     }
     const active = this.active;
-    if (!wasActive && active) {
+    if (!next.accepting) {
+      // Paused, suspended, stopped or unreadable: the worker released input itself, or
+      // nothing can be sent.
+      this.drop();
+    } else if (!wasActive && active) {
       // The game may still hold keys from before an interruption this editor could not
       // report (an unreadable status, a request that failed): release them first.
       this.push({ type: 'focus', focused: false });
       this.push({ type: 'focus', focused: true });
     } else if (wasActive && !active) {
+      // Focus left the view or a control request is in flight while the worker still takes
+      // input: the game must release what it holds.
       this.keys.clear();
       this.buttons.clear();
-      // Focus left the view or a control request is in flight while the worker still takes
-      // input: the game must release what it holds. Paused, suspended, stopped or
-      // unreadable: the worker released input itself, or nothing can be sent.
-      if (next.accepting) this.push({ type: 'focus', focused: false });
-      else this.drop();
+      this.push({ type: 'focus', focused: false });
+    } else if (!wasAccepting && !active) {
+      // The worker gives the game focus whenever it starts taking input (Play starting or
+      // resuming, the window coming back). Another panel has focus, so the game has not.
+      this.push({ type: 'focus', focused: false });
     }
     this.schedule();
   }
