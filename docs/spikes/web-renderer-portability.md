@@ -54,3 +54,14 @@ audio and runtime. No job, required context or full per-PR build was added.
 These are CPU tests and compile evidence. No browser, GPU, window or rendering
 acceptance was executed, and no shader, display transform or appearance changed.
 Complete browser integration and device/performance gates remain open.
+
+## Main102 integration
+
+Reviewed source `593d0a0` merged actual main102 `8bd9a96` without conflicts as
+`c8f6ce1`. All ten non-STATUS reviewed source/evidence hashes remain unchanged.
+The integrated graph again passes actual default wasm32 library compilation,
+36 native CPU tests (18 GPU cases remain ignored), all-target Clippy, 12 policy
+tests, actionlint, formatting and conventions. No browser or GPU was launched.
+The separate optional cooked-output implementation is not included here.
+[Independent review](evidence/web-renderer-root-review.json) and
+[integrated validation receipt](evidence/web-renderer-main102-integration.json).
