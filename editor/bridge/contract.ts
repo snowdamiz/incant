@@ -238,9 +238,16 @@ export type ProviderState = (
 };
 
 export type AgentState =
-  | { readonly status: 'unavailable'; readonly reason: string }
+  | { readonly status: 'unavailable'; readonly reason: string; readonly code?: AgentUnavailableCode }
   | { readonly status: 'idle' }
   | { readonly status: 'running'; readonly conversation: string };
+
+/**
+ * Why the agent cannot take a request, for hosts that say. `refreshing` is a short hold
+ * while the session is re-read after an account, allowance or history change. Older and
+ * fixture hosts omit it; the UI then infers what it can.
+ */
+export type AgentUnavailableCode = 'loading' | 'signed-out' | 'refreshing' | 'transport' | 'unread' | 'exhausted';
 
 /** Native session metadata. Provider credentials/configuration never cross this boundary. */
 export type AgentApprovalMode = 'auto' | 'destructive' | 'always';

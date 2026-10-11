@@ -142,7 +142,7 @@ describe('native project agent budget', () => {
     calls.length = 0;
     expect(await bridge.dispatch({ type: 'agent.budget.set', maxTokens: cap })).toEqual({ ok: true });
     expect(calls).toEqual([
-      { name: 'engine_execute', args: { commands: [{ op: 'set_agent_budget', settings: { max_tokens: cap } }], description: 'Set project agent token cap', expectedRevision: 7 } },
+      { name: 'engine_execute', args: { commands: [{ op: 'set_agent_budget', settings: { max_tokens: cap } }], description: 'Set agent token allowance', expectedRevision: 7 } },
       { name: 'engine_agent_read', args: { afterVersion: 1 } },
     ]);
     expect(bridge.getSnapshot().projectAgentBudget).toEqual({ maxTokens: cap });
@@ -390,6 +390,26 @@ describe('native project agent budget', () => {
     expect(bridge.getSnapshot().projectAgentBudget).toBeUndefined();
     expect(bridge.capabilities).not.toContain('agent.budget.set');
     expect(JSON.stringify(bridge.getSnapshot())).not.toContain('secret');
+  });
+
+  it('names why the agent is held: refreshing through a cap edit, exhausted after it, signed out', async () => {
+    let engine = project(100);
+    let current = session(100, 40);
+    const write = deferred<EngineRead>();
+    const bridge = await ready(async <T>(name: string) => {
+      if (name === 'engine_read') return engine as T;
+      if (name === 'engine_execute') return await write.promise as T;
+      return wire(current, engine.revision) as T;
+    });
+    expect(bridge.getSnapshot().agent).toEqual({ status: 'idle' });
+    const editing = bridge.dispatch({ type: 'agent.budget.set', maxTokens: 10 });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'unavailable', code: 'refreshing' });
+    engine = project(10, 8); current = session(10, 40, 2);
+    write.resolve(engine);
+    expect(await editing).toEqual({ ok: true });
+    expect(bridge.getSnapshot().agent).toEqual({ status: 'unavailable', code: 'exhausted', reason: 'The project’s agent token allowance is used up.' });
+    bridge.updateProvider({ status: 'not-connected', provider: 'openai' });
+    expect(bridge.getSnapshot().agent).toMatchObject({ status: 'unavailable', code: 'signed-out' });
   });
 
   it('preserves independently measured usage through account changes', async () => {

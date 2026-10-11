@@ -426,7 +426,7 @@ function fields(value, keys) {
 }
 const budgetInvalidResponse = ()=>({
         code: 'engine.invalid-response',
-        message: 'The native project agent token cap is invalid. Refresh the project to retry.'
+        message: 'The project’s agent token allowance is invalid. Refresh the project to retry.'
     });
 function record(value) {
     return value !== null && typeof value === 'object' && !Array.isArray(value) && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
@@ -948,31 +948,40 @@ class NativeBridge {
         };
         if (!this.read) return {
             status: 'unavailable',
-            reason: 'Wait for the project to load.'
+            reason: 'Wait for the project to load.',
+            code: 'loading'
         };
         if (this.providerIsPending() || this.provider.status !== 'connected') return {
             status: 'unavailable',
-            reason: 'Connect an OpenAI account to use the agent.'
+            reason: 'Connect an OpenAI account to use the agent.',
+            code: this.providerIsPending() ? 'refreshing' : 'signed-out'
         };
         if (this.agentError) return {
             status: 'unavailable',
-            reason: this.agentError.message
+            reason: this.agentError.message,
+            code: 'transport'
         };
         if (!this.agentSession) return {
             status: 'unavailable',
-            reason: 'The native agent session has not been read yet.'
+            reason: 'The native agent session has not been read yet.',
+            code: 'unread'
         };
         if (!this.agentVerified || !this.agentBudgetReady()) return {
             status: 'unavailable',
-            reason: 'Refresh the native agent session after account or project settings changes.'
+            reason: 'The agent session has not caught up with a recent account or project change.',
+            code: 'refreshing'
         };
         if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return {
             status: 'unavailable',
-            reason: 'The native agent session token allowance is exhausted.'
+            reason: this.exhaustedReason(),
+            code: 'exhausted'
         };
         return {
             status: 'idle'
         };
+    }
+    /** Scoped to where the allowance belongs: the project's authored cap, or an older host's session. */ exhaustedReason() {
+        return this.read && projectAgentBudget(this.read).status === 'ready' ? 'The project’s agent token allowance is used up.' : 'This agent session’s token allowance is used up.';
     }
     agentFields() {
         return {
@@ -1102,7 +1111,7 @@ class NativeBridge {
                 approval: request.approval ?? 'destructive'
             };
             if (!validAgentRequest(turnRequest)) return reject('agent.invalid-request', 'Enter a nonempty prompt up to 16 KiB and a model name up to 128 bytes.');
-            if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', 'The native agent session token allowance is exhausted.');
+            if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', this.exhaustedReason());
             this.agentStarting = true;
             const generation = ++this.agentGeneration;
             this.publishAgent();
@@ -1292,14 +1301,14 @@ class NativeBridge {
             ok: false,
             error: {
                 code: 'schema.invalid',
-                message: 'Enter a nonnegative safe integer for the project agent token cap.'
+                message: 'Enter a whole number of tokens from 0 to 9,007,199,254,740,991.'
             }
         };
         if (budgetEdit && !this.capabilities.includes('agent.budget.set')) return {
             ok: false,
             error: {
                 code: 'unsupported',
-                message: 'This host does not expose project agent token cap editing.'
+                message: 'This host cannot change the project’s agent token allowance.'
             }
         };
         const importing = command.type === 'asset.import';
@@ -1358,7 +1367,7 @@ class NativeBridge {
                             }
                         }
                     ],
-                    description: 'Set project agent token cap',
+                    description: 'Set agent token allowance',
                     expectedRevision: previous.revision
                 });
             } else if (command.type === "history.undo" || command.type === "history.redo") {
@@ -1398,7 +1407,7 @@ class NativeBridge {
                 if (budgetEdit && cap.status === 'ready' && cap.maxTokens !== command.maxTokens || read.project.id !== previous.project.id || read.revision < previous.revision || this.read && read.project.id === this.read.project.id && read.revision < this.read.revision) {
                     throw {
                         code: 'engine.stale',
-                        message: 'The project changed while updating its agent token cap. Refresh and retry.'
+                        message: 'The project changed while saving the agent token allowance. Try again.'
                     };
                 }
             }

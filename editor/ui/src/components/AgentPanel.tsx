@@ -45,12 +45,13 @@ export function agentPaneResizable(snapshot: BridgeSnapshot | null): boolean {
 /**
  * The host holds new requests only while it re-reads the agent session after a change
  * (an allowance edit, Undo or Redo, an account read): signed in, no transport error, a
- * session to read and allowance left. The contract has no reason code for it, so it is
- * recognised by what is absent. It normally lasts one read; the pane keeps the composer
- * and says "Updating…" instead of swapping in a note and back.
+ * session to read and allowance left. A host that names why it is unavailable is
+ * believed; for older hosts it is recognised by what is absent. It normally lasts one
+ * read; the pane keeps the composer and says "Updating…" instead of swapping in a note.
  */
 export function agentRefreshing(snapshot: BridgeSnapshot | null): boolean {
   if (!snapshot || snapshot.agent.status !== 'unavailable' || isNotInEditorReason(snapshot.agent.reason)) return false;
+  if (snapshot.agent.code !== undefined && snapshot.agent.code !== 'refreshing') return false;
   if (snapshot.provider.status !== 'connected' || snapshot.agentError || !snapshot.agentSession) return false;
   const allowance = allowanceOf(snapshot);
   return allowance !== null && !allowance.exhausted;

@@ -302,6 +302,7 @@ describe('Changing the allowance', () => {
     expect(field().getAttribute('aria-invalid')).toBeNull();
     expect(field().getAttribute('aria-describedby')).toBe(note()!.id);
     expect(line()).toBeNull();
+    await waitFor(() => expect(statusLine()).toBe('Token allowance not saved: Project revision changed.'));
     type('300001');
     expect(within(pane()).queryByText(error.message)).toBeNull();
     expect(host.commands).toEqual([{ type: 'agent.budget.set', maxTokens: 300_000 }]);
@@ -512,6 +513,17 @@ describe('While the agent applies a change', () => {
     expect(host.commands).toEqual([{ type: 'agent.budget.set', maxTokens: 300_000 }]);
   });
 
+  it('believes a host that names why the agent is unavailable', () => {
+    const reason = 'The native agent session has not been read yet.';
+    const host = allowanceHost({ budget: 250_000, session: session(6_532, 250_000), agent: { status: 'unavailable', reason, code: 'unread' } });
+    expect(header()).toBe('Unavailable');
+    expect(within(pane()).getByText(reason)).toBeTruthy();
+    expect(screen.queryByLabelText('Message to the agent')).toBeNull();
+    host.update({ agent: { status: 'unavailable', reason: REFRESH_REASON, code: 'refreshing' } });
+    expect(header()).toBe('Updating…');
+    expect(screen.getByLabelText('Message to the agent')).toBeTruthy();
+  });
+
   it('keeps a successful save when the session refresh after it fails', async () => {
     const refresh = vi.fn(() => Promise.resolve());
     const host = allowanceHost({ budget: 100_000, agent: { status: 'unavailable', reason: EXHAUSTED_REASON }, session: session(100_000, 100_000) }, { refreshAgent: refresh });
@@ -584,7 +596,7 @@ describe('Allowance on the real native bridge (mocked IPC)', () => {
     enter();
     await waitFor(() => expect(line()?.textContent).toBe('150,000 of 1,000,000 tokens used'));
     expect(calls.filter((call) => call.name !== 'viewport_bounds')).toEqual([
-      { name: 'engine_execute', args: { commands: [{ op: 'set_agent_budget', settings: { max_tokens: 1_000_000 } }], description: 'Set project agent token cap', expectedRevision: 7 } },
+      { name: 'engine_execute', args: { commands: [{ op: 'set_agent_budget', settings: { max_tokens: 1_000_000 } }], description: 'Set agent token allowance', expectedRevision: 7 } },
       { name: 'engine_agent_read', args: { afterVersion: 1 } },
     ]);
     await waitFor(() => expect(header()).toBe('Ready'));
