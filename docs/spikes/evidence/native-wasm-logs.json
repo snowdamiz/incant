@@ -1,0 +1,248 @@
+{
+  "kind": "local-native-wasm-committed-logging",
+  "base_commit": "39f5e40a793e57757af9ae79cb6a5a1ec27369d1",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "author": "astra",
+  "machine": {
+    "architecture": "arm64",
+    "os": "macOS26.6",
+    "build": "25G72",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1"
+  },
+  "contract": {
+    "namespace": "incant_log_v1",
+    "import": "write",
+    "opcode": 17,
+    "signature": "(epoch:i64,level:i32,ptr:i32,len:i32)->()",
+    "levels": [
+      "debug",
+      "info",
+      "warn",
+      "error"
+    ],
+    "message_bytes": 1024,
+    "update_entries": 64,
+    "update_bytes": 16384,
+    "retained_entries": 1024,
+    "retained_bytes": 262144,
+    "maximum_accepted_tick": 9007199254740991,
+    "publication": "after guest return and complete accepted numeric/structural transaction",
+    "history": "retained prefix; saturating dropped counter; preserved on successful development reload",
+    "public_native_session_report": "existing logs.entries/logs.dropped through SessionVm static observer; hidden after terminal failure"
+  },
+  "validation": [
+    {
+      "environment": {
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-native-target",
+        "INCANT_WASM_BUNDLE": "/tmp/incant-wasm-logging-conformance-001/complete-bundle",
+        "INCANT_RUST_SDK_GUESTS": "/tmp/incant-wasm-logging-conformance-001/sdk-guests",
+        "INCANT_FLIPBOOK_GUEST": "/tmp/incant-wasm-logging-conformance-001/inputs/flipbook-game.wasm"
+      },
+      "command": "./tools/cargo test --offline --locked --profile ci -j2 -p incant_wasm_runtime -p incant_wasm_dev -p incant-module --features incant_wasm_dev/static-conformance",
+      "log": "conformance-003",
+      "result": "passed",
+      "tests": 57
+    },
+    {
+      "environment": {
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-native-target",
+        "INCANT_WASM_BUNDLE": "/tmp/incant-wasm-logging-conformance-001/complete-bundle",
+        "INCANT_RUST_SDK_GUESTS": "/tmp/incant-wasm-logging-conformance-001/sdk-guests",
+        "INCANT_FLIPBOOK_GUEST": "/tmp/incant-wasm-logging-conformance-001/inputs/flipbook-game.wasm"
+      },
+      "command": "./tools/cargo test --offline --locked --profile ci -j2 -p incant_script --features static-module log_tests::",
+      "log": "quickjs-001",
+      "result": "passed",
+      "tests": 8
+    },
+    {
+      "environment": {
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-native-target",
+        "INCANT_WASM_BUNDLE": "/tmp/incant-wasm-logging-conformance-001/complete-bundle",
+        "INCANT_RUST_SDK_GUESTS": "/tmp/incant-wasm-logging-conformance-001/sdk-guests",
+        "INCANT_FLIPBOOK_GUEST": "/tmp/incant-wasm-logging-conformance-001/inputs/flipbook-game.wasm"
+      },
+      "command": "./tools/cargo clippy --offline --locked --profile ci -j2 -p incant_wasm_runtime -p incant_wasm_dev -p incant-module -p incant_script --features incant_wasm_dev/static-conformance --all-targets -- -D warnings",
+      "log": "clippy-001",
+      "result": "passed"
+    },
+    {
+      "command": "python3 -m unittest tools.tests.test_wasm_sdk tools.tests.test_wasm2c_prepare tools.tests.test_wasm2c_shipping tools.tests.test_wasm_metadata",
+      "log": "python-002",
+      "result": "passed",
+      "tests": 16
+    },
+    {
+      "command": "./tools/cargo fmt --all -- --check",
+      "log": "fmt-001",
+      "result": "passed"
+    },
+    {
+      "command": "python3 tools/generate_wasm_sdk.py --check",
+      "log": "generated-001",
+      "result": "passed"
+    },
+    {
+      "command": "python3 tools/check_runtime_dependencies.py incant_runtime incant_script incant_wasm_runtime incant_game_runtime incant_wasm_player --features incant_script/static-module",
+      "log": "dependencies-001",
+      "result": "passed"
+    }
+  ],
+  "logs": {
+    "runtime-001": {
+      "path": "/tmp/incant-wasm-logs-runtime-001.log",
+      "sha256": "c6868cf3f677ec3ee011a00f514d945e83cc941be992ea7156a1931abb0c3757"
+    },
+    "cook-001": {
+      "path": "/tmp/incant-wasm-logs-cook-001.log",
+      "sha256": "1c4abe6254b35bd5af4f3a7ee62cfc82adb78cff06562ba9ffa40119cbad7665"
+    },
+    "prepare-001": {
+      "path": "/tmp/incant-wasm-logs-prepare-001.log",
+      "sha256": "16a6fd1e21824abd8a9c3f04476664183a2290ff649b18e091a7bccf2b4b0c21"
+    },
+    "extend-001": {
+      "path": "/tmp/incant-wasm-logs-extend-001.log",
+      "sha256": "3f0c57be6fd1adbb15f2656771278bead9434997e8b7ae0fc574f581d86a378f"
+    },
+    "conformance-001": {
+      "path": "/tmp/incant-wasm-logs-conformance-001.log",
+      "sha256": "e33c60945c04ce17e213c0108a8abc2d55c51bc6d2d06f256e5782839430c620"
+    },
+    "conformance-002": {
+      "path": "/tmp/incant-wasm-logs-conformance-002.log",
+      "sha256": "536a5943fbbbf1b1504c052e8eb7c748d5ed91b3f5f0c979fa7968b66d4ee707"
+    },
+    "conformance-003": {
+      "path": "/tmp/incant-wasm-logs-conformance-003.log",
+      "sha256": "0c3056c85ab90a64990fa9e32e4c06624ee8abb30df1fa5ff49b762eff618b2c"
+    },
+    "quickjs-001": {
+      "path": "/tmp/incant-wasm-logs-quickjs-001.log",
+      "sha256": "9a5acbe051a3c8e54744ccfd9a4c97ec874b78141eb3f3bc2281620d5de8868e"
+    },
+    "clippy-001": {
+      "path": "/tmp/incant-wasm-logs-clippy-001.log",
+      "sha256": "af1b9a16388ccbda20b6e4c3cef864229775ffadaf97e674bf7eb87327c82a98"
+    },
+    "python-002": {
+      "path": "/tmp/incant-wasm-logs-python-002.log",
+      "sha256": "542b10ee0a9603298bb304707d964d338359d21da9d1fc6fc513476f85a36e18"
+    },
+    "fmt-001": {
+      "path": "/tmp/incant-wasm-logs-fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "generated-001": {
+      "path": "/tmp/incant-wasm-logs-generated-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dependencies-001": {
+      "path": "/tmp/incant-wasm-logs-dependencies-001.log",
+      "sha256": "83781cd210db9a44948e0960bd2ab7054ce0a257438f487dc18a5e74233432cc"
+    }
+  },
+  "source_sha256": {
+    "crates/incant_runtime/src/logging.rs": "cf79e3315433aa790fd7d7017f88c01839ce11c856d149f72a36f6e880436a73",
+    "crates/incant_wasm_dev/tests/logs.rs": "04003320b0730d2c4c7a5993e447c4384a44453482a7fb9c0d95ce142f3d53d8",
+    "crates/incant_wasm_runtime/fixtures/log-session.wat": "063dc1d6821fc7a54675194f60c5821e6dc6032c142efca1af8eb8d1b7de5419",
+    "crates/incant_wasm_runtime/fixtures/log-start.wat": "e69c6292405ad5d9a4539b174d03b26b3f7b457c6289c11c57e56f865fced381",
+    "crates/incant_wasm_runtime/fixtures/logs.wat": "8391d098212522d0957dd5144f5272e01e374a07fa7711971434ad029604b1aa",
+    "crates/incant_wasm_runtime/src/logging.rs": "48a22e82ffa13e80b42eba78a5cd6cb40bc63c6e9682adc1dc6f2ceb77f8d9c1",
+    "crates/incant_wasm_runtime/tests/logs.rs": "3ff00ca2cb8ccddd1b6034af79040069c1427c11674fc18d1a4e8ac8788e06af",
+    "docs/spikes/native-wasm-logs.md": "a5568fc2704b1ff40aebd6c7d2127a1de634fb180b84bf18fd30ee4bc74a3535",
+    "Cargo.lock": "7bbd9006ca514936941d72772f8daeda94a48eecd5b22416239a4a191593b49b",
+    "STATUS.md": "67036ee2016f89bb70afc952528ba26f6f2661c4ffd1f152c5d62a06cf39e270",
+    "crates/incant_runtime/Cargo.toml": "b21f3bd60eeb1046b969f3d85e6d606793521784d23c7a3ab507133af7456f50",
+    "crates/incant_runtime/src/lib.rs": "4197d5a46c8f8b8b10dff359889c91ebf02dea7b9dfc921db9a973237cc048a7",
+    "crates/incant_script/src/logging.rs": "0f6f407e68d61776e1d9d7204ba7352c48ca3dbf1ff46a33af6b9d64ab623608",
+    "crates/incant_script/src/program.rs": "e2c8ba901a59605fe8bec25a3b86a48f6942468fec55cbcae37a392f95fd28b5",
+    "crates/incant_wasm_abi/src/lib.rs": "41f51f322b42229669451f5147035a2d90a0ac2b69345d5e41dc2c4336eef655",
+    "crates/incant_wasm_dev/Cargo.toml": "779221d6513c77358e2f0139b631b3c9ec5137c829e51cc751db776519a1a304",
+    "crates/incant_wasm_dev/src/generated.rs": "dbb3d520e1353de201f2a9769904f973e56c1046d8ebf098fcfb1326d640795c",
+    "crates/incant_wasm_dev/src/host.rs": "5022dc71a0f38f4a8095e6b730c3107dc59905a4dfa3a0a7c2938bbed5eaf31b",
+    "crates/incant_wasm_dev/tests/rust_sdk.rs": "dbe396b3e259ae7f017eda40626584a5ac450c30c953e2fa095e5b51abc686f1",
+    "crates/incant_wasm_runtime/c/generated.h": "c215d567bed335c7506c94c44da1ab1badb368ef5f98b0420dbd419c9394d129",
+    "crates/incant_wasm_runtime/c/generated.inc": "3dd92f675ac09e83f0eff3a59461ea0f6d7f2522d88e87c4e8d14d10101c136d",
+    "crates/incant_wasm_runtime/src/capability.rs": "2fa96d01602b087ebe1b192e4c7c74389260231b80f69cedc49b57de176b429f",
+    "crates/incant_wasm_runtime/src/compiled.rs": "7279a344faa33d280ca153e7289a2f2334b64b52ea2364771e3c12132611b0fe",
+    "crates/incant_wasm_runtime/src/generated.rs": "ae9cb1ecd3a9b1caf202f028c69d6bf2c759cb3a1593a6561ecf9cd683da4b6b",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "46b0ba34aa7be4df61f878e963ecf67f9c3b41c2e63447520d6b1035cfa5d435",
+    "crates/incant_wasm_runtime/src/lib.rs": "ba333a29b25d55a679f897871d42acbe23fedbf38cdc7b6c09b6a8c6d323fc2f",
+    "sdk/abi/native-v1.json": "ea5d289f27a6970b60d4eba896497e388c881ef2f4326d8ede57912a7789b99c",
+    "sdk/rust/README.md": "a0f5791692eb3e70d3ce6e4998d2a4417631bb0678f38bf75c632b709afb8a1b",
+    "sdk/rust/fixtures/failure.rs": "356f178e87f0cd39c509d7f40031576b3a86346391c635913264f2a08fb0971f",
+    "sdk/rust/samples/gameplay.rs": "9411bf6aca2e77c8136186aa3df8a8a98509701dc4a0ab0f456211409d668ab0",
+    "sdk/rust/src/lib.rs": "116f60ef4b86bd4ed5ed6637e92374c14a474ec54981c7762e2a89ef14761630",
+    "sdk/rust/src/raw.rs": "4f5df838aa74061e0fc98cf665b9717e94b75469611323401bd04e9202f06180",
+    "sdk/rust/src/tick.rs": "9273a8712e8c5da9797af0927fa41dbc60b26142953e2ce0e3bdc75cb973d388",
+    "tools/probes/shipping-wasm2c.py": "cc0761b5ed735eccbce26aa611154349d99223e6e6710b29eef4e8faa601ec27",
+    "tools/tests/test_wasm_sdk.py": "514a44bc47efb31b961794a9f4947a0c27634d121afcf8f771fd182006082ab1",
+    "tools/wasm_abi.py": "19519a9cc2a8dbfb41198b618aeea28805a965e4b0ce2befbc40e59010135bcd"
+  },
+  "artifacts": [
+    {
+      "path": "/tmp/incant-wasm-logging-prepare.py",
+      "sha256": "a2f2499241f1a90ea4cade25d3b76e2080badd9fc2b2fc9ec90e4924836e842f"
+    },
+    {
+      "path": "/tmp/incant-wasm-logging-extend.py",
+      "sha256": "f4ec6c1d4db68a563696fec3759cd2b57549fdab4e803110bd7ef928358a6bf0"
+    },
+    {
+      "path": "/tmp/incant-wasm-logging-conformance-001/prepare.json",
+      "sha256": "ff10bf4a01d7c43a2f3ca2a962bc13e8363875efa7f088798525f34bf30b0b0e"
+    },
+    {
+      "path": "/tmp/incant-wasm-logging-conformance-001/manifest.json",
+      "sha256": "d4e142738cc270a2b380661a401e704a7a7210f65c3b259940ff1c4240b1d461"
+    },
+    {
+      "path": "/tmp/incant-wasm-logging-conformance-001/extend.json",
+      "sha256": "22f070059fe94932f67e8b178f2677de3496648d33a85015dff52cab4ccd5727"
+    },
+    {
+      "path": "/tmp/incant-wasm-logging-conformance-001/complete-manifest.json",
+      "sha256": "f3998fd3f0e3dab435986a8fa041772991c61c5ea969b1e0298c0efc9a24324c"
+    },
+    {
+      "path": "/tmp/incant-wasm-logs-graph-001.json",
+      "sha256": "df921b136b920cc14f40de5b75a05bc3598840347974746e213cc3058437d23a"
+    },
+    {
+      "path": "/tmp/incant-wasm-logs-source-freeze-001.json",
+      "sha256": "234e453d111d9342888bbea5ff98adbd7817e07e0ccae38880378bad6cc849ef"
+    },
+    {
+      "path": "/tmp/incant-wasm-logs-source-freeze-002.json",
+      "sha256": "6e8473713b7dae5491baab64771682933180449d98423c7fbe10a5898e1e86c0"
+    }
+  ],
+  "prepared_guests": {
+    "reused_initial": 44,
+    "final": 45,
+    "additional": "existing trusted flipbook parity guest; no original44 module changes",
+    "wabt": "1.0.42",
+    "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240",
+    "prepare_helpers": "trusted fixed repository Rust/WAT only; SDK sources/compiler and actual Wasm digests recorded by prepare.json"
+  },
+  "historical_attempts": [
+    {
+      "log": "conformance-001",
+      "result": "test-only u16/u64 inference compile error; fixed explicit conversion before final run"
+    },
+    {
+      "log": "conformance-002",
+      "result": "missing existing INCANT_FLIPBOOK_GUEST conformance environment; added existing45th guest before final run"
+    }
+  ],
+  "dependency_receipt": "six shipping normal graphs omit Wasmtime/Cranelift/parser/cook even with dev/static conformance enabled; only new direct edges runtime->existing serde and dev tests->existing serde_json; package pins unchanged",
+  "inputs_frozen_during_builds": true,
+  "limitations": [
+    "local macOS arm64 only; Windows/Linux physical-device checks not executed",
+    "bounded allocated host logging; guest SDK remains no_std and allocation-free",
+    "no complete SDK/module build sandbox/session save/identity/device/performance/distribution gate",
+    "no account/provider/GPU/window or untrusted source build/runtime source compiler work"
+  ]
+}

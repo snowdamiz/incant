@@ -10,6 +10,7 @@ use incant_runtime::NativeWorld;
 /// Static `incant_v1` numeric/structural and `incant_input_v1` read-only snapshot
 /// capabilities use the same accepted native input timeline. Additive
 /// `incant_flipbook_v1` exposes bounded committed playback and queued controls.
+/// `incant_log_v1` publishes copied primitive diagnostics only after acceptance.
 // This startup value is consumed immediately, never retained in a collection
 // or on the tick path. Boxing CompiledScript would add a second transient heap
 // allocation before the persistent SessionVm allocation.
@@ -55,7 +56,7 @@ impl SessionVm {
         match self {
             Self::Bytecode(host) => Ok(host.logs()?),
             #[cfg(feature = "static-module")]
-            Self::Static(_) => Ok(&crate::logging::NO_MODULE_LOGS),
+            Self::Static(host) => Ok(host.logs()?),
         }
     }
 

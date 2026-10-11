@@ -1,0 +1,100 @@
+{
+  "reviewer": "astra",
+  "recorded_at": "2026-10-11T22:40:56.571239+00:00",
+  "baseline": "f6389647dffd51f89011b5ae74e40dc7b768551e",
+  "frozen_source_manifest_sha256": "4d118b064a18bbdd4732f3271a09e08c6941758fdb00efa41ac09d65fccd7612",
+  "source_hashes": {
+    "crates/incant_runtime/src/save.rs": "f2d0658e3e6321a7237cc6661355e04cc9ba17c3abc15d2e1ce3e85c34b25cb8",
+    "crates/incant_script/build.rs": "7a7fe6b2c5ca36dd628c6d997d808465263b80e24e051141fb24fae5f52b0563",
+    "crates/incant_script/src/bindings.rs": "590769b2bd154f1bc0edc4e93fbb27a812b9446d3a1c3878ad77cf2549a418e7",
+    "crates/incant_script/src/checkpoint/codec.rs": "ddc1322207964e9dedaed0b541f689c2022c16c32c24650452823d116c6a78ca",
+    "crates/incant_script/src/checkpoint/mod.rs": "b86aec9f9bbce2dc7423e4aa286d43cf6c2479e39f1bd8b36459adafdd6f87cd",
+    "crates/incant_script/src/checkpoint/tests.rs": "435c8c77c9a79182d0d48d5016838f8b9cafe228fc05f3802a1690e467ba5957",
+    "crates/incant_script/src/compiled.rs": "9357e2c8ad48ea609a81328d04d358285d8d643095b00490c039c35e39def853",
+    "crates/incant_script/src/compiler.rs": "9e74b56a9681d30b97bffd6e06f45ac6c90a30f8100825d0fe7e9541707cffa8",
+    "crates/incant_script/src/harden.js": "7924408ee14592d4ec675b3e3aba9ec488778e9f7abddae2774135c0f3f98aa1",
+    "crates/incant_script/src/lib.rs": "f813d7a35728674e3ee61587da42685ca39b0ce746056b3c0272c1036e0c9578",
+    "crates/incant_script/src/navigation_tests.rs": "e83ac8dced60545c0dd0d1cb3d1f15fe1cc24e0f12459e96bbcfc8b7903e5001",
+    "crates/incant_script/src/persistence.rs": "03f2e613f28538bf89e42bee7349fcb46475a9c8cb0a2dc934b4eba0aa6c5252",
+    "crates/incant_script/src/persistence/tests.rs": "6117d0cae13807aa7a3d28ee1b7c6ed8f672bca16b8385dbbf6766a59a966ec4",
+    "crates/incant_script/src/persistence/value.rs": "cb3eed3acbaa2b28962fdc9800d120a51125218c49246edc77c5274cfc413b2a",
+    "crates/incant_script/src/schedule.rs": "f74707a71f120d7e1c4ab8aaebc7d86bd91af1e4c3ae07ae9d56be65b0d1621f",
+    "crates/incant_script/src/session.rs": "33d524e17071c151d53b251c744bc16aa14cb47feb7f1fce103624161a46819c",
+    "sdk/ts/src/native.d.ts": "80ff92658d98479ef219b035b1da463e603cec3a2f6f7624731d6af3b4ce93e3",
+    "tools/probes/native-session-checkpoint.py": "b80787e8eb648f427818064427ba85186aac729041991d51d8b4d379d5f735e4",
+    "tools/probes/native-session-checkpoint/Cargo.toml": "0a7e132c86cb54c9ee1cc13637b34dbf7872a9f6b99e2b6854503262e2fc4b03",
+    "tools/probes/native-session-checkpoint/build.rs": "9033041c6a6ea4708a4c57b4f2ecb783182aaa544f2ae9e4ab449f36e889c3c1",
+    "tools/probes/native-session-checkpoint/src/behavior.ts": "1671cf90827d798301b9209e14cf634ccc94c30ecbdc8758cf3da2a58f269afb",
+    "tools/probes/native-session-checkpoint/src/main.rs": "fbde6d0014e6f5c391549afaeb950975e7c95b4db351b3875a9cd9e264b7d90f"
+  },
+  "verdict": "accepted for native ordinary-load bytecode checkpoints and explicitly opted-in typed persistent state; no actionable source findings",
+  "reviewed": [
+    "Engine JS wrapper retains helper functions as traced JS closures; Rust native callbacks capture only native state and release borrows across guest traps",
+    "Versioned finite typed state, per-source/live-instance scope, aggregate quotas and expired authority; changed-key overlay publishes with accepted numeric/structural/timer transaction",
+    "Explicit opt-in promises VM globals/closures are ephemeral; restore instantiates trusted build-supplied code, never executable save bytes",
+    "Codec framing, aggregate section limits, sorted unique keys/IDs, finite values, depth/node/byte bounds and native timer schedule constraints",
+    "Actual trusted initial cooked scene, code/runtime fingerprint, origin/scene/rate/immutable localization comparisons before module initialization; live replacement atomic on all failures",
+    "Retired attachment and stable-ID reuse tracking; new world identity after replacement; neutral ordinary-load input policy, no fabricated replay",
+    "Existing physics/audio/static-module guards remain closed; legacy world-only restore compatibility preserved by shared guard"
+  ],
+  "validation": {
+    "tests_passed": 319,
+    "tests_failed": 0,
+    "tests_ignored": 0,
+    "test_groups": 45,
+    "clippy": "four affected packages all targets",
+    "static_module": "compiler-disabled compile pass",
+    "sdk_generators_fmt_graph": "pass",
+    "logs": {
+      "incant-session-checkpoint-final-dependencies.log": {
+        "path": "/tmp/incant-session-checkpoint-final-dependencies.log",
+        "sha256": "88313ae25c02211b7ad3926a18e880ab811f4bca1d25f5728e59fe901a8b7cff"
+      },
+      "incant-session-checkpoint-final-sdk.log": {
+        "path": "/tmp/incant-session-checkpoint-final-sdk.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "incant-session-checkpoint-final-tests.log": {
+        "path": "/tmp/incant-session-checkpoint-final-tests.log",
+        "sha256": "fd0f0255c8f6e96564640ffcfd54df6455583d93289c5016f46c763438b9008d"
+      },
+      "incant-session-checkpoint-final-conventions.log": {
+        "path": "/tmp/incant-session-checkpoint-final-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "incant-session-checkpoint-final-clippy.log": {
+        "path": "/tmp/incant-session-checkpoint-final-clippy.log",
+        "sha256": "20154d2aecf26c1b9b9fdb9314f9cd8d872204e8fd2da6210b0fd6c1881e21d7"
+      },
+      "incant-session-checkpoint-final-bridge.log": {
+        "path": "/tmp/incant-session-checkpoint-final-bridge.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "incant-session-checkpoint-final-generated.log": {
+        "path": "/tmp/incant-session-checkpoint-final-generated.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "incant-session-checkpoint-final-fmt.log": {
+        "path": "/tmp/incant-session-checkpoint-final-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "incant-session-checkpoint-final-static.log": {
+        "path": "/tmp/incant-session-checkpoint-final-static.log",
+        "sha256": "85a7d31b93d8786fd4a54bcaf5ee00e67967f82a678ee3eb82be858d2f3fe326"
+      }
+    },
+    "fresh_process_report_sha256": "27d8aadeec4c21db610b9b3b00176f40076f4478022aef9eb72b33aa95061e84",
+    "fresh_process_player_sha256": "55a0fa626ea37ef674eecbac8ecde464ca3c64f1e43d69682bdc769588831caa",
+    "fresh_processes_successful": 4,
+    "corruption_refusals": 1,
+    "matched_final_save_sha256": "2fcf8a7879d7fac7db3684c86491d77673dacc3a3308cfaf1c8649b27d00c871",
+    "scope": "Actual authored TS, trusted embedded code; copied source/build storage removed before execution; original repo/cache retained"
+  },
+  "limitations": [
+    "CI-profile local correctness, not shipping/device performance or whole-process allocation proof",
+    "No arbitrary VM heap/closure persistence, physics solver or audio playback restoration",
+    "No static-Wasm state save ABI or GameSession/export load route yet",
+    "Input resets to neutral; host must discard old queued events and reconnect devices; not exact input replay",
+    "Checksums and compatibility fingerprints do not authenticate save provenance"
+  ]
+}

@@ -71,6 +71,7 @@ jobs:
       - run: tools/platforms/web.sh
       - run: cargo check -p incant_audio --target wasm32-unknown-unknown --locked
       - run: cargo check -p incant_runtime --target wasm32-unknown-unknown --locked
+      - run: cargo check -p incant_render --lib --target wasm32-unknown-unknown --locked
       - run: node_modules/.bin/playwright-core install --with-deps chromium
       - run: python3 -m http.server 4188 --bind 127.0.0.1 --directory artifacts/web > /tmp/incant-web.log 2>&1 &
       - run: node tools/platforms/web-check.mjs

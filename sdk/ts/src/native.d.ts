@@ -159,6 +159,23 @@ export interface NativeLocalization {
    * localize().missing. No report accumulates mutable per-tick diagnostics. */
   report(request?: LocalizationReportRequest): LocalizationReport;
 }
+/** Explicit game-checkpoint data. No functions, accessors, symbols, class
+ * instances, sparse arrays, cycles or non-finite numbers. Returned data is
+ * deeply frozen; state.set copies bounded own data properties. */
+export type NativePersistentValue = null | boolean | number | string |
+  readonly NativePersistentValue[] | { readonly [key: string]: NativePersistentValue };
+export interface NativePersistentState {
+  /** Source state when omitted, otherwise one of this source's live instances.
+   * Missing data is null. Reads include this update's staged writes. */
+  get(entity?: NativeId): NativePersistentValue;
+  /** Replace data for the source/instance. Commits atomically with world/timers.
+   * At most 256 get/set calls and 1 MiB/65,536 transferred nodes per whole update;
+   * retained state across all sources is 1 MiB/65,536 nodes, depth at most 16.
+   * Active API invalid data/quota calls fail the tick even when caught. Functions
+   * expire after this source update; expired/wrong-source calls throw without
+   * poisoning the current source update. */
+  set(value: NativePersistentValue, entity?: NativeId): void;
+}
 export interface NativeContext {
   /** Authored attachments for this source, sorted by stable entity ID. The array
    * and initial props are deeply frozen. One callback per nonempty source runs
@@ -167,6 +184,8 @@ export interface NativeContext {
    * even when reusing an ID. Standalone behaviors receive an empty array.
    * Dynamic attachment, props replacement and legacy state hooks are unsupported. */
   readonly instances: readonly NativeInstance[];
+  /** Available only to behaviors explicitly declaring persistence version 1. */
+  readonly state: NativePersistentState;
   readonly flipbooks: NativeFlipbooks;
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;
@@ -187,6 +206,14 @@ export interface NativeContext {
   readonly log: (message: string, level?: NativeLogLevel) => void;
 }
 export interface NativeBehavior {
+  /** Explicit ordinary game-load contract, NOT a VM/closure continuation.
+   * Module initialization runs again on load. Module globals and closures are
+   * ephemeral: all gameplay state needed after load must be in context.state or
+   * native world components. Native source-scoped timer data is restored; timer
+   * events are still handled by update. Non-opted-in active behaviors prevent
+   * checkpoint creation. Static modules/physics/audio remain unsupported by the
+   * initial native-session checkpoint API. */
+  readonly persistence?: { readonly version: 1 };
   /** Synchronous only; no promises, deferred work or non-undefined return. */
   update(context: NativeContext): undefined;
 }

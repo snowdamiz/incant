@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Opt-in native session checkpoints — locally verified
+
+Bytecode behaviors can explicitly opt into bounded typed persistent data and
+ordinary-load checkpoints containing committed world state, live authored
+attachments and source-scoped timers. Trusted initial scene/program bindings are
+checked before VM execution; invalid replacement preserves the live session.
+Integrated main101 passes 324 affected tests/doctests, scoped Clippy/contracts and four successful fresh
+source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
+bytes match uninterrupted execution. Module globals/closures remain explicitly
+ephemeral and physical input restarts neutral. Physics/audio/static modules,
+complete GameSession/player/export loading and durable file publication remain
+unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+
 ## Shared agent project access — locally verified
 
 The agent loop can share the editor command bus without holding its mutex during
@@ -340,8 +353,12 @@ with primitive Unicode validation, fixed per-update limits, bounded retained
 history and dropped-message counts. Native/game observers hide logs after
 terminal failure; the source-free player reports them once at completion.
 585 ordinary workspace tests and 47 fresh CPU-mode process controls pass.
-[Evidence](docs/spikes/native-script-logs.md). This is the QuickJS path; Wasm logs,
-full native SDK, session saves and editor/headless Play migration remain open.
+[QuickJS evidence](docs/spikes/native-script-logs.md). Additive native Wasm logs
+now share its data/history contract and reach the actual static NativeSession
+observer. 57 combined actual-host/runtime/SDK tests, eight QuickJS logging cases,
+scoped Clippy and 16 generator/preparer cases pass locally.
+[Wasm evidence](docs/spikes/native-wasm-logs.md). Full native SDK, session saves,
+platform/device conformance and remaining editor/headless integration stay open.
 
 
 The reviewed native script/input stack is now tested together with the static
@@ -397,6 +414,16 @@ applicable checks passed; its actual-main tree equals the tested head. [Integrat
 - Deliver the remaining editor/AI/content/export/network/services/game production
   and release scope in PLAN.md. Phase 1 progress is not Engine 1.0 or Driftwake
   release completion.
+
+## WebGPU renderer compile portability
+
+The default renderer library compiles for wasm32 with explicit browser
+NonSend graph ownership and copied GPU error diagnostics. Desktop Send/Sync
+resources and typed errors remain intact. Local 36 CPU tests, scoped Clippy,
+formatting, actionlint and 12 workflow-policy cases pass; 18 GPU tests stayed ignored.
+The existing web checkpoint job now checks the renderer library. Browser
+rendering acceptance and device/performance gates remain open.
+[Evidence](docs/spikes/web-renderer-portability.md).
 
 ## Deferred gates and human-owned actions
 

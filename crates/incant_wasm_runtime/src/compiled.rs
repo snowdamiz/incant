@@ -102,6 +102,10 @@ impl StaticModule {
     pub fn is_failed(&self) -> bool {
         self.capability.is_failed()
     }
+    /// Bounded committed prefix; a failed instance exposes no live diagnostics.
+    pub fn logs(&self) -> Result<&crate::NativeLogs, StaticError> {
+        Ok(self.capability.logs()?)
+    }
     pub fn tick(&mut self, world: &mut NativeWorld, dt: f64) -> Result<(), StaticError> {
         let epoch = self.capability.begin(world, dt)?;
         self.run(world, dt, epoch)

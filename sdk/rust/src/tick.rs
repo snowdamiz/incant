@@ -58,6 +58,33 @@ impl<'tick> Tick<'tick> {
     fn ready(&mut self) -> Result<()> {
         self.check(Ok(()))
     }
+    /// Copy a primitive UTF-8 diagnostic into this update's bounded log buffer.
+    /// Publication waits for acceptance; history retains a prefix and counts drops.
+    /// An invalid message poisons this callback even if its error is ignored.
+    pub fn log(&mut self, message: &str, level: abi::LogLevel) -> Result<()> {
+        self.ready()?;
+        self.check(if message.len() > abi::LOG_MAX_MESSAGE_BYTES {
+            Err(Error::Bounds)
+        } else if message
+            .chars()
+            .any(|c| c.is_control() && c != '\n' && c != '\t')
+        {
+            Err(Error::Malformed)
+        } else {
+            Ok(())
+        })?;
+        // SAFETY: initialized UTF-8 bytes borrowed through this synchronous copy;
+        // the host independently checks the epoch, range, level and all quotas.
+        unsafe {
+            raw::incant_log_v1_write(
+                self.epoch,
+                level as i32,
+                message.as_ptr() as usize as i32,
+                message.len() as i32,
+            );
+        }
+        Ok(())
+    }
     pub fn chunk_count(&mut self) -> Result<usize> {
         self.ready()?;
         // SAFETY: scalar import only. Host checks active epoch/call quota.

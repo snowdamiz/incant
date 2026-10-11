@@ -1,10 +1,14 @@
 //! Resource preparation errors remain typed even at the renderer's boxed boundary.
+#[cfg(not(target_arch = "wasm32"))]
+pub type PreparationError = wgpu::Error;
+#[cfg(target_arch = "wasm32")]
+pub use crate::web_error::PreparationError;
 #[derive(Debug, thiserror::Error)]
 pub enum ResourceError {
     #[error("cooked output shader rejected: {0}")]
     CookedOutput(&'static str),
     #[error("renderer initialization failed: {0}")]
-    Preparation(#[source] wgpu::Error),
+    Preparation(#[source] PreparationError),
     #[error("{0} pipeline variant was not prepared during renderer initialization")]
     UnpreparedPipeline(&'static str),
     #[error("native GPU device was lost; the rendering host must stop")]

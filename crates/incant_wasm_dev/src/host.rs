@@ -102,11 +102,15 @@ impl DevModuleHost {
     pub fn is_failed(&self) -> bool {
         self.store.data().capability.is_failed()
     }
+    /// Bounded committed prefix; a failed instance exposes no live diagnostics.
+    pub fn logs(&self) -> Result<&incant_wasm_runtime::NativeLogs, ModuleError> {
+        Ok(self.store.data().capability.logs()?)
+    }
     /// A failed candidate leaves the current instance untouched. Successful
     /// replacement resets guest globals/memory; no VM-state migration is claimed.
     pub fn reload(&mut self, bytes: &[u8]) -> Result<(), ModuleError> {
         let mut candidate = Self::new(bytes)?;
-        candidate.store.data_mut().capability = self.store.data().capability.replacement();
+        candidate.store.data_mut().capability = self.store.data_mut().capability.replacement();
         *self = candidate;
         Ok(())
     }

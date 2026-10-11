@@ -8,6 +8,7 @@ pub use audio_controls::AudioControl;
 mod binary;
 mod localization;
 mod localization_binary;
+pub mod logging;
 pub use incant_localization::{
     CalendarDate, DateLength, LocaleSettings, LocalizationReport, LocalizationReportRequest,
     LocalizeRequest, LocalizedText,

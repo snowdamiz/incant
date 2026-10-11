@@ -7,6 +7,8 @@ pub use flipbooks::{
     MAGIC as FLIPBOOK_MAGIC, MAX_BYTES as MAX_FLIPBOOK_BYTES, ROW_BYTES as FLIPBOOK_ROW_BYTES,
 };
 mod input;
+mod logging;
+pub use incant_runtime::logging::{LogLevel, NativeLog, NativeLogs};
 pub use input::{MAGIC as INPUT_MAGIC, MAX_BYTES as MAX_INPUT_BYTES};
 mod compiled;
 pub use compiled::{Import, ModuleExports, StaticError, StaticModule};
