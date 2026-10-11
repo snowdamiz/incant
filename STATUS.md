@@ -21,12 +21,15 @@ visual work, and Astra owns correctness and integration.
 The native session/bridge now connect streamed turns, approval/cancel, bounded
 account-scoped conversation and real edits to the editor's shared bus. Account
 receipt fences cover reconnect/switch and delayed approvals; repeated browser
-opening runs off the admission path. The integrated scope passes 109 tests and
-four-package Clippy. Review found native Play state is currently dropped between
-turns: a persistent native worker and a two-turn regression are required before
-publication. Provider invalidation events and Claude's chat/Play UI are integrating
-separately; no live editor/provider or completed Phase 3 gate is claimed.
-[Evidence](docs/spikes/native-editor-agent.md).
+opening runs off the admission path. One dedicated worker now retains the native
+Play host and conversation across same-account/project turns without moving its
+QuickJS state between threads. Actual cross-turn query, failed candidate and
+replacement controls pass alongside cancellation/shutdown/panic checks: 117 tests,
+four-package all-target Clippy and independent review. Provider invalidation
+events and Claude's chat/Play UI are integrating separately; no live editor/provider
+or completed Phase 3 gate is claimed.
+[Binding evidence](docs/spikes/native-editor-agent.md),
+[persistent owner evidence](docs/spikes/persistent-native-agent-host.md).
 
 ## Agent conversation context — locally verified
 

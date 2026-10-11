@@ -1,6 +1,6 @@
 use super::*;
 use incant_agent::{
-    Agent, AgentError, NoViewport, Usage,
+    AgentError, Usage,
     provider::{Completion, Provider},
 };
 use incant_cmd::{Actor, Command, CommandBus};
@@ -150,29 +150,19 @@ impl Provider for Patch {
 fn job(
     turn: TurnContext,
     connection: Connection,
-    context: Arc<Mutex<Context>>,
+    owner: owner::Client,
     bus: Arc<Mutex<crate::project::LoadState>>,
-    provider: &mut dyn Provider,
+    mut provider: impl Provider + Send + 'static,
 ) -> TurnOutcome {
-    let mut agent = Agent {
-        budget: turn.budget.clone(),
-        approval: turn.request.approval.mode(),
-        max_steps: 4,
-        max_output_tokens: 1024,
-    };
-    let result = worker::execute(
-        &mut agent,
-        &turn,
-        &context,
-        ContextKey::Fixture(connection),
-        &bus,
-        &mut NoViewport,
-        provider,
-    );
-    TurnOutcome {
-        budget: agent.budget,
-        result,
-    }
+    owner.run(turn, move |state, turn| {
+        state.run_with(
+            turn,
+            ContextKey::Fixture(connection),
+            bus,
+            None,
+            &mut provider,
+        )
+    })
 }
 
 #[test]
@@ -191,7 +181,7 @@ fn streamed_approval_commits_to_existing_editor_bus_and_supports_undo() {
                     c,
                     h,
                     owned,
-                    &mut Patch {
+                    Patch {
                         calls: 0,
                         expected_revision: 0,
                         seen,
@@ -249,7 +239,7 @@ fn concurrent_manual_edit_while_approval_waits_cannot_be_overwritten() {
                     c,
                     h,
                     owned,
-                    &mut Patch {
+                    Patch {
                         calls: 0,
                         expected_revision: 0,
                         seen: Arc::new(Mutex::new(vec![])),
@@ -322,7 +312,7 @@ fn context_is_retained_per_account_and_cleared_on_account_change() {
                         c,
                         h,
                         owned,
-                        &mut Patch {
+                        Patch {
                             calls: 1,
                             expected_revision: 0,
                             seen: inputs,

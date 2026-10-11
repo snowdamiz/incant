@@ -30,8 +30,9 @@ every actual run, independently of session IDs which restart when the app opens.
 
 Saved projects bind project-confined imports and a concrete native Play host.
 The host cooks authored scripts into a disposable native world. Scenes without
-scripts use the editor's trusted no-op fallback. The retained world lives within
-one agent turn; a later turn must start a fresh Play run before querying it.
+scripts use the editor's trusted no-op fallback. A dedicated thread now retains
+the native host across turns in the same account/project scope; later queries
+observe the last accepted native world without rerunning it.
 Unsaved projects have no file/import/native Play capability. Authored viewport
 capture is lazy and real; it is not a captured native gameplay frame.
 
@@ -48,13 +49,17 @@ assembly, inline image/diff history, turn-specific revert, skills and the full l
 evaluation gate remain outstanding. The Claude chat interface and actual native
 window/live-account acceptance are integrated and recorded separately.
 
-## Review checkpoint
+## Review checkpoint and retained-owner correction
 
-This is an unpublished implementation checkpoint. Independent review accepted the
-local lifecycle and account/conversation/accounting boundaries, but identified a
-P2 gap in the current per-turn native host lifetime: the next request loses the
-previous successful Play state. The tool contract promises retained state. A
-persistent native worker and real two-turn play/query plus failed-candidate
-preservation regression are required before this integration is published. The
-bounded browser-reopen fix also requires the separately reviewed provider hint
-listener update before a complete native build. Neither issue is waived.
+The initial unpublished checkpoint passed 109 scoped tests and independent
+lifecycle/account review, but retained native Play only within one turn. That P2
+was corrected by the dedicated owner described in
+[persistent-native-agent-host.md](persistent-native-agent-host.md). All 109 prior
+checks plus eight owner regressions pass, with independent exact-source review
+and four-package all-target Clippy. Failed candidates preserve the accepted world
+across turns; account/project scope changes cannot reuse it.
+
+The separately reviewed provider invalidation-hint listener still needs union
+integration, and the Claude UI/native live-account acceptance remains separate.
+These checks do not claim completed WebView dispatch, appearance or live-provider
+evidence.

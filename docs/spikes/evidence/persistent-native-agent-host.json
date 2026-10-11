@@ -1,0 +1,61 @@
+{
+  "base": "6c149b8f7fccb925337c03b9fc9d6325a3d17092",
+  "source_sha256": {
+    "editor/app/src/agent.rs": "d0a9209be484f3e1c96cd0da5186f691f5947c43c5ccf628d7f560820eb4535a",
+    "editor/app/src/agent/worker.rs": "bf60d3d1933cef1f761600bbded872a4cb666fb4e43e7e2f3c375c89b75b1ce5",
+    "editor/app/src/agent/owner.rs": "22bff7e6aca85c7926bf5da1ccf5c3aea7135e33eb074db9681cb5fb3b52a7b6",
+    "editor/app/src/agent/owner/tests.rs": "3a40b7af1644373e0b7029214be1aa8bf9494ba511a494e13a08c527df5900b2",
+    "editor/app/src/agent/tests.rs": "72dbdb334d0c648fbea9241867585ef0d9f0be2560d7b61e82d0a8cc1214e1df"
+  },
+  "review": {
+    "review": "accepted",
+    "findings": [],
+    "source_sha256": {
+      "editor/app/src/agent.rs": "d0a9209be484f3e1c96cd0da5186f691f5947c43c5ccf628d7f560820eb4535a",
+      "editor/app/src/agent/worker.rs": "bf60d3d1933cef1f761600bbded872a4cb666fb4e43e7e2f3c375c89b75b1ce5",
+      "editor/app/src/agent/owner.rs": "22bff7e6aca85c7926bf5da1ccf5c3aea7135e33eb074db9681cb5fb3b52a7b6",
+      "editor/app/src/agent/owner/tests.rs": "3a40b7af1644373e0b7029214be1aa8bf9494ba511a494e13a08c527df5900b2",
+      "editor/app/src/agent/tests.rs": "72dbdb334d0c648fbea9241867585ef0d9f0be2560d7b61e82d0a8cc1214e1df"
+    },
+    "scope": "Persistent thread-affine native Host ownership, bounded owner requests, Session waiter physical-worker semantics, context/account/project/root scoping, shutdown and panic accounting.",
+    "evidence": "Reviewed all production changes and eight added regressions, including actual retained native world query/failing candidate/replacement and independent thread-exit observation. Owner constructs/uses/drops non-Send VM state on its dedicated thread; no unsafe Send or GUI-thread joins. Account and project checks precede dispatch without overlapping locks.",
+    "limits": [
+      "117-test result reported by owner; source matched and test logic independently reviewed. Integration/Clippy pending.",
+      "No live provider, UI pixel or performance claim."
+    ]
+  },
+  "review_report_sha256": "a014bd9bcb10d3c4ff181d70cf3ffa486931caa46f648ac5c590b6bff9cada1e",
+  "validation": {
+    "profile": "ci",
+    "jobs": 2,
+    "target_directory": "/tmp/incant-agent-native-target",
+    "test_command": "./tools/cargo test --locked --profile ci -j2 -p incant_agent -p incant_agent_native -p incant_editor",
+    "passed": 117,
+    "failed": 0,
+    "ignored": 1,
+    "result_groups": 14,
+    "clippy_command": "./tools/cargo clippy --locked --profile ci -j2 -p incant_agent -p incant_agent_native -p incant_headless -p incant_editor --all-targets -- -D warnings",
+    "clippy_exit": 0,
+    "normal_dependency_guard_roots": [
+      "incant_runtime",
+      "incant_script",
+      "incant_game_runtime"
+    ],
+    "normal_dependency_guard_exit": 0,
+    "fmt_conventions_diff_check": "passed"
+  },
+  "logs": {
+    "/tmp/incant-persistent-agent-host-tests.log": "7c75f332d02638bc894586c9bc908d84fd333ae267937e4f6b7c9ec6d70f3d60",
+    "/tmp/incant-persistent-agent-host-tests-final.log": "4f50829ca3c8ce5032b46348bfcc49a1f73eeb9b5decf5cbe1dd702f64ed2795",
+    "/tmp/incant-persistent-agent-host-clippy.log": "aca50633a11348a0e4696d1eb85a5c0b2ec2dd05f5ce6deacc46b1ecaf82d21c",
+    "/tmp/incant-persistent-agent-host-dependencies.log": "767e0e806a5f69ff31a63f14123494d8e990b00b7fcbc0720bd5a29798594e74"
+  },
+  "initial_failure": "Only new test fixture: recording offset zero failed before intended gamepad validation; changed to legal offset one. Final complete run passed.",
+  "input_changes": "Only five editor agent implementation/test files; no Cargo manifest/lock, provider, main, IPC or shipped runtime source changes.",
+  "limitations": [
+    "Local deterministic provider fixtures; no live account or credential use.",
+    "No GPU, screenshots, native window, rendered-pixel or performance/phase gate evidence.",
+    "Provider hint transport and UI/live probe integrate separately.",
+    "Provider cancellation remains cooperative; no event-thread join or forced provider-thread termination."
+  ]
+}
