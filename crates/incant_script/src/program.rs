@@ -7,9 +7,8 @@ use incant_runtime::NativeWorld;
 /// build-produced trust boundary; static modules contain reviewed native function
 /// descriptors, never pointers or executable bytes deserialized from a project.
 ///
-/// The current static `incant_v1` ABI exposes numeric/structural world capabilities
-/// only. The session still validates and advances input, but the Wasm guest cannot
-/// read input until a separate bounded input ABI is implemented.
+/// Static `incant_v1` numeric/structural and `incant_input_v1` read-only snapshot
+/// capabilities use the same accepted native input timeline.
 // This startup value is consumed immediately, never retained in a collection
 // or on the tick path. Boxing CompiledScript would add a second transient heap
 // allocation before the persistent SessionVm allocation.
@@ -66,7 +65,7 @@ impl SessionVm {
         match self {
             Self::Bytecode(host) => Ok(host.tick_with_input(world, dt, input)?),
             #[cfg(feature = "static-module")]
-            Self::Static(host) => Ok(host.tick(world, dt)?),
+            Self::Static(host) => Ok(host.tick_with_input(world, dt, input)?),
         }
     }
 }

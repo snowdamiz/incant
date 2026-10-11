@@ -19,7 +19,7 @@ visual work, and Astra owns correctness and integration.
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. Merged into main after all 17 hosted checks passed. | Claude native acceptance passed the five requested UI requirements; reimport no-op feedback is being corrected separately. [Evidence](docs/spikes/editor-release-union.md). |
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
-| Native WebAssembly | Shared bounded capability ABI serves Wasmtime and wasm2c. PR #64 passed actual Windows /Od + /O2, Linux and macOS static conformance and fresh packaging. The optional static-module native game session passes a fresh local composed proof. | Full guest input/SDK, static-module renderer/session saves, composed-player hosted coverage and device gates remain. [Composition evidence](docs/spikes/native-wasm-game-session.md). |
+| Native WebAssembly | Shared bounded capability ABI serves Wasmtime and wasm2c. PR #64 passed actual Windows /Od + /O2, Linux and macOS static conformance and fresh packaging. PR #67 composes static modules with the native game session. The versioned input ABI now drives real guest motion/spawns in both hosts and a fresh local packaged game proof. | Complete SDK, static-module renderer/session saves, new input/composed-player hosted results and device gates remain. [Input ABI evidence](docs/spikes/native-wasm-input-abi.md). |
 | CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
 
 Three Astra extra-high subagents own implementation/integration work in isolated
@@ -96,8 +96,12 @@ review; concurrent native reviews coordinate foreground ownership.
   growth remains unsupported. A native x64 MSVC /Od baseline and /O2 candidate
   passed actual hosted conformance and a fresh optimized PE/PDB proof on PR #64.
   Static modules also compose with native input acceptance, physics and offline
-  scene audio: 66 scoped cases and 32 fresh local process checks pass. The guest
-  input ABI and complete session/renderer/device evidence remain open.
+  scene audio. The new `incant_input_v1` bounded snapshot preserves raw controls,
+  gestures and named actions; 102 combined tests/doctests and 34 fresh local
+  process checks pass. The 3,933,488-byte packaged macOS player responds to delayed
+  accepted input with delayed native spawning and retains the exact audio clock.
+  Hosted input results, complete SDK and session/renderer/device evidence remain
+  open. [Input ABI](docs/spikes/native-wasm-input-abi.md).
   [Static game session](docs/spikes/native-wasm-game-session.md).
   [Development host](docs/spikes/development-wasm-host.md),
   [static host](docs/spikes/shipping-wasm2c.md),

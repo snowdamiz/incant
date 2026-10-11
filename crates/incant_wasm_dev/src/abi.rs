@@ -15,6 +15,18 @@ fn invoke(mut caller: Caller<'_, State>, epoch: i64, call: Call) -> Result<i32> 
 }
 pub fn install(linker: &mut Linker<State>) -> Result<()> {
     linker.func_wrap(
+        "incant_input_v1",
+        "snapshot_len",
+        |c: Caller<'_, State>, e: i64| invoke(c, e, Call::InputLen),
+    )?;
+    linker.func_wrap(
+        "incant_input_v1",
+        "read_snapshot",
+        |c: Caller<'_, State>, e: i64, ptr: i32, capacity: i32| {
+            invoke(c, e, Call::ReadInput { ptr, capacity })
+        },
+    )?;
+    linker.func_wrap(
         "incant_v1",
         "chunk_count",
         |c: Caller<'_, State>, e: i64| invoke(c, e, Call::ChunkCount),

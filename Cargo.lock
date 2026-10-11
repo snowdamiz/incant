@@ -4266,6 +4266,7 @@ dependencies = [
 name = "incant_wasm_dev"
 version = "0.0.1"
 dependencies = [
+ "incant_input",
  "incant_runtime",
  "incant_script",
  "incant_types",
@@ -4297,6 +4298,7 @@ name = "incant_wasm_runtime"
 version = "0.0.1"
 dependencies = [
  "cc",
+ "incant_input",
  "incant_runtime",
  "incant_types",
  "thiserror 2.0.21",
