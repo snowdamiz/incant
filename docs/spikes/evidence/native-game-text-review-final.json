@@ -1,0 +1,134 @@
+{
+  "kind": "independent bounded font-fix verification; read-only root source, private copied-source CPU probes",
+  "reviewer": "Astra; authorized Sol 6.1 Extra High",
+  "result": "accepted within requested nonvisual font-admission/fallback/resource scope; no remaining actionable finding",
+  "root_checkout": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant",
+  "base_head": "2816ecde29bf4dd0bb058e46212cd836c1bb816c",
+  "initial_review": {
+    "path": "/tmp/incant-game-text-agent-review.json",
+    "sha256": "2a9d469477cf530e106d53479abb3b69143ba9c334db6cc849fcc04082c6d484",
+    "source_manifest": "/tmp/incant-game-text-agent-review/reviewed-source.json",
+    "manifest_sha256": "d21e6a67f1e7241f3aabc9d5b533c1f52855bec50672ba7f748e983437cece14"
+  },
+  "final_reviewed_source": {
+    "manifest": "/tmp/incant-game-text-agent-review-final/reviewed-source.json",
+    "manifest_sha256": "7e1772ab5cb37ee23acc9c269af535354277c51ce387b80603d830c3cd88ba36",
+    "hashes": {
+      "Cargo.lock": "370a03ec7e0ec582e28a102de785028851a5f052e47efaf3a5c8bb8ffa17adca",
+      "crates/incant_text/Cargo.toml": "2ac16f0ddac0d6dc72bd32acd00df7df58a9cdd8fce1ebd7537c3fedb97293e7",
+      "crates/incant_text/src/fonts.rs": "a8eb58ae89a8a331cf81dc35e154b21240b550556c7b35bdcf765713e33b0524",
+      "crates/incant_text/src/layout.rs": "d274cde45aaeb884600712aac38ad1609ed2fc20d3a4f8f25d056b93cddf5263",
+      "crates/incant_text/src/lib.rs": "2343dce9914e9b89b144e99f731b4f678f74da85c7c1fe898cfdf4d1549e8cc8",
+      "crates/incant_text/tests/fonts/LICENSE": "5ec4347054089def6904da61d04f0360968f9ef36634b1fe007a5b6ec2f7aa96",
+      "crates/incant_text/tests/fonts/NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+      "crates/incant_text/tests/fonts/NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+      "crates/incant_text/tests/fonts/NotoSansHebrew.ttf": "3d4fef85b449ade4d165de982969374fa30b2a5fe7bc679f5a3f5bfc047fb703",
+      "crates/incant_text/tests/fonts/provenance.json": "dcf7c3810ec80ee28781a413985a1d2f65172fa63a95d5669ca0b1c6bd6bb664",
+      "crates/incant_text/tests/shaping.rs": "52c72e66cea8904b9a11ba8bdb1803b6573223c25d1e02b4b7e017572a4d61a2"
+    },
+    "unchanged_after_probes": true,
+    "delta_from_initial": [
+      "crates/incant_text/src/fonts.rs",
+      "crates/incant_text/tests/shaping.rs"
+    ]
+  },
+  "findings_closed": [
+    {
+      "initial": "Metadata-only named sfnt constructs then panics in shape.",
+      "final": "Identical1928-byte fixture is rejected by TextEngine::new as TextError::Font before shaping.",
+      "source_basis": "FontSystem.get_font validates and retains every actual rustybuzz face; malformed fallback faces are also checked. No metadata-only acceptance path remains."
+    },
+    {
+      "initial": "Italic-only face panics; bold first + regular second choosesID2.",
+      "final": "Identical italic-only and bold-first fixtures shape A with fontID1, without panic.",
+      "source_basis": "Bounded FaceInfo matching style/weight/stretch are normalized for the concrete-asset API; original source bytes and glyph/outlines remain untouched. Fixed family chain stays ordered."
+    },
+    {
+      "initial": "Decoded family-name records amplify646352-byte font to143507456 peak RSS.",
+      "final": "Identical fixture accepted without name decoding; peak RSS9256960, versus9093120 for baseline.",
+      "source_basis": "No load_font_source/parse_names/metadata clone; each FaceInfo gets only bounded private family and postscript strings plus Arc-owned bytes. Actual Font loader keeps name tables borrowed, not decoded."
+    }
+  ],
+  "private_repro": {
+    "path": "/tmp/incant-game-text-agent-review-final",
+    "target": "/tmp/incant-game-text-agent-review-target",
+    "probe_and_fixtures_identical_to_initial": true,
+    "artifact_hashes": {
+      "/tmp/incant-game-text-agent-review-final/Cargo.lock": {
+        "sha256": "0d91b974cad90b639d642ff7255e02e540bab657df81709202a323bc5df47ac0",
+        "bytes": 16079
+      },
+      "/tmp/incant-game-text-agent-review-final/Cargo.toml": {
+        "sha256": "6658ae8b7c441baf2a0164932b6fce925d9a64013d54ce656ad8551d5edc48e2",
+        "bytes": 287
+      },
+      "/tmp/incant-game-text-agent-review-final/bold.ttf": {
+        "sha256": "6baade2a2c3df86da389c56214bf2f5d2c8cf4a077b99cd7eab951e37e3b5384",
+        "bytes": 556216
+      },
+      "/tmp/incant-game-text-agent-review-final/italic.ttf": {
+        "sha256": "4742c697dad90f89b93cdae228038eafa5fe57f6407b9ffdfaa417fff3320a63",
+        "bytes": 556216
+      },
+      "/tmp/incant-game-text-agent-review-final/memory-amplified.log": {
+        "sha256": "62547be2a82edc4c93dab6134e5f657b7a5007cb501489275cd3f95078f807f4",
+        "bytes": 825
+      },
+      "/tmp/incant-game-text-agent-review-final/memory-regular.log": {
+        "sha256": "3be053f2e9affe4512ec86fa26170c975e423872d317f4746230faf72de8d606",
+        "bytes": 823
+      },
+      "/tmp/incant-game-text-agent-review-final/name-amplification.ttf": {
+        "sha256": "c670c9cbd177a288f7a9873a17b97649d5be4e9e0e9c8e89c4a958e16f3187f6",
+        "bytes": 646352
+      },
+      "/tmp/incant-game-text-agent-review-final/name-only.ttf": {
+        "sha256": "58763f0fa746d5025f229b91efe1528f2cd13e586e0f6452993409e0cc223b0a",
+        "bytes": 1928
+      },
+      "/tmp/incant-game-text-agent-review-final/regular.ttf": {
+        "sha256": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+        "bytes": 556216
+      },
+      "/tmp/incant-game-text-agent-review-final/repro.log": {
+        "sha256": "7ee74b32acec71b2d9e773bff4f534fa4a595d30055be5668854c0781e86d5c6",
+        "bytes": 468
+      },
+      "/tmp/incant-game-text-agent-review-final/reviewed-source.json": {
+        "sha256": "7e1772ab5cb37ee23acc9c269af535354277c51ce387b80603d830c3cd88ba36",
+        "bytes": 1216
+      },
+      "/tmp/incant-game-text-agent-review-final/src/bin/repro.rs": {
+        "sha256": "c57ef956ea97bc0650ec9a35aee8e32ad10bd9c61d825f8a611c429ca4864855",
+        "bytes": 1611
+      }
+    },
+    "commands": [
+      "PATH=/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:$PATH CARGO_TARGET_DIR=/tmp/incant-game-text-agent-review-target cargo run --offline --locked --bin repro -j2 > /tmp/incant-game-text-agent-review-final/repro.log 2>&1",
+      "/usr/bin/time -l /tmp/incant-game-text-agent-review-target/debug/repro regular > /tmp/incant-game-text-agent-review-final/memory-regular.log 2>&1",
+      "/usr/bin/time -l /tmp/incant-game-text-agent-review-target/debug/repro amplified > /tmp/incant-game-text-agent-review-final/memory-amplified.log 2>&1"
+    ],
+    "exit_status": "all0; foregroundexec completed; no live owned handle"
+  },
+  "memory_before_after": {
+    "units": "bytes; /usr/bin/time -l maximumresident setsize; separate unoptimized Mac processes; diagnostic only",
+    "initial_regular": 7979008,
+    "initial_amplified": 143507456,
+    "fixed_regular": 9093120,
+    "fixed_amplified": 9256960
+  },
+  "new_tests_reviewed_readonly": [
+    "metadata_without_a_loadable_shaping_face_is_refused_at_construction checks invalid primary and fallback faces.",
+    "concrete_asset_order_is_independent_of_style_weight_and_stretch_metadata checks single/paired styled first faces and bold Hebrew fallback before regular Hebrew.",
+    "shaping_does_not_require_or_decode_font_family_names checks identical geometry after name-table removal."
+  ],
+  "other_checks": "Shared layout/cache/paragraph code and all font/provenance bytes unchanged from initial reviewed manifest; no new source path or source-shaping semantic change.",
+  "limitations": [
+    "No root edits, formatting or commit; /tmp/incant-game-text-target not accessed.",
+    "No full-suite duplication; root chain29542 owns full numerical shaping tests/Clippy/wasm evidence.",
+    "No additional stress scope; same fixed fixtures/probe used byte-for-byte.",
+    "RSS results are diagnostic, not a shipping/mobile performance claim or guarantee over all supported fonts.",
+    "No visual/golden/raster/GPU/window/widget/IME/device/full gameUI acceptance.",
+    "Original private review sources/logs and Wasm7c66106 remain unchanged; only separate final copy compiled."
+  ]
+}
