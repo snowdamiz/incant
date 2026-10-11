@@ -126,3 +126,10 @@ require complete case coverage, matching adapter/source identity and successful
 test exits, then compare the raw bytes exactly before diagnosing any differences.
 Claude retains rendered-pixel acceptance.
 [Build/source receipt](evidence/cooked-output-readback-preparation.json).
+
+The test extension is frozen at `550b563` and independently accepted for this
+preparation-only scope. Its compiled source is unchanged;
+[review receipt](evidence/cooked-output-readback-review.json) and
+[exact commit, toolchain, feature/profile and copied-binary pairing](evidence/cooked-output-readback-binaries.json)
+are retained. No GPU grant, default enablement or equivalence claim follows from
+these CPU results.

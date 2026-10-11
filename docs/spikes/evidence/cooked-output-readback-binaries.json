@@ -1,0 +1,59 @@
+{
+  "commit": "550b5635ac04d47ea9eee2f8baacc25ae88b4652",
+  "implementation_base": "a8dd12e9612d20c412fbe5a4af05395047c665ea",
+  "original_manifest_sha256": "4f2939c6a25caabb141094906b0e1e0c8c713f382b32d4c0099fb57846fcde01",
+  "source_hashes": {
+    "Cargo.lock": "14ffe28d6b33c658bd5a3a621db25f14ed23a4b91ae007d7b1da048d589a0bf2",
+    "crates/incant_render/Cargo.toml": "c01cce44eb70a65d7f6a1589edd48209f4ccef5d2dd5e5a159c555e414a512db",
+    "crates/incant_render/build.rs": "33c550814e5c769fc8622fe28b9c9a26a73c2e58e8d4afdd14336e4d60efd5db",
+    "crates/incant_render/src/lib.rs": "23bc4e0aaa84411bd6cc89db25fb043bbf69a87ec50ef9fb31de1702edd0cf73",
+    "crates/incant_render/src/output.rs": "014d67ea6af999a9d1d2550ba96625037e019cec3f80b695920ed6a0ea9716f4",
+    "crates/incant_render/src/output/cooked.rs": "bb317225e7f2da32261d832d3d2c7cdc429c7b44854fb48e96834547660820b5",
+    "crates/incant_render/src/output/layout.rs": "609e17db021135c7f4ab49f4d74b782bb3aa2bfe32dee6548ee210133a46fc84",
+    "crates/incant_render/src/resource_error.rs": "e7dd1b4a5970d32f78ff01c6cf599d5753130902c4a5921eaa72e54bf03a2a78",
+    "crates/incant_render/tests/hdr_output/mod.rs": "394c3ee6a9ee295fe48764b66417a7082933191540c979b390dbe1b700f04d52",
+    "crates/incant_shader_cook/Cargo.toml": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+    "crates/incant_shader_cook/examples/output_bundle.rs": "567d7744d3bc31a9494296eb70a1952f43defe080848e97b1ee97bca351e550a",
+    "crates/incant_shader_cook/src/contract.rs": "c8956ae477c1e779cfe8ef5a6960a3950fff795849eb8d36bce917d1158c7515",
+    "crates/incant_shader_cook/src/emit.rs": "2da6ff21863ab62253c463449a592800f7a564d1b259c8b23f07030ca0aef596",
+    "crates/incant_shader_cook/src/lib.rs": "56df5f9b94a97aa7f1794d214e30583038199439da924481f36d42079a0342c1",
+    "crates/incant_shader_cook/src/manifest.rs": "88e6f5ae2a60345320463e7cfc7ebe335908a9f670c3ce2373c422948da6ca26",
+    "crates/incant_shader_cook/tests/output.rs": "6de04d9ef95f1d11d4b1239258504b57e33d7bc071da54aa3e03c9c0d6fd9bcd"
+  },
+  "rust_toolchain_toml_sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1",
+  "profile": "ci",
+  "test_target": "incant_render --lib",
+  "commands": {
+    "default": "./tools/cargo test --locked --profile ci -j2 -p incant_render --lib --no-run",
+    "cooked": "./tools/cargo test --locked --profile ci -j2 -p incant_render --features cooked-output --lib --no-run"
+  },
+  "binaries": {
+    "default": {
+      "path": "/tmp/incant-output-acceptance-binaries-v1/default-incant-render-tests",
+      "sha256": "7ab2bf2dd27b8c5b6ac734f4667877bbec6e5cf6b5e446cb8848a602847519cb"
+    },
+    "cooked": {
+      "path": "/tmp/incant-output-acceptance-binaries-v1/cooked-incant-render-tests",
+      "sha256": "5271c38c27b46f4850e3b2568e589ea2b936d67fbc298c05079c0f3baafe9d6a"
+    }
+  },
+  "build_logs": {
+    "default-build": {
+      "path": "/tmp/incant-output-acceptance-default-build.log",
+      "sha256": "841592ee5668e9a656b9671bf636874c042e12a557bbb46ff9b8d7bdc6c3d559"
+    },
+    "cooked-build": {
+      "path": "/tmp/incant-output-acceptance-cooked-build.log",
+      "sha256": "2ed2863b70f8a19eeee10d8d9c96efdbf4161d5838ddf6d2ab430514d5908862"
+    },
+    "clippy": {
+      "path": "/tmp/incant-output-acceptance-clippy.log",
+      "sha256": "92c7dba8395e1dcb56baa8273f1956be67cc524ccddbddc89f4425b9bcc69c7a"
+    }
+  },
+  "source_changed_after_build": false,
+  "gpu_executed": false,
+  "capture_count": 0,
+  "note": "Commit adds only docs/evidence around the exact compiled test-source hash394c3e; default and cooked executables are copied to distinct immutable paths. No backend/appearance acceptance yet."
+}
