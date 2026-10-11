@@ -3925,8 +3925,10 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "pollster",
  "serde",
  "serde_json",
+ "tao",
  "thiserror 2.0.21",
  "ulid",
 ]
