@@ -3,6 +3,8 @@
 //! Simulation failure creates no output. Output I/O itself is not atomic.
 use incant_assets_runtime::sha256;
 use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
+#[cfg(feature = "render-gpu")]
+mod gpu;
 mod session;
 use incant_input::InputReplay;
 use incant_runtime::{CookedScene, StableId};
@@ -77,7 +79,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         clips.push(ClipBinding::load(id, Path::new(&args[1]), &key)?);
     }
-    let mut game = Player::new(scene, embedded::load()?, actions, clips, rate, spatial)?;
+    let mut game = Player::new(
+        scene,
+        embedded::load()?,
+        actions,
+        clips,
+        rate,
+        spatial,
+        ticks,
+    )?;
     let mut output = vec![0.; frames as usize * 2];
     let mut offset = 0;
     for tick in 1..=ticks {

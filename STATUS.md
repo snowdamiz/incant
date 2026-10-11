@@ -1003,3 +1003,6 @@ development feature enabled; feature-disabled mobile/Wasm compilation passes.
 [Evidence](docs/spikes/development-wasm-host.md). The ABI deliberately copies
 columns and retains bounded numeric undo. Shipping wasm2c, browser/mobile
 execution, complete SDK conformance and device/performance gates remain open.
+## Source-free native offscreen GPU player (2026-10-10)
+
+The existing game player now has an explicit optional GPU mode using the real retained GPU host, preserving default nonvisual and explicit CPU modes. A fresh 7,388,160-byte shipping executable passes 28 launches after project/script/source/build removal on Apple M5 Pro / Metal, macOS 26.6: 120 accepted frames per successful run, changed first/final numerical readbacks, exact replay and matching physics/PCM/CPU poses. Scoped 34 ordinary + 3 actual GPU regressions, all three player Clippy configurations, 40 tools tests and graph/flag/symbol audits pass. This does not approve appearance, native surfaces, v5 sprites, offline shaders, phone/performance or phase gates. [Evidence](docs/spikes/native-game-gpu-player.md).
