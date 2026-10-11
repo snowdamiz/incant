@@ -1,8 +1,8 @@
 # Color mip roles
 
-Status: unpublished implementation integrated with reviewed PR81. Scoped CPU,
+Status: unpublished implementation integrated with reviewed PR81. Whole-workspace CPU,
 Clippy and the full renderer numerical GPU suite pass. Claude Opus 5.5 / Max
-appearance acceptance and integrated hosted checks remain pending. This is separate from the accepted PR77 generated-tangent correction.
+appearance review is accepted; integrated hosted checks remain pending. This is separate from the accepted PR77 generated-tangent correction.
 
 ## Defect and selected behavior
 
@@ -130,5 +130,13 @@ that serialized with the coordinator's independent build; no timing claim is mad
 and subsequent color builds will use a separate target.
 The integrated source is `02d1872f43a0aae7daf8df849f48ac0c9f442aff`; only STATUS
 required manual merge resolution. Exact logs and source hashes are recorded in
-[evidence/color-mip-roles-integrated.json](evidence/color-mip-roles-integrated.json). Claude0043 owns separate appearance acceptance. No phone, performance,
-GPU allocation budget or whole-engine completion claim is made.
+[evidence/color-mip-roles-integrated.json](evidence/color-mip-roles-integrated.json). The separate [Claude0043 report](../../handoffs/0043-color-mip-roles/result.md)
+accepts the scoped appearance delta at `8fe0c77`: 13 captures, 56 successful
+reaped children, no production changes or blocking finding. Seven unique engine
+frames and four labelled derived comparisons preserve exact hashes. Legacy-cache
+frames and fresh source-free replays are byte-identical to their controls.
+The review covers glTF/8-bit sources on one Mac; FBX role binding and HDR/odd/thin
+inputs retain their separate numerical test coverage. Both capture grants were
+removed before CPU-only report work. Formatting, generated conventions and the
+resolved native-window dependency guard also pass. No phone, performance, GPU
+allocation budget or whole-engine completion claim is made.
