@@ -166,7 +166,15 @@ class FreshSession:
             hashes = {str(p): sha(p) for p in filenames if p.is_file()}
             require(hashes, 'Target artifact files are missing')
             crate = artifact['target']['name'].replace('-', '_')
-            matches = [c for c in commands if c['crate'] == crate and c['features'] == sorted(artifact['features'])]
+            # A larger GPU graph can contain two versions with the same crate
+            # name/features. Join libraries using rustc's exact artifact suffix
+            # before accepting a unique command; package_id stays in the ledger.
+            matches = [c for c in commands if c['crate'] == crate
+                       and c['features'] == sorted(artifact['features'])
+                       and (artifact.get('executable') or (c['extra_filename'] and any(
+                           p.name.startswith(f'lib{crate}{c["extra_filename"]}.')
+                           or p.name.startswith(f'{crate}{c["extra_filename"]}.')
+                           for p in filenames)))]
             if artifact['fresh']:
                 require(not artifact.get('executable'), 'Every root player must compile freshly')
                 require(key in self.units, f'Unproven target artifact reuse: {crate}')

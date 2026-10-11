@@ -30,6 +30,24 @@ tick boundaries. It does not replace native-scene-audio or native-game proofs.
 Optional `incant_game_player/render-gpu` needs separate feature compilation and
 the actual source-deleted GPU proof; default workspace checks cannot certify it.
 
+The local follow-up adds `--four-proofs` to include the complete scene-audio and
+native-game `--gpu` commands, on the frozen PR80 source graph. Preparation follows
+the current macOS CI order: runtime, scene audio, GPU game, script/physics. Each
+generator prepares its own fixtures, compiles its own player, audits its resolved
+target units and packages its own matching symbols. Only then does the shared
+session remove all four authoring directories and the whole Cargo target before
+any packaged player is launched. Standalone command defaults and all existing
+execution/refusal assertions remain. The GPU graph's same-name dependency
+versions are joined by exact rustc artifact suffix as well as package, target,
+features, profile and file hashes; ambiguous joins still fail.
+
+The extension passes 106 tool tests. Its matched standalone/shared measurement
+is pending an exclusive local CPU/GPU interval. Public authoring-tool preparation
+is outside that interval, and both runs will use the same frozen tools and source
+revision. The four-proof extension is not enabled in CI, has no measured speed
+claim and does not use a persistent shipping target cache. The older two-proof
+numbers below apply only to their recorded source revision.
+
 The original commands passed locally on the same runtime sources in 78.82 and
 121.71 seconds, respectively. This is a local baseline with concurrent unrelated
 development builds, not a hosted or device performance result. Shared-session

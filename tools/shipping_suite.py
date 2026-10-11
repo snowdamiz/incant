@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the existing runtime and script/physics proofs in one fresh macOS session.
+"""Run shipping proofs in one fresh macOS session with a global deletion barrier.
 
 This is an opt-in local experiment until matched coverage and timing are reviewed.
 Standalone shipping.py and cooked-script.py commands remain supported.
@@ -24,6 +24,10 @@ def main():
     parser.add_argument('output', type=Path)
     parser.add_argument('--headless-binary', type=Path, default=ROOT / 'target/release/incant_headless')
     parser.add_argument('--cook-binary', type=Path, default=ROOT / 'target/release/examples/cook_scene')
+    parser.add_argument('--four-proofs', action='store_true',
+                        help='Also retain the complete scene-audio and native-game GPU proofs')
+    parser.add_argument('--audio-binary', type=Path, default=ROOT / 'target/release/examples/native_scene_audio')
+    parser.add_argument('--fixture-binary', type=Path, default=ROOT / 'target/release/examples/no_renderer_fixtures')
     args = parser.parse_args()
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -31,12 +35,27 @@ def main():
     compiler = run([rustc, '-vV'])
     target = re.search(r'^host: (.+)$', compiler, re.MULTILINE).group(1)
     session = FreshSession(ROOT, out / 'fresh-build', rustc, target, 'packed')
-    spec = importlib.util.spec_from_file_location('cooked_script_probe', ROOT / 'tools/probes/cooked-script.py')
-    script = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(script)
+    def load_probe(name):
+        spec = importlib.util.spec_from_file_location(name.replace('-', '_'), ROOT / f'tools/probes/{name}.py')
+        probe = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(probe)
+        return probe
+    script = load_probe('cooked-script')
     common = {'headless_binary': args.headless_binary, 'cook_binary': args.cook_binary}
     phases = [shipping.phases(argparse.Namespace(output=out / 'runtime', target=target, **common), session),
               script.phases(argparse.Namespace(output=out / 'script', physics=True, **common), session)]
+    probes = ['shipping.py', 'cooked-script.py --physics']
+    if args.four_proofs:
+        audio = load_probe('native-scene-audio')
+        game = load_probe('native-game')
+        # Match the ordinary CI order; only dependency artifacts created in this
+        # invocation may be reused. Every player and its symbol package is distinct.
+        phases[1:1] = [
+            audio.phases(argparse.Namespace(output=out / 'audio', **common), session),
+            game.phases(argparse.Namespace(output=out / 'game', gpu=True, render_input=True,
+                audio_binary=args.audio_binary, fixture_binary=args.fixture_binary, **common), session),
+        ]
+        probes = ['shipping.py', 'native-scene-audio.py', 'native-game.py --gpu', 'cooked-script.py --physics']
     begin = time.monotonic()
     try:
         for phase in phases:
@@ -47,7 +66,7 @@ def main():
                 raise ValueError('Unexpected additional shipping preparation phase')
         result = session.report()
         result.update(passed=True, elapsed_seconds=time.monotonic() - begin,
-                      probes=['shipping.py', 'cooked-script.py --physics'])
+                      probes=probes)
         (out / 'session.json').write_text(json.dumps(result, indent=2) + '\n')
         print(json.dumps({'passed': True, 'seconds': result['elapsed_seconds'], 'evidence': str(out / 'session.json')}))
     finally:

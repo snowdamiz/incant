@@ -75,6 +75,20 @@ class FreshShippingLedgerTests(unittest.TestCase):
             with self.subTest(command=command), self.assertRaises(ValueError):
                 self.record(command=command)
 
+    def test_same_crate_name_and_features_join_their_own_artifact_suffix(self):
+        second = self.output / 'libincant_runtime-456.rlib'
+        second.write_bytes(b'different package version')
+        other = dict(self.artifact, package_id='registry+example/runtime#2.0.0',
+                     filenames=[str(second)])
+        command = self.command + '\n' + self.command.replace('extra-filename=-123', 'extra-filename=-456')
+        lines = self.session.record(json.dumps(self.artifact) + '\n' + json.dumps(other), command)
+        self.assertEqual(len(lines), 2)
+        self.assertIn('extra-filename=-123', lines[0])
+        self.assertIn('extra-filename=-456', lines[1])
+        other['fresh'] = True
+        reused = self.session.record(json.dumps(other), '')
+        self.assertEqual(reused, [lines[1]])
+
     def test_missing_output_or_command_is_rejected(self):
         with self.assertRaisesRegex(ValueError, 'Missing or ambiguous'):
             self.record(command='')
