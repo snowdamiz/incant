@@ -4250,16 +4250,37 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_wasm_cook"
+version = "0.0.1"
+dependencies = [
+ "thiserror 2.0.21",
+ "wasm-encoder",
+ "wasmparser",
+ "wat",
+]
+
+[[package]]
 name = "incant_wasm_dev"
 version = "0.0.1"
 dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_wasm_runtime",
  "thiserror 2.0.21",
  "wasmparser",
  "wasmtime",
  "wat",
+]
+
+[[package]]
+name = "incant_wasm_runtime"
+version = "0.0.1"
+dependencies = [
+ "cc",
+ "incant_runtime",
+ "incant_types",
+ "thiserror 2.0.21",
 ]
 
 [[package]]

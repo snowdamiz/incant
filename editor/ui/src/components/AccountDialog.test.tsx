@@ -198,6 +198,37 @@ describe('ChatGPT account dialog', () => {
     await expectNoAxeViolations(document.body);
   });
 
+  it('recovers focus after a connected-to-connected account switch so Escape still closes', async () => {
+    const initial = PROVIDER_FIXTURES['signed-in-multi'];
+    const { bridge, requests, publish } = providerBridge(initial);
+    renderBridge(bridge);
+    const d = openDialog();
+    const useAccount = within(d).getByRole('button', { name: 'Use ada@example.com' });
+    useAccount.focus();
+    // Activation of the focused button models Enter; publish the native host's
+    // connected-to-connected result after the request has been accepted.
+    fireEvent.click(document.activeElement as HTMLElement);
+    await waitFor(() => expect(requests).toEqual([{ type: 'provider.switch', accountId: 'acct-fixture-1' }]));
+    publish(simulateProvider(initial, { type: 'provider.switch', accountId: 'acct-fixture-1' }));
+    expect(within(d).queryByRole('button', { name: 'Use ada@example.com' })).toBeNull();
+    expect(document.activeElement).toBe(within(d).getByRole('button', { name: 'Close' }));
+    fireEvent.keyDown(document.activeElement as HTMLElement, { key: 'Escape' });
+    expect(screen.queryByRole('dialog', { name: 'ChatGPT account' })).toBeNull();
+    expect(document.activeElement).toBe(chip());
+  });
+
+  it('clears a pending sign-out question when the host changes the active account', () => {
+    const initial = PROVIDER_FIXTURES['signed-in-multi'];
+    const { bridge, publish } = providerBridge(initial);
+    renderBridge(bridge);
+    const d = openDialog();
+    fireEvent.click(within(d).getByRole('button', { name: 'Sign out' }));
+    expect(within(d).getByRole('group', { name: /Sign out of studio@example.org/ })).toBeTruthy();
+    publish(simulateProvider(initial, { type: 'provider.switch', accountId: 'acct-fixture-1' }));
+    expect(within(d).queryByRole('group', { name: /Sign out of/ })).toBeNull();
+    expect(document.activeElement).toBe(within(d).getByRole('button', { name: 'Close' }));
+  });
+
   it('error: shows the exact host message and code, and retries', async () => {
     const { bridge, requests } = providerBridge(PROVIDER_FIXTURES.error);
     renderBridge(bridge);

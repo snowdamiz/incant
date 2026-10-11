@@ -327,6 +327,19 @@
   user-select: text;
 }
 
+/* A saved setting reimport cannot change (a sprite atlas is always color): the value in
+   the same raised box as the source path, with no control around it. */
+.asset-value {
+  display: flex;
+  align-items: center;
+  min-height: var(--field-height);
+  padding: 0 var(--space-3);
+  border-radius: 5px;
+  background: var(--color-bg-raised);
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+}
+
 /* The same chevron as a component header, so every disclosure reads alike. */
 .asset-ids > summary {
   display: flex;

@@ -1,0 +1,16 @@
+{
+  "upstream": "https://github.com/WebAssembly/wabt/tree/1.0.42/wasm2c",
+  "release": "1.0.42",
+  "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240",
+  "modified": false,
+  "files": {
+    "wasm-rt.h": "8905fa9c64101ca20702368d0202cd0172ea83a596c5568db135402f82fcde57",
+    "wasm-rt-impl.h": "dd8fbe19ba42258bb3a235017b82399c63fead4c932ad45197e77ca75b00d562",
+    "wasm-rt-impl.c": "2f14845b510f331e48ffc747304b34ccd80b19d91b67fa3a568bcf0ebfde5301",
+    "wasm-rt-mem-impl.c": "1deec12ce672fa17dcd35844a9f36b16b649c4eff3d984fcd1a62ea023ff9719",
+    "wasm-rt-mem-impl-helper.inc": "cb830e338448fafb4fa09a2013ecb11b45c6ff5ffd09eca3f72bffaf1cf63583",
+    "wasm-rt-impl-tableops.inc": "5debdc8ca347b7ca0fb763be3fdd3683e4824579f8f2eba84aa5de54ec040cd0"
+  },
+  "commit": "ff0ef7e0009402740c805a9744c09b05be063e48",
+  "license": "Apache-2.0; ../../licenses/Apache-2.0.txt"
+}

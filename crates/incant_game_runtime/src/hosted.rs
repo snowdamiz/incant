@@ -13,7 +13,9 @@ use std::{error::Error, fmt::Debug};
 /// Trusted native hosting implementation, not a project-supplied capability flag.
 /// `prepare` must check and retain compatible bindings for this exact world and
 /// reject unsupported declarations. `sync` must accept the committed frame or
-/// fail; successful CPU preparation does not imply GPU publication or rendering.
+/// fail. It may run repeatedly at the same tick for presentation-only refreshes;
+/// it must not advance gameplay or audio. Successful CPU preparation does not
+/// imply GPU publication or rendering.
 ///
 /// The session calls prepare before its VM/audio setup and retains the actual
 /// host. Caller-owned effects (including an already-created backend in Settings)
@@ -67,6 +69,12 @@ where
     }
     pub fn host(&self) -> Result<&H, H::Error> {
         Ok(&self.core.ready()?.host.0)
+    }
+    /// Re-present the committed world, including while suspended. No script,
+    /// physics, input application or audio advancement occurs. Error/unwind
+    /// destroys the complete session; submitted device effects cannot rewind.
+    pub fn refresh_host(&mut self) -> Result<(), H::Error> {
+        self.core.refresh_host()
     }
     pub fn poll_audio(&mut self) -> Result<(), H::Error> {
         self.core.poll_audio()
@@ -136,6 +144,11 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     }
     pub fn host(&self) -> Result<&H, H::Error> {
         Ok(&self.inner.core.ready()?.host.0)
+    }
+    /// Re-present committed state without advancing the offline sample clock,
+    /// transport, input or simulation. Host error/unwind is terminal.
+    pub fn refresh_host(&mut self) -> Result<(), H::Error> {
+        self.inner.core.refresh_host()
     }
     pub fn poll_audio(&mut self) -> Result<(), H::Error> {
         self.inner.core.poll_audio()

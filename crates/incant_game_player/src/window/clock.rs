@@ -2,6 +2,15 @@
 //! catch-up: excess elapsed ticks are counted and discarded, never simulated.
 use std::time::{Duration, Instant};
 pub const MAX_CATCH_UP: u128 = 4;
+/// Claim a bounded retry opportunity. Incoming OS events must not move a future
+/// deadline: a busy background window still needs periodic committed redraws.
+pub fn claim_retry(deadline: &mut Instant, now: Instant) -> bool {
+    if now < *deadline {
+        return false;
+    }
+    *deadline = now + Duration::from_millis(50);
+    true
+}
 pub struct Clock {
     rate: u32,
     last: Instant,
@@ -39,6 +48,23 @@ impl Clock {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn continuous_background_events_do_not_starve_pending_redraws() {
+        let start = Instant::now();
+        let mut retry = start + Duration::from_millis(50);
+        let mut presented = Vec::new();
+        // Every event requests another redraw. Throttling accepts at 50 ms
+        // intervals even though no quiet 50 ms period ever occurs.
+        for ms in 1..=210 {
+            if claim_retry(&mut retry, start + Duration::from_millis(ms)) {
+                presented.push(ms);
+            }
+        }
+        assert_eq!(presented, [50, 100, 150, 200]);
+        assert!(!claim_retry(&mut retry, start + Duration::from_millis(210)));
+        assert!(claim_retry(&mut retry, start + Duration::from_secs(1)));
+        assert!(!claim_retry(&mut retry, start + Duration::from_secs(1)));
+    }
     #[test]
     fn fractional_ticks_have_no_per_tick_rounding_drift() {
         let start = Instant::now();

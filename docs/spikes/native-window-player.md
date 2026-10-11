@@ -17,7 +17,9 @@ escapes an event callback. A failed accepted tick destroys the composite session
 submitted GPU work and device audio cannot be rolled back.
 
 - Physical sizes are bounded to 16–1920 by 16–1080 pixels, initially 640×480.
-  Zero/minimized surfaces defer work. Resizing invalidates the configuration.
+  Zero/minimized and other out-of-range OS sizes defer work without terminating
+  the session. Maximize/fullscreen controls are disabled where Tao supports it;
+  OS constraints are not assumed to be infallible. Resizing invalidates the configuration.
 - Each acquisition performs at most two attempts. `Outdated` reconfigures;
   `Lost` recreates the surface and rechecks its capabilities. Repeated loss,
   timeout and occlusion defer simulation and audio. Validation/device failures
@@ -104,6 +106,32 @@ Astra did not capture or inspect window pixels. Visible acceptance is assigned
 to verified Claude Opus 5.5 Max in
 [handoff 0037](../../handoffs/0037-native-player-window/brief.md).
 
+## Integration with the renderer prerequisite
+
+The branch integrates PR62 head `d8d00c3fbdf930a2ceea1e376088157e048fb0e4`.
+Only the status ledger conflicted; the reviewed window/audio/game lifecycle
+source is unchanged. The combined native host/adapter suite passes 62 ordinary
+release tests and three actual GPU host regressions, including device loss and
+presentation failure. Release all-target Clippy, 40 tools tests, fmt,
+conventions, actionlint and the normal dependency guard pass.
+
+The fresh window executable above and Claude0037 packet remain pinned to
+`f68d910f45b8d311e93cc84bcacf8714ad71e250`; they are historical artifact evidence,
+not a claim that the executable was rebuilt from the later integrated head.
+
+The corrected prerequisite `9cf171275debfd0cc959a636abf3db4c93865bfb` additionally carries
+v5 executable proof coverage, separated Cargo metadata channels and the
+parse-only ULID dependency/isolated physics lock fix. Seventeen affected player
+and 2D release tests, native-window all-target release Clippy, 43 tools tests,
+fmt, conventions, actionlint and the explicit normal graph pass after this
+second integration. The window/audio/game lifecycle sources remain unchanged.
+
+The next prerequisite `9c531a92854eab448053031a544579011bcc07a3` fixes Linux
+strict-C11 trap declarations and isolates the existing Camera accessibility
+scans. Integration passes 94 Camera tests, 43 tools tests, fmt and conventions.
+The optional window source is unchanged; these checks do not replace the
+prerequisite's combined Wasm conformance or pending exact-head hosted checks.
+
 ## Running and remaining scope
 
 ```sh
@@ -123,3 +151,42 @@ mobile support, audible speaker verification, a surface/device reset guarantee,
 shipping installers/signing, phone performance, full renderer migration, pixel
 placement completion or any phase gate. PDB source-symbol inspection is
 explicitly unsupported by this helper; Windows compile coverage remains in CI.
+
+## Native review corrections
+
+Claude Opus 5.5 Max completed [the original five native acceptance cases](https://github.com/snowdamiz/incant/blob/4073f8fab8b3a377230513d7cfa0c35b9f1db178/handoffs/0037-native-player-window/result.md)
+on the frozen `6b6a53a1` executable. Its 180 evidence hashes are verified. The
+review found an enabled fullscreen control that exceeded the bounded target and
+terminated the session, and stale stretching when resizing a background window.
+
+The correction disables maximize where supported and treats unsupported OS sizes
+as recoverable suspension. `HostedGameSession::refresh_host` (also available on
+the offline host) calls the existing owned host's sync with the current committed
+world. It advances neither native tick nor input, script, physics or audio. Host
+error/unwind drops the complete session. The window uses it only for pending
+redraw/resize while visible and paused; a 50 ms throttle advances only at its
+previous deadline, so a continuous event stream cannot postpone redraw forever.
+Successful refreshes are counted separately as `presentation_refreshes`; total
+`accepted_frames` includes both simulation presentations and these refreshes.
+
+Thirty-six ordinary scoped release tests, release all-target Clippy and four
+actual GPU regressions pass. Tests prove unchanged tick/input/poses, exact next
+audio samples after repeated paused refreshes, terminal error/unwind, unchanged
+GPU pixels, and bounded redraw opportunities under continuous 1 ms events.
+Forty-three tools tests and generated conventions also pass.
+
+The corrected fresh shipping executable is 8,120,976 bytes, SHA-256
+`ec18e426c67584c4ac762cf72deda6dfc10d9044c4a5ff91a07fc4ad0648edf5`.
+Its independently audited build/source directories were removed before the two
+actual static/streamed lifecycle processes and two refusals. Both accepted 40
+ticks with zero dropped wall ticks and zero presentation-only refreshes in that
+particular automated probe. Static acquisition deferred once; the streamed case
+never deferred. These timings/counts are observations, not performance gates.
+The corrected background resize/control behavior still needs Claude's separate
+hash-pinned delta review. Raw proof: `/tmp/incant-native-window-refresh-shipping-02`.
+
+The original review also observed one tick of motion on refocus (the existing
+step-before-script input latency) and 0.64–0.68 seconds of application-audio tail
+during macOS's blocking minimize animation. Focus-loss silence settled around
+0.10 seconds. No synchronous audio stop during an OS-blocked event loop or
+audible-speaker observation is claimed.

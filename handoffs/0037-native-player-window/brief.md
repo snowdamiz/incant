@@ -1,3 +1,72 @@
+# Priority revision — corrected window delta only
+
+Required model **Claude Opus 5.5**, thinking **Max**, explicitly reverified by ACP
+for this resumed session. Original acceptance is complete at `4073f8fab8b3a377230513d7cfa0c35b9f1db178`.
+Do not repeat all original cases. Preserve `result.md`, every old `evidence/`
+file, and the old `artifacts/player/` byte-for-byte. Write only new helpers,
+`evidence-refresh/`, and `result-refresh.md`. The runner may mention `result.md`;
+this priority revision overrides that return filename because the original
+report is immutable. Commit only this delta's review files, Built-by: claude.
+
+Astra fixed your D1 and D2 in source commit `d11c7c4` (present in this worktree):
+- maximize/fullscreen controls disabled where Tao supports them;
+- out-of-range OS sizes suspend rather than terminate or allocate oversized targets;
+- a visible background resize/redraw submits current committed state without a
+  native tick, input/script/physics or audio advancement. It uses the same
+  retained GPU host and a non-starving 50 ms throttle, not another renderer.
+The host takes/clears live state around refresh, so failure/unwind is terminal.
+36 ordinary and four actual GPU regressions plus fresh source-free lifecycle
+proof pass. This is correctness evidence, not appearance acceptance.
+
+## New immutable executable
+
+Use only `artifacts/player-refresh/incant_game_player`, SHA-256
+`ec18e426c67584c4ac762cf72deda6dfc10d9044c4a5ff91a07fc4ad0648edf5`,
+8,120,976 bytes. Its source/build storage was removed. Verify before each launch.
+The fixtures are copied unchanged from the prior proof. Launch:
+
+```sh
+artifacts/player-refresh/incant_game_player --window artifacts/player-refresh/static.scene artifacts/player-refresh/audio artifacts/player-refresh/clips.bin artifacts/player-refresh/actions.json artifacts/player-refresh/models artifacts/player-refresh/textures 00000000000000000000000000000004
+```
+
+Reusing your helper is fine with `GAME_BINARY` set to this exact new path. Do not
+change the old hash-checked launcher; make a separate `launch-refresh.sh` if useful.
+All native actions/captures target only PIDs you launch from that path. Do not
+manipulate unrelated Incant apps. Finder may be activated for focus tests. No
+Cargo, source edits, OS settings, global indiscriminate input, publishing or credentials.
+Foreground is reserved for this short delta; quit all your review PIDs as soon
+as interaction ends and say when the benchmark may resume.
+
+## Two focused acceptance cases
+
+1. D1: verify the window's ordinary maximize/fullscreen affordance is disabled
+   and cannot terminate the game. Verify ordinary close still succeeds. If a
+   PID-scoped, reversible AX request can exercise OS sizes outside the bound
+   without changing system state, check that the process remains alive and
+   recovers when size returns in-range. If the OS refuses the request, report
+   that limit; no need to force fullscreen or invent a test.
+2. D2: while Finder is frontmost, resize the game to in-range nonmatching aspect
+   ratios (e.g.960×540 and400×300 physical content pixels). After bounded settle,
+   the committed triangle should be freshly rendered at the correct camera
+   aspect, not a non-uniformly stretched previous framebuffer. Include a short
+   continuous resize burst to exercise the throttle if straightforward. Confirm
+   world position remains frozen until refocus and later D input still works.
+   Capture/compare the relevant window states using your prior reference math.
+
+No need to remeasure audio, reproduce O1/O2, or redesign visuals. Original O1
+(one-tick input latency) and O2 (macOS minimize animation audio tail) are retained
+as documented limitations. The new exit report adds `presentation_refreshes`;
+`accepted_frames = tick + presentation_refreshes` for this fixture, so refreshing
+while paused may raise presentation count without changing the simulation tick.
+
+Return `result-refresh.md` with exact model/Max, code/executable identities,
+limited tested scope, captures/hashes, process exits, unresolved issues, and
+explicit no phase/mobile/performance/installer/phone/pixel-placement gate claim.
+
+---
+
+# Historical original packet (superseded for this delta)
+
 # Native player window acceptance — review only
 
 Required model: **Claude Opus 5.5**. Required thinking: **Max**, verified through
