@@ -1,0 +1,28 @@
+{
+  "base_commit": "341ef8f",
+  "sources": {
+    "crates/incant_2d/Cargo.toml": "57378df7552b4ea8a12dbc876467d06bc067592b7c37a8a875bc670e84540a0f",
+    "tools/probes/native-physics/Cargo.lock": "3cb5157ab79ad04c5f120d8d0091356f84d6ce89aefe2c44526fd13faa45dc16",
+    "tools/probes/shipping-wasm2c.py": "dc199c72af92d010c9c2aa3de660b4e4aaf43684b155992eb87402d25f64d28a",
+    "tools/tests/test_wasm_metadata.py": "5ffa403ae814a637bbc02d732da40e515b74a86d27ccb1af32445b18844ab18e"
+  },
+  "review": "Independent Astra extra-high read-only review approved the metadata and parse-only ULID/lock corrections.",
+  "validation": {
+    "static_wasm_combined_conformance": true,
+    "physics_wasm32_locked_compile": true,
+    "physics_native_streams": 6,
+    "physics_browser_execution": false,
+    "incant_2d_and_runtime_release_tests_doctests": 81,
+    "player_render_gpu_release_all_targets_clippy": true,
+    "python_tools": 43,
+    "conventions_fmt_actionlint_diff": true
+  },
+  "logs": {
+    "/tmp/incant-pr62-physics-wasm-after.log": "9fd8b58524d29d991ee6b1db39e618e6094d2d2a0b09a16563e3a34a90fa22f2",
+    "/tmp/incant-pr62-native-physics-fixed.log": "bd34230fb627feede6500bb52061bc9a35c9a66e19833caa56c91415749f5191",
+    "/tmp/incant-pr62-correction-runtime-tests.log": "f68b6eaaa1056f6d2bedf59c1cecdf164aede4c2f2bcd03669c63d8e2e00d48c",
+    "/tmp/incant-pr62-correction-player-clippy.log": "1a524622ef35129cd116a688511a0faab832cea94c576ff6d7435dd632d39684",
+    "/tmp/incant-pr62-correction-tools.log": "db72574f81ffc7154f3463ca0331c56ef6fcdd2fde8760f08dbfe307ad66a545",
+    "/tmp/incant-pr62-metadata-conformance.log": "c23789f53c23039ce8f39b586aa22a270c3bbe45a483b8b00cb227486bb7c666"
+  }
+}
