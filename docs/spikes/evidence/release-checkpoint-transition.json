@@ -1,0 +1,83 @@
+{
+  "source_before_transition": "b89f51867e6bdcf2a41d7d335dbca93c242c5d68",
+  "policy_integration": "533405117fbefeeede0ec83671f85224dcde9cb6",
+  "historical_hosted": {
+    "general_run": 38151281490,
+    "job": 114505127324,
+    "result": "failure",
+    "other_checks_success": 20,
+    "diagnosis": "Generated Rust guest compilation failed E0463 because wasm32-unknown-unknown was not installed in the general job. The suite had not reached its launch barrier.",
+    "retained_raw_build_streams": [
+      "build-0.stdout.jsonl",
+      "build-0.stderr.log",
+      "build-1.stdout.jsonl",
+      "build-1.stderr.log"
+    ],
+    "final_session_ledger_present": false
+  },
+  "target_prerequisite_proof": {
+    "passed": true,
+    "rustc": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+    "guest_sha256": "eb4469d1089a35629958bcb36467a7fdea3c5bc441ce2355387d6fc3e1006851",
+    "guest_bytes": 638223,
+    "source_sha256": "8986dd2c4e9e3d28fa65b1fd205a3df3ce8e3d910d6da9b6de023f2c7cb22081",
+    "scope": "Actual trusted SDK guest compilation after the exact pinned target prerequisite; not a complete rerun of the four-player proof."
+  },
+  "local_transition": {
+    "python_tests": 138,
+    "node_tests": 12,
+    "ui_tests": 536,
+    "sdk_types": true,
+    "ui_build": true,
+    "conventions": true,
+    "bridge_and_sdk": true,
+    "cargo_fmt": true,
+    "actionlint": true,
+    "runtime_editor_sdk_build_proof_inputs_unchanged": true
+  },
+  "logs": [
+    {
+      "path": "/tmp/incant-pr83-transition-tools.log",
+      "sha256": "4c2bb01597beaf72017c1096161b23ce264486d0160f97c145b2c32414a9b451"
+    },
+    {
+      "path": "/tmp/incant-pr83-transition-node.log",
+      "sha256": "b33d5184a49fec7caedade75a26cc043fbcb076ff232d5f04f181f736571bb1c"
+    },
+    {
+      "path": "/tmp/incant-pr83-transition-ui.log",
+      "sha256": "6b2aa8a517d1d8b7dc096ba5c1ffb6e72fb4318cdb5d982ba754c5289c0d94cb"
+    },
+    {
+      "path": "/tmp/incant-pr83-transition-ui-build.log",
+      "sha256": "3907fc3a6b0b36292bc3945703ff3b143262d54fa71ebd6a8752e30ea24515d5"
+    },
+    {
+      "path": "/tmp/incant-pr83-macos-general-failure.log",
+      "sha256": "3e6f013489e6a107ff402d2e42892cc34e57ba4d859716b170bc8bd91a743f5d"
+    },
+    {
+      "path": "/tmp/incant-pr83-wasm-target-install.log",
+      "sha256": "2c90ce2f37a4e805799561f45e5eab35adbca700c521ce98f460e97aa5aa7d24"
+    }
+  ],
+  "deployment_pending": [
+    "exact-head development-checks",
+    "main/release protections",
+    "release bootstrap from cde3d7279ffe09204f853f3ce342175a14035b1e",
+    "first complete frozen release checkpoint"
+  ],
+  "heartbeat": {
+    "id": "incant-release-checkpoints",
+    "cadence": "three hours",
+    "state": "ACTIVE",
+    "owner": "root",
+    "confirmed_by_root": true
+  },
+  "limits": [
+    "The old failed check is not a success.",
+    "Local prerequisite compilation is not a hosted four-player proof.",
+    "The director authorized fast-main/full-release policy before this update.",
+    "No physical-device, distribution, service or phase gate is implied."
+  ]
+}

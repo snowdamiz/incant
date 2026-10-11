@@ -14,6 +14,13 @@ import shipping_suite
 
 
 class ShippingSuiteSelectionTests(unittest.TestCase):
+    def test_workflow_installs_the_pinned_guest_target_before_sdk_preparation(self):
+        workflow = (shipping_suite.ROOT / '.github/workflows/ci.yml').read_text()
+        prerequisite = 'run: rustup target add --toolchain 1.99.0 wasm32-unknown-unknown'
+        proof = 'run: python3 tools/shipping_suite.py '
+        self.assertEqual(workflow.count(prerequisite), 1)
+        self.assertLess(workflow.index(prerequisite), workflow.index(proof))
+
     def test_flipbook_refuses_without_four_proofs_before_creating_output(self):
         with tempfile.TemporaryDirectory() as storage:
             output = Path(storage) / 'proof'

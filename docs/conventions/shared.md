@@ -54,7 +54,12 @@ Every commit trailer identifies its author: Built-by: astra or Built-by: claude.
 PRs are agent-authored and agent-merged into main once the scoped work is complete,
 reviewed, and its required checks pass, per the director's 2026-10-09 authorization.
 Do not request separate merge approval. A merge does not approve a phase gate or
-claim that deferred requirements are complete. Human-only actions include phase
+claim that deferred requirements are complete. Development PRs use scoped local
+tests, review and the fast development check;
+comprehensive cross-platform CI runs on frozen release checkpoints approximately
+every three hours, per the director's 2026-10-11 instruction. Follow
+`docs/adr/0014-ci.md`; never advance release on incomplete or failed checks.
+Human-only actions include phase
 gate approval, signing credentials, store/developer accounts, payments, legal
 filings, age ratings and staffing. Implement and verify reviewable work before
 requesting these actions. Never publish or sign using fabricated or borrowed

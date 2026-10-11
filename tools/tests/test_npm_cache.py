@@ -115,15 +115,13 @@ class NpmCachePolicyTests(unittest.TestCase):
         self.assertNotIn('save-always:', text)
 
     def test_all_callers_use_local_action_and_preserve_windows_exclusion(self):
-        expected = {'ci.yml', 'desktop.yml', 'nightly.yml', 'physics-candidates.yml', 'website.yml'}
+        expected = {'ci.yml', 'desktop.yml', 'nightly.yml', 'physics-candidates.yml', 'website.yml', 'development.yml'}
         callers = set()
         for path in (ROOT / '.github/workflows').glob('*.yml'):
             text = path.read_text()
             self.assertNotRegex(text, r'\bcache:\s*(?:npm|[^\n]*[\'\"]npm[\'\"])', path.name)
             if 'uses: ./.github/actions/npm-cache' in text:
                 callers.add(path.name)
-                if path.name != 'ci.yml':
-                    self.assertIn("'.github/actions/npm-cache/**'", text)
         self.assertEqual(callers, expected)
         desktop = (ROOT / '.github/workflows/desktop.yml').read_text()
         self.assertIn("uses: ./.github/actions/npm-cache\n        if: runner.os != 'Windows'", desktop)

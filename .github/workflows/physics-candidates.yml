@@ -1,27 +1,8 @@
 name: Physics candidate feasibility
+# Full validation runs once per frozen release checkpoint.
 on:
-  pull_request:
-    paths:
-      - 'tools/probes/physics/**'
-      - 'tools/probes/physics-parity/**'
-      - 'tools/tests/test_physics_parity.py'
-      - 'crates/incant_physics/**'
-      - 'crates/incant_physics_runtime/**'
-      - 'crates/incant_physics_2d_runtime/**'
-      - 'crates/incant_2d/**'
-      - 'tools/tests/test_native_physics_parity.py'
-      - 'tools/probes/native-physics-2d.py'
-      - 'tools/shipping*.py'
-      - 'crates/incant_runtime/**'
-      - 'crates/incant_types/**'
-      - 'tools/probes/native-physics/**'
-      - 'Cargo.lock'
-      - 'Cargo.toml'
-      - 'package-lock.json'
-      - '.cargo/**'
-      - '.github/workflows/physics-candidates.yml'
-      - '.github/actions/npm-cache/**'
-      - 'rust-toolchain.toml'
+  push:
+    branches: [codex/release-candidate]
   workflow_dispatch:
 permissions:
   contents: read
