@@ -1,6 +1,7 @@
 //! Optional desktop window host. Existing cooked data, embedded script, native
 //! game session and retained GPU consumer remain the sole simulation path.
 mod clock;
+mod gamepad;
 mod input;
 mod probe;
 mod surface;
@@ -35,8 +36,14 @@ pub enum Error {
     SurfaceValidation,
     #[error("native surface reservation invariant failed")]
     Reservation,
-    #[error("this native window host supports keyboard and three-button mouse bindings only")]
+    #[error(
+        "this native window host supports keyboard, three-button mouse and gamepad IDs0..15 only"
+    )]
     InputCapability,
+    #[error("native gamepad backend initialization failed")]
+    GamepadBackend,
+    #[error(transparent)]
+    GamepadInput(#[from] incant_input::InputError),
     #[error("native pointer position must be finite and within one million pixels")]
     InputRange,
     #[error("native input scale factor must be a finite positive normal value")]
@@ -111,6 +118,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
             .with_maximizable(false)
             .build(&event_loop)?,
     );
+    let mut gamepads = gamepad::Gamepads::new()?;
     let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
     let mut game = Game::new(
         scene,
@@ -169,6 +177,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         }
                         focused = value;
                         input.reset_focus(value);
+                        gamepads.discard_pending();
                     }
                     WindowEvent::Suspended => {
                         platform_suspended = true;
@@ -206,11 +215,15 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         && !window.is_minimized()
                         && surface.has_supported_size();
                     let active = focused && presentable;
+                    // Drain even while paused, retaining only connection state.
+                    // Resume needs fresh OS control events, never cached holds.
+                    gamepads.poll(&mut input, active && !suspended)?;
                     if !active {
                         if !suspended {
                             game.set_suspended(true)?;
                             suspended = true;
                             input.reset_focus(focused);
+                            gamepads.discard_pending();
                         }
                         clock.reset(now);
                         // Background resize/redraw presents committed state once;
@@ -238,6 +251,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                     game.set_suspended(true)?;
                                     suspended = true;
                                     input.reset_focus(focused);
+                                    gamepads.discard_pending();
                                 }
                                 clock.reset(now);
                                 retry = now + Duration::from_millis(50);
@@ -248,6 +262,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 game.set_suspended(false)?;
                                 suspended = false;
                                 clock.reset(now);
+                                gamepads.synchronize(&mut input)?;
                             }
                             let result = game.tick(input.events());
                             let consumed = surface.consumed();
@@ -256,6 +271,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             if !consumed {
                                 return Err(Error::Reservation.into());
                             }
+                            gamepads.commit();
                             input.clear();
                             redraw_pending = false;
                             if options
