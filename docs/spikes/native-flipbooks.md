@@ -1,7 +1,7 @@
 # Native sprite flipbooks
 
-Local implementation checkpoint; GPU execution, fresh shipping proof, final
-integrated checks and publication remain pending. This is not a performance,
+Local implementation checkpoint; fresh shipping proof, Claude appearance review
+and publication remain pending. This is not a performance,
 phone, editor appearance or phase-gate result.
 
 `SpriteFlipbook` attaches 1–256 ordered pixel/atlas regions to one
@@ -52,17 +52,34 @@ the bounded prepared placements/batches; this is not a phone-performance result.
 
 Current local checks:
 
+- Integrated union `573af84` passed 666 workspace tests/doctests and all 71
+  actual native GPU tests, including retained flipbook/static-frame equivalence
+  and allocation-free staging. The two capture-helper bounds tests also pass.
+- Full-workspace all-target Clippy passes with the scene audio feature under
+  the functional `ci` profile. The 90 tools tests, editor typecheck, generated
+  bridge/SDK checks and normal runtime dependency guards pass.
+- The freshly built public headless executable regenerates byte-identical
+  schemas. This replaces the earlier temporary registry-only check.
+
 - 144 scoped 2D/runtime/cook/native-render tests and doctests passed.
 - 157 runtime/core/cook/render ordinary tests and doctests passed, with 64 GPU
   tests compiled but not executed in that command (includes two new tests).
 - Four native-render flipbook tests passed after the unused-static-region fix.
 - Generated TypeScript types check with the repository's installed TypeScript.
 - All-target release Clippy passed across the nine affected crates.
-- Schema generation uses the compiled Rust registry; the final integrated
-  headless schema equivalence check is still pending.
 
 The prepared `native-game.py --gpu --flipbook` extension compares animated first
 and last actual GPU readbacks with independent static-frame control scenes at
 identical script/input/physics/audio poses. It keeps the original source deletion,
 compiler exclusion, profile/symbol identity, replay, refusal and audio checks.
-Its execution is pending the coordinated GPU slot and integrated source union.
+Its execution is pending a fresh shipping build. The existing CI probe invocation
+now includes these additive controls in the same build.
+
+The `incant_render` `native_frames` example is a bounded review helper, using the
+real native world and retained renderer with no project, scripts, audio or
+presentation. Request files are bounded and parsed only at startup; sorted capture
+ticks and typed controls select committed states. It caps 4096 entities, 256
+flipbooks, 64 captures, 256 controls, 36000 ticks and 256 MiB total decoded output.
+Its PNG output is not atomic: earlier files can remain after a later failure.
+Claude packet 0042 owns visual captures and appearance review; its GPU gate is
+not yet granted.

@@ -354,6 +354,20 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         bad_frame.write_bytes(changed)
         dest = out/'unknown-frame.pcm'
         reject('unknown-sprite-frame', command(bad_frame, record_path, 48000, dest), dest, 'Sprite')
+        if args.flipbook:
+            animated_fixture = next(f for f in fixtures if f['animation'] == 'animated')
+            dest = out/'flipbook-default.pcm'
+            reject('flipbook-default-stays-strict', command(animated_fixture['path'], record_path, 48000, dest, spatial=False),
+                   dest, 'no spatial host')
+            # The bad frame is not selected at startup. All retained frame
+            # bindings still must validate before the first accepted game tick.
+            blob = Path(animated_fixture['path']).read_bytes()
+            require(blob.count(binary_id(MIDDLE_FRAME)) == 1, 'Ambiguous noncurrent frame mutation fixture')
+            changed = bytearray(blob.replace(binary_id(MIDDLE_FRAME), binary_id(f'{99:026d}')))
+            changed[40:72] = hashlib.sha256(changed[:40] + changed[72:]).digest()
+            bad_frame = out/'unknown-noncurrent-frame.scene'; bad_frame.write_bytes(changed)
+            dest = out/'unknown-noncurrent-frame.pcm'
+            reject('unknown-noncurrent-flipbook-frame', command(bad_frame, record_path, 48000, dest), dest, 'Sprite')
     existing = out/'preserved.pcm'; existing.write_bytes(b'keep')
     result = subprocess.run(command(fixtures[0]['path'], record_path, 48000, existing), capture_output=True)
     require(result.returncode != 0 and not result.stdout and existing.read_bytes() == b'keep', 'Existing output overwritten')
