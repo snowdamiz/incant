@@ -3,6 +3,12 @@ on:
   pull_request:
     paths:
       - 'crates/incant_wasm_dev/**'
+      - 'crates/incant_wasm_runtime/**'
+      - 'crates/incant_wasm_cook/**'
+      - 'third_party/wabt/**'
+      - 'tools/wasm2c.py'
+      - 'tools/probes/shipping-wasm2c.py'
+      - 'tools/shipping_symbols.py'
       - 'crates/incant_runtime/**'
       - 'crates/incant_types/**'
       - 'crates/incant_physics_runtime/**'
@@ -54,9 +60,18 @@ jobs:
           save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       # Keep tests, Clippy and the fresh-process probe on one development graph.
       # Never enable this feature on the workspace or shipped player commands.
-      - run: cargo test -p incant_wasm_dev --features wasmtime-host --locked
-      - run: cargo clippy -p incant_wasm_dev --features wasmtime-host --all-targets --locked -- -D warnings
-      - run: python tools/probes/development-wasm.py artifacts/development-wasm
+      - name: Windows development host (static MSVC path remains unsupported)
+        if: runner.os == 'Windows'
+        run: |
+          cargo test -p incant_wasm_dev --features wasmtime-host --locked
+          cargo clippy -p incant_wasm_dev --features wasmtime-host --all-targets --locked -- -D warnings
+          python tools/probes/development-wasm.py artifacts/development-wasm
+      - name: Combined static and development conformance on one development graph
+        if: runner.os != 'Windows'
+        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-conformance --conformance-only
+      - name: Fresh compiler-free static shipping executable and matched symbols
+        if: runner.os != 'Windows'
+        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-shipping
       - run: python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host
       - run: cargo check -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked
       - name: Keep unsupported device targets free of the development host
@@ -66,8 +81,18 @@ jobs:
           cargo check -p incant_wasm_dev --no-default-features --target aarch64-apple-ios --locked
           cargo check -p incant_wasm_dev --no-default-features --target aarch64-linux-android --locked
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
           name: development-wasm-${{ runner.os }}
-          path: artifacts/development-wasm/result.json
+          path: |
+            artifacts/development-wasm/result.json
+            artifacts/static-wasm-conformance/development/result.json
+            artifacts/static-wasm-conformance/conformance-*.log
+            artifacts/static-wasm-conformance/prepared-manifest.json
+            artifacts/static-wasm-shipping/result.json
+            artifacts/static-wasm-shipping/build.log
+            artifacts/static-wasm-shipping/prepared-manifest.json
+            artifacts/static-wasm-shipping/player.zip
+            artifacts/static-wasm-shipping/symbols.zip
           if-no-files-found: error
           retention-days: 7

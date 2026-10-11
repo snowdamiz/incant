@@ -75,3 +75,16 @@ PBR Neutral implementation. Retain this notice and the license when
 distributing the shader or a binary that contains it. No upstream NOTICE file
 exists at this revision. This notice covers the incorporated tone mapper; it is
 not a complete inventory of dependency licenses.
+
+## Static WebAssembly runtime
+
+`third_party/wabt/` contains six unmodified wasm2c runtime files from
+[WABT 1.0.42](https://github.com/WebAssembly/wabt/tree/ff0ef7e0009402740c805a9744c09b05be063e48/wasm2c),
+copyright 2018 WebAssembly Community Group participants, under
+[Apache License 2.0](licenses/Apache-2.0.txt). Exact file hashes and the verified
+release archive identity are recorded in `third_party/wabt/provenance.json`.
+Incant's trap/import facade and fuel preparation are separate original code.
+Retain this notice and the Apache license with static-module distributions.
+The development-only Wasmtime 49.0.2 and build-only wasm-tools crates retain their
+pinned crates.io resolutions and licenses in Cargo.lock; they do not enter the
+normal static-player dependency graph.

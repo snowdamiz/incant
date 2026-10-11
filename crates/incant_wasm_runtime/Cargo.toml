@@ -1,0 +1,23 @@
+[package]
+name = "incant_wasm_runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+incant_runtime.workspace = true
+incant_types.workspace = true
+thiserror.workspace = true
+
+[features]
+default = []
+# Only a trusted build may supply prepared C. Not a runtime module loader.
+embedded-fixture = []
+
+[build-dependencies]
+cc = "=1.6.0"
+
+[[example]]
+name = "shipping_module"
+required-features = ["embedded-fixture"]

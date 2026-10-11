@@ -1,8 +1,9 @@
 use crate::{
     abi::{self, State},
-    bounds, transaction,
+    bounds,
 };
-use incant_runtime::{FrameCommands, NativeWorld, RuntimeError, WorldIdentity};
+use incant_runtime::{NativeWorld, RuntimeError};
+use incant_wasm_runtime::{BoundaryError, Capability};
 use thiserror::Error;
 use wasmtime::{Config, Engine, Linker, Module, Store, StoreLimitsBuilder, TypedFunc};
 
@@ -29,8 +30,6 @@ pub enum ModuleError {
 pub struct DevModuleHost {
     store: Store<State>,
     update: TypedFunc<(i64, f64), ()>,
-    identity: Option<WorldIdentity>,
-    failed: bool,
 }
 impl DevModuleHost {
     /// Validate raw core Wasm then compile it locally. Never deserialize a
@@ -81,12 +80,7 @@ impl DevModuleHost {
             &engine,
             State {
                 limits,
-                active: false,
-                epoch: 0,
-                chunks: Vec::new(),
-                commands: FrameCommands::default(),
-                transferred: 0,
-                calls: 0,
+                capability: Capability::default(),
             },
         );
         store.limiter(|state| &mut state.limits);
@@ -103,74 +97,40 @@ impl DevModuleHost {
             return Err(ModuleError::Abi("expected unshared 32-bit memory"));
         }
         let update = instance.get_typed_func::<(i64, f64), ()>(&mut store, "update")?;
-        Ok(Self {
-            store,
-            update,
-            identity: None,
-            failed: false,
-        })
+        Ok(Self { store, update })
     }
     pub fn is_failed(&self) -> bool {
-        self.failed
+        self.store.data().capability.is_failed()
     }
     /// A failed candidate leaves the current instance untouched. Successful
     /// replacement resets guest globals/memory; no VM-state migration is claimed.
     pub fn reload(&mut self, bytes: &[u8]) -> Result<(), ModuleError> {
         let mut candidate = Self::new(bytes)?;
-        candidate.identity = self.identity.clone();
+        candidate.store.data_mut().capability = self.store.data().capability.replacement();
         *self = candidate;
         Ok(())
     }
     pub fn tick(&mut self, world: &mut NativeWorld, dt: f64) -> Result<(), ModuleError> {
-        if self.failed {
-            return Err(ModuleError::Failed);
-        }
-        if !dt.is_finite() || dt <= 0. || dt > 1. {
-            return Err(ModuleError::Abi("invalid dt"));
-        }
-        let identity = world.spatial_view()?.identity().clone();
-        if self.identity.as_ref().is_some_and(|old| old != &identity) {
-            return Err(ModuleError::Abi("module is bound to a different world"));
-        }
-        self.identity = Some(identity);
-        self.failed = true; // unwind/any later failure cannot resume guest state
-        let epoch = self
-            .store
-            .data()
-            .epoch
-            .checked_add(1)
-            .ok_or(ModuleError::Limit("epoch"))?;
-        self.store.set_fuel(bounds::TICK_FUEL)?;
-        let result = world.with_numeric_columns(|columns| {
-            let chunks = transaction::capture(columns)?;
-            let state = self.store.data_mut();
-            state.chunks = chunks;
-            state.commands.clear();
-            state.transferred = 0;
-            state.calls = 0;
-            state.epoch = epoch;
-            state.active = true;
-            let called = self.update.call(&mut self.store, (epoch, dt));
-            self.store.data_mut().active = false;
-            called?;
-            transaction::commit(columns, &self.store.data().chunks)
-        });
-        self.store.data_mut().active = false;
-        self.store.data_mut().chunks.clear();
-        let mut commands = std::mem::take(&mut self.store.data_mut().commands);
-        let result = result.and_then(|undo| {
-            // Native apply preflights the complete final command graph before
-            // publication. Its rejection preserves table layout and values.
-            // Retain bounded numeric undo until that preflight/commit succeeds.
-            if let Err(error) = world.apply(&mut commands) {
-                world.with_numeric_columns(|columns| undo.restore(columns));
-                return Err(error.into());
-            }
+        let epoch = self.store.data_mut().capability.begin(world, dt)?;
+        let result = (|| {
+            self.store.set_fuel(bounds::TICK_FUEL)?;
+            self.update.call(&mut self.store, (epoch, dt))?;
+            self.store.data_mut().capability.finish(world)?;
             Ok(())
-        });
-        if result.is_ok() {
-            self.failed = false;
+        })();
+        if result.is_err() {
+            self.store.data_mut().capability.abort();
         }
         result
+    }
+}
+impl From<BoundaryError> for ModuleError {
+    fn from(error: BoundaryError) -> Self {
+        match error {
+            BoundaryError::Abi(message) => Self::Abi(message),
+            BoundaryError::Limit(message) => Self::Limit(message),
+            BoundaryError::Runtime(error) => Self::Runtime(error),
+            BoundaryError::Failed => Self::Failed,
+        }
     }
 }
