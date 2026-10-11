@@ -36,6 +36,21 @@ impl Controller {
         request: RunRequest,
         cancel: &AtomicBool,
     ) -> Result<Value> {
+        self.run_checked(project, revision, root, request, cancel, &mut || Ok(()))
+    }
+
+    /// The callback validates the original authoring snapshot after all source
+    /// and asset reads have finished, before executing any candidate tick.
+    #[allow(clippy::too_many_arguments)]
+    pub fn run_checked(
+        &mut self,
+        project: &Project,
+        revision: u64,
+        root: &Path,
+        request: RunRequest,
+        cancel: &AtomicBool,
+        validate: &mut dyn FnMut() -> Result<()>,
+    ) -> Result<Value> {
         let started = Instant::now();
         check_budget(cancel, started)?;
         if serde_json::to_vec(&request)?.len() > 1024 * 1024 {
@@ -79,6 +94,9 @@ impl Controller {
             },
             48000,
         )?;
+        check_budget(cancel, started)?;
+        validate()?;
+        check_budget(cancel, started)?;
         let max_frames = (48000 / u64::from(session.world()?.tick_rate()) + 1) as usize;
         let mut candidate = Live {
             session,

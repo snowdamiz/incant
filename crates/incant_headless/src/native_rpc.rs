@@ -17,6 +17,8 @@ pub(crate) enum Error {
     Interrupted,
     #[error("native play exceeded its 10 second host execution budget")]
     Deadline,
+    #[error("native play snapshot: {0}")]
+    Snapshot(incant_agent::AgentError),
     #[error("native play RPC: {0}")]
     Invalid(&'static str),
     #[error(transparent)]

@@ -1,5 +1,5 @@
-use crate::{AgentError, EngineHost, tool};
-use incant_cmd::{Actor, CommandBus};
+use crate::{AgentError, EngineHost, access::ProjectAccess, tool};
+use incant_cmd::Actor;
 use incant_doc::Project;
 use incant_import::{ImportRequest, ImportSnapshot};
 use schemars::JsonSchema;
@@ -45,6 +45,20 @@ impl<P: EngineHost> ProjectHost<P> {
 impl<P: EngineHost> EngineHost for ProjectHost<P> {
     fn native_play_available(&self) -> bool {
         self.perception.native_play_available()
+    }
+    fn shared_play_available(&self) -> bool {
+        self.perception.shared_play_available()
+    }
+    fn play_run_checked(
+        &mut self,
+        project: &Project,
+        revision: u64,
+        request: crate::play::RunRequest,
+        cancel: &AtomicBool,
+        validate: &mut dyn FnMut() -> Result<(), AgentError>,
+    ) -> Result<Value, AgentError> {
+        self.perception
+            .play_run_checked(project, revision, request, cancel, validate)
     }
     fn play_run(
         &mut self,
@@ -120,8 +134,8 @@ pub fn tools() -> Vec<Value> {
     ]
 }
 
-pub fn dispatch(
-    bus: &mut CommandBus,
+pub(crate) fn dispatch(
+    access: &mut ProjectAccess<'_>,
     files: Option<&ProjectFiles>,
     name: &str,
     args: Value,
@@ -129,7 +143,7 @@ pub fn dispatch(
     cancel: &AtomicBool,
 ) -> Result<Value, AgentError> {
     match name {
-        "asset_list" => {
+        "asset_list" => access.with_bus(cancel, |bus| {
             let args: ListArgs = serde_json::from_value(args).map_err(error)?;
             if !(1..=100).contains(&args.limit) || args.filter.len() > 1024 {
                 return Err(error(
@@ -152,8 +166,8 @@ pub fn dispatch(
             Ok(
                 json!({"revision":bus.revision(),"untrusted_project_data":page,"next_after":next_after}),
             )
-        }
-        "asset_inspect" => {
+        }),
+        "asset_inspect" => access.with_bus(cancel, |bus| {
             let args: InspectArgs = serde_json::from_value(args).map_err(error)?;
             let asset = bus
                 .project()
@@ -161,44 +175,48 @@ pub fn dispatch(
                 .get(&args.id)
                 .ok_or_else(|| error("asset does not exist"))?;
             Ok(json!({"revision":bus.revision(),"untrusted_project_data":asset}))
-        }
+        }),
         "asset_import" => {
             let args: ImportArgs = serde_json::from_value(args).map_err(error)?;
             let files = files.ok_or_else(|| {
                 error("this engine host does not grant project asset import access")
             })?;
-            if files.project_id != bus.project().id {
-                return Err(error("asset import access belongs to a different project"));
-            }
-            if args.expected_revision != bus.revision() {
-                return Err(error(
-                    "project revision changed; query and retry the import",
-                ));
-            }
-            if cancel.load(Ordering::Relaxed) {
-                return Err(AgentError::Interrupted);
-            }
-            let prepared = ImportSnapshot::capture(bus)
-                .prepare(&files.root, None, &args.sources)
+            let snapshot = access.with_bus(cancel, |bus| {
+                if files.project_id != bus.project().id {
+                    return Err(error("asset import access belongs to a different project"));
+                }
+                if args.expected_revision != bus.revision() {
+                    return Err(error(
+                        "project revision changed; query and retry the import",
+                    ));
+                }
+                if cancel.load(Ordering::Relaxed) {
+                    return Err(AgentError::Interrupted);
+                }
+                Ok(ImportSnapshot::capture(bus))
+            })?;
+            let prepared = snapshot.prepare(&files.root, None, &args.sources)
                 .map_err(error)?;
             // Parsing cannot be interrupted portably, but cancellation never
             // commits a completed batch after the user's stop request.
             if cancel.load(Ordering::Relaxed) {
                 return Err(AgentError::Interrupted);
             }
-            let revision = bus.revision();
-            let committed = prepared
-                .commit(bus, actor, args.description)
-                .map_err(error)?;
-            let transaction = if bus.revision() != revision {
-                bus.history().last().map(|tx| &tx.id)
-            } else {
-                None
-            };
-            let imports: Vec<_> = committed.imports.iter().map(|outcome| json!({"asset":outcome.asset,"changed":outcome.changed,"cache_hit":outcome.cache_hit,"diagnostics":outcome.diagnostics})).collect();
-            Ok(
-                json!({"revision":committed.revision,"transaction_id":transaction,"untrusted_project_data":imports}),
-            )
+            access.with_bus(cancel, |bus| {
+                let revision = bus.revision();
+                let committed = prepared
+                    .commit(bus, actor, args.description)
+                    .map_err(error)?;
+                let transaction = if bus.revision() != revision {
+                    bus.history().last().map(|tx| &tx.id)
+                } else {
+                    None
+                };
+                let imports: Vec<_> = committed.imports.iter().map(|outcome| json!({"asset":outcome.asset,"changed":outcome.changed,"cache_hit":outcome.cache_hit,"diagnostics":outcome.diagnostics})).collect();
+                Ok(
+                    json!({"revision":committed.revision,"transaction_id":transaction,"untrusted_project_data":imports}),
+                )
+            })
         }
         _ => Err(error("unknown asset tool")),
     }
