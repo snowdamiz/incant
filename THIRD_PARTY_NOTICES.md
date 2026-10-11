@@ -88,3 +88,13 @@ Retain this notice and the Apache license with static-module distributions.
 The development-only Wasmtime 49.0.2 and build-only wasm-tools crates retain their
 pinned crates.io resolutions and licenses in Cargo.lock; they do not enter the
 normal static-player dependency graph.
+
+## Static FBX import
+
+The authoring importer uses unmodified [ufbx Rust 0.11.5](https://crates.io/crates/ufbx/0.11.5),
+including its bundled [ufbx C 0.23.1](https://github.com/ufbx/ufbx/tree/v0.23.1),
+copyright (c) 2020 Samuli Raivio, choosing the [MIT license](licenses/ufbx-MIT.txt).
+Cargo.lock pins the registry checksum. No Autodesk SDK is included, and the source
+parser is absent from the normal native runtime dependency graph. Selected upstream
+FBX test data retains its license and exact hashes in
+`crates/incant_assets/tests/fixtures/fbx/provenance.json`.

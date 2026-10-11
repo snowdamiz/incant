@@ -20,7 +20,28 @@ impl From<&ImportedModel> for ModelMetadata {
 /// Re-snapshot every dependency before considering a hit, so changed external
 /// buffers invalidate the entry even when the glTF JSON has not changed.
 pub fn cook_gltf(root: &Path, source: &Path, cache: &Path) -> Result<CookedModel> {
-    let imported = import_gltf(root, source)?;
+    cook_imported(import_gltf(root, source)?, cache)
+}
+/// Static FBX shares the checked model/meshopt/KTX2 format with glTF.
+pub fn cook_fbx(root: &Path, source: &Path, cache: &Path) -> Result<CookedModel> {
+    cook_imported(crate::import_fbx(root, source)?, cache)
+}
+/// Authoring import dispatch. Runtime readers never link either source parser.
+pub fn cook_model(root: &Path, source: &Path, cache: &Path) -> Result<CookedModel> {
+    match source
+        .extension()
+        .and_then(|s| s.to_str())
+        .map(str::to_ascii_lowercase)
+        .as_deref()
+    {
+        Some("gltf" | "glb") => cook_gltf(root, source, cache),
+        Some("fbx") => cook_fbx(root, source, cache),
+        _ => Err(AssetError::Unsupported(
+            "model format (expected glTF, GLB or FBX)".into(),
+        )),
+    }
+}
+fn cook_imported(imported: ImportedModel, cache: &Path) -> Result<CookedModel> {
     let metadata = ModelMetadata::from(&imported);
     crate::material::resolve(&metadata.materials, &metadata.textures, &imported.images)?;
     if let Ok(mut model) = load_model(cache, &metadata.fingerprint)

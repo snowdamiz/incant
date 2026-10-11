@@ -3,6 +3,7 @@ mod atlas;
 mod audio;
 mod audio_cook;
 mod cache;
+mod fbx;
 mod gltf_import;
 mod ktx;
 mod material;
@@ -19,7 +20,8 @@ mod texture_cache;
 
 pub use audio::{AUDIO_CHUNK_FRAMES, AudioMetadata, CookedAudio, MAX_AUDIO_PCM_BYTES, load_audio};
 pub use audio_cook::cook_audio;
-pub use cache::{CookedModel, ModelMetadata, cook_gltf, load_model};
+pub use cache::{CookedModel, ModelMetadata, cook_fbx, cook_gltf, cook_model, load_model};
+pub use fbx::import_fbx;
 pub use gltf_import::{ImportedModel, ModelNode, import_gltf};
 pub use ktx::{decode_ktx2, encode_ktx2};
 pub use material::{AlphaMode, Material, MaterialTexture};
@@ -44,6 +46,8 @@ pub enum AssetError {
     Io(#[from] std::io::Error),
     #[error("invalid glTF: {0}")]
     Gltf(#[from] gltf::Error),
+    #[error("invalid FBX: {0}")]
+    Fbx(String),
     #[error("asset JSON: {0}")]
     Json(#[from] serde_json::Error),
     #[error("invalid asset: {0}")]

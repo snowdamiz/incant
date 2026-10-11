@@ -1,0 +1,264 @@
+{
+  "scope": "bounded authoring-only static FBX; no renderer changes or complete animation/skinning claim",
+  "base": "77d86b83b9947d78d4643df0ae71f421e8168f7b",
+  "ufbx": {
+    "rust": "0.11.5",
+    "c": "0.23.1",
+    "license": "MIT",
+    "checksum": "260522f1eb74139f0e78b29dd82a58e5437d728c5498024a39e5af7282694240"
+  },
+  "rust": "cargo 1.99.0 (5f94df478 2026-08-27)",
+  "system": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6\nBuildVersion:\t\t25G72",
+  "source_sha256": {
+    "Cargo.lock": "2b2aaca8dc2bcb6259b7008f6523756ff9f134f0791872bc4e0b04ec68a72e67",
+    "crates/incant_assets/Cargo.toml": "274ee8e0d78aa3dac61825a61af0db1ef01e92cf1efba57a2f184c936ce271f2",
+    "crates/incant_assets/src/fbx/mod.rs": "58feaaf96a503211391cff0b7e4886034f79f5e663113b1d4a0fed9eaedaddf2",
+    "crates/incant_assets/src/fbx/geometry.rs": "2310b28ff2110a5ecc332f6470ab33e27b9dacd1f40482f05f40158786cbd178",
+    "crates/incant_assets/src/fbx/materials.rs": "52a6ee3d2f4567c75871bf6fd3081ed48d3ae3ac15a43fd7431cfe1b920ce7fe",
+    "crates/incant_assets/src/cache.rs": "15849e719a10d50bd18ce262c7c5327a9cca399a6c0b10669dfc8861598d3394",
+    "crates/incant_assets/src/source.rs": "9086d595e19d37e5cf33308e4b0c2312a026fdfa62f91dc8f54c9a90052560d3",
+    "crates/incant_import/src/lib.rs": "90c5f8a298f9c0d2bd91090bc81c5373093db4269ac6b35791585d54b0d82471",
+    "crates/incant_assets/tests/fbx.rs": "1a47e5d3a9ae6b316e3b321e201e271b9c286932ddf1b27a53ae107ce5bc9429",
+    "crates/incant_import/tests/fbx.rs": "9d1ba66ebad7c909f54c42e3482fbca8ff0caa536e060f2f713e4f87e4ca4455",
+    "editor/ui/src/assets/paths.ts": "7fb58eead6cca9de6e6d0c99df3d6ba781a0db7927f5e4148ef92ae9a753f653",
+    "tools/check_runtime_dependencies.py": "7dbc258f01b3864af6f0bcf86431ef5906059853a1df0938218d3a049f71a67d"
+  },
+  "checks": {
+    "scoped_release_tests": 70,
+    "ui_tests": 531,
+    "ui_files": 30,
+    "tools_tests": 50,
+    "release_clippy": true,
+    "strict_typescript": true,
+    "ui_build": true,
+    "headless_release_build": true,
+    "runtime_guard_features": "incant_game_player/render-gpu",
+    "runtime_parser_absent": true,
+    "format_conventions_diff": true
+  },
+  "logs": {
+    "scoped-tests": {
+      "local_path": "/tmp/incant-fbx-scoped-tests.log",
+      "sha256": "b331b958c789b7f3a76e1472216e1c932670370ca9ee074c7ed4ffe4bafdc81c"
+    },
+    "clippy": {
+      "local_path": "/tmp/incant-fbx-clippy.log",
+      "sha256": "b6a9f44e54f871fdb4bd44b0019f8f86f0d2e3ff55908b360af3d52afefa3d42"
+    },
+    "headless-build": {
+      "local_path": "/tmp/incant-fbx-headless-build.log",
+      "sha256": "5810baaf2e973664c33f0adfac1b9b74d178cac7faf48482bce16719fd1f01f7"
+    },
+    "runtime-guard": {
+      "local_path": "/tmp/incant-fbx-runtime-guard.log",
+      "sha256": "ba18e249af5ddc5262e6ec4000ad5de47ede24ca8e4d71df21eb3e3a700e3f72"
+    },
+    "ui-tests": {
+      "local_path": "/tmp/incant-fbx-ui-tests.log",
+      "sha256": "c360bba81cb3b97702bdd5501d13dac0ddc2e638565262bd7ab1217456b529e5"
+    },
+    "ui-typecheck": {
+      "local_path": "/tmp/incant-fbx-ui-typecheck.log",
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+    },
+    "ui-build": {
+      "local_path": "/tmp/incant-fbx-ui-build.log",
+      "sha256": "d78cf64dcb051b74c830a79d02279cdcf14aa1795e71516583032258a3d1b085"
+    },
+    "tools": {
+      "local_path": "/tmp/incant-fbx-tools.log",
+      "sha256": "b5cb0c636d36bb048fdd069729da4d1032b16bc1a4a6f76cfe8f6b47e6a471ac"
+    }
+  },
+  "cli": {
+    "binary_sha256": "e5f686ffb6cc00e7761cb643593f48c2047caaadce2a43ee94f1fbfffa6a67fa",
+    "processes": 11,
+    "initial": {
+      "asset": {
+        "id": "01M4MH439PS9NNY3P3MCV53E0H",
+        "kind": "model",
+        "name": "cube",
+        "path": "cube.FBX",
+        "sha256": "4fa86716a93403f1526b91dcb825a13dc5b1b20585964396abcc62c6dd8d7757"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "dependencies": [
+          {
+            "path": "cube.FBX",
+            "sha256": "00a26466be678131f143a1fa29804eab09a7520f40787c7dc51f5b4bb9e6b98c"
+          }
+        ],
+        "meshes": 1,
+        "textures": 0,
+        "vertices": 36
+      },
+      "revision": 1
+    },
+    "unchanged": {
+      "asset": {
+        "id": "01M4MH439PS9NNY3P3MCV53E0H",
+        "kind": "model",
+        "name": "cube",
+        "path": "cube.FBX",
+        "sha256": "4fa86716a93403f1526b91dcb825a13dc5b1b20585964396abcc62c6dd8d7757"
+      },
+      "cache_hit": true,
+      "changed": false,
+      "details": {
+        "dependencies": [
+          {
+            "path": "cube.FBX",
+            "sha256": "00a26466be678131f143a1fa29804eab09a7520f40787c7dc51f5b4bb9e6b98c"
+          }
+        ],
+        "meshes": 1,
+        "textures": 0,
+        "vertices": 36
+      },
+      "revision": 1
+    },
+    "reimport": {
+      "asset": {
+        "id": "01M4MH439PS9NNY3P3MCV53E0H",
+        "kind": "model",
+        "name": "cube",
+        "path": "cube.FBX",
+        "sha256": "6fa6935ea6ac62a3ddf3fb5cd62cc0e74e33c1bf453327ac35927c32e861b780"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "dependencies": [
+          {
+            "path": "cube.FBX",
+            "sha256": "8ca1c0dbd4e4979e9572dd3e0d5d93913587fe87967300a457e93a5ae8970fcd"
+          }
+        ],
+        "meshes": 1,
+        "textures": 0,
+        "vertices": 36
+      },
+      "revision": 2
+    },
+    "stable_asset_id": true,
+    "undo_redo_exact": true,
+    "rejected_import_project_and_journal_unchanged": true,
+    "sources_deleted": true,
+    "validation_after_deletion": true,
+    "cached_runtime_reader_executed": "separate Rust integration tests",
+    "cache": [
+      {
+        "path": "4fa86716a93403f1526b91dcb825a13dc5b1b20585964396abcc62c6dd8d7757.incmodel",
+        "bytes": 1218,
+        "sha256": "4820278e25465656cb87371dbbcfe534e4bd44642aefe5bb88d14a31d2b0317f"
+      },
+      {
+        "path": "6fa6935ea6ac62a3ddf3fb5cd62cc0e74e33c1bf453327ac35927c32e861b780.incmodel",
+        "bytes": 1281,
+        "sha256": "4aa573222cd411a5939b4a8b349679278835b05998fda06c7f55969547576b88"
+      }
+    ],
+    "invalid_error": "Error: could not cook cube.FBX: invalid FBX: TruncatedFile: Truncated file",
+    "unsupported_error": "Error: could not cook animated.fbx: unsupported asset feature: static FBX: animation channels",
+    "calls": [
+      {
+        "args": [
+          "init",
+          "<output>/model.incant.json",
+          "--name",
+          "FBX command proof",
+          "--entities",
+          "0"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "import",
+          "<output>/model.incant.json",
+          "cube.FBX"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "rpc",
+          "<output>/model.incant.json",
+          "--journal",
+          "<output>/model.incant.journal.jsonl"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "import",
+          "<output>/model.incant.json",
+          "cube.FBX"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "rpc",
+          "<output>/model.incant.json",
+          "--journal",
+          "<output>/model.incant.journal.jsonl"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "import",
+          "<output>/model.incant.json",
+          "cube.FBX"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "rpc",
+          "history.undo",
+          "project.save"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "rpc",
+          "history.redo",
+          "project.save"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "import",
+          "<output>/model.incant.json",
+          "cube.FBX"
+        ],
+        "exit": 1
+      },
+      {
+        "args": [
+          "import",
+          "<output>/model.incant.json",
+          "animated.fbx"
+        ],
+        "exit": 1
+      },
+      {
+        "args": [
+          "validate",
+          "<output>/model.incant.json"
+        ],
+        "exit": 0
+      }
+    ],
+    "rendering": false,
+    "visual_review": false
+  },
+  "appearance": "pending Claude0040, explicitOpus5.5/Max required",
+  "limits": "Desktop authoring CPU checks only; no phone/performance/export/full-FBX gate"
+}

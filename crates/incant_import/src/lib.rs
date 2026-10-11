@@ -3,7 +3,7 @@
 mod sprites;
 mod watch;
 use incant_assets::{
-    AssetError, Dependency, TextureFormat, TextureUsage, cook_audio, cook_gltf, cook_texture,
+    AssetError, Dependency, TextureFormat, TextureUsage, cook_audio, cook_model, cook_texture,
 };
 use incant_cmd::{Actor, Command, CommandBus, CommandError};
 use incant_doc::{Asset, AssetImportSettings, Project, new_id};
@@ -32,7 +32,7 @@ pub enum ImportError {
     #[error("multiple assets use source {0}; resolve their identities before reimport")]
     AmbiguousSource(String),
     #[error(
-        "unsupported import source: {0}; expected glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG"
+        "unsupported import source: {0}; expected glTF, GLB, FBX, PNG, JPEG, EXR, .atlas.json, WAV or OGG"
     )]
     Unsupported(String),
     #[error("texture usage applies only to standalone images: {0}")]
@@ -152,7 +152,7 @@ impl ImportSnapshot {
                 .unwrap_or("")
                 .to_ascii_lowercase();
             let kind = match extension.as_str() {
-                "gltf" | "glb" => ImportKind::Model,
+                "gltf" | "glb" | "fbx" => ImportKind::Model,
                 "png" | "jpg" | "jpeg" | "exr" => ImportKind::Texture,
                 "wav" | "ogg" => ImportKind::Audio,
                 "json" if request.source.to_ascii_lowercase().ends_with(".atlas.json") => {
@@ -266,7 +266,7 @@ fn cook(
     let source = Path::new(&request.source);
     let (kind, fingerprint, cache_hit, import_settings, details) = if kind == ImportKind::Model {
         let cache = cache_directory(root, cache_override, "models")?;
-        let cooked = cook_gltf(root, source, &cache)?;
+        let cooked = cook_model(root, source, &cache)?;
         (
             "model",
             cooked.metadata.fingerprint,
