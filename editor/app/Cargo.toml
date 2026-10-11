@@ -6,6 +6,8 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+# Explicit local numerical native-window acceptance, absent from normal builds.
+play-probe = []
 custom-protocol = ["tauri/custom-protocol"]
 
 [build-dependencies]
@@ -21,6 +23,13 @@ incant_assets = { path = "../../crates/incant_assets" }
 incant_core = { workspace = true }
 incant_agent = { workspace = true }
 incant_render = { path = "../../crates/incant_render" }
+incant_play = { path = "../../crates/incant_play", features = ["device"] }
+incant_script.workspace = true
+incant_input.workspace = true
+incant_runtime.workspace = true
+incant_audio_runtime = { workspace = true, features = ["device"] }
+incant_render_gpu_host = { path = "../../crates/incant_render_gpu_host" }
+ulid.workspace = true
 serde = { workspace = true }
 serde_json = { workspace = true }
 pollster = "0.4"

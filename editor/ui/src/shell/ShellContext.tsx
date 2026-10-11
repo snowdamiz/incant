@@ -102,8 +102,9 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
 
   const request = useCallback(
     async (hostRequest: HostRequest): Promise<BridgeResult> => {
-      if (!bridge || !capabilities.has(hostRequest.type)) {
-        const message = unavailableMessage(hostRequest.type, bridge);
+      const capability = hostRequest.type === 'play.start' || hostRequest.type === 'play.pause' || hostRequest.type === 'play.resume' || hostRequest.type === 'play.step' || hostRequest.type === 'play.stop' ? 'play.control' : hostRequest.type;
+      if (!bridge || !capabilities.has(capability)) {
+        const message = unavailableMessage(capability, bridge);
         announce(message);
         return { ok: false, error: { code: 'unsupported', message } };
       }
