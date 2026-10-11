@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Shared agent project access — locally verified
+
+The agent loop can share the editor command bus without holding its mutex during
+provider requests, streaming, approvals, asset cooking or perception. The common
+mutation path retains revision checks, provenance and undo. Native Play validates
+the captured revision after immutable startup and before candidate ticks, so a
+concurrent script write cannot publish a mixed scene/source revision. All 47 agent
+tests, five native agent Play cases and scoped Clippy pass; independent review
+accepted the corrected source-race boundary. [Evidence](docs/spikes/shared-agent-project-access.md).
+This is backend work; chat-panel wiring, visual approval/history and budget UI
+remain outstanding. It does not complete Phase 3 or a live-provider gate.
+
 ## CI cadence change — 2026-10-11
 
 The director authorized local tests and a fast hosted development gate for main,
@@ -62,6 +74,12 @@ build/generation and shipping audits. Independent review removed a resurrected
 old workflow and duplicate tests. [Evidence](docs/spikes/native-project-package.md).
 Existing full checkpoint jobs now include the export probe; hosted execution,
 window package execution and complete UI/export/device gates remain open.
+
+The shared-agent backend's actual main92 integration preserves all nine reviewed
+source identities and passes95 Agent/headless tests, scoped Clippy,62 exact
+contracts and the public32-request/two-process source/Play proof. The stale
+source-cook regression rejects a mixed candidate and retains the previous run.
+Editor chat wiring remains separate. [Evidence](docs/spikes/shared-agent-project-access.md).
 
 ## Current integration and parallel work
 
