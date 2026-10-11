@@ -338,6 +338,9 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
     if (capabilities.has('provider.connect')) void ask({ type: 'provider.connect', method: 'oauth' });
   };
 
+  // The host says it cannot admit a decision yet (it re-reads the session after Undo, Redo
+  // or an account read), even when the allowances it shows match. Older hosts do not say.
+  const approvalHeld = agent?.status === 'running' && agent.approvalReady === false;
   const decisionBlocked = !capabilities.has('agent.approve')
     ? unavailableMessage('agent.approve', bridge)
     : phase === 'stopping'
@@ -348,7 +351,9 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
           ? 'Retry the connection to decide. You can still stop the agent.'
           : savingAllowance || allowancePending
             ? 'Waiting for the agent to apply the new allowance. You can still stop the agent.'
-            : null;
+            : approvalHeld
+              ? 'Waiting for the agent to update its session. You can still stop the agent.'
+              : null;
   const turnActions = useMemo<Omit<TurnActions, 'reading'>>(
     () => ({
       names,
