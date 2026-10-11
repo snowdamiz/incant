@@ -20,7 +20,7 @@ visual work, and Astra owns correctness and integration.
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
 | Native tilemaps | Typed v6 data and exact solid-cell collision preparation are in [PR #68](https://github.com/snowdamiz/incant/pull/68). Retained GPU tile rendering now shares checked atlas versions, painter ordering and combined sprite/tile resource caps; 45 ordinary and 62 GPU tests pass. | Claude appearance review is separate. Solid-map simulation still explicitly refuses the missing Rapier2D consumer; legacy Play remains unsupported. [Data](docs/spikes/native-tilemaps.md), [rendering](docs/spikes/native-tilemap-rendering.md). |
-| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | Hosted verification, optimized Windows/MSVC support, full SDK/game composition and device execution continue separately. |
+| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | MSVC /Od and /O2 configurations are prepared for hosted conformance; actual Windows execution, full SDK/game composition and device evidence remain pending. |
 | CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
 
 Three Astra extra-high subagents own implementation/integration work in isolated
@@ -82,9 +82,11 @@ review; concurrent native reviews coordinate foreground ownership.
   terminate the module. A fresh 2,780,816-byte macOS executable passes three
   exact-motion processes and 18 refusals after temporary sources/build removal.
   Actual iOS C/Rust compilation is compile-only. Initial static memory/table
-  growth and MSVC are explicitly unsupported pending follow-up.
+  growth remains unsupported. A native x64 MSVC /Od baseline and /O2 candidate
+  now have conformance/proof wiring, but actual Windows execution remains pending.
   [Development host](docs/spikes/development-wasm-host.md),
-  [static host](docs/spikes/shipping-wasm2c.md).
+  [static host](docs/spikes/shipping-wasm2c.md),
+  [MSVC follow-up](docs/spikes/wasm2c-msvc.md).
 
 Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
