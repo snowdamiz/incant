@@ -988,3 +988,7 @@ scenes. Seven new behavior regressions plus existing game/script coverage total
 normal/device authoring-free dependency guards pass. [Evidence](docs/spikes/native-game-hosting.md).
 Real render-input/GPU consumer integration and its fresh player/union proof
 remain separate; no runtime saves, rendering/performance or phase gate is claimed.
+
+## Mandatory native render-input host (2026-10-10)
+
+One checked retained native input now composes with mandatory generic consumer preparation/sync inside the native game lifecycle. Seven actual cook/QuickJS/physics/PCM integration regressions and release Clippy/normal dependency checks pass, including source/cache removal, reparent, retry and terminal consumer failure/unwind. Default observation is explicitly CPU-only; GPU hosting and the opt-in source-free player proof remain separate. [Evidence](docs/spikes/native-render-game.md).
