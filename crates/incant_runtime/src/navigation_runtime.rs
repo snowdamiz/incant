@@ -345,19 +345,7 @@ impl NativeWorld {
         request: &PathRequest,
     ) -> Result<Option<NavigationPath>, RuntimeError> {
         self.ensure_navigation_current()?;
-        let entry = self
-            .navigation
-            .meshes
-            .get(&entity)
-            .ok_or(SceneError::Invalid("navigation mesh is absent"))?;
-        Ok(entry
-            .mesh
-            .find_path(request)
-            .map_err(failure)?
-            .map(|mut p| {
-                p.generation = entry.report.generation;
-                p
-            }))
+        self.navigation.path(entity, request).map_err(Into::into)
     }
     pub fn grid_path(
         &self,
@@ -365,15 +353,9 @@ impl NativeWorld {
         request: &GridPathRequest,
     ) -> Result<Option<GridPath>, RuntimeError> {
         self.ensure_navigation_current()?;
-        let (entry, generation) = self
-            .navigation
-            .grids
-            .get(&entity)
-            .ok_or(SceneError::Invalid("navigation grid is absent"))?;
-        Ok(entry.find_path(request).map_err(failure)?.map(|mut p| {
-            p.generation = *generation;
-            p
-        }))
+        self.navigation
+            .grid_path(entity, request)
+            .map_err(Into::into)
     }
     /// Report for the last actual rebuild; unchanged ticks retain it and its generation.
     pub fn navigation_report(&self, entity: StableId) -> Result<&RebuildReport, RuntimeError> {
@@ -398,5 +380,42 @@ impl NativeWorld {
                     .is_none_or(|m| m.0.linear == [0.; 3])
             },
         )
+    }
+}
+
+// Pure retained-cache reads shared by ordinary world queries and the exclusive
+// numeric loan. Neither path can rebuild from pending ECS writes.
+impl NavigationRuntime {
+    pub(crate) fn path(
+        &self,
+        entity: StableId,
+        request: &PathRequest,
+    ) -> Result<Option<NavigationPath>, SceneError> {
+        let entry = self
+            .meshes
+            .get(&entity)
+            .ok_or(SceneError::Invalid("navigation mesh is absent"))?;
+        Ok(entry
+            .mesh
+            .find_path(request)
+            .map_err(failure)?
+            .map(|mut path| {
+                path.generation = entry.report.generation;
+                path
+            }))
+    }
+    pub(crate) fn grid_path(
+        &self,
+        entity: StableId,
+        request: &GridPathRequest,
+    ) -> Result<Option<GridPath>, SceneError> {
+        let (entry, generation) = self
+            .grids
+            .get(&entity)
+            .ok_or(SceneError::Invalid("navigation grid is absent"))?;
+        Ok(entry.find_path(request).map_err(failure)?.map(|mut path| {
+            path.generation = *generation;
+            path
+        }))
     }
 }

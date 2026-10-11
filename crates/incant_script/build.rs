@@ -29,6 +29,7 @@ fn main() {
         Path::new("src/queries.rs").into(),
         Path::new("src/query_values.rs").into(),
         Path::new("src/query_values_2d.rs").into(),
+        Path::new("src/navigation_values.rs").into(),
         Path::new("src/schedule.rs").into(),
         Path::new("src/timers.rs").into(),
         Path::new("src/logging.rs").into(),
