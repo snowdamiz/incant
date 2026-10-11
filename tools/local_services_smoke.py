@@ -21,7 +21,7 @@ def main():
     stack.prepare()
     try:
         stack.validate_config()
-        stack.compose('up', '-d', '--wait', '--wait-timeout', '180')
+        stack.up()
         health = stack.health()
         first = run(stack)
         require(signed_s3(stack, 'PUT', '/restart-proof')[0] == 200, 'restart bucket')
@@ -34,7 +34,7 @@ def main():
         stack.compose('down')
         stack.prepare()
         require(hashlib.sha256((stack.state / 'settings.json').read_bytes()).digest() == state_hash, 'restart retained private state')
-        stack.compose('up', '-d', '--wait', '--wait-timeout', '180')
+        stack.up()
         require(stack.health()['oidc_issuer'] == health['oidc_issuer'], 'restart issuer stable')
         output = stack.compose('exec', '-T', 'postgres', 'sh', '-c',
             'PGPASSWORD="$POSTGRES_PASSWORD" psql -h gateway -p 15432 -U incant -d incant -v ON_ERROR_STOP=1 -At',

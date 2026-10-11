@@ -10,6 +10,10 @@ use std::{
     time::{Duration, Instant},
 };
 
+#[cfg(windows)]
+mod windows;
+
+const DRIVER: &str = "tools/build_native_script.mjs";
 const DEADLINE: Duration = Duration::from_secs(8);
 const MAX_LOG_BYTES: u64 = 2 * 1024 * 1024;
 
@@ -24,7 +28,11 @@ pub fn compile_project_sources(
     let engine = Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../..")
         .canonicalize()?;
-    let driver = engine.join("tools/build_native_script.mjs");
+    #[cfg(windows)]
+    let launch_engine = windows::launch_directory(&engine)?;
+    #[cfg(not(windows))]
+    let launch_engine = &engine;
+    let driver = engine.join(DRIVER);
     if !driver.is_file()
         || !engine
             .join("node_modules/typescript/package.json")
@@ -50,11 +58,15 @@ pub fn compile_project_sources(
     let mut command = Command::new(&node);
     command
         .args(["--max-old-space-size=512", "--disable-proto=throw"])
-        .arg(&driver)
+        // Rust canonicalizes Windows paths to \?\ drive/UNC syntax. Pinned Node
+        // can fail in its CLI realpathSync before entering a namespaced script
+        // (nodejs/node#62446). Resolve only this fixed entry relative to the
+        // trusted engine cwd; retain canonical paths for checks and project data.
+        .arg(DRIVER)
         .arg("--project")
         .arg(&root)
         .arg(&output)
-        .current_dir(&engine)
+        .current_dir(launch_engine)
         .env_clear()
         .env("PATH", node.parent().expect("canonical executable parent"))
         .env("TMPDIR", directory.path())
