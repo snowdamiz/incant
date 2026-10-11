@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native agent worker controller — locally verified
+
+The provider-independent session controller now supports one physical native
+worker, immediate cancellation of stream/approval publication, stale-decision
+rejection and bounded versioned snapshots. Session token accounting survives
+errors and cancellation; uncertain accounting exhausts the allowance explicitly.
+All 62 agent tests and scoped Clippy pass, including 15 new controller cases and
+real agent/command-bus integration with a deterministic provider.
+[Evidence](docs/spikes/native-agent-session.md). Actual editor/account/native-host
+binding, conversation-context integration, persistent budget settings and visual
+chat/approval/history remain separate work. This is not a live-provider gate.
+
 ## Shared agent project access — locally verified
 
 The agent loop can share the editor command bus without holding its mutex during
