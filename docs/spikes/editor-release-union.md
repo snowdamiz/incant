@@ -1,28 +1,38 @@
 # Plain editor release union
 
-The current code union is a20d258: the plain editor and accessibility corrections
-through ce06c31, plus reviewed sprite/atlas head8a7fbaf. The authored calendar-free
-PLAN revision7 commit8fe00eca is preserved by merge65129c8. Only the STATUS merge
-needed resolution; the latest implementation notes and revision7 reference remain.
-Editor, runtime, schemas, dependencies and workflow bytes match a20d258 exactly.
+The release combines the plain editor and accessibility corrections through
+ce06c31 with the reviewed sprite/atlas source. PLAN revision7's authored8fe00eca
+commit and the user's main merge6a759c6 are preserved. The final branch also
+contains corrected sprite head5b3071b, whose17 hosted checks passed on Windows,
+Linux and macOS. Only a STATUS conflict prevented merging that earlier PR directly
+after the user's PLAN update; the final UI PR validates the combined tree once.
 
-[Local evidence](evidence/editor-release-union-2026-10-10.json) records source
-objects and log hashes:451 release workspace tests,56 ignored GPU tests, release
-all-target Clippy, generated bridge,503 UI tests/build and the custom-protocol
-native editor build pass. After the PLAN integration, all40 Python tools tests,
-generated conventions and whitespace checks pass. The staffing gate remains open
-under its new `initial_staffing_confirmed` key; no gate is approved.
+[Local baseline evidence](evidence/editor-release-union-2026-10-10.json) records
+source objects and log hashes:451 release workspace tests,56 ignored GPU tests,
+release all-target Clippy, generated bridge,503 UI tests/build and the native
+custom-protocol build at a20d258. Later changes below are separately validated;
+those historical counts do not claim a build of newer frontend source.
 
-Claude Opus5.5 at explicitly verified Max reviews the real-schema Camera and
-sprite/atlas UI union through [handoff0035](../../handoffs/0035-editor-union-review/brief.md).
-The five plain-design requirements and prior behavioral corrections remain in
-force. This review is pending; these build checks do not approve rendered pixels.
+Claude Opus5.5 at explicitly verified Max completed the full browser review in
+[handoff0035](../../handoffs/0035-editor-union-review/result.md), commit9fb82e6:
+102 captures, the three real Camera projections, sprite/atlas Inspector states,
+account flows, shortcut notation, keyboard focus, paging, menus and narrow/minimum
+windows. All43 committed evidence hashes were independently verified. The plain
+layout survived the union; the review exposed the two behavior defects addressed
+below. The focused final presentation reconciliation is in progress.
 
-The director's running native preview is the older0d14f4f binary. It remains
-untouched. The newly built union has not been opened or visually accepted; older
-captures do not certify its native menus, dialogs, minimum size, paging or focus.
-Hosted checks and the exact current-source rendered review remain pending before
-release integration. Device/performance gates and full engine completion remain open.
+The generic sprite Inspector still lacks explicit untagged Region presentation,
+semantic channel/border labels, schema field order and bounded atlas-frame
+metadata. It reports unsupported values truthfully. Those items and the existing
+inactive-title contrast finding are separate presentation follow-up work; they do
+not imply a complete native 2D authoring or gameplay path.
+
+The director's running native0d14f4f preview remains untouched. No current-union
+native app was opened or visually accepted. Older captures and headless Chrome
+do not certify current native menus, dialogs, minimum size, paging or focus.
+The final native frontend build and exact-head hosted checks remain pending.
+The staffing key is now `initial_staffing_confirmed`; device/performance gates,
+phase approval and complete engine/game release requirements remain open.
 
 ## Typed atlas/audio import guard, 2026-10-11
 
