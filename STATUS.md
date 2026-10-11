@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Reusable native agent host — locally verified
+
+The existing headless native Play controller/session and lazy authored viewport
+provider now live in authoring-only `incant_agent_native`. Trusted host fallback
+selection preserves the embedded headless behavior; authored source failures
+never fall back, and checked candidate publication keeps its original atomic
+boundary. Independent review, 102 scoped tests and matching all-target Clippy
+pass; 62 schemas are unchanged and shipped dependency guards stay clean.
+[Evidence](docs/spikes/native-agent-host.md). Editor wiring and native Play-frame
+capture are separate work; no new GPU or live-provider gate is claimed.
+
 ## Shared agent project access — locally verified
 
 The agent loop can share the editor command bus without holding its mutex during

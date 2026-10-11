@@ -1,6 +1,6 @@
 //! Retained native Play for the trusted editor/headless RPC boundary. Only start
 //! cooks authoring; stepping and selected observation use the disposable world.
-use crate::native_play::{Session, StartOptions};
+use crate::{FallbackCompiler, Session, StartOptions};
 use incant_cmd::CommandBus;
 use incant_doc::{Transform, Velocity};
 use incant_input::{InputEvent, InputFrame};
@@ -12,7 +12,7 @@ use std::{collections::BTreeMap, path::Path};
 mod run;
 
 #[derive(Debug, thiserror::Error)]
-pub(crate) enum Error {
+pub enum Error {
     #[error("native play interrupted")]
     Interrupted,
     #[error("native play exceeded its 10 second host execution budget")]
@@ -24,7 +24,7 @@ pub(crate) enum Error {
     #[error(transparent)]
     Decode(#[from] serde_json::Error),
     #[error(transparent)]
-    Native(#[from] crate::native_play::PlayError),
+    Native(#[from] crate::SessionError),
 }
 type Result<T> = std::result::Result<T, Error>;
 
@@ -160,11 +160,19 @@ impl Live {
     }
 }
 
-#[derive(Default)]
-pub(crate) struct Controller {
+/// Retains only the last accepted native session. The fallback is trusted host
+/// code and cannot be changed by project/agent request fields.
+pub struct Controller {
     live: Option<Live>,
+    fallback: FallbackCompiler,
 }
 impl Controller {
+    pub fn new(fallback: FallbackCompiler) -> Self {
+        Self {
+            live: None,
+            fallback,
+        }
+    }
     pub fn start(&mut self, bus: &CommandBus, root: &Path, params: Value) -> Result<Value> {
         let request: Start = serde_json::from_value(params)?;
         if self.live.is_some() {
@@ -181,6 +189,7 @@ impl Controller {
                 script_sha256: request.script_sha256,
             },
             request.sample_rate,
+            self.fallback,
         )?;
         let max_frames =
             (u64::from(request.sample_rate) / u64::from(session.world()?.tick_rate()) + 1) as usize;

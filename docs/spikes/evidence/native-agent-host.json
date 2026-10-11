@@ -1,0 +1,100 @@
+{
+  "base": "d50fb0b3a91ca27982ddcf1ce05fc8e2192e8f04",
+  "scope": "Authoring-only extraction and trusted fallback parameter; no runtime, editor or schema change",
+  "source_sha256": {
+    "Cargo.lock": "380beb7a1603905a40f46ba737b085e39e999c21793eb1eca45ce0d0e63cb666",
+    "crates/incant_agent_native/Cargo.toml": "69e04789c396aaf48f4b98fd5bbdf98a46b9f491b157e46d3c96ca68cd712ced",
+    "crates/incant_agent_native/src/controller/run.rs": "58e49ecfd1b00b788f76d6522b064328d6f202dda3c62879027977ce4cea9fcf",
+    "crates/incant_agent_native/src/controller.rs": "a11f7c09905ea0384287266980feb2f9f59f26a0940f9085f538758a59eef714",
+    "crates/incant_agent_native/src/host/tests.rs": "da38383acbe17614cd6c0b9ebfd3fa5cfb227bfdfa8704715d09c0d89951b625",
+    "crates/incant_agent_native/src/host.rs": "0fabbf0b8acef8ae50da15066d77e83da039a8cb2ee8fa72f308e112c3ecf327",
+    "crates/incant_agent_native/src/lib.rs": "5d1f4b1582bffeb3e349721d2f0b32e10e08c31fcf419cb5522b52b90e725e1a",
+    "crates/incant_agent_native/src/perception.rs": "c7150340dcb575553c05a3540670287ae0b089b2ab9c3cac0540654e4599ff4c",
+    "crates/incant_agent_native/src/session.rs": "cb2f17066548a4a2e702110ed7226ee644261bca4fd57566b0df9f873d615054",
+    "crates/incant_agent_native/tests/fallback.rs": "09c39a1ffa5fce7080a21defec32e9d711abae316f730f75cf8c438dbb159924",
+    "crates/incant_headless/Cargo.toml": "9284e5e1400f7e4bbb8bdeed91f14d3ffb051c2228b932394586b7e639b8d061",
+    "crates/incant_headless/src/main.rs": "f9f000783d4567cc88171991322422a8137a32701098796b4368ac7680912f66",
+    "crates/incant_headless/src/native_play.rs": "1d9712b9966573714a01dac4e3178a497ca51e3b627e0f7b38ae7497d55c04db",
+    "tools/check_runtime_dependencies.py": "661a879b8fdc1be5f29866c2c14c462c9df83d0e118f98d259732a67fced3000"
+  },
+  "review": {
+    "path": "/tmp/incant-native-agent-host-review.md",
+    "sha256": "f058b766333419549eb2738fe18e8f566ea74bde3d30dd358a088db4b4a01df2",
+    "result": "No actionable blocker; all14 reviewed hashes match current inputs"
+  },
+  "tests": {
+    "command": "CARGO_TARGET_DIR=/tmp/incant-agent-native-target ./tools/cargo test --locked -j2 --profile ci -p incant_agent_native -p incant_headless -p incant_play -p incant_agent",
+    "passed": 102,
+    "failed": 0,
+    "ignored_gpu": 2,
+    "result_groups": 29,
+    "new_tests": 3,
+    "moved_host_tests": 5,
+    "existing_native_cli_process_tests": 8,
+    "existing_native_rpc_process_tests": 6
+  },
+  "clippy": {
+    "command": "CARGO_TARGET_DIR=/tmp/incant-agent-native-target ./tools/cargo clippy --locked -j2 --profile ci -p incant_agent_native -p incant_headless -p incant_play -p incant_agent --all-targets -- -D warnings",
+    "exit_code": 0
+  },
+  "dependency_check": {
+    "command": "python3 tools/check_runtime_dependencies.py incant_runtime incant_script incant_game_runtime incant_game_player --features incant_game_player/render-gpu",
+    "exit_code": 0,
+    "guard_unit_tests": 7,
+    "incant_play_normal_graph_agent_free": true,
+    "incant_play_normal_resolved_packages": 393,
+    "external_lock_entries_unchanged": true
+  },
+  "schema_check": {
+    "command": "/tmp/incant-agent-native-target/ci/incant_headless schema /tmp/incant-agent-native-schemas",
+    "files_byte_identical": 62
+  },
+  "perception_screenshot_implementation_byte_identical_to_base": true,
+  "logs": {
+    "/tmp/incant-agent-native-tests.log": {
+      "sha256": "5be1431ba74c20a11cdb591be5a49c56dbc4c952646c370fc7905662041a0be2"
+    },
+    "/tmp/incant-agent-native-tests-2.log": {
+      "sha256": "61b87784f755ecbbc2f26c19d06b87137dcf4ecb4068798c2ce6723700f9e594"
+    },
+    "/tmp/incant-agent-native-clippy.log": {
+      "sha256": "ff9c189b1d43262a04a5bfe0aec06cbb3614ceff1ab718f8d9e712301823f946"
+    },
+    "/tmp/incant-agent-native-dependencies.log": {
+      "sha256": "59cf54cdf128fbc16fda9ef78ab748458d4ab07c98014586aeeb00a791c589a8"
+    },
+    "/tmp/incant-agent-native-guard-tests.log": {
+      "sha256": "fe836cbecd3b6b4f70bec51b58d30c3e45ad72ae7fb3cb63421a0f7337e651ae"
+    },
+    "/tmp/incant-agent-native-schemas.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-agent-native-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-agent-native-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-agent-native-sdk.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-agent-native-bridge.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limitations": [
+    "No GPU/capture/live-provider run in this extraction",
+    "No new shipping or device evidence",
+    "GpuPerception captures authored snapshots, not native Play state",
+    "Cooperative host cancellation/deadline cannot preempt startup or a running tick",
+    "No new VM/physics/audio save continuation guarantee"
+  ],
+  "initial_compile_failure": "Separate screenshot CLI still required RendererAuthoringExt; restored after failed handle reaped, before passing tests.",
+  "additional_checks": [
+    "cargo fmt --all -- --check",
+    "python3 tools/generate_conventions.py --check",
+    "node tools/generate_sdk.mjs --check",
+    "node tools/build_bridge.mjs --check",
+    "git diff --check"
+  ]
+}

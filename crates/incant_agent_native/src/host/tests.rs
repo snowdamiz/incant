@@ -8,6 +8,10 @@ use incant_doc::{Entity, Scene, Transform};
 use serde_json::json;
 use std::{collections::VecDeque, sync::atomic::Ordering};
 
+fn fallback() -> Result<incant_script::CompiledScript, incant_script::ScriptError> {
+    incant_script::CompiledScript::compile("exports.default = { update() {} };")
+}
+
 fn fixture() -> (CommandBus, String, String) {
     let mut project = Project::empty("Native agent play");
     project.settings.tick_rate = 10;
@@ -98,7 +102,7 @@ export default {{ update({{chunks,dt}}) {{ for(const c of chunks) for(let i=0;i<
     let initial =
         CommandBus::persistent_with_sources(temp.path().join("journal"), project, temp.path())
             .unwrap();
-    let mut native = Host::new(temp.path().to_path_buf(), NoViewport);
+    let mut native = Host::new(temp.path().to_path_buf(), NoViewport, fallback);
     let request = || serde_json::from_value(json!({"seconds":0.5})).unwrap();
     native
         .play_run(initial.project(), 0, request(), &AtomicBool::new(false))
@@ -310,7 +314,7 @@ export default {{ update({{instances,chunks,dt}}) {{
     let mut bus = CommandBus::new(project).unwrap();
     let before = bus.project().canonical_text().unwrap();
     let revision = bus.revision();
-    let mut host = Host::new(temp.path().to_path_buf(), NoViewport);
+    let mut host = Host::new(temp.path().to_path_buf(), NoViewport, fallback);
     let request = json!({"seconds":0.5});
     let result = call(&mut bus, &mut host, "play_run", request.clone()).unwrap();
     assert_eq!(result["passed"], true);
@@ -379,7 +383,7 @@ fn provider_loop_runs_native_motion_and_queries_actual_state_without_authoring_e
     let mut host = ProjectHost::new(
         bus.project(),
         temp.path(),
-        Host::new(temp.path().to_path_buf(), NoViewport),
+        Host::new(temp.path().to_path_buf(), NoViewport, fallback),
     )
     .unwrap();
     let path = format!("/entities/{eid}/transform/translation");
@@ -434,7 +438,7 @@ fn provider_loop_runs_native_motion_and_queries_actual_state_without_authoring_e
 fn completed_false_assertion_is_inspectable_and_bad_runs_preserve_previous_session() {
     let temp = tempfile::tempdir().unwrap();
     let (mut bus, _, eid) = fixture();
-    let mut host = Host::new(temp.path().to_path_buf(), NoViewport);
+    let mut host = Host::new(temp.path().to_path_buf(), NoViewport, fallback);
     let result = call(&mut bus, &mut host, "play_run", run_request(&eid, 99.)).unwrap();
     assert_eq!(result["passed"], false);
     let path = json!({"path":format!("/entities/{eid}/transform/translation")});
@@ -513,7 +517,7 @@ fn unsupported_hosts_hide_play_and_always_approval_can_cancel_before_execution()
         )
         .unwrap();
     assert_eq!(no_play.advertised, vec![false]);
-    let mut host = Host::new(temp.path().to_path_buf(), NoViewport);
+    let mut host = Host::new(temp.path().to_path_buf(), NoViewport, fallback);
     let cancel = AtomicBool::new(false);
     let mut provider = Scripted {
         outputs: VecDeque::from([vec![
