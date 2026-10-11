@@ -24,3 +24,23 @@ the hosted Linux job retains its real browser execution and cross-host compariso
 No CI coverage or shipping audit was removed.
 
 [Source identities and local validation](evidence/runtime-ci-corrections-2026-10-10.json).
+
+## Follow-up Linux and Windows failures
+
+The corrected dependency run passed native physics on Linux, including the
+actual browser execution. Wasm then reached a strict-C11 Linux trap-link failure:
+[reproduction and POSIX declaration fix](wasm2c-linux-c11.md). Root integration
+transplants exactly those seven build lines into its pre-MSVC build script; the
+combined static/development helper passes all 25 tests, Clippy and the real
+Rust guest probe again. No trap/vendor semantics change.
+
+The Windows editor job exposed one test attempting six independent Camera
+accessibility scans under a single five-second deadline. It now uses six
+separately named cases with the same fixtures, rules, assertions and per-case
+deadline. Teardown drains the entire pending mount/scan before another fixture
+can replace the DOM. The isolated forced-timeout check confirms subsequent cases
+remain valid; 529 full UI tests and strict TypeScript pass, and root repeats all
+59 Camera cases. [Exact test evidence](evidence/editor-camera-scan-isolation-2026-10-11.json).
+
+Root conformance log: `/tmp/incant-pr62-posix-conformance.log`; Camera log:
+`/tmp/incant-pr62-camera-final.log`. Full hosted verification remains required.
