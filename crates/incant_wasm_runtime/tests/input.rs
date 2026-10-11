@@ -29,6 +29,17 @@ fn snapshot(input: &InputRuntime, tick: usize) -> Vec<u8> {
             .chain(&memory[8 + len as usize..])
             .all(|b| *b == 0xa5)
     );
+    // Public guest parser must accept every real engine frame, including max
+    // synthesized cancellations, and consume all variable sections exactly.
+    let parsed = incant_module::InputSnapshot::parse(&memory[8..8 + len as usize]).unwrap();
+    assert_eq!(parsed.tick, tick as u64);
+    assert_eq!(parsed.actions().count(), input.frame().actions.len());
+    assert_eq!(parsed.gamepads().count(), input.frame().gamepads.len());
+    assert_eq!(
+        parsed.touch_changes().count(),
+        input.frame().touch_changes.len()
+    );
+    assert_eq!(parsed.gestures().count(), input.frame().gestures.len());
     cap.finish(&mut world).unwrap();
     assert!(cap.invoke(&mut memory, epoch, Call::InputLen).is_err());
     memory[8..8 + len as usize].to_vec()
@@ -118,6 +129,26 @@ fn wire_snapshot_preserves_raw_controls_named_edges_and_tap_with_explicit_tags()
         )
         .unwrap();
     let bytes = snapshot(&input, 3);
+    let public = incant_module::InputSnapshot::parse(&bytes).unwrap();
+    assert!(public.keyboard.held(incant_module::Key::F12 as u8));
+    assert!(public.action("jump").unwrap().released);
+    assert_eq!(public.mouse.position, Some([3., 4.]));
+    assert_eq!(
+        public
+            .gamepads()
+            .next()
+            .unwrap()
+            .value(incant_module::GamepadButton::RightTrigger),
+        Some(0.75)
+    );
+    assert_eq!(public.connected().collect::<Vec<_>>(), vec![7]);
+    assert!(matches!(
+        public.gestures().next(),
+        Some(incant_module::input::Gesture::Tap {
+            id: 4,
+            position: [11., 21.]
+        })
+    ));
     let mut r = Reader(&bytes);
     assert_eq!(&r.take::<8>(), INPUT_MAGIC);
     assert_eq!(r.u32() as usize, bytes.len());

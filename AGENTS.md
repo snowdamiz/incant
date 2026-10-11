@@ -56,7 +56,12 @@ Every commit trailer identifies its author: Built-by: astra or Built-by: claude.
 PRs are agent-authored and agent-merged into main once the scoped work is complete,
 reviewed, and its required checks pass, per the director's 2026-10-09 authorization.
 Do not request separate merge approval. A merge does not approve a phase gate or
-claim that deferred requirements are complete. Human-only actions include phase
+claim that deferred requirements are complete. Development PRs use scoped local
+tests, review and the fast development check;
+comprehensive cross-platform CI runs on frozen release checkpoints approximately
+every three hours, per the director's 2026-10-11 instruction. Follow
+`docs/adr/0014-ci.md`; never advance release on incomplete or failed checks.
+Human-only actions include phase
 gate approval, signing credentials, store/developer accounts, payments, legal
 filings, age ratings and staffing. Implement and verify reviewable work before
 requesting these actions. Never publish or sign using fabricated or borrowed
@@ -66,8 +71,8 @@ credentials.
 
 Route visual work with `python3 tools/handoff/main.py run <id>`. Prepare a packet
 with scope, acceptance criteria, paths, commands, performance constraints and
-expected result. Review returned diffs, run the full checks, then prepare the PR
-when a remote exists. Merge completed PRs into main after their required checks
+expected result. Review returned diffs, run all applicable locally feasible checks,
+then prepare the PR when a remote exists. Merge completed PRs into main after their required checks
 pass; resolve conflicts and verify the integrated result without asking for another
 merge confirmation. Preserve author trailers. Do not approve a phase gate.
 For `gh pr merge`, supply a `--body-file` ending in `Built-by: astra` so the

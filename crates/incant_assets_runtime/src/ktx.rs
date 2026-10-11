@@ -56,7 +56,7 @@ pub fn decode_ktx2(bytes: &[u8]) -> Result<Texture> {
         if level.data.len() != expected || level.uncompressed_byte_length != expected as u64 {
             return Err(invalid("KTX2 level length mismatch"));
         }
-        levels.push(level.data.to_vec());
+        levels.push(std::sync::Arc::from(level.data));
     }
     let texture = Texture {
         width: header.pixel_width,

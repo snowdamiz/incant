@@ -30,9 +30,9 @@ fn color_mips_average_linear_light_while_numeric_maps_preserve_values() {
     let color = import_image(&source, TextureUsage::Color).unwrap();
     let data = import_image(&source, TextureUsage::Linear).unwrap();
     assert_eq!(color.format, TextureFormat::Rgba8Srgb);
-    assert_eq!(color.levels[1], [188, 188, 188, 255]);
+    assert_eq!(color.levels[1].as_ref(), [188, 188, 188, 255]);
     assert_eq!(data.format, TextureFormat::Rgba8Linear);
-    assert_eq!(data.levels[1], [128, 128, 128, 255]);
+    assert_eq!(data.levels[1].as_ref(), [128, 128, 128, 255]);
     for t in [color, data] {
         assert_eq!(decode_ktx2(&encode_ktx2(&t).unwrap()).unwrap(), t);
     }
@@ -44,13 +44,13 @@ fn transparent_color_does_not_bleed_and_odd_edges_are_not_dropped() {
         TextureUsage::Color,
     )
     .unwrap();
-    assert_eq!(texture.levels[1], [0, 0, 255, 128]);
+    assert_eq!(texture.levels[1].as_ref(), [0, 0, 255, 128]);
     let texture = import_image(
         &png(3, 1, vec![0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255, 255]),
         TextureUsage::Linear,
     )
     .unwrap();
-    assert_eq!(texture.levels[1], [85, 85, 85, 255]);
+    assert_eq!(texture.levels[1].as_ref(), [85, 85, 85, 255]);
 }
 #[test]
 fn normal_map_mips_renormalize_vectors() {
@@ -180,7 +180,7 @@ fn model_textures_keep_bindings_variants_tangents_and_image_dependencies() {
     assert_eq!(t.wrap_t, 33648);
     assert_eq!(t.mag_filter, Some(9728));
     assert_eq!(
-        first.images[t.color.unwrap()].format,
+        first.images[t.color_unweighted.unwrap()].format,
         TextureFormat::Rgba8Srgb
     );
     assert_eq!(

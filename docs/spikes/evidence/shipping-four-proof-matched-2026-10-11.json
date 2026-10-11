@@ -1,0 +1,310 @@
+{
+  "passed": true,
+  "source_head": "023c8bb2919fd6fc882abd90a82fd45676155462",
+  "standalone_seconds": 526.4288127920008,
+  "shared_seconds": 437.96361166701536,
+  "saved_seconds": 88.46520112498547,
+  "saved_percent": 16.804779483059807,
+  "comparisons": [
+    {
+      "proof": "runtime",
+      "target_units": 101,
+      "fresh_units": 101,
+      "reused_units": 0,
+      "shared_build_seconds": 91.85097920900444,
+      "standalone_report_sha256": "9758db5a3e168a0fa9739a6d91727dcbebcf3a5d60a906dea2a99ad03b9e0c1d",
+      "shared_report_sha256": "c3b3d9a7e5b6b8103a45bb29895422cfecc8e0002cd915d2166279985138db1c",
+      "resolved_graph_sha256": "fd5051b90e5d5e52b0ab75daeb35b8855039d0fb94e5215d3695a3f48c10bf49",
+      "matched_fields": [
+        "target",
+        "compiler",
+        "codegen",
+        "profile",
+        "source_commit",
+        "source_sha256",
+        "scope"
+      ]
+    },
+    {
+      "proof": "audio",
+      "target_units": 113,
+      "fresh_units": 31,
+      "reused_units": 82,
+      "shared_build_seconds": 77.5557972920069,
+      "standalone_report_sha256": "d36b06fbc5a13f1153da035fc0f5cd9df28598da83e76a1c481b517e8aae68bd",
+      "shared_report_sha256": "13b52c22f9b2399dec258593fdf69b2f2baf8347d5c72e5d50439e92e3846d08",
+      "resolved_graph_sha256": "70d2b8316c2613063a0d7327cb28d1ba00b53987750847bbb5484440ea7b904e",
+      "matched_fields": [
+        "target",
+        "compiler",
+        "codegen",
+        "passed",
+        "built_targets",
+        "headless_sha256",
+        "cook_sha256",
+        "authoring_and_build_storage_deleted",
+        "runtime_package_retained",
+        "native_fixed_ticks_per_process",
+        "runs",
+        "repeat_exact",
+        "audio_device_opened",
+        "vm_input_audio_session_integration",
+        "audio_cursor_saves",
+        "reference_phone_gate",
+        "failure_semantics"
+      ]
+    },
+    {
+      "proof": "game",
+      "target_units": 168,
+      "fresh_units": 83,
+      "reused_units": 85,
+      "shared_build_seconds": 171.7198267079948,
+      "standalone_report_sha256": "c75b799fe53d7cb4d62b1d595fd55c573cb0dc3a57e951dec762f6e59285c8bb",
+      "shared_report_sha256": "d6974cc8b0e085e8b1965c1bc088595eca7796cf4994fdee3129f9629dad8991",
+      "resolved_graph_sha256": "ebe65bf6ede9589441f390c1e380da47789a36ad0ba7b956c1e61d41cfa2717f",
+      "matched_fields": [
+        "target",
+        "compiler",
+        "codegen",
+        "passed",
+        "source_compiler_symbols_absent",
+        "dynamic_source_routes_rejected",
+        "headless_sha256",
+        "cook_sha256",
+        "audio_example_sha256",
+        "fixture_tool_sha256",
+        "cpu_render_input",
+        "gpu_submitted",
+        "on_screen_presentation",
+        "gpu_build_cpu_mode_preserved",
+        "sprite_cpu_mode_preserved",
+        "authoring_and_build_storage_deleted",
+        "removed_scope",
+        "retained_runtime_inputs",
+        "repeat_exact",
+        "recorded_ticks_per_process",
+        "audio_processes",
+        "plain_v1_controls",
+        "existing_output_preserved",
+        "device_output",
+        "session_saves",
+        "phone_performance_gate",
+        "failure_semantics"
+      ]
+    },
+    {
+      "proof": "script",
+      "target_units": 113,
+      "fresh_units": 15,
+      "reused_units": 98,
+      "shared_build_seconds": 75.77502004100825,
+      "standalone_report_sha256": "12448788bfe0455dab8886037b4d7ffc4599830c69fd9ca151d4eb4684ef2b70",
+      "shared_report_sha256": "59ac0dd888c978d92b2cc34242ac36dabfb6c81f4b8679e669277645a0b7445a",
+      "resolved_graph_sha256": "2045bb974e4181b4b436963d3cba1458d9519d32d68fb12824a37b3175328c5e",
+      "matched_fields": [
+        "target",
+        "compiler",
+        "codegen",
+        "passed",
+        "inputs_and_build_storage_removed",
+        "removed_input_scope",
+        "runtime_exchange_files",
+        "runtime_source_compiler_symbols_absent",
+        "dynamic_source_routes_rejected",
+        "character_and_trigger_capabilities",
+        "fixed_tick_timers_and_expired_capabilities",
+        "committed_raycast_and_expired_capabilities",
+        "input_exchange_only_at_startup",
+        "scope"
+      ]
+    }
+  ],
+  "session_sha256": "fcbbc2bfaa4f00fe411fd11adffdd17476f0fb8ec8d50591f953e9b5182830b4",
+  "measurement_order": [
+    "standalone",
+    "shared"
+  ],
+  "scope": "Single local macOS matched full-chain measurement. Every probe independently passed its original assertions; generated IDs/player hashes are retained independently, not claimed bit-identical across builds. No Windows, persistent-cache or device-gate inference.",
+  "format_version": 1,
+  "experiment": "four standalone shipping proofs versus one ephemeral shared session",
+  "standalone_measurement": {
+    "mode": "standalone",
+    "source_head": "023c8bb2919fd6fc882abd90a82fd45676155462",
+    "public_tools": {
+      "incant_headless": {
+        "path": "/tmp/incant-four-shipping-public-tools/ci/incant_headless",
+        "bytes": 48894176,
+        "sha256": "2d3caa0116db02576fc5f6d19ddd087a14bc035fc0ac9f8a89121bcd92970f80"
+      },
+      "examples/cook_scene": {
+        "path": "/tmp/incant-four-shipping-public-tools/ci/examples/cook_scene",
+        "bytes": 2728552,
+        "sha256": "17c560a8ab57ffa19ffd132b193e4236633b7cfd206e8c09ec3fc536229d1910"
+      },
+      "examples/native_scene_audio": {
+        "path": "/tmp/incant-four-shipping-public-tools/ci/examples/native_scene_audio",
+        "bytes": 12062704,
+        "sha256": "366c68aadf081a6fb823b3ab3636d7eee6be5690da9cb0338dbdccf17f6007b7"
+      },
+      "examples/no_renderer_fixtures": {
+        "path": "/tmp/incant-four-shipping-public-tools/ci/examples/no_renderer_fixtures",
+        "bytes": 798376,
+        "sha256": "c635d2ffb42001938e54e7fe4ea363a44915f1924b9e9a913893a15edf73712c"
+      }
+    },
+    "started_at": "2026-10-11T05:50:28.390551+00:00",
+    "preparation_excluded": true,
+    "persistent_shipping_target_cache": false,
+    "exclusive_scope": "Other agent Cargo/proof/capture work coordinated off; user apps and OS background processes remain untouched",
+    "controller_sha256": "c03967ead9f694e4c8f01799b9395aa58570b2f3868963a21163e393d2c6a611",
+    "commands": [
+      {
+        "name": "runtime",
+        "command": [
+          "tools/shipping.py",
+          "/private/tmp/incant-four-shipping-standalone-repeat-20261011/runtime",
+          "--headless-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/cook_scene"
+        ],
+        "seconds": 94.32618991599884,
+        "returncode": 0,
+        "log": "/private/tmp/incant-four-shipping-standalone-repeat-20261011/runtime.log",
+        "log_sha256": "3e53750331f21c31f35b5b30268d9c58b440a4407d5177de860f6e596036a9b0"
+      },
+      {
+        "name": "audio",
+        "command": [
+          "tools/probes/native-scene-audio.py",
+          "/private/tmp/incant-four-shipping-standalone-repeat-20261011/audio",
+          "--headless-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/cook_scene"
+        ],
+        "seconds": 101.09966362500563,
+        "returncode": 0,
+        "log": "/private/tmp/incant-four-shipping-standalone-repeat-20261011/audio.log",
+        "log_sha256": "0e4b41e47b22d3e405da239433fd489be5b23cbc1a4805fd76fbe4838a15537b"
+      },
+      {
+        "name": "game",
+        "command": [
+          "tools/probes/native-game.py",
+          "/private/tmp/incant-four-shipping-standalone-repeat-20261011/game",
+          "--gpu",
+          "--headless-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/cook_scene",
+          "--audio-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/native_scene_audio",
+          "--fixture-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/no_renderer_fixtures"
+        ],
+        "seconds": 197.74412937500165,
+        "returncode": 0,
+        "log": "/private/tmp/incant-four-shipping-standalone-repeat-20261011/game.log",
+        "log_sha256": "fe5ba0c245c2143d05279ccaf80f4dd5e22ae47224161c8ece521d423ba6f5fe"
+      },
+      {
+        "name": "script",
+        "command": [
+          "tools/probes/cooked-script.py",
+          "/private/tmp/incant-four-shipping-standalone-repeat-20261011/script",
+          "--physics",
+          "--headless-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/cook_scene"
+        ],
+        "seconds": 132.92914995801402,
+        "returncode": 0,
+        "log": "/private/tmp/incant-four-shipping-standalone-repeat-20261011/script.log",
+        "log_sha256": "d811c4faa908cfd673a983d5d3f42a7b2b6bb9f4e41418acf11f1a1dd16c019b"
+      }
+    ],
+    "passed": true,
+    "wall_seconds": 526.4288127920008,
+    "finished_at": "2026-10-11T05:59:14.822433+00:00"
+  },
+  "shared_measurement": {
+    "mode": "shared",
+    "source_head": "023c8bb2919fd6fc882abd90a82fd45676155462",
+    "public_tools": {
+      "incant_headless": {
+        "path": "/tmp/incant-four-shipping-public-tools/ci/incant_headless",
+        "bytes": 48894176,
+        "sha256": "2d3caa0116db02576fc5f6d19ddd087a14bc035fc0ac9f8a89121bcd92970f80"
+      },
+      "examples/cook_scene": {
+        "path": "/tmp/incant-four-shipping-public-tools/ci/examples/cook_scene",
+        "bytes": 2728552,
+        "sha256": "17c560a8ab57ffa19ffd132b193e4236633b7cfd206e8c09ec3fc536229d1910"
+      },
+      "examples/native_scene_audio": {
+        "path": "/tmp/incant-four-shipping-public-tools/ci/examples/native_scene_audio",
+        "bytes": 12062704,
+        "sha256": "366c68aadf081a6fb823b3ab3636d7eee6be5690da9cb0338dbdccf17f6007b7"
+      },
+      "examples/no_renderer_fixtures": {
+        "path": "/tmp/incant-four-shipping-public-tools/ci/examples/no_renderer_fixtures",
+        "bytes": 798376,
+        "sha256": "c635d2ffb42001938e54e7fe4ea363a44915f1924b9e9a913893a15edf73712c"
+      }
+    },
+    "started_at": "2026-10-11T05:59:14.899481+00:00",
+    "preparation_excluded": true,
+    "persistent_shipping_target_cache": false,
+    "exclusive_scope": "Other agent Cargo/proof/capture work coordinated off; user apps and OS background processes remain untouched",
+    "controller_sha256": "c03967ead9f694e4c8f01799b9395aa58570b2f3868963a21163e393d2c6a611",
+    "commands": [
+      {
+        "name": "shared",
+        "command": [
+          "tools/shipping_suite.py",
+          "/private/tmp/incant-four-shipping-shared-repeat-20261011/shared",
+          "--four-proofs",
+          "--headless-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/incant_headless",
+          "--cook-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/cook_scene",
+          "--audio-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/native_scene_audio",
+          "--fixture-binary",
+          "/tmp/incant-four-shipping-public-tools/ci/examples/no_renderer_fixtures"
+        ],
+        "seconds": 437.8772527909896,
+        "returncode": 0,
+        "log": "/private/tmp/incant-four-shipping-shared-repeat-20261011/shared.log",
+        "log_sha256": "75cc083707734dd03bb039f2d715281ccd19cdfe20b81a441f3c83f1ba63c190"
+      }
+    ],
+    "passed": true,
+    "wall_seconds": 437.96361166701536,
+    "finished_at": "2026-10-11T06:06:32.865701+00:00"
+  },
+  "machine": {
+    "captured_at": "2026-10-11T05:50:28.288921+00:00",
+    "hardware": {
+      "machdep.cpu.brand_string": "Apple M5 Pro",
+      "hw.memsize": "51539607552",
+      "hw.physicalcpu": "15",
+      "hw.logicalcpu": "15"
+    },
+    "platform": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6\nBuildVersion:\t\t25G72\n",
+    "measurement_scope": "Exclusive agent Cargo/probe/GPU work only. Existing user applications and OS activity untouched; lightweight remote CI monitoring/Git coordination continue. Standalone then shared; local macOS sample, no randomization or Windows/device inference.",
+    "explicit_no_build_confirmations": [
+      "root",
+      "runtime_review",
+      "windowing_correctness"
+    ],
+    "source_head": "023c8bb2919fd6fc882abd90a82fd45676155462"
+  },
+  "comparison_script_sha256": "cf09594a3aa2fcab2e98190b7c624955376c22d0e0d9d3a4593694e6045aaf5b",
+  "ci_adoption": false,
+  "review": "Root independently checked all8 report hashes and accepted the scoped single-macOS/order-limited measurement.",
+  "current_graph_limit": "Source is frozen PR80 plus the shared-session implementation; later flipbook/SDK controls must be integrated and independently reviewed before any CI adoption."
+}

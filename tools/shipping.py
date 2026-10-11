@@ -6,7 +6,10 @@ targets may use Cargo's portable shipping profile, but symbol packaging/device
 execution must be implemented before this command can certify their artifacts.
 """
 import argparse
+from contextlib import redirect_stdout
 import hashlib
+import importlib.util
+import io
 import json
 import os
 from pathlib import Path
@@ -98,14 +101,18 @@ def verify_abort(player, output):
     return {'build_info': info, 'panic_exit_code': probe.returncode, 'drop_guard_ran': False}
 
 
-def main():
+def arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path, help='New directory; contains separate player/symbol archives and evidence')
     parser.add_argument('--target', help='Native desktop host triple (cross-device packaging is not implemented)')
     suffix = '.exe' if os.name == 'nt' else ''
     parser.add_argument('--headless-binary', type=Path, default=ROOT / f'target/release/incant_headless{suffix}')
     parser.add_argument('--cook-binary', type=Path, default=ROOT / f'target/release/examples/cook_scene{suffix}')
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def phases(args, session=None):
+    suffix = '.exe' if os.name == 'nt' else ''
     rustc = Path(run(['rustup', 'which', 'rustc']).strip()) if shutil.which('rustup') else Path(shutil.which('rustc') or '')
     require(rustc.is_file(), 'Install the pinned Rust toolchain before building')
     compiler = run([rustc, '-vV'])
@@ -129,16 +136,23 @@ def main():
     (ROOT / 'target').mkdir(exist_ok=True)
     environment = dict(os.environ, PATH=str(rustc.parent) + os.pathsep + os.environ.get('PATH', ''))
     cargo = [str(ROOT / 'tools/cargo')] if os.name != 'nt' else [str(rustc.with_name('cargo.exe'))]
-    with tempfile.TemporaryDirectory(prefix='shipping-build-', dir=ROOT / 'target') as storage:
+    manager = session.storage() if session else tempfile.TemporaryDirectory(prefix='shipping-build-', dir=ROOT / 'target')
+    with manager as storage:
         command = [*cargo, 'build', '-j2', '-p', 'incant_runtime', '--example', 'run_scene',
                    '--profile', 'shipping', '--locked', '--target', target, '--target-dir', storage,
                    '--config', f'profile.shipping.split-debuginfo="{split}"', '--message-format=json', '-vv']
         print(f'Building standalone runtime for {target} with shipping profile...', flush=True)
-        build = cargo_output(command, cwd=ROOT, env=environment)
+        if session:
+            build, audited_commands = session.build(command, cwd=ROOT, env=environment)
+        else:
+            build = cargo_output(command, cwd=ROOT, env=environment)
+            audited_commands = build.stderr
+        (out / 'build.log').write_text(build.stderr, encoding='utf-8')
+        (out / 'cargo-artifacts.jsonl').write_text(build.stdout, encoding='utf-8')
         if build.returncode:
             print(build.stderr[-16000:], file=sys.stderr)
             raise ValueError(f'Shipping Cargo build failed with exit code {build.returncode}')
-        flags = verify_commands(build.stderr, target, split)
+        flags = verify_commands(audited_commands, target, split)
         artifacts = [json.loads(line) for line in build.stdout.splitlines() if line.startswith('{')]
         executables = [artifact for artifact in artifacts if artifact.get('reason') == 'compiler-artifact'
                        and artifact['target']['name'] == 'run_scene' and artifact.get('executable')]
@@ -146,11 +160,23 @@ def main():
         executable = Path(executables[0]['executable'])
         require(executable.is_file(), 'Cargo did not produce the runtime executable')
         player, identity = package(executable, out, kind, llvm_bin)
+    spec = importlib.util.spec_from_file_location('cooked_runtime_probe', ROOT / 'tools/probes/cooked-runtime.py')
+    probe = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(probe)
+    cooked = probe.phases(argparse.Namespace(output=out / 'source-free',
+        headless_binary=args.headless_binary, cook_binary=args.cook_binary, runtime_binary=player), session)
+    next(cooked)  # Cook and remove authoring inputs before any suite player starts.
+    if session:
+        session.packaged_player(player)
+    yield
+    if session:
+        session.assert_ready()
+    require(not Path(storage).exists(), 'Shipping build storage remains before player launch')
     print('Checking the packaged executable, abort behavior and source-free cooked scene...', flush=True)
     abort = verify_abort(player, out)
-    subprocess.run([sys.executable, str(ROOT / 'tools/probes/cooked-runtime.py'), str(out / 'source-free'),
-                    '--headless-binary', str(args.headless_binary.resolve()), '--cook-binary', str(args.cook_binary.resolve()),
-                    '--runtime-binary', str(player)], check=True, cwd=ROOT, capture_output=True, text=True)
+    with redirect_stdout(io.StringIO()):
+        for _ in cooked:
+            raise ValueError('Unexpected extra cooked-runtime preparation phase')
     source_free = json.loads((out / 'source-free/result.json').read_text())
     require(source_free['passed'] and source_free['binaries'][player.name] == digest(player), 'Source-free probe did not verify the packaged player')
     sources = [ROOT / name for name in ('Cargo.toml', 'Cargo.lock', '.cargo/config.toml', 'rust-toolchain.toml',
@@ -175,6 +201,11 @@ def main():
         (out / group / 'manifest.json').write_text(manifest_text)
         archive(out / group, out / f'{group}.zip')
     print(json.dumps({'passed': True, 'target': target, 'symbols': identity, 'manifest': str(out / 'manifest.json')}))
+
+
+def main():
+    for _ in phases(arguments()):
+        pass
 
 
 if __name__ == '__main__':

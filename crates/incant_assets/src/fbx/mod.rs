@@ -8,7 +8,7 @@ use std::{collections::BTreeMap, path::Path};
 const MAX_NODES: usize = 100_000;
 const MAX_PRIMITIVES: usize = 10_000;
 const RECIPE: &[u8] =
-    b"incant-static-fbx-v2-ufbx-0.11.5-c0.23.1-meters-yup-meshopt-0.6.2-textures-v1-normal-basis-v1\0";
+    b"incant-static-fbx-v3-ufbx-0.11.5-c0.23.1-meters-yup-meshopt-0.6.2-color-roles-v1-normal-basis-v1\0";
 fn unsupported(feature: impl std::fmt::Display) -> AssetError {
     AssetError::Unsupported(format!("static FBX: {feature}"))
 }

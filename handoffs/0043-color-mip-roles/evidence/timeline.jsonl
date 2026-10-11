@@ -1,0 +1,56 @@
+{"start": "2026-10-11T10:26:43.850-04:00", "end": "2026-10-11T10:26:44.300-04:00", "role": "baseline", "kind": "init", "label": "materials init", "ledger_seq": [1], "pids": [34384]}
+{"start": "2026-10-11T10:26:44.300-04:00", "end": "2026-10-11T10:26:44.365-04:00", "role": "baseline", "kind": "import", "label": "materials import env_uniform.png", "ledger_seq": [2], "pids": [34386]}
+{"start": "2026-10-11T10:26:44.365-04:00", "end": "2026-10-11T10:26:44.414-04:00", "role": "baseline", "kind": "import", "label": "materials import props.gltf", "ledger_seq": [3], "pids": [34387]}
+{"start": "2026-10-11T10:26:44.414-04:00", "end": "2026-10-11T10:26:44.460-04:00", "role": "baseline", "kind": "import", "label": "materials import shared.gltf", "ledger_seq": [4], "pids": [34388]}
+{"start": "2026-10-11T10:26:44.460-04:00", "end": "2026-10-11T10:26:44.506-04:00", "role": "baseline", "kind": "import", "label": "materials import controls.gltf", "ledger_seq": [5], "pids": [34389]}
+{"start": "2026-10-11T10:26:44.506-04:00", "end": "2026-10-11T10:26:44.550-04:00", "role": "baseline", "kind": "import", "label": "materials import emissive.gltf", "ledger_seq": [6], "pids": [34390]}
+{"start": "2026-10-11T10:26:44.551-04:00", "end": "2026-10-11T10:26:44.582-04:00", "role": "baseline", "kind": "rpc", "label": "materials read revision", "ledger_seq": [7], "pids": [34391]}
+{"start": "2026-10-11T10:26:44.583-04:00", "end": "2026-10-11T10:26:44.623-04:00", "role": "baseline", "kind": "rpc", "label": "materials author entities", "ledger_seq": [8], "pids": [34392]}
+{"start": "2026-10-11T10:26:44.623-04:00", "end": "2026-10-11T10:26:44.654-04:00", "role": "baseline", "kind": "validate", "label": "materials validate (build)", "ledger_seq": [9], "pids": [34393]}
+{"start": "2026-10-11T10:26:44.751-04:00", "end": "2026-10-11T10:26:44.787-04:00", "role": "baseline", "kind": "init", "label": "environment init", "ledger_seq": [10], "pids": [34394]}
+{"start": "2026-10-11T10:26:44.787-04:00", "end": "2026-10-11T10:26:44.857-04:00", "role": "baseline", "kind": "import", "label": "environment import sky.png", "ledger_seq": [11], "pids": [34395]}
+{"start": "2026-10-11T10:26:44.857-04:00", "end": "2026-10-11T10:26:44.907-04:00", "role": "baseline", "kind": "import", "label": "environment import solid.png", "ledger_seq": [12], "pids": [34396]}
+{"start": "2026-10-11T10:26:44.907-04:00", "end": "2026-10-11T10:26:44.956-04:00", "role": "baseline", "kind": "import", "label": "environment import sprites.atlas.json", "ledger_seq": [13], "pids": [34397]}
+{"start": "2026-10-11T10:26:44.956-04:00", "end": "2026-10-11T10:26:45.002-04:00", "role": "baseline", "kind": "import", "label": "environment import spheres.gltf", "ledger_seq": [14], "pids": [34398]}
+{"start": "2026-10-11T10:26:45.002-04:00", "end": "2026-10-11T10:26:45.034-04:00", "role": "baseline", "kind": "rpc", "label": "environment read revision", "ledger_seq": [15], "pids": [34399]}
+{"start": "2026-10-11T10:26:45.034-04:00", "end": "2026-10-11T10:26:45.082-04:00", "role": "baseline", "kind": "rpc", "label": "environment author entities", "ledger_seq": [16], "pids": [34400]}
+{"start": "2026-10-11T10:26:45.082-04:00", "end": "2026-10-11T10:26:45.119-04:00", "role": "baseline", "kind": "validate", "label": "environment validate (build)", "ledger_seq": [17], "pids": [34401]}
+{"start": "2026-10-11T10:26:45.214-04:00", "end": "2026-10-11T10:26:45.249-04:00", "role": "baseline", "kind": "init", "label": "envcontrol init", "ledger_seq": [18], "pids": [34402]}
+{"start": "2026-10-11T10:26:45.250-04:00", "end": "2026-10-11T10:26:45.318-04:00", "role": "baseline", "kind": "import", "label": "envcontrol import sky_one.png", "ledger_seq": [19], "pids": [34403]}
+{"start": "2026-10-11T10:26:45.318-04:00", "end": "2026-10-11T10:26:45.367-04:00", "role": "baseline", "kind": "import", "label": "envcontrol import solid.png", "ledger_seq": [20], "pids": [34404]}
+{"start": "2026-10-11T10:26:45.367-04:00", "end": "2026-10-11T10:26:45.415-04:00", "role": "baseline", "kind": "import", "label": "envcontrol import sprites.atlas.json", "ledger_seq": [21], "pids": [34405]}
+{"start": "2026-10-11T10:26:45.415-04:00", "end": "2026-10-11T10:26:45.461-04:00", "role": "baseline", "kind": "import", "label": "envcontrol import spheres.gltf", "ledger_seq": [22], "pids": [34406]}
+{"start": "2026-10-11T10:26:45.461-04:00", "end": "2026-10-11T10:26:45.493-04:00", "role": "baseline", "kind": "rpc", "label": "envcontrol read revision", "ledger_seq": [23], "pids": [34407]}
+{"start": "2026-10-11T10:26:45.493-04:00", "end": "2026-10-11T10:26:45.541-04:00", "role": "baseline", "kind": "rpc", "label": "envcontrol author entities", "ledger_seq": [24], "pids": [34408]}
+{"start": "2026-10-11T10:26:45.541-04:00", "end": "2026-10-11T10:26:45.578-04:00", "role": "baseline", "kind": "validate", "label": "envcontrol validate (build)", "ledger_seq": [25], "pids": [34409]}
+{"start": "2026-10-11T10:27:58.614-04:00", "end": "2026-10-11T10:27:59.042-04:00", "role": "baseline", "kind": "screenshot", "label": "old materials/board", "ledger_seq": [26], "pids": [34531]}
+{"start": "2026-10-11T10:27:59.043-04:00", "end": "2026-10-11T10:27:59.291-04:00", "role": "baseline", "kind": "screenshot", "label": "old materials/oblique", "ledger_seq": [27], "pids": [34535]}
+{"start": "2026-10-11T10:27:59.291-04:00", "end": "2026-10-11T10:27:59.546-04:00", "role": "baseline", "kind": "screenshot", "label": "old environment/view", "ledger_seq": [28], "pids": [34536]}
+{"start": "2026-10-11T10:27:59.547-04:00", "end": "2026-10-11T10:27:59.804-04:00", "role": "baseline", "kind": "screenshot", "label": "old envcontrol/view", "ledger_seq": [29], "pids": [34537]}
+{"start": "2026-10-11T10:28:42.399-04:00", "end": "2026-10-11T10:28:43.137-04:00", "role": "candidate", "kind": "screenshot", "label": "retained materials/board", "ledger_seq": [30], "pids": [34837]}
+{"start": "2026-10-11T10:28:43.137-04:00", "end": "2026-10-11T10:28:43.408-04:00", "role": "candidate", "kind": "screenshot", "label": "retained materials/oblique", "ledger_seq": [31], "pids": [34839]}
+{"start": "2026-10-11T10:28:43.408-04:00", "end": "2026-10-11T10:28:43.690-04:00", "role": "candidate", "kind": "screenshot", "label": "retained environment/view", "ledger_seq": [32], "pids": [34840]}
+{"start": "2026-10-11T10:29:47.835-04:00", "end": "2026-10-11T10:29:47.888-04:00", "role": "candidate", "kind": "import", "label": "materials import env_uniform.png", "ledger_seq": [33], "pids": [35318]}
+{"start": "2026-10-11T10:29:47.889-04:00", "end": "2026-10-11T10:29:47.946-04:00", "role": "candidate", "kind": "import", "label": "materials import props.gltf", "ledger_seq": [34], "pids": [35319]}
+{"start": "2026-10-11T10:29:47.946-04:00", "end": "2026-10-11T10:29:48.000-04:00", "role": "candidate", "kind": "import", "label": "materials import shared.gltf", "ledger_seq": [35], "pids": [35320]}
+{"start": "2026-10-11T10:29:48.001-04:00", "end": "2026-10-11T10:29:48.057-04:00", "role": "candidate", "kind": "import", "label": "materials import controls.gltf", "ledger_seq": [36], "pids": [35321]}
+{"start": "2026-10-11T10:29:48.057-04:00", "end": "2026-10-11T10:29:48.116-04:00", "role": "candidate", "kind": "import", "label": "materials import emissive.gltf", "ledger_seq": [37], "pids": [35322]}
+{"start": "2026-10-11T10:29:48.116-04:00", "end": "2026-10-11T10:29:48.153-04:00", "role": "candidate", "kind": "validate", "label": "materials validate (recook)", "ledger_seq": [38], "pids": [35323]}
+{"start": "2026-10-11T10:29:48.155-04:00", "end": "2026-10-11T10:29:48.271-04:00", "role": "candidate", "kind": "import", "label": "environment import sky.png", "ledger_seq": [39], "pids": [35324]}
+{"start": "2026-10-11T10:29:48.271-04:00", "end": "2026-10-11T10:29:48.352-04:00", "role": "candidate", "kind": "import", "label": "environment import solid.png", "ledger_seq": [40], "pids": [35325]}
+{"start": "2026-10-11T10:29:48.352-04:00", "end": "2026-10-11T10:29:48.435-04:00", "role": "candidate", "kind": "import", "label": "environment import sprites.atlas.json", "ledger_seq": [41], "pids": [35326]}
+{"start": "2026-10-11T10:29:48.436-04:00", "end": "2026-10-11T10:29:48.515-04:00", "role": "candidate", "kind": "import", "label": "environment import spheres.gltf", "ledger_seq": [42], "pids": [35327]}
+{"start": "2026-10-11T10:29:48.515-04:00", "end": "2026-10-11T10:29:48.563-04:00", "role": "candidate", "kind": "validate", "label": "environment validate (recook)", "ledger_seq": [43], "pids": [35328]}
+{"start": "2026-10-11T10:29:48.566-04:00", "end": "2026-10-11T10:29:48.686-04:00", "role": "candidate", "kind": "import", "label": "envcontrol import sky_one.png", "ledger_seq": [44], "pids": [35329]}
+{"start": "2026-10-11T10:29:48.686-04:00", "end": "2026-10-11T10:29:48.768-04:00", "role": "candidate", "kind": "import", "label": "envcontrol import solid.png", "ledger_seq": [45], "pids": [35330]}
+{"start": "2026-10-11T10:29:48.768-04:00", "end": "2026-10-11T10:29:48.851-04:00", "role": "candidate", "kind": "import", "label": "envcontrol import sprites.atlas.json", "ledger_seq": [46], "pids": [35331]}
+{"start": "2026-10-11T10:29:48.852-04:00", "end": "2026-10-11T10:29:48.931-04:00", "role": "candidate", "kind": "import", "label": "envcontrol import spheres.gltf", "ledger_seq": [47], "pids": [35339]}
+{"start": "2026-10-11T10:29:48.931-04:00", "end": "2026-10-11T10:29:48.979-04:00", "role": "candidate", "kind": "validate", "label": "envcontrol validate (recook)", "ledger_seq": [48], "pids": [35340]}
+{"start": "2026-10-11T10:30:56.682-04:00", "end": "2026-10-11T10:30:56.937-04:00", "role": "candidate", "kind": "screenshot", "label": "recooked materials/board", "ledger_seq": [49], "pids": [35452]}
+{"start": "2026-10-11T10:30:56.938-04:00", "end": "2026-10-11T10:30:57.197-04:00", "role": "candidate", "kind": "screenshot", "label": "recooked materials/oblique", "ledger_seq": [50], "pids": [35453]}
+{"start": "2026-10-11T10:30:57.198-04:00", "end": "2026-10-11T10:30:57.469-04:00", "role": "candidate", "kind": "screenshot", "label": "recooked environment/view", "ledger_seq": [51], "pids": [35454]}
+{"start": "2026-10-11T10:30:57.470-04:00", "end": "2026-10-11T10:30:57.744-04:00", "role": "candidate", "kind": "screenshot", "label": "recooked envcontrol/view", "ledger_seq": [52], "pids": [35455]}
+{"start": "2026-10-11T10:32:23.091-04:00", "end": "2026-10-11T10:32:23.129-04:00", "role": "candidate", "kind": "validate", "label": "materials validate (sourcefree)", "ledger_seq": [53], "pids": [35564]}
+{"start": "2026-10-11T10:32:23.239-04:00", "end": "2026-10-11T10:32:23.287-04:00", "role": "candidate", "kind": "validate", "label": "environment validate (sourcefree)", "ledger_seq": [54], "pids": [35568]}
+{"start": "2026-10-11T10:32:43.038-04:00", "end": "2026-10-11T10:32:43.292-04:00", "role": "candidate", "kind": "screenshot", "label": "sourcefree materials/board", "ledger_seq": [55], "pids": [35610]}
+{"start": "2026-10-11T10:32:43.293-04:00", "end": "2026-10-11T10:32:43.561-04:00", "role": "candidate", "kind": "screenshot", "label": "sourcefree environment/view", "ledger_seq": [56], "pids": [35611]}

@@ -31,8 +31,15 @@ impl PlaySession {
         compiled_source: &str,
         resources: incant_core::NavigationResources,
     ) -> Result<Self, ScriptError> {
+        Self::with_host_factory(project, resources, || ScriptHost::new(compiled_source))
+    }
+    fn with_host_factory(
+        project: &incant_doc::Project,
+        resources: incant_core::NavigationResources,
+        make_host: impl FnOnce() -> Result<ScriptHost, ScriptError>,
+    ) -> Result<Self, ScriptError> {
         let engine = incant_core::Engine::with_navigation_resources(project, resources)?;
-        let mut host = ScriptHost::new(compiled_source)?;
+        let mut host = make_host()?;
         host.raycaster = Some(Arc::new(engine.raycaster()));
         host.character_mover = Some(Arc::new(engine.character_mover()));
         host.navigator = Some(Arc::new(engine.navigator()));
@@ -212,3 +219,6 @@ impl PlaySession {
         Ok(count)
     }
 }
+
+#[cfg(test)]
+mod tests;
