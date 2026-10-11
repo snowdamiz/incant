@@ -1,0 +1,2192 @@
+{
+  "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+  "actual_main": "774e7b2238227fb4db9b34f3c6db0406b5c1fb58",
+  "tree": "4387e3e79e537fe4056fff425849cf7124160926",
+  "all_checks": [
+    {
+      "name": "storage (macos-latest)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258583/job/114357473565"
+    },
+    {
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258588/job/114357473580"
+    },
+    {
+      "name": "checks",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258586/job/114357532230"
+    },
+    {
+      "name": "native (macos-latest)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258596/job/114357490115"
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258573/job/114357581441"
+    },
+    {
+      "name": "storage (windows-latest)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258583/job/114357473548"
+    },
+    {
+      "name": "desktop (ubuntu-latest, Linux)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258588/job/114357473442"
+    },
+    {
+      "name": "native (ubuntu-latest)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258596/job/114357490006"
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258573/job/114357581442"
+    },
+    {
+      "name": "storage (ubuntu-latest)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258583/job/114357473337"
+    },
+    {
+      "name": "native (windows-latest)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258596/job/114357489850"
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258573/job/114357581425"
+    },
+    {
+      "name": "portability",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258596/job/114357489984"
+    },
+    {
+      "name": "web",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258573/job/114357581465"
+    },
+    {
+      "name": "compare",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258596/job/114359236715"
+    },
+    {
+      "name": "ios",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258573/job/114357581335"
+    },
+    {
+      "name": "android",
+      "conclusion": "SUCCESS",
+      "details": "https://github.com/snowdamiz/incant/actions/runs/38101258573/job/114357581482"
+    }
+  ],
+  "hosts": {
+    "Linux": {
+      "job": {
+        "name": "corrected-Linux",
+        "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+        "run_id": 38101258588,
+        "job_id": 114357473442,
+        "conclusion": "success",
+        "created_at": "2026-10-11T01:16:05Z",
+        "started_at": "2026-10-11T01:16:07Z",
+        "completed_at": "2026-10-11T01:28:03Z",
+        "queue_seconds": 2.0,
+        "execution_seconds": 716.0,
+        "cache_lines": [
+          "2026-10-11T01:16:19.3792606Z Cache hit for: node-cache-Linux-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+          "2026-10-11T01:16:23.1434619Z Cache Size: ~499 MB (523320636 B)",
+          "2026-10-11T01:16:23.7606233Z Cache restored from key: node-cache-Linux-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+          "2026-10-11T01:17:21.9985042Z Cache hit for restore-key: v0-rust-Desktop editor and engine-Linux-X64-desktop-Linux-x64-b9e20461-9fdba862",
+          "2026-10-11T01:17:33.5914698Z Cache Size: ~1751 MB (1836266248 B)",
+          "2026-10-11T01:27:59.6427028Z Cache hit occurred on the primary key node-cache-Linux-x64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161, not saving cache."
+        ],
+        "finished_lines": [
+          "2026-10-11T01:22:18.5096067Z     Finished `release` profile [optimized] target(s) in 3m 18s",
+          "2026-10-11T01:23:09.8058937Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.93s",
+          "2026-10-11T01:23:10.2307654Z     Finished `release` profile [optimized] target(s) in 0.35s",
+          "2026-10-11T01:24:58.4641362Z     Finished `release` profile [optimized] target(s) in 26.89s",
+          "2026-10-11T01:26:47.5746212Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:26:49.4840164Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:26:50.5417267Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:27:57.8018022Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:27:58.9479335Z Finished uploading artifact content to blob storage!"
+        ],
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "conclusion": "success",
+            "seconds": 7.0
+          },
+          {
+            "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run sudo apt-get update",
+            "conclusion": "success",
+            "seconds": 48.0
+          },
+          {
+            "name": "Run rustup show",
+            "conclusion": "success",
+            "seconds": 10.0
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "conclusion": "success",
+            "seconds": 42.0
+          },
+          {
+            "name": "Run npm ci",
+            "conclusion": "success",
+            "seconds": 9.0
+          },
+          {
+            "name": "Run node tools/build_bridge.mjs --check",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run npm run build --workspace editor/ui",
+            "conclusion": "success",
+            "seconds": 7.0
+          },
+          {
+            "name": "Run npm test --workspace editor/ui",
+            "conclusion": "success",
+            "seconds": 40.0
+          },
+          {
+            "name": "Run cargo test --workspace --release --locked --timings",
+            "conclusion": "success",
+            "seconds": 248.0
+          },
+          {
+            "name": "Run cargo check -p incant_audio --features device --locked",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Verify geometry, editor recovery and simulated frame capture",
+            "conclusion": "success",
+            "seconds": 82.0
+          },
+          {
+            "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked --timings",
+            "conclusion": "success",
+            "seconds": 27.0
+          },
+          {
+            "name": "Build and execute the shipping runtime with matched crash symbols",
+            "conclusion": "success",
+            "seconds": 107.0
+          },
+          {
+            "name": "Verify Windows executables do not require redistributable CRT DLLs",
+            "conclusion": "skipped",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Verify physics commands, persistence and sandbox playback",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Verify strict TypeScript character walking and jumping",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Verify compound authoring, recovery and scripted queries",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify versioned game saves across headless process restarts",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify recorded device input, character control and mid-jump save replay",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify script-driven WAV and Vorbis mixing without an audio device",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Verify saved timer callbacks across headless process restarts",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify saved runtime rebinding and named input actions",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify locale switching and string tables across process restarts",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Verify translator exchange, atomic import and shared Undo/Redo",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify runtime navigation and saved character chase",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify weighted grid doors and blocked-route save replay",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify one hundred steering agents and saved replay",
+            "conclusion": "success",
+            "seconds": 11.0
+          },
+          {
+            "name": "Verify directed off-mesh traversal and saved replay",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify authored and saved orthographic camera projections",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Verify pixel-perfect camera saves preserve unsnapped simulation",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify sprite authoring and source-free saved animation",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Verify atlas repacking and source-free saved frame references",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Exercise native GPU rendering without a user account",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 4.0
+          },
+          {
+            "name": "Preserve Cargo unit timing diagnostics",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "seconds": 0.0
+          }
+        ],
+        "logs": {
+          "path": "/tmp/incant-pr61-corrected-Linux.log",
+          "sha256": "363621eef711dce6322f52753fd8ecb16d45803aebdfe7cb9b05e85840b74185"
+        },
+        "run_to_job_start_seconds": 2.0
+      },
+      "timing_reports": [
+        {
+          "file": "/tmp/incant-pr61-corrected-Linux-timings/cargo-timing-20261011T011859681Z-35e09bd5907917b7.html",
+          "sha256": "99fd16bc333e0282d6cad49342305afdd81dae6130509c80f84812d3d2eaa186",
+          "compiled_units": 170,
+          "workspace_units": 169,
+          "other_units": 1,
+          "compiled_package_names": [
+            "incant_2d",
+            "incant_agent",
+            "incant_assets",
+            "incant_assets_runtime",
+            "incant_audio",
+            "incant_audio_runtime",
+            "incant_cmd",
+            "incant_cook",
+            "incant_core",
+            "incant_doc",
+            "incant_editor",
+            "incant_headless",
+            "incant_import",
+            "incant_input",
+            "incant_localization",
+            "incant_nav",
+            "incant_physics",
+            "incant_physics_runtime",
+            "incant_platform_smoke",
+            "incant_play_legacy",
+            "incant_render",
+            "incant_runtime",
+            "incant_script",
+            "incant_script_player",
+            "incant_types",
+            "rerecast"
+          ],
+          "observed_unit_span_seconds": 198.82,
+          "units_exposing_compilation_sections": 28,
+          "longest_units": [
+            {
+              "i": 543,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\"",
+              "features": [],
+              "start": 45.72,
+              "duration": 89.25,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 542,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\" (test)",
+              "features": [],
+              "start": 54.99,
+              "duration": 34.38,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 548,
+              "name": "incant_headless",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_headless \"bin\"",
+              "features": [],
+              "start": 60.97,
+              "duration": 27.99,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 614,
+              "name": "incant_play_legacy",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 23.61,
+              "duration": 18.66,
+              "unblocked_units": [
+                628,
+                620,
+                624,
+                616,
+                623,
+                627,
+                619,
+                626,
+                622,
+                618,
+                625,
+                621,
+                617
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 1.1
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 1.1,
+                    "end": 18.66
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 632,
+              "name": "incant_render",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " model_gpu \"test\" (test)",
+              "features": [],
+              "start": 70.05,
+              "duration": 18.57,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 629,
+              "name": "incant_render",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_render \"lib\" (test)",
+              "features": [],
+              "start": 144.67,
+              "duration": 17.57,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 613,
+              "name": "incant_play_legacy",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_play_legacy \"lib\" (test)",
+              "features": [],
+              "start": 163.0,
+              "duration": 17.12,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 486,
+              "name": "incant_assets",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 17.22,
+              "duration": 16.83,
+              "unblocked_units": [
+                494,
+                477,
+                489,
+                565,
+                491,
+                569,
+                493,
+                562,
+                568,
+                488,
+                629,
+                499,
+                490,
+                567,
+                492,
+                566
+              ],
+              "unblocked_rmeta_units": [
+                563
+              ],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 1.27
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 1.27,
+                    "end": 16.83
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 478,
+              "name": "incant_agent",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 25.06,
+              "duration": 16.32,
+              "unblocked_units": [
+                483,
+                484,
+                480,
+                481,
+                482
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 1.12
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 1.12,
+                    "end": 16.32
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 537,
+              "name": "incant_doc",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [
+                "crdt",
+                "default"
+              ],
+              "start": 9.35,
+              "duration": 15.7,
+              "unblocked_units": [
+                516,
+                603,
+                530,
+                602,
+                610,
+                515,
+                601,
+                514,
+                600,
+                534,
+                513,
+                522,
+                599,
+                521,
+                596,
+                510,
+                520,
+                609,
+                519,
+                485,
+                535,
+                613,
+                518,
+                533,
+                517
+              ],
+              "unblocked_rmeta_units": [
+                511,
+                597
+              ],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 1.0
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 1.0,
+                    "end": 15.7
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "file": "/tmp/incant-pr61-corrected-Linux-timings/cargo-timing-20261011T012309874Z-35e09bd5907917b7.html",
+          "sha256": "60a0232f9e2c1f241047a174efbaa38697e9280ee2f9ef130a8c44a1f197755c",
+          "compiled_units": 0,
+          "workspace_units": 0,
+          "other_units": 0,
+          "compiled_package_names": [],
+          "observed_unit_span_seconds": 0,
+          "units_exposing_compilation_sections": 0,
+          "longest_units": []
+        },
+        {
+          "file": "/tmp/incant-pr61-corrected-Linux-timings/cargo-timing-20261011T012431568Z-35e09bd5907917b7.html",
+          "sha256": "ec14e5057939241b532f0caf62441b68aab5ded2307dceebb75170bfd8bb829a",
+          "compiled_units": 3,
+          "workspace_units": 3,
+          "other_units": 0,
+          "compiled_package_names": [
+            "incant_editor"
+          ],
+          "observed_unit_span_seconds": 26.900000000000002,
+          "units_exposing_compilation_sections": 0,
+          "longest_units": [
+            {
+              "i": 440,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\"",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 1.69,
+              "duration": 25.21,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 442,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "run-custom-build",
+              "target": " build-script (run)",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 0.63,
+              "duration": 1.05,
+              "unblocked_units": [
+                440
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 441,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " build-script",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 0.38,
+              "duration": 0.25,
+              "unblocked_units": [
+                442
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            }
+          ]
+        }
+      ],
+      "ignored_count": 56,
+      "matches_pr58": true
+    },
+    "macOS": {
+      "job": {
+        "name": "corrected-macOS",
+        "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+        "run_id": 38101258586,
+        "job_id": 114357532230,
+        "conclusion": "success",
+        "created_at": "2026-10-11T01:16:05Z",
+        "started_at": "2026-10-11T01:19:25Z",
+        "completed_at": "2026-10-11T01:38:51Z",
+        "job_created_at": "2026-10-11T01:16:26Z",
+        "queue_seconds": 179.0,
+        "run_to_job_start_seconds": 200.0,
+        "run_to_job_creation_seconds": 21.0,
+        "execution_seconds": 1166.0,
+        "cache_lines": [
+          "2026-10-11T01:19:44.1679400Z Cache hit for: node-cache-macOS-arm64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+          "2026-10-11T01:19:47.6185900Z Cache Size: ~243 MB (254922613 B)",
+          "2026-10-11T01:19:48.5597700Z Cache restored from key: node-cache-macOS-arm64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161",
+          "2026-10-11T01:20:00.0014310Z Cache hit for restore-key: v0-rust-Incant checks-macOS-ARM64-checks-Darwin-arm64-791fe27b-9fdba862",
+          "2026-10-11T01:20:24.0762020Z Cache Size: ~2007 MB (2104691741 B)",
+          "2026-10-11T01:38:46.7865220Z Cache hit occurred on the primary key node-cache-macOS-arm64-npm-a06f4248ec3a4eafc59b5b318055b6ae75480c087180682becdb6451ef3b4161, not saving cache."
+        ],
+        "finished_lines": [
+          "2026-10-11T01:22:32.5207690Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 21.31s",
+          "2026-10-11T01:22:35.5837630Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.92s",
+          "2026-10-11T01:26:47.6827870Z     Finished `release` profile [optimized] target(s) in 4m 11s",
+          "2026-10-11T01:27:33.1828040Z     Finished `release` profile [optimized] target(s) in 1.53s",
+          "2026-10-11T01:30:18.9883770Z     Finished `release` profile [optimized] target(s) in 33.47s",
+          "2026-10-11T01:37:53.3554640Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:37:54.6315420Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:37:56.3689860Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:37:57.3350900Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:38:45.9491770Z Finished uploading artifact content to blob storage!"
+        ],
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "conclusion": "success",
+            "seconds": 8.0
+          },
+          {
+            "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "conclusion": "success",
+            "seconds": 11.0
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run rustup show",
+            "conclusion": "success",
+            "seconds": 10.0
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "conclusion": "success",
+            "seconds": 51.0
+          },
+          {
+            "name": "Run npm ci",
+            "conclusion": "success",
+            "seconds": 12.0
+          },
+          {
+            "name": "Run python3 tools/generate_conventions.py --check",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run npm run test:tools",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime",
+            "conclusion": "success",
+            "seconds": 14.0
+          },
+          {
+            "name": "Run node tools/build_bridge.mjs --check",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run npm run build --workspace editor/ui",
+            "conclusion": "success",
+            "seconds": 10.0
+          },
+          {
+            "name": "Run npm run test --workspace editor/ui",
+            "conclusion": "success",
+            "seconds": 42.0
+          },
+          {
+            "name": "Run cargo fmt --all --check",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run cargo clippy --workspace --all-targets --locked -- -D warnings",
+            "conclusion": "success",
+            "seconds": 21.0
+          },
+          {
+            "name": "Run cargo check -p incant_audio --features device --locked",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Run cargo test --workspace --release --locked --timings",
+            "conclusion": "success",
+            "seconds": 296.0
+          },
+          {
+            "name": "Verify geometry, editor recovery and simulated frame capture",
+            "conclusion": "success",
+            "seconds": 134.0
+          },
+          {
+            "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --release --features incant_editor/custom-protocol --locked --timings",
+            "conclusion": "success",
+            "seconds": 34.0
+          },
+          {
+            "name": "Validate cooked KTX2 with the Khronos reference tool",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run target/release/incant_headless schema schemas",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Verify native binary world saves across process restarts",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Build and execute the shipping runtime with matched crash symbols",
+            "conclusion": "success",
+            "seconds": 160.0
+          },
+          {
+            "name": "Verify embedded scripts with no runtime source compiler",
+            "conclusion": "success",
+            "seconds": 290.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run python3 tools/probes/physics-runtime.py artifacts/physics-runtime-cli",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run python3 tools/probes/character-movement.py artifacts/character-movement-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/compound-colliders.py artifacts/compound-colliders-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/game-saves.py artifacts/game-saves-cli",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Run python3 tools/probes/game-input.py artifacts/game-input-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/game-audio.py artifacts/game-audio-cli",
+            "conclusion": "success",
+            "seconds": 4.0
+          },
+          {
+            "name": "Run python3 tools/probes/game-timers.py artifacts/game-timers-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/game-actions.py artifacts/game-actions-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/game-localization.py artifacts/game-localization-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/localization-exchange.py artifacts/localization-exchange-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/game-navigation.py artifacts/game-navigation-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/navigation-grid.py artifacts/navigation-grid-cli",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Run python3 tools/probes/game-steering.py artifacts/game-steering-cli",
+            "conclusion": "success",
+            "seconds": 7.0
+          },
+          {
+            "name": "Run python3 tools/probes/navigation-links.py artifacts/navigation-links-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/orthographic-cameras.py artifacts/orthographic-cameras-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run python3 tools/probes/orthographic-cameras.py artifacts/pixel-perfect-cameras-cli --pixel-perfect",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Run python3 tools/probes/sprite-rendering.py artifacts/sprite-rendering-cli",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Run python3 tools/probes/sprite-atlases.py artifacts/sprite-atlases-cli",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run node tools/generate_sdk.mjs --check",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run git diff --exit-code -- schemas",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run node_modules/.bin/tsc -p sdk/ts/tsconfig.json",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run target/release/incant_headless eval-check",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run target/release/examples/collaboration_spike",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Preserve Cargo unit timing diagnostics",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "seconds": 1.0
+          }
+        ],
+        "logs": {
+          "path": "/tmp/incant-pr61-corrected-macOS.log",
+          "sha256": "bba51149f45e16db16872426ae5b991cb86db46e60bbeccbcce18f6525f7a765"
+        }
+      },
+      "timing_reports": [
+        {
+          "file": "/tmp/incant-pr61-corrected-macOS-timings/cargo-timing-20261011T012235661Z-8efa4bd2b8e0fdb5.html",
+          "sha256": "e29c8a04b99019bb3f8bfa8806a290edd2a62eec777f089cd8ba7fbf20c3017b",
+          "compiled_units": 170,
+          "workspace_units": 169,
+          "other_units": 1,
+          "compiled_package_names": [
+            "incant_2d",
+            "incant_agent",
+            "incant_assets",
+            "incant_assets_runtime",
+            "incant_audio",
+            "incant_audio_runtime",
+            "incant_cmd",
+            "incant_cook",
+            "incant_core",
+            "incant_doc",
+            "incant_editor",
+            "incant_headless",
+            "incant_import",
+            "incant_input",
+            "incant_localization",
+            "incant_nav",
+            "incant_physics",
+            "incant_physics_runtime",
+            "incant_platform_smoke",
+            "incant_play_legacy",
+            "incant_render",
+            "incant_runtime",
+            "incant_script",
+            "incant_script_player",
+            "incant_types",
+            "rerecast"
+          ],
+          "observed_unit_span_seconds": 251.89,
+          "units_exposing_compilation_sections": 28,
+          "longest_units": [
+            {
+              "i": 467,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\"",
+              "features": [],
+              "start": 69.01,
+              "duration": 81.55,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 466,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\" (test)",
+              "features": [],
+              "start": 67.8,
+              "duration": 34.71,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 472,
+              "name": "incant_headless",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_headless \"bin\"",
+              "features": [],
+              "start": 121.49,
+              "duration": 23.64,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 538,
+              "name": "incant_play_legacy",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 26.35,
+              "duration": 19.28,
+              "unblocked_units": [
+                540,
+                552,
+                551,
+                550,
+                549,
+                548,
+                547,
+                546,
+                545,
+                544,
+                543,
+                542,
+                541
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 1.02
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 1.02,
+                    "end": 19.28
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 537,
+              "name": "incant_play_legacy",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_play_legacy \"lib\" (test)",
+              "features": [],
+              "start": 215.99,
+              "duration": 18.38,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 402,
+              "name": "incant_agent",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 37.64,
+              "duration": 18.35,
+              "unblocked_units": [
+                408,
+                407,
+                406,
+                405,
+                404
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 2.12
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 2.12,
+                    "end": 18.35
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 410,
+              "name": "incant_assets",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 26.25,
+              "duration": 17.83,
+              "unblocked_units": [
+                401,
+                491,
+                490,
+                418,
+                489,
+                417,
+                416,
+                486,
+                493,
+                415,
+                492,
+                414,
+                413,
+                412
+              ],
+              "unblocked_rmeta_units": [
+                487
+              ],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 1.61
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 1.61,
+                    "end": 17.83
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 461,
+              "name": "incant_doc",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [
+                "crdt",
+                "default"
+              ],
+              "start": 9.5,
+              "duration": 16.74,
+              "unblocked_units": [
+                454,
+                525,
+                526,
+                524,
+                527,
+                523,
+                520
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 1.16
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 1.16,
+                    "end": 16.74
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 553,
+              "name": "incant_render",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_render \"lib\" (test)",
+              "features": [],
+              "start": 161.41,
+              "duration": 16.01,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 556,
+              "name": "incant_render",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " model_gpu \"test\" (test)",
+              "features": [],
+              "start": 125.95,
+              "duration": 15.67,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            }
+          ]
+        },
+        {
+          "file": "/tmp/incant-pr61-corrected-macOS-timings/cargo-timing-20261011T012731641Z-8efa4bd2b8e0fdb5.html",
+          "sha256": "31a62c50fe6be6902ee3049523637e894943f4482cda8b6df5200107c43d4857",
+          "compiled_units": 0,
+          "workspace_units": 0,
+          "other_units": 0,
+          "compiled_package_names": [],
+          "observed_unit_span_seconds": 0,
+          "units_exposing_compilation_sections": 0,
+          "longest_units": []
+        },
+        {
+          "file": "/tmp/incant-pr61-corrected-macOS-timings/cargo-timing-20261011T012945494Z-8efa4bd2b8e0fdb5.html",
+          "sha256": "45e879d4a55bb6333a56053d96ad833edc593f0584d8bacb4629806f970d6e5f",
+          "compiled_units": 3,
+          "workspace_units": 3,
+          "other_units": 0,
+          "compiled_package_names": [
+            "incant_editor"
+          ],
+          "observed_unit_span_seconds": 33.48,
+          "units_exposing_compilation_sections": 0,
+          "longest_units": [
+            {
+              "i": 359,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\"",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 3.67,
+              "duration": 29.81,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 360,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " build-script",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 1.49,
+              "duration": 1.11,
+              "unblocked_units": [
+                361
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 361,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "run-custom-build",
+              "target": " build-script (run)",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 2.6,
+              "duration": 1.07,
+              "unblocked_units": [
+                359
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            }
+          ]
+        }
+      ],
+      "ignored_count": 56,
+      "matches_pr58": true
+    },
+    "Windows": {
+      "job": {
+        "name": "corrected-Windows",
+        "head": "c620868755e3ea57e64c47879f345db8015e7cf6",
+        "run_id": 38101258588,
+        "job_id": 114357473580,
+        "conclusion": "success",
+        "created_at": "2026-10-11T01:16:05Z",
+        "started_at": "2026-10-11T01:16:07Z",
+        "completed_at": "2026-10-11T01:41:35Z",
+        "job_created_at": "2026-10-11T01:16:05Z",
+        "queue_seconds": 2.0,
+        "run_to_job_start_seconds": 2.0,
+        "run_to_job_creation_seconds": 0.0,
+        "execution_seconds": 1528.0,
+        "cache_lines": [
+          "2026-10-11T01:16:42.9559392Z Cache hit for restore-key: v0-rust-Desktop editor and engine-Windows-X64-desktop-Windows_NT-x64-773408be-9fdba862",
+          "2026-10-11T01:16:51.9025833Z Cache Size: ~1389 MB (1456743653 B)"
+        ],
+        "finished_lines": [
+          "2026-10-11T01:29:07.2428731Z     Finished `release` profile [optimized] target(s) in 9m 56s",
+          "2026-10-11T01:30:52.3719009Z     Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.65s",
+          "2026-10-11T01:30:53.8341799Z     Finished `release` profile [optimized] target(s) in 0.91s",
+          "2026-10-11T01:35:14.4534832Z     Finished `release` profile [optimized] target(s) in 1m 13s",
+          "2026-10-11T01:39:17.1559034Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:39:18.7125881Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:39:19.5870388Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:41:29.6766567Z Finished uploading artifact content to blob storage!",
+          "2026-10-11T01:41:30.6618161Z Finished uploading artifact content to blob storage!"
+        ],
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "conclusion": "success",
+            "seconds": 8.0
+          },
+          {
+            "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run sudo apt-get update",
+            "conclusion": "skipped",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run rustup show",
+            "conclusion": "success",
+            "seconds": 14.0
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "conclusion": "success",
+            "seconds": 44.0
+          },
+          {
+            "name": "Run npm ci",
+            "conclusion": "success",
+            "seconds": 26.0
+          },
+          {
+            "name": "Run node tools/build_bridge.mjs --check",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run npm run build --workspace editor/ui",
+            "conclusion": "success",
+            "seconds": 10.0
+          },
+          {
+            "name": "Run npm test --workspace editor/ui",
+            "conclusion": "success",
+            "seconds": 73.0
+          },
+          {
+            "name": "Run cargo test --workspace --release --locked --timings",
+            "conclusion": "success",
+            "seconds": 697.0
+          },
+          {
+            "name": "Run cargo check -p incant_audio --features device --locked",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Verify geometry, editor recovery and simulated frame capture",
+            "conclusion": "success",
+            "seconds": 188.0
+          },
+          {
+            "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked --timings",
+            "conclusion": "success",
+            "seconds": 74.0
+          },
+          {
+            "name": "Build and execute the shipping runtime with matched crash symbols",
+            "conclusion": "success",
+            "seconds": 241.0
+          },
+          {
+            "name": "Verify Windows executables do not require redistributable CRT DLLs",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Verify physics commands, persistence and sandbox playback",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Verify strict TypeScript character walking and jumping",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Verify compound authoring, recovery and scripted queries",
+            "conclusion": "success",
+            "seconds": 6.0
+          },
+          {
+            "name": "Verify versioned game saves across headless process restarts",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Verify recorded device input, character control and mid-jump save replay",
+            "conclusion": "success",
+            "seconds": 6.0
+          },
+          {
+            "name": "Verify script-driven WAV and Vorbis mixing without an audio device",
+            "conclusion": "success",
+            "seconds": 9.0
+          },
+          {
+            "name": "Verify saved timer callbacks across headless process restarts",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Verify saved runtime rebinding and named input actions",
+            "conclusion": "success",
+            "seconds": 4.0
+          },
+          {
+            "name": "Verify locale switching and string tables across process restarts",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Verify translator exchange, atomic import and shared Undo/Redo",
+            "conclusion": "success",
+            "seconds": 6.0
+          },
+          {
+            "name": "Verify runtime navigation and saved character chase",
+            "conclusion": "success",
+            "seconds": 7.0
+          },
+          {
+            "name": "Verify weighted grid doors and blocked-route save replay",
+            "conclusion": "success",
+            "seconds": 7.0
+          },
+          {
+            "name": "Verify one hundred steering agents and saved replay",
+            "conclusion": "success",
+            "seconds": 19.0
+          },
+          {
+            "name": "Verify directed off-mesh traversal and saved replay",
+            "conclusion": "success",
+            "seconds": 6.0
+          },
+          {
+            "name": "Verify authored and saved orthographic camera projections",
+            "conclusion": "success",
+            "seconds": 5.0
+          },
+          {
+            "name": "Verify pixel-perfect camera saves preserve unsnapped simulation",
+            "conclusion": "success",
+            "seconds": 6.0
+          },
+          {
+            "name": "Verify sprite authoring and source-free saved animation",
+            "conclusion": "success",
+            "seconds": 6.0
+          },
+          {
+            "name": "Verify atlas repacking and source-free saved frame references",
+            "conclusion": "success",
+            "seconds": 6.0
+          },
+          {
+            "name": "Exercise native GPU rendering without a user account",
+            "conclusion": "success",
+            "seconds": 12.0
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "conclusion": "success",
+            "seconds": 3.0
+          },
+          {
+            "name": "Preserve Cargo unit timing diagnostics",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "conclusion": "success",
+            "seconds": 1.0
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "conclusion": "success",
+            "seconds": 0.0
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "conclusion": "success",
+            "seconds": 2.0
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "seconds": 0.0
+          }
+        ],
+        "logs": {
+          "path": "/tmp/incant-pr61-corrected-Windows.log",
+          "sha256": "ec389a55baed845311525d664005b6a5ff9e028c5eacfbebdbeb2be67eae5597"
+        }
+      },
+      "timing_reports": [
+        {
+          "file": "/tmp/incant-pr61-corrected-Windows-timings/cargo-timing-20261011T011910669Z-8ca33db83f0de2da.html",
+          "sha256": "c615fef506edee60b2a5daa50cb8c9e6e99ab9b057ed3cfc52cbb9c35d93669b",
+          "compiled_units": 170,
+          "workspace_units": 169,
+          "other_units": 1,
+          "compiled_package_names": [
+            "incant_2d",
+            "incant_agent",
+            "incant_assets",
+            "incant_assets_runtime",
+            "incant_audio",
+            "incant_audio_runtime",
+            "incant_cmd",
+            "incant_cook",
+            "incant_core",
+            "incant_doc",
+            "incant_editor",
+            "incant_headless",
+            "incant_import",
+            "incant_input",
+            "incant_localization",
+            "incant_nav",
+            "incant_physics",
+            "incant_physics_runtime",
+            "incant_platform_smoke",
+            "incant_play_legacy",
+            "incant_render",
+            "incant_runtime",
+            "incant_script",
+            "incant_script_player",
+            "incant_types",
+            "rerecast"
+          ],
+          "observed_unit_span_seconds": 596.57,
+          "units_exposing_compilation_sections": 28,
+          "longest_units": [
+            {
+              "i": 470,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\"",
+              "features": [],
+              "start": 143.78,
+              "duration": 259.48,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 469,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\" (test)",
+              "features": [],
+              "start": 149.1,
+              "duration": 92.65,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 475,
+              "name": "incant_headless",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_headless \"bin\"",
+              "features": [],
+              "start": 203.35,
+              "duration": 77.73,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 559,
+              "name": "incant_render",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " model_gpu \"test\" (test)",
+              "features": [],
+              "start": 275.38,
+              "duration": 59.13,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 541,
+              "name": "incant_play_legacy",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 85.21,
+              "duration": 49.57,
+              "unblocked_units": [
+                549,
+                546,
+                550,
+                552,
+                551,
+                553,
+                548,
+                547,
+                545,
+                543,
+                544,
+                555,
+                554
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 2.05
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 2.05,
+                    "end": 49.57
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 540,
+              "name": "incant_play_legacy",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_play_legacy \"lib\" (test)",
+              "features": [],
+              "start": 513.57,
+              "duration": 47.43,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 556,
+              "name": "incant_render",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_render \"lib\" (test)",
+              "features": [],
+              "start": 445.18,
+              "duration": 46.18,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 413,
+              "name": "incant_assets",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 68.68,
+              "duration": 43.21,
+              "unblocked_units": [
+                426,
+                495,
+                496,
+                404,
+                493,
+                492,
+                494,
+                489,
+                419,
+                420,
+                421,
+                556,
+                418,
+                416,
+                417,
+                415
+              ],
+              "unblocked_rmeta_units": [
+                490
+              ],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 2.54
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 2.54,
+                    "end": 43.21
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 405,
+              "name": "incant_agent",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [],
+              "start": 88.95,
+              "duration": 42.83,
+              "unblocked_units": [
+                407,
+                410,
+                409,
+                411,
+                408
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 2.1
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 2.1,
+                    "end": 42.83
+                  }
+                ]
+              ]
+            },
+            {
+              "i": 464,
+              "name": "incant_doc",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": "",
+              "features": [
+                "crdt",
+                "default"
+              ],
+              "start": 46.73,
+              "duration": 42.21,
+              "unblocked_units": [
+                446,
+                445,
+                447,
+                444,
+                443,
+                442,
+                441,
+                440,
+                536,
+                537,
+                530,
+                523,
+                527,
+                529,
+                540,
+                460,
+                412,
+                528,
+                457,
+                462,
+                461,
+                526,
+                449,
+                448,
+                437
+              ],
+              "unblocked_rmeta_units": [
+                438
+              ],
+              "sections": [
+                [
+                  "frontend",
+                  {
+                    "start": 0.0,
+                    "end": 1.92
+                  }
+                ],
+                [
+                  "codegen",
+                  {
+                    "start": 1.92,
+                    "end": 42.21
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "file": "/tmp/incant-pr61-corrected-Windows-timings/cargo-timing-20261011T013052911Z-8ca33db83f0de2da.html",
+          "sha256": "0b35dffe51c6c35b26485df77bb61e2ca61fe269dcebaa823e3462bf1316c9fb",
+          "compiled_units": 0,
+          "workspace_units": 0,
+          "other_units": 0,
+          "compiled_package_names": [],
+          "observed_unit_span_seconds": 0,
+          "units_exposing_compilation_sections": 0,
+          "longest_units": []
+        },
+        {
+          "file": "/tmp/incant-pr61-corrected-Windows-timings/cargo-timing-20261011T013400791Z-8ca33db83f0de2da.html",
+          "sha256": "562b4386d33537a3111f01c5cc336447f84b8fc4475426886c321010f34c4340",
+          "compiled_units": 3,
+          "workspace_units": 3,
+          "other_units": 0,
+          "compiled_package_names": [
+            "incant_editor"
+          ],
+          "observed_unit_span_seconds": 73.64999999999999,
+          "units_exposing_compilation_sections": 0,
+          "longest_units": [
+            {
+              "i": 360,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " incant_editor \"bin\"",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 3.44,
+              "duration": 70.21,
+              "unblocked_units": [],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 362,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "run-custom-build",
+              "target": " build-script (run)",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 2.07,
+              "duration": 1.38,
+              "unblocked_units": [
+                360
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            },
+            {
+              "i": 361,
+              "name": "incant_editor",
+              "version": "0.0.1",
+              "mode": "todo",
+              "target": " build-script",
+              "features": [
+                "custom-protocol"
+              ],
+              "start": 0.93,
+              "duration": 1.13,
+              "unblocked_units": [
+                362
+              ],
+              "unblocked_rmeta_units": [],
+              "sections": null
+            }
+          ]
+        }
+      ],
+      "ignored_count": 56,
+      "matches_pr58": true
+    }
+  },
+  "expected_ignored_names": [
+    "alpha_modes_and_back_faces_follow_material_semantics",
+    "camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection",
+    "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
+    "cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference",
+    "cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects",
+    "cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back",
+    "cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units",
+    "cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing",
+    "cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions",
+    "cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel",
+    "cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose",
+    "cameras::transparency_depth_order_follows_the_selected_camera",
+    "color_maps_use_srgb_and_texture_reimport_keeps_retained_materials",
+    "dark_fill_lit_materials_remain_distinguishable",
+    "editor_publishes_complete_revisions_and_recovers_after_failed_replacements",
+    "emissive_maps_and_samplers_retain_color_and_addressing",
+    "environments::authored_environments_preserve_color_space_versions_and_source_free_loading",
+    "environments::environment_intensity_rotation_and_roughness_change_real_reflections",
+    "environments::malformed_environment_cannot_replace_a_retained_scene",
+    "environments::studio_environment_renders_metal_and_dielectric_across_roughness",
+    "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+    "graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing",
+    "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+    "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+    "headless_play_records_current_simulation_frames_and_publishes_a_complete_report",
+    "highlight_energy_survives_and_transparency_blends_before_tone_mapping",
+    "imported_geometry_survives_sources_and_retained_versions_survive_reimport",
+    "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+    "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+    "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+    "lights::clustered_masks_match_total_light_energy_and_retain_old_scenes",
+    "lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words",
+    "lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably",
+    "lights::coverage::visible_depth_boundary_patches_match_all_light_oracle",
+    "lights::directional_point_and_spot_lights_obey_authored_physical_parameters",
+    "lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease",
+    "lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting",
+    "lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix",
+    "lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize",
+    "material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength",
+    "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+    "shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions",
+    "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+    "shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary",
+    "shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible",
+    "shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions",
+    "sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement",
+    "sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop",
+    "sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe",
+    "sprites::sprite_layers_order_and_alpha_follow_painter_semantics",
+    "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels",
+    "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties",
+    "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize",
+    "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels"
+  ],
+  "platform_jobs": [
+    {
+      "name": "ios",
+      "created_at": "2026-10-11T01:16:43Z",
+      "started_at": "2026-10-11T01:23:02Z",
+      "completed_at": "2026-10-11T01:29:01Z",
+      "conclusion": "success"
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "created_at": "2026-10-11T01:16:43Z",
+      "started_at": "2026-10-11T01:17:04Z",
+      "completed_at": "2026-10-11T01:19:26Z",
+      "conclusion": "success"
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "created_at": "2026-10-11T01:16:43Z",
+      "started_at": "2026-10-11T01:28:39Z",
+      "completed_at": "2026-10-11T01:32:15Z",
+      "conclusion": "success"
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "created_at": "2026-10-11T01:16:43Z",
+      "started_at": "2026-10-11T01:20:37Z",
+      "completed_at": "2026-10-11T01:27:36Z",
+      "conclusion": "success"
+    },
+    {
+      "name": "web",
+      "created_at": "2026-10-11T01:16:43Z",
+      "started_at": "2026-10-11T01:17:53Z",
+      "completed_at": "2026-10-11T01:20:34Z",
+      "conclusion": "success"
+    },
+    {
+      "name": "android",
+      "created_at": "2026-10-11T01:16:43Z",
+      "started_at": "2026-10-11T01:20:54Z",
+      "completed_at": "2026-10-11T01:26:17Z",
+      "conclusion": "success"
+    }
+  ],
+  "critical_path": {
+    "host": "Windows",
+    "execution_seconds": 1528,
+    "queue_seconds": 2,
+    "run_to_completion_seconds": 1530
+  },
+  "findings": [
+    "All three native jobs restored dependency archives; each ordinary report compiled169 incant units plus the vendored rerecast package, with no registry compilation.",
+    "The immediately following ignored/GPU invocation compiled zero units on all three hosts; default/custom-protocol remain separately tested.",
+    "Windows ordinary workspace tests take697s including compilation; default editor259.48s, editor test92.65s and headless77.73s are whole-unit durations, not linker-only attribution.",
+    "Fresh shipping remains independent:241s Windows runtime;160s macOS runtime plus290s macOS scripted physics.",
+    "Mac platform job waited716s after creation and ran216s. Its queue is material but finished before the Windows critical path.",
+    "Whole-job changes versus earlier PRs include changed source, graph, tests, runner load and setup; no controlled dependency-identical speedup is claimed.",
+    "A lower-optimization local full-chain profile experiment is prepared but not adopted; shared fresh shipping session has only modest noisy local savings and remains out of CI."
+  ],
+  "raw_log_hashes": {
+    "Linux": "363621eef711dce6322f52753fd8ecb16d45803aebdfe7cb9b05e85840b74185",
+    "macOS": "bba51149f45e16db16872426ae5b991cb86db46e60bbeccbcce18f6525f7a765",
+    "Windows": "ec389a55baed845311525d664005b6a5ff9e028c5eacfbebdbeb2be67eae5597"
+  }
+}

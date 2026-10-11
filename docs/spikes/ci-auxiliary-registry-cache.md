@@ -101,6 +101,11 @@ solely to caching. PRs performed no cache writes or extra seed dispatch.
 
 The contemporaneous 17-entry inventory retains 6,968,145,208 bytes. Some compiled
 families remain absent; this is not a claim that every target cache is warm.
-The corrected native critical path is still pending; the initial desktop runs
-stopped at a UI test deadline before Rust compilation.
+The corrected native critical path completed in 25m28s on Windows plus 2s queue;
+all 17 checks passed. macOS general took 19m26s plus 2m59s queue (another 21s
+preceded job creation), and Linux desktop took 11m56s plus 2s queue. All three
+restored native dependencies and preserved the exact 56 ignored test names.
+Ordinary workspace compilation, test execution and independent shipping proofs
+now dominate; immediate GPU invocations compiled zero units on all three hosts.
+[Complete native unit/step timings and limits](evidence/ci-editor-union-pr61-2026-10-11.json).
 [Exact consumer keys, steps, queue/execution and log hashes](evidence/ci-registry-consumer-pr61-2026-10-11.json).
