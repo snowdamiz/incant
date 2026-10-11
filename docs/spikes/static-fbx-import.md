@@ -43,5 +43,9 @@ The PR77 platform correction passes the same 71 native tests and native/wasm rel
 Claude0040 accepted static conversion and colour/reimport controls but exposed an
 existing generated-tangent handedness inversion shared with glTF. The original
 review is preserved; [the narrow correction and cache policy](generated-tangent-correction.md)
-record numerical controls and the pending separate appearance delta. Supplied
-tangents, UVs, shaders and old immutable cooked versions retain their behavior.
+record 101 ordinary and 61 numerical GPU tests plus the accepted, hash-pinned
+Claude Opus 5.5 Max delta (12 captures, 34 successful processes). Supplied tangents,
+UVs, shaders and old immutable cooked versions retain their behavior. This is a
+scoped tangent correction; the separate shared OPAQUE/emissive/environment
+alpha-weighted mip defect remains open. Corrected integrated hosted checks remain
+pending.
