@@ -35,6 +35,15 @@ remain underway. No completed Phase 3 gate is claimed.
 [Binding evidence](docs/spikes/native-editor-agent.md),
 [persistent owner evidence](docs/spikes/persistent-native-agent-host.md).
 
+## Per-project agent budget — in progress
+
+The separate per-project usage ledger foundation passes 94 agent tests and
+independent review, including real subprocess locking and interrupted-turn
+reservation recovery. It is not yet wired to native admission or budget controls;
+the current editor allowance still resets with its session. Typed project-cap
+commands, durable admission, UI and native reopen acceptance remain in progress.
+[Budget accounting evidence](docs/spikes/agent-project-budget.md).
+
 ## Agent conversation context — locally verified
 
 The shared agent loop now retains bounded, project-bound completed exchanges

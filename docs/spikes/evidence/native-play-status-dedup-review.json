@@ -1,0 +1,19 @@
+{
+  "reviewer": "/root",
+  "commit": "f1dd1dd1dff5fac31e1d1979f734f51fc7c50515",
+  "integrated_commit": "32956c3",
+  "verdict": "accepted",
+  "source_sha256": {
+    "editor/bridge/native.ts": "f76c843714e0b2756df8ea853d36319e45fefcd87ac7ea8ac6b532066a7d0087",
+    "editor/bridge/native.generated.js": "8d3a937e6df1a675ae04716199ccaf30e05786f84dac5803f45e84e6a868149c",
+    "editor/bridge/native.test.ts": "3e239cc5c236e98146c4642d8204df8dbf77a27707ac117c863ced16ed85f690"
+  },
+  "checks": [
+    "114 scoped bridge/resolve/AgentPanel tests pass",
+    "strict UI types pass",
+    "generated bridge equivalence pass",
+    "native sequence semantics inspected"
+  ],
+  "scope": "subscriber identity and stale response correctness; no measured frame-time claim",
+  "test_log_sha256": "b36edaca4f22907f81d6013c590fa980502eec4412b53b7942715509774547ce"
+}
