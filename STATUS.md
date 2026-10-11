@@ -458,3 +458,5 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 761 ordinary tests, 75 GPU tests, 178 actual-host conformance tests, full Clippy,
 536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
+
+GameSession/exported-player checkpoint integration: reviewed source `0d841fcd` is preserved unchanged in main103 union `4661e254`; 34 integrated CPU tests and optional-GPU all-target Clippy pass. Original311-test/five-success/nine-refusal shipping evidence remains applicable; full-save limits are unchanged. See [integration evidence](docs/spikes/evidence/native-game-checkpoints-main103.json).

@@ -127,3 +127,19 @@ record exact inputs, output identities, limits and historical failures.
 [Independent scoped source/evidence review](evidence/native-game-checkpoints-review.json)
 accepted the frozen implementation without material findings. This review adds no
 physical-device, GPU, physics/audio or full-save acceptance.
+
+## Main103 integration
+
+The reviewed `0d841fcd` source merged actual main103 (`2816ecde`) cleanly at
+`4661e254`. All 14 reviewed source hashes and eight build/export input hashes are
+unchanged. The integrated player/game runtime passes 34 tests in eight groups and
+all-target Clippy with the optional GPU path compiled but never executed. Formatting,
+conventions and the CPU player normal/build dependency graph pass. Main103 changed
+only renderer portability, its workflow line and documentation; that renderer is
+absent from the CPU export graph. The accepted five-success/nine-refusal fresh
+shipping proof therefore remains applicable without another cold build.
+
+[Integration receipt](evidence/native-game-checkpoints-main103.json) records the
+exact source/log hashes and distinguishes the original 311-test/fresh-process
+evidence from the focused integrated checks. The full-save and backend limits
+above remain in force.
