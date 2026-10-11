@@ -16,6 +16,8 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import time
+import urllib.error
 import tempfile
 import urllib.request
 
@@ -53,17 +55,36 @@ def cargo_build(command, *, cwd, env, log):
     require(result.returncode == 0, f'Cargo build failed; see {log}: {result.stderr[-4000:]}')
 
 
+def transient_download_error(error):
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code in (408, 429, 500, 502, 503, 504)
+    if isinstance(error, urllib.error.URLError):
+        error = error.reason
+    # Certificate errors, permanent HTTP responses, disk errors, integrity and
+    # archive validation failures are deliberately outside this narrow set.
+    return isinstance(error, (ConnectionError, TimeoutError))
+
+
 def provision(path):
     key = (platform.system(), platform.machine())
     require(key in ASSETS, f'Unsupported pinned WABT host: {key}')
     suffix, expected = ASSETS[key]
     archive_path = path / 'wabt.tar.gz'
     url = f'https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-{suffix}.tar.gz'
-    with urllib.request.urlopen(url, timeout=30) as response, archive_path.open('wb') as output:
-        total = 0
-        while block := response.read(128*1024):
-            total += len(block); require(total <= 32*1024*1024, 'WABT download size limit')
-            output.write(block)
+    for attempt in range(1, 4):
+        try:
+            # Truncate a partial prior transfer. Never resume unknown bytes or
+            # switch URLs, versions, mirrors or expected integrity on retry.
+            with urllib.request.urlopen(url, timeout=30) as response, archive_path.open('wb') as output:
+                total = 0
+                while block := response.read(128*1024):
+                    total += len(block); require(total <= 32*1024*1024, 'WABT download size limit')
+                    output.write(block)
+            break
+        except Exception as error:
+            if attempt == 3 or not transient_download_error(error):
+                raise
+            time.sleep(0.5 * attempt)
     require(sha(archive_path) == expected, 'Pinned WABT archive checksum mismatch')
     # Extract only two exact regular executable members; never archive paths/links.
     root = path / 'wabt'; (root / 'bin').mkdir(parents=True)
@@ -76,7 +97,7 @@ def provision(path):
             with bundle.extractfile(entry) as source, dest.open('wb') as output:
                 shutil.copyfileobj(source, output)
             dest.chmod(0o755)
-    return root, {'release': '1.0.42', 'url': url, 'archive_sha256': expected}
+    return root, {'release': '1.0.42', 'url': url, 'archive_sha256': expected, 'download_attempts': attempt}
 
 
 def verify_c_flags(output, kind, msvc_opt_level):
