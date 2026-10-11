@@ -17,7 +17,7 @@
     "workspace_all_target_release_clippy": true,
     "optional_gpu_player_clippy": true,
     "generated_conventions": true,
-    "claude_appearance_review": "pending 0041",
+    "claude_appearance_review": "accepted 0041; headless960x540 Rgba8UnormSrgb on Apple M5 Pro",
     "hosted_checks": "not published"
   },
   "independent_review": {
@@ -1943,5 +1943,25 @@
     "WGSL runtime translation remains",
     "No persistent backend cache or asynchronous fallback",
     "No phone or cold-load performance claim"
-  ]
+  ],
+  "claude_review": {
+    "commit": "23fe9cae78de54ad47d50a89b3b8ce9cc7e1a118",
+    "report": "handoffs/0041-prewarmed-pipelines/result.md",
+    "model": "Claude Opus 5.5",
+    "effort": "Max, explicitly verified through ACP before prompt",
+    "capture_pairs_byte_identical": 11,
+    "guarded_capture_processes": 26,
+    "appearance_verdict": "No prewarming regression in the tested path",
+    "all_capture_children_reaped": true,
+    "gate_removed": true,
+    "shared_existing_findings": [
+      "generated tangent normal-map Y inversion, PR77 correction in review",
+      "OPAQUE alpha-zero color texels darken under alpha-weighted minification"
+    ],
+    "limits": [
+      "one Mac",
+      "headless screenshot output only",
+      "not performance or phase-gate evidence"
+    ]
+  }
 }

@@ -48,10 +48,27 @@ complete shipping results, source and log hashes, and exact validation counts.
 The preparation duration printed by the test is a single local diagnostic with
 uncontrolled driver caches; it is not a benchmark or a cold-load claim.
 
-Claude handoff 0041 is separately reviewing baseline/candidate appearance with
-Opus 5.5 and explicitly verified Max thinking. That review remains pending.
-Hosted checks for this unpublished slice are also pending. Local numerical
-checks do not replace either review.
+Claude handoff 0041 accepted the scoped appearance after an ACP session with
+Opus 5.5 and explicitly verified Max thinking. Its 11 baseline/candidate pairs
+are byte-identical; Claude also inspected their rendered appearance, including
+all material and shadow variants, lighting, sprites, reimport, source deletion
+and the diagnostic pipeline. All 26 guarded captures finished and the shared
+GPU slot was released. [Claude report](../../handoffs/0041-prewarmed-pipelines/result.md)
+and its original `Built-by: claude` commit `23fe9ca` are preserved.
+
+The review also records two existing shared defects: generated-tangent normal-map
+Y inversion (correction under review in PR77), and alpha-weighted colour mips
+that darken alpha-zero texels used by an OPAQUE material. Neither is a regression
+introduced by preparing pipelines. The opaque mip issue is being investigated
+separately, including sources shared by opaque and transparent consumers.
+
+The local combined renderer/flipbook source `faf12e8` additionally passes 666
+ordinary workspace tests, two bounded-capture helper tests, full-workspace and
+optional native-window release Clippy, 90 tools tests, conventions and the
+15-root authoring-free dependency guard. Its 72 GPU cases and fresh integrated
+shipping proof remain pending; the earlier separate results above do not stand
+in for those checks. [Combined local evidence](evidence/native-render-followup-local.json).
+Hosted checks and publication remain pending behind the coordinated runtime queue.
 
 ## Remaining shader and performance work
 

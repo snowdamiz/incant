@@ -46,9 +46,13 @@ review; concurrent native reviews coordinate foreground ownership.
   tests pass; material reimports across all current variants and four output
   formats allocate no additional pipelines or shader modules during drawing.
   A fresh source-free shipping proof passes eight GPU cases and 33 refusals.
-  Claude appearance review and hosted checks remain pending. Offline backend
+  Claude 0041 accepted the scoped appearance. Combined flipbook source passes
+  666 ordinary tests, two helper tests, 90 tools tests and release Clippy;
+  integrated GPU/shipping and hosted checks remain pending. Offline backend
   shaders, persistent caches, recorded per-level permutations and phone hitch
   gates are still open. [Evidence](docs/spikes/prewarmed-render-pipelines.md).
+  Claude also identified existing opaque-texture mip darkening; asset-cook
+  diagnosis is in progress alongside the generated-tangent correction.
 
 - **Authoring and accounts.** Typed canonical JSON and stable ULIDs, atomic shared
   commands, provenance, undo/redo and durable recovery; CRDT round-trip and scale

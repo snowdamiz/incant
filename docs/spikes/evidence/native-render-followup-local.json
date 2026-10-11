@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-11T05:14:34.789551+00:00",
+  "source_commit": "faf12e86472e27fe565d65f47c30258a374fb645",
+  "scope": "Local combined prewarmed renderer + retained native flipbooks, includes PR80 production07c0d433 but not its docs-only b39d7d03",
+  "ordinary_tests_passed": 666,
+  "ignored_gpu_tests_not_run": 72,
+  "capture_helper_tests_passed": 2,
+  "tools_tests_passed": 90,
+  "workspace_release_clippy": "passed, all targets, scene audio",
+  "native_window_release_clippy": "passed, all targets, native-window feature",
+  "conventions": "passed",
+  "runtime_dependency_guard": "passed, 15 explicit roots, scene audio and native-window features",
+  "source_clean_after_checks": true,
+  "logs": {
+    "tests": {
+      "path": "/tmp/incant-render-followup-tests.log",
+      "bytes": 108620,
+      "sha256": "e1ef1cfc945766dd72880b77f49014d4f0e50134dbc9d032ff32b9425c607c48"
+    },
+    "clippy": {
+      "path": "/tmp/incant-render-followup-clippy.log",
+      "bytes": 5684,
+      "sha256": "c0d7bc7aeb6507b9bc82765d6fc214e05c442d344247741371c813bc8fb5826e"
+    },
+    "helper": {
+      "path": "/tmp/incant-render-followup-helper.log",
+      "bytes": 2849,
+      "sha256": "bef90bda936f298a7e0120f55930d68e7489b506e1c1c7cdde979025ddfdfa25"
+    },
+    "window-clippy": {
+      "path": "/tmp/incant-render-followup-window-clippy.log",
+      "bytes": 5170,
+      "sha256": "7ad28b98e9c7bcde26ded9e7a24c5081a9382d7990568ceb2e34836f12a5a555"
+    },
+    "tools": {
+      "path": "/tmp/incant-render-followup-tools.log",
+      "bytes": 14547,
+      "sha256": "e29bdb994eb2400e30a2f7136be7242c3bd90a8065c7a9a86b3ca787e425b3b8"
+    },
+    "conventions": {
+      "path": "/tmp/incant-render-followup-conventions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dependencies": {
+      "path": "/tmp/incant-render-followup-dependencies.log",
+      "bytes": 414,
+      "sha256": "577d9b26eb59849d6d625edd30d43e1480ef9855aa1e1c64da6f9e7ddbe1531e"
+    }
+  },
+  "pending": [
+    "Claude0042 appearance verdict",
+    "Integrated72 GPU cases and fresh shipping proof",
+    "Actualmain80 integration",
+    "Publication and required hosted checks"
+  ],
+  "claims_not_made": [
+    "full PLAN or phase completion",
+    "device or shipping performance gate",
+    "hosted success"
+  ],
+  "claude0041": {
+    "accepted": true,
+    "commit": "23fe9cae78de54ad47d50a89b3b8ce9cc7e1a118",
+    "packet_review": {
+      "changed_packet_files": 20,
+      "screenshot_hashes_verified": 9,
+      "engine_calls": 80,
+      "guarded_captures": 26,
+      "expected_refusals": 4,
+      "all_reaped": true,
+      "production_changes": false
+    }
+  }
+}
