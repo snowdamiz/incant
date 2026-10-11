@@ -23,3 +23,67 @@ export const freeze = Object.freeze;
         });
     }
 })();
+
+// Fixed persistent-data inspector. Capture builtins before project code runs.
+// Native callers reserve their quota and release all Rust borrows before entry.
+export const persistentShape = (() => {
+    const ownKeys = Reflect.ownKeys;
+    const hasOwn = Object.hasOwn;
+    const text = String;
+    const Invalid = TypeError;
+    const descriptor = Object.getOwnPropertyDescriptor;
+    const prototype = Object.getPrototypeOf;
+    const define = Object.defineProperty;
+    const isArray = Array.isArray;
+    const objectPrototype = Object.prototype;
+    const arrayPrototype = Array.prototype;
+    const append = (array, index, value) => define(array, index, { value, enumerable: true });
+    return (value, remaining) => {
+        const array = isArray(value);
+        const proto = prototype(value);
+        if (array ? proto !== arrayPrototype : proto !== null && proto !== objectPrototype)
+            throw new Invalid('persistent state class/prototype unsupported');
+        const keys = ownKeys(value);
+        if (keys.length > remaining + (array ? 1 : 0))
+            throw new Invalid('persistent state node limit');
+        const result = [];
+        if (array) {
+            const length = descriptor(value, 'length');
+            if (!length || !hasOwn(length, 'value') || keys.length !== length.value + 1)
+                throw new Invalid('persistent state sparse/extended array');
+            for (let i = 0; i < length.value; i++) {
+                const d = descriptor(value, text(i));
+                if (!d || !hasOwn(d, 'value') || !d.enumerable)
+                    throw new Invalid('persistent state accessor/sparse array');
+                append(result, i, d.value);
+            }
+        } else {
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                const d = descriptor(value, key);
+                if (typeof key !== 'string' || !d || !hasOwn(d, 'value') || !d.enumerable)
+                    throw new Invalid('persistent state requires enumerable string data properties');
+                const row = [];
+                append(row, 0, key);
+                append(row, 1, d.value);
+                append(result, i, row);
+            }
+        }
+        return result;
+    };
+})();
+
+// The private native callback receives these trusted functions as call-local
+// arguments. Capturing JS values inside its Rust closure would evade VM tracing.
+export const persistentWrapper = (() => {
+    const inspect = persistentShape;
+    const immutable = freeze;
+    return native => function(a, b) {
+        switch (arguments.length) {
+            case 0: return native(inspect, immutable);
+            case 1: return native(inspect, immutable, a);
+            case 2: return native(inspect, immutable, a, b);
+            default: return native(inspect, immutable, a, b, undefined);
+        }
+    };
+})();
