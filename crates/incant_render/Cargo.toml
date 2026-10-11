@@ -8,6 +8,8 @@ publish.workspace = true
 [features]
 # CPU-verified integration; actual backend/appearance acceptance is still pending.
 cooked-output = ["dep:incant_shader_cook", "dep:sha2"]
+# Adds diagnostic geometry and all shadow variants; backend acceptance pending.
+cooked-geometry = ["cooked-output"]
 
 [build-dependencies]
 incant_shader_cook = { path = "../incant_shader_cook", optional = true }

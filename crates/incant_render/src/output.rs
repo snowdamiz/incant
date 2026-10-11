@@ -14,12 +14,7 @@ pub(crate) fn required_features(_adapter: &wgpu::Adapter) -> Result<wgpu::Featur
     #[cfg(not(all(feature = "cooked-output", not(target_arch = "wasm32"))))]
     Ok(wgpu::Features::empty())
 }
-struct Stages {
-    vertex: wgpu::ShaderModule,
-    fragment: wgpu::ShaderModule,
-    vertex_entry: &'static str,
-    fragment_entry: &'static str,
-}
+use crate::shader::Stages;
 
 #[repr(C)]
 #[derive(Clone, Copy, Pod, Zeroable)]

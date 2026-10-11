@@ -43,22 +43,30 @@ pub(crate) struct PreparedShadows {
     pub uniform: wgpu::Buffer,
     pub layers: Vec<ShadowLayer>,
 }
+pub(crate) fn camera_layout_entry() -> wgpu::BindGroupLayoutEntry {
+    wgpu::BindGroupLayoutEntry {
+        binding: 0,
+        visibility: wgpu::ShaderStages::VERTEX,
+        ty: wgpu::BindingType::Buffer {
+            ty: wgpu::BufferBindingType::Uniform,
+            has_dynamic_offset: false,
+            min_binding_size: None,
+        },
+        count: None,
+    }
+}
 impl ShadowSystem {
-    pub fn new(device: &wgpu::Device, materials: &wgpu::BindGroupLayout) -> Self {
+    pub fn new(
+        device: &wgpu::Device,
+        materials: &wgpu::BindGroupLayout,
+        backend: wgpu::Backend,
+    ) -> Result<Self> {
         let cameras = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Directional cascade camera"),
-            entries: &[wgpu::BindGroupLayoutEntry {
-                binding: 0,
-                visibility: wgpu::ShaderStages::VERTEX,
-                ty: wgpu::BindingType::Buffer {
-                    ty: wgpu::BufferBindingType::Uniform,
-                    has_dynamic_offset: false,
-                    min_binding_size: None,
-                },
-                count: None,
-            }],
+            entries: &[camera_layout_entry()],
         });
-        let shader = pipeline::shader(device);
+        let shader =
+            crate::geometry_shader::stages(device, backend, crate::geometry_shader::Kind::Shadow)?;
         let mut pipelines = HashMap::new();
         for alpha in [
             incant_assets_runtime::AlphaMode::Opaque,
@@ -78,7 +86,7 @@ impl ShadowSystem {
                 }
             }
         }
-        Self {
+        Ok(Self {
             cameras,
             sampler: device.create_sampler(&wgpu::SamplerDescriptor {
                 label: Some("Directional shadow comparison"),
@@ -89,7 +97,7 @@ impl ShadowSystem {
             }),
             atlas: Mutex::new(None),
             pipelines,
-        }
+        })
     }
     fn atlas(&self, device: &wgpu::Device, lights: usize) -> Result<Arc<Atlas>> {
         let layers = (lights * CASCADES).max(1) as u32;

@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Opt-in cooked diagnostic and shadow shaders — CPU verified
+
+The build-only cooker now emits actual native MSL/SPIR-V/HLSL for diagnostic
+geometry and all eight shadow variants, behind `cooked-geometry` (default off).
+Private fixed-family consumption validates the complete vertex/resource contract
+before native shader calls. Ten cooker, 42 cooked renderer and 36 default CPU
+tests pass, as do Clippy, default/feature Web compilation and the build-only
+dependency guard. Four new Metal stages compile/link; all six previous output
+payloads and the frozen output comparison binaries are unchanged. No GPU,
+rendered-pixel or performance acceptance is claimed; the original output-only
+comparison remains first after the current native review releases its grant.
+[Contract, evidence and remaining scope](docs/spikes/cooked-geometry-shaders.md).
+
 ## Opt-in native session checkpoints — locally verified
 
 Bytecode behaviors can explicitly opt into bounded typed persistent data and

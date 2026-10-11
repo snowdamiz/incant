@@ -7,6 +7,8 @@ pub use crate::web_error::PreparationError;
 pub enum ResourceError {
     #[error("cooked output shader rejected: {0}")]
     CookedOutput(&'static str),
+    #[error("cooked geometry shader rejected: {0}")]
+    CookedGeometry(&'static str),
     #[error("renderer initialization failed: {0}")]
     Preparation(#[source] PreparationError),
     #[error("{0} pipeline variant was not prepared during renderer initialization")]
