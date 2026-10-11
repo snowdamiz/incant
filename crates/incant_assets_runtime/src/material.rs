@@ -123,6 +123,26 @@ pub fn resolve(
     textures: &[ModelTexture],
     images: &[Texture],
 ) -> Result<Vec<Material>> {
+    resolve_impl(values, textures, images, false)
+}
+
+/// INCMOD03 materials require the exact coverage policy. Missing role data is an
+/// error; falling back to the legacy Color image would silently reintroduce the
+/// opaque/emissive filtering defect.
+pub fn resolve_color_roles(
+    values: &[Value],
+    textures: &[ModelTexture],
+    images: &[Texture],
+) -> Result<Vec<Material>> {
+    resolve_impl(values, textures, images, true)
+}
+
+fn resolve_impl(
+    values: &[Value],
+    textures: &[ModelTexture],
+    images: &[Texture],
+    by_role: bool,
+) -> Result<Vec<Material>> {
     if values.len() > 10_000 {
         return Err(AssetError::Limit("model materials"));
     }
@@ -183,6 +203,13 @@ pub fn resolve(
                     .get(info.index)
                     .ok_or_else(|| invalid("material texture index outside model"))?;
                 let image = match usage {
+                    TextureUsage::Color
+                        if by_role
+                            && (slot == 4
+                                || raw.alpha_mode.unwrap_or_default() == AlphaMode::Opaque) =>
+                    {
+                        binding.color_unweighted
+                    }
                     TextureUsage::Color => binding.color,
                     TextureUsage::Linear => binding.linear,
                     TextureUsage::Normal => binding.normal,
@@ -232,6 +259,54 @@ mod tests {
     use super::*;
     use serde_json::json;
     #[test]
+    fn new_materials_choose_color_by_semantics_and_refuse_missing_independent_data() {
+        let mut binding = ModelTexture {
+            color: Some(0),
+            color_unweighted: Some(1),
+            linear: None,
+            normal: None,
+            mag_filter: None,
+            min_filter: None,
+            wrap_s: 10497,
+            wrap_t: 10497,
+        };
+        let image = Texture {
+            width: 1,
+            height: 1,
+            format: TextureFormat::Rgba8Srgb,
+            levels: vec![vec![255, 0, 0, 0].into()],
+        };
+        let images = [image.clone(), image];
+        for (mode, base) in [("OPAQUE", 1), ("MASK", 0), ("BLEND", 0)] {
+            let value = json!({"alphaMode":mode,"pbrMetallicRoughness":{"baseColorTexture":{"index":0}},"emissiveTexture":{"index":0}});
+            let material = resolve_color_roles(
+                std::slice::from_ref(&value),
+                std::slice::from_ref(&binding),
+                &images,
+            )
+            .unwrap()
+            .remove(0);
+            assert_eq!(material.maps[0].unwrap().image, base);
+            assert_eq!(material.maps[4].unwrap().image, 1);
+            binding.color_unweighted = None;
+            assert!(
+                resolve_color_roles(
+                    std::slice::from_ref(&value),
+                    std::slice::from_ref(&binding),
+                    &images
+                )
+                .is_err()
+            );
+            assert_eq!(
+                resolve(&[value], &[binding.clone()], &images).unwrap()[0].maps[4]
+                    .unwrap()
+                    .image,
+                0
+            );
+            binding.color_unweighted = Some(1);
+        }
+    }
+    #[test]
     fn defaults_and_material_roles_keep_color_spaces_and_sampler_identity() {
         assert_eq!(
             resolve(&[json!({})], &[], &[]).unwrap(),
@@ -239,6 +314,7 @@ mod tests {
         );
         let textures = [ModelTexture {
             color: Some(0),
+            color_unweighted: None,
             linear: Some(1),
             normal: Some(2),
             mag_filter: None,
@@ -256,7 +332,7 @@ mod tests {
             width: 1,
             height: 1,
             format,
-            levels: vec![vec![255; 4]],
+            levels: vec![vec![255; 4].into()],
         })
         .collect();
         let raw = json!({"pbrMetallicRoughness":{"baseColorFactor":[0.1,0.2,0.3,0.4],"metallicFactor":0.2,"roughnessFactor":0.7,"baseColorTexture":{"index":0},"metallicRoughnessTexture":{"index":0}},"normalTexture":{"index":0,"scale":-2},"occlusionTexture":{"index":0,"strength":0.5},"emissiveTexture":{"index":0},"emissiveFactor":[0.1,0.2,0.3],"alphaMode":"MASK","alphaCutoff":1.2,"doubleSided":true});
@@ -284,6 +360,7 @@ mod tests {
         }
         let texture = ModelTexture {
             color: Some(0),
+            color_unweighted: None,
             linear: None,
             normal: None,
             mag_filter: None,
@@ -296,7 +373,7 @@ mod tests {
             width: 1,
             height: 1,
             format: TextureFormat::Rgba8Linear,
-            levels: vec![vec![255; 4]],
+            levels: vec![vec![255; 4].into()],
         };
         assert!(resolve(&[raw], &[texture], &[image]).is_err());
     }

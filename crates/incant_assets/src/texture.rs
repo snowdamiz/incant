@@ -4,6 +4,35 @@ use incant_assets_runtime::texture::MAX_DIMENSION;
 pub use incant_assets_runtime::{Texture, TextureFormat, TextureUsage};
 use std::io::Cursor;
 
+/// Color space and coverage filtering are separate decisions. An opaque base
+/// color or emissive image ignores its own alpha; a blended base or sprite does
+/// not. This cook-only role never changes level-zero source channels.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) enum ImageRole {
+    ColorCoverage,
+    ColorUnweighted,
+    Linear,
+    Normal,
+}
+impl ImageRole {
+    pub(crate) fn usage(self) -> TextureUsage {
+        match self {
+            Self::ColorCoverage | Self::ColorUnweighted => TextureUsage::Color,
+            Self::Linear => TextureUsage::Linear,
+            Self::Normal => TextureUsage::Normal,
+        }
+    }
+}
+impl From<TextureUsage> for ImageRole {
+    fn from(usage: TextureUsage) -> Self {
+        match usage {
+            TextureUsage::Color => Self::ColorCoverage,
+            TextureUsage::Linear => Self::Linear,
+            TextureUsage::Normal => Self::Normal,
+        }
+    }
+}
+
 fn dimensions(w: u32, h: u32) -> Result<()> {
     incant_assets_runtime::texture::dimensions(w, h).map_err(Into::into)
 }
@@ -26,6 +55,10 @@ fn encode_srgb(v: f32) -> f32 {
 /// retain channel values; normal maps renormalize averaged vectors. Sixteen-bit
 /// inputs and EXR keep float precision instead of being truncated to eight bits.
 pub fn import_image(bytes: &[u8], usage: TextureUsage) -> Result<Texture> {
+    import_image_role(bytes, usage.into())
+}
+
+pub(crate) fn import_image_role(bytes: &[u8], role: ImageRole) -> Result<Texture> {
     if bytes.len() > MAX_SOURCE_BYTES {
         return Err(AssetError::Limit("image source bytes"));
     }
@@ -59,7 +92,7 @@ pub fn import_image(bytes: &[u8], usage: TextureUsage) -> Result<Texture> {
     let decoded = DynamicImage::from_decoder(decoder)
         .map_err(|e| invalid(e.to_string()))?
         .into_rgba32f();
-    let srgb_input = usage == TextureUsage::Color && format != ImageFormat::OpenExr;
+    let srgb_input = role.usage() == TextureUsage::Color && format != ImageFormat::OpenExr;
     let target = if high_precision {
         TextureFormat::Rgba32Float
     } else if srgb_input {
@@ -81,25 +114,57 @@ pub fn import_image(bytes: &[u8], usage: TextureUsage) -> Result<Texture> {
             }
         }
     }
-    from_linear(width, height, pixels, target, usage)
+    from_linear_role(width, height, pixels, target, role)
 }
 
-pub(crate) fn from_linear(
+pub(crate) fn from_linear_role(
     width: u32,
     height: u32,
-    mut pixels: Vec<[f32; 4]>,
+    pixels: Vec<[f32; 4]>,
     target: TextureFormat,
-    usage: TextureUsage,
+    role: ImageRole,
+) -> Result<Texture> {
+    from_linear_pixels(width, height, &pixels, target, role)
+}
+
+pub(crate) fn color_pair_limit(texture: &Texture) -> Result<()> {
+    if texture.payload_bytes() > MAX_SOURCE_BYTES / 2 {
+        return Err(AssetError::Limit("combined color mip bytes"));
+    }
+    Ok(())
+}
+
+pub(crate) fn color_variants(
+    width: u32,
+    height: u32,
+    pixels: Vec<[f32; 4]>,
+    target: TextureFormat,
+) -> Result<(Texture, Texture)> {
+    let coverage = from_linear_pixels(width, height, &pixels, target, ImageRole::ColorCoverage)?;
+    color_pair_limit(&coverage)?;
+    let mut independent =
+        from_linear_pixels(width, height, &pixels, target, ImageRole::ColorUnweighted)?;
+    independent.share_base_from(&coverage)?;
+    Ok((coverage, independent))
+}
+
+fn from_linear_pixels(
+    width: u32,
+    height: u32,
+    pixels: &[[f32; 4]],
+    target: TextureFormat,
+    role: ImageRole,
 ) -> Result<Texture> {
     dimensions(width, height)?;
     if pixels.len() != width as usize * height as usize {
         return Err(invalid("linear texture pixel count mismatch"));
     }
     let mut levels = Vec::new();
+    let mut pixels = std::borrow::Cow::Borrowed(pixels);
     let (mut w, mut h) = (width, height);
     loop {
         let mut bytes = Vec::with_capacity(w as usize * h as usize * target.bytes_per_pixel());
-        for p in &pixels {
+        for p in pixels.iter() {
             for (i, &channel) in p.iter().enumerate() {
                 if target == TextureFormat::Rgba32Float {
                     bytes.extend(channel.to_le_bytes());
@@ -113,12 +178,12 @@ pub(crate) fn from_linear(
                 }
             }
         }
-        levels.push(bytes);
+        levels.push(bytes.into());
         if w == 1 && h == 1 {
             break;
         }
         let (nw, nh) = ((w / 2).max(1), (h / 2).max(1));
-        pixels = downsample(&pixels, w, h, nw, nh, usage);
+        pixels = std::borrow::Cow::Owned(downsample(&pixels, w, h, nw, nh, role));
         w = nw;
         h = nh;
     }
@@ -132,14 +197,15 @@ pub(crate) fn from_linear(
     Ok(texture)
 }
 // Area-weighted box filter includes every source texel for odd dimensions.
-// Colors are averaged premultiplied in linear light, then stored straight-alpha.
+// Coverage colors are averaged premultiplied in linear light, then stored
+// straight-alpha. Independent colors preserve RGB regardless of source alpha.
 fn downsample(
     src: &[[f32; 4]],
     w: u32,
     h: u32,
     nw: u32,
     nh: u32,
-    usage: TextureUsage,
+    role: ImageRole,
 ) -> Vec<[f32; 4]> {
     let mut out = Vec::with_capacity((nw * nh) as usize);
     for y in 0..nh {
@@ -163,9 +229,9 @@ fn downsample(
                     for i in 0..4 {
                         let mut v = f64::from(p[i]);
                         if i < 3 {
-                            match usage {
-                                TextureUsage::Color => v *= f64::from(p[3]),
-                                TextureUsage::Normal => v = v * 2. - 1.,
+                            match role {
+                                ImageRole::ColorCoverage => v *= f64::from(p[3]),
+                                ImageRole::Normal => v = v * 2. - 1.,
                                 _ => {}
                             }
                         }
@@ -176,14 +242,14 @@ fn downsample(
             for s in &mut sum {
                 *s /= total;
             }
-            match usage {
-                TextureUsage::Color => {
+            match role {
+                ImageRole::ColorCoverage => {
                     let a = sum[3];
                     for s in &mut sum[..3] {
                         *s = if a > 0. { *s / a } else { 0. };
                     }
                 }
-                TextureUsage::Normal => {
+                ImageRole::Normal => {
                     let len = sum[..3].iter().map(|v| v * v).sum::<f64>().sqrt();
                     for (i, s) in sum[..3].iter_mut().enumerate() {
                         *s = (if len > 1e-10 {
@@ -196,10 +262,54 @@ fn downsample(
                             + 0.5;
                     }
                 }
-                TextureUsage::Linear => {}
+                ImageRole::ColorUnweighted | ImageRole::Linear => {}
             }
             out.push(sum.map(|v| v as f32));
         }
     }
     out
+}
+
+#[cfg(test)]
+mod role_tests {
+    use super::*;
+    #[test]
+    fn opaque_rgb_uses_every_texel_even_with_mixed_or_zero_alpha() {
+        for alpha in [0., 1.] {
+            let pixels = vec![[1., 0., 0., 0.], [0., 0., 1., alpha]];
+            let (coverage, independent) =
+                color_variants(2, 1, pixels, TextureFormat::Rgba8Srgb).unwrap();
+            assert_eq!(
+                &*independent.levels[1],
+                &[188, 0, 188, (alpha * 127.5_f32).round() as u8]
+            );
+            assert_eq!(
+                &*coverage.levels[1],
+                if alpha == 0. {
+                    &[0, 0, 0, 0]
+                } else {
+                    &[0, 0, 255, 128]
+                }
+            );
+            assert!(std::sync::Arc::ptr_eq(
+                &coverage.levels[0],
+                &independent.levels[0]
+            ));
+        }
+    }
+    #[test]
+    fn independent_hdr_odd_filter_preserves_area_weights_and_source_alpha() {
+        let pixels = vec![[6., 0., 0., 0.], [0., 3., 0., 0.5], [0., 0., 9., 1.]];
+        let (coverage, independent) =
+            color_variants(3, 1, pixels, TextureFormat::Rgba32Float).unwrap();
+        let values: Vec<f32> = independent.levels[1]
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .map(|word| f32::from_le_bytes(*word))
+            .collect();
+        assert_eq!(values, [2., 1., 3., 0.5]);
+        assert_eq!(coverage.levels[0], independent.levels[0]);
+        assert_ne!(coverage.levels[1], independent.levels[1]);
+    }
 }

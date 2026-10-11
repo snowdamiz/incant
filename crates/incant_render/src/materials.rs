@@ -177,7 +177,7 @@ impl MaterialSystem {
                     converted = out;
                     converted.as_slice()
                 } else {
-                    bytes.as_slice()
+                    bytes.as_ref()
                 };
                 let width = (source.width >> mip).max(1);
                 let height = (source.height >> mip).max(1);
