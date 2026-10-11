@@ -124,6 +124,12 @@ and 2D release tests, native-window all-target release Clippy, 43 tools tests,
 fmt, conventions, actionlint and the explicit normal graph pass after this
 second integration. The window/audio/game lifecycle sources remain unchanged.
 
+The next prerequisite `9c531a92854eab448053031a544579011bcc07a3` fixes Linux
+strict-C11 trap declarations and isolates the existing Camera accessibility
+scans. Integration passes 94 Camera tests, 43 tools tests, fmt and conventions.
+The optional window source is unchanged; these checks do not replace the
+prerequisite's combined Wasm conformance or pending exact-head hosted checks.
+
 ## Running and remaining scope
 
 ```sh

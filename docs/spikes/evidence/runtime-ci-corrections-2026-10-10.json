@@ -24,5 +24,14 @@
     "/tmp/incant-pr62-correction-player-clippy.log": "1a524622ef35129cd116a688511a0faab832cea94c576ff6d7435dd632d39684",
     "/tmp/incant-pr62-correction-tools.log": "db72574f81ffc7154f3463ca0331c56ef6fcdd2fde8760f08dbfe307ad66a545",
     "/tmp/incant-pr62-metadata-conformance.log": "c23789f53c23039ce8f39b586aa22a270c3bbe45a483b8b00cb227486bb7c666"
+  },
+  "followup": {
+    "root_before_documentation": "682d374",
+    "root_build_rs_sha256": "342bcb470c323155e10d5536e70e939a159b1fe381f38492d17093196dedd102",
+    "wasm_conformance_log_sha256": "c23789f53c23039ce8f39b586aa22a270c3bbe45a483b8b00cb227486bb7c666",
+    "camera_scoped_log_sha256": "07e13659f7731c0199180ef94dc21fb4c2bcbf0f9e642e900ca4c00adf28d688",
+    "wasm_combined_tests": 25,
+    "camera_tests": 59,
+    "full_ui_tests_on_unchanged_source": 529
   }
 }

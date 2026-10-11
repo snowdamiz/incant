@@ -462,5 +462,31 @@
       }
     },
     "scope": "Add reviewed v5 executable proof, stdout-only Cargo metadata handling, and parse-only ULID/isolated probe lock correction. Window/audio/game lifecycle sources remain unchanged; no fresh-window executable claim for this later integration."
+  },
+  "ci_followup_integration": {
+    "root_head": "9c531a92854eab448053031a544579011bcc07a3",
+    "camera_tests": 94,
+    "tool_tests": 43,
+    "fmt": true,
+    "conventions": true,
+    "logs": {
+      "camera": {
+        "path": "/tmp/incant-native-window-ci-followup-camera.log",
+        "sha256": "22a05efcce7efb2a374fa28e5c2f9328b2c1c693d53f568c6d59a9268d04276f"
+      },
+      "tools": {
+        "path": "/tmp/incant-native-window-ci-followup-tools.log",
+        "sha256": "e55395f0393fc3ae236e9c0ac99a18a9860179332dea2db136268e5a0046d313"
+      },
+      "fmt": {
+        "path": "/tmp/incant-native-window-ci-followup-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conventions": {
+        "path": "/tmp/incant-native-window-ci-followup-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "scope": "Reviewed Linux C11 build policy and independent Camera scan tests only; native window semantics unchanged. Combined Wasm conformance was verified on the prerequisite source; hosted exact-head checks remain required."
   }
 }
