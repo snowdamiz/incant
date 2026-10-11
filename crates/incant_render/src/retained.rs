@@ -56,14 +56,17 @@ impl Renderer {
             .iter()
             .position(|n| n.id == camera && n.camera.is_some())
             .ok_or_else(|| SceneError::MissingCamera(camera.into()))?;
-        // Two startup resolutions/uploads. The sealed decoded asset versions and
-        // immutable GPU geometry/materials are shared; mutable frame buffers are not.
+        // Immutable geometry/materials are shared; mutable frame buffers are not.
         let live = self
             .upload_scene(crate::scene::resolve(input)?, true)?
             .with_camera(camera)?;
-        let staging = self
-            .upload_scene(crate::scene::resolve(input)?, true)?
-            .with_camera(camera)?;
+        let mut staging_plan = crate::scene::resolve(input)?;
+        staging_plan.sprites.clear();
+        let mut staging = self.upload_scene(staging_plan, true)?.with_camera(camera)?;
+        staging.sprites = live
+            .sprites
+            .as_ref()
+            .map(|sprites| Arc::new(sprites.staging(&self.device)));
         let directional = input
             .nodes
             .iter()

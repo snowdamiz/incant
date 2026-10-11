@@ -121,6 +121,21 @@ fn source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_
         .prepare_retained(input.input(), input.camera_label())
         .unwrap();
     assert_eq!(gpu.stats().sprite_entities, 3);
+    let (vertices, storage, upload_bytes) = gpu
+        .live
+        .sprites
+        .as_ref()
+        .unwrap()
+        .retained_storage(gpu.staging.sprites.as_ref().unwrap());
+    // The old two complete 64-byte CPU/GPU streams plus two 16-byte local
+    // position arrays required at least 288 bytes/vertex. Measure actual buffer
+    // sizes and CPU capacities here; sharing must save more than half even for
+    // this small, unevenly sized fixture with vector capacity slack.
+    assert!(
+        storage < vertices * 288 / 2,
+        "{vertices} vertices use {storage} bytes"
+    );
+    assert_eq!(upload_bytes, vertices * 12);
     let format = wgpu::TextureFormat::Rgba8UnormSrgb;
     let output = texture(&renderer, format, 64, 64);
     let view = output.create_view(&Default::default());

@@ -45,13 +45,14 @@ initialization, ECS ticks, encoding, GPU work and assertions are excluded.
 
 ## Memory and remaining work
 
-The existing 128 MiB sprite vertex limit is **per scene**, not a total retained
-memory budget. At that cap, the current double-buffer implementation can retain
-576 MiB of vertex-related state: two 128 MiB GPU buffers, two 128 MiB CPU update
-vectors and two 32 MiB f64 local-position arrays. Textures, decoded assets,
-metadata, replacement candidates and preparation peaks are additional. These
-upper bounds are not a phone-memory result. Reducing duplicate CPU geometry and
-measuring shipping memory against the plan's device budgets remain required.
+The original double-buffer implementation could retain 576 MiB of vertex-related
+state at the 128 MiB logical geometry cap. The subsequent
+[stream separation](retained-sprite-memory.md) keeps that accepted geometry limit
+but reduces the corresponding bound to 232 MiB by sharing immutable attributes
+and local positions. Only 12-byte positions are uploaded each moving frame,
+instead of the complete 64-byte vertex. Textures, decoded assets, metadata,
+replacement candidates, driver staging and preparation peaks are additional.
+These are storage calculations, not phone-memory or frame-time measurements.
 
 This establishes numerical native sprite correctness and retention, not the
 complete 2D feature set or a performance gate. Tilemaps, flipbook playback,
