@@ -3,9 +3,10 @@
 //! Simulation failure creates no output. Output I/O itself is not atomic.
 use incant_assets_runtime::sha256;
 use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
-use incant_game_runtime::OfflineGameSession;
+mod session;
 use incant_input::InputReplay;
 use incant_runtime::{CookedScene, StableId};
+use session::Player;
 use std::{
     fmt::Write as _,
     fs::{File, OpenOptions},
@@ -36,16 +37,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         );
         return Ok(());
     }
-    if args.len() != 8 {
-        return Err("expected SCENE CACHE CLIPS RECORDING ACTIONS TICKS SAMPLE_RATE OUTPUT; manual input/source paths are unsupported".into());
-    }
+    let spatial = session::settings(&args)?;
     let ticks: u64 = args[5].parse()?;
     let rate: u32 = args[6].parse()?;
     if !(1..=3600).contains(&ticks) || !(8000..=192000).contains(&rate) {
         return Err("tick/sample-rate bounds".into());
     }
     let scene = CookedScene::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
-    if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
+    if spatial.is_none() && (!scene.spatial().is_empty() || !scene.visual_assets().is_empty()) {
         return Err("this game player has no spatial host".into());
     }
     let frames = u128::from(ticks) * u128::from(rate) / u128::from(scene.tick_rate());
@@ -78,7 +77,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         clips.push(ClipBinding::load(id, Path::new(&args[1]), &key)?);
     }
-    let mut game = OfflineGameSession::new(scene, embedded::load()?, actions, clips, rate)?;
+    let mut game = Player::new(scene, embedded::load()?, actions, clips, rate, spatial)?;
     let mut output = vec![0.; frames as usize * 2];
     let mut offset = 0;
     for tick in 1..=ticks {
@@ -96,14 +95,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         serde_json::json!({"id":node.entity.0,"position":pose[3][..3],"physics":physics})
     }).collect();
     let bytes: Vec<_> = output.iter().flat_map(|v| v.to_le_bytes()).collect();
+    let mut report = serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources});
+    if let Some(input) = game.render_report()? {
+        report["render_input"] = input;
+    }
     OpenOptions::new()
         .write(true)
         .create_new(true)
         .open(&args[7])?
         .write_all(&bytes)?;
-    println!(
-        "{}",
-        serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources})
-    );
+    println!("{report}");
     Ok(())
 }

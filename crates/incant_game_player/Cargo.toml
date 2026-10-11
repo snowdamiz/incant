@@ -5,7 +5,12 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = []
+render-input = ["dep:incant_render_game"]
+
 [dependencies]
+incant_render_game = { path = "../incant_render_game", optional = true }
 incant_game_runtime = { path = "../incant_game_runtime" }
 incant_script.workspace = true
 incant_runtime.workspace = true
