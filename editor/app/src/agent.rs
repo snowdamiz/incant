@@ -1,5 +1,6 @@
 //! Native editor agent transport. Credentials and provider calls stay on the
 //! worker; authoring edits use the editor's existing bus and journal.
+mod owner;
 #[cfg(test)]
 mod tests;
 mod worker;
@@ -32,7 +33,7 @@ impl Connection {
             .or_else(|| store.data.api_key_connected.then_some(Self::ApiKey))
     }
 }
-#[derive(PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq)]
 enum ContextKey {
     Account(incant_agent::accounts::AccountSelection),
     #[cfg(test)]
@@ -40,12 +41,11 @@ enum ContextKey {
 }
 #[derive(Default)]
 struct Context {
-    selection: Option<ContextKey>,
     conversation: Conversation,
 }
 pub(super) struct Service {
     session: Session,
-    context: Arc<Mutex<Context>>,
+    owner: owner::Owner,
     // Serializes starts with account operations and shutdown, never provider IO.
     closed: Mutex<bool>,
 }
@@ -56,7 +56,7 @@ impl Service {
                 max_tokens: 1_000_000,
                 used_tokens: 0,
             }),
-            context: Arc::new(Mutex::new(Context::default())),
+            owner: owner::Owner::new(),
             closed: Mutex::new(false),
         }
     }
@@ -64,16 +64,16 @@ impl Service {
         &self,
         request: TurnRequest,
         ready: impl FnOnce() -> Result<Connection, Error>,
-        job: impl FnOnce(TurnContext, Connection, Arc<Mutex<Context>>) -> TurnOutcome + Send + 'static,
+        job: impl FnOnce(TurnContext, Connection, owner::Client) -> TurnOutcome + Send + 'static,
     ) -> Result<TurnId, Error> {
         let closed = self.closed.lock().map_err(|_| Error::unavailable())?;
         if *closed {
             return Err(Error::unavailable());
         }
         let connection = ready()?;
-        let context = self.context.clone();
+        let owner = self.owner.client();
         self.session
-            .start(request, move |turn| job(turn, connection, context))
+            .start(request, move |turn| job(turn, connection, owner))
             .map_err(Into::into)
     }
     fn cancel_active(&self) {
@@ -96,6 +96,7 @@ impl Service {
         let mut closed = self.closed.lock().unwrap_or_else(|e| e.into_inner());
         *closed = true;
         self.cancel_active();
+        self.owner.close();
     }
 }
 #[derive(Debug, Serialize)]
@@ -180,7 +181,11 @@ pub(super) fn engine_agent_start(
             }
             Ok(connection)
         },
-        move |turn, connection, context| worker::run(turn, connection, context, bus, root),
+        move |turn, connection, owner| {
+            owner.run(turn, move |state, turn| {
+                worker::run(turn, connection, state, bus, root)
+            })
+        },
     )
 }
 #[tauri::command]
