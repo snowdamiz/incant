@@ -7,9 +7,14 @@ publish.workspace = true
 
 [features]
 default = []
-render-input = ["dep:incant_render_game"]
+render-input = ["dep:incant_render_game", "dep:incant_render_native"]
+render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render", "dep:thiserror"]
 
 [dependencies]
+incant_render_gpu_host = { path = "../incant_render_gpu_host", optional = true }
+incant_render = { path = "../incant_render", optional = true }
+incant_render_native = { path = "../incant_render_native", optional = true }
+thiserror = { workspace = true, optional = true }
 incant_render_game = { path = "../incant_render_game", optional = true }
 incant_game_runtime = { path = "../incant_game_runtime" }
 incant_script.workspace = true

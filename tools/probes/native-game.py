@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run build-produced bytecode, replay, native physics and audio after source removal.
 
-Desktop host==target shipping proof; optional CPU-only retained render input.
-No GPU submission, device output, session save,
+Desktop host==target shipping proof; optional CPU input or offscreen GPU frames.
+No visible presentation, device audio, session save,
 portable export, phone measurement or performance gate is claimed.
 """
 import argparse
@@ -39,13 +39,16 @@ def binary_id(value):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
-    parser.add_argument('--render-input', action='store_true', help='Enable the existing player CPU render-input feature and real cooked model/camera fixture')
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('--render-input', action='store_true', help='Enable CPU render input with real cooked model/camera')
+    modes.add_argument('--gpu', action='store_true', help='Enable real retained offscreen GPU submission and first/final numeric readback')
     suffix = '.exe' if os.name == 'nt' else ''
     for name, default in (
         ('headless', f'incant_headless{suffix}'), ('cook', f'examples/cook_scene{suffix}'),
         ('audio', f'examples/native_scene_audio{suffix}'), ('fixture', f'examples/no_renderer_fixtures{suffix}')):
         parser.add_argument(f'--{name}-binary', type=Path, default=ROOT / 'target/release' / default)
     args = parser.parse_args()
+    if args.gpu: args.render_input = True
     out = args.output.resolve(); out.mkdir(parents=True, exist_ok=False)
     headless, cook, audio, fixture_tool = (getattr(args, f'{n}_binary').resolve() for n in ('headless', 'cook', 'audio', 'fixture'))
     require(all(p.is_file() for p in (headless, cook, audio, fixture_tool)), 'Build public headless/cook/audio/fixture tools first')
@@ -105,7 +108,7 @@ def main():
             }
             if args.render_input:
                 components[1]['MeshRenderer'] = {'mesh': model, 'materials': [], 'cast_shadows': True}
-                components[4] = {'Transform': transform, 'Camera': {'fov_degrees': 60, 'near': 0.1, 'far': 100, 'projection': {'kind': 'perspective'}}}
+                components[4] = {'Transform': dict(transform, translation=[0,0,8] if args.gpu else [0,0,0]), 'Camera': {'fov_degrees': 60, 'near': 0.1, 'far': 100, 'projection': {'kind': 'perspective'}}}
             commands = ([{'op': 'delete_entity', 'scene_id': scene, 'entity_id': ids[n]} for n in entity_order] if fixtures else [])
             commands += [{'op': 'create_entity', 'scene_id': scene, 'entity': {
                 'id': ids[n], 'name': f'Game {n}', 'parent': None, 'provenance': None, 'components': components[n]}} for n in entity_order]
@@ -137,7 +140,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         with tempfile.TemporaryDirectory(prefix='native-game-build-', dir=out) as storage:
             command = [*cargo, 'build', '-j2', '-p', 'incant_game_player', '--profile', 'shipping', '--locked',
                        '--target', target, '--target-dir', storage, '--config', f'profile.shipping.split-debuginfo="{split}"', '--message-format=json', '-vv']
-            if args.render_input: command += ['--features', 'render-input']
+            if args.render_input: command += ['--features', 'render-gpu' if args.gpu else 'render-input']
             build = cargo_output(command, cwd=ROOT, env=environment)
             (out / 'build.log').write_text(build.stderr, encoding='utf-8')
             require(build.returncode == 0, f'Shipping build failed: {out / "build.log"}')
@@ -146,6 +149,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             forbidden = ('incant_doc', 'incant_cmd', 'incant_agent', 'incant_editor', 'incant_assets', 'incant_audio', 'incant_core', 'incant_cook', 'incant_play_legacy', 'loro')
             require(not any(re.search(r'--crate-name ('+'|'.join(forbidden)+r')\b', line) for line in target_lines), 'Authoring target dependency compiled')
             extra = ('incant_render_game', 'incant_render_native', 'incant_render_data') if args.render_input else ()
+            if args.gpu: extra += ('incant_render_gpu_host', 'incant_render', 'wgpu')
             for crate in extra + ('incant_input', 'incant_script', 'incant_runtime', 'incant_physics_runtime', 'rapier3d', 'incant_assets_runtime', 'incant_audio_runtime', 'incant_game_runtime', 'incant_game_player'):
                 lines = [line for line in target_lines if re.search(r'--crate-name '+crate+r'\b', line)]
                 require(len(lines) == 1, f'Missing fresh target compile for {crate}')
@@ -189,7 +193,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
     def command(scene_path, recording, rate, dest, clips=table_path, spatial=None):
         cmd = [player, scene_path, cache, clips, recording, action_path, '120', str(rate), dest]
         if (args.render_input if spatial is None else spatial):
-            cmd += ['--cpu-render-input', out/'player/models', out/'player/textures', binary_id(ids[4]).hex()]
+            cmd += ['--gpu-offscreen' if args.gpu else '--cpu-render-input', out/'player/models', out/'player/textures', binary_id(ids[4]).hex()]
         return cmd
     for fixture in fixtures:
         for rate in (44117, 48000):
@@ -204,9 +208,14 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
                 require(source['physics']['position'] == source['position'] and source['physics']['velocity'] == [3, 0, 0], 'Solver state not synchronized')
                 if args.render_input:
                     spatial = report['render_input']
-                    require(spatial['mode'] == 'cpu-only' and not spatial['gpu_submitted'] and spatial['tick'] == 120, 'Wrong spatial publication scope')
+                    require(spatial['mode'] == ('gpu-offscreen' if args.gpu else 'cpu-only') and spatial['gpu_submitted'] == args.gpu and spatial['tick'] == 120, 'Wrong spatial publication scope')
                     require(spatial['model_count'] == 1 and spatial['decoded_payload_bytes'] > 0 and spatial['camera'] == binary_id(ids[4]).hex(), 'Missing real cooked binding')
-                    require(spatial['first_model_position'] == source['position'] and spatial['camera_position'] == [0,0,0], 'CPU render input disagrees with committed simulation')
+                    require(spatial['first_model_position'] == source['position'] and spatial['camera_position'] == ([0,0,8] if args.gpu else [0,0,0]), 'CPU render input disagrees with committed simulation')
+                if args.gpu:
+                    gpu = spatial['gpu']; captures = gpu['captures']
+                    require(gpu['accepted_frames'] == 120 and not gpu['on_screen'] and [gpu['width'],gpu['height']] == [160,96], 'Wrong GPU frame accounting')
+                    require([c['frame'] for c in captures] == [1,120] and all(c['non_background_pixels'] > 0 for c in captures), 'Missing actual nonuniform GPU output')
+                    require(captures[0]['sha256'] != captures[1]['sha256'], 'Motion did not change GPU output')
                 pcm = list(struct.iter_unpack('<ff', dest.read_bytes()))
                 require(len(pcm) == report['frames'] and all(math.isfinite(v) for frame in pcm for v in frame), 'Invalid PCM')
                 left = sum(l*l-r*r for l, r in pcm[1000:20000]); right = sum(l*l-r*r for l, r in pcm[-20000:])
@@ -262,6 +271,15 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             ('malformed-camera', 12, 'not-hexadecimal', 'CAMERA_HEX')):
             dest = out/f'{label}.pcm'; cmd = command(fixtures[0]['path'], record_path, 48000, dest)
             cmd[index] = value; reject(label, cmd, dest, message)
+    cpu_mode_preserved = False
+    if args.gpu:
+        dest = out/'gpu-build-cpu-mode.pcm'
+        cmd = command(fixtures[0]['path'], record_path, 48000, dest)
+        cmd[9] = '--cpu-render-input'
+        cpu = json.loads(run(cmd))
+        require(cpu['render_input']['mode'] == 'cpu-only' and not cpu['render_input']['gpu_submitted'] and 'gpu' not in cpu['render_input'], 'GPU feature forced GPU into CPU mode')
+        require(cpu['pcm_sha256'] == results[1]['report']['pcm_sha256'] and cpu['render_input']['first_model_position'] == results[1]['report']['render_input']['first_model_position'], 'CPU mode diverged from accepted GPU simulation')
+        cpu_mode_preserved = True
     existing = out/'preserved.pcm'; existing.write_bytes(b'keep')
     result = subprocess.run(command(fixtures[0]['path'], record_path, 48000, existing), capture_output=True)
     require(result.returncode != 0 and not result.stdout and existing.read_bytes() == b'keep', 'Existing output overwritten')
@@ -269,7 +287,7 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
               'player_bytes': player.stat().st_size, 'player_sha256': sha(player), 'script_metadata': metadata,
               'source_compiler_symbols_absent': True, 'dynamic_source_routes_rejected': True,
               'headless_sha256': sha(headless), 'cook_sha256': sha(cook), 'audio_example_sha256': sha(audio), 'fixture_tool_sha256': sha(fixture_tool),
-              'public_import': imported, 'public_model_import': model_import, 'cpu_render_input': args.render_input, 'gpu_submitted': False, 'project_hash_before_delete': authoring_hash,
+              'public_import': imported, 'public_model_import': model_import, 'cpu_render_input': args.render_input and not args.gpu, 'gpu_submitted': args.gpu, 'on_screen_presentation': False, 'gpu_build_cpu_mode_preserved': cpu_mode_preserved, 'project_hash_before_delete': authoring_hash,
               'authoring_and_build_storage_deleted': True, 'removed_scope': 'authoring project/WAV/glTF/bin/journal/script source and fresh Cargo storage',
               'retained_runtime_inputs': ['binary scenes', 'clips.bin', 'cooked PCM/manifests', 'startup input.json/actions.json'] + (['cooked model payloads/manifests'] if args.render_input else []),
               'repeat_exact': True, 'recorded_ticks_per_process': 120, 'audio_processes': 8, 'results': results, 'rejected': failures,
