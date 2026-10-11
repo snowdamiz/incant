@@ -40,5 +40,6 @@ also passes. Unsupported platforms use a typed `Unavailable` adapter with no
 filesystem fallback; ULID parsing requires no entropy dependency. The global
 runtime dependency guard forbids `incant_source` transitively.
 
-The bus/journal/tool integration is a following
-scoped change. This prerequisite alone does not expose script content authoring.
+The prerequisite itself does not expose script content authoring. The following
+[bus/journal/tool integration](script-source-transactions.md) uses this store for
+the shared authoring command and registered-ID read/write tools.

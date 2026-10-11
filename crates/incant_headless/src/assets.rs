@@ -37,9 +37,10 @@ pub fn import(
             None => None,
         },
     };
-    let mut bus = CommandBus::persistent(
+    let mut bus = CommandBus::persistent_with_sources(
         project.with_extension("journal.jsonl"),
         read_project(project)?,
+        root,
     )?;
     let prepared = ImportSnapshot::capture(&bus).prepare(root, cache, &[request])?;
     let outcome = &prepared.outcomes()[0];

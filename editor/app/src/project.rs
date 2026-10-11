@@ -89,9 +89,12 @@ pub fn start(
 pub fn open(path: Option<&Path>) -> Result<CommandBus, LoadError> {
     if let Some(path) = path {
         let project = Project::from_text(&std::fs::read_to_string(path)?)?;
-        Ok(CommandBus::persistent(
+        Ok(CommandBus::persistent_with_sources(
             path.with_extension("journal.jsonl"),
             project,
+            path.parent()
+                .filter(|p| !p.as_os_str().is_empty())
+                .unwrap_or(Path::new(".")),
         )?)
     } else {
         let mut project = Project::empty("Incant Surface Spike");

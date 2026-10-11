@@ -637,6 +637,40 @@
       ],
       "type": "object"
     },
+    "SourceVersion": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "state": {
+              "const": "missing",
+              "type": "string"
+            }
+          },
+          "required": [
+            "state"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "state": {
+              "const": "present",
+              "type": "string"
+            }
+          },
+          "required": [
+            "state",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      ]
+    },
     "Stick": {
       "enum": [
         "left",
@@ -935,6 +969,32 @@
       "required": [
         "op",
         "script_id"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "description": "Write one registered source through the persistent, file-aware transaction.",
+      "properties": {
+        "expected_source": {
+          "$ref": "#/$defs/SourceVersion"
+        },
+        "op": {
+          "const": "write_script",
+          "type": "string"
+        },
+        "script_id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "script_id",
+        "expected_source",
+        "source"
       ],
       "type": "object"
     },

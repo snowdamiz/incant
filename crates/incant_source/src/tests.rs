@@ -166,6 +166,15 @@ fn actual_process_crashes_recover_prepared_and_installed_files() {
     ] {
         let dir = tempfile::tempdir().unwrap();
         fs::write(dir.path().join("main.ts"), "before").unwrap();
+        // Seed a prior receipt so the next finish also covers a crash after
+        // retiring an existing epoch, not only initial receipt creation.
+        let seed = store(dir.path());
+        let seed_op = "01ARZ3NDEKTSV4RRFFQ69G5FAY";
+        let unchanged = edit(Some("before"), Some("before"));
+        seed.begin(seed_op, &unchanged).unwrap();
+        seed.install(seed_op, &unchanged).unwrap();
+        seed.finish(seed_op).unwrap();
+        drop(seed);
         let result = Command::new(std::env::current_exe().unwrap())
             .args(["--exact", "tests::process_crash_child", "--nocapture"])
             .env("INCANT_SOURCE_CRASH_TEST_ROOT", dir.path())
