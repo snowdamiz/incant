@@ -139,6 +139,11 @@ terminal failure; the source-free player reports them once at completion.
 full native SDK, session saves and editor/headless Play migration remain open.
 
 
+The reviewed native script/input stack is now tested together with the static
+module lifecycle and CI/import union: 593 ordinary tests, 97 actual composed-module
+tests, all-target Clippy, 86 tooling tests and two fresh shipping proofs pass.
+Hosted integration checks remain pending. [Union evidence](docs/spikes/native-runtime-integration.md).
+
 ## Remaining engineering requirements
 
 - Complete migration of the editor, headless runner and full gameplay SDK from
