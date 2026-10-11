@@ -1,11 +1,15 @@
 //! Bounded native turn transport. Providers, credentials, project access and
 //! conversation context belong to the caller; this controller only owns workers
 //! and their observable state. Cancellation is cooperative, never thread killing.
+mod durable;
 mod payload;
 #[cfg(test)]
 mod tests;
 mod types;
-use crate::{AgentError, Budget};
+use crate::{
+    AgentError, Budget,
+    ledger::{Ledger, LedgerSnapshot},
+};
 use serde_json::Value;
 use std::{
     collections::VecDeque,
@@ -158,6 +162,43 @@ impl Session {
         request: TurnRequest,
         job: impl FnOnce(TurnContext) -> TurnOutcome + Send + 'static,
     ) -> Result<TurnId, SessionError> {
+        self.start_inner(request, None, job, spawn_worker)
+    }
+    /// The caller opens the project ledger on a worker before admission. Only
+    /// an accepted turn's worker reserves usage, before invoking `job`.
+    pub fn start_durable(
+        &self,
+        request: TurnRequest,
+        ledger: Ledger,
+        max_tokens: u64,
+        job: impl FnOnce(TurnContext) -> TurnOutcome + Send + 'static,
+    ) -> Result<TurnId, SessionError> {
+        let restored = ledger
+            .snapshot(max_tokens)
+            .map_err(|_| SessionError::InvalidRequest)?;
+        self.start_inner(request, Some((ledger, restored)), job, spawn_worker)
+    }
+    /// Restore an idle display from a host-selected project's locked ledger.
+    /// The caller must keep that ledger open through this call and fence its
+    /// current project/cap identity; a detached snapshot has no freshness token.
+    /// No filesystem work occurs here. An active worker's budget is unchanged.
+    pub fn restore_budget_if_idle(&self, snapshot: LedgerSnapshot) -> Result<(), SessionError> {
+        durable::validate_snapshot(&snapshot)?;
+        let mut worker = self.worker.lock().map_err(|_| SessionError::Unavailable)?;
+        self.reap(&mut worker)?;
+        if worker.is_some() {
+            return Err(SessionError::Busy);
+        }
+        let mut state = self.shared.lock()?;
+        restore(&self.shared, &mut state, snapshot)
+    }
+    fn start_inner(
+        &self,
+        request: TurnRequest,
+        durable: Option<(Ledger, LedgerSnapshot)>,
+        job: impl FnOnce(TurnContext) -> TurnOutcome + Send + 'static,
+        spawn: impl FnOnce(String, WorkerJob) -> std::io::Result<JoinHandle<()>>,
+    ) -> Result<TurnId, SessionError> {
         if !cfg!(any(unix, windows)) {
             return Err(SessionError::Unsupported);
         }
@@ -174,6 +215,12 @@ impl Session {
             return Err(SessionError::Busy);
         }
         let mut state = self.shared.lock()?;
+        let ledger = if let Some((ledger, snapshot)) = durable {
+            restore(&self.shared, &mut state, snapshot)?;
+            Some(ledger)
+        } else {
+            None
+        };
         if state.budget.remaining() == 0 {
             return Err(SessionError::Budget);
         }
@@ -216,12 +263,17 @@ impl Session {
             shared: self.shared.clone(),
         };
         let shared = self.shared.clone();
-        match thread::Builder::new()
-            .name(format!("incant-agent-{}", id.0))
-            .spawn(move || {
-                let outcome = catch_unwind(AssertUnwindSafe(|| job(context)));
-                finish(&shared, id, initial, outcome.ok());
-            }) {
+        match spawn(
+            format!("incant-agent-{}", id.0),
+            Box::new(move || {
+                let completion = catch_unwind(AssertUnwindSafe(|| match ledger {
+                    Some(ledger) => durable::run(context, ledger, job),
+                    None => prepare(&initial, Some(job(context))),
+                }))
+                .unwrap_or_else(|_| conservative(&initial, Failure::WorkerPanicked));
+                finish(&shared, id, initial, completion);
+            }),
+        ) {
             Ok(handle) => {
                 *worker = Some(handle);
                 Ok(id)
@@ -445,13 +497,56 @@ fn failure(error: AgentError) -> Option<Failure> {
         AgentError::ProjectChanged => Failure::ProjectChanged,
     })
 }
-fn finish(shared: &Shared, id: TurnId, initial: Budget, outcome: Option<TurnOutcome>) {
+type WorkerJob = Box<dyn FnOnce() + Send + 'static>;
+fn spawn_worker(name: String, job: WorkerJob) -> std::io::Result<JoinHandle<()>> {
+    thread::Builder::new().name(name).spawn(job)
+}
+fn restore(
+    shared: &Shared,
+    state: &mut State,
+    snapshot: LedgerSnapshot,
+) -> Result<(), SessionError> {
+    durable::validate_snapshot(&snapshot)?;
+    if state.version >= types::MAX_SEQUENCE {
+        return Err(SessionError::SequenceExhausted);
+    }
+    if state.budget.max_tokens != snapshot.budget.max_tokens
+        || state.budget.used_tokens != snapshot.budget.used_tokens
+        || state.uncertain != snapshot.accounting_uncertain
+    {
+        shared.bump(state)?;
+        state.budget = snapshot.budget;
+        state.uncertain = snapshot.accounting_uncertain;
+        shared.changed.notify_all();
+    }
+    Ok(())
+}
+struct Completion {
+    budget: Budget,
+    report: Option<ReportSummary>,
+    error: Option<Option<Failure>>,
+    uncertain: bool,
+    valid_receipt: bool,
+}
+fn conservative(initial: &Budget, failure: Failure) -> Completion {
+    Completion {
+        budget: Budget {
+            max_tokens: initial.max_tokens,
+            used_tokens: initial.used_tokens.max(initial.max_tokens),
+        },
+        report: None,
+        error: Some(Some(failure)),
+        uncertain: true,
+        valid_receipt: false,
+    }
+}
+fn prepare(initial: &Budget, outcome: Option<TurnOutcome>) -> Completion {
     // Bound/summarize an owned report and drop any excess outside the state lock.
-    let (budget, report, error, uncertain) = match outcome {
+    match outcome {
         Some(TurnOutcome { budget, result })
             if budget.max_tokens == initial.max_tokens
                 && budget.used_tokens >= initial.used_tokens
-                && budget.used_tokens >= minimum_usage(&initial, &result) =>
+                && budget.used_tokens >= minimum_usage(initial, &result) =>
         {
             // The agent reserves an allowance when a transport failure has no
             // measured usage. Preserve that charge without labelling it exact.
@@ -465,22 +560,32 @@ fn finish(shared: &Shared, id: TurnId, initial: Budget, outcome: Option<TurnOutc
                 ),
                 Err(e) => (None, Some(failure(e))),
             };
-            (budget, report, error, uncertain)
+            Completion {
+                budget,
+                report,
+                error,
+                uncertain,
+                valid_receipt: true,
+            }
         }
-        value => (
-            Budget {
-                max_tokens: initial.max_tokens,
-                used_tokens: initial.used_tokens.max(initial.max_tokens),
-            },
-            None,
-            Some(Some(if value.is_none() {
+        value => conservative(
+            initial,
+            if value.is_none() {
                 Failure::WorkerPanicked
             } else {
                 Failure::BudgetAccounting
-            })),
-            true,
+            },
         ),
-    };
+    }
+}
+fn finish(shared: &Shared, id: TurnId, initial: Budget, completion: Completion) {
+    let Completion {
+        budget,
+        report,
+        error,
+        uncertain,
+        ..
+    } = completion;
     let Ok(mut state) = shared.lock() else { return };
     if state.active.as_ref().map(|a| a.id) != Some(id) {
         return;
