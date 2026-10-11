@@ -66,7 +66,7 @@ pub fn encode_ktx2(texture: &Texture) -> Result<Vec<u8>> {
         };
         let start = Header::LENGTH + i * LevelIndex::LENGTH;
         bytes[start..start + LevelIndex::LENGTH].copy_from_slice(&index.as_bytes());
-        bytes.extend(level);
+        bytes.extend_from_slice(level);
     }
     Ok(bytes)
 }

@@ -79,7 +79,7 @@ fn cook_imported(imported: ImportedModel, cache: &Path) -> Result<CookedModel> {
     if json.len() > 8 * 1024 * 1024 {
         return Err(AssetError::Limit("model metadata"));
     }
-    let mut bytes = b"INCMOD02".to_vec();
+    let mut bytes = b"INCMOD03".to_vec();
     bytes.extend_from_slice(&(json.len() as u32).to_le_bytes());
     bytes.extend(json);
     bytes.extend_from_slice(&(imported.meshes.len() as u32).to_le_bytes());

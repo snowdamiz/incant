@@ -1,0 +1,148 @@
+{
+  "head": "02d1872f43a0aae7daf8df849f48ac0c9f442aff",
+  "parents": [
+    "9863f205b0938feca14c18963c5474d941da3f25",
+    "b1fd8f052b841302c602b7981e7a3b63efb3d54f"
+  ],
+  "changed_from_reviewed81": [
+    "STATUS.md",
+    "crates/incant_assets/src/atlas.rs",
+    "crates/incant_assets/src/cache.rs",
+    "crates/incant_assets/src/cache_tests.rs",
+    "crates/incant_assets/src/fbx/materials.rs",
+    "crates/incant_assets/src/fbx/mod.rs",
+    "crates/incant_assets/src/ktx.rs",
+    "crates/incant_assets/src/material.rs",
+    "crates/incant_assets/src/model_textures.rs",
+    "crates/incant_assets/src/source.rs",
+    "crates/incant_assets/src/texture.rs",
+    "crates/incant_assets/src/texture_cache.rs",
+    "crates/incant_assets/tests/color_roles.rs",
+    "crates/incant_assets/tests/fbx.rs",
+    "crates/incant_assets/tests/reader_boundary.rs",
+    "crates/incant_assets/tests/textures.rs",
+    "crates/incant_assets_runtime/src/ktx.rs",
+    "crates/incant_assets_runtime/src/material.rs",
+    "crates/incant_assets_runtime/src/model.rs",
+    "crates/incant_assets_runtime/src/model_textures.rs",
+    "crates/incant_assets_runtime/src/texture.rs",
+    "crates/incant_assets_runtime/src/texture_cache.rs",
+    "crates/incant_assets_runtime/src/version.rs",
+    "crates/incant_assets_runtime/tests/visual_readers.rs",
+    "crates/incant_import/tests/imports.rs",
+    "crates/incant_render/src/environment/source.rs",
+    "crates/incant_render/src/environment/tests.rs",
+    "crates/incant_render/src/materials.rs",
+    "crates/incant_render/src/sprites/texture.rs",
+    "crates/incant_render/tests/color_roles/mod.rs",
+    "crates/incant_render/tests/model_gpu.rs",
+    "docs/spikes/color-mip-roles.md",
+    "docs/spikes/evidence/color-mip-roles-cpu.json",
+    "handoffs/0043-color-mip-roles/brief.md",
+    "handoffs/0043-color-mip-roles/references/0041-fixtures.py",
+    "handoffs/0043-color-mip-roles/references/README.md",
+    "handoffs/0043-color-mip-roles/tools/engine.py",
+    "handoffs/0043-color-mip-roles/tools/test_guard.py"
+  ],
+  "remerge_diff_sha256": "108bc0c89082bc84942fc9eac9b8d650f746e195101c577968e9218888a88a35",
+  "only_manual_conflict": "STATUS.md",
+  "source_files": {
+    "crates/incant_assets/src/atlas.rs": "b1c0d011dd8b2c2d89feb3877de2fe4294f4187091fbf9a44e7c6b8bb0e84977",
+    "crates/incant_assets/src/cache.rs": "1208994441855b760ce876cb6c01e01a9c1d313f73adc980b6f4733539a43911",
+    "crates/incant_assets/src/cache_tests.rs": "8422652c6a3591a14545450fb8451e7961e16cfe4061fc78c870c9fcde67439a",
+    "crates/incant_assets/src/fbx/materials.rs": "6a83e5ed09800d506d91b758cf6898420df6e8fafee3c7b700234b80a13168a4",
+    "crates/incant_assets/src/fbx/mod.rs": "bdec051e3860e8c365a51be2466420f9c88d1b8561656cda3d3bf7c9309022c0",
+    "crates/incant_assets/src/ktx.rs": "a9f4ca88a9972dbb561943cc917f26c3ecb09bef02a2d5e092c3ffb6c02e86dc",
+    "crates/incant_assets/src/material.rs": "06ef4e7e0f10549dd4659e04341dd894d165485c0bfd7358999db88fa277909c",
+    "crates/incant_assets/src/model_textures.rs": "1e3191b6aa7a83b3c5ae5eef38b9822f3fb75260717e0bc150e8d2d7c268a51f",
+    "crates/incant_assets/src/source.rs": "4acfd27f0c1961de8c3c249da8282fd25cc2cebd64479f365e09f0042611c007",
+    "crates/incant_assets/src/texture.rs": "bd2b24191138aeb995230691b67769007269155014aeb10c0f3a9e764de33026",
+    "crates/incant_assets/src/texture_cache.rs": "61a400574494518062f795f6825171ab1d55afd42a2d33844c8329d04776511a",
+    "crates/incant_assets/tests/color_roles.rs": "90df77b8f1ed1234a0231c2ff8b921bfb56a61bf0e7765dd1ace9c9892060906",
+    "crates/incant_assets/tests/fbx.rs": "8c2f71d6fdd2e4fd0dcba14d6108feb8829a67eb6d9e66b356b85339b55f2b05",
+    "crates/incant_assets/tests/reader_boundary.rs": "dc3de48a4e40e0dae6e75f857a6e7b80fc76d2feff70e9e8f717f15202f8a65c",
+    "crates/incant_assets/tests/textures.rs": "dbafb9915a071d3627bd437defd5bd6d853f32a098df2512ae248d411a6b349b",
+    "crates/incant_assets_runtime/src/ktx.rs": "87d124d509dc9cd98cc49d0f5bcd7f5aca78c30ab89dcb954afec8407039ed35",
+    "crates/incant_assets_runtime/src/material.rs": "bc5bb33dbafbf4d9f509d63ca0ff1fe8e9a2d2648e1b22f7d38074ed29e21fc5",
+    "crates/incant_assets_runtime/src/model.rs": "29b3e74dbe741d0d96acd5ea8370fde68500e6d0df0d66cc4f7403f9777eb794",
+    "crates/incant_assets_runtime/src/model_textures.rs": "53d7de663fdc7865dfdd100ca3c9fde3d3230eb7b439984fb4bfb36b72f1644a",
+    "crates/incant_assets_runtime/src/texture.rs": "b911fb28b4c4c897276dd78a551f1a01b7695d971431aa71c05e36b6129ddb97",
+    "crates/incant_assets_runtime/src/texture_cache.rs": "b902d63df8924088b89fa9281025a5c7476535cb384419adb95f13167fbdf2be",
+    "crates/incant_assets_runtime/src/version.rs": "0ed81762eee8598dfb9eb57dd5477004af653ac4675f61b42dcb611f447c8242",
+    "crates/incant_assets_runtime/tests/visual_readers.rs": "e29324314e8bf5128dfedb8644cb4c6e3d2588734cbbec997929c595acdac2c2",
+    "crates/incant_import/tests/imports.rs": "30f920bfe91de34be0465c21236a11ae2f6a8cf2c770d42e2e7e6c63fdde2bdd",
+    "crates/incant_render/src/environment/source.rs": "3c1e62da379399eeee7482201a8b13da353fcce4c4b3ff783721b7ce3a474ec0",
+    "crates/incant_render/src/environment/tests.rs": "adb353ee9b0fb3c5a9bf0eae42517313d427c0a806b8385048ed8118bb68803d",
+    "crates/incant_render/src/materials.rs": "076579fe6252c9864b06dfbf737ce95cc8f5e0207ebced2d8aaf6692bfae5a6f",
+    "crates/incant_render/src/sprites/texture.rs": "ac4065796da44e73ba45ca1dd0cadf1fd4bf2bbb2bc26c33ad44bc89412cf41d",
+    "crates/incant_render/tests/color_roles/mod.rs": "0eb60885e9f369143bcb9d047e49b8d362abdecffb32da25d543c4cf1fc0e47f",
+    "crates/incant_render/tests/model_gpu.rs": "2f17ee3619099df5e6a249b011709a1938ec09bbe86530445b55baf80df36a36"
+  },
+  "ordinary_passed": 132,
+  "clippy": "all-target ci scoped pass",
+  "gpu_passed": 68,
+  "gpu_unit": 18,
+  "gpu_integration": 50,
+  "new_gpu_test_functions": 2,
+  "new_role_comparisons": 11,
+  "appearance_accepted": false,
+  "performance_claim": false,
+  "process_status": "session30856 terminal0; no Cargo/test/player child on recheck after turn interruption",
+  "logs": [
+    {
+      "path": "/tmp/incant-color-roles-union-cpu-tests.log",
+      "sha256": "7b50e76f774088036401484c3f7b6916d66a0878e7208a47a71838f0624ee3da"
+    },
+    {
+      "path": "/tmp/incant-color-roles-union-clippy.log",
+      "sha256": "eac3a1ddebd79ea8bb6de25a52cb7ee814114c4a31ea000d054731fe13690bda"
+    },
+    {
+      "path": "/tmp/incant-color-roles-union-gpu.log",
+      "sha256": "775340ee682c14de0af32e206dcb814e72ef76937071e877f364e433adfdec7a"
+    }
+  ],
+  "workspace_followup": {
+    "source_head": "4f7ecfa211add87ee207f4e5abd69161c868a609",
+    "ordinary_passed": 703,
+    "ordinary_result_groups": 201,
+    "ignored_not_executed_in_cpu_run": 73,
+    "clippy": "workspace all-target ci pass",
+    "session": "43325 terminal0",
+    "logs": [
+      {
+        "path": "/tmp/incant-color-roles-workspace-tests.log",
+        "sha256": "43dc5c4a54632bcece6efebbba00eaa7a9eb67a02032416832809bfeb5aa7499",
+        "groups": 201,
+        "passed": 703,
+        "failed": 0,
+        "ignored": 73,
+        "tail": [
+          "   Doc-tests incant_wasm_runtime",
+          "",
+          "running 0 tests",
+          "",
+          "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+          ""
+        ]
+      },
+      {
+        "path": "/tmp/incant-color-roles-workspace-clippy.log",
+        "sha256": "652da8da2d330abc35a6f5f024c8c587eaf8a378a9d85b03d362463b3ba182ff",
+        "groups": 0,
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "tail": [
+          "    Checking incant_wasm_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_wasm_cook)",
+          "    Checking incant_platform_smoke v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_platform_smoke)",
+          "    Checking incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_gpu_host)",
+          "    Checking incant_wasm_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_wasm_player)",
+          "    Checking incant_wasm_dev v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_wasm_dev)",
+          "    Finished `ci` profile [optimized] target(s) in 15.25s"
+        ]
+      }
+    ],
+    "shared_target_limitation": "Used native-fbx-import target, serializing and invalidating coordinator graph. No timing claims; subsequent color builds must use an isolated target."
+  }
+}

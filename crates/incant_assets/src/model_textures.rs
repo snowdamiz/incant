@@ -1,6 +1,5 @@
-use crate::{
-    AssetError, MAX_SOURCE_BYTES, Result, SourceSet, Texture, TextureUsage, import_image, invalid,
-};
+use crate::texture::{ImageRole, import_image_role};
+use crate::{AssetError, MAX_SOURCE_BYTES, Result, SourceSet, Texture, invalid};
 use std::{
     collections::{BTreeMap, BTreeSet},
     path::Path,
@@ -17,7 +16,7 @@ pub(crate) fn import_textures(
         return Err(AssetError::Limit("model textures"));
     }
     let mut usage = vec![BTreeSet::new(); doc.textures().len()];
-    let mut mark = |index: usize, coord: u32, kind: TextureUsage| -> Result<()> {
+    let mut mark = |index: usize, coord: u32, kind: ImageRole| -> Result<()> {
         if coord != 0 {
             return Err(AssetError::Unsupported(
                 "texture coordinate set beyond UV0".into(),
@@ -28,36 +27,29 @@ pub(crate) fn import_textures(
     };
     for material in doc.materials() {
         let pbr = material.pbr_metallic_roughness();
-        for info in [pbr.base_color_texture(), material.emissive_texture()]
-            .into_iter()
-            .flatten()
-        {
+        if let Some(info) = pbr.base_color_texture() {
+            let role = if material.alpha_mode() == gltf::material::AlphaMode::Opaque {
+                ImageRole::ColorUnweighted
+            } else {
+                ImageRole::ColorCoverage
+            };
+            mark(info.texture().index(), info.tex_coord(), role)?;
+        }
+        if let Some(info) = material.emissive_texture() {
             mark(
                 info.texture().index(),
                 info.tex_coord(),
-                TextureUsage::Color,
+                ImageRole::ColorUnweighted,
             )?;
         }
         if let Some(info) = pbr.metallic_roughness_texture() {
-            mark(
-                info.texture().index(),
-                info.tex_coord(),
-                TextureUsage::Linear,
-            )?;
+            mark(info.texture().index(), info.tex_coord(), ImageRole::Linear)?;
         }
         if let Some(info) = material.occlusion_texture() {
-            mark(
-                info.texture().index(),
-                info.tex_coord(),
-                TextureUsage::Linear,
-            )?;
+            mark(info.texture().index(), info.tex_coord(), ImageRole::Linear)?;
         }
         if let Some(info) = material.normal_texture() {
-            mark(
-                info.texture().index(),
-                info.tex_coord(),
-                TextureUsage::Normal,
-            )?;
+            mark(info.texture().index(), info.tex_coord(), ImageRole::Normal)?;
         }
     }
     let mut encoded = Vec::new();
@@ -89,6 +81,7 @@ pub(crate) fn import_textures(
         let sampler = texture.sampler();
         let mut record = ModelTexture {
             color: None,
+            color_unweighted: None,
             linear: None,
             normal: None,
             mag_filter: sampler.mag_filter().map(|v| v.as_gl_enum()),
@@ -98,15 +91,26 @@ pub(crate) fn import_textures(
         };
         // Retain unused textures for subsequent material edits.
         if usage[texture.index()].is_empty() {
-            usage[texture.index()].insert(TextureUsage::Linear);
+            usage[texture.index()].insert(ImageRole::Linear);
         }
         for &kind in &usage[texture.index()] {
             let key = (texture.source().index(), kind);
             let id = if let Some(&id) = variants.get(&key) {
                 id
             } else {
-                let image = import_image(&encoded[key.0], kind)?;
-                total_bytes += image.levels.iter().map(Vec::len).sum::<usize>();
+                if images.len() >= 768 {
+                    return Err(AssetError::Limit("model image variants"));
+                }
+                let mut image = import_image_role(&encoded[key.0], kind)?;
+                let other = match kind {
+                    ImageRole::ColorCoverage => Some(ImageRole::ColorUnweighted),
+                    ImageRole::ColorUnweighted => Some(ImageRole::ColorCoverage),
+                    _ => None,
+                };
+                if let Some(other) = other.and_then(|role| variants.get(&(key.0, role))) {
+                    image.share_base_from(&images[*other])?;
+                }
+                total_bytes += image.payload_bytes();
                 if total_bytes > MAX_SOURCE_BYTES {
                     return Err(AssetError::Limit("decoded model textures"));
                 }
@@ -116,9 +120,10 @@ pub(crate) fn import_textures(
                 id
             };
             match kind {
-                TextureUsage::Color => record.color = Some(id),
-                TextureUsage::Linear => record.linear = Some(id),
-                TextureUsage::Normal => record.normal = Some(id),
+                ImageRole::ColorCoverage => record.color = Some(id),
+                ImageRole::ColorUnweighted => record.color_unweighted = Some(id),
+                ImageRole::Linear => record.linear = Some(id),
+                ImageRole::Normal => record.normal = Some(id),
             }
         }
         textures.push(record);

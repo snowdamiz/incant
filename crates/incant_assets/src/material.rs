@@ -6,5 +6,6 @@ pub(crate) fn resolve(
     textures: &[crate::ModelTexture],
     images: &[crate::Texture],
 ) -> crate::Result<Vec<Material>> {
-    incant_assets_runtime::material::resolve(values, textures, images).map_err(Into::into)
+    incant_assets_runtime::material::resolve_color_roles(values, textures, images)
+        .map_err(Into::into)
 }
