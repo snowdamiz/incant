@@ -74,3 +74,29 @@ WGSL pipelines at runtime; offline shader compilation/prewarming is not certifie
 by deleting project and script sources. No signing/export authentication claim is
 made. The bytecode hashes detect identity/integrity; trust comes from the fresh
 compiler output embedded by the trusted build, not the hashes.
+
+## Integrated renderer and sprite-storage rerun
+
+The integrated source tree at `d56e74b` passes **539 ordinary release tests and
+doctests**, **66 actual GPU tests**, workspace and optional-player all-target
+release Clippy, and the combined native editor/headless/tool build. The optional
+development Wasmtime host's 13 tests passed before the subsequent renderer-only
+immutable sprite-storage change; its sources are unchanged.
+
+A new initially empty shipping build also passes the same **28 process
+invocations** after deleting the project, imported sources, script source and
+build storage. Its Apple M5 Pro / Metal player is **7,404,688 bytes**, SHA-256
+`b884b7514a71f18d4f9f7d30d8c1138af86e0b040d187e7d65de14eb57b9e582`,
+with matched arm64 dSYM UUID `11d4f0fa-9490-300b-ba59-36238e4dafb0`. The first and
+final numerical frame hashes, PCM hashes and poses match the earlier proof.
+
+This executable contains the integrated v5 sprite reader and retained geometry
+implementation, but this particular process fixture still exercises the v4
+model path. Native v5 sprites are covered by the separate exact numerical GPU
+regressions, including the measured storage reduction; this rerun does not
+substitute for a future v5 source-free executable fixture. It does not include
+the separately developed native-window host.
+
+See [integrated result and check identities](evidence/native-runtime-integration-2026-10-10.json).
+Raw package, matching symbols, audit and process logs are retained in
+`/tmp/incant-native-final-gpu-shipping/`.

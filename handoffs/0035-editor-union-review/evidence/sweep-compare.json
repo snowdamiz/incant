@@ -1,0 +1,38 @@
+{
+  "generated": "2026-10-10T23:57:26.043Z",
+  "note": "Unchanged 0033 capture tool and evidence double, re-run on the union build (a20d258 UI). Compared with 0033 plain-comparison.json \"after\" (plain revision, before the cdf0fab status-dot change and Astra's 0d14f4f accessibility fixes). Headless Chrome; not native WebKit.",
+  "browser": {
+    "baseline": "155.0.8059.40",
+    "union": "155.0.8059.40"
+  },
+  "states": 96,
+  "identical": 94,
+  "changed": [
+    {
+      "capture": "native-broken-camera-normal-1440x874",
+      "changed": {
+        "visibleWords.inspector": [
+          59,
+          60
+        ],
+        "visibleWords.page": [
+          216,
+          217
+        ]
+      }
+    },
+    {
+      "capture": "native-broken-camera-minimum-1000x650",
+      "changed": {
+        "visibleWords.inspector": [
+          53,
+          54
+        ],
+        "visibleWords.page": [
+          144,
+          145
+        ]
+      }
+    }
+  ]
+}

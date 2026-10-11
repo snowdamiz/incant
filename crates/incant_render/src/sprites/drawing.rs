@@ -70,8 +70,9 @@ impl SpriteDraw {
         let [x, y, w, h] = self.rect;
         pass.set_viewport(x, y, w, h, 0., 1.);
         pass.set_bind_group(0, &self.globals, &[]);
-        pass.set_vertex_buffer(0, self.scene.vertices.slice(..));
-        for batch in &self.scene.batches {
+        pass.set_vertex_buffer(0, self.scene.positions.slice(..));
+        pass.set_vertex_buffer(1, self.scene.geometry.attributes.slice(..));
+        for batch in &self.scene.geometry.batches {
             pass.set_bind_group(1, &batch.texture.groups[batch.sampling], &[]);
             pass.draw(batch.start..batch.start + batch.count, 0..1);
         }

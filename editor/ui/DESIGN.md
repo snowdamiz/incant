@@ -166,6 +166,14 @@ The kind and the stable ID are the name's accessible description. There is no me
 The visible "Inspector" title returns when nothing is inspected; the panel's accessible
 name is always "Inspector". Assets and the import form use the same line.
 
+**Assets by source type.** The list tags an ordinary image with its interpretation
+(Color, Linear, Normal map) and a sprite atlas (`.atlas.json`) with "Atlas"; models and
+audio are icon-only, their kind spoken. Details are Source, Interpretation, Reimport and
+Identifiers: an image's interpretation is a choice, an atlas shows its saved value in a
+plain value box ("Sprite atlases are always color"), and audio has no Interpretation.
+Import rows name their type in quiet text under the path ("Model", "Color atlas", "WAV
+audio", "OGG audio"); image rows show the interpretation choice instead.
+
 **Problems on the entity.** A plain list under the header: each line is the severity
 icon, the engine's message, then where it is (the component name and the exact path in
 quiet monospace, as a link that focuses the field). Paths wrap after slashes.

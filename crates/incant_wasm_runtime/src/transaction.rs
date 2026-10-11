@@ -1,6 +1,6 @@
 //! Bounded numeric transfers, followed by the existing checked native sync.
 //! No foreign pointer or module memory reference enters this file.
-use crate::{ModuleError, bounds};
+use crate::{BoundaryError, limits};
 use incant_runtime::{NumericColumns, StableId};
 
 pub struct Chunk {
@@ -10,7 +10,7 @@ pub struct Chunk {
     pub dirty_transform: bool,
     pub dirty_velocity: bool,
 }
-pub fn capture(columns: &mut NumericColumns<'_>) -> Result<Vec<Chunk>, ModuleError> {
+pub fn capture(columns: &mut NumericColumns<'_>) -> Result<Vec<Chunk>, BoundaryError> {
     let mut chunks = Vec::new();
     let mut bytes = 0usize;
     columns.try_for_each_chunk(|chunk| {
@@ -20,10 +20,10 @@ pub fn capture(columns: &mut NumericColumns<'_>) -> Result<Vec<Chunk>, ModuleErr
                     + chunk.transforms.len() * 8
                     + chunk.velocities.as_ref().map_or(0, |v| v.len() * 8),
             )
-            .filter(|size| *size <= bounds::COLUMNS)
-            .ok_or(ModuleError::Limit("numeric transfer storage"))?;
-        if chunks.len() == bounds::CHUNKS {
-            return Err(ModuleError::Limit("numeric chunk count"));
+            .filter(|size| *size <= limits::COLUMNS)
+            .ok_or(BoundaryError::Limit("numeric transfer storage"))?;
+        if chunks.len() == limits::CHUNKS {
+            return Err(BoundaryError::Limit("numeric chunk count"));
         }
         chunks.push(Chunk {
             ids: chunk.ids.to_vec(),
@@ -95,12 +95,22 @@ impl Drop for Guard<'_, '_> {
         }
     }
 }
-pub fn commit(columns: &mut NumericColumns<'_>, chunks: &[Chunk]) -> Result<Undo, ModuleError> {
+pub fn commit(columns: &mut NumericColumns<'_>, chunks: &[Chunk]) -> Result<Undo, BoundaryError> {
     let mut index = 0;
     let mut saved = Vec::new();
-    columns.for_each_chunk(|chunk| {
-        let new = &chunks[index];
-        assert_eq!(chunk.ids, new.ids, "exclusive scope preserves table layout");
+    columns.try_for_each_chunk(|chunk| {
+        let new = chunks.get(index).ok_or(BoundaryError::Abi(
+            "table layout changed during guest execution",
+        ))?;
+        if chunk.ids != new.ids
+            || chunk.transforms.len() != new.transforms.len()
+            || chunk.velocities.as_ref().map(|v| v.len())
+                != new.velocities.as_ref().map(|v| v.len())
+        {
+            return Err(BoundaryError::Abi(
+                "table layout changed during guest execution",
+            ));
+        }
         if new.dirty_transform || new.dirty_velocity {
             saved.push(Saved {
                 index,
@@ -112,8 +122,14 @@ pub fn commit(columns: &mut NumericColumns<'_>, chunks: &[Chunk]) -> Result<Undo
             });
         }
         index += 1;
-    });
-    assert_eq!(index, chunks.len());
+        Ok(())
+    })?;
+    if index != chunks.len() {
+        return Err(BoundaryError::Abi(
+            "table layout changed during guest execution",
+        ));
+    }
+
     let mut guard = Guard {
         columns,
         undo: Some(Undo(saved)),

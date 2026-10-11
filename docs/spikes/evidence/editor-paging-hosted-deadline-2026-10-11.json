@@ -1,0 +1,42 @@
+{
+  "failed_head": "3ff9c1ab7fed86e1545a86947935684fbe2b5d2b",
+  "jobs": {
+    "Linux": 114356242110,
+    "Windows": 114356241937
+  },
+  "failure": "Two3000/5000-diagnostic behavioral cases exceeded Vitest default5s; Linux later axe scan overlapped timed-out async work. No Rust work ran in either job.",
+  "change": "Only those two case deadlines become20s; afterEach drains the actual pending axe Promise before next case. All fixtures/assertions/scan rules retained. No production source changed.",
+  "validation": {
+    "forced_1ms_timeout": "Exactly intended case failed; following real History axe scan passed with no overlap. Temporary fault restored before final tests.",
+    "final_full_ui_tests": 524,
+    "strict_typecheck": "passed",
+    "independent_review": "Root accepted exact patch and controlled timeout evidence."
+  },
+  "logs": {
+    "Linux_failure": {
+      "path": "/tmp/incant-pr61-Linux-failure.log",
+      "sha256": "e672901458d16c5eb7fb727071ab898f9c5c4dfbecd4ea464bd0643e4c621d65"
+    },
+    "Windows_failure": {
+      "path": "/tmp/incant-pr61-Windows-failure.log",
+      "sha256": "3e345e448a5b6353df296dc8f46cbc5596522696e8c50b1bbac12d9c60c0bc2c"
+    },
+    "forced_timeout": {
+      "path": "/tmp/incant-pr61-dock-forced-timeout.log",
+      "sha256": "5a90065cac5be0e3dbb29aad0203f81cfb5edf228e8c2bbab4cf41ee7cd7f1f5"
+    },
+    "full_ui": {
+      "path": "/tmp/incant-pr61-dock-deadline-full.log",
+      "sha256": "f8e8a36db71cb8207ca2643487adeb5168ebb2e27f867a4bf0049feea1f3ab56"
+    },
+    "typecheck": {
+      "path": "/tmp/incant-pr61-dock-deadline-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limitations": [
+    "Hosted correction checks pending.",
+    "No native critical-path result from these failed early jobs.",
+    "Current native review binary remains production-byte-identical."
+  ]
+}

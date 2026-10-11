@@ -104,6 +104,19 @@ Astra did not capture or inspect window pixels. Visible acceptance is assigned
 to verified Claude Opus 5.5 Max in
 [handoff 0037](../../handoffs/0037-native-player-window/brief.md).
 
+## Integration with the renderer prerequisite
+
+The branch integrates PR62 head `d8d00c3fbdf930a2ceea1e376088157e048fb0e4`.
+Only the status ledger conflicted; the reviewed window/audio/game lifecycle
+source is unchanged. The combined native host/adapter suite passes 62 ordinary
+release tests and three actual GPU host regressions, including device loss and
+presentation failure. Release all-target Clippy, 40 tools tests, fmt,
+conventions, actionlint and the normal dependency guard pass.
+
+The fresh window executable above and Claude0037 packet remain pinned to
+`f68d910f45b8d311e93cc84bcacf8714ad71e250`; they are historical artifact evidence,
+not a claim that the executable was rebuilt from the later integrated head.
+
 ## Running and remaining scope
 
 ```sh

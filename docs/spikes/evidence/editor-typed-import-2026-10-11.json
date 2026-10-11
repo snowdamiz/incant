@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-10-11T00:05:37.364552+00:00",
+  "base_head": "1deb1143519b0eeb9b24d1f6d8c6de69649f8b12",
+  "scope": "Astra-owned typed atlas/audio import and reimport request correctness; no layout/style changes",
+  "checks": {
+    "focused_tests": 46,
+    "full_ui_tests": 515,
+    "full_ui_test_files": 30,
+    "strict_typecheck": true,
+    "production_build": true,
+    "bridge_generation": true
+  },
+  "logs": {
+    "incant-ui-import-typed-tests.log": {
+      "path": "/tmp/incant-ui-import-typed-tests.log",
+      "sha256": "2feae73733a6fcce7de5336164ebcdfc84655797961f400195320b42a92e2c7a"
+    },
+    "incant-ui-import-typecheck.log": {
+      "path": "/tmp/incant-ui-import-typecheck.log",
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+    },
+    "incant-ui-import-full-tests.log": {
+      "path": "/tmp/incant-ui-import-full-tests.log",
+      "sha256": "1851027540ebb0ff827e1c0794fd709e51dbb65795bac6f4eab628c1ff288a94"
+    },
+    "incant-ui-import-build.log": {
+      "path": "/tmp/incant-ui-import-build.log",
+      "sha256": "9b1312a613b826295e3cf8d871c02dc89a562c3400f5c19d35b864580da476ad"
+    }
+  },
+  "native_contract": "crates/incant_import/src/lib.rs lowercases extensions and permits only the .atlas.json suffix for JSON; atlas textures are color-only",
+  "limits": [
+    "Claude presentation reconciliation and rendered review of the final union remain pending.",
+    "Current native executable was built before this frontend change; final native rebuild/review remains pending.",
+    "Browser bridge test doubles validate dispatch behavior, not native import execution."
+  ]
+}
