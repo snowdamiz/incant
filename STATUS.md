@@ -38,6 +38,15 @@ review; concurrent native reviews coordinate foreground ownership.
 
 ## Implemented boundaries and evidence
 
+- **Pipeline preparation (local, publication held).** The current finite renderer
+  catalog is prepared before the first frame. All 601 ordinary and 67 actual GPU
+  tests pass; material reimports across all current variants and four output
+  formats allocate no additional pipelines or shader modules during drawing.
+  A fresh source-free shipping proof passes eight GPU cases and 33 refusals.
+  Claude appearance review and hosted checks remain pending. Offline backend
+  shaders, persistent caches, recorded per-level permutations and phone hitch
+  gates are still open. [Evidence](docs/spikes/prewarmed-render-pipelines.md).
+
 - **Authoring and accounts.** Typed canonical JSON and stable ULIDs, atomic shared
   commands, provenance, undo/redo and durable recovery; CRDT round-trip and scale
   investigations; editor/CLI OpenAI tools and a 19/20 live evaluation. macOS OAuth,
