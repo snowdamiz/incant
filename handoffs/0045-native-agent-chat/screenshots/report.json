@@ -1,0 +1,3965 @@
+{
+  "set": "release",
+  "generated": "2026-10-11T20:06:24.659Z",
+  "browser": "155.0.8059.40",
+  "data": "deterministic agent fixture (tools/fake-host.js + real native.generated.js); not live, not native WebKit",
+  "captures": [
+    {
+      "file": "ready-empty-w1440-s380",
+      "state": "ready-empty",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 179,
+          "clientHeight": 179,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 44,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-empty-w1440-s280",
+      "state": "ready-empty",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 179,
+          "scrollHeight": 179,
+          "clientHeight": 179,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 44,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-empty-w1000-s280",
+      "state": "ready-empty",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 142,
+          "scrollHeight": 142,
+          "clientHeight": 142,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 44,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-empty-w1000-s380",
+      "state": "ready-empty",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 142,
+          "scrollHeight": 142,
+          "clientHeight": 142,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 632,
+          "y": 540,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 44,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-draft-w1440-s280",
+      "state": "ready-draft",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 139,
+          "scrollHeight": 139,
+          "clientHeight": 139,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 1172,
+          "y": 750,
+          "width": 256,
+          "height": 110
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "TEXTAREA",
+          "className": "composer__input",
+          "name": "Hang a second lantern on the mooring post and point the clos",
+          "focusVisible": true
+        },
+        "words": 44,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "ready-draft-w1000-s280",
+      "state": "ready-draft",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 102,
+          "scrollHeight": 102,
+          "clientHeight": 102,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 732,
+          "y": 500,
+          "width": 256,
+          "height": 110
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "TEXTAREA",
+          "className": "composer__input",
+          "name": "Hang a second lantern on the mooring post and point the clos",
+          "focusVisible": true
+        },
+        "words": 44,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "streaming-w1440-s380",
+      "state": "streaming",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Working…",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 409,
+          "clientHeight": 179,
+          "scrollTop": 230,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 134,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "streaming-w1440-s280",
+      "state": "streaming",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Working…",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 179,
+          "scrollHeight": 449,
+          "clientHeight": 179,
+          "scrollTop": 270,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 134,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "streaming-w1000-s280",
+      "state": "streaming",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Working…",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 142,
+          "scrollHeight": 449,
+          "clientHeight": 142,
+          "scrollTop": 307,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Working…",
+          "focusVisible": false
+        },
+        "words": 134,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "streaming-w1000-s380",
+      "state": "streaming",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Working…",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 142,
+          "scrollHeight": 409,
+          "clientHeight": 142,
+          "scrollTop": 267,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 632,
+          "y": 540,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Working…",
+          "focusVisible": false
+        },
+        "words": 134,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-w1440-s380",
+      "state": "approval",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 646,
+          "clientHeight": 179,
+          "scrollTop": 367,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 203,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-w1440-s280",
+      "state": "approval",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 179,
+          "scrollHeight": 722,
+          "clientHeight": 179,
+          "scrollTop": 427,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 203,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-w1000-s280",
+      "state": "approval",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 142,
+          "scrollHeight": 722,
+          "clientHeight": 142,
+          "scrollTop": 427,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Needs approval",
+          "focusVisible": false
+        },
+        "words": 203,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-w1000-s380",
+      "state": "approval",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 362,
+          "width": 380,
+          "height": 260
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 620,
+          "y": 398,
+          "width": 380,
+          "height": 142,
+          "scrollHeight": 646,
+          "clientHeight": 142,
+          "scrollTop": 367,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 632,
+          "y": 540,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Needs approval",
+          "focusVisible": false
+        },
+        "words": 203,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-arguments-w1440-s380",
+      "state": "approval-arguments",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 352,
+          "width": 380,
+          "height": 520
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1060,
+          "y": 388,
+          "width": 380,
+          "height": 402,
+          "scrollHeight": 852,
+          "clientHeight": 402,
+          "scrollTop": 418,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "PRE",
+          "className": "agent-approval__arguments",
+          "name": "Exact arguments",
+          "focusVisible": true
+        },
+        "words": 342,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-arguments-w1440-s280",
+      "state": "approval-arguments",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 352,
+          "width": 280,
+          "height": 520
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1160,
+          "y": 388,
+          "width": 280,
+          "height": 402,
+          "scrollHeight": 928,
+          "clientHeight": 402,
+          "scrollTop": 494,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "PRE",
+          "className": "agent-approval__arguments",
+          "name": "Exact arguments",
+          "focusVisible": true
+        },
+        "words": 342,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-arguments-w1000-s280",
+      "state": "approval-arguments",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 272,
+          "width": 280,
+          "height": 350
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 720,
+          "y": 308,
+          "width": 280,
+          "height": 232,
+          "scrollHeight": 928,
+          "clientHeight": 232,
+          "scrollTop": 632,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "PRE",
+          "className": "agent-approval__arguments",
+          "name": "Exact arguments",
+          "focusVisible": true
+        },
+        "words": 342,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-always-w1440-s380",
+      "state": "approval-always",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 221,
+          "clientHeight": 179,
+          "scrollTop": 42,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 65,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-always-w1000-s280",
+      "state": "approval-always",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 142,
+          "scrollHeight": 261,
+          "clientHeight": 142,
+          "scrollTop": 106,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Needs approval",
+          "focusVisible": false
+        },
+        "words": 65,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-signed-out-w1440-s380",
+      "state": "approval-signed-out",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 352,
+          "width": 380,
+          "height": 520
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1060,
+          "y": 388,
+          "width": 380,
+          "height": 402,
+          "scrollHeight": 668,
+          "clientHeight": 402,
+          "scrollTop": 266,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--horizontal",
+          "name": "Resize agent panel",
+          "focusVisible": false
+        },
+        "words": 214,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-signed-out-w1000-s280",
+      "state": "approval-signed-out",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 272,
+          "width": 280,
+          "height": 350
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 720,
+          "y": 308,
+          "width": 280,
+          "height": 232,
+          "scrollHeight": 760,
+          "clientHeight": 232,
+          "scrollTop": 427,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--horizontal",
+          "name": "Resize agent panel",
+          "focusVisible": false
+        },
+        "words": 214,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-deciding-w1440-s380",
+      "state": "approval-deciding",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 352,
+          "width": 380,
+          "height": 520
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1060,
+          "y": 388,
+          "width": 380,
+          "height": 402,
+          "scrollHeight": 646,
+          "clientHeight": 402,
+          "scrollTop": 244,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button button--small button--primary",
+          "name": "Allowing…",
+          "focusVisible": true
+        },
+        "words": 203,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "approval-deciding-w1000-s280",
+      "state": "approval-deciding",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 272,
+          "width": 280,
+          "height": 350
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 720,
+          "y": 308,
+          "width": 280,
+          "height": 232,
+          "scrollHeight": 722,
+          "clientHeight": 232,
+          "scrollTop": 490,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button button--small button--primary",
+          "name": "Allowing…",
+          "focusVisible": true
+        },
+        "words": 203,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "history-w1440-s380",
+      "state": "history",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 352,
+          "width": 380,
+          "height": 520
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 388,
+          "width": 380,
+          "height": 402,
+          "scrollHeight": 759,
+          "clientHeight": 402,
+          "scrollTop": 357,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--horizontal",
+          "name": "Resize agent panel",
+          "focusVisible": false
+        },
+        "words": 216,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "history-w1440-s280",
+      "state": "history",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 352,
+          "width": 280,
+          "height": 520
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 388,
+          "width": 280,
+          "height": 402,
+          "scrollHeight": 891,
+          "clientHeight": 402,
+          "scrollTop": 489,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--horizontal",
+          "name": "Resize agent panel",
+          "focusVisible": false
+        },
+        "words": 216,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "history-w1000-s280",
+      "state": "history",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 272,
+          "width": 280,
+          "height": 350
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 308,
+          "width": 280,
+          "height": 232,
+          "scrollHeight": 891,
+          "clientHeight": 232,
+          "scrollTop": 659,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--horizontal",
+          "name": "Resize agent panel",
+          "focusVisible": false
+        },
+        "words": 216,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "history-w1000-s380",
+      "state": "history",
+      "size": "w1000-s380",
+      "width": 1000,
+      "height": 650,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 620,
+          "y": 40,
+          "width": 380,
+          "height": 582
+        },
+        "pane": {
+          "x": 620,
+          "y": 272,
+          "width": 380,
+          "height": 350
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 620,
+          "y": 308,
+          "width": 380,
+          "height": 232,
+          "scrollHeight": 759,
+          "clientHeight": 232,
+          "scrollTop": 527,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 632,
+          "y": 540,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--horizontal",
+          "name": "Resize agent panel",
+          "focusVisible": false
+        },
+        "words": 216,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "history-default-w1440-s380",
+      "state": "history-default",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 759,
+          "clientHeight": 179,
+          "scrollTop": 580,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 216,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "history-default-w1000-s280",
+      "state": "history-default",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 142,
+          "scrollHeight": 891,
+          "clientHeight": 142,
+          "scrollTop": 749,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Ready",
+          "focusVisible": false
+        },
+        "words": 216,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "stopping-w1440-s380",
+      "state": "stopping",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Stopping…",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 409,
+          "clientHeight": 179,
+          "scrollTop": 230,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 134,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "stopping-w1000-s280",
+      "state": "stopping",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Stopping…",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 142,
+          "scrollHeight": 449,
+          "clientHeight": 142,
+          "scrollTop": 307,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Stopping…",
+          "focusVisible": false
+        },
+        "words": 134,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "finishing-w1440-s380",
+      "state": "finishing",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Finishing…",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 389,
+          "clientHeight": 179,
+          "scrollTop": 210,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 136,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "finishing-w1000-s280",
+      "state": "finishing",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Finishing…",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 142,
+          "scrollHeight": 429,
+          "clientHeight": 142,
+          "scrollTop": 287,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Finishing…",
+          "focusVisible": false
+        },
+        "words": 136,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-w1440-s380",
+      "state": "exhausted",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 475,
+          "width": 380,
+          "height": 397
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 1060,
+          "y": 512,
+          "width": 380,
+          "height": 320,
+          "scrollHeight": 759,
+          "clientHeight": 320,
+          "scrollTop": 439,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "This session’s token allowance is used up.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 194,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-w1440-s280",
+      "state": "exhausted",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 475,
+          "width": 280,
+          "height": 397
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 1160,
+          "y": 512,
+          "width": 280,
+          "height": 320,
+          "scrollHeight": 891,
+          "clientHeight": 320,
+          "scrollTop": 571,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "This session’s token allowance is used up.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 194,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "exhausted-w1000-s280",
+      "state": "exhausted",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 285,
+          "width": 280,
+          "height": 337
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 720,
+          "y": 322,
+          "width": 280,
+          "height": 260,
+          "scrollHeight": 891,
+          "clientHeight": 260,
+          "scrollTop": 631,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "This session’s token allowance is used up.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Unavailable",
+          "focusVisible": false
+        },
+        "words": 194,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "signed-out-history-w1440-s380",
+      "state": "signed-out-history",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 441,
+          "width": 380,
+          "height": 431
+        },
+        "status": "Not signed in",
+        "transcript": {
+          "x": 1060,
+          "y": 478,
+          "width": 380,
+          "height": 320,
+          "scrollHeight": 759,
+          "clientHeight": 320,
+          "scrollTop": 439,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "Connect an OpenAI account to use the agent.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 200,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "signed-out-history-w1440-s280",
+      "state": "signed-out-history",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 424,
+          "width": 280,
+          "height": 448
+        },
+        "status": "Not signed in",
+        "transcript": {
+          "x": 1160,
+          "y": 461,
+          "width": 280,
+          "height": 320,
+          "scrollHeight": 891,
+          "clientHeight": 320,
+          "scrollTop": 571,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "Connect an OpenAI account to use the agent.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 200,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "signed-out-history-w1000-s280",
+      "state": "signed-out-history",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 234,
+          "width": 280,
+          "height": 388
+        },
+        "status": "Not signed in",
+        "transcript": {
+          "x": 720,
+          "y": 271,
+          "width": 280,
+          "height": 260,
+          "scrollHeight": 891,
+          "clientHeight": 260,
+          "scrollTop": 631,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "Connect an OpenAI account to use the agent.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Not signed in",
+          "focusVisible": false
+        },
+        "words": 200,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "transport-error-w1440-s380",
+      "state": "transport-error",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 424,
+          "width": 380,
+          "height": 448
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 1060,
+          "y": 461,
+          "width": 380,
+          "height": 320,
+          "scrollHeight": 759,
+          "clientHeight": 320,
+          "scrollTop": 439,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "Could not contact the native agent. Refresh the session to retry.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 199,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "transport-error-w1440-s280",
+      "state": "transport-error",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 424,
+          "width": 280,
+          "height": 448
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 1160,
+          "y": 461,
+          "width": 280,
+          "height": 320,
+          "scrollHeight": 891,
+          "clientHeight": 320,
+          "scrollTop": 571,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "Could not contact the native agent. Refresh the session to retry.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 199,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "transport-error-w1000-s280",
+      "state": "transport-error",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 234,
+          "width": 280,
+          "height": 388
+        },
+        "status": "Unavailable",
+        "transcript": {
+          "x": 720,
+          "y": 271,
+          "width": 280,
+          "height": 260,
+          "scrollHeight": 891,
+          "clientHeight": 260,
+          "scrollTop": 631,
+          "tabIndex": "0"
+        },
+        "composer": null,
+        "note": "Could not contact the native agent. Refresh the session to retry.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Unavailable",
+          "focusVisible": false
+        },
+        "words": 199,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "transport-error-running-w1440-s380",
+      "state": "transport-error-running",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Working…",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 139,
+          "scrollHeight": 409,
+          "clientHeight": 139,
+          "scrollTop": 270,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 146,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "transport-error-running-w1000-s280",
+      "state": "transport-error-running",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Working…",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 86,
+          "scrollHeight": 449,
+          "clientHeight": 86,
+          "scrollTop": 363,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Working…",
+          "focusVisible": false
+        },
+        "words": 146,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "long-w1440-s380",
+      "state": "long",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 312,
+          "width": 380,
+          "height": 560
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1060,
+          "y": 348,
+          "width": 380,
+          "height": 442,
+          "scrollHeight": 1701,
+          "clientHeight": 442,
+          "scrollTop": 1033,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-disclosure",
+          "name": "Exact arguments189.3 KB",
+          "focusVisible": false
+        },
+        "words": 10604,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "long-w1440-s280",
+      "state": "long",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 312,
+          "width": 280,
+          "height": 560
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1160,
+          "y": 348,
+          "width": 280,
+          "height": 442,
+          "scrollHeight": 1957,
+          "clientHeight": 442,
+          "scrollTop": 1289,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-disclosure",
+          "name": "Exact arguments189.3 KB",
+          "focusVisible": false
+        },
+        "words": 10604,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "long-w1000-s280",
+      "state": "long",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 272,
+          "width": 280,
+          "height": 350
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 720,
+          "y": 308,
+          "width": 280,
+          "height": 232,
+          "scrollHeight": 1957,
+          "clientHeight": 232,
+          "scrollTop": 1485,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent-disclosure",
+          "name": "Exact arguments189.3 KB",
+          "focusVisible": false
+        },
+        "words": 10604,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "long-top-w1440-s280",
+      "state": "long-top",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 312,
+          "width": 280,
+          "height": 560
+        },
+        "status": "Needs approval",
+        "transcript": {
+          "x": 1160,
+          "y": 348,
+          "width": 280,
+          "height": 442,
+          "scrollHeight": 1731,
+          "clientHeight": 442,
+          "scrollTop": 0,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--horizontal",
+          "name": "Resize agent panel",
+          "focusVisible": false
+        },
+        "words": 618,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "model-limit-w1440-s380",
+      "state": "model-limit",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 159,
+          "scrollHeight": 159,
+          "clientHeight": 159,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 1072,
+          "y": 770,
+          "width": 356,
+          "height": 90
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "composer__model",
+          "name": "Model",
+          "focusVisible": true
+        },
+        "words": 54,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "model-limit-w1000-s280",
+      "state": "model-limit",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 86,
+          "scrollHeight": 86,
+          "clientHeight": 86,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 732,
+          "y": 484,
+          "width": 256,
+          "height": 126
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "composer__model",
+          "name": "Model",
+          "focusVisible": true
+        },
+        "words": 54,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "send-failed-w1440-s380",
+      "state": "send-failed",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 770,
+          "width": 380,
+          "height": 102
+        },
+        "status": "Unavailable",
+        "transcript": null,
+        "composer": null,
+        "note": "The selected OpenAI account is unavailable.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "P",
+          "className": "agent-note__body",
+          "name": "The selected OpenAI account is unavailable.",
+          "focusVisible": false
+        },
+        "words": 10,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "send-failed-w1000-s280",
+      "state": "send-failed",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 520,
+          "width": 280,
+          "height": 102
+        },
+        "status": "Unavailable",
+        "transcript": null,
+        "composer": null,
+        "note": "The selected OpenAI account is unavailable.",
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "P",
+          "className": "agent-note__body",
+          "name": "The selected OpenAI account is unavailable.",
+          "focusVisible": false
+        },
+        "words": 10,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "collapsed-approval-w1440-s380",
+      "state": "collapsed-approval",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 835,
+          "width": 380,
+          "height": 37
+        },
+        "status": "Needs approval",
+        "transcript": null,
+        "composer": null,
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Needs approval",
+          "focusVisible": false
+        },
+        "words": 4,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "collapsed-approval-w1440-s280",
+      "state": "collapsed-approval",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 835,
+          "width": 280,
+          "height": 37
+        },
+        "status": "Needs approval",
+        "transcript": null,
+        "composer": null,
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Needs approval",
+          "focusVisible": false
+        },
+        "words": 4,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "many-scrolled-w1440-s380",
+      "state": "many-scrolled",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Working…",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 2651,
+          "clientHeight": 179,
+          "scrollTop": 0,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 778,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "many-scrolled-w1000-s280",
+      "state": "many-scrolled",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Working…",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 142,
+          "scrollHeight": 3271,
+          "clientHeight": 142,
+          "scrollTop": 0,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 732,
+          "y": 540,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "BUTTON",
+          "className": "agent__toggle",
+          "name": "Agent, Working…",
+          "focusVisible": false
+        },
+        "words": 778,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "auto-mode-w1440-s380",
+      "state": "auto-mode",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 179,
+          "scrollHeight": 759,
+          "clientHeight": 179,
+          "scrollTop": 580,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1072,
+          "y": 790,
+          "width": 356,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 216,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "auto-mode-w1440-s280",
+      "state": "auto-mode",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 179,
+          "scrollHeight": 891,
+          "clientHeight": 179,
+          "scrollTop": 712,
+          "tabIndex": "0"
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "DIV",
+          "className": "splitter splitter--vertical",
+          "name": "Resize inspector and agent",
+          "focusVisible": false
+        },
+        "words": 216,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "focus-model-w1440-s280",
+      "state": "focus-model",
+      "size": "w1440-s280",
+      "width": 1440,
+      "height": 900,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1160,
+          "y": 40,
+          "width": 280,
+          "height": 832
+        },
+        "pane": {
+          "x": 1160,
+          "y": 575,
+          "width": 280,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1160,
+          "y": 611,
+          "width": 280,
+          "height": 179,
+          "scrollHeight": 179,
+          "clientHeight": 179,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 1172,
+          "y": 790,
+          "width": 256,
+          "height": 70
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "composer__model",
+          "name": "Model",
+          "focusVisible": true
+        },
+        "words": 44,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    }
+  ],
+  "flows": [
+    {
+      "name": "send-approve",
+      "scenario": "flow-send",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "draftAfterSend": "",
+        "focusWhileWaiting": {
+          "tag": "TEXTAREA",
+          "className": "composer__input",
+          "text": "",
+          "label": null
+        },
+        "headerWhileWaiting": ",\nNeeds approval",
+        "focusAfterAllow": {
+          "tag": "LI",
+          "className": "agent-decision agent-decision--allowed",
+          "text": "AllowedApply 4 changes to the project",
+          "label": null
+        },
+        "outcome": "1 edit\n·\n7,310 tokens\nShow in History",
+        "statusLine": "The agent finished: 1 edit.",
+        "afterHistory": {
+          "tag": "BUTTON",
+          "className": "tab",
+          "text": "History(2)",
+          "label": null
+        },
+        "historyTabSelected": "true"
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_agent_start",
+          "args": {
+            "request": {
+              "prompt": "Make the lantern visible from the close-up camera.",
+              "model": "gpt-6-astra",
+              "approval": "destructive"
+            }
+          }
+        },
+        {
+          "name": "engine_agent_decide",
+          "args": {
+            "turnId": 1,
+            "approvalId": 1,
+            "approved": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "stop",
+      "scenario": "flow-stop",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "focusWhileStopping": {
+          "tag": "BUTTON",
+          "className": "send-button send-button--wait",
+          "text": "",
+          "label": "Stopping…"
+        },
+        "headerAfterCancelled": ",\nStopping…",
+        "focusWhenIdle": {
+          "tag": "BUTTON",
+          "className": "send-button send-button--send",
+          "text": "",
+          "label": "Send"
+        },
+        "outcome": "Stopped\n·\n1,180 tokens (estimated)"
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_agent_start",
+          "args": {
+            "request": {
+              "prompt": "Check every prop group.",
+              "model": "gpt-6-astra",
+              "approval": "destructive"
+            }
+          }
+        },
+        {
+          "name": "engine_agent_cancel",
+          "args": {
+            "turnId": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "stop-signed-out",
+      "scenario": "streaming",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "headerSignedOut": ",\nWorking…",
+        "stopDisabled": null
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_agent_cancel",
+          "args": {
+            "turnId": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "retry",
+      "scenario": "history",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "turnsDuringError": 4,
+        "note": "Could not contact the native agent. Refresh the session to retry.",
+        "rawLeak": false,
+        "turnsAfterRetry": 4,
+        "focusAfterRetry": {
+          "tag": "TEXTAREA",
+          "className": "composer__input",
+          "text": "",
+          "label": null
+        },
+        "statusLine": "Agent session refreshed."
+      },
+      "error": null,
+      "calls": []
+    },
+    {
+      "name": "scroll",
+      "scenario": "flow-many",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "initial": {
+          "top": 2452,
+          "end": 2452
+        },
+        "afterOutput": {
+          "top": 120,
+          "end": 2472
+        },
+        "jumpShown": 1,
+        "afterJump": {
+          "top": 2472,
+          "end": 2472
+        },
+        "focusAfterJump": {
+          "tag": "DIV",
+          "className": "agent__transcript",
+          "text": "Only the latest 16 requests are kept.You: Nudge prop 1 onto the pier and report ",
+          "label": "Agent conversation"
+        },
+        "followingAgain": {
+          "top": 2472,
+          "end": 2472
+        }
+      },
+      "error": null,
+      "calls": []
+    },
+    {
+      "name": "send-failed",
+      "scenario": "send-fails",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "note": "The selected OpenAI account is unavailable.",
+        "draftAfterRetry": "Hang a second lantern on the mooring post."
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_agent_start",
+          "args": {
+            "request": {
+              "prompt": "Hang a second lantern on the mooring post.",
+              "model": "gpt-6-astra",
+              "approval": "destructive"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "review-reading",
+      "scenario": "flow-send",
+      "size": {
+        "width": 1000,
+        "height": 650,
+        "side": 280
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "onArrival": {
+          "scrollTop": 146,
+          "view": {
+            "top": 398,
+            "bottom": 540
+          },
+          "sticky": {
+            "top": 495,
+            "bottom": 540
+          },
+          "active": {
+            "top": 541,
+            "bottom": 571
+          },
+          "activeClass": "composer__input",
+          "title": {
+            "top": 415,
+            "bottom": 435
+          }
+        },
+        "disclosureFocused": {
+          "scrollTop": 271,
+          "view": {
+            "top": 398,
+            "bottom": 540
+          },
+          "sticky": {
+            "top": 482,
+            "bottom": 527
+          },
+          "active": {
+            "top": 450,
+            "bottom": 472
+          },
+          "activeClass": "agent-disclosure",
+          "title": {
+            "top": 290,
+            "bottom": 310
+          }
+        },
+        "afterExpand": {
+          "scrollTop": 271,
+          "view": {
+            "top": 398,
+            "bottom": 540
+          },
+          "sticky": {
+            "top": 495,
+            "bottom": 540
+          },
+          "active": {
+            "top": 450,
+            "bottom": 472
+          },
+          "activeClass": "agent-disclosure",
+          "title": {
+            "top": 290,
+            "bottom": 310
+          }
+        },
+        "argumentsFocused": {
+          "scrollTop": 412,
+          "view": {
+            "top": 398,
+            "bottom": 540
+          },
+          "sticky": {
+            "top": 495,
+            "bottom": 540
+          },
+          "active": {
+            "top": 337,
+            "bottom": 537
+          },
+          "activeClass": "agent-approval__arguments",
+          "title": {
+            "top": 149,
+            "bottom": 169
+          }
+        },
+        "argumentsStill": {
+          "scrollTop": 412,
+          "view": {
+            "top": 398,
+            "bottom": 540
+          },
+          "sticky": {
+            "top": 495,
+            "bottom": 540
+          },
+          "active": {
+            "top": 337,
+            "bottom": 537
+          },
+          "activeClass": "agent-approval__arguments",
+          "title": {
+            "top": 149,
+            "bottom": 169
+          }
+        },
+        "afterDecision": {
+          "top": 150,
+          "end": 150
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_agent_start",
+          "args": {
+            "request": {
+              "prompt": "Make the lantern visible from the close-up camera.",
+              "model": "gpt-6-astra",
+              "approval": "destructive"
+            }
+          }
+        },
+        {
+          "name": "engine_agent_decide",
+          "args": {
+            "turnId": 1,
+            "approvalId": 1,
+            "approved": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "deny",
+      "scenario": "flow-send",
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "side": 380
+      },
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "focusAfterDeny": {
+          "tag": "LI",
+          "className": "agent-decision agent-decision--denied",
+          "text": "DeniedApply 4 changes to the project",
+          "label": null
+        },
+        "failure": "Ended after you denied a request."
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_agent_start",
+          "args": {
+            "request": {
+              "prompt": "Make the lantern visible from the close-up camera.",
+              "model": "gpt-6-astra",
+              "approval": "destructive"
+            }
+          }
+        },
+        {
+          "name": "engine_agent_decide",
+          "args": {
+            "turnId": 1,
+            "approvalId": 1,
+            "approved": false
+          }
+        }
+      ]
+    }
+  ]
+}
