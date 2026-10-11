@@ -1,0 +1,12 @@
+{
+  "reviewed_utc": "2026-10-11T21:43:59.838657+00:00",
+  "reviewer": "astra/root",
+  "scope": "Public-command fixture authoring and CPU input/model-linkage evidence only",
+  "manifest_sha256": "185c46efafed3e1f1e42f29c9fb7a0a8dd494fb6e5a788334efd5dc763836e51",
+  "artifact_files_verified": 28,
+  "source_review": "Read complete public author script; mutations exclusively init/import/command.execute/project.save. Probes copied from vetted source and instance-filtered; fixed cameras and stationary visible-model target remain untouched. Reopen/Stop compare exact state and all authored/cooked file hashes.",
+  "observed_tests": "Agent-executed23actualCPUticks with input/focus/camera assertions; all state gpu_submitted=false. Root verified receipts and hashes, did not rerun.",
+  "no_provider_or_native_window_call": true,
+  "findings": [],
+  "native_rendered_visibility_and_interaction": "Pending finalimmutablebuild + Claude0048 grant"
+}

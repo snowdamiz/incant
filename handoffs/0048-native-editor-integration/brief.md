@@ -104,6 +104,23 @@ report backend/bridge changes as exact requested follow-ups rather than changing
 Astra's files. A corrected source needs a newly granted binary before native
 acceptance; never claim the old binary proves the new code. Commit Built-by: claude.
 
+## Prepared public-command fixture (no process grant yet)
+
+Astra/Sol prepared `/tmp/incant-native-0048-fixtures/saved/project.json` using the
+preliminary immutable headless build. See fixture/README.md, artifact-manifest.json,
+fixture-evidence.json and root-review.json. Read hashes before use. It has real
+imported geometry, stationary cameras at positive Z (CameraView looks along local
+negative Z), a stationary mesh plus slow moving mesh, instance-filtered input probes,
+a no-camera scene and a rename-only entity.23 CPU ticks and fresh journal reopen
+passed without a provider or GPU call. No rendered visibility is claimed.
+
+Use this existing disposable project and its same ULID for acceptance. The rename
+request should change only `Allowance Rename Target` (ID ending0051) to
+`Allowance Rename Confirmed`; inspect the exact proposal, approve only that change,
+then Undo. Do not create a replacement project for the usage/reopen verification.
+The fixture author script refuses to overwrite its saved output. All adjustments
+still use public commands; appearance/framing is yours to review after final grant.
+
 ## Final immutable build and grants
 
 0046 and0047 are integrated. Pending0049 approval-readiness correction, final
