@@ -22,7 +22,11 @@ impl Renderer {
         let mut casters = Vec::new();
         let mut bounds = Vec::new();
         if !scene.lights.shadows.is_empty() {
-            for batch in scene.batches.iter().filter(|b| b.casts_shadows) {
+            for batch in scene
+                .batches
+                .iter()
+                .filter(|b| b.casts_shadows && b.count > 0)
+            {
                 let material = &batch.model.materials.materials
                     [batch.model.primitives[batch.primitive].material];
                 if material.alpha == incant_assets_runtime::AlphaMode::Blend {

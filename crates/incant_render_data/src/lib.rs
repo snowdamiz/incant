@@ -74,6 +74,7 @@ pub struct SceneNode {
     /// Authoring-only diagnostic cubes. Native content opts in explicitly.
     pub diagnostic: bool,
 }
+#[derive(Clone, PartialEq)]
 pub enum SceneLight {
     Directional(DirectionalLight),
     Point(PointLight),

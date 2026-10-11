@@ -14,7 +14,7 @@ pub(crate) struct Instance {
     pub normal: [[f32; 4]; 3],
 }
 impl Instance {
-    fn new(world: Mat4) -> Result<Self, SceneError> {
+    pub(crate) fn new(world: Mat4) -> Result<Self, SceneError> {
         let inverse = world.inverse();
         if !world.is_finite() || !inverse.is_finite() {
             return Err(SceneError::TransformRange);
@@ -32,9 +32,15 @@ impl Instance {
     }
 }
 
+#[derive(Clone, Copy)]
+pub(crate) struct Placement {
+    pub node: usize,
+    pub local: glam::DMat4,
+}
 pub(crate) struct ModelPlan {
     pub source: Arc<RuntimeAsset>,
     pub primitives: BTreeMap<(usize, bool), Vec<Instance>>,
+    pub placements: BTreeMap<(usize, bool), Vec<Placement>>,
 }
 pub(crate) struct ResolvedScene {
     pub diagnostics: Vec<Mat4>,
@@ -81,7 +87,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
         });
     }
     let mut ids = BTreeSet::new();
-    for entity in &input.nodes {
+    for (entity_index, entity) in input.nodes.iter().enumerate() {
         if entity.id.is_empty() || entity.id.len() > 256 || !ids.insert(entity.id.as_str()) {
             return Err(SceneError::Input("empty, oversized or duplicate node ID"));
         }
@@ -135,12 +141,17 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
             .scenes
             .get(scene)
             .ok_or_else(|| SceneError::NoScene(binding.source.info().id.clone()))?;
-        let mut pending: Vec<_> = roots.iter().rev().map(|&index| (index, world64)).collect();
+        let mut pending: Vec<_> = roots
+            .iter()
+            .rev()
+            .map(|&index| (index, glam::DMat4::IDENTITY))
+            .collect();
         let mut visited = vec![false; model.metadata.nodes.len()];
         let key = (source.info().fingerprint.clone(), source.version_id());
         let plan = result.models.entry(key).or_insert_with(|| ModelPlan {
             source: Arc::clone(&source),
             primitives: BTreeMap::new(),
+            placements: BTreeMap::new(),
         });
         result.stats.model_entities += 1;
         while let Some((index, parent)) = pending.pop() {
@@ -152,7 +163,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
                 * glam::DMat4::from_cols_array_2d(
                     &node.transform.map(|column| column.map(f64::from)),
                 );
-            let instance = Instance::new(world.as_mat4())?;
+            let instance = Instance::new((world64 * world).as_mat4())?;
             for &primitive in &node.meshes {
                 result.stats.primitive_instances += 1;
                 if result.stats.primitive_instances > MAX_INSTANCES {
@@ -163,6 +174,13 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
                     .entry((primitive, binding.cast_shadows))
                     .or_default()
                     .push(instance);
+                plan.placements
+                    .entry((primitive, binding.cast_shadows))
+                    .or_default()
+                    .push(Placement {
+                        node: entity_index,
+                        local: world,
+                    });
             }
             pending.extend(node.children.iter().rev().map(|&child| (child, world)));
         }

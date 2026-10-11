@@ -1,0 +1,47 @@
+{
+  "recorded_utc": "2026-10-11T00:05:59.810408+00:00",
+  "base_commit": "6a8d73d7f4777d922b641e2ca1a57679785cc140",
+  "host": {
+    "system": "Darwin",
+    "release": "25.6.0",
+    "machine": "arm64",
+    "chip": "Apple M5 Pro"
+  },
+  "source_sha256": {
+    "crates/incant_render/src/retained.rs": "025b2972a15592459479c1bb7eb09e0cdff00492e55a0caf6e4e69010b88831b",
+    "crates/incant_render/src/retained_tests.rs": "48746e05205be31a49886ac4f4998b22ab775e98f7b4e28db2e84d126f7a2157",
+    "crates/incant_render/src/retained_alloc.rs": "30193b83cecca45c1f4c248e5e305adbef498ddd5e9194dc38464a1b86d0d772",
+    "crates/incant_render/src/models.rs": "099881678fee069bf8c7bcf5623f9bd5b2529adcd79049942123f8638eabb8b4",
+    "crates/incant_render/src/scene.rs": "afb76c99f45c94f56cce31c4004cf2da088613115b6aa2fd6a7daffb25dcc8b1",
+    "crates/incant_render/src/lighting/mod.rs": "0d1638a8a288d41690d477c7ba2d891429c82c8cc35b70aa8123df7d6a7d75b1",
+    "crates/incant_render/src/lighting/scene.rs": "3bcd5edd09d2f091120ccd4923e8b13ed9364a9c4711902da6b10cc803566af7",
+    "crates/incant_render/src/lib.rs": "97733005545ea5222cadab38900564725596cbf4e009f4305b76dbd387f08fc6",
+    "crates/incant_render/src/model_draw.rs": "a820f5c37f9e1cd89cdae49aa122a2b91cf1e4d9c680abf977fef19dce78ad49",
+    "crates/incant_render/src/shadow_draw.rs": "26c4b35b8c8dbe5f977090eb7a7dcd8e5a8321d043063db595f9ffb16a23d6f4",
+    "crates/incant_render_data/src/lib.rs": "12009a376758c209b5c6f4173d115e09d958216b421736d06ceeab00af641acb"
+  },
+  "logs": {
+    "/tmp/incant-retained-tests.log": "0e00d568acbb11df3815c78c0a41f749ec31c23b3a0eb73a3501d45dde840480",
+    "/tmp/incant-retained-gpu.log": "e8c754eac8f77bd99178be4a0237c7985673a0d28410e55ae19fd70a481b2316",
+    "/tmp/incant-retained-allocation.log": "c8b56ad16da86ec424801d2dee3462f57358abee5f560b486efa6f0115a789d9",
+    "/tmp/incant-retained-clippy.log": "414f60f466d6db82a2c8ed4dff767bc60939c2b4f0ae607ae9033311cbca9d36"
+  },
+  "results": {
+    "ordinary_tests": 27,
+    "native_gpu_unit_tests": 11,
+    "native_gpu_integration_tests": 46,
+    "retained_tests": 3,
+    "instrumented_cpu_staging_calls": 64,
+    "cpu_staging_allocations": 0,
+    "scoped_release_clippy": "passed",
+    "normal_dependency_guard": "passed",
+    "independent_nonvisual_review": "runtime_review: no actionable blocker"
+  },
+  "limits": [
+    "No whole-frame zero-allocation claim",
+    "Per-frame uniforms/draw packets remain",
+    "Separate private double instance/light buffers",
+    "Sprites/diagnostics explicitly unsupported in retained entry point",
+    "No device-performance or appearance approval"
+  ]
+}

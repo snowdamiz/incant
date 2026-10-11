@@ -899,3 +899,17 @@ mock response, simulator build or unsigned package counts as a shipped product.
   diagnostics, MSVC symbol audit and device/performance gates remain open.
 
 - Canonical renderer authoring boundary is implemented: typed retained cooked input, separate Project adapter, exact loaded-version GPU cache keys and direct input validation. Scoped 68 release tests and 54 native GPU tests plus Clippy/normal-graph checks pass. Native retained frame updates, full editor integration and phone performance remain open; see docs/spikes/native-renderer-boundary.md.
+
+### Retained native GPU frames (2026-10-10)
+
+- `RetainedScene` now stages fixed-binding camera/model/light/environment poses into
+  private reserved CPU/GPU storage and self-submits only after all ordinary checked
+  validation/encoding succeeds. Source/cache-deleted moving frames match fresh
+  output; reflection transitions, rejection/retry and renderer ownership are covered.
+- Passed 27 ordinary + 57 native GPU renderer tests, scoped release Clippy and the
+  authoring-free normal dependency guard. Sixty-four instrumented CPU pose-staging
+  calls allocated nothing; complete frame encoding still allocates. Independent
+  nonvisual review found no blocker. Evidence: `docs/spikes/native-retained-render-frames.md`.
+- Native game/visual host integration continues separately. Native sprites, full
+  frame resource retention/culling, memory/device budgets and appearance approval
+  remain open; this does not pass a phase or performance gate.

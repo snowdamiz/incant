@@ -30,7 +30,7 @@ use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Vec3};
 pub use incant_render_data::{SceneInput, ScenePreparer};
 pub use lighting::LocalLightSelection;
-pub use models::RenderScene;
+pub use models::{RenderScene, RetainedScene, RetainedTarget};
 pub use resource_error::ResourceError;
 pub use scene::{SceneError, SceneStats};
 use std::{collections::HashMap, error::Error, sync::Mutex, time::Duration};
@@ -53,6 +53,7 @@ pub struct Viewport {
     pub canvas_srgb: [u8; 3],
 }
 pub struct Renderer {
+    identity: std::sync::Arc<()>,
     pub device: wgpu::Device,
     pub queue: wgpu::Queue,
     pub adapter: wgpu::Adapter,
@@ -94,6 +95,7 @@ impl Renderer {
             materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
         let sprites = sprites::SpriteSystem::new(&device);
         Ok(Self {
+            identity: std::sync::Arc::new(()),
             sprites,
             device,
             queue,
