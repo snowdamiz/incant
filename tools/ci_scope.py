@@ -92,7 +92,8 @@ def validate_documents(base, head, root=ROOT):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
-    sub.add_parser('select')
+    select_parser = sub.add_parser('select')
+    select_parser.add_argument('--full', action='store_true', help='Always execute the full release-checkpoint suite')
     check = sub.add_parser('validate-docs')
     check.add_argument('--base', required=True)
     check.add_argument('--head', required=True)
@@ -105,6 +106,9 @@ def main():
         result = select(os.environ.get('GITHUB_EVENT_NAME', ''), event)
     except (KeyError, ValueError, OSError):
         result = select('', {})
+    if args.full:
+        result['scope'] = 'full'
+        result['reason'] = 'release checkpoint requires comprehensive validation'
     # Fixed scope literals and validated hexadecimal revisions only enter outputs.
     with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
         for name in ['scope', 'base', 'head']:

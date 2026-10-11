@@ -2,13 +2,9 @@ name: Website · check and deploy
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    paths:
-      - 'website/**'
-      - '.github/workflows/website.yml'
-      - '.github/actions/npm-cache/**'
+    branches: [codex/release-candidate]
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read

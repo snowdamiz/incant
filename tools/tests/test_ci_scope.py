@@ -156,6 +156,23 @@ class ScopeTests(unittest.TestCase):
         self.assertEqual(json.loads(result.stdout)['scope'], 'full')
         self.assertEqual(output.read_text(), 'scope=full\nbase=\nhead=\n')
 
+    def test_forced_checkpoint_overrides_a_real_docs_only_selection(self):
+        (self.root / 'PLAN.md').write_text('Updated documentation.\n')
+        head = self.commit()
+        # Execute a copied CLI against an actual docs-only Git history.
+        script = self.root / 'tools/ci_scope.py'
+        script.parent.mkdir(exist_ok=True)
+        shutil.copyfile(ROOT / 'tools/ci_scope.py', script)
+        event = self.root / 'event.json'
+        output = self.root / 'outputs'
+        event.write_text(json.dumps({'before': self.base, 'after': head}))
+        env = dict(os.environ, GITHUB_EVENT_PATH=str(event), GITHUB_EVENT_NAME='push', GITHUB_OUTPUT=str(output))
+        for arguments, expected in [([], 'docs'), (['--full'], 'full')]:
+            result = subprocess.run([os.sys.executable, str(script), 'select', *arguments],
+                                    env=env, text=True, capture_output=True, check=True)
+            self.assertEqual(json.loads(result.stdout)['scope'], expected)
+            self.assertEqual(output.read_text().splitlines()[-3], 'scope=' + expected)
+
     def test_generated_convention_drift_fails_unchanged_validator(self):
         destination = self.root / 'tools/generate_conventions.py'
         destination.parent.mkdir()

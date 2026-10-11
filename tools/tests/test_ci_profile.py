@@ -31,7 +31,7 @@ class FunctionalProfile(unittest.TestCase):
                 self.assertIn('-- --ignored --test-threads=1 --nocapture', workflow)
                 self.assertIn('incant_editor/custom-protocol,incant_audio_runtime/scene', workflow)
                 self.assertIn('cargo clean --profile release', workflow)
-                self.assertIn('save-if: ${{ github.ref == format(', workflow)
+                self.assertIn("save-if: ${{ github.event_name == 'push' }}", workflow)
                 for line in workflow.splitlines():
                     if 'run:' in line and ('tools/probes/' in line or 'tools/shipping.py' in line or 'tools/platforms/render-check.py' in line):
                         self.assertIn('target/ci/incant_headless', line)

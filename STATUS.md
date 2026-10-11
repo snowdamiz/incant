@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## CI cadence change — 2026-10-11
+
+The director authorized local tests and a fast hosted development gate for main,
+with comprehensive cross-platform CI on one frozen release checkpoint approximately
+every three hours. [ADR 0014](docs/adr/0014-ci.md) defines integration, cache and
+failure handling. The policy passes 137 Python, 17 Node and 536 UI tests, strict types/build,
+formatting, generated checks and actionlint; [evidence](docs/spikes/release-checkpoints.md).
+Branch bootstrap, protection rules and the first hosted checkpoint remain pending.
+No phase, live-provider or physical-device performance gate is waived.
+
 ## Current integration and parallel work
 
 | Workstream | Current result | Next work / boundary |

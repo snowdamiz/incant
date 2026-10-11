@@ -117,8 +117,11 @@ class CredentialImpact(unittest.TestCase):
                 directories[package['name']] = path.parent.as_posix()
         self.assertEqual(set(directories), set(names))
         workflow = (ROOT / '.github/workflows/credentials.yml').read_text()
-        for directory in directories.values():
-            self.assertIn(f"- '{directory}/**'", workflow)
+        # Every candidate change runs credentials; no path allowlist can omit a new dependency.
+        triggers = workflow.split('permissions:', 1)[0]
+        self.assertIn('branches: [codex/release-candidate]', triggers)
+        self.assertNotIn('paths:', triggers)
+        self.assertNotIn('paths-ignore:', triggers)
 
 
 class GitInputs(unittest.TestCase):

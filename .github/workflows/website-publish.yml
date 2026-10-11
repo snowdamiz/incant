@@ -1,0 +1,16 @@
+name: Publish changed website
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+      - '.github/workflows/website.yml'
+      - '.github/workflows/website-publish.yml'
+      - '.github/actions/npm-cache/**'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  website:
+    uses: ./.github/workflows/website.yml
