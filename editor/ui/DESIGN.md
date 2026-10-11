@@ -169,7 +169,8 @@ scene for the editor session.
 **Notice.** A failed session's message is one strip under the header, the engine's words
 after "Play could not start." or "Play stopped at tick 812.", with Dismiss; an unreadable
 status says so in the same strip, without Dismiss. It is the one place the failure is stated;
-it is an alert, and Play's earlier status-line message is cleared.
+it is an alert, and Play's earlier status-line message is cleared. Dismissed from the
+keyboard, focus moves to Play rather than leaving with the strip.
 
 **Game view.** While a session exists the viewport host is a focusable application region,
 "Game view". A click or keyboard navigation focuses it (that press is not sent) and draws the
@@ -177,7 +178,9 @@ it is an alert, and Play's earlier status-line message is cleared.
 to the game while it runs, including keys such as ? that are editor shortcuts elsewhere; F6
 and Shift+F6 leave the view, and the Play shortcuts and ⌘ combinations stay the editor's.
 Losing focus releases held input, and input that resumes releases whatever the game still
-held first. A session that ends with focus in the view moves focus to Play.
+held first. The game has focus only while the view has: when Play starts or resumes, or the
+window comes back, with focus in another panel, the game is told it has none. A session that
+ends with focus in the view moves focus to Play.
 
 **Runtime block.** While a session runs or is paused, an entity of the playing scene shows a
 sunken block above its authored components: "Runtime", the tick it was read at, and a

@@ -246,7 +246,15 @@ export function PlayNotice() {
         <p className="play-notice__text">
           <strong>{title}</strong> {session.error ?? 'The engine gave no reason.'}
         </p>
-        <button type="button" className="button button--ghost button--small play-notice__dismiss" onClick={play.dismiss}>
+        <button
+          type="button"
+          className="button button--ghost button--small play-notice__dismiss"
+          onClick={(event) => {
+            // The notice goes with its button: keyboard focus continues at Play, not nowhere.
+            if (document.activeElement === event.currentTarget) document.querySelector<HTMLElement>('[data-play-primary]')?.focus();
+            play.dismiss();
+          }}
+        >
           Dismiss
         </button>
       </div>

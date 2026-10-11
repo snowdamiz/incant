@@ -85,7 +85,9 @@ const runtimeRows = () =>
     [...row.querySelectorAll('input')].map((input) => input.value),
   ]);
 const host = () => document.querySelector<HTMLElement>('[data-viewport-host]')!;
-const ops = (session: Session) => session.double.commands.map((command) => `${String(command.op)}:${String(command.generation)}`);
+/** The Play control requests the bridge made; input packets are in `inputs` and `sent`. */
+const ops = (session: Session) =>
+  session.double.commands.filter((command) => command.op !== 'input').map((command) => `${String(command.op)}:${String(command.generation)}`);
 const sent = (session: Session) => session.double.inputs.flatMap((packet) => packet.events);
 
 async function choose(label: string) {
@@ -300,6 +302,32 @@ describe('native Play controls', () => {
     await waitFor(() => expect(screen.queryByRole('menu')).toBeNull());
   });
 
+  it('moves keyboard focus to Play when the focused Dismiss removes the notice', async () => {
+    // Found in the native review: after Dismiss by keyboard no element had focus.
+    const session = await open({ saved: false });
+    await choose('Harbor · Player Camera');
+    fireEvent.click(control('Play'));
+    const dismiss = within(await screen.findByRole('alert')).getByRole('button', { name: 'Dismiss' });
+    dismiss.focus();
+    fireEvent.click(dismiss);
+    expect(document.activeElement).toBe(control('Play'));
+    await waitFor(() => expect(ops(session)).toEqual(['start:0', 'stop:1']));
+    await waitFor(() => expect(screen.queryByRole('alert')).toBeNull());
+    expect(document.activeElement).toBe(control('Play'));
+  });
+
+  it('leaves focus alone when Dismiss is pressed without having it, as WebKit clicks do', async () => {
+    const session = await open({ saved: false });
+    await choose('Harbor · Player Camera');
+    fireEvent.click(control('Play'));
+    const notice = await screen.findByRole('alert');
+    const filter = screen.getByRole('searchbox', { name: /filter/i });
+    filter.focus();
+    fireEvent.click(within(notice).getByRole('button', { name: 'Dismiss' }));
+    await waitFor(() => expect(ops(session)).toEqual(['start:0', 'stop:1']));
+    expect(document.activeElement).toBe(filter);
+  });
+
   it('lets Play start again only after Dismiss has cleared the failed session', async () => {
     const session = await open({ saved: false });
     await choose('Harbor · Player Camera');
@@ -455,13 +483,35 @@ describe('game input', () => {
     return session;
   }
 
-  it('sends nothing until the game view is deliberately focused', async () => {
+  it('sends only that the game has no focus until the game view is deliberately focused', async () => {
     const session = await open();
     await play(session);
     fireEvent.keyDown(document.body, { code: 'KeyW', key: 'w' });
     fireEvent.keyDown(host(), { code: 'KeyW', key: 'w' });
     await new Promise((done) => setTimeout(done, 60));
-    expect(session.double.inputs).toEqual([]);
+    // The worker gives the game focus when it starts taking input; Play has it instead.
+    expect(sent(session)).toEqual([{ type: 'focus', focused: false }]);
+  });
+
+  it('tells the game it has no focus when Play resumes while another panel has focus', async () => {
+    // Found in the native review: Resume with the Hierarchy focused left the game focused.
+    const session = await focused();
+    fireEvent.keyDown(host(), { code: 'KeyP', key: 'p', metaKey: true, shiftKey: true });
+    await waitFor(() => expect(stateText()).toBe('Paused·, tick 1'));
+    const filter = screen.getByRole('searchbox', { name: /Filter/ });
+    filter.focus();
+    const count = sent(session).length;
+    fireEvent.keyDown(filter, { code: 'KeyP', key: 'p', ctrlKey: true, shiftKey: true });
+    await waitFor(() => expect(ops(session).at(-1)).toBe('resume:1'));
+    session.double.frame();
+    await session.poll();
+    await waitFor(() => expect(stateText()).toContain('Playing'));
+    await waitFor(() => expect(sent(session).slice(count)).toEqual([{ type: 'focus', focused: false }]));
+    // The filter's keys stay the editor's.
+    fireEvent.keyDown(filter, { code: 'KeyW', key: 'w' });
+    await new Promise((done) => setTimeout(done, 60));
+    expect(sent(session).slice(count)).toEqual([{ type: 'focus', focused: false }]);
+    expect(session.double.refusedInputs).toEqual([]);
   });
 
   it('sends keys, buttons, position and wheel from the focused view, under the session generation', async () => {

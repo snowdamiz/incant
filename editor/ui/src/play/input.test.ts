@@ -186,6 +186,42 @@ describe('game input queue', () => {
     expect(sent[2]!.events).toEqual(OPEN);
   });
 
+  it('tells the game it has no focus whenever the worker starts taking input while another panel has it', async () => {
+    // The worker gives the game focus itself when Play starts or resumes and when the
+    // window comes back (found in the native review: Resume with the Inspector focused).
+    const { input, sent, flush, ok } = sink();
+    input.update(state(4, true, false));
+    expect(input.key('KeyW', true)).toBe(false);
+    await flush();
+    expect(sent[0]!.events).toEqual([{ type: 'focus', focused: false }]);
+    await ok();
+    // Paused, then resumed, still from another panel: said again, once.
+    input.update(state(4, false, false));
+    input.update(state(4, true, false));
+    input.update(state(4, true, false));
+    await flush();
+    expect(sent[1]!.events).toEqual([{ type: 'focus', focused: false }]);
+    await ok();
+    // A new session that starts without the view's focus is told as well.
+    input.update(state(5, true, false));
+    await flush();
+    expect(sent.map((packet) => packet.generation)).toEqual([4, 4, 5]);
+    expect(sent[2]!.events).toEqual([{ type: 'focus', focused: false }]);
+    await ok();
+    // The view takes focus: the stream opens as always.
+    input.update(live(5));
+    await flush();
+    expect(sent[3]!.events).toEqual(OPEN);
+  });
+
+  it('drops a focus notice that the worker stops taking before it is sent', async () => {
+    const { input, sent, flush } = sink();
+    input.update(state(4, true, false));
+    input.update(state(4, false, false));
+    await flush(100);
+    expect(sent).toEqual([]);
+  });
+
   it('releases held input when the editor holds it back but the worker still takes it', async () => {
     // A Pause request in flight: the view stays focused but collects nothing.
     const { input, sent, flush, ok } = sink();

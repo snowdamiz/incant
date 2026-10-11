@@ -2,442 +2,378 @@
 
 ## Status
 
-- **Done for the browser stage.** The editor now has native Play controls, runtime
-  inspection and desktop game input, wired to the real bridge contract:
-  - **Header.** Play/Pause/Resume, Step and Stop, plus the session state, sit in the
-    viewport header line. A scene and camera picker appears only when there is a choice
-    to make.
-  - **Notice.** A failed session or an unreadable status gets one strip under the header.
-  - **Runtime block.** The Inspector shows a read-only block for the selected entity, read
-    on selection and after Pause and Step. It is never polled and never written back.
-  - **Game view.** Once deliberately focused, it sends bounded, generation-pinned input.
-  - **Shortcuts.** ⌘P, ⇧⌘P and ⌥⌘P (Ctrl elsewhere), listed in the shortcut reference.
-- **Pending: native actual-window review.** It waits for Astra's native binary or fixture
-  and an explicit graphics-slot grant. There is no grant in `artifacts/tools/`. I built and
-  launched no native renderer, window or GPU process, and claim no native visual
-  acceptance.
-- **No gate claims.** No phase gate is approved or claimed. Nothing here makes a phone,
+- **Browser stage: done.** Commit `1b01cdbf38f6ab9a6f8d6cc1568d9f3efc97f966`, integrated by the
+  root at `cfc20c1`. The editor has:
+  - native Play controls in the viewport header;
+  - read-only runtime inspection in the Inspector;
+  - bounded desktop game input from a focused game view;
+  - the ⌘P, ⇧⌘P and ⌥⌘P shortcuts.
+- **Native review: done** on the granted immutable binary (SHA-256 `718ea75b…bd1b6`). It
+  covers wide, minimum and narrow layouts. Controls, status, Preparing, Pause, Step, Stop,
+  Suspended, runtime rows, the picker, error placement, keyboard focus, F6 and the Play
+  shortcuts all behave as designed in the real WKWebView window. Measured details:
+  - Runtime rows match the engine exactly.
+  - Game input reaches the game with the expected numbers.
+  - The pointer arrives in viewport-local CSS px.
+  - Traffic lights, logo and title share one centre line within 0.25 pt.
+- **Three defects found natively:**
+  1. **Game focus after Resume (fixed).** Resuming with another panel focused left the game
+     believing it had focus. Fixed in `src/play/input.ts`; there is also a worker note for
+     Astra.
+  2. **Keyboard Dismiss (fixed).** Dismissing the error notice from the keyboard left no
+     element focused. Fixed in `PlayControls.tsx`.
+  3. **Splitter drag (reported only).** Dragging a panel splitter selects text across the
+     Inspector. The Splitter belongs to the handoff 0001 shell, outside this packet's
+     paths, so it is reported with a suggested patch and not changed.
+- **The fixes are not natively verified.** Both have regression tests, and typecheck, the
+  611 tests and the build pass. Native acceptance stops at the reviewed binary until the root
+  builds one from this source.
+- **Graphics slot released.** Every native process this review started is closed:
+  `pgrep -fl incant_editor` and `pgrep -fl /tmp/incant-native-review-0044/` both find
+  nothing. The slot is free.
+- **No gate claims.** No phase gate is approved or claimed, and nothing here makes a phone,
   device or performance claim.
 
 ## Model and effort
 
 - Exact model: Claude Opus 5.5, model ID `claude-opus-5-5`.
 - Thinking effort: Max. The session reports reasoning effort "max".
-- How it was verified:
-  - The prompt I received is the handoff runner's post-verification prompt
-    (`tools/handoff/main.py`, lines 225–240).
-  - `configure_model_and_effort` sets both settings through ACP. It raises before
-    prompting unless ACP confirms Opus 5.5 and `max`.
-  - I cannot see the runner's own "Claude session verified" output from inside the
-    session.
+- How it was verified: both prompts are the handoff runner's post-verification prompts.
+  The runner's `configure_model_and_effort` (`tools/handoff/main.py`) sets both settings
+  through ACP and raises before prompting unless ACP confirms them. I cannot see the
+  runner's own confirmation output from inside the session.
 - No substitution, and no routing exception.
 
-## Packet revisions and director feedback
+## Priority revision: acknowledged and applied
 
-- **Revisions.** The current brief has no separate priority-revision section and no new
-  director note. Nothing from an earlier attempt existed: the worktree was clean, with only
-  `brief.md`.
-- **Standing feedback, as applied:**
-  - **Restrained colour.** Colour is only on state dots: Playing green, Paused blue,
-    Suspended amber, failures red. The one tinted surface is the error strip, which
-    matches the existing project banner.
-  - **Compact header.** Every Play control lives in the existing 36 px viewport header
-    line. There is no new toolbar, panel or row.
-  - **No ornament.** No stripes, glows, pills, badges or explanatory rows. Generation,
-    sequence, frame and discarded-tick counters are not shown.
-  - **Account dialog.** Pixel-identical before and after, in two states.
-  - **Shortcut dialog.** Gains one "Play" section in its own style.
+- **Native review is authorized.** I used only the immutable root binary
+  `/tmp/incant-native-review-0044/incant_editor`, SHA-256
+  `718ea75b9d792015fa2af4d939d4af2e2e412c01c706b046a910075cf70bd1b6`:
+  - It was launched with one fixture path and no probe flags.
+  - It was never rebuilt or replaced. `launch.sh` checks the hash before each launch.
+  - The matching helper `incant_headless` (SHA-256 `4aae16ce…6c0f`) was used only for
+    public `init`, `command.execute` and `project.save`.
+- **Fixtures.** The granted fixture was not modified (its files keep their 15:32
+  timestamps). Extra fixtures were authored through public RPC only, under
+  `artifacts/native-review-0044/`.
+- **Settled upstream:**
+  - the pointer physical→logical mismatch is fixed by Sol in `2a4be3a`;
+  - wheel signs are unchanged;
+  - duplicate Play publication is being fixed separately.
+- **Director confirmation not needed.** Routine shortcut and default choices stand under the
+  original authorization, so the two director questions from the browser stage are closed:
+  the ⌘P/⇧⌘P/⌥⌘P shortcuts are kept, and an entity already selected at Start is read once at
+  tick 0.
+- **Not done:** I opened no account dialog, changed no saved account and sent no model
+  prompt. Nothing outside the review window was captured.
+
+## Native review (actual window)
+
+**Setup.**
+- macOS 26.6 (25G72), arm64, built-in Retina display (2 device px per pt).
+- Layouts (window size in pt):
+  - wide: 1440×874;
+  - minimum: 1000×650;
+  - narrow: 1440×866 (the visible-frame clamp) with the Inspector dragged to its 280 pt
+    minimum.
+- Screenshots: 29 files in `screenshots/native/`, labelled as actual native captures in its
+  README. They are separate from the browser-double sets. Hashes are in
+  `evidence/native-screenshots.sha256`; steps, coordinates and measurements are in
+  `evidence/native-review.json`.
+
+**Method.**
+- Window-only captures: `screencapture -o -x -l` on the review PID's own window id.
+- Input: CGEvents posted only while that PID is frontmost, rechecked before every event.
+  `tools/native/winctl.swift` refuses points outside the window.
+- The Mac was in use during the review, so each step:
+  - waited for 15 s without keyboard or mouse input;
+  - ran for a few seconds;
+  - handed the front and the pointer back afterwards.
+- The guard worked: once the person switched apps mid-step, the step aborted before any
+  further input was sent.
+
+**Fixtures.**
+- **Granted fixture** (`artifacts/native-review-0044/project.json`): its script moves X by 2
+  per tick.
+- **`input-variant/`, then `input-variant-2/`:** each has scene "Main" with Key Probe, Pointer
+  Probe, Camera and Side Camera, and scene "Lit Without Camera" with one point light. They
+  were authored by `tools/native/author-input-variant.py`: `init`, two `command.execute`
+  transactions (the bus takes one script source write per transaction), then
+  `project.save`; revision 2.
+- **Why there are two variants.** In the first variant both probes iterated every entity.
+  The SDK documents `chunks` as world-wide views, so the pointer probe overwrote the key
+  probe's X and Y. That was my probe's mistake, not an engine defect. `input-variant-2`
+  filters by `instances`, as `crates/incant_script/tests/project_bindings.rs` does.
+- Neither fixture has a mesh. During Play the viewport shows the native surface's empty clear
+  colour. The cube in stopped captures is the authoring viewport's diagnostic cube, not game
+  geometry.
+
+### Verified in the native window
+
+| Item | Result | Screenshots (`screenshots/native/`) |
+| --- | --- | --- |
+| Header controls and status | Preparing… with spinner, only Stop usable; Playing; Paused · tick N; Stepped; Stopped back to Live with focus on Play and "Play stopped. Runtime changes were discarded." | `wide-01`–`wide-05`, `wide-08` |
+| Suspended | Amber "Suspended" while the window is in the background (after the 400 ms delay) | `minimum-03` |
+| Step while running | Says "Pause Play to step one tick." | `wide-07` |
+| Runtime rows | Equal the engine: X = 2 × tick at tick 79, 81, 57 and 155 (X 158, 162, 114, 310). Authored Transform stays 0 | `wide-04`, `wide-05`, `minimum-02`, `narrow-01` |
+| Layouts | Header, controls, runtime rows and notice fit at all three sizes. The only truncation is the picker label at 1000 pt ("Lit Without …"); its full name is in the tooltip and accessible name | `minimum-*`, `narrow-01`, `error-02` |
+| Picker | Absent for one scene with one camera. Three targets with the "No camera" note. Play without a choice opens it. Arrow keys and Enter choose, and focus returns to the picker with a ring. The playing scene is named: "Playing · Main" | `picker-01`–`picker-03` |
+| Error placement | The engine's refusal sits in one strip under the header, with Dismiss on the right; it wraps to three lines at 1000 pt. The native surface follows the smaller hole: the strip covers y 152–223 px, the hole starts at y 226 px, and the diagnostic cube re-centres | `error-01`, `error-02` |
+| Viewport hole | The native surface fills the game view exactly, at 246, 76, 833×533 CSS px (x 492–2157 px, y 152–1217 px), between the panel borders | `wide-03` |
+| Keyboard | Shift+F6 and F6 reach the game view, which shows its 2 px inset ring. Play shortcuts work from the game view and from panels. Shift+Tab from the game view reaches Stop, then Step, so this WKWebView puts buttons in the Tab order. Space on an unavailable Stop announces "Play is not running." | `wide-06`, `keyboard-01` |
+| Titlebar | Traffic-light centre y 39.5 px, logo 39.0 px, title on the same line, in a 39 pt header (border at 78–79 px). Measured identically at all three sizes and unfocused. Lights at 23 pt spacing; the logo starts 15 pt after the zoom button; the titlebar dims when unfocused | `alignment-*`, `minimum-03` |
+
+### Game input numbers (`input-variant-2`, 60 Hz ticks)
+
+| Steps | Key Probe | Pointer Probe | Screenshot |
+| --- | --- | --- | --- |
+| F6 into the game view (pointer outside it); D held 1.0 s; ⇧⌘P | tick 326: X 64, Y 0, Z 0, scale X 2 | | `input-01` |
+| ⇧⌘P from the game view; left button held 0.5 s at window (520, 320); CGEvent wheel +3 lines; pointer to (800, 450); ⇧⌘P | tick 441: X 64, Y 34, Z 120, scale X 2 | tick 441: X 554, Y 374 | `input-02`, `input-03` |
+| Key Probe clicked (focus in the Hierarchy); ⇧⌘P resume; 0.6 s; ⇧⌘P | tick 485: scale X **2**, expected 1 (defect 1) | | `defect-input-…` |
+| F6 into the view; ⇧⌘P; D down; 0.5 s; F6 out; 1.0 s; ⇧⌘P; D up | tick 637: X 102 (+38 in 152 ticks), scale X 1 | | `input-04` |
+
+What the numbers show:
+- **Keys, buttons, wheel and focus** reach the game while the view has focus, and only then.
+- **Pointer units.** The position is viewport-local CSS px: (800, 450) − (246, 76) =
+  (554, 374).
+- **F6 releases a held key.** X grew only while D was held in the view.
+- **Wheel.** +3 synthetic CGEvent lines arrived as Z +120. That is a recorded observation
+  only, and the signs are unchanged.
+
+### Defects found natively
+
+1. **The game kept focus after Resume from another panel. Fixed in UI source.**
+   - **Trigger:** pause with the game view focused, click a Hierarchy row, then resume (⇧⌘P).
+     The game reports `input.focused` true while keys go to the editor (`defect-input-…`,
+     tick 485).
+   - **Cause:** the worker queues `focus:false, focus:true` itself whenever a held session
+     continues, based on window focus (`editor/app/src/play/worker.rs:340-345` in this
+     worktree). The UI sent nothing, because its view never had focus in that stream.
+   - **Fix (`src/play/input.ts`):** whenever the worker starts taking input (Start, Resume,
+     the window coming back) while the view lacks focus, the UI sends `focus:false`. Queued
+     events are dropped once the worker stops taking input, because it releases input
+     itself.
+   - **Tests:** 2 unit tests and 1 integration test; one existing test is restated for the
+     new contract. All fail on the reviewed source and pass now.
+   - **Remaining gap:** the game still sees focus for up to one status read (about 250 ms)
+     after such a resume. See Astra note 9.
+2. **Keyboard Dismiss left no element focused. Fixed in UI source.**
+   - **Trigger:** Tab to Dismiss in the error strip, then press Space. No element shows a
+     ring (`defect-keyboard-…`), and the next Tab restarts at the picker (`keyboard-03`).
+   - **Fix (`PlayControls.tsx`):** when the focused Dismiss removes the notice, focus moves
+     to Play. A mouse press, which does not focus buttons in WebKit, leaves focus alone.
+   - **Tests:** 2 tests. The focus test fails on the reviewed source.
+3. **Dragging a panel splitter selects text across panels. Reported, not changed.**
+   - **Trigger:** drag the Inspector's splitter in the native window. The stepped Runtime
+     value and the text between are selected (`defect-splitter-drag-selects-text.png`).
+   - **Cause:** `editor/ui/src/components/Splitter.tsx` (handoff 0001) only captures the
+     pointer on press. Nothing stops the press's default text selection.
+   - **Suggested patch (untested):** on a primary-button press, call `preventDefault()` on
+     the press, focus the separator explicitly, then capture the pointer. Alternatively, set
+     `user-select: none` on the document while dragging.
+   - **Owner:** this path is outside 0044's scope. It needs a shell UI follow-up with a
+     regression test.
+
+**Inconclusive.** One ⌘P right after the fresh `input-variant-2` window was first activated
+did not open the picker. In the same second, the person at the Mac became active and the
+guard aborted the step. On two later attempts (after activation, and after a click) ⌘P
+opened the picker both times (captures in the ignored `artifacts/`). Not counted as a
+defect.
 
 ## What the user sees
 
-Screenshots are under `screenshots/` (headless Chrome, deviceScaleFactor 2):
-- `normal/` is 1440×900 with a 360 px Inspector.
-- `minimum/` is 1000×650 with a 340 px Inspector.
-- `narrow/` is 1440×900 with the Inspector at its 280 px minimum.
-- `regression/` holds element crops.
-
-### Viewport header
-
-**State.** The header's state word changes with the session:
-- **No session.** The viewport's own word shows (Live, Not attached, …).
-- **Preparing… / Stopping….** Shown with a spinner.
-- **Playing.** With several scenes, the playing scene follows: "Playing · Harbor".
-- **Suspended.** Shown only once a worker hold lasts 400 ms. The tooltip explains it.
-- **Paused · tick 1,204.**
-- **Play failed / Play unavailable.**
-
-**Transport.**
-- Three plain 28 px buttons, always in the same place: Play/Resume/Pause, Step and Stop.
-- A button that cannot act stays focusable, is marked `aria-disabled`, and says why when
+The design from the browser stage is unchanged except for the two fixes; `editor/ui/DESIGN.md`
+says both in its Play section.
+- **Header.** The state word (Preparing…, Playing · scene, Suspended, Paused · tick N, Play
+  failed, Play unavailable) is followed by three plain 28 px transport buttons.
+- **Buttons that cannot act** stay focusable, are marked `aria-disabled`, and say why when
   pressed.
-- Each button's accessible name says its action. `aria-keyshortcuts` and the tooltip give
-  the platform's keys.
+- **Picker.** It appears only when there is a choice. The only scene, and a scene's only
+  camera, are used without asking.
+- **Notice.** One strip under the header gives the engine's words. Dismiss stops the failed
+  session; from the keyboard, focus then moves to Play.
+- **Game view.** It is a focusable application region with an inset ring. It sends keys and
+  the pointer while the session runs. F6 and Shift+F6 leave it. The game has focus only while
+  the view has.
+- **Runtime block.** A sunken Inspector well with Translation, Rotation, Scale and Velocity,
+  read on selection, Pause, Step and Refresh. It is never polled and never written to the
+  project.
 
-**Picker.**
-- **When it appears:** only with several scenes, or several cameras in the scene.
-- **Labels:** "Choose scene", "Harbor · Choose camera" or "Harbor · Player Camera".
-- **The list:** one radio list of every scene and camera. Its button is the toggle.
-- **Defaults:**
-  - The only scene, and a scene's only camera, are used without asking.
-  - Play without a needed choice opens the list, and choosing starts Play.
-  - Choices are remembered per scene for the editor session.
-- **No camera:** a scene without a camera starts without one, and the engine decides.
+Browser-double screenshots, from the first stage (headless Chrome, deviceScaleFactor 2):
+- `screenshots/normal/` (1440×900);
+- `screenshots/minimum/` (1000×650);
+- `screenshots/narrow/` (280 px Inspector);
+- `screenshots/regression/`.
 
-See `normal/choose--stopped.png`, `choose--picker.png`, `choose--preparing-polled.png`,
-`single--stopped.png` and `keyboard--choosing.png`.
+Their traffic and accessibility results are in `evidence/review.json`, `capture-g1.json`,
+`pixel-g1-g2.json`, `regression-pixels.json` and `screenshots.sha256` (43 entries).
 
-### Notice
+## Behaviour and input rules
 
-- **When:** a failed session, or a status that cannot be read.
-- **What it says:** "Play could not start." or "Play stopped at tick 42.", then the
-  engine's own words.
-- **Dismiss:** a failed session's notice has Dismiss, which stops that session. An
-  unreadable-status notice has no Dismiss: it clears itself when reads recover.
-- **Announced once.** The notice is an alert, and Play's earlier status-line message is
-  cleared so it cannot contradict it.
-- **Viewport bounds.** The notice moves the viewport down, and the bounds are reported
-  again (see Evidence).
+These are unchanged from the browser stage, apart from defect 1:
+- **When input flows:** only from a deliberately focused game view, in a focused window,
+  while the status says running and not suspended, and no control request is pending.
+- **Packets:** pinned to their generation; one in flight; at most one per 16 ms and 128
+  events; the backlog capped at 1024.
+- **Releases:** every stream opens with `focus:false, focus:true`. Leaving the view, or a
+  refused packet, sends `focus:false`.
+- **New:** a worker that starts taking input without the view's focus is sent
+  `focus:false`.
+- **Re-renders:** Play status reads stay out of the authoring snapshot, so panels do not
+  re-render at 4 Hz.
 
-See `normal/unsaved--refused.png`, `runtime-error--failed.png` and
-`transport--unreadable.png`.
+## Notes and gaps for Astra (Rust, transport and engine are yours; not changed)
 
-### Game view
-
-- **Focusable region.** While a session exists, the viewport host is a focusable
-  `role="application"` region named "Game view". It has a spoken note: keys and the pointer
-  go to the game, and F6 leaves.
-- **Focusing.** A click focuses it, and that press is not sent. F6 lands on it.
-- **Focus ring.** A 2 px focus ring is drawn inside the view's edge however it was focused
-  (`normal/game-input--focused.png`).
-- **Keys.** While the session runs, keys and the pointer go to the game, including ?. F6,
-  the Play shortcuts and ⌘ combinations stay the editor's.
-- **Ending.** A session that ends with focus in the view moves focus to Play.
-
-### Runtime block (Inspector)
-
-- **Where:** a sunken well above the authored components.
-- **Header:** "Runtime", the tick it was read at, and a refresh button.
-- **Rows:**
-  - Translation, Rotation, Scale and, when present, Velocity.
-  - They use the authored rows' own renderer and schema. Rounded values show; exact ones
-    are in the tooltip.
-  - Field IDs are in a separate namespace, and no diagnostics are shown.
-- **Explicit cases:**
-  - An entity the game removed: "No runtime state." plus the engine's reason.
-  - An entity of another scene: "Not in the running scene. Play runs Harbor." No request is
-    sent.
-  - A scene node: no block.
-  - A host without `play.inspect`: says so.
-- Authored values never stand in for runtime values.
-
-See `normal/running--refreshed.png`, `pause-step--stepped.png`, `missing--absent.png`,
-`missing--other-scene.png`, `older-host--labelled.png` and `narrow/`.
-
-## Behaviour
-
-| Situation | What happens |
-| --- | --- |
-| Play pressed | `play.start` with the scene, and the camera when there is one. The bridge adds the session generation and authoring revision. The header says "Preparing…" at once; Stop works at once |
-| Stop before any status read shows the new session | Held, then sent with the new session's generation as soon as a read shows it. If the start fails first, the stop is dropped and the failure notice stays |
-| Stop while preparing | Sent. The header shows "Stopping…" until the cancelled startup finishes; Play waits. The startup's late "Play startup was cancelled" is silent and never replaces the stopped state |
-| Start refused or failed | If the session reports the failure, the notice shows it, once. If the session is unchanged (a bridge refusal), the status line says "Play could not start: …" |
-| Pause / Step | Each re-reads the selected entity. Step stays unavailable until paused. A second press while a request is pending says to wait |
-| Selection or session changes during a read | The older read is discarded. Only the newest read for the current selection and session is shown |
-| Status unreadable | "Play unavailable" plus the notice. Stop (and Mod+P) still try: the bridge reads again first, then stops, or the status line says why it could not |
-| Dismiss | Stops the failed session; Play waits until that is done |
-| Unsupported host or fixture | Controls are marked unavailable: "Native Play is unavailable: the sample fixture is read-only." |
-
-**Input rules** (`src/play/input.ts`, `src/play/useGameCapture.ts`):
-
-- **When input flows:**
-  - The view has deliberate focus in a focused window.
-  - The status says running and not suspended.
-  - No control request is pending.
-- **Events sent:**
-  - `focus`.
-  - `key` with generated KeyCode names. Keys the engine lacks and auto-repeat are dropped
-    explicitly.
-  - Left, right and middle `mouse_button`.
-  - `pointer_position` in viewport-local CSS px.
-  - `wheel` in pixels or lines, as +x right and +y away from the user (DOM `deltaY`
-    negated, matching what the native window player passes through from tao).
-- **Packets and limits:**
-  - Each packet carries the generation its events were collected in.
-  - A new generation drops queued events and ignores late replies.
-  - One packet in flight, at most one per 16 ms, at most 128 events each.
-  - A pointer run keeps its first and latest position, and wheel deltas are summed.
-  - The backlog is capped at 1024. Over that, everything is released and the user is told
-    once.
-- **Releases:**
-  - Every stream opens with `focus:false`, `focus:true`, which releases whatever the game
-    still holds.
-  - Leaving the view, or a refused packet while the worker still takes input, sends
-    `focus:false`.
-- **Errors:**
-  - A single refusal (usually a pause racing a packet) is not reported.
-  - A repeated one is announced once per message, with no log flood.
-
-**Re-renders.** Play status reads arrive at up to 4 Hz while a session runs. They are kept
-out of the shell snapshot (`AuthoringSnapshot`), so panels do not re-render. Play views
-select only the fields they show; running ticks are not among them.
-
-## Independent review and fixes
-
-A separate review agent read the diff and the backend semantics. It reported six bugs and
-several minor issues. All were checked against the code, fixed and covered by tests:
-
-1. **Dev builds sent no game input.** In StrictMode, React's extra effect cleanup disposed
-   the input queue for good. `dispose()` is now reversible. Tested under StrictMode.
-2. **Stop did nothing while the status was unreadable.** It was offered, but the handler
-   gave up. It now really tries; the bridge reads again first, then stops or says why.
-3. **A release could be lost.** If the packet after a blur was refused, `focus:false` was
-   never sent. Releases now always go out while the worker takes input.
-4. **Held keys could stay held in the game.** The editor forgot them without telling the
-   game when input paused for editor-side reasons. Every stream now opens with a release,
-   and editor-side stops send `focus:false`.
-5. **Step or Resume could be dropped silently.** A press while a request was pending was
-   ignored without a word. It now says to wait. The test that flaked now waits for the
-   completed pause.
-6. **The picker's button could not close its menu.** It now can; the menu ignores presses
-   on its anchor.
-7. **Minor issues, all fixed:**
-   - ⌘ combinations stay the editor's (macOS sends no key release for them).
-   - A P release with a modifier still reaches the game.
-   - Dismiss counts as stopping.
-   - A Play press during an unfinished startup says so.
-   - No inspection is sent while a Step is pending.
-   - A queued Stop checks the phase.
-   - On macOS, Ctrl+P in a text field stays the text field's.
-   - The runtime block shows only a read of the current selection.
-   - A weak test was rewritten.
-
-**Mutation checks.** Restoring the snapshot pass-through, the terminal `dispose()`, the
-inert Stop or the anchor-less picker makes its new test fail. The files were restored and
-compared byte for byte with `cmp`.
+1. **Identical statuses republished.** Being fixed separately, per the revision.
+2. **CLI wording in the editor.** Seen natively: "native play: spatial content requires an
+   explicit --camera and native render host". The editor shows it verbatim. Non-blocking.
+3. **Pointer units.** Fixed upstream in `2a4be3a`. Natively, the editor delivers
+   viewport-local CSS px, (554, 374) as expected.
+4. **Wheel sign.** Kept. A synthetic +3-line CGEvent arrived as Z +120. This is an
+   observation only.
+5. **Start reply timing.** As before: the generation is first visible on the next status
+   read.
+6. **Suspended right after Start.** As before.
+7. **Untyped inspect errors.** As before.
+8. **No unsaved-project signal.** As before.
+9. **New: the worker decides game focus from window focus.** On every hold → run transition
+   it queues `focus:false, focus:true` (`frame()`, worker.rs:340-345 in this worktree).
+   - **Problem:** in the editor, the game view's DOM focus is what matters. A resume or
+     window return with focus in another panel gives the game focus until the editor's
+     correction arrives, up to one status read later.
+   - **Suggestion:** in the editor host, queue only `focus:false` on those transitions and
+     let the editor's stream open with `focus:true`. The UI's correction is then a harmless
+     no-op.
+10. **New, for the root's fixture.** `artifacts/native-review-0044/move.ts` adds 2 to every
+    row of every chunk, so it also moves the Camera. That is harmless without a mesh. With a
+    mesh added for visual validation, the camera would move with it and the model would look
+    still. Filtering by `instances` avoids this (SDK `NativeContext.instances`).
 
 ## Evidence
 
-**Tests.** UI tests went from 30 files and 545 tests (baseline) to 35 files and 606
-(final): 61 new tests in five new files. The final suite passed five consecutive full
-runs. New files:
+**Tests.**
+- **Now:** 35 files, 611 tests (`npm test`, 0 failures).
+- **Browser stage:** 606, from a 545 baseline.
+- **New this session:**
+  - `src/play/input.test.ts` (16 → 18): focus is denied when the worker starts taking
+    input; an unsent focus notice is dropped.
+  - `src/components/play/Play.test.tsx` (30 → 33):
+    - Resume with another panel focused sends only `focus:false`;
+    - focused Dismiss moves focus to Play;
+    - an unfocused Dismiss leaves focus alone;
+    - the test "sends nothing until focused" is restated as "sends only that the game has
+      no focus";
+    - the `ops` helper now lists control requests only.
+- **Mutation check:** with `input.ts` and `PlayControls.tsx` restored from `HEAD` (the
+  reviewed source), three new behaviour tests fail. The fix was then reapplied from a saved
+  patch: 33 of 33 pass.
 
-| File | Covers |
-| --- | --- |
-| `src/play/keys.test.ts` (2 tests) | The KeyCode list equals `schemas/InputEvent.schema.json`; unsupported browser codes are dropped |
-| `src/play/input.test.ts` (16 tests) | <ul><li>packets of at most 128, one in flight, one per frame</li><li>pointer and wheel coalescing and sign</li><li>generation pinning and no relabelling</li><li>release on blur and on refusal</li><li>the 1024 backlog</li><li>error reporting without floods</li><li>reuse after dispose</li></ul> |
-| `src/play/model.test.ts` (11 tests) | Scenes and cameras per scene, target choice, all states, runtime counterpart of the selection |
-| `src/components/play/Play.test.tsx` (30 tests) | The real `NativeBridge` class against the double: request wiring, picker, preparing and pending Stop, stale startup, failures, Dismiss, unreadable status, inspection and stale reads, missing entities, older hosts, game input including StrictMode and a 300-event burst, shortcuts, axe |
-| `src/shell/ShellContext.test.tsx` (2 tests) | Play status reads do not re-render authoring consumers; capability mapping |
+**Native evidence.**
+- `evidence/native-review.json`;
+- `evidence/native-screenshots.sha256` (29 entries);
+- `screenshots/native/README.md`.
 
-**Browser review.**
-- **Sets.** g1 and g2: 73 steps each, at the three sizes, on the final production build.
-- **Results:**
-  - 0 axe violations (axe-core 4.14.0, colour contrast included).
-  - 0 page errors, and 0 requests to any other origin.
-  - No header or page overflow. The only truncated text is the picker label at 1000 px,
-    whose full name is in its tooltip and accessible name.
-  - The macOS titlebar inset is 78 px wherever the double reports macOS chrome.
-  - Inspector widths: 360, 340 and 280 px.
-- **Native placement.** In all 71 steps that use the double, the viewport bounds the bridge
-  sent equal the game view's rectangle × device pixel ratio. That includes the moments when
-  the notice moves the view.
-- **Recorded traffic.** 107 commands and 39 input packets were recorded. The largest packet
-  had 5 events; none was refused, and every packet carried generation 1. No command
-  carried a stale generation.
-- **Noise.** 68 of 73 captures are identical between g1 and g2. The other five differ by
-  4–193 pixels on anti-aliased corners and text (masks checked).
-
-**Regression** (baseline `3910a85`, extracted with `git archive` into ignored artifacts
-and built there). Five of seven element crops are pixel-identical:
-- the account dialog, signed in with several accounts;
-- the account dialog, signed out;
-- the titlebar;
-- the hierarchy;
-- an authored Inspector (Crate 03).
-
-Two change by design:
-- the shortcut dialog, which gains the Play section;
-- the viewport header, which gains the transport.
-
-Before and after crops are in `screenshots/regression/`.
-
-**Evidence files** (`evidence/`):
-- `review.json`: what each curated capture shows, plus totals.
-- `capture-g1.json`: every step, command and input packet.
-- `pixel-g1-g2.json` and `regression-pixels.json`.
-- `screenshots.sha256`: 43 entries; `shasum -a 256 -c` gives 43 OK.
-
-### Coverage
-
-| State | 1440×900 | 1000×650 | 280 px Inspector |
-| --- | --- | --- | --- |
-| Stopped with a choice; picker open | ✓ | ✓ | ✓ |
-| Preparing (Stop available) | ✓ | ✓ | ✓ |
-| Playing with runtime block; refreshed | ✓ | ✓ | ✓ |
-| Paused; stepped | ✓ | ✓ | ✓ |
-| Stopping a preparing start; after the cancelled startup | ✓ | | |
-| Stop before the session is known | ✓ | | |
-| Unsaved refusal; dismissed | ✓ | ✓ | ✓ |
-| Runtime error | ✓ | ✓ | |
-| Unreadable status | ✓ | | |
-| Removed entity; other scene | ✓ | | ✓ |
-| Suspended | ✓ | | |
-| Game view focused; input sent; F6 left | ✓ | ✓ | |
-| Keyboard only (rings, list, game view) | ✓ | ✓ | |
-| Single scene and camera (no picker) | ✓ | ✓ | |
-| Fixture (unsupported) | ✓ | | |
-| Older host without `play.inspect`/`play.input` | ✓ | | |
-| Shortcut reference | ✓ | | |
-
-Every ticked cell is a step of set g1, recorded in `evidence/capture-g1.json` and kept in
-the ignored `artifacts/0044-native-editor-play/g1/`. `screenshots/` holds a curated subset
-of 43.
-
-## What is real and what is simulated
-
-- **Real:**
-  - the production UI build;
-  - all UI logic;
-  - the compiled `editor/bridge/native.generated.js`, and in tests the `NativeBridge`
-    class. They poll `play_read` and send `play_command` exactly as in the editor.
-  - authored values converted by the real `snapshotFromEngine` from the repository's
-    generated schemas.
-- **Simulated** by the clearly labelled native-bridge double (`src/test/nativePlayDouble.ts`;
-  the status line reads "Native-bridge double (simulated Play, not engine)"):
-  - Every Play result is simulated. The double mirrors the worker's rules and messages:
-    generations, the startup gate, Stop during preparation, deferred Step, the 128/1024
-    limits and inspection.
-  - It never cooks, simulates physics or renders.
-  - Runtime transforms are simple functions of the tick.
-  - Ticks advance only when the review calls `frame()`.
-- **Not shown:** the viewport hole is transparent in a browser, so captures show the page
-  behind it, not game pixels.
-- **Not counted:** mock and browser tests are transport and visual evidence only; they are
-  not a live gate.
-
-## Gaps and questions for Astra (not changed: transport and Rust are yours)
-
-1. **Identical statuses republished.** `NativeBridge.updatePlay` republishes an unchanged
-   status on every 4 Hz read, including when idle, so every subscriber is notified. The UI
-   now ignores these reads, but skipping the publish when generation and sequence are
-   unchanged would help any other consumer.
-2. **CLI wording in the editor.** Engine refusals use CLI wording: "choose --scene when the
-   project does not have exactly one scene" and "spatial content requires an explicit
-   --camera". The editor shows them verbatim. Editor-facing wording would read better.
-3. **Pointer units.** The editor sends viewport-local CSS pixels, as the brief specifies.
-   The native window player passes tao's `PhysicalPosition` (device pixels), while the
-   InputEvent schema says logical pixels. Please confirm which is intended, for parity.
-4. **Wheel sign.** The editor sends `[deltaX, -deltaY]`, matching tao's documented
-   +y-away convention that the player passes through. Please confirm it numerically. tao's
-   Linux path negates both axes, so horizontal may differ there.
-5. **Start reply timing.** `play.start` replies only after cooking finishes. The new
-   generation is first visible on the next status read, so the UI holds an early Stop
-   until then. A start that published `preparing` with its generation at once would remove
-   that gap.
-6. **Suspended right after Start.** The start reply reports `suspended: true` until the
-   first focused frame. The UI waits 400 ms before saying "Suspended".
-7. **Untyped inspect errors.** Inspect errors are plain strings (`engine.request`). A
-   typed code for an absent entity would let the UI word it without matching text.
-8. **No unsaved-project signal.** No snapshot field says a project is unsaved, so the UI
-   relies on the start refusal.
+All 54 raw captures (`native-r1/`, `native-r2/`) and the editor logs are in the ignored
+`artifacts/0044-native-editor-play/`.
 
 ## Not run and limitations
 
+- **Fixes in a rebuilt binary.** Not checked: this review used the immutable binary built
+  before the fixes. Further native acceptance needs the root to build one from this source.
+- **Visible game geometry.** Not shown: neither fixture has a mesh.
 - **Not run:**
-  - any native app, window, renderer or GPU process (no grant);
-  - WebKit/WKWebView;
-  - VoiceOver or any screen reader;
+  - Windows and Linux hosts;
+  - VoiceOver or another screen reader;
+  - IME composition;
+  - touch or trackpad gestures;
+  - real wheel hardware (only synthetic CGEvents);
+  - other device pixel ratios or multiple displays;
   - phones;
-  - Cargo;
+  - performance measurement;
   - hosted checks;
-  - performance measurement.
-- **Environment:** headless Chrome 155.0.8059.40, playwright-core 1.64.0, Node v22.23.3,
-  vitest 5.0.3, TypeScript 5.9.3. Dependencies came only from the local npm cache.
-- **Short worker holds.** A hold shorter than one status read (for example while a surface
-  is outdated) releases keys inside the game while the UI still tracks them. A key held
-  through it stays released until pressed again. The native window player also drops key
-  repeats.
-- **macOS ⌘ release.** A game key held before ⌘ and released while ⌘ is down gets no key
-  release from the browser on macOS. It stays held until blur, pause or the next stream.
-- **Stop message heuristic.** "Play start cancelled" versus "Runtime changes were
-  discarded" depends on the last status read.
-- **Not edited:** `STATUS.md` and `docs/spikes/native-editor-play.md` (Astra's). Its
-  "Remaining UI work" paragraph is now out of date.
-- **Not reviewed natively:** the native viewport, inset and focus behaviour in WKWebView,
-  pending the native review.
+  - Cargo (no Rust was built).
+- **Short worker holds and the macOS ⌘ release.** Unchanged from the browser stage: a key
+  held through a short hold, or released while ⌘ is down, stays released or held until the
+  next stream.
+- **Not edited:** `STATUS.md` and `docs/spikes/native-editor-play.md` (Astra's), and
+  `Splitter.tsx` (outside this packet's paths).
 
 ## Changed paths
 
-- **Edited:**
-  - `editor/ui/src/App.tsx`: Play provider, shortcuts.
-  - `editor/ui/src/shell/ShellContext.tsx`: snapshot without Play status, quiet requests,
-    `capabilityOf`.
-  - `editor/ui/src/components/ViewportPanel.tsx`: header state and controls, notice, game
-    view.
-  - `editor/ui/src/components/inspector/InspectorPanel.tsx`: runtime block.
-  - `editor/ui/src/components/Menu.tsx`: radio items, notes, anchor.
-  - `editor/ui/src/components/ShortcutsDialog.tsx` and its test: Play section.
-  - `editor/ui/src/icons/Icon.tsx`: play, pause, step, stop, refresh.
-  - `editor/ui/src/main.tsx`.
-  - `editor/ui/src/styles/base.css`: menu check and note.
-  - `editor/ui/DESIGN.md`: Play section, keyboard, styles table.
-  - `editor/ui/NATIVE_VIEWPORT.md`: game view, input, focus.
-- **New:**
-  - `editor/ui/src/play/`: `PlayContext.tsx`, `model.ts`, `input.ts`, `keys.ts`,
-    `useGameCapture.ts` and tests.
-  - `editor/ui/src/components/play/`: `PlayControls.tsx`, `RuntimeSection.tsx` and
-    `Play.test.tsx`.
-  - `editor/ui/src/shell/ShellContext.test.tsx`.
-  - `editor/ui/src/styles/play.css`.
-  - `editor/ui/src/test/nativePlayDouble.ts`: test support, not in the app bundle.
-  - `handoffs/0044-native-editor-play/`: `result.md`;
-    `tools/{play-double,capture,regression,curate}.mjs`; 43 files under `screenshots/`;
-    and `evidence/`.
-- **Unchanged:** Rust, `editor/bridge/*` (`tools/build_bridge.mjs --check` passes), Cargo
-  and npm manifests, CI, schemas and the SDK.
+- **This session, edited:**
+  - `editor/ui/src/play/input.ts` and `input.test.ts`;
+  - `editor/ui/src/components/play/PlayControls.tsx` and `Play.test.tsx`;
+  - `editor/ui/DESIGN.md` (Notice and Game view paragraphs);
+  - `handoffs/0044-native-editor-play/result.md`.
+- **This session, new:**
+  - `handoffs/0044-native-editor-play/tools/native/`:
+    - `winctl.swift`: per-PID window control with the frontmost and idle guards;
+    - `pixels.swift`: capture measurement;
+    - `author-input-variant.py`: public-RPC fixture authoring;
+    - `burst.sh`, `launch.sh`, `cap.sh`.
+  - `screenshots/native/`: 29 PNGs and a README.
+  - `evidence/native-review.json` and `evidence/native-screenshots.sha256`.
+- **Browser stage (commit `1b01cdb`):**
+  - **Edited:**
+    - `editor/ui/src/App.tsx`;
+    - `shell/ShellContext.tsx`;
+    - `components/ViewportPanel.tsx`;
+    - `inspector/InspectorPanel.tsx`;
+    - `Menu.tsx`;
+    - `ShortcutsDialog.tsx`;
+    - `icons/Icon.tsx`;
+    - `main.tsx`;
+    - `styles/base.css`;
+    - `DESIGN.md`;
+    - `NATIVE_VIEWPORT.md`.
+  - **New:**
+    - `editor/ui/src/play/*`;
+    - `components/play/*`;
+    - `shell/ShellContext.test.tsx`;
+    - `styles/play.css`;
+    - `test/nativePlayDouble.ts`;
+    - the handoff tools, screenshots and evidence.
+- **Unchanged:**
+  - Rust and `editor/bridge/*` (`node tools/build_bridge.mjs --check` passes);
+  - Cargo and npm manifests;
+  - CI, schemas and the SDK;
+  - the granted fixture.
 
 ## Commands and results
 
 ```sh
-npm ci --offline --ignore-scripts --no-audit --no-fund   # local npm cache only; 211 packages
-npm run typecheck --workspace editor/ui                  # baseline and final: 0 errors
-npm run test --workspace editor/ui                       # baseline 30 files / 545; final 35 files / 606 (five consecutive full runs)
-npm run build --workspace editor/ui                      # final: index-Hq2TUUUA.js 429.89 kB (gzip 131.93), index-N6ovSePc.css 76.34 kB
-node tools/build_bridge.mjs --check                      # generated bridge current and unchanged
-git archive HEAD editor/ui editor/bridge sdk/ts schemas | tar -x -C artifacts/0044-native-editor-play/baseline-src
-(cd artifacts/0044-native-editor-play/baseline-src/editor/ui && npx vite build)   # baseline index-BT33RD53.js, same as the untouched tree
-node handoffs/0044-native-editor-play/tools/capture.mjs g1   # 73 steps, 0 axe, 0 errors, 0 remote
-node handoffs/0044-native-editor-play/tools/capture.mjs g2   # same
-node handoffs/0035-editor-union-review/tools/pixel-diff.mjs artifacts/0044-native-editor-play/g1 artifacts/0044-native-editor-play/g2 artifacts/0044-native-editor-play/pixel-g1-g2   # 68 of 73 identical (noise)
-node handoffs/0044-native-editor-play/tools/regression.mjs artifacts/0044-native-editor-play/baseline-src/editor/ui reg-base1
-node handoffs/0044-native-editor-play/tools/regression.mjs editor/ui reg-cand2
-node handoffs/0035-editor-union-review/tools/pixel-diff.mjs artifacts/0044-native-editor-play/reg-base1 artifacts/0044-native-editor-play/reg-cand2 artifacts/0044-native-editor-play/reg-diff2   # 5 of 7 identical
-node handoffs/0044-native-editor-play/tools/curate.mjs g1 reg-base1 reg-cand2   # 43 screenshots
-(cd handoffs/0044-native-editor-play && shasum -a 256 -c evidence/screenshots.sha256)   # 43 OK
+# Native review (granted binary, one fixture path, no probe flags)
+swiftc -O handoffs/0044-native-editor-play/tools/native/winctl.swift -o /tmp/incant0044/winctl
+swiftc -O handoffs/0044-native-editor-play/tools/native/pixels.swift -o /tmp/incant0044/pixels
+shasum -a 256 /tmp/incant-native-review-0044/incant_editor      # 718ea75b…bd1b6, checked before each launch
+python3 -I handoffs/0044-native-editor-play/tools/native/author-input-variant.py \
+    --headless /tmp/incant-native-review-0044/incant_headless   # {"project": ".../input-variant-2/project.json", "revision": 2}
+tools/native/launch.sh <fixture> <log>                          # input variants; the granted fixture ran the same path-only command first; one editor at a time, each closed with SIGTERM
+tools/native/burst.sh '<winctl steps; cap.sh captures>'          # idle-gated steps; every step exit 0 except the one aborted by the guard
+pgrep -fl incant_editor; pgrep -fl /tmp/incant-native-review-0044/   # none: all native processes closed
+
+# UI checks after the fixes (editor/ui)
+npm run typecheck          # exit 0
+npm test                   # exit 0: 35 files, 611 tests
+npm run build              # exit 0: index-B42XLpcc.js 430.03 kB (gzip 131.96), index-N6ovSePc.css 76.34 kB
+node tools/build_bridge.mjs --check   # exit 0, bridge unchanged
+(cd handoffs/0044-native-editor-play && shasum -a 256 -c evidence/native-screenshots.sha256)   # 29 OK
 ```
 
-**Logs** are ignored, under `artifacts/0044-native-editor-play/`. SHA-256 prefixes:
+**Logs** are ignored, in `artifacts/0044-native-editor-play/`:
 
 | Log | SHA-256 prefix |
 | --- | --- |
-| `vitest-baseline.log` | `e64bbb95` |
-| `vitest-final.log` | `d368cc8d` |
-| `typecheck-final.log` | `5e05d027` |
-| `build-final.log` | `6e965caf` |
-| `build-baseline-src.log` | `70ad21f6` |
-| `g1.log` | `fb5a9586` |
-| `g2.log` | `fb5a9586` |
-| `pixel-g1-g2.log` | `380c48f8` |
+| `typecheck-native-fix.log` | `5e05d027` |
+| `vitest-native-fix.log` | `ec94e3f3` |
+| `build-native-fix.log` | `99cdc757` |
+
+The browser-stage logs are listed in that commit's `result.md`.
 
 ## Open questions
 
-1. **For the director:**
-   - **Shortcuts.** ⌘P / ⇧⌘P / ⌥⌘P follow the common game-editor convention, and Ctrl+P
-     on Windows overrides the browser's Print there. Keep them?
-   - **Runtime read at start.** An entity already selected when Play starts is read once
-     at tick 0, then on Pause, Step and Refresh. Is that the right moment?
-2. **For Astra:**
-   - Gaps 1–8 above.
-   - The final native-window review: the native viewport under the game view's ring, the
-     WKWebView focus and keyboard routing, the macOS ⌘ release behaviour, and input
-     numerics with a real game.
+1. **For the root:**
+   - Build a binary from this source, so the two fixes can be accepted natively.
+   - Route the Splitter defect to a shell UI packet.
+2. **For Astra:** notes 2 and 5–10 above.
+3. **For the director:** none. The routine choices are settled by the revision.
