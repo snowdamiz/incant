@@ -12,14 +12,17 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def main():
+def arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     suffix = '.exe' if os.name == 'nt' else ''
     parser.add_argument('--headless-binary', type=Path, default=ROOT / f'target/release/incant_headless{suffix}')
     parser.add_argument('--cook-binary', type=Path, default=ROOT / f'target/release/examples/cook_scene{suffix}')
     parser.add_argument('--runtime-binary', type=Path, default=ROOT / f'target/release/examples/run_scene{suffix}')
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def phases(args, session=None):
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
     headless = args.headless_binary.resolve()
@@ -56,6 +59,12 @@ def main():
     # must start from the cooked image after both source and history are gone.
     project.unlink()
     journal.unlink()
+    if session:
+        session.input_directory(project)
+        session.input_directory(journal)
+    yield  # All authoring inputs are gone; the suite removes shared build storage.
+    if session:
+        session.assert_ready()
 
     def run(ticks):
         return subprocess.check_output([str(runtime), str(scene_file), str(ticks)], cwd=out, text=True)
@@ -83,6 +92,11 @@ def main():
     (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
     (out / 'run.txt').write_text(first)
     print(json.dumps(result))
+
+
+def main():
+    for _ in phases(arguments()):
+        pass
 
 
 if __name__ == '__main__':
