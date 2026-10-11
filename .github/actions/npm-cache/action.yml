@@ -1,5 +1,5 @@
 name: npm download cache
-description: Restore the existing npm namespace; only default-branch jobs may save.
+description: Restore the existing npm namespace; only default and frozen candidate jobs may save.
 inputs:
   lock-file:
     description: One lockfile path relative to the repository root.
@@ -14,15 +14,17 @@ runs:
         INCANT_NPM_ACTION_PATH: ${{ github.action_path }}
         NPM_LOCK_FILE: ${{ inputs.lock-file }}
         NPM_LOCK_HASH: ${{ hashFiles(inputs.lock-file) }}
+        NPM_CACHE_REF: ${{ github.ref }}
+        NPM_CACHE_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
       run: bash "$INCANT_NPM_ACTION_PATH/metadata.sh"
     - name: Restore without a post-job write
-      if: github.ref != format('refs/heads/{0}', github.event.repository.default_branch)
+      if: steps.metadata.outputs.save != 'true'
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ${{ steps.metadata.outputs.path }}
         key: ${{ steps.metadata.outputs.key }}
-    - name: Restore and save on successful default-branch completion
-      if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    - name: Restore and save on successful producer completion
+      if: steps.metadata.outputs.save == 'true'
       # The pinned action's post-if is success(); exact hits are not saved again.
       uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
