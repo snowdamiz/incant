@@ -52,3 +52,12 @@ This schedule is host state, not a complete session save or hot-reload snapshot.
 Legacy `initialState`/`onTimer`, serialized payloads and coroutine callbacks remain
 unsupported by this native API. Bounded schedule copies and VM allocations occur;
 there is no allocation-free, mobile performance or full-SDK claim.
+
+Follow-up review found that the pinned binding library's `CString::as_str` assumes
+valid UTF-8 even though QuickJS can retain lone UTF-16 surrogates. Timer IDs now
+use only CString byte length before checked `String::to_string` conversion. Lone
+high/low and mixed surrogates, and non-ASCII valid pairs, reject atomically.
+All 63 script tests/doctests and scoped all-target release Clippy pass after this
+correction. The 48-process shipping result above records the earlier source
+identity; it is not relabeled as a new executable.
+[Correction evidence](evidence/native-timer-surrogates.json).
