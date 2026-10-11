@@ -10,12 +10,14 @@ mod compiler;
 mod diagnostics;
 mod input;
 mod loan;
+mod program;
 mod session;
 mod synchronous;
 
 pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
+pub use program::SessionProgram;
 use rquickjs::{Context, Function, Persistent, Runtime, Value};
 pub use session::{NativeSession, PendingNativeSession, SessionError};
 use std::{

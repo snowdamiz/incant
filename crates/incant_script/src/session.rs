@@ -1,6 +1,6 @@
 //! Fixed-tick native session. Physical input is transient and is not a save/VM
 //! snapshot. A valid packet advances simulation before the synchronous script.
-use crate::{CompiledScript, ScriptError, ScriptHost};
+use crate::{ScriptError, SessionProgram, program::SessionVm};
 use incant_input::{
     InputActions, InputError, InputEvent, InputFrame, InputRuntime, ValidatedActions,
 };
@@ -15,6 +15,9 @@ pub enum SessionError {
     Runtime(#[from] RuntimeError),
     #[error(transparent)]
     Script(#[from] ScriptError),
+    #[cfg(feature = "static-module")]
+    #[error(transparent)]
+    Module(#[from] incant_wasm_runtime::StaticError),
     #[error("native session failed; recreate it before continuing or accessing saveable state")]
     Failed,
 }
@@ -23,10 +26,11 @@ pub enum SessionError {
 /// per-tick project/JSON projection. Invalid packets preserve all state and may
 /// be retried. Once valid input advances, any runtime/script failure permanently
 /// fails this session: the native step is not rolled back, and no world/save or
-/// input access is returned. Script writes retain the host's atomic rollback.
+/// input access is returned. Each guest retains its own bounded write transaction;
+/// there is no rollback of the already accepted input or native simulation step.
 pub struct NativeSession {
     world: NativeWorld,
-    host: ScriptHost,
+    host: SessionVm,
     input: InputRuntime,
     bindings: ValidatedActions,
     failed: bool,
@@ -54,8 +58,8 @@ impl PendingNativeSession {
     pub fn world(&self) -> &NativeWorld {
         &self.world
     }
-    pub fn start(self, script: CompiledScript) -> Result<NativeSession, SessionError> {
-        let host = ScriptHost::new(script)?;
+    pub fn start(self, program: impl Into<SessionProgram>) -> Result<NativeSession, SessionError> {
+        let host = program.into().start()?;
         Ok(NativeSession {
             world: self.world,
             host,
@@ -69,10 +73,10 @@ impl PendingNativeSession {
 impl NativeSession {
     pub fn new(
         scene: CookedScene,
-        script: CompiledScript,
+        program: impl Into<SessionProgram>,
         actions: InputActions,
     ) -> Result<Self, SessionError> {
-        PendingNativeSession::new(scene, actions)?.start(script)
+        PendingNativeSession::new(scene, actions)?.start(program)
     }
 
     fn ready(&self) -> Result<(), SessionError> {
@@ -115,8 +119,7 @@ impl NativeSession {
         // no second whole-world/VM rollback or partially resumable session.
         self.failed = true;
         self.world.step()?;
-        self.host
-            .tick_with_input(&mut self.world, dt, &self.input)?;
+        self.host.tick(&mut self.world, dt, &self.input)?;
         self.failed = false;
         Ok(())
     }
