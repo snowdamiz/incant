@@ -433,6 +433,25 @@ function agentFailure(error: unknown): BridgeError {
   return { code: 'agent.transport', message: 'Could not contact the native agent. Refresh the session to retry.' };
 }
 const invalidAgentResponse = () => ({ code: 'agent.invalid-response', message: 'The native agent returned an invalid response. Refresh the session to retry.' });
+const providerTransportError = (): BridgeError => ({ code: 'provider.transport', message: 'Could not read the saved OpenAI connection. Retry the account operation.' });
+/** Native pending states may retain the prior account's safe display metadata. */
+function validProviderState(value: unknown): value is ProviderState {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const state = value as Record<string, unknown>;
+  const allowed = ['status', 'provider', 'accounts', 'activeAccount', 'message', 'method', 'phase', 'accountLabel', 'error'];
+  if (Object.keys(state).some(key => !allowed.includes(key)) || state.provider !== 'openai'
+    || !['checking', 'not-connected', 'connecting', 'connected', 'error'].includes(state.status as string)) return false;
+  if (state.accounts !== undefined && (!Array.isArray(state.accounts)
+    || state.accounts.some(account => !fields(account, ['id', 'label']) || typeof account.id !== 'string' || typeof account.label !== 'string'))) return false;
+  if (['activeAccount', 'message', 'accountLabel'].some(key => state[key] !== undefined && typeof state[key] !== 'string')) return false;
+  if (state.method !== undefined && !['oauth', 'api-key'].includes(state.method as string)
+    || state.phase !== undefined && !['browser', 'validating'].includes(state.phase as string)) return false;
+  if (state.error !== undefined && (!fields(state.error, ['code', 'message'])
+    || typeof state.error.code !== 'string' || typeof state.error.message !== 'string')) return false;
+  if (state.status === 'connected') return state.method !== undefined && typeof state.accountLabel === 'string';
+  if (state.status === 'connecting') return state.method !== undefined;
+  return state.status !== 'error' || state.error !== undefined;
+}
 export class NativeBridge implements EditorBridge {
   readonly protocolVersion = 1;
   readonly capabilities = [
@@ -471,6 +490,7 @@ export class NativeBridge implements EditorBridge {
   private chrome: WindowChrome | undefined;
   private provider: ProviderState = { status: "checking", provider: "openai" };
   private providerGeneration = 0;
+  private providerReadSequence = 0;
   private agentSession: AgentSessionSnapshot | undefined;
   private agentVerified = false;
   private agentError: BridgeError | undefined;
@@ -533,12 +553,33 @@ export class NativeBridge implements EditorBridge {
     if ((this.agentSession || this.agentPolling) && !this.providerPending) void this.refreshAgent();
   }
   async startProviderUpdates(listen?: Listen) {
-    if (listen) await listen<ProviderState>("incant:provider-changed", (event) => this.updateProvider(event.payload));
     const generation = this.providerGeneration;
     try {
-      const provider = await this.invoke<ProviderState>("provider_read");
-      if (generation === this.providerGeneration) this.updateProvider(provider);
-    } catch (error) { if (generation === this.providerGeneration) throw error; }
+      if (listen) await listen<unknown>("incant:provider-changed", () => {
+        // Events are hints, including null/late payloads. Only a current native read is authoritative.
+        ++this.agentGeneration;
+        this.agentVerified = false;
+        this.publishAgent();
+        void this.refreshProvider().catch(() => console.error('Native provider update could not be published.'));
+      });
+      await this.refreshProvider();
+    } catch {
+      if (generation === this.providerGeneration) this.updateProvider({ status: 'error', provider: 'openai', error: providerTransportError() });
+    }
+  }
+  private async refreshProvider(generation = this.providerGeneration): Promise<BridgeResult> {
+    if (generation !== this.providerGeneration) return { ok: true };
+    const sequence = ++this.providerReadSequence;
+    try {
+      const provider = await this.invoke<unknown>('provider_read');
+      if (!validProviderState(provider)) throw providerTransportError();
+      if (generation === this.providerGeneration && sequence === this.providerReadSequence) this.updateProvider(provider);
+      return { ok: true };
+    } catch {
+      const error = providerTransportError();
+      if (generation === this.providerGeneration && sequence === this.providerReadSequence) this.updateProvider({ status: 'error', provider: 'openai', error });
+      return { ok: false, error };
+    }
   }
   async startWindowUpdates(listen?: Listen) {
     if (listen)
@@ -883,10 +924,13 @@ export class NativeBridge implements EditorBridge {
       this.publishAgent();
       try {
         await this.invoke("provider_action", { action: request.type.slice("provider.".length), accountId: "accountId" in request ? request.accountId ?? null : null, add: "add" in request ? request.add ?? false : false });
-        const provider = await this.invoke<ProviderState>("provider_read");
-        if (providerGeneration === this.providerGeneration) this.updateProvider(provider);
-        return { ok: true };
-      } catch (error) { return failure(error); }
+        return await this.refreshProvider(providerGeneration);
+      } catch (error) {
+        // A failed scheduling receipt may follow a native state transition.
+        // Re-read for recovery without replacing the caller's original failure.
+        await this.refreshProvider(providerGeneration);
+        return failure(error);
+      }
       finally {
         --this.providerPending;
         this.publishAgent();
@@ -945,7 +989,7 @@ export function installNativeBridge(): NativeBridge | undefined {
   void bridge.startEngineUpdates(host.__TAURI__?.event?.listen);
   void bridge.startHistoryRequests(host.__TAURI__?.event?.listen)
     .catch(() => console.error("Native history menu could not be connected."));
-  void bridge.startProviderUpdates(host.__TAURI__?.event?.listen).catch(() => bridge.updateProvider({ status: "error", provider: "openai", error: { code: "provider.transport", message: "Could not read the saved OpenAI connection. Restart Incant to retry." } }));
+  void bridge.startProviderUpdates(host.__TAURI__?.event?.listen).catch(() => console.error('Native provider updates could not be published.'));
   void bridge
     .startWindowUpdates(host.__TAURI__?.event?.listen)
     .catch(() => console.error("Native window state could not be connected."));
