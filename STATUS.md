@@ -491,3 +491,13 @@ compiler-disabled/static and dependency checks. Static checkpoints remain refuse
 Packaged-font text integration against actual main105 passes all 15 actual-font
 tests, Clippy, standalone wasm32 and runtime dependency checks, preserving all
 935 prior lock records. [Integrated evidence](docs/spikes/evidence/native-game-text-main105.json).
+## Cooked skeletal-animation foundation
+
+The bounded glTF skin/TRS import, INCMOD04 cooked reader and retained CPU sampler
+are implemented with reviewed clip-only root validation; see
+[scope and evidence](docs/spikes/gltf-skeletal-animation.md). Static03 compatibility
+is preserved. Current static asset/render/navigation consumers explicitly refuse
+animated models. Native scene/GPU/SDK playback, blend/state/IK/root-motion and
+rendered acceptance remain outstanding; this does not complete Phase 1 animation.
+
+Skeletal foundation main106 union passes 90 integrated CPU tests, Clippy, audio-only/wasm32 compilation and dependency checks, with reviewed source unchanged. [Integration evidence](docs/spikes/evidence/gltf-skeletal-main106.json).

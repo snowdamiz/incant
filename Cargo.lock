@@ -3870,6 +3870,7 @@ dependencies = [
 name = "incant_assets_runtime"
 version = "0.0.1"
 dependencies = [
+ "glam 0.32.1",
  "incant_2d",
  "incant_types",
  "ktx2",

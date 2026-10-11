@@ -151,12 +151,13 @@ impl RuntimeAsset {
     }
     pub fn load_model(id: &str, generation: u64, cache: &Path, fingerprint: &str) -> Result<Self> {
         Self::check_id(id)?;
-        Self::create(
-            id,
-            generation,
-            fingerprint,
-            RuntimeAssetData::Model(crate::load_model(cache, fingerprint)?),
-        )
+        let model = crate::load_model(cache, fingerprint)?;
+        if model.animation.is_some() {
+            return Err(crate::AssetError::Unsupported(
+                "animated model rendering is not implemented; use the CPU AnimationPlayer".into(),
+            ));
+        }
+        Self::create(id, generation, fingerprint, RuntimeAssetData::Model(model))
     }
     pub fn load_texture(
         id: &str,
