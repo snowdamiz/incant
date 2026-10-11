@@ -241,6 +241,20 @@ describe('asset library', () => {
     expect(host.commands).toEqual([]);
   });
 
+  it('sends supported atlas and audio paths through one atomic import command', async () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    openImport();
+    fireEvent.paste(pathInput(1), { clipboardData: { getData: () => 'sprites/ui.atlas.json\naudio/theme.wav\naudio/hit.OGG' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Import 3 files' }));
+    expect(host.commands).toEqual([{
+      type: 'asset.import',
+      sources: [{ source: 'sprites/ui.atlas.json' }, { source: 'audio/theme.wav' }, { source: 'audio/hit.OGG' }],
+    }]);
+    await host.resolve({ ok: true });
+  });
+
   it('imports a batch as one command, sending usage only for images that change it', async () => {
     const host = controlledBridge();
     const { container } = renderWith(host.bridge);
