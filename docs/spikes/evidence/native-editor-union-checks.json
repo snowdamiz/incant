@@ -127,5 +127,28 @@
     "merge_receipt_sha256": "e419a50176e4d271f934422bf3e1fd72b876032e9c7186d1c575b5809dfa358d",
     "validation_evidence": "web-renderer-main102-integration.json",
     "scope": "Clean ancestry-preserving merge of reviewed WebGPU ownership repair. Renderer source matches the already tested main103 inputs; no redundant test run or new browser/GPU acceptance claim. Current editor service logic and UI source unchanged. Native0048 remains on separately bound immutable bb1b517."
+  },
+  "main104_integration": {
+    "recorded_at": "2026-10-11T23:29:45.397294+00:00",
+    "source_commit": "4d4ef2a28e0c751f8960a6ec97c4a4d6417bb562",
+    "merged_main": "3da7185ecd86917d9f4fa06b0999035b75b964e1",
+    "tests": {
+      "passed": 180,
+      "failed": 0,
+      "ignored": 1,
+      "groups": 11
+    },
+    "clippy": "passed",
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-editor-main104-tests.log",
+        "sha256": "2751f227dfc8742cc109aeb9248ff7687d72fa6fe14d546c02343975804d639b"
+      },
+      "clippy": {
+        "path": "/tmp/incant-editor-main104-clippy.log",
+        "sha256": "24774f511b59dbed1f9f9388034e3b81fff6f93f8ac6940fbade8117e8db7fb3"
+      }
+    },
+    "scope": "Exported game checkpoints integrated with editor/native-agent/script; ordinary scoped CPU checks. Native0048 remained on immutablebb1b517, and its two UI source fixes require rebuilt native verification."
   }
 }

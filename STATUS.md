@@ -23,12 +23,13 @@ authored scripting, imports, physics, audio, input and source-free exports have
 working, tested paths, but the complete Core Sample and its device gates remain
 ahead. Editor and agent work overlaps later phases without completing their gates.
 
-Native Wasm logging, desktop gamepad input, opt-in session checkpoints and the
-browser renderer compile repair are merged into main. Current parallel work
-connects checkpoints to the exported player, validates the native editor's
-Play/chat/budget controls, extends Wasm localization, and cooks shaders before
-runtime startup. Complete
-animation, game UI/text, remaining SDK/render features, and the required sample
+Native Wasm logging, desktop gamepad input, session and exported-player
+checkpoints, and the browser renderer compile repair are merged into main.
+The actual native editor Play/chat/budget review completed one real account-backed
+turn, Undo and reopen with retained login and usage. Two discovered UI defects
+are fixed and built locally; focused native rechecking remains. Parallel work
+covers skeletal animation, packaged-font text shaping, Wasm localization and
+shader cooking. Complete game UI, remaining SDK/render features, the Core Sample
 and reference-device measurements still prevent a Phase 1 completion claim.
 
 ## Native editor agent integration — in progress
@@ -42,9 +43,9 @@ QuickJS state between threads. Actual cross-turn query, failed candidate and
 replacement controls pass alongside cancellation/shutdown/panic checks. The
 provider invalidation listener is integrated with its intervening-read race fixed.
 The current editor/script/native-agent union passes 180 scoped Rust tests and
-all-target Clippy after integrating main102 session checkpoints. Claude’s chat UI is integrated with retained
+all-target Clippy after integrating main104 exported-player checkpoints. Claude’s chat UI is integrated with retained
 conversation resizing, accurate denial/failure messages and cause-neutral uncertain
-usage. The current combined UI suite passes 902 tests; strict app/test types and the
+usage. The current combined UI suite passes 904 tests; strict app/test types and the
 editor build pass. The corrected native cap-change and gameplay-focus fences pass 39 editor tests and Clippy. Four real native-handler turns used
 the saved ChatGPT login for approved edits, native Play and a later retained-state
 query; Undo and exact journal/account recovery passed after reopening. Claude's
@@ -52,11 +53,12 @@ Play, chat and project-budget controls are integrated. Independent review found
 an approval-button hold missing during Undo/Redo: the native admission remains
 safe, and both the explicit readiness metadata and UI consumer are now corrected.
 Twelve deferred-IPC regressions and the combined 902-test UI suite pass; combined
-native visual/WebView acceptance remains pending. Native Play now exposes its saved-project
-prerequisite before Start while retaining Stop and legacy-host behavior; actual
-unsaved-window acceptance remains pending ([evidence](docs/spikes/native-editor-play.md)).
-The reviewed splitter input correction is integrated with 15 regression tests;
-actual native acceptance remains pending alongside the budget controls.
+native visual/WebView acceptance passed on the separately identified main100
+build. Actual unsaved/saved Play, input focus, splitters, allowance edits and a
+real approved agent rename were checked, including Undo and reopening with the
+same account and 22,044 charged tokens. Two new source fixes address picker
+focus loss and a clipped model field; the rebuilt main104 union awaits focused
+native acceptance ([review](handoffs/0048-native-editor-integration/result.md)).
 No completed Phase 3 gate is claimed.
 [Binding evidence](docs/spikes/native-editor-agent.md),
 [persistent owner evidence](docs/spikes/persistent-native-agent-host.md),
@@ -79,7 +81,9 @@ ledger and recovered authored cap; invocation limits cannot refund usage or rais
 the project cap. Its 16 tests, scoped Clippy and independent integration review
 pass ([headless evidence](docs/spikes/headless-agent-budgets.md)). Claude-owned
 controls and the approval-readiness correction are integrated; combined native
-WebView/appearance acceptance remains in progress.
+WebView/appearance acceptance passed on its main100 build, with 22,044 tokens
+retained after Undo, reopen and a lowered cap. Rechecking the two UI fixes on
+the rebuilt main104 union remains.
 [Control integration review](docs/spikes/evidence/native-agent-allowance-integration.json).
 [Budget accounting evidence](docs/spikes/agent-project-budget.md).
 

@@ -1,0 +1,79 @@
+{
+  "kind": "root-integration-review",
+  "recorded_at": "2026-10-11T23:29:45.397294+00:00",
+  "reviewed_claude_commits": [
+    "10ee9e5",
+    "19ceada"
+  ],
+  "native_build": {
+    "source_commit": "bb1b517034386021b49541221c72500316e0ccb2",
+    "packet_commit": "62dcfcf",
+    "manifest": {
+      "path": "/tmp/incant-native-review-0048-final-bin-v1/manifest.json",
+      "sha256": "b2f83ac7b598f68fa5b0cf148718e4a5c6f086599f05d2329c0bff03458f606e"
+    },
+    "editor": {
+      "path": "/tmp/incant-native-review-0048-final-bin-v1/incant_editor",
+      "sha256": "3d059445c3691b219ff8cc2c6d990645af7f64bbeccee737b4dae4f9753c6603"
+    },
+    "headless": {
+      "sha256": "68a2a04bbbb767cb65cedf1cfa8d62ec95c2064a69e63289a78fd67c8764873c",
+      "launched": false
+    },
+    "hash_checked": "before every launch by tools/native/launch.sh"
+  },
+  "source_review": [
+    "picker unmount layout cleanup moves focus only if that control held focus",
+    "fixed model width preserves the existing bounded input sizing contract"
+  ],
+  "verified_usage": {
+    "sha256": "91cecc821692d0e478ef453384f00ca5daf3a5157c7ec441319d97d939d4ce09",
+    "record": {
+      "version": 1,
+      "charged_tokens": 22044,
+      "accounting_uncertain": false,
+      "pending": null
+    }
+  },
+  "verified_screenshot_hashes": 25,
+  "screen_review": "Claude only; root checked artifact integrity, not pixels",
+  "root_scoped_rust_tests": {
+    "passed": 180,
+    "failed": 0,
+    "ignored": 1,
+    "groups": 11
+  },
+  "root_scoped_clippy": "passed",
+  "native_follow_up": "New UI fixes require rebuilt immutable binary; zero further provider turns granted.",
+  "root_ui_checks": {
+    "passed": 904,
+    "files": 44,
+    "types": "strict app/node/test passed",
+    "bridge": "passed",
+    "production_build": "passed",
+    "native_build": "passed",
+    "logs": {
+      "typecheck": {
+        "path": "/tmp/incant-editor-0048-typecheck.log",
+        "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+      },
+      "tests": {
+        "path": "/tmp/incant-editor-0048-ui-tests.log",
+        "sha256": "c30aecff3a0f10583b41f81e9dafca4dc3973ef251795bb4ff3680796fe9fead"
+      },
+      "production_build": {
+        "path": "/tmp/incant-editor-0048-ui-build.log",
+        "sha256": "d88975f9c77f446cee4a4b8d894ab50b10f81d9aca9b46411c3ce41e423d3429"
+      },
+      "bridge": {
+        "path": "/tmp/incant-editor-0048-bridge-check.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "native_build": {
+        "path": "/tmp/incant-editor-0048-fixed-build.log",
+        "sha256": "4a9a949262a9f4030fe00dc160327f2577eb86c3a288d3141a998e13722fbb5f"
+      }
+    }
+  },
+  "follow_up_packet": "handoffs/0050-native-editor-focus-fit"
+}
