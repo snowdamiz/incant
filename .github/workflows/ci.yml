@@ -36,7 +36,9 @@ jobs:
           fetch-depth: ${{ needs.classify.result == 'success' && needs.classify.outputs.scope == 'docs' && '0' || '1' }}
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        with: {node-version: '22.23.3', cache: npm}
+        with: {node-version: '22.23.3'}
+      - uses: ./.github/actions/npm-cache
+        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with: {python-version: '3.12'}
       - name: Validate classified documentation inputs
