@@ -1,0 +1,35 @@
+{
+  "candidate": "b84a9bf318c9fa6005d7a5d3524941da2eb4546e",
+  "run": 38155060407,
+  "job": 114516221927,
+  "log_bytes": 108854,
+  "log_sha256": "f47b9284df6aa9e7487db283df6df879c6949c90af8f9d349a808106ae974416",
+  "conclusion": "failure",
+  "failed_case": "journal_replays_registration_replacement_removal_and_original_actors",
+  "reason": "Windows OS33 reading a persistent journal while the same test owns its exclusive lock",
+  "rerun_dispatched": false,
+  "production_changes": false,
+  "fix_scope": "test-only journal read lifetime; production untouched",
+  "source_sha256": "745f6d9627d68219de4f4ab607a3079953994d80cf4b9df9bfde32005f4af645",
+  "local_tests": 6,
+  "local_clippy": "incant_cmd scripts test target; warnings denied; passed",
+  "local_platform": "macOS ARM64; Windows confirmation pending next complete candidate",
+  "review": {
+    "reviewer": "/root",
+    "result": "accepted scoped diff; full byte/state/history/revision/redo assertions preserved"
+  },
+  "artifacts": {
+    "/tmp/incant-checkpoint1-windows-failure.log": {
+      "bytes": 108854,
+      "sha256": "f47b9284df6aa9e7487db283df6df879c6949c90af8f9d349a808106ae974416"
+    },
+    "/tmp/incant-script-journal-portability-tests.log": {
+      "bytes": 1364,
+      "sha256": "c52c87ea6f36bb6ccc94eb2cb913994e2ed7292845e9749934a54224bd403b92"
+    },
+    "/tmp/incant-script-journal-portability-clippy.log": {
+      "bytes": 1396,
+      "sha256": "3948015b692b45920e4571e976b4ee1f4918d313416acc1626f8e9a56a3b2488"
+    }
+  }
+}

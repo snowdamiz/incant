@@ -309,7 +309,15 @@ fn journal_replays_registration_replacement_removal_and_original_actors() {
         )
         .unwrap();
         registered = bus.project().clone();
+        let registered_history = bus.history().to_vec();
+        // Windows enforces the journal's exclusive lock for reads as well.
+        drop(bus);
         let journal = std::fs::read(&path).unwrap();
+        let mut bus = CommandBus::persistent(&path, project.clone()).unwrap();
+        assert_eq!(bus.project(), &registered);
+        assert_eq!(bus.history(), registered_history);
+        assert_eq!(bus.revision(), 1);
+        assert!(!bus.can_redo());
         assert_refused(
             &mut bus,
             Command::RemoveScript {
@@ -317,7 +325,13 @@ fn journal_replays_registration_replacement_removal_and_original_actors() {
             },
             "script source does not exist",
         );
+        drop(bus);
         assert_eq!(std::fs::read(&path).unwrap(), journal);
+        let mut bus = CommandBus::persistent(&path, project.clone()).unwrap();
+        assert_eq!(bus.project(), &registered);
+        assert_eq!(bus.history(), registered_history);
+        assert_eq!(bus.revision(), 1);
+        assert!(!bus.can_redo());
         script.path = "scripts/replacement.ts".into();
         bus.execute(
             vec![Command::UpsertScript {

@@ -26,6 +26,8 @@ formatting, generated checks and actionlint; [evidence](docs/spikes/release-chec
 PR83 merged after its exact-head fast check passed: 2s queue and119s execution. Main requires that fast check; release was bootstrapped at fully checked main82 and requires all22 full contexts. Both enforce administrators and prohibit force pushes/deletion. The three-hour heartbeat is active; the first full checkpoint remains pending. The historical missing-Wasm-target failure remains recorded separately.
 No phase, live-provider or physical-device performance gate is waived.
 
+The initial frozen checkpoint PR85 found a Windows-only journal test lock violation. A reviewed test-only lifetime correction passes all six scoped cases and Clippy locally; Windows confirmation and complete release promotion remain pending. [Failure and repair evidence](docs/spikes/script-journal-test-portability.md).
+
 ## Current integration and parallel work
 
 | Workstream | Current result | Next work / boundary |
