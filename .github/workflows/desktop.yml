@@ -1,12 +1,8 @@
 name: Desktop editor and engine
+# Full validation runs once per frozen release checkpoint.
 on:
   push:
-    branches: [main]
-    # Refill shared dependencies when their inputs change, without repeating
-    # this matrix after every source-only merge.
-    paths: ['Cargo.lock', '**/Cargo.lock', 'Cargo.toml', '**/Cargo.toml', 'rust-toolchain', 'rust-toolchain.toml', '.cargo/**', '.github/workflows/desktop.yml', '.github/actions/npm-cache/**']
-  pull_request:
-    paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', '.cargo/**', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'package*.json', 'tools/probes/**', 'tools/shipping*.py', 'tools/tests/test_shipping.py', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml', '.github/actions/npm-cache/**']
+    branches: [codex/release-candidate]
   workflow_dispatch:
 permissions:
   contents: read
@@ -44,8 +40,8 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # Share one default-branch dependency set; all PRs only restore.
-          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+          # Only the exact candidate push trigger produces reusable dependencies.
+          save-if: ${{ github.event_name == 'push' }}
       # Avoid retaining both the obsolete release and new CI target graphs.
       # Fresh shipping storage is independent of this target cleanup.
       - run: cargo clean --profile release
