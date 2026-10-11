@@ -1,0 +1,358 @@
+{
+ "children": [
+  {
+   "seq": 1,
+   "run": "d1",
+   "label": "init textures",
+   "pid": 15470,
+   "exit": 0,
+   "timed_out": false,
+   "kind": null,
+   "output_sha256": null
+  },
+  {
+   "seq": 2,
+   "run": "d1",
+   "label": "textures import models/tex_embedded.fbx",
+   "pid": 15472,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 3,
+   "run": "d1",
+   "label": "textures import models/tex_external.fbx",
+   "pid": 15473,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 4,
+   "run": "d1",
+   "label": "textures import models/normal_embedded.fbx",
+   "pid": 15474,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 5,
+   "run": "d1",
+   "label": "textures import models/instances.fbx",
+   "pid": 15475,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 6,
+   "run": "d1",
+   "label": "textures import controls/quad_face_art.glb",
+   "pid": 15476,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 7,
+   "run": "d1",
+   "label": "textures import controls/relief.glb",
+   "pid": 15477,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 8,
+   "run": "d1",
+   "label": "textures import controls/quad_normal_explicit.glb",
+   "pid": 15478,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 9,
+   "run": "d1",
+   "label": "textures import controls/quad_normal_generated.glb",
+   "pid": 15479,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 10,
+   "run": "d1",
+   "label": "textures read revision",
+   "pid": 15480,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "rpc",
+   "output_sha256": null
+  },
+  {
+   "seq": 11,
+   "run": "d1",
+   "label": "textures Texture review layout",
+   "pid": 15481,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "rpc",
+   "output_sha256": null
+  },
+  {
+   "seq": 12,
+   "run": "d1",
+   "label": "textures controls_ortho",
+   "pid": 15482,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "45f62126514ba5bdc23496dd89c6d7104ff95ceb467ed1a23508b5e570600405"
+  },
+  {
+   "seq": 13,
+   "run": "d1",
+   "label": "textures instances_ortho",
+   "pid": 15483,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "279cc4ca55f7a881c4e1bb77b2ccc91bf2e4d7a6c50487f8341c11607603c8b3"
+  },
+  {
+   "seq": 14,
+   "run": "d1",
+   "label": "textures instances_front_right_top",
+   "pid": 15484,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "bb16b5a26969058df4a9f67ec047bde42ebc051a869b2309594431bbfb2680b8"
+  },
+  {
+   "seq": 15,
+   "run": "d1",
+   "label": "textures instances_back_left_bottom",
+   "pid": 15485,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "65310cf48087ef611944e9cd6b7527cbb254c336096537d1e6bf054331621389"
+  },
+  {
+   "seq": 16,
+   "run": "d1",
+   "label": "textures controls_front_right_top",
+   "pid": 15495,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "ba54fd98134d35a513ed4b75cc6ef9f2eec10728b57f1f79e3154ddf7d9c90cb"
+  },
+  {
+   "seq": 17,
+   "run": "d1",
+   "label": "textures controls_ortho-source-free",
+   "pid": 15496,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "45f62126514ba5bdc23496dd89c6d7104ff95ceb467ed1a23508b5e570600405"
+  },
+  {
+   "seq": 18,
+   "run": "d1",
+   "label": "textures instances_ortho-source-free",
+   "pid": 15497,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "279cc4ca55f7a881c4e1bb77b2ccc91bf2e4d7a6c50487f8341c11607603c8b3"
+  },
+  {
+   "seq": 19,
+   "run": "d1",
+   "label": "textures validate source-free",
+   "pid": 15498,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "validate",
+   "output_sha256": null
+  },
+  {
+   "seq": 20,
+   "run": "d1",
+   "label": "init textures-twin",
+   "pid": 15521,
+   "exit": 0,
+   "timed_out": false,
+   "kind": null,
+   "output_sha256": null
+  },
+  {
+   "seq": 21,
+   "run": "d1",
+   "label": "textures-twin import models/tex_embedded.glb",
+   "pid": 15522,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 22,
+   "run": "d1",
+   "label": "textures-twin import models/normal_embedded.glb",
+   "pid": 15523,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 23,
+   "run": "d1",
+   "label": "textures-twin import models/instances.glb",
+   "pid": 15524,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 24,
+   "run": "d1",
+   "label": "textures-twin import controls/quad_face_art.glb",
+   "pid": 15525,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 25,
+   "run": "d1",
+   "label": "textures-twin import controls/relief.glb",
+   "pid": 15526,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 26,
+   "run": "d1",
+   "label": "textures-twin import controls/quad_normal_explicit.glb",
+   "pid": 15527,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 27,
+   "run": "d1",
+   "label": "textures-twin import controls/quad_normal_generated.glb",
+   "pid": 15528,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "import",
+   "output_sha256": null
+  },
+  {
+   "seq": 28,
+   "run": "d1",
+   "label": "textures-twin read revision",
+   "pid": 15529,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "rpc",
+   "output_sha256": null
+  },
+  {
+   "seq": 29,
+   "run": "d1",
+   "label": "textures-twin Texture review layout (twin control)",
+   "pid": 15530,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "rpc",
+   "output_sha256": null
+  },
+  {
+   "seq": 30,
+   "run": "d1",
+   "label": "textures-twin controls_ortho",
+   "pid": 15531,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "45f62126514ba5bdc23496dd89c6d7104ff95ceb467ed1a23508b5e570600405"
+  },
+  {
+   "seq": 31,
+   "run": "d1",
+   "label": "textures-twin instances_ortho",
+   "pid": 15532,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "279cc4ca55f7a881c4e1bb77b2ccc91bf2e4d7a6c50487f8341c11607603c8b3"
+  },
+  {
+   "seq": 32,
+   "run": "d1",
+   "label": "textures-twin instances_front_right_top",
+   "pid": 15533,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "bb16b5a26969058df4a9f67ec047bde42ebc051a869b2309594431bbfb2680b8"
+  },
+  {
+   "seq": 33,
+   "run": "d1",
+   "label": "textures-twin instances_back_left_bottom",
+   "pid": 15534,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "65310cf48087ef611944e9cd6b7527cbb254c336096537d1e6bf054331621389"
+  },
+  {
+   "seq": 34,
+   "run": "d1",
+   "label": "textures-twin controls_front_right_top",
+   "pid": 15536,
+   "exit": 0,
+   "timed_out": false,
+   "kind": "screenshot",
+   "output_sha256": "ba54fd98134d35a513ed4b75cc6ef9f2eec10728b57f1f79e3154ddf7d9c90cb"
+  }
+ ],
+ "captures": 12,
+ "raw_bytes": 536691,
+ "adapters": [
+  "Apple M5 Pro"
+ ],
+ "candidate_hash_checked_every_child": true,
+ "written_at": "2026-10-11T01:12:28-04:00",
+ "candidate": {
+  "source_commit": "35f3f0d19f0b495a9337e49025ef3f57a16f6475",
+  "sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506",
+  "binary": "artifacts/tools/incant_headless-tangent"
+ },
+ "process_inventory": "no running process command line contains artifacts/tools/incant_headless-tangent",
+ "release": "All candidate renderer and CLI children have exited and were reaped. The graphics slot can be released; Claude will launch no further renderer for this delta."
+}

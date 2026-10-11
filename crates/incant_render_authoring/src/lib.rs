@@ -67,6 +67,17 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             let mut sprite: incant_doc::SpriteRenderer = serde_json::from_value(value.clone())?;
             let source = asset(project, assets, &sprite.texture, "texture")
                 .ok_or_else(|| SceneError::MissingSprite(sprite.texture.clone()))?;
+            let flipbook = components
+                .get("SpriteFlipbook")
+                .map(|v| serde_json::from_value::<incant_doc::SpriteFlipbook>(v.clone()))
+                .transpose()?;
+            if let Some(f) = &flipbook {
+                sprite.region = f
+                    .frames
+                    .first()
+                    .ok_or(SceneError::Input("flipbook frame count"))?
+                    .clone();
+            }
             if let incant_doc::SpriteRegion::Atlas { frame } = &sprite.region {
                 let region = match source.data() {
                     RuntimeAssetData::Texture(texture) => texture
@@ -83,7 +94,20 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
                 })?;
                 sprite.region = region.into();
             }
-            Some(SpriteInput { source, sprite })
+            let frames = flipbook
+                .as_ref()
+                .map(|f| {
+                    Ok::<_, Box<dyn std::error::Error + Send + Sync>>(Arc::new(
+                        SpriteFrames::resolve(&source, &sprite, &f.frames)?,
+                    ))
+                })
+                .transpose()?;
+            Some(SpriteInput {
+                source,
+                sprite,
+                frames,
+                frame: 0,
+            })
         } else {
             None
         };

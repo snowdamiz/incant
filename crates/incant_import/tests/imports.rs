@@ -245,7 +245,7 @@ fn malformed_or_ambiguous_requests_fail_before_cooking() {
         Err(ImportError::DuplicateSource(_))
     ));
     assert!(matches!(
-        ImportSnapshot::capture(&bus).prepare(root, None, &[request("a.fbx")]),
+        ImportSnapshot::capture(&bus).prepare(root, None, &[request("a.obj")]),
         Err(ImportError::Unsupported(_))
     ));
     let mut model = request("a.gltf");

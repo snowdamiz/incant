@@ -3775,6 +3775,7 @@ dependencies = [
  "symphonia",
  "tempfile",
  "thiserror 2.0.21",
+ "ufbx",
 ]
 
 [[package]]
@@ -4096,6 +4097,7 @@ dependencies = [
 name = "incant_platform_smoke"
 version = "0.0.1"
 dependencies = [
+ "incant_assets",
  "incant_core",
  "incant_doc",
  "incant_input",
@@ -8732,6 +8734,15 @@ dependencies = [
  "memoffset",
  "tempfile",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "ufbx"
+version = "0.11.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "260522f1eb74139f0e78b29dd82a58e5437d728c5498024a39e5af7282694240"
+dependencies = [
+ "cc",
 ]
 
 [[package]]

@@ -358,3 +358,35 @@ fn sync_removes_deleted_entities_and_resets_components_while_moving_scenes() {
     );
     assert_eq!(state.tick, 61);
 }
+
+#[test]
+fn legacy_gameplay_refuses_flipbooks_instead_of_silently_running_a_static_sprite() {
+    let mut project = Project::empty("Native flipbook capability");
+    let mut scene = Scene::new("Main");
+    let mut entity = positioned("Sprite", [0.; 3]);
+    let texture = new_id();
+    project.assets.insert(
+        texture.clone(),
+        Asset {
+            id: texture.clone(),
+            name: "Texture".into(),
+            path: "absent.png".into(),
+            kind: "texture".into(),
+            sha256: "0".repeat(64),
+            import_settings: None,
+        },
+    );
+    entity.components.insert("SpriteRenderer".into(),json!({"texture":texture,"region":[0,0,1,1],"size":[1,1],"pivot":[0.5,0.5],"tint":[1,1,1,1],"mode":{"kind":"simple"}}));
+    entity.components.insert("SpriteFlipbook".into(),json!({"frames":[[0,0,1,1]],"rate":{"numerator":1,"denominator":1},"looping":true,"playing":true}));
+    scene.entities.insert(entity.id.clone(), entity);
+    project.scenes.insert(scene.id.clone(), scene);
+    project.validate().unwrap();
+    assert!(
+        Engine::new(&project)
+            .err()
+            .unwrap()
+            .to_string()
+            .contains("SpriteFlipbook gameplay is unsupported")
+    );
+    assert_eq!(incant_core::project_entities(&project).unwrap().len(), 1);
+}

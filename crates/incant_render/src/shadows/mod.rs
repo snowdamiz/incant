@@ -31,7 +31,7 @@ pub(crate) struct ShadowSystem {
     cameras: wgpu::BindGroupLayout,
     sampler: wgpu::Sampler,
     atlas: Mutex<Option<Arc<Atlas>>>,
-    pipelines: Mutex<HashMap<PipelineKey, wgpu::RenderPipeline>>,
+    pipelines: HashMap<PipelineKey, wgpu::RenderPipeline>,
 }
 pub(crate) struct ShadowLayer {
     pub view: wgpu::TextureView,
@@ -44,21 +44,42 @@ pub(crate) struct PreparedShadows {
     pub layers: Vec<ShadowLayer>,
 }
 impl ShadowSystem {
-    pub fn new(device: &wgpu::Device) -> Self {
+    pub fn new(device: &wgpu::Device, materials: &wgpu::BindGroupLayout) -> Self {
+        let cameras = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
+            label: Some("Directional cascade camera"),
+            entries: &[wgpu::BindGroupLayoutEntry {
+                binding: 0,
+                visibility: wgpu::ShaderStages::VERTEX,
+                ty: wgpu::BindingType::Buffer {
+                    ty: wgpu::BufferBindingType::Uniform,
+                    has_dynamic_offset: false,
+                    min_binding_size: None,
+                },
+                count: None,
+            }],
+        });
+        let shader = pipeline::shader(device);
+        let mut pipelines = HashMap::new();
+        for alpha in [
+            incant_assets_runtime::AlphaMode::Opaque,
+            incant_assets_runtime::AlphaMode::Mask,
+        ] {
+            for double_sided in [false, true] {
+                for mirrored in [false, true] {
+                    let key = PipelineKey {
+                        alpha,
+                        double_sided,
+                        mirrored,
+                    };
+                    pipelines.insert(
+                        key,
+                        pipeline::build(device, &shader, &cameras, materials, key),
+                    );
+                }
+            }
+        }
         Self {
-            cameras: device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
-                label: Some("Directional cascade camera"),
-                entries: &[wgpu::BindGroupLayoutEntry {
-                    binding: 0,
-                    visibility: wgpu::ShaderStages::VERTEX,
-                    ty: wgpu::BindingType::Buffer {
-                        ty: wgpu::BufferBindingType::Uniform,
-                        has_dynamic_offset: false,
-                        min_binding_size: None,
-                    },
-                    count: None,
-                }],
-            }),
+            cameras,
             sampler: device.create_sampler(&wgpu::SamplerDescriptor {
                 label: Some("Directional shadow comparison"),
                 compare: Some(wgpu::CompareFunction::LessEqual),
@@ -67,7 +88,7 @@ impl ShadowSystem {
                 ..Default::default()
             }),
             atlas: Mutex::new(None),
-            pipelines: Mutex::new(HashMap::new()),
+            pipelines,
         }
     }
     fn atlas(&self, device: &wgpu::Device, lights: usize) -> Result<Arc<Atlas>> {
@@ -180,19 +201,10 @@ impl ShadowSystem {
             }),
         })
     }
-    pub fn pipeline(
-        &self,
-        device: &wgpu::Device,
-        materials: &wgpu::BindGroupLayout,
-        key: PipelineKey,
-    ) -> Result<wgpu::RenderPipeline> {
-        let mut cache = self
-            .pipelines
-            .lock()
-            .map_err(|_| ResourceError::CacheLock("shadow pipeline"))?;
-        Ok(cache
-            .entry(key)
-            .or_insert_with(|| pipeline::build(device, &self.cameras, materials, key))
-            .clone())
+    pub fn pipeline(&self, key: PipelineKey) -> Result<wgpu::RenderPipeline> {
+        self.pipelines
+            .get(&key)
+            .cloned()
+            .ok_or_else(|| ResourceError::UnpreparedPipeline("shadow").into())
     }
 }

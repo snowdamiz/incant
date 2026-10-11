@@ -1,0 +1,122 @@
+{
+  "scope": "generated Mikk handedness only; supplied tangents, UVs, shaders unchanged",
+  "cpu_tests": 101,
+  "gate_tests": 3,
+  "gpu_status": "61 numerical renderer tests passed; Claude Opus 5.5 Max tangent delta accepted",
+  "source_sha256": {
+    "crates/incant_assets/src/tangents.rs": "1fec5d52e5544f1f01e35933740bf0d74bfa6135e9d9a6dab53abe8267513ab8",
+    "crates/incant_assets/src/source.rs": "bfc2d4e160e4afea279a5de657fe03f4d54327d0e4398dba44cc9a02952acff0",
+    "crates/incant_assets/src/fbx/mod.rs": "501f06dfbe3235246a9b299b928d8f130a0001f43a48db4ae8f8fbd066e50f28",
+    "crates/incant_assets/src/cache.rs": "e7f268e633995c807dff18031a15ecf6cf3c423bce495d24e9b64be2f7bbc78e",
+    "crates/incant_assets/src/cache_tests.rs": "4f4c461a5ef970903af0862f80ab5674f1fe46c2e23702dc4f55a222f4fabf5e",
+    "crates/incant_assets/tests/fbx.rs": "c86c65fa8ae4a94e2f2fda282a8a561ada1d35e3b86c1a913f924c6f199381d3",
+    "crates/incant_assets/tests/textures.rs": "364eaac1db111c6e8a0497f8c8c464af678ef8aee236aff28bcbe1ba6bac870b",
+    "crates/incant_render/tests/tangents/mod.rs": "34e84173920516d55d54ce7fd0ef4aaf6e2b1a4a46b3ca5b5ca0ff52b2f6d85d",
+    "crates/incant_render/tests/model_gpu.rs": "af0b1c10c411dd9373c703d36c06e7d7a02d9a23579dd9566c5d1874a59bd660"
+  },
+  "logs": {
+    "before": {
+      "path": "/tmp/incant-fbx-tangent-before.log",
+      "sha256": "439e9c88241b008efdb5ee5c55ee739f45537673c98d0fe39f024900fd52ea03"
+    },
+    "assets": {
+      "path": "/tmp/incant-fbx-tangent-assets.log",
+      "sha256": "558f82cae9dd08c155a6fa4d7d975a3cb9a50373875b9c226a79bee8538d6392"
+    },
+    "clippy": {
+      "path": "/tmp/incant-fbx-tangent-clippy.log",
+      "sha256": "b940a74f0209b61af85734a965da8f5e631ad6f683cf3b877d9b339d0a4470d7"
+    },
+    "gpu-compile": {
+      "path": "/tmp/incant-fbx-tangent-gpu-compile.log",
+      "sha256": "ed86d47dcbfd32a8c1d662d27b689434f9b133f1065548fc93d18b37be02ac06"
+    },
+    "headless-build": {
+      "path": "/tmp/incant-fbx-tangent-headless-build.log",
+      "sha256": "9eb635aba5c2f4c8a66a80523837ec8be2bf31b9bd02993126912ce41751379a"
+    },
+    "scoped": {
+      "path": "/tmp/incant-fbx-tangent-scoped.log",
+      "sha256": "2f31291a7f8c009669df81ab87012fe8ec7b3457660b22999cf0c3e032e59963"
+    },
+    "host-clippy": {
+      "path": "/tmp/incant-fbx-tangent-host-clippy.log",
+      "sha256": "65023585b3c54e55a9caf0b9921e05d216c93b8db8c7d7ae89993409f0b5ccb1"
+    },
+    "gate-tests": {
+      "path": "/tmp/incant-fbx-tangent-gate-tests.log",
+      "sha256": "55acadf0454ddcc94b077c0c2c736842df089ee096c225ff97919952791f409d"
+    },
+    "gpu": {
+      "path": "/tmp/incant-fbx-tangent-gpu.log",
+      "sha256": "0298da6529f68d3db49ece0c119851ab2153ebaf7534e883ba8db6c59a969ede"
+    },
+    "frozen-build": {
+      "path": "/tmp/incant-fbx-tangent-frozen-build.log",
+      "sha256": "d1235ea4563620b53ef5bdd2da5f595fec9d54f9efb48376378c20547dd95e57"
+    },
+    "final-helpers": {
+      "path": "/tmp/incant-fbx-tangent-final-helpers.log",
+      "sha256": "439c63ddaa03fee9db16cd94cbcdaadc61c4649aac0e0335b73e3adc4c4a23e1"
+    },
+    "claude-capture": {
+      "path": "/tmp/incant-fbx-tangent-claude-capture.log",
+      "sha256": "1d69f29abb9c63b7202660eec308242be5aa5c61d63e87a3eef09cc47853c339"
+    }
+  },
+  "prior_appearance": {
+    "source": "90abec1c10bef0e0f0ef3110583faebb812851a6",
+    "binary_sha256": "e5f686ffb6cc00e7761cb643593f48c2047caaadce2a43ee94f1fbfffa6a67fa",
+    "shared_glTF_defect": true,
+    "original_result_preserved": true
+  },
+  "old_cache_policy": "Old immutable versions retain appearance until source reimport; both generations remain readable for Undo/version pinning.",
+  "timing_claim": false,
+  "capture_coordination_limitation": "Two original 0040 material captures finished at 04:34:47Z after gate withdrawal at 04:34:14Z, overlapping the start of union GPU tests; all processes subsequently exited. The separate delta checked an identity-specific grant before every Popen and all 34 children were independently verified reaped before release.",
+  "gpu_tests_passed": 61,
+  "candidate": {
+    "source_commit": "35f3f0d19f0b495a9337e49025ef3f57a16f6475",
+    "source_tree": "e2c09ac1f25c6e43b0b652f6ecf3d9b2eb198e4f",
+    "binary": "artifacts/tools/incant_headless-tangent",
+    "sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506",
+    "bytes": 39470912,
+    "build_command": "./tools/cargo build -p incant_headless --bin incant_headless --release --locked -j2",
+    "build_log": "/tmp/incant-fbx-tangent-frozen-build.log",
+    "target": "aarch64-apple-darwin",
+    "rust": "1.99.0",
+    "host": "macOS-26.6-arm64-arm-64bit-Mach-O",
+    "scope": "generated tangent w and two cook recipe salts; unchanged supplied tangents, UVs, shader and reader",
+    "original_binary_preserved": true
+  },
+  "appearance_delta": {
+    "original_commit": "e010df35bc77e2a0370464551c61e669659f5f23",
+    "integrated_commit": "6860032",
+    "report": "handoffs/0040-static-fbx-import/tangent-delta-result.md",
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "captures": 12,
+    "children": 34,
+    "all_children_exit_zero": true,
+    "committed_capture_hashes_verified": 10,
+    "helper_tests_passed": 17,
+    "source_deleted_repeats_identical": true,
+    "verdict": "accepted within the generated tangent delta",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "backend_evidence": "original binary.json and system_profiler; screenshot output reports adapter but not backend"
+  },
+  "release": {
+    "verified_at_utc": "2026-10-11T05:13:32.146035+00:00",
+    "source": "35f3f0d19f0b495a9337e49025ef3f57a16f6475",
+    "binary_sha256": "b2aed48f61fc310737c05afd945475124f68680aac2021838a510c758ff47506",
+    "captures": 12,
+    "all34_children_exited_zero": true,
+    "all12_capture_hashes_verified": true,
+    "gate_removed": true,
+    "active_candidate_processes": [],
+    "recorded_pids_still_in_inventory": [],
+    "release": "GPU slot released for next coordinated0042; Claude continues CPU-only report, no further candidate execution authorized."
+  },
+  "hosted_status": "Corrected PR77 publication and full hosted matrix await actual main80 integration; obsolete defective-head cancellation is not passing coverage.",
+  "separate_open_defect": "Existing Color mips weight RGB by alpha even for OPAQUE/emissive/environment consumers. Claude0041 found the minification defect; it is outside this tangent-only correction and remains a separately scoped follow-up."
+}

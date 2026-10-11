@@ -1,0 +1,16 @@
+{
+  "adapter": "Apple M5 Pro",
+  "captures": [
+    {
+      "binding_generation": 0,
+      "flipbooks": [],
+      "png": "tick-00000.png",
+      "tick": 0,
+      "topology_generation": 0
+    }
+  ],
+  "height": 360,
+  "scope": "retained native scene frames; no scripts, audio or presentation",
+  "tick_rate": 60,
+  "width": 640
+}

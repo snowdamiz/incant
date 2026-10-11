@@ -1,6 +1,8 @@
 //! Typed renderer input shared by authoring and native extraction. No project,
 //! command bus, importer, GPU or agent dependency. Construct/replace at sync points.
+mod flipbook;
 mod tilemap;
+pub use flipbook::SpriteFrames;
 use glam::DMat4;
 use incant_assets_runtime::RuntimeAsset;
 use incant_types::{Camera, DirectionalLight, PointLight, SpotLight};
@@ -97,7 +99,11 @@ pub struct MeshInput {
 }
 pub struct SpriteInput {
     pub source: Arc<RuntimeAsset>,
+    /// Frozen base configuration; frame regions override only its source region.
     pub sprite: incant_2d::SpriteRenderer,
+    pub frames: Option<Arc<SpriteFrames>>,
+    /// Committed numeric selection, zero for a static sprite.
+    pub frame: u16,
 }
 pub struct EnvironmentInput {
     pub source: Arc<RuntimeAsset>,

@@ -1,0 +1,2713 @@
+{
+  "adapter": "Apple M5 Pro",
+  "captures": [
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000006",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000007",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000008",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000009",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000e",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000010",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000011",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000012",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000013",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000014",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000015",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000016",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000017",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000020",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000027",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000028",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000029",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002b",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002e",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000030",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000031",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000032",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000033",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000034",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000035",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000036",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000037",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000038",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000039",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000041",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000043",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000045",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000047",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000048",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000049",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000004a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000019",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000022",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000026",
+          "frame": 0,
+          "playing": true
+        }
+      ],
+      "png": "tick-00000.png",
+      "tick": 0,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000006",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000007",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000008",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000009",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000a",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000b",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000c",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000d",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000e",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000f",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000010",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000011",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000012",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000013",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000014",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000015",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000016",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000017",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000020",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000027",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000028",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000029",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002a",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002b",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002c",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002d",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002e",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002f",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000030",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000031",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000032",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000033",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000034",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000035",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000036",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000037",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000038",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000039",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003c",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003f",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000041",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000043",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000045",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000047",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000048",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000049",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000004a",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000019",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001b",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001d",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001f",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000022",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000026",
+          "frame": 1,
+          "playing": true
+        }
+      ],
+      "png": "tick-00009.png",
+      "tick": 9,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000006",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000007",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000008",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000009",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000a",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000b",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000c",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000d",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000e",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000f",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000010",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000011",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000012",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000013",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000014",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000015",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000016",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000017",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000020",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000027",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000028",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000029",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002a",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002b",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002c",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002d",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002e",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002f",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000030",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000031",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000032",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000033",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000034",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000035",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000036",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000037",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000038",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000039",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003c",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003f",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000041",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000043",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000045",
+          "frame": 2,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000047",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000048",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000049",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000004a",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000019",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001b",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001d",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001f",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000022",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000026",
+          "frame": 2,
+          "playing": true
+        }
+      ],
+      "png": "tick-00025.png",
+      "tick": 25,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000006",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000007",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000008",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000009",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000e",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000010",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000011",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000012",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000013",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000014",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000015",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000016",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000017",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000020",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000027",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000028",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000029",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "0192882754000000000000000000002a",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002b",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002d",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002e",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002f",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000030",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000031",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000032",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000033",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000034",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000035",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000036",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000037",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000038",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000039",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "0192882754000000000000000000003b",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000041",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000043",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000045",
+          "frame": 2,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000047",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000048",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000049",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000004a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000019",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000022",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000026",
+          "frame": 0,
+          "playing": true
+        }
+      ],
+      "png": "tick-00042.png",
+      "tick": 42,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000006",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000007",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000008",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000009",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000a",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000b",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000c",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000d",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000e",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000f",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000010",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000011",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000012",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000013",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000014",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000015",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000016",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000017",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000020",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000027",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000028",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000029",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002b",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002c",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002d",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002e",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002f",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000030",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000031",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000032",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000033",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000034",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000035",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000036",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000037",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000038",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000039",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "0192882754000000000000000000003b",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003c",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003f",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000041",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000043",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000045",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000047",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000048",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000049",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000004a",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000019",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001b",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001d",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001f",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000022",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000026",
+          "frame": 2,
+          "playing": true
+        }
+      ],
+      "png": "tick-00060.png",
+      "tick": 60,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000006",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000007",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000008",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000009",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000a",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000b",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000c",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000d",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000e",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000f",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000010",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000011",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000012",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000013",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000014",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000015",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000016",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000017",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000020",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000027",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000028",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000029",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002a",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002b",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002c",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002d",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002e",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002f",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000030",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000031",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000032",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000033",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000034",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000035",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000036",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000037",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000038",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000039",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "0192882754000000000000000000003b",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003c",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003f",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000041",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000043",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000045",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000047",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000048",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000049",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000004a",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000019",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001b",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001d",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001f",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000022",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000026",
+          "frame": 3,
+          "playing": true
+        }
+      ],
+      "png": "tick-00069.png",
+      "tick": 69,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000006",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000007",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000008",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000009",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000e",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000010",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000011",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000012",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000013",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000014",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000015",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000016",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000017",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000020",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000027",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000028",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000029",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "0192882754000000000000000000002a",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002b",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002d",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002e",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002f",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000030",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000031",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000032",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000033",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000034",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000035",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000036",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000037",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000038",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000039",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "0192882754000000000000000000003b",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000041",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000043",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000045",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000047",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000048",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000049",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000004a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000019",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000022",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000026",
+          "frame": 0,
+          "playing": true
+        }
+      ],
+      "png": "tick-00420.png",
+      "tick": 420,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000006",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000007",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000008",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000009",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000e",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000000f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000010",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000011",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000012",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000013",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000014",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000015",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000016",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000017",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000020",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000027",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000028",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000029",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "0192882754000000000000000000002a",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002b",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002d",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002e",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000002f",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000030",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000031",
+          "frame": 3,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000032",
+          "frame": 1,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000033",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000034",
+          "frame": 1,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000035",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000036",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000037",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000038",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928827540000000000000000000039",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "0192882754000000000000000000003b",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003c",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000003f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000041",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000043",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000045",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000047",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000048",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000049",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000004a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000019",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001b",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "0192882754000000000000000000001f",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000022",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928827540000000000000000000026",
+          "frame": 0,
+          "playing": true
+        }
+      ],
+      "png": "tick-02100.png",
+      "tick": 2100,
+      "topology_generation": 0
+    }
+  ],
+  "height": 360,
+  "scope": "retained native scene frames; no scripts, audio or presentation",
+  "tick_rate": 60,
+  "width": 640
+}

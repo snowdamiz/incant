@@ -15,7 +15,7 @@ import sys
 
 FORBIDDEN = frozenset({
     'incant_doc', 'incant_cmd', 'incant_agent', 'incant_editor', 'incant_play_legacy', 'incant_cook',
-    'loro', 'loro-internal', 'automerge',
+    'loro', 'loro-internal', 'automerge', 'ufbx',
 })
 
 

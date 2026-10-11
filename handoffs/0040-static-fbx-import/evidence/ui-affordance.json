@@ -1,0 +1,105 @@
+{
+ "checks": [
+  {
+   "name": "format label advertises FBX",
+   "pass": true,
+   "detail": "Accepts glTF, GLB, FBX, PNG, JPEG, EXR, .atlas.json, WAV or OGG. Paste several lines to add several paths."
+  },
+  {
+   "name": "models/static.fbx is typed as a model without interpretation choices",
+   "pass": true,
+   "detail": {
+    "type": "Model",
+    "usage": 0,
+    "problem": 0
+   }
+  },
+  {
+   "name": "models/static.FBX is typed as a model without interpretation choices",
+   "pass": true,
+   "detail": {
+    "type": "Model",
+    "usage": 0,
+    "problem": 0
+   }
+  },
+  {
+   "name": "png row offers interpretation and Normal map is selected",
+   "pass": true
+  },
+  {
+   "name": "retyped FBX row hides the stale interpretation",
+   "pass": true,
+   "detail": {
+    "radios": 0
+   }
+  },
+  {
+   "name": "FBX row recognises the registered FBX model",
+   "pass": true,
+   "detail": "Updates “static”"
+  },
+  {
+   "name": "import request omits the stale texture usage",
+   "pass": true,
+   "detail": {
+    "type": "asset.import",
+    "sources": [
+     {
+      "source": "models/static.FBX"
+     }
+    ]
+   }
+  },
+  {
+   "name": "unsupported extension message lists FBX",
+   "pass": true,
+   "detail": "Unsupported file type. Use glTF, GLB, FBX, PNG, JPEG, EXR, .atlas.json, WAV or OGG."
+  },
+  {
+   "name": "FBX reimport request carries no texture usage",
+   "pass": true,
+   "detail": {
+    "type": "asset.import",
+    "sources": [
+     {
+      "source": "models/static.FBX"
+     }
+    ]
+   }
+  },
+  {
+   "name": "no page errors or remote requests",
+   "pass": true,
+   "detail": []
+  }
+ ],
+ "tooling": {
+  "browser": "156.0.8078.4",
+  "playwright": "playwright-core 1.64.0",
+  "vite": "8.3.4"
+ },
+ "screenshots": [
+  "ui-import-row-fbx-upper.png",
+  "ui-import-form-fbx-after-stale-usage.png"
+ ],
+ "dispatched": [
+  {
+   "type": "asset.import",
+   "sources": [
+    {
+     "source": "models/static.FBX"
+    }
+   ]
+  },
+  {
+   "type": "asset.import",
+   "sources": [
+    {
+     "source": "models/static.FBX"
+    }
+   ]
+  }
+ ],
+ "passed": true
+}

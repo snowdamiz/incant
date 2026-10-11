@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "FrameRate": {
+      "additionalProperties": false,
+      "properties": {
+        "denominator": {
+          "format": "uint32",
+          "maximum": 1000000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "numerator": {
+          "description": "Frames per second = numerator / denominator; no floating-point clock.",
+          "format": "uint32",
+          "maximum": 1000000,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "numerator",
+        "denominator"
+      ],
+      "type": "object"
+    },
+    "SpriteRegion": {
+      "anyOf": [
+        {
+          "description": "Explicit source rectangle in top-left pixel coordinates.",
+          "items": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Stable frame identity, resolved from the current cooked atlas metadata.",
+          "properties": {
+            "frame": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "frame"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "frames": {
+      "description": "Regions in the SpriteRenderer's single texture; first frame overrides its\nstatic region. Every frame is checked by the retained asset host up front.",
+      "items": {
+        "$ref": "#/$defs/SpriteRegion"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "type": "array"
+    },
+    "looping": {
+      "type": "boolean"
+    },
+    "playing": {
+      "type": "boolean"
+    },
+    "rate": {
+      "$ref": "#/$defs/FrameRate"
+    }
+  },
+  "required": [
+    "frames",
+    "rate",
+    "looping",
+    "playing"
+  ],
+  "title": "SpriteFlipbook",
+  "type": "object"
+}
