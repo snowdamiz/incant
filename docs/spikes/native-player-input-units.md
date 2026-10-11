@@ -73,3 +73,13 @@ Tested source SHA-256 values:
 These are numerical adapter/runtime checks and a pinned-source audit. No GPU or
 native window was launched, and no live display transition, Linux/Windows
 execution, rendered acceptance, performance measurement or phase gate is claimed.
+
+## Actual main96 integration
+
+Only the accepted correction commit `2a4be3a98c416927dd9679fc0fa14668d1cc15ef`
+was cherry-picked onto actual main96 `d22465f69aec1a1e7af9a978bc69bf1a9458a6ad`.
+Its unpublished bridge/agent parent was not merged. All three independently
+reviewed source hashes above remain identical. The integrated graph again passes
+all 18 unit tests, the one pre-startup routing process test, native-window
+all-target Clippy, formatting, generated conventions and diff checks. No native
+window or GPU was launched. [Integration identities and logs](evidence/native-player-input-main96.json).
