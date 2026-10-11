@@ -54,6 +54,8 @@ jobs:
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm test --workspace editor/ui
+      # Workspace tests exercise actual source confinement/crash recovery on each OS.
+      - run: cargo clippy -p incant_source --all-targets --profile ci --locked -j2 -- -D warnings
       - run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings
       - run: cargo check -p incant_audio --features device --locked
       # The workspace default deliberately omits this optional player module.

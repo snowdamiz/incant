@@ -1,13 +1,17 @@
 //! Authoring-only confined source storage. Project consumers use `check_recovery`
 //! before and after acquiring a source graph and compare the returned epoch.
 //! Mutating protocol primitives are for incant_cmd, the sole authoring gateway.
-#[cfg(unix)]
+#[cfg(any(target_os = "linux", target_os = "macos"))]
 #[path = "unix.rs"]
 mod platform;
 #[cfg(windows)]
 #[path = "windows.rs"]
 mod platform;
+#[cfg(not(any(target_os = "linux", target_os = "macos", windows)))]
+#[path = "unsupported.rs"]
+mod platform;
 use platform::Dir;
+const SUPPORTED: bool = cfg!(any(target_os = "linux", target_os = "macos", windows));
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -178,6 +182,9 @@ fn state(root: &Dir) -> Result<Option<Dir>, SourceError> {
 /// No writes, no journal replay, no file recovery. A pending or malformed marker
 /// fails closed. Compare the result before/after source graph acquisition.
 pub fn check_recovery(root: &Path) -> Result<SourceEpoch, SourceError> {
+    if !SUPPORTED {
+        return Err(SourceError::Unavailable);
+    }
     let root = Dir::root(root)?;
     let Some(state) = state(&root)? else {
         return Ok(SourceEpoch(String::new()));
@@ -207,6 +214,9 @@ impl SourceStore {
     /// Trusted host construction only. Tool arguments never supply either path.
     /// One lock per root prevents distinct journals from concurrently writing it.
     pub fn open(root: &Path, journal: &Path, project_id: &str) -> Result<Self, SourceError> {
+        if !SUPPORTED {
+            return Err(SourceError::Unavailable);
+        }
         let root = Dir::root(root)?;
         let state = match state(&root)? {
             Some(dir) => dir,
@@ -305,6 +315,8 @@ impl SourceStore {
         if let Some(after) = &edit.after {
             write_new(&self.state, &format!("{operation}.next"), after.as_bytes())?;
         }
+        #[cfg(test)]
+        crash_point("staged");
         let pending = Pending {
             operation: operation.into(),
             binding: self.binding.clone(),
@@ -333,6 +345,8 @@ impl SourceStore {
         let (parent, leaf) = self.parent(&edit.path)?;
         if edit.before.is_some() {
             parent.move_to(&leaf, &self.state, &format!("{operation}.previous"))?;
+            #[cfg(test)]
+            crash_point("displaced");
             if optional_read(
                 &self.state,
                 &format!("{operation}.previous"),
@@ -419,9 +433,22 @@ impl SourceStore {
                 self.state
                     .move_to("receipt", &self.state, &format!("{operation}.old-receipt"))?;
             }
+            #[cfg(test)]
+            crash_point("receipt_retired");
             self.state.move_to(&next, &self.state, "receipt")?;
+            #[cfg(test)]
+            crash_point("receipt_published");
         }
         self.state.remove("pending")?;
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests;
+#[cfg(test)]
+fn crash_point(phase: &str) {
+    if std::env::var("INCANT_SOURCE_CRASH_TEST_PHASE").as_deref() == Ok(phase) {
+        std::process::exit(73);
     }
 }

@@ -1,4 +1,4 @@
-use incant_source::{SourceEdit, SourceError, SourceStore, check_recovery, validate_path};
+use crate::{SourceEdit, SourceError, SourceStore, check_recovery, validate_path};
 use std::{fs, path::Path, process::Command};
 const SCRIPT: &str = "01ARZ3NDEKTSV4RRFFQ69G5FAV";
 const OP: &str = "01ARZ3NDEKTSV4RRFFQ69G5FAW";
@@ -115,7 +115,7 @@ fn byte_limit_paths_links_and_missing_parent_refuse_without_effects() {
     }
     assert!(store.read("missing/a.ts").is_err());
     let mut change = edit(None, Some("ok"));
-    change.after = Some("x".repeat(incant_source::MAX_SOURCE_BYTES + 1));
+    change.after = Some("x".repeat(crate::MAX_SOURCE_BYTES + 1));
     assert!(store.begin(OP, &change).is_err());
     fs::write(dir.path().join("main.ts"), "linked").unwrap();
     fs::hard_link(dir.path().join("main.ts"), dir.path().join("alias.ts")).unwrap();
@@ -141,30 +141,61 @@ fn process_crash_child() {
     let store = store(root);
     let change = edit(Some("before"), Some("after"));
     store.begin(OP, &change).unwrap();
-    if phase == "installed" {
+    if phase != "prepared" {
         store.install(OP, &change).unwrap();
+    }
+    if matches!(
+        phase.as_str(),
+        "receipt_retired" | "receipt_published" | "finished"
+    ) {
+        store.finish(OP).unwrap();
     }
     // A real process exits without Rust destructors, releasing only OS handles.
     std::process::exit(73);
 }
 #[test]
 fn actual_process_crashes_recover_prepared_and_installed_files() {
-    for phase in ["prepared", "installed"] {
+    for phase in [
+        "staged",
+        "prepared",
+        "displaced",
+        "installed",
+        "receipt_retired",
+        "receipt_published",
+        "finished",
+    ] {
         let dir = tempfile::tempdir().unwrap();
         fs::write(dir.path().join("main.ts"), "before").unwrap();
         let result = Command::new(std::env::current_exe().unwrap())
-            .args(["--exact", "process_crash_child", "--nocapture"])
+            .args(["--exact", "tests::process_crash_child", "--nocapture"])
             .env("INCANT_SOURCE_CRASH_TEST_ROOT", dir.path())
             .env("INCANT_SOURCE_CRASH_TEST_PHASE", phase)
             .status()
             .unwrap();
         assert_eq!(result.code(), Some(73));
-        assert!(matches!(
-            check_recovery(dir.path()),
-            Err(SourceError::RecoveryRequired)
-        ));
+        if matches!(phase, "staged" | "finished") {
+            check_recovery(dir.path()).unwrap();
+        } else {
+            assert!(matches!(
+                check_recovery(dir.path()),
+                Err(SourceError::RecoveryRequired)
+            ));
+        }
         let store = store(dir.path());
+        if phase == "staged" {
+            assert_eq!(store.read("main.ts").unwrap().as_deref(), Some("before"));
+            continue;
+        }
+        if phase == "finished" {
+            assert_eq!(store.read("main.ts").unwrap().as_deref(), Some("after"));
+            continue;
+        }
         let pending = store.pending().unwrap().unwrap();
+        if matches!(phase, "receipt_retired" | "receipt_published") {
+            store.finish(&pending.operation).unwrap();
+            assert_eq!(store.read("main.ts").unwrap().as_deref(), Some("after"));
+            continue;
+        }
         store.rollback(&pending.operation, &pending.edit).unwrap();
         store.finish(&pending.operation).unwrap();
         assert_eq!(store.read("main.ts").unwrap().as_deref(), Some("before"));
@@ -219,4 +250,47 @@ fn junction_directory_is_not_followed() {
         fs::read_to_string(outside.path().join("main.ts")).unwrap(),
         "outside"
     );
+}
+
+#[cfg(unix)]
+#[test]
+fn raced_leaf_symlink_is_preserved_without_following_its_target() {
+    use std::os::unix::fs::symlink;
+    let dir = tempfile::tempdir().unwrap();
+    let outside = tempfile::tempdir().unwrap();
+    fs::write(dir.path().join("main.ts"), "before").unwrap();
+    fs::write(outside.path().join("other.ts"), "outside").unwrap();
+    let store = store(dir.path());
+    let change = edit(Some("before"), Some("ours"));
+    store.begin(OP, &change).unwrap();
+    fs::remove_file(dir.path().join("main.ts")).unwrap();
+    symlink(outside.path().join("other.ts"), dir.path().join("main.ts")).unwrap();
+    assert!(store.install(OP, &change).is_err());
+    assert!(matches!(
+        store.rollback(OP, &change),
+        Err(SourceError::RecoveryRequired)
+    ));
+    assert_eq!(
+        fs::read_to_string(outside.path().join("other.ts")).unwrap(),
+        "outside"
+    );
+    assert!(
+        fs::symlink_metadata(
+            dir.path()
+                .join(format!(".incant-source-transactions/{OP}.previous"))
+        )
+        .unwrap()
+        .is_symlink()
+    );
+}
+#[cfg(windows)]
+#[test]
+fn pinned_windows_directory_cannot_be_renamed_during_source_access() {
+    let dir = tempfile::tempdir().unwrap();
+    fs::create_dir(dir.path().join("scripts")).unwrap();
+    let root = super::platform::Dir::root(dir.path()).unwrap();
+    let pinned = root.child("scripts").unwrap();
+    assert!(fs::rename(dir.path().join("scripts"), dir.path().join("moved")).is_err());
+    drop(pinned);
+    fs::rename(dir.path().join("scripts"), dir.path().join("moved")).unwrap();
 }
