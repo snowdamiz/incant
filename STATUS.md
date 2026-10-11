@@ -25,6 +25,17 @@ Clippy and independent review pass. Native session, account and chat integration
 remain outstanding; no live multi-turn provider gate is claimed.
 [Evidence](docs/spikes/agent-conversation-context.md).
 
+## Reusable native agent host — locally verified
+
+The existing headless native Play controller/session and lazy authored viewport
+provider now live in authoring-only `incant_agent_native`. Trusted host fallback
+selection preserves the embedded headless behavior; authored source failures
+never fall back, and checked candidate publication keeps its original atomic
+boundary. Independent review, 102 scoped tests and matching all-target Clippy
+pass; 62 schemas are unchanged and shipped dependency guards stay clean.
+[Evidence](docs/spikes/native-agent-host.md). Editor wiring and native Play-frame
+capture are separate work; no new GPU or live-provider gate is claimed.
+
 ## Shared agent project access — locally verified
 
 The agent loop can share the editor command bus without holding its mutex during

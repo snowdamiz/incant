@@ -1,21 +1,21 @@
-//! Concrete native gameplay host for the headless provider loop. The trusted
+//! Concrete native gameplay host for editor/headless provider loops. The trusted
 //! caller binds the root; agent requests cannot open files or invoke a compiler.
 use incant_agent::{AgentError, EngineHost, play::RunRequest};
 use incant_doc::Project;
 use serde_json::Value;
 use std::{path::PathBuf, sync::atomic::AtomicBool};
 
-pub(crate) struct Host<P> {
+pub struct Host<P> {
     root: PathBuf,
     viewport: P,
-    play: crate::native_rpc::Controller,
+    play: crate::controller::Controller,
 }
 impl<P> Host<P> {
-    pub fn new(root: PathBuf, viewport: P) -> Self {
+    pub fn new(root: PathBuf, viewport: P, fallback: crate::FallbackCompiler) -> Self {
         Self {
             root,
             viewport,
-            play: Default::default(),
+            play: crate::Controller::new(fallback),
         }
     }
 }
@@ -36,7 +36,7 @@ impl<P: EngineHost> EngineHost for Host<P> {
     ) -> Result<Value, AgentError> {
         self.play
             .run_checked(project, revision, &self.root, request, cancel, &mut || {
-                validate().map_err(crate::native_rpc::Error::Snapshot)
+                validate().map_err(crate::controller::Error::Snapshot)
             })
             .map_err(agent_error)
     }
@@ -67,10 +67,10 @@ impl<P: EngineHost> EngineHost for Host<P> {
     }
 }
 
-fn agent_error(error: crate::native_rpc::Error) -> AgentError {
+fn agent_error(error: crate::controller::Error) -> AgentError {
     match error {
-        crate::native_rpc::Error::Interrupted => AgentError::Interrupted,
-        crate::native_rpc::Error::Snapshot(error) => error,
+        crate::controller::Error::Interrupted => AgentError::Interrupted,
+        crate::controller::Error::Snapshot(error) => error,
         error => AgentError::Tool(error.to_string()),
     }
 }

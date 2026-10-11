@@ -1,6 +1,6 @@
 //! One startup boundary shared by the native CLI and retained RPC play.
 //! The session contains no authoring document, command bus or source text.
-use super::{Result, embedded, native};
+use crate::{FallbackCompiler, StartOptions};
 use incant_audio_runtime::ClipBinding;
 use incant_game_runtime::{HostedOfflineGameSession, OfflineGameSession};
 use incant_input::{InputActions, InputEvent, InputFrame};
@@ -9,9 +9,17 @@ use incant_runtime::{CookedScene, NativeWorld};
 use incant_script::{CompiledScript, NativeLogs};
 use std::path::Path;
 
-pub(crate) use incant_play::StartOptions;
+#[derive(Debug, thiserror::Error)]
+pub enum SessionError {
+    #[error("native play startup/runtime failure: {0}")]
+    Native(#[source] Box<dyn std::error::Error>),
+}
+type Result<T> = std::result::Result<T, SessionError>;
+fn native<E: std::error::Error + 'static>(error: E) -> SessionError {
+    SessionError::Native(Box::new(error))
+}
 
-pub(crate) struct Session {
+pub struct Session {
     pub scene: String,
     pub script_source_sha256: String,
     pub authored_scripts: bool,
@@ -23,9 +31,10 @@ impl Session {
         root: &Path,
         options: &StartOptions,
         sample_rate: u32,
+        fallback: FallbackCompiler,
     ) -> Result<Self> {
         let prepared =
-            incant_play::PreparedPlay::load(document, root, options, sample_rate, embedded::load)
+            incant_play::PreparedPlay::load(document, root, options, sample_rate, fallback)
                 .map_err(native)?;
         let game = Game::new(
             prepared.cooked,

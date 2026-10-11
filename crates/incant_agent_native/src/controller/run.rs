@@ -1,5 +1,5 @@
 use super::{Controller, Error, Live, Observation, Result};
-use crate::native_play::{Session, StartOptions};
+use crate::{Session, StartOptions};
 use incant_agent::play::RunRequest;
 use incant_doc::Project;
 use incant_input::InputReplay;
@@ -21,7 +21,7 @@ fn check_budget(cancel: &AtomicBool, started: Instant) -> Result<()> {
     Ok(())
 }
 fn native(error: impl std::error::Error + 'static) -> Error {
-    crate::native_play::PlayError::Native(Box::new(error)).into()
+    crate::SessionError::Native(Box::new(error)).into()
 }
 
 impl Controller {
@@ -93,6 +93,7 @@ impl Controller {
                 script_sha256: request.script_sha256,
             },
             48000,
+            self.fallback,
         )?;
         check_budget(cancel, started)?;
         validate()?;

@@ -1,11 +1,10 @@
 use clap::{Parser, Subcommand};
+use incant_agent_native::GpuPerception;
 use incant_render_authoring::RendererAuthoringExt as _;
 mod assets;
 mod eval;
 mod localization;
-mod native_agent_play;
 mod native_play;
-mod native_rpc;
 mod play;
 mod play_assertions;
 mod play_audio;
@@ -296,7 +295,7 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
     } else {
         CommandBus::new(initial)?
     };
-    let mut play = native_rpc::Controller::default();
+    let mut play = incant_agent_native::Controller::new(native_play::embedded::load);
     for line in io::stdin().lock().lines() {
         let line = line?;
         if line.len() > 16 * 1024 * 1024 {
@@ -752,7 +751,11 @@ fn run() -> Result<()> {
                 .filter(|p| !p.as_os_str().is_empty())
                 .unwrap_or(Path::new("."));
             let viewport = GpuPerception::new(Some(root.to_path_buf()));
-            let viewport = native_agent_play::Host::new(root.to_path_buf(), viewport);
+            let viewport = incant_agent_native::Host::new(
+                root.to_path_buf(),
+                viewport,
+                native_play::embedded::load,
+            );
             let mut host = incant_agent::ProjectHost::new(bus.project(), root, viewport)?;
             let report = agent.run(
                 &mut provider,
@@ -775,62 +778,4 @@ fn run() -> Result<()> {
         }
     }
     Ok(())
-}
-
-struct GpuPerception {
-    renderer: Option<incant_render::Renderer>,
-    project_root: Option<PathBuf>,
-    assets: incant_assets::AssetStore,
-}
-impl GpuPerception {
-    fn new(project_root: Option<PathBuf>) -> Self {
-        Self {
-            renderer: None,
-            project_root,
-            assets: Default::default(),
-        }
-    }
-}
-impl incant_agent::Perception for GpuPerception {
-    fn screenshot(
-        &mut self,
-        project: &Project,
-        camera: Option<&str>,
-        width: u32,
-        height: u32,
-    ) -> std::result::Result<Value, incant_agent::AgentError> {
-        use base64::Engine;
-        if self.renderer.is_none() {
-            self.renderer =
-                Some(incant_render::Renderer::headless().map_err(|_| {
-                    incant_agent::AgentError::Tool("GPU renderer unavailable".into())
-                })?);
-        }
-        let renderer = self.renderer.as_mut().expect("initialized renderer");
-        if let Some(root) = &self.project_root {
-            self.assets.sync_project(project, root).map_err(|_| {
-                incant_agent::AgentError::Tool("Cooked assets could not be loaded".into())
-            })?;
-        } else if !project.assets.is_empty() {
-            return Err(incant_agent::AgentError::Tool(
-                "This viewport has no project asset access".into(),
-            ));
-        }
-        let scene = renderer.prepare_scene(project, &self.assets).map_err(|_| {
-            incant_agent::AgentError::Tool("Scene geometry could not be prepared".into())
-        })?;
-        let scene = if let Some(id) = camera {
-            scene
-                .with_camera(id)
-                .map_err(|error| incant_agent::AgentError::Tool(error.to_string()))?
-        } else {
-            scene
-        };
-        let bytes = renderer
-            .screenshot_scene_png(&scene, width, height)
-            .map_err(|_| incant_agent::AgentError::Tool("GPU capture failed".into()))?;
-        Ok(
-            json!({"mime_type":"image/png","data_url":format!("data:image/png;base64,{}",base64::engine::general_purpose::STANDARD.encode(bytes)),"width":width,"height":height,"camera":camera}),
-        )
-    }
 }
