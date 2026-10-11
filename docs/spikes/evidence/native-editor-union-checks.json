@@ -23,7 +23,28 @@
     "incant-editor-union-clippy.log": {
       "path": "/tmp/incant-editor-union-clippy.log",
       "sha256": "dfb5f988ff5d491ec4b2a16d7ab390bc990f3354b71a75b47f501d1fd028945a"
+    },
+    "incant-editor-union-python-tests.log": {
+      "path": "/tmp/incant-editor-union-python-tests.log",
+      "sha256": "4126e14ead21a2644e52c2448478f8f5715142c2d4f71b44cdbab54dae3af151"
+    },
+    "incant-editor-union-node-tests.log": {
+      "path": "/tmp/incant-editor-union-node-tests.log",
+      "sha256": "c5f02762c1697cec33cd92b8ed97a4f916f42450f5e1222aafdbe2bb5eabcebb"
     }
   },
-  "scope": "Ordinary local workspace unit/integration/doc tests and all-target lint. Ignored tests are not executed, no native-window, provider, device-performance or phase-gate claim. Optional native probe features receive their scoped checks and final build separately."
+  "scope": "Ordinary local workspace unit/integration/doc tests and all-target lint. Ignored tests are not executed, no native-window, provider, device-performance or phase-gate claim. Optional native probe features receive their scoped checks and final build separately.",
+  "python_tools": {
+    "command": "python3 -m unittest discover -s tools/tests -v",
+    "exit_code": 0,
+    "ran": 213,
+    "passed": 209,
+    "skipped": 4
+  },
+  "node_tools": {
+    "command": "node --test tools/tests/native_script.test.mjs",
+    "exit_code": 0,
+    "passed": 19,
+    "skipped": 0
+  }
 }

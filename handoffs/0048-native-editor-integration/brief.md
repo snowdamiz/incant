@@ -4,7 +4,10 @@ Status: preparation only. Do not run this packet until Astra appends the immutab
 binary/source manifest, fixture grant and exclusive native graphics grant below.
 Use Claude Opus 5.5 through ACP with explicitly verified Max on every new/resumed
 session. Own rendered review, interaction design and scoped UI corrections;
-Astra owns engine, transport and numerical correctness. No publishing or main edits.
+Astra owns engine, transport and numerical correctness. No publishing or main edits. Keep every visual/review action in this explicitly
+verified Opus5.5 Max session; do not use an auxiliary Claude subagent whose model
+and thinking have not been verified through ACP. Root independently reviews
+nonvisual correctness; an unverified auxiliary review is not acceptance evidence.
 
 ## Review target
 
@@ -64,13 +67,31 @@ logs or receipts. Keep actual app account state intact. No account sign-out/logi
 permission changes, unsolicited browser tabs or unrelated app interactions.
 
 For that one turn, set a 64,000-token project allowance through the actual UI,
-then request only a clearly named fixture entity rename. Observe the actual
+set the approval policy to Always for this turn, then request only the clearly
+named fixture entity rename. Read-only tool approvals needed for that one request
+are allowed; approve a mutation only when its exact arguments match that rename.
+Observe the actual
 stream, inspect and approve the matching in-engine transaction, verify the new
 name and History entry, then Undo. Record the usage before and after Undo and
 after quitting/reopening the same fixture. A new process must retain the selected
 account and usage without another login or provider request. Keep the account
 dialog closed in published captures. Do not issue additional turns automatically
 if the request fails or the cap is exhausted; record the actual outcome for Astra.
+Do not sign out to exercise error wording. Do not intentionally cancel the only
+allowed turn before verifying the rename; observe the Stop control during its work
+and retain the existing cancellation test evidence for actions not executed here.
+
+Include the0049 approval-readiness behavior in the native review. If exercising
+Undo/Redo while the turn awaits approval, first make a harmless ordinary UI edit
+(such as renaming Pointer Probe to Pointer Probe Review) before starting the turn,
+after setting its final allowance. Undo/Redo that edit, never the allowance: a cap
+change intentionally cancels the worker and would test a different path. A patch
+whose expected revision became stale must refuse atomically; the same bounded
+turn may re-query and propose the same target rename again. Do not start another
+turn to hide a failure. Preserve the actual outcome and label any millisecond hold
+that could not be observed as unobserved; deterministic browser IPC tests already
+cover the held barriers.
+
 Any unrelated edit proposal must be denied. This is UI/transport acceptance of one
 small operation, not the plan's game-creation or agent-quality evaluation.
 
@@ -86,7 +107,8 @@ Close all owned native/browser/helper processes and report their termination.
 
 The fixture is disposable and must be authored through public init/import/RPC
 commands; all source/document edits use incant_cmd. Never edit project JSON or
-journal files directly. Keep numerical fixture corrections distinct from product
+journal files directly. Public command-bus writes to this granted disposable
+fixture are authorized task behavior; source edits remain in the handoff worktree. Keep numerical fixture corrections distinct from product
 bugs, and preserve failed attempts honestly. Root will verify actual journal and
 usage evidence independently without accessing account credentials.
 

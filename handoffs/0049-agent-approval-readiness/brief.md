@@ -4,6 +4,24 @@ Use Claude Opus 5.5 through ACP, explicitly verified Max, for UI and rendered re
 Read AGENTS.md and editor/ui/DESIGN.md. No publishing/merging. This is one concrete
 review finding before combined native acceptance0048; keep the current design.
 
+## Priority finalization revision — root review complete
+
+Root independently reviewed the exact final source, all12regressions and browser
+report data; see review/root-consumer-review.json. There is no actionable source
+finding. Your own verified Opus5.5Max visual review and browser captures are complete,
+and your latest full suite reported902tests/44files pass with strict types/build.
+Astra interrupted the redundant auxiliary-review wait deliberately; this is not a
+failed implementation. Do not wait for an auxiliary reviewer or count a review whose
+model/effort was not verified through ACP. Stop/reap any auxiliary agent/tool you own.
+
+Finish the packet now: preserve and copy existing final check logs, replace the
+remaining result placeholders with observed outcomes, record root source review and
+your own visual review, commit all scoped changes with Built-by: claude, then return.
+Do not rerun already-passed checks or create more capture/review tasks unless source
+changes or an actual unresolved failure require it. Do not change implementation or
+styling during finalization. Do not discard any source/evidence. Root will integrate
+and independently run the final union UI/types/build before native0048.
+
 ## Confirmed issue and integrated backend
 
 Independent review of0046 found that Allow and Deny remain enabled while Undo/Redo
