@@ -73,12 +73,18 @@ pub enum UpdateKind {
 /// or the host explicitly constructs a new adapter. A published input can lag the
 /// native world after consumer rejection; synchronize again before drawing it as
 /// the current simulation frame.
+#[derive(Clone, Copy)]
+struct NumericUndo {
+    world: DMat4,
+    frame: u16,
+}
+
 pub struct NativeRenderInput {
     identity: WorldIdentity,
     assets: BTreeMap<StableId, Arc<RuntimeAsset>>,
     input: SceneInput,
     slots: Vec<Option<usize>>,
-    undo: Vec<DMat4>,
+    undo: Vec<NumericUndo>,
     camera: StableId,
     camera_slot: usize,
     topology_generation: u64,

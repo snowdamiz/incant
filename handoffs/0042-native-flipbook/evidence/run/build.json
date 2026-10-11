@@ -1,0 +1,3513 @@
+{
+ "tools_sha256": {
+  "incant_headless": "34c0173d5f5d75734c5b94eaa9800752bf81ebac8b4668c48b133bf0f40b32ce",
+  "cook_scene": "256010202e5b272007bd6a655638985801f128d9188f0f4643723370743aa563",
+  "native_frames": "02acba93a337220e0f76d069fe0d245129fcdebf7fef552e02438cf2fecbbe12"
+ },
+ "capture_py_sha256": "7ddc1a4e18d32e9c91b65ed2e007c6d5a453754ec7481b27a0c7b86246b4eacc",
+ "art_manifest_sha256": "212eaedc3954c7705c53fcf89717d05aa1a84e7b6be76bfec2d4fad04cedbfbe",
+ "art_matches_committed": false,
+ "anim": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDQP9PXJD1DVWB8QCW46C",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDQRJGYP96HSE3PQXMBX7",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDQTVTB4CHMD12XQAY6X4",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDQX6H0VF7YNS780ZBJJP",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDQP9PXJD1DVWB8QCW46C",
+   "sheet": "01M4MPDQRJGYP96HSE3PQXMBX7",
+   "badge": "01M4MPDQTVTB4CHMD12XQAY6X4",
+   "plates": "01M4MPDQX6H0VF7YNS780ZBJJP"
+  },
+  "scene_id": "01M4MPDQKWPQ9DZ28JAZA4YWNQ",
+  "transaction_id": "01M4MPDR118897A6SYKNFVRDMD",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "cb02a01c04f101fe98f02974b6d315aca121c9a0a9476a502e80cc3989e1e2db",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDQKW6HDCS7P8T11N1XQT",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "anim.incant.json": "1a7f06c37b18262680f685873e0d832a1416705635fbb55fe1752f437638315f",
+   "anim.incant.journal.jsonl": "d42af67a0fcab452c5dd71000ea8facabd11dc5a1e813cfc0d8b93939fef15d6"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/anim.scene",
+   "sha256": "742d068507f40ee7c703f0b08f23521625dc4386b6ba68c96114b61615c60aaa",
+   "bytes": 24815,
+   "version": 8,
+   "stdout": "Cooked 24815 bytes"
+  }
+ },
+ "ctl-t00000": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDRGPHHSD7GV52CRT82G3",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDRK0D98VDD3EYE90S6PG",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDRN973B9HYYC8JGATRYA",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDRQKMWSTBPGSV1QHBWYD",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDRGPHHSD7GV52CRT82G3",
+   "sheet": "01M4MPDRK0D98VDD3EYE90S6PG",
+   "badge": "01M4MPDRN973B9HYYC8JGATRYA",
+   "plates": "01M4MPDRQKMWSTBPGSV1QHBWYD"
+  },
+  "scene_id": "01M4MPDRE9ZMA8A55DPGFVDPRH",
+  "transaction_id": "01M4MPDRVESSG7Z1W1K8YMS69S",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "464f7474b291757c962289034294f1a9a8297a963f00b6145ad65bf83729002f",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDRE9FTWM86XA38WYXKEA",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00000.incant.json": "a100f54e3d4471c2747dc0abcfa5e8b6579d185d3cc03af393d0deb324f288ce",
+   "ctl-t00000.incant.journal.jsonl": "efa2f53458a231e68bc274843d43be849b2944f2e477ca62c9c43c1deb2b887f"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00000/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00000/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00000/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00000/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00000/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00000/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00000/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00000/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00000.scene",
+   "sha256": "5599fa8a416c3f7145030254fda71b403eade50d1c791c946c8168ac0d2685f9",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00009": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDS3QRSQDFQ6KC1BWRHJ1",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDS60JP6YJCWEYX4BRX18",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDS89VBMDBQ12KVC4JCY1",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDSAPGKCNTG8ZWA44Y0GK",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDS3QRSQDFQ6KC1BWRHJ1",
+   "sheet": "01M4MPDS60JP6YJCWEYX4BRX18",
+   "badge": "01M4MPDS89VBMDBQ12KVC4JCY1",
+   "plates": "01M4MPDSAPGKCNTG8ZWA44Y0GK"
+  },
+  "scene_id": "01M4MPDS1CAEJD842AEYAR232J",
+  "transaction_id": "01M4MPDSESE2334Y2D7T5FY955",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "c966daa4ab520e41da908db3b8e42ff464d0b2a27f5c83382b63557da8adc22d",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDS1CS5C2ANDG5K6F04K4",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00009.incant.json": "ec043cbfb1225beeba04de69f161482f3230a7578a9cff1dab50f753cd935e89",
+   "ctl-t00009.incant.journal.jsonl": "618c3cd3e58e9af7c1891310f789139d4263b00420985194bf4369a841c0dca8"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00009/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00009/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00009/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00009/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00009/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00009/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00009/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00009/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00009.scene",
+   "sha256": "07b5eaeb3142a423f4dbffaf5c3e8452abea2998f929076008678a1e80941b30",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00017": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDSQ2Z9Q5J13CV1FB8BM9",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDSSCGZFZFGCBC2ZZJRMJ",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDSVNQDMTJ1HT3CY0P5EJ",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDSXYH586W8M7P3GEYGT1",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDSQ2Z9Q5J13CV1FB8BM9",
+   "sheet": "01M4MPDSSCGZFZFGCBC2ZZJRMJ",
+   "badge": "01M4MPDSVNQDMTJ1HT3CY0P5EJ",
+   "plates": "01M4MPDSXYH586W8M7P3GEYGT1"
+  },
+  "scene_id": "01M4MPDSMSEY8M1H9Q29EEE246",
+  "transaction_id": "01M4MPDT1SK25PCAX621Q0RGWY",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "595e5cb15b0849c6e6300466843b07075b3c719bd179aa1ab36740b27bef90e4",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDSMS7PXQ48V1GGFEFTFH",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00017.incant.json": "116a54c0c5d3de3d7a6e0068c61aff51fb6f8cb60731179802601c19eae8ebfe",
+   "ctl-t00017.incant.journal.jsonl": "8f37ed852c6b0706210d36a687f4c2b866f03e86daee6a607ffe6dd18831eb08"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00017/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00017/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00017/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00017/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00017/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00017/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00017/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00017/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00017.scene",
+   "sha256": "a7dec751da382b8e6086de2f80f206f283d66ba1dc9e77cb84019c9ce4bfccfc",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00025": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDTA45QX47X48QTENZJ3T",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDTCEZ8E5ZQMZDYDPBZP6",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDTEQJ75Q8SHEWZE9AE8B",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDTH1V1Q4NBHK1TFTBEB3",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDTA45QX47X48QTENZJ3T",
+   "sheet": "01M4MPDTCEZ8E5ZQMZDYDPBZP6",
+   "badge": "01M4MPDTEQJ75Q8SHEWZE9AE8B",
+   "plates": "01M4MPDTH1V1Q4NBHK1TFTBEB3"
+  },
+  "scene_id": "01M4MPDT7SM5E80528AN196F53",
+  "transaction_id": "01M4MPDTMW7AWE4NHVNCQ6S7J3",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "04b319504b171952ffb9e65f54c8d37dd5d7a177d372e8b305825b801d61a0ac",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDT7S6KC3Q0M8NE9Y9B6W",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00025.incant.json": "89ee33a595a57cc474b8ee56665a5d18f5108b5128d720543fb9a208329b0002",
+   "ctl-t00025.incant.journal.jsonl": "6d398a76108fae11723cd14cb869301e2e598da8f9805043bb0cd8bfb8440eaa"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00025/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00025/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00025/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00025/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00025/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00025/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00025/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00025/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00025.scene",
+   "sha256": "2ca8e39cb5743ba83c19700e21d158e9df69e64ae4bdf50daa45bbd2c73e87bd",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00034": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDTX9TFW1NQ606B26Q7DZ",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDTZKTEK8R7X9WTB7KB3A",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDV1YPT9XPHZESC2P5ZZT",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDV48JTM7DME5G9EZQMDG",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDTX9TFW1NQ606B26Q7DZ",
+   "sheet": "01M4MPDTZKTEK8R7X9WTB7KB3A",
+   "badge": "01M4MPDV1YPT9XPHZESC2P5ZZT",
+   "plates": "01M4MPDV48JTM7DME5G9EZQMDG"
+  },
+  "scene_id": "01M4MPDTTZKSR8VCB8SDS6GFXH",
+  "transaction_id": "01M4MPDV84DZYRW312Y41FERWJ",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "968065d92d4d2e7919e53f54b7c1c2ea4cbb25f604900e553d9838a5a2378bb9",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDTTZJMPWXGPYYFNK63Q6",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00034.incant.json": "6b8dc82cfb81e0e9e46696918c3925c3ebf6f73f3f6ed63668a8baad3e43add1",
+   "ctl-t00034.incant.journal.jsonl": "9fa4c88bdb8e989c4df68fb9c4868373297a0e762841b3ad6ad244d69b455543"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00034/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00034/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00034/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00034/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00034/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00034/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00034/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00034/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00034.scene",
+   "sha256": "ef84ec4ff504bffe15ddd76712e7239cf84f54f8fca3b1307101a2dd79a7fd3c",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00042": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDVGGK3CM1QSNRNN8J84Z",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDVJSGCQ2QY92E1JAMDRF",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDVN2J2S322PVR9HJGY1G",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDVQBY1HSEZ198MBK4S41",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDVGGK3CM1QSNRNN8J84Z",
+   "sheet": "01M4MPDVJSGCQ2QY92E1JAMDRF",
+   "badge": "01M4MPDVN2J2S322PVR9HJGY1G",
+   "plates": "01M4MPDVQBY1HSEZ198MBK4S41"
+  },
+  "scene_id": "01M4MPDVE6JW4WDFC9N245VPHF",
+  "transaction_id": "01M4MPDVV74TZ96HHWDHPM26YB",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "abf18a277f7ab894ec5b33401bd8ee1b87474063e7bca9eb5a4a48c8e9c4b80b",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDVE6532FQG2BNRARA4CK",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00042.incant.json": "2296bc8f97643556086cb613536b82999d63a4cebf81f98cd47ac282db191f9e",
+   "ctl-t00042.incant.journal.jsonl": "54a43a2eec9b7515261a130656b072a097513a3891a80eb8c218941b3e811458"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00042/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00042/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00042/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00042/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00042/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00042/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00042/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00042/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00042.scene",
+   "sha256": "8927b0164e89128f4ce8b7d05200ac0cd0dc59fe4657ed823ef4a8836ba1a896",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00050": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDW3E4A48TFXWYS880AD8",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDW5QSW8C30A4YYWCT50D",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDW80NYWWQM8A0B9T1B0C",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDWA9DGA74M8H8JKVX3SQ",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDW3E4A48TFXWYS880AD8",
+   "sheet": "01M4MPDW5QSW8C30A4YYWCT50D",
+   "badge": "01M4MPDW80NYWWQM8A0B9T1B0C",
+   "plates": "01M4MPDWA9DGA74M8H8JKVX3SQ"
+  },
+  "scene_id": "01M4MPDW15AE3S3N6MM5N73PAW",
+  "transaction_id": "01M4MPDWE47A4ZTANXZR12VHW8",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "d70d3750edc5625ad12590e0cc32667a8da17e67a09f4654b831820f3d68e9e7",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDW15F0Z8RVKK555066WM",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00050.incant.json": "86e852fa42ffd41d53718dbafa6130a36c59b432555b9259b3181b3364e64b18",
+   "ctl-t00050.incant.journal.jsonl": "0ea977ecc36683dabd0065516caf796c30de004474b8adb89541547197f1bfd4"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00050/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00050/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00050/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00050/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00050/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00050/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00050/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00050/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00050.scene",
+   "sha256": "14fe5d09f6c90cf2d577e5ba631a02ef7fb95c1cdcec6838f7be74b80629e586",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00060": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDWPE0C0FJ5YZP7Y5V8HS",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDWRSEVRR9DKT3C5ADKSE",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDWV83MAPWW0XYZ0C3PKK",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDWXQA39GME3TVE5115W7",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDWPE0C0FJ5YZP7Y5V8HS",
+   "sheet": "01M4MPDWRSEVRR9DKT3C5ADKSE",
+   "badge": "01M4MPDWV83MAPWW0XYZ0C3PKK",
+   "plates": "01M4MPDWXQA39GME3TVE5115W7"
+  },
+  "scene_id": "01M4MPDWM2BGFVND32RK9GXBGN",
+  "transaction_id": "01M4MPDX1TW47JDTGX29KF7S6N",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "5b75b90a0cc5f0bf2c009e27c30f6bc88fe62bfd3f105bf5f4ec24e0b1d49f91",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDWM2YVXMBCZ4PB2FF3V4",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00060.incant.json": "670910ec9a9c33a83014debfaf314e56ee179070d2b1524811a79de68601add0",
+   "ctl-t00060.incant.journal.jsonl": "04aa1a739294392276d059a5059919bfbbaea796d7e888387109f22c912584e9"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00060/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00060/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00060/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00060/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00060/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00060/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00060/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00060/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00060.scene",
+   "sha256": "2e1e14df6e3888792b17814eaca10083d7c9d1537e0f056c140fff34689a27b0",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00069": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDXA4S23SWNEZYMNHV5SX",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDXCDR21MFD8V7AYYV2YR",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDXERE78QH8A6EW9636DX",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDXH53T8P7V2DBGHDHTPQ",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDXA4S23SWNEZYMNHV5SX",
+   "sheet": "01M4MPDXCDR21MFD8V7AYYV2YR",
+   "badge": "01M4MPDXERE78QH8A6EW9636DX",
+   "plates": "01M4MPDXH53T8P7V2DBGHDHTPQ"
+  },
+  "scene_id": "01M4MPDX7TCEFWYF38R9WPZW64",
+  "transaction_id": "01M4MPDXN28C86T6KHM7NCC455",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "d864dd4339e18185bba9f8faf25896f4182c2e4b4722f6a47f413694937a0cb6",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDX7T7K6EP77J7AB4YWBQ",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00069.incant.json": "26f14a5bddf6dfa70326034c0e6de09849716b99c07464eabd298f0f6839b61e",
+   "ctl-t00069.incant.journal.jsonl": "9de0c2364441ee2c304c56410138976950d2f9d0bd294cec2aeb676f843719ee"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00069/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00069/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00069/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00069/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00069/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00069/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00069/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00069/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00069.scene",
+   "sha256": "e2644b9ef07ae8f258e7db4d5118c0d2f656f78de19896586874c3f560cf2131",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t00420": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDXXFCPPWGWKQ40RPWMQ6",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDXZRM0N61M68JBAPK69C",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDY21M9Y6M661QER8YEFY",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDY4AKS0JR8K68Q8WAYZG",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDXXFCPPWGWKQ40RPWMQ6",
+   "sheet": "01M4MPDXZRM0N61M68JBAPK69C",
+   "badge": "01M4MPDY21M9Y6M661QER8YEFY",
+   "plates": "01M4MPDY4AKS0JR8K68Q8WAYZG"
+  },
+  "scene_id": "01M4MPDXV6JPWV75CTRRBCC2SJ",
+  "transaction_id": "01M4MPDY862X7NGYDFK3CWNVZ8",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "fcb9cf0f85e3d9159e985b087773b1a589871d28e836fe5fd71f739b49f7ab0d",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDXV66MFY2DQ8NZBQTRK0",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t00420.incant.json": "25dae30e9f5b436d331fb3a053187fb5bbdb6406d4975682246c180a1a6c0cc4",
+   "ctl-t00420.incant.journal.jsonl": "30ce9773509dfb66e059e3e7a7fcdbdc6da5f6b8254fa5db2e28b270cd84ac9b"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t00420/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t00420/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t00420/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t00420/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t00420/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t00420/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t00420/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t00420/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t00420.scene",
+   "sha256": "1077dc5833833d194295902c912fc1f05947edf9b3ad7f1f6e9b0f74ff384cf8",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "ctl-t02100": {
+  "imports": {
+   "atlas": {
+    "source": "art/flip.atlas.json",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDYGEJ87BQ1VNEDE7SMC8",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "flip.atlas",
+     "path": "art/flip.atlas.json",
+     "sha256": "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "atlas": {
+      "frames": {
+       "01JA42FR000000000000000001": {
+        "name": "f0",
+        "region": [
+         26,
+         1,
+         12,
+         12
+        ]
+       },
+       "01JA42FR000000000000000002": {
+        "name": "f1",
+        "region": [
+         40,
+         1,
+         14,
+         11
+        ]
+       },
+       "01JA42FR000000000000000003": {
+        "name": "f2",
+        "region": [
+         14,
+         1,
+         10,
+         13
+        ]
+       },
+       "01JA42FR000000000000000004": {
+        "name": "f3",
+        "region": [
+         26,
+         15,
+         15,
+         10
+        ]
+       },
+       "01JA42FR000000000000000005": {
+        "name": "f4",
+        "region": [
+         1,
+         1,
+         11,
+         14
+        ]
+       },
+       "01JA42FR00000000000000000B": {
+        "name": "t0",
+        "region": [
+         43,
+         14,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000C": {
+        "name": "t1",
+        "region": [
+         14,
+         16,
+         8,
+         8
+        ]
+       },
+       "01JA42FR00000000000000000D": {
+        "name": "t2",
+        "region": [
+         1,
+         17,
+         8,
+         8
+        ]
+       }
+      },
+      "id": "01JA42AT000000000000000001",
+      "padding": 1,
+      "size": [
+       55,
+       26
+      ]
+     },
+     "dependencies": [
+      {
+       "path": "art/flip.atlas.json",
+       "sha256": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10"
+      },
+      {
+       "path": "art/f0.png",
+       "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf"
+      },
+      {
+       "path": "art/f1.png",
+       "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901"
+      },
+      {
+       "path": "art/f2.png",
+       "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911"
+      },
+      {
+       "path": "art/f3.png",
+       "sha256": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559"
+      },
+      {
+       "path": "art/f4.png",
+       "sha256": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212"
+      },
+      {
+       "path": "art/t0.png",
+       "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b"
+      },
+      {
+       "path": "art/t1.png",
+       "sha256": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863"
+      },
+      {
+       "path": "art/t2.png",
+       "sha256": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 26,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 55
+    },
+    "revision": 1,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "sheet": {
+    "source": "art/sheet.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDYJSK14RWDRAC45NDVPA",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "art/sheet.png",
+     "sha256": "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/sheet.png",
+       "sha256": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 34,
+     "mip_levels": 6,
+     "usage": "color",
+     "width": 48
+    },
+    "revision": 2,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "badge": {
+    "source": "art/badge.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDYN219VFMGJNB7WDPKPG",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "badge",
+     "path": "art/badge.png",
+     "sha256": "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/badge.png",
+       "sha256": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 10,
+     "mip_levels": 4,
+     "usage": "color",
+     "width": 10
+    },
+    "revision": 3,
+    "diagnostics": [],
+    "authored_changed": true
+   },
+   "plates": {
+    "source": "art/plates.png",
+    "exit": 0,
+    "asset": {
+     "id": "01M4MPDYQCP6S1Q3SPJSPX00NJ",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "plates",
+     "path": "art/plates.png",
+     "sha256": "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef"
+    },
+    "changed": true,
+    "cache_hit": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "art/plates.png",
+       "sha256": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2"
+      }
+     ],
+     "format": "rgba8_srgb",
+     "height": 4,
+     "mip_levels": 5,
+     "usage": "color",
+     "width": 20
+    },
+    "revision": 4,
+    "diagnostics": [],
+    "authored_changed": true
+   }
+  },
+  "ids": {
+   "atlas": "01M4MPDYGEJ87BQ1VNEDE7SMC8",
+   "sheet": "01M4MPDYJSK14RWDRAC45NDVPA",
+   "badge": "01M4MPDYN219VFMGJNB7WDPKPG",
+   "plates": "01M4MPDYQCP6S1Q3SPJSPX00NJ"
+  },
+  "scene_id": "01M4MPDYE5V1SRJSKAVDVFE4MH",
+  "transaction_id": "01M4MPDYVA5SKWQ32N0WE5JV14",
+  "revision": 5,
+  "entities": 76,
+  "request_sha256": "639b1169d2f50b6e4ce1ff1825da4b86a63a6336f5e4e3f006cd69d3ea1667a1",
+  "validate": {
+   "exit": 0,
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MPDYE5H07AP145G9SWE30B",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "authored": {
+   "ctl-t02100.incant.json": "edcdbd255d3e3cc239d5f3fc0e7b5d326912e1d129db58b45dd5853334cfd52b",
+   "ctl-t02100.incant.journal.jsonl": "c208dd56422d73adbc15aba9187c6258035e553c0f9faf09fb470320bc4c562b"
+  },
+  "cache": {
+   "artifacts/0042-native-flipbook/r1/ctl-t02100/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "artifacts/0042-native-flipbook/r1/ctl-t02100/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "artifacts/0042-native-flipbook/r1/ctl-t02100/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "artifacts/0042-native-flipbook/r1/ctl-t02100/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "artifacts/0042-native-flipbook/r1/ctl-t02100/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "artifacts/0042-native-flipbook/r1/ctl-t02100/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "artifacts/0042-native-flipbook/r1/ctl-t02100/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "artifacts/0042-native-flipbook/r1/ctl-t02100/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  },
+  "cooked": {
+   "path": "artifacts/0042-native-flipbook/r1/cooked/ctl-t02100.scene",
+   "sha256": "e37c93f0afb86f3cce2aacf4458aa1953d460ff6bd6f4efde72cbba5f56cf74c",
+   "bytes": 18601,
+   "version": 6,
+   "stdout": "Cooked 18601 bytes"
+  }
+ },
+ "requests": {
+  "main": "4b74100573b7a437f2966657d474557568b7a1f073266d03192229b625760dd9",
+  "ortho": "d519a78551d4e4fed06d793fa1ed2ecbe1df8167a53da6396bf8b9d655ba43ea",
+  "subset": "3f7ada5f9a1122256b64a9288089c8f4140f83aa99d2447be209338c6658e319",
+  "control": "d425a7bd65a647fe3fc1de19f25b71a57afaf1280d5a4390dabef2533193a32c"
+ },
+ "tools_sha256_end": {
+  "incant_headless": "34c0173d5f5d75734c5b94eaa9800752bf81ebac8b4668c48b133bf0f40b32ce",
+  "cook_scene": "256010202e5b272007bd6a655638985801f128d9188f0f4643723370743aa563",
+  "native_frames": "02acba93a337220e0f76d069fe0d245129fcdebf7fef552e02438cf2fecbbe12"
+ }
+}

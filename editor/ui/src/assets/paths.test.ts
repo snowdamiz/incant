@@ -4,7 +4,7 @@ import { folderLabel, groupByFolder } from './library';
 
 describe('import source paths (mirrors incant_import validate_path)', () => {
   it('accepts canonical project-relative model and image paths', () => {
-    for (const path of ['models/crate.glb', 'a.gltf', 'textures/sky/Harbor 4k.EXR', 'x/y.jpeg', 'x/y.JPG', 'x.png']) {
+    for (const path of ['models/crate.glb', 'a.gltf', 'models/static.fbx', 'models/static.FBX', 'textures/sky/Harbor 4k.EXR', 'x/y.jpeg', 'x/y.JPG', 'x.png']) {
       expect(pathProblem(path)).toBeNull();
     }
   });
@@ -23,12 +23,13 @@ describe('import source paths (mirrors incant_import validate_path)', () => {
     expect(pathProblem('file:///tmp/crate.glb')).toMatch(/URL/);
     expect(pathProblem('models/a:b.png')).toMatch(/:/);
     expect(pathProblem(' models/crate.glb')).toMatch(/spaces/);
-    expect(pathProblem('models/crate.fbx')).toMatch(/Unsupported/);
+    expect(pathProblem('models/crate.obj')).toMatch(/Unsupported/);
     expect(pathProblem('models/.png')).toMatch(/Unsupported/);
   });
 
   it('derives the kind from the extension only', () => {
     expect(sourceKind('a/b.GLB')).toBe('model');
+    expect(sourceKind('a/b.FBX')).toBe('model');
     expect(sourceKind('a/b.exr')).toBe('image');
     expect(sourceKind('a.b/c')).toBeNull();
   });

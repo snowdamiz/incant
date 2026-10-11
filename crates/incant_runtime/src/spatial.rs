@@ -34,6 +34,7 @@ pub struct CookedSpatial {
     /// and spatial node does not pay for a full sprite configuration.
     pub sprite: Option<Box<crate::NativeSpriteRenderer>>,
     pub tilemap: Option<Box<crate::NativeTilemap>>,
+    pub flipbook: Option<std::sync::Arc<crate::NativeFlipbook>>,
     pub directional: Option<DirectionalLight>,
     pub point: Option<PointLight>,
     pub spot: Option<SpotLight>,
@@ -47,6 +48,7 @@ impl CookedSpatial {
             mesh: None,
             sprite: None,
             tilemap: None,
+            flipbook: None,
             directional: None,
             point: None,
             spot: None,
@@ -58,6 +60,7 @@ impl CookedSpatial {
             && self.mesh.is_none()
             && self.sprite.is_none()
             && self.tilemap.is_none()
+            && self.flipbook.is_none()
             && self.directional.is_none()
             && self.point.is_none()
             && self.spot.is_none()
@@ -92,6 +95,7 @@ pub(crate) fn validate<'a>(
     let invalid = || SceneError::Invalid("spatial declarations, limits or references");
     let mut ids = BTreeSet::new();
     let (mut tilemaps, mut tile_slots) = (0, 0usize);
+    let mut flipbook_frames = 0usize;
     let (mut meshes, mut sprites, mut directional, mut local, mut shadows, mut environments) =
         (0, 0, 0, 0, 0, 0);
     let asset = |id, kind| {
@@ -127,6 +131,15 @@ pub(crate) fn validate<'a>(
             sprites += 1;
             sprite.validate()?;
             if !asset(sprite.texture, VisualAssetKind::Texture) {
+                return Err(invalid());
+            }
+        }
+        if let Some(flipbook) = &node.flipbook {
+            flipbook.validate(node.sprite.as_deref().ok_or_else(invalid)?)?;
+            flipbook_frames = flipbook_frames
+                .checked_add(flipbook.frames.len())
+                .ok_or_else(invalid)?;
+            if flipbook_frames > crate::MAX_SCENE_FLIPBOOK_FRAMES {
                 return Err(invalid());
             }
         }

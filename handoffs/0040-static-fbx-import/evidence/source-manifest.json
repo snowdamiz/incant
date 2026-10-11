@@ -1,0 +1,1001 @@
+{
+ "files": {
+  "art/bevels.png": {
+   "bytes": 4550,
+   "provenance": "original (art.py): OpenGL/glTF-convention normal map: raised 35-degree button per island",
+   "sha256": "1fabc17e9895556b11870ce760c3e351af401a8d5b30ee8a6c6229a4ee2bbf24"
+  },
+  "art/face_art_v1.png": {
+   "bytes": 3685,
+   "provenance": "original (art.py): original asymmetric per-island art (F, axis labels, corner marks)",
+   "sha256": "3d1a9c465f2a5a8923267e40b69118346ae13a2b595f0273116997ddddd1ef70"
+  },
+  "art/face_art_v2.png": {
+   "bytes": 3696,
+   "provenance": "original (art.py): accepted-change art: G glyph, red islands",
+   "sha256": "544de777b6e484b43c797ee5d8b05a2f27b2cb05e5e6ae65976765f875dc35ab"
+  },
+  "art/panel_v1.png": {
+   "bytes": 3671,
+   "provenance": "original (art.py): project-relative panel art v1 (grey)",
+   "sha256": "c36709460164ab6cace7f627291cd470ed05111ec4a78e4b8ae9f92c444f5cec"
+  },
+  "art/panel_v2.png": {
+   "bytes": 3705,
+   "provenance": "original (art.py): panel art v2 (glyph 2, green)",
+   "sha256": "f3d92a6feeb4be8daba9bbe2a4e378af0eb71f921c59daa15801b1119171324e"
+  },
+  "controls/axes.glb": {
+   "bytes": 5764,
+   "provenance": "original glTF control: world axes",
+   "sha256": "f76111b09ea872b98c6d79b9a7986e48377789713e9371234f22c91ba21fe478"
+  },
+  "controls/backdrop.glb": {
+   "bytes": 1060,
+   "provenance": "original glTF control: uniform backdrop behind the opacity case",
+   "sha256": "71e09ea419f5cd7ab3c130dd0d9ced3dbb01664f5f52f77f27aa47a20234ca2e"
+  },
+  "controls/material_quads.glb": {
+   "bytes": 8320,
+   "provenance": "original glTF control: expected glTF values of the Lambert cases",
+   "sha256": "b703740c197ecf15a4182ac280435adb980ef2771eaa5e250c37042df8b53b23"
+  },
+  "controls/quad_face_art.glb": {
+   "bytes": 5124,
+   "provenance": "original glTF control: colour art UV reference",
+   "sha256": "1113bd859a18876189881878d7b613d7cb9e7f1b21629ba698a732cf72e06bd6"
+  },
+  "controls/quad_normal_explicit.glb": {
+   "bytes": 6192,
+   "provenance": "original glTF control: normal map, TANGENT (1,0,0,+1) per glTF 2.0",
+   "sha256": "2e3b776228611cac43a63f161f7e57376f292d2f3464dbbaa66710081effc5fd"
+  },
+  "controls/quad_normal_generated.glb": {
+   "bytes": 5992,
+   "provenance": "original glTF control: normal map, no TANGENT (engine-generated)",
+   "sha256": "b015e988df74d3c8d7a9f8604d65035de566687859c8e61416dd1b2e35fcdc6e"
+  },
+  "controls/relief.glb": {
+   "bytes": 2040,
+   "provenance": {
+    "height": 0.17505188455242743,
+    "inner_half": 0.1875,
+    "note": "original glTF control: real-geometry button",
+    "outer_half": 0.4375
+   },
+   "sha256": "b1f3bb3895a80e4537b55ffca44d69c35a090782c3effc92d40fe57696a3c4bd"
+  },
+  "controls/ruler.glb": {
+   "bytes": 8808,
+   "provenance": "original glTF control: 1 m ruler, 10 cm segments",
+   "sha256": "10231d725113be72c78b99ff42c8b4ae3575a868e51497f0f8596aeffcb9169d"
+  },
+  "derived/bad_bump_channel.fbx": {
+   "bytes": 19128,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 0.8",
+     "lambert1 DiffuseFactor 1",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 Bump"
+    ],
+    "purpose": "expected explicit refusal"
+   },
+   "sha256": "286dee8cde617e39d5bd3a351daaa1e0a849d99ad351ae2773bd55be2ef822cb"
+  },
+  "derived/bad_escape_path.fbx": {
+   "bytes": 14220,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (project-relative ..\\..\\escape.png)",
+     "connections to lambert1 DiffuseColor"
+    ],
+    "purpose": "expected explicit refusal"
+   },
+   "sha256": "b811d17033831c067e64b4b6cca442d8dd6f3fac78c3690f84377e895c023497"
+  },
+  "derived/bad_missing_image.fbx": {
+   "bytes": 14228,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (project-relative textures\\missing.png)",
+     "connections to lambert1 DiffuseColor"
+    ],
+    "purpose": "expected explicit refusal"
+   },
+   "sha256": "0829e80d270d44292255da0e6725619b0ed67f5cb2b7a75d3f42115e184ca627"
+  },
+  "derived/bad_phong.fbx": {
+   "bytes": 19144,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 DiffuseColor",
+     "lambert1 ShadingModel phong"
+    ],
+    "purpose": "expected explicit refusal: legacy Phong"
+   },
+   "sha256": "f67922dbb1fea2aa50ab075408770c2028eb5e1503c57df390e169f8aa422452"
+  },
+  "derived/bad_second_uv.fbx": {
+   "bytes": 19832,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 DiffuseColor",
+     "second UV set map2 on Layer 1"
+    ],
+    "purpose": "expected explicit refusal: two UV sets"
+   },
+   "sha256": "b0947ef35cf1b0d8a6d4694e9582cb7d7b48e3a2f6566e7a5fd41526418008d3"
+  },
+  "derived/bad_specular_channel.fbx": {
+   "bytes": 19192,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 DiffuseColor+SpecularColor"
+    ],
+    "purpose": "expected explicit refusal"
+   },
+   "sha256": "b54598525b46ea8d6a79ddb4d3f38c30170d8fa8c78738740ffa021fe89cba3a"
+  },
+  "derived/bad_transparency_map.fbx": {
+   "bytes": 19140,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 0.8",
+     "lambert1 DiffuseFactor 1",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 TransparentColor"
+    ],
+    "purpose": "expected explicit refusal"
+   },
+   "sha256": "4107316e08fcbde7ab9ce9e6f1e4f057c4af742628c5c5ba20e1441ae0c59376"
+  },
+  "derived/bad_uv_transform.fbx": {
+   "bytes": 19194,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "texture properties: P: \"Translation\", \"Vector\", \"\", \"A\",0.25,0,0",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 DiffuseColor"
+    ],
+    "purpose": "expected explicit refusal"
+   },
+   "sha256": "52f2a753489d657bbcdc6e4e53a94a306fd734a056e5d120c8f93e58cf9e6bae"
+  },
+  "derived/crate_malformed.fbx": {
+   "bytes": 11494,
+   "provenance": {
+    "base": "derived/crate_v2.fbx",
+    "edits": [
+     "truncated to the first 60% of bytes"
+    ],
+    "purpose": "rejected malformed reimport"
+   },
+   "sha256": "cb35b3b7c42a61028f93743b3b78cccc761ca0b3e0eba51ddf5cfa205d9b760c"
+  },
+  "derived/crate_unsupported.fbx": {
+   "bytes": 19204,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 DiffuseColor+SpecularColor"
+    ],
+    "purpose": "rejected reimport: same texture also on SpecularColor"
+   },
+   "sha256": "d55ee94e48b94384e36c1a86c9de594f29486ce53700d88f23513c833ca413fe"
+  },
+  "derived/crate_v1.fbx": {
+   "bytes": 19146,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 DiffuseColor"
+    ],
+    "purpose": "reimport v1 (embedded art v1)"
+   },
+   "sha256": "eff24707f851325e150a8f91697e73da1758030592454344544ba7dd06b63c35"
+  },
+  "derived/crate_v2.fbx": {
+   "bytes": 19158,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 DiffuseColor"
+    ],
+    "purpose": "reimport accepted change (embedded art v2)"
+   },
+   "sha256": "fb8ba7199705525df39672311e29fe1b7776d1952803647c5ff5eacd62cf30e0"
+  },
+  "derived/instances.fbx": {
+   "bytes": 29672,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "two embedded textures, material bevel_normal, seven Model instances",
+     "instance, geometry and material connections"
+    ],
+    "purpose": "mirrored/rotated/nonuniform instances"
+   },
+   "sha256": "e70289f9a88911f16bd783dbf522f311f974600016db00d6d373ee92957f8129"
+  },
+  "derived/materials.fbx": {
+   "bytes": 21579,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 0.2,0.5,0.9",
+     "lambert1 DiffuseFactor 0.5",
+     "embedded emissive texture, three Lambert materials and instances",
+     "material case connections"
+    ],
+    "purpose": "Lambert diffuse x factor, emissive map, constant emissive, opacity 0.5"
+   },
+   "sha256": "bbd4a32d062ab91797c9c04bf2b53b0a997871f30c949a2946ca769ce221fbcb"
+  },
+  "derived/normal_embedded.fbx": {
+   "bytes": 20281,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 0.8",
+     "lambert1 DiffuseFactor 1",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 NormalMap"
+    ],
+    "purpose": "embedded NormalMap on Lambert"
+   },
+   "sha256": "a9b1544fb3729a9825745068e9dc693a7045786e9719f55e9d67070e86b976d2"
+  },
+  "derived/panel.fbx": {
+   "bytes": 14224,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (project-relative textures\\panel.png)",
+     "connections to lambert1 DiffuseColor"
+    ],
+    "purpose": "project-relative dependency-change subject"
+   },
+   "sha256": "b1aa45029dedf6fc1c771021722651ebc9cc66025aab749856f646f94f16dc2f"
+  },
+  "derived/parented_shear_mirror.fbx": {
+   "bytes": 16156,
+   "provenance": {
+    "base": "maya_parented_cubes_7500_ascii.fbx",
+    "edits": [
+     "Parent Lcl Scaling -1.1,1.2,1.3",
+     "Child Lcl Rotation 0,0,40 (shear under the nonuniform parent)"
+    ],
+    "purpose": "mirrored nonuniform parent, rotated child"
+   },
+   "sha256": "afbc6d95d3539696de315ebc95118850cbb4e9a858ecb3291095ac4e27adbe40"
+  },
+  "derived/tex_embedded.fbx": {
+   "bytes": 19146,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (embedded)",
+     "connections to lambert1 DiffuseColor"
+    ],
+    "purpose": "embedded colour map"
+   },
+   "sha256": "eff24707f851325e150a8f91697e73da1758030592454344544ba7dd06b63c35"
+  },
+  "derived/tex_external.fbx": {
+   "bytes": 14230,
+   "provenance": {
+    "base": "maya_cube_7500_ascii.fbx",
+    "edits": [
+     "lambert1 DiffuseColor 1",
+     "lambert1 DiffuseFactor 0.800000011920929",
+     "Video/Texture 'Image' (project-relative textures\\face_art.png)",
+     "connections to lambert1 DiffuseColor"
+    ],
+    "purpose": "project-relative colour map (Windows separator, as Maya writes)"
+   },
+   "sha256": "99a2ce88b7526955777efafd07c57ce85bc4d6d95215f1e8711bb5c1c75f7349"
+  },
+  "twins/blender_cube.glb": {
+   "bytes": 1716,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     "blender_encoding": true,
+     "materials": 0,
+     "meshes": 1,
+     "models": [
+      {
+       "materials": 0,
+       "name": "Cube",
+       "order": "XYZ",
+       "rotation": [
+        -90.00000933466734,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "unit_meters": 1.0
+    },
+    "twin_of": "crates/incant_assets/tests/fixtures/fbx/blender_272_cube_7400_binary.fbx"
+   },
+   "sha256": "bd1819f11e0925b83a0129bd15b20e49a6e49626bdcad3531a88e70180ee35d8"
+  },
+  "twins/instances.glb": {
+   "bytes": 13956,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "blender_encoding": false,
+     "materials": 2,
+     "meshes": 2,
+     "models": [
+      {
+       "materials": 1,
+       "name": "A_mirror_x",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        -1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        1.6,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "A_nonuniform",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.4,
+        0.7,
+        1.0
+       ],
+       "translation": [
+        3.2,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "A_mirror_y",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        -1.0,
+        1.0
+       ],
+       "translation": [
+        4.8,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "B_identity",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        -2.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "B_mirror_x",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        -1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        1.6,
+        -2.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "B_nonuniform",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.4,
+        0.7,
+        1.0
+       ],
+       "translation": [
+        3.2,
+        -2.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "B_rot_z90",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        90.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        4.8,
+        -2.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "pCube1",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "unit_meters": 0.01
+    },
+    "textures": "embedded images; Maya tangent frame",
+    "twin_of": "derived/instances.fbx"
+   },
+   "sha256": "981693e667765553826533ac462446c41e040f65ea55c07b22282eb693de9ada"
+  },
+  "twins/max_instances.glb": {
+   "bytes": 2880,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      -0.707106781,
+      0.0,
+      0.0,
+      0.707106781
+     ],
+     "blender_encoding": false,
+     "materials": 0,
+     "meshes": 1,
+     "models": [
+      {
+       "materials": 0,
+       "name": "Box004",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        30.000000445292
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        1.13686837721616e-13,
+        -4.37113953921653e-07,
+        10.0
+       ]
+      },
+      {
+       "materials": 0,
+       "name": "Box003",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        30.000000445292
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        -2.8421709430404e-14,
+        -8.74227737313049e-07,
+        20.0
+       ]
+      },
+      {
+       "materials": 0,
+       "name": "Box002",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        30.000000445292
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        -4.37113897078234e-07,
+        10.0
+       ]
+      },
+      {
+       "materials": 0,
+       "name": "Box001",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        -4.37113897078234e-07,
+        10.0
+       ]
+      }
+     ],
+     "unit_meters": 0.0254
+    },
+    "twin_of": "crates/incant_assets/tests/fixtures/fbx/max_geometry_transform_instances_7700_ascii.fbx"
+   },
+   "sha256": "6daae6ff36ff21a8986e934866fba595f7eb995793a2d7c2040e7e85e5c8f0e5"
+  },
+  "twins/maya_cube.glb": {
+   "bytes": 1920,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "blender_encoding": false,
+     "materials": 1,
+     "meshes": 1,
+     "models": [
+      {
+       "materials": 1,
+       "name": "pCube1",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "unit_meters": 0.01
+    },
+    "twin_of": "crates/incant_assets/tests/fixtures/fbx/maya_cube_7500_ascii.fbx"
+   },
+   "sha256": "aeb79672ffde37117ebc4562255bc3e6f04bc08963b9dcdf901a01712645bc3e"
+  },
+  "twins/maya_parented.glb": {
+   "bytes": 3396,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "blender_encoding": false,
+     "materials": 1,
+     "meshes": 2,
+     "models": [
+      {
+       "materials": 1,
+       "name": "Child",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        -1.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "Parent",
+       "order": "ZYX",
+       "rotation": [
+        10.0,
+        20.0,
+        30.0
+       ],
+       "scale": [
+        1.1,
+        1.2,
+        1.3
+       ],
+       "translation": [
+        0.1,
+        0.2,
+        0.3
+       ]
+      }
+     ],
+     "unit_meters": 0.01
+    },
+    "twin_of": "crates/incant_assets/tests/fixtures/fbx/maya_parented_cubes_7500_ascii.fbx"
+   },
+   "sha256": "0400f2e59fea0c27282f92d33fa7549e34228066552b4a12df6e2606a5c1c220"
+  },
+  "twins/normal_embedded.glb": {
+   "bytes": 7496,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "blender_encoding": false,
+     "materials": 1,
+     "meshes": 1,
+     "models": [
+      {
+       "materials": 1,
+       "name": "pCube1",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "unit_meters": 0.01
+    },
+    "textures": "embedded images; Maya tangent frame",
+    "twin_of": "derived/normal_embedded.fbx"
+   },
+   "sha256": "3d8c398c1a087d4cffff43841bd87a0816a404214ca05cd63964e37d1d62daff"
+  },
+  "twins/shear_mirror.glb": {
+   "bytes": 3428,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "blender_encoding": false,
+     "materials": 1,
+     "meshes": 2,
+     "models": [
+      {
+       "materials": 1,
+       "name": "Child",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        40.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        -1.0,
+        0.0
+       ]
+      },
+      {
+       "materials": 1,
+       "name": "Parent",
+       "order": "ZYX",
+       "rotation": [
+        10.0,
+        20.0,
+        30.0
+       ],
+       "scale": [
+        -1.1,
+        1.2,
+        1.3
+       ],
+       "translation": [
+        0.1,
+        0.2,
+        0.3
+       ]
+      }
+     ],
+     "unit_meters": 0.01
+    },
+    "twin_of": "derived/parented_shear_mirror.fbx"
+   },
+   "sha256": "766162175d22adc294c7b41ff875ab98d458770b08deea3ebebcc6678d122719"
+  },
+  "twins/suzanne.glb": {
+   "bytes": 64564,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "blender_encoding": true,
+     "materials": 7,
+     "meshes": 1,
+     "models": [
+      {
+       "materials": 7,
+       "name": "Suzanne",
+       "order": "XYZ",
+       "rotation": [
+        -90.00000933466734,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        100.0,
+        100.0,
+        100.0
+       ],
+       "translation": [
+        0.0,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "unit_meters": 0.01
+    },
+    "twin_of": "crates/incant_assets/tests/fixtures/fbx/blender_suzanne_multimaterial_7400_binary.fbx"
+   },
+   "sha256": "191c682de8293460cf46b18bf7d4cc1d8294195659a06ef3d81c889088156891"
+  },
+  "twins/tex_embedded.glb": {
+   "bytes": 6152,
+   "provenance": {
+    "summary": {
+     "axis_rotation": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "blender_encoding": false,
+     "materials": 1,
+     "meshes": 1,
+     "models": [
+      {
+       "materials": 1,
+       "name": "pCube1",
+       "order": "XYZ",
+       "rotation": [
+        0.0,
+        0.0,
+        0.0
+       ],
+       "scale": [
+        1.0,
+        1.0,
+        1.0
+       ],
+       "translation": [
+        0.0,
+        0.0,
+        0.0
+       ]
+      }
+     ],
+     "unit_meters": 0.01
+    },
+    "textures": "embedded images; Maya tangent frame",
+    "twin_of": "derived/tex_embedded.fbx"
+   },
+   "sha256": "50ba73cabf99ce0c6cb3207ade08eea591af9bcb9506fdaa7502921efb040ab6"
+  },
+  "upstream/blender_272_cube_7400_binary.fbx": {
+   "bytes": 11020,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "bb78c7ee90fa811baa9a4400b613c845d3a5329f4bfa87ff5e20692ddb8bd2ae"
+  },
+  "upstream/blender_293_embedded_textures_7400_binary.fbx": {
+   "bytes": 33212,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "0747b141c0ea4467574719bbebe855ef2a0f25c9bf51792439a6bf1d2f380944"
+  },
+  "upstream/blender_suzanne_multimaterial_7400_binary.fbx": {
+   "bytes": 41692,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "503bdf6683b7473bbd40e2220c9f7ab91b03598f06bf39692379afe020b1a3c6"
+  },
+  "upstream/max2009_cube_anim_6100_ascii.fbx": {
+   "bytes": 16851,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "fb5f2cd52386a6a62b8ec15bc4ad87dc054d3b1381eb44ccd569cae251489d4d"
+  },
+  "upstream/max_geometry_transform_instances_7700_ascii.fbx": {
+   "bytes": 13188,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "21aca91bf854271dc9439c5bb1e6d8dc6b704e0fa59fa44cfd57e5d2eabc21a2"
+  },
+  "upstream/maya_blend_shape_cube_7700_ascii.fbx": {
+   "bytes": 16955,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "2ae340094aa37a9cff77bcdf1b616b065bc7f4c662124ac81bcffec278b51bb9"
+  },
+  "upstream/maya_cube_7500_ascii.fbx": {
+   "bytes": 13640,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "00a26466be678131f143a1fa29804eab09a7520f40787c7dc51f5b4bb9e6b98c"
+  },
+  "upstream/maya_instanced_skin_7700_ascii.fbx": {
+   "bytes": 34732,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "7294773313461e56d1bb94e4b084b3da5efb18b643b0673ce211337e51d26003"
+  },
+  "upstream/maya_parented_cubes_7500_ascii.fbx": {
+   "bytes": 16102,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "643fb64619027196cf45d722678004b7a75f79cd942a4e95e1298d8b064c45d5"
+  },
+  "upstream/maya_textured_cube_7500_ascii.fbx": {
+   "bytes": 39722,
+   "provenance": "ufbx v0.23.1 data/, MIT; unmodified, verified against provenance.json",
+   "sha256": "c15cf4effe57f4344737bdd485b69b5665c983eab6d13c61d286797d4bd02dbb"
+  }
+ },
+ "generator": "handoffs/0040-static-fbx-import/tools/make_sources.py"
+}

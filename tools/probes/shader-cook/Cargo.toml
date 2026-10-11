@@ -1,0 +1,8 @@
+[package]
+name = "incant-shader-cook-probe"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[dependencies]
+naga = { version = "=29.0.4", features = ["wgsl-in", "msl-out", "spv-out", "hlsl-out"] }
+serde_json = "=1.0.151"

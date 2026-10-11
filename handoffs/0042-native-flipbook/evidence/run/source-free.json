@@ -1,0 +1,42 @@
+{
+ "removed": {
+  "artifacts/0042-native-flipbook/r1/anim/anim.incant.json": "1a7f06c37b18262680f685873e0d832a1416705635fbb55fe1752f437638315f",
+  "artifacts/0042-native-flipbook/r1/anim/anim.incant.journal.jsonl": "d42af67a0fcab452c5dd71000ea8facabd11dc5a1e813cfc0d8b93939fef15d6",
+  "artifacts/0042-native-flipbook/r1/anim/art/badge.png": "9bec75cfcfad225b3835eaaf13b431eeaa2f6eab5880fa9a1f718c9c68cbed85",
+  "artifacts/0042-native-flipbook/r1/anim/art/f0.png": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf",
+  "artifacts/0042-native-flipbook/r1/anim/art/f1.png": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901",
+  "artifacts/0042-native-flipbook/r1/anim/art/f2.png": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911",
+  "artifacts/0042-native-flipbook/r1/anim/art/f3.png": "d69167e081b2426df403c54d0ce1934d5cf8071a76c557c486362b3237751559",
+  "artifacts/0042-native-flipbook/r1/anim/art/f4.png": "b4d1ea2b8be901f6cae46415dfb290871a89d9e6e0c1b88b61c7326ed3459212",
+  "artifacts/0042-native-flipbook/r1/anim/art/flip.atlas.json": "860f3e4b4907c5d7c516907cd7c701ad43f2a07bca60381fc59df6d3f50eba10",
+  "artifacts/0042-native-flipbook/r1/anim/art/plates.png": "659a0a6e03a42589332b997fd5dcf6473bc46d70e7801dfc8725f1b283b436c2",
+  "artifacts/0042-native-flipbook/r1/anim/art/sheet.png": "03ab87e19c27ea5577e675be48c5da6060a1a6167e176a94f3c18ab869c989f4",
+  "artifacts/0042-native-flipbook/r1/anim/art/t0.png": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b",
+  "artifacts/0042-native-flipbook/r1/anim/art/t1.png": "7694846502fd913dfdfef1bb37d76819977de76fdf15c088fdf5d0b681de1863",
+  "artifacts/0042-native-flipbook/r1/anim/art/t2.png": "a8bcbe23764ce6640f52d3811f8a66d009a7ff506112942770c5e2cbcb95fda1"
+ },
+ "fixture_copy": "artifacts/0042-native-flipbook/r1/private-fixture/anim",
+ "remaining": {
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+ },
+ "kept_unchanged": true,
+ "kept": {
+  "artifacts/0042-native-flipbook/r1/cooked/anim.scene": "742d068507f40ee7c703f0b08f23521625dc4386b6ba68c96114b61615c60aaa",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+  "artifacts/0042-native-flipbook/r1/anim/.incant/cache/textures/e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+ },
+ "at": "2026-10-11T01:20:51.395-04:00"
+}
