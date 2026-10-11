@@ -22,8 +22,8 @@ visual work, and Astra owns correctness and integration.
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
 | Import completion and Undo | Native imports return an exact revision/transaction receipt; unchanged imports preserve history and redo without offering stale Undo. Claude 0038 accepted the browser completion copy on frozen source. | The original PLAN revision 8/import union is included in merged PR76 and PR80 after their full applicable checks passed; 534 UI tests and the scoped native receipt/Undo checks pass. [Evidence](docs/spikes/editor-import-receipts.md). |
-| Native TypeScript cooking | Strict bounded local module cooking, flat source maps and developer native playback pass 12 Node/90 Python tests and six real source-deleted process controls. | Local only; full editor/project Script routing, complete SDK and hosted/export/device gates remain. [Evidence](docs/spikes/native-typescript-cook.md). |
-| Native Play RPC and agent | Cooked-native retained RPC and bounded agent play/query now pass 87 scoped release tests, 92 Python/12 Node tests and twelve source-deleted developer processes. A real saved-OAuth Astra turn successfully ran and queried native gameplay without edits. | Local combined candidate integrated with verified main81; integrated verification and hosted checks/publication, editor controls, project Script routing, gameplay capture and complete session saves remain. [RPC](docs/spikes/native-play-rpc.md), [agent evidence](docs/spikes/native-agent-play.md). |
+| Native TypeScript cooking | Project-attached sources now cook once into grouped native behaviors with frozen per-entity props, scoped timers and atomic whole-tick rollback. 730 workspace tests, 98 Python/17 Node/536 UI tests and a 16-process source-deleted embedding proof pass locally. | Reviewed local implementation; editor controls, source editing, complete SDK/save/export integration and hosted/device gates remain. [Attached scripts](docs/spikes/native-project-scripts.md), [embedding proof](docs/spikes/native-project-script-embedding.md). |
+| Native Play RPC and agent | Cooked-native retained RPC and bounded agent play/query passed twelve source-deleted developer processes and a real saved-OAuth Astra turn. The new local attached-script route passes actual fixed-Node dispatcher tests, public CLI motion checks and a saved-OAuth provider run with native play/query. | Base capability is in PR82, whose corrected head is running required checks. Attached-script changes stay local for combined integration; editor controls, gameplay capture and complete session saves remain. [RPC](docs/spikes/native-play-rpc.md), [agent evidence](docs/spikes/native-agent-play.md). |
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is merged after all 20 checks. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | Optional cooked native game window has bounded recovery, keyboard/mouse input, suspension and device audio. Source-free lifecycle checks and Claude0037 corrected native acceptance pass. [Evidence](docs/spikes/native-window-player.md). | PR63 is included in merged [PR80](https://github.com/snowdamiz/incant/pull/80), whose 21 applicable checks passed. Paused refresh preserves gameplay/audio; fullscreen-route limitations remain explicit. No phone or frame-budget claim. |
 | Native tilemaps | Typed v6 data and exact solid-cell collision preparation preserve the reviewed [PR68](https://github.com/snowdamiz/incant/pull/68) ancestry in the consolidated union. Retained GPU tile rendering now shares checked atlas versions, painter ordering and combined sprite/tile resource caps; 45 ordinary and 62 GPU tests pass. | Claude0039 accepted scoped tile appearance; PR68/73 are included in merged PR80 with passing hosted checks. Native solid-map collision is included through the planar physics boundary below; legacy Play remains unsupported. [Data](docs/spikes/native-tilemaps.md), [rendering](docs/spikes/native-tilemap-rendering.md). |
@@ -57,10 +57,12 @@ main tree is verified against the tested source. Included source PRs close only
 after their exact authored commits are verified in main. This avoids dependent
 PR chains and repeated CI restarts for metadata-only updates.
 
-PR76, PR79 and PR80 are merged. PR80 includes the exact PR63/68/73/78 source
-history. The next publication is one reviewed union of corrected static-FBX
-import and the prewarming/flipbook change, preserving both original histories.
-Further work remains local; this queue does not waive any phase or device gate. [Verified ancestry and queue evidence](docs/spikes/foundation-integration-queue.md).
+PR76, PR79, PR80 and PR81 are merged. PR80 includes the exact PR63/68/73/78
+source history; PR81 includes corrected static FBX, prewarming and flipbooks.
+Only PR82 is currently published: its reviewed timer-fixture correction is
+running the full required matrix. The next related SDK/color/shipping-proof
+changes are being consolidated locally; attached-script work remains local too.
+This queue does not waive any phase or device gate. [Verified ancestry and queue evidence](docs/spikes/foundation-integration-queue.md).
 
 ## Implemented boundaries and evidence
 
@@ -202,8 +204,9 @@ to its source digest. Replay, selected observations, committed logs and optional
 PCM preserve authoring and publish no partial output on runtime failure. The
 integrated source passes 601 ordinary tests, 88 tooling tests, six custom-behavior
 process controls and a fresh 47-process shipping-player regression proof.
-[Evidence](docs/spikes/native-project-play.md). Editor Play, agent play tools,
-project script routing, GPU capture and complete session saves remain open.
+[Evidence](docs/spikes/native-project-play.md). Native agent play tools are now
+in PR82; the local attached-source implementation is recorded above. Editor Play,
+GPU capture and complete session saves remain open.
 
 ## Consolidated native-window and 2D integration
 

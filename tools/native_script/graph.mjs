@@ -10,6 +10,29 @@ export const SDK_IMPORT = '@incant/runtime/native';
 export const fail = message => { throw new Error(`Native TypeScript cook: ${message}`); };
 export const portable = file => file.split(path.sep).join('/');
 
+/** A catalog is data, never compiler configuration. Stable source order also
+ * determines module initialization order when entries share dependencies. */
+export function sourceCatalog(value) {
+  if (!Array.isArray(value) || !value.length || value.length > LIMITS.modules)
+    fail('source catalog must contain 1–64 entries');
+  const ids = new Set(), paths = new Set();
+  const entries = value.map(item => {
+    if (!item || typeof item !== 'object' || Array.isArray(item)
+        || Object.keys(item).sort().join(',') !== 'id,path'
+        || typeof item.id !== 'string' || !/^[0-7][0-9A-HJKMNP-TV-Z]{25}$/u.test(item.id)
+        || typeof item.path !== 'string' || Buffer.byteLength(item.path) > 1024
+        || /[\\\x00-\x1f\x7f]/u.test(item.path) || item.path.includes(':')
+        || item.path.split('/').some(part => !part || part === '.' || part === '..')
+        || !item.path.endsWith('.ts') || item.path.endsWith('.d.ts'))
+      fail('source catalog requires canonical ULIDs and portable relative .ts paths');
+    if (ids.has(item.id)) fail('duplicate source ID in catalog');
+    if (paths.has(item.path)) fail('multiple source IDs alias the same entry path');
+    ids.add(item.id); paths.add(item.path);
+    return { id: item.id, path: item.path };
+  });
+  return entries.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+}
+
 function inside(root, file) {
   const relative = path.relative(root, file);
   return relative !== '' && !path.isAbsolute(relative) && relative !== '..'
@@ -106,9 +129,18 @@ function imports(source, label) {
 }
 
 export async function snapshotGraph(rootArgument, entryArgument) {
+  return snapshot(rootArgument, [{ path: entryArgument }]);
+}
+
+/** All entries share one captured graph and aggregate source/module quotas. */
+export async function snapshotProjectGraph(rootArgument, catalog) {
+  return snapshot(rootArgument, sourceCatalog(catalog));
+}
+
+async function snapshot(rootArgument, catalog) {
   const root = await fs.realpath(path.resolve(rootArgument));
   if (!(await fs.stat(root)).isDirectory()) fail('source root must be a directory');
-  const entry = path.resolve(root, entryArgument);
+  const entries = catalog.map(item => ({ ...item, file: path.resolve(root, item.path) }));
   const modules = new Map();
   let sourceBytes = 0;
   const resolveImport = async (from, name) => {
@@ -141,7 +173,7 @@ export async function snapshotGraph(rootArgument, entryArgument) {
       await visit(dependency);
     }
   };
-  await visit(entry);
-  return { root, entry, sourceBytes, modules: [...modules.values()].sort((a, b) =>
+  for (const entry of entries) await visit(entry.file);
+  return { root, entry: entries[0].file, entries, sourceBytes, modules: [...modules.values()].sort((a, b) =>
     a.label < b.label ? -1 : a.label > b.label ? 1 : 0) };
 }

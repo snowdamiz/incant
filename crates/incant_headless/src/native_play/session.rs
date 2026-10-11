@@ -21,6 +21,7 @@ pub(crate) struct StartOptions {
 pub(crate) struct Session {
     pub scene: String,
     pub script_source_sha256: String,
+    pub authored_scripts: bool,
     game: Game,
 }
 impl Session {
@@ -46,9 +47,21 @@ impl Session {
         };
         id(&scene)?;
         let camera = options.camera.as_deref().map(id).transpose()?;
-        let cooked = {
+        let authored_scripts = document.scenes.get(&scene).is_some_and(|scene| {
+            scene
+                .entities
+                .values()
+                .any(|entity| entity.components.contains_key("Script"))
+        });
+        let (cooked, code) = if authored_scripts {
+            let prepared = incant_cook::prepare_script_scene(document, &scene).map_err(native)?;
+            super::compiler::compile(prepared, root)?.into_parts()
+        } else {
             let bytes = incant_cook::cook_scene(document, &scene).map_err(native)?;
-            CookedScene::from_bytes(&bytes).map_err(native)?
+            (
+                CookedScene::from_bytes(&bytes).map_err(native)?,
+                embedded::load().map_err(native)?,
+            )
         };
         if camera.is_none() && (!cooked.spatial().is_empty() || !cooked.visual_assets().is_empty())
         {
@@ -116,7 +129,6 @@ impl Session {
                 .map_err(native)?,
             );
         }
-        let code = embedded::load().map_err(native)?;
         let script_source_sha256 = code
             .metadata()
             .source_sha256
@@ -129,7 +141,7 @@ impl Session {
             .is_some_and(|expected| expected != &script_source_sha256)
         {
             return Err(invalid(
-                "embedded script does not match requested source hash",
+                "selected script does not match requested source hash",
             ));
         }
         let actions = document.settings.input_actions.clone();
@@ -137,6 +149,7 @@ impl Session {
         Ok(Self {
             scene,
             script_source_sha256,
+            authored_scripts,
             game,
         })
     }
