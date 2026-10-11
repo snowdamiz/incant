@@ -90,7 +90,7 @@ def prepare(output, modules, wabt, cook):
         module = f'm{index}'
         (output / f'{module}.original.wasm').write_bytes(source.read_bytes())
         prepared = output / f'{module}.wasm'
-        run([cook, source, prepared])
+        run([cook, output / f'{module}.original.wasm', prepared])
         run([translator, prepared, '--module-name', module, '--no-debug-names',
              '--disable-exceptions', '--disable-tail-call', '--disable-memory64',
              '--disable-multi-memory', '--disable-simd', '--disable-relaxed-simd',
@@ -105,7 +105,7 @@ def prepare(output, modules, wabt, cook):
  fn incant_{module}_update(p:*mut c_void,cb:Import,ctx:*mut c_void,e:i64,dt:f64)->i32;
  fn incant_{module}_free(p:*mut c_void);
 }}''')
-        report.append({'name': name, 'prefix': module, 'input_sha256': sha(source),
+        report.append({'name': name, 'prefix': module, 'input_sha256': sha(output / f'{module}.original.wasm'),
                        'prepared_sha256': sha(prepared)})
     bindings.append('pub fn linked(name: &str) -> Option<ModuleExports> { match name {')
     for row in report:
