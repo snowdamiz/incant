@@ -217,7 +217,8 @@ fn authored_sources_share_navigation_quota_and_one_atomic_transaction() {
         );
         let code =
             CompiledScript::compile_project("navigation.cjs", &source, bindings.clone()).unwrap();
-        let mut host = ScriptHost::initialize(code, Duration::from_secs(3), Some(&world)).unwrap();
+        let mut host =
+            ScriptHost::initialize(code, Duration::from_secs(3), Some(&world), None).unwrap();
         let result = host.tick(&mut world, 1. / 60.);
         if reject {
             assert!(matches!(result, Err(ScriptError::InputLimit)));

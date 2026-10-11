@@ -7,6 +7,7 @@ mod bindings;
 #[cfg(feature = "compiler")]
 mod bindings_embed;
 mod budget;
+mod checkpoint;
 mod commands;
 mod compiled;
 #[cfg(feature = "compiler")]
@@ -18,6 +19,7 @@ mod loan;
 mod localization_values;
 mod logging;
 mod navigation_values;
+mod persistence;
 mod program;
 mod queries;
 mod query_values;
@@ -31,6 +33,7 @@ pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use bindings::{
     MAX_SCRIPT_INSTANCES, MAX_SCRIPT_SOURCES, ScriptBindings, ScriptInstance, ScriptValue,
 };
+pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
 pub use logging::{LogLevel, NativeLog, NativeLogs};
@@ -86,6 +89,8 @@ pub enum ScriptError {
     UnsupportedAsync,
     #[error("native bulk behavior callbacks must return undefined")]
     UnsupportedReturn,
+    #[error("invalid, excessive or ungranted persistent-state access")]
+    PersistenceInput,
     #[error("script host failed; recreate it before continuing")]
     FailedSession,
 }
@@ -101,13 +106,17 @@ pub enum ScriptError {
 /// detachment and scope exit; rejection restores numeric writes too.
 /// Physics queries read committed solver state during the loan; retained capabilities
 /// expire before diagnostics. Fixed-tick timers publish bounded data events;
-/// callback code, persistent saves and the legacy PlaySession are not migrated.
+/// callback code is never serialized. Opted-in native sessions can checkpoint
+/// typed persistent data; this is not an arbitrary VM heap snapshot.
 /// Bounded primitive logs publish only after a successful script transaction.
 pub struct ScriptHost {
     // Drop VM roots/context/runtime before bytecode: QuickJS's ROM-data module
     // loader may retain references to its input allocation.
     update: Persistent<Function<'static>>,
     freeze: Persistent<Function<'static>>,
+    persistent_wrap: Persistent<Function<'static>>,
+    persistent_opt_in: Vec<bool>,
+    persistent: std::rc::Rc<std::cell::RefCell<persistence::Store>>,
     project: Option<bindings::BoundProject>,
     context: Context,
     _runtime: Runtime,
@@ -126,56 +135,77 @@ impl ScriptHost {
     }
 
     pub fn with_budget(compiled: CompiledScript, limit: Duration) -> Result<Self, ScriptError> {
-        Self::initialize(compiled, limit, None)
+        Self::initialize(compiled, limit, None, None)
     }
 
     /// Attach the compiler-produced catalog to this exact fresh native world.
     /// Plain Spawn never inherits an attachment, including reuse of a stable ID.
     pub fn for_world(compiled: CompiledScript, world: &NativeWorld) -> Result<Self, ScriptError> {
-        Self::initialize(compiled, Duration::from_millis(50), Some(world))
+        Self::initialize(compiled, Duration::from_millis(50), Some(world), None)
     }
 
+    pub(crate) fn for_checkpoint(
+        compiled: CompiledScript,
+        world: &NativeWorld,
+        active: &[incant_runtime::StableId],
+    ) -> Result<Self, ScriptError> {
+        Self::initialize(
+            compiled,
+            Duration::from_millis(50),
+            Some(world),
+            Some(active),
+        )
+    }
     fn initialize(
         compiled: CompiledScript,
         limit: Duration,
         world: Option<&NativeWorld>,
+        active: Option<&[incant_runtime::StableId]>,
     ) -> Result<Self, ScriptError> {
         if compiled.bindings.is_some() && world.is_none() {
             return Err(ScriptError::ScriptBindings);
         }
         let (runtime, context, deadline) = vm(limit, compiled.allow_source)?;
-        let (freeze, project) = context.with(|ctx| {
-            let freeze = compiled.harden(&ctx).map_err(|error| {
+        let (freeze, persistent_wrap, project) = context.with(|ctx| {
+            let (freeze, persistent_wrap) = compiled.harden(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "initialization", &deadline)
             })?;
             let project = compiled
                 .bindings
                 .as_ref()
                 .map(|bindings| {
-                    bindings::BoundProject::new(
-                        &ctx,
-                        &freeze,
-                        bindings,
-                        world.expect("checked native world"),
-                    )
+                    let world = world.expect("checked native world");
+                    match active {
+                        Some(ids) => {
+                            bindings::BoundProject::restore(&ctx, &freeze, bindings, world, ids)
+                        }
+                        None => bindings::BoundProject::new(&ctx, &freeze, bindings, world),
+                    }
                 })
                 .transpose()?;
-            Ok::<_, ScriptError>((Persistent::save(&ctx, freeze), project))
+            Ok::<_, ScriptError>((
+                Persistent::save(&ctx, freeze),
+                Persistent::save(&ctx, persistent_wrap),
+                project,
+            ))
         })?;
         // Fixed engine hardening runs first. Its two internal module promises
         // must not change the guest module's separately measured baseline.
         let synchronous = synchronous::Synchronous::install(&runtime);
-        let update = context.with(|ctx| {
-            let update = compiled.instantiate(&ctx).map_err(|error| {
+        let (update, persistent_opt_in) = context.with(|ctx| {
+            let (update, persistent_opt_in) = compiled.instantiate(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "initialization", &deadline)
             })?;
             synchronous.check(&ctx, true)?;
-            Ok::<_, ScriptError>(Persistent::save(&ctx, update))
+            Ok::<_, ScriptError>((Persistent::save(&ctx, update), persistent_opt_in))
         })?;
         diagnostics::check_deadline(&deadline)?;
         Ok(Self {
             update,
             freeze,
+            persistent_wrap,
+            persistent_opt_in,
+            persistent: Default::default(),
             project,
             context,
             _runtime: runtime,
@@ -236,20 +266,26 @@ impl ScriptHost {
                 .restore(&ctx)
                 .map_err(diagnostics::allocation)?;
             let mut schedule = self.schedule.clone();
+            let inspect = self
+                .persistent_wrap
+                .clone()
+                .restore(&ctx)
+                .map_err(diagnostics::allocation)?;
             let mut groups = Vec::new();
+            let mut retired = Vec::new();
             if let Some(project) = &mut self.project {
                 if project.incarnation != world.incarnation() {
                     return Err(ScriptError::ScriptBindings);
                 }
                 for (index, group) in project.groups.iter_mut().enumerate() {
                     let instances = group
-                        .snapshot(&ctx, &freeze, world)
+                        .snapshot(&ctx, &freeze, world, &mut retired)
                         .map_err(diagnostics::allocation)?;
                     let scope = schedule::Scope::Source(group.source);
                     if instances.is_empty() {
                         schedule.cancel_scope(scope);
                     } else {
-                        groups.push((index, scope, instances));
+                        groups.push((index, scope, instances, group.ids()));
                     }
                 }
             } else {
@@ -257,8 +293,11 @@ impl ScriptHost {
                     0,
                     schedule::Scope::Global,
                     rquickjs::Array::new(ctx.clone()).map_err(diagnostics::allocation)?,
+                    Vec::new().into(),
                 ));
             }
+            let persistent =
+                persistence::TickState::new(std::rc::Rc::clone(&self.persistent), retired);
             let (mut schedule, events) = schedule.advance(dt)?;
             let logs = logging::TickLogs::default();
             let log_api = logs.expose(&ctx).map_err(|error| {
@@ -267,11 +306,20 @@ impl ScriptHost {
             let timers = timers::TickTimers::default();
             let groups = groups
                 .into_iter()
-                .map(|(index, scope, instances)| {
+                .map(|(index, scope, instances, ids)| {
                     let api = timers.expose(&ctx, scope, &events).map_err(|error| {
                         diagnostics::javascript(&ctx, error, "timer bindings", &self.deadline)
                     })?;
-                    Ok::<_, ScriptError>((index, scope, instances, api))
+                    let state_api = persistent
+                        .expose(
+                            &ctx,
+                            scope,
+                            ids,
+                            self.persistent_opt_in[index],
+                            inspect.clone(),
+                        )
+                        .map_err(diagnostics::allocation)?;
+                    Ok::<_, ScriptError>((index, scope, instances, api, state_api))
                 })
                 .collect::<Result<Vec<_>, _>>()?;
             let clock = timers::clock(&ctx, &schedule).map_err(|error| {
@@ -330,8 +378,9 @@ impl ScriptHost {
                     queries.activate();
                     logs.activate();
                     let mut result = Ok(());
-                    for (index, scope, instances, timer_api) in groups {
+                    for (index, scope, instances, timer_api, state_api) in groups {
                         timers.activate(scope);
+                        persistent.activate(scope);
                         let called = function.call::<_, Value>((
                             rquickjs::function::Flat((
                                 chunks.clone(),
@@ -342,14 +391,15 @@ impl ScriptHost {
                                 navigation.clone(),
                                 localization.clone(),
                             )),
-                            clock.clone(),
-                            timer_api,
+                            rquickjs::function::Flat((clock.clone(), timer_api)),
                             log_api.clone(),
                             flipbooks.clone(),
                             index as u32,
                             instances,
+                            state_api,
                         ));
                         timers.revoke();
+                        persistent.revoke();
                         match called {
                             Err(error) => {
                                 result = Err(error);
@@ -400,17 +450,19 @@ impl ScriptHost {
                     let commands = commands.take()?;
                     schedule.apply(timers.take()?)?;
                     let logs = logs.take()?;
-                    Ok((loan.finish(), commands, schedule, logs))
+                    let changes = persistent.take()?;
+                    Ok((loan.finish(), commands, schedule, logs, changes))
                 })
                 .map_err(ScriptError::Structural)?
         });
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
-        let result = result.and_then(|(undo, mut commands, schedule, logs)| {
+        let result = result.and_then(|(undo, mut commands, schedule, logs, changes)| {
             undo.apply(world, &mut commands)?;
             self.logs.commit(schedule.tick, logs);
             self.schedule = schedule;
+            self.persistent.borrow_mut().apply(changes);
             Ok(())
         });
         if result.is_err() {

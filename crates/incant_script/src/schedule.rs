@@ -11,9 +11,9 @@ pub(crate) enum Scope {
     Source(incant_runtime::StableId),
 }
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord)]
-struct Key {
-    scope: Scope,
-    id: String,
+pub(crate) struct Key {
+    pub scope: Scope,
+    pub id: String,
 }
 pub(crate) struct ScopedAction {
     pub scope: Scope,
@@ -22,18 +22,18 @@ pub(crate) struct ScopedAction {
 
 pub(crate) const MAX_TIMERS: usize = 128;
 pub(crate) const MAX_TIMER_ACTIONS: usize = 256;
-const MAX_TICK: u64 = (1 << 53) - 1;
+pub(crate) const MAX_TICK: u64 = (1 << 53) - 1;
 
 #[derive(Clone, Default)]
 pub(crate) struct Schedule {
     pub tick: u64,
     pub elapsed_seconds: f64,
-    timers: BTreeMap<Key, Timer>,
+    pub timers: BTreeMap<Key, Timer>,
 }
 #[derive(Clone)]
-struct Timer {
-    due: u64,
-    interval: Option<u32>,
+pub(crate) struct Timer {
+    pub due: u64,
+    pub interval: Option<u32>,
 }
 #[derive(Clone)]
 pub(crate) struct Event {

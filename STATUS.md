@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Opt-in native session checkpoints — locally verified
+
+Bytecode behaviors can explicitly opt into bounded typed persistent data and
+ordinary-load checkpoints containing committed world state, live authored
+attachments and source-scoped timers. Trusted initial scene/program bindings are
+checked before VM execution; invalid replacement preserves the live session.
+Integrated main101 passes 324 affected tests/doctests, scoped Clippy/contracts and four successful fresh
+source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
+bytes match uninterrupted execution. Module globals/closures remain explicitly
+ephemeral and physical input restarts neutral. Physics/audio/static modules,
+complete GameSession/player/export loading and durable file publication remain
+unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+
 ## Shared agent project access — locally verified
 
 The agent loop can share the editor command bus without holding its mutex during
