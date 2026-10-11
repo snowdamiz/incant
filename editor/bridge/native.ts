@@ -682,7 +682,7 @@ export class NativeBridge implements EditorBridge {
       } catch (error) {
         if (generation === this.agentGeneration) {
           await this.refreshAgent();
-          this.agentError = agentFailure(error);
+          if (generation === this.agentGeneration) this.agentError = agentFailure(error);
         }
         return { ok: false, error: agentFailure(error) };
       } finally { this.agentStarting = false; this.publishAgent(); }
@@ -712,8 +712,10 @@ export class NativeBridge implements EditorBridge {
     } catch (error) {
       if (generation === this.agentGeneration) {
         await this.refreshAgent();
-        this.agentError = agentFailure(error);
-        this.publishAgent();
+        if (generation === this.agentGeneration) {
+          this.agentError = agentFailure(error);
+          this.publishAgent();
+        }
       }
       if (request.type === 'agent.approve') this.agentDecisions.delete(`${request.turnId}:${request.approvalId}`);
       return { ok: false, error: agentFailure(error) };

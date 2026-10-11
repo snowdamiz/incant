@@ -384,6 +384,39 @@ describe('native agent transport', () => {
     expect(bridge.getSnapshot().agent.status).toBe('idle');
   });
 
+  it.each(['send', 'cancel', 'approve'] as const)('does not publish an old %s failure after its recovery read is superseded by an account change', async (action) => {
+    const old = deferred<EngineAgentRead>();
+    const recoveryStarted = deferred<void>();
+    const initial = action === 'send' ? session() : session(2, awaiting());
+    let current = initial;
+    let reads = 0;
+    const error = { code: 'agent.provider', message: 'Old account unavailable.' };
+    const bridge = await ready(async <T>(name: string) => {
+      if (name === 'engine_read') return project() as T;
+      if (name === 'engine_agent_read') {
+        if (++reads === 2) { recoveryStarted.resolve(); return await old.promise as T; }
+        return wire(current) as T;
+      }
+      if (['engine_agent_start', 'engine_agent_cancel', 'engine_agent_decide'].includes(name)) throw error;
+      throw new Error('unexpected IPC');
+    });
+    const pending = bridge.request(action === 'send' ? { type: 'agent.send', text: 'Start' }
+      : action === 'cancel' ? { type: 'agent.cancel', turnId: 1 }
+        : { type: 'agent.approve', turnId: 1, approvalId: 5, approved: true });
+    await recoveryStarted.promise;
+    current = action === 'send' ? session(1)
+      : session(3, turn({ status: 'cancelled', text: 'Native state after account change' }), false);
+    bridge.updateProvider({ ...connected, activeAccount: 'new-account', accountLabel: 'New account' });
+    await bridge.refreshAgent();
+    expect(bridge.getSnapshot().agentError).toBeUndefined();
+    old.resolve(wire(initial));
+    expect(await pending).toEqual({ ok: false, error });
+    expect(bridge.getSnapshot().provider).toMatchObject({ activeAccount: 'new-account', accountLabel: 'New account' });
+    expect(bridge.getSnapshot().agentSession).toEqual(current);
+    expect(bridge.getSnapshot().agentError).toBeUndefined();
+    expect(bridge.getSnapshot().agent.status).toBe('idle');
+  });
+
   it('retains a start reservation after read failure and recovers the actual terminal state explicitly', async () => {
     let readsFail = false;
     let current = session();
