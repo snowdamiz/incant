@@ -66,8 +66,13 @@ PLAN merge whose historical merge message lacks an author trailer.
 
 ## Reviewed editor/sprite union
 
-Integrating corrected editor headc620868 adds incant_2d to the conservative local
+Integrating corrected editor head c620868 adds incant_2d to the conservative local
 credential dependency closure through incant_doc. The dynamic trigger-coverage
 test fails before adding that source directory and passes afterward. The report
 remains diagnostic only: every outcome still runs every credential command.
 No current PR matrix or skip policy changes.
+
+The natural PR61 consumers now verify all three registry-only restores and every
+credential proof: Linux 1m45s, Windows 2m55s, macOS 2m28s, with queue time recorded
+separately. [Actual restored keys and job evidence](evidence/ci-registry-consumer-pr61-2026-10-11.json).
+No whole-job speedup is attributed solely to the registry cache.
