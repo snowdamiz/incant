@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from shipping_session import FreshSession, sha
@@ -107,6 +107,38 @@ class FreshShippingLedgerTests(unittest.TestCase):
     def test_wrong_profile_rejected_before_running_cargo(self):
         with self.assertRaisesRegex(ValueError, 'build setting'):
             self.session.build(['cargo', '--profile', 'release'], cwd=self.root, env={})
+
+    def test_compiler_overrides_are_rejected_before_running_cargo(self):
+        command = ['cargo', '--profile', 'shipping', '--target', self.target,
+                   '--target-dir', str(self.storage), '--config',
+                   'profile.shipping.split-debuginfo="packed"', '--locked',
+                   '--message-format=json', '-vv']
+        for key in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'CARGO_BUILD_RUSTC',
+                    'RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER', 'CARGO_BUILD_RUSTC_WRAPPER',
+                    'CARGO_BUILD_RUSTC_WORKSPACE_WRAPPER'):
+            with self.subTest(key=key), patch('shipping_session.subprocess.run') as run:
+                with self.assertRaisesRegex(ValueError, 'compiler override'):
+                    self.session.build(command, cwd=self.root, env={key: 'override'})
+                run.assert_not_called()
+
+    def test_source_head_content_and_compiler_changes_are_rejected(self):
+        session = self.session
+        session.head = b'frozen-head'
+        session.sources = {'tracked.rs': 'frozen-bytes'}
+        session.rustc = self.root / 'pinned-rustc'
+        session.compiler = 'frozen-compiler'
+        cases = [('other-head', session.sources, session.compiler, 'HEAD changed'),
+                 ('frozen-head', {'tracked.rs': 'changed'}, session.compiler, 'source changed'),
+                 ('frozen-head', session.sources, 'other-compiler', 'Compiler changed')]
+        for head, sources, compiler, message in cases:
+            with self.subTest(message=message), \
+                    patch('shipping_session.subprocess.check_output', side_effect=[head.encode(), compiler]), \
+                    patch('shipping_session.snapshot', return_value=sources):
+                with self.assertRaisesRegex(ValueError, message):
+                    FreshSession.check_frozen(session)
+        with patch('shipping_session.subprocess.check_output', side_effect=[session.head, session.compiler]), \
+                patch('shipping_session.snapshot', return_value=session.sources):
+            FreshSession.check_frozen(session)
 
     def test_deletion_barrier_rejects_retained_inputs_and_missing_player(self):
         player = self.root / 'player'
