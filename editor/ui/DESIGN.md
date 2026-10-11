@@ -72,9 +72,10 @@ Titlebar host contract: `TITLEBAR.md`. Native viewport: `NATIVE_VIEWPORT.md`.
 - **Defaults** (`src/shell/layout.ts`): hierarchy 17 % of width (232–296 px), inspector
   25 % (340–420 px; 360 px at 1440 px), dock 27 % of height (160–340 px). The viewport
   never drops below 360 × 200. The Inspector's minimum is 280 px.
-- **Agent pane.** Only an open, ready agent is a resizable pane with a separator
-  (default 33 % of height, 260–340 px). Otherwise the pane is as tall as its content:
-  a 36 px status line when collapsed, or the line plus one sentence when open.
+- **Agent pane.** An open agent that is ready, re-reading its session, or holding turns
+  is a resizable pane with a separator (default 33 % of height, 260–340 px). Otherwise the
+  pane is as tall as its content: a 36 px status line when collapsed, or the line, one
+  sentence and the allowance line when open.
 - **The window never scrolls.** `.app` contains and clips its descendants, and every
   scroller is a containing block, so `scrollIntoView`, focus and visually hidden text
   cannot shift the titlebar off screen.
@@ -306,22 +307,51 @@ count every entry, and a list that fits one page shows no pager at all.
 ## Agent pane
 
 The header is a disclosure: chevron, wisp mark, "Agent", and a status (Ready, Starting…,
-Working…, Needs approval, Stopping…, Finishing…, Signing in…, Sign-in problem,
-Unavailable, Not signed in, No engine). Work in progress shows the small spinner in place
-of the dot; "Needs approval" is a steady amber dot. Files: `components/AgentPanel.tsx`,
-`components/agent/`, `styles/agent.css`.
+Working…, Needs approval, Stopping…, Finishing…, Updating…, Signing in…, Sign-in problem,
+Unavailable, Allowance used up, Off, Not signed in, No engine). Work in progress shows the
+small spinner in place of the dot; "Needs approval" is a steady amber dot. Files:
+`components/AgentPanel.tsx`, `components/agent/`, `styles/agent.css`.
 
 - **Conversation.** The native session's turns (`snapshot.agentSession`), oldest first,
   divided by hairlines. A turn is the prompt (the one filled block, so a conversation
   scans by request; past 8 lines it clamps with Show all), the reply exactly as streamed
   (plain text, never markup), one quiet line per decided approval, and how it ended: a
   failure sentence after the error icon, then Stopped, the edits ("No edits" only when
-  the report says so), the allowance charged ("(estimated)" when the provider did not
-  confirm it, "Token use unknown" when nothing was charged) and Show in History. A send
-  adds nothing until the session lists its turn. The allowance used is the last line.
-  The conversation is a log but not a live region: approval requests and outcomes are
-  said once in the status line, streamed text never. It follows new output only while
-  the reader is at its end; otherwise a floating Latest returns there.
+  the report says so), the allowance charged ("(estimated)" when exact usage could not be
+  confirmed or saved, "Token use unknown" when nothing was charged) and Show in History.
+  A send adds nothing until the session lists its turn. The conversation is a log but not
+  a live region: approval requests and outcomes are said once in the status line, streamed
+  text never. It follows new output only while the reader is at its end; otherwise a
+  floating Latest returns there.
+- **Allowance line.** The open pane's last line, under the composer or the note, outside
+  the conversation so it never scrolls or moves with it: "7,712 of 250,000 tokens used",
+  then, where the project has an authored allowance (`projectAgentBudget`), a quiet
+  Change at the trailing edge of the first line. The allowance is the project's authored
+  cap; usage is the session's recorded total, "(some estimated)" where part of it is a
+  conservative charge. While the session catches up with a changed cap its own copy is
+  never shown. The numbers turn amber at 80 %, red when used up, and stay muted at 0 (off
+  on purpose). Usage above a lowered cap stays visible; only what is left (spoken and in
+  the tooltip) stops at zero. There is no reset and no money: tokens only. Older hosts
+  without a project allowance show their session's allowance without Change.
+- **Changing it.** Change edits in place, as a rename does: "Allowance", the Inspector's
+  28 px value box (monospace digits, "tokens" following them, all selected), Cancel and
+  Save. Enter saves, Escape cancels, and focus returns to Change. Digits with one
+  consistent group separator are read exactly; fractions, signs, exponents and values past
+  9,007,199,254,740,991 are refused inline. One quiet line under the box says the single
+  most important thing: why it cannot be saved, the host's reason a save failed (what was
+  typed stays), "Saving stops the current request." while one runs (native hosts end it),
+  that another edit changed the allowance meanwhile, "0 turns the agent off.",
+  "No new requests: 7,712 already used.", or else the usage it is weighed against. A save
+  is one `agent.budget.set` through the command bus: journaled, undoable, offline, and
+  sent once however often Enter is pressed. Save is the raised button; Send or Stop keeps
+  the one accent. A narrow pane, or a very long value, puts the actions beside the note.
+- **Updating.** After an allowance edit, Undo or Redo, or an account read, the host holds
+  new requests until it re-reads the session. The pane keeps the composer (its action a
+  quiet wait) and says Updating… instead of swapping in a note; decisions wait with a
+  reason while the session's cap lags the project's, and Stop stays usable. A refresh the
+  host never finishes says Unavailable after 4 s (counted from the end of the pane's own
+  save) and shows the host's reason and Refresh in the notice line above the same composer
+  and draft, as a transport failure does while a worker runs.
 - **Approvals.** A bordered card at the end of its turn: the request as a question read
   from the exact arguments ("Apply 4 changes to the project?"), the agent's own
   description in quotes, one row per operation marked like a diff (+ add, − remove,
@@ -336,10 +366,15 @@ of the dot; "Needs approval" is a steady amber dot. Files: `components/AgentPane
   cancelled, or a spinner while sending, stopping or finishing. It is one element, so
   focus stays on it, and the draft stays editable while the agent works.
 - **Cannot run:** one sentence (why, or the host's reason) and its single next step
-  (Continue with ChatGPT, the account dialog, or Retry after a transport failure). Turns
-  the session still holds stay readable above it. A reason that names an internal
-  milestone is shown in plain words ("The agent is not available in the editor yet.")
-  without a sign-in invitation that would not help.
+  (Continue with ChatGPT, the account dialog, or Retry after a transport failure; Retry
+  then says the same sentence if the agent is still unavailable). Turns the session still
+  holds stay readable above it, and the
+  allowance line stays below it, so the allowance can be changed without an account. A
+  used-up allowance says "Raise the allowance to send new requests." ("…to turn the agent
+  on." at 0), its next step being the line's Change; an older host says "This session’s
+  token allowance is used up." A reason that names an internal milestone is shown in plain
+  words ("The agent is not available in the editor yet.") without a sign-in invitation
+  that would not help.
 - **Collapsed:** the 36 px status line. A window shorter than 720 px starts collapsed.
 
 ## Dialogs

@@ -3,11 +3,34 @@ import type { ApprovalReview } from './agentText';
 import { DEFAULT_APPROVAL, DEFAULT_MODEL } from './agentText';
 
 /**
+ * An open allowance editor. It belongs to one project: another project's editor is never
+ * shown or saved, whatever is typed in it.
+ */
+export interface AllowanceEdit {
+  readonly project: string;
+  readonly draft: string;
+  /** The authored allowance the edit started from (or last saved here). A different current value came from another edit. */
+  readonly base: number;
+  /** Why the last save failed: the host's safe message. */
+  readonly error: string | null;
+  /** A save was attempted, so an empty field is reported rather than left quiet. */
+  readonly attempted: boolean;
+}
+
+/** A save in flight: its project and exactly what was sent. */
+export interface AllowanceSave {
+  readonly project: string;
+  readonly draft: string;
+  readonly value: number;
+}
+
+/**
  * The Agent pane's own state for one bridge: the unsent draft, the next message's model
- * and approval mode, and the requests this pane has in flight. It lives outside the
- * component (hiding the Inspector column unmounts the pane), so a request that resolves
- * while the pane is away, or after it comes back, lands in the same place. None of it is
- * conversation state: turns come only from the host's session snapshot.
+ * and approval mode, the allowance being edited, and the requests this pane has in
+ * flight. It lives outside the component (hiding the Inspector column unmounts the
+ * pane), so a request that resolves while the pane is away, or after it comes back,
+ * lands in the same place. None of it is conversation state or project state: turns come
+ * only from the host's session snapshot, and the allowance only from the project.
  */
 export interface AgentPaneState {
   readonly draft: string;
@@ -24,6 +47,9 @@ export interface AgentPaneState {
   /** Why a decision failed while its approval was still pending. */
   readonly decisionErrors: ReadonlyMap<string, string>;
   readonly retrying: boolean;
+  /** The open allowance editor, or null. Closing it forgets what was typed. */
+  readonly allowance: AllowanceEdit | null;
+  readonly allowanceSaving: AllowanceSave | null;
 }
 
 export interface AgentMemory {
@@ -47,6 +73,8 @@ function createMemory(): AgentMemory {
     deciding: new Map(),
     decisionErrors: new Map(),
     retrying: false,
+    allowance: null,
+    allowanceSaving: null,
   };
   const listeners = new Set<() => void>();
   return {

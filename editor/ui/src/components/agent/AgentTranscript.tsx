@@ -3,7 +3,6 @@ import type { AgentSessionSnapshot } from '../../bridge/contract';
 import { Icon } from '../../icons/Icon';
 import type { TurnActions } from './AgentTurn';
 import { AgentTurnView } from './AgentTurn';
-import { sessionUsage } from './agentText';
 
 /** The native session keeps at most this many turns (editor/bridge/native.ts validAgentSession). */
 const SESSION_TURN_LIMIT = 16;
@@ -13,9 +12,10 @@ const FOLLOW_SLACK = 24;
 const REVIEW_INSET = 6;
 
 /**
- * The session's turns, oldest first, then the allowance used. It is a log for assistive
- * tech but not a live region: streamed text would otherwise be read out chunk by chunk.
- * The pane announces discrete events (approval needed, finished) instead.
+ * The session's turns, oldest first. It is a log for assistive tech but not a live
+ * region: streamed text would otherwise be read out chunk by chunk. The pane announces
+ * discrete events (approval needed, finished) instead. The allowance is the pane's last
+ * line, outside the log, so editing it never moves with the conversation.
  */
 export function AgentTranscript({ session, actions }: { session: AgentSessionSnapshot | undefined; actions: Omit<TurnActions, 'reading'> }) {
   const turns = session?.turns ?? [];
@@ -25,7 +25,6 @@ export function AgentTranscript({ session, actions }: { session: AgentSessionSna
   // The session holds a bounded tail of turns. The contract has no "trimmed" flag, so the
   // bound is stated as the policy once it is reached, without claiming what was dropped.
   const atBound = turns.length >= SESSION_TURN_LIMIT;
-  const usage = session && (session.budget.used_tokens > 0 || session.accounting_uncertain) ? sessionUsage(session) : null;
   return (
     <div className="agent__transcript-frame">
       <div
@@ -49,7 +48,6 @@ export function AgentTranscript({ session, actions }: { session: AgentSessionSna
           ) : (
             <p className="agent-empty">Describe a change. Every edit lands in History and can be undone.</p>
           )}
-          {usage ? <p className={`agent-usage agent-usage--${usage.level}`}>{usage.text}</p> : null}
         </div>
       </div>
       {follow.behind ? (
