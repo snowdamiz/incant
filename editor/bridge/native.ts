@@ -452,6 +452,10 @@ function validProviderState(value: unknown): value is ProviderState {
   if (state.status === 'connecting') return state.method !== undefined;
   return state.status !== 'error' || state.error !== undefined;
 }
+function samePlayStatus(previous: PlayStatus, next: PlayStatus): boolean {
+  const keys = Object.keys(previous) as (keyof PlayStatus)[];
+  return keys.length === Object.keys(next).length && keys.every(key => previous[key] === next[key]);
+}
 export class NativeBridge implements EditorBridge {
   readonly protocolVersion = 1;
   readonly capabilities = [
@@ -482,6 +486,7 @@ export class NativeBridge implements EditorBridge {
   private play: PlayStatus | undefined;
   private playError: BridgeError | undefined;
   private playRead: Promise<void> | undefined;
+  private playUpdateId = 0;
   private listeners = new Set<() => void>();
   private historyListeners = new Set<(action: 'undo' | 'redo') => void>();
   private pending = false;
@@ -776,7 +781,11 @@ export class NativeBridge implements EditorBridge {
   }
   updatePlay(status: PlayStatus) {
     if (this.play && (status.generation < this.play.generation || status.sequence < this.play.sequence)) return;
-    this.play = freeze(status);
+    // An accepted duplicate still fences failures from earlier reads without replacing the snapshot.
+    ++this.playUpdateId;
+    const retained = this.play && samePlayStatus(this.play, status) ? this.play : undefined;
+    if (retained && !this.playError) return;
+    this.play = retained ?? freeze(status);
     this.playError = undefined;
     const { playError: _error, ...rest } = this.snapshot;
     this.snapshot = freeze({ ...rest, play: this.play });
@@ -788,10 +797,10 @@ export class NativeBridge implements EditorBridge {
     try { await this.playRead; } finally { this.playRead = undefined; }
   }
   private async readPlay() {
-    const published = this.play;
+    const published = this.playUpdateId;
     try { this.updatePlay(await this.invoke<PlayStatus>('play_read')); }
     catch (error) {
-      if (this.play !== published) return;
+      if (this.playUpdateId !== published) return;
       const result = failure(error);
       if (!result.ok) {
         this.playError = result.error;
