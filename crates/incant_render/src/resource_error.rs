@@ -1,6 +1,8 @@
 //! Resource preparation errors remain typed even at the renderer's boxed boundary.
 #[derive(Debug, thiserror::Error)]
 pub enum ResourceError {
+    #[error("cooked output shader rejected: {0}")]
+    CookedOutput(&'static str),
     #[error("renderer initialization failed: {0}")]
     Preparation(#[source] wgpu::Error),
     #[error("{0} pipeline variant was not prepared during renderer initialization")]

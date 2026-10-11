@@ -86,6 +86,7 @@ impl Renderer {
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Incant renderer"),
+                required_features: output::required_features(&adapter)?,
                 ..Default::default()
             })
             .await?;
@@ -103,7 +104,7 @@ impl Renderer {
             materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
         let shadows = shadows::ShadowSystem::new(&device, &materials.layout);
         let diagnostic_pipeline = Self::pipeline(&device, frame::HDR_FORMAT);
-        let output = output::OutputPass::new(&device);
+        let output = output::OutputPass::new(&device, adapter.get_info().backend)?;
         let sprites = sprites::SpriteSystem::new(&device);
         if let Some(error) = validation.pop().await {
             return Err(ResourceError::Preparation(error).into());

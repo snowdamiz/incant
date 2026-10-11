@@ -218,6 +218,17 @@ prewarming and flipbook source on actual main80. All 685 ordinary/73 GPU tests,
 checks, actual browser smoke and fresh source-free shipping controls pass. Final
 combined hosted checks passed and PR81 is merged. [Evidence](docs/spikes/native-assets-render-union.md).
 
+- **Offline output shaders (opt-in, CPU verified).** A build-only pinned Naga
+  cooker now emits MSL/SPIR-V/HLSL for the unchanged fullscreen output pass and
+  wires private embedded artifacts into an explicit wgpu backend layout. Five
+  cooker and four runtime-contract tests, native default/feature Clippy and the
+  normal dependency guard pass; independent source review accepts the bounded
+  opt-in scope. The ci/dev artifacts are byte-identical and both MSL
+  stages compile/link without a GPU. The feature stays off pending actual backend
+  numerical and Claude appearance acceptance. Other shaders, driver compilation,
+  persistent caches and phone gates remain open. The direct wasm renderer check
+  retains the same baseline163 errors; it is not a web success claim.
+  [Contract and evidence](docs/spikes/cooked-output-shaders.md).
 - **Pipeline preparation (merged through PR81).** The current finite renderer
   catalog is prepared before the first frame. All 601 ordinary and 67 actual GPU
   tests pass; material reimports across all current variants and four output

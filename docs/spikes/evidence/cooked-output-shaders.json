@@ -1,0 +1,200 @@
+{
+  "baseline": "39f5e40a793e57757af9ae79cb6a5a1ec27369d1",
+  "source_review_patch_sha256": "49a07f5f93e217b618b3adbb9c56b1722df7ad40cc356ee78bcdb817d64e845a",
+  "source_hashes": {
+    "Cargo.lock": "14ffe28d6b33c658bd5a3a621db25f14ed23a4b91ae007d7b1da048d589a0bf2",
+    "crates/incant_render/Cargo.toml": "c01cce44eb70a65d7f6a1589edd48209f4ccef5d2dd5e5a159c555e414a512db",
+    "crates/incant_render/build.rs": "33c550814e5c769fc8622fe28b9c9a26a73c2e58e8d4afdd14336e4d60efd5db",
+    "crates/incant_render/src/lib.rs": "23bc4e0aaa84411bd6cc89db25fb043bbf69a87ec50ef9fb31de1702edd0cf73",
+    "crates/incant_render/src/output.rs": "014d67ea6af999a9d1d2550ba96625037e019cec3f80b695920ed6a0ea9716f4",
+    "crates/incant_render/src/output/cooked.rs": "bb317225e7f2da32261d832d3d2c7cdc429c7b44854fb48e96834547660820b5",
+    "crates/incant_render/src/output/layout.rs": "609e17db021135c7f4ab49f4d74b782bb3aa2bfe32dee6548ee210133a46fc84",
+    "crates/incant_render/src/resource_error.rs": "e7dd1b4a5970d32f78ff01c6cf599d5753130902c4a5921eaa72e54bf03a2a78",
+    "crates/incant_shader_cook/Cargo.toml": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+    "crates/incant_shader_cook/examples/output_bundle.rs": "567d7744d3bc31a9494296eb70a1952f43defe080848e97b1ee97bca351e550a",
+    "crates/incant_shader_cook/src/contract.rs": "c8956ae477c1e779cfe8ef5a6960a3950fff795849eb8d36bce917d1158c7515",
+    "crates/incant_shader_cook/src/emit.rs": "2da6ff21863ab62253c463449a592800f7a564d1b259c8b23f07030ca0aef596",
+    "crates/incant_shader_cook/src/lib.rs": "56df5f9b94a97aa7f1794d214e30583038199439da924481f36d42079a0342c1",
+    "crates/incant_shader_cook/src/manifest.rs": "88e6f5ae2a60345320463e7cfc7ebe335908a9f670c3ce2373c422948da6ca26",
+    "crates/incant_shader_cook/tests/output.rs": "6de04d9ef95f1d11d4b1239258504b57e33d7bc071da54aa3e03c9c0d6fd9bcd",
+    "tools/check_runtime_dependencies.py": "6f379fde53d544f345baecb4aced68d91d6dcf88795c25bb7561356e9b46066b",
+    "tools/tests/test_runtime_dependencies.py": "e7fb009c4ce4c09157220663f49343486eb2ceb7d914e75b25a68be9d27aca61"
+  },
+  "scope": "optional built-in output-only host cooking and private native passthrough integration; CPU checks only; no GPU/native-window/provider call",
+  "source_review": "root independent review pending",
+  "checks": {
+    "cooker_tests": 5,
+    "runtime_cpu_tests": 4,
+    "gpu_tests_ignored": 2,
+    "clippy": [
+      "native-default-all-targets",
+      "native-cooked-output-all-targets",
+      "host-cooker-all-targets"
+    ],
+    "dependency_unit_tests": 7,
+    "normal_graph": "incant_render with cooked-output: authoring-free"
+  },
+  "logs": {
+    "/tmp/incant-output-cooker-verified-tests.log": {
+      "sha256": "f87dc96625aceece598049f3db7b0e0fffc43159702f061532047d86ecf4e240",
+      "bytes": 1047
+    },
+    "/tmp/incant-output-runtime-verified-cpu.log": {
+      "sha256": "7dedd7b227d2cc91d7dc64627da6074aff53700e6c0d4f38c1ec7ee1fdb2ee0d",
+      "bytes": 1026
+    },
+    "/tmp/incant-output-cooked-verified-clippy.log": {
+      "sha256": "9797110ebbaa0e25d6b28bd42d950efda19cb769684ad4c246d15ca9fc135249",
+      "bytes": 331
+    },
+    "/tmp/incant-output-default-clippy.log": {
+      "sha256": "a159064861d1ad643b736714b898ce32a66c540260310bf598b962451b1f358a",
+      "bytes": 369
+    },
+    "/tmp/incant-output-dependency-unit.log": {
+      "sha256": "fe836cbecd3b6b4f70bec51b58d30c3e45ad72ae7fb3cb63421a0f7337e651ae",
+      "bytes": 105
+    },
+    "/tmp/incant-output-runtime-graph.log": {
+      "sha256": "1d8b5c787fe0d85b889b66dddb08e5c0305f0577b5a814d46fe6f58510485b8a",
+      "bytes": 92
+    },
+    "/tmp/incant-output-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-output-diffcheck.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-output-artifacts-ci.log": {
+      "sha256": "9f88b243eda71c1e796a7d820d33a8485c612e6da0f7571849098ef19eed7f50",
+      "bytes": 137
+    },
+    "/tmp/incant-output-artifacts-dev.log": {
+      "sha256": "04b9834af99d8c66e1e3f3645cc75a2fe830737811b92a87883061775ca4f051",
+      "bytes": 1169
+    },
+    "/tmp/incant-output-metal-compiler.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-output-web-check.log": {
+      "sha256": "937750d186011ed80f3b4277b21c123aa1090837ef2ffc2a0f42afec7af38228",
+      "bytes": 327172
+    },
+    "/tmp/incant-output-web-baseline.log": {
+      "sha256": "b94c18620ad327972a3b9f9a4bf4ca2b1a50b70be425b7678e591c308e1c5065",
+      "bytes": 323795
+    },
+    "/tmp/incant-output-cooker-first.log": {
+      "sha256": "067fd30b428da7f05c9c7fe4c9894cb4cb930a9fdc52033b642dc0a63b16a9d9",
+      "bytes": 2758
+    },
+    "/tmp/incant-output-cooker-tests.log": {
+      "sha256": "f368c680e6c367f528b7fcd9201f47f5e4385a9a4f512003b46ab29756068f4d",
+      "bytes": 2773
+    },
+    "/tmp/incant-output-cooked-clippy.log": {
+      "sha256": "dc28a7c5cd851fd24f1c6b98acea9bc89ddc794c8e2191d506686c08e4636ddc",
+      "bytes": 4306
+    }
+  },
+  "profiles": {
+    "profiles": [
+      "ci",
+      "dev"
+    ],
+    "identical": true,
+    "artifacts": [
+      {
+        "name": "Dx12-Fragment.shader",
+        "bytes": 3698,
+        "sha256": "c321dde205b9c0b535a198b26f91db6f82035ce9b086c004d8fffe19a3ca011a"
+      },
+      {
+        "name": "Dx12-Vertex.shader",
+        "bytes": 611,
+        "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+      },
+      {
+        "name": "Metal-Fragment.shader",
+        "bytes": 4275,
+        "sha256": "cc2a7197769ba09090757dc93a79ba67001b86ba6cd987545199450a2040410e"
+      },
+      {
+        "name": "Metal-Vertex.shader",
+        "bytes": 508,
+        "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+      },
+      {
+        "name": "Vulkan-Fragment.shader",
+        "bytes": 5388,
+        "sha256": "dacf90c0e06af8bf75fa034b59e8b85026cca4ac975a0d763a855683ff5ce260"
+      },
+      {
+        "name": "Vulkan-Vertex.shader",
+        "bytes": 772,
+        "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+      },
+      {
+        "name": "manifest.rs",
+        "bytes": 2334,
+        "sha256": "49881628565d8584808fd48d5b6b7dbe320b88ebf8de88e92c35492721b10fb3"
+      }
+    ]
+  },
+  "web_baseline": {
+    "baseline": "39f5e40a793e57757af9ae79cb6a5a1ec27369d1",
+    "new_error_count": 163,
+    "baseline_error_count": 163,
+    "ordered_error_codes_and_messages_identical": true,
+    "scope": "default wasm32 native renderer check fails identically before and after this patch; no web compatibility pass claimed",
+    "logs": {
+      "/tmp/incant-output-web-check.log": "937750d186011ed80f3b4277b21c123aa1090837ef2ffc2a0f42afec7af38228",
+      "/tmp/incant-output-web-baseline.log": "b94c18620ad327972a3b9f9a4bf4ca2b1a50b70be425b7678e591c308e1c5065"
+    }
+  },
+  "pinned_contract_sources": {
+    "wgpu-hal-29.0.4/src/metal/device.rs": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864",
+    "wgpu-hal-29.0.4/src/vulkan/adapter.rs": "9f9f3557178ac555122d17a472d7cc4289bbde961d2eecf8099ca1b3bd10c24a",
+    "wgpu-hal-29.0.4/src/vulkan/device.rs": "7d72923762700aed073922f80d1bd510009c6249d8861cd30d9998c794eb7e27",
+    "wgpu-hal-29.0.4/src/vulkan/command.rs": "65586beb28db45edf4d5169eceb77ffa42af1383be4498736c22bfd0df647ab0",
+    "wgpu-hal-29.0.4/src/dx12/device.rs": "77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc",
+    "wgpu-core-29.0.4/src/device/resource.rs": "796858f878f290e872a113cb474d7ff947dfdd61f5dcf38f6f64b9e69c959644",
+    "wgpu-types-29.0.4/src/shader.rs": "6569700e88085fd645d5ef90ac7072f5736baf16ef4bcbe764e8073b09e5832e"
+  },
+  "metal": {
+    "compiler": "Apple metal32023.921 /metalfe32023.921.6",
+    "command": "xcrun -sdk macosx metal -std=macos-metal2.4 -x metal -c; xcrun metallib",
+    "runtime_uses": "MSL source, not these validation libraries",
+    "outputs": {
+      "vertex.air": {
+        "sha256": "4197d5c3285a7fe6df30cfdbb3d22fd92b4cd0ae5136704170f27d839ba20efb",
+        "bytes": 3616
+      },
+      "fragment.air": {
+        "sha256": "f46a5a1bcc94e3abdc841ad6a0d5fd790c1dc848c01968437a167933c94854c3",
+        "bytes": 8816
+      },
+      "vertex.metallib": {
+        "sha256": "6ed1d6f6b5a630f5a27175ad815febc553571d19eae2ad630f80c61e03391ab3",
+        "bytes": 3725
+      },
+      "fragment.metallib": {
+        "sha256": "15568404c16525015e0684ddb93273726c4342850542284c8fd90e11c543a355",
+        "bytes": 6751
+      }
+    }
+  },
+  "remaining": [
+    "actual GPU/backend numerical equivalence",
+    "Claude appearance acceptance",
+    "DXC validation",
+    "native output feature default enablement",
+    "other shader families and complete parser exclusion",
+    "persistent driver caches",
+    "phone performance gates",
+    "existing default wasm native-renderer Send/Sync compile boundary"
+  ]
+}

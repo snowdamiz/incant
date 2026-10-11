@@ -3,6 +3,23 @@ use crate::{ResourceError, Result, Viewport};
 use bytemuck::{Pod, Zeroable};
 use std::collections::HashMap;
 use wgpu::util::DeviceExt;
+#[cfg(all(feature = "cooked-output", not(target_arch = "wasm32")))]
+mod cooked;
+#[cfg(all(feature = "cooked-output", not(target_arch = "wasm32")))]
+mod layout;
+
+pub(crate) fn required_features(_adapter: &wgpu::Adapter) -> Result<wgpu::Features> {
+    #[cfg(all(feature = "cooked-output", not(target_arch = "wasm32")))]
+    return cooked::features(_adapter.get_info().backend, _adapter.features());
+    #[cfg(not(all(feature = "cooked-output", not(target_arch = "wasm32"))))]
+    Ok(wgpu::Features::empty())
+}
+struct Stages {
+    vertex: wgpu::ShaderModule,
+    fragment: wgpu::ShaderModule,
+    vertex_entry: &'static str,
+    fragment_entry: &'static str,
+}
 
 #[repr(C)]
 #[derive(Clone, Copy, Pod, Zeroable)]
@@ -23,9 +40,13 @@ fn decode(byte: u8) -> f32 {
 }
 pub(crate) struct OutputPass(HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>);
 impl OutputPass {
-    pub fn new(device: &wgpu::Device) -> Self {
-        let shader = shader(device);
-        Self(
+    pub fn new(device: &wgpu::Device, backend: wgpu::Backend) -> Result<Self> {
+        let shader = shader(device, backend)?;
+        #[cfg(all(feature = "cooked-output", not(target_arch = "wasm32")))]
+        let layout = Some(layout::create(device));
+        #[cfg(not(all(feature = "cooked-output", not(target_arch = "wasm32"))))]
+        let layout: Option<wgpu::PipelineLayout> = None;
+        Ok(Self(
             [
                 wgpu::TextureFormat::Rgba8Unorm,
                 wgpu::TextureFormat::Rgba8UnormSrgb,
@@ -33,9 +54,9 @@ impl OutputPass {
                 wgpu::TextureFormat::Bgra8UnormSrgb,
             ]
             .into_iter()
-            .map(|format| (format, build(device, &shader, format)))
+            .map(|format| (format, build(device, &shader, layout.as_ref(), format)))
             .collect(),
-        )
+        ))
     }
     pub fn validate(format: wgpu::TextureFormat) -> Result<()> {
         match format {
@@ -133,29 +154,41 @@ impl OutputDraw {
     }
 }
 
-fn shader(device: &wgpu::Device) -> wgpu::ShaderModule {
-    let source = format!(
-        "{}\n{}",
-        include_str!("output.wgsl"),
-        include_str!("tone_map.wgsl")
-    );
-    device.create_shader_module(wgpu::ShaderModuleDescriptor {
-        label: Some("HDR display transform"),
-        source: wgpu::ShaderSource::Wgsl(source.into()),
-    })
+fn shader(device: &wgpu::Device, _backend: wgpu::Backend) -> Result<Stages> {
+    #[cfg(all(feature = "cooked-output", not(target_arch = "wasm32")))]
+    return cooked::stages(device, _backend);
+    #[cfg(not(all(feature = "cooked-output", not(target_arch = "wasm32"))))]
+    {
+        let source = format!(
+            "{}\n{}",
+            include_str!("output.wgsl"),
+            include_str!("tone_map.wgsl")
+        );
+        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("HDR display transform"),
+            source: wgpu::ShaderSource::Wgsl(source.into()),
+        });
+        Ok(Stages {
+            vertex: module.clone(),
+            fragment: module,
+            vertex_entry: "vertex",
+            fragment_entry: "fragment",
+        })
+    }
 }
 
 fn build(
     device: &wgpu::Device,
-    shader: &wgpu::ShaderModule,
+    shader: &Stages,
+    layout: Option<&wgpu::PipelineLayout>,
     format: wgpu::TextureFormat,
 ) -> wgpu::RenderPipeline {
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("HDR display transform"),
-        layout: None,
+        layout,
         vertex: wgpu::VertexState {
-            module: shader,
-            entry_point: Some("vertex"),
+            module: &shader.vertex,
+            entry_point: Some(shader.vertex_entry),
             compilation_options: Default::default(),
             buffers: &[],
         },
@@ -163,8 +196,8 @@ fn build(
         depth_stencil: None,
         multisample: Default::default(),
         fragment: Some(wgpu::FragmentState {
-            module: shader,
-            entry_point: Some("fragment"),
+            module: &shader.fragment,
+            entry_point: Some(shader.fragment_entry),
             compilation_options: Default::default(),
             targets: &[Some(wgpu::ColorTargetState {
                 format,
