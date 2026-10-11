@@ -115,6 +115,14 @@ coverage and bounded asynchronous cleanup. Both corrections pass local checks. C
 and all three Wasm conformance jobs pass; the remaining PR #62 jobs are still
 running or queued.
 
+Native script logs now publish only after accepted numeric/structural updates,
+with primitive Unicode validation, fixed per-update limits, bounded retained
+history and dropped-message counts. Native/game observers hide logs after
+terminal failure; the source-free player reports them once at completion.
+585 ordinary workspace tests and 47 fresh CPU-mode process controls pass.
+[Evidence](docs/spikes/native-script-logs.md). This is the QuickJS path; Wasm logs,
+full native SDK, session saves and editor/headless Play migration remain open.
+
 ## Remaining engineering requirements
 
 - Complete migration of the editor, headless runner and full gameplay SDK from
