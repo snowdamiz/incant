@@ -150,5 +150,45 @@
       }
     },
     "scope": "Exported game checkpoints integrated with editor/native-agent/script; ordinary scoped CPU checks. Native0048 remained on immutablebb1b517, and its two UI source fixes require rebuilt native verification."
+  },
+  "main106_integration": {
+    "recorded_at": "2026-10-11T23:46:00.536257+00:00",
+    "source_commit": "7a4d6a97a937ff72219e104dbca524b65d5ea94c",
+    "merged_main": "ec6e21cc789da9fb3c4005cc11fd26385932e266",
+    "packages": [
+      "incant_script",
+      "incant_agent_native",
+      "incant_editor",
+      "incant_text",
+      "incant_wasm_abi",
+      "incant_wasm_runtime",
+      "incant_wasm_dev"
+    ],
+    "tests": {
+      "passed": 219,
+      "failed": 0,
+      "ignored": 1,
+      "groups": 33,
+      "exit_code": 0
+    },
+    "clippy": "passed; same packages, all targets, -D warnings",
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-editor-main106-tests.log",
+        "sha256": "9f340619d6f87460aeedf5634be282571bd479ccc89335cfde8601340de33080"
+      },
+      "clippy": {
+        "path": "/tmp/incant-editor-main106-clippy.log",
+        "sha256": "645deb57c3cf36c540a823490ce744c86ac7c626d00c471dc8d39f1b98ddf1a8"
+      }
+    },
+    "generated_checks": [
+      "tools/generate_wasm_sdk.py --check",
+      "tools/build_bridge.mjs --check",
+      "tools/generate_conventions.py --check"
+    ],
+    "merge_conflicts": "STATUS.md additive sections retained; no source conflicts",
+    "scope": "CPU integration of merged Wasm localization and packaged text with editor/agent. Native0050 remains on immutable4589c2b/main104 binary; no additional UI source changes. Full phase/device gates remain open.",
+    "inherited_whitespace": "Full staged diff check reported upstream font LICENSE trailing whitespace and Cargo.toml blank final line already in main106. Font license preserved byte-identically; edited STATUS.md passes scoped whitespace check."
   }
 }
