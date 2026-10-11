@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "scope": "Timer primitive ID checked Unicode conversion; no new runtime dependency",
+  "sources": {
+    "crates/incant_script/src/timers.rs": "fcad95765d4229909facc70149f984584eee8bd3b808960dab3723c17ed352d0",
+    "crates/incant_script/src/timer_tests.rs": "057f655888c8e6ccc3dd9054113a026ee04ad2c8315259d6acadd41e13870ff7"
+  },
+  "logs": {
+    "/tmp/incant-timer-surrogate-tests.log": "f7a202463ed6ddb599a371fcd320a97d5cd55feb4f12237ff90a87ba8c65d691",
+    "/tmp/incant-timer-surrogate-clippy.log": "50277727db00c69ca1f770000d96b23f263cd02fbe117922f773f5e7a646caa5"
+  },
+  "script_tests_and_doctests": 63,
+  "independent_review": {
+    "path": "/tmp/incant-native-logs-review.md",
+    "sha256": "c89f4328367ac4cd888294aa43e37116558307fc0d5b09b8bf7c872aec23c5b4"
+  },
+  "previous_shipping_evidence_unchanged": true,
+  "phone_or_release_gate": false
+}

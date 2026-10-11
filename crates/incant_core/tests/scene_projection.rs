@@ -23,6 +23,95 @@ fn origin(matrix: [[f64; 4]; 4]) -> [f64; 3] {
 }
 
 #[test]
+fn legacy_startup_and_sync_refuse_tilemaps_atomically_but_static_inspection_remains_available() {
+    let mut project = Project::empty("Tile capability");
+    let mut scene = Scene::new("Main");
+    let mut entity = positioned("Tilemap", [2., 3., 0.]);
+    let id = entity.id.clone();
+    let texture = new_id();
+    project.assets.insert(
+        texture.clone(),
+        Asset {
+            id: texture.clone(),
+            name: "Tiles".into(),
+            path: "tiles.atlas.json".into(),
+            kind: "texture".into(),
+            sha256: "0".repeat(64),
+            import_settings: None,
+        },
+    );
+    entity.components.insert("Tilemap".into(),json!({"tileset":texture,"size":[1,1],"cell_size":[1,1],"layers":[{"id":new_id(),"cells":["00000000000000000000000001"],"solid":true}]}));
+    scene.entities.insert(id.clone(), entity);
+    project.scenes.insert(scene.id.clone(), scene);
+    project.validate().unwrap();
+    let error = Engine::new(&project).err().unwrap();
+    assert!(
+        error
+            .to_string()
+            .contains("Tilemap gameplay is unsupported")
+    );
+    assert_eq!(
+        incant_core::project_entities(&project).unwrap()[&id].translation,
+        [2., 3., 0.]
+    );
+
+    let mut supported = project.clone();
+    let scene_id = supported.scenes.keys().next().unwrap().clone();
+    let entity = supported
+        .scenes
+        .get_mut(&scene_id)
+        .unwrap()
+        .entities
+        .get_mut(&id)
+        .unwrap();
+    entity.components.remove("Tilemap");
+    entity
+        .components
+        .insert("Velocity".into(), json!({"linear":[3., 0., 0.]}));
+    let mut engine = Engine::new(&supported).unwrap();
+    let mut control = Engine::new(&supported).unwrap();
+    engine.run_ticks(4).unwrap();
+    control.run_ticks(4).unwrap();
+    let before = serde_json::to_value(engine.snapshot()).unwrap();
+    // A new fixed Tilemap arrives with unrelated pose/velocity/tick-rate changes.
+    // Its zero velocity differs from the running body while remaining valid
+    // under the shared native solid-collision contract.
+    // Refusal must precede every write, including the existing world's dt.
+    project.settings.tick_rate = 120;
+    let entity = project
+        .scenes
+        .get_mut(&scene_id)
+        .unwrap()
+        .entities
+        .get_mut(&id)
+        .unwrap();
+    entity
+        .components
+        .insert("Velocity".into(), json!({"linear":[0., 0., 0.]}));
+    entity.components.insert(
+        "Transform".into(),
+        json!(Transform {
+            translation: [42., 43., 0.],
+            ..Default::default()
+        }),
+    );
+    project.validate().unwrap();
+    let error = engine.sync(&project).unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("Tilemap gameplay is unsupported")
+    );
+    assert_eq!(serde_json::to_value(engine.snapshot()).unwrap(), before);
+    engine.step().unwrap();
+    control.step().unwrap();
+    assert_eq!(
+        serde_json::to_value(engine.snapshot()).unwrap(),
+        serde_json::to_value(control.snapshot()).unwrap()
+    );
+}
+
+#[test]
 fn hierarchy_composes_rotation_scale_and_parent_local_motion_before_snapshot() {
     let mut project = Project::empty("Hierarchy");
     let mut scene = Scene::new("First");

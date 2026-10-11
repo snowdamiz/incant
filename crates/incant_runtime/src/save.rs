@@ -46,7 +46,7 @@ impl NativeWorld {
         if self.audio_used {
             return Err(SaveError::AudioUnsupported);
         }
-        if self.physics_failed || self.physics_used {
+        if self.physics_failed || self.physics_used || self.physics_2d_used {
             return Err(SaveError::PhysicsUnsupported);
         }
         let entities = self
@@ -128,7 +128,7 @@ impl NativeWorld {
         if self.audio_used {
             return Err(SaveError::AudioUnsupported);
         }
-        if self.physics_failed || self.physics_used {
+        if self.physics_failed || self.physics_used || self.physics_2d_used {
             return Err(SaveError::PhysicsUnsupported);
         }
         let mut candidate = Self::from_save_bytes(bytes)?;

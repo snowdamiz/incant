@@ -1,4 +1,4 @@
-//! Versions 1/2/3/4/5, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1/2/3/4/5/6/7, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 5;
+const VERSION: u32 = 7;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,12 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.spatial.iter().any(|n| n.sprite.is_some()) {
+        let version = if !self.physics_2d.is_empty() {
             VERSION
+        } else if self.spatial.iter().any(|n| n.tilemap.is_some()) {
+            6
+        } else if self.spatial.iter().any(|n| n.sprite.is_some()) {
+            5
         } else if !self.spatial.is_empty() || !self.visual_assets.is_empty() {
             4
         } else if !self.audio.is_empty() {
@@ -92,6 +96,12 @@ impl CookedScene {
             bytes.extend((self.spatial.len() as u32).to_le_bytes());
             for node in &self.spatial {
                 crate::spatial_binary::write(&mut bytes, node);
+            }
+        }
+        if version >= 7 {
+            bytes.extend((self.physics_2d.len() as u32).to_le_bytes());
+            for record in &self.physics_2d {
+                crate::physics_2d_binary::write(&mut bytes, record);
             }
         }
         let length = (bytes.len() - HEADER) as u32;
@@ -227,13 +237,14 @@ impl CookedScene {
             let spatial_count = reader.u32()? as usize;
             if spatial_count > count
                 || spatial_count > reader.0.len() / 17
-                || (spatial_count == 0 && asset_count == 0)
+                || (version < 7 && spatial_count == 0 && asset_count == 0)
             {
                 return Err(SceneError::Invalid("spatial record count"));
             }
             spatial.reserve(spatial_count);
+            let mut tile_budget = crate::tilemap_binary::Budget::default();
             for _ in 0..spatial_count {
-                let node = crate::spatial_binary::read(&mut reader, version)?;
+                let node = crate::spatial_binary::read(&mut reader, version, &mut tile_budget)?;
                 if spatial
                     .last()
                     .is_some_and(|p: &crate::CookedSpatial| p.entity >= node.entity)
@@ -247,6 +258,33 @@ impl CookedScene {
             return Err(SceneError::Invalid(
                 "version 5 requires a sprite declaration",
             ));
+        }
+        if version == 6 && !spatial.iter().any(|n| n.tilemap.is_some()) {
+            return Err(SceneError::Invalid(
+                "version 6 requires a tilemap declaration",
+            ));
+        }
+        let mut physics_2d = Vec::new();
+        if version >= 7 {
+            let n = reader.u32()? as usize;
+            if n == 0
+                || n > count
+                || n > incant_physics_2d_runtime::MAX_BODIES
+                || n > reader.remaining_len() / 60
+            {
+                return Err(SceneError::Invalid("2D record count"));
+            }
+            physics_2d.reserve(n);
+            for _ in 0..n {
+                let record = crate::physics_2d_binary::read(&mut reader)?;
+                if physics_2d
+                    .last()
+                    .is_some_and(|p: &crate::CookedPhysics2D| p.entity >= record.entity)
+                {
+                    return Err(SceneError::Invalid("noncanonical 2D order"));
+                }
+                physics_2d.push(record);
+            }
         }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
@@ -263,7 +301,8 @@ impl CookedScene {
         Self::new(id, tick_rate, entities)?
             .with_physics(physics)?
             .with_audio(audio)?
-            .with_spatial(assets, spatial)
+            .with_spatial(assets, spatial)?
+            .with_physics_2d(physics_2d)
     }
 }
 
@@ -276,6 +315,9 @@ fn checksum(bytes: &[u8]) -> [u8; 32] {
 
 pub(crate) struct Reader<'a>(&'a [u8]);
 impl Reader<'_> {
+    pub(crate) fn remaining_len(&self) -> usize {
+        self.0.len()
+    }
     pub(crate) fn byte(&mut self) -> Result<u8, SceneError> {
         Ok(self.array::<1>()?[0])
     }

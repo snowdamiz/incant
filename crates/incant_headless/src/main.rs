@@ -3,6 +3,7 @@ use incant_render_authoring::RendererAuthoringExt as _;
 mod assets;
 mod eval;
 mod localization;
+mod native_play;
 mod play;
 mod play_assertions;
 mod play_audio;
@@ -119,6 +120,8 @@ enum Cli {
     },
     /// Run isolated gameplay, optionally recording actual GPU frames and a report.
     Play(play::Options),
+    /// Run a selected project scene on the native runtime with startup-only cooking.
+    NativePlay(native_play::Options),
     Script {
         project: PathBuf,
         compiled_script: PathBuf,
@@ -578,6 +581,14 @@ fn run() -> Result<()> {
             print(
                 json!({"state":engine.snapshot(),"assets":assets.snapshot(),"wall_ms":start.elapsed().as_secs_f64()*1000.}),
             )?;
+        }
+        Cli::NativePlay(options) => {
+            let report = native_play::run(options)?;
+            let passed = report.passed;
+            print(report)?;
+            if !passed {
+                return Err("native gameplay assertions failed; see completed report".into());
+            }
         }
         Cli::Play(options) => {
             let report = play::run(options).map_err(|error| error.to_string())?;

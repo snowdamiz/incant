@@ -36,6 +36,7 @@ incant_cmd = { path = "crates/incant_cmd" }
 incant_core = { path = "crates/incant_core" }
 incant_physics = { path = "crates/incant_physics" }
 incant_physics_runtime = { path = "crates/incant_physics_runtime" }
+incant_physics_2d_runtime = { path = "crates/incant_physics_2d_runtime" }
 incant_input = { path = "crates/incant_input" }
 incant_localization = { path = "crates/incant_localization" }
 incant_nav = { path = "crates/incant_nav" }

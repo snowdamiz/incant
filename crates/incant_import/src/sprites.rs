@@ -1,4 +1,4 @@
-//! Authoring-time checks of sprite bindings against immutable cooked textures.
+//! Authoring-time checks of sprite/tilemap bindings against immutable cooked textures.
 //! No source files, renderer, project mutation or gameplay-tick validation.
 use crate::{ImportDetails, ImportOutcome};
 use incant_assets::{CacheKind, TextureUsage, load_texture, project_cache_directory};
@@ -54,7 +54,7 @@ impl fmt::Display for SpriteReferenceErrors {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
-            "import rejected: {} invalid sprite reference(s)",
+            "import rejected: {} invalid sprite/tilemap reference(s)",
             self.0.len()
         )?;
         for diagnostic in &self.0 {
@@ -65,13 +65,13 @@ impl fmt::Display for SpriteReferenceErrors {
 }
 impl std::error::Error for SpriteReferenceErrors {}
 
-struct TextureInfo {
-    size: [u32; 2],
-    usage: TextureUsage,
-    atlas: Option<AtlasLayout>,
+pub(crate) struct TextureInfo {
+    pub(crate) size: [u32; 2],
+    pub(crate) usage: TextureUsage,
+    pub(crate) atlas: Option<AtlasLayout>,
 }
 
-/// Validate the document and every sprite's cached texture binding. Each unique
+/// Validate the document and every sprite/tilemap cached texture binding. Each unique
 /// referenced texture is loaded once and its pixel payload immediately dropped;
 /// only bounded layout metadata is retained. Missing/corrupt caches are errors,
 /// not a reason to reopen source images. Other asset types are outside this check.
@@ -85,14 +85,17 @@ pub fn validate_cached_sprites(
     let mut textures = BTreeMap::new();
     for scene in project.scenes.values() {
         for entity in scene.entities.values() {
-            let Some(value) = entity.components.get("SpriteRenderer") else {
+            let texture = if let Some(value) = entity.components.get("SpriteRenderer") {
+                serde_json::from_value::<SpriteRenderer>(value.clone())?.texture
+            } else if let Some(value) = entity.components.get("Tilemap") {
+                serde_json::from_value::<incant_doc::Tilemap>(value.clone())?.tileset
+            } else {
                 continue;
             };
-            let sprite: SpriteRenderer = serde_json::from_value(value.clone())?;
-            if textures.contains_key(&sprite.texture) {
+            if textures.contains_key(&texture) {
                 continue;
             }
-            let asset = &project.assets[&sprite.texture];
+            let asset = &project.assets[&texture];
             let loaded = (|| {
                 let cache = match cache_override {
                     Some(path) => path.to_path_buf(),
@@ -106,10 +109,10 @@ pub fn validate_cached_sprites(
                 })
             })()
             .map_err(|e| e.to_string());
-            textures.insert(sprite.texture, loaded);
+            textures.insert(texture, loaded);
         }
     }
-    Ok(check(project, &textures))
+    Ok(check_all(project, &textures))
 }
 
 pub(crate) fn check_imports(
@@ -139,7 +142,7 @@ pub(crate) fn check_imports(
             ))
         })
         .collect();
-    let diagnostics = check(project, &textures);
+    let diagnostics = check_all(project, &textures);
     let errors: Vec<_> = diagnostics
         .iter()
         .filter(|d| d.severity == SpriteDiagnosticSeverity::Error)
@@ -279,5 +282,14 @@ fn check(
             &b.path,
         ))
     });
+    diagnostics
+}
+
+fn check_all(
+    project: &Project,
+    textures: &BTreeMap<String, Result<TextureInfo, String>>,
+) -> Vec<SpriteDiagnostic> {
+    let mut diagnostics = check(project, textures);
+    diagnostics.extend(crate::tilemaps::check(project, textures));
     diagnostics
 }

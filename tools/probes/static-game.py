@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run a build-linked Wasm program through native input/physics/audio sessions.
 
-Desktop host==target proof only. Input is accepted/observed by the native session;
-incant_v1 does not yet expose input to the guest. No renderer/device/save gate.
+Desktop host==target proof only. The versioned incant_input_v1 snapshot drives
+actual guest motion and structural commands. No renderer/device/save gate.
 """
 import argparse
 import importlib.util
@@ -64,7 +64,7 @@ def verify_player(player, out):
             pcm = out/f'{fixture.name}-{index}.pcm'
             result = execute(player, ['game', *base, pcm])
             require(result.returncode == 0, result.stderr)
-            require(result.stdout == 'tick=64 frames=44117 source=[3.0, 1.0, 0.0] spawned=1.96875 pressed=1 released=1\n',
+            require(result.stdout == 'tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.96875 pressed=1 released=1\n',
                     f'Wrong combined state/timeline: {result.stdout}')
             data = pcm.read_bytes()
             require(len(data) == 44117*2*4, 'Rational sample clock drift')
@@ -75,6 +75,20 @@ def verify_player(player, out):
             digests.append(sha(pcm))
             successes.append({'streaming': streaming, 'stdout': result.stdout.strip(), 'pcm_sha256': digests[-1], 'energy': energy})
         require(len(set(digests)) == 1, 'Repeated-process PCM changed')
+        # A later accepted press must delay the guest's structural spawn. Merely
+        # counting the native input frame cannot satisfy this executable control.
+        delayed = fixture/'delayed-input.json'
+        packet = json.loads(recording.read_text())
+        packet['frames'][0]['tick'] = 5; packet['frames'][1]['tick'] = 7
+        delayed.write_text(json.dumps(packet))
+        pcm = out/f'{fixture.name}-delayed.pcm'
+        result = execute(player, ['game', scene, fixture, key, delayed, pcm])
+        require(result.returncode == 0, result.stderr)
+        require(result.stdout == 'tick=64 frames=44117 source=[2.078125, 1.0, 0.0] spawned=1.84375 pressed=1 released=1\n',
+                f'Guest ignored delayed accepted action: {result.stdout}')
+        require(pcm.stat().st_size == 44117*2*4, 'Delayed input altered sample clock')
+        successes.append({'streaming': streaming, 'delayed_action': True,
+                          'stdout': result.stdout.strip(), 'pcm_sha256': sha(pcm)})
         cases = [(name, [name, *base], None) for name in ('trap', 'nan', 'cycle', 'loop', 'remove-listener', 'audio-pose', 'not-linked')]
         for name in ('camera', 'manifest'):
             spatial = fixture/f'{name}.scene'
@@ -182,7 +196,7 @@ def main():
         'player_sha256': sha(player), 'symbols': identity, 'source_sha256': source_hash, 'wasm_sha256': wasm_hash,
         'temporary_compile_sources_tools_generated_c_wasm_and_build_storage_deleted': True,
         'successes': successes, 'rejections': failures,
-        'limitations': ['native host observes replay; Wasm guest input ABI not implemented', 'QuickJS remains in normal dependency graph; this is not a QuickJS-free architecture', 'retained PCM and recording JSON are runtime exchange files, not deleted compile inputs', 'repository and validator build storage retained', 'copied bounded numeric transfer, not zero-copy', 'no renderer, full session save, mobile/device or performance gate', 'simulation/module/audio failures publish no PCM; output I/O itself is not atomic', 'trusted build environment; C flag audit checks global presence, not every translation unit']}
+        'limitations': ['versioned copied input snapshot, not a complete gameplay SDK', 'QuickJS remains in normal dependency graph; this is not a QuickJS-free architecture', 'retained PCM and recording JSON are runtime exchange files, not deleted compile inputs', 'repository and validator build storage retained', 'copied bounded numeric transfer, not zero-copy', 'no renderer, full session save, mobile/device or performance gate', 'simulation/module/audio failures publish no PCM; output I/O itself is not atomic', 'trusted build environment; C flag audit checks global presence, not every translation unit']}
     (out/'result.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps(report, indent=2))
 

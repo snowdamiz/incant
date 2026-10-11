@@ -18,7 +18,7 @@ pub use navigation::{
     NavigationError, NavigationPath, NavigationQuery, NavigationResources, PathRequest,
     RebuildReport,
 };
-use scene::{LocalFrame, ParentId, SceneOrder, WorldFrame, prepare, propagate};
+use scene::{LocalFrame, ParentId, SceneOrder, WorldFrame, prepare, prepare_gameplay, propagate};
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::{Arc, Mutex};
@@ -284,7 +284,7 @@ impl Engine {
     /// Existing Bevy entities and schedules are reused; no scripts receive World.
     pub fn sync(&mut self, project: &Project) -> Result<(), incant_doc::DocumentError> {
         let validated = project.validated()?;
-        let staged = prepare(validated)?;
+        let staged = prepare_gameplay(validated)?;
         let prepared_physics = PreparedPhysics::from_validated(validated)?;
         let staged_grids = self
             .grid_navigation

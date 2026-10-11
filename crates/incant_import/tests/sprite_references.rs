@@ -40,6 +40,26 @@ struct Fixture {
     ordinary: String,
 }
 impl Fixture {
+    fn tilemap(&mut self, texture: String, frame: &str) -> String {
+        let mut entity = Entity::new("Referenced tilemap");
+        let id = entity.id.clone();
+        entity
+            .components
+            .insert("Transform".into(), json!(Transform::default()));
+        entity.components.insert("Tilemap".into(), json!({"tileset":texture,"size":[2,2],"cell_size":[1,1],"layers":[{"id":B,"cells":[frame,frame,null,frame],"solid":true}]}));
+        self.bus
+            .execute(
+                vec![Command::CreateEntity {
+                    scene_id: self.scene.clone(),
+                    entity,
+                }],
+                Actor::user("test"),
+                "Author tilemap",
+                None,
+            )
+            .unwrap();
+        id
+    }
     fn new() -> Self {
         let root = tempfile::tempdir().unwrap();
         image(root.path(), "first.png", 8, 255);
@@ -125,6 +145,104 @@ impl Fixture {
         assert_eq!(self.bus.project(), &project);
         assert_eq!(self.bus.revision(), revision);
         bytes
+    }
+}
+
+#[test]
+fn shared_tile_frames_reject_reimport_atomically_and_cached_validation_survives_undo_redo() {
+    let mut f = Fixture::new();
+    let first = f.tilemap(f.atlas.clone(), A);
+    let second = f.tilemap(f.atlas.clone(), A);
+    let sprite = f.sprite(f.atlas.clone(), json!({"frame":A}), false);
+    let before = f.bus.project().clone();
+    let revision = f.bus.revision();
+    let journal = f.journal_bytes();
+    image(f.root.path(), "ordinary.png", 8, 99);
+    let mut dropped = descriptor();
+    dropped["frames"].as_object_mut().unwrap().remove(A);
+    write_descriptor(f.root.path(), &dropped);
+    let ImportError::SpriteReferences(errors) = f.prepare().err().unwrap() else {
+        panic!("typed references")
+    };
+    assert_eq!(errors.0.len(), 3); // Shared cells are grouped per entity/texture/frame.
+    for entity in [&first, &second, &sprite] {
+        let diagnostic = errors.0.iter().find(|d| &d.entity_id == entity).unwrap();
+        assert_eq!(diagnostic.code, Code::MissingFrame);
+        assert_eq!(diagnostic.texture_id, f.atlas);
+        assert_eq!(diagnostic.frame.as_deref(), Some(A));
+        if entity != &sprite {
+            assert!(diagnostic.path.ends_with("/Tilemap/layers/0/cells/0"));
+        }
+    }
+    assert_eq!(f.bus.project(), &before);
+    assert_eq!(f.bus.revision(), revision);
+    assert_eq!(f.journal_bytes(), journal);
+    assert!(
+        validate_cached_sprites(f.bus.project(), f.root.path(), None)
+            .unwrap()
+            .is_empty()
+    );
+    write_descriptor(f.root.path(), &descriptor());
+    image(f.root.path(), "first.png", 8, 17);
+    f.prepare()
+        .unwrap()
+        .commit(&mut f.bus, Actor::import("test"), "Repair tile atlas")
+        .unwrap();
+    let after = f.bus.project().clone();
+    assert_ne!(
+        before.assets[&f.atlas].sha256,
+        after.assets[&f.atlas].sha256
+    );
+    for source in [
+        "first.png",
+        "second.png",
+        "ordinary.png",
+        "sheet.atlas.json",
+    ] {
+        fs::remove_file(f.root.path().join(source)).unwrap();
+    }
+    assert!(
+        validate_cached_sprites(f.bus.project(), f.root.path(), None)
+            .unwrap()
+            .is_empty()
+    );
+    f.bus.undo().unwrap();
+    assert_eq!(f.bus.project(), &before);
+    assert!(
+        validate_cached_sprites(f.bus.project(), f.root.path(), None)
+            .unwrap()
+            .is_empty()
+    );
+    f.bus.redo().unwrap();
+    assert_eq!(f.bus.project(), &after);
+    assert!(
+        validate_cached_sprites(f.bus.project(), f.root.path(), None)
+            .unwrap()
+            .is_empty()
+    );
+}
+
+#[test]
+fn ordinary_tile_textures_and_unknown_frames_have_typed_offline_diagnostics() {
+    let mut f = Fixture::new();
+    let ordinary = f.tilemap(f.ordinary.clone(), A);
+    let unknown = f.tilemap(f.atlas.clone(), "00000000000000000000000003");
+    f.bus.project().validate().unwrap(); // No filesystem IO in schema validation.
+    for source in [
+        "first.png",
+        "second.png",
+        "ordinary.png",
+        "sheet.atlas.json",
+    ] {
+        fs::remove_file(f.root.path().join(source)).unwrap();
+    }
+    let diagnostics = validate_cached_sprites(f.bus.project(), f.root.path(), None).unwrap();
+    assert_eq!(diagnostics.len(), 2);
+    for (entity, code) in [(ordinary, Code::NotAtlas), (unknown, Code::MissingFrame)] {
+        let diagnostic = diagnostics.iter().find(|d| d.entity_id == entity).unwrap();
+        assert_eq!(diagnostic.code, code);
+        assert_eq!(diagnostic.severity, Severity::Error);
+        assert!(diagnostic.path.contains("/Tilemap/"));
     }
 }
 
