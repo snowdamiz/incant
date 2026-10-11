@@ -1,0 +1,237 @@
+{
+  "frozen_adoption_commit": "f5d0ca21e2bfc6f305c8a67d4b54b35311c4ae41",
+  "ordinary_test_source": "aceedd2e013f393723125be5a1e2103d5bacddb8",
+  "fresh_shipping_source": "61d41be7566d6139d11b2e0f5686529f71022297",
+  "runtime_editor_sdk_cargo_bytes_unchanged_since_ordinary_tests": true,
+  "suite_executable_ast_unchanged_since_fresh_proof": true,
+  "preserved_heads": {
+    "corrected_pr82": "588f7e7e61129ee698e83b408cd02741b59b2bae",
+    "flipbook_sdk": "2ee26d510a6bfa6ea2bcb381b9f3bd0296d9680f",
+    "public_rust_sdk": "6b5ed792510eeef78bff35faad2c2adca3a1e4c4",
+    "color_appearance": "cfb2d450112e1ebf3513a094887c2e8a35dbe914"
+  },
+  "checks": {
+    "ordinary_workspace_tests_doctests": 739,
+    "ordinary_harness_groups": 214,
+    "serialized_ignored_gpu": 75,
+    "workspace_all_target_ci_clippy": true,
+    "static_wasmtime_tests": 167,
+    "static_wasmtime_harness_groups": 35,
+    "static_wasmtime_clippy_and_actual_guest": true,
+    "optional_native_window_tests": 13,
+    "optional_native_window_clippy": true,
+    "python_tools": 125,
+    "node_typescript_cook_tests": 12,
+    "ui_tests": 536,
+    "ui_strict_production_build": true,
+    "schemas_exact": 58,
+    "normal_runtime_dependency_roots": 14,
+    "default_wasm32_runtime_assets_static_host_compile": true,
+    "generated_sdk_bridge_conventions_fmt_actionlint": true
+  },
+  "gpu_test_names": [
+    "editor_publishes_complete_revisions_and_recovers_after_failed_replacements",
+    "camera_capture_tracks_simulated_camera_motion_and_rejects_unknown_selection",
+    "headless_play_records_current_simulation_frames_and_publishes_a_complete_report",
+    "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+    "graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing",
+    "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+    "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+    "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+    "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+    "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+    "models::retained::flipbook_tests::retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletion",
+    "models::retained::native_tests::binary_native_motion_and_structural_rebuilds_submit_without_source_or_document",
+    "models::retained::sprite_tests::source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild",
+    "models::retained::tests::motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings",
+    "models::retained::tests::rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry",
+    "models::retained::tests::retained_flipbook_selection_stages_without_allocation",
+    "models::retained::tests::retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion",
+    "models::retained::tests::retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings",
+    "models::retained::tests::retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells",
+    "models::retained::tilemap_tests::cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection",
+    "version_tests::live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry",
+    "alpha_modes_and_back_faces_follow_material_semantics",
+    "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
+    "cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference",
+    "cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects",
+    "cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back",
+    "cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units",
+    "cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing",
+    "cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions",
+    "cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel",
+    "cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose",
+    "cameras::transparency_depth_order_follows_the_selected_camera",
+    "color_maps_use_srgb_and_texture_reimport_keeps_retained_materials",
+    "color_roles::color_environment_minification_matches_alpha_one_and_retains_prior_versions",
+    "color_roles::opaque_and_emissive_minification_ignore_alpha_without_recoloring_coverage_roles",
+    "dark_fill_lit_materials_remain_distinguishable",
+    "emissive_maps_and_samplers_retain_color_and_addressing",
+    "environments::authored_environments_preserve_color_space_versions_and_source_free_loading",
+    "environments::environment_intensity_rotation_and_roughness_change_real_reflections",
+    "environments::malformed_environment_cannot_replace_a_retained_scene",
+    "environments::studio_environment_renders_metal_and_dielectric_across_roughness",
+    "highlight_energy_survives_and_transparency_blends_before_tone_mapping",
+    "imported_geometry_survives_sources_and_retained_versions_survive_reimport",
+    "lights::clustered_masks_match_total_light_energy_and_retain_old_scenes",
+    "lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words",
+    "lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably",
+    "lights::coverage::visible_depth_boundary_patches_match_all_light_oracle",
+    "lights::directional_point_and_spot_lights_obey_authored_physical_parameters",
+    "lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease",
+    "lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting",
+    "lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix",
+    "lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize",
+    "material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength",
+    "pipeline_warmup::all_current_variants_exist_before_first_draw_and_reimport_creates_no_pipelines",
+    "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+    "shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions",
+    "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+    "shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary",
+    "shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible",
+    "shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions",
+    "sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement",
+    "sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop",
+    "sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe",
+    "sprites::sprite_layers_order_and_alpha_follow_painter_semantics",
+    "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels",
+    "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties",
+    "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize",
+    "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels",
+    "tangents::generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection",
+    "observed_device_loss_stops_the_host_before_another_target_is_acquired",
+    "paused_committed_refresh_submits_without_advancing_game_or_audio",
+    "script_physics_audio_and_submitted_frames_share_the_source_free_native_tick",
+    "target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm"
+  ],
+  "fresh_proof_evidence": {
+    "path": "docs/spikes/evidence/shipping-sdk-color-shared-proof.json",
+    "sha256": "7079f4c1d470f130c64de965bdec6e686b13619b09845359e83789c1a44aaf2e"
+  },
+  "retained_logs": {
+    "/tmp/incant-sdk-color-adoption-tools.log": {
+      "sha256": "cf22540187ccaf8bac8f18c9f3bad2f764896655cf1603d45eb782b23902afcd",
+      "bytes": 21934
+    },
+    "/tmp/incant-sdk-color-bridge.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-sdk-color-conformance/conformance-0.log": {
+      "sha256": "d578218115533510b50be2fb3cc92e1a5c25995935ca6dbf4ba07df31f8bdf91",
+      "bytes": 28704
+    },
+    "/tmp/incant-sdk-color-conformance/conformance-1.log": {
+      "sha256": "281cb96dba1aa46fe4a9d78414805bd4bee169025ef58faaf2e5890a45b05515",
+      "bytes": 5883
+    },
+    "/tmp/incant-sdk-color-conformance/conformance-2.log": {
+      "sha256": "d9b8c04ea00deff4a367c5b116ed9350a7fb694afb6c3179c2411e54e80c21c0",
+      "bytes": 2166
+    },
+    "/tmp/incant-sdk-color-conformance/cook-build.log": {
+      "sha256": "c92508a29848820f033cd2ea015c85dde0953c88b07cc967ce34b7c08f610549",
+      "bytes": 72
+    },
+    "/tmp/incant-sdk-color-conformance/development/result.json": {
+      "sha256": "d9b8c04ea00deff4a367c5b116ed9350a7fb694afb6c3179c2411e54e80c21c0",
+      "bytes": 2166
+    },
+    "/tmp/incant-sdk-color-conformance.log": {
+      "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b",
+      "bytes": 120
+    },
+    "/tmp/incant-sdk-color-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-sdk-color-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-sdk-color-runtime-guard.log": {
+      "sha256": "da87c4b6027ca44b4d7cdbaccbb0e004ca05ac553d71a2d2b8332e280588f8e7",
+      "bytes": 387
+    },
+    "/tmp/incant-sdk-color-rust-sdk.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-sdk-color-schemas-diff.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-sdk-color-schemas.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-sdk-color-shared-proof.log": {
+      "sha256": "972808054945aafc007cee57b0a0216afa7867678c9936f0f775190e939c0e1b",
+      "bytes": 980
+    },
+    "/tmp/incant-sdk-color-typescript-sdk.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-sdk-color-union-clippy.log": {
+      "sha256": "05a2c5d38dbd9c506977f78c3fdb73221c98afdf65e18c2716092baceefa6db0",
+      "bytes": 19250
+    },
+    "/tmp/incant-sdk-color-union-gpu.log": {
+      "sha256": "cf790e2da38c62bff67290fd0204f48b4ea488ab47c3292f8a832728ce53f013",
+      "bytes": 46545
+    },
+    "/tmp/incant-sdk-color-union-node.log": {
+      "sha256": "77c40b8f71ec0324ea0b58afd7799a3a60e3b3d1cb7afdb9835cf98e5b8608b8",
+      "bytes": 2735
+    },
+    "/tmp/incant-sdk-color-union-npm.log": {
+      "sha256": "1ec873b133447fdaf11fd7241cf1973f89f65edaa92984dcd18fdd699847a0b3",
+      "bytes": 143
+    },
+    "/tmp/incant-sdk-color-union-tools-build.log": {
+      "sha256": "9ef3efe93af72d1246c7927d04279d3d9fe5a2fa443b3df0976779b6a329c8b5",
+      "bytes": 57
+    },
+    "/tmp/incant-sdk-color-union-tools.log": {
+      "sha256": "2a1c612966594cce96c9651dca9f729fa19066cefd1390e5eaa49e50a0cadfc2",
+      "bytes": 2278
+    },
+    "/tmp/incant-sdk-color-union-ui-build.log": {
+      "sha256": "a62c06173b68b35614a26e09b24662f6e2d764b1ef9ecf8de0ea0325c2c21cec",
+      "bytes": 1551
+    },
+    "/tmp/incant-sdk-color-union-ui.log": {
+      "sha256": "500e6ecc5e672801d41a43981e033381fd71ca6e0489fcb2cec91587417901da",
+      "bytes": 2298
+    },
+    "/tmp/incant-sdk-color-union-workspace.log": {
+      "sha256": "c0cd06fec3050672b76d11c180cf6995c9c7741730fcd0e9091913ad4061873c",
+      "bytes": 135158
+    },
+    "/tmp/incant-sdk-color-wasm32.log": {
+      "sha256": "9f1af1f04232abe5b19ca24596c196b198a1687509c22b3c7765848782db3d5c",
+      "bytes": 2876
+    },
+    "/tmp/incant-sdk-color-window-clippy.log": {
+      "sha256": "e4706a96b0ae1b0364cf3502153d294a3de4388fccc02c3a52defcf3c58e5533",
+      "bytes": 6062
+    },
+    "/tmp/incant-sdk-color-window-tests.log": {
+      "sha256": "c9bd77a2a0ebb94a6a9b6657e3eabf2dd24693a5ec3a7b84aa2ba79784fcc277",
+      "bytes": 8773
+    }
+  },
+  "review": {
+    "nonvisual_sources": "Root independently accepted frozen SDK, color and shipping changes; merge conflicts confined to STATUS.md.",
+    "appearance": "Claude Opus5.5 Max0043 scoped acceptance retained with original ancestry; Astra did not inspect pixels."
+  },
+  "limits": [
+    "Local checks are not hosted or reference-phone evidence.",
+    "The only speedup sample is the older matched macOS graph; the final fresh proof has no performance claim.",
+    "Authored project-script registration remains a separate later candidate.",
+    "Hosted exact-head checks remain required before merge."
+  ]
+}
