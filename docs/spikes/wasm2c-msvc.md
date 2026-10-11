@@ -108,3 +108,21 @@ Its macOS combined conformance rerun passes; its Linux C negative control and
 three trap round trips are recorded separately. Neither local proof executes
 MSVC; hosted `/Od` and `/O2` conformance and fresh `/O2` PE/PDB proof remain the
 acceptance evidence needed for the Windows path.
+
+## First hosted Windows result
+
+PR64 `a22a569` job114360966244 failed before static module preparation. The first
+cook build used the pinned `cargo.exe` but omitted the prepared child-process
+PATH; Cargo's named `rustc` invocations reached a rustup proxy inside registry
+crates and attempted conflicting stable toolchain updates. This was a probe
+launch failure, not evidence about either MSVC C configuration.
+
+The corrected launch uses `cargo_output` with the explicit pinned environment
+and retains the complete UTF-8 `cook-build.log` even on failure. Two real child
+process regressions verify the environment, non-ASCII diagnostics, nonzero exit
+rejection and full diagnostic retention. All 49 tool tests, actionlint and the
+25-case combined static/development suite, Clippy and three guest processes pass
+locally. The reviewed upstream Camera test isolation and Linux declaration fix
+are integrated without changing the MSVC/runtime source. Corrected hosted
+Windows execution remains pending; the earlier macOS shipping identity is
+retained as evidence for its exact source.

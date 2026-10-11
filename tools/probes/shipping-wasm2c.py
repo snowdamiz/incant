@@ -45,6 +45,14 @@ def cargo_metadata(command, *, cwd, env):
     return json.loads(result.stdout)
 
 
+def cargo_build(command, *, cwd, env, log):
+    # A direct cargo.exe still launches rustc by name. Preserve the explicitly
+    # pinned toolchain PATH for those children, including registry build scripts.
+    result = cargo_output(command, cwd=cwd, env=env)
+    log.write_text(result.stdout + result.stderr, encoding='utf-8')
+    require(result.returncode == 0, f'Cargo build failed; see {log}: {result.stderr[-4000:]}')
+
+
 def provision(path):
     key = (platform.system(), platform.machine())
     require(key in ASSETS, f'Unsupported pinned WABT host: {key}')
@@ -112,7 +120,8 @@ def main():
     if kind == 'pdb':
         environment['INCANT_WASM_MSVC_OPT_LEVEL'] = args.msvc_opt_level
     cargo = ROOT / 'tools/cargo' if os.name != 'nt' else rustc.with_name('cargo.exe')
-    run([cargo, 'build', '-j2', '-p', 'incant_wasm_cook', '--locked'])
+    cargo_build([str(cargo), 'build', '-j2', '-p', 'incant_wasm_cook', '--locked'],
+                cwd=ROOT, env=environment, log=out/'cook-build.log')
     cook = ROOT / f'target/debug/incant_wasm_cook{suffix}'
     metadata = cargo_metadata([str(cargo), 'metadata', '--locked', '--format-version=1', '--features', 'incant_wasm_dev/wasmtime-host,incant_wasm_runtime/embedded-fixture'], cwd=ROOT, env=environment)
     names = {p['id']: p['name'] for p in metadata['packages']}; nodes = {n['id']: n for n in metadata['resolve']['nodes']}

@@ -88,11 +88,14 @@ jobs:
             artifacts/static-wasm-conformance/development/result.json
             artifacts/static-wasm-conformance/conformance-*.log
             artifacts/static-wasm-conformance/prepared-manifest.json
+            artifacts/static-wasm-conformance/cook-build.log
             artifacts/static-wasm-optimized/development/result.json
             artifacts/static-wasm-optimized/conformance-*.log
             artifacts/static-wasm-optimized/prepared-manifest.json
+            artifacts/static-wasm-optimized/cook-build.log
             artifacts/static-wasm-shipping/result.json
             artifacts/static-wasm-shipping/build.log
+            artifacts/static-wasm-shipping/cook-build.log
             artifacts/static-wasm-shipping/prepared-manifest.json
             artifacts/static-wasm-shipping/player.zip
             artifacts/static-wasm-shipping/symbols.zip

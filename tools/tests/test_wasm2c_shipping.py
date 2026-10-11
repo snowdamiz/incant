@@ -1,8 +1,10 @@
 import hashlib
 import importlib.util
 import io
+import os
 from pathlib import Path
 import tarfile
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -59,3 +61,26 @@ class StaticShippingTests(unittest.TestCase):
                 probe.verify_c_flags(flags.replace(removed, ''), 'pdb', '2')
         with self.assertRaises(ValueError):
             probe.verify_c_flags(flags, 'pdb', '0')
+
+
+class CargoBuildEnvironment(unittest.TestCase):
+    def test_actual_child_receives_pinned_path_and_utf8_diagnostics(self):
+        with tempfile.TemporaryDirectory() as directory:
+            log = Path(directory) / 'cook.log'
+            environment = dict(os.environ, PATH=directory + os.pathsep + os.environ.get('PATH', ''),
+                               INCANT_TEST_COMPILER_PATH=directory)
+            source = ("import os, sys; "
+                      "assert os.environ['PATH'].split(os.pathsep)[0] == os.environ['INCANT_TEST_COMPILER_PATH']; "
+                      "sys.stdout.buffer.write('toolchain selected\\n'.encode('utf-8')); "
+                      "sys.stderr.buffer.write('diagnostic: café\\n'.encode('utf-8'))")
+            probe.cargo_build([sys.executable, '-c', source], cwd=directory, env=environment, log=log)
+            self.assertEqual(log.read_text(encoding='utf-8'), 'toolchain selected\n' + 'diagnostic: café\n')
+
+    def test_actual_build_failure_is_reported_and_full_diagnostic_is_retained(self):
+        with tempfile.TemporaryDirectory() as directory:
+            log = Path(directory) / 'cook.log'
+            source = "import sys; print('build refused', file=sys.stderr); sys.exit(7)"
+            with self.assertRaisesRegex(ValueError, 'Cargo build failed'):
+                probe.cargo_build([sys.executable, '-c', source], cwd=directory,
+                                  env=os.environ.copy(), log=log)
+            self.assertEqual(log.read_text(encoding='utf-8'), 'build refused\n')

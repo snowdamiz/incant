@@ -356,5 +356,28 @@
     },
     "subsequent_linux_only_configuration": "41a006399c2038873479c02519d9fa41b6aa104f; separate C negative-control and post-change macOS conformance evidence in wasm2c-linux-c11-2026-10-10.json",
     "windows_execution": "pending"
+  },
+  "windows_initial_failure_and_correction": {
+    "failed_head": "a22a569c79aa2e09bf809edeb610d019ba654187",
+    "run": 38102436720,
+    "job": 114360966244,
+    "cause": "Initial cook build omitted explicit prepared PATH; pinned cargo.exe launched rustup-proxy rustc children and concurrent stable updates failed before module preparation",
+    "correction_base": "11341d1",
+    "correction": "Explicit prepared env through UTF-8 cargo_output for first cook build; full cook-build.log artifact",
+    "python_tests": 49,
+    "combined_tests": 25,
+    "clippy": "passed",
+    "actual_development_processes": 3,
+    "hosted_corrected_windows": "pending",
+    "sha256": {
+      "tools/probes/shipping-wasm2c.py": "52942b1b3249f3168eae8c8f6819217fef1d19a090de2ada5a06be2426a8f158",
+      "tools/tests/test_wasm2c_shipping.py": "d6a4313635e7cd3d399ecfeef14de7bdde9b52633debf2f5250e855086654c5d",
+      ".github/workflows/development-wasm.yml": "c733ac629011b9c46d911ee4ca6b3e35ed031474835f871072a889fd5930c9e0",
+      "/tmp/incant-pr64-windows-first.log": "bc60e261d8c721c7a5f8e686070e2c9afbab2cc735c8efce55a10a13bdfa3794",
+      "/tmp/incant-msvc-cargo-env-tools.log": "e6de548fa137591a47ba835d54282b762be39512c615e8e5d2ef5d3df46e6e06",
+      "/tmp/incant-wasm2c-msvc-cargo-env-conformance/conformance-0.log": "5a98061085b41816295ef95094b4307375eab827511cc4333cbff5a791d040dd",
+      "/tmp/incant-wasm2c-msvc-cargo-env-conformance/conformance-1.log": "460b31717cc3173cf3eda65bf149dbe55ae4c5f230a59165ffed5b5e74c4af3e",
+      "/tmp/incant-wasm2c-msvc-cargo-env-conformance/conformance-2.log": "e46aeb566d62bce6d460de8b36f9d9c36f1aeb5715a6a3891ebe11430d90168d"
+    }
   }
 }
