@@ -27,7 +27,7 @@ fn update(tick: &mut Tick<'_>, dt: f64) -> Result<()> {
 
 The complete runnable sample is [samples/gameplay.rs](samples/gameplay.rs). It
 uses accepted named input, numeric rows, spawn/parent/velocity/despawn commands,
-and bulk flipbook playback/controls. `tools/rust_guest.py::compile` builds the
+bulk flipbook playback/controls, and committed primitive diagnostics. `tools/rust_guest.py::compile` builds the
 trusted repository samples with pinned rustc and the two fixed library roots;
 it does not run project Cargo build scripts, dependency downloads or proc macros.
 The current helper is a trusted engine build tool, not an untrusted source sandbox.
@@ -65,6 +65,13 @@ source, raw Wasm or cached native modules at runtime.
   scratch. Their iterators need no per-entity host calls. Input is the accepted
   tick's immutable snapshot. Flipbook rows show committed state before queued
   commands; pause/play/restart/seek become visible after successful publication.
+- `tick.log(message, LogLevel::Info)` copies primitive UTF-8 diagnostics into the
+  current update. `Debug`, `Warn` and `Error` are also supported. Messages accept
+  at most 1,024 bytes, LF/TAB but no other controls; the host accepts at most 64
+  records/16 KiB per update. History retains a prefix of 1,024 records/256 KiB and
+  counts later drops without failing gameplay. Records publish only after the
+  entire numeric/structural update succeeds, carry its accepted update number,
+  and reach the native session/report log observer. Failed hosts hide logs.
 - Use `?` for SDK operations. Returning `Err` from the callback traps. An ignored
   error returned by an active SDK method also traps at callback exit, rejecting
   all its earlier numeric writes and queued commands. Pure snapshot `parse`
@@ -87,6 +94,7 @@ Wasmtime bindings, static Rust/C dispatch, namespace contexts, host input tag
 mapping and shared endian codecs. Generated files are checked in. Run its
 `--check` mode after changes. Runtime crates never read this JSON.
 
+Additive `incant_log_v1` supplies logging; older hosts reject its import explicitly.
 Existing `incant_v1`, `incant_input_v1`, and `incant_flipbook_v1` layouts remain
 unchanged. Unknown namespaces, signatures and magic/layout versions fail closed.
 The host's native numeric layout is checked against generated sizes and offsets

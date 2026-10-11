@@ -4327,6 +4327,7 @@ dependencies = [
  "incant_physics_runtime",
  "incant_types",
  "libm",
+ "serde",
  "sha2 0.10.9",
  "thiserror 2.0.21",
 ]
@@ -4410,6 +4411,7 @@ dependencies = [
  "incant_wasm_abi",
  "incant_wasm_cook",
  "incant_wasm_runtime",
+ "serde_json",
  "thiserror 2.0.21",
  "wasmparser",
  "wasmtime",
