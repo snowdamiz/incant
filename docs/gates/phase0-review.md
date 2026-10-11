@@ -24,7 +24,7 @@ The separate landing page is [PR #2](https://github.com/snowdamiz/incant/pull/2)
 | Claude 5.5 ACP roundtrip | [First result packet](../../handoffs/0001-editor-foundation/result.md), later native/account/palette packets and integration commits | No copied coding-agent credentials; handoff 0008 resumes visual review after the director restored capture permission |
 | Runnable artifacts for six targets | [Build and execution evidence](../spikes/evidence/six-platform-2026-10-08.json), including hosted Android emulator execution | PR-triggered runs do not prove scheduled nightly history or signed distribution |
 | Apple and Windows signing certificates | Removed from Phase 0 by director decision on 2026-10-10 | First needed for Phase 5 store uploads; unsigned development builds remain development builds, not substitutes |
-| Year 1 director/reviewer/contracts | Director is identified by the plan; reviewer/contracts are not recorded | Director confirmation is required; no staffing or contract commitments were made by an agent |
+| Phases 0–1 director/reviewer/contracts | Director is identified by the plan; reviewer/contracts are not recorded | Director confirmation is required; no staffing or contract commitments were made by an agent |
 
 The ledger at [phase0.json](phase0.json) remains unapproved. The gate command reports
 auth verification, scheduled nightly artifacts, staffing and director
