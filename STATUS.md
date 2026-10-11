@@ -152,3 +152,8 @@ Earlier implementation notes, superseded counts and publication chronology are
 preserved in the [historical ledger](docs/spikes/implementation-history-2026-10-10.md).
 Technical evidence remains under [docs/spikes](docs/spikes); `python3 tools/check_gate.py`
 reports the recorded gate state without granting approval.
+
+The reviewed general-check selector allows only nine audited plan/convention/ADR
+files onto a Linux documentation path, preserving full checks for every other
+change and all classification failures. Local82tool tests/actionlint pass; hosted
+latency remains pending. [Policy and evidence](docs/spikes/ci-document-selection.md).
