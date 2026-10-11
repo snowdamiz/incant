@@ -14,5 +14,14 @@ for npm_cache_value in "$npm_cache_dir" "$npm_cache_arch" "$RUNNER_OS"; do
     exit 1
   }
 done
-printf 'path=%s\nkey=node-cache-%s-%s-npm-%s\n' \
-  "$npm_cache_dir" "$RUNNER_OS" "$npm_cache_arch" "$NPM_LOCK_HASH" >> "$GITHUB_OUTPUT"
+# GitHub expression equality ignores case; compare actual Git refs in Bash.
+# Only these trusted producer refs can register the save-capable action.
+npm_cache_ref="${NPM_CACHE_REF:-}"
+npm_cache_default_branch="${NPM_CACHE_DEFAULT_BRANCH:-}"
+npm_cache_save=false
+if [[ -n "$npm_cache_default_branch" && "$npm_cache_ref" == "refs/heads/$npm_cache_default_branch" ]] \
+  || [[ "$npm_cache_ref" == 'refs/heads/codex/release-candidate' ]]; then
+  npm_cache_save=true
+fi
+printf 'path=%s\nkey=node-cache-%s-%s-npm-%s\nsave=%s\n' \
+  "$npm_cache_dir" "$RUNNER_OS" "$npm_cache_arch" "$NPM_LOCK_HASH" "$npm_cache_save" >> "$GITHUB_OUTPUT"
