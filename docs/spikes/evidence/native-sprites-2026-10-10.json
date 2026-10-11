@@ -1,0 +1,64 @@
+{
+  "recorded_utc": "2026-10-11T00:39:42.192049+00:00",
+  "base_commit": "affe687042e09b3790b86dfb453467b15e2244c3",
+  "host": {
+    "system": "Darwin",
+    "release": "25.6.0",
+    "machine": "arm64",
+    "chip": "Apple M5 Pro",
+    "backend": "Metal"
+  },
+  "source_sha256": {
+    "Cargo.lock": "da614a38c497e029754abeac21aa8b2c6b30fab98e5860acdea77b335b8236b1",
+    "crates/incant_cook/src/scene.rs": "2015cb6a807b6e6fb59086321bca24b1c301d0269555a16ca9fb11624c934115",
+    "crates/incant_cook/src/spatial.rs": "b41f30e740b178ac63d1dec73d2250f77d9e76e911d3a9abd75b4e4520bf2b40",
+    "crates/incant_cook/tests/spatial.rs": "a84f91b146f6e56c31b709a90e62367805443d6e0e932a9b62054cf502a003bb",
+    "crates/incant_render/src/models.rs": "88f4bd93a54f040fde916a758bebdcd99178cd8219fb561238fd6ef85e664be7",
+    "crates/incant_render/src/retained.rs": "26624d4cab0fa7d145b1d44f08135db511a6499d03ef337816993b5bc803e729",
+    "crates/incant_render/src/retained_tests.rs": "995c8d08a466dc8ed4ba5f1dfd026528d345d8f0170c7338c48787bbf4ab052f",
+    "crates/incant_render/src/scene.rs": "d387f9b27d9355da51e356775e43a2399ef30059db0219cef310f103e5cc63d5",
+    "crates/incant_render/src/sprites/mod.rs": "03d4d763d7af8ceac69a48c48d850643c5f6e570748ed680c99b10b8f53ae4bd",
+    "crates/incant_render_native/Cargo.toml": "5567bed66d5ceddb99b6c7267baebad4dae741c77f3b1dac86757769a3094da7",
+    "crates/incant_render_native/src/binding.rs": "3c1d93d9030e1028b77183f56e1c5e5cadb2bd0106515445aca250d160a8b5e7",
+    "crates/incant_render_native/src/lib.rs": "f6b9ea82d76cc26434d18ba32c1da50b92f2727a0aae84e89db76a4f8be027a8",
+    "crates/incant_render_native/tests/bindings.rs": "2382d85e6ce410323b276f071c66a1ddbf081cc535084596bfcf447c4640d23e",
+    "crates/incant_runtime/Cargo.toml": "8b2473f89f4005944c1cde18411610fcd50b6cc4eb9406a7d39c50fa3edc49c9",
+    "crates/incant_runtime/src/binary.rs": "33adf7822f29ecc2f447e219c883d6a4f56f03e5bb631fe8976895d2a73d926c",
+    "crates/incant_runtime/src/lib.rs": "0e41de8c5fd522a0a08d6ab9edfb4a467f9c0b7519ddc70a6d986bb1210d6d70",
+    "crates/incant_runtime/src/spatial.rs": "a0ce8093d13e2865421d84e9b0c6026e1e174590f90d7bf5b5af4b101ae605a4",
+    "crates/incant_runtime/src/spatial_binary.rs": "ae1ddaf70c6d46188b085614ba243f928766b66d6f3497d3dee849821fb0d192",
+    "crates/incant_runtime/tests/physics.rs": "596f8ce664cfd30b16783281848283d0bf0e1afb62826b36e60874c5e6b7c27f",
+    "crates/incant_runtime/tests/scenes.rs": "124ec99f505f7a37b7b840ff353ad3cf0146e316b52601fd8b333efa2123665f",
+    "crates/incant_render/src/retained_sprite_tests.rs": "0de90354b307008bd722b84983633ed005e926dc0885d5263cb4ee2018fc87d4",
+    "crates/incant_runtime/src/sprite.rs": "f00cd559c6b538d904eae5d3551102da27711556b51f3b59b6e9b9b9169ac249",
+    "crates/incant_runtime/src/sprite_binary.rs": "e211217db25b5f07223782cf722646bf474f23ac93b39809817d73af01bc5c65",
+    "crates/incant_runtime/tests/sprites.rs": "c98212457bd9be306161b6b2b9c71cb04d044ab1573675579973f573f777f066"
+  },
+  "logs": {
+    "/tmp/incant-native-sprite-tests.log": "4a32ee0831964a1564591c4d01dbe6ee6a1983452db617bbdf534c2835cab500",
+    "/tmp/incant-native-sprite-gpu.log": "2054a7af5822e7dcaa43920d8760c4558332925398ccc4d48d85c1fa8d91c427",
+    "/tmp/incant-native-sprite-clippy.log": "0b37ae3fcacae1df8d00a3143eff5d2b7df851db9ea501ce4213e84e27e01eca",
+    "/tmp/incant-native-sprite-deps.log": "e4ccf76e97819c03e04779262fed7d51031fa7bb6c4f8133ef4ce6a45a180f9e"
+  },
+  "results": {
+    "scoped_ordinary_tests_doctests": 123,
+    "renderer_gpu_tests": 60,
+    "native_sprite_frames": 8,
+    "structural_replacements": 1,
+    "sprite_cpu_staging_calls": 64,
+    "sprite_cpu_staging_allocations": 0,
+    "scoped_release_clippy": "passed",
+    "normal_dependency_guard": "passed",
+    "independent_review": {
+      "agent": "runtime_review",
+      "result": "no blocking finding",
+      "report_sha256": "13038ad08a01bd597653a94b38d0b8b2fcecf5d4a82a314d945bb1cf1ded1dbb"
+    }
+  },
+  "limits": [
+    "576 MiB vertex-related retained upper bound before texture/assets/metadata/candidate/preparation peaks",
+    "No whole-frame allocation/performance or appearance approval",
+    "No standalone rendered sprite player evidence yet",
+    "Tilemap/flipbook/Rapier2D and camera-relative placement remain open"
+  ]
+}

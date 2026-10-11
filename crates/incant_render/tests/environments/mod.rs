@@ -4,6 +4,7 @@ use super::{
 };
 use incant_doc::TextureUsage;
 use incant_render::Renderer;
+use incant_render_authoring::RendererAuthoringExt as _;
 use serde_json::json;
 
 // Analytic UV sphere: numerical coverage fixture, not authored game art.

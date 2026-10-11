@@ -1,0 +1,48 @@
+{
+  "base": "5159df1",
+  "scope": "numeric renderer storage and exact-output preservation; no appearance/performance gate",
+  "host": "Apple M5 Pro / Metal",
+  "sources": {
+    "crates/incant_render/src/retained.rs": "d23e90e30c886fe3a92660681a82ebd1e2953278dce7c4d5ec814723b46ae157",
+    "crates/incant_render/src/retained_sprite_tests.rs": "b83c2df5dcf756b357764367de91efb6d133379dd56305fac5b59f8a786bfca9",
+    "crates/incant_render/src/sprites/drawing.rs": "1844dfc3bcdb15750c4e48a3bf8762203956ebc9edb2d55160e559854068d8f7",
+    "crates/incant_render/src/sprites/mod.rs": "ce4fbb9c7b682a39d41184764f99fb8ecf37ad5514bb5372b13d931a3e657907"
+  },
+  "checks": {
+    "tests": {
+      "command": "./tools/cargo test -p incant_render --release --locked -j2",
+      "passed": 27,
+      "log_sha256": "d9d1a1887562211bf2def1f6684171863746ac50b9a7560496d394c3a5129271"
+    },
+    "gpu": {
+      "command": "./tools/cargo test -p incant_render --release --locked -j2 -- --ignored --test-threads=1",
+      "passed": 60,
+      "log_sha256": "a8767f3aafcf3a7d12073d51714ce5b5921b5eccaef618b2910271a3fd0847a7"
+    },
+    "clippy": {
+      "command": "./tools/cargo clippy -p incant_render --all-targets --release --locked -j2 -- -D warnings",
+      "passed": true,
+      "log_sha256": "dddae8a2aa99c138f419b023826c0f623b913630016714a0d2e1c449fc6fe157"
+    }
+  },
+  "review": "independent Astra xhigh read-only review; no blocker",
+  "storage_calculation": {
+    "logical_geometry_bytes": 134217728,
+    "maximum_vertices": 2097152,
+    "before_bytes_per_vertex": 288,
+    "after_bytes_per_vertex": 116,
+    "before_total_bytes": 603979776,
+    "after_total_bytes": 243269632,
+    "before_upload_bytes_per_vertex": 64,
+    "after_upload_bytes_per_vertex": 12,
+    "excluded": [
+      "textures",
+      "decoded assets",
+      "batch/placement metadata",
+      "driver staging",
+      "replacement scenes",
+      "preparation temporaries"
+    ]
+  },
+  "observed_regression": "Actual GPU buffer sizes and CPU capacities show >50% reduction for the source-free numerical fixture. Eight moving frames, reflection, nearest/linear, nine-slice, order replacement and rejected-target retry remain exact. 64 CPU staging calls allocate zero times."
+}

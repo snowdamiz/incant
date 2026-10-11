@@ -1,4 +1,5 @@
 //! Real GPU checks, explicitly run by the desktop renderer workflow.
+use incant_render_authoring::RendererAuthoringExt as _;
 mod cameras;
 mod environments;
 mod lights;

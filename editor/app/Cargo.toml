@@ -12,6 +12,7 @@ custom-protocol = ["tauri/custom-protocol"]
 tauri-build = { version = "2", features = ["codegen"] }
 
 [dependencies]
+incant_render_authoring.workspace = true
 tauri = { version = "=2.12.1", features = ["unstable", "macos-private-api"] }
 incant_doc = { workspace = true }
 incant_cmd = { workspace = true }

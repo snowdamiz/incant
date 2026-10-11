@@ -2,6 +2,7 @@
 use super::materials::Fixture;
 use incant_doc::{Entity, Transform};
 use incant_render::Renderer;
+use incant_render_authoring::RendererAuthoringExt as _;
 use serde_json::json;
 mod coverage;
 mod lookdev;

@@ -1,6 +1,8 @@
 //! Resource preparation errors remain typed even at the renderer's boxed boundary.
 #[derive(Debug, thiserror::Error)]
 pub enum ResourceError {
+    #[error("native GPU device was lost; the rendering host must stop")]
+    DeviceLost,
     #[error(
         "sprite entity {entity}, texture {texture}, source region {region:?}, cooked texture size {texture_size:?}: {source}"
     )]

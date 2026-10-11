@@ -1,0 +1,14 @@
+[package]
+name = "incant_render_authoring"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+incant_render_data.workspace = true
+incant_assets = { path = "../incant_assets" }
+incant_core.workspace = true
+incant_doc.workspace = true
+glam = "0.32"
+serde_json.workspace = true

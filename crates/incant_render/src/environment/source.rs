@@ -1,7 +1,7 @@
 use super::cube::Cube;
 use crate::{ResourceError, Result};
 use glam::Vec3;
-use incant_assets::{CookedTexture, TextureFormat, TextureUsage};
+use incant_assets_runtime::{CookedTexture, TextureFormat, TextureUsage};
 use std::f32::consts::PI;
 
 pub(super) fn decode(source: &CookedTexture) -> Result<Cube> {

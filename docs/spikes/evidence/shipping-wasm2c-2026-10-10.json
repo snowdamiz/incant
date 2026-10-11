@@ -1,0 +1,243 @@
+{
+  "base_commit": "fe3d87c159e73059165de1750a049369bf7414a6",
+  "scope": "trusted statically linked wasm2c desktop slice; no device, complete SDK or deterministic arithmetic gate",
+  "sources_sha256": {
+    ".github/workflows/development-wasm.yml": "85b1185b51dc41c94a8978159628753af1f2ac4e42c33b54c623983f3198fba2",
+    "Cargo.lock": "270330b33b59ea196433358fdd36edfc927391bbdd643f54dde76d043bbca91b",
+    "THIRD_PARTY_NOTICES.md": "f19fe88df433e3e2127024498f3e675e0ea6372432a548bcc1ddefc3198eaec1",
+    "crates/incant_wasm_cook/Cargo.toml": "090fe99f78433f739e656ff712829e3637ad9e0abde3f21b29238355e7826dd1",
+    "crates/incant_wasm_cook/src/lib.rs": "9b8dec87b47e72838eaf4c7e5774f748d1593bb74913406c0bdbcfc4d661cce3",
+    "crates/incant_wasm_cook/src/main.rs": "5f04931fe96a9b3b2badea132d5e8e9e749839100e92b6bc211fb5a69349a8a3",
+    "crates/incant_wasm_cook/tests/validation.rs": "3d64c70c0e305229a2c96cc10254facdcca17071a9ce8c8a1c9420b9478d0763",
+    "crates/incant_wasm_dev/Cargo.toml": "b3edf15f40ccad6505427ea3cc38b1fa825c396cd18bdd49c421170f8172fb33",
+    "crates/incant_wasm_dev/examples/development_module.rs": "c9113820ed63baa450ed595fb1046b052b32100729aadb1abcac190500e6742b",
+    "crates/incant_wasm_dev/fixtures/bulk.rs": "29846cc4782229151d551c543713b671f164d962d20bed2e8a7fdd54a0404d15",
+    "crates/incant_wasm_dev/src/abi.rs": "801abea0e63e42875b420af11c027b76cf98289077b9703874acf46b9f6ff028",
+    "crates/incant_wasm_dev/src/bounds.rs": "f67382243b5e0e36bab4ab7f5832f20eb6423b8f39a70686fadb69335e371dcc",
+    "crates/incant_wasm_dev/src/host.rs": "84a1b739dc7a00292afa9e77fccc76cd85b2ca32c2def4ad339a4ed2c958e980",
+    "crates/incant_wasm_dev/src/lib.rs": "fd03d90fc64ec9b76f09c371cd9a15af3e3143b5a64dcc6725b41cc40c898559",
+    "crates/incant_wasm_dev/tests/conformance.rs": "30e47d606ded875f743d0f36fc41b0dc1803266bfdbe6f5cb3b0c5b0a0357cea",
+    "crates/incant_wasm_dev/tests/static_parity.rs": "37ee7c02a843ad703cfd8c9e7339a3f5a1f574ca4769ca4f70d040a9bf0e4ea4",
+    "crates/incant_wasm_runtime/Cargo.toml": "7fc2f30260726f647530e27f60aeec121558d6aaab699c1c939e656dc60d8ea4",
+    "crates/incant_wasm_runtime/build.rs": "7bae624bf399c645a06e831da3ccf7e5671d046b587b3c3a32e7790810088827",
+    "crates/incant_wasm_runtime/c/imports.c": "d9cf9016da6bbf0f1c91f4b63dbb2f6130c6667f69d8294432d070fa612d13e7",
+    "crates/incant_wasm_runtime/c/imports.h": "532cf56efb19e4ba8f7251ddbcba741cb691dda7aa3d34d2dfc09be225f535a1",
+    "crates/incant_wasm_runtime/examples/shipping_module.rs": "d8b155699d277647c18805a44dcacab4fce0e7fa785596c988f4aa95b21a84cb",
+    "crates/incant_wasm_runtime/fixtures/bad-version.wat": "4ef98c30b5200a12626be2a27fd5a046b3fd75b989498b75f9d2e911df65477e",
+    "crates/incant_wasm_runtime/fixtures/calls.wat": "3019ce2397d4dad60fec77955ac83dbbc0bc87d3de851731e3e1f506091ab7e9",
+    "crates/incant_wasm_runtime/fixtures/commands.wat": "81bd76045e587a567069ac3b9fc3ebb2a91a6f79d538177f0132475085bbaed4",
+    "crates/incant_wasm_runtime/fixtures/cycle.wat": "b0547b912ee809a1f333276c68b2f77edf7b7842ec65b1317dfb37f3b25a49e2",
+    "crates/incant_wasm_runtime/fixtures/epoch.wat": "234f8bd7b54b761f77fe778d21e3a562b82113ad02b396b6dea07bf483965df9",
+    "crates/incant_wasm_runtime/fixtures/hierarchy.wat": "8779d048050e479b971f5489c897f4a66eb0594d5766dcff16e39995de6d9688",
+    "crates/incant_wasm_runtime/fixtures/import-oob.wat": "30796f09dc6884801c65f5331ca56678b3a9834352d533a13d6f98a781c099b9",
+    "crates/incant_wasm_runtime/fixtures/indirect-loop.wat": "564cb409dfb418ec323c78683a72be16564eb2b03a218ab4b64c044ad97dd105",
+    "crates/incant_wasm_runtime/fixtures/loop.wat": "ffd098700843e6fa955b60e517b68a060f533d8ed55955da22cf417d1b8497e1",
+    "crates/incant_wasm_runtime/fixtures/nan.wat": "dedc4fc1a7ab1c96a53eac4143efa791017519d2f7da4a83f609e86f6e960887",
+    "crates/incant_wasm_runtime/fixtures/oob.wat": "f0de8a1c1a88572aa695c5fbcbdea01cb08125b19ac81bcf25cf15e5eb1e6920",
+    "crates/incant_wasm_runtime/fixtures/quaternion.wat": "cc8f6456eeb6ab5e6a4a261b51c153ae0b0d770d34959bedba73494f3ebac77d",
+    "crates/incant_wasm_runtime/fixtures/rounding.wat": "3ccad308c0d3baff74c43ff77e6ffcb595140fde0c034133cc086d4e8eaec854",
+    "crates/incant_wasm_runtime/fixtures/scale.wat": "b7114ae68462f97ae8f577f699034dcc969e8b852995e9fbd1cc559d73bb1964",
+    "crates/incant_wasm_runtime/fixtures/stack.wat": "7e8d743b93ec1e6f18b31a5164d38ebfa8e860d70044f0ef61e58bc824ba0719",
+    "crates/incant_wasm_runtime/fixtures/start-import.wat": "db589c708b0404b44c5ac282191d4f525e7dbdb951158c4b171152e33f61c5a6",
+    "crates/incant_wasm_runtime/fixtures/start-loop.wat": "d7271164dc8da972e412d66b1eb461fb5488be74731100902ca3f6f719d56511",
+    "crates/incant_wasm_runtime/fixtures/trap.wat": "4f7fb120cd2735b835ef1f1f6e1be6a2e35d90dac68950d6b40c2f0c78a041b4",
+    "crates/incant_wasm_runtime/src/capability.rs": "26dc44e2295d87c013b74e63bfc16ffa52e25631de5905d51ff8c76b663a6619",
+    "crates/incant_wasm_runtime/src/compiled.rs": "fa474893fe7f561981dc27df38b5a8399a3be49927af1b6c5957d80d90b0730c",
+    "crates/incant_wasm_runtime/src/lib.rs": "0ba14c89b5ff86e3dfce12c6aaa49e5326267c527457424a831e1f8c6777ef26",
+    "crates/incant_wasm_runtime/src/limits.rs": "aaf07e50f2d1ec22367ea95296a16ea659374e8757a0ac15ff7c7de52aeca567",
+    "crates/incant_wasm_runtime/src/transaction.rs": "9bff19dc63ebf43b241b172ffa7d56a2736fce93d083eb6845bac093187eac12",
+    "crates/incant_wasm_runtime/tests/compiled.rs": "cf49de608025b9fd49d0be074e59676c70d6fd792e2316b37beac98732abc124",
+    "third_party/wabt/provenance.json": "7544d541b816716a3e2d812ce534aeff3f8276ee30e4b8d8325eebbd9bef383f",
+    "third_party/wabt/wasm-rt-impl-tableops.inc": "5debdc8ca347b7ca0fb763be3fdd3683e4824579f8f2eba84aa5de54ec040cd0",
+    "third_party/wabt/wasm-rt-impl.c": "2f14845b510f331e48ffc747304b34ccd80b19d91b67fa3a568bcf0ebfde5301",
+    "third_party/wabt/wasm-rt-impl.h": "dd8fbe19ba42258bb3a235017b82399c63fead4c932ad45197e77ca75b00d562",
+    "third_party/wabt/wasm-rt-mem-impl-helper.inc": "cb830e338448fafb4fa09a2013ecb11b45c6ff5ffd09eca3f72bffaf1cf63583",
+    "third_party/wabt/wasm-rt-mem-impl.c": "1deec12ce672fa17dcd35844a9f36b16b649c4eff3d984fcd1a62ea023ff9719",
+    "third_party/wabt/wasm-rt.h": "8905fa9c64101ca20702368d0202cd0172ea83a596c5568db135402f82fcde57",
+    "tools/probes/development-wasm.py": "58fd4b79dba98112232dadda1d693656f08c48d00c1cde1b82f7a97705a603c0",
+    "tools/probes/shipping-wasm2c.py": "c1f38fb1b7a2ea98a44e2f3abeb7629252db185fd2fb353721a26d1103030149",
+    "tools/wasm2c.py": "8fff7ac890b481758b14091dbbb0acc69a5fa89421c8228425ea2b3cda4f8450",
+    ".gitattributes": "29c1e9dd75af81fa4b376ff827f6f8c7bb984b43545c4a526f0ced0c1f69dfb7"
+  },
+  "logs_sha256": {
+    "/tmp/incant-wasm2c-release-tests.log": "22dc94a97e22a4116c00d0b50815855934572b2ed90438ecd270702e2bbfd57f",
+    "/tmp/incant-wasm2c-release-clippy.log": "69ecae57e7847b7145ffb583003ac995e6ac3533c6cbd87636256cd72b6a78fa",
+    "/tmp/incant-wasm2c-combined-ci.log": "c23789f53c23039ce8f39b586aa22a270c3bbe45a483b8b00cb227486bb7c666",
+    "/tmp/incant-wasm2c-final-shipping-proof.log": "db0057828e7184e6905e0261d5af2fd772d1aeb4c2cab955b6137785f91f2759",
+    "/tmp/incant-wasm2c-ios-check.log": "149a73d19a7adb24777ef5c4982ccf3705a268ed8c18cbe4f3af549cd036cf82",
+    "/tmp/incant-wasm2c-wasm-check.log": "542becf21350c1eba4cb6a8ccdce11d90a741516582134d110eaa8538edb242f",
+    "/tmp/incant-wasm2c-runtime-guard.log": "18cbb1e2dc21c790b050cc27fad53acb1c9383ccc5de807bd042bdedc0fa2907",
+    "/tmp/incant-wasm2c-tools.log": "2c3cca09410fa653a1f96d4c70c0505fd7b1c821b6e5acbed551b6ca9cea4b36",
+    "/tmp/incant-wasm2c-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-wasm2c-actionlint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-wasm2c-combined-ci-local/conformance-0.log": "d0d3b49e4af7e68fbe20f8327928f19c673a3676b6dc5bcafaad4e1185ad7b92",
+    "/tmp/incant-wasm2c-combined-ci-local/conformance-1.log": "f34ef695a550a0694600a0ed3a6f2991481020e69dfd6d1e71aeab6cf971a8dd",
+    "/tmp/incant-wasm2c-combined-ci-local/conformance-2.log": "ebc0a8d32d08161b66b6400456db6796471b4cef04745f17d2e7dd03772ede48"
+  },
+  "fresh_shipping_report_sha256": "db0057828e7184e6905e0261d5af2fd772d1aeb4c2cab955b6137785f91f2759",
+  "fresh_shipping_report": {
+    "passed": true,
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "target": "aarch64-apple-darwin",
+    "wabt": {
+      "release": "1.0.42",
+      "url": "https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-macos-arm64.tar.gz",
+      "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240"
+    },
+    "codegen": {
+      "incant_wasm_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_physics_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "shipping_module": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "lto": "fat",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      }
+    },
+    "guest_source_sha256": "29846cc4782229151d551c543713b671f164d962d20bed2e8a7fdd54a0404d15",
+    "guest_wasm_sha256": "430442939af644c0ba2029face76c2827add005d646ac7e5e0733542800787b4",
+    "player_sha256": "ba2f20354371ceb757ed193c572a16eee2a2bd2b921a4e864ad39e548947b4b7",
+    "player_bytes": 2780816,
+    "symbols": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "cac646f4-3aa6-3e1b-9568-06cfca4e2172"
+      }
+    },
+    "temporary_guest_sources_wasm_generated_c_tools_and_build_storage_deleted": true,
+    "normal_graphs_without_compilers": [
+      "incant_wasm_runtime",
+      "incant_runtime",
+      "incant_script",
+      "incant_game_runtime",
+      "incant_script_player",
+      "incant_game_player"
+    ],
+    "success_processes": 3,
+    "outputs": [
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+      "1 0.25\n2 0.125\n3 0.25\n4 0.125\n"
+    ],
+    "rejections": [
+      {
+        "name": "trap",
+        "stderr": "Error: Trap(1)"
+      },
+      {
+        "name": "nan",
+        "stderr": "Error: Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))"
+      },
+      {
+        "name": "quaternion",
+        "stderr": "Error: Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))"
+      },
+      {
+        "name": "scale",
+        "stderr": "Error: Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))"
+      },
+      {
+        "name": "cycle",
+        "stderr": "Error: Boundary(Runtime(Scene(Duplicate(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3])))))"
+      },
+      {
+        "name": "oob",
+        "stderr": "Error: Trap(1)"
+      },
+      {
+        "name": "import-oob",
+        "stderr": "Error: Boundary(Abi(\"negative memory offset\"))"
+      },
+      {
+        "name": "epoch",
+        "stderr": "Error: Boundary(Abi(\"inactive or expired ECS epoch\"))"
+      },
+      {
+        "name": "loop",
+        "stderr": "Error: Fuel"
+      },
+      {
+        "name": "stack",
+        "stderr": "Error: Trap(1)"
+      },
+      {
+        "name": "indirect-loop",
+        "stderr": "Error: Fuel"
+      },
+      {
+        "name": "start-import",
+        "stderr": "Error: Boundary(Abi(\"inactive or expired ECS epoch\"))"
+      },
+      {
+        "name": "start-loop",
+        "stderr": "Error: Fuel"
+      },
+      {
+        "name": "bad-version",
+        "stderr": "Error: Trap(-2)"
+      },
+      {
+        "name": "calls",
+        "stderr": "Error: Boundary(Limit(\"host call quota\"))"
+      },
+      {
+        "name": "commands",
+        "stderr": "Error: Boundary(Limit(\"structural command quota\"))"
+      },
+      {
+        "name": "not-linked",
+        "stderr": "Error: \"unknown linked module\""
+      }
+    ],
+    "limitations": [
+      "macOS local execution only until other hosts run",
+      "Windows/MSVC refused",
+      "repository and validator build storage retained",
+      "trusted fixture build only, not an arbitrary-source sandbox",
+      "fixed Wasm memory/table; growth rejected",
+      "no complete SDK/determinism/mobile/performance gate"
+    ]
+  },
+  "prepared_manifest_sha256": "86e72b186daec5ba9dbd9e9e49d477c364301bbea40cb51057a5c6cdb2fbe5a4",
+  "release_tests_passed": 135,
+  "original_wasmtime_tests_preserved": 13,
+  "new_tests": {
+    "static_execution": 7,
+    "cook_validation": 4,
+    "static_development_state_parity": 1
+  },
+  "combined_ci_helper": {
+    "passed": true,
+    "tests": 25,
+    "clippy": "passed",
+    "fresh_development_processes": 3
+  },
+  "compile_only": {
+    "aarch64-apple-ios": "static C and Rust cargo check passed; no final link, signing or device execution",
+    "wasm32-unknown-unknown": "shared native capability default feature check passed; no static C/browser execution"
+  },
+  "python_tool_tests": 40,
+  "workflow": "actionlint passed; macOS/Linux static and all-three-desktop development hosted execution pending",
+  "flag_audit_limit": "Expected C flags found globally in build output, not every translation unit or contradictory target-specific environment. Native build tools/environment are trusted.",
+  "platform": {
+    "os": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6\nBuildVersion:\t\t25G72",
+    "c_compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+  },
+  "license": "Unmodified WABT runtime, Apache-2.0, per-file pinned provenance; notice and Apache license packaged with player",
+  "vendor_whitespace": "Header-only Git attribute preserves three upstream trailing-space comment lines byte-for-byte."
+}

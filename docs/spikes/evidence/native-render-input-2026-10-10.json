@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-10",
+  "scope": "Retained CPU native render input; no GPU frame, visual acceptance, shipping/device timing or phase gate claim",
+  "base_commit": "4c3ad5446d57af83d868c2641a41c15317517b14",
+  "prerequisites": {
+    "spatial": "ad49da5c9181fe093ebe3217b05506ef209a5a63",
+    "world_identity": "3e8766737484487fd14998998dd58fefe3d01a05",
+    "renderer_extract_original": "6a8d73d7f4777d922b641e2ca1a57679785cc140"
+  },
+  "host": {
+    "os": "macOS 26.6 (25G72)",
+    "architecture": "arm64",
+    "rustc": "1.99.0 (b940084d7 2026-09-28)"
+  },
+  "commands": [
+    {
+      "command": "./tools/cargo test --release --locked -p incant_render_native -p incant_runtime -p incant_assets_runtime -j2",
+      "status": "passed",
+      "tests_and_doctests": 87,
+      "adapter_tests": 11
+    },
+    {
+      "command": "./tools/cargo clippy --release --locked -p incant_render_native -p incant_runtime -p incant_assets_runtime --all-targets -j2 -- -D warnings",
+      "status": "passed"
+    },
+    {
+      "command": "python3 tools/check_runtime_dependencies.py incant_render_native incant_runtime incant_assets_runtime incant_render_data incant_render",
+      "status": "passed"
+    },
+    {
+      "command": "./tools/cargo tree --locked -p incant_render_native -e normal --prefix none",
+      "status": "passed",
+      "unique_normal_packages": 128,
+      "additional_exclusions": [
+        "gltf",
+        "image",
+        "incant_assets",
+        "incant_render_authoring",
+        "wgpu"
+      ]
+    },
+    {
+      "command": "./tools/cargo fmt --all --check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 tools/generate_conventions.py --check",
+      "status": "passed"
+    },
+    {
+      "command": "actionlint .github/workflows/ci.yml",
+      "version": "1.7.12",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "allocation_test": {
+    "accepted_motion_calls": 64,
+    "rejected_motion_calls": 64,
+    "measured_allocations": 0,
+    "fixture": "three native entities, transform-only parent, child camera, point light",
+    "instrumentation": "thread-local GlobalAlloc wrapper forwarding unchanged to System; world.step/startup/other threads excluded; callbacks only return Ok or Err",
+    "scope": "CPU input synchronization only, not a whole-renderer/device performance result"
+  },
+  "source_free_proofs": [
+    "Actual glTF and PNG cooks, authoring source directory removed before sealed native binding",
+    "Cooked cache directory removed after binding, 8 motion ticks and topology rebuild use retained versions",
+    "Project scene cook to v4 bytes; Project dropped before native world/input load"
+  ],
+  "failure_cases": [
+    "missing/stale/wrong-kind/corrupt/unused bad asset binding",
+    "Normal environment startup/rebind",
+    "consumer late error and unwind in motion/rebuild",
+    "same scene ID/generations from a different world",
+    "selected camera removal/recovery",
+    "failed native integration and structural batch"
+  ],
+  "caps": {
+    "decoded_payload_bytes": 268435456,
+    "startup_peak": "published payload plus one reader-bounded staged asset; retained prior adapters, metadata, allocator and GPU overhead add separately"
+  },
+  "limitations": [
+    "Fixed camera selection for adapter lifetime",
+    "External callback/GPU side effects are not rolled back by CPU guard",
+    "Rejected consumer input can lag committed simulation; caller must retry or refuse current-frame publication",
+    "No sprites, diagnostic cubes, material overrides, pixel marker, GPU migration, spatial saves or device gate completion claimed",
+    "Recipe fingerprint and integrity checksum are not authentication"
+  ],
+  "source_sha256": {
+    "crates/incant_render_native/src/binding.rs": "a0c769a134df0192ccabe5c3c237ff9075fbc71e29d863aaaf94f0fe56aee55a",
+    "crates/incant_render_native/src/lib.rs": "5079f450fa4ff45376afa9e88d933b45426fedfbd649473d4174a62e21c33b37",
+    "crates/incant_render_native/src/update.rs": "cb00e9dcb4e6cb94ce10e66b47cbef7199d4afecb842c4caca6c5efc8dbc48dd",
+    "crates/incant_render_native/tests/allocations.rs": "bca00f260a821d395cd63826f530c25cc767a8ce1fadcf82125609afcac06b41",
+    "crates/incant_render_native/tests/bindings.rs": "e89b01a1d82c9d5e4ea7f726f0a860f8b0959918442698d09362ea02069d6437",
+    "crates/incant_render_native/tests/common/mod.rs": "0b7176c461243572703e61c6b8024fbb0f009e058a89345c4adfc72317bb3f3f",
+    "crates/incant_render_native/tests/retained.rs": "8c72d139ecd57f17dbf5fafc9bb3d4cbcdc10e300cf5dfcec2e069386e881948",
+    "crates/incant_render_native/Cargo.toml": "30bbed3620839ea82999557f746cbaaa7f0902aa2088a85a7d3467ed5cd0bd10",
+    ".github/workflows/ci.yml": "600b6d05f8f7a096f2a69807645e82013c9aaaba96a5dcdbb6b8d27b92947761",
+    "Cargo.lock": "dc200dbbee560c27a5020e2d2729d5216f9aff2f52482c3f825815b5d6001f40"
+  },
+  "logs": {
+    "/tmp/incant-render-native-tests.log": "68820e8c5aca0357c42d708cf4cfd6cc06540898a20d82ceb6962fad028b84b7",
+    "/tmp/incant-render-native-union-tests.log": "a8f84fe19dee41cc9144c7428125c4a3586bfb4c086fecbe7a02e4231040e1b3",
+    "/tmp/incant-render-native-clippy.log": "b74eab9e1fcfeda3ba84b6ec2cf9d46c664dc76a4f5d27510144555dc06382a5",
+    "/tmp/incant-render-native-dependencies.log": "0827591228bddb721d769c1ed0b64b26a6fe6d76f376430e476e39cc96e9a5a5",
+    "/tmp/incant-render-native-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-render-native-tree.log": "8dc9f746df49030570a2e08c77da50efabd8248527967d667d85b81f88f1fcd2"
+  }
+}

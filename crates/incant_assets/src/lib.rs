@@ -34,9 +34,7 @@ pub use texture::{Texture, TextureFormat, TextureUsage, import_image};
 pub use texture_cache::{CookedTexture, TextureMetadata, cook_texture, load_texture};
 use thiserror::Error;
 
-pub const MAX_SOURCE_BYTES: usize = 128 * 1024 * 1024;
-pub const MAX_VERTICES: usize = 1_000_000;
-pub const MAX_INDICES: usize = 3_000_000;
+pub use incant_assets_runtime::{MAX_INDICES, MAX_SOURCE_BYTES, MAX_VERTICES};
 
 #[derive(Debug, Error)]
 pub enum AssetError {
@@ -63,9 +61,11 @@ pub use incant_assets_runtime::sha256;
 impl From<incant_assets_runtime::AssetError> for AssetError {
     fn from(error: incant_assets_runtime::AssetError) -> Self {
         match error {
+            incant_assets_runtime::AssetError::Atlas(e) => Self::Atlas(e),
             incant_assets_runtime::AssetError::Io(e) => Self::Io(e),
             incant_assets_runtime::AssetError::Json(e) => Self::Json(e),
             incant_assets_runtime::AssetError::Invalid(e) => Self::Invalid(e),
+            incant_assets_runtime::AssetError::Unsupported(e) => Self::Unsupported(e),
             incant_assets_runtime::AssetError::Limit(e) => Self::Limit(e),
         }
     }

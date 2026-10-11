@@ -6,14 +6,13 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+incant_render_data.workspace = true
+incant_assets_runtime = { workspace = true, features = ["visual"] }
+incant_types.workspace = true
 incant_2d.workspace = true
 bevy_ecs = { workspace = true }
-incant_doc = { workspace = true }
-incant_core = { workspace = true }
-incant_assets = { path = "../incant_assets" }
 serde = { workspace = true }
 thiserror = { workspace = true }
-serde_json = { workspace = true }
 wgpu = "=29.0.4"
 pollster = "0.4"
 bytemuck = { version = "1.25", features = ["derive"] }
@@ -22,4 +21,12 @@ png = "0.18"
 half = "=2.7.1"
 
 [dev-dependencies]
+incant_render_native = { path = "../incant_render_native" }
+incant_runtime.workspace = true
+incant_cook = { path = "../incant_cook", default-features = false, features = ["scene"] }
+incant_render_authoring.workspace = true
+incant_doc.workspace = true
+incant_assets = { path = "../incant_assets" }
+serde_json.workspace = true
+sha2.workspace = true
 tempfile = "3.27"
