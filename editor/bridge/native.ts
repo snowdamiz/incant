@@ -941,14 +941,16 @@ export class NativeBridge implements EditorBridge {
     const recoverBudget = budgetEdit || (command.type === 'history.undo' || command.type === 'history.redo')
       && projectAgentBudget(this.read).status !== 'unsupported';
     const previous = this.read;
+    // Subscribers run synchronously. Reserve the mutation before publishing its
+    // admission barrier so a subscriber cannot start a second document write.
+    if (importing) this.importing = true;
+    else this.pending = true;
     if (recoverBudget) {
       this.agentBudgetPending = true;
       ++this.agentGeneration;
       this.agentVerified = false;
       this.publishAgent();
     }
-    if (importing) this.importing = true;
-    else this.pending = true;
     try {
       // A pending background read cannot overwrite the mutation response.
       ++this.refreshId;

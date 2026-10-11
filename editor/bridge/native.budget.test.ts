@@ -40,6 +40,25 @@ async function ready(invoke: Invoke) {
 }
 
 describe('native project agent budget', () => {
+  it('reserves a cap mutation before synchronous subscribers can dispatch another write', async () => {
+    let engine = project();
+    let current = session();
+    let writes = 0;
+    const bridge = await ready(async <T>(name: string) => {
+      if (name === 'engine_execute') { writes += 1; engine = project(200, 8); current = session(200, 40, 2); }
+      return (name === 'engine_read' || name === 'engine_execute' ? engine : wire(current, engine.revision)) as T;
+    });
+    let nested: ReturnType<NativeBridge['dispatch']> | undefined;
+    const unsubscribe = bridge.subscribe(() => {
+      unsubscribe();
+      nested = bridge.dispatch({ type: 'agent.budget.set', maxTokens: 300 });
+    });
+    expect(await bridge.dispatch({ type: 'agent.budget.set', maxTokens: 200 })).toEqual({ ok: true });
+    expect(await nested).toMatchObject({ ok: false, error: { code: 'engine.busy' } });
+    expect(writes).toBe(1);
+    expect(bridge.getSnapshot().projectAgentBudget).toEqual({ maxTokens: 200 });
+  });
+
   it.each(['old host', 'schema only', 'unavailable adapter'] as const)('does not fabricate writable support for %s', async (kind) => {
     const engine = project();
     if (kind === 'old host') { delete engine.agent_budget; engine.schemas = {}; delete engine.project.settings; }

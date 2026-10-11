@@ -103,6 +103,20 @@ function authoringReader(bridge: EditorBridge): () => AuthoringSnapshot {
   };
 }
 
+/** Capabilities can arrive with native metadata; retain identity between changes. */
+function capabilityReader(bridge: EditorBridge | null): () => CapabilitySet {
+  let previous: readonly string[] = [];
+  let current = NO_CAPABILITIES;
+  return () => {
+    const next = bridge?.capabilities ?? [];
+    if (next.length !== previous.length || next.some((value, index) => value !== previous[index])) {
+      previous = [...next];
+      current = readCapabilities(previous);
+    }
+    return current;
+  };
+}
+
 export function ShellProvider({ bridge, children }: { bridge: EditorBridge | null; children: ReactNode }) {
   // Bound wrappers so a class-based bridge keeps its `this`.
   const subscribe = useMemo(
@@ -111,7 +125,8 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   );
   const getSnapshot = useMemo(() => (bridge ? authoringReader(bridge) : nullSnapshot), [bridge]);
   const snapshot = useSyncExternalStore(subscribe, getSnapshot);
-  const capabilities = useMemo(() => (bridge ? readCapabilities(bridge.capabilities) : NO_CAPABILITIES), [bridge]);
+  const getCapabilities = useMemo(() => capabilityReader(bridge), [bridge]);
+  const capabilities = getCapabilities();
   const [selection, setSelection] = useState<Ulid | null>(null);
   const [dockTab, setDockTab] = useState<DockTab>('problems');
   const [panels, setPanels] = useState<PanelVisibility>({ hierarchy: true, dock: true, inspector: true });
