@@ -11,6 +11,13 @@ mod script;
 #[cfg(feature = "script")]
 pub use script::{CookedScriptArtifact, ScriptCookError, cook_script};
 
+#[cfg(all(feature = "scene", feature = "script"))]
+mod project_script;
+#[cfg(all(feature = "scene", feature = "script"))]
+pub use project_script::{
+    CookedProjectProgram, PreparedScriptScene, ProjectScriptError, prepare_script_scene,
+};
+
 #[cfg(feature = "script")]
 mod build_script;
 #[cfg(feature = "script")]

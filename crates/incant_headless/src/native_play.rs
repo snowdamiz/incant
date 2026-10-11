@@ -1,6 +1,7 @@
 //! Development project play on the native graph. Project validation/cooking and
-//! binary loading precede simulation. Scripts are embedded by the trusted cook
-//! during the native build; playback never reads or parses script source.
+//! binary loading precede simulation. Authored TypeScript uses a fixed trusted
+//! startup cook; scenes without attachments use the native build's embedded
+//! behavior. Simulation has no source parsing or authoring dependency.
 use incant_input::InputReplay;
 use incant_observe::Plan;
 use incant_runtime::StableId;
@@ -8,6 +9,7 @@ mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
 }
 use serde::Serialize;
+mod compiler;
 mod session;
 pub(crate) use session::{Session, StartOptions};
 use sha2::{Digest, Sha256};
@@ -216,7 +218,7 @@ pub fn run(options: Options) -> Result<Report> {
         passed: observations.as_ref().is_none_or(|r| r.passed),
         runtime: "native",
         script_source_sha256: game.script_source_sha256.clone(),
-        script_source_parsing: false,
+        script_source_parsing: game.authored_scripts,
         scene: game.scene.clone(),
         tick: world.tick(),
         tick_rate: world.tick_rate(),

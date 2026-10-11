@@ -21,6 +21,11 @@ export interface NativeTimers {
   cancel(id: string): void;
 }
 export type NativeId = string; // canonical uppercase, 26-character ULID
+export type NativeProp = null | boolean | number | string | readonly NativeProp[] | { readonly [key: string]: NativeProp };
+export interface NativeInstance {
+  readonly entity: NativeId;
+  readonly props: { readonly [key: string]: NativeProp };
+}
 export type NativeVector3 = readonly [number, number, number] | Float64Array;
 /** translation xyz, rotation xyzw (unit quaternion), scale xyz; length 10. */
 export type NativeTransform = readonly [number, number, number, number, number, number, number, number, number, number] | Float64Array;
@@ -85,6 +90,13 @@ export interface NativeFlipbooks {
   readonly flags: Uint32Array;
 }
 export interface NativeContext {
+  /** Authored attachments for this source, sorted by stable entity ID. The array
+   * and initial props are deeply frozen. One callback per nonempty source runs
+   * in source-ID order with the same world-wide bulk views/transaction. A queued
+   * despawn changes membership only after commit; plain Spawn never reattaches,
+   * even when reusing an ID. Standalone behaviors receive an empty array.
+   * Dynamic attachment, props replacement and legacy state hooks are unsupported. */
+  readonly instances: readonly NativeInstance[];
   readonly flipbooks: NativeFlipbooks;
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;

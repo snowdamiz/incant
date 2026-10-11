@@ -5,6 +5,7 @@ use crate::{CookedEntity, CookedScene, SceneError, StableId};
 use bevy_ecs::prelude::*;
 use glam::DMat4;
 use incant_types::{Transform, Velocity};
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use thiserror::Error;
 
@@ -64,6 +65,7 @@ pub enum RuntimeError {
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
     pub(crate) identity: crate::WorldIdentity,
+    source_scene_fingerprint: [u8; 32],
     pub(crate) world: World,
     schedule: Schedule,
     pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
@@ -93,6 +95,9 @@ impl NativeWorld {
     }
 
     pub fn new(scene: CookedScene) -> Self {
+        // Startup pairing only. No document, scene serialization or hashing is
+        // performed during simulation or native structural operations.
+        let source_scene_fingerprint = Sha256::digest(scene.to_bytes()).into();
         let physics = scene.physics.clone();
         let physics_2d = scene.physics_2d.clone();
         let audio = scene.audio.clone();
@@ -143,6 +148,7 @@ impl NativeWorld {
         let flipbook_query = world.query::<(&Identity, &crate::flipbook::Playback)>();
         let mut result = Self {
             identity: crate::WorldIdentity::new(),
+            source_scene_fingerprint,
             world,
             physics: solver,
             physics_2d: Default::default(),
@@ -200,6 +206,26 @@ impl NativeWorld {
             .apply(planar_changes)
             .expect("validated planar scene");
         result
+    }
+
+    /// Fingerprint of the canonical scene used to construct this incarnation.
+    /// It does not describe current mutable state or authenticate executable code.
+    pub fn source_scene_fingerprint(&self) -> [u8; 32] {
+        self.source_scene_fingerprint
+    }
+
+    pub fn incarnation(&self) -> crate::WorldIncarnation {
+        crate::WorldIncarnation(self.world.id())
+    }
+
+    /// Opaque lifetime identity for an actual ECS entity, independent of its
+    /// reusable stable ID or archetype. Restoring replaces the Bevy world and
+    /// invalidates every previous entity token, even when saved IDs match.
+    pub fn entity_identity(&self, id: StableId) -> Option<crate::EntityIdentity> {
+        self.entities.get(&id).map(|&entity| crate::EntityIdentity {
+            world: self.world.id(),
+            entity,
+        })
     }
 
     pub(crate) fn install_spatial(&mut self, id: StableId, node: Option<crate::CookedSpatial>) {

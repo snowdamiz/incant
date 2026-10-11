@@ -2,7 +2,7 @@
 use crate::ScriptError;
 use sha2::{Digest, Sha256};
 
-pub const ARTIFACT_FORMAT: u32 = 1;
+pub const ARTIFACT_FORMAT: u32 = 2;
 pub const ENGINE_VERSION: &str = "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28";
 pub const BUILD_ID: &str = env!("INCANT_SCRIPT_BUILD_ID");
 pub const TARGET: &str = env!("INCANT_SCRIPT_TARGET");
@@ -23,6 +23,7 @@ pub struct ScriptMetadata {
     pub wrapper_prefix_lines: u32,
     pub bytecode_sha256: [u8; 32],
     pub hardening_sha256: [u8; 32],
+    pub bindings_sha256: Option<[u8; 32]>,
 }
 
 /// An embedded build product, never a project/cache/mod/network file format.
@@ -31,6 +32,7 @@ pub struct EmbeddedScript {
     pub metadata: ScriptMetadata,
     pub bytecode: &'static [u8],
     pub hardening: &'static [u8],
+    pub bindings: Option<crate::ScriptBindings>,
 }
 
 pub(crate) fn digest(bytes: &[u8]) -> [u8; 32] {
@@ -84,6 +86,7 @@ mod tests {
             metadata: code.metadata.clone(),
             bytecode: Box::leak(code.bytes.to_vec().into_boxed_slice()),
             hardening: Box::leak(code.hardening.to_vec().into_boxed_slice()),
+            bindings: code.bindings.as_deref().cloned(),
         };
         // SAFETY: test uses unchanged output from the identical local compiler,
         // including its fixed hardening module. No forged bytes enter QuickJS.
