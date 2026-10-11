@@ -10,7 +10,7 @@
   "rust": "cargo 1.99.0 (5f94df478 2026-08-27)",
   "system": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6\nBuildVersion:\t\t25G72",
   "source_sha256": {
-    "Cargo.lock": "2b2aaca8dc2bcb6259b7008f6523756ff9f134f0791872bc4e0b04ec68a72e67",
+    "Cargo.lock": "889cf9a73a58e3a38288e4001c58bf9301d73218abc3eb835c9202fca407685d",
     "crates/incant_assets/Cargo.toml": "274ee8e0d78aa3dac61825a61af0db1ef01e92cf1efba57a2f184c936ce271f2",
     "crates/incant_assets/src/fbx/mod.rs": "58feaaf96a503211391cff0b7e4886034f79f5e663113b1d4a0fed9eaedaddf2",
     "crates/incant_assets/src/fbx/geometry.rs": "2310b28ff2110a5ecc332f6470ab33e27b9dacd1f40482f05f40158786cbd178",
@@ -18,13 +18,14 @@
     "crates/incant_assets/src/cache.rs": "15849e719a10d50bd18ce262c7c5327a9cca399a6c0b10669dfc8861598d3394",
     "crates/incant_assets/src/source.rs": "9086d595e19d37e5cf33308e4b0c2312a026fdfa62f91dc8f54c9a90052560d3",
     "crates/incant_import/src/lib.rs": "90c5f8a298f9c0d2bd91090bc81c5373093db4269ac6b35791585d54b0d82471",
-    "crates/incant_assets/tests/fbx.rs": "1a47e5d3a9ae6b316e3b321e201e271b9c286932ddf1b27a53ae107ce5bc9429",
+    "crates/incant_assets/tests/fbx.rs": "31df3ec3ea17618ca25a98c8020a711f24fac9a5e09d33df5dfed8c97e2b8eac",
     "crates/incant_import/tests/fbx.rs": "9d1ba66ebad7c909f54c42e3482fbca8ff0caa536e060f2f713e4f87e4ca4455",
     "editor/ui/src/assets/paths.ts": "7fb58eead6cca9de6e6d0c99df3d6ba781a0db7927f5e4148ef92ae9a753f653",
-    "tools/check_runtime_dependencies.py": "7dbc258f01b3864af6f0bcf86431ef5906059853a1df0938218d3a049f71a67d"
+    "tools/check_runtime_dependencies.py": "7dbc258f01b3864af6f0bcf86431ef5906059853a1df0938218d3a049f71a67d",
+    ".gitattributes": "c934a44807dc76a2be4c4d84b6730b6301f0f11b8f94dfae5e0d08f22267cd8f"
   },
   "checks": {
-    "scoped_release_tests": 70,
+    "scoped_release_tests": 71,
     "ui_tests": 531,
     "ui_files": 30,
     "tools_tests": 50,
@@ -34,16 +35,19 @@
     "headless_release_build": true,
     "runtime_guard_features": "incant_game_player/render-gpu",
     "runtime_parser_absent": true,
-    "format_conventions_diff": true
+    "format_conventions_diff": true,
+    "integrated_script_game_assets_tests": 127,
+    "integrated_release_clippy": true,
+    "committed_fixture_hashes_verified": 10
   },
   "logs": {
     "scoped-tests": {
       "local_path": "/tmp/incant-fbx-scoped-tests.log",
-      "sha256": "b331b958c789b7f3a76e1472216e1c932670370ca9ee074c7ed4ffe4bafdc81c"
+      "sha256": "c5a32bebe56c77763bfabf3f3beeb1f66b98e57e8c945dfbed53d93ce9f3b9ff"
     },
     "clippy": {
       "local_path": "/tmp/incant-fbx-clippy.log",
-      "sha256": "b6a9f44e54f871fdb4bd44b0019f8f86f0d2e3ff55908b360af3d52afefa3d42"
+      "sha256": "311840022486f03fde5b3a6874573bb5ec5ee6cdc19c32c444375a88ff7b7f95"
     },
     "headless-build": {
       "local_path": "/tmp/incant-fbx-headless-build.log",
@@ -68,6 +72,18 @@
     "tools": {
       "local_path": "/tmp/incant-fbx-tools.log",
       "sha256": "b5cb0c636d36bb048fdd069729da4d1032b16bc1a4a6f76cfe8f6b47e6a471ac"
+    },
+    "integrated-tests": {
+      "local_path": "/tmp/incant-fbx-integrated-tests.log",
+      "sha256": "9fac4a37a1ee6b2c55f0932688f549a18aaa7754cb523eb29fd6f294fcfc340c"
+    },
+    "integrated-clippy": {
+      "local_path": "/tmp/incant-fbx-integrated-clippy.log",
+      "sha256": "8154b31d43526bfdc5c79aa684dc5ee94cdbefeb56396adde4494411e1cc71ca"
+    },
+    "integrated-headless": {
+      "local_path": "/tmp/incant-fbx-integrated-headless.log",
+      "sha256": "0de31bb8485638adca3b21dd27a3da83f5bdd092455b92448f3a6f4e707f716b"
     }
   },
   "cli": {
@@ -75,7 +91,7 @@
     "processes": 11,
     "initial": {
       "asset": {
-        "id": "01M4MH439PS9NNY3P3MCV53E0H",
+        "id": "01M4MHFSJNMCHZ7SYQSCV0T89N",
         "kind": "model",
         "name": "cube",
         "path": "cube.FBX",
@@ -98,7 +114,7 @@
     },
     "unchanged": {
       "asset": {
-        "id": "01M4MH439PS9NNY3P3MCV53E0H",
+        "id": "01M4MHFSJNMCHZ7SYQSCV0T89N",
         "kind": "model",
         "name": "cube",
         "path": "cube.FBX",
@@ -121,7 +137,7 @@
     },
     "reimport": {
       "asset": {
-        "id": "01M4MH439PS9NNY3P3MCV53E0H",
+        "id": "01M4MHFSJNMCHZ7SYQSCV0T89N",
         "kind": "model",
         "name": "cube",
         "path": "cube.FBX",
@@ -260,5 +276,6 @@
     "visual_review": false
   },
   "appearance": "pending Claude0040, explicitOpus5.5/Max required",
-  "limits": "Desktop authoring CPU checks only; no phone/performance/export/full-FBX gate"
+  "limits": "Desktop authoring CPU checks only; no phone/performance/export/full-FBX gate",
+  "integrated_main": "aef98042ac42f2bed5cf7d89a2c34ff9d19cc5d5"
 }

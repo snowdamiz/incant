@@ -6,6 +6,19 @@ use std::{
 fn fixtures() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/fbx")
 }
+#[test]
+fn upstream_fixture_bytes_match_recorded_provenance_on_every_host() {
+    use sha2::{Digest, Sha256};
+    let root = fixtures();
+    let provenance: serde_json::Value =
+        serde_json::from_slice(&fs::read(root.join("provenance.json")).unwrap()).unwrap();
+    let hashes = provenance["files_sha256"].as_object().unwrap();
+    assert_eq!(hashes.len(), 10);
+    for (name, expected) in hashes {
+        let actual = format!("{:x}", Sha256::digest(fs::read(root.join(name)).unwrap()));
+        assert_eq!(actual, expected.as_str().unwrap(), "{name}");
+    }
+}
 fn globals(model: &ImportedModel) -> Vec<glam::DMat4> {
     let mut out = vec![glam::DMat4::IDENTITY; model.nodes.len()];
     let mut todo = vec![(model.scenes[0][0], glam::DMat4::IDENTITY)];
