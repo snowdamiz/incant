@@ -1,10 +1,30 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
-import axe from 'axe-core';
-import { describe, expect, it } from 'vitest';
+import axe, { type AxeResults } from 'axe-core';
+import { afterEach, describe, expect, it } from 'vitest';
 import { App } from '../App';
 import type { BridgeSnapshot, ConsoleEntry, Diagnostic, EditorBridge, HistoryEntry, Ulid } from '../bridge/contract';
 import { fixtureSnapshot } from '../bridge/fixture';
 import { PAGE_SIZE } from './dock/paging';
+
+// These behavioral cases retain thousands of diagnostics and a full visible-page
+// accessibility scan. Hosted runners exceeded Vitest's default 5s; this is not a
+// wall-clock performance assertion. Keep the larger budget local to those cases.
+const LARGE_PAGE_TEST_TIMEOUT = 20_000;
+let pendingAxe: Promise<AxeResults> | undefined;
+async function checkAccessibility(container: HTMLElement) {
+  pendingAxe = axe.run(container, { rules: { 'color-contrast': { enabled: false } } });
+  const results = await pendingAxe;
+  expect(results.violations.map((v) => v.id)).toEqual([]);
+}
+afterEach(async () => {
+  // A timed-out test does not cancel its async work. Drain the scanner before the
+  // next test can call axe, including when an assertion/timeout interrupted it.
+  try {
+    await pendingAxe;
+  } finally {
+    pendingAxe = undefined;
+  }
+}, LARGE_PAGE_TEST_TIMEOUT);
 
 /** TEST DOUBLE: serves a snapshot that tests replace to simulate arriving entries; refuses every command. */
 function liveBridge(initial: BridgeSnapshot) {
@@ -82,9 +102,8 @@ describe('Problems pages', () => {
     fireEvent.click(next);
     expect(document.activeElement).toBe(next);
     expect(range('problems')).toBe('2,901–3,000 of 3,000');
-    const results = await axe.run(container, { rules: { 'color-contrast': { enabled: false } } });
-    expect(results.violations.map((v) => v.id)).toEqual([]);
-  });
+    await checkAccessibility(container);
+  }, LARGE_PAGE_TEST_TIMEOUT);
 
   it('splits one huge group across pages, marks the continuation, and says how many follow', () => {
     const crate = sampleIds.find((id) => sample.entities[id]?.name === 'Crate 03')!;
@@ -101,7 +120,7 @@ describe('Problems pages', () => {
     // Full text, and the row still reveals its entity.
     fireEvent.click(screen.getByText(/^Problem 150:/).closest('button')!);
     expect(screen.getByRole('treeitem', { name: /^Crate 03/ }).getAttribute('aria-selected')).toBe('true');
-  });
+  }, LARGE_PAGE_TEST_TIMEOUT);
 
   it('returns to the first page when a filter changes and keeps a valid page as problems change', () => {
     const errors = Array.from({ length: 250 }, (_, n) => diag(n, sampleIds[0]!));
@@ -169,8 +188,7 @@ describe('History pages', () => {
     press('edits', 'Now');
     expect(range('edits')).toBe('701–800 of 1,000');
     expect(list().firstElementChild?.getAttribute('aria-label')).toBe('Current position');
-    const results = await axe.run(container, { rules: { 'color-contrast': { enabled: false } } });
-    expect(results.violations.map((v) => v.id)).toEqual([]);
+    await checkAccessibility(container);
   });
 
   it('puts Now after the last edit when everything is applied, on the last page', () => {

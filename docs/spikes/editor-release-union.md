@@ -80,3 +80,14 @@ import, successful/failed reimport and navigation; three fail before the fix.
 Root independently reviewed28e5491. Final524 UI tests, strict typecheck/build,
 bridge/conventions and40 tools tests pass. The native build completes in28.34s;
 that is an incremental local build measurement, not a clean/hosted latency claim.
+
+## Hosted large-page test deadline
+
+The first combined matrix stopped before Rust compilation: two3000/5000-diagnostic
+behavioral cases exceeded Vitest's default5s on Linux/Windows. Those two cases now
+have20s deadlines; all fixture sizes, assertions and accessibility scans remain.
+An afterEach hook drains any unfinished axe Promise before the next case. A
+controlled1ms timeout failed only the intended case; the following real History
+scan passed without overlap. Final524 UI tests and strict typecheck pass. No
+production source or native binary changed. The replacement hosted matrix remains
+pending. [Failure/correction evidence](evidence/editor-paging-hosted-deadline-2026-10-11.json).
