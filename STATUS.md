@@ -29,14 +29,15 @@ provider invalidation listener is integrated with its intervening-read race fixe
 The current native slice passes 152 scoped Rust tests and four-package all-target
 Clippy after integrating main97. Claude’s chat UI is integrated with retained
 conversation resizing, accurate denial/failure messages and cause-neutral uncertain
-usage. The current combined UI suite passes 890 tests; strict app/test types and the
+usage. The current combined UI suite passes 902 tests; strict app/test types and the
 editor build pass. The corrected native cap-change and gameplay-focus fences pass 39 editor tests and Clippy. Four real native-handler turns used
 the saved ChatGPT login for approved edits, native Play and a later retained-state
 query; Undo and exact journal/account recovery passed after reopening. Claude's
 Play, chat and project-budget controls are integrated. Independent review found
 an approval-button hold missing during Undo/Redo: the native admission remains
-safe, its explicit readiness metadata is corrected, and Claude0049 is completing
-the UI consumer before combined native visual/WebView acceptance. Native Play now exposes its saved-project
+safe, and both the explicit readiness metadata and UI consumer are now corrected.
+Twelve deferred-IPC regressions and the combined 902-test UI suite pass; combined
+native visual/WebView acceptance remains pending. Native Play now exposes its saved-project
 prerequisite before Start while retaining Stop and legacy-host behavior; actual
 unsaved-window acceptance remains pending ([evidence](docs/spikes/native-editor-play.md)).
 The reviewed splitter input correction is integrated with 15 regression tests;
@@ -54,16 +55,16 @@ cap changes and account changes without being part of Undo. Independent reviews
 closed cancellation and cap-installation races. The verified bridge cap command and
 dynamic shell capabilities are integrated, including offline edits and unchanged
 usage across cap/history recovery. The integrated controls and shared bridge pass
-890 UI tests, with one independently discovered approval-readiness UI correction
-still underway.
+902 UI tests, including the independently reviewed approval-readiness correction
+and its 12 deferred-IPC regressions.
 A fresh live native check completed four saved-account turns and retained all
 73,259 measured tokens through Undo and a separate app process, with the same
 login and exact journal restored. The headless command now shares the durable
 ledger and recovered authored cap; invocation limits cannot refund usage or raise
 the project cap. Its 16 tests, scoped Clippy and independent integration review
 pass ([headless evidence](docs/spikes/headless-agent-budgets.md)). Claude-owned
-controls are integrated; the approval-readiness correction and combined native
-WebView/appearance acceptance remain in progress.
+controls and the approval-readiness correction are integrated; combined native
+WebView/appearance acceptance remains in progress.
 [Control integration review](docs/spikes/evidence/native-agent-allowance-integration.json).
 [Budget accounting evidence](docs/spikes/agent-project-budget.md).
 

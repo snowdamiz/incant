@@ -114,6 +114,12 @@ usage evidence independently without accessing account credentials.
 
 ## Return and permitted edits
 
+Keep this acceptance focused and finish once the stated checks have results.
+Reuse the prepared fixture and existing browser regressions; do not create extra
+review agents, redundant mutation suites or a broad screenshot catalogue. Capture
+only the views needed to support the concrete native findings. Keep result.md a
+concise factual interaction table with artifact links and explicit limitations.
+
 Return result.md with model+Max verification, exact source/binary/fixture hashes,
 actual dimensions, a concise interaction/result table, reviewed window captures,
 process cleanup and limitations. Browser doubles are labelled separately; no
