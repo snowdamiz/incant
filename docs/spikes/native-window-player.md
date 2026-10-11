@@ -182,8 +182,20 @@ actual static/streamed lifecycle processes and two refusals. Both accepted 40
 ticks with zero dropped wall ticks and zero presentation-only refreshes in that
 particular automated probe. Static acquisition deferred once; the streamed case
 never deferred. These timings/counts are observations, not performance gates.
-The corrected background resize/control behavior still needs Claude's separate
-hash-pinned delta review. Raw proof: `/tmp/incant-native-window-refresh-shipping-02`.
+Claude Opus 5.5 Max accepted both corrected cases in the [separate hash-pinned
+delta review](https://github.com/snowdamiz/incant/blob/0dd843e08f2a39abd5a67d4914cda8b0b5880ea8/handoffs/0037-native-player-window/result-refresh.md).
+All 49 new evidence files and the 180 unchanged original files verify. The
+control was disabled/inert; paused aspect changes and a continuous resize burst
+presented fresh output without advancing the world. The second run reported
+897 ticks plus 16 presentation-only refreshes, exactly 913 accepted frames.
+Both owned review processes closed normally. These are local acceptance
+observations, not frame-time or scanout measurements.
+
+The AX fullscreen attribute remains settable. macOS clamped the tested oversized
+and undersized requests, so the recoverable out-of-range suspension path has
+policy tests but no live native reproduction. Linux/Windows behavior and forced
+fullscreen remain outside this acceptance. Original evidence and executables are
+unchanged. Raw fresh proof: `/tmp/incant-native-window-refresh-shipping-02`.
 
 The original review also observed one tick of motion on refocus (the existing
 step-before-script input latency) and 0.64–0.68 seconds of application-audio tail
