@@ -1,8 +1,8 @@
 # Color mip roles
 
-Status: local implementation; CPU verification passed. Numerical GPU execution,
-Claude Opus 5.5 / Max appearance acceptance and integrated hosted checks remain
-pending. This is separate from the accepted PR77 generated-tangent correction.
+Status: unpublished implementation integrated with reviewed PR81. Scoped CPU,
+Clippy and the full renderer numerical GPU suite pass. Claude Opus 5.5 / Max
+appearance acceptance and integrated hosted checks remain pending. This is separate from the accepted PR77 generated-tangent correction.
 
 ## Defect and selected behavior
 
@@ -116,9 +116,14 @@ legacy model1/2 and texture1/2 source-free reads; mandatory modern role fields,
 digests, formats, bad indices and mismatched bases; square/thin/odd allocation
 identity; unchanged logical store budgets; and failed batch reimport/Undo/Redo.
 
-Numerical GPU tests are prepared, but not yet executed: eight opaque/emissive
-minification pairs against all-alpha-one RGB controls, two coverage-role pairs,
-and a Color environment comparison, with nonvacuous wrong-color controls and
-retained source/cache-deleted replays. The full existing renderer GPU suite must
-also pass. Claude0043 owns separate appearance acceptance. No phone, performance,
+After integration with reviewed PR81, 132 scoped ordinary ci-profile tests and
+all-target Clippy pass. The full renderer numerical GPU suite passes 68 tests
+(18 unit and 50 integration), including eleven comparisons across two new test
+functions: eight opaque/emissive minification pairs against all-alpha-one RGB
+controls, two coverage-role pairs, and a Color environment comparison. Wrong-color
+controls make the oracle nonvacuous; retained source/cache-deleted replays pass.
+This preserves the prewarming, flipbook and generated-tangent regression suites.
+The integrated source is `02d1872f43a0aae7daf8df849f48ac0c9f442aff`; only STATUS
+required manual merge resolution. Exact logs and source hashes are recorded in
+[evidence/color-mip-roles-integrated.json](evidence/color-mip-roles-integrated.json). Claude0043 owns separate appearance acceptance. No phone, performance,
 GPU allocation budget or whole-engine completion claim is made.
