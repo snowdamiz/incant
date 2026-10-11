@@ -1,0 +1,13 @@
+{
+  "handoff": "0043-color-mip-roles",
+  "client": "tools/handoff/main.py",
+  "required_model": "Opus 5.5",
+  "required_effort": "max",
+  "verified_before_prompt": true,
+  "observed_stdout": "Claude session verified: Opus 5.5; thinking: max",
+  "permission_mode": "acceptEdits",
+  "launcher_log": "/tmp/incant-0043-acp.log",
+  "session_exec_id": 97358,
+  "frozen_candidate_source": "4f7ecfa211add87ee207f4e5abd69161c868a609",
+  "note": "Astra observed client verification before the initial prompt. Model and effort are set and confirmed with ACP config options; shell environment variables are not the proof."
+}
