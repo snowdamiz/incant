@@ -48,6 +48,7 @@ fn input(sources: &[Arc<RuntimeAsset>]) -> SceneInput {
                 camera: None,
                 light: None,
                 sprite: None,
+                tilemap: None,
                 diagnostic: false,
                 mesh: Some(MeshInput {
                     source: Arc::clone(source),
