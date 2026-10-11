@@ -1,0 +1,126 @@
+{
+ "version": 1,
+ "id": "01JA39AT000000000000000001",
+ "maximum_size": [
+  256,
+  256
+ ],
+ "padding": 2,
+ "frames": {
+  "01JA39FR000000000000000001": {
+   "name": "A",
+   "path": "tiles.png",
+   "region": [
+    2,
+    2,
+    8,
+    8
+   ]
+  },
+  "01JA39FR000000000000000002": {
+   "name": "B",
+   "path": "tiles.png",
+   "region": [
+    12,
+    2,
+    12,
+    10
+   ]
+  },
+  "01JA39FR000000000000000004": {
+   "name": "D",
+   "path": "tiles.png",
+   "region": [
+    38,
+    2,
+    16,
+    16
+   ]
+  },
+  "01JA39FR000000000000000005": {
+   "name": "E",
+   "path": "tiles.png",
+   "region": [
+    56,
+    2,
+    6,
+    9
+   ]
+  },
+  "01JA39FR000000000000000006": {
+   "name": "F",
+   "path": "tiles.png",
+   "region": [
+    64,
+    2,
+    20,
+    12
+   ]
+  },
+  "01JA39FR000000000000000007": {
+   "name": "G",
+   "path": "tiles.png",
+   "region": [
+    86,
+    2,
+    7,
+    11
+   ]
+  },
+  "01JA39FR000000000000000008": {
+   "name": "H",
+   "path": "tiles.png",
+   "region": [
+    2,
+    20,
+    13,
+    7
+   ]
+  },
+  "01JA39FR000000000000000009": {
+   "name": "T",
+   "path": "tiles.png",
+   "region": [
+    17,
+    20,
+    12,
+    12
+   ]
+  },
+  "01JA39FR00000000000000000A": {
+   "name": "X",
+   "path": "tiles.png",
+   "region": [
+    31,
+    20,
+    16,
+    16
+   ]
+  },
+  "01JA39FR00000000000000000B": {
+   "name": "K",
+   "path": "tiles.png",
+   "region": [
+    49,
+    20,
+    4,
+    4
+   ]
+  },
+  "01JA39FR00000000000000000C": {
+   "name": "W",
+   "path": "tiles.png",
+   "region": [
+    55,
+    20,
+    24,
+    8
+   ]
+  },
+  "01JA39FR000000000000000033": {
+   "name": "ballast",
+   "path": "ballast.png",
+   "region": null
+  }
+ }
+}

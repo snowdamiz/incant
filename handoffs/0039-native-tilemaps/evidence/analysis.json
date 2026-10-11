@@ -1,0 +1,1641 @@
+{
+ "run": "r2",
+ "differential": [
+  {
+   "label": "tile vs ordinary-sprite control, s0",
+   "state": "s0--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s0--control-s0/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s0--control-s0/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s0--control-s0/pp1-C-320x180.png",
+     "identical": true
+    },
+    "pp3-A": {
+     "reference": "s0--control-s0/pp3-A-960x540.png",
+     "identical": true
+    },
+    "pp3-B": {
+     "reference": "s0--control-s0/pp3-B-960x540.png",
+     "identical": true
+    },
+    "pp3-C": {
+     "reference": "s0--control-s0/pp3-C-960x540.png",
+     "identical": true
+    },
+    "of25-A": {
+     "reference": "s0--control-s0/of25-A-640x360.png",
+     "identical": true
+    },
+    "of25-B": {
+     "reference": "s0--control-s0/of25-B-640x360.png",
+     "identical": true
+    },
+    "of25-C": {
+     "reference": "s0--control-s0/of25-C-640x360.png",
+     "identical": true
+    },
+    "o3-C": {
+     "reference": "s0--control-s0/o3-C-960x540.png",
+     "identical": true
+    }
+   },
+   "identical": 10,
+   "compared": 10
+  },
+  {
+   "label": "tile vs ordinary-sprite control, s1",
+   "state": "s1--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s1--control-s1/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s1--control-s1/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp3-A": {
+     "reference": "s1--control-s1/pp3-A-960x540.png",
+     "identical": true
+    },
+    "pp3-B": {
+     "reference": "s1--control-s1/pp3-B-960x540.png",
+     "identical": true
+    },
+    "of25-A": {
+     "reference": "s1--control-s1/of25-A-640x360.png",
+     "identical": true
+    },
+    "of25-B": {
+     "reference": "s1--control-s1/of25-B-640x360.png",
+     "identical": true
+    }
+   },
+   "identical": 6,
+   "compared": 6
+  },
+  {
+   "label": "fresh-process repeat of s0",
+   "state": "s0-repeat--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s0--tile/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s0--tile/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s0--tile/pp1-C-320x180.png",
+     "identical": true
+    },
+    "pp3-A": {
+     "reference": "s0--tile/pp3-A-960x540.png",
+     "identical": true
+    },
+    "pp3-B": {
+     "reference": "s0--tile/pp3-B-960x540.png",
+     "identical": true
+    },
+    "pp3-C": {
+     "reference": "s0--tile/pp3-C-960x540.png",
+     "identical": true
+    },
+    "of25-A": {
+     "reference": "s0--tile/of25-A-640x360.png",
+     "identical": true
+    },
+    "of25-B": {
+     "reference": "s0--tile/of25-B-640x360.png",
+     "identical": true
+    },
+    "of25-C": {
+     "reference": "s0--tile/of25-C-640x360.png",
+     "identical": true
+    },
+    "o3-C": {
+     "reference": "s0--tile/o3-C-960x540.png",
+     "identical": true
+    }
+   },
+   "identical": 10,
+   "compared": 10
+  },
+  {
+   "label": "s1 command edit against s0",
+   "state": "s1--tile",
+   "expectation": "A and B change, C identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s0--tile/pp1-A-320x180.png",
+     "identical": false,
+     "pixels": 1492,
+     "max_level": 206,
+     "bbox": [
+      41,
+      26,
+      267,
+      89
+     ]
+    },
+    "pp1-B": {
+     "reference": "s0--tile/pp1-B-320x180.png",
+     "identical": false,
+     "pixels": 1195,
+     "max_level": 210,
+     "bbox": [
+      48,
+      66,
+      143,
+      128
+     ]
+    },
+    "pp1-C": {
+     "reference": "s0--tile/pp1-C-320x180.png",
+     "identical": true
+    },
+    "pp3-A": {
+     "reference": "s0--tile/pp3-A-960x540.png",
+     "identical": false,
+     "pixels": 13428,
+     "max_level": 206,
+     "bbox": [
+      123,
+      78,
+      803,
+      269
+     ]
+    },
+    "pp3-B": {
+     "reference": "s0--tile/pp3-B-960x540.png",
+     "identical": false,
+     "pixels": 10755,
+     "max_level": 210,
+     "bbox": [
+      144,
+      198,
+      431,
+      386
+     ]
+    },
+    "of25-A": {
+     "reference": "s0--tile/of25-A-640x360.png",
+     "identical": false,
+     "pixels": 9326,
+     "max_level": 206,
+     "bbox": [
+      16,
+      18,
+      585,
+      177
+     ]
+    },
+    "of25-B": {
+     "reference": "s0--tile/of25-B-640x360.png",
+     "identical": false,
+     "pixels": 7440,
+     "max_level": 210,
+     "bbox": [
+      36,
+      118,
+      275,
+      274
+     ]
+    }
+   },
+   "identical": 1,
+   "compared": 7
+  },
+  {
+   "label": "Undo of the s1 edit against s0",
+   "state": "s2-undo--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s0--tile/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s0--tile/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s0--tile/pp1-C-320x180.png",
+     "identical": true
+    },
+    "pp3-A": {
+     "reference": "s0--tile/pp3-A-960x540.png",
+     "identical": true
+    },
+    "pp3-B": {
+     "reference": "s0--tile/pp3-B-960x540.png",
+     "identical": true
+    },
+    "of25-A": {
+     "reference": "s0--tile/of25-A-640x360.png",
+     "identical": true
+    },
+    "of25-B": {
+     "reference": "s0--tile/of25-B-640x360.png",
+     "identical": true
+    }
+   },
+   "identical": 7,
+   "compared": 7
+  },
+  {
+   "label": "Redo of the s1 edit against s1",
+   "state": "s3-redo--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s1--tile/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s1--tile/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s1--tile/pp1-C-320x180.png",
+     "identical": true
+    },
+    "pp3-A": {
+     "reference": "s1--tile/pp3-A-960x540.png",
+     "identical": true
+    },
+    "pp3-B": {
+     "reference": "s1--tile/pp3-B-960x540.png",
+     "identical": true
+    },
+    "of25-A": {
+     "reference": "s1--tile/of25-A-640x360.png",
+     "identical": true
+    },
+    "of25-B": {
+     "reference": "s1--tile/of25-B-640x360.png",
+     "identical": true
+    }
+   },
+   "identical": 7,
+   "compared": 7
+  },
+  {
+   "label": "accepted v2 repack against before",
+   "state": "s4-repack--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s3-redo--tile/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s3-redo--tile/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s3-redo--tile/pp1-C-320x180.png",
+     "identical": true
+    },
+    "pp3-A": {
+     "reference": "s3-redo--tile/pp3-A-960x540.png",
+     "identical": true
+    },
+    "pp3-B": {
+     "reference": "s3-redo--tile/pp3-B-960x540.png",
+     "identical": true
+    },
+    "pp3-C": {
+     "reference": "s0--tile/pp3-C-960x540.png",
+     "identical": true
+    },
+    "of25-A": {
+     "reference": "s3-redo--tile/of25-A-640x360.png",
+     "identical": true
+    },
+    "of25-B": {
+     "reference": "s3-redo--tile/of25-B-640x360.png",
+     "identical": true
+    },
+    "of25-C": {
+     "reference": "s0--tile/of25-C-640x360.png",
+     "identical": true
+    },
+    "o3-C": {
+     "reference": "s0--tile/o3-C-960x540.png",
+     "identical": true
+    }
+   },
+   "identical": 10,
+   "compared": 10
+  },
+  {
+   "label": "rejected missing-frame reimport against before",
+   "state": "s5-rejected--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s4-repack--tile/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s4-repack--tile/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s4-repack--tile/pp1-C-320x180.png",
+     "identical": true
+    }
+   },
+   "identical": 3,
+   "compared": 3
+  },
+  {
+   "label": "Undo of the repack import (v1 page)",
+   "state": "s6-import-undo--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s4-repack--tile/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s4-repack--tile/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s4-repack--tile/pp1-C-320x180.png",
+     "identical": true
+    }
+   },
+   "identical": 3,
+   "compared": 3
+  },
+  {
+   "label": "Redo of the repack import (v2 page)",
+   "state": "s7-import-redo--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s4-repack--tile/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s4-repack--tile/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s4-repack--tile/pp1-C-320x180.png",
+     "identical": true
+    }
+   },
+   "identical": 3,
+   "compared": 3
+  },
+  {
+   "label": "sources removed against cached baseline",
+   "state": "s8-source-free--tile",
+   "expectation": "identical",
+   "views": {
+    "pp1-A": {
+     "reference": "s4-repack--tile/pp1-A-320x180.png",
+     "identical": true
+    },
+    "pp1-B": {
+     "reference": "s4-repack--tile/pp1-B-320x180.png",
+     "identical": true
+    },
+    "pp1-C": {
+     "reference": "s4-repack--tile/pp1-C-320x180.png",
+     "identical": true
+    },
+    "pp3-A": {
+     "reference": "s4-repack--tile/pp3-A-960x540.png",
+     "identical": true
+    },
+    "pp3-B": {
+     "reference": "s4-repack--tile/pp3-B-960x540.png",
+     "identical": true
+    },
+    "pp3-C": {
+     "reference": "s4-repack--tile/pp3-C-960x540.png",
+     "identical": true
+    },
+    "of25-A": {
+     "reference": "s4-repack--tile/of25-A-640x360.png",
+     "identical": true
+    },
+    "of25-B": {
+     "reference": "s4-repack--tile/of25-B-640x360.png",
+     "identical": true
+    },
+    "of25-C": {
+     "reference": "s4-repack--tile/of25-C-640x360.png",
+     "identical": true
+    },
+    "o3-C": {
+     "reference": "s4-repack--tile/o3-C-960x540.png",
+     "identical": true
+    }
+   },
+   "identical": 10,
+   "compared": 10
+  }
+ ],
+ "upscale": {
+  "frames": 23,
+  "mismatching_pixels": 0,
+  "per_frame": {
+   "s0--control-s0/A": 0,
+   "s0--control-s0/B": 0,
+   "s0--control-s0/C": 0,
+   "s0--tile/A": 0,
+   "s0--tile/B": 0,
+   "s0--tile/C": 0,
+   "s0-repeat--tile/A": 0,
+   "s0-repeat--tile/B": 0,
+   "s0-repeat--tile/C": 0,
+   "s1--control-s1/A": 0,
+   "s1--control-s1/B": 0,
+   "s1--tile/A": 0,
+   "s1--tile/B": 0,
+   "s2-undo--tile/A": 0,
+   "s2-undo--tile/B": 0,
+   "s3-redo--tile/A": 0,
+   "s3-redo--tile/B": 0,
+   "s4-repack--tile/A": 0,
+   "s4-repack--tile/B": 0,
+   "s4-repack--tile/C": 0,
+   "s8-source-free--tile/A": 0,
+   "s8-source-free--tile/B": 0,
+   "s8-source-free--tile/C": 0
+  }
+ },
+ "magenta": {
+  "frames": 86,
+  "frames_with_magenta": {}
+ },
+ "model": [
+  {
+   "state": "s0--tile",
+   "view": "pp1-A",
+   "pixels": 57600,
+   "ambiguous": 864,
+   "exact_matches": 56736,
+   "ties_as_rule": 858,
+   "ties_other_side": 6,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [
+    {
+     "pixel": [
+      78,
+      97
+     ],
+     "engine": [
+      200,
+      196,
+      220
+     ],
+     "rule": [
+      50,
+      70,
+      130
+     ],
+     "item": "A4:non-dyadic:3,6:D",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      98
+     ],
+     "engine": [
+      200,
+      196,
+      220
+     ],
+     "rule": [
+      50,
+      70,
+      130
+     ],
+     "item": "A4:non-dyadic:3,6:D",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      107
+     ],
+     "engine": [
+      24,
+      22,
+      40
+     ],
+     "rule": [
+      230,
+      210,
+      60
+     ],
+     "item": "A4:non-dyadic:3,5:X",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      108
+     ],
+     "engine": [
+      230,
+      210,
+      60
+     ],
+     "rule": [
+      24,
+      22,
+      40
+     ],
+     "item": "A4:non-dyadic:3,5:X",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      155
+     ],
+     "engine": [
+      24,
+      22,
+      40
+     ],
+     "rule": [
+      230,
+      210,
+      60
+     ],
+     "item": "A4:non-dyadic:3,0:X",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      156
+     ],
+     "engine": [
+      230,
+      210,
+      60
+     ],
+     "rule": [
+      24,
+      22,
+      40
+     ],
+     "item": "A4:non-dyadic:3,0:X",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    }
+   ],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s0--tile",
+   "view": "pp1-B",
+   "pixels": 57600,
+   "ambiguous": 0,
+   "exact_matches": 57600,
+   "ties_as_rule": 0,
+   "ties_other_side": 0,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s0--tile",
+   "view": "pp1-C",
+   "pixels": 57600,
+   "ambiguous": 46,
+   "exact_matches": 57554,
+   "ties_as_rule": 45,
+   "ties_other_side": 1,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [
+    {
+     "pixel": [
+      98,
+      53
+     ],
+     "engine": [
+      120,
+      40,
+      90
+     ],
+     "rule": [
+      72,
+      186,
+      112
+     ],
+     "item": "C1:rotation:2,0:F",
+     "kind": "texel boundary x",
+     "distance_px": 0.0003268
+    }
+   ],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s0--tile",
+   "view": "of25-A",
+   "pixels": 230400,
+   "ambiguous": 80,
+   "exact_matches": 230320,
+   "ties_as_rule": 80,
+   "ties_other_side": 0,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s0--tile",
+   "view": "of25-B",
+   "pixels": 230400,
+   "ambiguous": 6,
+   "exact_matches": 230394,
+   "ties_as_rule": 6,
+   "ties_other_side": 0,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s0--tile",
+   "view": "of25-C",
+   "pixels": 230400,
+   "ambiguous": 111,
+   "exact_matches": 230289,
+   "ties_as_rule": 111,
+   "ties_other_side": 0,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s0--tile",
+   "view": "o3-C",
+   "pixels": 518400,
+   "ambiguous": 141,
+   "exact_matches": 518259,
+   "ties_as_rule": 138,
+   "ties_other_side": 3,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [
+    {
+     "pixel": [
+      292,
+      150
+     ],
+     "engine": [
+      72,
+      186,
+      112
+     ],
+     "rule": [
+      22,
+      30,
+      34
+     ],
+     "item": "C1:rotation:2,0:F",
+     "kind": "coverage edge",
+     "distance_px": 0.0009434
+    },
+    {
+     "pixel": [
+      139,
+      161
+     ],
+     "engine": [
+      60,
+      44,
+      110
+     ],
+     "rule": [
+      226,
+      182,
+      72
+     ],
+     "item": "C1:rotation:0,1:A",
+     "kind": "texel boundary x",
+     "distance_px": 0.0009434
+    },
+    {
+     "pixel": [
+      139,
+      173
+     ],
+     "engine": [
+      226,
+      182,
+      72
+     ],
+     "rule": [
+      22,
+      30,
+      34
+     ],
+     "item": "C1:rotation:0,1:A",
+     "kind": "coverage edge",
+     "distance_px": 0.0009434
+    }
+   ],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s1--tile",
+   "view": "pp1-A",
+   "pixels": 57600,
+   "ambiguous": 938,
+   "exact_matches": 56662,
+   "ties_as_rule": 932,
+   "ties_other_side": 6,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [
+    {
+     "pixel": [
+      78,
+      97
+     ],
+     "engine": [
+      200,
+      196,
+      220
+     ],
+     "rule": [
+      50,
+      70,
+      130
+     ],
+     "item": "A4:non-dyadic:3,6:D",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      98
+     ],
+     "engine": [
+      200,
+      196,
+      220
+     ],
+     "rule": [
+      50,
+      70,
+      130
+     ],
+     "item": "A4:non-dyadic:3,6:D",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      107
+     ],
+     "engine": [
+      24,
+      22,
+      40
+     ],
+     "rule": [
+      230,
+      210,
+      60
+     ],
+     "item": "A4:non-dyadic:3,5:X",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      108
+     ],
+     "engine": [
+      230,
+      210,
+      60
+     ],
+     "rule": [
+      24,
+      22,
+      40
+     ],
+     "item": "A4:non-dyadic:3,5:X",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      155
+     ],
+     "engine": [
+      24,
+      22,
+      40
+     ],
+     "rule": [
+      230,
+      210,
+      60
+     ],
+     "item": "A4:non-dyadic:3,0:X",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    },
+    {
+     "pixel": [
+      78,
+      156
+     ],
+     "engine": [
+      230,
+      210,
+      60
+     ],
+     "rule": [
+      24,
+      22,
+      40
+     ],
+     "item": "A4:non-dyadic:3,0:X",
+     "kind": "texel boundary x",
+     "distance_px": 0.0
+    }
+   ],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s1--tile",
+   "view": "pp1-B",
+   "pixels": 57600,
+   "ambiguous": 0,
+   "exact_matches": 57600,
+   "ties_as_rule": 0,
+   "ties_other_side": 0,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s1--tile",
+   "view": "of25-A",
+   "pixels": 230400,
+   "ambiguous": 80,
+   "exact_matches": 230320,
+   "ties_as_rule": 80,
+   "ties_other_side": 0,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [],
+   "unexplained_examples": []
+  },
+  {
+   "state": "s1--tile",
+   "view": "of25-B",
+   "pixels": 230400,
+   "ambiguous": 12,
+   "exact_matches": 230388,
+   "ties_as_rule": 12,
+   "ties_other_side": 0,
+   "unexplained": 0,
+   "guard_pixels": 0,
+   "other_side": [],
+   "unexplained_examples": []
+  }
+ ],
+ "pages": {
+  "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30": {
+   "descriptor": "tiles-v1.atlas.json",
+   "ballast_source": "ballast-v1.png",
+   "content_sha256": "2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a",
+   "size": [
+    42,
+    68
+   ],
+   "padding": 1,
+   "ktx_size": [
+    42,
+    68
+   ],
+   "mip_levels": 7,
+   "frames": 13,
+   "regions": {
+    "A": [
+     33,
+     42,
+     8,
+     8
+    ],
+    "B": [
+     19,
+     56,
+     12,
+     10
+    ],
+    "C": [
+     27,
+     9,
+     10,
+     14
+    ],
+    "D": [
+     1,
+     33,
+     16,
+     16
+    ],
+    "E": [
+     34,
+     25,
+     6,
+     9
+    ],
+    "F": [
+     1,
+     19,
+     20,
+     12
+    ],
+    "G": [
+     33,
+     52,
+     7,
+     11
+    ],
+    "H": [
+     19,
+     33,
+     13,
+     7
+    ],
+    "T": [
+     19,
+     42,
+     12,
+     12
+    ],
+    "X": [
+     1,
+     51,
+     16,
+     16
+    ],
+    "K": [
+     33,
+     1,
+     4,
+     4
+    ],
+    "W": [
+     1,
+     9,
+     24,
+     8
+    ],
+    "ballast": [
+     1,
+     1,
+     30,
+     6
+    ]
+   },
+   "content_mismatches": 0,
+   "extrusion_mismatches": 0,
+   "overlapping_texels": 0,
+   "nonzero_empty_texels": 0,
+   "pass": true
+  },
+  "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f": {
+   "descriptor": "tiles-v2.atlas.json",
+   "ballast_source": "ballast-v2.png",
+   "content_sha256": "220f2892bd94748aafbb8b4d1e80b9914563251d81d55d0f60d4b15c2cebe60f",
+   "size": [
+    94,
+    56
+   ],
+   "padding": 2,
+   "ktx_size": [
+    94,
+    56
+   ],
+   "mip_levels": 7,
+   "frames": 13,
+   "regions": {
+    "A": [
+     45,
+     46,
+     8,
+     8
+    ],
+    "B": [
+     19,
+     44,
+     12,
+     10
+    ],
+    "C": [
+     54,
+     28,
+     10,
+     14
+    ],
+    "D": [
+     76,
+     2,
+     16,
+     16
+    ],
+    "E": [
+     35,
+     44,
+     6,
+     9
+    ],
+    "F": [
+     30,
+     28,
+     20,
+     12
+    ],
+    "G": [
+     84,
+     42,
+     7,
+     11
+    ],
+    "H": [
+     2,
+     40,
+     13,
+     7
+    ],
+    "T": [
+     68,
+     42,
+     12,
+     12
+    ],
+    "X": [
+     76,
+     22,
+     16,
+     16
+    ],
+    "K": [
+     57,
+     46,
+     4,
+     4
+    ],
+    "W": [
+     2,
+     28,
+     24,
+     8
+    ],
+    "ballast": [
+     2,
+     2,
+     70,
+     22
+    ]
+   },
+   "content_mismatches": 0,
+   "extrusion_mismatches": 0,
+   "overlapping_texels": 0,
+   "nonzero_empty_texels": 0,
+   "pass": true
+  },
+  "e9cd20afd65818d13a9124304e611f5ab6329c367da546f37b7218fc684b40b3": {
+   "descriptor": "tiles-fail-missing.atlas.json",
+   "ballast_source": "ballast-v2.png",
+   "content_sha256": "3ada2865504d9958a0d63a0ccc7852970a3cc10c113d18210960a065d3e2ae6d",
+   "size": [
+    94,
+    53
+   ],
+   "padding": 2,
+   "ktx_size": [
+    94,
+    53
+   ],
+   "mip_levels": 7,
+   "frames": 12,
+   "regions": {
+    "A": [
+     80,
+     42,
+     8,
+     8
+    ],
+    "B": [
+     2,
+     40,
+     12,
+     10
+    ],
+    "D": [
+     76,
+     2,
+     16,
+     16
+    ],
+    "E": [
+     70,
+     42,
+     6,
+     9
+    ],
+    "F": [
+     30,
+     28,
+     20,
+     12
+    ],
+    "G": [
+     18,
+     40,
+     7,
+     11
+    ],
+    "H": [
+     54,
+     28,
+     13,
+     7
+    ],
+    "T": [
+     54,
+     39,
+     12,
+     12
+    ],
+    "X": [
+     76,
+     22,
+     16,
+     16
+    ],
+    "K": [
+     29,
+     44,
+     4,
+     4
+    ],
+    "W": [
+     2,
+     28,
+     24,
+     8
+    ],
+    "ballast": [
+     2,
+     2,
+     70,
+     22
+    ]
+   },
+   "content_mismatches": 0,
+   "extrusion_mismatches": 0,
+   "overlapping_texels": 0,
+   "nonzero_empty_texels": 0,
+   "pass": true
+  }
+ },
+ "relocation_v1_v2": {
+  "from": "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+  "to": "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f",
+  "moved": 13,
+  "common": 13,
+  "regions": {
+   "A": [
+    [
+     33,
+     42,
+     8,
+     8
+    ],
+    [
+     45,
+     46,
+     8,
+     8
+    ]
+   ],
+   "B": [
+    [
+     19,
+     56,
+     12,
+     10
+    ],
+    [
+     19,
+     44,
+     12,
+     10
+    ]
+   ],
+   "C": [
+    [
+     27,
+     9,
+     10,
+     14
+    ],
+    [
+     54,
+     28,
+     10,
+     14
+    ]
+   ],
+   "D": [
+    [
+     1,
+     33,
+     16,
+     16
+    ],
+    [
+     76,
+     2,
+     16,
+     16
+    ]
+   ],
+   "E": [
+    [
+     34,
+     25,
+     6,
+     9
+    ],
+    [
+     35,
+     44,
+     6,
+     9
+    ]
+   ],
+   "F": [
+    [
+     1,
+     19,
+     20,
+     12
+    ],
+    [
+     30,
+     28,
+     20,
+     12
+    ]
+   ],
+   "G": [
+    [
+     33,
+     52,
+     7,
+     11
+    ],
+    [
+     84,
+     42,
+     7,
+     11
+    ]
+   ],
+   "H": [
+    [
+     19,
+     33,
+     13,
+     7
+    ],
+    [
+     2,
+     40,
+     13,
+     7
+    ]
+   ],
+   "T": [
+    [
+     19,
+     42,
+     12,
+     12
+    ],
+    [
+     68,
+     42,
+     12,
+     12
+    ]
+   ],
+   "X": [
+    [
+     1,
+     51,
+     16,
+     16
+    ],
+    [
+     76,
+     22,
+     16,
+     16
+    ]
+   ],
+   "K": [
+    [
+     33,
+     1,
+     4,
+     4
+    ],
+    [
+     57,
+     46,
+     4,
+     4
+    ]
+   ],
+   "W": [
+    [
+     1,
+     9,
+     24,
+     8
+    ],
+    [
+     2,
+     28,
+     24,
+     8
+    ]
+   ],
+   "ballast": [
+    [
+     1,
+     1,
+     30,
+     6
+    ],
+    [
+     2,
+     2,
+     70,
+     22
+    ]
+   ]
+  }
+ },
+ "rejected_page_files": [
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/3ada2865504d9958a0d63a0ccc7852970a3cc10c113d18210960a065d3e2ae6d.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/e9cd20afd65818d13a9124304e611f5ab6329c367da546f37b7218fc684b40b3.json"
+ ],
+ "workflow": {
+  "atlas_asset": "01M4MFBBDJ4HRCCCX98FBM0VC9",
+  "v1_fingerprint": "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+  "build_validate": {
+   "tile": 0,
+   "control-s0": 0,
+   "control-s1": 0
+  },
+  "art_matches_committed": true,
+  "steps": [
+   {
+    "step": "01-s1-edit",
+    "authored_changed": true,
+    "atlas_fingerprint": [
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30"
+    ],
+    "history_length": 5,
+    "new_cache_files": [],
+    "transaction_id": "01M4MFMR9H0Y6W811859ESZMSH",
+    "commands": [
+     {
+      "op": "set_component",
+      "entity_id": "01JA39EN000000000000020000",
+      "component": "Tilemap"
+     },
+     {
+      "op": "set_component",
+      "entity_id": "01JA39EN000000000000030000",
+      "component": "Tilemap"
+     },
+     {
+      "op": "set_component",
+      "entity_id": "01JA39EN0000000000000B0000",
+      "component": "Tilemap"
+     }
+    ],
+    "validate": {
+     "exit": 0,
+     "valid": true,
+     "diagnostics": 0
+    }
+   },
+   {
+    "step": "02-undo",
+    "authored_changed": true,
+    "atlas_fingerprint": [
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30"
+    ],
+    "history_length": 4,
+    "new_cache_files": [],
+    "history": {
+     "method": "history.undo",
+     "transaction_id": "01M4MFMR9H0Y6W811859ESZMSH",
+     "revision": 6
+    }
+   },
+   {
+    "step": "03-redo",
+    "authored_changed": true,
+    "atlas_fingerprint": [
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30"
+    ],
+    "history_length": 5,
+    "new_cache_files": [],
+    "history": {
+     "method": "history.redo",
+     "transaction_id": "01M4MFMR9H0Y6W811859ESZMSH",
+     "revision": 7
+    }
+   },
+   {
+    "step": "04-repack",
+    "authored_changed": true,
+    "atlas_fingerprint": [
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+     "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f"
+    ],
+    "history_length": 6,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/220f2892bd94748aafbb8b4d1e80b9914563251d81d55d0f60d4b15c2cebe60f.ktx2",
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f.json"
+    ],
+    "import": {
+     "exit": 0,
+     "first_line": "",
+     "reference_lines": 0,
+     "authored_unchanged": false,
+     "changed": true,
+     "cache_hit": false,
+     "diagnostics": []
+    },
+    "validate": {
+     "exit": 0,
+     "valid": true,
+     "diagnostics": 0
+    }
+   },
+   {
+    "step": "05-reject",
+    "authored_changed": false,
+    "atlas_fingerprint": [
+     "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f",
+     "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f"
+    ],
+    "history_length": 6,
+    "new_cache_files": [
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/3ada2865504d9958a0d63a0ccc7852970a3cc10c113d18210960a065d3e2ae6d.ktx2",
+     "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/e9cd20afd65818d13a9124304e611f5ab6329c367da546f37b7218fc684b40b3.json"
+    ],
+    "import": {
+     "exit": 1,
+     "first_line": "Error: import rejected: 12 invalid sprite/tilemap reference(s)",
+     "reference_lines": 12,
+     "authored_unchanged": true
+    },
+    "validate": {
+     "exit": 0,
+     "valid": true,
+     "diagnostics": 0
+    }
+   },
+   {
+    "step": "06-import-undo",
+    "authored_changed": true,
+    "atlas_fingerprint": [
+     "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f",
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30"
+    ],
+    "history_length": 5,
+    "new_cache_files": [],
+    "history": {
+     "method": "history.undo",
+     "transaction_id": "01M4MFNH487T31178XF7BWXBH8",
+     "revision": 9
+    }
+   },
+   {
+    "step": "07-import-redo",
+    "authored_changed": true,
+    "atlas_fingerprint": [
+     "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+     "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f"
+    ],
+    "history_length": 6,
+    "new_cache_files": [],
+    "history": {
+     "method": "history.redo",
+     "transaction_id": "01M4MFNH487T31178XF7BWXBH8",
+     "revision": 10
+    }
+   },
+   {
+    "step": "08-source-free",
+    "authored_changed": false,
+    "atlas_fingerprint": [
+     "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f",
+     "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f"
+    ],
+    "history_length": 6,
+    "new_cache_files": [],
+    "reimport_without_sources": {
+     "exit": 1,
+     "first_line": "Error: could not cook art/tiles.atlas.json: asset IO: No such file or directory (os error 2)",
+     "reference_lines": 0,
+     "authored_unchanged": true
+    },
+    "validate": {
+     "exit": 0,
+     "valid": true,
+     "diagnostics": 0
+    },
+    "removed": [
+     "artifacts/0039-native-tilemaps/r2/tile/art/badge.png",
+     "artifacts/0039-native-tilemaps/r2/tile/art/ballast.png",
+     "artifacts/0039-native-tilemaps/r2/tile/art/plates.png",
+     "artifacts/0039-native-tilemaps/r2/tile/art/tiles.atlas.json",
+     "artifacts/0039-native-tilemaps/r2/tile/art/tiles.png"
+    ]
+   }
+  ]
+ },
+ "engine": {
+  "calls": 128,
+  "by_command": {
+   "init": 3,
+   "import": 12,
+   "rpc": 20,
+   "validate": 7,
+   "screenshot": 86
+  },
+  "all_hash_checked": true,
+  "all_calls_any_run": 132,
+  "nonzero_exits": [
+   "import art/tiles.atlas.json",
+   "import art/tiles.atlas.json"
+  ]
+ },
+ "ledger": {
+  "frames": 86,
+  "raw_bytes": 87321600,
+  "packet_frames": 86,
+  "packet_raw_bytes": 87321600
+ }
+}

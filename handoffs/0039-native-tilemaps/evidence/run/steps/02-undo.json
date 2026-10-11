@@ -1,0 +1,88 @@
+{
+ "action": "undo",
+ "authored_before": {
+  "tile.incant.json": "2dab5f8bb526290e52ac8093e6e1db55d5964ffebf94fdf28c73868d924890a9",
+  "tile.incant.journal.jsonl": "25af53b767eadc5c927d2e46ebb1f0c3521f54362676f24e899bf353af1ac7c2"
+ },
+ "fingerprints_before": {
+  "01M4MFBBDJ4HRCCCX98FBM0VC9": "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+  "01M4MFBBF7B106FG5D1C5NTMPP": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+  "01M4MFBBHFZVCMVC4GR6MN2S4N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+ },
+ "cache_before": [
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2"
+ ],
+ "history": {
+  "method": "history.undo",
+  "transaction_id": "01M4MFMR9H0Y6W811859ESZMSH",
+  "revision": 6
+ },
+ "authored_after": {
+  "tile.incant.json": "89b424ec26572951ed9fc42c5136865e1a2b6be487911e264277b4bd9ece1153",
+  "tile.incant.journal.jsonl": "1e1930cd479988246edbe021003c0c8395bc9000d548473b3cf964e090bce39f"
+ },
+ "fingerprints_after": {
+  "01M4MFBBDJ4HRCCCX98FBM0VC9": "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+  "01M4MFBBF7B106FG5D1C5NTMPP": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+  "01M4MFBBHFZVCMVC4GR6MN2S4N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+ },
+ "cache_after": [
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2"
+ ],
+ "history_after": [
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import tiles.atlas",
+   "id": "01M4MFBBDJAF2YDTY5K921ED6X"
+  },
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import plates",
+   "id": "01M4MFBBF75AHZ8SZ8CBRTTTD0"
+  },
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import badge",
+   "id": "01M4MFBBHFZPAP9GQ6RP505ZGH"
+  },
+  {
+   "actor": {
+    "actor": "editor",
+    "conversation_id": null,
+    "model": null,
+    "origin": "user"
+   },
+   "commands": 37,
+   "description": "Tilemap review scene s0 (handoff 0039)",
+   "id": "01M4MFBBMCTQWDVH325M497Z9A"
+  }
+ ]
+}

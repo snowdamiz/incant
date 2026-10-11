@@ -1,0 +1,163 @@
+{
+ "project": "tile",
+ "state": "s1",
+ "authored_before": {
+  "tile.incant.json": "2dab5f8bb526290e52ac8093e6e1db55d5964ffebf94fdf28c73868d924890a9",
+  "tile.incant.journal.jsonl": "25af53b767eadc5c927d2e46ebb1f0c3521f54362676f24e899bf353af1ac7c2"
+ },
+ "fingerprints": {
+  "01M4MFBBDJ4HRCCCX98FBM0VC9": "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+  "01M4MFBBF7B106FG5D1C5NTMPP": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+  "01M4MFBBHFZVCMVC4GR6MN2S4N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+ },
+ "shots": {
+  "pp1-A": {
+   "camera": "pp-A",
+   "camera_id": "01JA39EN0000000000000Z0000",
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "2a2fb12f27716409425a365988c5cf4cc60cabb1b1f272ac8893e5add2881fe8",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 11,
+    "tile_cells": 219,
+    "tilemap_entities": 15
+   },
+   "shading": "sprites_and_materials"
+  },
+  "pp1-B": {
+   "camera": "pp-B",
+   "camera_id": "01JA39EN000000000000110000",
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "30145ef684b3f669de904833baadd2899a66bbe76d5ce01dedad2be67cdbdbd8",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 11,
+    "tile_cells": 219,
+    "tilemap_entities": 15
+   },
+   "shading": "sprites_and_materials"
+  },
+  "pp1-C": {
+   "camera": "pp-C",
+   "camera_id": "01JA39EN000000000000130000",
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "44868e2a7ded1dfeebde904d89083cbf8bc8da34a63d5d9ad2298cad4ca51f9b",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 11,
+    "tile_cells": 219,
+    "tilemap_entities": 15
+   },
+   "shading": "sprites_and_materials"
+  },
+  "pp3-A": {
+   "camera": "pp-A",
+   "camera_id": "01JA39EN0000000000000Z0000",
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "df69c81fc6b39a43257b709823d2a771f9c7d7403c888e4d87a6d2c5169cf3aa",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 11,
+    "tile_cells": 219,
+    "tilemap_entities": 15
+   },
+   "shading": "sprites_and_materials"
+  },
+  "pp3-B": {
+   "camera": "pp-B",
+   "camera_id": "01JA39EN000000000000110000",
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "1dc71c0e7313dd48dd79881a7fb22778ba6bed042fa4d33cd65c9ef4fbdcf565",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 11,
+    "tile_cells": 219,
+    "tilemap_entities": 15
+   },
+   "shading": "sprites_and_materials"
+  },
+  "of25-A": {
+   "camera": "of-A",
+   "camera_id": "01JA39EN000000000000100000",
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "bf01efdb1e278d5a95aa1a62202263d8b8636cd3e7bfef47b5b8caaa8c305b6d",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 11,
+    "tile_cells": 219,
+    "tilemap_entities": 15
+   },
+   "shading": "sprites_and_materials"
+  },
+  "of25-B": {
+   "camera": "of-B",
+   "camera_id": "01JA39EN000000000000120000",
+   "exit": 0,
+   "written": true,
+   "stderr": "",
+   "sha256": "0a972d0343f7365850437d4b1c5118acae175756a69651a959852fc69ac81042",
+   "adapter": "Apple M5 Pro",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 0,
+    "model_entities": 0,
+    "model_triangles": 0,
+    "primitive_instances": 0,
+    "sprite_entities": 11,
+    "tile_cells": 219,
+    "tilemap_entities": 15
+   },
+   "shading": "sprites_and_materials"
+  }
+ },
+ "authored_after": {
+  "tile.incant.json": "2dab5f8bb526290e52ac8093e6e1db55d5964ffebf94fdf28c73868d924890a9",
+  "tile.incant.journal.jsonl": "25af53b767eadc5c927d2e46ebb1f0c3521f54362676f24e899bf353af1ac7c2"
+ },
+ "ledger_after": {
+  "frames": 37,
+  "raw_bytes": 41932800
+ }
+}

@@ -1,0 +1,1273 @@
+{
+ "state": "s1",
+ "items": [
+  {
+   "name": "A:plate",
+   "kind": "sprite",
+   "slot": 1,
+   "parent": null,
+   "t": [
+    0.0,
+    0.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "plate",
+    "board"
+   ],
+   "size": [
+    24.0,
+    14.0
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": -100,
+   "order": 0
+  },
+  {
+   "name": "A1",
+   "kind": "map",
+   "slot": 2,
+   "parent": null,
+   "t": [
+    -7.5,
+    0.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    6,
+    4
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY000000000000000001",
+     "rows": [
+      "ABCDE.",
+      "GHXTWK",
+      "X.FEAD",
+      "DBAHGW"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "main"
+    }
+   ]
+  },
+  {
+   "name": "A2",
+   "kind": "map",
+   "slot": 3,
+   "parent": null,
+   "t": [
+    0.5,
+    1.75
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    5,
+    3
+   ],
+   "cell": [
+    1.25,
+    0.75
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY000000000000000002",
+     "rows": [
+      "DCBAK",
+      "W.TEG",
+      "FGHXA"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "main"
+    }
+   ]
+  },
+  {
+   "name": "A3",
+   "kind": "map",
+   "slot": 4,
+   "parent": null,
+   "t": [
+    0.53125,
+    0.28125
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    6,
+    1
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY000000000000000003",
+     "rows": [
+      "ABCDEF"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "half-pixel"
+    }
+   ]
+  },
+  {
+   "name": "A4",
+   "kind": "map",
+   "slot": 5,
+   "parent": null,
+   "t": [
+    -7.5,
+    -4.4
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    8,
+    7
+   ],
+   "cell": [
+    0.7,
+    0.6
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY000000000000000004",
+     "rows": [
+      "ABCDEFGH",
+      "TWKXABCD",
+      "EFGH.TWK",
+      "XABC.DEF",
+      "GHTWKXAB",
+      "CDE..FGH",
+      "TWKXABCD"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "non-dyadic"
+    }
+   ]
+  },
+  {
+   "name": "A5",
+   "kind": "map",
+   "slot": 6,
+   "parent": null,
+   "t": [
+    0.5,
+    -1.75
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    6,
+    3
+   ],
+   "cell": [
+    0.5,
+    0.5
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY000000000000000005",
+     "rows": [
+      "DFWABC",
+      "TXHGED",
+      "KKDDFF"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "minified"
+    }
+   ]
+  },
+  {
+   "name": "A6",
+   "kind": "map",
+   "slot": 7,
+   "parent": null,
+   "t": [
+    0.5,
+    -4.25
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    3,
+    1
+   ],
+   "cell": [
+    2.0,
+    2.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY000000000000000006",
+     "rows": [
+      "AEK"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "magnified"
+    }
+   ]
+  },
+  {
+   "name": "A7",
+   "kind": "map",
+   "slot": 8,
+   "parent": null,
+   "t": [
+    -6.0,
+    4.3
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    12,
+    1
+   ],
+   "cell": [
+    1.0,
+    0.5
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY000000000000000007",
+     "rows": [
+      "ABCDEFGHTWKX"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "view-clipped"
+    }
+   ]
+  },
+  {
+   "name": "B:plate",
+   "kind": "sprite",
+   "slot": 9,
+   "parent": null,
+   "t": [
+    40.0,
+    0.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "plate",
+    "board_b"
+   ],
+   "size": [
+    24.0,
+    14.0
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": -100,
+   "order": 0
+  },
+  {
+   "name": "B:below",
+   "kind": "sprite",
+   "slot": 10,
+   "parent": null,
+   "t": [
+    35.5,
+    -2.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "badge"
+   ],
+   "size": [
+    4.0,
+    1.0
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": 0,
+   "order": 0
+  },
+  {
+   "name": "B1",
+   "kind": "map",
+   "slot": 11,
+   "parent": null,
+   "t": [
+    33.0,
+    -2.5
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    6,
+    4
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY00000000000000001G",
+     "rows": [
+      "T....X",
+      ".T.X..",
+      "X.T...",
+      "...T.X"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "decor"
+    },
+    {
+     "id": "01JA39KY000000000000000010",
+     "rows": [
+      "ABCDEF",
+      "G.HABC",
+      "DE..FG",
+      "H.ABC."
+     ],
+     "layer": 0,
+     "order": 4,
+     "label": "ground"
+    },
+    {
+     "id": "01JA39KY000000000000000020",
+     "rows": [
+      "KKKKKK",
+      "KKKKKK",
+      "KKKKKK",
+      "KKKKKK"
+     ],
+     "layer": -1,
+     "order": 0,
+     "label": "under"
+    },
+    {
+     "id": "01JA39KY00000000000000002G",
+     "rows": [
+      "......",
+      "....X.",
+      "..W...",
+      "......"
+     ],
+     "layer": 0,
+     "order": 3,
+     "label": "mid"
+    },
+    {
+     "id": "01JA39KY00000000000000000G",
+     "rows": [
+      ".X....",
+      "......",
+      "......",
+      "......"
+     ],
+     "layer": 2,
+     "order": -7,
+     "label": "top"
+    }
+   ]
+  },
+  {
+   "name": "B:tie-after",
+   "kind": "sprite",
+   "slot": 12,
+   "parent": null,
+   "t": [
+    35.5,
+    -1.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "frame",
+    "F"
+   ],
+   "size": [
+    2.0,
+    1.0
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": 0,
+   "order": 0
+  },
+  {
+   "name": "B2",
+   "kind": "map",
+   "slot": 13,
+   "parent": null,
+   "t": [
+    37.0,
+    -1.5
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    3,
+    2
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY000000000000000030",
+     "rows": [
+      "CTD",
+      "EFX"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "main"
+    }
+   ]
+  },
+  {
+   "name": "B:order5",
+   "kind": "sprite",
+   "slot": 14,
+   "parent": null,
+   "t": [
+    38.0,
+    0.25
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "badge"
+   ],
+   "size": [
+    1.0,
+    1.0
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": 0,
+   "order": 5
+  },
+  {
+   "name": "B:layer1",
+   "kind": "sprite",
+   "slot": 15,
+   "parent": null,
+   "t": [
+    34.5,
+    1.25
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "frame",
+    "W"
+   ],
+   "size": [
+    2.5,
+    0.5
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": 1,
+   "order": 0
+  },
+  {
+   "name": "B:layer2-low",
+   "kind": "sprite",
+   "slot": 16,
+   "parent": null,
+   "t": [
+    34.25,
+    1.25
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "badge"
+   ],
+   "size": [
+    0.5,
+    0.5
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": 2,
+   "order": -8
+  },
+  {
+   "name": "B:layer2-high",
+   "kind": "sprite",
+   "slot": 17,
+   "parent": null,
+   "t": [
+    34.75,
+    0.75
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "badge"
+   ],
+   "size": [
+    0.5,
+    0.5
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": 2,
+   "order": -7
+  },
+  {
+   "name": "C:plate",
+   "kind": "sprite",
+   "slot": 18,
+   "parent": null,
+   "t": [
+    80.0,
+    0.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "plate",
+    "board_c"
+   ],
+   "size": [
+    24.0,
+    14.0
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": -100,
+   "order": 0
+  },
+  {
+   "name": "C1:parent",
+   "kind": "group",
+   "slot": 19,
+   "parent": null,
+   "t": [
+    74.5,
+    2.25
+   ],
+   "r": 30.0,
+   "s": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "name": "C1",
+   "kind": "map",
+   "slot": 20,
+   "parent": "C1:parent",
+   "t": [
+    -1.5,
+    -1.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    3,
+    2
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY00000000000000003H",
+     "rows": [
+      "ABC",
+      "DEF"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "rotation"
+    }
+   ]
+  },
+  {
+   "name": "C:over-c1",
+   "kind": "sprite",
+   "slot": 21,
+   "parent": null,
+   "t": [
+    75.5,
+    2.75
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "badge"
+   ],
+   "size": [
+    1.0,
+    1.0
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": 0,
+   "order": 0
+  },
+  {
+   "name": "C:under-c2",
+   "kind": "sprite",
+   "slot": 22,
+   "parent": null,
+   "t": [
+    81.75,
+    2.25
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "texture": [
+    "badge"
+   ],
+   "size": [
+    1.0,
+    1.0
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "layer": 0,
+   "order": 0
+  },
+  {
+   "name": "C2",
+   "kind": "map",
+   "slot": 23,
+   "parent": null,
+   "t": [
+    81.5,
+    1.25
+   ],
+   "r": 0.0,
+   "s": [
+    -1.0,
+    1.0
+   ],
+   "size": [
+    3,
+    2
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY00000000000000003J",
+     "rows": [
+      "ABC",
+      "DEF"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "reflect-x"
+    }
+   ]
+  },
+  {
+   "name": "C3:parent",
+   "kind": "group",
+   "slot": 24,
+   "parent": null,
+   "t": [
+    85.5,
+    2.25
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    -1.0
+   ]
+  },
+  {
+   "name": "C3",
+   "kind": "map",
+   "slot": 25,
+   "parent": "C3:parent",
+   "t": [
+    -1.5,
+    -1.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    3,
+    2
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY00000000000000003K",
+     "rows": [
+      "ABC",
+      "DEF"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "reflect-y"
+    }
+   ]
+  },
+  {
+   "name": "C4",
+   "kind": "map",
+   "slot": 26,
+   "parent": null,
+   "t": [
+    73.0,
+    -3.0
+   ],
+   "r": 15.0,
+   "s": [
+    1.25,
+    0.6
+   ],
+   "size": [
+    3,
+    2
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY00000000000000003M",
+     "rows": [
+      "GHT",
+      "WKX"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "scale+rotation"
+    }
+   ]
+  },
+  {
+   "name": "C5:parent",
+   "kind": "group",
+   "slot": 27,
+   "parent": null,
+   "t": [
+    80.0,
+    -3.25
+   ],
+   "r": 0.0,
+   "s": [
+    1.3,
+    0.8
+   ]
+  },
+  {
+   "name": "C5",
+   "kind": "map",
+   "slot": 28,
+   "parent": "C5:parent",
+   "t": [
+    -0.2,
+    0.0
+   ],
+   "r": 40.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    2,
+    2
+   ],
+   "cell": [
+    1.0,
+    1.0
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY00000000000000003N",
+     "rows": [
+      "GH",
+      "TE"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "shear"
+    }
+   ]
+  },
+  {
+   "name": "C6:parent",
+   "kind": "group",
+   "slot": 29,
+   "parent": null,
+   "t": [
+    83.0,
+    -3.5
+   ],
+   "r": 0.0,
+   "s": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "name": "C6",
+   "kind": "map",
+   "slot": 30,
+   "parent": "C6:parent",
+   "t": [
+    0.5,
+    0.25
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "size": [
+    2,
+    2
+   ],
+   "cell": [
+    0.5,
+    0.5
+   ],
+   "layers": [
+    {
+     "id": "01JA39KY00000000000000003P",
+     "rows": [
+      "AB",
+      "CD"
+     ],
+     "layer": 0,
+     "order": 0,
+     "label": "inherited"
+    }
+   ]
+  },
+  {
+   "name": "camera:pp-A",
+   "kind": "camera",
+   "slot": 31,
+   "parent": null,
+   "t": [
+    0.0,
+    0.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "camera": "pp-A"
+  },
+  {
+   "name": "camera:of-A",
+   "kind": "camera",
+   "slot": 32,
+   "parent": null,
+   "t": [
+    0.1037,
+    -0.0491
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "camera": "of-A"
+  },
+  {
+   "name": "camera:pp-B",
+   "kind": "camera",
+   "slot": 33,
+   "parent": null,
+   "t": [
+    40.0,
+    0.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "camera": "pp-B"
+  },
+  {
+   "name": "camera:of-B",
+   "kind": "camera",
+   "slot": 34,
+   "parent": null,
+   "t": [
+    40.1037,
+    -0.0491
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "camera": "of-B"
+  },
+  {
+   "name": "camera:pp-C",
+   "kind": "camera",
+   "slot": 35,
+   "parent": null,
+   "t": [
+    80.0,
+    0.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "camera": "pp-C"
+  },
+  {
+   "name": "camera:of-C",
+   "kind": "camera",
+   "slot": 36,
+   "parent": null,
+   "t": [
+    80.1037,
+    -0.0491
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "camera": "of-C"
+  },
+  {
+   "name": "camera:o3-C",
+   "kind": "camera",
+   "slot": 37,
+   "parent": null,
+   "t": [
+    80.0,
+    0.0
+   ],
+   "r": 0.0,
+   "s": [
+    1.0,
+    1.0
+   ],
+   "camera": "o3-C"
+  }
+ ],
+ "cameras": {
+  "pp-A": {
+   "board": "A",
+   "t": [
+    0.0,
+    0.0
+   ],
+   "projection": {
+    "kind": "pixel_perfect",
+    "pixels_per_unit": 16,
+    "reference_resolution": [
+     320,
+     180
+    ]
+   }
+  },
+  "of-A": {
+   "board": "A",
+   "t": [
+    0.1037,
+    -0.0491
+   ],
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 9.0
+   }
+  },
+  "pp-B": {
+   "board": "B",
+   "t": [
+    40.0,
+    0.0
+   ],
+   "projection": {
+    "kind": "pixel_perfect",
+    "pixels_per_unit": 16,
+    "reference_resolution": [
+     320,
+     180
+    ]
+   }
+  },
+  "of-B": {
+   "board": "B",
+   "t": [
+    40.1037,
+    -0.0491
+   ],
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 9.0
+   }
+  },
+  "pp-C": {
+   "board": "C",
+   "t": [
+    80.0,
+    0.0
+   ],
+   "projection": {
+    "kind": "pixel_perfect",
+    "pixels_per_unit": 16,
+    "reference_resolution": [
+     320,
+     180
+    ]
+   }
+  },
+  "of-C": {
+   "board": "C",
+   "t": [
+    80.1037,
+    -0.0491
+   ],
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 9.0
+   }
+  },
+  "o3-C": {
+   "board": "C",
+   "t": [
+    80.0,
+    0.0
+   ],
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 11.25
+   }
+  }
+ },
+ "views": {
+  "pp1-A": [
+   "pp-A",
+   [
+    320,
+    180
+   ]
+  ],
+  "pp3-A": [
+   "pp-A",
+   [
+    960,
+    540
+   ]
+  ],
+  "of25-A": [
+   "of-A",
+   [
+    640,
+    360
+   ]
+  ],
+  "pp1-B": [
+   "pp-B",
+   [
+    320,
+    180
+   ]
+  ],
+  "pp3-B": [
+   "pp-B",
+   [
+    960,
+    540
+   ]
+  ],
+  "of25-B": [
+   "of-B",
+   [
+    640,
+    360
+   ]
+  ],
+  "pp1-C": [
+   "pp-C",
+   [
+    320,
+    180
+   ]
+  ],
+  "pp3-C": [
+   "pp-C",
+   [
+    960,
+    540
+   ]
+  ],
+  "of25-C": [
+   "of-C",
+   [
+    640,
+    360
+   ]
+  ],
+  "o3-C": [
+   "o3-C",
+   [
+    960,
+    540
+   ]
+  ]
+ },
+ "ids": {
+  "A:plate": "01JA39EN000000000000010000",
+  "A1": "01JA39EN000000000000020000",
+  "A2": "01JA39EN000000000000030000",
+  "A3": "01JA39EN000000000000040000",
+  "A4": "01JA39EN000000000000050000",
+  "A5": "01JA39EN000000000000060000",
+  "A6": "01JA39EN000000000000070000",
+  "A7": "01JA39EN000000000000080000",
+  "B:plate": "01JA39EN000000000000090000",
+  "B:below": "01JA39EN0000000000000A0000",
+  "B1": "01JA39EN0000000000000B0000",
+  "B:tie-after": "01JA39EN0000000000000C0000",
+  "B2": "01JA39EN0000000000000D0000",
+  "B:order5": "01JA39EN0000000000000E0000",
+  "B:layer1": "01JA39EN0000000000000F0000",
+  "B:layer2-low": "01JA39EN0000000000000G0000",
+  "B:layer2-high": "01JA39EN0000000000000H0000",
+  "C:plate": "01JA39EN0000000000000J0000",
+  "C1:parent": "01JA39EN0000000000000K0000",
+  "C1": "01JA39EN0000000000000M0000",
+  "C:over-c1": "01JA39EN0000000000000N0000",
+  "C:under-c2": "01JA39EN0000000000000P0000",
+  "C2": "01JA39EN0000000000000Q0000",
+  "C3:parent": "01JA39EN0000000000000R0000",
+  "C3": "01JA39EN0000000000000S0000",
+  "C4": "01JA39EN0000000000000T0000",
+  "C5:parent": "01JA39EN0000000000000V0000",
+  "C5": "01JA39EN0000000000000W0000",
+  "C6:parent": "01JA39EN0000000000000X0000",
+  "C6": "01JA39EN0000000000000Y0000",
+  "camera:pp-A": "01JA39EN0000000000000Z0000",
+  "camera:of-A": "01JA39EN000000000000100000",
+  "camera:pp-B": "01JA39EN000000000000110000",
+  "camera:of-B": "01JA39EN000000000000120000",
+  "camera:pp-C": "01JA39EN000000000000130000",
+  "camera:of-C": "01JA39EN000000000000140000",
+  "camera:o3-C": "01JA39EN000000000000150000"
+ }
+}

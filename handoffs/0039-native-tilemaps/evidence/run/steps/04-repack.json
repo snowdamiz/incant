@@ -1,0 +1,291 @@
+{
+ "action": "repack",
+ "authored_before": {
+  "tile.incant.json": "2dab5f8bb526290e52ac8093e6e1db55d5964ffebf94fdf28c73868d924890a9",
+  "tile.incant.journal.jsonl": "2166019e215603c87499e66c848bc4eaa4006d952d926cd54e56fce3dbb6c9f9"
+ },
+ "fingerprints_before": {
+  "01M4MFBBDJ4HRCCCX98FBM0VC9": "135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30",
+  "01M4MFBBF7B106FG5D1C5NTMPP": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+  "01M4MFBBHFZVCMVC4GR6MN2S4N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+ },
+ "cache_before": [
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2"
+ ],
+ "import": {
+  "source": "art/tiles.atlas.json",
+  "usage": null,
+  "exit": 0,
+  "stderr": "",
+  "authored_unchanged": false,
+  "new_cache_files": [
+   "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/220f2892bd94748aafbb8b4d1e80b9914563251d81d55d0f60d4b15c2cebe60f.ktx2",
+   "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f.json"
+  ],
+  "asset": {
+   "id": "01M4MFBBDJ4HRCCCX98FBM0VC9",
+   "import_settings": {
+    "type": "texture",
+    "usage": "color"
+   },
+   "kind": "texture",
+   "name": "tiles.atlas",
+   "path": "art/tiles.atlas.json",
+   "sha256": "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f"
+  },
+  "changed": true,
+  "cache_hit": false,
+  "details": {
+   "atlas": {
+    "frames": {
+     "01JA39FR000000000000000001": {
+      "name": "A",
+      "region": [
+       45,
+       46,
+       8,
+       8
+      ]
+     },
+     "01JA39FR000000000000000002": {
+      "name": "B",
+      "region": [
+       19,
+       44,
+       12,
+       10
+      ]
+     },
+     "01JA39FR000000000000000003": {
+      "name": "C",
+      "region": [
+       54,
+       28,
+       10,
+       14
+      ]
+     },
+     "01JA39FR000000000000000004": {
+      "name": "D",
+      "region": [
+       76,
+       2,
+       16,
+       16
+      ]
+     },
+     "01JA39FR000000000000000005": {
+      "name": "E",
+      "region": [
+       35,
+       44,
+       6,
+       9
+      ]
+     },
+     "01JA39FR000000000000000006": {
+      "name": "F",
+      "region": [
+       30,
+       28,
+       20,
+       12
+      ]
+     },
+     "01JA39FR000000000000000007": {
+      "name": "G",
+      "region": [
+       84,
+       42,
+       7,
+       11
+      ]
+     },
+     "01JA39FR000000000000000008": {
+      "name": "H",
+      "region": [
+       2,
+       40,
+       13,
+       7
+      ]
+     },
+     "01JA39FR000000000000000009": {
+      "name": "T",
+      "region": [
+       68,
+       42,
+       12,
+       12
+      ]
+     },
+     "01JA39FR00000000000000000A": {
+      "name": "X",
+      "region": [
+       76,
+       22,
+       16,
+       16
+      ]
+     },
+     "01JA39FR00000000000000000B": {
+      "name": "K",
+      "region": [
+       57,
+       46,
+       4,
+       4
+      ]
+     },
+     "01JA39FR00000000000000000C": {
+      "name": "W",
+      "region": [
+       2,
+       28,
+       24,
+       8
+      ]
+     },
+     "01JA39FR000000000000000033": {
+      "name": "ballast",
+      "region": [
+       2,
+       2,
+       70,
+       22
+      ]
+     }
+    },
+    "id": "01JA39AT000000000000000001",
+    "padding": 2,
+    "size": [
+     94,
+     56
+    ]
+   },
+   "dependencies": [
+    {
+     "path": "art/tiles.atlas.json",
+     "sha256": "05f3d9cbc53a9ae60460f82ff2a2c00f6a89cafe7704f4bb3f7fea788934a728"
+    },
+    {
+     "path": "art/ballast.png",
+     "sha256": "cf6fd5b3163a1da0682bdf9a7664c6814cfb4100df373971e68a18f27f5d7c0a"
+    },
+    {
+     "path": "art/tiles.png",
+     "sha256": "d73c0724eddbeaa116e1fce03956a45b0a2b986e7c8a918d5c5303a90cc12191"
+    }
+   ],
+   "format": "rgba8_srgb",
+   "height": 56,
+   "mip_levels": 7,
+   "usage": "color",
+   "width": 94
+  },
+  "revision": 8,
+  "diagnostics": []
+ },
+ "validate": {
+  "exit": 0,
+  "reply": {
+   "diagnostics": [],
+   "project_id": "01M4MFBBBR67WFZJQP9Y5Q6S3X",
+   "schema_version": 1,
+   "valid": true
+  },
+  "stderr": ""
+ },
+ "authored_after": {
+  "tile.incant.json": "2434688731ed198e6162d4d4b85dda00bd45f578b4eabac7a3baac634facfa1a",
+  "tile.incant.journal.jsonl": "509e7d78c9f22ee020f01c805c4eee49aea19ae227b539389826741543b66174"
+ },
+ "fingerprints_after": {
+  "01M4MFBBDJ4HRCCCX98FBM0VC9": "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f",
+  "01M4MFBBF7B106FG5D1C5NTMPP": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+  "01M4MFBBHFZVCMVC4GR6MN2S4N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+ },
+ "cache_after": [
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/220f2892bd94748aafbb8b4d1e80b9914563251d81d55d0f60d4b15c2cebe60f.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f.json"
+ ],
+ "history_after": [
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import tiles.atlas",
+   "id": "01M4MFBBDJAF2YDTY5K921ED6X"
+  },
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import plates",
+   "id": "01M4MFBBF75AHZ8SZ8CBRTTTD0"
+  },
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import badge",
+   "id": "01M4MFBBHFZPAP9GQ6RP505ZGH"
+  },
+  {
+   "actor": {
+    "actor": "editor",
+    "conversation_id": null,
+    "model": null,
+    "origin": "user"
+   },
+   "commands": 37,
+   "description": "Tilemap review scene s0 (handoff 0039)",
+   "id": "01M4MFBBMCTQWDVH325M497Z9A"
+  },
+  {
+   "actor": {
+    "actor": "editor",
+    "conversation_id": null,
+    "model": null,
+    "origin": "user"
+   },
+   "commands": 3,
+   "description": "Tile review s1: cells, map size and layer order (handoff 0039)",
+   "id": "01M4MFMR9H0Y6W811859ESZMSH"
+  },
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import tiles.atlas",
+   "id": "01M4MFNH487T31178XF7BWXBH8"
+  }
+ ]
+}
