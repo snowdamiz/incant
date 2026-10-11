@@ -1001,8 +1001,29 @@ numeric/structural imports over the native world. Thirteen real Wasm regressions
 processes pass. Shipping graphs exclude Wasmtime/Cranelift even with the
 development feature enabled; feature-disabled mobile/Wasm compilation passes.
 [Evidence](docs/spikes/development-wasm-host.md). The ABI deliberately copies
-columns and retains bounded numeric undo. Shipping wasm2c, browser/mobile
-execution, complete SDK conformance and device/performance gates remain open.
+columns and retains bounded numeric undo. Browser/mobile execution, complete
+SDK conformance and device/performance gates remain open. The first static
+native path is recorded separately below.
+
+## Static native Wasm module execution
+
+The settled wasm2c path now has a real trusted Rust→Wasm→metered C→shipping
+executable slice sharing the development host's copied native capability ABI.
+135 scoped release tests/doctests pass, including the original 13 Wasmtime
+cases, static traps/quotas/rollback and exact state-stream parity. Scoped Clippy,
+the combined CI helper, dependency guards and actual iOS C/Rust compilation pass.
+A fresh 2,780,816-byte macOS player passes three exact-motion processes and 18
+rejections after temporary sources/Wasm/generated C/tools/build storage are
+deleted; separately packaged dSYM identity matches. [Evidence](docs/spikes/shipping-wasm2c.md).
+
+Fuel, memory/table storage and typed imports are bounded; growth is explicitly
+unsupported in this initial static subset. There is no runtime compiler/JIT,
+arbitrary native-module loader or engine-agent capability. macOS/Linux CI is
+wired but hosted results remain pending; Windows static/MSVC is refused while
+its full development coverage remains. iOS compile-only evidence is not a
+signed device run. Full SDK/export migration, deterministic arithmetic,
+browser/mobile execution and device/performance gates remain open.
+
 ## Source-free native offscreen GPU player (2026-10-10)
 
 The existing game player now has an explicit optional GPU mode using the real retained GPU host, preserving default nonvisual and explicit CPU modes. A fresh 7,388,160-byte shipping executable passes 28 launches after project/script/source/build removal on Apple M5 Pro / Metal, macOS 26.6: 120 accepted frames per successful run, changed first/final numerical readbacks, exact replay and matching physics/PCM/CPU poses. Scoped 34 ordinary + 3 actual GPU regressions, all three player Clippy configurations, 40 tools tests and graph/flag/symbol audits pass. This does not approve appearance, native surfaces, v5 sprites, offline shaders, phone/performance or phase gates. [Evidence](docs/spikes/native-game-gpu-player.md).

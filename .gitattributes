@@ -3,3 +3,6 @@
 * text=auto eol=lf
 *.bat text eol=crlf
 *.cmd text eol=crlf
+# Preserve the pinned upstream header byte-for-byte, including three comment
+# lines ending in spaces. Local code keeps the normal whitespace checks.
+third_party/wabt/wasm-rt.h whitespace=-blank-at-eol

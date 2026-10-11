@@ -13,6 +13,4 @@ mod bounds;
 #[cfg(feature = "wasmtime-host")]
 mod host;
 #[cfg(feature = "wasmtime-host")]
-mod transaction;
-#[cfg(feature = "wasmtime-host")]
 pub use host::{DevModuleHost, ModuleError};
