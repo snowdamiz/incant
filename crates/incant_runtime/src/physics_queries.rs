@@ -27,6 +27,7 @@ pub enum QueryError {
 /// queued structural commands. No ECS pointer or live solver handle escapes.
 #[derive(Clone)]
 pub struct NativeQueries {
+    localization: Rc<RefCell<Option<crate::NativeLocalization>>>,
     solver: Rc<RefCell<Option<PhysicsRuntime<StableId>>>>,
     planar: Rc<RefCell<Option<incant_physics_2d_runtime::PhysicsWorld2D>>>,
     navigation: Rc<RefCell<Option<crate::navigation_runtime::NavigationRuntime>>>,
@@ -34,6 +35,56 @@ pub struct NativeQueries {
     used: bool,
 }
 impl NativeQueries {
+    pub fn localize(
+        &self,
+        request: &crate::LocalizeRequest,
+    ) -> Result<crate::LocalizedText, QueryError> {
+        Ok(self
+            .localization
+            .borrow()
+            .as_ref()
+            .ok_or(QueryError::Expired)?
+            .localize(request)?)
+    }
+    pub fn locale(&self) -> Result<crate::LocaleSettings, QueryError> {
+        Ok(self
+            .localization
+            .borrow()
+            .as_ref()
+            .ok_or(QueryError::Expired)?
+            .settings()
+            .clone())
+    }
+    pub fn localization_report(
+        &self,
+        request: crate::LocalizationReportRequest,
+    ) -> Result<crate::LocalizationReport, QueryError> {
+        Ok(self
+            .localization
+            .borrow()
+            .as_ref()
+            .ok_or(QueryError::Expired)?
+            .report(request)?)
+    }
+    pub fn format_number(&self, value: f64) -> Result<String, QueryError> {
+        let data = self.localization.borrow();
+        let locale = &data.as_ref().ok_or(QueryError::Expired)?.settings().locale;
+        Ok(
+            incant_localization::format_number(locale, value)
+                .map_err(crate::localization::error)?,
+        )
+    }
+    pub fn format_date(
+        &self,
+        value: &crate::CalendarDate,
+        length: crate::DateLength,
+    ) -> Result<String, QueryError> {
+        let data = self.localization.borrow();
+        let locale = &data.as_ref().ok_or(QueryError::Expired)?.settings().locale;
+        Ok(incant_localization::format_date(locale, value, length)
+            .map_err(crate::localization::error)?)
+    }
+
     /// Owned world-space path from the committed mesh, including explicit
     /// off-mesh traversal metadata. No movement or rebuild is performed.
     pub fn navigation_path(
@@ -128,6 +179,7 @@ struct Restore<'a> {
 }
 impl Drop for Restore<'_> {
     fn drop(&mut self) {
+        self.queries.localization.borrow_mut().take();
         // Only owned values leave queries; no caller can retain a RefCell loan.
         // Empty each retained capability before restoring its owned native state.
         if let Some(cache) = self.queries.navigation.borrow_mut().take() {
@@ -144,7 +196,7 @@ impl Drop for Restore<'_> {
 
 impl NativeWorld {
     /// Lend numeric ECS columns and read-only committed physics/navigation synchronously.
-    /// Moving ownership costs three bounded allocations, not a world/solver/cache clone.
+    /// Moving ownership costs four bounded allocations, not a world/solver/cache clone.
     /// The private guard exposes no world methods during the temporary move.
     /// NumericColumns validation and cleanup use only ECS data/hierarchy; they
     /// must not access the temporarily detached solvers/cache. Ownership is
@@ -155,6 +207,7 @@ impl NativeWorld {
     ) -> Result<R, RuntimeError> {
         self.ensure_navigation_current()?;
         let queries = NativeQueries {
+            localization: Rc::new(RefCell::new(Some(self.localization.clone()))),
             solver: Rc::new(RefCell::new(None)),
             planar: Rc::new(RefCell::new(None)),
             navigation: Rc::new(RefCell::new(None)),

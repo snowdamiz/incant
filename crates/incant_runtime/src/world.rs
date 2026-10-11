@@ -64,6 +64,7 @@ pub enum RuntimeError {
 /// A disposable Bevy world; no project, command bus, authoring validator or
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
+    pub(crate) localization: crate::NativeLocalization,
     pub(crate) navigation: crate::navigation_runtime::NavigationRuntime,
     pub(crate) navigation_used: bool,
     pub(crate) identity: crate::WorldIdentity,
@@ -150,6 +151,7 @@ impl NativeWorld {
         schedule.add_systems((integrate, publish_globals, crate::flipbook::advance).chain());
         let flipbook_query = world.query::<(&Identity, &crate::flipbook::Playback)>();
         let mut result = Self {
+            localization: scene.localization,
             navigation_used: !navigation.nodes.is_empty(),
             navigation,
             identity: crate::WorldIdentity::new(),

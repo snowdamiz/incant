@@ -17,6 +17,7 @@ pub struct CookedEntity {
 /// entire scene before any running ECS world can be published.
 #[derive(Debug, Clone)]
 pub struct CookedScene {
+    pub(crate) localization: crate::NativeLocalization,
     pub(crate) id: StableId,
     pub(crate) tick_rate: u32,
     pub(crate) entities: Vec<CookedEntity>,
@@ -34,6 +35,8 @@ pub const MAX_ENTITIES: usize = 1_000_000;
 
 #[derive(Debug, Error, PartialEq)]
 pub enum SceneError {
+    #[error("native localization: {0}")]
+    Localization(String),
     #[error("native navigation: {0}")]
     Navigation(String),
     #[error("invalid scene data: {0}")]
@@ -76,6 +79,7 @@ impl CookedScene {
                 .map(|node| (indices[&node.id], node.parent))
                 .collect();
         Ok(Self {
+            localization: Default::default(),
             id,
             tick_rate,
             entities,
@@ -140,6 +144,7 @@ impl CookedScene {
         crate::audio::validate(&audio, |id| ids.contains(&id))?;
         audio.sort_unstable_by_key(|node| node.entity);
         let size = 72
+            + self.localization_bytes()
             + self.entities.len() * 128
             + 16
             + crate::navigation_binary::size(&self.navigation)
@@ -186,6 +191,7 @@ impl CookedScene {
         self.visual_assets = assets;
         self.spatial = nodes;
         let size = 72
+            + self.localization_bytes()
             + self.entities.len() * 128
             + 16
             + crate::navigation_binary::size(&self.navigation)
@@ -293,6 +299,7 @@ impl CookedScene {
             ));
         }
         let size = 72
+            + self.localization_bytes()
             + self.entities.len() * 128
             + 20
             + crate::navigation_binary::size(&self.navigation)
@@ -316,6 +323,25 @@ impl CookedScene {
             return Err(SceneError::Invalid("file size"));
         }
         Ok(())
+    }
+
+    fn localization_bytes(&self) -> usize {
+        if self.localization.is_default() {
+            0
+        } else {
+            crate::localization_binary::size(&self.localization) + 8
+        }
+    }
+    pub fn with_localization(
+        mut self,
+        localization: crate::NativeLocalization,
+    ) -> Result<Self, SceneError> {
+        self.localization = localization;
+        self.validate_physics_2d()?;
+        Ok(self)
+    }
+    pub fn localization(&self) -> &crate::NativeLocalization {
+        &self.localization
     }
 
     pub fn with_navigation(

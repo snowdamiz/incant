@@ -1,0 +1,71 @@
+{
+  "observed_at": "2026-10-11T18:24:03.076197+00:00",
+  "scope": "Narrow fast development checks, not reduced full release or compilation wall time",
+  "runs": [
+    {
+      "pr": 89,
+      "head": "c324a95e828a5d1944b0d27b47089a7fd45ae829",
+      "merge": "f8955bec6f0d7bcbd54f30fdbc5b08226e3c326e",
+      "job_url": "https://github.com/snowdamiz/incant/actions/runs/38160675874/job/114532736194",
+      "run_id": 38160675874,
+      "workflow_created_at": "2026-10-11T17:41:07Z",
+      "job_started_at": "2026-10-11T17:41:09Z",
+      "job_completed_at": "2026-10-11T17:43:15Z",
+      "queue_seconds": 2.0,
+      "execution_seconds": 126.0,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "pr": 90,
+      "head": "c828f026b40a86fa0d25272512c3888933d62f26",
+      "merge": "5554e7251a84b57521801986c45c8727119db5d8",
+      "job_url": "https://github.com/snowdamiz/incant/actions/runs/38161336532/job/114534703389",
+      "run_id": 38161336532,
+      "workflow_created_at": "2026-10-11T17:50:46Z",
+      "job_started_at": "2026-10-11T17:50:48Z",
+      "job_completed_at": "2026-10-11T17:53:01Z",
+      "queue_seconds": 2.0,
+      "execution_seconds": 133.0,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "pr": 91,
+      "head": "bd460247e2aa67a47c40c568d997805b3fbc91e8",
+      "merge": "c8b05fb18fe17d9b2df737d872a333997d227762",
+      "job_url": "https://github.com/snowdamiz/incant/actions/runs/38162197465/job/114537270676",
+      "run_id": 38162197465,
+      "workflow_created_at": "2026-10-11T18:03:20Z",
+      "job_started_at": "2026-10-11T18:03:21Z",
+      "job_completed_at": "2026-10-11T18:05:10Z",
+      "queue_seconds": 1.0,
+      "execution_seconds": 109.0,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "pr": 92,
+      "head": "3ba3f703137edcbdda1216490788a5aefcf78cb8",
+      "merge": "22f30bd36fd744c7298787ea9a46681548b92b69",
+      "job_url": "https://github.com/snowdamiz/incant/actions/runs/38162922751/job/114539429310",
+      "run_id": 38162922751,
+      "workflow_created_at": "2026-10-11T18:13:43Z",
+      "job_started_at": "2026-10-11T18:13:45Z",
+      "job_completed_at": "2026-10-11T18:15:54Z",
+      "queue_seconds": 2.0,
+      "execution_seconds": 129.0,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "pr": 93,
+      "head": "8b4120dbc80004ffe5d260926b62a40f855424bd",
+      "merge": "100e723d2f655fd120b680191acd82c1ad6a1d4c",
+      "job_url": "https://github.com/snowdamiz/incant/actions/runs/38163306131/job/114540568148",
+      "run_id": 38163306131,
+      "workflow_created_at": "2026-10-11T18:19:13Z",
+      "job_started_at": "2026-10-11T18:19:15Z",
+      "job_completed_at": "2026-10-11T18:21:23Z",
+      "queue_seconds": 2.0,
+      "execution_seconds": 128.0,
+      "conclusion": "SUCCESS"
+    }
+  ]
+}

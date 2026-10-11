@@ -498,6 +498,18 @@ fn run() -> Result<()> {
                     json!(schemars::schema_for!(incant_localization::LocalizedText)),
                 ),
                 (
+                    "LocalizationReportRequest".into(),
+                    json!(schemars::schema_for!(
+                        incant_localization::LocalizationReportRequest
+                    )),
+                ),
+                (
+                    "LocalizationReport".into(),
+                    json!(schemars::schema_for!(
+                        incant_localization::LocalizationReport
+                    )),
+                ),
+                (
                     "MissingString".into(),
                     json!(schemars::schema_for!(incant_localization::MissingString)),
                 ),

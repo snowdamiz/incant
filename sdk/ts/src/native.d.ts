@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath } from './generated';
+import type { LocaleSettings, LocalizeRequest, LocalizedText, CalendarDate, DateLength, LocalizationReportRequest, LocalizationReport, InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -44,6 +44,10 @@ export interface NativeChunk {
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Buffered runtime locale change; visible on the next accepted update. At
+   * most 64 per tick within the shared structural quota. The entire numeric,
+   * locale and structural batch rolls back on refusal. Catalog is immutable. */
+  setLocale(settings: LocaleSettings): void;
   /** Desired playing state for an existing source. False pauses its retained
    * cursor; true starts an unstarted source or resumes a paused one. Unchanged
    * true does not replay an ended voice. False then true needs separate sync
@@ -139,6 +143,22 @@ export interface NativeFlipbooks {
   readonly frames: Uint32Array;
   readonly flags: Uint32Array;
 }
+/** Read-only committed locale/catalog. Each call costs four of the shared
+ * 1,024 native query units, at most 64 localization calls per whole tick.
+ * Arguments together are bounded to 64 KiB and returned text/metadata to 256 KiB.
+ * Inputs/results are owned typed values. Active errors poison the whole tick,
+ * even when caught; retained methods never reactivate. ICU formatters use
+ * compiled data; this API neither reads source files nor renders fonts. */
+export interface NativeLocalization {
+  localize(request: LocalizeRequest): LocalizedText;
+  locale(): LocaleSettings;
+  formatNumber(value: number): string;
+  formatDate(value: CalendarDate, length?: DateLength): string;
+  /** Prepared coverage of declared keys, in canonical table/key order. Offset
+   * 0..4096; limit 1..128 (default 128). Unknown runtime keys are returned by
+   * localize().missing. No report accumulates mutable per-tick diagnostics. */
+  report(request?: LocalizationReportRequest): LocalizationReport;
+}
 export interface NativeContext {
   /** Authored attachments for this source, sorted by stable entity ID. The array
    * and initial props are deeply frozen. One callback per nonempty source runs
@@ -154,6 +174,7 @@ export interface NativeContext {
   readonly input: NativeInput;
   readonly physics: NativePhysics;
   readonly navigation: NativeNavigation;
+  readonly localization: NativeLocalization;
   readonly clock: NativeClock;
   /** Functions expire after this update. Invalid/caught commands reject numeric,
    * structural and scheduling changes together and permanently fail the host. */

@@ -25,6 +25,9 @@ struct State {
     characters: usize,
     navigation: usize,
     expansions: u32,
+    localization: usize,
+    argument_bytes: usize,
+    output_bytes: usize,
     failure: Option<ScriptError>,
 }
 pub(crate) struct TickQueries {
@@ -74,6 +77,18 @@ impl TickQueries {
             &[("findPath", Kind::Navigation), ("findGridPath", Kind::Grid)],
         )
     }
+    pub fn expose_localization<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
+        self.expose_methods(
+            ctx,
+            &[
+                ("localize", Kind::Localize),
+                ("locale", Kind::Locale),
+                ("formatNumber", Kind::Number),
+                ("formatDate", Kind::Date),
+                ("report", Kind::Report),
+            ],
+        )
+    }
     fn expose_methods<'js>(
         &self,
         ctx: &Ctx<'js>,
@@ -87,13 +102,19 @@ impl TickQueries {
             let deadline = Arc::clone(&self.deadline);
             let function =
                 Function::new(ctx.clone(), move |ctx: Ctx<'js>, args: Rest<Value<'js>>| {
+                    let localized = matches!(
+                        kind,
+                        Kind::Localize | Kind::Locale | Kind::Number | Kind::Date | Kind::Report
+                    );
+                    let cost = if localized { 4 } else { 1 };
                     let rejection = {
                         let mut state = state.borrow_mut();
                         if !state.active {
                             Some("native queries belong to their active tick only")
                         } else if state.failure.is_some() {
                             Some("native query capability already failed")
-                        } else if state.calls == MAX_PHYSICS_QUERIES
+                        } else if state.calls > MAX_PHYSICS_QUERIES - cost
+                            || (localized && state.localization == 64)
                             || (matches!(kind, Kind::Character)
                                 && state.characters == MAX_CHARACTER_QUERIES)
                             || (matches!(kind, Kind::Navigation | Kind::Grid)
@@ -102,7 +123,10 @@ impl TickQueries {
                             state.failure = Some(ScriptError::InputLimit);
                             Some("native query limit exceeded")
                         } else {
-                            state.calls += 1;
+                            state.calls += cost;
+                            if localized {
+                                state.localization += 1;
+                            }
                             if matches!(kind, Kind::Navigation | Kind::Grid) {
                                 state.navigation += 1;
                             }
@@ -133,6 +157,18 @@ impl TickQueries {
                             "native query capability failed",
                         ));
                     }
+                    let input_bytes = crate::localization_values::input_bytes(&request);
+                    {
+                        let mut state = state.borrow_mut();
+                        if input_bytes > 65_536 - state.argument_bytes {
+                            state.failure = Some(ScriptError::InputLimit);
+                            return Err(Exception::throw_type(
+                                &ctx,
+                                "localization argument budget exceeded",
+                            ));
+                        }
+                        state.argument_bytes += input_bytes;
+                    }
                     // Charge requested maximum work, including misses, before entering
                     // native search. Nested getters have already consumed their share.
                     let expansions = match &request {
@@ -160,6 +196,19 @@ impl TickQueries {
                     }
                     // No JS runs while a solver/cache is borrowed. Results are owned.
                     let result = match match request {
+                        Request::Localize(request) => {
+                            queries.localize(&request).map(ResultData::Localized)
+                        }
+                        Request::Locale => queries.locale().map(ResultData::Locale),
+                        Request::Number(value) => {
+                            queries.format_number(value).map(ResultData::Text)
+                        }
+                        Request::Date(value, length) => {
+                            queries.format_date(&value, length).map(ResultData::Text)
+                        }
+                        Request::Report(request) => {
+                            queries.localization_report(request).map(ResultData::Report)
+                        }
                         Request::Navigation(entity, request) => queries
                             .navigation_path(entity, &request)
                             .map(ResultData::Navigation),
@@ -195,6 +244,18 @@ impl TickQueries {
                             &ctx,
                             "native query deadline exceeded",
                         ));
+                    }
+                    {
+                        let bytes = crate::localization_values::output_bytes(&result);
+                        let mut state = state.borrow_mut();
+                        if bytes > 262_144 - state.output_bytes {
+                            state.failure = Some(ScriptError::InputLimit);
+                            return Err(Exception::throw_type(
+                                &ctx,
+                                "localization output budget exceeded",
+                            ));
+                        }
+                        state.output_bytes += bytes;
                     }
                     match query_values::materialize(&ctx, result) {
                         Ok(result) => Ok(result),

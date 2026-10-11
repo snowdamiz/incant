@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "limit": {
+      "default": 128,
+      "format": "uint32",
+      "maximum": 128,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "offset": {
+      "default": 0,
+      "format": "uint32",
+      "maximum": 4096,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "title": "LocalizationReportRequest",
+  "type": "object"
+}

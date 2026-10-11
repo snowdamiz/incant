@@ -206,7 +206,7 @@ fn exact_fraction_spatial_navigation_and_original_binding_survive_continuation()
     let origin = world.source_scene_fingerprint();
     step(&mut world, 17);
     let saved = world.save_bytes().unwrap();
-    assert_eq!(&saved[8..12], &2u32.to_le_bytes());
+    assert_eq!(&saved[8..12], &3u32.to_le_bytes());
     let mut restored = NativeWorld::from_save_bytes(&saved).unwrap();
     same(&world, &restored);
     assert_eq!(restored.source_scene_fingerprint(), origin);
@@ -385,7 +385,7 @@ fn checksum_valid_bad_sections_and_cursor_states_leave_live_state_untouched() {
     cases.push(missing);
     let mut duplicate = saved.clone();
     duplicate.extend(&saved[row..]);
-    duplicate[100..104].copy_from_slice(&2u32.to_le_bytes());
+    duplicate[100..104].copy_from_slice(&3u32.to_le_bytes());
     cases.push(duplicate);
     for mut bytes in cases {
         let size = bytes.len() - 64;
@@ -423,7 +423,7 @@ fn legacy_plain_saves_load_but_never_smuggle_spatial_or_solver_state() {
     );
     assert_eq!(extended.save_bytes().unwrap(), before);
     assert_eq!(world.tick(), 21);
-    assert_eq!(&world.save_bytes().unwrap()[8..12], &2u32.to_le_bytes());
+    assert_eq!(&world.save_bytes().unwrap()[8..12], &3u32.to_le_bytes());
     assert!(matches!(
         NativeWorld::from_save_bytes(&legacy(fixture())),
         Err(SaveError::NavigationUnsupported)
