@@ -56,3 +56,23 @@ scripts. Bounded source-content editing with atomic recovery and provenance,
 typechecking, native Play integration and the complete gameplay SDK remain
 separate work. No runtime path, phase gate, device or performance result is
 claimed by these functional checks.
+
+## Combined authored-native integration
+
+The scoped change was integrated with project-attached native TypeScript.
+115 command, agent and headless release tests across 35 groups and scoped
+all-target Clippy passed; two GPU tests were ignored. A rebuilt public CLI
+regenerated all 58 schemas identically; strict SDK/UI types and generator,
+formatting and conventions checks pass.
+
+A separate real two-process RPC exercise registers both source records and
+attaches three entities in one command transaction, then runs 20 native ticks
+and observes the expected X positions 2, 3 and 4. Play preserves the authoring
+document and revision. Undo returns to the initial project; Redo restores the
+complete registration/attachment transaction; a fresh process recovers that
+same revision and project from the journal. Restart creates a new tick-zero
+world. This used new engine-owned fixture files, with no direct mutation of an
+existing project. [Integration evidence](evidence/script-registration-native-play.json).
+
+The generated Rust SDK/color union and hosted checks remain separate integration
+work. Source-content transactions and complete script/game authoring remain open.
