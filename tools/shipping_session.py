@@ -35,12 +35,30 @@ def option(tokens, name):
 
 def target_commands(stderr, target, storage):
     result = []
-    for line in stderr.splitlines():
-        if 'Running `' not in line or '--crate-name ' not in line:
+    pending = ''
+    for raw in stderr.splitlines(keepends=True):
+        if 'Running `' in raw and not pending:
+            pending = raw.split('Running `', 1)[1]
+        elif pending:
+            pending += raw
+        else:
             continue
-        tokens = shlex.split(line.split('Running `', 1)[1].removesuffix('`'))
+        if not pending.rstrip().endswith('`'):
+            continue
+        try:
+            tokens = shlex.split(pending.rstrip()[:-1])
+        except ValueError:
+            continue  # Quoted package descriptions can contain newlines/backticks.
+        pending = ''
+        if '--crate-name' not in tokens:
+            continue
         if '--target' not in tokens:
             continue  # The host cooker legitimately has compiler support.
+        # Keep exact compiler arguments, excluding Cargo's multiline environment
+        # descriptions. Raw Cargo output is separately retained without rewriting.
+        start = tokens.index('--crate-name') - 1
+        require(start >= 0 and Path(tokens[start]).name == 'rustc', 'Unexpected compiler command')
+        line = f'Running `{shlex.join(tokens[start:])}`'
         require(option(tokens, '--target') == target, 'Unexpected target in shipping session')
         out_dir = Path(option(tokens, '--out-dir')).resolve()
         require(out_dir.is_relative_to(storage / target / 'shipping'), 'Target unit escaped session storage')
@@ -52,6 +70,7 @@ def target_commands(stderr, target, storage):
                        'extra_filename': next((tokens[i + 1].split('=', 1)[1]
                            for i, token in enumerate(tokens[:-1]) if token == '-C'
                            and tokens[i + 1].startswith('extra-filename=')), None)})
+    require(not pending, 'Incomplete Cargo command evidence')
     return result
 
 

@@ -92,6 +92,14 @@ class FreshShippingLedgerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Missing or ambiguous'):
             self.record(command=self.command.replace(f'--target {self.target} ', ''))
 
+    def test_multiline_package_description_preserves_target_command(self):
+        command = self.command.replace('Running `rustc',
+            "Running `CARGO_PKG_DESCRIPTION='Type-level numbers\nwith `inline` text' rustc")
+        lines = self.record(command=command)
+        self.assertEqual(len(lines), 1)
+        self.assertNotIn('CARGO_PKG_DESCRIPTION', lines[0])
+        self.assertIn('--crate-name incant_runtime', lines[0])
+
     def test_preexisting_storage_is_rejected_before_compiler_probe(self):
         with self.assertRaisesRegex(ValueError, 'must not preexist'):
             FreshSession(self.root, self.storage, self.root / 'missing-rustc', self.target, 'packed')
