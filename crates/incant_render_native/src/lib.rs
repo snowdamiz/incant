@@ -25,8 +25,8 @@ pub struct VisualCaches<'a> {
 pub enum NativeRenderError {
     #[error("spatial input belongs to a different native world")]
     DifferentWorld,
-    #[error("native tilemap {entity:?} has no renderer consumer yet")]
-    TilemapUnsupported { entity: StableId },
+    #[error("tilemap render binding failed: {0}")]
+    TilemapRender(incant_render_data::SceneError),
     #[error("tilemap requires a matching checked color atlas descriptor and cache")]
     TilemapBinding,
     #[error("tilemap frame {0:?} is absent from the checked atlas")]

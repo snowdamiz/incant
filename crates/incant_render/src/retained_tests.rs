@@ -14,6 +14,7 @@ fn node(id: &str) -> SceneNode {
         light: None,
         mesh: None,
         sprite: None,
+        tilemap: None,
         diagnostic: false,
     }
 }
@@ -229,4 +230,21 @@ fn retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings() 
         .1
         .layer += 1;
     assert!(retained.stage(input.input()).is_err());
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells() {
+    let (_, input, _) = super::sprite_tests::tile_fixture();
+    let renderer = Renderer::headless().unwrap();
+    let mut retained = renderer
+        .prepare_retained(input.input(), input.camera_label())
+        .unwrap();
+    retained.stage(input.input()).unwrap();
+    assert_eq!(
+        allocation::measured(|| for _ in 0..64 {
+            retained.stage(input.input()).unwrap();
+        }),
+        0
+    );
 }

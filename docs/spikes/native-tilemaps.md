@@ -1,8 +1,9 @@
 # Native tilemap data and collision preparation
 
-This slice adds typed tilemap authoring, native binary cooking, retained local
-placements and exact solid-cell collision preparation. Rendering and a Rapier2D
-consumer remain unimplemented and are refused explicitly. It adds no legacy
+This data slice adds typed tilemap authoring, native binary cooking, retained local
+placements and exact solid-cell collision preparation. Its original renderer refusal
+is superseded by the [retained tile rendering follow-up](native-tilemap-rendering.md).
+The Rapier2D simulation consumer remains unimplemented and is refused explicitly. It adds no legacy
 simulation, renderer, shader, painter or GUI-only mutation path.
 
 ## Data and bounds
@@ -25,7 +26,8 @@ same aggregate bounds. There are no new dependency versions or feature changes.
 Cell (0,0) begins at the entity's local origin; +x points right and +y points up.
 Cell dimensions determine local bounds. Atlas image rows remain top-down, and
 packing offsets or sprite pivots do not change grid or collision positions.
-This is a data contract; no tile appearance has been implemented or accepted.
+This is the data contract; separate rendered appearance acceptance is recorded
+with the tile rendering follow-up.
 
 ## Binary and retained boundaries
 
@@ -57,8 +59,8 @@ binary descriptor's ID/kind/recipe to a sealed cooked color atlas, resolves ever
 used frame and retains that exact asset version after source/cache deletion. Its
 single-asset decoded payload is limited to the existing 256 MiB bound (the reader
 may stage one bounded asset before the aggregate check). Recipe fingerprints are
-cache identities, not authentication. This binding does not grant tilemap
-support to the renderer.
+cache identities, not authentication. The rendering follow-up adds sealed `TilemapInput` construction through the
+same checked asset boundary.
 
 The existing import and cached-validation paths now protect Tilemap references
 alongside Sprite references. Diagnostics retain the structured sprite-reference
@@ -70,16 +72,17 @@ failed replacement, undo and redo use the same transaction path.
 
 ## Explicit unsupported behavior
 
-Native and authoring render adapters reject Tilemap. A native world with any
+The original data slice rejected Tilemap in both render adapters; that refusal is
+superseded by the rendering follow-up. A native world with any
 prepared solid-cell coverage rejects `step` before motion or tick publication;
 a maintained ID set avoids scanning every map per tick. Removing that capability
 through an accepted structural batch allows simulation again. Nonsolid maps may
-retain and move CPU data, but cannot render. Legacy Engine startup and sync share
+retain and move renderable data. Legacy Engine startup and sync share
 a capability refusal before changing the running world; static authoring
 transform inspection remains available.
 
 No arbitrary polygon/partial-cell shapes, per-cell collision properties,
-autotiling, multi-tileset layers, editor painting, GPU geometry, Rapier2D solver,
+autotiling, multi-tileset layers, editor painting, Rapier2D solver,
 shipping tilemap player or appearance/performance gate is claimed. Those require
 actual consumers of this data rather than another document-backed implementation.
 

@@ -142,7 +142,7 @@ fn checked_tile_atlas_bindings_survive_source_and_cache_removal_and_reject_wrong
     assert_eq!(prepared.placements().len(), 2);
 }
 #[test]
-fn startup_and_rebuild_refuse_tile_rendering_without_publishing_partial_input() {
+fn tile_input_binds_once_and_failed_rebuild_preserves_previous_input() {
     let fixture = Fixture::new();
     let base = scene()
         .with_spatial(vec![fixture.atlas], vec![declaration(2), declaration(3)])
@@ -150,19 +150,78 @@ fn startup_and_rebuild_refuse_tile_rendering_without_publishing_partial_input() 
     let mut world = NativeWorld::new(base);
     let mut input =
         NativeRenderInput::load(&world.spatial_view().unwrap(), fixture.caches(), id(2)).unwrap();
-    let before = matrices(&input);
-    let generations = generations(&input);
+
     let mut map = CookedSpatial::empty(id(3));
     map.tilemap = Some(Box::new(fixture.map()));
+    world
+        .apply(&mut queue([StructuralCommand::SetSpatial {
+            entity: id(3),
+            spatial: Some(map.clone()),
+        }]))
+        .unwrap();
+    let initial =
+        NativeRenderInput::load(&world.spatial_view().unwrap(), fixture.caches(), id(2)).unwrap();
+    assert_eq!(
+        initial
+            .input()
+            .nodes
+            .iter()
+            .find(|n| n.tilemap.is_some())
+            .unwrap()
+            .tilemap
+            .as_ref()
+            .unwrap()
+            .cells()
+            .len(),
+        2
+    );
+    input
+        .try_sync(&world.spatial_view().unwrap(), |_, _, kind| {
+            assert_eq!(kind, incant_render_native::UpdateKind::Rebuilt);
+            Ok::<_, ()>(())
+        })
+        .unwrap();
+    let binding = std::sync::Arc::clone(
+        input
+            .input()
+            .nodes
+            .iter()
+            .find(|n| n.tilemap.is_some())
+            .unwrap()
+            .tilemap
+            .as_ref()
+            .unwrap(),
+    );
+    fixture.directory.close().unwrap(); // No reads while motion or a candidate binding is prepared.
+    for _ in 0..20 {
+        world.step().unwrap();
+        input
+            .try_sync(&world.spatial_view().unwrap(), |candidate, _, kind| {
+                assert_eq!(kind, incant_render_native::UpdateKind::Motion);
+                assert!(std::sync::Arc::ptr_eq(
+                    candidate
+                        .nodes
+                        .iter()
+                        .find(|n| n.tilemap.is_some())
+                        .unwrap()
+                        .tilemap
+                        .as_ref()
+                        .unwrap(),
+                    &binding
+                ));
+                Ok::<_, ()>(())
+            })
+            .unwrap();
+    }
+    let before = matrices(&input);
+    let generations = generations(&input);
+    map.tilemap.as_mut().unwrap().layers[0].cells[1] = Some(id(9));
     world
         .apply(&mut queue([StructuralCommand::SetSpatial {
             entity: id(3),
             spatial: Some(map),
         }]))
         .unwrap();
-    assert!(
-        matches!(NativeRenderInput::load(&world.spatial_view().unwrap(),fixture.caches(),id(2)),Err(NativeRenderError::TilemapUnsupported{entity}) if entity==id(3))
-    );
     let mut called = false;
     assert!(
         input
