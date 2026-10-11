@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Packaged-font game text shaping — locally verified
+
+`incant_text` now shapes real packaged fonts with explicit fallback order,
+Unicode bidi and wrapping, absolute UTF-8 clusters and reusable immutable glyph
+geometry. Fifteen numerical tests, all-target Clippy, independent font-ingress
+review and standalone wasm compilation pass. The review's malformed-face panic,
+metadata priority and name-allocation amplification findings are fixed. Runtime
+fonts never come from host discovery. Font cooking/atlases, actual drawing,
+widgets/IME, broader script coverage and device gates remain; this does not
+complete game UI. [Evidence](docs/spikes/native-game-text.md).
+
 ## Opt-in native session checkpoints — locally verified
 
 Bytecode behaviors can explicitly opt into bounded typed persistent data and
