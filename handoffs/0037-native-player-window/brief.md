@@ -3,6 +3,18 @@
 Required model: **Claude Opus 5.5**. Required thinking: **Max**, verified through
 ACP before this prompt. Preserve this unique packet and all earlier handoffs.
 
+## Resume priority: foreground ownership
+
+Editor review0036 has finished native interaction and its review process exited.
+You now own the foreground for this packet. Operate/capture only the game
+process you launch, identified by its exact PID/window ID. Do not activate,
+close or manipulate any Incant editor window or the user's older Incant process
+(previously PID64681). Use Finder only if a controlled focus-loss case needs a
+neutral foreground app. Never terminate by a broad application/process-name
+match. Record the game PID, close only your own game process after captures,
+and state explicitly when native interaction is finished so the benchmark can
+resume. Continue against the same immutable binary and no production edits.
+
 ## Ownership and goal
 
 Review the visible behavior of a frozen native standalone game window on this
