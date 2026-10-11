@@ -182,5 +182,179 @@
   "python_tests": 44,
   "windows_archive_sha256_verified_locally": "62f1eb2b51aa57cf0f0b8ba333bf2c72a049930aa9c5de01dcad271c4fe48c88",
   "windows_execution": "pending",
-  "optimized_msvc_adoption": "pending; /Od remains conservative default"
+  "optimized_msvc_adoption": "pending; /Od remains conservative default",
+  "corrected_base_verification": {
+    "executed_commit": "f73514d42e0029b3bbebe68414a763f690c9186b",
+    "runtime_base": "9cf171275debfd0cc959a636abf3db4c93865bfb",
+    "sources_sha256": {
+      "tools/probes/shipping-wasm2c.py": "573da5106d917ff0bd595cb59e0b9bf0123522c5a48399c9b76d0fa1ffb351a6",
+      "Cargo.lock": "55c49fba7b5ea7e6b7a8aed2f26138a3fa365b69034ed8457bd94392c4479c5e",
+      "crates/incant_2d/Cargo.toml": "57378df7552b4ea8a12dbc876467d06bc067592b7c37a8a875bc670e84540a0f"
+    },
+    "python_tests": 47,
+    "combined_tests": 25,
+    "clippy": "passed",
+    "actual_development_processes": 3,
+    "dependency_roots": 6,
+    "logs_sha256": {
+      "/tmp/incant-msvc-corrected-tools.log": "63712c5763c193f4d5af79f54209a45a42827b5ed6c8dbaf74512f304b0f8af1",
+      "/tmp/incant-msvc-corrected-guard.log": "18cbb1e2dc21c790b050cc27fad53acb1c9383ccc5de807bd042bdedc0fa2907",
+      "/tmp/incant-wasm2c-msvc-corrected-conformance/conformance-0.log": "ce7c4493aebb89bcf2a88c0a547c21dbd31afeb4efff83550c5c63e49792bc3d",
+      "/tmp/incant-wasm2c-msvc-corrected-conformance/conformance-1.log": "b438bd8a5eca2466426d4434574498f69b31bab096e42a8446f4a7d5eabea87e",
+      "/tmp/incant-wasm2c-msvc-corrected-conformance/conformance-2.log": "45c73708f9af90fa18519f8b4739f121a7bb6fbaf50ef884479e52610e6fff53",
+      "/tmp/incant-msvc-corrected-shipping.log": "68831c7164d80b4d5a75d975efd67f5f04b80cb2107f157aceb343100bbc31bb"
+    },
+    "shipping_report_sha256": "68831c7164d80b4d5a75d975efd67f5f04b80cb2107f157aceb343100bbc31bb",
+    "shipping_report": {
+      "passed": true,
+      "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+      "target": "aarch64-apple-darwin",
+      "wabt": {
+        "release": "1.0.42",
+        "url": "https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-macos-arm64.tar.gz",
+        "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240"
+      },
+      "codegen": {
+        "incant_wasm_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_physics_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "shipping_module": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "lto": "fat",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        }
+      },
+      "c_flags": [
+        "-O3",
+        "-frounding-math",
+        "-fno-optimize-sibling-calls",
+        "-ffp-contract=off",
+        "-DWASM_RT_MEMCHECK_BOUNDS_CHECK=1",
+        "-DWASM_RT_MAX_CALL_STACK_DEPTH=64"
+      ],
+      "symbol_audit": "llvm-nm defined symbols",
+      "msvc_compiler": null,
+      "link_map_sha256": null,
+      "guest_source_sha256": "29846cc4782229151d551c543713b671f164d962d20bed2e8a7fdd54a0404d15",
+      "guest_wasm_sha256": "430442939af644c0ba2029face76c2827add005d646ac7e5e0733542800787b4",
+      "player_sha256": "1aed314662750e09272da4a48ba535d74225b65cb9c00dccbe8b78951032e9e8",
+      "player_bytes": 2797360,
+      "symbols": {
+        "format": "Mach-O/dSYM",
+        "uuids": {
+          "arm64": "345ae234-ae3e-3a14-b134-95fb8c12e275"
+        }
+      },
+      "temporary_guest_sources_wasm_generated_c_tools_and_build_storage_deleted": true,
+      "normal_graphs_without_compilers": [
+        "incant_wasm_runtime",
+        "incant_runtime",
+        "incant_script",
+        "incant_game_runtime",
+        "incant_script_player",
+        "incant_game_player"
+      ],
+      "success_processes": 3,
+      "outputs": [
+        "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+        "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+        "1 0.25\n2 0.125\n3 0.25\n4 0.125\n"
+      ],
+      "rejections": [
+        {
+          "name": "trap",
+          "stderr": "Error: Trap(1)"
+        },
+        {
+          "name": "nan",
+          "stderr": "Error: Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))"
+        },
+        {
+          "name": "quaternion",
+          "stderr": "Error: Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))"
+        },
+        {
+          "name": "scale",
+          "stderr": "Error: Boundary(Runtime(Scene(Component(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])))))"
+        },
+        {
+          "name": "cycle",
+          "stderr": "Error: Boundary(Runtime(Scene(Duplicate(StableId([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3])))))"
+        },
+        {
+          "name": "oob",
+          "stderr": "Error: Trap(1)"
+        },
+        {
+          "name": "import-oob",
+          "stderr": "Error: Boundary(Abi(\"negative memory offset\"))"
+        },
+        {
+          "name": "epoch",
+          "stderr": "Error: Boundary(Abi(\"inactive or expired ECS epoch\"))"
+        },
+        {
+          "name": "loop",
+          "stderr": "Error: Fuel"
+        },
+        {
+          "name": "stack",
+          "stderr": "Error: Trap(1)"
+        },
+        {
+          "name": "indirect-loop",
+          "stderr": "Error: Fuel"
+        },
+        {
+          "name": "start-import",
+          "stderr": "Error: Boundary(Abi(\"inactive or expired ECS epoch\"))"
+        },
+        {
+          "name": "start-loop",
+          "stderr": "Error: Fuel"
+        },
+        {
+          "name": "bad-version",
+          "stderr": "Error: Trap(-2)"
+        },
+        {
+          "name": "calls",
+          "stderr": "Error: Boundary(Limit(\"host call quota\"))"
+        },
+        {
+          "name": "commands",
+          "stderr": "Error: Boundary(Limit(\"structural command quota\"))"
+        },
+        {
+          "name": "not-linked",
+          "stderr": "Error: \"unknown linked module\""
+        }
+      ],
+      "limitations": [
+        "execution establishes only the recorded host/toolchain",
+        "MSVC /Od baseline is not optimized shipping performance; /O2 remains a conformance candidate",
+        "repository and validator build storage retained",
+        "trusted fixture build only, not an arbitrary-source sandbox",
+        "fixed Wasm memory/table; growth rejected",
+        "no complete SDK/determinism/mobile/performance gate"
+      ]
+    },
+    "subsequent_linux_only_configuration": "41a006399c2038873479c02519d9fa41b6aa104f; separate C negative-control and post-change macOS conformance evidence in wasm2c-linux-c11-2026-10-10.json",
+    "windows_execution": "pending"
+  }
 }

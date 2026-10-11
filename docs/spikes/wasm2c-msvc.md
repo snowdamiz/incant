@@ -87,3 +87,24 @@ configuration. Hosted Windows and optimized candidate acceptance remain pending.
 
 No phone performance, distribution signing, full SDK/export migration,
 arbitrary-source build service or phase gate is claimed.
+
+## Corrected publication base
+
+The latest runtime base `9cf1712` is integrated as `f73514d`. Its Cargo metadata
+fix keeps progress/download stderr outside machine JSON; the MSVC tool suffixes
+and selected environment are preserved. This union passes 47 tool tests,
+25 combined static/development tests, Clippy, three real guest processes,
+six-root dependency guards, formatting, conventions and actionlint.
+
+A fresh macOS shipping proof at `f73514d` again passes three motion processes
+and 18 refusals after temporary compile-input removal. The player is 2,797,360
+bytes, SHA-256 `1aed314662750e09272da4a48ba535d74225b65cb9c00dccbe8b78951032e9e8`,
+with matched arm64 dSYM UUID `345ae234-ae3e-3a14-b134-95fb8c12e275`.
+The prior proof above remains evidence for its exact earlier commit.
+
+A subsequent [strict-C11 Linux correction](wasm2c-linux-c11.md) supplies POSIX
+trap declarations and rejects implicit declarations on configured Unix compilers.
+Its macOS combined conformance rerun passes; its Linux C negative control and
+three trap round trips are recorded separately. Neither local proof executes
+MSVC; hosted `/Od` and `/O2` conformance and fresh `/O2` PE/PDB proof remain the
+acceptance evidence needed for the Windows path.
