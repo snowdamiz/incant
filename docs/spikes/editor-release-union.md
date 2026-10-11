@@ -42,3 +42,16 @@ changed. Claude's final presentation reconciliation remains pending, including
 atlas color-only controls and source labels. The native executable predates this
 frontend correction and must be rebuilt before claiming final native build evidence.
 [Exact logs and limits](evidence/editor-typed-import-2026-10-11.json).
+
+## Connected account switch focus
+
+Claude's final browser review found a pre-existing behavior defect: switching
+between two connected accounts removed the focused Use button without recovering
+keyboard focus, so Escape no longer reached the dialog. The active account is now
+part of the existing host-state recovery key. A changed active account also clears
+a stale sign-out question. No credentials, styling or account requests changed.
+
+Both new observable regressions fail on the original source: focus lands on the
+body, and the old confirmation remains. With the fix all 27 account tests and
+strict typecheck pass. Final full UI validation and Claude's focused rendered
+recheck follow after the presentation reconciliation.

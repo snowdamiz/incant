@@ -14,6 +14,13 @@ saved settings remain. Root independently reviewed the five source/test files;
 515 full UI tests, strict typecheck and production build pass. This fixes the
 import blocker you observed. Do not undo or broaden the validated mutation logic.
 
+Astra also fixed your account-switch finding: the existing stateKey now includes
+activeAccount. Both the focus/Escape regression and stale sign-out confirmation
+regression fail on the old source and pass with the fix; all 27 account tests and
+strict typecheck pass. In the focused browser review, verify that Use moves focus
+to Close and Escape dismisses, and that a host account change clears an old
+sign-out question. Do not modify the reviewed account request or credential logic.
+
 Please reconcile presentation for these supported types using the existing plain
 style: correct asset/import source labels/icons and atlas detail controls. A
 texture whose source is `.atlas.json` is a color atlas; do not present an editable
