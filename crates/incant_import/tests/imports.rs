@@ -164,6 +164,55 @@ fn a_failed_batch_or_rejected_actor_never_partially_edits_the_document() {
 }
 
 #[test]
+fn independent_color_chain_limit_rejects_reimport_batch_without_history_or_partial_assets() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    image(root, "paint.png", 10);
+    image(root, "first.png", 20);
+    let seed = Project::empty("Color role bound");
+    let journal = root.join("history.jsonl");
+    let mut bus = CommandBus::persistent(&journal, seed.clone()).unwrap();
+    prepare(&bus, root, &["paint.png"])
+        .commit(&mut bus, Actor::import("test"), "Initial")
+        .unwrap();
+    let before = bus.project().clone();
+    let revision = bus.revision();
+    drop(bus);
+    let original_journal = fs::read(&journal).unwrap();
+    let bus = CommandBus::persistent(&journal, seed.clone()).unwrap();
+    // One valid 16-bit input is under the existing four-million-texel bound, but
+    // two full floating-point chains exceed the unchanged combined 128 MiB cap.
+    image::ImageBuffer::<image::Rgba<u16>, Vec<u16>>::from_pixel(
+        2048,
+        2048,
+        image::Rgba([65535, 0, 0, 0]),
+    )
+    .save(root.join("paint.png"))
+    .unwrap();
+    let result = ImportSnapshot::capture(&bus).prepare(
+        root,
+        None,
+        &[request("first.png"), request("paint.png")],
+    );
+    assert!(matches!(result, Err(ImportError::Cook { path, source })
+        if path == "paint.png" && source.to_string().contains("combined color mip bytes")));
+    assert_eq!(bus.project(), &before);
+    assert_eq!(bus.revision(), revision);
+    assert_eq!(bus.history().len(), 1);
+    drop(bus);
+    assert_eq!(fs::read(&journal).unwrap(), original_journal);
+    let mut recovered = CommandBus::persistent(&journal, seed).unwrap();
+    recovered.undo().unwrap();
+    assert!(recovered.project().assets.is_empty());
+    recovered.redo().unwrap();
+    assert_eq!(recovered.project(), &before);
+    fs::remove_file(root.join("paint.png")).unwrap();
+    let mut retained = AssetStore::default();
+    retained.sync_project(recovered.project(), root).unwrap();
+    assert_eq!(retained.snapshot().len(), 1);
+}
+
+#[test]
 fn preparation_rejects_stale_revisions_and_other_documents_even_for_noops() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path();
@@ -245,7 +294,7 @@ fn malformed_or_ambiguous_requests_fail_before_cooking() {
         Err(ImportError::DuplicateSource(_))
     ));
     assert!(matches!(
-        ImportSnapshot::capture(&bus).prepare(root, None, &[request("a.fbx")]),
+        ImportSnapshot::capture(&bus).prepare(root, None, &[request("a.obj")]),
         Err(ImportError::Unsupported(_))
     ));
     let mut model = request("a.gltf");

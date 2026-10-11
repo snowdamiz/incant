@@ -1,0 +1,2374 @@
+{
+ "binary_sha256": "e5f686ffb6cc00e7761cb643593f48c2047caaadce2a43ee94f1fbfffa6a67fa",
+ "cameras": {
+  "r3q": "01JA40RW0000000000000000W5",
+  "rfront": "01JA40RW0000000000000000W6"
+ },
+ "project": "reimport",
+ "run": "r2",
+ "steps": [
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "crate",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKJ8F8NZ5FYNC1VBVRK31K",
+     "kind": "model",
+     "name": "crate",
+     "path": "models/crate.fbx",
+     "sha256": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/crate.fbx",
+       "sha256": "eff24707f851325e150a8f91697e73da1758030592454344544ba7dd06b63c35"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 36
+    },
+    "revision": 1
+   },
+   "source": "models/crate.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb"
+    },
+    "journal_sha256": "f6ab89f777da14f1296f56dfcdc22c84282fbf22102791eecaea9b6821beea80",
+    "project_sha256": "9878494758cba869ac974448b2b0f0e51f1104917c10b57f31954f49e2687d15"
+   },
+   "state_before": {
+    "assets": {},
+    "journal_sha256": null,
+    "project_sha256": "3b04a71483bf6dfc34dac2563fa67fec720836c2cbf89a08b80d4f7309e44c31"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "panel",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKJ8HEMH4DJKF3TEC98093",
+     "kind": "model",
+     "name": "panel",
+     "path": "models/panel.fbx",
+     "sha256": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/panel.fbx",
+       "sha256": "b1aa45029dedf6fc1c771021722651ebc9cc66025aab749856f646f94f16dc2f"
+      },
+      {
+       "path": "models/textures/panel.png",
+       "sha256": "c36709460164ab6cace7f627291cd470ed05111ec4a78e4b8ae9f92c444f5cec"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 36
+    },
+    "revision": 2
+   },
+   "source": "models/panel.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "28fe474dac7b34f9ae12fa849916e5e292f19a9e532238f52d483b82da791d14",
+    "project_sha256": "1c6adf2d724aa34185ede003b8bacb95beb313f31f30d80761d1c8b6a44b5e21"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb"
+    },
+    "journal_sha256": "f6ab89f777da14f1296f56dfcdc22c84282fbf22102791eecaea9b6821beea80",
+    "project_sha256": "9878494758cba869ac974448b2b0f0e51f1104917c10b57f31954f49e2687d15"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "kind": "rpc",
+   "label": "read revision",
+   "methods": [
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 2
+     }
+    }
+   ]
+  },
+  {
+   "kind": "rpc",
+   "label": "Reimport review layout",
+   "methods": [
+    "command.execute",
+    "project.save"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 3,
+      "transaction_id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+     }
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "saved": true
+     }
+    }
+   ]
+  },
+  {
+   "kind": "rpc",
+   "label": "history s0 imported",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 3
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    }
+   ],
+   "kind": "state",
+   "label": "s0 imported",
+   "revision": 3
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 53319,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s0-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s0-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "sha256": "691737e5cc2e038318740e6cc1f5963747fb8482eeb163572f418c5ec206a3e6",
+   "shading": "material_preview",
+   "state": "s0 v1/v1"
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 7585,
+   "camera": "01JA40RW0000000000000000W6",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s0-rfront",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s0-rfront.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "sha256": "04a2653a46ba6f55652549b45bdf02c72e0436bff222eb5e4d126d31c88e2b1c",
+   "shading": "material_preview",
+   "state": "s0 v1/v1"
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "crate",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKJ8F8NZ5FYNC1VBVRK31K",
+     "kind": "model",
+     "name": "crate",
+     "path": "models/crate.fbx",
+     "sha256": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb"
+    },
+    "cache_hit": true,
+    "changed": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/crate.fbx",
+       "sha256": "eff24707f851325e150a8f91697e73da1758030592454344544ba7dd06b63c35"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 36
+    },
+    "revision": 3
+   },
+   "source": "models/crate.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "stderr": "",
+   "unchanged": true
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "panel",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKJ8HEMH4DJKF3TEC98093",
+     "kind": "model",
+     "name": "panel",
+     "path": "models/panel.fbx",
+     "sha256": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "cache_hit": true,
+    "changed": false,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/panel.fbx",
+       "sha256": "b1aa45029dedf6fc1c771021722651ebc9cc66025aab749856f646f94f16dc2f"
+      },
+      {
+       "path": "models/textures/panel.png",
+       "sha256": "c36709460164ab6cace7f627291cd470ed05111ec4a78e4b8ae9f92c444f5cec"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 36
+    },
+    "revision": 3
+   },
+   "source": "models/panel.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "stderr": "",
+   "unchanged": true
+  },
+  {
+   "kind": "rpc",
+   "label": "history s1 stable reimport",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 3
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    }
+   ],
+   "kind": "state",
+   "label": "s1 stable reimport",
+   "revision": 3
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 53319,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s1-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s1-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "sha256": "691737e5cc2e038318740e6cc1f5963747fb8482eeb163572f418c5ec206a3e6",
+   "shading": "material_preview",
+   "state": "s1 stable reimport"
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "crate",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKJ8F8NZ5FYNC1VBVRK31K",
+     "kind": "model",
+     "name": "crate",
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/crate.fbx",
+       "sha256": "fb8ba7199705525df39672311e29fe1b7776d1952803647c5ff5eacd62cf30e0"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 36
+    },
+    "revision": 4
+   },
+   "source": "models/crate.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "3adc9da6c1d200b766186ca347507573e850629141bee0b1f05624d85c56bff0",
+    "project_sha256": "5472d19156e968a658e7fb972a46f3fe764a8f91febb4c091db9c614a87c6f3d"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "kind": "rpc",
+   "label": "history s2 crate v2",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 4
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+    }
+   ],
+   "kind": "state",
+   "label": "s2 crate v2",
+   "revision": 4
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 54154,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s2-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s2-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "3adc9da6c1d200b766186ca347507573e850629141bee0b1f05624d85c56bff0",
+    "project_sha256": "5472d19156e968a658e7fb972a46f3fe764a8f91febb4c091db9c614a87c6f3d"
+   },
+   "sha256": "e9f814d37e31411acddd2716efc98de18450c4ea55bc747a936230a7a0a239d6",
+   "shading": "material_preview",
+   "state": "s2 crate v2"
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "panel",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKJ8HEMH4DJKF3TEC98093",
+     "kind": "model",
+     "name": "panel",
+     "path": "models/panel.fbx",
+     "sha256": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/panel.fbx",
+       "sha256": "b1aa45029dedf6fc1c771021722651ebc9cc66025aab749856f646f94f16dc2f"
+      },
+      {
+       "path": "models/textures/panel.png",
+       "sha256": "f3d92a6feeb4be8daba9bbe2a4e378af0eb71f921c59daa15801b1119171324e"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 36
+    },
+    "revision": 5
+   },
+   "source": "models/panel.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "b7276c2088cc41d7c2ff33f2459ea68b9905fd13d5303ed11806dbf7c1393658",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "3adc9da6c1d200b766186ca347507573e850629141bee0b1f05624d85c56bff0",
+    "project_sha256": "5472d19156e968a658e7fb972a46f3fe764a8f91febb4c091db9c614a87c6f3d"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "kind": "rpc",
+   "label": "history s3 panel dependency v2",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 5
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+    }
+   ],
+   "kind": "state",
+   "label": "s3 panel dependency v2",
+   "revision": 5
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 61132,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s3-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s3-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "b7276c2088cc41d7c2ff33f2459ea68b9905fd13d5303ed11806dbf7c1393658",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "sha256": "c7949b2f06c3522210ca463c04689b505064371a65883ce849d720e069fc4a1b",
+   "shading": "material_preview",
+   "state": "s3 panel png v2"
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 8238,
+   "camera": "01JA40RW0000000000000000W6",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s3-rfront",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s3-rfront.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "b7276c2088cc41d7c2ff33f2459ea68b9905fd13d5303ed11806dbf7c1393658",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "sha256": "7c34f68e4c1a6dc240ac2e303c68553efd80fa3716720268bd34adddcae16cc6",
+   "shading": "material_preview",
+   "state": "s3 panel png v2"
+  },
+  {
+   "kind": "rpc",
+   "label": "s4 undo panel",
+   "methods": [
+    "history.undo",
+    "project.save"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 6,
+      "transaction_id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+     }
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "saved": true
+     }
+    }
+   ]
+  },
+  {
+   "kind": "rpc",
+   "label": "history s4 undo panel",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 6
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+    }
+   ],
+   "kind": "state",
+   "label": "s4 undo panel",
+   "revision": 6
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 54154,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s4-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s4-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "2497aa3af04f3bfce580f4ce2bdfdecb3a0b4423fb59f7b3e98db849c3e6c1aa",
+    "project_sha256": "5472d19156e968a658e7fb972a46f3fe764a8f91febb4c091db9c614a87c6f3d"
+   },
+   "sha256": "e9f814d37e31411acddd2716efc98de18450c4ea55bc747a936230a7a0a239d6",
+   "shading": "material_preview",
+   "state": "s4 undo panel"
+  },
+  {
+   "kind": "rpc",
+   "label": "s5 undo crate",
+   "methods": [
+    "history.undo",
+    "project.save"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 7,
+      "transaction_id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+     }
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "saved": true
+     }
+    }
+   ]
+  },
+  {
+   "kind": "rpc",
+   "label": "history s5 undo crate",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 7
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    }
+   ],
+   "kind": "state",
+   "label": "s5 undo crate",
+   "revision": 7
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 53319,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s5-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s5-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "d0239eac520012ff6514f29c8f677ed40c4373b4f22f469449c611609313c157",
+    "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+   },
+   "sha256": "691737e5cc2e038318740e6cc1f5963747fb8482eeb163572f418c5ec206a3e6",
+   "shading": "material_preview",
+   "state": "s5 undo crate"
+  },
+  {
+   "kind": "rpc",
+   "label": "s6 redo crate",
+   "methods": [
+    "history.redo",
+    "project.save"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 8,
+      "transaction_id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+     }
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "saved": true
+     }
+    }
+   ]
+  },
+  {
+   "kind": "rpc",
+   "label": "history s6 redo crate",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 8
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+    }
+   ],
+   "kind": "state",
+   "label": "s6 redo crate",
+   "revision": 8
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 54154,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s6-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s6-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+    },
+    "journal_sha256": "b992d930f788c65cb9928c1e02d004f4d20f6181a217cf1a42d646ae57909767",
+    "project_sha256": "5472d19156e968a658e7fb972a46f3fe764a8f91febb4c091db9c614a87c6f3d"
+   },
+   "sha256": "e9f814d37e31411acddd2716efc98de18450c4ea55bc747a936230a7a0a239d6",
+   "shading": "material_preview",
+   "state": "s6 redo crate"
+  },
+  {
+   "kind": "rpc",
+   "label": "s7 redo panel",
+   "methods": [
+    "history.redo",
+    "project.save"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 9,
+      "transaction_id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+     }
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "saved": true
+     }
+    }
+   ]
+  },
+  {
+   "kind": "rpc",
+   "label": "history s7 redo panel",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 9
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+    }
+   ],
+   "kind": "state",
+   "label": "s7 redo panel",
+   "revision": 9
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 61132,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s7-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s7-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "sha256": "c7949b2f06c3522210ca463c04689b505064371a65883ce849d720e069fc4a1b",
+   "shading": "material_preview",
+   "state": "s7 redo panel"
+  },
+  {
+   "exit": 1,
+   "expect_ok": false,
+   "key": "crate",
+   "kind": "import",
+   "source": "models/crate.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "stderr": "Error: could not cook models/crate.fbx: unsupported asset feature: static FBX: material texture channel SpecularColor",
+   "unchanged": true
+  },
+  {
+   "kind": "rpc",
+   "label": "history s8 rejected unsupported",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 9
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+    }
+   ],
+   "kind": "state",
+   "label": "s8 rejected unsupported",
+   "revision": 9
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 61132,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s8-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s8-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "sha256": "c7949b2f06c3522210ca463c04689b505064371a65883ce849d720e069fc4a1b",
+   "shading": "material_preview",
+   "state": "s8 rejected unsupported reimport"
+  },
+  {
+   "exit": 1,
+   "expect_ok": false,
+   "key": "crate",
+   "kind": "import",
+   "source": "models/crate.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "stderr": "Error: could not cook models/crate.fbx: invalid FBX: Unknown: Failed to load",
+   "unchanged": true
+  },
+  {
+   "kind": "rpc",
+   "label": "history s9 rejected malformed",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 9
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+    }
+   ],
+   "kind": "state",
+   "label": "s9 rejected malformed",
+   "revision": 9
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 61132,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s9-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s9-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "sha256": "c7949b2f06c3522210ca463c04689b505064371a65883ce849d720e069fc4a1b",
+   "shading": "material_preview",
+   "state": "s9 rejected malformed reimport"
+  },
+  {
+   "files": [
+    "models/crate.fbx",
+    "models/panel.fbx",
+    "models/textures/panel.png"
+   ],
+   "kind": "remove_sources",
+   "remaining_models_dir": [
+    "artifacts/0040-static-fbx-import/runs/r2/reimport/models/textures"
+   ]
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 61132,
+   "camera": "01JA40RW0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s10-r3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s10-r3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "sha256": "c7949b2f06c3522210ca463c04689b505064371a65883ce849d720e069fc4a1b",
+   "shading": "material_preview",
+   "state": "s10 sources removed, fresh process"
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 8238,
+   "camera": "01JA40RW0000000000000000W6",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 2,
+    "model_entities": 2,
+    "model_triangles": 24,
+    "primitive_instances": 2,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "s10-rfront",
+   "path": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s10-rfront.png",
+   "project_state": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "sha256": "7c34f68e4c1a6dc240ac2e303c68553efd80fa3716720268bd34adddcae16cc6",
+   "shading": "material_preview",
+   "state": "s10 sources removed, fresh process"
+  },
+  {
+   "exit": 0,
+   "kind": "validate",
+   "reply": {
+    "diagnostics": [],
+    "project_id": "01M4MKJ8D3746C1VGM4DRED1DC",
+    "schema_version": 1,
+    "valid": true
+   },
+   "stderr": ""
+  },
+  {
+   "exit": 1,
+   "expect_ok": false,
+   "key": "crate",
+   "kind": "import",
+   "source": "models/crate.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+     "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    },
+    "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+    "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+   },
+   "stderr": "Error: could not cook models/crate.fbx: asset IO: No such file or directory (os error 2)",
+   "unchanged": true
+  },
+  {
+   "kind": "rpc",
+   "label": "history s11 reimport without source",
+   "methods": [
+    "history.read",
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": [
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ8F86MYS656C431R809F"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+      },
+      {
+       "actor": {
+        "actor": "editor",
+        "conversation_id": null,
+        "model": null,
+        "origin": "user"
+       },
+       "commands": 4,
+       "description": "Reimport review layout",
+       "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import crate",
+       "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+      },
+      {
+       "actor": {
+        "actor": "model",
+        "conversation_id": null,
+        "model": null,
+        "origin": "import"
+       },
+       "commands": 1,
+       "description": "Import panel",
+       "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+      }
+     ]
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "revision": 9
+     }
+    }
+   ]
+  },
+  {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": {
+     "path": "models/crate.fbx",
+     "sha256": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4"
+    },
+    "01M4MKJ8HEMH4DJKF3TEC98093": {
+     "path": "models/panel.fbx",
+     "sha256": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+    }
+   },
+   "history": [
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ8F86MYS656C431R809F"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJ8HE49XCTGTKVRPCZFRP"
+    },
+    {
+     "actor": {
+      "actor": "editor",
+      "conversation_id": null,
+      "model": null,
+      "origin": "user"
+     },
+     "commands": 4,
+     "description": "Reimport review layout",
+     "id": "01M4MKJ8M9ECDQQ6ENTJBX8WSK"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import crate",
+     "id": "01M4MKJ9VMQQFQT3XZBWCFS5BQ"
+    },
+    {
+     "actor": {
+      "actor": "model",
+      "conversation_id": null,
+      "model": null,
+      "origin": "import"
+     },
+     "commands": 1,
+     "description": "Import panel",
+     "id": "01M4MKJA9Z4NZ5Q8HHS9HYEJ94"
+    }
+   ],
+   "kind": "state",
+   "label": "s11 reimport without source",
+   "revision": 9
+  }
+ ]
+}

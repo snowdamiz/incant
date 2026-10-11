@@ -6,7 +6,13 @@ mod audio_binary;
 mod binary;
 mod columns;
 mod commands;
+mod flipbook;
+mod flipbook_binary;
 mod hierarchy;
+pub use flipbook::{
+    FlipbookControl, FlipbookSnapshot, FlipbookState, FrameRate, MAX_FLIPBOOK_FRAMES,
+    MAX_SCENE_FLIPBOOK_FRAMES, NativeFlipbook,
+};
 mod physics;
 mod physics_2d;
 mod physics_2d_binary;
@@ -25,6 +31,7 @@ pub use sprite::{
 pub use tilemap::{
     MAX_SCENE_TILE_SLOTS, MAX_TILEMAP_ENTITIES, NativeTilemap, NativeTilemapLayer, PreparedTilemap,
 };
+mod entity_identity;
 mod spatial_binary;
 mod spatial_commands;
 mod spatial_view;
@@ -37,6 +44,7 @@ pub use audio::{
 };
 pub use columns::{NumericChunk, NumericColumns, TRANSFORM_STRIDE, VELOCITY_STRIDE};
 pub use commands::{FrameCommands, MAX_FRAME_COMMANDS, StructuralCommand};
+pub use entity_identity::{EntityIdentity, WorldIncarnation};
 pub use incant_physics_2d_runtime::{
     BodyState as BodyState2D, RayHit as RayHit2D, RayQuery as RayQuery2D,
     TriggerEvent as TriggerEvent2D,

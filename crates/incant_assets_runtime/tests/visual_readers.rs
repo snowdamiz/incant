@@ -18,10 +18,10 @@ fn shared_value_validation_retains_dimension_mip_float_and_hierarchy_bounds() {
         width: 1,
         height: 1,
         format: TextureFormat::Rgba32Float,
-        levels: vec![vec![0; 16]],
+        levels: vec![vec![0; 16].into()],
     };
     texture.validate().unwrap();
-    texture.levels[0][..4].copy_from_slice(&f32::NAN.to_le_bytes());
+    std::sync::Arc::make_mut(&mut texture.levels[0])[..4].copy_from_slice(&f32::NAN.to_le_bytes());
     assert!(matches!(texture.validate(), Err(AssetError::Invalid(_))));
     texture.width = 8193;
     assert!(matches!(

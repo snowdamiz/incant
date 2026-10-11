@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [dependencies]
+incant_wasm_abi = { path = "../incant_wasm_abi" }
 incant_input.workspace = true
 incant_runtime.workspace = true
 incant_types.workspace = true
@@ -22,3 +23,6 @@ cc = "=1.6.0"
 [[example]]
 name = "shipping_module"
 required-features = ["embedded-fixture"]
+
+[dev-dependencies]
+incant-module = { path = "../../sdk/rust" }

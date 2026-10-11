@@ -5,6 +5,7 @@ pub mod auth;
 pub mod credentials;
 #[cfg(target_os = "macos")]
 mod local_credentials;
+pub mod play;
 pub mod provider;
 pub use assets::{ProjectFiles, ProjectHost};
 use incant_cmd::{Actor, Command, CommandBus};
@@ -100,6 +101,22 @@ struct ScreenshotArgs {
 /// Engine capabilities supplied by the trusted caller. The agent cannot select
 /// filesystem roots or gain access to a shell through tool arguments.
 pub trait EngineHost {
+    /// Expose gameplay tools only when a concrete native host is connected.
+    fn native_play_available(&self) -> bool {
+        false
+    }
+    fn play_run(
+        &mut self,
+        _: &incant_doc::Project,
+        _: u64,
+        _: play::RunRequest,
+        _: &AtomicBool,
+    ) -> Result<Value, AgentError> {
+        Err(AgentError::Tool("no native play host connected".into()))
+    }
+    fn play_state_query(&mut self, _: &str) -> Result<Value, AgentError> {
+        Err(AgentError::Tool("no native play host connected".into()))
+    }
     fn project_files(&self) -> Option<&ProjectFiles> {
         None
     }
@@ -137,7 +154,7 @@ pub fn tools() -> Vec<Value> {
         ),
         tool(
             "doc_patch",
-            "Apply an atomic, undoable transaction through the shared command bus. Use the last observed revision.",
+            "Apply an atomic, undoable transaction through the shared command bus. Use the last observed revision. Script upsert/removal changes registered metadata only, not source files. Requires approval under destructive/always modes.",
             json!(schemars::schema_for!(PatchArgs)),
         ),
         tool(
@@ -152,6 +169,7 @@ pub fn tools() -> Vec<Value> {
         ),
     ];
     tools.extend(assets::tools());
+    tools.extend(play::tools());
     tools
 }
 pub fn dispatch(
@@ -175,6 +193,7 @@ fn dispatch_cancellable(
         serde_json::from_value(v).map_err(|e| AgentError::Tool(e.to_string()))
     }
     match name {
+        "play_run" | "play_state_query" => play::dispatch(bus, perception, name, args, cancel),
         "asset_list" | "asset_inspect" | "asset_import" => {
             assets::dispatch(bus, perception.project_files(), name, args, actor, cancel)
         }
@@ -257,6 +276,9 @@ impl Agent {
         if perception.project_files().is_none() {
             tools.retain(|tool| tool["name"] != "asset_import");
         }
+        if !perception.native_play_available() {
+            tools.retain(|tool| tool["name"] != "play_run" && tool["name"] != "play_state_query");
+        }
         let mut report = TurnReport {
             steps: 0,
             usage: Usage::default(),
@@ -335,6 +357,8 @@ impl Agent {
                             .ok_or_else(|| AgentError::Tool("missing arguments".into()))?,
                     )
                     .map_err(|_| AgentError::Tool("invalid tool JSON".into()))?;
+                    // All document patches require destructive-mode approval,
+                    // including registered script replacement and removal.
                     let ask = matches!(self.approval, ApprovalMode::Always)
                         || (matches!(self.approval, ApprovalMode::Destructive)
                             && matches!(name, "doc_patch" | "asset_import"));

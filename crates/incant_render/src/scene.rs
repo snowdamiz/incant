@@ -147,6 +147,8 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
                 node: entity_index,
                 source: Arc::clone(&sprite.source),
                 sprite: sprite.sprite.clone(),
+                frames: sprite.frames.clone(),
+                frame: sprite.frame,
                 world: world64,
                 id: entity.id.clone(),
             });

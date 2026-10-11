@@ -1,12 +1,8 @@
 name: Desktop editor and engine
+# Full validation runs once per frozen release checkpoint.
 on:
   push:
-    branches: [main]
-    # Refill shared dependencies when their inputs change, without repeating
-    # this matrix after every source-only merge.
-    paths: ['Cargo.lock', '**/Cargo.lock', 'Cargo.toml', '**/Cargo.toml', 'rust-toolchain', 'rust-toolchain.toml', '.cargo/**', '.github/workflows/desktop.yml']
-  pull_request:
-    paths: ['crates/**', 'editor/**', 'sdk/**', 'schemas/**', '.cargo/**', 'Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml', 'package*.json', 'tools/probes/**', 'tools/shipping*.py', 'tools/tests/test_shipping.py', 'tools/platforms/render-check.py', '.github/workflows/desktop.yml']
+    branches: [codex/release-candidate]
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,10 +26,9 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22.23.3'
-          # Windows has no default-branch npm cache producer. Saving an identical
-          # archive per PR consumed 8.9 GiB for a 13-second install; reserve the
-          # repository cache for Rust builds instead.
-          cache: ${{ runner.os != 'Windows' && 'npm' || '' }}
+      # Preserve the existing Windows no-cache policy.
+      - uses: ./.github/actions/npm-cache
+        if: runner.os != 'Windows'
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with: {python-version: '3.12'}
       - if: runner.os == 'Linux'
@@ -45,8 +40,8 @@ jobs:
         with:
           key: ${{ github.workflow }}-${{ runner.os }}-${{ runner.arch }}
           cache-bin: 'false'
-          # Share one default-branch dependency set; all PRs only restore.
-          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+          # Only the exact candidate push trigger produces reusable dependencies.
+          save-if: ${{ github.event_name == 'push' }}
       # Avoid retaining both the obsolete release and new CI target graphs.
       # Fresh shipping storage is independent of this target cleanup.
       - run: cargo clean --profile release
@@ -172,6 +167,7 @@ jobs:
             licenses/Unicode-3.0.txt
             licenses/quick-xml-MIT.txt
             licenses/cpu-time-MIT.txt
+            licenses/ufbx-MIT.txt
             licenses/rerecast-MIT.txt
             licenses/dodgy-MIT.txt
             licenses/dodgy-RVO2-original.txt

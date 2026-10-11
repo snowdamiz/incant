@@ -91,7 +91,7 @@ def main():
         parity.compare(baseline, output.read_bytes(), '2d')
         processes.append({'output': output.name, **parity.inspect(output.read_bytes(), '2d')})
     invalid = [b'not a scene', destination.read_bytes()[:-1], bytearray(destination.read_bytes())]
-    invalid[2][8:12] = (8).to_bytes(4, 'little')
+    invalid[2][8:12] = (9).to_bytes(4, 'little')
     for index, data in enumerate(invalid):
         source = out / f'invalid-{index}.scene'; source.write_bytes(data)
         output = out / f'rejected-{index}.bin'

@@ -1,4 +1,4 @@
-//! Versions 1/2/3/4/5/6/7, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1/2/3/4/5/6/7/8, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 7;
+const VERSION: u32 = 8;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,10 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if !self.physics_2d.is_empty() {
+        let version = if self.spatial.iter().any(|n| n.flipbook.is_some()) {
             VERSION
+        } else if !self.physics_2d.is_empty() {
+            7
         } else if self.spatial.iter().any(|n| n.tilemap.is_some()) {
             6
         } else if self.spatial.iter().any(|n| n.sprite.is_some()) {
@@ -102,6 +104,16 @@ impl CookedScene {
             bytes.extend((self.physics_2d.len() as u32).to_le_bytes());
             for record in &self.physics_2d {
                 crate::physics_2d_binary::write(&mut bytes, record);
+            }
+        }
+        if version >= 8 {
+            bytes.extend(
+                (self.spatial.iter().filter(|n| n.flipbook.is_some()).count() as u32).to_le_bytes(),
+            );
+            for node in &self.spatial {
+                if let Some(f) = &node.flipbook {
+                    crate::flipbook_binary::write(&mut bytes, node.entity, f);
+                }
             }
         }
         let length = (bytes.len() - HEADER) as u32;
@@ -267,7 +279,7 @@ impl CookedScene {
         let mut physics_2d = Vec::new();
         if version >= 7 {
             let n = reader.u32()? as usize;
-            if n == 0
+            if (version == 7 && n == 0)
                 || n > count
                 || n > incant_physics_2d_runtime::MAX_BODIES
                 || n > reader.remaining_len() / 60
@@ -284,6 +296,26 @@ impl CookedScene {
                     return Err(SceneError::Invalid("noncanonical 2D order"));
                 }
                 physics_2d.push(record);
+            }
+        }
+        if version >= 8 {
+            let n = reader.u32()? as usize;
+            if n == 0 || n > spatial.len() || n > reader.remaining_len() / 46 {
+                return Err(SceneError::Invalid("flipbook record count"));
+            }
+            let mut previous = None;
+            let mut budget = 0;
+            for _ in 0..n {
+                let id = StableId(reader.array()?);
+                if previous.is_some_and(|p| p >= id) {
+                    return Err(SceneError::Invalid("noncanonical flipbook order"));
+                }
+                previous = Some(id);
+                let index = spatial
+                    .binary_search_by_key(&id, |n| n.entity)
+                    .map_err(|_| SceneError::Invalid("flipbook entity"))?;
+                spatial[index].flipbook =
+                    Some(crate::flipbook_binary::read(&mut reader, &mut budget)?);
             }
         }
         if !reader.0.is_empty() {

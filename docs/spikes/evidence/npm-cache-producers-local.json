@@ -1,0 +1,106 @@
+{
+  "scope": "Local reviewed exact default/frozen candidate npm cache saves; hosted restore/version and retained-size evidence pending.",
+  "base": "b89f51867e6bdcf2a41d7d335dbca93c242c5d68",
+  "sources": {
+    ".github/actions/npm-cache/action.yml": "d36dead0c23a96e66a0ba1dc430eaa1461200cad5e0e32311233259ac7b172a6",
+    ".github/actions/npm-cache/metadata.sh": "d1043bc8499e2248a968b5de7ec0dedda7c50e0e3e1680386a76487747c681cb",
+    "tools/tests/test_npm_cache.py": "ce1c244333bcbe47c916c24f351d6b4fd07050859e651f55623830744f42a0b9",
+    ".github/workflows/ci.yml": "db2bf6fb928b3f8e494f7acddab800648280387d7a504f4c0b7eccd1ac9a2196",
+    ".github/workflows/desktop.yml": "4cb88be2fa67c7cbd977d0655d5f50274478bff848b5382224ea981469157368",
+    ".github/workflows/nightly.yml": "61d3768f1f0bb728b8daa11a25a5e590874ab4dbd4264d7b5aef4880c0ae3a8d",
+    ".github/workflows/physics-candidates.yml": "b4f219af497d0f0dcbc611fdf9b5f67bfbaa6ee8a63514f00e341cd3c3d7f86e",
+    ".github/workflows/website.yml": "73fa2aeaa0556a7cef0aae2cd5dbc3f2d417ef9ec59274e807d18f6ac143d977"
+  },
+  "validation": {
+    "python_tests": 131,
+    "log": "/tmp/incant-npm-exact-producer-tools.log",
+    "log_sha256": "5939420f1362d1be127866f1329f727d04cabc7094147d84700b118e721fc5e2",
+    "actionlint": "passed on all five changed workflows",
+    "diff_check": "passed",
+    "workflow_commands": [
+      {
+        "workflow": ".github/workflows/ci.yml",
+        "preserved_run_steps": 47,
+        "run_bodies_sha256": "ec71c667ea109dcc7bc9fd127caf56827a845570402087db763fadfaec964280"
+      },
+      {
+        "workflow": ".github/workflows/desktop.yml",
+        "preserved_run_steps": 34,
+        "run_bodies_sha256": "51eb2d5cb52f0388b2a04ec2b528de7131ffa9faea45b735e5234cc1d79e79c0"
+      },
+      {
+        "workflow": ".github/workflows/nightly.yml",
+        "preserved_run_steps": 29,
+        "run_bodies_sha256": "75795d2628cd3d1941b86a4294bc0a4bbecc1e5bec5f263bb4e59b8d3642ffab"
+      },
+      {
+        "workflow": ".github/workflows/physics-candidates.yml",
+        "preserved_run_steps": 27,
+        "run_bodies_sha256": "c18bdc8e760150e56fa5aee205d95f82a1fdff0185a983e2f4eb0ab8576cc767"
+      },
+      {
+        "workflow": ".github/workflows/website.yml",
+        "preserved_run_steps": 5,
+        "run_bodies_sha256": "9aa8235e898ed0e38251b8b18ab72f1c6f3e6030fa1343f50c77e2037fac801c"
+      }
+    ]
+  },
+  "pinned_source_review": {
+    "cache-action.yml": "c04edf35104c16c8944076df01561748bac9cd10941417e467a236e508e52dda",
+    "cache-restore-action.yml": "bb552a94cec165255080b7e13fe3d2051c6c79e321e99435b5859dc7de5e9057",
+    "cache-saveImpl.ts": "a4cb9eaf4d65ffe966f2ffbd7381fe12e0dbe4c5c05fbd901f99bb76503baef9",
+    "setup-node-v6-action.yml": "ad45f1922115116fb4706651d0a9262332bc4e4f11eb2021e09789dd1af18085",
+    "setup-node-v6-main.ts": "e9390b85150e11a49774bd7b74c71d4326b1460bfce57892916271978b46ac70"
+  },
+  "historical_cleanup": {
+    "notice": "Historical exact approved obsolete merged-PR79/80 cache retirement, not a measurement of the new policy.",
+    "evidence": "/tmp/incant-obsolete-npm79-80-retirement/summary.json",
+    "bytes_freed": 509846766
+  },
+  "pending": [
+    "Actual Linux and macOS restore from existing main key and cache version with the composite action.",
+    "Default-branch successful upload and no PR-scoped upload on a natural consumer.",
+    "Retention and timing measurements; no current speed claim."
+  ],
+  "initial_validation": {
+    "python_tests": 130,
+    "log": "/tmp/incant-npm-cache-tools.log",
+    "log_sha256": "0c852981a83039d2ac786174407ccba35768f3351dc8aa1b734b5d82f98d0383",
+    "actionlint": "passed on all five changed workflows",
+    "diff_check": "passed",
+    "workflow_commands": [
+      {
+        "workflow": ".github/workflows/ci.yml",
+        "preserved_run_steps": 47,
+        "run_bodies_sha256": "ec71c667ea109dcc7bc9fd127caf56827a845570402087db763fadfaec964280"
+      },
+      {
+        "workflow": ".github/workflows/desktop.yml",
+        "preserved_run_steps": 34,
+        "run_bodies_sha256": "51eb2d5cb52f0388b2a04ec2b528de7131ffa9faea45b735e5234cc1d79e79c0"
+      },
+      {
+        "workflow": ".github/workflows/nightly.yml",
+        "preserved_run_steps": 29,
+        "run_bodies_sha256": "75795d2628cd3d1941b86a4294bc0a4bbecc1e5bec5f263bb4e59b8d3642ffab"
+      },
+      {
+        "workflow": ".github/workflows/physics-candidates.yml",
+        "preserved_run_steps": 27,
+        "run_bodies_sha256": "c18bdc8e760150e56fa5aee205d95f82a1fdff0185a983e2f4eb0ab8576cc767"
+      },
+      {
+        "workflow": ".github/workflows/website.yml",
+        "preserved_run_steps": 5,
+        "run_bodies_sha256": "9aa8235e898ed0e38251b8b18ab72f1c6f3e6030fa1343f50c77e2037fac801c"
+      }
+    ]
+  },
+  "case_sensitive_ref_decision": {
+    "refs": "Exact event repository default ref or literal refs/heads/codex/release-candidate",
+    "actual_shell_ref_cases": 15,
+    "focused_test_count": 6,
+    "github_semantics": "https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#operators",
+    "focused_log_sha256": "8e3ee7ab5e92ee11a5c162925e8e045f784f5c75bc9279cb5a01e5cd9154e2ee"
+  }
+}

@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location('native_play', ROOT / 'tools/native_play.py')
@@ -22,6 +23,32 @@ class CoordinatorTests(unittest.TestCase):
             path.write_bytes(b'\xff')
             with self.assertRaises(UnicodeError):
                 play.bounded(path, 3)
+
+    def test_typescript_cook_uses_local_pinned_compiler_and_retains_no_temp_inputs(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root/'entry.ts').write_text("import type { NativeBehavior } from '@incant/runtime/native';\n"
+                "import { amount } from './value';\n"
+                "export default { update({chunks}) { for (const chunk of chunks) chunk.transforms[0] += amount; return undefined; } } satisfies NativeBehavior;\n")
+            (root/'value.ts').write_text('export const amount = 3;')
+            # Ambient Node injection is excluded by the developer coordinator.
+            with mock.patch.dict('os.environ', {'NODE_OPTIONS': '--this-option-must-not-run'}):
+                source, source_map = play.cook_typescript(root, Path('entry.ts'))
+            self.assertIn(b'exports.default', source)
+            self.assertIn(b'entry.ts', source_map)
+            self.assertIn(b'value.ts', source_map)
+            self.assertEqual(sorted(p.name for p in root.iterdir()), ['entry.ts', 'value.ts'])
+            (root/'value.ts').write_text('export const amount: number = "wrong";')
+            with self.assertRaisesRegex(RuntimeError, 'strict typecheck failed'):
+                play.cook_typescript(root, Path('entry.ts'))
+
+    def test_typescript_argument_conflicts_fail_before_build(self):
+        for args in [['missing', '--typescript', 'entry.ts', '--script', 'entry.js'],
+                     ['missing', '--typescript', 'entry.ts', '--source-map', 'entry.map'],
+                     ['missing', '--script-root', 'scripts']]:
+            with self.assertRaises(SystemExit) as raised:
+                play.main(args)
+            self.assertEqual(raised.exception.code, 2)
 
     def test_concurrent_build_copies_are_serialized_and_exception_releases_lock(self):
         script = '''import sys

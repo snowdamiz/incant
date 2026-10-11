@@ -5,6 +5,7 @@ use crate::{CookedEntity, CookedScene, SceneError, StableId};
 use bevy_ecs::prelude::*;
 use glam::DMat4;
 use incant_types::{Transform, Velocity};
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use thiserror::Error;
 
@@ -64,8 +65,10 @@ pub enum RuntimeError {
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
     pub(crate) identity: crate::WorldIdentity,
+    source_scene_fingerprint: [u8; 32],
     pub(crate) world: World,
     schedule: Schedule,
+    pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_2d: incant_physics_2d_runtime::PhysicsWorld2D,
     pub(crate) physics_2d_used: bool,
@@ -92,6 +95,9 @@ impl NativeWorld {
     }
 
     pub fn new(scene: CookedScene) -> Self {
+        // Startup pairing only. No document, scene serialization or hashing is
+        // performed during simulation or native structural operations.
+        let source_scene_fingerprint = Sha256::digest(scene.to_bytes()).into();
         let physics = scene.physics.clone();
         let physics_2d = scene.physics_2d.clone();
         let audio = scene.audio.clone();
@@ -138,9 +144,11 @@ impl NativeWorld {
         let mut schedule = Schedule::default();
         // Native builds enable Bevy's multi_threaded executor and parallel
         // queries. Browser builds remain serial until their worker host exists.
-        schedule.add_systems((integrate, publish_globals).chain());
+        schedule.add_systems((integrate, publish_globals, crate::flipbook::advance).chain());
+        let flipbook_query = world.query::<(&Identity, &crate::flipbook::Playback)>();
         let mut result = Self {
             identity: crate::WorldIdentity::new(),
+            source_scene_fingerprint,
             world,
             physics: solver,
             physics_2d: Default::default(),
@@ -156,6 +164,7 @@ impl NativeWorld {
             audio_used: !audio.is_empty(),
             audio_ids: BTreeSet::new(),
             schedule,
+            flipbook_query,
             entities,
             parents,
             scene_id: scene.id,
@@ -199,10 +208,40 @@ impl NativeWorld {
         result
     }
 
+    /// Fingerprint of the canonical scene used to construct this incarnation.
+    /// It does not describe current mutable state or authenticate executable code.
+    pub fn source_scene_fingerprint(&self) -> [u8; 32] {
+        self.source_scene_fingerprint
+    }
+
+    pub fn incarnation(&self) -> crate::WorldIncarnation {
+        crate::WorldIncarnation(self.world.id())
+    }
+
+    /// Opaque lifetime identity for an actual ECS entity, independent of its
+    /// reusable stable ID or archetype. Restoring replaces the Bevy world and
+    /// invalidates every previous entity token, even when saved IDs match.
+    pub fn entity_identity(&self, id: StableId) -> Option<crate::EntityIdentity> {
+        self.entities.get(&id).map(|&entity| crate::EntityIdentity {
+            world: self.world.id(),
+            entity,
+        })
+    }
+
     pub(crate) fn install_spatial(&mut self, id: StableId, node: Option<crate::CookedSpatial>) {
         if self.world.get::<crate::CookedSpatial>(self.entities[&id]) == node.as_ref() {
             return;
         }
+        let previous_flipbook = self
+            .world
+            .get::<crate::CookedSpatial>(self.entities[&id])
+            .and_then(|n| n.flipbook.as_ref());
+        let next_flipbook = node.as_ref().and_then(|n| n.flipbook.as_ref());
+        let playback_changed = previous_flipbook != next_flipbook;
+        let next_playback = next_flipbook.map(|f| crate::flipbook::Playback {
+            clock: f.clock(self.tick_rate),
+            state: crate::FlipbookState::new(f.playing),
+        });
         let prepared = node
             .as_ref()
             .and_then(|n| n.tilemap.as_ref())
@@ -216,6 +255,13 @@ impl NativeWorld {
             self.tilemap_collision_ids.remove(&id);
         }
         let mut entity = self.world.entity_mut(self.entities[&id]);
+        if playback_changed {
+            if let Some(playback) = next_playback {
+                entity.insert(playback);
+            } else {
+                entity.remove::<crate::flipbook::Playback>();
+            }
+        }
         if let Some(prepared) = prepared {
             entity.insert(prepared);
         } else {

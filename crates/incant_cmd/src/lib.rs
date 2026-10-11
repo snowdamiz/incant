@@ -3,7 +3,7 @@ mod journal;
 mod localization;
 use incant_doc::{
     Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene,
-    new_id,
+    ScriptSource, new_id,
 };
 pub use journal::Journal;
 pub use localization::{PreparedTranslations, TranslationImportResult};
@@ -56,6 +56,14 @@ pub enum Command {
     },
     RemoveAsset {
         asset_id: Id,
+    },
+    /// Register or update script metadata; source files are not read or written.
+    UpsertScript {
+        script: ScriptSource,
+    },
+    /// Remove script metadata; the final project must have no dangling references.
+    RemoveScript {
+        script_id: Id,
     },
     SetMemory {
         section: String,
@@ -425,6 +433,14 @@ fn apply(
         Command::RemoveAsset { asset_id } => {
             if project.assets.remove(asset_id).is_none() {
                 return Err(CommandError::Invalid("asset does not exist".into()));
+            }
+        }
+        Command::UpsertScript { script } => {
+            project.scripts.insert(script.id.clone(), script.clone());
+        }
+        Command::RemoveScript { script_id } => {
+            if project.scripts.remove(script_id).is_none() {
+                return Err(CommandError::Invalid("script does not exist".into()));
             }
         }
         Command::CreateScene { scene } => {

@@ -202,7 +202,8 @@ impl CookedScene {
         &self.visual_assets
     }
     fn spatial_bytes(&self) -> usize {
-        self.visual_assets.len() * crate::spatial_binary::ASSET_BYTES
+        usize::from(self.spatial.iter().any(|n| n.flipbook.is_some())) * 4
+            + self.visual_assets.len() * crate::spatial_binary::ASSET_BYTES
             + self
                 .spatial
                 .iter()

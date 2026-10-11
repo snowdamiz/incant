@@ -1,0 +1,112 @@
+{
+ "removed": [
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_base.png",
+   "sha256": "668cdfa8d20b2e5226b0365f8a851d009785e63fb5f2272764f55554ff546a82"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_blend_double.bin",
+   "sha256": "df5ce40770524b173fc036acce603b3e00d0dfd8295a004bf3db4162064444e7"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_blend_double.gltf",
+   "sha256": "60c4efdf5fb465a2a34b895ed045b96229abef8c258e178309acbd0d2f530a31"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_blend_single.bin",
+   "sha256": "df5ce40770524b173fc036acce603b3e00d0dfd8295a004bf3db4162064444e7"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_blend_single.gltf",
+   "sha256": "d58076f231915e630b520b02721523a132b48a790bd912936bde7909e8dd3a17"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_mask_double.bin",
+   "sha256": "df5ce40770524b173fc036acce603b3e00d0dfd8295a004bf3db4162064444e7"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_mask_double.gltf",
+   "sha256": "99da2e3c7c82666b38767536291a2ab09d7941dce70466781a67844a70ba93c8"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_mask_single.bin",
+   "sha256": "df5ce40770524b173fc036acce603b3e00d0dfd8295a004bf3db4162064444e7"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_mask_single.gltf",
+   "sha256": "5b481338985cd1b3abfa27140924c97421791f68bb06aa23d3b987daf5771c40"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_normal.png",
+   "sha256": "ef19475b2dff12ec174de623e3ea81db70cf5147377e025afc4f4ba129ba66a2"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_opaque_double.bin",
+   "sha256": "df5ce40770524b173fc036acce603b3e00d0dfd8295a004bf3db4162064444e7"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_opaque_double.gltf",
+   "sha256": "38525129c02ebeca1818c051dbfd8f766ffe6daf7596cbbb7027298ce3d21a32"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_opaque_single.bin",
+   "sha256": "df5ce40770524b173fc036acce603b3e00d0dfd8295a004bf3db4162064444e7"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/card_opaque_single.gltf",
+   "sha256": "fcb14cd183202025308a832879897a37adb72c61fcfdb97b22bf538945ee5184"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/env_uniform.png",
+   "sha256": "769944175394eaca977229aefe74fd182b6f8dc911da039aacca240c9dec110c"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_base.png",
+   "sha256": "e5bcb6eea527d8766839de85582b7d719af017bdeca098edf550a6c6e44d2f43"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_generated.bin",
+   "sha256": "ccfab8a93e234a19273f4e26b64c72e084f23288c0c3beedd00c7b680a6948f3"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_generated.gltf",
+   "sha256": "eb2b7a491c2a77622e2760d6bf46515857ad0ca6ea9a5ba662422b3e02d5e05e"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_generated_double.bin",
+   "sha256": "ccfab8a93e234a19273f4e26b64c72e084f23288c0c3beedd00c7b680a6948f3"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_generated_double.gltf",
+   "sha256": "0fd4b3ee47f182ab6e404fe2896962441fd48ded1d2f1e2bd70d047d740450bf"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_tangent_neg.bin",
+   "sha256": "14d9572d5aa8cd02ea4efc915344c5d028115097ed278fb65aae78b10501a463"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_tangent_neg.gltf",
+   "sha256": "a5b7983693c113a7ecc94c17294f5fcf3388b5115052b486d7b607d21019b3b5"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_tangent_pos.bin",
+   "sha256": "4f83ac6f4925fe3d7571b195c864bfc8d73d566405cbc194de2d6931ee7989d7"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_tangent_pos.gltf",
+   "sha256": "4749cf53b849d6710734125ee19499eb19ab4190a59ee90b93e4294e878d6549"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/props.bin",
+   "sha256": "2106211a5b048c530bfabd6313b415c7d137883a326997740e3bc6ad516f7d0e"
+  },
+  {
+   "path": "artifacts/0041-prewarmed-pipelines/projects/materials/props.gltf",
+   "sha256": "9ecc1c4deea0deca8c16fc42ccf1839862690604d3f5e7d17aa2ed6ab80607d5"
+  }
+ ],
+ "remaining": [
+  "artifacts/0041-prewarmed-pipelines/projects/materials/materials.incant.journal.jsonl",
+  "artifacts/0041-prewarmed-pipelines/projects/materials/materials.incant.json"
+ ]
+}

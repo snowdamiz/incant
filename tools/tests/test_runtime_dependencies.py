@@ -25,6 +25,16 @@ def edge(data, source, dest, kind=None, target=None):
 
 
 class RuntimeDependencies(unittest.TestCase):
+    def test_fbx_source_parser_stays_outside_shipped_runtime(self):
+        data = graph()
+        data['packages'].append({'id': 'pkg:ufbx', 'name': 'ufbx'})
+        data['resolve']['nodes'].append({'id': 'pkg:ufbx', 'deps': []})
+        edge(data, 'incant_runtime', 'adapter')
+        edge(data, 'adapter', 'ufbx')
+        self.assertEqual(guard.violations(data, ['incant_runtime']), [
+            ['incant_runtime', 'adapter', 'ufbx'],
+        ])
+
     def test_rejects_transitive_renamed_and_target_specific_authoring_edge(self):
         data = graph()
         edge(data, 'incant_runtime', 'adapter')

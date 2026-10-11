@@ -1,12 +1,15 @@
 //! Real GPU checks, explicitly run by the desktop renderer workflow.
 use incant_render_authoring::RendererAuthoringExt as _;
 mod cameras;
+mod color_roles;
 mod environments;
 mod lights;
 mod materials;
+mod pipeline_warmup;
 mod shadows;
 mod sprites;
 mod support;
+mod tangents;
 use incant_render::Renderer;
 use materials::{Fixture, center, emissive, near};
 use serde_json::json;

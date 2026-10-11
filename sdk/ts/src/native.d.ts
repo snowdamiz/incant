@@ -21,6 +21,11 @@ export interface NativeTimers {
   cancel(id: string): void;
 }
 export type NativeId = string; // canonical uppercase, 26-character ULID
+export type NativeProp = null | boolean | number | string | readonly NativeProp[] | { readonly [key: string]: NativeProp };
+export interface NativeInstance {
+  readonly entity: NativeId;
+  readonly props: { readonly [key: string]: NativeProp };
+}
 export type NativeVector3 = readonly [number, number, number] | Float64Array;
 /** translation xyz, rotation xyzw (unit quaternion), scale xyz; length 10. */
 export type NativeTransform = readonly [number, number, number, number, number, number, number, number, number, number] | Float64Array;
@@ -33,10 +38,18 @@ export interface NativeChunk {
   readonly velocities: Float64Array | undefined;
 }
 /** Bounded to 65,536 operations per tick. Validated/applied after views detach.
- * Errors reject numeric writes and the complete batch and fail the host.
+ * Active-call errors reject numeric writes and the complete batch even when
+ * caught, and fail the host. An expired function always throws; catching that
+ * error alone does not poison the current update.
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Ordered with this same structural buffer. Seek resets phase/completion;
+   * play on a completed once sequence restarts it. Readback remains the committed
+   * pre-command snapshot until the next update. Invalid controls reject the
+   * whole callback, including numeric writes and earlier queued commands. */
+  controlFlipbook(id: NativeId, control: 'play' | 'pause' | 'restart'): void;
+  controlFlipbook(id: NativeId, control: 'seek', frame: number): void;
   spawn(id: NativeId, transform: NativeTransform, parent: NativeId | null, velocity: NativeVector3 | null): void;
   /** No cascading deletion. Reparent/remove children in the same batch. */
   despawn(id: NativeId): void;
@@ -66,7 +79,25 @@ export interface NativePhysics {
   raycast(query: NativeRayQuery): NativeRayHit | null;
 }
 export type NativeLogLevel = 'debug' | 'info' | 'warn' | 'error';
+/** Bulk committed state captured after simulation, before script commands.
+ * Entries with the same index belong together; order is unspecified. Flags:
+ * bit 0 = playing, bit 1 = completed, all other bits zero. These are VM-owned
+ * copies, not borrowed ECS columns: retaining/mutating them cannot change the
+ * world or a later snapshot. At most 32,768 rows, within the VM memory budget. */
+export interface NativeFlipbooks {
+  readonly ids: readonly NativeId[];
+  readonly frames: Uint32Array;
+  readonly flags: Uint32Array;
+}
 export interface NativeContext {
+  /** Authored attachments for this source, sorted by stable entity ID. The array
+   * and initial props are deeply frozen. One callback per nonempty source runs
+   * in source-ID order with the same world-wide bulk views/transaction. A queued
+   * despawn changes membership only after commit; plain Spawn never reattaches,
+   * even when reusing an ID. Standalone behaviors receive an empty array.
+   * Dynamic attachment, props replacement and legacy state hooks are unsupported. */
+  readonly instances: readonly NativeInstance[];
+  readonly flipbooks: NativeFlipbooks;
   readonly chunks: readonly NativeChunk[];
   readonly dt: number;
   readonly commands: NativeCommands;

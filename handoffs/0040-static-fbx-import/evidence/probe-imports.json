@@ -1,0 +1,236 @@
+[
+ {
+  "source": "models/tex_embedded.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "models/tex_external.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "models/normal_embedded.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "models/instances.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "models/crate_v1.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "models/panel.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "models/parented_shear_mirror.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "models/bad_uv_transform.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/bad_uv_transform.fbx: unsupported asset feature: static FBX: non-file texture or texture-coordinate transform",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/bad_bump_channel.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/bad_bump_channel.fbx: unsupported asset feature: static FBX: bump/displacement maps",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/bad_transparency_map.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/bad_transparency_map.fbx: unsupported asset feature: static FBX: material texture channel TransparentColor",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/bad_specular_channel.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/bad_specular_channel.fbx: unsupported asset feature: static FBX: material texture channel SpecularColor",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/bad_escape_path.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/bad_escape_path.fbx: invalid asset: asset path escapes the project",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/bad_missing_image.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/bad_missing_image.fbx: asset IO: No such file or directory (os error 2)",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/bad_phong.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/bad_phong.fbx: unsupported asset feature: static FBX: material \"lambert1\" (FbxPhong); use a supported Lambert or Blender metallic/roughness material",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/bad_second_uv.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/bad_second_uv.fbx: unsupported asset feature: static FBX: vertex color/crease or multiple UV sets",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/crate_unsupported.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/crate_unsupported.fbx: unsupported asset feature: static FBX: material texture channel SpecularColor",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "models/crate_malformed.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook models/crate_malformed.fbx: invalid FBX: Unknown: Failed to load",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "upstream/blender_272_cube_7400_binary.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "upstream/blender_293_embedded_textures_7400_binary.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook upstream/blender_293_embedded_textures_7400_binary.fbx: unsupported asset feature: static FBX: material texture channel ReflectionFactor",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "upstream/blender_suzanne_multimaterial_7400_binary.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "upstream/max2009_cube_anim_6100_ascii.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook upstream/max2009_cube_anim_6100_ascii.fbx: unsupported asset feature: static FBX: animation channels",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "upstream/max_geometry_transform_instances_7700_ascii.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "upstream/maya_blend_shape_cube_7700_ascii.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook upstream/maya_blend_shape_cube_7700_ascii.fbx: unsupported asset feature: static FBX: animation channels",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "upstream/maya_cube_7500_ascii.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "upstream/maya_instanced_skin_7700_ascii.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook upstream/maya_instanced_skin_7700_ascii.fbx: unsupported asset feature: static FBX: animation channels",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "upstream/maya_parented_cubes_7500_ascii.fbx",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "upstream/maya_textured_cube_7500_ascii.fbx",
+  "exit": 1,
+  "stderr": "Error: could not cook upstream/maya_textured_cube_7500_ascii.fbx: unsupported asset feature: static FBX: material \"phong1\" (FbxPhong); use a supported Lambert or Blender metallic/roughness material",
+  "project_and_journal_unchanged": true
+ },
+ {
+  "source": "controls/axes.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "controls/quad_face_art.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "controls/quad_normal_explicit.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "controls/quad_normal_generated.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "controls/relief.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "controls/ruler.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "twins/blender_cube.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "twins/max_instances.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "twins/maya_cube.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "twins/maya_parented.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "twins/shear_mirror.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ },
+ {
+  "source": "twins/suzanne.glb",
+  "exit": 0,
+  "stderr": "",
+  "project_and_journal_unchanged": null
+ }
+]

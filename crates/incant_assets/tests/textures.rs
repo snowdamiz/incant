@@ -30,9 +30,9 @@ fn color_mips_average_linear_light_while_numeric_maps_preserve_values() {
     let color = import_image(&source, TextureUsage::Color).unwrap();
     let data = import_image(&source, TextureUsage::Linear).unwrap();
     assert_eq!(color.format, TextureFormat::Rgba8Srgb);
-    assert_eq!(color.levels[1], [188, 188, 188, 255]);
+    assert_eq!(color.levels[1].as_ref(), [188, 188, 188, 255]);
     assert_eq!(data.format, TextureFormat::Rgba8Linear);
-    assert_eq!(data.levels[1], [128, 128, 128, 255]);
+    assert_eq!(data.levels[1].as_ref(), [128, 128, 128, 255]);
     for t in [color, data] {
         assert_eq!(decode_ktx2(&encode_ktx2(&t).unwrap()).unwrap(), t);
     }
@@ -44,13 +44,13 @@ fn transparent_color_does_not_bleed_and_odd_edges_are_not_dropped() {
         TextureUsage::Color,
     )
     .unwrap();
-    assert_eq!(texture.levels[1], [0, 0, 255, 128]);
+    assert_eq!(texture.levels[1].as_ref(), [0, 0, 255, 128]);
     let texture = import_image(
         &png(3, 1, vec![0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255, 255]),
         TextureUsage::Linear,
     )
     .unwrap();
-    assert_eq!(texture.levels[1], [85, 85, 85, 255]);
+    assert_eq!(texture.levels[1].as_ref(), [85, 85, 85, 255]);
 }
 #[test]
 fn normal_map_mips_renormalize_vectors() {
@@ -180,7 +180,7 @@ fn model_textures_keep_bindings_variants_tangents_and_image_dependencies() {
     assert_eq!(t.wrap_t, 33648);
     assert_eq!(t.mag_filter, Some(9728));
     assert_eq!(
-        first.images[t.color.unwrap()].format,
+        first.images[t.color_unweighted.unwrap()].format,
         TextureFormat::Rgba8Srgb
     );
     assert_eq!(
@@ -189,7 +189,9 @@ fn model_textures_keep_bindings_variants_tangents_and_image_dependencies() {
     );
     assert_ne!(t.linear, t.normal);
     for vertex in &first.meshes[0].vertices {
-        assert_eq!(vertex[8..12], [1., 0., 0., 1.]);
+        // This fixture's increasing V follows +Y, so glTF normal-map +Y
+        // follows -Y after accounting for the top-left image origin.
+        assert_eq!(vertex[8..12], [1., 0., 0., -1.]);
     }
     assert!(cook_gltf(root, source, &cache).unwrap().cache_hit);
     fs::write(root.join("map.png"), png(1, 1, vec![0, 0, 255, 255])).unwrap();
@@ -200,6 +202,42 @@ fn model_textures_keep_bindings_variants_tangents_and_image_dependencies() {
     fs::remove_file(root.join("map.png")).unwrap();
     let loaded = load_model(&cache, &first.metadata.fingerprint).unwrap();
     assert_eq!(loaded.images, first.images);
+}
+
+#[test]
+fn supplied_gltf_tangent_directions_and_both_signs_survive_cooking() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    textured_fixture(root);
+    let path = root.join("model.gltf");
+    let mut doc: serde_json::Value = serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
+    doc["buffers"][0]["byteLength"] = json!(108);
+    doc["bufferViews"]
+        .as_array_mut()
+        .unwrap()
+        .push(json!({"buffer":0,"byteOffset":60,"byteLength":48}));
+    doc["accessors"]
+        .as_array_mut()
+        .unwrap()
+        .push(json!({"bufferView":2,"componentType":5126,"count":3,"type":"VEC4"}));
+    doc["meshes"][0]["primitives"][0]["attributes"]["TANGENT"] = json!(2);
+    fs::write(path, doc.to_string()).unwrap();
+    let source = Path::new("model.gltf");
+    for sign in [1_f32, -1.] {
+        // Deliberately differs from the UV-derived +X tangent. The source owns
+        // this basis; the importer must neither regenerate it nor flip its sign.
+        let tangent = [0_f32, 1., 0., sign];
+        let mut bytes = fs::read(root.join("mesh.bin")).unwrap();
+        bytes.truncate(60);
+        for _ in 0..3 {
+            bytes.extend(tangent.into_iter().flat_map(f32::to_le_bytes));
+        }
+        fs::write(root.join("mesh.bin"), bytes).unwrap();
+        let cooked = cook_gltf(root, source, &root.join("cache")).unwrap();
+        for vertex in &cooked.meshes[0].vertices {
+            assert_eq!(vertex[8..12], tangent);
+        }
+    }
 }
 #[test]
 fn data_uri_and_buffer_view_images_are_imported_and_missing_uv_is_rejected() {

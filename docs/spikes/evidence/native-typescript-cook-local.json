@@ -1,0 +1,211 @@
+{
+  "source_commit": "519c975f528be8344429dc6e982f0e6bc16d6e0e",
+  "recorded_at": "2026-10-11T05:51:25.209572+00:00",
+  "base_main": "ecf61d49bf781e337d2318f2b8492cfe5a37c4e4",
+  "node_tests_passed": 12,
+  "python_tool_tests_passed": 90,
+  "real_process_result": {
+    "passed": true,
+    "typescript_modules": 4,
+    "successful_runs": 3,
+    "false_assertion_runs": 1,
+    "terminal_failure_runs": 1,
+    "mismatched_script_runs": 1,
+    "player_sha256": "fd804e3a349c0ab30afc5f172a515c5091bf7f43a80ec7dda14a3e94ea645a26",
+    "source_sha256": "88763acdfbdcd42842f65c1f81e7e67cffd4b52243b6a14da5cf974ae3771b1b",
+    "temporary_compile_input_deleted": true,
+    "authoring_unchanged": true,
+    "baseline": {
+      "passed": true,
+      "runtime": "native",
+      "script_source_sha256": "88763acdfbdcd42842f65c1f81e7e67cffd4b52243b6a14da5cf974ae3771b1b",
+      "script_source_parsing": false,
+      "scene": "01M4MR2SR52V94GMH7TPAT52BA",
+      "tick": 5,
+      "tick_rate": 60,
+      "entity_count": 1,
+      "frames": 4000,
+      "pcm_sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+      "logs": {
+        "dropped": 0,
+        "entries": [
+          {
+            "level": "info",
+            "message": "accepted 1 \ud83d\ude80",
+            "tick": 1
+          },
+          {
+            "level": "info",
+            "message": "accepted 2 \ud83d\ude80",
+            "tick": 2
+          },
+          {
+            "level": "info",
+            "message": "accepted 3 \ud83d\ude80",
+            "tick": 3
+          },
+          {
+            "level": "info",
+            "message": "accepted 4 \ud83d\ude80",
+            "tick": 4
+          },
+          {
+            "level": "info",
+            "message": "accepted 5 \ud83d\ude80",
+            "tick": 5
+          }
+        ]
+      },
+      "observations": {
+        "passed": true,
+        "tick": 5,
+        "tick_rate": 60,
+        "checks": [
+          {
+            "name": "motion",
+            "tick": 5,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000001",
+              "property": "translation",
+              "value": [
+                0.23333333333333334,
+                0.0,
+                0.0
+              ],
+              "tolerance": 1e-10
+            },
+            "passed": true,
+            "actual": [
+              0.23333333333333334,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "entities": {
+          "00000000000000000000000001": {
+            "parent": null,
+            "translation": [
+              0.23333333333333334,
+              0.0,
+              0.0
+            ],
+            "rotation": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "velocity": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "world_transform": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.23333333333333334,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        }
+      },
+      "cpu_render_input": false,
+      "gpu_submitted": false,
+      "project_sha256": "a0d034e6a94332a26c6d29fe3a5af9a3a03991104a96010416a5827a09e35696"
+    },
+    "shipping_profile": false,
+    "gpu_submitted": false,
+    "reference_phone_gate": false
+  },
+  "logs": {
+    "tools-final": {
+      "path": "/tmp/incant-native-ts-tools-final.log",
+      "bytes": 18281,
+      "sha256": "b2b438a9c31b391ac8fbfc84b8b328b57fcf3b0c61ade9b11e7780260ca0ada4"
+    },
+    "play-final": {
+      "path": "/tmp/incant-native-ts-play-final.log",
+      "bytes": 230,
+      "sha256": "a04a5108592e41095bf68897160f284738117df504dab775d2f48f0d8c09f0f0"
+    }
+  },
+  "independent_review": {
+    "reviewed_at": "2026-10-11T05:47:01.735105+00:00",
+    "scope": "Independent source-only review; no tests, builds or edits to owned source",
+    "files": {
+      "tools/native_script/graph.mjs": "009bae78d98aff92d30a812e69817241f32cc2b0a762565c7cb64f7316bd6719",
+      "tools/native_script/cook.mjs": "ccf8f91977fd6400bb785adf9bdd357acd91fb4aada3a59460f62175d2604196",
+      "tools/build_native_script.mjs": "84f1727d040d3be1751f4adda03cf1f061479bef169028d1d56017f47b3e6513",
+      "tools/native_play.py": "4d169f84a280b7e0bcaac73f21197a69bf4db964a718b197226c4acc0d928467",
+      "tools/tests/native_script.test.mjs": "713174983f080a0cabf95716bd2a9e617748834aa5bc24803d2439751011efc3",
+      "tools/tests/test_native_play.py": "3dda73a09f104885f26d020a5ec29398114c357629f331c42b6cef5c88dedf21",
+      "tools/probes/native-project-play.py": "8f4e346d894a9a9449e34087874d20aba35047b8d5a98549e0c80f65b051c40d"
+    },
+    "findings": [
+      {
+        "priority": "P2",
+        "path": "tools/build_native_script.mjs",
+        "line": 13,
+        "finding": "A later output write failure leaves a partial final directory and prevents retry; clean only invocation-owned output on failure or publish a complete private staging directory atomically."
+      }
+    ],
+    "known_parent_followup": "Purely type-only SWC modules can emit sources=[]; parent already owns tightly bounded empty-map handling/regression.",
+    "reviewed_boundaries": [
+      "Project code/config/plugins are never imported or executed by the cook; strict TypeScript host is snapshot/SDK/library-only and SWC config discovery is disabled.",
+      "Graph traversal is bounded by module/file/aggregate bytes; static relative TS-only imports, symlink/path containment checks, UTF-8 and stable opened-file snapshot checks remain explicit.",
+      "Factories and CommonJS cache execute only later in the native VM; native SDK imports remain type-only; reexports/cycles and source-map offsets are covered by source-visible tests.",
+      "Coordinator clears ambient Node injection variables, bounds heap/time/output bytes and removes temporary source/map before copied runtime execution."
+    ],
+    "limits": [
+      "No independent executable or source-free process results claimed from this review.",
+      "The existing-output guard is sound; reported issue is partial new-output cleanup after an I/O failure."
+    ],
+    "followup": {
+      "reviewed_at": "2026-10-11T05:49:04.421815+00:00",
+      "scope": "Source-only final failure-cleanup and type-only-map delta; no tests/builds",
+      "files": {
+        "tools/native_script/publish.mjs": "fa4efed989536b27e1e42e4c082533573e30f2999ef14ba813b9fc80ca5019a0",
+        "tools/native_script/cook.mjs": "8ba8816a4c981896407387bc29d2159670f5d9343d1f7db2bfd481000cf87568",
+        "tools/build_native_script.mjs": "4c09e66fe398d3baeaf82b245615b7a09f0cd4a82bd0fae38a5e49f981715dfa",
+        "tools/tests/native_script.test.mjs": "587f23a78c269efe93e79c5288a18e6d171539b017c931d17ee6d869b464bcc7",
+        "tools/probes/native-project-play.py": "1240c7caa500dd26ab2520bcfe9a4c17a5d3e7f9aeb7ad56e6d92a242b2f361f"
+      },
+      "findings_remaining": [],
+      "finding_resolved": "Identity-scoped create-only publisher rollback with partial-write/retry/existing-output/foreign-file regressions",
+      "known_followup_resolved": "Empty SWC sources accepted only with empty mappings; pure-type fixture and four-module real-process proof input added"
+    }
+  },
+  "remaining": [
+    "Actual main80 integration and hosted checks",
+    "Editor and project Script component migration",
+    "Full native SDK, cross-target export and automatic stack remapping",
+    "Shipping/reference-phone performance gates"
+  ]
+}

@@ -16,4 +16,5 @@ incant_localization.workspace = true
 serde_json = { workspace = true }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
+incant_assets = { path = "../incant_assets" }
 wasm-bindgen = "=0.2.126"

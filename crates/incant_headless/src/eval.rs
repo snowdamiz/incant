@@ -74,7 +74,7 @@ pub fn run(
         super::provider(model.clone())?
     };
     provider.models()?;
-    let mut viewport = GpuPerception::new(None)?;
+    let mut viewport = GpuPerception::new(None);
     let mut results = vec![];
     let mut passed = 0;
     for case in suite.cases {

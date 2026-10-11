@@ -1,0 +1,16 @@
+[
+ {
+  "label": "suzanne_front",
+  "project": "artifacts/0040-static-fbx-import/runs/r1/static-fbx/static-fbx.incant.json",
+  "camera": "01JA40ST0000000000000000W6",
+  "sha256": "8975cc757a4ab8c1765bca0ff1ce8bde23ac70e3268ee05cae9d7645a2f6bcc3",
+  "path": "artifacts/0040-static-fbx-import/runs/r3/repeat/suzanne_front.png"
+ },
+ {
+  "label": "controls_ortho-source-free",
+  "project": "artifacts/0040-static-fbx-import/runs/r1/textures/textures.incant.json",
+  "camera": "01JA40TX0000000000000000W5",
+  "sha256": "d3b22000a5e594fe533d328eb44c1a4910d83ee10d4f964039daa16375eec366",
+  "path": "artifacts/0040-static-fbx-import/runs/r3/repeat/controls_ortho-source-free.png"
+ }
+]

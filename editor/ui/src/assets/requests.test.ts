@@ -8,7 +8,7 @@ const asset = (path: string, kind: string): ProjectAsset => ({
 });
 
 describe('typed import interpretation', () => {
-  it.each(['sprites/ui.atlas.json', 'audio/theme.wav', 'audio/hit.OGG', 'models/scene.glb'])(
+  it.each(['sprites/ui.atlas.json', 'audio/theme.wav', 'audio/hit.OGG', 'models/scene.glb', 'models/static.FBX'])(
     'omits a stale draft interpretation for %s', (source) => {
       expect(requestFor({ key: 1, source, usage: 'normal' }, [])).toEqual({ source });
     },
@@ -20,6 +20,7 @@ describe('typed import interpretation', () => {
     ['audio/theme.wav', 'audio'],
     ['audio/hit.ogg', 'audio'],
     ['models/scene.glb', 'model'],
+    ['models/static.fbx', 'model'],
   ])('does not reinterpret %s during reimport', (path, kind) => {
     expect(reimportRequest(asset(path, kind), 'linear')).toEqual({ source: path });
   });

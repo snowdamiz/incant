@@ -1,0 +1,187 @@
+{
+  "source_head": "d640159c911940164c269a706a1b48aa997f14f2",
+  "platform": "Local aarch64-apple-darwin, pinned Rust1.99.0; concurrent unrelated development work",
+  "passed": true,
+  "comparison_checks": {
+    "runtime.target": true,
+    "runtime.profile": true,
+    "runtime.compiler": true,
+    "runtime.codegen": true,
+    "runtime.executable_checks": true,
+    "runtime.source_free.passed": true,
+    "runtime.source_free.authoring_via_commands": true,
+    "runtime.source_free.authoring_files_removed_before_runtime": true,
+    "runtime.source_free.process_restarts_equal": true,
+    "runtime.source_free.reset_discards_simulation": true,
+    "runtime.source_free.corruption_rejected": true,
+    "runtime.source_free.scene_bytes": true,
+    "runtime.output": true,
+    "script.passed": true,
+    "script.target": true,
+    "script.compiler": true,
+    "script.codegen": true,
+    "script.inputs_and_build_storage_removed": true,
+    "script.runtime_exchange_files": true,
+    "script.runtime_source_compiler_symbols_absent": true,
+    "script.dynamic_source_routes_rejected": true,
+    "script.observations": true,
+    "script.recorded_input_observations": true,
+    "script.native_physics_observations": true,
+    "script.input_exchange_only_at_startup": true,
+    "script.source-symbol-audit.json": true,
+    "session.deletion": true
+  },
+  "player_processes": {
+    "observations": 12,
+    "recorded_input_observations": 12,
+    "native_physics_observations": 8,
+    "runtime_player_processes": 6
+  },
+  "timing_seconds": {
+    "standalone_runtime": 80.59473279200029,
+    "standalone_script_physics": 120.83550716601894,
+    "standalone_total": 201.43023995801923,
+    "shared_process_total": 189.25164612499066,
+    "shared_inner_session": 188.8227546250273
+  },
+  "builds": [
+    {
+      "seconds": 76.38682983399485,
+      "target_units": 93,
+      "reused_units": 0,
+      "owned_units": [
+        {
+          "crate": "incant_types",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "37f92def1e15d8f1f4cdf73ce5c490d3033309f7d073e692a472fbdf997de830",
+          "fresh_build": 0
+        },
+        {
+          "crate": "incant_physics_runtime",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "3eca1344e6b19cb717f9fe47f528a41997d2bf229b96a2547560513286d25153",
+          "fresh_build": 0
+        },
+        {
+          "crate": "incant_runtime",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "a62a98037daf650d0caead030098bbb9d190925e505c776a2be37adac0ad2142",
+          "fresh_build": 0
+        }
+      ]
+    },
+    {
+      "seconds": 105.80620329198427,
+      "target_units": 107,
+      "reused_units": 77,
+      "owned_units": [
+        {
+          "crate": "incant_types",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "884509c0d88d406f197869ac32e63b3b4021ab60ef0ee6994b6dc9243879656c",
+          "fresh_build": 1
+        },
+        {
+          "crate": "incant_physics_runtime",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "4080f8f89493fd0e5caffe6074fc821e12c9b36ee3b4c5677bc9539351b93aac",
+          "fresh_build": 1
+        },
+        {
+          "crate": "incant_input",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "9070b4cf717a3c36bc5fa55fa1379296f80422ec58f091146012f528ae3ad47f",
+          "fresh_build": 1
+        },
+        {
+          "crate": "incant_runtime",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "681ed3eca6764116333996e3c7c11fe8f2ac281ec11db731ee0edbb140e03233",
+          "fresh_build": 1
+        },
+        {
+          "crate": "incant_script",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "c8122140670f74fe2ac6c74f43cd4dd4f41d65b443e3a7ee8d547cb3eb5e1845",
+          "fresh_build": 1
+        },
+        {
+          "crate": "incant_script_player",
+          "features": [],
+          "reused": false,
+          "identity_sha256": "8d787a44cde88a16de53df09b926fe307874296855d7cee366589f4014f0a77f",
+          "fresh_build": 1
+        }
+      ]
+    }
+  ],
+  "tools_tests": 55,
+  "workflow_delta": [],
+  "logs": [
+    {
+      "path": "/tmp/incant-shipping-shared-final/session.json",
+      "sha256": "189b7153c1ab71b03288ee2d16200974e12d16f281d0110d85ed17a847d624be",
+      "bytes": 679027
+    },
+    {
+      "path": "/tmp/incant-shipping-shared-final/comparison.json",
+      "sha256": "84912ae7b3c267a6f68168a97400b9c7662b26974b05773ab26303678870b8fb",
+      "bytes": 57116
+    },
+    {
+      "path": "/tmp/incant-shipping-shared-final/build-0.stdout.jsonl",
+      "sha256": "d1df80210f1025fc030a5c53de54ca277240c6a1500d4645476fcd62bd900c20",
+      "bytes": 3166403
+    },
+    {
+      "path": "/tmp/incant-shipping-shared-final/build-0.stderr.log",
+      "sha256": "2ad8481ae3676cf426fa3be348a53522930f01d43a81e16fde41bd486fd9462d",
+      "bytes": 383171
+    },
+    {
+      "path": "/tmp/incant-shipping-shared-final/build-1.stdout.jsonl",
+      "sha256": "8058700b9c3be6a4912353b9630eadcc489dfe32f3537b0184d7854145511161",
+      "bytes": 6298779
+    },
+    {
+      "path": "/tmp/incant-shipping-shared-final/build-1.stderr.log",
+      "sha256": "b49afa68c3f9459e6af2f19aae14ca6e6d9298bbba64648c0fe03cd635033a37",
+      "bytes": 420514
+    },
+    {
+      "path": "/tmp/incant-shipping-standalone-final.log",
+      "sha256": "53f1799005fe122278247d43238157702d26bd29c5c1403aad4d235d97b4f1fe",
+      "bytes": 1602
+    },
+    {
+      "path": "/tmp/incant-shipping-session-tools-final.log",
+      "sha256": "38a4f8367f65ecda2d9ad17a53098ae829ba35490028a384dba41f1739b3b6e0",
+      "bytes": 700
+    },
+    {
+      "path": "/tmp/incant-shipping-standalone-final-runtime/manifest.json",
+      "sha256": "3444a81f3e9d61d7db4858a814208cfff8ddb2592ef3938d65990545af205121",
+      "bytes": 7032
+    },
+    {
+      "path": "/tmp/incant-shipping-standalone-final-script/result.json",
+      "sha256": "8c50284d1aa9f0a750876aeed0ed84e4bd0128a4ae4c551cf215b15f9afc6a87",
+      "bytes": 10131
+    }
+  ],
+  "limitations": [
+    "Generated scene/project identities and per-build executable/symbol UUIDs may differ; each package independently passed symbol identity and source-deletion checks.",
+    "This is one local matched source comparison with concurrent unrelated builds; hosted performance remains unmeasured.",
+    "All player assertions, symbol/package and source-deletion checks are preserved; no audio/gameGPU expansion or CI adoption.",
+    "Owned libraries recompiled as distinct feature/dependency units;77 reused units are same-session proven dependencies.",
+    "Approximately12s total difference in this final local sample is not a material or hosted latency claim; earlier sample differed by8s."
+  ]
+}

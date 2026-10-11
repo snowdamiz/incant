@@ -4,6 +4,22 @@
 use crate::ScriptError;
 use std::collections::BTreeMap;
 
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) enum Scope {
+    #[default]
+    Global,
+    Source(incant_runtime::StableId),
+}
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord)]
+struct Key {
+    scope: Scope,
+    id: String,
+}
+pub(crate) struct ScopedAction {
+    pub scope: Scope,
+    pub action: Action,
+}
+
 pub(crate) const MAX_TIMERS: usize = 128;
 pub(crate) const MAX_TIMER_ACTIONS: usize = 256;
 const MAX_TICK: u64 = (1 << 53) - 1;
@@ -12,14 +28,16 @@ const MAX_TICK: u64 = (1 << 53) - 1;
 pub(crate) struct Schedule {
     pub tick: u64,
     pub elapsed_seconds: f64,
-    timers: BTreeMap<String, Timer>,
+    timers: BTreeMap<Key, Timer>,
 }
 #[derive(Clone)]
 struct Timer {
     due: u64,
     interval: Option<u32>,
 }
+#[derive(Clone)]
 pub(crate) struct Event {
+    pub scope: Scope,
     pub id: String,
     pub scheduled_tick: u64,
 }
@@ -53,7 +71,8 @@ impl Schedule {
         for (id, timer) in &mut next.timers {
             if timer.due == tick {
                 events.push(Event {
-                    id: id.clone(),
+                    scope: id.scope,
+                    id: id.id.clone(),
                     scheduled_tick: tick,
                 });
                 if let Some(interval) = timer.interval {
@@ -65,14 +84,18 @@ impl Schedule {
         next.timers.retain(|_, timer| timer.due > tick);
         Ok((next, events))
     }
-    pub fn apply(&mut self, actions: Vec<Action>) -> Result<(), ScriptError> {
-        for action in actions {
+    pub fn cancel_scope(&mut self, scope: Scope) {
+        self.timers.retain(|key, _| key.scope != scope);
+    }
+    pub fn apply(&mut self, actions: Vec<ScopedAction>) -> Result<(), ScriptError> {
+        for ScopedAction { scope, action } in actions {
             match action {
                 Action::Set {
                     id,
                     delay,
                     interval,
                 } => {
+                    let id = Key { scope, id };
                     let timer = Timer {
                         due: due(self.tick, delay)?,
                         interval,
@@ -83,7 +106,7 @@ impl Schedule {
                     self.timers.insert(id, timer);
                 }
                 Action::Cancel(id) => {
-                    self.timers.remove(&id);
+                    self.timers.remove(&Key { scope, id });
                 }
             }
         }
@@ -101,10 +124,13 @@ mod tests {
             ..Default::default()
         };
         schedule
-            .apply(vec![Action::Set {
-                id: "once".into(),
-                delay: 1,
-                interval: None,
+            .apply(vec![ScopedAction {
+                scope: Scope::Global,
+                action: Action::Set {
+                    id: "once".into(),
+                    delay: 1,
+                    interval: None,
+                },
             }])
             .unwrap();
         let (end, events) = schedule.advance(0.5).unwrap();
@@ -112,10 +138,13 @@ mod tests {
         assert!(end.timers.is_empty());
         assert!(matches!(end.advance(0.5), Err(ScriptError::TimerRange)));
         schedule
-            .apply(vec![Action::Set {
-                id: "repeat".into(),
-                delay: 1,
-                interval: Some(1),
+            .apply(vec![ScopedAction {
+                scope: Scope::Global,
+                action: Action::Set {
+                    id: "repeat".into(),
+                    delay: 1,
+                    interval: Some(1),
+                },
             }])
             .unwrap();
         assert!(matches!(

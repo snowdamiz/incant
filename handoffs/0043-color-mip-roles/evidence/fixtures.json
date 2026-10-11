@@ -1,0 +1,2521 @@
+{
+ "envcontrol": {
+  "assets": {
+   "sky_one.png": "01M4NNQSDH32FZYY05TP89BG1P",
+   "solid.png": "01M4NNQSF13GWMK6MBVDSBC3CK",
+   "spheres.gltf": "01M4NNQSHZ1FKHGFFX7CB3WFSM",
+   "sprites.atlas.json": "01M4NNQSGHBHSQBRSVMMMPZZ0D"
+  },
+  "authored": {
+   "journal": "e45c5946900d4a6b18fc6a94584cb813fa0e7819f7224cc14627f19fc82f6b73",
+   "project": "7d8d3d020f2e4e86909c88b441f380eb5810dbddc67df9340f875a018c4eb1d4"
+  },
+  "cache_files": {
+   "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/models/0d4203759f4d2e1452e14582a31419ef428f70f0ac73b4e5e29e9af7a6eb4db6.incmodel": "d955154be4bdf9145dbade69611edb70b3d18b230a4617a41f0f15f4ac17de19",
+   "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4.ktx2": "578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4",
+   "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d.json": "0eeb072207743b48e0af727c96e887e6162903ded6bc8af568a8d8dd57d366f9",
+   "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/6841a455d0074ecd9796e4b0e95734c28d49951a005fe42bc27e736e72287ac2.json": "bf775dbf0e7393dfa1698ead52bb037222f7440538ae0c21b55cf256420d8cb6",
+   "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/b6e977dc29dd16edce67defbd6d330c89962b399ebdcc6b325b837f9beaba026.ktx2": "b6e977dc29dd16edce67defbd6d330c89962b399ebdcc6b325b837f9beaba026",
+   "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/da8c08c950fa8abab243d4787f3528a9b49d486784ea76921dd7dc9d184d384b.ktx2": "da8c08c950fa8abab243d4787f3528a9b49d486784ea76921dd7dc9d184d384b",
+   "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/f060064990163704c78a05bd4e32cb6ff9c9ac54ed9896acba0ee80c11fc62e6.json": "ae248871d4c713c5ee8b3bcbfaf942f01cf8baab21472c86aa38813e35a5f156"
+  },
+  "entities": {
+   "Atlas flag": "01JA43CMC00000000000000019",
+   "Atlas panel": "01JA43CMC0000000000000001A",
+   "Camera view": "01JA43CMC0000000000000001B",
+   "Sky environment": "01JA43CMC00000000000000002",
+   "Sky sprite": "01JA43CMC00000000000000018",
+   "Spheres": "01JA43CMC00000000000000003",
+   "Stripe 0": "01JA43CMC00000000000000004",
+   "Stripe 1": "01JA43CMC00000000000000005",
+   "Stripe 10": "01JA43CMC0000000000000000E",
+   "Stripe 11": "01JA43CMC0000000000000000F",
+   "Stripe 12": "01JA43CMC0000000000000000G",
+   "Stripe 13": "01JA43CMC0000000000000000H",
+   "Stripe 14": "01JA43CMC0000000000000000J",
+   "Stripe 15": "01JA43CMC0000000000000000K",
+   "Stripe 16": "01JA43CMC0000000000000000M",
+   "Stripe 17": "01JA43CMC0000000000000000N",
+   "Stripe 18": "01JA43CMC0000000000000000P",
+   "Stripe 19": "01JA43CMC0000000000000000Q",
+   "Stripe 2": "01JA43CMC00000000000000006",
+   "Stripe 20": "01JA43CMC0000000000000000R",
+   "Stripe 21": "01JA43CMC0000000000000000S",
+   "Stripe 22": "01JA43CMC0000000000000000T",
+   "Stripe 23": "01JA43CMC0000000000000000V",
+   "Stripe 24": "01JA43CMC0000000000000000W",
+   "Stripe 25": "01JA43CMC0000000000000000X",
+   "Stripe 26": "01JA43CMC0000000000000000Y",
+   "Stripe 27": "01JA43CMC0000000000000000Z",
+   "Stripe 28": "01JA43CMC00000000000000010",
+   "Stripe 29": "01JA43CMC00000000000000011",
+   "Stripe 3": "01JA43CMC00000000000000007",
+   "Stripe 30": "01JA43CMC00000000000000012",
+   "Stripe 31": "01JA43CMC00000000000000013",
+   "Stripe 32": "01JA43CMC00000000000000014",
+   "Stripe 33": "01JA43CMC00000000000000015",
+   "Stripe 34": "01JA43CMC00000000000000016",
+   "Stripe 35": "01JA43CMC00000000000000017",
+   "Stripe 4": "01JA43CMC00000000000000008",
+   "Stripe 5": "01JA43CMC00000000000000009",
+   "Stripe 6": "01JA43CMC0000000000000000A",
+   "Stripe 7": "01JA43CMC0000000000000000B",
+   "Stripe 8": "01JA43CMC0000000000000000C",
+   "Stripe 9": "01JA43CMC0000000000000000D",
+   "Zero key": "01JA43CMC00000000000000001"
+  },
+  "framing": {
+   "view": [
+    70.0,
+    81.9,
+    890.0,
+    495.8
+   ]
+  },
+  "meta": {
+   "Atlas flag": {
+    "centre": [
+     -3.35,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     1.4,
+     1.4
+    ]
+   },
+   "Atlas panel": {
+    "centre": [
+     3.35,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     1.4,
+     1.4
+    ]
+   },
+   "Sky sprite": {
+    "centre": [
+     0.0,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     4.0,
+     2.0
+    ]
+   },
+   "Stripe 0": {
+    "centre": [
+     -4.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 1": {
+    "centre": [
+     -4.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 10": {
+    "centre": [
+     -1.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 11": {
+    "centre": [
+     -1.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 12": {
+    "centre": [
+     -1.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 13": {
+    "centre": [
+     -1.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 14": {
+    "centre": [
+     -0.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 15": {
+    "centre": [
+     -0.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 16": {
+    "centre": [
+     -0.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 17": {
+    "centre": [
+     -0.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 18": {
+    "centre": [
+     0.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 19": {
+    "centre": [
+     0.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 2": {
+    "centre": [
+     -3.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 20": {
+    "centre": [
+     0.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 21": {
+    "centre": [
+     0.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 22": {
+    "centre": [
+     1.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 23": {
+    "centre": [
+     1.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 24": {
+    "centre": [
+     1.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 25": {
+    "centre": [
+     1.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 26": {
+    "centre": [
+     2.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 27": {
+    "centre": [
+     2.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 28": {
+    "centre": [
+     2.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 29": {
+    "centre": [
+     2.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 3": {
+    "centre": [
+     -3.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 30": {
+    "centre": [
+     3.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 31": {
+    "centre": [
+     3.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 32": {
+    "centre": [
+     3.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 33": {
+    "centre": [
+     3.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 34": {
+    "centre": [
+     4.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 35": {
+    "centre": [
+     4.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 4": {
+    "centre": [
+     -3.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 5": {
+    "centre": [
+     -3.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 6": {
+    "centre": [
+     -2.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 7": {
+    "centre": [
+     -2.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 8": {
+    "centre": [
+     -2.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 9": {
+    "centre": [
+     -2.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "matte white": {
+    "centre": [
+     -1.45,
+     0.95,
+     0.0
+    ],
+    "radius": 0.95
+   },
+   "polished metal": {
+    "centre": [
+     1.45,
+     0.95,
+     0.0
+    ],
+    "radius": 0.95
+   }
+  },
+  "project": "artifacts/0043-color-mip-roles/projects/envcontrol/envcontrol.incant.json",
+  "receipts": {
+   "sky_one.png": {
+    "asset": {
+     "id": "01M4NNQSDH32FZYY05TP89BG1P",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sky_one",
+     "path": "sky_one.png",
+     "sha256": "6841a455d0074ecd9796e4b0e95734c28d49951a005fe42bc27e736e72287ac2"
+    },
+    "changed": true,
+    "revision": 1
+   },
+   "solid.png": {
+    "asset": {
+     "id": "01M4NNQSF13GWMK6MBVDSBC3CK",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "solid",
+     "path": "solid.png",
+     "sha256": "f060064990163704c78a05bd4e32cb6ff9c9ac54ed9896acba0ee80c11fc62e6"
+    },
+    "changed": true,
+    "revision": 2
+   },
+   "spheres.gltf": {
+    "asset": {
+     "id": "01M4NNQSHZ1FKHGFFX7CB3WFSM",
+     "kind": "model",
+     "name": "spheres",
+     "path": "spheres.gltf",
+     "sha256": "0d4203759f4d2e1452e14582a31419ef428f70f0ac73b4e5e29e9af7a6eb4db6"
+    },
+    "changed": true,
+    "revision": 4
+   },
+   "sprites.atlas.json": {
+    "asset": {
+     "id": "01M4NNQSGHBHSQBRSVMMMPZZ0D",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sprites.atlas",
+     "path": "sprites.atlas.json",
+     "sha256": "58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d"
+    },
+    "changed": true,
+    "revision": 3
+   }
+  },
+  "scene": "01M4NNQSBG7AFG6H36NSXJ45B4",
+  "sources": {
+   "flag.png": "4a894de0b4d9189c81861ad1f2e2f554cc29c4add86739b45d0c1d148a315f52",
+   "panel_b.png": "d3c744087835abaedec95fbe96412a80e2bb3de5072189637b802390b4767d08",
+   "sky_one.png": "288f9c429a87785a619e3d91366b3cd02211743d5eb6443807ea3a4dac21e3de",
+   "solid.png": "033363320406e259c9dbeeac58907310aca2bd2fb64bcc9510abb302c40dff1f",
+   "spheres.bin": "1ad9f9870a7cd83d3da939c2330c4a776116832dd6e90ee479fb56d388aa65cd",
+   "spheres.gltf": "cf422f55371f1aa99a1093baac4d5dd9bedee2e15a0d66b6e1320815ff3e60bc",
+   "sprites.atlas.json": "198111b8962c513dc6b2637f264531469d4f209a49e733f7bc310515c7f74043"
+  },
+  "validate": {
+   "diagnostics": [],
+   "project_id": "01M4NNQSBGT7TPGEQY1BXENJG4",
+   "schema_version": 1,
+   "valid": true
+  },
+  "views": {
+   "view": {
+    "camera": "01JA43CMC0000000000000001B",
+    "eye": [
+     0.0,
+     0.1,
+     8.6
+    ],
+    "fov": 38.0,
+    "ortho_half_height": null,
+    "rotation": [
+     -0.014530280211797404,
+     -0.0,
+     -0.0,
+     0.999894429905961
+    ],
+    "size": [
+     960,
+     540
+    ]
+   }
+  }
+ },
+ "environment": {
+  "assets": {
+   "sky.png": "01M4NNQRZ235WBQ0PD9Y6XB7JY",
+   "solid.png": "01M4NNQS0MBHSF3HMD974G0WMJ",
+   "spheres.gltf": "01M4NNQS3NCFRNXWHQWPDZ8FHG",
+   "sprites.atlas.json": "01M4NNQS26C854J50VTDN29Z0V"
+  },
+  "authored": {
+   "journal": "9d68e70d06e15abc1a318230832c2b624e56eb7761d3fe7d5bcd404328e39579",
+   "project": "c3e3b32fd52fcdafdc20af1780ef41f25852e07d4f35549d54940280adb53757"
+  },
+  "cache_files": {
+   "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/models/0d4203759f4d2e1452e14582a31419ef428f70f0ac73b4e5e29e9af7a6eb4db6.incmodel": "d955154be4bdf9145dbade69611edb70b3d18b230a4617a41f0f15f4ac17de19",
+   "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4.ktx2": "578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4",
+   "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d.json": "0eeb072207743b48e0af727c96e887e6162903ded6bc8af568a8d8dd57d366f9",
+   "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/6a1c04b6acf4528f6343dbcd3069faad24d2518ffb1e4dcd057d579d7d0de9bc.ktx2": "6a1c04b6acf4528f6343dbcd3069faad24d2518ffb1e4dcd057d579d7d0de9bc",
+   "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/b18500a1814d6e91fd307a2eae5c47837d2e025162b39dbef33489d689a4f121.json": "a92fcfd8913d0fca7d1514d7088e9499103ec4021330720780109570a6e18098",
+   "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/da8c08c950fa8abab243d4787f3528a9b49d486784ea76921dd7dc9d184d384b.ktx2": "da8c08c950fa8abab243d4787f3528a9b49d486784ea76921dd7dc9d184d384b",
+   "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/f060064990163704c78a05bd4e32cb6ff9c9ac54ed9896acba0ee80c11fc62e6.json": "ae248871d4c713c5ee8b3bcbfaf942f01cf8baab21472c86aa38813e35a5f156"
+  },
+  "entities": {
+   "Atlas flag": "01JA43CME00000000000000019",
+   "Atlas panel": "01JA43CME0000000000000001A",
+   "Camera view": "01JA43CME0000000000000001B",
+   "Sky environment": "01JA43CME00000000000000002",
+   "Sky sprite": "01JA43CME00000000000000018",
+   "Spheres": "01JA43CME00000000000000003",
+   "Stripe 0": "01JA43CME00000000000000004",
+   "Stripe 1": "01JA43CME00000000000000005",
+   "Stripe 10": "01JA43CME0000000000000000E",
+   "Stripe 11": "01JA43CME0000000000000000F",
+   "Stripe 12": "01JA43CME0000000000000000G",
+   "Stripe 13": "01JA43CME0000000000000000H",
+   "Stripe 14": "01JA43CME0000000000000000J",
+   "Stripe 15": "01JA43CME0000000000000000K",
+   "Stripe 16": "01JA43CME0000000000000000M",
+   "Stripe 17": "01JA43CME0000000000000000N",
+   "Stripe 18": "01JA43CME0000000000000000P",
+   "Stripe 19": "01JA43CME0000000000000000Q",
+   "Stripe 2": "01JA43CME00000000000000006",
+   "Stripe 20": "01JA43CME0000000000000000R",
+   "Stripe 21": "01JA43CME0000000000000000S",
+   "Stripe 22": "01JA43CME0000000000000000T",
+   "Stripe 23": "01JA43CME0000000000000000V",
+   "Stripe 24": "01JA43CME0000000000000000W",
+   "Stripe 25": "01JA43CME0000000000000000X",
+   "Stripe 26": "01JA43CME0000000000000000Y",
+   "Stripe 27": "01JA43CME0000000000000000Z",
+   "Stripe 28": "01JA43CME00000000000000010",
+   "Stripe 29": "01JA43CME00000000000000011",
+   "Stripe 3": "01JA43CME00000000000000007",
+   "Stripe 30": "01JA43CME00000000000000012",
+   "Stripe 31": "01JA43CME00000000000000013",
+   "Stripe 32": "01JA43CME00000000000000014",
+   "Stripe 33": "01JA43CME00000000000000015",
+   "Stripe 34": "01JA43CME00000000000000016",
+   "Stripe 35": "01JA43CME00000000000000017",
+   "Stripe 4": "01JA43CME00000000000000008",
+   "Stripe 5": "01JA43CME00000000000000009",
+   "Stripe 6": "01JA43CME0000000000000000A",
+   "Stripe 7": "01JA43CME0000000000000000B",
+   "Stripe 8": "01JA43CME0000000000000000C",
+   "Stripe 9": "01JA43CME0000000000000000D",
+   "Zero key": "01JA43CME00000000000000001"
+  },
+  "framing": {
+   "view": [
+    70.0,
+    81.9,
+    890.0,
+    495.8
+   ]
+  },
+  "meta": {
+   "Atlas flag": {
+    "centre": [
+     -3.35,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     1.4,
+     1.4
+    ]
+   },
+   "Atlas panel": {
+    "centre": [
+     3.35,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     1.4,
+     1.4
+    ]
+   },
+   "Sky sprite": {
+    "centre": [
+     0.0,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     4.0,
+     2.0
+    ]
+   },
+   "Stripe 0": {
+    "centre": [
+     -4.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 1": {
+    "centre": [
+     -4.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 10": {
+    "centre": [
+     -1.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 11": {
+    "centre": [
+     -1.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 12": {
+    "centre": [
+     -1.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 13": {
+    "centre": [
+     -1.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 14": {
+    "centre": [
+     -0.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 15": {
+    "centre": [
+     -0.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 16": {
+    "centre": [
+     -0.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 17": {
+    "centre": [
+     -0.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 18": {
+    "centre": [
+     0.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 19": {
+    "centre": [
+     0.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 2": {
+    "centre": [
+     -3.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 20": {
+    "centre": [
+     0.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 21": {
+    "centre": [
+     0.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 22": {
+    "centre": [
+     1.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 23": {
+    "centre": [
+     1.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 24": {
+    "centre": [
+     1.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 25": {
+    "centre": [
+     1.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 26": {
+    "centre": [
+     2.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 27": {
+    "centre": [
+     2.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 28": {
+    "centre": [
+     2.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 29": {
+    "centre": [
+     2.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 3": {
+    "centre": [
+     -3.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 30": {
+    "centre": [
+     3.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 31": {
+    "centre": [
+     3.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 32": {
+    "centre": [
+     3.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 33": {
+    "centre": [
+     3.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 34": {
+    "centre": [
+     4.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 35": {
+    "centre": [
+     4.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 4": {
+    "centre": [
+     -3.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 5": {
+    "centre": [
+     -3.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 6": {
+    "centre": [
+     -2.875,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 7": {
+    "centre": [
+     -2.625,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 8": {
+    "centre": [
+     -2.375,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "Stripe 9": {
+    "centre": [
+     -2.125,
+     -1.45,
+     0.0
+    ],
+    "size": [
+     0.25,
+     2.4
+    ]
+   },
+   "matte white": {
+    "centre": [
+     -1.45,
+     0.95,
+     0.0
+    ],
+    "radius": 0.95
+   },
+   "polished metal": {
+    "centre": [
+     1.45,
+     0.95,
+     0.0
+    ],
+    "radius": 0.95
+   }
+  },
+  "project": "artifacts/0043-color-mip-roles/projects/environment/environment.incant.json",
+  "receipts": {
+   "sky.png": {
+    "asset": {
+     "id": "01M4NNQRZ235WBQ0PD9Y6XB7JY",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sky",
+     "path": "sky.png",
+     "sha256": "b18500a1814d6e91fd307a2eae5c47837d2e025162b39dbef33489d689a4f121"
+    },
+    "changed": true,
+    "revision": 1
+   },
+   "solid.png": {
+    "asset": {
+     "id": "01M4NNQS0MBHSF3HMD974G0WMJ",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "solid",
+     "path": "solid.png",
+     "sha256": "f060064990163704c78a05bd4e32cb6ff9c9ac54ed9896acba0ee80c11fc62e6"
+    },
+    "changed": true,
+    "revision": 2
+   },
+   "spheres.gltf": {
+    "asset": {
+     "id": "01M4NNQS3NCFRNXWHQWPDZ8FHG",
+     "kind": "model",
+     "name": "spheres",
+     "path": "spheres.gltf",
+     "sha256": "0d4203759f4d2e1452e14582a31419ef428f70f0ac73b4e5e29e9af7a6eb4db6"
+    },
+    "changed": true,
+    "revision": 4
+   },
+   "sprites.atlas.json": {
+    "asset": {
+     "id": "01M4NNQS26C854J50VTDN29Z0V",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sprites.atlas",
+     "path": "sprites.atlas.json",
+     "sha256": "58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d"
+    },
+    "changed": true,
+    "revision": 3
+   }
+  },
+  "scene": "01M4NNQRX1WCX6TTV2XVRCRT7S",
+  "sources": {
+   "flag.png": "4a894de0b4d9189c81861ad1f2e2f554cc29c4add86739b45d0c1d148a315f52",
+   "panel_b.png": "d3c744087835abaedec95fbe96412a80e2bb3de5072189637b802390b4767d08",
+   "sky.png": "293fb0ba01e89409605df0ab906a51fa00d0e6f333bbc3225f7dc6aea9790013",
+   "solid.png": "033363320406e259c9dbeeac58907310aca2bd2fb64bcc9510abb302c40dff1f",
+   "spheres.bin": "1ad9f9870a7cd83d3da939c2330c4a776116832dd6e90ee479fb56d388aa65cd",
+   "spheres.gltf": "cf422f55371f1aa99a1093baac4d5dd9bedee2e15a0d66b6e1320815ff3e60bc",
+   "sprites.atlas.json": "198111b8962c513dc6b2637f264531469d4f209a49e733f7bc310515c7f74043"
+  },
+  "validate": {
+   "diagnostics": [],
+   "project_id": "01M4NNQRX1964XNTY8V2Y15S06",
+   "schema_version": 1,
+   "valid": true
+  },
+  "views": {
+   "view": {
+    "camera": "01JA43CME0000000000000001B",
+    "eye": [
+     0.0,
+     0.1,
+     8.6
+    ],
+    "fov": 38.0,
+    "ortho_half_height": null,
+    "rotation": [
+     -0.014530280211797404,
+     -0.0,
+     -0.0,
+     0.999894429905961
+    ],
+    "size": [
+     960,
+     540
+    ]
+   }
+  }
+ },
+ "materials": {
+  "assets": {
+   "controls.gltf": "01M4NNQRM4G2HYH7KTBZ128360",
+   "emissive.gltf": "01M4NNQRNGMCD9EHE36VP38MDB",
+   "env_uniform.png": "01M4NNQRFK5PEXN076FDEKMC5J",
+   "props.gltf": "01M4NNQRH7GXCNVZWHG22XMD0R",
+   "shared.gltf": "01M4NNQRJPYPB948REBYX8Z2PW"
+  },
+  "authored": {
+   "journal": "6f70ec973559dadbab6363f258f98a56288c367d99e01fed236e1863926f3f91",
+   "project": "a643a4ca3dbd2c82e924516793400ce54e9a6af72b7d946ebb71acbf474b7cce"
+  },
+  "cache_files": {
+   "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/1cea76a990ff9b5545810cc5919cb82d158bf8244a0b057776c98398f70e64b3.incmodel": "908e6b8f9fc8d0b61614f1335f7968cb0ade61d4debebc671716152a80f3becb",
+   "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/21858612014bfdec6ca931f32d3a2379eecfb8a102b017cd19aee64ee89c7115.incmodel": "30b5816bb724a2a637948c5181463f481375a3ca1e25990990e3ce286fd3835e",
+   "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/483413d386480de02b3fad126d7eb5353cd91cbac910b74a7c6fbedfad9b2ce6.incmodel": "28ab5b0aa11bc606b50b7dfc80d4d8fb82b3554d96f5a89c3b31d495cd0095e1",
+   "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/5658d6080ba0800fe7895792621bcb4670401837edd37d0b21e200491e95b851.incmodel": "4d07efa409725510ae1b436b0bbd4f211379f9a4041f7e22ba6ed23db687c644",
+   "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/textures/36949e83dcb972ea16a3a1af21066d981b650130f2381cabfae9d0b0fb293a8f.ktx2": "36949e83dcb972ea16a3a1af21066d981b650130f2381cabfae9d0b0fb293a8f",
+   "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/textures/e822139b6ca931340138021d64ceec048bb6636da8432206e158c3a25b7bfb67.json": "4760ee8adccd2e6054a626482d0e41861df04a8fc3d44fa328611ac0ed0d8dda"
+  },
+  "entities": {
+   "Alpha and role controls": "01JA43CMM00000000000000005",
+   "Backdrop": "01JA43CMM00000000000000003",
+   "Camera board": "01JA43CMM00000000000000007",
+   "Camera oblique": "01JA43CMM00000000000000008",
+   "Emissive maps": "01JA43CMM00000000000000006",
+   "Key light": "01JA43CMM00000000000000001",
+   "Shared OPAQUE MASK BLEND": "01JA43CMM00000000000000004",
+   "Uniform environment": "01JA43CMM00000000000000002"
+  },
+  "framing": {
+   "board": [
+    132.0,
+    10.0,
+    828.0,
+    530.0
+   ],
+   "board backdrop covers frame": true,
+   "board pixel rectangles": {
+    "B-mixed k1": [
+     572,
+     10,
+     652,
+     90
+    ],
+    "B-mixed k2": [
+     572,
+     98,
+     652,
+     178
+    ],
+    "B-mixed k6": [
+     572,
+     186,
+     652,
+     266
+    ],
+    "E-B-mixed k1": [
+     484,
+     274,
+     564,
+     354
+    ],
+    "E-B-mixed k2": [
+     484,
+     362,
+     564,
+     442
+    ],
+    "E-B-mixed k6": [
+     484,
+     450,
+     564,
+     530
+    ],
+    "E-B-one k1": [
+     660,
+     274,
+     740,
+     354
+    ],
+    "E-B-one k2": [
+     660,
+     362,
+     740,
+     442
+    ],
+    "E-B-one k6": [
+     660,
+     450,
+     740,
+     530
+    ],
+    "E-B-zero k1": [
+     572,
+     274,
+     652,
+     354
+    ],
+    "E-B-zero k2": [
+     572,
+     362,
+     652,
+     442
+    ],
+    "E-B-zero k6": [
+     572,
+     450,
+     652,
+     530
+    ],
+    "E-O-mixed k1": [
+     220,
+     274,
+     300,
+     354
+    ],
+    "E-O-mixed k2": [
+     220,
+     362,
+     300,
+     442
+    ],
+    "E-O-mixed k6": [
+     220,
+     450,
+     300,
+     530
+    ],
+    "E-O-one k1": [
+     396,
+     274,
+     476,
+     354
+    ],
+    "E-O-one k2": [
+     396,
+     362,
+     476,
+     442
+    ],
+    "E-O-one k6": [
+     396,
+     450,
+     476,
+     530
+    ],
+    "E-O-zero k1": [
+     308,
+     274,
+     388,
+     354
+    ],
+    "E-O-zero k2": [
+     308,
+     362,
+     388,
+     442
+    ],
+    "E-O-zero k6": [
+     308,
+     450,
+     388,
+     530
+    ],
+    "L-control k1": [
+     748,
+     10,
+     828,
+     90
+    ],
+    "L-control k2": [
+     748,
+     98,
+     828,
+     178
+    ],
+    "L-control k6": [
+     748,
+     186,
+     828,
+     266
+    ],
+    "M-mixed k1": [
+     484,
+     10,
+     564,
+     90
+    ],
+    "M-mixed k2": [
+     484,
+     98,
+     564,
+     178
+    ],
+    "M-mixed k6": [
+     484,
+     186,
+     564,
+     266
+    ],
+    "N-control k1": [
+     660,
+     10,
+     740,
+     90
+    ],
+    "N-control k2": [
+     660,
+     98,
+     740,
+     178
+    ],
+    "N-control k6": [
+     660,
+     186,
+     740,
+     266
+    ],
+    "O-mixed k1": [
+     132,
+     10,
+     212,
+     90
+    ],
+    "O-mixed k2": [
+     132,
+     98,
+     212,
+     178
+    ],
+    "O-mixed k6": [
+     132,
+     186,
+     212,
+     266
+    ],
+    "O-one k1": [
+     308,
+     10,
+     388,
+     90
+    ],
+    "O-one k2": [
+     308,
+     98,
+     388,
+     178
+    ],
+    "O-one k6": [
+     308,
+     186,
+     388,
+     266
+    ],
+    "O-rgb k1": [
+     396,
+     10,
+     476,
+     90
+    ],
+    "O-rgb k2": [
+     396,
+     98,
+     476,
+     178
+    ],
+    "O-rgb k6": [
+     396,
+     186,
+     476,
+     266
+    ],
+    "O-zero k1": [
+     220,
+     10,
+     300,
+     90
+    ],
+    "O-zero k2": [
+     220,
+     98,
+     300,
+     178
+    ],
+    "O-zero k6": [
+     220,
+     186,
+     300,
+     266
+    ]
+   },
+   "oblique": [
+    61.7,
+    82.8,
+    898.3,
+    365.8
+   ],
+   "oblique backdrop covers frame": true
+  },
+  "meta": {
+   "B-mixed k1": {
+    "centre": [
+     3.3,
+     5.5,
+     0.0
+    ],
+    "column": 5,
+    "group": "base",
+    "k": 1,
+    "material": "B-mixed",
+    "row": 0
+   },
+   "B-mixed k2": {
+    "centre": [
+     3.3,
+     3.3,
+     0.0
+    ],
+    "column": 5,
+    "group": "base",
+    "k": 2,
+    "material": "B-mixed",
+    "row": 1
+   },
+   "B-mixed k6": {
+    "centre": [
+     3.3,
+     1.1,
+     0.0
+    ],
+    "column": 5,
+    "group": "base",
+    "k": 6,
+    "material": "B-mixed",
+    "row": 2
+   },
+   "E-B-mixed k1": {
+    "centre": [
+     1.1,
+     -1.1,
+     0.0
+    ],
+    "column": 3,
+    "group": "emissive",
+    "k": 1,
+    "material": "E-B-mixed",
+    "row": 0
+   },
+   "E-B-mixed k2": {
+    "centre": [
+     1.1,
+     -3.3,
+     0.0
+    ],
+    "column": 3,
+    "group": "emissive",
+    "k": 2,
+    "material": "E-B-mixed",
+    "row": 1
+   },
+   "E-B-mixed k6": {
+    "centre": [
+     1.1,
+     -5.5,
+     0.0
+    ],
+    "column": 3,
+    "group": "emissive",
+    "k": 6,
+    "material": "E-B-mixed",
+    "row": 2
+   },
+   "E-B-one k1": {
+    "centre": [
+     5.5,
+     -1.1,
+     0.0
+    ],
+    "column": 5,
+    "group": "emissive",
+    "k": 1,
+    "material": "E-B-one",
+    "row": 0
+   },
+   "E-B-one k2": {
+    "centre": [
+     5.5,
+     -3.3,
+     0.0
+    ],
+    "column": 5,
+    "group": "emissive",
+    "k": 2,
+    "material": "E-B-one",
+    "row": 1
+   },
+   "E-B-one k6": {
+    "centre": [
+     5.5,
+     -5.5,
+     0.0
+    ],
+    "column": 5,
+    "group": "emissive",
+    "k": 6,
+    "material": "E-B-one",
+    "row": 2
+   },
+   "E-B-zero k1": {
+    "centre": [
+     3.3,
+     -1.1,
+     0.0
+    ],
+    "column": 4,
+    "group": "emissive",
+    "k": 1,
+    "material": "E-B-zero",
+    "row": 0
+   },
+   "E-B-zero k2": {
+    "centre": [
+     3.3,
+     -3.3,
+     0.0
+    ],
+    "column": 4,
+    "group": "emissive",
+    "k": 2,
+    "material": "E-B-zero",
+    "row": 1
+   },
+   "E-B-zero k6": {
+    "centre": [
+     3.3,
+     -5.5,
+     0.0
+    ],
+    "column": 4,
+    "group": "emissive",
+    "k": 6,
+    "material": "E-B-zero",
+    "row": 2
+   },
+   "E-O-mixed k1": {
+    "centre": [
+     -5.5,
+     -1.1,
+     0.0
+    ],
+    "column": 0,
+    "group": "emissive",
+    "k": 1,
+    "material": "E-O-mixed",
+    "row": 0
+   },
+   "E-O-mixed k2": {
+    "centre": [
+     -5.5,
+     -3.3,
+     0.0
+    ],
+    "column": 0,
+    "group": "emissive",
+    "k": 2,
+    "material": "E-O-mixed",
+    "row": 1
+   },
+   "E-O-mixed k6": {
+    "centre": [
+     -5.5,
+     -5.5,
+     0.0
+    ],
+    "column": 0,
+    "group": "emissive",
+    "k": 6,
+    "material": "E-O-mixed",
+    "row": 2
+   },
+   "E-O-one k1": {
+    "centre": [
+     -1.1,
+     -1.1,
+     0.0
+    ],
+    "column": 2,
+    "group": "emissive",
+    "k": 1,
+    "material": "E-O-one",
+    "row": 0
+   },
+   "E-O-one k2": {
+    "centre": [
+     -1.1,
+     -3.3,
+     0.0
+    ],
+    "column": 2,
+    "group": "emissive",
+    "k": 2,
+    "material": "E-O-one",
+    "row": 1
+   },
+   "E-O-one k6": {
+    "centre": [
+     -1.1,
+     -5.5,
+     0.0
+    ],
+    "column": 2,
+    "group": "emissive",
+    "k": 6,
+    "material": "E-O-one",
+    "row": 2
+   },
+   "E-O-zero k1": {
+    "centre": [
+     -3.3,
+     -1.1,
+     0.0
+    ],
+    "column": 1,
+    "group": "emissive",
+    "k": 1,
+    "material": "E-O-zero",
+    "row": 0
+   },
+   "E-O-zero k2": {
+    "centre": [
+     -3.3,
+     -3.3,
+     0.0
+    ],
+    "column": 1,
+    "group": "emissive",
+    "k": 2,
+    "material": "E-O-zero",
+    "row": 1
+   },
+   "E-O-zero k6": {
+    "centre": [
+     -3.3,
+     -5.5,
+     0.0
+    ],
+    "column": 1,
+    "group": "emissive",
+    "k": 6,
+    "material": "E-O-zero",
+    "row": 2
+   },
+   "L-control k1": {
+    "centre": [
+     7.7,
+     5.5,
+     0.0
+    ],
+    "column": 7,
+    "group": "base",
+    "k": 1,
+    "material": "L-control",
+    "row": 0
+   },
+   "L-control k2": {
+    "centre": [
+     7.7,
+     3.3,
+     0.0
+    ],
+    "column": 7,
+    "group": "base",
+    "k": 2,
+    "material": "L-control",
+    "row": 1
+   },
+   "L-control k6": {
+    "centre": [
+     7.7,
+     1.1,
+     0.0
+    ],
+    "column": 7,
+    "group": "base",
+    "k": 6,
+    "material": "L-control",
+    "row": 2
+   },
+   "M-mixed k1": {
+    "centre": [
+     1.1,
+     5.5,
+     0.0
+    ],
+    "column": 4,
+    "group": "base",
+    "k": 1,
+    "material": "M-mixed",
+    "row": 0
+   },
+   "M-mixed k2": {
+    "centre": [
+     1.1,
+     3.3,
+     0.0
+    ],
+    "column": 4,
+    "group": "base",
+    "k": 2,
+    "material": "M-mixed",
+    "row": 1
+   },
+   "M-mixed k6": {
+    "centre": [
+     1.1,
+     1.1,
+     0.0
+    ],
+    "column": 4,
+    "group": "base",
+    "k": 6,
+    "material": "M-mixed",
+    "row": 2
+   },
+   "N-control k1": {
+    "centre": [
+     5.5,
+     5.5,
+     0.0
+    ],
+    "column": 6,
+    "group": "base",
+    "k": 1,
+    "material": "N-control",
+    "row": 0
+   },
+   "N-control k2": {
+    "centre": [
+     5.5,
+     3.3,
+     0.0
+    ],
+    "column": 6,
+    "group": "base",
+    "k": 2,
+    "material": "N-control",
+    "row": 1
+   },
+   "N-control k6": {
+    "centre": [
+     5.5,
+     1.1,
+     0.0
+    ],
+    "column": 6,
+    "group": "base",
+    "k": 6,
+    "material": "N-control",
+    "row": 2
+   },
+   "O-mixed k1": {
+    "centre": [
+     -7.7,
+     5.5,
+     0.0
+    ],
+    "column": 0,
+    "group": "base",
+    "k": 1,
+    "material": "O-mixed",
+    "row": 0
+   },
+   "O-mixed k2": {
+    "centre": [
+     -7.7,
+     3.3,
+     0.0
+    ],
+    "column": 0,
+    "group": "base",
+    "k": 2,
+    "material": "O-mixed",
+    "row": 1
+   },
+   "O-mixed k6": {
+    "centre": [
+     -7.7,
+     1.1,
+     0.0
+    ],
+    "column": 0,
+    "group": "base",
+    "k": 6,
+    "material": "O-mixed",
+    "row": 2
+   },
+   "O-one k1": {
+    "centre": [
+     -3.3,
+     5.5,
+     0.0
+    ],
+    "column": 2,
+    "group": "base",
+    "k": 1,
+    "material": "O-one",
+    "row": 0
+   },
+   "O-one k2": {
+    "centre": [
+     -3.3,
+     3.3,
+     0.0
+    ],
+    "column": 2,
+    "group": "base",
+    "k": 2,
+    "material": "O-one",
+    "row": 1
+   },
+   "O-one k6": {
+    "centre": [
+     -3.3,
+     1.1,
+     0.0
+    ],
+    "column": 2,
+    "group": "base",
+    "k": 6,
+    "material": "O-one",
+    "row": 2
+   },
+   "O-rgb k1": {
+    "centre": [
+     -1.1,
+     5.5,
+     0.0
+    ],
+    "column": 3,
+    "group": "base",
+    "k": 1,
+    "material": "O-rgb",
+    "row": 0
+   },
+   "O-rgb k2": {
+    "centre": [
+     -1.1,
+     3.3,
+     0.0
+    ],
+    "column": 3,
+    "group": "base",
+    "k": 2,
+    "material": "O-rgb",
+    "row": 1
+   },
+   "O-rgb k6": {
+    "centre": [
+     -1.1,
+     1.1,
+     0.0
+    ],
+    "column": 3,
+    "group": "base",
+    "k": 6,
+    "material": "O-rgb",
+    "row": 2
+   },
+   "O-zero k1": {
+    "centre": [
+     -5.5,
+     5.5,
+     0.0
+    ],
+    "column": 1,
+    "group": "base",
+    "k": 1,
+    "material": "O-zero",
+    "row": 0
+   },
+   "O-zero k2": {
+    "centre": [
+     -5.5,
+     3.3,
+     0.0
+    ],
+    "column": 1,
+    "group": "base",
+    "k": 2,
+    "material": "O-zero",
+    "row": 1
+   },
+   "O-zero k6": {
+    "centre": [
+     -5.5,
+     1.1,
+     0.0
+    ],
+    "column": 1,
+    "group": "base",
+    "k": 6,
+    "material": "O-zero",
+    "row": 2
+   }
+  },
+  "project": "artifacts/0043-color-mip-roles/projects/materials/materials.incant.json",
+  "receipts": {
+   "controls.gltf": {
+    "asset": {
+     "id": "01M4NNQRM4G2HYH7KTBZ128360",
+     "kind": "model",
+     "name": "controls",
+     "path": "controls.gltf",
+     "sha256": "1cea76a990ff9b5545810cc5919cb82d158bf8244a0b057776c98398f70e64b3"
+    },
+    "changed": true,
+    "revision": 4
+   },
+   "emissive.gltf": {
+    "asset": {
+     "id": "01M4NNQRNGMCD9EHE36VP38MDB",
+     "kind": "model",
+     "name": "emissive",
+     "path": "emissive.gltf",
+     "sha256": "5658d6080ba0800fe7895792621bcb4670401837edd37d0b21e200491e95b851"
+    },
+    "changed": true,
+    "revision": 5
+   },
+   "env_uniform.png": {
+    "asset": {
+     "id": "01M4NNQRFK5PEXN076FDEKMC5J",
+     "import_settings": {
+      "type": "texture",
+      "usage": "linear"
+     },
+     "kind": "texture",
+     "name": "env_uniform",
+     "path": "env_uniform.png",
+     "sha256": "e822139b6ca931340138021d64ceec048bb6636da8432206e158c3a25b7bfb67"
+    },
+    "changed": true,
+    "revision": 1
+   },
+   "props.gltf": {
+    "asset": {
+     "id": "01M4NNQRH7GXCNVZWHG22XMD0R",
+     "kind": "model",
+     "name": "props",
+     "path": "props.gltf",
+     "sha256": "483413d386480de02b3fad126d7eb5353cd91cbac910b74a7c6fbedfad9b2ce6"
+    },
+    "changed": true,
+    "revision": 2
+   },
+   "shared.gltf": {
+    "asset": {
+     "id": "01M4NNQRJPYPB948REBYX8Z2PW",
+     "kind": "model",
+     "name": "shared",
+     "path": "shared.gltf",
+     "sha256": "21858612014bfdec6ca931f32d3a2379eecfb8a102b017cd19aee64ee89c7115"
+    },
+    "changed": true,
+    "revision": 3
+   }
+  },
+  "scene": "01M4NNQRDCDEP34184DXAY5G2P",
+  "sources": {
+   "card_mixed.png": "668cdfa8d20b2e5226b0365f8a851d009785e63fb5f2272764f55554ff546a82",
+   "card_mr.png": "e47d5daa05f0848f3b6c8ec0f1ef172c0efbdcae7fb84966f12235859184a531",
+   "card_normal.png": "ef19475b2dff12ec174de623e3ea81db70cf5147377e025afc4f4ba129ba66a2",
+   "card_one.png": "3a01799d54b6b96056c5a53fe7ffcffa1fd0764ac0faa33f301f6d796a8aade6",
+   "card_rgb.png": "3e73b9f1edb646af52064aa0800b71ddfb2744046d5028bd1ca6a99775e98259",
+   "card_zero.png": "572b7f9822d323f80a26837b22c2feae87237931438d856d02707f4a599d1967",
+   "controls.bin": "d1f35a18432715ef06fe6e05ca752ad32fd356e8c9466ad84618a8d31864db70",
+   "controls.gltf": "b08b17d3dbeb32d78109644d9ed4af713b36375a04272be8f8e78b5432c96f6f",
+   "emissive.bin": "999840326527ce1b89e0aa91f602e909e8315580b71e7800c55895d4f2b508de",
+   "emissive.gltf": "aa6b2b434f094fcfedfc9bc200f01fddd4926635f469de5242055efcabaf7c82",
+   "env_uniform.png": "769944175394eaca977229aefe74fd182b6f8dc911da039aacca240c9dec110c",
+   "props.bin": "7ee8e2970764cd270e92cc52add1f5751c9f7295e32bad00c5ed88302514ad47",
+   "props.gltf": "486d469dab2c5ad30235004d59fab85f1f27b5b32745168c4430e4565737c810",
+   "shared.bin": "8d3556f86881ea874b3b355cb56ee1a2af816c742b191584bf9baa53b468df79",
+   "shared.gltf": "a7adb7308a2a8a534656d0eca4689e90188e545d034b05014fbe85baf7230f57"
+  },
+  "validate": {
+   "diagnostics": [],
+   "project_id": "01M4NNQRDB5XNTTD2VGSGGG9XD",
+   "schema_version": 1,
+   "valid": true
+  },
+  "views": {
+   "board": {
+    "camera": "01JA43CMM00000000000000007",
+    "eye": [
+     0.0,
+     0.0,
+     10.0
+    ],
+    "fov": 40.0,
+    "ortho_half_height": 6.75,
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "size": [
+     960,
+     540
+    ]
+   },
+   "oblique": {
+    "camera": "01JA43CMM00000000000000008",
+    "eye": [
+     0.0,
+     14.5,
+     10.5
+    ],
+    "fov": 48.0,
+    "ortho_half_height": null,
+    "rotation": [
+     -0.4575815808579404,
+     -0.0,
+     -0.0,
+     0.8891676427196101
+    ],
+    "size": [
+     960,
+     540
+    ]
+   }
+  }
+ },
+ "recook": {
+  "envcontrol": {
+   "authored": {
+    "journal": "a70a8d4a42cd5bc5c3d455c09ee5576b231e5a91acdbba3c07c7d335572de2b6",
+    "project": "5616ddeb31e00f043bd67cf50f464309b4061bee0145c417be5251368c987496"
+   },
+   "cache_files": {
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/models/09bfc7c6009ca4b70728a78995f86446880571fd972a2bee7715a8d6055e9fc9.incmodel": "c3597d831de6b18d462c86add8e2b56345684818bf6aeb451ba5c1a159b2ee8d",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/models/0d4203759f4d2e1452e14582a31419ef428f70f0ac73b4e5e29e9af7a6eb4db6.incmodel": "d955154be4bdf9145dbade69611edb70b3d18b230a4617a41f0f15f4ac17de19",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/169c5d298ec10f1973fb68688f3cb4ffefb42586a30203468ae4bee25b1665bb.json": "f23e43d54b00b6c329f0b05eaadafb8c9af34da70ea69c96ba58185215f8d10c",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/2bc10ae669700f0a741d7b8c569581916025e4ff80a1d5946ac96b1b05ea7bb3.json": "5a1a38e867cdbb5b93a87512719c449fb281b9577e5043c79df2550d36b143eb",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4.ktx2": "578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d.json": "0eeb072207743b48e0af727c96e887e6162903ded6bc8af568a8d8dd57d366f9",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/6841a455d0074ecd9796e4b0e95734c28d49951a005fe42bc27e736e72287ac2.json": "bf775dbf0e7393dfa1698ead52bb037222f7440538ae0c21b55cf256420d8cb6",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/754f901d2d57715e7db25990dea3f8f859743b2d4731dee1c860fb5f23fbc710.ktx2": "754f901d2d57715e7db25990dea3f8f859743b2d4731dee1c860fb5f23fbc710",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/a57eb8af84140388d49ee77ea36c602b76203fd652a34d5cef71d28f77b83e57.json": "6d45f78cdd5e871d444328e246f6177160f69d21a065df5cf0663aef636943b4",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/b6e977dc29dd16edce67defbd6d330c89962b399ebdcc6b325b837f9beaba026.ktx2": "b6e977dc29dd16edce67defbd6d330c89962b399ebdcc6b325b837f9beaba026",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/da8c08c950fa8abab243d4787f3528a9b49d486784ea76921dd7dc9d184d384b.ktx2": "da8c08c950fa8abab243d4787f3528a9b49d486784ea76921dd7dc9d184d384b",
+    "artifacts/0043-color-mip-roles/projects/envcontrol/.incant/cache/textures/f060064990163704c78a05bd4e32cb6ff9c9ac54ed9896acba0ee80c11fc62e6.json": "ae248871d4c713c5ee8b3bcbfaf942f01cf8baab21472c86aa38813e35a5f156"
+   },
+   "imports": [
+    {
+     "asset": "01M4NNQSDH32FZYY05TP89BG1P",
+     "changed": true,
+     "fingerprint_after": "2bc10ae669700f0a741d7b8c569581916025e4ff80a1d5946ac96b1b05ea7bb3",
+     "fingerprint_before": "6841a455d0074ecd9796e4b0e95734c28d49951a005fe42bc27e736e72287ac2",
+     "project_changed": true,
+     "revision": 6,
+     "same_asset_id": true,
+     "source": "sky_one.png",
+     "usage": "color"
+    },
+    {
+     "asset": "01M4NNQSF13GWMK6MBVDSBC3CK",
+     "changed": true,
+     "fingerprint_after": "169c5d298ec10f1973fb68688f3cb4ffefb42586a30203468ae4bee25b1665bb",
+     "fingerprint_before": "f060064990163704c78a05bd4e32cb6ff9c9ac54ed9896acba0ee80c11fc62e6",
+     "project_changed": true,
+     "revision": 7,
+     "same_asset_id": true,
+     "source": "solid.png",
+     "usage": "color"
+    },
+    {
+     "asset": "01M4NNQSGHBHSQBRSVMMMPZZ0D",
+     "changed": true,
+     "fingerprint_after": "a57eb8af84140388d49ee77ea36c602b76203fd652a34d5cef71d28f77b83e57",
+     "fingerprint_before": "58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d",
+     "project_changed": true,
+     "revision": 8,
+     "same_asset_id": true,
+     "source": "sprites.atlas.json",
+     "usage": "color"
+    },
+    {
+     "asset": "01M4NNQSHZ1FKHGFFX7CB3WFSM",
+     "changed": true,
+     "fingerprint_after": "09bfc7c6009ca4b70728a78995f86446880571fd972a2bee7715a8d6055e9fc9",
+     "fingerprint_before": "0d4203759f4d2e1452e14582a31419ef428f70f0ac73b4e5e29e9af7a6eb4db6",
+     "project_changed": true,
+     "revision": 9,
+     "same_asset_id": true,
+     "source": "spheres.gltf",
+     "usage": null
+    }
+   ],
+   "validate": {
+    "diagnostics": [],
+    "project_id": "01M4NNQSBGT7TPGEQY1BXENJG4",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "environment": {
+   "authored": {
+    "journal": "e2868f0132e9a9c29f5eb8b6aecafedee1f23cb884a59bc9ff6f0933896a15a8",
+    "project": "1edfe99ef67dbc91dc44c838619a1d713263a7eefdabdb718ab73a746b793c41"
+   },
+   "cache_files": {
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/models/09bfc7c6009ca4b70728a78995f86446880571fd972a2bee7715a8d6055e9fc9.incmodel": "c3597d831de6b18d462c86add8e2b56345684818bf6aeb451ba5c1a159b2ee8d",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/models/0d4203759f4d2e1452e14582a31419ef428f70f0ac73b4e5e29e9af7a6eb4db6.incmodel": "d955154be4bdf9145dbade69611edb70b3d18b230a4617a41f0f15f4ac17de19",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/169c5d298ec10f1973fb68688f3cb4ffefb42586a30203468ae4bee25b1665bb.json": "f23e43d54b00b6c329f0b05eaadafb8c9af34da70ea69c96ba58185215f8d10c",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4.ktx2": "578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d.json": "0eeb072207743b48e0af727c96e887e6162903ded6bc8af568a8d8dd57d366f9",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/6a1c04b6acf4528f6343dbcd3069faad24d2518ffb1e4dcd057d579d7d0de9bc.ktx2": "6a1c04b6acf4528f6343dbcd3069faad24d2518ffb1e4dcd057d579d7d0de9bc",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/754f901d2d57715e7db25990dea3f8f859743b2d4731dee1c860fb5f23fbc710.ktx2": "754f901d2d57715e7db25990dea3f8f859743b2d4731dee1c860fb5f23fbc710",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/8006aae98e84c9f61df096d45b269bdc2e3cd15c2db5737327d843544151de90.json": "0f7e10af4098fbfafda9e2b6efc4bf85a2a283f4b9a05b63f75668197acdf694",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/a57eb8af84140388d49ee77ea36c602b76203fd652a34d5cef71d28f77b83e57.json": "6d45f78cdd5e871d444328e246f6177160f69d21a065df5cf0663aef636943b4",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/b18500a1814d6e91fd307a2eae5c47837d2e025162b39dbef33489d689a4f121.json": "a92fcfd8913d0fca7d1514d7088e9499103ec4021330720780109570a6e18098",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/da8c08c950fa8abab243d4787f3528a9b49d486784ea76921dd7dc9d184d384b.ktx2": "da8c08c950fa8abab243d4787f3528a9b49d486784ea76921dd7dc9d184d384b",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/eddf6310625e13d0ce67e2d06cda9fc6608e51c1e82c64abe8928d101d78b89a.ktx2": "eddf6310625e13d0ce67e2d06cda9fc6608e51c1e82c64abe8928d101d78b89a",
+    "artifacts/0043-color-mip-roles/projects/environment/.incant/cache/textures/f060064990163704c78a05bd4e32cb6ff9c9ac54ed9896acba0ee80c11fc62e6.json": "ae248871d4c713c5ee8b3bcbfaf942f01cf8baab21472c86aa38813e35a5f156"
+   },
+   "imports": [
+    {
+     "asset": "01M4NNQRZ235WBQ0PD9Y6XB7JY",
+     "changed": true,
+     "fingerprint_after": "8006aae98e84c9f61df096d45b269bdc2e3cd15c2db5737327d843544151de90",
+     "fingerprint_before": "b18500a1814d6e91fd307a2eae5c47837d2e025162b39dbef33489d689a4f121",
+     "project_changed": true,
+     "revision": 6,
+     "same_asset_id": true,
+     "source": "sky.png",
+     "usage": "color"
+    },
+    {
+     "asset": "01M4NNQS0MBHSF3HMD974G0WMJ",
+     "changed": true,
+     "fingerprint_after": "169c5d298ec10f1973fb68688f3cb4ffefb42586a30203468ae4bee25b1665bb",
+     "fingerprint_before": "f060064990163704c78a05bd4e32cb6ff9c9ac54ed9896acba0ee80c11fc62e6",
+     "project_changed": true,
+     "revision": 7,
+     "same_asset_id": true,
+     "source": "solid.png",
+     "usage": "color"
+    },
+    {
+     "asset": "01M4NNQS26C854J50VTDN29Z0V",
+     "changed": true,
+     "fingerprint_after": "a57eb8af84140388d49ee77ea36c602b76203fd652a34d5cef71d28f77b83e57",
+     "fingerprint_before": "58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d",
+     "project_changed": true,
+     "revision": 8,
+     "same_asset_id": true,
+     "source": "sprites.atlas.json",
+     "usage": "color"
+    },
+    {
+     "asset": "01M4NNQS3NCFRNXWHQWPDZ8FHG",
+     "changed": true,
+     "fingerprint_after": "09bfc7c6009ca4b70728a78995f86446880571fd972a2bee7715a8d6055e9fc9",
+     "fingerprint_before": "0d4203759f4d2e1452e14582a31419ef428f70f0ac73b4e5e29e9af7a6eb4db6",
+     "project_changed": true,
+     "revision": 9,
+     "same_asset_id": true,
+     "source": "spheres.gltf",
+     "usage": null
+    }
+   ],
+   "validate": {
+    "diagnostics": [],
+    "project_id": "01M4NNQRX1964XNTY8V2Y15S06",
+    "schema_version": 1,
+    "valid": true
+   }
+  },
+  "materials": {
+   "authored": {
+    "journal": "a5dbeded1b6ba2463e366907fb29ff6990b2100318dfbed448aa39c21c274826",
+    "project": "f6be46c274c29e3c4558d7f6dc32fded63db8646c0a478382a4dbcd8f98e0562"
+   },
+   "cache_files": {
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/1cea76a990ff9b5545810cc5919cb82d158bf8244a0b057776c98398f70e64b3.incmodel": "908e6b8f9fc8d0b61614f1335f7968cb0ade61d4debebc671716152a80f3becb",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/21858612014bfdec6ca931f32d3a2379eecfb8a102b017cd19aee64ee89c7115.incmodel": "30b5816bb724a2a637948c5181463f481375a3ca1e25990990e3ce286fd3835e",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/483413d386480de02b3fad126d7eb5353cd91cbac910b74a7c6fbedfad9b2ce6.incmodel": "28ab5b0aa11bc606b50b7dfc80d4d8fb82b3554d96f5a89c3b31d495cd0095e1",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/5658d6080ba0800fe7895792621bcb4670401837edd37d0b21e200491e95b851.incmodel": "4d07efa409725510ae1b436b0bbd4f211379f9a4041f7e22ba6ed23db687c644",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/5e51169243a3c48ea3cef57113fba00268b34661eca37b747b247ecf7910b104.incmodel": "7302f85781b9f414dd3a74fc11fb4d3616bd971f2f1dd66405a313250d9720d0",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/7345e84092e99aee29a9521c53f1665484b813c7caf5eae50730041db8a8288f.incmodel": "c362399735e2d534d64d8374c5a910f42b0f20ba06fd54e838673b3797e72f83",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/e054b73cf6a8f064e23c8803f59758013a5ef36b90ca1f982a4420b0967a90e4.incmodel": "4c141875db47b05786f2e9d31c0ddfb1efbdb52c1108f08f1f720fdd591e3a89",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/models/e0897f5fd941eb52303f2fb41cec0871cde22271c52ff3b6833f3450efe8a19b.incmodel": "760edb42534ade1ad504364ce98d7953279fc6176916d43f93145caa8508c7c0",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/textures/36949e83dcb972ea16a3a1af21066d981b650130f2381cabfae9d0b0fb293a8f.ktx2": "36949e83dcb972ea16a3a1af21066d981b650130f2381cabfae9d0b0fb293a8f",
+    "artifacts/0043-color-mip-roles/projects/materials/.incant/cache/textures/e822139b6ca931340138021d64ceec048bb6636da8432206e158c3a25b7bfb67.json": "4760ee8adccd2e6054a626482d0e41861df04a8fc3d44fa328611ac0ed0d8dda"
+   },
+   "imports": [
+    {
+     "asset": "01M4NNQRFK5PEXN076FDEKMC5J",
+     "changed": false,
+     "fingerprint_after": "e822139b6ca931340138021d64ceec048bb6636da8432206e158c3a25b7bfb67",
+     "fingerprint_before": "e822139b6ca931340138021d64ceec048bb6636da8432206e158c3a25b7bfb67",
+     "project_changed": false,
+     "revision": 6,
+     "same_asset_id": true,
+     "source": "env_uniform.png",
+     "usage": "linear"
+    },
+    {
+     "asset": "01M4NNQRH7GXCNVZWHG22XMD0R",
+     "changed": true,
+     "fingerprint_after": "5e51169243a3c48ea3cef57113fba00268b34661eca37b747b247ecf7910b104",
+     "fingerprint_before": "483413d386480de02b3fad126d7eb5353cd91cbac910b74a7c6fbedfad9b2ce6",
+     "project_changed": true,
+     "revision": 7,
+     "same_asset_id": true,
+     "source": "props.gltf",
+     "usage": null
+    },
+    {
+     "asset": "01M4NNQRJPYPB948REBYX8Z2PW",
+     "changed": true,
+     "fingerprint_after": "e0897f5fd941eb52303f2fb41cec0871cde22271c52ff3b6833f3450efe8a19b",
+     "fingerprint_before": "21858612014bfdec6ca931f32d3a2379eecfb8a102b017cd19aee64ee89c7115",
+     "project_changed": true,
+     "revision": 8,
+     "same_asset_id": true,
+     "source": "shared.gltf",
+     "usage": null
+    },
+    {
+     "asset": "01M4NNQRM4G2HYH7KTBZ128360",
+     "changed": true,
+     "fingerprint_after": "7345e84092e99aee29a9521c53f1665484b813c7caf5eae50730041db8a8288f",
+     "fingerprint_before": "1cea76a990ff9b5545810cc5919cb82d158bf8244a0b057776c98398f70e64b3",
+     "project_changed": true,
+     "revision": 9,
+     "same_asset_id": true,
+     "source": "controls.gltf",
+     "usage": null
+    },
+    {
+     "asset": "01M4NNQRNGMCD9EHE36VP38MDB",
+     "changed": true,
+     "fingerprint_after": "e054b73cf6a8f064e23c8803f59758013a5ef36b90ca1f982a4420b0967a90e4",
+     "fingerprint_before": "5658d6080ba0800fe7895792621bcb4670401837edd37d0b21e200491e95b851",
+     "project_changed": true,
+     "revision": 10,
+     "same_asset_id": true,
+     "source": "emissive.gltf",
+     "usage": null
+    }
+   ],
+   "validate": {
+    "diagnostics": [],
+    "project_id": "01M4NNQRDB5XNTTD2VGSGGG9XD",
+    "schema_version": 1,
+    "valid": true
+   }
+  }
+ },
+ "strip": {
+  "environment": {
+   "remaining": [
+    "artifacts/0043-color-mip-roles/projects/environment/environment.incant.journal.jsonl",
+    "artifacts/0043-color-mip-roles/projects/environment/environment.incant.json"
+   ],
+   "removed": [
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/environment/flag.png",
+     "sha256": "4a894de0b4d9189c81861ad1f2e2f554cc29c4add86739b45d0c1d148a315f52"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/environment/panel_b.png",
+     "sha256": "d3c744087835abaedec95fbe96412a80e2bb3de5072189637b802390b4767d08"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/environment/sky.png",
+     "sha256": "293fb0ba01e89409605df0ab906a51fa00d0e6f333bbc3225f7dc6aea9790013"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/environment/solid.png",
+     "sha256": "033363320406e259c9dbeeac58907310aca2bd2fb64bcc9510abb302c40dff1f"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/environment/spheres.bin",
+     "sha256": "1ad9f9870a7cd83d3da939c2330c4a776116832dd6e90ee479fb56d388aa65cd"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/environment/spheres.gltf",
+     "sha256": "cf422f55371f1aa99a1093baac4d5dd9bedee2e15a0d66b6e1320815ff3e60bc"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/environment/sprites.atlas.json",
+     "sha256": "198111b8962c513dc6b2637f264531469d4f209a49e733f7bc310515c7f74043"
+    }
+   ]
+  },
+  "materials": {
+   "remaining": [
+    "artifacts/0043-color-mip-roles/projects/materials/materials.incant.journal.jsonl",
+    "artifacts/0043-color-mip-roles/projects/materials/materials.incant.json"
+   ],
+   "removed": [
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/card_mixed.png",
+     "sha256": "668cdfa8d20b2e5226b0365f8a851d009785e63fb5f2272764f55554ff546a82"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/card_mr.png",
+     "sha256": "e47d5daa05f0848f3b6c8ec0f1ef172c0efbdcae7fb84966f12235859184a531"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/card_normal.png",
+     "sha256": "ef19475b2dff12ec174de623e3ea81db70cf5147377e025afc4f4ba129ba66a2"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/card_one.png",
+     "sha256": "3a01799d54b6b96056c5a53fe7ffcffa1fd0764ac0faa33f301f6d796a8aade6"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/card_rgb.png",
+     "sha256": "3e73b9f1edb646af52064aa0800b71ddfb2744046d5028bd1ca6a99775e98259"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/card_zero.png",
+     "sha256": "572b7f9822d323f80a26837b22c2feae87237931438d856d02707f4a599d1967"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/controls.bin",
+     "sha256": "d1f35a18432715ef06fe6e05ca752ad32fd356e8c9466ad84618a8d31864db70"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/controls.gltf",
+     "sha256": "b08b17d3dbeb32d78109644d9ed4af713b36375a04272be8f8e78b5432c96f6f"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/emissive.bin",
+     "sha256": "999840326527ce1b89e0aa91f602e909e8315580b71e7800c55895d4f2b508de"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/emissive.gltf",
+     "sha256": "aa6b2b434f094fcfedfc9bc200f01fddd4926635f469de5242055efcabaf7c82"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/env_uniform.png",
+     "sha256": "769944175394eaca977229aefe74fd182b6f8dc911da039aacca240c9dec110c"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/props.bin",
+     "sha256": "7ee8e2970764cd270e92cc52add1f5751c9f7295e32bad00c5ed88302514ad47"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/props.gltf",
+     "sha256": "486d469dab2c5ad30235004d59fab85f1f27b5b32745168c4430e4565737c810"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/shared.bin",
+     "sha256": "8d3556f86881ea874b3b355cb56ee1a2af816c742b191584bf9baa53b468df79"
+    },
+    {
+     "path": "artifacts/0043-color-mip-roles/projects/materials/shared.gltf",
+     "sha256": "a7adb7308a2a8a534656d0eca4689e90188e545d034b05014fbe85baf7230f57"
+    }
+   ]
+  }
+ },
+ "validate_sourcefree": {
+  "environment": {
+   "diagnostics": [],
+   "project_id": "01M4NNQRX1964XNTY8V2Y15S06",
+   "schema_version": 1,
+   "valid": true
+  },
+  "materials": {
+   "diagnostics": [],
+   "project_id": "01M4NNQRDB5XNTTD2VGSGGG9XD",
+   "schema_version": 1,
+   "valid": true
+  }
+ }
+}

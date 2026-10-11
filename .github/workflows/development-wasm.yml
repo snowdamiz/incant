@@ -1,40 +1,8 @@
 name: Development Wasm conformance
+# Full validation runs once per frozen release checkpoint.
 on:
-  pull_request:
-    paths:
-      - 'crates/incant_wasm_dev/**'
-      - 'crates/incant_wasm_runtime/**'
-      - 'crates/incant_wasm_cook/**'
-      - 'third_party/wabt/**'
-      - 'tools/wasm2c.py'
-      - 'tools/probes/shipping-wasm2c.py'
-      - 'tools/shipping_symbols.py'
-      - 'crates/incant_runtime/**'
-      - 'crates/incant_types/**'
-      - 'crates/incant_physics_runtime/**'
-      - 'crates/incant_input/**'
-      - 'crates/incant_script/**'
-      - 'crates/incant_game_runtime/**'
-      - 'crates/incant_wasm_player/**'
-      - 'crates/incant_audio_runtime/**'
-      - 'crates/incant_assets_runtime/**'
-      - 'tools/probes/static-game.py'
-      - 'crates/incant_script_player/**'
-      - 'crates/incant_game_player/**'
-      - 'crates/incant_2d/**'
-      - '**/Cargo.toml'
-      - 'Cargo.lock'
-      - 'rust-toolchain.toml'
-      - '.cargo/**'
-      - 'tools/cargo'
-      - 'tools/shipping.py'
-      - 'tools/probes/development-wasm.py'
-      - 'tools/check_runtime_dependencies.py'
-      - '.github/workflows/development-wasm.yml'
   push:
-    branches: [main]
-    # Main supplies the shared registry, without source-only repeated matrices.
-    paths: ['Cargo.lock', '**/Cargo.toml', 'rust-toolchain.toml', '.cargo/**', '.github/workflows/development-wasm.yml']
+    branches: [codex/release-candidate]
   workflow_dispatch:
 permissions:
   contents: read
@@ -55,13 +23,14 @@ jobs:
         with: {python-version: '3.12'}
       - run: rustup show
       - run: rustup target add wasm32-unknown-unknown
+      - run: python tools/generate_wasm_sdk.py --check
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           shared-key: auxiliary-registry-v1-${{ matrix.runner }}
           cache-targets: 'false'
           cache-bin: 'false'
           # Reuse the reviewed auxiliary download namespace, no JIT target cache.
-          save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+          save-if: ${{ github.event_name == 'push' }}
       # Keep tests, Clippy and the fresh-process probe on one development graph.
       # Never enable this feature on the workspace or shipped player commands.
       - name: Combined static and development conformance on one development graph
@@ -92,6 +61,7 @@ jobs:
           path: |
             artifacts/development-wasm/result.json
             artifacts/static-wasm-conformance/development/result.json
+            artifacts/static-wasm-conformance/rust-sdk.json
             artifacts/static-wasm-conformance/conformance-*.log
             artifacts/static-wasm-conformance/prepared-manifest.json
             artifacts/static-wasm-conformance/cook-build.log

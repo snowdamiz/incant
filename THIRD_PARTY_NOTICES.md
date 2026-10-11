@@ -99,3 +99,13 @@ local service processes, not engine-player dependencies. See
 [the bounded policy and remaining audit work](services/local/README.md#pins-and-licenses).
 This notice does not claim a complete license inventory of every OS package
 inside those container images or approve production redistribution.
+
+## Static FBX import
+
+The authoring importer uses unmodified [ufbx Rust 0.11.5](https://crates.io/crates/ufbx/0.11.5),
+including its bundled [ufbx C 0.23.1](https://github.com/ufbx/ufbx/tree/v0.23.1),
+copyright (c) 2020 Samuli Raivio, choosing the [MIT license](licenses/ufbx-MIT.txt).
+Cargo.lock pins the registry checksum. No Autodesk SDK is included, and the source
+parser is absent from the normal native runtime dependency graph. Selected upstream
+FBX test data retains its license and exact hashes in
+`crates/incant_assets/tests/fixtures/fbx/provenance.json`.

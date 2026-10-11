@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-11T05:51:25.072946+00:00",
+  "source_commit": "faf12e86472e27fe565d65f47c30258a374fb645",
+  "scope": "Local combined prewarmed renderer + retained native flipbooks, includes PR80 production07c0d433 but not its docs-only b39d7d03",
+  "ordinary_tests_passed": 666,
+  "ignored_gpu_tests_not_run": 0,
+  "capture_helper_tests_passed": 2,
+  "tools_tests_passed": 90,
+  "workspace_release_clippy": "passed, all targets, scene audio",
+  "native_window_release_clippy": "passed, all targets, native-window feature",
+  "conventions": "passed",
+  "runtime_dependency_guard": "passed, 15 explicit roots, scene audio and native-window features",
+  "source_clean_after_checks": true,
+  "logs": {
+    "tests": {
+      "path": "/tmp/incant-render-followup-tests.log",
+      "bytes": 108620,
+      "sha256": "e1ef1cfc945766dd72880b77f49014d4f0e50134dbc9d032ff32b9425c607c48"
+    },
+    "clippy": {
+      "path": "/tmp/incant-render-followup-clippy.log",
+      "bytes": 5684,
+      "sha256": "c0d7bc7aeb6507b9bc82765d6fc214e05c442d344247741371c813bc8fb5826e"
+    },
+    "helper": {
+      "path": "/tmp/incant-render-followup-helper.log",
+      "bytes": 2849,
+      "sha256": "bef90bda936f298a7e0120f55930d68e7489b506e1c1c7cdde979025ddfdfa25"
+    },
+    "window-clippy": {
+      "path": "/tmp/incant-render-followup-window-clippy.log",
+      "bytes": 5170,
+      "sha256": "7ad28b98e9c7bcde26ded9e7a24c5081a9382d7990568ceb2e34836f12a5a555"
+    },
+    "tools": {
+      "path": "/tmp/incant-render-followup-tools.log",
+      "bytes": 14547,
+      "sha256": "e29bdb994eb2400e30a2f7136be7242c3bd90a8065c7a9a86b3ca787e425b3b8"
+    },
+    "conventions": {
+      "path": "/tmp/incant-render-followup-conventions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dependencies": {
+      "path": "/tmp/incant-render-followup-dependencies.log",
+      "bytes": 414,
+      "sha256": "577d9b26eb59849d6d625edd30d43e1480ef9855aa1e1c64da6f9e7ddbe1531e"
+    },
+    "gpu": {
+      "path": "/tmp/incant-render-followup-gpu.log",
+      "bytes": 7088,
+      "sha256": "b88071d6b0847a145049ffbc4911f6c30f525cfa62878b608032c7c831ce0c20"
+    },
+    "gpu-host": {
+      "path": "/tmp/incant-render-followup-gpu-host.log",
+      "bytes": 3271,
+      "sha256": "446f77f2827bd908cfa10098f2cfdf0e22101cc0768b1d6d075f1b16c9ee39ac"
+    },
+    "editor-gpu": {
+      "path": "/tmp/incant-render-followup-editor-gpu.log",
+      "bytes": 8034,
+      "sha256": "e42ff8deeb4e61deb3faac711ae589d72f86c561ff89c68e3562b202c4d9bcbd"
+    },
+    "proof-tools": {
+      "path": "/tmp/incant-render-followup-proof-tools.log",
+      "bytes": 8376,
+      "sha256": "161e64dc6725a0b8bef2b1f69b0fb9dbc44bb4e3d7d6fa4859ec890aec01fabb"
+    },
+    "proof-fixture": {
+      "path": "/tmp/incant-render-followup-proof-fixture.log",
+      "bytes": 1448,
+      "sha256": "b7ab664c30ae5b19ea2bf17e73a1b1e083bb6a3000f5768d91645a8d8e4c49f0"
+    },
+    "shipping": {
+      "path": "/tmp/incant-render-followup-shipping.log",
+      "bytes": 185,
+      "sha256": "03aa952806a8b2d62cb67e9eb2007f8878758f14f1460d3503d13b1c30fdeb9d"
+    }
+  },
+  "pending": [
+    "Actualmain80 integration",
+    "Publication and required hosted checks"
+  ],
+  "claims_not_made": [
+    "full PLAN or phase completion",
+    "device or shipping performance gate",
+    "hosted success"
+  ],
+  "claude0041": {
+    "accepted": true,
+    "commit": "23fe9cae78de54ad47d50a89b3b8ce9cc7e1a118",
+    "packet_review": {
+      "changed_packet_files": 20,
+      "screenshot_hashes_verified": 9,
+      "engine_calls": 80,
+      "guarded_captures": 26,
+      "expected_refusals": 4,
+      "all_reaped": true,
+      "production_changes": false
+    }
+  },
+  "gpu_tests_passed": 72,
+  "gpu_source_commit": "3bd834ec48a6ce97140214354da034427f179340",
+  "gpu_breakdown": {
+    "renderer": 65,
+    "native_gpu_host": 4,
+    "editor_and_headless": 3
+  },
+  "claude0042": {
+    "commit": "ddc164b83825f930f03199fa4ca57aa87f99ad58",
+    "changed_paths": 94,
+    "verified_manifest_files": 92,
+    "production_changes": false,
+    "report_sha256": "bc5ce5aacc81cae0022e00ab35e07d988f94494105e7fc95f87cb006edb0113b",
+    "capture_calls": 19,
+    "captures": 63,
+    "all_reaped": true,
+    "claude_verdict": "accepted, flipbook-specific appearance on frozen95df19d",
+    "accepted": true
+  },
+  "fresh_shipping": {
+    "passed": true,
+    "source_commit": "3bd834ec48a6ce97140214354da034427f179340",
+    "repeated_fixture_processes": 32,
+    "refusal_controls": 35,
+    "flipbook_controls": [
+      {
+        "fixture": "static-sprite",
+        "rate": 44117,
+        "first_frame": 0,
+        "last_frame": 2,
+        "first_matches_static": true,
+        "last_matches_static": true,
+        "gpu_output_changed": true
+      },
+      {
+        "fixture": "static-sprite",
+        "rate": 48000,
+        "first_frame": 0,
+        "last_frame": 2,
+        "first_matches_static": true,
+        "last_matches_static": true,
+        "gpu_output_changed": true
+      },
+      {
+        "fixture": "stream-sprite",
+        "rate": 44117,
+        "first_frame": 0,
+        "last_frame": 2,
+        "first_matches_static": true,
+        "last_matches_static": true,
+        "gpu_output_changed": true
+      },
+      {
+        "fixture": "stream-sprite",
+        "rate": 48000,
+        "first_frame": 0,
+        "last_frame": 2,
+        "first_matches_static": true,
+        "last_matches_static": true,
+        "gpu_output_changed": true
+      }
+    ],
+    "player_bytes": 8960176,
+    "player_sha256": "7e3139e758d13e8dff18843fc94beb6237d20a3fb644a88903e0f075b9fba942",
+    "symbol_identity": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "fd5ac15a-a82f-3209-a8f0-96d88d872a49"
+      }
+    },
+    "result_sha256": "43d9150fca4e5ffc86b61740ae7c63ac09bdc6d567fee5302d30ac2e53d00713"
+  }
+}

@@ -31,6 +31,14 @@ pub enum CookError {
 /// binary image. Missing Transform projects to identity, as in the existing ECS.
 pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookError> {
     let validated = project.validated()?;
+    cook_validated_scene(validated, scene_id, &std::collections::BTreeSet::new())
+}
+
+pub(crate) fn cook_validated_scene(
+    validated: incant_doc::ValidatedProject<'_>,
+    scene_id: &str,
+    attached_scripts: &std::collections::BTreeSet<String>,
+) -> Result<Vec<u8>, CookError> {
     let project = validated.project();
     let scene = project
         .scenes
@@ -44,6 +52,11 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
     let mut visual_assets = std::collections::BTreeMap::new();
     for entity in scene.entities.values() {
         for component in entity.components.keys() {
+            // Only the program-aware cook constructs this exact attachment set
+            // from the same validated project and returns it with compiled code.
+            if component == "Script" && attached_scripts.contains(&entity.id) {
+                continue;
+            }
             if ![
                 "Transform",
                 "Velocity",
@@ -59,6 +72,7 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                 "Camera",
                 "MeshRenderer",
                 "SpriteRenderer",
+                "SpriteFlipbook",
                 "Tilemap",
                 "DirectionalLight",
                 "PointLight",

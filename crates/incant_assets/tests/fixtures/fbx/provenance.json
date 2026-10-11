@@ -1,0 +1,18 @@
+{
+  "upstream": "https://github.com/ufbx/ufbx",
+  "tag": "v0.23.1",
+  "source_directory": "data",
+  "license": "MIT (alternative A in LICENSE)",
+  "files_sha256": {
+    "blender_272_cube_7400_binary.fbx": "bb78c7ee90fa811baa9a4400b613c845d3a5329f4bfa87ff5e20692ddb8bd2ae",
+    "blender_293_embedded_textures_7400_binary.fbx": "0747b141c0ea4467574719bbebe855ef2a0f25c9bf51792439a6bf1d2f380944",
+    "blender_suzanne_multimaterial_7400_binary.fbx": "503bdf6683b7473bbd40e2220c9f7ab91b03598f06bf39692379afe020b1a3c6",
+    "max2009_cube_anim_6100_ascii.fbx": "fb5f2cd52386a6a62b8ec15bc4ad87dc054d3b1381eb44ccd569cae251489d4d",
+    "max_geometry_transform_instances_7700_ascii.fbx": "21aca91bf854271dc9439c5bb1e6d8dc6b704e0fa59fa44cfd57e5d2eabc21a2",
+    "maya_blend_shape_cube_7700_ascii.fbx": "2ae340094aa37a9cff77bcdf1b616b065bc7f4c662124ac81bcffec278b51bb9",
+    "maya_cube_7500_ascii.fbx": "00a26466be678131f143a1fa29804eab09a7520f40787c7dc51f5b4bb9e6b98c",
+    "maya_instanced_skin_7700_ascii.fbx": "7294773313461e56d1bb94e4b084b3da5efb18b643b0673ce211337e51d26003",
+    "maya_parented_cubes_7500_ascii.fbx": "643fb64619027196cf45d722678004b7a75f79cd942a4e95e1298d8b064c45d5",
+    "maya_textured_cube_7500_ascii.fbx": "c15cf4effe57f4344737bdd485b69b5665c983eab6d13c61d286797d4bd02dbb"
+  }
+}

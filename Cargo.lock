@@ -3715,6 +3715,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant-module"
+version = "0.0.1"
+dependencies = [
+ "incant_wasm_abi",
+]
+
+[[package]]
 name = "incant_2d"
 version = "0.0.1"
 dependencies = [
@@ -3733,6 +3740,8 @@ dependencies = [
  "incant_cmd",
  "incant_doc",
  "incant_import",
+ "incant_input",
+ "incant_observe",
  "jsonwebtoken",
  "keyring",
  "libc",
@@ -3775,6 +3784,7 @@ dependencies = [
  "symphonia",
  "tempfile",
  "thiserror 2.0.21",
+ "ufbx",
 ]
 
 [[package]]
@@ -3926,6 +3936,7 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_wasm_runtime",
  "pollster",
  "serde",
  "serde_json",
@@ -4051,6 +4062,7 @@ dependencies = [
  "incant_input",
  "incant_runtime",
  "incant_types",
+ "schemars 1.2.2",
  "serde",
  "serde_json",
  "thiserror 2.0.21",
@@ -4096,6 +4108,7 @@ dependencies = [
 name = "incant_platform_smoke"
 version = "0.0.1"
 dependencies = [
+ "incant_assets",
  "incant_core",
  "incant_doc",
  "incant_input",
@@ -4290,9 +4303,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_wasm_abi"
+version = "0.0.1"
+
+[[package]]
 name = "incant_wasm_cook"
 version = "0.0.1"
 dependencies = [
+ "incant_wasm_abi",
  "thiserror 2.0.21",
  "wasm-encoder",
  "wasmparser",
@@ -4307,6 +4325,8 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_wasm_abi",
+ "incant_wasm_cook",
  "incant_wasm_runtime",
  "thiserror 2.0.21",
  "wasmparser",
@@ -4335,9 +4355,11 @@ name = "incant_wasm_runtime"
 version = "0.0.1"
 dependencies = [
  "cc",
+ "incant-module",
  "incant_input",
  "incant_runtime",
  "incant_types",
+ "incant_wasm_abi",
  "thiserror 2.0.21",
 ]
 
@@ -8732,6 +8754,15 @@ dependencies = [
  "memoffset",
  "tempfile",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "ufbx"
+version = "0.11.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "260522f1eb74139f0e78b29dd82a58e5437d728c5498024a39e5af7282694240"
+dependencies = [
+ "cc",
 ]
 
 [[package]]

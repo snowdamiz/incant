@@ -50,6 +50,28 @@ pub(crate) fn cook(
             mode: s.mode,
         }));
     }
+    if let Some(f) = decode!("SpriteFlipbook", incant_doc::SpriteFlipbook) {
+        let frames = f
+            .frames
+            .into_iter()
+            .map(|r| match r {
+                incant_doc::SpriteRegion::Pixels(r) => {
+                    Ok(incant_runtime::NativeSpriteRegion::Pixels(r))
+                }
+                incant_doc::SpriteRegion::Atlas { frame } => {
+                    Ok(incant_runtime::NativeSpriteRegion::Atlas {
+                        frame: stable_id(&frame)?,
+                    })
+                }
+            })
+            .collect::<Result<Vec<_>, CookError>>()?;
+        node.flipbook = Some(std::sync::Arc::new(incant_runtime::NativeFlipbook {
+            frames: frames.into(),
+            rate: f.rate,
+            looping: f.looping,
+            playing: f.playing,
+        }));
+    }
     if let Some(map) = decode!("Tilemap", incant_doc::Tilemap) {
         let tileset = bind(project, &map.tileset, VisualAssetKind::Texture, assets)?;
         let layers = map

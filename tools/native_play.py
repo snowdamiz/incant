@@ -3,8 +3,9 @@
 
 Developer coordinator, not an engine-agent shell capability. Only the trusted
 engine Cargo package/build script runs. The project is runtime input, never the
-Cargo working directory or a source of build scripts. CommonJS must use the
-native SDK; project-attached legacy Script components still fail explicitly.
+Cargo working directory or a source of build scripts. Scripts must use the native
+SDK; project-attached legacy Script components still fail explicitly. TypeScript
+is checked and bundled only in the authoring process.
 """
 import argparse
 from contextlib import contextmanager
@@ -27,6 +28,24 @@ def bounded(path, limit):
         raise ValueError(f'Cook input exceeds {limit} bytes: {path}')
     data.decode('utf-8')
     return data
+
+
+def cook_typescript(root, entry):
+    """Run the pinned text-only compiler, never project configs/plugins/scripts."""
+    node = shutil.which('node')
+    if not node:
+        raise RuntimeError('Node.js is required for the native TypeScript cook')
+    environment = dict(os.environ)
+    for key in ('NODE_OPTIONS', 'NODE_PATH'):
+        environment.pop(key, None)
+    with tempfile.TemporaryDirectory(prefix='incant-typescript-cook-') as temporary:
+        output = Path(temporary)/'output'
+        result = subprocess.run([node, '--max-old-space-size=512',
+            str(ROOT/'tools/build_native_script.mjs'), str(root), str(entry), str(output)],
+            cwd=ROOT, env=environment, capture_output=True, text=True, encoding='utf-8', timeout=60)
+        if result.returncode:
+            raise RuntimeError(result.stderr.strip() or 'Native TypeScript cook failed')
+        return bounded(output/'behavior.cjs', 1_000_000), bounded(output/'behavior.cjs.map', 4*1024*1024)
 
 
 @contextmanager
@@ -102,19 +121,29 @@ def prepare(source, source_map=None):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('project', type=Path)
-    parser.add_argument('--script', type=Path, help='Native SDK CommonJS; omitted uses the engine no-op behavior')
+    parser.add_argument('--rpc', action='store_true', help='Serve retained native Play RPC using this trusted compiled behavior')
+    scripts = parser.add_mutually_exclusive_group()
+    scripts.add_argument('--script', type=Path, help='Native SDK CommonJS; omitted uses the engine no-op behavior')
+    scripts.add_argument('--typescript', type=Path, help='Native TypeScript entry, relative to --script-root (default: project directory)')
+    parser.add_argument('--script-root', type=Path, help='Bounded local module root; requires --typescript')
     parser.add_argument('--source-map', type=Path, help='Version-3 CommonJS source map, retained in build symbols')
     args, playback = parser.parse_known_args(argv)
     if args.source_map and not args.script:
         parser.error('--source-map requires --script')
+    if args.script_root and not args.typescript:
+        parser.error('--script-root requires --typescript')
     if any(a == '--script-sha256' or a.startswith('--script-sha256=') for a in playback):
         parser.error('--script-sha256 is owned by the coordinator')
     project = args.project.resolve(strict=True)
-    source = bounded(args.script or ROOT/'crates/incant_headless/fixtures/native-play.js', 1_000_000)
-    source_map = bounded(args.source_map, 4*1024*1024) if args.source_map else None
+    if args.typescript:
+        source, source_map = cook_typescript(args.script_root or project.parent, args.typescript)
+    else:
+        source = bounded(args.script or ROOT/'crates/incant_headless/fixtures/native-play.js', 1_000_000)
+        source_map = bounded(args.source_map, 4*1024*1024) if args.source_map else None
     with prepare(source, source_map) as (player, digest):
-        result = subprocess.run([player, 'native-play', project,
-            '--script-sha256', digest, *playback], check=False)
+        command = [player, 'rpc', project, *playback] if args.rpc else [player,
+            'native-play', project, '--script-sha256', digest, *playback]
+        result = subprocess.run(command, check=False)
         return result.returncode
 
 

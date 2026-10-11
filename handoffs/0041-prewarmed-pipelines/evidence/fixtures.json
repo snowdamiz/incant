@@ -1,0 +1,1806 @@
+{
+ "lights": {
+  "assets": {
+   "cube_red.gltf": "01M4MNAM6ZKWBZKWP3NT8TRMYZ",
+   "env_uniform.png": "01M4MNAKWZVD7R0G4VGBD8KCQG",
+   "room.gltf": "01M4MNAKZDDWDKAN7BT09Q0MHZ",
+   "sphere_metal.gltf": "01M4MNAM4HEHA1T30J4FGBRYDT",
+   "sphere_white.gltf": "01M4MNAM1Z9P3ZCGD5BGVTBWFF"
+  },
+  "authored": {
+   "journal": "fbdac01d23c82eba7ba3064450e20a3298da942972e6119247520be7566b04b7",
+   "project": "bb3af79b3d094c0d71bcc4bc4419e24dc2c39b302adbdca96318aa7063c55df9"
+  },
+  "cache_files": {
+   "artifacts/0041-prewarmed-pipelines/projects/lights/.incant/cache/models/0182973cf42817e08a74cb5569bd1b1ce841da72d49c9f31d835a2869d35d96e.incmodel": "92afc4fb56f7204ab82ea5de23631061a250eaed8f67d44e040dabdde12e6684",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/.incant/cache/models/7dbfbd20f1bb654cbb89e1b621a88f88cb3bcf6a4c0c31b5615f3cc040cb8dc5.incmodel": "f75935bb6bc640376e6f0521c209cd7273afa177a6dbd91df91779482e8e7915",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/.incant/cache/models/f3f26a2a13b51c311cb872554c9f6070fe6d5e0a31d4359ef7acd07b296f96e6.incmodel": "3423b6e6f4d47bb1f3e9156502b064736699c2daf37d69edd3bd7b3f8cdc8380",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/.incant/cache/models/fb05e7b03cd093a263d5253afa7dc9263e1b5bbe08dadd552b219b00e4f2b757.incmodel": "583cfc123e381a86a67fbbac108bc0e397d7fd09aa92e0fd905c49b716ae0aae",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/.incant/cache/textures/36bf31114979697b7bec901caabe8d1ec7da27efa4325d4a9133c264a998b335.json": "448b03ab823362b041ee10b1ec382dddca6295de385ea3c1a5780d2605e78976",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/.incant/cache/textures/8881cd8f5041cfc392f447e8ab7950c9f23a4a91b531e3c0dae2f6eab6abfce6.ktx2": "8881cd8f5041cfc392f447e8ab7950c9f23a4a91b531e3c0dae2f6eab6abfce6"
+  },
+  "entities": {
+   "Camera board": "01JA41PWG0000000000000000A",
+   "Cool point": "01JA41PWG00000000000000007",
+   "Dim environment": "01JA41PWG00000000000000001",
+   "Magenta spot": "01JA41PWG00000000000000009",
+   "Room": "01JA41PWG00000000000000002",
+   "Warm point": "01JA41PWG00000000000000006",
+   "White spot": "01JA41PWG00000000000000008",
+   "metal sphere": "01JA41PWG00000000000000004",
+   "red cube": "01JA41PWG00000000000000005",
+   "white sphere": "01JA41PWG00000000000000003"
+  },
+  "framing": {
+   "board": [
+    165.3,
+    251.7,
+    793.4,
+    369.4
+   ]
+  },
+  "meta": {},
+  "project": "artifacts/0041-prewarmed-pipelines/projects/lights/lights.incant.json",
+  "receipts": {
+   "cube_red.gltf": {
+    "asset": {
+     "id": "01M4MNAM6ZKWBZKWP3NT8TRMYZ",
+     "kind": "model",
+     "name": "cube_red",
+     "path": "cube_red.gltf",
+     "sha256": "7dbfbd20f1bb654cbb89e1b621a88f88cb3bcf6a4c0c31b5615f3cc040cb8dc5"
+    },
+    "changed": true,
+    "revision": 5
+   },
+   "env_uniform.png": {
+    "asset": {
+     "id": "01M4MNAKWZVD7R0G4VGBD8KCQG",
+     "import_settings": {
+      "type": "texture",
+      "usage": "linear"
+     },
+     "kind": "texture",
+     "name": "env_uniform",
+     "path": "env_uniform.png",
+     "sha256": "36bf31114979697b7bec901caabe8d1ec7da27efa4325d4a9133c264a998b335"
+    },
+    "changed": true,
+    "revision": 1
+   },
+   "room.gltf": {
+    "asset": {
+     "id": "01M4MNAKZDDWDKAN7BT09Q0MHZ",
+     "kind": "model",
+     "name": "room",
+     "path": "room.gltf",
+     "sha256": "fb05e7b03cd093a263d5253afa7dc9263e1b5bbe08dadd552b219b00e4f2b757"
+    },
+    "changed": true,
+    "revision": 2
+   },
+   "sphere_metal.gltf": {
+    "asset": {
+     "id": "01M4MNAM4HEHA1T30J4FGBRYDT",
+     "kind": "model",
+     "name": "sphere_metal",
+     "path": "sphere_metal.gltf",
+     "sha256": "f3f26a2a13b51c311cb872554c9f6070fe6d5e0a31d4359ef7acd07b296f96e6"
+    },
+    "changed": true,
+    "revision": 4
+   },
+   "sphere_white.gltf": {
+    "asset": {
+     "id": "01M4MNAM1Z9P3ZCGD5BGVTBWFF",
+     "kind": "model",
+     "name": "sphere_white",
+     "path": "sphere_white.gltf",
+     "sha256": "0182973cf42817e08a74cb5569bd1b1ce841da72d49c9f31d835a2869d35d96e"
+    },
+    "changed": true,
+    "revision": 3
+   }
+  },
+  "scene": "01M4MNAKTEZEDZD3ZYBSFFF9JR",
+  "sources": [
+   "artifacts/0041-prewarmed-pipelines/projects/lights/cube_red.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/cube_red.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/env_uniform.png",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/room.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/room.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/sphere_metal.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/sphere_metal.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/sphere_white.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/lights/sphere_white.gltf"
+  ],
+  "views": {
+   "board": {
+    "camera": "01JA41PWG0000000000000000A",
+    "eye": [
+     0.0,
+     2.8,
+     9.0
+    ],
+    "fov": 46.0,
+    "ortho_half_height": null,
+    "pixel": null,
+    "rotation": [
+     -0.08842095372751035,
+     -0.0,
+     -0.0,
+     0.9960831967972944
+    ],
+    "size": [
+     960,
+     540
+    ]
+   }
+  }
+ },
+ "materials": {
+  "assets": {
+   "card_blend_double.gltf": "01M4MNAJ7CJKAK3QS9EYJPFCFW",
+   "card_blend_single.gltf": "01M4MNAJ4XM5J24R4QXBW65K0S",
+   "card_mask_double.gltf": "01M4MNAJ26F8VPZSYCNQGT4JCS",
+   "card_mask_single.gltf": "01M4MNAHZQ312MYR458CYQPQ54",
+   "card_opaque_double.gltf": "01M4MNAHX801Q90MMA0JMJK4TR",
+   "card_opaque_single.gltf": "01M4MNAHTSEWRS870CBQ9GVQJX",
+   "env_uniform.png": "01M4MNAHR674XZ18TG4SF74P0C",
+   "nrm_generated.gltf": "01M4MNAJ9V9T32H3HN723TE3SZ",
+   "nrm_generated_double.gltf": "01M4MNAJCBXC6TGNG7D1GBC4MQ",
+   "nrm_tangent_neg.gltf": "01M4MNAJHAXSH55F3S9KPGWDAJ",
+   "nrm_tangent_pos.gltf": "01M4MNAJETW3TAW8N13DFDBEEN",
+   "props.gltf": "01M4MNAJKVQGY50X3K3MH0RV8N"
+  },
+  "authored": {
+   "journal": "119f7a7a86a58e44a259b27abe09a7283c64267d67aa6044e1845a440ecf1537",
+   "project": "9c1c4f521eb11641425cc2d9eeb93d27446ba96ce372e39291d906417156dda6"
+  },
+  "cache_files": {
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/489ef6b019fe41d7e916136c2b7805d8d7dcd786c58d95ca38180f80a8fea49e.incmodel": "cd0beab1e964a25e02e9e731fa37ac7b342dbbee696b0122719d920eb1f9e0a2",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/5f6d87d52925fb515016ed40306129c715adfb0841a3e1b6c606a8269034e956.incmodel": "dff3b7619dda6649f815c20bd1d9900cf91b5fb3a2b8cd3b2f50205aa277494f",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/603763f97dd03e076a5c297694345f7cdd7ae456feae659923e85bba838817f7.incmodel": "12dc4639637b73ec4bede6bfcf856356749114e2ae257d05cb5bd2168836fca0",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/834b4c0c3c7f227af579b4cca8ac35ccd1307745dc3d394be3c40ce251e4cdec.incmodel": "7edb7f53b3348d96639e286d681eafe2fe0df987f71338492a8843d5cbb0460f",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/875a0c471c486af067077071e465a2d562fdefbb63c019470155854df81da4d4.incmodel": "001ce6bf7fb5050595b779de8f391e86bdcfc3f630987f6ff1aea8b55ef73b2c",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/888db3c819fe3c2655502e514472b546fa05f1a64880c00312630ae22254ec40.incmodel": "49d0abcc8b690dfe3a91db7811d7fcb010bbe759c5bc36be12d7a37b4ec94e46",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/8b4a1c7077179bd3e2b1d26c4f7ec6212c44fcc28ab7796e4a0e9fc2565fe61c.incmodel": "371d0a5e298059a2ae66e9176161d95410ef185dbbb0a800c0a90540603441d5",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/c615834990a189ad3f84c8cd22bcc79728cdfcc7d66e02a550800b16b8a6662f.incmodel": "334b6d998d5b04ec7e7eb0bc83ed6e23835e1d03ec42dfec36383de19ea9c71c",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/d97fbb2e57a07fd738f010ad50f1655d8a1509913392243f4d8419c2d4c903ec.incmodel": "25eea54aadd0a144211dde5e62a6c68e8cb2872ef4b1ae8bfd0696ef0556f186",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/db6707877a2ba9b3037b13b441f053095f52edc6474b263a4c8b91d78ede9496.incmodel": "d04ded1273edfb10a56a6bc2f7079b8a59603b1f266217ce1cb93c2dd5382e15",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/models/fd5bef5142b9961888d433c32eccc1036be2ae4fd38a4bd05399e401be17b8a5.incmodel": "1bb24d52367d087531adc824c3e253f336e229e6d5a9803c8c9b5470cbe50391",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/textures/36949e83dcb972ea16a3a1af21066d981b650130f2381cabfae9d0b0fb293a8f.ktx2": "36949e83dcb972ea16a3a1af21066d981b650130f2381cabfae9d0b0fb293a8f",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/.incant/cache/textures/e822139b6ca931340138021d64ceec048bb6636da8432206e158c3a25b7bfb67.json": "4760ee8adccd2e6054a626482d0e41861df04a8fc3d44fa328611ac0ed0d8dda"
+  },
+  "entities": {
+   "BLEND double back": "01JA41PWM0000000000000000S",
+   "BLEND double front": "01JA41PWM0000000000000000R",
+   "BLEND double-mirrored back": "01JA41PWM0000000000000000V",
+   "BLEND double-mirrored front": "01JA41PWM0000000000000000T",
+   "BLEND single back": "01JA41PWM0000000000000000N",
+   "BLEND single front": "01JA41PWM0000000000000000M",
+   "BLEND single-mirrored back": "01JA41PWM0000000000000000Q",
+   "BLEND single-mirrored front": "01JA41PWM0000000000000000P",
+   "Camera board": "01JA41PWM00000000000000012",
+   "Camera normals": "01JA41PWM00000000000000013",
+   "Key light": "01JA41PWM00000000000000001",
+   "MASK double back": "01JA41PWM0000000000000000H",
+   "MASK double front": "01JA41PWM0000000000000000G",
+   "MASK double-mirrored back": "01JA41PWM0000000000000000K",
+   "MASK double-mirrored front": "01JA41PWM0000000000000000J",
+   "MASK single back": "01JA41PWM0000000000000000D",
+   "MASK single front": "01JA41PWM0000000000000000C",
+   "MASK single-mirrored back": "01JA41PWM0000000000000000F",
+   "MASK single-mirrored front": "01JA41PWM0000000000000000E",
+   "Normals generated": "01JA41PWM0000000000000000W",
+   "Normals generated-double-back": "01JA41PWM00000000000000010",
+   "Normals generated-mirrored": "01JA41PWM0000000000000000Z",
+   "Normals tangent+1": "01JA41PWM0000000000000000X",
+   "Normals tangent+1-mirrored": "01JA41PWM00000000000000011",
+   "Normals tangent-1": "01JA41PWM0000000000000000Y",
+   "OPAQUE double back": "01JA41PWM00000000000000009",
+   "OPAQUE double front": "01JA41PWM00000000000000008",
+   "OPAQUE double-mirrored back": "01JA41PWM0000000000000000B",
+   "OPAQUE double-mirrored front": "01JA41PWM0000000000000000A",
+   "OPAQUE single back": "01JA41PWM00000000000000005",
+   "OPAQUE single front": "01JA41PWM00000000000000004",
+   "OPAQUE single-mirrored back": "01JA41PWM00000000000000007",
+   "OPAQUE single-mirrored front": "01JA41PWM00000000000000006",
+   "Props": "01JA41PWM00000000000000003",
+   "Uniform environment": "01JA41PWM00000000000000002"
+  },
+  "framing": {
+   "board": [
+    26.3,
+    75.1,
+    933.7,
+    467.9
+   ],
+   "board backdrop covers frame": true,
+   "normals": [
+    163.5,
+    63.9,
+    796.5,
+    476.1
+   ]
+  },
+  "meta": {
+   "BLEND double back": {
+    "alpha": "BLEND",
+    "centre": [
+     2.8,
+     -2.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "back",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "BLEND double front": {
+    "alpha": "BLEND",
+    "centre": [
+     1.1,
+     -2.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "front",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "BLEND double-mirrored back": {
+    "alpha": "BLEND",
+    "centre": [
+     6.699999999999999,
+     -2.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "back",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "BLEND double-mirrored front": {
+    "alpha": "BLEND",
+    "centre": [
+     5.0,
+     -2.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "front",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "BLEND single back": {
+    "alpha": "BLEND",
+    "centre": [
+     -5.0,
+     -2.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "back",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "BLEND single front": {
+    "alpha": "BLEND",
+    "centre": [
+     -6.699999999999999,
+     -2.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "front",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "BLEND single-mirrored back": {
+    "alpha": "BLEND",
+    "centre": [
+     -1.1,
+     -2.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "back",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "BLEND single-mirrored front": {
+    "alpha": "BLEND",
+    "centre": [
+     -2.8,
+     -2.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "front",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "MASK double back": {
+    "alpha": "MASK",
+    "centre": [
+     2.8,
+     0.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "back",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "MASK double front": {
+    "alpha": "MASK",
+    "centre": [
+     1.1,
+     0.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "front",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "MASK double-mirrored back": {
+    "alpha": "MASK",
+    "centre": [
+     6.699999999999999,
+     0.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "back",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "MASK double-mirrored front": {
+    "alpha": "MASK",
+    "centre": [
+     5.0,
+     0.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "front",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "MASK single back": {
+    "alpha": "MASK",
+    "centre": [
+     -5.0,
+     0.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "back",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "MASK single front": {
+    "alpha": "MASK",
+    "centre": [
+     -6.699999999999999,
+     0.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "front",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "MASK single-mirrored back": {
+    "alpha": "MASK",
+    "centre": [
+     -1.1,
+     0.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "back",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "MASK single-mirrored front": {
+    "alpha": "MASK",
+    "centre": [
+     -2.8,
+     0.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "front",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "Normals generated": {
+    "centre": [
+     57.0,
+     1.5,
+     0.0
+    ],
+    "model": "nrm_generated",
+    "size": 2.6
+   },
+   "Normals generated-double-back": {
+    "centre": [
+     60.0,
+     -1.5,
+     0.0
+    ],
+    "model": "nrm_generated_double",
+    "size": 2.6
+   },
+   "Normals generated-mirrored": {
+    "centre": [
+     57.0,
+     -1.5,
+     0.0
+    ],
+    "model": "nrm_generated",
+    "size": 2.6
+   },
+   "Normals tangent+1": {
+    "centre": [
+     60.0,
+     1.5,
+     0.0
+    ],
+    "model": "nrm_tangent_pos",
+    "size": 2.6
+   },
+   "Normals tangent+1-mirrored": {
+    "centre": [
+     63.0,
+     -1.5,
+     0.0
+    ],
+    "model": "nrm_tangent_pos",
+    "size": 2.6
+   },
+   "Normals tangent-1": {
+    "centre": [
+     63.0,
+     1.5,
+     0.0
+    ],
+    "model": "nrm_tangent_neg",
+    "size": 2.6
+   },
+   "OPAQUE double back": {
+    "alpha": "OPAQUE",
+    "centre": [
+     2.8,
+     2.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "back",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "OPAQUE double front": {
+    "alpha": "OPAQUE",
+    "centre": [
+     1.1,
+     2.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "front",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "OPAQUE double-mirrored back": {
+    "alpha": "OPAQUE",
+    "centre": [
+     6.699999999999999,
+     2.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "back",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "OPAQUE double-mirrored front": {
+    "alpha": "OPAQUE",
+    "centre": [
+     5.0,
+     2.0,
+     0.0
+    ],
+    "double_sided": true,
+    "facing": "front",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "OPAQUE single back": {
+    "alpha": "OPAQUE",
+    "centre": [
+     -5.0,
+     2.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "back",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "OPAQUE single front": {
+    "alpha": "OPAQUE",
+    "centre": [
+     -6.699999999999999,
+     2.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "front",
+    "mirrored": false,
+    "size": 1.5
+   },
+   "OPAQUE single-mirrored back": {
+    "alpha": "OPAQUE",
+    "centre": [
+     -1.1,
+     2.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "back",
+    "mirrored": true,
+    "size": 1.5
+   },
+   "OPAQUE single-mirrored front": {
+    "alpha": "OPAQUE",
+    "centre": [
+     -2.8,
+     2.0,
+     0.0
+    ],
+    "double_sided": false,
+    "facing": "front",
+    "mirrored": true,
+    "size": 1.5
+   }
+  },
+  "project": "artifacts/0041-prewarmed-pipelines/projects/materials/materials.incant.json",
+  "receipts": {
+   "card_blend_double.gltf": {
+    "asset": {
+     "id": "01M4MNAJ7CJKAK3QS9EYJPFCFW",
+     "kind": "model",
+     "name": "card_blend_double",
+     "path": "card_blend_double.gltf",
+     "sha256": "875a0c471c486af067077071e465a2d562fdefbb63c019470155854df81da4d4"
+    },
+    "changed": true,
+    "revision": 7
+   },
+   "card_blend_single.gltf": {
+    "asset": {
+     "id": "01M4MNAJ4XM5J24R4QXBW65K0S",
+     "kind": "model",
+     "name": "card_blend_single",
+     "path": "card_blend_single.gltf",
+     "sha256": "c615834990a189ad3f84c8cd22bcc79728cdfcc7d66e02a550800b16b8a6662f"
+    },
+    "changed": true,
+    "revision": 6
+   },
+   "card_mask_double.gltf": {
+    "asset": {
+     "id": "01M4MNAJ26F8VPZSYCNQGT4JCS",
+     "kind": "model",
+     "name": "card_mask_double",
+     "path": "card_mask_double.gltf",
+     "sha256": "fd5bef5142b9961888d433c32eccc1036be2ae4fd38a4bd05399e401be17b8a5"
+    },
+    "changed": true,
+    "revision": 5
+   },
+   "card_mask_single.gltf": {
+    "asset": {
+     "id": "01M4MNAHZQ312MYR458CYQPQ54",
+     "kind": "model",
+     "name": "card_mask_single",
+     "path": "card_mask_single.gltf",
+     "sha256": "834b4c0c3c7f227af579b4cca8ac35ccd1307745dc3d394be3c40ce251e4cdec"
+    },
+    "changed": true,
+    "revision": 4
+   },
+   "card_opaque_double.gltf": {
+    "asset": {
+     "id": "01M4MNAHX801Q90MMA0JMJK4TR",
+     "kind": "model",
+     "name": "card_opaque_double",
+     "path": "card_opaque_double.gltf",
+     "sha256": "db6707877a2ba9b3037b13b441f053095f52edc6474b263a4c8b91d78ede9496"
+    },
+    "changed": true,
+    "revision": 3
+   },
+   "card_opaque_single.gltf": {
+    "asset": {
+     "id": "01M4MNAHTSEWRS870CBQ9GVQJX",
+     "kind": "model",
+     "name": "card_opaque_single",
+     "path": "card_opaque_single.gltf",
+     "sha256": "8b4a1c7077179bd3e2b1d26c4f7ec6212c44fcc28ab7796e4a0e9fc2565fe61c"
+    },
+    "changed": true,
+    "revision": 2
+   },
+   "env_uniform.png": {
+    "asset": {
+     "id": "01M4MNAHR674XZ18TG4SF74P0C",
+     "import_settings": {
+      "type": "texture",
+      "usage": "linear"
+     },
+     "kind": "texture",
+     "name": "env_uniform",
+     "path": "env_uniform.png",
+     "sha256": "e822139b6ca931340138021d64ceec048bb6636da8432206e158c3a25b7bfb67"
+    },
+    "changed": true,
+    "revision": 1
+   },
+   "nrm_generated.gltf": {
+    "asset": {
+     "id": "01M4MNAJ9V9T32H3HN723TE3SZ",
+     "kind": "model",
+     "name": "nrm_generated",
+     "path": "nrm_generated.gltf",
+     "sha256": "603763f97dd03e076a5c297694345f7cdd7ae456feae659923e85bba838817f7"
+    },
+    "changed": true,
+    "revision": 8
+   },
+   "nrm_generated_double.gltf": {
+    "asset": {
+     "id": "01M4MNAJCBXC6TGNG7D1GBC4MQ",
+     "kind": "model",
+     "name": "nrm_generated_double",
+     "path": "nrm_generated_double.gltf",
+     "sha256": "489ef6b019fe41d7e916136c2b7805d8d7dcd786c58d95ca38180f80a8fea49e"
+    },
+    "changed": true,
+    "revision": 9
+   },
+   "nrm_tangent_neg.gltf": {
+    "asset": {
+     "id": "01M4MNAJHAXSH55F3S9KPGWDAJ",
+     "kind": "model",
+     "name": "nrm_tangent_neg",
+     "path": "nrm_tangent_neg.gltf",
+     "sha256": "888db3c819fe3c2655502e514472b546fa05f1a64880c00312630ae22254ec40"
+    },
+    "changed": true,
+    "revision": 11
+   },
+   "nrm_tangent_pos.gltf": {
+    "asset": {
+     "id": "01M4MNAJETW3TAW8N13DFDBEEN",
+     "kind": "model",
+     "name": "nrm_tangent_pos",
+     "path": "nrm_tangent_pos.gltf",
+     "sha256": "5f6d87d52925fb515016ed40306129c715adfb0841a3e1b6c606a8269034e956"
+    },
+    "changed": true,
+    "revision": 10
+   },
+   "props.gltf": {
+    "asset": {
+     "id": "01M4MNAJKVQGY50X3K3MH0RV8N",
+     "kind": "model",
+     "name": "props",
+     "path": "props.gltf",
+     "sha256": "d97fbb2e57a07fd738f010ad50f1655d8a1509913392243f4d8419c2d4c903ec"
+    },
+    "changed": true,
+    "revision": 12
+   }
+  },
+  "scene": "01M4MNAHKWC7Q6J31649S2A5AH",
+  "sources": [
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_base.png",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_blend_double.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_blend_double.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_blend_single.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_blend_single.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_mask_double.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_mask_double.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_mask_single.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_mask_single.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_normal.png",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_opaque_double.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_opaque_double.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_opaque_single.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/card_opaque_single.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/env_uniform.png",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_base.png",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_generated.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_generated.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_generated_double.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_generated_double.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_tangent_neg.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_tangent_neg.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_tangent_pos.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/nrm_tangent_pos.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/props.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/materials/props.gltf"
+  ],
+  "views": {
+   "board": {
+    "camera": "01JA41PWM00000000000000012",
+    "eye": [
+     0.0,
+     -0.45,
+     14.5
+    ],
+    "fov": 34.0,
+    "ortho_half_height": null,
+    "pixel": null,
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "size": [
+     960,
+     540
+    ]
+   },
+   "normals": {
+    "camera": "01JA41PWM00000000000000013",
+    "eye": [
+     60.0,
+     0.0,
+     12.0
+    ],
+    "fov": 34.0,
+    "ortho_half_height": null,
+    "pixel": null,
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "size": [
+     960,
+     540
+    ]
+   }
+  }
+ },
+ "shadows": {
+  "assets": {
+   "card_blend_double.gltf": "01M4MNAKEE8N8R6VE5BVAXRZ7E",
+   "card_blend_single.gltf": "01M4MNAKBYX2JPEWAB3TQHAJAZ",
+   "card_mask_double.gltf": "01M4MNAK9EFR8X5SY4E50FB9WT",
+   "card_mask_single.gltf": "01M4MNAK6WFNVYEX6X1DG1CS7B",
+   "card_opaque_double.gltf": "01M4MNAK49MQM4KGDTHX92MD4Y",
+   "card_opaque_single.gltf": "01M4MNAK1V9ZZZ935B6ZQE5CK7",
+   "env_uniform.png": "01M4MNAJZD3H3PK7C4WB465FSJ",
+   "floor.gltf": "01M4MNAKGX6J8C5GT66RK12HG0"
+  },
+  "authored": {
+   "journal": "dc235595f98c64059b37e99a6be00d1a0c3579acb9f33f3265d64f15d5d0e9d6",
+   "project": "402832282523a0217189c5a160ca7372fbf4574120e8860b01c45ebcb5e5b93b"
+  },
+  "cache_files": {
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/models/289b9b6e5a47e5f5a8fbbd0f1f91f2cd5798f25d7a7d2903a697115bd0dd86b4.incmodel": "0f71ac095403197e659a86e7dc2ebca2f6b3810d8bd098a1ac373481f19cdf40",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/models/4d7e73beb3732fe1a011a48c6aa8b5cffc6734c174ca51ff82f8fc04947ab243.incmodel": "70854dbc8c652bb89871762ecc6cf89dbea4591b0b326c69db46f1f0251299ef",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/models/6b01844267bec47b9681997c9b568339dc35fefdd25359cef250fa8c6b998f16.incmodel": "aef1d8d23bc8b61ac905a33eccf476e114aeed7e3109e03a5cd31cdcbae79a1c",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/models/91b2d781d500817dd18d6f8a87aac8c7d76bed0c33c1cde06462e6c51a6763d8.incmodel": "5bd93720963fbd1e8a8c15cc2f5beb098d453cc1d4acc9b9c679b5befa1ea850",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/models/b29f9b4279005d34b8b02417846e26857ac9d49d72d76752f2f02e05449c544a.incmodel": "a820f4a7bd97a50627b49d95256f9eb0c59f0df8394e617236e483f24812e838",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/models/c9cbfbd558e55b63dbf1d21905b1a58ab80c489d7cbecd33b87eefe55a2e9814.incmodel": "63a35d6d8db962e43bc03fa66e1c67ab3866c781bc25f7acd085b2ccd26d2295",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/models/fa854c0c208f5687922d5414d3ef487b7371a96a644f2b7a0ab6b542fd3e2632.incmodel": "059d3f379f7b91feb55f8524d53fd8a0ab099e3b041d5b02bf6d082eded2830b",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/textures/0c275e60be5b799a637daba9470b0d098cc6f0c5133047e6e875ac6c03166307.ktx2": "0c275e60be5b799a637daba9470b0d098cc6f0c5133047e6e875ac6c03166307",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/.incant/cache/textures/c38e1e8aee3f1df573bc7d6904d40f77db971875be7a5f25ab0bd927ddbe36ab.json": "bfb90ac7a95935865d14f7b3b28b77b50b762de281da53f798a33a5fe20827dd"
+  },
+  "entities": {
+   "BLEND double up (non-caster)": "01JA41PWS0000000000000000N",
+   "BLEND single up (non-caster)": "01JA41PWS0000000000000000M",
+   "Camera board": "01JA41PWS0000000000000000P",
+   "Floor": "01JA41PWS00000000000000003",
+   "MASK down double": "01JA41PWS0000000000000000J",
+   "MASK down double-mirrored": "01JA41PWS0000000000000000K",
+   "MASK down single": "01JA41PWS0000000000000000G",
+   "MASK down single-mirrored": "01JA41PWS0000000000000000H",
+   "MASK up double": "01JA41PWS0000000000000000E",
+   "MASK up double-mirrored": "01JA41PWS0000000000000000F",
+   "MASK up single": "01JA41PWS0000000000000000C",
+   "MASK up single-mirrored": "01JA41PWS0000000000000000D",
+   "OPAQUE down double": "01JA41PWS0000000000000000A",
+   "OPAQUE down double-mirrored": "01JA41PWS0000000000000000B",
+   "OPAQUE down single": "01JA41PWS00000000000000008",
+   "OPAQUE down single-mirrored": "01JA41PWS00000000000000009",
+   "OPAQUE up double": "01JA41PWS00000000000000006",
+   "OPAQUE up double-mirrored": "01JA41PWS00000000000000007",
+   "OPAQUE up single": "01JA41PWS00000000000000004",
+   "OPAQUE up single-mirrored": "01JA41PWS00000000000000005",
+   "Sun": "01JA41PWS00000000000000001",
+   "Uniform environment": "01JA41PWS00000000000000002"
+  },
+  "framing": {
+   "board": [
+    89.6,
+    118.4,
+    816.6,
+    452.4
+   ],
+   "floor covers frame": true
+  },
+  "meta": {
+   "BLEND double up (non-caster)": {
+    "alpha": "BLEND",
+    "casts": false,
+    "centre": [
+     2.0,
+     1.4,
+     5.6
+    ],
+    "double_sided": true,
+    "facing": "up",
+    "mirrored": false
+   },
+   "BLEND single up (non-caster)": {
+    "alpha": "BLEND",
+    "casts": false,
+    "centre": [
+     -2.0,
+     1.4,
+     5.6
+    ],
+    "double_sided": false,
+    "facing": "up",
+    "mirrored": false
+   },
+   "MASK down double": {
+    "alpha": "MASK",
+    "casts": true,
+    "centre": [
+     2.0,
+     1.4,
+     -4.2
+    ],
+    "double_sided": true,
+    "facing": "down",
+    "mirrored": false
+   },
+   "MASK down double-mirrored": {
+    "alpha": "MASK",
+    "casts": true,
+    "centre": [
+     6.0,
+     1.4,
+     -4.2
+    ],
+    "double_sided": true,
+    "facing": "down",
+    "mirrored": true
+   },
+   "MASK down single": {
+    "alpha": "MASK",
+    "casts": true,
+    "centre": [
+     -6.0,
+     1.4,
+     -4.2
+    ],
+    "double_sided": false,
+    "facing": "down",
+    "mirrored": false
+   },
+   "MASK down single-mirrored": {
+    "alpha": "MASK",
+    "casts": true,
+    "centre": [
+     -2.0,
+     1.4,
+     -4.2
+    ],
+    "double_sided": false,
+    "facing": "down",
+    "mirrored": true
+   },
+   "MASK up double": {
+    "alpha": "MASK",
+    "casts": true,
+    "centre": [
+     2.0,
+     1.4,
+     -1.8
+    ],
+    "double_sided": true,
+    "facing": "up",
+    "mirrored": false
+   },
+   "MASK up double-mirrored": {
+    "alpha": "MASK",
+    "casts": true,
+    "centre": [
+     6.0,
+     1.4,
+     -1.8
+    ],
+    "double_sided": true,
+    "facing": "up",
+    "mirrored": true
+   },
+   "MASK up single": {
+    "alpha": "MASK",
+    "casts": true,
+    "centre": [
+     -6.0,
+     1.4,
+     -1.8
+    ],
+    "double_sided": false,
+    "facing": "up",
+    "mirrored": false
+   },
+   "MASK up single-mirrored": {
+    "alpha": "MASK",
+    "casts": true,
+    "centre": [
+     -2.0,
+     1.4,
+     -1.8
+    ],
+    "double_sided": false,
+    "facing": "up",
+    "mirrored": true
+   },
+   "OPAQUE down double": {
+    "alpha": "OPAQUE",
+    "casts": true,
+    "centre": [
+     2.0,
+     1.4,
+     0.6
+    ],
+    "double_sided": true,
+    "facing": "down",
+    "mirrored": false
+   },
+   "OPAQUE down double-mirrored": {
+    "alpha": "OPAQUE",
+    "casts": true,
+    "centre": [
+     6.0,
+     1.4,
+     0.6
+    ],
+    "double_sided": true,
+    "facing": "down",
+    "mirrored": true
+   },
+   "OPAQUE down single": {
+    "alpha": "OPAQUE",
+    "casts": true,
+    "centre": [
+     -6.0,
+     1.4,
+     0.6
+    ],
+    "double_sided": false,
+    "facing": "down",
+    "mirrored": false
+   },
+   "OPAQUE down single-mirrored": {
+    "alpha": "OPAQUE",
+    "casts": true,
+    "centre": [
+     -2.0,
+     1.4,
+     0.6
+    ],
+    "double_sided": false,
+    "facing": "down",
+    "mirrored": true
+   },
+   "OPAQUE up double": {
+    "alpha": "OPAQUE",
+    "casts": true,
+    "centre": [
+     2.0,
+     1.4,
+     3.0
+    ],
+    "double_sided": true,
+    "facing": "up",
+    "mirrored": false
+   },
+   "OPAQUE up double-mirrored": {
+    "alpha": "OPAQUE",
+    "casts": true,
+    "centre": [
+     6.0,
+     1.4,
+     3.0
+    ],
+    "double_sided": true,
+    "facing": "up",
+    "mirrored": true
+   },
+   "OPAQUE up single": {
+    "alpha": "OPAQUE",
+    "casts": true,
+    "centre": [
+     -6.0,
+     1.4,
+     3.0
+    ],
+    "double_sided": false,
+    "facing": "up",
+    "mirrored": false
+   },
+   "OPAQUE up single-mirrored": {
+    "alpha": "OPAQUE",
+    "casts": true,
+    "centre": [
+     -2.0,
+     1.4,
+     3.0
+    ],
+    "double_sided": false,
+    "facing": "up",
+    "mirrored": true
+   }
+  },
+  "project": "artifacts/0041-prewarmed-pipelines/projects/shadows/shadows.incant.json",
+  "receipts": {
+   "card_blend_double.gltf": {
+    "asset": {
+     "id": "01M4MNAKEE8N8R6VE5BVAXRZ7E",
+     "kind": "model",
+     "name": "card_blend_double",
+     "path": "card_blend_double.gltf",
+     "sha256": "91b2d781d500817dd18d6f8a87aac8c7d76bed0c33c1cde06462e6c51a6763d8"
+    },
+    "changed": true,
+    "revision": 7
+   },
+   "card_blend_single.gltf": {
+    "asset": {
+     "id": "01M4MNAKBYX2JPEWAB3TQHAJAZ",
+     "kind": "model",
+     "name": "card_blend_single",
+     "path": "card_blend_single.gltf",
+     "sha256": "289b9b6e5a47e5f5a8fbbd0f1f91f2cd5798f25d7a7d2903a697115bd0dd86b4"
+    },
+    "changed": true,
+    "revision": 6
+   },
+   "card_mask_double.gltf": {
+    "asset": {
+     "id": "01M4MNAK9EFR8X5SY4E50FB9WT",
+     "kind": "model",
+     "name": "card_mask_double",
+     "path": "card_mask_double.gltf",
+     "sha256": "6b01844267bec47b9681997c9b568339dc35fefdd25359cef250fa8c6b998f16"
+    },
+    "changed": true,
+    "revision": 5
+   },
+   "card_mask_single.gltf": {
+    "asset": {
+     "id": "01M4MNAK6WFNVYEX6X1DG1CS7B",
+     "kind": "model",
+     "name": "card_mask_single",
+     "path": "card_mask_single.gltf",
+     "sha256": "fa854c0c208f5687922d5414d3ef487b7371a96a644f2b7a0ab6b542fd3e2632"
+    },
+    "changed": true,
+    "revision": 4
+   },
+   "card_opaque_double.gltf": {
+    "asset": {
+     "id": "01M4MNAK49MQM4KGDTHX92MD4Y",
+     "kind": "model",
+     "name": "card_opaque_double",
+     "path": "card_opaque_double.gltf",
+     "sha256": "c9cbfbd558e55b63dbf1d21905b1a58ab80c489d7cbecd33b87eefe55a2e9814"
+    },
+    "changed": true,
+    "revision": 3
+   },
+   "card_opaque_single.gltf": {
+    "asset": {
+     "id": "01M4MNAK1V9ZZZ935B6ZQE5CK7",
+     "kind": "model",
+     "name": "card_opaque_single",
+     "path": "card_opaque_single.gltf",
+     "sha256": "b29f9b4279005d34b8b02417846e26857ac9d49d72d76752f2f02e05449c544a"
+    },
+    "changed": true,
+    "revision": 2
+   },
+   "env_uniform.png": {
+    "asset": {
+     "id": "01M4MNAJZD3H3PK7C4WB465FSJ",
+     "import_settings": {
+      "type": "texture",
+      "usage": "linear"
+     },
+     "kind": "texture",
+     "name": "env_uniform",
+     "path": "env_uniform.png",
+     "sha256": "c38e1e8aee3f1df573bc7d6904d40f77db971875be7a5f25ab0bd927ddbe36ab"
+    },
+    "changed": true,
+    "revision": 1
+   },
+   "floor.gltf": {
+    "asset": {
+     "id": "01M4MNAKGX6J8C5GT66RK12HG0",
+     "kind": "model",
+     "name": "floor",
+     "path": "floor.gltf",
+     "sha256": "4d7e73beb3732fe1a011a48c6aa8b5cffc6734c174ca51ff82f8fc04947ab243"
+    },
+    "changed": true,
+    "revision": 8
+   }
+  },
+  "scene": "01M4MNAJWWFB7NYJ5D8107TB2F",
+  "sources": [
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_base.png",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_blend_double.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_blend_double.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_blend_single.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_blend_single.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_mask_double.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_mask_double.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_mask_single.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_mask_single.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_opaque_double.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_opaque_double.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_opaque_single.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/card_opaque_single.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/env_uniform.png",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/floor.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/shadows/floor.gltf"
+  ],
+  "views": {
+   "board": {
+    "camera": "01JA41PWS0000000000000000P",
+    "eye": [
+     1.0,
+     12.0,
+     13.5
+    ],
+    "fov": 40.0,
+    "ortho_half_height": null,
+    "pixel": null,
+    "rotation": [
+     -0.35538055751288666,
+     -0.0,
+     -0.0,
+     0.9347217015464174
+    ],
+    "size": [
+     960,
+     540
+    ]
+   },
+   "top": {
+    "camera": "01JA41PWS00000000000000034",
+    "eye": [
+     0.8,
+     20.0,
+     0.4
+    ],
+    "fov": 40.0,
+    "ortho_half_height": 7.0,
+    "pixel": null,
+    "rotation": [
+     -0.7071067811865475,
+     -0.0,
+     -0.0,
+     0.7071067811865476
+    ],
+    "size": [
+     960,
+     540
+    ]
+   }
+  }
+ },
+ "sprites": {
+  "assets": {
+   "occluder.gltf": "01M4MNAMQ8W2PAQC650T0WVF9Q",
+   "sheet.png": "01M4MNAMJ8H7R7312CVK6RB00Q",
+   "sprites.atlas.json": "01M4MNAMMTV8ASPCTH9WBQAXSK"
+  },
+  "authored": {
+   "journal": "f625c1285d1dd62f0ac2d5c44227c03bdc284abeec876f1f2fcabc8abf20b666",
+   "project": "955beb356cf669ca900df7fcf05fb642805324892aac98f21eb47685737f890c"
+  },
+  "cache_files": {
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/.incant/cache/models/501fa36b8febdf7f512faa5223677b7673b0f419baaa5c209afd39f12d3dbd52.incmodel": "41b04e025acdc751d2d6e7c81107ad5c6734b2d22338acf36705eb7ab9806444",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/.incant/cache/textures/17e1167379797b4fb77acc3cddb81d81d24e96a76c3f4fb245323011b1b8c160.ktx2": "17e1167379797b4fb77acc3cddb81d81d24e96a76c3f4fb245323011b1b8c160",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/.incant/cache/textures/578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4.ktx2": "578aaee8f5dcfe802130979f9c77073e6d0a10feef1c87b821cee4332a779fb4",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/.incant/cache/textures/58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d.json": "0eeb072207743b48e0af727c96e887e6162903ded6bc8af568a8d8dd57d366f9",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/.incant/cache/textures/ead8d849584b27a87a6d4d6b2c892e8b9e3ddd37d745c3ee21782129786acf27.json": "f041514e2dc9af773421286b05cf4779d0200a81959a12549834ab97e240e03a"
+  },
+  "entities": {
+   "A flip-x": "01JA41PWP0000000000000000D",
+   "A flip-xy": "01JA41PWP0000000000000000F",
+   "A flip-y": "01JA41PWP0000000000000000E",
+   "A normal": "01JA41PWP0000000000000000C",
+   "A reflection": "01JA41PWP0000000000000000J",
+   "A reflection parent": "01JA41PWP0000000000000000H",
+   "A rot90": "01JA41PWP0000000000000000G",
+   "A tint": "01JA41PWP0000000000000000K",
+   "A translucent": "01JA41PWP0000000000000000M",
+   "B flip-x": "01JA41PWP0000000000000000P",
+   "B flip-xy": "01JA41PWP0000000000000000R",
+   "B flip-y": "01JA41PWP0000000000000000Q",
+   "B normal": "01JA41PWP0000000000000000N",
+   "B reflection": "01JA41PWP0000000000000000V",
+   "B reflection parent": "01JA41PWP0000000000000000T",
+   "B rot90": "01JA41PWP0000000000000000S",
+   "B tint": "01JA41PWP0000000000000000W",
+   "B translucent": "01JA41PWP0000000000000000X",
+   "Background": "01JA41PWP00000000000000001",
+   "C atlas nine-slice": "01JA41PWP0000000000000000Z",
+   "C atlas nine-slice compressed": "01JA41PWP00000000000000013",
+   "C atlas nine-slice flip-xy": "01JA41PWP00000000000000012",
+   "C ordinary nine-slice": "01JA41PWP0000000000000000Y",
+   "C reflected nine-slice": "01JA41PWP00000000000000011",
+   "C reflected nine-slice parent": "01JA41PWP00000000000000010",
+   "Camera perspective": "01JA41PWP0000000000000001G",
+   "Camera pixel": "01JA41PWP0000000000000001F",
+   "D atlas glyph in front": "01JA41PWP0000000000000001C",
+   "D glyph behind occluder": "01JA41PWP0000000000000001B",
+   "D occluder model": "01JA41PWP0000000000000001E",
+   "D orb 0": "01JA41PWP00000000000000018",
+   "D orb 1": "01JA41PWP00000000000000019",
+   "D orb 2": "01JA41PWP0000000000000001A",
+   "D stripe 0": "01JA41PWP00000000000000014",
+   "D stripe 1": "01JA41PWP00000000000000015",
+   "D stripe 2": "01JA41PWP00000000000000016",
+   "D stripe 3": "01JA41PWP00000000000000017",
+   "D translucent atlas over occluder": "01JA41PWP0000000000000001D",
+   "Stripe dark 0": "01JA41PWP00000000000000003",
+   "Stripe dark 1": "01JA41PWP00000000000000005",
+   "Stripe dark 2": "01JA41PWP00000000000000007",
+   "Stripe dark 3": "01JA41PWP00000000000000009",
+   "Stripe dark 4": "01JA41PWP0000000000000000B",
+   "Stripe light 0": "01JA41PWP00000000000000002",
+   "Stripe light 1": "01JA41PWP00000000000000004",
+   "Stripe light 2": "01JA41PWP00000000000000006",
+   "Stripe light 3": "01JA41PWP00000000000000008",
+   "Stripe light 4": "01JA41PWP0000000000000000A"
+  },
+  "framing": {
+   "perspective background corners": [
+    [
+     195.69470481463478,
+     110.41430101366021
+    ],
+    [
+     165.7082756707057,
+     496.8303311183826
+    ],
+    [
+     896.1570262858247,
+     -30.348462152799044
+    ],
+    [
+     963.7108467855144,
+     541.5156379384742
+    ]
+   ],
+   "perspective board": [
+    192.0,
+    15.7,
+    904.1,
+    490.1
+   ]
+  },
+  "meta": {
+   "A flip-x": {
+    "rect": [
+     46,
+     8,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "A flip-xy": {
+    "rect": [
+     122,
+     8,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "A flip-y": {
+    "rect": [
+     84,
+     8,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "A normal": {
+    "rect": [
+     8,
+     8,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "A reflection": {
+    "rect": [
+     198,
+     8,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "A rot90": {
+    "rect": [
+     160,
+     8,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "A tint": {
+    "rect": [
+     236,
+     8,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "A translucent": {
+    "rect": [
+     274,
+     8,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "B flip-x": {
+    "rect": [
+     46,
+     46,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "B flip-xy": {
+    "rect": [
+     122,
+     46,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "B flip-y": {
+    "rect": [
+     84,
+     46,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "B normal": {
+    "rect": [
+     8,
+     46,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "B reflection": {
+    "rect": [
+     198,
+     46,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "B rot90": {
+    "rect": [
+     160,
+     46,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "B tint": {
+    "rect": [
+     236,
+     46,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "B translucent": {
+    "rect": [
+     274,
+     46,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "Background": {
+    "rect": [
+     -16,
+     -16,
+     352,
+     212
+    ],
+    "z": 0.0
+   },
+   "C atlas nine-slice": {
+    "rect": [
+     80,
+     86,
+     64,
+     40
+    ],
+    "z": 0.0
+   },
+   "C atlas nine-slice compressed": {
+    "rect": [
+     300,
+     86,
+     8,
+     40
+    ],
+    "z": 0.0
+   },
+   "C atlas nine-slice flip-xy": {
+    "rect": [
+     224,
+     86,
+     64,
+     40
+    ],
+    "z": 0.0
+   },
+   "C ordinary nine-slice": {
+    "rect": [
+     8,
+     86,
+     64,
+     40
+    ],
+    "z": 0.0
+   },
+   "C reflected nine-slice": {
+    "rect": [
+     152,
+     86,
+     64,
+     40
+    ],
+    "z": 0.0
+   },
+   "D atlas glyph in front": {
+    "rect": [
+     232,
+     138,
+     32,
+     32
+    ],
+    "z": 2.0
+   },
+   "D glyph behind occluder": {
+    "rect": [
+     160,
+     138,
+     32,
+     32
+    ],
+    "z": 0.0
+   },
+   "D occluder model": {
+    "rect": [
+     180,
+     140,
+     70,
+     30
+    ],
+    "z": 1.0
+   },
+   "D orb 0": {
+    "rect": [
+     10,
+     144,
+     24,
+     24
+    ],
+    "z": 0.0
+   },
+   "D orb 1": {
+    "rect": [
+     24,
+     144,
+     24,
+     24
+    ],
+    "z": 0.0
+   },
+   "D orb 2": {
+    "rect": [
+     38,
+     144,
+     24,
+     24
+    ],
+    "z": 0.0
+   },
+   "D stripe 0": {
+    "rect": [
+     8,
+     138,
+     8,
+     36
+    ],
+    "z": 0.0
+   },
+   "D stripe 1": {
+    "rect": [
+     24,
+     138,
+     8,
+     36
+    ],
+    "z": 0.0
+   },
+   "D stripe 2": {
+    "rect": [
+     40,
+     138,
+     8,
+     36
+    ],
+    "z": 0.0
+   },
+   "D stripe 3": {
+    "rect": [
+     56,
+     138,
+     8,
+     36
+    ],
+    "z": 0.0
+   },
+   "D translucent atlas over occluder": {
+    "rect": [
+     196,
+     150,
+     24,
+     24
+    ],
+    "z": 2.0
+   },
+   "Stripe dark 0": {
+    "rect": [
+     274,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe dark 1": {
+    "rect": [
+     282,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe dark 2": {
+    "rect": [
+     290,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe dark 3": {
+    "rect": [
+     298,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe dark 4": {
+    "rect": [
+     306,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe light 0": {
+    "rect": [
+     270,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe light 1": {
+    "rect": [
+     278,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe light 2": {
+    "rect": [
+     286,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe light 3": {
+    "rect": [
+     294,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   },
+   "Stripe light 4": {
+    "rect": [
+     302,
+     4,
+     4,
+     78
+    ],
+    "z": 0.0
+   }
+  },
+  "project": "artifacts/0041-prewarmed-pipelines/projects/sprites/sprites.incant.json",
+  "receipts": {
+   "occluder.gltf": {
+    "asset": {
+     "id": "01M4MNAMQ8W2PAQC650T0WVF9Q",
+     "kind": "model",
+     "name": "occluder",
+     "path": "occluder.gltf",
+     "sha256": "501fa36b8febdf7f512faa5223677b7673b0f419baaa5c209afd39f12d3dbd52"
+    },
+    "changed": true,
+    "revision": 3
+   },
+   "sheet.png": {
+    "asset": {
+     "id": "01M4MNAMJ8H7R7312CVK6RB00Q",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sheet",
+     "path": "sheet.png",
+     "sha256": "ead8d849584b27a87a6d4d6b2c892e8b9e3ddd37d745c3ee21782129786acf27"
+    },
+    "changed": true,
+    "revision": 1
+   },
+   "sprites.atlas.json": {
+    "asset": {
+     "id": "01M4MNAMMTV8ASPCTH9WBQAXSK",
+     "import_settings": {
+      "type": "texture",
+      "usage": "color"
+     },
+     "kind": "texture",
+     "name": "sprites.atlas",
+     "path": "sprites.atlas.json",
+     "sha256": "58a414b5e5ee8b7ca5074d8cdd547dabffc202699805f4f75056a38e6a7aff5d"
+    },
+    "changed": true,
+    "revision": 2
+   }
+  },
+  "scene": "01M4MNAMFQATRJP6AFX16DKCRJ",
+  "sources": [
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/flag.png",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/occluder.bin",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/occluder.gltf",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/panel_b.png",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/sheet.png",
+   "artifacts/0041-prewarmed-pipelines/projects/sprites/sprites.atlas.json"
+  ],
+  "views": {
+   "perspective": {
+    "camera": "01JA41PWP0000000000000001G",
+    "eye": [
+     8.0,
+     -4.0,
+     19.0
+    ],
+    "fov": 40.0,
+    "ortho_half_height": null,
+    "pixel": null,
+    "rotation": [
+     0.0937838668867253,
+     0.1970371384557252,
+     -0.018938809364549232,
+     0.9757162875963513
+    ],
+    "size": [
+     960,
+     540
+    ]
+   },
+   "pixel": {
+    "camera": "01JA41PWP0000000000000001F",
+    "eye": [
+     0.0,
+     0.0,
+     10.0
+    ],
+    "fov": 40.0,
+    "ortho_half_height": 5.625,
+    "pixel": [
+     16,
+     [
+      320,
+      180
+     ]
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "size": [
+     960,
+     540
+    ]
+   }
+  }
+ }
+}

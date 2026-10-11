@@ -1,0 +1,1238 @@
+{
+  "registry_version": 1,
+  "abi_version": 1,
+  "endianness": "little",
+  "id_endianness": "big",
+  "functions": [
+    {
+      "namespace": "incant_v1",
+      "name": "chunk_count",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 0,
+      "call": "Call::ChunkCount"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "chunk_len",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "chunk",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 1,
+      "call": "Call::ChunkLen(chunk)"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "chunk_flags",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "chunk",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 2,
+      "call": "Call::ChunkFlags(chunk)"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "read_ids",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "chunk",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 3,
+      "call": "Call::ReadIds(chunk, ptr)"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "read_transforms",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "chunk",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 4,
+      "call": "Call::Column { chunk, ptr, velocity: false, write: false }"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "write_transforms",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "chunk",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 5,
+      "call": "Call::Column { chunk, ptr, velocity: false, write: true }"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "read_velocities",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "chunk",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 6,
+      "call": "Call::Column { chunk, ptr, velocity: true, write: false }"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "write_velocities",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "chunk",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 7,
+      "call": "Call::Column { chunk, ptr, velocity: true, write: true }"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "spawn",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "parent",
+          "i32"
+        ],
+        [
+          "transform",
+          "i32"
+        ],
+        [
+          "velocity",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 8,
+      "call": "Call::Spawn { id, parent, transform, velocity }"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "despawn",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 9,
+      "call": "Call::Despawn(id)"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "set_velocity",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 10,
+      "call": "Call::SetVelocity(id, ptr)"
+    },
+    {
+      "namespace": "incant_v1",
+      "name": "set_parent",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 11,
+      "call": "Call::SetParent(id, ptr)"
+    },
+    {
+      "namespace": "incant_input_v1",
+      "name": "snapshot_len",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 12,
+      "call": "Call::InputLen"
+    },
+    {
+      "namespace": "incant_input_v1",
+      "name": "read_snapshot",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 13,
+      "call": "Call::ReadInput { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_flipbook_v1",
+      "name": "snapshot_len",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 14,
+      "call": "Call::FlipbookLen"
+    },
+    {
+      "namespace": "incant_flipbook_v1",
+      "name": "read_snapshot",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 15,
+      "call": "Call::ReadFlipbooks { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_flipbook_v1",
+      "name": "control",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "id",
+          "i32"
+        ],
+        [
+          "kind",
+          "i32"
+        ],
+        [
+          "frame",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 16,
+      "call": "Call::ControlFlipbook { id, kind, frame }"
+    }
+  ],
+  "enums": {
+    "Key": [
+      [
+        "KeyA",
+        0
+      ],
+      [
+        "KeyB",
+        1
+      ],
+      [
+        "KeyC",
+        2
+      ],
+      [
+        "KeyD",
+        3
+      ],
+      [
+        "KeyE",
+        4
+      ],
+      [
+        "KeyF",
+        5
+      ],
+      [
+        "KeyG",
+        6
+      ],
+      [
+        "KeyH",
+        7
+      ],
+      [
+        "KeyI",
+        8
+      ],
+      [
+        "KeyJ",
+        9
+      ],
+      [
+        "KeyK",
+        10
+      ],
+      [
+        "KeyL",
+        11
+      ],
+      [
+        "KeyM",
+        12
+      ],
+      [
+        "KeyN",
+        13
+      ],
+      [
+        "KeyO",
+        14
+      ],
+      [
+        "KeyP",
+        15
+      ],
+      [
+        "KeyQ",
+        16
+      ],
+      [
+        "KeyR",
+        17
+      ],
+      [
+        "KeyS",
+        18
+      ],
+      [
+        "KeyT",
+        19
+      ],
+      [
+        "KeyU",
+        20
+      ],
+      [
+        "KeyV",
+        21
+      ],
+      [
+        "KeyW",
+        22
+      ],
+      [
+        "KeyX",
+        23
+      ],
+      [
+        "KeyY",
+        24
+      ],
+      [
+        "KeyZ",
+        25
+      ],
+      [
+        "Digit0",
+        26
+      ],
+      [
+        "Digit1",
+        27
+      ],
+      [
+        "Digit2",
+        28
+      ],
+      [
+        "Digit3",
+        29
+      ],
+      [
+        "Digit4",
+        30
+      ],
+      [
+        "Digit5",
+        31
+      ],
+      [
+        "Digit6",
+        32
+      ],
+      [
+        "Digit7",
+        33
+      ],
+      [
+        "Digit8",
+        34
+      ],
+      [
+        "Digit9",
+        35
+      ],
+      [
+        "ArrowUp",
+        36
+      ],
+      [
+        "ArrowDown",
+        37
+      ],
+      [
+        "ArrowLeft",
+        38
+      ],
+      [
+        "ArrowRight",
+        39
+      ],
+      [
+        "Space",
+        40
+      ],
+      [
+        "Enter",
+        41
+      ],
+      [
+        "Escape",
+        42
+      ],
+      [
+        "Tab",
+        43
+      ],
+      [
+        "Backspace",
+        44
+      ],
+      [
+        "Delete",
+        45
+      ],
+      [
+        "Insert",
+        46
+      ],
+      [
+        "Home",
+        47
+      ],
+      [
+        "End",
+        48
+      ],
+      [
+        "PageUp",
+        49
+      ],
+      [
+        "PageDown",
+        50
+      ],
+      [
+        "ShiftLeft",
+        51
+      ],
+      [
+        "ShiftRight",
+        52
+      ],
+      [
+        "ControlLeft",
+        53
+      ],
+      [
+        "ControlRight",
+        54
+      ],
+      [
+        "AltLeft",
+        55
+      ],
+      [
+        "AltRight",
+        56
+      ],
+      [
+        "MetaLeft",
+        57
+      ],
+      [
+        "MetaRight",
+        58
+      ],
+      [
+        "CapsLock",
+        59
+      ],
+      [
+        "NumLock",
+        60
+      ],
+      [
+        "ScrollLock",
+        61
+      ],
+      [
+        "Pause",
+        62
+      ],
+      [
+        "PrintScreen",
+        63
+      ],
+      [
+        "ContextMenu",
+        64
+      ],
+      [
+        "Backquote",
+        65
+      ],
+      [
+        "Minus",
+        66
+      ],
+      [
+        "Equal",
+        67
+      ],
+      [
+        "BracketLeft",
+        68
+      ],
+      [
+        "BracketRight",
+        69
+      ],
+      [
+        "Backslash",
+        70
+      ],
+      [
+        "Semicolon",
+        71
+      ],
+      [
+        "Quote",
+        72
+      ],
+      [
+        "Comma",
+        73
+      ],
+      [
+        "Period",
+        74
+      ],
+      [
+        "Slash",
+        75
+      ],
+      [
+        "Numpad0",
+        76
+      ],
+      [
+        "Numpad1",
+        77
+      ],
+      [
+        "Numpad2",
+        78
+      ],
+      [
+        "Numpad3",
+        79
+      ],
+      [
+        "Numpad4",
+        80
+      ],
+      [
+        "Numpad5",
+        81
+      ],
+      [
+        "Numpad6",
+        82
+      ],
+      [
+        "Numpad7",
+        83
+      ],
+      [
+        "Numpad8",
+        84
+      ],
+      [
+        "Numpad9",
+        85
+      ],
+      [
+        "NumpadAdd",
+        86
+      ],
+      [
+        "NumpadSubtract",
+        87
+      ],
+      [
+        "NumpadMultiply",
+        88
+      ],
+      [
+        "NumpadDivide",
+        89
+      ],
+      [
+        "NumpadDecimal",
+        90
+      ],
+      [
+        "NumpadEnter",
+        91
+      ],
+      [
+        "F1",
+        92
+      ],
+      [
+        "F2",
+        93
+      ],
+      [
+        "F3",
+        94
+      ],
+      [
+        "F4",
+        95
+      ],
+      [
+        "F5",
+        96
+      ],
+      [
+        "F6",
+        97
+      ],
+      [
+        "F7",
+        98
+      ],
+      [
+        "F8",
+        99
+      ],
+      [
+        "F9",
+        100
+      ],
+      [
+        "F10",
+        101
+      ],
+      [
+        "F11",
+        102
+      ],
+      [
+        "F12",
+        103
+      ]
+    ],
+    "MouseButton": [
+      [
+        "Left",
+        0
+      ],
+      [
+        "Right",
+        1
+      ],
+      [
+        "Middle",
+        2
+      ],
+      [
+        "Back",
+        3
+      ],
+      [
+        "Forward",
+        4
+      ]
+    ],
+    "GamepadButton": [
+      [
+        "South",
+        0
+      ],
+      [
+        "East",
+        1
+      ],
+      [
+        "West",
+        2
+      ],
+      [
+        "North",
+        3
+      ],
+      [
+        "LeftShoulder",
+        4
+      ],
+      [
+        "RightShoulder",
+        5
+      ],
+      [
+        "LeftTrigger",
+        6
+      ],
+      [
+        "RightTrigger",
+        7
+      ],
+      [
+        "Select",
+        8
+      ],
+      [
+        "Start",
+        9
+      ],
+      [
+        "Guide",
+        10
+      ],
+      [
+        "LeftStick",
+        11
+      ],
+      [
+        "RightStick",
+        12
+      ],
+      [
+        "DpadUp",
+        13
+      ],
+      [
+        "DpadDown",
+        14
+      ],
+      [
+        "DpadLeft",
+        15
+      ],
+      [
+        "DpadRight",
+        16
+      ]
+    ],
+    "ActionKind": [
+      [
+        "Button",
+        0
+      ],
+      [
+        "Axis1",
+        1
+      ],
+      [
+        "Axis2",
+        2
+      ]
+    ],
+    "TouchPhase": [
+      [
+        "Down",
+        0
+      ],
+      [
+        "Move",
+        1
+      ],
+      [
+        "Up",
+        2
+      ],
+      [
+        "Cancel",
+        3
+      ]
+    ],
+    "GestureKind": [
+      [
+        "Tap",
+        1
+      ],
+      [
+        "LongPress",
+        2
+      ],
+      [
+        "Swipe",
+        3
+      ],
+      [
+        "Pinch",
+        4
+      ]
+    ],
+    "FlipbookControl": [
+      [
+        "Play",
+        0
+      ],
+      [
+        "Pause",
+        1
+      ],
+      [
+        "Restart",
+        2
+      ],
+      [
+        "Seek",
+        3
+      ]
+    ]
+  },
+  "records": {
+    "InputHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "length",
+        "u32"
+      ],
+      [
+        "focused",
+        "u32"
+      ],
+      [
+        "tick",
+        "u64"
+      ]
+    ],
+    "Action": [
+      [
+        "name_length",
+        "u8"
+      ],
+      [
+        "kind",
+        "u8"
+      ],
+      [
+        "flags",
+        "u8"
+      ],
+      [
+        "reserved",
+        "u8"
+      ],
+      [
+        "value",
+        "f64",
+        2
+      ]
+    ],
+    "Keyboard": [
+      [
+        "held",
+        "u128"
+      ],
+      [
+        "pressed",
+        "u128"
+      ],
+      [
+        "released",
+        "u128"
+      ]
+    ],
+    "Mouse": [
+      [
+        "buttons",
+        "u8",
+        3
+      ],
+      [
+        "has_position",
+        "u8"
+      ],
+      [
+        "position",
+        "f64",
+        2
+      ],
+      [
+        "motion",
+        "f64",
+        2
+      ],
+      [
+        "wheel_pixels",
+        "f64",
+        2
+      ],
+      [
+        "wheel_lines",
+        "f64",
+        2
+      ]
+    ],
+    "Gamepad": [
+      [
+        "id",
+        "u32"
+      ],
+      [
+        "held",
+        "u32"
+      ],
+      [
+        "pressed",
+        "u32"
+      ],
+      [
+        "released",
+        "u32"
+      ],
+      [
+        "present",
+        "u32"
+      ],
+      [
+        "values",
+        "f64",
+        17
+      ],
+      [
+        "left_stick",
+        "f64",
+        2
+      ],
+      [
+        "right_stick",
+        "f64",
+        2
+      ]
+    ],
+    "Touch": [
+      [
+        "id",
+        "u32"
+      ],
+      [
+        "position",
+        "f64",
+        2
+      ],
+      [
+        "delta",
+        "f64",
+        2
+      ]
+    ],
+    "TouchChange": [
+      [
+        "id",
+        "u32"
+      ],
+      [
+        "phase",
+        "u8"
+      ],
+      [
+        "reserved",
+        "u8",
+        3
+      ],
+      [
+        "position",
+        "f64",
+        2
+      ]
+    ],
+    "GestureHeader": [
+      [
+        "kind",
+        "u8"
+      ],
+      [
+        "reserved",
+        "u8",
+        3
+      ],
+      [
+        "id",
+        "u32"
+      ]
+    ],
+    "PointGesture": [
+      [
+        "position",
+        "f64",
+        2
+      ]
+    ],
+    "SwipeGesture": [
+      [
+        "direction",
+        "f64",
+        2
+      ],
+      [
+        "distance",
+        "f64"
+      ],
+      [
+        "duration_seconds",
+        "f64"
+      ]
+    ],
+    "PinchGesture": [
+      [
+        "second_id",
+        "u32"
+      ],
+      [
+        "center",
+        "f64",
+        2
+      ],
+      [
+        "scale_delta",
+        "f64"
+      ],
+      [
+        "rotation_delta",
+        "f64"
+      ]
+    ],
+    "FlipbookHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "Flipbook": [
+      [
+        "id",
+        "u8",
+        16
+      ],
+      [
+        "frame",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ]
+    ],
+    "TransformRow": [
+      [
+        "translation",
+        "f64",
+        3
+      ],
+      [
+        "rotation",
+        "f64",
+        4
+      ],
+      [
+        "scale",
+        "f64",
+        3
+      ]
+    ],
+    "VelocityRow": [
+      [
+        "linear",
+        "f64",
+        3
+      ]
+    ]
+  },
+  "input_sections": [
+    "Actions",
+    "Keyboard",
+    "Mouse",
+    "Gamepads",
+    "Connected",
+    "Disconnected",
+    "Touches",
+    "TouchChanges",
+    "Gestures"
+  ],
+  "constants": {
+    "ID_BYTES": 16,
+    "TRANSFORM_STRIDE": 10,
+    "VELOCITY_STRIDE": 3,
+    "INPUT_MAX_BYTES": 131072,
+    "FLIPBOOK_MAX_ROWS": 32768,
+    "INPUT_MAX_ACTIONS": 64,
+    "INPUT_MAX_NAME_BYTES": 64,
+    "INPUT_MAX_GAMEPADS": 16,
+    "INPUT_MAX_TOUCHES": 16,
+    "INPUT_MAX_DEVICE_CHANGES": 1024,
+    "INPUT_MAX_TOUCH_CHANGES": 2064,
+    "INPUT_MAX_GESTURES": 1041,
+    "MEMORY": 33554432,
+    "COLUMNS": 33554432,
+    "TRANSFERS": 134217728,
+    "CALLS": 65536,
+    "COMMANDS": 1024,
+    "CHUNKS": 4096,
+    "FLIPBOOK_MAX_FRAMES": 256,
+    "KEY_TAG_COUNT": 104,
+    "GAMEPAD_BUTTON_COUNT": 17,
+    "MOUSE_BUTTON_COUNT": 5
+  },
+  "magic": {
+    "INPUT_MAGIC": "INPINP01",
+    "FLIPBOOK_MAGIC": "INCFB001"
+  },
+  "optional_none": -1,
+  "namespaces": {
+    "incant_v1": "imports",
+    "incant_input_v1": "input",
+    "incant_flipbook_v1": "flipbook"
+  }
+}

@@ -137,8 +137,13 @@ def main():
         inputs = Path(inputs); wabt, provenance = static.provision(inputs)
         rust = inputs/'game.rs'; shutil.copy2(ROOT/'crates/incant_wasm_player/fixtures/game.rs', rust)
         module = inputs/'game.wasm'
-        run([rustc, rust, '--crate-type=cdylib', '--edition=2024', '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', module])
+        static.rust_guest.compile(rustc,rust,module,env=env)
         modules = [('game', module)]
+        if args.conformance_only:
+            flipbook = inputs/'flipbook.rs'; shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs', flipbook)
+            flipbook_module = inputs/'flipbook.wasm'
+            static.rust_guest.compile(rustc,flipbook,flipbook_module,env=env)
+            modules.append(('flipbook-game', flipbook_module))
         for source in [*(ROOT/'crates/incant_wasm_runtime/fixtures').glob('*.wat'), *(ROOT/'crates/incant_wasm_player/fixtures').glob('*.wat')]:
             copied = inputs/source.name; shutil.copy2(source, copied); dest = copied.with_suffix('.wasm')
             run([wabt/f'bin/wat2wasm{suffix}', copied, '-o', dest]); modules.append((source.stem, dest))
@@ -193,7 +198,7 @@ def main():
     static.archive(out/'player', out/'player.zip'); static.archive(out/'symbols', out/'symbols.zip')
     report = {'passed': True, 'target': target, 'compiler': compiler, 'wabt': provenance, 'codegen': flags,
         'c_flags': c_flags, 'normal_dependencies': dependencies, 'player_bytes': player.stat().st_size,
-        'player_sha256': sha(player), 'symbols': identity, 'source_sha256': source_hash, 'wasm_sha256': wasm_hash,
+        'rust_sdk': static.rust_guest.provenance(), 'player_sha256': sha(player), 'symbols': identity, 'source_sha256': source_hash, 'wasm_sha256': wasm_hash,
         'temporary_compile_sources_tools_generated_c_wasm_and_build_storage_deleted': True,
         'successes': successes, 'rejections': failures,
         'limitations': ['versioned copied input snapshot, not a complete gameplay SDK', 'QuickJS remains in normal dependency graph; this is not a QuickJS-free architecture', 'retained PCM and recording JSON are runtime exchange files, not deleted compile inputs', 'repository and validator build storage retained', 'copied bounded numeric transfer, not zero-copy', 'no renderer, full session save, mobile/device or performance gate', 'simulation/module/audio failures publish no PCM; output I/O itself is not atomic', 'trusted build environment; C flag audit checks global presence, not every translation unit']}

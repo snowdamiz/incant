@@ -45,11 +45,31 @@ impl RuntimeAssetData {
                     + model
                         .images
                         .iter()
-                        .flat_map(|image| &image.levels)
-                        .map(Vec::len)
+                        .map(crate::Texture::payload_bytes)
                         .sum::<usize>()
             }
-            Self::Texture(texture) => texture.texture.levels.iter().map(Vec::len).sum(),
+            Self::Texture(texture) => std::iter::once(&texture.texture)
+                .chain(texture.color_unweighted.as_ref())
+                .map(crate::Texture::payload_bytes)
+                .sum(),
+            Self::Audio(audio) => audio.resident_bytes(),
+        }
+    }
+
+    fn resident_payload_bytes(&self) -> usize {
+        match self {
+            Self::Model(model) => {
+                self.payload_bytes()
+                    - model
+                        .images
+                        .iter()
+                        .map(crate::Texture::payload_bytes)
+                        .sum::<usize>()
+                    + crate::texture::resident_bytes(&model.images)
+            }
+            Self::Texture(texture) => crate::texture::resident_bytes(
+                std::iter::once(&texture.texture).chain(texture.color_unweighted.as_ref()),
+            ),
             Self::Audio(audio) => audio.resident_bytes(),
         }
     }
@@ -71,6 +91,7 @@ pub struct RuntimeAsset {
     info: RuntimeAssetInfo,
     usage: Option<TextureUsage>,
     data: RuntimeAssetData,
+    resident_payload_bytes: usize,
 }
 impl RuntimeAsset {
     pub fn version_id(&self) -> AssetVersionId {
@@ -84,6 +105,12 @@ impl RuntimeAsset {
     }
     pub fn usage(&self) -> Option<TextureUsage> {
         self.usage
+    }
+    /// Unique retained CPU payload, excluding allocation metadata. The separate
+    /// info.payload_bytes remains the conservative logical budget; neither is a
+    /// measurement of GPU allocations or serialized disk bytes.
+    pub fn resident_payload_bytes(&self) -> usize {
+        self.resident_payload_bytes
     }
 }
 
@@ -112,6 +139,7 @@ impl RuntimeAsset {
                 payload_bytes: data.payload_bytes(),
             },
             usage,
+            resident_payload_bytes: data.resident_payload_bytes(),
             data,
         })
     }

@@ -5,6 +5,7 @@ use incant_assets_runtime::sha256;
 #[cfg(feature = "render-gpu")]
 mod gpu;
 mod observe;
+mod program;
 mod session;
 mod startup;
 #[cfg(all(
@@ -55,7 +56,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         )))]
         return Err("native window mode requires the native-window feature on desktop".into());
     }
-    let (args, observation_path) = observe::split_args(&args);
+    let (args, module) = program::split_args(&args)?;
+    let (args, observation_path) = observe::split_args(args);
     let spatial = session::settings(args)?;
     let ticks: u64 = args[5].parse()?;
     let rate: u32 = args[6].parse()?;
@@ -90,7 +92,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let clips = startup::clips(&args[1], &args[2])?;
     let mut game = Player::new(
         scene,
-        embedded::load()?,
+        program::load(module)?,
         actions,
         clips,
         rate,
@@ -121,6 +123,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }).collect();
     let bytes: Vec<_> = output.iter().flat_map(|v| v.to_le_bytes()).collect();
     let mut report = serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources,"logs":game.logs()?});
+    // One final bounded observation, never a tick-time projection. Playback
+    // rows contain no asset data or private rational clock remainder.
+    report["flipbooks"] = world
+        .spatial_view()?
+        .nodes()
+        .filter_map(|node| {
+            node.flipbook.map(|state| {
+                serde_json::json!({"id":node.id.0,"frame":state.frame(),
+            "playing":state.playing(),"completed":state.completed()})
+            })
+        })
+        .collect::<Vec<_>>()
+        .into();
     if let Some(input) = game.render_report()? {
         report["render_input"] = input;
     }

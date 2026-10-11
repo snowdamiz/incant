@@ -9,13 +9,18 @@ use incant_types::{
 
 pub(crate) const ASSET_BYTES: usize = 49;
 pub(crate) fn encoded_size(n: &CookedSpatial) -> usize {
-    17 + n.camera.as_ref().map_or(0, |c| {
-        25 + match c.projection {
-            CameraProjection::Perspective {} => 0,
-            CameraProjection::Orthographic { .. } => 8,
-            CameraProjection::PixelPerfect { .. } => 16,
-        }
-    }) + n.mesh.as_ref().map_or(0, |_| 17)
+    n.flipbook
+        .as_deref()
+        .map_or(0, crate::flipbook_binary::encoded_size)
+        + 17
+        + n.camera.as_ref().map_or(0, |c| {
+            25 + match c.projection {
+                CameraProjection::Perspective {} => 0,
+                CameraProjection::Orthographic { .. } => 8,
+                CameraProjection::PixelPerfect { .. } => 16,
+            }
+        })
+        + n.mesh.as_ref().map_or(0, |_| 17)
         + n.directional
             .as_ref()
             .map_or(0, |l| 33 + usize::from(l.shadows.is_some()) * 8)
