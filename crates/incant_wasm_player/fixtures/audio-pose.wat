@@ -1,0 +1,25 @@
+(module
+  (import "incant_v1" "chunk_count" (func $count (param i64) (result i32)))
+  (import "incant_v1" "chunk_len" (func $len (param i64 i32) (result i32)))
+  (import "incant_v1" "read_ids" (func $ids (param i64 i32 i32)))
+  (import "incant_v1" "read_transforms" (func $read (param i64 i32 i32)))
+  (import "incant_v1" "write_transforms" (func $write (param i64 i32 i32)))
+  (memory (export "memory") 1)
+  (func (export "incant_abi") (result i32) (i32.const 1))
+  (func (export "update") (param $epoch i64) (param f64)
+    (local $chunk i32) (local $row i32) (local $len i32)
+    (block $done (loop $chunks
+      (br_if $done (i32.ge_u (local.get $chunk) (call $count (local.get $epoch))))
+      (local.set $len (call $len (local.get $epoch) (local.get $chunk)))
+      (if (i32.gt_u (local.get $len) (i32.const 32)) (then unreachable))
+      (call $ids (local.get $epoch) (local.get $chunk) (i32.const 8192))
+      (call $read (local.get $epoch) (local.get $chunk) (i32.const 0))
+      (local.set $row (i32.const 0))
+      (block $rows_done (loop $rows
+        (br_if $rows_done (i32.ge_u (local.get $row) (local.get $len)))
+        ;; Fixture StableId(2): last byte is enough for its known small ID set.
+        (if (i32.eq (i32.load8_u (i32.add (i32.const 8207) (i32.mul (local.get $row) (i32.const 16)))) (i32.const 2))
+          (then (f64.store (i32.mul (local.get $row) (i32.const 80)) (f64.const 2000000))))
+        (local.set $row (i32.add (local.get $row) (i32.const 1))) (br $rows)))
+      (call $write (local.get $epoch) (local.get $chunk) (i32.const 0))
+      (local.set $chunk (i32.add (local.get $chunk) (i32.const 1))) (br $chunks)))))
