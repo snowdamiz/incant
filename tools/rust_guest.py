@@ -22,8 +22,9 @@ def compile(rustc, source, output, *, env=None, cfg=()):
     compiler=subprocess.check_output([str(rustc),'-vV'],env=environment)
     for name,root in roots:
         library=storage/f'lib{name}.rlib'
-        files=sorted(root.parent.glob('*.rs'))
-        digest=hashlib.sha256(b''.join(p.name.encode()+b'\0'+p.read_bytes()+b'\0' for p in files)+roots[0][1].read_bytes()+compiler+repr(flags).encode()).hexdigest()
+        files=sorted(root.parent.rglob('*.rs'))
+        abi_files=sorted(roots[0][1].parent.rglob('*.rs'))
+        digest=hashlib.sha256(b''.join(p.relative_to(root.parent).as_posix().encode()+b'\0'+p.read_bytes()+b'\0' for p in files)+b''.join(p.relative_to(roots[0][1].parent).as_posix().encode()+b'\0'+p.read_bytes()+b'\0' for p in abi_files)+compiler+repr(flags).encode()).hexdigest()
         stamp=storage/f'{name}.sha256'
         if not library.exists() or not stamp.exists() or stamp.read_text()!=digest:
             command=[rustc,root,'--crate-name',name,'--crate-type=rlib',*flags,'-o',library]
@@ -40,7 +41,7 @@ def compile(rustc, source, output, *, env=None, cfg=()):
 
 def provenance():
     """Exact build-time SDK sources; these repository originals are retained."""
-    paths=[ROOT/'sdk/abi/native-v1.json',Path(__file__).resolve(),ROOT/'crates/incant_wasm_abi/src/lib.rs',*sorted((ROOT/'sdk/rust/src').glob('*.rs'))]
+    paths=[ROOT/'sdk/abi/native-v1.json',Path(__file__).resolve(),*sorted((ROOT/'crates/incant_wasm_abi/src').rglob('*.rs')),*sorted((ROOT/'sdk/rust/src').rglob('*.rs'))]
     return {'target':'wasm32-unknown-unknown','edition':'2024','panic':'abort','opt_level':2,
             'source_sha256':{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},
             'repository_sdk_sources_retained':True,'build_scripts_or_proc_macros':False}
