@@ -65,3 +65,13 @@ CPU/compile checks do not complete the game UI or reference-device gates.
 
 The current editor import form still excludes TTF/OTF in its format allowlist.
 That UI entry point remains a separate integration; this slice does not claim it.
+
+## Main107 integration
+
+Independent source review accepted the bounded CPU asset path. The union keeps
+the existing skeletal modules, visual glam feature and animated-model refusal
+while adding font registration. All 957 lock records retain their versions; only
+five internal dependency edges are added. Integrated tests, Clippy, font-only/
+audio-only readers, wasm32, renderer/cook/game-runtime consumer compilation and
+dependency checks pass. [Review](evidence/packaged-font-assets-independent-review.json)
+and [integrated evidence](evidence/packaged-font-assets-main107.json).

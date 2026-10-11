@@ -506,3 +506,5 @@ animated models. Native scene/GPU/SDK playback, blend/state/IK/root-motion and
 rendered acceptance remain outstanding; this does not complete Phase 1 animation.
 
 Skeletal foundation main106 union passes 90 integrated CPU tests, Clippy, audio-only/wasm32 compilation and dependency checks, with reviewed source unchanged. [Integration evidence](docs/spikes/evidence/gltf-skeletal-main106.json).
+
+Packaged-font backend/CLI import main107 integration passes affected CPU tests, Clippy, font/default-reader, wasm32 and consumer checks while preserving skeletal registration. Editor font import form and rendering remain unfinished. [Evidence](docs/spikes/evidence/packaged-font-assets-main107.json).
