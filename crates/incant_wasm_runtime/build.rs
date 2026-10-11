@@ -1,6 +1,7 @@
 use std::{env, fs, path::PathBuf};
 fn main() {
     println!("cargo:rerun-if-env-changed=INCANT_WASM_BUNDLE");
+    println!("cargo:rerun-if-env-changed=INCANT_WASM_MSVC_OPT_LEVEL");
     if env::var_os("CARGO_FEATURE_EMBEDDED_FIXTURE").is_none() {
         return;
     }
@@ -11,37 +12,74 @@ fn main() {
     );
     let vendor = root.join("../../third_party/wabt");
     let mut build = cc::Build::new();
-    // Initial executed route is macOS Clang. Linux GCC/Clang uses the same
-    // upstream-prescribed semantics; MSVC flags have not been verified yet.
     let compiler = build.get_compiler();
-    assert!(
-        !compiler.is_like_msvc(),
-        "static Wasm MSVC conformance is not established"
-    );
-    // glibc hides sigsetjmp/siglongjmp under strict C11 unless POSIX
-    // declarations are requested before every system header. Preserve
-    // WABT's signal-mask-aware C trap path rather than replacing it.
-    if env::var("CARGO_CFG_TARGET_OS").unwrap() == "linux" {
-        build.define("_POSIX_C_SOURCE", "200809L");
+    if env::var("CARGO_CFG_TARGET_OS").unwrap() == "windows" {
+        // Keep the initial Windows route specifically MSVC, not GNU or clang-cl.
+        assert_eq!(env::var("TARGET").unwrap(), "x86_64-pc-windows-msvc");
+        assert!(compiler.is_like_msvc() && !compiler.is_like_clang());
+        assert_eq!(compiler.path().file_stem().unwrap(), "cl");
+        let level = env::var("INCANT_WASM_MSVC_OPT_LEVEL").unwrap_or_else(|_| "0".into());
+        assert!(
+            matches!(level.as_str(), "0" | "2"),
+            "MSVC conformance level must be 0 or 2"
+        );
+        // /Od is the initial conservative baseline. /O2 is an explicit candidate
+        // exercised by the same hosted numerical/recursion/fuel controls.
+        // Bounds and TLS call-depth checks stay enabled in either configuration.
+        build
+            .opt_level_str(&level)
+            .flag("/TC")
+            .flag("/std:c11")
+            .flag("/experimental:c11atomics")
+            .flag("/fp:strict");
+        if level == "0" {
+            build.flag("/Od");
+        }
+        // Record the actual discovered cl.exe, not a different compiler found
+        // later on PATH. /? reports its banner without compiling a probe file.
+        let info = std::process::Command::new(compiler.path())
+            .envs(compiler.env().iter().cloned())
+            .args(["/Bv", "/?"])
+            .output()
+            .expect("read actual MSVC compiler identity");
+        let identity = format!(
+            "path: {}\noptimization: {level}\n{}\n{}",
+            compiler.path().display(),
+            String::from_utf8_lossy(&info.stdout),
+            String::from_utf8_lossy(&info.stderr)
+        );
+        fs::write(
+            PathBuf::from(env::var_os("OUT_DIR").unwrap()).join("msvc-compiler.txt"),
+            identity,
+        )
+        .unwrap();
+    } else {
+        // glibc hides sigsetjmp/siglongjmp under strict C11 unless POSIX
+        // declarations are requested before every system header. Preserve
+        // WABT's signal-mask-aware C trap path rather than replacing it.
+        if env::var("CARGO_CFG_TARGET_OS").unwrap() == "linux" {
+            build.define("_POSIX_C_SOURCE", "200809L");
+        }
+        build
+            .flag("-std=c11")
+            .flag("-Werror=implicit-function-declaration")
+            .flag("-fno-optimize-sibling-calls")
+            .flag("-frounding-math")
+            .flag("-ffp-contract=off");
+        if compiler.is_like_gnu() && !compiler.is_like_clang() {
+            build.flag("-fsignaling-nans");
+        }
     }
     build
         .include(&vendor)
         .include(root.join("c"))
         .include(&bundle)
-        .flag("-std=c11")
-        .flag("-Werror=implicit-function-declaration")
-        .flag("-fno-optimize-sibling-calls")
-        .flag("-frounding-math")
-        .flag("-ffp-contract=off")
         .define("WASM_RT_USE_MMAP", "0")
         .define("WASM_RT_MEMCHECK_BOUNDS_CHECK", "1")
         .define("WASM_RT_STACK_DEPTH_COUNT", "1")
         .define("WASM_RT_MAX_CALL_STACK_DEPTH", "64")
         .define("WASM_RT_USE_SEGUE", "0")
         .warnings(false);
-    if compiler.is_like_gnu() && !compiler.is_like_clang() {
-        build.flag("-fsignaling-nans");
-    }
     for source in [
         vendor.join("wasm-rt-impl.c"),
         vendor.join("wasm-rt-mem-impl.c"),
