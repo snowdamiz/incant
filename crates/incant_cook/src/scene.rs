@@ -55,6 +55,7 @@ pub fn cook_scene(project: &Project, scene_id: &str) -> Result<Vec<u8>, CookErro
                 "Camera",
                 "MeshRenderer",
                 "SpriteRenderer",
+                "Tilemap",
                 "DirectionalLight",
                 "PointLight",
                 "SpotLight",

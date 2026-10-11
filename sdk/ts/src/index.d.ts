@@ -9,7 +9,7 @@ export interface Entity {
   readonly parent: Id | null;
   readonly components: Readonly<Record<string, Json>>;
 }
-export type { Command, Transform, Camera, SpriteRenderer, SpriteAtlas } from './generated';
+export type { Command, Transform, Camera, SpriteRenderer, SpriteAtlas, Tilemap } from './generated';
 /** Host-managed save envelope; scripts do not receive filesystem access. */
 export type { GameSave, PlayAssertions } from './generated';
 import type { Command } from './generated';

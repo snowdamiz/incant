@@ -14,8 +14,13 @@ mod scene;
 mod spatial;
 mod sprite;
 mod sprite_binary;
+mod tilemap;
+mod tilemap_binary;
 pub use sprite::{
     MAX_SPRITE_ENTITIES, NativeSpriteRegion, NativeSpriteRenderer, SpriteMode, SpriteSampling,
+};
+pub use tilemap::{
+    MAX_SCENE_TILE_SLOTS, MAX_TILEMAP_ENTITIES, NativeTilemap, NativeTilemapLayer, PreparedTilemap,
 };
 mod spatial_binary;
 mod spatial_commands;

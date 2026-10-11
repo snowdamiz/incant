@@ -217,6 +217,7 @@ impl NativeWorld {
             for id in staged.removed {
                 self.audio_ids.remove(&id);
                 self.spatial_ids.remove(&id);
+                self.tilemap_collision_ids.remove(&id);
                 self.physics.remove(&self.scene_id(), &id);
                 let entity = self.entities.remove(&id).expect("staged entity");
                 self.world.despawn(entity);

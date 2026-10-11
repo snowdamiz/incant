@@ -24,6 +24,9 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
     let mut render_frames = BTreeSet::new();
     for scene in project.scenes.values() {
         for entity in scene.entities.values() {
+            if entity.components.contains_key("Tilemap") {
+                return Err(SceneError::Input("tilemap rendering is not implemented").into());
+            }
             if let Some(value) = entity.components.get("EnvironmentLight") {
                 let binding: incant_doc::EnvironmentLight = serde_json::from_value(value.clone())?;
                 let source = asset(project, assets, &binding.texture, "texture")

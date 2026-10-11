@@ -9,7 +9,9 @@ mod physics;
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
-pub use incant_2d::{SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling};
+pub use incant_2d::{
+    SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling, Tilemap, TilemapLayer,
+};
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
@@ -360,6 +362,22 @@ impl Project {
                         );
                     }
                 }
+                if entity.components.contains_key("Tilemap") {
+                    if !entity.components.contains_key("Transform") {
+                        issue(
+                            format!("{path}/components"),
+                            "a tilemap requires a Transform",
+                        );
+                    }
+                    if entity.components.contains_key("MeshRenderer")
+                        || entity.components.contains_key("SpriteRenderer")
+                    {
+                        issue(
+                            format!("{path}/components"),
+                            "tilemap, sprite and mesh rendering require separate entities",
+                        );
+                    }
+                }
                 if let Err(message) = physics::validate_entity(entity) {
                     issue(format!("{path}/components"), &message);
                 }
@@ -456,6 +474,24 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
                 return Err("script source does not exist".into());
             }
         }
+        "Tilemap" => {
+            let map: Tilemap = decode(value)?;
+            map.validate_document().map_err(|e| e.to_string())?;
+            let asset = project
+                .assets
+                .get(&map.tileset)
+                .ok_or("tilemap tileset does not exist")?;
+            if asset.kind != "texture"
+                || matches!(
+                    asset.import_settings,
+                    Some(AssetImportSettings::Texture {
+                        usage: TextureUsage::Normal | TextureUsage::Linear
+                    })
+                )
+            {
+                return Err("tilemap requires a color atlas texture asset".into());
+            }
+        }
         "SpriteRenderer" => {
             let sprite: SpriteRenderer = decode(value)?;
             sprite.validate().map_err(|e| e.to_string())?;
@@ -538,6 +574,7 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        ("Tilemap".into(), json!(schemars::schema_for!(Tilemap))),
         (
             "SpriteRenderer".into(),
             json!(schemars::schema_for!(SpriteRenderer)),

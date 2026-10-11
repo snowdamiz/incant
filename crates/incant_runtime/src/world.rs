@@ -47,6 +47,10 @@ pub enum RuntimeError {
     Physics(#[from] incant_physics_runtime::PhysicsError),
     #[error("native physics world failed; construct a new session")]
     PhysicsFailed,
+    #[error(
+        "solid tilemap collision requires a native Rapier2D consumer; simulation is unsupported"
+    )]
+    TilemapPhysicsUnsupported,
     #[error("runtime entity {0:?} does not exist")]
     MissingEntity(StableId),
     #[error("frame command buffer is full (maximum {0})")]
@@ -64,6 +68,7 @@ pub struct NativeWorld {
     pub(crate) physics_used: bool,
     pub(crate) spatial_used: bool,
     pub(crate) spatial_ids: BTreeSet<StableId>,
+    pub(crate) tilemap_collision_ids: BTreeSet<StableId>,
     pub(crate) visual_assets: Vec<crate::VisualAssetRef>,
     pub(crate) topology_generation: u64,
     pub(crate) binding_generation: u64,
@@ -132,6 +137,7 @@ impl NativeWorld {
             physics_used: !physics.is_empty(),
             spatial_used: !spatial.is_empty() || !visual_assets.is_empty(),
             spatial_ids: BTreeSet::new(),
+            tilemap_collision_ids: BTreeSet::new(),
             visual_assets,
             topology_generation: 0,
             binding_generation: 0,
@@ -157,7 +163,27 @@ impl NativeWorld {
     }
 
     pub(crate) fn install_spatial(&mut self, id: StableId, node: Option<crate::CookedSpatial>) {
+        if self.world.get::<crate::CookedSpatial>(self.entities[&id]) == node.as_ref() {
+            return;
+        }
+        let prepared = node
+            .as_ref()
+            .and_then(|n| n.tilemap.as_ref())
+            .map(|map| crate::tilemap::Prepared(map.prepare().expect("validated tilemap")));
+        if prepared
+            .as_ref()
+            .is_some_and(|map| !map.0.collision().is_empty())
+        {
+            self.tilemap_collision_ids.insert(id);
+        } else {
+            self.tilemap_collision_ids.remove(&id);
+        }
         let mut entity = self.world.entity_mut(self.entities[&id]);
+        if let Some(prepared) = prepared {
+            entity.insert(prepared);
+        } else {
+            entity.remove::<crate::tilemap::Prepared>();
+        }
         if let Some(node) = node {
             self.spatial_used = true;
             self.spatial_ids.insert(id);
@@ -230,6 +256,9 @@ impl NativeWorld {
 
     pub fn step(&mut self) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
+        if !self.tilemap_collision_ids.is_empty() {
+            return Err(RuntimeError::TilemapPhysicsUnsupported);
+        }
         let next = self.tick.checked_add(1).ok_or(RuntimeError::TickOverflow)?;
         let dt = self.world.resource::<Step>().0;
         // Validate the whole numeric input set and ordinary integration before
