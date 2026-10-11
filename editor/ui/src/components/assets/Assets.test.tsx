@@ -114,7 +114,10 @@ describe('asset library', () => {
     expect(screen.queryByRole('option', { name: /just imported/ })).toBeNull();
     expect(host.bridge.getSnapshot().history).toEqual(IMPORT_HISTORY);
     expect(host.commands).toHaveLength(1);
-    await waitFor(() => expect(statusMessage()).toBe('Already up to date. Nothing changed.'));
+    // The status line names what it reports on, since it can be read from another asset.
+    await waitFor(() => expect(statusMessage()).toBe(kind === 'import'
+      ? 'Already up to date: 1 file. Nothing changed.'
+      : 'Already up to date: crate. Nothing changed.'));
   });
 
   it('offers the import Undo hint only while its exact transaction is at the history cursor', async () => {

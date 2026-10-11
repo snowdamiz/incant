@@ -188,17 +188,20 @@ export function AssetsProvider({ children }: { children: ReactNode }) {
       const unchanged = result.assetImport?.transaction === null;
       setOutcome({ status: 'success', job, ...(result.assetImport ? { commit: result.assetImport } : {}) });
       setRecent(new Set(result.assetImport?.transaction ? job.sources.map((source) => source.source) : []));
-      const completion = unchanged ? 'Already up to date. Nothing changed.' : result.assetImport ? null : 'Import completed.';
+      // The status line can be the only feedback once the user has moved on to another
+      // asset, so it names the files or asset; the notice sits beside the form or asset.
       if (job.kind === 'import') {
         commit([{ key: nextKey.current++, source: '', usage: null }]);
         const count = job.sources.length;
-        announce(completion ?? `Imported ${count} ${count === 1 ? 'file' : 'files'}.`);
+        const files = `${count} ${count === 1 ? 'file' : 'files'}`;
+        announce(unchanged ? `Already up to date: ${files}. Nothing changed.` : result.assetImport ? `Imported ${files}.` : 'Import completed.');
       } else {
         if (job.asset) {
           const id = job.asset;
           setReimportUsageState(({ [id]: _done, ...rest }) => rest);
         }
-        announce(completion ?? `Reimported ${job.name ?? job.sources[0]?.source ?? 'asset'}.`);
+        const name = job.name ?? job.sources[0]?.source ?? 'asset';
+        announce(unchanged ? `Already up to date: ${name}. Nothing changed.` : result.assetImport ? `Reimported ${name}.` : 'Import completed.');
       }
       return true;
     },
