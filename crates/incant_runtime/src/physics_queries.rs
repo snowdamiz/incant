@@ -1,5 +1,8 @@
 //! Read-only solver access while foreign code holds exclusive numeric ECS views.
-use crate::{NativeWorld, NumericColumns, RayHit, RayQuery, RuntimeError, StableId};
+use crate::{
+    CharacterMovement, CharacterQuery, NativeWorld, NumericColumns, RayHit, RayQuery, RuntimeError,
+    StableId, TriggerEvent,
+};
 use incant_physics_runtime::{PhysicsError, PhysicsRuntime};
 use std::{cell::RefCell, rc::Rc};
 use thiserror::Error;
@@ -25,6 +28,29 @@ pub struct NativeQueries {
     used: bool,
 }
 impl NativeQueries {
+    /// Computes a displacement without moving the body. The caller applies it
+    /// through the same numeric columns/structural synchronization as other edits.
+    pub fn compute_character_motion(
+        &self,
+        query: &CharacterQuery<StableId>,
+        dt: f64,
+    ) -> Result<CharacterMovement<StableId>, QueryError> {
+        let solver = self.solver.borrow();
+        let solver = solver.as_ref().ok_or(QueryError::Expired)?;
+        if query.scene_id != self.scene {
+            return Err(QueryError::Scene);
+        }
+        Ok(solver.compute_character_motion(query, dt)?)
+    }
+
+    /// Owned events from the last committed solver step. Reading does not drain
+    /// them; retaining or mutating the copy cannot affect this or later steps.
+    pub fn trigger_events(&self) -> Result<Vec<TriggerEvent<StableId>>, QueryError> {
+        let solver = self.solver.borrow();
+        let solver = solver.as_ref().ok_or(QueryError::Expired)?;
+        Ok(solver.events().to_vec())
+    }
+
     pub fn scene_id(&self) -> StableId {
         self.scene
     }

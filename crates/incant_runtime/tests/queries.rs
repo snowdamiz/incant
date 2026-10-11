@@ -138,3 +138,80 @@ fn empty_world_still_checks_invalid_queries_and_refuses_another_scene() {
         .unwrap();
     world.step().unwrap();
 }
+
+#[test]
+fn character_and_event_reads_preserve_solver_continuation_and_expire() {
+    use incant_runtime::{CharacterOptions, CharacterQuery};
+    let mut actual = world();
+    let mut control = world();
+    let query = CharacterQuery {
+        scene_id: id(99),
+        entity_id: id(1),
+        translation: [0., 1., 0.],
+        options: CharacterOptions::default(),
+    };
+    let retained = actual
+        .with_numeric_physics(|_, cap| {
+            let movement = cap.compute_character_motion(&query, 1. / 60.).unwrap();
+            assert_eq!(movement.translation, [0., 1., 0.]);
+            assert!(cap.trigger_events().unwrap().is_empty());
+            let mut wrong = query.clone();
+            wrong.scene_id = id(98);
+            assert!(matches!(
+                cap.compute_character_motion(&wrong, 1. / 60.),
+                Err(QueryError::Scene)
+            ));
+            cap
+        })
+        .unwrap();
+    assert!(matches!(
+        retained.compute_character_motion(&query, 1. / 60.),
+        Err(QueryError::Expired)
+    ));
+    assert!(matches!(
+        retained.trigger_events(),
+        Err(QueryError::Expired)
+    ));
+    for _ in 0..120 {
+        actual.step().unwrap();
+        control.step().unwrap();
+        actual
+            .with_numeric_physics(|_, cap| {
+                assert_eq!(
+                    cap.compute_character_motion(&query, 1. / 60.)
+                        .unwrap()
+                        .translation,
+                    [0., 1., 0.]
+                );
+                assert!(cap.trigger_events().unwrap().is_empty());
+                assert!(matches!(
+                    retained.trigger_events(),
+                    Err(QueryError::Expired)
+                ));
+            })
+            .unwrap();
+        assert_eq!(actual.physics_state(id(1)), control.physics_state(id(1)));
+    }
+}
+#[test]
+fn empty_world_events_are_empty_but_missing_character_is_explicit() {
+    use incant_runtime::{CharacterOptions, CharacterQuery};
+    let mut world = NativeWorld::new(CookedScene::new(id(99), 60, vec![]).unwrap());
+    world
+        .with_numeric_physics(|_, cap| {
+            assert!(cap.trigger_events().unwrap().is_empty());
+            assert!(matches!(
+                cap.compute_character_motion(
+                    &CharacterQuery {
+                        scene_id: id(99),
+                        entity_id: id(1),
+                        translation: [0.; 3],
+                        options: CharacterOptions::default()
+                    },
+                    1. / 60.
+                ),
+                Err(QueryError::Physics(_))
+            ));
+        })
+        .unwrap();
+}

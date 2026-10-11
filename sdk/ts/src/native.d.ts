@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { InputFrame, PhysicsRayQuery, PhysicsRayHit } from './generated';
+import type { InputFrame, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -32,8 +32,18 @@ export interface NativeCommands {
 /** Schema-derived query; the active native scene is implicit. */
 export type NativeRayQuery = Omit<PhysicsRayQuery, 'scene_id'>;
 export type NativeRayHit = PhysicsRayHit;
+export type NativeCharacterQuery = Omit<PhysicsCharacterQuery, 'scene_id'>;
+export type NativeCharacterMovement = PhysicsCharacterMovement;
+export type NativeTriggerEvent = PhysicsTriggerEvent;
 export interface NativePhysics {
-  /** Up to 1,024 calls per update; invalid/caught queries reject the whole update.
+  /** Computes a world-space displacement against committed bodies without moving
+   * them. Apply it through the existing columns/commands. Up to 128 per update,
+   * within the shared 1,024-call query budget; the update dt is implicit. */
+  computeCharacterMotion(query: NativeCharacterQuery): NativeCharacterMovement;
+  /** Owned sorted events from the last committed solver step. Does not drain.
+   * Pending movement/commands affect events only after a later solver step. */
+  triggerEvents(): NativeTriggerEvent[];
+  /** Within the shared 1,024-call budget per update; invalid/caught queries reject the whole update.
    * Reads the last committed solver, not pending column writes or commands.
    * A retained function expires after update and never reactivates.
    * Returns owned values; mutating a result cannot alter native state. */

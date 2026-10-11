@@ -31,6 +31,9 @@ pub use audio::{
 pub use columns::{NumericChunk, NumericColumns, TRANSFORM_STRIDE, VELOCITY_STRIDE};
 pub use commands::{FrameCommands, MAX_FRAME_COMMANDS, StructuralCommand};
 pub use incant_physics_runtime::{BodyState, MAX_TRIGGER_EVENTS, MAX_TRIGGER_PAIRS, TriggerEvent};
+pub use incant_physics_runtime::{
+    CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep,
+};
 pub use incant_physics_runtime::{RayHit, RayQuery};
 pub use physics::CookedPhysics;
 pub use physics_queries::{NativeQueries, QueryError};

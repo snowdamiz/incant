@@ -11,6 +11,7 @@ mod diagnostics;
 mod input;
 mod loan;
 mod queries;
+mod query_values;
 mod session;
 mod synchronous;
 
@@ -73,7 +74,7 @@ pub enum ScriptError {
 /// detached on every exit. A failed callback restores its component writes and
 /// permanently fails this host. Tick-local structural commands apply only after
 /// detachment and scope exit; rejection restores numeric writes too.
-/// Raycasts read committed solver state during the loan; retained capabilities
+/// Physics queries read committed solver state during the loan; retained capabilities
 /// expire before diagnostics. Persistent state, timers, logs and the legacy PlaySession are not
 /// migrated by this boundary.
 pub struct ScriptHost {
@@ -168,7 +169,8 @@ impl ScriptHost {
             diagnostics::check_deadline(&self.deadline)?;
             world
                 .with_numeric_physics(|columns, capability| {
-                    let queries = queries::TickQueries::new(capability, Arc::clone(&self.deadline));
+                    let queries =
+                        queries::TickQueries::new(capability, Arc::clone(&self.deadline), dt);
                     let physics = queries.expose(&ctx).map_err(|error| {
                         diagnostics::javascript(&ctx, error, "physics bindings", &self.deadline)
                     })?;
@@ -277,3 +279,6 @@ mod input_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod query_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod character_tests;

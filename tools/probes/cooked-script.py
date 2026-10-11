@@ -69,6 +69,7 @@ def main():
         run([cook, project, scene_id, scene])
         require(before == {path.name: sha(path) for path in (project, journal)}, 'Cook changed authoring')
         physics_scene = None
+        character_scene = None
         if args.physics:
             physics_entities = []
             for n, position in [(101, [0, -0.5, 0]), (102, [0, 3, 0]), (103, [5, 4, 0])]:
@@ -98,6 +99,29 @@ def main():
             require(all('error' not in json.loads(line) for line in reply.splitlines()), 'Physics authoring failed')
             physics_scene = inputs / 'physics.scene'
             run([cook, project, scene_id, physics_scene])
+            character_entities = []
+            for n, position, half, sensor in [(201,[0,-0.5,0],[20,0.5,20],False),
+                    (202,[0,0.6,0],[0.5,0.5,0.5],False), (203,[2.5,1,0],[0.5,2,4],False),
+                    (204,[0.75,0.6,0],[0.1,1,0.5],True)]:
+                components = {'Transform':dict(transform,translation=position),
+                    'Collider':{'shape':{'type':'box','half_extents':half},'density':1000,
+                    'friction':0.5,'restitution':0,'sensor':sensor,'memberships':4294967295,'filter':4294967295}}
+                if n == 202:
+                    components['RigidBody'] = {'motion':'kinematic','gravity_scale':1,'linear_damping':0,
+                        'angular_damping':0,'can_sleep':True,'ccd':True}
+                    components['Velocity'] = {'linear':[0,0,0]}
+                character_entities.append({'id':f'{n:026d}','name':f'Character fixture {n}',
+                    'parent':None,'provenance':None,'components':components})
+            commands = [{'op':'delete_entity','scene_id':scene_id,'entity_id':entity['id']} for entity in physics_entities]
+            commands += [{'op':'create_entity','scene_id':scene_id,'entity':entity} for entity in character_entities]
+            requests = [{'id':5,'method':'command.execute','params':{'expected_revision':2,
+                'description':'Native character and trigger fixture','commands':commands}}, {'id':6,'method':'project.save'}]
+            reply = subprocess.check_output([headless,'rpc',project,'--journal',journal],
+                input=''.join(json.dumps(r)+'\n' for r in requests),text=True)
+            require(all('error' not in json.loads(line) for line in reply.splitlines()),'Character authoring failed')
+            character_scene = inputs/'character.scene'
+            run([cook,project,scene_id,character_scene])
+
         template = (ROOT / 'sdk/templates/native-structural/spawn.ts').read_text()
         sentinel = 'INCANT_SOURCE_ONLY_COMMENT_fbd20c41'
         # This runs as already compiled guest bytecode. Each dynamic source route
@@ -120,9 +144,16 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         queries = (ROOT / 'sdk/templates/native-physics/raycast.ts').read_text()
         queries = '\n'.join(line for line in queries.splitlines() if not line.startswith('import type'))
         combined += '\n' + queries.replace('export function', 'function')
+        character = (ROOT/'sdk/templates/native-physics/character.ts').read_text()
+        character = '\n'.join(line for line in character.splitlines() if not line.startswith('import type'))
+        combined += '\n' + character.replace('export function','function')
+
         combined += '''
 import type { NativeContext } from '../../ts/src/native';
 let inputTick = 0;
+let characterTick = 0, enters = 0, exits = 0;
+let previousCharacter: NativeContext['physics']['computeCharacterMotion'] | undefined;
+let previousEvents: NativeContext['physics']['triggerEvents'] | undefined;
 let previousRay: NativeContext['physics']['raycast'] | undefined;
 export default {update(context: NativeContext) {
     const query = { origin: [-10,10,0], direction: [0,-1,0], max_distance: 100,
@@ -132,6 +163,46 @@ export default {update(context: NativeContext) {
         if (!denied) throw Error('retained native query reactivated');
     }
     previousRay = context.physics.raycast;
+    if (previousEvents) {
+        let denied=false; try { previousEvents(); } catch { denied=true; }
+        if (!denied) throw Error('retained event capability reactivated');
+    }
+    if (previousCharacter) {
+        let denied=false; try { previousCharacter({entity_id:'00000000000000000000000202',translation:[0,0,0]}); } catch { denied=true; }
+        if (!denied) throw Error('retained character capability reactivated');
+    }
+    previousCharacter=context.physics.computeCharacterMotion;
+    previousEvents=context.physics.triggerEvents;
+    if (context.input.keyboard.held.includes('KeyC')) {
+        try { context.physics.computeCharacterMotion({entity_id:'00000000000000000000000000',translation:[0,0,0]}); } catch {}
+        return undefined;
+    }
+    if (context.input.keyboard.held.includes('KeyT')) {
+        try { (context.physics.triggerEvents as any)(1); } catch {}
+        return undefined;
+    }
+    const character='00000000000000000000000202', sensor='00000000000000000000000204';
+    const hasCharacter=context.chunks.some(c=>c.ids.includes(character));
+    if (hasCharacter) {
+        const query={entity_id:character,translation:[5/60,-1/60,0] as [number,number,number]};
+        if (context.input.keyboard.held.includes('KeyL')) {
+            for(let i=0;i<129;i++){try{context.physics.computeCharacterMotion(query)}catch{}}
+            return undefined;
+        }
+        ++characterTick;
+        const events=context.physics.triggerEvents();
+        for(const event of events) {
+            if(event.first===character && event.second===sensor) {
+                if(event.entered) ++enters; else ++exits;
+            }
+        }
+        if(context.physics.triggerEvents().length!==events.length)throw Error('events drained');
+        driveCharacter(context,character,query.translation);
+        if(characterTick>=60 && (enters!==1 || exits!==1))throw Error('missing character sensor lifecycle');
+        return undefined;
+    }
+    if(context.physics.triggerEvents().length)throw Error('unexpected trigger events');
+
     if (context.input.keyboard.held.includes('KeyQ')) {
         try { context.physics.raycast({...query, direction:[0,0,0]}); } catch {}
         return undefined;
@@ -235,6 +306,8 @@ export default {update(context: NativeContext) {
         shutil.copy2(scene, out / 'player/world.scene')
         if physics_scene is not None:
             shutil.copy2(physics_scene, out / 'player/physics.scene')
+        if character_scene is not None:
+            shutil.copy2(character_scene, out / 'player/character.scene')
         # These are bounded startup exchange inputs, not cooked binary assets or
         # session saves. Typed packets are retained after one-time decoding.
         clip = {'format': 'incant-input', 'version': 1, 'tick_rate': 60, 'start_tick': 0,
@@ -304,16 +377,33 @@ export default {update(context: NativeContext) {
                 require(abs(arrays[1][0][1] - 0.5) < 0.02 and rows[1].endswith(' true'), 'Collision/sleep missing')
             physics_observations.append({'ticks': ticks, 'output': first})
         require((out / 'player/physics.scene').read_bytes() == physics_bytes, 'Runtime changed cooked physics')
+    character_observations = []
+    if args.physics:
+        character_bytes = (out/'player/character.scene').read_bytes()
+        for ticks in (0,1,60,120):
+            command = [player,'character.scene',str(ticks)]
+            first = subprocess.check_output(command,cwd=out/'player',text=True)
+            second = subprocess.check_output(command,cwd=out/'player',text=True)
+            require(first == second and first.startswith(f'tick={ticks} entities=4\n'),'Nonrepeatable character result')
+            rows = [line for line in first.splitlines() if line.startswith('physics ')]
+            require(len(rows)==4,'Missing character body observations')
+            arrays = [[ast.literal_eval(value) for value in re.findall(r'\[[^\[\]]*\]',line)[1:]] for line in rows]
+            position = arrays[1][0]
+            if ticks >= 60:
+                require(1.4<position[0]<1.51 and 0.49<position[1]<0.53,'Character did not stop at floor and wall')
+            character_observations.append({'ticks':ticks,'output':first})
+        require((out/'player/character.scene').read_bytes()==character_bytes,'Character mutated cooked input')
     query_refusals = []
-    for key in ('KeyQ', 'KeyB'):
+    for key in ('KeyQ', 'KeyB', 'KeyC', 'KeyT', *(['KeyL'] if args.physics else [])):
         rejected = dict(clip, frames=[{'tick': 1, 'events': [{'type':'key', 'code':key, 'down':True}]}])
         rejection_clip = out/'player'/f'{key}.json'
         rejection_clip.write_text(json.dumps(rejected)+'\n')
-        result = subprocess.run([player, 'world.scene', '1', '--input-recording', rejection_clip.name,
+        result = subprocess.run([player, 'character.scene' if key == 'KeyL' else 'world.scene', '1', '--input-recording', rejection_clip.name,
                                  '--input-actions', 'actions.json'], cwd=out/'player', capture_output=True, text=True)
         # A swallowed invalid/over-budget query must never publish world output.
         require(result.returncode != 0 and not result.stdout, f'{key}: rejected query published output')
-        require(('PhysicsQuery' in result.stderr if key == 'KeyQ' else 'InputLimit' in result.stderr),
+        expected = 'PhysicsQuery' if key in ('KeyQ','KeyC') else 'QueryInput' if key == 'KeyT' else 'InputLimit'
+        require(expected in result.stderr,
                 f'{key}: expected query refusal, got {result.stderr}')
         query_refusals.append({'key':key, 'stderr':result.stderr.strip()})
     result = {'passed': True, 'target': target, 'compiler': compiler, 'codegen': flags,
@@ -321,10 +411,11 @@ export default {update(context: NativeContext) {
               'symbols': identity, 'script_metadata': metadata, 'authoring_preserved': before,
               'inputs_and_build_storage_removed': True,
               'removed_input_scope': 'authoring/compile inputs and temporary Cargo storage; runtime exchange files retained',
-              'runtime_exchange_files': ['input.json', 'actions.json', 'KeyQ.json', 'KeyB.json'],
+              'runtime_exchange_files': ['input.json', 'actions.json', *[f'{entry["key"]}.json' for entry in query_refusals]],
               'runtime_source_compiler_symbols_absent': True,
               'dynamic_source_routes_rejected': True, 'observations': observations,
               'recorded_input_observations': recorded, 'native_physics_observations': physics_observations,
+              'native_character_observations': character_observations, 'character_and_trigger_capabilities': True,
               'committed_raycast_and_expired_capabilities': True, 'query_refusals': query_refusals, 'input_exchange_only_at_startup': True,
               'scope': 'Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate'}
     (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
