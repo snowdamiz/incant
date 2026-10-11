@@ -3722,6 +3722,7 @@ dependencies = [
  "incant_cook",
  "incant_game_runtime",
  "incant_input",
+ "incant_render_game",
  "incant_runtime",
  "incant_script",
  "serde_json",
