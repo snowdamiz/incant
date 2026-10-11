@@ -85,7 +85,7 @@
   "gpu_integration": 50,
   "new_gpu_test_functions": 2,
   "new_role_comparisons": 11,
-  "appearance_accepted": false,
+  "appearance_accepted": true,
   "performance_claim": false,
   "process_status": "session30856 terminal0; no Cargo/test/player child on recheck after turn interruption",
   "logs": [
@@ -144,5 +144,36 @@
       }
     ],
     "shared_target_limitation": "Used native-fbx-import target, serializing and invalidating coordinator graph. No timing claims; subsequent color builds must use an isolated target."
+  },
+  "appearance_review": {
+    "commit": "8fe0c77fcf4d2a4d6c98a996e74c6207e448d28f",
+    "model": "Claude Opus 5.5",
+    "effort": "Max, verified through ACP before prompt",
+    "result": "handoffs/0043-color-mip-roles/result.md",
+    "result_sha256": "e8b6f29058d90b4875f94b9cdbd68f81d2e131408ea9abf9c27b141fa5b77392",
+    "scope": "One Mac headless glTF/8-bit appearance delta; no FBX/HDR/phone/shipping performance claim",
+    "frames": 13,
+    "frame_cap": 20,
+    "children": 56,
+    "all_children_exit_zero_and_reaped": true,
+    "gpu_release_utc": "2026-10-11T14:33:35.887003+00:00",
+    "raw_capture_png_bytes": 919339,
+    "committed_images": 11,
+    "engine_images": 7,
+    "labelled_derived_images": 4,
+    "production_changed": false,
+    "acp_session": "97358 terminal0",
+    "cpu_concurrency_note": "Permitted unrelated CPU-only compilation was observed; root confirmed no renderer/capture/GPU overlap."
+  },
+  "static_checks": {
+    "source_head": "d5a2b1503095b3051c3b714866cb0667ab8fa61a",
+    "conventions": "pass",
+    "fmt": "pass",
+    "dependency_guard": "pass",
+    "features": "incant_audio_runtime/scene,incant_game_player/native-window",
+    "log": "/tmp/incant-color-roles-dependency-guard.log",
+    "sha256": "da87c4b6027ca44b4d7cdbaccbb0e004ca05ac553d71a2d2b8332e280588f8e7",
+    "isolated_target": "/tmp/incant-color-role-verification-target",
+    "cargo_session": "39056 terminal0"
   }
 }
