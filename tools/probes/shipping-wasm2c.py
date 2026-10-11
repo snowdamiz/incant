@@ -173,7 +173,7 @@ def main():
             rust_guest.compile(rustc,guest_source,module_path,env=environment)
             modules.append(('rust-sdk',module_path))
             failure_source=inputs/'sdk-failure.rs';shutil.copy2(ROOT/'sdk/rust/fixtures/failure.rs',failure_source)
-            for kind in ('callback-error','capacity','malformed','expired'):
+            for kind in ('callback-error','capacity','malformed','expired','log-bounds','log-invalid'):
                 name='rust-sdk-'+kind; module_path=sdk_guests/(name+'.wasm')
                 rust_guest.compile(rustc,failure_source,module_path,env=environment,cfg=['sdk_'+kind.replace('-','_')])
                 modules.append((name,module_path))

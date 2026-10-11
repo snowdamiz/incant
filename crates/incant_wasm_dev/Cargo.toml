@@ -7,7 +7,7 @@ publish.workspace = true
 
 [features]
 default = []
-static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture"]
+static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture", "incant_script/static-module"]
 # Explicit desktop development dependency; never enabled by shipped players.
 wasmtime-host = ["dep:incant_input", "dep:wasmtime", "dep:incant_runtime", "dep:incant_types", "dep:thiserror", "dep:wasmparser", "dep:incant_wasm_runtime"]
 
@@ -28,6 +28,7 @@ incant_wasm_abi = { path = "../incant_wasm_abi" }
 incant_wasm_cook = { path = "../incant_wasm_cook" }
 wat = "=1.258.3"
 incant_script = { workspace = true, features = ["compiler"] }
+serde_json.workspace = true
 
 [[test]]
 name = "conformance"
