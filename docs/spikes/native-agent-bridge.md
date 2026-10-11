@@ -67,3 +67,23 @@ returns its own failure receipt. Final scoped validation passes 32 agent tests
 and 88 combined transport/resolve/AgentPanel tests, strict TypeScript, generated
 bridge equivalence and diff checks. The earlier full 574-test/build result above
 precedes this reviewed correction; combined native integration remains separate.
+
+The provider lifecycle follow-up treats `incant:provider-changed` as an invalidation
+hint. Its payload is never applied, including null hints and delayed connecting
+snapshots from the native browser opener. Every hint re-reads `provider_read`;
+read sequence and account/action generation checks prevent an overlapping old
+reply or failure from replacing a newer account publication. Native reads receive
+a basic safe-metadata shape check, preserving the prior-account display fields
+that actual connecting states retain. Malformed or failed reads publish a fixed
+`provider.transport` error without exception text. A failed native action also
+re-reads current state for recovery while preserving that action's failure receipt.
+Event and bootstrap promises handle failures without trusting delayed payloads.
+A hint invalidates send/approval readiness until fresh provider and session reads
+recover; it does not cancel a same-account worker.
+
+Fourteen focused provider tests cover delayed/null hints, overlapping read success
+and failure, bootstrap ordering, explicit/hint recovery, action failure recovery,
+safe connecting metadata, pending cache readiness and malformed responses. All 102 combined
+transport/resolve/AgentPanel tests, strict TypeScript, generated bridge equivalence
+and diff checks pass for this separate follow-up. No native browser, live account,
+UI layout or phase gate evidence is implied.
