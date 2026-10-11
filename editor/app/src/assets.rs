@@ -283,7 +283,7 @@ mod tests {
             &state,
             capture(&state, 0)
                 .unwrap()
-                .prepare(temp.path(), None, &[request.clone()])
+                .prepare(temp.path(), None, std::slice::from_ref(&request))
                 .unwrap(),
         )
         .unwrap();
@@ -324,7 +324,7 @@ mod tests {
                 &state,
                 capture(&state, revision)
                     .unwrap()
-                    .prepare(temp.path(), None, &[request.clone()])
+                    .prepare(temp.path(), None, std::slice::from_ref(&request))
                     .unwrap(),
             )
             .unwrap();

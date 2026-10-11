@@ -61,11 +61,64 @@
     "release scoped editor Clippy"
   ],
   "pending": [
-    "Claude focused rendered/copy review",
-    "hosted integrated checks"
+    "Exact final-head hosted checks"
   ],
   "limits": [
     "Native transport/journal behavior tested locally; no new native pixel acceptance claimed.",
-    "Test graph is main61 plus five UI/bridge cases, not newer runtime union."
-  ]
+    "Test graph is main61 plus five UI/bridge cases, not newer runtime union.",
+    "Claude0038 accepted browser copy/states only; no fresh native visual acceptance or actual screenreader output claim."
+  ],
+  "integration": {
+    "main": "77d86b83b9947d78d4643df0ae71f421e8168f7b",
+    "source_merge": "b0033ba",
+    "authored_plan_revision8": "638bf8f409c96842f07c6cb7f1434123aecfaee6",
+    "claude_review_commit": "278500c7f7ff44f842b93919bc25dade6d3ad0cf",
+    "cherry_pick": "f76548f",
+    "source_sha256": {
+      "editor/app/src/assets.rs": "bfcaeec25a3d7fdf3116c0a503c5c7cf631c67d642a7d0569cb156d991a4188b",
+      "editor/bridge/contract.ts": "51e8f11755f6a6d581b9f3b5a13eeeb403ead77066cca42e8f364e2e48718e76",
+      "editor/bridge/native.generated.js": "e29fdb58af1a252d80fc70af6b72560fb205d57e2c30192997a5f5962e3a66e4",
+      "editor/bridge/native.test.ts": "2cd9b215e7a40b06258ea8791aedd8942e796d32f3766301c051a03409e76eeb",
+      "editor/bridge/native.ts": "06746cd4a8cd7454ef94ab4c2600700dcbbd90099ac4d4bc2fd693d76ede1452",
+      "editor/ui/src/assets/AssetsContext.tsx": "d37f1699ab9cd6d050bd1cfb5c67356a9857ae15a8c45cf567cfc8d70a514e6a",
+      "editor/ui/src/components/assets/AssetInspector.tsx": "84402ea4a6f80ce8f9d13bc777fd29eb1887b2bd320fe9a6f925f583a0e02de7",
+      "editor/ui/src/components/assets/Assets.test.tsx": "859758465e51c316013d2fcf4e5f6be97a84ba047b4cbdc35877833e8b3b89ba"
+    },
+    "logs": {
+      "/tmp/incant-import-union-bridge.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "/tmp/incant-import-union-build.log": "8d2dc18e27851d084e8e625db4bdd1a094002559dc5d261470f119d479acada6",
+      "/tmp/incant-import-union-clippy-final.log": "c779fd4ed7e7a1c548a5ca6ce26579c4ccd166674cb27d6b203b174777524317",
+      "/tmp/incant-import-union-clippy.log": "bfd6d94f75265c2595d1816f282e1c5719844d736ab0cf61f9045aab03ed8311",
+      "/tmp/incant-import-union-native-final.log": "549485d297a639ad1d9bde43f74aaaf44ce4b5d2795038b2793b6070fdc331dd",
+      "/tmp/incant-import-union-native.log": "0b47eb463e773282b805118594459560098f4a794501a007f52bd41402574e2e",
+      "/tmp/incant-import-union-tools.log": "72392f91b744f4c33ad243af60d5fc893e8427a927542afb8c75d64400fbd5e0",
+      "/tmp/incant-import-union-typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "/tmp/incant-import-union-ui.log": "f066f8371fb540a07cb47ad2c967c62e58ab8554588f430e602f6c8b1ba7ae77"
+    },
+    "passed": {
+      "ui_tests": 534,
+      "native_asset_tests": 3,
+      "tools_tests": 49,
+      "strict_typescript": true,
+      "production_ui_build": true,
+      "generated_bridge": true,
+      "scoped_release_all_target_clippy": true,
+      "conventions": true,
+      "format": true
+    },
+    "clippy_correction": "Initial integrated all-target run found two cloned_ref_to_slice_refs warnings in test setup. Replaced only those clones with std::slice::from_ref and reran all three native asset tests plus all-target Clippy successfully. Original log retained.",
+    "visual_review": {
+      "scope": "Claude Opus5.5 Max browser receipts with mocked host; no native/macOS WebKit or screenreader claim",
+      "evidence": "handoffs/0038-import-completion-review/evidence/completion-review.json",
+      "sha256": "47e50f34f15072d415dc99bc714aca20d75cfa88c90a7cf2f3c8541aff23769a",
+      "final_sets": [
+        "b1",
+        "g1",
+        "g2"
+      ],
+      "verified_screenshot_hashes": 31,
+      "verified_log_hashes": 14,
+      "newer_camera_test_split": "Inherited main64 Camera test changes do not change the frozen reviewed import presentation."
+    }
+  }
 }

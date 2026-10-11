@@ -20,11 +20,11 @@ visual work, and Astra owns correctness and integration.
 
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
-| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Exact-head hosted checks and isolated native Claude acceptance are running. [Evidence](docs/spikes/editor-release-union.md). |
-| Import completion and Undo | Native imports return an exact revision/transaction receipt; unchanged imports preserve history and redo without offering stale Undo. Claude 0038 accepted the browser completion copy on frozen source. | Integrating runtime main and local-first PLAN revision 8; final union checks and hosted verification pending. [Evidence](docs/spikes/editor-import-receipts.md). |
-| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
+| Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
+| Import completion and Undo | Native imports return an exact revision/transaction receipt; unchanged imports preserve history and redo without offering stale Undo. Claude 0038 accepted the browser completion copy on frozen source. | Union with runtime main and original PLAN revision 8 passes 534 UI tests, three native asset tests and scoped Clippy. Hosted verification pending. [Evidence](docs/spikes/editor-import-receipts.md). |
+| Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is merged after all 20 checks. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
-| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | MSVC /Od and /O2 configurations are prepared for hosted conformance; actual Windows execution, full SDK/game composition and device evidence remain pending. |
+| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | PR #64 merged after actual MSVC /Od and /O2 conformance and source-free PE/PDB proof; full SDK/game composition and device evidence remain pending. |
 | CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
 
 Three Astra extra-high subagents own implementation/integration work in isolated
@@ -87,7 +87,7 @@ review; concurrent native reviews coordinate foreground ownership.
   exact-motion processes and 18 refusals after temporary sources/build removal.
   Actual iOS C/Rust compilation is compile-only. Initial static memory/table
   growth remains unsupported. A native x64 MSVC /Od baseline and /O2 candidate
-  now have conformance/proof wiring, but actual Windows execution remains pending.
+  passed actual hosted conformance and the fresh source-free PE/PDB proof in PR #64.
   [Development host](docs/spikes/development-wasm-host.md),
   [static host](docs/spikes/shipping-wasm2c.md),
   [MSVC follow-up](docs/spikes/wasm2c-msvc.md).
@@ -104,8 +104,7 @@ conformance, browser-target physics compilation and six native parity streams.
 [Correction evidence](docs/spikes/runtime-ci-corrections.md). A subsequent Linux
 C11 trap-link failure now has a reproduced POSIX declaration fix; the Windows
 Camera accessibility test is split into its six independent scans with unchanged
-coverage and bounded asynchronous cleanup. Both corrections pass local checks
-and await the next hosted run.
+coverage and bounded asynchronous cleanup. Both corrections passed local and hosted checks before PR #62 merged.
 
 ## Remaining engineering requirements
 
