@@ -60,18 +60,17 @@ jobs:
           save-if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
       # Keep tests, Clippy and the fresh-process probe on one development graph.
       # Never enable this feature on the workspace or shipped player commands.
-      - name: Windows development host (static MSVC path remains unsupported)
-        if: runner.os == 'Windows'
-        run: |
-          cargo test -p incant_wasm_dev --features wasmtime-host --locked
-          cargo clippy -p incant_wasm_dev --features wasmtime-host --all-targets --locked -- -D warnings
-          python tools/probes/development-wasm.py artifacts/development-wasm
       - name: Combined static and development conformance on one development graph
-        if: runner.os != 'Windows'
         run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-conformance --conformance-only
+      - name: MSVC optimized C candidate numerical, fuel and trap controls
+        if: runner.os == 'Windows'
+        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-optimized --conformance-only --msvc-opt-level 2
       - name: Fresh compiler-free static shipping executable and matched symbols
         if: runner.os != 'Windows'
         run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-shipping
+      - name: Fresh MSVC optimized candidate executable and matched PDB
+        if: runner.os == 'Windows'
+        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-shipping --msvc-opt-level 2
       - run: python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host
       - run: cargo check -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked
       - name: Keep unsupported device targets free of the development host
@@ -89,10 +88,18 @@ jobs:
             artifacts/static-wasm-conformance/development/result.json
             artifacts/static-wasm-conformance/conformance-*.log
             artifacts/static-wasm-conformance/prepared-manifest.json
+            artifacts/static-wasm-conformance/cook-build.log
+            artifacts/static-wasm-optimized/development/result.json
+            artifacts/static-wasm-optimized/conformance-*.log
+            artifacts/static-wasm-optimized/prepared-manifest.json
+            artifacts/static-wasm-optimized/cook-build.log
             artifacts/static-wasm-shipping/result.json
             artifacts/static-wasm-shipping/build.log
+            artifacts/static-wasm-shipping/cook-build.log
             artifacts/static-wasm-shipping/prepared-manifest.json
             artifacts/static-wasm-shipping/player.zip
             artifacts/static-wasm-shipping/symbols.zip
+            artifacts/static-wasm-shipping/shipping_module.map
+            artifacts/static-wasm-shipping/msvc-compiler.txt
           if-no-files-found: error
           retention-days: 7

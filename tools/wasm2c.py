@@ -7,6 +7,7 @@ This is not an arbitrary Rust build service or a sandbox for native toolchains.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -61,7 +62,8 @@ void incant_{module}_free(void* instance) {{ Instance* p=instance; wasm2c_{modul
 
 
 def prepare(output, modules, wabt, cook):
-    if run([wabt / 'bin/wasm2c', '--version']).strip() != '1.0.42':
+    translator = wabt / ('bin/wasm2c.exe' if os.name == 'nt' else 'bin/wasm2c')
+    if run([translator, '--version']).strip() != '1.0.42':
         raise ValueError('WABT 1.0.42 required')
     output.mkdir(parents=True, exist_ok=False)
     report = []
@@ -78,7 +80,7 @@ def prepare(output, modules, wabt, cook):
         (output / f'{module}.original.wasm').write_bytes(source.read_bytes())
         prepared = output / f'{module}.wasm'
         run([cook, source, prepared])
-        run([wabt / 'bin/wasm2c', prepared, '--module-name', module, '--no-debug-names',
+        run([translator, prepared, '--module-name', module, '--no-debug-names',
              '--disable-exceptions', '--disable-tail-call', '--disable-memory64',
              '--disable-multi-memory', '--disable-simd', '--disable-relaxed-simd',
              '-o', output / f'{module}.c'])

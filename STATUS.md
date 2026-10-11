@@ -19,8 +19,8 @@ visual work, and Astra owns correctness and integration.
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Exact-head hosted checks and isolated native Claude acceptance are running. [Evidence](docs/spikes/editor-release-union.md). |
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is in hosted verification. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
 | Native window player | A separate implementation branch adds real surface presentation, keyboard/mouse input, suspension and device audio. Local source-free lifecycle tests pass. | Independent review/CI and Claude native acceptance precede integration. No phone or frame-budget claim. |
-| Native tilemaps | Typed shared authoring, binary v6 cooking, retained local placements and exact solid-cell collision preparation pass 192 scoped tests. Versions 1–5 remain byte-compatible. | Unpublished data slice; native/legacy rendering and solid-map simulation explicitly refuse missing consumers. GPU tile rendering and Rapier2D integration remain open. [Evidence](docs/spikes/native-tilemaps.md). |
-| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | Hosted verification, optimized Windows/MSVC support, full SDK/game composition and device execution continue separately. |
+| Native tilemaps | Typed shared authoring, binary v6 cooking, retained local placements and exact solid-cell collision preparation pass 192 scoped tests. Versions 1–5 remain byte-compatible. | [PR #68](https://github.com/snowdamiz/incant/pull/68) targets main; native/legacy rendering and solid-map simulation explicitly refuse missing consumers. GPU tile rendering and Rapier2D integration remain open. [Evidence](docs/spikes/native-tilemaps.md). |
+| Native WebAssembly | Shared bounded capability ABI serves development Wasmtime and compiled wasm2c modules; local conformance and a source-free macOS executable pass. | MSVC /Od and /O2 configurations are prepared for hosted conformance; actual Windows execution, full SDK/game composition and device evidence remain pending. |
 | CI speed | Registry-only shared auxiliary caches are merged; the agent is measuring actual warm consumers and completed job timings. | Shared fresh-build storage and a lower-optimization CI test profile are experiments, not adopted speed claims. Independent shipping audits remain intact. |
 
 Three Astra extra-high subagents own implementation/integration work in isolated
@@ -82,9 +82,11 @@ review; concurrent native reviews coordinate foreground ownership.
   terminate the module. A fresh 2,780,816-byte macOS executable passes three
   exact-motion processes and 18 refusals after temporary sources/build removal.
   Actual iOS C/Rust compilation is compile-only. Initial static memory/table
-  growth and MSVC are explicitly unsupported pending follow-up.
+  growth remains unsupported. A native x64 MSVC /Od baseline and /O2 candidate
+  now have conformance/proof wiring, but actual Windows execution remains pending.
   [Development host](docs/spikes/development-wasm-host.md),
-  [static host](docs/spikes/shipping-wasm2c.md).
+  [static host](docs/spikes/shipping-wasm2c.md),
+  [MSVC follow-up](docs/spikes/wasm2c-msvc.md).
 
 Local integration checks: 543 ordinary Rust release tests/doctests; 138 scoped
 static/development-Wasm/runtime/script tests; workspace and optional-host release
