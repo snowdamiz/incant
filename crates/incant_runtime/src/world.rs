@@ -138,7 +138,7 @@ impl NativeWorld {
         let mut schedule = Schedule::default();
         // Native builds enable Bevy's multi_threaded executor and parallel
         // queries. Browser builds remain serial until their worker host exists.
-        schedule.add_systems((integrate, publish_globals).chain());
+        schedule.add_systems((integrate, publish_globals, crate::flipbook::advance).chain());
         let mut result = Self {
             identity: crate::WorldIdentity::new(),
             world,
@@ -203,6 +203,16 @@ impl NativeWorld {
         if self.world.get::<crate::CookedSpatial>(self.entities[&id]) == node.as_ref() {
             return;
         }
+        let previous_flipbook = self
+            .world
+            .get::<crate::CookedSpatial>(self.entities[&id])
+            .and_then(|n| n.flipbook.as_ref());
+        let next_flipbook = node.as_ref().and_then(|n| n.flipbook.as_ref());
+        let playback_changed = previous_flipbook != next_flipbook;
+        let next_playback = next_flipbook.map(|f| crate::flipbook::Playback {
+            clock: f.clock(self.tick_rate),
+            state: crate::FlipbookState::new(f.playing),
+        });
         let prepared = node
             .as_ref()
             .and_then(|n| n.tilemap.as_ref())
@@ -216,6 +226,13 @@ impl NativeWorld {
             self.tilemap_collision_ids.remove(&id);
         }
         let mut entity = self.world.entity_mut(self.entities[&id]);
+        if playback_changed {
+            if let Some(playback) = next_playback {
+                entity.insert(playback);
+            } else {
+                entity.remove::<crate::flipbook::Playback>();
+            }
+        }
         if let Some(prepared) = prepared {
             entity.insert(prepared);
         } else {

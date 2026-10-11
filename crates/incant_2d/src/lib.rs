@@ -1,5 +1,9 @@
 //! Bounded sprite geometry and document values. No GPU, filesystem or mutation path.
 pub mod atlas;
+pub mod flipbook;
+pub use flipbook::{
+    FlipbookClock, FlipbookControl, FlipbookError, FlipbookState, FrameRate, SpriteFlipbook,
+};
 pub mod tilemap;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};

@@ -248,3 +248,60 @@ fn retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells() 
         0
     );
 }
+
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn retained_flipbook_selection_stages_without_allocation() {
+    let (mut world, mut input, id) = super::sprite_tests::fixture();
+    let mut declared = world
+        .spatial_view()
+        .unwrap()
+        .nodes()
+        .find(|n| n.id == id)
+        .unwrap()
+        .declaration
+        .unwrap()
+        .clone();
+    declared.flipbook = Some(std::sync::Arc::new(incant_runtime::NativeFlipbook {
+        frames: vec![
+            incant_runtime::NativeSpriteRegion::Atlas {
+                frame: incant_cook::stable_id("00000000000000000000000001").unwrap(),
+            },
+            incant_runtime::NativeSpriteRegion::Atlas {
+                frame: incant_cook::stable_id("00000000000000000000000002").unwrap(),
+            },
+        ]
+        .into(),
+        rate: incant_runtime::FrameRate {
+            numerator: 60,
+            denominator: 1,
+        },
+        looping: true,
+        playing: true,
+    }));
+    let mut commands = incant_runtime::FrameCommands::default();
+    commands
+        .push(incant_runtime::StructuralCommand::SetSpatial {
+            entity: id,
+            spatial: Some(declared),
+        })
+        .unwrap();
+    world.apply(&mut commands).unwrap();
+    input
+        .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+        .unwrap();
+    let renderer = Renderer::headless().unwrap();
+    let mut retained = renderer
+        .prepare_retained(input.input(), input.camera_label())
+        .unwrap();
+    for _ in 0..64 {
+        world.step().unwrap();
+        input
+            .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+            .unwrap();
+        assert_eq!(
+            allocation::measured(|| retained.stage(input.input()).unwrap()),
+            0
+        );
+    }
+}

@@ -40,12 +40,16 @@ pub(crate) fn prepare_gameplay(
 ) -> Result<Vec<PreparedEntity>, incant_doc::DocumentError> {
     for (scene_id, scene) in &validated.project().scenes {
         for (entity_id, entity) in &scene.entities {
-            if entity.components.contains_key("Tilemap") {
+            if let Some(kind) = ["Tilemap", "SpriteFlipbook"]
+                .into_iter()
+                .find(|kind| entity.components.contains_key(*kind))
+            {
                 return Err(incant_doc::DocumentError::Validation(vec![
                     incant_doc::Diagnostic {
-                        path: format!("/scenes/{scene_id}/entities/{entity_id}/components/Tilemap"),
-                        message: "Tilemap gameplay is unsupported by legacy document simulation"
-                            .into(),
+                        path: format!("/scenes/{scene_id}/entities/{entity_id}/components/{kind}"),
+                        message: format!(
+                            "{kind} gameplay is unsupported by legacy document simulation"
+                        ),
                     },
                 ]));
             }

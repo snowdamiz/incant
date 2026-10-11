@@ -110,7 +110,7 @@ fn typed_environment_rejects_normal_map_and_out_of_range_rotation_at_startup() {
         nodes: vec![node("sprite")],
         environment: None,
     };
-    sprite_input.nodes[0].sprite = Some(incant_render_data::SpriteInput {
+    sprite_input.nodes[0].sprite = Some(incant_render_data::SpriteInput { frames: None, frame: 0,
         source,
         sprite: serde_json::from_value(
             serde_json::json!({"texture":"normal","size":[1.,1.],"region":[0,0,1,1],"pivot":[0.5,0.5],"tint":[1.,1.,1.,1.]}),

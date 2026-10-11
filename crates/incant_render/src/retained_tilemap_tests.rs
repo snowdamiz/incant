@@ -58,6 +58,8 @@ fn ordinary_sprite_reference(world: &NativeWorld, input: &NativeRenderInput) -> 
                         tilemap: None,
                         diagnostic: false,
                         sprite: Some(SpriteInput {
+                            frames: None,
+                            frame: 0,
                             source: Arc::clone(binding.source()),
                             sprite: incant_2d::SpriteRenderer {
                                 texture: binding.source().info().id.clone(),
@@ -89,6 +91,8 @@ fn ordinary_sprite_reference(world: &NativeWorld, input: &NativeRenderInput) -> 
                     cast_shadows: m.cast_shadows,
                 }),
                 sprite: node.sprite.as_ref().map(|s| SpriteInput {
+                    frames: None,
+                    frame: 0,
                     source: Arc::clone(&s.source),
                     sprite: s.sprite.clone(),
                 }),
@@ -313,6 +317,8 @@ fn sprite_and_tile_counts_share_one_cap_before_expanded_vertex_allocation() {
             tilemap: None,
             diagnostic: false,
             sprite: Some(SpriteInput {
+                frames: None,
+                frame: 0,
                 source: Arc::clone(&source),
                 sprite: sprite.clone(),
             }),
