@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored native package — local integration pending
+
+A public host-equals-target exporter now cooks authored Script attachments into a
+fresh shipping player and copies only referenced native assets. Three fresh
+source-deleted runs reproduce all expected motion; startup tampering is refused.
+Scoped tests, Clippy, compiler/dependency/symbol audits and independent review
+pass. [Evidence](docs/spikes/native-project-package.md). Combined source-transaction
+integration, Linux/Windows/window execution and complete UI/export/device gates
+remain open. This slice is queued locally behind authored native Play.
+
 ## Current integration and parallel work
 
 | Workstream | Current result | Next work / boundary |

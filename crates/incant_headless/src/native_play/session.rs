@@ -55,7 +55,10 @@ impl Session {
         });
         let (cooked, code) = if authored_scripts {
             let prepared = incant_cook::prepare_script_scene(document, &scene).map_err(native)?;
-            super::compiler::compile(prepared, root)?.into_parts()
+            incant_cook::compile_project_sources(prepared, root)
+                .map_err(native)?
+                .program
+                .into_parts()
         } else {
             let bytes = incant_cook::cook_scene(document, &scene).map_err(native)?;
             (
