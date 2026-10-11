@@ -159,6 +159,30 @@ class LocalBoundary(unittest.TestCase):
 
 
 class ProtocolRefusals(unittest.TestCase):
+    def test_startup_failure_reports_only_bounded_status_not_bootstrap_output(self):
+        stack = local.Stack('test')
+        secret = 'unknown-generated-bootstrap-token'
+        jobs = [{'Service': 'objects', 'State': 'exited', 'Health': '', 'ExitCode': 255,
+                 'Command': secret, 'Status': secret},
+                {'Service': 'oidc', 'State': secret, 'Health': secret, 'ExitCode': secret},
+                {'Service': secret, 'State': 'running'}]
+        for raw in [json.dumps(jobs), '\n'.join(json.dumps(job) for job in jobs)]:
+            with self.subTest(format=raw[0]), patch.object(stack, 'compose', side_effect=[RuntimeError(secret), raw]) as compose:
+                with self.assertRaisesRegex(RuntimeError, 'startup failed') as error:
+                    stack.up()
+                self.assertNotIn(secret, str(error.exception))
+                status = json.loads(str(error.exception).split('bounded status: ')[1])
+                self.assertEqual(status, [
+                    {'service': 'objects', 'state': 'exited', 'health': '', 'exit_code': 255},
+                    {'service': 'oidc', 'state': 'unknown', 'health': 'unknown', 'exit_code': None}])
+                self.assertEqual(compose.call_args.args, ('ps', '--all', '--format', 'json'))
+
+    def test_failed_status_collection_does_not_leak_original_or_diagnostic_output(self):
+        stack = local.Stack('test')
+        with patch.object(stack, 'compose', side_effect=[RuntimeError('bootstrap-secret'), RuntimeError('diagnostic-secret')]):
+            with self.assertRaisesRegex(RuntimeError, '^Local service startup failed; bounded status: unavailable$'):
+                stack.up()
+
     def test_mail_body_mismatch_is_refused_and_only_its_fixture_is_deleted(self):
         stack = local.Stack('test')
         stack.values = {'SMTP_PORT': '11025', 'MAIL_PORT': '18025'}

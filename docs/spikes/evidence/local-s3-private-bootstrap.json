@@ -1,0 +1,125 @@
+{
+  "recorded_at": "2026-10-11T17:22:45.576000+00:00",
+  "base_main": "c3ec3e84dae6bf957304471639e7fac34d2297d4",
+  "scope": "Private local S3 bootstrap ownership portability; sanitized startup status only",
+  "failed_checkpoint": {
+    "candidate": "c3ec3e84dae6bf957304471639e7fac34d2297d4",
+    "run": 38158170506,
+    "job": 114525340080,
+    "result": "failure before protocol checks; checkpoint remains unpromoted"
+  },
+  "original_linux_reproduction": {
+    "pinned_image": "chrislusf/seaweedfs@sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d",
+    "linux_volume_metadata": "1001:1001:600\nuid=1000(seaweed) gid=1000(seaweed) groups=1000(seaweed),1000(seaweed)",
+    "exit_code": 255,
+    "stopped": true,
+    "permission_denied_config": true,
+    "evidence": [
+      "W1011 17:14:34.666907 filer.go:377 Failed to load S3 config file for static identities: read /config/s3.json: open /config/s3.json: permission denied",
+      "W1011 17:14:36.668516 auth_credentials.go:634 fail to read /config/s3.json : open /config/s3.json: permission denied",
+      "F1011 17:14:36.668571 auth_credentials.go:376 fail to load config file /config/s3.json: fail to read /config/s3.json : open /config/s3.json: permission denied"
+    ],
+    "fixture_has_no_credentials": true,
+    "published_ports": false
+  },
+  "fixed_linux_volume_proof": {
+    "pinned_image": "chrislusf/seaweedfs@sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d",
+    "platform": "linux/aarch64",
+    "fixture_has_no_credentials": true,
+    "published_ports": false,
+    "healthy": true,
+    "exact_copy_matches": true,
+    "metadata": [
+      "1001:1001:600",
+      "1000:1000:700",
+      "1000:1000:600",
+      "Uid:\t1000\t1000\t1000\t1000"
+    ],
+    "wrapper_sha256": "893fe2992c6d6c7ed9dfbb00c799cf7a764988b09a5337d5c6f6c0c59652db7f"
+  },
+  "actual_local_protocols": {
+    "elapsed_seconds": 43.94,
+    "hosted_gates_satisfied": false,
+    "protocols_after": {
+      "checks": [
+        "postgres_tcp_commit",
+        "postgres_tcp_rollback",
+        "postgres_wrong_password_refused",
+        "s3_create_put_exact_get_list_delete",
+        "s3_wrong_signature_refused",
+        "s3_anonymous_write_refused",
+        "s3_missing_key_refused",
+        "smtp_local_capture_exact_body",
+        "oidc_discovery_local_issuer_jwks",
+        "oidc_pkce_code_exchange_userinfo",
+        "oidc_state_nonce_audience_subject",
+        "oidc_wrong_password_refused",
+        "oidc_wrong_pkce_refused",
+        "oidc_code_replay_refused"
+      ],
+      "count": 14,
+      "hosted_gates_satisfied": false,
+      "id_token_signature_validation": "not a client-library validation; provider userinfo validates the access token",
+      "scope": "local protocol fixtures only"
+    },
+    "protocols_before": {
+      "checks": [
+        "postgres_tcp_commit",
+        "postgres_tcp_rollback",
+        "postgres_wrong_password_refused",
+        "s3_create_put_exact_get_list_delete",
+        "s3_wrong_signature_refused",
+        "s3_anonymous_write_refused",
+        "s3_missing_key_refused",
+        "smtp_local_capture_exact_body",
+        "oidc_discovery_local_issuer_jwks",
+        "oidc_pkce_code_exchange_userinfo",
+        "oidc_state_nonce_audience_subject",
+        "oidc_wrong_password_refused",
+        "oidc_wrong_pkce_refused",
+        "oidc_code_replay_refused"
+      ],
+      "count": 14,
+      "hosted_gates_satisfied": false,
+      "id_token_signature_validation": "not a client-library validation; provider userinfo validates the access token",
+      "scope": "local protocol fixtures only"
+    },
+    "restart_checks": [
+      "private_state",
+      "oidc_issuer",
+      "postgres_row",
+      "s3_bytes"
+    ],
+    "scope": "fresh local containers only"
+  },
+  "verification": {
+    "python_passed": 180,
+    "python_skipped": 2,
+    "python_total": 182,
+    "local_boundary_tests": 18,
+    "actionlint": "pass",
+    "conventions": "pass",
+    "shell_parse": "pass",
+    "diff_check": "pass"
+  },
+  "limitations": [
+    "Linux-volume proof runs Docker linux/aarch64 on macOS; hosted ubuntu-latest AMD64 confirmation is pending the next corrected checkpoint.",
+    "No hosted provider, release, device or capacity gate is satisfied by these local protocols."
+  ],
+  "source_hashes": {
+    "services/local/compose.yaml": "3d81001c2d04e8b0a82aa45ba4d11dd98f8ee39aa1d14e16846c2fa08b0cb5cd",
+    "services/local/objects-entrypoint.sh": "893fe2992c6d6c7ed9dfbb00c799cf7a764988b09a5337d5c6f6c0c59652db7f",
+    "tools/local_services.py": "a95d331e40a81e23edf69cccbb2e446ef1e0d902b28be9337a2a72f14e064ba2",
+    "tools/local_services_smoke.py": "90038166917601df3f6298fbeaf259cfca0f281d0fdff1709bb0121ec63c8b9e",
+    "tools/tests/test_local_services.py": "08c85e4e122f9eefdfd5a03cc343bacd21f476635d0110964da28c94c2cc8b16"
+  },
+  "logs": {
+    "/tmp/incant-checkpoint2-local-services-failure.log": "071a13a63029ff6f9bc3123683fb12c7ffc401a8b998aeb59676392cac3100fc",
+    "/tmp/incant-s3-permission-repro.json": "4a3396a6541686dfab17684d8546f70487e60279e7a18695d1864fd83180cd99",
+    "/tmp/incant-s3-private-copy-proof.json": "e158137c665fc477deca478c6a8df7445c03eda64666cd14e8438605c50a19fa",
+    "/tmp/incant-local-s3-fixed-smoke.log": "9b807d663e1a6a616cb385f9cbfbdf393c67b052a86a8854b58cbd4cea2ec110",
+    "/tmp/incant-local-s3-fixed-tools.log": "3ff9b17329813d646f54ef2e836d69a36a3eeb1feefa59c57c3dce4426935fbb",
+    "/tmp/incant-local-s3-fixed-actionlint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-local-s3-fixed-conventions.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
