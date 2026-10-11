@@ -29,14 +29,14 @@ pub enum StructuralCommand {
         entity: StableId,
         audio: Option<crate::CookedAudio>,
     },
-    /// Replace/remove render configuration using the immutable startup asset
-    /// table. The final bounded declarations are checked before publication.
     /// Controls use the final declaration of this batch, in submitted order.
     /// Pause/resume preserves phase; restart/seek resets it.
     ControlFlipbook {
         entity: StableId,
         control: crate::FlipbookControl,
     },
+    /// Replace/remove render configuration using the immutable startup asset
+    /// table. The final bounded declarations are checked before publication.
     SetSpatial {
         entity: StableId,
         spatial: Option<crate::CookedSpatial>,
@@ -181,6 +181,7 @@ impl NativeWorld {
                 StructuralCommand::SetVelocity { .. }
                     | StructuralCommand::SetAngularVelocity { .. }
                     | StructuralCommand::SetAngularVelocity2D { .. }
+                    | StructuralCommand::ControlFlipbook { .. }
             )
         }) {
             let mut velocities = BTreeMap::new();
@@ -210,6 +211,7 @@ impl NativeWorld {
                         spins_2d.insert(*entity, velocity.clone());
                         *entity
                     }
+                    StructuralCommand::ControlFlipbook { .. } => continue,
                     _ => unreachable!(),
                 };
                 if !self.entities.contains_key(&id) {
@@ -274,6 +276,10 @@ impl NativeWorld {
                     )?;
                 }
             }
+            let playback = self.prepare_flipbook_controls(commands, &BTreeMap::new(), |id| {
+                self.entities.contains_key(&id)
+            })?;
+            self.install_flipbook_states(playback);
             self.install_velocities(velocities);
             for (id, spin) in spins_2d {
                 self.world

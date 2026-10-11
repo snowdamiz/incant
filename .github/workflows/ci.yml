@@ -120,7 +120,7 @@ jobs:
       # This remains a separate fresh build until shared-session provenance is verified.
       - name: Verify source-free native game GPU frames and audio
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        run: python3 tools/probes/native-game.py artifacts/native-game-gpu --gpu --flipbook --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene --audio-binary target/ci/examples/native_scene_audio --fixture-binary target/ci/examples/no_renderer_fixtures
+        run: python3 tools/probes/native-game.py artifacts/native-game-gpu --gpu --flipbook --flipbook-sdk --headless-binary target/ci/incant_headless --cook-binary target/ci/examples/cook_scene --audio-binary target/ci/examples/native_scene_audio --fixture-binary target/ci/examples/no_renderer_fixtures
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         with: {name: native-game-gpu-macOS, path: artifacts/native-game-gpu/result.json, if-no-files-found: error}

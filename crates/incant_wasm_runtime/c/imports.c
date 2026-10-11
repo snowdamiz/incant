@@ -22,3 +22,6 @@ void w2c_incant__v1_despawn(struct w2c_incant__v1* h,uint64_t e,uint32_t a){invo
 
 uint32_t w2c_incant__input__v1_snapshot_len(struct w2c_incant__input__v1* h,uint64_t e){return invoke(&h->core,12,e,0,0,0,0);}
 uint32_t w2c_incant__input__v1_read_snapshot(struct w2c_incant__input__v1* h,uint64_t e,uint32_t p,uint32_t capacity){return invoke(&h->core,13,e,p,capacity,0,0);}
+uint32_t w2c_incant__flipbook__v1_snapshot_len(struct w2c_incant__flipbook__v1* h,uint64_t e){return invoke(&h->core,14,e,0,0,0,0);}
+uint32_t w2c_incant__flipbook__v1_read_snapshot(struct w2c_incant__flipbook__v1* h,uint64_t e,uint32_t p,uint32_t capacity){return invoke(&h->core,15,e,p,capacity,0,0);}
+void w2c_incant__flipbook__v1_control(struct w2c_incant__flipbook__v1* h,uint64_t e,uint32_t id,uint32_t kind,uint32_t frame){invoke(&h->core,16,e,id,kind,frame,0);}

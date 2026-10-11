@@ -4,7 +4,7 @@ use incant_audio_runtime::ClipBinding;
 use incant_game_runtime::OfflineGameSession;
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld};
-use incant_script::CompiledScript;
+use incant_script::SessionProgram;
 pub(crate) type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 #[cfg(feature = "render-input")]
 use incant_game_runtime::HostedOfflineGameSession;
@@ -67,13 +67,14 @@ pub enum Player {
 impl Player {
     pub fn new(
         scene: CookedScene,
-        script: CompiledScript,
+        script: impl Into<SessionProgram>,
         actions: InputActions,
         clips: Vec<ClipBinding>,
         rate: u32,
         settings: Option<Settings>,
         requested_ticks: u64,
     ) -> Result<Self> {
+        let script = script.into();
         #[cfg(not(feature = "render-gpu"))]
         let _ = requested_ticks;
         #[cfg(feature = "render-input")]

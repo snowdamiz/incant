@@ -21,6 +21,8 @@ fn main() {
         Path::new("src/compiled.rs").into(),
         Path::new("src/lib.rs").into(),
         Path::new("src/input.rs").into(),
+        Path::new("src/flipbooks.rs").into(),
+        Path::new("src/commands.rs").into(),
         Path::new("src/queries.rs").into(),
         Path::new("src/query_values.rs").into(),
         Path::new("src/schedule.rs").into(),

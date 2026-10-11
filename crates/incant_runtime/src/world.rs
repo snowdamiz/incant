@@ -66,6 +66,7 @@ pub struct NativeWorld {
     pub(crate) identity: crate::WorldIdentity,
     pub(crate) world: World,
     schedule: Schedule,
+    pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_2d: incant_physics_2d_runtime::PhysicsWorld2D,
     pub(crate) physics_2d_used: bool,
@@ -139,6 +140,7 @@ impl NativeWorld {
         // Native builds enable Bevy's multi_threaded executor and parallel
         // queries. Browser builds remain serial until their worker host exists.
         schedule.add_systems((integrate, publish_globals, crate::flipbook::advance).chain());
+        let flipbook_query = world.query::<(&Identity, &crate::flipbook::Playback)>();
         let mut result = Self {
             identity: crate::WorldIdentity::new(),
             world,
@@ -156,6 +158,7 @@ impl NativeWorld {
             audio_used: !audio.is_empty(),
             audio_ids: BTreeSet::new(),
             schedule,
+            flipbook_query,
             entities,
             parents,
             scene_id: scene.id,
