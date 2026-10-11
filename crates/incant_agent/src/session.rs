@@ -440,6 +440,7 @@ fn failure(error: AgentError) -> Option<Failure> {
         AgentError::Budget => Failure::BudgetExhausted,
         AgentError::Interrupted => return None,
         AgentError::StepLimit => Failure::StepLimit,
+        AgentError::ContextLimit => Failure::ContextLimit,
         AgentError::ProjectUnavailable => Failure::ProjectUnavailable,
         AgentError::ProjectChanged => Failure::ProjectChanged,
     })
@@ -452,6 +453,10 @@ fn finish(shared: &Shared, id: TurnId, initial: Budget, outcome: Option<TurnOutc
                 && budget.used_tokens >= initial.used_tokens
                 && budget.used_tokens >= minimum_usage(&initial, &result) =>
         {
+            // The agent reserves an allowance when a transport failure has no
+            // measured usage. Preserve that charge without labelling it exact.
+            let uncertain = budget.used_tokens > initial.used_tokens
+                && matches!(&result, Err(AgentError::Response { usage: None, .. }));
             let (report, error) = match result {
                 Ok(r) => (
                     Some(ReportSummary::from(r)),
@@ -460,7 +465,7 @@ fn finish(shared: &Shared, id: TurnId, initial: Budget, outcome: Option<TurnOutc
                 ),
                 Err(e) => (None, Some(failure(e))),
             };
-            (budget, report, error, false)
+            (budget, report, error, uncertain)
         }
         value => (
             Budget {
@@ -502,7 +507,11 @@ fn finish(shared: &Shared, id: TurnId, initial: Budget, outcome: Option<TurnOutc
     {
         a.decision = Decision::Cancelled;
     }
-    if uncertain || (!cancelled && turn.failure.is_none()) {
+    if matches!(
+        error,
+        Some(Some(Failure::WorkerPanicked | Failure::BudgetAccounting))
+    ) || (!cancelled && turn.failure.is_none())
+    {
         turn.failure = error.flatten();
     }
     turn.status = if turn.failure.is_some() {

@@ -13,6 +13,7 @@ use std::{
     },
     time::Duration,
 };
+mod agent;
 mod assets;
 mod menu;
 mod play;
@@ -27,6 +28,7 @@ fn app_context() -> tauri::Context<tauri::Wry> {
 }
 
 struct Editor {
+    agent: Arc<agent::Service>,
     play: Arc<play::Service>,
     provider: Arc<provider::ProviderRuntime>,
     bus: Arc<Mutex<project::LoadState>>,
@@ -153,9 +155,11 @@ fn main() {
             .to_path_buf()
     });
     let (play_service, play_requests) = play::Service::new();
+    let agent = Arc::new(agent::Service::new());
     let editor = Arc::new(Editor {
+        agent: agent.clone(),
         play: play_service,
-        provider: Arc::new(provider::ProviderRuntime::new()),
+        provider: Arc::new(provider::ProviderRuntime::new(agent)),
         bus: Arc::new(Mutex::new(project::LoadState::Loading)),
         viewport: Mutex::new(None),
         alive: AtomicBool::new(true),
@@ -172,6 +176,10 @@ fn main() {
             engine_execute,
             engine_script_read,
             engine_history,
+            agent::engine_agent_read,
+            agent::engine_agent_start,
+            agent::engine_agent_cancel,
+            agent::engine_agent_decide,
             play::play_read,
             play::play_command,
             assets::engine_import,
@@ -249,6 +257,7 @@ fn main() {
                 }
                 if matches!(event, tauri::WindowEvent::Destroyed) {
                     close.alive.store(false, Ordering::Relaxed);
+                    close.agent.shutdown();
                 } else if matches!(
                     event,
                     tauri::WindowEvent::Resized(_)

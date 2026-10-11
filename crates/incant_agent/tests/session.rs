@@ -262,6 +262,81 @@ fn failure_accounting_carries_across_turns_and_raw_errors_never_enter_snapshots(
     assert_eq!(state.turns[1].charged_tokens, 15);
 }
 #[test]
+fn unmeasured_provider_charges_are_explicit_without_overwriting_cancellation() {
+    for (charged, cancelled) in [(0, false), (42, false), (42, true)] {
+        let s = Session::new(Budget {
+            max_tokens: 1000,
+            used_tokens: 5,
+        });
+        let (tx, rx) = std::sync::mpsc::channel();
+        let id = s
+            .start(request(), move |c| {
+                rx.recv().unwrap();
+                TurnOutcome {
+                    budget: Budget {
+                        max_tokens: 1000,
+                        used_tokens: c.budget.used_tokens + charged,
+                    },
+                    result: Err(AgentError::Response {
+                        reason: "private transport failure",
+                        usage: None,
+                    }),
+                }
+            })
+            .unwrap();
+        if cancelled {
+            s.cancel(id).unwrap();
+        }
+        tx.send(()).unwrap();
+        let state = done(&s);
+        assert_eq!(state.budget.used_tokens, 5 + charged);
+        assert_eq!(state.accounting_uncertain, charged != 0);
+        assert_eq!(state.turns[0].accounting_uncertain, charged != 0);
+        assert_eq!(
+            state.turns[0].status,
+            if cancelled {
+                Status::Cancelled
+            } else {
+                Status::Failed
+            }
+        );
+        assert_eq!(
+            state.turns[0].failure,
+            if cancelled {
+                None
+            } else {
+                Some(Failure::Provider)
+            }
+        );
+        assert!(
+            !serde_json::to_string(&state)
+                .unwrap()
+                .contains("private transport failure")
+        );
+    }
+}
+#[test]
+fn account_fence_failure_after_measured_usage_does_not_mark_a_reservation() {
+    let s = Session::new(Budget {
+        max_tokens: 1000,
+        used_tokens: 5,
+    });
+    s.start(request(), |c| TurnOutcome {
+        budget: Budget {
+            max_tokens: 1000,
+            used_tokens: c.budget.used_tokens + 42,
+        },
+        result: Err(AgentError::Provider("account selection changed".into())),
+    })
+    .unwrap();
+    let state = done(&s);
+    assert_eq!(state.budget.used_tokens, 47);
+    assert_eq!(state.turns[0].charged_tokens, 42);
+    assert_eq!(state.turns[0].failure, Some(Failure::Provider));
+    assert!(!state.accounting_uncertain);
+    assert!(!state.turns[0].accounting_uncertain);
+}
+#[test]
 fn inconsistent_budget_or_panicking_jobs_exhaust_allowance_explicitly() {
     for kind in 0..5 {
         let s = Session::new(Budget {

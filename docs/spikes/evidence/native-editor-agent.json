@@ -1,0 +1,39 @@
+{
+  "scope": "unpublished native editor binding checkpoint",
+  "source_sha256": {
+    "Cargo.lock": "26d1b3620c0f373c994691f60131c5ce31997472daeb41c722d4d5259be56a04",
+    "editor/app/Cargo.toml": "82a8ee94b2b2c41c530c9e4e50877c25119954e320737f3a6558bf16692cfc7e",
+    "editor/app/src/main.rs": "21b053d76b36c530cffdcc50b34daaffda57e7b9f3bb5177a3f3919efd8abdf0",
+    "editor/app/src/provider.rs": "5fcc1e95d06162815a8a27276523c0909fd0d0e6d9d930d9d9e3d6e5328b0bf5",
+    "editor/app/src/provider/tests.rs": "c851943db80f5326b4ed5647c75ed21f2549820f51859f799c93b8ada97a5a0b",
+    "editor/app/src/agent.rs": "ee11ed368890c8ac171ce963bd88f686718570c65e309e9b5e75b511a3e98ca7",
+    "editor/app/src/agent/worker.rs": "bcd41eba787d2d102cbea3ba18b0b498e3be6077a52a1ac161e1431d47fc9ccc",
+    "editor/app/src/agent/tests.rs": "1e430b9fe6edffac64d98360919e16e71ea7e73efd8f7c36d9858d89fb438fb8",
+    "crates/incant_agent/src/lib.rs": "2ab48d59d8c33b0d7e520d849cccf272c9c6452bb3280c00ad2d4887643e9824",
+    "crates/incant_agent/src/session.rs": "e683fbb33d7b547741accd743b8f154f2aedc790aa34918060b67dca54be0864",
+    "crates/incant_agent/src/session/types.rs": "ca8380e6613da6a1fb7c8b954db9103b061c4a2f703d9544b58073fef09f4e41",
+    "crates/incant_agent/tests/session.rs": "f64529bd758a7f23d2dc35f01c94290f147193eca0aec5bac71e2e54f818466b"
+  },
+  "validation": {
+    "tests_passed": 109,
+    "gpu_ignored": 1,
+    "test_command": "./tools/cargo test -p incant_editor -p incant_agent -p incant_agent_native --profile ci --locked -j2",
+    "clippy_command": "./tools/cargo clippy -p incant_editor -p incant_agent -p incant_agent_native -p incant_headless --all-targets --profile ci --locked -j2 -- -D warnings",
+    "clippy": "passed",
+    "logs": {
+      "/tmp/incant-agent-binding-final-tests.log": "61a05af4980d0d19d001467187cd92b18cb23fc2096e7a69b0d6ec58c26ee0f4",
+      "/tmp/incant-agent-binding-final-clippy.log": "410ee9c97b598a063e99c690f6ea1d27abfe8339910674ca185afc67ff9b0188"
+    }
+  },
+  "review": {
+    "path": "native-editor-agent-review.md",
+    "sha256": "64de6c031dc46bb619479aae34c84e7d730dbf956b36dff811f7aaaf9a361a8b",
+    "outcome": "persistent cross-turn Play owner required before publication"
+  },
+  "limits": [
+    "provider fixtures are not live-provider evidence",
+    "actual native UI proof pending Claude integration",
+    "provider invalidation event listener integration pending",
+    "no phase/performance/device release gate claimed"
+  ]
+}

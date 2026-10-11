@@ -3933,6 +3933,7 @@ name = "incant_editor"
 version = "0.0.1"
 dependencies = [
  "incant_agent",
+ "incant_agent_native",
  "incant_assets",
  "incant_audio_runtime",
  "incant_cmd",

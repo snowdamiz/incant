@@ -53,7 +53,7 @@ pub enum Failure {
     Provider,
     Tool,
     BudgetExhausted,
-    /// Reserved for the separately integrated bounded provider-context runner.
+    /// The next provider input exceeds the bounded conversation context.
     ContextLimit,
     StepLimit,
     ProjectUnavailable,
@@ -182,8 +182,9 @@ pub struct TurnSnapshot {
 pub struct SessionSnapshot {
     pub version: u64,
     pub budget: Budget,
-    /// True means the allowance was exhausted conservatively after missing or
-    /// inconsistent worker accounting; used_tokens is then not measured usage.
+    /// Some charges are conservative allowances rather than measured usage.
+    /// Inconsistent/missing worker accounting exhausts the allowance entirely;
+    /// provider failures without usage retain the agent's bounded reservation.
     pub accounting_uncertain: bool,
     pub worker_running: bool,
     pub turns: Vec<TurnSnapshot>,
