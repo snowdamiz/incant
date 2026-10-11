@@ -116,5 +116,16 @@
       "git diff --check"
     ],
     "scope": "Reviewed session checkpoints integrated with editor/agent source; only STATUS.md had an additive merge conflict, with both sections retained. All22 checkpoint source files match the reviewed main101 integration. CPU verification only. Native0048 remains on separately bound immutable bb1b517 and is not evidence for new checkpoint behavior."
+  },
+  "main103_integration": {
+    "recorded_at": "2026-10-11T23:02:21.042813+00:00",
+    "source_commit": "deac1019021d23ae3f0da8b7e4b741d3609b769e",
+    "merged_main": "2816ecde29bf4dd0bb058e46212cd836c1bb816c",
+    "merge_conflicts": false,
+    "reviewed_source_and_original_evidence_hashes_verified": 9,
+    "integration_log_hashes_verified": 7,
+    "merge_receipt_sha256": "e419a50176e4d271f934422bf3e1fd72b876032e9c7186d1c575b5809dfa358d",
+    "validation_evidence": "web-renderer-main102-integration.json",
+    "scope": "Clean ancestry-preserving merge of reviewed WebGPU ownership repair. Renderer source matches the already tested main103 inputs; no redundant test run or new browser/GPU acceptance claim. Current editor service logic and UI source unchanged. Native0048 remains on separately bound immutable bb1b517."
   }
 }

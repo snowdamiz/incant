@@ -23,10 +23,11 @@ authored scripting, imports, physics, audio, input and source-free exports have
 working, tested paths, but the complete Core Sample and its device gates remain
 ahead. Editor and agent work overlaps later phases without completing their gates.
 
-Native Wasm logging, desktop gamepad input and opt-in session checkpoints are
-merged into main. Current parallel work connects checkpoints to the exported
-player, validates the native editor's Play/chat/budget controls, repairs browser
-renderer ownership, and cooks output shaders before runtime startup. Complete
+Native Wasm logging, desktop gamepad input, opt-in session checkpoints and the
+browser renderer compile repair are merged into main. Current parallel work
+connects checkpoints to the exported player, validates the native editor's
+Play/chat/budget controls, extends Wasm localization, and cooks shaders before
+runtime startup. Complete
 animation, game UI/text, remaining SDK/render features, and the required sample
 and reference-device measurements still prevent a Phase 1 completion claim.
 
