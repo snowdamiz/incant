@@ -1,7 +1,7 @@
 # Native sprite flipbooks
 
 The native implementation and local numerical/shipping checks are complete;
-Claude appearance review, hosted checks and publication remain pending. This is not a performance,
+Claude appearance review is accepted; hosted checks and publication remain pending. This is not a performance,
 phone, editor appearance or phase-gate result.
 
 `SpriteFlipbook` attaches 1–256 ordered pixel/atlas regions to one
@@ -96,7 +96,16 @@ presentation. Request files are bounded and parsed only at startup; sorted captu
 ticks and typed controls select committed states. It caps 4096 entities, 256
 flipbooks, 64 captures, 256 controls, 36000 ticks and 256 MiB total decoded output.
 Its PNG output is not atomic: earlier files can remain after a later failure.
-Claude packet 0042 owns visual captures and appearance review; its GPU gate is
-not yet granted. The supplied capture wrapper checks the gate and executable
+Claude packet 0042 completed its scoped appearance review on frozen source
+`95df19d`, with Opus 5.5 and Max verified through ACP. All 19 guarded calls
+completed (63 captures); the gate is removed and all processes reaped. Claude
+accepted 15 full static-control moments, 850 fixed-entity crops and 2,640 playback
+states, including source-free repeats. Root verified all 92 manifest files and
+preserved the original Claude commit `ddc164b`.
+[Appearance report](../../handoffs/0042-native-flipbook/result.md).
+
+The combined prewarming/flipbook tree additionally passed all 72 GPU tests and a
+fresh source-free shipping run with 32 repeated fixtures, four animated controls
+and 35 refusals. [Combined evidence](evidence/native-render-followup-local.json). The supplied capture wrapper checks the gate and executable
 hash per call, bounds the cumulative budget, and kills/reaps timed-out process
 groups. Its absent-gate refusal was tested without invoking a renderer.

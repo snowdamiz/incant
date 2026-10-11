@@ -65,9 +65,12 @@ separately, including sources shared by opaque and transparent consumers.
 The local combined renderer/flipbook source `faf12e8` additionally passes 666
 ordinary workspace tests, two bounded-capture helper tests, full-workspace and
 optional native-window release Clippy, 90 tools tests, conventions and the
-15-root authoring-free dependency guard. Its 72 GPU cases and fresh integrated
-shipping proof remain pending; the earlier separate results above do not stand
-in for those checks. [Combined local evidence](evidence/native-render-followup-local.json).
+15-root authoring-free dependency guard. The combined tree also passes all 72 actual GPU cases and a fresh integrated
+`--gpu --flipbook` shipping proof: 32 repeated fixture processes, four animated
+first/final frame controls, 35 refusals, source/build deletion and compiler-symbol
+exclusion. The copied player is 8,960,176 bytes (SHA256
+`7e3139e758d13e8dff18843fc94beb6237d20a3fb644a88903e0f075b9fba942`).
+These are local correctness results, not a phone or frame-time gate. [Combined local evidence](evidence/native-render-followup-local.json).
 Hosted checks and publication remain pending behind the coordinated runtime queue.
 
 ## Remaining shader and performance work
