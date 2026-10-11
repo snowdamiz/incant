@@ -30,7 +30,7 @@ The current native slice passes 152 scoped Rust tests and four-package all-targe
 Clippy after integrating main97. Claude’s chat UI is integrated with retained
 conversation resizing, accurate denial/failure messages and cause-neutral uncertain
 usage. The combined UI suite passes 782 tests; strict types and the editor build
-pass. The corrected native cap-change fences pass 38 editor tests and Clippy. Four real native-handler turns used
+pass. The corrected native cap-change and gameplay-focus fences pass 39 editor tests and Clippy. Four real native-handler turns used
 the saved ChatGPT login for approved edits, native Play and a later retained-state
 query; Undo and exact journal/account recovery passed after reopening. Claude's
 Play and chat UI are integrated; project-budget controls and native visual/WebView
@@ -49,8 +49,11 @@ dynamic shell capabilities are integrated, including offline edits and unchanged
 usage across cap/history recovery. Its combined UI suite passes 782 tests.
 A fresh live native check completed four saved-account turns and retained all
 73,259 measured tokens through Undo and a separate app process, with the same
-login and exact journal restored. Claude-owned controls and combined native
-WebView/appearance acceptance remain in progress.
+login and exact journal restored. The headless command now shares the durable
+ledger and recovered authored cap; invocation limits cannot refund usage or raise
+the project cap. Its 16 tests, scoped Clippy and independent integration review
+pass ([headless evidence](docs/spikes/headless-agent-budgets.md)). Claude-owned
+controls and combined native WebView/appearance acceptance remain in progress.
 [Budget accounting evidence](docs/spikes/agent-project-budget.md).
 
 ## Agent conversation context — locally verified

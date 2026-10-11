@@ -94,3 +94,15 @@ SHA-256 evidence:
 | unchanged crates/incant_agent/src/ledger.rs | c54cde4db5d81f77f7b861fe1f7738012dbc8c7d6ea1cb1934bde2fa4742af6e |
 | /tmp/incant-headless-agent-budget-tests.log | f954c6dd1376c02e3ad30c13c4a33a9fb92d5cf2ffc3b856153c80d9b3da3564 |
 | /tmp/incant-headless-agent-budget-clippy.log | d4457d0c8a56f64d41c95ece8bb38bebc411d218c390740e07a8f447baff4469 |
+
+## Independent root integration
+
+Astra reviewed the frozen implementation and tests, then integrated the exact
+source as `91615ee` into the native editor/agent/budget union. All six implementation
+and shared accounting source hashes above match. The 16 binary tests and scoped
+all-target Clippy passed again on the integrated sources. The review found no
+actionable issue; CLI invocation limits, recovered authored caps, lock ordering,
+worker ownership, settlement and failed-output accounting were checked.
+[Source and validation receipt](evidence/headless-agent-budget-integration.json).
+This verification uses synthetic provider responses and does not add a headless
+live-provider or process-signal gate claim.
