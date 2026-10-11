@@ -8,6 +8,22 @@
       ],
       "type": "string"
     },
+    "AgentBudgetSettings": {
+      "additionalProperties": false,
+      "description": "User-authored token allowance for this project. Consumption is stored outside\nthe project; zero disables new agent turns.",
+      "properties": {
+        "max_tokens": {
+          "format": "uint64",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_tokens"
+      ],
+      "type": "object"
+    },
     "Asset": {
       "additionalProperties": false,
       "properties": {
@@ -565,6 +581,12 @@
     "ProjectSettings": {
       "additionalProperties": false,
       "properties": {
+        "agent_budget": {
+          "$ref": "#/$defs/AgentBudgetSettings",
+          "default": {
+            "max_tokens": 1000000
+          }
+        },
         "input_actions": {
           "additionalProperties": {
             "$ref": "#/$defs/InputAction"

@@ -360,3 +360,7 @@ impl Journal {
         Ok(())
     }
 }
+
+#[cfg(test)]
+#[path = "agent_budget_replay_tests.rs"]
+mod agent_budget_replay_tests;
