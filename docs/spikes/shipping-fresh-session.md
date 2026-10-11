@@ -85,7 +85,7 @@ before and after its fresh target build. The global deletion barrier removes tha
 bundle, guest source, module and translator before any packaged player launch.
 The trusted host cooker remains a separate authoring tool, outside the target
 shipping ledger. The suite forwards no new default behavior to standalone probes.
-This integrated graph still needs its fresh player proof. The 16.8% sample above
+The corrected integrated graph passes its fresh four-player proof below. The 16.8% sample above
 does not measure this newer graph; shared storage remains off CI. The inherited
 SDK CI command continues to run its full standalone proof.
 
@@ -97,8 +97,20 @@ on a copy of each caller environment and records it. Compiler arguments, the
 standalone commands, the strict duplicate-unit refusal and the deletion barrier
 are unchanged. All 120 tooling tests pass, including diagnostic consistency and
 caller isolation. [Failed-run evidence](evidence/shipping-sdk-ledger-refusal.json)
-retains all raw build hashes; the fresh corrected proof remains pending. No
-performance claim is made for this coordinated correctness run.
+retains all raw build hashes. The corrected frozen `ef780b9` then passed all four
+complete probe bodies, including 32 baseline game repeats, 32 additional
+QuickJS/wasm2c SDK repeats, 43 runtime refusals, spatial/observation/log controls
+and four animated/static comparisons. Every player compiled freshly and retained
+its independent symbol identity; all registered authoring inputs and shared Cargo
+storage were deleted before any launch. Audio reused 82 target units, GPU game
+85 and script/physics 98; the strict ledger records 231 distinct freshly compiled
+target units. The three QuickJS libraries were proven fresh in the game build
+and unchanged/reused in the later script build.
+[Current SDK proof](evidence/shipping-sdk-shared-proof.json) records exact source,
+commands, profile/feature evidence, tool/player identities and all report hashes.
+Elapsed time includes a coordinated wait and unrelated CPU work, so no speedup
+is inferred. The newer generated public Rust SDK and color-correction union still
+need integration and scoped proof before CI adoption, which remains disabled.
 
 The original commands passed locally on the same runtime sources in 78.82 and
 121.71 seconds, respectively. This is a local baseline with concurrent unrelated
