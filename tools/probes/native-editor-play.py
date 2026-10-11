@@ -32,7 +32,13 @@ def main():
         scene = next(iter(json.loads(project.read_text())['scenes']))
         rpc = Rpc(headless, project, journal)
         try:
-            source = "import type { NativeBehavior } from '@incant/runtime/native';\nexport default { update({chunks}) { for (const chunk of chunks) for (let i=0;i<chunk.ids.length;i++) chunk.transforms[i*chunk.transformStride]+=2; } } satisfies NativeBehavior;\n"
+            source = ("import type { NativeBehavior } from '@incant/runtime/native';\n"
+                      "export default { update({instances, chunks}) {\n"
+                      "  for (const chunk of chunks) for (let i=0;i<chunk.ids.length;i++) {\n"
+                      "    if (!instances.some(instance => instance.entity === chunk.ids[i])) continue;\n"
+                      "    chunk.transforms[i*chunk.transformStride]+=2;\n"
+                      "  }\n"
+                      "} } satisfies NativeBehavior;\n")
             def item(identity, name, components):
                 return {'op': 'create_entity', 'scene_id': scene, 'entity': {
                     'id': identity, 'name': name, 'parent': None, 'provenance': None, 'components': components}}

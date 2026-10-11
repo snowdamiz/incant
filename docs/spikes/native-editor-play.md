@@ -81,3 +81,18 @@ ignored), plus scoped all-target Clippy. [Independent reviews and logs](evidence
 bind the corrected source. The reviewed native binary predates these corrections;
 combined native acceptance after the pending budget and splitter controls remains
 required. The splitter selection defect is assigned separately to Claude0047.
+
+## Attached-script isolation in the native fixture
+
+The numerical fixture now filters world-wide chunk views by the script's actual
+instances. Previously its movement affected the unrelated camera as well as the
+mover. The opt-in native probe additionally inspects the camera after a single
+Step and requires its authored origin to remain unchanged. The existing +2 mover
+assertion, pause/redraw, minimize/resume, Stop/restart and authoring byte/history
+checks remain intact. Independent source review, feature-enabled compilation and
+an actual native-window run pass on the integrated gameplay-focus correction.
+The new run observes X=10 at tick5, X=12 at tick6 and a fresh X=4 at tick2; paused
+presentation advances14→39 without ticking. No provider was called.
+[Exact sources, binary hashes, review and result](evidence/native-play-instance-isolation.json).
+This is numerical native evidence; the pending budget/splitter UI and corrected
+WebView focus interaction still require combined visual/native acceptance.

@@ -147,6 +147,17 @@ fn run(app: &tauri::AppHandle, editor: &Editor, options: &Options) -> Result<Val
         (x(&after_step)? - x(&at_pause)? - 2.).abs() < 1e-9,
         "authored script did not move two units in one step",
     )?;
+    let camera = execute(
+        editor,
+        Action::Inspect {
+            generation: paused.generation,
+            entity: "00000000000000000000000003".into(),
+        },
+    )?;
+    require(
+        camera["transform"]["translation"] == json!([0.0, 0.0, 0.0]),
+        "movement escaped its attached entity and changed the camera",
+    )?;
     execute(
         editor,
         Action::Resume {
