@@ -43,5 +43,19 @@
     "Separate private double instance/light buffers",
     "Sprites/diagnostics explicitly unsupported in retained entry point",
     "No device-performance or appearance approval"
-  ]
+  ],
+  "native_binary_integration": {
+    "base_commit": "ab5dca0",
+    "frames": 12,
+    "structural_rebuilds": 1,
+    "retained_tests_passed": 4,
+    "scoped_release_clippy": "passed",
+    "normal_dependency_guard": "passed",
+    "source_sha256": "8e5b750b9ca26ac22307fd99662477131e8611802d3c7266700b9dbfa931d8af",
+    "logs": {
+      "/tmp/incant-native-retained-union.log": "1e405aee4c0f951a9040c8e656535b204f0d5af293e2b76de016911472734843",
+      "/tmp/incant-native-retained-union-clippy.log": "957abbd6d8c3015f90021f08e4143e231cd08ae67f6ed663f85ce4d0a678ffca",
+      "/tmp/incant-native-retained-union-deps.log": "89599a5c57305b32f2d595d57da0fd60d9dcdd39b2362bc025353eec8b2d03db"
+    }
+  }
 }

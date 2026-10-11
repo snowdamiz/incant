@@ -59,3 +59,18 @@ cubes are explicitly unsupported by this native retained entry point; the existi
 ordinary authoring renderer still supports them. Native sprite/tilemap bindings,
 frame culling and the camera-relative pixel placement contract remain separate
 work. No rendered appearance approval or real-phone measurement is claimed.
+
+## Native binary integration
+
+The composed scene/audio + spatial + renderer branch also passes an actual
+`incant_cook` binary scene test: a moving native world feeds `NativeRenderInput`,
+then the retained GPU consumer, after the source project, decoded authoring store,
+source files and cooked cache are destroyed. Twelve submitted frames match fresh
+reference output exactly. A checked target failure rolls both the adapter's pose/
+tick and GPU state back to the last accepted frame, then retries successfully. A
+committed `SetSpatial` change produces exactly one prepared replacement, without
+reloading files. All four retained GPU tests and scoped renderer/adapter release
+Clippy pass on this composition. Normal dependency checks include the renderer,
+native input, game runtime and native player. This is an in-process numerical
+integration test; it does not establish compiler-free rendered player execution,
+full game-host integration or a final combined-workspace gate.

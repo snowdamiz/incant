@@ -245,3 +245,7 @@ impl RetainedScene {
 #[cfg(test)]
 #[path = "retained_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+#[path = "retained_native_tests.rs"]
+mod native_tests;
