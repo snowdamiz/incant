@@ -25,6 +25,8 @@ pub struct CookedScene {
     pub(crate) audio: Vec<crate::CookedAudio>,
     pub(crate) spatial: Vec<crate::CookedSpatial>,
     pub(crate) visual_assets: Vec<crate::VisualAssetRef>,
+    pub(crate) navigation: Vec<crate::CookedNavigation>,
+    pub(crate) prepared_navigation: crate::navigation_runtime::NavigationRuntime,
     pub(crate) topology: Vec<(usize, Option<usize>)>,
 }
 
@@ -32,6 +34,8 @@ pub const MAX_ENTITIES: usize = 1_000_000;
 
 #[derive(Debug, Error, PartialEq)]
 pub enum SceneError {
+    #[error("native navigation: {0}")]
+    Navigation(String),
     #[error("invalid scene data: {0}")]
     Invalid(&'static str),
     #[error("unsupported cooked-scene version {0}")]
@@ -81,6 +85,8 @@ impl CookedScene {
             audio: Vec::new(),
             spatial: Vec::new(),
             visual_assets: Vec::new(),
+            navigation: Vec::new(),
+            prepared_navigation: Default::default(),
         })
     }
 
@@ -102,6 +108,7 @@ impl CookedScene {
         let mut size = 72
             + self.entities.len() * 128
             + 16
+            + crate::navigation_binary::size(&self.navigation)
             + self.spatial_bytes()
             + self
                 .audio
@@ -124,6 +131,7 @@ impl CookedScene {
         }
         self.physics = physics;
         self.validate_physics_2d()?;
+        self.prepare_navigation()?;
         Ok(self)
     }
     /// Canonical checked audio nodes, separate from mixer/device state.
@@ -134,6 +142,7 @@ impl CookedScene {
         let size = 72
             + self.entities.len() * 128
             + 16
+            + crate::navigation_binary::size(&self.navigation)
             + self.spatial_bytes()
             + self
                 .physics
@@ -149,6 +158,7 @@ impl CookedScene {
         }
         self.audio = audio;
         self.validate_physics_2d()?;
+        self.prepare_navigation()?;
         Ok(self)
     }
     pub fn audio(&self) -> &[crate::CookedAudio] {
@@ -178,6 +188,7 @@ impl CookedScene {
         let size = 72
             + self.entities.len() * 128
             + 16
+            + crate::navigation_binary::size(&self.navigation)
             + self.spatial_bytes()
             + self
                 .physics
@@ -193,6 +204,7 @@ impl CookedScene {
             return Err(SceneError::Invalid("file size"));
         }
         self.validate_physics_2d()?;
+        self.prepare_navigation()?;
         Ok(self)
     }
     pub fn spatial(&self) -> &[crate::CookedSpatial] {
@@ -202,7 +214,9 @@ impl CookedScene {
         &self.visual_assets
     }
     fn spatial_bytes(&self) -> usize {
-        usize::from(self.spatial.iter().any(|n| n.flipbook.is_some())) * 4
+        usize::from(
+            !self.navigation.is_empty() || self.spatial.iter().any(|n| n.flipbook.is_some()),
+        ) * 4
             + self.visual_assets.len() * crate::spatial_binary::ASSET_BYTES
             + self
                 .spatial
@@ -224,6 +238,7 @@ impl CookedScene {
         }
         self.physics_2d = declarations;
         self.validate_physics_2d()?;
+        self.prepare_navigation()?;
         Ok(self)
     }
     pub fn physics_2d(&self) -> &[crate::CookedPhysics2D] {
@@ -280,6 +295,7 @@ impl CookedScene {
         let size = 72
             + self.entities.len() * 128
             + 20
+            + crate::navigation_binary::size(&self.navigation)
             + self.spatial_bytes()
             + self
                 .physics
@@ -299,6 +315,69 @@ impl CookedScene {
         if size > crate::binary::MAX_SCENE_BYTES {
             return Err(SceneError::Invalid("file size"));
         }
+        Ok(())
+    }
+
+    pub fn with_navigation(
+        mut self,
+        mut nodes: Vec<crate::CookedNavigation>,
+    ) -> Result<Self, SceneError> {
+        crate::navigation::canonicalize(&mut nodes)?;
+        self.navigation = nodes;
+        self.validate_physics_2d()?;
+        self.prepare_navigation()?;
+        Ok(self)
+    }
+    pub fn navigation(&self) -> &[crate::CookedNavigation] {
+        &self.navigation
+    }
+    fn prepare_navigation(&mut self) -> Result<(), SceneError> {
+        if self.navigation.is_empty() {
+            self.prepared_navigation = Default::default();
+            return Ok(());
+        }
+        let by_id: BTreeMap<_, _> = self.entities.iter().map(|e| (e.id, e)).collect();
+        let mut globals = BTreeMap::new();
+        let mut ordered = Vec::with_capacity(self.topology.len());
+        for &(index, parent) in &self.topology {
+            let entity = &self.entities[index];
+            let local = matrix(&entity.transform);
+            let global = parent.map_or(local, |p| ordered[p] * local);
+            ordered.push(global);
+            globals.insert(entity.id, global);
+        }
+        self.prepared_navigation = self.prepared_navigation.prepare(
+            self.navigation
+                .iter()
+                .cloned()
+                .map(std::sync::Arc::new)
+                .collect(),
+            |id| {
+                let e = *by_id.get(&id)?;
+                let physics = self.physics.iter().find(|p| p.entity == id);
+                let planar = self.physics_2d.iter().find(|p| p.entity == id);
+                let mesh = self
+                    .spatial
+                    .iter()
+                    .find(|p| p.entity == id)
+                    .and_then(|n| n.mesh.as_ref())
+                    .and_then(|m| self.visual_assets.iter().find(|a| a.id == m.mesh))
+                    .copied();
+                Some(crate::navigation_runtime::Input {
+                    parent: e.parent,
+                    world: globals[&id],
+                    stationary: e.velocity.as_ref().is_none_or(|v| v.linear == [0.; 3])
+                        && physics
+                            .and_then(|p| p.body.as_ref())
+                            .is_none_or(|b| b.motion == incant_types::BodyMotion::Fixed)
+                        && planar
+                            .and_then(|p| p.body.as_ref())
+                            .is_none_or(|b| b.motion == incant_types::BodyMotion::Fixed),
+                    collider: physics.map(|p| &p.collider),
+                    mesh,
+                })
+            },
+        )?;
         Ok(())
     }
 

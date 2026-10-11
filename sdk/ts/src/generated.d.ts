@@ -268,15 +268,30 @@ export namespace PhysicsRayHitSchema {
 }
 export type PhysicsRayHit = PhysicsRayHitSchema.Root;
 
+export namespace PhysicsRayHit2DSchema {
+  export type Root = { "distance": number; "entity_id": string; "normal": [number, number]; "point": [number, number] };
+}
+export type PhysicsRayHit2D = PhysicsRayHit2DSchema.Root;
+
 export namespace PhysicsRayQuerySchema {
   export type Root = { "direction": [number, number, number]; "exclude_entity"?: string | null; "filter": number; "include_sensors": boolean; "max_distance": number; "memberships": number; "origin": [number, number, number]; "scene_id": string };
 }
 export type PhysicsRayQuery = PhysicsRayQuerySchema.Root;
 
+export namespace PhysicsRayQuery2DSchema {
+  export type Root = { "direction": [number, number]; "exclude_entity"?: string | null; "filter": number; "include_sensors": boolean; "max_distance": number; "memberships": number; "origin": [number, number] };
+}
+export type PhysicsRayQuery2D = PhysicsRayQuery2DSchema.Root;
+
 export namespace PhysicsTriggerEventSchema {
   export type Root = { "entered": boolean; "first": string; "scene_id": string; "second": string };
 }
 export type PhysicsTriggerEvent = PhysicsTriggerEventSchema.Root;
+
+export namespace PhysicsTriggerEvent2DSchema {
+  export type Root = { "entered": boolean; "first": string; "second": string };
+}
+export type PhysicsTriggerEvent2D = PhysicsTriggerEvent2DSchema.Root;
 
 export namespace PlayAssertionsSchema {
   export type Check = { "expect": Expect; "name": string; "path": string; "tick": number };

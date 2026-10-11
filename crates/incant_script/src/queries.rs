@@ -58,6 +58,8 @@ impl TickQueries {
             ("raycast", Kind::Ray),
             ("computeCharacterMotion", Kind::Character),
             ("triggerEvents", Kind::Triggers),
+            ("raycast2D", Kind::Ray2D),
+            ("triggerEvents2D", Kind::Triggers2D),
         ] {
             let dt = self.dt;
             let state = Rc::clone(&self.state);
@@ -115,6 +117,12 @@ impl TickQueries {
                     }
                     // No JS runs while the solver is borrowed. Hits are owned scalars.
                     let result = match match request {
+                        Request::Ray2D(request) => {
+                            queries.raycast_2d(&request).map(ResultData::Ray2D)
+                        }
+                        Request::Triggers2D => {
+                            queries.trigger_events_2d().map(ResultData::Triggers2D)
+                        }
                         Request::Ray(request) => queries.raycast(&request).map(ResultData::Ray),
                         Request::Character(request) => queries
                             .compute_character_motion(&request, dt)

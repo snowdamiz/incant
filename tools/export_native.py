@@ -42,7 +42,7 @@ def normal_dependencies(metadata):
     require(len(pending) == 1, 'Missing unique native player')
     seen = set()
     forbidden = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook',
-                 'incant_source', 'incant_play_legacy', 'loro', 'automerge'}
+                 'incant_source', 'incant_play', 'incant_play_legacy', 'loro', 'automerge'}
     while pending:
         ident = pending.pop()
         if ident in seen:
@@ -68,7 +68,7 @@ def verify_codegen(stderr, host, split):
         require(all(actual.get(k) == v for k, v in expected.items()) and actual.get('target-cpu') != 'native',
                 f'Incorrect shipping codegen for {name}: {actual}')
         flags[name] = expected
-    forbidden = r'--crate-name (?:incant_doc|incant_cmd|incant_agent|incant_cook|incant_core|incant_source|loro|wasmtime)\b'
+    forbidden = r'--crate-name (?:incant_doc|incant_cmd|incant_agent|incant_cook|incant_core|incant_source|incant_play|loro|wasmtime)\b'
     require(not any(re.search(forbidden, line) for line in target_lines), 'Authoring dependency compiled into player target')
     return flags
 

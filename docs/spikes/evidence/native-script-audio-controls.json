@@ -1,0 +1,103 @@
+{
+  "format": "incant-native-script-audio-controls-evidence",
+  "version": 1,
+  "base": "e76e4eb8b973dec227456442f1ef622fb0a1d79f",
+  "host": "aarch64-apple-darwin",
+  "profile": "ci; local correctness, not shipping/device performance",
+  "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+  "commands": {
+    "tests": "CARGO_TARGET_DIR=/tmp/incant-script-registration-target ./tools/cargo test --locked -j2 --profile ci -p incant_runtime -p incant_script -p incant_game_runtime -p incant_audio_runtime --features incant_audio_runtime/scene",
+    "clippy": "CARGO_TARGET_DIR=/tmp/incant-script-registration-target ./tools/cargo clippy --locked -j2 --profile ci -p incant_runtime -p incant_script -p incant_game_runtime -p incant_audio_runtime -p incant_headless --all-targets --features incant_audio_runtime/scene -- -D warnings",
+    "headless": "CARGO_TARGET_DIR=/tmp/incant-script-registration-target ./tools/cargo build --locked -j2 --profile ci -p incant_headless",
+    "runtime_only": "CARGO_TARGET_DIR=/tmp/incant-script-registration-target ./tools/cargo check --locked -j2 --profile ci -p incant_script --no-default-features"
+  },
+  "checks": {
+    "tests": {
+      "passed": 254,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 34,
+      "new_behavior_tests": 9
+    },
+    "clippy": "passed",
+    "headless": "passed",
+    "compiler_disabled_host": "passed",
+    "registry": "61 freshly generated schema/agent files exactly match; no schema changes",
+    "sdk": "strict SDK/templates typecheck and generated check passed",
+    "bridge": "generated check passed; unchanged",
+    "dependencies": "authoring-free runtime/script/game/audio normal graph passed",
+    "format_conventions_whitespace": "passed"
+  },
+  "pcm_proof": {
+    "backend": "actual offline Kira renderer, with independent retained Mixer reference",
+    "modes": [
+      "static",
+      "streamed"
+    ],
+    "ticks_per_mode": 6,
+    "frames_per_tick": 800,
+    "channels": 2,
+    "sample_rate": 48000,
+    "exact_compared_scalars": 19200,
+    "operations": [
+      "source pause",
+      "source resume",
+      "source gain",
+      "bus gain"
+    ],
+    "reference_voice_preserved": true,
+    "additional_tests": [
+      "initial source start",
+      "unchanged true does not replay ended source",
+      "one-batch false/true creates no mixer edge",
+      "separate-sync false/true replays ended source",
+      "failed script silences unpublished output and terminalizes composed session"
+    ]
+  },
+  "review": {
+    "reviewer": "/root/runtime_review",
+    "mode": "read-only; no builds or edits",
+    "result": "no actionable blocker;13 frozen source/test/SDK/helper hashes verified",
+    "report_sha256": "ab06766a860c975214798630694fa9653c99dbd2ae332ac60d945fc3b8fbd34e"
+  },
+  "source_sha256": {
+    "crates/incant_game_runtime/tests/script_audio_controls.rs": "cdbb1c033af86c41f49283c9b8d3154c489646c2e7a3c7e54f68a6f24c5e16b9",
+    "crates/incant_runtime/src/audio_controls.rs": "e166e61357bf60044728155041995400b18c3078fe794002ff8508ce03ca2eeb",
+    "crates/incant_runtime/src/commands.rs": "9c271d1b797d80f5f9cba009b857f08cb4d630d7a733bc200a7a6964a5d20c3d",
+    "crates/incant_runtime/src/lib.rs": "0ed272696d3e97cb2cc5c32e0b24acf095ffc27188694645646321b34906b6b3",
+    "crates/incant_runtime/tests/audio_controls.rs": "7943b7f0bb9732950bceb2e2ecdf8e5f6b43a898f0150ebc64f96bf054d78e66",
+    "crates/incant_runtime/tests/support/audio_controls.rs": "50d8c367463a8a200c4dceafb9583d1dcf393549397e08c07ef9281b36ec77b7",
+    "crates/incant_script/build.rs": "ca1e1af5a8aa314b26e414e6c0ac0afe67a254c684b5dc544d5ad583da5a6f6f",
+    "crates/incant_script/src/audio_commands.rs": "195c9168520c83db7488ae082791c839177530629d5c05a9d082062b4955c63d",
+    "crates/incant_script/src/commands.rs": "0825b53498b2784f545ad08c5097d0393b1dee5bdf20ed09cacc3fd619d178d8",
+    "crates/incant_script/src/lib.rs": "3f01d033b93e7bc94123ca0db30d7eb99273476463303dd08dc240edd40c99fc",
+    "crates/incant_script/tests/audio_controls.rs": "ffc1a8cd2c64cc7964cd31ee26348ed9b3bb86a69fe1fec6ce613aa78df2d94c",
+    "sdk/templates/native-audio/controls.ts": "c2f69189670ea8c09275d6292ffb25fecdf02b400e0ec4f4a180a9a628379ae1",
+    "sdk/ts/src/native.d.ts": "22af3e0d560d517d56b2168863973a96d905c548eb0d349af7ebaf8dd445b124"
+  },
+  "logs": {
+    "incant-script-audio-tests.log": {
+      "sha256": "0c398c516b61109ad65118260849161501cdb5a4fbcfaef77dfabde27b2dce66",
+      "bytes": 30517
+    },
+    "incant-script-audio-clippy.log": {
+      "sha256": "e901a0bb774aed375993602968293f051121c59b39c77272fe4950431e6778d0",
+      "bytes": 1394
+    },
+    "incant-script-audio-headless.log": {
+      "sha256": "3f974554f9a4c223332ffb06f372e97421406c23b9c4b89a7f7589759ad81336",
+      "bytes": 1395
+    },
+    "incant-script-audio-runtime-check.log": {
+      "sha256": "c13bee3721cc4cfe07cb04dd6373adae6d8665ff81687afee0575514f4782f03",
+      "bytes": 293
+    }
+  },
+  "limits": [
+    "native QuickJS only; no Wasm/static/browser parity claim",
+    "desired pause/resume state; no stop, seek or restart transport operation",
+    "no clip loading, source/routing/topology authoring or audio-state query API",
+    "audio-used save refusal unchanged; no complete session/device rollback claim",
+    "local offline PCM and CI-profile correctness; no speakers/GPU/device/performance or phase gate"
+  ]
+}

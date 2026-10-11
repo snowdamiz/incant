@@ -35,7 +35,9 @@ private permissions and the non-root server. The checkpoint also found macOS
 Python process-observation and Windows native TypeScript startup failures. All eight workflows are now terminal: 20 required contexts passed and these three failed.
 The combined reviewed repairs pass 199 Python tests (four Windows-only skips),
 17 Node tests and scoped native compiler checks. All failures remain recorded;
-no failed checkpoint is promoted. [Combined evidence](docs/spikes/checkpoint-2-portability.md).
+no failed checkpoint is promoted. PR89 merged after its 126-second fast check;
+checkpoint 3 is frozen at repaired main89 with all 23 contexts retained.
+[Combined evidence](docs/spikes/checkpoint-2-portability.md).
 [Service correction evidence](docs/spikes/local-service-foundation.md#linux-private-bootstrap-correction).
 
 ## Authored source and native package — locally integrated
@@ -55,6 +57,16 @@ window package execution and complete UI/export/device gates remain open.
 
 ## Current integration and parallel work
 
+The closed retained-state / native SDK / shared Play-startup union passes 837
+ordinary and 75 serialized GPU tests, full Clippy, 536 UI tests and the fresh
+four-player shipping proof. Audio and navigation preparation now precede all
+publication, with a combined atomic-refusal regression. World-save v2 remains
+world-only; solver/audio/VM continuation and editor controls remain open.
+The repaired main89 integration also passes two actual compiler cases, 51
+Play/headless tests, scoped Clippy, the 32-request public source proof and 199
+Python tests (four Windows-only skips).
+[Integrated evidence](docs/spikes/native-state-play-union.md).
+
 - Checkpoint 2 Windows native TypeScript startup has a reviewed local path adapter
   correction: fixed engine-relative entry and canonical-equivalent ordinary launch
   cwd; the scrubbed environment remains unchanged. Nine local tests and scoped
@@ -64,7 +76,7 @@ window package execution and complete UI/export/device gates remain open.
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
-| Local service foundation | Digest-pinned Postgres/S3-compatible storage/Zitadel/SMTP capture with private generated state and loopback-only access passes 28 actual local protocol checks plus four restart-persistence checks after integration with actual main84. Private state-home refusal and complete SMTP body verification are covered by 16 scoped tests; all 154 Python and 17 Node tooling tests pass. | Independent scoped review accepted the foundation; checkpoint 2 exposed the Linux private-config ownership issue. Its reviewed correction passes the actual local protocol and restart controls. The candidate-only `local-service-protocols` context is now required among 23 checks; corrected hosted execution remains pending. Accounts/player services, PITR, other local substitutes and real provider/device gates remain. [Evidence](docs/spikes/local-service-foundation.md). |
+| Local service foundation | Digest-pinned Postgres/S3-compatible storage/Zitadel/SMTP capture with private generated state and loopback-only access passes 28 actual local protocol checks plus four restart-persistence checks after integration with actual main84. Private state-home refusal and complete SMTP body verification are covered by 16 scoped tests; all 154 Python and 17 Node tooling tests pass. | Independent scoped review accepted the foundation; checkpoint 2 exposed the Linux private-config ownership issue. Its reviewed correction passes the actual local protocol and restart controls. The candidate-only `local-service-protocols` context is now required among 23 checks; checkpoint 3 has passed all 28 protocol and four restart/persistence controls on hosted Linux AMD64. Accounts/player services, PITR, other local substitutes and real provider/device gates remain. [Evidence](docs/spikes/local-service-foundation.md). |
 | Script-source transactions | Shared `write_script` combines one bounded `.ts` content edit with registration and attachment, with exact-preimage Undo/Redo, actor provenance and recoverable Prepare/Commit/Abort history. Registered-ID read/write tools and trusted editor/headless adapters use the same bus. | Locally: 145 scoped tests, Clippy, 59 generated contracts and 32 real RPC requests across two processes pass, including native motion and crash recovery. Source/compiler/package integration now passes the actual recovery guard and source-deleted shipping proof; existing three-OS checkpoint CI will collect platform execution evidence. Multi-file authoring, reconciliation UI, a script editor and complete agent-created gameplay remain open. [Evidence](docs/spikes/script-source-transactions.md). |
 | Import completion and Undo | Native imports return an exact revision/transaction receipt; unchanged imports preserve history and redo without offering stale Undo. Claude 0038 accepted the browser completion copy on frozen source. | The original PLAN revision 8/import union is included in merged PR76 and PR80 after their full applicable checks passed; 534 UI tests and the scoped native receipt/Undo checks pass. [Evidence](docs/spikes/editor-import-receipts.md). |
 | Native TypeScript cooking | Project-attached sources now cook once into grouped native behaviors with frozen per-entity props, scoped timers and atomic whole-tick rollback. 730 workspace tests, 98 Python/17 Node/536 UI tests and a 16-process source-deleted embedding proof pass locally. | Reviewed local implementation; editor controls, source editing, complete SDK/save/export integration and hosted/device gates remain. [Attached scripts](docs/spikes/native-project-scripts.md), [embedding proof](docs/spikes/native-project-script-embedding.md). |

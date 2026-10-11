@@ -3,15 +3,29 @@
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod audio;
 mod audio_binary;
+mod audio_controls;
+pub use audio_controls::AudioControl;
 mod binary;
 mod columns;
 mod commands;
 mod flipbook;
 mod flipbook_binary;
 mod hierarchy;
+mod navigation;
+mod navigation_binary;
+mod navigation_runtime;
 pub use flipbook::{
     FlipbookControl, FlipbookSnapshot, FlipbookState, FrameRate, MAX_FLIPBOOK_FRAMES,
     MAX_SCENE_FLIPBOOK_FRAMES, NativeFlipbook,
+};
+pub use incant_nav::{
+    GridPath, GridPathRequest, NavigationGeometry, NavigationGrid, NavigationPath,
+    NavigationSettings, PathRequest, RebuildReport,
+};
+pub use navigation::{
+    CookedNavigation, MAX_NAVIGATION_DEPENDENCIES, MAX_NAVIGATION_GRIDS, MAX_NAVIGATION_LINKS,
+    MAX_NAVIGATION_MESHES, MAX_NAVIGATION_SOURCES, NativeNavigationGeometry, NativeNavigationLink,
+    NativeNavigationMesh, NativeNavigationSource,
 };
 mod physics;
 mod physics_2d;

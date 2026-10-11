@@ -1,0 +1,85 @@
+{
+  "recorded_at": "2026-10-11T17:00:07.459580+00:00",
+  "source_base": "f46957984a39803a0b190da163545859e2cf4eef",
+  "source_hashes": {
+    "Cargo.lock": "6c00624e65369b707dcbe2a06775623929296893fde350bb6e1e096287acca6b",
+    "crates/incant_headless/Cargo.toml": "48fed25224fb803f0529cadcaa8ae1e057dd3b84635596b16c968b1824d2fa79",
+    "crates/incant_headless/src/native_play.rs": "dd9a348061af17b29a27c581982dbc5df1f4f46623b40c44eb053c942fdd1245",
+    "crates/incant_headless/src/native_play/session.rs": "eb8c527ae60b8ba5baf59fd137f601310ea7a831ae5ade90c6edb39e142669a8",
+    "crates/incant_play/Cargo.toml": "b4116892d104ab51bc7956f96b2f5b9c3f42fbd0085e8cadde406f10151ae081",
+    "crates/incant_play/src/lib.rs": "14ef2501174196e4ec5121f7a15a14bd7c8b1473ac6b5e9514ec0d0e23e2d529",
+    "crates/incant_play/tests/startup.rs": "45c84351722cd3ce399e5bfd976655d0717ee6038496fae49aa4655c46be0d6b",
+    "tools/check_runtime_dependencies.py": "f0e77c74f2e0b8fcbcde0b65b40b379fd58cac32bcec0bc3891c9f45c7b3d917",
+    "tools/export_native.py": "99b9b2142436b923af37f712377bd1f3ddc238c8f4664abb7e96462c5309850a",
+    "tools/tests/test_runtime_dependencies.py": "df02d4386aea54da9b75b2dbf9f4dd4efbdbe5617b59e2bd7182482353a0aaad"
+  },
+  "review": {
+    "result": "accepted",
+    "reviewer": "astra /root/script_registration",
+    "report_sha256": "4c5cc2c813c9f9554927850a58b65029e5275347a8ae7e7741ef8d9ee32fc54e"
+  },
+  "local_checks": {
+    "rust_ordinary_passed": 51,
+    "gpu_passed_separately": 2,
+    "python_passed": 13,
+    "clippy": "passed",
+    "build": "passed",
+    "authoring_free_player_graph": "passed with project and native-window features",
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-native-editor-startup-tests.log",
+        "sha256": "4f18274a18fcb2f9f2983d6dcddbec87bb605a621e210865dc963f01e273e574"
+      },
+      "gpu": {
+        "path": "/tmp/incant-native-editor-startup-gpu.log",
+        "sha256": "b16697c714433a8bd83b6d6d6a480112a7836868efdf60fac20905e2d8c7456e"
+      },
+      "clippy": {
+        "path": "/tmp/incant-native-editor-startup-clippy.log",
+        "sha256": "20fb1e3373ac12b02a0812f5865f8109d4e3e1d5f3100c5e3d879e6bb73b22e9"
+      },
+      "build": {
+        "path": "/tmp/incant-native-editor-startup-build.log",
+        "sha256": "0662fc5dfd47f29bb07a252c68adc0dcd2934a62e5c7a4c78f899a27a8e53de1"
+      },
+      "guard": {
+        "path": "/tmp/incant-native-editor-startup-guard.log",
+        "sha256": "bf674117d6eeb880e4f8f15b8c467d308daf1057d6d97089b98285c850b40ddc"
+      },
+      "package-tests": {
+        "path": "/tmp/incant-native-editor-startup-package-tests.log",
+        "sha256": "37d8a0769d6c800296764c21f8e08feca52d770d400afabe65713604062cf749"
+      },
+      "guard-tests": {
+        "path": "/tmp/incant-native-editor-startup-guard-tests.log",
+        "sha256": "fe836cbecd3b6b4f70bec51b58d30c3e45ad72ae7fb3cb63421a0f7337e651ae"
+      }
+    }
+  },
+  "public_rpc": {
+    "passed": true,
+    "processes": 2,
+    "rpc_requests": 32,
+    "ticks_per_play": 20,
+    "translations_x": [
+      2.0000000000000004,
+      4.000000000000001,
+      2.0000000000000004,
+      4.000000000000001,
+      2.0000000000000004
+    ],
+    "content_authored_only_through_command_bus": true,
+    "registration_content_attachment_one_transaction": true,
+    "undo_redo_and_recovery": true,
+    "authoring_unchanged_by_play": true,
+    "gpu_submitted": false,
+    "reference_phone_gate": false,
+    "binary_sha256": "466d3462a98849a401c769ec8852977bad81b4b02f88e7f467ff77ec50d3d87a"
+  },
+  "limits": [
+    "Shared authoring startup only; native editor controls/viewport integration are not implemented by this change.",
+    "GPU checks are existing headless regression cases, not a new editor or pixel review.",
+    "Prepared cache paths remain the consuming host responsibility.",
+    "No hosted cross-platform, reference-phone performance or phase gate claim."
+  ]
+}
