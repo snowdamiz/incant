@@ -1,0 +1,19 @@
+{
+  "scope": "Read-only LOCAL macOS estimate, not hosted cache archive decomposition. Selects files using pinned Swatinem cleanup package/target-name rules without deleting anything. Includes own target debug/release variants; differs from each hosted family. zstd default level3,2threads; tar headers/layout may differ from GitHub action. No source or cache policy changed.",
+  "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+  "cleanup_source_sha256": "f61e000ae20f72f64ca6baf8fad699175e2a54186191300501790cc2a1840fc2",
+  "parts": {
+    "registry": {
+      "selected_roots": 1615,
+      "file_count": 7597,
+      "uncompressed_file_bytes": 393409603,
+      "compressed_tar_bytes": 150782417
+    },
+    "third_party_target": {
+      "selected_roots": 8196,
+      "file_count": 18287,
+      "uncompressed_file_bytes": 5184418254,
+      "compressed_tar_bytes": 1487336402
+    }
+  }
+}

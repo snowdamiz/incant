@@ -3616,6 +3616,8 @@ name = "incant_audio_runtime"
 version = "0.0.1"
 dependencies = [
  "incant_assets_runtime",
+ "incant_runtime",
+ "incant_types",
  "kira",
  "schemars 1.2.2",
  "serde",
@@ -3644,11 +3646,14 @@ dependencies = [
 name = "incant_cook"
 version = "0.0.1"
 dependencies = [
+ "incant_assets",
+ "incant_assets_runtime",
  "incant_doc",
  "incant_runtime",
  "incant_script",
  "serde_json",
  "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
  "ulid",
 ]
@@ -3704,6 +3709,36 @@ dependencies = [
  "serde_json",
  "tauri",
  "tauri-build",
+ "tempfile",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "incant_game_player"
+version = "0.0.1"
+dependencies = [
+ "incant_assets_runtime",
+ "incant_audio_runtime",
+ "incant_cook",
+ "incant_game_runtime",
+ "incant_input",
+ "incant_runtime",
+ "incant_script",
+ "serde_json",
+]
+
+[[package]]
+name = "incant_game_runtime"
+version = "0.0.1"
+dependencies = [
+ "incant_assets_runtime",
+ "incant_audio_runtime",
+ "incant_input",
+ "incant_runtime",
+ "incant_script",
+ "incant_types",
+ "kira",
+ "serde_json",
  "tempfile",
  "thiserror 2.0.21",
 ]

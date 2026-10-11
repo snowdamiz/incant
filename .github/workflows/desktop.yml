@@ -51,17 +51,17 @@ jobs:
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm test --workspace editor/ui
-      - run: cargo test --workspace --release --locked --timings
+      - run: cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings
       - run: cargo check -p incant_audio --features device --locked
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.
       # Keep the same workspace feature graph as the preceding test run; scoped
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
-        run: cargo test --workspace --release --locked --timings -- --ignored --test-threads=1 --nocapture
+        run: cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings -- --ignored --test-threads=1 --nocapture
       # Keep workspace feature unification from the release tests while building
       # only the editor, headless and cook tools used below.
-      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol --locked --timings
+      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --release --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python tools/shipping.py artifacts/shipping-runtime
       - name: Verify Windows executables do not require redistributable CRT DLLs

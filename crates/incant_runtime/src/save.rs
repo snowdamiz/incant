@@ -26,6 +26,10 @@ pub enum SaveError {
     WorldMismatch,
     #[error("physics world save/restore is not supported")]
     PhysicsUnsupported,
+    #[error("audio playback cursor save/restore is not supported")]
+    AudioUnsupported,
+    #[error("spatial asset/configuration save/restore is not supported")]
+    SpatialUnsupported,
 }
 
 impl NativeWorld {
@@ -36,6 +40,12 @@ impl NativeWorld {
     /// The schema versions/component masks come from the nested cooked scene.
     /// Invalid numeric state fails without changing the running world.
     pub fn save_bytes(&self) -> Result<Vec<u8>, SaveError> {
+        if self.spatial_used {
+            return Err(SaveError::SpatialUnsupported);
+        }
+        if self.audio_used {
+            return Err(SaveError::AudioUnsupported);
+        }
         if self.physics_failed || self.physics_used {
             return Err(SaveError::PhysicsUnsupported);
         }
@@ -94,6 +104,12 @@ impl NativeWorld {
             return Err(SaveError::Integrity);
         }
         let scene = CookedScene::from_bytes(&bytes[HEADER..])?;
+        if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
+            return Err(SaveError::SpatialUnsupported);
+        }
+        if !scene.audio().is_empty() {
+            return Err(SaveError::AudioUnsupported);
+        }
         if !scene.physics().is_empty() {
             return Err(SaveError::PhysicsUnsupported);
         }
@@ -106,13 +122,29 @@ impl NativeWorld {
     /// A malformed, unsupported or different-world save leaves it untouched.
     /// External script hosts and command buffers are not restored by this API.
     pub fn restore_bytes(&mut self, bytes: &[u8]) -> Result<(), SaveError> {
+        if self.spatial_used {
+            return Err(SaveError::SpatialUnsupported);
+        }
+        if self.audio_used {
+            return Err(SaveError::AudioUnsupported);
+        }
         if self.physics_failed || self.physics_used {
             return Err(SaveError::PhysicsUnsupported);
         }
-        let candidate = Self::from_save_bytes(bytes)?;
+        let mut candidate = Self::from_save_bytes(bytes)?;
         if candidate.scene_id() != self.scene_id() || candidate.tick_rate != self.tick_rate {
             return Err(SaveError::WorldMismatch);
         }
+        // Restoring may replace topology even at the same saved tick. Never
+        // reuse this instance's retained consumer cache generation.
+        candidate.topology_generation = self
+            .topology_generation
+            .checked_add(1)
+            .ok_or(SaveError::Invalid("spatial generation exhausted"))?;
+        candidate.binding_generation = self
+            .binding_generation
+            .checked_add(1)
+            .ok_or(SaveError::Invalid("spatial generation exhausted"))?;
         *self = candidate;
         Ok(())
     }

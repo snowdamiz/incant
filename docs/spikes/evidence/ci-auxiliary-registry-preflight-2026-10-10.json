@@ -1,0 +1,219 @@
+{
+  "action": "Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+  "action_config_sha256": "66257e183e21f00907abf526923c94e986a64a2fae7c38b1ee2f9576fb8465d7",
+  "method": "Apply the pinned CacheConfig shared-key prefix construction to all eight observed same-head keys. cache-targets changes cached paths, not compiler/environment/manifest hashing. This derives exact expected keys; new hosted restore/save and compressed sizes remain pending.",
+  "key_namespace_count": 3,
+  "derived_keys": [
+    "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-61680e07",
+    "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-61680e07",
+    "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-61680e07"
+  ],
+  "rows": [
+    {
+      "label": "pr56-credential-Mac",
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "job_id": 114331277714,
+      "observed_existing_key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-61680e07",
+      "derived_new_key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-61680e07",
+      "execution_seconds": 46.0,
+      "queue_seconds": 92.0,
+      "old_restore_key": "v0-rust-Desktop credential persistence-macOS-ARM64-storage-Darwin-arm64-791fe27b-1340c12d",
+      "old_restore_bytes": "417622614",
+      "raw_log_sha256": "dd7d81fc006035e0f948e92cc1bf20a9a60cd08cc968f00f22866039b257b411"
+    },
+    {
+      "label": "pr56-credential-Linux",
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "job_id": 114331277605,
+      "observed_existing_key": "v0-rust-Desktop credential persistence-Linux-X64-storage-Linux-x64-b9e20461-61680e07",
+      "derived_new_key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-61680e07",
+      "execution_seconds": 142.0,
+      "queue_seconds": 2.0,
+      "old_restore_key": null,
+      "old_restore_bytes": null,
+      "raw_log_sha256": "a861a77b996c2d4ce3b57db9eb02bac3e18ce3fadf12740605cc621ec57abe40"
+    },
+    {
+      "label": "pr56-credential-Windows",
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "job_id": 114331277697,
+      "observed_existing_key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-61680e07",
+      "derived_new_key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-61680e07",
+      "execution_seconds": 103.0,
+      "queue_seconds": 6.0,
+      "old_restore_key": "v0-rust-Desktop credential persistence-Windows-X64-storage-Windows_NT-x64-773408be-1340c12d",
+      "old_restore_bytes": "475355315",
+      "raw_log_sha256": "3b954ef7a3ad057d47111965674093e7badb960b41a82adc2d93a7beff3c7177"
+    },
+    {
+      "label": "pr56-platform-Mac",
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "job_id": 114331289310,
+      "observed_existing_key": "v0-rust-Six platform probes-macOS-ARM64-desktop-Darwin-arm64-791fe27b-61680e07",
+      "derived_new_key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-61680e07",
+      "execution_seconds": 82.0,
+      "queue_seconds": 347.0,
+      "old_restore_key": "v0-rust-Six platform probes-macOS-ARM64-desktop-Darwin-arm64-791fe27b-1340c12d",
+      "old_restore_bytes": "424888897",
+      "raw_log_sha256": "8ba5fe92859e232d146b17cfa7d22a315c416221307ce7280bf2af676f12ec9b"
+    },
+    {
+      "label": "pr56-platform-Linux",
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "job_id": 114331289406,
+      "observed_existing_key": "v0-rust-Six platform probes-Linux-X64-desktop-Linux-x64-b9e20461-61680e07",
+      "derived_new_key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-61680e07",
+      "execution_seconds": 59.0,
+      "queue_seconds": 400.0,
+      "old_restore_key": "v0-rust-Six platform probes-Linux-X64-desktop-Linux-x64-b9e20461-1340c12d",
+      "old_restore_bytes": "426177219",
+      "raw_log_sha256": "91777f467df9f9d7449523288431dbc10a9d785987f1928fd0b722d89224d2bd"
+    },
+    {
+      "label": "pr56-platform-Windows",
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "job_id": 114331289407,
+      "observed_existing_key": "v0-rust-Six platform probes-Windows-X64-desktop-Windows_NT-x64-773408be-61680e07",
+      "derived_new_key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-61680e07",
+      "execution_seconds": 145.0,
+      "queue_seconds": 32.0,
+      "old_restore_key": "v0-rust-Six platform probes-Windows-X64-desktop-Windows_NT-x64-773408be-1340c12d",
+      "old_restore_bytes": "444582320",
+      "raw_log_sha256": "a2ebbe7aabe8277a0b9cc92dd722925df2cc987e50a9ca61f1a30cbfc15c112c"
+    },
+    {
+      "label": "pr56-web",
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "job_id": 114331289450,
+      "observed_existing_key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-61680e07",
+      "derived_new_key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-61680e07",
+      "execution_seconds": 98.0,
+      "queue_seconds": 357.0,
+      "old_restore_key": "v0-rust-Six platform probes-Linux-X64-web-Linux-x64-b9e20461-1340c12d",
+      "old_restore_bytes": "597699504",
+      "raw_log_sha256": "6cb7d6002f2ef60ba365c3f92320c32a26e472ce97aa63f53b80a4e397f8ec21"
+    },
+    {
+      "label": "pr56-android",
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "job_id": 114331289436,
+      "observed_existing_key": "v0-rust-Six platform probes-Linux-X64-android-Linux-x64-b9e20461-61680e07",
+      "derived_new_key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-61680e07",
+      "execution_seconds": 249.0,
+      "queue_seconds": 106.0,
+      "old_restore_key": "v0-rust-Six platform probes-Linux-X64-android-Linux-x64-b9e20461-1340c12d",
+      "old_restore_bytes": "899431855",
+      "raw_log_sha256": "80fe3023c2084202f9807ca4ab072e3acb9a59ccd0dee8d3fc224abb629c600e"
+    }
+  ],
+  "workflow_semantic_equality": {
+    "base": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+    "only_four_cache_input_maps_changed": {
+      ".github/workflows/credentials.yml": 1,
+      ".github/workflows/nightly.yml": 3
+    },
+    "expanded_families": 8,
+    "all_commands_steps_permissions_triggers_unchanged": true
+  },
+  "capacity": {
+    "name": "plus_android_web",
+    "old_ids": [
+      8780787844,
+      8780799870,
+      8780777374,
+      8780883154,
+      8780995675,
+      8780909132,
+      8780952278,
+      8780916771
+    ],
+    "old_archive_bytes": 4252113850,
+    "currently_present_old_bytes": 3685757724,
+    "no_aux_cache_steady_bytes": 6344452056,
+    "shared_registry_projection": {
+      "lower": {
+        "registry_bytes": 225000000,
+        "steady_bytes": 6569452056,
+        "with_largest_and_reserve": 8686795581,
+        "with_observed_mac_windows_overlap_and_reserve": 9993274438,
+        "with_three_native_overlap_and_reserve": 11555927558
+      },
+      "local_central": {
+        "registry_bytes": 452347251,
+        "steady_bytes": 6796799307,
+        "with_largest_and_reserve": 8914142832,
+        "with_observed_mac_windows_overlap_and_reserve": 10220621689,
+        "with_three_native_overlap_and_reserve": 11783274809
+      },
+      "upper": {
+        "registry_bytes": 600000000,
+        "steady_bytes": 6944452056,
+        "with_largest_and_reserve": 9061795581,
+        "with_observed_mac_windows_overlap_and_reserve": 10368274438,
+        "with_three_native_overlap_and_reserve": 11930927558
+      }
+    }
+  },
+  "quota_bytes": 10737418240,
+  "proposed_reserve_bytes": 268435456,
+  "actual_new_archive_sizes": null,
+  "actual_new_upload_and_restore": null,
+  "limitations": [
+    "runner labels partition registries; this does not pin future hosted image versions. Registry contents remain locked/checksummed sources. Native/iOS target namespaces remain unchanged.",
+    "Different future environment/manifest inputs can produce additional generations, so this is not a permanent three-entry or quota guarantee.",
+    "No cache deletion, seed dispatch, permission, package resolution or test coverage change."
+  ],
+  "integrated_physics_base": "aecee49908f22bceb9c020c9b0a67506df9467b1",
+  "integrated_workflow_semantic_equality": {
+    "base": "aecee49908f22bceb9c020c9b0a67506df9467b1",
+    "only_four_cache_input_maps_changed": {
+      ".github/workflows/credentials.yml": 1,
+      ".github/workflows/nightly.yml": 3
+    },
+    "expanded_families": 8,
+    "all_commands_steps_permissions_triggers_unchanged": true
+  },
+  "integrated_source_preserved": "git diff aecee499 -- crates Cargo.toml Cargo.lock editor sdk tools .cargo ci.yml desktop.yml physics-candidates.yml is empty; only the same four cache input maps differ in the two remaining workflows.",
+  "integrated_tools_tests": 40,
+  "first_head_actual_key_jobs": [
+    {
+      "head": "5548a318d5db03ba8e9c51109a6c874409fcfda3",
+      "job_id": 114335061582,
+      "run_id": 38093677423,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-macos-latest-Darwin-arm64-791fe27b-61680e07",
+      "restored_cache_key": null,
+      "save_if": "false",
+      "execution_seconds": 127.0,
+      "queue_seconds": 94.0,
+      "log_sha256": "6f3e95e592a6895bd9184cca3502f9570739ebd44ac564fbcbc1df75818ccd0b"
+    },
+    {
+      "head": "5548a318d5db03ba8e9c51109a6c874409fcfda3",
+      "job_id": 114335061497,
+      "run_id": 38093677423,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-windows-latest-Windows_NT-x64-773408be-61680e07",
+      "restored_cache_key": null,
+      "save_if": "false",
+      "execution_seconds": 258.0,
+      "queue_seconds": 2.0,
+      "log_sha256": "cd2c5ab6a9ebe8ebed5f47c5e03b29dbb078de4868b6a8878a51200250701488"
+    },
+    {
+      "head": "5548a318d5db03ba8e9c51109a6c874409fcfda3",
+      "job_id": 114335061338,
+      "run_id": 38093677423,
+      "requested_cache_key": "v0-rust-auxiliary-registry-v1-ubuntu-latest-Linux-x64-b9e20461-61680e07",
+      "restored_cache_key": null,
+      "save_if": "false",
+      "execution_seconds": 142.0,
+      "queue_seconds": 1.0,
+      "log_sha256": "5b904aa17c6e3a270c24977b196da57d7c4b2f6e8b3e6f9ba88ae551233c4b95"
+    }
+  ],
+  "first_head_actual_namespace_count": 3,
+  "first_head_actual_key_caveat": "These completed cold credential jobs prove the predicted key construction and no PR writes on5548a31. The integrated physics head changes the manifest/lock suffix and requires its own checks. New compressed registry saves/restores remain pending.",
+  "inherited_corrections": [
+    "a1c7be60deeab291c2fa4b19c7ca7b333fe92d86: explicit UTF-8 Cargo capture and regressions",
+    "aecee49908f22bceb9c020c9b0a67506df9467b1: canonical physics source-report paths; strict comparator unchanged"
+  ]
+}

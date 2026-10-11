@@ -1,88 +1,23 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import axe from 'axe-core';
 import { afterEach, describe, expect, it } from 'vitest';
-import { App } from '../../App';
-import { snapshotFromEngine } from '../../../../bridge/native';
-import type { EngineRead } from '../../../../bridge/native';
-import type { BridgeSnapshot, ComponentSchema, Diagnostic, EditorBridge } from '../../bridge/contract';
-import { createFixtureBridge, fixtureSnapshot } from '../../bridge/fixture';
+import type { Diagnostic } from '../../bridge/contract';
+import { FIXTURE_VARIANTS, fixtureSnapshot } from '../../bridge/fixture';
+import { LEGACY, PIXEL, description, expectFieldOfViewLive, inspect, nativeCamera, regionOf, rows } from '../../test/cameraInspector';
 import { FieldView, formatNumber, presentableDefault } from './FieldView';
-import { isOrthographicCamera, isPixelPerfectCamera } from './presentation';
+import { isOrthographicCamera } from './presentation';
+
+/*
+ * The Camera Inspector against main's native schema (schemas/Camera.schema.json):
+ * perspective, orthographic and pixel-perfect projections. Pixel-specific behavior
+ * is covered by PixelCameraFields.test.tsx against the same generated schema.
+ */
 
 afterEach(cleanup);
 
-/** The real bridge conversion of the Rust-generated Camera schema, as the native editor sees it. */
-function nativeCamera(): ComponentSchema {
-  const schema = JSON.parse(readFileSync(resolve(__dirname, '../../../../../schemas/Camera.schema.json'), 'utf8'));
-  const read = {
-    project: { id: '00000000000000000000000001', name: 'Cameras', scenes: {} },
-    revision: 1,
-    can_redo: false,
-    history: [],
-    applied: 0,
-    schemas: { Camera: schema },
-    console: [],
-    viewport_error: null,
-  } as unknown as EngineRead;
-  return snapshotFromEngine(read).schemas.Camera!;
-}
-
 const NATIVE = nativeCamera();
-const LEGACY = { fov_degrees: 60, near: 0.1, far: 100 };
-const PIXEL = { kind: 'pixel_perfect', pixels_per_unit: 32, reference_resolution: [320, 180] };
-
-/** Field of view carries no "Unused" tag: it is live, or the projection is not well-formed. */
-function expectFieldOfViewLive(camera: { getByRole: (role: string, options: { name: string }) => HTMLElement }) {
-  const fov = camera.getByRole('textbox', { name: 'Field of view' });
-  expect(fov.closest('.field')?.querySelector('.control__tag')).toBeNull();
-  expect(description(fov)).not.toContain('Not used');
-}
-
-/** Mounts the real editor on the sample fixture with this value on the Camera Rig. */
-async function inspect(value: unknown, diagnostics: readonly Diagnostic[] = []) {
-  const base = fixtureSnapshot('sample');
-  const rig = Object.values(base.entities).find((entity) => entity.name === 'Camera Rig')!;
-  const snapshot: BridgeSnapshot = {
-    ...base,
-    entities: {
-      ...base.entities,
-      [rig.id]: {
-        ...rig,
-        components: rig.components.map((c) => (c.type === 'Camera' ? { ...c, value: value as Record<string, unknown> } : c)),
-      },
-    },
-    diagnostics: [...base.diagnostics, ...diagnostics.map((d) => ({ ...d, entity: rig.id }))],
-  };
-  const bridge: EditorBridge = {
-    ...createFixtureBridge('sample'),
-    getSnapshot: () => snapshot,
-    subscribe: () => () => undefined,
-  };
-  render(<App resolution={{ kind: 'bridge', bridge }} />);
-  fireEvent.click(screen.getByRole('treeitem', { name: /^Camera Rig/ }));
-  const inspector = document.querySelector<HTMLElement>('[data-region="inspector"]')!;
-  return within(await waitFor(() => within(inspector).getByRole('region', { name: 'Camera' })));
-}
-
-const description = (element: Element) =>
-  (element.getAttribute('aria-describedby') ?? '')
-    .split(' ')
-    .filter(Boolean)
-    .map((id) => document.getElementById(id)?.textContent ?? '')
-    .join(' ');
-
-/** Visible row text: label, then the value box's text and input value. */
-type Queries = { getAllByRole: (role: string) => HTMLElement[] };
-const regionOf = (camera: Queries) => camera.getAllByRole('textbox')[0]!.closest<HTMLElement>('section.component')!;
-const rows = (camera: Queries) =>
-  Array.from(regionOf(camera).querySelectorAll<HTMLElement>('.field')).map((row) => {
-    const label = row.querySelector('.field__label')?.textContent ?? '';
-    const box = row.querySelector('.field__value')!;
-    const input = box.querySelector('input');
-    return `${label}: ${input ? input.value : ''} ${box.textContent ?? ''}`.replace(/\s+/g, ' ').trim();
-  });
+const variantsOf = (schema: typeof NATIVE) =>
+  (schema.properties.projection as { variants: Record<string, { properties: Record<string, Record<string, unknown>> }> }).variants;
 
 describe('native Camera schema', () => {
   it('reaches the Inspector with projection as an optional perspective/orthographic/pixel-perfect union', () => {
@@ -97,17 +32,16 @@ describe('native Camera schema', () => {
     // Units come from Rust metadata, not from the Inspector profile.
     expect(['fov_degrees', 'near', 'far'].map((key) => (NATIVE.properties[key] as { 'x-incant-unit'?: string })['x-incant-unit']))
       .toEqual(['°', 'm', 'm']);
-    const variants = (projection as { variants: Record<string, { properties: Record<string, Record<string, unknown>> }> }).variants;
+    // Exactly the projections the generated Rust schema declares.
+    const variants = variantsOf(NATIVE);
     expect(Object.keys(variants)).toEqual(['perspective', 'orthographic', 'pixel_perfect']);
-    const pixel = variants.pixel_perfect!.properties;
-    expect(Object.keys(pixel)).toEqual(['kind', 'pixels_per_unit', 'reference_resolution']);
-    expect(pixel.pixels_per_unit).toMatchObject({ type: 'number', minimum: 1, maximum: 4096, 'x-incant-unit': 'px/m' });
-    expect(pixel.reference_resolution).toMatchObject({
-      type: 'array',
-      items: { type: 'integer' },
-      minItems: 2,
-      maxItems: 2,
-      'x-incant-unit': 'px',
+    expect(Object.keys(variants.perspective!.properties)).toEqual(['kind']);
+    const orthographic = variants.orthographic!.properties;
+    expect(Object.keys(orthographic)).toEqual(['kind', 'vertical_size']);
+    expect(orthographic.vertical_size).toMatchObject({
+      type: 'number',
+      'x-incant-unit': 'm',
+      description: 'Visible world-space height. Width follows the output aspect ratio.',
     });
   });
 
@@ -250,12 +184,13 @@ describe('Camera Inspector', () => {
     expect(screen.getByText('Read-only')).toBeTruthy();
   });
 
-  it('has no axe violations for legacy, orthographic, pixel-perfect and malformed cameras', async () => {
+  it('has no axe violations for legacy, perspective, orthographic and malformed cameras', async () => {
     for (const value of [
       LEGACY,
+      { ...LEGACY, projection: { kind: 'perspective' } },
       { ...LEGACY, projection: { kind: 'orthographic', vertical_size: 8 } },
+      { ...LEGACY, projection: { kind: 'orthographic' } },
       { ...LEGACY, projection: PIXEL },
-      { ...LEGACY, projection: { ...PIXEL, reference_resolution: [320] } },
       { ...LEGACY, projection: { kind: 'isometric' } },
     ]) {
       await inspect(value);
@@ -268,164 +203,33 @@ describe('Camera Inspector', () => {
 });
 
 describe('sample fixture cameras', () => {
-  it('holds a legacy rig, an orthographic map camera and a pixel-perfect camera', () => {
+  it('holds a legacy rig, an orthographic map camera and an explicitly perspective close-up camera', () => {
     const cameras = Object.values(fixtureSnapshot('sample').entities).flatMap((entity) =>
       entity.components.filter((c) => c.type === 'Camera').map((c) => [entity.name, c.value.projection ?? null]),
     );
     expect(cameras).toEqual([
       ['Camera Rig', null],
       ['Map Camera', { kind: 'orthographic', vertical_size: 8 }],
-      ['Pixel Camera', PIXEL],
+      ['Close-up Camera', { kind: 'perspective' }],
     ]);
   });
-});
 
-describe('pixel-perfect Camera Inspector', () => {
-  it('shows density in px/m and the logical resolution as a labelled width and height', async () => {
-    const camera = await inspect({ ...LEGACY, projection: PIXEL });
-    expect(rows(camera)).toEqual([
-      'Projection: Pixel perfect',
-      'Pixel density: 32 px/m',
-      // The row helper reads the first entry's value; both entries are checked below.
-      'Resolution, in px: 320 WH',
-      'Field of view: 60 °Unused',
-      'Near clip: 0.1 m',
-      'Far clip: 100 m',
-    ]);
-    const group = camera.getByRole('group', { name: 'Projection' });
-    const density = within(group).getByRole('textbox', { name: 'Pixel density' });
-    expect(description(density)).toContain('Logical pixels per world metre. Camera motion snaps to this grid.');
-    const resolution = within(group).getByRole('group', { name: /^Resolution/ });
-    const [width, height] = within(resolution).getAllByRole('textbox');
-    expect(width).toBe(within(resolution).getByRole('textbox', { name: 'Logical width' }));
-    expect(height).toBe(within(resolution).getByRole('textbox', { name: 'Logical height' }));
-    expect([width, height].map((input) => (input as HTMLInputElement).value)).toEqual(['320', '180']);
-    expect(description(width!)).toContain('Fixed logical width and height, scaled by whole pixels with letterboxing.');
-    // W/H are names, not spatial axes: they never take the X/Y axis tints.
-    expect(Array.from(resolution.querySelectorAll('.vector__axis-name')).map((n) => n.className)).toEqual([
-      'vector__axis-name axis--plain',
-      'vector__axis-name axis--plain',
-    ]);
-    expect(description(camera.getByRole('textbox', { name: 'Field of view' }))).toContain(
-      'Not used by pixel-perfect projection. Kept for switching back to perspective.',
-    );
+  it('advertises no projection the native schema lacks, in any fixture', () => {
+    const declared = Object.keys(variantsOf(NATIVE));
+    for (const variant of FIXTURE_VARIANTS) {
+      for (const entity of Object.values(fixtureSnapshot(variant).entities)) {
+        for (const component of entity.components.filter((c) => c.type === 'Camera')) {
+          const projection = component.value.projection as { kind?: unknown } | undefined;
+          if (projection !== undefined) expect(declared, `${variant}: ${entity.name}`).toContain(projection.kind);
+        }
+      }
+    }
   });
 
-  it('is read-only and reachable by Tab in reading order, with no projection controls', async () => {
-    const camera = await inspect({ ...LEGACY, projection: PIXEL });
-    const region = regionOf(camera);
-    expect(region.querySelectorAll('button:not(.component__toggle), select, [role="combobox"], [role="radio"]')).toHaveLength(0);
-    const inputs = Array.from(region.querySelectorAll<HTMLInputElement>('input'));
-    expect(inputs.every((input) => input.readOnly && input.tabIndex === 0)).toBe(true);
-    const names = inputs.map((input) =>
-      input.getAttribute('aria-label') ?? document.getElementById(input.getAttribute('aria-labelledby')!)?.textContent,
-    );
-    expect(names).toEqual(['Projection', 'Pixel density', 'Logical width', 'Logical height', 'Field of view', 'Near clip', 'Far clip']);
-  });
-
-  it.each([
-    ['one number', [320], '[320]'],
-    ['three numbers', [320, 180, 1], '[320,180,1]'],
-    ['an empty list', [], '[]'],
-  ])('reports a resolution of %s as a mismatch instead of guessing a width or height', async (_name, size, raw) => {
-    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, reference_resolution: size } });
-    expect(camera.getByRole('textbox', { name: 'Projection' })).toHaveProperty('value', 'Pixel perfect');
-    const notice = camera.getByRole('group', { name: /^Resolution/ });
-    expect(notice.textContent).toContain('Cannot show as 2 numbers (logical width and logical height); raw value:');
-    expect(notice.querySelector('code')?.textContent).toBe(raw);
-    expect(notice.tabIndex).toBe(0);
-    expect(camera.queryByRole('textbox', { name: 'Logical width' })).toBeNull();
+  it('shows the close-up camera as authored perspective with a live field of view', async () => {
+    const camera = await inspect({ fov_degrees: 35, near: 0.05, far: 60, projection: { kind: 'perspective' } });
+    expect(rows(camera)).toEqual(['Projection: Perspective', 'Field of view: 35 °', 'Near clip: 0.05 m', 'Far clip: 60 m']);
     expectFieldOfViewLive(camera);
-  });
-
-  it.each([
-    ['a missing resolution', { kind: 'pixel_perfect', pixels_per_unit: 32 }, 'Resolution', 'Cannot show as a list of numbers; raw value:', 'undefined'],
-    ['a text resolution', { ...PIXEL, reference_resolution: ['320', '180'] }, 'Resolution', 'Cannot show as a list of numbers; raw value:', '["320","180"]'],
-    ['a missing density', { kind: 'pixel_perfect', reference_resolution: [320, 180] }, 'Pixel density', 'Cannot show as a number; raw value:', 'undefined'],
-    ['a text density', { ...PIXEL, pixels_per_unit: '32' }, 'Pixel density', 'Cannot show as a number; raw value:', '"32"'],
-  ])('reports %s with its raw value', async (_name, projection, label, message, raw) => {
-    const camera = await inspect({ ...LEGACY, projection });
-    expect(camera.getByRole('textbox', { name: 'Projection' })).toHaveProperty('value', 'Pixel perfect');
-    const notice = camera.getByRole('group', { name: new RegExp(`^${label}`) });
-    expect(notice.textContent).toContain(message);
-    expect(notice.querySelector('code')?.textContent).toBe(raw);
-    expectFieldOfViewLive(camera);
-  });
-
-  it('flags a field that is not part of the pixel-perfect projection', async () => {
-    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, vertical_size: 8 } });
-    expect(camera.getByRole('group', { name: 'Projection' }).textContent).toContain(
-      'Field vertical_size is not part of the “pixel_perfect” projection: 8',
-    );
-    expectFieldOfViewLive(camera);
-  });
-
-  it('shows an out-of-range resolution as authored and lets the engine diagnostic explain it', async () => {
-    const problem: Diagnostic = {
-      id: 'pixel-size',
-      severity: 'error',
-      message: 'pixel-perfect reference resolution must be 16..4096 per side',
-      entity: null,
-      component: 'Camera',
-      path: '/projection/reference_resolution/1',
-    };
-    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, reference_resolution: [320, 8] } }, [problem]);
-    const width = camera.getByRole('textbox', { name: 'Logical width' });
-    const height = camera.getByRole('textbox', { name: 'Logical height' });
-    expect([width, height].map((input) => (input as HTMLInputElement).value)).toEqual(['320', '8']);
-    expect(height.getAttribute('aria-invalid')).toBe('true');
-    expect(width.getAttribute('aria-invalid')).toBeNull();
-    expect(description(height)).toContain('pixel-perfect reference resolution must be 16..4096 per side');
-    expectFieldOfViewLive(camera);
-  });
-
-  it('shows a tiny or fractional density as a nonzero authored value', async () => {
-    const camera = await inspect({ ...LEGACY, projection: { ...PIXEL, pixels_per_unit: 0.0000025 } });
-    const density = camera.getByRole('textbox', { name: 'Pixel density' });
-    expect(density).toHaveProperty('value', '2.5e-6');
-    expect(density.getAttribute('title')).toBe('0.0000025');
-    // Out of the engine's 1..4096 range, so field of view is not marked unused.
-    expectFieldOfViewLive(camera);
-    cleanup();
-    const fractional = await inspect({ ...LEGACY, projection: { ...PIXEL, pixels_per_unit: 16.5 } });
-    expect(fractional.getByRole('textbox', { name: 'Pixel density' })).toHaveProperty('value', '16.5');
-    expect(rows(fractional)[3]).toBe('Field of view: 60 °Unused');
-  });
-});
-
-describe('pixel-perfect detection for the field-of-view tag', () => {
-  it.each([
-    ['well-formed', PIXEL, true],
-    ['the smallest bounds', { ...PIXEL, pixels_per_unit: 1, reference_resolution: [16, 16] }, true],
-    ['the largest density and a 2048 square', { ...PIXEL, pixels_per_unit: 4096, reference_resolution: [2048, 2048] }, true],
-    ['a fractional density', { ...PIXEL, pixels_per_unit: 16.5 }, true],
-    ['too many pixels', { ...PIXEL, reference_resolution: [4096, 1025] }, false],
-    ['a side below 16', { ...PIXEL, reference_resolution: [320, 15] }, false],
-    ['a side above 4096', { ...PIXEL, reference_resolution: [4097, 16] }, false],
-    ['a fractional side', { ...PIXEL, reference_resolution: [320.5, 180] }, false],
-    ['one side', { ...PIXEL, reference_resolution: [320] }, false],
-    ['text sides', { ...PIXEL, reference_resolution: ['320', '180'] }, false],
-    ['density below 1', { ...PIXEL, pixels_per_unit: 0.5 }, false],
-    ['density above 4096', { ...PIXEL, pixels_per_unit: 4097 }, false],
-    ['infinite density', { ...PIXEL, pixels_per_unit: Infinity }, false],
-    ['NaN density', { ...PIXEL, pixels_per_unit: NaN }, false],
-    ['missing density', { kind: 'pixel_perfect', reference_resolution: [320, 180] }, false],
-    ['missing resolution', { kind: 'pixel_perfect', pixels_per_unit: 32 }, false],
-    ['extra field', { ...PIXEL, vertical_size: 8 }, false],
-    ['orthographic', { kind: 'orthographic', vertical_size: 8 }, false],
-    ['legacy (omitted)', undefined, false],
-    ['null', null, false],
-  ])('%s -> %s', (_name, projection, expected) => {
-    const camera: Record<string, unknown> = { ...LEGACY };
-    if (projection !== undefined) camera.projection = projection;
-    expect(isPixelPerfectCamera(camera)).toBe(expected);
-  });
-
-  it('does not change the authored value it inspects', () => {
-    const camera = { ...LEGACY, projection: { ...PIXEL, reference_resolution: [320, 180], extra: [1] } };
-    const before = JSON.stringify(camera);
-    isPixelPerfectCamera(camera);
-    expect(JSON.stringify(camera)).toBe(before);
   });
 });
 

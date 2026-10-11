@@ -6,7 +6,7 @@ import type { BridgeSnapshot, EditorBridge, EditorCommand } from './bridge/contr
 import { createFixtureBridge, fixtureSnapshot } from './bridge/fixture';
 import type { FixtureVariant } from './bridge/fixture';
 import { humanize } from './components/inspector/FieldView';
-import { defaultLayout, idleAgentHeight } from './shell/layout';
+import { defaultLayout } from './shell/layout';
 
 /**
  * TEST DOUBLE, not a bridge implementation: serves the sample snapshot, advertises
@@ -55,7 +55,7 @@ describe('editor shell', () => {
     const { container } = renderWith(null);
     expect(screen.getByText('No engine connected.')).toBeTruthy();
     expect(screen.queryByRole('tree')).toBeNull();
-    expect(screen.getByText('Native viewport not attached')).toBeTruthy();
+    expect(screen.getByText('No viewport')).toBeTruthy();
     await expectNoAxeViolations(container);
   });
 
@@ -252,7 +252,8 @@ describe('editor shell', () => {
     act(() => opener.focus());
     fireEvent.keyDown(opener, { key: '?' });
     const dialog = screen.getByRole('dialog', { name: 'Keyboard shortcuts' });
-    expect(document.activeElement).toBe(within(dialog).getByRole('button', { name: 'Close' }));
+    // The reference opens on its filter, so typing narrows the list at once.
+    expect(document.activeElement).toBe(within(dialog).getByRole('searchbox', { name: 'Filter shortcuts' }));
     await expectNoAxeViolations(container);
     fireEvent.keyDown(dialog, { key: 'Escape' });
     expect(screen.queryByRole('dialog')).toBeNull();
@@ -269,23 +270,31 @@ describe('editor shell', () => {
     expect(splitter.getAttribute('aria-valuenow')).toBe('200');
   });
 
-  it('keeps an unavailable agent compact until its separator is moved, and sizes a ready agent normally', () => {
+  it('sizes an unavailable agent to its note, collapses it to one line, and keeps a ready agent resizable', () => {
     const sideRows = () => (document.querySelector('.column--side') as HTMLElement).style.gridTemplateRows;
     const { unmount } = renderFixture('sample');
-    const splitter = screen.getByRole('separator', { name: 'Resize agent panel' });
-    const idle = idleAgentHeight(window.innerHeight);
-    expect(splitter.getAttribute('aria-valuenow')).toBe(String(idle));
-    expect(sideRows()).toMatch(new RegExp(`${idle}px$`));
-    // A deliberate size wins over the compact default, even while the agent is unavailable.
-    fireEvent.keyDown(splitter, { key: 'ArrowUp' });
-    expect(splitter.getAttribute('aria-valuenow')).toBe(String(idle + 16));
+    // Unable to run: one note with its next step, no splitter, and only the content's height.
+    expect(sideRows()).toBe('minmax(0, 1fr) auto');
+    expect(screen.queryByRole('separator', { name: 'Resize agent panel' })).toBeNull();
+    const agent = document.querySelector<HTMLElement>('[data-region="agent"]')!;
+    expect(within(agent).getByText(/Sign in with ChatGPT to use the agent\./)).toBeTruthy();
+    const toggle = within(agent).getByRole('button', { name: /^Agent/ });
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    fireEvent.click(toggle);
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    expect(within(agent).queryByText(/Sign in with ChatGPT to use the agent/)).toBeNull();
+    // Collapsed, the line still says why the agent is idle.
+    expect(toggle.textContent).toContain('Not signed in');
     unmount();
 
     const ready = { ...fixtureSnapshot('sample'), agent: { status: 'idle' as const } };
     renderWith(recordingBridge(['agent.send'], ready).bridge);
     const full = defaultLayout(window.innerWidth, window.innerHeight).agent;
-    expect(full).toBeGreaterThan(idle);
-    expect(screen.getByRole('separator', { name: 'Resize agent panel' }).getAttribute('aria-valuenow')).toBe(String(full));
+    const splitter = screen.getByRole('separator', { name: 'Resize agent panel' });
+    expect(splitter.getAttribute('aria-valuenow')).toBe(String(full));
+    expect(sideRows()).toMatch(new RegExp(`${full}px$`));
+    fireEvent.keyDown(splitter, { key: 'ArrowUp' });
+    expect(screen.getByRole('separator', { name: 'Resize agent panel' }).getAttribute('aria-valuenow')).toBe(String(full + 16));
   });
 
   it.each([
@@ -304,17 +313,47 @@ describe('editor shell', () => {
     expect(alerts.some((a) => a.textContent?.includes('Lost connection to the editor process'))).toBe(true);
   });
 
-  it('refuses an incompatible bridge protocol', () => {
-    render(<App resolution={{ kind: 'incompatible', protocolVersion: 7 }} />);
-    expect(screen.getByText('Engine bridge version mismatch')).toBeTruthy();
+  it('refuses an incompatible bridge protocol', async () => {
+    const { container } = render(<App resolution={{ kind: 'incompatible', protocolVersion: 7 }} />);
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Engine bridge version mismatch');
+    expect(screen.getByRole('alert').textContent).toContain('the engine offered protocol 7');
+    await expectNoAxeViolations(container);
   });
 
-  it('agent composer is disabled and explains why without a provider', () => {
+  it('lists the valid fixture and account names when a fixture is unknown', () => {
+    render(<App resolution={{ kind: 'bad-fixture', requested: 'nope' }} />);
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Unknown sample fixture');
+    const fixtures = screen.getByRole('list', { name: 'Sample fixtures (fixture=)' });
+    expect(within(fixtures).getAllByRole('listitem').map((item) => item.textContent)).toContain('stress');
+    expect(within(screen.getByRole('list', { name: 'Account states (provider=)' })).getByText('signed-in')).toBeTruthy();
+  });
+
+  it('counts only the problems that exist in the status line, and says when a validated project has none', () => {
+    const { unmount } = renderFixture('sample');
+    const counts = screen.getByRole('button', { name: /errors/ });
+    expect(counts.textContent).toMatch(/6 errors, 2 warnings/);
+    fireEvent.click(counts);
+    expect(screen.getByRole('tab', { name: /^Problems/ }).getAttribute('aria-selected')).toBe('true');
+    unmount();
+    renderFixture('empty');
+    expect(screen.getByRole('button', { name: 'No problems' })).toBeTruthy();
+  });
+
+  it('offers no composer while the agent cannot run, and gives the reason and the next step', () => {
     renderFixture('sample');
+    expect(screen.queryByLabelText('Message to the agent')).toBeNull();
+    const agent = document.querySelector<HTMLElement>('[data-region="agent"]')!;
+    expect(within(agent).getByText(/Sign in with ChatGPT to use the agent\./)).toBeTruthy();
+    expect(within(agent).getByRole('button', { name: 'Continue with ChatGPT' })).toBeTruthy();
+  });
+
+  it('disables the composer while the agent works on a request and says why', () => {
+    const running = { ...fixtureSnapshot('sample'), agent: { status: 'running' as const, conversation: 'sample-conversation' } };
+    renderWith(recordingBridge(['agent.send'], running).bridge);
     const input = screen.getByLabelText('Message to the agent') as HTMLTextAreaElement;
     expect(input.disabled).toBe(true);
-    expect(screen.getAllByText('Sign in with ChatGPT to use the agent.').length).toBeGreaterThan(0);
     expect(input.getAttribute('aria-describedby')).toBe('agent-reason');
+    expect(document.getElementById('agent-reason')?.textContent).toBe('The agent is working on the current request.');
   });
 
   it('shows no window controls and reserves no inset outside the native host', () => {
@@ -462,7 +501,7 @@ describe('editor shell', () => {
     const { bridge } = recordingBridge([]);
     const { container } = renderWith({ ...bridge, getSnapshot: () => snapshot });
     fireEvent.click(treeRow(entity.name));
-    const section = screen.getByRole('region', { name: 'PointLight' });
+    const section = screen.getByRole('region', { name: 'Point Light' });
     const color = within(section).getByRole('group', { name: 'Color' });
     expect([...color.querySelectorAll('.vector__axis-name')].map((n) => n.textContent)).toEqual(['R', 'G', 'B']);
     expect((within(color).getByRole('textbox', { name: 'Green' }) as HTMLInputElement).value).toBe('0.8');

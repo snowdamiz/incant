@@ -1,0 +1,87 @@
+{
+  "jobs": [
+    {
+      "label": "pr56-web",
+      "tool": "wasm-bindgen",
+      "version": "0.2.126",
+      "job_id": 114331289450,
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "log_sha256": "6cb7d6002f2ef60ba365c3f92320c32a26e472ce97aa63f53b80a4e397f8ec21",
+      "execution_seconds": 98.0,
+      "queue_seconds": 357.0,
+      "evidence_lines": [
+        "2026-10-10T22:48:29.4383876Z Cache restored from key: incant-cli-v1-wasm-bindgen-0.2.126-Linux-x86_64-ubuntu-24.04-c6e63d9832830b85",
+        "2026-10-10T22:48:29.5934553Z Reusing wasm-bindgen 0.2.126 from /home/runner/work/_temp/incant-tools/wasm-bindgen/wasm-bindgen"
+      ],
+      "steps": [
+        {
+          "name": "Select pinned wasm-bindgen cache",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-10T22:48:27Z",
+          "completed_at": "2026-10-10T22:48:28Z"
+        },
+        {
+          "name": "Verify or install pinned wasm-bindgen",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-10T22:48:29Z",
+          "completed_at": "2026-10-10T22:48:29Z"
+        },
+        {
+          "name": "Run actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 17,
+          "started_at": "2026-10-10T22:49:16Z",
+          "completed_at": "2026-10-10T22:49:16Z"
+        }
+      ],
+      "pr_cache_save_skipped": true
+    },
+    {
+      "label": "pr56-android",
+      "tool": "cargo-ndk",
+      "version": "4.1.2",
+      "job_id": 114331289436,
+      "head": "961b1d35251aed9b024b6af7b004f8337e29b1b4",
+      "log_sha256": "80fe3023c2084202f9807ca4ab072e3acb9a59ccd0dee8d3fc224abb629c600e",
+      "execution_seconds": 249.0,
+      "queue_seconds": 106.0,
+      "evidence_lines": [
+        "2026-10-10T22:44:11.2101490Z Cache restored from key: incant-cli-v1-cargo-ndk-4.1.2-Linux-x86_64-ubuntu-24.04-c6e63d9832830b85",
+        "2026-10-10T22:44:11.2730930Z Reusing cargo-ndk 4.1.2 from /home/runner/work/_temp/incant-tools/cargo-ndk/cargo-ndk"
+      ],
+      "steps": [
+        {
+          "name": "Select pinned cargo-ndk cache",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-10T22:44:10Z",
+          "completed_at": "2026-10-10T22:44:10Z"
+        },
+        {
+          "name": "Verify or install pinned cargo-ndk",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-10T22:44:11Z",
+          "completed_at": "2026-10-10T22:44:11Z"
+        },
+        {
+          "name": "Run actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 17,
+          "started_at": "2026-10-10T22:47:37Z",
+          "completed_at": "2026-10-10T22:47:37Z"
+        }
+      ],
+      "pr_cache_save_skipped": true
+    }
+  ],
+  "limitations": "Mixed dependency graph and queue; proves binary restore/version reuse and no PR write, not a controlled speed comparison."
+}
