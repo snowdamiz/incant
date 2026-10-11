@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 use incant_agent_native::GpuPerception;
 use incant_render_authoring::RendererAuthoringExt as _;
+mod agent_command;
 mod assets;
 mod eval;
 mod localization;
@@ -145,18 +146,7 @@ enum Cli {
         #[arg(long)]
         journal: Option<PathBuf>,
     },
-    Agent {
-        project: PathBuf,
-        prompt: String,
-        #[arg(long)]
-        model: String,
-        #[arg(long, default_value_t = 64000)]
-        max_tokens: u64,
-        #[arg(long, default_value_t = 25000)]
-        max_output_tokens: u64,
-        #[arg(long)]
-        journal: Option<PathBuf>,
-    },
+    Agent(agent_command::Options),
     Auth {
         #[command(subcommand)]
         action: AuthCli,
@@ -734,61 +724,7 @@ fn run() -> Result<()> {
             case.as_deref(),
         )?,
         Cli::Auth { action } => auth_command(action)?,
-        Cli::Agent {
-            project,
-            prompt,
-            model,
-            max_tokens,
-            max_output_tokens,
-            journal,
-        } => {
-            let mut provider = provider(model)?;
-            let initial = read_project(&project)?;
-            let journal = journal.unwrap_or_else(|| project.with_extension("journal.jsonl"));
-            let root = project
-                .parent()
-                .filter(|p| !p.as_os_str().is_empty())
-                .unwrap_or(Path::new("."));
-            let mut bus = CommandBus::persistent_with_sources(&journal, initial, root)?;
-            let mut agent = Agent {
-                budget: Budget {
-                    max_tokens,
-                    used_tokens: 0,
-                },
-                approval: ApprovalMode::Destructive,
-                max_steps: 30,
-                max_output_tokens,
-            };
-            let root = project
-                .parent()
-                .filter(|p| !p.as_os_str().is_empty())
-                .unwrap_or(Path::new("."));
-            let viewport = GpuPerception::new(Some(root.to_path_buf()));
-            let viewport = incant_agent_native::Host::new(
-                root.to_path_buf(),
-                viewport,
-                native_play::embedded::load,
-            );
-            let mut host = incant_agent::ProjectHost::new(bus.project(), root, viewport)?;
-            let report = agent.run(
-                &mut provider,
-                &mut bus,
-                &mut host,
-                &prompt,
-                &new_id(),
-                &AtomicBool::new(false),
-                &mut |name, args| {
-                    eprintln!("Approve {name}: {args}\nType yes to apply:");
-                    let mut answer = String::new();
-                    io::stdin().read_line(&mut answer).is_ok() && answer.trim() == "yes"
-                },
-                &mut |text| eprint!("{text}"),
-            )?;
-            // Keep the input file as the journal's genesis; explicit RPC save is separate.
-            let output = project.with_extension("agent-result.json");
-            save(&output, &bus.project().canonical_text()?)?;
-            print(json!({"report":report,"output":output,"journal":journal}))?;
-        }
+        Cli::Agent(options) => agent_command::run(options)?,
     }
     Ok(())
 }
