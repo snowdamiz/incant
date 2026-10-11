@@ -147,3 +147,26 @@ platform durable file publication remain separate implementation work. Static/Wa
 persistent-state ABI and any separately selected exact-input replay contract are
 also absent. Diagnostics/log history, arbitrary VM globals/closures and external
 render/device/provider state are intentionally outside this ordinary-load contract.
+
+## Main101 integration
+
+The reviewed checkpoint commit `647985a` was merged with actual main101
+`cd06450` as `510adeab`; all 22 reviewed checkpoint source hashes remain identical
+and the merge required no source conflict resolution. The integrated graph passes
+324 affected tests/doctests in 46 groups, four-package all-target Clippy, the
+compiler-disabled static-module check, strict SDK types, generated SDK/bridge,
+normal runtime dependency guards, formatting and conventions. The additional five
+tests are the already merged gamepad adapter cases.
+
+The process proof was freshly cooked and built after main101 shared logging
+changed the conservative runtime/program identity. Four successful processes and
+one corruption refusal passed after deletion of the disposable source/build copy.
+The uninterrupted and two restored final 971-byte checkpoints are identical.
+The executable SHA-256 is
+`a5ebfae88289bc58672e97f2953e7c7bc31def930cc3a2fef20d9d3938e2333b`.
+This retains the same CI-profile, original-cache-retained and ordinary-load scope
+described above; it adds no shipping, device, physics/audio or complete-game gate.
+
+[Integration review and logs](evidence/native-session-checkpoints-main101.json)
+and [complete recooked process receipt](evidence/native-session-checkpoints-main101-process.json)
+retain the tested source identities and results.

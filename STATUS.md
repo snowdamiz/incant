@@ -22,7 +22,7 @@ Bytecode behaviors can explicitly opt into bounded typed persistent data and
 ordinary-load checkpoints containing committed world state, live authored
 attachments and source-scoped timers. Trusted initial scene/program bindings are
 checked before VM execution; invalid replacement preserves the live session.
-All319 affected tests/doctests, scoped Clippy/contracts and four successful fresh
+Integrated main101 passes 324 affected tests/doctests, scoped Clippy/contracts and four successful fresh
 source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
 bytes match uninterrupted execution. Module globals/closures remain explicitly
 ephemeral and physical input restarts neutral. Physics/audio/static modules,
