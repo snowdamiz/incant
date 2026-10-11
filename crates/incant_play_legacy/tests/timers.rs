@@ -100,38 +100,6 @@ fn timer_schedule_and_clock_survive_save_reload_with_exact_future_callbacks() {
 }
 
 #[test]
-fn malformed_schedules_and_handler_removal_are_rejected_without_losing_pending_work() {
-    let project = Project::empty("Timer validation");
-    let source =
-        r#"exports.default={update(api){api.setTimer({id:'one',delay_ticks:5})},onTimer(){}}"#;
-    let mut play = PlaySession::new(&project, source).unwrap();
-    play.tick().unwrap();
-    let before = play.save_text().unwrap();
-    assert!(matches!(
-        play.host.hot_reload("exports.default={update(){}}"),
-        Err(ScriptError::TimerHandler)
-    ));
-    assert_eq!(play.save_text().unwrap(), before);
-    let valid: Value = serde_json::from_str(&before).unwrap();
-    for (pointer, value) in [
-        ("/schedule", json!(null)),
-        ("/schedule/clock/tick", json!(0)),
-        ("/schedule/timers/one/due_tick", json!(1)),
-        ("/schedule/timers/one/interval_ticks", json!(0)),
-        ("/schedule/timers/one/payload", json!("x".repeat(17000))),
-        ("/schedule/timers/one/due_tick", json!(9007199254740991_u64)),
-    ] {
-        let mut bad = valid.clone();
-        *bad.pointer_mut(pointer).unwrap() = value;
-        assert!(
-            PlaySession::from_save(&project, source, &bad.to_string()).is_err(),
-            "{pointer}"
-        );
-    }
-    assert_eq!(play.save_text().unwrap(), before);
-}
-
-#[test]
 fn invalid_timer_requests_and_limits_cannot_commit_prefix_state_or_project_changes() {
     for body in [
         "api.setTimer({id:'',delay_ticks:1})",

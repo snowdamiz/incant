@@ -80,8 +80,10 @@ def main():
         assert len(call('history.read')) == 1
         call('play.start')
         for _ in range(120):
-            state = call('play.step')
-        assert abs(state['entities'][body]['translation'][1] - 0.5) < 0.02
+            call('play.step')
+        state = call('play.state', {'entities': [body]})
+        assert state['runtime'] == 'native' and state['tick'] == 120
+        assert abs(state['entities'][body]['transform']['translation'][1] - 0.5) < 0.02
         stopped = call('play.stop')
         assert stopped['project'] == before['project']
     baseline = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in [project, journal]}

@@ -9,11 +9,12 @@
   "scripts": {
     "conventions": "python3 tools/generate_conventions.py",
     "handoff": "python3 tools/handoff/main.py",
-    "test:tools": "python3 -m unittest discover -s tools/tests -v"
+    "test:tools": "python3 -m unittest discover -s tools/tests -v && node --test tools/tests/native_script.test.mjs"
   },
   "devDependencies": {
     "@agentclientprotocol/claude-agent-acp": "0.88.0",
     "@anthropic-ai/claude-code": "2.1.295",
+    "@jridgewell/sourcemap-codec": "1.6.0",
     "@swc/core": "1.16.13",
     "typescript": "5.9.3"
   },
