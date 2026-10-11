@@ -1,0 +1,152 @@
+{
+  "scope": "PR77 native-only FBX source parser; explicit browser model-source cooking refusal and portable persistent-journal test inspection",
+  "base": "90abec1c10bef0e0f0ef3110583faebb812851a6",
+  "date": "2026-10-11",
+  "source_sha256": {
+    "Cargo.lock": "2631d838ce7267dbd1bc072a3850d0075d7d8881d711e33bea32519458fd8ab7",
+    "crates/incant_assets/Cargo.toml": "d5d73c823ae8c77efabfc5fd03de2b13fbf3bbfb2383b1121cf9fa723141a61c",
+    "crates/incant_assets/src/cache.rs": "f79abc20e86e54003377e55feb684fa84340cbda91b8f6168ad501121a72b626",
+    "crates/incant_assets/src/lib.rs": "306e386253cadc00e7367225e0bb5c1d442e4b5e40deba7d99ea82f4e7fc179c",
+    "crates/incant_assets/src/material.rs": "3601d46bf15ddd2ab39716fde1a2247ce09c6f4e9bb50c52b165d909736e155d",
+    "crates/incant_assets/src/fbx_browser.rs": "6e61031de2d247750c11f1fde9f9ed2e57e110d848f9b45c6c72a4170b604164",
+    "crates/incant_assets/tests/fbx.rs": "0eee1242adb3399a3d5be4eb909c1ab42b6460a7513664f9be63dbd2d2e7c605",
+    "crates/incant_import/tests/fbx.rs": "bc3e5d4dc2388e1cf49b6fbacfd1d4691fd6adfb0a4b0cea4220301694e1ebe1",
+    "crates/incant_platform_smoke/Cargo.toml": "61580b0887f2c1dfb2da7472a8b0688d0618d0fa9ed7b2906fcbeb38ec96558e",
+    "crates/incant_platform_smoke/src/lib.rs": "ccd413a8fea43e14ddcb2767fbbb41ca19c71d4c0221791faa9f279ccde9ddc5",
+    "crates/incant_platform_smoke/src/assets_wasm.rs": "200dfde1a536ea2f86e49974a41f7df57ca325a7e8a1702b5028c4f8ce76f7fb"
+  },
+  "native_conversion_unchanged": true,
+  "native_writer_body_sha256": "933eecdcc71e8606f316af82201bb65e05446203cae6132e05075e16866d2375",
+  "checks": {
+    "native_asset_import_release_tests": 71,
+    "native_all_target_release_clippy": true,
+    "wasm_release_build": true,
+    "wasm_release_clippy": true,
+    "runtime_dependency_guard": true,
+    "ufbx_absent_from_wasm_normal_graph": true,
+    "wasm_bindgen": "0.2.126",
+    "browser": {
+      "browser": "156.0.8078.4",
+      "gpu_disabled": true,
+      "source_model_refusal_checks": 7,
+      "wasm_sha256": "5aeeea2130bc7737e7de694d29e5398278ff08d80708e704061f7e64d7238f37",
+      "result": {
+        "arch": "wasm32",
+        "character_movement": {
+          "collisions": [
+            "01M4MJYY6BWRZSG3SB7TT3BHMY"
+          ],
+          "grounded": true,
+          "sliding_down_slope": false,
+          "translation": [
+            0.10000000149011612,
+            5.1684826757991686e-05,
+            0
+          ]
+        },
+        "grid_navigation": {
+          "corner_cost": 2000,
+          "edited_cost": 2000,
+          "restart_route_equal": true,
+          "script_vm": false,
+          "snapshot_changed": true,
+          "visual_gate": false,
+          "weighted_cost": 2828
+        },
+        "incant": "hello-world",
+        "input": {
+          "action_dead_zone": true,
+          "focus_releases_controls": true,
+          "named_action_edges": true,
+          "pinch_rotation": 1.5707963267948966,
+          "pinch_scale": 2,
+          "replay_equal": true,
+          "scope": "normalized synthetic events; not a live device adapter"
+        },
+        "localization": {
+          "date": "5/8/24",
+          "number": "1.234,5",
+          "shaping_verified": false,
+          "text_values": [
+            "1 coin",
+            "2 \u043c\u043e\u043d\u0435\u0442\u044b",
+            "5 \u043c\u043e\u043d\u0435\u0442",
+            "\u3053\u3093\u306b\u3061\u306f \u6d77",
+            "\u0645\u0631\u062d\u0628\u0627 \u0646\u0648\u0631"
+          ],
+          "xliff_roundtrip": true
+        },
+        "navigation": {
+          "changed_tiles": 9,
+          "directed_off_mesh_link": true,
+          "first_corners": 4,
+          "link_endpoint_rollback": true,
+          "recast_tiled": true,
+          "retained_tiles": 6,
+          "second_corners": 2,
+          "visual_gate": false
+        },
+        "ok": true,
+        "os": "",
+        "physics_backend": "rapier-0.36-enhanced-determinism",
+        "physics_y": 0.49993008375167847,
+        "position_x": 5.999999999999987,
+        "steering": {
+          "agents": 100,
+          "overlap_recovery_finite": true,
+          "stable_id_order": true,
+          "visual_gate": false
+        },
+        "ticks": 120
+      }
+    }
+  },
+  "logs": {
+    "incant-pr77-web-failure.log": {
+      "local_path": "/tmp/incant-pr77-web-failure.log",
+      "sha256": "843de13248fa6a7bca034264e1da132968fa67dece03fd0e94cf00a4d7d81423"
+    },
+    "incant-pr77-windows-failure.log": {
+      "local_path": "/tmp/incant-pr77-windows-failure.log",
+      "sha256": "d1acf912eeb2e8869605fc34fb422c9e829752dc45076f5ac068cb3a5ac984fa"
+    },
+    "incant-fbx-web-link-before.log": {
+      "local_path": "/tmp/incant-fbx-web-link-before.log",
+      "sha256": "6a6f63b1ae6ae331a3ae886e6aa97418ca8d6a744365d25a2937141ec46b03af"
+    },
+    "incant-fbx-web-build.log": {
+      "local_path": "/tmp/incant-fbx-web-build.log",
+      "sha256": "e67a25354ca6eea5e86e7a425bec44977021591f963327954cd986990837dde9"
+    },
+    "incant-fbx-browser-check.log": {
+      "local_path": "/tmp/incant-fbx-browser-check.log",
+      "sha256": "fca2b2f913cbc1c545ac63d137cf4e9c08a056dc67b5aee417a9226b5894f1d7"
+    },
+    "incant-fbx-platform-native-tests.log": {
+      "local_path": "/tmp/incant-fbx-platform-native-tests.log",
+      "sha256": "5ee5fc1f630019323e18f6d8528c182fa70aecb7a6588c973d672b47d612f20e"
+    },
+    "incant-fbx-platform-native-clippy.log": {
+      "local_path": "/tmp/incant-fbx-platform-native-clippy.log",
+      "sha256": "1338a49ac1422786a917f1beb52d45f14032b37fb7cb3354c3efa62cf391abc4"
+    },
+    "incant-fbx-platform-web-clippy.log": {
+      "local_path": "/tmp/incant-fbx-platform-web-clippy.log",
+      "sha256": "fed32775b2c09b34b52404c3687ee1b8ae22ab00ceb3d90f8068126f571be463"
+    },
+    "incant-fbx-platform-guard.log": {
+      "local_path": "/tmp/incant-fbx-platform-guard.log",
+      "sha256": "67ff996af7bf16972df5ceb47bee837c4e3d19810d094d7f8910627d5a230679"
+    },
+    "incant-fbx-platform-web-tree.log": {
+      "local_path": "/tmp/incant-fbx-platform-web-tree.log",
+      "sha256": "b1e9eef6fc0fc9a51585b3da8e2fcd7dca64eadf5d5b68b86d6f703527656e53"
+    }
+  },
+  "limitations": [
+    "Windows journal test uses the existing drop/reopen pattern; hosted Windows rerun remains required.",
+    "Browser model-source cooking remains unsupported. The real mixed-format dispatch probe exposed inherited missing meshopt encoder/optimizer symbols; checked runtime decoders are unchanged.",
+    "Native Claude0040 review retains the original importer and headless executable identities; this correction changes no native conversion behavior.",
+    "No phone, export, full-FBX or performance gate is claimed."
+  ]
+}

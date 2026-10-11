@@ -1,4 +1,6 @@
 //! Small runnable cross-platform probe of the actual document and Bevy crates.
+#[cfg(target_arch = "wasm32")]
+mod assets_wasm;
 mod grid_navigation;
 mod input;
 mod localization;
@@ -12,6 +14,8 @@ use incant_doc::{
 use serde_json::json;
 
 pub fn run() -> Result<String, String> {
+    #[cfg(target_arch = "wasm32")]
+    assets_wasm::check()?;
     let grid_navigation = grid_navigation::check()?;
     let input = input::check()?;
     let localization = localization::check()?;

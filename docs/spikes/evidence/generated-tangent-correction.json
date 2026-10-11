@@ -1,0 +1,61 @@
+{
+  "scope": "generated Mikk handedness only; supplied tangents, UVs, shaders unchanged",
+  "cpu_tests": 101,
+  "gpu_cases_compiled_not_executed": 61,
+  "gate_tests": 3,
+  "gpu_status": "pending coordinated numerical and Claude delta",
+  "source_sha256": {
+    "crates/incant_assets/src/tangents.rs": "1fec5d52e5544f1f01e35933740bf0d74bfa6135e9d9a6dab53abe8267513ab8",
+    "crates/incant_assets/src/source.rs": "bfc2d4e160e4afea279a5de657fe03f4d54327d0e4398dba44cc9a02952acff0",
+    "crates/incant_assets/src/fbx/mod.rs": "501f06dfbe3235246a9b299b928d8f130a0001f43a48db4ae8f8fbd066e50f28",
+    "crates/incant_assets/src/cache.rs": "e7f268e633995c807dff18031a15ecf6cf3c423bce495d24e9b64be2f7bbc78e",
+    "crates/incant_assets/src/cache_tests.rs": "4f4c461a5ef970903af0862f80ab5674f1fe46c2e23702dc4f55a222f4fabf5e",
+    "crates/incant_assets/tests/fbx.rs": "c86c65fa8ae4a94e2f2fda282a8a561ada1d35e3b86c1a913f924c6f199381d3",
+    "crates/incant_assets/tests/textures.rs": "364eaac1db111c6e8a0497f8c8c464af678ef8aee236aff28bcbe1ba6bac870b",
+    "crates/incant_render/tests/tangents/mod.rs": "34e84173920516d55d54ce7fd0ef4aaf6e2b1a4a46b3ca5b5ca0ff52b2f6d85d",
+    "crates/incant_render/tests/model_gpu.rs": "af0b1c10c411dd9373c703d36c06e7d7a02d9a23579dd9566c5d1874a59bd660"
+  },
+  "logs": {
+    "before": {
+      "path": "/tmp/incant-fbx-tangent-before.log",
+      "sha256": "439e9c88241b008efdb5ee5c55ee739f45537673c98d0fe39f024900fd52ea03"
+    },
+    "assets": {
+      "path": "/tmp/incant-fbx-tangent-assets.log",
+      "sha256": "558f82cae9dd08c155a6fa4d7d975a3cb9a50373875b9c226a79bee8538d6392"
+    },
+    "clippy": {
+      "path": "/tmp/incant-fbx-tangent-clippy.log",
+      "sha256": "b940a74f0209b61af85734a965da8f5e631ad6f683cf3b877d9b339d0a4470d7"
+    },
+    "gpu-compile": {
+      "path": "/tmp/incant-fbx-tangent-gpu-compile.log",
+      "sha256": "ed86d47dcbfd32a8c1d662d27b689434f9b133f1065548fc93d18b37be02ac06"
+    },
+    "headless-build": {
+      "path": "/tmp/incant-fbx-tangent-headless-build.log",
+      "sha256": "9eb635aba5c2f4c8a66a80523837ec8be2bf31b9bd02993126912ce41751379a"
+    },
+    "scoped": {
+      "path": "/tmp/incant-fbx-tangent-scoped.log",
+      "sha256": "2f31291a7f8c009669df81ab87012fe8ec7b3457660b22999cf0c3e032e59963"
+    },
+    "host-clippy": {
+      "path": "/tmp/incant-fbx-tangent-host-clippy.log",
+      "sha256": "65023585b3c54e55a9caf0b9921e05d216c93b8db8c7d7ae89993409f0b5ccb1"
+    },
+    "gate-tests": {
+      "path": "/tmp/incant-fbx-tangent-gate-tests.log",
+      "sha256": "55acadf0454ddcc94b077c0c2c736842df089ee096c225ff97919952791f409d"
+    }
+  },
+  "prior_appearance": {
+    "source": "90abec1c10bef0e0f0ef3110583faebb812851a6",
+    "binary_sha256": "e5f686ffb6cc00e7761cb643593f48c2047caaadce2a43ee94f1fbfffa6a67fa",
+    "shared_glTF_defect": true,
+    "original_result_preserved": true
+  },
+  "old_cache_policy": "Old immutable versions retain appearance until source reimport; both generations remain readable for Undo/version pinning.",
+  "timing_claim": false,
+  "capture_coordination_limitation": "Two original 0040 material captures started 04:34:47Z after gate withdrawal 04:34:14Z, overlapping union GPU tests; all processes subsequently exited. New delta checks identity-specific grant before each Popen."
+}

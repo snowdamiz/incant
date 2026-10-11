@@ -7,6 +7,7 @@ mod materials;
 mod shadows;
 mod sprites;
 mod support;
+mod tangents;
 use incant_render::Renderer;
 use materials::{Fixture, center, emissive, near};
 use serde_json::json;
