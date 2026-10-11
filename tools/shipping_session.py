@@ -107,6 +107,9 @@ class FreshSession:
         begin = time.monotonic()
         build = subprocess.run(command, cwd=cwd, env=env, capture_output=True, text=True, encoding='utf-8')
         elapsed = time.monotonic() - begin
+        evidence = self.path.parent / f'build-{len(self.builds)}'
+        evidence.with_suffix('.stdout.jsonl').write_text(build.stdout, encoding='utf-8')
+        evidence.with_suffix('.stderr.log').write_text(build.stderr, encoding='utf-8')
         self.check_frozen()
         require(all(sha(Path(value['path'])) == value['sha256'] for value in inputs.values()),
                 'Compile input changed during shipping build')
@@ -148,7 +151,9 @@ class FreshSession:
                 require(not matches, f'Ambiguous fresh/reused target artifact: {crate}')
                 line = prior['command']
             else:
-                require(len(matches) == 1, f'Missing or ambiguous fresh target command: {crate}')
+                require(len(matches) == 1, f'Missing or ambiguous fresh target command: {crate}; '
+                        f'artifact features={artifact["features"]}; '
+                        f'command features={[c["features"] for c in commands if c["crate"] == crate]}')
                 suffix = matches[0]['extra_filename']
                 require(suffix and (artifact.get('executable') or any(
                     p.name.startswith(f'lib{crate}{suffix}.') or p.name.startswith(f'{crate}{suffix}.')
