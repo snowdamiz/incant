@@ -969,3 +969,14 @@ scenes. Seven new behavior regressions plus existing game/script coverage total
 normal/device authoring-free dependency guards pass. [Evidence](docs/spikes/native-game-hosting.md).
 Real render-input/GPU consumer integration and its fresh player/union proof
 remain separate; no runtime saves, rendering/performance or phase gate is claimed.
+
+## Development Wasm module execution
+
+An opt-in desktop Wasmtime 49.0.2 host now executes bounded version-1 typed
+numeric/structural imports over the native world. Thirteen real Wasm regressions,
+123 scoped release tests/doctests, release Clippy and three fresh Rust-module
+processes pass. Shipping graphs exclude Wasmtime/Cranelift even with the
+development feature enabled; feature-disabled mobile/Wasm compilation passes.
+[Evidence](docs/spikes/development-wasm-host.md). The ABI deliberately copies
+columns and retains bounded numeric undo. Shipping wasm2c, browser/mobile
+execution, complete SDK conformance and device/performance gates remain open.

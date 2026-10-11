@@ -1,0 +1,30 @@
+[package]
+name = "incant_wasm_dev"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+# Explicit desktop development dependency; never enabled by shipped players.
+wasmtime-host = ["dep:wasmtime", "dep:incant_runtime", "dep:incant_types", "dep:thiserror", "dep:wasmparser"]
+
+[target.'cfg(any(target_os = "macos", target_os = "linux", target_os = "windows"))'.dependencies]
+wasmtime = { version = "=49.0.2", default-features = false, features = ["std", "runtime", "cranelift"], optional = true }
+wasmparser = { version = "=0.258.3", default-features = false, features = ["std"], optional = true }
+incant_runtime = { workspace = true, optional = true }
+incant_types = { workspace = true, optional = true }
+thiserror = { workspace = true, optional = true }
+
+[dev-dependencies]
+wat = "=1.258.3"
+incant_script = { workspace = true, features = ["compiler"] }
+
+[[test]]
+name = "conformance"
+required-features = ["wasmtime-host"]
+
+[[example]]
+name = "development_module"
+required-features = ["wasmtime-host"]
