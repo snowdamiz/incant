@@ -1,0 +1,377 @@
+[
+ {
+  "file": "screenshots/engine/static-overview-true-scale.png",
+  "sha256": "3fa8fadbeb0df627f1a571947f094cd6ca6ad2060f5930b63a6416bfce3646ef",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/static-fbx/frames/overview.png",
+  "ledger_seq": 56,
+  "camera": "01JA40ST0000000000000000W5",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MK9BQRNCKNXPPTPPH363AC": "b01905ac359d5166d8051cca0ec55e5c83933648911aae8f8c5f9059985694ac",
+    "01M4MK9BSBB2S0DV5QBJ4D26KH": "4d210fabad6f3ce2409a87ab805c8a3bbc58e3829065e68b98850d1b7bf93259",
+    "01M4MK9BTWWYB3XQZCQ2KMPWW4": "42dbae820e5e9d67f1f1eeb374dc1c870b37094e7683d0ebf0ad2033961e1714",
+    "01M4MK9BWD31284CM4VMYCE3WM": "d1f64de7f28f293ecb099f882bdba500458f07d0c75e966bfdd76260d7d335a0",
+    "01M4MK9BXYR75Y8TV8Y9DH94XD": "31562d05b57cdd02eedd3bdaacbeea10b853bad76de926a1741f20749a0ee278",
+    "01M4MK9BZFZSBQS4YPCT347TF8": "688336d982ad55ade531c09b6ade5c67eef3f1adf0257f3171e6425036c55367",
+    "01M4MK9C0ZF1PMW44914N71TTT": "2d28480d786caf7179f4a21f726b72c9c8d1dd16cb96aad90b73eaab04c219ea",
+    "01M4MK9C2H8PBRTGCW2S1SAGNK": "48bf1bbd127f7cc4219b6895da5a382aee98d7af4c670511bb891b82b3db31e5"
+   },
+   "journal_sha256": "ec5df9f373124b35e9dcf3640c3bf9afd488c70142c7a145c7e383cf0c9d4bda",
+   "project_sha256": "13c596e1947b76def101f08c75aba44efe620166734e52c83bc99d5e25f0ee70"
+  }
+ },
+ {
+  "file": "screenshots/engine/static-suzanne-front.png",
+  "sha256": "8975cc757a4ab8c1765bca0ff1ce8bde23ac70e3268ee05cae9d7645a2f6bcc3",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/static-fbx/frames/suzanne_front.png",
+  "ledger_seq": 57,
+  "camera": "01JA40ST0000000000000000W6",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MK9BQRNCKNXPPTPPH363AC": "b01905ac359d5166d8051cca0ec55e5c83933648911aae8f8c5f9059985694ac",
+    "01M4MK9BSBB2S0DV5QBJ4D26KH": "4d210fabad6f3ce2409a87ab805c8a3bbc58e3829065e68b98850d1b7bf93259",
+    "01M4MK9BTWWYB3XQZCQ2KMPWW4": "42dbae820e5e9d67f1f1eeb374dc1c870b37094e7683d0ebf0ad2033961e1714",
+    "01M4MK9BWD31284CM4VMYCE3WM": "d1f64de7f28f293ecb099f882bdba500458f07d0c75e966bfdd76260d7d335a0",
+    "01M4MK9BXYR75Y8TV8Y9DH94XD": "31562d05b57cdd02eedd3bdaacbeea10b853bad76de926a1741f20749a0ee278",
+    "01M4MK9BZFZSBQS4YPCT347TF8": "688336d982ad55ade531c09b6ade5c67eef3f1adf0257f3171e6425036c55367",
+    "01M4MK9C0ZF1PMW44914N71TTT": "2d28480d786caf7179f4a21f726b72c9c8d1dd16cb96aad90b73eaab04c219ea",
+    "01M4MK9C2H8PBRTGCW2S1SAGNK": "48bf1bbd127f7cc4219b6895da5a382aee98d7af4c670511bb891b82b3db31e5"
+   },
+   "journal_sha256": "ec5df9f373124b35e9dcf3640c3bf9afd488c70142c7a145c7e383cf0c9d4bda",
+   "project_sha256": "13c596e1947b76def101f08c75aba44efe620166734e52c83bc99d5e25f0ee70"
+  }
+ },
+ {
+  "file": "screenshots/engine/static-suzanne-profile.png",
+  "sha256": "92a07aaba2edec07bd2c1217992b14d8a0111b6413eccce4a38577110c55da9c",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/static-fbx/frames/suzanne_profile.png",
+  "ledger_seq": 59,
+  "camera": "01JA40ST0000000000000000W8",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MK9BQRNCKNXPPTPPH363AC": "b01905ac359d5166d8051cca0ec55e5c83933648911aae8f8c5f9059985694ac",
+    "01M4MK9BSBB2S0DV5QBJ4D26KH": "4d210fabad6f3ce2409a87ab805c8a3bbc58e3829065e68b98850d1b7bf93259",
+    "01M4MK9BTWWYB3XQZCQ2KMPWW4": "42dbae820e5e9d67f1f1eeb374dc1c870b37094e7683d0ebf0ad2033961e1714",
+    "01M4MK9BWD31284CM4VMYCE3WM": "d1f64de7f28f293ecb099f882bdba500458f07d0c75e966bfdd76260d7d335a0",
+    "01M4MK9BXYR75Y8TV8Y9DH94XD": "31562d05b57cdd02eedd3bdaacbeea10b853bad76de926a1741f20749a0ee278",
+    "01M4MK9BZFZSBQS4YPCT347TF8": "688336d982ad55ade531c09b6ade5c67eef3f1adf0257f3171e6425036c55367",
+    "01M4MK9C0ZF1PMW44914N71TTT": "2d28480d786caf7179f4a21f726b72c9c8d1dd16cb96aad90b73eaab04c219ea",
+    "01M4MK9C2H8PBRTGCW2S1SAGNK": "48bf1bbd127f7cc4219b6895da5a382aee98d7af4c670511bb891b82b3db31e5"
+   },
+   "journal_sha256": "ec5df9f373124b35e9dcf3640c3bf9afd488c70142c7a145c7e383cf0c9d4bda",
+   "project_sha256": "13c596e1947b76def101f08c75aba44efe620166734e52c83bc99d5e25f0ee70"
+  }
+ },
+ {
+  "file": "screenshots/engine/static-max-zup-inch-instances-3q.png",
+  "sha256": "bd46a6d99a838fd81b4c0cbe0bc1206e6767d4bc0c6a369655cbf603c4dbcf54",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/static-fbx/frames/max_3q.png",
+  "ledger_seq": 60,
+  "camera": "01JA40ST0000000000000000W9",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MK9BQRNCKNXPPTPPH363AC": "b01905ac359d5166d8051cca0ec55e5c83933648911aae8f8c5f9059985694ac",
+    "01M4MK9BSBB2S0DV5QBJ4D26KH": "4d210fabad6f3ce2409a87ab805c8a3bbc58e3829065e68b98850d1b7bf93259",
+    "01M4MK9BTWWYB3XQZCQ2KMPWW4": "42dbae820e5e9d67f1f1eeb374dc1c870b37094e7683d0ebf0ad2033961e1714",
+    "01M4MK9BWD31284CM4VMYCE3WM": "d1f64de7f28f293ecb099f882bdba500458f07d0c75e966bfdd76260d7d335a0",
+    "01M4MK9BXYR75Y8TV8Y9DH94XD": "31562d05b57cdd02eedd3bdaacbeea10b853bad76de926a1741f20749a0ee278",
+    "01M4MK9BZFZSBQS4YPCT347TF8": "688336d982ad55ade531c09b6ade5c67eef3f1adf0257f3171e6425036c55367",
+    "01M4MK9C0ZF1PMW44914N71TTT": "2d28480d786caf7179f4a21f726b72c9c8d1dd16cb96aad90b73eaab04c219ea",
+    "01M4MK9C2H8PBRTGCW2S1SAGNK": "48bf1bbd127f7cc4219b6895da5a382aee98d7af4c670511bb891b82b3db31e5"
+   },
+   "journal_sha256": "ec5df9f373124b35e9dcf3640c3bf9afd488c70142c7a145c7e383cf0c9d4bda",
+   "project_sha256": "13c596e1947b76def101f08c75aba44efe620166734e52c83bc99d5e25f0ee70"
+  }
+ },
+ {
+  "file": "screenshots/engine/static-max-zup-inch-instances-top.png",
+  "sha256": "efa99f02b58d218de553876edc635cc4b99d0a3ff931c1596e33baa0bcd80a75",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/static-fbx/frames/max_top.png",
+  "ledger_seq": 61,
+  "camera": "01JA40ST0000000000000000WA",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MK9BQRNCKNXPPTPPH363AC": "b01905ac359d5166d8051cca0ec55e5c83933648911aae8f8c5f9059985694ac",
+    "01M4MK9BSBB2S0DV5QBJ4D26KH": "4d210fabad6f3ce2409a87ab805c8a3bbc58e3829065e68b98850d1b7bf93259",
+    "01M4MK9BTWWYB3XQZCQ2KMPWW4": "42dbae820e5e9d67f1f1eeb374dc1c870b37094e7683d0ebf0ad2033961e1714",
+    "01M4MK9BWD31284CM4VMYCE3WM": "d1f64de7f28f293ecb099f882bdba500458f07d0c75e966bfdd76260d7d335a0",
+    "01M4MK9BXYR75Y8TV8Y9DH94XD": "31562d05b57cdd02eedd3bdaacbeea10b853bad76de926a1741f20749a0ee278",
+    "01M4MK9BZFZSBQS4YPCT347TF8": "688336d982ad55ade531c09b6ade5c67eef3f1adf0257f3171e6425036c55367",
+    "01M4MK9C0ZF1PMW44914N71TTT": "2d28480d786caf7179f4a21f726b72c9c8d1dd16cb96aad90b73eaab04c219ea",
+    "01M4MK9C2H8PBRTGCW2S1SAGNK": "48bf1bbd127f7cc4219b6895da5a382aee98d7af4c670511bb891b82b3db31e5"
+   },
+   "journal_sha256": "ec5df9f373124b35e9dcf3640c3bf9afd488c70142c7a145c7e383cf0c9d4bda",
+   "project_sha256": "13c596e1947b76def101f08c75aba44efe620166734e52c83bc99d5e25f0ee70"
+  }
+ },
+ {
+  "file": "screenshots/engine/static-maya-mirrored-nonuniform-parent-sheared-child.png",
+  "sha256": "c5bb9c92fe7dd9cc221de6492b23a03470d3fa3c4793647e70111ebc373806f8",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/static-fbx/frames/shear_mirror_3q.png",
+  "ledger_seq": 63,
+  "camera": "01JA40ST0000000000000000WC",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MK9BQRNCKNXPPTPPH363AC": "b01905ac359d5166d8051cca0ec55e5c83933648911aae8f8c5f9059985694ac",
+    "01M4MK9BSBB2S0DV5QBJ4D26KH": "4d210fabad6f3ce2409a87ab805c8a3bbc58e3829065e68b98850d1b7bf93259",
+    "01M4MK9BTWWYB3XQZCQ2KMPWW4": "42dbae820e5e9d67f1f1eeb374dc1c870b37094e7683d0ebf0ad2033961e1714",
+    "01M4MK9BWD31284CM4VMYCE3WM": "d1f64de7f28f293ecb099f882bdba500458f07d0c75e966bfdd76260d7d335a0",
+    "01M4MK9BXYR75Y8TV8Y9DH94XD": "31562d05b57cdd02eedd3bdaacbeea10b853bad76de926a1741f20749a0ee278",
+    "01M4MK9BZFZSBQS4YPCT347TF8": "688336d982ad55ade531c09b6ade5c67eef3f1adf0257f3171e6425036c55367",
+    "01M4MK9C0ZF1PMW44914N71TTT": "2d28480d786caf7179f4a21f726b72c9c8d1dd16cb96aad90b73eaab04c219ea",
+    "01M4MK9C2H8PBRTGCW2S1SAGNK": "48bf1bbd127f7cc4219b6895da5a382aee98d7af4c670511bb891b82b3db31e5"
+   },
+   "journal_sha256": "ec5df9f373124b35e9dcf3640c3bf9afd488c70142c7a145c7e383cf0c9d4bda",
+   "project_sha256": "13c596e1947b76def101f08c75aba44efe620166734e52c83bc99d5e25f0ee70"
+  }
+ },
+ {
+  "file": "screenshots/engine/static-maya-1cm-cube-on-1cm-ruler.png",
+  "sha256": "77170d789bf32eeba18b4cffc26ca492274c435c4577671eb9430f82a221b8a4",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/static-fbx/frames/units.png",
+  "ledger_seq": 64,
+  "camera": "01JA40ST0000000000000000WD",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MK9BQRNCKNXPPTPPH363AC": "b01905ac359d5166d8051cca0ec55e5c83933648911aae8f8c5f9059985694ac",
+    "01M4MK9BSBB2S0DV5QBJ4D26KH": "4d210fabad6f3ce2409a87ab805c8a3bbc58e3829065e68b98850d1b7bf93259",
+    "01M4MK9BTWWYB3XQZCQ2KMPWW4": "42dbae820e5e9d67f1f1eeb374dc1c870b37094e7683d0ebf0ad2033961e1714",
+    "01M4MK9BWD31284CM4VMYCE3WM": "d1f64de7f28f293ecb099f882bdba500458f07d0c75e966bfdd76260d7d335a0",
+    "01M4MK9BXYR75Y8TV8Y9DH94XD": "31562d05b57cdd02eedd3bdaacbeea10b853bad76de926a1741f20749a0ee278",
+    "01M4MK9BZFZSBQS4YPCT347TF8": "688336d982ad55ade531c09b6ade5c67eef3f1adf0257f3171e6425036c55367",
+    "01M4MK9C0ZF1PMW44914N71TTT": "2d28480d786caf7179f4a21f726b72c9c8d1dd16cb96aad90b73eaab04c219ea",
+    "01M4MK9C2H8PBRTGCW2S1SAGNK": "48bf1bbd127f7cc4219b6895da5a382aee98d7af4c670511bb891b82b3db31e5"
+   },
+   "journal_sha256": "ec5df9f373124b35e9dcf3640c3bf9afd488c70142c7a145c7e383cf0c9d4bda",
+   "project_sha256": "13c596e1947b76def101f08c75aba44efe620166734e52c83bc99d5e25f0ee70"
+  }
+ },
+ {
+  "file": "screenshots/engine/textures-controls-colour-and-normal-ortho.png",
+  "sha256": "d3b22000a5e594fe533d328eb44c1a4910d83ee10d4f964039daa16375eec366",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/textures/frames/controls_ortho.png",
+  "ledger_seq": 96,
+  "camera": "01JA40TX0000000000000000W5",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKCJVFGDZ833BPYE6D7A1K": "aa099dd7985b1ad81adfbc11f23f21cf95f426814f12b194d7d0acdc3fc8c7ab",
+    "01M4MKCJXAVJVZM6MPF0JYCA0J": "0c4a11c9bc257c69113f0c5acbcad362c8f26f056de2ea1bf68d9c522aaee77c",
+    "01M4MKCJZ1ZC0MBNFETS2KMCC7": "da642a708db5e9eaf840dc210bd7ffdfaddd3a4a8090a935f968888d2e254bea",
+    "01M4MKCK15QADG70AH8QFDARX2": "4909fe2f53468703d3010b6e34a91a9a014d2d2d62d09a018740e5ac54aeaba2",
+    "01M4MKCK30VZ0GXQ5VZDC4KT2E": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+    "01M4MKCK4FQRRJHG9JG7Q03CS0": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+    "01M4MKCK6546CDRYGX34PC6NVZ": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+    "01M4MKCK7XFZK996XGF6JV7VDM": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+   },
+   "journal_sha256": "bc6f0efa0a77c5f2853fc29f487d2bf5dacd680e3282a89697af7599a720e322",
+   "project_sha256": "199954e0cecdf0929b92aba01a0f8d1ca9c24204d40a7e86c68fae70e124f220"
+  }
+ },
+ {
+  "file": "screenshots/engine/textures-fbx-instances-ortho.png",
+  "sha256": "13d2aeccea220fca87e59f48d9840a7d1af05afae858970c1052cb677418ed9f",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/textures/frames/instances_ortho.png",
+  "ledger_seq": 97,
+  "camera": "01JA40TX0000000000000000W6",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKCJVFGDZ833BPYE6D7A1K": "aa099dd7985b1ad81adfbc11f23f21cf95f426814f12b194d7d0acdc3fc8c7ab",
+    "01M4MKCJXAVJVZM6MPF0JYCA0J": "0c4a11c9bc257c69113f0c5acbcad362c8f26f056de2ea1bf68d9c522aaee77c",
+    "01M4MKCJZ1ZC0MBNFETS2KMCC7": "da642a708db5e9eaf840dc210bd7ffdfaddd3a4a8090a935f968888d2e254bea",
+    "01M4MKCK15QADG70AH8QFDARX2": "4909fe2f53468703d3010b6e34a91a9a014d2d2d62d09a018740e5ac54aeaba2",
+    "01M4MKCK30VZ0GXQ5VZDC4KT2E": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+    "01M4MKCK4FQRRJHG9JG7Q03CS0": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+    "01M4MKCK6546CDRYGX34PC6NVZ": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+    "01M4MKCK7XFZK996XGF6JV7VDM": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+   },
+   "journal_sha256": "bc6f0efa0a77c5f2853fc29f487d2bf5dacd680e3282a89697af7599a720e322",
+   "project_sha256": "199954e0cecdf0929b92aba01a0f8d1ca9c24204d40a7e86c68fae70e124f220"
+  }
+ },
+ {
+  "file": "screenshots/engine/textures-twin-maya-tangents-instances-ortho.png",
+  "sha256": "279cc4ca55f7a881c4e1bb77b2ccc91bf2e4d7a6c50487f8341c11607603c8b3",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/textures-twin/frames/instances_ortho.png",
+  "ledger_seq": 115,
+  "camera": "01JA40TX0000000000000000W6",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+    "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+    "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+    "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+    "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+    "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+    "01M4MKGZ179Y6TBMJEPCJH1BT4": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+   },
+   "journal_sha256": "4eefdebb54b1cef576abcef303afaf48e91b7f77662768dc5ad477fae31c33ed",
+   "project_sha256": "e116c30dc3fdb0ece8640c2330d5e26e5a87d54cc3571984d02c6c474693c5bb"
+  }
+ },
+ {
+  "file": "screenshots/engine/textures-fbx-instances-front-right-top.png",
+  "sha256": "103cdca261df84c0f1c6b73a5f7cc8dfe8e05cc795030d16f0a940800e3e4bfd",
+  "source": "artifacts/0040-static-fbx-import/runs/r1/textures/frames/instances_front_right_top.png",
+  "ledger_seq": 98,
+  "camera": "01JA40TX0000000000000000W7",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKCJVFGDZ833BPYE6D7A1K": "aa099dd7985b1ad81adfbc11f23f21cf95f426814f12b194d7d0acdc3fc8c7ab",
+    "01M4MKCJXAVJVZM6MPF0JYCA0J": "0c4a11c9bc257c69113f0c5acbcad362c8f26f056de2ea1bf68d9c522aaee77c",
+    "01M4MKCJZ1ZC0MBNFETS2KMCC7": "da642a708db5e9eaf840dc210bd7ffdfaddd3a4a8090a935f968888d2e254bea",
+    "01M4MKCK15QADG70AH8QFDARX2": "4909fe2f53468703d3010b6e34a91a9a014d2d2d62d09a018740e5ac54aeaba2",
+    "01M4MKCK30VZ0GXQ5VZDC4KT2E": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+    "01M4MKCK4FQRRJHG9JG7Q03CS0": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+    "01M4MKCK6546CDRYGX34PC6NVZ": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+    "01M4MKCK7XFZK996XGF6JV7VDM": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+   },
+   "journal_sha256": "bc6f0efa0a77c5f2853fc29f487d2bf5dacd680e3282a89697af7599a720e322",
+   "project_sha256": "199954e0cecdf0929b92aba01a0f8d1ca9c24204d40a7e86c68fae70e124f220"
+  }
+ },
+ {
+  "file": "screenshots/engine/reimport-s0-v1.png",
+  "sha256": "691737e5cc2e038318740e6cc1f5963747fb8482eeb163572f418c5ec206a3e6",
+  "source": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s0-r3q.png",
+  "ledger_seq": 128,
+  "camera": "01JA40RW0000000000000000W5",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": "b335bdd40aff03420d6a3880075147a906fdd9889d056471003ecf11b0181acb",
+    "01M4MKJ8HEMH4DJKF3TEC98093": "215b638cad36915e90dac7d5096896f2f5d54b9a25cf8b4ca662e4216656ef8d"
+   },
+   "journal_sha256": "4a58e6c2cadbf257220a16d2c330041389515d5ca47a47fb444ece1667d3cdbe",
+   "project_sha256": "02d9d180f30d06944a4741cea8b58024c9e268bc868223960aaccd2f69ec2452"
+  }
+ },
+ {
+  "file": "screenshots/engine/reimport-s3-v2-and-dependency-v2.png",
+  "sha256": "c7949b2f06c3522210ca463c04689b505064371a65883ce849d720e069fc4a1b",
+  "source": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s3-r3q.png",
+  "ledger_seq": 139,
+  "camera": "01JA40RW0000000000000000W5",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+    "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+   },
+   "journal_sha256": "b7276c2088cc41d7c2ff33f2459ea68b9905fd13d5303ed11806dbf7c1393658",
+   "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+  }
+ },
+ {
+  "file": "screenshots/engine/reimport-s10-source-free-fresh-process.png",
+  "sha256": "7c34f68e4c1a6dc240ac2e303c68553efd80fa3716720268bd34adddcae16cc6",
+  "source": "artifacts/0040-static-fbx-import/runs/r2/reimport/frames/s10-rfront.png",
+  "ledger_seq": 160,
+  "camera": "01JA40RW0000000000000000W6",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKJ8F8NZ5FYNC1VBVRK31K": "f058ed13a6815be32296269221a42f6a6d2f83abcd790290cdfc1f032ce2d4f4",
+    "01M4MKJ8HEMH4DJKF3TEC98093": "83738da443bb2bfa63868b7ff286b9112db3553803d1e0a4f5bb721c46e27c9c"
+   },
+   "journal_sha256": "ba4fc6b57d645fcd46100842fde0b811b657760640d65d94c69e84c6ed2cc591",
+   "project_sha256": "8cb088da6375f5f242e0d1e609f1b4c5484318dfceed31e42137a1078e1a0b16"
+  }
+ },
+ {
+  "file": "screenshots/engine/materials-lambert-cases-vs-expected-gltf.png",
+  "sha256": "bb647406bae52eb0d3227834de48fb91d5a6edce0cfa15c7d9987c1dc9ad9d96",
+  "source": "artifacts/0040-static-fbx-import/runs/r5/materials/frames/materials_ortho.png",
+  "ledger_seq": 174,
+  "camera": "01JA40MT0000000000000000W5",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506",
+    "01M4MKVV1S525WAZ3N6WMCZCEF": "0f10f0e158221b5d34c2605da999a76ff3d6ad919d6707c92dd66d09193d4b82",
+    "01M4MKVV3862YNWPXDCXZE6XME": "a1a0569b2135bd26079179dc2e862a70c472aad344644f3c8090003537056024"
+   },
+   "journal_sha256": "1178256f6f37abb62de63c6c36da0f315153822ce12b5bb7caf303188600b2a8",
+   "project_sha256": "07674aef5e22ecade41a1c42a6038468d802180349a1e770817e4f5e9a1dc78a"
+  }
+ },
+ {
+  "file": "screenshots/engine/materials-lambert-cases-3q.png",
+  "sha256": "e1bf3394fa0ac90fa3aeef4bcb580a175f81ed9ea6b6a3c40e90e597b12cf206",
+  "source": "artifacts/0040-static-fbx-import/runs/r5/materials/frames/materials_3q.png",
+  "ledger_seq": 175,
+  "camera": "01JA40MT0000000000000000W6",
+  "adapter": "Apple M5 Pro",
+  "width": 960,
+  "height": 540,
+  "project_state": {
+   "assets": {
+    "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506",
+    "01M4MKVV1S525WAZ3N6WMCZCEF": "0f10f0e158221b5d34c2605da999a76ff3d6ad919d6707c92dd66d09193d4b82",
+    "01M4MKVV3862YNWPXDCXZE6XME": "a1a0569b2135bd26079179dc2e862a70c472aad344644f3c8090003537056024"
+   },
+   "journal_sha256": "1178256f6f37abb62de63c6c36da0f315153822ce12b5bb7caf303188600b2a8",
+   "project_sha256": "07674aef5e22ecade41a1c42a6038468d802180349a1e770817e4f5e9a1dc78a"
+  }
+ },
+ {
+  "file": "screenshots/derived/DERIVED-diff-fbx-vs-twin-instances-front-right-top.png",
+  "sha256": "1d85b9e74417fc71a6d03bc398ced6e1e87aac452ae86474f8a79391ff79074e",
+  "source": "artifacts/0040-static-fbx-import/derived/DERIVED-diff-fbx-vs-twin-instances_front_right_top.png"
+ },
+ {
+  "file": "screenshots/derived/DERIVED-diff-fbx-vs-twin-instances-back-left-bottom.png",
+  "sha256": "aa88156ba35ef61a7f1076f07e3363ac47139b322990c41b1463ac1d1d3203a7",
+  "source": "artifacts/0040-static-fbx-import/derived/DERIVED-diff-fbx-vs-twin-instances_back_left_bottom.png"
+ },
+ {
+  "file": "screenshots/ui/ui-import-form-fbx-after-stale-usage.png",
+  "sha256": "d13cc6b0ff611c370601930b0c81f3ea4d2bc0191ba7cf1ad77fb32adc7f0b34",
+  "source": "artifacts/0040-static-fbx-import/ui/shots/ui-import-form-fbx-after-stale-usage.png"
+ },
+ {
+  "file": "screenshots/ui/ui-import-row-fbx-upper.png",
+  "sha256": "d9775062554dcffc99520bde4148e8943c8843943fc1ecf7ffd3a57702b93678",
+  "source": "artifacts/0040-static-fbx-import/ui/shots/ui-import-row-fbx-upper.png"
+ }
+]

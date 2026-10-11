@@ -1,0 +1,248 @@
+{
+ "binary_sha256": "e5f686ffb6cc00e7761cb643593f48c2047caaadce2a43ee94f1fbfffa6a67fa",
+ "cameras": {
+  "materials_3q": "01JA40MT0000000000000000W6",
+  "materials_ortho": "01JA40MT0000000000000000W5"
+ },
+ "project": "materials",
+ "run": "r5",
+ "steps": [
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "materials",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKVTZVT0GZ40KHAD71A8TG",
+     "kind": "model",
+     "name": "materials",
+     "path": "models/materials.fbx",
+     "sha256": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/materials.fbx",
+       "sha256": "bbd4a32d062ab91797c9c04bf2b53b0a997871f30c949a2946ca769ce221fbcb"
+      }
+     ],
+     "meshes": 4,
+     "textures": 1,
+     "vertices": 144
+    },
+    "revision": 1
+   },
+   "source": "models/materials.fbx",
+   "state_after": {
+    "assets": {
+     "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506"
+    },
+    "journal_sha256": "e57c660c71f5ce6f94a6a936d3a5d3cbd748147d8aa8177263320d6d183e95d2",
+    "project_sha256": "63826501adcd7ae1e8b21e8994ecfbf4f542ab508c7815ec0237bd3edab2c6ed"
+   },
+   "state_before": {
+    "assets": {},
+    "journal_sha256": null,
+    "project_sha256": "7eafc381b58bfbfc132d98413828ea1e455c76ad31816789ab2d8c56387bf078"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "material_quads",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKVV1S525WAZ3N6WMCZCEF",
+     "kind": "model",
+     "name": "material_quads",
+     "path": "controls/material_quads.glb",
+     "sha256": "0f10f0e158221b5d34c2605da999a76ff3d6ad919d6707c92dd66d09193d4b82"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "controls/material_quads.glb",
+       "sha256": "b703740c197ecf15a4182ac280435adb980ef2771eaa5e250c37042df8b53b23"
+      }
+     ],
+     "meshes": 4,
+     "textures": 1,
+     "vertices": 16
+    },
+    "revision": 2
+   },
+   "source": "controls/material_quads.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506",
+     "01M4MKVV1S525WAZ3N6WMCZCEF": "0f10f0e158221b5d34c2605da999a76ff3d6ad919d6707c92dd66d09193d4b82"
+    },
+    "journal_sha256": "959ffde96ceaa96be9a98fa19de9f118fbe2340756db4cfa0f53f97e1383cb0a",
+    "project_sha256": "0f02fa891d2a375054d3fbac441e7055f3cb0e3948c227d2aa01b0be3fcb1dc1"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506"
+    },
+    "journal_sha256": "e57c660c71f5ce6f94a6a936d3a5d3cbd748147d8aa8177263320d6d183e95d2",
+    "project_sha256": "63826501adcd7ae1e8b21e8994ecfbf4f542ab508c7815ec0237bd3edab2c6ed"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "backdrop",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKVV3862YNWPXDCXZE6XME",
+     "kind": "model",
+     "name": "backdrop",
+     "path": "controls/backdrop.glb",
+     "sha256": "a1a0569b2135bd26079179dc2e862a70c472aad344644f3c8090003537056024"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "controls/backdrop.glb",
+       "sha256": "71e09ea419f5cd7ab3c130dd0d9ced3dbb01664f5f52f77f27aa47a20234ca2e"
+      }
+     ],
+     "meshes": 1,
+     "textures": 0,
+     "vertices": 4
+    },
+    "revision": 3
+   },
+   "source": "controls/backdrop.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506",
+     "01M4MKVV1S525WAZ3N6WMCZCEF": "0f10f0e158221b5d34c2605da999a76ff3d6ad919d6707c92dd66d09193d4b82",
+     "01M4MKVV3862YNWPXDCXZE6XME": "a1a0569b2135bd26079179dc2e862a70c472aad344644f3c8090003537056024"
+    },
+    "journal_sha256": "19bbf34a9482fb304138b05e39ef57e1445fe837fc142e393cc92b8a04e1af39",
+    "project_sha256": "6c1cbe59e0a5632614cd951a4d63c27004b4484b28305e6e57b8366399b16c62"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506",
+     "01M4MKVV1S525WAZ3N6WMCZCEF": "0f10f0e158221b5d34c2605da999a76ff3d6ad919d6707c92dd66d09193d4b82"
+    },
+    "journal_sha256": "959ffde96ceaa96be9a98fa19de9f118fbe2340756db4cfa0f53f97e1383cb0a",
+    "project_sha256": "0f02fa891d2a375054d3fbac441e7055f3cb0e3948c227d2aa01b0be3fcb1dc1"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "kind": "rpc",
+   "label": "read revision",
+   "methods": [
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 3
+     }
+    }
+   ]
+  },
+  {
+   "kind": "rpc",
+   "label": "Lambert material case layout",
+   "methods": [
+    "command.execute",
+    "project.save"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 4,
+      "transaction_id": "01M4MKVV5QQ7C6X1ZK4KFZN3NB"
+     }
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "saved": true
+     }
+    }
+   ]
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 5584,
+   "camera": "01JA40MT0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 9,
+    "model_entities": 3,
+    "model_triangles": 58,
+    "primitive_instances": 9,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "materials_ortho",
+   "path": "artifacts/0040-static-fbx-import/runs/r5/materials/frames/materials_ortho.png",
+   "project_state": {
+    "assets": {
+     "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506",
+     "01M4MKVV1S525WAZ3N6WMCZCEF": "0f10f0e158221b5d34c2605da999a76ff3d6ad919d6707c92dd66d09193d4b82",
+     "01M4MKVV3862YNWPXDCXZE6XME": "a1a0569b2135bd26079179dc2e862a70c472aad344644f3c8090003537056024"
+    },
+    "journal_sha256": "1178256f6f37abb62de63c6c36da0f315153822ce12b5bb7caf303188600b2a8",
+    "project_sha256": "07674aef5e22ecade41a1c42a6038468d802180349a1e770817e4f5e9a1dc78a"
+   },
+   "sha256": "bb647406bae52eb0d3227834de48fb91d5a6edce0cfa15c7d9987c1dc9ad9d96",
+   "shading": "material_preview",
+   "state": "with sources"
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 25432,
+   "camera": "01JA40MT0000000000000000W6",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 9,
+    "model_entities": 3,
+    "model_triangles": 58,
+    "primitive_instances": 9,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "materials_3q",
+   "path": "artifacts/0040-static-fbx-import/runs/r5/materials/frames/materials_3q.png",
+   "project_state": {
+    "assets": {
+     "01M4MKVTZVT0GZ40KHAD71A8TG": "3c54fd83fbb808322ec475b8cfc33d45c3a01e4ef17363a1e539878e7dc29506",
+     "01M4MKVV1S525WAZ3N6WMCZCEF": "0f10f0e158221b5d34c2605da999a76ff3d6ad919d6707c92dd66d09193d4b82",
+     "01M4MKVV3862YNWPXDCXZE6XME": "a1a0569b2135bd26079179dc2e862a70c472aad344644f3c8090003537056024"
+    },
+    "journal_sha256": "1178256f6f37abb62de63c6c36da0f315153822ce12b5bb7caf303188600b2a8",
+    "project_sha256": "07674aef5e22ecade41a1c42a6038468d802180349a1e770817e4f5e9a1dc78a"
+   },
+   "sha256": "e1bf3394fa0ac90fa3aeef4bcb580a175f81ed9ea6b6a3c40e90e597b12cf206",
+   "shading": "material_preview",
+   "state": "with sources"
+  }
+ ]
+}
