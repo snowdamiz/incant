@@ -1,7 +1,7 @@
 {
   "format": "incant-shared-agent-project-access",
   "version": 1,
-  "base_commit": "5554e7251a84b57521801986c45c8727119db5d8",
+  "base_commit": "c8b05fb18fe17d9b2df737d872a333997d227762",
   "source_sha256": {
     "crates/incant_agent/src/access.rs": "eb31e955db5f19b21c1fd5080f0cbfbc53a61e505b4e3ae30a910eb17cf39fe3",
     "crates/incant_agent/src/lib.rs": "7f00f03ee5a15262bec3d491dcd159844ae9482b71cac405218d6f5f2bd8a147",
@@ -31,12 +31,26 @@
       "passed": true,
       "log": "/tmp/incant-responsive-agent-checked-clippy.log",
       "sha256": "63995da22efeca00208e47182b9cc7444e068c2441e2f528a82a4d607405c25a"
+    },
+    {
+      "command": "./tools/cargo test --locked --profile ci -j2 -p incant_headless --bin incant_headless native_agent_play",
+      "passed": 5,
+      "integrated_main": "c8b05fb18fe17d9b2df737d872a333997d227762",
+      "log": "/tmp/incant-responsive-agent-main91-native.log",
+      "sha256": "98561df4774b5c49cb86747d7a054a0c4d07d8d5117088d17d31888b26a66660"
+    },
+    {
+      "command": "node --test tools/tests/native_script.test.mjs",
+      "passed": 19,
+      "integrated_main": "c8b05fb18fe17d9b2df737d872a333997d227762",
+      "log": "/tmp/incant-responsive-agent-main91-node.log",
+      "sha256": "55cd629d759de953fb2a5801b8e5344347cc4b11568722a9204e7c52a4afda78"
     }
   ],
   "review": {
     "path": "/tmp/incant-responsive-agent-review.md",
-    "sha256": "cc11c37b260858e3a99ff5fc18f759a24dd453d569364c83d880c07ee03fa715",
-    "result": "accepted corrected post-cook validation boundary; subsequent compiler-only local Result alias arity correction"
+    "sha256": "a376263edaac9d8a5250159ab038bfd5e8395e1062bb2bac2c42b3852da5d5b1",
+    "result": "accepted at reviewed code commit; source-race finding resolved"
   },
   "limits": [
     "deterministic provider doubles, not a live-provider gate",
@@ -44,5 +58,6 @@
     "no reference-device performance claim",
     "shared mutex belongs to one project session",
     "network reads and compiler work are not preempted by cancellation"
-  ]
+  ],
+  "reviewed_code_commit": "a582d95e48f5dd3f7402430a73d18fcab915250a"
 }

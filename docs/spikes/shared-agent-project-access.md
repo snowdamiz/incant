@@ -43,6 +43,8 @@ new bus that reuses the same project ID is outside this API's contract.
   accepts the new script from a fresh snapshot. Both scripts are actually
   typechecked, cooked and executed.
 - Scoped all-target Clippy with denied warnings and formatting pass.
+- After rebasing on main91, all five native cases and all 19 Node compiler
+  cases pass with the integrated Windows compiler-path correction.
 - Independent review found the document/source race above; the corrected checked
   boundary and regression were reviewed again and accepted.
 
