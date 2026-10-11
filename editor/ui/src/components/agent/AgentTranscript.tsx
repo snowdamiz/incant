@@ -90,6 +90,9 @@ function useFollow(version: number | null, lastTurn: number | null) {
   // The last position this hook or the reader left the view at. A scroll event that is not
   // a move by the reader (our own jump, or text reflowing after fonts load) keeps following.
   const lastTop = useRef(0);
+  // How tall the conversation was when last measured. A session update that adds nothing
+  // to read (an allowance change, a usage total) does not offer Latest.
+  const seenHeight = useRef(0);
   const toEdge = useCallback((target: HTMLElement) => {
     target.scrollTop = liveEdge(target);
     lastTop.current = target.scrollTop;
@@ -102,6 +105,8 @@ function useFollow(version: number | null, lastTurn: number | null) {
     const update = () => {
       setScrollable(element.scrollHeight > element.clientHeight + 1);
       if (following.current) toEdge(element);
+      // Growth with no session update (something expanded to be read) is not new output.
+      seenHeight.current = element.scrollHeight;
     };
     update();
     const observer = new ResizeObserver(update);
@@ -120,9 +125,11 @@ function useFollow(version: number | null, lastTurn: number | null) {
     if (following.current) {
       toEdge(element);
       setBehind(false);
-    } else {
+    } else if (element.scrollHeight > seenHeight.current + 1) {
+      // New output below the reader.
       setBehind(true);
     }
+    seenHeight.current = element.scrollHeight;
   }, [element, version, lastTurn, toEdge]);
 
   const onScroll = useCallback(() => {
