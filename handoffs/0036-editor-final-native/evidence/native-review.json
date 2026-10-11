@@ -1,0 +1,1027 @@
+{
+ "handoff": "0036-editor-final-native",
+ "model": {
+  "name": "Claude Opus 5.5",
+  "id": "claude-opus-5-5",
+  "thinking_effort": "max (as required and stated by the runner; not independently observable from inside the session)"
+ },
+ "source": {
+  "reviewed_commit": "28e5491ab317019b050bf58b8819e580f796dd33",
+  "presentation_commit": "65e17177bb488374fc76e23567f558a3d91669e9",
+  "branch_head": "3ff9c1ab7fed86e1545a86947935684fbe2b5d2b",
+  "editor_tree_at_head_and_28e5491": "a1c1f74ab626f70b69e48a69ac471a45976ad245",
+  "crates_tree_at_head_and_28e5491": "e9e2c5fa4d61d44246c48df85a34d9cc990d1aec",
+  "head_adds_only": [
+   "STATUS.md",
+   "docs/spikes/editor-release-union.md",
+   "docs/spikes/evidence/editor-release-final-2026-10-11.json",
+   "handoffs/0036-editor-final-native/brief.md"
+  ]
+ },
+ "binary": {
+  "bundle": "/private/tmp/incant-native-review-28e5491/Incant Review 28e5491.app",
+  "executable": "/private/tmp/incant-native-review-28e5491/Incant Review 28e5491.app/Contents/MacOS/incant_review_28e5491",
+  "sha256": "51599f65f3e96458d706a81c81b71bc392e93812923f11549e4ae0bd3024b79e",
+  "sha256_matches_packet_and_provenance": true,
+  "codesign": "ad hoc, linker-signed, identifier incant_editor-b5d0fb30b6efd6d6, Info.plist not bound",
+  "info_plist_bundle_id": "dev.incant.review.28e5491",
+  "launchservices_bundle_id": null,
+  "launchservices_note": "Launched by exec under sandbox-exec; LaunchServices registered the exact bundle path, display name 'Incant Review 28e5491' and 'sandboxed', but no bundle ID. Identity was asserted by kernel executable path, registered bundle path and the bundle's on-disk ID."
+ },
+ "launch": {
+  "command": "/usr/bin/sandbox-exec -f /private/tmp/incant-native-review-28e5491/review.sb '<executable>' /private/tmp/incant-native-review-28e5491/fixture/review.incant.json (tools/launch.sh, after a hash check)",
+  "pid": 64415,
+  "started": "2026-10-10T21:14:46-04:00",
+  "stopped": "normal quit request, verified exit, no SIGTERM needed",
+  "sandbox_profile_sha256": "4aa861577c4188c22f27f3a274eec30672f6b23b68877af255d4366502f3ed06",
+  "sandbox_profile": "(version 1) (allow default) (deny network*) (deny file-read* file-write* (subpath \"~/Library/Application Support/Incant\") (subpath \".../protected-probe\"))",
+  "isolation_proof_sha256": "dd92dee7cfea1e76ddb50575983f4be89d4ba116ac8e43e8849892f91738ae43",
+  "observed_account_error": "provider: Could not create Incant account directory (provider.auth)"
+ },
+ "environment": {
+  "macos": "26.6 (25G72)",
+  "hardware": "Mac17,9, Apple M5 Pro, 48 GB",
+  "webkit": "21624.4.5.11.5",
+  "display_points": [
+   1512,
+   982
+  ],
+  "visible_points": [
+   1512,
+   874
+  ],
+  "scale": 2,
+  "keyboard_layout": "com.apple.keylayout.US",
+  "helper": "tools/native.swift compiled with Apple Swift 6.4"
+ },
+ "sizes": {
+  "normal": {
+   "requested_inner": [
+    1440,
+    900
+   ],
+   "actual_points": [
+    1440,
+    874
+   ],
+   "capture_pixels": [
+    2880,
+    1748
+   ],
+   "why": "the display's visible frame is 874 pt tall"
+  },
+  "minimum": {
+   "actual_points": [
+    1000,
+    650
+   ],
+   "capture_pixels": [
+    2000,
+    1300
+   ],
+   "enforced": "a 900x600 request stayed 1000x650"
+  },
+  "narrow_inspector": {
+   "points": 280,
+   "from": 360,
+   "how": "Home on the focused 'Resize inspector and agent' divider at 1000x650"
+  }
+ },
+ "input_safety": {
+  "log_entries": 219,
+  "all_entries_pid": [
+   64415
+  ],
+  "input_entries": 128,
+  "input_entries_with_three_way_frontmost_proof": 128,
+  "method": "keyboard events posted to PID 64415 only (CGEvent.postToPid); accessibility actions on AXUIElementCreateApplication(64415); window-only captures (screencapture -l 29601)",
+  "frontmost_sources": [
+   "NSWorkspace frontmost PID",
+   "owner of the front on-screen layer-0 window",
+   "the review app's AXFrontmost"
+  ],
+  "system_wide_ax": "AXFocusedApplication returned kAXErrorCannotComplete (-25204) in this session, so it was not used",
+  "key_combos": {
+   "down": 7,
+   "f6": 9,
+   "shift+f6": 2,
+   "tab": 24,
+   "shift+tab": 5,
+   "escape": 14,
+   "?": 2,
+   "cmd+/": 1,
+   "right": 5,
+   "return": 15,
+   "cmd+a": 1,
+   "shift+return": 3,
+   "end": 1,
+   "up": 4,
+   "left": 2,
+   "shift+f10": 1,
+   "home": 2,
+   "alt+cmd+3": 2
+  },
+  "menus": [
+   [
+    "Edit",
+    "Select All"
+   ],
+   [
+    "Edit",
+    "Select All"
+   ],
+   [
+    "Edit",
+    "Undo"
+   ],
+   [
+    "Edit",
+    "Redo"
+   ]
+  ],
+  "typed": [
+   "hierarchy",
+   "refused.json",
+   "new.atlas.json",
+   "new.wav",
+   "new.ogg",
+   "ordinary.png",
+   "new.atlas.json",
+   "../outside.png",
+   "missing.png"
+  ],
+  "never": [
+   "Continue with ChatGPT / connect",
+   "add account",
+   "sign out",
+   "Enter or Space inside the account dialog",
+   "the user's other Incant app",
+   "full-screen capture"
+  ]
+ },
+ "observations": {
+  "account": {
+   "titlebar_control": "AXPopUpButton 'ChatGPT account, sign-in problem', 30x28 pt, person glyph with a red corner dot, no text; tooltip 'ChatGPT account, sign-in problem: provider: Could not create Incant account directory'",
+   "dialog_points": {
+    "1440x874": [
+     420,
+     188
+    ],
+    "1000x650": [
+     420,
+     188
+    ]
+   },
+   "dialog_text": [
+    "ChatGPT account",
+    "Sign-in didn't finish. You can try again now.",
+    "provider: Could not create Incant account directory",
+    "provider.auth",
+    "Continue with ChatGPT"
+   ],
+   "focus": [
+    [
+     "open (AX press on the account button)",
+     "Continue with ChatGPT"
+    ],
+    [
+     "Tab",
+     "Close (wraps)"
+    ],
+    [
+     "Shift+Tab",
+     "Continue with ChatGPT (wraps)"
+    ],
+    [
+     "Escape",
+     "dialog closed; account button"
+    ],
+    [
+     "Close button",
+     "dialog closed; account button"
+    ],
+    [
+     "Escape with focus on the dialog container",
+     "dialog closed; account button"
+    ]
+   ]
+  },
+  "shortcuts": {
+   "open": [
+    "? from the account button",
+    "Command-/"
+   ],
+   "initial_focus": "Filter shortcuts",
+   "dialog_points": {
+    "1440x874": [
+     600,
+     680
+    ],
+    "1000x650": [
+     600,
+     554
+    ]
+   },
+   "visible_mac_labels": [
+    "F6",
+    "⇧F6",
+    "⌘Z",
+    "⇧⌘Z",
+    "? or ⌘/",
+    "Esc",
+    "↑ / ↓",
+    "→ / ←",
+    "Home / End",
+    "Page Up / Page Down",
+    "⌘F",
+    "F2",
+    "⌘⌫ or ⌦",
+    "⇧F10 or Menu",
+    "⌥⌘1",
+    "⌥⌘2"
+   ],
+   "spoken_examples": [
+    "Shift Command Z",
+    "Option Command 1",
+    "Command Delete, or Forward Delete",
+    "Question mark, or Command Slash"
+   ],
+   "filter_hierarchy": "10 of 29",
+   "escape": [
+    "first Escape clears the filter, focus stays in it",
+    "second Escape closes, focus returns to the opener"
+   ]
+  },
+  "cameras": {
+   "Camera Perspective": "Projection Perspective; Field of view 60°; Near clip 0.1 m; Far clip 100 m",
+   "Camera Orthographic": "Projection Orthographic; Vertical size 10 m; Field of view 60° tagged Unused; Near 0.1 m; Far 100 m",
+   "Camera Pixel Perfect": "Projection Pixel perfect; Pixel density 16 px/m; Resolution px W 320 H 180; Field of view tagged Unused; fits at 1000x650 and in the 280 pt Inspector with units visible"
+  },
+  "compound": "Dumbbell: header glyph, name, lock and Copy entity ID only; Shape compound; 'Parts 2 · 2 sphere'; rows '1 sphere r 0.3 m', '2 sphere r 0.3 m'; Part 1 of 2 offset X -0.7, Down gives Part 2 of 2 offset X 0.7; the part's own stable ID is a field (kept since 0025); no collider paragraph or Entity/ID rows visible. Tab order: Copy entity ID, Collider, Shape, part row, Primitive, Radius.",
+  "sprite": "Atlas Sprite: rows alphabetical; Region shows the unsupported notice with {\"frame\":\"…0002\"}; Tint X/Y/Z/W; Flip x, Flip y and Sampling 'Not set'; Layer, Mode, Order Default; Texture 'existing.atlas 01M4M7Z8QS5EW…'; generic entity glyph. Same as 0035 findings 3–8; no regression.",
+  "assets": {
+   "initial_list": [
+    "existing.atlas — Texture, Atlas",
+    "existing — Audio"
+   ],
+   "atlas_details": "Source existing.atlas.json; Interpretation 'Color' value box with 'Sprite atlases are always color.'; button 'Reimport' only",
+   "ordinary_image": "Interpretation radios Color (saved), Linear, Normal map; Right Arrow to Linear shows 'Saved as Color; reimport to apply.' and 'Reimport as Linear'; after it, header 'Texture, Linear' and button 'Reimport'",
+   "audio": "new.wav and new.ogg details: kind Audio, Source path, Reimport, no Interpretation",
+   "after_import_list": [
+    "existing.atlas — Atlas",
+    "existing — Audio",
+    "new.atlas — Atlas",
+    "new — Audio (new.ogg)",
+    "new — Audio (new.wav)",
+    "ordinary — Color, later Linear"
+   ]
+  },
+  "imports": [
+   {
+    "input": "refused.json",
+    "result": "Unsupported file type. Use glTF, GLB, PNG, JPEG, EXR, .atlas.json, WAV or OGG.; status 'Fix the highlighted path before importing.'",
+    "sent": false,
+    "focus": "Path 1 (kept)",
+    "history": "3 (unchanged)"
+   },
+   {
+    "input": [
+     "new.atlas.json",
+     "new.wav",
+     "new.ogg",
+     "ordinary.png"
+    ],
+    "rows": [
+     "Color atlas",
+     "WAV audio",
+     "OGG audio",
+     "Color / Linear / Normal map"
+    ],
+    "result": "Imported 4 files. Undo reverts the whole batch.",
+    "focus": "the reset, empty Path 1",
+    "journal": "seq 4, Import assets, 4 upsert_asset"
+   },
+   {
+    "input": "../outside.png",
+    "result": "Paths cannot leave the project folder (“..”).",
+    "sent": false,
+    "focus": "Path 1 (kept)"
+   },
+   {
+    "input": "missing.png",
+    "result": "Nothing was imported — could not cook missing.png: asset IO: No such file or directory (os error 2). The asset list is unchanged. Your paths are kept below.",
+    "sent": true,
+    "native_failure": true,
+    "focus": "Path 1 with the path kept",
+    "history": "5 (unchanged)",
+    "assets_tab": "alert dot 'The last import failed'; list banner 'Last import failed — Show'"
+   }
+  ],
+  "reimports": [
+   {
+    "asset": "existing.atlas",
+    "result": "Reimported. Undo reverts the whole reimport.",
+    "focus": "asset heading",
+    "history": "3 → 3 (no transaction)"
+   },
+   {
+    "asset": "ordinary (as Linear)",
+    "result": "Reimported. Undo reverts the whole reimport.",
+    "focus": "asset heading",
+    "history": "4 → 5",
+    "journal": "seq 5, Import assets, 1 upsert_asset"
+   },
+   {
+    "asset": "new (new.wav)",
+    "result": "Reimported. Undo reverts the whole reimport.",
+    "focus": "asset heading",
+    "history": "5 → 5 (no transaction)"
+   },
+   {
+    "asset": "new (new.ogg)",
+    "result": "Reimported. Undo reverts the whole reimport.",
+    "focus": "asset heading",
+    "history": "5 → 5 (no transaction)"
+   }
+  ],
+  "native_menu": {
+   "edit_items": [
+    "Undo ⌘Z",
+    "Redo ⇧⌘Z",
+    "Cut",
+    "Copy",
+    "Paste",
+    "Select All ⌘A",
+    "AutoFill",
+    "Start Dictation…",
+    "Emoji & Symbols"
+   ],
+   "select_all": "replaced the Path 1 text",
+   "undo": "after the no-op OGG reimport: '4 of 5 applied', the 21:28:06 'Import assets' (the Linear reimport of ordinary) marked undone, ordinary back to Color (journal seq 6)",
+   "redo": "'5 of 5 applied', ordinary Linear again (journal seq 7); the window capture after Redo is byte-identical to the one before Undo (6233dd86…)"
+  },
+  "keyboard": [
+   "Up/Down in the hierarchy move selection and focus with a visible ring",
+   "F6: hierarchy → viewport → output (Problems tab) → inspector → agent → hierarchy; Shift+F6 reverses",
+   "Shift+F10 on a row: menu Rename (F2), Copy ID, Delete (⌘⌫) with focus on Rename; Down → Copy ID; Escape → the row, nothing run",
+   "Right/Left on the left-panel tabs switch Hierarchy/Assets",
+   "End/Home in the asset list; Return opens details with focus on the heading; Escape returns to the row",
+   "Shift+Return adds an import row below; Return submits",
+   "Home on the Inspector divider: 360 → 280",
+   "Option-Command-3 hides and shows the inspector and agent; focus stays on the row"
+  ],
+  "titlebar_inactive_dimming": {
+   "project_name": [
+    "#f0f0f4",
+    "#99999d"
+   ],
+   "scene_crumb": [
+    "#b8bcc5",
+    "#75787f"
+   ],
+   "background": "#0b0d12",
+   "contrast_scene_crumb": [
+    "10.21:1 active",
+    "4.40:1 inactive"
+   ],
+   "account_dot": [
+    "#f39688",
+    "#9b6059"
+   ],
+   "method": "brightest antialiased pixel in the window capture after conversion to sRGB; approximate"
+  }
+ },
+ "external_interference": [
+  "Between 21:15:51 and 21:16:32, with no helper input, the review window was zoomed to 1512x874, Camera Perspective was selected, the agent panel was collapsed and another app became frontmost.",
+  "Around 21:21:30–21:21:50, with no helper input, focus inside the open account dialog moved from Continue with ChatGPT to the dialog container (as a click on dialog content does) and another app became frontmost.",
+  "Another app repeatedly became frontmost; every helper input asserted the review PID frontmost first, and none was sent otherwise. I restored 1440x874 before the review captures."
+ ],
+ "other_incant_app": "The other Incant app (artifacts/0033-native-clean/Incant Studio Review.app, PID 64681) was running at 21:13 and not running at the end. No helper action targeted it: every log entry names PID 64415.",
+ "fixture_changes": {
+  "journal_records": "4 → 8: seq 4 Import assets (4 upserts), seq 5 Import assets (ordinary Linear), seq 6 undo of seq 5, seq 7 redo of seq 5",
+  "new_cache_files": 8,
+  "project_json_unchanged": true,
+  "inputs_unchanged": true
+ },
+ "outside_fixture": [
+  "~/Library/WebKit/dev.incant.review.28e5491 (created 21:14:47 at launch)",
+  "~/Library/Caches/dev.incant.review.28e5491 (created 21:14:47 at launch)"
+ ],
+ "captures": {
+  "n01-launch-inactive-1440x874.png": {
+   "sha256": "33141ea4be00282b7c4105e002bed2efde47ff9caf8faee21a5ea0121dbdc14b",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": false,
+   "time": "2026-10-10T21:15:32.552-04:00"
+  },
+  "n02-launch-active-1440x874.png": {
+   "sha256": "6b16fe81558adc9194bca206fe4b50fbec2dc0a98c0be260b644490a4a0e67e6",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:16:32.831-04:00"
+  },
+  "n03-state-after-raise.png": {
+   "sha256": "c8c6f87ecc49b71be019c8662915f39d5b2524c0ceca74ad62099a6f0be00bbd",
+   "pixels": [
+    3024,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1512,
+    "x": 0,
+    "y": 33
+   },
+   "active": false,
+   "time": "2026-10-10T21:16:51.223-04:00"
+  },
+  "n10-camera-perspective-1440x874.png": {
+   "sha256": "087cf86598fff85905eccd783a813fd20af6789efda08c85ed2b5d70ffa4bdf5",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:18:10.914-04:00"
+  },
+  "n11-camera-orthographic-1440x874.png": {
+   "sha256": "88c8691ee79ef49c40a95a5a23475844891b747f954cd5b9e24bde28573d2a10",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:19:30.481-04:00"
+  },
+  "n12-camera-pixel-perfect-1440x874.png": {
+   "sha256": "f597d14d5b8ee53ac6ac55930f1f83d014906f5bbc470185e8c5ed2b92872291",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:19:39.453-04:00"
+  },
+  "n13-dumbbell-compound-1440x874.png": {
+   "sha256": "2aa969a67d940e5982ba1a65623f3630fe03537e3cbee7ca06689b03d8dff62d",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:19:47.529-04:00"
+  },
+  "n14-dumbbell-part2-1440x874.png": {
+   "sha256": "2804d32236d38df5bafaae7b98c800ea6ba3f18ff658538a6edd943a4178a9e6",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:20:33.148-04:00"
+  },
+  "n15-atlas-sprite-1440x874.png": {
+   "sha256": "c76422ebbb01b8316c2ef73a87dc50bcd95ef6ef1bb86a6ac9bf2166063bafbd",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:20:53.481-04:00"
+  },
+  "n20-account-unavailable-1440x874.png": {
+   "sha256": "8878d07b4cec834cc78e2d703b47c49581548f612d848c7976180ee44d60746f",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:21:26.908-04:00"
+  },
+  "n22-account-state-check.png": {
+   "sha256": "f2f86d7205dc95f45f8af9d4286a4121ade42dad6d1f7198f20b9dc6465500d6",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": false,
+   "time": "2026-10-10T21:22:13.363-04:00"
+  },
+  "n21-account-close-focus-1440x874.png": {
+   "sha256": "3dbf3296f76e0f0914b6a9ab9fb5a39d42cfc28283456c7c9aee53b420428fec",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:23:19.740-04:00"
+  },
+  "n23-account-closed-focus-1440x874.png": {
+   "sha256": "6ddebab095426397f8c40499ddee296bfecf7d7734da7ab716641e0b81146e6f",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:23:21.236-04:00"
+  },
+  "n30-shortcuts-mac-1440x874.png": {
+   "sha256": "223080a1b1e092cc7fc39864532dccc8199e96dad040aad6a9a06ddf5ab8f062",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:23:59.204-04:00"
+  },
+  "n31-shortcuts-filter-hierarchy-1440x874.png": {
+   "sha256": "a591da49fe3e45201dbe58b9f8723cdc54c72602a5a7434208bc9ae245e0e3c1",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:24:18.316-04:00"
+  },
+  "n40-assets-list-1440x874.png": {
+   "sha256": "043861d96eb3cec41f2c0b856accd73ae4b8f4897048882cf2efb8548f6ea6e0",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:24:40.198-04:00"
+  },
+  "n41-atlas-details-1440x874.png": {
+   "sha256": "3a0f9503d6dbfba43fb6cf7a40b7e182587fcc51f373d8eda124bdda78c8a749",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:25:00.990-04:00"
+  },
+  "n42-atlas-reimported-focus-1440x874.png": {
+   "sha256": "edb41f79fb60d6d9cb940ff64faf881ab0fceed8bf6871441f251594ea743d61",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:25:19.500-04:00"
+  },
+  "n43-import-refused-json-1440x874.png": {
+   "sha256": "6b4c47f27e1f0196c7af181f8f7b85550080d3917ebb2f3cc9452cbaf13e40af",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:25:51.725-04:00"
+  },
+  "n44-import-typed-rows-1440x874.png": {
+   "sha256": "b0dee76b9050577dbfa209c7db66871ad58ec55baf10f9e12223c194f44c2779",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:26:55.738-04:00"
+  },
+  "n45-import-success-focus-1440x874.png": {
+   "sha256": "e83a3719901f546f3511dcfe836b0f43e81097707a3473699af12a775aecfe31",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:27:19.575-04:00"
+  },
+  "n46-ordinary-details-1440x874.png": {
+   "sha256": "4106dc2de28d5ad20729c8f17f983a688d64d7c4961175a6bbc2247272e7f65e",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:27:49.529-04:00"
+  },
+  "n47-ordinary-linear-pending-1440x874.png": {
+   "sha256": "a61e8a60bd91b57639dfb4017e0ce6ce27a908d8699f22fc621339c33da07cdb",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:27:58.529-04:00"
+  },
+  "n48-ordinary-reimported-linear-1440x874.png": {
+   "sha256": "5354d0b8375299ec14e0493707ba62468e34d4f7f5c8faeeb0f1fd7635e2c524",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:28:07.025-04:00"
+  },
+  "n49-wav-details-1440x874.png": {
+   "sha256": "c05f1a619bef4fa567f611c0facc48695dffb23a49f30000efa992aa87153855",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:28:17.475-04:00"
+  },
+  "n50-ogg-details-1440x874.png": {
+   "sha256": "17ac390c1f21e2dba9f8783de1b021b34785d75a728818a68d877fcbae84a52e",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:28:31.538-04:00"
+  },
+  "n51-ogg-reimported-focus-1440x874.png": {
+   "sha256": "ae39b9361b2120c47c91495e56a2d377a441923916484a08122da7ab7a570dde",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:28:32.463-04:00"
+  },
+  "n52-import-traversal-refused-1440x874.png": {
+   "sha256": "5955faaa20378bce4082905e11f9d7154f5b788a06bbf43884631268fbfedf17",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:28:58.054-04:00"
+  },
+  "n53-import-missing-failure-1440x874.png": {
+   "sha256": "c9f9f2966bab805d354a2336682395f49903185c68146a04b20f3b8341f5c7e7",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:29:07.454-04:00"
+  },
+  "n54-history-before-undo-1440x874.png": {
+   "sha256": "6233dd8623e0d815bd72cd8f3803efc6f332e564adce810e587efd8ed6391d65",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:29:39.809-04:00"
+  },
+  "n55-after-menu-undo-1440x874.png": {
+   "sha256": "78be63256f7689c01b8645879bbfaf0588dd987040e9940ada1f8aeadb919399",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:30:13.913-04:00"
+  },
+  "n56-after-menu-redo-1440x874.png": {
+   "sha256": "6233dd8623e0d815bd72cd8f3803efc6f332e564adce810e587efd8ed6391d65",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:30:15.071-04:00"
+  },
+  "n57-context-menu-1440x874.png": {
+   "sha256": "0d8e6f76e0d5ee02c099d12da40cd5c1c413c051b7115694d824db3d4b7dd778",
+   "pixels": [
+    2880,
+    1748
+   ],
+   "window_points": {
+    "h": 874,
+    "w": 1440,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:30:35.900-04:00"
+  },
+  "m10-pixel-camera-1000x650.png": {
+   "sha256": "6eeff050f81835fe860ff21ecc3b33e4354ddd0ec87ca9f0d74c2deaa7013208",
+   "pixels": [
+    2000,
+    1300
+   ],
+   "window_points": {
+    "h": 650,
+    "w": 1000,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:30:53.497-04:00"
+  },
+  "m20-account-unavailable-1000x650.png": {
+   "sha256": "49e7d724916be8545872b3dc0977a5f7dcb578ec08a37e665d42476691dadcb8",
+   "pixels": [
+    2000,
+    1300
+   ],
+   "window_points": {
+    "h": 650,
+    "w": 1000,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:31:16.503-04:00"
+  },
+  "m30-shortcuts-1000x650.png": {
+   "sha256": "c71284fd4cd500d307d1f25db5eb66aea4f8192d5600031c288eeb0d38af0e5e",
+   "pixels": [
+    2000,
+    1300
+   ],
+   "window_points": {
+    "h": 650,
+    "w": 1000,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:31:18.431-04:00"
+  },
+  "m40-atlas-details-1000x650.png": {
+   "sha256": "df2f7da7fba47096688432119ed5d12812c920ffb488f5bd424fea48a9234f80",
+   "pixels": [
+    2000,
+    1300
+   ],
+   "window_points": {
+    "h": 650,
+    "w": 1000,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:31:34.492-04:00"
+  },
+  "m41-atlas-details-narrow-1000x650.png": {
+   "sha256": "4e7c5e3ea38a915c5a8d9309e6b725d80026a36a24c600fe5af3ae1ffefda6b9",
+   "pixels": [
+    2000,
+    1300
+   ],
+   "window_points": {
+    "h": 650,
+    "w": 1000,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:31:49.959-04:00"
+  },
+  "m11-pixel-camera-narrow-1000x650.png": {
+   "sha256": "53699ca5d77983ddb519e5fe3bd9cd487298573445b7b81f066b12baca4fca4a",
+   "pixels": [
+    2000,
+    1300
+   ],
+   "window_points": {
+    "h": 650,
+    "w": 1000,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:32:04.609-04:00"
+  },
+  "m13-dumbbell-narrow-1000x650.png": {
+   "sha256": "d5259bc9b35798d8356f1b0c7c3d4318d7aabfaaed6018277cc7b39d89278516",
+   "pixels": [
+    2000,
+    1300
+   ],
+   "window_points": {
+    "h": 650,
+    "w": 1000,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:32:05.536-04:00"
+  },
+  "m50-inspector-hidden-1000x650.png": {
+   "sha256": "56b1bb4884029cf06d3257807a6cb7c7d59e2b732adb60bb62f81b9b5c58e6c4",
+   "pixels": [
+    2000,
+    1300
+   ],
+   "window_points": {
+    "h": 650,
+    "w": 1000,
+    "x": 36,
+    "y": 33
+   },
+   "active": true,
+   "time": "2026-10-10T21:32:28.164-04:00"
+  }
+ }
+}
