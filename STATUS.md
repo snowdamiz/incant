@@ -35,7 +35,7 @@ with comprehensive cross-platform CI on one frozen release checkpoint approximat
 every three hours. [ADR 0014](docs/adr/0014-ci.md) defines integration, cache and
 failure handling. The integrated policy passes 138 Python, 12 Node and 536 UI tests, strict types/build,
 formatting, generated checks and actionlint; [evidence](docs/spikes/release-checkpoints.md).
-PR83 merged after its exact-head fast check passed: 2s queue and119s execution. Main requires that fast check; release was bootstrapped at fully checked main82 and now requires all 23 full contexts, including local-service protocols. Both enforce administrators and prohibit force pushes/deletion. The three-hour heartbeat is active; the first two checkpoints remain unpromoted after diagnosed failures. The historical missing-Wasm-target failure remains recorded separately.
+PR83 merged after its exact-head fast check passed: 2s queue and119s execution. Main requires that fast check; release was bootstrapped at fully checked main82 and now requires all 23 full contexts, including local-service protocols. Both enforce administrators and prohibit force pushes/deletion. The three-hour heartbeat is active; the first three checkpoints remain unpromoted after diagnosed failures. The historical missing-Wasm-target failure remains recorded separately.
 No phase, live-provider or physical-device performance gate is waived.
 
 The initial frozen checkpoint PR85 found a Windows-only journal test lock violation. A reviewed test-only lifetime correction passes all six scoped cases and Clippy locally; Windows confirmation and complete release promotion remain pending. [Failure and repair evidence](docs/spikes/script-journal-test-portability.md).
@@ -48,7 +48,7 @@ Python process-observation and Windows native TypeScript startup failures. All e
 The combined reviewed repairs pass 199 Python tests (four Windows-only skips),
 17 Node tests and scoped native compiler checks. All failures remain recorded;
 no failed checkpoint is promoted. PR89 merged after its 126-second fast check;
-checkpoint 3 is frozen at repaired main89 with all 23 contexts retained.
+checkpoint 3 was frozen at repaired main89 with all 23 contexts retained.
 [Combined evidence](docs/spikes/checkpoint-2-portability.md).
 [Service correction evidence](docs/spikes/local-service-foundation.md#linux-private-bootstrap-correction).
 
@@ -57,8 +57,17 @@ Windows exposed a separate restricted TypeScript-host path lookup mismatch.
 The reviewed correction normalizes only compiler callback keys, preserves strict
 source/library confinement and passes actual TypeScript drive/UNC regressions,
 19 Node tests, six actual native compiler/agent tests and the source RPC proof.
-The failed candidate remains frozen; corrected Windows execution is still
-required before release. [Evidence](docs/spikes/windows-native-compiler-entry.md#checkpoint-3-restricted-typescript-host-lookup).
+Checkpoint 3 is terminal with 22 of 23 required checks passing; macOS general
+validation took 49m39s plus 4m37s queue. Its failed result remains historical,
+and corrected Windows execution is required before release.
+[Evidence](docs/spikes/windows-native-compiler-entry.md#checkpoint-3-restricted-typescript-host-lookup).
+
+Checkpoint 4 is frozen at reviewed main94. All three native physics jobs exposed
+a stale isolated probe lock missing navigation/localization dependencies. The
+reviewed repair preserves existing pins and the engine's vendored source patch;
+the fast structural regression adds no Rust compilation or new check context.
+The candidate remains unchanged while the repair is validated on main.
+[Failure and repair scope](docs/spikes/checkpoint-4-probe-lock.md).
 
 ## Authored source and native package — locally integrated
 
