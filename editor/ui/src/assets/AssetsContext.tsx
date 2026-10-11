@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { AssetImportRequest, BridgeError, ProjectAsset, TextureUsage, Ulid } from '../bridge/contract';
+import type { AssetImportCommit, AssetImportRequest, BridgeError, ProjectAsset, TextureUsage, Ulid } from '../bridge/contract';
 import { useShell } from '../shell/ShellContext';
 import { MAX_BATCH, pathProblem, sourceKind } from './paths';
 
@@ -29,7 +29,7 @@ export interface ImportJob {
 }
 
 export type ImportOutcome =
-  | { readonly status: 'success'; readonly job: ImportJob }
+  | { readonly status: 'success'; readonly job: ImportJob; readonly commit?: AssetImportCommit }
   | { readonly status: 'failure'; readonly job: ImportJob; readonly error: BridgeError };
 
 /** What the Inspector shows while the Assets view is active. */
@@ -185,18 +185,23 @@ export function AssetsProvider({ children }: { children: ReactNode }) {
         setOutcome({ status: 'failure', job, error: result.error });
         return false;
       }
-      setOutcome({ status: 'success', job });
-      setRecent(new Set(job.sources.map((source) => source.source)));
+      const unchanged = result.assetImport?.transaction === null;
+      setOutcome({ status: 'success', job, ...(result.assetImport ? { commit: result.assetImport } : {}) });
+      setRecent(new Set(result.assetImport?.transaction ? job.sources.map((source) => source.source) : []));
+      // The status line can be the only feedback once the user has moved on to another
+      // asset, so it names the files or asset; the notice sits beside the form or asset.
       if (job.kind === 'import') {
         commit([{ key: nextKey.current++, source: '', usage: null }]);
         const count = job.sources.length;
-        announce(`Imported ${count} ${count === 1 ? 'file' : 'files'}.`);
+        const files = `${count} ${count === 1 ? 'file' : 'files'}`;
+        announce(unchanged ? `Already up to date: ${files}. Nothing changed.` : result.assetImport ? `Imported ${files}.` : 'Import completed.');
       } else {
         if (job.asset) {
           const id = job.asset;
           setReimportUsageState(({ [id]: _done, ...rest }) => rest);
         }
-        announce(`Reimported ${job.name ?? job.sources[0]?.source ?? 'asset'}.`);
+        const name = job.name ?? job.sources[0]?.source ?? 'asset';
+        announce(unchanged ? `Already up to date: ${name}. Nothing changed.` : result.assetImport ? `Reimported ${name}.` : 'Import completed.');
       }
       return true;
     },
