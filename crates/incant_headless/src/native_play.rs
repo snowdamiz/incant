@@ -4,7 +4,6 @@
 //! behavior. Simulation has no source parsing or authoring dependency.
 use incant_input::InputReplay;
 use incant_observe::Plan;
-use incant_runtime::StableId;
 mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
 }
@@ -71,15 +70,6 @@ fn bounded(path: &Path, limit: usize) -> Result<Vec<u8>> {
         return Err(invalid("startup input exceeds its byte limit"));
     }
     Ok(bytes)
-}
-fn id(text: &str) -> Result<StableId> {
-    let value = text
-        .parse::<ulid::Ulid>()
-        .map_err(|_| invalid("expected canonical uppercase ULID"))?;
-    if value.to_string() != text {
-        return Err(invalid("expected canonical uppercase ULID"));
-    }
-    Ok(StableId(value.to_bytes()))
 }
 fn ticks(options: &Options, rate: u32) -> Result<u64> {
     if let Some(ticks) = options.ticks {
