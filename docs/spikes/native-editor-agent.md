@@ -59,7 +59,36 @@ checks plus eight owner regressions pass, with independent exact-source review
 and four-package all-target Clippy. Failed candidates preserve the accepted world
 across turns; account/project scope changes cannot reuse it.
 
-The separately reviewed provider invalidation-hint listener still needs union
-integration, and the Claude UI/native live-account acceptance remains separate.
-These checks do not claim completed WebView dispatch, appearance or live-provider
-evidence.
+Provider events now invalidate cached account state and trigger an authoritative
+native read. Send and approval stay unavailable until that read and a subsequent
+session read complete. Independent review reproduced an intervening-session-read
+race in the first listener; the corrected transport fences it even when account
+metadata is unchanged. Obsolete reads cannot release a newer barrier.
+
+## Live native acceptance
+
+The opt-in `agent-probe` build and `tools/probes/native-editor-agent.py --live`
+exercise the actual native handlers against the already saved ChatGPT account on
+macOS. Four `gpt-6-astra` turns completed with streamed text, six exact scoped
+approvals and 72,372 measured charged tokens. Two atomic memory edits carried
+agent ULID provenance; a third turn ran the fixture's authored script in native
+Play, and the fourth queried that retained world without another run. Play left
+the full authoring document, revision and history unchanged. Two actual Undo
+commands restored the original document.
+
+A fresh editor process restored the existing login without sign-in and recovered
+the same journal revision, applied/redo counts and ordered transaction IDs. This
+second process made no provider turn. Saved project and script hashes were
+unchanged. The fixture was created through public `incant_cmd` operations, and
+receipts omit account metadata, raw provider errors and model text.
+
+[Exact evidence](evidence/native-editor-agent-live.json) binds the source, logs,
+native binaries and numerical results. The union passes 118 scoped Rust tests
+(one existing GPU case ignored), four-package all-target Clippy, 658 UI tests,
+strict types and the custom-protocol native build. The harness first failed to
+compile because an opaque iterator was treated as a slice; the diagnostic is
+retained, and the corrected iterator count passed before the live run.
+
+This is local live-provider/native-handler evidence. The chat UI, actual WebView
+interaction and native appearance review remain outstanding; it is not the full
+model-quality evaluation, phone performance evidence or a phase gate.

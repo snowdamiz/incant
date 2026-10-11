@@ -24,10 +24,14 @@ receipt fences cover reconnect/switch and delayed approvals; repeated browser
 opening runs off the admission path. One dedicated worker now retains the native
 Play host and conversation across same-account/project turns without moving its
 QuickJS state between threads. Actual cross-turn query, failed candidate and
-replacement controls pass alongside cancellation/shutdown/panic checks: 117 tests,
-four-package all-target Clippy and independent review. Provider invalidation
-events and Claude's chat/Play UI are integrating separately; no live editor/provider
-or completed Phase 3 gate is claimed.
+replacement controls pass alongside cancellation/shutdown/panic checks. The
+provider invalidation listener is integrated with its intervening-read race fixed.
+The combined slice passes 118 scoped Rust tests, four-package all-target Clippy,
+658 UI tests, strict types and native build. Four real native-handler turns used
+the saved ChatGPT login for approved edits, native Play and a later retained-state
+query; Undo and exact journal/account recovery passed after reopening. Claude's
+Play UI is integrated; chat UI and native visual/WebView interaction acceptance
+remain underway. No completed Phase 3 gate is claimed.
 [Binding evidence](docs/spikes/native-editor-agent.md),
 [persistent owner evidence](docs/spikes/persistent-native-agent-host.md).
 

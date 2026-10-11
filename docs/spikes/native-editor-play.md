@@ -53,12 +53,15 @@ measurements. This is numerical native-window correctness evidence, not pixel
 review or a phone/performance gate. Device audio suspension takes effect at a
 callback boundary; stepped device audio is not sample-exact.
 
-## Remaining UI work
+## UI integration and remaining native review
 
-The backend and bridge are usable, but visible controls, desktop event routing and
-runtime inspector presentation are not connected yet. Claude Opus 5.5 at explicitly
-verified Max owns [handoff 0044](../../handoffs/0044-native-editor-play/brief.md).
-Its browser doubles must remain labelled; actual native-window visual acceptance
-and integrated control tests are still required before calling this feature done.
+Claude Opus 5.5 at explicitly verified Max implemented the controls, bounded
+desktop event routing, shortcuts and read-only runtime Inspector in
+[handoff 0044](../../handoffs/0044-native-editor-play/result.md). Its 606-test UI
+suite and 73 labelled browser-double flows pass; the combined agent/Play UI now
+passes 658 tests, strict types and build. Root reviewed the control/input logic
+and integrated the returned commit. Browser captures show no actual game pixels.
+The exact compiled native binary is ready for Claude's actual-window visual
+acceptance; that review remains required before calling this feature done.
 Gamepad, touch, raw pointer motion, complete session persistence and cross-platform
 native-window verification are not supplied by this work.

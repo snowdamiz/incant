@@ -14,6 +14,8 @@ use std::{
     time::Duration,
 };
 mod agent;
+#[cfg(feature = "agent-probe")]
+mod agent_probe;
 mod assets;
 mod menu;
 mod play;
@@ -147,7 +149,12 @@ fn viewport_bounds(
 fn main() {
     let project_path = std::env::args_os().nth(1).map(PathBuf::from);
     #[cfg(feature = "play-probe")]
-    let play_probe = play::probe::Options::from_args();
+    let play_probe = (std::env::args_os().nth(2).as_deref()
+        == Some(std::ffi::OsStr::new("--play-probe")))
+    .then(play::probe::Options::from_args)
+    .flatten();
+    #[cfg(feature = "agent-probe")]
+    let agent_probe = agent_probe::Options::from_args();
     let asset_root = project_path.as_ref().map(|path| {
         path.parent()
             .filter(|p| !p.as_os_str().is_empty())
@@ -419,6 +426,8 @@ fn main() {
             });
             #[cfg(feature = "play-probe")]
             if let Some(options) = play_probe { play::probe::start(app.handle().clone(), editor.clone(), options); }
+            #[cfg(feature = "agent-probe")]
+            if let Some(options) = agent_probe { agent_probe::start(app.handle().clone(), editor.clone(), options); }
             Ok(())
         })
         .run(app_context())

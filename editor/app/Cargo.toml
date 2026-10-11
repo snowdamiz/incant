@@ -8,6 +8,8 @@ publish.workspace = true
 [features]
 # Explicit local numerical native-window acceptance, absent from normal builds.
 play-probe = []
+# Explicit local live-provider acceptance, absent from normal builds.
+agent-probe = []
 custom-protocol = ["tauri/custom-protocol"]
 
 [build-dependencies]
