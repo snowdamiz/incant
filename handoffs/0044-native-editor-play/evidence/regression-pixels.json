@@ -1,0 +1,236 @@
+{
+  "generated": "2026-10-11T19:14:16.324Z",
+  "baselineDir": "artifacts/0044-native-editor-play/reg-base1",
+  "candidateDir": "artifacts/0044-native-editor-play/reg-cand2",
+  "compared": 7,
+  "identical": 5,
+  "results": [
+    {
+      "name": "account-signed-in-multi.png",
+      "sameSize": true,
+      "size": [
+        840,
+        472
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "account-signed-out.png",
+      "sameSize": true,
+      "size": [
+        840,
+        372
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "hierarchy.png",
+      "sameSize": true,
+      "size": [
+        490,
+        1664
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "inspector-crate-03.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1460
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "shortcuts-dialog.png",
+      "sameSize": true,
+      "size": [
+        1200,
+        1360
+      ],
+      "differing": 99780,
+      "box": [
+        40,
+        581,
+        1159,
+        1331
+      ],
+      "clusters": [
+        {
+          "at": "64,1056",
+          "count": 525
+        },
+        {
+          "at": "1088,1120",
+          "count": 513
+        },
+        {
+          "at": "64,1120",
+          "count": 487
+        },
+        {
+          "at": "64,1248",
+          "count": 469
+        },
+        {
+          "at": "224,704",
+          "count": 456
+        },
+        {
+          "at": "64,704",
+          "count": 431
+        },
+        {
+          "at": "192,1184",
+          "count": 430
+        },
+        {
+          "at": "96,992",
+          "count": 429
+        },
+        {
+          "at": "1024,1056",
+          "count": 423
+        },
+        {
+          "at": "96,1120",
+          "count": 422
+        },
+        {
+          "at": "1120,1120",
+          "count": 422
+        },
+        {
+          "at": "96,1184",
+          "count": 422
+        },
+        {
+          "at": "64,992",
+          "count": 421
+        },
+        {
+          "at": "160,1120",
+          "count": 417
+        },
+        {
+          "at": "64,928",
+          "count": 412
+        },
+        {
+          "at": "160,1248",
+          "count": 412
+        },
+        {
+          "at": "1120,640",
+          "count": 407
+        },
+        {
+          "at": "128,1184",
+          "count": 406
+        },
+        {
+          "at": "224,1184",
+          "count": 405
+        },
+        {
+          "at": "96,1056",
+          "count": 403
+        },
+        {
+          "at": "64,576",
+          "count": 399
+        },
+        {
+          "at": "1120,1248",
+          "count": 397
+        },
+        {
+          "at": "64,896",
+          "count": 394
+        },
+        {
+          "at": "160,640",
+          "count": 393
+        }
+      ],
+      "mask": "shortcuts-dialog-diff.png"
+    },
+    {
+      "name": "titlebar.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        80
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "viewport-header.png",
+      "sameSize": true,
+      "size": [
+        1666,
+        72
+      ],
+      "differing": 680,
+      "box": [
+        1494,
+        25,
+        1631,
+        46
+      ],
+      "clusters": [
+        {
+          "at": "1600,32",
+          "count": 158
+        },
+        {
+          "at": "1536,32",
+          "count": 121
+        },
+        {
+          "at": "1600,0",
+          "count": 94
+        },
+        {
+          "at": "1472,32",
+          "count": 88
+        },
+        {
+          "at": "1504,32",
+          "count": 54
+        },
+        {
+          "at": "1472,0",
+          "count": 50
+        },
+        {
+          "at": "1536,0",
+          "count": 48
+        },
+        {
+          "at": "1568,32",
+          "count": 43
+        },
+        {
+          "at": "1568,0",
+          "count": 19
+        },
+        {
+          "at": "1504,0",
+          "count": 5
+        }
+      ],
+      "mask": "viewport-header-diff.png"
+    }
+  ]
+}
