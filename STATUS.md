@@ -85,7 +85,7 @@ review; concurrent native reviews coordinate foreground ownership.
   passed actual hosted conformance and a fresh optimized PE/PDB proof on PR #64.
   Static modules also compose with native input acceptance, physics and offline
   scene audio. The new `incant_input_v1` bounded snapshot preserves raw controls,
-  gestures and named actions; 101 combined tests/doctests and 34 fresh local
+  gestures and named actions; 102 combined tests/doctests and 34 fresh local
   process checks pass. The 3,933,488-byte packaged macOS player responds to delayed
   accepted input with delayed native spawning and retains the exact audio clock.
   Hosted input results, complete SDK and session/renderer/device evidence remain

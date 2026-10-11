@@ -133,6 +133,24 @@ fn actual_hosts_consume_identical_complete_snapshots_with_edges_and_focus() {
             })
             .collect(),
     );
+    let mut focus_cycles = Vec::new();
+    for _ in 0..56 {
+        focus_cycles.push(InputEvent::Focus { focused: false });
+        focus_cycles.push(InputEvent::Focus { focused: true });
+        focus_cycles.extend((0..16).map(|id| InputEvent::Touch {
+            id,
+            phase: TouchPhase::Down,
+            position: [1., 2.],
+        }));
+    }
+    focus_cycles.extend((0..15).map(|id| InputEvent::Touch {
+        id,
+        phase: TouchPhase::Move,
+        position: [3., 4.],
+    }));
+    focus_cycles.push(InputEvent::Focus { focused: false });
+    assert_eq!(focus_cycles.len(), 1024);
+    packets.push(focus_cycles);
     let mut hashes = vec![];
     for (index, events) in packets.into_iter().enumerate() {
         input.advance_validated(&events, DT, &actions).unwrap();

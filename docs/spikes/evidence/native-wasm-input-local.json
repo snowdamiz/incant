@@ -9,7 +9,7 @@
     "crates/incant_wasm_dev/Cargo.toml": "56ba652e91e13dd6d31520258f26421d45e3febe94b3b73629bfb0de0f6302c3",
     "crates/incant_wasm_dev/src/abi.rs": "d5a3f6b1d47863d1b210db6210a67b36e2673aecc05cee585d93973a54a784ae",
     "crates/incant_wasm_dev/src/host.rs": "e3fad6ce63812a2cc5db62eeef8ee1005c5ce4e4bd97d421d79dd2a931650b09",
-    "crates/incant_wasm_dev/tests/input_parity.rs": "49d87e7c3894fee1a41fdc56f9cd015925eef2082687b55d9431dfbea3e5c2f0",
+    "crates/incant_wasm_dev/tests/input_parity.rs": "3807dd21401c75a71d40bcde55f27e6d8f0d247b3bf856ed369fc01d213ead9a",
     "crates/incant_wasm_player/fixtures/game.rs": "a341d5eb72f32ee0051b74bb15c46111bd5f8df9c4e2ab5d7f18e1081d778520",
     "crates/incant_wasm_player/tests/session.rs": "941b7fc30ffe22568635929f475e43cbb109f7834dec1184581f248b3d342697",
     "crates/incant_wasm_runtime/Cargo.toml": "6520ab50f080a7060b370affe0d66c44925a21c9ac5bf5ba544817044a26539b",
@@ -22,28 +22,29 @@
     "crates/incant_wasm_runtime/fixtures/input.wat": "204cadff4e7fdaed3de13c80a129e7a73c05e9c7a73cf88dea1f3f022ab6a08b",
     "crates/incant_wasm_runtime/src/capability.rs": "186d0b67e8f411c7ec09b3aa1dae642b53f3220d37d5b754b0e1a70f9e7c34dc",
     "crates/incant_wasm_runtime/src/compiled.rs": "ac784a4c529216404c2e5bde0f5e3c61f13e9ff6d06a76995c9b9f3decb3eadb",
-    "crates/incant_wasm_runtime/src/input.rs": "8c79b4a343a9fd3b54abf19cad8cfa85a5ab53e9f6c32ed0a9c6e412f808be68",
+    "crates/incant_wasm_runtime/src/input.rs": "107c1714038b6257ddf9b025776c740f840606d219463dbc0575613f270c5710",
     "crates/incant_wasm_runtime/src/lib.rs": "5672f659b2bd1aca51ddec042a9e3f1bb4df4491dc0f7cb9ccbaa3b2614c0ed5",
-    "crates/incant_wasm_runtime/tests/input.rs": "320ed420f8f3401da5cb0b93b3a184aeeeef390a2d29144557b2f62df1c05555",
+    "crates/incant_wasm_runtime/tests/input.rs": "4a0c382e803f464b225232ac0dc4f43e26daea6c2adc78cbcf005fdbb2170f16",
     "tools/probes/shipping-wasm2c.py": "b86e6b30d511b6980493b1bc1736cff2f17034d0e1aa1d6a5c83315caee8ae29",
     "tools/probes/static-game.py": "5f36a766422d72860d722a97405ba39394c83f14d3f7fe22f16a3acc81d36bc1",
     "tools/wasm2c.py": "d4551de1f38cd7defa4f6beaccad2b5030688b2105edfb40905d7889bcdd2723"
   },
   "logs_sha256": {
-    "/tmp/incant-wasm-input-conformance-final/conformance-0.log": "aa853b6913ad0ca8f84938bcff62b78b37af9f275036b32edc51f43a7d34d0c4",
-    "/tmp/incant-wasm-input-conformance-final/conformance-1.log": "60a866e25682539842d26622c16925ff7774cc5c9573b0af90dc02a173135f57",
-    "/tmp/incant-wasm-input-conformance-final/conformance-2.log": "5bbf444254e1ebeb0fdc65662335a9c542c0a84037d33561f0bf2c181d478dfa",
-    "/tmp/incant-wasm-input-conformance-final/development/result.json": "5bbf444254e1ebeb0fdc65662335a9c542c0a84037d33561f0bf2c181d478dfa",
-    "/tmp/incant-wasm-input-shipping/result.json": "3a9b181dadfd9cf617f91c91848e9135eac2a9c038c0d5c82ee14b63f3c8dc46",
-    "/tmp/incant-wasm-input-shipping/build.log": "1654d731bb5fc02d9304b06264c9c4cc2c3cebf71458dcf82a7b00cda7d0beb3",
+    "/tmp/incant-wasm-input-conformance-fixed/conformance-0.log": "3258a7711f90114fc063a223ae1d3ed48ae5f377aa84300ea17bf547e13adf24",
+    "/tmp/incant-wasm-input-conformance-fixed/conformance-1.log": "b51c62d0937b4940d371daee20b71b9146b39b3faf9a6538c182935bf558bd0c",
+    "/tmp/incant-wasm-input-conformance-fixed/conformance-2.log": "2d1819426972d52a6f35617e24a479d44940700313c2ad5e5999afd46a1002c9",
+    "/tmp/incant-wasm-input-conformance-fixed/development/result.json": "2d1819426972d52a6f35617e24a479d44940700313c2ad5e5999afd46a1002c9",
+    "/tmp/incant-wasm-input-shipping-fixed/result.json": "fe2eaf477024345e99c2bf598d6ed55e5b394935995c75fbbdc8887862833afc",
+    "/tmp/incant-wasm-input-shipping-fixed/build.log": "5d50f42a9467fdfce7d25374f0754400841c08cf6072e4b9ad444b61fd915707",
     "/tmp/incant-wasm-input-tools.log": "0eb373d7d9e409f605ecbb777e7754e686ad80385da5d54734a0261c20300ebe",
     "/tmp/incant-wasm-input-default-check.log": "10056b07baa481e1687c00b434bb4de774952c3e9237bc0f328f1c4952ad3345",
     "/tmp/incant-wasm-input-wasm-check.log": "08b3ce0aee8de0aba92b7d51fb29f16cf985a1eca012b431162ea83d9b20b7f9",
-    "/tmp/incant-wasm-input-graphs.log": "0685105bedbd051739af4b135f14de50ec4cb97d68851a5396184a764ce0ed66"
+    "/tmp/incant-wasm-input-graphs.log": "0685105bedbd051739af4b135f14de50ec4cb97d68851a5396184a764ce0ed66",
+    "/tmp/incant-wasm-input-focus-before.log": "8ebee3ed4631a9aa45033903587ef028f8ed9a9651294b0b24509be8249de1aa"
   },
-  "combined_tests_and_doctests": 101,
+  "combined_tests_and_doctests": 102,
   "python_tool_tests": 49,
-  "shipping_build_elapsed": "1m43s",
+  "shipping_build_elapsed": "Finished `shipping` profile [optimized + debuginfo] target(s) in 1m 44s",
   "baseline_player_bytes": 3897424,
   "player_delta_bytes": 36064,
   "shipping": {
@@ -318,15 +319,15 @@
       "zmij"
     ],
     "player_bytes": 3933488,
-    "player_sha256": "6ff066b65272d7467283bff80eec6101cc8561724c25ff43cd92ec9a326aca75",
+    "player_sha256": "457029f83deba18120906aed530e33b0998d30f106fe56f31bcfafc23023b280",
     "symbols": {
       "format": "Mach-O/dSYM",
       "uuids": {
-        "arm64": "06c3967e-235a-301d-b853-1cd6d4cc5b52"
+        "arm64": "be68cdfc-fd67-3ef2-a9c2-16e810900d08"
       }
     },
     "source_sha256": "a341d5eb72f32ee0051b74bb15c46111bd5f8df9c4e2ab5d7f18e1081d778520",
-    "wasm_sha256": "570947519531ccb637b36ced851252e33e8bb3e35fd4c44319907b803c562b7f",
+    "wasm_sha256": "c04df041469c59ad89fe30a23042599cbc94d86dbaf0d0c6bdc706d858460952",
     "temporary_compile_sources_tools_generated_c_wasm_and_build_storage_deleted": true,
     "successes": [
       {
@@ -538,5 +539,6 @@
     ]
   },
   "hosted_input_results": "pending",
-  "limits": "No complete SDK, renderer/session save, mobile/device/performance gate; QuickJS remains a normal dependency."
+  "limits": "No complete SDK, renderer/session save, mobile/device/performance gate; QuickJS remains a normal dependency.",
+  "regression": "Valid 1024-event focus-cycling packet with 16 prior touches yields 1823 touch changes; initial encoder failed Limit(input collection). Fixed bound 2064 preserves all records, with a conservative 112660-byte maximum frame."
 }

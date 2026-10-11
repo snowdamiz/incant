@@ -363,3 +363,52 @@ fn large_snapshot_copies_share_numeric_transfer_quota_and_last_failure_is_atomic
     assert!(total <= 128 * 1024 * 1024 && total + len as usize > 128 * 1024 * 1024);
     cap.abort();
 }
+#[test]
+fn accepted_repeated_focus_loss_preserves_synthesized_touch_cancellations() {
+    let mut input = InputRuntime::default();
+    input
+        .advance(
+            &(0..16)
+                .map(|id| touch(id, TouchPhase::Down, [1., 2.]))
+                .collect::<Vec<_>>(),
+            DT,
+        )
+        .unwrap();
+    let mut events = Vec::new();
+    for _ in 0..56 {
+        events.push(InputEvent::Focus { focused: false });
+        events.push(InputEvent::Focus { focused: true });
+        events.extend((0..16).map(|id| touch(id, TouchPhase::Down, [1., 2.])));
+    }
+    events.extend((0..15).map(|id| touch(id, TouchPhase::Move, [3., 4.])));
+    events.push(InputEvent::Focus { focused: false });
+    assert_eq!(events.len(), MAX_EVENTS_PER_TICK);
+    input.advance(&events, DT).unwrap();
+    assert_eq!(input.frame().touch_changes.len(), 1823);
+    assert!(!input.frame().focused);
+    assert!(input.frame().touches.is_empty());
+    let bytes = snapshot(&input, 2);
+    let mut r = Reader(&bytes[144..]);
+    for _ in 0..4 {
+        assert_eq!(r.u32(), 0);
+    } // pads, device edges, live touches
+    assert_eq!(r.u32(), 1823);
+    let mut cancellations = 0;
+    for change in &input.frame().touch_changes {
+        assert_eq!(r.u32(), change.id);
+        let tag = r.take::<4>();
+        assert_eq!(&tag[1..], &[0, 0, 0]);
+        let expected = match change.phase {
+            TouchPhase::Down => 0,
+            TouchPhase::Move => 1,
+            TouchPhase::Up => 2,
+            TouchPhase::Cancel => 3,
+        };
+        assert_eq!(tag[0], expected);
+        cancellations += usize::from(expected == 3);
+        assert_eq!(r.point(), change.position);
+    }
+    assert_eq!(cancellations, 57 * 16);
+    assert_eq!(r.u32(), 0);
+    assert!(r.0.is_empty());
+}

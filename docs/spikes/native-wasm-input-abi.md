@@ -53,10 +53,17 @@ copied bytes, but they do not become an authoritative future input frame.
 
 The engine's current limits are 1024 events/tick, 16 simultaneous gamepads,
 16 active touches, and 64 named actions with names of at most 64 ASCII bytes.
-Snapshot fields check those bounds (gesture bound 1041), finite numbers and total
+Touch changes have a conservative bound of **2064**, not the packet event cap:
+each event emits at most one explicit record, and synthesized cancellations
+consume either a prior-tick contact (at most 16) or a down event in this packet
+(at most 1024). Repeated focus regain/loss can cancel several new generations of
+contacts. Snapshot fields check these bounds (gesture bound 1041), finite numbers and total
 128 KiB before publication. Existing limits of 65,536 calls and 128 MiB of total
 numeric/input transfers apply together. These are logical host quotas, not a
-process-memory or wall-time guarantee.
+process-memory or wall-time guarantee. Even independent maximum section sizes
+occupy at most 112,660 bytes (actions 5376, keyboard 48, pointer 68, pads 3012,
+device edges 8200, live touches 580, touch changes 49,540, gestures 45,808, header
+28), below 128 KiB; those loose maxima need not be simultaneously reachable.
 
 ## Wire layout, version 1
 
@@ -144,7 +151,7 @@ revision executes there.
 
 Frozen source/log identities and the full proof report are in
 [evidence/native-wasm-input-local.json](evidence/native-wasm-input-local.json).
-On aarch64 macOS, the final combined run passed **101 tests/doctests**, all-target
+On aarch64 macOS, the final combined run passed **102 tests/doctests**, all-target
 Clippy with warnings denied, and the actual Rust development guest. The original
 13 Wasmtime cases remain. The Python tool suite passed 49 tests; actionlint,
 format/conventions checks, default script/game checks, default-only Wasm-target
@@ -153,21 +160,28 @@ dev-host compilation and three normal player dependency guards passed.
 Commands (all Cargo subprocesses use `-j2`):
 
 ```sh
-python3 tools/probes/shipping-wasm2c.py /tmp/incant-wasm-input-conformance-final --conformance-only --rustup /opt/homebrew/bin/rustup
-python3 tools/probes/static-game.py /tmp/incant-wasm-input-shipping --rustup /opt/homebrew/bin/rustup
+python3 tools/probes/shipping-wasm2c.py /tmp/incant-wasm-input-conformance-fixed --conformance-only --rustup /opt/homebrew/bin/rustup
+python3 tools/probes/static-game.py /tmp/incant-wasm-input-shipping-fixed --rustup /opt/homebrew/bin/rustup
 ./tools/cargo check -j2 -p incant_script -p incant_game_runtime --no-default-features --locked
 ./tools/cargo check -j2 -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked
 python3 tools/check_runtime_dependencies.py incant_wasm_player incant_game_player incant_script_player --features incant_wasm_player/fixture
 python3 -m unittest discover -s tools/tests
 ```
 
-The fresh shipping Cargo compile took **1m43s** locally; this is a build diagnostic,
+The fresh shipping Cargo compile took **1m 44s** locally; this is a build diagnostic,
 not a runtime performance result. Eight successful and 26 refusal subprocesses
 passed after compile-input removal. The player is **3,933,488 bytes**, 36,064 bytes
 above the previous static-game fixture (3,897,424 bytes). Its SHA-256 is
-`6ff066b65272d7467283bff80eec6101cc8561724c25ff43cd92ec9a326aca75`;
-the matched arm64 dSYM UUID is `06c3967e-235a-301d-b853-1cd6d4cc5b52`.
+`457029f83deba18120906aed530e33b0998d30f106fe56f31bcfafc23023b280`;
+the matched arm64 dSYM UUID is `be68cdfc-fd67-3ef2-a9c2-16e810900d08`.
 The result JSON SHA-256 is
-`3a9b181dadfd9cf617f91c91848e9135eac2a9c038c0d5c82ee14b63f3c8dc46`.
+`fe2eaf477024345e99c2bf598d6ed55e5b394935995c75fbbdc8887862833afc`.
 Windows and Linux execution for this new input ABI remains pending the added
 hosted checks; the earlier MSVC/static baseline evidence does not establish it.
+
+Independent review identified a legitimate frame larger than the initial touch
+count assumption. Before the correction, the new repeated-focus regression failed
+with `Limit("input collection")` for 1,823 changes from 1,024 accepted events and
+16 prior contacts. The corrected test checks every record, and actual static/JIT
+parity also exercises repeated focus cycles. The failure log hash is retained;
+the final evidence and shipping identity above are from the corrected encoder.

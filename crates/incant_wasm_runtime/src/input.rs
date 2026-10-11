@@ -130,7 +130,14 @@ pub(crate) fn encode(
         w.numbers(touch.position)?;
         w.numbers(touch.delta)?;
     }
-    w.count(f.touch_changes.len(), incant_input::MAX_EVENTS_PER_TICK)?;
+    // Each event emits at most one explicit touch record. Focus loss can also
+    // cancel prior-tick contacts (<= MAX_TOUCHES) or contacts created by a Down
+    // in this packet (<= MAX_EVENTS_PER_TICK). Repeated focus cycles mean a
+    // single +MAX_TOUCHES allowance is insufficient.
+    w.count(
+        f.touch_changes.len(),
+        2 * incant_input::MAX_EVENTS_PER_TICK + incant_input::MAX_TOUCHES,
+    )?;
     for change in &f.touch_changes {
         w.u32(change.id)?;
         w.bytes(&[
