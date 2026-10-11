@@ -1,20 +1,17 @@
 //! Development project play on the native graph. Project validation/cooking and
 //! binary loading precede simulation. Scripts are embedded by the trusted cook
 //! during the native build; playback never reads or parses script source.
-use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
-use incant_game_runtime::{HostedOfflineGameSession, OfflineGameSession};
-use incant_input::{InputActions, InputEvent, InputFrame, InputReplay};
+use incant_input::InputReplay;
 use incant_observe::Plan;
-use incant_render_game::{NativeRenderHost, NativeRenderSettings};
-use incant_runtime::{CookedScene, NativeWorld, StableId};
-use incant_script::{CompiledScript, NativeLogs};
+use incant_runtime::StableId;
 mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
 }
 use serde::Serialize;
+mod session;
+pub(crate) use session::{Session, StartOptions};
 use sha2::{Digest, Sha256};
 use std::{
-    collections::BTreeSet,
     fs::File,
     io::{Read, Write},
     path::{Path, PathBuf},
@@ -75,7 +72,9 @@ fn bounded(path: &Path, limit: usize) -> Result<Vec<u8>> {
     Ok(bytes)
 }
 fn id(text: &str) -> Result<StableId> {
-    let value = text.parse::<ulid::Ulid>().map_err(native)?;
+    let value = text
+        .parse::<ulid::Ulid>()
+        .map_err(|_| invalid("expected canonical uppercase ULID"))?;
     if value.to_string() != text {
         return Err(invalid("expected canonical uppercase ULID"));
     }
@@ -98,67 +97,6 @@ fn ticks(options: &Options, rate: u32) -> Result<u64> {
     Ok(ticks as u64)
 }
 
-enum Game {
-    Plain(Box<OfflineGameSession>),
-    Spatial(Box<HostedOfflineGameSession<NativeRenderHost>>),
-}
-impl Game {
-    fn new(
-        scene: CookedScene,
-        code: CompiledScript,
-        actions: InputActions,
-        clips: Vec<ClipBinding>,
-        rate: u32,
-        settings: Option<NativeRenderSettings>,
-    ) -> Result<Self> {
-        if let Some(settings) = settings {
-            Ok(Self::Spatial(Box::new(
-                HostedOfflineGameSession::new(scene, code, actions, clips, rate, settings)
-                    .map_err(native)?,
-            )))
-        } else {
-            Ok(Self::Plain(Box::new(
-                OfflineGameSession::new(scene, code, actions, clips, rate).map_err(native)?,
-            )))
-        }
-    }
-    fn world(&self) -> Result<&NativeWorld> {
-        match self {
-            Self::Plain(g) => g.world().map_err(native),
-            Self::Spatial(g) => g.world().map_err(native),
-        }
-    }
-    fn input(&self) -> Result<&InputFrame> {
-        match self {
-            Self::Plain(g) => g.input().map_err(native),
-            Self::Spatial(g) => g.input().map_err(native),
-        }
-    }
-    fn logs(&self) -> Result<&NativeLogs> {
-        match self {
-            Self::Plain(g) => g.logs().map_err(native),
-            Self::Spatial(g) => g.logs().map_err(native),
-        }
-    }
-    fn next_frames(&self) -> Result<usize> {
-        match self {
-            Self::Plain(g) => g.next_output_frames().map_err(native),
-            Self::Spatial(g) => g.next_output_frames().map_err(native),
-        }
-    }
-    fn frames(&self) -> Result<u128> {
-        match self {
-            Self::Plain(g) => g.rendered_frames().map_err(native),
-            Self::Spatial(g) => g.rendered_frames().map_err(native),
-        }
-    }
-    fn tick(&mut self, input: &[InputEvent], output: &mut [f32]) -> Result<()> {
-        match self {
-            Self::Plain(g) => g.tick(input, output).map_err(native),
-            Self::Spatial(g) => g.tick(input, output).map_err(native),
-        }
-    }
-}
 #[derive(Serialize)]
 pub struct Report {
     pub passed: bool,
@@ -187,114 +125,11 @@ pub fn run(options: Options) -> Result<Report> {
     let document = incant_doc::Project::from_text(std::str::from_utf8(&bytes).map_err(native)?)
         .map_err(native)?;
     drop(bytes);
-    let scene = match &options.scene {
-        Some(value) => value.clone(),
-        None if document.scenes.len() == 1 => {
-            document.scenes.keys().next().expect("one scene").clone()
-        }
-        None => {
-            return Err(invalid(
-                "choose --scene when the project does not have exactly one scene",
-            ));
-        }
-    };
-    id(&scene)?;
     let end = ticks(&options, document.settings.tick_rate)?;
     let frame_count =
         u128::from(end) * u128::from(options.sample_rate) / u128::from(document.settings.tick_rate);
     if options.pcm_output.is_some() && frame_count * 8 > 512 * 1024 * 1024 {
         return Err(invalid("PCM output exceeds 512 MiB"));
-    }
-    let camera = options.camera.as_deref().map(id).transpose()?;
-    let cooked = {
-        let bytes = incant_cook::cook_scene(&document, &scene).map_err(native)?;
-        CookedScene::from_bytes(&bytes).map_err(native)?
-    };
-    if camera.is_none() && (!cooked.spatial().is_empty() || !cooked.visual_assets().is_empty()) {
-        return Err(invalid(
-            "spatial content requires an explicit --camera and native render host",
-        ));
-    }
-    let root = options
-        .project
-        .parent()
-        .filter(|p| !p.as_os_str().is_empty())
-        .unwrap_or(Path::new("."));
-    let clip_ids: BTreeSet<_> = cooked
-        .audio()
-        .iter()
-        .filter_map(|n| n.source.as_ref().map(|s| s.clip))
-        .collect();
-    if clip_ids.len() > MAX_SCENE_CLIPS {
-        return Err(invalid("too many scene clips"));
-    }
-    let settings = camera
-        .map(|camera| {
-            let path = |kind, asset_kind, suffix| {
-                if cooked.visual_assets().iter().any(|a| a.kind == asset_kind) {
-                    incant_assets::project_cache_directory(root, kind).map_err(native)
-                } else {
-                    Ok(root.join(suffix))
-                }
-            };
-            Ok::<_, PlayError>(NativeRenderSettings {
-                model_cache: path(
-                    incant_assets::CacheKind::Models,
-                    incant_runtime::VisualAssetKind::Model,
-                    ".incant/cache/models",
-                )?,
-                texture_cache: path(
-                    incant_assets::CacheKind::Textures,
-                    incant_runtime::VisualAssetKind::Texture,
-                    ".incant/cache/textures",
-                )?,
-                camera,
-                consumer: (),
-            })
-        })
-        .transpose()?;
-    let audio_cache = if clip_ids.is_empty() {
-        None
-    } else {
-        Some(
-            incant_assets::project_cache_directory(root, incant_assets::CacheKind::Audio)
-                .map_err(native)?,
-        )
-    };
-    let mut clips = Vec::with_capacity(clip_ids.len());
-    for clip in clip_ids {
-        let key = ulid::Ulid::from_bytes(clip.0).to_string();
-        let asset = document
-            .assets
-            .get(&key)
-            .ok_or_else(|| invalid("missing audio asset"))?;
-        if asset.kind != "audio" {
-            return Err(invalid("clip reference is not an audio asset"));
-        }
-        clips.push(
-            ClipBinding::load(
-                clip,
-                audio_cache.as_deref().expect("referenced clips"),
-                &asset.sha256,
-            )
-            .map_err(native)?,
-        );
-    }
-    let code = embedded::load().map_err(native)?;
-    let script_source_sha256 = code
-        .metadata()
-        .source_sha256
-        .iter()
-        .map(|b| format!("{b:02x}"))
-        .collect();
-    if options
-        .script_sha256
-        .as_ref()
-        .is_some_and(|expected| expected != &script_source_sha256)
-    {
-        return Err(invalid(
-            "embedded script does not match requested source hash",
-        ));
     }
     let replay = options
         .input_replay
@@ -304,7 +139,7 @@ pub fn run(options: Options) -> Result<Report> {
             let replay = InputReplay::from_text(
                 std::str::from_utf8(&bytes).map_err(native)?,
                 0,
-                cooked.tick_rate(),
+                document.settings.tick_rate,
             )
             .map_err(native)?;
             if replay.end_tick() < end {
@@ -318,10 +153,23 @@ pub fn run(options: Options) -> Result<Report> {
         .as_deref()
         .map(|p| Plan::parse(&bounded(p, incant_observe::MAX_PLAN_BYTES)?, end).map_err(native))
         .transpose()?;
-    let actions = document.settings.input_actions.clone();
-    // Authoring data and binary startup image are gone before any guest update.
+    let root = options
+        .project
+        .parent()
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or(Path::new("."));
+    let mut game = Session::new(
+        &document,
+        root,
+        &StartOptions {
+            scene: options.scene.clone(),
+            script_sha256: options.script_sha256.clone(),
+            camera: options.camera.clone(),
+        },
+        options.sample_rate,
+    )?;
+    // No guest update retains or consults this authoring document.
     drop(document);
-    let mut game = Game::new(cooked, code, actions, clips, options.sample_rate, settings)?;
     let mut pcm = if let Some(path) = &options.pcm_output {
         if path.exists() {
             return Err(invalid("PCM output already exists"));
@@ -367,9 +215,9 @@ pub fn run(options: Options) -> Result<Report> {
     let report = Report {
         passed: observations.as_ref().is_none_or(|r| r.passed),
         runtime: "native",
-        script_source_sha256,
+        script_source_sha256: game.script_source_sha256.clone(),
         script_source_parsing: false,
-        scene,
+        scene: game.scene.clone(),
         tick: world.tick(),
         tick_rate: world.tick_rate(),
         entity_count: world.entity_count(),
@@ -377,7 +225,7 @@ pub fn run(options: Options) -> Result<Report> {
         pcm_sha256: format!("{:x}", hash.finalize()),
         logs: serde_json::to_value(game.logs()?).map_err(native)?,
         observations,
-        cpu_render_input: matches!(game, Game::Spatial(_)),
+        cpu_render_input: game.is_spatial(),
         gpu_submitted: false,
         project_sha256,
     };

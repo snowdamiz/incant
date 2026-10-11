@@ -110,7 +110,7 @@ impl NativeWorld {
         if !scene.audio().is_empty() {
             return Err(SaveError::AudioUnsupported);
         }
-        if !scene.physics().is_empty() {
+        if !scene.physics().is_empty() || !scene.physics_2d().is_empty() {
             return Err(SaveError::PhysicsUnsupported);
         }
         let mut world = Self::new(scene);

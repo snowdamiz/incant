@@ -43,6 +43,21 @@ impl<P: EngineHost> ProjectHost<P> {
     }
 }
 impl<P: EngineHost> EngineHost for ProjectHost<P> {
+    fn native_play_available(&self) -> bool {
+        self.perception.native_play_available()
+    }
+    fn play_run(
+        &mut self,
+        project: &Project,
+        revision: u64,
+        request: crate::play::RunRequest,
+        cancel: &AtomicBool,
+    ) -> Result<Value, AgentError> {
+        self.perception.play_run(project, revision, request, cancel)
+    }
+    fn play_state_query(&mut self, path: &str) -> Result<Value, AgentError> {
+        self.perception.play_state_query(path)
+    }
     fn project_files(&self) -> Option<&ProjectFiles> {
         Some(&self.files)
     }
