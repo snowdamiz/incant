@@ -166,7 +166,7 @@ fn every_truncation_and_single_byte_mutation_leaves_the_destination_intact() {
 #[test]
 fn unknown_version_flags_and_rehashed_malformed_payloads_fail_closed() {
     let source = world(60).save_bytes().unwrap();
-    for (offset, value) in [(8, 3_u32), (12, 1), (24, u32::MAX)] {
+    for (offset, value) in [(8, 4_u32), (12, 1), (24, u32::MAX)] {
         let mut bad = source.clone();
         bad[offset..offset + 4].copy_from_slice(&value.to_le_bytes());
         rehash(&mut bad, 32, 64);

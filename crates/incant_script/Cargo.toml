@@ -13,6 +13,7 @@ compiler = []
 static-module = ["dep:incant_wasm_runtime"]
 
 [dependencies]
+incant_localization.workspace = true
 incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true }
 incant_runtime.workspace = true
 incant_types.workspace = true

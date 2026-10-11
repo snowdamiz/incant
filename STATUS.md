@@ -62,6 +62,15 @@ required before release. [Evidence](docs/spikes/windows-native-compiler-entry.md
 
 ## Authored source and native package — locally integrated
 
+Native localization now carries authored string tables through checked cooked
+scenes into bounded TypeScript queries and the source-free player. Runtime locale
+commands share atomic rollback, and world save v3 retains settings/catalog with
+origin binding. Local validation passed 372 tests (two existing GPU tests ignored),
+Clippy/contracts and three fresh shipping replays after authoring/build removal;
+both independent source reviews passed. Font rendering, RTL/CJK visual checks,
+static-Wasm localization, composite session persistence and physical-device gates
+remain separate. [Implementation and evidence](docs/spikes/native-localization.md).
+
 A public host-equals-target exporter now cooks authored Script attachments into a
 fresh shipping player and copies only referenced native assets. Three fresh
 source-deleted runs reproduce all expected motion; startup tampering is refused.

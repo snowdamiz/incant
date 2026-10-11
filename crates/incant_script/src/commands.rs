@@ -11,6 +11,7 @@ use std::{cell::RefCell, rc::Rc};
 #[derive(Default)]
 struct State {
     active: bool,
+    locales: usize,
     failure: Option<ScriptError>,
     queue: FrameCommands,
 }
@@ -22,6 +23,7 @@ impl TickCommands {
     pub fn expose<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
         let object = Object::new_proto(ctx.clone(), None)?;
         for name in [
+            "setLocale",
             "spawn",
             "despawn",
             "setParent",
@@ -42,10 +44,15 @@ impl TickCommands {
                             Some("structural commands belong to their active tick only")
                         } else if state.failure.is_some() {
                             Some("structural command buffer already failed")
-                        } else if state.queue.len() == MAX_FRAME_COMMANDS {
+                        } else if state.queue.len() == MAX_FRAME_COMMANDS
+                            || (name == "setLocale" && state.locales == 64)
+                        {
                             state.failure = Some(ScriptError::InputLimit);
                             Some("structural command limit exceeded")
                         } else {
+                            if name == "setLocale" {
+                                state.locales += 1;
+                            }
                             None
                         }
                     };
@@ -121,6 +128,9 @@ fn parse<'js>(
         return crate::audio_commands::parse(ctx, name, args);
     }
     Ok(match (name, args) {
+        ("setLocale", [settings]) => {
+            StructuralCommand::SetLocale(crate::localization_values::settings(ctx, settings)?)
+        }
         ("controlFlipbook", [entity, action, rest @ ..]) => {
             let invalid = || Exception::throw_type(ctx, "expected flipbook control string");
             let action = action.as_string().ok_or_else(invalid)?;

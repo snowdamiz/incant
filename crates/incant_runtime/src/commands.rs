@@ -14,6 +14,8 @@ pub const MAX_FRAME_COMMANDS: usize = 65_536;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum StructuralCommand {
+    /// Replace committed runtime settings atomically; the catalog stays immutable.
+    SetLocale(crate::LocaleSettings),
     /// Replace/remove checked navigation configuration at a committed boundary.
     SetNavigation {
         entity: StableId,
@@ -138,6 +140,20 @@ impl NativeWorld {
     /// Validation reads native values only; it never constructs a Project.
     pub fn apply(&mut self, commands: &mut FrameCommands) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
+        let localization = self.prepare_locale(commands)?;
+        if commands
+            .iter()
+            .all(|c| matches!(c, StructuralCommand::SetLocale(_)))
+            && !commands.is_empty()
+        {
+            let navigation = self.navigation_motion()?;
+            self.localization = localization.expect("locale command");
+            if let Some(next) = navigation {
+                self.navigation = next;
+            }
+            commands.clear();
+            return Ok(());
+        }
         if commands.is_empty() {
             if let Some(next) = self.navigation_motion()? {
                 self.navigation = next;
@@ -205,7 +221,8 @@ impl NativeWorld {
         if commands.iter().all(|c| {
             matches!(
                 c,
-                StructuralCommand::SetVelocity { .. }
+                StructuralCommand::SetLocale(_)
+                    | StructuralCommand::SetVelocity { .. }
                     | StructuralCommand::SetAngularVelocity { .. }
                     | StructuralCommand::SetAngularVelocity2D { .. }
                     | StructuralCommand::ControlFlipbook { .. }
@@ -239,7 +256,8 @@ impl NativeWorld {
                         spins_2d.insert(*entity, velocity.clone());
                         *entity
                     }
-                    StructuralCommand::ControlFlipbook { .. }
+                    StructuralCommand::SetLocale(_)
+                    | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. } => continue,
                     _ => unreachable!(),
                 };
@@ -423,6 +441,9 @@ impl NativeWorld {
             self.parents = staged.parents;
             self.world.insert_resource(hierarchy);
         }
+        if let Some(localization) = localization {
+            self.localization = localization;
+        }
         commands.clear();
         Ok(())
     }
@@ -515,7 +536,8 @@ impl NativeWorld {
                     spatial.remove(id);
                     navigation_changes.remove(id);
                 }
-                StructuralCommand::ControlFlipbook { .. }
+                StructuralCommand::SetLocale(_)
+                | StructuralCommand::ControlFlipbook { .. }
                 | StructuralCommand::ControlAudio { .. } => {}
                 StructuralCommand::SetParent { entity, parent } => {
                     *parents

@@ -8,6 +8,11 @@ use rquickjs::{Array, Ctx, Exception, Object, Value, object::Property};
 
 #[derive(Clone, Copy)]
 pub(super) enum Kind {
+    Localize,
+    Locale,
+    Number,
+    Date,
+    Report,
     Ray,
     Character,
     Triggers,
@@ -17,6 +22,14 @@ pub(super) enum Kind {
     Grid,
 }
 pub(super) enum Request {
+    Localize(incant_localization::LocalizeRequest),
+    Locale,
+    Number(f64),
+    Date(
+        incant_localization::CalendarDate,
+        incant_localization::DateLength,
+    ),
+    Report(incant_localization::LocalizationReportRequest),
     Ray(RayQuery<StableId>),
     Character(CharacterQuery<StableId>),
     Triggers,
@@ -26,6 +39,10 @@ pub(super) enum Request {
     Grid(StableId, incant_runtime::GridPathRequest),
 }
 pub(super) enum ResultData {
+    Localized(incant_localization::LocalizedText),
+    Locale(incant_localization::LocaleSettings),
+    Text(String),
+    Report(incant_localization::LocalizationReport),
     Ray(Option<RayHit<StableId>>),
     Character(CharacterMovement<StableId>),
     Triggers(Vec<TriggerEvent<StableId>>),
@@ -41,6 +58,9 @@ pub(super) fn parse<'js>(
     scene: StableId,
 ) -> rquickjs::Result<Request> {
     match kind {
+        Kind::Localize | Kind::Locale | Kind::Number | Kind::Date | Kind::Report => {
+            crate::localization_values::parse(kind, ctx, args)
+        }
         Kind::Navigation => crate::navigation_values::path(ctx, args),
         Kind::Grid => crate::navigation_values::grid(ctx, args),
         Kind::Ray2D => crate::query_values_2d::ray(ctx, args).map(Request::Ray2D),
@@ -142,6 +162,10 @@ pub(super) fn materialize<'js>(ctx: &Ctx<'js>, data: ResultData) -> rquickjs::Re
         return Err(rquickjs::Error::Allocation);
     }
     match data {
+        data @ (ResultData::Localized(_)
+        | ResultData::Locale(_)
+        | ResultData::Text(_)
+        | ResultData::Report(_)) => crate::localization_values::materialize(ctx, data),
         ResultData::Navigation(path) => crate::navigation_values::path_value(ctx, path),
         ResultData::Grid(path) => crate::navigation_values::grid_value(ctx, path),
         ResultData::Ray2D(hit) => crate::query_values_2d::hit(ctx, hit),

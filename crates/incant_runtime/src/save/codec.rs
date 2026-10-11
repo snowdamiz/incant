@@ -23,7 +23,7 @@ pub(super) fn encode(
     let length = EXTENSION + scene.len() + states.len() * STATE_BYTES;
     let mut bytes = Vec::with_capacity(HEADER + length);
     bytes.extend(MAGIC);
-    bytes.extend(2u32.to_le_bytes());
+    bytes.extend(3u32.to_le_bytes());
     bytes.extend(0u32.to_le_bytes());
     bytes.extend(tick.to_le_bytes());
     bytes.extend((length as u64).to_le_bytes());
@@ -44,13 +44,14 @@ pub(super) fn encode(
     Ok(bytes)
 }
 pub(super) struct Decoded<'a> {
+    pub version: u32,
     pub tick: u64,
     pub origin: Option<[u8; 32]>,
     pub scene: &'a [u8],
     pub states: &'a [u8],
 }
-pub(super) fn is_v2(bytes: &[u8]) -> bool {
-    bytes[8..12] == 2u32.to_le_bytes()
+pub(super) fn is_bound(bytes: &[u8]) -> bool {
+    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2 | 3)
 }
 pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     if !(HEADER..=MAX_SAVE_BYTES).contains(&bytes.len()) {
@@ -60,7 +61,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         return Err(SaveError::Invalid("magic"));
     }
     let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
-    if !(1..=2).contains(&version) {
+    if !(1..=3).contains(&version) {
         return Err(SaveError::Version(version));
     }
     if bytes[12..16] != [0; 4] {
@@ -75,6 +76,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     }
     if version == 1 {
         return Ok(Decoded {
+            version,
             tick,
             origin: None,
             scene: &bytes[HEADER..],
@@ -82,7 +84,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         });
     }
     if bytes.len() < HEADER + EXTENSION {
-        return Err(SaveError::Invalid("v2 header"));
+        return Err(SaveError::Invalid("bound save header"));
     }
     let origin = bytes[64..96].try_into().unwrap();
     let scene_len = u32::from_le_bytes(bytes[96..100].try_into().unwrap()) as usize;
@@ -103,6 +105,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         previous = Some(id);
     }
     Ok(Decoded {
+        version,
         tick,
         origin: Some(origin),
         scene,
