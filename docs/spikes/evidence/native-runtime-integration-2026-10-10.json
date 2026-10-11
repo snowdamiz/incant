@@ -644,5 +644,54 @@
     "phone_performance_gate": false,
     "failure_semantics": "Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file."
   },
-  "scope": "Integrated native renderer, native v5 sprite storage, native game composition, GPU offscreen player and optional development Wasm. Shipping fixture remains v4 models; native v5 sprites have separate exact numerical GPU regression evidence. No native-window, phone-performance or phase gate claim."
+  "scope": "Integrated native renderer, native v5 sprite storage, native game composition, GPU offscreen player and optional development Wasm. Shipping fixture remains v4 models; native v5 sprites have separate exact numerical GPU regression evidence. No native-window, phone-performance or phase gate claim.",
+  "subsequent_integration": {
+    "native_source_commit": "c63f13c",
+    "ui_integration_commit": "53e5edb",
+    "static_wasm_source_commit": "2e2621862bfe1fa06fe52f1a4190aeee99e1a78b",
+    "ui_source_commit": "3ff9c1ab7fed86e1545a86947935684fbe2b5d2b",
+    "checks": {
+      "workspace-release": {
+        "passed": 543,
+        "log": "/tmp/incant-native-static-union-tests.log",
+        "sha256": "76582ffe83d87384f3f329c115dd8c40bc2af84e64f7f45706189adbaab3868c"
+      },
+      "wasm-conformance": {
+        "passed": 138,
+        "log": "/tmp/incant-native-static-conformance.log",
+        "sha256": "0381738344d30ebfdd85cdb8f2471a51c99c706b8f5f19f789bf4e0c99324e4a"
+      },
+      "workspace-clippy": {
+        "passed": true,
+        "log": "/tmp/incant-native-static-union-clippy.log",
+        "sha256": "5a8c7e9371898f949d14d588541d042569677f0b1f3acbac518a407da19c922e"
+      },
+      "wasm-clippy": {
+        "passed": true,
+        "log": "/tmp/incant-native-static-conformance-clippy.log",
+        "sha256": "2e9587be8eafdab84bb5d469b70b45afb285e6fecc69e1aaa4dc55eb3c9c5ac7"
+      },
+      "ui": {
+        "passed": 524,
+        "log": "/tmp/incant-native-publish-ui.log",
+        "sha256": "4f210af7890b9c6f73d05821aacef36dae1b9d6a163c643ec52c63fc8534bca5"
+      },
+      "typecheck": {
+        "passed": true,
+        "log": "/tmp/incant-native-publish-typecheck.log",
+        "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+      },
+      "ui-build": {
+        "passed": true,
+        "log": "/tmp/incant-native-publish-ui-build.log",
+        "sha256": "f6c84123a0865817082da17992c2671c218cd468a3b08d73225edfbf05a122e0"
+      },
+      "tools": {
+        "passed": 40,
+        "log": "/tmp/incant-native-publish-tools.log",
+        "sha256": "dc5eb3550d8e5eb4e8b52496c8f930bc7a84d693d1cca35d50b4434f85e2a841"
+      }
+    },
+    "scope": "Static Wasm independently proven shipping source integrated and scoped conformance rerun. UI source merged unchanged and full UI checks rerun. Renderer/source-free game executable inputs are unchanged from the earlier frozen GPU proof. Hosted verification remains pending."
+  }
 }
