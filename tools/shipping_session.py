@@ -87,12 +87,15 @@ class FreshSession:
         require(f'host: {target}\n' in self.compiler, 'Shared session requires host == target')
         require(not subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=self.root),
                 'Freeze tracked sources before the shipping session')
+        self.head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=self.root).strip()
         self.sources = snapshot(self.root)
         self.path.mkdir(parents=True)
         self.units, self.builds, self.inputs, self.players = {}, [], [], []
         self.deleted = False
 
     def check_frozen(self):
+        require(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=self.root).strip() == self.head,
+                'Source HEAD changed during shipping session')
         require(snapshot(self.root) == self.sources, 'Tracked source changed during shipping session')
         require(subprocess.check_output([self.rustc, '-vV'], text=True) == self.compiler,
                 'Compiler changed during shipping session')
@@ -118,7 +121,9 @@ class FreshSession:
             require(option(command, name) == expected, f'Changed shipping build setting: {name}')
         require('--locked' in command and '--message-format=json' in command and '-vv' in command,
                 'Shipping build must retain lock and machine/command evidence')
-        for key in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER'):
+        for key in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'CARGO_BUILD_RUSTC',
+                    'RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER', 'CARGO_BUILD_RUSTC_WRAPPER',
+                    'CARGO_BUILD_RUSTC_WORKSPACE_WRAPPER'):
             require(not env.get(key), f'Unexpected compiler override: {key}')
         inputs = {key: {'path': str(Path(env[key]).resolve()), 'sha256': sha(Path(env[key]))}
                   for key in ('INCANT_NATIVE_SCRIPT_SOURCE', 'INCANT_NATIVE_SCRIPT_MAP') if env.get(key)}
@@ -210,7 +215,7 @@ class FreshSession:
     def report(self):
         self.assert_ready()
         return {'format_version': 1, 'compiler': self.compiler, 'target': self.target, 'profile': 'shipping',
-                'source_sha256': self.sources, 'builds': self.builds, 'units': list(self.units.values()),
+                'source_head': self.head.decode(), 'source_sha256': self.sources, 'builds': self.builds, 'units': list(self.units.values()),
                 'build_storage_removed_before_any_player': True,
                 'authoring_inputs_removed_before_any_player': True,
                 'scope': 'One fresh ephemeral session; no persistent target cache or device performance gate'}
