@@ -1,0 +1,571 @@
+{
+ "binary_sha256": "e5f686ffb6cc00e7761cb643593f48c2047caaadce2a43ee94f1fbfffa6a67fa",
+ "cameras": {
+  "controls_front_right_top": "01JA40TX0000000000000000W9",
+  "controls_ortho": "01JA40TX0000000000000000W5",
+  "instances_back_left_bottom": "01JA40TX0000000000000000W8",
+  "instances_front_right_top": "01JA40TX0000000000000000W7",
+  "instances_ortho": "01JA40TX0000000000000000W6"
+ },
+ "project": "textures-twin",
+ "run": "r1",
+ "steps": [
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "tex_embedded",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKGYNN4Z06BERH5PW0GQD0",
+     "kind": "model",
+     "name": "tex_embedded",
+     "path": "models/tex_embedded.glb",
+     "sha256": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/tex_embedded.glb",
+       "sha256": "50ba73cabf99ce0c6cb3207ade08eea591af9bcb9506fdaa7502921efb040ab6"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 24
+    },
+    "revision": 1
+   },
+   "source": "models/tex_embedded.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387"
+    },
+    "journal_sha256": "a6dc5fa85ff81fd6e47b42352c38db6647c9cb22547af91148632c6ef57fa10e",
+    "project_sha256": "0669ba2fd95b86c66007d8a155f08e541a47f371d75210b953797d5ee0c120d7"
+   },
+   "state_before": {
+    "assets": {},
+    "journal_sha256": null,
+    "project_sha256": "44d900856d6f0c92c4e0b9494d9ddb134be7c68d3f90289cd10a431704bd0d7f"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "normal_embedded",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKGYQGCYVQ2RDVHJ6MDGMR",
+     "kind": "model",
+     "name": "normal_embedded",
+     "path": "models/normal_embedded.glb",
+     "sha256": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/normal_embedded.glb",
+       "sha256": "3d8c398c1a087d4cffff43841bd87a0816a404214ca05cd63964e37d1d62daff"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 24
+    },
+    "revision": 2
+   },
+   "source": "models/normal_embedded.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623"
+    },
+    "journal_sha256": "9ae7644cf139b0eb397b3cdc0af05590ef277972f12ff42a0122da9fca5772ed",
+    "project_sha256": "bad098d12ee1a5e9cd993bd9cc16580474751dc23754309546416e2cf96ffa3f"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387"
+    },
+    "journal_sha256": "a6dc5fa85ff81fd6e47b42352c38db6647c9cb22547af91148632c6ef57fa10e",
+    "project_sha256": "0669ba2fd95b86c66007d8a155f08e541a47f371d75210b953797d5ee0c120d7"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "instances",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKGYSX3FEMASYXNNS1E2FJ",
+     "kind": "model",
+     "name": "instances",
+     "path": "models/instances.glb",
+     "sha256": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "models/instances.glb",
+       "sha256": "981693e667765553826533ac462446c41e040f65ea55c07b22282eb693de9ada"
+      }
+     ],
+     "meshes": 2,
+     "textures": 2,
+     "vertices": 48
+    },
+    "revision": 3
+   },
+   "source": "models/instances.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e"
+    },
+    "journal_sha256": "2564fcfe23a56c3f9dd7c82f0923f4089cf1ba7a3ea993eac660e2c11ca653a3",
+    "project_sha256": "577eb05df03766391e91d262ca9e0bed096a6ea770d642d9c72582caa9718796"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623"
+    },
+    "journal_sha256": "9ae7644cf139b0eb397b3cdc0af05590ef277972f12ff42a0122da9fca5772ed",
+    "project_sha256": "bad098d12ee1a5e9cd993bd9cc16580474751dc23754309546416e2cf96ffa3f"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "quad_face_art",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKGYVVTVCY5TKMEZ4P0AQD",
+     "kind": "model",
+     "name": "quad_face_art",
+     "path": "controls/quad_face_art.glb",
+     "sha256": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "controls/quad_face_art.glb",
+       "sha256": "1113bd859a18876189881878d7b613d7cb9e7f1b21629ba698a732cf72e06bd6"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 4
+    },
+    "revision": 4
+   },
+   "source": "controls/quad_face_art.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1"
+    },
+    "journal_sha256": "144a8e845ff48460b892ae69c7a36afd653ecc9f7e1bf9326ece738c06576ec3",
+    "project_sha256": "a95557721bd6ac3a8ed7f3c12c7dc37c55cfb92e356036f2d8b011f07aeab16f"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e"
+    },
+    "journal_sha256": "2564fcfe23a56c3f9dd7c82f0923f4089cf1ba7a3ea993eac660e2c11ca653a3",
+    "project_sha256": "577eb05df03766391e91d262ca9e0bed096a6ea770d642d9c72582caa9718796"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "relief",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKGYXFGJX5VGBH1MRZ8P7F",
+     "kind": "model",
+     "name": "relief",
+     "path": "controls/relief.glb",
+     "sha256": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "controls/relief.glb",
+       "sha256": "b1f3bb3895a80e4537b55ffca44d69c35a090782c3effc92d40fe57696a3c4bd"
+      }
+     ],
+     "meshes": 1,
+     "textures": 0,
+     "vertices": 36
+    },
+    "revision": 5
+   },
+   "source": "controls/relief.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1"
+    },
+    "journal_sha256": "7a04beb2535d62f06a8c75fc340e905777a83caecd6772d01621ec3c0eafcde5",
+    "project_sha256": "1d0e4fd5d6b864df3c7cb54668c097bc945b05dce2387e9823221875ae272c25"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1"
+    },
+    "journal_sha256": "144a8e845ff48460b892ae69c7a36afd653ecc9f7e1bf9326ece738c06576ec3",
+    "project_sha256": "a95557721bd6ac3a8ed7f3c12c7dc37c55cfb92e356036f2d8b011f07aeab16f"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "quad_normal_explicit",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKGYZA5RXTSMBP6JQVZ46G",
+     "kind": "model",
+     "name": "quad_normal_explicit",
+     "path": "controls/quad_normal_explicit.glb",
+     "sha256": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "controls/quad_normal_explicit.glb",
+       "sha256": "2e3b776228611cac43a63f161f7e57376f292d2f3464dbbaa66710081effc5fd"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 4
+    },
+    "revision": 6
+   },
+   "source": "controls/quad_normal_explicit.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+     "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8"
+    },
+    "journal_sha256": "23b846c8b651e66d7205b6ac21f2444bfe3ffa3e25412d7f8c80a91a06fb3561",
+    "project_sha256": "67936acd165a3083fa387b009ee2177bf85b6403165083fac4dd9e70c015e477"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1"
+    },
+    "journal_sha256": "7a04beb2535d62f06a8c75fc340e905777a83caecd6772d01621ec3c0eafcde5",
+    "project_sha256": "1d0e4fd5d6b864df3c7cb54668c097bc945b05dce2387e9823221875ae272c25"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "exit": 0,
+   "expect_ok": true,
+   "key": "quad_normal_generated",
+   "kind": "import",
+   "reply": {
+    "asset": {
+     "id": "01M4MKGZ179Y6TBMJEPCJH1BT4",
+     "kind": "model",
+     "name": "quad_normal_generated",
+     "path": "controls/quad_normal_generated.glb",
+     "sha256": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+     "dependencies": [
+      {
+       "path": "controls/quad_normal_generated.glb",
+       "sha256": "b015e988df74d3c8d7a9f8604d65035de566687859c8e61416dd1b2e35fcdc6e"
+      }
+     ],
+     "meshes": 1,
+     "textures": 1,
+     "vertices": 6
+    },
+    "revision": 7
+   },
+   "source": "controls/quad_normal_generated.glb",
+   "state_after": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+     "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+     "01M4MKGZ179Y6TBMJEPCJH1BT4": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+    },
+    "journal_sha256": "29eb066efee07f9972b9d2ed892b325ea41b98d204233d871943f4a0239657ce",
+    "project_sha256": "8cdfe1c537306f45042c4f4519a4066cd32f3d94bb24d773df8d7dac3cc2cf18"
+   },
+   "state_before": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+     "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8"
+    },
+    "journal_sha256": "23b846c8b651e66d7205b6ac21f2444bfe3ffa3e25412d7f8c80a91a06fb3561",
+    "project_sha256": "67936acd165a3083fa387b009ee2177bf85b6403165083fac4dd9e70c015e477"
+   },
+   "stderr": "",
+   "unchanged": false
+  },
+  {
+   "kind": "rpc",
+   "label": "read revision",
+   "methods": [
+    "project.read"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 7
+     }
+    }
+   ]
+  },
+  {
+   "kind": "rpc",
+   "label": "Texture review layout (twin control)",
+   "methods": [
+    "command.execute",
+    "project.save"
+   ],
+   "responses": [
+    {
+     "error": null,
+     "id": 0,
+     "result": {
+      "revision": 8,
+      "transaction_id": "01M4MKGZ3YV69ZKB61YKRK79E0"
+     }
+    },
+    {
+     "error": null,
+     "id": 1,
+     "result": {
+      "saved": true
+     }
+    }
+   ]
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 9348,
+   "camera": "01JA40TX0000000000000000W5",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 10,
+    "model_entities": 8,
+    "model_triangles": 156,
+    "primitive_instances": 15,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "controls_ortho",
+   "path": "artifacts/0040-static-fbx-import/runs/r1/textures-twin/frames/controls_ortho.png",
+   "project_state": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+     "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+     "01M4MKGZ179Y6TBMJEPCJH1BT4": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+    },
+    "journal_sha256": "4eefdebb54b1cef576abcef303afaf48e91b7f77662768dc5ad477fae31c33ed",
+    "project_sha256": "e116c30dc3fdb0ece8640c2330d5e26e5a87d54cc3571984d02c6c474693c5bb"
+   },
+   "sha256": "03c9a3b730f2bb3576bba8679c1843136ac6d6fbc659e96848ebc6b2be35f71f",
+   "shading": "material_preview",
+   "state": "twin control"
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 15179,
+   "camera": "01JA40TX0000000000000000W6",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 10,
+    "model_entities": 8,
+    "model_triangles": 156,
+    "primitive_instances": 15,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "instances_ortho",
+   "path": "artifacts/0040-static-fbx-import/runs/r1/textures-twin/frames/instances_ortho.png",
+   "project_state": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+     "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+     "01M4MKGZ179Y6TBMJEPCJH1BT4": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+    },
+    "journal_sha256": "4eefdebb54b1cef576abcef303afaf48e91b7f77662768dc5ad477fae31c33ed",
+    "project_sha256": "e116c30dc3fdb0ece8640c2330d5e26e5a87d54cc3571984d02c6c474693c5bb"
+   },
+   "sha256": "279cc4ca55f7a881c4e1bb77b2ccc91bf2e4d7a6c50487f8341c11607603c8b3",
+   "shading": "material_preview",
+   "state": "twin control"
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 100639,
+   "camera": "01JA40TX0000000000000000W7",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 10,
+    "model_entities": 8,
+    "model_triangles": 156,
+    "primitive_instances": 15,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "instances_front_right_top",
+   "path": "artifacts/0040-static-fbx-import/runs/r1/textures-twin/frames/instances_front_right_top.png",
+   "project_state": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+     "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+     "01M4MKGZ179Y6TBMJEPCJH1BT4": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+    },
+    "journal_sha256": "4eefdebb54b1cef576abcef303afaf48e91b7f77662768dc5ad477fae31c33ed",
+    "project_sha256": "e116c30dc3fdb0ece8640c2330d5e26e5a87d54cc3571984d02c6c474693c5bb"
+   },
+   "sha256": "9649b80c20d53033bc1bdf7d13da59213c0c819f99284b0b178ff228c8132a94",
+   "shading": "material_preview",
+   "state": "twin control"
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 73769,
+   "camera": "01JA40TX0000000000000000W8",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 10,
+    "model_entities": 8,
+    "model_triangles": 156,
+    "primitive_instances": 15,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "instances_back_left_bottom",
+   "path": "artifacts/0040-static-fbx-import/runs/r1/textures-twin/frames/instances_back_left_bottom.png",
+   "project_state": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+     "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+     "01M4MKGZ179Y6TBMJEPCJH1BT4": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+    },
+    "journal_sha256": "4eefdebb54b1cef576abcef303afaf48e91b7f77662768dc5ad477fae31c33ed",
+    "project_sha256": "e116c30dc3fdb0ece8640c2330d5e26e5a87d54cc3571984d02c6c474693c5bb"
+   },
+   "sha256": "65310cf48087ef611944e9cd6b7527cbb254c336096537d1e6bf054331621389",
+   "shading": "material_preview",
+   "state": "twin control"
+  },
+  {
+   "adapter": "Apple M5 Pro",
+   "bytes": 58992,
+   "camera": "01JA40TX0000000000000000W9",
+   "geometry": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 10,
+    "model_entities": 8,
+    "model_triangles": 156,
+    "primitive_instances": 15,
+    "sprite_entities": 0
+   },
+   "kind": "capture",
+   "label": "controls_front_right_top",
+   "path": "artifacts/0040-static-fbx-import/runs/r1/textures-twin/frames/controls_front_right_top.png",
+   "project_state": {
+    "assets": {
+     "01M4MKGYNN4Z06BERH5PW0GQD0": "50e0672dfd8a12141fee127320e0f41df55b9652e6a40a0b2e1c7a8b45cbf387",
+     "01M4MKGYQGCYVQ2RDVHJ6MDGMR": "1fd3819e3120fe6e0e95aa41b7d795896e5a6d18c25e0bd6ef2904f279af9623",
+     "01M4MKGYSX3FEMASYXNNS1E2FJ": "380125cb5773eef72f911fe18128b3422f45f4b64693070f275a0beb4dd0a48e",
+     "01M4MKGYVVTVCY5TKMEZ4P0AQD": "8b9cc92e195e9b63b3e37bdf891ad04091af6045cf7a2e63eb8b4c46d7b41cd1",
+     "01M4MKGYXFGJX5VGBH1MRZ8P7F": "cd43db8db4de7d8de75c449fd0bb009d1fea21796bfa43dfd9db03823c11b6f1",
+     "01M4MKGYZA5RXTSMBP6JQVZ46G": "1ba4dd847c8e8f40f3b731687f04092212d14eeb65625b8450bc76d7314e04f8",
+     "01M4MKGZ179Y6TBMJEPCJH1BT4": "2acff28e04e5c4e1749a7b9cb1802343da9e12789d4fa96227c360ffe2599544"
+    },
+    "journal_sha256": "4eefdebb54b1cef576abcef303afaf48e91b7f77662768dc5ad477fae31c33ed",
+    "project_sha256": "e116c30dc3fdb0ece8640c2330d5e26e5a87d54cc3571984d02c6c474693c5bb"
+   },
+   "sha256": "afa998e339033c1b3be9432020e858181a3005a975b019ff52775ea112aea7ab",
+   "shading": "material_preview",
+   "state": "twin control"
+  }
+ ]
+}

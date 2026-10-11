@@ -1,0 +1,391 @@
+{
+ "fresh_process_repeats": {
+  "controls_ortho-source-free": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "suzanne_front": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  }
+ },
+ "front_face_crops": {
+  "gltf_colour_quad_vs_tex_embedded": {
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "offset_px": 262,
+   "pixels": 21609
+  },
+  "tex_embedded_vs_tex_external": {
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "offset_px": 262,
+   "pixels": 21609
+  }
+ },
+ "lambert_cases_vs_expected_gltf": {
+  "diffuse_x_factor": {
+   "differing_pixels": 0,
+   "fbx_centre_rgb": [
+    84.0,
+    126.0,
+    163.0
+   ],
+   "max_channel_delta": 0,
+   "offset_px": 262,
+   "pixels": 21609
+  },
+  "emissive_constant": {
+   "differing_pixels": 0,
+   "fbx_centre_rgb": [
+    245.0,
+    200.0,
+    136.0
+   ],
+   "max_channel_delta": 0,
+   "offset_px": 262,
+   "pixels": 21609
+  },
+  "emissive_map": {
+   "differing_pixels": 0,
+   "fbx_centre_rgb": [
+    199.27,
+    121.86,
+    61.18
+   ],
+   "max_channel_delta": 0,
+   "offset_px": 262,
+   "pixels": 21609
+  },
+  "opacity_half_over_backdrop": {
+   "differing_pixels": 0,
+   "fbx_centre_rgb": [
+    216.0,
+    182.0,
+    163.0
+   ],
+   "max_channel_delta": 0,
+   "offset_px": 262,
+   "pixels": 21609
+  }
+ },
+ "ledger": {
+  "adapters": [
+   "Apple M5 Pro"
+  ],
+  "all_hash_checked": true,
+  "binary_sha256": "e5f686ffb6cc00e7761cb643593f48c2047caaadce2a43ee94f1fbfffa6a67fa",
+  "captures": 49,
+  "engine_calls": 220,
+  "max_dimensions": [
+   960,
+   540
+  ],
+  "raw_bytes": 1440714,
+  "timeouts": 0
+ },
+ "normal_bevel_luminance_controls_ortho": {
+  "fbx_normal_cube": {
+   "bottom": 228.0,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 213.0,
+   "right_minus_left": 30.0,
+   "top": 159.93,
+   "top_minus_bottom": -68.07
+  },
+  "gltf_explicit_tangent": {
+   "bottom": 159.93,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 214.0,
+   "right_minus_left": 31.0,
+   "top": 228.0,
+   "top_minus_bottom": 68.07
+  },
+  "gltf_generated_tangent": {
+   "bottom": 228.0,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 213.0,
+   "right_minus_left": 30.0,
+   "top": 159.93,
+   "top_minus_bottom": -68.07
+  },
+  "relief_geometry": {
+   "bottom": 159.93,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 213.0,
+   "right_minus_left": 30.0,
+   "top": 228.0,
+   "top_minus_bottom": 68.07
+  }
+ },
+ "normal_bevel_luminance_instances_fbx": {
+  "B_identity": {
+   "bottom": 228.0,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 213.0,
+   "right_minus_left": 30.0,
+   "top": 159.93,
+   "top_minus_bottom": -68.07
+  },
+  "B_mirror_x": {
+   "bottom": 228.0,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 213.0,
+   "right_minus_left": 30.0,
+   "top": 159.0,
+   "top_minus_bottom": -69.0
+  },
+  "B_nonuniform": {
+   "bottom": 192.08,
+   "flat": 210.0,
+   "left": 183.53,
+   "right": 213.0,
+   "right_minus_left": 29.47,
+   "top": 185.64,
+   "top_minus_bottom": -6.44
+  },
+  "B_rot_z90": {
+   "bottom": 159.93,
+   "flat": 210.0,
+   "left": 214.0,
+   "right": 183.0,
+   "right_minus_left": -31.0,
+   "top": 228.0,
+   "top_minus_bottom": 68.07
+  }
+ },
+ "normal_bevel_luminance_instances_twin_maya_tangents": {
+  "B_identity": {
+   "bottom": 159.93,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 214.0,
+   "right_minus_left": 31.0,
+   "top": 228.0,
+   "top_minus_bottom": 68.07
+  },
+  "B_mirror_x": {
+   "bottom": 159.0,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 214.0,
+   "right_minus_left": 31.0,
+   "top": 228.0,
+   "top_minus_bottom": 69.0
+  },
+  "B_nonuniform": {
+   "bottom": 165.13,
+   "flat": 210.0,
+   "left": 183.67,
+   "right": 214.0,
+   "right_minus_left": 30.33,
+   "top": 219.13,
+   "top_minus_bottom": 54.0
+  },
+  "B_rot_z90": {
+   "bottom": 159.0,
+   "flat": 210.0,
+   "left": 183.0,
+   "right": 214.0,
+   "right_minus_left": 31.0,
+   "top": 228.0,
+   "top_minus_bottom": 69.0
+  }
+ },
+ "reimport_identical_frame_groups": {
+  "04a2653a46ba6f55": [
+   "s0-rfront"
+  ],
+  "691737e5cc2e0383": [
+   "s0-r3q",
+   "s1-r3q",
+   "s5-r3q"
+  ],
+  "7c34f68e4c1a6dc2": [
+   "s10-rfront",
+   "s3-rfront"
+  ],
+  "c7949b2f06c35222": [
+   "s10-r3q",
+   "s3-r3q",
+   "s7-r3q",
+   "s8-r3q",
+   "s9-r3q"
+  ],
+  "e9f814d37e31411a": [
+   "s2-r3q",
+   "s4-r3q",
+   "s6-r3q"
+  ]
+ },
+ "static_fbx_vs_twin": {
+  "max_3q": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "max_top": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "overview": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "parented_3q": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "shear_mirror_3q": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "suzanne_back3q": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "suzanne_front": {
+   "bbox": [
+    532,
+    256,
+    532,
+    256
+   ],
+   "bytes_identical": false,
+   "differing_pixels": 1,
+   "max_channel_delta": 131,
+   "pixels": 518400
+  },
+  "suzanne_profile": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "units": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  }
+ },
+ "textures_fbx_vs_twin": {
+  "controls_front_right_top": {
+   "bbox": [
+    620,
+    331,
+    959,
+    539
+   ],
+   "bytes_identical": false,
+   "differing_pixels": 18265,
+   "max_channel_delta": 80,
+   "pixels": 518400
+  },
+  "controls_ortho": {
+   "bbox": [
+    801,
+    361,
+    944,
+    505
+   ],
+   "bytes_identical": false,
+   "differing_pixels": 13291,
+   "max_channel_delta": 69,
+   "pixels": 518400
+  },
+  "instances_back_left_bottom": {
+   "bbox": [
+    275,
+    135,
+    959,
+    431
+   ],
+   "bytes_identical": false,
+   "differing_pixels": 34591,
+   "max_channel_delta": 84,
+   "pixels": 518400
+  },
+  "instances_front_right_top": {
+   "bbox": [
+    222,
+    208,
+    689,
+    461
+   ],
+   "bytes_identical": false,
+   "differing_pixels": 28297,
+   "max_channel_delta": 82,
+   "pixels": 518400
+  },
+  "instances_ortho": {
+   "bbox": [
+    15,
+    361,
+    944,
+    505
+   ],
+   "bytes_identical": false,
+   "differing_pixels": 52835,
+   "max_channel_delta": 69,
+   "pixels": 518400
+  }
+ },
+ "textures_fbx_vs_twin_rows": {
+  "controls_ortho": {
+   "colour_row_y_lt_270": 0,
+   "normal_row_y_ge_270": 13291
+  },
+  "instances_ortho": {
+   "colour_row_y_lt_270": 0,
+   "normal_row_y_ge_270": 52835
+  }
+ },
+ "textures_source_free": {
+  "controls_ortho": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  },
+  "instances_ortho": {
+   "bbox": null,
+   "bytes_identical": true,
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "pixels": 518400
+  }
+ }
+}
