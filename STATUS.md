@@ -144,6 +144,16 @@ module lifecycle and CI/import union: 593 ordinary tests, 97 actual composed-mod
 tests, all-target Clippy, 86 tooling tests and two fresh shipping proofs pass.
 Hosted integration checks remain pending. [Union evidence](docs/spikes/native-runtime-integration.md).
 
+Native project playback now cooks authoring once and runs a disposable native
+world with a trusted build-embedded behavior. The developer coordinator serializes
+build/copy, removes temporary compiler inputs, and binds each private executable
+to its source digest. Replay, selected observations, committed logs and optional
+PCM preserve authoring and publish no partial output on runtime failure. The
+integrated source passes 601 ordinary tests, 88 tooling tests, six custom-behavior
+process controls and a fresh 47-process shipping-player regression proof.
+[Evidence](docs/spikes/native-project-play.md). Editor Play, agent play tools,
+project script routing, GPU capture and complete session saves remain open.
+
 ## Remaining engineering requirements
 
 - Complete migration of the editor, headless runner and full gameplay SDK from
