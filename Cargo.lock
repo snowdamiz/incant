@@ -3840,10 +3840,12 @@ dependencies = [
  "incant_core",
  "incant_doc",
  "incant_localization",
+ "incant_source",
  "schemars 1.2.2",
  "serde",
  "serde_json",
  "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
  "ulid",
 ]
@@ -3857,6 +3859,7 @@ dependencies = [
  "incant_doc",
  "incant_runtime",
  "incant_script",
+ "incant_source",
  "serde_json",
  "sha2 0.10.9",
  "tempfile",
@@ -3941,6 +3944,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tao",
+ "tempfile",
  "thiserror 2.0.21",
  "ulid",
 ]
@@ -4292,6 +4296,21 @@ dependencies = [
  "incant_script",
  "incant_types",
  "serde_json",
+]
+
+[[package]]
+name = "incant_source"
+version = "0.0.1"
+dependencies = [
+ "rustix",
+ "schemars 1.2.2",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "tempfile",
+ "thiserror 2.0.21",
+ "ulid",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]

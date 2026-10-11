@@ -9,7 +9,6 @@ mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
 }
 use serde::Serialize;
-mod compiler;
 mod session;
 pub(crate) use session::{Session, StartOptions};
 use sha2::{Digest, Sha256};

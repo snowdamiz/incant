@@ -25,6 +25,16 @@ def edge(data, source, dest, kind=None, target=None):
 
 
 class RuntimeDependencies(unittest.TestCase):
+    def test_source_authoring_store_stays_outside_shipped_runtime(self):
+        data = graph()
+        data['packages'].append({'id': 'pkg:incant_source', 'name': 'incant_source'})
+        data['resolve']['nodes'].append({'id': 'pkg:incant_source', 'deps': []})
+        edge(data, 'incant_runtime', 'adapter')
+        edge(data, 'adapter', 'incant_source', target='cfg(target_os = "windows")')
+        self.assertEqual(guard.violations(data, ['incant_runtime']), [
+            ['incant_runtime', 'adapter', 'incant_source'],
+        ])
+
     def test_fbx_source_parser_stays_outside_shipped_runtime(self):
         data = graph()
         data['packages'].append({'id': 'pkg:ufbx', 'name': 'ufbx'})

@@ -214,10 +214,20 @@ Plans are bounded and validated before output creation. See
 
 `init` refuses to overwrite an existing file. `rpc` serves newline-delimited JSON
 on stdin/stdout. `project.read`, `schema.list`, `command.execute`, `history.read`,
-`history.undo`, `history.redo`, `project.save`, and disposable `play.*` operations are
-available. `command.execute` requires an expected document revision. Use `--journal`
+`history.undo`, `history.redo`, `script.read`, `script.write`, `project.save`, and
+disposable `play.*` operations are available. `command.execute` requires an expected document revision. Use `--journal`
 for recovery across process restarts. The journal and project checkpoint belong
 together; do not reuse a journal for another project.
+
+Source reads and writes require `--journal` and use registered script IDs under
+the trusted project directory. `script.read` returns `untrusted_source_data` with
+the actual UTF-8 text, source version and document revision; `script.write`
+requires those observed versions and a description. One `.ts` file of at most
+256 KiB may be written per transaction. A `write_script` command can share a
+`command.execute` transaction with registration and entity attachment. Undo/Redo
+includes the file contents, and conflicting external edits are preserved. Missing
+parent directories, symlinks, hardlinks and unsafe paths are refused. See
+[source transaction semantics and recovery](docs/spikes/script-source-transactions.md).
 
 ```sh
 tools/cargo run -p incant_headless -- rpc artifacts/demo.incant.json --journal artifacts/demo.journal.jsonl
