@@ -9,6 +9,8 @@
  *   3. Inactive window: titlebar contrast with host chrome focused and unfocused.
  *   4. Dialog edge: whether the specks on the account dialog's top hairline are
  *      background text seen through its translucent ring (viewport text hidden or not).
+ *   5. Import and reimport: where keyboard focus lands when the request settles (results
+ *      come from the live double and are MOCKED).
  *
  * Usage (repo root): node handoffs/0035-editor-union-review/tools/findings.mjs [outDir]
  * With outDir, the two edge crops (finding 4) are written there.
@@ -20,7 +22,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 import { preview } from 'vite';
-import { unionInitScript } from './union-double.mjs';
+import { unionInitScript, unionLiveInitScript } from './union-double.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, '../../..');
@@ -126,6 +128,26 @@ try {
     }
     await context.close();
   }
+  console.log('5. Keyboard focus after an import or reimport finishes (live double; results MOCKED)');
+  for (const ok of [true, false]) {
+    const result = ok ? { ok: true } : { ok: false, error: { code: 'asset.import', message: 'Mocked failure.' } };
+    const { context, page } = await open({ init: unionLiveInitScript({ capabilities: ['asset.import'], assetImport: { available: true }, results: { 'asset.import': result } }) });
+    await page.getByRole('tab', { name: /^Assets/ }).click();
+    await page.getByRole('button', { name: 'Import' }).click();
+    const path = page.getByRole('textbox', { name: 'Path 1' });
+    await path.fill('sprites/dock_props.atlas.json');
+    await path.press('Enter');
+    await page.waitForTimeout(200);
+    console.log(`   import, Enter in the path, result ok=${ok}: ${await where(page)}`);
+    await page.getByRole('option', { name: /^harbor_ui/ }).click();
+    const button = page.locator('#asset-inspector .asset-section__actions button');
+    await button.focus();
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(200);
+    console.log(`   reimport, Enter on the button, result ok=${ok}: ${await where(page)}`);
+    await context.close();
+  }
+
 } finally {
   await browser.close();
   await new Promise((done) => server.httpServer.close(done));

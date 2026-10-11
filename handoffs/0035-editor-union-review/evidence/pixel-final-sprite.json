@@ -1,0 +1,86 @@
+{
+  "generated": "2026-10-11T00:50:56.812Z",
+  "baselineDir": "./handoffs/0035-editor-union-review/screenshots/sprite",
+  "candidateDir": "./artifacts/0035-editor-union-review/v2",
+  "compared": 7,
+  "identical": 7,
+  "results": [
+    {
+      "name": "u-sprite-board-narrow-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-sprite-broken-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-sprite-coil-narrow-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-sprite-lantern-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-sprite-long-narrow-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-sprite-sign-minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-sprite-sign-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    }
+  ]
+}

@@ -78,11 +78,40 @@ export const USAGE_HINT: Readonly<Record<TextureUsage, string>> = {
 export const KIND_LABEL: Readonly<Record<string, string>> = {
   model: 'Model',
   texture: 'Texture',
+  audio: 'Audio',
 };
 
 /** Display label for an engine asset kind. Unknown kinds are shown as reported. */
 export function kindLabel(kind: string): string {
   return KIND_LABEL[kind] ?? kind;
+}
+
+/**
+ * A texture's short tag. A sprite atlas (`.atlas.json` source) cooks to one color page
+ * and has no other interpretation, so it reads "Atlas"; an ordinary image shows its
+ * interpretation. Other kinds have no tag.
+ */
+export function textureTag(asset: { readonly kind: string; readonly path: string; readonly textureUsage?: TextureUsage | undefined }): string | null {
+  if (asset.kind !== 'texture') return null;
+  if (sourceKind(asset.path) === 'atlas') return 'Atlas';
+  return asset.textureUsage ? USAGE_LABEL[asset.textureUsage] : null;
+}
+
+/**
+ * The type line of an import row whose source has no interpretation choice, in the
+ * importer's own terms ("expected WAV or OGG audio"). Images show their choice instead.
+ */
+export function sourceTypeLabel(kind: SourceKind, path: string): string | null {
+  switch (kind) {
+    case 'model':
+      return 'Model';
+    case 'atlas':
+      return 'Color atlas';
+    case 'audio':
+      return `${path.slice(path.lastIndexOf('.') + 1).toUpperCase()} audio`;
+    default:
+      return null;
+  }
 }
 
 /** Engine errors that mean the project changed underneath the import; retrying is safe. */

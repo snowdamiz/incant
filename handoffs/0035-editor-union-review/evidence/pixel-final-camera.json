@@ -1,0 +1,86 @@
+{
+  "generated": "2026-10-11T00:50:55.954Z",
+  "baselineDir": "./handoffs/0035-editor-union-review/screenshots/camera",
+  "candidateDir": "./artifacts/0035-editor-union-review/v2",
+  "compared": 7,
+  "identical": 7,
+  "results": [
+    {
+      "name": "camera-rig-narrow-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1408
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "closeup-camera-minimum-1000x650-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1090
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "map-camera-narrow-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        560,
+        1408
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-broken-camera-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-pixel-bad-normal-1440x874-inspector.png",
+      "sameSize": true,
+      "size": [
+        720,
+        1476
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-pixel-camera-minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "u-pixel-camera-normal-1440x874.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1748
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    }
+  ]
+}

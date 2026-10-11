@@ -6,9 +6,13 @@
  * Screenshots are unedited captures, or crops/4x enlargements made with macOS `sips`
  * (marked "crop" below). Every account shown is an invented example address.
  *
+ * Two rounds: the complete review of source a20d258 (sets r2, s1, s2; kept as committed)
+ * and the final typed-import revision (sets f1, f2, v2; group `final`). Nothing is
+ * deleted; re-running copies the same files again.
+ *
  * Usage (repo root): node handoffs/0035-editor-union-review/tools/curate.mjs
  */
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -59,6 +63,19 @@ const PICKS = [
   ['regression', 'pixel-plain/dock-paged-problems-minimum-1000x650-diff.png'],
   ['regression', 'findings-edge/edge-normal-4x.png'], // findings.mjs crop, enlarged 4x with sips
   ['regression', 'findings-edge/edge-viewport-hidden-4x.png'], // the same with the viewport text hidden
+  // Final typed-import revision (results from the live double are MOCKED; request shapes are real).
+  ['final', 'f1/t-import-typed-normal-1440x874--rows.png'],
+  ['final', 'f1/t-import-typed-minimum-1000x650.png'],
+  ['final', 'f1/t-import-json-normal-1440x874-inspector.png'],
+  ['final', 'f1/u-import-mirror-normal-1440x874-inspector.png'],
+  ['final', 'f1/t-atlas-details-normal-1440x874--details.png'],
+  ['final', 'f1/t-atlas-details-narrow-1440x874-inspector.png'],
+  ['final', 'f1/t-atlas-long-narrow-1440x874-inspector.png'],
+  ['final', 'scratch/image-linear-narrow.png'], // crop of f1 t-image-reimport-narrow --linear
+  ['final', 'f1/t-audio-details-minimum-1000x650--details.png'],
+  ['final', 'scratch/switch-close.png'], // crop of f1 t-account-switch-normal --switched
+  ['final', 'scratch/host-change-question.png'], // crop of f2 t-account-host-change --question
+  ['final', 'scratch/host-change-cleared.png'], // crop of f2 t-account-host-change --cleared
 ];
 
 /** Evidence JSON: [source under artifacts, destination name under evidence/]. */
@@ -67,11 +84,15 @@ const EVIDENCE = [
   ['sweep-compare.json', 'sweep-compare.json'],
   ['pixel-plain.json', 'pixel-plain.json'],
   ['pixel-repeat.json', 'pixel-repeat.json'],
+  ['summary-typed.json', 'typed-import-review.json'],
+  ['pixel-v2-camera.json', 'pixel-final-camera.json'],
+  ['pixel-v2-sprite.json', 'pixel-final-sprite.json'],
+  ['pixel-f1-assets.json', 'pixel-final-assets.json'],
+  ['pixel-f1-account.json', 'pixel-final-account.json'],
 ];
 
 const shots = join(handoff, 'screenshots');
 const evidence = join(handoff, 'evidence');
-if (existsSync(shots)) rmSync(shots, { recursive: true });
 mkdirSync(evidence, { recursive: true });
 const lines = [];
 for (const [group, source] of PICKS) {
