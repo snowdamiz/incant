@@ -10,7 +10,7 @@ use incant_render::{Renderer, RetainedTarget, wgpu};
 use incant_render_game::{NativeRenderHost, NativeRenderSettings};
 use incant_render_gpu_host::{GpuRenderConsumer, GpuRenderSettings, RenderFrame, TargetProvider};
 use incant_runtime::CookedScene;
-use incant_script::CompiledScript;
+use incant_script::SessionProgram;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 const WIDTH: u32 = 160;
@@ -159,7 +159,7 @@ pub(crate) struct Session {
 impl Session {
     pub(crate) fn new(
         scene: CookedScene,
-        script: CompiledScript,
+        script: SessionProgram,
         actions: InputActions,
         clips: Vec<ClipBinding>,
         rate: u32,

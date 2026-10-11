@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["crates/*", "editor/app"]
+members = ["crates/*", "editor/app", "sdk/rust"]
 exclude = ["third_party/rerecast"]
 default-members = ["crates/*"]
 

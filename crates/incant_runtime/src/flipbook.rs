@@ -2,7 +2,7 @@
 use crate::{
     CookedSpatial, NativeSpriteRegion, NativeSpriteRenderer, NativeWorld, SceneError, StableId,
 };
-use bevy_ecs::prelude::{Component, Query};
+use bevy_ecs::prelude::{Component, Query, QueryState};
 use incant_2d::FlipbookClock;
 pub use incant_2d::flipbook::{MAX_FLIPBOOK_FRAMES, MAX_SCENE_FLIPBOOK_FRAMES};
 pub use incant_2d::{FlipbookControl, FlipbookState, FrameRate};
@@ -40,7 +40,44 @@ pub(crate) struct Playback {
     pub clock: FlipbookClock,
     pub state: FlipbookState,
 }
+pub(crate) type PlaybackQuery = QueryState<(&'static crate::world::Identity, &'static Playback)>;
+
+/// One owned committed playback row. No asset/configuration or private clock
+/// remainder is copied. Row order is unspecified; identify rows by stable ID.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct FlipbookSnapshot {
+    pub id: StableId,
+    pub frame: u16,
+    pub playing: bool,
+    pub completed: bool,
+}
 impl NativeWorld {
+    /// Replace reusable caller scratch with committed playback rows, before any
+    /// numeric loan. A retained ECS query visits only animation archetypes and
+    /// discovers structural changes without rebuilding the query each tick.
+    /// At most MAX_SPRITE_ENTITIES rows; no frame lists or asset bindings copied.
+    /// Later queued controls do not change these owned observations.
+    pub fn snapshot_flipbooks(
+        &mut self,
+        rows: &mut Vec<FlipbookSnapshot>,
+    ) -> Result<(), crate::RuntimeError> {
+        self.ensure_usable()?;
+        rows.clear();
+        for (id, playback) in self.flipbook_query.iter(&self.world) {
+            if rows.len() == crate::MAX_SPRITE_ENTITIES {
+                rows.clear();
+                return Err(SceneError::Invalid("flipbook snapshot quota").into());
+            }
+            rows.push(FlipbookSnapshot {
+                id: id.0,
+                frame: playback.state.frame(),
+                playing: playback.state.playing(),
+                completed: playback.state.completed(),
+            });
+        }
+        Ok(())
+    }
+
     /// Committed playback only. No mutable escape, text or asset lookup.
     pub fn flipbook_state(&self, id: StableId) -> Option<FlipbookState> {
         if self.physics_failed {

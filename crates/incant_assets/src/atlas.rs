@@ -52,11 +52,12 @@ pub(crate) fn cook(
     }
     let layout = pack(&descriptor, &sizes)?;
     let mut metadata = TextureMetadata {
-        version: 2,
+        version: 3,
         fingerprint: String::new(),
         dependency: dependency.clone(),
         usage,
         content_sha256: String::new(),
+        unweighted_content_sha256: None,
         dependencies: sources
             .dependencies()
             .into_iter()
@@ -92,8 +93,8 @@ pub(crate) fn cook(
     } else {
         TextureFormat::Rgba8Srgb
     };
-    let texture = crate::texture::from_linear(width, height, pixels, format, usage)?;
-    crate::texture_cache::store(cache, metadata, texture)
+    let (texture, independent) = crate::texture::color_variants(width, height, pixels, format)?;
+    crate::texture_cache::store(cache, metadata, texture, Some(independent))
 }
 fn linear_texel(image: &Texture, x: u32, y: u32) -> Result<[f32; 4]> {
     let i = (y as usize * image.width as usize + x as usize) * image.format.bytes_per_pixel();

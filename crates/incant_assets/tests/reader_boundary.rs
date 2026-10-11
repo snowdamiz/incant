@@ -79,21 +79,24 @@ fn same_error(legacy: authoring::AssetError, native: runtime::AssetError) {
 }
 
 #[test]
-fn cooked_model_v1_v2_readers_share_types_and_load_without_sources() {
+fn cooked_model_v1_v2_v3_readers_share_types_and_load_without_sources() {
     let temp = tempfile::tempdir().unwrap();
     model_source(temp.path());
     let cache = temp.path().join("cache");
     let cooked = authoring::cook_gltf(temp.path(), Path::new("triangle.gltf"), &cache).unwrap();
     let key = &cooked.metadata.fingerprint;
     let path = cache.join(format!("{key}.incmodel"));
-    let v2 = fs::read(&path).unwrap();
+    let v3 = fs::read(&path).unwrap();
+    let mut v2 = v3[..v3.len() - 32].to_vec();
+    v2[..8].copy_from_slice(b"INCMOD02");
+    checksum(&mut v2);
     fs::remove_file(temp.path().join("triangle.gltf")).unwrap();
     fs::remove_file(temp.path().join("triangle.bin")).unwrap();
     // v1 differs only by omitting v2's (empty here) embedded image section.
     let mut v1 = v2[..v2.len() - 36].to_vec();
     v1[..8].copy_from_slice(b"INCMOD01");
     checksum(&mut v1);
-    for bytes in [&v1, &v2] {
+    for bytes in [&v1, &v2, &v3] {
         fs::write(&path, bytes).unwrap();
         let legacy: runtime::CookedModel = authoring::load_model(&cache, key).unwrap();
         let native = runtime::load_model(&cache, key).unwrap();
@@ -198,7 +201,7 @@ fn mesh_and_ktx_decoding_match_the_authoring_api_and_keep_resource_limits() {
             width: 1,
             height: 1,
             format,
-            levels: vec![level],
+            levels: vec![level.into()],
         };
         let bytes = authoring::encode_ktx2(&texture).unwrap();
         assert_eq!(runtime::decode_ktx2(&bytes).unwrap(), texture);
@@ -260,7 +263,7 @@ fn ordinary_and_atlas_texture_manifests_load_without_sources_and_preserve_errors
         assert_eq!(legacy.metadata, native.metadata);
         assert_eq!(legacy.texture, native.texture);
         let mut bad = manifest.clone();
-        if cooked.metadata.version == 2 {
+        if cooked.metadata.atlas.is_some() {
             bad["atlas"]["padding"] = json!(0);
         } else {
             bad["dependency"]["sha256"] = json!("invalid");

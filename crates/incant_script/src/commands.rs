@@ -2,7 +2,7 @@
 //! World/column pointers, and an old tick's state is never activated again.
 use crate::ScriptError;
 use incant_runtime::{
-    CookedEntity, FrameCommands, MAX_FRAME_COMMANDS, StableId, StructuralCommand,
+    CookedEntity, FlipbookControl, FrameCommands, MAX_FRAME_COMMANDS, StableId, StructuralCommand,
 };
 use incant_types::{Transform, Velocity};
 use rquickjs::{Ctx, Exception, Function, Object, TypedArray, Value, function::Rest};
@@ -21,7 +21,13 @@ pub(crate) struct TickCommands(Rc<RefCell<State>>);
 impl TickCommands {
     pub fn expose<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
         let object = Object::new_proto(ctx.clone(), None)?;
-        for name in ["spawn", "despawn", "setParent", "setVelocity"] {
+        for name in [
+            "spawn",
+            "despawn",
+            "setParent",
+            "setVelocity",
+            "controlFlipbook",
+        ] {
             let state = Rc::clone(&self.0);
             let function =
                 Function::new(ctx.clone(), move |ctx: Ctx<'js>, args: Rest<Value<'js>>| {
@@ -109,6 +115,45 @@ fn parse<'js>(
     args: &[Value<'js>],
 ) -> rquickjs::Result<StructuralCommand> {
     Ok(match (name, args) {
+        ("controlFlipbook", [entity, action, rest @ ..]) => {
+            let invalid = || Exception::throw_type(ctx, "expected flipbook control string");
+            let action = action.as_string().ok_or_else(invalid)?;
+            let bytes = action.clone().to_cstring()?;
+            if bytes.is_empty() || bytes.len() > 7 {
+                return Err(invalid());
+            }
+            drop(bytes);
+            // Checked conversion: QuickJS also permits lone UTF-16 surrogates.
+            let action = action.to_string().map_err(|_| invalid())?;
+            let control = match (action.as_str(), rest) {
+                ("play", []) => FlipbookControl::Play,
+                ("pause", []) => FlipbookControl::Pause,
+                ("restart", []) => FlipbookControl::Restart,
+                ("seek", [frame]) => {
+                    let frame = frame
+                        .as_number()
+                        .filter(|n| {
+                            n.is_finite()
+                                && n.fract() == 0.
+                                && (0.0..=f64::from(u16::MAX)).contains(n)
+                        })
+                        .ok_or_else(|| {
+                            Exception::throw_type(ctx, "expected unsigned integer flipbook frame")
+                        })?;
+                    FlipbookControl::Seek(frame as u16)
+                }
+                _ => {
+                    return Err(Exception::throw_type(
+                        ctx,
+                        "unsupported flipbook control arguments",
+                    ));
+                }
+            };
+            StructuralCommand::ControlFlipbook {
+                entity: id(ctx, entity)?,
+                control,
+            }
+        }
         ("despawn", [entity]) => StructuralCommand::Despawn(id(ctx, entity)?),
         ("setParent", [entity, parent]) => StructuralCommand::SetParent {
             entity: id(ctx, entity)?,

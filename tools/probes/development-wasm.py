@@ -15,6 +15,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
+import rust_guest
 from shipping import cargo_output
 
 
@@ -70,9 +71,7 @@ def main():
     source = out / 'trusted_fixture.rs'
     shutil.copy2(ROOT / 'crates/incant_wasm_dev/fixtures/bulk.rs', source)
     source_hash = sha(source); module = out / 'bulk.wasm'
-    command = [rustc, source, '--crate-type=cdylib', '--edition=2024',
-               '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', module]
-    run(command, env=env)
+    rust_guest.compile(rustc,source,module,env=env)
     source.unlink()
     expected = '1 0.25\n2 0.125\n3 0.25\n4 0.125\n'
     outputs = [run([runner, module], cwd=out, env=env) for _ in range(3)]
@@ -80,7 +79,7 @@ def main():
         raise SystemExit('Native module state differs from exact dyadic expectation')
     report = {'kind': 'development-jit-conformance', 'rustc': run([rustc, '-vV']),
               'shipping_roots_without_wasmtime_or_cranelift': shipping,
-              'fixture_sha256': source_hash, 'fixture_deleted': not source.exists(),
+              'rust_sdk': rust_guest.provenance(), 'fixture_sha256': source_hash, 'fixture_deleted': not source.exists(),
               'wasm_sha256': sha(module), 'runner_sha256': sha(runner), 'processes': 3,
               'stdout': outputs, 'limitations': ['host build storage retained',
               'development JIT, not shipping wasm2c', 'trusted fixture compile, no untrusted build service',

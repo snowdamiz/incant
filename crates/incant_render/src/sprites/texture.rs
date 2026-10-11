@@ -123,7 +123,10 @@ mod tests {
             width: 2,
             height: 1,
             format: TextureFormat::Rgba8Srgb,
-            levels: vec![vec![255, 0, 0, 0, 128, 128, 128, 128], vec![0; 4]],
+            levels: vec![
+                vec![255, 0, 0, 0, 128, 128, 128, 128].into(),
+                vec![0; 4].into(),
+            ],
         };
         let out = premultiplied(&texture).unwrap();
         let values: Vec<_> = out
