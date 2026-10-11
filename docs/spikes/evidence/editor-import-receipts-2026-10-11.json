@@ -1,0 +1,71 @@
+{
+  "base": "774e7b2238227fb4db9b34f3c6db0406b5c1fb58",
+  "source_sha256": {
+    "editor/app/src/assets.rs": "9643395b1ff9544614e1f43a42ac9d69a9fc5f3072a6df25624d9974c806642c",
+    "editor/bridge/contract.ts": "51e8f11755f6a6d581b9f3b5a13eeeb403ead77066cca42e8f364e2e48718e76",
+    "editor/bridge/native.generated.js": "e29fdb58af1a252d80fc70af6b72560fb205d57e2c30192997a5f5962e3a66e4",
+    "editor/bridge/native.test.ts": "2cd9b215e7a40b06258ea8791aedd8942e796d32f3766301c051a03409e76eeb",
+    "editor/bridge/native.ts": "06746cd4a8cd7454ef94ab4c2600700dcbbd90099ac4d4bc2fd693d76ede1452",
+    "editor/ui/src/assets/AssetsContext.tsx": "16aa82d09836fad275a746e8c2f16d8166a1290c23cbcbeb31dd7f64936e45d7",
+    "editor/ui/src/components/assets/AssetInspector.tsx": "84402ea4a6f80ce8f9d13bc777fd29eb1887b2bd320fe9a6f925f583a0e02de7",
+    "editor/ui/src/components/assets/Assets.test.tsx": "077213603ed6f92d42863af47044438c8ebdf9c3e546032cd1069418d57c827a"
+  },
+  "logs": {
+    "/tmp/incant-import-noop-native-tests.log": {
+      "sha256": "a16e91e655a1e2e3a18d6dfc3c12fe75441e0bc8f7528b5e9c6a70e69bb431d0",
+      "bytes": 662
+    },
+    "/tmp/incant-import-noop-ui-scoped.log": {
+      "sha256": "f6b209b183215e4c7a1535237dab12b90fdbdf91493891e28ab9fff7ab6ff5a0",
+      "bytes": 357
+    },
+    "/tmp/incant-import-noop-typecheck.log": {
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3",
+      "bytes": 56
+    },
+    "/tmp/incant-import-noop-ui-full.log": {
+      "sha256": "ea6508325fdb24438e4b862b2011083b40385ed36ffdd5088090c0f8febbb7d1",
+      "bytes": 11682
+    },
+    "/tmp/incant-import-noop-ui-full-final.log": {
+      "sha256": "532b5c4928bd72fd4e8e7b17f2e323b8d892388845532e2e68c40e7910e80fc3",
+      "bytes": 2298
+    },
+    "/tmp/incant-import-noop-ui-build.log": {
+      "sha256": "296137a191efda975d5d99f2ac80c7e947974dd4267bfb97816ee0643727ee07",
+      "bytes": 1551
+    },
+    "/tmp/incant-import-noop-bridge.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-import-noop-native-clippy.log": {
+      "sha256": "072bdc29b95725357c625d5f8c06e70c163c14dfa7737109ae91f0503fc29466",
+      "bytes": 2793
+    }
+  },
+  "tests": {
+    "native_asset_host": 3,
+    "scoped_ui_bridge": 63,
+    "full_ui_bridge": 529,
+    "files": 30
+  },
+  "first_full_failure": "Ambiguous text query matched the notice and live status bar; changed test to assert each location independently. Final complete suite passes.",
+  "passed": [
+    "native host asset regression",
+    "scoped UI/bridge",
+    "full UI/bridge",
+    "strict TypeScript",
+    "UI production build",
+    "generated bridge check",
+    "release scoped editor Clippy"
+  ],
+  "pending": [
+    "Claude focused rendered/copy review",
+    "hosted integrated checks"
+  ],
+  "limits": [
+    "Native transport/journal behavior tested locally; no new native pixel acceptance claimed.",
+    "Test graph is main61 plus five UI/bridge cases, not newer runtime union."
+  ]
+}

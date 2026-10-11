@@ -88,6 +88,13 @@ within its documented workload.
 
 ## Active work
 
+- Import completion now uses an exact native transaction receipt: unchanged
+  imports preserve journal/revision/redo and do not promise Undo; changed imports
+  offer that hint only while their transaction is current. Three native asset
+  tests, 529 UI/bridge tests, strict/build/bridge generation and scoped release
+  Clippy pass. Focused Claude completion-state review and hosted validation remain
+  pending; see [import receipts](docs/spikes/editor-import-receipts.md).
+
 - The integrated editor now preserves live OAuth completion announcements and
   recovers Close focus instead of reusing Cancel as Sign out. Shortcut cells keep
   native table semantics with explicit group/action/key context; returning to the

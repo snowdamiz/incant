@@ -18,6 +18,11 @@ const TYPED_ASSETS: ProjectAsset[] = [
   { id: '01J9ZF1XTR0000000000000004' as Ulid, name: 'ui', path: 'sprites/ui.atlas.json', kind: 'texture', fingerprint: 'f4', textureUsage: 'color' },
   { id: '01J9ZF1XTR0000000000000005' as Ulid, name: 'theme', path: 'audio/theme.wav', kind: 'audio', fingerprint: 'f5' },
 ];
+const IMPORT_TX = '01J9ZF1XTR0000000000000030' as Ulid;
+const IMPORT_HISTORY: BridgeSnapshot['history'] = {
+  entries: [{ transaction: IMPORT_TX, description: 'Import assets', origin: { kind: 'user' }, at: '2026-10-11T00:00:00Z' }],
+  applied: 1,
+};
 
 /** The text of an element's accessible description. */
 const describedBy = (element: Element) =>
@@ -62,6 +67,10 @@ function controlledBridge(overrides: Partial<BridgeSnapshot> = {}, capabilities 
   return {
     bridge,
     commands,
+    publish: (next: Partial<BridgeSnapshot>) => act(() => {
+      snapshot = { ...snapshot, ...next };
+      listeners.forEach((listener) => listener());
+    }),
     resolve: async (result: BridgeResult, next?: Partial<BridgeSnapshot>) => {
       await act(async () => {
         if (next) {
@@ -87,6 +96,55 @@ async function expectNoAxeViolations(container: HTMLElement) {
 }
 
 describe('asset library', () => {
+  it.each(['import', 'reimport'])('reports a no-op %s without promising Undo or marking assets changed', async (kind) => {
+    const host = controlledBridge({ history: IMPORT_HISTORY });
+    renderWith(host.bridge);
+    openAssets();
+    if (kind === 'import') {
+      openImport();
+      fireEvent.change(pathInput(1), { target: { value: 'models/crate.glb' } });
+      fireEvent.submit(pathInput(1).closest('form')!);
+    } else {
+      fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
+      fireEvent.click(screen.getByRole('button', { name: 'Reimport' }));
+    }
+    await host.resolve({ ok: true, assetImport: { revision: 7, transaction: null } });
+    expect(document.querySelector('.asset-note')?.textContent).toBe('Already up to date. Nothing changed.');
+    expect(document.querySelector('.asset-note')?.textContent).not.toContain('Undo');
+    expect(screen.queryByRole('option', { name: /just imported/ })).toBeNull();
+    expect(host.bridge.getSnapshot().history).toEqual(IMPORT_HISTORY);
+    expect(host.commands).toHaveLength(1);
+    await waitFor(() => expect(statusMessage()).toBe('Already up to date. Nothing changed.'));
+  });
+
+  it('offers the import Undo hint only while its exact transaction is at the history cursor', async () => {
+    const host = controlledBridge();
+    renderWith(host.bridge);
+    openAssets();
+    fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Reimport' }));
+    await host.resolve({ ok: true, assetImport: { revision: 8, transaction: IMPORT_TX } }, { history: IMPORT_HISTORY });
+    expect(document.querySelector('.asset-note')?.textContent).toBe('Reimported. Undo reverts the whole reimport.');
+    host.publish({ history: { ...IMPORT_HISTORY, applied: 0 } });
+    expect(document.querySelector('.asset-note')?.textContent).toBe('Reimported.');
+    host.publish({ history: IMPORT_HISTORY });
+    expect(document.querySelector('.asset-note')?.textContent).toContain('Undo reverts');
+    host.publish({ history: { entries: [...IMPORT_HISTORY.entries, { ...IMPORT_HISTORY.entries[0]!, transaction: '01J9ZF1XTR0000000000000031' as Ulid, description: 'Unrelated edit' }], applied: 2 } });
+    expect(document.querySelector('.asset-note')?.textContent).toBe('Reimported.');
+    expect(host.commands).toHaveLength(1);
+  });
+
+  it('does not infer an undoable transaction when a bridge omits the receipt', async () => {
+    const host = controlledBridge({ history: IMPORT_HISTORY });
+    renderWith(host.bridge);
+    openAssets();
+    fireEvent.click(screen.getByRole('option', { name: /^crate Model/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Reimport' }));
+    await host.resolve({ ok: true });
+    expect(document.querySelector('.asset-note')?.textContent).toBe('Import completed.');
+    expect(screen.queryByRole('option', { name: /just imported/ })).toBeNull();
+  });
+
   it('recovers focus to the reset import path after a successful keyboard submission', async () => {
     const host = controlledBridge();
     renderWith(host.bridge);
@@ -398,8 +456,9 @@ describe('asset library', () => {
     openAssets();
     expect(screen.getByRole('textbox', { name: 'Path 3' })).toBeTruthy();
 
-    await host.resolve({ ok: true }, {
+    await host.resolve({ ok: true, assetImport: { revision: 8, transaction: IMPORT_TX } }, {
       assets: { status: 'ready', value: [...ASSETS, { id: '01J9ZF1XTR0000000000000009' as Ulid, name: 'lantern', path: 'models/lantern.glb', kind: 'model', fingerprint: 'f9' }] },
+      history: IMPORT_HISTORY,
     });
     expect(screen.getByText(/Imported 3 files\. Undo reverts the whole batch\./)).toBeTruthy();
     expect(pathInput(1)).toHaveProperty('value', '');
