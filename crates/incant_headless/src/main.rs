@@ -571,6 +571,20 @@ fn run() -> Result<()> {
                     "PhysicsTriggerEvent".into(),
                     json!(schemars::schema_for!(incant_core::TriggerEvent)),
                 ),
+                (
+                    "PhysicsRayQuery2D".into(),
+                    json!(schemars::schema_for!(incant_runtime::RayQuery2D<String>)),
+                ),
+                (
+                    "PhysicsRayHit2D".into(),
+                    json!(schemars::schema_for!(incant_runtime::RayHit2D<String>)),
+                ),
+                (
+                    "PhysicsTriggerEvent2D".into(),
+                    json!(schemars::schema_for!(
+                        incant_runtime::TriggerEvent2D<String>
+                    )),
+                ),
             ]);
             for (name, schema) in registry {
                 save(

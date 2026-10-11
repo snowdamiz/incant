@@ -3,6 +3,8 @@
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod audio;
 mod audio_binary;
+mod audio_controls;
+pub use audio_controls::AudioControl;
 mod binary;
 mod columns;
 mod commands;
