@@ -1,9 +1,13 @@
 # Implementation status
 
-[PLAN.md](PLAN.md) revision 7 is the source of truth. Phase 1 is in progress;
+[PLAN.md](PLAN.md) revision 8 is the source of truth. Phase 1 is in progress;
 the full engine and Driftwake release are not complete. Calendar targets and
 phase durations have been removed. Work proceeds continuously and in parallel
 where dependencies allow; exit gates still require their stated evidence.
+Service-backed features use local containers or in-process substitutes during
+development, behind production-shaped contracts. Real provider integrations,
+security/device evidence and release gates remain real; local substitutes do not
+satisfy those gates.
 
 The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
@@ -139,8 +143,9 @@ Do not revoke the director's working account for a test. Manual Windows/Linux
 account checks and the Windows viewport review were replaced by CI under the
 director's explicit decision; no extra desktop machine or live API key is requested.
 
-Hosted device/service accounts, payments and human staffing/legal commitments
-remain human-owned. Signing credentials and store/developer accounts first gate
+Hosted device/service accounts first gate real staging or device work, not
+local feature development. Payments and human staffing/legal commitments remain
+human-owned. Signing credentials and store/developer accounts first gate
 Phase 5 store uploads. No phone purchases, name clearance or package reservations
 are required. Unsigned packages and simulator/compile-only results do not satisfy
 store distribution or real-device gates.
