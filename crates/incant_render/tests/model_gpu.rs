@@ -4,6 +4,7 @@ mod cameras;
 mod environments;
 mod lights;
 mod materials;
+mod pipeline_warmup;
 mod shadows;
 mod sprites;
 mod support;

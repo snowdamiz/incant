@@ -35,15 +35,11 @@ impl Renderer {
                 bounds.push(batch.bounds);
                 casters.push(Caster {
                     batch: Arc::clone(batch),
-                    pipeline: self.shadows.pipeline(
-                        &self.device,
-                        &self.materials.layout,
-                        PipelineKey {
-                            alpha: material.alpha,
-                            double_sided: material.double_sided,
-                            mirrored: batch.mirrored,
-                        },
-                    )?,
+                    pipeline: self.shadows.pipeline(PipelineKey {
+                        alpha: material.alpha,
+                        double_sided: material.double_sided,
+                        mirrored: batch.mirrored,
+                    })?,
                 });
             }
         }

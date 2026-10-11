@@ -21,7 +21,7 @@ impl DiagnosticDraw {
         Ok(Self {
             targets,
             rect,
-            pipeline: renderer.cached_pipeline(crate::frame::HDR_FORMAT)?,
+            pipeline: renderer.diagnostic_pipeline.clone(),
             vertices: renderer
                 .device
                 .create_buffer_init(&wgpu::util::BufferInitDescriptor {

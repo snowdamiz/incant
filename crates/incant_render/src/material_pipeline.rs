@@ -3,24 +3,13 @@ use incant_assets_runtime::AlphaMode;
 
 pub(crate) fn build(
     device: &wgpu::Device,
+    shader: &wgpu::ShaderModule,
     key: PipelineKey,
     globals: &wgpu::BindGroupLayout,
     materials: &wgpu::BindGroupLayout,
     environment: &wgpu::BindGroupLayout,
     lighting: &wgpu::BindGroupLayout,
 ) -> wgpu::RenderPipeline {
-    let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-        label: Some("glTF metallic roughness"),
-        source: wgpu::ShaderSource::Wgsl(
-            format!(
-                "{}\n{}\n{}",
-                include_str!("shadows/shade.wgsl"),
-                include_str!("lighting/shade.wgsl"),
-                include_str!("model_material.wgsl")
-            )
-            .into(),
-        ),
-    });
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Material pipeline"),
         bind_group_layouts: &[
@@ -35,7 +24,7 @@ pub(crate) fn build(
         label: Some("Imported metallic roughness"),
         layout: Some(&layout),
         vertex: wgpu::VertexState {
-            module: &shader,
+            module: shader,
             entry_point: Some("vertex"),
             compilation_options: Default::default(),
             buffers: &[
@@ -65,7 +54,7 @@ pub(crate) fn build(
         }),
         multisample: Default::default(),
         fragment: Some(wgpu::FragmentState {
-            module: &shader,
+            module: shader,
             entry_point: Some("fragment"),
             compilation_options: Default::default(),
             targets: &[Some(wgpu::ColorTargetState {
@@ -76,5 +65,20 @@ pub(crate) fn build(
         }),
         multiview_mask: None,
         cache: None,
+    })
+}
+
+pub(crate) fn shader(device: &wgpu::Device) -> wgpu::ShaderModule {
+    device.create_shader_module(wgpu::ShaderModuleDescriptor {
+        label: Some("glTF metallic roughness"),
+        source: wgpu::ShaderSource::Wgsl(
+            format!(
+                "{}\n{}\n{}",
+                include_str!("shadows/shade.wgsl"),
+                include_str!("lighting/shade.wgsl"),
+                include_str!("model_material.wgsl")
+            )
+            .into(),
+        ),
     })
 }
