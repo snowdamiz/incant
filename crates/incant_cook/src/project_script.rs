@@ -1,6 +1,6 @@
 //! Checked authoring scene + source catalog + attachment package. The ordinary
 //! scene-only cook still rejects Script instead of silently dropping gameplay.
-use crate::{CookError, scene::cook_validated_scene, stable_id};
+use crate::{CookError, scene::cook_validated_scene_with_navigation, stable_id};
 use incant_doc::Project;
 use incant_runtime::CookedScene;
 use incant_script::{CompiledScript, ScriptBindings, ScriptError, ScriptInstance, ScriptValue};
@@ -52,6 +52,17 @@ impl CookedProjectProgram {
 pub fn prepare_script_scene(
     project: &Project,
     scene_id: &str,
+) -> Result<PreparedScriptScene, ProjectScriptError> {
+    prepare_script_scene_with_navigation(project, scene_id, &Default::default())
+}
+
+/// Bind authored behaviors and explicit checked navigation geometry to the same
+/// immutable scene snapshot. Missing/stale geometry refuses before compilation;
+/// the default preparation entry point retains that strict refusal.
+pub fn prepare_script_scene_with_navigation(
+    project: &Project,
+    scene_id: &str,
+    resources: &incant_nav::NavigationResources,
 ) -> Result<PreparedScriptScene, ProjectScriptError> {
     let validated = project.validated().map_err(CookError::from)?;
     let scene = project
@@ -133,7 +144,7 @@ pub fn prepare_script_scene(
             Ok(json!({"id":ulid::Ulid::from_bytes(id.0).to_string(),"path":source.path}))
         })
         .collect::<Result<Vec<_>, _>>()?;
-    let bytes = cook_validated_scene(validated, scene_id, &attached)?;
+    let bytes = cook_validated_scene_with_navigation(validated, scene_id, &attached, resources)?;
     let bindings = ScriptBindings::new(
         Sha256::digest(&bytes).into(),
         sources.iter().map(|(id, _)| *id).collect(),

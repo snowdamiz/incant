@@ -64,6 +64,20 @@ impl NavigationGrid {
         request: &GridPathRequest,
     ) -> Result<Option<GridPath>, NavigationError> {
         self.validate()?;
+        let minimum = self
+            .costs
+            .iter()
+            .copied()
+            .filter(|&c| c != 0)
+            .min()
+            .unwrap_or(1);
+        self.find_path_prepared(request, minimum)
+    }
+    fn find_path_prepared(
+        &self,
+        request: &GridPathRequest,
+        minimum: u16,
+    ) -> Result<Option<GridPath>, NavigationError> {
         let [width, height] = self.dimensions.map(usize::from);
         if request.max_expansions == 0 || request.max_expansions as usize > MAX_GRID_CELLS {
             return Err(limit("grid expansion budget must be 1..65536"));
@@ -79,7 +93,7 @@ impl NavigationGrid {
         if self.costs[start] == 0 || self.costs[end] == 0 {
             return Ok(None);
         }
-        let minimum = u64::from(*self.costs.iter().filter(|&&c| c != 0).min().unwrap());
+        let minimum = u64::from(minimum);
         let heuristic = |node: usize| {
             let dx = (node % width).abs_diff(end % width) as u64;
             let dy = (node / width).abs_diff(end / width) as u64;
@@ -159,5 +173,35 @@ impl NavigationGrid {
             }
         }
         Ok(None)
+    }
+}
+
+/// Immutable checked grid. Validation and minimum-weight scanning occur once at
+/// construction; queries check only their request and visit the search frontier.
+#[derive(Debug, Clone)]
+pub struct PreparedGrid {
+    grid: NavigationGrid,
+    minimum: u16,
+}
+impl PreparedGrid {
+    pub fn new(grid: NavigationGrid) -> Result<Self, NavigationError> {
+        grid.validate()?;
+        let minimum = grid
+            .costs
+            .iter()
+            .copied()
+            .filter(|&c| c != 0)
+            .min()
+            .unwrap_or(1);
+        Ok(Self { grid, minimum })
+    }
+    pub fn grid(&self) -> &NavigationGrid {
+        &self.grid
+    }
+    pub fn find_path(
+        &self,
+        request: &GridPathRequest,
+    ) -> Result<Option<GridPath>, NavigationError> {
+        self.grid.find_path_prepared(request, self.minimum)
     }
 }

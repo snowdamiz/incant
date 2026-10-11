@@ -3857,6 +3857,7 @@ dependencies = [
  "incant_assets",
  "incant_assets_runtime",
  "incant_doc",
+ "incant_nav",
  "incant_runtime",
  "incant_script",
  "incant_source",
@@ -4101,6 +4102,7 @@ dependencies = [
 name = "incant_physics_runtime"
 version = "0.0.1"
 dependencies = [
+ "incant_nav",
  "incant_types",
  "rapier3d",
  "schemars 1.2.2",
@@ -4261,6 +4263,7 @@ dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
  "incant_2d",
+ "incant_nav",
  "incant_physics_2d_runtime",
  "incant_physics_runtime",
  "incant_types",

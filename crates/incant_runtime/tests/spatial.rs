@@ -382,9 +382,9 @@ fn failed_integration_does_not_publish_candidate_globals_or_tick() {
 }
 
 #[test]
-fn spatial_saves_refuse_sticky_usage_and_plain_restore_invalidates_consumer_generations() {
+fn spatial_saves_survive_removed_declarations_and_restore_invalidates_generations() {
     let mut world = NativeWorld::new(scene().with_spatial(assets(), nodes()).unwrap());
-    assert_eq!(world.save_bytes(), Err(SaveError::SpatialUnsupported));
+    assert!(world.save_bytes().is_ok());
     let mut commands = queue((1..=4).map(|n| Cmd::SetSpatial {
         entity: id(n),
         spatial: None,
@@ -392,11 +392,8 @@ fn spatial_saves_refuse_sticky_usage_and_plain_restore_invalidates_consumer_gene
     world.apply(&mut commands).unwrap();
     let mut plain = NativeWorld::new(scene());
     let save = plain.save_bytes().unwrap();
-    assert_eq!(world.save_bytes(), Err(SaveError::SpatialUnsupported));
-    assert_eq!(
-        world.restore_bytes(&save),
-        Err(SaveError::SpatialUnsupported)
-    );
+    assert!(world.save_bytes().is_ok());
+    assert_eq!(world.restore_bytes(&save), Err(SaveError::WorldMismatch));
     plain.restore_bytes(&save).unwrap();
     assert_eq!(generations(&plain), (1, 1));
     plain.restore_bytes(&save).unwrap();

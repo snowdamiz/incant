@@ -119,7 +119,11 @@ fn saves_include_committed_structural_and_direct_column_changes() {
 #[test]
 fn save_order_does_not_depend_on_archetype_insertion_history() {
     let initial = world(120);
-    let mut reordered = NativeWorld::new(CookedScene::new(id(99), 120, vec![]).unwrap());
+    let mut reordered = world(120);
+    let mut remove = FrameCommands::default();
+    remove.push(Command::Despawn(id(2))).unwrap();
+    remove.push(Command::Despawn(id(1))).unwrap();
+    reordered.apply(&mut remove).unwrap();
     let mut commands = FrameCommands::default();
     commands
         .push(Command::Spawn(entity(2, Some(1), false)))
@@ -162,7 +166,7 @@ fn every_truncation_and_single_byte_mutation_leaves_the_destination_intact() {
 #[test]
 fn unknown_version_flags_and_rehashed_malformed_payloads_fail_closed() {
     let source = world(60).save_bytes().unwrap();
-    for (offset, value) in [(8, 2_u32), (12, 1), (24, u32::MAX)] {
+    for (offset, value) in [(8, 3_u32), (12, 1), (24, u32::MAX)] {
         let mut bad = source.clone();
         bad[offset..offset + 4].copy_from_slice(&value.to_le_bytes());
         rehash(&mut bad, 32, 64);
@@ -172,7 +176,7 @@ fn unknown_version_flags_and_rehashed_malformed_payloads_fail_closed() {
     // an unsupported component, bad parent, duplicate ID and non-finite value.
     for case in 0..5 {
         let mut bad = source.clone();
-        let scene = &mut bad[64..];
+        let scene = &mut bad[104..];
         match case {
             0 => scene[92..96].copy_from_slice(&7_u32.to_le_bytes()),
             1 => scene[88..92].copy_from_slice(&100_u32.to_le_bytes()),
@@ -265,6 +269,7 @@ fn rehashed_planar_physics_scene_cannot_bypass_the_v1_save_boundary() {
         let payload = scene.to_bytes();
         let mut bytes = world(60).save_bytes().unwrap();
         bytes.truncate(64);
+        bytes[8..12].copy_from_slice(&1u32.to_le_bytes());
         bytes[16..24].copy_from_slice(&25_u64.to_le_bytes());
         bytes[24..32].copy_from_slice(&(payload.len() as u64).to_le_bytes());
         bytes.extend(payload);
