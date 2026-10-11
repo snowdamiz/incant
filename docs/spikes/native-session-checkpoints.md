@@ -170,3 +170,13 @@ described above; it adds no shipping, device, physics/audio or complete-game gat
 [Integration review and logs](evidence/native-session-checkpoints-main101.json)
 and [complete recooked process receipt](evidence/native-session-checkpoints-main101-process.json)
 retain the tested source identities and results.
+
+
+## Game composition and exporter follow-up
+
+The later [native game checkpoint slice](native-game-checkpoints.md) implements
+candidate construction through the existing GameSession hosts and real exported
+offline player, with rational output phase, neutral relative input and create-only
+file publication. The remaining-work list above records this slice's original
+boundary. Physics/audio/static continuation, window/GPU load and platform durability
+remain open; the follow-up does not claim full saves or VM heap continuation.

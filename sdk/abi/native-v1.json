@@ -361,6 +361,82 @@
       "result": null,
       "opcode": 17,
       "call": "Call::Log { level, ptr, len }"
+    },
+    {
+      "namespace": "incant_localization_v1",
+      "name": "locale",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 18,
+      "call": "Call::Locale"
+    },
+    {
+      "namespace": "incant_localization_v1",
+      "name": "localize",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 19,
+      "call": "Call::Localize { ptr, len }"
+    },
+    {
+      "namespace": "incant_localization_v1",
+      "name": "read_result",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 20,
+      "call": "Call::ReadLocalized { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_localization_v1",
+      "name": "set_locale",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 21,
+      "call": "Call::SetLocale { ptr, len }"
     }
   ],
   "enums": {
@@ -1271,17 +1347,35 @@
     "LOG_MAX_TICK_ENTRIES": 64,
     "LOG_MAX_TICK_BYTES": 16384,
     "LOG_MAX_RETAINED_ENTRIES": 1024,
-    "LOG_MAX_RETAINED_BYTES": 262144
+    "LOG_MAX_RETAINED_BYTES": 262144,
+    "LOCALIZATION_MAX_QUERIES": 64,
+    "LOCALIZATION_QUERY_UNITS": 4,
+    "NATIVE_MAX_QUERY_UNITS": 1024,
+    "LOCALIZATION_MAX_INPUT_BYTES": 65536,
+    "LOCALIZATION_MAX_OUTPUT_BYTES": 262144,
+    "LOCALIZATION_MAX_TEXT_BYTES": 65536,
+    "LOCALIZATION_MAX_ARGUMENTS": 64,
+    "LOCALIZATION_MAX_LOCALE_BYTES": 128,
+    "LOCALIZATION_MAX_KEY_BYTES": 128,
+    "LOCALIZATION_MAX_FALLBACKS": 16,
+    "LOCALIZATION_MAX_COMMANDS": 64,
+    "LOCALIZATION_MAX_REQUEST_BYTES": 66560,
+    "LOCALIZATION_MAX_RESULT_BYTES": 66560,
+    "LOCALIZATION_MAX_SETTINGS_BYTES": 2364
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
-    "FLIPBOOK_MAGIC": "INCFB001"
+    "FLIPBOOK_MAGIC": "INCFB001",
+    "LOCALIZATION_REQUEST_MAGIC": "INCLQR01",
+    "LOCALIZATION_SETTINGS_MAGIC": "INCLST01",
+    "LOCALIZATION_RESULT_MAGIC": "INCLRS01"
   },
   "optional_none": -1,
   "namespaces": {
     "incant_v1": "imports",
     "incant_input_v1": "input",
     "incant_flipbook_v1": "flipbook",
-    "incant_log_v1": "log"
+    "incant_log_v1": "log",
+    "incant_localization_v1": "localization"
   }
 }

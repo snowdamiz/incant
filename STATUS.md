@@ -36,9 +36,22 @@ checked before VM execution; invalid replacement preserves the live session.
 Integrated main101 passes 324 affected tests/doctests, scoped Clippy/contracts and four successful fresh
 source/build-deleted processes plus a corruption refusal pass. Whole checkpoint
 bytes match uninterrupted execution. Module globals/closures remain explicitly
-ephemeral and physical input restarts neutral. Physics/audio/static modules,
-complete GameSession/player/export loading and durable file publication remain
-unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+ephemeral and physical input restarts neutral. Physics/audio/static continuation
+and platform durability remain unsupported; this does not complete Phase1 saves. [Contract and evidence](docs/spikes/native-session-checkpoints.md).
+
+## Native game and exported-player checkpoints — locally verified
+
+The existing GameSession families can create ordinary checkpoints and construct a
+validated candidate on its exact restored WorldIdentity before VM/audio startup.
+The public exported offline player accepts create-only `--save-checkpoint` and
+`--load-checkpoint`, retains rational sample phase, uses new neutral relative input
+and absolute observations, and refuses unsupported window/GPU/static routes.
+311 affected tests, scoped Clippy and a fresh shipping export pass. After source
+and private build deletion, five successful processes and nine refusal controls
+pass; uninterrupted and twice-resumed final checkpoint bytes match. This remains
+opt-in typed gameplay persistence, not arbitrary VM, physics/audio or complete
+Phase1 saves. PCM/checkpoint are not a multifile atomic transaction, and full
+power-loss durability is not claimed. [Contract/evidence](docs/spikes/native-game-checkpoints.md).
 
 ## Shared agent project access — locally verified
 
@@ -360,6 +373,15 @@ scoped Clippy and 16 generator/preparer cases pass locally.
 [Wasm evidence](docs/spikes/native-wasm-logs.md). Full native SDK, session saves,
 platform/device conformance and remaining editor/headless integration stay open.
 
+Native Wasm localization now exposes copied locale/message queries and ordinary
+atomic runtime locale settings, using the existing native catalog/ICU rules.
+Actual Wasmtime, linked wasm2c and no_std Rust guest checks cover rich arguments,
+fallback/pseudo/missing metadata, next-callback visibility, quota refusal, mixed
+rollback, reload and static session log observation. Shared ingress failures on
+active correct-epoch locale calls reject the entire batch. Standalone formatting,
+reports, catalog editing, static checkpoints and platform/device gates remain
+open. [Contract and evidence](docs/spikes/native-wasm-localization.md).
+
 
 The reviewed native script/input stack is now tested together with the static
 module lifecycle and CI/import union: 593 ordinary tests, 97 actual composed-module
@@ -456,3 +478,12 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 761 ordinary tests, 75 GPU tests, 178 actual-host conformance tests, full Clippy,
 536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
+
+GameSession/exported-player checkpoint integration: reviewed source `0d841fcd` is preserved unchanged in main103 union `4661e254`; 34 integrated CPU tests and optional-GPU all-target Clippy pass. Original311-test/five-success/nine-refusal shipping evidence remains applicable; full-save limits are unchanged. See [integration evidence](docs/spikes/evidence/native-game-checkpoints-main103.json).
+
+## Native Wasm localization integration
+
+Actual main104 integration is clean: 74 development/static/SDK, 106 session library
+and five GameSession checkpoint cases pass, with 20 tooling tests, Clippy,
+compiler-disabled/static and dependency checks. Static checkpoints remain refused.
+[Integration evidence](docs/spikes/evidence/native-wasm-localization-main104.json).
