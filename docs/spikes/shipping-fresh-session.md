@@ -76,9 +76,18 @@ forwards the existing animated/static-frame numerical controls without changing
 their fixtures or assertions. The original four-proof mode remains available;
 `--flipbook` without all four proofs is refused before output creation. All 110
 Python tooling tests pass, including option forwarding and global barrier order.
-This integrated graph has not yet run the fresh player proofs, and the later
-flipbook SDK controls remain pending. The 16.8% sample above does not measure
-this newer graph. CI remains unchanged.
+The immutable SDK revision `2ee26d510a6bfa6ea2bcb381b9f3bd0296d9680f`
+is now integrated locally with exact PR81. `--flipbook-sdk` requires `--flipbook`
+and retains all original QuickJS/static-module frame, state, symbol, C-codegen,
+compiler-exclusion and refusal controls. The generated Wasm/C bundle must live
+inside registered disposable inputs; its complete file set and hashes are checked
+before and after its fresh target build. The global deletion barrier removes that
+bundle, guest source, module and translator before any packaged player launch.
+The trusted host cooker remains a separate authoring tool, outside the target
+shipping ledger. The suite forwards no new default behavior to standalone probes.
+This integrated graph still needs its fresh player proof. The 16.8% sample above
+does not measure this newer graph; shared storage remains off CI. The inherited
+SDK CI command continues to run its full standalone proof.
 
 The original commands passed locally on the same runtime sources in 78.82 and
 121.71 seconds, respectively. This is a local baseline with concurrent unrelated

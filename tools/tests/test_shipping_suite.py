@@ -23,9 +23,20 @@ class ShippingSuiteSelectionTests(unittest.TestCase):
             self.assertEqual(raised.exception.code, 2)
             self.assertFalse(output.exists())
 
+    def test_sdk_refuses_without_flipbook_before_creating_output(self):
+        for extra in ([], ['--four-proofs']):
+            with self.subTest(extra=extra), tempfile.TemporaryDirectory() as storage:
+                output = Path(storage) / 'proof'
+                with patch.object(sys, 'argv', ['suite', str(output), '--flipbook-sdk', *extra]), \
+                        contextlib.redirect_stderr(io.StringIO()), \
+                        self.assertRaises(SystemExit) as raised:
+                    shipping_suite.main()
+                self.assertEqual(raised.exception.code, 2)
+                self.assertFalse(output.exists())
+
     def test_four_proofs_forward_exact_flipbook_selection_before_global_barrier(self):
-        for flipbook in (False, True):
-            with self.subTest(flipbook=flipbook), tempfile.TemporaryDirectory() as storage:
+        for flipbook, sdk in ((False, False), (True, False), (True, True)):
+            with self.subTest(flipbook=flipbook, sdk=sdk), tempfile.TemporaryDirectory() as storage:
                 output = Path(storage) / 'proof'
                 events, arguments = [], {}
                 session = Mock(path=Path(storage) / 'absent-build')
@@ -44,7 +55,7 @@ class ShippingSuiteSelectionTests(unittest.TestCase):
 
                 probes = {name: SimpleNamespace(phases=phase(name)) for name in (
                     'native-scene-audio', 'native-game', 'cooked-script')}
-                argv = ['suite', str(output), '--four-proofs'] + (['--flipbook'] if flipbook else [])
+                argv = ['suite', str(output), '--four-proofs'] + (['--flipbook'] if flipbook else []) + (['--flipbook-sdk'] if sdk else [])
                 with patch.object(sys, 'argv', argv), \
                         patch.object(shipping_suite, 'FreshSession', return_value=session), \
                         patch.object(shipping_suite, 'run', side_effect=['/trusted/rustc', 'host: aarch64-apple-darwin']), \
@@ -53,12 +64,14 @@ class ShippingSuiteSelectionTests(unittest.TestCase):
                         contextlib.redirect_stdout(io.StringIO()):
                     shipping_suite.main()
                 self.assertEqual(arguments['native-game'].flipbook, flipbook)
+                self.assertEqual(arguments['native-game'].flipbook_sdk, sdk)
                 self.assertTrue(arguments['native-game'].gpu)
                 self.assertTrue(arguments['cooked-script'].physics)
                 self.assertEqual(events[:5], ['prepare:' + name for name in (
                     'runtime', 'native-scene-audio', 'native-game', 'cooked-script')] + ['sealed'])
                 report = json.loads((output / 'session.json').read_text())
-                self.assertEqual(report['probes'][2], 'native-game.py --gpu' + (' --flipbook' if flipbook else ''))
+                self.assertEqual(report['probes'][2], 'native-game.py --gpu' + (' --flipbook' if flipbook else '')
+                                 + (' --flipbook-sdk' if sdk else ''))
 
 
 if __name__ == '__main__':

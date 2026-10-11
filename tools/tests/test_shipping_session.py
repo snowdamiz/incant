@@ -153,6 +153,44 @@ class FreshShippingLedgerTests(unittest.TestCase):
                     self.session.build(command, cwd=self.root, env={key: 'override'})
                 run.assert_not_called()
 
+    def test_static_bundle_must_be_disposable_and_without_symlinks(self):
+        bundle = self.root / 'authoring/bundle'
+        bundle.mkdir(parents=True)
+        source = bundle / 'module.c'
+        source.write_bytes(b'trusted generated C')
+        env = {'INCANT_WASM_BUNDLE': str(bundle)}
+        with self.assertRaisesRegex(ValueError, 'registered disposable'):
+            self.session.bundle_inputs(env)
+        self.session.input_directory(bundle.parent)
+        recorded = self.session.bundle_inputs(env)
+        self.assertEqual(recorded['files_sha256'], {'module.c': sha(source)})
+        (bundle / 'external.c').symlink_to(self.library)
+        with self.assertRaisesRegex(ValueError, 'Symlinked static bundle'):
+            self.session.bundle_inputs(env)
+
+    def test_static_bundle_mutation_during_build_is_refused(self):
+        command = ['cargo', '--profile', 'shipping', '--target', self.target,
+                   '--target-dir', str(self.storage), '--config',
+                   'profile.shipping.split-debuginfo="packed"', '--locked',
+                   '--message-format=json', '-vv']
+        for mutation in ('changed', 'added', 'deleted'):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory(dir=self.root) as temporary:
+                bundle = Path(temporary)
+                source = bundle / 'module.c'
+                source.write_bytes(b'original C')
+                self.session.input_directory(bundle)
+
+                def compile(*args, **kwargs):
+                    if mutation == 'changed': source.write_bytes(b'different C')
+                    elif mutation == 'added': (bundle / 'extra.h').write_bytes(b'new input')
+                    else: source.unlink()
+                    return subprocess.CompletedProcess(args[0], 0, '{}', '')
+
+                with patch('shipping_session.subprocess.run', side_effect=compile):
+                    with self.assertRaisesRegex(ValueError, 'Static bundle (changed|is empty)'):
+                        self.session.build(command, cwd=self.root, env={'INCANT_WASM_BUNDLE': str(bundle)})
+                self.assertFalse(self.session.builds)
+
     def test_source_head_content_and_compiler_changes_are_rejected(self):
         session = self.session
         session.head = b'frozen-head'

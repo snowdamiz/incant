@@ -3927,6 +3927,7 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "incant_wasm_runtime",
  "pollster",
  "serde",
  "serde_json",

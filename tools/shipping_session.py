@@ -113,6 +113,24 @@ class FreshSession:
         require(path.is_file() and not path.is_relative_to(self.path), 'Missing independent packaged player')
         self.players.append((path, sha(path)))
 
+    def bundle_inputs(self, env):
+        if not env.get('INCANT_WASM_BUNDLE'):
+            return None
+        original = Path(env['INCANT_WASM_BUNDLE'])
+        path = original.resolve()
+        require(not original.is_symlink() and path.is_dir(), 'Missing or symlinked static bundle')
+        require(any(path.is_relative_to(parent) for parent in self.inputs),
+                'Static bundle must be inside registered disposable authoring inputs')
+        files = {}
+        for item in sorted(path.rglob('*')):
+            require(not item.is_symlink(), 'Symlinked static bundle input')
+            if item.is_file():
+                files[item.relative_to(path).as_posix()] = sha(item)
+            else:
+                require(item.is_dir(), 'Unsupported static bundle input')
+        require(files, 'Static bundle is empty')
+        return {'path': str(path), 'files_sha256': files}
+
     def build(self, command, *, cwd, env):
         require(not self.deleted and Path(cwd).resolve() == self.root, 'Invalid shipping build boundary')
         for name, expected in (('--profile', 'shipping'), ('--target', self.target),
@@ -127,6 +145,7 @@ class FreshSession:
             require(not env.get(key), f'Unexpected compiler override: {key}')
         inputs = {key: {'path': str(Path(env[key]).resolve()), 'sha256': sha(Path(env[key]))}
                   for key in ('INCANT_NATIVE_SCRIPT_SOURCE', 'INCANT_NATIVE_SCRIPT_MAP') if env.get(key)}
+        bundle = self.bundle_inputs(env)
         self.check_frozen()
         begin = time.monotonic()
         build = subprocess.run(command, cwd=cwd, env=env, capture_output=True, text=True, encoding='utf-8')
@@ -137,12 +156,13 @@ class FreshSession:
         self.check_frozen()
         require(all(sha(Path(value['path'])) == value['sha256'] for value in inputs.values()),
                 'Compile input changed during shipping build')
+        require(self.bundle_inputs(env) == bundle, 'Static bundle changed during shipping build')
         require(build.returncode == 0, f'Shared shipping build failed:\n{build.stderr[-16000:]}')
         lines = self.record(build.stdout, build.stderr)
         self.builds.append({'command': list(map(str, command)), 'seconds': elapsed,
                             'stdout_sha256': hashlib.sha256(build.stdout.encode()).hexdigest(),
                             'stderr_sha256': hashlib.sha256(build.stderr.encode()).hexdigest(),
-                            'compile_inputs': inputs,
+                            'compile_inputs': inputs, 'static_bundle': bundle,
                             'script_name': env.get('INCANT_NATIVE_SCRIPT_NAME'),
                             'target_units': self.last_units})
         return build, '\n'.join(lines)

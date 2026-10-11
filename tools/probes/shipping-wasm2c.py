@@ -166,6 +166,11 @@ def main():
             copied = inputs / source.name; shutil.copy2(source, copied); dest = copied.with_suffix('.wasm')
             run([wabt / f'bin/wat2wasm{suffix}', copied, '-o', dest]); modules.append((source.stem, dest))
         if args.conformance_only:
+            flipbook = inputs/'flipbook.rs'; shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs', flipbook)
+            flipbook_module = inputs/'flipbook.wasm'
+            run([rustc, flipbook, '--crate-type=cdylib', '--edition=2024', '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', flipbook_module])
+            modules.append(('flipbook-game', flipbook_module))
+            environment['INCANT_FLIPBOOK_GUEST'] = str(flipbook_module)
             game = inputs/'game.rs'; shutil.copy2(ROOT/'crates/incant_wasm_player/fixtures/game.rs', game)
             game_module = inputs/'game.wasm'
             run([rustc, game, '--crate-type=cdylib', '--edition=2024', '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', game_module])

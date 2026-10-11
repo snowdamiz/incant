@@ -45,9 +45,13 @@ def main():
     parser.add_argument('--fixture-binary', type=Path, default=ROOT / 'target/release/examples/no_renderer_fixtures')
     parser.add_argument('--flipbook', action='store_true',
                         help='Retain native flipbook numerical controls; requires --four-proofs')
+    parser.add_argument('--flipbook-sdk', action='store_true',
+                        help='Retain QuickJS and trusted wasm2c controls; requires --flipbook')
     args = parser.parse_args()
     if args.flipbook and not args.four_proofs:
         parser.error('--flipbook requires --four-proofs')
+    if args.flipbook_sdk and not args.flipbook:
+        parser.error('--flipbook-sdk requires --flipbook')
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
     rustc = Path(run(['rustup', 'which', 'rustc']).strip())
@@ -67,10 +71,12 @@ def main():
         phases[1:1] = [
             audio.phases(argparse.Namespace(output=out / 'audio', **common), session),
             game.phases(argparse.Namespace(output=out / 'game', gpu=True, render_input=True, flipbook=args.flipbook,
+                flipbook_sdk=args.flipbook_sdk,
                 audio_binary=args.audio_binary, fixture_binary=args.fixture_binary, **common), session),
         ]
         probes = ['shipping.py', 'native-scene-audio.py',
-                  'native-game.py --gpu' + (' --flipbook' if args.flipbook else ''),
+                  'native-game.py --gpu' + (' --flipbook' if args.flipbook else '')
+                  + (' --flipbook-sdk' if args.flipbook_sdk else ''),
                   'cooked-script.py --physics']
     begin = time.monotonic()
     try:

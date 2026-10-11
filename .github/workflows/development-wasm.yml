@@ -19,6 +19,7 @@ on:
       - 'crates/incant_audio_runtime/**'
       - 'crates/incant_assets_runtime/**'
       - 'tools/probes/static-game.py'
+      - 'tools/native_flipbook_sdk.py'
       - 'crates/incant_script_player/**'
       - 'crates/incant_game_player/**'
       - 'crates/incant_2d/**'

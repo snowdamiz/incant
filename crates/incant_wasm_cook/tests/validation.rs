@@ -61,3 +61,28 @@ fn input_capability_is_versioned_with_exact_signatures_before_translation() {
     let wrong=wat::parse_str("(module (import \"incant_input_v1\" \"snapshot_len\" (func (param i32) (result i32))) (memory (export \"memory\") 1) (func (export \"incant_abi\") (result i32) i32.const 1) (func (export \"update\") (param i64 f64)))").unwrap();
     assert!(incant_wasm_cook::prepare(&wrong).is_err());
 }
+#[test]
+fn flipbook_namespace_signatures_are_explicit_and_prior_modules_still_validate() {
+    let source = include_str!("../../incant_wasm_runtime/fixtures/flipbooks.wat");
+    for accepted in [
+        source,
+        include_str!("../../incant_wasm_runtime/fixtures/input.wat"),
+        include_str!("../../incant_wasm_runtime/fixtures/trap.wat"),
+    ] {
+        assert!(incant_wasm_cook::prepare(&wat::parse_str(accepted).unwrap()).is_ok());
+    }
+    for invalid in [
+        source.replace("incant_flipbook_v1", "incant_flipbook_v2"),
+        source.replace("\"control\"", "\"mutate_frames\""),
+    ] {
+        assert!(incant_wasm_cook::prepare(&wat::parse_str(invalid).unwrap()).is_err());
+    }
+    for signature in [
+        "(param i64 i32 i32)",
+        "(param i64 i32 i32 i32) (result i32)",
+        "(param i32 i32 i32 i32)",
+    ] {
+        let wrong=wat::parse_str(format!(r#"(module (import "incant_flipbook_v1" "control" (func {signature})) (memory (export "memory") 1) (func (export "incant_abi") (result i32) i32.const 1) (func (export "update") (param i64 f64)))"#)).unwrap();
+        assert!(incant_wasm_cook::prepare(&wrong).is_err());
+    }
+}

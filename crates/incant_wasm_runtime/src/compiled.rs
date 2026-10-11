@@ -201,6 +201,16 @@ unsafe extern "C" fn dispatch(
                 ptr: a,
                 capacity: b,
             },
+            14 => Call::FlipbookLen,
+            15 => Call::ReadFlipbooks {
+                ptr: a,
+                capacity: b,
+            },
+            16 => Call::ControlFlipbook {
+                id: a,
+                kind: b,
+                frame: c,
+            },
             _ => return Err(StaticError::Facade),
         };
         // SAFETY: validated trusted descriptor contract guarantees initialized,
