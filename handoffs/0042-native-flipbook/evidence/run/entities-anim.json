@@ -1,0 +1,5530 @@
+[
+ {
+  "id": "01JA42EN000000000000000001",
+  "name": "plate-A",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -10.0,
+     7.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQX6H0VF7YNS780ZBJJP",
+    "region": [
+     0,
+     0,
+     4,
+     4
+    ],
+    "size": [
+     19.5,
+     8.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": -100,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000002",
+  "name": "plate-B",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     10.0,
+     7.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQX6H0VF7YNS780ZBJJP",
+    "region": [
+     4,
+     0,
+     4,
+     4
+    ],
+    "size": [
+     19.5,
+     8.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": -100,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000003",
+  "name": "plate-C",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -10.0,
+     -0.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQX6H0VF7YNS780ZBJJP",
+    "region": [
+     8,
+     0,
+     4,
+     4
+    ],
+    "size": [
+     19.5,
+     6.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": -100,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000004",
+  "name": "plate-E",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -10.0,
+     -7.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQX6H0VF7YNS780ZBJJP",
+    "region": [
+     16,
+     0,
+     4,
+     4
+    ],
+    "size": [
+     19.5,
+     6.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": -100,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000005",
+  "name": "plate-D",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     10.0,
+     -4.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQX6H0VF7YNS780ZBJJP",
+    "region": [
+     12,
+     0,
+     4,
+     4
+    ],
+    "size": [
+     19.5,
+     13.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": -100,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000006",
+  "name": "A1-nearest",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -18.0,
+     9.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000007",
+  "name": "A2-linear",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -15.5,
+     9.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "linear",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000008",
+  "name": "A3-flip-x",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -13.0,
+     9.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": true,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000009",
+  "name": "A4-flip-y",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -10.5,
+     9.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": true,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000A",
+  "name": "A5-flip-xy",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.0,
+     9.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": true,
+    "flip_y": true,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000B",
+  "name": "A6-sheet",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.5,
+     9.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQRJGYP96HSE3PQXMBX7",
+    "region": [
+     0,
+     0,
+     4,
+     4
+    ],
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     [
+      2,
+      3,
+      12,
+      12
+     ],
+     [
+      17,
+      1,
+      14,
+      11
+     ],
+     [
+      34,
+      2,
+      10,
+      13
+     ],
+     [
+      3,
+      19,
+      15,
+      10
+     ],
+     [
+      22,
+      17,
+      11,
+      14
+     ]
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000C",
+  "name": "A7-reversed",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -3.0,
+     9.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000005"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000001"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000D",
+  "name": "A8-tint",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -18.0,
+     6.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     0.7,
+     0.45,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000E",
+  "name": "A9-one-to-one",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -15.5,
+     6.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     0.75,
+     0.75
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000F",
+  "name": "A10-nearest-3x",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -12.75,
+     6.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     2.25,
+     2.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000G",
+  "name": "A15-linear-3x",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -9.5,
+     6.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     2.25,
+     2.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "linear",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000H",
+  "name": "A16-sheet-linear",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.5,
+     6.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQRJGYP96HSE3PQXMBX7",
+    "region": [
+     0,
+     0,
+     4,
+     4
+    ],
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "linear",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     [
+      2,
+      3,
+      12,
+      12
+     ],
+     [
+      17,
+      1,
+      14,
+      11
+     ],
+     [
+      34,
+      2,
+      10,
+      13
+     ],
+     [
+      3,
+      19,
+      15,
+      10
+     ],
+     [
+      22,
+      17,
+      11,
+      14
+     ]
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000J",
+  "name": "A17-wide",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.5,
+     6.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     3.0,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000K",
+  "name": "A11-nine-nearest",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -17.5,
+     4.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     3.0,
+     2.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "nine_slice",
+     "border": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "pixels_per_unit": 16.0
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000M",
+  "name": "A12-nine-linear",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -13.75,
+     4.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     3.0,
+     2.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "linear",
+    "mode": {
+     "kind": "nine_slice",
+     "border": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "pixels_per_unit": 16.0
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000N",
+  "name": "A13-nine-flip-x",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -10.0,
+     4.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     3.0,
+     2.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": true,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "nine_slice",
+     "border": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "pixels_per_unit": 16.0
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000P",
+  "name": "A14-nine-ppu8",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.0,
+     4.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     3.5,
+     2.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "nine_slice",
+     "border": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "pixels_per_unit": 8.0
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000Q",
+  "name": "A18-nine-compressed",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.75,
+     4.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     0.25,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "nine_slice",
+     "border": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "pixels_per_unit": 16.0
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000R",
+  "name": "B1-parent",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.5,
+     8.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.25881904510252074,
+     0.9659258262890683
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000S",
+  "name": "B1-rotated",
+  "parent": "01JA42EN00000000000000000R",
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000T",
+  "name": "B2-parent",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     6.0,
+     8.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     -1.0,
+     1.0,
+     1.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000V",
+  "name": "B2-reflect-x-flip-y",
+  "parent": "01JA42EN00000000000000000T",
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": true,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000W",
+  "name": "B3-parent",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     9.75,
+     8.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.5,
+     0.75,
+     1.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000X",
+  "name": "B3-shear-linear",
+  "parent": "01JA42EN00000000000000000W",
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.17364817766693033,
+     0.984807753012208
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "linear",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000Y",
+  "name": "B6-parent",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     14.0,
+     8.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.10452846326765347,
+     0.9945218953682733
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000000Z",
+  "name": "B6-nine-rotated",
+  "parent": "01JA42EN00000000000000000Y",
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     3.0,
+     2.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "nine_slice",
+     "border": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "pixels_per_unit": 16.0
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000010",
+  "name": "B7-rotated-linear",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     18.0,
+     8.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.3826834323650898,
+     0.9238795325112867
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "linear",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000011",
+  "name": "B4-moving-parent",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.5,
+     4.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Velocity": {
+    "linear": [
+     0.75,
+     0.0,
+     0.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000012",
+  "name": "B4-moving-child",
+  "parent": "01JA42EN000000000000000011",
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000013",
+  "name": "B4-static-sibling",
+  "parent": "01JA42EN000000000000000011",
+  "components": {
+   "Transform": {
+    "translation": [
+     2.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQTVTB4CHMD12XQAY6X4",
+    "region": [
+     0,
+     0,
+     10,
+     10
+    ],
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000014",
+  "name": "B8-parent",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     11.0,
+     4.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     2.0,
+     2.0,
+     1.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000015",
+  "name": "B8-inner",
+  "parent": "01JA42EN000000000000000014",
+  "components": {
+   "Transform": {
+    "translation": [
+     0.25,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     -0.13052619222005157,
+     0.9914448613738104
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000016",
+  "name": "B8-chain",
+  "parent": "01JA42EN000000000000000015",
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     0.75,
+     0.75
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000017",
+  "name": "B5-moving",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     17.5,
+     4.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Velocity": {
+    "linear": [
+     -0.5,
+     0.0,
+     0.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000018",
+  "name": "C1-pause-play",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -18.0,
+     0.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000019",
+  "name": "C2-pause-seek-play-restart",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -15.0,
+     0.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001A",
+  "name": "C3-once-hold-replay",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -12.0,
+     0.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": false,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001B",
+  "name": "C4-initially-paused",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -9.0,
+     0.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": false
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001C",
+  "name": "C5-seek-playing",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.0,
+     0.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001D",
+  "name": "C6-restart-playing",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -3.0,
+     0.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001E",
+  "name": "C7-pause-then-restart",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -18.0,
+     -2.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001F",
+  "name": "C8-restart-then-pause",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -15.0,
+     -2.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001G",
+  "name": "C9-once-seek-completed",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -12.0,
+     -2.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": false,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001H",
+  "name": "C10-reversed-seek",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -9.0,
+     -2.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000005"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000001"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001J",
+  "name": "C11-sheet-pause",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.0,
+     -2.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQRJGYP96HSE3PQXMBX7",
+    "region": [
+     0,
+     0,
+     4,
+     4
+    ],
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     [
+      2,
+      3,
+      12,
+      12
+     ],
+     [
+      17,
+      1,
+      14,
+      11
+     ],
+     [
+      34,
+      2,
+      10,
+      13
+     ],
+     [
+      3,
+      19,
+      15,
+      10
+     ],
+     [
+      22,
+      17,
+      11,
+      14
+     ]
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001K",
+  "name": "E1-150fps",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -18.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 150,
+     "denominator": 1
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001M",
+  "name": "E2-13-over-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -16.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 13,
+     "denominator": 3
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001N",
+  "name": "E3-1-over-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -14.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 1,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001P",
+  "name": "E4-1000fps",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -12.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 1000,
+     "denominator": 1
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001Q",
+  "name": "E5-60fps",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -10.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 60,
+     "denominator": 1
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001R",
+  "name": "E6-7-over-11",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 7,
+     "denominator": 11
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001S",
+  "name": "E7-once-150fps",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 150,
+     "denominator": 1
+    },
+    "looping": false,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001T",
+  "name": "E8-single-loop",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000003"
+     }
+    ],
+    "rate": {
+     "numerator": 10,
+     "denominator": 1
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001V",
+  "name": "E9-single-once",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.0,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.0,
+     1.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000004"
+     }
+    ],
+    "rate": {
+     "numerator": 2,
+     "denominator": 1
+    },
+    "looping": false,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001W",
+  "name": "D0-under-map",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     -6.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     2.25,
+     2.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": -1,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001X",
+  "name": "D-map",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     1.5,
+     -10.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Tilemap": {
+    "tileset": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "size": [
+     16,
+     7
+    ],
+    "cell_size": [
+     1.0,
+     1.0
+    ],
+    "layers": [
+     {
+      "id": "01JA42KY000000000000000001",
+      "cells": [
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000B",
+       null,
+       null,
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       null,
+       null,
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       null,
+       null,
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       null,
+       null,
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       null,
+       null,
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       null,
+       null,
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       null,
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000B",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C",
+       "01JA42FR00000000000000000C"
+      ],
+      "layer": 0,
+      "order": 0,
+      "solid": false
+     },
+     {
+      "id": "01JA42KY000000000000000002",
+      "cells": [
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       "01JA42FR00000000000000000D",
+       null,
+       null,
+       null,
+       null,
+       null,
+       "01JA42FR00000000000000000D",
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       "01JA42FR00000000000000000D",
+       null,
+       null,
+       null,
+       null,
+       "01JA42FR00000000000000000D",
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       "01JA42FR00000000000000000D",
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       "01JA42FR00000000000000000D",
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "layer": 0,
+      "order": 2,
+      "solid": false
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001Y",
+  "name": "D-static-low",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.0,
+     -5.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQTVTB4CHMD12XQAY6X4",
+    "region": [
+     0,
+     0,
+     10,
+     10
+    ],
+    "size": [
+     2.0,
+     2.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 1,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000001Z",
+  "name": "D1-tie-middle",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     9.0,
+     -5.75,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     2.25,
+     2.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 1,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000020",
+  "name": "D-static-high",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     10.25,
+     -6.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQTVTB4CHMD12XQAY6X4",
+    "region": [
+     0,
+     0,
+     10,
+     10
+    ],
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 1,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000021",
+  "name": "D2-layer1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     13.5,
+     -5.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     2.25,
+     2.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 1,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000022",
+  "name": "D-glass",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     14.25,
+     -4.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQTVTB4CHMD12XQAY6X4",
+    "region": [
+     0,
+     0,
+     10,
+     10
+    ],
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     0.5
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 2,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000023",
+  "name": "D5-above-ground",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     16.0,
+     -8.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000024",
+  "name": "D-static-top",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.0,
+     -8.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQTVTB4CHMD12XQAY6X4",
+    "region": [
+     0,
+     0,
+     10,
+     10
+    ],
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 2,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000025",
+  "name": "D3-moving-paused",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     3.5,
+     -8.25,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Velocity": {
+    "linear": [
+     3.0,
+     0.0,
+     0.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     2.25,
+     2.25
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 3,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000026",
+  "name": "D-static-frame",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     18.5,
+     -9.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR000000000000000003"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 1,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000027",
+  "name": "D6-linear-beside-static",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     18.5,
+     -7.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     1.5,
+     1.5
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 1,
+    "sampling": "linear",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000028",
+  "name": "D7-nearest-4x",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.5,
+     -0.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     3.0,
+     3.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "nearest",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN000000000000000029",
+  "name": "D8-linear-4x",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     9.0,
+     -0.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     3.0,
+     3.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "linear",
+    "mode": {
+     "kind": "simple"
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000002A",
+  "name": "D9-nine-linear-big",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     15.0,
+     -0.5,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpriteRenderer": {
+    "texture": "01M4MPDQP9PXJD1DVWB8QCW46C",
+    "region": {
+     "frame": "01JA42FR00000000000000000D"
+    },
+    "size": [
+     4.0,
+     3.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "tint": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "flip_x": false,
+    "flip_y": false,
+    "layer": 0,
+    "order": 0,
+    "sampling": "linear",
+    "mode": {
+     "kind": "nine_slice",
+     "border": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "pixels_per_unit": 16.0
+    }
+   },
+   "SpriteFlipbook": {
+    "frames": [
+     {
+      "frame": "01JA42FR000000000000000001"
+     },
+     {
+      "frame": "01JA42FR000000000000000002"
+     },
+     {
+      "frame": "01JA42FR000000000000000003"
+     },
+     {
+      "frame": "01JA42FR000000000000000004"
+     },
+     {
+      "frame": "01JA42FR000000000000000005"
+     }
+    ],
+    "rate": {
+     "numerator": 50,
+     "denominator": 7
+    },
+    "looping": true,
+    "playing": true
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000002B",
+  "name": "camera-pp",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     10.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Camera": {
+    "fov_degrees": 50.0,
+    "near": 0.1,
+    "far": 50.0,
+    "projection": {
+     "kind": "pixel_perfect",
+     "pixels_per_unit": 16.0,
+     "reference_resolution": [
+      640,
+      360
+     ]
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA42EN00000000000000002C",
+  "name": "camera-ortho",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.8963,
+     6.4509,
+     10.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Camera": {
+    "fov_degrees": 50.0,
+    "near": 0.1,
+    "far": 50.0,
+    "projection": {
+     "kind": "orthographic",
+     "vertical_size": 9.0
+    }
+   }
+  }
+ }
+]

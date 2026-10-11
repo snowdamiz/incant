@@ -1,0 +1,48 @@
+{
+ "name": "ctl-t00009-pp",
+ "camera": "camera-pp",
+ "camera_hex": "0192882754000000000000000000004b",
+ "inputs": {
+  "scene": "07b5eaeb3142a423f4dbffaf5c3e8452abea2998f929076008678a1e80941b30",
+  "request": "d425a7bd65a647fe3fc1de19f25b71a57afaf1280d5a4390dabef2533193a32c",
+  "textures": {
+   "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c.ktx2": "260384e5757d5908fade29ee128f37f8b02bfe9660e78b355db39a1ccba2440c",
+   "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae.ktx2": "747d340d984854a711e99dc9be760473590ffd9a09bba1b1759df7c0f7b643ae",
+   "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a.ktx2": "86526c0d9a594f74b1da9c300512ff81ee434ef6a7dc182d1621d83e898f359a",
+   "911f0868cd625ce78c302b10676d291f15ad856c04c580369b2b63fe4c0fecef.json": "d268d0f6bd6d4970e92c823a5fbc27ce9421f8f25ed53ca0108649fe8953c316",
+   "a3c678f6f2d60510dc7063fd558ea605dc304cd57045f521bc7893dd46529f0e.json": "003ff9c10701bfc41e99c7b75bd0fe641de5f78b78db682d0833ac7763ed13fe",
+   "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057.ktx2": "c3cb07f5f046ad708291942378f84ff94dab12db6fd544ac1cc29a82f752a057",
+   "da10ac5263ba60df512cb03a1a0001b768f475d7a9413dbe3b8265df9b9c0943.json": "b5d30bdfe87c0bf992c5687c789138ff9326f64cf66fc0d98874bd93ab8a4a63",
+   "e02bfa1e39938d101f6ed2851d296c43b917332bb5b04cc8d089d24a31ae4a7f.json": "b314859abe9ddde505cf22040dcf85ef4e60f4a890d88ab3c0d88a27798b1ca5"
+  }
+ },
+ "started": "2026-10-11T01:20:36.068-04:00",
+ "ended": "2026-10-11T01:20:36.157-04:00",
+ "exit": 0,
+ "stdout": "{\"passed\": true, \"output\": \"artifacts/0042-native-flipbook/r1/captures/ctl-t00009-pp\", \"captures\": 1, \"budget_used\": {\"calls\": 4, \"captures\": 34, \"decoded_bytes\": 31334400}, \"adapter\": \"Apple M5 Pro\"}",
+ "stderr": "",
+ "tools_before": {
+  "incant_headless": "34c0173d5f5d75734c5b94eaa9800752bf81ebac8b4668c48b133bf0f40b32ce",
+  "cook_scene": "256010202e5b272007bd6a655638985801f128d9188f0f4643723370743aa563",
+  "native_frames": "02acba93a337220e0f76d069fe0d245129fcdebf7fef552e02438cf2fecbbe12"
+ },
+ "tools_after": {
+  "incant_headless": "34c0173d5f5d75734c5b94eaa9800752bf81ebac8b4668c48b133bf0f40b32ce",
+  "cook_scene": "256010202e5b272007bd6a655638985801f128d9188f0f4643723370743aa563",
+  "native_frames": "02acba93a337220e0f76d069fe0d245129fcdebf7fef552e02438cf2fecbbe12"
+ },
+ "pngs": {
+  "tick-00000.png": "059f078155586eb3f5662676a7712ef8883879fd6b23e8ab73193bcd9a7a1272"
+ },
+ "report_sha256": "83e5a36ac168c9465240ca582a52cb68151552d3a55071ed1d59fc7638493201",
+ "budget_file": {
+  "calls": 4,
+  "captures": 34,
+  "decoded_bytes": 31334400
+ },
+ "ledger_after": {
+  "calls": 4,
+  "captures": 34,
+  "raw_bytes": 31334400
+ }
+}
