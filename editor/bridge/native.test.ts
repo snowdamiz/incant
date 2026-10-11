@@ -550,6 +550,91 @@ function play(overrides: Partial<PlayStatus> = {}): PlayStatus {
     error: null, ...overrides };
 }
 describe('native Play transport', () => {
+  it.each([
+    ['idle', play()],
+    ['paused', play({ generation: 1, sequence: 10, phase: 'paused', tick: 5 })],
+    ['running', play({ generation: 1, sequence: 10, phase: 'running', tick: 5 })],
+  ] as const)('retains snapshot identity and avoids duplicate %s notices at four-Hz polling', async (_phase, current) => {
+    vi.useFakeTimers();
+    let stop = () => {};
+    try {
+      let reads = 0;
+      let notices = 0;
+      const bridge = new NativeBridge(async <T>(name: string) => {
+        expect(name).toBe('play_read');
+        reads++;
+        return { ...current } as T;
+      });
+      bridge.subscribe(() => { notices++; });
+      stop = bridge.startPlayUpdates();
+      await bridge.refreshPlay();
+      const snapshot = bridge.getSnapshot();
+      expect(notices).toBe(1);
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(reads).toBe(5);
+      expect(notices).toBe(1);
+      expect(bridge.getSnapshot()).toBe(snapshot);
+      expect(bridge.getSnapshot().play).toBe(snapshot.play);
+    } finally { stop(); vi.useRealTimers(); }
+  });
+  it('publishes changed ticks, sequences and fields within the same generation', async () => {
+    let current = play({ generation: 1, sequence: 10, phase: 'running', tick: 5 });
+    let notices = 0;
+    const bridge = new NativeBridge(async <T>() => ({ ...current }) as T);
+    bridge.subscribe(() => { notices++; });
+    await bridge.refreshPlay();
+    for (const update of [{ sequence: 11, tick: 6, presentedFrames: 6 }, { sequence: 12 }, { suspended: true }]) {
+      const previous = bridge.getSnapshot();
+      current = { ...current, ...update };
+      await bridge.refreshPlay();
+      expect(bridge.getSnapshot()).not.toBe(previous);
+      expect(bridge.getSnapshot().play).toEqual(current);
+    }
+    expect(notices).toBe(4);
+  });
+  it('clears a read error on identical status recovery exactly once', async () => {
+    const current = play({ generation: 1, sequence: 10, phase: 'paused', tick: 5 });
+    let fail = true;
+    let notices = 0;
+    const bridge = new NativeBridge(async <T>(name: string) => {
+      expect(name).toBe('play_read');
+      if (fail) throw 'worker disconnected';
+      return { ...current } as T;
+    });
+    bridge.subscribe(() => { notices++; });
+    bridge.updatePlay(current);
+    await bridge.refreshPlay();
+    const failed = bridge.getSnapshot();
+    expect(failed.playError).toBeDefined();
+    expect(notices).toBe(2);
+    fail = false;
+    await bridge.refreshPlay();
+    const recovered = bridge.getSnapshot();
+    expect(recovered).not.toBe(failed);
+    expect(recovered.play).toBe(failed.play);
+    expect(recovered.playError).toBeUndefined();
+    expect(notices).toBe(3);
+    await bridge.refreshPlay();
+    expect(notices).toBe(3);
+    expect(bridge.getSnapshot()).toBe(recovered);
+  });
+  it('fences an old read failure behind a newer identical accepted status', async () => {
+    let reject!: (reason: string) => void;
+    const current = play({ generation: 1, sequence: 10, phase: 'paused', tick: 5 });
+    const bridge = new NativeBridge(async <T>() => await new Promise<T>((_, no) => { reject = no; }));
+    bridge.updatePlay(current);
+    let notices = 0;
+    bridge.subscribe(() => { notices++; });
+    const snapshot = bridge.getSnapshot();
+    const pending = bridge.refreshPlay();
+    bridge.updatePlay({ ...current });
+    expect(bridge.getSnapshot()).toBe(snapshot);
+    reject('obsolete failure');
+    await pending;
+    expect(notices).toBe(0);
+    expect(bridge.getSnapshot()).toBe(snapshot);
+    expect(bridge.getSnapshot().playError).toBeUndefined();
+  });
   it('uses revision and generation without sending project content or creating transactions', async () => {
     const calls: { name: string; args: unknown }[] = [];
     const bridge = new NativeBridge(async <T>(name: string, args?: Record<string, unknown>) => {

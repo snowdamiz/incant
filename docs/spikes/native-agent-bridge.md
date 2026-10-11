@@ -106,3 +106,24 @@ transport/resolve/AgentPanel tests pass, including the original action failure
 receipt tests. Strict TypeScript, generated bridge equivalence and diff checks
 pass. This follow-up is mock transport evidence only; it adds no native account,
 browser or live-provider validation.
+
+The Play polling follow-up suppresses publication of an identical accepted
+`PlayStatus`, retaining the complete bridge snapshot and Play object identities.
+The native `Service::snapshot` clones metadata without changing its sequence;
+production mutations go through `Service::edit` and worker publications advance
+that sequence (`editor/app/src/play/mod.rs:122`, `:128` and
+`editor/app/src/play/worker.rs:255`). The bridge nevertheless compares every flat
+status field, including counters, so changed fields at equal counters still
+publish. An accepted-update marker preserves failure fencing when a newer
+successful reply is deduplicated. A matching successful status clears a prior
+`playError` and notifies once. Poll frequency, native input notification behavior
+and stale-generation/sequence rejection remain unchanged.
+
+Five regression cases reproduced unnecessary notifications/identity replacement
+before the fix. Six new observable cases cover four-Hz duplicate idle/paused/
+running reads, genuine tick/sequence changes and equal-counter field changes,
+error-to-identical-status recovery and an obsolete failure after a newer identical
+reply. All 114 scoped bridge/resolve/AgentPanel tests, strict TypeScript, generated
+bridge equivalence and diff checks pass on this frozen correction. These mock
+subscriber counts establish publication behavior; they are not native execution,
+rendering or measured frame-performance evidence.

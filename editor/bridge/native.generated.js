@@ -600,6 +600,10 @@ const providerTransportError = ()=>({
     if (state.status === 'connecting') return state.method !== undefined;
     return state.status !== 'error' || state.error !== undefined;
 }
+function samePlayStatus(previous, next) {
+    const keys = Object.keys(previous);
+    return keys.length === Object.keys(next).length && keys.every((key)=>previous[key] === next[key]);
+}
 class NativeBridge {
     invoke;
     protocolVersion = 1;
@@ -631,6 +635,7 @@ class NativeBridge {
     play;
     playError;
     playRead;
+    playUpdateId = 0;
     listeners = new Set();
     historyListeners = new Set();
     pending = false;
@@ -1054,7 +1059,11 @@ class NativeBridge {
     }
     updatePlay(status) {
         if (this.play && (status.generation < this.play.generation || status.sequence < this.play.sequence)) return;
-        this.play = freeze(status);
+        // An accepted duplicate still fences failures from earlier reads without replacing the snapshot.
+        ++this.playUpdateId;
+        const retained = this.play && samePlayStatus(this.play, status) ? this.play : undefined;
+        if (retained && !this.playError) return;
+        this.play = retained ?? freeze(status);
         this.playError = undefined;
         const { playError: _error, ...rest } = this.snapshot;
         this.snapshot = freeze({
@@ -1073,11 +1082,11 @@ class NativeBridge {
         }
     }
     async readPlay() {
-        const published = this.play;
+        const published = this.playUpdateId;
         try {
             this.updatePlay(await this.invoke('play_read'));
         } catch (error) {
-            if (this.play !== published) return;
+            if (this.playUpdateId !== published) return;
             const result = failure(error);
             if (!result.ok) {
                 this.playError = result.error;
