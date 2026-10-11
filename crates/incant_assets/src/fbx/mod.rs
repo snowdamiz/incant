@@ -105,6 +105,7 @@ pub fn import_fbx(root: &Path, source: &Path) -> Result<ImportedModel> {
     let (textures, images) = material_import.finish();
     crate::material::resolve(&materials, &textures, &images)?;
     Ok(ImportedModel {
+        animation: None,
         meshes,
         textures,
         images,

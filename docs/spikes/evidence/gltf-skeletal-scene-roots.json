@@ -1,0 +1,87 @@
+{
+  "scope": "General animation scene-root validation independent of bound skins; no consumer or format change",
+  "parent": "cc56b67d226d604048847cd9872a808b865567f9",
+  "original_evidence": {
+    "path": "docs/spikes/evidence/gltf-skeletal-animation.json",
+    "sha256": "547272427c835ba8910de8c4a008fe6a2e6288d210b45ecfb36516d1d4f20740",
+    "retained_test_executable": "/tmp/incant-skeletal-cc56b67-test-binary",
+    "executable_sha256": "9dd089a7ee35041d282f3a4000cf4ac9adcee7d7bd1ab14bc89855558a64be4d"
+  },
+  "source_sha256": {
+    "Cargo.lock": "e6ab9cf4e3cac5a3f261bb03d607fa59a85bce1397030721635c0b8b12e4e4d2",
+    "crates/incant_assets/src/animation_cook.rs": "0fe6ded425961b4edd7f1a4ef8024300689f6e092b3c90aec534415fc2e54e9d",
+    "crates/incant_assets/src/cache.rs": "464d7a00f0b95501655e36b5e5d602397527244d02fa362a3ba3808c522f26e8",
+    "crates/incant_assets/src/fbx/mod.rs": "b25e66a52c57c69f3c714c8eb123adee685e48bdeff8da52fbe2daf3e48eaa8d",
+    "crates/incant_assets/src/gltf_animation.rs": "54bf1078e658770186ca938a2322d834fbc74f16f394b98e903994cb7ef3e0d2",
+    "crates/incant_assets/src/gltf_import.rs": "2ddf54702cea88fc764800d8359f45956e5557a687929945659c63470c6ee388",
+    "crates/incant_assets/src/lib.rs": "9281a2212d64469bd2ff7c1594ee0bf9b73200a7a31b0796e91a0bd45d50899f",
+    "crates/incant_assets/src/mesh.rs": "6d0afdb45b6995798b3e159a916ad054f3f2095e34538cdf51f297b62c2afa8e",
+    "crates/incant_assets/src/navigation.rs": "ee2122c7ec4a89ea7345b98bbc9122f36c6d944c913442f8c23644b9509017e3",
+    "crates/incant_assets/tests/navigation.rs": "fa2798a56fad72840077f2419c1dfacc966898754ea8e06d0e9aa785c4668a60",
+    "crates/incant_assets/tests/skeletal.rs": "41d1cf2e9f070de6c3115ddd95a3696d4467029ca6c21bd0c792ec172cc3fbda",
+    "crates/incant_assets/tests/skeletal/alloc.rs": "f58df95c57c6f884684b9a20427701e16e9049e24f287b0a9ea1e3031cb927fb",
+    "crates/incant_assets/tests/skeletal/fixture.rs": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+    "crates/incant_assets_runtime/Cargo.toml": "f56622df1f962feae0b2970fe6a1a118fc30a2e3d04d194cf7a238b788405b34",
+    "crates/incant_assets_runtime/src/animation/binary.rs": "2d4cdf6389116ceeac3dd77f2870deed82cec5d85c357b2ac678164e006b9727",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "d448b7a5eb7b6a6042730a4d68f1b04652782dfd972ecce549cce8ae39e7aa6a",
+    "crates/incant_assets_runtime/src/animation/player.rs": "540d5717d07956e58ef3a0acc880cf341564d2ab5cadbf588d5e4efdd1f91b0e",
+    "crates/incant_assets_runtime/src/lib.rs": "a931e6d7a3135d7097c6ba65da0d7a578985a00025cc7ea78f99c2de37847167",
+    "crates/incant_assets_runtime/src/model.rs": "846a1943f44ee7b491f8cf1346f52d05b5ea5c338d0b85e49252910fd933db0e",
+    "crates/incant_assets_runtime/src/version.rs": "7395e20e7ccc72ce709c6443ab018620b1bcb46e8dae67b4a434d36368a20c05"
+  },
+  "changed_source_paths": [
+    "crates/incant_assets/tests/skeletal.rs",
+    "crates/incant_assets_runtime/src/animation/mod.rs"
+  ],
+  "correction": "Root range and no-parent checks now run once after hierarchy parent construction; skin scene membership remains conditional on each bound skin.",
+  "regression": {
+    "name": "clip_only_scene_roots_are_revalidated_before_retained_copy",
+    "control": "Valid skinless clip data passes shared validation and AnimationPlayer::new",
+    "before": "Shared validation accepted out-of-range root 5; test failed",
+    "after": "Out-of-range and parented scene roots reject in shared validation and AnimationPlayer::new"
+  },
+  "results": {
+    "passed": 90,
+    "failed": 0,
+    "ignored": 0,
+    "result_groups": 16,
+    "skeletal_tests": 15
+  },
+  "commands": [
+    "cargo test --locked -j2 --profile ci -p incant_assets --test skeletal clip_only_scene_roots_are_revalidated_before_retained_copy (red baseline)",
+    "cargo test --locked -j2 --profile ci -p incant_assets -p incant_assets_runtime --features incant_assets_runtime/visual",
+    "cargo clippy --locked -j2 --profile ci -p incant_assets -p incant_assets_runtime --features incant_assets_runtime/visual --all-targets -- -D warnings",
+    "cargo fmt --all -- --check"
+  ],
+  "logs": {
+    "before": {
+      "path": "/tmp/incant-skeletal-scene-roots-before.log",
+      "sha256": "1e3e07bbc457634176f69336026ba750894cd5c221af4d5832020dd7d135a9f1"
+    },
+    "tests": {
+      "path": "/tmp/incant-skeletal-scene-roots-tests.log",
+      "sha256": "127fadc9706546dd08d2bb7ea725c0f471fef4b024b92a6aefcbfd0e44354c4b"
+    },
+    "clippy": {
+      "path": "/tmp/incant-skeletal-scene-roots-clippy.log",
+      "sha256": "a72e1ef4a79c7434d9675eb5b619c42848b198f67e1ad7d9e9374fe929bd737b"
+    },
+    "fmt": {
+      "path": "/tmp/incant-skeletal-scene-roots-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "source_deleted_process": {
+    "executable": "/tmp/incant-skeletal-target/ci/deps/skeletal-f0d5f3412645e00e",
+    "executable_sha256": "f0f330638cc16abed3f3aa7a68c2a2ca2cd52fd4074e315cbd0d631df24e3077",
+    "test": "fresh_process_loads_only_cooked_animation_data",
+    "expected_position": [
+      12,
+      1,
+      0
+    ],
+    "claim": "Included in full repeat; fresh test executable loads cooked bytes after both glTF source files are deleted. No shipped renderer/export claim."
+  },
+  "unchanged": "Prior dependency resolutions, graph guards, no-default and wasm runtime checks remain scoped to their original source. This follow-up changes only the shared validation loop and regression; no dependency/build/feature changes.",
+  "limits": "All original format/resource/runtime-consumer refusals and missing integration limits remain in force. No GPU, visual, provider or performance claim."
+}

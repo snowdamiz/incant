@@ -1,0 +1,42 @@
+{
+  "recorded_at": "2026-10-11T23:47:44.674808+00:00",
+  "reviewer": "astra /root",
+  "source_commit": "fd6afda85d8cd61a2a8bf38fce202893194edf88",
+  "original_commit": "cc56b67d226d604048847cd9872a808b865567f9",
+  "review_result": "accepted for scoped CPU import/cook/retained animation foundation integration",
+  "source_review": [
+    "glTF semantic accessor and aggregate preflight, normalized influences and expanded geometry alignment",
+    "static format/recipe compatibility and checked animated binary encoder/decoder",
+    "shared mutable-data validation, topology, skin scene membership and clip numerical constraints",
+    "retained live/staged sampling, interpolation, mesh-local palette conversion and CPU position blending",
+    "resource/count-before-allocation bounds, rollback, no-allocation tests and source-deleted process evidence",
+    "explicit refusal by current static native rendering and navigation consumers"
+  ],
+  "finding": {
+    "severity": "P2",
+    "problem": "Scene-root checks only ran for bound skins, allowing invalid roots in clip-only public cooked models.",
+    "resolution": "Moved general scene-root checks immediately after parent construction; conditional skin scene-membership retained.",
+    "regression": "Red baseline accepted out-of-range root 5; final test checks valid clip-only control and range/parent failures through both shared validation and AnimationPlayer startup.",
+    "commit": "fd6afda85d8cd61a2a8bf38fce202893194edf88"
+  },
+  "remaining_actionable_findings": [],
+  "verification": {
+    "source_hashes": 20,
+    "original_logs": 9,
+    "followup_logs": 4,
+    "original_and_current_test_executables": 2,
+    "test_results": {
+      "passed": 90,
+      "failed": 0,
+      "ignored": 0,
+      "result_groups": 16,
+      "skeletal_tests": 15
+    },
+    "correction_evidence_sha256": "e2b26f17c6cda2909b9040a9bbe204c4f92f4340160b59f509eb9e9229323f1d"
+  },
+  "notes": [
+    "Checked pinned glTF1.4.1 inverse-bind and accessor iterator code against importer typed/range preflight; absent-matrix identity fallback has no demonstrated malformed-buffer fallback path.",
+    "No additional duplicate test execution by root: source review, red/green logs, hashes and complete test totals independently verified.",
+    "Skeletal native gameplay/render/SDK, blend trees/state machines/IK/root motion and device performance remain incomplete; no visual acceptance claim."
+  ]
+}
