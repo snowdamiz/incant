@@ -23,3 +23,35 @@ untouched. The newly built union has not been opened or visually accepted; older
 captures do not certify its native menus, dialogs, minimum size, paging or focus.
 Hosted checks and the exact current-source rendered review remain pending before
 release integration. Device/performance gates and full engine completion remain open.
+
+## Typed atlas/audio import guard, 2026-10-11
+
+The release review found that the editor still rejected native-supported atlas
+and audio paths before dispatch. Source classification now distinguishes atlas
+descriptors and WAV/OGG audio from models and ordinary images. Only the exact
+`.atlas.json` suffix admits JSON; case normalization matches the native importer.
+Generic JSON, unsupported audio formats and unsafe project-relative paths remain
+rejected. Draft and reimport requests omit stale texture interpretation for atlas,
+audio and model sources; ordinary image reinterpretation and saved defaults remain.
+A bridge regression verifies all three new source formats dispatch as one atomic
+`asset.import` command.
+
+Independent review, 46 focused tests, all 515 UI tests, strict typecheck, production
+build and bridge generation pass. No styling, layout, Rust or command contract
+changed. Claude's final presentation reconciliation remains pending, including
+atlas color-only controls and source labels. The native executable predates this
+frontend correction and must be rebuilt before claiming final native build evidence.
+[Exact logs and limits](evidence/editor-typed-import-2026-10-11.json).
+
+## Connected account switch focus
+
+Claude's final browser review found a pre-existing behavior defect: switching
+between two connected accounts removed the focused Use button without recovering
+keyboard focus, so Escape no longer reached the dialog. The active account is now
+part of the existing host-state recovery key. A changed active account also clears
+a stale sign-out question. No credentials, styling or account requests changed.
+
+Both new observable regressions fail on the original source: focus lands on the
+body, and the old confirmation remains. With the fix all 27 account tests and
+strict typecheck pass. Final full UI validation and Claude's focused rendered
+recheck follow after the presentation reconciliation.

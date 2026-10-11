@@ -229,3 +229,24 @@ and log identities are in [publication evidence](evidence/sprite-atlas-publicati
 The accepted atlas-specific visual evidence and all shared rendering limitations
 above remain unchanged. Hosted checks, native editor integration and phone gates
 remain distinct requirements.
+
+## Hosted probe portability corrections, 2026-10-10
+
+The first publication run exposed two check defects. The Linux model renderer
+probe compared the complete geometry object against its old five-field shape;
+its fixture now explicitly expects `sprite_entities: 0` as well. The comparison
+remains exact. On Windows, the sprite-reference transaction test tried to read
+`history.jsonl` through a second handle while `CommandBus` held its exclusive
+OS lock. The test now releases that handle, reads the exact bytes, reopens the
+journal and verifies the replayed project and revision before continuing. Both
+journal snapshots still compare byte-for-byte; typed diagnostics, atomicity and
+subsequent exact Undo/Redo assertions remain. No production lock behavior changed.
+
+All four sprite-reference tests, focused release Clippy and formatting pass. A
+fresh release headless build passes the real GPU probe on Apple M5 Pro: exact
+model geometry, PNG integrity, parent/flattened transform equivalence, unchanged
+output after source deletion and changed output after reimport. These numerical
+checks do not claim visual or native-window acceptance. Corrected hosted checks,
+including the actual Windows journal behavior, remain pending.
+
+[Failure identities, commands/log hashes and native probe result](evidence/sprite-atlas-portable-probes-2026-10-10.json).
