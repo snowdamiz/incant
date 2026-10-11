@@ -39,6 +39,8 @@ pub enum Error {
     InputCapability,
     #[error("native pointer position must be finite and within one million pixels")]
     InputRange,
+    #[error("native input scale factor must be a finite positive normal value")]
+    InputScale,
     #[error("native input event capacity exceeded")]
     InputCapacity,
 }
@@ -177,7 +179,10 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         surface.invalidate();
                         redraw_pending = true;
                     }
-                    ref event if focused && !suspended => input.window(event)?,
+                    ref event if focused && !suspended => {
+                        // InputEvent uses logical pixels; query this window's current scale per event.
+                        input.window(event, window.scale_factor())?;
+                    }
                     _ => {}
                 },
                 // Raw DeviceEvent::MouseMotion is deliberately not forwarded:
