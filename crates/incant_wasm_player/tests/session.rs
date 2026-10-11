@@ -105,7 +105,7 @@ fn composed_static_motion_physics_audio_and_replay_share_one_tick_after_cache_de
                 .transform
                 .translation;
             assert!(
-                (position[0] - (2. + tick as f64 / 64.)).abs() < 2e-6,
+                (position[0] - (2. + 1. / 64. + (tick - 1).min(2) as f64 / 32.)).abs() < 2e-6,
                 "{position:?}"
             );
             assert_eq!(position[1], tick as f64 / 64.);
@@ -245,7 +245,7 @@ fn accepted_host_unwind_drops_static_session_and_silences_output() {
     )
     .unwrap();
     let mut output = vec![0.7; game.next_output_frames().unwrap() * 2];
-    assert!(catch_unwind(AssertUnwindSafe(|| game.tick(&[], &mut output))).is_err());
+    assert!(catch_unwind(AssertUnwindSafe(|| game.tick(&[key(true)], &mut output))).is_err());
     assert!(output.iter().all(|v| *v == 0.));
     assert!(game.is_failed());
     assert!(matches!(game.world(), Err(GameError::Failed)));
@@ -315,4 +315,36 @@ fn audio_rejection_after_real_module_publication_terminalizes_the_composite() {
     ));
     assert!(output.iter().all(|v| *v == 0.));
     failed(&mut game);
+}
+
+#[test]
+fn guest_reads_accepted_action_edges_instead_of_guessing_the_first_tick() {
+    let mut game = NativeSession::new(scene(false), module("game"), actions()).unwrap();
+    for tick in 1..=64 {
+        let events = match tick {
+            5 => vec![key(true)],
+            7 => vec![key(false)],
+            _ => vec![],
+        };
+        game.tick(&events).unwrap();
+        let world = game.world().unwrap();
+        if tick < 5 {
+            assert!(world.inspect(id(3)).is_none());
+        } else {
+            assert_eq!(
+                world.inspect(id(3)).unwrap().transform.translation[0],
+                (tick - 5) as f64 / 32.
+            );
+        }
+        let x = world.inspect(id(1)).unwrap().transform.translation[0];
+        let expected = if tick < 5 {
+            -2. + 1. / 64.
+        } else {
+            2. + 1. / 64. + (tick - 5).min(2) as f64 / 32.
+        };
+        assert!(
+            (x - expected).abs() < 2e-6,
+            "tick {tick}: {x} != {expected}"
+        );
+    }
 }

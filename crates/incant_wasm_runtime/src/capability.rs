@@ -10,6 +10,11 @@ use incant_types::{Transform, Velocity};
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    InputLen,
+    ReadInput {
+        ptr: i32,
+        capacity: i32,
+    },
     ChunkCount,
     ChunkLen(i32),
     ChunkFlags(i32),
@@ -42,6 +47,8 @@ pub struct Capability {
     epoch: i64,
     chunks: Vec<Chunk>,
     commands: FrameCommands,
+    input: Vec<u8>,
+    input_available: bool,
     transferred: usize,
     calls: usize,
 }
@@ -68,6 +75,8 @@ impl Capability {
         }
         self.identity = Some(identity);
         self.failed = true;
+        self.input_available = false;
+        self.input.clear();
         self.epoch = self.epoch.checked_add(1).ok_or(Error::Limit("epoch"))?;
         self.chunks = world.with_numeric_columns(transaction::capture)?;
         self.commands.clear();
@@ -76,8 +85,25 @@ impl Capability {
         self.active = true;
         Ok(self.epoch)
     }
+    /// Optional v1 input capability. Only an engine-validated runtime is accepted.
+    pub fn begin_with_input(
+        &mut self,
+        world: &mut NativeWorld,
+        dt: f64,
+        input: &incant_input::InputRuntime,
+    ) -> Result<i64, Error> {
+        let epoch = self.begin(world, dt)?;
+        if let Err(error) = crate::input::encode(input, world.tick(), &mut self.input) {
+            self.abort();
+            return Err(error);
+        }
+        self.input_available = true;
+        Ok(epoch)
+    }
     pub fn abort(&mut self) {
         self.active = false;
+        self.input_available = false;
+        self.input.clear();
         self.chunks.clear();
         self.commands.clear();
     }
@@ -86,6 +112,8 @@ impl Capability {
             return Err(Error::Abi("inactive ECS transaction"));
         }
         self.active = false;
+        self.input_available = false;
+        self.input.clear();
         if Some(world.spatial_view()?.identity()) != self.identity.as_ref() {
             self.abort();
             return Err(Error::Abi("different commit world"));
@@ -167,6 +195,26 @@ impl Capability {
             return Err(Error::Limit("linear memory"));
         }
         match call {
+            Call::InputLen => {
+                if !self.input_available {
+                    return Err(Error::Abi("input capability unavailable"));
+                }
+                return Ok(self.input.len() as i32);
+            }
+            Call::ReadInput { ptr, capacity } => {
+                if !self.input_available {
+                    return Err(Error::Abi("input capability unavailable"));
+                }
+                let len = self.input.len();
+                if usize::try_from(capacity).ok().is_none_or(|n| n < len) {
+                    return Err(Error::Abi("input destination capacity"));
+                }
+                range(ptr, capacity as usize, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(&self.input);
+                return Ok(len as i32);
+            }
             Call::ChunkCount => return Ok(self.chunks.len() as i32),
             Call::ChunkLen(i) => return Ok(self.chunks[self.index(i)?].ids.len() as i32),
             Call::ChunkFlags(i) => {
