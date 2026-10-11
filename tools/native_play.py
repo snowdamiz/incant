@@ -121,6 +121,7 @@ def prepare(source, source_map=None):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('project', type=Path)
+    parser.add_argument('--rpc', action='store_true', help='Serve retained native Play RPC using this trusted compiled behavior')
     scripts = parser.add_mutually_exclusive_group()
     scripts.add_argument('--script', type=Path, help='Native SDK CommonJS; omitted uses the engine no-op behavior')
     scripts.add_argument('--typescript', type=Path, help='Native TypeScript entry, relative to --script-root (default: project directory)')
@@ -140,8 +141,9 @@ def main(argv=None):
         source = bounded(args.script or ROOT/'crates/incant_headless/fixtures/native-play.js', 1_000_000)
         source_map = bounded(args.source_map, 4*1024*1024) if args.source_map else None
     with prepare(source, source_map) as (player, digest):
-        result = subprocess.run([player, 'native-play', project,
-            '--script-sha256', digest, *playback], check=False)
+        command = [player, 'rpc', project, *playback] if args.rpc else [player,
+            'native-play', project, '--script-sha256', digest, *playback]
+        result = subprocess.run(command, check=False)
         return result.returncode
 
 

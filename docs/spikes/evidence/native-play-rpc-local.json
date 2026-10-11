@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-11T06:15:11.039963+00:00",
+  "source_base": "55585ecf821eb3c3eb8e54d8ce45853f23f7b59c",
+  "source_sha256": {
+    "crates/incant_headless/src/main.rs": "6bff328eeb870adc510f60d7844ceb7b1e529f86139f00b385021d9e444aea08",
+    "crates/incant_headless/src/native_play.rs": "b77c068b25181c6674da09b272d0d15c601bfba8945e86620210a2015b6268d4",
+    "crates/incant_headless/src/native_play/session.rs": "e52251be2258f60e4435887bbe73820590cda6ba38f6daff6203c2bb856798be",
+    "crates/incant_headless/src/native_rpc.rs": "b90427d9fd4b0993dc590844a2602eda5e48bbaf265cbd03f07b21c9dce1cc6d",
+    "crates/incant_headless/tests/native_rpc.rs": "160d6417112d3f00b9855e101e26adf584a6ef53287eeb25ac8c8ccff860db5b",
+    "tools/native_play.py": "e25c9af846e70d7e6fe5d3ca167c91a2c85ffd072d3ba12c2d1fff6bcf615b95",
+    "tools/probes/native-project-play.py": "7cbf3c00f74d05dd89bf601148b981a121403c768340415396600bd1e572f293",
+    "tools/probes/native_rpc_controls.py": "b00b6236ede5fe95433df368f31dbd795213ec6c62b45ed9f9ce38f9e98ec8fb",
+    "tools/probes/physics-runtime.py": "5f3f77ea4f675a6faafd2c1a2a25ff9c6445be5f2829a17d658647e06b7ac459"
+  },
+  "scope": "Native retained RPC and shared CLI startup on native TypeScript cook/main79; actualmain80 integration still pending",
+  "native_cli_tests": 8,
+  "native_rpc_tests": 5,
+  "python_tool_tests": 90,
+  "node_tool_tests": 12,
+  "release_all_targets_headless_clippy": "passed",
+  "conventions": "passed",
+  "logs": {
+    "native_cli_and_rpc_tests": {
+      "path": "/tmp/incant-native-rpc-tests-final.log",
+      "sha256": "4aff972fa4897c306a922bcc929995fa6af7fc07ac04b7d8d8a127d6cef96f80"
+    },
+    "clippy": {
+      "path": "/tmp/incant-native-rpc-clippy.log",
+      "sha256": "cca32699276352540d76d9354e259c6e12f4ebd3b96abd7c578de45115645a74"
+    },
+    "tools": {
+      "path": "/tmp/incant-native-rpc-tools.log",
+      "sha256": "4e69418d7f268ce10a90ff516a24c833de320d9f78b43589fc4ea64c48313d0d"
+    },
+    "physics": {
+      "path": "/tmp/incant-native-rpc-physics.log",
+      "sha256": "5b09927b9d7a4a5b25e3d12aa8d42d2638ac96135a6568c3a8acafd794f7c91b"
+    },
+    "source_deleted_player": {
+      "path": "/tmp/incant-native-rpc-source-free.log",
+      "sha256": "480d4a1a2e7465517bf1c0835a175943796780d4b55477872bc33c347421a9d9"
+    }
+  },
+  "source_review": {
+    "reviewer": "/root/runtime_review",
+    "report_sha256": "833b3f977fd05bfa87dd11346ce4a1cebb895acb5d9fe8cf96d9951a89f939a1",
+    "finding": "Existing physics-runtime RPC consumer required explicit selected state",
+    "resolution": "Migrated consumer; full actual physics/persistence/legacy regression probe passed"
+  },
+  "physics_probe": {
+    "passed": true,
+    "public_rpc": true,
+    "atomic_invalid_rejection": true,
+    "undo_redo_and_persistent_reopen": true,
+    "repeated_runtime_exact": true,
+    "sandbox_query_and_velocity_command": true,
+    "author_files_unchanged": {
+      "project.incant.json": "6e7be38a336ec89e9ab627910d2ad2394775b7960cd2073aded8d9e29954e2ea",
+      "history.jsonl": "7f42875c33cce3eea9c6ec6cd4bd262111c60f18f28fda29dbfa4e8834a68fb3"
+    },
+    "settled_y": 0.4999316930770874,
+    "jump_y": 0.5815619230270386,
+    "live_platform_gate": false
+  },
+  "developer_player_proof": {
+    "passed": true,
+    "typescript_modules": 4,
+    "successful_runs": 3,
+    "false_assertion_runs": 1,
+    "terminal_failure_runs": 1,
+    "mismatched_script_runs": 1,
+    "player_sha256": "36459d3b33a24b98d9bf5431f34f1d472cb44719bb625138205c5cde8b496f8d",
+    "source_sha256": "88763acdfbdcd42842f65c1f81e7e67cffd4b52243b6a14da5cf974ae3771b1b",
+    "temporary_compile_input_deleted": true,
+    "authoring_unchanged": true,
+    "baseline": {
+      "passed": true,
+      "runtime": "native",
+      "script_source_sha256": "88763acdfbdcd42842f65c1f81e7e67cffd4b52243b6a14da5cf974ae3771b1b",
+      "script_source_parsing": false,
+      "scene": "01M4MSGWFSV4MNMQHDT5FK2WSY",
+      "tick": 5,
+      "tick_rate": 60,
+      "entity_count": 1,
+      "frames": 4000,
+      "pcm_sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+      "logs": {
+        "dropped": 0,
+        "entries": [
+          {
+            "level": "info",
+            "message": "accepted 1 \ud83d\ude80",
+            "tick": 1
+          },
+          {
+            "level": "info",
+            "message": "accepted 2 \ud83d\ude80",
+            "tick": 2
+          },
+          {
+            "level": "info",
+            "message": "accepted 3 \ud83d\ude80",
+            "tick": 3
+          },
+          {
+            "level": "info",
+            "message": "accepted 4 \ud83d\ude80",
+            "tick": 4
+          },
+          {
+            "level": "info",
+            "message": "accepted 5 \ud83d\ude80",
+            "tick": 5
+          }
+        ]
+      },
+      "observations": {
+        "passed": true,
+        "tick": 5,
+        "tick_rate": 60,
+        "checks": [
+          {
+            "name": "motion",
+            "tick": 5,
+            "expect": {
+              "type": "vector",
+              "entity": "00000000000000000000000001",
+              "property": "translation",
+              "value": [
+                0.23333333333333334,
+                0.0,
+                0.0
+              ],
+              "tolerance": 1e-10
+            },
+            "passed": true,
+            "actual": [
+              0.23333333333333334,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "entities": {
+          "00000000000000000000000001": {
+            "parent": null,
+            "translation": [
+              0.23333333333333334,
+              0.0,
+              0.0
+            ],
+            "rotation": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "velocity": [
+              3.0,
+              0.0,
+              0.0
+            ],
+            "world_transform": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.23333333333333334,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        }
+      },
+      "cpu_render_input": false,
+      "gpu_submitted": false,
+      "project_sha256": "bcdfaa4a0ef59097ca100d20487f4a9ee290561210e6fef830aa6a2b3bd3e3e2"
+    },
+    "shipping_profile": false,
+    "gpu_submitted": false,
+    "reference_phone_gate": false,
+    "rpc_controls": {
+      "successful_processes": 2,
+      "failed_session_processes": 1,
+      "mismatched_script_processes": 1,
+      "source_parsing": false,
+      "full_world_serialization": false,
+      "gpu_submitted": false
+    }
+  },
+  "remaining": [
+    "Actualmain80 integration and integrated checks",
+    "Hosted checks/publication within queue capacity",
+    "Editor controls/agent play tools/project Script routing/runtime inspector edits/composite saves",
+    "Remaining legacy CLI migration and full PLAN/device/release scope"
+  ],
+  "claims_not_made": [
+    "shipping executable/profile",
+    "reference phone or frame-time budget",
+    "GPU submission/presentation",
+    "editor Play UX",
+    "phase or full objective completion"
+  ]
+}

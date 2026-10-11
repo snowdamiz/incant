@@ -4,6 +4,7 @@ mod assets;
 mod eval;
 mod localization;
 mod native_play;
+mod native_rpc;
 mod play;
 mod play_assertions;
 mod play_audio;
@@ -290,7 +291,11 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
     } else {
         CommandBus::new(initial)?
     };
-    let mut engine: Option<Engine> = None;
+    let mut play = native_rpc::Controller::default();
+    let root = project
+        .parent()
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or(Path::new("."));
     for line in io::stdin().lock().lines() {
         let line = line?;
         if line.len() > 16 * 1024 * 1024 {
@@ -299,7 +304,8 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
         let request: Value = serde_json::from_str(&line)?;
         let id = request.get("id").cloned().unwrap_or(Value::Null);
         let response = (|| -> Result<Value> {
-            let params = &request["params"];
+            let empty = json!({});
+            let params = request.get("params").unwrap_or(&empty);
             match request["method"].as_str().ok_or("missing RPC method")?{
   "project.read"=>Ok(json!({"project":bus.project(),"revision":bus.revision()})),
   "project.save"=>{save(&project,&bus.project().canonical_text()?)?;Ok(json!({"saved":true}))},
@@ -308,10 +314,10 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
   "history.read"=>Ok(json!(bus.history().iter().map(|t|json!({"id":t.id,"description":t.description,"actor":t.actor,"commands":t.commands.len()})).collect::<Vec<_>>())),
   "history.undo"=>{let tx=bus.undo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
   "history.redo"=>{let tx=bus.redo()?;Ok(json!({"transaction_id":tx,"revision":bus.revision(),"project":bus.project()}))},
-  "play.start"=>{let assets=assets::load_runtime(&project,bus.project())?;engine=Some(Engine::with_navigation_resources(bus.project(),assets.navigation_resources())?);Ok(json!({"playing":true}))},
-  "play.step"=>{let engine=engine.as_mut().ok_or("no play session")?;engine.step()?;Ok(json!(engine.snapshot()))},
-  "play.state"=>Ok(json!(engine.as_mut().ok_or("no play session")?.snapshot())),
-  "play.stop"=>{engine=None;Ok(json!({"playing":false,"project":bus.project()}))},
+  "play.start"=>Ok(play.start(&bus,root,params.clone())?),
+  "play.step"=>Ok(play.step(params.clone())?),
+  "play.state"=>Ok(play.state(params.clone())?),
+  "play.stop"=>{play.stop(params.clone())?;Ok(json!({"playing":false,"project":bus.project(),"revision":bus.revision()}))},
   _=>Err("unknown RPC method".into()),
  }
         })();

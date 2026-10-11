@@ -41,6 +41,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output',type=Path)
     parser.add_argument('--typescript', action='store_true', help='Use the bounded strict native TypeScript module cook')
+    parser.add_argument('--rpc', action='store_true', help='Also exercise retained native RPC success/failure/restart using the same source-deleted player')
     args=parser.parse_args(); out=args.output.resolve(); out.mkdir(parents=True,exist_ok=False)
     source, source_map = SOURCE, None
     if args.typescript:
@@ -95,10 +96,16 @@ def main():
         require(not any(p.name.startswith('.tmp') for p in out.iterdir()),'partial PCM remained')
         bad=run(['native-play',project,'--script-sha256','0'*64])
         require(bad.returncode!=0 and not bad.stdout,'wrong compiled behavior accepted')
+        rpc_result = None
+        if args.rpc:
+            from native_rpc_controls import exercise
+            rpc_result = exercise(run, project, digest, entity, rate, out)
         require(before=={p.name:sha(p) for p in (project,journal)},'authoring changed')
         require(player_hash==sha(player),'player modified itself')
         result={'passed':True,'typescript_modules':4 if args.typescript else 0,'successful_runs':3,'false_assertion_runs':1,'terminal_failure_runs':1,'mismatched_script_runs':1,'player_sha256':player_hash,'source_sha256':digest,'temporary_compile_input_deleted':True,'authoring_unchanged':True,'baseline':reports[0],'shipping_profile':False,'gpu_submitted':False,'reference_phone_gate':False}
+        if rpc_result is not None:
+            result['rpc_controls'] = rpc_result
         (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
-    print(json.dumps({'passed':True,'runtime_processes':6}))
+    print(json.dumps({'passed':True,'runtime_processes':10 if args.rpc else 6}))
 
 if __name__=='__main__': main()
