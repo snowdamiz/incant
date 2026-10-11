@@ -23,6 +23,8 @@ fn main() {
         Path::new("src/input.rs").into(),
         Path::new("src/queries.rs").into(),
         Path::new("src/query_values.rs").into(),
+        Path::new("src/schedule.rs").into(),
+        Path::new("src/timers.rs").into(),
         Path::new("src/session.rs").into(),
         Path::new("src/artifact.rs").into(),
         Path::new("src/harden.js").into(),

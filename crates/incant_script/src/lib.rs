@@ -12,8 +12,10 @@ mod input;
 mod loan;
 mod queries;
 mod query_values;
+mod schedule;
 mod session;
 mod synchronous;
+mod timers;
 
 pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use compiled::CompiledScript;
@@ -53,6 +55,10 @@ pub enum ScriptError {
     CommandInput,
     #[error("invalid or throwing physics query arguments")]
     QueryInput,
+    #[error("invalid timer ID, tick delay or timer command arguments")]
+    TimerInput,
+    #[error("native script clock or timer deadline exceeds its numeric range")]
+    TimerRange,
     #[error(transparent)]
     PhysicsQuery(#[from] incant_runtime::QueryError),
     #[error("native structural batch failed: {0}")]
@@ -75,8 +81,8 @@ pub enum ScriptError {
 /// permanently fails this host. Tick-local structural commands apply only after
 /// detachment and scope exit; rejection restores numeric writes too.
 /// Physics queries read committed solver state during the loan; retained capabilities
-/// expire before diagnostics. Persistent state, timers, logs and the legacy PlaySession are not
-/// migrated by this boundary.
+/// expire before diagnostics. Fixed-tick timers publish bounded data events;
+/// callback code, persistent saves, logs and the legacy PlaySession are not migrated.
 pub struct ScriptHost {
     // Drop VM roots/context/runtime before bytecode: QuickJS's ROM-data module
     // loader may retain references to its input allocation.
@@ -86,6 +92,7 @@ pub struct ScriptHost {
     _compiled: CompiledScript,
     synchronous: synchronous::Synchronous,
     deadline: Arc<Mutex<budget::ExecutionBudget>>,
+    schedule: schedule::Schedule,
     failed: bool,
 }
 
@@ -119,6 +126,7 @@ impl ScriptHost {
             _compiled: compiled,
             synchronous,
             deadline,
+            schedule: schedule::Schedule::default(),
             failed: false,
         })
     }
@@ -151,6 +159,14 @@ impl ScriptHost {
             .reset()?;
         self.synchronous.reset();
         let result = self.context.with(|ctx| {
+            let (mut schedule, events) = self.schedule.advance(dt)?;
+            let timers = timers::TickTimers::default();
+            let timer_api = timers.expose(&ctx, events).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "timer bindings", &self.deadline)
+            })?;
+            let clock = timers::clock(&ctx, &schedule).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "script clock", &self.deadline)
+            })?;
             let input = input::expose(&ctx, input.frame()).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "input snapshot", &self.deadline)
             })?;
@@ -191,9 +207,12 @@ impl ScriptHost {
                     };
                     commands.activate();
                     queries.activate();
-                    let result = function.call::<_, Value>((chunks, dt, api, input, physics));
+                    timers.activate();
+                    let result = function
+                        .call::<_, Value>((chunks, dt, api, input, physics, clock, timer_api));
                     commands.revoke();
                     queries.revoke();
+                    timers.revoke();
                     // Revoke before diagnostics can execute a user-defined getter,
                     // and before Rust reads or restores any component bytes.
                     loan.revoke();
@@ -211,14 +230,19 @@ impl ScriptHost {
                     queries.check()?;
                     loan.validate_numeric()?;
                     let commands = commands.take()?;
-                    Ok((loan.finish(), commands))
+                    schedule.apply(timers.take()?)?;
+                    Ok((loan.finish(), commands, schedule))
                 })
                 .map_err(ScriptError::Structural)?
         });
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
-        let result = result.and_then(|(undo, mut commands)| undo.apply(world, &mut commands));
+        let result = result.and_then(|(undo, mut commands, schedule)| {
+            undo.apply(world, &mut commands)?;
+            self.schedule = schedule;
+            Ok(())
+        });
         if result.is_err() {
             self.failed = true;
         }
@@ -282,3 +306,6 @@ mod query_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod character_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod timer_tests;

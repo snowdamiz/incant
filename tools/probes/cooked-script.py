@@ -155,7 +155,19 @@ let characterTick = 0, enters = 0, exits = 0;
 let previousCharacter: NativeContext['physics']['computeCharacterMotion'] | undefined;
 let previousEvents: NativeContext['physics']['triggerEvents'] | undefined;
 let previousRay: NativeContext['physics']['raycast'] | undefined;
+let previousTimer: NativeContext['timers']['set'] | undefined;
+let timerTick = 0, timerSeconds = 0;
 export default {update(context: NativeContext) {
+    ++timerTick; timerSeconds += context.dt;
+    if(context.clock.tick!==timerTick || context.clock.elapsed_seconds!==timerSeconds)throw Error('timer clock');
+    if(previousTimer){let denied=false;try{previousTimer('stale',1)}catch{denied=true}if(!denied)throw Error('retained timer reactivated');}
+    previousTimer=context.timers.set;
+    const due=timerTick===3?['a','b']:timerTick>3 && timerTick%3===0?['b']:[];
+    if(context.timers.events.length!==due.length || context.timers.events.some((event,i)=>event.id!==due[i] || event.scheduled_tick!==timerTick))throw Error('timer delivery');
+    if(timerTick===1){context.timers.set('b',2,3);context.timers.set('a',10);context.timers.set('a',2);context.timers.set('cancelled',1);context.timers.cancel('cancelled');}
+    if(context.input.keyboard.held.includes('KeyR')){try{context.timers.set('bad',0)}catch{}return undefined;}
+    if(context.input.keyboard.held.includes('KeyE')){for(let i=0;i<257;i++){try{context.timers.cancel('absent')}catch{}}return undefined;}
+    if(context.input.keyboard.held.includes('KeyO')){for(let i=0;i<129;i++)context.timers.set('extra'+i,1);return undefined;}
     const query = { origin: [-10,10,0], direction: [0,-1,0], max_distance: 100,
         include_sensors: false, memberships: 0xffffffff, filter: 0xffffffff };
     if (previousRay) {
@@ -394,15 +406,15 @@ export default {update(context: NativeContext) {
             character_observations.append({'ticks':ticks,'output':first})
         require((out/'player/character.scene').read_bytes()==character_bytes,'Character mutated cooked input')
     query_refusals = []
-    for key in ('KeyQ', 'KeyB', 'KeyC', 'KeyT', *(['KeyL'] if args.physics else [])):
+    for key in ('KeyQ', 'KeyB', 'KeyC', 'KeyT', 'KeyR', 'KeyE', 'KeyO', *(['KeyL'] if args.physics else [])):
         rejected = dict(clip, frames=[{'tick': 1, 'events': [{'type':'key', 'code':key, 'down':True}]}])
         rejection_clip = out/'player'/f'{key}.json'
         rejection_clip.write_text(json.dumps(rejected)+'\n')
         result = subprocess.run([player, 'character.scene' if key == 'KeyL' else 'world.scene', '1', '--input-recording', rejection_clip.name,
                                  '--input-actions', 'actions.json'], cwd=out/'player', capture_output=True, text=True)
-        # A swallowed invalid/over-budget query must never publish world output.
-        require(result.returncode != 0 and not result.stdout, f'{key}: rejected query published output')
-        expected = 'PhysicsQuery' if key in ('KeyQ','KeyC') else 'QueryInput' if key == 'KeyT' else 'InputLimit'
+        # A swallowed invalid/over-budget capability must not publish world output.
+        require(result.returncode != 0 and not result.stdout, f'{key}: rejected capability published output')
+        expected = 'PhysicsQuery' if key in ('KeyQ','KeyC') else 'QueryInput' if key == 'KeyT' else 'TimerInput' if key == 'KeyR' else 'InputLimit'
         require(expected in result.stderr,
                 f'{key}: expected query refusal, got {result.stderr}')
         query_refusals.append({'key':key, 'stderr':result.stderr.strip()})
@@ -416,6 +428,7 @@ export default {update(context: NativeContext) {
               'dynamic_source_routes_rejected': True, 'observations': observations,
               'recorded_input_observations': recorded, 'native_physics_observations': physics_observations,
               'native_character_observations': character_observations, 'character_and_trigger_capabilities': True,
+              'fixed_tick_timers_and_expired_capabilities': True,
               'committed_raycast_and_expired_capabilities': True, 'query_refusals': query_refusals, 'input_exchange_only_at_startup': True,
               'scope': 'Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate'}
     (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')

@@ -1,9 +1,25 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { InputFrame, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent } from './generated';
+import type { InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
 export type NativeInput = InputReadonly<InputFrame>;
+/** Accepted update count (first update is 1) and accumulated simulation seconds.
+ * No wall-clock time; reset on host creation, not a save/VM snapshot. */
+export type NativeClock = Readonly<ScriptClock>;
+export type NativeTimerEvent = Readonly<Omit<TimerEvent, 'payload'>>;
+export interface NativeTimers {
+  /** Due events sorted by ID. Handle synchronously in update. Cancelling an
+   * interval here stops future events, not the event already published. */
+  readonly events: readonly NativeTimerEvent[];
+  /** Replace the ID's timer; due after delayTicks additional accepted updates.
+   * IDs: 1–64 ASCII letters/digits/_.:-; delays: positive u32 integers.
+   * At most 128 pending timers, 256 set/cancel calls per update. No callbacks,
+   * promises or serialized payloads. Store local gameplay data in the behavior. */
+  set(id: string, delayTicks: number, intervalTicks?: number): void;
+  /** Cancelling an absent ID is valid and still consumes one command. */
+  cancel(id: string): void;
+}
 export type NativeId = string; // canonical uppercase, 26-character ULID
 export type NativeVector3 = readonly [number, number, number] | Float64Array;
 /** translation xyz, rotation xyzw (unit quaternion), scale xyz; length 10. */
@@ -55,6 +71,10 @@ export interface NativeContext {
   readonly commands: NativeCommands;
   readonly input: NativeInput;
   readonly physics: NativePhysics;
+  readonly clock: NativeClock;
+  /** Functions expire after this update. Invalid/caught commands reject numeric,
+   * structural and scheduling changes together and permanently fail the host. */
+  readonly timers: NativeTimers;
 }
 export interface NativeBehavior {
   /** Synchronous only; no promises, deferred work or non-undefined return. */
