@@ -103,7 +103,7 @@ fn v8_round_trip_advances_only_on_successful_fixed_ticks_with_retained_binding()
             ptr
         );
     }
-    assert!(world.save_bytes().is_err());
+    assert!(world.save_bytes().is_ok());
 }
 #[test]
 fn paused_phase_seek_restart_and_noop_reinstall_are_observable() {

@@ -7,7 +7,7 @@ publish.workspace = true
 
 [features]
 default = ["scene", "script"]
-scene = ["dep:incant_doc", "dep:incant_runtime", "dep:ulid"]
+scene = ["dep:incant_nav", "dep:incant_doc", "dep:incant_runtime", "dep:ulid"]
 script = ["dep:incant_script", "dep:sha2"]
 
 [[example]]
@@ -15,6 +15,7 @@ name = "cook_scene"
 required-features = ["scene"]
 
 [dependencies]
+incant_nav = { workspace = true, optional = true }
 incant_doc = { workspace = true, optional = true }
 incant_runtime = { workspace = true, optional = true }
 incant_script = { workspace = true, features = ["compiler"], optional = true }

@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-11",
+  "scope": "local cooked native navigation data, queries and committed rebuild lifecycle",
+  "base": "e43ad0facdd9d475606bbe9ffb19efebea991052",
+  "branch": "codex/native-navigation",
+  "worktree": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "platform": {
+    "os": "macOS 26.6",
+    "arch": "arm64",
+    "cargo": "1.99.0 (5f94df478 2026-08-27)",
+    "rustc": "1.99.0 (b940084d7 2026-09-28)"
+  },
+  "profile": "ci (opt-level 1), not shipping/device evidence",
+  "checks": {
+    "tests": {
+      "passed": 188,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 44,
+      "new_navigation_tests": 17,
+      "packages": [
+        "incant_runtime",
+        "incant_nav",
+        "incant_physics",
+        "incant_physics_runtime",
+        "incant_cook"
+      ]
+    },
+    "all_target_clippy_warnings_denied": true,
+    "wasm32_unknown_unknown": "compile only; incant_runtime",
+    "normal_dependency_guard": [
+      "incant_runtime",
+      "incant_nav",
+      "incant_physics_runtime"
+    ],
+    "fmt": true,
+    "generated_conventions": true,
+    "diff_check": true
+  },
+  "commands": [
+    "./tools/cargo test -p incant_runtime -p incant_nav -p incant_physics -p incant_physics_runtime -p incant_cook --profile ci --locked -j2 --target-dir /tmp/incant-native-navigation-target",
+    "./tools/cargo clippy -p incant_runtime -p incant_nav -p incant_physics -p incant_physics_runtime -p incant_cook --profile ci --all-targets --locked -j2 --target-dir /tmp/incant-native-navigation-target -- -D warnings",
+    "./tools/cargo check -p incant_runtime --target wasm32-unknown-unknown --profile ci --locked -j2 --target-dir /tmp/incant-native-navigation-target",
+    "python3 tools/check_runtime_dependencies.py incant_runtime incant_nav incant_physics_runtime",
+    "./tools/cargo fmt --all --check",
+    "python3 tools/generate_conventions.py --check",
+    "git diff --check"
+  ],
+  "logs": {
+    "tests-final": {
+      "path": "/tmp/incant-native-navigation-tests-final.log",
+      "sha256": "14d92134826aadba9c67b3fb59a57ff34d3a7bf10baeaf1029273b57a03798c8"
+    },
+    "clippy": {
+      "path": "/tmp/incant-native-navigation-clippy.log",
+      "sha256": "132e88defdfd521b6aafa8549a99a3afcc533b93384118aa4ab3e951d8f5c0ce"
+    },
+    "wasm-check": {
+      "path": "/tmp/incant-native-navigation-wasm-check.log",
+      "sha256": "ce6d3299896214508e417497bbea10df53c50efc5a7563d46b29382aafee64a1"
+    },
+    "dependencies": {
+      "path": "/tmp/incant-native-navigation-dependencies.log",
+      "sha256": "ca4a701f6b06f765ab9a7089d2f1827e7bc6df3a833a099859396df858ab7b2a"
+    }
+  },
+  "source_sha256": {
+    "Cargo.lock": "726a824eeabb4a14d899cd756655eb8b128f466028a8a05d5970397d86c3b084",
+    "crates/incant_cook/Cargo.toml": "d40d5520224cb435c1c4e67ddb0b61ab03f659bf60d08415a69b8d9a84c43886",
+    "crates/incant_cook/src/lib.rs": "ef8aaed71c63284242ae0a4f9e726b1b79e10d857d199bd75de8c03086b74bb4",
+    "crates/incant_cook/src/navigation.rs": "e0622989f1e8b79121b252940d285af176f5c6b7972dbee8947424a8a11a451b",
+    "crates/incant_cook/src/project_script.rs": "ecd6d9fcb0ccbedeb673a1a77a4fa739931c7d2ea19c065b166b7cb9cedea0cd",
+    "crates/incant_cook/src/scene.rs": "ce710d194a119addbe13f3cfbaa0ed2a9df36b88c64491369c6ad49ba2b21a6c",
+    "crates/incant_cook/tests/navigation.rs": "c9cfb55c8840b820bfdd9fa1513f4a547042b1c81861564980bc898e4966219a",
+    "crates/incant_cook/tests/project_scripts.rs": "081fd68be88c95265f41aec1de82944b4fd380ab8ed31553514a73fd5347e7a3",
+    "crates/incant_cook/tests/runtime.rs": "2dfc47ad11cb775799ab6786e393f8c43d7c5ea75518f955b5eefc5f0a576d9c",
+    "crates/incant_nav/Cargo.toml": "14bc6900a1a881b287f3689a9ecf7fdcf3eb16d230fd67a5899403ef1bc4213f",
+    "crates/incant_nav/src/build.rs": "c16bd14b2691fbda111543f0b3b9ee43475dd34e0363c168c823bf504c28f4a3",
+    "crates/incant_nav/src/grid.rs": "39951ecb55b64890cb83958041c2557c12de1a56f377bd199875eac4f47d3b83",
+    "crates/incant_nav/src/lib.rs": "26ce1c22326c86d4b1c80c6daf951f97e06e1d0be64861051bf570ea83dc5f15",
+    "crates/incant_physics/src/lib.rs": "ab82e5096ff6b2197feca5aa7eb0cf34b53d63d73b79e64612f673e327973493",
+    "crates/incant_physics/src/navigation.rs": "31b0bd5719720014c8f24e2c44eecccd037e4110df2c287301e673c20e5f64c2",
+    "crates/incant_physics_runtime/Cargo.toml": "b46d383c71229ebfc5e5293cec8f710865a52bff011da621762ee34c45ca6c97",
+    "crates/incant_physics_runtime/src/lib.rs": "5c5a026f999e808a7902895172d083f1a6ffeffcc25c18edf3d8af7cd9611cad",
+    "crates/incant_physics_runtime/src/navigation.rs": "57157ad54bc96f51cd0965c78862f1119dd12ca04bb92d04ada21bc7a7e7b378",
+    "crates/incant_runtime/Cargo.toml": "f51803ac6f60b9d5fe12262f9cc27528a45ce8e267fe2c13d9da8b8a9c807677",
+    "crates/incant_runtime/src/binary.rs": "42fbccb32cad91b1ca843d792d5aeae01b02f6dbcfdba67ab89dd93986154ade",
+    "crates/incant_runtime/src/commands.rs": "0be73dde85855023e8789262ec45d6d59fe184496c8e5ef40dcce0fe76f97f0f",
+    "crates/incant_runtime/src/lib.rs": "c1afc380d9d2dde06babeb7195d6feff6cf8bfe7da3b4632bf8b78ca0f50e521",
+    "crates/incant_runtime/src/navigation.rs": "b35cd40cc5992706c9326b0ab5bbc59f9b8e2364cbd6ce4b700c68ea458aca2f",
+    "crates/incant_runtime/src/navigation_binary.rs": "7b9f01e992aa230d9987240b4d28e3ec9c2631db503be80cc6ab885977ffb9d4",
+    "crates/incant_runtime/src/navigation_runtime.rs": "3853d6c2cf2c6b5647f064f5213fc8d6618dd8cca3ad178decb5586ff95f8a2f",
+    "crates/incant_runtime/src/save.rs": "476bea9e074a24fcc70072792f0ba598e763b986751fca0bdbbddea3ddc0631c",
+    "crates/incant_runtime/src/scene.rs": "94d4133557d4f2324e7eec64c6a290ae85c0048a3e0dc0f616fdd81242bda2b0",
+    "crates/incant_runtime/src/world.rs": "d424907336f8ef79ecac82d7e1ee25f588491a58bd7a2d93cb260bc530c177de",
+    "crates/incant_runtime/tests/navigation.rs": "40a613f7069d92ab2a541cdda4974e27ecf9db5e9b7c45ee62bf2fed457c5a4a",
+    "crates/incant_runtime/tests/physics.rs": "a5417dba332db8f8831d0f7fad859b06451ae96da13ec7d6904b396ed60d836a",
+    "crates/incant_runtime/tests/physics_2d.rs": "d2b9bf256be34fcad8c3df4ff488e93413bfd2f612a0af64639024416c120b41",
+    "crates/incant_runtime/tests/scenes.rs": "f94cd14c68b85d626d7f5730bfa787a250289054f98f2ec469988ee3ea80ecf7"
+  },
+  "review": "Root independently reviewed runtime/cook/algorithms, v9 bounds, save refusal and final-state lifecycle with no blocking finding; local commit remains unpublished.",
+  "limits": [
+    "No guest navigation ABI/SDK or debug draw added.",
+    "No shipping/performance/phone or browser-execution claim.",
+    "Source and ancestors require zero velocity and fixed/no body; intentional numeric pose changes sync explicitly.",
+    "Mesh resources must be supplied by checked authoring adapter; recipe identity is not authentication.",
+    "Navigation save and restore explicitly refuse; navigation_used remains monotonic.",
+    "Existing host cache-provider wiring, steering world integration and tilemap-to-grid policy remain follow-ups.",
+    "Rebuilds are synchronous host work with old plus bounded staged state; queries allocate bounded frontier/results."
+  ],
+  "dependency_resolutions": "No new versions; three workspace graph edges added to Cargo.lock."
+}

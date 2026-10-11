@@ -1,5 +1,7 @@
 //! Document-free fixed-step physics. Ordered IDs are selected by the owning
 //! runtime; solver handles, contacts and sleeping state never cross this boundary.
+mod navigation;
+pub use navigation::navigation_geometry;
 mod character;
 mod character_queries;
 mod queries;

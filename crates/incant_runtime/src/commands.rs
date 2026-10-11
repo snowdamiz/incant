@@ -14,6 +14,11 @@ pub const MAX_FRAME_COMMANDS: usize = 65_536;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum StructuralCommand {
+    /// Replace/remove checked navigation configuration at a committed boundary.
+    SetNavigation {
+        entity: StableId,
+        navigation: Option<Box<crate::CookedNavigation>>,
+    },
     Spawn(CookedEntity),
     /// Children must also be removed or reparented in this batch. No implicit
     /// cascading deletion, and no recycling an existing ID within one batch.
@@ -108,6 +113,7 @@ impl FrameCommands {
 }
 
 struct Staged {
+    navigation: crate::navigation_runtime::NavigationRuntime,
     parents: BTreeMap<StableId, Option<StableId>>,
     spawns: BTreeMap<StableId, CookedEntity>,
     removed: BTreeSet<StableId>,
@@ -133,9 +139,12 @@ impl NativeWorld {
     pub fn apply(&mut self, commands: &mut FrameCommands) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
         if commands.is_empty() {
+            if let Some(next) = self.navigation_motion()? {
+                self.navigation = next;
+            }
             return Ok(());
         }
-        if commands
+        if self.navigation.nodes.is_empty() && commands
             .iter()
             .all(|c| matches!(c, StructuralCommand::SetSpatial { .. }))
             && !commands.iter().any(|c| matches!(c, StructuralCommand::SetSpatial{entity,spatial} if self.tilemap_collision_ids.contains(entity) || spatial.as_ref().is_some_and(|n|n.tilemap.as_ref().is_some_and(|m|m.layers.iter().any(|l|l.solid)))))
@@ -150,7 +159,11 @@ impl NativeWorld {
             let states = self.prepare_flipbook_controls(commands, &BTreeMap::new(), |id| {
                 self.entities.contains_key(&id)
             })?;
+            let navigation = self.navigation_motion()?;
             self.install_flipbook_states(states);
+            if let Some(next) = navigation {
+                self.navigation = next;
+            }
             commands.clear();
             return Ok(());
         }
@@ -177,8 +190,12 @@ impl NativeWorld {
             let changes = self
                 .prepare_audio_controls(commands, changes, |id| self.entities.contains_key(&id))?;
             self.validate_audio_changes(&changes, &self.parents)?;
+            let navigation = self.navigation_motion()?;
             for (id, node) in changes {
                 self.install_audio(id, node);
+            }
+            if let Some(next) = navigation {
+                self.navigation = next;
             }
             commands.clear();
             return Ok(());
@@ -297,11 +314,26 @@ impl NativeWorld {
             if !audio.is_empty() {
                 self.validate_audio_changes(&audio, &self.parents)?;
             }
+            let navigation = self.navigation.motion(
+                |id| self.world.get::<Global>(self.entities[&id]).unwrap().0,
+                |id| {
+                    velocities
+                        .get(&id)
+                        .map(|v| v.as_ref())
+                        .unwrap_or_else(|| {
+                            self.world.get::<Motion>(self.entities[&id]).map(|v| &v.0)
+                        })
+                        .is_none_or(|v| v.linear == [0.; 3])
+                },
+            )?;
             for (id, node) in audio {
                 self.install_audio(id, node);
             }
             self.install_flipbook_states(playback);
             self.install_velocities(velocities);
+            if let Some(next) = navigation {
+                self.navigation = next;
+            }
             for (id, spin) in spins_2d {
                 self.world
                     .entity_mut(self.entities[&id])
@@ -384,6 +416,8 @@ impl NativeWorld {
                 hierarchy.nodes.push((entity, node.parent));
                 hierarchy.globals.push(node.world);
             }
+            self.navigation_used |= !staged.navigation.nodes.is_empty();
+            self.navigation = staged.navigation;
             self.topology_generation = staged.topology_generation;
             self.binding_generation = staged.binding_generation;
             self.parents = staged.parents;
@@ -440,8 +474,18 @@ impl NativeWorld {
         let mut spins = BTreeMap::new();
         let mut audio = BTreeMap::new();
         let mut spatial = BTreeMap::new();
+        let mut navigation_changes = BTreeMap::new();
         for command in commands.iter() {
             match command {
+                StructuralCommand::SetNavigation { entity, navigation } => {
+                    if !parents.contains_key(entity) {
+                        return Err(RuntimeError::MissingEntity(*entity));
+                    }
+                    if navigation.as_ref().is_some_and(|n| n.entity != *entity) {
+                        return Err(SceneError::Invalid("navigation entity reference").into());
+                    }
+                    navigation_changes.insert(*entity, navigation.as_deref().cloned());
+                }
                 StructuralCommand::Spawn(data) => {
                     if data.id == self.scene_id()
                         || self
@@ -469,6 +513,7 @@ impl NativeWorld {
                     spins.remove(id);
                     audio.remove(id);
                     spatial.remove(id);
+                    navigation_changes.remove(id);
                 }
                 StructuralCommand::ControlFlipbook { .. }
                 | StructuralCommand::ControlAudio { .. } => {}
@@ -754,7 +799,78 @@ impl NativeWorld {
                 )
             }
         })?;
+        let mut navigation_nodes: Vec<_> = self
+            .navigation
+            .nodes
+            .iter()
+            .filter(|n| {
+                parents.contains_key(&n.entity) && !navigation_changes.contains_key(&n.entity)
+            })
+            .map(|n| n.as_ref().clone())
+            .chain(navigation_changes.values().filter_map(|n| n.clone()))
+            .collect();
+        crate::navigation::canonicalize(&mut navigation_nodes)?;
+        let globals: BTreeMap<_, _> = if navigation_nodes.is_empty() {
+            BTreeMap::new()
+        } else {
+            hierarchy.iter().map(|n| (n.id, n.world)).collect()
+        };
+        let navigation = self.navigation.prepare(
+            navigation_nodes
+                .into_iter()
+                .map(std::sync::Arc::new)
+                .collect(),
+            |id| {
+                let parent = *parents.get(&id)?;
+                let live = self.entities.get(&id).map(|&e| self.world.entity(e));
+                let spawned = spawns.get(&id);
+                let velocity = velocities.get(&id).map(|v| v.as_ref()).unwrap_or_else(|| {
+                    spawned.map(|e| e.velocity.as_ref()).unwrap_or_else(|| {
+                        live.as_ref().and_then(|e| e.get::<Motion>()).map(|m| &m.0)
+                    })
+                });
+                let previous = live.as_ref().and_then(|e| e.get::<Binding>());
+                let collider = physics
+                    .get(&id)
+                    .map(|v| v.as_ref().map(|p| &p.collider))
+                    .unwrap_or_else(|| previous.map(|p| &p.collider));
+                let body = physics
+                    .get(&id)
+                    .map(|v| v.as_ref().and_then(|p| p.body.as_ref()))
+                    .unwrap_or_else(|| previous.and_then(|p| p.body.as_ref()));
+                let planar = physics_2d
+                    .get(&id)
+                    .map(|v| v.as_ref().and_then(|p| p.body.as_ref()))
+                    .unwrap_or_else(|| {
+                        live.as_ref()
+                            .and_then(|e| e.get::<Binding2D>())
+                            .and_then(|b| b.body.as_ref())
+                    });
+                let node = spatial
+                    .get(&id)
+                    .map(|v| v.as_ref())
+                    .unwrap_or_else(|| live.as_ref().and_then(|e| e.get::<crate::CookedSpatial>()));
+                let mesh = node
+                    .and_then(|n| n.mesh.as_ref())
+                    .and_then(|m| {
+                        self.visual_assets
+                            .binary_search_by_key(&m.mesh, |a| a.id)
+                            .ok()
+                    })
+                    .map(|i| self.visual_assets[i]);
+                Some(crate::navigation_runtime::Input {
+                    parent,
+                    world: globals[&id],
+                    stationary: velocity.is_none_or(|v| v.linear == [0.; 3])
+                        && body.is_none_or(|b| b.motion == incant_types::BodyMotion::Fixed)
+                        && planar.is_none_or(|b| b.motion == incant_types::BodyMotion::Fixed),
+                    collider,
+                    mesh,
+                })
+            },
+        )?;
         Ok(Staged {
+            navigation,
             parents,
             spawns,
             removed,

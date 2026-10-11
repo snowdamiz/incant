@@ -1,5 +1,9 @@
 # Native binary world saves
 
+This document records the first version-1 slice. The current version-2 retained
+spatial/flipbook/navigation contract and remaining session refusals are described
+in [Retained native world checkpoints](native-retained-saves.md).
+
 The first native save slice serializes the currently migrated world: stable
 scene/entity identities, Transform, optional Velocity, hierarchy, fixed tick rate
 and tick counter. It runs only when explicitly requested. Normal simulation does
