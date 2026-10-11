@@ -7,6 +7,7 @@ mod assets;
 pub mod auth;
 mod conversation;
 pub mod credentials;
+pub mod ledger;
 pub use conversation::Conversation;
 #[cfg(target_os = "macos")]
 mod local_credentials;
