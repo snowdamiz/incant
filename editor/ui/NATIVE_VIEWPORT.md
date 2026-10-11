@@ -33,6 +33,17 @@ exists yet. See `handoffs/0002-native-viewport/result.md`.
    corner clip remains supported for any future rounded layout.
 4. **CSP allows the IPC scheme.** `connect-src 'self' ipc: http://ipc.localhost`.
 
+5. **Is the game view during native Play** (handoff 0044). While a session exists the host
+   is a focusable `role="application"` region. Focused (by a click, whose press is not sent,
+   or by keyboard), it sends `play.input` packets for the session generation it collected
+   them in: `focus`, `key` (generated KeyCode names; other keys are dropped), left, right and
+   middle `mouse_button`, `pointer_position` in viewport-local CSS pixels, and `wheel` in
+   pixels or lines as +x right and +y away from the user (DOM `deltaY` negated, matching
+   what the native window player passes through from tao). At most 128 events per packet,
+   one packet in flight, at most one per 16 ms. Each stream opens with `focus: false` then
+   `focus: true`; losing focus, or a refused packet, sends `focus: false`. The Play notice
+   strip under the header moves the host down, and the bounds are sent again.
+
 ## Constraints the host must satisfy
 
 - **Window transparency.** The Tauri window and its webview must be created
@@ -48,10 +59,11 @@ exists yet. See `handoffs/0002-native-viewport/result.md`.
   dialog will be hidden behind it. Options: hide the native surface while
   `[role=dialog]` is open (the UI can report this), or keep native below the webview.
 - **Input.** With the surface below a transparent webview, pointer events over the
-  hole reach the webview first. The host must forward them or the UI must mark the hole
-  `pointer-events: none` (not done yet; needs a decision with gizmo work).
-- **Focus.** The viewport region is an F6 stop. Keyboard input while it is focused
-  should go to the engine; this needs a `viewport.focus` request or an equivalent.
+  hole reach the webview first. During native Play the UI forwards them itself through
+  `play.input` (item 5). Editor-camera and gizmo input outside Play is still undecided.
+- **Focus.** The viewport region is an F6 stop. During native Play, F6 lands on the game
+  view and its DOM focus decides whether input goes to the game; the worker separately
+  holds the session when the native window loses focus or the surface is unavailable.
 
 ## Open questions for Astra
 

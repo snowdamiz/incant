@@ -1,0 +1,1317 @@
+{
+  "captureSet": "g1",
+  "baseSet": "reg-base1",
+  "candSet": "reg-cand2",
+  "browser": "Chrome 155.0.8059.40 (headless, playwright-core)",
+  "double": "Native-bridge double (simulated Play, not engine)",
+  "capture": [
+    {
+      "file": "screenshots/normal/choose--stopped.png",
+      "size": "1440x900",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Choose scene",
+      "notice": null,
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "body",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/choose--picker.png",
+      "size": "1440x900",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Choose scene",
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Choose a scene to play.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "div[menuitemradio] Harbor · Player Camera",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/choose--preparing-polled.png",
+      "size": "1440x900",
+      "header": "Preparing…",
+      "controls": [
+        "Play (unavailable)",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Preparing Harbor…",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "preparing",
+        "generation": 1,
+        "tick": 0,
+        "preparing": true,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/running--refreshed.png",
+      "size": "1440x900",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "Runtimetick 90Read-only values from the running game at tick 90. They are not saved to the project.TranslationXYZRotationXYZWScaleXYZVelocityXYZ",
+        "rows": [
+          {
+            "label": "Translation",
+            "values": [
+              "2",
+              "0.5",
+              "1"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Scale",
+            "values": [
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "label": "Velocity",
+            "values": [
+              "0",
+              "0",
+              "0"
+            ]
+          }
+        ]
+      },
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Read runtime state again",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 90,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/pause-step--paused.png",
+      "size": "1440x900",
+      "header": "Paused·, tick 120",
+      "controls": [
+        "Resume",
+        "Step",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "Runtimetick 120Read-only values from the running game at tick 120. They are not saved to the project.TranslationXYZRotationXYZWScaleXYZVelocityXYZ",
+        "rows": [
+          {
+            "label": "Translation",
+            "values": [
+              "3",
+              "1",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0.7071",
+              "0",
+              "0.7071"
+            ]
+          },
+          {
+            "label": "Scale",
+            "values": [
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "label": "Velocity",
+            "values": [
+              "1.5",
+              "0",
+              "0"
+            ]
+          }
+        ]
+      },
+      "statusLine": "Paused at tick 120.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Resume",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "paused",
+        "generation": 1,
+        "tick": 120,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/pause-step--stepped.png",
+      "size": "1440x900",
+      "header": "Paused·, tick 122",
+      "controls": [
+        "Resume",
+        "Step",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "Runtimetick 122Read-only values from the running game at tick 122. They are not saved to the project.TranslationXYZRotationXYZWScaleXYZVelocityXYZ",
+        "rows": [
+          {
+            "label": "Translation",
+            "values": [
+              "3.05",
+              "1",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0.7071",
+              "0",
+              "0.7071"
+            ]
+          },
+          {
+            "label": "Scale",
+            "values": [
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "label": "Velocity",
+            "values": [
+              "1.5",
+              "0",
+              "0"
+            ]
+          }
+        ]
+      },
+      "statusLine": "Stepped to tick 122.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Resume",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "paused",
+        "generation": 1,
+        "tick": 122,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/stop-preparing--stopping.png",
+      "size": "1440x900",
+      "header": "Stopping…",
+      "controls": [
+        "Play (unavailable)",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Play start cancelled.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Stop",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 2,
+        "tick": 0,
+        "preparing": true,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/stop-preparing--after-cancelled-startup.png",
+      "size": "1440x900",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Harbor · Dock Camera",
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Play start cancelled.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Stop",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 2,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/unsaved--refused.png",
+      "size": "1440x900",
+      "header": "Play failed",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Harbor · Player Camera",
+      "notice": "Play could not start. Open a saved project to run PlayDismiss",
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "error",
+        "generation": 1,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/runtime-error--failed.png",
+      "size": "1440x900",
+      "header": "Play failed",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Harbor · Player Camera",
+      "notice": "Play stopped at tick 240. Native surface was lost or rejected; reopen the editor to recreate itDismiss",
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "error",
+        "generation": 1,
+        "tick": 240,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/transport--unreadable.png",
+      "size": "1440x900",
+      "header": "Play unavailable",
+      "controls": [
+        "Play (unavailable)",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": "The Play status cannot be read. Native Play worker has stopped",
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 30,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/missing--absent.png",
+      "size": "1440x900",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "RuntimeRead-only values from the running game. They are not saved to the project.No runtime state. Entity is absent from this runtime world",
+        "rows": []
+      },
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "div[treeitem] Tutorial Sign",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 30,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/missing--other-scene.png",
+      "size": "1440x900",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "RuntimeRead-only values from the running game. They are not saved to the project.Not in the running scene. Play runs Harbor.",
+        "rows": []
+      },
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "div[treeitem] Title Camera",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 30,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/suspended--suspended.png",
+      "size": "1440x900",
+      "header": "Suspended·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Pause",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 30,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/game-input--focused.png",
+      "size": "1440x900",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "div[application] Game view",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": true,
+        "focused": true
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 30,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/single--stopped.png",
+      "size": "1440x900",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "body",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/fixture--explained.png",
+      "size": "1440x900",
+      "header": "Not attached",
+      "controls": [
+        "Play (unavailable)",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Native Play is unavailable: the sample fixture is read-only.",
+      "source": "Sample fixture: sample",
+      "focus": "button Play",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": null,
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/keyboard--play-focused.png",
+      "size": "1440x900",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Choose scene",
+      "notice": null,
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/keyboard--choosing.png",
+      "size": "1440x900",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Choose scene",
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Choose a scene to play.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "div[menuitemradio] Harbor · Overview Camera",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/older-host--labelled.png",
+      "size": "1440x900",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "RuntimeRead-only values from the running game. They are not saved to the project.Runtime inspection is unavailable in this editor build (play.inspect).",
+        "rows": []
+      },
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Pause",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 30,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/normal/shortcuts--filtered.png",
+      "size": "1440x900",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Choose scene",
+      "notice": null,
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "input",
+      "inspectorWidth": 360,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/choose--stopped.png",
+      "size": "1000x650",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Choose scene",
+      "notice": null,
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "body",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/choose--picker.png",
+      "size": "1000x650",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Choose scene",
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Choose a scene to play.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "div[menuitemradio] Harbor · Player Camera",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/choose--preparing-polled.png",
+      "size": "1000x650",
+      "header": "Preparing…",
+      "controls": [
+        "Play (unavailable)",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Preparing Harbor…",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "preparing",
+        "generation": 1,
+        "tick": 0,
+        "preparing": true,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/running--refreshed.png",
+      "size": "1000x650",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "Runtimetick 90Read-only values from the running game at tick 90. They are not saved to the project.TranslationXYZRotationXYZWScaleXYZVelocityXYZ",
+        "rows": [
+          {
+            "label": "Translation",
+            "values": [
+              "2",
+              "0.5",
+              "1"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Scale",
+            "values": [
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "label": "Velocity",
+            "values": [
+              "0",
+              "0",
+              "0"
+            ]
+          }
+        ]
+      },
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Read runtime state again",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 90,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/pause-step--stepped.png",
+      "size": "1000x650",
+      "header": "Paused·, tick 122",
+      "controls": [
+        "Resume",
+        "Step",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "Runtimetick 122Read-only values from the running game at tick 122. They are not saved to the project.TranslationXYZRotationXYZWScaleXYZVelocityXYZ",
+        "rows": [
+          {
+            "label": "Translation",
+            "values": [
+              "3.05",
+              "1",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0.7071",
+              "0",
+              "0.7071"
+            ]
+          },
+          {
+            "label": "Scale",
+            "values": [
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "label": "Velocity",
+            "values": [
+              "1.5",
+              "0",
+              "0"
+            ]
+          }
+        ]
+      },
+      "statusLine": "Stepped to tick 122.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Resume",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "paused",
+        "generation": 1,
+        "tick": 122,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/unsaved--refused.png",
+      "size": "1000x650",
+      "header": "Play failed",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Harbor · Player Camera",
+      "notice": "Play could not start. Open a saved project to run PlayDismiss",
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "error",
+        "generation": 1,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/runtime-error--failed.png",
+      "size": "1000x650",
+      "header": "Play failed",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Harbor · Player Camera",
+      "notice": "Play stopped at tick 240. Native surface was lost or rejected; reopen the editor to recreate itDismiss",
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "error",
+        "generation": 1,
+        "tick": 240,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/game-input--sent.png",
+      "size": "1000x650",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": null,
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "div[application] Game view",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": true,
+        "focused": true
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 30,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/minimum/keyboard--play-focused.png",
+      "size": "1000x650",
+      "header": "Live",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Choose scene",
+      "notice": null,
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 340,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "stopped",
+        "generation": 0,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/narrow/running--refreshed.png",
+      "size": "1440x900",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "Runtimetick 90Read-only values from the running game at tick 90. They are not saved to the project.TranslationXYZRotationXYZWScaleXYZVelocityXYZ",
+        "rows": [
+          {
+            "label": "Translation",
+            "values": [
+              "2",
+              "0.5",
+              "1"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          {
+            "label": "Scale",
+            "values": [
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "label": "Velocity",
+            "values": [
+              "0",
+              "0",
+              "0"
+            ]
+          }
+        ]
+      },
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Read runtime state again",
+      "inspectorWidth": 280,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 90,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/narrow/pause-step--stepped.png",
+      "size": "1440x900",
+      "header": "Paused·, tick 122",
+      "controls": [
+        "Resume",
+        "Step",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "Runtimetick 122Read-only values from the running game at tick 122. They are not saved to the project.TranslationXYZRotationXYZWScaleXYZVelocityXYZ",
+        "rows": [
+          {
+            "label": "Translation",
+            "values": [
+              "3.05",
+              "1",
+              "0"
+            ]
+          },
+          {
+            "label": "Rotation",
+            "values": [
+              "0",
+              "0.7071",
+              "0",
+              "0.7071"
+            ]
+          },
+          {
+            "label": "Scale",
+            "values": [
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "label": "Velocity",
+            "values": [
+              "1.5",
+              "0",
+              "0"
+            ]
+          }
+        ]
+      },
+      "statusLine": "Stepped to tick 122.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Resume",
+      "inspectorWidth": 280,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "paused",
+        "generation": 1,
+        "tick": 122,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/narrow/missing--absent.png",
+      "size": "1440x900",
+      "header": "Playing·, Harbor",
+      "controls": [
+        "Pause",
+        "Step (unavailable)",
+        "Stop"
+      ],
+      "picker": null,
+      "notice": null,
+      "runtime": {
+        "text": "RuntimeRead-only values from the running game. They are not saved to the project.No runtime state. Entity is absent from this runtime world",
+        "rows": []
+      },
+      "statusLine": "Playing Harbor.",
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "div[treeitem] Tutorial Sign",
+      "inspectorWidth": 280,
+      "gameView": {
+        "focusable": true,
+        "focused": false
+      },
+      "host": {
+        "phase": "running",
+        "generation": 1,
+        "tick": 30,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    },
+    {
+      "file": "screenshots/narrow/unsaved--refused.png",
+      "size": "1440x900",
+      "header": "Play failed",
+      "controls": [
+        "Play",
+        "Step (unavailable)",
+        "Stop (unavailable)"
+      ],
+      "picker": "Play scene and camera: Harbor · Player Camera",
+      "notice": "Play could not start. Open a saved project to run PlayDismiss",
+      "runtime": null,
+      "statusLine": null,
+      "source": "Native-bridge double (simulated Play, not engine)",
+      "focus": "button Play",
+      "inspectorWidth": 280,
+      "gameView": {
+        "focusable": false,
+        "focused": false
+      },
+      "host": {
+        "phase": "error",
+        "generation": 1,
+        "tick": 0,
+        "preparing": false,
+        "boundsMatch": true
+      },
+      "axeViolations": 0
+    }
+  ],
+  "regression": [
+    {
+      "name": "account-signed-in-multi",
+      "identical": true,
+      "after": "screenshots/regression/account-signed-in-multi--after.png"
+    },
+    {
+      "name": "account-signed-out",
+      "identical": true,
+      "after": "screenshots/regression/account-signed-out--after.png"
+    },
+    {
+      "name": "titlebar",
+      "identical": true,
+      "after": "screenshots/regression/titlebar--after.png"
+    },
+    {
+      "name": "hierarchy",
+      "identical": true,
+      "after": "screenshots/regression/hierarchy--after.png"
+    },
+    {
+      "name": "inspector-crate-03",
+      "identical": true,
+      "after": "screenshots/regression/inspector-crate-03--after.png"
+    },
+    {
+      "name": "shortcuts-dialog",
+      "identical": false,
+      "after": "screenshots/regression/shortcuts-dialog--after.png",
+      "before": "screenshots/regression/shortcuts-dialog--before.png"
+    },
+    {
+      "name": "viewport-header",
+      "identical": false,
+      "after": "screenshots/regression/viewport-header--after.png",
+      "before": "screenshots/regression/viewport-header--before.png"
+    }
+  ],
+  "totals": {
+    "steps": 73,
+    "axeViolations": 0,
+    "pageErrors": 0,
+    "remoteRequests": 0,
+    "boundsMismatches": 0,
+    "headerOrPageOverflow": 0,
+    "titlebarInsets": [
+      78,
+      0
+    ],
+    "inputPackets": 39,
+    "largestPacket": 5,
+    "refusedInputs": 0,
+    "inputGenerations": [
+      1
+    ]
+  }
+}

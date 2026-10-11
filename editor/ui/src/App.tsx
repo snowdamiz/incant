@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { BridgeResolution } from './bridge/resolve';
 import { FIXTURE_VARIANTS } from './bridge/fixture';
 import { PROVIDER_FIXTURE_NAMES } from './bridge/providerFixture';
@@ -14,6 +14,7 @@ import { Splitter } from './components/Splitter';
 import { Titlebar } from './components/Titlebar';
 import { ViewportPanel } from './components/ViewportPanel';
 import { Icon } from './icons/Icon';
+import { PlayProvider, usePlay } from './play/PlayContext';
 import { ShellProvider, useShell } from './shell/ShellContext';
 import { installInputModality } from './shell/inputModality';
 import { projectState } from './shell/projectState';
@@ -50,7 +51,9 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
   return (
     <ShellProvider bridge={resolution.kind === 'bridge' ? resolution.bridge : null}>
       <AssetsProvider>
-        <Workbench />
+        <PlayProvider>
+          <Workbench />
+        </PlayProvider>
       </AssetsProvider>
     </ShellProvider>
   );
@@ -93,6 +96,14 @@ function FatalChoices({ title, names }: { title: string; names: readonly string[
 function Workbench() {
   const shell = useShell();
   const { bridge, snapshot, run, accountOpen, panels, togglePanel } = shell;
+  // The Play actions of the latest commit: a shortcut pressed right after a state change
+  // must not reach the previous render's action (Step while it still thinks "running").
+  const play = usePlay();
+  const mac = snapshot?.window ? snapshot.window.platform === 'macos' : /Mac|iPhone|iPad/.test(`${navigator.platform} ${navigator.userAgent}`);
+  const playActions = useRef(play);
+  useLayoutEffect(() => {
+    playActions.current = play;
+  });
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
   // The agent pane's disclosure; collapsing leaves its one-line status. A short window
   // starts with it collapsed, so the Inspector keeps the column; the choice then sticks.
@@ -145,6 +156,19 @@ function Workbench() {
         focusRegion(nextRegion(regionOf(document.activeElement), event.shiftKey ? -1 : 1));
         return;
       }
+      // Play shortcuts by physical key, as the panel shortcuts are: Mod+P plays or stops,
+      // with Shift pauses or resumes, with Alt steps. They work from the game view too.
+      // In a text field only the platform's own modifier counts: Ctrl+P moves up a line
+      // there on macOS, and Ctrl+Alt elsewhere may be AltGr typing a character.
+      const playKeys = !isTextEntry(event.target) || (mac ? event.metaKey : event.ctrlKey && !event.altKey);
+      if (mod && event.code === 'KeyP' && playKeys) {
+        event.preventDefault();
+        if (event.repeat) return;
+        if (event.altKey) playActions.current.step();
+        else if (event.shiftKey) playActions.current.togglePause();
+        else playActions.current.playOrStop();
+        return;
+      }
       if (isTextEntry(event.target)) return;
       if (mod && key === 'z') {
         event.preventDefault();
@@ -164,7 +188,7 @@ function Workbench() {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [runHistory, shortcutsOpen, accountOpen, togglePanel]);
+  }, [runHistory, shortcutsOpen, accountOpen, togglePanel, mac]);
 
   const openShortcuts = (from: HTMLElement) => {
     shortcutsReturn.current = from;

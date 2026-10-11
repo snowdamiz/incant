@@ -1,17 +1,24 @@
 import { useEffect, useRef } from 'react';
+import { useGameCapture } from '../play/useGameCapture';
 import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
+import { PlayControls, PlayNotice, PlayStatusPill, usePlayStatusView } from './play/PlayControls';
 
 /**
  * The area the engine's native surface occupies. The UI never draws engine pixels
  * here. When the bridge supports `viewport.bounds`, the host is
  * told where the hole is so it can position the native child surface; see
  * NATIVE_VIEWPORT.md for the constraints this layout is designed around.
+ *
+ * During native Play the header carries the session's state and controls, and the
+ * area becomes the game view: focused, it sends desktop input to the game.
  */
 export function ViewportPanel() {
   const { snapshot, capabilities, ask } = useShell();
   const hostRef = useRef<HTMLDivElement>(null);
   const reportBounds = capabilities.has('viewport.bounds');
+  const capture = useGameCapture(hostRef);
+  const playStatus = usePlayStatusView();
 
   useEffect(() => {
     const host = hostRef.current;
@@ -39,6 +46,14 @@ export function ViewportPanel() {
       window.removeEventListener('resize', send);
     };
   }, [ask, reportBounds]);
+
+  // A session that ends while the game view has focus leaves focus on Play, not on
+  // an area that is no longer focusable.
+  useEffect(() => {
+    if (!capture.focusable && document.activeElement === hostRef.current) {
+      document.querySelector<HTMLElement>('[data-play-primary]')?.focus();
+    }
+  }, [capture.focusable]);
 
   const viewport = snapshot?.viewport;
   const project = projectState(snapshot);
@@ -81,24 +96,40 @@ export function ViewportPanel() {
   }
 
   const tone = viewport?.status === 'error' ? 'error' : attached ? 'ok' : project.kind === 'loading' ? 'pending' : 'idle';
+  const describedBy = [capture.focusable ? 'game-view-help' : '', !attached && detail ? 'viewport-detail' : ''].filter(Boolean).join(' ');
   return (
     <section className="panel panel--viewport" data-region="viewport" aria-labelledby="viewport-title" tabIndex={-1}>
       <header className="panel__header">
         <h2 id="viewport-title" className="panel__title">
           Viewport
         </h2>
-        <span
-          className={`status-pill status-pill--${tone}`}
-          title={attached ? 'The engine’s view is attached and drawing here.' : undefined}
-        >
-          {status}
-        </span>
+        {playStatus ? (
+          <PlayStatusPill view={playStatus} />
+        ) : (
+          <span
+            className={`status-pill status-pill--${tone}`}
+            title={attached ? 'The engine’s view is attached and drawing here.' : undefined}
+          >
+            {status}
+          </span>
+        )}
+        <PlayControls />
       </header>
+      <PlayNotice />
+      {capture.focusable ? (
+        <span id="game-view-help" className="visually-hidden">
+          While Play runs, keys and the pointer go to the game. F6 moves to the next panel.
+        </span>
+      ) : null}
       <div
         ref={hostRef}
-        className={`viewport-host${attached ? ' is-attached' : ''}`}
+        className={`viewport-host${attached ? ' is-attached' : ''}${capture.focused ? ' is-focused' : ''}`}
         data-viewport-host=""
-        aria-describedby={!attached && detail ? 'viewport-detail' : undefined}
+        data-focus-target={capture.focusable ? '' : undefined}
+        tabIndex={capture.focusable ? 0 : undefined}
+        role={capture.focusable ? 'application' : undefined}
+        aria-label={capture.focusable ? 'Game view' : undefined}
+        aria-describedby={describedBy || undefined}
       >
         {attached ? null : (
           <div className={`viewport-empty viewport-empty--${tone}`}>

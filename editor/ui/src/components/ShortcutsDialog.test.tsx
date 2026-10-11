@@ -67,6 +67,7 @@ describe('keyboard shortcuts dialog', () => {
     // One table of sections, no cards: each section caption heads its rows.
     expect([...dialog.querySelectorAll('.shortcuts__section th')].map((th) => th.textContent)).toEqual([
       'General',
+      'Play',
       'Hierarchy',
       'Panels and layout',
       'Lists, assets and inspector',

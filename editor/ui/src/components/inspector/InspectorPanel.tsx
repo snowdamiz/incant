@@ -7,6 +7,7 @@ import { projectState } from '../../shell/projectState';
 import { useShell } from '../../shell/ShellContext';
 import { COPY_ID_UNAVAILABLE, canWriteClipboard, copyText } from '../../shell/clipboard';
 import { StateView } from '../StateView';
+import { RuntimeSection } from '../play/RuntimeSection';
 import { IdentityHeader } from './IdentityHeader';
 import { AssetInspector, useAssetEscape, useAssetInspectorHeader } from '../assets/AssetInspector';
 import { useAssets } from '../../assets/AssetsContext';
@@ -73,7 +74,13 @@ export function InspectorPanel() {
         }
       />
     );
-    body = <FieldRevealProvider><EntityInspector entity={entity} schemas={snapshot.schemas} diagnostics={snapshot.diagnostics} refs={refs} /></FieldRevealProvider>;
+    body = (
+      <FieldRevealProvider>
+        {/* While Play runs: the entity in the native world, above its authored components. */}
+        <RuntimeSection />
+        <EntityInspector entity={entity} schemas={snapshot.schemas} diagnostics={snapshot.diagnostics} refs={refs} />
+      </FieldRevealProvider>
+    );
   }
   return (
     <section
