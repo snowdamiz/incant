@@ -902,7 +902,7 @@ class NativeBridge {
             } catch (error) {
                 if (generation === this.agentGeneration) {
                     await this.refreshAgent();
-                    this.agentError = agentFailure(error);
+                    if (generation === this.agentGeneration) this.agentError = agentFailure(error);
                 }
                 return {
                     ok: false,
@@ -939,8 +939,10 @@ class NativeBridge {
         } catch (error) {
             if (generation === this.agentGeneration) {
                 await this.refreshAgent();
-                this.agentError = agentFailure(error);
-                this.publishAgent();
+                if (generation === this.agentGeneration) {
+                    this.agentError = agentFailure(error);
+                    this.publishAgent();
+                }
             }
             if (request.type === 'agent.approve') this.agentDecisions.delete(`${request.turnId}:${request.approvalId}`);
             return {

@@ -56,3 +56,14 @@ live-provider evidence and do not approve a phase or performance gate. The root
 integration owns the Rust IPC binding, real provider checks, current `STATUS.md`
 and combined validation. Claude Opus 5.5 at Max owns the complete chat UI and
 rendered review. No publication, PR or merge occurs from this subtask.
+
+Independent review of `c4e4471` reproduced a stale-error race after the request's
+automatic recovery read: send and cancel/approval error handlers checked the
+generation before awaiting recovery but could publish the old error after a
+new account had already refreshed successfully. Both handlers now check again
+after recovery. Three deferred-response tests reproduced the failure on the
+reviewed code and pass with this correction, while the original request still
+returns its own failure receipt. Final scoped validation passes 32 agent tests
+and 88 combined transport/resolve/AgentPanel tests, strict TypeScript, generated
+bridge equivalence and diff checks. The earlier full 574-test/build result above
+precedes this reviewed correction; combined native integration remains separate.
