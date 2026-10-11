@@ -119,5 +119,18 @@
     "No WAL archival/PITR, application object adapters, relay/TURN, observability or other complete local substitutes",
     "No full transitive image SBOM/security/production distribution approval",
     "No hosted provider/device/region/performance/production gate"
-  ]
+  ],
+  "independent_review": {
+    "reviewer": "/root/runtime_review",
+    "source_commit": "54e521fd4af4ccb034afe526c96a4c51e44d2494",
+    "compared_with": "3b3b56557ce18cd6c65c3d7bb1d4183d5c5e0eb7",
+    "result": "accepted; no actionable blocker",
+    "scope": [
+      "private parent refusal and preserved-byte regression",
+      "complete CRLF-normalized SMTP body and exact fixture cleanup",
+      "candidate-only workflow and required context identity",
+      "next-checkpoint-only protection rollout and local evidence limits"
+    ],
+    "mode": "read-only Git/source inspection; no builds or containers"
+  }
 }
