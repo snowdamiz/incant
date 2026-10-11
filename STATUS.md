@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Agent conversation context — locally verified
+
+The shared agent loop now retains bounded, project-bound completed exchanges
+across turns. Interrupted batches cannot leave unmatched calls in the next
+request; partial commits remain explicitly acknowledged. All 53 agent tests,
+Clippy and independent review pass. Native session, account and chat integration
+remain outstanding; no live multi-turn provider gate is claimed.
+[Evidence](docs/spikes/agent-conversation-context.md).
+
 ## Shared agent project access — locally verified
 
 The agent loop can share the editor command bus without holding its mutex during
