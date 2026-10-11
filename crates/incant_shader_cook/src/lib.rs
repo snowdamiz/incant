@@ -2,6 +2,7 @@
 //! This is not a project-shader compiler or a general wgpu layout compiler.
 mod contract;
 mod emit;
+pub mod geometry;
 mod manifest;
 
 pub use manifest::write_bundle;

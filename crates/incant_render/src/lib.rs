@@ -18,6 +18,8 @@ mod pixel_grid;
 mod preview_environment;
 mod resource_error;
 mod scene;
+mod shader;
+mod geometry_shader;
 mod shadows;
 mod sprites;
 mod studio;
