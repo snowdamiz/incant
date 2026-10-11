@@ -657,6 +657,8 @@
       "tools/probes/shader-cook/src/main.rs": "a52f1b0d747e010d4dd2fc51acefa3152ef029f7be8275e79ba769356003c415",
       "tools/probes/shader-cook/Cargo.toml": "bdf9bbba0644ae734c54c170caff8f7f4cf7e28ffcdf458b1d51314cf5936550",
       "tools/probes/shader-cook/Cargo.lock": "466d5c495b79a3dec428d26f167239ec71174373e229fb57896ba341805df963"
-    }
-  }
+    },
+    "independent_review": "Astra windowing_correctness read-only review at 7f2a2cb: current probe hashes,11stage rows/33outputs, prior Metal output hashes, explicit flags/bindings and translation-only limits verified; no blocker. No GPU/build work in review."
+  },
+  "probe_sha256_scope": "Historical probe source used for the original Metal compiler proof; current HLSL extension source hashes are under hlsl_translation.probe_sha256."
 }
