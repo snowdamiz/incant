@@ -22,6 +22,8 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum GameError<E = Infallible> {
+    #[error(transparent)]
+    Checkpoint(#[from] incant_script::CheckpointError),
     #[error("scene host failed: {0}")]
     Host(#[source] E),
     #[error(transparent)]
@@ -45,6 +47,14 @@ pub type Result<T, E = Infallible> = std::result::Result<T, GameError<E>>;
 
 fn require_nonspatial(scene: &CookedScene) -> Result<()> {
     if !scene.spatial().is_empty() || !scene.visual_assets().is_empty() {
+        return Err(GameError::SpatialHost);
+    }
+    Ok(())
+}
+
+fn require_nonspatial_world(world: &NativeWorld) -> Result<()> {
+    let view = world.spatial_view().map_err(SessionError::from)?;
+    if view.nodes().any(|node| node.declaration.is_some()) || !view.assets().is_empty() {
         return Err(GameError::SpatialHost);
     }
     Ok(())
@@ -77,6 +87,36 @@ where
                 |world| SceneAudio::new(world, clips, settings),
             )?,
         })
+    }
+    /// Ordinary load of an opted-in, audio/physics-free bytecode session.
+    /// Decode and trusted scene validation precede VM/backend creation. A fresh
+    /// host is constructed; this never resumes an old asynchronous audio cursor.
+    pub fn from_checkpoint_bytes(
+        bytes: &[u8],
+        initial: &CookedScene,
+        program: impl Into<SessionProgram>,
+        actions: InputActions,
+        clips: Vec<ClipBinding>,
+        settings: AudioManagerSettings<B>,
+    ) -> Result<Self> {
+        require_nonspatial(initial)?;
+        Ok(Self {
+            core: Core::from_checkpoint(
+                bytes,
+                initial,
+                program,
+                actions,
+                |world| {
+                    require_nonspatial_world(world)?;
+                    Ok(NoHost)
+                },
+                |world| SceneAudio::new(world, clips, settings),
+            )?,
+        })
+    }
+    /// No clocks or host state advance. Physics/audio-used and static sessions refuse.
+    pub fn checkpoint_bytes(&self) -> Result<Vec<u8>> {
+        self.core.checkpoint_bytes()
     }
     pub fn tick(&mut self, events: &[InputEvent]) -> Result<()> {
         self.core.tick(events, |_| Ok(()))
