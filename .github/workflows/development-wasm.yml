@@ -2,6 +2,13 @@ name: Development Wasm conformance
 on:
   pull_request:
     paths:
+      - 'sdk/abi/**'
+      - 'sdk/rust/**'
+      - 'crates/incant_wasm_abi/**'
+      - 'tools/generate_wasm_sdk.py'
+      - 'tools/rust_guest.py'
+      - 'tools/wasm_abi.py'
+      - 'tools/tests/test_wasm_sdk.py'
       - 'crates/incant_wasm_dev/**'
       - 'crates/incant_wasm_runtime/**'
       - 'crates/incant_wasm_cook/**'
@@ -56,6 +63,7 @@ jobs:
         with: {python-version: '3.12'}
       - run: rustup show
       - run: rustup target add wasm32-unknown-unknown
+      - run: python tools/generate_wasm_sdk.py --check
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           shared-key: auxiliary-registry-v1-${{ matrix.runner }}
@@ -93,6 +101,7 @@ jobs:
           path: |
             artifacts/development-wasm/result.json
             artifacts/static-wasm-conformance/development/result.json
+            artifacts/static-wasm-conformance/rust-sdk.json
             artifacts/static-wasm-conformance/conformance-*.log
             artifacts/static-wasm-conformance/prepared-manifest.json
             artifacts/static-wasm-conformance/cook-build.log
