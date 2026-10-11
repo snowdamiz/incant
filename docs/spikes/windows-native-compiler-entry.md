@@ -50,3 +50,29 @@ not executed on macOS; local results do not establish drive/UNC filesystem behav
 or make checkpoint 2 pass. Use the existing hosted workspace tests at the next
 coordinated frozen candidate. No additional workflow, duplicate full CI run,
 publication, release update or GPU execution is part of this patch.
+
+## Checkpoint 3: restricted TypeScript host lookup
+
+The corrected Node entry reached the trusted compiler on hosted Windows. The
+new spaces/Unicode regression then exposed a second defect: TypeScript normalizes
+callback filenames to forward slashes, while the restricted host keyed captured
+sources, containing modules and the library directory with native separators.
+The strict compiler therefore reported missing project files and global library
+types. The failed checkpoint remains recorded and is not promoted.
+
+The compiler host now normalizes callback paths using the same native separator
+and compiler case policy as its captured keys. It still reads only captured
+project/SDK text or the pinned TypeScript library directory; unknown files never
+reach the filesystem. Ambiguous normalized snapshot keys fail explicitly. No
+project compiler options, plugin, module loader or filesystem capability is added.
+
+Two new drive/UNC regressions run the actual pinned TypeScript program with real
+ES library text. The exact old callback block reproduces missing files/globals;
+the fixed host passes, still rejects strict type errors and host globals, and
+preserves denied-path and alias controls. All 19 Node tests, two actual Rust
+compiler/native-motion tests, four agent Play tests and the public 32-request,
+two-process source transaction proof pass locally. Runtime Rust and compiler
+flags are unchanged. Independent root review accepted the exact source patch.
+[Source/log identities](evidence/windows-compiler-host-paths.json) retain the red
+and green evidence. Actual Windows confirmation is pending the next full frozen
+checkpoint; synthetic path tests are not presented as hosted execution.

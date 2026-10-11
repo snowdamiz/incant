@@ -1,20 +1,82 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import vm from 'node:vm';
 import { test } from 'node:test';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+import ts from 'typescript';
 import { decode } from '@jridgewell/sourcemap-codec';
 import { cookNativeScript, cookNativeProjectScripts } from '../native_script/cook.mjs';
 import { snapshotGraph, snapshotProjectGraph, sourceCatalog, LIMITS } from '../native_script/graph.mjs';
 import { publishArtifact } from '../native_script/publish.mjs';
+import { snapshotCompilerHost } from '../native_script/typecheck_host.mjs';
 
 const REPO = fileURLToPath(new URL('../../', import.meta.url));
 const ENTRY = `import type { NativeBehavior } from '@incant/runtime/native';
 export default { update() { return undefined; } } satisfies NativeBehavior;\n`;
 const A = '00000000000000000000000001', B = '00000000000000000000000002';
+
+for (const engine of ['D:\\engine Ω space', '\\\\server\\share\\engine Ω space']) {
+  test(`restricted compiler host typechecks normalized Windows paths: ${engine}`, () => {
+    const paths = path.win32, project = paths.join(engine, 'project Ω');
+    const lib = paths.join(engine, 'node_modules/typescript/lib');
+    const actualLib = path.dirname(createRequire(import.meta.url).resolve('typescript'));
+    const native = paths.join(engine, 'sdk/native.d.ts');
+    const generated = paths.join(engine, 'sdk/generated.d.ts');
+    const virtual = paths.join(engine, '__incant_native_entry_check__.ts');
+    const entry = paths.join(project, 'main.ts'), shared = paths.join(project, 'shared.ts');
+    const texts = new Map([
+      [native, "import type { Tick } from './generated'; export interface NativeBehavior { update(dt: Tick): void; }"],
+      [generated, 'export type Tick = number;'],
+      [entry, "import type { NativeBehavior } from '@incant/runtime/native'; import { move } from './shared'; export default { update(dt) { move(dt); } } satisfies NativeBehavior;"],
+      [shared, 'export function move(dt: number): void { const a = new Float64Array(2); a[0] = Math.abs(dt); }'],
+      [virtual, "import type { NativeBehavior } from '@incant/runtime/native'; import entry from '__entry__'; const checked: NativeBehavior = entry; void checked;"],
+    ]);
+    const snapshot = { texts, native, generated, virtual, lib,
+      entryImports: new Map([['__entry__', entry]]), records: [
+        { file: entry, dependencies: new Map([['./shared', shared]]) },
+        { file: shared, dependencies: new Map() },
+      ] };
+    const reads = [];
+    const localLibrary = file => {
+      assert.equal(paths.dirname(file), lib, 'only pinned library text may touch disk');
+      return path.join(actualLib, paths.basename(file));
+    };
+    const io = { existsSync: file => fsSync.existsSync(localLibrary(file)),
+      readFileSync: (file, encoding) => { reads.push(file); return fsSync.readFileSync(localLibrary(file), encoding); } };
+    const options = { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext,
+      moduleResolution: ts.ModuleResolutionKind.Bundler, strict: true, noEmit: true,
+      types: [], lib: ['lib.es2022.d.ts'], skipLibCheck: false };
+    const host = snapshotCompilerHost(options, snapshot, io, paths);
+    const slash = file => file.replaceAll('\\', '/');
+    assert.equal(host.fileExists(slash(entry)), true);
+    assert.equal(host.readFile(slash(entry)), texts.get(entry));
+    assert.equal(host.resolveModuleNames(['./shared'], slash(entry))[0].resolvedFileName, shared);
+    assert.equal(host.resolveModuleNames(['./generated'], slash(native))[0].resolvedFileName, generated);
+    const diagnostics = ts.getPreEmitDiagnostics(ts.createProgram([entry, shared, virtual], options, host));
+    assert.deepEqual(diagnostics.map(d => ts.flattenDiagnosticMessageText(d.messageText, '\n')), []);
+    assert.ok(reads.length > 0, 'the real pinned ES libraries must be checked');
+    const before = reads.length;
+    for (const file of [paths.join(project, 'not-snapshotted.ts'),
+      paths.join(lib, 'untrusted.d.ts'), paths.join(lib, '../outside/lib.es2022.d.ts'),
+      paths.join(lib, 'nested/lib.es2022.d.ts')]) {
+      assert.equal(host.fileExists(slash(file)), false);
+      assert.equal(host.readFile(slash(file)), undefined);
+    }
+    assert.equal(reads.length, before, 'refused paths never reach the filesystem');
+    texts.set(shared, 'export function move(dt: number): void { const wrong: number = "bad"; void wrong; process.exit(0); }');
+    const bad = ts.getPreEmitDiagnostics(ts.createProgram([entry, shared, virtual], options,
+      snapshotCompilerHost(options, snapshot, io, paths)));
+    assert.ok(bad.some(d => d.code === 2322), 'strict type mismatch remains refused');
+    assert.ok(bad.some(d => d.code === 2591 || d.code === 2580 || d.code === 2304), 'host globals remain unavailable');
+    texts.set(slash(entry), texts.get(entry));
+    assert.throws(() => snapshotCompilerHost(options, snapshot, io, paths), /ambiguous compiler snapshot path/u);
+  });
+}
 async function fixture(files, action) {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'incant-native-ts-test-'));
   try {
