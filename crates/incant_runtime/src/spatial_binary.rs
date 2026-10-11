@@ -9,13 +9,18 @@ use incant_types::{
 
 pub(crate) const ASSET_BYTES: usize = 49;
 pub(crate) fn encoded_size(n: &CookedSpatial) -> usize {
-    17 + n.camera.as_ref().map_or(0, |c| {
-        25 + match c.projection {
-            CameraProjection::Perspective {} => 0,
-            CameraProjection::Orthographic { .. } => 8,
-            CameraProjection::PixelPerfect { .. } => 16,
-        }
-    }) + n.mesh.as_ref().map_or(0, |_| 17)
+    n.flipbook
+        .as_deref()
+        .map_or(0, crate::flipbook_binary::encoded_size)
+        + 17
+        + n.camera.as_ref().map_or(0, |c| {
+            25 + match c.projection {
+                CameraProjection::Perspective {} => 0,
+                CameraProjection::Orthographic { .. } => 8,
+                CameraProjection::PixelPerfect { .. } => 16,
+            }
+        })
+        + n.mesh.as_ref().map_or(0, |_| 17)
         + n.directional
             .as_ref()
             .map_or(0, |l| 33 + usize::from(l.shadows.is_some()) * 8)
@@ -25,6 +30,9 @@ pub(crate) fn encoded_size(n: &CookedSpatial) -> usize {
         + n.sprite
             .as_deref()
             .map_or(0, crate::sprite_binary::encoded_size)
+        + n.tilemap
+            .as_deref()
+            .map_or(0, crate::tilemap_binary::encoded_size)
 }
 pub(crate) fn write_asset(bytes: &mut Vec<u8>, asset: &VisualAssetRef) {
     bytes.extend(asset.id.0);
@@ -61,7 +69,8 @@ pub(crate) fn write(bytes: &mut Vec<u8>, n: &CookedSpatial) {
             | u8::from(n.point.is_some()) << 3
             | u8::from(n.spot.is_some()) << 4
             | u8::from(n.environment.is_some()) << 5
-            | u8::from(n.sprite.is_some()) << 6,
+            | u8::from(n.sprite.is_some()) << 6
+            | u8::from(n.tilemap.is_some()) << 7,
     );
     if let Some(c) = &n.camera {
         floats(bytes, [c.fov_degrees, c.near, c.far]);
@@ -113,6 +122,9 @@ pub(crate) fn write(bytes: &mut Vec<u8>, n: &CookedSpatial) {
     if let Some(s) = &n.sprite {
         crate::sprite_binary::write(bytes, s);
     }
+    if let Some(map) = &n.tilemap {
+        crate::tilemap_binary::write(bytes, map);
+    }
 }
 fn flag(r: &mut Reader<'_>) -> Result<bool, SceneError> {
     match r.byte()? {
@@ -121,10 +133,21 @@ fn flag(r: &mut Reader<'_>) -> Result<bool, SceneError> {
         _ => Err(SceneError::Invalid("spatial boolean flag")),
     }
 }
-pub(crate) fn read(r: &mut Reader<'_>, version: u32) -> Result<CookedSpatial, SceneError> {
+pub(crate) fn read(
+    r: &mut Reader<'_>,
+    version: u32,
+    tile_budget: &mut crate::tilemap_binary::Budget,
+) -> Result<CookedSpatial, SceneError> {
     let mut n = CookedSpatial::empty(StableId(r.array()?));
     let mask = r.byte()?;
-    if mask == 0 || mask > if version >= 5 { 127 } else { 63 } {
+    let allowed = if version >= 6 {
+        255
+    } else if version >= 5 {
+        127
+    } else {
+        63
+    };
+    if mask == 0 || mask & !allowed != 0 {
         return Err(SceneError::Invalid("spatial component mask"));
     }
     if mask & 1 != 0 {
@@ -200,6 +223,9 @@ pub(crate) fn read(r: &mut Reader<'_>, version: u32) -> Result<CookedSpatial, Sc
     }
     if mask & 64 != 0 {
         n.sprite = Some(Box::new(crate::sprite_binary::read(r)?));
+    }
+    if mask & 128 != 0 {
+        n.tilemap = Some(Box::new(crate::tilemap_binary::read(r, tile_budget)?));
     }
     Ok(n)
 }

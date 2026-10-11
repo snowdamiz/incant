@@ -1,6 +1,8 @@
 //! Retained CPU input for the native renderer. Bind checked cooked versions once;
 //! ordinary frames only copy committed f64 poses into existing typed slots.
 mod binding;
+mod tilemap;
+pub use tilemap::TilemapAtlasBinding;
 mod update;
 use glam::DMat4;
 use incant_assets_runtime::RuntimeAsset;
@@ -23,6 +25,12 @@ pub struct VisualCaches<'a> {
 pub enum NativeRenderError {
     #[error("spatial input belongs to a different native world")]
     DifferentWorld,
+    #[error("tilemap render binding failed: {0}")]
+    TilemapRender(incant_render_data::SceneError),
+    #[error("tilemap requires a matching checked color atlas descriptor and cache")]
+    TilemapBinding,
+    #[error("tilemap frame {0:?} is absent from the checked atlas")]
+    TilemapFrame(StableId),
     #[error("retained spatial index layout is inconsistent")]
     Layout,
     #[error("visual asset {asset:?} failed to load: {source}")]
@@ -65,12 +73,18 @@ pub enum UpdateKind {
 /// or the host explicitly constructs a new adapter. A published input can lag the
 /// native world after consumer rejection; synchronize again before drawing it as
 /// the current simulation frame.
+#[derive(Clone, Copy)]
+struct NumericUndo {
+    world: DMat4,
+    frame: u16,
+}
+
 pub struct NativeRenderInput {
     identity: WorldIdentity,
     assets: BTreeMap<StableId, Arc<RuntimeAsset>>,
     input: SceneInput,
     slots: Vec<Option<usize>>,
-    undo: Vec<DMat4>,
+    undo: Vec<NumericUndo>,
     camera: StableId,
     camera_slot: usize,
     topology_generation: u64,

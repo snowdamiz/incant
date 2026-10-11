@@ -131,6 +131,18 @@ where
         self.terminal(result)
     }
 
+    /// Host suspension freezes every voice cursor at the next mixer boundary;
+    /// individual desired play/pause states and scene declarations are unchanged.
+    /// Asynchronous decoding errors remain terminal, including while suspended.
+    pub fn set_suspended(&mut self, suspended: bool) -> Result<()> {
+        self.check_errors()?;
+        self.mixer
+            .as_mut()
+            .ok_or(AudioError::FailedSession)?
+            .set_suspended(suspended);
+        Ok(())
+    }
+
     pub fn is_failed(&self) -> bool {
         self.mixer.is_none()
     }
@@ -326,6 +338,32 @@ impl SceneAudio<OfflineBackend> {
         if result.is_err() {
             output.fill(0.);
         }
+        self.terminal(result)
+    }
+}
+
+#[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+impl SceneAudio<crate::DeviceBackend> {
+    /// Observe the real CPAL backend error queue. Any reported or discarded
+    /// error is terminal; absence of an observed error is not a liveness proof.
+    pub fn check_device(&mut self) -> Result<()> {
+        let backend = self
+            .mixer
+            .as_mut()
+            .ok_or(AudioError::FailedSession)?
+            .backend_mut();
+        let result = if backend
+            .num_stream_errors_discarded()
+            .is_none_or(|count| count != 0)
+        {
+            Err(AudioError::Backend(
+                "device error queue unavailable or errors discarded".into(),
+            ))
+        } else if let Some(error) = backend.pop_error() {
+            Err(AudioError::Backend(error.to_string()))
+        } else {
+            Ok(())
+        };
         self.terminal(result)
     }
 }

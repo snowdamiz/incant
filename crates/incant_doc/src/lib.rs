@@ -6,10 +6,13 @@ mod crdt;
 mod lights;
 mod navigation;
 mod physics;
+mod physics_2d;
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
 pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
-pub use incant_2d::{SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling};
+pub use incant_2d::{
+    SpriteFlipbook, SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling, Tilemap, TilemapLayer,
+};
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
@@ -22,10 +25,10 @@ use thiserror::Error;
 
 pub const SCHEMA_VERSION: u32 = 1;
 pub use incant_types::{
-    AngularVelocity, AudioBus, AudioListener, AudioSource, AudioSpatial, BodyMotion, Camera,
-    CameraProjection, Collider, ColliderPart, ColliderShape, DirectionalLight, DirectionalShadows,
-    EnvironmentLight, Id, MeshRenderer, PointLight, PrimitiveColliderShape, RigidBody, SpotLight,
-    TextureUsage, Transform, Velocity,
+    AngularVelocity, AngularVelocity2D, AudioBus, AudioListener, AudioSource, AudioSpatial,
+    BodyMotion, Camera, CameraProjection, Collider, Collider2D, ColliderPart, ColliderShape,
+    ColliderShape2D, DirectionalLight, DirectionalShadows, EnvironmentLight, Id, MeshRenderer,
+    PointLight, PrimitiveColliderShape, RigidBody, SpotLight, TextureUsage, Transform, Velocity,
 };
 pub fn new_id() -> Id {
     ulid::Ulid::new().to_string()
@@ -346,6 +349,22 @@ impl Project {
                         );
                     }
                 }
+                if let Some(flipbook) = entity.components.get("SpriteFlipbook") {
+                    let checked = (|| -> Result<(), String> {
+                        let flipbook: SpriteFlipbook =
+                            serde_json::from_value(flipbook.clone()).map_err(|e| e.to_string())?;
+                        let sprite = entity
+                            .components
+                            .get("SpriteRenderer")
+                            .ok_or("SpriteFlipbook requires SpriteRenderer")?;
+                        let sprite: SpriteRenderer =
+                            serde_json::from_value(sprite.clone()).map_err(|e| e.to_string())?;
+                        flipbook.validate(&sprite).map_err(|e| e.to_string())
+                    })();
+                    if let Err(message) = checked {
+                        issue(format!("{path}/components/SpriteFlipbook"), &message);
+                    }
+                }
                 if entity.components.contains_key("SpriteRenderer") {
                     if !entity.components.contains_key("Transform") {
                         issue(
@@ -359,6 +378,25 @@ impl Project {
                             "sprite and mesh rendering require separate entities",
                         );
                     }
+                }
+                if entity.components.contains_key("Tilemap") {
+                    if !entity.components.contains_key("Transform") {
+                        issue(
+                            format!("{path}/components"),
+                            "a tilemap requires a Transform",
+                        );
+                    }
+                    if entity.components.contains_key("MeshRenderer")
+                        || entity.components.contains_key("SpriteRenderer")
+                    {
+                        issue(
+                            format!("{path}/components"),
+                            "tilemap, sprite and mesh rendering require separate entities",
+                        );
+                    }
+                }
+                if let Err(message) = physics_2d::validate_entity(entity) {
+                    issue(format!("{path}/components"), &message);
                 }
                 if let Err(message) = physics::validate_entity(entity) {
                     issue(format!("{path}/components"), &message);
@@ -424,6 +462,7 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
             .map_err(|e| e.to_string())?,
         "AudioBus" | "AudioSource" | "AudioListener" => audio::validate(kind, value, project)?,
         "RigidBody" | "Collider" | "AngularVelocity" => physics::validate(kind, value)?,
+        "RigidBody2D" | "Collider2D" | "AngularVelocity2D" => physics_2d::validate(kind, value)?,
         "DirectionalLight" | "PointLight" | "SpotLight" => lights::validate(kind, value)?,
         "Transform" => {
             let t: Transform = decode(value)?;
@@ -454,6 +493,33 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
             let s: ScriptComponent = decode(value)?;
             if !project.scripts.contains_key(&s.source) {
                 return Err("script source does not exist".into());
+            }
+        }
+        "Tilemap" => {
+            let map: Tilemap = decode(value)?;
+            map.validate_document().map_err(|e| e.to_string())?;
+            let asset = project
+                .assets
+                .get(&map.tileset)
+                .ok_or("tilemap tileset does not exist")?;
+            if asset.kind != "texture"
+                || matches!(
+                    asset.import_settings,
+                    Some(AssetImportSettings::Texture {
+                        usage: TextureUsage::Normal | TextureUsage::Linear
+                    })
+                )
+            {
+                return Err("tilemap requires a color atlas texture asset".into());
+            }
+        }
+        "SpriteFlipbook" => {
+            let flipbook: SpriteFlipbook = decode(value)?;
+            flipbook.rate.validate().map_err(|e| e.to_string())?;
+            if flipbook.frames.is_empty()
+                || flipbook.frames.len() > incant_2d::flipbook::MAX_FLIPBOOK_FRAMES
+            {
+                return Err("flipbook frame count".into());
             }
         }
         "SpriteRenderer" => {
@@ -538,6 +604,11 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(MeshRenderer)),
         ),
         ("Camera".into(), json!(schemars::schema_for!(Camera))),
+        ("Tilemap".into(), json!(schemars::schema_for!(Tilemap))),
+        (
+            "SpriteFlipbook".into(),
+            json!(schemars::schema_for!(SpriteFlipbook)),
+        ),
         (
             "SpriteRenderer".into(),
             json!(schemars::schema_for!(SpriteRenderer)),
@@ -560,6 +631,18 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
             json!(schemars::schema_for!(AudioListener)),
         ),
         ("RigidBody".into(), json!(schemars::schema_for!(RigidBody))),
+        (
+            "RigidBody2D".into(),
+            json!(schemars::schema_for!(RigidBody)),
+        ),
+        (
+            "Collider2D".into(),
+            json!(schemars::schema_for!(Collider2D)),
+        ),
+        (
+            "AngularVelocity2D".into(),
+            json!(schemars::schema_for!(AngularVelocity2D)),
+        ),
         ("Collider".into(), json!(schemars::schema_for!(Collider))),
         (
             "AngularVelocity".into(),

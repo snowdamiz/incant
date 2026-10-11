@@ -1,0 +1,16 @@
+[package]
+name = "incant_physics_2d_runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+incant_types.workspace = true
+incant_2d.workspace = true
+thiserror.workspace = true
+rapier2d = { version = "=0.36.0", features = ["enhanced-determinism"] }
+
+# Keep browser/WASI serial until a supported worker pool exists.
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+rapier2d = { version = "=0.36.0", features = ["parallel"] }

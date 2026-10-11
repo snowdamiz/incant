@@ -11,7 +11,7 @@ impl NativeRenderInput {
     /// make that external consumer terminal on failure. This guard cannot undo
     /// GPU writes/device side effects. Return a newly prepared resource to publish
     /// alongside the accepted adapter, or use a transactional retained GPU path.
-    /// Ordinary motion reuses a bounded numeric undo buffer: no Vec allocations,
+    /// Ordinary motion and flipbook selection reuse a bounded numeric undo buffer: no Vec allocations,
     /// String copies, Arc clones, source reads or model hierarchy expansion.
     pub fn try_sync<T, E>(
         &mut self,
@@ -47,7 +47,10 @@ impl NativeRenderInput {
         // runs during these copies. Configuration/index layout is private and
         // unchanged for this world identity + accepted generation pair.
         for (old, node) in self.undo.iter_mut().zip(&self.input.nodes) {
-            *old = node.world;
+            *old = NumericUndo {
+                world: node.world,
+                frame: node.sprite.as_ref().map_or(0, |s| s.frame),
+            };
         }
         let mut guard = MotionGuard {
             input: &mut self.input,
@@ -57,6 +60,9 @@ impl NativeRenderInput {
         for node in view.nodes() {
             if let Some(slot) = self.slots[node.index] {
                 guard.input.nodes[slot].world = *node.global;
+                if let Some(sprite) = &mut guard.input.nodes[slot].sprite {
+                    sprite.frame = node.flipbook.map_or(0, |p| p.frame());
+                }
             }
         }
         let result = accept(
@@ -72,14 +78,17 @@ impl NativeRenderInput {
 }
 struct MotionGuard<'a> {
     input: &'a mut SceneInput,
-    undo: &'a [DMat4],
+    undo: &'a [NumericUndo],
     accepted: bool,
 }
 impl Drop for MotionGuard<'_> {
     fn drop(&mut self) {
         if !self.accepted {
             for (node, old) in self.input.nodes.iter_mut().zip(self.undo) {
-                node.world = *old;
+                node.world = old.world;
+                if let Some(sprite) = &mut node.sprite {
+                    sprite.frame = old.frame;
+                }
             }
         }
     }

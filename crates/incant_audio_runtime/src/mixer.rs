@@ -20,6 +20,7 @@ pub(crate) const MAX_STATIC_FRAMES: usize = 8 * 1024 * 1024;
 pub type VoiceId = u64;
 pub struct Mixer<B: Backend> {
     manager: AudioManager<B>,
+    master: TrackHandle,
     buses: BTreeMap<String, TrackHandle>,
     listener: ListenerHandle,
     voices: BTreeMap<VoiceId, Voice>,
@@ -89,9 +90,16 @@ where
                 .ok_or(AudioError::Invalid("bus parent missing or cycle detected"))?;
             order.push(pending.remove(&id).unwrap());
         }
-        settings.capacities.sub_track_capacity = MAX_BUSES + MAX_VOICES;
+        settings.capacities.sub_track_capacity = 1;
         settings.capacities.listener_capacity = 1;
         let mut manager = AudioManager::<B>::new(settings).map_err(resource)?;
+        let mut master = manager
+            .add_sub_track(
+                TrackBuilder::new()
+                    .sound_capacity(MAX_VOICES)
+                    .sub_track_capacity(MAX_BUSES + MAX_VOICES),
+            )
+            .map_err(resource)?;
         let listener = manager
             .add_listener([0., 0., 0.], [0., 0., 0., 1.])
             .map_err(resource)?;
@@ -104,13 +112,14 @@ where
             let track = if let Some(parent) = &bus.parent {
                 buses.get_mut(parent).unwrap().add_sub_track(builder)
             } else {
-                manager.add_sub_track(builder)
+                master.add_sub_track(builder)
             }
             .map_err(resource)?;
             buses.insert(bus.id.clone(), track);
         }
         Ok(Self {
             manager,
+            master,
             buses,
             listener,
             voices: BTreeMap::new(),
@@ -122,6 +131,15 @@ where
     }
     pub fn backend_mut(&mut self) -> &mut B {
         self.manager.backend_mut()
+    }
+    /// Freeze all child transports without changing individual source state.
+    /// The device applies this command at its next processing boundary.
+    pub fn set_suspended(&mut self, suspended: bool) {
+        if suspended {
+            self.master.pause(immediate());
+        } else {
+            self.master.resume(immediate());
+        }
     }
     pub fn set_bus_gain(&mut self, id: Option<&str>, db: f32) -> Result<()> {
         config::gain(db)?;
@@ -238,7 +256,7 @@ where
                         builder,
                     )
                 } else {
-                    self.manager
+                    self.master
                         .add_spatial_sub_track(self.listener.id(), s.position, builder)
                 }
                 .map_err(resource)?,
@@ -299,7 +317,7 @@ where
                 .ok_or(AudioError::UnknownBus)?
                 .play(data)
         } else {
-            self.manager.play(data)
+            self.master.play(data)
         }
         .map_err(resource)
     }
@@ -435,9 +453,9 @@ where
                 track.num_sounds() < track.sound_capacity()
             })
         } else if spatial {
-            Ok(self.manager.num_sub_tracks() < self.manager.sub_track_capacity())
+            Ok(self.master.num_sub_tracks() < self.master.sub_track_capacity())
         } else {
-            let track = self.manager.main_track();
+            let track = &self.master;
             Ok(track.num_sounds() < track.sound_capacity())
         }
     }

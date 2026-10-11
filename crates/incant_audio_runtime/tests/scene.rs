@@ -655,3 +655,35 @@ fn actual_background_decoder_error_is_observable_without_an_audio_device() {
         Err(AudioError::FailedSession)
     ));
 }
+
+#[test]
+fn master_suspend_freezes_static_and_streamed_cursors_without_resuming_paused_sources() {
+    let temp = tempfile::tempdir().unwrap();
+    let key = tone(&temp);
+    for streaming in [false, true] {
+        let world = world(vec![bus(), source(streaming)]);
+        let mut control = SceneAudio::offline(&world, vec![binding(&temp, &key)], 44100).unwrap();
+        let mut host = SceneAudio::offline(&world, vec![binding(&temp, &key)], 44100).unwrap();
+        assert_eq!(render(&mut host, 512), render(&mut control, 512));
+        host.set_suspended(true).unwrap();
+        assert!(render(&mut host, 2048).iter().all(|v| *v == 0.));
+        assert_eq!(host.source_state(id(2)).unwrap(), SourceState::Playing);
+        host.set_suspended(false).unwrap();
+        let resumed = render(&mut host, 1024);
+        let expected = render(&mut control, 1024);
+        // Kira interpolates the resume gain over its first internal chunk even
+        // for a zero-duration tween. Subsequent exact samples prove no cursor
+        // advance occurred while suspended, in both static and streaming paths.
+        assert_eq!(&resumed[256..], &expected[256..]);
+        let mut paused = source(streaming);
+        paused.source.as_mut().unwrap().playing = false;
+        let paused_world = self::world(vec![bus(), paused]);
+        host.sync(&paused_world).unwrap();
+        render(&mut host, 256);
+        host.set_suspended(true).unwrap();
+        render(&mut host, 256);
+        host.set_suspended(false).unwrap();
+        assert!(render(&mut host, 1024).iter().all(|v| *v == 0.));
+        assert_eq!(host.source_state(id(2)).unwrap(), SourceState::Paused);
+    }
+}

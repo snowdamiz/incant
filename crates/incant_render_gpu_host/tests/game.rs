@@ -369,3 +369,32 @@ fn observed_device_loss_stops_the_host_before_another_target_is_acquired() {
     assert_eq!(probe.presents.load(Ordering::SeqCst), 1);
     assert_eq!(probe.dropped.load(Ordering::SeqCst), 1);
 }
+
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn paused_committed_refresh_submits_without_advancing_game_or_audio() {
+    let (mut game, probe) = game();
+    let mut output = vec![0.; game.next_output_frames().unwrap() * 2];
+    game.tick(&[], &mut output).unwrap();
+    let expected = pixels(&probe);
+    let world = game.world().unwrap().snapshot();
+    let input = game.input().unwrap().clone();
+    let frames = game.rendered_frames().unwrap();
+    game.set_suspended(true).unwrap();
+    for _ in 0..3 {
+        game.refresh_host().unwrap();
+        assert_eq!(pixels(&probe), expected);
+    }
+    assert_eq!(game.world().unwrap().tick(), 1);
+    assert_eq!(game.world().unwrap().snapshot(), world);
+    assert_eq!(game.input().unwrap(), &input);
+    assert_eq!(game.rendered_frames().unwrap(), frames);
+    assert_eq!(probe.presents.load(Ordering::SeqCst), 4);
+    assert_eq!(game.host().unwrap().consumer().accepted_frames(), 4);
+    assert_eq!(game.host().unwrap().render_input().tick(), 1);
+    assert!(game.tick(&[], &mut output).is_err());
+    probe.fault.store(1, Ordering::SeqCst);
+    assert!(game.refresh_host().is_err());
+    assert!(game.is_failed());
+    assert_eq!(probe.dropped.load(Ordering::SeqCst), 1);
+}

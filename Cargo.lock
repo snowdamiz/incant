@@ -3926,8 +3926,10 @@ dependencies = [
  "incant_runtime",
  "incant_script",
  "incant_types",
+ "pollster",
  "serde",
  "serde_json",
+ "tao",
  "thiserror 2.0.21",
  "ulid",
 ]
@@ -4070,6 +4072,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_physics_2d_runtime"
+version = "0.0.1"
+dependencies = [
+ "incant_2d",
+ "incant_types",
+ "rapier2d",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_physics_runtime"
 version = "0.0.1"
 dependencies = [
@@ -4160,6 +4172,7 @@ dependencies = [
  "incant_types",
  "serde",
  "thiserror 2.0.21",
+ "ulid",
 ]
 
 [[package]]
@@ -4231,8 +4244,10 @@ dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
  "incant_2d",
+ "incant_physics_2d_runtime",
  "incant_physics_runtime",
  "incant_types",
+ "libm",
  "sha2 0.10.9",
  "thiserror 2.0.21",
 ]
@@ -5880,6 +5895,34 @@ dependencies = [
 ]
 
 [[package]]
+name = "parry2d"
+version = "0.31.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fe1ba500175e957aaa27ddc92290ec8ff503d73331365443660816d6302e2a31"
+dependencies = [
+ "approx",
+ "arrayvec",
+ "bitflags 2.13.2",
+ "downcast-rs",
+ "either",
+ "ena",
+ "foldhash 0.2.0",
+ "glamx",
+ "hashbrown 0.17.1",
+ "indexmap 2.14.2",
+ "log",
+ "num-derive 0.5.1",
+ "num-traits",
+ "ordered-float",
+ "rayon",
+ "simba",
+ "slab",
+ "smallvec",
+ "spade",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "parry3d"
 version = "0.31.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6560,6 +6603,29 @@ name = "range-alloc"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ca45419789ae5a7899559e9512e58ca889e41f04f1f2445e9f4b290ceccd1d08"
+
+[[package]]
+name = "rapier2d"
+version = "0.36.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e6708b492a19e936d66ba45fd0749ea8e20275f9a8e9891050944c35b8305349"
+dependencies = [
+ "approx",
+ "arrayvec",
+ "bitflags 2.13.2",
+ "glamx",
+ "log",
+ "nalgebra",
+ "num-traits",
+ "parry2d",
+ "profiling",
+ "rayon",
+ "serde",
+ "simba",
+ "static_assertions",
+ "thiserror 2.0.21",
+ "wide",
+]
 
 [[package]]
 name = "rapier3d"
