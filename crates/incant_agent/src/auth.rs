@@ -245,6 +245,7 @@ impl LoginAttempt {
             return Err(AgentError::Interrupted);
         }
         let mut store = crate::accounts::AccountStore::open()?;
+        store.invalidate_selection()?;
         save_record(&id, &record)?;
         let account = AccountMetadata {
             id,

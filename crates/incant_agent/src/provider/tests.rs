@@ -186,3 +186,28 @@ fn lost_account_stops_before_sending_another_request() {
         "provider: signed out"
     );
 }
+
+#[test]
+fn active_metadata_checks_never_resolve_or_refresh_credentials() {
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    let mut provider = OpenAiProvider::with_token_source(
+        Box::new(|_| panic!("metadata checks must not read or refresh credentials")),
+        true,
+        "fixture-model".into(),
+    )
+    .unwrap();
+    assert!(provider.check_active().is_ok());
+    let checks = Arc::new(AtomicUsize::new(0));
+    let observed = checks.clone();
+    provider.active = Some(Box::new(move || {
+        observed.fetch_add(1, Ordering::Relaxed);
+        Err(AgentError::Provider("selection changed".into()))
+    }));
+    for _ in 0..3 {
+        assert!(matches!(
+            provider.check_active(),
+            Err(AgentError::Provider(_))
+        ));
+    }
+    assert_eq!(checks.load(Ordering::Relaxed), 3);
+}
