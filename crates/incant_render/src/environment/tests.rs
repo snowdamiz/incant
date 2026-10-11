@@ -23,14 +23,16 @@ fn source(format: incant_assets::TextureFormat, color: [f32; 4]) -> incant_asset
             },
             usage: incant_assets::TextureUsage::Linear,
             content_sha256: "ef".repeat(32),
+            unweighted_content_sha256: None,
         },
         texture: incant_assets::Texture {
             width: 2,
             height: 1,
             format,
-            levels: vec![texel.repeat(2), texel],
+            levels: vec![texel.repeat(2).into(), texel.into()],
         },
         cache_hit: true,
+        color_unweighted: None,
     }
 }
 
@@ -89,6 +91,70 @@ fn large_environment_uses_cooked_low_pass_mips_before_cube_resampling() {
     for pixel in cube.pixels {
         assert!((pixel - Vec3::splat(128. / 255.)).abs().max_element() < 0.00001);
     }
+}
+
+#[test]
+fn shared_color_asset_preserves_sprite_coverage_and_alpha_independent_environment_radiance() {
+    let root = tempfile::tempdir().unwrap();
+    let pixels: Vec<u8> = (0..512)
+        .flat_map(|y| {
+            (0..1024).flat_map(move |x| {
+                if (x + y) % 2 == 0 {
+                    [255, 0, 0, 0]
+                } else {
+                    [0, 0, 255, 255]
+                }
+            })
+        })
+        .collect();
+    let mut png_bytes = Vec::new();
+    {
+        let mut encoder = png::Encoder::new(&mut png_bytes, 1024, 512);
+        encoder.set_color(png::ColorType::Rgba);
+        encoder.set_depth(png::BitDepth::Eight);
+        encoder
+            .write_header()
+            .unwrap()
+            .write_image_data(&pixels)
+            .unwrap();
+    }
+    std::fs::write(root.path().join("shared.png"), png_bytes).unwrap();
+    let cache = root.path().join("cache");
+    let cooked = incant_assets::cook_texture(
+        root.path(),
+        std::path::Path::new("shared.png"),
+        &cache,
+        incant_assets::TextureUsage::Color,
+    )
+    .unwrap();
+    std::fs::remove_file(root.path().join("shared.png")).unwrap();
+    let asset = incant_assets_runtime::RuntimeAsset::load_texture(
+        "shared",
+        1,
+        &cache,
+        &cooked.metadata.fingerprint,
+        None,
+    )
+    .unwrap();
+    let incant_assets_runtime::RuntimeAssetData::Texture(texture) = asset.data() else {
+        panic!()
+    };
+    // Sprite upload keeps the original coverage-filtered chain.
+    assert_eq!(&texture.texture.levels[1][..4], &[0, 0, 255, 128]);
+    let cube = super::source::decode(texture).unwrap();
+    let c = 188_f32 / 255.;
+    let half_linear = ((c + 0.055) / 1.055).powf(2.4);
+    for pixel in cube.pixels {
+        assert!(
+            (pixel - Vec3::new(half_linear, 0., half_linear))
+                .abs()
+                .max_element()
+                < 0.00001
+        );
+    }
+    let mut malformed = cooked;
+    malformed.color_unweighted = None;
+    assert!(super::source::decode(&malformed).is_err());
 }
 
 #[test]

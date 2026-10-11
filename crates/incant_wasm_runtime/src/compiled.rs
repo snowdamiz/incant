@@ -1,6 +1,6 @@
 //! Audited static C boundary. Traps must be caught before returning from C; C
 //! import wrappers must wait for Rust callbacks to return before trapping.
-use crate::{BoundaryError, Call, Capability, limits};
+use crate::{BoundaryError, Capability, limits};
 use incant_runtime::NativeWorld;
 use std::{ffi::c_void, ptr::NonNull};
 use thiserror::Error;
@@ -176,43 +176,7 @@ unsafe extern "C" fn dispatch(
         if len > limits::MEMORY || (len != 0 && memory.is_null()) || out.is_null() {
             return Err(StaticError::Facade);
         }
-        let call = match op {
-            0 => Call::ChunkCount,
-            1 => Call::ChunkLen(a),
-            2 => Call::ChunkFlags(a),
-            3 => Call::ReadIds(a, b),
-            4..=7 => Call::Column {
-                chunk: a,
-                ptr: b,
-                velocity: op >= 6,
-                write: op % 2 == 1,
-            },
-            8 => Call::Spawn {
-                id: a,
-                parent: b,
-                transform: c,
-                velocity: d,
-            },
-            9 => Call::Despawn(a),
-            10 => Call::SetVelocity(a, b),
-            11 => Call::SetParent(a, b),
-            12 => Call::InputLen,
-            13 => Call::ReadInput {
-                ptr: a,
-                capacity: b,
-            },
-            14 => Call::FlipbookLen,
-            15 => Call::ReadFlipbooks {
-                ptr: a,
-                capacity: b,
-            },
-            16 => Call::ControlFlipbook {
-                id: a,
-                kind: b,
-                frame: c,
-            },
-            _ => return Err(StaticError::Facade),
-        };
+        let call = crate::generated::decode(op, [a, b, c, d]).ok_or(StaticError::Facade)?;
         // SAFETY: validated trusted descriptor contract guarantees initialized,
         // exclusive, bounded guest bytes. Empty Wasm memory may have null data.
         let bytes = if len == 0 {

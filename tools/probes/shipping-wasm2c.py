@@ -23,6 +23,7 @@ import urllib.request
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
+import rust_guest
 from shipping import cargo_output, codegen, archive
 from shipping_symbols import backend, package, require, run
 import wasm2c
@@ -160,20 +161,31 @@ def main():
         inputs = Path(inputs); wabt, provenance = provision(inputs)
         rust = inputs / 'trusted.rs'; shutil.copy2(ROOT / 'crates/incant_wasm_dev/fixtures/bulk.rs', rust)
         module = inputs / 'bulk.wasm'
-        run([rustc, rust, '--crate-type=cdylib', '--edition=2024', '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', module])
+        rust_guest.compile(rustc,rust,module,env=environment)
         modules = [('bulk', module)]
         for source in sorted((ROOT / 'crates/incant_wasm_runtime/fixtures').glob('*.wat')):
             copied = inputs / source.name; shutil.copy2(source, copied); dest = copied.with_suffix('.wasm')
             run([wabt / f'bin/wat2wasm{suffix}', copied, '-o', dest]); modules.append((source.stem, dest))
         if args.conformance_only:
+            sdk_guests = inputs/'sdk-guests'; sdk_guests.mkdir()
+            guest_source=inputs/'sdk-gameplay.rs';shutil.copy2(ROOT/'sdk/rust/samples/gameplay.rs',guest_source)
+            module_path=sdk_guests/'rust-sdk.wasm'
+            rust_guest.compile(rustc,guest_source,module_path,env=environment)
+            modules.append(('rust-sdk',module_path))
+            failure_source=inputs/'sdk-failure.rs';shutil.copy2(ROOT/'sdk/rust/fixtures/failure.rs',failure_source)
+            for kind in ('callback-error','capacity','malformed','expired'):
+                name='rust-sdk-'+kind; module_path=sdk_guests/(name+'.wasm')
+                rust_guest.compile(rustc,failure_source,module_path,env=environment,cfg=['sdk_'+kind.replace('-','_')])
+                modules.append((name,module_path))
+            environment['INCANT_RUST_SDK_GUESTS']=str(sdk_guests)
             flipbook = inputs/'flipbook.rs'; shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs', flipbook)
             flipbook_module = inputs/'flipbook.wasm'
-            run([rustc, flipbook, '--crate-type=cdylib', '--edition=2024', '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', flipbook_module])
+            rust_guest.compile(rustc,flipbook,flipbook_module,env=environment)
             modules.append(('flipbook-game', flipbook_module))
             environment['INCANT_FLIPBOOK_GUEST'] = str(flipbook_module)
             game = inputs/'game.rs'; shutil.copy2(ROOT/'crates/incant_wasm_player/fixtures/game.rs', game)
             game_module = inputs/'game.wasm'
-            run([rustc, game, '--crate-type=cdylib', '--edition=2024', '--target=wasm32-unknown-unknown', '-C', 'panic=abort', '-C', 'opt-level=2', '-o', game_module])
+            rust_guest.compile(rustc,game,game_module,env=environment)
             modules.append(('game', game_module))
             for source in sorted((ROOT/'crates/incant_wasm_player/fixtures').glob('*.wat')):
                 copied = inputs/source.name; shutil.copy2(source, copied); dest = copied.with_suffix('.wasm')
@@ -181,10 +193,11 @@ def main():
         bundle = inputs / 'bundle'; manifest = wasm2c.prepare(bundle, modules, wabt, cook)
         (out / 'prepared-manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')
         environment.update(INCANT_WASM_BUNDLE=str(bundle), CC_ENABLE_DEBUG_OUTPUT='1')
+        (out/'rust-sdk.json').write_text(json.dumps(rust_guest.provenance(),indent=2)+'\n')
         if args.conformance_only:
             commands = [
-                [cargo, 'test', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--locked'],
-                [cargo, 'clippy', '-j2', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
+                [cargo, 'test', '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--locked'],
+                [cargo, 'clippy', '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
                 [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance'],
             ]
             for index, command in enumerate(commands):
@@ -250,7 +263,7 @@ def main():
               'c_flags': c_flags, 'symbol_audit': 'fresh MSVC linker map' if kind == 'pdb' else 'llvm-nm defined symbols',
               'msvc_compiler': msvc_compiler,
               'link_map_sha256': sha(link_map) if kind == 'pdb' else None,
-              'guest_source_sha256': guest_source_hash, 'guest_wasm_sha256': guest_wasm_hash,
+              'rust_sdk': rust_guest.provenance(), 'guest_source_sha256': guest_source_hash, 'guest_wasm_sha256': guest_wasm_hash,
               'player_sha256': sha(player), 'player_bytes': player.stat().st_size, 'symbols': identity,
               'temporary_guest_sources_wasm_generated_c_tools_and_build_storage_deleted': True,
               'normal_graphs_without_compilers': roots, 'success_processes': 3, 'outputs': outputs, 'rejections': failures,

@@ -8,7 +8,7 @@ import importlib.util
 import json
 from pathlib import Path
 import shutil
-import subprocess
+import rust_guest
 
 ROOT = Path(__file__).resolve().parents[1]
 ACTIONS = [('flip_pause','F1'),('flip_seek','F2'),('flip_play','F3'),
@@ -42,11 +42,11 @@ def prepare(inputs, out, rustc, cargo, env, suffix):
     wabt,provenance=helper.provision(inputs)
     source=inputs/'flipbook.rs';shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs',source)
     module=inputs/'flipbook.wasm'
-    subprocess.run([str(x) for x in [rustc,source,'--crate-type=cdylib','--edition=2024','--target=wasm32-unknown-unknown','-C','panic=abort','-C','opt-level=2','-o',module]],env=env,check=True,capture_output=True,text=True,encoding='utf-8')
+    rust_guest.compile(rustc,source,module,env=env)
     bundle=inputs/'static-bundle'
     manifest=helper.wasm2c.prepare(bundle,[('flipbook-game',module)],wabt,ROOT/f'target/debug/incant_wasm_cook{suffix}')
     env.update(INCANT_WASM_BUNDLE=str(bundle),CC_ENABLE_DEBUG_OUTPUT='1')
-    return {'source_sha256':helper.sha(source),'module_sha256':helper.sha(module),'bundle':manifest,'translator':provenance}
+    return {'rust_sdk':rust_guest.provenance(),'source_sha256':helper.sha(source),'module_sha256':helper.sha(module),'bundle':manifest,'translator':provenance}
 
 
 def verify(out, command, fixtures, results, replay, run, reject, require):

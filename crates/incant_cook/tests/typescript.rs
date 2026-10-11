@@ -6,9 +6,6 @@ use serde_json::json;
 #[test]
 fn interrupted_source_transaction_refuses_before_opening_the_source_graph() {
     let root = tempfile::tempdir().unwrap();
-    let state = root.path().join(".incant-source-transactions");
-    std::fs::create_dir(&state).unwrap();
-    std::fs::write(state.join("pending"), "interrupted").unwrap();
     let mut project = Project::empty("Recovery refusal");
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Actor");
@@ -22,11 +19,27 @@ fn interrupted_source_transaction_refuses_before_opening_the_source_graph() {
     project.scripts.insert(
         source.clone(),
         ScriptSource {
-            id: source,
+            id: source.clone(),
             name: "Actor".into(),
-            path: "absent.ts".into(),
+            path: "main.ts".into(),
         },
     );
+    let journal = root.path().join("journal");
+    std::fs::write(&journal, "").unwrap();
+    let before = "export default {update(){}};";
+    std::fs::write(root.path().join("main.ts"), before).unwrap();
+    let operation = new_id();
+    let edit = incant_source::SourceEdit {
+        script_id: source,
+        path: "main.ts".into(),
+        before: Some(before.into()),
+        after: Some("export default {update(){throw new Error('uncommitted');}};".into()),
+    };
+    let store = incant_source::SourceStore::open(root.path(), &journal, &project.id).unwrap();
+    store.begin(&operation, &edit).unwrap();
+    drop(store); // Simulate interrupted publication: the durable marker survives.
+    let state = root.path().join(".incant-source-transactions");
+    let marker = std::fs::read(state.join("pending")).unwrap();
     let prepared = prepare_script_scene(&project, &scene_id).unwrap();
     let result = compile_project_sources(prepared, root.path());
     assert!(matches!(
@@ -35,9 +48,14 @@ fn interrupted_source_transaction_refuses_before_opening_the_source_graph() {
             incant_source::SourceError::RecoveryRequired
         ))
     ));
+    assert_eq!(std::fs::read(state.join("pending")).unwrap(), marker);
     assert_eq!(
-        std::fs::read_to_string(state.join("pending")).unwrap(),
-        "interrupted"
+        std::fs::read_to_string(root.path().join("main.ts")).unwrap(),
+        before
     );
-    assert_eq!(std::fs::read_dir(root.path()).unwrap().count(), 1);
+    let store = incant_source::SourceStore::open(root.path(), &journal, &project.id).unwrap();
+    store.rollback(&operation, &edit).unwrap();
+    store.finish(&operation).unwrap();
+    assert!(!state.join("pending").exists());
+    incant_source::check_recovery(root.path()).unwrap();
 }

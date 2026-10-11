@@ -5,7 +5,7 @@ use incant_assets_runtime::{CookedTexture, TextureFormat, TextureUsage};
 use std::f32::consts::PI;
 
 pub(super) fn decode(source: &CookedTexture) -> Result<Cube> {
-    let texture = &source.texture;
+    let texture = source.radiance_texture()?;
     texture.validate()?;
     if source.metadata.usage == TextureUsage::Normal {
         return Err(ResourceError::EnvironmentSource("normal maps cannot provide radiance").into());

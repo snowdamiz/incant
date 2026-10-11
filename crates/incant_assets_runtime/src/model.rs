@@ -66,14 +66,14 @@ fn take<'a>(bytes: &mut &'a [u8], n: usize) -> Result<&'a [u8]> {
 fn count(bytes: &mut &[u8]) -> Result<usize> {
     Ok(u32::from_le_bytes(take(bytes, 4)?.try_into().unwrap()) as usize)
 }
-/// Decode a bounded version-1 or version-2 cache image without source access.
+/// Decode bounded version-1/2 legacy or version-3 color-role cache data.
 /// The digest checks corruption, not executable trust; models contain data only.
 pub fn decode_model(bytes: &[u8], key: &str) -> Result<CookedModel> {
     if bytes.len() > MAX_SOURCE_BYTES {
         return Err(AssetError::Limit("cooked model bytes"));
     }
     key_path(Path::new(""), key)?;
-    if bytes.len() < 48 || (&bytes[..8] != b"INCMOD01" && &bytes[..8] != b"INCMOD02") {
+    if bytes.len() < 48 || !matches!(&bytes[..8], b"INCMOD01" | b"INCMOD02" | b"INCMOD03") {
         return Err(invalid("invalid model cache header"));
     }
     let end = bytes.len() - 32;
@@ -106,7 +106,8 @@ pub fn decode_model(bytes: &[u8], key: &str) -> Result<CookedModel> {
         meshes.push(mesh);
     }
     let mut images = Vec::new();
-    if &bytes[..8] == b"INCMOD02" {
+    let by_role = &bytes[..8] == b"INCMOD03";
+    if &bytes[..8] != b"INCMOD01" {
         let n = count(&mut payload)?;
         if n > 768 {
             return Err(AssetError::Limit("cached textures"));
@@ -116,7 +117,18 @@ pub fn decode_model(bytes: &[u8], key: &str) -> Result<CookedModel> {
             images.push(crate::decode_ktx2(take(&mut payload, size)?)?);
         }
     }
-    crate::model_textures::validate_textures(&metadata.textures, images.len())?;
+    crate::model_textures::validate_textures(&metadata.textures, images.len(), by_role)?;
+    if images
+        .iter()
+        .map(crate::Texture::payload_bytes)
+        .sum::<usize>()
+        > MAX_SOURCE_BYTES
+    {
+        return Err(AssetError::Limit("total cached image bytes"));
+    }
+    if by_role {
+        crate::model_textures::share_color_bases(&metadata.textures, &mut images)?;
+    }
     if !payload.is_empty() {
         return Err(invalid("trailing bytes in model cache"));
     }
@@ -141,7 +153,11 @@ pub fn decode_model(bytes: &[u8], key: &str) -> Result<CookedModel> {
         return Err(invalid("invalid model metadata reference"));
     }
     crate::model_node::validate_nodes(&metadata.nodes)?;
-    let materials = crate::material::resolve(&metadata.materials, &metadata.textures, &images)?;
+    let materials = if by_role {
+        crate::material::resolve_color_roles(&metadata.materials, &metadata.textures, &images)?
+    } else {
+        crate::material::resolve(&metadata.materials, &metadata.textures, &images)?
+    };
     Ok(CookedModel {
         metadata,
         materials,

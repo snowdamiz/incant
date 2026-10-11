@@ -1,0 +1,55 @@
+{
+  "head": "ae919ba268e7a620b946d4a4e4de36e5b7f9953f",
+  "outcome": "strict ledger failure before deletion-barrier/any player execution",
+  "failure": "Target unit unexpectedly rebuilt in one frozen session: rquickjs_sys",
+  "cargo_reason": "the env variable CC_ENABLE_DEBUG_OUTPUT changed",
+  "build_storage_removed": true,
+  "barrier_ready": false,
+  "launch_release": false,
+  "result_files": [],
+  "evidence": {
+    "/tmp/incant-shipping-sdk-shared-proof.log": {
+      "sha256": "37f9baa4908720a1f331d9beb96e6136e0dc32c29a0d51119512ec25ac207963",
+      "bytes": 1379
+    },
+    "/tmp/incant-shipping-sdk-shared-proof/build-0.stderr.log": {
+      "sha256": "55484eeea466ba9ff7fc1c9baeb22f3d8503fc58b6b80dc54e8d96d348c83cb6",
+      "bytes": 411564
+    },
+    "/tmp/incant-shipping-sdk-shared-proof/build-0.stdout.jsonl": {
+      "sha256": "5d56d7085af38834da192eb0bad7afd7379a587ee77d4c5defe4db697bd20ea5",
+      "bytes": 3182660
+    },
+    "/tmp/incant-shipping-sdk-shared-proof/build-1.stderr.log": {
+      "sha256": "9af00bfb7e38c6350a7f0085fb5c22d1477e20ae9d0d568663305db97b878b63",
+      "bytes": 117971
+    },
+    "/tmp/incant-shipping-sdk-shared-proof/build-1.stdout.jsonl": {
+      "sha256": "fa25216f8d0c8d43d6d29f81772d31f38b6f888ad84e442ec1c6a90d8b2482b1",
+      "bytes": 3203335
+    },
+    "/tmp/incant-shipping-sdk-shared-proof/build-2.stderr.log": {
+      "sha256": "8ffeabf1809f90c8d6195a1be353448d18c7246d10d42783888057e229a99630",
+      "bytes": 659612
+    },
+    "/tmp/incant-shipping-sdk-shared-proof/build-2.stdout.jsonl": {
+      "sha256": "1cdf09822b66a7d2eb3ef045c632990c1728b116ab4c6f09b3a4526d1f8a4c70",
+      "bytes": 6504204
+    },
+    "/tmp/incant-shipping-sdk-shared-proof/build-3.stderr.log": {
+      "sha256": "3559fc074e8fcfd7a1ccd100d7426923405fbfbb3e408e3c471a3f023c4b7e9f",
+      "bytes": 89407
+    },
+    "/tmp/incant-shipping-sdk-shared-proof/build-3.stdout.jsonl": {
+      "sha256": "171ba5bc05f78abeeaa8825caa34e0af66131bd6b8ad2684838363f6f846c21a",
+      "bytes": 6301782
+    }
+  },
+  "performance_claim": false,
+  "correction": {
+    "scope": "Enable only CC_ENABLE_DEBUG_OUTPUT=1 consistently on a copied environment for all shared builds; record setting; standalone behavior and strict duplicate-unit refusal unchanged",
+    "python_tests": 120,
+    "test_log_sha256": "7aae664a0fe2656142285a9a2d74f8d0fd1bfe7276f770319f276c60409564e9",
+    "fresh_rerun": "pending"
+  }
+}

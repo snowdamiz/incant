@@ -1,0 +1,22 @@
+{
+  "review_commit": "8fe0c77fcf4d2a4d6c98a996e74c6207e448d28f",
+  "verified_images": [
+    "screenshots/engine/old-materials-board.png",
+    "screenshots/engine/recooked-materials-board.png",
+    "screenshots/engine/old-materials-oblique.png",
+    "screenshots/engine/recooked-materials-oblique.png",
+    "screenshots/engine/old-environment-view.png",
+    "screenshots/engine/recooked-environment-view.png",
+    "screenshots/engine/envcontrol-view.png",
+    "screenshots/derived/DERIVED-board-minified-cells-x3.png",
+    "screenshots/derived/DERIVED-board-retained-vs-recooked-diff.png",
+    "screenshots/derived/DERIVED-environment-old-vs-recooked-diff.png",
+    "screenshots/derived/DERIVED-oblique-retained-vs-recooked-diff.png"
+  ],
+  "children": 56,
+  "frames": 13,
+  "all_exits_zero": true,
+  "helper_tests": 8,
+  "no_images_opened_by_astra": true,
+  "production_source_unchanged_from": "d5a2b1503095b3051c3b714866cb0667ab8fa61a"
+}

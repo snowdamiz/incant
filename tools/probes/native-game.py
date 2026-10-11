@@ -40,7 +40,7 @@ def binary_id(value):
     return n.to_bytes(16, 'big')
 
 
-def main():
+def arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     modes = parser.add_mutually_exclusive_group()
@@ -53,7 +53,11 @@ def main():
         ('headless', f'incant_headless{suffix}'), ('cook', f'examples/cook_scene{suffix}'),
         ('audio', f'examples/native_scene_audio{suffix}'), ('fixture', f'examples/no_renderer_fixtures{suffix}')):
         parser.add_argument(f'--{name}-binary', type=Path, default=ROOT / 'target/release' / default)
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def phases(args, session=None):
+    suffix = '.exe' if os.name == 'nt' else ''
     require(not args.flipbook or args.gpu, '--flipbook requires actual --gpu execution')
     require(not args.flipbook_sdk or args.flipbook, '--flipbook-sdk requires --flipbook')
     if args.gpu: args.render_input = True
@@ -75,6 +79,8 @@ def main():
     static_build = None
     with tempfile.TemporaryDirectory(prefix='native-game-authoring-', dir=out) as inputs:
         inputs = Path(inputs); project = inputs / 'game.incant.json'; journal = project.with_suffix('.journal.jsonl')
+        if session:
+            session.input_directory(inputs)
         run([headless, 'init', project, '--name', 'Native game composition', '--entities', '0'])
         with wave.open(str(inputs / 'tone.wav'), 'wb') as file:
             file.setparams((2, 2, 48000, 24000, 'NONE', 'not compressed'))
@@ -165,17 +171,23 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         environment.pop('INCANT_NATIVE_SCRIPT_MAP', None)
         if args.flipbook_sdk:
             static_build = native_flipbook_sdk.prepare(inputs, out, rustc, cargo, environment, suffix)
-        with tempfile.TemporaryDirectory(prefix='native-game-build-', dir=out) as storage:
+        manager = session.storage() if session else tempfile.TemporaryDirectory(prefix='native-game-build-', dir=out)
+        with manager as storage:
             command = [*cargo, 'build', '-j2', '-p', 'incant_game_player', '--profile', 'shipping', '--locked',
                        '--target', target, '--target-dir', storage, '--config', f'profile.shipping.split-debuginfo="{split}"', '--message-format=json', '-vv']
             features = ['render-gpu' if args.gpu else 'render-input'] if args.render_input else []
             if args.flipbook_sdk: features += ['static-module']
             if features: command += ['--features', ','.join(features)]
-            build = cargo_output(command, cwd=ROOT, env=environment)
+            if session:
+                build, audited_commands = session.build(command, cwd=ROOT, env=environment)
+            else:
+                build = cargo_output(command, cwd=ROOT, env=environment)
+                audited_commands = build.stderr
+            (out / 'cargo-artifacts.jsonl').write_text(build.stdout, encoding='utf-8')
             (out / 'build.log').write_text(build.stderr, encoding='utf-8')
             require(build.returncode == 0, f'Shipping build failed: {out / "build.log"}')
             flags = {}
-            target_lines = [line for line in build.stderr.splitlines() if 'Running `' in line and f'--target {target}' in line]
+            target_lines = [line for line in audited_commands.splitlines() if 'Running `' in line and f'--target {target}' in line]
             forbidden = ('incant_doc', 'incant_cmd', 'incant_agent', 'incant_editor', 'incant_assets', 'incant_audio', 'incant_core', 'incant_cook', 'incant_play_legacy', 'loro')
             require(not any(re.search(r'--crate-name ('+'|'.join(forbidden)+r')\b', line) for line in target_lines), 'Authoring target dependency compiled')
             extra = ('incant_render_game', 'incant_render_native', 'incant_render_data') if args.render_input else ()
@@ -213,6 +225,11 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             dest = out / 'player' / fixture['path'].name
             shutil.copy2(fixture['path'], dest); fixture['path'] = str(dest)
         require(authoring_hash == sha(project), 'Build changed authoring project')
+    if session:
+        session.packaged_player(player)
+    yield
+    if session:
+        session.assert_ready()
     require(not inputs.exists() and not Path(storage).exists(), 'Authoring/build storage remains')
     if args.flipbook_sdk:
         shutil.copy2(ROOT/'THIRD_PARTY_NOTICES.md', out/'player/THIRD_PARTY_NOTICES.md')
@@ -418,6 +435,11 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
               'failure_semantics': 'Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file.'}
     (out/'result.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps({'passed': True, 'bytes': player.stat().st_size, 'sha256': sha(player), 'evidence': str(out/'result.json')}))
+
+
+def main():
+    for _ in phases(arguments()):
+        pass
 
 
 if __name__ == '__main__':

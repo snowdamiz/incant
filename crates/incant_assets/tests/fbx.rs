@@ -414,3 +414,59 @@ fn invalid_source_units_cannot_silently_skip_meter_conversion() {
         assert!(error.to_string().contains("source units"), "{error}");
     }
 }
+
+#[test]
+fn one_fbx_texture_supports_opaque_blend_and_emission_without_role_aliasing() {
+    use std::sync::Arc;
+    let root = tempfile::tempdir().unwrap();
+    let path = Path::new("roles.fbx");
+    let cache = root.path().join("cache");
+    image::RgbaImage::from_raw(2, 1, vec![255, 0, 0, 0, 0, 0, 255, 255])
+        .unwrap()
+        .save(root.path().join("mixed.png"))
+        .unwrap();
+    let base = textured_source("mixed.png", None)
+        .replace("Connections:  {", "Connections:  {\n C: \"OP\",90002,1907674217712,\"EmissiveColor\"")
+        .replace("P: \"Emissive\", \"Vector3D\", \"Vector\", \"\",0,0,0",
+                 "P: \"EmissiveColor\", \"Color\", \"\", \"A\",1,1,1\n P: \"EmissiveFactor\", \"Number\", \"\", \"A\",1");
+    let mut retained = Vec::new();
+    for blend in [false, true] {
+        let source = if blend {
+            base.replace("P: \"TransparencyFactor\",", "P: \"TransparentColor\", \"Color\", \"\", \"A\",0.5,0.5,0.5\n P: \"TransparencyFactor\",")
+        } else {
+            base.clone()
+        };
+        fs::write(root.path().join(path), source).unwrap();
+        let cooked = cook_fbx(root.path(), path, &cache).unwrap();
+        assert_eq!(cooked.images.len(), if blend { 2 } else { 1 });
+        let material = &cooked.materials[0];
+        let base = material.maps[0].unwrap().image;
+        let emission = material.maps[4].unwrap().image;
+        assert_eq!(&*cooked.images[emission].levels[1], &[188, 0, 188, 128]);
+        if blend {
+            assert_ne!(base, emission);
+            assert_eq!(&*cooked.images[base].levels[1], &[0, 0, 255, 128]);
+            assert!(Arc::ptr_eq(
+                &cooked.images[base].levels[0],
+                &cooked.images[emission].levels[0]
+            ));
+        } else {
+            assert_eq!(base, emission);
+        }
+        assert!(cook_fbx(root.path(), path, &cache).unwrap().cache_hit);
+        retained.push(cooked);
+    }
+    fs::remove_file(root.path().join(path)).unwrap();
+    fs::remove_file(root.path().join("mixed.png")).unwrap();
+    for old in retained {
+        let loaded = load_model(&cache, &old.metadata.fingerprint).unwrap();
+        assert_eq!(loaded.images, old.images);
+        assert_eq!(loaded.materials, old.materials);
+        if loaded.images.len() == 2 {
+            assert!(Arc::ptr_eq(
+                &loaded.images[0].levels[0],
+                &loaded.images[1].levels[0]
+            ));
+        }
+    }
+}

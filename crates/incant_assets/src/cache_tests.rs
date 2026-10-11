@@ -4,6 +4,21 @@ use serde_json::json;
 
 #[test]
 fn tangent_recipe_change_reimports_both_formats_without_removing_older_caches() {
+    recipe_change([
+        b"incant-static-gltf-v2-meshopt-0.6.2-textures-v1\0",
+        b"incant-static-fbx-v1-ufbx-0.11.5-c0.23.1-meters-yup-meshopt-0.6.2-textures-v1\0",
+    ]);
+}
+
+#[test]
+fn color_role_recipe_change_reimports_both_formats_without_removing_older_caches() {
+    recipe_change([
+        b"incant-static-gltf-v3-meshopt-0.6.2-textures-v1-normal-basis-v1\0",
+        b"incant-static-fbx-v2-ufbx-0.11.5-c0.23.1-meters-yup-meshopt-0.6.2-textures-v1-normal-basis-v1\0",
+    ]);
+}
+
+fn recipe_change(previous: [&[u8]; 2]) {
     let root = tempfile::tempdir().unwrap();
     let cache = root.path().join("cache");
     let positions = [0_f32, 0., 0., 1., 0., 0., 0., 1., 0.];
@@ -28,17 +43,7 @@ fn tangent_recipe_change_reimports_both_formats_without_removing_older_caches() 
     )
     .unwrap();
 
-    for (name, previous_recipe) in [
-        (
-            "triangle.gltf",
-            b"incant-static-gltf-v2-meshopt-0.6.2-textures-v1\0".as_slice(),
-        ),
-        (
-            "cube.fbx",
-            b"incant-static-fbx-v1-ufbx-0.11.5-c0.23.1-meters-yup-meshopt-0.6.2-textures-v1\0"
-                .as_slice(),
-        ),
-    ] {
+    for (name, previous_recipe) in ["triangle.gltf", "cube.fbx"].into_iter().zip(previous) {
         let source = Path::new(name);
         let mut imported = if name.ends_with("fbx") {
             import_fbx(root.path(), source).unwrap()
