@@ -1,0 +1,74 @@
+{
+ "anim.json": {
+  "sha256": "ab6dae0247da34821870c2e9b883ceb2013166f9b07ba98572b599b61a3d17e3",
+  "bytes": 83072,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00000.json": {
+  "sha256": "beb2afa35ad0855eaa8c0c3e1b9eb71729de7bbfbbd872a07be8cdb206834cd2",
+  "bytes": 58549,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00009.json": {
+  "sha256": "721288f6f0639c4f8e68d70f90c4d8d8394d46850def5b426f677937dd2117ce",
+  "bytes": 58596,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00017.json": {
+  "sha256": "5198b55a4323c97d8ddd4ab845afe783ce9dfcbc5a76f18dc6c0871d9feb50f8",
+  "bytes": 58593,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00025.json": {
+  "sha256": "e28aac79d43eda643bc19c0489c16a6383cbdb775574d2b60f1a0f558a0d5fb8",
+  "bytes": 58594,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00034.json": {
+  "sha256": "e7762cbc8eb763ef13a9e8c592521336b8075d1d985aef1d366e75391bf21464",
+  "bytes": 58596,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00042.json": {
+  "sha256": "97da63f8ab442ece43eacd83fe3e69599aa8a496529bdfd32e11b4f35757b4b3",
+  "bytes": 58593,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00050.json": {
+  "sha256": "93b307aca6e5b8d1bf844ddd6aa3f4c96dcf0d1f6e84aec14f8db78ed5e86158",
+  "bytes": 58592,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00060.json": {
+  "sha256": "f301955482595d49bec5ade930319e2b0a1b41ca75212b3f6bd288c8b176bfaf",
+  "bytes": 58594,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00069.json": {
+  "sha256": "ba6d649e146929f480fa21929b97ac6151a4ff1b24b8c6dcde1ac1d1259b04e9",
+  "bytes": 58595,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t00420.json": {
+  "sha256": "a53fa0c4d34d82152ba7772283931652dcce28d5f8a109b38b724cd670297a08",
+  "bytes": 58593,
+  "entities": 76,
+  "regenerated_identical": true
+ },
+ "ctl-t02100.json": {
+  "sha256": "5b4abda6e4eeb83b32d7510cba261a0918fa9fd5a1b043ce819a740f78f40f4e",
+  "bytes": 58596,
+  "entities": 76,
+  "regenerated_identical": true
+ }
+}

@@ -345,6 +345,13 @@ export namespace SpriteAtlasSchema {
 }
 export type SpriteAtlas = SpriteAtlasSchema.Root;
 
+export namespace SpriteFlipbookSchema {
+  export type FrameRate = { "denominator": number; "numerator": number };
+  export type SpriteRegion = ([number, number, number, number]) | ({ "frame": string });
+  export type Root = { "frames": Array<SpriteRegion>; "looping": boolean; "playing": boolean; "rate": FrameRate };
+}
+export type SpriteFlipbook = SpriteFlipbookSchema.Root;
+
 export namespace SpriteRendererSchema {
   export type SpriteMode = ({ "kind": "simple" }) | ({ "border": [number, number, number, number]; "kind": "nine_slice"; "pixels_per_unit": number });
   export type SpriteRegion = ([number, number, number, number]) | ({ "frame": string });
