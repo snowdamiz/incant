@@ -410,5 +410,86 @@
     "Physics/audio-used saves still explicitly refuse",
     "Static Wasm has no localization ABI",
     "Native ICU call and one-time locale-coverage preparation have finite bounds but no intra-call preemption"
-  ]
+  ],
+  "main93_integration": {
+    "base": "100e723d2f655fd120b680191acd82c1ad6a1d4c",
+    "original_head": "b76ff3834dea5af2a0cb2ff953ee2349dbebb94c",
+    "tested_head": "279228f99be856d8bd3e207be1e65475268765fc",
+    "conflicts": [
+      "STATUS.md: retain current evidence and remove duplicate stale navigation paragraph"
+    ],
+    "accepted_non_status_source_inputs_unchanged": 40,
+    "tests": {
+      "passed": 420,
+      "failed": 0,
+      "ignored": 2,
+      "groups": 74,
+      "scope": "runtime/script/localization/cook/game-runtime/play/headless/agent; unchanged GPU cases ignored"
+    },
+    "checks": {
+      "eight_package_all_target_clippy": "passed",
+      "compiler_disabled_static_module": "passed",
+      "headless_build": "passed",
+      "fresh_contract_files_equal": 64,
+      "sdk_templates_bridge_fmt_conventions": "passed",
+      "project_player_normal_graph": "authoring-free"
+    },
+    "command_correction": "Initial optional-feature command used nonexistent static-wasm and refused before compilation; corrected to existing static-module and passed. No source change/retry suppression. Error log retained separately.",
+    "shipping_proof": {
+      "passed": true,
+      "authoring": {
+        "native_play_x": 140.0,
+        "binary_sha256": "3bb99f5e82f7f624781025505b5cdc3508e348a877a975a3156367dc6b7c2074",
+        "project_sha256": "0ddfcd8dbdfc4636d2005b98453c2e20c4221f7575665839a094c0ef63c114fd",
+        "script_sha256": "b4a97116810e942ac79e8bdf5c0b4e12b47c42f0a3fd3d077fc969df1b2ba2a7",
+        "authoring_unchanged": true,
+        "checkpoint_and_journal_reopened": true
+      },
+      "fresh_runs": 3,
+      "ticks_each": 12,
+      "expected_messages": [
+        "Hello Ada",
+        "Bonjour Ada",
+        "Bonjour Ada",
+        "Bonjour Ada",
+        "Hello Ada",
+        "Hello Ada",
+        "Hello Ada",
+        "Bonjour Ada",
+        "Bonjour Ada",
+        "Bonjour Ada",
+        "[!! \u0124\u00e9\u00e9\u013e\u013e\u00f3\u00f3 Ada !!]",
+        "[!! \u0124\u00e9\u00e9\u013e\u013e\u00f3\u00f3 Ada !!]"
+      ],
+      "pcm_sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "authoring_deleted": true,
+      "build_storage_removed": true,
+      "player_sha256": "40d8ba9eae954cf5bfd70579a48a3754c9217d0675ad20330dff2c87251e8703",
+      "target": "aarch64-apple-darwin",
+      "limitations": [
+        "CPU functional proof",
+        "No GPU, reference phone, performance or phase gate"
+      ]
+    },
+    "shipping_proof_sha256": "22e20a2e1f3cfbe2374ddbdb8405a7771db8292848b88060b46e8f5d9a889eab",
+    "logs": {
+      "incant-localization-main93-clippy.log": "b8af666049e8b8c3553accd45ce9670833cfa37adb07a8c92e053dfd1569067a",
+      "incant-localization-main93-headless.log": "57623e24ab35675c7529a618dae7c5dbfd51b22161ff5c767c2508b678bb2e68",
+      "incant-localization-main93-runtime-graph.log": "dc64fcaf750bfe4005e8a6bcd830cc556fba9966c0055b8b2b456758dfe591e9",
+      "incant-localization-main93-schema.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "incant-localization-main93-shipping.log": "528b9b42393156108e9a59cd97b923b45049745bd29b4fe42352c221f619ed0c",
+      "incant-localization-main93-static-command-error.log": "808d6de068ef6519493a7761f6844b08d0c1c6e7b330884dbd4ca49ab019060c",
+      "incant-localization-main93-static.log": "86dad5eaa14be5fb1ba079b5c99ff8a2ba0a28643a84dc2878b8cff743f385e4",
+      "incant-localization-main93-tests.log": "ecce23d93d449f95d4fe4897ac08a7d696c4d124aa03060b2cc124c80d35be4e"
+    },
+    "package_audit_hashes": {
+      "export.json": "2fbbb9e705695f4c009fb6a1aac49cd22c9b8ed998ccbf18f156fa6e9708a86b",
+      "project-build.json": "148278392563c8fcf5e4bcef5f8914bad545c0f5dbb4b36f645d26bc401c6b57",
+      "build.log": "904d58910444e5f7f9798d400977164382953c1bc137062796eb3e39d1581b9a"
+    },
+    "independent_exact_head_review": {
+      "/tmp/incant-native-localization-persistence-review.md": "08be0108aa1dce8752255c2fd3b959cd0d6710209860c97f088639dea079beed",
+      "/tmp/incant-native-localization-sdk-review.md": "406452a9330d89e12d05f5a2e5d0a2115a65e38685181e2010a999a3d147fe45"
+    }
+  }
 }

@@ -67,7 +67,10 @@ scenes into bounded TypeScript queries and the source-free player. Runtime local
 commands share atomic rollback, and world save v3 retains settings/catalog with
 origin binding. Local validation passed 372 tests (two existing GPU tests ignored),
 Clippy/contracts and three fresh shipping replays after authoring/build removal;
-both independent source reviews passed. Font rendering, RTL/CJK visual checks,
+both independent source reviews passed. Actual main93 integration additionally
+passes 420 affected tests, Clippy, 64 exact contracts and a repeated fresh three-run
+source/build-deleted shipping proof with every accepted input unchanged.
+Font rendering, RTL/CJK visual checks,
 static-Wasm localization, composite session persistence and physical-device gates
 remain separate. [Implementation and evidence](docs/spikes/native-localization.md).
 

@@ -15,8 +15,8 @@ release contract. The full engine build/test/probe bodies remain present; changi
 triggers does not count as rerunning their correctness or performance proofs.
 
 All feasible scoped engine tests and review are still required before development
-merges. The first fast job and deployed branch rules are recorded below; the first full
-candidate result remains pending. This
+merges. The first fast job and deployed branch rules are recorded below; the first successful full
+candidate promotion remains pending. This
 local verification does not claim hosted success, physical-device performance,
 phase completion, or a signed/published distribution release.
 
@@ -37,7 +37,7 @@ formatting and workflow lint. The policy's earlier 17-Node result was on a priva
 authored-script union; this PR preserves its separate 12-test source scope.
 The root created the active `incant-release-checkpoints` heartbeat at the agreed
 three-hour cadence. Repository settings and exact final fast-check success are recorded below. The
-first full candidate result remains pending; neither
+first successful full candidate promotion remains pending; neither
 the historical failure nor local verification is presented as full hosted success.
 [Machine-readable evidence](evidence/release-checkpoint-transition.json).
 
@@ -51,11 +51,27 @@ restore-only npm action reused the existing exact Linux cache key successfully
 and registered no PR save hook.
 
 `release` was bootstrapped at the fully checked main82 integration
-`cde3d7279ffe09204f853f3ce342175a14035b1e`. API readback confirms main requires
+`cde3d7279ffe09204f853f3ce342175a14035b1e`. Initial API readback confirmed main required
 only the GitHub Actions `development-checks` context, with strict up-to-date off;
-release requires all22 listed GitHub Actions contexts with strict up-to-date on.
+release required all 22 listed GitHub Actions contexts with strict up-to-date on.
 Both require PRs, enforce the rules for administrators, and prohibit force pushes
 and deletion. No extra approval count is imposed. The active three-hour thread
 heartbeat is `incant-release-checkpoints`. No candidate has yet been promoted;
 release remains on its known baseline until the complete frozen suite succeeds.
 [Deployment and first-run identities](evidence/release-checkpoint-deployment.json).
+
+## Recent fast main checks
+
+PR89–93 each passed the exact required development check before verified merge:
+execution was 126, 133, 109, 129 and 128 seconds, with queues of 2, 2, 1, 2 and 2 seconds.
+[Head/job identities and timestamps](evidence/fast-main-checks-2026-10-11.json)
+record the observed runs. These jobs retain the fast gate's original coverage;
+full native/platform checks remain on frozen release candidates.
+
+The reviewed local-service workflow increased release protection from the initial
+22 contexts to 23 for checkpoint 2. Checkpoints 1 and 2 were not promoted after
+recorded platform failures. Checkpoint 3 confirmed the Linux private-service and
+macOS process-tooling repairs, then exposed a Windows restricted-TypeScript-host
+lookup failure; PR91 fixes that on main, with real Windows confirmation assigned
+to the next snapshot. Release stays on its fully checked bootstrap until every
+required context succeeds.

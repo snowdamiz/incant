@@ -88,3 +88,26 @@ The independent read-only catalog/persistence and SDK/callback reviews found no
 actionable blocker. Exact commands, source/log hashes, executable identity,
 replay outcomes and review limits are recorded in
 [the evidence](evidence/native-localization.json).
+
+## Integration on actual main93
+
+Merge `279228f` preserves original reviewed `b76ff383` on actual main93
+`100e723`. Only STATUS required reconciliation; all 40 accepted non-STATUS
+source/test/build inputs remain exact. The eight affected package suites pass
+**420 tests**, with two unchanged GPU cases explicitly ignored, plus all-target
+Clippy and compiler-disabled `static-module` checking. Strict SDK/templates,
+bridge, formatting and conventions pass; all 64 fresh contracts match, and the
+project player's resolved normal graph remains authoring-free.
+
+The integrated public host and freshly exported shipping player pass the same
+localization proof: authoring stays unchanged, checkpoint/journal reopen succeeds,
+and **three source/build-deleted replays** reproduce all 12 messages and 140-unit
+motion with identical PCM. The player SHA-256 is
+`40d8ba9eae954cf5bfd70579a48a3754c9217d0675ad20330dff2c87251e8703`.
+The ledger binds its raw build/export audits and proof/log hashes. A mistyped
+optional-feature validation command was retained as a command error, corrected
+to the existing feature and passed; it did not alter source or assertions.
+
+Fast development CI gates main integration. Full platform confirmation is still
+assigned to a subsequent frozen checkpoint; no new appearance, physical-device,
+performance or complete-session evidence is claimed.
