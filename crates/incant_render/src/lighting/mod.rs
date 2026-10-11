@@ -50,6 +50,20 @@ impl GpuLights {
         Ok(())
     }
 
+    pub fn stage(&mut self, plan: &mut scene::LightPlan, packed: &mut Vec<scene::Light>) {
+        self.directional = plan.copy_into(packed, &mut self.shadows);
+        self.local = packed.len() as u32 - self.directional;
+        self.positions.clear();
+        self.positions.extend(
+            packed[self.directional as usize..]
+                .iter()
+                .map(|l| glam::Vec3::from_slice(&l.position_range[..3])),
+        );
+    }
+    pub fn write(&self, queue: &wgpu::Queue, packed: &[scene::Light]) {
+        queue.write_buffer(&self.buffer, 0, bytemuck::cast_slice(packed));
+    }
+
     pub fn upload(device: &wgpu::Device, plan: scene::LightPlan) -> Self {
         let (lights, directional, shadows) = plan.finish();
         Self {
@@ -61,7 +75,7 @@ impl GpuLights {
             buffer: device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
                 label: Some("Immutable authored lights"),
                 contents: bytemuck::cast_slice(&lights),
-                usage: wgpu::BufferUsages::STORAGE,
+                usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
             }),
             directional,
             local: lights.len() as u32 - directional,

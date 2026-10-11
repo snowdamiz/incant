@@ -8,7 +8,7 @@ mod tests;
 use crate::{ResourceError, Result};
 use filter::{Filtered, LUT_SIZE};
 pub(crate) const MAX_SPECULAR_LOD: f32 = filter::SPECULAR_SIZE.ilog2() as f32;
-use incant_assets::{RuntimeAsset, RuntimeAssetData};
+use incant_assets_runtime::{RuntimeAsset, RuntimeAssetData};
 use std::{
     collections::HashMap,
     sync::{Arc, Mutex, OnceLock, Weak},
@@ -33,7 +33,7 @@ pub(crate) struct EnvironmentSystem {
     lut: wgpu::TextureView,
     sampler: wgpu::Sampler,
     default: OnceLock<Arc<GpuEnvironment>>,
-    cache: Mutex<HashMap<String, Weak<GpuEnvironment>>>,
+    cache: Mutex<HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuEnvironment>>>,
 }
 impl EnvironmentSystem {
     pub fn new(device: &wgpu::Device, queue: &wgpu::Queue) -> Self {
@@ -138,7 +138,7 @@ impl EnvironmentSystem {
             .lock()
             .map_err(|_| ResourceError::CacheLock("environment"))?;
         cache.retain(|_, value| value.strong_count() != 0);
-        let key = plan.source.info().fingerprint.clone();
+        let key = plan.source.version_id();
         let resource = if let Some(resource) = cache.get(&key).and_then(Weak::upgrade) {
             resource
         } else {

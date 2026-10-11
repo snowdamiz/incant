@@ -6,7 +6,7 @@ mod texture;
 use crate::{ResourceError, Result};
 pub(crate) use drawing::SpriteDraw;
 use incant_2d::{SpriteRenderer, SpriteSampling};
-use incant_assets::{RuntimeAsset, RuntimeAssetData};
+use incant_assets_runtime::{RuntimeAsset, RuntimeAssetData};
 use std::{
     collections::HashMap,
     sync::{Arc, Mutex, Weak},
@@ -15,8 +15,7 @@ use wgpu::util::DeviceExt;
 
 #[repr(C)]
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
-struct Vertex {
-    position: [f32; 3],
+struct Attributes {
     uv: [f32; 2],
     tint: [f32; 4],
     uv_bounds: [f32; 4],
@@ -24,6 +23,7 @@ struct Vertex {
     sampling: u32,
 }
 pub(crate) struct SpritePlan {
+    pub node: usize,
     pub source: Arc<RuntimeAsset>,
     pub sprite: SpriteRenderer,
     pub world: glam::DMat4,
@@ -41,14 +41,101 @@ struct Batch {
     count: u32,
 }
 pub(crate) struct SpriteScene {
-    vertices: wgpu::Buffer,
+    positions: wgpu::Buffer,
+    geometry: Arc<SpriteGeometry>,
+    updates: Vec<[f32; 3]>,
+}
+struct SpriteGeometry {
+    attributes: wgpu::Buffer,
     batches: Vec<Batch>,
+    placements: Vec<Placement>,
+}
+struct Placement {
+    node: usize,
+    start: usize,
+    local: Vec<[f64; 2]>,
+}
+impl SpriteScene {
+    /// Share frozen geometry and keep only mutable positions private to each
+    /// accepted/staged frame. No second sort, tessellation or texture upload.
+    pub(crate) fn staging(&self, device: &wgpu::Device) -> Self {
+        debug_assert!(!self.updates.is_empty());
+        Self {
+            positions: position_buffer(device, &self.updates, true),
+            geometry: Arc::clone(&self.geometry),
+            updates: self.updates.clone(),
+        }
+    }
+    pub(crate) fn stage(&mut self, input: &incant_render_data::SceneInput) -> Result<()> {
+        for placement in &self.geometry.placements {
+            let world = input.nodes[placement.node].world;
+            for (local, vertex) in placement
+                .local
+                .iter()
+                .zip(&mut self.updates[placement.start..])
+            {
+                let position = world
+                    .transform_point3(glam::DVec3::new(local[0], local[1], 0.))
+                    .as_vec3();
+                if !position.is_finite() {
+                    return Err(ResourceError::GeometryRange.into());
+                }
+                *vertex = position.to_array();
+            }
+        }
+        Ok(())
+    }
+    pub(crate) fn write(&self, queue: &wgpu::Queue) {
+        if !self.updates.is_empty() {
+            queue.write_buffer(&self.positions, 0, bytemuck::cast_slice(&self.updates));
+        }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn retained_storage(&self, other: &Self) -> (usize, usize, usize) {
+        // Actual buffer sizes and allocated vector capacities, excluding batch/
+        // placement metadata, textures and driver-side staging allocations.
+        let geometry_bytes = |geometry: &SpriteGeometry| {
+            geometry.attributes.size() as usize
+                + geometry
+                    .placements
+                    .iter()
+                    .map(|p| p.local.capacity() * 16)
+                    .sum::<usize>()
+        };
+        let shared = geometry_bytes(&self.geometry)
+            + if Arc::ptr_eq(&self.geometry, &other.geometry) {
+                0
+            } else {
+                geometry_bytes(&other.geometry)
+            };
+        let mutable = self.positions.size() as usize
+            + other.positions.size() as usize
+            + (self.updates.capacity() + other.updates.capacity()) * size_of::<[f32; 3]>();
+        (
+            self.updates.len(),
+            shared + mutable,
+            self.updates.len() * size_of::<[f32; 3]>(),
+        )
+    }
+}
+fn position_buffer(device: &wgpu::Device, positions: &[[f32; 3]], retained: bool) -> wgpu::Buffer {
+    device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+        label: Some("Sorted sprite positions"),
+        contents: bytemuck::cast_slice(positions),
+        usage: wgpu::BufferUsages::VERTEX
+            | if retained {
+                wgpu::BufferUsages::COPY_DST
+            } else {
+                wgpu::BufferUsages::empty()
+            },
+    })
 }
 pub(crate) struct SpriteSystem {
     globals: wgpu::BindGroupLayout,
     textures: wgpu::BindGroupLayout,
     pipeline: wgpu::RenderPipeline,
-    cache: Mutex<HashMap<String, Weak<GpuTexture>>>,
+    cache: Mutex<HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuTexture>>>,
 }
 impl SpriteSystem {
     pub fn new(device: &wgpu::Device) -> Self {
@@ -98,8 +185,11 @@ impl SpriteSystem {
         let pipeline=device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
             label:Some("Sorted sprites in shared HDR graph"),layout:Some(&layout),
             vertex:wgpu::VertexState{module:&shader,entry_point:Some("vertex"),compilation_options:Default::default(),buffers:&[wgpu::VertexBufferLayout {
-                array_stride:size_of::<Vertex>() as u64,step_mode:wgpu::VertexStepMode::Vertex,
-                attributes:&wgpu::vertex_attr_array![0=>Float32x3,1=>Float32x2,2=>Float32x4,3=>Float32x4,4=>Float32x2,5=>Uint32],
+                array_stride:size_of::<[f32;3]>() as u64,step_mode:wgpu::VertexStepMode::Vertex,
+                attributes:&wgpu::vertex_attr_array![0=>Float32x3],
+            }, wgpu::VertexBufferLayout {
+                array_stride:size_of::<Attributes>() as u64,step_mode:wgpu::VertexStepMode::Vertex,
+                attributes:&wgpu::vertex_attr_array![1=>Float32x2,2=>Float32x4,3=>Float32x4,4=>Float32x2,5=>Uint32],
             }]},
             fragment:Some(wgpu::FragmentState{module:&shader,entry_point:Some("fragment"),compilation_options:Default::default(),targets:&[Some(wgpu::ColorTargetState {
                 format:crate::frame::HDR_FORMAT,blend:Some(wgpu::BlendState::PREMULTIPLIED_ALPHA_BLENDING),write_mask:wgpu::ColorWrites::ALL,
@@ -120,6 +210,7 @@ impl SpriteSystem {
         device: &wgpu::Device,
         queue: &wgpu::Queue,
         mut plans: Vec<SpritePlan>,
+        retained: bool,
     ) -> Result<Option<Arc<SpriteScene>>> {
         if plans.is_empty() {
             return Ok(None);
@@ -138,7 +229,7 @@ impl SpriteSystem {
         let mut unique = std::collections::BTreeSet::new();
         let mut texture_bytes = 0_u64;
         for plan in &plans {
-            if unique.insert(&plan.source.info().fingerprint) {
+            if unique.insert(plan.source.version_id()) {
                 let RuntimeAssetData::Texture(source) = plan.source.data() else {
                     return Err(ResourceError::TextureSize.into());
                 };
@@ -149,7 +240,9 @@ impl SpriteSystem {
                 }
             }
         }
-        let mut vertices = Vec::new();
+        let mut positions = Vec::new();
+        let mut attributes = Vec::new();
+        let mut placements = Vec::new();
         let mut batches: Vec<Batch> = Vec::new();
         for plan in plans {
             let RuntimeAssetData::Texture(source) = plan.source.data() else {
@@ -186,13 +279,16 @@ impl SpriteSystem {
             };
             // Enforce the total bound before extending the CPU vertex vector or
             // allocating this sprite's GPU texture. Large regions add spans.
-            let vertex_bytes = (vertices.len() + geometry.len()) * size_of::<Vertex>();
+            // Preserve the existing aggregate geometry limit and accepted scene
+            // capacity even though positions and attributes now use two streams.
+            let vertex_bytes = (positions.len() + geometry.len())
+                * (size_of::<[f32; 3]>() + size_of::<Attributes>());
             if vertex_bytes > 128 * 1024 * 1024
                 || vertex_bytes as u64 > device.limits().max_buffer_size
             {
                 return Err(ResourceError::BufferSize("sprite geometry").into());
             }
-            let key = plan.source.info().fingerprint.clone();
+            let key = plan.source.version_id();
             let texture = match cache.get(&key).and_then(Weak::upgrade) {
                 Some(texture) => texture,
                 None => {
@@ -206,7 +302,7 @@ impl SpriteSystem {
                     texture
                 }
             };
-            let start = vertices.len() as u32;
+            let start = positions.len() as u32;
             let [x, y, w, h] = region;
             let tw = source.texture.width as f64;
             let th = source.texture.height as f64;
@@ -221,6 +317,13 @@ impl SpriteSystem {
                 [f64::from(x), f64::from(y), f64::from(w), f64::from(h)]
             }
             .map(|v| v as f32);
+            if retained {
+                placements.push(Placement {
+                    node: plan.node,
+                    start: positions.len(),
+                    local: geometry.iter().map(|v| v.position).collect(),
+                });
+            }
             for local in geometry {
                 let position = plan
                     .world
@@ -229,8 +332,8 @@ impl SpriteSystem {
                 if !position.is_finite() {
                     return Err(ResourceError::GeometryRange.into());
                 }
-                vertices.push(Vertex {
-                    position: position.to_array(),
+                positions.push(position.to_array());
+                attributes.push(Attributes {
                     // Nearest uses this slot as a flat integer source base;
                     // linear retains its original normalized texture UVs.
                     uv: local.base.map(|v| v as f32),
@@ -240,7 +343,7 @@ impl SpriteSystem {
                     sampling: u32::from(sprite.sampling == SpriteSampling::Linear),
                 });
             }
-            let count = vertices.len() as u32 - start;
+            let count = positions.len() as u32 - start;
             let sampling = usize::from(sprite.sampling == SpriteSampling::Linear);
             if let Some(last) = batches
                 .last_mut()
@@ -256,15 +359,19 @@ impl SpriteSystem {
                 });
             }
         }
-        let bytes = bytemuck::cast_slice(&vertices);
-        if bytes.len() as u64 > device.limits().max_buffer_size || bytes.len() > 128 * 1024 * 1024 {
-            return Err(ResourceError::BufferSize("sprite geometry").into());
-        }
-        let vertices = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-            label: Some("Sorted sprite vertices"),
-            contents: bytes,
+        let attributes = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+            label: Some("Immutable sprite attributes"),
+            contents: bytemuck::cast_slice(&attributes),
             usage: wgpu::BufferUsages::VERTEX,
         });
-        Ok(Some(Arc::new(SpriteScene { vertices, batches })))
+        Ok(Some(Arc::new(SpriteScene {
+            positions: position_buffer(device, &positions, retained),
+            geometry: Arc::new(SpriteGeometry {
+                attributes,
+                batches,
+                placements,
+            }),
+            updates: if retained { positions } else { Vec::new() },
+        })))
     }
 }

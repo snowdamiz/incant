@@ -9,6 +9,7 @@ mod physics;
 pub mod physics_validation;
 mod render;
 mod transform;
+mod visual_asset;
 
 /// Stable project/runtime identifier; allocation and reference validation belong
 /// to the boundary that constructs or loads the data.
@@ -37,3 +38,4 @@ pub use lights::{DirectionalLight, DirectionalShadows, PointLight, SpotLight};
 pub use physics::{AngularVelocity, BodyMotion, Collider, RigidBody};
 pub use render::{EnvironmentLight, MeshRenderer, TextureUsage};
 pub use transform::{Transform, Velocity};
+pub use visual_asset::{VisualAssetKind, VisualAssetRef};

@@ -7,7 +7,7 @@ publish.workspace = true
 
 [dependencies]
 incant_2d.workspace = true
-incant_assets_runtime.workspace = true
+incant_assets_runtime = { workspace = true, features = ["visual"] }
 incant_nav.workspace = true
 glam = "0.32"
 symphonia = { version = "=0.6.0", default-features = false, features = ["wav", "pcm", "ogg", "vorbis"] }
@@ -27,4 +27,5 @@ percent-encoding = "2.3"
 tempfile = "3"
 
 [dev-dependencies]
+incant_types.workspace = true
 incant_cmd = { workspace = true }

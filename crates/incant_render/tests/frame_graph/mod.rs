@@ -4,6 +4,7 @@ use crate::{
     hdr_output::{read, save, texture},
     test_support,
 };
+use incant_render_authoring::RendererAuthoringExt as _;
 
 #[test]
 #[ignore = "requires a native GPU; run by all desktop workflows"]

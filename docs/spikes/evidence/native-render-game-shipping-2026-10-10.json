@@ -1,0 +1,522 @@
+{
+  "passed": true,
+  "target": "aarch64-apple-darwin",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "codegen": {
+    "incant_render_game": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_render_native": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_render_data": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_input": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_script": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_physics_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "rapier3d": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_assets_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_audio_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_game_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_game_player": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "lto": "fat",
+      "debuginfo": "2",
+      "split-debuginfo": "packed"
+    }
+  },
+  "symbol_identity": {
+    "format": "Mach-O/dSYM",
+    "uuids": {
+      "arm64": "b5b6eb94-4cf9-3e12-b689-a674a41d934a"
+    }
+  },
+  "player_bytes": 4521424,
+  "player_sha256": "b6e16b305730886fd47000a1a4a9cb37337ffe342002259bf2028def7e716e1b",
+  "script_metadata": {
+    "build_id": "3e7b4be4fb638cf3ec67ddadbf7647130c0c2cfc7a8df2bcb5b2bb59d1474a8e",
+    "bytecode_bytes": 2390,
+    "bytecode_sha256": "9ee518bee91197aef63f159d764106f7e1a04b4f6075a7d38c2b60351663e9cd",
+    "debug_line_tables": true,
+    "embedded_source": false,
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "format": 1,
+    "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+    "source_map_sha256": null,
+    "source_name": "embedded-game.js",
+    "source_sha256": "0c6bc11c956ee002da8bb2ceb466895ac627787183d2735cc895d7c8530e29d1",
+    "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+    "target": "aarch64-apple-darwin",
+    "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+    "wrapper_prefix_lines": 3
+  },
+  "source_compiler_symbols_absent": true,
+  "dynamic_source_routes_rejected": true,
+  "headless_sha256": "6c6d8eafec3fe097e0264fef58b1ce3971e9c512a0881cf695634657ae09ea45",
+  "cook_sha256": "17f796a11805a148dfac82746d7b3e7b051abfb766ac9b1d602a8b6ddd97f962",
+  "audio_example_sha256": "54c849fda78dea7969699e31cc4782a0733e2de0a388e373320db92ee1133606",
+  "fixture_tool_sha256": "c4db250e61e36294fe1034068f43aec46355fc4a43ceab5e788a47557b819dab",
+  "public_import": {
+    "asset": {
+      "id": "01M4M59TKBVVCA58VFBCVFA09S",
+      "kind": "audio",
+      "name": "tone",
+      "path": "tone.wav",
+      "sha256": "4a24dd0240956f6ad00cd68d2f816e25f6662a170b6a0a92ae86a0a10aa5176e"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+      "channels": 2,
+      "dependencies": [
+        {
+          "path": "tone.wav",
+          "sha256": "59aca4ec1400bba63489f30c73a82fb29e82c83a923fcb468fa1ba0176dab6e3"
+        }
+      ],
+      "duration_seconds": 0.5,
+      "frames": 24000,
+      "sample_rate": 48000
+    },
+    "revision": 1
+  },
+  "public_model_import": {
+    "asset": {
+      "id": "01M4M59TKZ59AHXY0KEA3K1WZT",
+      "kind": "model",
+      "name": "tri",
+      "path": "tri.gltf",
+      "sha256": "eee5c6bca733d77735113773adbddd0eca28e08f96dd6c2d5a767be3321c00a4"
+    },
+    "cache_hit": false,
+    "changed": true,
+    "details": {
+      "dependencies": [
+        {
+          "path": "tri.bin",
+          "sha256": "d8b87038ed2ace74ed183166f6b0a541eab77f7184d50e65edc4bca5ccb5445a"
+        },
+        {
+          "path": "tri.gltf",
+          "sha256": "34ef92ca7a431a27baf00c0291a5d30027cdf03e4e5243adc0a38ea8c863d722"
+        }
+      ],
+      "meshes": 1,
+      "textures": 0,
+      "vertices": 3
+    },
+    "revision": 2
+  },
+  "cpu_render_input": true,
+  "gpu_submitted": false,
+  "project_hash_before_delete": "22958f6abf6bc22c84e9bd32c2177636d53ce0f7562ebd00a6743f2349c3320e",
+  "authoring_and_build_storage_deleted": true,
+  "removed_scope": "authoring project/WAV/glTF/bin/journal/script source and fresh Cargo storage",
+  "retained_runtime_inputs": [
+    "binary scenes",
+    "clips.bin",
+    "cooked PCM/manifests",
+    "startup input.json/actions.json",
+    "cooked model payloads/manifests"
+  ],
+  "repeat_exact": true,
+  "recorded_ticks_per_process": 120,
+  "audio_processes": 8,
+  "results": [
+    {
+      "fixture": "static",
+      "rate": 44117,
+      "report": {
+        "frames": 88234,
+        "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000004",
+          "camera_position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            2.9500136375427246,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "tick": 120,
+          "topology_generation": 0
+        },
+        "sources": [
+          {
+            "id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "physics": {
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "sleeping": false,
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "tick": 120
+      },
+      "rms": 0.0553028731136091,
+      "early_balance": 109.52215792219184,
+      "late_balance": -115.71745094939368
+    },
+    {
+      "fixture": "static",
+      "rate": 48000,
+      "report": {
+        "frames": 96000,
+        "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000004",
+          "camera_position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            2.9500136375427246,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "tick": 120,
+          "topology_generation": 0
+        },
+        "sources": [
+          {
+            "id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "physics": {
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "sleeping": false,
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "tick": 120
+      },
+      "rms": 0.055305097447639784,
+      "early_balance": 108.70557752668313,
+      "late_balance": -114.8314969751412
+    },
+    {
+      "fixture": "stream",
+      "rate": 44117,
+      "report": {
+        "frames": 88234,
+        "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000004",
+          "camera_position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            2.9500136375427246,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "tick": 120,
+          "topology_generation": 0
+        },
+        "sources": [
+          {
+            "id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "physics": {
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "sleeping": false,
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "tick": 120
+      },
+      "rms": 0.05530287311397527,
+      "early_balance": 109.52215791799678,
+      "late_balance": -115.7174509755776
+    },
+    {
+      "fixture": "stream",
+      "rate": 48000,
+      "report": {
+        "frames": 96000,
+        "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+        "render_input": {
+          "binding_generation": 0,
+          "camera": "00000000000000000000000000000004",
+          "camera_position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "decoded_payload_bytes": 156,
+          "first_model_position": [
+            2.9500136375427246,
+            0.0,
+            0.0
+          ],
+          "gpu_submitted": false,
+          "mode": "cpu-only",
+          "model_count": 1,
+          "tick": 120,
+          "topology_generation": 0
+        },
+        "sources": [
+          {
+            "id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "physics": {
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ],
+              "sleeping": false,
+              "velocity": [
+                3.0,
+                0.0,
+                0.0
+              ]
+            },
+            "position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "tick": 120
+      },
+      "rms": 0.055305097447639784,
+      "early_balance": 108.70557752668313,
+      "late_balance": -114.8314969751412
+    }
+  ],
+  "rejected": [
+    "accepted-script-failure",
+    "wrong-recording-clock",
+    "invalid-input-packet",
+    "wrong-clip-fingerprint",
+    "unknown-cooked-version",
+    "oversized-startup-actions",
+    "manual-input-route",
+    "incant_game_player-camera-only",
+    "native_scene_audio-camera-only",
+    "incant_game_player-manifest-only",
+    "native_scene_audio-manifest-only",
+    "late-camera-removal",
+    "feature-default-stays-strict",
+    "missing-model-cache",
+    "missing-camera",
+    "malformed-camera"
+  ],
+  "spatial_refusals": [
+    {
+      "player": "incant_game_player",
+      "fixture": "camera-only"
+    },
+    {
+      "player": "native_scene_audio",
+      "fixture": "camera-only"
+    },
+    {
+      "player": "incant_game_player",
+      "fixture": "manifest-only"
+    },
+    {
+      "player": "native_scene_audio",
+      "fixture": "manifest-only"
+    }
+  ],
+  "plain_v1_controls": 2,
+  "existing_output_preserved": true,
+  "size_delta_from_audio_host_2885984": 1635440,
+  "size_delta_from_physics_script_player_3941816": 579608,
+  "size_comparison_scope": "whole executable graphs, not an isolated feature cost or performance gate",
+  "device_output": false,
+  "session_saves": false,
+  "phone_performance_gate": false,
+  "failure_semantics": "Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file.",
+  "total_process_launches": 27,
+  "scope": "CPU-only native retained render input; no GPU submission",
+  "scoped_release_tests_doctests": 75,
+  "tools_tests": 40,
+  "default_feature_binary_refusals_verified": true,
+  "source_hashes": {
+    "crates/incant_game_player/Cargo.toml": "c19f104ba567d16052d0b616c9a8f2912388dfdc982d6c222c803b6702d16050",
+    "crates/incant_game_player/src/main.rs": "933333759a9484a1f5788701c9a16c39af74be61cbdd1ecebca8e3fe81c9db35",
+    "crates/incant_game_player/src/session.rs": "7e4ee8b0fad0e4f5c1973500295906a8c8f44d64230883b2612b7d7e4bee3546",
+    "crates/incant_game_player/build.rs": "2005589c1fd00b55bb5900569333bf37bcded613c7452d3271d474ee3ef9fe9d",
+    "tools/probes/native-game.py": "4849f553391ffc6f745c3bea235438dfd530c6d021571dd50ead9e4226731c64"
+  },
+  "check_log_hashes": {
+    "/tmp/incant-render-game-union-tests.log": "ca4046530d93db4294ea6912e99b26e92941af99125d41b403d1f9928de9b0dc",
+    "/tmp/incant-render-game-union-clippy.log": "a946b01eccd1ca39f68ac243d25888df12e550c7f5fec0dd70d6383a448c7660",
+    "/tmp/incant-render-player-default-clippy.log": "9a39b0767020b9ccde5f1ab37b54dc3864c0da290faa1a17799972261e362faf",
+    "/tmp/incant-render-game-tools.log": "7e23189aae9090946e270edf1f13c20db9afb6c4f891231347caa27269609bd0",
+    "/tmp/incant-render-player-default-graph.log": "acce202b522c995711e478d2cc1b1cae7ee63b6823529207170e92071e62a697",
+    "/tmp/incant-render-player-feature-graph.log": "07085d2b56c5db7e8711727c26f798e7aed503c7c064cba25cd49dac95d4a015"
+  }
+}

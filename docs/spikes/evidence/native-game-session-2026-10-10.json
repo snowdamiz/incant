@@ -1,0 +1,603 @@
+{
+  "passed": true,
+  "base": "3c368ed",
+  "integrated_checkpoint": "c0a5eca31d9b4561b45220038b75e6b8ad4829e7",
+  "reviewed_spatial_commits": [
+    "274458c",
+    "0a03bd7",
+    "4816f5c",
+    "ad49da5"
+  ],
+  "integration_conflicts": "STATUS only; both entries preserved. No core source conflict resolution.",
+  "checks": {
+    "scoped_release_tests": 146,
+    "workspace_release_tests": 504,
+    "workspace_gpu": 56
+  },
+  "new_game_behavior_tests": 9,
+  "python_tool_tests": 40,
+  "device_feature_compile_only": true,
+  "schema_sdk_bridge_unchanged": true,
+  "source_hashes": {
+    "Cargo.lock": "25520b384005bc3dad76658576351fc3260d3d696ce0757e2bdb5b5b65b9f541",
+    "Cargo.toml": "fdc683c42ce56bdbd6403fcf7ef791f3db5690289c9be0a5f1eb2d2b8b04aef3",
+    "crates/incant_assets_runtime/Cargo.toml": "a2a3936c1c7b86ea9644d916a2cb7cacf0a7d8c842c060604c7cea5faf9d0b54",
+    "crates/incant_assets_runtime/src/audio.rs": "fb5c8532178fc959e122457aa9c29c9c7e6dce7f1c36a789606d15738d0c46ac",
+    "crates/incant_assets_runtime/src/ktx.rs": "c5de6664d9f0b6123fae37cb571c6d805cb3995606a20a5692cfbd4e70489d00",
+    "crates/incant_assets_runtime/src/lib.rs": "901b7920d41365d14c7aa1f4dccd99325e5744e57b79a947de0a703503ad2e8f",
+    "crates/incant_assets_runtime/src/material.rs": "ea4542f0817cdbf9f8defa80675bcc4e900f62b36454b687033e8fdff11469fe",
+    "crates/incant_assets_runtime/src/mesh.rs": "e0bb90ac0624d09d4446d0f7c2cfaa9775d9283849273f31a5d6d8444f33bc52",
+    "crates/incant_assets_runtime/src/model.rs": "e329026937fd9f0ff7c542392d6d85bb78a8195d329bfc2228340623460cb5b1",
+    "crates/incant_assets_runtime/src/model_node.rs": "b88bc3c45e3a1a1da61273fba6990d95d90e7254fc160e2baf183f0bb37f1118",
+    "crates/incant_assets_runtime/src/model_textures.rs": "8316903dad900c1c3a92a4d03f84b7c78ffa13d9ee12091b5b0555af205b41ec",
+    "crates/incant_assets_runtime/src/texture.rs": "5d33715786964cabed9cf8d8076f8bc6b14f48dbe7f588bdaba3661d05a42f2f",
+    "crates/incant_assets_runtime/src/texture_cache.rs": "540ed0a242d5f9259bedb02fc68da83719d44d74696c713288b975542e333a11",
+    "crates/incant_assets_runtime/src/version.rs": "702acc673f7c55c5725fc6c1fec7eb7c4646615736d610a264209bc5142deb35",
+    "crates/incant_assets_runtime/tests/cooked.rs": "d1ede06786a210fb4a5330e791151f52290040cab2af5b7adc61649f0d70aa00",
+    "crates/incant_assets_runtime/tests/support/mod.rs": "12b146bd25a41549fe66820f647e4d810f7ae82a6964fe0d2e94a69ec9fa1e2a",
+    "crates/incant_assets_runtime/tests/visual_readers.rs": "000732cbfe419925cce558b443b422748fb8ad233e8541adc1ab7aa41d192ce4",
+    "crates/incant_audio_runtime/Cargo.toml": "c0f5643a950aa754e2da13cb6ec6cb840ece82579529dc3abc844123045d92c3",
+    "crates/incant_audio_runtime/examples/cooked_audio.rs": "60428c8da63065d10df26dd805a86665fa42a70f83e87d5f591e1ce15dbdddd8",
+    "crates/incant_audio_runtime/examples/native_scene_audio.rs": "3d8efe7c030f95a8ff0f884be069f7799f99e4ae127bdb7e892e704c6db3efa9",
+    "crates/incant_audio_runtime/src/config.rs": "eb22b9ca8803ef14534c4bd68dfb17d0f96c10ad386cd8f4a9d89dd3c6723f7e",
+    "crates/incant_audio_runtime/src/lib.rs": "754e8deb9221a5bde44900a9d8b799fcedcc71d35e88e9328e0471b030240d93",
+    "crates/incant_audio_runtime/src/mixer.rs": "c2334bf76e6f50c70a7e80113be0bf369f7ada2135b4bf0749b72e8696113d6b",
+    "crates/incant_audio_runtime/src/offline.rs": "df823c9040b925d2d97648abc0c22ea2944b171d43ede70cd6449eb99b874857",
+    "crates/incant_audio_runtime/src/offline_stream.rs": "bcb5d073288778d694857394fdb11ff350cd2e8b79f3d7acd6fd231d0d30ecc5",
+    "crates/incant_audio_runtime/src/scene/binding.rs": "9c88b5ff075ed110838bb553705332e1ea745fff64b9f079f0f1b3444ea403c7",
+    "crates/incant_audio_runtime/src/scene/prepare.rs": "3facf2fe479af79cf7ac80ea858cadbd2fd62d0cb879926c9adffdd54a332867",
+    "crates/incant_audio_runtime/src/scene.rs": "75bc0e6649592d90f8e938e04db4774aca5ec442bc5604942a06dbd7b6c4e0da",
+    "crates/incant_audio_runtime/src/stream.rs": "5c95e5df733637bb7c5f41f807bdbe0977435305b8bbb5977b72e4484c6d16f4",
+    "crates/incant_audio_runtime/tests/cooked.rs": "075a2735389e78eaa5784d16e6858fa6b0be64964046f716113393645fd76a7e",
+    "crates/incant_audio_runtime/tests/scene.rs": "4e0aceb645120235583633a08f1e9706d2a69b4d95abad8d10a65547c8e83d51",
+    "crates/incant_cook/Cargo.toml": "e00d74ac8f43d6d8e40f34618af2c10f0ce60ccb0e789337e9154cf36b781e30",
+    "crates/incant_cook/examples/cook_scene.rs": "e9edb5d97088a266593e5a1cc3a7ed89596ff87b5b221a89adf46210c710ca16",
+    "crates/incant_cook/src/lib.rs": "d5d5680843e7ec9f2a67698d0e2d2aec83e5369ec098335d509b5d42231b3418",
+    "crates/incant_cook/src/scene.rs": "6a3785f4baebaf0f7adfdb98fddbc191f0812e19ee586b80be4dd3dd51753a3c",
+    "crates/incant_cook/src/script.rs": "a1eee1f00e96f4badc5f94dacbbf5a2fbd7ee0bce52ac91c9fb090f0a52a7382",
+    "crates/incant_cook/src/spatial.rs": "12b3c1f3711a0c5b65d8fcc50915dde6f8ed8edd83c961828d89339a4b7472db",
+    "crates/incant_cook/tests/runtime.rs": "848447531ef84c5c9cfc4a0c6dcb5c47e6e152417cab602c4fa05ac33959962d",
+    "crates/incant_cook/tests/scripts.rs": "1cf01a02707c9617f9d2b07ede894ee5ca4065eb35fa67e499df818c46697dc8",
+    "crates/incant_cook/tests/spatial.rs": "a5e512342942c5127ab613ee0776df97046d8f8d683e2c0337b3710401c6b3fa",
+    "crates/incant_game_player/Cargo.toml": "35a9907dbd4bb70c4594384f6879e2a665725d5c9000daed048a5d814850de17",
+    "crates/incant_game_player/build.rs": "2005589c1fd00b55bb5900569333bf37bcded613c7452d3271d474ee3ef9fe9d",
+    "crates/incant_game_player/fixtures/game.js": "466a31676cda2862a9693ab76bc659be5ac3a3f7bece0c740d2024b7820dd90e",
+    "crates/incant_game_player/src/main.rs": "174cf891c907583f1d0e114879d5eb2227a0befd2c1e13b2b7b96e5279c8ce20",
+    "crates/incant_game_runtime/Cargo.toml": "e9bf789358eab7903f4d2638a2afbfc1e34a1b6f685075123876710baa39b8a4",
+    "crates/incant_game_runtime/examples/no_renderer_fixtures.rs": "a47c6d9b1d53b5fc66b7e533511a9f37b8e1db6485992da08c7b16ccfe42a9e9",
+    "crates/incant_game_runtime/src/lib.rs": "e6f52dc467d325161ef95af31a5bd0e9b7d4e069e2e9e71a2da9caba56bfc029",
+    "crates/incant_game_runtime/src/offline.rs": "0b23c4ee63f2957a3edbb1253c8058d5c4ac9627d97a656025b444cec39c124f",
+    "crates/incant_game_runtime/tests/session.rs": "4269e312001da51ee9ec14fc4640ce497e8b9140451ecdecb2a8faab25ec4b69",
+    "crates/incant_game_runtime/tests/support/spatial.rs": "84674da6e34403873f9410c579f1602752e6d42ab172912744e22d5bf167b1f5",
+    "crates/incant_input/Cargo.toml": "e642b20236fceb732e03a59fdf95cfb14f68529a3e0b83b240b028ee87e9430f",
+    "crates/incant_input/examples/actions_bench.rs": "0754786e1c6de87b982afd232f8d7e59a3ec5e2054a0890f2c02916c71f129f4",
+    "crates/incant_input/src/actions.rs": "37105276f6143e0fd57124465440fb3c95f4fc25c7328e0deac29939e5013648",
+    "crates/incant_input/src/gestures.rs": "0542f895ca70ef7a66ad5d2b4d00fcec6788f0177d6a572f64ce82f8f6b2d572",
+    "crates/incant_input/src/lib.rs": "fe8df643774b1df9625c884daa605e6d1fead916245a5773403d69d7364fbae3",
+    "crates/incant_input/src/recording.rs": "6450d1313e42ea59df3e348056f484724c82148f921279e6710df411a3f9a22a",
+    "crates/incant_input/src/types.rs": "8b25d8b9b347ed601934683fc9b2abbd069295d0b3676d000eadd53e7d349cd1",
+    "crates/incant_input/tests/actions.rs": "f2bfe3e68198eac15807f413b4f4f45d94a443df06db81ce232e995d623efcf0",
+    "crates/incant_input/tests/devices.rs": "b59241fb2236e82b614cdc237bd2b2ec9bc34bde63b6fe9831f7a026399c9ef6",
+    "crates/incant_input/tests/gestures.rs": "ee9e38d3fe6ee8b2fb1bbab17023d352e11662216ab30839a0277fe93618d305",
+    "crates/incant_input/tests/recording.rs": "6c8815039d947cfc46ab33b12cc2d86fb3740e151024daa42344fa4c0c22a854",
+    "crates/incant_physics_runtime/Cargo.toml": "03cbdc41344fade42197ad457b27e00f0f3f537accb7935d77afd52173128885",
+    "crates/incant_physics_runtime/src/character.rs": "a46c7ece3103ce7c8ddbd80d60b1668782028e93c626b655d6f4bab175672a92",
+    "crates/incant_physics_runtime/src/character_queries.rs": "c7548822eede48b93ab6e822e1da563f2c319a606a491f06159c61a95dd7e3bd",
+    "crates/incant_physics_runtime/src/lib.rs": "6f6195522e75587d678a9e73dc264802d88fd19f8bf02003425c8f5b0dcb506e",
+    "crates/incant_physics_runtime/src/queries.rs": "94e7c8aa5d56977036e4161f8637b5e8221e95312c4df8fe3f9b81b382986668",
+    "crates/incant_physics_runtime/src/shapes.rs": "17fc238d7cbc9ab5ffc6eba0e6a59e55d8d29f1f1e29d587927a7f1ce2a3eb87",
+    "crates/incant_physics_runtime/tests/typed.rs": "99ccbb278d09d655e65c3123efd2c13e12cb112f77a10d666837aa2e9a71e2bb",
+    "crates/incant_runtime/Cargo.toml": "fa06c43719120dc282c59b7ab84ccb0e76d3fcd87c49ff5b41fb24d93cc665ea",
+    "crates/incant_runtime/examples/run_scene.rs": "ba5d462927f1b14d3e7dee114cf3f2b1a105e0cd33168369d3a16bce87843e5b",
+    "crates/incant_runtime/examples/save_world.rs": "7ffcbae5f2f92d9405d0f14512dbb42dd8dccb69f77820045c66726474a07ef3",
+    "crates/incant_runtime/src/audio.rs": "f0e4b40768a3b3aa4bef5e50d8e4dcb531225ff7937b0d9bc7b358a4ead9dc96",
+    "crates/incant_runtime/src/audio_binary.rs": "1121b4cc9151d929bb112f40625bb7620ac12fd9dda52eabe529ac5ca80d36ce",
+    "crates/incant_runtime/src/binary.rs": "8c7a8ec05fa2dbcf3f0e692ebc1ee8f70afd50d2eee3dbca3c536176b975f255",
+    "crates/incant_runtime/src/columns/tests.rs": "96e0caa0aace60e87095d3d22651aba5345db828d220b2dfc0bfb15f68405ad8",
+    "crates/incant_runtime/src/columns.rs": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66",
+    "crates/incant_runtime/src/commands.rs": "f573f62a0d91222fe90c76eba7918ab1c95009e34731f1f633fdad61529dd60d",
+    "crates/incant_runtime/src/hierarchy.rs": "242b534ad778bf4a2bb3aa67db0a0e1f620566a6a15650abbfda9e61a24224bc",
+    "crates/incant_runtime/src/lib.rs": "accd44c2d3f5b5a97295980500bf53e5b0dc75794b0a0858e92eb86853dc2cfa",
+    "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+    "crates/incant_runtime/src/physics_binary.rs": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822",
+    "crates/incant_runtime/src/save.rs": "aead81b02ea23307f8e1632bba6a41b28412cb5d535fcee56d18e5d5c51dfae2",
+    "crates/incant_runtime/src/scene.rs": "eb99228ef410492742b8e0a628a4527a3e825d0e20939e1456b48442cdd437b6",
+    "crates/incant_runtime/src/spatial.rs": "3286909d0497c622063a2a456fa49dfd1667f57679df8bb23881e89e5e437517",
+    "crates/incant_runtime/src/spatial_binary.rs": "f08067177a8afd20ae2aab37f72de067a4d57c13d6d031cbc6eb6e4e71e33d60",
+    "crates/incant_runtime/src/spatial_commands.rs": "c1a003b8460d3667cdfcad95a639bc7a5bea8887b11ceffee2b9ff4e0cafe087",
+    "crates/incant_runtime/src/spatial_view.rs": "edac1dadfeedea65846b4bb369961fb9a49e521320feb8ae736bc27a612747de",
+    "crates/incant_runtime/src/world.rs": "5d002f4a1cdd5164ac97318a39a75e8985f247f6c372827b429b35ce7421bf41",
+    "crates/incant_runtime/tests/audio.rs": "0de8804b3dab49a345b4dc20d9d7390dd4d9ce3e15072fe6baed600c0bc0f3be",
+    "crates/incant_runtime/tests/columns.rs": "8c86e7033b7b5c7ca9171a5a2587dfbff088d5b6bbd151d49bb03da7a3fc82c3",
+    "crates/incant_runtime/tests/numeric_boundaries.rs": "2d246f6b4bc3a0bb28e0dbeae072b2ad892235aa5f0a30ebb8b462c48d13741f",
+    "crates/incant_runtime/tests/physics.rs": "647d01144e26a5778918e96a42242077b4984719b70833807817ea2f398e76b1",
+    "crates/incant_runtime/tests/saves.rs": "be5a4e056f90574837c83ee8a5fe812267b5ed02198480187dabd4729e5d6458",
+    "crates/incant_runtime/tests/scenes.rs": "9f563824789de2357d31beeba034f448505841211d2fa72fa0729e74c25c54ea",
+    "crates/incant_runtime/tests/spatial.rs": "15028c8138cc29b24292b3643572b3c3bcfbb50e59eab672a44448da33864ee2",
+    "crates/incant_runtime/tests/structural.rs": "ac002e67cbee6ea7523b30ec94959d5dc2a4e168853bbbe66aa697afcc03cd9b",
+    "crates/incant_script/Cargo.toml": "173d1cddece0e58bb166779d08fa4fcc7cfd422a95425b9f96568aab4842df5a",
+    "crates/incant_script/build.rs": "0daf6b0b92a8f677343cffc099ea8abb0eb8dd804dd2885b4248cfe1abe4b753",
+    "crates/incant_script/examples/native_bulk.rs": "96ab4c5a1679c7849c81b74241d4c8b6c5fed180f0ddb4282b119c9ea00218b3",
+    "crates/incant_script/src/artifact.rs": "04f0c61be9cb6c7ed88f9d581a64846515c4f1a384966cbb60dcee52e2e8eaf1",
+    "crates/incant_script/src/budget.rs": "53619776fa5bfd2367b9aa2eac7fb9d028f17bb1bd9463a2e475cbe7ac4311e8",
+    "crates/incant_script/src/commands.rs": "4f40712d27ce7c47bc28b4fa251951ebf03f5c3c92f63d8209209758ecceeb41",
+    "crates/incant_script/src/compiled.rs": "0bdd5f4b97fe29be7342c50046c53e02189441bf5e2e383dc7a858640114d3c4",
+    "crates/incant_script/src/compiler.rs": "044c72191c4e0b4aab962dee081c664164e1f9ca4403479fa341a5a92c49e1c0",
+    "crates/incant_script/src/diagnostics.rs": "48264dd946e35b1fda082a892fd890bf05f7060b4b85c85dc703cf693d3b791e",
+    "crates/incant_script/src/harden.js": "b7344caebab6142521fd8c1c1c5fb9c38ef3d3d5c471d12d7f0516b065fb6469",
+    "crates/incant_script/src/input.rs": "8fe6884e365b41f930073d2efa28badcaf9e975b7743585389437b6fff5c32f8",
+    "crates/incant_script/src/input_tests.rs": "5ae6cf7c5d4c0841ede5245c57fa5aa17ae5a1a9888ab1703813abfb80d591b6",
+    "crates/incant_script/src/lib.rs": "ae761c29a1d0ea8ee2042e8a579bb5134491ccfec5049a3b84b95218141982f7",
+    "crates/incant_script/src/loan.rs": "2ae499a4215bda9bd3192d4bad0bbcf1de292163558e9c8d7c6dc7068716a2ae",
+    "crates/incant_script/src/session.rs": "4f0511201946a290978ca9e5f776295e10fce8d90573e421c537e183b6df8d69",
+    "crates/incant_script/src/session_tests.rs": "8c65e0ba4ce7c9a2e1ab7207c869e21f55e822fd3e14cf711513bb2d97de7575",
+    "crates/incant_script/src/structural_tests.rs": "c5c0de0465ad178344571791aa0bd25730272be837d7c314f9cccdd4b3bb787f",
+    "crates/incant_script/src/synchronous.rs": "d95cbe3a1ab2ff75731f85d4c4be74c7456bb32315f244ee314f06019c3a6c69",
+    "crates/incant_script/src/tests.rs": "e298f443a29a59dd30c3bc8ecc9ec8e9497ceba8f1c413873901463656948b50",
+    "crates/incant_script/tests/spatial.rs": "fd4f31f03d78587f4667cc6c65168b2f030a98a225292d44f69d4cca79e21b21",
+    "crates/incant_types/Cargo.toml": "ae094bd227e3e585de808ad18da99b02cc7bc8282720cffeb6d3a8b3275c5e9c",
+    "crates/incant_types/src/audio.rs": "31a41005ed056423ce3c7d3882429550d6383a58a1ea5799e698c25d150a3feb",
+    "crates/incant_types/src/camera.rs": "28eaace0a774685b9bc72962480520a8646fca4310b5eb1d3ac995444dfb0de2",
+    "crates/incant_types/src/collider_shapes.rs": "dc2efc4d76e8671b03bc38eb92e8db0161f4613417772644028e0b4ecb958979",
+    "crates/incant_types/src/lib.rs": "4e460ff3803f1ef07682439da8a6c3bec87a044abd2bbfd0e1dc565e9b38dcba",
+    "crates/incant_types/src/lights.rs": "c69e1a4f9b682f1f5bf267d57502387b9f8e6b4a42c32c752c0176f43c9ac935",
+    "crates/incant_types/src/physics.rs": "ec1dd966a85676197f7283133be1b274666135a8cfe6403a477a130a6a43769d",
+    "crates/incant_types/src/physics_validation.rs": "c8a2e2e8b77020ea2ae39d047a9be13081003ef6cf236ca292a52aed4f4a3a98",
+    "crates/incant_types/src/render.rs": "e02d42ddcdbcdeb607c4ae307f30b02805adae2b68cd1fadee2eaed603f3d881",
+    "crates/incant_types/src/transform.rs": "b22948c2013800b8b76d1d18693e7a406358e2d554aad01a1e6d1f87adccf08c",
+    "crates/incant_types/src/visual_asset.rs": "6dae6f3e5a2f98dd208616f01b1a84dfcc5588cebda819b07c52421e24341791",
+    "tools/probes/native-game.py": "a01512fc6f04ef7b94cba81a546e80fefc99f4e627957b3e08b7d406b960d98a",
+    "tools/shipping.py": "4defaadd378754f028f1286d5685de68d2ab3ac81daa3e81eafa6ba216c49f9a",
+    "tools/shipping_symbols.py": "de7d4b0c5523a7b2d281ce8713acb899997726c1144199e7ea8d7bd8ea3dc856"
+  },
+  "logs": {
+    "scoped_release_tests": {
+      "path": "/tmp/incant-game-spatial-scoped-tests.log",
+      "sha256": "e7042e8f88d46bc4c97dab49685107ac7fa62776570b562fd39e25e90b056e56"
+    },
+    "scoped_clippy": {
+      "path": "/tmp/incant-game-spatial-scoped-clippy.log",
+      "sha256": "e89121d5aa1edf675ad4dce5528e716c6a6f77d64748a044535874610710fff0"
+    },
+    "workspace_release_tests": {
+      "path": "/tmp/incant-game-workspace-tests.log",
+      "sha256": "29751990c5e3bdde8d2fba37a21b3814aec47f9fd915badd113759e3ba6ea5bd"
+    },
+    "workspace_gpu": {
+      "path": "/tmp/incant-game-workspace-gpu.log",
+      "sha256": "4290b98697d0507855f1fe7e562669b5b80225ad1194a8bb05d379e24a7df6bb"
+    },
+    "workspace_release_clippy": {
+      "path": "/tmp/incant-game-workspace-clippy.log",
+      "sha256": "913b94acdd9f4368e9ccc93ac0876c4b27b8fdb2302b4ca4b109122d068cd555"
+    },
+    "device_compile": {
+      "path": "/tmp/incant-game-device-check.log",
+      "sha256": "1e28a82d8ba916fb21430adb95cacab6c032298db4d46a78583f52df7a2abf75"
+    },
+    "tool_build": {
+      "path": "/tmp/incant-game-tools-build.log",
+      "sha256": "390076cf280468f4c90ddea1db20882e651f0759e8eba7f129ed44a0e0840216"
+    },
+    "python_tools": {
+      "path": "/tmp/incant-game-tools-tests.log",
+      "sha256": "f9f008b2b56f3f869685435eb2ab5c75b189ee81d886a09f5c0554cd29dc8936"
+    },
+    "normal_dependency_guard": {
+      "path": "/tmp/incant-game-runtime-dependencies.log",
+      "sha256": "a9440fb509e2e71016cec8e312317308eccd25122f28bbe978b30030c2e122af"
+    },
+    "contracts_and_device_dependency_guard": {
+      "path": "/tmp/incant-game-contracts-final.log",
+      "sha256": "65c69d2f18cbd755db3ed3248a3f7e6b812198a6d33f1d742d8b8962c2304cbb"
+    },
+    "shipping_probe": {
+      "path": "/tmp/incant-native-game-shipping-02.log",
+      "sha256": "23fadd9014bb2949de820cc3d41ec29de44d653d11294d7f664731f18b4a83b9"
+    },
+    "shipping_cargo": {
+      "path": "/tmp/incant-native-game-shipping-02/build.log",
+      "sha256": "d22142d6ffd0cc988296f7bc1f296b352adb0354582c1eddda70736a61a132f2"
+    }
+  },
+  "proof_path": "/tmp/incant-native-game-shipping-02/result.json",
+  "proof_sha256": "77ee414638f13fe46927167cde61c5a6cc82de22bc9925ed9f95aa7f052fb2af",
+  "proof": {
+    "passed": true,
+    "target": "aarch64-apple-darwin",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "codegen": {
+      "incant_input": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_physics_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "rapier3d": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_assets_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_audio_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_game_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_game_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "lto": "fat",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      }
+    },
+    "symbol_identity": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "96796659-c29f-3147-8f76-4d07553cf757"
+      }
+    },
+    "player_bytes": 4322672,
+    "player_sha256": "61b2cf1b366eb52042d2be2991fd1a50f3d46b55da85fc23723ffcb8f9e243d2",
+    "script_metadata": {
+      "build_id": "972a4db1f1e0ac79964e8c1d9332bc44ab525175e08214e540d19defdb4fd0e1",
+      "bytecode_bytes": 2202,
+      "bytecode_sha256": "ceff3006569d790b9be33a71bdb0d2760634890f04718049e045193e37901d60",
+      "debug_line_tables": true,
+      "embedded_source": false,
+      "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+      "format": 1,
+      "hardening_sha256": "4a2d87348651fab15d47582cce2fba82058255ddb2a2a29386db7705bea1cb23",
+      "source_map_sha256": null,
+      "source_name": "embedded-game.js",
+      "source_sha256": "e7302801b736b6de0c90816d111b9f3a47bf3d816439cd36e59da34e34543f93",
+      "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+      "target": "aarch64-apple-darwin",
+      "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+      "wrapper_prefix_lines": 3
+    },
+    "source_compiler_symbols_absent": true,
+    "dynamic_source_routes_rejected": true,
+    "headless_sha256": "6cb3442411df182d1f2c89a21ccf8988af5841f4cf21eded583cca898745b9f6",
+    "cook_sha256": "ca0c6479ee467a59dc28cefbf57eb7f75f10121c587b2dfb879e628ca4e496ac",
+    "audio_example_sha256": "c28b5cd6e051aac05d1f139f93350913078fbf48e26e3a28b2c507f8b20cb5ba",
+    "fixture_tool_sha256": "5e7349204dc11784172aa679db3f6c635e469f9d6866e8598a3616644ea44ee7",
+    "public_import": {
+      "asset": {
+        "id": "01M4M3C52B8NKPWGN7XZTKP633",
+        "kind": "audio",
+        "name": "tone",
+        "path": "tone.wav",
+        "sha256": "4a24dd0240956f6ad00cd68d2f816e25f6662a170b6a0a92ae86a0a10aa5176e"
+      },
+      "cache_hit": false,
+      "changed": true,
+      "details": {
+        "channels": 2,
+        "dependencies": [
+          {
+            "path": "tone.wav",
+            "sha256": "59aca4ec1400bba63489f30c73a82fb29e82c83a923fcb468fa1ba0176dab6e3"
+          }
+        ],
+        "duration_seconds": 0.5,
+        "frames": 24000,
+        "sample_rate": 48000
+      },
+      "revision": 1
+    },
+    "project_hash_before_delete": "cb1fc6b590dc8f2c9d9ff57cda77155c7d1ba553bdf3e9214e79239c58998283",
+    "authoring_and_build_storage_deleted": true,
+    "removed_scope": "authoring project/WAV/journal/script source and fresh Cargo storage",
+    "retained_runtime_inputs": [
+      "binary scenes",
+      "clips.bin",
+      "cooked PCM/manifests",
+      "startup input.json/actions.json"
+    ],
+    "repeat_exact": true,
+    "recorded_ticks_per_process": 120,
+    "audio_processes": 8,
+    "results": [
+      {
+        "fixture": "static",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "pcm_sha256": "a4722ea4c42fa7e629e2bc7bd99127d45e2616383113d71bec57379b771c99c8",
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.0553028731136091,
+        "early_balance": 109.52215792219184,
+        "late_balance": -115.71745094939368
+      },
+      {
+        "fixture": "static",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      },
+      {
+        "fixture": "stream",
+        "rate": 44117,
+        "report": {
+          "frames": 88234,
+          "pcm_sha256": "5da6b39c9fac3c7dd96db9434a8e9879d101c7901398a23b90de5b5587a04e26",
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.05530287311397527,
+        "early_balance": 109.52215791799678,
+        "late_balance": -115.7174509755776
+      },
+      {
+        "fixture": "stream",
+        "rate": 48000,
+        "report": {
+          "frames": 96000,
+          "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+          "sources": [
+            {
+              "id": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ],
+              "physics": {
+                "position": [
+                  2.9500136375427246,
+                  0.0,
+                  0.0
+                ],
+                "sleeping": false,
+                "velocity": [
+                  3.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "position": [
+                2.9500136375427246,
+                0.0,
+                0.0
+              ]
+            }
+          ],
+          "tick": 120
+        },
+        "rms": 0.055305097447639784,
+        "early_balance": 108.70557752668313,
+        "late_balance": -114.8314969751412
+      }
+    ],
+    "rejected": [
+      "accepted-script-failure",
+      "wrong-recording-clock",
+      "invalid-input-packet",
+      "wrong-clip-fingerprint",
+      "unknown-cooked-version",
+      "oversized-startup-actions",
+      "manual-input-route",
+      "incant_game_player-camera-only",
+      "native_scene_audio-camera-only",
+      "incant_game_player-manifest-only",
+      "native_scene_audio-manifest-only"
+    ],
+    "spatial_refusals": [
+      {
+        "player": "incant_game_player",
+        "fixture": "camera-only"
+      },
+      {
+        "player": "native_scene_audio",
+        "fixture": "camera-only"
+      },
+      {
+        "player": "incant_game_player",
+        "fixture": "manifest-only"
+      },
+      {
+        "player": "native_scene_audio",
+        "fixture": "manifest-only"
+      }
+    ],
+    "plain_v1_controls": 2,
+    "existing_output_preserved": true,
+    "size_delta_from_audio_host_2885984": 1436688,
+    "size_delta_from_physics_script_player_3941816": 380856,
+    "size_comparison_scope": "whole executable graphs, not an isolated feature cost or performance gate",
+    "device_output": false,
+    "session_saves": false,
+    "phone_performance_gate": false,
+    "failure_semantics": "Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file."
+  },
+  "player_launches": 22,
+  "runtime_source_unchanged_since_shipping_proof": true,
+  "earlier_environment_repairs": [
+    "First probe used a separate RPC journal and correctly rejected revision mismatch before Cargo; same public import journal used in final proof.",
+    "Bridge check initially lacked node_modules; npm ci completed, then all contract checks passed."
+  ],
+  "base_only_evidence": {
+    "commit": "3c368ed",
+    "provided_by": "root",
+    "ordinary_tests": 472,
+    "gpu_tests": 56,
+    "ui_tests": 503,
+    "python_tests": 40,
+    "scope": "Prior base verification; does not replace this union checks."
+  },
+  "publication": "Local reviewed checkpoint only; root owns subsequent integration/workflows/publication.",
+  "non_claims": [
+    "render host",
+    "native character/navigation migration",
+    "session save/seek",
+    "live audio device",
+    "portable script export",
+    "full legacy SDK migration",
+    "Linux/Windows proof execution",
+    "phone/performance/phase gates"
+  ]
+}

@@ -683,6 +683,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_2d"
+version = "0.0.1"
+dependencies = [
+ "schemars",
+ "serde",
+ "thiserror",
+ "ulid",
+]
+
+[[package]]
 name = "incant_physics_runtime"
 version = "0.0.1"
 dependencies = [
@@ -699,6 +709,7 @@ version = "0.0.1"
 dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
+ "incant_2d",
  "incant_physics_runtime",
  "incant_types",
  "sha2",
@@ -1370,6 +1381,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20"
 
 [[package]]
+name = "ulid"
+version = "1.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "470dbf6591da1b39d43c14523b2b469c86879a53e8b758c8e090a470fe7b1fbe"
+dependencies = [
+ "web-time",
+]
+
+[[package]]
 name = "unicode-ident"
 version = "1.0.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1489,6 +1509,16 @@ checksum = "1cdc136a53ccd64a1211f107ccc34404769fbcc0f165f1afa065f5d88ab93538"
 dependencies = [
  "async-task",
  "cfg-if",
+ "js-sys",
+ "wasm-bindgen",
+]
+
+[[package]]
+name = "web-time"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5a6580f308b1fad9207618087a65c04e7a10bc77e02c8e84e9b00dd4b12fa0bb"
+dependencies = [
  "js-sys",
  "wasm-bindgen",
 ]

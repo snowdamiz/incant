@@ -38,5 +38,5 @@ pub(crate) fn generate(mesh: &mut Mesh) -> Result<()> {
     }
     mesh.vertices = faces.0;
     mesh.indices = (0..mesh.vertices.len() as u32).collect();
-    mesh.validate()
+    mesh.validate().map_err(Into::into)
 }

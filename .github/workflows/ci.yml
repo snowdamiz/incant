@@ -31,23 +31,25 @@ jobs:
       - run: npm run test:tools
       # Check the real binary-scene/native-world slice and its shared values.
       # The legacy PlaySession still requires migration and is not certified here.
-      - run: python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime
+      - run: python3 tools/check_runtime_dependencies.py incant_types incant_physics_runtime incant_runtime incant_script incant_script_player incant_assets_runtime incant_audio_runtime incant_render incant_render_data incant_render_native incant_render_game incant_render_gpu_host incant_game_runtime incant_game_player --features incant_audio_runtime/scene
       - run: node tools/build_bridge.mjs --check
       - run: npm run build --workspace editor/ui
       - run: npm run test --workspace editor/ui
       - run: cargo fmt --all --check
-      - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - run: cargo clippy --workspace --all-targets --locked --features incant_audio_runtime/scene -- -D warnings
       - run: cargo check -p incant_audio --features device --locked
-      - run: cargo test --workspace --release --locked --timings
+      # The workspace default deliberately omits this optional player module.
+      - run: cargo clippy -p incant_game_player --features render-gpu --all-targets --release --locked -- -D warnings
+      - run: cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.
       # Keep the same workspace feature graph as the preceding test run; scoped
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
-        run: cargo test --workspace --release --locked --timings -- --ignored --test-threads=1 --nocapture
+        run: cargo test --workspace --release --locked --features incant_audio_runtime/scene --timings -- --ignored --test-threads=1 --nocapture
       # Keep workspace feature unification from the release tests while building
       # only these tools; execute the resulting binaries directly below.
-      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --release --features incant_editor/custom-protocol --locked --timings
+      - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --example native_scene_audio --example no_renderer_fixtures --release --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
       - name: Validate cooked KTX2 with the Khronos reference tool
         run: python3 tools/validate_ktx.py --probe-binary target/release/examples/texture_probe
       - run: target/release/incant_headless schema schemas
@@ -55,6 +57,15 @@ jobs:
         run: python3 tools/probes/native-saves.py artifacts/native-world-saves
       - name: Build and execute the shipping runtime with matched crash symbols
         run: python3 tools/shipping.py artifacts/shipping-runtime
+      - name: Verify cooked native scene audio without authoring inputs
+        run: python3 tools/probes/native-scene-audio.py artifacts/native-scene-audio
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with: {name: native-scene-audio-macOS, path: artifacts/native-scene-audio, if-no-files-found: error}
+      # This remains a separate fresh build until shared-session provenance is verified.
+      - name: Verify source-free native game GPU frames and audio
+        run: python3 tools/probes/native-game.py artifacts/native-game-gpu --gpu
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with: {name: native-game-gpu-macOS, path: artifacts/native-game-gpu/result.json, if-no-files-found: error}
       - name: Verify embedded scripts with no runtime source compiler
         run: python3 tools/probes/cooked-script.py artifacts/cooked-native-script --physics
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

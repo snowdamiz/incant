@@ -4,8 +4,8 @@ use crate::{
     materials::MaterialResources,
     scene::{ResolvedScene, SceneStats},
 };
-use incant_assets::{AssetStore, RuntimeAsset, RuntimeAssetData};
-use incant_doc::Project;
+use incant_assets_runtime::{RuntimeAsset, RuntimeAssetData};
+use incant_render_data::SceneInput;
 use std::{
     collections::{BTreeMap, HashMap},
     sync::{Arc, Weak},
@@ -33,6 +33,10 @@ pub(crate) struct GpuModel {
     primitives: Vec<Primitive>,
     materials: MaterialResources,
 }
+#[path = "retained.rs"]
+mod retained;
+pub use retained::{RetainedScene, RetainedTarget};
+
 struct Batch {
     model: Arc<GpuModel>,
     primitive: usize,
@@ -42,6 +46,8 @@ struct Batch {
     centers: Vec<glam::Vec3>,
     casts_shadows: bool,
     bounds: crate::shadows::cascade::Bounds,
+    placements: Arc<[crate::scene::Placement]>,
+    updates: Vec<crate::scene::Instance>,
 }
 /// Immutable scene ready for rendering. A failed replacement never changes it.
 /// Source bytes are not needed after AssetStore has loaded the cooked model.
@@ -88,16 +94,13 @@ impl RenderScene {
         &self.stats
     }
 }
-pub(crate) type ModelCache = HashMap<String, Weak<GpuModel>>;
+pub(crate) type ModelCache = HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuModel>>;
 
 impl Renderer {
-    pub fn prepare_scene(&self, project: &Project, assets: &AssetStore) -> Result<RenderScene> {
-        self.upload_scene(crate::scene::resolve(project, Some(assets))?)
+    pub fn prepare(&self, input: &SceneInput) -> Result<RenderScene> {
+        self.upload_scene(crate::scene::resolve(input)?, false)
     }
-    pub(crate) fn diagnostic_scene(&self, project: &Project) -> Result<RenderScene> {
-        self.upload_scene(crate::scene::resolve(project, None)?)
-    }
-    fn upload_scene(&self, mut resolved: ResolvedScene) -> Result<RenderScene> {
+    fn upload_scene(&self, mut resolved: ResolvedScene, retained: bool) -> Result<RenderScene> {
         let environment = if resolved.environment.is_some() || !resolved.models.is_empty() {
             Some(self.environments.prepare(
                 &self.device,
@@ -113,7 +116,7 @@ impl Renderer {
             .map_err(|_| ResourceError::CacheLock("GPU model"))?;
         cache.retain(|_, model| model.strong_count() != 0);
         let mut batches = Vec::new();
-        for (key, plan) in resolved.models {
+        for ((_, key), plan) in resolved.models {
             let model = match cache.get(&key).and_then(Weak::upgrade) {
                 Some(model) => model,
                 None => {
@@ -170,6 +173,12 @@ impl Renderer {
                 }
             };
             for ((primitive, casts_shadows), transforms) in plan.primitives {
+                let capacity = transforms.len();
+                let placements: Arc<[crate::scene::Placement]> = if retained {
+                    plan.placements[&(primitive, casts_shadows)].clone().into()
+                } else {
+                    Arc::from([])
+                };
                 // A reflected instance reverses winding. Split it from ordinary
                 // instances so back-face culling remains correct for both.
                 for mirrored in [false, true] {
@@ -178,7 +187,7 @@ impl Renderer {
                         .copied()
                         .filter(|t| (t.normal[0][3] < 0.) == mirrored)
                         .collect();
-                    if transforms.is_empty() {
+                    if transforms.is_empty() && !retained {
                         continue;
                     }
                     let mesh = &model.primitives[primitive];
@@ -201,23 +210,43 @@ impl Renderer {
                         }
                         centers.push(world.transform_point3(mesh.center));
                     }
-                    let bytes = bytemuck::cast_slice(&transforms);
-                    if bytes.len() as u64 > self.device.limits().max_buffer_size {
+                    let bytes: &[u8] = bytemuck::cast_slice(&transforms);
+                    let size = if retained {
+                        capacity * std::mem::size_of::<crate::scene::Instance>()
+                    } else {
+                        bytes.len()
+                    };
+                    if size as u64 > self.device.limits().max_buffer_size {
                         return Err(ResourceError::BufferSize("scene instances").into());
+                    }
+                    let instances = self.device.create_buffer(&wgpu::BufferDescriptor {
+                        label: Some("Model scene instances"),
+                        size: size as u64,
+                        usage: wgpu::BufferUsages::VERTEX | wgpu::BufferUsages::COPY_DST,
+                        mapped_at_creation: false,
+                    });
+                    if !bytes.is_empty() {
+                        self.queue.write_buffer(&instances, 0, bytes);
                     }
                     batches.push(Arc::new(Batch {
                         model: Arc::clone(&model),
                         primitive,
-                        instances: self.device.create_buffer_init(
-                            &wgpu::util::BufferInitDescriptor {
-                                label: Some("Model scene instances"),
-                                contents: bytes,
-                                usage: wgpu::BufferUsages::VERTEX,
-                            },
-                        ),
+                        instances,
+                        placements: Arc::clone(&placements),
+                        updates: if retained {
+                            Vec::with_capacity(capacity)
+                        } else {
+                            Vec::new()
+                        },
                         count: transforms.len() as u32,
                         mirrored,
-                        centers,
+                        centers: if retained {
+                            let mut reserved = Vec::with_capacity(capacity);
+                            reserved.extend(centers);
+                            reserved
+                        } else {
+                            centers
+                        },
                         casts_shadows,
                         bounds: crate::shadows::cascade::Bounds { minimum, maximum },
                     }));
@@ -227,8 +256,11 @@ impl Renderer {
         resolved.stats.model_draw_calls = batches
             .iter()
             .map(|b| {
-                if b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
-                    == incant_assets::AlphaMode::Blend
+                if b.count == 0 {
+                    0
+                } else if b.model.materials.materials[b.model.primitives[b.primitive].material]
+                    .alpha
+                    == incant_assets_runtime::AlphaMode::Blend
                 {
                     b.count as usize
                 } else {
@@ -241,14 +273,14 @@ impl Renderer {
             && batches.iter().any(|b| {
                 b.casts_shadows
                     && b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
-                        == incant_assets::AlphaMode::Blend
+                        == incant_assets_runtime::AlphaMode::Blend
             })
         {
             return Err(ResourceError::TransparentShadowCaster.into());
         }
         let sprites = self
             .sprites
-            .upload(&self.device, &self.queue, resolved.sprites)?;
+            .upload(&self.device, &self.queue, resolved.sprites, retained)?;
         Ok(RenderScene {
             sprites,
             lights,
