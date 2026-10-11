@@ -28,6 +28,14 @@ No phase, live-provider or physical-device performance gate is waived.
 
 The initial frozen checkpoint PR85 found a Windows-only journal test lock violation. A reviewed test-only lifetime correction passes all six scoped cases and Clippy locally; Windows confirmation and complete release promotion remain pending. [Failure and repair evidence](docs/spikes/script-journal-test-portability.md).
 
+The second frozen checkpoint includes the Windows journal repair and all 23 release
+contexts. Its local-service job exposed a Linux private S3 config UID mismatch;
+the isolated repair passes the real local protocol/restart proof while preserving
+private permissions and the non-root server. The checkpoint also found macOS
+Python process-observation and Windows native TypeScript startup failures. All
+failures remain recorded; no failed checkpoint is promoted.
+[Service correction evidence](docs/spikes/local-service-foundation.md#linux-private-bootstrap-correction).
+
 ## Authored source and native package — locally integrated
 
 A public host-equals-target exporter now cooks authored Script attachments into a

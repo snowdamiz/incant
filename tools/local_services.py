@@ -164,6 +164,35 @@ class Stack:
         return self.command(['docker', 'compose', '--project-name', self.project,
             '--env-file', str(self.state / '.env'), '-f', str(LOCAL / 'compose.yaml'), *args], input=input)
 
+    def startup_status(self) -> list[dict]:
+        """Return only bounded metadata, never service logs, commands or credentials."""
+        raw = self.compose('ps', '--all', '--format', 'json')
+        jobs = json.loads(raw) if raw.lstrip().startswith('[') else [json.loads(line) for line in raw.splitlines() if line.strip()]
+        states = {'created', 'running', 'paused', 'restarting', 'removing', 'exited', 'dead'}
+        health = {'', 'starting', 'healthy', 'unhealthy'}
+        result = []
+        for job in jobs:
+            if job.get('Service') not in {'postgres', 'objects', 'oidc', 'mail', 'gateway'}:
+                continue
+            code = job.get('ExitCode')
+            result.append({'service': job['Service'],
+                'state': job.get('State') if job.get('State') in states else 'unknown',
+                'health': job.get('Health') if job.get('Health') in health else 'unknown',
+                'exit_code': code if type(code) is int and 0 <= code <= 255 else None})
+        return sorted(result, key=lambda item: item['service'])
+
+    def up(self) -> None:
+        try:
+            self.compose('up', '-d', '--wait', '--wait-timeout', '180')
+        except (OSError, RuntimeError, subprocess.SubprocessError):
+            # Bootstrap output may contain values not yet known to the redactor.
+            # Do not print raw logs or the original command exception on failure.
+            try:
+                status = json.dumps(self.startup_status(), sort_keys=True)
+            except (OSError, ValueError, KeyError, TypeError, RuntimeError, subprocess.SubprocessError):
+                status = 'unavailable'
+            raise RuntimeError('Local service startup failed; bounded status: ' + status) from None
+
     def validate_config(self) -> dict:
         config = json.loads(self.compose('config', '--format', 'json'))
         lock = image_policy()
@@ -231,7 +260,7 @@ def main() -> None:
         stack.prepare()
         stack.validate_config()
         if args.action == 'up':
-            stack.compose('up', '-d', '--wait', '--wait-timeout', '180')
+            stack.up()
         if args.action in ('up', 'health'):
             print(json.dumps(stack.health(), sort_keys=True))
         elif args.action == 'probe':
