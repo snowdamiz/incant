@@ -57,8 +57,8 @@
   "review": {
     "reviewer": "/root/runtime_review",
     "mode": "read-only; no builds/edits/GPU",
-    "result": "no actionable blocker; final one-assertion test delta queued for exact-head closure",
-    "report_snapshot_sha256": "c4c111b7387520058a01571fe171d7603bcf70f2fe3433be802c5891b112e829"
+    "result": "accepted exact179d384 including final assertions, SDK, docs and evidence; no actionable blocker",
+    "report_snapshot_sha256": "e1bc8d4a71a6b6f041ab184f6fd69e6a7cfbcef298137435d351ae664e1b72df"
   },
   "source_sha256": {
     "crates/incant_runtime/src/navigation_runtime.rs": "b7cfced7c8bf91adabed5a02e6fe4c960849574bea2779c583e89fec60b00951",
@@ -107,5 +107,97 @@
       "sha256": "228f571ee07c155028c41af70dc97a1d3814a3784ffaf6fea1b1ac5cb64bbf59"
     }
   },
-  "publication": "local only; sole coordinator owns serialized integration and all shared refs"
+  "publication": "Prepared as one direct-main fast development PR; full platform evidence belongs to a later frozen checkpoint. Checkpoint3 remains unchanged.",
+  "main91_integration": {
+    "captured_at": "2026-10-11T18:13:14.616554+00:00",
+    "main": "c8b05fb18fe17d9b2df737d872a333997d227762",
+    "source_head": "179d384c21895c6c5cc887fd3d6be896774b972b",
+    "integrated_tested_head": "bdddb0b6c7d2069d8c3514d07152971ccea57ac7",
+    "conflicts": [
+      "STATUS.md"
+    ],
+    "source_hashes_unchanged": [
+      "crates/incant_runtime/src/navigation_runtime.rs",
+      "crates/incant_runtime/src/physics_queries.rs",
+      "crates/incant_runtime/tests/navigation_queries.rs",
+      "crates/incant_runtime/tests/support/navigation_queries.rs",
+      "crates/incant_script/build.rs",
+      "crates/incant_script/src/compiler.rs",
+      "crates/incant_script/src/lib.rs",
+      "crates/incant_script/src/navigation_tests.rs",
+      "crates/incant_script/src/navigation_values.rs",
+      "crates/incant_script/src/queries.rs",
+      "crates/incant_script/src/query_values.rs",
+      "sdk/templates/native-navigation/paths.ts",
+      "sdk/ts/src/native.d.ts"
+    ],
+    "runtime_audio_navigation_atomic_resolution": "main90 commands.rs unchanged; both audio/navigation preflight preserved",
+    "cargo_workflows_unchanged": true,
+    "tests": {
+      "passed": 351,
+      "failed": 0,
+      "ignored": 2,
+      "groups": 60,
+      "ignored_scope": "Existing headless GPU perception cases; query-only slice did not change renderer/perception and does not claim a GPU rerun"
+    },
+    "clippy": "all targets for runtime/script/game-runtime/nav/play/headless passed",
+    "compiler_disabled": "incant_script no-default-features check passed",
+    "headless_build": "passed",
+    "contracts": {
+      "fresh_generated_files_equal": 62,
+      "sdk_templates_strict": true,
+      "bridge": true,
+      "conventions_fmt_diff": true
+    },
+    "runtime_dependency_roots": [
+      "incant_runtime",
+      "incant_script",
+      "incant_game_runtime",
+      "incant_nav"
+    ],
+    "public_source_play_proof": {
+      "passed": true,
+      "processes": 2,
+      "rpc_requests": 32,
+      "ticks_per_play": 20,
+      "translations_x": [
+        2.0000000000000004,
+        4.000000000000001,
+        2.0000000000000004,
+        4.000000000000001,
+        2.0000000000000004
+      ],
+      "content_authored_only_through_command_bus": true,
+      "registration_content_attachment_one_transaction": true,
+      "undo_redo_and_recovery": true,
+      "authoring_unchanged_by_play": true,
+      "gpu_submitted": false,
+      "reference_phone_gate": false,
+      "binary_sha256": "7d015378c388c6d0540fcce96f54d55643c0e208ed50d71a9df0f6f21fe498c9"
+    },
+    "public_proof_sha256": "a43355ec7a2158ba87e3d62adaafe9bb7623d584c59f4cc60fbf83b03609c5fd",
+    "logs": {
+      "incant-navigation-main91-clippy.log": {
+        "sha256": "8a13f901f0e606780fda15fcf0742f56a11888c76f75e902a63cf280b0566545"
+      },
+      "incant-navigation-main91-headless.log": {
+        "sha256": "3e6da90b6d4465c8a414e14f7a950df46c750cc54db64b47b2240deed5cb7042"
+      },
+      "incant-navigation-main91-no-compiler.log": {
+        "sha256": "a97a31da285fabf5c5050f8bcdd1df966cd5f93543f3134d6079560bdba5859d"
+      },
+      "incant-navigation-main91-runtime-graph.log": {
+        "sha256": "36c4e2a71857bc385ea9b50760063597103af83cf345595181411fae03564af5"
+      },
+      "incant-navigation-main91-schema.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "incant-navigation-main91-source-proof.log": {
+        "sha256": "40a315afd0c7eb472f6cf513c9da13b388026b68573212535d925aed3e2e1a70"
+      },
+      "incant-navigation-main91-tests.log": {
+        "sha256": "f10f50d3d14a8ac443ee06738fce716bbd7e7ca011c2e77a750190a760892302"
+      }
+    }
+  }
 }

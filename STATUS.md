@@ -84,7 +84,10 @@ Python tests (four Windows-only skips).
 - Local native TypeScript navigation queries are implemented and independently reviewed:
   committed mesh/grid paths with owned off-mesh metadata, revocable cache loans,
   shared bounded search work and atomic script rollback. 299 distinct scoped tests,
-  Clippy and generated-contract checks pass. [Evidence](docs/spikes/native-script-navigation.md).
+  Clippy and generated-contract checks pass. Repaired main91 integration preserves
+  all reviewed source hashes and passes 351 scoped tests, Clippy, 62 exact contracts
+  and the real 32-request/two-process source/Play proof.
+  [Evidence](docs/spikes/native-script-navigation.md).
   Query-only: movement, grid/world mapping, steering, automatic traversal, runtime
   rebuild controls, static-Wasm parity and physical-device navigation gates remain open.
 

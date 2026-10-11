@@ -68,3 +68,25 @@ byte-identical; native SDK aliases reuse the existing Rust-derived path schemas.
 The independent read-only review found no actionable blocker. Machine-readable
 commands, source/log hashes and limitations are in
 [evidence](evidence/native-script-navigation.json).
+
+## Integration with repaired main91
+
+The original reviewed `179d384` history is preserved by merge `bdddb0b` onto
+actual main91 `c8b05fb`. Only STATUS conflicted; all thirteen reviewed source, test
+and SDK file hashes remain exact. Current audio/navigation atomic preparation,
+Cargo inputs and workflow coverage are unchanged.
+
+The integrated six-package runtime/script/game/navigation/Play/headless suite
+passes **351 tests/doctests**, with the two existing headless GPU cases ignored;
+this query-only integration does not claim a new GPU run. All-target Clippy, the
+compiler-disabled script check, headless build, strict SDK/templates, generated
+bridge, conventions and formatting pass. All **62** freshly generated contract
+files match. The four affected runtime graphs remain authoring-free.
+
+The rebuilt public headless host also passes **32 actual RPC requests across two
+fresh processes**, including source authoring, register/attach, native motion,
+Undo/Redo and journal recovery. Authoring stays unchanged by Play. This is local
+macOS correctness evidence; comprehensive Windows/mobile/browser validation stays
+with the next frozen release checkpoint, and none of the limitations above is
+removed. The [ledger](evidence/native-script-navigation.json) retains the exact
+source, proof and validation-log identities.
