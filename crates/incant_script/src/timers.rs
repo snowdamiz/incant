@@ -107,21 +107,22 @@ fn parse<'js>(ctx: &Ctx<'js>, name: &str, args: &[Value<'js>]) -> rquickjs::Resu
     let id = |value: &Value<'js>| -> rquickjs::Result<String> {
         // UTF-8 conversion stays in the VM's bounded allocation until the byte
         // cap is checked. Do not copy a large guest string into Rust first.
-        let value = value
-            .as_string()
-            .ok_or_else(invalid)?
-            .clone()
-            .to_cstring()?;
-        if value.is_empty()
-            || value.len() > 64
-            || !value
-                .as_str()
-                .bytes()
-                .all(|b| b.is_ascii_alphanumeric() || b"_.:-".contains(&b))
+        let string = value.as_string().ok_or_else(invalid)?;
+        let bytes = string.clone().to_cstring()?;
+        if bytes.is_empty() || bytes.len() > 64 {
+            return Err(invalid());
+        }
+        // QuickJS permits lone UTF-16 surrogates. CString::as_str assumes UTF-8;
+        // use String::to_string's checked conversion only after the byte cap.
+        drop(bytes);
+        let value = string.to_string().map_err(|_| invalid())?;
+        if !value
+            .bytes()
+            .all(|b| b.is_ascii_alphanumeric() || b"_.:-".contains(&b))
         {
             return Err(invalid());
         }
-        Ok(value.as_str().to_owned())
+        Ok(value)
     };
     let ticks = |value: &Value<'js>| -> rquickjs::Result<u32> {
         let value = value.as_number().ok_or_else(invalid)?;
