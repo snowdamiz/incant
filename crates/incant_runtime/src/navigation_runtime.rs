@@ -44,6 +44,20 @@ impl std::fmt::Debug for NavigationRuntime {
     }
 }
 impl NavigationRuntime {
+    /// Restored caches are freshly derived. Invalidate all paths returned by the
+    /// old incarnation, even when the declarations and geometry are identical.
+    pub(crate) fn invalidate_after_restore(&mut self, previous: &Self) -> Result<(), SceneError> {
+        let generation = bump(previous.generation)?;
+        self.generation = generation;
+        for entry in self.meshes.values_mut() {
+            Arc::make_mut(entry).report.generation = generation;
+        }
+        for (_, value) in self.grids.values_mut() {
+            *value = generation;
+        }
+        Ok(())
+    }
+
     pub fn prepare<'a>(
         &self,
         nodes: Vec<Arc<CookedNavigation>>,
@@ -302,7 +316,7 @@ fn rebuild(
     })
 }
 impl NativeWorld {
-    fn ensure_navigation_current(&self) -> Result<(), RuntimeError> {
+    pub(crate) fn ensure_navigation_current(&self) -> Result<(), RuntimeError> {
         self.ensure_usable()?;
         if !self.navigation.current(
             |id| {

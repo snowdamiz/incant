@@ -1,0 +1,84 @@
+{
+  "format": "incant-native-retained-saves-evidence",
+  "version": 1,
+  "implementation_parent": "3000428027fc57222af969d02c94b70a9e7f2d59",
+  "navigation_base": "18aa621aff8e3adfd8531333839c312b97c03231",
+  "actual_main84": "b84a9bf318c9fa6005d7a5d3524941da2eb4546e",
+  "host": "aarch64-apple-darwin",
+  "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)\nrelease: 1.99.0\ncommit-hash: 5f94df4789f005f9a352888e8355ffc645b7ed0e\ncommit-date: 2026-08-27\nhost: aarch64-apple-darwin\nlibgit2: 1.9.6 (sys:0.21.0 vendored)\nlibcurl: 8.7.1 (sys:0.4.90+curl-8.21.0 system ssl:(SecureTransport) LibreSSL/3.3.6)\nssl: OpenSSL 3.6.3 9 Jun 2026\nos: Mac OS 26.6.0 [64-bit]",
+  "checks": {
+    "runtime_and_2d_tests": {
+      "command": "CARGO_TARGET_DIR=/tmp/incant-native-navigation-target ./tools/cargo test -j2 --profile ci -p incant_runtime -p incant_2d",
+      "passed": 145,
+      "failed": 0,
+      "ignored": 0,
+      "result_groups": 23
+    },
+    "clippy": "ci-profile all-target incant_runtime and incant_2d, -D warnings, passed",
+    "wasm32": "incant_runtime compile-only, passed",
+    "normal_dependencies": "incant_runtime authoring-free guard passed",
+    "fmt": "passed",
+    "conventions": "passed",
+    "whitespace": "passed"
+  },
+  "fresh_process_proof": {
+    "profile": "ci; not shipping/performance evidence",
+    "test": "fresh_process_resume_matches_uninterrupted_after_deleting_the_binary_scene",
+    "processes": 5,
+    "uninterrupted_ticks": 154,
+    "checkpoint_tick": 17,
+    "resumed_ticks": 137,
+    "binary_scene_deleted_before_resume": true,
+    "authoring_or_asset_cache_inputs": false,
+    "byte_identical_repeated_and_zero_tick_restore": true,
+    "grid_and_mesh_queries_executed_in_each_child": true,
+    "test_executable_sha256": "6d35e37017a4f2198778a8103d00255f38e291a90b5cf48dda0d8719586b25d4"
+  },
+  "source_sha256": {
+    "crates/incant_2d/src/flipbook.rs": "83c415e9758be08298ae5aecc6a019123f3900070d7a7dfdc6ec298dcaf4aa84",
+    "crates/incant_runtime/src/save.rs": "a4092d2b855be34466d2777b8b3f8393465960c31746d8d6d76ea57e48ab1891",
+    "crates/incant_runtime/src/save/codec.rs": "143c4fdf37d935815dd569b0817a44c45f159cf6ef3077b0b6eb23bc4ccf5fa1",
+    "crates/incant_runtime/src/navigation_runtime.rs": "09ab0a5354ee2a361e91f0658ac250fdfbdc4688d66c007edc925c37e7f25084",
+    "crates/incant_runtime/src/world.rs": "a73bd929f8c46c1f8e0e82298437398b116e5eafdf75d43969c93d93f65cad3f",
+    "crates/incant_runtime/tests/retained_saves.rs": "c43f66d85ff57b61584d0505723ac35d06deafeca4cf5036aae3742cc7f76c88",
+    "crates/incant_runtime/tests/saves.rs": "64cc8d95c4dc8380f040f71cee15f252b38f3bdd54eefaf1fd6f907d6b5282fc",
+    "crates/incant_runtime/tests/navigation.rs": "f4665c26f5bfcb2502141f8083e0b59c093ce833f8fa4d87230b3a377b657bea",
+    "crates/incant_runtime/tests/spatial.rs": "29dfc872e41f690acd955f3e0ef3557efe35b750ab878ebfcb6ad4428977e193",
+    "crates/incant_runtime/tests/flipbook.rs": "e7439bb21b27554cfb607b793548751738448e7e10c5c0b348577114718b7665",
+    "crates/incant_runtime/tests/tilemaps.rs": "5f74ab8ec57d6adca352785a55f887c104192d3a126f47df5f6834e5e21dc805"
+  },
+  "logs": {
+    "incant-native-state-saves-tests-final.log": {
+      "sha256": "00842a1edba366e01ef7dbf1d9b01f0b8d712b599eb988595c431ccf5242f3df",
+      "bytes": 16826
+    },
+    "incant-native-state-saves-clippy.log": {
+      "sha256": "17abab90c66d574293be63501ee2033ae761121bc373badbe804fe2546fb9544",
+      "bytes": 176
+    },
+    "incant-native-state-saves-wasm.log": {
+      "sha256": "8782c49f9312dcd95ee2c1b5ee77036a41fbcd5fc950bcda9a7c22c8c44686c2",
+      "bytes": 5054
+    },
+    "incant-native-state-saves-dependencies.log": {
+      "sha256": "8f77a37ec4738c7752086111a5ed5a7dfc5454816ab0b7123c6dbdbac4cfb5a1",
+      "bytes": 53
+    }
+  },
+  "limits": [
+    "world checkpoint only; no complete session/VM heap/callback/timer/input restore",
+    "physics/audio-used worlds including solid tilemaps refuse",
+    "no asset payload embedding or persistent path/crowd cache continuation",
+    "external queued FrameCommands must be discarded by host",
+    "v1 cannot reconstruct original source binding or clear extended destination capabilities",
+    "hashes are integrity/mismatch data, not authentication",
+    "no renderer/GPU/appearance/phone/performance or live cross-platform execution claim"
+  ],
+  "review": {
+    "reviewer": "/root/script_registration (Astra), independent read-only review",
+    "result": "accepted; no actionable blocker; all eleven pinned production/test hashes unchanged",
+    "report": "native-retained-saves-review.md",
+    "sha256": "f4c29bc62ce60966d3034be54b2e4c9563c6c1a5b164dcb4d5f947e7ec5b9f8d",
+    "independently_executed_tests": false
+  }
+}

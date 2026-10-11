@@ -160,7 +160,7 @@ fn source_free_roundtrip_paths_and_unchanged_ticks_retain_generations() {
     );
     assert!(matches!(
         world.save_bytes(),
-        Err(SaveError::NavigationUnsupported)
+        Err(SaveError::PhysicsUnsupported)
     ));
 }
 #[test]
@@ -287,7 +287,7 @@ fn source_ancestry_velocity_binding_and_lifetime_are_checked_atomically() {
     assert!(world.navigation_path(id(1), &path()).is_err());
     assert!(matches!(
         world.save_bytes(),
-        Err(SaveError::NavigationUnsupported)
+        Err(SaveError::PhysicsUnsupported)
     ));
 }
 #[test]
@@ -591,6 +591,7 @@ fn navigation_save_envelopes_refuse_without_replacing_either_world() {
     let original = destination.save_bytes().unwrap();
     let payload = scene().to_bytes();
     let mut envelope = original[..64].to_vec();
+    envelope[8..12].copy_from_slice(&1u32.to_le_bytes());
     envelope[24..32].copy_from_slice(&(payload.len() as u64).to_le_bytes());
     envelope.extend(payload);
     let mut hash = Sha256::new();
@@ -611,7 +612,7 @@ fn navigation_save_envelopes_refuse_without_replacing_either_world() {
     let query = navigation.navigation_path(id(1), &path()).unwrap();
     assert!(matches!(
         navigation.restore_bytes(&original),
-        Err(SaveError::NavigationUnsupported)
+        Err(SaveError::PhysicsUnsupported)
     ));
     assert_eq!(navigation.snapshot(), before);
     assert_eq!(navigation.navigation_path(id(1), &path()).unwrap(), query);

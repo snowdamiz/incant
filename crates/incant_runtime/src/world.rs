@@ -67,7 +67,7 @@ pub struct NativeWorld {
     pub(crate) navigation: crate::navigation_runtime::NavigationRuntime,
     pub(crate) navigation_used: bool,
     pub(crate) identity: crate::WorldIdentity,
-    source_scene_fingerprint: [u8; 32],
+    pub(crate) source_scene_fingerprint: [u8; 32],
     pub(crate) world: World,
     schedule: Schedule,
     pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
@@ -213,7 +213,7 @@ impl NativeWorld {
         result
     }
 
-    /// Fingerprint of the canonical scene used to construct this incarnation.
+    /// Fingerprint of the original canonical scene, preserved through v2 saves.
     /// It does not describe current mutable state or authenticate executable code.
     pub fn source_scene_fingerprint(&self) -> [u8; 32] {
         self.source_scene_fingerprint
