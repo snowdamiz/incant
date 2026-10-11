@@ -1,0 +1,2 @@
+axprobe: no menu bar
+menu exit=2

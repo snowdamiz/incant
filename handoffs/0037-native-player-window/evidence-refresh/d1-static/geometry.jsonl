@@ -1,0 +1,7 @@
+{"base_row": 240, "capture": "a01-startup.png", "colors": 5, "content_px": [640, 480], "expected_side_px": 52.0, "foreground_px": 1378, "fresh": true, "half_height": 240.0, "triangle_px": [52, 52], "world_left": -3.002}
+{"base_row": 240, "capture": "a02-after-zoom-press.png", "colors": 5, "content_px": [640, 480], "expected_side_px": 52.0, "foreground_px": 1378, "fresh": true, "half_height": 240.0, "triangle_px": [52, 52], "world_left": -3.002}
+{"base_row": 540, "capture": "a03-req-2000x1200.png", "colors": 6, "content_px": [1920, 1080], "expected_side_px": 116.9, "foreground_px": 6903, "fresh": true, "half_height": 540.0, "triangle_px": [117, 117], "world_left": -3.002}
+{"base_row": 540, "capture": "a04-max-1920x1080.png", "colors": 6, "content_px": [1920, 1080], "expected_side_px": 116.9, "foreground_px": 6903, "fresh": true, "half_height": 540.0, "triangle_px": [117, 117], "world_left": -3.002}
+{"base_row": 8, "capture": "a05-req-600x4.png", "colors": 2, "content_px": [600, 16], "expected_side_px": 1.7, "foreground_px": 1, "fresh": true, "half_height": 8.0, "triangle_px": [1, 1], "world_left": -2.887}
+{"base_row": 240, "capture": "a06-back-640x480.png", "colors": 5, "content_px": [640, 480], "expected_side_px": 52.0, "foreground_px": 1378, "fresh": true, "half_height": 240.0, "triangle_px": [52, 52], "world_left": -3.002}
+{"base_row": 240, "capture": "a07-before-close.png", "colors": 5, "content_px": [640, 480], "expected_side_px": 52.0, "foreground_px": 1378, "fresh": true, "half_height": 240.0, "triangle_px": [52, 52], "world_left": -3.002}
