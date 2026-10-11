@@ -78,3 +78,6 @@ pub fn sha256(bytes: &[u8]) -> String {
     use sha2::{Digest, Sha256};
     format!("{:x}", Sha256::digest(bytes))
 }
+
+#[cfg(feature = "visual")]
+pub mod animation;

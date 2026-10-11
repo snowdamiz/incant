@@ -13,6 +13,7 @@ fn default_scene_hierarchy_mirrors_and_primitive_instances_match_geometry() {
         indices: vec![0, 2, 1, 0, 3, 2],
     };
     let mut model = CookedModel {
+        animation: None,
         metadata: ModelMetadata {
             fingerprint: "a".repeat(64),
             dependencies: vec![],

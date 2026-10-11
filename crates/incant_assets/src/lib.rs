@@ -1,10 +1,13 @@
 //! CPU asset import and cooking. No account, renderer or editor is required.
+#[cfg(not(target_arch = "wasm32"))]
+mod animation_cook;
 mod atlas;
 mod audio;
 mod audio_cook;
 mod cache;
 #[cfg_attr(target_arch = "wasm32", path = "fbx_browser.rs")]
 mod fbx;
+mod gltf_animation;
 mod gltf_import;
 mod ktx;
 mod material;

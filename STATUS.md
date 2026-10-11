@@ -445,3 +445,12 @@ changing its tested runtime/compiler/ABI inputs. Integrated verification include
 761 ordinary tests, 75 GPU tests, 178 actual-host conformance tests, full Clippy,
 536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
 Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.
+
+## Local skeletal-animation foundation (unpublished)
+
+The bounded glTF skin/TRS import, INCMOD04 cooked reader and retained CPU sampler
+are implemented and locally verified in `codex/gltf-skeletal-animation`; see
+[scope and evidence](docs/spikes/gltf-skeletal-animation.md). Static03 compatibility
+is preserved. Current static asset/render/navigation consumers explicitly refuse
+animated models. Native scene/GPU/SDK playback, blend/state/IK/root-motion and
+rendered acceptance remain outstanding; this does not complete Phase 1 animation.
