@@ -1,0 +1,141 @@
+# Local development only. Generated bootstrap values stay in private per-user storage outside projects.
+services:
+  postgres:
+    mem_limit: 512m
+    cpus: "1"
+    pids_limit: 128
+    image: postgres@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_DB: incant
+      POSTGRES_USER: incant
+      POSTGRES_PASSWORD: ${INCANT_LOCAL_DB_PASSWORD:?Use tools/local_services.py up}
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    volumes: ["postgres:/var/lib/postgresql/data"]
+    networks: [local]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U incant -d incant"]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+  objects:
+    mem_limit: 512m
+    cpus: "1"
+    pids_limit: 128
+    image: chrislusf/seaweedfs@sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d
+    command: [server, -dir=/data, -ip=objects, -volume.max=16, -master.volumeSizeLimitMB=64, -s3, -s3.port=8333, -s3.config=/config/s3.json]
+    volumes: ["objects:/data", "${INCANT_LOCAL_STATE}/s3.json:/config/s3.json:ro"]
+    networks: [local]
+    healthcheck:
+      test: [CMD-SHELL, "wget -qO- http://127.0.0.1:9333/dir/status | grep -q '\"Url\":\"objects:8080\"'"]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+  mail:
+    mem_limit: 128m
+    cpus: "0.5"
+    pids_limit: 128
+    image: axllent/mailpit@sha256:94f6b70c1436defae6799d9ac7ff0eeff9540465b842026d5cdb018f1c0234ea
+    environment:
+      MP_DATABASE: /data/mailpit.db
+      MP_MAX_MESSAGES: 100
+      MP_SMTP_AUTH_ACCEPT_ANY: "false"
+      MP_DISABLE_VERSION_CHECK: "true"
+      MP_BLOCK_REMOTE_CSS_AND_FONTS: "true"
+    volumes: ["mail:/data"]
+    networks: [local]
+    healthcheck:
+      test: [CMD, /mailpit, readyz]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+  oidc:
+    mem_limit: 1g
+    cpus: "1"
+    pids_limit: 128
+    image: ghcr.io/zitadel/zitadel@sha256:90a3045b80a2b5b395e1e770302076906af3a5911225af7c464b4f3bd00d0a1b
+    user: "${INCANT_LOCAL_UID}:${INCANT_LOCAL_GID}"
+    command: [start-from-init, --masterkeyFile, /bootstrap/masterkey, --tlsMode, disabled]
+    environment:
+      ZITADEL_EXTERNALDOMAIN: 127.0.0.1
+      ZITADEL_EXTERNALPORT: ${INCANT_LOCAL_OIDC_PORT}
+      ZITADEL_EXTERNALSECURE: "false"
+      ZITADEL_TLS_ENABLED: "false"
+      ZITADEL_SERVICEPING_ENABLED: "false"
+      ZITADEL_DATABASE_POSTGRES_HOST: postgres
+      ZITADEL_DATABASE_POSTGRES_PORT: 5432
+      ZITADEL_DATABASE_POSTGRES_DATABASE: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_USERNAME: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: ${INCANT_LOCAL_OIDC_DB_PASSWORD}
+      ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE: disable
+      ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME: incant
+      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: ${INCANT_LOCAL_DB_PASSWORD}
+      ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE: disable
+      ZITADEL_FIRSTINSTANCE_INSTANCENAME: Incant local protocol fixture
+      ZITADEL_FIRSTINSTANCE_ORG_NAME: Incant local
+      ZITADEL_FIRSTINSTANCE_PATPATH: /bootstrap/admin.pat
+      ZITADEL_FIRSTINSTANCE_ORG_MACHINE_MACHINE_USERNAME: incant-bootstrap
+      ZITADEL_FIRSTINSTANCE_ORG_MACHINE_MACHINE_NAME: Disposable local bootstrap
+      ZITADEL_FIRSTINSTANCE_ORG_MACHINE_PAT_EXPIRATIONDATE: ${INCANT_LOCAL_PAT_EXPIRY}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME: incant-admin
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: ${INCANT_LOCAL_ADMIN_PASSWORD}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORDCHANGEREQUIRED: "false"
+      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_REQUIRED: "false"
+      ZITADEL_DEFAULTINSTANCE_SMTPCONFIGURATION_SMTP_HOST: mail:1025
+      ZITADEL_DEFAULTINSTANCE_SMTPCONFIGURATION_TLS: "false"
+      ZITADEL_DEFAULTINSTANCE_SMTPCONFIGURATION_FROM: noreply@incant.invalid
+      ZITADEL_DEFAULTINSTANCE_SMTPCONFIGURATION_FROMNAME: Incant local
+      ZITADEL_TELEMETRY_ENABLED: "false"
+      ZITADEL_INSTRUMENTATION_TRACE_EXPORTER_TYPE: none
+      ZITADEL_INSTRUMENTATION_METRIC_EXPORTER_TYPE: none
+      ZITADEL_INSTRUMENTATION_LOG_EXPORTER_TYPE: none
+      ZITADEL_INSTRUMENTATION_PROFILE_TYPE: none
+      ZITADEL_INSTRUMENTATION_LOG_LEVEL: WARN
+      ZITADEL_LOGSTORE_ACCESS_STDOUT_ENABLED: "false"
+    volumes: ["${INCANT_LOCAL_STATE}/bootstrap:/bootstrap"]
+    networks: [local]
+    depends_on:
+      postgres: {condition: service_healthy}
+      mail: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, /app/zitadel, ready]
+      interval: 3s
+      timeout: 5s
+      retries: 60
+      start_period: 10s
+  gateway:
+    mem_limit: 64m
+    cpus: "0.5"
+    pids_limit: 128
+    image: haproxy@sha256:5d97434a423c2533cfeb42874d45cf6d69a840b60334582dfbfd5008e94c80be
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    volumes: ["./gateway.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"]
+    networks: [local, edge]
+    ports:
+      - "127.0.0.1:${INCANT_LOCAL_PG_PORT}:15432"
+      - "127.0.0.1:${INCANT_LOCAL_S3_PORT}:18333"
+      - "127.0.0.1:${INCANT_LOCAL_OIDC_PORT}:18080"
+      - "127.0.0.1:${INCANT_LOCAL_SMTP_PORT}:11025"
+      - "127.0.0.1:${INCANT_LOCAL_MAIL_PORT}:18025"
+    depends_on:
+      postgres: {condition: service_healthy}
+      objects: {condition: service_healthy}
+      oidc: {condition: service_healthy}
+      mail: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, "http://127.0.0.1:18404/health"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+networks:
+  local:
+    internal: true
+  edge:
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
+volumes:
+  postgres:
+  objects:
+  mail:

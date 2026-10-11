@@ -1,0 +1,329 @@
+{
+  "schema": 1,
+  "source_base": "446412345ebeb55d59192861ecb091dafe32e2e7",
+  "date": "2026-10-11",
+  "host": {
+    "system": "Darwin",
+    "release": "25.6.0",
+    "architecture": "arm64",
+    "python": "3.14.8",
+    "docker": "29.8.2",
+    "compose": "5.5.1"
+  },
+  "result": {
+    "elapsed_seconds": 37.94,
+    "hosted_gates_satisfied": false,
+    "protocols_after": {
+      "checks": [
+        "postgres_tcp_commit",
+        "postgres_tcp_rollback",
+        "postgres_wrong_password_refused",
+        "s3_create_put_exact_get_list_delete",
+        "s3_wrong_signature_refused",
+        "s3_anonymous_write_refused",
+        "s3_missing_key_refused",
+        "smtp_local_capture_exact_body",
+        "oidc_discovery_local_issuer_jwks",
+        "oidc_pkce_code_exchange_userinfo",
+        "oidc_state_nonce_audience_subject",
+        "oidc_wrong_password_refused",
+        "oidc_wrong_pkce_refused",
+        "oidc_code_replay_refused"
+      ],
+      "count": 14,
+      "hosted_gates_satisfied": false,
+      "id_token_signature_validation": "not a client-library validation; provider userinfo validates the access token",
+      "scope": "local protocol fixtures only"
+    },
+    "protocols_before": {
+      "checks": [
+        "postgres_tcp_commit",
+        "postgres_tcp_rollback",
+        "postgres_wrong_password_refused",
+        "s3_create_put_exact_get_list_delete",
+        "s3_wrong_signature_refused",
+        "s3_anonymous_write_refused",
+        "s3_missing_key_refused",
+        "smtp_local_capture_exact_body",
+        "oidc_discovery_local_issuer_jwks",
+        "oidc_pkce_code_exchange_userinfo",
+        "oidc_state_nonce_audience_subject",
+        "oidc_wrong_password_refused",
+        "oidc_wrong_pkce_refused",
+        "oidc_code_replay_refused"
+      ],
+      "count": 14,
+      "hosted_gates_satisfied": false,
+      "id_token_signature_validation": "not a client-library validation; provider userinfo validates the access token",
+      "scope": "local protocol fixtures only"
+    },
+    "restart_checks": [
+      "private_state",
+      "oidc_issuer",
+      "postgres_row",
+      "s3_bytes"
+    ],
+    "scope": "fresh local containers only"
+  },
+  "offline_tool_tests": 100,
+  "boundary_tests": 14,
+  "workflow_lint": "actionlint passed",
+  "source_sha256": {
+    "tools/local_services.py": "940ae7f75d617b78b1fc678c6c10de70cd1afb749ef779cb631ae0fcf042274c",
+    "tools/local_services_probe.py": "6b202c331b3030da10c3b12697d6de64131e191878fa0f221ab1d0f539987b8a",
+    "tools/local_services_smoke.py": "2efecc6f71572eae5eaefcab71955dc8ca04767d26f1da8d43a2ac88202a0e07",
+    ".github/workflows/local-services.yml": "8693ba6e6faa7ee657adb863ef46bae5b29f3b316f6ceba669bff82136f038f0",
+    "tools/tests/test_local_services.py": "b0b8397fd346ab92f47dccea7549d406d9c77b19e36737091294a141ac17db9e",
+    "services/local/images.lock.json": "0e7ca0cb8d159a15637a76a55859f2f33f61d67af32c172ee0689a2be0f7f5f7",
+    "services/local/README.md": "078e73417dfac6cde0265381bde40a05ea645aa117a1fe3253731944b4aa4c77",
+    "services/local/compose.yaml": "1bd1429ea9ec11f91acd095c88e47763b73ec3cf6d7441a18338be43689910b1",
+    "services/local/gateway.cfg": "0cc816f8b2324415d316d23500f8c0d73fa4a9f2500c6a08e9660d4ff4352d47",
+    "services/local/licenses/zitadel-LICENSING.md": "97a02685ee62bfd02b2e696580189807a193b81fcc37909818f9d19cef45394e",
+    "services/local/licenses/zitadel-LICENSE.txt": "4df3c306dddaaf4baffdff5ca820cc679ac8cd6dc263c6a74517783e42fa7a3b",
+    "services/local/licenses/postgres-COPYRIGHT.txt": "3d6af92ff8a4c2cdf69afb1cf44edea727922f5cd0cf8b5f72b11cdecac8fdfd",
+    "services/local/licenses/mailpit-LICENSE.txt": "9dade1b3ace5dd6c36ca58eef466ae7dd9afe52bfb978deffa44645f6f0a2aa9",
+    "services/local/licenses/haproxy-LICENSE.txt": "0717ca51fceaa25ac9e5ccc62e0c727dcf27796057201fb5fded56a25ff6ca28",
+    "services/local/licenses/haproxy-GPL.txt": "ddb9db7630752f8fdc6898f7c99a99eaeeac5213627ecb093df9c82f56175dc7",
+    "services/local/licenses/seaweedfs-LICENSE.txt": "d789d433cc11da163273d1e39be2e8fa67642f9a58ef220d3f258fa9c14ef613"
+  },
+  "raw_artifacts": {
+    "incant-local-final-fresh-proof.log": {
+      "sha256": "768bca71d1961f59e2d74decdefd5d420453627cf37ec433325958dd71c94361",
+      "bytes": 1521
+    },
+    "incant-local-all-tools.log": {
+      "sha256": "51b9df7cd391d70254fbdbe07320ffe8a7965b135faf4c892ac9e2209a93447a",
+      "bytes": 15956
+    },
+    "incant-local-image-platforms.json": {
+      "sha256": "81c9752cfc8ecdd53b1be34005a788fbb74f2cde07b670446f8462b3759ee017",
+      "bytes": 4301
+    }
+  },
+  "image_index_platforms": {
+    "postgres": {
+      "digest": "postgres@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "platforms": [
+        {
+          "architecture": "amd64",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm",
+          "os": "linux",
+          "variant": "v6"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm",
+          "os": "linux",
+          "variant": "v7"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm64",
+          "os": "linux",
+          "variant": "v8"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "386",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "ppc64le",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "riscv64",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "s390x",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        }
+      ]
+    },
+    "objects": {
+      "digest": "chrislusf/seaweedfs@sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d",
+      "platforms": [
+        {
+          "architecture": "386",
+          "os": "linux"
+        },
+        {
+          "architecture": "amd64",
+          "os": "linux"
+        },
+        {
+          "architecture": "arm",
+          "os": "linux",
+          "variant": "v7"
+        },
+        {
+          "architecture": "arm64",
+          "os": "linux"
+        }
+      ]
+    },
+    "oidc": {
+      "digest": "ghcr.io/zitadel/zitadel@sha256:90a3045b80a2b5b395e1e770302076906af3a5911225af7c464b4f3bd00d0a1b",
+      "platforms": [
+        {
+          "architecture": "amd64",
+          "os": "linux"
+        },
+        {
+          "architecture": "arm64",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        }
+      ]
+    },
+    "mail": {
+      "digest": "axllent/mailpit@sha256:94f6b70c1436defae6799d9ac7ff0eeff9540465b842026d5cdb018f1c0234ea",
+      "platforms": [
+        {
+          "architecture": "386",
+          "os": "linux"
+        },
+        {
+          "architecture": "amd64",
+          "os": "linux"
+        },
+        {
+          "architecture": "arm64",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        }
+      ]
+    },
+    "gateway": {
+      "digest": "haproxy@sha256:5d97434a423c2533cfeb42874d45cf6d69a840b60334582dfbfd5008e94c80be",
+      "platforms": [
+        {
+          "architecture": "amd64",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm",
+          "os": "linux",
+          "variant": "v6"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm",
+          "os": "linux",
+          "variant": "v7"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "arm64",
+          "os": "linux",
+          "variant": "v8"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "386",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "ppc64le",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "riscv64",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        },
+        {
+          "architecture": "s390x",
+          "os": "linux"
+        },
+        {
+          "architecture": "unknown",
+          "os": "unknown"
+        }
+      ]
+    }
+  },
+  "cleanup": "all generated proof/foundation containers, volumes and private fixture state removed; unrelated containers untouched",
+  "limitations": [
+    "macOS Docker Desktop ARM64 execution only; amd64 index availability is not execution",
+    "no Incant accounts/player service or editor login integration",
+    "no browser login or client cryptographic ID-token verifier",
+    "no WAL archive/PITR, production TLS, hosted provider/device/region gate",
+    "application license texts checked; complete transitive image SBOM/security/distribution review remains"
+  ]
+}

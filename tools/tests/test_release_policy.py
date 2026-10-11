@@ -6,10 +6,22 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOWS = ROOT / '.github/workflows'
 FULL = ('ci.yml', 'desktop.yml', 'credentials.yml', 'development-wasm.yml',
-        'physics-candidates.yml', 'nightly.yml', 'website.yml')
+        'physics-candidates.yml', 'nightly.yml', 'website.yml', 'local-services.yml')
 
 
 class ReleasePolicyTests(unittest.TestCase):
+    def test_new_workflows_cannot_reintroduce_full_pr_or_main_push_suites(self):
+        for path in WORKFLOWS.glob('*.yml'):
+            if path.name in ('development.yml', 'website-publish.yml'):
+                continue
+            with self.subTest(workflow=path.name):
+                events = path.read_text().split('on:\n', 1)[1].split('permissions:', 1)[0]
+                self.assertNotIn('pull_request:', events)
+                self.assertNotIn('pull_request_target:', events)
+                if '  push:' in events:
+                    self.assertIn('  push:\n    branches: [codex/release-candidate]\n', events)
+                    self.assertNotIn('main', events)
+
     def test_full_suites_cover_all_candidate_changes_without_duplicate_pr_or_main_runs(self):
         for name in FULL:
             with self.subTest(workflow=name):
@@ -53,9 +65,10 @@ class ReleasePolicyTests(unittest.TestCase):
     def test_full_context_contract_is_unique_and_excludes_development_and_deploy(self):
         contexts = json.loads((ROOT / '.github/release-checks.json').read_text())['required_contexts']
         self.assertEqual(len(contexts), len(set(contexts)))
-        self.assertEqual(len(contexts), 22)
-        for required in ('checks', 'classify', 'build', 'compare', 'android', 'ios', 'web', 'portability'):
+        self.assertEqual(len(contexts), 23)
+        for required in ('checks', 'classify', 'build', 'compare', 'android', 'ios', 'web', 'portability', 'local-service-protocols'):
             self.assertIn(required, contexts)
+        self.assertIn('  local-service-protocols:', (WORKFLOWS / 'local-services.yml').read_text())
         for os in ('macos-latest', 'ubuntu-latest', 'windows-latest'):
             for job in ('storage', 'native', 'conformance'):
                 self.assertIn(f'{job} ({os})', contexts)
