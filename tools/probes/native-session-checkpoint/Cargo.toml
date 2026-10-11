@@ -1,0 +1,18 @@
+[package]
+name = "incant_native_session_checkpoint_probe"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Installed only into the helper's disposable engine source snapshot.
+[dependencies]
+incant_script.workspace = true
+incant_runtime.workspace = true
+incant_types.workspace = true
+
+[build-dependencies]
+incant_cook = { path = "../incant_cook", features = ["typescript"] }
+incant_doc.workspace = true
+serde_json.workspace = true
+tempfile = "3"

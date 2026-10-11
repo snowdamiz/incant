@@ -4,6 +4,7 @@ mod codec;
 use crate::flipbook::Playback;
 use crate::world::{Local, Motion};
 use crate::{CookedEntity, CookedScene, CookedSpatial, NativeWorld, SceneError};
+use sha2::{Digest, Sha256};
 use thiserror::Error;
 
 pub use codec::MAX_SAVE_BYTES;
@@ -121,18 +122,7 @@ impl NativeWorld {
                 return Err(SaveError::SpatialUnsupported);
             }
         }
-        if !scene.audio().is_empty() {
-            return Err(SaveError::AudioUnsupported);
-        }
-        if !scene.physics().is_empty()
-            || !scene.physics_2d().is_empty()
-            || scene
-                .spatial()
-                .iter()
-                .any(|node| node.tilemap.as_ref().is_some_and(|m| m.has_collision()))
-        {
-            return Err(SaveError::PhysicsUnsupported);
-        }
+        check_scene_capabilities(&scene)?;
         // Exact membership is required: no missing/extra/duplicate playback row
         // may silently install a default cursor after a valid nested scene load.
         let expected = scene
@@ -166,6 +156,59 @@ impl NativeWorld {
         Ok(world)
     }
 
+    /// Load against the trusted original cooked scene without constructing a
+    /// second ECS world. Origin, scene/rate and immutable localization tables
+    /// must match; saved mutable locale settings and gameplay state may differ.
+    /// These are compatibility checks, not authentication of save provenance.
+    pub fn from_save_bytes_for_scene(
+        bytes: &[u8],
+        initial: &CookedScene,
+    ) -> Result<Self, SaveError> {
+        check_scene_capabilities(initial)?;
+        let candidate = Self::from_save_bytes(bytes)?;
+        if !codec::is_bound(bytes) {
+            return Err(SaveError::Invalid("original scene binding required"));
+        }
+        candidate.check_save_binding(
+            Some(Sha256::digest(initial.to_bytes()).into()),
+            initial.id(),
+            initial.tick_rate(),
+            initial.localization(),
+        )?;
+        Ok(candidate)
+    }
+
+    /// Read-only compatibility check for a separately loaded candidate. Checks
+    /// sticky unsupported capabilities on both worlds and exact immutable
+    /// bindings, without copying a world or sharing its host identity.
+    pub fn validate_save_compatibility(&self, candidate: &Self) -> Result<(), SaveError> {
+        self.check_save_capabilities()?;
+        candidate.check_save_capabilities()?;
+        candidate.check_save_binding(
+            Some(self.source_scene_fingerprint),
+            self.scene_id(),
+            self.tick_rate,
+            &self.localization,
+        )
+    }
+
+    fn check_save_binding(
+        &self,
+        origin: Option<[u8; 32]>,
+        scene: crate::StableId,
+        rate: u32,
+        localization: &crate::NativeLocalization,
+    ) -> Result<(), SaveError> {
+        if self.localization.tables() != localization.tables()
+            || self.scene_id() != scene
+            || self.tick_rate != rate
+            || origin.is_some_and(|origin| self.source_scene_fingerprint != origin)
+        {
+            return Err(SaveError::WorldMismatch);
+        }
+        Ok(())
+    }
+
     /// Atomic replacement after complete decoding/validation. Retains the host
     /// WorldIdentity, changes WorldIncarnation/entity identities, and advances
     /// spatial/navigation generations. Previous borrowed views cannot overlap
@@ -187,14 +230,12 @@ impl NativeWorld {
                 return Err(SaveError::SpatialUnsupported);
             }
         }
-        if candidate.localization.tables() != self.localization.tables()
-            || candidate.scene_id() != self.scene_id()
-            || candidate.tick_rate != self.tick_rate
-            || (codec::is_bound(bytes)
-                && candidate.source_scene_fingerprint != self.source_scene_fingerprint)
-        {
-            return Err(SaveError::WorldMismatch);
-        }
+        candidate.check_save_binding(
+            codec::is_bound(bytes).then_some(self.source_scene_fingerprint),
+            self.scene_id(),
+            self.tick_rate,
+            &self.localization,
+        )?;
         // V1 never carried the origin fingerprint. A matching live destination
         // retains its own known origin; the restored data cannot replace it.
         candidate.source_scene_fingerprint = self.source_scene_fingerprint;
@@ -223,4 +264,20 @@ impl NativeWorld {
         }
         Ok(())
     }
+}
+
+fn check_scene_capabilities(scene: &CookedScene) -> Result<(), SaveError> {
+    if !scene.audio().is_empty() {
+        return Err(SaveError::AudioUnsupported);
+    }
+    if !scene.physics().is_empty()
+        || !scene.physics_2d().is_empty()
+        || scene
+            .spatial()
+            .iter()
+            .any(|node| node.tilemap.as_ref().is_some_and(|m| m.has_collision()))
+    {
+        return Err(SaveError::PhysicsUnsupported);
+    }
+    Ok(())
 }

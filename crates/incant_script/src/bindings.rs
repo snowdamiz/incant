@@ -185,7 +185,38 @@ impl BoundProject {
         bindings: &ScriptBindings,
         world: &NativeWorld,
     ) -> Result<Self, ScriptError> {
-        if world.tick() != 0 || world.source_scene_fingerprint() != bindings.scene_sha256 {
+        Self::build(ctx, freeze, bindings, world, None)
+    }
+    pub(crate) fn restore<'js>(
+        ctx: &Ctx<'js>,
+        freeze: &Function<'js>,
+        bindings: &ScriptBindings,
+        world: &NativeWorld,
+        active: &[StableId],
+    ) -> Result<Self, ScriptError> {
+        Self::build(ctx, freeze, bindings, world, Some(active))
+    }
+    fn build<'js>(
+        ctx: &Ctx<'js>,
+        freeze: &Function<'js>,
+        bindings: &ScriptBindings,
+        world: &NativeWorld,
+        active: Option<&[StableId]>,
+    ) -> Result<Self, ScriptError> {
+        if (active.is_none() && world.tick() != 0)
+            || world.source_scene_fingerprint() != bindings.scene_sha256
+        {
+            return Err(ScriptError::ScriptBindings);
+        }
+        if let Some(active) = active
+            && (active.windows(2).any(|p| p[0] >= p[1])
+                || active.iter().any(|id| {
+                    bindings
+                        .instances
+                        .binary_search_by_key(id, |i| i.entity)
+                        .is_err()
+                }))
+        {
             return Err(ScriptError::ScriptBindings);
         }
         let mut groups: Vec<_> = bindings
@@ -197,6 +228,9 @@ impl BoundProject {
             })
             .collect();
         for instance in &bindings.instances {
+            if active.is_some_and(|ids| ids.binary_search(&instance.entity).is_err()) {
+                continue;
+            }
             let identity = world
                 .entity_identity(instance.entity)
                 .ok_or(ScriptError::ScriptBindings)?;
@@ -233,17 +267,45 @@ impl BoundProject {
         })
     }
 }
+impl BoundProject {
+    pub fn active_ids(&self, world: &NativeWorld) -> Result<Vec<StableId>, ScriptError> {
+        if self.incarnation != world.incarnation() {
+            return Err(ScriptError::ScriptBindings);
+        }
+        let mut ids: Vec<_> = self
+            .groups
+            .iter()
+            .flat_map(|g| g.instances.iter())
+            .filter(|(id, identity, _)| world.entity_identity(*id) == Some(*identity))
+            .map(|v| v.0)
+            .collect();
+        ids.sort_unstable();
+        Ok(ids)
+    }
+}
 impl BoundGroup {
+    pub fn ids(&self) -> std::sync::Arc<[StableId]> {
+        self.instances.iter().map(|v| v.0).collect()
+    }
     pub fn snapshot<'js>(
         &mut self,
         ctx: &Ctx<'js>,
         freeze: &Function<'js>,
         world: &NativeWorld,
+        retired: &mut Vec<crate::persistence::Key>,
     ) -> rquickjs::Result<Array<'js>> {
         // A committed despawn retires an attachment forever. Stable-ID reuse,
         // even between script ticks, cannot reconnect it to a new ECS lifetime.
-        self.instances
-            .retain(|(id, identity, _)| world.entity_identity(*id) == Some(*identity));
+        self.instances.retain(|(id, identity, _)| {
+            let live = world.entity_identity(*id) == Some(*identity);
+            if !live {
+                retired.push(crate::persistence::Key {
+                    scope: crate::schedule::Scope::Source(self.source),
+                    entity: Some(*id),
+                });
+            }
+            live
+        });
         let array = Array::new(ctx.clone())?;
         for (index, (_, _, instance)) in self.instances.iter().enumerate() {
             array.as_object().prop(
@@ -270,7 +332,7 @@ fn expose_object<'js>(
     freeze.call::<_, ()>((object.clone(),))?;
     Ok(object)
 }
-fn expose_value<'js>(
+pub(crate) fn expose_value<'js>(
     ctx: &Ctx<'js>,
     freeze: &Function<'js>,
     value: &ScriptValue,
