@@ -526,13 +526,20 @@ describe('While the agent applies a change', () => {
 
   it('keeps a successful save when the session refresh after it fails', async () => {
     const refresh = vi.fn(() => Promise.resolve());
-    const host = allowanceHost({ budget: 100_000, agent: { status: 'unavailable', reason: EXHAUSTED_REASON }, session: session(100_000, 100_000) }, { refreshAgent: refresh });
+    const reply = deferred<BridgeResult>();
+    const host = allowanceHost(
+      { budget: 100_000, agent: { status: 'unavailable', reason: EXHAUSTED_REASON }, session: session(100_000, 100_000) },
+      { dispatch: () => reply.promise, refreshAgent: refresh },
+    );
     fireEvent.click(change());
     type('200000');
     enter();
-    await waitFor(() => expect(host.commands).toHaveLength(1));
+    expect(host.commands).toHaveLength(1);
+    // In the native bridge's order: the new cap and the failed session read are published
+    // before the command itself resolves.
     host.update({ projectAgentBudget: { maxTokens: 200_000 }, agentError: TRANSPORT, agent: { status: 'unavailable', reason: TRANSPORT.message } });
-    await waitFor(() => expect(within(pane()).queryByRole('textbox', { name: /Allowance/ })).toBeNull());
+    await act(async () => reply.resolve(OK));
+    expect(within(pane()).queryByRole('textbox', { name: /Allowance/ })).toBeNull();
     expect(line()!.textContent).toBe('100,000 of 200,000 tokens used');
     expect(within(pane()).getByText(TRANSPORT.message)).toBeTruthy();
     expect(within(pane()).getByRole('button', { name: 'Retry' })).toBeTruthy();
