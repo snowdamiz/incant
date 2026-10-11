@@ -54,8 +54,15 @@ fn main() {
         )
         .unwrap();
     } else {
+        // glibc hides sigsetjmp/siglongjmp under strict C11 unless POSIX
+        // declarations are requested before every system header. Preserve
+        // WABT's signal-mask-aware C trap path rather than replacing it.
+        if env::var("CARGO_CFG_TARGET_OS").unwrap() == "linux" {
+            build.define("_POSIX_C_SOURCE", "200809L");
+        }
         build
             .flag("-std=c11")
+            .flag("-Werror=implicit-function-declaration")
             .flag("-fno-optimize-sibling-calls")
             .flag("-frounding-math")
             .flag("-ffp-contract=off");
