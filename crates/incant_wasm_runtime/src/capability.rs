@@ -3,13 +3,38 @@ use crate::{
     transaction::{self, Chunk},
 };
 use incant_runtime::{
-    CookedEntity, FrameCommands, NativeWorld, StableId, StructuralCommand, WorldIdentity,
+    CookedEntity, FlipbookControl, FlipbookSnapshot, FrameCommands, NativeWorld, StableId,
+    StructuralCommand, WorldIdentity,
 };
 use incant_types::{Transform, Velocity};
+
+// The native component representation and generated wire record must agree on
+// every numeric field. These compile on each target, not only the test host.
+const _: () = {
+    use incant_wasm_abi as abi;
+    assert!(incant_runtime::TRANSFORM_STRIDE == abi::TRANSFORM_STRIDE);
+    assert!(incant_runtime::VELOCITY_STRIDE == abi::VELOCITY_STRIDE);
+    assert!(std::mem::size_of::<Transform>() == abi::TransformRow::SIZE);
+    assert!(std::mem::offset_of!(Transform, translation) == abi::TransformRow::TRANSLATION_OFFSET);
+    assert!(std::mem::offset_of!(Transform, rotation) == abi::TransformRow::ROTATION_OFFSET);
+    assert!(std::mem::offset_of!(Transform, scale) == abi::TransformRow::SCALE_OFFSET);
+    assert!(std::mem::size_of::<Velocity>() == abi::VelocityRow::SIZE);
+    assert!(std::mem::offset_of!(Velocity, linear) == abi::VelocityRow::LINEAR_OFFSET);
+};
 
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    FlipbookLen,
+    ReadFlipbooks {
+        ptr: i32,
+        capacity: i32,
+    },
+    ControlFlipbook {
+        id: i32,
+        kind: i32,
+        frame: i32,
+    },
     InputLen,
     ReadInput {
         ptr: i32,
@@ -49,6 +74,8 @@ pub struct Capability {
     commands: FrameCommands,
     input: Vec<u8>,
     input_available: bool,
+    flipbook_rows: Vec<FlipbookSnapshot>,
+    flipbooks: Vec<u8>,
     transferred: usize,
     calls: usize,
 }
@@ -79,6 +106,12 @@ impl Capability {
         self.input.clear();
         self.epoch = self.epoch.checked_add(1).ok_or(Error::Limit("epoch"))?;
         self.chunks = world.with_numeric_columns(transaction::capture)?;
+        if let Err(error) =
+            crate::flipbooks::encode(world, &mut self.flipbook_rows, &mut self.flipbooks)
+        {
+            self.abort();
+            return Err(error);
+        }
         self.commands.clear();
         self.transferred = 0;
         self.calls = 0;
@@ -104,6 +137,8 @@ impl Capability {
         self.active = false;
         self.input_available = false;
         self.input.clear();
+        self.flipbook_rows.clear();
+        self.flipbooks.clear();
         self.chunks.clear();
         self.commands.clear();
     }
@@ -114,6 +149,8 @@ impl Capability {
         self.active = false;
         self.input_available = false;
         self.input.clear();
+        self.flipbook_rows.clear();
+        self.flipbooks.clear();
         if Some(world.spatial_view()?.identity()) != self.identity.as_ref() {
             self.abort();
             return Err(Error::Abi("different commit world"));
@@ -195,6 +232,31 @@ impl Capability {
             return Err(Error::Limit("linear memory"));
         }
         match call {
+            Call::FlipbookLen => return Ok(self.flipbooks.len() as i32),
+            Call::ReadFlipbooks { ptr, capacity } => {
+                let len = self.flipbooks.len();
+                if usize::try_from(capacity).ok().is_none_or(|n| n < len) {
+                    return Err(Error::Abi("flipbook destination capacity"));
+                }
+                range(ptr, capacity as usize, memory.len())?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[region].copy_from_slice(&self.flipbooks);
+                return Ok(len as i32);
+            }
+            Call::ControlFlipbook { id, kind, frame } => {
+                let control = match (kind, frame) {
+                    (0, 0) => FlipbookControl::Play,
+                    (1, 0) => FlipbookControl::Pause,
+                    (2, 0) => FlipbookControl::Restart,
+                    (3, frame) => FlipbookControl::Seek(
+                        u16::try_from(frame).map_err(|_| Error::Abi("flipbook seek frame"))?,
+                    ),
+                    _ => return Err(Error::Abi("flipbook control tag/reserved frame")),
+                };
+                let entity = self.stable(memory, id)?;
+                self.command(StructuralCommand::ControlFlipbook { entity, control })?;
+            }
             Call::InputLen => {
                 if !self.input_available {
                     return Err(Error::Abi("input capability unavailable"));

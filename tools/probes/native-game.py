@@ -26,6 +26,7 @@ from shipping_symbols import backend, package, require, run
 from native_observations import verify as verify_observations
 from native_logs import ACTIONS as LOG_ACTIONS, BEHAVIOR as LOG_BEHAVIOR, BASELINE as LOG_BASELINE, verify as verify_logs
 from native_game_sprites import FRAME, MIDDLE_FRAME, LAST_FRAME, component as sprite_component, import_atlas
+import native_flipbook_sdk
 
 
 def sha(path):
@@ -39,20 +40,26 @@ def binary_id(value):
     return n.to_bytes(16, 'big')
 
 
-def main():
+def arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument('--render-input', action='store_true', help='Enable CPU render input with real cooked model/camera')
     modes.add_argument('--gpu', action='store_true', help='Enable real retained offscreen GPU submission and first/final numeric readback')
     parser.add_argument('--flipbook', action='store_true', help='Add native animated/static-frame numerical controls; requires --gpu')
+    parser.add_argument('--flipbook-sdk', action='store_true', help='Add QuickJS and trusted wasm2c guest controls/readback; requires --flipbook')
     suffix = '.exe' if os.name == 'nt' else ''
     for name, default in (
         ('headless', f'incant_headless{suffix}'), ('cook', f'examples/cook_scene{suffix}'),
         ('audio', f'examples/native_scene_audio{suffix}'), ('fixture', f'examples/no_renderer_fixtures{suffix}')):
         parser.add_argument(f'--{name}-binary', type=Path, default=ROOT / 'target/release' / default)
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def phases(args, session=None):
+    suffix = '.exe' if os.name == 'nt' else ''
     require(not args.flipbook or args.gpu, '--flipbook requires actual --gpu execution')
+    require(not args.flipbook_sdk or args.flipbook, '--flipbook-sdk requires --flipbook')
     if args.gpu: args.render_input = True
     out = args.output.resolve(); out.mkdir(parents=True, exist_ok=False)
     headless, cook, audio, fixture_tool = (getattr(args, f'{n}_binary').resolve() for n in ('headless', 'cook', 'audio', 'fixture'))
@@ -63,14 +70,17 @@ def main():
     require(kind != 'pdb', 'Runtime compiler-symbol audit supports Mach-O/ELF; PDB audit is unimplemented')
     split = 'packed' if kind == 'dsym' else 'off'
     llvm_bin = Path(run([rustc, '--print', 'sysroot']).strip()) / 'lib/rustlib' / target / 'bin'
-    for key in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER'):
+    for key in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER') + (('CFLAGS', 'HOST_CFLAGS') if args.flipbook_sdk else ()):
         require(not os.environ.get(key), f'Unset {key} for declared shipping codegen')
     environment = dict(os.environ, PATH=str(rustc.parent) + os.pathsep + os.environ.get('PATH', ''))
     cargo = [str(ROOT / 'tools/cargo')] if os.name != 'nt' else [str(rustc.with_name('cargo.exe'))]
     fixtures = []
     sentinel = 'INCANT_GAME_SOURCE_COMMENT_8e461d8f'
+    static_build = None
     with tempfile.TemporaryDirectory(prefix='native-game-authoring-', dir=out) as inputs:
         inputs = Path(inputs); project = inputs / 'game.incant.json'; journal = project.with_suffix('.journal.jsonl')
+        if session:
+            session.input_directory(inputs)
         run([headless, 'init', project, '--name', 'Native game composition', '--entities', '0'])
         with wave.open(str(inputs / 'tone.wav'), 'wb') as file:
             file.setparams((2, 2, 48000, 24000, 'NONE', 'not compressed'))
@@ -156,22 +166,33 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         behavior = (ROOT / 'crates/incant_game_player/fixtures/game.js').read_text()
         if args.render_input:
             behavior += "\nconst update = exports.default.update; exports.default.update = function(ctx) { update(ctx); if(ctx.input.actions.camera_fail.pressed) ctx.commands.despawn('00000000000000000000000004'); };\n"
-        source.write_text(f'// {sentinel}\n' + checks + behavior + LOG_BEHAVIOR)
+        source.write_text(f'// {sentinel}\n' + checks + behavior + LOG_BEHAVIOR + (native_flipbook_sdk.BEHAVIOR if args.flipbook_sdk else ''))
         environment.update(INCANT_NATIVE_SCRIPT_SOURCE=str(source), INCANT_NATIVE_SCRIPT_NAME='embedded-game.js')
         environment.pop('INCANT_NATIVE_SCRIPT_MAP', None)
-        with tempfile.TemporaryDirectory(prefix='native-game-build-', dir=out) as storage:
+        if args.flipbook_sdk:
+            static_build = native_flipbook_sdk.prepare(inputs, out, rustc, cargo, environment, suffix)
+        manager = session.storage() if session else tempfile.TemporaryDirectory(prefix='native-game-build-', dir=out)
+        with manager as storage:
             command = [*cargo, 'build', '-j2', '-p', 'incant_game_player', '--profile', 'shipping', '--locked',
                        '--target', target, '--target-dir', storage, '--config', f'profile.shipping.split-debuginfo="{split}"', '--message-format=json', '-vv']
-            if args.render_input: command += ['--features', 'render-gpu' if args.gpu else 'render-input']
-            build = cargo_output(command, cwd=ROOT, env=environment)
+            features = ['render-gpu' if args.gpu else 'render-input'] if args.render_input else []
+            if args.flipbook_sdk: features += ['static-module']
+            if features: command += ['--features', ','.join(features)]
+            if session:
+                build, audited_commands = session.build(command, cwd=ROOT, env=environment)
+            else:
+                build = cargo_output(command, cwd=ROOT, env=environment)
+                audited_commands = build.stderr
+            (out / 'cargo-artifacts.jsonl').write_text(build.stdout, encoding='utf-8')
             (out / 'build.log').write_text(build.stderr, encoding='utf-8')
             require(build.returncode == 0, f'Shipping build failed: {out / "build.log"}')
             flags = {}
-            target_lines = [line for line in build.stderr.splitlines() if 'Running `' in line and f'--target {target}' in line]
+            target_lines = [line for line in audited_commands.splitlines() if 'Running `' in line and f'--target {target}' in line]
             forbidden = ('incant_doc', 'incant_cmd', 'incant_agent', 'incant_editor', 'incant_assets', 'incant_audio', 'incant_core', 'incant_cook', 'incant_play_legacy', 'loro')
             require(not any(re.search(r'--crate-name ('+'|'.join(forbidden)+r')\b', line) for line in target_lines), 'Authoring target dependency compiled')
             extra = ('incant_render_game', 'incant_render_native', 'incant_render_data') if args.render_input else ()
             if args.gpu: extra += ('incant_render_gpu_host', 'incant_render', 'wgpu')
+            if args.flipbook_sdk: extra += ('incant_wasm_runtime',)
             for crate in extra + ('incant_input', 'incant_script', 'incant_runtime', 'incant_physics_runtime', 'rapier3d', 'incant_assets_runtime', 'incant_audio_runtime', 'incant_game_runtime', 'incant_game_player'):
                 lines = [line for line in target_lines if re.search(r'--crate-name '+crate+r'\b', line)]
                 require(len(lines) == 1, f'Missing fresh target compile for {crate}')
@@ -189,6 +210,8 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             for name in ('JS_AddIntrinsicEval', '__JS_EvalInternal', 'js_parse_program', 'js_parse_function_decl', 'incant_script::compiler'):
                 require(name not in symbols, f'Source compiler linked: {name}')
             require(sentinel.encode() not in Path(exe[0]).read_bytes(), 'Source comment embedded')
+            if args.flipbook_sdk:
+                static_build.update(native_flipbook_sdk.verify_build(cargo, environment, build.stderr+build.stdout, symbols, kind))
             player, identity = package(Path(exe[0]), out, kind, llvm_bin)
             metadata_files = list(Path(storage).glob('*/shipping/build/incant_game_player-*/out/script-symbols.json'))
             require(len(metadata_files) == 1, 'Missing script symbols')
@@ -202,12 +225,25 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             dest = out / 'player' / fixture['path'].name
             shutil.copy2(fixture['path'], dest); fixture['path'] = str(dest)
         require(authoring_hash == sha(project), 'Build changed authoring project')
+    if session:
+        session.packaged_player(player)
+    yield
+    if session:
+        session.assert_ready()
     require(not inputs.exists() and not Path(storage).exists(), 'Authoring/build storage remains')
+    if args.flipbook_sdk:
+        shutil.copy2(ROOT/'THIRD_PARTY_NOTICES.md', out/'player/THIRD_PARTY_NOTICES.md')
+        (out/'player/licenses').mkdir()
+        shutil.copy2(ROOT/'licenses/Apache-2.0.txt', out/'player/licenses/Apache-2.0.txt')
+        static_build['temporary_rust_wasm_generated_c_and_translator_deleted'] = True
+        static_build['license_sha256'] = sha(out/'player/licenses/Apache-2.0.txt')
     # Runtime exchange files are intentionally retained and parsed once, not on ticks.
     replay = {'format': 'incant-input', 'version': 1, 'tick_rate': 60, 'start_tick': 0, 'ticks': 120,
               'frames': [{'tick': 1, 'events': [{'type': 'key', 'code': 'KeyD', 'down': True}]}]}
     actions = {n: {'kind': 'button', 'bindings': [{'type': 'key', 'code': c}]} for n, c in (('right', 'KeyD'), ('fail', 'KeyF'))}
     actions.update({n: {'kind': 'button', 'bindings': [{'type': 'key', 'code': c}]} for n,c in LOG_ACTIONS})
+    if args.flipbook_sdk:
+        actions.update({n: {'kind': 'button', 'bindings': [{'type': 'key', 'code': c}]} for n,c in native_flipbook_sdk.ACTIONS})
     if args.render_input: actions['camera_fail'] = {'kind': 'button', 'bindings': [{'type': 'key', 'code': 'KeyC'}]}
     record_path = out / 'player/input.json'; record_path.write_text(json.dumps(replay))
     action_path = out / 'player/actions.json'; action_path.write_text(json.dumps(actions))
@@ -378,10 +414,12 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
         if args.gpu: cmd[9] = '--cpu-render-input'
         return cmd
     logs = verify_logs(out, log_command, results[1]['report'], replay, run, reject, require)
+    sdk = native_flipbook_sdk.verify(out, command, fixtures, results, replay, run, reject, require) if args.flipbook_sdk else None
     require(before == package_hashes(), 'Observation changed retained package')
     report = {'passed': True, 'target': target, 'compiler': compiler, 'codegen': flags, 'symbol_identity': identity,
               'player_bytes': player.stat().st_size, 'player_sha256': sha(player), 'script_metadata': metadata,
               'source_compiler_symbols_absent': True, 'dynamic_source_routes_rejected': True,
+              'flipbook_sdk': sdk, 'static_module_build': static_build,
               'headless_sha256': sha(headless), 'cook_sha256': sha(cook), 'audio_example_sha256': sha(audio), 'fixture_tool_sha256': sha(fixture_tool),
               'public_import': imported, 'public_model_import': model_import, 'public_atlas_import': atlas_import,
               'cpu_render_input': args.render_input and not args.gpu, 'gpu_submitted': args.gpu, 'on_screen_presentation': False,
@@ -397,6 +435,11 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
               'failure_semantics': 'Invalid input/buffer retry is covered in host tests. Any failure after accepted simulation destroys composite state; device cursor is not rolled back. Simulation/host failure creates no output file; output I/O may leave a partial file.'}
     (out/'result.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps({'passed': True, 'bytes': player.stat().st_size, 'sha256': sha(player), 'evidence': str(out/'result.json')}))
+
+
+def main():
+    for _ in phases(arguments()):
+        pass
 
 
 if __name__ == '__main__':

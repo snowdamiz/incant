@@ -105,6 +105,3 @@ impl PhysicsRuntime {
         self.0.compute_character_motion(query, dt)
     }
 }
-fn vector(value: [f64; 3]) -> rapier3d::prelude::Vector {
-    rapier3d::prelude::Vector::from_array(value.map(|v| v as f32))
-}

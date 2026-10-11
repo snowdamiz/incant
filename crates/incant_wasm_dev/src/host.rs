@@ -87,7 +87,7 @@ impl DevModuleHost {
         store.set_fuel(bounds::START_FUEL)?;
         let instance = linker.instantiate(&mut store, &module)?;
         let version = instance.get_typed_func::<(), i32>(&mut store, "incant_abi")?;
-        if version.call(&mut store, ())? != 1 {
+        if version.call(&mut store, ())? != incant_wasm_abi::ABI_VERSION {
             return Err(ModuleError::Abi("unsupported incant_abi"));
         }
         let memory = instance

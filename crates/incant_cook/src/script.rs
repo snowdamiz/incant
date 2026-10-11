@@ -58,6 +58,15 @@ pub fn cook_script(
         }
     }
     let compiled = CompiledScript::compile_named(name, commonjs)?;
+    Ok(artifact_from_compiled(&compiled, source_map))
+}
+
+/// The program has already been freshly compiled by this trusted producer.
+/// Project source maps originate in the fixed, hash-checked Node compiler.
+pub(crate) fn artifact_from_compiled(
+    compiled: &CompiledScript,
+    source_map: Option<&str>,
+) -> CookedScriptArtifact {
     let m = compiled.metadata();
     let hex = |bytes: &[u8]| bytes.iter().map(|v| format!("{v:02x}")).collect::<String>();
     let manifest = json!({
@@ -65,6 +74,7 @@ pub fn cook_script(
         "target": m.target, "source_name": m.source_name,
         "source_sha256": hex(&m.source_sha256),
         "bytecode_sha256": hex(&m.bytecode_sha256),
+        "bindings_sha256": m.bindings_sha256.as_ref().map(|v| hex(v)),
         "hardening_sha256": hex(&m.hardening_sha256),
         "bytecode_bytes": compiled.byte_len(),
         "wrapper_prefix_lines": m.wrapper_prefix_lines,
@@ -73,9 +83,9 @@ pub fn cook_script(
         "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
         "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
     });
-    Ok(CookedScriptArtifact {
+    CookedScriptArtifact {
         rust_module: compiled.embedded_rust(),
         symbol_manifest: format!("{manifest:#}\n"),
         source_map: source_map.map(str::to_owned),
-    })
+    }
 }

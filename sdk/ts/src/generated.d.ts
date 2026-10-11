@@ -65,10 +65,12 @@ export namespace CommandSchema {
   export type Origin = "user" | "agent" | "script" | "import";
   export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
   export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string };
+  export type ScriptSource = { "id": string; "name": string; "path": string };
+  export type SourceVersion = ({ "state": "missing" }) | ({ "sha256": string; "state": "present" });
   export type Stick = "left" | "right";
   export type StringTable = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
   export type TextureUsage = "color" | "linear" | "normal";
-  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" });
+  export type Root = ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "upsert_script"; "script": ScriptSource }) | ({ "op": "remove_script"; "script_id": string }) | ({ "expected_source": SourceVersion; "op": "write_script"; "script_id": string; "source": string }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" });
 }
 export type Command = CommandSchema.Root;
 
@@ -188,6 +190,18 @@ export namespace LocaleSettingsSchema {
 }
 export type LocaleSettings = LocaleSettingsSchema.Root;
 
+export namespace LocalizationReportSchema {
+  export type MissingKind = "translation" | "key";
+  export type MissingString = { "key": string; "kind": MissingKind; "requested_locale": string; "resolved_locale"?: string | null; "table_id": string };
+  export type Root = { "entries": Array<MissingString>; "total": number };
+}
+export type LocalizationReport = LocalizationReportSchema.Root;
+
+export namespace LocalizationReportRequestSchema {
+  export type Root = { "limit"?: number; "offset"?: number };
+}
+export type LocalizationReportRequest = LocalizationReportRequestSchema.Root;
+
 export namespace LocalizeRequestSchema {
   export type CalendarDate = { "day": number; "month": number; "year": number };
   export type MessageArgument = (string) | (number) | (CalendarDate);
@@ -266,15 +280,30 @@ export namespace PhysicsRayHitSchema {
 }
 export type PhysicsRayHit = PhysicsRayHitSchema.Root;
 
+export namespace PhysicsRayHit2DSchema {
+  export type Root = { "distance": number; "entity_id": string; "normal": [number, number]; "point": [number, number] };
+}
+export type PhysicsRayHit2D = PhysicsRayHit2DSchema.Root;
+
 export namespace PhysicsRayQuerySchema {
   export type Root = { "direction": [number, number, number]; "exclude_entity"?: string | null; "filter": number; "include_sensors": boolean; "max_distance": number; "memberships": number; "origin": [number, number, number]; "scene_id": string };
 }
 export type PhysicsRayQuery = PhysicsRayQuerySchema.Root;
 
+export namespace PhysicsRayQuery2DSchema {
+  export type Root = { "direction": [number, number]; "exclude_entity"?: string | null; "filter": number; "include_sensors": boolean; "max_distance": number; "memberships": number; "origin": [number, number] };
+}
+export type PhysicsRayQuery2D = PhysicsRayQuery2DSchema.Root;
+
 export namespace PhysicsTriggerEventSchema {
   export type Root = { "entered": boolean; "first": string; "scene_id": string; "second": string };
 }
 export type PhysicsTriggerEvent = PhysicsTriggerEventSchema.Root;
+
+export namespace PhysicsTriggerEvent2DSchema {
+  export type Root = { "entered": boolean; "first": string; "second": string };
+}
+export type PhysicsTriggerEvent2D = PhysicsTriggerEvent2DSchema.Root;
 
 export namespace PlayAssertionsSchema {
   export type Check = { "expect": Expect; "name": string; "path": string; "tick": number };
@@ -333,6 +362,12 @@ export namespace ScriptClockSchema {
   export type Root = { "elapsed_seconds": number; "tick": number };
 }
 export type ScriptClock = ScriptClockSchema.Root;
+
+export namespace ScriptReadSchema {
+  export type SourceVersion = ({ "state": "missing" }) | ({ "sha256": string; "state": "present" });
+  export type Root = { "matches_history"?: boolean | null; "path": string; "revision": number; "script_id": string; "source"?: string | null; "version": SourceVersion };
+}
+export type ScriptRead = ScriptReadSchema.Root;
 
 export namespace SpotLightSchema {
   export type Root = { "color": [number, number, number]; "inner_degrees": number; "intensity": number; "outer_degrees": number; "range": number };

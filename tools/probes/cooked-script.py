@@ -26,14 +26,18 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
+def arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--physics', action='store_true', help='Also cook/run native rigid-body and angular motion fixture')
     suffix = '.exe' if os.name == 'nt' else ''
     parser.add_argument('--headless-binary', type=Path, default=ROOT / f'target/release/incant_headless{suffix}')
     parser.add_argument('--cook-binary', type=Path, default=ROOT / f'target/release/examples/cook_scene{suffix}')
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def phases(args, session=None):
+    suffix = '.exe' if os.name == 'nt' else ''
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
     rustc = Path(run(['rustup', 'which', 'rustc']).strip())
@@ -49,6 +53,8 @@ def main():
     require(headless.is_file() and cook.is_file(), 'Build the headless and cook_scene tools first')
     with tempfile.TemporaryDirectory(prefix='script-inputs-', dir=out) as inputs:
         inputs = Path(inputs)
+        if session:
+            session.input_directory(inputs)
         project, journal = inputs / 'game.incant.json', inputs / 'history.jsonl'
         run([headless, 'init', project, '--name', 'Embedded script', '--entities', '0'])
         scene_id = next(iter(json.loads(project.read_text())['scenes']))
@@ -265,11 +271,17 @@ export default {update(context: NativeContext) {
         cargo = [str(ROOT / 'tools/cargo')] if os.name != 'nt' else [str(rustc.with_name('cargo.exe'))]
         # Deleted before the first player launch; a source/cache lookup cannot
         # recover an executable artifact from this build's OUT_DIR.
-        with tempfile.TemporaryDirectory(prefix='script-shipping-', dir=out) as storage:
+        manager = session.storage() if session else tempfile.TemporaryDirectory(prefix='script-shipping-', dir=out)
+        with manager as storage:
             command = [*cargo, 'build', '-j2', '-p', 'incant_script_player', '--profile', 'shipping',
                        '--locked', '--target', target, '--target-dir', storage,
                        '--config', f'profile.shipping.split-debuginfo="{split}"', '--message-format=json', '-vv']
-            build = cargo_output(command, cwd=ROOT, env=environment)
+            if session:
+                build, audited_commands = session.build(command, cwd=ROOT, env=environment)
+            else:
+                build = cargo_output(command, cwd=ROOT, env=environment)
+                audited_commands = build.stderr
+            (out / 'cargo-artifacts.jsonl').write_text(build.stdout, encoding='utf-8')
             (out / 'build.log').write_text(build.stderr, encoding='utf-8')
             require(build.returncode == 0, f'Shipping script build failed; see {out / "build.log"}')
             flags = {}
@@ -277,7 +289,7 @@ export default {update(context: NativeContext) {
             if args.physics:
                 checked_crates += ['incant_physics_runtime', 'rapier3d']
             for crate in checked_crates:
-                lines = [line for line in build.stderr.splitlines() if 'Running `' in line
+                lines = [line for line in audited_commands.splitlines() if 'Running `' in line
                          and re.search(r'--crate-name ' + crate + r'\b', line) and f'--target {target}' in line]
                 require(len(lines) == 1, f'Missing fresh target compile for {crate}')
                 require('feature="compiler"' not in lines[0], f'Runtime compiler feature leaked into {crate}')
@@ -343,6 +355,12 @@ export default {update(context: NativeContext) {
         (out / 'player/actions.json').write_text(json.dumps(actions) + '\n')
     # No authoring inputs or build storage exist at this point. Only the player,
     # checked scene and bounded input-exchange files enter the runtime directory; maps are separate.
+    if session:
+        session.packaged_player(player)
+    yield
+    if session:
+        session.assert_ready()
+    require(not inputs.exists() and not Path(storage).exists(), 'Authoring/build storage remains before player launch')
     original_scene = (out / 'player/world.scene').read_bytes()
     observations = []
     for ticks in (0, 1, 2, 3, 4, 60):
@@ -433,6 +451,11 @@ export default {update(context: NativeContext) {
               'scope': 'Native host==target embedded script; no portable ABI, authenticated file loader, full export, mobile execution or phone gate'}
     (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'passed': True, 'target': target, 'player_bytes': result['player_bytes'], 'evidence': str(out / 'result.json')}))
+
+
+def main():
+    for _ in phases(arguments()):
+        pass
 
 
 if __name__ == '__main__':

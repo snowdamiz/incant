@@ -1,0 +1,112 @@
+{
+  "format": "incant-shared-agent-project-access",
+  "version": 1,
+  "base_commit": "c8b05fb18fe17d9b2df737d872a333997d227762",
+  "source_sha256": {
+    "crates/incant_agent/src/access.rs": "eb31e955db5f19b21c1fd5080f0cbfbc53a61e505b4e3ae30a910eb17cf39fe3",
+    "crates/incant_agent/src/lib.rs": "7f00f03ee5a15262bec3d491dcd159844ae9482b71cac405218d6f5f2bd8a147",
+    "crates/incant_agent/src/assets.rs": "a6f850a7e2192963b238120db7caea77abd246628c3a7d7824d99f3b15834db8",
+    "crates/incant_agent/src/play.rs": "a32bf3112adc6735c7910d0240a079aa96da0ea92c988a7e886e5d67e2950e64",
+    "crates/incant_agent/tests/shared.rs": "09e1d6e2a90097add6296ca9e96e3c0a8c1c024af7e01dac3042e5fd8c942697",
+    "crates/incant_headless/src/native_agent_play.rs": "dd332b50fa079e46ccb84515a9e6b39089b79376dab9bdaad54ab7dd6750a56b",
+    "crates/incant_headless/src/native_rpc.rs": "ac5d12bcf0eddd82d591f9d39025a3148c3962b3530d55786a343e616c223173",
+    "crates/incant_headless/src/native_rpc/run.rs": "e61dc53632a38a2b3a32e556ad0719d570c2a6ff045d98ded14068fcc10ff53f",
+    "crates/incant_headless/src/native_agent_play/tests.rs": "cd5b063fa9b6b8286ccae6e3d654fb460e70cfa505b4d97d2d6f855c2678a471"
+  },
+  "checks": [
+    {
+      "command": "./tools/cargo test --locked --profile ci -j2 -p incant_agent",
+      "passed": 47,
+      "log": "/tmp/incant-responsive-agent-checked-tests.log",
+      "sha256": "f5ec4f315cdb23f7d5bebd0df73e873f428f587413fe94d468feff73d5725643"
+    },
+    {
+      "command": "./tools/cargo test --locked --profile ci -j2 -p incant_headless native_agent_play",
+      "passed": 5,
+      "log": "/tmp/incant-responsive-agent-native-tests-final.log",
+      "sha256": "2284549a0ba577173b8c3d7d5ef7e0e04ee110bf2349e6ea51918c61e1931d93"
+    },
+    {
+      "command": "./tools/cargo clippy --locked --profile ci -j2 -p incant_agent -p incant_headless --all-targets -- -D warnings",
+      "passed": true,
+      "log": "/tmp/incant-responsive-agent-checked-clippy.log",
+      "sha256": "63995da22efeca00208e47182b9cc7444e068c2441e2f528a82a4d607405c25a"
+    },
+    {
+      "command": "./tools/cargo test --locked --profile ci -j2 -p incant_headless --bin incant_headless native_agent_play",
+      "passed": 5,
+      "integrated_main": "c8b05fb18fe17d9b2df737d872a333997d227762",
+      "log": "/tmp/incant-responsive-agent-main91-native.log",
+      "sha256": "98561df4774b5c49cb86747d7a054a0c4d07d8d5117088d17d31888b26a66660"
+    },
+    {
+      "command": "node --test tools/tests/native_script.test.mjs",
+      "passed": 19,
+      "integrated_main": "c8b05fb18fe17d9b2df737d872a333997d227762",
+      "log": "/tmp/incant-responsive-agent-main91-node.log",
+      "sha256": "55cd629d759de953fb2a5801b8e5344347cc4b11568722a9204e7c52a4afda78"
+    }
+  ],
+  "review": {
+    "path": "/tmp/incant-responsive-agent-review.md",
+    "sha256": "a376263edaac9d8a5250159ab038bfd5e8395e1062bb2bac2c42b3852da5d5b1",
+    "result": "accepted at reviewed code commit; source-race finding resolved"
+  },
+  "limits": [
+    "deterministic provider doubles, not a live-provider gate",
+    "no chat-panel connection or visual acceptance",
+    "no reference-device performance claim",
+    "shared mutex belongs to one project session",
+    "network reads and compiler work are not preempted by cancellation"
+  ],
+  "reviewed_code_commit": "a582d95e48f5dd3f7402430a73d18fcab915250a",
+  "main92_integration": {
+    "base": "22f30bd36fd744c7298787ea9a46681548b92b69",
+    "original_head": "d50fb0b3a91ca27982ddcf1ce05fc8e2192e8f04",
+    "tested_merge": "524ea5a80ede10e08796df24c036c5a72e17de02",
+    "conflicts": [],
+    "reviewed_source_hashes_unchanged": true,
+    "tests": {
+      "passed": 95,
+      "failed": 0,
+      "ignored": 2,
+      "groups": 23,
+      "scope": "incant_agent and incant_headless; unchanged GPU tests ignored, no new GPU claim"
+    },
+    "clippy": "all targets both packages passed",
+    "headless_build": "passed",
+    "contracts": {
+      "fresh_schema_files_equal": 62,
+      "sdk_bridge": true,
+      "fmt_conventions_diff": true
+    },
+    "public_source_play_proof": {
+      "passed": true,
+      "processes": 2,
+      "rpc_requests": 32,
+      "ticks_per_play": 20,
+      "translations_x": [
+        2.0000000000000004,
+        4.000000000000001,
+        2.0000000000000004,
+        4.000000000000001,
+        2.0000000000000004
+      ],
+      "content_authored_only_through_command_bus": true,
+      "registration_content_attachment_one_transaction": true,
+      "undo_redo_and_recovery": true,
+      "authoring_unchanged_by_play": true,
+      "gpu_submitted": false,
+      "reference_phone_gate": false,
+      "binary_sha256": "55e2bc25b16a6e8788db8ed566c257e4c902bd4223a903f96b16873de73c2603"
+    },
+    "public_proof_sha256": "0c860d3fa5ed0844742c0cb6e08685911343d1a4f1a04cfd64a88b310355a01e",
+    "logs": {
+      "incant-shared-agent-main92-clippy.log": "9a4f6af1683499cf69cb8de5ff90155e44e739d2a854c2dfb22b0fd11d307e9d",
+      "incant-shared-agent-main92-headless.log": "53c13877574de99869dedea3a2ab41e0324e33a3c049ee7961e3800d5c33031d",
+      "incant-shared-agent-main92-schema.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "incant-shared-agent-main92-source-proof.log": "34745772a893e690064bb54ac971850b940915e61ab5a238958eb34b2e49d44d",
+      "incant-shared-agent-main92-tests.log": "d113ff2fa5d886454747b7acb7050bf9c7b79c807bff40091196f452e7fab382"
+    }
+  }
+}

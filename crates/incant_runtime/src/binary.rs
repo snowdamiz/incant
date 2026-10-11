@@ -1,4 +1,4 @@
-//! Versions 1/2/3/4/5/6/7/8, little-endian checked data (not executable code). SHA-256 detects
+//! Versions 1–10, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,7 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 8;
+const VERSION: u32 = 10;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +24,12 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.spatial.iter().any(|n| n.flipbook.is_some()) {
+        let version = if !self.localization.is_default() {
             VERSION
+        } else if !self.navigation.is_empty() {
+            9
+        } else if self.spatial.iter().any(|n| n.flipbook.is_some()) {
+            8
         } else if !self.physics_2d.is_empty() {
             7
         } else if self.spatial.iter().any(|n| n.tilemap.is_some()) {
@@ -115,6 +119,12 @@ impl CookedScene {
                     crate::flipbook_binary::write(&mut bytes, node.entity, f);
                 }
             }
+        }
+        if version >= 9 {
+            crate::navigation_binary::write(&mut bytes, &self.navigation);
+        }
+        if version >= 10 {
+            crate::localization_binary::write(&mut bytes, &self.localization);
         }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
@@ -300,7 +310,7 @@ impl CookedScene {
         }
         if version >= 8 {
             let n = reader.u32()? as usize;
-            if n == 0 || n > spatial.len() || n > reader.remaining_len() / 46 {
+            if (version == 8 && n == 0) || n > spatial.len() || n > reader.remaining_len() / 46 {
                 return Err(SceneError::Invalid("flipbook record count"));
             }
             let mut previous = None;
@@ -318,6 +328,22 @@ impl CookedScene {
                     Some(crate::flipbook_binary::read(&mut reader, &mut budget)?);
             }
         }
+        let navigation = if version >= 9 {
+            crate::navigation_binary::read(&mut reader)?
+        } else {
+            Vec::new()
+        };
+        if version == 9 && navigation.is_empty() {
+            return Err(SceneError::Invalid("version 9 requires navigation"));
+        }
+        let localization = if version >= 10 {
+            crate::localization_binary::read(&mut reader)?
+        } else {
+            Default::default()
+        };
+        if version == 10 && localization.is_default() {
+            return Err(SceneError::Invalid("empty localization suffix"));
+        }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
         }
@@ -334,7 +360,9 @@ impl CookedScene {
             .with_physics(physics)?
             .with_audio(audio)?
             .with_spatial(assets, spatial)?
-            .with_physics_2d(physics_2d)
+            .with_physics_2d(physics_2d)?
+            .with_navigation(navigation)?
+            .with_localization(localization)
     }
 }
 
@@ -346,7 +374,18 @@ fn checksum(bytes: &[u8]) -> [u8; 32] {
 }
 
 pub(crate) struct Reader<'a>(&'a [u8]);
-impl Reader<'_> {
+impl<'a> Reader<'a> {
+    pub(crate) fn new(bytes: &'a [u8]) -> Self {
+        Self(bytes)
+    }
+    pub(crate) fn bytes(&mut self, n: usize) -> Result<&'a [u8], SceneError> {
+        let part = self
+            .0
+            .get(..n)
+            .ok_or(SceneError::Invalid("truncated record"))?;
+        self.0 = &self.0[n..];
+        Ok(part)
+    }
     pub(crate) fn remaining_len(&self) -> usize {
         self.0.len()
     }

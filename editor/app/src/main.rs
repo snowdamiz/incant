@@ -68,33 +68,56 @@ fn engine_read(state: tauri::State<'_, Arc<Editor>>) -> Result<Value, String> {
     )
 }
 #[tauri::command]
-fn engine_execute(
+async fn engine_execute(
     state: tauri::State<'_, Arc<Editor>>,
     commands: Vec<Command>,
     description: String,
     expected_revision: u64,
 ) -> Result<Value, String> {
-    {
-        let mut load = state.bus.lock().map_err(|_| "engine lock failed")?;
-        let bus = load.bus_mut()?;
-        bus.execute(
-            commands,
-            Actor::user("editor"),
-            description,
-            Some(expected_revision),
-        )
-        .map_err(|e| e.to_string())?;
-    }
+    let bus = state.bus.clone();
+    tauri::async_runtime::spawn_blocking(move || -> Result<(), String> {
+        let mut load = bus.lock().map_err(|_| "engine lock failed")?;
+        load.bus_mut()?
+            .execute(
+                commands,
+                Actor::user("editor"),
+                description,
+                Some(expected_revision),
+            )
+            .map_err(|e| e.to_string())?;
+        Ok(())
+    })
+    .await
+    .map_err(|e| e.to_string())??;
     engine_read(state)
 }
 #[tauri::command]
-fn engine_history(state: tauri::State<'_, Arc<Editor>>, redo: bool) -> Result<Value, String> {
-    {
-        let mut load = state.bus.lock().map_err(|_| "engine lock failed")?;
+async fn engine_history(state: tauri::State<'_, Arc<Editor>>, redo: bool) -> Result<Value, String> {
+    let bus = state.bus.clone();
+    tauri::async_runtime::spawn_blocking(move || -> Result<(), String> {
+        let mut load = bus.lock().map_err(|_| "engine lock failed")?;
         let bus = load.bus_mut()?;
         if redo { bus.redo() } else { bus.undo() }.map_err(|e| e.to_string())?;
-    }
+        Ok(())
+    })
+    .await
+    .map_err(|e| e.to_string())??;
     engine_read(state)
+}
+#[tauri::command]
+async fn engine_script_read(
+    state: tauri::State<'_, Arc<Editor>>,
+    script_id: String,
+) -> Result<incant_cmd::ScriptRead, String> {
+    let bus = state.bus.clone();
+    tauri::async_runtime::spawn_blocking(move || {
+        let mut load = bus.lock().map_err(|_| "engine lock failed".to_string())?;
+        load.bus_mut()?
+            .read_script(&script_id)
+            .map_err(|e| e.to_string())
+    })
+    .await
+    .map_err(|e| e.to_string())?
 }
 #[tauri::command]
 fn viewport_bounds(
@@ -141,6 +164,7 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             engine_read,
             engine_execute,
+            engine_script_read,
             engine_history,
             assets::engine_import,
             viewport_bounds,

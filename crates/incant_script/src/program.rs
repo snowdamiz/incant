@@ -8,7 +8,8 @@ use incant_runtime::NativeWorld;
 /// descriptors, never pointers or executable bytes deserialized from a project.
 ///
 /// Static `incant_v1` numeric/structural and `incant_input_v1` read-only snapshot
-/// capabilities use the same accepted native input timeline.
+/// capabilities use the same accepted native input timeline. Additive
+/// `incant_flipbook_v1` exposes bounded committed playback and queued controls.
 // This startup value is consumed immediately, never retained in a collection
 // or on the tick path. Boxing CompiledScript would add a second transient heap
 // allocation before the persistent SessionVm allocation.
@@ -30,9 +31,11 @@ impl From<incant_wasm_runtime::ModuleExports> for SessionProgram {
     }
 }
 impl SessionProgram {
-    pub(crate) fn start(self) -> Result<SessionVm, SessionError> {
+    pub(crate) fn start(self, world: &NativeWorld) -> Result<SessionVm, SessionError> {
         match self {
-            Self::Bytecode(script) => Ok(SessionVm::Bytecode(Box::new(ScriptHost::new(script)?))),
+            Self::Bytecode(script) => Ok(SessionVm::Bytecode(Box::new(ScriptHost::for_world(
+                script, world,
+            )?))),
             #[cfg(feature = "static-module")]
             Self::Static(module) => Ok(SessionVm::Static(Box::new(
                 incant_wasm_runtime::StaticModule::new(module)?,

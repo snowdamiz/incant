@@ -83,7 +83,7 @@ fn v6_round_trip_preserves_binary_frames_and_retained_local_preparation() {
         assert_eq!(node.tilemap.unwrap().placements().as_ptr(), pointer);
         assert!((node.global.w_axis.x - world.tick() as f64 / 60.).abs() < 1e-12);
     }
-    assert!(world.save_bytes().is_err());
+    assert!(world.save_bytes().is_ok());
 }
 #[test]
 fn solid_maps_step_in_retained_solver_and_structural_removal_clears_binding() {

@@ -37,13 +37,16 @@ def binary_id(value):
     return n.to_bytes(16, 'big')
 
 
-def main():
+def arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     suffix = '.exe' if os.name == 'nt' else ''
     parser.add_argument('--headless-binary', type=Path, default=ROOT / f'target/release/incant_headless{suffix}')
     parser.add_argument('--cook-binary', type=Path, default=ROOT / f'target/release/examples/cook_scene{suffix}')
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def phases(args, session=None):
     out = args.output.resolve(); out.mkdir(parents=True, exist_ok=False)
     headless, cook = args.headless_binary.resolve(), args.cook_binary.resolve()
     require(headless.is_file() and cook.is_file(), 'Build the public headless/cook tools first')
@@ -58,6 +61,8 @@ def main():
     fixtures = []
     with tempfile.TemporaryDirectory(prefix='native-audio-authoring-', dir=out) as inputs:
         inputs = Path(inputs); project = inputs / 'audio.incant.json'; journal = project.with_suffix('.journal.jsonl')
+        if session:
+            session.input_directory(inputs)
         run([headless, 'init', project, '--name', 'Native scene audio', '--entities', '0'])
         with wave.open(str(inputs / 'tone.wav'), 'wb') as file:
             file.setparams((2, 2, 48000, 24000, 'NONE', 'not compressed'))
@@ -101,16 +106,22 @@ def main():
                 require(destination.read_bytes()[8:12] == struct.pack('<I', 3), 'Expected audio cooked version3')
                 fixtures.append({'name': name, 'path': destination, 'streaming': streaming, 'rate': rate})
         authoring_hash = sha(project)
-        with tempfile.TemporaryDirectory(prefix='native-audio-build-', dir=out) as storage:
+        manager = session.storage() if session else tempfile.TemporaryDirectory(prefix='native-audio-build-', dir=out)
+        with manager as storage:
             command = [*cargo, 'build', '-j2', '-p', 'incant_audio_runtime', '--features', 'scene', '--example', 'native_scene_audio',
                        '--profile', 'shipping', '--locked', '--target', target, '--target-dir', storage,
                        '--config', f'profile.shipping.split-debuginfo="{split}"', '--message-format=json', '-vv']
-            build = cargo_output(command, cwd=ROOT, env=environment)
+            if session:
+                build, audited_commands = session.build(command, cwd=ROOT, env=environment)
+            else:
+                build = cargo_output(command, cwd=ROOT, env=environment)
+                audited_commands = build.stderr
+            (out / 'cargo-artifacts.jsonl').write_text(build.stdout, encoding='utf-8')
             (out / 'build.log').write_text(build.stderr, encoding='utf-8')
             require(build.returncode == 0, f'Shipping build failed: {out / "build.log"}')
             flags = {}
             for crate in ('incant_assets_runtime', 'incant_audio_runtime', 'incant_runtime', 'native_scene_audio'):
-                lines = [line for line in build.stderr.splitlines() if 'Running `' in line
+                lines = [line for line in audited_commands.splitlines() if 'Running `' in line
                          and re.search(r'--crate-name '+crate+r'\b', line) and f'--target {target}' in line]
                 require(len(lines) == 1, f'Missing fresh target codegen for {crate}')
                 values = codegen(lines[0]); expected = {'opt-level': '3', 'codegen-units': '1', 'panic': 'abort', 'debuginfo': '2', 'split-debuginfo': split}
@@ -132,6 +143,11 @@ def main():
             destination = out / 'player' / fixture['path'].name
             shutil.copy2(fixture['path'], destination); fixture['path'] = str(destination)
         require(authoring_hash == sha(project), 'Build changed authoring project')
+    if session:
+        session.packaged_player(player)
+    yield
+    if session:
+        session.assert_ready()
     require(not inputs.exists() and not Path(storage).exists(), 'Authoring/build input storage remains')
     cache = out / 'player/audio'; table_path = out / 'player/clips.bin'
     before = {p.name: sha(p) for p in cache.iterdir()}
@@ -176,6 +192,11 @@ def main():
               'reference_phone_gate': False, 'failure_semantics': 'Simulation/sync/render failure stops before output creation; no world rollback. Output I/O is not atomic and may leave a partial PCM file.'}
     (out / 'result.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps({'passed': True, 'runs': 16, 'bytes': player.stat().st_size, 'player_sha256': sha(player)}))
+
+
+def main():
+    for _ in phases(arguments()):
+        pass
 
 
 if __name__ == '__main__':

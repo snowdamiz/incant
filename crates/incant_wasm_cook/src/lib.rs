@@ -70,25 +70,23 @@ pub fn prepare(bytes: &[u8]) -> Result<Vec<u8>, CookError> {
                         return Err(error("only function imports supported"));
                     };
                     let ty = &types[index as usize];
-                    let (params, results): (&[V], &[V]) = match (i.module, i.name) {
-                        ("incant_input_v1", "snapshot_len") => (&[V::I64], &[V::I32]),
-                        ("incant_input_v1", "read_snapshot") => {
-                            (&[V::I64, V::I32, V::I32], &[V::I32])
-                        }
-                        ("incant_v1", "chunk_count") => (&[V::I64], &[V::I32]),
-                        ("incant_v1", "chunk_len" | "chunk_flags") => {
-                            (&[V::I64, V::I32], &[V::I32])
-                        }
-                        (
-                            "incant_v1",
-                            "read_ids" | "read_transforms" | "write_transforms" | "read_velocities"
-                            | "write_velocities" | "set_velocity" | "set_parent",
-                        ) => (&[V::I64, V::I32, V::I32], &[]),
-                        ("incant_v1", "spawn") => (&[V::I64, V::I32, V::I32, V::I32, V::I32], &[]),
-                        ("incant_v1", "despawn") => (&[V::I64, V::I32], &[]),
-                        _ => return Err(error("unsupported import capability")),
+                    let contract = incant_wasm_abi::import(i.module, i.name)
+                        .ok_or_else(|| error("unsupported import capability"))?;
+                    let value = |v: &incant_wasm_abi::ValueType| match v {
+                        incant_wasm_abi::ValueType::I32 => V::I32,
+                        incant_wasm_abi::ValueType::I64 => V::I64,
                     };
-                    if ty.params() != params || ty.results() != results {
+                    if !ty
+                        .params()
+                        .iter()
+                        .copied()
+                        .eq(contract.params.iter().map(value))
+                        || !ty
+                            .results()
+                            .iter()
+                            .copied()
+                            .eq(contract.results.iter().map(value))
+                    {
                         return Err(error("import signature"));
                     }
                     funcs.push(index);

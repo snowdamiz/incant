@@ -1,0 +1,77 @@
+{
+  "format_version": 1,
+  "source_head": "fe4ba95d0cfe905bad6053dd87e5392dcd3371cd",
+  "scope": "First local macOS four-proof attempt; standalone passes, shared loader fails before Cargo/player execution. Not a completed matched performance comparison.",
+  "standalone": {
+    "passed": true,
+    "seconds": 529.7636231250071,
+    "started_at": "2026-10-11T05:23:48.662723+00:00",
+    "finished_at": "2026-10-11T05:32:38.440862+00:00",
+    "commands": [
+      {
+        "name": "runtime",
+        "seconds": 96.10032183298608,
+        "returncode": 0,
+        "log_sha256": "b32467593af1f10f80fa1c06421936167e00c5a0daa665e95016287ad1989fdf"
+      },
+      {
+        "name": "audio",
+        "seconds": 100.74042479100171,
+        "returncode": 0,
+        "log_sha256": "f9f27e720a9acdd27c84fc9a8ed2d10c9faeae28a42b6de6da733d02f4d335a9"
+      },
+      {
+        "name": "game",
+        "seconds": 198.92733274999773,
+        "returncode": 0,
+        "log_sha256": "92ad5ecc45ecd741db8a231377033b6ac39059698843647a8a68370cd177cb6d"
+      },
+      {
+        "name": "script",
+        "seconds": 133.6587005420006,
+        "returncode": 0,
+        "log_sha256": "8b2d827523268824ce9486230b0f7ae3aae2c622fe94f14f1421178ef238d3d9"
+      }
+    ],
+    "measurement_sha256": "c8c8036f08e2be4236d33e43d5a0e981fc0b85c0af59a14a947bd470a818b1be"
+  },
+  "shared": {
+    "passed": false,
+    "failure_stage": "Python module loading before any build/player launch",
+    "error": "ModuleNotFoundError: No module named native_game_sprites",
+    "seconds": 0.615651208005147,
+    "log_sha256": "ebddbcb3e8dcabbd002a790865e6d319b6165f39d4750f108f497869eb7b9a09",
+    "measurement_sha256": "654cd1225d1c5e865c6d85a0e4d296f300071d28b004a4cbbaf770a9893172fd"
+  },
+  "public_tools": {
+    "incant_headless": {
+      "bytes": 48894176,
+      "sha256": "2d3caa0116db02576fc5f6d19ddd087a14bc035fc0ac9f8a89121bcd92970f80"
+    },
+    "examples/cook_scene": {
+      "bytes": 2728552,
+      "sha256": "17c560a8ab57ffa19ffd132b193e4236633b7cfd206e8c09ec3fc536229d1910"
+    },
+    "examples/native_scene_audio": {
+      "bytes": 12062704,
+      "sha256": "366c68aadf081a6fb823b3ab3636d7eee6be5690da9cb0338dbdccf17f6007b7"
+    },
+    "examples/no_renderer_fixtures": {
+      "bytes": 798376,
+      "sha256": "c635d2ffb42001938e54e7fe4ea363a44915f1924b9e9a913893a15edf73712c"
+    }
+  },
+  "public_tool_preparation_excluded": true,
+  "persistent_shipping_target_cache": false,
+  "hardware": {
+    "machdep.cpu.brand_string": "Apple M5 Pro",
+    "hw.memsize": "51539607552",
+    "hw.physicalcpu": "15",
+    "hw.logicalcpu": "15"
+  },
+  "platform": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6\nBuildVersion:\t\t25G72\n",
+  "limits": "Exclusive agent Cargo/probe/GPU work only. Existing user applications and OS activity remain untouched; lightweight remote CI monitoring and Git merge coordination continue. Single standalone-then-shared order; no randomization or Windows/device inference.",
+  "ci_adoption": false,
+  "speedup_claim": false,
+  "next_requirement": "Fix loader, freeze/review source and repeat both chains on the same frozen revision in a newly coordinated exclusive interval."
+}

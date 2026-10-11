@@ -1,0 +1,48 @@
+{
+  "recorded_at": "2026-10-11T18:02:53.317360+00:00",
+  "base": "5554e7251a84b57521801986c45c8727119db5d8",
+  "failed_checkpoint": {
+    "candidate": "f8955bec6f0d7bcbd54f30fdbc5b08226e3c326e",
+    "run": 38160866262,
+    "job": 114533307210,
+    "failed_case": "canonical_project_root_with_spaces_and_unicode_cooks_local_imports_into_real_native_motion",
+    "cause": "TypeScript callback forward-slash paths failed raw native-key and pinned-library comparisons",
+    "log_sha256": "e480b1d59ed13dbf7a8624164127f255cfd16fcf852c697502c6b942636f5a93"
+  },
+  "review": {
+    "reviewer": "/root",
+    "result": "Accepted exact three-file source patch and red/green evidence; actual Windows remains pending"
+  },
+  "source_hashes": {
+    "tools/native_script/cook.mjs": "326d0a5817798aabac8c057fb4174ec0a81ee86e97ace22a60f6d51c4d84be37",
+    "tools/native_script/typecheck_host.mjs": "4cc7c7d0d212547a6ed55286eb8786d1cfdd66f96d1116e3f4e8f7145d5132c4",
+    "tools/tests/native_script.test.mjs": "f309ed607b5ddf78d552b1adc628088fed043a093081572a537d509b18cc100e"
+  },
+  "tests": {
+    "node": 19,
+    "actual_rust_typescript": 2,
+    "native_agent": 4,
+    "source_transaction_rpc": 32,
+    "source_transaction_processes": 2,
+    "production_rust_unchanged": true
+  },
+  "red_green": {
+    "baseline": "5554e7251a84b57521801986c45c8727119db5d8",
+    "old_callback_block_sha256": "ac454ccb334d447b149bdd0e97fec371d092d3c49d6b8f7f416f1e2a03d7b655",
+    "old_exit": 1,
+    "old_failed_cases": 2,
+    "old_log_sha256": "9431e81fa1bd2a8f428743ad7ccf4c766889d6a57d8c0de4d7f229d40da21730",
+    "fixed_log_sha256": "15380748387b1408b4f01b13b55ce34a2a05b1fefec45db2c88b449d3a7a2ff6",
+    "scope": "Actual pinned TypeScript compiler with synthetic Windows drive/UNC snapshot names and real pinned ES library text; not actual Windows execution",
+    "old_real_program_diagnostics": true,
+    "old_program_failed_cases": 2,
+    "old_program_log_sha256": "1d94bc44c7ae935f0b89aba057cf5e581707c7d6cb2d3222e50bb536e7e1415d"
+  },
+  "logs": {
+    "/tmp/incant-typecheck-host-agent.log": "a7248665be1b74804e835c01611e7a4c97479b571394b8ecd3ff54b6e69eec52",
+    "/tmp/incant-typecheck-host-all-node.log": "149f12ea63c6b3b05a8db99b8e79bd5254097c0351ab2cd36b9197b6a01b0de5",
+    "/tmp/incant-typecheck-host-rust-compiler.log": "cc5b4ad4f4f17eb87cebeee316c6d15c4bb6265f3cac000e93138615dc1c8793",
+    "/tmp/incant-typecheck-host-source-proof.log": "22c9c0f1f918e3d0e35472f87b6ad09a40b9b07b82bfeacc7575cdd18c19789c"
+  },
+  "limits": "Synthetic drive/UNC paths exercise the actual pinned TypeScript program with real ES library text locally. This is not Windows execution; complete actual Windows and all23 release contexts remain required in a future frozen checkpoint. No retry or weakened fixture."
+}

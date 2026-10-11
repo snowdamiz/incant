@@ -16,22 +16,153 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Shared agent project access — locally verified
+
+The agent loop can share the editor command bus without holding its mutex during
+provider requests, streaming, approvals, asset cooking or perception. The common
+mutation path retains revision checks, provenance and undo. Native Play validates
+the captured revision after immutable startup and before candidate ticks, so a
+concurrent script write cannot publish a mixed scene/source revision. All 47 agent
+tests, five native agent Play cases and scoped Clippy pass; independent review
+accepted the corrected source-race boundary. [Evidence](docs/spikes/shared-agent-project-access.md).
+This is backend work; chat-panel wiring, visual approval/history and budget UI
+remain outstanding. It does not complete Phase 3 or a live-provider gate.
+
+## CI cadence change — 2026-10-11
+
+The director authorized local tests and a fast hosted development gate for main,
+with comprehensive cross-platform CI on one frozen release checkpoint approximately
+every three hours. [ADR 0014](docs/adr/0014-ci.md) defines integration, cache and
+failure handling. The integrated policy passes 138 Python, 12 Node and 536 UI tests, strict types/build,
+formatting, generated checks and actionlint; [evidence](docs/spikes/release-checkpoints.md).
+PR83 merged after its exact-head fast check passed: 2s queue and119s execution. Main requires that fast check; release was bootstrapped at fully checked main82 and now requires all 23 full contexts, including local-service protocols. Both enforce administrators and prohibit force pushes/deletion. The three-hour heartbeat is active; the first three checkpoints remain unpromoted after diagnosed failures. The historical missing-Wasm-target failure remains recorded separately.
+No phase, live-provider or physical-device performance gate is waived.
+
+The initial frozen checkpoint PR85 found a Windows-only journal test lock violation. A reviewed test-only lifetime correction passes all six scoped cases and Clippy locally; Checkpoint 2 confirmed these Windows cases; complete release promotion remains pending. [Failure and repair evidence](docs/spikes/script-journal-test-portability.md).
+
+The second frozen checkpoint includes the Windows journal repair and all 23 release
+contexts. Its local-service job exposed a Linux private S3 config UID mismatch;
+the isolated repair passes the real local protocol/restart proof while preserving
+private permissions and the non-root server. The checkpoint also found macOS
+Python process-observation and Windows native TypeScript startup failures. All eight workflows are now terminal: 20 required contexts passed and these three failed.
+The combined reviewed repairs pass 199 Python tests (four Windows-only skips),
+17 Node tests and scoped native compiler checks. All failures remain recorded;
+no failed checkpoint is promoted. PR89 merged after its 126-second fast check;
+checkpoint 3 was frozen at repaired main89 with all 23 contexts retained.
+[Combined evidence](docs/spikes/checkpoint-2-portability.md).
+[Service correction evidence](docs/spikes/local-service-foundation.md#linux-private-bootstrap-correction).
+
+Checkpoint 3 passed the Linux service repair and macOS Python tooling step, then
+Windows exposed a separate restricted TypeScript-host path lookup mismatch.
+The reviewed correction normalizes only compiler callback keys, preserves strict
+source/library confinement and passes actual TypeScript drive/UNC regressions,
+19 Node tests, six actual native compiler/agent tests and the source RPC proof.
+Checkpoint 3 is terminal with 22 of 23 required checks passing; macOS general
+validation took 49m39s plus 4m37s queue. Its failed result remains historical,
+and checkpoint 4 confirmed that exact authored TypeScript native-agent regression on Windows.
+[Evidence](docs/spikes/windows-native-compiler-entry.md#checkpoint-3-restricted-typescript-host-lookup).
+
+Checkpoint 4 is frozen at reviewed main94. All three native physics jobs exposed
+a stale isolated probe lock missing navigation/localization dependencies. The
+reviewed repair preserves existing pins and the engine's vendored source patch;
+the fast structural regression adds no Rust compilation or new check context.
+The candidate remains unchanged while the repair is validated on main.
+[Failure and repair scope](docs/spikes/checkpoint-4-probe-lock.md).
+
+A later checkpoint 4 Windows export audit failed after the fresh shipping build:
+PE bytecode symbols were incorrectly read with llvm-nm. The reviewed correction
+uses a fresh final-link map and preserves parser/codegen checks and matched PDB
+packaging. Local PE/PDB fixture validation, 206 Python tests (four skipped), and
+a fresh macOS export with three source-deleted runs pass; complete Windows export
+confirmation is required in the next frozen checkpoint.
+[Exact failure and repair evidence](docs/spikes/checkpoint-4-export-symbols.md).
+
+## Authored source and native package — locally integrated
+
+Native localization now carries authored string tables through checked cooked
+scenes into bounded TypeScript queries and the source-free player. Runtime locale
+commands share atomic rollback, and world save v3 retains settings/catalog with
+origin binding. Local validation passed 372 tests (two existing GPU tests ignored),
+Clippy/contracts and three fresh shipping replays after authoring/build removal;
+both independent source reviews passed. Actual main93 integration additionally
+passes 420 affected tests, Clippy, 64 exact contracts and a repeated fresh three-run
+source/build-deleted shipping proof with every accepted input unchanged.
+Font rendering, RTL/CJK visual checks,
+static-Wasm localization, composite session persistence and physical-device gates
+remain separate. [Implementation and evidence](docs/spikes/native-localization.md).
+
+A public host-equals-target exporter now cooks authored Script attachments into a
+fresh shipping player and copies only referenced native assets. Three fresh
+source-deleted runs reproduce all expected motion; startup tampering is refused.
+Source transactions and the shared compiler/exporter now integrate actual main87.
+The public acceptance probe creates/writes/attaches, plays, saves, reopens and
+exports through the real interfaces, then reproduces motion after deleting its
+private authoring fixture. 786 workspace, 75 GPU, 15 optional window/project,
+178 Python (two Windows skips), 17 Node and 536 UI tests pass, with Clippy,
+build/generation and shipping audits. Independent review removed a resurrected
+old workflow and duplicate tests. [Evidence](docs/spikes/native-project-package.md).
+Existing full checkpoint jobs include the export probe. Checkpoint 4 passed hosted
+Linux and macOS export execution; Windows symbol-audit correction, window package
+execution and complete UI/export/device gates remain open.
+
+The shared-agent backend's actual main92 integration preserves all nine reviewed
+source identities and passes95 Agent/headless tests, scoped Clippy,62 exact
+contracts and the public32-request/two-process source/Play proof. The stale
+source-cook regression rejects a mixed candidate and retains the previous run.
+Editor chat wiring remains separate. [Evidence](docs/spikes/shared-agent-project-access.md).
+
 ## Current integration and parallel work
+
+The closed retained-state / native SDK / shared Play-startup union passes 837
+ordinary and 75 serialized GPU tests, full Clippy, 536 UI tests and the fresh
+four-player shipping proof. Audio and navigation preparation now precede all
+publication, with a combined atomic-refusal regression. World-save v2 remains
+world-only; solver/audio/VM continuation and editor controls remain open.
+The repaired main89 integration also passes two actual compiler cases, 51
+Play/headless tests, scoped Clippy, the 32-request public source proof and 199
+Python tests (four Windows-only skips).
+[Integrated evidence](docs/spikes/native-state-play-union.md).
+
+- Checkpoint 2 Windows native TypeScript startup has a reviewed local path adapter
+  correction: fixed engine-relative entry and canonical-equivalent ordinary launch
+  cwd; the scrubbed environment remains unchanged. Nine local tests and scoped
+  Clippy pass; actual Windows helper/workspace execution remains required.
+  [Diagnosis and evidence](docs/spikes/windows-native-compiler-entry.md).
+
+- Local native TypeScript navigation queries are implemented and independently reviewed:
+  committed mesh/grid paths with owned off-mesh metadata, revocable cache loans,
+  shared bounded search work and atomic script rollback. 299 distinct scoped tests,
+  Clippy and generated-contract checks pass. Repaired main91 integration preserves
+  all reviewed source hashes and passes 351 scoped tests, Clippy, 62 exact contracts
+  and the real 32-request/two-process source/Play proof.
+  [Evidence](docs/spikes/native-script-navigation.md).
+  Query-only: movement, grid/world mapping, steering, automatic traversal, runtime
+  rebuild controls, static-Wasm parity and physical-device navigation gates remain open.
 
 | Workstream | Current result | Next work / boundary |
 | --- | --- | --- |
 | Editor and sprite authoring | [PR #61](https://github.com/snowdamiz/incant/pull/61) combines the final plain UI, typed atlas/audio imports, focus fixes and the corrected sprite/atlas baseline. 524 UI tests, strict TypeScript, production and native builds pass. | Merged after exact-head hosted checks and isolated native Claude acceptance. [Evidence](docs/spikes/editor-release-union.md). |
+| Local service foundation | Digest-pinned Postgres/S3-compatible storage/Zitadel/SMTP capture with private generated state and loopback-only access passes 28 actual local protocol checks plus four restart-persistence checks after integration with actual main84. Private state-home refusal and complete SMTP body verification are covered by 16 scoped tests; all 154 Python and 17 Node tooling tests pass. | Independent scoped review accepted the foundation; checkpoint 2 exposed the Linux private-config ownership issue. Its reviewed correction passes the actual local protocol and restart controls. The candidate-only `local-service-protocols` context is now required among 23 checks; checkpoint 3 has passed all 28 protocol and four restart/persistence controls on hosted Linux AMD64. Accounts/player services, PITR, other local substitutes and real provider/device gates remain. [Evidence](docs/spikes/local-service-foundation.md). |
+| Script-source transactions | Shared `write_script` combines one bounded `.ts` content edit with registration and attachment, with exact-preimage Undo/Redo, actor provenance and recoverable Prepare/Commit/Abort history. Registered-ID read/write tools and trusted editor/headless adapters use the same bus. | Locally: 145 scoped tests, Clippy, 59 generated contracts and 32 real RPC requests across two processes pass, including native motion and crash recovery. Source/compiler/package integration now passes the actual recovery guard and source-deleted shipping proof; existing three-OS checkpoint CI will collect platform execution evidence. Multi-file authoring, reconciliation UI, a script editor and complete agent-created gameplay remain open. [Evidence](docs/spikes/script-source-transactions.md). |
 | Import completion and Undo | Native imports return an exact revision/transaction receipt; unchanged imports preserve history and redo without offering stale Undo. Claude 0038 accepted the browser completion copy on frozen source. | The original PLAN revision 8/import union is included in merged PR76 and PR80 after their full applicable checks passed; 534 UI tests and the scoped native receipt/Undo checks pass. [Evidence](docs/spikes/editor-import-receipts.md). |
-| Native TypeScript cooking | Strict bounded local module cooking, flat source maps and developer native playback pass 12 Node/90 Python tests and six real source-deleted process controls. | Integrated with verified main81; 695 ordinary/73 GPU tests, 98 Python/12 Node tools and twelve source-deleted developer processes pass. Hosted checks, full editor/project Script routing, complete SDK and export/device gates remain. [Evidence](docs/spikes/native-typescript-cook.md). |
-| Native Play RPC and agent | Cooked-native retained RPC and bounded agent play/query now pass 87 scoped release tests, 92 Python/12 Node tests and twelve source-deleted developer processes. A real saved-OAuth Astra turn successfully ran and queried native gameplay without edits. | Combined candidate integrated with verified main81 and the planar save refusal; 695 ordinary/73 GPU regressions, 536 UI tests and twelve source-deleted developer processes pass. PR82 is published; a legacy save-test fixture correction passes all54 scoped tests/Clippy and keeps production CPU deadlines intact. Corrected-head hosted checks, editor controls, project Script routing, gameplay capture and complete session saves remain. [Integrated evidence](docs/spikes/native-agent-integration.md). [RPC](docs/spikes/native-play-rpc.md), [agent evidence](docs/spikes/native-agent-play.md). |
+| Native TypeScript cooking | Project-attached sources now cook once into grouped native behaviors with frozen per-entity props, scoped timers and atomic whole-tick rollback. 730 workspace tests, 98 Python/17 Node/536 UI tests and a 16-process source-deleted embedding proof pass locally. | Reviewed local implementation; editor controls, source editing, complete SDK/save/export integration and hosted/device gates remain. [Attached scripts](docs/spikes/native-project-scripts.md), [embedding proof](docs/spikes/native-project-script-embedding.md). |
+| Native Play RPC and agent | Cooked-native retained RPC and bounded agent play/query passed twelve source-deleted developer processes and a real saved-OAuth Astra turn. The new local attached-script route passes actual fixed-Node dispatcher tests, public CLI motion checks and a saved-OAuth provider run with native play/query. | Base capability is merged through PR82 after all21 required checks passed. Attached-script changes stay local for combined integration; editor controls, gameplay capture and complete session saves remain. [RPC](docs/spikes/native-play-rpc.md), [agent evidence](docs/spikes/native-agent-play.md). |
 | Native game and rendering | Input, embedded QuickJS, native physics, scene audio and retained GPU submission compose through one accepted-tick lifecycle. Binary v5 sprites share immutable geometry. | [PR #62](https://github.com/snowdamiz/incant/pull/62) is merged after all 20 checks. Native editor/legacy Play migration, complete SDK, shader pipeline work and device budgets remain. |
-| Native window player | Optional cooked native game window has bounded recovery, keyboard/mouse input, suspension and device audio. Source-free lifecycle checks and Claude0037 corrected native acceptance pass. [Evidence](docs/spikes/native-window-player.md). | PR63 is included in merged [PR80](https://github.com/snowdamiz/incant/pull/80), whose 21 applicable checks passed. Paused refresh preserves gameplay/audio; fullscreen-route limitations remain explicit. No phone or frame-budget claim. |
+| Native window player | Optional cooked native game window has bounded recovery, keyboard/mouse input, suspension and device audio. Source-free lifecycle checks and Claude0037 corrected native acceptance pass. [Evidence](docs/spikes/native-window-player.md). | PR63 is included in merged [PR80](https://github.com/snowdamiz/incant/pull/80), whose 21 applicable checks passed. Paused refresh preserves gameplay/audio; fullscreen-route limitations remain explicit. Current-window scale now converts pointer/pixel-wheel coordinates to logical pixels while preserving line units/signs/order; 19 integrated numerical/routing tests and Clippy pass. [Input evidence](docs/spikes/native-player-input-units.md). No phone or frame-budget claim. |
 | Native tilemaps | Typed v6 data and exact solid-cell collision preparation preserve the reviewed [PR68](https://github.com/snowdamiz/incant/pull/68) ancestry in the consolidated union. Retained GPU tile rendering now shares checked atlas versions, painter ordering and combined sprite/tile resource caps; 45 ordinary and 62 GPU tests pass. | Claude0039 accepted scoped tile appearance; PR68/73 are included in merged PR80 with passing hosted checks. Native solid-map collision is included through the planar physics boundary below; legacy Play remains unsupported. [Data](docs/spikes/native-tilemaps.md), [rendering](docs/spikes/native-tilemap-rendering.md). |
 | Native planar physics | Retained Rapier2D, cooked v7, typed native commands and solid-map collision pass 585 workspace tests, 66 GPU tests, 18 native/browser parity streams and seven fresh shipping processes. | PR78 is included in merged PR80; hosted cross-desktop 2D parity and all applicable checks passed. Root/unit-scale planar bodies only; physics saves, 2D character/joints, full script SDK and phone/performance gates remain open. [Evidence](docs/spikes/native-physics-2d.md). |
-| Native flipbooks | Local v8 cooking, rational playback, typed controls and cached geometry pass 666 workspace tests, 71 actual GPU cases, Clippy and fresh source-free shipping controls. | Claude0042 appearance accepted; combined prewarming tree passes 72 GPU cases and fresh shipping. Actual main80 is integrated; the single corrected-FBX/rendering union passes 685 ordinary/73 GPU tests and a fresh shipping proof; all 21 hosted checks passed and PR81 is merged. No SDK/save/device gate claim. [Evidence](docs/spikes/native-flipbooks.md). |
-| Static FBX import | Shared asset transactions accept a bounded static subset through pinned MIT ufbx; existing cooked model/texture formats and stable reimport IDs are preserved. 71 scoped Rust and 531 UI tests, Clippy and 11 CLI process controls pass. | Claude0040 accepts static conversion/colour/reimport and the separate generated-tangent correction after 101 ordinary/61 numerical GPU tests and a bounded 12-capture delta. The corrected FBX/prewarming/flipbook union passes 685 ordinary/73 GPU tests and a fresh source-free player proof; all 21 hosted checks passed and PR81 is merged. The separately identified shared OPAQUE/emissive/environment mip-filter defect remains open. Browser source-model cooking explicitly refuses; actual browser dispatch and native fixture checks pass. Animation, skinning and full FBX compatibility remain unsupported. [Evidence](docs/spikes/static-fbx-import.md). |
+| Native flipbooks | Local v8 playback and its additive QuickJS/Wasmtime/wasm2c bulk SDK are independently reviewed. The frozen SDK passes 687 workspace and 158 combined conformance tests plus a fresh 64-success/43-refusal shipping proof. | The corrected FBX/prewarming/flipbook baseline is merged through PR81 after all21 hosted checks. The SDK and shared shipping union are published in PR83 with integrated local verification; the policy transition and corrected setup merged through PR83 after the fast main gate passed. Full release-checkpoint validation remains pending. The generated public Rust SDK is locally integrated below; complete gameplay SDK, save and device/performance gates remain. [Playback](docs/spikes/native-flipbooks.md), [SDK evidence](docs/spikes/native-flipbook-sdk.md). |
+| Static FBX import | Shared asset transactions accept a bounded static subset through pinned MIT ufbx; existing cooked model/texture formats and stable reimport IDs are preserved. 71 scoped Rust and 531 UI tests, Clippy and 11 CLI process controls pass. | Claude0040 accepts static conversion/colour/reimport and the separate generated-tangent correction after 101 ordinary/61 numerical GPU tests and a bounded 12-capture delta. The corrected FBX/prewarming/flipbook union passes 685 ordinary/73 GPU tests and a fresh source-free player proof; all21 combined hosted checks passed in merged PR81. The separate OPAQUE/emissive/environment mip-filter correction is locally integrated below; combined checks remain pending. Browser source-model cooking explicitly refuses; actual browser dispatch and native fixture checks pass. Animation, skinning and full FBX compatibility remain unsupported. [Evidence](docs/spikes/static-fbx-import.md). |
+| Color mip roles | Local INCMOD03 and Color manifest3 preserve alpha-independent OPAQUE/emissive/environment RGB while retaining sprite/MASK/BLEND coverage filtering. Integrated PR81 source passes 703 workspace ordinary tests, Clippy and 68 numerical renderer GPU tests; checked base sharing retains logical resource caps. Claude0043 accepted 13 bounded captures without a blocker. | The PR83 SDK/color union passes 739 ordinary and 75 serialized GPU tests plus the complete local four-player fresh proof; twenty old hosted checks passed, and the general setup failure is corrected locally. The exact new fast main gate passed; complete release checks remain a separate pending gate. Old immutable versions require source-backed reimport to adopt the fix. [Evidence](docs/spikes/color-mip-roles.md). |
 | Native WebAssembly | Shared bounded capability ABI serves Wasmtime and wasm2c. PR #64 passed actual Windows /Od + /O2, Linux and macOS static conformance and fresh packaging. PR #67 composes static modules with the native game session. The versioned input ABI now drives real guest motion/spawns in both hosts and a fresh local packaged game proof. | The input/composed-player hosted checks passed in the merged runtime union. Complete SDK, static-module renderer/session saves and device gates remain. [Input ABI evidence](docs/spikes/native-wasm-input-abi.md). |
-| CI speed | Registry-only caches have actual three-host consumers. The strict documentation selector and measured opt1 functional profile are merged through PR76/80; all applicable hosted checks passed with full shipping coverage. | Main79 saved all three native CI-profile dependency caches. These cold migration jobs do not establish a warm Windows speedup; next natural consumers provide that evidence. [Profile scope](docs/spikes/ci-test-profile.md); shared fresh-build storage remains off CI. Shipping audits and device gates are unchanged. |
+| CI speed | Registry-only caches have actual three-host consumers. The strict documentation selector and measured opt1 functional profile are merged through PR76/80; all applicable hosted checks passed with full shipping coverage. | Main79 saved all three native CI-profile dependency caches. These cold migration jobs do not establish a warm Windows speedup; next natural consumers provide that evidence. [Profile scope](docs/spikes/ci-test-profile.md). A single older matched local macOS sample saved 16.8%; the final SDK/color union now passes all four fresh proofs and selects the reviewed shared session in the macOS workflow. Its hosted correctness/latency remains pending; no Windows/device speed claim. Shipping audits and device gates are unchanged. [Proof](docs/spikes/shipping-fresh-session.md). |
+| Generated Rust module SDK | Local public no_std Rust SDK and generated v1 host/guest/C registry bindings preserve existing capabilities. 167 actual-host conformance tests, 692 workspace tests, Clippy and a fresh 8-success/26-refusal shipping proof pass. | Independent review and combined 167-test actual-host conformance, real guest execution and fresh GPU/SDK player proof pass; hosted platform checks remain pending. No complete gameplay SDK, module build sandbox, save, device or performance gate. [API guide](sdk/rust/README.md), [evidence](docs/spikes/native-rust-sdk.md). |
+
+The local npm cache follow-up preserves existing keys and download paths while
+restricting saves to successful exact default-branch or frozen release-candidate
+jobs. All 131 tooling tests and
+workflow lint pass; hosted restore/version compatibility and retained-size
+measurements remain pending. [Evidence](docs/spikes/npm-cache-producers.md).
 
 Credential CI has a report-only locked dependency classifier and conservative
 local-crate trigger coverage. Actual tests remain enabled; any selection policy
@@ -59,8 +190,10 @@ PR chains and repeated CI restarts for metadata-only updates.
 
 PR76, PR79, PR80 and PR81 are merged. PR80 includes the exact PR63/68/73/78 source
 history; PR81 preserves the corrected PR77 history, pipeline preparation and
-flipbooks after all 21 checks passed. The next publication combines native
-TypeScript cooking, RPC/agent Play and the planar save refusal on actual main81.
+flipbooks after all 21 checks passed. PR82 has since merged native TypeScript
+cooking, RPC/agent Play and planar-save refusal after all21 checks. PR83 now
+combines the reviewed SDK/color/shared shipping work with the director-authorized
+CI cadence transition. Authored native Play is merged through PR84. PR86 adds local services and PR87 fixes the checkpoint-discovered Windows journal test. The source-transaction/package successor integrates actual main87 with passing local checks; navigation and retained world saves remain the next local consolidation slice.
 Further work remains local; this queue does not waive any phase or device gate. [Verified ancestry and queue evidence](docs/spikes/foundation-integration-queue.md).
 
 ## Implemented boundaries and evidence
@@ -270,3 +403,9 @@ The reviewed general-check selector allows only nine audited plan/convention/ADR
 files onto a Linux documentation path, preserving full checks for every other
 change and all classification failures. Local82tool tests/actionlint pass; hosted
 latency remains pending. [Policy and evidence](docs/spikes/ci-document-selection.md).
+
+The private authored-script union now includes the reviewed PR83 policy without
+changing its tested runtime/compiler/ABI inputs. Integrated verification includes
+761 ordinary tests, 75 GPU tests, 178 actual-host conformance tests, full Clippy,
+536 UI tests and 17 Node tests. The fresh bound-script embedding proof passed all16 copied-player processes after removing source/build storage. [Integrated evidence](docs/spikes/native-authored-sdk-integration.md).
+Actual main83 is now integrated without a tree change; the authored candidate is ready for direct-main publication.

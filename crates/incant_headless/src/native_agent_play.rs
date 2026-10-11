@@ -23,6 +23,23 @@ impl<P: EngineHost> EngineHost for Host<P> {
     fn native_play_available(&self) -> bool {
         true
     }
+    fn shared_play_available(&self) -> bool {
+        true
+    }
+    fn play_run_checked(
+        &mut self,
+        project: &Project,
+        revision: u64,
+        request: RunRequest,
+        cancel: &AtomicBool,
+        validate: &mut dyn FnMut() -> Result<(), AgentError>,
+    ) -> Result<Value, AgentError> {
+        self.play
+            .run_checked(project, revision, &self.root, request, cancel, &mut || {
+                validate().map_err(crate::native_rpc::Error::Snapshot)
+            })
+            .map_err(agent_error)
+    }
     fn play_run(
         &mut self,
         project: &Project,
@@ -32,13 +49,7 @@ impl<P: EngineHost> EngineHost for Host<P> {
     ) -> Result<Value, AgentError> {
         self.play
             .run(project, revision, &self.root, request, cancel)
-            .map_err(|error| {
-                if matches!(error, crate::native_rpc::Error::Interrupted) {
-                    AgentError::Interrupted
-                } else {
-                    AgentError::Tool(error.to_string())
-                }
-            })
+            .map_err(agent_error)
     }
     fn play_state_query(&mut self, path: &str) -> Result<Value, AgentError> {
         self.play
@@ -53,6 +64,14 @@ impl<P: EngineHost> EngineHost for Host<P> {
         height: u32,
     ) -> Result<Value, AgentError> {
         self.viewport.screenshot(project, camera, width, height)
+    }
+}
+
+fn agent_error(error: crate::native_rpc::Error) -> AgentError {
+    match error {
+        crate::native_rpc::Error::Interrupted => AgentError::Interrupted,
+        crate::native_rpc::Error::Snapshot(error) => error,
+        error => AgentError::Tool(error.to_string()),
     }
 }
 

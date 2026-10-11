@@ -7,7 +7,6 @@ publish.workspace = true
 
 [dependencies]
 serde.workspace = true
-serde_json.workspace = true
 schemars.workspace = true
 thiserror.workspace = true
 sha2.workspace = true
@@ -18,3 +17,6 @@ glam_avoidance = { package = "glam", version = "=0.29.3", features = ["libm"] }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 getrandom = { version = "0.3", features = ["wasm_js"] }
+
+[dev-dependencies]
+serde_json.workspace = true

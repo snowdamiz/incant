@@ -1,9 +1,9 @@
 //! Development project play on the native graph. Project validation/cooking and
-//! binary loading precede simulation. Scripts are embedded by the trusted cook
-//! during the native build; playback never reads or parses script source.
+//! binary loading precede simulation. Authored TypeScript uses a fixed trusted
+//! startup cook; scenes without attachments use the native build's embedded
+//! behavior. Simulation has no source parsing or authoring dependency.
 use incant_input::InputReplay;
 use incant_observe::Plan;
-use incant_runtime::StableId;
 mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
 }
@@ -70,15 +70,6 @@ fn bounded(path: &Path, limit: usize) -> Result<Vec<u8>> {
         return Err(invalid("startup input exceeds its byte limit"));
     }
     Ok(bytes)
-}
-fn id(text: &str) -> Result<StableId> {
-    let value = text
-        .parse::<ulid::Ulid>()
-        .map_err(|_| invalid("expected canonical uppercase ULID"))?;
-    if value.to_string() != text {
-        return Err(invalid("expected canonical uppercase ULID"));
-    }
-    Ok(StableId(value.to_bytes()))
 }
 fn ticks(options: &Options, rate: u32) -> Result<u64> {
     if let Some(ticks) = options.ticks {
@@ -216,7 +207,7 @@ pub fn run(options: Options) -> Result<Report> {
         passed: observations.as_ref().is_none_or(|r| r.passed),
         runtime: "native",
         script_source_sha256: game.script_source_sha256.clone(),
-        script_source_parsing: false,
+        script_source_parsing: game.authored_scripts,
         scene: game.scene.clone(),
         tick: world.tick(),
         tick_rate: world.tick_rate(),

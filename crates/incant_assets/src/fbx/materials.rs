@@ -1,8 +1,6 @@
 use super::unsupported;
-use crate::{
-    AssetError, MAX_SOURCE_BYTES, ModelTexture, Result, SourceSet, Texture, TextureUsage,
-    import_image, invalid,
-};
+use crate::texture::{ImageRole, import_image_role};
+use crate::{AssetError, MAX_SOURCE_BYTES, ModelTexture, Result, SourceSet, Texture, invalid};
 use serde_json::{Value, json};
 use std::{
     collections::{BTreeMap, BTreeSet},
@@ -15,7 +13,7 @@ pub(super) struct Materials<'a> {
     source: &'a Path,
     textures: Vec<ModelTexture>,
     images: Vec<Texture>,
-    variants: BTreeMap<(u32, TextureUsage), usize>,
+    variants: BTreeMap<(u32, ImageRole), usize>,
     decoded_bytes: usize,
 }
 impl<'a> Materials<'a> {
@@ -115,10 +113,17 @@ impl<'a> Materials<'a> {
         {
             return Err(unsupported("advanced material lobes"));
         }
-        let allowed: [(&MaterialMap, TextureUsage); 3] = [
-            (base, TextureUsage::Color),
-            (emission, TextureUsage::Color),
-            (normal, TextureUsage::Normal),
+        let allowed: [(&MaterialMap, ImageRole); 3] = [
+            (
+                base,
+                if alpha < 1. {
+                    ImageRole::ColorCoverage
+                } else {
+                    ImageRole::ColorUnweighted
+                },
+            ),
+            (emission, ImageRole::ColorUnweighted),
+            (normal, ImageRole::Normal),
         ];
         let ids: BTreeSet<_> = allowed
             .iter()
@@ -179,7 +184,7 @@ impl<'a> Materials<'a> {
         }
         Ok(value)
     }
-    fn texture(&mut self, t: &ufbx::Texture, usage: TextureUsage) -> Result<usize> {
+    fn texture(&mut self, t: &ufbx::Texture, usage: ImageRole) -> Result<usize> {
         if t.type_ != ufbx::TextureType::File || t.has_uv_transform || !t.has_file {
             return Err(unsupported(
                 "non-file texture or texture-coordinate transform",
@@ -204,16 +209,30 @@ impl<'a> Materials<'a> {
             self.sources
                 .read(&self.source.parent().unwrap_or(Path::new("")).join(relative))?
         };
-        let image = import_image(&bytes, usage)?;
+        let mut image = import_image_role(&bytes, usage)?;
+        let other = match usage {
+            ImageRole::ColorCoverage => Some(ImageRole::ColorUnweighted),
+            ImageRole::ColorUnweighted => Some(ImageRole::ColorCoverage),
+            _ => None,
+        };
+        if let Some(other) = other.and_then(|role| self.variants.get(&(t.element.typed_id, role))) {
+            let binding = &self.textures[*other];
+            let image_id = binding
+                .color
+                .or(binding.color_unweighted)
+                .expect("color variant has an image");
+            image.share_base_from(&self.images[image_id])?;
+        }
         self.decoded_bytes = self
             .decoded_bytes
-            .checked_add(image.levels.iter().map(Vec::len).sum::<usize>())
+            .checked_add(image.payload_bytes())
             .filter(|n| *n <= MAX_SOURCE_BYTES)
             .ok_or(AssetError::Limit("decoded FBX model textures"))?;
         let image_id = self.images.len();
         self.images.push(image);
         let mut record = ModelTexture {
             color: None,
+            color_unweighted: None,
             linear: None,
             normal: None,
             mag_filter: None,
@@ -222,9 +241,10 @@ impl<'a> Materials<'a> {
             wrap_t: wrap(t.wrap_v),
         };
         match usage {
-            TextureUsage::Color => record.color = Some(image_id),
-            TextureUsage::Linear => record.linear = Some(image_id),
-            TextureUsage::Normal => record.normal = Some(image_id),
+            ImageRole::ColorCoverage => record.color = Some(image_id),
+            ImageRole::ColorUnweighted => record.color_unweighted = Some(image_id),
+            ImageRole::Linear => record.linear = Some(image_id),
+            ImageRole::Normal => record.normal = Some(image_id),
         }
         let id = self.textures.len();
         self.textures.push(record);

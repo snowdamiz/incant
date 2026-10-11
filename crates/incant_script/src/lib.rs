@@ -2,24 +2,35 @@
 //! command bus, JSON projection or filesystem/network capability is installed.
 //! The prior document-backed host lives temporarily in incant_play_legacy.
 pub mod artifact;
+mod audio_commands;
+mod bindings;
+#[cfg(feature = "compiler")]
+mod bindings_embed;
 mod budget;
 mod commands;
 mod compiled;
 #[cfg(feature = "compiler")]
 mod compiler;
 mod diagnostics;
+mod flipbooks;
 mod input;
 mod loan;
+mod localization_values;
 mod logging;
+mod navigation_values;
 mod program;
 mod queries;
 mod query_values;
+mod query_values_2d;
 mod schedule;
 mod session;
 mod synchronous;
 mod timers;
 
 pub use artifact::{EmbeddedScript, ScriptMetadata};
+pub use bindings::{
+    MAX_SCRIPT_INSTANCES, MAX_SCRIPT_SOURCES, ScriptBindings, ScriptInstance, ScriptValue,
+};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
 pub use logging::{LogLevel, NativeLog, NativeLogs};
@@ -40,6 +51,8 @@ pub enum ScriptError {
     ArtifactCompatibility,
     #[error("cooked script bytecode integrity check failed")]
     ArtifactIntegrity,
+    #[error("native script source/attachment catalog or cooked scene pairing is invalid")]
+    ScriptBindings,
     #[error("script execution exceeded its {budget_ms} ms thread CPU budget")]
     ExecutionDeadline { budget_ms: u128 },
     #[error("script CPU budget clock {reason}")]
@@ -57,7 +70,7 @@ pub enum ScriptError {
     InputLimit,
     #[error("invalid or throwing native structural command arguments")]
     CommandInput,
-    #[error("invalid or throwing physics query arguments")]
+    #[error("invalid or throwing native query arguments")]
     QueryInput,
     #[error("invalid timer ID, tick delay or timer command arguments")]
     TimerInput,
@@ -81,7 +94,7 @@ pub enum ScriptError {
 /// private, compiler-produced bytecode. Ticks borrow real numeric ECS columns;
 /// they neither parse code nor serialize project/component values.
 ///
-/// This native host exposes `update({chunks, dt, commands, input, physics, clock, timers, log})`. Each chunk has stable
+/// This native host exposes `update({chunks, dt, commands, input, physics, navigation, clock, timers, log, flipbooks})`. Each chunk has stable
 /// ID strings, Transform stride 10, and optional Velocity stride 3. Views are
 /// detached on every exit. A failed callback restores its component writes and
 /// permanently fails this host. Tick-local structural commands apply only after
@@ -94,6 +107,8 @@ pub struct ScriptHost {
     // Drop VM roots/context/runtime before bytecode: QuickJS's ROM-data module
     // loader may retain references to its input allocation.
     update: Persistent<Function<'static>>,
+    freeze: Persistent<Function<'static>>,
+    project: Option<bindings::BoundProject>,
     context: Context,
     _runtime: Runtime,
     _compiled: CompiledScript,
@@ -101,6 +116,7 @@ pub struct ScriptHost {
     deadline: Arc<Mutex<budget::ExecutionBudget>>,
     schedule: schedule::Schedule,
     logs: NativeLogs,
+    flipbooks: flipbooks::Scratch,
     failed: bool,
 }
 
@@ -110,11 +126,41 @@ impl ScriptHost {
     }
 
     pub fn with_budget(compiled: CompiledScript, limit: Duration) -> Result<Self, ScriptError> {
+        Self::initialize(compiled, limit, None)
+    }
+
+    /// Attach the compiler-produced catalog to this exact fresh native world.
+    /// Plain Spawn never inherits an attachment, including reuse of a stable ID.
+    pub fn for_world(compiled: CompiledScript, world: &NativeWorld) -> Result<Self, ScriptError> {
+        Self::initialize(compiled, Duration::from_millis(50), Some(world))
+    }
+
+    fn initialize(
+        compiled: CompiledScript,
+        limit: Duration,
+        world: Option<&NativeWorld>,
+    ) -> Result<Self, ScriptError> {
+        if compiled.bindings.is_some() && world.is_none() {
+            return Err(ScriptError::ScriptBindings);
+        }
         let (runtime, context, deadline) = vm(limit, compiled.allow_source)?;
-        context.with(|ctx| {
-            compiled
-                .harden(&ctx)
-                .map_err(|error| diagnostics::javascript(&ctx, error, "initialization", &deadline))
+        let (freeze, project) = context.with(|ctx| {
+            let freeze = compiled.harden(&ctx).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "initialization", &deadline)
+            })?;
+            let project = compiled
+                .bindings
+                .as_ref()
+                .map(|bindings| {
+                    bindings::BoundProject::new(
+                        &ctx,
+                        &freeze,
+                        bindings,
+                        world.expect("checked native world"),
+                    )
+                })
+                .transpose()?;
+            Ok::<_, ScriptError>((Persistent::save(&ctx, freeze), project))
         })?;
         // Fixed engine hardening runs first. Its two internal module promises
         // must not change the guest module's separately measured baseline.
@@ -129,6 +175,8 @@ impl ScriptHost {
         diagnostics::check_deadline(&deadline)?;
         Ok(Self {
             update,
+            freeze,
+            project,
             context,
             _runtime: runtime,
             _compiled: compiled,
@@ -136,6 +184,7 @@ impl ScriptHost {
             deadline,
             schedule: schedule::Schedule::default(),
             logs: NativeLogs::default(),
+            flipbooks: flipbooks::Scratch::default(),
             failed: false,
         })
     }
@@ -177,15 +226,54 @@ impl ScriptHost {
             .reset()?;
         self.synchronous.reset();
         let result = self.context.with(|ctx| {
-            let (mut schedule, events) = self.schedule.advance(dt)?;
+            self.flipbooks.capture(world)?;
+            let flipbooks = self.flipbooks.expose(&ctx).map_err(|error| {
+                diagnostics::javascript(&ctx, error, "flipbook snapshot", &self.deadline)
+            })?;
+            let freeze = self
+                .freeze
+                .clone()
+                .restore(&ctx)
+                .map_err(diagnostics::allocation)?;
+            let mut schedule = self.schedule.clone();
+            let mut groups = Vec::new();
+            if let Some(project) = &mut self.project {
+                if project.incarnation != world.incarnation() {
+                    return Err(ScriptError::ScriptBindings);
+                }
+                for (index, group) in project.groups.iter_mut().enumerate() {
+                    let instances = group
+                        .snapshot(&ctx, &freeze, world)
+                        .map_err(diagnostics::allocation)?;
+                    let scope = schedule::Scope::Source(group.source);
+                    if instances.is_empty() {
+                        schedule.cancel_scope(scope);
+                    } else {
+                        groups.push((index, scope, instances));
+                    }
+                }
+            } else {
+                groups.push((
+                    0,
+                    schedule::Scope::Global,
+                    rquickjs::Array::new(ctx.clone()).map_err(diagnostics::allocation)?,
+                ));
+            }
+            let (mut schedule, events) = schedule.advance(dt)?;
             let logs = logging::TickLogs::default();
             let log_api = logs.expose(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "log bindings", &self.deadline)
             })?;
             let timers = timers::TickTimers::default();
-            let timer_api = timers.expose(&ctx, events).map_err(|error| {
-                diagnostics::javascript(&ctx, error, "timer bindings", &self.deadline)
-            })?;
+            let groups = groups
+                .into_iter()
+                .map(|(index, scope, instances)| {
+                    let api = timers.expose(&ctx, scope, &events).map_err(|error| {
+                        diagnostics::javascript(&ctx, error, "timer bindings", &self.deadline)
+                    })?;
+                    Ok::<_, ScriptError>((index, scope, instances, api))
+                })
+                .collect::<Result<Vec<_>, _>>()?;
             let clock = timers::clock(&ctx, &schedule).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "script clock", &self.deadline)
             })?;
@@ -212,6 +300,17 @@ impl ScriptHost {
                     let physics = queries.expose(&ctx).map_err(|error| {
                         diagnostics::javascript(&ctx, error, "physics bindings", &self.deadline)
                     })?;
+                    let navigation = queries.expose_navigation(&ctx).map_err(|error| {
+                        diagnostics::javascript(&ctx, error, "navigation bindings", &self.deadline)
+                    })?;
+                    let localization = queries.expose_localization(&ctx).map_err(|error| {
+                        diagnostics::javascript(
+                            &ctx,
+                            error,
+                            "localization bindings",
+                            &self.deadline,
+                        )
+                    })?;
                     let mut loan = loan::Loan::new(columns)?;
                     let chunks = match loan.expose(&ctx) {
                         Ok(chunks) => chunks,
@@ -229,13 +328,61 @@ impl ScriptHost {
                     };
                     commands.activate();
                     queries.activate();
-                    timers.activate();
                     logs.activate();
-                    let result = function.call::<_, Value>((
-                        rquickjs::function::Flat((chunks, dt, api, input, physics, clock)),
-                        timer_api,
-                        log_api,
-                    ));
+                    let mut result = Ok(());
+                    for (index, scope, instances, timer_api) in groups {
+                        timers.activate(scope);
+                        let called = function.call::<_, Value>((
+                            rquickjs::function::Flat((
+                                chunks.clone(),
+                                dt,
+                                api.clone(),
+                                input.clone(),
+                                physics.clone(),
+                                navigation.clone(),
+                                localization.clone(),
+                            )),
+                            clock.clone(),
+                            timer_api,
+                            log_api.clone(),
+                            flipbooks.clone(),
+                            index as u32,
+                            instances,
+                        ));
+                        timers.revoke();
+                        match called {
+                            Err(error) => {
+                                result = Err(error);
+                                break;
+                            }
+                            Ok(value) => {
+                                // Don't run another source after a disallowed return.
+                                // Native capabilities/loans revoke before diagnostics.
+                                if !value.is_undefined() {
+                                    commands.revoke();
+                                    queries.revoke();
+                                    logs.revoke();
+                                    loan.revoke();
+                                    return Err(if value.is_promise() {
+                                        ScriptError::UnsupportedAsync
+                                    } else {
+                                        ScriptError::UnsupportedReturn
+                                    });
+                                }
+                                if let Err(error) = self
+                                    .synchronous
+                                    .check(&ctx, false)
+                                    .and_then(|()| diagnostics::check_deadline(&self.deadline))
+                                {
+                                    commands.revoke();
+                                    queries.revoke();
+                                    logs.revoke();
+                                    loan.revoke();
+                                    return Err(error);
+                                }
+                            }
+                        }
+                    }
                     commands.revoke();
                     queries.revoke();
                     timers.revoke();
@@ -243,17 +390,11 @@ impl ScriptHost {
                     // Revoke before diagnostics can execute a user-defined getter,
                     // and before Rust reads or restores any component bytes.
                     loan.revoke();
-                    let returned = result.map_err(|error| {
+                    result.map_err(|error| {
                         diagnostics::javascript(&ctx, error, "tick", &self.deadline)
                     })?;
                     diagnostics::check_deadline(&self.deadline)?;
                     self.synchronous.check(&ctx, false)?;
-                    if returned.is_promise() {
-                        return Err(ScriptError::UnsupportedAsync);
-                    }
-                    if !returned.is_undefined() {
-                        return Err(ScriptError::UnsupportedReturn);
-                    }
                     queries.check()?;
                     loan.validate_numeric()?;
                     let commands = commands.take()?;
@@ -331,6 +472,10 @@ mod tests;
 mod input_tests;
 
 #[cfg(all(test, feature = "compiler"))]
+mod navigation_tests;
+#[cfg(all(test, feature = "compiler"))]
+mod query_2d_tests;
+#[cfg(all(test, feature = "compiler"))]
 mod query_tests;
 
 #[cfg(all(test, feature = "compiler"))]
@@ -340,3 +485,6 @@ mod character_tests;
 mod log_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod timer_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod localization_tests;

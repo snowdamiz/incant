@@ -3,6 +3,7 @@
 use super::Error;
 use incant_input::{InputEvent, KeyCode, MAX_EVENTS_PER_TICK, MouseButton, WheelUnit};
 use tao::{
+    dpi::{PhysicalPosition, validate_scale_factor},
     event::{ElementState, MouseScrollDelta, WindowEvent},
     keyboard::KeyCode as NativeKey,
 };
@@ -63,7 +64,25 @@ impl PendingInput {
         }
         Ok(())
     }
-    pub fn window(&mut self, event: &WindowEvent<'_>) -> Result<(), Error> {
+    fn pointer(&mut self, position: PhysicalPosition<f64>, scale_factor: f64) -> Result<(), Error> {
+        self.push(InputEvent::PointerPosition {
+            position: logical_position(position, scale_factor)?,
+        })
+    }
+    fn wheel(&mut self, delta: MouseScrollDelta, scale_factor: f64) -> Result<(), Error> {
+        self.push(match delta {
+            MouseScrollDelta::LineDelta(x, y) => InputEvent::Wheel {
+                delta: [f64::from(x), f64::from(y)],
+                unit: WheelUnit::Lines,
+            },
+            MouseScrollDelta::PixelDelta(position) => InputEvent::Wheel {
+                delta: logical_position(position, scale_factor)?,
+                unit: WheelUnit::Pixels,
+            },
+            _ => return Err(Error::InputCapability),
+        })
+    }
+    pub fn window(&mut self, event: &WindowEvent<'_>, scale_factor: f64) -> Result<(), Error> {
         let event = match event {
             WindowEvent::KeyboardInput { event, .. } if !event.repeat => key(event.physical_key)
                 .map(|code| InputEvent::Key {
@@ -82,20 +101,10 @@ impl PendingInput {
                     down: *state == ElementState::Pressed,
                 })
             }
-            WindowEvent::CursorMoved { position, .. } => Some(InputEvent::PointerPosition {
-                position: [position.x, position.y],
-            }),
-            WindowEvent::MouseWheel { delta, .. } => Some(match delta {
-                MouseScrollDelta::LineDelta(x, y) => InputEvent::Wheel {
-                    delta: [f64::from(*x), f64::from(*y)],
-                    unit: WheelUnit::Lines,
-                },
-                MouseScrollDelta::PixelDelta(p) => InputEvent::Wheel {
-                    delta: [p.x, p.y],
-                    unit: WheelUnit::Pixels,
-                },
-                _ => return Err(Error::InputCapability),
-            }),
+            WindowEvent::CursorMoved { position, .. } => {
+                return self.pointer(*position, scale_factor);
+            }
+            WindowEvent::MouseWheel { delta, .. } => return self.wheel(*delta, scale_factor),
             _ => None,
         };
         if let Some(event) = event {
@@ -103,6 +112,13 @@ impl PendingInput {
         }
         Ok(())
     }
+}
+fn logical_position(position: PhysicalPosition<f64>, scale_factor: f64) -> Result<[f64; 2], Error> {
+    if !validate_scale_factor(scale_factor) {
+        return Err(Error::InputScale);
+    }
+    let position = position.to_logical::<f64>(scale_factor);
+    Ok([position.x, position.y])
 }
 pub fn key(key: NativeKey) -> Option<KeyCode> {
     Some(match key {
@@ -237,6 +253,8 @@ pub fn validate_actions(actions: &incant_input::InputActions) -> Result<(), Erro
     }
     Ok(())
 }
+#[cfg(test)]
+mod coordinate_tests;
 #[cfg(test)]
 mod tests {
     use super::*;

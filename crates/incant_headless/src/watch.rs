@@ -29,9 +29,10 @@ pub fn run(
         .filter(|p| !p.as_os_str().is_empty())
         .unwrap_or(Path::new("."));
     let mut saved = fs::read_to_string(project)?;
-    let mut bus = CommandBus::persistent(
+    let mut bus = CommandBus::persistent_with_sources(
         project.with_extension("journal.jsonl"),
         Project::from_text(&saved)?,
+        root,
     )?;
     let mut watcher = SourceWatcher::new(root, debounce);
     let mut runtime = AssetStore::default();

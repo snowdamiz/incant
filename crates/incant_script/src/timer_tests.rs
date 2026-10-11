@@ -214,7 +214,9 @@ fn timer_events_and_clock_use_own_properties_without_invoking_guest_setters() {
         let object = timers
             .expose(
                 &ctx,
-                vec![schedule::Event {
+                schedule::Scope::Global,
+                &[schedule::Event {
+                    scope: schedule::Scope::Global,
                     id: "good".into(),
                     scheduled_tick: 2,
                 }],

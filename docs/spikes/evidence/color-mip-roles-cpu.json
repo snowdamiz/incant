@@ -1,0 +1,30 @@
+{
+  "scope": "color role CPU implementation checkpoint; GPU and visual acceptance pending",
+  "base": "f2963ba9c1d8a98a9957074910296099b2e0c477",
+  "ordinary_passed": 126,
+  "result_groups": 26,
+  "prior_count_correction": "Preliminary prose said134; final log count126 is authoritative, not cumulative with earlier runs.",
+  "clippy": "release all-target scoped pass",
+  "capture_gate_tests": 2,
+  "gpu_executed": false,
+  "appearance_accepted": false,
+  "dependencies_changed": false,
+  "logs": [
+    {
+      "path": "/tmp/incant-color-roles-final-cpu-tests.log",
+      "sha256": "cd0a3de221085298c691be999abad53d6cadbdcd77ca867a447b59dbd7d67cfd"
+    },
+    {
+      "path": "/tmp/incant-color-roles-final-clippy.log",
+      "sha256": "5ef4e888847ac87b3bb602673a1884100a5d9758789d89218ae62fe3bda9c763"
+    },
+    {
+      "path": "/tmp/incant-color-roles-storage.log",
+      "sha256": "4c5a722fbebeb6a9a86ac32f8df47c4dbeb5b54f6f205722cef8b4109f9ff42a"
+    },
+    {
+      "path": "/tmp/incant-color-roles-handoff-guard.log",
+      "sha256": "fe39841100dd360276b7ee4258d5435069504ae52ca0e294bfdf888259941f5d"
+    }
+  ]
+}

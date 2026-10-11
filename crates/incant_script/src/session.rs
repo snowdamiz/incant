@@ -59,7 +59,7 @@ impl PendingNativeSession {
         &self.world
     }
     pub fn start(self, program: impl Into<SessionProgram>) -> Result<NativeSession, SessionError> {
-        let host = program.into().start()?;
+        let host = program.into().start(&self.world)?;
         Ok(NativeSession {
             world: self.world,
             host,

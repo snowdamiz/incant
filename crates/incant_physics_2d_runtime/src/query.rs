@@ -1,25 +1,31 @@
 use crate::{PhysicsError, PhysicsWorld2D, groups, vector};
 use incant_types::StableId;
 use rapier2d::prelude::*;
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone)]
-pub struct RayQuery {
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+#[schemars(rename = "RayQuery2D")]
+pub struct RayQuery<I = StableId> {
     pub origin: [f64; 2],
     pub direction: [f64; 2],
     pub max_distance: f64,
     pub include_sensors: bool,
-    pub exclude_entity: Option<StableId>,
+    pub exclude_entity: Option<I>,
     pub memberships: u32,
     pub filter: u32,
 }
-#[derive(Debug, Clone, PartialEq)]
-pub struct RayHit {
-    pub entity: StableId,
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[schemars(rename = "RayHit2D")]
+pub struct RayHit<I = StableId> {
+    #[serde(rename = "entity_id")]
+    pub entity: I,
     pub distance: f64,
     pub point: [f64; 2],
     pub normal: [f64; 2],
 }
-impl RayQuery {
+impl<I> RayQuery<I> {
     /// Pure bounded input check, available before an owner flushes numeric edits.
     pub fn validate(&self) -> Result<(), PhysicsError> {
         if !self

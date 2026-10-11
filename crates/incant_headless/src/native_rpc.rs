@@ -17,6 +17,8 @@ pub(crate) enum Error {
     Interrupted,
     #[error("native play exceeded its 10 second host execution budget")]
     Deadline,
+    #[error("native play snapshot: {0}")]
+    Snapshot(incant_agent::AgentError),
     #[error("native play RPC: {0}")]
     Invalid(&'static str),
     #[error(transparent)]
@@ -138,7 +140,7 @@ impl Live {
             started_revision: self.started_revision,
             scene: &self.session.scene,
             script_source_sha256: &self.session.script_source_sha256,
-            script_source_parsing: false,
+            script_source_parsing: self.session.authored_scripts,
             tick: world.tick(),
             tick_rate: world.tick_rate(),
             entity_count: world.entity_count(),

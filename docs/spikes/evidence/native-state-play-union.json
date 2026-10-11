@@ -1,0 +1,302 @@
+{
+  "checked_at": "2026-10-11T17:50:31.763599+00:00",
+  "frozen_source": "56eff03dda452ab5d8440efe6b6cc6b2cf3a63ed",
+  "base_main": "c3ec3e84dae6bf957304471639e7fac34d2297d4",
+  "preserved_ancestors": [
+    "15a73702e8ba4ed767863b58bb8853a4d1f7b5ba",
+    "e76e4eb8b973dec227456442f1ef622fb0a1d79f",
+    "cfaa442001a61a8c9743d58a5677db1f0fa8c0a6",
+    "fec59089b93b7496d967f1c8f6844c40e54023f8"
+  ],
+  "logs": {
+    "/tmp/incant-native-state-play-union-wasm-sdk.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-native-state-play-union-tools.log": {
+      "sha256": "8459c9c25769f23ea0dd06ba4ef1c8e88bbc93dfba8ae37845a5db34332f84a4"
+    },
+    "/tmp/incant-native-state-play-union-sdk.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-native-state-play-union-ui-tests.log": {
+      "sha256": "bcedb8e21ef73b9d2ea58302e6c28b6b41cd314e7ccd10e666b90f019aff6ccf"
+    },
+    "/tmp/incant-native-state-play-union-actionlint.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-native-state-play-union-bridge.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-native-state-play-union-save-proof.log": {
+      "sha256": "26fc05aeace266cf266143759c59cb30bf0410bfa7651e22eedd3b64c9cec4f0"
+    },
+    "/tmp/incant-native-state-play-union-workspace.log": {
+      "sha256": "c3a22827df38e348731ec8432ba031df2d410ffb74fdef5eb29dd9e529774a99",
+      "groups": 232,
+      "passed": 837,
+      "ignored": 75
+    },
+    "/tmp/incant-native-state-play-union-gpu.log": {
+      "sha256": "3cdb899dbfc988154af22fba51b7a743ba52b6461deeec79988183073811f263",
+      "groups": 232,
+      "passed": 75,
+      "ignored": 0
+    },
+    "/tmp/incant-native-state-play-union-ui-build.log": {
+      "sha256": "d0eb5d95a2a4b3ab595d9d5cb9523467fd6d5a4a6b29ed68ec8aeaa3b82cda89"
+    },
+    "/tmp/incant-native-state-play-union-public-tools.log": {
+      "sha256": "62c849c99faa7886e07d5961035b43c3a14a5b669c5ed648faace6cddcf75244"
+    },
+    "/tmp/incant-native-state-play-union-window.log": {
+      "sha256": "3e5bd58373f461ca51d72c18ce70f7f73b26f625ea359c0c4c220dc5e1c3f963",
+      "groups": 2,
+      "passed": 15,
+      "ignored": 0
+    },
+    "/tmp/incant-native-state-play-union-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/tmp/incant-native-state-play-union-clippy.log": {
+      "sha256": "c47ae7cea201823a09b40fbe46f3b18c1676e5ed7b2ca3e09d0fb5ec338638a4"
+    },
+    "/tmp/incant-native-state-play-union-ui-types.log": {
+      "sha256": "5e05d0271a5a922a5b1639a75c386f68b84dc6f16fa9c31d0ca3992328a98dc3"
+    },
+    "/tmp/incant-native-state-play-union-node.log": {
+      "sha256": "edc992d424b45b0ea35d49676164ec26eb776b1536b8d835b0a19474dc22e9b6"
+    },
+    "/tmp/incant-native-state-play-union-window-clippy.log": {
+      "sha256": "732a9248198314c18062c86644b748382b1f395c40fe42cca4ef6d98b2ab59ac"
+    },
+    "/tmp/incant-native-state-play-union-no-compiler.log": {
+      "sha256": "c97d826739da6940111dcde103e81fd096e4c563604ef250d03c4b04321be329"
+    },
+    "/tmp/incant-native-state-play-union-wasm.log": {
+      "sha256": "391369eec8a3ce7c3dfac28347f28a3cbd06337330938cd0576b01c3769da3a4"
+    },
+    "/tmp/incant-native-state-play-union-source-proof.log": {
+      "sha256": "56c76dd68d5fb32109c3020c5e95d6cf6cf37b95419c6b83e418306852d44171"
+    },
+    "/tmp/incant-native-state-play-union-graph.log": {
+      "sha256": "8248fd899670a1b43a4737b5b61ed093d7fbdf058399066d1bdb147d7b633136"
+    },
+    "/tmp/incant-native-state-play-union-shipping.log": {
+      "sha256": "ff717ac65687df02ed8fbe0f84da70c779c19dc672068fc60594fd7270c663a3"
+    }
+  },
+  "source_sha256": {
+    "Cargo.lock": "008871a3a5e83afce716a3fde3d9ff7f08e0aad1700a0a49fe7bf3bf36d85b2d",
+    "crates/incant_2d/src/flipbook.rs": "83c415e9758be08298ae5aecc6a019123f3900070d7a7dfdc6ec298dcaf4aa84",
+    "crates/incant_cook/Cargo.toml": "46753970f249d475ddb2fda76844be8639a1f31c61f082f36fe472dc082a3de0",
+    "crates/incant_cook/src/lib.rs": "ec536f709b327bece3c1f4a308fd9a881e60a0ea7056cffe0c76405932915a72",
+    "crates/incant_cook/src/navigation.rs": "e0622989f1e8b79121b252940d285af176f5c6b7972dbee8947424a8a11a451b",
+    "crates/incant_cook/src/project_script.rs": "ecd6d9fcb0ccbedeb673a1a77a4fa739931c7d2ea19c065b166b7cb9cedea0cd",
+    "crates/incant_cook/src/scene.rs": "ce710d194a119addbe13f3cfbaa0ed2a9df36b88c64491369c6ad49ba2b21a6c",
+    "crates/incant_cook/tests/navigation.rs": "c9cfb55c8840b820bfdd9fa1513f4a547042b1c81861564980bc898e4966219a",
+    "crates/incant_cook/tests/project_scripts.rs": "081fd68be88c95265f41aec1de82944b4fd380ab8ed31553514a73fd5347e7a3",
+    "crates/incant_cook/tests/runtime.rs": "2dfc47ad11cb775799ab6786e393f8c43d7c5ea75518f955b5eefc5f0a576d9c",
+    "crates/incant_game_runtime/tests/script_audio_controls.rs": "cdbb1c033af86c41f49283c9b8d3154c489646c2e7a3c7e54f68a6f24c5e16b9",
+    "crates/incant_headless/Cargo.toml": "48fed25224fb803f0529cadcaa8ae1e057dd3b84635596b16c968b1824d2fa79",
+    "crates/incant_headless/src/main.rs": "1eb2467f59430faef61695309b8b343d6e160ac82834537bc1dee20e8a1ebe89",
+    "crates/incant_headless/src/native_play.rs": "dd9a348061af17b29a27c581982dbc5df1f4f46623b40c44eb053c942fdd1245",
+    "crates/incant_headless/src/native_play/session.rs": "eb8c527ae60b8ba5baf59fd137f601310ea7a831ae5ade90c6edb39e142669a8",
+    "crates/incant_nav/Cargo.toml": "14bc6900a1a881b287f3689a9ecf7fdcf3eb16d230fd67a5899403ef1bc4213f",
+    "crates/incant_nav/src/build.rs": "c16bd14b2691fbda111543f0b3b9ee43475dd34e0363c168c823bf504c28f4a3",
+    "crates/incant_nav/src/grid.rs": "39951ecb55b64890cb83958041c2557c12de1a56f377bd199875eac4f47d3b83",
+    "crates/incant_nav/src/lib.rs": "26ce1c22326c86d4b1c80c6daf951f97e06e1d0be64861051bf570ea83dc5f15",
+    "crates/incant_physics/src/lib.rs": "ab82e5096ff6b2197feca5aa7eb0cf34b53d63d73b79e64612f673e327973493",
+    "crates/incant_physics/src/navigation.rs": "31b0bd5719720014c8f24e2c44eecccd037e4110df2c287301e673c20e5f64c2",
+    "crates/incant_physics_2d_runtime/Cargo.toml": "19f80020558bccfa3a890ffb97d0479a82f55a504af6fca689a848a5012b8c0b",
+    "crates/incant_physics_2d_runtime/src/lib.rs": "2f0948f7cc93007327a07e4ffc0debd6ffd9f36052fcf70ca6e5d22d64114b13",
+    "crates/incant_physics_2d_runtime/src/query.rs": "3d0026bca040b22aacec283af9fa923c28ded1c0fdabf40652b5db0540d2a491",
+    "crates/incant_physics_runtime/Cargo.toml": "b46d383c71229ebfc5e5293cec8f710865a52bff011da621762ee34c45ca6c97",
+    "crates/incant_physics_runtime/src/lib.rs": "5c5a026f999e808a7902895172d083f1a6ffeffcc25c18edf3d8af7cd9611cad",
+    "crates/incant_physics_runtime/src/navigation.rs": "57157ad54bc96f51cd0965c78862f1119dd12ca04bb92d04ada21bc7a7e7b378",
+    "crates/incant_play/Cargo.toml": "b4116892d104ab51bc7956f96b2f5b9c3f42fbd0085e8cadde406f10151ae081",
+    "crates/incant_play/src/lib.rs": "14ef2501174196e4ec5121f7a15a14bd7c8b1473ac6b5e9514ec0d0e23e2d529",
+    "crates/incant_play/tests/startup.rs": "45c84351722cd3ce399e5bfd976655d0717ee6038496fae49aa4655c46be0d6b",
+    "crates/incant_runtime/Cargo.toml": "f51803ac6f60b9d5fe12262f9cc27528a45ce8e267fe2c13d9da8b8a9c807677",
+    "crates/incant_runtime/src/audio_controls.rs": "e166e61357bf60044728155041995400b18c3078fe794002ff8508ce03ca2eeb",
+    "crates/incant_runtime/src/binary.rs": "42fbccb32cad91b1ca843d792d5aeae01b02f6dbcfdba67ab89dd93986154ade",
+    "crates/incant_runtime/src/commands.rs": "246293d2a6ae8155dca7d8c13f5e29553843254de79e6d5fba78aac18f6bd9a7",
+    "crates/incant_runtime/src/lib.rs": "573f77eab7a4afb5dd39f00febfaad505c800fee34e4d5aa4f2fb8cb1f803a63",
+    "crates/incant_runtime/src/navigation.rs": "b35cd40cc5992706c9326b0ab5bbc59f9b8e2364cbd6ce4b700c68ea458aca2f",
+    "crates/incant_runtime/src/navigation_binary.rs": "7b9f01e992aa230d9987240b4d28e3ec9c2631db503be80cc6ab885977ffb9d4",
+    "crates/incant_runtime/src/navigation_runtime.rs": "09ab0a5354ee2a361e91f0658ac250fdfbdc4688d66c007edc925c37e7f25084",
+    "crates/incant_runtime/src/physics_queries.rs": "b8c8a82f2a63bc67bc400018a487444c30597649d36f0f687df0a51d01e6853f",
+    "crates/incant_runtime/src/save.rs": "a4092d2b855be34466d2777b8b3f8393465960c31746d8d6d76ea57e48ab1891",
+    "crates/incant_runtime/src/save/codec.rs": "143c4fdf37d935815dd569b0817a44c45f159cf6ef3077b0b6eb23bc4ccf5fa1",
+    "crates/incant_runtime/src/scene.rs": "94d4133557d4f2324e7eec64c6a290ae85c0048a3e0dc0f616fdd81242bda2b0",
+    "crates/incant_runtime/src/world.rs": "a73bd929f8c46c1f8e0e82298437398b116e5eafdf75d43969c93d93f65cad3f",
+    "crates/incant_runtime/tests/audio_controls.rs": "7943b7f0bb9732950bceb2e2ecdf8e5f6b43a898f0150ebc64f96bf054d78e66",
+    "crates/incant_runtime/tests/flipbook.rs": "e7439bb21b27554cfb607b793548751738448e7e10c5c0b348577114718b7665",
+    "crates/incant_runtime/tests/navigation.rs": "739e5958c4d0ecd2d36e5dded065280d8189d4be63cb37d40d6048d74e8c63df",
+    "crates/incant_runtime/tests/physics.rs": "a5417dba332db8f8831d0f7fad859b06451ae96da13ec7d6904b396ed60d836a",
+    "crates/incant_runtime/tests/physics_2d.rs": "d2b9bf256be34fcad8c3df4ff488e93413bfd2f612a0af64639024416c120b41",
+    "crates/incant_runtime/tests/physics_queries_2d.rs": "485103902b8c6c07646707c748e937ae5d4e18b60a5895a1cfc4e4b72d23ba8f",
+    "crates/incant_runtime/tests/retained_saves.rs": "c43f66d85ff57b61584d0505723ac35d06deafeca4cf5036aae3742cc7f76c88",
+    "crates/incant_runtime/tests/saves.rs": "64cc8d95c4dc8380f040f71cee15f252b38f3bdd54eefaf1fd6f907d6b5282fc",
+    "crates/incant_runtime/tests/scenes.rs": "f94cd14c68b85d626d7f5730bfa787a250289054f98f2ec469988ee3ea80ecf7",
+    "crates/incant_runtime/tests/spatial.rs": "29dfc872e41f690acd955f3e0ef3557efe35b750ab878ebfcb6ad4428977e193",
+    "crates/incant_runtime/tests/support/audio_controls.rs": "50d8c367463a8a200c4dceafb9583d1dcf393549397e08c07ef9281b36ec77b7",
+    "crates/incant_runtime/tests/support/physics_queries_2d.rs": "8fd47a88c8c0b8b114afe11adfb9ff2490fdf3c226bd08cde2c3ab08a5352f77",
+    "crates/incant_runtime/tests/tilemaps.rs": "5f74ab8ec57d6adca352785a55f887c104192d3a126f47df5f6834e5e21dc805",
+    "crates/incant_script/build.rs": "ca1e1af5a8aa314b26e414e6c0ac0afe67a254c684b5dc544d5ad583da5a6f6f",
+    "crates/incant_script/src/audio_commands.rs": "195c9168520c83db7488ae082791c839177530629d5c05a9d082062b4955c63d",
+    "crates/incant_script/src/commands.rs": "0825b53498b2784f545ad08c5097d0393b1dee5bdf20ed09cacc3fd619d178d8",
+    "crates/incant_script/src/lib.rs": "3f01d033b93e7bc94123ca0db30d7eb99273476463303dd08dc240edd40c99fc",
+    "crates/incant_script/src/queries.rs": "42ce71a9486bcf45a351166ed3d291a97f121dc3c051ae08ffd79b3189603ddc",
+    "crates/incant_script/src/query_2d_tests.rs": "8b1987afa22dd765b177bbe5886bfdf1720907d351b96748955550d15c6d570c",
+    "crates/incant_script/src/query_values.rs": "5df4b4b7c83e6f616fb531583b40220ff9138d56b372c0b9f20c126c705c4401",
+    "crates/incant_script/src/query_values_2d.rs": "5251ed6014200eafaa9216088af50338efb78dbc37f01bba08a9723428e888a5",
+    "crates/incant_script/tests/audio_controls.rs": "ffc1a8cd2c64cc7964cd31ee26348ed9b3bb86a69fe1fec6ce613aa78df2d94c",
+    "schemas/PhysicsRayHit2D.schema.json": "2e18552859dbcfae7f4200664af9f0eb4f3ee108d38fdff57b0de3905a7fb2d2",
+    "schemas/PhysicsRayQuery2D.schema.json": "6e2386fa213e7eba335ab9e8749cbc7ebf62f36a3115d6e3c13ddf587cc66c74",
+    "schemas/PhysicsTriggerEvent2D.schema.json": "34ea8a24d577da821a66576c33bebeb664bafe781a5a480f5762e4e9c241f80d",
+    "sdk/templates/native-audio/controls.ts": "c2f69189670ea8c09275d6292ffb25fecdf02b400e0ec4f4a180a9a628379ae1",
+    "sdk/templates/native-physics/planar.ts": "a66709607f90aa5eab5c3dde53d951780066d91b844cb1f68d434a1a069c110c",
+    "sdk/ts/src/generated.d.ts": "eff85988a8cc4a123ba925643fca6aa40fb593dc46597e0a92e381d2d1fed777",
+    "sdk/ts/src/index.d.ts": "4c2153688c603919437840044c1dce1f471d27767607049671dc159720b37543",
+    "sdk/ts/src/native.d.ts": "22af3e0d560d517d56b2168863973a96d905c548eb0d349af7ebaf8dd445b124",
+    "tools/check_runtime_dependencies.py": "f0e77c74f2e0b8fcbcde0b65b40b379fd58cac32bcec0bc3891c9f45c7b3d917",
+    "tools/export_native.py": "99b9b2142436b923af37f712377bd1f3ddc238c8f4664abb7e96462c5309850a",
+    "tools/tests/test_runtime_dependencies.py": "df02d4386aea54da9b75b2dbf9f4dd4efbdbe5617b59e2bd7182482353a0aaad"
+  },
+  "proof_state": "Four-player fresh proof terminal success; all local validation complete on frozen source56eff03",
+  "state": "ALL_LOCAL_CHECKS_PASSED",
+  "shipping": {
+    "source_head": "56eff03dda452ab5d8440efe6b6cc6b2cf3a63ed",
+    "target": "aarch64-apple-darwin",
+    "profile": "shipping",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "passed": true,
+    "build_storage_removed_before_any_player": true,
+    "authoring_inputs_removed_before_any_player": true,
+    "probes": [
+      "shipping.py",
+      "native-scene-audio.py",
+      "native-game.py --gpu --flipbook --flipbook-sdk",
+      "cooked-script.py --physics"
+    ],
+    "distinct_target_units": 251,
+    "build_count": 4,
+    "source_file_count": 3372,
+    "performance_claim": false,
+    "elapsed_scope": "Concurrent local development: wall time is not a matched performance comparison",
+    "receipts": {
+      "session.json": {
+        "sha256": "f2e8f7929bc71bdaf0cee9f27c248dd139cd9cb682b5d5134198594f885d1be5",
+        "bytes": 1489649
+      },
+      "runtime/manifest.json": {
+        "sha256": "4ab7e84fbd4897df77a0329695f25bc68631017340601404998c9469941085b4",
+        "bytes": 11886
+      },
+      "audio/result.json": {
+        "sha256": "3f4b0db15c37da163603ee9577ce21c30d6405dc4db53d345a06021a8ce10dfc",
+        "bytes": 7722
+      },
+      "game/result.json": {
+        "sha256": "443345dbc3c8079edbf73479501301131a01032b2ffec73fecc0689ef3da36cc",
+        "bytes": 133894
+      },
+      "script/result.json": {
+        "sha256": "ffb4d30d27ecbb19c6481b90395aa4add5afb2e984c906c6492a8025b26269b3",
+        "bytes": 15357
+      }
+    },
+    "audio": {
+      "player_bytes": 4424672,
+      "player_sha256": "df73dafbe3f296d256b02314696247181740de6707d4ff81dd826e94350bd8ca",
+      "source_deleted": true,
+      "processes": 16
+    },
+    "game": {
+      "player_bytes": 9459280,
+      "player_sha256": "92516e78ebe0e45c55cc594cda4e808e507d6d62a22c9eeebb7b8ad65c940e6e",
+      "source_deleted": true,
+      "baseline_repeat_processes": 32,
+      "sdk_repeat_processes": 32,
+      "refusal_entries": 43,
+      "flipbook_comparisons": 4,
+      "gpu_submitted": true,
+      "on_screen_presentation": false
+    },
+    "script": {
+      "player_bytes": 5712312,
+      "player_sha256": "3b20cbb46b986308e49c2792140a9ae32fe50b736f89c1360a85b7e02534a90a",
+      "source_deleted": true
+    }
+  },
+  "limits": [
+    "World-only v2 saves preserve retained spatial/navigation/flipbook state; active or previously used solver/audio state and VM continuation remain unsupported.",
+    "Shared incant_play is authoring-only preparation; editor Play controls are separate unfinished work.",
+    "Later TypeScript navigation179d384 and solver snapshots are excluded.",
+    "Local macOS numerical GPU checks are not appearance, hosted platform, phone-performance or phase-gate approval."
+  ],
+  "main89_integration": {
+    "integrated_head": "68b0944f13ed13e185f3a264f28e2336d2e8ce94",
+    "base": "f8955bec6f0d7bcbd54f30fdbc5b08226e3c326e",
+    "conflict": "STATUS.md only; preserves current repaired-checkpoint state plus accepted union paragraph",
+    "changed_frozen_source_hashes": [],
+    "main89_paths": [
+      "crates/incant_cook/src/typescript.rs",
+      "crates/incant_cook/src/typescript/windows.rs",
+      "crates/incant_cook/tests/typescript.rs",
+      "services/local/compose.yaml",
+      "services/local/objects-entrypoint.sh",
+      "tools/local_services.py",
+      "tools/local_services_smoke.py",
+      "tools/native_process.py",
+      "tools/tests/test_local_services.py",
+      "tools/tests/test_native_process.py"
+    ],
+    "main89_sources_exact": true,
+    "prospective_tree": "2545e7a792067e23fb0521781fdbab0ef615d7bb",
+    "head_tree": "2545e7a792067e23fb0521781fdbab0ef615d7bb",
+    "checks": {
+      "compiler_with_typescript_feature": {
+        "passed": 2,
+        "initial_default_feature_invocation": "zero gated cases, not counted; repeated explicitly with typescript"
+      },
+      "play_and_headless": {
+        "passed": 51,
+        "ignored": 2,
+        "ignored_scope": "Both existing GPU cases passed in frozen75-case serialized GPU lane; no graphics behavior changed by main89 integration"
+      },
+      "python": {
+        "passed": 199,
+        "windows_only_skip": 4
+      },
+      "python39_process_lifecycle": {
+        "passed": 35,
+        "windows_only_skip": 4
+      },
+      "all_target_clippy": [
+        "incant_cook",
+        "incant_play",
+        "incant_headless"
+      ],
+      "public_headless_rebuilt": true,
+      "source_transaction_proof": {
+        "processes": 2,
+        "rpc_requests": 32,
+        "native_motion_undo_redo_recovery": true
+      },
+      "fmt_conventions_workflow_lint": true
+    },
+    "logs": {
+      "/tmp/incant-native-state-main89-build.log": "fb52ce8a98b13c52c7afa691c1995617f313b55a1c076982f1c5b4fe1f6c98f8",
+      "/tmp/incant-native-state-main89-clippy.log": "4c635e5646f10b876395a3f42e82aa62684e7cf4d2dd47d2049e39f5b70916a2",
+      "/tmp/incant-native-state-main89-compiler-enabled.log": "0ab4d3b216497d3c9f9d05a11735c33390e84048348d787f715f0a9d743f0faa",
+      "/tmp/incant-native-state-main89-compiler.log": "a99cec2cd8d2c2d4ec2255774bbd5ae45736503e6fe33a314e7cee6bee802bb5",
+      "/tmp/incant-native-state-main89-play.log": "8ab16c3c6eda8a0737edb6517d3cf403eb51b30349e2c380e44b3bcfcdaf05d0",
+      "/tmp/incant-native-state-main89-probe-help.log": "b2da4f3c9bc376739a076996b778d088e6360ea6240910a76dafc5ee6348ba48",
+      "/tmp/incant-native-state-main89-python39.log": "c27278eeb1c0495400034ceca6b99428edb459146d5b07ed84bf1b0267ab7cf1",
+      "/tmp/incant-native-state-main89-source-proof.log": "22c9c0f1f918e3d0e35472f87b6ad09a40b9b07b82bfeacc7575cdd18c19789c",
+      "/tmp/incant-native-state-main89-tools.log": "4e693c03b3f8b9b5db447648cf462f1e8536d3e65ee22ed7bbe1a697a02bb518"
+    },
+    "review": "Root accepted e36ec70 evidence/source closure; main89 production paths exactly equal independently reviewed merged repairs; STATUS-only resolution preserves both scopes"
+  }
+}

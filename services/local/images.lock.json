@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "scope": "Unmodified local service containers only; not linked into or bundled with engine players.",
+  "license_policy": {
+    "postgres": [
+      "PostgreSQL"
+    ],
+    "objects": [
+      "Apache-2.0"
+    ],
+    "oidc": [
+      "AGPL-3.0-only"
+    ],
+    "mail": [
+      "MIT"
+    ],
+    "gateway": [
+      "GPL-2.0-only"
+    ]
+  },
+  "license_audit_boundary": "Records selected application licenses and source links. Does not claim a complete transitive OS-image SBOM/license or production distribution review.",
+  "images": {
+    "postgres": {
+      "image": "postgres@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24",
+      "version": "17.11-alpine",
+      "license": "PostgreSQL",
+      "license_file": "licenses/postgres-COPYRIGHT.txt",
+      "license_sha256": "3d6af92ff8a4c2cdf69afb1cf44edea727922f5cd0cf8b5f72b11cdecac8fdfd",
+      "source": "https://github.com/postgres/postgres/tree/REL_17_11",
+      "modified": false
+    },
+    "objects": {
+      "image": "chrislusf/seaweedfs@sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d",
+      "version": "4.48",
+      "license": "Apache-2.0",
+      "license_file": "licenses/seaweedfs-LICENSE.txt",
+      "license_sha256": "d789d433cc11da163273d1e39be2e8fa67642f9a58ef220d3f258fa9c14ef613",
+      "source": "https://github.com/seaweedfs/seaweedfs/tree/4.48",
+      "modified": false
+    },
+    "oidc": {
+      "image": "ghcr.io/zitadel/zitadel@sha256:90a3045b80a2b5b395e1e770302076906af3a5911225af7c464b4f3bd00d0a1b",
+      "version": "v4.19.4",
+      "license": "AGPL-3.0-only",
+      "license_file": "licenses/zitadel-LICENSE.txt",
+      "license_sha256": "4df3c306dddaaf4baffdff5ca820cc679ac8cd6dc263c6a74517783e42fa7a3b",
+      "source": "https://github.com/zitadel/zitadel/tree/v4.19.4",
+      "modified": false
+    },
+    "mail": {
+      "image": "axllent/mailpit@sha256:94f6b70c1436defae6799d9ac7ff0eeff9540465b842026d5cdb018f1c0234ea",
+      "version": "v1.31.5",
+      "license": "MIT",
+      "license_file": "licenses/mailpit-LICENSE.txt",
+      "license_sha256": "9dade1b3ace5dd6c36ca58eef466ae7dd9afe52bfb978deffa44645f6f0a2aa9",
+      "source": "https://github.com/axllent/mailpit/tree/v1.31.5",
+      "modified": false
+    },
+    "gateway": {
+      "image": "haproxy@sha256:5d97434a423c2533cfeb42874d45cf6d69a840b60334582dfbfd5008e94c80be",
+      "version": "3.2.25",
+      "license": "GPL-2.0-only",
+      "license_file": "licenses/haproxy-LICENSE.txt",
+      "license_sha256": "0717ca51fceaa25ac9e5ccc62e0c727dcf27796057201fb5fded56a25ff6ca28",
+      "source": "https://www.haproxy.org/download/3.2/src/haproxy-3.2.25.tar.gz",
+      "source_sha256": "d59a68d0daef7b5c596b019b742089788ff1748513ef96e71fe7b3943577866e",
+      "modified": false,
+      "license_exception": "OpenSSL linking/use exemption retained in haproxy-LICENSE.txt"
+    }
+  },
+  "retained_notices": {
+    "licenses/zitadel-LICENSING.md": "97a02685ee62bfd02b2e696580189807a193b81fcc37909818f9d19cef45394e",
+    "licenses/zitadel-LICENSE.txt": "4df3c306dddaaf4baffdff5ca820cc679ac8cd6dc263c6a74517783e42fa7a3b",
+    "licenses/postgres-COPYRIGHT.txt": "3d6af92ff8a4c2cdf69afb1cf44edea727922f5cd0cf8b5f72b11cdecac8fdfd",
+    "licenses/mailpit-LICENSE.txt": "9dade1b3ace5dd6c36ca58eef466ae7dd9afe52bfb978deffa44645f6f0a2aa9",
+    "licenses/haproxy-LICENSE.txt": "0717ca51fceaa25ac9e5ccc62e0c727dcf27796057201fb5fded56a25ff6ca28",
+    "licenses/haproxy-GPL.txt": "ddb9db7630752f8fdc6898f7c99a99eaeeac5213627ecb093df9c82f56175dc7",
+    "licenses/seaweedfs-LICENSE.txt": "d789d433cc11da163273d1e39be2e8fa67642f9a58ef220d3f258fa9c14ef613"
+  }
+}

@@ -5,6 +5,7 @@ use crate::{CookedEntity, CookedScene, SceneError, StableId};
 use bevy_ecs::prelude::*;
 use glam::DMat4;
 use incant_types::{Transform, Velocity};
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use thiserror::Error;
 
@@ -63,9 +64,14 @@ pub enum RuntimeError {
 /// A disposable Bevy world; no project, command bus, authoring validator or
 /// serialization in the tick path. Snapshot conversion is explicitly requested.
 pub struct NativeWorld {
+    pub(crate) localization: crate::NativeLocalization,
+    pub(crate) navigation: crate::navigation_runtime::NavigationRuntime,
+    pub(crate) navigation_used: bool,
     pub(crate) identity: crate::WorldIdentity,
+    pub(crate) source_scene_fingerprint: [u8; 32],
     pub(crate) world: World,
     schedule: Schedule,
+    pub(crate) flipbook_query: crate::flipbook::PlaybackQuery,
     pub(crate) physics: incant_physics_runtime::PhysicsRuntime<StableId>,
     pub(crate) physics_2d: incant_physics_2d_runtime::PhysicsWorld2D,
     pub(crate) physics_2d_used: bool,
@@ -92,6 +98,10 @@ impl NativeWorld {
     }
 
     pub fn new(scene: CookedScene) -> Self {
+        // Startup pairing only. No document, scene serialization or hashing is
+        // performed during simulation or native structural operations.
+        let source_scene_fingerprint = Sha256::digest(scene.to_bytes()).into();
+        let navigation = scene.prepared_navigation;
         let physics = scene.physics.clone();
         let physics_2d = scene.physics_2d.clone();
         let audio = scene.audio.clone();
@@ -139,8 +149,13 @@ impl NativeWorld {
         // Native builds enable Bevy's multi_threaded executor and parallel
         // queries. Browser builds remain serial until their worker host exists.
         schedule.add_systems((integrate, publish_globals, crate::flipbook::advance).chain());
+        let flipbook_query = world.query::<(&Identity, &crate::flipbook::Playback)>();
         let mut result = Self {
+            localization: scene.localization,
+            navigation_used: !navigation.nodes.is_empty(),
+            navigation,
             identity: crate::WorldIdentity::new(),
+            source_scene_fingerprint,
             world,
             physics: solver,
             physics_2d: Default::default(),
@@ -156,6 +171,7 @@ impl NativeWorld {
             audio_used: !audio.is_empty(),
             audio_ids: BTreeSet::new(),
             schedule,
+            flipbook_query,
             entities,
             parents,
             scene_id: scene.id,
@@ -197,6 +213,26 @@ impl NativeWorld {
             .apply(planar_changes)
             .expect("validated planar scene");
         result
+    }
+
+    /// Fingerprint of the original canonical scene, preserved through v2 saves.
+    /// It does not describe current mutable state or authenticate executable code.
+    pub fn source_scene_fingerprint(&self) -> [u8; 32] {
+        self.source_scene_fingerprint
+    }
+
+    pub fn incarnation(&self) -> crate::WorldIncarnation {
+        crate::WorldIncarnation(self.world.id())
+    }
+
+    /// Opaque lifetime identity for an actual ECS entity, independent of its
+    /// reusable stable ID or archetype. Restoring replaces the Bevy world and
+    /// invalidates every previous entity token, even when saved IDs match.
+    pub fn entity_identity(&self, id: StableId) -> Option<crate::EntityIdentity> {
+        self.entities.get(&id).map(|&entity| crate::EntityIdentity {
+            world: self.world.id(),
+            entity,
+        })
     }
 
     pub(crate) fn install_spatial(&mut self, id: StableId, node: Option<crate::CookedSpatial>) {
@@ -315,6 +351,7 @@ impl NativeWorld {
         // Validate the whole numeric input set and ordinary integration before
         // the first solver write. No cloned configuration or document exists.
         self.prepare_globals(Some(dt))?;
+        let navigation = self.navigation_motion()?;
         if self.physics_used || self.physics_2d_used {
             self.sync_physics_2d()?;
             let mut query = self
@@ -375,6 +412,9 @@ impl NativeWorld {
         }
         self.schedule.run(&mut self.world);
         self.tick = next;
+        if let Some(navigation) = navigation {
+            self.navigation = navigation;
+        }
         self.physics_failed = false;
         Ok(())
     }

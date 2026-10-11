@@ -66,6 +66,8 @@ pub enum FlipbookError {
     Seek,
     #[error("flipbook tick rate must be in 1..=1000")]
     TickRate,
+    #[error("invalid flipbook checkpoint for this clock")]
+    Checkpoint,
 }
 
 /// Typed native control. Seek resets the subframe phase and completion, retaining
@@ -86,7 +88,25 @@ pub struct FlipbookState {
     playing: bool,
     completed: bool,
 }
+/// Plain checkpoint data, checked against the owning clock on restoration.
+/// This is runtime persistence data, not a new authoring schema or guest API.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct FlipbookCheckpoint {
+    pub frame: u16,
+    pub remainder: u64,
+    pub playing: bool,
+    pub completed: bool,
+}
 impl FlipbookState {
+    pub fn checkpoint(self) -> FlipbookCheckpoint {
+        FlipbookCheckpoint {
+            frame: self.frame,
+            remainder: self.remainder,
+            playing: self.playing,
+            completed: self.completed,
+        }
+    }
+
     pub fn new(playing: bool) -> Self {
         Self {
             frame: 0,
@@ -156,6 +176,26 @@ impl FlipbookClock {
             denominator: u64::from(rate.denominator) * u64::from(tick_rate),
             frames: frames as u16,
             looping,
+        })
+    }
+    /// Reject impossible frame/fraction/completion combinations before creating
+    /// private state. Paused playback retains its exact rational remainder.
+    pub fn restore(self, value: FlipbookCheckpoint) -> Result<FlipbookState, FlipbookError> {
+        if value.frame >= self.frames
+            || value.remainder >= self.denominator
+            || (value.completed
+                && (self.looping
+                    || value.playing
+                    || value.frame != self.frames - 1
+                    || value.remainder != 0))
+        {
+            return Err(FlipbookError::Checkpoint);
+        }
+        Ok(FlipbookState {
+            frame: value.frame,
+            remainder: value.remainder,
+            playing: value.playing,
+            completed: value.completed,
         })
     }
     pub fn control(
@@ -274,6 +314,67 @@ mod tests {
         let old = state;
         assert!(clock.control(&mut state, FlipbookControl::Seek(2)).is_err());
         assert_eq!(old, state);
+    }
+    #[test]
+    fn checkpoint_preserves_fraction_and_rejects_impossible_completion() {
+        let clock = FlipbookClock::new(
+            FrameRate {
+                numerator: 7,
+                denominator: 3,
+            },
+            3,
+            false,
+            60,
+        )
+        .unwrap();
+        let mut state = FlipbookState::new(true);
+        for _ in 0..17 {
+            clock.advance(&mut state);
+        }
+        clock.control(&mut state, FlipbookControl::Pause).unwrap();
+        let checkpoint = state.checkpoint();
+        assert_eq!(checkpoint.remainder, 119);
+        assert_eq!(clock.restore(checkpoint), Ok(state));
+        for invalid in [
+            FlipbookCheckpoint {
+                frame: 3,
+                ..checkpoint
+            },
+            FlipbookCheckpoint {
+                remainder: 180,
+                ..checkpoint
+            },
+            FlipbookCheckpoint {
+                completed: true,
+                ..checkpoint
+            },
+            FlipbookCheckpoint {
+                frame: 2,
+                remainder: 0,
+                playing: true,
+                completed: true,
+            },
+        ] {
+            assert_eq!(clock.restore(invalid), Err(FlipbookError::Checkpoint));
+        }
+        let complete = FlipbookCheckpoint {
+            frame: 2,
+            remainder: 0,
+            playing: false,
+            completed: true,
+        };
+        assert!(clock.restore(complete).is_ok());
+        let looping = FlipbookClock::new(
+            FrameRate {
+                numerator: 7,
+                denominator: 3,
+            },
+            3,
+            true,
+            60,
+        )
+        .unwrap();
+        assert_eq!(looping.restore(complete), Err(FlipbookError::Checkpoint));
     }
     #[test]
     fn prepared_clock_rejects_unbounded_or_zero_inputs() {

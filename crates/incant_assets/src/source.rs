@@ -134,7 +134,7 @@ impl SourceSet {
     /// Version salt makes importer/codec changes invalidate older cooked entries.
     pub fn fingerprint(&self) -> String {
         self.fingerprint_with_salt(
-            b"incant-static-gltf-v3-meshopt-0.6.2-textures-v1-normal-basis-v1\0",
+            b"incant-static-gltf-v4-meshopt-0.6.2-color-roles-v1-normal-basis-v1\0",
         )
     }
     pub(crate) fn fingerprint_with_salt(&self, salt: &[u8]) -> String {

@@ -1,0 +1,27 @@
+{
+  "required_contexts": [
+    "android",
+    "build",
+    "checks",
+    "classify",
+    "compare",
+    "conformance (macos-latest)",
+    "conformance (ubuntu-latest)",
+    "conformance (windows-latest)",
+    "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+    "desktop (macos, macos-latest, incant_platform_smoke)",
+    "desktop (ubuntu-latest, Linux)",
+    "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+    "desktop (windows-latest, Windows, .exe)",
+    "ios",
+    "local-service-protocols",
+    "native (macos-latest)",
+    "native (ubuntu-latest)",
+    "native (windows-latest)",
+    "portability",
+    "storage (macos-latest)",
+    "storage (ubuntu-latest)",
+    "storage (windows-latest)",
+    "web"
+  ]
+}
