@@ -329,8 +329,12 @@ with primitive Unicode validation, fixed per-update limits, bounded retained
 history and dropped-message counts. Native/game observers hide logs after
 terminal failure; the source-free player reports them once at completion.
 585 ordinary workspace tests and 47 fresh CPU-mode process controls pass.
-[Evidence](docs/spikes/native-script-logs.md). This is the QuickJS path; Wasm logs,
-full native SDK, session saves and editor/headless Play migration remain open.
+[QuickJS evidence](docs/spikes/native-script-logs.md). Additive native Wasm logs
+now share its data/history contract and reach the actual static NativeSession
+observer. 57 combined actual-host/runtime/SDK tests, eight QuickJS logging cases,
+scoped Clippy and 16 generator/preparer cases pass locally.
+[Wasm evidence](docs/spikes/native-wasm-logs.md). Full native SDK, session saves,
+platform/device conformance and remaining editor/headless integration stay open.
 
 
 The reviewed native script/input stack is now tested together with the static

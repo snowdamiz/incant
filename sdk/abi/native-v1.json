@@ -336,6 +336,31 @@
       "result": null,
       "opcode": 16,
       "call": "Call::ControlFlipbook { id, kind, frame }"
+    },
+    {
+      "namespace": "incant_log_v1",
+      "name": "write",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "level",
+          "i32"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": null,
+      "opcode": 17,
+      "call": "Call::Log { level, ptr, len }"
     }
   ],
   "enums": {
@@ -916,6 +941,24 @@
         "Seek",
         3
       ]
+    ],
+    "LogLevel": [
+      [
+        "Debug",
+        0
+      ],
+      [
+        "Info",
+        1
+      ],
+      [
+        "Warn",
+        2
+      ],
+      [
+        "Error",
+        3
+      ]
     ]
   },
   "records": {
@@ -1223,7 +1266,12 @@
     "FLIPBOOK_MAX_FRAMES": 256,
     "KEY_TAG_COUNT": 104,
     "GAMEPAD_BUTTON_COUNT": 17,
-    "MOUSE_BUTTON_COUNT": 5
+    "MOUSE_BUTTON_COUNT": 5,
+    "LOG_MAX_MESSAGE_BYTES": 1024,
+    "LOG_MAX_TICK_ENTRIES": 64,
+    "LOG_MAX_TICK_BYTES": 16384,
+    "LOG_MAX_RETAINED_ENTRIES": 1024,
+    "LOG_MAX_RETAINED_BYTES": 262144
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -1233,6 +1281,7 @@
   "namespaces": {
     "incant_v1": "imports",
     "incant_input_v1": "input",
-    "incant_flipbook_v1": "flipbook"
+    "incant_flipbook_v1": "flipbook",
+    "incant_log_v1": "log"
   }
 }
