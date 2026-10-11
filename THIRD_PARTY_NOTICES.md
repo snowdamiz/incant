@@ -88,3 +88,14 @@ Retain this notice and the Apache license with static-module distributions.
 The development-only Wasmtime 49.0.2 and build-only wasm-tools crates retain their
 pinned crates.io resolutions and licenses in Cargo.lock; they do not enter the
 normal static-player dependency graph.
+
+## Local service containers
+
+`services/local/images.lock.json` pins unmodified PostgreSQL, SeaweedFS, Zitadel,
+Mailpit and HAProxy container image indexes. Application license texts and source
+links are retained in `services/local/licenses/` and the lock. Zitadel v4 uses
+AGPL-3.0-only; HAProxy uses GPL-2.0 with the retained OpenSSL exemption. These are
+local service processes, not engine-player dependencies. See
+[the bounded policy and remaining audit work](services/local/README.md#pins-and-licenses).
+This notice does not claim a complete license inventory of every OS package
+inside those container images or approve production redistribution.

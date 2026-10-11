@@ -1,0 +1,33 @@
+name: Local service protocols
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'services/local/**'
+      - 'tools/local_services*.py'
+      - 'tools/tests/test_local_services.py'
+      - '.github/workflows/local-services.yml'
+  pull_request:
+    paths:
+      - 'services/local/**'
+      - 'tools/local_services*.py'
+      - 'tools/tests/test_local_services.py'
+      - '.github/workflows/local-services.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: local-services-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  protocols:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Verify private-state and boundary refusals
+        run: python3 -m unittest discover -s tools/tests -p test_local_services.py -v
+      - name: Exercise real local protocols and restart persistence
+        run: python3 tools/local_services_smoke.py
