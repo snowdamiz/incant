@@ -8,11 +8,14 @@ publish.workspace = true
 [dependencies]
 incant_types.workspace = true
 incant_2d.workspace = true
+incant_physics_2d_runtime.workspace = true
 incant_physics_runtime = { path = "../incant_physics_runtime" }
 bevy_ecs.workspace = true
 thiserror.workspace = true
 sha2.workspace = true
 glam = "0.32"
+# Keep planar angle/quaternion projection identical in native and browser builds.
+libm = "=0.2.16"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 bevy_ecs = { workspace = true, features = ["multi_threaded"] }

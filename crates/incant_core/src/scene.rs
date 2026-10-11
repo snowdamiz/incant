@@ -32,6 +32,28 @@ pub(crate) struct PreparedEntity {
     pub mesh: Option<MeshRenderer>,
 }
 
+/// The legacy gameplay projection must refuse unmigrated capabilities both at
+/// startup and when a running Play session receives a newly edited document.
+/// Static authoring inspection continues to use `prepare` directly.
+pub(crate) fn prepare_gameplay(
+    validated: incant_doc::ValidatedProject<'_>,
+) -> Result<Vec<PreparedEntity>, incant_doc::DocumentError> {
+    for (scene_id, scene) in &validated.project().scenes {
+        for (entity_id, entity) in &scene.entities {
+            if entity.components.contains_key("Tilemap") {
+                return Err(incant_doc::DocumentError::Validation(vec![
+                    incant_doc::Diagnostic {
+                        path: format!("/scenes/{scene_id}/entities/{entity_id}/components/Tilemap"),
+                        message: "Tilemap gameplay is unsupported by legacy document simulation"
+                            .into(),
+                    },
+                ]));
+            }
+        }
+    }
+    prepare(validated)
+}
+
 /// All validation and decoding precede changes to the running ECS world.
 pub(crate) fn prepare(
     validated: incant_doc::ValidatedProject<'_>,

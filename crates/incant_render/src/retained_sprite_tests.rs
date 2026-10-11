@@ -9,6 +9,18 @@ use std::path::Path;
 const A: &str = "00000000000000000000000001";
 const B: &str = "00000000000000000000000002";
 pub(super) fn fixture() -> (NativeWorld, NativeRenderInput, StableId) {
+    let (world, input, moving, _) = fixture_kind(false);
+    (world, input, moving)
+}
+pub(super) fn tile_fixture() -> (NativeWorld, NativeRenderInput, StableId) {
+    let (world, input, moving, _) = fixture_kind(true);
+    (world, input, moving)
+}
+pub(super) fn tile_fixture_with_authoring() -> (NativeWorld, NativeRenderInput, StableId, SceneInput)
+{
+    fixture_kind(true)
+}
+fn fixture_kind(tiles: bool) -> (NativeWorld, NativeRenderInput, StableId, SceneInput) {
     let directory = tempfile::tempdir().unwrap();
     let root = directory.path();
     let mut encoder = png::Encoder::new(
@@ -93,11 +105,40 @@ pub(super) fn fixture() -> (NativeWorld, NativeRenderInput, StableId) {
         }
         scene.entities.insert(entity.id.clone(), entity);
     }
+    if tiles {
+        for (id, offset) in [
+            ("00000000000000000000000006", 0.),
+            ("00000000000000000000000007", 0.75),
+        ] {
+            let mut entity = Entity::new("Numerical tile map");
+            entity.id = id.into();
+            entity.parent = Some(parent_id.clone());
+            entity.components.insert(
+                "Transform".into(),
+                json!(Transform {
+                    translation: [-2. + offset, -1. + offset, 0.],
+                    ..Default::default()
+                }),
+            );
+            entity.components.insert("Tilemap".into(),json!({"tileset":texture_id,"size":[3,2],"cell_size":[0.75,0.5],"layers":[
+                {"id":"00000000000000000000000004","layer":2,"order":-1,"cells":[null,A,null,B,null,null]},
+                {"id":"00000000000000000000000003","layer":-2,"order":3,"cells":[A,B,null,null,A,B]}
+            ]}));
+            scene.entities.insert(entity.id.clone(), entity);
+        }
+    }
     let scene_id = scene.id.clone();
     project.scenes.insert(scene_id.clone(), scene);
     let bytes = incant_cook::cook_scene(&project, &scene_id).unwrap();
-    assert_eq!(&bytes[8..12], &5u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &(if tiles { 6u32 } else { 5u32 }).to_le_bytes()
+    );
     let world = NativeWorld::from_bytes(&bytes).unwrap();
+    let mut assets = incant_assets::AssetStore::default();
+    assets.sync(&project, root).unwrap();
+    let authoring = incant_render_authoring::project_input(&project, Some(&assets)).unwrap();
+    drop(assets);
     drop(project);
     drop(bytes);
     let input = NativeRenderInput::load(
@@ -110,7 +151,7 @@ pub(super) fn fixture() -> (NativeWorld, NativeRenderInput, StableId) {
     )
     .unwrap();
     directory.close().unwrap();
-    (world, input, moving.unwrap())
+    (world, input, moving.unwrap(), authoring)
 }
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]

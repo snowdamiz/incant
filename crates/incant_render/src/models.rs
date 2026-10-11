@@ -278,9 +278,13 @@ impl Renderer {
         {
             return Err(ResourceError::TransparentShadowCaster.into());
         }
-        let sprites = self
-            .sprites
-            .upload(&self.device, &self.queue, resolved.sprites, retained)?;
+        let sprites = self.sprites.upload(
+            &self.device,
+            &self.queue,
+            resolved.sprites,
+            resolved.tilemaps,
+            retained,
+        )?;
         Ok(RenderScene {
             sprites,
             lights,

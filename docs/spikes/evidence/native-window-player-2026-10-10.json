@@ -1,0 +1,710 @@
+{
+  "scope": "Optional native desktop window, source-free executable and numerical lifecycle; visible review remains Claude-owned",
+  "base": "a105347293541326df7bf87d73813829934ca274",
+  "host": {
+    "os": "macOS 26.6 (25G72)",
+    "architecture": "aarch64-apple-darwin",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal"
+  },
+  "pinned": {
+    "rust": "1.99.0",
+    "tao": "0.37.1",
+    "kira": "0.12.5",
+    "cpal": "0.18.2",
+    "wgpu": "29.0.4"
+  },
+  "source_sha256": {
+    ".github/workflows/ci.yml": "a2ddd36e7eea221d627039171f8fb70dfdfb67a34418243b78d5a461e7939881",
+    ".github/workflows/desktop.yml": "37c1cd89b24de3c837a04aa1fd49e7404306ab431a9bfbde90c40d89dceef932",
+    "Cargo.lock": "93a45d394a5e2f13be298ca8b737828e98e7cd231f58f35a878775db30e85138",
+    "crates/incant_audio_runtime/src/mixer.rs": "2e2d6807626c873aec1f204b56e1571ad4491090f20a5101fcea1f0f42968245",
+    "crates/incant_audio_runtime/src/scene.rs": "0fd32808c7b5735daaa4f95d2386b867383f32e9fe3f88d4cf7114edb7a23ae7",
+    "crates/incant_audio_runtime/tests/scene.rs": "89dc1bc571cd20b43bf9fa5f3f17ece771ae2a9bd71e9e31e69369b0f70c3bc2",
+    "crates/incant_game_player/Cargo.toml": "96ff7b27014aff242e9c076daa11480791c04da97b1f8eb3a3717580e5cec60b",
+    "crates/incant_game_player/src/main.rs": "be5e58fea1c06895f67e1394090a3faac9d93172fec5df3c62428cd6ce49f29f",
+    "crates/incant_game_player/src/startup.rs": "d4723bbc4d1b07df9aa20b3935849e9800d507e94454eeae5da8b9f7fad65595",
+    "crates/incant_game_player/src/window/clock.rs": "dfd7b58684393d86248914244af01a28e00fab5482d788d143b5b29e547dcb6c",
+    "crates/incant_game_player/src/window/input.rs": "d9ad61131d90d7e44497b3d457c0f8cc47ab5174e665f30c5d79d0d020ce8a48",
+    "crates/incant_game_player/src/window/mod.rs": "3dbe1499dbc089d8f33fe6d4aeae96641bfd8ea4fcaedaf3939f6c1b884291a5",
+    "crates/incant_game_player/src/window/probe.rs": "cb20fa208a0eaad956c94a64f9d7a2715e018604d1c2621b1e58745a205816c7",
+    "crates/incant_game_player/src/window/surface.rs": "b18b122fc5cdbfe766a738a8648d6a0711f67fa6c8e53ffab5841194a0c57430",
+    "crates/incant_game_runtime/src/core.rs": "98b00099a5acde9863a81ca3b03afc4ef4a310bb751a56d8f821f80dd60e41a9",
+    "crates/incant_game_runtime/src/hosted.rs": "bbd2503f34d2f7b33533de60f825c0438f211cd0184c4a99f410a29e2b923e7e",
+    "crates/incant_game_runtime/src/lib.rs": "f15e9184184b5b6d5117fb657f3badfe5555234e531ba1d29cd7f0727ae8cf53",
+    "crates/incant_game_runtime/src/offline.rs": "5dc8a771ab3728f7fc383ae9364ca679a70d20132e8336671d171147c625c0e7",
+    "crates/incant_game_runtime/tests/session.rs": "aefe71a8809f2259f6dc84a75b6f2f66fa7440f952e27b7daca05d8a07ec3314",
+    "tools/probes/native-window.py": "643cec9ae08d4a39ff31f475010c38262e067c98c4ff492252d3aff951f5eec5"
+  },
+  "logs": {
+    "tests": {
+      "path": "/tmp/incant-native-window-tests.log",
+      "sha256": "ccf09d5614cb70fe68565f9fadaa4787ab9b42bfff4ae9c94cfb2b5b3ef3b58f"
+    },
+    "player-tests": {
+      "path": "/tmp/incant-native-window-player-tests.log",
+      "sha256": "5d5c9bf1f8efd88c004d36d4f7e1c933ef3afd6458030a123abcfc2de53637e8"
+    },
+    "clippy": {
+      "path": "/tmp/incant-native-window-clippy.log",
+      "sha256": "2d3d86f32f1d1249cb289ec10c5befba5f8701bdcc7c3ca32256b8e7a33c9dbf"
+    },
+    "legacy-audio": {
+      "path": "/tmp/incant-native-window-legacy-audio.log",
+      "sha256": "e693a32ad7b4871b8fcb749d61aa6e444040dce1da433d8c32cc1f76933b4e09"
+    },
+    "default-clippy": {
+      "path": "/tmp/incant-native-window-default-clippy.log",
+      "sha256": "713387b4f57544b079cd42f28e5ee04d487192ee334fef610e28142889ffcbe4"
+    },
+    "cpu-clippy": {
+      "path": "/tmp/incant-native-window-cpu-clippy.log",
+      "sha256": "55dd4afbfca01b169d73fc83a27e1e58ce256d5d41c3298ad2b83bb131f5e58f"
+    },
+    "graph": {
+      "path": "/tmp/incant-native-window-graph.log",
+      "sha256": "7399ac31399c536fd7158fc3e8c9e5b5b4dca4acd5ad19bbb3272c5beaa1eb5a"
+    },
+    "tools": {
+      "path": "/tmp/incant-native-window-tools.log",
+      "sha256": "f0c1bf385c7768125cf39264ed142eef2579547273bae1b5bdcfd20396c55063"
+    },
+    "fmt": {
+      "path": "/tmp/incant-native-window-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conventions": {
+      "path": "/tmp/incant-native-window-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actionlint": {
+      "path": "/tmp/incant-native-window-actionlint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "checks": {
+    "current_scoped_release_tests": 43,
+    "legacy_audio_release_tests": 10,
+    "tool_tests": 40,
+    "release_all_target_clippy": [
+      "native-window/audio-scene/game",
+      "default-player",
+      "render-input-player"
+    ],
+    "fmt": true,
+    "conventions": true,
+    "actionlint": true,
+    "authoring_free_normal_graph": true,
+    "hosted_interactive_claim": false
+  },
+  "proof_command": "python3 tools/probes/native-window.py /tmp/incant-game-gpu-shipping /tmp/incant-native-window-shipping-final",
+  "proof": {
+    "scope": "actual native surface/device startup and numerical lifecycle; no pixel/appearance or audible-output review",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "target": "aarch64-apple-darwin",
+    "player_sha256": "6b6a53a1ee86fabc9b2c98c7dd4601534bd72521c828bd55c779dbafbe5b3560",
+    "player_bytes": 8104464,
+    "symbol_identity": {
+      "format": "Mach-O/dSYM",
+      "uuids": {
+        "arm64": "fedc605f-1f68-3995-8640-0b003468e831"
+      }
+    },
+    "fixture_ledger_sha256": "a06b338ca5987d0e88bf599b23d2dc686eb6258dafe057ebe87807fa2f40c53d",
+    "fixture_inputs": {
+      "static.scene": "39e14dce85d6985aca7ab3b0cd32388cb085192cddc6763d71a0b114e80ecda6",
+      "stream.scene": "f6f95cabc6d745d8ad57ec718f5ff8e6fdfc9ecb7ea73371bfccf7cb203ef53c"
+    },
+    "source_and_build_deleted": true,
+    "codegen": {
+      "incant_game_player": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort",
+        "lto": "fat",
+        "debuginfo": "2",
+        "split-debuginfo": "packed"
+      },
+      "incant_game_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render_game": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render_gpu_host": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render_native": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_render_data": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_script": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_input": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_audio_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_assets_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "incant_physics_runtime": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "rapier3d": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "wgpu": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "tao": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "kira": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      },
+      "cpal": {
+        "opt-level": "3",
+        "codegen-units": "1",
+        "panic": "abort"
+      }
+    },
+    "source_compiler_symbols_absent": true,
+    "dynamic_source_routes_rejected": true,
+    "results": [
+      {
+        "scene": "static.scene",
+        "report": {
+          "accepted_frames": 40,
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "dropped_wall_ticks": "5",
+          "lifecycle_probe": {
+            "actual_minimize_restore": true,
+            "actual_resize": true,
+            "explicit_surface_recreation": true,
+            "os_loss_injected": false,
+            "suspended_tick": 16
+          },
+          "mode": "native-window",
+          "on_screen": true,
+          "surface_reconfigurations": 3,
+          "surface_recreations": 1,
+          "surface_skipped": 0,
+          "tick": 40
+        },
+        "stderr": ""
+      },
+      {
+        "scene": "stream.scene",
+        "report": {
+          "accepted_frames": 40,
+          "adapter": "Apple M5 Pro",
+          "backend": "Metal",
+          "dropped_wall_ticks": "0",
+          "lifecycle_probe": {
+            "actual_minimize_restore": true,
+            "actual_resize": true,
+            "explicit_surface_recreation": true,
+            "os_loss_injected": false,
+            "suspended_tick": 16
+          },
+          "mode": "native-window",
+          "on_screen": true,
+          "surface_reconfigurations": 3,
+          "surface_recreations": 1,
+          "surface_skipped": 0,
+          "tick": 40
+        },
+        "stderr": ""
+      }
+    ],
+    "rejected": [
+      {
+        "case": "unsupported-gamepad",
+        "stderr": "Error: InputCapability\n"
+      },
+      {
+        "case": "malformed-camera",
+        "stderr": "Error: \"CAMERA_HEX must contain exactly32 hexadecimal digits\"\n"
+      }
+    ]
+  },
+  "compatibility": {
+    "matched_frozen_gpu_pcm_pose_report": true,
+    "baseline_player_sha256": "23e0f27152263f37685e0e78898989df2d3c8748b33b3b2752dcf5427fd7cfa9",
+    "report": {
+      "frames": 96000,
+      "pcm_sha256": "3822063f9e3b291d4bc8ab543e16bd09900c3ea82082b0181e5369fdd781ef58",
+      "render_input": {
+        "binding_generation": 0,
+        "camera": "00000000000000000000000000000004",
+        "camera_position": [
+          0.0,
+          0.0,
+          8.0
+        ],
+        "decoded_payload_bytes": 156,
+        "first_model_position": [
+          2.9500136375427246,
+          0.0,
+          0.0
+        ],
+        "gpu": {
+          "accepted_frames": 120,
+          "adapter": {
+            "backend": "Metal",
+            "device_type": "IntegratedGpu",
+            "name": "Apple M5 Pro"
+          },
+          "captures": [
+            {
+              "frame": 1,
+              "non_background_pixels": 55,
+              "sha256": "f83486993de4f7ea04058053abd7af7e3aad7b7f6843300c292563a4d76593c3"
+            },
+            {
+              "frame": 120,
+              "non_background_pixels": 55,
+              "sha256": "d7acf22c7808031e1ec5cd17987f68bdca40c324f2d531f89ac26d31c8863dda"
+            }
+          ],
+          "height": 96,
+          "on_screen": false,
+          "width": 160
+        },
+        "gpu_submitted": true,
+        "mode": "gpu-offscreen",
+        "model_count": 1,
+        "tick": 120,
+        "topology_generation": 0
+      },
+      "sources": [
+        {
+          "id": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "physics": {
+            "position": [
+              2.9500136375427246,
+              0.0,
+              0.0
+            ],
+            "sleeping": false,
+            "velocity": [
+              3.0,
+              0.0,
+              0.0
+            ]
+          },
+          "position": [
+            2.9500136375427246,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "tick": 120
+    }
+  },
+  "raw_artifacts": "/tmp/incant-native-window-shipping-final",
+  "qualification": "After this completed proof, the helper accepted minimized ticks 16..19 instead of exactly16 to allow the already-bounded four-tick catch-up. Both recorded runs stopped at16 and passed the stricter original check; no Rust artifact input changed.",
+  "limits": [
+    "Only local macOS actual-window/device startup; Linux/Windows compile pending CI",
+    "No Astra appearance review or screenshots; Claude0037 pending",
+    "No audible speaker verification",
+    "No actual OS Lost event injected; explicit recreation plus bounded policy tests",
+    "Asynchronous device-error observation, not continuous health proof",
+    "Static run dropped5 wall ticks; streamed0; no frame-budget or phone gate",
+    "No native v5 sprite window fixture coverage yet",
+    "No installer, signing, mobile, full game release or phase gate"
+  ],
+  "pr62_integration": {
+    "root_head": "d8d00c3fbdf930a2ceea1e376088157e048fb0e4",
+    "ordinary_release_tests": 62,
+    "actual_gpu_host_tests": 3,
+    "tool_tests": 40,
+    "release_all_target_clippy": true,
+    "fmt": true,
+    "conventions": true,
+    "actionlint": true,
+    "normal_graph": true,
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-native-window-integrated-tests.log",
+        "sha256": "94a5194c51d88f9e4bc88e637941c9f40dda224fb587b191a3374e3cd6e590be"
+      },
+      "gpu": {
+        "path": "/tmp/incant-native-window-integrated-gpu.log",
+        "sha256": "276aaba17bc010a43f8990fa9cdfbc8fee8565640f2e3b3259c510a362275ad1"
+      },
+      "clippy": {
+        "path": "/tmp/incant-native-window-integrated-clippy.log",
+        "sha256": "f9a3d939e5dbe09471d58f6c0c07a2e0d7146fd8fd93e9cd9086c9e3f167ab26"
+      },
+      "fmt": {
+        "path": "/tmp/incant-native-window-integrated-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conventions": {
+        "path": "/tmp/incant-native-window-integrated-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tools": {
+        "path": "/tmp/incant-native-window-integrated-tools.log",
+        "sha256": "1649490d9ee5249eddeb254d66a004115e6d16be9a1c4ca940858300f109ccea"
+      },
+      "actionlint": {
+        "path": "/tmp/incant-native-window-integrated-actionlint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "graph": {
+        "path": "/tmp/incant-native-window-integrated-graph.log",
+        "sha256": "da87c4b6027ca44b4d7cdbaccbb0e004ca05ac553d71a2d2b8332e280588f8e7"
+      }
+    },
+    "scope": "Only STATUS conflict; reviewed window/audio/game source unchanged. Historical source-free binary and Claude0037 remain pinned to f68d910, not represented as rebuilt from this integrated head."
+  },
+  "corrected_pr62_integration": {
+    "root_head": "9cf171275debfd0cc959a636abf3db4c93865bfb",
+    "affected_player_and_2d_release_tests": 17,
+    "tool_tests": 43,
+    "native_window_release_all_target_clippy": true,
+    "fmt": true,
+    "conventions": true,
+    "actionlint": true,
+    "normal_graph": true,
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-native-window-corrected-tests.log",
+        "sha256": "b6f599caaf08e23ed6ba7267a7e5fb5ccef4f63f6b8ac3f96b091492ea4237f0"
+      },
+      "clippy": {
+        "path": "/tmp/incant-native-window-corrected-clippy.log",
+        "sha256": "e003d12964e0b07cdccc1a03f5265029e094233cfca1a08771df13e5ec9181f5"
+      },
+      "tools": {
+        "path": "/tmp/incant-native-window-corrected-tools.log",
+        "sha256": "07a1638aaa51ecfdd665e0d1af2b04cf7d308638be51aac804fcfda2e1bd1b62"
+      },
+      "fmt": {
+        "path": "/tmp/incant-native-window-corrected-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conventions": {
+        "path": "/tmp/incant-native-window-corrected-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "actionlint": {
+        "path": "/tmp/incant-native-window-corrected-actionlint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "graph": {
+        "path": "/tmp/incant-native-window-corrected-graph.log",
+        "sha256": "da87c4b6027ca44b4d7cdbaccbb0e004ca05ac553d71a2d2b8332e280588f8e7"
+      }
+    },
+    "scope": "Add reviewed v5 executable proof, stdout-only Cargo metadata handling, and parse-only ULID/isolated probe lock correction. Window/audio/game lifecycle sources remain unchanged; no fresh-window executable claim for this later integration."
+  },
+  "ci_followup_integration": {
+    "root_head": "9c531a92854eab448053031a544579011bcc07a3",
+    "camera_tests": 94,
+    "tool_tests": 43,
+    "fmt": true,
+    "conventions": true,
+    "logs": {
+      "camera": {
+        "path": "/tmp/incant-native-window-ci-followup-camera.log",
+        "sha256": "22a05efcce7efb2a374fa28e5c2f9328b2c1c693d53f568c6d59a9268d04276f"
+      },
+      "tools": {
+        "path": "/tmp/incant-native-window-ci-followup-tools.log",
+        "sha256": "e55395f0393fc3ae236e9c0ac99a18a9860179332dea2db136268e5a0046d313"
+      },
+      "fmt": {
+        "path": "/tmp/incant-native-window-ci-followup-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conventions": {
+        "path": "/tmp/incant-native-window-ci-followup-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "scope": "Reviewed Linux C11 build policy and independent Camera scan tests only; native window semantics unchanged. Combined Wasm conformance was verified on the prerequisite source; hosted exact-head checks remain required."
+  },
+  "window_review_corrections": {
+    "base": "8246435b27b2365d4a2058e707173741a94c408c",
+    "original_claude_review": "4073f8fab8b3a377230513d7cfa0c35b9f1db178",
+    "scope": "Disable unsupported maximize affordance; defer out-of-bound OS sizes; throttled explicit background redraw via unchanged committed host sync. No simulation/input/audio advancement. Delta visible acceptance pending.",
+    "source_sha256": {
+      "crates/incant_game_player/src/window/mod.rs": "0d1f0ad7b7934c372be064b89551050df75e55c1a35826062e9c9e9b03fd0bf5",
+      "crates/incant_game_player/src/window/surface.rs": "334e5622619418ddc698161b92b6930075e534de771e7d44184192c2367b4505",
+      "crates/incant_game_player/src/window/clock.rs": "f19acd30cfb0a599f487a6f5811f7fc400a7df5d9b8b647f919a38df359f3461",
+      "crates/incant_game_runtime/src/core.rs": "2cacd79a2b5441aece48e868a44459d75a534b534427d5b653bac1c9ad65deeb",
+      "crates/incant_game_runtime/src/hosted.rs": "6a0ec8c28fa22862e4deeeb010c3515e630cbfa55edb3b28e05810530fc0c676",
+      "crates/incant_game_runtime/tests/hosting.rs": "9ef8fc89c8d6aa31938c60d7d0d7b99e631bc41e426467156855e04bf9399410",
+      "crates/incant_render_gpu_host/tests/game.rs": "6c5a6273a87a59ab08190121c10c5d0d178b9be83a8cec2a49d3cfeae94b14ca",
+      "tools/probes/native-window.py": "15f9bcbb7e825c66d96994877beba1bf3fbeb4427740c4103ab292acd0a1242b"
+    },
+    "ordinary_tests": 36,
+    "actual_gpu_tests": 4,
+    "clippy": true,
+    "tools_tests": 43,
+    "logs": {
+      "tests": {
+        "path": "/tmp/incant-native-window-refresh-tests.log",
+        "sha256": "34d0185b7b473c2bf7a2f0be5de0fcfe643272d8c75b37488d1f027e55dca9fe"
+      },
+      "clippy": {
+        "path": "/tmp/incant-native-window-refresh-clippy.log",
+        "sha256": "313adea149f29aed5a581bb6cb5b1c3b5cc5a5bd52fa961342123eae39daa3de"
+      },
+      "gpu": {
+        "path": "/tmp/incant-native-window-refresh-gpu.log",
+        "sha256": "c461a33c4e041397bf9b556800547076ecdf440075a45b828a0ffd710ae0b729"
+      },
+      "tools": {
+        "path": "/tmp/incant-native-window-refresh-tools.log",
+        "sha256": "c232ad44bba270a2990d5dcb7e0b6ca8817e4880d0ff53fecacf3803bcef605b"
+      },
+      "conventions": {
+        "path": "/tmp/incant-native-window-refresh-conventions.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "proof": {
+      "scope": "actual native surface/device startup and numerical lifecycle; no pixel/appearance or audible-output review",
+      "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+      "target": "aarch64-apple-darwin",
+      "player_sha256": "ec18e426c67584c4ac762cf72deda6dfc10d9044c4a5ff91a07fc4ad0648edf5",
+      "player_bytes": 8120976,
+      "symbol_identity": {
+        "format": "Mach-O/dSYM",
+        "uuids": {
+          "arm64": "ae8358e3-1290-3e9a-89a8-0adf2d6f643e"
+        }
+      },
+      "fixture_ledger_sha256": "a06b338ca5987d0e88bf599b23d2dc686eb6258dafe057ebe87807fa2f40c53d",
+      "fixture_inputs": {
+        "static.scene": "39e14dce85d6985aca7ab3b0cd32388cb085192cddc6763d71a0b114e80ecda6",
+        "stream.scene": "f6f95cabc6d745d8ad57ec718f5ff8e6fdfc9ecb7ea73371bfccf7cb203ef53c"
+      },
+      "source_and_build_deleted": true,
+      "codegen": {
+        "incant_game_player": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "lto": "fat",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        },
+        "incant_game_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_render_game": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_render_gpu_host": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_render_native": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_render": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_render_data": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_script": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_input": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_audio_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_assets_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "incant_physics_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "rapier3d": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "wgpu": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "tao": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "kira": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        },
+        "cpal": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort"
+        }
+      },
+      "source_compiler_symbols_absent": true,
+      "dynamic_source_routes_rejected": true,
+      "results": [
+        {
+          "scene": "static.scene",
+          "report": {
+            "accepted_frames": 40,
+            "adapter": "Apple M5 Pro",
+            "backend": "Metal",
+            "dropped_wall_ticks": "0",
+            "lifecycle_probe": {
+              "actual_minimize_restore": true,
+              "actual_resize": true,
+              "explicit_surface_recreation": true,
+              "os_loss_injected": false,
+              "suspended_tick": 16
+            },
+            "mode": "native-window",
+            "on_screen": true,
+            "presentation_refreshes": 0,
+            "surface_reconfigurations": 3,
+            "surface_recreations": 1,
+            "surface_skipped": 1,
+            "tick": 40
+          },
+          "stderr": ""
+        },
+        {
+          "scene": "stream.scene",
+          "report": {
+            "accepted_frames": 40,
+            "adapter": "Apple M5 Pro",
+            "backend": "Metal",
+            "dropped_wall_ticks": "0",
+            "lifecycle_probe": {
+              "actual_minimize_restore": true,
+              "actual_resize": true,
+              "explicit_surface_recreation": true,
+              "os_loss_injected": false,
+              "suspended_tick": 16
+            },
+            "mode": "native-window",
+            "on_screen": true,
+            "presentation_refreshes": 0,
+            "surface_reconfigurations": 3,
+            "surface_recreations": 1,
+            "surface_skipped": 0,
+            "tick": 40
+          },
+          "stderr": ""
+        }
+      ],
+      "rejected": [
+        {
+          "case": "unsupported-gamepad",
+          "stderr": "Error: InputCapability\n"
+        },
+        {
+          "case": "malformed-camera",
+          "stderr": "Error: \"CAMERA_HEX must contain exactly32 hexadecimal digits\"\n"
+        }
+      ]
+    },
+    "discarded_incomplete_build": "Initial fresh compilation was interrupted for the throttle review fix; it is not accepted evidence."
+  }
+}

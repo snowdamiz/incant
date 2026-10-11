@@ -1,0 +1,138 @@
+{
+ "action": "source-free",
+ "authored_before": {
+  "tile.incant.json": "2434688731ed198e6162d4d4b85dda00bd45f578b4eabac7a3baac634facfa1a",
+  "tile.incant.journal.jsonl": "305b91a7422b4b9acb2592ad16a34372a84c460ac4e5f472b221f13a45b79283"
+ },
+ "fingerprints_before": {
+  "01M4MFBBDJ4HRCCCX98FBM0VC9": "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f",
+  "01M4MFBBF7B106FG5D1C5NTMPP": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+  "01M4MFBBHFZVCMVC4GR6MN2S4N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+ },
+ "cache_before": [
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/220f2892bd94748aafbb8b4d1e80b9914563251d81d55d0f60d4b15c2cebe60f.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/3ada2865504d9958a0d63a0ccc7852970a3cc10c113d18210960a065d3e2ae6d.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/e9cd20afd65818d13a9124304e611f5ab6329c367da546f37b7218fc684b40b3.json"
+ ],
+ "removed": [
+  "artifacts/0039-native-tilemaps/r2/tile/art/badge.png",
+  "artifacts/0039-native-tilemaps/r2/tile/art/ballast.png",
+  "artifacts/0039-native-tilemaps/r2/tile/art/plates.png",
+  "artifacts/0039-native-tilemaps/r2/tile/art/tiles.atlas.json",
+  "artifacts/0039-native-tilemaps/r2/tile/art/tiles.png"
+ ],
+ "validate": {
+  "exit": 0,
+  "reply": {
+   "diagnostics": [],
+   "project_id": "01M4MFBBBR67WFZJQP9Y5Q6S3X",
+   "schema_version": 1,
+   "valid": true
+  },
+  "stderr": ""
+ },
+ "reimport_without_sources": {
+  "source": "art/tiles.atlas.json",
+  "usage": null,
+  "exit": 1,
+  "stderr": "Error: could not cook art/tiles.atlas.json: asset IO: No such file or directory (os error 2)",
+  "authored_unchanged": true,
+  "new_cache_files": []
+ },
+ "authored_after": {
+  "tile.incant.json": "2434688731ed198e6162d4d4b85dda00bd45f578b4eabac7a3baac634facfa1a",
+  "tile.incant.journal.jsonl": "305b91a7422b4b9acb2592ad16a34372a84c460ac4e5f472b221f13a45b79283"
+ },
+ "fingerprints_after": {
+  "01M4MFBBDJ4HRCCCX98FBM0VC9": "a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f",
+  "01M4MFBBF7B106FG5D1C5NTMPP": "15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a",
+  "01M4MFBBHFZVCMVC4GR6MN2S4N": "56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d"
+ },
+ "cache_after": [
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/135f00844748000573b8b9cae4cdb7028d1252c376fc741e4795c2029ed7cf30.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/15acb4454994baa8902bb5325e654bf30781663d92ef0be7295516ba8632807a.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/220f2892bd94748aafbb8b4d1e80b9914563251d81d55d0f60d4b15c2cebe60f.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/2e72de4a2878ddd2d44ef99cccdc1fda0a388e75136bd87883bcdaf05057294a.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/3ada2865504d9958a0d63a0ccc7852970a3cc10c113d18210960a065d3e2ae6d.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/460a58f8a4d70e76c6d17d471668d6864324283bcce142d4839247eebd0f0a92.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/56ac3ebf2c982b9e472fe43c477226ef11be814e716cef564572b36c6099cb6d.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/9bb117fb33a15a7e423f1f5a5453319e535d8a5c02bbbbf535f3ffa44ffaa5f9.ktx2",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/a78215d554ac3fa8fb588c11403913e378317cede0becd35e2468f1b1ae4a64f.json",
+  "artifacts/0039-native-tilemaps/r2/tile/.incant/cache/textures/e9cd20afd65818d13a9124304e611f5ab6329c367da546f37b7218fc684b40b3.json"
+ ],
+ "history_after": [
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import tiles.atlas",
+   "id": "01M4MFBBDJAF2YDTY5K921ED6X"
+  },
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import plates",
+   "id": "01M4MFBBF75AHZ8SZ8CBRTTTD0"
+  },
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import badge",
+   "id": "01M4MFBBHFZPAP9GQ6RP505ZGH"
+  },
+  {
+   "actor": {
+    "actor": "editor",
+    "conversation_id": null,
+    "model": null,
+    "origin": "user"
+   },
+   "commands": 37,
+   "description": "Tilemap review scene s0 (handoff 0039)",
+   "id": "01M4MFBBMCTQWDVH325M497Z9A"
+  },
+  {
+   "actor": {
+    "actor": "editor",
+    "conversation_id": null,
+    "model": null,
+    "origin": "user"
+   },
+   "commands": 3,
+   "description": "Tile review s1: cells, map size and layer order (handoff 0039)",
+   "id": "01M4MFMR9H0Y6W811859ESZMSH"
+  },
+  {
+   "actor": {
+    "actor": "texture",
+    "conversation_id": null,
+    "model": null,
+    "origin": "import"
+   },
+   "commands": 1,
+   "description": "Import tiles.atlas",
+   "id": "01M4MFNH487T31178XF7BWXBH8"
+  }
+ ]
+}
