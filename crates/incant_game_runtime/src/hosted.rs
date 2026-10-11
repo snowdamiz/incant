@@ -64,6 +64,36 @@ where
             )?,
         })
     }
+    /// Prepare a new retained host on the exact restored world before VM/audio
+    /// setup. Old hosts are never reused. External prepare/backend effects are
+    /// not rollbackable; this is a candidate factory, not in-place device restore.
+    pub fn from_checkpoint_bytes(
+        bytes: &[u8],
+        initial: &CookedScene,
+        program: impl Into<SessionProgram>,
+        actions: InputActions,
+        clips: Vec<ClipBinding>,
+        audio_settings: AudioManagerSettings<B>,
+        host_settings: H::Settings,
+    ) -> Result<Self, H::Error> {
+        Ok(Self {
+            core: Core::from_checkpoint(
+                bytes,
+                initial,
+                program,
+                actions,
+                |world| {
+                    H::prepare(world, host_settings)
+                        .map(WithHost)
+                        .map_err(GameError::Host)
+                },
+                |world| SceneAudio::new(world, clips, audio_settings),
+            )?,
+        })
+    }
+    pub fn checkpoint_bytes(&self) -> Result<Vec<u8>, H::Error> {
+        self.core.checkpoint_bytes()
+    }
     pub fn tick(&mut self, events: &[InputEvent]) -> Result<(), H::Error> {
         self.core.tick(events, |_| Ok(()))
     }
@@ -135,6 +165,39 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
                 sample_rate,
             },
         })
+    }
+    /// Ordinary load; a fresh retained host is prepared before VM/mixer setup.
+    /// Only data supported by NativeSession checkpoints can be loaded.
+    pub fn from_checkpoint_bytes(
+        bytes: &[u8],
+        initial: &CookedScene,
+        program: impl Into<SessionProgram>,
+        actions: InputActions,
+        clips: Vec<ClipBinding>,
+        sample_rate: u32,
+        host_settings: H::Settings,
+    ) -> Result<Self, H::Error> {
+        validate_rate(sample_rate)?;
+        Ok(Self {
+            inner: OfflineCore {
+                core: Core::from_checkpoint(
+                    bytes,
+                    initial,
+                    program,
+                    actions,
+                    |world| {
+                        H::prepare(world, host_settings)
+                            .map(WithHost)
+                            .map_err(GameError::Host)
+                    },
+                    |world| SceneAudio::offline(world, clips, sample_rate),
+                )?,
+                sample_rate,
+            },
+        })
+    }
+    pub fn checkpoint_bytes(&self) -> Result<Vec<u8>, H::Error> {
+        self.inner.core.checkpoint_bytes()
     }
     pub fn rendered_frames(&self) -> Result<u128, H::Error> {
         self.inner.rendered_frames()
