@@ -208,6 +208,28 @@ describe('native Play controls', () => {
     expect(document.activeElement?.getAttribute('data-play-primary')).toBe('');
   });
 
+  it('keeps keyboard focus at Play when Play starts from the focused scene and camera picker', async () => {
+    // Found in the 0048 native review: the picker hides during a session, and focus on it fell to the page.
+    const session = await open();
+    await choose('Harbor · Player Camera');
+    picker().focus();
+    fireEvent.keyDown(picker(), { key: 'p', code: 'KeyP', metaKey: true });
+    await waitFor(() => expect(ops(session)).toEqual(['start:0']));
+    await waitFor(() => expect(within(header()).queryByRole('button', { name: /^Play (scene and camera|camera):/ })).toBeNull());
+    expect(document.activeElement?.getAttribute('data-play-primary')).toBe('');
+  });
+
+  it('leaves focus where it is when Play starts from outside the picker', async () => {
+    const session = await open();
+    await choose('Harbor · Player Camera');
+    const tab = screen.getByRole('tab', { name: /^Hierarchy/ });
+    tab.focus();
+    fireEvent.keyDown(tab, { key: 'p', code: 'KeyP', metaKey: true });
+    await waitFor(() => expect(ops(session)).toEqual(['start:0']));
+    await waitFor(() => expect(within(header()).queryByRole('button', { name: /^Play (scene and camera|camera):/ })).toBeNull());
+    expect(document.activeElement).toBe(tab);
+  });
+
   it('stops a session that is still preparing; its cancelled startup never replaces the stopped state', async () => {
     const session = await open();
     await choose('Harbor · Player Camera');

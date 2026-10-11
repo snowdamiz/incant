@@ -253,6 +253,9 @@ describe('Sending', () => {
     fireEvent.change(mode, { target: { value: 'always' } });
     const model = within(pane()).getByRole('textbox', { name: 'Model' }) as HTMLInputElement;
     expect(model.value).toBe('gpt-6-astra');
+    // Measured in the system WKWebView (0048): with only the 10px padding past its characters the
+    // field's text overflows and the default name shows as "gpt-6-astr…".
+    expect(model.style.width).toBe('calc(11ch + 12px)');
     fireEvent.change(model, { target: { value: ' gpt-6-astra-mini ' } });
     fireEvent.change(input(), { target: { value: 'Check the lights' } });
     fireEvent.click(action('Send'));

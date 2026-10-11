@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { IconName } from '../../icons/Icon';
 import { Icon } from '../../icons/Icon';
 import { targetLabel, targetOptions } from '../../play/model';
@@ -181,6 +181,14 @@ function TargetPicker({ play }: { play: Play }) {
     requests.current = play.pickerRequests;
     open(true);
   }, [play.pickerRequests, open]);
+  // The picker hides while a session exists. If it had focus (⌘P pressed on it), keyboard
+  // focus continues at Play instead of falling to the page. Runs before the button is removed.
+  useLayoutEffect(() => {
+    const element = button.current;
+    return () => {
+      if (element !== null && element === document.activeElement) document.querySelector<HTMLElement>('[data-play-primary]')?.focus();
+    };
+  }, []);
   const options = useMemo(() => targetOptions(play.scenes), [play.scenes]);
   const { target } = play;
   const label = targetLabel(target, play.scenes.length);

@@ -1,0 +1,2 @@
+node tools/build_bridge.mjs --check  (run from the worktree root after the UI changes)
+exit 0, no output: editor/bridge/native.generated.js is current and unchanged

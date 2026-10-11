@@ -1,0 +1,13 @@
+{
+ "description": "Rename Allowance Rename Target to Allowance Rename Confirmed",
+ "expected_revision": 14,
+ "ops": [
+  {
+   "entity_id": "00000000000000000000000051",
+   "name": "Allowance Rename Confirmed",
+   "op": "rename_entity",
+   "scene_id": "01M4PEJQNPKJKBZRM6FFAP8SXA"
+  }
+ ]
+}
+OK: exactly the granted rename
