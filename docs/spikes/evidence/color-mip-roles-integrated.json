@@ -101,5 +101,48 @@
       "path": "/tmp/incant-color-roles-union-gpu.log",
       "sha256": "775340ee682c14de0af32e206dcb814e72ef76937071e877f364e433adfdec7a"
     }
-  ]
+  ],
+  "workspace_followup": {
+    "source_head": "4f7ecfa211add87ee207f4e5abd69161c868a609",
+    "ordinary_passed": 703,
+    "ordinary_result_groups": 201,
+    "ignored_not_executed_in_cpu_run": 73,
+    "clippy": "workspace all-target ci pass",
+    "session": "43325 terminal0",
+    "logs": [
+      {
+        "path": "/tmp/incant-color-roles-workspace-tests.log",
+        "sha256": "43dc5c4a54632bcece6efebbba00eaa7a9eb67a02032416832809bfeb5aa7499",
+        "groups": 201,
+        "passed": 703,
+        "failed": 0,
+        "ignored": 73,
+        "tail": [
+          "   Doc-tests incant_wasm_runtime",
+          "",
+          "running 0 tests",
+          "",
+          "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+          ""
+        ]
+      },
+      {
+        "path": "/tmp/incant-color-roles-workspace-clippy.log",
+        "sha256": "652da8da2d330abc35a6f5f024c8c587eaf8a378a9d85b03d362463b3ba182ff",
+        "groups": 0,
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "tail": [
+          "    Checking incant_wasm_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_wasm_cook)",
+          "    Checking incant_platform_smoke v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_platform_smoke)",
+          "    Checking incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_gpu_host)",
+          "    Checking incant_wasm_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_wasm_player)",
+          "    Checking incant_wasm_dev v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_wasm_dev)",
+          "    Finished `ci` profile [optimized] target(s) in 15.25s"
+        ]
+      }
+    ],
+    "shared_target_limitation": "Used native-fbx-import target, serializing and invalidating coordinator graph. No timing claims; subsequent color builds must use an isolated target."
+  }
 }

@@ -123,6 +123,11 @@ functions: eight opaque/emissive minification pairs against all-alpha-one RGB
 controls, two coverage-role pairs, and a Color environment comparison. Wrong-color
 controls make the oracle nonvacuous; retained source/cache-deleted replays pass.
 This preserves the prewarming, flipbook and generated-tangent regression suites.
+A subsequent whole-workspace ci-profile run passed 703 ordinary tests/doctests
+(201 result groups; 73 ignored cases were not executed by that CPU command),
+followed by workspace all-target Clippy. These runs reused a target directory
+that serialized with the coordinator's independent build; no timing claim is made,
+and subsequent color builds will use a separate target.
 The integrated source is `02d1872f43a0aae7daf8df849f48ac0c9f442aff`; only STATUS
 required manual merge resolution. Exact logs and source hashes are recorded in
 [evidence/color-mip-roles-integrated.json](evidence/color-mip-roles-integrated.json). Claude0043 owns separate appearance acceptance. No phone, performance,
