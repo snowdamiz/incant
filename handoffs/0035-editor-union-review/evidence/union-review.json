@@ -1,0 +1,5609 @@
+{
+  "generated": "2026-10-11T00:23:39.179Z",
+  "note": "Headless Chrome on the built union UI (a20d258 editor/ui) at device scale 2; sample fixture, synthetic provider fixtures and the 0035 evidence double (real schemas through the real compiled bridge). Not native WebKit, not the native app and not device evidence.",
+  "sets": [
+    {
+      "set": "r2",
+      "generated": "2026-10-11T00:09:58.332Z",
+      "browser": "155.0.8059.40",
+      "captures": 100
+    },
+    {
+      "set": "s1",
+      "generated": "2026-10-11T00:14:03.698Z",
+      "browser": "155.0.8059.40",
+      "captures": 2
+    },
+    {
+      "set": "s2",
+      "generated": "2026-10-11T00:16:53.421Z",
+      "browser": "155.0.8059.40",
+      "captures": 2
+    }
+  ],
+  "totals": {
+    "captures": 102,
+    "axeViolations": [
+      {
+        "capture": "title-mac-inactive-normal-1440x874.png",
+        "id": "color-contrast",
+        "targets": [
+          ".titlebar__scene"
+        ]
+      }
+    ],
+    "axeNotRun": [
+      "probe-grid-paging-normal-1440x874.png"
+    ],
+    "stepErrors": [],
+    "timeouts": [],
+    "pageErrors": 0,
+    "remoteRequests": 0,
+    "windowScroll": [],
+    "inspectorHorizontalOverflow": [
+      {
+        "capture": "probe-grid-paging-normal-1440x874.png",
+        "overflow": [
+          {
+            "el": "section.component > div.component__body > div.value-list > div.number-table.is-grid",
+            "overflow": 4126
+          }
+        ]
+      }
+    ],
+    "outOfBounds": [
+      {
+        "capture": "probe-grid-paging-normal-1440x874.png",
+        "count": 20
+      }
+    ],
+    "clippedValues": [
+      {
+        "capture": "u-sprite-sign-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-sign-minimum-1000x650.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-sign-narrow-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-sign-wide-1920x1080.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-coil-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-coil-narrow-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-board-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-board-minimum-1000x650.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-board-narrow-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-gull-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH2"
+        ]
+      },
+      {
+        "capture": "u-sprite-lantern-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-lantern-narrow-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-broken-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-broken-minimum-1000x650.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-broken-narrow-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-sky-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000037"
+        ]
+      },
+      {
+        "capture": "u-sprite-lost-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "u-sprite-long-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH3"
+        ]
+      },
+      {
+        "capture": "u-sprite-long-minimum-1000x650.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH3"
+        ]
+      },
+      {
+        "capture": "u-sprite-long-narrow-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH3"
+        ]
+      },
+      {
+        "capture": "u-sprite-tint-focus-normal-1440x874.png",
+        "values": [
+          "Texture: 01JA33RV000000000000000KH1"
+        ]
+      },
+      {
+        "capture": "probe-menu-normal-1440x874.png",
+        "values": [
+          "Material: materials/weathered_wood.mat"
+        ]
+      },
+      {
+        "capture": "probe-menu-minimum-1000x650.png",
+        "values": [
+          "Mesh: assets/dock_kit/crate.mesh",
+          "Material: materials/weathered_wood.mat"
+        ]
+      }
+    ],
+    "mostDockRows": 58,
+    "dialogsNotFitting": []
+  },
+  "states": [
+    {
+      "capture": "camera-rig-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 1.7 -3.5 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Perspective (Default)",
+        "Field of view: 70",
+        "Near clip: 0.1",
+        "Far clip: 800"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 29,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 205
+      }
+    },
+    {
+      "capture": "camera-rig-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 1.7 -3.5 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Perspective (Default)",
+        "Field of view: 70",
+        "Near clip: 0.1",
+        "Far clip: 800"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 29,
+        "agent": 4,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 142
+      }
+    },
+    {
+      "capture": "camera-rig-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 1.7 -3.5 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Perspective (Default)",
+        "Field of view: 70",
+        "Near clip: 0.1",
+        "Far clip: 800"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 29,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 205
+      }
+    },
+    {
+      "capture": "map-camera-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 24 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Orthographic",
+        "Vertical size: 8",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 32,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 208
+      }
+    },
+    {
+      "capture": "map-camera-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 24 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Orthographic",
+        "Vertical size: 8",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 32,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 208
+      }
+    },
+    {
+      "capture": "closeup-camera-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 2 10 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Perspective",
+        "Field of view: 35",
+        "Near clip: 0.05",
+        "Far clip: 60"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 28,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 204
+      }
+    },
+    {
+      "capture": "closeup-camera-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 2 10 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Perspective",
+        "Field of view: 35",
+        "Near clip: 0.05",
+        "Far clip: 60"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 28,
+        "agent": 4,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 141
+      }
+    },
+    {
+      "capture": "closeup-camera-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 2 10 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Perspective",
+        "Field of view: 35",
+        "Near clip: 0.05",
+        "Far clip: 60"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 28,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 204
+      }
+    },
+    {
+      "capture": "u-pixel-camera-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 16 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 32",
+        "Resolution, in px: 320 180 [WH]",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 36,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 202
+      }
+    },
+    {
+      "capture": "u-pixel-camera-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 16 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 32",
+        "Resolution, in px: 320 180 [WH]",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 40,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 36,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 132
+      }
+    },
+    {
+      "capture": "u-pixel-camera-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 16 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 32",
+        "Resolution, in px: 320 180 [WH]",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 36,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 202
+      }
+    },
+    {
+      "capture": "u-pixel-camera-wide-1920x1080",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 16 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 32",
+        "Resolution, in px: 320 180 [WH]",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 71,
+        "inspector": 36,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 233
+      }
+    },
+    {
+      "capture": "u-pixel-focus-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 16 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 32",
+        "Resolution, in px: 320 180 [WH]",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 36,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 202
+      }
+    },
+    {
+      "capture": "u-pixel-focus-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 16 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 32",
+        "Resolution, in px: 320 180 [WH]",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 40,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 36,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 132
+      }
+    },
+    {
+      "capture": "u-pixel-bad-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 18 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 0.5",
+        "Resolution, in px: ",
+        "Field of view: 60",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "notices": [
+        {
+          "label": "Resolution, in px",
+          "text": "Cannot show as 2 numbers (logical width and logical height); raw value:",
+          "raw": "[320]"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 88,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 254
+      }
+    },
+    {
+      "capture": "u-pixel-bad-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 18 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 0.5",
+        "Resolution, in px: ",
+        "Field of view: 60",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "notices": [
+        {
+          "label": "Resolution, in px",
+          "text": "Cannot show as 2 numbers (logical width and logical height); raw value:",
+          "raw": "[320]"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 88,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 254
+      }
+    },
+    {
+      "capture": "u-broken-camera-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 3 12 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: ",
+        "Field of view: 60",
+        "Near clip: 1e-6",
+        "Far clip: 1e9"
+      ],
+      "notices": [
+        {
+          "label": "Projection",
+          "text": "Unknown projection kind \"fisheye\". Expected perspective, orthographic or pixel_perfect; raw value:",
+          "raw": "{\"kind\":\"fisheye\",\"strength\":2}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 60,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 226
+      }
+    },
+    {
+      "capture": "u-legacy-camera-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 1.7 -3.5 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Perspective (Default)",
+        "Field of view: 70",
+        "Near clip: 0.1",
+        "Far clip: 800"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 29,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 195
+      }
+    },
+    {
+      "capture": "u-map-camera-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 24 0 [XYZ]",
+        "Rotation: -0.7071 0 0 0.7071 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Orthographic",
+        "Vertical size: 24",
+        "Field of view: 60 (Unused)",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 32,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 198
+      }
+    },
+    {
+      "capture": "u-follow-camera-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 1.6 -3.2 [XYZ]",
+        "Rotation: -0.0698 0 0 0.9976 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Perspective",
+        "Field of view: 55",
+        "Near clip: 0.05",
+        "Far clip: 500"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 28,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 194
+      }
+    },
+    {
+      "capture": "u-sprite-sign-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: -2 1.2 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 2",
+        "Mode: simple",
+        "Order: 0",
+        "Pivot: 0.5 0 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 1.5 0.75 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9H\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 53,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 240
+      }
+    },
+    {
+      "capture": "u-sprite-sign-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: -2 1.2 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 2",
+        "Mode: simple",
+        "Order: 0",
+        "Pivot: 0.5 0 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 1.5 0.75 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9H\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 60,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 40,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 156
+      }
+    },
+    {
+      "capture": "u-sprite-sign-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: -2 1.2 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 2",
+        "Mode: simple",
+        "Order: 0",
+        "Pivot: 0.5 0 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 1.5 0.75 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9H\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 49,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 236
+      }
+    },
+    {
+      "capture": "u-sprite-sign-wide-1920x1080",
+      "set": "r2",
+      "rows": [
+        "Translation: -2 1.2 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 2",
+        "Mode: simple",
+        "Order: 0",
+        "Pivot: 0.5 0 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 1.5 0.75 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9H\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 71,
+        "inspector": 53,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 250
+      }
+    },
+    {
+      "capture": "u-sprite-coil-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: -0.5 0.25 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 2",
+        "Mode: simple",
+        "Order: 1",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 0.5 0.5 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "[64,0,32,32]"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 90,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 277
+      }
+    },
+    {
+      "capture": "u-sprite-coil-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: -0.5 0.25 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 2",
+        "Mode: simple",
+        "Order: 1",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 0.5 0.5 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "[64,0,32,32]"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 85,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 272
+      }
+    },
+    {
+      "capture": "u-sprite-board-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 1.5 1.5 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 1",
+        "Mode: nine_slice",
+        "Border: 12 12 10 14 [XYZW]",
+        "Pixels per unit: 32",
+        "Order: 3",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: linear",
+        "Size, in m: 3 2 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 0.92 0.86 0.74 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9J\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 57,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 244
+      }
+    },
+    {
+      "capture": "u-sprite-board-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: 1.5 1.5 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 1",
+        "Mode: nine_slice",
+        "Border: 12 12 10 14 [XYZW]",
+        "Pixels per unit: 32",
+        "Order: 3",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: linear",
+        "Size, in m: 3 2 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 0.92 0.86 0.74 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9J\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 60,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 35,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 151
+      }
+    },
+    {
+      "capture": "u-sprite-board-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 1.5 1.5 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 1",
+        "Mode: nine_slice",
+        "Border: 12 12 10 14 [XYZW]",
+        "Pixels per unit: 32",
+        "Order: 3",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: linear",
+        "Size, in m: 3 2 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 0.92 0.86 0.74 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9J\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 50,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 237
+      }
+    },
+    {
+      "capture": "u-sprite-gull-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 3.5 4 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: On",
+        "Flip y: Off",
+        "Layer: 5",
+        "Mode: simple",
+        "Order: -2",
+        "Pivot: 0.5 0 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 0.75 0.5 [XY]",
+        "Texture: gull_sheet 01JA33RV000000000000000KH2",
+        "Tint: 1 1 1 0.85 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "[0,0,48,32]"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 52,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 239
+      }
+    },
+    {
+      "capture": "u-sprite-lantern-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0.5 2.2 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Not set",
+        "Flip y: Not set",
+        "Layer: 0 (Default)",
+        "Mode: simple (Default)",
+        "Order: 0 (Default)",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: Not set",
+        "Size, in m: 0.4 0.4 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 0.78 0.45 0.9 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9K\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 54,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 241
+      }
+    },
+    {
+      "capture": "u-sprite-lantern-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0.5 2.2 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Not set",
+        "Flip y: Not set",
+        "Layer: 0 (Default)",
+        "Mode: simple (Default)",
+        "Order: 0 (Default)",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: Not set",
+        "Size, in m: 0.4 0.4 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 0.78 0.45 0.9 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9K\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 50,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 237
+      }
+    },
+    {
+      "capture": "u-sprite-broken-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 5 1 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: ",
+        "Flip y: Off",
+        "Layer: 40000",
+        "Mode: ",
+        "Order: 0",
+        "Pivot: 0.5 [X]",
+        "Region: ",
+        "Sampling: bilinear",
+        "Size, in m: -1 0.5 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 0.5 0.2 [XYZ]"
+      ],
+      "notices": [
+        {
+          "label": "Flip x",
+          "text": "Cannot show as on or off; raw value:",
+          "raw": "\"yes\""
+        },
+        {
+          "label": "Mode",
+          "text": "Unknown mode kind \"tiled\". Expected simple or nine_slice; raw value:",
+          "raw": "{\"kind\":\"tiled\",\"tile\":4}"
+        },
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"lantern-glow\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 101,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 288
+      }
+    },
+    {
+      "capture": "u-sprite-broken-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: 5 1 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: ",
+        "Flip y: Off",
+        "Layer: 40000",
+        "Mode: ",
+        "Order: 0",
+        "Pivot: 0.5 [X]",
+        "Region: ",
+        "Sampling: bilinear",
+        "Size, in m: -1 0.5 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 0.5 0.2 [XYZ]"
+      ],
+      "notices": [
+        {
+          "label": "Flip x",
+          "text": "Cannot show as on or off; raw value:",
+          "raw": "\"yes\""
+        },
+        {
+          "label": "Mode",
+          "text": "Unknown mode kind \"tiled\". Expected simple or nine_slice; raw value:",
+          "raw": "{\"kind\":\"tiled\",\"tile\":4}"
+        },
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"lantern-glow\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 58,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 72,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 186
+      }
+    },
+    {
+      "capture": "u-sprite-broken-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 5 1 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: ",
+        "Flip y: Off",
+        "Layer: 40000",
+        "Mode: ",
+        "Order: 0",
+        "Pivot: 0.5 [X]",
+        "Region: ",
+        "Sampling: bilinear",
+        "Size, in m: -1 0.5 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 0.5 0.2 [XYZ]"
+      ],
+      "notices": [
+        {
+          "label": "Flip x",
+          "text": "Cannot show as on or off; raw value:",
+          "raw": "\"yes\""
+        },
+        {
+          "label": "Mode",
+          "text": "Unknown mode kind \"tiled\". Expected simple or nine_slice; raw value:",
+          "raw": "{\"kind\":\"tiled\",\"tile\":4}"
+        },
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"lantern-glow\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 99,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 286
+      }
+    },
+    {
+      "capture": "u-sprite-missing-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 6.5 1 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 0",
+        "Mode: simple",
+        "Order: 0",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 0.25 0.25 [XY]",
+        "Texture: 01JA33RV0000000000000031MZ",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "[0,0,16,16]"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 65,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 252
+      }
+    },
+    {
+      "capture": "u-sprite-sky-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 8 1 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 0",
+        "Mode: simple",
+        "Order: 0",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 4 2 [XY]",
+        "Texture: harbor_sky 01JA33RV000000000000000037",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "[0,0,256,128]"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 67,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 254
+      }
+    },
+    {
+      "capture": "u-sprite-lost-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 9.5 1 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 0",
+        "Mode: simple",
+        "Order: 0",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: nearest",
+        "Size, in m: 0.5 0.5 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 1 1 1 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000XCK\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 71,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 258
+      }
+    },
+    {
+      "capture": "u-sprite-long-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 11 1.5 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: -12",
+        "Mode: nine_slice",
+        "Border: 24 24 18 30 [XYZW]",
+        "Pixels per unit: 64",
+        "Order: 2.147e9",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: linear",
+        "Size, in m: 2.5 1.25 [XY]",
+        "Texture: harbor_master_notice_board_weathered_signage_atlas_variant_c 01JA33RV000000000000000KH3",
+        "Tint: 0.8 0.84 0.9 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9M\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 65,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 252
+      }
+    },
+    {
+      "capture": "u-sprite-long-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: 11 1.5 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: -12",
+        "Mode: nine_slice",
+        "Border: 24 24 18 30 [XYZW]",
+        "Pixels per unit: 64",
+        "Order: 2.147e9",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: linear",
+        "Size, in m: 2.5 1.25 [XY]",
+        "Texture: harbor_master_notice_board_weathered_signage_atlas_variant_c 01JA33RV000000000000000KH3",
+        "Tint: 0.8 0.84 0.9 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9M\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 43,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 167
+      }
+    },
+    {
+      "capture": "u-sprite-long-narrow-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 11 1.5 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: -12",
+        "Mode: nine_slice",
+        "Border: 24 24 18 30 [XYZW]",
+        "Pixels per unit: 64",
+        "Order: 2.147e9",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: linear",
+        "Size, in m: 2.5 1.25 [XY]",
+        "Texture: harbor_master_notice_board_weathered_signage_atlas_variant_c 01JA33RV000000000000000KH3",
+        "Tint: 0.8 0.84 0.9 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9M\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 58,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 245
+      }
+    },
+    {
+      "capture": "u-sprite-tint-focus-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 1.5 1.5 0 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Flip x: Off",
+        "Flip y: Off",
+        "Layer: 1",
+        "Mode: nine_slice",
+        "Border: 12 12 10 14 [XYZW]",
+        "Pixels per unit: 32",
+        "Order: 3",
+        "Pivot: 0.5 0.5 [XY]",
+        "Region: ",
+        "Sampling: linear",
+        "Size, in m: 3 2 [XY]",
+        "Texture: harbor_ui 01JA33RV000000000000000KH1",
+        "Tint: 0.92 0.86 0.74 1 [XYZW]"
+      ],
+      "notices": [
+        {
+          "label": "Region",
+          "text": "This field’s type is not supported yet; raw value:",
+          "raw": "{\"frame\":\"01JA33RV000000000000000X9J\"}"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 89,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 55,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 242
+      }
+    },
+    {
+      "capture": "u-assets-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 4,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 128
+      }
+    },
+    {
+      "capture": "u-assets-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 4,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 86
+      }
+    },
+    {
+      "capture": "u-asset-atlas-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 33,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 157
+      }
+    },
+    {
+      "capture": "u-asset-atlas-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 33,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 115
+      }
+    },
+    {
+      "capture": "u-asset-atlas-narrow-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 33,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 157
+      }
+    },
+    {
+      "capture": "u-asset-atlas-long-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 37,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 161
+      }
+    },
+    {
+      "capture": "u-asset-atlas-long-narrow-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 37,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 161
+      }
+    },
+    {
+      "capture": "u-asset-sheet-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 35,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 159
+      }
+    },
+    {
+      "capture": "u-import-mirror-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Fix 2 highlighted paths before importing.",
+      "live": [
+        "Fix 2 highlighted paths before importing."
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 26,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 68,
+        "agent": 11,
+        "statusbar": 13,
+        "dialog": null,
+        "menu": null,
+        "page": 198
+      },
+      "observations": [
+        {
+          "step": "submit",
+          "rows": [
+            {
+              "path": "sprites/dock_props.atlas.json",
+              "problem": "Unsupported file type. Use glTF, GLB, PNG, JPEG or EXR.",
+              "kind": null
+            },
+            {
+              "path": "audio/gulls.ogg",
+              "problem": "Unsupported file type. Use glTF, GLB, PNG, JPEG or EXR.",
+              "kind": null
+            },
+            {
+              "path": "textures/dock_sign.png",
+              "problem": null,
+              "kind": "image (usage choice)"
+            }
+          ],
+          "formats": "Accepts glTF, GLB, PNG, JPEG or EXR. Paste several lines to add several paths.",
+          "live": [
+            "Fix 2 highlighted paths before importing."
+          ],
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Path 1",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        }
+      ]
+    },
+    {
+      "capture": "acct-signed-out-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          186
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-out (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Sign in to use the agent. ChatGPT opens in your browser."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 8,
+        "dialog": 29,
+        "menu": null,
+        "page": 211
+      }
+    },
+    {
+      "capture": "acct-signed-out-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          186
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-out (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Sign in to use the agent. ChatGPT opens in your browser."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 4,
+        "statusbar": 8,
+        "dialog": 29,
+        "menu": null,
+        "page": 148
+      }
+    },
+    {
+      "capture": "acct-checking-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, checking for a saved sign-in",
+        "title": "ChatGPT account, checking for a saved sign-in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          94
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account checking (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Checking for a saved sign-in…"
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": 7,
+        "menu": null,
+        "page": 187
+      }
+    },
+    {
+      "capture": "acct-browser-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, waiting for the browser",
+        "title": "ChatGPT account, waiting for the browser",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          153
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account browser (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Continue in your browserApprove access in ChatGPT; Incant finishes automatically."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": 18,
+        "menu": null,
+        "page": 198
+      }
+    },
+    {
+      "capture": "acct-browser-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, waiting for the browser",
+        "title": "ChatGPT account, waiting for the browser",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          153
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account browser (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Continue in your browserApprove access in ChatGPT; Incant finishes automatically."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 3,
+        "statusbar": 8,
+        "dialog": 18,
+        "menu": null,
+        "page": 136
+      }
+    },
+    {
+      "capture": "acct-validating-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, finishing sign-in",
+        "title": "ChatGPT account, finishing sign-in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          134
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account validating (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Finishing sign-in…"
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": 6,
+        "menu": null,
+        "page": 186
+      }
+    },
+    {
+      "capture": "acct-adding-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, waiting for the browser",
+        "title": "ChatGPT account, waiting for the browser",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          199
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account adding-browser (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Continue in your browserApprove access in ChatGPT; Incant finishes automatically."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": 31,
+        "menu": null,
+        "page": 211
+      }
+    },
+    {
+      "capture": "acct-signed-in-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "dialog": {
+        "size": [
+          420,
+          155
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-in (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Signed in as ada@example.com"
+      ],
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 8,
+        "dialog": 11,
+        "menu": null,
+        "page": 190
+      }
+    },
+    {
+      "capture": "acct-signed-in-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "dialog": {
+        "size": [
+          420,
+          155
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-in (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Signed in as ada@example.com"
+      ],
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 8,
+        "dialog": 11,
+        "menu": null,
+        "page": 129
+      }
+    },
+    {
+      "capture": "acct-multi-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as studio@example.org",
+        "title": "ChatGPT account, signed in as studio@example.org",
+        "visibleText": "S"
+      },
+      "dialog": {
+        "size": [
+          420,
+          235
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Signed in as studio@example.org"
+      ],
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 8,
+        "dialog": 17,
+        "menu": null,
+        "page": 196
+      }
+    },
+    {
+      "capture": "acct-multi-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as studio@example.org",
+        "title": "ChatGPT account, signed in as studio@example.org",
+        "visibleText": "S"
+      },
+      "dialog": {
+        "size": [
+          420,
+          235
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Signed in as studio@example.org"
+      ],
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 8,
+        "dialog": 17,
+        "menu": null,
+        "page": 135
+      }
+    },
+    {
+      "capture": "acct-saved-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          365
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-out-saved (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Sign in to a saved account, or continue in your browser."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 8,
+        "dialog": 59,
+        "menu": null,
+        "page": 241
+      }
+    },
+    {
+      "capture": "acct-saved-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          365
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-out-saved (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Sign in to a saved account, or continue in your browser."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 4,
+        "statusbar": 8,
+        "dialog": 59,
+        "menu": null,
+        "page": 178
+      }
+    },
+    {
+      "capture": "acct-error-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, sign-in problem",
+        "title": "ChatGPT account, sign-in problem: Could not open the default browser: no handler is registered for https links.",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          258
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account error (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Sign-in didn't finish. You can try again now."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": 31,
+        "menu": null,
+        "page": 211
+      }
+    },
+    {
+      "capture": "acct-error-signed-in-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, sign-in problem",
+        "title": "ChatGPT account, sign-in problem: The sign-in window expired after 5 minutes.",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          420,
+          295
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account error-while-signed-in (simulated) 6 errors, 2 warnings",
+      "live": [
+        "That didn't finish. You are still signed in as ada@example.com."
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": 31,
+        "menu": null,
+        "page": 211
+      }
+    },
+    {
+      "capture": "acct-cli-key-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as Personal API key",
+        "title": "ChatGPT account, signed in as Personal API key",
+        "visibleText": "P"
+      },
+      "dialog": {
+        "size": [
+          420,
+          207
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-cli-key (simulated) 6 errors, 2 warnings",
+      "live": [
+        "Connected with an API key, set up from the command line, where you can change it."
+      ],
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 8,
+        "dialog": 26,
+        "menu": null,
+        "page": 205
+      }
+    },
+    {
+      "capture": "title-signed-out-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account signed-out (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 182
+      }
+    },
+    {
+      "capture": "title-signed-out-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account signed-out (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 4,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 119
+      }
+    },
+    {
+      "capture": "title-checking-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, checking for a saved sign-in",
+        "title": "ChatGPT account, checking for a saved sign-in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account checking (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 180
+      }
+    },
+    {
+      "capture": "title-browser-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, waiting for the browser",
+        "title": "ChatGPT account, waiting for the browser",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account browser (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 180
+      }
+    },
+    {
+      "capture": "title-signed-in-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Sample fixture: sample, account signed-in (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 179
+      }
+    },
+    {
+      "capture": "title-signed-in-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Sample fixture: sample, account signed-in (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 5,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 118
+      }
+    },
+    {
+      "capture": "title-error-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, sign-in problem",
+        "title": "ChatGPT account, sign-in problem: Could not open the default browser: no handler is registered for https links.",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account error (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 13,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 180
+      }
+    },
+    {
+      "capture": "title-mac-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 7,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 170
+      }
+    },
+    {
+      "capture": "title-mac-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 7,
+        "banner": null,
+        "hierarchy": 40,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 100
+      }
+    },
+    {
+      "capture": "title-mac-inactive-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 7,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 170
+      }
+    },
+    {
+      "capture": "title-windows-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 7,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 170
+      }
+    },
+    {
+      "capture": "title-windows-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 7,
+        "banner": null,
+        "hierarchy": 40,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 100
+      }
+    },
+    {
+      "capture": "keys-dialog-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          600,
+          680
+        ],
+        "fits": true,
+        "bodyOverflow": 463
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": 102,
+        "menu": null,
+        "page": 281
+      }
+    },
+    {
+      "capture": "keys-dialog-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          600,
+          554
+        ],
+        "fits": true,
+        "bodyOverflow": 589
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 4,
+        "statusbar": 5,
+        "dialog": 80,
+        "menu": null,
+        "page": 196
+      }
+    },
+    {
+      "capture": "keys-windows-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          600,
+          680
+        ],
+        "fits": true,
+        "bodyOverflow": 464
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": 104,
+        "menu": null,
+        "page": 273
+      }
+    },
+    {
+      "capture": "keys-windows-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          600,
+          554
+        ],
+        "fits": true,
+        "bodyOverflow": 590
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 40,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": 82,
+        "menu": null,
+        "page": 181
+      }
+    },
+    {
+      "capture": "keys-nomatch-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          600,
+          680
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "live": [
+        "0 of 29"
+      ],
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": 11,
+        "menu": null,
+        "page": 190
+      }
+    },
+    {
+      "capture": "u-agent-native-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 169
+      }
+    },
+    {
+      "capture": "u-no-selection-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 169
+      }
+    },
+    {
+      "capture": "u-no-selection-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 40,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 99
+      }
+    },
+    {
+      "capture": "probe-end-tab-normal-1440x874",
+      "set": "s2",
+      "rows": [
+        "Translation: 6.5 0 3 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Motion: fixed",
+        "Gravity scale: 1",
+        "Linear damping: 0",
+        "Angular damping: 0",
+        "Can sleep: On",
+        "CCD: Off",
+        "Shape: compound",
+        "Parts64: ",
+        "Primitive: sphere",
+        "Radius: 0.12",
+        "Offset, in m: 0.508 0.99 -0.21 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "ID: 01JA33RV0000000000000008VC",
+        "Density: 2200",
+        "Friction: 0.9",
+        "Restitution: 0",
+        "Sensor: Off",
+        "Memberships: 4294967295",
+        "Filter: 4294967295"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 92,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 258
+      },
+      "observations": [
+        {
+          "step": "opened",
+          "parts": {
+            "scrollTop": 995,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 20,
+            "mountedParts": [
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49
+            ],
+            "visibleParts": [
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45
+            ],
+            "blankSlots": [],
+            "selected": [
+              42
+            ],
+            "caption": "Part 42 of 64, path /shape/parts/41"
+          }
+        },
+        {
+          "step": "Part 1 (click the selected row, Home)",
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "Part 1: box, half extents 0.14 × 0.1 × 0.12 m1box½ 0.14 × 0.1 × 0.12 m",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 4,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 13,
+            "mountedParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "visibleParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "blankSlots": [],
+            "selected": [
+              1
+            ],
+            "caption": "Part 1 of 64, path /shape/parts/0"
+          }
+        },
+        {
+          "step": "End",
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "Part 64: sphere, radius 0.12 m64spherer 0.12 m",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 1491,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 15,
+            "mountedParts": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "visibleParts": [
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "blankSlots": [],
+            "selected": [
+              64
+            ],
+            "caption": "Part 64 of 64, path /shape/parts/63"
+          }
+        },
+        {
+          "step": "Tab",
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Primitive",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 1491,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 15,
+            "mountedParts": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "visibleParts": [
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "blankSlots": [],
+            "selected": [
+              64
+            ],
+            "caption": "Part 64 of 64, path /shape/parts/63"
+          },
+          "aria": "- listbox \"Parts\":\n  - 'option \"Part 50: capsule, half height 0.18, radius 0.08 m\"'\n  - 'option \"Part 51: box, half extents 0.2 × 0.1 × 0.16 m\"'\n  - 'option \"Part 52: box, half extents 0.23 × 0.1 × 0.12 m\"'\n  - 'option \"Part 53: box, half extents 0.14 × 0.1 × 0.14 m\"'\n  - 'option \"Part 54: sphere, radius 0.2 m\"'\n  - 'option \"Part 55: capsule, half height 0.18, radius 0.08 m\"'\n  - 'option \"Part 56: box, half extents 0.23 × 0.1 × 0.14 m\"'\n  - 'option \"Part 57: box, half extents 0.14 × 0.1 × 0.16 m\"'\n  - 'option \"Part 58: box, half extents 0.17 × 0.1 × 0.12 m\"'\n  - 'option \"Part 59: sphere, radius 0.16 m\"'\n  - 'option \"Part 60: capsule, half height 0.18, radius 0.08 m\"'\n  - 'option \"Part 61: box, half extents 0.14 × 0.1 × 0.12 m\"'\n  - 'option \"Part 62: box, half extents 0.17 × 0.1 × 0.14 m\"'\n  - 'option \"Part 63: box, half extents 0.2 × 0.1 × 0.16 m\"'\n  - 'option \"Part 64: sphere, radius 0.12 m\" [selected]'"
+        },
+        {
+          "step": "Shift+Tab, Home",
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "Part 1: box, half extents 0.14 × 0.1 × 0.12 m1box½ 0.14 × 0.1 × 0.12 m",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 4,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 13,
+            "mountedParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "visibleParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "blankSlots": [],
+            "selected": [
+              1
+            ],
+            "caption": "Part 1 of 64, path /shape/parts/0"
+          }
+        },
+        {
+          "step": "PageDown x2",
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "Part 11: box, half extents 0.2 × 0.1 × 0.14 m11box½ 0.2 × 0.1 × 0.14 m",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 113,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 17,
+            "mountedParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "visibleParts": [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "blankSlots": [],
+            "selected": [
+              11
+            ],
+            "caption": "Part 11 of 64, path /shape/parts/10"
+          }
+        },
+        {
+          "step": "End, Tab again",
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Primitive",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 1491,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 15,
+            "mountedParts": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "visibleParts": [
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "blankSlots": [],
+            "selected": [
+              64
+            ],
+            "caption": "Part 64 of 64, path /shape/parts/63"
+          }
+        }
+      ],
+      "steps": [
+        "probe-end-tab-normal-1440x874--end.png"
+      ]
+    },
+    {
+      "capture": "probe-end-tab-minimum-1000x650",
+      "set": "s2",
+      "rows": [
+        "Translation: 6.5 0 3 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Motion: fixed",
+        "Gravity scale: 1",
+        "Linear damping: 0",
+        "Angular damping: 0",
+        "Can sleep: On",
+        "CCD: Off",
+        "Shape: compound",
+        "Parts64: ",
+        "Primitive: sphere",
+        "Radius: 0.12",
+        "Offset, in m: 0.508 0.99 -0.21 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "ID: 01JA33RV0000000000000008VC",
+        "Density: 2200",
+        "Friction: 0.9",
+        "Restitution: 0",
+        "Sensor: Off",
+        "Memberships: 4294967295",
+        "Filter: 4294967295"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 60,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 84,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 200
+      },
+      "observations": [
+        {
+          "step": "opened",
+          "parts": {
+            "scrollTop": 995,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 20,
+            "mountedParts": [
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49
+            ],
+            "visibleParts": [
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45
+            ],
+            "blankSlots": [],
+            "selected": [
+              42
+            ],
+            "caption": "Part 42 of 64, path /shape/parts/41"
+          }
+        },
+        {
+          "step": "Part 1 (click the selected row, Home)",
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "Part 1: box, half extents 0.14 × 0.1 × 0.12 m1box½ 0.14 × 0.1 × 0.12 m",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 4,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 13,
+            "mountedParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "visibleParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "blankSlots": [],
+            "selected": [
+              1
+            ],
+            "caption": "Part 1 of 64, path /shape/parts/0"
+          }
+        },
+        {
+          "step": "End",
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "Part 64: sphere, radius 0.12 m64spherer 0.12 m",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 1491,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 15,
+            "mountedParts": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "visibleParts": [
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "blankSlots": [],
+            "selected": [
+              64
+            ],
+            "caption": "Part 64 of 64, path /shape/parts/63"
+          }
+        },
+        {
+          "step": "Tab",
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Primitive",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 1491,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 15,
+            "mountedParts": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "visibleParts": [
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "blankSlots": [],
+            "selected": [
+              64
+            ],
+            "caption": "Part 64 of 64, path /shape/parts/63"
+          },
+          "aria": "- listbox \"Parts\":\n  - 'option \"Part 50: capsule, half height 0.18, radius 0.08 m\"'\n  - 'option \"Part 51: box, half extents 0.2 × 0.1 × 0.16 m\"'\n  - 'option \"Part 52: box, half extents 0.23 × 0.1 × 0.12 m\"'\n  - 'option \"Part 53: box, half extents 0.14 × 0.1 × 0.14 m\"'\n  - 'option \"Part 54: sphere, radius 0.2 m\"'\n  - 'option \"Part 55: capsule, half height 0.18, radius 0.08 m\"'\n  - 'option \"Part 56: box, half extents 0.23 × 0.1 × 0.14 m\"'\n  - 'option \"Part 57: box, half extents 0.14 × 0.1 × 0.16 m\"'\n  - 'option \"Part 58: box, half extents 0.17 × 0.1 × 0.12 m\"'\n  - 'option \"Part 59: sphere, radius 0.16 m\"'\n  - 'option \"Part 60: capsule, half height 0.18, radius 0.08 m\"'\n  - 'option \"Part 61: box, half extents 0.14 × 0.1 × 0.12 m\"'\n  - 'option \"Part 62: box, half extents 0.17 × 0.1 × 0.14 m\"'\n  - 'option \"Part 63: box, half extents 0.2 × 0.1 × 0.16 m\"'\n  - 'option \"Part 64: sphere, radius 0.12 m\" [selected]'"
+        },
+        {
+          "step": "Shift+Tab, Home",
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "Part 1: box, half extents 0.14 × 0.1 × 0.12 m1box½ 0.14 × 0.1 × 0.12 m",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 4,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 13,
+            "mountedParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ],
+            "visibleParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "blankSlots": [],
+            "selected": [
+              1
+            ],
+            "caption": "Part 1 of 64, path /shape/parts/0"
+          }
+        },
+        {
+          "step": "PageDown x2",
+          "focus": {
+            "tag": "div",
+            "role": "option",
+            "name": "Part 11: box, half extents 0.2 × 0.1 × 0.14 m11box½ 0.2 × 0.1 × 0.14 m",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 113,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 17,
+            "mountedParts": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "visibleParts": [
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "blankSlots": [],
+            "selected": [
+              11
+            ],
+            "caption": "Part 11 of 64, path /shape/parts/10"
+          }
+        },
+        {
+          "step": "End, Tab again",
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Primitive",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "parts": {
+            "scrollTop": 1491,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 15,
+            "mountedParts": [
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "visibleParts": [
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64
+            ],
+            "blankSlots": [],
+            "selected": [
+              64
+            ],
+            "caption": "Part 64 of 64, path /shape/parts/63"
+          }
+        }
+      ],
+      "steps": [
+        "probe-end-tab-minimum-1000x650--end.png"
+      ]
+    },
+    {
+      "capture": "probe-grid-paging-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Size: 256 256 [WH]",
+        "Costs: "
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 213,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 379
+      },
+      "observations": [
+        {
+          "step": "Show values, focus table",
+          "table": {
+            "scrollTop": 0,
+            "scrollLeft": 0,
+            "clientWidth": 336,
+            "clientHeight": 184,
+            "scrollWidth": 4462,
+            "scrollHeight": 5640,
+            "mountedRows": 15,
+            "mountedCells": 360,
+            "firstRow": 0,
+            "lastRow": 14,
+            "visibleRows": [
+              0,
+              8
+            ],
+            "cellRange": [
+              0,
+              3607
+            ],
+            "focused": true
+          },
+          "focus": {
+            "tag": "div",
+            "role": "group",
+            "name": "Costs",
+            "region": "inspector",
+            "outline": null
+          }
+        },
+        {
+          "step": "PageDown x3",
+          "table": {
+            "scrollTop": 483,
+            "scrollLeft": 0,
+            "clientWidth": 336,
+            "clientHeight": 184,
+            "scrollWidth": 4462,
+            "scrollHeight": 5640,
+            "mountedRows": 22,
+            "mountedCells": 528,
+            "firstRow": 13,
+            "lastRow": 34,
+            "visibleRows": [
+              21,
+              30
+            ],
+            "cellRange": [
+              3328,
+              8727
+            ],
+            "focused": true
+          }
+        },
+        {
+          "step": "End",
+          "table": {
+            "scrollTop": 5456,
+            "scrollLeft": 0,
+            "clientWidth": 336,
+            "clientHeight": 184,
+            "scrollWidth": 4462,
+            "scrollHeight": 5640,
+            "mountedRows": 15,
+            "mountedCells": 360,
+            "firstRow": 241,
+            "lastRow": 255,
+            "visibleRows": [
+              247,
+              255
+            ],
+            "cellRange": [
+              61696,
+              65303
+            ],
+            "focused": true
+          }
+        },
+        {
+          "step": "ArrowRight x60",
+          "table": {
+            "scrollTop": 5456,
+            "scrollLeft": 2400,
+            "clientWidth": 336,
+            "clientHeight": 184,
+            "scrollWidth": 4462,
+            "scrollHeight": 5640,
+            "mountedRows": 15,
+            "mountedCells": 465,
+            "firstRow": 241,
+            "lastRow": 255,
+            "visibleRows": [
+              247,
+              255
+            ],
+            "cellRange": [
+              61827,
+              65441
+            ],
+            "focused": true
+          }
+        },
+        {
+          "step": "scrolled to the last column",
+          "table": {
+            "scrollTop": 5456,
+            "scrollLeft": 4126,
+            "clientWidth": 336,
+            "clientHeight": 184,
+            "scrollWidth": 4462,
+            "scrollHeight": 5640,
+            "mountedRows": 15,
+            "mountedCells": 420,
+            "firstRow": 241,
+            "lastRow": 255,
+            "visibleRows": [
+              247,
+              255
+            ],
+            "cellRange": [
+              61924,
+              65535
+            ],
+            "focused": true
+          }
+        },
+        {
+          "step": "Home",
+          "table": {
+            "scrollTop": 0,
+            "scrollLeft": 4126,
+            "clientWidth": 336,
+            "clientHeight": 184,
+            "scrollWidth": 4462,
+            "scrollHeight": 5640,
+            "mountedRows": 15,
+            "mountedCells": 420,
+            "firstRow": 0,
+            "lastRow": 14,
+            "visibleRows": [
+              0,
+              8
+            ],
+            "cellRange": [
+              228,
+              3839
+            ],
+            "focused": true
+          },
+          "focus": {
+            "tag": "div",
+            "role": "group",
+            "name": "Costs",
+            "region": "inspector",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        }
+      ],
+      "steps": [
+        "probe-grid-paging-normal-1440x874--end.png",
+        "probe-grid-paging-normal-1440x874--corner.png"
+      ]
+    },
+    {
+      "capture": "probe-pager-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 337 errors, 113 warnings",
+      "live": [
+        "Showing problems 401–450 of 450"
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 100,
+        "viewport": 13,
+        "dock": 95,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 235
+      },
+      "observations": [
+        {
+          "step": "Next page",
+          "range": "101–200 of 450 problems",
+          "statusbar": "Evidence test double (not engine)337 errors, 113 warnings",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Next page",
+            "region": "dock",
+            "outline": null
+          }
+        },
+        {
+          "step": "Hide warnings (filter resets the page)",
+          "range": "1–100 of 337 problems"
+        },
+        {
+          "step": "Show warnings",
+          "range": "1–100 of 450 problems"
+        },
+        {
+          "step": "Next page again (same range)",
+          "range": "101–200 of 450 problems",
+          "statusbar": "Evidence test double (not engine)337 errors, 113 warnings"
+        },
+        {
+          "step": "Last page, then Enter on it at the end",
+          "range": "401–450 of 450 problems",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Last page",
+            "region": "dock",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "disabled": "true",
+          "rowsMounted": 58
+        },
+        {
+          "step": "announcements",
+          "sequence": [
+            {
+              "text": "Showing problems 101–200 of 450",
+              "at": 643
+            },
+            {
+              "text": "",
+              "at": 1142
+            },
+            {
+              "text": "Showing problems 101–200 of 450",
+              "at": 1163
+            },
+            {
+              "text": "Showing problems 401–450 of 450",
+              "at": 1390
+            }
+          ]
+        }
+      ],
+      "steps": [
+        "probe-pager-normal-1440x874--last.png"
+      ]
+    },
+    {
+      "capture": "probe-pager-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 337 errors, 113 warnings",
+      "live": [
+        "Showing problems 401–450 of 450"
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 69,
+        "viewport": 13,
+        "dock": 45,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 145
+      },
+      "observations": [
+        {
+          "step": "Next page",
+          "range": "101–200 of 450 problems",
+          "statusbar": "Evidence test double (not engine)337 errors, 113 warnings",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Next page",
+            "region": "dock",
+            "outline": null
+          }
+        },
+        {
+          "step": "Hide warnings (filter resets the page)",
+          "range": "1–100 of 337 problems"
+        },
+        {
+          "step": "Show warnings",
+          "range": "1–100 of 450 problems"
+        },
+        {
+          "step": "Next page again (same range)",
+          "range": "101–200 of 450 problems",
+          "statusbar": "Evidence test double (not engine)337 errors, 113 warnings"
+        },
+        {
+          "step": "Last page, then Enter on it at the end",
+          "range": "401–450 of 450 problems",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Last page",
+            "region": "dock",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "disabled": "true",
+          "rowsMounted": 58
+        },
+        {
+          "step": "announcements",
+          "sequence": [
+            {
+              "text": "Showing problems 101–200 of 450",
+              "at": 676
+            },
+            {
+              "text": "",
+              "at": 1179
+            },
+            {
+              "text": "Showing problems 101–200 of 450",
+              "at": 1198
+            },
+            {
+              "text": "Showing problems 401–450 of 450",
+              "at": 1427
+            }
+          ]
+        }
+      ],
+      "steps": [
+        "probe-pager-minimum-1000x650--last.png"
+      ]
+    },
+    {
+      "capture": "probe-account-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 182
+      },
+      "observations": [
+        {
+          "step": "opened (signed in, three accounts)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as studio@example.org"
+        },
+        {
+          "step": "Use ada@example.com",
+          "focus": {
+            "element": "body"
+          },
+          "button": "ChatGPT account, signed in as ada@example.com",
+          "rows": [
+            "Aada@example.comSigned in",
+            "Sstudio@example.orgUse",
+            "Aa.very.long.account.name.for.wrapping@example.netUse"
+          ]
+        },
+        {
+          "step": "Add another account (browser step)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Open browser again",
+            "region": "dialog",
+            "outline": null
+          },
+          "status": "Continue in your browserApprove access in ChatGPT; Incant finishes automatically.",
+          "button": "ChatGPT account, waiting for the browser"
+        },
+        {
+          "step": "Cancel sign-in",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as ada@example.com"
+        },
+        {
+          "step": "Sign out (question)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Keep signed in",
+            "region": "dialog",
+            "outline": null
+          },
+          "question": "Sign out of ada@example.com on this computer? The agent stops working until you sign in again."
+        },
+        {
+          "step": "Escape (question dismissed, dialog stays)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 1
+        },
+        {
+          "step": "Confirm sign out",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Continue with ChatGPT",
+            "region": "dialog",
+            "outline": null
+          },
+          "status": "Sign in to a saved account, or continue in your browser.",
+          "button": "ChatGPT account, not signed in"
+        },
+        {
+          "step": "Escape (dialog closed, focus returns)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "ChatGPT account, not signed in",
+            "region": "titlebar",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 0
+        }
+      ],
+      "steps": [
+        "probe-account-normal-1440x874--adding.png",
+        "probe-account-normal-1440x874--question.png",
+        "probe-account-normal-1440x874--signed-out.png"
+      ]
+    },
+    {
+      "capture": "probe-account-minimum-1000x650",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample, account signed-in-multi (simulated) 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 3,
+        "agent": 4,
+        "statusbar": 8,
+        "dialog": null,
+        "menu": null,
+        "page": 119
+      },
+      "observations": [
+        {
+          "step": "opened (signed in, three accounts)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as studio@example.org"
+        },
+        {
+          "step": "Use ada@example.com",
+          "focus": {
+            "element": "body"
+          },
+          "button": "ChatGPT account, signed in as ada@example.com",
+          "rows": [
+            "Aada@example.comSigned in",
+            "Sstudio@example.orgUse",
+            "Aa.very.long.account.name.for.wrapping@example.netUse"
+          ]
+        },
+        {
+          "step": "Add another account (browser step)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Open browser again",
+            "region": "dialog",
+            "outline": null
+          },
+          "status": "Continue in your browserApprove access in ChatGPT; Incant finishes automatically.",
+          "button": "ChatGPT account, waiting for the browser"
+        },
+        {
+          "step": "Cancel sign-in",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": null
+          },
+          "button": "ChatGPT account, signed in as ada@example.com"
+        },
+        {
+          "step": "Sign out (question)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Keep signed in",
+            "region": "dialog",
+            "outline": null
+          },
+          "question": "Sign out of ada@example.com on this computer? The agent stops working until you sign in again."
+        },
+        {
+          "step": "Escape (question dismissed, dialog stays)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Close",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 1
+        },
+        {
+          "step": "Confirm sign out",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Continue with ChatGPT",
+            "region": "dialog",
+            "outline": null
+          },
+          "status": "Sign in to a saved account, or continue in your browser.",
+          "button": "ChatGPT account, not signed in"
+        },
+        {
+          "step": "Escape (dialog closed, focus returns)",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "ChatGPT account, not signed in",
+            "region": "titlebar",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialogOpen": 0
+        }
+      ],
+      "steps": [
+        "probe-account-minimum-1000x650--adding.png",
+        "probe-account-minimum-1000x650--question.png",
+        "probe-account-minimum-1000x650--signed-out.png"
+      ]
+    },
+    {
+      "capture": "probe-shortcuts-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 179
+      },
+      "observations": [
+        {
+          "step": "? pressed",
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Filter shortcuts",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialog": 1
+        },
+        {
+          "step": "typed \"hierarchy\"",
+          "status": "10 of 29",
+          "rows": 10
+        },
+        {
+          "step": "Escape (clears the filter)",
+          "value": "",
+          "dialog": 1
+        },
+        {
+          "step": "Escape (closes)",
+          "focus": {
+            "tag": "section",
+            "role": null,
+            "name": "Viewport",
+            "region": "viewport",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "dialog": 0
+        },
+        {
+          "step": "names of key cells (macOS notation)",
+          "cells": [
+            {
+              "action": "Undo",
+              "visible": "⌘Z",
+              "name": "General Undo Command Z"
+            },
+            {
+              "action": "Redo",
+              "visible": "⇧⌘Z",
+              "name": "General Redo Shift Command Z"
+            },
+            {
+              "action": "Keyboard shortcuts",
+              "visible": "? | ⌘/",
+              "name": "General Keyboard shortcuts Question mark , or Command Slash"
+            },
+            {
+              "action": "Move selection",
+              "visible": "↑ | ↓",
+              "name": "Hierarchy Move selection Up , or Down"
+            },
+            {
+              "action": "Delete",
+              "visible": "⌘⌫ | ⌦",
+              "name": "Hierarchy Delete Command Delete , or Forward Delete"
+            },
+            {
+              "action": "Show or hide the hierarchy",
+              "visible": "⌥⌘1",
+              "name": "Panels and layout Show or hide the hierarchy Option Command 1"
+            }
+          ]
+        },
+        {
+          "step": "Tab x3 (focus stays in the dialog)",
+          "focus": {
+            "tag": "input",
+            "role": null,
+            "name": "Filter shortcuts",
+            "region": "dialog",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        },
+        {
+          "step": "Escape from the button-opened dialog",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "Keyboard shortcuts",
+            "region": "titlebar",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        }
+      ],
+      "steps": [
+        "probe-shortcuts-normal-1440x874--filtered.png"
+      ]
+    },
+    {
+      "capture": "probe-shortcuts-windows-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "dialog": {
+        "size": [
+          600,
+          680
+        ],
+        "fits": true,
+        "bodyOverflow": 0
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "live": [
+        "1 of 29"
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": 10,
+        "menu": null,
+        "page": 179
+      },
+      "observations": [
+        {
+          "step": "names of key cells (Windows notation)",
+          "cells": [
+            {
+              "action": "Undo",
+              "visible": "Ctrl+Z",
+              "name": "General Undo Ctrl Z"
+            },
+            {
+              "action": "Redo",
+              "visible": "Ctrl+Y | Ctrl+Shift+Z",
+              "name": "General Redo Ctrl Y , or Ctrl Shift Z"
+            },
+            {
+              "action": "Keyboard shortcuts",
+              "visible": "? | Ctrl+/",
+              "name": "General Keyboard shortcuts Question mark , or Ctrl Slash"
+            },
+            {
+              "action": "Delete",
+              "visible": "Delete | Ctrl+Backspace",
+              "name": "Hierarchy Delete Delete , or Ctrl Backspace"
+            },
+            {
+              "action": "Show or hide the hierarchy",
+              "visible": "Ctrl+Alt+1",
+              "name": "Panels and layout Show or hide the hierarchy Ctrl Alt 1"
+            },
+            {
+              "action": "Send the message",
+              "visible": "Ctrl+Enter",
+              "name": "Agent Send the message Ctrl Enter"
+            }
+          ]
+        },
+        {
+          "step": "typed \"ctrl shift\"",
+          "status": "1 of 29",
+          "actions": [
+            "Redo"
+          ]
+        }
+      ]
+    },
+    {
+      "capture": "probe-f6-normal-1440x874",
+      "set": "r2",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 3,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 179
+      },
+      "observations": [
+        {
+          "step": "F6 x6",
+          "regions": [
+            "dock",
+            "inspector",
+            "agent",
+            "hierarchy",
+            "viewport",
+            "dock"
+          ]
+        },
+        {
+          "step": "Shift+F6 x3",
+          "regions": [
+            "viewport",
+            "hierarchy",
+            "agent"
+          ]
+        }
+      ]
+    },
+    {
+      "capture": "probe-menu-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: -1 0.5 2 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Mesh: assets/dock_kit/crate.mesh",
+        "Material: materials/weathered_wood.mat",
+        "Cast shadows: On",
+        "LOD bias: 0",
+        "Motion: dynamic",
+        "Gravity scale: 1",
+        "Linear damping: 0",
+        "Angular damping: 0.05",
+        "Can sleep: On",
+        "CCD: On",
+        "Shape: box",
+        "Half extents, in m: 0.5 0.5 0.5 [XYZ]",
+        "Density: 420",
+        "Friction: 0.7",
+        "Restitution: 0",
+        "Sensor: Off",
+        "Memberships: 4294967295",
+        "Filter: 4294967295"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 63,
+        "viewport": 24,
+        "dock": 65,
+        "inspector": 45,
+        "agent": 15,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 221
+      },
+      "observations": [
+        {
+          "step": "Shift+F10",
+          "focus": {
+            "tag": "div",
+            "role": "menuitem",
+            "name": "RenameF2, unavailable: Rename is unavailable: the sample fixture is read-only.",
+            "region": "hierarchy",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "items": [
+            {
+              "text": "RenameF2, unavailable: Rename is unavailable: the sample fixture is read-only.",
+              "disabled": "true"
+            },
+            {
+              "text": "Copy ID",
+              "disabled": null
+            },
+            {
+              "text": "Delete⌘⌫, unavailable: Delete is unavailable: the sample fixture is read-only.",
+              "disabled": "true"
+            }
+          ]
+        },
+        {
+          "step": "ArrowDown",
+          "focus": {
+            "tag": "div",
+            "role": "menuitem",
+            "name": "Copy ID",
+            "region": "hierarchy",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        },
+        {
+          "step": "Escape (focus returns)",
+          "focus": {
+            "tag": "div",
+            "role": "treeitem",
+            "name": "Crate 02",
+            "region": "hierarchy",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "menu": 0
+        }
+      ],
+      "steps": [
+        "probe-menu-normal-1440x874--open.png"
+      ]
+    },
+    {
+      "capture": "probe-menu-minimum-1000x650",
+      "set": "r2",
+      "rows": [
+        "Translation: -1 0.5 2 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Mesh: assets/dock_kit/crate.mesh",
+        "Material: materials/weathered_wood.mat",
+        "Cast shadows: On",
+        "LOD bias: 0",
+        "Motion: dynamic",
+        "Gravity scale: 1",
+        "Linear damping: 0",
+        "Angular damping: 0.05",
+        "Can sleep: On",
+        "CCD: On",
+        "Shape: box",
+        "Half extents, in m: 0.5 0.5 0.5 [XYZ]",
+        "Density: 420",
+        "Friction: 0.7",
+        "Restitution: 0",
+        "Sensor: Off",
+        "Memberships: 4294967295",
+        "Filter: 4294967295"
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Sample fixture: sample 6 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 4,
+        "banner": null,
+        "hierarchy": 41,
+        "viewport": 24,
+        "dock": 35,
+        "inspector": 31,
+        "agent": 4,
+        "statusbar": 5,
+        "dialog": null,
+        "menu": null,
+        "page": 144
+      },
+      "observations": [
+        {
+          "step": "Shift+F10",
+          "focus": {
+            "tag": "div",
+            "role": "menuitem",
+            "name": "RenameF2, unavailable: Rename is unavailable: the sample fixture is read-only.",
+            "region": "hierarchy",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "items": [
+            {
+              "text": "RenameF2, unavailable: Rename is unavailable: the sample fixture is read-only.",
+              "disabled": "true"
+            },
+            {
+              "text": "Copy ID",
+              "disabled": null
+            },
+            {
+              "text": "Delete⌘⌫, unavailable: Delete is unavailable: the sample fixture is read-only.",
+              "disabled": "true"
+            }
+          ]
+        },
+        {
+          "step": "ArrowDown",
+          "focus": {
+            "tag": "div",
+            "role": "menuitem",
+            "name": "Copy ID",
+            "region": "hierarchy",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          }
+        },
+        {
+          "step": "Escape (focus returns)",
+          "focus": {
+            "tag": "div",
+            "role": "treeitem",
+            "name": "Crate 02",
+            "region": "hierarchy",
+            "outline": "solid 2px rgb(195, 200, 255)"
+          },
+          "menu": 0
+        }
+      ],
+      "steps": [
+        "probe-menu-minimum-1000x650--open.png"
+      ]
+    },
+    {
+      "capture": "probe-reveal-normal-1440x874",
+      "set": "r2",
+      "rows": [
+        "Translation: 0 4 18 [XYZ]",
+        "Rotation: 0 0 0 1 [XYZW]",
+        "Scale: 1 1 1 [XYZ]",
+        "Projection: Pixel perfect",
+        "Pixel density: 0.5",
+        "Resolution, in px: ",
+        "Field of view: 60",
+        "Near clip: 0.1",
+        "Far clip: 100"
+      ],
+      "notices": [
+        {
+          "label": "Resolution, in px",
+          "text": "Cannot show as 2 numbers (logical width and logical height); raw value:",
+          "raw": "[320]"
+        }
+      ],
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, not signed in",
+        "title": "ChatGPT account, not signed in",
+        "visibleText": ""
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings Selected Pixel Camera (out of range)",
+      "live": [
+        "Selected Pixel Camera (out of range)"
+      ],
+      "visibleWords": {
+        "titlebar": 6,
+        "banner": null,
+        "hierarchy": 71,
+        "viewport": 13,
+        "dock": 66,
+        "inspector": 88,
+        "agent": 11,
+        "statusbar": 13,
+        "dialog": null,
+        "menu": null,
+        "page": 268
+      },
+      "observations": [
+        {
+          "step": "Problems row: compound part 41 rotation",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "error: compound part 41 rotation must be a unit quaternion, Rubble PileCollider ",
+            "region": "dock",
+            "outline": null
+          },
+          "parts": {
+            "scrollTop": 995,
+            "clientHeight": 177,
+            "scrollHeight": 1672,
+            "mounted": 20,
+            "mountedParts": [
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49
+            ],
+            "visibleParts": [
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45
+            ],
+            "blankSlots": [],
+            "selected": [
+              42
+            ],
+            "caption": "Part 42 of 64, path /shape/parts/41"
+          },
+          "selected": "Rubble Pile1, 1 error"
+        },
+        {
+          "step": "Problems row: raw atlas rectangle warning",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "warning: raw pixel rectangles address the packed page and can show unrelated con",
+            "region": "dock",
+            "outline": null
+          },
+          "selected": "Rope Coil1, 1 warning"
+        },
+        {
+          "step": "Problems row: pixel-perfect camera range",
+          "focus": {
+            "tag": "button",
+            "role": null,
+            "name": "error: pixel-perfect cameras require 1..4096 pixels per metre and a 16..4096 log",
+            "region": "dock",
+            "outline": null
+          },
+          "selected": "Pixel Camera (out of range)1, 1 error"
+        }
+      ],
+      "steps": [
+        "probe-reveal-normal-1440x874--part.png",
+        "probe-reveal-normal-1440x874--region.png"
+      ]
+    },
+    {
+      "capture": "title-windows-controls-normal-1440x874",
+      "set": "s1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 7,
+        "banner": null,
+        "hierarchy": 68,
+        "viewport": 13,
+        "dock": 61,
+        "inspector": 3,
+        "agent": 11,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 170
+      }
+    },
+    {
+      "capture": "title-windows-controls-minimum-1000x650",
+      "set": "s1",
+      "account": {
+        "size": [
+          30,
+          28
+        ],
+        "name": "ChatGPT account, signed in as ada@example.com",
+        "title": "ChatGPT account, signed in as ada@example.com",
+        "visibleText": "A"
+      },
+      "statusbar": "Evidence test double (not engine) 13 errors, 2 warnings",
+      "visibleWords": {
+        "titlebar": 7,
+        "banner": null,
+        "hierarchy": 40,
+        "viewport": 13,
+        "dock": 28,
+        "inspector": 3,
+        "agent": 2,
+        "statusbar": 7,
+        "dialog": null,
+        "menu": null,
+        "page": 100
+      }
+    }
+  ]
+}
