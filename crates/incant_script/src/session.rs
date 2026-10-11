@@ -104,7 +104,7 @@ impl NativeSession {
     /// Committed bounded diagnostics; terminal failures hide all session outputs.
     pub fn logs(&self) -> Result<&crate::NativeLogs, SessionError> {
         self.ready()?;
-        Ok(self.host.logs()?)
+        self.host.logs()
     }
 
     /// Validate once and reseed from held controls without inventing edges.
