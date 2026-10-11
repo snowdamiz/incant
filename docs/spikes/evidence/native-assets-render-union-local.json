@@ -3227,5 +3227,27 @@
     "Flipbook SDK/save completeness, export and whole-engine/game completion remain open.",
     "No timing comparison or performance gate claim; independent CPU work could overlap these correctness checks.",
     "The helper tests use the original frozen0040 review context. The CLI helper is unchanged except selecting the integrated target/ci binary instead of target/release in a temporary copy."
-  ]
+  ],
+  "post_runtime_verification_tooling": {
+    "original_reviewed_commit": "e20bbbee889c307bc5e0a6498ba4df47bf8865bc",
+    "preserved_merge": "2b36f4e",
+    "reason": "main80 Linux WABT TLS ConnectionResetError104 before composed build; prior static conformance/standalone proof passed",
+    "scope": "at most3 transport attempts with0.5/1s backoffs, existing30s per-call timeout (not an overall deadline), unchanged URL/version/hash/size/member validation",
+    "runtime_compiler_asset_renderer_manifest_toolchain_workflow_inputs_unchanged_from_ef2897a": true,
+    "changed_paths": [
+      "STATUS.md",
+      "docs/spikes/evidence/native-assets-render-union-local.json",
+      "docs/spikes/native-assets-render-union.md",
+      "docs/spikes/wabt-download-retry.md",
+      "tools/probes/shipping-wasm2c.py",
+      "tools/tests/test_wabt_download.py"
+    ],
+    "full_tools_tests": 96,
+    "tools_log": {
+      "path": "/tmp/incant-assets-render-union-final-tools.log",
+      "sha256": "17f27b1975fde4014937d895ceb7105826dea2287379c10a322fb4cc7ddf1f24"
+    },
+    "independent_live_pin_evidence": "docs/spikes/wabt-download-retry.md",
+    "hosted_retry_not_claimed_complete": true
+  }
 }

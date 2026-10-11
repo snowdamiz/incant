@@ -64,7 +64,7 @@ Further work remains local; this queue does not waive any phase or device gate. 
 
 The reviewed native-assets/rendering union now preserves corrected FBX, pipeline
 prewarming and flipbook source on actual main80. All 685 ordinary/73 GPU tests,
-536 UI tests, 91 tools tests, both workspace Clippy profiles, optional-window
+536 UI tests, 96 final tools tests, both workspace Clippy profiles, optional-window
 checks, actual browser smoke and fresh source-free shipping controls pass. Final
 combined hosted checks remain pending. [Evidence](docs/spikes/native-assets-render-union.md).
 

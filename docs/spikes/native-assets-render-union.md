@@ -53,6 +53,24 @@ retains exact results, binary/source identities and log hashes. Primary logs are
 `/tmp/incant-assets-render-union-*`; the fresh shipping record is
 `/tmp/incant-assets-render-union-shipping/result.json`.
 
+## Bounded tooling follow-up
+
+After all runtime checks were terminal, the union preserved reviewed commit
+`e20bbbee889c307bc5e0a6498ba4df47bf8865bc`. Main80's Linux composed-Wasm
+producer had failed before compilation on a WABT TLS connection reset; preceding
+static conformance and standalone shipping checks had passed. The provisioning
+helper now retries only bounded transient transport failures, at most three
+attempts with 0.5/1-second backoffs. The original 30-second per-call timeout is
+not a total deadline. Pins, URL, transfer/member limits and certificate/integrity
+refusals are unchanged. [Full scope and fault evidence](wabt-download-retry.md).
+
+The final 96 tooling tests pass, including actual localhost fault controls.
+A complete changed-path audit confirms that engine/compiler/asset/render source,
+build inputs, manifests, toolchains and workflows are byte-identical to the
+fully tested `ef2897a` source. Only this provisioning helper/test and evidence
+changed. No engine rebuild was needed for that reviewed tooling-only delta;
+hosted execution remains a separate requirement.
+
 ## Appearance and remaining limits
 
 Claude Opus 5.5 with explicitly verified Max accepted the respective frozen scopes:
