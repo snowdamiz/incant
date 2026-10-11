@@ -23,7 +23,12 @@ Unicode bidi and wrapping, absolute UTF-8 clusters and reusable immutable glyph
 geometry. Fifteen numerical tests, all-target Clippy, independent font-ingress
 review and standalone wasm compilation pass. The review's malformed-face panic,
 metadata priority and name-allocation amplification findings are fixed. Runtime
-fonts never come from host discovery. Font cooking/atlases, actual drawing,
+fonts never come from host discovery. Project font import/cooking now retains
+stable asset IDs through reimport/Undo and supplies bounded checked cooked bytes
+to the shaper after original source deletion. The optional runtime reader keeps
+the default audio-only dependency graph unchanged; 124 affected CPU tests and
+scoped Clippy/compile checks pass. [Font asset evidence](docs/spikes/packaged-font-assets.md).
+Font atlases, actual drawing,
 widgets/IME, broader script coverage and device gates remain; this does not
 complete game UI. [Evidence](docs/spikes/native-game-text.md).
 
