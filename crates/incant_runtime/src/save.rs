@@ -9,6 +9,8 @@ use thiserror::Error;
 pub use codec::MAX_SAVE_BYTES;
 #[derive(Debug, Error, PartialEq)]
 pub enum SaveError {
+    #[error("localization is unsupported in a legacy v1/v2 save")]
+    LocalizationUnsupported,
     #[error("invalid native world save: {0}")]
     Invalid(&'static str),
     #[error("unsupported native world save version {0}")]
@@ -33,7 +35,7 @@ pub enum SaveError {
 
 impl NativeWorld {
     /// Checkpoint committed components, hierarchy, spatial/asset declarations,
-    /// exact flipbook fractions and the fixed-step clock. Navigation geometry is
+    /// exact flipbook fractions, locale settings/catalog and the fixed-step clock. Navigation geometry is
     /// saved; bounded query caches are rebuilt on load. No asset files are read.
     ///
     /// This is NOT a game-session/VM checkpoint: input, timers, callbacks, script
@@ -73,6 +75,7 @@ impl NativeWorld {
             })
             .collect();
         let scene = CookedScene::new(self.scene_id(), self.tick_rate, entities)?
+            .with_localization(self.localization.clone())?
             .with_spatial(self.visual_assets.clone(), spatial)?
             .with_navigation(
                 self.navigation
@@ -99,13 +102,17 @@ impl NativeWorld {
         )
     }
 
-    /// Load validated data without source/project/asset-cache access. V2 retains
+    /// Load validated data without source/project/asset-cache access. V2/v3 retain
     /// the original cooked-scene fingerprint for later program pairing; it is not
     /// authentication and does not restore a VM. Legacy v1 has no original binding
-    /// field: its fingerprint describes only the saved plain scene.
+    /// field: its fingerprint describes only the saved plain scene. V3 adds localized
+    /// scenes; older saves cannot silently clear an existing locale/catalog.
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
         let scene = CookedScene::from_bytes(decoded.scene)?;
+        if decoded.version < 3 && !scene.localization().is_default() {
+            return Err(SaveError::LocalizationUnsupported);
+        }
         if decoded.origin.is_none() {
             if !scene.navigation().is_empty() {
                 return Err(SaveError::NavigationUnsupported);
@@ -167,9 +174,12 @@ impl NativeWorld {
     pub fn restore_bytes(&mut self, bytes: &[u8]) -> Result<(), SaveError> {
         self.check_save_capabilities()?;
         let mut candidate = Self::from_save_bytes(bytes)?;
+        if bytes[8..12] != 3u32.to_le_bytes() && !self.localization.is_default() {
+            return Err(SaveError::LocalizationUnsupported);
+        }
         // Legacy data has no extended-state/origin contract. Do not let a plain
         // v1 payload silently clear a world's spatial/navigation capability.
-        if !codec::is_v2(bytes) {
+        if !codec::is_bound(bytes) {
             if self.navigation_used {
                 return Err(SaveError::NavigationUnsupported);
             }
@@ -177,9 +187,10 @@ impl NativeWorld {
                 return Err(SaveError::SpatialUnsupported);
             }
         }
-        if candidate.scene_id() != self.scene_id()
+        if candidate.localization.tables() != self.localization.tables()
+            || candidate.scene_id() != self.scene_id()
             || candidate.tick_rate != self.tick_rate
-            || (codec::is_v2(bytes)
+            || (codec::is_bound(bytes)
                 && candidate.source_scene_fingerprint != self.source_scene_fingerprint)
         {
             return Err(SaveError::WorldMismatch);

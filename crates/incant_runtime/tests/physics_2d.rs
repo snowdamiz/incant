@@ -333,10 +333,10 @@ fn cooked_rejects_malformed_and_unsupported_planar_data_and_preserves_v1() {
             .is_err()
     );
     let mut unknown = scene().to_bytes();
-    unknown[8..12].copy_from_slice(&10u32.to_le_bytes());
+    unknown[8..12].copy_from_slice(&11u32.to_le_bytes());
     assert_eq!(
         CookedScene::from_bytes(&unknown).unwrap_err(),
-        SceneError::Version(10)
+        SceneError::Version(11)
     );
 }
 

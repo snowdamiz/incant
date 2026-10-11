@@ -104,6 +104,36 @@ pub struct LocalizedText {
     pub resolved_locale: Option<String>,
     pub missing: Option<MissingString>,
 }
+/// A bounded page of deterministic missing-translation coverage.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct LocalizationReport {
+    #[schemars(range(max = 4096))]
+    pub total: u32,
+    #[schemars(length(max = 128))]
+    pub entries: Vec<MissingString>,
+}
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct LocalizationReportRequest {
+    #[serde(default)]
+    #[schemars(range(max = 4096))]
+    pub offset: u32,
+    #[serde(default = "report_limit")]
+    #[schemars(range(min = 1, max = 128))]
+    pub limit: u32,
+}
+const fn report_limit() -> u32 {
+    128
+}
+impl Default for LocalizationReportRequest {
+    fn default() -> Self {
+        Self {
+            offset: 0,
+            limit: report_limit(),
+        }
+    }
+}
 pub(crate) fn locale(value: &str) -> Result<icu_locale::Locale, LocalizationError> {
     if value.len() > 128 {
         return Err(invalid("locale", "tag exceeds 128 bytes"));

@@ -15,6 +15,7 @@ mod diagnostics;
 mod flipbooks;
 mod input;
 mod loan;
+mod localization_values;
 mod logging;
 mod navigation_values;
 mod program;
@@ -302,6 +303,14 @@ impl ScriptHost {
                     let navigation = queries.expose_navigation(&ctx).map_err(|error| {
                         diagnostics::javascript(&ctx, error, "navigation bindings", &self.deadline)
                     })?;
+                    let localization = queries.expose_localization(&ctx).map_err(|error| {
+                        diagnostics::javascript(
+                            &ctx,
+                            error,
+                            "localization bindings",
+                            &self.deadline,
+                        )
+                    })?;
                     let mut loan = loan::Loan::new(columns)?;
                     let chunks = match loan.expose(&ctx) {
                         Ok(chunks) => chunks,
@@ -331,8 +340,9 @@ impl ScriptHost {
                                 input.clone(),
                                 physics.clone(),
                                 navigation.clone(),
-                                clock.clone(),
+                                localization.clone(),
                             )),
+                            clock.clone(),
                             timer_api,
                             log_api.clone(),
                             flipbooks.clone(),
@@ -475,3 +485,6 @@ mod character_tests;
 mod log_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod timer_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod localization_tests;

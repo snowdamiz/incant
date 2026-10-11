@@ -190,6 +190,18 @@ export namespace LocaleSettingsSchema {
 }
 export type LocaleSettings = LocaleSettingsSchema.Root;
 
+export namespace LocalizationReportSchema {
+  export type MissingKind = "translation" | "key";
+  export type MissingString = { "key": string; "kind": MissingKind; "requested_locale": string; "resolved_locale"?: string | null; "table_id": string };
+  export type Root = { "entries": Array<MissingString>; "total": number };
+}
+export type LocalizationReport = LocalizationReportSchema.Root;
+
+export namespace LocalizationReportRequestSchema {
+  export type Root = { "limit"?: number; "offset"?: number };
+}
+export type LocalizationReportRequest = LocalizationReportRequestSchema.Root;
+
 export namespace LocalizeRequestSchema {
   export type CalendarDate = { "day": number; "month": number; "year": number };
   export type MessageArgument = (string) | (number) | (CalendarDate);
