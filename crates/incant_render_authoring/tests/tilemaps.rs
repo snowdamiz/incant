@@ -1,7 +1,7 @@
 use incant_doc::{Asset, Entity, Project, Scene, Transform};
 use serde_json::json;
 #[test]
-fn a_valid_tilemap_cannot_silently_disappear_from_authoring_preview() {
+fn a_valid_tilemap_requires_its_checked_atlas_before_authoring_preview() {
     let mut project = Project::empty("Tile preview capability");
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Tiles");
@@ -30,6 +30,6 @@ fn a_valid_tilemap_cannot_silently_disappear_from_authoring_preview() {
     assert!(
         error
             .to_string()
-            .contains("tilemap rendering is not implemented")
+            .contains("tilemap requires a matching checked color atlas")
     );
 }

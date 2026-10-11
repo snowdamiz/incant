@@ -1,10 +1,12 @@
 //! Typed renderer input shared by authoring and native extraction. No project,
 //! command bus, importer, GPU or agent dependency. Construct/replace at sync points.
+mod tilemap;
 use glam::DMat4;
 use incant_assets_runtime::RuntimeAsset;
 use incant_types::{Camera, DirectionalLight, PointLight, SpotLight};
 use std::sync::Arc;
 use thiserror::Error;
+pub use tilemap::{MAX_TILE_SLOTS, MAX_TILEMAPS, TileCell, TilemapInput};
 pub const MAX_INSTANCES: usize = 100_000;
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 #[derive(Debug, Error)]
@@ -21,6 +23,12 @@ pub enum SceneError {
     MissingSpriteFrame { texture: String, frame: String },
     #[error(transparent)]
     Sprite(#[from] incant_2d::SpriteError),
+    #[error(transparent)]
+    Tilemap(#[from] incant_2d::TilemapError),
+    #[error("tilemap requires a matching checked color atlas")]
+    TilemapBinding,
+    #[error("tilemap frame {0:?} is absent from the checked atlas")]
+    TilemapFrame(incant_types::StableId),
     #[error("authored material asset overrides are not supported by the imported preview")]
     MaterialOverrides,
     #[error("model {0} has no scene to instantiate")]
@@ -57,6 +65,8 @@ pub struct SceneStats {
     pub model_triangles: u64,
     pub model_draw_calls: usize,
     pub sprite_entities: usize,
+    pub tilemap_entities: usize,
+    pub tile_cells: usize,
 }
 
 #[derive(Default)]
@@ -71,6 +81,7 @@ pub struct SceneNode {
     pub light: Option<SceneLight>,
     pub mesh: Option<MeshInput>,
     pub sprite: Option<SpriteInput>,
+    pub tilemap: Option<Arc<TilemapInput>>,
     /// Authoring-only diagnostic cubes. Native content opts in explicitly.
     pub diagnostic: bool,
 }

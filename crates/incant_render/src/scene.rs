@@ -50,6 +50,7 @@ pub(crate) struct ResolvedScene {
     pub lights: crate::lighting::scene::LightPlan,
     pub cameras: BTreeMap<String, crate::camera::CameraView>,
     pub sprites: Vec<crate::sprites::SpritePlan>,
+    pub tilemaps: Vec<crate::sprites::TilemapPlan>,
 }
 
 /// Resolve startup/revision input. Native moving-frame extraction will use a
@@ -66,6 +67,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
         lights: Default::default(),
         cameras: BTreeMap::new(),
         sprites: Vec::new(),
+        tilemaps: Vec::new(),
     };
     if let Some(environment) = &input.environment {
         if !(0.0..=100.).contains(&environment.intensity)
@@ -87,12 +89,19 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
         });
     }
     let mut ids = BTreeSet::new();
+    let mut tile_slots = 0usize;
     for (entity_index, entity) in input.nodes.iter().enumerate() {
         if entity.id.is_empty() || entity.id.len() > 256 || !ids.insert(entity.id.as_str()) {
             return Err(SceneError::Input("empty, oversized or duplicate node ID"));
         }
-        if entity.mesh.is_some() && entity.sprite.is_some() {
-            return Err(SceneError::Input("ambiguous mesh and sprite binding"));
+        if usize::from(entity.mesh.is_some())
+            + usize::from(entity.sprite.is_some())
+            + usize::from(entity.tilemap.is_some())
+            > 1
+        {
+            return Err(SceneError::Input(
+                "ambiguous mesh, sprite or tilemap binding",
+            ));
         }
         let world64 = entity.world;
         if !world64.is_finite() || world64.row(3) != glam::DVec4::W {
@@ -109,6 +118,25 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
         }
         let world = world64.as_mat4();
         Instance::new(world)?;
+        if let Some(tilemap) = &entity.tilemap {
+            tile_slots = tile_slots
+                .checked_add(tilemap.cell_slots())
+                .ok_or(SceneError::Input("tilemap slot limit"))?;
+            if result.tilemaps.len() == incant_render_data::MAX_TILEMAPS
+                || tile_slots > incant_render_data::MAX_TILE_SLOTS
+            {
+                return Err(SceneError::Input("tilemap slot or entity limit"));
+            }
+            result.stats.tilemap_entities += 1;
+            result.stats.tile_cells += tilemap.cells().len();
+            result.tilemaps.push(crate::sprites::TilemapPlan {
+                node: entity_index,
+                data: Arc::clone(tilemap),
+                world: world64,
+                id: entity.id.clone(),
+            });
+            continue;
+        }
         if let Some(sprite) = &entity.sprite {
             if !matches!(sprite.source.data(), RuntimeAssetData::Texture(_))
                 || sprite.source.usage() != Some(incant_assets_runtime::TextureUsage::Color)

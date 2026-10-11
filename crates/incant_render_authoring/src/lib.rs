@@ -24,9 +24,6 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
     let mut render_frames = BTreeSet::new();
     for scene in project.scenes.values() {
         for entity in scene.entities.values() {
-            if entity.components.contains_key("Tilemap") {
-                return Err(SceneError::Input("tilemap rendering is not implemented").into());
-            }
             if let Some(value) = entity.components.get("EnvironmentLight") {
                 let binding: incant_doc::EnvironmentLight = serde_json::from_value(value.clone())?;
                 let source = asset(project, assets, &binding.texture, "texture")
@@ -39,6 +36,7 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             }
             if entity.components.contains_key("Camera")
                 || entity.components.contains_key("SpriteRenderer")
+                || entity.components.contains_key("Tilemap")
             {
                 let mut current = Some(entity.id.as_str());
                 while let Some(id) = current {
@@ -89,8 +87,19 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
         } else {
             None
         };
+        let tilemap = components
+            .get("Tilemap")
+            .map(|value| {
+                let map: incant_doc::Tilemap = serde_json::from_value(value.clone())?;
+                let source = asset(project, assets, &map.tileset, "texture")
+                    .ok_or(SceneError::TilemapBinding)?;
+                Ok::<_, Box<dyn std::error::Error + Send + Sync>>(Arc::new(
+                    TilemapInput::from_string_ids(source, &map)?,
+                ))
+            })
+            .transpose()?;
         // Sprite precedence matches the existing authoring preview.
-        let mesh = if sprite.is_some() {
+        let mesh = if sprite.is_some() || tilemap.is_some() {
             None
         } else if let Some(binding) = &entity.mesh {
             if !binding.materials.is_empty() {
@@ -106,6 +115,7 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             None
         };
         let diagnostic = sprite.is_none()
+            && tilemap.is_none()
             && mesh.is_none()
             && components.contains_key("Transform")
             && !render_frames.contains(&entity.id)
@@ -125,6 +135,7 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
             light,
             mesh,
             sprite,
+            tilemap,
             diagnostic,
         });
     }

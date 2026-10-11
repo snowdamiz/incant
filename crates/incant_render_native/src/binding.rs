@@ -1,6 +1,8 @@
 use super::*;
 use incant_assets_runtime::{RuntimeAssetData, TextureUsage};
-use incant_render_data::{EnvironmentInput, MeshInput, SceneLight, SceneNode, SpriteInput};
+use incant_render_data::{
+    EnvironmentInput, MeshInput, SceneLight, SceneNode, SpriteInput, TilemapInput,
+};
 use incant_runtime::{VisualAssetKind, VisualAssetRef};
 use std::fmt::Write;
 
@@ -45,9 +47,6 @@ pub(crate) fn prepare(
         let Some(decl) = node.declaration else {
             continue;
         };
-        if decl.tilemap.is_some() {
-            return Err(NativeRenderError::TilemapUnsupported { entity: node.id });
-        }
         if let Some(env) = &decl.environment {
             let source = asset(&env.texture)?;
             if !matches!(source.data(), RuntimeAssetData::Texture(_)) {
@@ -65,6 +64,7 @@ pub(crate) fn prepare(
         if decl.camera.is_none()
             && decl.mesh.is_none()
             && decl.sprite.is_none()
+            && decl.tilemap.is_none()
             && decl.directional.is_none()
             && decl.point.is_none()
             && decl.spot.is_none()
@@ -125,6 +125,15 @@ pub(crate) fn prepare(
                 })
             })
             .transpose()?;
+        let tilemap = decl
+            .tilemap
+            .as_ref()
+            .map(|map| {
+                TilemapInput::new(Arc::clone(asset(&map.tileset)?), map)
+                    .map(Arc::new)
+                    .map_err(NativeRenderError::TilemapRender)
+            })
+            .transpose()?;
         let light = if let Some(light) = &decl.directional {
             Some(SceneLight::Directional(light.clone()))
         } else if let Some(light) = &decl.point {
@@ -150,6 +159,7 @@ pub(crate) fn prepare(
             light,
             mesh,
             sprite,
+            tilemap,
             diagnostic: false,
         });
     }
