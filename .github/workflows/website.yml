@@ -7,6 +7,7 @@ on:
     paths:
       - 'website/**'
       - '.github/workflows/website.yml'
+      - '.github/actions/npm-cache/**'
   workflow_dispatch:
 
 permissions:
@@ -28,8 +29,9 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '22.23.3'
-          cache: npm
-          cache-dependency-path: website/package-lock.json
+          package-manager-cache: false
+      - uses: ./.github/actions/npm-cache
+        with: {lock-file: website/package-lock.json}
       - run: npm ci
       - name: Build for the repository's Pages path
         env:
